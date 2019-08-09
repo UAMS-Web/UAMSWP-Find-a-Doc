@@ -1,0 +1,68 @@
+.facetwp-counts {
+    display: inline-block;
+}
+.leaflet-icon div {
+    text-align: center;
+    border: none;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.8em;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+.transparentwhite {
+    color: #ffffff;
+  }
+  .transparentgray {
+    color: #c9c9c9;
+  }
+/*  FacetWP Pager  */
+.facetwp-page.page-link {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #9d2235;
+    background-color: #fff;
+    border: 1px solid #dcdadb;
+    margin-right: 0;
+}
+/*  FacetWP Alpha  */
+
+.facetwp-alpha {
+    display: inline-block;
+    min-width: 26px;
+    text-align: center;
+    border: 1px solid #a9a7a8;
+    padding: 2px 7px;
+    border-radius: .25rem;
+    background-color: #fff;
+    margin: 5px 5px 5px 0;
+}
+.facetwp-alpha:last-child {
+}
+
+.facetwp-alpha.available {
+    display: inline-block;
+    min-width: 26px;
+    text-align: center;
+    border: 1px solid #a9a7a8;
+    padding: 2px 7px;
+    border-radius: .25rem;
+    background-color: #fff;
+}
+
+.facetwp-alpha.available:hover {
+    border-color: #9d2235;
+    background-color: #9d2235;
+    color: #fff;
+}
+
+.facetwp-alpha.selected {
+    border-color: #9d2235;
+    background-color: #9d2235;
+    color: #fff;
+}
