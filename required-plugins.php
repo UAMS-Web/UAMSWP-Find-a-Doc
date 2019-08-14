@@ -182,9 +182,9 @@ function uamswp_register_required_plugins() {
 		),
 
 		array(
-			'name'               => 'FacetWP - Alpha', // The plugin name.
-			'slug'               => 'factwp-alpha', // The plugin slug (typically the folder name).
-			'source'             => dirname( __FILE__ ) . '/plugins/factwp-alpha.zip', // The plugin source.
+			'name'               => 'FacetWP - Alpha for UAMS', // The plugin name.
+			'slug'               => 'factwp-alpha-uams', // The plugin slug (typically the folder name).
+			'source'             => dirname( __FILE__ ) . '/plugins/factwp-alpha-uams.zip', // The plugin source.
 			'required'           => false, // If false, the plugin is only 'recommended' instead of required.
 		),
 
