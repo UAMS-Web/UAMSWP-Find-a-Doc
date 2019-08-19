@@ -92,3 +92,43 @@ if( function_exists('acf_add_local_field_group') ):
   ));
   
   endif;
+
+add_filter('acf/get_field_group', 'extend_header_field_group_function');
+function extend_header_field_group_function($group) {
+
+	if ($group['key'] != 'group_header_options') {
+    // not our field group
+    return $group;
+	
+	} else {
+
+		// add an OR rule to existing location rules for a specific field group
+		$group['location'] = array(
+			array (
+				array (
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'services',
+				),
+			),
+			array (
+				array (
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'page',
+				),
+			),
+			array (
+				array (
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'post',
+				),
+			)
+		);
+		return $group;
+
+		
+	}
+	
+}
