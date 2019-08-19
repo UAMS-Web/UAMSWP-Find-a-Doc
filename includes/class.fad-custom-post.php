@@ -102,7 +102,7 @@ function locations() {
 	$args = array(
 		'label'                 => 'Location',
 		'labels'                => $labels,
-		'supports'              => array( 'title', 'author', 'editor', 'thumbnail', ),
+		'supports'              => array( 'title', 'author', 'thumbnail', ),
 		'taxonomies'            => array( 'specialties', 'medical_terms', 'conditions' ),
 		'hierarchical'          => false,
 		'public'                => true,
