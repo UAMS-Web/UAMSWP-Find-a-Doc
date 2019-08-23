@@ -295,6 +295,7 @@ function fwp_disable_auto_refresh() {
 
 // FacetWP scripts
 function fwp_facet_scripts() {
+	if ( is_post_type_archive( 'physicians' ) || is_post_type_archive( 'locations' ) ) {
 ?>
 <script>
 (function($) {
@@ -378,6 +379,7 @@ function fwp_facet_scripts() {
 })(jQuery);
 </script>
 <?php
+	}
 }
 add_action( 'wp_footer', 'fwp_facet_scripts', 100 );
 
