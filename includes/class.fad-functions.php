@@ -589,7 +589,7 @@ function posts_physicians_custom_columns($column_name, $id){
 // NRC JSON API Call
 function wp_nrc_cached_api( $npi ) {
 	// Namespace in case of collision, since transients don't support groups like object caching.
-	$url = 'https://transparency.nrchealth.com/widget/api/org-profile/uams/npi/' . $npi . '/0';
+	$url = 'https://transparency.nrchealth.com/widget/api/org-profile/uams/npi/' . $npi . '/6';
 	$cache_key = 'nrc_' . $npi;
 	$request = get_transient( $cache_key );
 
