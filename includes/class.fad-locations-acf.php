@@ -476,7 +476,7 @@ if( function_exists('acf_add_local_field_group') ):
         'label' => 'Email',
         'name' => 'location_email',
         'type' => 'text',
-        'instructions' => '[Depreciated]',
+        'instructions' => '[Deprecated]',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(
@@ -509,7 +509,7 @@ if( function_exists('acf_add_local_field_group') ):
         'label' => 'Website Name',
         'name' => 'location_web_name',
         'type' => 'text',
-        'instructions' => '[Depreciated]',
+        'instructions' => '[Deprecated]',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(
@@ -529,7 +529,7 @@ if( function_exists('acf_add_local_field_group') ):
         'label' => 'URL',
         'name' => 'location_url',
         'type' => 'link',
-        'instructions' => '[Depreciated]',
+        'instructions' => '[Deprecated]',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(
@@ -1118,7 +1118,7 @@ if( function_exists('acf_add_local_field_group') ):
         'label' => 'Clinic',
         'name' => 'location_clinic',
         'type' => 'true_false',
-        'instructions' => '[Depreciated]',
+        'instructions' => '[Deprecated]',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(
@@ -1138,7 +1138,7 @@ if( function_exists('acf_add_local_field_group') ):
         'label' => 'Facility',
         'name' => 'location_facility',
         'type' => 'true_false',
-        'instructions' => '[Depreciated]',
+        'instructions' => '[Deprecated]',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(
