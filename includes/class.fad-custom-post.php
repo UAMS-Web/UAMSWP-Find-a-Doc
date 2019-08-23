@@ -164,7 +164,7 @@ if ( ! function_exists('services_cpt') ) {
 		);
 		$args = array(
 			'label'                 => 'Service',
-			'description'           => 'UAMS Services',
+			'description'           => 'UAMS Services', 
 			'labels'                => $labels,
 			'supports'              => array( 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes', ),
 			'taxonomies'            => array( 'specialties', 'medical_terms', 'conditions' ),
@@ -372,6 +372,67 @@ function create_departments_taxonomy() {
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
 	);
 	register_taxonomy( 'department', array( 'physicians' ), $args );
+
+}
+//hook into the init action and call create_book_taxonomies when it fires
+add_action( 'init', 'create_degrees_taxonomy', 0 );
+
+//create a custom taxonomy name it topics for your posts
+function create_degrees_taxonomy() {
+
+// Add new taxonomy, make it hierarchical like categories
+// first do the translations part for GUI
+
+  $labels = array(
+		'name'                           => 'Medical Degrees',
+		'singular_name'                  => 'Medical Degrees',
+		'search_items'                   => 'Search Degrees',
+		'all_items'                      => 'All Degrees',
+		'edit_item'                      => 'Edit Degree',
+		'update_item'                    => 'Update Degree',
+		'add_new_item'                   => 'Add New Degree',
+		'new_item_name'                  => 'New Degree',
+		'menu_name'                      => 'Medical Degrees',
+		'view_item'                      => 'View Degree',
+		'popular_items'                  => 'Popular Degree',
+		'separate_items_with_commas'     => 'Separate degrees with commas',
+		'add_or_remove_items'            => 'Add or remove degrees',
+		'choose_from_most_used'          => 'Choose from the most used degrees',
+		'not_found'                      => 'No degrees found',
+		'parent_item'                	 => 'Parent Degree',
+		'parent_item_colon'          	 => 'Parent Degree:',
+		'no_terms'                   	 => 'No Medical Degrees',
+		'items_list'                 	 => 'Medical degrees list',
+		'items_list_navigation'      	 => 'Medical degrees list navigation',
+	);
+  	$rewrite = array(
+		'slug'                       => 'degree',
+		'with_front'                 => true,
+		'hierarchical'               => true,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'label' 					 => __( 'Medical Degrees' ),
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => true,
+		'show_ui'                    => true,
+		'meta_box_cb'				 => false,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+		'show_in_rest'       		 => true,
+  		'rest_base'          		 => 'medical_degree',
+  		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+	);
+	register_taxonomy( 'degree', array( 'physicians' ), $args );
 
 }
 //hook into the init action and call create_book_taxonomies when it fires
