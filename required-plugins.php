@@ -178,7 +178,7 @@ function uamswp_register_required_plugins() {
 			'name'               => 'FacetWP', // The plugin name.
 			'slug'               => 'factwp', // The plugin slug (typically the folder name).
 			'source'             => dirname( __FILE__ ) . '/plugins/facetwp.zip', // The plugin source.
-			'required'           => false, // If false, the plugin is only 'recommended' instead of required.
+			'required'           => true, // If false, the plugin is only 'recommended' instead of required.
 		),
 
 		array(
@@ -188,12 +188,12 @@ function uamswp_register_required_plugins() {
 			'required'           => false, // If false, the plugin is only 'recommended' instead of required.
 		),
 
-		array(
-			'name'               => 'FacetWP - Load More', // The plugin name.
-			'slug'               => 'factwp-load-more', // The plugin slug (typically the folder name).
-			'source'             => dirname( __FILE__ ) . '/plugins/factwp-load-more.zip', // The plugin source.
-			'required'           => false, // If false, the plugin is only 'recommended' instead of required.
-		),
+		// array(
+		// 	'name'               => 'FacetWP - Load More', // The plugin name.
+		// 	'slug'               => 'factwp-load-more', // The plugin slug (typically the folder name).
+		// 	'source'             => dirname( __FILE__ ) . '/plugins/factwp-load-more.zip', // The plugin source.
+		// 	'required'           => false, // If false, the plugin is only 'recommended' instead of required.
+		// ),
 
 		array(
 			'name'               => 'FacetWP - Cache', // The plugin name.
