@@ -173,6 +173,14 @@ function uamswp_register_required_plugins() {
 		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
 		// ),
 
+		// ACF
+		array(
+			'name'               => 'Advanced Custom Fields: Mask Field', // The plugin name.
+			'slug'               => 'acf-maskfield', // The plugin slug (typically the folder name).
+			'source'             => dirname( __FILE__ ) . '/plugins/acf-maskfield.zip', // The plugin source.
+			'required'           => true, // If false, the plugin is only 'recommended' instead of required.
+		),
+
 		// Begin FacetWP & extensions.
 		array(
 			'name'               => 'FacetWP', // The plugin name.
@@ -184,8 +192,8 @@ function uamswp_register_required_plugins() {
 		array(
 			'name'               => 'FacetWP - Alpha for UAMS', // The plugin name.
 			'slug'               => 'factwp-alpha-uams', // The plugin slug (typically the folder name).
-			'source'             => dirname( __FILE__ ) . '/plugins/factwp-alpha-uams.zip', // The plugin source.
-			'required'           => false, // If false, the plugin is only 'recommended' instead of required.
+			'source'             => dirname( __FILE__ ) . '/plugins/facetwp-alpha-uams.zip', // The plugin source.
+			'required'           => true, // If false, the plugin is only 'recommended' instead of required.
 		),
 
 		// array(
