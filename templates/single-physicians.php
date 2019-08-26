@@ -64,20 +64,16 @@ foreach( $degrees as $degree ):
                                     echo '</div>';
                                 } else { ?>
                                     <div class="rating" aria-label="Patient Rating">
-                                    <!-- <div class="ds-title">Patient Rating</div> -->
-                                    <div class="ratings-count-lg">No ratings</div>
-                                    <div class="ratings-comments-lg">>0 Patient Comments</div>
-                                    <div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div>
+                                    <div class="ratings-count">No ratings <a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div>
+                                    <!-- <div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div> -->
                                     </div>
                                 <?php
                                 }
                             }
                         } else { ?>
                             <div class="rating" aria-label="Patient Rating">
-                                <!-- <div class="ds-title">Patient Rating</div> -->
-                                <div class="ratings-count-lg">No ratings</div>
-                                <div class="ratings-comments-lg">>0 Patient Comments</div>
-                                <div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div>
+                                <div class="ratings-count">No ratings <a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div>
+                                <!-- <div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div> -->
                             </div>
                     <?php } ?>
                     <!-- <div class="rating" aria-label="Patient Rating">
