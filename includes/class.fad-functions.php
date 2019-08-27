@@ -637,6 +637,6 @@ $request = wp_remote_get( 'https://transparency.nrchealth.com/widget/api/org-pro
 */
 
 function my_acf_init() {
-	acf_update_setting('google_api_key', 'AIzaSyAlw6doT5Yv6mfbw1JIF1s74Y7J_7j9ufY');
+	acf_update_setting('google_api_key', '****Key goes here****');
 }
 add_action('acf/init', 'my_acf_init');
