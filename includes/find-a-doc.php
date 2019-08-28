@@ -25,6 +25,7 @@ function bootstrap() {
     include_once (__DIR__ . '/class.fad-service-attributes-meta-box.php' );
     include_once (__DIR__ . '/class.fad-templates.php' );
     include_once (__DIR__ . '/class.fad-functions.php' );
+    include_once (__DIR__ . '/class.fad-acf-google-key.php' );
     
 	//add_action( 'init', 'UAMS\Content_Syndicate\activate_shortcodes' );
 }
