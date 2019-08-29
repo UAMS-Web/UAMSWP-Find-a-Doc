@@ -14,12 +14,13 @@ foreach( $degrees as $degree ):
     }
     $i++;
  endforeach; ?>
+<?php $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') .  ( $degree_list ? ', ' . $degree_list : '' );?>
 
 <main class="doctor-item">
         <section class="container-fluid p-0 p-xs-8 p-sm-10 doctor-info bg-white">
             <div class="row mx-0 mx-xs-n4 mx-sm-n8">
                 <div class="col-12 col-xs p-4 py-xs-0 px-xs-4 px-sm-8 order-2 text">
-                    <h1 class="page-title"><?php echo get_field('physician_first_name'); ?> <?php echo (get_field('physician_middle_name') ? get_field('physician_middle_name') : ''); ?> <?php echo get_field('physician_last_name'); ?><?php echo ( $degree_list ? ', ' . $degree_list : '' ); ?></h1>
+                    <h1 class="page-title"><?php echo $full_name; ?></h1>
                     <h2 class="sr-only">Overview</h2>
                     <dl>
                         <dt>Medical Department</dt>
@@ -141,7 +142,7 @@ foreach( $degrees as $degree ):
                             (min-width: 1px) and (min-resolution: 192dpi)">
                         <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 380, 507, 'center', 'center'); ?>"
                             media="(min-width: 1px)">
-                        <img src="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center'); ?>" alt="<?php echo get_field('physician_first_name'); ?> <?php echo (get_field('physician_middle_name') ? get_field('physician_middle_name') : ''); ?> <?php echo get_field('physician_last_name'); ?><?php echo ( $degree_list ? ', ' . $degree_list : '' ); ?>" />
+                        <img src="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center'); ?>" alt="<?php echo $full_name; ?>" />
                         <?php } else { ?>
                             <?php the_post_thumbnail( 'large',  array( 'itemprop' => 'image' ) ); ?>
                         <?php } //endif ?>
