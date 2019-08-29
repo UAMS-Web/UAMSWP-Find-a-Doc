@@ -64,20 +64,16 @@ foreach( $degrees as $degree ):
                                     echo '</div>';
                                 } else { ?>
                                     <div class="rating" aria-label="Patient Rating">
-                                    <!-- <div class="ds-title">Patient Rating</div> -->
-                                    <div class="ratings-count-lg">No ratings</div>
-                                    <div class="ratings-comments-lg">>0 Patient Comments</div>
-                                    <div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div>
+                                    <div class="ratings-count">No ratings <a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div>
+                                    <!-- <div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div> -->
                                     </div>
                                 <?php
                                 }
                             }
                         } else { ?>
                             <div class="rating" aria-label="Patient Rating">
-                                <!-- <div class="ds-title">Patient Rating</div> -->
-                                <div class="ratings-count-lg">No ratings</div>
-                                <div class="ratings-comments-lg">>0 Patient Comments</div>
-                                <div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div>
+                                <div class="ratings-count">No ratings <a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div>
+                                <!-- <div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div> -->
                             </div>
                     <?php } ?>
                     <!-- <div class="rating" aria-label="Patient Rating">
@@ -119,16 +115,18 @@ foreach( $degrees as $degree ):
                 </div>
                 <div class="col-12 col-xs px-0 px-xs-4 px-sm-8 order-1 image">
                     <picture>
-                        <!-- <source srcset="https://picsum.photos/389/519?image=669 1x, https://picsum.photos/778/1038?image=669 2x"
+                    <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
+                            <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 389, 519, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center'); ?> 2x"
                             media="(min-width: 1200px)">
-                        <source srcset="https://picsum.photos/306/408?image=669 1x, https://picsum.photos/612/816?image=669 2x"
+                            <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 306, 408, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 612, 816, 'center', 'center'); ?> 2x"
                             media="(min-width: 992px)">
-                        <source srcset="https://picsum.photos/182/243?image=669 1x, https://picsum.photos/364/486?image=669 2x"
+                            <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 182, 243, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 364, 486, 'center', 'center'); ?> 2x"
                             media="(min-width: 768px)">
-                        <source srcset="https://picsum.photos/86/115?image=669 1x, https://picsum.photos/172/230?image=669 2x"
+                            <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 86, 115, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 172, 230, 'center', 'center'); ?> 2x"
                             media="(min-width: 576px)">  
-                            <source srcset="https://picsum.photos/182/243?image=669 1x, https://picsum.photos/364/486?image=669 2x"
-                            media="(min-width: 1px)"> -->
+                            <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 182, 243, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 364, 486, 'center', 'center'); ?> 2x"
+                            media="(min-width: 1px)">
+                        <?php } //endif ?>
                             <?php the_post_thumbnail( 'large',  array( 'itemprop' => 'image' ) ); ?>
                     </picture>
                 </div>
@@ -151,7 +149,8 @@ foreach( $degrees as $degree ):
                         <?php echo get_field('physician_clinical_bio'); ?>
                         <?php if(get_field('physician_youtube_link')) { ?>
                         <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="<?php echo get_field('physician_youtube_link'); ?>"></iframe>
+                            <!-- <iframe class="embed-responsive-item" src="<?php echo get_field('physician_youtube_link'); ?>"></iframe> -->
+                            <?php echo wp_oembed_get( get_field( 'physician_youtube_link' ) ); ?>
                         </div>
                         <?php } ?>
                     </div>

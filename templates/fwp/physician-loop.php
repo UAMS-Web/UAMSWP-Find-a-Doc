@@ -6,8 +6,19 @@
 ?>
 	<?php $i = 0; ?>
 	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-	<?php //$class = ($i%2 == 0)? 'whiteBackground': 'grayBackground'; ?>
-	<?php $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_degree') ? ', ' . get_field('physician_degree') : '');
+	<?php 
+	$degrees = get_field('physician_degree');
+	$degree_list = '';
+	$i = 1;
+	foreach( $degrees as $degree ):
+		$degree_name = get_term( $degree, 'degree');
+		$degree_list .= $degree_name->name;
+		if( count($degrees) > $i ) {
+			$degree_list .= ", ";
+		}
+		$i++;
+	endforeach; ?>
+	<?php $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . ( $degree_list ? ', ' . $degree_list : '' );
 	      //$profileurl = '/directory/physician/' . $post->post_name .'/';
 	?>
 	<div class="col item-container">

@@ -39,16 +39,34 @@ while ( have_posts() ) : the_post(); ?>
 				<?php
 					if (get_field('location_24_7', $args)):
 						echo 'Open 24/7';
-					else:
+					else :
 						echo '<dl class="hours">';
-						echo '<dt>Sunday</dt> <dd>' .( get_field('location_sun_open', $args ) && "00:00:00" != get_field('location_sun_open', $args ) ? '' . get_field('location_sun_open', $args) . ' &ndash; ' . get_field('location_sunn_close', $args) . '' : 'Closed') . '</dd>';
-						echo '<dt>Monday</dt> <dd>' . ( get_field('location_mon_open', $args ) && "00:00:00" != get_field('location_mon_open', $args ) ? '' . get_field('location_mon_open', $args) . ' &ndash; ' . get_field('location_mon_close', $args) . '' : 'Closed') . '</dd>';
-						echo '<dt>Tuesday</dt> <dd>' . ( get_field('location_tues_open', $args ) && "00:00:00" != get_field('location_tues_open', $args ) ? '' . get_field('location_tues_open', $args) . ' &ndash; ' . get_field('location_tues_close', $args) . '' : 'Closed') . '</dd>';
-						echo '<dt>Wednesday</dt> <dd>' . ( get_field('location_wed_open', $args ) && "00:00:00" != get_field('location_wed_open', $args ) ? '' . get_field('location_wed_open', $args) . ' &ndash; ' . get_field('location_wed_close', $args) . '' : 'Closed') . '</dd>';
-						echo '<dt>Thursday</dt> <dd>' . ( get_field('location_thurs_open', $args ) && "00:00:00" != get_field('location_thurs_open', $args ) ? '' . get_field('location_thurs_open', $args) . ' &ndash; ' . get_field('location_thurs_close', $args) . '' : 'Closed') . '</dd>';
-						echo '<dt>Friday</dt> <dd>' . ( get_field('location_fri_open', $args ) && "00:00:00" != get_field('location_fri_open', $args ) ? '' . get_field('location_fri_open', $args) . ' &ndash; ' . get_field('location_fri_close', $args) . '' : 'Closed') . '</dd>';
-						echo '<dt>Saturday</dt> <dd>' . ( get_field('location_sat_open', $args ) && "00:00:00" != get_field('location_sat_open', $args ) ? '' . get_field('location_sat_open', $args) . ' &ndash; ' . get_field('location_sat_close', $args) . '' : 'Closed') . '</dd>';
+						$hours = get_field('location_hours');
+						if( $hours ) {
+							foreach ($hours as $hour) :
+								echo '<dt>'. $hour['day'] .'</dt> ';
+								echo '<dd>';
+								if ( $hour['closed'] ) {
+									echo 'Closed ';
+								} else {
+									echo ( ( $hour['open'] && '00:00:00' != $hour['open'] )  ? '' . $hour['open'] . ' &ndash; ' . $hour['close'] . '' : '' );
+								}
+								echo '</dd>';
+							endforeach;
+						} else {
+							echo '<dt>None information</dt>';
+						}
 						echo '</dl>';
+					// else:
+					// 	echo '<dl class="hours">';
+					// 	echo '<dt>Sunday</dt> <dd>' .( get_field('location_sun_open', $args ) && "00:00:00" != get_field('location_sun_open', $args ) ? '' . get_field('location_sun_open', $args) . ' &ndash; ' . get_field('location_sunn_close', $args) . '' : 'Closed') . '</dd>';
+					// 	echo '<dt>Monday</dt> <dd>' . ( get_field('location_mon_open', $args ) && "00:00:00" != get_field('location_mon_open', $args ) ? '' . get_field('location_mon_open', $args) . ' &ndash; ' . get_field('location_mon_close', $args) . '' : 'Closed') . '</dd>';
+					// 	echo '<dt>Tuesday</dt> <dd>' . ( get_field('location_tues_open', $args ) && "00:00:00" != get_field('location_tues_open', $args ) ? '' . get_field('location_tues_open', $args) . ' &ndash; ' . get_field('location_tues_close', $args) . '' : 'Closed') . '</dd>';
+					// 	echo '<dt>Wednesday</dt> <dd>' . ( get_field('location_wed_open', $args ) && "00:00:00" != get_field('location_wed_open', $args ) ? '' . get_field('location_wed_open', $args) . ' &ndash; ' . get_field('location_wed_close', $args) . '' : 'Closed') . '</dd>';
+					// 	echo '<dt>Thursday</dt> <dd>' . ( get_field('location_thurs_open', $args ) && "00:00:00" != get_field('location_thurs_open', $args ) ? '' . get_field('location_thurs_open', $args) . ' &ndash; ' . get_field('location_thurs_close', $args) . '' : 'Closed') . '</dd>';
+					// 	echo '<dt>Friday</dt> <dd>' . ( get_field('location_fri_open', $args ) && "00:00:00" != get_field('location_fri_open', $args ) ? '' . get_field('location_fri_open', $args) . ' &ndash; ' . get_field('location_fri_close', $args) . '' : 'Closed') . '</dd>';
+					// 	echo '<dt>Saturday</dt> <dd>' . ( get_field('location_sat_open', $args ) && "00:00:00" != get_field('location_sat_open', $args ) ? '' . get_field('location_sat_open', $args) . ' &ndash; ' . get_field('location_sat_close', $args) . '' : 'Closed') . '</dd>';
+					// 	echo '</dl>';
 					endif; ?>				
 			</div>
 			<div class="col-12 col-md px-0 px-md-8 order-1 image">

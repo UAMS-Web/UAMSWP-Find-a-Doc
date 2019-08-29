@@ -635,3 +635,11 @@ $request = wp_remote_get( 'https://transparency.nrchealth.com/widget/api/org-pro
 
 					$data = json_decode( $body );
 */
+
+add_filter('acf/load_value/key=field_physician_languages', 'set_default_language', 20, 3);
+function set_default_language($value, $post_id, $field) {
+	$term = get_term_by('slug', 'english', 'languages');
+	$id = $term->term_id;
+    $value = array($id);
+  	return $value;
+}
