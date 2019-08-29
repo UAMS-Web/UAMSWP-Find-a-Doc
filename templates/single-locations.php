@@ -187,22 +187,25 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="col-12">
 				<h2 class="module-title">Doctors at <?php the_title(); ?></h2>
 
-				<div class="list-legend">
+				<!-- <div class="list-legend">
 					<div class="az-filter">
-							<!-- All Filters:
+							<?php 
+								/* 
+								All Filters:
 								Disable any checkbox input that does not represent any conditions. Add "disabled" to input.
 								
 								A-Z Filter:
 								Start with "All"/"Any" checkbox input checked. Add "checked" attribute to input.
 								If user checks any other checkbox input, remove "checked" attribute from "All"/"Any" checkbox input.
 								If user checks "All"/"Any" checkbox input, remove "checked" attribute from checkbox input of other characters.
-							-->
-							<?php  echo facetwp_display( 'facet', 'alpha' ); ?>
-					</div>
-				</div>
+								*/
+							?>
+							<?php  //echo facetwp_display( 'facet', 'location_doctors_cards' ); ?>
+				 	</div>
+				</div> -->
 				<div class="card-list-container">
-					<div class="card-list card-list-doctors">
-						<?php echo facetwp_display( 'template', 'physician_cards' ); ?>
+					<div class="card-list card-list-doctors facetwp-template">
+						<?php echo facetwp_display( 'template', 'physician_by_location' ); ?>
 					</div>
 				</div>
 				<div class="list-pagination">
@@ -225,7 +228,8 @@ while ( have_posts() ) : the_post(); ?>
 						 	foreach( $specialtiescols[$i] as $specialty ):
 							 $specialty_name = get_term( $specialty, 'specialty');
 								echo $specialty_name->name . '<br/>';
-						 	endforeach; ?>
+							 endforeach; 
+						?>
 			    		</div>
 			    		<?php } // endfor?>
 			    	</div>
