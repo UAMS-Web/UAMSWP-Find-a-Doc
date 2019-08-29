@@ -93,14 +93,14 @@ foreach( $degrees as $degree ):
                             <?php foreach( $locations as $location ):
                                     if ( 2 > $l ){ ?>
                                 <p><strong><?php echo get_the_title( $location->ID ); ?></strong><br />
-                                <?php echo get_field('location_address_1', $location->ID ); ?><br/>
-                                <?php echo ( get_field('location_address_2', $location->ID ) ? get_field('location_address_2', $location->ID ) . '<br/>' : ''); ?>
-                                <?php echo get_field('location_city', $location->ID ); ?>, <?php echo get_field('location_state', $location->ID ); ?> <?php echo get_field('location_zip', $location->ID); ?>
-                                <?php $map = get_field('location_map'); ?>
-                                <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['latitude'] ?>,<?php echo $map['longitude'] ?>" target="_blank">Directions</a>
+                                <?php echo get_field( 'location_address_1', $location->ID ); ?><br/>
+                                <?php echo ( get_field( 'location_address_2', $location->ID ) ? get_field( 'location_address_2', $location->ID ) . '<br/>' : ''); ?>
+                                <?php echo get_field( 'location_city', $location->ID ); ?>, <?php echo get_field(' location_state', $location->ID ); ?> <?php echo get_field( 'location_zip', $location->ID ); ?>
+                                <?php $map = get_field( 'location_map', $location->ID ); ?>
+                                <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a>
                                 </p>
                                 <div class="btn-container">
-                                    <a class="btn btn-primary" href="<?php the_permalink(  $location->ID ); ?>">
+                                    <a class="btn btn-primary" href="<?php the_permalink( $location->ID ); ?>">
                                         View Location
                                     </a>
                                     <a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of locations for this doctor">
@@ -136,7 +136,7 @@ foreach( $degrees as $degree ):
             <div class="row">
                 <div class="col-xs-12">
                     <h2>Make an Appointment</h2>
-                    <p>Request an appointment directly with <a href="javascript:void(0)">your clinic</a>, <a href="javascript:void(0)">your doctor</a>, <span class="no-break">or call <a href="javascript:void(0)">501-555-5555</a>.</span></p>
+                    <p>Request an <a href="<?php echo get_field( 'field_physician_appointment_link' ); ?>">appointment</a>, <span class="no-break">or call <a href="tel:501-686-8000">501-686-8000</a>.</span></p>
                 </div>
             </div>
         </section>
@@ -149,7 +149,6 @@ foreach( $degrees as $degree ):
                         <?php echo get_field('physician_clinical_bio'); ?>
                         <?php if(get_field('physician_youtube_link')) { ?>
                         <div class="embed-responsive embed-responsive-16by9">
-                            <!-- <iframe class="embed-responsive-item" src="<?php echo get_field('physician_youtube_link'); ?>"></iframe> -->
                             <?php echo wp_oembed_get( get_field( 'physician_youtube_link' ) ); ?>
                         </div>
                         <?php } ?>
@@ -361,37 +360,6 @@ foreach( $degrees as $degree ):
                                     </div>
                                 </dd>
                                 <?php endforeach; ?>
-                                <!-- <dt>Listened Carefully</dt>
-                                <dd>
-                                    <div class="rating" aria-label="Patient Rating">
-                                        <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: 94%;"></div></div>
-                                        <div class="ratings-score-lg">4.7<span class="sr-only"> out of 5</span></div>
-                                    </div>
-                                </dd>
-                                
-                                <dt>Knew Important Medical History</dt>
-                                <dd>
-                                    <div class="rating" aria-label="Patient Rating">
-                                        <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: 94%;"></div></div>
-                                        <div class="ratings-score-lg">4.7<span class="sr-only"> out of 5</span></div>
-                                    </div>
-                                </dd>
-                                
-                                <dt>Gave Enough Information About Health and Treatment</dt>
-                                <dd>
-                                    <div class="rating" aria-label="Patient Rating">
-                                        <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: 94%;"></div></div>
-                                        <div class="ratings-score-lg">4.7<span class="sr-only"> out of 5</span></div>
-                                    </div>
-                                </dd>
-                                
-                                <dt>Trust Provider</dt>
-                                <dd>
-                                    <div class="rating" aria-label="Patient Rating">
-                                        <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: 94%;"></div></div>
-                                        <div class="ratings-score-lg">4.7<span class="sr-only"> out of 5</span></div>
-                                    </div>
-                                </dd> -->
                             </dl>
                         </div>
                         <div class="card-footer bg-transparent text-muted small">
@@ -424,86 +392,6 @@ foreach( $degrees as $degree ):
                                 </div>
                             </div>
                             <?php endforeach; ?>
-                            <!-- <div class="card">
-                                <div class="card-header bg-transparent">
-                                    <div class="rating rating-center" aria-label="Average Rating">
-                                        <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: 94%;"></div></div>
-                                        <div class="ratings-score-lg" itemprop="ratingValue">4.7<span class="sr-only"> out of 5</span></div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <h4 class="sr-only">Comment</h4>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu</p>
-                                </div>
-                                <div class="card-footer bg-transparent text-muted small">
-                                    <h4 class="sr-only">Date</h4>
-                                    Nov. 28, 2018
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header bg-transparent">
-                                    <div class="rating rating-center" aria-label="Average Rating">
-                                        <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: 94%;"></div></div>
-                                        <div class="ratings-score-lg" itemprop="ratingValue">4.7<span class="sr-only"> out of 5</span></div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <h4 class="sr-only">Comment</h4>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu</p>
-                                </div>
-                                <div class="card-footer bg-transparent text-muted small">
-                                    <h4 class="sr-only">Date</h4>
-                                    Nov. 28, 2018
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header bg-transparent">
-                                    <div class="rating rating-center" aria-label="Average Rating">
-                                        <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: 94%;"></div></div>
-                                        <div class="ratings-score-lg" itemprop="ratingValue">4.7<span class="sr-only"> out of 5</span></div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <h4 class="sr-only">Comment</h4>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu</p>
-                                </div>
-                                <div class="card-footer bg-transparent text-muted small">
-                                    <h4 class="sr-only">Date</h4>
-                                    Nov. 28, 2018
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header bg-transparent">
-                                    <div class="rating rating-center" aria-label="Average Rating">
-                                        <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: 94%;"></div></div>
-                                        <div class="ratings-score-lg" itemprop="ratingValue">4.7<span class="sr-only"> out of 5</span></div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <h4 class="sr-only">Comment</h4>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu</p>
-                                </div>
-                                <div class="card-footer bg-transparent text-muted small">
-                                    <h4 class="sr-only">Date</h4>
-                                    Nov. 28, 2018
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header bg-transparent">
-                                    <div class="rating rating-center" aria-label="Average Rating">
-                                        <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: 94%;"></div></div>
-                                        <div class="ratings-score-lg" itemprop="ratingValue">4.7<span class="sr-only"> out of 5</span></div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <h4 class="sr-only">Comment</h4>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu</p>
-                                </div>
-                                <div class="card-footer bg-transparent text-muted small">
-                                    <h4 class="sr-only">Date</h4>
-                                    Nov. 28, 2018
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                     <div class="view-more text-center mt-8 mt-sm-10">
@@ -579,7 +467,7 @@ foreach( $degrees as $degree ):
             <div class="row">
                 <div class="col-xs-12">
                     <h2>Make an Appointment</h2>
-                    <p>Request an appointment directly with <a href="javascript:void(0)">your clinic</a>, <a href="javascript:void(0)">your doctor</a>, <span class="no-break">or call <a href="javascript:void(0)">501-555-5555</a>.</span></p>
+                    <p>Request an <a href="<?php echo get_field( 'field_physician_appointment_link' ); ?>">appointment</a>, <span class="no-break">or call <a href="tel:501-686-8000">501-686-8000</a>.</span></p>
                 </div>
             </div>
         </section>
