@@ -28,7 +28,7 @@
 				media="(min-width: 1px)">
 			<img src="<?php echo image_sizer(get_post_thumbnail_id(), 255, 340, 'center', 'center'); ?>" class="card-img-top" alt="<?php echo $full_name; ?>" />
 			<?php } else { ?>
-			<?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
+			<?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image', 'class' => 'card-img-top' ) ); ?>
 			<?php } //endif ?>
 		</picture>
 		<div class="card-body">
