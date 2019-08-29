@@ -14,12 +14,13 @@ foreach( $degrees as $degree ):
     }
     $i++;
  endforeach; ?>
+<?php $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') .  ( $degree_list ? ', ' . $degree_list : '' );?>
 
 <main class="doctor-item">
         <section class="container-fluid p-0 p-xs-8 p-sm-10 doctor-info bg-white">
             <div class="row mx-0 mx-xs-n4 mx-sm-n8">
                 <div class="col-12 col-xs p-4 py-xs-0 px-xs-4 px-sm-8 order-2 text">
-                    <h1 class="page-title"><?php echo get_field('physician_first_name'); ?> <?php echo (get_field('physician_middle_name') ? get_field('physician_middle_name') : ''); ?> <?php echo get_field('physician_last_name'); ?><?php echo ( $degree_list ? ', ' . $degree_list : '' ); ?></h1>
+                    <h1 class="page-title"><?php echo $full_name; ?></h1>
                     <h2 class="sr-only">Overview</h2>
                     <dl>
                         <dt>Medical Department</dt>
@@ -116,18 +117,35 @@ foreach( $degrees as $degree ):
                 <div class="col-12 col-xs px-0 px-xs-4 px-sm-8 order-1 image">
                     <picture>
                     <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
-                            <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 389, 519, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center'); ?> 2x"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center'); ?>"
+                            media="(min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2), 
+                            (min-width: 1200px) and (min-resolution: 192dpi)">
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 389, 519, 'center', 'center'); ?>"
                             media="(min-width: 1200px)">
-                            <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 306, 408, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 612, 816, 'center', 'center'); ?> 2x"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 612, 816, 'center', 'center'); ?>"
+                            media="(min-width: 992px) and (-webkit-min-device-pixel-ratio: 2), 
+                            (min-width: 992px) and (min-resolution: 192dpi)">
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 306, 408, 'center', 'center'); ?>"
                             media="(min-width: 992px)">
-                            <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 182, 243, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 364, 486, 'center', 'center'); ?> 2x"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 364, 486, 'center', 'center'); ?>"
+                            media="(min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), 
+                            (min-width: 768px) and (min-resolution: 192dpi)">
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 182, 243, 'center', 'center'); ?>"
                             media="(min-width: 768px)">
-                            <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 86, 115, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 172, 230, 'center', 'center'); ?> 2x"
-                            media="(min-width: 576px)">  
-                            <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 182, 243, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 364, 486, 'center', 'center'); ?> 2x"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 172, 230, 'center', 'center'); ?>"
+                            media="(min-width: 576px) and (-webkit-min-device-pixel-ratio: 2), 
+                            (min-width: 576px) and (min-resolution: 192dpi)">
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 86, 115, 'center', 'center'); ?>"
+                            media="(min-width: 576px)">
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 760, 1013, 'center', 'center'); ?>"
+                            media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), 
+                            (min-width: 1px) and (min-resolution: 192dpi)">
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 380, 507, 'center', 'center'); ?>"
                             media="(min-width: 1px)">
-                        <?php } //endif ?>
+                        <img src="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center'); ?>" alt="<?php echo $full_name; ?>" />
+                        <?php } else { ?>
                             <?php the_post_thumbnail( 'large',  array( 'itemprop' => 'image' ) ); ?>
+                        <?php } //endif ?>
                     </picture>
                 </div>
             </div>
