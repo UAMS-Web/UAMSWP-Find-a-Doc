@@ -21,7 +21,18 @@
 	      //$profileurl = '/directory/physician/' . $post->post_name .'/';
 	?>
 	<div class="card">
-		<?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
+		<picture>
+			<?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
+			<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 510, 680, 'center', 'center'); ?>"
+				media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), 
+				(min-width: 1px) and (min-resolution: 192dpi)">
+			<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 255, 340, 'center', 'center'); ?>"
+				media="(min-width: 1px)">
+			<img src="<?php echo image_sizer(get_post_thumbnail_id(), 255, 340, 'center', 'center'); ?>" class="card-img-top" alt="<?php echo $full_name; ?>" />
+			<?php } else { ?>
+			<?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
+			<?php } //endif ?>
+		</picture>
 		<div class="card-body">
 				<h3 class="card-title">
 					<span class="name"><?php echo $full_name; ?></span>
