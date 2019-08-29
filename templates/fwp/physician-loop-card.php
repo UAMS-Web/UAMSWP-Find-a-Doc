@@ -17,9 +17,7 @@
 		}
 		$i++;
 	endforeach; ?>
-	<?php $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') .  ( $degree_list ? ', ' . $degree_list : '' );
-	      //$profileurl = '/directory/physician/' . $post->post_name .'/';
-	?>
+	<?php $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') .  ( $degree_list ? ', ' . $degree_list : '' ); ?>
 	<div class="card">
 		<?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
 		<div class="card-body">
