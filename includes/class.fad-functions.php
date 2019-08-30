@@ -206,6 +206,18 @@ function prefix_enqueue_custom_style() {
     wp_enqueue_style( 'admin-mb-style', get_stylesheet_directory_uri() . '/admin.css' );
 }
 
+if (!function_exists('apStyleDate')) {
+	function apStyleDate($date){
+
+		$date = strftime("%l:%M %P", strtotime($date));
+	
+		$date = str_replace(":00", "", $date);
+		$date = str_replace("m", ".m.", $date);
+	
+		return $date;
+	
+	}
+}
 // add_action( 'mb_relationships_init', function() {
 //     MB_Relationships_API::register( array(
 //         'id'   => 'physicians_to_locations',

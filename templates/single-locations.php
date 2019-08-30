@@ -11,17 +11,27 @@ while ( have_posts() ) : the_post(); ?>
 				<p><?php echo get_field('location_address_1', $args, get_the_ID() ); ?><br/>
 				<?php echo ( get_field('location_address_2', $args ) ? get_field('location_address_2', $args) . '<br/>' : ''); ?>
 				<?php echo get_field('location_city', $args); ?>, <?php echo get_field('location_state', $args); ?> <?php echo get_field('location_zip', $args, get_the_ID()); ?></p>
-						<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a>
+					<p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a></p>
+				<?php if(get_field('location_web_name') && get_field('location_url')){ ?>
+					<p><a class="btn btn-secondary" href="<?php echo get_field('location_url')['url']; ?>"><?php echo get_field('location_web_name'); ?> <span class="far fa-external-link-alt"></span></span></a></p>
+				<?php } ?>
 				<h2>Contact Information</h2>
 				<dl>
 					<?php if (get_field('location_phone')) { ?>
 					<dt>Clinic Phone Number</dt>
 					<dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone') ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone') ); ?></a></dd>
 					<?php } ?>
-					
-					<!-- <dt>Appointments Phone Number</dt>
-					<dd><a href="tel:5555555555">(555) 555-5555</a></dd> -->
-
+					<?php if ( get_field('field_location_phone_numbers') ) { 
+						$phone_numbers = get_field('field_location_phone_numbers');
+						while( have_rows('field_location_phone_numbers') ): the_row(); 
+							$title = get_sub_field('location_appointments_text');
+							$phone = get_sub_field('location_appointments_phone');
+							$text = get_sub_field('location_appointments_additional_text');
+					?>
+					<dt><?php echo $title; ?></dt>
+					<dd><a href="tel:<?php echo format_phone_dash( $phone ); ?>"><?php echo format_phone_us( $phone ); ?></a><?php echo ($text ? '<br/><small>'. $text .'</small>' : ''); ?></dd>
+					<?php endwhile; 
+						} ?>
 					<?php
 						$phone_numbers = get_field('location_appointments');
 						if ( ! empty( $phone_numbers ) && ! empty( $phone_numbers[0]['number'] ) ) {
@@ -35,7 +45,6 @@ while ( have_posts() ) : the_post(); ?>
 					?>
 				</dl>
 				<h2>Hours</h2>
-				<!-- Use AP Style abbreviations (a.m. / p.m.), don't add zeroes after even hours, separate with en dashes -->
 				<?php
 					if (get_field('location_24_7', $args)):
 						echo 'Open 24/7';
@@ -43,45 +52,57 @@ while ( have_posts() ) : the_post(); ?>
 						echo '<dl class="hours">';
 						$hours = get_field('location_hours');
 						if( $hours ) {
+							$hours_text = '';
+							$day = ''; // Previous Day
+							$comment = ''; // Comment on previous day
 							foreach ($hours as $hour) :
-								echo '<dt>'. $hour['day'] .'</dt> ';
-								echo '<dd>';
-								if ( $hour['closed'] ) {
-									echo 'Closed ';
+								if( $day !== $hour['day'] || $comment ) {
+									$hours_text .= '<dt>'. $hour['day'] .'</dt> ';
+									$hours_text .= '<dd>';
 								} else {
-									echo ( ( $hour['open'] && '00:00:00' != $hour['open'] )  ? '' . $hour['open'] . ' &ndash; ' . $hour['close'] . '' : '' );
+									$hours_text .= ', ';
 								}
-								echo '</dd>';
+								if ( $hour['closed'] ) {
+									$hours_text .= 'Closed ';
+								} else {
+									$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] )  ? '' . apStyleDate( $hour['open'] ) . ' &ndash; ' . apStyleDate( $hour['close'] ) . '' : '' );
+									if ( $hour['comment'] ) {
+										$hours_text .= ' ' .$hour['comment'];
+										$comment = $hour['comment'];
+									} else {
+										$comment = '';
+									}
+								}
+								if( $day !== $hour['day'] && $comment ) {
+									$hours_text .= '</dd>';
+								}
+								$day = $hour['day']; // Reset the day
 							endforeach;
+							echo $hours_text;
 						} else {
-							echo '<dt>None information</dt>';
+							echo '<dt>No information</dt>';
 						}
 						echo '</dl>';
-					// else:
-					// 	echo '<dl class="hours">';
-					// 	echo '<dt>Sunday</dt> <dd>' .( get_field('location_sun_open', $args ) && "00:00:00" != get_field('location_sun_open', $args ) ? '' . get_field('location_sun_open', $args) . ' &ndash; ' . get_field('location_sunn_close', $args) . '' : 'Closed') . '</dd>';
-					// 	echo '<dt>Monday</dt> <dd>' . ( get_field('location_mon_open', $args ) && "00:00:00" != get_field('location_mon_open', $args ) ? '' . get_field('location_mon_open', $args) . ' &ndash; ' . get_field('location_mon_close', $args) . '' : 'Closed') . '</dd>';
-					// 	echo '<dt>Tuesday</dt> <dd>' . ( get_field('location_tues_open', $args ) && "00:00:00" != get_field('location_tues_open', $args ) ? '' . get_field('location_tues_open', $args) . ' &ndash; ' . get_field('location_tues_close', $args) . '' : 'Closed') . '</dd>';
-					// 	echo '<dt>Wednesday</dt> <dd>' . ( get_field('location_wed_open', $args ) && "00:00:00" != get_field('location_wed_open', $args ) ? '' . get_field('location_wed_open', $args) . ' &ndash; ' . get_field('location_wed_close', $args) . '' : 'Closed') . '</dd>';
-					// 	echo '<dt>Thursday</dt> <dd>' . ( get_field('location_thurs_open', $args ) && "00:00:00" != get_field('location_thurs_open', $args ) ? '' . get_field('location_thurs_open', $args) . ' &ndash; ' . get_field('location_thurs_close', $args) . '' : 'Closed') . '</dd>';
-					// 	echo '<dt>Friday</dt> <dd>' . ( get_field('location_fri_open', $args ) && "00:00:00" != get_field('location_fri_open', $args ) ? '' . get_field('location_fri_open', $args) . ' &ndash; ' . get_field('location_fri_close', $args) . '' : 'Closed') . '</dd>';
-					// 	echo '<dt>Saturday</dt> <dd>' . ( get_field('location_sat_open', $args ) && "00:00:00" != get_field('location_sat_open', $args ) ? '' . get_field('location_sat_open', $args) . ' &ndash; ' . get_field('location_sat_close', $args) . '' : 'Closed') . '</dd>';
-					// 	echo '</dl>';
-					endif; ?>				
+					endif; ?>
+				<?php if (get_field('location_after_hours') && !get_field('location_24_7', $args)) { ?>
+				<h2>After Hours</h2>
+				<?php echo get_field('location_after_hours'); ?>
+				<?php } ?>
 			</div>
 			<div class="col-12 col-md px-0 px-md-8 order-1 image">
 				<picture>
-					<!-- <source srcset="https://picsum.photos/630/473?image=1040 1x, https://picsum.photos/1260/945?image=1040 2x"
+					<?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
+					<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 630, 473, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1260, 945, 'center', 'center'); ?> 2x"
 						media="(min-width: 1500px)">
-					<source srcset="https://picsum.photos/400/300?image=1040 1x, https://picsum.photos/800/600?image=1040 2x"
+					<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 400, 300, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 800, 600, 'center', 'center'); ?> 2x"
 						media="(min-width: 992px)">
-					<source srcset="https://picsum.photos/992/558?image=1040 1x, https://picsum.photos/1984/1116?image=1040 2x"
+					<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 992, 558, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1984, 1116, 'center', 'center'); ?> 2x"
 						media="(min-width: 768px)">
-					<source srcset="https://picsum.photos/768/432?image=1040 1x, https://picsum.photos/1536/864?image=1040 2x"
+					<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 768, 432, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1536, 864, 'center', 'center'); ?> 2x"
 						media="(min-width: 576px)">  
-						<source srcset="https://picsum.photos/576/324?image=1040 1x, https://picsum.photos/1152/648?image=1040 2x"
+						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 576, 324, 'center', 'center'); ?>1x, <?php echo image_sizer(get_post_thumbnail_id(), 1152, 648, 'center', 'center'); ?> 2x"
 						media="(min-width: 1px)">
-					<img src="https://picsum.photos/544/408?image=1040" alt="C. Lowry Barnes, M.D." /> -->
+					<?php } // endif ?>
 					<?php if ( has_post_thumbnail() ) { 
 						 the_post_thumbnail('medium_large', ['class' => 'img-responsive']); 
 						  } ?>
@@ -89,6 +110,18 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 		</div>
 	</section>
+	<?php if ( get_field('location_about')) { ?>
+	<section class="container-fluid p-8 p-sm-10 bg-auto">
+		<div class="row">
+			<div class="col-xs-12">
+				<h2 class="module-title">About This Location</h2>
+				<div class="module-body">
+					<?php echo get_field('location_about'); ?>
+				</div>
+			</div>
+		</div>
+	</section>
+	<?php } ?>
 	<section class="container-fluid p-8 p-sm-10 location-directions bg-auto" id="directions">
 		<div class="row mx-md-n8">
 			<?php if (get_field('location_parking') || get_field('location_direction')) : ?>
@@ -170,14 +203,23 @@ while ( have_posts() ) : the_post(); ?>
 			<?php endif; ?>
 		</div>
 	</section>
-	<?php if ( get_field('location_appointment')): ?>
+	<?php if ( get_field('location_appointment') || get_field('location_appointment_bring')): ?>
 	<section class="container-fluid p-8 p-sm-10 bg-auto">
 		<div class="row">
 			<div class="col-xs-12">
+				<?php if ( get_field('location_appointment') ) { ?>
 				<h2 class="module-title">Appointments</h2>
 				<div class="module-body">
 					<?php echo get_field('location_appointment'); ?>
 				</div>
+				<?php } 
+				if ( get_field('location_appointment_bring') ) { 
+				?>
+				<h3 class="module-title">What to Bring to Your Appointment</h3>
+				<div class="module-body">
+					<?php echo get_field('location_appointment_bring'); ?>
+				</div>
+				<?php } ?>
 			</div>
 		</div>
 	</section>
