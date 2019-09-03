@@ -206,18 +206,6 @@ function prefix_enqueue_custom_style() {
     wp_enqueue_style( 'admin-mb-style', get_stylesheet_directory_uri() . '/admin.css' );
 }
 
-if (!function_exists('apStyleDate')) {
-	function apStyleDate($date){
-
-		$date = strftime("%l:%M %P", strtotime($date));
-	
-		$date = str_replace(":00", "", $date);
-		$date = str_replace("m", ".m.", $date);
-	
-		return $date;
-	
-	}
-}
 // add_action( 'mb_relationships_init', function() {
 //     MB_Relationships_API::register( array(
 //         'id'   => 'physicians_to_locations',
@@ -556,6 +544,13 @@ add_filter( 'facetwp_pager_html', function( $output, $params ) {
 add_filter( 'facetwp_per_page_options', function( $options ) {
     return array( 1, 2, 25, 50, 100, 250 );
 });
+
+add_filter( 'facetwp_shortcode_html', function( $output, $atts ) {
+    if ( $atts['template'] = 'locations' ) {
+        $output = str_replace( 'facetwp-template row', 'facetwp-template row card-list', $output );
+    }
+    return $output;
+}, 10, 2 );
 
 //FacetWP Active
 // add_filter( 'facetwp_preload_url_vars', function( $url_vars ) {
