@@ -2,7 +2,7 @@
 	<div class="card">
 		<?php if ( has_post_thumbnail() ) { ?>
 			<p>
-			<?php the_post_thumbnail('aspect-16-9-small', ['class' => 'img-responsive']); ?>
+			<?php the_post_thumbnail('aspect-16-9-small', ['class' => 'card-img-top']); ?>
 			</p>
 		<?php } ?>
 		<div class="card-body">
