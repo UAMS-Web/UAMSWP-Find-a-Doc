@@ -25,12 +25,36 @@
 				<div class="col image">
 					<picture>
 					<?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 486, 648, 'center', 'center'); ?> 2x" media="(min-width: 2054px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?> 2x" media="(min-width: 1784px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 486, 648, 'center', 'center'); ?> 2x" media="(min-width: 1200px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?> 2x" media="(min-width: 768px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 95, 127, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 190, 254, 'center', 'center'); ?> 2x" media="(min-width: 576px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?> 2x" media="(min-width: 1px)">
+						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 486, 648, 'center', 'center'); ?>"
+                            media="(min-width: 2054px) and (-webkit-min-device-pixel-ratio: 2), 
+                            (min-width: 2054px) and (min-resolution: 192dpi)">
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
+                            media="(min-width: 2054px)">
+						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?>"
+                            media="(min-width: 1784px) and (-webkit-min-device-pixel-ratio: 2), 
+                            (min-width: 1784px) and (min-resolution: 192dpi)">
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
+                            media="(min-width: 1784px)">
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 486, 648, 'center', 'center'); ?>"
+                            media="(min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2), 
+                            (min-width: 1200px) and (min-resolution: 192dpi)">
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
+                            media="(min-width: 1200px)">
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?>"
+                            media="(min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), 
+                            (min-width: 768px) and (min-resolution: 192dpi)">
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
+                            media="(min-width: 768px)">
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 190, 254, 'center', 'center'); ?>"
+                            media="(min-width: 576px) and (-webkit-min-device-pixel-ratio: 2), 
+                            (min-width: 576px) and (min-resolution: 192dpi)">
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 95, 127, 'center', 'center'); ?>"
+                            media="(min-width: 576px)">
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?>"
+                            media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), 
+                            (min-width: 1px) and (min-resolution: 192dpi)">
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
+                            media="(min-width: 1px)">
 					<?php } //endif ?>
 						<?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
 					</picture>
