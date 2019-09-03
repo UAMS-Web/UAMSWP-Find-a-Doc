@@ -55,8 +55,10 @@
                             (min-width: 1px) and (min-resolution: 192dpi)">
                         <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
                             media="(min-width: 1px)">
-					<?php } //endif ?>
+						<img src="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>" alt="<?php echo $full_name; ?>" />
+						<?php } else { ?>
 						<?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
+					<?php } //endif ?>
 					</picture>
 				</div>
 				<div class="col text">
