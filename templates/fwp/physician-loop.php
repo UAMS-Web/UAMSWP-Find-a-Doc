@@ -18,21 +18,20 @@
 		}
 		$i++;
 	endforeach; ?>
-	<?php $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . ( $degree_list ? ', ' . $degree_list : '' );
-	      //$profileurl = '/directory/physician/' . $post->post_name .'/';
-	?>
+	<?php $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . ( $degree_list ? ', ' . $degree_list : '' ); ?>
 	<div class="col item-container">
 		<div class="item">
 			<div class="row">
 				<div class="col image">
 					<picture>
-						<!-- <source srcset="https://picsum.photos/243/324?image=669 1x, https://picsum.photos/486/648?image=669 2x" media="(min-width: 2054px)">
-						<source srcset="https://picsum.photos/184/245?image=669 1x, https://picsum.photos/368/490?image=669 2x" media="(min-width: 1784px)">
-						<source srcset="https://picsum.photos/243/324?image=669 1x, https://picsum.photos/486/648?image=669 2x" media="(min-width: 1200px)">
-						<source srcset="https://picsum.photos/184/245?image=669 1x, https://picsum.photos/368/490?image=669 2x" media="(min-width: 768px)">
-						<source srcset="https://picsum.photos/95/127?image=669 1x, https://picsum.photos/190/254?image=669 2x" media="(min-width: 576px)">
-						<source srcset="https://picsum.photos/184/245?image=669 1x, https://picsum.photos/368/490?image=669 2x" media="(min-width: 1px)"> -->
-						<!-- <img src="https://picsum.photos/184/245?image=669" alt="C. Lowry Barnes, M.D."> -->
+					<?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
+						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 486, 648, 'center', 'center'); ?> 2x" media="(min-width: 2054px)">
+						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?> 2x" media="(min-width: 1784px)">
+						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 486, 648, 'center', 'center'); ?> 2x" media="(min-width: 1200px)">
+						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?> 2x" media="(min-width: 768px)">
+						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 95, 127, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 190, 254, 'center', 'center'); ?> 2x" media="(min-width: 576px)">
+						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?> 2x" media="(min-width: 1px)">
+					<?php } //endif ?>
 						<?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
 					</picture>
 				</div>
@@ -63,8 +62,7 @@
 										} else { ?>
 											<div class="rating">
 												<div class="star-ratings-sprite" title="0 out of 5"><div class="star-ratings-sprite-percentage" style="width: 0%;"></div></div>
-												<div class="ratings-count">No ratings</div>
-												<div><a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
+												<div class="ratings-count">No ratings - <a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
 											</div>
 										<?php
 										}
@@ -72,8 +70,7 @@
 								} else { ?>
 									<div class="rating">
 										<div class="star-ratings-sprite" title="0 out of 5"><div class="star-ratings-sprite-percentage" style="width: 0%;"></div></div>
-										<div class="ratings-count">No ratings</div>
-										<div><a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
+										<div class="ratings-count">No ratings - <a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
 									</div>
 						<?php } ?>
 						

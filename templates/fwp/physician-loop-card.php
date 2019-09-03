@@ -17,9 +17,7 @@
 		}
 		$i++;
 	endforeach; ?>
-	<?php $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') .  ( $degree_list ? ', ' . $degree_list : '' );
-	      //$profileurl = '/directory/physician/' . $post->post_name .'/';
-	?>
+	<?php $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') .  ( $degree_list ? ', ' . $degree_list : '' ); ?>
 	<div class="card">
 		<picture>
 			<?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
@@ -30,7 +28,7 @@
 				media="(min-width: 1px)">
 			<img src="<?php echo image_sizer(get_post_thumbnail_id(), 255, 340, 'center', 'center'); ?>" class="card-img-top" alt="<?php echo $full_name; ?>" />
 			<?php } else { ?>
-			<?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
+			<?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image', 'class' => 'card-img-top' ) ); ?>
 			<?php } //endif ?>
 		</picture>
 		<div class="card-body">

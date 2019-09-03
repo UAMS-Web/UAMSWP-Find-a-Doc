@@ -206,6 +206,18 @@ function prefix_enqueue_custom_style() {
     wp_enqueue_style( 'admin-mb-style', get_stylesheet_directory_uri() . '/admin.css' );
 }
 
+if (!function_exists('apStyleDate')) {
+	function apStyleDate($date){
+
+		$date = strftime("%l:%M %P", strtotime($date));
+	
+		$date = str_replace(":00", "", $date);
+		$date = str_replace("m", ".m.", $date);
+	
+		return $date;
+	
+	}
+}
 // add_action( 'mb_relationships_init', function() {
 //     MB_Relationships_API::register( array(
 //         'id'   => 'physicians_to_locations',
@@ -499,11 +511,11 @@ add_filter( 'facetwp_pager_html', function( $output, $params ) {
 
         // Previous page (NEW)
         if ( $page > 1 ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page - 1) . '"><span class="fas fa-fast-backward" aria-hidden="true"></span></a></li>';
+            $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page - 1) . '"><span class="fas fa-angle-left" aria-hidden="true"></span></a></li>';
         }
         
         if ( 3 < $page ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link first-page" data-page="1"><span class="fas fa-angle-left" aria-hidden="true"></span></a></li>';
+            $output .= '<li class="page-item"><a class="facetwp-page page-link first-page" data-page="1"><span class="fas fa-fast-backward" aria-hidden="true"></span></a></li>';
         }
         if ( 1 < ( $page - 10 ) ) {
             $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page - 10) . '">' . ($page - 10) . '</a></li>';
@@ -526,12 +538,12 @@ add_filter( 'facetwp_pager_html', function( $output, $params ) {
             $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page + 10) . '">' . ($page + 10) . '</a></li>';
         }
         if ( $total_pages > ( $page + 2 ) ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link last-page" data-page="' . $total_pages . '"><span class="fas fa-angle-left aria-hidden="true"></span></a></li>';
+            $output .= '<li class="page-item"><a class="facetwp-page page-link last-page" data-page="' . $total_pages . '"><span class="fas fa-fast-forward aria-hidden="true"></span></a></li>';
         }
 
         // Next page (NEW)
         if ( $page < $total_pages ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page + 1) . '"><span class="fas fa-fast-forward" aria-hidden="true"></span></a>';
+            $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page + 1) . '"><span class="fas fa-angle-right" aria-hidden="true"></span></a>';
 		}
 		
 		$output .= '</ul></nav>';
