@@ -24,7 +24,7 @@
 			<div class="row">
 				<div class="col image">
 					<picture>
-					<?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
+					<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
 						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 486, 648, 'center', 'center'); ?>"
                             media="(min-width: 2054px) and (-webkit-min-device-pixel-ratio: 2), 
                             (min-width: 2054px) and (min-resolution: 192dpi)">
@@ -56,9 +56,11 @@
                         <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
                             media="(min-width: 1px)">
 						<img src="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>" alt="<?php echo $full_name; ?>" />
-						<?php } else { ?>
+					<?php } elseif ( has_post_thumbnail() ) { ?>
 						<?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
-					<?php } //endif ?>
+					<?php } else { ?>
+						<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.svg" alt="" />
+					<?php } ?>
 					</picture>
 				</div>
 				<div class="col text">
