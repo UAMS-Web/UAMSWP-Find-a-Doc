@@ -1,9 +1,7 @@
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 	<div class="card">
 		<?php if ( has_post_thumbnail() ) { ?>
-			<p>
 			<?php the_post_thumbnail('aspect-16-9-small', ['class' => 'card-img-top']); ?>
-			</p>
 		<?php } ?>
 		<div class="card-body">
             <h3 class="card-title">
