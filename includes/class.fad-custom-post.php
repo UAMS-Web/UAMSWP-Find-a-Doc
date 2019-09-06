@@ -193,7 +193,6 @@ if ( ! function_exists('services_cpt') ) {
 	add_action( 'init', 'services_cpt', 0 );
 }
 
-//hook into the init action and call create_book_taxonomies when it fires
 add_action( 'init', 'create_clinical_conditions_taxonomy', 0 );
 
 //create a custom taxonomy name it topics for your posts
@@ -205,7 +204,7 @@ function create_clinical_conditions_taxonomy() {
 
   $labels = array(
 		'name'                           => 'Conditions',
-		'singular_name'                  => 'Conditions',
+		'singular_name'                  => 'Condition',
 		'search_items'                   => 'Search Conditions',
 		'all_items'                      => 'All Conditions',
 		'edit_item'                      => 'Edit Condition',
@@ -222,8 +221,8 @@ function create_clinical_conditions_taxonomy() {
 		'parent_item'                	 => 'Parent Condition',
 		'parent_item_colon'          	 => 'Parent Condition:',
 		'no_terms'                   	 => 'No Conditions',
-		'items_list'                 	 => 'Conditions list',
-		'items_list_navigation'      	 => 'Conditions list navigation',
+		'items_list'                 	 => 'Condition list',
+		'items_list_navigation'      	 => 'Condition list navigation',
 	);
   	$rewrite = array(
 		'slug'                       => 'conditions',
@@ -256,6 +255,69 @@ function create_clinical_conditions_taxonomy() {
 
 }
 
+// //hook into the init action and call create_book_taxonomies when it fires
+// add_action( 'init', 'create_clinical_diseases_conditions_taxonomy', 0 );
+
+// //create a custom taxonomy name it topics for your posts
+
+// function create_clinical_diseases_conditions_taxonomy() {
+
+// // Add new taxonomy, make it hierarchical like categories
+// // first do the translations part for GUI
+
+//   $labels = array(
+// 		'name'                           => 'Diseases & Conditions',
+// 		'singular_name'                  => 'Disease or Condition',
+// 		'search_items'                   => 'Search Diseases & Conditions',
+// 		'all_items'                      => 'All Diseases & Conditions',
+// 		'edit_item'                      => 'Edit Disease or Condition',
+// 		'update_item'                    => 'Update Disease or Condition',
+// 		'add_new_item'                   => 'Add New Disease or Condition',
+// 		'new_item_name'                  => 'New Disease or Condition',
+// 		'menu_name'                      => 'Diseases & Conditions',
+// 		'view_item'                      => 'View Disease or Condition',
+// 		'popular_items'                  => 'Popular Disease or Condition',
+// 		'separate_items_with_commas'     => 'Separate diseases & conditions with commas',
+// 		'add_or_remove_items'            => 'Add or remove diseases & conditions',
+// 		'choose_from_most_used'          => 'Choose from the most used diseases & conditions',
+// 		'not_found'                      => 'No diseases or conditions found',
+// 		'parent_item'                	 => 'Parent Disease or Condition',
+// 		'parent_item_colon'          	 => 'Parent Disease or Condition:',
+// 		'no_terms'                   	 => 'No Diseases or Conditions',
+// 		'items_list'                 	 => 'Disease & Condition list',
+// 		'items_list_navigation'      	 => 'Disease & Condition list navigation',
+// 	);
+//   	$rewrite = array(
+// 		'slug'                       => 'disease-condition',
+// 		'with_front'                 => true,
+// 		'hierarchical'               => true,
+// 	);
+// 	$capabilities = array(
+// 		'manage_terms'               => 'manage_options',
+// 		'edit_terms'                 => 'manage_options',
+// 		'delete_terms'               => 'manage_options',
+// 		'assign_terms'               => 'edit_physicians',
+// 	);
+// 	$args = array(
+// 		'label' 					 => __( 'Diseases & Conditions' ),
+// 		'labels'                     => $labels,
+// 		'hierarchical'               => true,
+// 		'public'                     => true,
+// 		'show_ui'                    => true,
+// 		'meta_box_cb'				 => false,
+// 		'show_admin_column'          => false,
+// 		'show_in_nav_menus'          => false,
+// 		'show_tagcloud'              => false,
+// 		'rewrite'                    => $rewrite,
+// 		'capabilities'               => $capabilities,
+// 		'show_in_rest'       		 => true,
+//   		'rest_base'          		 => 'disease_condition',
+//   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+// 	);
+// 	register_taxonomy( 'disease-condition', array( 'physicians' ), $args );
+
+// }
+
 //hook into the init action and call create_book_taxonomies when it fires
 add_action( 'init', 'create_clinical_treatments_taxonomy', 0 );
 
@@ -267,29 +329,29 @@ function create_clinical_treatments_taxonomy() {
 // first do the translations part for GUI
 
   $labels = array(
-		'name'                           => 'Treatments',
-		'singular_name'                  => 'Treatments',
-		'search_items'                   => 'Search Treatments',
-		'all_items'                      => 'All Treatments',
-		'edit_item'                      => 'Edit Treatment',
-		'update_item'                    => 'Update Treatment',
-		'add_new_item'                   => 'Add New Treatment',
-		'new_item_name'                  => 'New Treatment',
-		'menu_name'                      => 'Treatments',
-		'view_item'                      => 'View Treatment',
-		'popular_items'                  => 'Popular Treatment',
-		'separate_items_with_commas'     => 'Separate Treatments with commas',
-		'add_or_remove_items'            => 'Add or remove Treatments',
-		'choose_from_most_used'          => 'Choose from the most used Treatments',
-		'not_found'                      => 'No Treatments found',
-		'parent_item'                	 => 'Parent Treatment',
-		'parent_item_colon'          	 => 'Parent Treatment:',
-		'no_terms'                   	 => 'No Treatments',
-		'items_list'                 	 => 'Treatments list',
-		'items_list_navigation'      	 => 'Treatments list navigation',
+		'name'                           => 'Treatments & Procedures',
+		'singular_name'                  => 'Treatments & Procedures',
+		'search_items'                   => 'Search Treatments & Procedures',
+		'all_items'                      => 'All Treatments & Procedures',
+		'edit_item'                      => 'Edit Treatment or Procedure',
+		'update_item'                    => 'Update Treatment or Procedure',
+		'add_new_item'                   => 'Add New Treatment or Procedure',
+		'new_item_name'                  => 'New Treatment or Procedure',
+		'menu_name'                      => 'Treatments & Procedures',
+		'view_item'                      => 'View Treatment or Procedure',
+		'popular_items'                  => 'Popular Treatment or Procedure',
+		'separate_items_with_commas'     => 'Separate Treatments or Procedures with commas',
+		'add_or_remove_items'            => 'Add or remove Treatment or Procedure',
+		'choose_from_most_used'          => 'Choose from the most used Treatments or Procedures',
+		'not_found'                      => 'No Treatments or Procedures found',
+		'parent_item'                	 => 'Parent Treatment or Procedure',
+		'parent_item_colon'          	 => 'Parent Treatment or Procedure:',
+		'no_terms'                   	 => 'No Treatments or Procedures',
+		'items_list'                 	 => 'Treatment & Procedure list',
+		'items_list_navigation'      	 => 'Treatment & Procedure list navigation',
 	);
   	$rewrite = array(
-		'slug'                       => 'treatments',
+		'slug'                       => 'treatment-procedure',
 		'with_front'                 => true,
 		'hierarchical'               => true,
 	);
@@ -312,10 +374,10 @@ function create_clinical_treatments_taxonomy() {
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
 		'show_in_rest'       		 => true,
-  		'rest_base'          		 => 'treatment',
+  		'rest_base'          		 => 'treatment_procedure',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
 	);
-	register_taxonomy( 'treatment', array( 'physicians' ), $args );
+	register_taxonomy( 'treatment-procedure', array( 'physicians' ), $args );
 
 }
 
@@ -622,62 +684,62 @@ function create_patient_type_taxonomy() {
 
 // }
 
-//hook into the init action and call create_medical_procedures_taxonomy when it fires
-add_action( 'init', 'create_medical_procedures_taxonomy', 0 );
+// //hook into the init action and call create_medical_procedures_taxonomy when it fires
+// add_action( 'init', 'create_medical_procedures_taxonomy', 0 );
 
-//create a custom taxonomy name it topics for your posts
-function create_medical_procedures_taxonomy() {
+// //create a custom taxonomy name it topics for your posts
+// function create_medical_procedures_taxonomy() {
 
-// Add new taxonomy, make it hierarchical like categories
-// first do the translations part for GUI
+// // Add new taxonomy, make it hierarchical like categories
+// // first do the translations part for GUI
 
-  $labels = array(
-		'name'                           => 'Medical Procedures',
-		'singular_name'                  => 'Medical Procedures',
-		'search_items'                   => 'Search Procedures',
-		'all_items'                      => 'All Procedures',
-		'edit_item'                      => 'Edit Procedure',
-		'update_item'                    => 'Update Procedure',
-		'add_new_item'                   => 'Add New Procedure',
-		'new_item_name'                  => 'New Procedure',
-		'menu_name'                      => 'Medical Procedures',
-		'view_item'                      => 'View Procedure',
-		'popular_items'                  => 'Popular Procedure',
-		'separate_items_with_commas'     => 'Separate procedures with commas',
-		'add_or_remove_items'            => 'Add or remove procedures',
-		'choose_from_most_used'          => 'Choose from the most used procedures',
-		'not_found'                      => 'No procedures found'
-	);
-  	$rewrite = array(
-		'slug'                       => 'medical_procedures',
-		'with_front'                 => true,
-		'hierarchical'               => true,
-	);
-	$capabilities = array(
-		'manage_terms'               => 'manage_options',
-		'edit_terms'                 => 'manage_options',
-		'delete_terms'               => 'manage_options',
-		'assign_terms'               => 'edit_physicians',
-	);
-	$args = array(
-		'label' 				 	 => __( 'Medical Procedures' ),
-		'labels'                     => $labels,
-		'hierarchical'               => false,
-		'public'                     => true,
-		'show_ui'                    => true, //make true to add another
-		'show_admin_column'          => false,
-		'meta_box_cb' 				 => false,
-		'show_in_nav_menus'          => false,
-		'show_tagcloud'              => false,
- 		'rewrite'                    => $rewrite,
-		'capabilities'               => $capabilities,
-		'show_in_rest'               => true,
-		'rest_base'                  => 'medical_procedures',
-		'rest_controller_class'      => 'WP_REST_Terms_Controller',
-	);
-	register_taxonomy( 'medical_procedures', array( 'physicians' ), $args );
+//   $labels = array(
+// 		'name'                           => 'Medical Procedures',
+// 		'singular_name'                  => 'Medical Procedures',
+// 		'search_items'                   => 'Search Procedures',
+// 		'all_items'                      => 'All Procedures',
+// 		'edit_item'                      => 'Edit Procedure',
+// 		'update_item'                    => 'Update Procedure',
+// 		'add_new_item'                   => 'Add New Procedure',
+// 		'new_item_name'                  => 'New Procedure',
+// 		'menu_name'                      => 'Medical Procedures',
+// 		'view_item'                      => 'View Procedure',
+// 		'popular_items'                  => 'Popular Procedure',
+// 		'separate_items_with_commas'     => 'Separate procedures with commas',
+// 		'add_or_remove_items'            => 'Add or remove procedures',
+// 		'choose_from_most_used'          => 'Choose from the most used procedures',
+// 		'not_found'                      => 'No procedures found'
+// 	);
+//   	$rewrite = array(
+// 		'slug'                       => 'medical_procedures',
+// 		'with_front'                 => true,
+// 		'hierarchical'               => true,
+// 	);
+// 	$capabilities = array(
+// 		'manage_terms'               => 'manage_options',
+// 		'edit_terms'                 => 'manage_options',
+// 		'delete_terms'               => 'manage_options',
+// 		'assign_terms'               => 'edit_physicians',
+// 	);
+// 	$args = array(
+// 		'label' 				 	 => __( 'Medical Procedures' ),
+// 		'labels'                     => $labels,
+// 		'hierarchical'               => false,
+// 		'public'                     => true,
+// 		'show_ui'                    => true, //make true to add another
+// 		'show_admin_column'          => false,
+// 		'meta_box_cb' 				 => false,
+// 		'show_in_nav_menus'          => false,
+// 		'show_tagcloud'              => false,
+//  		'rewrite'                    => $rewrite,
+// 		'capabilities'               => $capabilities,
+// 		'show_in_rest'               => true,
+// 		'rest_base'                  => 'medical_procedures',
+// 		'rest_controller_class'      => 'WP_REST_Terms_Controller',
+// 	);
+// 	register_taxonomy( 'medical_procedures', array( 'physicians' ), $args );
 
-}
+// }
 // add_action( 'init', 'create_medical_procedures_taxonomy', 0 );
 
 //hook into the init action and call create_book_taxonomies when it fires

@@ -11,12 +11,12 @@
             <div class="module-body">
             </div>
             <div class="card-list-container">
-                <div class="card-list">
+                <?php //<div class="card-list"> ?>
                     <?php echo facetwp_display( 'template', 'locations' ); ?>
                     <?php //get_template_part( 'templates/physician-loop' ); ?>
                     <?php //echo facetwp_display( 'pager' ); ?>
                     <?php //echo do_shortcode('[facetwp load_more="true" label="Load more"]'); ?>
-                </div>
+                <?php //</div> ?>
             </div>
         </div>
     </div>
