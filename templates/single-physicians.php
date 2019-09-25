@@ -114,6 +114,7 @@ foreach( $degrees as $degree ):
 								// wp_reset_postdata(); ?>
 						<?php endif; ?> 
                 </div>
+                <?php if ( has_post_thumbnail() ) { ?>
                 <div class="col-12 col-xs px-0 px-xs-4 px-sm-8 order-1 image">
                     <picture>
                     <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
@@ -148,6 +149,7 @@ foreach( $degrees as $degree ):
                         <?php } //endif ?>
                     </picture>
                 </div>
+                <?php } //endif ?>
             </div>
         </section>
         <section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">

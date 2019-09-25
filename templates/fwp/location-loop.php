@@ -1,9 +1,9 @@
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 	<div class="card">
 		<?php if ( has_post_thumbnail() ) { ?>
-			<p>
-			<?php the_post_thumbnail('aspect-16-9-small', ['class' => 'img-responsive']); ?>
-			</p>
+		<?php the_post_thumbnail('aspect-16-9-small', ['class' => 'card-img-top']); ?>
+		<?php } else { ?>
+		<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" alt="" class="card-image-top" />
 		<?php } ?>
 		<div class="card-body">
             <h3 class="card-title">
