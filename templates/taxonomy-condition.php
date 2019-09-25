@@ -19,68 +19,72 @@
 	}
 	add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );
 
-	add_filter( 'facetwp_template_use_archive', '__return_true' );
+	$condition_title = get_field('conditions_archive_headline', 'option');
+	$condition_text = get_field('conditions_archive_intro_text', 'option');
 
-	get_template_part( 'header', 'image' ); ?>
+	// Hard coded breadcrumbs
+	$tax = get_term_by("slug", get_query_var("term"), get_query_var("taxonomy") );
+ ?>
+ <main class="doctor-item">
+	<section class="container-fluid p-8 p-sm-10 bg-auto">
+		<div class="row">
+			<div class="col-xs-12">
+				<h1 class="page-title"><?php echo ( $condition_title ? $condition_title : 'Condition' ); ?>: <?php echo single_cat_title( '', false ); ?></h1>
+				<?php echo (get_field('conditions_content') ? '<div class="module-body">'. get_field('conditions_content') . '</div>' : '' ); ?>
+			</div>
+		</div>
+	</section>
+	<section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
+		<div class="row">
+			<div class="col-xs-12">
+				<h2>Clinical Trials</h2>
+				<p><a href="javascript:void(0)">Search our clinical trials</a> for those related to Shoulder Impingement Syndrome.</p>
+			</div>
+		</div>
+	</section>
+	<?php 
+		$treatments = get_field('conditions_treatments');
+		//echo count($treatments);
 
-	<div class="container uams-body">
-
-	  <div class="row">
-
-	    <div class="col-md-12 uams-content" role='main'>
-
-	      <?php // Hard coded breadcrumbs
-	      		$tax = get_term_by("slug", get_query_var("term"), get_query_var("taxonomy") )
-	      ?>
-	    <nav class="uams-breadcrumbs" role="navigation" aria-label="breadcrumbs">
-	    	<ul>
-	    		<li><a href="http://www.uams.edu" title="University of Arkansas for Medical Scineces">Home</a></li>
-	    		<li><a href="/" title="<?php echo str_replace('   ', ' ', get_bloginfo('title')); ?>"><?php echo str_replace('   ', ' ', get_bloginfo('title')); ?></a></li>
-	    		<li><a href="<?php echo get_bloginfo('url'); ?>/physicians/" title="Physicians">Physicians</a></li>
-	    		<li class="current"><span><?php echo $tax->name; ?></span>
-	    	</ul>
-	    </nav>
-
-	      <div id='main_content' class="uams-body-copy" tabindex="-1">
-
-				<div class="row">
-
-					<div class="col-md-8 people">
-
-						<h1>Condition &amp; Treatments: <?php echo single_cat_title( '', false ); ?></h1><hr>
-
-					    <?php echo (term_description( '', false ) ? '<p>' .term_description( '', false ) . '</p>' : '' ); ?>
-
-					    <?php
-					    		$specialty_url = rwmb_meta( 'specialty_url', array( 'object_type' => 'term' ), $term->term_id );
-					     		echo ($specialty_url ? '<p><a href="' . $specialty_url . '">More Information</a></p>' : '' ); ?>
-
-					     <?php echo facetwp_display( 'facet', 'alpha' ); ?>
-
-					    <?php echo facetwp_display( 'template', 'physician' ); ?>
-
-					</div><!-- .col -->
-					<div class="col-md-4">
-			        	<?php echo do_shortcode( '[wpdreams_ajaxsearchpro id=1]' ); // based on install ?>
-			        	<?php echo do_shortcode( '[accordion]
-													    [section title="Advanced Filter"]
-														<div class="fwp-filter">[facetwp facet="primary_care"]</div>
-														<div class="fwp-filter">[facetwp facet="conditions"]</div>
-														<div class="fwp-filter">[facetwp facet="patient_types"]</div>
-														<div class="fwp-filter">[facetwp facet="physician_gender"]</div>
-														<div class="fwp-filter">[facetwp facet="physician_language"]</div>
-														<div class="fwp-filter condition-filter">[facetwp facet="condition_checkbox"]</div>
-														[/section]
-													[/accordion]' ); ?>
-		        	</div>
-				</div><!-- .row -->
-   			</div><!-- main_content -->
-
-    	</div><!-- uams-content -->
-    <div id="sidebar"></div>
-
-  </div>
-
-</div>
+		// print_r($treatments);
+		
+		if (0 < count($treatments)) {
+			
+	?>
+	<section class="container-fluid p-8 p-sm-10 conditions-treatments bg-auto">
+		<div class="row">
+			<div class="col-xs-12">
+				<h2 class="module-title">Treatments and Services</h2>
+				<div class="list-container list-container-rows">
+					<ul class="list">
+					<?php foreach( $treatments as $treatment ) { ?> 
+					<li><a href="<?php echo get_term_link($treatment, 'treatment_procedure'); ?>"><?php echo( get_term( $treatment, 'treatment_procedure' )->name ); ?></a></li>
+					<?php } ?>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+	<?php } ?>
+	<section class="container-fluid p-8 p-sm-10 bg-auto" id="doctors">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="module-title">Doctors Providing Treatments or Services for <?php echo single_cat_title( '', false ); ?></h2>
+				<p class="note">Note that every treatment/service listed above may not be provided by each doctor listed below. Review each doctor for availability.</p>	
+				<div class="card-list-container">
+					<?php echo facetwp_display( 'template', 'condition' ); ?>
+				</div>
+			</div>
+		</div>
+	</section>	
+    <section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
+		<div class="row">
+			<div class="col-xs-12">
+				<h2>Make an Appointment</h2>
+				<p>Request an appointment directly with <a href="javascript:void(0)">your clinic</a>, <a href="javascript:void(0)">your doctor</a>, <span class="no-break">or call <a href="javascript:void(0)">501-555-5555</a>.</span></p>
+			</div>
+		</div>
+	</section>
+</main>
 
 <?php get_footer(); ?>
