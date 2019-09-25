@@ -1,0 +1,248 @@
+{
+    "name": "uamswp_locations",
+    "relationship": {
+        "type": "post",
+        "post_type": "locations"
+    },
+    "primary_key": [
+        "id"
+    ],
+    "keys": [
+        {
+            "name": "post_id",
+            "columns": [
+                "post_id"
+            ],
+            "unique": true
+        }
+    ],
+    "columns": [
+        {
+            "name": "id",
+            "format": "%d",
+            "null": false,
+            "auto_increment": true,
+            "unsigned": true
+        },
+        {
+            "name": "post_id",
+            "format": "%d"
+        },
+        {
+            "name": "location_abbreviation",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_abbreviation"
+            }
+        },
+        {
+            "name": "location_description",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_description"
+            }
+        },
+        {
+            "name": "location_address_1",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_address_1"
+            }
+        },
+        {
+            "name": "location_address_2",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_address_2"
+            }
+        },
+        {
+            "name": "location_city",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_city"
+            }
+        },
+        {
+            "name": "location_state",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_state"
+            }
+        },
+        {
+            "name": "location_zip",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_zip"
+            }
+        },
+        {
+            "name": "location_map",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_map"
+            }
+        },
+        {
+            "name": "location_parking",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_parking"
+            }
+        },
+        {
+            "name": "location_direction",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_direction"
+            }
+        },
+        {
+            "name": "location_about",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_about"
+            }
+        },
+        {
+            "name": "location_short_desc",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_short_desc"
+            }
+        },
+        {
+            "name": "location_phone",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_phone"
+            }
+        },
+        {
+            "name": "location_phone_numbers",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_phone_numbers"
+            }
+        },
+        {
+            "name": "location_appointment",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_appointment"
+            }
+        },
+        {
+            "name": "location_appointment_bring",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_appointment_bring"
+            }
+        },
+        {
+            "name": "location_portal",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_portal"
+            }
+        },
+        {
+            "name": "location_web_name",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_web_name"
+            }
+        },
+        {
+            "name": "location_url",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_url"
+            }
+        },
+        {
+            "name": "location_email",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_email"
+            }
+        },
+        {
+            "name": "location_24_7",
+            "format": "%d",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_24_7"
+                
+            }
+        },
+        {
+            "name": "location_hours",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_hours"
+            }
+        },
+        {
+            "name": "location_after_hours",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_after_hours"
+            }
+        },
+        {
+            "name": "location_holiday_hours",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_holiday_hours"
+            }
+        },
+        {
+            "name": "location_medical_specialties",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_medical_specialties"
+            }
+        },
+        {
+            "name": "location_medical_terms",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_medical_terms"
+            }
+        },
+        {
+            "name": "location_conditions",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_conditions"
+            }
+        },
+        {
+            "name": "location_treatments",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_treatments"
+            }
+        },
+        {
+            "name": "location_clinic",
+            "format": "%d",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_clinic"
+            }
+        },
+        {
+            "name": "location_facility",
+            "format": "%d",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_facility"
+            }
+        }
+    ],
+    "hash": "c89b987d38635e87c06696a8e97e40dd",
+    "modified": 1566591623
+}
