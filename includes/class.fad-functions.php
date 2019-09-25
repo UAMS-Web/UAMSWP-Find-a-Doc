@@ -181,7 +181,7 @@ function pubmed_register() {
 	if ( !is_admin() ) {
 		wp_register_script( 'pubmed-api', UAMS_FAD_ROOT_URL . 'assets/js/pubmed-api-async.js', array('jquery'), null, true );
     }
-    if ( (is_single() && ('locations' == $post_type)) || is_singular( 'physicians' ) ) {
+    if ( (is_single() && ('locations' == $post_type)) ) {
         wp_enqueue_style( 'leaflet-css', UAMS_FAD_ROOT_URL . 'assets/leaflet/leaflet.css', array(), '1.1', 'all');
         wp_enqueue_script( 'leaflet-js', UAMS_FAD_ROOT_URL . 'assets/leaflet/leaflet-bing.js', array(), null, false );
 	}
@@ -650,3 +650,99 @@ function set_default_language($value, $post_id, $field) {
     $value = array($id);
   	return $value;
 }
+
+// ACF Custom Tables
+/*
+ * Changes the ACF Custom Database Tables JSON directory.
+ * This needs to run before the 'plugins_loaded' action hook, so 
+ * you need to put this in a plugin or in your wp-config.php file.
+ */
+define( 'ACFCDT_JSON_DIR', WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) . '/assets/json/acf-tables' );
+/*
+ * Disables storing of meta data values in core meta tables where a custom 
+ * database table has been defined for fields. Any fields that aren't mapped
+ * to a custom database table will still be stored in the core meta tables. 
+ */
+add_filter( 'acfcdt/settings/store_acf_values_in_core_meta', '__return_false' );
+
+/*
+ * Disables storing of ACF field key references in core meta tables where a custom 
+ * database table has been defined for fields. Any fields that aren't mapped to a 
+ * custom database table will still have their key references stored in the core 
+ * meta tables. 
+ */
+// add_filter( 'acfcdt/settings/store_acf_keys_in_core_meta', '__return_false' );
+
+add_filter('acf/settings/load_json', 'uamswp_fad_json_load_point');
+
+function uamswp_fad_json_load_point( $paths ) {
+    
+    // remove original path (optional)
+    // unset($paths[0]);
+    
+    
+    // append path
+    $paths[] = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) . '/assets/json/acf-json';
+    
+    
+    // return
+    return $paths;
+    
+}
+/* 
+ * Remove for production 
+ */
+// // Convert php to json acf
+// // get all the local field groups 
+// $field_groups = acf_get_local_field_groups();
+
+// // loop over each of the gield gruops 
+// foreach( $field_groups as $field_group ) {
+
+// 	// get the field group key 
+// 	$key = $field_group['key'];
+
+// 	// if this field group has fields 
+// 	if( acf_have_local_fields( $key ) ) {
+	
+//       	// append the fields 
+// 		$field_group['fields'] = acf_get_local_fields( $key );
+
+// 	}
+
+// 	// save the acf-json file to the acf-json dir by default 
+// 	acf_write_json_field_group( $field_group );
+
+// }
+add_action( 'admin_init', 'uamswp_remove_genesis_term_meta', 11 ); // hook in after genesis adds the tax meta
+function uamswp_remove_genesis_term_meta() {
+ $taxonomies = array( 'condition', 'treatment_procedure' );
+ foreach( $taxonomies as $taxonomy ) {
+ remove_action( "{$taxonomy}_edit_form", 'genesis_taxonomy_archive_options', 10 );
+ remove_action( "{$taxonomy}_edit_form", 'genesis_taxonomy_seo_options', 10 );
+ remove_action( "{$taxonomy}_edit_form", 'genesis_taxonomy_layout_options', 10 );
+//  add_action( "{$taxonomy}_edit_form", 'genesis_taxonomy_archive_options', 20, 2 );
+//  add_action( "{$taxonomy}_edit_form", 'genesis_taxonomy_seo_options', 20, 2 );
+//  add_action( "{$taxonomy}_edit_form", 'genesis_taxonomy_layout_options', 20, 2 );
+ add_action( "{$taxonomy}_edit_form", 'remove_description_form');
+ add_action( "{$taxonomy}_add_form", 'remove_description_form');
+ }
+}
+function remove_description_form() {
+    echo "<style> .term-description-wrap { display:none; } </style>";
+}
+
+add_filter('manage_edit-condition_columns', function ( $columns ) 
+{
+    if( isset( $columns['description'] ) )
+        unset( $columns['description'] );   
+
+    return $columns;
+} );
+add_filter('manage_edit-treatment_procedure_columns', function ( $columns ) 
+{
+    if( isset( $columns['description'] ) )
+        unset( $columns['description'] );   
+
+    return $columns;
+} );
