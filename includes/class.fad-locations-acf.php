@@ -7,7 +7,7 @@
 if( function_exists('acf_add_local_field_group') ):
 
   acf_add_local_field_group(array(
-    'key' => 'group_5d430a61280c7',
+    'key' => 'group_uamswp_locations',
     'title' => 'Location Information',
     'fields' => array(
       array(

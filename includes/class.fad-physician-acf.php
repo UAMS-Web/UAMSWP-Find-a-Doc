@@ -8,7 +8,7 @@
 if( function_exists('acf_add_local_field_group') ):
 
   acf_add_local_field_group(array(
-    'key' => 'group_5d408d2bcedc2',
+    'key' => 'group_uamswp_physicians',
     'title' => 'Physicians',
     'fields' => array(
       array(
@@ -577,7 +577,7 @@ if( function_exists('acf_add_local_field_group') ):
       array(
         'key' => 'field_medical_specialties',
         'label' => 'Medical Specialties',
-        'name' => 'medical_specialties',
+        'name' => 'physician_medical_specialties',
         'type' => 'taxonomy',
         'instructions' => '',
         'required' => 0,
@@ -652,7 +652,7 @@ if( function_exists('acf_add_local_field_group') ):
       array(
         'key' => 'field_medical_terms',
         'label' => 'Medical Terms (Tags)',
-        'name' => 'medical_terms',
+        'name' => 'physician_medical_terms',
         'type' => 'taxonomy',
         'instructions' => '',
         'required' => 0,
@@ -1191,9 +1191,9 @@ if( function_exists('acf_add_local_field_group') ):
         'maxlength' => '',
       ),
       array(
-        'key' => 'field_pubmed_author_number',
+        'key' => 'field_physician_author_number',
         'label' => 'Number Latest Articles',
-        'name' => 'pubmed_author_number',
+        'name' => 'physician_author_number',
         'type' => 'select',
         'instructions' => '',
         'required' => 0,
@@ -1462,6 +1462,9 @@ if( function_exists('acf_add_local_field_group') ):
     'hide_on_screen' => '',
     'active' => true,
     'description' => '',
+    'acfcdt_manage_table_definition' => 1,
+	  'acfcdt_table_name' => 'uamswp_physicians',
+	  'acfcdt_table_definition_file_name' => 'table_uamswp_physicians',
   ));
   
   endif;
