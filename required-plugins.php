@@ -84,95 +84,6 @@ function uamswp_register_required_plugins() {
 		// 	'required'  => true,
 		// ),
 
-		// array(
-		// 	'name'      => 'MB Relationsships',
-		// 	'slug'      => 'mb-relationships',
-		// 	'required'  => true,
-		// ),
-
-		// array(
-		// 	'name'      => 'Meta Box - FacetWP Integrator',
-		// 	'slug'      => 'meta-box-facetwp-integrator',
-		// 	'required'  => true,
-		// ),
-
-		// array(
-		// 	'name'      => 'Meta Box Text Limiter',
-		// 	'slug'      => 'meta-box-text-limiter',
-		// 	'required'  => true,
-		// ),
-
-		// Begin Meta Box extensions.
-		// array(
-		// 	'name'               => 'Meta Box Tabs', // The plugin name.
-		// 	'slug'               => 'meta-box-tabs', // The plugin slug (typically the folder name).
-		// 	'source'             => dirname( __FILE__ ) . '/plugins/meta-box-tabs.zip', // The plugin source.
-		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-		// ),
-
-		// array(
-		// 	'name'               => 'MB Admin Columns', // The plugin name.
-		// 	'slug'               => 'mb-admin-columns', // The plugin slug (typically the folder name).
-		// 	'source'             => dirname( __FILE__ ) . '/plugins/mb-admin-columns.zip', // The plugin source.
-		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-		// ),
-
-		// array(
-		// 	'name'               => 'MB Term Meta', // The plugin name.
-		// 	'slug'               => 'mb-term-meta', // The plugin slug (typically the folder name).
-		// 	'source'             => dirname( __FILE__ ) . '/plugins/mb-term-meta.zip', // The plugin source.
-		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-		// ),
-
-		// array(
-		// 	'name'               => 'MB Custom Table', // The plugin name.
-		// 	'slug'               => 'mb-custom-table', // The plugin slug (typically the folder name).
-		// 	'source'             => dirname( __FILE__ ) . '/plugins/mb-custom-table.zip', // The plugin source.
-		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-		// ),
-
-		// array(
-		// 	'name'               => 'Meta Box Group', // The plugin name.
-		// 	'slug'               => 'meta-box-group', // The plugin slug (typically the folder name).
-		// 	'source'             => dirname( __FILE__ ) . '/plugins/meta-box-group.zip', // The plugin source.
-		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-		// ),
-
-		// array(
-		// 	'name'               => 'Meta Box Columns', // The plugin name.
-		// 	'slug'               => 'meta-box-columns', // The plugin slug (typically the folder name).
-		// 	'source'             => dirname( __FILE__ ) . '/plugins/meta-box-columns.zip', // The plugin source.
-		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-		// ),
-
-		// array(
-		// 	'name'               => 'Meta Box Updater', // The plugin name.
-		// 	'slug'               => 'meta-box-updater', // The plugin slug (typically the folder name).
-		// 	'source'             => dirname( __FILE__ ) . '/plugins/meta-box-updater.zip', // The plugin source.
-		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-		// ),
-
-		// array(
-		// 	'name'               => 'MB Revision', // The plugin name.
-		// 	'slug'               => 'mb-revision', // The plugin slug (typically the folder name).
-		// 	'source'             => dirname( __FILE__ ) . '/plugins/mb-revision.zip', // The plugin source.
-		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-		// ),
-
-		// array(
-		// 	'name'               => 'Meta Box Conditional Logic', // The plugin name.
-		// 	'slug'               => 'meta-box-conditional-logic', // The plugin slug (typically the folder name).
-		// 	'source'             => dirname( __FILE__ ) . '/plugins/meta-box-conditional-logic.zip', // The plugin source.
-		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-		// ),
-
-		// array(
-		// 	'name'               => 'Meta Box Include Exclude', // The plugin name.
-		// 	'slug'               => 'meta-box-include-exclude', // The plugin slug (typically the folder name).
-		// 	'source'             => dirname( __FILE__ ) . '/plugins/meta-box-includeexclude.zip', // The plugin source.
-		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-		// ),
-
 		// ACF
 		array(
 			'name'               => 'Advanced Custom Fields PRO', // The plugin name.
@@ -185,6 +96,12 @@ function uamswp_register_required_plugins() {
 			'slug'               => 'acf-maskfield', // The plugin slug (typically the folder name).
 			'source'             => dirname( __FILE__ ) . '/plugins/acf-maskfield.zip', // The plugin source.
 			'required'           => true, // If false, the plugin is only 'recommended' instead of required.
+		),
+
+		array(
+			'name'      => 'Advanced Custom Fields: Extended',
+			'slug'      => 'acf-extended',
+			'required'  => true,
 		),
 
 		// Begin FacetWP & extensions.

@@ -9,11 +9,11 @@
 if( function_exists('acf_add_local_field_group') ):
 
   acf_add_local_field_group(array(
-    'key' => 'group_5d433bd8e2794',
+    'key' => 'group_uamswp_colleges',
     'title' => 'Additional Information',
     'fields' => array(
       array(
-        'key' => 'field_5d433bfaf4452',
+        'key' => 'field_college_url',
         'label' => 'Website URL',
         'name' => 'college_url',
         'type' => 'link',
@@ -56,11 +56,11 @@ if( function_exists('acf_add_local_field_group') ):
   ));
   
   acf_add_local_field_group(array(
-    'key' => 'group_5d433c3148eb5',
+    'key' => 'group_uamswp_specialty',
     'title' => 'Additional Information',
     'fields' => array(
       array(
-        'key' => 'field_5d433c48de6ae',
+        'key' => 'field_specialty_url',
         'label' => 'Link to Specialty Page',
         'name' => 'specialty_url',
         'type' => 'link',

@@ -10,13 +10,13 @@ if( function_exists('acf_add_options_page') ) {
 		'redirect'		=> false
     ));
     
-    // acf_add_options_sub_page(array(
-	// 	'page_title' 	=> 'Find-a-Doc Settings',
-    //     'menu_title'	=> 'Find-a-Doc Settings',
-    //     'menu_slug' 	=> 'fad-settings',
-    //     'parent_slug'	=> 'uamswp-settings',
-    //     'redirect'		=> false
-	// ));
+    acf_add_options_sub_page(array(
+		'page_title' 	=> 'Services Options',
+        'menu_title'	=> 'Clinical Services',
+        'menu_slug' 	=> 'uamswp-fad-services',
+        'parent_slug'	=> 'fad-settings',
+        'redirect'		=> false
+	));
 
 }
 
@@ -73,6 +73,6 @@ function my_acf_google_key() {
     if ($key) {
         acf_update_setting('google_api_key', $key); 
     }
-    echo "<script> console.log('PHP: ".$key ."');</script>";
+    // echo "<script> console.log('PHP: ".$key ."');</script>";
 }
 add_action('acf/init', 'my_acf_google_key');
