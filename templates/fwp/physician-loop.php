@@ -134,7 +134,7 @@
 								<?php endforeach; ?>
 								</ul>
 							<?php endif; ?>
-						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>">Full Profile</a>
+						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name; ?>">Full Profile</a>
 						</div>
 					</div>
 				</div>
