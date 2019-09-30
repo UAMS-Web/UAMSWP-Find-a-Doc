@@ -67,8 +67,10 @@
 					<div class="row">
 						<div class="col-12 primary">
 						<h3 class="h4">
-							<span class="name"><?php echo $full_name; ?></span>
-							<span class="subtitle"><?php echo (get_field('physician_department') ? get_field('physician_department')->name : ''); ?></span>
+							<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name; ?>"><span class="name"><?php echo $full_name; ?></span></a>
+							<?php if ( get_field('physician_department') ) { ?>
+							<span class="subtitle"><?php echo get_field('physician_department')->name; ?></span>
+							<?php } // endif ?>
 						</h3>
 						<?php
 							if(get_field('physician_npi')) {
