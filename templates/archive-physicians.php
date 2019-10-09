@@ -47,6 +47,11 @@
 					// }
 				 ?>
 
+				<style>
+					.facetwp-facet-regional .facetwp-checkbox[data-value="0"] {
+						display: none;
+					}
+				</style>
 				<main class="container-fluid doctor-list">
 					<div class="row">
 						<div class="col-12 col-sm filter-col collapse">
