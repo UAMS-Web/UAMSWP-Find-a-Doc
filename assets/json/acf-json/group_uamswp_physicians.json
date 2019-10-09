@@ -130,8 +130,8 @@
             "taxonomy": "degree",
             "field_type": "multi_select",
             "add_term": 1,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
@@ -267,8 +267,8 @@
             "field_type": "select",
             "allow_null": 0,
             "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
@@ -291,8 +291,8 @@
             "taxonomy": "department",
             "field_type": "select",
             "add_term": 1,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
@@ -374,8 +374,8 @@
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
@@ -423,8 +423,8 @@
             "taxonomy": "affiliations",
             "field_type": "checkbox",
             "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
@@ -480,8 +480,8 @@
             "taxonomy": "patient_type",
             "field_type": "checkbox",
             "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
@@ -601,8 +601,8 @@
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
@@ -626,8 +626,8 @@
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
@@ -651,8 +651,8 @@
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
@@ -666,7 +666,15 @@
             "label": "Medical Terms (Tags)",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_clinical_details_tab",
+                        "operator": "==",
+                        "value": "false"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -676,8 +684,8 @@
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
@@ -768,6 +776,9 @@
                 "class": "",
                 "id": ""
             },
+            "acfe_permissions": [
+                "administrator"
+            ],
             "default_value": "",
             "placeholder": "",
             "prepend": "",
@@ -790,8 +801,8 @@
             "taxonomy": "academic_colleges",
             "field_type": "checkbox",
             "add_term": 1,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
@@ -815,8 +826,8 @@
             "taxonomy": "academic_positions",
             "field_type": "checkbox",
             "add_term": 1,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
@@ -1035,8 +1046,8 @@
                     "taxonomy": "academic_department",
                     "field_type": "select",
                     "add_term": 1,
-                    "save_terms": 0,
-                    "load_terms": 0,
+                    "save_terms": 1,
+                    "load_terms": 1,
                     "return_format": "id",
                     "acfe_bidirectional": {
                         "acfe_bidirectional_enabled": "0"
@@ -1081,8 +1092,8 @@
                     "taxonomy": "educationtype",
                     "field_type": "select",
                     "add_term": 1,
-                    "save_terms": 0,
-                    "load_terms": 0,
+                    "save_terms": 1,
+                    "load_terms": 1,
                     "return_format": "id",
                     "acfe_bidirectional": {
                         "acfe_bidirectional_enabled": "0"
@@ -1106,8 +1117,8 @@
                     "taxonomy": "schools",
                     "field_type": "select",
                     "add_term": 1,
-                    "save_terms": 0,
-                    "load_terms": 0,
+                    "save_terms": 1,
+                    "load_terms": 1,
                     "return_format": "id",
                     "acfe_bidirectional": {
                         "acfe_bidirectional_enabled": "0"
@@ -1153,8 +1164,8 @@
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 1,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
