@@ -10,14 +10,16 @@
 	$degrees = get_field('physician_degree');
 	$degree_list = '';
 	$i = 1;
-	foreach( $degrees as $degree ):
-		$degree_name = get_term( $degree, 'degree');
-		$degree_list .= $degree_name->name;
-		if( count($degrees) > $i ) {
-			$degree_list .= ", ";
-		}
-		$i++;
-	endforeach; ?>
+	if ($degrees){
+		foreach( $degrees as $degree ):
+			$degree_name = get_term( $degree, 'degree');
+			$degree_list .= $degree_name->name;
+			if( count($degrees) > $i ) {
+				$degree_list .= ", ";
+			}
+			$i++;
+		endforeach;
+ 	} ?>
 	<?php $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . ( $degree_list ? ', ' . $degree_list : '' ); ?>
 	<div class="col item-container">
 		<div class="item">
