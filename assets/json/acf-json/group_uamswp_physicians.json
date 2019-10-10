@@ -324,7 +324,7 @@
             "name": "physician_short_clinical_bio",
             "type": "textarea",
             "label": "Short Bio",
-            "instructions": "Limit of 30 words. Preferred length is approx 18 words.",
+            "instructions": "Limit of 160 characters. Preferred length is approx 18 words.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -334,7 +334,7 @@
             },
             "default_value": "",
             "placeholder": "",
-            "maxlength": 176,
+            "maxlength": 160,
             "rows": 4,
             "new_lines": ""
         },
@@ -859,7 +859,7 @@
             "name": "physician_academic_short_bio",
             "type": "text",
             "label": "Short Academic Bio",
-            "instructions": "Limit of 30 words. Preferred length is approx 18 words.",
+            "instructions": "Limit of 160 characters. Preferred length is approx 18 words.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -871,7 +871,7 @@
             "placeholder": "",
             "prepend": "",
             "append": "",
-            "maxlength": 176
+            "maxlength": 160
         },
         "field_physician_academic_office": {
             "key": "field_physician_academic_office",
