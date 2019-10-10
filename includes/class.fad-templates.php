@@ -28,7 +28,11 @@ function uamswp_force_template( $template )
     
     if( is_tax( 'condition' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/taxonomy-condition.php';
-	}
+    }
+    
+    if( is_tax( 'treatment_procedure' ) ) {
+        $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/taxonomy-treatment_procedure.php';
+    }
 	
 	if( is_tax( 'medical_procedures' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/taxonomy-medical_procedures.php';

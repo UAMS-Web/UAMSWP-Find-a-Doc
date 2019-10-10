@@ -601,8 +601,8 @@
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
@@ -626,8 +626,8 @@
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
@@ -651,8 +651,8 @@
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
@@ -666,7 +666,15 @@
             "label": "Medical Terms (Tags)",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_clinical_details_tab",
+                        "operator": "==",
+                        "value": "false"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -676,8 +684,8 @@
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
@@ -768,6 +776,9 @@
                 "class": "",
                 "id": ""
             },
+            "acfe_permissions": [
+                "administrator"
+            ],
             "default_value": "",
             "placeholder": "",
             "prepend": "",
@@ -1153,8 +1164,8 @@
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 1,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"

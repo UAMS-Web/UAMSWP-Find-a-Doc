@@ -552,24 +552,30 @@ add_filter( 'facetwp_shortcode_html', function( $output, $atts ) {
     return $output;
 }, 10, 2 );
 
-//FacetWP Active
+// Show only Yes values
+add_filter( 'facetwp_index_row', function( $params, $class ) {
+    if ( 'primary_care' == $params['facet_name'] ) {
+        $included_terms = array( 'Yes' );
+        if ( ! in_array( $params['facet_display_value'], $included_terms ) ) {
+            return false;
+        }
+    }
+     if ( 'regional' == $params['facet_name'] ) {
+        $included_terms = array( 'Yes' );
+        if ( ! in_array( $params['facet_display_value'], $included_terms ) ) {
+            return false;
+        }
+    }
+    return $params;
+}, 10, 2 );
+
 // add_filter( 'facetwp_preload_url_vars', function( $url_vars ) {
 //     if ( 'physicians' == FWP()->helper->get_uri() ) {
-//         if ( empty( $url_vars['active'] ) ) {
-//             $url_vars['active'] = array( '1' );
+//         if ( empty( $url_vars['regional'] ) ) {
+//             $url_vars['regional'] = array( '0' );
 //         }
 //     }
 //     return $url_vars;
-// } );
-
-// add_filter( 'rwmb_outside_conditions', function( $conditions ){
-//     $conditions['#services_to_locations_relationships_to'] = array(
-// 		'hidden' => array(
-// 			array( 'post_type', 'services' ),
-// 			array( 'parent_id', '!=', '' )
-// 		)
-//     );
-//     return $conditions;
 // } );
 
 // Admin Columns

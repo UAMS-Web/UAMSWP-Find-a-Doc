@@ -650,7 +650,7 @@
                 "class": "",
                 "id": ""
             },
-            "message": "<h4>Hours of Operation<\/h4>\n        <p>Set the time for each day or 24\/7. Leave time blank for closed.<\/p>",
+            "message": "<p>Set the time for each day or 24\/7. Leave time blank for closed.<\/p>",
             "new_lines": "",
             "esc_html": 0
         },
@@ -1037,8 +1037,8 @@
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"

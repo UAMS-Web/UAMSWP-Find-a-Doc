@@ -44,13 +44,16 @@ while ( have_posts() ) : the_post(); ?>
 						}
 					?>
 				</dl>
+				<?php
+				$hours247 = get_field('location_24_7', $args);
+				$hours = get_field('location_hours');
+				if ( $hours247 || $hours[0]['day'] ) : ?>
 				<h2>Hours</h2>
 				<?php
-					if (get_field('location_24_7', $args)):
+					if ($hours247):
 						echo 'Open 24/7';
 					else :
 						echo '<dl class="hours">';
-						$hours = get_field('location_hours');
 						if( $hours ) {
 							$hours_text = '';
 							$day = ''; // Previous Day
@@ -83,12 +86,89 @@ while ( have_posts() ) : the_post(); ?>
 							echo '<dt>No information</dt>';
 						}
 						echo '</dl>';
+					endif;
+					$holidayhours = get_field('location_holiday_hours');
+					if ($holidayhours):
+						/**
+						 * Sort by date
+						 * if current date is before date & within 30 days
+						 * Display results
+						 */
+
+						$order = array();
+						// populate order
+						foreach( $holidayhours as $i => $row ) {	
+							$order[ $i ] = $row['field_holiday_date'];
+						}
+						
+						// multisort
+						array_multisort( $order, SORT_ASC, $holidayhours );
+
+						$i = 0;
+						foreach( $holidayhours as $row ):
+							$holidayDate = $row['date']; // Text
+							$holidayDateTime = DateTime::createFromFormat('m/d/Y', $holidayDate); // Date for evaluation
+							$dateNow = new DateTime("now", new DateTimeZone('America/Chicago') );
+							if (($dateNow < $holidayDateTime) && ($holidayDateTime->diff($dateNow)->days < 30)) {
+								if ( 0 == $i ) {
+									echo '<h2>Upcoming Holiday Hours</h2>';
+									echo '<dl class="hours">';
+									$i++;
+								}
+								echo '<dt>'.$holidayDate . '<br/>';
+								echo '</dt>' . '<dd>';
+								if ( $row['closed'] ) {
+									echo $row['closed'] ? 'Closed ' .$row['label'] .'</dd>': '';
+								} else {
+									echo ( ( $hour['open'] && '00:00:00' != $row['open'] )  ? '' . apStyleDate( $row['open'] ) . ' &ndash; ' . apStyleDate( $row['close'] ) . ' ' : '' );
+									echo $row['label'] .'</dd>';
+								}
+							}	
+						endforeach;
+						if ( 0 < $i ) {
+							echo '</dl>';
+						}
+						// echo '<h2>Holiday Hours</h2>';
+						// echo '<dl class="hours">';
+						// if( $hours ) {
+						// 	$hours_text = '';
+						// 	$day = ''; // Previous Day
+						// 	$comment = ''; // Comment on previous day
+						// 	foreach ($hours as $hour) :
+						// 		if( $day !== $hour['day'] || $comment ) {
+						// 			$hours_text .= '<dt>'. $hour['day'] .'</dt> ';
+						// 			$hours_text .= '<dd>';
+						// 		} else {
+						// 			$hours_text .= ', ';
+						// 		}
+						// 		if ( $hour['closed'] ) {
+						// 			$hours_text .= 'Closed ';
+						// 		} else {
+						// 			$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] )  ? '' . apStyleDate( $hour['open'] ) . ' &ndash; ' . apStyleDate( $hour['close'] ) . '' : '' );
+						// 			if ( $hour['comment'] ) {
+						// 				$hours_text .= ' ' .$hour['comment'];
+						// 				$comment = $hour['comment'];
+						// 			} else {
+						// 				$comment = '';
+						// 			}
+						// 		}
+						// 		if( $day !== $hour['day'] && $comment ) {
+						// 			$hours_text .= '</dd>';
+						// 		}
+						// 		$day = $hour['day']; // Reset the day
+						// 	endforeach;
+						// 	echo $hours_text;
+						// } else {
+						// 	echo '<dt>No information</dt>';
+						// }
+						// echo '</dl>';
 					endif; ?>
 				<?php if (get_field('location_after_hours') && !get_field('location_24_7', $args)) { ?>
 				<h2>After Hours</h2>
 				<?php echo get_field('location_after_hours'); ?>
 				<?php } ?>
 			</div>
+			<?php endif; ?>
 			<div class="col-12 col-md px-0 px-md-8 order-1 image">
 				<picture>
 					<?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
