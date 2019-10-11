@@ -147,7 +147,7 @@
         "field_physician_prefix": {
             "key": "field_physician_prefix",
             "name": "physician_prefix",
-            "type": "text",
+            "type": "select",
             "label": "Prefix",
             "instructions": "",
             "required": 0,
@@ -157,7 +157,19 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
+            "choices": {
+                "Dr.": "Dr.",
+                "Miss": "Miss",
+                "Mr.": "Mr.",
+                "Mrs.": "Mrs.",
+                "Prof.": "Prof."
+            },
+            "default_value": [],
+            "allow_null": 1,
+            "multiple": 0,
+            "ui": 1,
+            "ajax": 0,
+            "return_format": "value",
             "placeholder": "",
             "prepend": "",
             "append": "",
@@ -172,28 +184,28 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "25",
+                "width": "40",
                 "class": "",
                 "id": ""
             },
             "choices": {
-                "male": "Male",
                 "female": "Female",
+                "male": "Male",
                 "other": "Other"
             },
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "",
-            "layout": "vertical",
+            "layout": "horizontal",
             "return_format": "value",
             "save_other_choice": 0
         },
-        "field_physician_regional": {
-            "key": "field_physician_regional",
-            "name": "physician_regional",
+        "field_physician_searchable": {
+            "key": "field_physician_searchable",
+            "name": "physician_searchable",
             "type": "true_false",
-            "label": "Regional Campus",
-            "instructions": "Excluded from main campus results",
+            "label": "Searchable",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -201,8 +213,8 @@
                 "class": "",
                 "id": ""
             },
-            "message": "Regional Campus only",
-            "default_value": 0,
+            "message": "Display in search results",
+            "default_value": 1,
             "ui": 0,
             "ui_on_text": "",
             "ui_off_text": ""
@@ -224,7 +236,7 @@
                 ]
             ],
             "wrapper": {
-                "width": "25",
+                "width": "",
                 "class": "",
                 "id": ""
             },
@@ -448,22 +460,6 @@
             "placement": "top",
             "endpoint": 0
         },
-        "field_physician_appointment_link": {
-            "key": "field_physician_appointment_link",
-            "name": "physician_appointment_link",
-            "type": "url",
-            "label": "Appointment Link",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "https:\/\/uamshealth.com\/appointments",
-            "placeholder": "https:\/\/uamshealth.com\/appointments"
-        },
         "field_physician_patient_types": {
             "key": "field_physician_patient_types",
             "name": "physician_patient_types",
@@ -489,24 +485,21 @@
             "multiple": 0,
             "allow_null": 0
         },
-        "field_physician_searchable": {
-            "key": "field_physician_searchable",
-            "name": "physician_searchable",
-            "type": "true_false",
-            "label": "Searchable",
+        "field_physician_appointment_link": {
+            "key": "field_physician_appointment_link",
+            "name": "physician_appointment_link",
+            "type": "url",
+            "label": "Appointment Link",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
-            "message": "Display in search results",
-            "default_value": 1,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
+            "default_value": "https:\/\/uamshealth.com\/appointments",
+            "placeholder": "https:\/\/uamshealth.com\/appointments"
         },
         "field_physician_primary_care": {
             "key": "field_physician_primary_care",
