@@ -159,10 +159,9 @@
             },
             "choices": {
                 "Dr.": "Dr.",
-                "Miss": "Miss",
                 "Mr.": "Mr.",
                 "Mrs.": "Mrs.",
-                "Prof.": "Prof."
+                "Ms.": "Ms."
             },
             "default_value": [],
             "allow_null": 1,

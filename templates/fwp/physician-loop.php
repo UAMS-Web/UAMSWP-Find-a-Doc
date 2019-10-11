@@ -25,52 +25,56 @@
 		<div class="item">
 			<div class="row">
 				<div class="col image">
-					<picture>
-					<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 486, 648, 'center', 'center'); ?>"
-                            media="(min-width: 2054px) and (-webkit-min-device-pixel-ratio: 2), 
-                            (min-width: 2054px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
-                            media="(min-width: 2054px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?>"
-                            media="(min-width: 1784px) and (-webkit-min-device-pixel-ratio: 2), 
-                            (min-width: 1784px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
-                            media="(min-width: 1784px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 486, 648, 'center', 'center'); ?>"
-                            media="(min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2), 
-                            (min-width: 1200px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
-                            media="(min-width: 1200px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?>"
-                            media="(min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), 
-                            (min-width: 768px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
-                            media="(min-width: 768px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 190, 254, 'center', 'center'); ?>"
-                            media="(min-width: 576px) and (-webkit-min-device-pixel-ratio: 2), 
-                            (min-width: 576px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 95, 127, 'center', 'center'); ?>"
-                            media="(min-width: 576px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?>"
-                            media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), 
-                            (min-width: 1px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
-                            media="(min-width: 1px)">
-						<img src="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>" alt="<?php echo $full_name; ?>" />
-					<?php } elseif ( has_post_thumbnail() ) { ?>
-						<?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
-					<?php } else { ?>
-						<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.svg" alt="" />
-					<?php } ?>
-					</picture>
+					<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name; ?>" class="stretched-link">
+						<picture>
+						<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 486, 648, 'center', 'center'); ?>"
+								media="(min-width: 2054px) and (-webkit-min-device-pixel-ratio: 2), 
+								(min-width: 2054px) and (min-resolution: 192dpi)">
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
+								media="(min-width: 2054px)">
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?>"
+								media="(min-width: 1784px) and (-webkit-min-device-pixel-ratio: 2), 
+								(min-width: 1784px) and (min-resolution: 192dpi)">
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
+								media="(min-width: 1784px)">
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 486, 648, 'center', 'center'); ?>"
+								media="(min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2), 
+								(min-width: 1200px) and (min-resolution: 192dpi)">
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
+								media="(min-width: 1200px)">
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?>"
+								media="(min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), 
+								(min-width: 768px) and (min-resolution: 192dpi)">
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
+								media="(min-width: 768px)">
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 190, 254, 'center', 'center'); ?>"
+								media="(min-width: 576px) and (-webkit-min-device-pixel-ratio: 2), 
+								(min-width: 576px) and (min-resolution: 192dpi)">
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 95, 127, 'center', 'center'); ?>"
+								media="(min-width: 576px)">
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?>"
+								media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), 
+								(min-width: 1px) and (min-resolution: 192dpi)">
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
+								media="(min-width: 1px)">
+							<img src="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>" alt="<?php echo $full_name; ?>" />
+						<?php } elseif ( has_post_thumbnail() ) { ?>
+							<?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
+						<?php } else { ?>
+							<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.svg" alt="" />
+						<?php } ?>
+						</picture>
+					</a>
 				</div>
 				<div class="col text">
 					<div class="row">
 						<div class="col-12 primary">
 						<h3 class="h4">
-							<span class="name"><?php echo $full_name; ?></span>
-							<span class="subtitle"><?php echo (get_field('physician_department') ? get_field('physician_department')->name : ''); ?></span>
+							<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name; ?>"><span class="name"><?php echo $full_name; ?></span></a>
+							<?php if ( get_field('physician_department') ) { ?>
+							<span class="subtitle"><?php echo get_field('physician_department')->name; ?></span>
+							<?php } // endif ?>
 						</h3>
 						<?php
 							if(get_field('physician_npi')) {
@@ -134,7 +138,7 @@
 								<?php endforeach; ?>
 								</ul>
 							<?php endif; ?>
-						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>">Full Profile</a>
+						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name; ?>">Full Profile</a>
 						</div>
 					</div>
 				</div>
