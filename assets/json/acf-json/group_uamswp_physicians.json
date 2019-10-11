@@ -147,7 +147,7 @@
         "field_physician_prefix": {
             "key": "field_physician_prefix",
             "name": "physician_prefix",
-            "type": "text",
+            "type": "select",
             "label": "Prefix",
             "instructions": "",
             "required": 0,
@@ -157,7 +157,19 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
+            "choices": {
+                "Dr.": "Dr.",
+                "Miss": "Miss",
+                "Mr.": "Mr.",
+                "Mrs.": "Mrs.",
+                "Prof.": "Prof."
+            },
+            "default_value": [],
+            "allow_null": 1,
+            "multiple": 0,
+            "ui": 1,
+            "ajax": 0,
+            "return_format": "value",
             "placeholder": "",
             "prepend": "",
             "append": "",
@@ -172,28 +184,28 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "25",
+                "width": "40",
                 "class": "",
                 "id": ""
             },
             "choices": {
-                "male": "Male",
                 "female": "Female",
+                "male": "Male",
                 "other": "Other"
             },
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "",
-            "layout": "vertical",
+            "layout": "horizontal",
             "return_format": "value",
             "save_other_choice": 0
         },
-        "field_physician_regional": {
-            "key": "field_physician_regional",
-            "name": "physician_regional",
+        "field_physician_searchable": {
+            "key": "field_physician_searchable",
+            "name": "physician_searchable",
             "type": "true_false",
-            "label": "Regional Campus",
-            "instructions": "Excluded from main campus results",
+            "label": "Searchable",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -201,8 +213,8 @@
                 "class": "",
                 "id": ""
             },
-            "message": "Regional Campus only",
-            "default_value": 0,
+            "message": "Display in search results",
+            "default_value": 1,
             "ui": 0,
             "ui_on_text": "",
             "ui_off_text": ""
@@ -224,7 +236,7 @@
                 ]
             ],
             "wrapper": {
-                "width": "25",
+                "width": "",
                 "class": "",
                 "id": ""
             },
@@ -324,7 +336,7 @@
             "name": "physician_short_clinical_bio",
             "type": "textarea",
             "label": "Short Bio",
-            "instructions": "Limit of 30 words. Preferred length is approx 18 words.",
+            "instructions": "Limit of 160 characters. Preferred length is approx 18 words.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -334,7 +346,7 @@
             },
             "default_value": "",
             "placeholder": "",
-            "maxlength": 176,
+            "maxlength": 160,
             "rows": 4,
             "new_lines": ""
         },
@@ -448,22 +460,6 @@
             "placement": "top",
             "endpoint": 0
         },
-        "field_physician_appointment_link": {
-            "key": "field_physician_appointment_link",
-            "name": "physician_appointment_link",
-            "type": "url",
-            "label": "Appointment Link",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "https:\/\/uamshealth.com\/appointments",
-            "placeholder": "https:\/\/uamshealth.com\/appointments"
-        },
         "field_physician_patient_types": {
             "key": "field_physician_patient_types",
             "name": "physician_patient_types",
@@ -489,24 +485,21 @@
             "multiple": 0,
             "allow_null": 0
         },
-        "field_physician_searchable": {
-            "key": "field_physician_searchable",
-            "name": "physician_searchable",
-            "type": "true_false",
-            "label": "Searchable",
+        "field_physician_appointment_link": {
+            "key": "field_physician_appointment_link",
+            "name": "physician_appointment_link",
+            "type": "url",
+            "label": "Appointment Link",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
-            "message": "Display in search results",
-            "default_value": 1,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
+            "default_value": "https:\/\/uamshealth.com\/appointments",
+            "placeholder": "https:\/\/uamshealth.com\/appointments"
         },
         "field_physician_primary_care": {
             "key": "field_physician_primary_care",
@@ -770,7 +763,15 @@
             "label": "Academic Title",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_academic_profile_tab",
+                        "operator": "==",
+                        "value": "false"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "51",
                 "class": "",
@@ -784,6 +785,71 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        "field_physician_academic_appointment": {
+            "key": "field_physician_academic_appointment",
+            "name": "physician_academic_appointment",
+            "type": "repeater",
+            "label": "Academic Appointment",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_physician_appointment_title",
+                    "label": "Academic Title",
+                    "name": "academic_title",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5d4099f605575",
+                    "label": "Department",
+                    "name": "department",
+                    "type": "taxonomy",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "academic_department",
+                    "field_type": "select",
+                    "add_term": 1,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "acfe_bidirectional": {
+                        "acfe_bidirectional_enabled": "0"
+                    },
+                    "multiple": 0,
+                    "allow_null": 0
+                }
+            ]
         },
         "field_physician_academic_college": {
             "key": "field_physician_academic_college",
@@ -859,7 +925,7 @@
             "name": "physician_academic_short_bio",
             "type": "text",
             "label": "Short Academic Bio",
-            "instructions": "Limit of 30 words. Preferred length is approx 18 words.",
+            "instructions": "Limit of 160 characters. Preferred length is approx 18 words.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -871,7 +937,7 @@
             "placeholder": "",
             "prepend": "",
             "append": "",
-            "maxlength": 176
+            "maxlength": 160
         },
         "field_physician_academic_office": {
             "key": "field_physician_academic_office",
@@ -905,9 +971,50 @@
                 "class": "",
                 "id": ""
             },
-            "choices": [],
+            "choices": {
+                "127": "12th St. Clinic",
+                "116": "Administration West (ADMINW)",
+                "117": "Barton Research (BART)",
+                "118": "Biomedical Research Center I (BMR1)",
+                "119": "Biomedical Research Center II (BMR2)",
+                "120": "Bioventures (BVENT)",
+                "121": "Boiler House (BH)",
+                "122": "Central Building (CENT)",
+                "123": "College of Public Health (COPH)",
+                "124": "Computer Building (COMP)",
+                "125": "Cottage 3 (C3)",
+                "128": "Distribution Center (DIST)",
+                "129": "Donald W. Reynolds Institute on Aging (RIOA)",
+                "126": "Ear Nose Throat (ENT)",
+                "131": "Education Building South (EDS)",
+                "130": "Education II (EDII)",
+                "132": "Family Medical Center (FMC)",
+                "133": "Freeway Medical Tower (FWAY)",
+                "134": "Harvey and Bernice Jones Eye Institute (JEI)",
+                "135": "Hospital (HOSP)",
+                "136": "I. Dodd Wilson Education Building (IDW)",
+                "137": "Jackson T. Stephens Spine Institute (JTSSI)",
+                "138": "Magnetic Resonance Imaging (MRI)",
+                "139": "Mediplex Apartments (1 unit) (MEDPX)",
+                "140": "Northwest Campus (NWA)",
+                "141": "Outpatient Center (OPC)",
+                "142": "Outpatient Diagnostic Center (OPDC)",
+                "143": "Paint Shop & Flammable Storage (PAINT)",
+                "144": "PET (PET)",
+                "145": "Physical Plant (PP)",
+                "146": "Psychiatric Research Institute (PRI)",
+                "147": "Radiation Oncology [ROC] (RADONC)",
+                "148": "Residence Hall Complex (RHC)",
+                "149": "Ricks Armory",
+                "150": "Walker Annex (ANNEX)",
+                "151": "Ward Tower (WARD)",
+                "152": "West Central Energy Plant (WCEP)",
+                "153": "Westmark (WESTM)",
+                "154": "Winston K. Shorey Building (SHOR)",
+                "155": "Winthrop P. Rockefeller Cancer Institute (WPRCI)"
+            },
             "default_value": [],
-            "allow_null": 0,
+            "allow_null": 1,
             "multiple": 0,
             "ui": 0,
             "return_format": "value",
@@ -946,7 +1053,13 @@
                         "class": "",
                         "id": ""
                     },
-                    "choices": [],
+                    "choices": {
+                        "phone": "Phone",
+                        "fax": "Fax",
+                        "mobile": "Mobile",
+                        "email": "Email",
+                        "sms": "Text/SMS"
+                    },
                     "default_value": [],
                     "allow_null": 0,
                     "multiple": 0,
@@ -991,71 +1104,6 @@
             },
             "placement": "top",
             "endpoint": 0
-        },
-        "field_physician_academic_appointment": {
-            "key": "field_physician_academic_appointment",
-            "name": "physician_academic_appointment",
-            "type": "repeater",
-            "label": "Academic Appointment",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "collapsed": "",
-            "min": 0,
-            "max": 0,
-            "layout": "table",
-            "button_label": "",
-            "sub_fields": [
-                {
-                    "key": "field_physician_appointment_title",
-                    "label": "Academic Title",
-                    "name": "academic_title",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_5d4099f605575",
-                    "label": "Department",
-                    "name": "department",
-                    "type": "taxonomy",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "taxonomy": "academic_department",
-                    "field_type": "select",
-                    "add_term": 1,
-                    "save_terms": 0,
-                    "load_terms": 0,
-                    "return_format": "id",
-                    "acfe_bidirectional": {
-                        "acfe_bidirectional_enabled": "0"
-                    },
-                    "multiple": 0,
-                    "allow_null": 0
-                }
-            ]
         },
         "field_physician_appointment_education": {
             "key": "field_physician_appointment_education",

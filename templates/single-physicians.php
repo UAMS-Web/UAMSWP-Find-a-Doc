@@ -1,8 +1,8 @@
-<?php get_header();
-
-while ( have_posts() ) : the_post(); ?>
-
 <?php 
+/*
+ *  Get ACF fields to use for meta data
+ *  Add description from physician short description or full description * 
+ */
 $degrees = get_field('physician_degree');
 $degree_list = '';
 $i = 1;
@@ -13,8 +13,33 @@ foreach( $degrees as $degree ):
         $degree_list .= ", ";
     }
     $i++;
- endforeach; ?>
-<?php $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') .  ( $degree_list ? ', ' . $degree_list : '' );?>
+ endforeach; 
+$full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') .  ( $degree_list ? ', ' . $degree_list : '' );
+$excerpt = get_field('physician_academic_short_bio');
+$bio = get_field('physician_clinical_bio');
+if (empty($excerpt)){
+    if ($bio){
+        $excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 155, '...');
+    }
+}
+function sp_titles_desc($html) {
+    //you can add here all your conditions as if is_page(), is_category() etc.. 
+    global $excerpt;
+	$html = $excerpt; 
+	return $html;
+}
+add_filter('seopress_titles_desc', 'sp_titles_desc');
+function sp_titles_title($html) { 
+    global $full_name;
+	//you can add here all your conditions as if is_page(), is_category() etc.. 
+	$html = $full_name . ' | ' . get_bloginfo( "name" );
+	return $html;
+}
+add_filter('seopress_titles_title', 'sp_titles_title');
+
+get_header();
+
+while ( have_posts() ) : the_post(); ?>
 
 <main class="doctor-item">
         <section class="container-fluid p-0 p-xs-8 p-sm-10 doctor-info bg-white">
@@ -23,11 +48,12 @@ foreach( $degrees as $degree ):
                     <h1 class="page-title"><?php echo $full_name; ?></h1>
                     <h2 class="sr-only">Overview</h2>
                     <dl>
-                        <?php if(get_field('physician_department')) {?>
-                            <dt>Medical Department</dt>
-                            <dd><?php echo get_term( get_field('physician_department'), 'department' )->name; ?></dd>
-                        <?php } ?>
-                        
+                    <?php 
+                    $med_dept = get_field('physician_department');
+                    if ($med_dept && !empty($med_dept)) { ?>
+                        <dt>Medical Department</dt>
+                        <dd><?php echo (get_field('physician_department') ? get_term( get_field('physician_department'), 'department' )->name : ''); ?></dd>                 
+                    <?php } ?>
                         <dt>Primary Care</dt>
                         <dd><?php echo (get_field('physician_primary_care') ? 'Yes' : 'No'); ?></dd>
                         
