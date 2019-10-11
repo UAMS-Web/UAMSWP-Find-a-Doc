@@ -20,38 +20,8 @@
 
 	add_filter( 'facetwp_template_use_archive', '__return_true' );
 
-	// get_template_part( 'header', 'image' ); ?>
-
-	<!-- <div class="container uams-body">
-
-	  <div class="row">
-
-	    <div class="col-md-12 uams-content" role='main'>
-
-	    <?php // Hard coded breadcrumbs ?>
-	    <nav class="uams-breadcrumbs" role="navigation" aria-label="breadcrumbs">
-	    	<ul>
-	    		<li><a href="http://www.uams.edu" title="University of Arkansas for Medical Scineces">Home</a></li>
-	    		<li><a href="/" title="<?php echo str_replace('   ', ' ', get_bloginfo('title')); ?>"><?php echo str_replace('   ', ' ', get_bloginfo('title')); ?></a></li>
-	    		<li class="current"><span>Physicians</span></li>
-	    	</ul>
-	    </nav> -->
-
-	      <!-- <div id='main_content' class="uams-body-copy uams-module" tabindex="-1"> -->
-
-	      		<?php
-					// $fwp_filter = '';
-					// $uri = $_SERVER["REQUEST_URI"];
-					// if( strpos($uri, 'fwp_') !== false ) {
-					// 	$fwp_filter = 'active="true"';
-					// }
-				 ?>
-
-				<style>
-					.facetwp-facet-regional .facetwp-checkbox[data-value="0"] {
-						display: none;
-					}
-				</style>
+	?>
+	
 				<main class="container-fluid doctor-list">
 					<div class="row">
 						<div class="col-12 col-sm filter-col collapse">
@@ -70,7 +40,7 @@
 																<div class="fwp-filter">[facetwp facet="physician_gender"]</div>
 																<div class="fwp-filter">[facetwp facet="physician_language"]</div>
 																<div class="fwp-filter">[facetwp facet="locations"]</div>
-																<div class="fwp-filter">[facetwp facet="regional"]</div>
+																<div class="fwp-filter sr-only">[facetwp facet="searchable"]</div>
 																<button onclick="FWP.refresh()">Apply</button> <button onclick="FWP.reset()">Reset</button>
 															' );
 								?>
