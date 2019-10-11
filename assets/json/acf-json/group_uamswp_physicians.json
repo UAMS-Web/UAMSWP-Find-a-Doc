@@ -763,7 +763,15 @@
             "label": "Academic Title",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_academic_profile_tab",
+                        "operator": "==",
+                        "value": "false"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "51",
                 "class": "",
@@ -777,6 +785,71 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        "field_physician_academic_appointment": {
+            "key": "field_physician_academic_appointment",
+            "name": "physician_academic_appointment",
+            "type": "repeater",
+            "label": "Academic Appointment",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_physician_appointment_title",
+                    "label": "Academic Title",
+                    "name": "academic_title",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5d4099f605575",
+                    "label": "Department",
+                    "name": "department",
+                    "type": "taxonomy",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "academic_department",
+                    "field_type": "select",
+                    "add_term": 1,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "acfe_bidirectional": {
+                        "acfe_bidirectional_enabled": "0"
+                    },
+                    "multiple": 0,
+                    "allow_null": 0
+                }
+            ]
         },
         "field_physician_academic_college": {
             "key": "field_physician_academic_college",
@@ -984,71 +1057,6 @@
             },
             "placement": "top",
             "endpoint": 0
-        },
-        "field_physician_academic_appointment": {
-            "key": "field_physician_academic_appointment",
-            "name": "physician_academic_appointment",
-            "type": "repeater",
-            "label": "Academic Appointment",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "collapsed": "",
-            "min": 0,
-            "max": 0,
-            "layout": "table",
-            "button_label": "",
-            "sub_fields": [
-                {
-                    "key": "field_physician_appointment_title",
-                    "label": "Academic Title",
-                    "name": "academic_title",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_5d4099f605575",
-                    "label": "Department",
-                    "name": "department",
-                    "type": "taxonomy",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "taxonomy": "academic_department",
-                    "field_type": "select",
-                    "add_term": 1,
-                    "save_terms": 0,
-                    "load_terms": 0,
-                    "return_format": "id",
-                    "acfe_bidirectional": {
-                        "acfe_bidirectional_enabled": "0"
-                    },
-                    "multiple": 0,
-                    "allow_null": 0
-                }
-            ]
         },
         "field_physician_appointment_education": {
             "key": "field_physician_appointment_education",
