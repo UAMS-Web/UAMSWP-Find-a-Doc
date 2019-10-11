@@ -23,8 +23,10 @@ foreach( $degrees as $degree ):
                     <h1 class="page-title"><?php echo $full_name; ?></h1>
                     <h2 class="sr-only">Overview</h2>
                     <dl>
-                        <dt>Medical Department</dt>
-                        <dd><?php echo (get_field('physician_department') ? get_term( get_field('physician_department'), 'department' )->name : ''); ?></dd>
+                        <?php if(get_field('physician_department')) {?>
+                            <dt>Medical Department</dt>
+                            <dd><?php echo get_term( get_field('physician_department'), 'department' )->name; ?></dd>
+                        <?php } ?>
                         
                         <dt>Primary Care</dt>
                         <dd><?php echo (get_field('physician_primary_care') ? 'Yes' : 'No'); ?></dd>
