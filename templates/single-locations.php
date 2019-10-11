@@ -1,4 +1,23 @@
-<?php get_header();
+<?php 
+/*
+ *  Get ACF fields to use for meta data
+ *  Add description from location short description or full description * 
+ */
+$excerpt = get_field('location_short_desc');
+$about_loc = get_field('location_about');
+if (empty($excerpt)){
+    if ($about_loc){
+        $excerpt = mb_strimwidth(wp_strip_all_tags($about_loc), 0, 155, '...');
+    }
+}
+function sp_titles_desc($html) {
+    global $excerpt;
+	$html = $excerpt; 
+	return $html;
+}
+add_filter('seopress_titles_desc', 'sp_titles_desc');
+
+get_header();
 
 while ( have_posts() ) : the_post(); ?>
 <?php $map = get_field('location_map'); ?>
