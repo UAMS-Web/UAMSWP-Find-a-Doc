@@ -164,7 +164,8 @@ foreach( $degrees as $degree ):
         <section class="container-fluid p-8 p-sm-10 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2 class="module-title">About</h2>
+                    <h2 class="module-title">About <?php echo get_field('physician_prefix') ? get_field('physician_prefix') .' ' .get_field('physician_last_name') : get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name'); ?>
+                    </h2>
                     <div class="module-body">
                         <?php echo get_field('physician_clinical_bio'); ?>
                         <?php if(get_field('physician_youtube_link')) { ?>
