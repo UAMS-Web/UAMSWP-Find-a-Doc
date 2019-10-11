@@ -46,44 +46,6 @@
             "placement": "top",
             "endpoint": 0
         },
-        "field_location_abbreviation": {
-            "key": "field_location_abbreviation",
-            "name": "location_abbreviation",
-            "type": "text",
-            "label": "Abbreviation",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "60",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        "field_location_description": {
-            "key": "field_location_description",
-            "name": "location_description",
-            "type": "text",
-            "label": "Location Description",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "60",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
         "field_location_address_1": {
             "key": "field_location_address_1",
             "name": "location_address_1",
@@ -570,6 +532,44 @@
             "open": 0,
             "multi_expand": 0,
             "endpoint": 0
+        },
+        "field_location_abbreviation": {
+            "key": "field_location_abbreviation",
+            "name": "location_abbreviation",
+            "type": "text",
+            "label": "Abbreviation",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "60",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        "field_location_description": {
+            "key": "field_location_description",
+            "name": "location_description",
+            "type": "text",
+            "label": "Location Description",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "60",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         },
         "field_location_email": {
             "key": "field_location_email",
