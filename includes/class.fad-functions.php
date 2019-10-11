@@ -560,23 +560,23 @@ add_filter( 'facetwp_index_row', function( $params, $class ) {
             return false;
         }
     }
-     if ( 'regional' == $params['facet_name'] ) {
-        $included_terms = array( 'Yes' );
-        if ( ! in_array( $params['facet_display_value'], $included_terms ) ) {
-            return false;
-        }
-    }
+    // if ( 'searchable' == $params['facet_name'] ) {
+    //     $included_terms = array( 'Yes' );
+    //     if ( ! in_array( $params['facet_display_value'], $included_terms ) ) {
+    //         return false;
+    //     }
+    // }
     return $params;
 }, 10, 2 );
 
-// add_filter( 'facetwp_preload_url_vars', function( $url_vars ) {
-//     if ( 'physicians' == FWP()->helper->get_uri() ) {
-//         if ( empty( $url_vars['regional'] ) ) {
-//             $url_vars['regional'] = array( '0' );
-//         }
-//     }
-//     return $url_vars;
-// } );
+add_filter( 'facetwp_preload_url_vars', function( $url_vars ) {
+    if ( 'physicians' == FWP()->helper->get_uri() ) {
+        if ( empty( $url_vars['searchable'] ) ) {
+            $url_vars['searchable'] = array( '1' );
+        }
+    }
+    return $url_vars;
+} );
 
 // Admin Columns
 add_filter('manage_physicians_posts_columns', 'posts_physicians_columns', 10);
