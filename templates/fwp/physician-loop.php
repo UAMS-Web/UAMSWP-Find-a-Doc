@@ -4,7 +4,6 @@
 	 *  Designed for physicians
 	 */
 ?>
-	<?php $i = 0; ?>
 	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 	<?php 
 	$degrees = get_field('physician_degree');
