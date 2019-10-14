@@ -127,8 +127,8 @@
 								<ul>
 								<?php foreach( $locations as $location): ?>
 									<li>
-										<a href="<?php echo get_permalink( $location->ID ); ?>">
-											<?php echo get_the_title( $location->ID ); ?>
+										<a href="<?php echo get_permalink( $location ); ?>">
+											<?php echo get_the_title( $location ); ?>
 										</a>
 									</li>
 								<?php endforeach; ?>
@@ -249,8 +249,8 @@
 								<ul>
 								<?php foreach( $locations as $location): ?>
 									<li>
-										<a href="<?php echo get_permalink( $location->ID ); ?>">
-											<?php echo get_the_title( $location->ID ); ?>
+										<a href="<?php echo get_permalink( $location ); ?>">
+											<?php echo get_the_title( $location ); ?>
 										</a>
 									</li>
 								<?php endforeach; ?>
