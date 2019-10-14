@@ -6,14 +6,16 @@
 $degrees = get_field('physician_degree');
 $degree_list = '';
 $i = 1;
-foreach( $degrees as $degree ):
-    $degree_name = get_term( $degree, 'degree');
-    $degree_list .= $degree_name->name;
-    if( count($degrees) > $i ) {
-        $degree_list .= ", ";
-    }
-    $i++;
- endforeach; 
+if ( $degrees ) {
+    foreach( $degrees as $degree ):
+        $degree_name = get_term( $degree, 'degree');
+        $degree_list .= $degree_name->name;
+        if( count($degrees) > $i ) {
+            $degree_list .= ", ";
+        }
+        $i++;
+    endforeach;
+} 
 $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') .  ( $degree_list ? ', ' . $degree_list : '' );
 $excerpt = get_field('physician_academic_short_bio');
 $bio = get_field('physician_clinical_bio');
@@ -121,15 +123,15 @@ while ( have_posts() ) : the_post(); ?>
 						<h2>Primary Location</h2>
                             <?php foreach( $locations as $location ):
                                     if ( 2 > $l ){ ?>
-                                <p><strong><?php echo get_the_title( $location->ID ); ?></strong><br />
-                                <?php echo get_field( 'location_address_1', $location->ID ); ?><br/>
-                                <?php echo ( get_field( 'location_address_2', $location->ID ) ? get_field( 'location_address_2', $location->ID ) . '<br/>' : ''); ?>
-                                <?php echo get_field( 'location_city', $location->ID ); ?>, <?php echo get_field(' location_state', $location->ID ); ?> <?php echo get_field( 'location_zip', $location->ID ); ?>
-                                <?php $map = get_field( 'location_map', $location->ID ); ?>
+                                <p><strong><?php echo get_the_title( $location ); ?></strong><br />
+                                <?php echo get_field( 'location_address_1', $location ); ?><br/>
+                                <?php echo ( get_field( 'location_address_2', $location ) ? get_field( 'location_address_2', $location ) . '<br/>' : ''); ?>
+                                <?php echo get_field( 'location_city', $location ); ?>, <?php echo get_field(' location_state', $location ); ?> <?php echo get_field( 'location_zip', $location ); ?>
+                                <?php $map = get_field( 'location_map', $location ); ?>
                                 <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a>
                                 </p>
                                 <div class="btn-container">
-                                    <a class="btn btn-primary" href="<?php the_permalink( $location->ID ); ?>">
+                                    <a class="btn btn-primary" href="<?php the_permalink( $location ); ?>">
                                         View Location
                                     </a>
                                     <a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of locations for this doctor">
@@ -365,19 +367,19 @@ while ( have_posts() ) : the_post(); ?>
                         <?php $l = 1; ?>
                         <?php foreach( $locations as $location ): ?>
                             <div class="card">
-                                <?php echo get_the_post_thumbnail( $location->ID , 'large',  array( 'itemprop' => 'image' ) ); ?>
-                                <!-- <img srcset="https://picsum.photos/434/244?image=13 1x, https://picsum.photos/868/488?image=13 2x" src="https://picsum.photos/434/244?image=13" class="card-img-top" alt="<?php echo get_the_title( $location->ID ); ?>"> -->
+                                <?php echo get_the_post_thumbnail( $location , 'large',  array( 'itemprop' => 'image' ) ); ?>
+                                <!-- <img srcset="https://picsum.photos/434/244?image=13 1x, https://picsum.photos/868/488?image=13 2x" src="https://picsum.photos/434/244?image=13" class="card-img-top" alt="<?php echo get_the_title( $location ); ?>"> -->
                                 <div class="card-body">
                                         <h3 class="card-title">
-                                            <span class="name"><?php echo get_the_title( $location->ID ); ?></span>
+                                            <span class="name"><?php echo get_the_title( $location ); ?></span>
                                             <?php  if ( 1 == $l ) { ?>
                                                 <span class="subtitle">Primary Location</span>
                                             <?php } ?>
                                         </h3>
-                                    <p class="card-text"><?php echo get_field('location_address_1', $location->ID ); ?><br/>
-                                    <?php echo ( get_field('location_address_2', $location->ID ) ? get_field('location_address_2', $location->ID ) . '<br/>' : ''); ?>
-                                    <?php echo get_field('location_city', $location->ID ); ?>, <?php echo get_field('location_state', $location->ID ); ?> <?php echo get_field('location_zip', $location->ID); ?></p>
-                                    <a href="<?php the_permalink(  $location->ID ); ?>" class="btn btn-primary stretched-link" aria-label="Go to location page for <?php echo get_the_title( $location->ID ); ?>">View Location</a>
+                                    <p class="card-text"><?php echo get_field('location_address_1', $location ); ?><br/>
+                                    <?php echo ( get_field('location_address_2', $location ) ? get_field('location_address_2', $location ) . '<br/>' : ''); ?>
+                                    <?php echo get_field('location_city', $location ); ?>, <?php echo get_field('location_state', $location ); ?> <?php echo get_field('location_zip', $location); ?></p>
+                                    <a href="<?php the_permalink(  $location ); ?>" class="btn btn-primary stretched-link" aria-label="Go to location page for <?php echo get_the_title( $location ); ?>">View Location</a>
                                 </div>
                             </div>
                             <?php $l++; ?>
