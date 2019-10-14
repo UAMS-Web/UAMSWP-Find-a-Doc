@@ -1181,7 +1181,7 @@
             "elements": "",
             "min": 1,
             "max": "",
-            "return_format": "object",
+            "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": true,
                 "acfe_bidirectional_related": "field_physician_locations"
