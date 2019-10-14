@@ -279,6 +279,7 @@ add_filter( 'facetwp_shortcode_html', function( $output, $atts) {
 }, 10, 2 );
 
 function fwp_disable_auto_refresh() {
+    if ( is_post_type_archive( 'physicians' ) ) {
 	?>
 	<script>
 	(function($) {
@@ -289,9 +290,26 @@ function fwp_disable_auto_refresh() {
 		});
 	})(jQuery);
 	</script>
-	<?php
-	}
-	add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
+<?php
+    }
+}
+add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
+
+add_action( 'wp_head', function() {
+?>
+    <script>
+    (function($) {
+        $(document).on('facetwp-refresh', function() {
+        if (FWP.loaded) {
+            FWP.set_hash();
+            window.location.reload();
+            return false;
+        }
+        });
+    })(jQuery);
+    </script>
+<?php
+}, 50 );
 
 // FacetWP scripts
 function fwp_facet_scripts() {
