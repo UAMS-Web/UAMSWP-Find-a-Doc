@@ -241,6 +241,13 @@
                 "type": "acf_field_name",
                 "identifier": "location_facility"
             }
+        },
+        {
+            "name": "location_physicians",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_physicians"
+            }
         }
     ],
     "hash": "c89b987d38635e87c06696a8e97e40dd",
