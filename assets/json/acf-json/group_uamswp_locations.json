@@ -1141,6 +1141,53 @@
             "open": 0,
             "multi_expand": 0,
             "endpoint": 1
+        },
+        "field_location_physician_tab": {
+            "key": "field_location_physician_tab",
+            "name": "",
+            "type": "tab",
+            "label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Physicians",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        "field_location_physicians": {
+            "key": "field_location_physicians",
+            "name": "location_physicians",
+            "type": "relationship",
+            "label": "Physicians",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "physicians"
+            ],
+            "taxonomy": [],
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": 1,
+            "max": "",
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": true,
+                "acfe_bidirectional_related": "field_physician_locations"
+            },
+            "acfe_validate": "",
+            "acfe_update": ""
         }
     },
     "modified": false

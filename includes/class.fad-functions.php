@@ -279,6 +279,7 @@ add_filter( 'facetwp_shortcode_html', function( $output, $atts) {
 }, 10, 2 );
 
 function fwp_disable_auto_refresh() {
+    if ( is_post_type_archive( 'physicians' ) ) {
 	?>
 	<script>
 	(function($) {
@@ -289,9 +290,26 @@ function fwp_disable_auto_refresh() {
 		});
 	})(jQuery);
 	</script>
-	<?php
-	}
-	add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
+<?php
+    }
+}
+add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
+
+add_action( 'wp_head', function() {
+?>
+    <script>
+    (function($) {
+        $(document).on('facetwp-refresh', function() {
+        if (FWP.loaded) {
+            FWP.set_hash();
+            window.location.reload();
+            return false;
+        }
+        });
+    })(jQuery);
+    </script>
+<?php
+}, 50 );
 
 // FacetWP scripts
 function fwp_facet_scripts() {
@@ -497,14 +515,16 @@ add_filter( 'facetwp_pager_html', function( $output, $params ) {
 
 		$output .= '<nav aria-label="list pagination"><ul class="pagination">';
 
+        // First Page
+        if ( 3 < $page ) {
+            $output .= '<li class="page-item"><a class="facetwp-page page-link first-page" data-page="1"><span class="fas fa-fast-backward" aria-hidden="true"></span></a></li>';
+        }
+        
         // Previous page (NEW)
         if ( $page > 1 ) {
             $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page - 1) . '"><span class="fas fa-angle-left" aria-hidden="true"></span></a></li>';
         }
         
-        if ( 3 < $page ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link first-page" data-page="1"><span class="fas fa-fast-backward" aria-hidden="true"></span></a></li>';
-        }
         if ( 1 < ( $page - 10 ) ) {
             $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page - 10) . '">' . ($page - 10) . '</a></li>';
         }
@@ -525,14 +545,16 @@ add_filter( 'facetwp_pager_html', function( $output, $params ) {
         if ( $total_pages > ( $page + 10 ) ) {
             $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page + 10) . '">' . ($page + 10) . '</a></li>';
         }
-        if ( $total_pages > ( $page + 2 ) ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link last-page" data-page="' . $total_pages . '"><span class="fas fa-fast-forward aria-hidden="true"></span></a></li>';
-        }
 
         // Next page (NEW)
         if ( $page < $total_pages ) {
             $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page + 1) . '"><span class="fas fa-angle-right" aria-hidden="true"></span></a>';
-		}
+        }
+        
+        // Last Page
+        if ( $total_pages > ( $page + 2 ) ) {
+            $output .= '<li class="page-item"><a class="facetwp-page page-link last-page" data-page="' . $total_pages . '"><span class="fas fa-fast-forward aria-hidden="true"></span></a></li>';
+        }
 		
 		$output .= '</ul></nav>';
 

@@ -20,8 +20,7 @@
 
 	add_filter( 'facetwp_template_use_archive', '__return_true' );
 
-	?>
-	
+?>
 				<main class="container-fluid doctor-list">
 					<div class="row">
 						<div class="col-12 col-sm filter-col collapse">

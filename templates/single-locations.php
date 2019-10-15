@@ -27,9 +27,9 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="col-12 col-md p-4 p-xs-8 p-sm-10 px-md-8 py-md-0 order-2 text">
 			<h1 class="page-title"><?php the_title(); ?></h1>
 				<h2 class="sr-only">Address</h2>
-				<p><?php echo get_field('location_address_1', $args, get_the_ID() ); ?><br/>
-				<?php echo ( get_field('location_address_2', $args ) ? get_field('location_address_2', $args) . '<br/>' : ''); ?>
-				<?php echo get_field('location_city', $args); ?>, <?php echo get_field('location_state', $args); ?> <?php echo get_field('location_zip', $args, get_the_ID()); ?></p>
+				<p><?php echo get_field('location_address_1', get_the_ID() ); ?><br/>
+				<?php echo ( get_field('location_address_2' ) ? get_field('location_address_2') . '<br/>' : ''); ?>
+				<?php echo get_field('location_city'); ?>, <?php echo get_field('location_state'); ?> <?php echo get_field('location_zip', get_the_ID()); ?></p>
 					<p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a></p>
 				<?php if(get_field('location_web_name') && get_field('location_url')){ ?>
 					<p><a class="btn btn-secondary" href="<?php echo get_field('location_url')['url']; ?>"><?php echo get_field('location_web_name'); ?> <span class="far fa-external-link-alt"></span></span></a></p>
@@ -64,7 +64,7 @@ while ( have_posts() ) : the_post(); ?>
 					?>
 				</dl>
 				<?php
-				$hours247 = get_field('location_24_7', $args);
+				$hours247 = get_field('location_24_7');
 				$hours = get_field('location_hours');
 				if ( $hours247 || $hours[0]['day'] ) : ?>
 				<h2>Hours</h2>
@@ -117,7 +117,7 @@ while ( have_posts() ) : the_post(); ?>
 						$order = array();
 						// populate order
 						foreach( $holidayhours as $i => $row ) {	
-							$order[ $i ] = $row['field_holiday_date'];
+							$order[ $i ] = $row['date'];
 						}
 						
 						// multisort
@@ -182,7 +182,7 @@ while ( have_posts() ) : the_post(); ?>
 						// }
 						// echo '</dl>';
 					endif; ?>
-				<?php if (get_field('location_after_hours') && !get_field('location_24_7', $args)) { ?>
+				<?php if (get_field('location_after_hours') && !get_field('location_24_7')) { ?>
 				<h2>After Hours</h2>
 				<?php echo get_field('location_after_hours'); ?>
 				<?php } ?>
@@ -323,6 +323,9 @@ while ( have_posts() ) : the_post(); ?>
 		</div>
 	</section>
 	<?php endif; ?>
+	<?php
+	$physicians = get_field( 'location_physicians' );
+	if( $physicians ): ?>
 	<section class="container-fluid p-8 p-sm-10 bg-auto" id="doctors">
 		<div class="row">
 			<div class="col-12">
@@ -355,6 +358,7 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 		</div>
 	</section>
+	<?php endif; ?>
 	<?php $specialties = get_field('medical_specialties');
 		if( $specialties ): ?>
 	<section class="container-fluid p-8 p-sm-10 bg-auto">
