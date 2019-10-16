@@ -2,7 +2,7 @@
 
 /* Ajax Search Pro Functions */
 // Sort by last name, first name, middle name
-add_action( 'pre_get_posts', 'cd_sort_physicians' );
+// add_action( 'pre_get_posts', 'cd_sort_physicians' );
 function cd_sort_physicians( $query ) {
     if ( $query->is_main_query() && !is_admin() ) {
         if ( $query->is_tax() || $query->is_post_type_archive('physicians') ) {
@@ -28,22 +28,35 @@ function cd_sort_physicians( $query ) {
 
 // Ajax Search Pro modifications
 add_filter( 'asp_results', 'asp_custom_link_meta_results', 1, 2 );
-function asp_custom_link_meta_results( $results, $id ) {
+function asp_custom_link_meta_results( $results ) {
 
   // Change this variable to whatever meta key you are using
   //$key = 'profile_type';
 
   // Parse through each result item
-    if ($id == '1') {
+    // if ($id == '1') {
 	  // Parse through each result item
-	  $new_url = '';
+	//   $new_url = '';
 	  $full_name = '';
 	  $new_desc = '';
 	  foreach ($results as $k=>$v) {
 		  if (($v->content_type == "pagepost") && (get_post_type($v->id) == "physicians")) {
+                $degrees = get_field('physician_degree', $v->id);
+                $degree_list = '';
+                $i = 1;
+                if ($degrees){
+                    foreach( $degrees as $degree ):
+                        $degree_name = get_term( $degree, 'degree');
+                        $degree_list .= $degree_name->name;
+                        if( count($degrees) > $i ) {
+                            $degree_list .= ", ";
+                        }
+                        $i++;
+                    endforeach;
+                }
 		  		// $new_url = '/directory/physician/' . get_post_field( 'post_name', $v->id ) .'/';
-		  		$full_name = get_field('physician_first_name', '', $v->id) .' ' .(get_field('physician_middle_name', '', $v->id) ? get_field('physician_middle_name', '', $v->id) . ' ' : '') . get_field('physician_last_name', '', $v->id) . (get_field('physician_degree', '', $v->id) ? ', ' . get_field('physician_degree', '', $v->id) : '');
-		  		$new_desc = get_field('physician_short_clinical_bio', '', $v->id );
+		  		$full_name = get_field('physician_first_name', $v->id) .' ' .(get_field('physician_middle_name', $v->id) ? get_field('physician_middle_name', $v->id) . ' ' : '') . get_field('physician_last_name', $v->id) . ( $degree_list ? ', ' . $degree_list : '' );
+		  		$new_desc = get_field('physician_short_clinical_bio', $v->id );
 		  }
 		  // Change only, if the meta is specified
 		  // if ( !empty($new_url) )
@@ -58,10 +71,10 @@ function asp_custom_link_meta_results( $results, $id ) {
 	      $new_desc = ''; //Reset
 	  }
 	  return $results;
-	}
+	// }
 }
 
-add_filter( 'asp_result_image_after_prostproc', 'asp_get_post_type_image', 1, 2 );
+// add_filter( 'asp_result_image_after_prostproc', 'asp_get_post_type_image', 1, 2 );
 
 function asp_get_post_type_image( $image, $id ) {
 
