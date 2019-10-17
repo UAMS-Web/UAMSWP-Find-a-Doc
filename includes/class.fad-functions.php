@@ -1,31 +1,4 @@
 <?php
-
-/* Ajax Search Pro Functions */
-// Sort by last name, first name, middle name
-// add_action( 'pre_get_posts', 'cd_sort_physicians' );
-// function cd_sort_physicians( $query ) {
-//     if ( $query->is_main_query() && !is_admin() ) {
-//         if ( $query->is_tax() || $query->is_post_type_archive('physicians') ) {
-// 	        $query->set('meta_query', array(
-//                 'physician_last_name' => array(
-//                     'key' => get_field('physician_last_name'),
-//                 ),
-//                 'physician_first_name' => array(
-//                     'key' => get_field('physician_first_name'),
-//                 ),
-//                 'physician_middle_name' => array(
-//                     'key' => get_field('physician_middle_name'),
-//                 )
-//             ));
-//             $query->set('orderby',array(
-//                 'physician_last_name' => 'ASC',
-//                 'physician_first_name' => 'ASC',
-//                 'physician_middle_name' => 'ASC'
-//             ));
-//         }
-//     }
-// }
-
 // Ajax Search Pro modifications
 add_filter( 'asp_results', 'asp_custom_link_meta_results', 1, 2 );
 function asp_custom_link_meta_results( $results ) {
@@ -218,53 +191,6 @@ add_action( 'rwmb_enqueue_scripts', 'prefix_enqueue_custom_style' );
 function prefix_enqueue_custom_style() {
     wp_enqueue_style( 'admin-mb-style', get_stylesheet_directory_uri() . '/admin.css' );
 }
-
-// add_action( 'mb_relationships_init', function() {
-//     MB_Relationships_API::register( array(
-//         'id'   => 'physicians_to_locations',
-//         'from' => array(
-//             'object_type' => 'post',
-//             'post_type'   => 'physicians',
-//             'admin_column' => 'after title',
-//             'meta_box'    => array(
-//                 'title'       => 'Location(s)',
-//                 'field_title' => 'Select Location(s)<br/><span style="font-weight:normal; font-style:italic;">Set Primary Location First</span>',
-//                 'context' => 'normal',
-//                 'priority' => 'high',
-//             ),
-//         ),
-//         'to'   => array(
-//             'object_type' => 'post',
-//             'post_type'   => 'locations',
-//             'admin_column' => true,
-//             'meta_box'    => array(
-//                 'hidden'	=> true,
-//                 'title'       => 'Physician(s)',
-//             ),
-//         ),
-//     ),
-//     array (
-// 		'id'	=> 'services_to_locations',
-// 		'from'	=> array(
-//             'object_type' => 'post',
-//             'post_type'   => 'services',
-//             'meta_box'    => array(
-//                 'title'       => 'Location(s)',
-//                 'field_title' => 'Select Location',
-//                 'context' => 'normal',
-//                 'priority' => 'high',
-//             ),
-//         ),
-//         'to'   => array(
-//             'object_type' => 'post',
-//             'post_type'   => 'locations',
-//             'meta_box'    => array(
-//                 'hidden'	=> true,
-//                 'title'       => 'Service(s)',
-//             ),
-// 		),
-//     ) );
-// } );
 
 /* FacetWP functions */
 // factwp Main Query fix
