@@ -1179,7 +1179,7 @@
                 "search"
             ],
             "elements": "",
-            "min": 1,
+            "min": "",
             "max": "",
             "return_format": "id",
             "acfe_bidirectional": {
