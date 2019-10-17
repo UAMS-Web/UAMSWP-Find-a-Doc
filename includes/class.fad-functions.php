@@ -3,28 +3,28 @@
 /* Ajax Search Pro Functions */
 // Sort by last name, first name, middle name
 // add_action( 'pre_get_posts', 'cd_sort_physicians' );
-function cd_sort_physicians( $query ) {
-    if ( $query->is_main_query() && !is_admin() ) {
-        if ( $query->is_tax() || $query->is_post_type_archive('physicians') ) {
-	        $query->set('meta_query', array(
-                'physician_last_name' => array(
-                    'key' => get_field('physician_last_name'),
-                ),
-                'physician_first_name' => array(
-                    'key' => get_field('physician_first_name'),
-                ),
-                'physician_middle_name' => array(
-                    'key' => get_field('physician_middle_name'),
-                )
-            ));
-            $query->set('orderby',array(
-                'physician_last_name' => 'ASC',
-                'physician_first_name' => 'ASC',
-                'physician_middle_name' => 'ASC'
-            ));
-        }
-    }
-}
+// function cd_sort_physicians( $query ) {
+//     if ( $query->is_main_query() && !is_admin() ) {
+//         if ( $query->is_tax() || $query->is_post_type_archive('physicians') ) {
+// 	        $query->set('meta_query', array(
+//                 'physician_last_name' => array(
+//                     'key' => get_field('physician_last_name'),
+//                 ),
+//                 'physician_first_name' => array(
+//                     'key' => get_field('physician_first_name'),
+//                 ),
+//                 'physician_middle_name' => array(
+//                     'key' => get_field('physician_middle_name'),
+//                 )
+//             ));
+//             $query->set('orderby',array(
+//                 'physician_last_name' => 'ASC',
+//                 'physician_first_name' => 'ASC',
+//                 'physician_middle_name' => 'ASC'
+//             ));
+//         }
+//     }
+// }
 
 // Ajax Search Pro modifications
 add_filter( 'asp_results', 'asp_custom_link_meta_results', 1, 2 );
@@ -277,16 +277,16 @@ function prefix_enqueue_custom_style() {
 
 // Filter to fix facetwp hash error
 add_filter( 'facetwp_is_main_query', function( $is_main_query, $query ) {
-    if ( 'physicians' == $query->get( 'post_type' ) ) {
+    // if ( 'physicians' == $query->get( 'post_type' ) ) {
 		$is_main_query = false;
-    }
+    // }
     return $is_main_query;
 }, 10, 2 );
 
 add_filter( 'facetwp_shortcode_html', function( $output, $atts) {
 	if ( $atts['template'] = 'physician' ) { // replace 'example' with name of your template
-    /** modify replacement as needed, make sure you keep the facetwp-template class **/
-    $output = str_replace( 'facetwp-template', 'facetwp-template row list', $output );
+        /** modify replacement as needed, make sure you keep the facetwp-template class **/
+        $output = str_replace( 'facetwp-template', 'facetwp-template row list', $output );
 	}
 	return $output; 
 }, 10, 2 );
@@ -308,21 +308,23 @@ function fwp_disable_auto_refresh() {
 }
 add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
 
-add_action( 'wp_head', function() {
-?>
-    <script>
-    (function($) {
-        $(document).on('facetwp-refresh', function() {
-        if (FWP.loaded) {
-            FWP.set_hash();
-            window.location.reload();
-            return false;
-        }
-        });
-    })(jQuery);
-    </script>
-<?php
-}, 50 );
+add_action( 'wp_footer', function() {
+    if ( !is_post_type_archive( 'physicians' ) || !is_post_type_archive( 'locations' ) ) {
+    ?>
+        <script>
+        (function($) {
+            $(document).on('facetwp-refresh', function() {
+            if (FWP.loaded) {
+                FWP.set_hash();
+                window.location.reload();
+                return false;
+            }
+            });
+        })(jQuery);
+        </script>
+    <?php
+    }
+}, 10 );
 
 // FacetWP scripts
 function fwp_facet_scripts() {
