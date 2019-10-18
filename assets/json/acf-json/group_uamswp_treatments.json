@@ -3,9 +3,26 @@
     "title": "Treatments",
     "fields": [
         {
-            "key": "field_treatments_content",
+            "key": "field_treatment_procedure_alternate",
+            "label": "Alternate names",
+            "name": "treatment_procedure_alternate",
+            "type": "text",
+            "instructions": "Seperate terms with a semi-colon",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "acfe_validate": "",
+            "acfe_update": ""
+        },
+        {
+            "key": "field_treatment_procedure_content",
             "label": "Content",
-            "name": "treatments_content",
+            "name": "treatment_procedure_content",
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
@@ -25,9 +42,9 @@
             "acfe_update": ""
         },
         {
-            "key": "field_treatments_conditions",
+            "key": "field_treatment_procedure_conditions",
             "label": "Conditions",
-            "name": "treatments_conditions",
+            "name": "treatment_procedure_conditions",
             "type": "taxonomy",
             "instructions": "",
             "required": 0,
