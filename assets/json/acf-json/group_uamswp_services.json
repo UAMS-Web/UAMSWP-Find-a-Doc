@@ -81,7 +81,15 @@
             "label": "Medical Terms (Tags)",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_service_conditions",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -98,6 +106,37 @@
                 "acfe_bidirectional_enabled": "0"
             },
             "multiple": 0
+        },
+        "field_service_physicians": {
+            "key": "field_service_physicians",
+            "name": "service_physicians",
+            "type": "relationship",
+            "label": "Physicians",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "physicians"
+            ],
+            "taxonomy": [],
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": true,
+                "acfe_bidirectional_related": "field_physician_services"
+            },
+            "acfe_validate": "",
+            "acfe_update": ""
         }
     },
     "modified": false
