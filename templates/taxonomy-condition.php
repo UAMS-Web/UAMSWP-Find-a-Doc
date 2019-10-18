@@ -1,24 +1,6 @@
 <?php
    	get_header();
 
-	function custom_field_excerpt($title) {
-			global $post;
-			$text = get_field($title);
-			if ( '' != $text ) {
-				$text = strip_shortcodes( $text );
-				$text = apply_filters('the_content', $text);
-				$text = str_replace(']]>', ']]>', $text);
-				$excerpt_length = 35; // 35 words
-				$excerpt_more = apply_filters('excerpt_more', ' ' . '[...]');
-				$text = wp_trim_words( $text, $excerpt_length, $excerpt_more );
-			}
-			return apply_filters('the_excerpt', $text);
-		}
-	function wpdocs_custom_excerpt_length( $length ) {
-	    return 35; // 35 words
-	}
-	add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );
-
 	$condition_title = get_field('conditions_archive_headline', 'option');
 	$condition_text = get_field('conditions_archive_intro_text', 'option');
 
@@ -32,6 +14,7 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<h1 class="page-title"><?php echo ( $condition_title ? $condition_title : 'Condition' ); ?>: <?php echo single_cat_title( '', false ); ?></h1>
+				<?php echo (get_field('conditions_alternate', $term) ? '<p>Possible alternate names: '. get_field('conditions_alternate', $term) . '</p>' : '' ); ?>
 				<?php echo (get_field('conditions_content', $term) ? '<div class="module-body">'. get_field('conditions_content', $term) . '</div>' : '' ); ?>
 			</div>
 		</div>
