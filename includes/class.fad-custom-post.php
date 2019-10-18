@@ -364,7 +364,7 @@ function create_clinical_treatments_taxonomy() {
 	$args = array(
 		'label' 					 => __( 'Treatments' ),
 		'labels'                     => $labels,
-		'hierarchical'               => true,
+		'hierarchical'               => false,
 		'public'                     => true,
 		'show_ui'                    => true,
 		'meta_box_cb'				 => false,
