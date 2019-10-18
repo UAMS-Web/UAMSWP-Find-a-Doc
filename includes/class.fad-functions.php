@@ -726,7 +726,13 @@ function rlv_tax_excerpt_term_fields($content, $term) {
         $term->taxonomy = $term->post_type;
     }
     $post_id = $term->taxonomy . "_" . $term->term_id;
-    $content .= get_field('conditions_alternate', $post_id);
-    $content .= ' ' . get_field('conditions_content', $post_id);
+    if( get_field('condition_alternate', $post_id) || get_field('condition_content', $post_id) ) {
+        $content .= get_field('condition_alternate', $post_id);
+        $content .= ' ' . get_field('condition_content', $post_id);
+    } 
+    if ( get_field('treatment_procedure_alternate', $post_id) || get_field('treatment_procedure_content', $post_id) ) {
+        $content .= get_field('treatment_procedure_alternate', $post_id);
+        $content .= ' ' . get_field('treatment_procedure_content', $post_id);
+    }
     return $content;
 }
