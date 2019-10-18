@@ -970,31 +970,6 @@
             "placement": "top",
             "endpoint": 0
         },
-        "field_location_medical_specialties": {
-            "key": "field_location_medical_specialties",
-            "name": "location_medical_specialties",
-            "type": "taxonomy",
-            "label": "Medical Specialties Offered",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "specialty",
-            "field_type": "multi_select",
-            "allow_null": 0,
-            "add_term": 0,
-            "save_terms": 1,
-            "load_terms": 1,
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
-            },
-            "multiple": 0
-        },
         "field_location_conditions": {
             "key": "field_location_conditions",
             "name": "location_conditions",
@@ -1045,6 +1020,79 @@
             },
             "multiple": 0
         },
+        "field_location_services": {
+            "key": "field_location_services",
+            "name": "location_services",
+            "type": "relationship",
+            "label": "Area of Expertise / Services",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "services"
+            ],
+            "taxonomy": [],
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": true,
+                "acfe_bidirectional_related": "field_service_locations"
+            },
+            "acfe_validate": "",
+            "acfe_update": ""
+        },
+        "field_info_depreciated_open": {
+            "key": "field_info_depreciated_open",
+            "name": "",
+            "type": "accordion",
+            "label": "Deprecated",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        "field_location_medical_specialties": {
+            "key": "field_location_medical_specialties",
+            "name": "location_medical_specialties",
+            "type": "taxonomy",
+            "label": "Medical Specialties Offered",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "specialty",
+            "field_type": "multi_select",
+            "allow_null": 0,
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 0
+        },
         "field_location_medical_terms": {
             "key": "field_location_medical_terms",
             "name": "location_medical_terms",
@@ -1069,23 +1117,6 @@
                 "acfe_bidirectional_enabled": "0"
             },
             "multiple": 0
-        },
-        "field_info_depreciated_open": {
-            "key": "field_info_depreciated_open",
-            "name": "",
-            "type": "accordion",
-            "label": "Deprecated",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "open": 0,
-            "multi_expand": 0,
-            "endpoint": 0
         },
         "field_location_clinic": {
             "key": "field_location_clinic",
