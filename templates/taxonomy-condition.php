@@ -14,8 +14,8 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<h1 class="page-title"><?php echo ( $condition_title ? $condition_title : 'Condition' ); ?>: <?php echo single_cat_title( '', false ); ?></h1>
-				<?php echo (get_field('conditions_alternate', $term) ? '<p>Possible alternate names: '. get_field('conditions_alternate', $term) . '</p>' : '' ); ?>
-				<?php echo (get_field('conditions_content', $term) ? '<div class="module-body">'. get_field('conditions_content', $term) . '</div>' : '' ); ?>
+				<?php echo (get_field('condition_alternate', $term) ? '<p>Possible alternate names: '. get_field('condition_alternate', $term) . '</p>' : '' ); ?>
+				<?php echo (get_field('condition_content', $term) ? '<div class="module-body">'. get_field('condition_content', $term) . '</div>' : '' ); ?>
 			</div>
 		</div>
 	</section>
@@ -28,7 +28,7 @@
 		</div>
 	</section>
 	<?php 
-		$treatments = get_field('conditions_treatments', $term);
+		$treatments = get_field('condition_treatments', $term);
 		//echo count($treatments);
 
 		// print_r($treatments);
