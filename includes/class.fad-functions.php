@@ -619,6 +619,15 @@ function set_default_language($value, $post_id, $field) {
     $value = array($id);
   	return $value;
 }
+add_filter('acf/fields/relationship/query/key=field_physician_services', 'limit_to_post_parent', 10, 3);
+add_filter('acf/fields/relationship/query/key=field_location_services', 'limit_to_post_parent', 10, 3);
+function limit_to_post_parent( $args, $field, $post ) {
+
+    $args['post_parent'] = 0;
+    // $args['post_status'] = 'publish';
+
+    return $args;
+}
 
 // ACF Custom Tables
 /*
