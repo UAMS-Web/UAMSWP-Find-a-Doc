@@ -3,6 +3,23 @@
     "title": "Conditions",
     "fields": [
         {
+            "key": "field_conditions_alternate",
+            "label": "Alternate names",
+            "name": "conditions_alternate",
+            "type": "text",
+            "instructions": "Seperate terms with a semi-colon",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "acfe_validate": "",
+            "acfe_update": ""
+        },
+        {
             "key": "field_conditions_content",
             "label": "Content",
             "name": "conditions_content",
