@@ -717,14 +717,9 @@ add_filter('manage_edit-treatment_procedure_columns', function ( $columns )
 } );
 
 /* Relevanssi Functions */
-add_filter('relevanssi_tax_term_additional_content', 'rlv_condition_excerpt_term_fields', 10, 2);
-// function rlv_condition_term_fields($content, $term) {
-//     $post_id = $term->taxonomy . "_" . $term->term_id;
-//     $content .= get_field('conditions_alternate', $post_id);
-//     return $content;
-// }
-add_filter('relevanssi_pre_excerpt_content', 'rlv_condition_excerpt_term_fields', 10, 2);
-function rlv_condition_excerpt_term_fields($content, $term) {
+add_filter('relevanssi_tax_term_additional_content', 'rlv_tax_excerpt_term_fields', 10, 2);
+add_filter('relevanssi_pre_excerpt_content', 'rlv_tax_excerpt_term_fields', 10, 2);
+function rlv_tax_excerpt_term_fields($content, $term) {
     if (!isset($term->term_id)) return $content;    // not a taxonomy term, skip
     if (isset($term->term_id) && !isset($term->taxonomy)) {
         // this is excerpt-building, where the taxonomy is in $term->post_type
