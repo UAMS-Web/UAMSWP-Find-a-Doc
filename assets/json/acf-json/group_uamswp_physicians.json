@@ -100,7 +100,7 @@
             "name": "physician_pedigree",
             "type": "text",
             "label": "Pedigree",
-            "instructions": "",
+            "instructions": "Example: Jr.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -119,7 +119,7 @@
             "name": "physician_degree",
             "type": "taxonomy",
             "label": "Degree(s)",
-            "instructions": "",
+            "instructions": "Select Multiple (if necessary)",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -149,7 +149,7 @@
             "name": "physician_prefix",
             "type": "select",
             "label": "Prefix",
-            "instructions": "",
+            "instructions": "Example: Dr.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -582,6 +582,37 @@
             "ui_on_text": "",
             "ui_off_text": ""
         },
+        "field_physician_services": {
+            "key": "field_physician_services",
+            "name": "physician_services",
+            "type": "relationship",
+            "label": "Area of Expertise / Services",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "services"
+            ],
+            "taxonomy": [],
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": true,
+                "acfe_bidirectional_related": "field_service_physicians"
+            },
+            "acfe_validate": "",
+            "acfe_update": ""
+        },
         "field_medical_specialties": {
             "key": "field_medical_specialties",
             "name": "physician_medical_specialties",
@@ -589,7 +620,15 @@
             "label": "Medical Specialties",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_clinical_details_tab",
+                        "operator": "==",
+                        "value": "false"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",

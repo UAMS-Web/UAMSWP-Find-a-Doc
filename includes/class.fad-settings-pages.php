@@ -32,7 +32,7 @@ if( function_exists('acf_add_options_page') ) {
 if( function_exists('acf_add_local_field_group') ):
 
     acf_add_local_field_group(array(
-        'key' => 'group_uams_theme_settings',
+        'key' => 'group_uams_fad_settings',
         'title' => 'Theme Settings',
         'fields' => array(
             array(

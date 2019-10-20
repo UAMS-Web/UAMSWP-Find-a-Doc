@@ -1,6 +1,6 @@
 <?php get_header();
 
-  add_filter( 'facetwp_template_use_archive', '__return_true' );
+    add_filter( 'facetwp_template_use_archive', '__return_true' );
 
  ?>
 
@@ -14,14 +14,17 @@
                 <?php //<div class="card-list"> ?>
                     <?php echo facetwp_display( 'template', 'locations' ); ?>
                     <?php //get_template_part( 'templates/physician-loop' ); ?>
-                    <?php //echo facetwp_display( 'pager' ); ?>
+                    <?php // echo facetwp_display( 'pager' ); ?>
                     <?php //echo do_shortcode('[facetwp load_more="true" label="Load more"]'); ?>
                 <?php //</div> ?>
+            </div>
+            <div class="row list-pagination">
+                <div class="col">
+                    <?php echo facetwp_display( 'pager' ); ?>
+                </div>
             </div>
         </div>
     </div>
 </main>
-
-
 
 <?php get_footer(); ?>
