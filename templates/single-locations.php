@@ -186,8 +186,8 @@ while ( have_posts() ) : the_post(); ?>
 				<h2>After Hours</h2>
 				<?php echo get_field('location_after_hours'); ?>
 				<?php } ?>
+				<?php endif; ?>
 			</div>
-			<?php endif; ?>
 			<div class="col-12 col-md px-0 px-md-8 order-1 image">
 				<picture>
 					<?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
