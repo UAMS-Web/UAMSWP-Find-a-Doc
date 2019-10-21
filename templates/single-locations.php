@@ -25,7 +25,7 @@ while ( have_posts() ) : the_post(); ?>
 	<section class="container-fluid p-0 p-md-10 location-info bg-white">
 		<div class="row mx-0 mx-md-n8">
 			<div class="col-12 col-md p-4 p-xs-8 p-sm-10 px-md-8 py-md-0 order-2 text">
-			<h1 class="page-title"><?php the_title(); ?></h1>
+				<h1 class="page-title"><?php the_title(); ?></h1>
 				<h2 class="sr-only">Address</h2>
 				<p><?php echo get_field('location_address_1', get_the_ID() ); ?><br/>
 				<?php echo ( get_field('location_address_2' ) ? get_field('location_address_2') . '<br/>' : ''); ?>
