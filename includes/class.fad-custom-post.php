@@ -230,12 +230,18 @@ if ( ! function_exists('expertise_cpt') ) {
 			'publish_posts'         => 'publish_expertises',
 			'read_private_posts'    => 'read_private_expertises',
 		);
+		$rewrite = array(
+			'slug'                  => 'area-of-expertise',
+			'with_front'            => true,
+			'pages'                 => true,
+			'feeds'                 => true,
+		);
 		$args = array(
 			'label'                 => 'Areas of Expertise',
 			'description'           => 'UAMS Areas of Expertise', 
 			'labels'                => $labels,
 			'supports'              => array( 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes', ),
-			'taxonomies'            => array( 'treatment_procedure', 'medical_terms', 'conditions' ),
+			'taxonomies'            => array( 'treatment_procedure', 'conditions' ),
 			'hierarchical'          => true,
 			'capability_type' 		=> 'page',
 			'public'                => true,
@@ -245,7 +251,6 @@ if ( ! function_exists('expertise_cpt') ) {
 			'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/services-icon.png',
 			'show_in_admin_bar'     => true,
 			'show_in_nav_menus'     => true,
-			'slug'					=> 'area-of-expertise',
 			'can_export'            => true,
 			'has_archive'           => true,
 			'exclude_from_search'   => false,
@@ -254,6 +259,7 @@ if ( ! function_exists('expertise_cpt') ) {
 			'show_in_rest'          => true,
 			'rest_base'             => 'expertise',
 			'rest_controller_class' => 'WP_REST_Posts_Controller',
+			'rewrite'               => $rewrite,
 		);
 		register_post_type( 'expertise', $args );
 
