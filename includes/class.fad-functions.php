@@ -49,26 +49,26 @@ function asp_custom_link_meta_results( $results ) {
 
 // add_filter( 'asp_result_image_after_prostproc', 'asp_get_post_type_image', 1, 2 );
 
-function asp_get_post_type_image( $image, $id ) {
+// function asp_get_post_type_image( $image, $id ) {
 
-   if ( empty($image) ) {
-       $type = get_post_type( $id );
+//    if ( empty($image) ) {
+//        $type = get_post_type( $id );
 
-       switch ($type) {
-           case "physicians":
-               $image = "/wp-content/uploads/2018/12/image01299.png";
-               break;
-           case "locations":
-               $image = "/wp-content/uploads/2019/01/pin.png";
-               break;
-           default:
-               $image = get_stylesheet_directory_uri() ."/assets/admin-icons/services-icon.png";
-               break;
-       }
-   }
+//        switch ($type) {
+//            case "physicians":
+//                $image = "/wp-content/uploads/2018/12/image01299.png";
+//                break;
+//            case "locations":
+//                $image = "/wp-content/uploads/2019/01/pin.png";
+//                break;
+//            default:
+//                $image = get_stylesheet_directory_uri() ."/assets/admin-icons/services-icon.png";
+//                break;
+//        }
+//    }
 
-    return $image;
-}
+//     return $image;
+// }
 
 
 // pubmed finder
@@ -619,8 +619,8 @@ function set_default_language($value, $post_id, $field) {
     $value = array($id);
   	return $value;
 }
-add_filter('acf/fields/relationship/query/key=field_physician_services', 'limit_to_post_parent', 10, 3);
-add_filter('acf/fields/relationship/query/key=field_location_services', 'limit_to_post_parent', 10, 3);
+add_filter('acf/fields/relationship/query/key=field_physician_expertise', 'limit_to_post_parent', 10, 3);
+add_filter('acf/fields/relationship/query/key=field_location_expertise', 'limit_to_post_parent', 10, 3);
 function limit_to_post_parent( $args, $field, $post ) {
 
     $args['post_parent'] = 0;

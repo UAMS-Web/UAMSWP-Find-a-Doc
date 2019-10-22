@@ -612,11 +612,11 @@
             "ui_on_text": "",
             "ui_off_text": ""
         },
-        "field_physician_services": {
-            "key": "field_physician_services",
-            "name": "physician_services",
+        "field_physician_expertise": {
+            "key": "field_physician_expertise",
+            "name": "physician_expertise",
             "type": "relationship",
-            "label": "Area of Expertise / Services",
+            "label": "Areas of Expertise",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -626,7 +626,7 @@
                 "id": ""
             },
             "post_type": [
-                "services"
+                "expertise"
             ],
             "taxonomy": [],
             "filters": [
@@ -638,7 +638,7 @@
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": true,
-                "acfe_bidirectional_related": "field_service_physicians"
+                "acfe_bidirectional_related": "field_expertise_physicians"
             },
             "acfe_validate": "",
             "acfe_update": ""

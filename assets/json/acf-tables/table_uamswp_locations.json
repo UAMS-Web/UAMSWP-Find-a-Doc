@@ -29,20 +29,6 @@
             "format": "%d"
         },
         {
-            "name": "location_abbreviation",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_abbreviation"
-            }
-        },
-        {
-            "name": "location_description",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_description"
-            }
-        },
-        {
             "name": "location_address_1",
             "map": {
                 "type": "acf_field_name",
@@ -162,6 +148,20 @@
             }
         },
         {
+            "name": "location_abbreviation",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_abbreviation"
+            }
+        },
+        {
+            "name": "location_description",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_description"
+            }
+        },
+        {
             "name": "location_email",
             "map": {
                 "type": "acf_field_name",
@@ -199,20 +199,6 @@
             }
         },
         {
-            "name": "location_medical_specialties",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_medical_specialties"
-            }
-        },
-        {
-            "name": "location_medical_terms",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_medical_terms"
-            }
-        },
-        {
             "name": "location_conditions",
             "map": {
                 "type": "acf_field_name",
@@ -224,6 +210,27 @@
             "map": {
                 "type": "acf_field_name",
                 "identifier": "location_treatments"
+            }
+        },
+        {
+            "name": "location_expertise",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_expertise"
+            }
+        },
+        {
+            "name": "location_medical_specialties",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_medical_specialties"
+            }
+        },
+        {
+            "name": "location_medical_terms",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_medical_terms"
             }
         },
         {

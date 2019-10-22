@@ -1065,11 +1065,11 @@
             },
             "multiple": 0
         },
-        "field_location_services": {
-            "key": "field_location_services",
-            "name": "location_services",
+        "field_location_expertise": {
+            "key": "field_location_expertise",
+            "name": "location_expertise",
             "type": "relationship",
-            "label": "Area of Expertise / Services",
+            "label": "Areas of Expertise",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -1079,7 +1079,7 @@
                 "id": ""
             },
             "post_type": [
-                "services"
+                "expertise"
             ],
             "taxonomy": [],
             "filters": [
@@ -1091,7 +1091,7 @@
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": true,
-                "acfe_bidirectional_related": "field_service_locations"
+                "acfe_bidirectional_related": "field_expertise_locations"
             },
             "acfe_validate": "",
             "acfe_update": ""
