@@ -388,7 +388,7 @@ function create_clinical_treatments_taxonomy() {
   		'rest_base'          		 => 'treatment_procedure',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
 	);
-	register_taxonomy( 'treatment_procedure', array( 'physicians', 'locations', 'expertise' ), $args );
+	register_taxonomy( 'treatment_procedure', array( 'physicians' ), $args );
 
 }
 
