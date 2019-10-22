@@ -103,7 +103,7 @@ function locations() {
 		'label'                 => 'Location',
 		'labels'                => $labels,
 		'supports'              => array( 'title', 'author', 'thumbnail', ),
-		'taxonomies'            => array( 'specialties', 'medical_terms', 'conditions' ),
+		'taxonomies'            => array( 'treatment_procedure', 'conditions' ),
 		'hierarchical'          => false,
 		'public'                => true,
 		'show_ui'               => true,
@@ -329,69 +329,6 @@ function create_clinical_conditions_taxonomy() {
 
 }
 
-// //hook into the init action and call create_book_taxonomies when it fires
-// add_action( 'init', 'create_clinical_diseases_conditions_taxonomy', 0 );
-
-// //create a custom taxonomy name it topics for your posts
-
-// function create_clinical_diseases_conditions_taxonomy() {
-
-// // Add new taxonomy, make it hierarchical like categories
-// // first do the translations part for GUI
-
-//   $labels = array(
-// 		'name'                           => 'Diseases & Conditions',
-// 		'singular_name'                  => 'Disease or Condition',
-// 		'search_items'                   => 'Search Diseases & Conditions',
-// 		'all_items'                      => 'All Diseases & Conditions',
-// 		'edit_item'                      => 'Edit Disease or Condition',
-// 		'update_item'                    => 'Update Disease or Condition',
-// 		'add_new_item'                   => 'Add New Disease or Condition',
-// 		'new_item_name'                  => 'New Disease or Condition',
-// 		'menu_name'                      => 'Diseases & Conditions',
-// 		'view_item'                      => 'View Disease or Condition',
-// 		'popular_items'                  => 'Popular Disease or Condition',
-// 		'separate_items_with_commas'     => 'Separate diseases & conditions with commas',
-// 		'add_or_remove_items'            => 'Add or remove diseases & conditions',
-// 		'choose_from_most_used'          => 'Choose from the most used diseases & conditions',
-// 		'not_found'                      => 'No diseases or conditions found',
-// 		'parent_item'                	 => 'Parent Disease or Condition',
-// 		'parent_item_colon'          	 => 'Parent Disease or Condition:',
-// 		'no_terms'                   	 => 'No Diseases or Conditions',
-// 		'items_list'                 	 => 'Disease & Condition list',
-// 		'items_list_navigation'      	 => 'Disease & Condition list navigation',
-// 	);
-//   	$rewrite = array(
-// 		'slug'                       => 'disease-condition',
-// 		'with_front'                 => true,
-// 		'hierarchical'               => true,
-// 	);
-// 	$capabilities = array(
-// 		'manage_terms'               => 'manage_options',
-// 		'edit_terms'                 => 'manage_options',
-// 		'delete_terms'               => 'manage_options',
-// 		'assign_terms'               => 'edit_physicians',
-// 	);
-// 	$args = array(
-// 		'label' 					 => __( 'Diseases & Conditions' ),
-// 		'labels'                     => $labels,
-// 		'hierarchical'               => true,
-// 		'public'                     => true,
-// 		'show_ui'                    => true,
-// 		'meta_box_cb'				 => false,
-// 		'show_admin_column'          => false,
-// 		'show_in_nav_menus'          => false,
-// 		'show_tagcloud'              => false,
-// 		'rewrite'                    => $rewrite,
-// 		'capabilities'               => $capabilities,
-// 		'show_in_rest'       		 => true,
-//   		'rest_base'          		 => 'disease_condition',
-//   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
-// 	);
-// 	register_taxonomy( 'disease-condition', array( 'physicians' ), $args );
-
-// }
-
 //hook into the init action and call create_book_taxonomies when it fires
 add_action( 'init', 'create_clinical_treatments_taxonomy', 0 );
 
@@ -451,7 +388,7 @@ function create_clinical_treatments_taxonomy() {
   		'rest_base'          		 => 'treatment_procedure',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
 	);
-	register_taxonomy( 'treatment_procedure', array( 'physicians' ), $args );
+	register_taxonomy( 'treatment_procedure', array( 'physicians', 'locations', 'expertise' ), $args );
 
 }
 
