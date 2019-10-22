@@ -19,6 +19,7 @@ add_action( 'genesis_after_entry', 'uamswp_expertise_conditions', 8 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_treatments', 10 );
 add_action( 'genesis_after_entry', 'uamswp_physicians_facet', 12 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 14 );
+add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 16 );
 function uamswp_physicians_facet() {
     // if(wp_get_post_parent_id(get_the_ID()) == 0) {
 ?>
@@ -44,7 +45,6 @@ function uamswp_expertise_conditions() {
     // load all 'conditions' terms for the post
     $conditions = get_field('expertise_conditions');
 
-    // we will use the first term to load ACF data from
     if( $conditions ):
         include( UAMS_FAD_PATH . '/templates/loops/conditions-loop.php' );
     endif;
@@ -52,7 +52,6 @@ function uamswp_expertise_conditions() {
 function uamswp_expertise_treatments() {
     $treatments = get_field('expertise_treatments');
 
-    // we will use the first term to load ACF data from
     if( $treatments ): 
         // print_r($treatments); 
         include( UAMS_FAD_PATH . '/templates/loops/treatments-loop.php' );
@@ -76,5 +75,25 @@ function uamswp_expertise_locations() {
             </div>
         </section>
     <?php endif;
+}
+function uamswp_expertise_associated() {
+    $expertises =  get_field('expertise_associated');
+	if( $expertises ): ?>
+		<section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="expertise">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="module-title">Associated Areas of Expertise</h2>
+                    <div class="card-list-container">
+                        <div class="card-list">
+                        <?php foreach( $expertises as $expertise ) {
+                            $id = $expertise; 
+                            include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+                        } ?>
+                    </div>
+                </div>
+            </div>
+        </section>
+	<?php 
+    endif;
 }
 genesis();
