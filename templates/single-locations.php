@@ -190,7 +190,7 @@ while ( have_posts() ) : the_post(); ?>
 			<?php endif; ?>
 			<div class="col-12 col-md px-0 px-md-8 order-1 image">
 				<picture>
-					<?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
+					<?php if ( function_exists( 'fly_add_image_size' ) && !empty(get_post_thumbnail_id()) ) { ?>
 						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 1260, 945, 'center', 'center'); ?>" media="(min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1200px) and (min-resolution: 192dpi)">
                         <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 630, 473, 'center', 'center'); ?>"  media="(min-width: 1500px)">
                         <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 800, 600, 'center', 'center'); ?>" media="(min-width: 992px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 992px) and (min-resolution: 192dpi)">
