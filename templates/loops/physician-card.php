@@ -40,11 +40,11 @@
 				<h3 class="card-title">
 					<span class="name"><?php echo $full_name; ?></span>
 					<?php 
-					if(! empty( get_field('physician_clinical_title', $id) ) || ! empty( get_field('physician_department', $id) ) ){
+					if(! empty( get_field('physician_title', $id) ) || ! empty( get_field('physician_department', $id) ) ){
 						echo '<span class="subtitle">';
-						echo (get_field('physician_clinical_title', $id) ? get_field('physician_clinical_title', $id)->name : '');
-						echo ((! empty( get_field('physician_clinical_title', $id) )) && (! empty( get_field('physician_department', $id) ) ) ? ', ' : '' );
-						echo (get_field('physician_department', $id) ? get_field('physician_department', $id)->name : '');
+						echo (get_field('physician_title', $id) ? get_term( get_field('physician_title', $id), 'clinical_title' )->name : '');
+						echo ((! empty( get_field('physician_title', $id) )) && (! empty( get_field('physician_department', $id) ) ) ? ',<br/>' : '' );
+						echo (get_field('physician_department', $id) ? get_term( get_field('physician_department', $id), 'department' )->name : '');
 						echo '</span>';
 					}
 					?>

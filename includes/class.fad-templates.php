@@ -18,12 +18,12 @@ function uamswp_force_template( $template )
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-locations.php';
     }
     
-    if( is_post_type_archive( 'services' ) ) {
-        $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/archive-services.php';
+    if( is_post_type_archive( 'expertise' ) ) {
+        $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/archive-expertise.php';
 	}
 	
-	if( is_singular( 'services' ) ) {
-        $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-services.php';
+	if( is_singular( 'expertise' ) ) {
+        $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-expertise.php';
     }
     
     if( is_tax( 'condition' ) ) {

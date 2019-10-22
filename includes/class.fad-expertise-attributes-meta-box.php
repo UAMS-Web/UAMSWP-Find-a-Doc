@@ -1,11 +1,11 @@
 <?php
 
-class UAMS_Service_Attributes_Meta_Box
+class UAMS_Expertise_Attributes_Meta_Box
 {
 
   const ID = 'pageparentdiv';
-  const TITLE = 'Service Attributes';
-  const POSTTYPE = 'services';
+  const TITLE = 'Area of Expertise Attributes';
+  const POSTTYPE = 'expertise';
   const POSITION = 'side';
   const PRIORITY = 'core';
 
@@ -20,11 +20,11 @@ class UAMS_Service_Attributes_Meta_Box
 
   function replace_meta_box()
   {
-      remove_meta_box( 'pageparentdiv', 'services', 'side');
-	    add_meta_box( 'uamsserviceparentdiv', 'Service Attributes', array( $this, 'service_attributes_meta_box' ), 'services', 'side', 'core' );
+      remove_meta_box( 'pageparentdiv', 'expertise', 'side');
+	    add_meta_box( 'uamsexpertiseparentdiv', 'Area of Expertise Attributes', array( $this, 'expertise_attributes_meta_box' ), 'expertise', 'side', 'core' );
   }
 
-  function service_attributes_meta_box( $post )
+  function expertise_attributes_meta_box( $post )
   {
 
     $post_type_object = get_post_type_object( $post->post_type );
@@ -89,15 +89,15 @@ class UAMS_Service_Attributes_Meta_Box
     <?php
   }
 
-  function custom_style() {
-      wp_enqueue_style( 'uams-admin-template', get_template_directory_uri() . '/assets/admin/css/uams.admin.template.css' );
-  }
+  // function custom_style() {
+  //     wp_enqueue_style( 'uamswp-fad-admin', UAMS_FAD_PATH . '/admin/css/fad-admin.css' );
+  // }
 
   function save_postdata( $post_ID = 0 ){
     $post_ID = (int) $post_ID;
     $post_type = get_post_type( $post_ID );
     $post_status = get_post_status( $post_ID );
-    if (!isset($post_type) || 'services' != $post_type ) {
+    if (!isset($post_type) || 'expertise' != $post_type ) {
         return $post_ID;
     }
 
@@ -130,4 +130,4 @@ class UAMS_Service_Attributes_Meta_Box
 
 }
 
-new UAMS_Service_Attributes_Meta_Box;
+new UAMS_Expertise_Attributes_Meta_Box;

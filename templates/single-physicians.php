@@ -211,56 +211,36 @@ while ( have_posts() ) : the_post(); ?>
         <?php // load all 'conditions' terms for the post
                 $conditions = get_field('physician_conditions');
 
-                // we will use the first term to load ACF data from
-            if( $conditions ): ?>
-        <section class="container-fluid p-8 p-sm-10 conditions-treatments bg-auto">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h2 class="module-title">Conditions Treated</h2>
-                    <p class="note">UAMS doctors treat a broad range of conditions some of which may not be listed below.</p>
-                    <div class="list-container list-container-rows">
-                        <ul class="list">
-                        <?php foreach( $conditions as $condition ): ?>
-                            <li>
-                                <a href="<?php echo get_term_link( $condition ); ?>">
-                                    <?php $condition_name = get_term( $condition, 'condition');
-                                        echo $condition_name->name;
-                                    ?>
-                                </a>
-                            </li>
-                        <?php endforeach; ?>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <?php endif; ?>
-        <?php // load all 'specialties' terms for the post
-            $specialties = get_field('medical_specialties');
+            // we will use the first term to load ACF data from
+            if( $conditions ):
+                include( UAMS_FAD_PATH . '/templates/loops/conditions-loop.php' );
+            endif; 
+             // load all 'treatments' terms for the post
+            $treatments = get_field('physician_treatments');
 
             // we will use the first term to load ACF data from
-        if( $specialties ): ?>
-        <section class="container-fluid p-8 p-sm-10 conditions-treatments bg-auto">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h2 class="module-title">Medical Specialties</h2>
-                    <div class="list-container list-container-rows">
-                        <ul class="list">
-                        <?php foreach( $specialties as $specialty ): ?>
-                            <li>
-                                <a href="<?php echo get_term_link( $specialty ); ?>">
-                                <?php $specialty_name = get_term( $specialty, 'specialty');
-                                    echo $specialty_name->name;
-                                ?>
-                                </a>
-                            </li>
-                        <?php endforeach; ?>
-                        </ul>
+        if( $treatments ):
+            include( UAMS_FAD_PATH . '/templates/loops/treatments-loop.php' );
+        endif;
+        $expertises =  get_field('physician_expertise');
+        if( $expertises ): ?>
+            <section class="container-fluid p-8 p-sm-10 expertise-list bg-auto" id="expertise">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="module-title">Areas of Expertise</h2>
+                        <div class="card-list-container">
+                            <div class="card-list">
+                            <?php foreach( $expertises as $expertise ) {
+                                $id = $expertise; 
+                                include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+                            } ?>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <?php endif; ?>
+            </section>
+        <?php 
+        endif;
+        ?>
         <?php if(get_field('physician_academic_appointment')||get_field('physician_education')||get_field('physician_boards')||get_field('physician_publications')||get_field('physician_pubmed_author_id')||get_field('physician_research_profiles_link')): ?>
         <section class="container-fluid p-8 p-sm-10 bg-auto">
             <div class="row">
