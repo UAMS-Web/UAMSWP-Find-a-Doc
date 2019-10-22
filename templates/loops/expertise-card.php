@@ -1,6 +1,6 @@
 <?php 
     /**
-     *  Template Name: Services Loop - Card layout
+     *  Template Name: Areas of Expertise Loop - Card layout
      *  Designed for UAMS Find-a-Doc
      * 
      *  Must be used inside a loop
