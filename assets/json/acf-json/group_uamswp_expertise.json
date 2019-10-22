@@ -7,11 +7,16 @@
                 "param": "post_type",
                 "operator": "==",
                 "value": "expertise"
+            },
+            {
+                "param": "page_parent",
+                "operator": "==",
+                "value": "0"
             }
         ]
     ],
     "menu_order": 0,
-    "position": "side",
+    "position": "normal",
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
@@ -168,6 +173,31 @@
             },
             "acfe_validate": "",
             "acfe_update": ""
+        },
+        "field_expertise_associated": {
+            "key": "field_expertise_associated",
+            "name": "expertise_associated",
+            "type": "relationship",
+            "label": "Associated Areas of Expertise",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "expertise"
+            ],
+            "taxonomy": [],
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id"
         }
     },
     "modified": false

@@ -621,10 +621,12 @@ function set_default_language($value, $post_id, $field) {
 }
 add_filter('acf/fields/relationship/query/key=field_physician_expertise', 'limit_to_post_parent', 10, 3);
 add_filter('acf/fields/relationship/query/key=field_location_expertise', 'limit_to_post_parent', 10, 3);
+add_filter('acf/fields/relationship/query/key=field_expertise_associated', 'limit_to_post_parent', 10, 3);
 function limit_to_post_parent( $args, $field, $post ) {
 
     $args['post_parent'] = 0;
     // $args['post_status'] = 'publish';
+    $args['post__not_in'] = array( $post );
 
     return $args;
 }

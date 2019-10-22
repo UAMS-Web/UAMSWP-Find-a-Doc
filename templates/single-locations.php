@@ -370,30 +370,36 @@ while ( have_posts() ) : the_post(); ?>
 		</div>
 	</section>
 	<?php endif; ?>
-	<?php $specialties = get_field('medical_specialties');
-		if( $specialties ): ?>
-	<section class="container-fluid p-8 p-sm-10 bg-auto">
-		<div class="row">
-			<div class="col-xs-12">
-				<?php $specialtiescols = partition( $specialties, 3 ); ?>
-					<h2 class="module-title">Specialties at <?php the_title(); ?></h2>
-					<div class="module-body">
-						<?php for ( $i = 0 ; $i < 3 ; $i++ ) { ?>
-			    		<div class="col-md-4">
-						<?php
-						 	foreach( $specialtiescols[$i] as $specialty ):
-							 $specialty_name = get_term( $specialty, 'specialty');
-								echo $specialty_name->name . '<br/>';
-							 endforeach; 
-						?>
-			    		</div>
-			    		<?php } // endfor?>
-			    	</div>
-			    
-			</div>
-		</div>
-	</section>
-	<?php endif; ?>
+	<?php // load all 'conditions' terms for the post
+	$conditions = get_field('expertise_conditions');
+
+	if( $conditions ):
+        include( UAMS_FAD_PATH . '/templates/loops/conditions-loop.php' );
+    endif;
+	$treatments = get_field('location_treatments');
+	if( $treatments ): 
+			// print_r($treatments); 
+		include( UAMS_FAD_PATH . '/templates/loops/treatments-loop.php' );
+	endif; 
+	$expertises =  get_field('location_expertise');
+	if( $expertises ): ?>
+		<section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="locations">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="module-title">Areas of Expertise</h2>
+                    <div class="card-list-container">
+                        <div class="card-list">
+                        <?php foreach( $expertises as $expertise ){
+                            $id = $expertise; 
+                            include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+                        } ?>
+                    </div>
+                </div>
+            </div>
+        </section>
+	<?php 
+    endif;
+	?>
 	<section class="container-fluid p-8 p-sm-10 news-list bg-auto">
 		<div class="row">
 			<div class="col-12">
