@@ -348,7 +348,7 @@ while ( have_posts() ) : the_post(); ?>
                         <?php $l = 1; ?>
                         <?php foreach( $locations as $location ): ?>
                             <div class="card">
-                                <?php echo get_the_post_thumbnail( $location , 'large',  array( 'itemprop' => 'image' ) ); ?>
+                                <?php echo get_the_post_thumbnail( $location , 'large',  array( 'itemprop' => 'image', 'class' => 'card-img-top' ) ); ?>
                                 <!-- <img srcset="https://picsum.photos/434/244?image=13 1x, https://picsum.photos/868/488?image=13 2x" src="https://picsum.photos/434/244?image=13" class="card-img-top" alt="<?php echo get_the_title( $location ); ?>"> -->
                                 <div class="card-body">
                                         <h3 class="card-title">
