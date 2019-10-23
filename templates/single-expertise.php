@@ -20,7 +20,6 @@ add_action( 'genesis_after_entry', 'uamswp_expertise_treatments', 10 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 12 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 14 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 16 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_alternate', 18 );
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 function uamswp_expertise_physicians() {
     // if(wp_get_post_parent_id(get_the_ID()) == 0) {
@@ -100,17 +99,18 @@ function uamswp_expertise_associated() {
 }
 function uamswp_expertise_header_metadata() { 
     $keywords = get_field('expertise_alternate_names');
-    $i = 1;
-    $keyword_text = '';
-    foreach( $keywords as $keyword ) { 
-        if ( 1 < $i ) {
-            $keyword_text .= ', ';
+    if( $keywords ): 
+        $i = 1;
+        $keyword_text = '';
+        foreach( $keywords as $keyword ) { 
+            if ( 1 < $i ) {
+                $keyword_text .= ', ';
+            }
+            $keyword_text .= $keyword['text'];
+            $i++;
         }
-        $keyword_text .= $keyword['text'];
-        $i++;
-    }
-    
-    echo '<meta name="keywords" content="'. $keyword_text .'" />';
-
+        
+        echo '<meta name="keywords" content="'. $keyword_text .'" />';
+    endif;
 }
 genesis();
