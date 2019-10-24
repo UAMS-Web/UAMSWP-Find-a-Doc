@@ -272,13 +272,13 @@ while ( have_posts() ) : the_post(); ?>
                         <?php
                             // $academic_appointments = get_field('physician_academic_appointment');
                             if( have_rows('physician_academic_appointment') ): ?>
-                        <h3>Academic Appointments</h3>
-                        <ul>
-                        <?php while( have_rows('physician_academic_appointment') ): the_row(); ?>
-                        <?php $department = get_term( get_sub_field('department'), 'academic_department' ); ?>
-                            <li><?php the_sub_field('academic_title'); ?>, <?php echo $department->name; ?></li>
-                        <?php endwhile; ?>
-                        </ul>
+                                <h3>Academic Appointments</h3>
+                                <ul>
+                                <?php while( have_rows('physician_academic_appointment') ): the_row(); ?>
+                                <?php $department = get_term( get_sub_field('department'), 'academic_department' ); ?>
+                                    <li><?php the_sub_field('academic_title'); ?>, <?php echo $department->name; ?></li>
+                                <?php endwhile; ?>
+                                </ul>
                         <?php endif; ?>
                         <?php
                             if( have_rows('physician_education') ): ?>
