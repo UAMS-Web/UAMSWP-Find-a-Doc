@@ -199,10 +199,10 @@ while ( have_posts() ) : the_post(); ?>
 							(min-width: 1200px) and (min-resolution: 192dpi)">
 						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 630, 473, 'center', 'center'); ?>"
 							media="(min-width: 1500px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 800, 600, 'center', 'center'); ?>"
+						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 784, 588, 'center', 'center'); ?>"
 							media="(min-width: 992px) and (-webkit-min-device-pixel-ratio: 2), 
 							(min-width: 992px) and (min-resolution: 192dpi)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 400, 300, 'center', 'center'); ?>"
+						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 392, 294, 'center', 'center'); ?>"
 							media="(min-width: 992px)">
 						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 1984, 1116, 'center', 'center'); ?>"
 							media="(min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), 
