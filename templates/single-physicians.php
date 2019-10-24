@@ -283,15 +283,15 @@ while ( have_posts() ) : the_post(); ?>
                         <?php endif; ?>
                         <?php
                             if( have_rows('physician_education') ): ?>
-                        <h3>Education</h3>
-                        <ul>
-                        <?php while( have_rows('physician_education') ): the_row();
-                            $school_name = get_term( get_sub_field('school'), 'schools');
-                            $education_type = get_term( get_sub_field('education_type'), 'educationtype');
-                        ?>
-                            <li><?php echo $education_type->name; ?> - <?php echo (get_sub_field('description') ? '' . get_sub_field('description') .'<br/>' : ''); ?><?php echo $school_name->name; ?></li>
-                        <?php endwhile; ?>
-                        </ul>
+                                <h3>Education</h3>
+                                <ul>
+                                <?php while( have_rows('physician_education') ): the_row();
+                                    $school_name = get_term( get_sub_field('school'), 'schools');
+                                    $education_type = get_term( get_sub_field('education_type'), 'educationtype');
+                                ?>
+                                    <li><?php echo $education_type->name; ?> - <?php echo (get_sub_field('description') ? '' . get_sub_field('description') .'<br/>' : ''); ?><?php echo $school_name->name; ?></li>
+                                <?php endwhile; ?>
+                                </ul>
                         <?php endif;
                             $boards = get_field( 'physician_boards' );
                             if( ! empty( $boards ) ): ?>
