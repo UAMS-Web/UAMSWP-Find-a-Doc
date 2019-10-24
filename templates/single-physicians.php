@@ -269,6 +269,7 @@ while ( have_posts() ) : the_post(); ?>
                 <div class="col-xs-12">
                     <h2 class="module-title">Academic Background</h2>
                     <div class="module-body">
+                        <?php echo get_field('physician_academic_bio'); ?>
                         <?php
                             // $academic_appointments = get_field('physician_academic_appointment');
                             if( have_rows('physician_academic_appointment') ): ?>
