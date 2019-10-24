@@ -284,14 +284,15 @@ while ( have_posts() ) : the_post(); ?>
                         <?php
                             if( have_rows('physician_education') ): ?>
                                 <h3>Education</h3>
-                                <ul>
+                                <dl>
                                 <?php while( have_rows('physician_education') ): the_row();
                                     $school_name = get_term( get_sub_field('school'), 'schools');
                                     $education_type = get_term( get_sub_field('education_type'), 'educationtype');
                                 ?>
-                                    <li><?php echo $education_type->name; ?> - <?php echo (get_sub_field('description') ? '' . get_sub_field('description') .'<br/>' : ''); ?><?php echo $school_name->name; ?></li>
+                                    <dt><?php echo $education_type->name; ?></dt>
+                                    <dd><?php echo $school_name->name; ?><?php echo (get_sub_field('description') ? '<br /><span class="subtitle">' . get_sub_field('description') .'</span>' : ''); ?></dd>
                                 <?php endwhile; ?>
-                                </ul>
+                                </dl>
                         <?php endif;
                             $boards = get_field( 'physician_boards' );
                             if( ! empty( $boards ) ): ?>
