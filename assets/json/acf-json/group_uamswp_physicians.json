@@ -306,7 +306,7 @@
             },
             "taxonomy": "clinical_title",
             "field_type": "select",
-            "allow_null": 0,
+            "allow_null": 1,
             "add_term": 0,
             "save_terms": 0,
             "load_terms": 0,
@@ -339,7 +339,7 @@
                 "acfe_bidirectional_enabled": "0"
             },
             "multiple": 0,
-            "allow_null": 0
+            "allow_null": 1
         },
         "field_physician_clinical_bio": {
             "key": "field_physician_clinical_bio",
