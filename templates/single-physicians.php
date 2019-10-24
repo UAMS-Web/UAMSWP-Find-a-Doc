@@ -57,7 +57,7 @@ while ( have_posts() ) : the_post(); ?>
                     </h1>
                     <h2 class="sr-only">Overview</h2>
                     <dl>
-                    <?php 
+                    <?php // Display medical department
                     $med_dept = get_field('physician_department');
                     if ($med_dept && !empty($med_dept)) { ?>
                         <dt>Medical Department</dt>
