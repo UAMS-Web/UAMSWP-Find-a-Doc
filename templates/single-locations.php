@@ -323,19 +323,26 @@ while ( have_posts() ) : the_post(); ?>
 	<section class="container-fluid p-8 p-sm-10 bg-auto">
 		<div class="row">
 			<div class="col-xs-12">
-				<?php if ( get_field('location_appointment') ) { ?>
-				<h2 class="module-title">Appointments</h2>
-				<div class="module-body">
-					<?php echo get_field('location_appointment'); ?>
-				</div>
-				<?php } 
-				if ( get_field('location_appointment_bring') ) { 
-				?>
-				<h3 class="module-title">What to Bring to Your Appointment</h3>
-				<div class="module-body">
-					<?php echo get_field('location_appointment_bring'); ?>
-				</div>
-				<?php } ?>
+				<?php if ( get_field('location_appointment') && get_field('location_appointment_bring') ) { ?>
+					<h2 class="module-title">Appointments</h2>
+					<div class="module-body">
+						<?php echo get_field('location_appointment'); ?>
+						<h3>What to Bring to Your Appointment</h3>
+						<?php echo get_field('location_appointment_bring'); ?>
+					</div>
+
+				<?php } elseif ( get_field('location_appointment') ) { ?>
+					<h2 class="module-title">Appointments</h2>
+					<div class="module-body">
+						<?php echo get_field('location_appointment'); ?>
+					</div>
+
+				<?php } elseif ( get_field('location_appointment_bring') ) { ?>
+					<h2 class="module-title">What to Bring to Your Appointment</h2>
+					<div class="module-body">
+						<?php echo get_field('location_appointment_bring'); ?>
+					</div>
+				<?php } // endif ?>
 			</div>
 		</div>
 	</section>
