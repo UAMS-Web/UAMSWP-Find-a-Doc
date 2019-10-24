@@ -389,13 +389,13 @@ while ( have_posts() ) : the_post(); ?>
 	endif; 
 	$expertises =  get_field('location_expertise');
 	if( $expertises ): ?>
-		<section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="locations">
+		<section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="expertise">
             <div class="row">
                 <div class="col-12">
                     <h2 class="module-title">Areas of Expertise</h2>
                     <div class="card-list-container">
                         <div class="card-list">
-                        <?php foreach( $expertises as $expertise ){
+                        <?php foreach( $expertises as $expertise ) {
                             $id = $expertise; 
                             include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
                         } ?>
@@ -447,14 +447,9 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 		</div>
 	</section>
-	<section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
-		<div class="row">
-			<div class="col-xs-12">
-				<h2>Make an Appointment</h2>
-				<p>Request an appointment directly with <a href="javascript:void(0)">your clinic</a>, <a href="javascript:void(0)">your doctor</a>, <span class="no-break">or call <a href="javascript:void(0)">501-555-5555</a>.</span></p>
-			</div>
-		</div>
-	</section>
+	<?php
+	include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
+	?>
 </main>
 
 <?php endwhile; // end of the loop. ?>
