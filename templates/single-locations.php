@@ -232,7 +232,7 @@ while ( have_posts() ) : the_post(); ?>
 	<section class="container-fluid p-8 p-sm-10 bg-auto">
 		<div class="row">
 			<div class="col-xs-12">
-				<h2 class="module-title">About This Location</h2>
+				<h2 class="module-title">About <?php the_title(); ?></h2>
 				<div class="module-body">
 					<?php echo get_field('location_about'); ?>
 				</div>
@@ -259,7 +259,7 @@ while ( have_posts() ) : the_post(); ?>
 		<div class="row">
 			<div class="col-xs-12">
 				<?php if ( get_field('location_appointment') && get_field('location_appointment_bring') ) { ?>
-					<h2 class="module-title">Appointments</h2>
+					<h2 class="module-title">Appointment Information</h2>
 					<div class="module-body">
 						<?php echo get_field('location_appointment'); ?>
 						<h3>What to Bring to Your Appointment</h3>
@@ -335,7 +335,7 @@ while ( have_posts() ) : the_post(); ?>
 		<section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="locations">
             <div class="row">
                 <div class="col-12">
-                    <h2 class="module-title">Areas of Expertise</h2>
+                    <h2 class="module-title">Areas of Expertise Represented at <?php the_title(); ?></h2>
                     <div class="card-list-container">
                         <div class="card-list">
                         <?php foreach( $expertises as $expertise ){
@@ -352,7 +352,7 @@ while ( have_posts() ) : the_post(); ?>
 	<section class="container-fluid p-8 p-sm-10 news-list bg-auto">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="module-title">Latest News for [Location Item Name]</h2>
+				<h2 class="module-title">Latest News for <?php the_title(); ?></h2>
 				<div class="card-list-container">
 					<div class="card-list">
 						<div class="card">

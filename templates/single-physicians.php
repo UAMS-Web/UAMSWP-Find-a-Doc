@@ -196,7 +196,7 @@ while ( have_posts() ) : the_post(); ?>
         <section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2>Make an Appointment</h2>
+                    <h2>Make an Appointment With <?php echo $short_name; ?></h2>
                     <?php 
                         $refer_req = get_field('physician_referral_required');
                         $accept_new = get_field('physician_accepting_patients');
@@ -251,7 +251,7 @@ while ( have_posts() ) : the_post(); ?>
             <section class="container-fluid p-8 p-sm-10 expertise-list bg-auto" id="expertise">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="module-title">Areas of Expertise</h2>
+                        <h2 class="module-title"><?php echo $short_name; ?>'s Areas of Expertise</h2>
                         <div class="card-list-container">
                             <div class="card-list">
                             <?php foreach( $expertises as $expertise ) {
@@ -269,7 +269,7 @@ while ( have_posts() ) : the_post(); ?>
         <section class="container-fluid p-8 p-sm-10 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2 class="module-title">Academic Background</h2>
+                    <h2 class="module-title"><?php echo $short_name; ?>'s Academic Background</h2>
                     <div class="module-body">
                         <?php echo get_field('physician_academic_bio'); ?>
                         <?php
@@ -369,7 +369,7 @@ while ( have_posts() ) : the_post(); ?>
         <section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="locations">
             <div class="row">
                 <div class="col-12">
-                    <h2 class="module-title">Locations</h2>
+                    <h2 class="module-title">Locations Where <?php echo $short_name; ?> Practices</h2>
                     <div class="card-list-container">
                         <div class="card-list">
                         <?php $l = 1; ?>
@@ -527,7 +527,7 @@ while ( have_posts() ) : the_post(); ?>
         <section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2>Make an Appointment</h2>
+                    <h2>Make an Appointment With <?php echo $short_name; ?></h2>
                     <?php 
                         $refer_req = get_field('physician_referral_required');
                         $accept_new = get_field('physician_accepting_patients');
