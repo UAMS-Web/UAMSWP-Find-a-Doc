@@ -49,7 +49,7 @@ while ( have_posts() ) : the_post(); ?>
 								$text = get_sub_field('location_appointments_additional_text');
 						?>
 						<dt><?php echo $title; ?></dt>
-						<dd><a href="tel:<?php echo format_phone_dash( $phone ); ?>"><?php echo format_phone_us( $phone ); ?></a><?php echo ($text ? '<br/><small>'. $text .'</small>' : ''); ?></dd>
+						<dd><a href="tel:<?php echo format_phone_dash( $phone ); ?>"><?php echo format_phone_us( $phone ); ?></a><?php echo ($text ? '<br/><span class="subtitle">'. $text .'</span>' : ''); ?></dd>
 						<?php endwhile; 
 							} ?>
 						<?php
@@ -90,7 +90,7 @@ while ( have_posts() ) : the_post(); ?>
 									} else {
 										$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] )  ? '' . apStyleDate( $hour['open'] ) . ' &ndash; ' . apStyleDate( $hour['close'] ) . '' : '' );
 										if ( $hour['comment'] ) {
-											$hours_text .= ' ' .$hour['comment'];
+											$hours_text .= ' <br /><span class="subtitle">' .$hour['comment'] . '</span>';
 											$comment = $hour['comment'];
 										} else {
 											$comment = '';
@@ -135,13 +135,12 @@ while ( have_posts() ) : the_post(); ?>
 										echo '<dl class="hours">';
 										$i++;
 									}
-									echo '<dt>'.$holidayDate . '<br/>';
+									echo '<dt>'. $row['label'] . '<br />' . $holidayDate . '<br/>';
 									echo '</dt>' . '<dd>';
 									if ( $row['closed'] ) {
-										echo $row['closed'] ? 'Closed ' .$row['label'] .'</dd>': '';
+										echo $row['closed'] ? 'Closed</dd>': '';
 									} else {
 										echo ( ( $hour['open'] && '00:00:00' != $row['open'] )  ? '' . apStyleDate( $row['open'] ) . ' &ndash; ' . apStyleDate( $row['close'] ) . ' ' : '' );
-										echo $row['label'] .'</dd>';
 									}
 								}	
 							endforeach;
