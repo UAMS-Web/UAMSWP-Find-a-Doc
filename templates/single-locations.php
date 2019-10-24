@@ -24,7 +24,7 @@ while ( have_posts() ) : the_post(); ?>
 <main class="location-item">
 	<section class="container-fluid p-0 p-md-10 location-info bg-white">
 		<div class="row mx-0 mx-md-n8">
-			<div class="col-12 col-md p-4 p-xs-8 p-sm-10 px-md-8 py-md-0 order-2 text">
+			<div class="col-12 col-md p-8 p-sm-10 px-md-8 py-md-0 order-2 text">
 				<div class="content-width">
 					<h1 class="page-title"><?php the_title(); ?></h1>
 					<h2 class="sr-only">Address</h2>
