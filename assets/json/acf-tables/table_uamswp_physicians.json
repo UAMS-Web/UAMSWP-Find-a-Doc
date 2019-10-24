@@ -78,11 +78,11 @@
             }
         },
         {
-            "name": "physician_regional",
+            "name": "physician_searchable",
             "format": "%d",
             "map": {
                 "type": "acf_field_name",
-                "identifier": "physician_regional"
+                "identifier": "physician_searchable"
             }
         },
         {
@@ -149,13 +149,6 @@
             }
         },
         {
-            "name": "physician_appointment_link",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_appointment_link"
-            }
-        },
-        {
             "name": "physician_patient_types",
             "map": {
                 "type": "acf_field_name",
@@ -163,11 +156,10 @@
             }
         },
         {
-            "name": "physician_searchable",
-            "format": "%d",
+            "name": "physician_appointment_link",
             "map": {
                 "type": "acf_field_name",
-                "identifier": "physician_searchable"
+                "identifier": "physician_appointment_link"
             }
         },
         {
@@ -200,6 +192,13 @@
             "map": {
                 "type": "acf_field_name",
                 "identifier": "physician_second_opinion"
+            }
+        },
+        {
+            "name": "physician_expertise",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "physician_expertise"
             }
         },
         {
@@ -254,6 +253,13 @@
             }
         },
         {
+            "name": "physician_academic_appointment",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "physician_academic_appointment"
+            }
+        },
+        {
             "name": "physician_academic_college",
             "map": {
                 "type": "acf_field_name",
@@ -300,13 +306,6 @@
             "map": {
                 "type": "acf_field_name",
                 "identifier": "physician_contact_information"
-            }
-        },
-        {
-            "name": "physician_academic_appointment",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_academic_appointment"
             }
         },
         {

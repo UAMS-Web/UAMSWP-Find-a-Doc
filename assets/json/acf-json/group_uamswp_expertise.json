@@ -1,17 +1,22 @@
 {
-    "key": "group_uamswp_services",
-    "title": "Clinical Service Information",
+    "key": "group_uamswp_expertise",
+    "title": "Clinical Area of Expertise",
     "location": [
         [
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "services"
+                "value": "expertise"
+            },
+            {
+                "param": "page_parent",
+                "operator": "==",
+                "value": "0"
             }
         ]
     ],
     "menu_order": 0,
-    "position": "side",
+    "position": "normal",
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
@@ -24,9 +29,9 @@
     "acfe_note": "",
     "acfe_meta": "",
     "fields": {
-        "field_service_conditions": {
-            "key": "field_service_conditions",
-            "name": "service_conditions",
+        "field_expertise_conditions": {
+            "key": "field_expertise_conditions",
+            "name": "expertise_conditions",
             "type": "taxonomy",
             "label": "Conditions",
             "instructions": "",
@@ -49,9 +54,9 @@
             },
             "multiple": 0
         },
-        "field_service_treatments": {
-            "key": "field_service_treatments",
-            "name": "service_treatments",
+        "field_expertise_treatments": {
+            "key": "field_expertise_treatments",
+            "name": "expertise_treatments",
             "type": "taxonomy",
             "label": "Treatments & Procedures",
             "instructions": "",
@@ -75,8 +80,8 @@
             "multiple": 0
         },
         "field_medical_terms": {
-            "key": "field_service_medical_terms",
-            "name": "service_medical_terms",
+            "key": "field_expertise_medical_terms",
+            "name": "expertise_medical_terms",
             "type": "taxonomy",
             "label": "Medical Terms (Tags)",
             "instructions": "",
@@ -84,7 +89,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_service_conditions",
+                        "field": "field_expertise_conditions",
                         "operator": "==",
                         "value": "0"
                     }
@@ -107,9 +112,9 @@
             },
             "multiple": 0
         },
-        "field_service_physicians": {
-            "key": "field_service_physicians",
-            "name": "service_physicians",
+        "field_expertise_physicians": {
+            "key": "field_expertise_physicians",
+            "name": "expertise_physicians",
             "type": "relationship",
             "label": "Physicians",
             "instructions": "",
@@ -133,14 +138,14 @@
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": true,
-                "acfe_bidirectional_related": "field_physician_services"
+                "acfe_bidirectional_related": "field_physician_expertise"
             },
             "acfe_validate": "",
             "acfe_update": ""
         },
-        "field_service_locations": {
-            "key": "field_service_locations",
-            "name": "service_locations",
+        "field_expertise_locations": {
+            "key": "field_expertise_locations",
+            "name": "expertise_locations",
             "type": "relationship",
             "label": "Locations",
             "instructions": "",
@@ -164,10 +169,35 @@
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": true,
-                "acfe_bidirectional_related": "field_location_services"
+                "acfe_bidirectional_related": "field_location_expertise"
             },
             "acfe_validate": "",
             "acfe_update": ""
+        },
+        "field_expertise_associated": {
+            "key": "field_expertise_associated",
+            "name": "expertise_associated",
+            "type": "relationship",
+            "label": "Associated Areas of Expertise",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "expertise"
+            ],
+            "taxonomy": [],
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id"
         }
     },
     "modified": false
