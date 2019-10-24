@@ -319,7 +319,8 @@ while ( have_posts() ) : the_post(); ?>
 	</section>
 	<?php endif; ?>
 	<?php // load all 'conditions' terms for the post
-	$conditions = get_field('expertise_conditions');
+	$title_append = ' at ' . get_the_title();
+	$conditions = get_field('location_conditions');
 
 	if( $conditions ):
         include( UAMS_FAD_PATH . '/templates/loops/conditions-loop.php' );
