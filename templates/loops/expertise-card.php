@@ -9,9 +9,7 @@
 ?>
 <div class="card">
     <?php if ( has_post_thumbnail($id) ) { ?>
-        <p>
-        <?php the_post_thumbnail($id, 'aspect-16-9-small', ['class' => 'img-responsive']); ?>
-        </p>
+    <?php echo get_the_post_thumbnail($id, 'aspect-16-9-small', ['class' => 'card-img-top']); ?>
     <?php } ?>
     <?php $excerpt = get_the_excerpt($id); ?>
     <div class="card-body">
