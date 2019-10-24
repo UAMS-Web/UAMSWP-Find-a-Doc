@@ -63,9 +63,6 @@ while ( have_posts() ) : the_post(); ?>
                         <dt>Medical Department</dt>
                         <dd><?php echo (get_field('physician_department') ? get_term( get_field('physician_department'), 'department' )->name : ''); ?></dd>                 
                     <?php } ?>
-                        <dt>Primary Care</dt>
-                        <dd><?php echo (get_field('physician_primary_care') ? 'Yes' : 'No'); ?></dd>
-                        
                         <?php // load all 'specialties' terms for the post
                             $patients = get_field('physician_patient_types');
                             if( $patients ): 
