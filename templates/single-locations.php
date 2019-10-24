@@ -248,7 +248,7 @@ while ( have_posts() ) : the_post(); ?>
 					<?php echo get_field('location_parking'); ?>
 					<?php } // End Parking 
 					if (get_field('location_direction')) { ?>
-					<h2>Directions</h2>
+					<h3>Directions From the Parking Area</h3>
 					<?php echo get_field('location_direction'); ?>
 					<? } // End Directions ?>
 				</div>

@@ -289,7 +289,7 @@ function uams_locations_register_meta_boxes( $meta_boxes ) {
         array (
           'id' => 'location_direction',
           'type' => 'wysiwyg',
-          'name' => 'Directions (Written)',
+          'name' => 'Directions From Parking Area',
           'tab' => 'tab_address',
           'columns'    => 12,
           'options' => array(

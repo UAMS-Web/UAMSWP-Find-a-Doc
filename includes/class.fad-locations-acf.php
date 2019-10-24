@@ -256,7 +256,7 @@ if( function_exists('acf_add_local_field_group') ):
       ),
       array(
         'key' => 'field_location_direction',
-        'label' => 'Directions (Written)',
+        'label' => 'Directions From Parking Area',
         'name' => 'location_direction',
         'type' => 'wysiwyg',
         'instructions' => '',
