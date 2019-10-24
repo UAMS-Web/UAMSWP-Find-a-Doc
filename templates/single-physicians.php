@@ -47,7 +47,14 @@ while ( have_posts() ) : the_post(); ?>
         <section class="container-fluid p-0 p-xs-8 p-sm-10 doctor-info bg-white">
             <div class="row mx-0 mx-xs-n4 mx-sm-n8">
                 <div class="col-12 col-xs p-4 py-xs-0 px-xs-4 px-sm-8 order-2 text">
-                    <h1 class="page-title"><?php echo $full_name; ?></h1>
+                    <h1 class="page-title">
+                        <span class="name"><?php echo $full_name; ?></span>
+                        <?php 
+                        $phys_title = get_field('physician_title');
+                        if ($phys_title && !empty($phys_title)) { ?>
+                            <span class="subtitle"><?php echo (get_field('physician_title') ? get_term( get_field('physician_title'), 'clinical_title' )->name : ''); ?></span>
+                        <?php } ?>
+                    </h1>
                     <h2 class="sr-only">Overview</h2>
                     <dl>
                     <?php 
