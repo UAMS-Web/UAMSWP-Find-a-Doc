@@ -285,7 +285,7 @@
             "key": "field_location_direction",
             "name": "location_direction",
             "type": "wysiwyg",
-            "label": "Directions (Written)",
+            "label": "Directions From Parking Area",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
