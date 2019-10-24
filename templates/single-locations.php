@@ -348,7 +348,8 @@ while ( have_posts() ) : the_post(); ?>
 	<?php 
     endif;
 	?>
-	<section class="container-fluid p-8 p-sm-10 news-list bg-auto">
+	<!-- Latest News -->
+	<!-- <section class="container-fluid p-8 p-sm-10 news-list bg-auto">
 		<div class="row">
 			<div class="col-12">
 				<h2 class="module-title">Latest News for [Location Item Name]</h2>
@@ -388,7 +389,7 @@ while ( have_posts() ) : the_post(); ?>
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> -->
 </main>
 
 <?php endwhile; // end of the loop. ?>
