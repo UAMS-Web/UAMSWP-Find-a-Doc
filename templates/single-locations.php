@@ -25,168 +25,170 @@ while ( have_posts() ) : the_post(); ?>
 	<section class="container-fluid p-0 p-md-10 location-info bg-white">
 		<div class="row mx-0 mx-md-n8">
 			<div class="col-12 col-md p-4 p-xs-8 p-sm-10 px-md-8 py-md-0 order-2 text">
-				<h1 class="page-title"><?php the_title(); ?></h1>
-				<h2 class="sr-only">Address</h2>
-				<p><?php echo get_field('location_address_1', get_the_ID() ); ?><br/>
-				<?php echo ( get_field('location_address_2' ) ? get_field('location_address_2') . '<br/>' : ''); ?>
-				<?php echo get_field('location_city'); ?>, <?php echo get_field('location_state'); ?> <?php echo get_field('location_zip', get_the_ID()); ?></p>
-					<p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a></p>
-				<?php if(get_field('location_web_name') && get_field('location_url')){ ?>
-					<p><a class="btn btn-secondary" href="<?php echo get_field('location_url')['url']; ?>"><?php echo get_field('location_web_name'); ?> <span class="far fa-external-link-alt"></span></span></a></p>
-				<?php } ?>
-				<h2>Contact Information</h2>
-				<dl>
-					<?php if (get_field('location_phone')) { ?>
-					<dt>Clinic Phone Number</dt>
-					<dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone') ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone') ); ?></a></dd>
+				<div class="content-width">
+					<h1 class="page-title"><?php the_title(); ?></h1>
+					<h2 class="sr-only">Address</h2>
+					<p><?php echo get_field('location_address_1', get_the_ID() ); ?><br/>
+					<?php echo ( get_field('location_address_2' ) ? get_field('location_address_2') . '<br/>' : ''); ?>
+					<?php echo get_field('location_city'); ?>, <?php echo get_field('location_state'); ?> <?php echo get_field('location_zip', get_the_ID()); ?></p>
+						<p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a></p>
+					<?php if(get_field('location_web_name') && get_field('location_url')){ ?>
+						<p><a class="btn btn-secondary" href="<?php echo get_field('location_url')['url']; ?>"><?php echo get_field('location_web_name'); ?> <span class="far fa-external-link-alt"></span></span></a></p>
 					<?php } ?>
-					<?php if ( get_field('field_location_phone_numbers') ) { 
-						$phone_numbers = get_field('field_location_phone_numbers');
-						while( have_rows('field_location_phone_numbers') ): the_row(); 
-							$title = get_sub_field('location_appointments_text');
-							$phone = get_sub_field('location_appointments_phone');
-							$text = get_sub_field('location_appointments_additional_text');
-					?>
-					<dt><?php echo $title; ?></dt>
-					<dd><a href="tel:<?php echo format_phone_dash( $phone ); ?>"><?php echo format_phone_us( $phone ); ?></a><?php echo ($text ? '<br/><small>'. $text .'</small>' : ''); ?></dd>
-					<?php endwhile; 
-						} ?>
-					<?php
-						$phone_numbers = get_field('location_appointments');
-						if ( ! empty( $phone_numbers ) && ! empty( $phone_numbers[0]['number'] ) ) {
-							foreach ( $phone_numbers as $phone_number ) {
-								if (! empty($phone_number['text']) && ! empty($phone_number['number']) ) {
-									echo '<dt>' . $phone_number['text'] . '</dt>';
-									echo '<dd><a href="tel:'. $phone_number['number'] .'" class="icon-phone">'. $phone_number['number'] .'</a> ' . $phone_number['after'] .'</dd>'; // Display sub-field value
-								}
-							}
-						}
-					?>
-				</dl>
-				<?php
-				$hours247 = get_field('location_24_7');
-				$hours = get_field('location_hours');
-				if ( $hours247 || $hours[0]['day'] ) : ?>
-				<h2>Hours</h2>
-				<?php
-					if ($hours247):
-						echo 'Open 24/7';
-					else :
-						echo '<dl class="hours">';
-						if( $hours ) {
-							$hours_text = '';
-							$day = ''; // Previous Day
-							$comment = ''; // Comment on previous day
-							foreach ($hours as $hour) :
-								if( $day !== $hour['day'] || $comment ) {
-									$hours_text .= '<dt>'. $hour['day'] .'</dt> ';
-									$hours_text .= '<dd>';
-								} else {
-									$hours_text .= ', ';
-								}
-								if ( $hour['closed'] ) {
-									$hours_text .= 'Closed ';
-								} else {
-									$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] )  ? '' . apStyleDate( $hour['open'] ) . ' &ndash; ' . apStyleDate( $hour['close'] ) . '' : '' );
-									if ( $hour['comment'] ) {
-										$hours_text .= ' ' .$hour['comment'];
-										$comment = $hour['comment'];
-									} else {
-										$comment = '';
+					<h2>Contact Information</h2>
+					<dl>
+						<?php if (get_field('location_phone')) { ?>
+						<dt>Clinic Phone Number</dt>
+						<dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone') ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone') ); ?></a></dd>
+						<?php } ?>
+						<?php if ( get_field('field_location_phone_numbers') ) { 
+							$phone_numbers = get_field('field_location_phone_numbers');
+							while( have_rows('field_location_phone_numbers') ): the_row(); 
+								$title = get_sub_field('location_appointments_text');
+								$phone = get_sub_field('location_appointments_phone');
+								$text = get_sub_field('location_appointments_additional_text');
+						?>
+						<dt><?php echo $title; ?></dt>
+						<dd><a href="tel:<?php echo format_phone_dash( $phone ); ?>"><?php echo format_phone_us( $phone ); ?></a><?php echo ($text ? '<br/><small>'. $text .'</small>' : ''); ?></dd>
+						<?php endwhile; 
+							} ?>
+						<?php
+							$phone_numbers = get_field('location_appointments');
+							if ( ! empty( $phone_numbers ) && ! empty( $phone_numbers[0]['number'] ) ) {
+								foreach ( $phone_numbers as $phone_number ) {
+									if (! empty($phone_number['text']) && ! empty($phone_number['number']) ) {
+										echo '<dt>' . $phone_number['text'] . '</dt>';
+										echo '<dd><a href="tel:'. $phone_number['number'] .'" class="icon-phone">'. $phone_number['number'] .'</a> ' . $phone_number['after'] .'</dd>'; // Display sub-field value
 									}
 								}
-								if( $day !== $hour['day'] && $comment ) {
-									$hours_text .= '</dd>';
-								}
-								$day = $hour['day']; // Reset the day
-							endforeach;
-							echo $hours_text;
-						} else {
-							echo '<dt>No information</dt>';
-						}
-						echo '</dl>';
-					endif;
-					$holidayhours = get_field('location_holiday_hours');
-					if ($holidayhours):
-						/**
-						 * Sort by date
-						 * if current date is before date & within 30 days
-						 * Display results
-						 */
-
-						$order = array();
-						// populate order
-						foreach( $holidayhours as $i => $row ) {	
-							$order[ $i ] = $row['date'];
-						}
-						
-						// multisort
-						array_multisort( $order, SORT_ASC, $holidayhours );
-
-						$i = 0;
-						foreach( $holidayhours as $row ):
-							$holidayDate = $row['date']; // Text
-							$holidayDateTime = DateTime::createFromFormat('m/d/Y', $holidayDate); // Date for evaluation
-							$dateNow = new DateTime("now", new DateTimeZone('America/Chicago') );
-							if (($dateNow < $holidayDateTime) && ($holidayDateTime->diff($dateNow)->days < 30)) {
-								if ( 0 == $i ) {
-									echo '<h2>Upcoming Holiday Hours</h2>';
-									echo '<dl class="hours">';
-									$i++;
-								}
-								echo '<dt>'.$holidayDate . '<br/>';
-								echo '</dt>' . '<dd>';
-								if ( $row['closed'] ) {
-									echo $row['closed'] ? 'Closed ' .$row['label'] .'</dd>': '';
-								} else {
-									echo ( ( $hour['open'] && '00:00:00' != $row['open'] )  ? '' . apStyleDate( $row['open'] ) . ' &ndash; ' . apStyleDate( $row['close'] ) . ' ' : '' );
-									echo $row['label'] .'</dd>';
-								}
-							}	
-						endforeach;
-						if ( 0 < $i ) {
+							}
+						?>
+					</dl>
+					<?php
+					$hours247 = get_field('location_24_7');
+					$hours = get_field('location_hours');
+					if ( $hours247 || $hours[0]['day'] ) : ?>
+					<h2>Hours</h2>
+					<?php
+						if ($hours247):
+							echo 'Open 24/7';
+						else :
+							echo '<dl class="hours">';
+							if( $hours ) {
+								$hours_text = '';
+								$day = ''; // Previous Day
+								$comment = ''; // Comment on previous day
+								foreach ($hours as $hour) :
+									if( $day !== $hour['day'] || $comment ) {
+										$hours_text .= '<dt>'. $hour['day'] .'</dt> ';
+										$hours_text .= '<dd>';
+									} else {
+										$hours_text .= ', ';
+									}
+									if ( $hour['closed'] ) {
+										$hours_text .= 'Closed ';
+									} else {
+										$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] )  ? '' . apStyleDate( $hour['open'] ) . ' &ndash; ' . apStyleDate( $hour['close'] ) . '' : '' );
+										if ( $hour['comment'] ) {
+											$hours_text .= ' ' .$hour['comment'];
+											$comment = $hour['comment'];
+										} else {
+											$comment = '';
+										}
+									}
+									if( $day !== $hour['day'] && $comment ) {
+										$hours_text .= '</dd>';
+									}
+									$day = $hour['day']; // Reset the day
+								endforeach;
+								echo $hours_text;
+							} else {
+								echo '<dt>No information</dt>';
+							}
 							echo '</dl>';
-						}
-						// echo '<h2>Holiday Hours</h2>';
-						// echo '<dl class="hours">';
-						// if( $hours ) {
-						// 	$hours_text = '';
-						// 	$day = ''; // Previous Day
-						// 	$comment = ''; // Comment on previous day
-						// 	foreach ($hours as $hour) :
-						// 		if( $day !== $hour['day'] || $comment ) {
-						// 			$hours_text .= '<dt>'. $hour['day'] .'</dt> ';
-						// 			$hours_text .= '<dd>';
-						// 		} else {
-						// 			$hours_text .= ', ';
-						// 		}
-						// 		if ( $hour['closed'] ) {
-						// 			$hours_text .= 'Closed ';
-						// 		} else {
-						// 			$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] )  ? '' . apStyleDate( $hour['open'] ) . ' &ndash; ' . apStyleDate( $hour['close'] ) . '' : '' );
-						// 			if ( $hour['comment'] ) {
-						// 				$hours_text .= ' ' .$hour['comment'];
-						// 				$comment = $hour['comment'];
-						// 			} else {
-						// 				$comment = '';
-						// 			}
-						// 		}
-						// 		if( $day !== $hour['day'] && $comment ) {
-						// 			$hours_text .= '</dd>';
-						// 		}
-						// 		$day = $hour['day']; // Reset the day
-						// 	endforeach;
-						// 	echo $hours_text;
-						// } else {
-						// 	echo '<dt>No information</dt>';
-						// }
-						// echo '</dl>';
-					endif; ?>
-				<?php if (get_field('location_after_hours') && !get_field('location_24_7')) { ?>
-				<h2>After Hours</h2>
-				<?php echo get_field('location_after_hours'); ?>
-				<?php } ?>
-				<?php endif; ?>
+						endif;
+						$holidayhours = get_field('location_holiday_hours');
+						if ($holidayhours):
+							/**
+							 * Sort by date
+							 * if current date is before date & within 30 days
+							 * Display results
+							 */
+
+							$order = array();
+							// populate order
+							foreach( $holidayhours as $i => $row ) {	
+								$order[ $i ] = $row['date'];
+							}
+							
+							// multisort
+							array_multisort( $order, SORT_ASC, $holidayhours );
+
+							$i = 0;
+							foreach( $holidayhours as $row ):
+								$holidayDate = $row['date']; // Text
+								$holidayDateTime = DateTime::createFromFormat('m/d/Y', $holidayDate); // Date for evaluation
+								$dateNow = new DateTime("now", new DateTimeZone('America/Chicago') );
+								if (($dateNow < $holidayDateTime) && ($holidayDateTime->diff($dateNow)->days < 30)) {
+									if ( 0 == $i ) {
+										echo '<h2>Upcoming Holiday Hours</h2>';
+										echo '<dl class="hours">';
+										$i++;
+									}
+									echo '<dt>'.$holidayDate . '<br/>';
+									echo '</dt>' . '<dd>';
+									if ( $row['closed'] ) {
+										echo $row['closed'] ? 'Closed ' .$row['label'] .'</dd>': '';
+									} else {
+										echo ( ( $hour['open'] && '00:00:00' != $row['open'] )  ? '' . apStyleDate( $row['open'] ) . ' &ndash; ' . apStyleDate( $row['close'] ) . ' ' : '' );
+										echo $row['label'] .'</dd>';
+									}
+								}	
+							endforeach;
+							if ( 0 < $i ) {
+								echo '</dl>';
+							}
+							// echo '<h2>Holiday Hours</h2>';
+							// echo '<dl class="hours">';
+							// if( $hours ) {
+							// 	$hours_text = '';
+							// 	$day = ''; // Previous Day
+							// 	$comment = ''; // Comment on previous day
+							// 	foreach ($hours as $hour) :
+							// 		if( $day !== $hour['day'] || $comment ) {
+							// 			$hours_text .= '<dt>'. $hour['day'] .'</dt> ';
+							// 			$hours_text .= '<dd>';
+							// 		} else {
+							// 			$hours_text .= ', ';
+							// 		}
+							// 		if ( $hour['closed'] ) {
+							// 			$hours_text .= 'Closed ';
+							// 		} else {
+							// 			$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] )  ? '' . apStyleDate( $hour['open'] ) . ' &ndash; ' . apStyleDate( $hour['close'] ) . '' : '' );
+							// 			if ( $hour['comment'] ) {
+							// 				$hours_text .= ' ' .$hour['comment'];
+							// 				$comment = $hour['comment'];
+							// 			} else {
+							// 				$comment = '';
+							// 			}
+							// 		}
+							// 		if( $day !== $hour['day'] && $comment ) {
+							// 			$hours_text .= '</dd>';
+							// 		}
+							// 		$day = $hour['day']; // Reset the day
+							// 	endforeach;
+							// 	echo $hours_text;
+							// } else {
+							// 	echo '<dt>No information</dt>';
+							// }
+							// echo '</dl>';
+						endif; ?>
+					<?php if (get_field('location_after_hours') && !get_field('location_24_7')) { ?>
+					<h2>After Hours</h2>
+					<?php echo get_field('location_after_hours'); ?>
+					<?php } ?>
+					<?php endif; ?>
+				</div>
 			</div>
 			<?php if ( has_post_thumbnail() ) { ?>
 			<div class="col-12 col-md px-0 px-md-8 order-1 image">
