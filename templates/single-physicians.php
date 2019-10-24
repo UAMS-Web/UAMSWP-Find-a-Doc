@@ -63,6 +63,12 @@ while ( have_posts() ) : the_post(); ?>
                         <dt>Medical Department</dt>
                         <dd><?php echo (get_field('physician_department') ? get_term( get_field('physician_department'), 'department' )->name : ''); ?></dd>                 
                     <?php } ?>
+                    <?php  // Display if they will provide second opinions
+                        $second_opinion = get_field('physician_second_opinion');
+                        if ($second_opinion) { ?>
+                        <dt>Provides Second Opinion</dt>
+                        <dd>Yes</dd>
+                    <?php } ?>
                     <?php // Display all patient types
                         $patients = get_field('physician_patient_types');
                         if( $patients ): 
