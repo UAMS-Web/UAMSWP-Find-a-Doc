@@ -63,17 +63,17 @@ while ( have_posts() ) : the_post(); ?>
                         <dt>Medical Department</dt>
                         <dd><?php echo (get_field('physician_department') ? get_term( get_field('physician_department'), 'department' )->name : ''); ?></dd>                 
                     <?php } ?>
-                        <?php // load all 'specialties' terms for the post
-                            $patients = get_field('physician_patient_types');
-                            if( $patients ): 
-                            ?>
-                            <dt>Patient Type<?php echo( count($patients) > 1 ? 's' : '' );?></dt>
-                                <?php foreach( $patients as $patient ): ?>
-                                    <?php $patient_name = get_term( $patient, 'patient_type');
-                                        echo '<dd>' . $patient_name->name . '</dd>';
-                                    ?>
-                                <?php endforeach; ?>
-                        <?php endif; ?>
+                    <?php // Display all patient types
+                        $patients = get_field('physician_patient_types');
+                        if( $patients ): 
+                        ?>
+                        <dt>Patient Type<?php echo( count($patients) > 1 ? 's' : '' );?></dt>
+                            <?php foreach( $patients as $patient ): ?>
+                                <?php $patient_name = get_term( $patient, 'patient_type');
+                                    echo '<dd>' . $patient_name->name . '</dd>';
+                                ?>
+                            <?php endforeach; ?>
+                    <?php endif; ?>
                     </dl>
                     <?php
                         if(get_field('physician_npi')) {
