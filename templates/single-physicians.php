@@ -47,29 +47,39 @@ while ( have_posts() ) : the_post(); ?>
         <section class="container-fluid p-0 p-xs-8 p-sm-10 doctor-info bg-white">
             <div class="row mx-0 mx-xs-n4 mx-sm-n8">
                 <div class="col-12 col-xs p-4 py-xs-0 px-xs-4 px-sm-8 order-2 text">
-                    <h1 class="page-title"><?php echo $full_name; ?></h1>
+                    <h1 class="page-title">
+                        <span class="name"><?php echo $full_name; ?></span>
+                        <?php 
+                        $phys_title = get_field('physician_title');
+                        if ($phys_title && !empty($phys_title)) { ?>
+                            <span class="subtitle"><?php echo (get_field('physician_title') ? get_term( get_field('physician_title'), 'clinical_title' )->name : ''); ?></span>
+                        <?php } ?>
+                    </h1>
                     <h2 class="sr-only">Overview</h2>
                     <dl>
-                    <?php 
+                    <?php // Display medical department
                     $med_dept = get_field('physician_department');
                     if ($med_dept && !empty($med_dept)) { ?>
                         <dt>Medical Department</dt>
                         <dd><?php echo (get_field('physician_department') ? get_term( get_field('physician_department'), 'department' )->name : ''); ?></dd>                 
                     <?php } ?>
-                        <dt>Primary Care</dt>
-                        <dd><?php echo (get_field('physician_primary_care') ? 'Yes' : 'No'); ?></dd>
-                        
-                        <?php // load all 'specialties' terms for the post
-                            $patients = get_field('physician_patient_types');
-                            if( $patients ): 
-                            ?>
-                            <dt>Patient Type<?php echo( count($patients) > 1 ? 's' : '' );?></dt>
-                                <?php foreach( $patients as $patient ): ?>
-                                    <?php $patient_name = get_term( $patient, 'patient_type');
-                                        echo '<dd>' . $patient_name->name . '</dd>';
-                                    ?>
-                                <?php endforeach; ?>
-                        <?php endif; ?>
+                    <?php  // Display if they will provide second opinions
+                        $second_opinion = get_field('physician_second_opinion');
+                        if ($second_opinion) { ?>
+                        <dt>Provides Second Opinion</dt>
+                        <dd>Yes</dd>
+                    <?php } ?>
+                    <?php // Display all patient types
+                        $patients = get_field('physician_patient_types');
+                        if( $patients ): 
+                        ?>
+                        <dt>Patient Type<?php echo( count($patients) > 1 ? 's' : '' );?></dt>
+                            <?php foreach( $patients as $patient ): ?>
+                                <?php $patient_name = get_term( $patient, 'patient_type');
+                                    echo '<dd>' . $patient_name->name . '</dd>';
+                                ?>
+                            <?php endforeach; ?>
+                    <?php endif; ?>
                     </dl>
                     <?php
                         if(get_field('physician_npi')) {
@@ -128,7 +138,7 @@ while ( have_posts() ) : the_post(); ?>
                                 <?php echo ( get_field( 'location_address_2', $location ) ? get_field( 'location_address_2', $location ) . '<br/>' : ''); ?>
                                 <?php echo get_field( 'location_city', $location ); ?>, <?php echo get_field(' location_state', $location ); ?> <?php echo get_field( 'location_zip', $location ); ?>
                                 <?php $map = get_field( 'location_map', $location ); ?>
-                                <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a>
+                                <!-- <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a> -->
                                 </p>
                                 <div class="btn-container">
                                     <a class="btn btn-primary" href="<?php the_permalink( $location ); ?>">
@@ -186,7 +196,19 @@ while ( have_posts() ) : the_post(); ?>
             <div class="row">
                 <div class="col-xs-12">
                     <h2>Make an Appointment</h2>
-                    <p>Request an <a href="<?php echo get_field( 'field_physician_appointment_link' ); ?>">appointment</a>, <span class="no-break">or call <a href="tel:501-686-8000">501-686-8000</a>.</span></p>
+                    <?php 
+                        $refer_req = get_field('physician_referral_required');
+                        $accept_new = get_field('physician_accepting_patients');
+                        if ($refer_req && $accept_new) { ?>
+                            <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
+                            <p>Existing patients can either <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through MyChart, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                    <?php } elseif ($accept_new) { ?>
+                        <p>New patients can make appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                        <p>Existing patients have the option to <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through&nbsp;MyChart.</p>
+                    <?php } else { ?>
+                        <p>This physician is not currently accepting new patients.</p>
+                        <p>Existing patients can either <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through MyChart, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                    <?php } ?>
                 </div>
             </div>
         </section>
@@ -247,28 +269,31 @@ while ( have_posts() ) : the_post(); ?>
                 <div class="col-xs-12">
                     <h2 class="module-title">Academic Background</h2>
                     <div class="module-body">
+                        <?php echo get_field('physician_academic_bio'); ?>
                         <?php
                             // $academic_appointments = get_field('physician_academic_appointment');
                             if( have_rows('physician_academic_appointment') ): ?>
-                        <h3>Academic Appointments</h3>
-                        <ul>
-                        <?php while( have_rows('physician_academic_appointment') ): the_row(); ?>
-                        <?php $department = get_term( get_sub_field('department'), 'academic_department' ); ?>
-                            <li><?php the_sub_field('academic_title'); ?>, <?php echo $department->name; ?></li>
-                        <?php endwhile; ?>
-                        </ul>
+                                <h3>Academic Appointments</h3>
+                                <dl>
+                                <?php while( have_rows('physician_academic_appointment') ): the_row(); ?>
+                                <?php $department = get_term( get_sub_field('department'), 'academic_department' ); ?>
+                                    <dt><?php echo $department->name; ?></dt>
+                                    <dd><?php the_sub_field('academic_title'); ?></dd>
+                                <?php endwhile; ?>
+                                </dl>
                         <?php endif; ?>
                         <?php
                             if( have_rows('physician_education') ): ?>
-                        <h3>Education</h3>
-                        <ul>
-                        <?php while( have_rows('physician_education') ): the_row();
-                            $school_name = get_term( get_sub_field('school'), 'schools');
-                            $education_type = get_term( get_sub_field('education_type'), 'educationtype');
-                        ?>
-                            <li><?php echo $education_type->name; ?> - <?php echo (get_sub_field('description') ? '' . get_sub_field('description') .'<br/>' : ''); ?><?php echo $school_name->name; ?></li>
-                        <?php endwhile; ?>
-                        </ul>
+                                <h3>Education</h3>
+                                <dl>
+                                <?php while( have_rows('physician_education') ): the_row();
+                                    $school_name = get_term( get_sub_field('school'), 'schools');
+                                    $education_type = get_term( get_sub_field('education_type'), 'educationtype');
+                                ?>
+                                    <dt><?php echo $education_type->name; ?></dt>
+                                    <dd><?php echo $school_name->name; ?><?php echo (get_sub_field('description') ? '<br /><span class="subtitle">' . get_sub_field('description') .'</span>' : ''); ?></dd>
+                                <?php endwhile; ?>
+                                </dl>
                         <?php endif;
                             $boards = get_field( 'physician_boards' );
                             if( ! empty( $boards ) ): ?>
@@ -498,7 +523,19 @@ while ( have_posts() ) : the_post(); ?>
             <div class="row">
                 <div class="col-xs-12">
                     <h2>Make an Appointment</h2>
-                    <p>Request an <a href="<?php echo get_field( 'field_physician_appointment_link' ); ?>">appointment</a>, <span class="no-break">or call <a href="tel:501-686-8000">501-686-8000</a>.</span></p>
+                    <?php 
+                        $refer_req = get_field('physician_referral_required');
+                        $accept_new = get_field('physician_accepting_patients');
+                        if ($refer_req && $accept_new) { ?>
+                            <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
+                            <p>Existing patients can either <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through MyChart, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                    <?php } elseif ($accept_new) { ?>
+                        <p>New patients can make appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                        <p>Existing patients have the option to <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through&nbsp;MyChart.</p>
+                    <?php } else { ?>
+                        <p>This physician is not currently accepting new patients.</p>
+                        <p>Existing patients can either <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through MyChart, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                    <?php } ?>
                 </div>
             </div>
         </section>
