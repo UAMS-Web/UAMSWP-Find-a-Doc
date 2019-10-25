@@ -14,7 +14,21 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<h1 class="page-title"><?php echo ( $condition_title ? $condition_title : 'Condition' ); ?>: <?php echo single_cat_title( '', false ); ?></h1>
-				<?php echo (get_field('condition_alternate', $term) ? '<p>Possible alternate names: '. get_field('condition_alternate', $term) . '</p>' : '' ); ?>
+				<?php $keywords = get_field('condition_alternate', $term);
+					if( $keywords ): 
+						$i = 1;
+						$keyword_text = '';
+						foreach( $keywords as $keyword ) { 
+							if ( 1 < $i ) {
+								$keyword_text .= ', ';
+							}
+							$keyword_text .= $keyword['text'];
+							$i++;
+						}
+						
+						echo '<p>Possible alternate names: '. $keyword_text .'</p>';
+					endif;
+				?>
 				<?php echo (get_field('condition_content', $term) ? '<div class="module-body">'. get_field('condition_content', $term) . '</div>' : '' ); ?>
 			</div>
 		</div>
