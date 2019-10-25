@@ -447,7 +447,7 @@ function create_medical_specialties_taxonomy() {
 	register_taxonomy( 'specialty', array( 'physicians' ), $args );
 
 }
-add_action( 'init', 'create_medical_specialties_taxonomy', 0 );
+// add_action( 'init', 'create_medical_specialties_taxonomy', 0 ); // Disabled
 
 //hook into the init action and call create_book_taxonomies when it fires
 add_action( 'init', 'create_departments_taxonomy', 0 );
@@ -857,7 +857,7 @@ function create_medical_terms_taxonomy() {
 	register_taxonomy( 'medical_terms', array( 'physicians' ), $args );
 
 }
-add_action( 'init', 'create_medical_terms_taxonomy', 0 );
+// add_action( 'init', 'create_medical_terms_taxonomy', 0 ); // Disabled
 
 // Register Custom Taxonomy
 function create_academic_position_taxonomy() {

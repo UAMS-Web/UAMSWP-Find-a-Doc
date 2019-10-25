@@ -14,7 +14,21 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<h1 class="page-title"><?php echo ( $condition_title ? $condition_title : 'Condition' ); ?>: <?php echo single_cat_title( '', false ); ?></h1>
-				<?php echo (get_field('condition_alternate', $term) ? '<p>Possible alternate names: '. get_field('condition_alternate', $term) . '</p>' : '' ); ?>
+				<?php $keywords = get_field('condition_alternate', $term);
+					if( $keywords ): 
+						$i = 1;
+						$keyword_text = '';
+						foreach( $keywords as $keyword ) { 
+							if ( 1 < $i ) {
+								$keyword_text .= ', ';
+							}
+							$keyword_text .= $keyword['text'];
+							$i++;
+						}
+						
+						echo '<p>Possible alternate names: '. $keyword_text .'</p>';
+					endif;
+				?>
 				<?php echo (get_field('condition_content', $term) ? '<div class="module-body">'. get_field('condition_content', $term) . '</div>' : '' ); ?>
 			</div>
 		</div>
@@ -158,14 +172,9 @@
 			</div>
 		</section>
 	<?php endif; ?>	
-    <section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
-		<div class="row">
-			<div class="col-xs-12">
-				<h2>Make an Appointment</h2>
-				<p>Request an appointment directly with <a href="javascript:void(0)">your clinic</a>, <a href="javascript:void(0)">your doctor</a>, <span class="no-break">or call <a href="javascript:void(0)">501-555-5555</a>.</span></p>
-			</div>
-		</div>
-	</section>
+    <?php
+		include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
+	?>
 </main>
 
 <?php get_footer(); ?>

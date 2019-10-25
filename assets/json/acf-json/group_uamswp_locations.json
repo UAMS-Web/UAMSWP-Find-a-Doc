@@ -367,7 +367,7 @@
                 "class": "",
                 "id": ""
             },
-            "input_mask": "(999) 999-9999"
+            "input_mask": "(999) 999-9999 [x 99999]"
         },
         "field_location_phone_numbers": {
             "key": "field_location_phone_numbers",
@@ -420,7 +420,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "input_mask": "(999) 999-9999"
+                    "input_mask": "(999) 999-9999 [x 99999]"
                 },
                 {
                     "key": "field_location_appointments_additional_text",
@@ -905,8 +905,8 @@
                 "id": ""
             },
             "collapsed": "field_holiday_day",
-            "min": 1,
-            "max": 0,
+            "min": "",
+            "max": "",
             "layout": "table",
             "button_label": "Add Day",
             "sub_fields": [

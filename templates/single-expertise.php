@@ -22,7 +22,7 @@ add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 14 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 16 );
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 function uamswp_expertise_physicians() {
-    // if(wp_get_post_parent_id(get_the_ID()) == 0) {
+    if(get_field('expertise_physicians')) {
 ?>
     <section class="container-fluid p-8 p-sm-10 bg-auto" id="doctors">
         <div class="row">
@@ -40,7 +40,7 @@ function uamswp_expertise_physicians() {
         </div>
     </section>
 <?php
-    // }
+    }
 }
 function uamswp_expertise_conditions() {
     // load all 'conditions' terms for the post

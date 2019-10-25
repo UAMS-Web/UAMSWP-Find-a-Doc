@@ -331,13 +331,13 @@ while ( have_posts() ) : the_post(); ?>
 	endif; 
 	$expertises =  get_field('location_expertise');
 	if( $expertises ): ?>
-		<section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="locations">
+		<section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="expertise">
             <div class="row">
                 <div class="col-12">
                     <h2 class="module-title">Areas of Expertise Represented at <?php the_title(); ?></h2>
                     <div class="card-list-container">
                         <div class="card-list">
-                        <?php foreach( $expertises as $expertise ){
+                        <?php foreach( $expertises as $expertise ) {
                             $id = $expertise; 
                             include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
                         } ?>
@@ -348,7 +348,8 @@ while ( have_posts() ) : the_post(); ?>
 	<?php 
     endif;
 	?>
-	<section class="container-fluid p-8 p-sm-10 news-list bg-auto">
+	<!-- Latest News -->
+	<!-- <section class="container-fluid p-8 p-sm-10 news-list bg-auto">
 		<div class="row">
 			<div class="col-12">
 				<h2 class="module-title">Latest News for <?php the_title(); ?></h2>
@@ -388,7 +389,7 @@ while ( have_posts() ) : the_post(); ?>
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> -->
 </main>
 
 <?php endwhile; // end of the loop. ?>
