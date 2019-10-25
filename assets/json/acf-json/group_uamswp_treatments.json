@@ -6,8 +6,8 @@
             "key": "field_treatment_procedure_alternate",
             "label": "Alternate names",
             "name": "treatment_procedure_alternate",
-            "type": "text",
-            "instructions": "Seperate terms with a semi-colon",
+            "type": "repeater",
+            "instructions": "Insert additional names \/ phrases",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -15,9 +15,36 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "acfe_validate": "",
-            "acfe_update": ""
+            "acfe_permissions": "",
+            "collapsed": "field_alternate_text",
+            "min": 0,
+            "max": 10,
+            "layout": "table",
+            "button_label": "Add Keyword",
+            "sub_fields": [
+                {
+                    "key": "field_alternate_text",
+                    "label": "Alternate name \/ text",
+                    "name": "text",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "acfe_validate": "",
+                    "acfe_update": ""
+                }
+            ]
         },
         {
             "key": "field_treatment_procedure_content",
