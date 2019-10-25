@@ -33,9 +33,14 @@
 			</div>
 		</div>
 	</section>
-	<?php
-		include( UAMS_FAD_PATH . '/templates/blocks/clinical-trials.php' );
-	?>
+	<section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
+		<div class="row">
+			<div class="col-xs-12">
+				<h2>Clinical Trials</h2>
+				<p><a href="https://uams.trialstoday.org/" aria-label="Search UAMS Clinical Trials">Search our clinical trials</a> for those related to <?php echo single_cat_title( '', false ); ?>.</p>
+			</div>
+		</div>
+	</section>
 	<?php 
 		$treatments = get_field('condition_treatments', $term);
 		//echo count($treatments);
@@ -48,7 +53,7 @@
 	<section class="container-fluid p-8 p-sm-10 conditions-treatments bg-auto">
 		<div class="row">
 			<div class="col-xs-12">
-				<h2 class="module-title">Treatments and Services</h2>
+				<h2 class="module-title">Treatments and Procedures Related to <?php echo single_cat_title( '', false ); ?></h2>
 				<div class="list-container list-container-rows">
 					<ul class="list">
 					<?php foreach( $treatments as $treatment ) { ?> 
@@ -78,10 +83,12 @@
 	<section class="container-fluid p-8 p-sm-10 bg-auto" id="doctors">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="module-title">Doctors Providing Treatments or Services for <?php echo single_cat_title( '', false ); ?></h2>
-				<p class="note">Note that every treatment/service listed above may not be provided by each doctor listed below. Review each doctor for availability.</p>	
+				<h2 class="module-title">Doctors Treating <?php echo single_cat_title( '', false ); ?></h2>
+				<p class="note">Note that every treatment or procedure listed above may not be provided by each doctor listed below. Review each doctor for availability.</p>
 				<div class="card-list-container">
-					<?php echo facetwp_display( 'template', 'condition_physicians' ); ?>
+					<div class="card-list card-list-doctors facetwp-template">
+						<?php echo facetwp_display( 'template', 'condition_physicians' ); ?>
+					</div>
 				</div>
 				<div class="row list-pagination">
 					<div class="col">
@@ -113,7 +120,7 @@
 	<section class="container-fluid p-8 p-sm-10 bg-auto" id="locations">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="module-title">Locations Providing Treatments or Services for <?php echo single_cat_title( '', false ); ?></h2>
+				<h2 class="module-title">Locations Where <?php echo single_cat_title( '', false ); ?> Is Treated</h2>
 				<div class="card-list-container">
 					<div class="card-list card-list-locations">
 					<?php 
