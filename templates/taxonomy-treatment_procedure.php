@@ -23,7 +23,7 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<h2>Clinical Trials</h2>
-				<p><a href="javascript:void(0)">Search our clinical trials</a> for those related to Shoulder Impingement Syndrome.</p>
+				<p><a href="https://uams.trialstoday.org/" aria-label="Search UAMS Clinical Trials">Search our clinical trials</a> for those related to <?php echo single_cat_title( '', false ); ?>.</p>
 			</div>
 		</div>
 	</section>
@@ -36,7 +36,7 @@
 	<section class="container-fluid p-8 p-sm-10 conditions-treatments bg-auto">
 		<div class="row">
 			<div class="col-xs-12">
-				<h2 class="module-title">Conditions</h2>
+				<h2 class="module-title">Conditions Related to <?php echo single_cat_title( '', false ); ?></h2>
 				<div class="list-container list-container-rows">
 					<ul class="list">
 					<?php foreach( $conditions as $condition ) { ?> 
@@ -51,8 +51,8 @@
 	<section class="container-fluid p-8 p-sm-10 bg-auto" id="doctors">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="module-title">Doctors Providing Treatments or Services for <?php echo single_cat_title( '', false ); ?></h2>
-				<p class="note">Note that every treatment/service listed above may not be provided by each doctor listed below. Review each doctor for availability.</p>	
+				<h2 class="module-title">Doctors Performing <?php echo single_cat_title( '', false ); ?></h2>
+				<p class="note">Note that every condition listed above may not be treated by each doctor listed below. Review each doctor for availability.</p>	
 				<div class="card-list-container">
 					<?php echo facetwp_display( 'template', 'treatment_physicians' ); ?>
 				</div>
@@ -67,7 +67,7 @@
 	<section class="container-fluid p-8 p-sm-10 bg-auto" id="locations">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="module-title">Locations Providing Treatments or Services for <?php echo single_cat_title( '', false ); ?></h2>
+				<h2 class="module-title">Locations Providing <?php echo single_cat_title( '', false ); ?></h2>
 				<div class="card-list-container">
 					<div class="card-list card-list-locations">
 					<?php 

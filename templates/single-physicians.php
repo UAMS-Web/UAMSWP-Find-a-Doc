@@ -17,6 +17,7 @@ if ( $degrees ) {
     endforeach;
 } 
 $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') .  ( $degree_list ? ', ' . $degree_list : '' );
+$short_name = get_field('physician_prefix') ? get_field('physician_prefix') .' ' .get_field('physician_last_name') : get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name');
 $excerpt = get_field('physician_academic_short_bio');
 $bio = get_field('physician_clinical_bio');
 if (empty($excerpt)){
@@ -195,7 +196,7 @@ while ( have_posts() ) : the_post(); ?>
         <section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2>Make an Appointment</h2>
+                    <h2>Make an Appointment With <?php echo $short_name; ?></h2>
                     <?php 
                         $refer_req = get_field('physician_referral_required');
                         $accept_new = get_field('physician_accepting_patients');
@@ -216,7 +217,7 @@ while ( have_posts() ) : the_post(); ?>
         <section class="container-fluid p-8 p-sm-10 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2 class="module-title">About <?php echo get_field('physician_prefix') ? get_field('physician_prefix') .' ' .get_field('physician_last_name') : get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name'); ?>
+                    <h2 class="module-title">About <?php echo $short_name; ?>
                     </h2>
                     <div class="module-body">
                         <?php echo get_field('physician_clinical_bio'); ?>
@@ -231,7 +232,8 @@ while ( have_posts() ) : the_post(); ?>
         </section>
         <?php endif; ?>
         <?php // load all 'conditions' terms for the post
-                $conditions = get_field('physician_conditions');
+	        $title_append = ' by ' . $short_name;
+            $conditions = get_field('physician_conditions');
 
             // we will use the first term to load ACF data from
             if( $conditions ):
@@ -249,7 +251,7 @@ while ( have_posts() ) : the_post(); ?>
             <section class="container-fluid p-8 p-sm-10 expertise-list bg-auto" id="expertise">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="module-title">Areas of Expertise</h2>
+                        <h2 class="module-title"><?php echo $short_name; ?>'s Areas of Expertise</h2>
                         <div class="card-list-container">
                             <div class="card-list">
                             <?php foreach( $expertises as $expertise ) {
@@ -267,7 +269,7 @@ while ( have_posts() ) : the_post(); ?>
         <section class="container-fluid p-8 p-sm-10 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2 class="module-title">Academic Background</h2>
+                    <h2 class="module-title"><?php echo $short_name; ?>'s Academic Background</h2>
                     <div class="module-body">
                         <?php echo get_field('physician_academic_bio'); ?>
                         <?php
@@ -367,7 +369,7 @@ while ( have_posts() ) : the_post(); ?>
         <section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="locations">
             <div class="row">
                 <div class="col-12">
-                    <h2 class="module-title">Locations</h2>
+                    <h2 class="module-title">Locations Where <?php echo $short_name; ?> Practices</h2>
                     <div class="card-list-container">
                         <div class="card-list">
                         <?php $l = 1; ?>
@@ -525,7 +527,7 @@ while ( have_posts() ) : the_post(); ?>
         <section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2>Make an Appointment</h2>
+                    <h2>Make an Appointment With <?php echo $short_name; ?></h2>
                     <?php 
                         $refer_req = get_field('physician_referral_required');
                         $accept_new = get_field('physician_accepting_patients');

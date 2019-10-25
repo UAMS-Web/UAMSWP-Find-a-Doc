@@ -49,7 +49,7 @@ while ( have_posts() ) : the_post(); ?>
 								$text = get_sub_field('location_appointments_additional_text');
 						?>
 						<dt><?php echo $title; ?></dt>
-						<dd><a href="tel:<?php echo format_phone_dash( $phone ); ?>"><?php echo format_phone_us( $phone ); ?></a><?php echo ($text ? '<br/><small>'. $text .'</small>' : ''); ?></dd>
+						<dd><a href="tel:<?php echo format_phone_dash( $phone ); ?>"><?php echo format_phone_us( $phone ); ?></a><?php echo ($text ? '<br/><span class="subtitle">'. $text .'</span>' : ''); ?></dd>
 						<?php endwhile; 
 							} ?>
 						<?php
@@ -90,7 +90,7 @@ while ( have_posts() ) : the_post(); ?>
 									} else {
 										$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] )  ? '' . apStyleDate( $hour['open'] ) . ' &ndash; ' . apStyleDate( $hour['close'] ) . '' : '' );
 										if ( $hour['comment'] ) {
-											$hours_text .= ' ' .$hour['comment'];
+											$hours_text .= ' <br /><span class="subtitle">' .$hour['comment'] . '</span>';
 											$comment = $hour['comment'];
 										} else {
 											$comment = '';
@@ -135,13 +135,12 @@ while ( have_posts() ) : the_post(); ?>
 										echo '<dl class="hours">';
 										$i++;
 									}
-									echo '<dt>'.$holidayDate . '<br/>';
+									echo '<dt>'. $row['label'] . '<br />' . $holidayDate . '<br/>';
 									echo '</dt>' . '<dd>';
 									if ( $row['closed'] ) {
-										echo $row['closed'] ? 'Closed ' .$row['label'] .'</dd>': '';
+										echo $row['closed'] ? 'Closed</dd>': '';
 									} else {
 										echo ( ( $hour['open'] && '00:00:00' != $row['open'] )  ? '' . apStyleDate( $row['open'] ) . ' &ndash; ' . apStyleDate( $row['close'] ) . ' ' : '' );
-										echo $row['label'] .'</dd>';
 									}
 								}	
 							endforeach;
@@ -232,7 +231,7 @@ while ( have_posts() ) : the_post(); ?>
 	<section class="container-fluid p-8 p-sm-10 bg-auto">
 		<div class="row">
 			<div class="col-xs-12">
-				<h2 class="module-title">About This Location</h2>
+				<h2 class="module-title">About <?php the_title(); ?></h2>
 				<div class="module-body">
 					<?php echo get_field('location_about'); ?>
 				</div>
@@ -259,7 +258,7 @@ while ( have_posts() ) : the_post(); ?>
 		<div class="row">
 			<div class="col-xs-12">
 				<?php if ( get_field('location_appointment') && get_field('location_appointment_bring') ) { ?>
-					<h2 class="module-title">Appointments</h2>
+					<h2 class="module-title">Appointment Information</h2>
 					<div class="module-body">
 						<?php echo get_field('location_appointment'); ?>
 						<h3>What to Bring to Your Appointment</h3>
@@ -319,7 +318,8 @@ while ( have_posts() ) : the_post(); ?>
 	</section>
 	<?php endif; ?>
 	<?php // load all 'conditions' terms for the post
-	$conditions = get_field('expertise_conditions');
+	$title_append = ' at ' . get_the_title();
+	$conditions = get_field('location_conditions');
 
 	if( $conditions ):
         include( UAMS_FAD_PATH . '/templates/loops/conditions-loop.php' );
@@ -334,7 +334,7 @@ while ( have_posts() ) : the_post(); ?>
 		<section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="locations">
             <div class="row">
                 <div class="col-12">
-                    <h2 class="module-title">Areas of Expertise</h2>
+                    <h2 class="module-title">Areas of Expertise Represented at <?php the_title(); ?></h2>
                     <div class="card-list-container">
                         <div class="card-list">
                         <?php foreach( $expertises as $expertise ){
@@ -351,7 +351,7 @@ while ( have_posts() ) : the_post(); ?>
 	<section class="container-fluid p-8 p-sm-10 news-list bg-auto">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="module-title">Latest News for [Location Item Name]</h2>
+				<h2 class="module-title">Latest News for <?php the_title(); ?></h2>
 				<div class="card-list-container">
 					<div class="card-list">
 						<div class="card">
