@@ -72,7 +72,9 @@
 				<h2 class="module-title">Doctors Treating <?php echo single_cat_title( '', false ); ?></h2>
 				<p class="note">Note that every treatment or procedure listed above may not be provided by each doctor listed below. Review each doctor for availability.</p>
 				<div class="card-list-container">
-					<?php echo facetwp_display( 'template', 'condition_physicians' ); ?>
+					<div class="card-list card-list-doctors facetwp-template">
+						<?php echo facetwp_display( 'template', 'condition_physicians' ); ?>
+					</div>
 				</div>
 				<div class="row list-pagination">
 					<div class="col">
