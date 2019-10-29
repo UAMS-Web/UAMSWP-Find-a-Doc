@@ -1,0 +1,248 @@
+{
+    "key": "group_uamswp_expertise",
+    "title": "Clinical Area of Expertise",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "expertise"
+            },
+            {
+                "param": "page_parent",
+                "operator": "==",
+                "value": "0"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "acfe_display_title": "",
+    "acfe_autosync": "",
+    "acfe_permissions": "",
+    "acfe_note": "",
+    "acfe_meta": "",
+    "fields": {
+        "field_expertise_conditions": {
+            "key": "field_expertise_conditions",
+            "name": "expertise_conditions",
+            "type": "taxonomy",
+            "label": "Conditions",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "condition",
+            "field_type": "multi_select",
+            "allow_null": 0,
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 0
+        },
+        "field_expertise_treatments": {
+            "key": "field_expertise_treatments",
+            "name": "expertise_treatments",
+            "type": "taxonomy",
+            "label": "Treatments & Procedures",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "treatment_procedure",
+            "field_type": "multi_select",
+            "allow_null": 0,
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 0
+        },
+        "field_medical_terms": {
+            "key": "field_expertise_medical_terms",
+            "name": "expertise_medical_terms",
+            "type": "taxonomy",
+            "label": "Medical Terms (Tags)",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_expertise_conditions",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "medical_terms",
+            "field_type": "multi_select",
+            "allow_null": 0,
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 0
+        },
+        "field_expertise_physicians": {
+            "key": "field_expertise_physicians",
+            "name": "expertise_physicians",
+            "type": "relationship",
+            "label": "Physicians",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "physicians"
+            ],
+            "taxonomy": [],
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": true,
+                "acfe_bidirectional_related": "field_physician_expertise"
+            },
+            "acfe_validate": "",
+            "acfe_update": ""
+        },
+        "field_expertise_locations": {
+            "key": "field_expertise_locations",
+            "name": "expertise_locations",
+            "type": "relationship",
+            "label": "Locations",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "locations"
+            ],
+            "taxonomy": [],
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": true,
+                "acfe_bidirectional_related": "field_location_expertise"
+            },
+            "acfe_validate": "",
+            "acfe_update": ""
+        },
+        "field_expertise_associated": {
+            "key": "field_expertise_associated",
+            "name": "expertise_associated",
+            "type": "relationship",
+            "label": "Associated Areas of Expertise",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "expertise"
+            ],
+            "taxonomy": [],
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id"
+        },
+        "field_expertise_alternate_names": {
+            "key": "field_expertise_alternate_names",
+            "label": "Alternate Names",
+            "name": "expertise_alternate_names",
+            "type": "repeater",
+            "instructions": "Insert additional names \/ phrases",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "collapsed": "field_alternate_text",
+            "min": 0,
+            "max": 10,
+            "layout": "table",
+            "button_label": "Add Keyword",
+            "sub_fields": [
+                {
+                    "key": "field_alternate_text",
+                    "label": "Alternate name \/ text",
+                    "name": "text",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "acfe_validate": "",
+                    "acfe_update": ""
+                }
+            ]
+        }
+    },
+    "modified": false
+}

@@ -6,15 +6,18 @@
 $degrees = get_field('physician_degree');
 $degree_list = '';
 $i = 1;
-foreach( $degrees as $degree ):
-    $degree_name = get_term( $degree, 'degree');
-    $degree_list .= $degree_name->name;
-    if( count($degrees) > $i ) {
-        $degree_list .= ", ";
-    }
-    $i++;
- endforeach; 
+if ( $degrees ) {
+    foreach( $degrees as $degree ):
+        $degree_name = get_term( $degree, 'degree');
+        $degree_list .= $degree_name->name;
+        if( count($degrees) > $i ) {
+            $degree_list .= ", ";
+        }
+        $i++;
+    endforeach;
+} 
 $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') .  ( $degree_list ? ', ' . $degree_list : '' );
+$short_name = get_field('physician_prefix') ? get_field('physician_prefix') .' ' .get_field('physician_last_name') : get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name');
 $excerpt = get_field('physician_academic_short_bio');
 $bio = get_field('physician_clinical_bio');
 if (empty($excerpt)){
@@ -45,29 +48,39 @@ while ( have_posts() ) : the_post(); ?>
         <section class="container-fluid p-0 p-xs-8 p-sm-10 doctor-info bg-white">
             <div class="row mx-0 mx-xs-n4 mx-sm-n8">
                 <div class="col-12 col-xs p-4 py-xs-0 px-xs-4 px-sm-8 order-2 text">
-                    <h1 class="page-title"><?php echo $full_name; ?></h1>
+                    <h1 class="page-title">
+                        <span class="name"><?php echo $full_name; ?></span>
+                        <?php 
+                        $phys_title = get_field('physician_title');
+                        if ($phys_title && !empty($phys_title)) { ?>
+                            <span class="subtitle"><?php echo (get_field('physician_title') ? get_term( get_field('physician_title'), 'clinical_title' )->name : ''); ?></span>
+                        <?php } ?>
+                    </h1>
                     <h2 class="sr-only">Overview</h2>
                     <dl>
-                    <?php 
+                    <?php // Display medical department
                     $med_dept = get_field('physician_department');
                     if ($med_dept && !empty($med_dept)) { ?>
                         <dt>Medical Department</dt>
                         <dd><?php echo (get_field('physician_department') ? get_term( get_field('physician_department'), 'department' )->name : ''); ?></dd>                 
                     <?php } ?>
-                        <dt>Primary Care</dt>
-                        <dd><?php echo (get_field('physician_primary_care') ? 'Yes' : 'No'); ?></dd>
-                        
-                        <?php // load all 'specialties' terms for the post
-                            $patients = get_field('physician_patient_types');
-                            if( $patients ): 
-                            ?>
-                            <dt>Patient Type<?php echo( count($patients) > 1 ? 's' : '' );?></dt>
-                                <?php foreach( $patients as $patient ): ?>
-                                    <?php $patient_name = get_term( $patient, 'patient_type');
-                                        echo '<dd>' . $patient_name->name . '</dd>';
-                                    ?>
-                                <?php endforeach; ?>
-                        <?php endif; ?>
+                    <?php  // Display if they will provide second opinions
+                        $second_opinion = get_field('physician_second_opinion');
+                        if ($second_opinion) { ?>
+                        <dt>Provides Second Opinion</dt>
+                        <dd>Yes</dd>
+                    <?php } ?>
+                    <?php // Display all patient types
+                        $patients = get_field('physician_patient_types');
+                        if( $patients ): 
+                        ?>
+                        <dt>Patient Type<?php echo( count($patients) > 1 ? 's' : '' );?></dt>
+                            <?php foreach( $patients as $patient ): ?>
+                                <?php $patient_name = get_term( $patient, 'patient_type');
+                                    echo '<dd>' . $patient_name->name . '</dd>';
+                                ?>
+                            <?php endforeach; ?>
+                    <?php endif; ?>
                     </dl>
                     <?php
                         if(get_field('physician_npi')) {
@@ -121,15 +134,15 @@ while ( have_posts() ) : the_post(); ?>
 						<h2>Primary Location</h2>
                             <?php foreach( $locations as $location ):
                                     if ( 2 > $l ){ ?>
-                                <p><strong><?php echo get_the_title( $location->ID ); ?></strong><br />
-                                <?php echo get_field( 'location_address_1', $location->ID ); ?><br/>
-                                <?php echo ( get_field( 'location_address_2', $location->ID ) ? get_field( 'location_address_2', $location->ID ) . '<br/>' : ''); ?>
-                                <?php echo get_field( 'location_city', $location->ID ); ?>, <?php echo get_field(' location_state', $location->ID ); ?> <?php echo get_field( 'location_zip', $location->ID ); ?>
-                                <?php $map = get_field( 'location_map', $location->ID ); ?>
-                                <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a>
+                                <p><strong><?php echo get_the_title( $location ); ?></strong><br />
+                                <?php echo get_field( 'location_address_1', $location ); ?><br/>
+                                <?php echo ( get_field( 'location_address_2', $location ) ? get_field( 'location_address_2', $location ) . '<br/>' : ''); ?>
+                                <?php echo get_field( 'location_city', $location ); ?>, <?php echo get_field(' location_state', $location ); ?> <?php echo get_field( 'location_zip', $location ); ?>
+                                <?php $map = get_field( 'location_map', $location ); ?>
+                                <!-- <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a> -->
                                 </p>
                                 <div class="btn-container">
-                                    <a class="btn btn-primary" href="<?php the_permalink( $location->ID ); ?>">
+                                    <a class="btn btn-primary" href="<?php the_permalink( $location ); ?>">
                                         View Location
                                     </a>
                                     <a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of locations for this doctor">
@@ -183,8 +196,20 @@ while ( have_posts() ) : the_post(); ?>
         <section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2>Make an Appointment</h2>
-                    <p>Request an <a href="<?php echo get_field( 'field_physician_appointment_link' ); ?>">appointment</a>, <span class="no-break">or call <a href="tel:501-686-8000">501-686-8000</a>.</span></p>
+                    <h2>Make an Appointment With <?php echo $short_name; ?></h2>
+                    <?php 
+                        $refer_req = get_field('physician_referral_required');
+                        $accept_new = get_field('physician_accepting_patients');
+                        if ($refer_req && $accept_new) { ?>
+                            <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
+                            <p>Existing patients can either <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through MyChart, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                    <?php } elseif ($accept_new) { ?>
+                        <p>New patients can make appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                        <p>Existing patients have the option to <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through&nbsp;MyChart.</p>
+                    <?php } else { ?>
+                        <p>This physician is not currently accepting new patients.</p>
+                        <p>Existing patients can either <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through MyChart, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                    <?php } ?>
                 </div>
             </div>
         </section>
@@ -192,7 +217,7 @@ while ( have_posts() ) : the_post(); ?>
         <section class="container-fluid p-8 p-sm-10 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2 class="module-title">About <?php echo get_field('physician_prefix') ? get_field('physician_prefix') .' ' .get_field('physician_last_name') : get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name'); ?>
+                    <h2 class="module-title">About <?php echo $short_name; ?>
                     </h2>
                     <div class="module-body">
                         <?php echo get_field('physician_clinical_bio'); ?>
@@ -207,86 +232,70 @@ while ( have_posts() ) : the_post(); ?>
         </section>
         <?php endif; ?>
         <?php // load all 'conditions' terms for the post
-                $conditions = get_field('physician_conditions');
-
-                // we will use the first term to load ACF data from
-            if( $conditions ): ?>
-        <section class="container-fluid p-8 p-sm-10 conditions-treatments bg-auto">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h2 class="module-title">Conditions Treated</h2>
-                    <p class="note">UAMS doctors treat a broad range of conditions some of which may not be listed below.</p>
-                    <div class="list-container list-container-rows">
-                        <ul class="list">
-                        <?php foreach( $conditions as $condition ): ?>
-                            <li>
-                                <a href="<?php echo get_term_link( $condition ); ?>">
-                                    <?php $condition_name = get_term( $condition, 'condition');
-                                        echo $condition_name->name;
-                                    ?>
-                                </a>
-                            </li>
-                        <?php endforeach; ?>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <?php endif; ?>
-        <?php // load all 'specialties' terms for the post
-            $specialties = get_field('medical_specialties');
+	        $title_append = ' by ' . $short_name;
+            $conditions = get_field('physician_conditions');
 
             // we will use the first term to load ACF data from
-        if( $specialties ): ?>
-        <section class="container-fluid p-8 p-sm-10 conditions-treatments bg-auto">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h2 class="module-title">Medical Specialties</h2>
-                    <div class="list-container list-container-rows">
-                        <ul class="list">
-                        <?php foreach( $specialties as $specialty ): ?>
-                            <li>
-                                <a href="<?php echo get_term_link( $specialty ); ?>">
-                                <?php $specialty_name = get_term( $specialty, 'specialty');
-                                    echo $specialty_name->name;
-                                ?>
-                                </a>
-                            </li>
-                        <?php endforeach; ?>
-                        </ul>
+            if( $conditions ):
+                include( UAMS_FAD_PATH . '/templates/loops/conditions-loop.php' );
+            endif; 
+             // load all 'treatments' terms for the post
+            $treatments = get_field('physician_treatments');
+
+            // we will use the first term to load ACF data from
+        if( $treatments ):
+            include( UAMS_FAD_PATH . '/templates/loops/treatments-loop.php' );
+        endif;
+        $expertises =  get_field('physician_expertise');
+        if( $expertises ): ?>
+            <section class="container-fluid p-8 p-sm-10 expertise-list bg-auto" id="expertise">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="module-title"><?php echo $short_name; ?>'s Areas of Expertise</h2>
+                        <div class="card-list-container">
+                            <div class="card-list">
+                            <?php foreach( $expertises as $expertise ) {
+                                $id = $expertise; 
+                                include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+                            } ?>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <?php endif; ?>
+            </section>
+        <?php 
+        endif;
+        ?>
         <?php if(get_field('physician_academic_appointment')||get_field('physician_education')||get_field('physician_boards')||get_field('physician_publications')||get_field('physician_pubmed_author_id')||get_field('physician_research_profiles_link')): ?>
         <section class="container-fluid p-8 p-sm-10 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2 class="module-title">Academic Background</h2>
+                    <h2 class="module-title"><?php echo $short_name; ?>'s Academic Background</h2>
                     <div class="module-body">
+                        <?php echo get_field('physician_academic_bio'); ?>
                         <?php
                             // $academic_appointments = get_field('physician_academic_appointment');
                             if( have_rows('physician_academic_appointment') ): ?>
-                        <h3>Academic Appointments</h3>
-                        <ul>
-                        <?php while( have_rows('physician_academic_appointment') ): the_row(); ?>
-                        <?php $department = get_term( get_sub_field('department'), 'academic_department' ); ?>
-                            <li><?php the_sub_field('academic_title'); ?>, <?php echo $department->name; ?></li>
-                        <?php endwhile; ?>
-                        </ul>
+                                <h3>Academic Appointments</h3>
+                                <dl>
+                                <?php while( have_rows('physician_academic_appointment') ): the_row(); ?>
+                                <?php $department = get_term( get_sub_field('department'), 'academic_department' ); ?>
+                                    <dt><?php echo $department->name; ?></dt>
+                                    <dd><?php the_sub_field('academic_title'); ?></dd>
+                                <?php endwhile; ?>
+                                </dl>
                         <?php endif; ?>
                         <?php
                             if( have_rows('physician_education') ): ?>
-                        <h3>Education</h3>
-                        <ul>
-                        <?php while( have_rows('physician_education') ): the_row();
-                            $school_name = get_term( get_sub_field('school'), 'schools');
-                            $education_type = get_term( get_sub_field('education_type'), 'educationtype');
-                        ?>
-                            <li><?php echo $education_type->name; ?> - <?php echo (get_sub_field('description') ? '' . get_sub_field('description') .'<br/>' : ''); ?><?php echo $school_name->name; ?></li>
-                        <?php endwhile; ?>
-                        </ul>
+                                <h3>Education</h3>
+                                <dl>
+                                <?php while( have_rows('physician_education') ): the_row();
+                                    $school_name = get_term( get_sub_field('school'), 'schools');
+                                    $education_type = get_term( get_sub_field('education_type'), 'educationtype');
+                                ?>
+                                    <dt><?php echo $education_type->name; ?></dt>
+                                    <dd><?php echo $school_name->name; ?><?php echo (get_sub_field('description') ? '<br /><span class="subtitle">' . get_sub_field('description') .'</span>' : ''); ?></dd>
+                                <?php endwhile; ?>
+                                </dl>
                         <?php endif;
                             $boards = get_field( 'physician_boards' );
                             if( ! empty( $boards ) ): ?>
@@ -360,25 +369,28 @@ while ( have_posts() ) : the_post(); ?>
         <section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="locations">
             <div class="row">
                 <div class="col-12">
-                    <h2 class="module-title">Locations</h2>
+                    <h2 class="module-title">Locations Where <?php echo $short_name; ?> Practices</h2>
                     <div class="card-list-container">
                         <div class="card-list">
                         <?php $l = 1; ?>
                         <?php foreach( $locations as $location ): ?>
                             <div class="card">
-                                <?php echo get_the_post_thumbnail( $location->ID , 'large',  array( 'itemprop' => 'image' ) ); ?>
-                                <!-- <img srcset="https://picsum.photos/434/244?image=13 1x, https://picsum.photos/868/488?image=13 2x" src="https://picsum.photos/434/244?image=13" class="card-img-top" alt="<?php echo get_the_title( $location->ID ); ?>"> -->
+                                <?php if ( has_post_thumbnail($location) ) { ?>
+                                <?php echo get_the_post_thumbnail($location, 'aspect-16-9-small', ['class' => 'card-img-top']); ?>
+                                <?php } else { ?>
+                                <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" alt="<?php echo get_the_title( $location ); ?>" class="card-image-top" />
+                                <?php } ?>
                                 <div class="card-body">
                                         <h3 class="card-title">
-                                            <span class="name"><?php echo get_the_title( $location->ID ); ?></span>
+                                            <span class="name"><?php echo get_the_title( $location ); ?></span>
                                             <?php  if ( 1 == $l ) { ?>
                                                 <span class="subtitle">Primary Location</span>
                                             <?php } ?>
                                         </h3>
-                                    <p class="card-text"><?php echo get_field('location_address_1', $location->ID ); ?><br/>
-                                    <?php echo ( get_field('location_address_2', $location->ID ) ? get_field('location_address_2', $location->ID ) . '<br/>' : ''); ?>
-                                    <?php echo get_field('location_city', $location->ID ); ?>, <?php echo get_field('location_state', $location->ID ); ?> <?php echo get_field('location_zip', $location->ID); ?></p>
-                                    <a href="<?php the_permalink(  $location->ID ); ?>" class="btn btn-primary stretched-link" aria-label="Go to location page for <?php echo get_the_title( $location->ID ); ?>">View Location</a>
+                                    <p class="card-text"><?php echo get_field('location_address_1', $location ); ?><br/>
+                                    <?php echo ( get_field('location_address_2', $location ) ? get_field('location_address_2', $location ) . '<br/>' : ''); ?>
+                                    <?php echo get_field('location_city', $location ); ?>, <?php echo get_field('location_state', $location ); ?> <?php echo get_field('location_zip', $location); ?></p>
+                                    <a href="<?php the_permalink(  $location ); ?>" class="btn btn-primary stretched-link" aria-label="Go to location page for <?php echo get_the_title( $location ); ?>">View Location</a>
                                 </div>
                             </div>
                             <?php $l++; ?>
@@ -515,8 +527,20 @@ while ( have_posts() ) : the_post(); ?>
         <section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2>Make an Appointment</h2>
-                    <p>Request an <a href="<?php echo get_field( 'field_physician_appointment_link' ); ?>">appointment</a>, <span class="no-break">or call <a href="tel:501-686-8000">501-686-8000</a>.</span></p>
+                    <h2>Make an Appointment With <?php echo $short_name; ?></h2>
+                    <?php 
+                        $refer_req = get_field('physician_referral_required');
+                        $accept_new = get_field('physician_accepting_patients');
+                        if ($refer_req && $accept_new) { ?>
+                            <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
+                            <p>Existing patients can either <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through MyChart, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                    <?php } elseif ($accept_new) { ?>
+                        <p>New patients can make appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                        <p>Existing patients have the option to <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through&nbsp;MyChart.</p>
+                    <?php } else { ?>
+                        <p>This physician is not currently accepting new patients.</p>
+                        <p>Existing patients can either <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through MyChart, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                    <?php } ?>
                 </div>
             </div>
         </section>

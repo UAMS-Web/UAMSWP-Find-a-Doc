@@ -25,6 +25,7 @@
         "page_attributes",
         "categories",
         "tags",
+        "featured_image",
         "send-trackbacks"
     ],
     "active": true,
@@ -217,6 +218,50 @@
             "zoom": 14,
             "height": 400
         },
+        "field_location_featured_image": {
+            "key": "field_location_featured_image",
+            "label": "Featured Image",
+            "name": "_thumbnail_id",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": 1984,
+            "min_height": 1116,
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "acfe_thumbnail": "",
+            "acfe_validate": "",
+            "acfe_update": ""
+        },
+        "field_location_directions_tab": {
+            "key": "field_location_directions_tab",
+            "name": "",
+            "type": "tab",
+            "label": "<i class=\"dashicons-randomize dashicons\"><\/i> Parking &amp; Directions",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
         "field_location_parking": {
             "key": "field_location_parking",
             "name": "location_parking",
@@ -240,7 +285,7 @@
             "key": "field_location_direction",
             "name": "location_direction",
             "type": "wysiwyg",
-            "label": "Directions (Written)",
+            "label": "Directions From Parking Area",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -322,7 +367,7 @@
                 "class": "",
                 "id": ""
             },
-            "input_mask": "(999) 999-9999"
+            "input_mask": "(999) 999-9999 [x 99999]"
         },
         "field_location_phone_numbers": {
             "key": "field_location_phone_numbers",
@@ -375,7 +420,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "input_mask": "(999) 999-9999"
+                    "input_mask": "(999) 999-9999 [x 99999]"
                 },
                 {
                     "key": "field_location_appointments_additional_text",
@@ -860,8 +905,8 @@
                 "id": ""
             },
             "collapsed": "field_holiday_day",
-            "min": 1,
-            "max": 0,
+            "min": "",
+            "max": "",
             "layout": "table",
             "button_label": "Add Day",
             "sub_fields": [
@@ -970,31 +1015,6 @@
             "placement": "top",
             "endpoint": 0
         },
-        "field_location_medical_specialties": {
-            "key": "field_location_medical_specialties",
-            "name": "location_medical_specialties",
-            "type": "taxonomy",
-            "label": "Medical Specialties Offered",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "specialty",
-            "field_type": "multi_select",
-            "allow_null": 0,
-            "add_term": 0,
-            "save_terms": 1,
-            "load_terms": 1,
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
-            },
-            "multiple": 0
-        },
         "field_location_conditions": {
             "key": "field_location_conditions",
             "name": "location_conditions",
@@ -1045,6 +1065,79 @@
             },
             "multiple": 0
         },
+        "field_location_expertise": {
+            "key": "field_location_expertise",
+            "name": "location_expertise",
+            "type": "relationship",
+            "label": "Areas of Expertise",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "expertise"
+            ],
+            "taxonomy": [],
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": true,
+                "acfe_bidirectional_related": "field_expertise_locations"
+            },
+            "acfe_validate": "",
+            "acfe_update": ""
+        },
+        "field_info_depreciated_open": {
+            "key": "field_info_depreciated_open",
+            "name": "",
+            "type": "accordion",
+            "label": "Deprecated",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        "field_location_medical_specialties": {
+            "key": "field_location_medical_specialties",
+            "name": "location_medical_specialties",
+            "type": "taxonomy",
+            "label": "Medical Specialties Offered",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "specialty",
+            "field_type": "multi_select",
+            "allow_null": 0,
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 0
+        },
         "field_location_medical_terms": {
             "key": "field_location_medical_terms",
             "name": "location_medical_terms",
@@ -1069,23 +1162,6 @@
                 "acfe_bidirectional_enabled": "0"
             },
             "multiple": 0
-        },
-        "field_info_depreciated_open": {
-            "key": "field_info_depreciated_open",
-            "name": "",
-            "type": "accordion",
-            "label": "Deprecated",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "open": 0,
-            "multi_expand": 0,
-            "endpoint": 0
         },
         "field_location_clinic": {
             "key": "field_location_clinic",
@@ -1141,6 +1217,53 @@
             "open": 0,
             "multi_expand": 0,
             "endpoint": 1
+        },
+        "field_location_physician_tab": {
+            "key": "field_location_physician_tab",
+            "name": "",
+            "type": "tab",
+            "label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Physicians",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        "field_location_physicians": {
+            "key": "field_location_physicians",
+            "name": "location_physicians",
+            "type": "relationship",
+            "label": "Physicians",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "physicians"
+            ],
+            "taxonomy": [],
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": true,
+                "acfe_bidirectional_related": "field_physician_locations"
+            },
+            "acfe_validate": "",
+            "acfe_update": ""
         }
     },
     "modified": false

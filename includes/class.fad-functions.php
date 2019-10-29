@@ -1,49 +1,35 @@
 <?php
-
-/* Ajax Search Pro Functions */
-// Sort by last name, first name, middle name
-add_action( 'pre_get_posts', 'cd_sort_physicians' );
-function cd_sort_physicians( $query ) {
-    if ( $query->is_main_query() && !is_admin() ) {
-        if ( $query->is_tax() || $query->is_post_type_archive('physicians') ) {
-	        $query->set('meta_query', array(
-                'physician_last_name' => array(
-                    'key' => get_field('physician_last_name'),
-                ),
-                'physician_first_name' => array(
-                    'key' => get_field('physician_first_name'),
-                ),
-                'physician_middle_name' => array(
-                    'key' => get_field('physician_middle_name'),
-                )
-            ));
-            $query->set('orderby',array(
-                'physician_last_name' => 'ASC',
-                'physician_first_name' => 'ASC',
-                'physician_middle_name' => 'ASC'
-            ));
-        }
-    }
-}
-
 // Ajax Search Pro modifications
 add_filter( 'asp_results', 'asp_custom_link_meta_results', 1, 2 );
-function asp_custom_link_meta_results( $results, $id ) {
+function asp_custom_link_meta_results( $results ) {
 
   // Change this variable to whatever meta key you are using
   //$key = 'profile_type';
 
   // Parse through each result item
-    if ($id == '1') {
+    // if ($id == '1') {
 	  // Parse through each result item
-	  $new_url = '';
+	//   $new_url = '';
 	  $full_name = '';
 	  $new_desc = '';
 	  foreach ($results as $k=>$v) {
 		  if (($v->content_type == "pagepost") && (get_post_type($v->id) == "physicians")) {
+                $degrees = get_field('physician_degree', $v->id);
+                $degree_list = '';
+                $i = 1;
+                if ($degrees){
+                    foreach( $degrees as $degree ):
+                        $degree_name = get_term( $degree, 'degree');
+                        $degree_list .= $degree_name->name;
+                        if( count($degrees) > $i ) {
+                            $degree_list .= ", ";
+                        }
+                        $i++;
+                    endforeach;
+                }
 		  		// $new_url = '/directory/physician/' . get_post_field( 'post_name', $v->id ) .'/';
-		  		$full_name = get_field('physician_first_name', '', $v->id) .' ' .(get_field('physician_middle_name', '', $v->id) ? get_field('physician_middle_name', '', $v->id) . ' ' : '') . get_field('physician_last_name', '', $v->id) . (get_field('physician_degree', '', $v->id) ? ', ' . get_field('physician_degree', '', $v->id) : '');
-		  		$new_desc = get_field('physician_short_clinical_bio', '', $v->id );
+		  		$full_name = get_field('physician_first_name', $v->id) .' ' .(get_field('physician_middle_name', $v->id) ? get_field('physician_middle_name', $v->id) . ' ' : '') . get_field('physician_last_name', $v->id) . ( $degree_list ? ', ' . $degree_list : '' );
+		  		$new_desc = get_field('physician_short_clinical_bio', $v->id );
 		  }
 		  // Change only, if the meta is specified
 		  // if ( !empty($new_url) )
@@ -58,31 +44,31 @@ function asp_custom_link_meta_results( $results, $id ) {
 	      $new_desc = ''; //Reset
 	  }
 	  return $results;
-	}
+	// }
 }
 
-add_filter( 'asp_result_image_after_prostproc', 'asp_get_post_type_image', 1, 2 );
+// add_filter( 'asp_result_image_after_prostproc', 'asp_get_post_type_image', 1, 2 );
 
-function asp_get_post_type_image( $image, $id ) {
+// function asp_get_post_type_image( $image, $id ) {
 
-   if ( empty($image) ) {
-       $type = get_post_type( $id );
+//    if ( empty($image) ) {
+//        $type = get_post_type( $id );
 
-       switch ($type) {
-           case "physicians":
-               $image = "/wp-content/uploads/2018/12/image01299.png";
-               break;
-           case "locations":
-               $image = "/wp-content/uploads/2019/01/pin.png";
-               break;
-           default:
-               $image = get_stylesheet_directory_uri() ."/assets/admin-icons/services-icon.png";
-               break;
-       }
-   }
+//        switch ($type) {
+//            case "physicians":
+//                $image = "/wp-content/uploads/2018/12/image01299.png";
+//                break;
+//            case "locations":
+//                $image = "/wp-content/uploads/2019/01/pin.png";
+//                break;
+//            default:
+//                $image = get_stylesheet_directory_uri() ."/assets/admin-icons/services-icon.png";
+//                break;
+//        }
+//    }
 
-    return $image;
-}
+//     return $image;
+// }
 
 
 // pubmed finder
@@ -206,53 +192,6 @@ function prefix_enqueue_custom_style() {
     wp_enqueue_style( 'admin-mb-style', get_stylesheet_directory_uri() . '/admin.css' );
 }
 
-// add_action( 'mb_relationships_init', function() {
-//     MB_Relationships_API::register( array(
-//         'id'   => 'physicians_to_locations',
-//         'from' => array(
-//             'object_type' => 'post',
-//             'post_type'   => 'physicians',
-//             'admin_column' => 'after title',
-//             'meta_box'    => array(
-//                 'title'       => 'Location(s)',
-//                 'field_title' => 'Select Location(s)<br/><span style="font-weight:normal; font-style:italic;">Set Primary Location First</span>',
-//                 'context' => 'normal',
-//                 'priority' => 'high',
-//             ),
-//         ),
-//         'to'   => array(
-//             'object_type' => 'post',
-//             'post_type'   => 'locations',
-//             'admin_column' => true,
-//             'meta_box'    => array(
-//                 'hidden'	=> true,
-//                 'title'       => 'Physician(s)',
-//             ),
-//         ),
-//     ),
-//     array (
-// 		'id'	=> 'services_to_locations',
-// 		'from'	=> array(
-//             'object_type' => 'post',
-//             'post_type'   => 'services',
-//             'meta_box'    => array(
-//                 'title'       => 'Location(s)',
-//                 'field_title' => 'Select Location',
-//                 'context' => 'normal',
-//                 'priority' => 'high',
-//             ),
-//         ),
-//         'to'   => array(
-//             'object_type' => 'post',
-//             'post_type'   => 'locations',
-//             'meta_box'    => array(
-//                 'hidden'	=> true,
-//                 'title'       => 'Service(s)',
-//             ),
-// 		),
-//     ) );
-// } );
-
 /* FacetWP functions */
 // factwp Main Query fix
 // add_filter( 'facetwp_is_main_query', function( $is_main_query, $query ) {
@@ -264,21 +203,22 @@ function prefix_enqueue_custom_style() {
 
 // Filter to fix facetwp hash error
 add_filter( 'facetwp_is_main_query', function( $is_main_query, $query ) {
-    if ( 'physicians' == $query->get( 'post_type' ) ) {
+    // if ( 'physicians' == $query->get( 'post_type' ) ) {
 		$is_main_query = false;
-    }
+    // }
     return $is_main_query;
 }, 10, 2 );
 
 add_filter( 'facetwp_shortcode_html', function( $output, $atts) {
 	if ( $atts['template'] = 'physician' ) { // replace 'example' with name of your template
-    /** modify replacement as needed, make sure you keep the facetwp-template class **/
-    $output = str_replace( 'facetwp-template', 'facetwp-template row list', $output );
+        /** modify replacement as needed, make sure you keep the facetwp-template class **/
+        $output = str_replace( 'facetwp-template', 'facetwp-template row list', $output );
 	}
 	return $output; 
 }, 10, 2 );
 
 function fwp_disable_auto_refresh() {
+    if ( is_post_type_archive( 'physicians' ) ) {
 	?>
 	<script>
 	(function($) {
@@ -289,9 +229,28 @@ function fwp_disable_auto_refresh() {
 		});
 	})(jQuery);
 	</script>
-	<?php
-	}
-	add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
+<?php
+    }
+}
+add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
+
+add_action( 'wp_footer', function() {
+    if ( !is_post_type_archive( 'physicians' ) || !is_post_type_archive( 'locations' ) ) {
+    ?>
+        <script>
+        (function($) {
+            $(document).on('facetwp-refresh', function() {
+            if (FWP.loaded) {
+                FWP.set_hash();
+                window.location.reload();
+                return false;
+            }
+            });
+        })(jQuery);
+        </script>
+    <?php
+    }
+}, 10 );
 
 // FacetWP scripts
 function fwp_facet_scripts() {
@@ -497,14 +456,16 @@ add_filter( 'facetwp_pager_html', function( $output, $params ) {
 
 		$output .= '<nav aria-label="list pagination"><ul class="pagination">';
 
+        // First Page
+        if ( 3 < $page ) {
+            $output .= '<li class="page-item"><a class="facetwp-page page-link first-page" data-page="1"><span class="fas fa-fast-backward" aria-hidden="true"></span></a></li>';
+        }
+        
         // Previous page (NEW)
         if ( $page > 1 ) {
             $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page - 1) . '"><span class="fas fa-angle-left" aria-hidden="true"></span></a></li>';
         }
         
-        if ( 3 < $page ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link first-page" data-page="1"><span class="fas fa-fast-backward" aria-hidden="true"></span></a></li>';
-        }
         if ( 1 < ( $page - 10 ) ) {
             $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page - 10) . '">' . ($page - 10) . '</a></li>';
         }
@@ -525,14 +486,16 @@ add_filter( 'facetwp_pager_html', function( $output, $params ) {
         if ( $total_pages > ( $page + 10 ) ) {
             $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page + 10) . '">' . ($page + 10) . '</a></li>';
         }
-        if ( $total_pages > ( $page + 2 ) ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link last-page" data-page="' . $total_pages . '"><span class="fas fa-fast-forward aria-hidden="true"></span></a></li>';
-        }
 
         // Next page (NEW)
         if ( $page < $total_pages ) {
             $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page + 1) . '"><span class="fas fa-angle-right" aria-hidden="true"></span></a>';
-		}
+        }
+        
+        // Last Page
+        if ( $total_pages > ( $page + 2 ) ) {
+            $output .= '<li class="page-item"><a class="facetwp-page page-link last-page" data-page="' . $total_pages . '"><span class="fas fa-fast-forward aria-hidden="true"></span></a></li>';
+        }
 		
 		$output .= '</ul></nav>';
 
@@ -656,6 +619,17 @@ function set_default_language($value, $post_id, $field) {
     $value = array($id);
   	return $value;
 }
+add_filter('acf/fields/relationship/query/key=field_physician_expertise', 'limit_to_post_parent', 10, 3);
+add_filter('acf/fields/relationship/query/key=field_location_expertise', 'limit_to_post_parent', 10, 3);
+add_filter('acf/fields/relationship/query/key=field_expertise_associated', 'limit_to_post_parent', 10, 3);
+function limit_to_post_parent( $args, $field, $post ) {
+
+    $args['post_parent'] = 0;
+    // $args['post_status'] = 'publish';
+    $args['post__not_in'] = array( $post );
+
+    return $args;
+}
 
 // ACF Custom Tables
 /*
@@ -752,3 +726,24 @@ add_filter('manage_edit-treatment_procedure_columns', function ( $columns )
 
     return $columns;
 } );
+
+/* Relevanssi Functions */
+add_filter('relevanssi_tax_term_additional_content', 'rlv_tax_excerpt_term_fields', 10, 2);
+add_filter('relevanssi_pre_excerpt_content', 'rlv_tax_excerpt_term_fields', 10, 2);
+function rlv_tax_excerpt_term_fields($content, $term) {
+    if (!isset($term->term_id)) return $content;    // not a taxonomy term, skip
+    if (isset($term->term_id) && !isset($term->taxonomy)) {
+        // this is excerpt-building, where the taxonomy is in $term->post_type
+        $term->taxonomy = $term->post_type;
+    }
+    $post_id = $term->taxonomy . "_" . $term->term_id;
+    if( get_field('condition_alternate', $post_id) || get_field('condition_content', $post_id) ) {
+        $content .= get_field('condition_alternate', $post_id);
+        $content .= ' ' . get_field('condition_content', $post_id);
+    } 
+    if ( get_field('treatment_procedure_alternate', $post_id) || get_field('treatment_procedure_content', $post_id) ) {
+        $content .= get_field('treatment_procedure_alternate', $post_id);
+        $content .= ' ' . get_field('treatment_procedure_content', $post_id);
+    }
+    return $content;
+}

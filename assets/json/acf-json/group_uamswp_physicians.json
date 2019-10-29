@@ -15,7 +15,9 @@
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
-    "hide_on_screen": "",
+    "hide_on_screen": [
+        "featured_image"
+    ],
     "active": true,
     "description": "",
     "acfcdt_manage_table_definition": 1,
@@ -100,7 +102,7 @@
             "name": "physician_pedigree",
             "type": "text",
             "label": "Pedigree",
-            "instructions": "",
+            "instructions": "Example: Jr.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -119,7 +121,7 @@
             "name": "physician_degree",
             "type": "taxonomy",
             "label": "Degree(s)",
-            "instructions": "",
+            "instructions": "Select Multiple (if necessary)",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -149,7 +151,7 @@
             "name": "physician_prefix",
             "type": "select",
             "label": "Prefix",
-            "instructions": "",
+            "instructions": "Example: Dr.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -245,6 +247,34 @@
             "append": "",
             "maxlength": ""
         },
+        "field_physician_featured_image": {
+            "key": "field_physician_featured_image",
+            "label": "Headshot",
+            "name": "_thumbnail_id",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": 778,
+            "min_height": 1038,
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "acfe_thumbnail": "",
+            "acfe_validate": "",
+            "acfe_update": ""
+        },
         "field_physician_clinical_tab": {
             "key": "field_physician_clinical_tab",
             "name": "",
@@ -276,7 +306,7 @@
             },
             "taxonomy": "clinical_title",
             "field_type": "select",
-            "allow_null": 0,
+            "allow_null": 1,
             "add_term": 0,
             "save_terms": 0,
             "load_terms": 0,
@@ -309,7 +339,7 @@
                 "acfe_bidirectional_enabled": "0"
             },
             "multiple": 0,
-            "allow_null": 0
+            "allow_null": 1
         },
         "field_physician_clinical_bio": {
             "key": "field_physician_clinical_bio",
@@ -416,7 +446,13 @@
             "elements": "",
             "min": 1,
             "max": "",
-            "return_format": "object"
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": true,
+                "acfe_bidirectional_related": "field_location_physicians"
+            },
+            "acfe_validate": "",
+            "acfe_update": ""
         },
         "field_physician_affiliation": {
             "key": "field_physician_affiliation",
@@ -576,6 +612,37 @@
             "ui_on_text": "",
             "ui_off_text": ""
         },
+        "field_physician_expertise": {
+            "key": "field_physician_expertise",
+            "name": "physician_expertise",
+            "type": "relationship",
+            "label": "Areas of Expertise",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "expertise"
+            ],
+            "taxonomy": [],
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": true,
+                "acfe_bidirectional_related": "field_expertise_physicians"
+            },
+            "acfe_validate": "",
+            "acfe_update": ""
+        },
         "field_medical_specialties": {
             "key": "field_medical_specialties",
             "name": "physician_medical_specialties",
@@ -583,7 +650,15 @@
             "label": "Medical Specialties",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_clinical_details_tab",
+                        "operator": "==",
+                        "value": "false"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",

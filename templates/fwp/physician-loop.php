@@ -4,7 +4,6 @@
 	 *  Designed for physicians
 	 */
 ?>
-	<?php $i = 0; ?>
 	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 	<?php 
 	$degrees = get_field('physician_degree');
@@ -73,7 +72,7 @@
 						<h3 class="h4">
 							<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name; ?>"><span class="name"><?php echo $full_name; ?></span></a>
 							<?php if ( get_field('physician_department') ) { ?>
-							<span class="subtitle"><?php echo get_field('physician_department')->name; ?></span>
+							<span class="subtitle"><?php echo get_term( get_field('physician_department'), 'department' )->name; ?></span>
 							<?php } // endif ?>
 						</h3>
 						<?php
@@ -131,8 +130,8 @@
 								<ul>
 								<?php foreach( $locations as $location): ?>
 									<li>
-										<a href="<?php echo get_permalink( $location->ID ); ?>">
-											<?php echo get_the_title( $location->ID ); ?>
+										<a href="<?php echo get_permalink( $location ); ?>">
+											<?php echo get_the_title( $location ); ?>
 										</a>
 									</li>
 								<?php endforeach; ?>
@@ -152,7 +151,7 @@
 						echo '<h4>';
 						echo (get_field('physician_clinical_title') ? get_field('physician_clinical_title')->name : '');
 						echo ((! empty( get_field('physician_clinical_title') )) && (! empty( get_field('physician_department') ) ) ? ', ' : '' );
-						echo (get_field('physician_department') ? get_field('physician_department')->name : '');
+						echo (get_field('physician_department') ? get_term( get_field('physician_department'), 'department' )->name : '');
 						echo '</h4>';
 					}
 				?>
@@ -253,8 +252,8 @@
 								<ul>
 								<?php foreach( $locations as $location): ?>
 									<li>
-										<a href="<?php echo get_permalink( $location->ID ); ?>">
-											<?php echo get_the_title( $location->ID ); ?>
+										<a href="<?php echo get_permalink( $location ); ?>">
+											<?php echo get_the_title( $location ); ?>
 										</a>
 									</li>
 								<?php endforeach; ?>

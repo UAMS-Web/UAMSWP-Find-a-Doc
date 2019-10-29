@@ -3,9 +3,53 @@
     "title": "Conditions",
     "fields": [
         {
-            "key": "field_conditions_content",
+            "key": "field_condition_alternate",
+            "label": "Alternate names",
+            "name": "condition_alternate",
+            "type": "repeater",
+            "instructions": "Insert additional names \/ phrases",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "collapsed": "field_alternate_text",
+            "min": 0,
+            "max": 10,
+            "layout": "table",
+            "button_label": "Add Keyword",
+            "sub_fields": [
+                {
+                    "key": "field_alternate_text",
+                    "label": "Alternate name \/ text",
+                    "name": "text",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "acfe_validate": "",
+                    "acfe_update": ""
+                }
+            ]
+        },
+        {
+            "key": "field_condition_content",
             "label": "Content",
-            "name": "conditions_content",
+            "name": "condition_content",
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
@@ -25,9 +69,9 @@
             "acfe_update": ""
         },
         {
-            "key": "field_conditions_treatments",
+            "key": "field_condition_treatments",
             "label": "Treatments",
-            "name": "conditions_treatments",
+            "name": "condition_treatments",
             "type": "taxonomy",
             "instructions": "",
             "required": 0,
