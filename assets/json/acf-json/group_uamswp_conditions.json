@@ -96,6 +96,35 @@
             "acfe_validate": "",
             "acfe_update": "",
             "multiple": 0
+        },
+        {
+            "key": "field_condition_expertise",
+            "label": "Related Areas of Expertise",
+            "name": "condition_expertise",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "post_type": [
+                "expertise"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 1,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_expertise_conditions"
+            },
+            "acfe_validate": "",
+            "acfe_update": "",
+            "ui": 1
         }
     ],
     "location": [
