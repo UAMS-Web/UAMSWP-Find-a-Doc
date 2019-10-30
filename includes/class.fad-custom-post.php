@@ -1178,6 +1178,68 @@ function create_education_taxonomy() {
 }
 add_action( 'init', 'create_education_taxonomy', 0 );
 
+//hook into the init action and call create_book_taxonomies when it fires
+add_action( 'init', 'create_portal_taxonomy', 0 );
+
+//create a custom taxonomy name it topics for your posts
+function create_portal_taxonomy() {
+
+// Add new taxonomy, make it hierarchical like categories
+// first do the translations part for GUI
+
+  	$labels = array(
+		'name'                           => 'Portals',
+		'singular_name'                  => 'Portal',
+		'search_items'                   => 'Search Portals',
+		'all_items'                      => 'All Portals',
+		'edit_item'                      => 'Edit Portal',
+		'update_item'                    => 'Update Portal',
+		'add_new_item'                   => 'Add New Portal',
+		'new_item_name'                  => 'New Portal',
+		'menu_name'                      => 'Portals',
+		'view_item'                      => 'View Portal',
+		'popular_items'                  => 'Popular Portal',
+		'separate_items_with_commas'     => 'Separate portals with commas',
+		'add_or_remove_items'            => 'Add or remove portals',
+		'choose_from_most_used'          => 'Choose from the most used portals',
+		'not_found'                      => 'No portals found',
+		'parent_item'                	 => 'Parent Portal',
+		'parent_item_colon'          	 => 'Parent Portal:',
+		'no_terms'                   	 => 'No Portals',
+		'items_list'                 	 => 'Portals list',
+		'items_list_navigation'      	 => 'Portals list navigation',
+	);
+  	$rewrite = array(
+		'slug'                       => 'portal',
+		'with_front'                 => true,
+		'hierarchical'               => true,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'label' 					 => __( 'Portals' ),
+		'labels'                     => $labels,
+		'hierarchical'               => false,
+		'public'                     => true,
+		'show_ui'                    => true,
+		'meta_box_cb'				 => false,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+		'show_in_rest'       		 => true,
+  		'rest_base'          		 => 'portal',
+  		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+	);
+	register_taxonomy( 'portal', array( 'physicians' ), $args );
+
+}
+
 function add_roles_on_plugin_activation() {
        add_role( 'doc_editor', 'Doc Profile Editor',
        		array( 	'read' => true,
