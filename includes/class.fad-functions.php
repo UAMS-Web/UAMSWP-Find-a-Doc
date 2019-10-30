@@ -622,6 +622,8 @@ function set_default_language($value, $post_id, $field) {
 add_filter('acf/fields/relationship/query/key=field_physician_expertise', 'limit_to_post_parent', 10, 3);
 add_filter('acf/fields/relationship/query/key=field_location_expertise', 'limit_to_post_parent', 10, 3);
 add_filter('acf/fields/relationship/query/key=field_expertise_associated', 'limit_to_post_parent', 10, 3);
+add_filter('acf/fields/post_object/query/key=field_condition_expertise', 'limit_to_post_parent', 10, 3);
+add_filter('acf/fields/post_object/query/key=field_treatment_procedure_expertise', 'limit_to_post_parent', 10, 3);
 function limit_to_post_parent( $args, $field, $post ) {
 
     $args['post_parent'] = 0;
@@ -696,7 +698,7 @@ function uamswp_fad_json_load_point( $paths ) {
 // }
 add_action( 'admin_init', 'uamswp_remove_genesis_term_meta', 11 ); // hook in after genesis adds the tax meta
 function uamswp_remove_genesis_term_meta() {
- $taxonomies = array( 'condition', 'treatment_procedure' );
+ $taxonomies = array( 'condition', 'treatment_procedure', 'portal' );
  foreach( $taxonomies as $taxonomy ) {
  remove_action( "{$taxonomy}_edit_form", 'genesis_taxonomy_archive_options', 10 );
  remove_action( "{$taxonomy}_edit_form", 'genesis_taxonomy_seo_options', 10 );
