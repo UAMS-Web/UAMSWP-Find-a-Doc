@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-xs-12">
             <h2>Clinical Trials</h2>
-            <p><a href="javascript:void(0)">Search our clinical trials</a> for those related to Shoulder Impingement Syndrome.</p>
+            <p><a href="https://uams.trialstoday.org/">Search our clinical trials</a> for those related to <?php echo single_cat_title( '', false ); ?>.</p>
         </div>
     </div>
 </section>
