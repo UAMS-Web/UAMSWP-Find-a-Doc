@@ -201,6 +201,8 @@ function prefix_enqueue_custom_style() {
 //     return $is_main_query;
 // }, 10, 2 );
 
+
+
 // Filter to fix facetwp hash error
 add_filter( 'facetwp_is_main_query', function( $is_main_query, $query ) {
     // if ( 'physicians' == $query->get( 'post_type' ) ) {
@@ -614,7 +616,12 @@ $request = wp_remote_get( 'https://transparency.nrchealth.com/widget/api/org-pro
 
 add_filter('acf/load_value/key=field_physician_languages', 'set_default_language', 20, 3);
 function set_default_language($value, $post_id, $field) {
-	$term = get_term_by('slug', 'english', 'languages');
+    // Only add default content for new posts
+    if ( $value !== null ) {
+        return $value;
+    }
+    
+    $term = get_term_by('slug', 'english', 'languages');
 	$id = $term->term_id;
     $value = array($id);
   	return $value;
