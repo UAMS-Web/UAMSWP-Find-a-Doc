@@ -9,28 +9,28 @@
 	// Hard coded breadcrumbs
 	$tax = get_term_by("slug", get_query_var("term"), get_query_var("taxonomy") );
  ?>
- <main class="doctor-item">
-	<section class="container-fluid p-8 p-sm-10 bg-auto">
-		<div class="row">
-			<div class="col-xs-12">
-				<h1 class="page-title"><?php echo ( $treatment_title ? $treatment_title : 'Treatment & Procedure' ); ?>: <?php echo single_cat_title( '', false ); ?></h1>
-				<?php $keywords = get_field('treatment_procedure_alternate', $term);
-					if( $keywords ): 
-						$i = 1;
-						$keyword_text = '';
-						foreach( $keywords as $keyword ) { 
-							if ( 1 < $i ) {
-								$keyword_text .= ', ';
-							}
-							$keyword_text .= $keyword['text'];
-							$i++;
+ <main class="content">
+	<article class="treatement-procedure entry">
+		<header class="entry-header">
+			<h1 class="page-title"><?php echo ( $treatment_title ? $treatment_title : 'Treatment & Procedure' ); ?>: <?php echo single_cat_title( '', false ); ?></h1>
+		</header>
+		<div class="entry-content clearfix" itemprop="text">
+			<?php $keywords = get_field('treatment_procedure_alternate', $term);
+				if( $keywords ): 
+					$i = 1;
+					$keyword_text = '';
+					foreach( $keywords as $keyword ) { 
+						if ( 1 < $i ) {
+							$keyword_text .= ', ';
 						}
-						
-						echo '<p>Possible alternate names: '. $keyword_text .'</p>';
-					endif;
-				?>
-				<?php echo (get_field('treatment_procedure_content', $term) ? '<div class="module-body">'. get_field('treatment_procedure_content', $term) . '</div>' : '' ); ?>
-			</div>
+						$keyword_text .= $keyword['text'];
+						$i++;
+					}
+					
+					echo '<p>Possible alternate names: '. $keyword_text .'</p>';
+				endif;
+			?>
+			<?php echo (get_field('treatment_procedure_content', $term) ? ''. get_field('treatment_procedure_content', $term) . '' : '' ); ?>
 		</div>
 	</section>
 	<section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
