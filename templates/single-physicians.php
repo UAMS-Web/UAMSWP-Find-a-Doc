@@ -58,11 +58,11 @@ while ( have_posts() ) : the_post(); ?>
                     </h1>
                     <h2 class="sr-only">Overview</h2>
                     <dl>
-                    <?php // Display medical department
-                    $med_dept = get_field('physician_department');
-                    if ($med_dept && !empty($med_dept)) { ?>
-                        <dt>Medical Department</dt>
-                        <dd><?php echo (get_field('physician_department') ? get_term( get_field('physician_department'), 'department' )->name : ''); ?></dd>                 
+                    <?php // Display service line
+                    $service_line = get_field('physician_service_line');
+                    if ($service_line && !empty($service_line)) { ?>
+                        <dt>Service Line</dt>
+                        <dd><?php echo ($service_line) ? get_term( $service_line, 'service_line' )->name : ''); ?></dd>                 
                     <?php } ?>
                     <?php  // Display if they will provide second opinions
                         $second_opinion = get_field('physician_second_opinion');
