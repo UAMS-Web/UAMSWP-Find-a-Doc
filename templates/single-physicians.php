@@ -58,11 +58,11 @@ while ( have_posts() ) : the_post(); ?>
                     </h1>
                     <h2 class="sr-only">Overview</h2>
                     <dl>
-                    <?php // Display medical department
-                    $med_dept = get_field('physician_department');
-                    if ($med_dept && !empty($med_dept)) { ?>
-                        <dt>Medical Department</dt>
-                        <dd><?php echo (get_field('physician_department') ? get_term( get_field('physician_department'), 'department' )->name : ''); ?></dd>                 
+                    <?php // Display service line
+                    $service_line = get_field('physician_service_line');
+                    if ($service_line && !empty($service_line)) { ?>
+                        <dt>Service Line</dt>
+                        <dd><?php echo ($service_line ? get_term( $service_line, 'service_line' )->name : ''); ?></dd>                 
                     <?php } ?>
                     <?php  // Display if they will provide second opinions
                         $second_opinion = get_field('physician_second_opinion');
@@ -106,7 +106,7 @@ while ( have_posts() ) : the_post(); ?>
                                     echo '</div>';
                                 } else { ?>
                                     <div class="rating" aria-label="Patient Rating">
-                                    <div class="ratings-count">No ratings <a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div>
+                                    <div class="ratings-count">No ratings - <a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
                                     <!-- <div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div> -->
                                     </div>
                                 <?php
@@ -114,7 +114,7 @@ while ( have_posts() ) : the_post(); ?>
                             }
                         } else { ?>
                             <div class="rating" aria-label="Patient Rating">
-                                <div class="ratings-count">No ratings <a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div>
+                                <div class="ratings-count">No ratings - <a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
                                 <!-- <div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div> -->
                             </div>
                     <?php } ?>
@@ -127,6 +127,24 @@ while ( have_posts() ) : the_post(); ?>
                             <div class="ratings-comments-lg">100 comments</div>
                         </a>
                     </div> -->
+                    <div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="WhyNotTitle">Why Not?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>There is no publicly available rating for this medical professional for one of two reasons: 1) he or she does not see patients or 2) he or she sees patients but has not yet received the minimum number of Patient Satisfaction Reviews. To be eligible for display, we require a minimum of 30 surveys. This ensures that the rating is statistically reliable and a true reflection of patient satisfaction.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <?php 
                         $l = 1;
                         $locations = get_field('physician_locations');

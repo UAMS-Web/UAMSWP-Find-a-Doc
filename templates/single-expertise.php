@@ -7,6 +7,11 @@
  */
 // add_action( 'genesis_after_header', 'page_options', 5 );
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
+remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
+// Removes entry meta from entry footer incl. markup.
+remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_open', 5 );
+remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
+remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
 
 function uams_default_page_body_class( $classes ) {
 
@@ -21,6 +26,7 @@ add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 12 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 14 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 16 );
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
+
 function uamswp_expertise_physicians() {
     if(get_field('expertise_physicians')) {
 ?>
@@ -39,6 +45,18 @@ function uamswp_expertise_physicians() {
             </div>
         </div>
     </section>
+    <?php // FacetWP Hide elements
+		  // Set # value depending on element
+		  ?>
+	<script>
+    (function($) {
+        $(document).on('facetwp-loaded', function() {
+            if (4 >= FWP.settings.pager.total_rows ) {
+                $('.list-pagination').hide()
+            }
+        });
+    })(jQuery);
+    </script>
 <?php
     }
 }

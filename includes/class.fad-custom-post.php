@@ -129,71 +129,71 @@ add_action( 'init', 'locations', 0 );
 }
 /* Changing to Areas of Expertise */
 /* Deleting soon */
-if ( ! function_exists('services_cpt') ) {
-	// Register 'Services' Custom Post Type
-	function services_cpt() {
+// if ( ! function_exists('services_cpt') ) {
+// 	// Register 'Services' Custom Post Type
+// 	function services_cpt() {
 
-		$labels = array(
-			'name'                  => 'Services',
-			'singular_name'         => 'Service',
-			'menu_name'             => 'Services',
-			'name_admin_bar'        => 'Service',
-			'archives'              => 'Service Archives',
-			'attributes'            => 'Service Attributes',
-			'parent_item_colon'     => 'Parent Item:',
-			'all_items'             => 'All Services',
-			'add_new_item'          => 'Add New Service',
-			'add_new'               => 'Add New',
-			'new_item'              => 'New Service',
-			'edit_item'             => 'Edit Service',
-			'update_item'           => 'Update Service',
-			'view_item'             => 'View Service',
-			'view_items'            => 'View Services',
-			'search_items'          => 'Search Services',
-			'uploaded_to_this_item' => 'Uploaded to this item',
-			'items_list'            => 'Services list',
-			'items_list_navigation' => 'Services list navigation',
-			'filter_items_list'     => 'Filter Services list',
-		);
-		$capabilities = array(
-			'edit_post'             => 'edit_service',
-			'read_post'             => 'read_service',
-			'delete_post'           => 'delete_service',
-			'edit_posts'            => 'edit_services',
-			'edit_others_posts'     => 'edit_others_services',
-			'publish_posts'         => 'publish_services',
-			'read_private_posts'    => 'read_private_services',
-		);
-		$args = array(
-			'label'                 => 'Service',
-			'description'           => 'UAMS Services', 
-			'labels'                => $labels,
-			'supports'              => array( 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes', ),
-			'taxonomies'            => array( 'specialties', 'medical_terms', 'conditions' ),
-			'hierarchical'          => true,
-			'capability_type' 		=> 'page',
-			'public'                => true,
-			'show_ui'               => true,
-			'show_in_menu'          => true,
-			'menu_position'         => 20,
-			'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/services-icon.png',
-			'show_in_admin_bar'     => true,
-			'show_in_nav_menus'     => true,
-			'slug'					=> 'services',
-			'can_export'            => true,
-			'has_archive'           => true,
-			'exclude_from_search'   => false,
-			'publicly_queryable'    => true,
-			'capabilities'          => $capabilities,
-			'show_in_rest'          => true,
-			'rest_base'             => 'services',
-			'rest_controller_class' => 'WP_REST_Posts_Controller',
-		);
-		register_post_type( 'services', $args );
+// 		$labels = array(
+// 			'name'                  => 'Services',
+// 			'singular_name'         => 'Service',
+// 			'menu_name'             => 'Services',
+// 			'name_admin_bar'        => 'Service',
+// 			'archives'              => 'Service Archives',
+// 			'attributes'            => 'Service Attributes',
+// 			'parent_item_colon'     => 'Parent Item:',
+// 			'all_items'             => 'All Services',
+// 			'add_new_item'          => 'Add New Service',
+// 			'add_new'               => 'Add New',
+// 			'new_item'              => 'New Service',
+// 			'edit_item'             => 'Edit Service',
+// 			'update_item'           => 'Update Service',
+// 			'view_item'             => 'View Service',
+// 			'view_items'            => 'View Services',
+// 			'search_items'          => 'Search Services',
+// 			'uploaded_to_this_item' => 'Uploaded to this item',
+// 			'items_list'            => 'Services list',
+// 			'items_list_navigation' => 'Services list navigation',
+// 			'filter_items_list'     => 'Filter Services list',
+// 		);
+// 		$capabilities = array(
+// 			'edit_post'             => 'edit_service',
+// 			'read_post'             => 'read_service',
+// 			'delete_post'           => 'delete_service',
+// 			'edit_posts'            => 'edit_services',
+// 			'edit_others_posts'     => 'edit_others_services',
+// 			'publish_posts'         => 'publish_services',
+// 			'read_private_posts'    => 'read_private_services',
+// 		);
+// 		$args = array(
+// 			'label'                 => 'Service',
+// 			'description'           => 'UAMS Services', 
+// 			'labels'                => $labels,
+// 			'supports'              => array( 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes', ),
+// 			'taxonomies'            => array( 'specialties', 'medical_terms', 'conditions' ),
+// 			'hierarchical'          => true,
+// 			'capability_type' 		=> 'page',
+// 			'public'                => true,
+// 			'show_ui'               => true,
+// 			'show_in_menu'          => true,
+// 			'menu_position'         => 20,
+// 			'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/services-icon.png',
+// 			'show_in_admin_bar'     => true,
+// 			'show_in_nav_menus'     => true,
+// 			'slug'					=> 'services',
+// 			'can_export'            => true,
+// 			'has_archive'           => true,
+// 			'exclude_from_search'   => false,
+// 			'publicly_queryable'    => true,
+// 			'capabilities'          => $capabilities,
+// 			'show_in_rest'          => true,
+// 			'rest_base'             => 'services',
+// 			'rest_controller_class' => 'WP_REST_Posts_Controller',
+// 		);
+// 		register_post_type( 'services', $args );
 
-	}
-	add_action( 'init', 'services_cpt', 0 );
-}
+// 	}
+// 	// add_action( 'init', 'services_cpt', 0 );
+// }
 
 if ( ! function_exists('expertise_cpt') ) {
 	// Register 'Areas of Expertise' Custom Post Type
@@ -393,60 +393,60 @@ function create_clinical_treatments_taxonomy() {
 }
 
 // Register Custom Taxonomy
-function create_medical_specialties_taxonomy() {
+// function create_medical_specialties_taxonomy() {
 
-	$labels = array(
-		'name'                       => 'Medical Specialties',
-		'singular_name'              => 'Medical Specialty',
-		'menu_name'                  => 'Medical Specialty',
-		'all_items'                  => 'All Specialties',
-		'parent_item'                => 'Parent Specialty',
-		'parent_item_colon'          => 'Parent Specialty:',
-		'new_item_name'              => 'New Specialty',
-		'add_new_item'               => 'Add New Specialty',
-		'edit_item'                  => 'Edit Specialty',
-		'update_item'                => 'Update Specialty',
-		'view_item'                  => 'View Specialty',
-		'separate_items_with_commas' => 'Separate specialties with commas',
-		'add_or_remove_items'        => 'Add or remove specialties',
-		'choose_from_most_used'      => 'Choose from the most used',
-		'popular_items'              => 'Popular Specialties',
-		'search_items'               => 'Search Specialties',
-		'not_found'                  => 'Not Found',
-		'no_terms'                   => 'No Specialties',
-		'items_list'                 => 'Specialties list',
-		'items_list_navigation'      => 'Specialties list navigation',
-	);
-	$rewrite = array(
-		'slug'                       => 'specialties',
-		'with_front'                 => true,
-		'hierarchical'               => true,
-	);
-	$capabilities = array(
-		'manage_terms'               => 'manage_options',
-		'edit_terms'                 => 'manage_options',
-		'delete_terms'               => 'manage_options',
-		'assign_terms'               => 'edit_physicians',
-	);
-	$args = array(
-		'label' 					 => __( 'Medical Specialties' ),
-		'labels'                     => $labels,
-		'hierarchical'               => true,
-		'public'                     => true,
-		'show_ui'                    => true,
-		'meta_box_cb'				 => false,
-		'show_admin_column'          => false,
-		'show_in_nav_menus'          => false,
-		'show_tagcloud'              => false,
-		'rewrite'                    => $rewrite,
-		'capabilities'               => $capabilities,
-		'show_in_rest'       		 => true,
-  		'rest_base'          		 => 'specialties',
-  		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
-	);
-	register_taxonomy( 'specialty', array( 'physicians' ), $args );
+// 	$labels = array(
+// 		'name'                       => 'Medical Specialties',
+// 		'singular_name'              => 'Medical Specialty',
+// 		'menu_name'                  => 'Medical Specialty',
+// 		'all_items'                  => 'All Specialties',
+// 		'parent_item'                => 'Parent Specialty',
+// 		'parent_item_colon'          => 'Parent Specialty:',
+// 		'new_item_name'              => 'New Specialty',
+// 		'add_new_item'               => 'Add New Specialty',
+// 		'edit_item'                  => 'Edit Specialty',
+// 		'update_item'                => 'Update Specialty',
+// 		'view_item'                  => 'View Specialty',
+// 		'separate_items_with_commas' => 'Separate specialties with commas',
+// 		'add_or_remove_items'        => 'Add or remove specialties',
+// 		'choose_from_most_used'      => 'Choose from the most used',
+// 		'popular_items'              => 'Popular Specialties',
+// 		'search_items'               => 'Search Specialties',
+// 		'not_found'                  => 'Not Found',
+// 		'no_terms'                   => 'No Specialties',
+// 		'items_list'                 => 'Specialties list',
+// 		'items_list_navigation'      => 'Specialties list navigation',
+// 	);
+// 	$rewrite = array(
+// 		'slug'                       => 'specialties',
+// 		'with_front'                 => true,
+// 		'hierarchical'               => true,
+// 	);
+// 	$capabilities = array(
+// 		'manage_terms'               => 'manage_options',
+// 		'edit_terms'                 => 'manage_options',
+// 		'delete_terms'               => 'manage_options',
+// 		'assign_terms'               => 'edit_physicians',
+// 	);
+// 	$args = array(
+// 		'label' 					 => __( 'Medical Specialties' ),
+// 		'labels'                     => $labels,
+// 		'hierarchical'               => true,
+// 		'public'                     => true,
+// 		'show_ui'                    => true,
+// 		'meta_box_cb'				 => false,
+// 		'show_admin_column'          => false,
+// 		'show_in_nav_menus'          => false,
+// 		'show_tagcloud'              => false,
+// 		'rewrite'                    => $rewrite,
+// 		'capabilities'               => $capabilities,
+// 		'show_in_rest'       		 => true,
+//   		'rest_base'          		 => 'specialties',
+//   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+// 	);
+// 	register_taxonomy( 'specialty', array( 'physicians' ), $args );
 
-}
+// }
 // add_action( 'init', 'create_medical_specialties_taxonomy', 0 ); // Disabled
 
 //hook into the init action and call create_book_taxonomies when it fires
@@ -508,6 +508,67 @@ function create_departments_taxonomy() {
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
 	);
 	register_taxonomy( 'department', array( 'physicians' ), $args );
+
+}
+//hook into the init action and call create_book_taxonomies when it fires
+add_action( 'init', 'create_service_line_taxonomy', 0 );
+
+//create a custom taxonomy name it topics for your posts
+function create_service_line_taxonomy() {
+
+// Add new taxonomy, make it hierarchical like categories
+// first do the translations part for GUI
+
+  $labels = array(
+		'name'                           => 'Service Lines',
+		'singular_name'                  => 'Service Lines',
+		'search_items'                   => 'Search Service Lines',
+		'all_items'                      => 'All Service Lines',
+		'edit_item'                      => 'Edit Service Line',
+		'update_item'                    => 'Update Service Line',
+		'add_new_item'                   => 'Add New Service Line',
+		'new_item_name'                  => 'New Service Line',
+		'menu_name'                      => 'Service Lines',
+		'view_item'                      => 'View Service Line',
+		'popular_items'                  => 'Popular Service Line',
+		'separate_items_with_commas'     => 'Separate service lines with commas',
+		'add_or_remove_items'            => 'Add or remove service lines',
+		'choose_from_most_used'          => 'Choose from the most used service lines',
+		'not_found'                      => 'No service lines found',
+		'parent_item'                	 => 'Parent Service Line',
+		'parent_item_colon'          	 => 'Parent Service Line:',
+		'no_terms'                   	 => 'No Service Lines',
+		'items_list'                 	 => 'Service Lines list',
+		'items_list_navigation'      	 => 'Service Lines list navigation',
+	);
+  	$rewrite = array(
+		'slug'                       => 'service-line',
+		'with_front'                 => true,
+		'hierarchical'               => true,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'label' 					 => __( 'Service Lines' ),
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => true,
+		'show_ui'                    => true,
+		'meta_box_cb'				 => false,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+		'show_in_rest'       		 => true,
+  		'rest_base'          		 => 'service_line',
+  		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+	);
+	register_taxonomy( 'service_line', array( 'physicians' ), $args );
 
 }
 //hook into the init action and call create_book_taxonomies when it fires
@@ -1177,6 +1238,68 @@ function create_education_taxonomy() {
 
 }
 add_action( 'init', 'create_education_taxonomy', 0 );
+
+//hook into the init action and call create_book_taxonomies when it fires
+add_action( 'init', 'create_portal_taxonomy', 0 );
+
+//create a custom taxonomy name it topics for your posts
+function create_portal_taxonomy() {
+
+// Add new taxonomy, make it hierarchical like categories
+// first do the translations part for GUI
+
+  	$labels = array(
+		'name'                           => 'Portals',
+		'singular_name'                  => 'Portal',
+		'search_items'                   => 'Search Portals',
+		'all_items'                      => 'All Portals',
+		'edit_item'                      => 'Edit Portal',
+		'update_item'                    => 'Update Portal',
+		'add_new_item'                   => 'Add New Portal',
+		'new_item_name'                  => 'New Portal',
+		'menu_name'                      => 'Portals',
+		'view_item'                      => 'View Portal',
+		'popular_items'                  => 'Popular Portal',
+		'separate_items_with_commas'     => 'Separate portals with commas',
+		'add_or_remove_items'            => 'Add or remove portals',
+		'choose_from_most_used'          => 'Choose from the most used portals',
+		'not_found'                      => 'No portals found',
+		'parent_item'                	 => 'Parent Portal',
+		'parent_item_colon'          	 => 'Parent Portal:',
+		'no_terms'                   	 => 'No Portals',
+		'items_list'                 	 => 'Portals list',
+		'items_list_navigation'      	 => 'Portals list navigation',
+	);
+  	$rewrite = array(
+		'slug'                       => 'portal',
+		'with_front'                 => true,
+		'hierarchical'               => true,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'label' 					 => __( 'Portals' ),
+		'labels'                     => $labels,
+		'hierarchical'               => false,
+		'public'                     => true,
+		'show_ui'                    => true,
+		'meta_box_cb'				 => false,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+		'show_in_rest'       		 => true,
+  		'rest_base'          		 => 'portal',
+  		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+	);
+	register_taxonomy( 'portal', array( 'physicians' ), $args );
+
+}
 
 function add_roles_on_plugin_activation() {
        add_role( 'doc_editor', 'Doc Profile Editor',

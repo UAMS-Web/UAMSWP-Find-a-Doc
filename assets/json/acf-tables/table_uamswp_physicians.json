@@ -100,10 +100,10 @@
             }
         },
         {
-            "name": "physician_department",
+            "name": "physician_service_line",
             "map": {
                 "type": "acf_field_name",
-                "identifier": "physician_department"
+                "identifier": "physician_service_line"
             }
         },
         {
@@ -160,6 +160,14 @@
             "map": {
                 "type": "acf_field_name",
                 "identifier": "physician_appointment_link"
+            }
+        },
+        {
+            "name": "physician_eligible_appointments",
+            "format": "%d",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "physician_eligible_appointments"
             }
         },
         {
