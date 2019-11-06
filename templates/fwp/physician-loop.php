@@ -71,8 +71,8 @@
 						<div class="col-12 primary">
 						<h3 class="h4">
 							<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name; ?>"><span class="name"><?php echo $full_name; ?></span></a>
-							<?php if ( get_field('physician_department') ) { ?>
-							<span class="subtitle"><?php echo get_term( get_field('physician_department'), 'department' )->name; ?></span>
+							<?php if ( get_field('physician_service_line') ) { ?>
+							<span class="subtitle"><?php echo get_term( get_field('physician_service_line'), 'service_line' )->name; ?></span>
 							<?php } // endif ?>
 						</h3>
 						<?php
@@ -147,11 +147,11 @@
 	<!--
 				<a href="<?php echo get_permalink($post->ID); ?>"><h2 class="margin-top-none margin-bottom-none" itemprop="name"><?php echo $full_name; ?></h2></a>
 				<?php
-					if(! empty( get_field('physician_clinical_title') ) || ! empty( get_field('physician_department') ) ){
+					if(! empty( get_field('physician_clinical_title') ) || ! empty( get_field('physician_service_line') ) ){
 						echo '<h4>';
 						echo (get_field('physician_clinical_title') ? get_field('physician_clinical_title')->name : '');
-						echo ((! empty( get_field('physician_clinical_title') )) && (! empty( get_field('physician_department') ) ) ? ', ' : '' );
-						echo (get_field('physician_department') ? get_term( get_field('physician_department'), 'department' )->name : '');
+						echo ((! empty( get_field('physician_clinical_title') )) && (! empty( get_field('physician_service_line') ) ) ? ', ' : '' );
+						echo (get_field('physician_service_line') ? get_term( get_field('physician_service_line'), 'service_line' )->name : '');
 						echo '</h4>';
 					}
 				?>
