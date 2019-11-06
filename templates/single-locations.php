@@ -316,6 +316,18 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 		</div>
 	</section>
+	<?php // FacetWP Hide elements
+		  // Set # value depending on element
+		  ?>
+	<script>
+    (function($) {
+        $(document).on('facetwp-loaded', function() {
+            if (4 >= FWP.settings.pager.total_rows ) {
+                $('.list-pagination').hide()
+            }
+        });
+    })(jQuery);
+    </script>
 	<?php endif; ?>
 	<?php // load all 'conditions' terms for the post
 	$title_append = ' at ' . get_the_title();

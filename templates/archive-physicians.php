@@ -71,6 +71,18 @@
 							<?php echo facetwp_display( 'pager' ); ?>
 						</div>
 					</div>
+					<?php // FacetWP Hide elements
+						// Set # value depending on element
+						?>
+					<script>
+					(function($) {
+						$(document).on('facetwp-loaded', function() {
+							if (3 >= FWP.settings.pager.total_rows ) {
+								$('.list-pagination').hide()
+							}
+						});
+					})(jQuery);
+					</script>
 				<div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-hidden="true">
 					<div class="modal-dialog modal-dialog-centered" role="document">
 						<div class="modal-content">

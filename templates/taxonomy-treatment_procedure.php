@@ -95,6 +95,18 @@
 			</div>
 		</div>
 	</section>
+	<?php // FacetWP Hide elements
+		  // Set # value depending on element
+		  ?>
+	<script>
+    (function($) {
+        $(document).on('facetwp-loaded', function() {
+            if (8 >= FWP.settings.pager.total_rows ) {
+                $('.list-pagination').hide()
+            }
+        });
+    })(jQuery);
+    </script>
 	<?php endif; ?>
 	<?php 
 	$args = (array(

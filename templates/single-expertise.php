@@ -45,6 +45,18 @@ function uamswp_expertise_physicians() {
             </div>
         </div>
     </section>
+    <?php // FacetWP Hide elements
+		  // Set # value depending on element
+		  ?>
+	<script>
+    (function($) {
+        $(document).on('facetwp-loaded', function() {
+            if (4 >= FWP.settings.pager.total_rows ) {
+                $('.list-pagination').hide()
+            }
+        });
+    })(jQuery);
+    </script>
 <?php
     }
 }

@@ -27,5 +27,16 @@
         </div>
     </div>
 </main>
-
+<?php // FacetWP Hide elements
+		  // Set # value depending on element
+		  ?>
+	<script>
+    (function($) {
+        $(document).on('facetwp-loaded', function() {
+            if (3 >= FWP.settings.pager.total_rows ) {
+                $('.list-pagination').hide()
+            }
+        });
+    })(jQuery);
+    </script>
 <?php get_footer(); ?>
