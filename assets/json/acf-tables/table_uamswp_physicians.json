@@ -100,13 +100,6 @@
             }
         },
         {
-            "name": "physician_department",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_department"
-            }
-        },
-        {
             "name": "physician_service_line",
             "map": {
                 "type": "acf_field_name",
