@@ -316,11 +316,11 @@
             },
             "multiple": 0
         },
-        "field_physician_department": {
-            "key": "field_physician_department",
-            "name": "physician_department",
+        "field_physician_service_line": {
+            "key": "field_physician_service_line",
+            "name": "physician_service_line",
             "type": "taxonomy",
-            "label": "Medical Department",
+            "label": "Service Line",
             "instructions": "&nbsp;",
             "required": 0,
             "conditional_logic": 0,
@@ -329,7 +329,7 @@
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "department",
+            "taxonomy": "service_line",
             "field_type": "select",
             "add_term": 1,
             "save_terms": 0,
@@ -536,6 +536,25 @@
             "default_value": "https:\/\/uamshealth.com\/appointments",
             "placeholder": "https:\/\/uamshealth.com\/appointments"
         },
+        "field_physician_eligible_appointments": {
+            "key": "field_physician_eligible_appointments",
+            "name": "physician_eligible_appointments",
+            "type": "true_false",
+            "label": "Eligible for appointments",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-acf-title",
+                "id": ""
+            },
+            "message": "Eligible for appointments?",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
         "field_physician_primary_care": {
             "key": "field_physician_primary_care",
             "name": "physician_primary_care",
@@ -543,7 +562,15 @@
             "label": "Primary Care Physician",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_eligible_appointments",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "hide-acf-title",
@@ -562,7 +589,15 @@
             "label": "Referral required for new patients",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_eligible_appointments",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "hide-acf-title",
@@ -581,7 +616,15 @@
             "label": "Accepting new patients",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_eligible_appointments",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "hide-acf-title",
@@ -600,7 +643,15 @@
             "label": "Provides second opinion",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_eligible_appointments",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "hide-acf-title",

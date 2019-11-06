@@ -107,6 +107,13 @@
             }
         },
         {
+            "name": "physician_service_line",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "physician_service_line"
+            }
+        },
+        {
             "name": "physician_clinical_bio",
             "map": {
                 "type": "acf_field_name",
@@ -160,6 +167,14 @@
             "map": {
                 "type": "acf_field_name",
                 "identifier": "physician_appointment_link"
+            }
+        },
+        {
+            "name": "physician_eligible_appointments",
+            "format": "%d",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "physician_eligible_appointments"
             }
         },
         {
