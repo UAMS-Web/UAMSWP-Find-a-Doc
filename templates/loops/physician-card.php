@@ -22,7 +22,7 @@
 		endforeach; 
 	} 
 	?>
-	<?php $full_name = get_field('physician_first_name', $id) .' ' .(get_field('physician_middle_name', $id) ? get_field('physician_middle_name', $id) . ' ' : '') . get_field('physician_last_name', $id) .  ( $degree_list ? ', ' . $degree_list : '' ); ?>
+	<?php $full_name = get_field('physician_first_name', $id) .' ' .(get_field('physician_middle_name', $id) ? get_field('physician_middle_name', $id) . ' ' : '') . get_field('physician_last_name', $id) . (get_field('physician_pedigree', $id) ? '&nbsp;' . get_field('physician_pedigree', $id) : '') .  ( $degree_list ? ', ' . $degree_list : '' ); ?>
 	<div class="card">
 		<picture>
 			<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>

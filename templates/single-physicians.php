@@ -16,8 +16,8 @@ if ( $degrees ) {
         $i++;
     endforeach;
 } 
-$full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') .  ( $degree_list ? ', ' . $degree_list : '' );
-$short_name = get_field('physician_prefix') ? get_field('physician_prefix') .' ' .get_field('physician_last_name') : get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name');
+$full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+$short_name = get_field('physician_prefix') ? get_field('physician_prefix') .' ' .get_field('physician_last_name') : get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '');
 $excerpt = get_field('physician_academic_short_bio');
 $bio = get_field('physician_clinical_bio');
 if (empty($excerpt)){
