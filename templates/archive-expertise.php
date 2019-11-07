@@ -9,12 +9,12 @@
 
 <div class="content-sidebar-wrap row">
     <div class="content col-sm-12" id="genesis-content">
-        <div class="archive-description area-of-expertise-list">
+        <section class="archive-description area-of-expertise-list">
             <header class="entry-header">
                 <h1 class="entry-title" itemprop="headline"><?php echo ($service_title ? $service_title : 'Areas of Expertise' ); ?></h1>
             </header>
             <?php echo ($service_text ? '<div class="entry-content clearfix" itemprop="text">' . $service_text . '</div>' : '' ); ?>
-        </div>
+        </section>
         <section class="uams-module area-of-expertise-list">
             <div class="container-fluid">
                 <div class="row">
