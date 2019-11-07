@@ -479,6 +479,33 @@
             "multiple": 0,
             "allow_null": 0
         },
+        "field_location_portal": {
+            "key": "field_physician_portal",
+            "name": "physician_portal",
+            "type": "taxonomy",
+            "label": "Portal (Optional)",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "portal",
+            "field_type": "radio",
+            "allow_null": 0,
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "acfe_validate": "",
+            "acfe_update": "",
+            "multiple": 0
+        },
         "field_physician_clinical_details_tab": {
             "key": "field_physician_clinical_details_tab",
             "name": "",
@@ -550,7 +577,7 @@
                 "id": ""
             },
             "message": "Eligible for appointments?",
-            "default_value": 0,
+            "default_value": 1,
             "ui": 0,
             "ui_on_text": "",
             "ui_off_text": ""
@@ -1345,28 +1372,12 @@
             },
             "multiple": 0
         },
-        "field_physician_profiles_link": {
-            "key": "field_physician_profiles_link",
-            "name": "physician_research_profiles_link",
-            "type": "url",
-            "label": "Profiles Link",
-            "instructions": "Please include the full URL, including https:\/\/",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "33",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": ""
-        },
         "field_pubmed_author_id": {
             "key": "field_pubmed_author_id",
             "name": "physician_pubmed_author_id",
             "type": "text",
-            "label": "Pubmed Author ID",
-            "instructions": "Used to link to Pubmed complete list. AuthorID is found at the end of a link URL for Author.",
+            "label": "Pubmed Author ID \/ Name",
+            "instructions": "Used to link to Pubmed complete list. Ex. 'Smith JD' More information at <a href='https://www.ncbi.nlm.nih.gov/pubmed/advanced' target='_blank'>https://www.ncbi.nlm.nih.gov/pubmed/advanced</a>",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -1519,6 +1530,22 @@
             "maxlength": "",
             "rows": "",
             "new_lines": ""
+        },
+        "field_physician_profiles_link": {
+            "key": "field_physician_profiles_link",
+            "name": "physician_research_profiles_link",
+            "type": "url",
+            "label": "UAMS Profiles Link",
+            "instructions": "Please include the full URL, including https:\/\/",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
         },
         "field_physician_extra_tab": {
             "key": "field_physician_extra_tab",

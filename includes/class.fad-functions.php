@@ -79,7 +79,7 @@ class pubmed_field_on_change {
 	public function __construct() {
 		// enqueue js extension for acf
 		// do this when ACF in enqueuing scripts
-		//add_action('rwmb_enqueue_scripts', array($this, 'enqueue_script'));
+		add_action('acf/input/admin_enqueue_scripts', array($this, 'enqueue_script'));
 		// ajax action for loading values
 		add_action('wp_ajax_load_content_from_pubmed', array($this, 'load_content_from_pubmed'));
 	} // end public function __construct
@@ -116,7 +116,7 @@ class pubmed_field_on_change {
 			// create authors array, just in case
 			$authors = [];
 			$authorlist = '';
-			$last_author = end(array_keys($result->authors));
+			// $last_author = end(array_keys($result->authors)); // unused
 			foreach ($result->authors as $author) {
 				$name = $author->name;
 				array_push($authors, $name);
@@ -156,7 +156,45 @@ class pubmed_field_on_change {
 		//}
 
 
-	} // end public function load_content_from_relationship
+    } // end public function load_content_from_relationship
+    
+    public function enqueue_script() {
+		// enqueue acf extenstion
+
+		// only enqueue the script on the post page where it needs to run
+		/* *** THIS IS IMPORTANT
+		       ACF uses the same scripts as well as the same field identification
+		       markup (the data-key attribute) if the ACF field group editor
+		       because of this, if you load and run your custom javascript on
+		       the field group editor page it can have unintended side effects
+		       on this page. It is important to always make sure you're only
+		       loading scripts where you need them.
+		*/
+
+		// global $post;
+		// if (!$post ||
+		//     !isset($post->ID) ||
+		//     get_post_type($post->ID) != 'physicians') {
+		// 	return;
+		// }
+
+
+		// the handle should be changed to your own unique handle
+		$handle = 'pubmed_field_on_change';
+
+		// I'm using this method to set the src because
+		// I don't know where this file will be located
+		// you should alter this to use the correct functions
+		// to get the theme, template or plugin path
+		// to set the src value to point to the javascript file
+		$src = UAMS_FAD_ROOT_URL . '/assets/js/acf-pubmed.js';
+		// make this script dependent on acf-input
+		$depends = array('acf-input');
+
+		wp_register_script($handle, $src, $depends);
+
+		wp_enqueue_script($handle);
+	} // end public function enqueue_script
 
 } // end class my_dynmamic_field_on_relationship
 
@@ -625,6 +663,20 @@ function set_default_language($value, $post_id, $field) {
 	$id = $term->term_id;
     $value = array($id);
   	return $value;
+}
+// Order for Portal - None slug set to "_none"
+add_filter('acf/fields/taxonomy/wp_list_categories/key=field_location_portal', 'my_taxonomy_query', 10, 2);
+add_filter('acf/fields/taxonomy/wp_list_categories/key=field_physician_portal', 'my_taxonomy_query', 10, 2);
+function my_taxonomy_query( $args, $field ) {
+    
+    // modify args
+    $args['orderby'] = 'slug';
+    $args['order'] = 'ASC';
+    
+    
+    // return
+    return $args;
+    
 }
 add_filter('acf/fields/relationship/query/key=field_physician_expertise', 'limit_to_post_parent', 10, 3);
 add_filter('acf/fields/relationship/query/key=field_location_expertise', 'limit_to_post_parent', 10, 3);

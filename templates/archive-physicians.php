@@ -35,6 +35,7 @@
 						<?php  echo facetwp_display( 'facet', 'alpha' ); ?>
 						<?php  echo do_shortcode( '		<div class="fwp-filter">[facetwp facet="primary_care"]</div>
 														<div class="fwp-filter">[facetwp facet="conditions"]</div>
+														<div class="fwp-filter">[facetwp facet="treatments_procedures"]</div>
 														<div class="fwp-filter">[facetwp facet="patient_types"]</div>
 														<div class="fwp-filter">[facetwp facet="physician_gender"]</div>
 														<div class="fwp-filter">[facetwp facet="physician_language"]</div>
