@@ -98,6 +98,18 @@
 					</div>
 				</div>
 			</div>
+			<?php // FacetWP Hide elements
+					// Set # value depending on element
+					?>
+			<script>
+				(function($) {
+					$(document).on('facetwp-loaded', function() {
+						if (3 >= FWP.settings.pager.total_rows ) {
+							$('.list-pagination').hide()
+						}
+					});
+				})(jQuery);
+			</script>
 		</section>
 		<?php endif; ?>
 		<?php 
@@ -179,17 +191,5 @@
 	</main>
 </div>
 
-<?php // FacetWP Hide elements
-		  // Set # value depending on element
-		  ?>
-<script>
-(function($) {
-	$(document).on('facetwp-loaded', function() {
-		if (3 >= FWP.settings.pager.total_rows ) {
-			$('.list-pagination').hide()
-		}
-	});
-})(jQuery);
-</script>
 
 <?php get_footer(); ?>
