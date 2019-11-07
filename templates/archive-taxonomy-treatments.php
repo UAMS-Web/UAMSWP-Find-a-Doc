@@ -38,12 +38,11 @@ get_header(); ?>
             </header>
             <?php echo ($treatment_text ? '<div class="entry-content clearfix" itemprop="text">' . $treatment_text . '</div>' : '' ); ?>
         </article>
-        <section class="uams-module">
+        <section class="uams-module conditions-treatments">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
                         <h2 class="module-title sr-only">List of Conditions</h2>
-                        <div class="list-container list-container-columns">
                             <?php
                             // if show all is set
                             $taxonomy = 'treatment_procedure';
@@ -169,6 +168,7 @@ get_header(); ?>
                                     </div>
                                 </div>
                             </div>
+                            <div class="list-container list-container-rows">
                             <?php
 
                             if ( ! empty($tax_terms->terms) ) {
@@ -176,14 +176,14 @@ get_header(); ?>
                                 echo '<ul class="list">';
 
                                 foreach ($tax_terms->terms as $tax_term) {
-                                    echo '<li>' . '<a href="' . esc_attr(get_term_link($tax_term, $taxonomy)) . '" title="' . sprintf( __( "View all posts in %s" ), $tax_term->name ) . '" ' . '>' . $tax_term->name.'</a></li>';
+                                    echo '<li>' . '<a href="' . esc_attr(get_term_link($tax_term, $taxonomy)) . '" aria-label="' . sprintf( __( "Learn about %s" ), $tax_term->name ) . '" ' . '>' . $tax_term->name.'</a></li>';
                                 }
 
                                 echo '</ul>';
 
                             } else {
 
-                                echo '<p>No Treatments meet your criteria.</p>';
+                                echo '<p class="text-center content-width">No treatments meet your criteria.</p>';
 
                             }
 
