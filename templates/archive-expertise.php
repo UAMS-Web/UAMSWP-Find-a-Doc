@@ -15,7 +15,7 @@
             </header>
             <?php echo ($service_text ? '<div class="entry-content clearfix" itemprop="text">' . $service_text . '</div>' : '' ); ?>
         </div>
-        <section class="uams-module area-of-expertise-list bg-auto">
+        <section class="uams-module area-of-expertise-list">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
