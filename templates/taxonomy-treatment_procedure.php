@@ -101,6 +101,9 @@
 			<script>
 				(function($) {
 					$(document).on('facetwp-loaded', function() {
+						if( 0 === FWP.settings.pager.total_rows ) {
+							$('#doctors').hide()
+						}
 						if (8 >= FWP.settings.pager.total_rows ) {
 							$('.list-pagination').hide()
 						}
