@@ -7,27 +7,36 @@
 
  ?>
 
-<main class="container-fluid p-8 p-sm-10 area-of-expertise-list bg-auto">
-    <div class="row">
-        <div class="col-12">
-            <h1 class="page-title"><?php echo ($service_title ? $service_title : 'Areas of Expertise' ); ?></h1>
-            <?php echo ($service_text ? '<div class="module-body">' . $service_text . '</div>' : '' ); ?>
-            <h2 class="sr-only">List of Areas of Expertise</h2>
-            <div class="card-list-container">
-                <div class="card-list">
-                    <?php echo facetwp_display( 'template', 'expertise' ); ?>
-                    <?php //get_template_part( 'templates/physician-loop' ); ?>
-                </div>
-            </div>
-            <div class="row list-pagination">
-                <div class="col">
-					<?php echo facetwp_display( 'pager' ); ?>
-                </div>
-            </div>
+<div class="content-sidebar-wrap row">
+    <div class="content col-sm-12" id="genesis-content">
+        <div class="archive-description taxonomy-archive-description taxonomy-description area-of-expertise-list">
+            <header class="entry-header">
+                <h1 class="entry-title" itemprop="headline"><?php echo ($service_title ? $service_title : 'Areas of Expertise' ); ?></h1>
+            </header>
+            <?php echo ($service_text ? '<div class="entry-content clearfix" itemprop="text">' . $service_text . '</div>' : '' ); ?>
         </div>
+        <section class="uams-module area-of-expertise-list bg-auto">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h2 class="module-title sr-only">List of Areas of Expertise</h2>
+                        <div class="card-list-container">
+                            <div class="card-list">
+                                <?php echo facetwp_display( 'template', 'expertise' ); ?>
+                                <?php //get_template_part( 'templates/physician-loop' ); ?>
+                            </div>
+                        </div>
+                        <div class="row list-pagination">
+                            <div class="col">
+                                <?php echo facetwp_display( 'pager' ); ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-</main>
-<?php // FacetWP Hide elements
+    <?php // FacetWP Hide elements
 		  // Set # value depending on element
 		  ?>
 	<script>
@@ -39,4 +48,5 @@
         });
     })(jQuery);
     </script>
+</div>
 <?php get_footer(); ?>
