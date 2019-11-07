@@ -25,16 +25,18 @@
 	<?php $full_name = get_field('physician_first_name', $id) .' ' .(get_field('physician_middle_name', $id) ? get_field('physician_middle_name', $id) . ' ' : '') . get_field('physician_last_name', $id) .  ( $degree_list ? ', ' . $degree_list : '' ); ?>
 	<div class="card">
 		<picture>
-			<?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
-			<source srcset="<?php echo image_sizer(get_post_thumbnail_id($id), 510, 680, 'center', 'center'); ?>"
-				media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), 
-				(min-width: 1px) and (min-resolution: 192dpi)">
-			<source srcset="<?php echo image_sizer(get_post_thumbnail_id($id), 255, 340, 'center', 'center'); ?>"
-				media="(min-width: 1px)">
-			<img src="<?php echo image_sizer(get_post_thumbnail_id($id), 255, 340, 'center', 'center'); ?>" class="card-img-top" alt="<?php echo $full_name; ?>" />
+			<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
+				<source srcset="<?php echo image_sizer(get_post_thumbnail_id($id), 510, 680, 'center', 'center'); ?>"
+					media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), 
+					(min-width: 1px) and (min-resolution: 192dpi)">
+				<source srcset="<?php echo image_sizer(get_post_thumbnail_id($id), 255, 340, 'center', 'center'); ?>"
+					media="(min-width: 1px)">
+				<img src="<?php echo image_sizer(get_post_thumbnail_id(), 255, 340, 'center', 'center'); ?>" itemprop="image" class="card-img-top" alt="<?php echo $full_name; ?>" />
+			<?php } elseif ( has_post_thumbnail() ) { ?>
+				<?php echo get_the_post_thumbnail( $id, 'medium',  array( 'itemprop' => 'image', 'class' => 'card-img-top' ) ); ?>
 			<?php } else { ?>
-			<?php echo get_the_post_thumbnail( $id, 'medium',  array( 'itemprop' => 'image', 'class' => 'card-img-top' ) ); ?>
-			<?php } //endif ?>
+				<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.svg" alt="" />
+			<?php } ?>
 		</picture>
 		<div class="card-body">
 				<h3 class="card-title">
