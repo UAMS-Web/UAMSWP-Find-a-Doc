@@ -481,10 +481,10 @@
             "media_upload": 1,
             "delay": 0
         },
-        "field_portal": {
-            "key": "field_portal",
+        "field_location_portal": {
+            "key": "field_location_portal",
             "name": "location_portal",
-            "type": "select",
+            "type": "taxonomy",
             "label": "Portal (Optional)",
             "instructions": "",
             "required": 0,
@@ -494,20 +494,19 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "mychart": "Epic\/MyChart",
-                "fam_med": "Family Medical Centers portal",
-                "": "None"
-            },
-            "default_value": [
-                ""
-            ],
+            "taxonomy": "portal",
+            "field_type": "radio",
             "allow_null": 0,
-            "multiple": 0,
-            "ui": 0,
-            "return_format": "value",
-            "ajax": 0,
-            "placeholder": ""
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "acfe_validate": "",
+            "acfe_update": "",
+            "multiple": 0
         },
         "field_link_message": {
             "key": "field_link_message",
