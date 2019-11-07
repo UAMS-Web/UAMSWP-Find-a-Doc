@@ -1376,8 +1376,8 @@
             "key": "field_pubmed_author_id",
             "name": "physician_pubmed_author_id",
             "type": "text",
-            "label": "Pubmed Author ID",
-            "instructions": "Used to link to Pubmed complete list. AuthorID is found at the end of a link URL for Author.",
+            "label": "Pubmed Author ID \/ Name",
+            "instructions": "Used to link to Pubmed complete list. Ex. 'Smith JD' More information at <a href='https://www.ncbi.nlm.nih.gov/pubmed/advanced' target='_blank'>https://www.ncbi.nlm.nih.gov/pubmed/advanced</a>",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
