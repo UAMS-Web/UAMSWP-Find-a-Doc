@@ -20,6 +20,13 @@ function uams_default_page_body_class( $classes ) {
 }
 add_filter( 'body_class', 'uams_default_page_body_class' );
 
+// Add extra class to entry
+function uamswp_add_entry_class( $attributes ) {
+    $attributes['class'] = $attributes['class']. ' bg-white';
+    return $attributes;
+}
+add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
+
 add_action( 'genesis_after_entry', 'uamswp_expertise_conditions', 8 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_treatments', 10 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 12 );
