@@ -9,7 +9,7 @@
 
 <div class="content-sidebar-wrap row">
     <div class="content col-sm-12" id="genesis-content">
-        <div class="archive-description taxonomy-archive-description taxonomy-description area-of-expertise-list">
+        <div class="archive-description area-of-expertise-list">
             <header class="entry-header">
                 <h1 class="entry-title" itemprop="headline"><?php echo ($service_title ? $service_title : 'Areas of Expertise' ); ?></h1>
             </header>
