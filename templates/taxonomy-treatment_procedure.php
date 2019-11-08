@@ -1,4 +1,21 @@
 <?php
+	function uamswp_keyword_hook_header() {
+		$keywords = get_field('treatment_procedure_alternate', get_queried_object());
+		$keyword_text = '';
+		if( $keywords ): 
+			$i = 1;
+			foreach( $keywords as $keyword ) { 
+				if ( 1 < $i ) {
+					$keyword_text .= ', ';
+				}
+				$keyword_text .= $keyword['text'];
+				$i++;
+			}
+			echo '<meta name="keywords" content="'. $keyword_text .'" />';
+		endif;
+	}
+	add_action('wp_head','uamswp_keyword_hook_header');
+	
    	get_header();
 
 	$treatment_title = get_field('treatments_archive_headline', 'option');
@@ -16,7 +33,8 @@
 				<h1 class="entry-title"><?php echo ( $treatment_title ? $treatment_title : 'Treatment & Procedure' ); ?>: <?php echo single_cat_title( '', false ); ?></h1>
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
-				<?php $keywords = get_field('treatment_procedure_alternate', $term);
+				<?php
+					$keywords = get_field('treatment_procedure_alternate', $term);
 					if( $keywords ): 
 						$i = 1;
 						$keyword_text = '';
@@ -27,7 +45,6 @@
 							$keyword_text .= $keyword['text'];
 							$i++;
 						}
-						
 						echo '<p>Possible alternate names: '. $keyword_text .'</p>';
 					endif;
 				?>
