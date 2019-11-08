@@ -281,6 +281,45 @@ while ( have_posts() ) : the_post(); ?>
 		</div>
 	</section>
 	<?php endif; ?>
+	<?php // Portal
+		if ( get_field('location_portal')) :
+			$portal = get_term(get_field('location_portal'), "portal");
+			$portal_name = $portal->name;
+			$portal_content = get_field('portal_content', $portal);
+			$portal_link = get_field('portal_url', $portal);
+			if ($portal_link) {
+				$portal_url = $portal_link['url'];
+				$portal_link_title = $portal_link['title'];
+			}
+	?>
+	<section class="uams-module cta-bar  alignfull cta-bar-weighted bg-red" id="cta-bar-block_5d6ead7291283" aria-label="Patient Portal">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<div class="inner-container">
+						<div class="cta-heading">
+							<h2><?php echo $portal_name; ?></h2>
+						</div>
+						<?php if ( $portal_content || $portal_link ) { ?>
+						<div class="cta-body">
+							<?php if ( $portal_content ) { ?>
+							<div class="text-container">
+								<?php echo $portal_content; ?>
+							</div>
+							<?php }
+							if ( $portal_content ) { ?>
+							<div class="btn-container">
+								<a href="<?php echo $portal_url; ?>" aria-label="Access the <?php echo $portal_name; ?>&nbsp;to view your patient information and medical records" class="btn" target="_blank" data-moduletitle="<?php echo $portal_name; ?>"><?php echo $portal_link_title ? $portal_link_title : 'Log in to '. $portal_name; ?></a>
+							</div>
+							<?php } ?>
+						</div>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<?php endif; ?>
 	<?php
 	$physicians = get_field( 'location_physicians' );
 	if( $physicians ): ?>
