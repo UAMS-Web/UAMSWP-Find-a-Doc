@@ -284,6 +284,7 @@ while ( have_posts() ) : the_post(); ?>
 	<?php // Portal
 		if ( get_field('location_portal')) :
 			$portal = get_term(get_field('location_portal'), "portal");
+			$portal_slug = $portal->slug;
 			$portal_name = $portal->name;
 			$portal_content = get_field('portal_content', $portal);
 			$portal_link = get_field('portal_url', $portal);
@@ -291,8 +292,10 @@ while ( have_posts() ) : the_post(); ?>
 				$portal_url = $portal_link['url'];
 				$portal_link_title = $portal_link['title'];
 			}
+
+			if ($portal && $portal_slug !== "_none") {
 	?>
-	<section class="uams-module cta-bar  alignfull cta-bar-weighted bg-red" id="cta-bar-block_5d6ead7291283" aria-label="Patient Portal">
+	<section class="uams-module cta-bar alignfull cta-bar-weighted bg-red" aria-label="Patient Portal">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-12">
@@ -309,7 +312,7 @@ while ( have_posts() ) : the_post(); ?>
 							<?php }
 							if ( $portal_content ) { ?>
 							<div class="btn-container">
-								<a href="<?php echo $portal_url; ?>" aria-label="Access the <?php echo $portal_name; ?>&nbsp;to view your patient information and medical records" class="btn" target="_blank" data-moduletitle="<?php echo $portal_name; ?>"><?php echo $portal_link_title ? $portal_link_title : 'Log in to '. $portal_name; ?></a>
+								<a href="<?php echo $portal_url; ?>" aria-label="Access <?php echo $portal_name; ?>&nbsp;to view your patient information and medical records" class="btn" target="_blank" data-moduletitle="<?php echo $portal_name; ?>"><?php echo $portal_link_title ? $portal_link_title : 'Log in to '. $portal_name; ?></a>
 							</div>
 							<?php } ?>
 						</div>
@@ -319,7 +322,8 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 		</div>
 	</section>
-	<?php endif; ?>
+	<?php }
+	endif; ?>
 	<?php
 	$physicians = get_field( 'location_physicians' );
 	if( $physicians ): ?>
