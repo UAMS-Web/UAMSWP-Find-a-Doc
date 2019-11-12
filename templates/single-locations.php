@@ -284,6 +284,7 @@ while ( have_posts() ) : the_post(); ?>
 	<?php // Portal
 		if ( get_field('location_portal')) :
 			$portal = get_term(get_field('location_portal'), "portal");
+			$portal_slug = $portal->slug;
 			$portal_name = $portal->name;
 			$portal_content = get_field('portal_content', $portal);
 			$portal_link = get_field('portal_url', $portal);
@@ -291,6 +292,8 @@ while ( have_posts() ) : the_post(); ?>
 				$portal_url = $portal_link['url'];
 				$portal_link_title = $portal_link['title'];
 			}
+
+			if ($portal && $portal_slug !== "_none") {
 	?>
 	<section class="uams-module cta-bar  alignfull cta-bar-weighted bg-red" id="cta-bar-block_5d6ead7291283" aria-label="Patient Portal">
 		<div class="container-fluid">
@@ -319,7 +322,8 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 		</div>
 	</section>
-	<?php endif; ?>
+	<?php }
+	endif; ?>
 	<?php
 	$physicians = get_field( 'location_physicians' );
 	if( $physicians ): ?>
