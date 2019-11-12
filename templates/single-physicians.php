@@ -239,6 +239,23 @@ while ( have_posts() ) : the_post(); ?>
             </div>
         </section>
         <?php if ($eligible_appt): ?>
+        <?php // Portal
+            if ( get_field('physician_portal')) {
+                $portal = get_term(get_field('physician_portal'), "portal");
+                $portal_slug = $portal->slug;
+                $portal_name = $portal->name;
+                $portal_content = get_field('portal_content', $portal);
+                $portal_link = get_field('portal_url', $portal);
+                if ($portal_link) {
+                    $portal_url = $portal_link['url'];
+                    $portal_link_title = $portal_link['title'];
+                }
+
+                if ($portal && $portal_slug !== "_none") {
+                    $show_portal = true;
+                }
+            }
+        ?>
         <section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
@@ -246,15 +263,23 @@ while ( have_posts() ) : the_post(); ?>
                     <?php 
                         $refer_req = get_field('physician_referral_required');
                         $accept_new = get_field('physician_accepting_patients');
-                        if ($refer_req && $accept_new) { ?>
+                        if ($refer_req && $accept_new && $show_portal) { ?>
                             <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
-                            <p>Existing patients can either <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through MyChart, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                            <p>Existing patients can either <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                    <?php } elseif ($refer_req && $accept_new) { ?>
+                            <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
+                            <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                    <?php } elseif ($accept_new && $show_portal) { ?>
+                        <p>New patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                        <p>Existing patients also have the option to <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>.</p>
                     <?php } elseif ($accept_new) { ?>
-                        <p>New patients can make appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
-                        <p>Existing patients have the option to <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through&nbsp;MyChart.</p>
+                        <p>New and existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                    <?php } elseif ($show_portal) { ?>
+                        <p>This physician is not currently accepting new patients.</p>
+                        <p>Existing patients can either <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
                     <?php } else { ?>
                         <p>This physician is not currently accepting new patients.</p>
-                        <p>Existing patients can either <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through MyChart, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                        <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
                     <?php } ?>
                 </div>
             </div>
@@ -580,15 +605,23 @@ while ( have_posts() ) : the_post(); ?>
                     <?php 
                         $refer_req = get_field('physician_referral_required');
                         $accept_new = get_field('physician_accepting_patients');
-                        if ($refer_req && $accept_new) { ?>
+                        if ($refer_req && $accept_new && $show_portal) { ?>
                             <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
-                            <p>Existing patients can either <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through MyChart, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                            <p>Existing patients can either <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                    <?php } elseif ($refer_req && $accept_new) { ?>
+                            <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
+                            <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                    <?php } elseif ($accept_new && $show_portal) { ?>
+                        <p>New patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                        <p>Existing patients also have the option to <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>.</p>
                     <?php } elseif ($accept_new) { ?>
-                        <p>New patients can make appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
-                        <p>Existing patients have the option to <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through&nbsp;MyChart.</p>
+                        <p>New and existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                    <?php } elseif ($show_portal) { ?>
+                        <p>This physician is not currently accepting new patients.</p>
+                        <p>Existing patients can either <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
                     <?php } else { ?>
                         <p>This physician is not currently accepting new patients.</p>
-                        <p>Existing patients can either <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through MyChart, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                        <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
                     <?php } ?>
                 </div>
             </div>
