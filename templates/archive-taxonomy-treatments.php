@@ -83,88 +83,88 @@ get_header(); ?>
                                         After that, if user checks any other checkbox input, remove "checked" attribute from "Any"/"All" checkbox input.
                                     -->
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>">All</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>" aria-label="Remove any filter">All</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=0">#</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=0" aria-label="Show only the treatments and procedures that begin with a number">#</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=a">A</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=a" aria-label="Show only the treatments and procedures that begin with the letter A">A</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=b">B</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=b" aria-label="Show only the treatments and procedures that begin with the letter B">B</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=c">C</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=c" aria-label="Show only the treatments and procedures that begin with the letter C">C</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=d">D</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=d" aria-label="Show only the treatments and procedures that begin with the letter D">D</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=e">E</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=e" aria-label="Show only the treatments and procedures that begin with the letter E">E</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=f">F</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=f" aria-label="Show only the treatments and procedures that begin with the letter F">F</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=g">G</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=g" aria-label="Show only the treatments and procedures that begin with the letter G">G</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=h">H</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=h" aria-label="Show only the treatments and procedures that begin with the letter H">H</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=i">I</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=i" aria-label="Show only the treatments and procedures that begin with the letter I">I</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=j">J</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=j" aria-label="Show only the treatments and procedures that begin with the letter J">J</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=k">K</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=k" aria-label="Show only the treatments and procedures that begin with the letter K">K</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=l">L</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=l" aria-label="Show only the treatments and procedures that begin with the letter L">L</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=m">M</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=m" aria-label="Show only the treatments and procedures that begin with the letter M">M</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=n">N</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=n" aria-label="Show only the treatments and procedures that begin with the letter N">N</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=o">O</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=o" aria-label="Show only the treatments and procedures that begin with the letter O">O</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=p">P</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=p" aria-label="Show only the treatments and procedures that begin with the letter P">P</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=q">Q</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=q" aria-label="Show only the treatments and procedures that begin with the letter Q">Q</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=r">R</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=r" aria-label="Show only the treatments and procedures that begin with the letter R">R</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=s">S</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=s" aria-label="Show only the treatments and procedures that begin with the letter S">S</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=t">T</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=t" aria-label="Show only the treatments and procedures that begin with the letter T">T</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=u">U</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=u" aria-label="Show only the treatments and procedures that begin with the letter U">U</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=v">V</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=v" aria-label="Show only the treatments and procedures that begin with the letter V">V</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=w">W</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=w" aria-label="Show only the treatments and procedures that begin with the letter W">W</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=x">X</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=x" aria-label="Show only the treatments and procedures that begin with the letter X">X</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=y">Y</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=y" aria-label="Show only the treatments and procedures that begin with the letter Y">Y</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=z">Z</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=z" aria-label="Show only the treatments and procedures that begin with the letter Z">Z</a>
                                     </div>
                                 </div>
                             </div>
