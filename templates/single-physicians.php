@@ -16,6 +16,19 @@ if ( $degrees ) {
         $i++;
     endforeach;
 } 
+$languages = get_field('physician_languages');
+$language_list = '';
+$i = 1;
+if ( $languages ) {
+    foreach( $languages as $language ):
+        $language_name = get_term( $language, 'languages');
+        $language_list .= $language_name->name;
+        if( count($languages) > $i ) {
+            $language_list .= ", ";
+        }
+        $i++;
+    endforeach;
+}
 $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '') .  ( $degree_list ? ', ' . $degree_list : '' );
 $short_name = get_field('physician_prefix') ? get_field('physician_prefix') .' ' .get_field('physician_last_name') : get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '');
 $excerpt = get_field('physician_academic_short_bio');
@@ -81,6 +94,15 @@ while ( have_posts() ) : the_post(); ?>
                                 ?>
                             <?php endforeach; ?>
                     <?php endif; ?>
+                    <?php // Display all languages
+                        if( $languages && $language_list == 'English') { 
+                        ?>
+                        <dt class="sr-only">Language</dt>
+                        <?php echo '<dd class="sr-only">' . $language_list . '</dd>';?>
+                    <?php } else { ?>
+                        <dt>Language<?php echo( count($languages) > 1 ? 's' : '' );?></dt>
+                        <?php echo '<dd>' . $language_list . '</dd>';?>
+                    <?php } //endif ?>
                     </dl>
                     <?php
                         if(get_field('physician_npi')) {
