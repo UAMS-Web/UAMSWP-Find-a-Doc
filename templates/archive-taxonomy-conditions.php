@@ -238,13 +238,13 @@ get_header(); ?>
                                 </div>
                                     <?php
                                     // link to show all
-                                    echo '<a href="'.get_permalink().'?showall=true">show all</a>';
+                                    echo '<div class="show-all"><p><a href="'.get_permalink().'?showall=true">Show all items</a></p></div>';
                                 endif;
 
                             else:
                             // showall is set, show link to get back to paged mode
 
-                                echo '<a href="'.get_permalink().'">show paged</a>';
+                            echo '<div class="show-paged"><p><a href="'.get_permalink().'">Show paged</a></p></div>';
 
                             endif;
                             ?>
