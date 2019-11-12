@@ -82,88 +82,88 @@ get_header(); ?>
                                         After that, if user checks any other checkbox input, remove "checked" attribute from "Any"/"All" checkbox input.
                                     -->
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-any"><a href="<?php echo get_permalink(); ?>">All</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>">All</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-number"><a href="<?php echo get_permalink(); ?>?alpha=0">#</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=0">#</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-A"><a href="<?php echo get_permalink(); ?>?alpha=a">A</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=a">A</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-B"><a href="<?php echo get_permalink(); ?>?alpha=b">B</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=b">B</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-C"><a href="<?php echo get_permalink(); ?>?alpha=c">C</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=c">C</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-D"><a href="<?php echo get_permalink(); ?>?alpha=d">D</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=d">D</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-E"><a href="<?php echo get_permalink(); ?>?alpha=e">E</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=e">E</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-F"><a href="<?php echo get_permalink(); ?>?alpha=f">F</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=f">F</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-G"><a href="<?php echo get_permalink(); ?>?alpha=g">G</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=g">G</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-H"><a href="<?php echo get_permalink(); ?>?alpha=h">H</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=h">H</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-I"><a href="<?php echo get_permalink(); ?>?alpha=i">I</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=i">I</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-J"><a href="<?php echo get_permalink(); ?>?alpha=j">J</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=j">J</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-K"><a href="<?php echo get_permalink(); ?>?alpha=k">K</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=k">K</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-L"><a href="<?php echo get_permalink(); ?>?alpha=l">L</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=l">L</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-M"><a href="<?php echo get_permalink(); ?>?alpha=m">M</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=m">M</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-N"><a href="<?php echo get_permalink(); ?>?alpha=n">N</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=n">N</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-O"><a href="<?php echo get_permalink(); ?>?alpha=o">O</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=o">O</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-P"><a href="<?php echo get_permalink(); ?>?alpha=p">P</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=p">P</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-Q"><a href="<?php echo get_permalink(); ?>?alpha=q">Q</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=q">Q</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-R"><a href="<?php echo get_permalink(); ?>?alpha=r">R</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=r">R</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-S"><a href="<?php echo get_permalink(); ?>?alpha=s">S</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=s">S</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-T"><a href="<?php echo get_permalink(); ?>?alpha=t">T</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=t">T</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-U"><a href="<?php echo get_permalink(); ?>?alpha=u">U</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=u">U</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-V"><a href="<?php echo get_permalink(); ?>?alpha=v">V</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=v">V</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-W"><a href="<?php echo get_permalink(); ?>?alpha=w">W</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=w">W</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-X"><a href="<?php echo get_permalink(); ?>?alpha=x">X</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=x">X</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-Y"><a href="<?php echo get_permalink(); ?>?alpha=y">Y</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=y">Y</a>
                                     </div>
                                     <div class="custom-control">
-                                        <label class="az-filter-label" for="az-filter-Z"><a href="<?php echo get_permalink(); ?>?alpha=z">Z</a></label>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=z">Z</a>
                                     </div>
                                 </div>
                             </div>
