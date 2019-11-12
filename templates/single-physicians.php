@@ -172,7 +172,11 @@ while ( have_posts() ) : the_post(); ?>
                         $l = 1;
                         $locations = get_field('physician_locations');
                         if( $locations ): ?>
-						<h2>Primary Location</h2>
+                            <?php if ($eligible_appt) { ?>
+                                <h2>Primary Appointment Location</h2>
+                            <?php } else { ?>
+                                <h2>Primary Location</h2>
+                            <?php } // endif ?>
                             <?php foreach( $locations as $location ):
                                     if ( 2 > $l ){ ?>
                                 <p><strong><?php echo get_the_title( $location ); ?></strong><br />
