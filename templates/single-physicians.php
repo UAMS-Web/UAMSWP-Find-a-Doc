@@ -33,6 +33,7 @@ $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middl
 $short_name = get_field('physician_prefix') ? get_field('physician_prefix') .' ' .get_field('physician_last_name') : get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '');
 $excerpt = get_field('physician_academic_short_bio');
 $bio = get_field('physician_clinical_bio');
+$eligible_appt = get_field('physician_eligible_appointments');
 if (empty($excerpt)){
     if ($bio){
         $excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 155, '...');
@@ -233,6 +234,7 @@ while ( have_posts() ) : the_post(); ?>
                 <?php } //endif ?>
             </div>
         </section>
+        <?php if ($eligible_appt): ?>
         <section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
@@ -253,6 +255,7 @@ while ( have_posts() ) : the_post(); ?>
                 </div>
             </div>
         </section>
+        <?php endif; ?>
         <?php if(get_field('physician_clinical_bio')|| !empty (get_field('physician_youtube_link')) || !empty (get_field('physician_awards')) || get_field('physician_additional_info')): ?>
         <section class="container-fluid p-8 p-sm-10 bg-auto">
             <div class="row">
@@ -565,6 +568,7 @@ while ( have_posts() ) : the_post(); ?>
                 </div>
             </div>
         </section> -->
+        <?php if ($eligible_appt): ?>
         <section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
@@ -585,6 +589,7 @@ while ( have_posts() ) : the_post(); ?>
                 </div>
             </div>
         </section>
+        <?php endif; ?>
     </main>
 
 
