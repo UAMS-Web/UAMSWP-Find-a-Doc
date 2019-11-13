@@ -239,7 +239,13 @@ while ( have_posts() ) : the_post(); ?>
             </div>
         </section>
         <?php if ($eligible_appt): ?>
-        <?php // Portal
+        <?php 
+            $refer_req = get_field('physician_referral_required');
+            $accept_new = get_field('physician_accepting_patients');
+            $appointment_phone_name = 'the main UAMS appointment line'; // default (UAMS)
+            $appointment_phone = '5016868000'; // default (UAMS)
+        
+            // Portal
             if ( get_field('physician_portal')) {
                 $portal = get_term(get_field('physician_portal'), "portal");
                 $portal_slug = $portal->slug;
@@ -254,10 +260,6 @@ while ( have_posts() ) : the_post(); ?>
                 if ($portal && $portal_slug !== "_none") {
                     $show_portal = true;
                 }
-                $refer_req = get_field('physician_referral_required');
-                $accept_new = get_field('physician_accepting_patients');
-                $appointment_phone_name = 'the main UAMS appointment line'; // default (UAMS)
-                $appointment_phone = '5016868000'; // default (UAMS)
                 if ($portal_slug == "ach-mychart") {
                     $appointment_phone_name = 'the main Arkansas Children\'s Hospital appointment line';
                     $appointment_phone = '5013641202';
@@ -265,9 +267,10 @@ while ( have_posts() ) : the_post(); ?>
                     $appointment_phone_name = 'the main Central Arkansas Veterans Healthcare System appointment line';
                     $appointment_phone = '5012573999';
                 }
-                $appointment_phone_tel = preg_replace('/^(\+?\d)?(\d{3})(\d{3})(\d{4})$/', '$2-$3-$4', $appointment_phone);
-                $appointment_phone_text = preg_replace('/^(\+?\d)?(\d{3})(\d{3})(\d{4})$/', '($2) $3-$4', $appointment_phone);
             }
+            
+            $appointment_phone_tel = preg_replace('/^(\+?\d)?(\d{3})(\d{3})(\d{4})$/', '$2-$3-$4', $appointment_phone);
+            $appointment_phone_text = preg_replace('/^(\+?\d)?(\d{3})(\d{3})(\d{4})$/', '($2) $3-$4', $appointment_phone);
         ?>
         <section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
             <div class="row">
