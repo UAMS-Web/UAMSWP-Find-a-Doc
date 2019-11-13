@@ -274,6 +274,7 @@ function fwp_disable_auto_refresh() {
 }
 add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
 
+/*
 add_action( 'wp_footer', function() {
     if ( !is_post_type_archive( 'physicians' ) || !is_post_type_archive( 'locations' ) ) {
     ?>
@@ -291,6 +292,7 @@ add_action( 'wp_footer', function() {
     <?php
     }
 }, 10 );
+*/
 
 // FacetWP scripts
 function fwp_facet_scripts() {
@@ -382,64 +384,6 @@ function fwp_facet_scripts() {
 }
 add_action( 'wp_footer', 'fwp_facet_scripts', 100 );
 
-// Adapted from https://gist.github.com/mgibbs189/f2469009a7039159e229efe5a01dab23
-// Add Load more and Load All buttons
-function fwp_load_more() {
-?>
-<script>
-(function($) {
-    $(function() {
-        if ('object' != typeof FWP) {
-            return;
-        }
-        FWP.hooks.addFilter('facetwp/template_html', function(resp, params) {
-            if (FWP.is_load_more) {
-                FWP.is_load_more = false;
-                $('.facetwp-template').append(params.html);
-                return true;
-            }
-            return resp;
-        });
-        $(document).on('click', '.fwp-load-more', function() {
-            $('.fwp-load-more').html('Loading more');
-            $('.fwp-load-more').after('<span class="fwp-loader"></span>');
-            FWP.is_load_more = true;
-            FWP.paged = parseInt(FWP.settings.pager.page) + 1;
-            FWP.soft_refresh = true;
-            FWP.refresh();
-        });
-        $(document).on('click', '.fwp-load-all', function() {
-            $('.fwp-load-all').html('Loading all');
-            $('.fwp-load-all').after('<span class="fwp-loader"></span>');
-            FWP.soft_refresh = true;
-            FWP.extras.per_page = 500
-            FWP.refresh();
-		});
-		$(document).on('click', '.fwp_paged', function() {
-			FWP.fetch_data();
-		});
-        // $(document).on('facetwp-loaded', function() {
-        //     $('.fwp-loader').hide();
-        //     if (FWP.settings.pager.page < FWP.settings.pager.total_pages) {
-        //         if (! FWP.loaded && 1 > $('.fwp-load-more').length) {
-        //             $('.facetwp-template').after('<div class="facetwp__loader"><button class="fwp-load-more btn btn-primary">Show more</button><button class="fwp-load-all btn btn-primary">Show all</button></div>');
-        //         }
-        //         else {
-        //             $('.fwp-load-more').html('Show more').show();
-        //         }
-        //     }
-        //     else {
-        //         $('.fwp-load-more').hide();
-        //         $('.fwp-load-all').hide();
-        //     }
-        // });
-    });
-})(jQuery);
-</script>
-<?php
-}
-// add_action( 'wp_head', 'fwp_load_more', 99 );
-
 // FacetWP Sort
 add_filter( 'facetwp_sort_options', function( $options, $params ) {
 	if ( is_post_type_archive( 'physicians' ) || is_singular( 'physicians' ) ) {
@@ -474,18 +418,6 @@ add_filter( 'facetwp_sort_options', function( $options, $params ) {
      unset( $options['date_asc'] );
     return $options;
 }, 10, 2 );
-
-//FacetWP Count
-// add_filter( 'facetwp_result_count', function( $output, $params ) {
-// 	if ( is_post_type_archive( 'physicians' ) || is_singular( 'physicians' ) ) {
-//     	$output = $params['total'] . ( $params['total'] > 1 ? ' Doctors' : ' Doctor' );
-//     } elseif ( in_array( get_post_type(), array( 'locations' )) ) {//is_post_type_archive( 'locations' ) || is_singular( 'locations' ) ) {
-//     	$output = $params['total'] . ( $params['total'] > 1 ? ' Locations' : ' Location' );
-//     } else {
-//     	$output = $params['total'];
-//     }
-//     return $output;
-// }, 10, 2 );
 
 add_filter( 'facetwp_pager_html', function( $output, $params ) {
     $output = '';
