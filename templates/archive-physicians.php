@@ -49,7 +49,7 @@
 				<div class="col-12 col-sm list-col">
 					<h2 class="sr-only">List of Doctors</h2>
 					<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
-						If you think you are experiencing a medical emergency, call 9-1-1 immediately.
+						If you think you are experiencing a medical emergency, call 911 immediately.
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
