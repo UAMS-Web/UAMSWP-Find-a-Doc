@@ -259,7 +259,7 @@ while ( have_posts() ) : the_post(); ?>
                 $appointment_phone_name = 'the main UAMS appointment line'; // default (UAMS)
                 $appointment_phone = '5016868000'; // default (UAMS)
                 if ($portal_slug == "ach-mychart") {
-                    $appointment_phone_name = 'the main Arkansas Childrens Hospital appointment line';
+                    $appointment_phone_name = 'the main Arkansas Children\'s Hospital appointment line';
                     $appointment_phone = '5013641202';
                 } elseif ($portal_slug == "my-healthevet") {
                     $appointment_phone_name = 'the main Central Arkansas Veterans Healthcare System appointment line';
