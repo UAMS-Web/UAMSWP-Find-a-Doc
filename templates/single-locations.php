@@ -295,7 +295,7 @@ while ( have_posts() ) : the_post(); ?>
 
 			if ($portal && $portal_slug !== "_none") {
 	?>
-	<section class="uams-module cta-bar alignfull cta-bar-weighted bg-red" aria-label="Patient Portal">
+	<section class="uams-module cta-bar alignfull cta-bar-weighted bg-blue" aria-label="Patient Portal">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-12">
