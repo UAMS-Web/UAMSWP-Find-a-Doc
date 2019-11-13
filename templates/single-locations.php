@@ -131,7 +131,7 @@ while ( have_posts() ) : the_post(); ?>
 								$dateNow = new DateTime("now", new DateTimeZone('America/Chicago') );
 								if (($dateNow < $holidayDateTime) && ($holidayDateTime->diff($dateNow)->days < 30)) {
 									if ( 0 == $i ) {
-										echo '<h2>Upcoming Holiday Hours</h2>';
+										echo '<h3>Upcoming Holiday Hours</h3>';
 										echo '<dl class="hours">';
 										$i++;
 									}
@@ -147,7 +147,7 @@ while ( have_posts() ) : the_post(); ?>
 							if ( 0 < $i ) {
 								echo '</dl>';
 							}
-							// echo '<h2>Holiday Hours</h2>';
+							// echo '<h3>Holiday Hours</h3>';
 							// echo '<dl class="hours">';
 							// if( $hours ) {
 							// 	$hours_text = '';
@@ -183,10 +183,10 @@ while ( have_posts() ) : the_post(); ?>
 							// echo '</dl>';
 						endif; ?>
 					<?php if (get_field('location_after_hours') && !get_field('location_24_7')) { ?>
-					<h2>After Hours</h2>
+					<h3>After Hours</h3>
 					<?php echo get_field('location_after_hours'); ?>
 					<?php } elseif (!get_field('location_24_7')) { ?>
-					<h2>After Hours</h2>
+					<h3>After Hours</h3>
 					<p>If you are in need of urgent or emergency care call 911 or go to your nearest emergency department at your local hospital.</p>
 					<?php } endif; ?>
 				</div>
