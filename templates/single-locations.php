@@ -245,85 +245,92 @@ while ( have_posts() ) : the_post(); ?>
 	<?php $parking_map = get_field('location_parking_map'); ?>
 	<section class="container-fluid p-8 p-sm-10 bg-auto">
 		<div class="row">
-			<div class="col-xs-12">
-				<h2 class="module-title"><?php echo ( get_field('location_parking' ) ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
-				<div class="module-body">
+			<div class="col-xs-12<?php echo $parking_map ? ' col-md-6' : ''  ?>">
+				<?php if ($parking_map) { ?>
+					<div class="module-body">
+					<h2><?php echo ( get_field('location_parking' ) ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
+				<?php } else { ?>
+					<h2 class="module-title"><?php echo ( get_field('location_parking' ) ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
+					<div class="module-body">
+				<?php } // endif ?>
 					<?php echo get_field('location_parking'); ?>
 					<?php echo ( get_field('location_parking' ) ? '<h3>Directions From the Parking Area</h3>' : ''); // Display the directions heading here if there is a value for parking. ?>
 					<?php echo get_field('location_direction'); ?>
 				</div>
 			</div>
-		</div>
-		<?php if ( $parking_map ) { ?>
-		<div class="embed-responsive embed-responsive-16by9" id="map"></div>
-			<script type='text/javascript'>
-				/*-- Function to create encode SVG  --*/
-				/* colors needd to be hex code without # */
-				// createSVGIcon("9d2235", "222", "whitetext", "1");
-				var createSVGIcon = function(fillColor,strokeColor,labelClass,labelText) {
-					var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 27.77" aria-labelledby="pinTitle" role="img"><title id="mapTitle">Basic Map Pin</title><path d="M9.5,26.26l.57-.65c.29-.4,7.93-9.54,7.93-15.67A8.75,8.75,0,0,0,9.5,1,8.75,8.75,0,0,0,1,9.94c0,6,7.54,15.27,7.93,15.67l.57.65Z" fill="#'+ fillColor +'" stroke="#'+ strokeColor +'" stroke-miterlimit="10" stroke-width="1"/></svg>';
-					var encoded = window.btoa(svg);
-					var backgroundImage = "background-image: url(data:image/svg+xml;base64,"+encoded+")";
-					return '<div style="'+ backgroundImage +'" class="'+ labelClass +'">'+ labelText +'</div>';
-				}
-				/* Function to create divIcon for leaflet map */
-				// createLabelIcon("leaflet-icon","A");
-				var createLabelIcon = function(labelClass,labelText){
-					return L.divIcon({
-						className: labelClass,
-						html: labelText,
-						iconSize: new L.Point(28, 41),
-						iconAnchor: new L.Point(14, 43),
-						popupAnchor: [0, -43]
-					})
-				}
-				var map = new L.Map('map', {center: new L.LatLng(<?php echo $parking_map['lat']; ?>, <?php echo $parking_map['lng'] ?>), zoom: 16 });
-				map.attributionControl.setPrefix(''); // Don't show the 'Powered by Leaflet' text.
-				// for all possible values and explanations see "Template Parameters" in https://msdn.microsoft.com/en-us/library/ff701716.aspx
-				var imagerySet = "Road"; // AerialWithLabels | Birdseye | BirdseyeWithLabels | Road
-				var bing = new L.BingLayer("AnCRy0VpPMDzYT6rOBqqqCNvNbUWvdSOv8zrQloRCGFnJZU28JK3c6cQkCMAHtCd", {type: imagerySet});
-				map.addLayer(bing);
-				/* [lat, lon, fillColor, strokeColor, labelClass, iconText, popupText] */
-				var markers = [
-					// example [ 34.74376029995541, -92.31828863640054, "00F","000","white","A","I am a blue icon." ],
-					[ <?php echo $map['lat']; ?>, <?php echo $map['lng'] ?>, "9d2235","222", "transparentwhite", '1', 'Clinic<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a>' ],
-					[ <?php echo $parking_map['lat']; ?>, <?php echo $parking_map['lng'] ?>, "9d2235","222", "transparentwhite", '2', 'Parking<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank">Get Directions</a>' ]
-				]
-				//Loop through the markers array
-				var markerArray = [];
-				for (var i=0; i<markers.length; i++) {
-					var lat = markers[i][0];
-					var lon = markers[i][1];
-					var fillColor = markers[i][2];
-					var strokeColor = markers[i][3];
-					var labelClass = markers[i][4];
-					var iconText = markers[i][5];
-					var popupText = markers[i][6];
-					var markerLocation = new L.LatLng(lat, lon);
-					marker = new L.marker([lat, lon], { icon: createLabelIcon("leaflet-icon", createSVGIcon(fillColor,strokeColor,labelClass,iconText))});
-					if (popupText)
-						marker.bindPopup(popupText, { maxWidth: '240' });
-					marker.addTo(map);
-					markerArray.push(markerLocation);
-				}
-				group = new L.LatLngBounds(markerArray);
-				if (markers.length > 1){
-					map.fitBounds(group, {padding: [100, 75]});
-				}
-			</script>
-			<div class="row">
-				<div class="col-xs-12">
-					<ol>
-						<li>Clinic<br/>
-						<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a>
-						</li>
-						<li>Parking<br/>
-						<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank">Get Directions</a>
-						</li>
-					</ol>
+			<?php if ( $parking_map ) { ?>
+				<div class="col-xs-12 col-md-6">
+					<div class="embed-responsive embed-responsive-16by9" id="map"></div>
+					<script type='text/javascript'>
+						/*-- Function to create encode SVG  --*/
+						/* colors needd to be hex code without # */
+						// createSVGIcon("9d2235", "222", "whitetext", "1");
+						var createSVGIcon = function(fillColor,strokeColor,labelClass,labelText) {
+							var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 27.77" aria-labelledby="pinTitle" role="img"><title id="mapTitle">Basic Map Pin</title><path d="M9.5,26.26l.57-.65c.29-.4,7.93-9.54,7.93-15.67A8.75,8.75,0,0,0,9.5,1,8.75,8.75,0,0,0,1,9.94c0,6,7.54,15.27,7.93,15.67l.57.65Z" fill="#'+ fillColor +'" stroke="#'+ strokeColor +'" stroke-miterlimit="10" stroke-width="1"/></svg>';
+							var encoded = window.btoa(svg);
+							var backgroundImage = "background-image: url(data:image/svg+xml;base64,"+encoded+")";
+							return '<div style="'+ backgroundImage +'" class="'+ labelClass +'">'+ labelText +'</div>';
+						}
+						/* Function to create divIcon for leaflet map */
+						// createLabelIcon("leaflet-icon","A");
+						var createLabelIcon = function(labelClass,labelText){
+							return L.divIcon({
+								className: labelClass,
+								html: labelText,
+								iconSize: new L.Point(28, 41),
+								iconAnchor: new L.Point(14, 43),
+								popupAnchor: [0, -43]
+							})
+						}
+						var map = new L.Map('map', {center: new L.LatLng(<?php echo $parking_map['lat']; ?>, <?php echo $parking_map['lng'] ?>), zoom: 16 });
+						map.attributionControl.setPrefix(''); // Don't show the 'Powered by Leaflet' text.
+						// for all possible values and explanations see "Template Parameters" in https://msdn.microsoft.com/en-us/library/ff701716.aspx
+						var imagerySet = "Road"; // AerialWithLabels | Birdseye | BirdseyeWithLabels | Road
+						var bing = new L.BingLayer("AnCRy0VpPMDzYT6rOBqqqCNvNbUWvdSOv8zrQloRCGFnJZU28JK3c6cQkCMAHtCd", {type: imagerySet});
+						map.addLayer(bing);
+						/* [lat, lon, fillColor, strokeColor, labelClass, iconText, popupText] */
+						var markers = [
+							// example [ 34.74376029995541, -92.31828863640054, "00F","000","white","A","I am a blue icon." ],
+							[ <?php echo $map['lat']; ?>, <?php echo $map['lng'] ?>, "9d2235","222", "transparentwhite", '1', 'Clinic<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a>' ],
+							[ <?php echo $parking_map['lat']; ?>, <?php echo $parking_map['lng'] ?>, "9d2235","222", "transparentwhite", '2', 'Parking<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank">Get Directions</a>' ]
+						]
+						//Loop through the markers array
+						var markerArray = [];
+						for (var i=0; i<markers.length; i++) {
+							var lat = markers[i][0];
+							var lon = markers[i][1];
+							var fillColor = markers[i][2];
+							var strokeColor = markers[i][3];
+							var labelClass = markers[i][4];
+							var iconText = markers[i][5];
+							var popupText = markers[i][6];
+							var markerLocation = new L.LatLng(lat, lon);
+							marker = new L.marker([lat, lon], { icon: createLabelIcon("leaflet-icon", createSVGIcon(fillColor,strokeColor,labelClass,iconText))});
+							if (popupText)
+								marker.bindPopup(popupText, { maxWidth: '240' });
+							marker.addTo(map);
+							markerArray.push(markerLocation);
+						}
+						group = new L.LatLngBounds(markerArray);
+						if (markers.length > 1){
+							map.fitBounds(group, {padding: [100, 75]});
+						}
+					</script>
+					<div class="row">
+						<div class="col-xs-12">
+							<ol>
+								<li>Clinic<br/>
+								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a>
+								</li>
+								<li>Parking<br/>
+								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank">Get Directions</a>
+								</li>
+							</ol>
+						</div>
+					</div>
 				</div>
-			</div>
-		<?php } ?>
+			<?php } ?>
+		</div>
 	</section>
 	<?php endif; ?>
 	<?php if ( get_field('location_appointment') || get_field('location_appointment_bring')): ?>
