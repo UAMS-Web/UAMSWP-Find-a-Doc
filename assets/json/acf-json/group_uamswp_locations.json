@@ -262,6 +262,24 @@
             "placement": "top",
             "endpoint": 0
         },
+        "field_location_parking_map": {
+            "key": "field_location_parking_map",
+            "name": "location_parking_map",
+            "type": "google_map",
+            "label": "Parking Map",
+            "instructions": "Place pin on the parking location (if different than building)",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "center_lat": "34.7492719",
+            "center_lng": "-92.3198281",
+            "zoom": 14,
+            "height": 400
+        },
         "field_location_parking": {
             "key": "field_location_parking",
             "name": "location_parking",
