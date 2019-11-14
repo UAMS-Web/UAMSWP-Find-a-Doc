@@ -421,7 +421,7 @@ while ( have_posts() ) : the_post(); ?>
         <section class="container-fluid p-8 p-sm-10 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2 class="module-title">Research</h2>
+                    <h2 class="module-title"><?php echo $short_name; ?>'s Research</h2>
                     <div class="module-body">
                         <?php
                             if(get_field('physician_research_bio'))
