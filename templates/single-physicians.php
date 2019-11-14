@@ -417,7 +417,7 @@ while ( have_posts() ) : the_post(); ?>
             </div>
         </section>
         <?php endif; ?>
-        <?php if( !empty(get_field('physician_research_bio')) || !empty(get_field('physician_research_interests')) ): ?>
+        <?php if( !empty(get_field('physician_research_bio')) || !empty(get_field('physician_research_interests')) || get_field('physician_research_profiles_link') ): ?>
         <section class="container-fluid p-8 p-sm-10 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
