@@ -350,7 +350,7 @@ while ( have_posts() ) : the_post(); ?>
         <?php 
         endif;
         ?>
-        <?php if(get_field('physician_academic_appointment')||get_field('physician_education')||get_field('physician_boards')): ?>
+        <?php if(get_field('physician_academic_bio') || get_field('physician_academic_appointment') || get_field('physician_education') || get_field('physician_boards')): ?>
         <section class="container-fluid p-8 p-sm-10 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
