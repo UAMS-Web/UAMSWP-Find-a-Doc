@@ -350,7 +350,7 @@ while ( have_posts() ) : the_post(); ?>
         <?php 
         endif;
         ?>
-        <?php if(get_field('physician_academic_appointment')||get_field('physician_education')||get_field('physician_boards')||get_field('physician_publications')||get_field('physician_pubmed_author_id')||get_field('physician_research_profiles_link')): ?>
+        <?php if(get_field('physician_academic_appointment')||get_field('physician_education')||get_field('physician_boards')): ?>
         <section class="container-fluid p-8 p-sm-10 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
@@ -398,7 +398,10 @@ while ( have_posts() ) : the_post(); ?>
             </div>
         </section>
         <?php endif; ?>
-        <?php if( !empty(get_field('physician_research_bio')) || !empty(get_field('physician_research_interests')) || get_field('physician_research_profiles_link') ): ?>
+        <?php 
+        $publications = get_field('physician_select_publications');
+
+        if( !empty(get_field('physician_research_bio')) || !empty(get_field('physician_research_interests')) || !empty ( $publications ) || get_field('physician_pubmed_author_id') || get_field('physician_research_profiles_link') ): ?>
         <section class="container-fluid p-8 p-sm-10 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
