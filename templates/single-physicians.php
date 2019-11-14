@@ -350,7 +350,7 @@ while ( have_posts() ) : the_post(); ?>
         <?php 
         endif;
         ?>
-        <?php if(get_field('physician_academic_appointment')||get_field('physician_education')||get_field('physician_boards')||get_field('physician_publications')||get_field('physician_pubmed_author_id')||get_field('physician_research_profiles_link')): ?>
+        <?php if(get_field('physician_academic_bio') || get_field('physician_academic_appointment') || get_field('physician_education') || get_field('physician_boards')): ?>
         <section class="container-fluid p-8 p-sm-10 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
@@ -393,38 +393,19 @@ while ( have_posts() ) : the_post(); ?>
                         <?php endforeach; ?>
                         </ul>
                         <?php endif; ?>
-                        <?php
-                            $publications = get_field('physician_select_publications');
-                            if( !empty ( $publications ) ): ?>
-                        <h3>Selected Publications</h3>
-                        <ul>
-                        <?php foreach( $publications as $publication ): ?>
-                            <li><?php echo $publication['pubmed_information']; ?></li>
-                        <?php endforeach; ?>
-                        </ul>
-                        <?php endif; ?>
-                        <?php if( get_field('physician_pubmed_author_id') ): ?>
-                            <?php
-                                $pubmedid = trim(get_field('physician_pubmed_author_id'));
-                                $pubmedcount = (get_field('pubmed_author_number') ? get_field('pubmed_author_number') : '3');
-                            ?>
-                        <h3>Latest Publications</h3>
-                            <p>Publications listed below are automatically derived from MEDLINE/PubMed and other sources, which might result in incorrect or missing publications.</p>
-                            <?php echo do_shortcode( '[pubmed terms="' . urlencode($pubmedid) .'%5BAuthor%5D" count="' . $pubmedcount .'"]' ); ?>
-                        <?php endif; ?>
-                        <?php if( get_field('physician_research_profiles_link') ): ?>
-                            More information is available on <a href="<?php echo get_field('physician_research_profiles_link'); ?>">UAMS Profile Page</a>
-                        <?php endif; ?>
                     </div>
                 </div>
             </div>
         </section>
         <?php endif; ?>
-        <?php if( !empty(get_field('physician_research_bio')) || !empty(get_field('physician_research_interests')) ): ?>
+        <?php 
+        $publications = get_field('physician_select_publications');
+
+        if( !empty(get_field('physician_research_bio')) || !empty(get_field('physician_research_interests')) || !empty ( $publications ) || get_field('physician_pubmed_author_id') || get_field('physician_research_profiles_link') ): ?>
         <section class="container-fluid p-8 p-sm-10 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2 class="module-title">Research</h2>
+                    <h2 class="module-title"><?php echo $short_name; ?>'s Research</h2>
                     <div class="module-body">
                         <?php
                             if(get_field('physician_research_bio'))
@@ -441,11 +422,28 @@ while ( have_posts() ) : the_post(); ?>
                             }
                         ?>
                         <?php
-                            if(get_field('physician_research_profiles_link'))
-                            { ?>
-                                <p><a href="<?php echo get_field('physician_research_profiles_link'); ?>" target="_blank">UAMS TRI Profiles</a></p>
-                        <?php }
-                        ?>
+                            if( !empty ( $publications ) ): ?>
+                        <h3>Selected Publications</h3>
+                        <ul>
+                        <?php foreach( $publications as $publication ): ?>
+                            <li><?php echo $publication['pubmed_information']; ?></li>
+                        <?php endforeach; ?>
+                        </ul>
+                        <?php endif; ?>
+                        <?php if( get_field('physician_pubmed_author_id') ): ?>
+                            <?php
+                                $pubmedid = trim(get_field('physician_pubmed_author_id'));
+                                $pubmedcount = (get_field('pubmed_author_number') ? get_field('pubmed_author_number') : '3');
+                            ?>
+                            <h3>Latest Publications</h3>
+                            <p>Publications listed below are automatically derived from MEDLINE/PubMed and other sources, which might result in incorrect or missing publications.</p>
+                            <?php echo do_shortcode( '[pubmed terms="' . urlencode($pubmedid) .'%5BAuthor%5D" count="' . $pubmedcount .'"]' ); ?>
+                        <?php endif; ?>
+                        <?php if( get_field('physician_research_profiles_link') ): ?>
+                            <h3>UAMS Research Profile</h3>
+                            <p>Each UAMS faculty member has a research profile page that includes biographical and contact information, a list of their most recent grant activity and a list of their PubMed publications.</p>
+                            <p><a class="btn btn-outline-primary" href="<?php echo get_field('physician_research_profiles_link'); ?>">View <?php echo $short_name; ?>'s research profile</a></p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
