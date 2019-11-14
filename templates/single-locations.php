@@ -316,17 +316,15 @@ while ( have_posts() ) : the_post(); ?>
 							map.fitBounds(group, {padding: [100, 75]});
 						}
 					</script>
-					<div class="row">
-						<div class="col-xs-12">
-							<ol>
-								<li>Clinic<br/>
-								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a>
-								</li>
-								<li>Parking<br/>
-								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank">Get Directions</a>
-								</li>
-							</ol>
-						</div>
+					<div class="map-legend">
+						<ol>
+							<li>Clinic<br/>
+							<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a>
+							</li>
+							<li>Parking<br/>
+							<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank">Get Directions</a>
+							</li>
+						</ol>
 					</div>
 				</div>
 			<?php } ?>
