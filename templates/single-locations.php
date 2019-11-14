@@ -321,12 +321,8 @@ while ( have_posts() ) : the_post(); ?>
 					</script>
 					<div class="map-legend">
 						<ol>
-							<li>Clinic<br/>
-							<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a>
-							</li>
-							<li>Parking<br/>
-							<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank">Get Directions</a>
-							</li>
+							<li>Clinic (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a>)</li>
+							<li>Parking (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank">Get Directions</a>)</li>
 						</ol>
 					</div>
 				</div>
