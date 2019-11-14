@@ -312,7 +312,7 @@ function create_clinical_conditions_taxonomy() {
 	$args = array(
 		'label' 					 => __( 'Conditions' ),
 		'labels'                     => $labels,
-		'hierarchical'               => true,
+		'hierarchical'               => false,
 		'public'                     => true,
 		'show_ui'                    => true,
 		'meta_box_cb'				 => false,
