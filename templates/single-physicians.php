@@ -412,9 +412,6 @@ while ( have_posts() ) : the_post(); ?>
                             <p>Publications listed below are automatically derived from MEDLINE/PubMed and other sources, which might result in incorrect or missing publications.</p>
                             <?php echo do_shortcode( '[pubmed terms="' . urlencode($pubmedid) .'%5BAuthor%5D" count="' . $pubmedcount .'"]' ); ?>
                         <?php endif; ?>
-                        <?php if( get_field('physician_research_profiles_link') ): ?>
-                            More information is available on <a href="<?php echo get_field('physician_research_profiles_link'); ?>">UAMS Profile Page</a>
-                        <?php endif; ?>
                     </div>
                 </div>
             </div>
