@@ -319,7 +319,7 @@ while ( have_posts() ) : the_post(); ?>
 							map.fitBounds(group, {padding: [100, 75]});
 						}
 					</script>
-					<div class="map-legend">
+					<div class="map-legend" aria-label="Legend for map">
 						<ol>
 							<li>Clinic (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a>)</li>
 							<li>Parking (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank">Get Directions</a>)</li>
