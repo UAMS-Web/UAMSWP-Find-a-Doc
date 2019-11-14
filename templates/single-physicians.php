@@ -437,12 +437,11 @@ while ( have_posts() ) : the_post(); ?>
                                 echo get_field('physician_research_interests');
                             }
                         ?>
-                        <?php
-                            if(get_field('physician_research_profiles_link'))
-                            { ?>
-                                <p><a href="<?php echo get_field('physician_research_profiles_link'); ?>" target="_blank">UAMS TRI Profiles</a></p>
-                        <?php }
-                        ?>
+                        <?php if( get_field('physician_research_profiles_link') ): ?>
+                            <h3>UAMS Research Profile</h3>
+                            <p>Each UAMS faculty member has a research profile page that includes biographical and contact information, a list of their most recent grant activity and a list of their PubMed publications.</p>
+                            <p><a class="btn btn-outline-primary" href="<?php echo get_field('physician_research_profiles_link'); ?>">View <?php echo $short_name; ?>'s research profile</a></p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
