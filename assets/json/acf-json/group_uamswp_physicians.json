@@ -1363,7 +1363,32 @@
             "taxonomy": "boards",
             "field_type": "multi_select",
             "allow_null": 0,
-            "add_term": 1,
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 0
+        },
+        "field_physician_associations": {
+            "key": "field_physician_associations",
+            "name": "physician_associations",
+            "type": "taxonomy",
+            "label": "Associations",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "associations",
+            "field_type": "multi_select",
+            "allow_null": 0,
+            "add_term": 0,
             "save_terms": 1,
             "load_terms": 1,
             "return_format": "id",

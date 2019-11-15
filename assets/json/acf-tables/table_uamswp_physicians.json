@@ -331,6 +331,13 @@
             }
         },
         {
+            "name": "physician_associations",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "physician_associations"
+            }
+        },
+        {
             "name": "physician_research_profiles_link",
             "map": {
                 "type": "acf_field_name",

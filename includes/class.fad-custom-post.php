@@ -1186,6 +1186,59 @@ function create_boards_taxonomy() {
 
 }
 
+add_action( 'init', 'create_associations_taxonomy', 0 );//hook into the init action and call create_book_taxonomies when it fires
+
+//create a custom taxonomy name it topics for your posts
+function create_associations_taxonomy() {
+
+// Add new taxonomy, make it hierarchical like categories
+// first do the translations part for GUI
+
+  $labels = array(
+		'name'                           => 'Associations',
+		'singular_name'                  => 'Association',
+		'search_items'                   => 'Search Associations',
+		'all_items'                      => 'All Associations',
+		'edit_item'                      => 'Edit Association',
+		'update_item'                    => 'Update Association',
+		'add_new_item'                   => 'Add New Association',
+		'new_item_name'                  => 'New Association',
+		'menu_name'                      => 'Academic Associations',
+		'view_item'                      => 'View Association',
+		'popular_items'                  => 'Popular Associations',
+		'separate_items_with_commas'     => 'Separate associations with commas',
+		'add_or_remove_items'            => 'Add or remove associations',
+		'choose_from_most_used'          => 'Choose from the most used associations',
+		'not_found'                      => 'No associations found'
+	);
+  	$rewrite = array(
+		'slug'                       => 'associations',
+		'with_front'                 => false,
+		'hierarchical'               => false,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'label' 					 => __( 'Associations' ),
+		'labels'                     => $labels,
+		'hierarchical'               => false,
+		'public'                     => true,
+		'show_ui'                    => true,  //Made true to add / edit
+		'meta_box_cb'				 => false,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+	);
+	register_taxonomy( 'associations', array( 'physicians' ), $args );
+
+}
+
 // Register Custom Taxonomy
 function create_education_taxonomy() {
 
