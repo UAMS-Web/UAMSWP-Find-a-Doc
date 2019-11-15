@@ -1053,7 +1053,8 @@
             "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
+                "acfe_bidirectional_enabled": true,
+                "acfe_bidirectional_related": "field_condition_locations"
             },
             "multiple": 0
         },
@@ -1078,7 +1079,8 @@
             "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
+                "acfe_bidirectional_enabled": true,
+                "acfe_bidirectional_related": "field_treatment_procedure_locations"
             },
             "multiple": 0
         },
