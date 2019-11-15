@@ -16,10 +16,24 @@ if ( $degrees ) {
         $i++;
     endforeach;
 } 
-$full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') .  ( $degree_list ? ', ' . $degree_list : '' );
-$short_name = get_field('physician_prefix') ? get_field('physician_prefix') .' ' .get_field('physician_last_name') : get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name');
+$languages = get_field('physician_languages');
+$language_list = '';
+$i = 1;
+if ( $languages ) {
+    foreach( $languages as $language ):
+        $language_name = get_term( $language, 'languages');
+        $language_list .= $language_name->name;
+        if( count($languages) > $i ) {
+            $language_list .= ", ";
+        }
+        $i++;
+    endforeach;
+}
+$full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+$short_name = get_field('physician_prefix') ? get_field('physician_prefix') .' ' .get_field('physician_last_name') : get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '');
 $excerpt = get_field('physician_academic_short_bio');
 $bio = get_field('physician_clinical_bio');
+$eligible_appt = get_field('physician_eligible_appointments');
 if (empty($excerpt)){
     if ($bio){
         $excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 155, '...');
@@ -81,6 +95,15 @@ while ( have_posts() ) : the_post(); ?>
                                 ?>
                             <?php endforeach; ?>
                     <?php endif; ?>
+                    <?php // Display all languages
+                        if( $languages && $language_list == 'English') { 
+                        ?>
+                        <dt class="sr-only">Language</dt>
+                        <?php echo '<dd class="sr-only">' . $language_list . '</dd>';?>
+                    <?php } else { ?>
+                        <dt>Language<?php echo( count($languages) > 1 ? 's' : '' );?></dt>
+                        <?php echo '<dd>' . $language_list . '</dd>';?>
+                    <?php } //endif ?>
                     </dl>
                     <?php
                         if(get_field('physician_npi')) {
@@ -149,7 +172,11 @@ while ( have_posts() ) : the_post(); ?>
                         $l = 1;
                         $locations = get_field('physician_locations');
                         if( $locations ): ?>
-						<h2>Primary Location</h2>
+                            <?php if ($eligible_appt) { ?>
+                                <h2>Primary Appointment Location</h2>
+                            <?php } else { ?>
+                                <h2>Primary Location</h2>
+                            <?php } // endif ?>
                             <?php foreach( $locations as $location ):
                                     if ( 2 > $l ){ ?>
                                 <p><strong><?php echo get_the_title( $location ); ?></strong><br />
@@ -211,26 +238,66 @@ while ( have_posts() ) : the_post(); ?>
                 <?php } //endif ?>
             </div>
         </section>
+        <?php if ($eligible_appt): ?>
+        <?php 
+            $refer_req = get_field('physician_referral_required');
+            $accept_new = get_field('physician_accepting_patients');
+            $appointment_phone_name = 'the main UAMS appointment line'; // default (UAMS)
+            $appointment_phone = '5016868000'; // default (UAMS)
+        
+            // Portal
+            if ( get_field('physician_portal')) {
+                $portal = get_term(get_field('physician_portal'), "portal");
+                $portal_slug = $portal->slug;
+                $portal_name = $portal->name;
+                $portal_content = get_field('portal_content', $portal);
+                $portal_link = get_field('portal_url', $portal);
+                if ($portal_link) {
+                    $portal_url = $portal_link['url'];
+                    $portal_link_title = $portal_link['title'];
+                }
+
+                if ($portal && $portal_slug !== "_none") {
+                    $show_portal = true;
+                }
+                if ($portal_slug == "ach-mychart") {
+                    $appointment_phone_name = 'the main Arkansas Children\'s Hospital appointment line';
+                    $appointment_phone = '5013641202';
+                } elseif ($portal_slug == "my-healthevet") {
+                    $appointment_phone_name = 'the main Central Arkansas Veterans Healthcare System appointment line';
+                    $appointment_phone = '5012573999';
+                }
+            }
+            
+            $appointment_phone_tel = preg_replace('/^(\+?\d)?(\d{3})(\d{3})(\d{4})$/', '$2-$3-$4', $appointment_phone);
+            $appointment_phone_text = preg_replace('/^(\+?\d)?(\d{3})(\d{3})(\d{4})$/', '($2) $3-$4', $appointment_phone);
+        ?>
         <section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
                     <h2>Make an Appointment With <?php echo $short_name; ?></h2>
-                    <?php 
-                        $refer_req = get_field('physician_referral_required');
-                        $accept_new = get_field('physician_accepting_patients');
-                        if ($refer_req && $accept_new) { ?>
-                            <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
-                            <p>Existing patients can either <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through MyChart, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                    <?php if ($refer_req && $accept_new && $show_portal) { ?>
+                        <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
+                        <p>Existing patients can either <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                    <?php } elseif ($refer_req && $accept_new) { ?>
+                        <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
+                        <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                    <?php } elseif ($accept_new && $show_portal) { ?>
+                        <p>New patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                        <p>Existing patients also have the option to <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>.</p>
                     <?php } elseif ($accept_new) { ?>
-                        <p>New patients can make appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
-                        <p>Existing patients have the option to <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through&nbsp;MyChart.</p>
+                        <p>New and existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                    <?php } elseif ($show_portal) { ?>
+                        <p>This physician is not currently accepting new patients.</p>
+                        <p>Existing patients can either <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                     <?php } else { ?>
                         <p>This physician is not currently accepting new patients.</p>
-                        <p>Existing patients can either <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through MyChart, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                        <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                     <?php } ?>
                 </div>
             </div>
         </section>
+        <?php endif; ?>
         <?php if(get_field('physician_clinical_bio')|| !empty (get_field('physician_youtube_link')) || !empty (get_field('physician_awards')) || get_field('physician_additional_info')): ?>
         <section class="container-fluid p-8 p-sm-10 bg-auto">
             <div class="row">
@@ -283,7 +350,7 @@ while ( have_posts() ) : the_post(); ?>
         <?php 
         endif;
         ?>
-        <?php if(get_field('physician_academic_appointment')||get_field('physician_education')||get_field('physician_boards')||get_field('physician_publications')||get_field('physician_pubmed_author_id')||get_field('physician_research_profiles_link')): ?>
+        <?php if(get_field('physician_academic_bio') || get_field('physician_academic_appointment') || get_field('physician_education') || get_field('physician_boards')): ?>
         <section class="container-fluid p-8 p-sm-10 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
@@ -326,38 +393,19 @@ while ( have_posts() ) : the_post(); ?>
                         <?php endforeach; ?>
                         </ul>
                         <?php endif; ?>
-                        <?php
-                            $publications = get_field('physician_select_publications');
-                            if( !empty ( $publications ) ): ?>
-                        <h3>Selected Publications</h3>
-                        <ul>
-                        <?php foreach( $publications as $publication ): ?>
-                            <li><?php echo $publication['pubmed_information']; ?></li>
-                        <?php endforeach; ?>
-                        </ul>
-                        <?php endif; ?>
-                        <?php if( get_field('physician_pubmed_author_id') ): ?>
-                            <?php
-                                $pubmedid = trim(get_field('physician_pubmed_author_id'));
-                                $pubmedcount = (get_field('pubmed_author_number') ? get_field('pubmed_author_number') : '3');
-                            ?>
-                        <h3>Latest Publications</h3>
-                            <p>Publications listed below are automatically derived from MEDLINE/PubMed and other sources, which might result in incorrect or missing publications.</p>
-                            <?php echo do_shortcode( '[pubmed terms="' . urlencode($pubmedid) .'%5BAuthor%5D" count="' . $pubmedcount .'"]' ); ?>
-                        <?php endif; ?>
-                        <?php if( get_field('physician_research_profiles_link') ): ?>
-                            More information is available on <a href="<?php echo get_field('physician_research_profiles_link'); ?>">UAMS Profile Page</a>
-                        <?php endif; ?>
                     </div>
                 </div>
             </div>
         </section>
         <?php endif; ?>
-        <?php if( !empty(get_field('physician_research_bio')) || !empty(get_field('physician_research_interests')) ): ?>
+        <?php 
+        $publications = get_field('physician_select_publications');
+
+        if( !empty(get_field('physician_research_bio')) || !empty(get_field('physician_research_interests')) || !empty ( $publications ) || get_field('physician_pubmed_author_id') || get_field('physician_research_profiles_link') ): ?>
         <section class="container-fluid p-8 p-sm-10 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2 class="module-title">Research</h2>
+                    <h2 class="module-title"><?php echo $short_name; ?>'s Research</h2>
                     <div class="module-body">
                         <?php
                             if(get_field('physician_research_bio'))
@@ -374,11 +422,28 @@ while ( have_posts() ) : the_post(); ?>
                             }
                         ?>
                         <?php
-                            if(get_field('physician_research_profiles_link'))
-                            { ?>
-                                <p><a href="<?php echo get_field('physician_research_profiles_link'); ?>" target="_blank">UAMS TRI Profiles</a></p>
-                        <?php }
-                        ?>
+                            if( !empty ( $publications ) ): ?>
+                        <h3>Selected Publications</h3>
+                        <ul>
+                        <?php foreach( $publications as $publication ): ?>
+                            <li><?php echo $publication['pubmed_information']; ?></li>
+                        <?php endforeach; ?>
+                        </ul>
+                        <?php endif; ?>
+                        <?php if( get_field('physician_pubmed_author_id') ): ?>
+                            <?php
+                                $pubmedid = trim(get_field('physician_pubmed_author_id'));
+                                $pubmedcount = (get_field('pubmed_author_number') ? get_field('pubmed_author_number') : '3');
+                            ?>
+                            <h3>Latest Publications</h3>
+                            <p>Publications listed below are automatically derived from MEDLINE/PubMed and other sources, which might result in incorrect or missing publications.</p>
+                            <?php echo do_shortcode( '[pubmed terms="' . urlencode($pubmedid) .'%5BAuthor%5D" count="' . $pubmedcount .'"]' ); ?>
+                        <?php endif; ?>
+                        <?php if( get_field('physician_research_profiles_link') ): ?>
+                            <h3>UAMS Research Profile</h3>
+                            <p>Each UAMS faculty member has a research profile page that includes biographical and contact information, a list of their most recent grant activity and a list of their PubMed publications.</p>
+                            <p><a class="btn btn-outline-primary" href="<?php echo get_field('physician_research_profiles_link'); ?>">View <?php echo $short_name; ?>'s research profile</a></p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -543,26 +608,33 @@ while ( have_posts() ) : the_post(); ?>
                 </div>
             </div>
         </section> -->
-        <section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
+        <?php if ($eligible_appt): ?>
+            <section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
             <div class="row">
                 <div class="col-xs-12">
                     <h2>Make an Appointment With <?php echo $short_name; ?></h2>
-                    <?php 
-                        $refer_req = get_field('physician_referral_required');
-                        $accept_new = get_field('physician_accepting_patients');
-                        if ($refer_req && $accept_new) { ?>
-                            <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
-                            <p>Existing patients can either <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through MyChart, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                    <?php if ($refer_req && $accept_new && $show_portal) { ?>
+                        <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
+                        <p>Existing patients can either <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                    <?php } elseif ($refer_req && $accept_new) { ?>
+                        <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
+                        <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                    <?php } elseif ($accept_new && $show_portal) { ?>
+                        <p>New patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                        <p>Existing patients also have the option to <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>.</p>
                     <?php } elseif ($accept_new) { ?>
-                        <p>New patients can make appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
-                        <p>Existing patients have the option to <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through&nbsp;MyChart.</p>
+                        <p>New and existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                    <?php } elseif ($show_portal) { ?>
+                        <p>This physician is not currently accepting new patients.</p>
+                        <p>Existing patients can either <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                     <?php } else { ?>
                         <p>This physician is not currently accepting new patients.</p>
-                        <p>Existing patients can either <a href="https://mychart.uamshealth.com/" aria-label="UAMS MyChart" target="_blank">request an appointment online</a> through MyChart, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                        <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                     <?php } ?>
                 </div>
             </div>
         </section>
+        <?php endif; ?>
     </main>
 
 
