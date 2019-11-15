@@ -53,6 +53,9 @@
 				<?php echo (get_field('condition_content', $term) ? ''. get_field('condition_content', $term) . '' : '' ); ?>
 			</div>
 		</section>
+		<?php
+		$clinical_trials = get_field('condition_clinical_trials', $term);
+		if (!empty($clinical_trials)): ?>
 		<section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
 			<div class="row">
 				<div class="col-xs-12">
@@ -61,6 +64,7 @@
 				</div>
 			</div>
 		</section>
+		<?php endif; ?>
 		<?php 
 			$treatments = get_field('condition_treatments', $term);
 			//echo count($treatments);
