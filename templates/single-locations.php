@@ -255,7 +255,7 @@ while ( have_posts() ) : the_post(); ?>
 				<?php } // endif ?>
 					<?php echo get_field('location_parking'); ?>
 					<?php if ( $parking_map ) { ?>
-						<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a>
+						<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank">Get Directions</a>
 					<?php } // endif ?>
 					<?php echo ( get_field('location_parking' ) ? '<h3>Directions From the Parking Area</h3>' : ''); // Display the directions heading here if there is a value for parking. ?>
 					<?php echo get_field('location_direction'); ?>
