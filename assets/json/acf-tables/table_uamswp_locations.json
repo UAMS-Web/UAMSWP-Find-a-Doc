@@ -192,20 +192,6 @@
             }
         },
         {
-            "name": "location_conditions",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_conditions"
-            }
-        },
-        {
-            "name": "location_treatments",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_treatments"
-            }
-        },
-        {
             "name": "location_expertise",
             "map": {
                 "type": "acf_field_name",
