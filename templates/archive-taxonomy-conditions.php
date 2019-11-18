@@ -47,7 +47,7 @@ get_header(); ?>
                             $taxonomy = 'condition';
                             if( isset($_GET['showall']) ):
 
-                                $args = array( 'hide_empty' => 0 );
+                                $args = array( 'taxonomy' => $taxonomy, 'hide_empty' => 0 );
 
                             else:
                             // else show paged
