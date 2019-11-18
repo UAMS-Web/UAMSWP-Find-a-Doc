@@ -262,7 +262,7 @@ while ( have_posts() ) : the_post(); ?>
 				</div>
 			</div>
 			<?php if ( $parking_map ) { ?>
-				<div class="col-xs-12 col-md-6">
+				<div class="col-xs-12 col-md-6" class="parking-map-container">
 					<div class="embed-responsive embed-responsive-16by9" id="map"></div>
 					<script type='text/javascript'>
 						/*-- Function to create encode SVG  --*/
