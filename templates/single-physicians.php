@@ -3,7 +3,7 @@
  *  Get ACF fields to use for meta data
  *  Add description from physician short description or full description * 
  */
-$degrees = get_field('physician_degree');
+$degrees = get_field('physician_degree',$post->ID);
 $degree_list = '';
 $i = 1;
 if ( $degrees ) {
@@ -16,7 +16,7 @@ if ( $degrees ) {
         $i++;
     endforeach;
 } 
-$languages = get_field('physician_languages');
+$languages = get_field('physician_languages',$post->ID);
 $language_list = '';
 $i = 1;
 if ( $languages ) {
@@ -29,18 +29,17 @@ if ( $languages ) {
         $i++;
     endforeach;
 }
-$full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '') .  ( $degree_list ? ', ' . $degree_list : '' );
-$short_name = get_field('physician_prefix') ? get_field('physician_prefix') .' ' .get_field('physician_last_name') : get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '');
-$excerpt = get_field('physician_academic_short_bio');
-$bio = get_field('physician_clinical_bio');
-$eligible_appt = get_field('physician_eligible_appointments');
+$full_name = get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+$short_name = get_field('physician_prefix',$post->ID) ? get_field('physician_prefix',$post->ID) .' ' .get_field('physician_last_name',$post->ID) : get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '');
+$excerpt = get_field('physician_short_clinical_bio',$post->ID);
+$bio = get_field('physician_clinical_bio',$post->ID);
+$eligible_appt = get_field('physician_eligible_appointments',$post->ID);
 if (empty($excerpt)){
     if ($bio){
         $excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 155, '...');
     }
 }
 function sp_titles_desc($html) {
-    //you can add here all your conditions as if is_page(), is_category() etc.. 
     global $excerpt;
 	$html = $excerpt; 
 	return $html;
