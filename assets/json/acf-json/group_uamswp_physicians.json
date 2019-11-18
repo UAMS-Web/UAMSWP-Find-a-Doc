@@ -1397,6 +1397,76 @@
             },
             "multiple": 0
         },
+        "field_physician_research_tab": {
+            "key": "field_physician_research_tab",
+            "name": "",
+            "type": "tab",
+            "label": "<i class=\"dashicons dashicons-clipboard\"><\/i> Research",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        "field_physician_research_bio": {
+            "key": "field_physician_research_bio",
+            "name": "physician_research_bio",
+            "type": "wysiwyg",
+            "label": "Research Bio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        "field_physician_research_interests": {
+            "key": "field_physician_research_interests",
+            "name": "physician_research_interests",
+            "type": "textarea",
+            "label": "Research Interests",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": ""
+        },
+        "field_physician_profiles_link": {
+            "key": "field_physician_profiles_link",
+            "name": "physician_research_profiles_link",
+            "type": "url",
+            "label": "UAMS Profiles Link",
+            "instructions": "Please include the full URL, including https:\/\/",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
         "field_pubmed_author_id": {
             "key": "field_pubmed_author_id",
             "name": "physician_pubmed_author_id",
@@ -1501,76 +1571,6 @@
                     "new_lines": ""
                 }
             ]
-        },
-        "field_physician_research_tab": {
-            "key": "field_physician_research_tab",
-            "name": "",
-            "type": "tab",
-            "label": "<i class=\"dashicons dashicons-clipboard\"><\/i> Research",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
-        },
-        "field_physician_research_bio": {
-            "key": "field_physician_research_bio",
-            "name": "physician_research_bio",
-            "type": "wysiwyg",
-            "label": "Research Bio",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0
-        },
-        "field_physician_research_interests": {
-            "key": "field_physician_research_interests",
-            "name": "physician_research_interests",
-            "type": "textarea",
-            "label": "Research Interests",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": "",
-            "new_lines": ""
-        },
-        "field_physician_profiles_link": {
-            "key": "field_physician_profiles_link",
-            "name": "physician_research_profiles_link",
-            "type": "url",
-            "label": "UAMS Profiles Link",
-            "instructions": "Please include the full URL, including https:\/\/",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "33",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": ""
         },
         "field_physician_extra_tab": {
             "key": "field_physician_extra_tab",
