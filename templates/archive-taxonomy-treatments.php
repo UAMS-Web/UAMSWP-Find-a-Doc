@@ -48,7 +48,7 @@ get_header(); ?>
                             $taxonomy = 'treatment_procedure';
                             if( isset($_GET['showall']) ):
 
-                                $args = array( 'hide_empty' => 0 );
+                                $args = array( 'taxonomy' => $taxonomy, 'hide_empty' => 0 );
 
                             else:
                             // else show paged
