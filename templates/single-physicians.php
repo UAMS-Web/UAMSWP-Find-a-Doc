@@ -391,6 +391,17 @@ while ( have_posts() ) : the_post(); ?>
                             <?php // }; ?>
                         <?php endforeach; ?>
                         </ul>
+                        <?php endif;
+                            $associations = get_field( 'physician_associations' );
+                            if( ! empty( $associations ) ): ?>
+                        <h3>Associations</h3>
+                        <ul>
+                        <?php foreach ( $associations as $association ) :
+                            $association_name = get_term( $association, 'associations'); ?>
+                            <li><?php echo $association_name->name; ?></li>
+                            <?php // }; ?>
+                        <?php endforeach; ?>
+                        </ul>
                         <?php endif; ?>
                     </div>
                 </div>
