@@ -583,7 +583,19 @@ $request = wp_remote_get( 'https://transparency.nrchealth.com/widget/api/org-pro
 
 					$data = json_decode( $body );
 */
-
+add_filter('acf/prepare_field/key=field_physician_portal', 'set_default_portal', 20, 3);
+add_filter('acf/prepare_field/key=field_location_portal', 'set_default_portal', 20, 3);
+function set_default_portal( $field ) {
+    // Only if no value set
+    if( empty( $field['value'] ) ){
+        $term = get_term_by('slug', 'uams-mychart', 'portal');
+        $id = $term->term_id;
+        $default = array($id);
+        // Set field to default value
+        $field[ 'value' ] = $default ;
+    }
+    return $field;
+}
 add_filter('acf/load_value/key=field_physician_languages', 'set_default_language', 20, 3);
 function set_default_language($value, $post_id, $field) {
     // Only add default content for new posts
