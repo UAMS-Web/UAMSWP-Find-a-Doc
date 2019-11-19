@@ -28,7 +28,7 @@ function uamswp_add_entry_class( $attributes ) {
 add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 add_filter( 'genesis_entry_content', 'uamswp_expertise_keywords', 8);
-
+add_action( 'genesis_after_entry', 'uamswp_expertise_youtube', 6 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_conditions', 8 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_treatments', 10 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 12 );
@@ -71,6 +71,19 @@ function uamswp_expertise_physicians() {
     </section>
 <?php
     }
+}
+function uamswp_expertise_youtube() {
+    if(get_field('expertise_youtube_link')) { ?>
+        <section class="container-fluid p-8 p-sm-10 bg-auto">
+            <div class="row">
+                <div class="col-12">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <?php echo wp_oembed_get( get_field( 'expertise_youtube_link' ) ); ?>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <?php }
 }
 function uamswp_expertise_keywords() {
     $keywords = get_field('expertise_alternate_names');

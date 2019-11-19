@@ -24,6 +24,22 @@
     "acfe_note": "",
     "acfe_meta": "",
     "fields": {
+        "field_physician_youtube_link": {
+            "key": "field_expertise_youtube_link",
+            "name": "expertise_youtube_link",
+            "type": "url",
+            "label": "Featured Youtube video",
+            "instructions": "Full URL, including https:\/\/",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
         "field_expertise_conditions": {
             "key": "field_expertise_conditions",
             "name": "expertise_conditions",

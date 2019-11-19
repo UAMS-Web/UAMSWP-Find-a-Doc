@@ -88,6 +88,22 @@
             "acfe_update": ""
         },
         {
+            "key": "field_treatment_procedure_youtube_link",
+            "name": "treatment_procedure_youtube_link",
+            "type": "url",
+            "label": "Featured Youtube video",
+            "instructions": "Full URL, including https:\/\/",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
             "key": "field_treatment_procedure_conditions",
             "label": "Conditions",
             "name": "treatment_procedure_conditions",
