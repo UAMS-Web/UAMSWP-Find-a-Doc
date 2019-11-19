@@ -45,7 +45,7 @@
 							$keyword_text .= $keyword['text'];
 							$i++;
 						}
-						echo '<p>Possible alternate names: '. $keyword_text .'</p>';
+						echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';
 					endif;
 				?>
 				<?php echo ( get_field('treatment_procedure_content', $term) ? ''. get_field('treatment_procedure_content', $term) . '' : '' ); ?>
