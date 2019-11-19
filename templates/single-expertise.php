@@ -28,7 +28,7 @@ function uamswp_add_entry_class( $attributes ) {
 add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 add_filter( 'genesis_entry_content', 'uamswp_expertise_keywords', 8);
-add_action( 'genesis_after_entry', 'uamswp_expertise_youtube', 6 );
+add_action( 'genesis_entry_content', 'uamswp_expertise_youtube', 12 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_conditions', 8 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_treatments', 10 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 12 );
