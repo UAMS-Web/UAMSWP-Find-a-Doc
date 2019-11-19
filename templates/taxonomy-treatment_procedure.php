@@ -64,12 +64,12 @@
 		</section>
 		<?php endif; ?>
 		<?php
-		if(get_field('treatment_procedure_youtube_link')) { ?>
+		if(get_field('treatment_procedure_youtube_link', $term)) { ?>
 			<section class="container-fluid p-8 p-sm-10 bg-auto">
 				<div class="row">
 					<div class="col-12">
 						<div class="embed-responsive embed-responsive-16by9">
-							<?php echo wp_oembed_get( get_field( 'treatment_procedure_youtube_link' ) ); ?>
+							<?php echo wp_oembed_get( get_field( 'treatment_procedure_youtube_link', $term ) ); ?>
 						</div>
 					</div>
 				</div>
