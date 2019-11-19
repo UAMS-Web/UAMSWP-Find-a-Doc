@@ -49,7 +49,7 @@
 						echo '<p>Possible alternate names: '. $keyword_text .'</p>';
 					endif;
 				?>
-				<?php echo (get_field('condition_content', $term) ? ''. get_field('condition_content', $term) . '' : '' ); ?>
+				<?php echo ( get_field('condition_content', $term) ? ''. get_field('condition_content', $term) . '' : '' ); ?>
 			</div>
 		</section>
 		<?php
