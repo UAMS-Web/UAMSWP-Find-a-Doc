@@ -48,7 +48,12 @@
 						echo '<p>Possible alternate names: '. $keyword_text .'</p>';
 					endif;
 				?>
-				<?php echo (get_field('treatment_procedure_content', $term) ? ''. get_field('treatment_procedure_content', $term) . '' : '' ); ?>
+				<?php echo ( get_field('treatment_procedure_content', $term) ? ''. get_field('treatment_procedure_content', $term) . '' : '' ); ?>
+				<?php if( get_field('treatment_procedure_youtube_link', $term) ) { ?>
+					<div class="embed-responsive embed-responsive-16by9">
+					<?php echo wp_oembed_get( get_field('treatment_procedure_youtube_link', $term) ); ?>
+					</div>
+				<?php } ?>
 			</div>
 		</section>
 		<?php
@@ -63,19 +68,7 @@
 			</div>
 		</section>
 		<?php endif; ?>
-		<?php
-		if(get_field('treatment_procedure_youtube_link', $term)) { ?>
-			<section class="container-fluid p-8 p-sm-10 bg-auto">
-				<div class="row">
-					<div class="col-12">
-						<div class="embed-responsive embed-responsive-16by9">
-							<?php echo wp_oembed_get( get_field( 'treatment_procedure_youtube_link', $term ) ); ?>
-						</div>
-					</div>
-				</div>
-			</section>
 		<?php 
-		} 
 			$conditions = get_field('treatment_procedure_conditions', $term);
 			
 			if (!empty($conditions) && 0 < count($conditions)) {
