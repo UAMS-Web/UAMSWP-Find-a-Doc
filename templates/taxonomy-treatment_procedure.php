@@ -48,7 +48,7 @@
 						echo '<p>Possible alternate names: '. $keyword_text .'</p>';
 					endif;
 				?>
-				<?php echo (get_field('treatment_procedure_content', $term) ? ''. get_field('treatment_procedure_content', $term) . '' : '' ); ?>
+				<?php echo ( get_field('treatment_procedure_content', $term) ? ''. get_field('treatment_procedure_content', $term) . '' : '' ); ?>
 			</div>
 		</section>
 		<?php
