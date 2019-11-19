@@ -91,7 +91,7 @@ function uamswp_expertise_keywords() {
             $keyword_text .= $keyword['text'];
             $i++;
         } 
-        echo '<p>Possible alternate names: '. $keyword_text .'</p>';
+        echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';
     endif;
 }
 function uamswp_expertise_conditions() {
