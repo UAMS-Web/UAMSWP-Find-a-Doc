@@ -50,6 +50,11 @@
 					endif;
 				?>
 				<?php echo ( get_field('condition_content', $term) ? ''. get_field('condition_content', $term) . '' : '' ); ?>
+				<?php if( get_field('condition_youtube_link', $term) ) { ?>
+					<div class="embed-responsive embed-responsive-16by9">
+					<?php echo wp_oembed_get( get_field('condition_youtube_link', $term) ); ?>
+					</div>
+				<?php } ?>
 			</div>
 		</section>
 		<?php
@@ -64,19 +69,7 @@
 			</div>
 		</section>
 		<?php endif; ?>
-		<?php
-		if(get_field('condition_youtube_link')) { ?>
-			<section class="container-fluid p-8 p-sm-10 bg-auto">
-				<div class="row">
-					<div class="col-12">
-						<div class="embed-responsive embed-responsive-16by9">
-							<?php echo wp_oembed_get( get_field( 'condition_youtube_link' ) ); ?>
-						</div>
-					</div>
-				</div>
-			</section>
 		<?php 
-		} 
 			$treatments = get_field('condition_treatments', $term);
 			//echo count($treatments);
 
