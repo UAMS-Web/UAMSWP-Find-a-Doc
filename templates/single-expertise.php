@@ -134,7 +134,7 @@ function uamswp_expertise_header_metadata() {
             if ( 1 < $i ) {
                 $keyword_text .= ', ';
             }
-            $keyword_text .= $keyword['text'];
+            $keyword_text .= str_replace(",", ";", $keyword['text']);
             $i++;
         }
         
