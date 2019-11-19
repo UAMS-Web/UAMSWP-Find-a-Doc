@@ -7,11 +7,6 @@
                 "param": "post_type",
                 "operator": "==",
                 "value": "expertise"
-            },
-            {
-                "param": "page_parent",
-                "operator": "==",
-                "value": "0"
             }
         ]
     ],

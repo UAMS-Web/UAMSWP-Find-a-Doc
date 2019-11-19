@@ -27,6 +27,8 @@ function uamswp_add_entry_class( $attributes ) {
 }
 add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
+add_filter( 'genesis_entry_content', 'uamswp_expertise_keywords', 8);
+
 add_action( 'genesis_after_entry', 'uamswp_expertise_conditions', 8 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_treatments', 10 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 12 );
@@ -69,6 +71,21 @@ function uamswp_expertise_physicians() {
     </section>
 <?php
     }
+}
+function uamswp_expertise_keywords() {
+    $keywords = get_field('expertise_alternate_names');
+    $keyword_text = '';
+    if( $keywords ): 
+        $i = 1;
+        foreach( $keywords as $keyword ) { 
+            if ( 1 < $i ) {
+                $keyword_text .= '; ';
+            }
+            $keyword_text .= $keyword['text'];
+            $i++;
+        } 
+        echo '<p>Possible alternate names: '. $keyword_text .'</p>';
+    endif;
 }
 function uamswp_expertise_conditions() {
     // load all 'conditions' terms for the post
@@ -134,7 +151,7 @@ function uamswp_expertise_header_metadata() {
             if ( 1 < $i ) {
                 $keyword_text .= ', ';
             }
-            $keyword_text .= str_replace(",", ";", $keyword['text']);
+            $keyword_text .= str_replace(",", "", $keyword['text']);
             $i++;
         }
         

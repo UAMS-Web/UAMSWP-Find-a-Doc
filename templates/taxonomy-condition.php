@@ -8,7 +8,7 @@
 				if ( 1 < $i ) {
 					$keyword_text .= ', ';
 				}
-				$keyword_text .= str_replace(",", ";", $keyword['text']);
+				$keyword_text .= str_replace(",", "", $keyword['text']);
 				$i++;
 			}
 			echo '<meta name="keywords" content="'. $keyword_text .'" />';
@@ -35,14 +35,13 @@
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
 				<?php 
-
 					$keywords = get_field('condition_alternate', $term);
 					$keyword_text = '';
 					if( $keywords ): 
 						$i = 1;
 						foreach( $keywords as $keyword ) { 
 							if ( 1 < $i ) {
-								$keyword_text .= ', ';
+								$keyword_text .= '; ';
 							}
 							$keyword_text .= $keyword['text'];
 							$i++;

@@ -838,7 +838,7 @@ function create_languages_taxonomy() {
   	$rewrite = array(
 		'slug'                       => 'languages',
 		'with_front'                 => true,
-		'hierarchical'               => true,
+		'hierarchical'               => false,
 	);
 	$capabilities = array(
 		'manage_terms'               => 'manage_options',
@@ -1103,12 +1103,14 @@ function create_academic_departments_taxonomy() {
 		'separate_items_with_commas'     => 'Separate departments with commas',
 		'add_or_remove_items'            => 'Add or remove departments',
 		'choose_from_most_used'          => 'Choose from the most used departments',
-		'not_found'                      => 'No departments found'
+		'not_found'                      => 'No departments found',
+		'parent_item'					 => 'Parent Department',
+		'parent_item_colon'				 => 'Parent Department:'
 	);
   	$rewrite = array(
 		'slug'                       => 'academic_department',
 		'with_front'                 => false,
-		'hierarchical'               => false,
+		'hierarchical'               => true,
 	);
 	$capabilities = array(
 		'manage_terms'               => 'manage_options',
@@ -1119,7 +1121,7 @@ function create_academic_departments_taxonomy() {
 	$args = array(
 		'label'						 => __( 'Academic Departments' ),
 		'labels'                     => $labels,
-		'hierarchical'               => false,
+		'hierarchical'               => true,
 		'public'                     => true,
 		'show_ui'                    => true,  //Made true to add / edit
 		'meta_box_cb'				 => false,

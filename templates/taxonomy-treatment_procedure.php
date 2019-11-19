@@ -8,7 +8,7 @@
 				if ( 1 < $i ) {
 					$keyword_text .= ', ';
 				}
-				$keyword_text .= str_replace(",", ";", $keyword['text']);
+				$keyword_text .= str_replace(",", "", $keyword['text']);
 				$i++;
 			}
 			echo '<meta name="keywords" content="'. $keyword_text .'" />';
@@ -40,7 +40,7 @@
 						$keyword_text = '';
 						foreach( $keywords as $keyword ) { 
 							if ( 1 < $i ) {
-								$keyword_text .= ', ';
+								$keyword_text .= '; ';
 							}
 							$keyword_text .= $keyword['text'];
 							$i++;
