@@ -112,19 +112,21 @@
 					)
 			]);
 			if($doctorQuery->have_posts()) : ?>
-		<section class="container-fluid p-8 p-sm-10 bg-auto" id="doctors">
-			<div class="row">
-				<div class="col-12">
-					<h2 class="module-title">Doctors Treating <?php echo single_cat_title( '', false ); ?></h2>
-					<p class="note">Note that every treatment or procedure listed above may not be provided by each doctor listed below. Review each doctor for availability.</p>
-					<div class="card-list-container">
-						<div class="card-list card-list-doctors facetwp-template">
-							<?php echo facetwp_display( 'template', 'condition_physicians' ); ?>
+		<section class="uams-module bg-auto" id="doctors">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<h2 class="module-title">Doctors Treating <?php echo single_cat_title( '', false ); ?></h2>
+						<p class="note">Note that every treatment or procedure listed above may not be provided by each doctor listed below. Review each doctor for availability.</p>
+						<div class="card-list-container">
+							<div class="card-list card-list-doctors facetwp-template">
+								<?php echo facetwp_display( 'template', 'condition_physicians' ); ?>
+							</div>
 						</div>
-					</div>
-					<div class="row list-pagination">
-						<div class="col">
-							<?php echo facetwp_display( 'pager' ); ?>
+						<div class="row list-pagination">
+							<div class="col">
+								<?php echo facetwp_display( 'pager' ); ?>
+							</div>
 						</div>
 					</div>
 				</div>
