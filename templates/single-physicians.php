@@ -300,18 +300,20 @@ while ( have_posts() ) : the_post(); ?>
         </section>
         <?php endif; ?>
         <?php if(get_field('physician_clinical_bio')|| !empty (get_field('physician_youtube_link')) || !empty (get_field('physician_awards')) || get_field('physician_additional_info')): ?>
-        <section class="container-fluid p-8 p-sm-10 bg-auto">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h2 class="module-title">About <?php echo $short_name; ?>
-                    </h2>
-                    <div class="module-body">
-                        <?php echo get_field('physician_clinical_bio'); ?>
-                        <?php if(get_field('physician_youtube_link')) { ?>
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <?php echo wp_oembed_get( get_field( 'physician_youtube_link' ) ); ?>
+        <section class="uams-module bg-auto">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h2 class="module-title">About <?php echo $short_name; ?>
+                        </h2>
+                        <div class="module-body">
+                            <?php echo get_field('physician_clinical_bio'); ?>
+                            <?php if(get_field('physician_youtube_link')) { ?>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <?php echo wp_oembed_get( get_field( 'physician_youtube_link' ) ); ?>
+                            </div>
+                            <?php } ?>
                         </div>
-                        <?php } ?>
                     </div>
                 </div>
             </div>
