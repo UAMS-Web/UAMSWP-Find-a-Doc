@@ -76,20 +76,22 @@
 			if (!empty($conditions) && 0 < count($conditions)) {
 				
 		?>
-		<section class="container-fluid p-8 p-sm-10 conditions-treatments bg-auto">
-			<div class="row">
-				<div class="col-xs-12">
-					<h2 class="module-title">Conditions Related to <?php echo single_cat_title( '', false ); ?></h2>
-					<div class="list-container list-container-rows">
-						<ul class="list">
-						<?php foreach( $conditions as $condition ) { ?> 
-						<li><a href="<?php echo get_term_link($condition, 'condition'); ?>"><?php echo( get_term( $condition, 'condition' )->name ); ?></a></li>
-						<?php } ?>
-						</ul>
+			<section class="uams-module conditions-treatments bg-auto">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12">
+							<h2 class="module-title">Conditions Related to <?php echo single_cat_title( '', false ); ?></h2>
+							<div class="list-container list-container-rows">
+								<ul class="list">
+								<?php foreach( $conditions as $condition ) { ?> 
+								<li><a href="<?php echo get_term_link($condition, 'condition'); ?>"><?php echo( get_term( $condition, 'condition' )->name ); ?></a></li>
+								<?php } ?>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-		</section>
+			</section>
 		<?php } // endif ?>
 		<?php 
 		$doctorQuery = new WP_Query([
