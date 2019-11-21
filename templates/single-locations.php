@@ -443,22 +443,22 @@ while ( have_posts() ) : the_post(); ?>
 					</div>
 				</div>
 			</div>
+			<?php // FacetWP Hide elements
+				// Set # value depending on element
+				?>
+			<script>
+				(function($) {
+					$(document).on('facetwp-loaded', function() {
+						if( 0 === FWP.settings.pager.total_rows ) {
+							$('#doctors').hide()
+						}
+						if (4 >= FWP.settings.pager.total_rows ) {
+							$('.list-pagination').hide()
+						}
+					});
+				})(jQuery);
+			</script>
 		</section>
-	<?php // FacetWP Hide elements
-		  // Set # value depending on element
-		  ?>
-	<script>
-    (function($) {
-        $(document).on('facetwp-loaded', function() {
-			if( 0 === FWP.settings.pager.total_rows ) {
-                $('#doctors').hide()
-            }
-            if (4 >= FWP.settings.pager.total_rows ) {
-                $('.list-pagination').hide()
-            }
-        });
-    })(jQuery);
-    </script>
 	<?php endif; ?>
 	<?php // load all 'conditions' terms for the post
 	$title_append = ' at ' . get_the_title();
