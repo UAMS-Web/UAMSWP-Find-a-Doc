@@ -108,39 +108,41 @@
 			)
 		]);
 		if($doctorQuery->have_posts()) : ?>
-		<section class="container-fluid p-8 p-sm-10 bg-auto" id="doctors">
-			<div class="row">
-				<div class="col-12">
-					<h2 class="module-title">Doctors Performing <?php echo single_cat_title( '', false ); ?></h2>
-					<p class="note">Note that every condition listed above may not be treated by each doctor listed below. Review each doctor for availability.</p>	
-					<div class="card-list-container">
-						<div class="card-list card-list-doctors facetwp-template">
-							<?php echo facetwp_display( 'template', 'treatment_physicians' ); ?>
-						</div>
-					</div>
-					<div class="row list-pagination">
-						<div class="col">
-							<?php echo facetwp_display( 'pager' ); ?>
+			<section class="uams-module bg-auto" id="doctors">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<h2 class="module-title">Doctors Performing <?php echo single_cat_title( '', false ); ?></h2>
+							<p class="note">Note that every condition listed above may not be treated by each doctor listed below. Review each doctor for availability.</p>	
+							<div class="card-list-container">
+								<div class="card-list card-list-doctors facetwp-template">
+									<?php echo facetwp_display( 'template', 'treatment_physicians' ); ?>
+								</div>
+							</div>
+							<div class="row list-pagination">
+								<div class="col">
+									<?php echo facetwp_display( 'pager' ); ?>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<?php // FacetWP Hide elements
-				// Set # value depending on element
-				?>
-			<script>
-				(function($) {
-					$(document).on('facetwp-loaded', function() {
-						if( 0 === FWP.settings.pager.total_rows ) {
-							$('#doctors').hide()
-						}
-						if (8 >= FWP.settings.pager.total_rows ) {
-							$('.list-pagination').hide()
-						}
-					});
-				})(jQuery);
-			</script>
-		</section>
+				<?php // FacetWP Hide elements
+					// Set # value depending on element
+					?>
+				<script>
+					(function($) {
+						$(document).on('facetwp-loaded', function() {
+							if( 0 === FWP.settings.pager.total_rows ) {
+								$('#doctors').hide()
+							}
+							if (8 >= FWP.settings.pager.total_rows ) {
+								$('.list-pagination').hide()
+							}
+						});
+					})(jQuery);
+				</script>
+			</section>
 		<?php endif; ?>
 		<?php 
 		$args = (array(
