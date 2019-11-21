@@ -506,83 +506,85 @@ while ( have_posts() ) : the_post(); ?>
         </section>
         <?php endif; ?> 
         <?php if ( $rating_valid ) : ?>
-        <section class="container-fluid p-8 p-sm-10 ratings-and-reviews bg-auto" id="ratings">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="module-title">Patient Ratings &amp; Reviews</h2>
-                    <div class="card overall-ratings text-center">
-                        <div class="card-body">
-                            <h3 class="sr-only">Average Ratings</h3>
-                            <dl>
-                                <?php
-                                $questionRatings = $data->profile->questionRatings;
-                                foreach( $questionRatings as $questionRating ): ?>
-                                <dt><?php echo $questionRating->question; ?></dt>
-                                <dd>
-                                    <div class="rating" aria-label="Patient Rating">
-                                        <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($questionRating->averageRatingStr)/5 * 100; ?>%;"></div></div>
-                                        <div class="ratings-score-lg"><?php echo $questionRating->averageRatingStr; ?><span class="sr-only"> out of 5</span></div>
+        <section class="uams-module ratings-and-reviews bg-auto" id="ratings">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="module-title">Patient Ratings &amp; Reviews</h2>
+                        <div class="card overall-ratings text-center">
+                            <div class="card-body">
+                                <h3 class="sr-only">Average Ratings</h3>
+                                <dl>
+                                    <?php
+                                    $questionRatings = $data->profile->questionRatings;
+                                    foreach( $questionRatings as $questionRating ): ?>
+                                    <dt><?php echo $questionRating->question; ?></dt>
+                                    <dd>
+                                        <div class="rating" aria-label="Patient Rating">
+                                            <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($questionRating->averageRatingStr)/5 * 100; ?>%;"></div></div>
+                                            <div class="ratings-score-lg"><?php echo $questionRating->averageRatingStr; ?><span class="sr-only"> out of 5</span></div>
+                                        </div>
+                                    </dd>
+                                    <?php endforeach; ?>
+                                </dl>
+                            </div>
+                            <div class="card-footer bg-transparent text-muted small">
+                                <p>Overall: <?php echo $data->profile->averageRatingStr; ?> out of 5</p>
+                                <p>(<?php echo $data->profile->reviewBodyCountStr; ?>)</p>
+                            </div>
+                        </div>
+                        <?php 
+                        $reviews = $data->reviews;
+                        // if ( $reviews ) : ?>
+                        <?php //print_r($data); ?>
+                        <h3 class="sr-only">Individual Reviews</h3>
+                        <div class="card-list-container">
+                            <div class="card-list">
+                                <?php foreach( $reviews as $review ): ?>
+                                <div class="card">
+                                    <div class="card-header bg-transparent">
+                                        <div class="rating rating-center" aria-label="Average Rating">
+                                            <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($review->rating)/5 * 100; ?>%;"></div></div>
+                                            <div class="ratings-score-lg" itemprop="ratingValue"><?php echo $review->rating; ?><span class="sr-only"> out of 5</span></div>
+                                        </div>
                                     </div>
-                                </dd>
+                                    <div class="card-body">
+                                        <h4 class="sr-only">Comment</h4>
+                                        <p class="card-text"><?php echo $review->bodyForDisplay; ?></p>
+                                    </div>
+                                    <div class="card-footer bg-transparent text-muted small">
+                                        <h4 class="sr-only">Date</h4>
+                                        <?php echo $review->formattedReviewDate; ?>
+                                    </div>
+                                </div>
                                 <?php endforeach; ?>
-                            </dl>
+                            </div>
                         </div>
-                        <div class="card-footer bg-transparent text-muted small">
-                            <p>Overall: <?php echo $data->profile->averageRatingStr; ?> out of 5</p>
-                            <p>(<?php echo $data->profile->reviewBodyCountStr; ?>)</p>
+                        <div class="view-more text-center mt-8 mt-sm-10">
+                            <button class="btn btn-secondary" data-toggle="modal" data-target="#MoreReviews" aria-label="Load more individual reviews">View More</a>
                         </div>
-                    </div>
-                    <?php 
-                    $reviews = $data->reviews;
-                    // if ( $reviews ) : ?>
-                    <?php //print_r($data); ?>
-                    <h3 class="sr-only">Individual Reviews</h3>
-                    <div class="card-list-container">
-                        <div class="card-list">
-                            <?php foreach( $reviews as $review ): ?>
-                            <div class="card">
-                                <div class="card-header bg-transparent">
-                                    <div class="rating rating-center" aria-label="Average Rating">
-                                        <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($review->rating)/5 * 100; ?>%;"></div></div>
-                                        <div class="ratings-score-lg" itemprop="ratingValue"><?php echo $review->rating; ?><span class="sr-only"> out of 5</span></div>
-                                    </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="MoreReviews" tabindex="-1" role="dialog" aria-labelledby="More_Reviews_Modal" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="MoreReviews">More Reviews</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                                <div class="card-body">
-                                    <h4 class="sr-only">Comment</h4>
-                                    <p class="card-text"><?php echo $review->bodyForDisplay; ?></p>
+                                <div class="modal-body">
+                                    <div class="ds-comments" data-ds-pagesize="10"></div>
                                 </div>
-                                <div class="card-footer bg-transparent text-muted small">
-                                    <h4 class="sr-only">Date</h4>
-                                    <?php echo $review->formattedReviewDate; ?>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
                                 </div>
                             </div>
-                            <?php endforeach; ?>
                         </div>
+                        <script src="https://transparency.nrchealth.com/widget/v2/uams/npi/1841276169/lotw.js" async></script>                           
+                        <?php // endif; ?>
                     </div>
-                    <div class="view-more text-center mt-8 mt-sm-10">
-                        <button class="btn btn-secondary" data-toggle="modal" data-target="#MoreReviews" aria-label="Load more individual reviews">View More</a>
-                    </div>
-                    <!-- Modal -->
-                    <div class="modal fade" id="MoreReviews" tabindex="-1" role="dialog" aria-labelledby="More_Reviews_Modal" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="MoreReviews">More Reviews</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="ds-comments" data-ds-pagesize="10"></div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                    <script src="https://transparency.nrchealth.com/widget/v2/uams/npi/1841276169/lotw.js" async></script>                           
-                    <?php // endif; ?>
                 </div>
             </div>
         </section>
