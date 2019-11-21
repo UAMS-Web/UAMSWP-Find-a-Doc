@@ -336,16 +336,18 @@ while ( have_posts() ) : the_post(); ?>
         endif;
         $expertises =  get_field('physician_expertise');
         if( $expertises ): ?>
-            <section class="container-fluid p-8 p-sm-10 expertise-list bg-auto" id="expertise">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="module-title"><?php echo $short_name; ?>'s Areas of Expertise</h2>
-                        <div class="card-list-container">
-                            <div class="card-list">
-                            <?php foreach( $expertises as $expertise ) {
-                                $id = $expertise; 
-                                include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-                            } ?>
+            <section class="uams-module expertise-list bg-auto" id="expertise">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="module-title"><?php echo $short_name; ?>'s Areas of Expertise</h2>
+                            <div class="card-list-container">
+                                <div class="card-list">
+                                <?php foreach( $expertises as $expertise ) {
+                                    $id = $expertise; 
+                                    include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+                                } ?>
+                            </div>
                         </div>
                     </div>
                 </div>
