@@ -204,19 +204,21 @@
 			$expertise_query = new WP_Query( $args );
 
 			if ( $expertise_query->have_posts() ) : ?>
-			<section class="container-fluid p-8 p-sm-10 bg-auto" id="expertise">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title">Areas of Expertise for <?php echo single_cat_title( '', false ); ?></h2>
-						<div class="card-list-container">
-							<div class="card-list card-list-expertise">
-							<?php 
+			<section class="uams-module bg-auto" id="expertise">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<h2 class="module-title">Areas of Expertise for <?php echo single_cat_title( '', false ); ?></h2>
+							<div class="card-list-container">
+								<div class="card-list card-list-expertise">
+								<?php 
 
-								while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
-									$id = get_the_ID();
-									include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-								endwhile; 
-							?>
+									while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
+										$id = get_the_ID();
+										include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+									endwhile; 
+								?>
+								</div>
 							</div>
 						</div>
 					</div>
