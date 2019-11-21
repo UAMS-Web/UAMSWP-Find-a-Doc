@@ -80,16 +80,18 @@
 			if (!empty($treatments) && 0 < count($treatments)) {
 				
 		?>
-		<section class="container-fluid p-8 p-sm-10 conditions-treatments bg-auto">
-			<div class="row">
-				<div class="col-xs-12">
-					<h2 class="module-title">Treatments and Procedures Related to <?php echo single_cat_title( '', false ); ?></h2>
-					<div class="list-container list-container-rows">
-						<ul class="list">
-						<?php foreach( $treatments as $treatment ) { ?> 
-						<li><a href="<?php echo get_term_link($treatment, 'treatment_procedure'); ?>"><?php echo( get_term( $treatment, 'treatment_procedure' )->name ); ?></a></li>
-						<?php } ?>
-						</ul>
+		<section class="uams-module conditions-treatments bg-auto">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-12">
+						<h2 class="module-title">Treatments and Procedures Related to <?php echo single_cat_title( '', false ); ?></h2>
+						<div class="list-container list-container-rows">
+							<ul class="list">
+							<?php foreach( $treatments as $treatment ) { ?> 
+							<li><a href="<?php echo get_term_link($treatment, 'treatment_procedure'); ?>"><?php echo( get_term( $treatment, 'treatment_procedure' )->name ); ?></a></li>
+							<?php } ?>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
