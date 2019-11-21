@@ -410,34 +410,36 @@ while ( have_posts() ) : the_post(); ?>
 	<?php
 	$physicians = get_field( 'location_physicians' );
 	if( $physicians ): ?>
-	<section class="container-fluid p-8 p-sm-10 bg-auto" id="doctors">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="module-title">Doctors at <?php the_title(); ?></h2>
+	<section class="uams-module bg-auto" id="doctors">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<h2 class="module-title">Doctors at <?php the_title(); ?></h2>
 
-				<!-- <div class="list-legend">
-					<div class="az-filter">
-							<?php 
-								/* 
-								All Filters:
-								Disable any checkbox input that does not represent any conditions. Add "disabled" to input.
-								
-								A-Z Filter:
-								Start with "All"/"Any" checkbox input checked. Add "checked" attribute to input.
-								If user checks any other checkbox input, remove "checked" attribute from "All"/"Any" checkbox input.
-								If user checks "All"/"Any" checkbox input, remove "checked" attribute from checkbox input of other characters.
-								*/
-							?>
-							<?php  //echo facetwp_display( 'facet', 'location_doctors_cards' ); ?>
-				 	</div>
-				</div> -->
-				<div class="card-list-container">
-					<div class="card-list card-list-doctors facetwp-template">
-						<?php echo facetwp_display( 'template', 'physician_by_location' ); ?>
+					<!-- <div class="list-legend">
+						<div class="az-filter">
+								<?php 
+									/* 
+									All Filters:
+									Disable any checkbox input that does not represent any conditions. Add "disabled" to input.
+									
+									A-Z Filter:
+									Start with "All"/"Any" checkbox input checked. Add "checked" attribute to input.
+									If user checks any other checkbox input, remove "checked" attribute from "All"/"Any" checkbox input.
+									If user checks "All"/"Any" checkbox input, remove "checked" attribute from checkbox input of other characters.
+									*/
+								?>
+								<?php  //echo facetwp_display( 'facet', 'location_doctors_cards' ); ?>
+						</div>
+					</div> -->
+					<div class="card-list-container">
+						<div class="card-list card-list-doctors facetwp-template">
+							<?php echo facetwp_display( 'template', 'physician_by_location' ); ?>
+						</div>
 					</div>
-				</div>
-				<div class="list-pagination">
-					<?php echo facetwp_display( 'pager' ); ?>
+					<div class="list-pagination">
+						<?php echo facetwp_display( 'pager' ); ?>
+					</div>
 				</div>
 			</div>
 		</div>
