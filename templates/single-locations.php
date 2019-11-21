@@ -230,16 +230,18 @@ while ( have_posts() ) : the_post(); ?>
 		</div>
 	</section>
 	<?php if ( get_field('location_about')) { ?>
-	<section class="container-fluid p-8 p-sm-10 bg-auto">
-		<div class="row">
-			<div class="col-xs-12">
-				<h2 class="module-title">About <?php the_title(); ?></h2>
-				<div class="module-body">
-					<?php echo get_field('location_about'); ?>
+		<section class="uams-module bg-auto">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-12">
+						<h2 class="module-title">About <?php the_title(); ?></h2>
+						<div class="module-body">
+							<?php echo get_field('location_about'); ?>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-	</section>
+		</section>
 	<?php } ?>
 	<?php if (get_field('location_parking') || get_field('location_direction') || get_field('location_parking_map')) : ?>
 	<?php $parking_map = get_field('location_parking_map'); ?>
