@@ -162,24 +162,26 @@
 		$location_query = new WP_Query( $args );
 
 		if ( $location_query->have_posts() ) : ?>
-		<section class="container-fluid p-8 p-sm-10 bg-auto" id="locations">
-			<div class="row">
-				<div class="col-12">
-					<h2 class="module-title">Locations Providing <?php echo single_cat_title( '', false ); ?></h2>
-					<div class="card-list-container">
-						<div class="card-list card-list-locations">
-						<?php 
-							while ( $location_query->have_posts() ) : $location_query->the_post();
-								$id = get_the_ID();
-								include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
-							endwhile; 
-							
-						?>
+			<section class="uams-module bg-auto" id="locations">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<h2 class="module-title">Locations Providing <?php echo single_cat_title( '', false ); ?></h2>
+							<div class="card-list-container">
+								<div class="card-list card-list-locations">
+								<?php 
+									while ( $location_query->have_posts() ) : $location_query->the_post();
+										$id = get_the_ID();
+										include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+									endwhile; 
+									
+								?>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</section>	
+			</section>	
 		<?php endif; ?>
 		<?php
 		include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
