@@ -134,16 +134,18 @@ function uamswp_expertise_locations() {
 function uamswp_expertise_associated() {
     $expertises =  get_field('expertise_associated');
 	if( $expertises ): ?>
-		<section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="expertise">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="module-title">Associated Areas of Expertise</h2>
-                    <div class="card-list-container">
-                        <div class="card-list">
-                        <?php foreach( $expertises as $expertise ) {
-                            $id = $expertise; 
-                            include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-                        } ?>
+		<section class="uams-module expertise-list bg-auto" id="expertise">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="module-title">Associated Areas of Expertise</h2>
+                        <div class="card-list-container">
+                            <div class="card-list">
+                            <?php foreach( $expertises as $expertise ) {
+                                $id = $expertise; 
+                                include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+                            } ?>
+                        </div>
                     </div>
                 </div>
             </div>
