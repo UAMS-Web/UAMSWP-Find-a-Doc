@@ -150,23 +150,24 @@
 		</section>
 		<?php endif; ?>
 		<?php 
-			$args = (array(
-				'post_type' => "locations",
-				'order' => 'ASC',
-				'orderby' => 'title',
-				'posts_per_page' => -1,
-				'tax_query' => array(
-					array(
-					"taxonomy" => "condition",
-					"field" => "slug",
-					"terms" => get_queried_object()->slug,
-					"operator" => "IN"
-					)
-				)
-			));
-			$location_query = new WP_Query( $args );
+			$locations = get_field('condition_locations', $term);
+			// $args = (array(
+			// 	'post_type' => "locations",
+			// 	'order' => 'ASC',
+			// 	'orderby' => 'title',
+			// 	'posts_per_page' => -1,
+			// 	'tax_query' => array(
+			// 		array(
+			// 		"taxonomy" => "condition",
+			// 		"field" => "slug",
+			// 		"terms" => get_queried_object()->slug,
+			// 		"operator" => "IN"
+			// 		)
+			// 	)
+			// ));
+			// $location_query = new WP_Query( $args );
 
-			if ( $location_query->have_posts() ) : ?>
+			if ( $locations ) : ?>
 		<section class="container-fluid p-8 p-sm-10 bg-auto" id="locations">
 			<div class="row">
 				<div class="col-12">
@@ -174,35 +175,37 @@
 					<div class="card-list-container">
 						<div class="card-list card-list-locations">
 						<?php 
-							while ( $location_query->have_posts() ) : $location_query->the_post();
+							foreach( $locations as $post ):
 								$id = get_the_ID();
 								include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
-							endwhile; 
+							endforeach; 
 						?>
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
-		<?php endif; ?>
-		<?php 
-			$args = (array(
-				'post_type' => "expertise",
-				'order' => 'ASC',
-				'orderby' => 'title',
-				'posts_per_page' => -1,
-				'tax_query' => array(
-					array(
-					"taxonomy" => "condition",
-					"field" => "slug",
-					"terms" => get_queried_object()->slug,
-					"operator" => "IN"
-					)
-				)
-			));
-			$expertise_query = new WP_Query( $args );
+		<?php wp_reset_postdata();
+		 endif; 
+		  
+			$expertise = get_field('condition_expertise', $term);
+			// $args = (array(
+			// 	'post_type' => "expertise",
+			// 	'order' => 'ASC',
+			// 	'orderby' => 'title',
+			// 	'posts_per_page' => -1,
+			// 	'tax_query' => array(
+			// 		array(
+			// 		"taxonomy" => "condition",
+			// 		"field" => "slug",
+			// 		"terms" => get_queried_object()->slug,
+			// 		"operator" => "IN"
+			// 		)
+			// 	)
+			// ));
+			// $expertise_query = new WP_Query( $args );
 
-			if ( $expertise_query->have_posts() ) : ?>
+			if ( $expertise ) : ?>
 			<section class="container-fluid p-8 p-sm-10 bg-auto" id="expertise">
 				<div class="row">
 					<div class="col-12">
@@ -210,18 +213,18 @@
 						<div class="card-list-container">
 							<div class="card-list card-list-expertise">
 							<?php 
-
-								while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
+								foreach( $expertise as $post):
 									$id = get_the_ID();
 									include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-								endwhile; 
+								endforeach; 
 							?>
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
-		<?php endif; ?>	
+			<?php wp_reset_postdata();
+		 endif; ?>	
 		<?php
 			include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
 		?>
