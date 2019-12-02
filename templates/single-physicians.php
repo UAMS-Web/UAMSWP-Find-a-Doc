@@ -131,20 +131,21 @@ while ( have_posts() ) : the_post(); ?>
                                         echo '<div class="ratings-comments-lg">'. $data->profile->bodycount .' comments</div>';
                                         echo '</a>';
                                     echo '</div>';
-                                } else { ?>
+                                /* } else { ?>
                                     <div class="rating" aria-label="Patient Rating">
                                     <div class="ratings-count">No ratings - <a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
                                     <!-- <div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div> -->
                                     </div>
-                                <?php
+                                <?php */
                                 }
                             }
-                        } else { ?>
+                        /* } else { ?>
                             <div class="rating" aria-label="Patient Rating">
                                 <div class="ratings-count">No ratings - <a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
                                 <!-- <div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div> -->
                             </div>
-                    <?php } ?>
+                    <?php */
+                        } ?>
                     <!-- <div class="rating" aria-label="Patient Rating">
                         <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: 94%;"></div></div>
                         <div class="ratings-score">4.7<span class="sr-only"> out of 5</span></div>
