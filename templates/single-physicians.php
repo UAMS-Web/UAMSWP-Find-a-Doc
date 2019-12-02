@@ -271,45 +271,49 @@ while ( have_posts() ) : the_post(); ?>
             $appointment_phone_tel = preg_replace('/^(\+?\d)?(\d{3})(\d{3})(\d{4})$/', '$2-$3-$4', $appointment_phone);
             $appointment_phone_text = preg_replace('/^(\+?\d)?(\d{3})(\d{3})(\d{4})$/', '($2) $3-$4', $appointment_phone);
         ?>
-        <section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h2>Make an Appointment With <?php echo $short_name; ?></h2>
-                    <?php if ($refer_req && $accept_new && $show_portal) { ?>
-                        <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
-                        <p>Existing patients can either <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
-                    <?php } elseif ($refer_req && $accept_new) { ?>
-                        <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
-                        <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
-                    <?php } elseif ($accept_new && $show_portal) { ?>
-                        <p>New patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
-                        <p>Existing patients also have the option to <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>.</p>
-                    <?php } elseif ($accept_new) { ?>
-                        <p>New and existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
-                    <?php } elseif ($show_portal) { ?>
-                        <p>This physician is not currently accepting new patients.</p>
-                        <p>Existing patients can either <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
-                    <?php } else { ?>
-                        <p>This physician is not currently accepting new patients.</p>
-                        <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
-                    <?php } ?>
+        <section class="uams-module cta-bar cta-bar-1 bg-auto">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h2>Make an Appointment With <?php echo $short_name; ?></h2>
+                        <?php if ($refer_req && $accept_new && $show_portal) { ?>
+                            <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
+                            <p>Existing patients can either <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                        <?php } elseif ($refer_req && $accept_new) { ?>
+                            <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
+                            <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                        <?php } elseif ($accept_new && $show_portal) { ?>
+                            <p>New patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                            <p>Existing patients also have the option to <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>.</p>
+                        <?php } elseif ($accept_new) { ?>
+                            <p>New and existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                        <?php } elseif ($show_portal) { ?>
+                            <p>This physician is not currently accepting new patients.</p>
+                            <p>Existing patients can either <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                        <?php } else { ?>
+                            <p>This physician is not currently accepting new patients.</p>
+                            <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
         </section>
         <?php endif; ?>
         <?php if(get_field('physician_clinical_bio')|| !empty (get_field('physician_youtube_link')) || !empty (get_field('physician_awards')) || get_field('physician_additional_info')): ?>
-        <section class="container-fluid p-8 p-sm-10 bg-auto">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h2 class="module-title">About <?php echo $short_name; ?>
-                    </h2>
-                    <div class="module-body">
-                        <?php echo get_field('physician_clinical_bio'); ?>
-                        <?php if(get_field('physician_youtube_link')) { ?>
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <?php echo wp_oembed_get( get_field( 'physician_youtube_link' ) ); ?>
+        <section class="uams-module bg-auto">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h2 class="module-title">About <?php echo $short_name; ?>
+                        </h2>
+                        <div class="module-body">
+                            <?php echo get_field('physician_clinical_bio'); ?>
+                            <?php if(get_field('physician_youtube_link')) { ?>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <?php echo wp_oembed_get( get_field( 'physician_youtube_link' ) ); ?>
+                            </div>
+                            <?php } ?>
                         </div>
-                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -332,16 +336,18 @@ while ( have_posts() ) : the_post(); ?>
         endif;
         $expertises =  get_field('physician_expertise');
         if( $expertises ): ?>
-            <section class="container-fluid p-8 p-sm-10 expertise-list bg-auto" id="expertise">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="module-title"><?php echo $short_name; ?>'s Areas of Expertise</h2>
-                        <div class="card-list-container">
-                            <div class="card-list">
-                            <?php foreach( $expertises as $expertise ) {
-                                $id = $expertise; 
-                                include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-                            } ?>
+            <section class="uams-module expertise-list bg-auto" id="expertise">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="module-title"><?php echo $short_name; ?>'s Areas of Expertise</h2>
+                            <div class="card-list-container">
+                                <div class="card-list">
+                                <?php foreach( $expertises as $expertise ) {
+                                    $id = $expertise; 
+                                    include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+                                } ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -350,114 +356,118 @@ while ( have_posts() ) : the_post(); ?>
         endif;
         ?>
         <?php if(get_field('physician_academic_bio') || get_field('physician_academic_appointment') || get_field('physician_education') || get_field('physician_boards')): ?>
-        <section class="container-fluid p-8 p-sm-10 bg-auto">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h2 class="module-title"><?php echo $short_name; ?>'s Academic Background</h2>
-                    <div class="module-body">
-                        <?php echo get_field('physician_academic_bio'); ?>
-                        <?php
-                            // $academic_appointments = get_field('physician_academic_appointment');
-                            if( have_rows('physician_academic_appointment') ): ?>
-                                <h3>Academic Appointments</h3>
-                                <dl>
-                                <?php while( have_rows('physician_academic_appointment') ): the_row(); ?>
-                                <?php $department = get_term( get_sub_field('department'), 'academic_department' ); ?>
-                                    <dt><?php echo $department->name; ?></dt>
-                                    <dd><?php the_sub_field('academic_title'); ?></dd>
-                                <?php endwhile; ?>
-                                </dl>
-                        <?php endif; ?>
-                        <?php
-                            if( have_rows('physician_education') ): ?>
-                                <h3>Education</h3>
-                                <dl>
-                                <?php while( have_rows('physician_education') ): the_row();
-                                    $school_name = get_term( get_sub_field('school'), 'schools');
-                                    $education_type = get_term( get_sub_field('education_type'), 'educationtype');
-                                ?>
-                                    <dt><?php echo $education_type->name; ?></dt>
-                                    <dd><?php echo $school_name->name; ?><?php echo (get_sub_field('description') ? '<br /><span class="subtitle">' . get_sub_field('description') .'</span>' : ''); ?></dd>
-                                <?php endwhile; ?>
-                                </dl>
-                        <?php endif;
-                            $boards = get_field( 'physician_boards' );
-                            if( ! empty( $boards ) ): ?>
-                        <h3>Professional Certifications</h3>
-                        <ul>
-                        <?php foreach ( $boards as $board ) :
-                            $board_name = get_term( $board, 'boards'); ?>
-                            <li><?php echo $board_name->name; ?></li>
-                            <?php // }; ?>
-                        <?php endforeach; ?>
-                        </ul>
-                        <?php endif;
-                            $associations = get_field( 'physician_associations' );
-                            if( ! empty( $associations ) ): ?>
-                        <h3>Associations</h3>
-                        <ul>
-                        <?php foreach ( $associations as $association ) :
-                            $association_name = get_term( $association, 'associations'); ?>
-                            <li><?php echo $association_name->name; ?></li>
-                            <?php // }; ?>
-                        <?php endforeach; ?>
-                        </ul>
-                        <?php endif; ?>
+            <section class="uams-module bg-auto">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h2 class="module-title"><?php echo $short_name; ?>'s Academic Background</h2>
+                            <div class="module-body">
+                                <?php echo get_field('physician_academic_bio'); ?>
+                                <?php
+                                    // $academic_appointments = get_field('physician_academic_appointment');
+                                    if( have_rows('physician_academic_appointment') ): ?>
+                                        <h3>Academic Appointments</h3>
+                                        <dl>
+                                        <?php while( have_rows('physician_academic_appointment') ): the_row(); ?>
+                                        <?php $department = get_term( get_sub_field('department'), 'academic_department' ); ?>
+                                            <dt><?php echo $department->name; ?></dt>
+                                            <dd><?php the_sub_field('academic_title'); ?></dd>
+                                        <?php endwhile; ?>
+                                        </dl>
+                                <?php endif; ?>
+                                <?php
+                                    if( have_rows('physician_education') ): ?>
+                                        <h3>Education</h3>
+                                        <dl>
+                                        <?php while( have_rows('physician_education') ): the_row();
+                                            $school_name = get_term( get_sub_field('school'), 'schools');
+                                            $education_type = get_term( get_sub_field('education_type'), 'educationtype');
+                                        ?>
+                                            <dt><?php echo $education_type->name; ?></dt>
+                                            <dd><?php echo $school_name->name; ?><?php echo (get_sub_field('description') ? '<br /><span class="subtitle">' . get_sub_field('description') .'</span>' : ''); ?></dd>
+                                        <?php endwhile; ?>
+                                        </dl>
+                                <?php endif;
+                                    $boards = get_field( 'physician_boards' );
+                                    if( ! empty( $boards ) ): ?>
+                                <h3>Professional Certifications</h3>
+                                <ul>
+                                <?php foreach ( $boards as $board ) :
+                                    $board_name = get_term( $board, 'boards'); ?>
+                                    <li><?php echo $board_name->name; ?></li>
+                                    <?php // }; ?>
+                                <?php endforeach; ?>
+                                </ul>
+                                <?php endif;
+                                    $associations = get_field( 'physician_associations' );
+                                    if( ! empty( $associations ) ): ?>
+                                <h3>Associations</h3>
+                                <ul>
+                                <?php foreach ( $associations as $association ) :
+                                    $association_name = get_term( $association, 'associations'); ?>
+                                    <li><?php echo $association_name->name; ?></li>
+                                    <?php // }; ?>
+                                <?php endforeach; ?>
+                                </ul>
+                                <?php endif; ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
         <?php endif; ?>
         <?php 
         $publications = get_field('physician_select_publications');
 
         if( !empty(get_field('physician_research_bio')) || !empty(get_field('physician_research_interests')) || !empty ( $publications ) || get_field('physician_pubmed_author_id') || get_field('physician_research_profiles_link') ): ?>
-        <section class="container-fluid p-8 p-sm-10 bg-auto">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h2 class="module-title"><?php echo $short_name; ?>'s Research</h2>
-                    <div class="module-body">
-                        <?php
-                            if(get_field('physician_research_bio'))
-                            {
-                                echo get_field('physician_research_bio');
-                            }
-                        ?>
-                        <?php
-                            if(get_field('physician_research_interests'))
-                            { ?>
-                            <h3>Research Interests</h3>
-                        <?php
-                                echo get_field('physician_research_interests');
-                            }
-                        ?>
-                        <?php
-                            if( !empty ( $publications ) ): ?>
-                        <h3>Selected Publications</h3>
-                        <ul>
-                        <?php foreach( $publications as $publication ): ?>
-                            <li><?php echo $publication['pubmed_information']; ?></li>
-                        <?php endforeach; ?>
-                        </ul>
-                        <?php endif; ?>
-                        <?php if( get_field('physician_pubmed_author_id') ): ?>
-                            <?php
-                                $pubmedid = trim(get_field('physician_pubmed_author_id'));
-                                $pubmedcount = (get_field('pubmed_author_number') ? get_field('pubmed_author_number') : '3');
-                            ?>
-                            <h3>Latest Publications</h3>
-                            <p>Publications listed below are automatically derived from MEDLINE/PubMed and other sources, which might result in incorrect or missing publications.</p>
-                            <?php echo do_shortcode( '[pubmed terms="' . urlencode($pubmedid) .'%5BAuthor%5D" count="' . $pubmedcount .'"]' ); ?>
-                        <?php endif; ?>
-                        <?php if( get_field('physician_research_profiles_link') ): ?>
-                            <h3>UAMS Research Profile</h3>
-                            <p>Each UAMS faculty member has a research profile page that includes biographical and contact information, a list of their most recent grant activity and a list of their PubMed publications.</p>
-                            <p><a class="btn btn-outline-primary" href="<?php echo get_field('physician_research_profiles_link'); ?>">View <?php echo $short_name; ?>'s research profile</a></p>
-                        <?php endif; ?>
+            <section class="uams-module bg-auto">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h2 class="module-title"><?php echo $short_name; ?>'s Research</h2>
+                            <div class="module-body">
+                                <?php
+                                    if(get_field('physician_research_bio'))
+                                    {
+                                        echo get_field('physician_research_bio');
+                                    }
+                                ?>
+                                <?php
+                                    if(get_field('physician_research_interests'))
+                                    { ?>
+                                    <h3>Research Interests</h3>
+                                <?php
+                                        echo get_field('physician_research_interests');
+                                    }
+                                ?>
+                                <?php
+                                    if( !empty ( $publications ) ): ?>
+                                <h3>Selected Publications</h3>
+                                <ul>
+                                <?php foreach( $publications as $publication ): ?>
+                                    <li><?php echo $publication['pubmed_information']; ?></li>
+                                <?php endforeach; ?>
+                                </ul>
+                                <?php endif; ?>
+                                <?php if( get_field('physician_pubmed_author_id') ): ?>
+                                    <?php
+                                        $pubmedid = trim(get_field('physician_pubmed_author_id'));
+                                        $pubmedcount = (get_field('pubmed_author_number') ? get_field('pubmed_author_number') : '3');
+                                    ?>
+                                    <h3>Latest Publications</h3>
+                                    <p>Publications listed below are automatically derived from MEDLINE/PubMed and other sources, which might result in incorrect or missing publications.</p>
+                                    <?php echo do_shortcode( '[pubmed terms="' . urlencode($pubmedid) .'%5BAuthor%5D" count="' . $pubmedcount .'"]' ); ?>
+                                <?php endif; ?>
+                                <?php if( get_field('physician_research_profiles_link') ): ?>
+                                    <h3>UAMS Research Profile</h3>
+                                    <p>Each UAMS faculty member has a research profile page that includes biographical and contact information, a list of their most recent grant activity and a list of their PubMed publications.</p>
+                                    <p><a class="btn btn-outline-primary" href="<?php echo get_field('physician_research_profiles_link'); ?>">View <?php echo $short_name; ?>'s research profile</a></p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
         <?php endif; ?>
         <?php if( $locations ): ?>
         <section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="locations">
@@ -496,121 +506,125 @@ while ( have_posts() ) : the_post(); ?>
         </section>
         <?php endif; ?> 
         <?php if ( $rating_valid ) : ?>
-        <section class="container-fluid p-8 p-sm-10 ratings-and-reviews bg-auto" id="ratings">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="module-title">Patient Ratings &amp; Reviews</h2>
-                    <div class="card overall-ratings text-center">
-                        <div class="card-body">
-                            <h3 class="sr-only">Average Ratings</h3>
-                            <dl>
-                                <?php
-                                $questionRatings = $data->profile->questionRatings;
-                                foreach( $questionRatings as $questionRating ): ?>
-                                <dt><?php echo $questionRating->question; ?></dt>
-                                <dd>
-                                    <div class="rating" aria-label="Patient Rating">
-                                        <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($questionRating->averageRatingStr)/5 * 100; ?>%;"></div></div>
-                                        <div class="ratings-score-lg"><?php echo $questionRating->averageRatingStr; ?><span class="sr-only"> out of 5</span></div>
+        <section class="uams-module ratings-and-reviews bg-auto" id="ratings">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="module-title">Patient Ratings &amp; Reviews</h2>
+                        <div class="card overall-ratings text-center">
+                            <div class="card-body">
+                                <h3 class="sr-only">Average Ratings</h3>
+                                <dl>
+                                    <?php
+                                    $questionRatings = $data->profile->questionRatings;
+                                    foreach( $questionRatings as $questionRating ): ?>
+                                    <dt><?php echo $questionRating->question; ?></dt>
+                                    <dd>
+                                        <div class="rating" aria-label="Patient Rating">
+                                            <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($questionRating->averageRatingStr)/5 * 100; ?>%;"></div></div>
+                                            <div class="ratings-score-lg"><?php echo $questionRating->averageRatingStr; ?><span class="sr-only"> out of 5</span></div>
+                                        </div>
+                                    </dd>
+                                    <?php endforeach; ?>
+                                </dl>
+                            </div>
+                            <div class="card-footer bg-transparent text-muted small">
+                                <p>Overall: <?php echo $data->profile->averageRatingStr; ?> out of 5</p>
+                                <p>(<?php echo $data->profile->reviewBodyCountStr; ?>)</p>
+                            </div>
+                        </div>
+                        <?php 
+                        $reviews = $data->reviews;
+                        // if ( $reviews ) : ?>
+                        <?php //print_r($data); ?>
+                        <h3 class="sr-only">Individual Reviews</h3>
+                        <div class="card-list-container">
+                            <div class="card-list">
+                                <?php foreach( $reviews as $review ): ?>
+                                <div class="card">
+                                    <div class="card-header bg-transparent">
+                                        <div class="rating rating-center" aria-label="Average Rating">
+                                            <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($review->rating)/5 * 100; ?>%;"></div></div>
+                                            <div class="ratings-score-lg" itemprop="ratingValue"><?php echo $review->rating; ?><span class="sr-only"> out of 5</span></div>
+                                        </div>
                                     </div>
-                                </dd>
+                                    <div class="card-body">
+                                        <h4 class="sr-only">Comment</h4>
+                                        <p class="card-text"><?php echo $review->bodyForDisplay; ?></p>
+                                    </div>
+                                    <div class="card-footer bg-transparent text-muted small">
+                                        <h4 class="sr-only">Date</h4>
+                                        <?php echo $review->formattedReviewDate; ?>
+                                    </div>
+                                </div>
                                 <?php endforeach; ?>
-                            </dl>
+                            </div>
                         </div>
-                        <div class="card-footer bg-transparent text-muted small">
-                            <p>Overall: <?php echo $data->profile->averageRatingStr; ?> out of 5</p>
-                            <p>(<?php echo $data->profile->reviewBodyCountStr; ?>)</p>
+                        <div class="view-more text-center mt-8 mt-sm-10">
+                            <button class="btn btn-secondary" data-toggle="modal" data-target="#MoreReviews" aria-label="Load more individual reviews">View More</a>
                         </div>
-                    </div>
-                    <?php 
-                    $reviews = $data->reviews;
-                    // if ( $reviews ) : ?>
-                    <?php //print_r($data); ?>
-                    <h3 class="sr-only">Individual Reviews</h3>
-                    <div class="card-list-container">
-                        <div class="card-list">
-                            <?php foreach( $reviews as $review ): ?>
-                            <div class="card">
-                                <div class="card-header bg-transparent">
-                                    <div class="rating rating-center" aria-label="Average Rating">
-                                        <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($review->rating)/5 * 100; ?>%;"></div></div>
-                                        <div class="ratings-score-lg" itemprop="ratingValue"><?php echo $review->rating; ?><span class="sr-only"> out of 5</span></div>
-                                    </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="MoreReviews" tabindex="-1" role="dialog" aria-labelledby="More_Reviews_Modal" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="MoreReviews">More Reviews</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                                <div class="card-body">
-                                    <h4 class="sr-only">Comment</h4>
-                                    <p class="card-text"><?php echo $review->bodyForDisplay; ?></p>
+                                <div class="modal-body">
+                                    <div class="ds-comments" data-ds-pagesize="10"></div>
                                 </div>
-                                <div class="card-footer bg-transparent text-muted small">
-                                    <h4 class="sr-only">Date</h4>
-                                    <?php echo $review->formattedReviewDate; ?>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
                                 </div>
                             </div>
-                            <?php endforeach; ?>
                         </div>
+                        <script src="https://transparency.nrchealth.com/widget/v2/uams/npi/1841276169/lotw.js" async></script>                           
+                        <?php // endif; ?>
                     </div>
-                    <div class="view-more text-center mt-8 mt-sm-10">
-                        <button class="btn btn-secondary" data-toggle="modal" data-target="#MoreReviews" aria-label="Load more individual reviews">View More</a>
-                    </div>
-                    <!-- Modal -->
-                    <div class="modal fade" id="MoreReviews" tabindex="-1" role="dialog" aria-labelledby="More_Reviews_Modal" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="MoreReviews">More Reviews</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="ds-comments" data-ds-pagesize="10"></div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                    <script src="https://transparency.nrchealth.com/widget/v2/uams/npi/1841276169/lotw.js" async></script>                           
-                    <?php // endif; ?>
                 </div>
             </div>
         </section>
         <?php endif; ?>
-        <!-- <section class="container-fluid p-8 p-sm-10 news-list bg-auto">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="module-title">Latest News for C. Lowry Barnes, M.D.</h2>
-                    <div class="card-list-container">
-                        <div class="card-list">
-                            <div class="card">
-                                <img srcset="https://picsum.photos/434/244?image=1066 1x, https://picsum.photos/868/488?image=1066 2x" src="https://picsum.photos/434/244?image=1066" class="card-img-top" alt="Image description or Story title">
-                                <div class="card-body">
-                                    <h3 class="card-title">
-                                        <span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
-                                    </h3>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.&nbsp;...</p>
-                                    <a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Story title">Read Full Story</a>
+        <!-- <section class="uams-module news-list bg-auto">
+            <div class="container-fluid"
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="module-title">Latest News for C. Lowry Barnes, M.D.</h2>
+                        <div class="card-list-container">
+                            <div class="card-list">
+                                <div class="card">
+                                    <img srcset="https://picsum.photos/434/244?image=1066 1x, https://picsum.photos/868/488?image=1066 2x" src="https://picsum.photos/434/244?image=1066" class="card-img-top" alt="Image description or Story title">
+                                    <div class="card-body">
+                                        <h3 class="card-title">
+                                            <span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
+                                        </h3>
+                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.&nbsp;...</p>
+                                        <a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Story title">Read Full Story</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card">
-                                <img srcset="https://picsum.photos/434/244?image=348 1x, https://picsum.photos/868/488?image=348 2x" src="https://picsum.photos/434/244?image=348" class="card-img-top" alt="Image description or Story title">
-                                <div class="card-body">
-                                    <h3 class="card-title">
-                                        <span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
-                                    </h3>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.&nbsp;...</p>
-                                    <a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Story title">Read Full Story</a>
+                                <div class="card">
+                                    <img srcset="https://picsum.photos/434/244?image=348 1x, https://picsum.photos/868/488?image=348 2x" src="https://picsum.photos/434/244?image=348" class="card-img-top" alt="Image description or Story title">
+                                    <div class="card-body">
+                                        <h3 class="card-title">
+                                            <span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
+                                        </h3>
+                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.&nbsp;...</p>
+                                        <a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Story title">Read Full Story</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card">
-                                <img srcset="https://picsum.photos/434/244?image=823 1x, https://picsum.photos/868/488?image=823 2x" src="https://picsum.photos/434/244?image=823" class="card-img-top" alt="Image description or Story title">
-                                <div class="card-body">
-                                    <h3 class="card-title">
-                                        <span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
-                                    </h3>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.&nbsp;...</p>
-                                    <a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Story title">Read Full Story</a>
+                                <div class="card">
+                                    <img srcset="https://picsum.photos/434/244?image=823 1x, https://picsum.photos/868/488?image=823 2x" src="https://picsum.photos/434/244?image=823" class="card-img-top" alt="Image description or Story title">
+                                    <div class="card-body">
+                                        <h3 class="card-title">
+                                            <span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
+                                        </h3>
+                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.&nbsp;...</p>
+                                        <a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Story title">Read Full Story</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -619,31 +633,33 @@ while ( have_posts() ) : the_post(); ?>
             </div>
         </section> -->
         <?php if ($eligible_appt): ?>
-            <section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h2>Make an Appointment With <?php echo $short_name; ?></h2>
-                    <?php if ($refer_req && $accept_new && $show_portal) { ?>
-                        <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
-                        <p>Existing patients can either <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
-                    <?php } elseif ($refer_req && $accept_new) { ?>
-                        <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
-                        <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
-                    <?php } elseif ($accept_new && $show_portal) { ?>
-                        <p>New patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
-                        <p>Existing patients also have the option to <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>.</p>
-                    <?php } elseif ($accept_new) { ?>
-                        <p>New and existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
-                    <?php } elseif ($show_portal) { ?>
-                        <p>This physician is not currently accepting new patients.</p>
-                        <p>Existing patients can either <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
-                    <?php } else { ?>
-                        <p>This physician is not currently accepting new patients.</p>
-                        <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
-                    <?php } ?>
+            <section class="uams-module cta-bar cta-bar-1 bg-auto">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h2>Make an Appointment With <?php echo $short_name; ?></h2>
+                            <?php if ($refer_req && $accept_new && $show_portal) { ?>
+                                <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
+                                <p>Existing patients can either <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                            <?php } elseif ($refer_req && $accept_new) { ?>
+                                <p>Appointments for new patients are by referral only. Please contact your primary care doctor or visit one of our <a href="/physicians/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care doctors</a>.</p>
+                                <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                            <?php } elseif ($accept_new && $show_portal) { ?>
+                                <p>New patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                                <p>Existing patients also have the option to <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>.</p>
+                            <?php } elseif ($accept_new) { ?>
+                                <p>New and existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                            <?php } elseif ($show_portal) { ?>
+                                <p>This physician is not currently accepting new patients.</p>
+                                <p>Existing patients can either <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                            <?php } else { ?>
+                                <p>This physician is not currently accepting new patients.</p>
+                                <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                            <?php } ?>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
         <?php endif; ?>
     </main>
 

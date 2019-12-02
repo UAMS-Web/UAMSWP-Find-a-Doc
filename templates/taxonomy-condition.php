@@ -60,11 +60,13 @@
 		<?php
 		$clinical_trials = get_field('condition_clinical_trials', $term);
 		if (!empty($clinical_trials)): ?>
-		<section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
-			<div class="row">
-				<div class="col-xs-12">
-					<h2>Clinical Trials</h2>
-					<p><a href="https://uams.trialstoday.org/" aria-label="Search UAMS Clinical Trials">Search our clinical trials</a> for those related to <?php echo single_cat_title( '', false ); ?>.</p>
+		<section class="uams-module cta-bar cta-bar-1 bg-auto">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-12">
+						<h2>Clinical Trials</h2>
+						<p><a href="https://uams.trialstoday.org/" aria-label="Search UAMS Clinical Trials">Search our clinical trials</a> for those related to <?php echo single_cat_title( '', false ); ?>.</p>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -78,16 +80,18 @@
 			if (!empty($treatments) && 0 < count($treatments)) {
 				
 		?>
-		<section class="container-fluid p-8 p-sm-10 conditions-treatments bg-auto">
-			<div class="row">
-				<div class="col-xs-12">
-					<h2 class="module-title">Treatments and Procedures Related to <?php echo single_cat_title( '', false ); ?></h2>
-					<div class="list-container list-container-rows">
-						<ul class="list">
-						<?php foreach( $treatments as $treatment ) { ?> 
-						<li><a href="<?php echo get_term_link($treatment, 'treatment_procedure'); ?>"><?php echo( get_term( $treatment, 'treatment_procedure' )->name ); ?></a></li>
-						<?php } ?>
-						</ul>
+		<section class="uams-module conditions-treatments bg-auto">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-12">
+						<h2 class="module-title">Treatments and Procedures Related to <?php echo single_cat_title( '', false ); ?></h2>
+						<div class="list-container list-container-rows">
+							<ul class="list">
+							<?php foreach( $treatments as $treatment ) { ?> 
+							<li><a href="<?php echo get_term_link($treatment, 'treatment_procedure'); ?>"><?php echo( get_term( $treatment, 'treatment_procedure' )->name ); ?></a></li>
+							<?php } ?>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -108,19 +112,21 @@
 					)
 			]);
 			if($doctorQuery->have_posts()) : ?>
-		<section class="container-fluid p-8 p-sm-10 bg-auto" id="doctors">
-			<div class="row">
-				<div class="col-12">
-					<h2 class="module-title">Doctors Treating <?php echo single_cat_title( '', false ); ?></h2>
-					<p class="note">Note that every treatment or procedure listed above may not be provided by each doctor listed below. Review each doctor for availability.</p>
-					<div class="card-list-container">
-						<div class="card-list card-list-doctors facetwp-template">
-							<?php echo facetwp_display( 'template', 'condition_physicians' ); ?>
+		<section class="uams-module bg-auto" id="doctors">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<h2 class="module-title">Doctors Treating <?php echo single_cat_title( '', false ); ?></h2>
+						<p class="note">Note that every treatment or procedure listed above may not be provided by each doctor listed below. Review each doctor for availability.</p>
+						<div class="card-list-container">
+							<div class="card-list card-list-doctors facetwp-template">
+								<?php echo facetwp_display( 'template', 'condition_physicians' ); ?>
+							</div>
 						</div>
-					</div>
-					<div class="row list-pagination">
-						<div class="col">
-							<?php echo facetwp_display( 'pager' ); ?>
+						<div class="row list-pagination">
+							<div class="col">
+								<?php echo facetwp_display( 'pager' ); ?>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -160,18 +166,20 @@
 			$location_query = new WP_Query( $args );
 
 			if ( $location_query->have_posts() ) : ?>
-		<section class="container-fluid p-8 p-sm-10 bg-auto" id="locations">
-			<div class="row">
-				<div class="col-12">
-					<h2 class="module-title">Locations Where <?php echo single_cat_title( '', false ); ?> Is Treated</h2>
-					<div class="card-list-container">
-						<div class="card-list card-list-locations">
-						<?php 
-							while ( $location_query->have_posts() ) : $location_query->the_post();
-								$id = get_the_ID();
-								include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
-							endwhile; 
-						?>
+		<section class="uams-module bg-auto" id="locations">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<h2 class="module-title">Locations Where <?php echo single_cat_title( '', false ); ?> is Treated</h2>
+						<div class="card-list-container">
+							<div class="card-list card-list-locations">
+							<?php 
+								while ( $location_query->have_posts() ) : $location_query->the_post();
+									$id = get_the_ID();
+									include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+								endwhile; 
+							?>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -196,19 +204,21 @@
 			$expertise_query = new WP_Query( $args );
 
 			if ( $expertise_query->have_posts() ) : ?>
-			<section class="container-fluid p-8 p-sm-10 bg-auto" id="expertise">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title">Areas of Expertise for <?php echo single_cat_title( '', false ); ?></h2>
-						<div class="card-list-container">
-							<div class="card-list card-list-expertise">
-							<?php 
+			<section class="uams-module bg-auto" id="expertise">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<h2 class="module-title">Areas of Expertise for <?php echo single_cat_title( '', false ); ?></h2>
+							<div class="card-list-container">
+								<div class="card-list card-list-expertise">
+								<?php 
 
-								while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
-									$id = get_the_ID();
-									include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-								endwhile; 
-							?>
+									while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
+										$id = get_the_ID();
+										include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+									endwhile; 
+								?>
+								</div>
 							</div>
 						</div>
 					</div>
