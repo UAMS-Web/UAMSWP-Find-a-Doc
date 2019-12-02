@@ -355,115 +355,141 @@ while ( have_posts() ) : the_post(); ?>
         <?php 
         endif;
         ?>
-        <?php if(get_field('physician_academic_bio') || get_field('physician_academic_appointment') || get_field('physician_education') || get_field('physician_boards')): ?>
-            <section class="uams-module bg-auto">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h2 class="module-title"><?php echo $short_name; ?>'s Academic Background</h2>
+        <?php 
+            if ( get_field('physician_academic_bio') && ( get_field('physician_academic_appointment') || get_field('physician_education') || get_field('physician_boards') ) ) {
+                $physician_academic_split = true;
+            }
+        
+            if(get_field('physician_academic_bio') || get_field('physician_academic_appointment') || get_field('physician_education') || get_field('physician_boards')): ?>
+        <section class="uams-module academic-info bg-auto">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h2 class="module-title"><?php echo $short_name; ?>'s Academic Background</h2>
+                        <?php if ( $physician_academic_split ) {
+                            // If there is a bio AND at least one of the other academic things, visually split the layout ?>
+                            <div class="row content-split-lg">
+                            <div class="col-xs-12 col-lg-7">
+                            <div class="content-width">
+                        <?php } else { ?>
                             <div class="module-body">
-                                <?php echo get_field('physician_academic_bio'); ?>
-                                <?php
-                                    // $academic_appointments = get_field('physician_academic_appointment');
-                                    if( have_rows('physician_academic_appointment') ): ?>
-                                        <h3>Academic Appointments</h3>
-                                        <dl>
-                                        <?php while( have_rows('physician_academic_appointment') ): the_row(); ?>
-                                        <?php $department = get_term( get_sub_field('department'), 'academic_department' ); ?>
-                                            <dt><?php echo $department->name; ?></dt>
-                                            <dd><?php the_sub_field('academic_title'); ?></dd>
-                                        <?php endwhile; ?>
-                                        </dl>
-                                <?php endif; ?>
-                                <?php
-                                    if( have_rows('physician_education') ): ?>
-                                        <h3>Education</h3>
-                                        <dl>
-                                        <?php while( have_rows('physician_education') ): the_row();
-                                            $school_name = get_term( get_sub_field('school'), 'schools');
-                                            $education_type = get_term( get_sub_field('education_type'), 'educationtype');
-                                        ?>
-                                            <dt><?php echo $education_type->name; ?></dt>
-                                            <dd><?php echo $school_name->name; ?><?php echo (get_sub_field('description') ? '<br /><span class="subtitle">' . get_sub_field('description') .'</span>' : ''); ?></dd>
-                                        <?php endwhile; ?>
-                                        </dl>
-                                <?php endif;
-                                    $boards = get_field( 'physician_boards' );
-                                    if( ! empty( $boards ) ): ?>
-                                <h3>Professional Certifications</h3>
-                                <ul>
-                                <?php foreach ( $boards as $board ) :
-                                    $board_name = get_term( $board, 'boards'); ?>
-                                    <li><?php echo $board_name->name; ?></li>
-                                    <?php // }; ?>
-                                <?php endforeach; ?>
-                                </ul>
-                                <?php endif;
-                                    $associations = get_field( 'physician_associations' );
-                                    if( ! empty( $associations ) ): ?>
-                                <h3>Associations</h3>
-                                <ul>
-                                <?php foreach ( $associations as $association ) :
-                                    $association_name = get_term( $association, 'associations'); ?>
-                                    <li><?php echo $association_name->name; ?></li>
-                                    <?php // }; ?>
-                                <?php endforeach; ?>
-                                </ul>
-                                <?php endif; ?>
+                        <?php } // endif
+                        if ( get_field('physician_academic_bio') ) { ?>
+                            <h3 class="sr-only">Academic Biography</h3>
+                            <?php echo get_field('physician_academic_bio'); ?>
+                        <?php } // endif?>
+                        <?php if ( $physician_academic_split ) { ?>
                             </div>
-                        </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-5">
+                            <div class="content-width">
+                        <?php } // endif ?>
+                            <?php
+                                // $academic_appointments = get_field('physician_academic_appointment');
+                                if( have_rows('physician_academic_appointment') ): ?>
+                                    <h3>Academic Appointments</h3>
+                                    <dl>
+                                    <?php while( have_rows('physician_academic_appointment') ): the_row(); ?>
+                                    <?php $department = get_term( get_sub_field('department'), 'academic_department' ); ?>
+                                        <dt><?php echo $department->name; ?></dt>
+                                        <dd><?php the_sub_field('academic_title'); ?></dd>
+                                    <?php endwhile; ?>
+                                    </dl>
+                            <?php endif; ?>
+                            <?php
+                                if( have_rows('physician_education') ): ?>
+                                    <h3>Education</h3>
+                                    <dl>
+                                    <?php while( have_rows('physician_education') ): the_row();
+                                        $school_name = get_term( get_sub_field('school'), 'schools');
+                                        $education_type = get_term( get_sub_field('education_type'), 'educationtype');
+                                    ?>
+                                        <dt><?php echo $education_type->name; ?></dt>
+                                        <dd><?php echo $school_name->name; ?><?php echo (get_sub_field('description') ? '<br /><span class="subtitle">' . get_sub_field('description') .'</span>' : ''); ?></dd>
+                                    <?php endwhile; ?>
+                                    </dl>
+                            <?php endif;
+                                $boards = get_field( 'physician_boards' );
+                                if( ! empty( $boards ) ): ?>
+                            <h3>Professional Certifications</h3>
+                            <ul>
+                            <?php foreach ( $boards as $board ) :
+                                $board_name = get_term( $board, 'boards'); ?>
+                                <li><?php echo $board_name->name; ?></li>
+                                <?php // }; ?>
+                            <?php endforeach; ?>
+                            </ul>
+                            <?php endif;
+                                $associations = get_field( 'physician_associations' );
+                                if( ! empty( $associations ) ): ?>
+                            <h3>Associations</h3>
+                            <ul>
+                            <?php foreach ( $associations as $association ) :
+                                $association_name = get_term( $association, 'associations'); ?>
+                                <li><?php echo $association_name->name; ?></li>
+                                <?php // }; ?>
+                            <?php endforeach; ?>
+                            </ul>
+                            <?php endif; ?>
+                        <?php if ( $physician_academic_split ) { ?>
+                            </div>
+                            </div>
+                            </div>
+                        <?php } else { ?>
+                            </div>
+                        <?php } // endif ?>
                     </div>
                 </div>
-            </section>
+            <div>
+        </section>
         <?php endif; ?>
         <?php 
         $publications = get_field('physician_select_publications');
 
         if( !empty(get_field('physician_research_bio')) || !empty(get_field('physician_research_interests')) || !empty ( $publications ) || get_field('physician_pubmed_author_id') || get_field('physician_research_profiles_link') ): ?>
-            <section class="uams-module bg-auto">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h2 class="module-title"><?php echo $short_name; ?>'s Research</h2>
-                            <div class="module-body">
+        <section class="uams-module research-info bg-auto">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h2 class="module-title"><?php echo $short_name; ?>'s Research</h2>
+                        <div class="module-body">
+                            <?php
+                                if(get_field('physician_research_bio'))
+                                {
+                                    echo get_field('physician_research_bio');
+                                }
+                            ?>
+                            <?php
+                                if(get_field('physician_research_interests'))
+                                { ?>
+                                <h3>Research Interests</h3>
+                            <?php
+                                    echo get_field('physician_research_interests');
+                                }
+                            ?>
+                            <?php
+                                if( !empty ( $publications ) ): ?>
+                            <h3>Selected Publications</h3>
+                            <ul>
+                            <?php foreach( $publications as $publication ): ?>
+                                <li><?php echo $publication['pubmed_information']; ?></li>
+                            <?php endforeach; ?>
+                            </ul>
+                            <?php endif; ?>
+                            <?php if( get_field('physician_pubmed_author_id') ): ?>
                                 <?php
-                                    if(get_field('physician_research_bio'))
-                                    {
-                                        echo get_field('physician_research_bio');
-                                    }
+                                    $pubmedid = trim(get_field('physician_pubmed_author_id'));
+                                    $pubmedcount = (get_field('pubmed_author_number') ? get_field('pubmed_author_number') : '3');
                                 ?>
-                                <?php
-                                    if(get_field('physician_research_interests'))
-                                    { ?>
-                                    <h3>Research Interests</h3>
-                                <?php
-                                        echo get_field('physician_research_interests');
-                                    }
-                                ?>
-                                <?php
-                                    if( !empty ( $publications ) ): ?>
-                                <h3>Selected Publications</h3>
-                                <ul>
-                                <?php foreach( $publications as $publication ): ?>
-                                    <li><?php echo $publication['pubmed_information']; ?></li>
-                                <?php endforeach; ?>
-                                </ul>
-                                <?php endif; ?>
-                                <?php if( get_field('physician_pubmed_author_id') ): ?>
-                                    <?php
-                                        $pubmedid = trim(get_field('physician_pubmed_author_id'));
-                                        $pubmedcount = (get_field('pubmed_author_number') ? get_field('pubmed_author_number') : '3');
-                                    ?>
-                                    <h3>Latest Publications</h3>
-                                    <p>Publications listed below are automatically derived from MEDLINE/PubMed and other sources, which might result in incorrect or missing publications.</p>
-                                    <?php echo do_shortcode( '[pubmed terms="' . urlencode($pubmedid) .'%5BAuthor%5D" count="' . $pubmedcount .'"]' ); ?>
-                                <?php endif; ?>
-                                <?php if( get_field('physician_research_profiles_link') ): ?>
-                                    <h3>UAMS Research Profile</h3>
-                                    <p>Each UAMS faculty member has a research profile page that includes biographical and contact information, a list of their most recent grant activity and a list of their PubMed publications.</p>
-                                    <p><a class="btn btn-outline-primary" href="<?php echo get_field('physician_research_profiles_link'); ?>">View <?php echo $short_name; ?>'s research profile</a></p>
-                                <?php endif; ?>
-                            </div>
+                                <h3>Latest Publications</h3>
+                                <p>Publications listed below are automatically derived from MEDLINE/PubMed and other sources, which might result in incorrect or missing publications.</p>
+                                <?php echo do_shortcode( '[pubmed terms="' . urlencode($pubmedid) .'%5BAuthor%5D" count="' . $pubmedcount .'"]' ); ?>
+                            <?php endif; ?>
+                            <?php if( get_field('physician_research_profiles_link') ): ?>
+                                <h3>UAMS Research Profile</h3>
+                                <p>Each UAMS faculty member has a research profile page that includes biographical and contact information, a list of their most recent grant activity and a list of their PubMed publications.</p>
+                                <p><a class="btn btn-outline-primary" href="<?php echo get_field('physician_research_profiles_link'); ?>">View <?php echo $short_name; ?>'s research profile</a></p>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
