@@ -28,7 +28,7 @@ function uamswp_add_entry_class( $attributes ) {
 add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 add_filter( 'genesis_entry_content', 'uamswp_expertise_keywords', 8);
-add_action( 'genesis_after_entry', 'uamswp_expertise_youtube', 6 );
+add_action( 'genesis_entry_content', 'uamswp_expertise_youtube', 12 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_conditions', 8 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_treatments', 10 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 12 );
@@ -39,17 +39,19 @@ add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 function uamswp_expertise_physicians() {
     if(get_field('expertise_physicians')) {
 ?>
-    <section class="container-fluid p-8 p-sm-10 bg-auto" id="doctors">
-        <div class="row">
-            <div class="col-12">
-                <h2 class="module-title">Doctors</h2>
-                <div class="card-list-container">
-                    <div class="card-list card-list-doctors facetwp-template">
-                        <?php echo facetwp_display( "template", "physicians_by_expertise" ); ?>
+    <section class="uams-module bg-auto" id="doctors">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="module-title">Doctors</h2>
+                    <div class="card-list-container">
+                        <div class="card-list card-list-doctors facetwp-template">
+                            <?php echo facetwp_display( "template", "physicians_by_expertise" ); ?>
+                        </div>
                     </div>
-                </div>
-                <div class="list-pagination">
-                <?php echo facetwp_display( "pager" ); ?>
+                    <div class="list-pagination">
+                    <?php echo facetwp_display( "pager" ); ?>
+                    </div>
                 </div>
             </div>
         </div>
@@ -74,15 +76,9 @@ function uamswp_expertise_physicians() {
 }
 function uamswp_expertise_youtube() {
     if(get_field('expertise_youtube_link')) { ?>
-        <section class="container-fluid p-8 p-sm-10 bg-auto">
-            <div class="row">
-                <div class="col-12">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <?php echo wp_oembed_get( get_field( 'expertise_youtube_link' ) ); ?>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="embed-responsive embed-responsive-16by9">
+            <?php echo wp_oembed_get( get_field( 'expertise_youtube_link' ) ); ?>
+        </div>
     <?php }
 }
 function uamswp_expertise_keywords() {
@@ -97,7 +93,7 @@ function uamswp_expertise_keywords() {
             $keyword_text .= $keyword['text'];
             $i++;
         } 
-        echo '<p>Possible alternate names: '. $keyword_text .'</p>';
+        echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';
     endif;
 }
 function uamswp_expertise_conditions() {
@@ -138,16 +134,18 @@ function uamswp_expertise_locations() {
 function uamswp_expertise_associated() {
     $expertises =  get_field('expertise_associated');
 	if( $expertises ): ?>
-		<section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="expertise">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="module-title">Associated Areas of Expertise</h2>
-                    <div class="card-list-container">
-                        <div class="card-list">
-                        <?php foreach( $expertises as $expertise ) {
-                            $id = $expertise; 
-                            include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-                        } ?>
+		<section class="uams-module expertise-list bg-auto" id="expertise">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="module-title">Associated Areas of Expertise</h2>
+                        <div class="card-list-container">
+                            <div class="card-list">
+                            <?php foreach( $expertises as $expertise ) {
+                                $id = $expertise; 
+                                include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+                            } ?>
+                        </div>
                     </div>
                 </div>
             </div>
