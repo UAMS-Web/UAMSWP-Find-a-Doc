@@ -92,20 +92,20 @@
 											echo '<div class="star-ratings-sprite" title="'. $data->profile->averageRatingStr .' out of 5"><div class="star-ratings-sprite-percentage" style="width: '. (floatval($data->profile->averageRatingStr) / 5)*100  .'%;"></div></div>';
 											echo '<div class="ratings-count">'. $data->profile->reviewcount .' Ratings</div>';
 											echo '</div>';
-										} else { ?>
+									/*	} else { ?>
 											<div class="rating">
 												<div class="star-ratings-sprite" title="0 out of 5"><div class="star-ratings-sprite-percentage" style="width: 0%;"></div></div>
 												<div class="ratings-count">No ratings - <a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
 											</div>
-										<?php
+										<?php */
 										}
 									}
-								} else { ?>
+							/*	} else { ?>
 									<div class="rating">
 										<div class="star-ratings-sprite" title="0 out of 5"><div class="star-ratings-sprite-percentage" style="width: 0%;"></div></div>
 										<div class="ratings-count">No ratings - <a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
 									</div>
-						<?php } ?>
+							<?php */ } ?>
 						
 							<p><?php echo ( get_field('physician_short_clinical_bio') ? get_field( 'physician_short_clinical_bio') : wp_trim_words( get_field( 'physician_clinical_bio' ), 30, ' &hellip;' ) ); ?></p>
 						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>">Full Profile</a>
@@ -162,7 +162,7 @@
 	            <div class="margin-bottom-two text-center">
 	            	<span><a href="<?php echo get_permalink($post->ID); ?>" target="_self"><?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?></a></span>
 	            </div>
-				<?php
+				<?php /*
 					if(get_field('physician_npi')) {
 
 							$npi =  get_field( 'physician_npi' );
@@ -201,7 +201,7 @@
 							<div><a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
 							</div>
 						<?php }
-					?>
+				*/	?>
 	        </div>
 	        <div class="col-md-9 col-sm-8" class="margin-top-none margin-bottom-none">
 	                <div class="row" class="margin-top-none margin-bottom-none">
