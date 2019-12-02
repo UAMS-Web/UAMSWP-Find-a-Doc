@@ -71,11 +71,16 @@ while ( have_posts() ) : the_post(); ?>
                     </h1>
                     <h2 class="sr-only">Overview</h2>
                     <dl>
-                    <?php // Display service line
-                    $service_line = get_field('physician_service_line');
-                    if ($service_line && !empty($service_line)) { ?>
-                        <dt>Service Line</dt>
-                        <dd><?php echo ($service_line ? get_term( $service_line, 'service_line' )->name : ''); ?></dd>                 
+                    <?php // Display area(s) of expertise
+                    $expertises =  get_field('physician_expertise');
+                    if ($expertises && !empty($expertises)) { ?>
+                        <dt>Area<?php echo( count($expertises) > 1 ? 's' : '' );?> of Expertise</dt>
+                        <dd>
+                            <?php foreach( $expertises as $expertise ) {
+                                $id = $expertise; 
+                                echo '<dd><a href="' . get_permalink($id) . '" target="_self">' . get_the_title($id) . '</a></dd>';
+                            } ?>
+                        </dd>                 
                     <?php } ?>
                     <?php  // Display if they will provide second opinions
                         $second_opinion = get_field('physician_second_opinion');
