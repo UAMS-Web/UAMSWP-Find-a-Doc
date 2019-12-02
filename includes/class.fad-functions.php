@@ -338,6 +338,11 @@ function fwp_facet_scripts() {
 				$('.condition-filter').hide();
 			}
         }
+        if (FWP.loaded) {
+            $('html, body').animate({
+                scrollTop: $('main').offset().top
+            }, 500);
+        }
     });
     $(document).on('facetwp-refresh', function() {
         if (! FWP.loaded) {
