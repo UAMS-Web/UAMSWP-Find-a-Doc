@@ -39,17 +39,19 @@ add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 function uamswp_expertise_physicians() {
     if(get_field('expertise_physicians')) {
 ?>
-    <section class="container-fluid p-8 p-sm-10 bg-auto" id="doctors">
-        <div class="row">
-            <div class="col-12">
-                <h2 class="module-title">Doctors</h2>
-                <div class="card-list-container">
-                    <div class="card-list card-list-doctors facetwp-template">
-                        <?php echo facetwp_display( "template", "physicians_by_expertise" ); ?>
+    <section class="uams-module bg-auto" id="doctors">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="module-title">Doctors</h2>
+                    <div class="card-list-container">
+                        <div class="card-list card-list-doctors facetwp-template">
+                            <?php echo facetwp_display( "template", "physicians_by_expertise" ); ?>
+                        </div>
                     </div>
-                </div>
-                <div class="list-pagination">
-                <?php echo facetwp_display( "pager" ); ?>
+                    <div class="list-pagination">
+                    <?php echo facetwp_display( "pager" ); ?>
+                    </div>
                 </div>
             </div>
         </div>
@@ -132,16 +134,18 @@ function uamswp_expertise_locations() {
 function uamswp_expertise_associated() {
     $expertises =  get_field('expertise_associated');
 	if( $expertises ): ?>
-		<section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="expertise">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="module-title">Associated Areas of Expertise</h2>
-                    <div class="card-list-container">
-                        <div class="card-list">
-                        <?php foreach( $expertises as $expertise ) {
-                            $id = $expertise; 
-                            include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-                        } ?>
+		<section class="uams-module expertise-list bg-auto" id="expertise">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="module-title">Associated Areas of Expertise</h2>
+                        <div class="card-list-container">
+                            <div class="card-list">
+                            <?php foreach( $expertises as $expertise ) {
+                                $id = $expertise; 
+                                include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+                            } ?>
+                        </div>
                     </div>
                 </div>
             </div>
