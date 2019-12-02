@@ -81,7 +81,7 @@
 					<?php // FacetWP Hide elements
 						// Set # value depending on element
 						?>
-					<script>
+					<script defer>
 					(function($) {
 						$(document).on('facetwp-loaded', function() {
 							if (3 >= FWP.settings.pager.total_rows ) {
@@ -90,7 +90,7 @@
 						});
 					})(jQuery);
 					</script>
-				<div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-hidden="true">
+				<!-- <div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-hidden="true">
 					<div class="modal-dialog modal-dialog-centered" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -107,7 +107,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</main>

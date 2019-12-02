@@ -155,7 +155,7 @@ while ( have_posts() ) : the_post(); ?>
                             <div class="ratings-comments-lg">100 comments</div>
                         </a>
                     </div> -->
-                    <div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-hidden="true">
+                    <!-- <div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -172,7 +172,7 @@ while ( have_posts() ) : the_post(); ?>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <?php 
                         $l = 1;
                         $locations = get_field('physician_locations');
