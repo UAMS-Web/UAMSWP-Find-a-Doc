@@ -40,6 +40,7 @@
 														<div class="fwp-filter">[facetwp facet="physician_gender"]</div>
 														<div class="fwp-filter">[facetwp facet="physician_language"]</div>
 														<div class="fwp-filter">[facetwp facet="locations"]</div>
+														<div class="fwp-filter">[facetwp facet="physician_areas_of_expertise"]</div>
 														<div class="fwp-filter sr-only">[facetwp facet="searchable"]</div>
 														<button onclick="FWP.refresh()">Apply</button> <button onclick="FWP.reset()">Reset</button>
 													' );
@@ -81,7 +82,7 @@
 					<?php // FacetWP Hide elements
 						// Set # value depending on element
 						?>
-					<script>
+					<script defer>
 					(function($) {
 						$(document).on('facetwp-loaded', function() {
 							if (3 >= FWP.settings.pager.total_rows ) {
@@ -90,7 +91,7 @@
 						});
 					})(jQuery);
 					</script>
-				<div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-hidden="true">
+				<!-- <div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-hidden="true">
 					<div class="modal-dialog modal-dialog-centered" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -107,7 +108,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</main>
