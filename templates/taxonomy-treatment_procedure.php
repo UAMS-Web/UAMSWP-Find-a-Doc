@@ -161,7 +161,7 @@
 		// 	)
 		// ));
 		// $location_query = new WP_Query( $args );
-
+    
 		if ( $locations ) : ?>
 		<section class="container-fluid p-8 p-sm-10 bg-auto" id="locations">
 			<div class="row">
