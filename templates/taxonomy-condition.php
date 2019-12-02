@@ -46,37 +46,32 @@
 							$keyword_text .= $keyword['text'];
 							$i++;
 						} 
-						echo '<p>Possible alternate names: '. $keyword_text .'</p>';
+						echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';
 					endif;
 				?>
-				<?php echo (get_field('condition_content', $term) ? ''. get_field('condition_content', $term) . '' : '' ); ?>
+				<?php echo ( get_field('condition_content', $term) ? ''. get_field('condition_content', $term) . '' : '' ); ?>
+				<?php if( get_field('condition_youtube_link', $term) ) { ?>
+					<div class="embed-responsive embed-responsive-16by9">
+					<?php echo wp_oembed_get( get_field('condition_youtube_link', $term) ); ?>
+					</div>
+				<?php } ?>
 			</div>
 		</section>
 		<?php
 		$clinical_trials = get_field('condition_clinical_trials', $term);
 		if (!empty($clinical_trials)): ?>
-		<section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
-			<div class="row">
-				<div class="col-xs-12">
-					<h2>Clinical Trials</h2>
-					<p><a href="https://uams.trialstoday.org/" aria-label="Search UAMS Clinical Trials">Search our clinical trials</a> for those related to <?php echo single_cat_title( '', false ); ?>.</p>
+		<section class="uams-module cta-bar cta-bar-1 bg-auto">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-12">
+						<h2>Clinical Trials</h2>
+						<p><a href="https://uams.trialstoday.org/" aria-label="Search UAMS Clinical Trials">Search our clinical trials</a> for those related to <?php echo single_cat_title( '', false ); ?>.</p>
+					</div>
 				</div>
 			</div>
 		</section>
 		<?php endif; ?>
-		<?php
-		if(get_field('condition_youtube_link', $term)) { ?>
-			<section class="container-fluid p-8 p-sm-10 bg-auto">
-				<div class="row">
-					<div class="col-12">
-						<div class="embed-responsive embed-responsive-16by9">
-							<?php echo wp_oembed_get( get_field( 'condition_youtube_link', $term ) ); ?>
-						</div>
-					</div>
-				</div>
-			</section>
 		<?php 
-		} 
 			$treatments = get_field('condition_treatments', $term);
 			//echo count($treatments);
 
@@ -85,16 +80,18 @@
 			if (!empty($treatments) && 0 < count($treatments)) {
 				
 		?>
-		<section class="container-fluid p-8 p-sm-10 conditions-treatments bg-auto">
-			<div class="row">
-				<div class="col-xs-12">
-					<h2 class="module-title">Treatments and Procedures Related to <?php echo single_cat_title( '', false ); ?></h2>
-					<div class="list-container list-container-rows">
-						<ul class="list">
-						<?php foreach( $treatments as $treatment ) { ?> 
-						<li><a href="<?php echo get_term_link($treatment, 'treatment_procedure'); ?>"><?php echo( get_term( $treatment, 'treatment_procedure' )->name ); ?></a></li>
-						<?php } ?>
-						</ul>
+		<section class="uams-module conditions-treatments bg-auto">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-12">
+						<h2 class="module-title">Treatments and Procedures Related to <?php echo single_cat_title( '', false ); ?></h2>
+						<div class="list-container list-container-rows">
+							<ul class="list">
+							<?php foreach( $treatments as $treatment ) { ?> 
+							<li><a href="<?php echo get_term_link($treatment, 'treatment_procedure'); ?>"><?php echo( get_term( $treatment, 'treatment_procedure' )->name ); ?></a></li>
+							<?php } ?>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -115,19 +112,21 @@
 					)
 			]);
 			if($doctorQuery->have_posts()) : ?>
-		<section class="container-fluid p-8 p-sm-10 bg-auto" id="doctors">
-			<div class="row">
-				<div class="col-12">
-					<h2 class="module-title">Doctors Treating <?php echo single_cat_title( '', false ); ?></h2>
-					<p class="note">Note that every treatment or procedure listed above may not be provided by each doctor listed below. Review each doctor for availability.</p>
-					<div class="card-list-container">
-						<div class="card-list card-list-doctors facetwp-template">
-							<?php echo facetwp_display( 'template', 'condition_physicians' ); ?>
+		<section class="uams-module bg-auto" id="doctors">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<h2 class="module-title">Doctors Treating <?php echo single_cat_title( '', false ); ?></h2>
+						<p class="note">Note that every treatment or procedure listed above may not be provided by each doctor listed below. Review each doctor for availability.</p>
+						<div class="card-list-container">
+							<div class="card-list card-list-doctors facetwp-template">
+								<?php echo facetwp_display( 'template', 'condition_physicians' ); ?>
+							</div>
 						</div>
-					</div>
-					<div class="row list-pagination">
-						<div class="col">
-							<?php echo facetwp_display( 'pager' ); ?>
+						<div class="row list-pagination">
+							<div class="col">
+								<?php echo facetwp_display( 'pager' ); ?>
+							</div>
 						</div>
 					</div>
 				</div>

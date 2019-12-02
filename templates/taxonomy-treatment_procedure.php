@@ -45,56 +45,53 @@
 							$keyword_text .= $keyword['text'];
 							$i++;
 						}
-						echo '<p>Possible alternate names: '. $keyword_text .'</p>';
+						echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';
 					endif;
 				?>
-				<?php echo (get_field('treatment_procedure_content', $term) ? ''. get_field('treatment_procedure_content', $term) . '' : '' ); ?>
+				<?php echo ( get_field('treatment_procedure_content', $term) ? ''. get_field('treatment_procedure_content', $term) . '' : '' ); ?>
+				<?php if( get_field('treatment_procedure_youtube_link', $term) ) { ?>
+					<div class="embed-responsive embed-responsive-16by9">
+					<?php echo wp_oembed_get( get_field('treatment_procedure_youtube_link', $term) ); ?>
+					</div>
+				<?php } ?>
 			</div>
 		</section>
 		<?php
 		$clinical_trials = get_field('treatment_procedure_clinical_trials', $term);
 		if (!empty($clinical_trials)): ?>
-		<section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
-			<div class="row">
-				<div class="col-xs-12">
-					<h2>Clinical Trials</h2>
-					<p><a href="https://uams.trialstoday.org/" aria-label="Search UAMS Clinical Trials">Search our clinical trials</a> for those related to <?php echo single_cat_title( '', false ); ?>.</p>
-				</div>
-			</div>
-		</section>
-		<?php endif; ?>
-		<?php
-		if(get_field('treatment_procedure_youtube_link', $term)) { ?>
-			<section class="container-fluid p-8 p-sm-10 bg-auto">
-				<div class="row">
-					<div class="col-12">
-						<div class="embed-responsive embed-responsive-16by9">
-							<?php echo wp_oembed_get( get_field( 'treatment_procedure_youtube_link', $term ) ); ?>
+			<section class="uams-module cta-bar cta-bar-1 bg-auto">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12">
+							<h2>Clinical Trials</h2>
+							<p><a href="https://uams.trialstoday.org/" aria-label="Search UAMS Clinical Trials">Search our clinical trials</a> for those related to <?php echo single_cat_title( '', false ); ?>.</p>
 						</div>
 					</div>
 				</div>
 			</section>
+		<?php endif; ?>
 		<?php 
-		} 
 			$conditions = get_field('treatment_procedure_conditions', $term);
 			
 			if (!empty($conditions) && 0 < count($conditions)) {
 				
 		?>
-		<section class="container-fluid p-8 p-sm-10 conditions-treatments bg-auto">
-			<div class="row">
-				<div class="col-xs-12">
-					<h2 class="module-title">Conditions Related to <?php echo single_cat_title( '', false ); ?></h2>
-					<div class="list-container list-container-rows">
-						<ul class="list">
-						<?php foreach( $conditions as $condition ) { ?> 
-						<li><a href="<?php echo get_term_link($condition, 'condition'); ?>"><?php echo( get_term( $condition, 'condition' )->name ); ?></a></li>
-						<?php } ?>
-						</ul>
+			<section class="uams-module conditions-treatments bg-auto">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12">
+							<h2 class="module-title">Conditions Related to <?php echo single_cat_title( '', false ); ?></h2>
+							<div class="list-container list-container-rows">
+								<ul class="list">
+								<?php foreach( $conditions as $condition ) { ?> 
+								<li><a href="<?php echo get_term_link($condition, 'condition'); ?>"><?php echo( get_term( $condition, 'condition' )->name ); ?></a></li>
+								<?php } ?>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-		</section>
+			</section>
 		<?php } // endif ?>
 		<?php 
 		$doctorQuery = new WP_Query([
@@ -111,39 +108,41 @@
 			)
 		]);
 		if($doctorQuery->have_posts()) : ?>
-		<section class="container-fluid p-8 p-sm-10 bg-auto" id="doctors">
-			<div class="row">
-				<div class="col-12">
-					<h2 class="module-title">Doctors Performing <?php echo single_cat_title( '', false ); ?></h2>
-					<p class="note">Note that every condition listed above may not be treated by each doctor listed below. Review each doctor for availability.</p>	
-					<div class="card-list-container">
-						<div class="card-list card-list-doctors facetwp-template">
-							<?php echo facetwp_display( 'template', 'treatment_physicians' ); ?>
-						</div>
-					</div>
-					<div class="row list-pagination">
-						<div class="col">
-							<?php echo facetwp_display( 'pager' ); ?>
+			<section class="uams-module bg-auto" id="doctors">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<h2 class="module-title">Doctors Performing <?php echo single_cat_title( '', false ); ?></h2>
+							<p class="note">Note that every condition listed above may not be treated by each doctor listed below. Review each doctor for availability.</p>	
+							<div class="card-list-container">
+								<div class="card-list card-list-doctors facetwp-template">
+									<?php echo facetwp_display( 'template', 'treatment_physicians' ); ?>
+								</div>
+							</div>
+							<div class="row list-pagination">
+								<div class="col">
+									<?php echo facetwp_display( 'pager' ); ?>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<?php // FacetWP Hide elements
-				// Set # value depending on element
-				?>
-			<script>
-				(function($) {
-					$(document).on('facetwp-loaded', function() {
-						if( 0 === FWP.settings.pager.total_rows ) {
-							$('#doctors').hide()
-						}
-						if (8 >= FWP.settings.pager.total_rows ) {
-							$('.list-pagination').hide()
-						}
-					});
-				})(jQuery);
-			</script>
-		</section>
+				<?php // FacetWP Hide elements
+					// Set # value depending on element
+					?>
+				<script>
+					(function($) {
+						$(document).on('facetwp-loaded', function() {
+							if( 0 === FWP.settings.pager.total_rows ) {
+								$('#doctors').hide()
+							}
+							if (8 >= FWP.settings.pager.total_rows ) {
+								$('.list-pagination').hide()
+							}
+						});
+					})(jQuery);
+				</script>
+			</section>
 		<?php endif; ?>
 		<?php 
 		$locations = get_field('treatment_procedure_locations', $term);
