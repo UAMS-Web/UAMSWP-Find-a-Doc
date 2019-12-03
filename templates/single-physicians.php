@@ -131,6 +131,9 @@ while ( have_posts() ) : the_post(); ?>
                                         echo '<div class="ratings-comments-lg">'. $data->profile->bodycount .' comments</div>';
                                         echo '</a>';
                                     echo '</div>';
+                                } else { ?>
+                                    <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" href>Why not?</a></em></p>
+                                <?php
                                 /* } else { ?>
                                     <div class="rating" aria-label="Patient Rating">
                                     <div class="ratings-count">No ratings - <a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
@@ -139,6 +142,9 @@ while ( have_posts() ) : the_post(); ?>
                                 <?php */
                                 }
                             }
+                        } else { ?>
+                            <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" href>Why not?</a></em></p>
+                    <?php
                         /* } else { ?>
                             <div class="rating" aria-label="Patient Rating">
                                 <div class="ratings-count">No ratings - <a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
@@ -155,24 +161,30 @@ while ( have_posts() ) : the_post(); ?>
                             <div class="ratings-comments-lg">100 comments</div>
                         </a>
                     </div> -->
-                    <!-- <div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="WhyNotTitle">Why Not?</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>There is no publicly available rating for this medical professional for one of two reasons: 1) he or she does not see patients or 2) he or she sees patients but has not yet received the minimum number of Patient Satisfaction Reviews. To be eligible for display, we require a minimum of 30 surveys. This ensures that the rating is statistically reliable and a true reflection of patient satisfaction.</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    <?php if( (!get_field('physician_npi')) || ( !empty($data) && !$rating_valid ) ) { ?>
+                        <div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="WhyNotTitle">Why are there no ratings?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>There is no publicly available rating for this medical professional for one of two reasons:</p>
+                                        <ul>
+                                            <li>He or she does not see patients</li>
+                                            <li>He or she sees patients but has not yet received the minimum number of Patient Satisfaction Reviews. To be eligible for display, we require a minimum of 30 surveys. This ensures that the rating is statistically reliable and a true reflection of patient satisfaction.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div> -->
+                    <?php } ?>
                     <?php 
                         $l = 1;
                         $locations = get_field('physician_locations');
