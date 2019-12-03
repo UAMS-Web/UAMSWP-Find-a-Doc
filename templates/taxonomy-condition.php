@@ -73,10 +73,14 @@
 		<?php endif; ?>
 		<?php 
 			$treatments = get_field('condition_treatments', $term);
-			//echo count($treatments);
-
-			// print_r($treatments);
-			
+			$args = (array(
+				'taxonomy' => "treatment_procedure",
+				'order' => 'ASC',
+				'orderby' => 'name',
+				'hide_empty' => false,
+				'term_taxonomy_id' => $treatments
+			));
+			$treatments_query = new WP_Term_Query( $args );
 			if (!empty($treatments) && 0 < count($treatments)) {
 				
 		?>
@@ -87,9 +91,15 @@
 						<h2 class="module-title">Treatments and Procedures Related to <?php echo single_cat_title( '', false ); ?></h2>
 						<div class="list-container list-container-rows">
 							<ul class="list">
-							<?php foreach( $treatments as $treatment ) { ?> 
-							<li><a href="<?php echo get_term_link($treatment, 'treatment_procedure'); ?>"><?php echo( get_term( $treatment, 'treatment_procedure' )->name ); ?></a></li>
-							<?php } ?>
+							<?php foreach( $treatments_query->get_terms() as $treatment ): ?>
+								<li>
+									<a href="<?php echo get_term_link( $treatment->term_id ); ?>">
+									<?php
+										echo $treatment->name;
+									?>
+									</a>
+								</li>
+							<?php endforeach; ?>
 							</ul>
 						</div>
 					</div>
@@ -150,21 +160,14 @@
 		<?php endif; ?>
 		<?php 
 			$locations = get_field('condition_locations', $term);
-			// $args = (array(
-			// 	'post_type' => "locations",
-			// 	'order' => 'ASC',
-			// 	'orderby' => 'title',
-			// 	'posts_per_page' => -1,
-			// 	'tax_query' => array(
-			// 		array(
-			// 		"taxonomy" => "condition",
-			// 		"field" => "slug",
-			// 		"terms" => get_queried_object()->slug,
-			// 		"operator" => "IN"
-			// 		)
-			// 	)
-			// ));
-			// $location_query = new WP_Query( $args );
+			$args = (array(
+				'post_type' => "locations",
+				'order' => 'ASC',
+				'orderby' => 'title',
+				'posts_per_page' => -1,
+				'post__in'	=> $locations
+			));
+			$location_query = new WP_Query( $args );
 
 			if ( $locations ) : ?>
 		<section class="container-fluid p-8 p-sm-10 bg-auto" id="locations">
@@ -174,10 +177,10 @@
 					<div class="card-list-container">
 						<div class="card-list card-list-locations">
 						<?php 
-							foreach( $locations as $post ):
+							while ( $location_query->have_posts() ) : $location_query->the_post();
 								$id = get_the_ID();
 								include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
-							endforeach; 
+							endwhile; 
 						?>
 						</div>
 					</div>
@@ -188,21 +191,14 @@
 		 endif; 
 		  
 			$expertise = get_field('condition_expertise', $term);
-			// $args = (array(
-			// 	'post_type' => "expertise",
-			// 	'order' => 'ASC',
-			// 	'orderby' => 'title',
-			// 	'posts_per_page' => -1,
-			// 	'tax_query' => array(
-			// 		array(
-			// 		"taxonomy" => "condition",
-			// 		"field" => "slug",
-			// 		"terms" => get_queried_object()->slug,
-			// 		"operator" => "IN"
-			// 		)
-			// 	)
-			// ));
-			// $expertise_query = new WP_Query( $args );
+			$args = (array(
+				'post_type' => "expertise",
+				'order' => 'ASC',
+				'orderby' => 'title',
+				'posts_per_page' => -1,
+				'post__in'	=> $expertise
+			));
+			$expertise_query = new WP_Query( $args );
 
 			if ( $expertise ) : ?>
 			<section class="container-fluid p-8 p-sm-10 bg-auto" id="expertise">
@@ -212,18 +208,18 @@
 						<div class="card-list-container">
 							<div class="card-list card-list-expertise">
 							<?php 
-								foreach( $expertise as $post):
+								while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
 									$id = get_the_ID();
 									include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-								endforeach; 
+								endwhile; 
+								wp_reset_postdata();
 							?>
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
-			<?php wp_reset_postdata();
-		 endif; ?>	
+			<?php endif; ?>	
 		<?php
 			include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
 		?>

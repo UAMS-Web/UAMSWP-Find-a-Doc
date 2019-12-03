@@ -376,7 +376,22 @@
             "key": "field_location_phone",
             "name": "location_phone",
             "type": "maskfield",
-            "label": "Phone",
+            "label": "Clinic Phone Number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "input_mask": "(999) 999-9999 [x 99999]"
+        },
+        "location_appointments_phone": {
+            "key": "field_location_appointments_phone",
+            "name": "location_appointments_phone",
+            "type": "maskfield",
+            "label": "Appointments Phone Number",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -1037,7 +1052,7 @@
             "name": "location_conditions",
             "type": "taxonomy",
             "label": "Conditions",
-            "instructions": "",
+            "instructions": "Will display in alphabetical order.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -1063,7 +1078,7 @@
             "name": "location_treatments",
             "type": "taxonomy",
             "label": "Treatments & Procedures",
-            "instructions": "",
+            "instructions": "Will display in alphabetical order.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {

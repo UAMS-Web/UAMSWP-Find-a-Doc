@@ -99,6 +99,13 @@
             }
         },
         {
+            "name": "location_appointments_phone",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_appointments_phone"
+            }
+        },
+        {
             "name": "location_phone_numbers",
             "map": {
                 "type": "acf_field_name",

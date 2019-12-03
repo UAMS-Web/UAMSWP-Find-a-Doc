@@ -340,6 +340,12 @@ while ( have_posts() ) : the_post(); ?>
         <?php // load all 'conditions' terms for the post
 	        $title_append = ' by ' . $short_name;
             $conditions = get_field('physician_conditions');
+            $args = (array(
+                'taxonomy' => "condition",
+                'hide_empty' => false,
+                'term_taxonomy_id' => $conditions
+            ));
+            $conditions_query = new WP_Term_Query( $args );
 
             // we will use the first term to load ACF data from
             if( $conditions ):
@@ -347,6 +353,12 @@ while ( have_posts() ) : the_post(); ?>
             endif; 
              // load all 'treatments' terms for the post
             $treatments = get_field('physician_treatments');
+            $args = (array(
+                'taxonomy' => "treatment_procedure",
+                'hide_empty' => false,
+                'term_taxonomy_id' => $treatments
+            ));
+            $treatments_query = new WP_Term_Query( $args );
 
             // we will use the first term to load ACF data from
         if( $treatments ):
