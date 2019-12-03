@@ -92,6 +92,9 @@
 											echo '<div class="star-ratings-sprite" title="'. $data->profile->averageRatingStr .' out of 5"><div class="star-ratings-sprite-percentage" style="width: '. (floatval($data->profile->averageRatingStr) / 5)*100  .'%;"></div></div>';
 											echo '<div class="ratings-count">'. $data->profile->reviewcount .' Ratings</div>';
 											echo '</div>';
+										} else { ?>
+										<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" href>Why not?</a></em></p>
+										<?php
 									/*	} else { ?>
 											<div class="rating">
 												<div class="star-ratings-sprite" title="0 out of 5"><div class="star-ratings-sprite-percentage" style="width: 0%;"></div></div>
@@ -100,6 +103,9 @@
 										<?php */
 										}
 									}
+							} else { ?>
+								<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" href>Why not?</a></em></p>
+							<?php
 							/*	} else { ?>
 									<div class="rating">
 										<div class="star-ratings-sprite" title="0 out of 5"><div class="star-ratings-sprite-percentage" style="width: 0%;"></div></div>
