@@ -131,6 +131,9 @@ while ( have_posts() ) : the_post(); ?>
                                         echo '<div class="ratings-comments-lg">'. $data->profile->bodycount .' comments</div>';
                                         echo '</a>';
                                     echo '</div>';
+                                } else { ?>
+                                    <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" href>Why not?</a></em></p>
+                                <?php
                                 /* } else { ?>
                                     <div class="rating" aria-label="Patient Rating">
                                     <div class="ratings-count">No ratings - <a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
@@ -139,6 +142,9 @@ while ( have_posts() ) : the_post(); ?>
                                 <?php */
                                 }
                             }
+                        } else { ?>
+                            <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" href>Why not?</a></em></p>
+                    <?php
                         /* } else { ?>
                             <div class="rating" aria-label="Patient Rating">
                                 <div class="ratings-count">No ratings - <a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
