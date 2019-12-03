@@ -78,28 +78,34 @@
 						<?php
 							if(get_field('physician_npi')) {
 
-									$npi =  get_field( 'physician_npi' );
-									$request = wp_nrc_cached_api( $npi );
+								$npi =  get_field( 'physician_npi' );
+								$request = wp_nrc_cached_api( $npi );
 
-									$data = json_decode( $request );
+								$data = json_decode( $request );
 
-									if( ! empty( $data ) ) {
+								if( ! empty( $data ) ) {
 
-										$rating_valid = $data->valid;
+									$rating_valid = $data->valid;
 
-										if ( $rating_valid ){
-											echo '<div class="rating">';
-											echo '<div class="star-ratings-sprite" title="'. $data->profile->averageRatingStr .' out of 5"><div class="star-ratings-sprite-percentage" style="width: '. (floatval($data->profile->averageRatingStr) / 5)*100  .'%;"></div></div>';
-											echo '<div class="ratings-count">'. $data->profile->reviewcount .' Ratings</div>';
-											echo '</div>';
-									/*	} else { ?>
-											<div class="rating">
-												<div class="star-ratings-sprite" title="0 out of 5"><div class="star-ratings-sprite-percentage" style="width: 0%;"></div></div>
-												<div class="ratings-count">No ratings - <a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
-											</div>
-										<?php */
-										}
+									if ( $rating_valid ){
+										echo '<div class="rating">';
+										echo '<div class="star-ratings-sprite" title="'. $data->profile->averageRatingStr .' out of 5"><div class="star-ratings-sprite-percentage" style="width: '. (floatval($data->profile->averageRatingStr) / 5)*100  .'%;"></div></div>';
+										echo '<div class="ratings-count">'. $data->profile->reviewcount .' Ratings</div>';
+										echo '</div>';
+									} else { ?>
+									<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" href>Why not?</a></em></p>
+									<?php
+								/*	} else { ?>
+										<div class="rating">
+											<div class="star-ratings-sprite" title="0 out of 5"><div class="star-ratings-sprite-percentage" style="width: 0%;"></div></div>
+											<div class="ratings-count">No ratings - <a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
+										</div>
+									<?php */
 									}
+								}
+							} else { ?>
+								<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" href>Why not?</a></em></p>
+							<?php
 							/*	} else { ?>
 									<div class="rating">
 										<div class="star-ratings-sprite" title="0 out of 5"><div class="star-ratings-sprite-percentage" style="width: 0%;"></div></div>
