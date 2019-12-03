@@ -428,7 +428,7 @@
             "name": "physician_locations",
             "type": "relationship",
             "label": "Locations",
-            "instructions": "Please put primary location first",
+            "instructions": "Please put primary location first, will displayed in this order.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -759,7 +759,7 @@
             "name": "physician_conditions",
             "type": "taxonomy",
             "label": "Conditions Treated",
-            "instructions": "",
+            "instructions": "Will displayed in this order.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -784,7 +784,7 @@
             "name": "physician_treatments",
             "type": "taxonomy",
             "label": "Treatments & Procedures",
-            "instructions": "",
+            "instructions": "Will displayed in this order.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {

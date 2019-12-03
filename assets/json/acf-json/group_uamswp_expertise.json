@@ -45,7 +45,7 @@
             "name": "expertise_conditions",
             "type": "taxonomy",
             "label": "Conditions",
-            "instructions": "",
+            "instructions": "Will display in alphabetical order.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -71,7 +71,7 @@
             "name": "expertise_treatments",
             "type": "taxonomy",
             "label": "Treatments & Procedures",
-            "instructions": "",
+            "instructions": "Will display in alphabetical order.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
