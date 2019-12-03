@@ -43,7 +43,7 @@ function uamswp_expertise_physicians() {
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <h2 class="module-title">Doctors</h2>
+                    <h2 class="module-title">Providers</h2>
                     <div class="card-list-container">
                         <div class="card-list card-list-doctors facetwp-template">
                             <?php echo facetwp_display( "template", "physicians_by_expertise" ); ?>
@@ -99,16 +99,29 @@ function uamswp_expertise_keywords() {
 function uamswp_expertise_conditions() {
     // load all 'conditions' terms for the post
     $conditions = get_field('expertise_conditions');
-
+    $args = (array(
+        'taxonomy' => "condition",
+        'order' => 'ASC',
+        'orderby' => 'name',
+        'hide_empty' => false,
+        'term_taxonomy_id' => $conditions
+    ));
+    $conditions_query = new WP_Term_Query( $args );
     if( $conditions ):
         include( UAMS_FAD_PATH . '/templates/loops/conditions-loop.php' );
     endif;
 }
 function uamswp_expertise_treatments() {
     $treatments = get_field('expertise_treatments');
-
+    $args = (array(
+        'taxonomy' => "treatment_procedure",
+        'order' => 'ASC',
+        'orderby' => 'name',
+        'hide_empty' => false,
+        'term_taxonomy_id' => $treatments
+    ));
+    $treatments_query = new WP_Term_Query( $args );
     if( $treatments ): 
-        // print_r($treatments); 
         include( UAMS_FAD_PATH . '/templates/loops/treatments-loop.php' );
     endif;
 }
@@ -133,13 +146,13 @@ function uamswp_expertise_locations() {
                         <?php while ( $location_query->have_posts() ) : $location_query->the_post();
                             $id = get_the_ID(); 
                             include( UAMS_FAD_PATH . '/templates/loops/location-card.php' ); 
-                        endwhile; ?>
+                        endwhile; 
+                        wp_reset_postdata();?>
                     </div>
                 </div>
             </div>
         </section>
     <?php endif;
-    wp_reset_postdata();
 }
 function uamswp_expertise_associated() {
     $expertises =  get_field('expertise_associated');
@@ -163,7 +176,8 @@ function uamswp_expertise_associated() {
                             <?php while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
                                 $id = get_the_ID(); 
                                 include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-                            endwhile; ?>
+                            endwhile;
+                            wp_reset_postdata(); ?>
                         </div>
                     </div>
                 </div>
@@ -171,7 +185,6 @@ function uamswp_expertise_associated() {
         </section>
 	<?php 
     endif;
-    wp_reset_postdata();
 }
 function uamswp_expertise_header_metadata() { 
     $keywords = get_field('expertise_alternate_names');

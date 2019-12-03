@@ -72,6 +72,14 @@
 		<?php endif; ?>
 		<?php 
 			$conditions = get_field('treatment_procedure_conditions', $term);
+			$args = (array(
+				'taxonomy' => "condition",
+				'order' => 'ASC',
+				'orderby' => 'name',
+				'hide_empty' => false,
+				'term_taxonomy_id' => $conditions
+			));
+			$conditions_query = new WP_Term_Query( $args );
 			
 			if (!empty($conditions) && 0 < count($conditions)) {
 				
@@ -83,9 +91,15 @@
 							<h2 class="module-title">Conditions Related to <?php echo single_cat_title( '', false ); ?></h2>
 							<div class="list-container list-container-rows">
 								<ul class="list">
-								<?php foreach( $conditions as $condition ) { ?> 
-								<li><a href="<?php echo get_term_link($condition, 'condition'); ?>"><?php echo( get_term( $condition, 'condition' )->name ); ?></a></li>
-								<?php } ?>
+								<?php foreach( $conditions_query->get_terms() as $condition ): ?>
+									<li>
+										<a href="<?php echo get_term_link( $condition->term_id ); ?>">
+											<?php 
+												echo $condition->name;
+											?>
+										</a>
+									</li>
+								<?php endforeach; ?>
 								</ul>
 							</div>
 						</div>

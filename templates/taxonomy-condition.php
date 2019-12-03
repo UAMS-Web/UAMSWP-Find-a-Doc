@@ -73,10 +73,14 @@
 		<?php endif; ?>
 		<?php 
 			$treatments = get_field('condition_treatments', $term);
-			//echo count($treatments);
-
-			// print_r($treatments);
-			
+			$args = (array(
+				'taxonomy' => "treatment_procedure",
+				'order' => 'ASC',
+				'orderby' => 'name',
+				'hide_empty' => false,
+				'term_taxonomy_id' => $treatments
+			));
+			$treatments_query = new WP_Term_Query( $args );
 			if (!empty($treatments) && 0 < count($treatments)) {
 				
 		?>
@@ -87,9 +91,15 @@
 						<h2 class="module-title">Treatments and Procedures Related to <?php echo single_cat_title( '', false ); ?></h2>
 						<div class="list-container list-container-rows">
 							<ul class="list">
-							<?php foreach( $treatments as $treatment ) { ?> 
-							<li><a href="<?php echo get_term_link($treatment, 'treatment_procedure'); ?>"><?php echo( get_term( $treatment, 'treatment_procedure' )->name ); ?></a></li>
-							<?php } ?>
+							<?php foreach( $treatments_query->get_terms() as $treatment ): ?>
+								<li>
+									<a href="<?php echo get_term_link( $treatment->term_id ); ?>">
+									<?php
+										echo $treatment->name;
+									?>
+									</a>
+								</li>
+							<?php endforeach; ?>
 							</ul>
 						</div>
 					</div>

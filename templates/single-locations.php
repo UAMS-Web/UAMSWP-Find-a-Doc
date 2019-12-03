@@ -418,7 +418,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title">Doctors at <?php the_title(); ?></h2>
+						<h2 class="module-title">Providers at <?php the_title(); ?></h2>
 
 						<!-- <div class="list-legend">
 							<div class="az-filter">
@@ -467,13 +467,27 @@ while ( have_posts() ) : the_post(); ?>
 	<?php // load all 'conditions' terms for the post
 	$title_append = ' at ' . get_the_title();
 	$conditions = get_field('location_conditions');
-
+	$args = (array(
+        'taxonomy' => "condition",
+        'order' => 'ASC',
+        'orderby' => 'name',
+        'hide_empty' => false,
+        'term_taxonomy_id' => $conditions
+    ));
+    $conditions_query = new WP_Term_Query( $args );
 	if( $conditions ):
         include( UAMS_FAD_PATH . '/templates/loops/conditions-loop.php' );
     endif;
 	$treatments = get_field('location_treatments');
+	$args = (array(
+        'taxonomy' => "treatment_procedure",
+        'order' => 'ASC',
+        'orderby' => 'name',
+        'hide_empty' => false,
+        'term_taxonomy_id' => $treatments
+    ));
+    $treatments_query = new WP_Term_Query( $args );
 	if( $treatments ): 
-			// print_r($treatments); 
 		include( UAMS_FAD_PATH . '/templates/loops/treatments-loop.php' );
 	endif; 
 	$expertises =  get_field('location_expertise');
