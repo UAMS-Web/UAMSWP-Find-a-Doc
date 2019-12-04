@@ -42,8 +42,6 @@
 					if(! empty( get_field('physician_title', $id) ) || ! empty( get_field('physician_service_line', $id) ) ){
 						echo '<span class="subtitle">';
 						echo (get_field('physician_title', $id) ? get_term( get_field('physician_title', $id), 'clinical_title' )->name : '');
-						echo ((! empty( get_field('physician_title', $id) )) && (! empty( get_field('physician_service_line', $id) ) ) ? ',<br/>' : '' );
-						echo (get_field('physician_service_line', $id) ? get_term( get_field('physician_service_line', $id), 'service_line' )->name : '');
 						echo '</span>';
 					}
 					?>
