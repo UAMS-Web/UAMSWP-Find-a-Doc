@@ -165,6 +165,7 @@
 				'order' => 'ASC',
 				'orderby' => 'title',
 				'posts_per_page' => -1,
+				'post_status' => array('publish', 'published-hidden'),
 				'post__in'	=> $locations
 			));
 			$location_query = new WP_Query( $args );
