@@ -17,13 +17,17 @@ if ( $degrees ) {
     endforeach;
 } 
 $languages = get_field('physician_languages',$post->ID);
+$language_count = 0;
+if ($languages) {
+    $language_count = count($languages);
+}
 $language_list = '';
 $i = 1;
 if ( $languages ) {
     foreach( $languages as $language ):
         $language_name = get_term( $language, 'languages');
         $language_list .= $language_name->name;
-        if( count($languages) > $i ) {
+        if( $language_count > $i ) {
             $language_list .= ", ";
         }
         $i++;
@@ -105,7 +109,7 @@ while ( have_posts() ) : the_post(); ?>
                         <dt class="sr-only">Language</dt>
                         <?php echo '<dd class="sr-only">' . $language_list . '</dd>';?>
                     <?php } else { ?>
-                        <dt>Language<?php echo( count($languages) > 1 ? 's' : '' );?></dt>
+                        <dt>Language<?php echo( $language_count > 1 ? 's' : '' );?></dt>
                         <?php echo '<dd>' . $language_list . '</dd>';?>
                     <?php } //endif ?>
                     </dl>
@@ -204,7 +208,7 @@ while ( have_posts() ) : the_post(); ?>
                                 <!-- <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a> -->
                                 </p>
                                 <div class="btn-container">
-                                    <a class="btn btn-primary" href="<?php the_permalink( $location ); ?>">
+                                    <a class="btn btn-primary" href="<?php echo get_permalink( $location, true ); ?>">
                                         View Location
                                     </a>
                                     <a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of locations for this doctor">
@@ -307,7 +311,7 @@ while ( have_posts() ) : the_post(); ?>
                             <p>New and existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                         <?php } elseif ($show_portal) { ?>
                             <p>This physician is not currently accepting new patients.</p>
-                            <p>Existing patients can either <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                            <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                         <?php } else { ?>
                             <p>This physician is not currently accepting new patients.</p>
                             <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
@@ -386,6 +390,7 @@ while ( have_posts() ) : the_post(); ?>
         endif;
         ?>
         <?php 
+            $physician_academic_split = false;
             if ( get_field('physician_academic_bio') && ( get_field('physician_academic_appointment') || get_field('physician_education') || get_field('physician_boards') ) ) {
                 $physician_academic_split = true;
             }
@@ -707,7 +712,7 @@ while ( have_posts() ) : the_post(); ?>
                                 <p>New and existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                             <?php } elseif ($show_portal) { ?>
                                 <p>This physician is not currently accepting new patients.</p>
-                                <p>Existing patients can either <a href="<?php echo $portal_link; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                                <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this doctor">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                             <?php } else { ?>
                                 <p>This physician is not currently accepting new patients.</p>
                                 <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this doctor">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
