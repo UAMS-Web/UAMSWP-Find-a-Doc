@@ -509,14 +509,14 @@ add_filter( 'facetwp_index_row', function( $params, $class ) {
     return $params;
 }, 10, 2 );
 
-add_filter( 'facetwp_preload_url_vars', function( $url_vars ) {
-    if ( 'physicians' == FWP()->helper->get_uri() ) {
-        if ( empty( $url_vars['searchable'] ) ) {
-            $url_vars['searchable'] = array( '1' );
-        }
-    }
-    return $url_vars;
-} );
+// add_filter( 'facetwp_preload_url_vars', function( $url_vars ) {
+//     if ( 'physicians' == FWP()->helper->get_uri() ) {
+//         if ( empty( $url_vars['searchable'] ) ) {
+//             $url_vars['searchable'] = array( '1' );
+//         }
+//     }
+//     return $url_vars;
+// } );
 
 // Admin Columns
 add_filter('manage_physicians_posts_columns', 'posts_physicians_columns', 10);

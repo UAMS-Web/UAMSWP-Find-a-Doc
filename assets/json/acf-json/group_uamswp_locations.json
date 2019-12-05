@@ -372,6 +372,25 @@
             "rows": 4,
             "new_lines": ""
         },
+        "field_location_hidden": {
+            "key": "field_location_hidden",
+            "name": "location_hidden",
+            "type": "true_false",
+            "label": "Hide",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "Exclude from Primary Listing",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
         "field_location_phone": {
             "key": "field_location_phone",
             "name": "location_phone",

@@ -41,7 +41,6 @@
 														<div class="fwp-filter">[facetwp facet="physician_language"]</div>
 														<div class="fwp-filter">[facetwp facet="locations"]</div>
 														<div class="fwp-filter">[facetwp facet="physician_areas_of_expertise"]</div>
-														<div class="fwp-filter sr-only">[facetwp facet="searchable"]</div>
 														<button onclick="FWP.refresh()">Apply</button> <button onclick="FWP.reset()">Reset</button>
 													' );
 						?>

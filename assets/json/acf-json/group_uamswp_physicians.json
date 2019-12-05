@@ -208,7 +208,15 @@
             "label": "Searchable",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_details_tab",
+                        "operator": "==",
+                        "value": "false"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "25",
                 "class": "",
@@ -506,22 +514,6 @@
             "acfe_update": "",
             "multiple": 0
         },
-        "field_physician_clinical_details_tab": {
-            "key": "field_physician_clinical_details_tab",
-            "name": "",
-            "type": "tab",
-            "label": "<i class=\"dashicons dashicons-forms\"><\/i> Clinical Details",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
-        },
         "field_physician_patient_types": {
             "key": "field_physician_patient_types",
             "name": "physician_patient_types",
@@ -547,11 +539,11 @@
             "multiple": 0,
             "allow_null": 0
         },
-        "field_physician_appointment_link": {
-            "key": "field_physician_appointment_link",
-            "name": "physician_appointment_link",
-            "type": "url",
-            "label": "Appointment Link",
+        "field_spacer_1": {
+            "key": "field_spacer_1",
+            "label": "",
+            "name": "",
+            "type": "message",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -560,8 +552,10 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "https:\/\/uamshealth.com\/appointments",
-            "placeholder": "https:\/\/uamshealth.com\/appointments"
+            "acfe_permissions": "",
+            "message": "&nbsp;",
+            "new_lines": "",
+            "esc_html": 0
         },
         "field_physician_eligible_appointments": {
             "key": "field_physician_eligible_appointments",
@@ -572,12 +566,31 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "hide-acf-title",
                 "id": ""
             },
             "message": "Eligible for appointments?",
             "default_value": 1,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_physician_hidden": {
+            "key": "field_physician_hidden",
+            "name": "physician_hidden",
+            "type": "true_false",
+            "label": "Hide",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "hide-acf-title",
+                "id": ""
+            },
+            "message": "Exclude from Primary Listing",
+            "default_value": 0,
             "ui": 0,
             "ui_on_text": "",
             "ui_off_text": ""
@@ -690,6 +703,48 @@
             "ui_on_text": "",
             "ui_off_text": ""
         },
+        "field_spacer_2": {
+            "key": "field_spacer_2",
+            "label": "",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "message": "&nbsp;",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        "field_physician_appointment_link": {
+            "key": "field_physician_appointment_link",
+            "name": "physician_appointment_link",
+            "type": "url",
+            "label": "Appointment Link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_eligible_appointments",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "https:\/\/uamshealth.com\/appointments",
+            "placeholder": "https:\/\/uamshealth.com\/appointments"
+        },
         "field_physician_expertise": {
             "key": "field_physician_expertise",
             "name": "physician_expertise",
@@ -731,7 +786,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_physician_clinical_details_tab",
+                        "field": "field_physician_clinical_tab",
                         "operator": "==",
                         "value": "false"
                     }
@@ -814,7 +869,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_physician_clinical_details_tab",
+                        "field": "field_physician_clinical_tab",
                         "operator": "==",
                         "value": "false"
                     }
@@ -1401,7 +1456,7 @@
             "key": "field_physician_research_tab",
             "name": "",
             "type": "tab",
-            "label": "<i class=\"dashicons dashicons-clipboard\"><\/i> Research",
+            "label": "<i class=\"dashicons dashicons-clipboard\"><\/i> Research Profile",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
