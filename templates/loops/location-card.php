@@ -31,10 +31,12 @@
             <?php if (get_field('location_return_appointments_phone')) { ?>
             <dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone') ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone') ); ?></a> (Returning Patients)</dd>
             <?php } } ?>
-            <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary" aria-label="Go to location page for <?php echo get_the_title($id); ?>">View Location</a>
-            <?php if ($map) { ?>
-            <a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a>
-            <?php } ?>
+            <div class="btn-container">
+                <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary" aria-label="Go to location page for <?php echo get_the_title($id); ?>">View Location</a>
+                <?php if ($map) { ?>
+                <a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a>
+                <?php } ?>
+            </div>
         </p>
     </div><!-- .card-body -->
 </div><!-- .card --> 
