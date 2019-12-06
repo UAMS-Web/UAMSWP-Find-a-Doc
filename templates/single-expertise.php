@@ -141,7 +141,7 @@ function uamswp_expertise_locations() {
             <div class="row">
                 <div class="col-12">
                     <h2 class="module-title">Locations</h2>
-                    <div class="card-list-container">
+                    <div class="card-list-container location-card-list-container">
                         <div class="card-list">
                         <?php while ( $location_query->have_posts() ) : $location_query->the_post();
                             $id = get_the_ID(); 

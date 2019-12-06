@@ -10,7 +10,7 @@
             <h1 class="page-title">Locations</h1>
             <div class="module-body">
             </div>
-            <div class="card-list-container">
+            <div class="card-list-container location-card-list-container">
                 <?php //<div class="card-list"> ?>
                     <?php echo facetwp_display( 'template', 'locations' ); ?>
                     <?php //get_template_part( 'templates/physician-loop' ); ?>

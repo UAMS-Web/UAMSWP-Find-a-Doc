@@ -530,7 +530,7 @@ while ( have_posts() ) : the_post(); ?>
             <div class="row">
                 <div class="col-12">
                     <h2 class="module-title">Locations Where <?php echo $short_name; ?> Practices</h2>
-                    <div class="card-list-container">
+                    <div class="card-list-container location-card-list-container">
                         <div class="card-list">
                         <?php $l = 1; ?>
                         <?php foreach( $locations as $location ): ?>
