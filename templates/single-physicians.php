@@ -200,8 +200,8 @@ while ( have_posts() ) : the_post(); ?>
                             <?php } // endif ?>
                             <?php foreach( $locations as $location ):
                                     if ( 2 > $l ){ ?>
-                                <p><strong><?php echo get_the_title( $location ); ?></strong><br />
-                                <?php echo get_field( 'location_address_1', $location ); ?><br/>
+                                <h3 class="h4"><?php echo get_the_title( $location ); ?></h3>
+                                <p><?php echo get_field( 'location_address_1', $location ); ?><br/>
                                 <?php echo ( get_field( 'location_address_2', $location ) ? get_field( 'location_address_2', $location ) . '<br/>' : ''); ?>
                                 <?php echo get_field( 'location_city', $location ); ?>, <?php echo get_field(' location_state', $location ); ?> <?php echo get_field( 'location_zip', $location ); ?>
                                 <?php $map = get_field( 'location_map', $location ); ?>
