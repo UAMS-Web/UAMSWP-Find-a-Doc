@@ -115,10 +115,10 @@
             }
         },
         {
-            "name": "location_appointments_phone",
+            "name": "location_new_appointments_phone",
             "map": {
                 "type": "acf_field_name",
-                "identifier": "location_appointments_phone"
+                "identifier": "location_new_appointments_phone"
             }
         },
         {

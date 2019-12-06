@@ -460,9 +460,9 @@
             "layout": "horizontal",
             "return_format": "value"
         },
-        "field_location_appointments_phone": {
-            "key": "field_location_appointments_phone",
-            "name": "location_appointments_phone",
+        "field_location_new_appointments_phone": {
+            "key": "field_location_new_appointments_phone",
+            "name": "location_new_appointments_phone",
             "type": "maskfield",
             "label": "Appointments Phone Number",
             "instructions": "For new patients, if seperate numbers for new and returning patients",
@@ -537,7 +537,7 @@
             "name": "location_phone_numbers",
             "type": "repeater",
             "label": "Additional Phone Numbers (if needed):",
-            "instructions": "Example: <br\/>New Patients: ###-###-####",
+            "instructions": "Example: <br\/>After Hours: ###-###-####",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -546,7 +546,7 @@
                 "id": ""
             },
             "collapsed": "field_location_appointments_text",
-            "min": 1,
+            "min": 0,
             "max": 0,
             "layout": "table",
             "button_label": "",
