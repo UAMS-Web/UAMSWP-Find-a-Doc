@@ -391,8 +391,8 @@
             "ui_on_text": "",
             "ui_off_text": ""
         },
-        "field_location_clinic_phone": {
-            "key": "field_location_clinic_phone",
+        "field_location_clinic_phone_query": {
+            "key": "field_location_clinic_phone_query",
             "label": "Is there a seperate appointment number for patients?",
             "name": "location_clinic_phone",
             "type": "button_group",
@@ -429,8 +429,8 @@
             },
             "input_mask": "(999) 999-9999 [x 99999]"
         },
-        "field_location_appointment_phone": {
-            "key": "field_location_appointment_phone",
+        "field_location_appointment_phone_query": {
+            "key": "field_location_appointment_phone_query",
             "label": "Is there a seperate number for returning patients?",
             "name": "location_appointment_phone",
             "type": "button_group",
@@ -439,7 +439,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_location_clinic_phone",
+                        "field": "field_location_clinic_phone_query",
                         "operator": "==",
                         "value": "1"
                     }
@@ -470,7 +470,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_location_clinic_phone",
+                        "field": "field_location_clinic_phone_query",
                         "operator": "==",
                         "value": "1"
                     }
@@ -493,7 +493,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_location_appointment_phone",
+                        "field": "field_location_appointment_phone_query",
                         "operator": "==",
                         "value": "1"
                     }
@@ -519,7 +519,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_location_appointment_phone",
+                        "field": "field_location_appointment_phone_query",
                         "operator": "==",
                         "value": "1"
                     }
@@ -536,18 +536,10 @@
             "key": "field_location_phone_numbers",
             "name": "location_phone_numbers",
             "type": "repeater",
-            "label": "Additional Phone Numbers",
+            "label": "Additional Phone Numbers (if needed):",
             "instructions": "Example: <br\/>New Patients: ###-###-####",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_appointment_phone",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
