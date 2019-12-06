@@ -394,7 +394,7 @@
         "field_location_clinic_phone_query": {
             "key": "field_location_clinic_phone_query",
             "label": "Is there a seperate appointment number for patients?",
-            "name": "location_clinic_phone",
+            "name": "location_clinic_phone_query",
             "type": "button_group",
             "instructions": "",
             "required": 1,
@@ -432,7 +432,7 @@
         "field_location_appointment_phone_query": {
             "key": "field_location_appointment_phone_query",
             "label": "Is there a seperate number for returning patients?",
-            "name": "location_appointment_phone",
+            "name": "location_appointment_phone_query",
             "type": "button_group",
             "instructions": "",
             "required": 1,
