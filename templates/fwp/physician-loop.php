@@ -19,7 +19,7 @@
 			$i++;
 		endforeach;
  	} ?>
-	<?php $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . ( $degree_list ? ', ' . $degree_list : '' ); ?>
+	<?php $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '') . ( $degree_list ? ', ' . $degree_list : '' ); ?>
 	<div class="col item-container">
 		<div class="item">
 			<div class="row">
@@ -27,35 +27,17 @@
 					<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name; ?>" class="stretched-link">
 						<picture>
 						<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 486, 648, 'center', 'center'); ?>"
-								media="(min-width: 2054px) and (-webkit-min-device-pixel-ratio: 2), 
-								(min-width: 2054px) and (min-resolution: 192dpi)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 486, 648, 'center', 'center'); ?> 2x"
 								media="(min-width: 2054px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?>"
-								media="(min-width: 1784px) and (-webkit-min-device-pixel-ratio: 2), 
-								(min-width: 1784px) and (min-resolution: 192dpi)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?> 2x"
 								media="(min-width: 1784px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 486, 648, 'center', 'center'); ?>"
-								media="(min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2), 
-								(min-width: 1200px) and (min-resolution: 192dpi)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 486, 648, 'center', 'center'); ?> 2x"
 								media="(min-width: 1200px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?>"
-								media="(min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), 
-								(min-width: 768px) and (min-resolution: 192dpi)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?> 2x"
 								media="(min-width: 768px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 190, 254, 'center', 'center'); ?>"
-								media="(min-width: 576px) and (-webkit-min-device-pixel-ratio: 2), 
-								(min-width: 576px) and (min-resolution: 192dpi)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 95, 127, 'center', 'center'); ?>"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 95, 127, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 190, 254, 'center', 'center'); ?> 2x"
 								media="(min-width: 576px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?>"
-								media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), 
-								(min-width: 1px) and (min-resolution: 192dpi)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?> 2x"
 								media="(min-width: 1px)">
 							<img src="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>" alt="<?php echo $full_name; ?>" />
 						<?php } elseif ( has_post_thumbnail() ) { ?>
@@ -71,41 +53,47 @@
 						<div class="col-12 primary">
 						<h3 class="h4">
 							<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name; ?>"><span class="name"><?php echo $full_name; ?></span></a>
-							<?php if ( get_field('physician_department') ) { ?>
-							<span class="subtitle"><?php echo get_term( get_field('physician_department'), 'department' )->name; ?></span>
+							<?php if ( get_field('physician_service_line') ) { ?>
+							<span class="subtitle"><?php echo get_term( get_field('physician_service_line'), 'service_line' )->name; ?></span>
 							<?php } // endif ?>
 						</h3>
 						<?php
 							if(get_field('physician_npi')) {
 
-									$npi =  get_field( 'physician_npi' );
-									$request = wp_nrc_cached_api( $npi );
+								$npi =  get_field( 'physician_npi' );
+								$request = wp_nrc_cached_api( $npi );
 
-									$data = json_decode( $request );
+								$data = json_decode( $request );
 
-									if( ! empty( $data ) ) {
+								if( ! empty( $data ) ) {
 
-										$rating_valid = $data->valid;
+									$rating_valid = $data->valid;
 
-										if ( $rating_valid ){
-											echo '<div class="rating">';
-											echo '<div class="star-ratings-sprite" title="'. $data->profile->averageRatingStr .' out of 5"><div class="star-ratings-sprite-percentage" style="width: '. (floatval($data->profile->averageRatingStr) / 5)*100  .'%;"></div></div>';
-											echo '<div class="ratings-count">'. $data->profile->reviewcount .' Ratings</div>';
-											echo '</div>';
-										} else { ?>
-											<div class="rating">
-												<div class="star-ratings-sprite" title="0 out of 5"><div class="star-ratings-sprite-percentage" style="width: 0%;"></div></div>
-												<div class="ratings-count">No ratings - <a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
-											</div>
-										<?php
-										}
+									if ( $rating_valid ){
+										echo '<div class="rating">';
+										echo '<div class="star-ratings-sprite" title="'. $data->profile->averageRatingStr .' out of 5"><div class="star-ratings-sprite-percentage" style="width: '. (floatval($data->profile->averageRatingStr) / 5)*100  .'%;"></div></div>';
+										echo '<div class="ratings-count">'. $data->profile->reviewcount .' Ratings</div>';
+										echo '</div>';
+									} else { ?>
+									<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" href>Why not?</a></em></p>
+									<?php
+								/*	} else { ?>
+										<div class="rating">
+											<div class="star-ratings-sprite" title="0 out of 5"><div class="star-ratings-sprite-percentage" style="width: 0%;"></div></div>
+											<div class="ratings-count">No ratings - <a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
+										</div>
+									<?php */
 									}
-								} else { ?>
+								}
+							} else { ?>
+								<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" href>Why not?</a></em></p>
+							<?php
+							/*	} else { ?>
 									<div class="rating">
 										<div class="star-ratings-sprite" title="0 out of 5"><div class="star-ratings-sprite-percentage" style="width: 0%;"></div></div>
 										<div class="ratings-count">No ratings - <a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
 									</div>
-						<?php } ?>
+							<?php */ } ?>
 						
 							<p><?php echo ( get_field('physician_short_clinical_bio') ? get_field( 'physician_short_clinical_bio') : wp_trim_words( get_field( 'physician_clinical_bio' ), 30, ' &hellip;' ) ); ?></p>
 						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>">Full Profile</a>
@@ -147,11 +135,11 @@
 	<!--
 				<a href="<?php echo get_permalink($post->ID); ?>"><h2 class="margin-top-none margin-bottom-none" itemprop="name"><?php echo $full_name; ?></h2></a>
 				<?php
-					if(! empty( get_field('physician_clinical_title') ) || ! empty( get_field('physician_department') ) ){
+					if(! empty( get_field('physician_clinical_title') ) || ! empty( get_field('physician_service_line') ) ){
 						echo '<h4>';
 						echo (get_field('physician_clinical_title') ? get_field('physician_clinical_title')->name : '');
-						echo ((! empty( get_field('physician_clinical_title') )) && (! empty( get_field('physician_department') ) ) ? ', ' : '' );
-						echo (get_field('physician_department') ? get_term( get_field('physician_department'), 'department' )->name : '');
+						echo ((! empty( get_field('physician_clinical_title') )) && (! empty( get_field('physician_service_line') ) ) ? ', ' : '' );
+						echo (get_field('physician_service_line') ? get_term( get_field('physician_service_line'), 'service_line' )->name : '');
 						echo '</h4>';
 					}
 				?>
@@ -162,7 +150,7 @@
 	            <div class="margin-bottom-two text-center">
 	            	<span><a href="<?php echo get_permalink($post->ID); ?>" target="_self"><?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?></a></span>
 	            </div>
-				<?php
+				<?php /*
 					if(get_field('physician_npi')) {
 
 							$npi =  get_field( 'physician_npi' );
@@ -201,7 +189,7 @@
 							<div><a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
 							</div>
 						<?php }
-					?>
+				*/	?>
 	        </div>
 	        <div class="col-md-9 col-sm-8" class="margin-top-none margin-bottom-none">
 	                <div class="row" class="margin-top-none margin-bottom-none">

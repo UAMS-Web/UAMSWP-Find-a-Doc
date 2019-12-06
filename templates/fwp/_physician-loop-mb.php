@@ -7,7 +7,7 @@
 	<?php $i = 0; ?>
 	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 	<?php $class = ($i%2 == 0)? 'whiteBackground': 'grayBackground'; ?>
-	<?php $full_name = rwmb_meta('physician_first_name') .' ' .(rwmb_meta('physician_middle_name') ? rwmb_meta('physician_middle_name') . ' ' : '') . rwmb_meta('physician_last_name') . (rwmb_meta('physician_degree') ? ', ' . rwmb_meta('physician_degree') : '');
+	<?php $full_name = rwmb_meta('physician_first_name') .' ' .(rwmb_meta('physician_middle_name') ? rwmb_meta('physician_middle_name') . ' ' : '') . rwmb_meta('physician_last_name') . (rwmb_meta('physician_pedigree', $id) ? '&nbsp;' . rwmb_meta('physician_pedigree', $id) : '') . (rwmb_meta('physician_degree') ? ', ' . rwmb_meta('physician_degree') : '');
 	      //$profileurl = '/directory/physician/' . $post->post_name .'/';
 	?>
 	<div class="<?php echo $class; ?> archive-box">

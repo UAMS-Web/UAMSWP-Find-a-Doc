@@ -24,12 +24,28 @@
     "acfe_note": "",
     "acfe_meta": "",
     "fields": {
+        "field_physician_youtube_link": {
+            "key": "field_expertise_youtube_link",
+            "name": "expertise_youtube_link",
+            "type": "url",
+            "label": "Featured Youtube video",
+            "instructions": "Full URL, including https:\/\/",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
         "field_expertise_conditions": {
             "key": "field_expertise_conditions",
             "name": "expertise_conditions",
             "type": "taxonomy",
             "label": "Conditions",
-            "instructions": "",
+            "instructions": "Will display in alphabetical order.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -41,11 +57,12 @@
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 0,
-            "save_terms": 1,
-            "load_terms": 1,
+            "save_terms": 0,
+            "load_terms": 0,
             "return_format": "id",
             "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
+                "acfe_bidirectional_enabled": true,
+                "acfe_bidirectional_related": "field_condition_expertise"
             },
             "multiple": 0
         },
@@ -54,7 +71,7 @@
             "name": "expertise_treatments",
             "type": "taxonomy",
             "label": "Treatments & Procedures",
-            "instructions": "",
+            "instructions": "Will display in alphabetical order.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -66,11 +83,12 @@
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 0,
-            "save_terms": 1,
-            "load_terms": 1,
+            "save_terms": 0,
+            "load_terms": 0,
             "return_format": "id",
             "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
+                "acfe_bidirectional_enabled": true,
+                "acfe_bidirectional_related": "field_treatment_procedure_expertise"
             },
             "multiple": 0
         },

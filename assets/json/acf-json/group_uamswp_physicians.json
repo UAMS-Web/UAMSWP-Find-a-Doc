@@ -208,7 +208,15 @@
             "label": "Searchable",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_details_tab",
+                        "operator": "==",
+                        "value": "false"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "25",
                 "class": "",
@@ -316,11 +324,11 @@
             },
             "multiple": 0
         },
-        "field_physician_department": {
-            "key": "field_physician_department",
-            "name": "physician_department",
+        "field_physician_service_line": {
+            "key": "field_physician_service_line",
+            "name": "physician_service_line",
             "type": "taxonomy",
-            "label": "Medical Department",
+            "label": "Service Line",
             "instructions": "&nbsp;",
             "required": 0,
             "conditional_logic": 0,
@@ -329,7 +337,7 @@
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "department",
+            "taxonomy": "service_line",
             "field_type": "select",
             "add_term": 1,
             "save_terms": 0,
@@ -428,7 +436,7 @@
             "name": "physician_locations",
             "type": "relationship",
             "label": "Locations",
-            "instructions": "Please put primary location first",
+            "instructions": "Please put primary location first, will displayed in this order.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -479,21 +487,32 @@
             "multiple": 0,
             "allow_null": 0
         },
-        "field_physician_clinical_details_tab": {
-            "key": "field_physician_clinical_details_tab",
-            "name": "",
-            "type": "tab",
-            "label": "<i class=\"dashicons dashicons-forms\"><\/i> Clinical Details",
+        "field_location_portal": {
+            "key": "field_physician_portal",
+            "name": "physician_portal",
+            "type": "taxonomy",
+            "label": "Portal (Optional)",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
-            "endpoint": 0
+            "taxonomy": "portal",
+            "field_type": "radio",
+            "allow_null": 0,
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "acfe_validate": "",
+            "acfe_update": "",
+            "multiple": 0
         },
         "field_physician_patient_types": {
             "key": "field_physician_patient_types",
@@ -520,11 +539,11 @@
             "multiple": 0,
             "allow_null": 0
         },
-        "field_physician_appointment_link": {
-            "key": "field_physician_appointment_link",
-            "name": "physician_appointment_link",
-            "type": "url",
-            "label": "Appointment Link",
+        "field_spacer_1": {
+            "key": "field_spacer_1",
+            "label": "",
+            "name": "",
+            "type": "message",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -533,8 +552,48 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "https:\/\/uamshealth.com\/appointments",
-            "placeholder": "https:\/\/uamshealth.com\/appointments"
+            "acfe_permissions": "",
+            "message": "&nbsp;",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        "field_physician_eligible_appointments": {
+            "key": "field_physician_eligible_appointments",
+            "name": "physician_eligible_appointments",
+            "type": "true_false",
+            "label": "Eligible for appointments",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "hide-acf-title",
+                "id": ""
+            },
+            "message": "Eligible for appointments?",
+            "default_value": 1,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_physician_hidden": {
+            "key": "field_physician_hidden",
+            "name": "physician_hidden",
+            "type": "true_false",
+            "label": "Hide",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "hide-acf-title",
+                "id": ""
+            },
+            "message": "Exclude from Primary Listing",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         "field_physician_primary_care": {
             "key": "field_physician_primary_care",
@@ -543,7 +602,15 @@
             "label": "Primary Care Physician",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_eligible_appointments",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "hide-acf-title",
@@ -562,7 +629,15 @@
             "label": "Referral required for new patients",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_eligible_appointments",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "hide-acf-title",
@@ -581,7 +656,15 @@
             "label": "Accepting new patients",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_eligible_appointments",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "hide-acf-title",
@@ -600,7 +683,15 @@
             "label": "Provides second opinion",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_eligible_appointments",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "hide-acf-title",
@@ -611,6 +702,48 @@
             "ui": 0,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        "field_spacer_2": {
+            "key": "field_spacer_2",
+            "label": "",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "message": "&nbsp;",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        "field_physician_appointment_link": {
+            "key": "field_physician_appointment_link",
+            "name": "physician_appointment_link",
+            "type": "url",
+            "label": "Appointment Link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_eligible_appointments",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "https:\/\/uamshealth.com\/appointments",
+            "placeholder": "https:\/\/uamshealth.com\/appointments"
         },
         "field_physician_expertise": {
             "key": "field_physician_expertise",
@@ -653,7 +786,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_physician_clinical_details_tab",
+                        "field": "field_physician_clinical_tab",
                         "operator": "==",
                         "value": "false"
                     }
@@ -681,7 +814,7 @@
             "name": "physician_conditions",
             "type": "taxonomy",
             "label": "Conditions Treated",
-            "instructions": "",
+            "instructions": "Will displayed in this order.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -706,7 +839,7 @@
             "name": "physician_treatments",
             "type": "taxonomy",
             "label": "Treatments & Procedures",
-            "instructions": "",
+            "instructions": "Will displayed in this order.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -736,7 +869,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_physician_clinical_details_tab",
+                        "field": "field_physician_clinical_tab",
                         "operator": "==",
                         "value": "false"
                     }
@@ -1285,7 +1418,7 @@
             "taxonomy": "boards",
             "field_type": "multi_select",
             "allow_null": 0,
-            "add_term": 1,
+            "add_term": 0,
             "save_terms": 1,
             "load_terms": 1,
             "return_format": "id",
@@ -1294,11 +1427,90 @@
             },
             "multiple": 0
         },
+        "field_physician_associations": {
+            "key": "field_physician_associations",
+            "name": "physician_associations",
+            "type": "taxonomy",
+            "label": "Associations",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "associations",
+            "field_type": "multi_select",
+            "allow_null": 0,
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 0
+        },
+        "field_physician_research_tab": {
+            "key": "field_physician_research_tab",
+            "name": "",
+            "type": "tab",
+            "label": "<i class=\"dashicons dashicons-clipboard\"><\/i> Research Profile",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        "field_physician_research_bio": {
+            "key": "field_physician_research_bio",
+            "name": "physician_research_bio",
+            "type": "wysiwyg",
+            "label": "Research Bio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        "field_physician_research_interests": {
+            "key": "field_physician_research_interests",
+            "name": "physician_research_interests",
+            "type": "textarea",
+            "label": "Research Interests",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": ""
+        },
         "field_physician_profiles_link": {
             "key": "field_physician_profiles_link",
             "name": "physician_research_profiles_link",
             "type": "url",
-            "label": "Profiles Link",
+            "label": "UAMS Profiles Link",
             "instructions": "Please include the full URL, including https:\/\/",
             "required": 0,
             "conditional_logic": 0,
@@ -1314,8 +1526,8 @@
             "key": "field_pubmed_author_id",
             "name": "physician_pubmed_author_id",
             "type": "text",
-            "label": "Pubmed Author ID",
-            "instructions": "Used to link to Pubmed complete list. AuthorID is found at the end of a link URL for Author.",
+            "label": "Pubmed Author ID \/ Name",
+            "instructions": "Used to link to Pubmed complete list. Ex. 'Smith JD' More information at <a href='https://www.ncbi.nlm.nih.gov/pubmed/advanced' target='_blank'>https://www.ncbi.nlm.nih.gov/pubmed/advanced</a>",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -1414,60 +1626,6 @@
                     "new_lines": ""
                 }
             ]
-        },
-        "field_physician_research_tab": {
-            "key": "field_physician_research_tab",
-            "name": "",
-            "type": "tab",
-            "label": "<i class=\"dashicons dashicons-clipboard\"><\/i> Research",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
-        },
-        "field_physician_research_bio": {
-            "key": "field_physician_research_bio",
-            "name": "physician_research_bio",
-            "type": "wysiwyg",
-            "label": "Research Bio",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0
-        },
-        "field_physician_research_interests": {
-            "key": "field_physician_research_interests",
-            "name": "physician_research_interests",
-            "type": "textarea",
-            "label": "Research Interests",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": "",
-            "new_lines": ""
         },
         "field_physician_extra_tab": {
             "key": "field_physician_extra_tab",

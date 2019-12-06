@@ -22,16 +22,13 @@
 		endforeach; 
 	} 
 	?>
-	<?php $full_name = get_field('physician_first_name', $id) .' ' .(get_field('physician_middle_name', $id) ? get_field('physician_middle_name', $id) . ' ' : '') . get_field('physician_last_name', $id) .  ( $degree_list ? ', ' . $degree_list : '' ); ?>
+	<?php $full_name = get_field('physician_first_name', $id) .' ' .(get_field('physician_middle_name', $id) ? get_field('physician_middle_name', $id) . ' ' : '') . get_field('physician_last_name', $id) . (get_field('physician_pedigree', $id) ? '&nbsp;' . get_field('physician_pedigree', $id) : '') .  ( $degree_list ? ', ' . $degree_list : '' ); ?>
 	<div class="card">
 		<picture>
 			<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
-				<source srcset="<?php echo image_sizer(get_post_thumbnail_id($id), 510, 680, 'center', 'center'); ?>"
-					media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), 
-					(min-width: 1px) and (min-resolution: 192dpi)">
-				<source srcset="<?php echo image_sizer(get_post_thumbnail_id($id), 255, 340, 'center', 'center'); ?>"
+				<source srcset="<?php echo image_sizer(get_post_thumbnail_id($id), 253, 337, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id($id), 506, 675, 'center', 'center'); ?> 2x"
 					media="(min-width: 1px)">
-				<img src="<?php echo image_sizer(get_post_thumbnail_id(), 255, 340, 'center', 'center'); ?>" itemprop="image" class="card-img-top" alt="<?php echo $full_name; ?>" />
+				<img src="<?php echo image_sizer(get_post_thumbnail_id(), 253, 337, 'center', 'center'); ?>" itemprop="image" class="card-img-top" alt="<?php echo $full_name; ?>" />
 			<?php } elseif ( has_post_thumbnail() ) { ?>
 				<?php echo get_the_post_thumbnail( $id, 'medium',  array( 'itemprop' => 'image', 'class' => 'card-img-top' ) ); ?>
 			<?php } else { ?>
@@ -42,11 +39,9 @@
 				<h3 class="card-title">
 					<span class="name"><?php echo $full_name; ?></span>
 					<?php 
-					if(! empty( get_field('physician_title', $id) ) || ! empty( get_field('physician_department', $id) ) ){
+					if(! empty( get_field('physician_title', $id) ) || ! empty( get_field('physician_service_line', $id) ) ){
 						echo '<span class="subtitle">';
 						echo (get_field('physician_title', $id) ? get_term( get_field('physician_title', $id), 'clinical_title' )->name : '');
-						echo ((! empty( get_field('physician_title', $id) )) && (! empty( get_field('physician_department', $id) ) ) ? ',<br/>' : '' );
-						echo (get_field('physician_department', $id) ? get_term( get_field('physician_department', $id), 'department' )->name : '');
 						echo '</span>';
 					}
 					?>

@@ -79,7 +79,7 @@ class pubmed_field_on_change {
 	public function __construct() {
 		// enqueue js extension for acf
 		// do this when ACF in enqueuing scripts
-		//add_action('rwmb_enqueue_scripts', array($this, 'enqueue_script'));
+		add_action('acf/input/admin_enqueue_scripts', array($this, 'enqueue_script'));
 		// ajax action for loading values
 		add_action('wp_ajax_load_content_from_pubmed', array($this, 'load_content_from_pubmed'));
 	} // end public function __construct
@@ -116,7 +116,7 @@ class pubmed_field_on_change {
 			// create authors array, just in case
 			$authors = [];
 			$authorlist = '';
-			$last_author = end(array_keys($result->authors));
+			// $last_author = end(array_keys($result->authors)); // unused
 			foreach ($result->authors as $author) {
 				$name = $author->name;
 				array_push($authors, $name);
@@ -156,7 +156,45 @@ class pubmed_field_on_change {
 		//}
 
 
-	} // end public function load_content_from_relationship
+    } // end public function load_content_from_relationship
+    
+    public function enqueue_script() {
+		// enqueue acf extenstion
+
+		// only enqueue the script on the post page where it needs to run
+		/* *** THIS IS IMPORTANT
+		       ACF uses the same scripts as well as the same field identification
+		       markup (the data-key attribute) if the ACF field group editor
+		       because of this, if you load and run your custom javascript on
+		       the field group editor page it can have unintended side effects
+		       on this page. It is important to always make sure you're only
+		       loading scripts where you need them.
+		*/
+
+		// global $post;
+		// if (!$post ||
+		//     !isset($post->ID) ||
+		//     get_post_type($post->ID) != 'physicians') {
+		// 	return;
+		// }
+
+
+		// the handle should be changed to your own unique handle
+		$handle = 'pubmed_field_on_change';
+
+		// I'm using this method to set the src because
+		// I don't know where this file will be located
+		// you should alter this to use the correct functions
+		// to get the theme, template or plugin path
+		// to set the src value to point to the javascript file
+		$src = UAMS_FAD_ROOT_URL . '/assets/js/acf-pubmed.js';
+		// make this script dependent on acf-input
+		$depends = array('acf-input');
+
+		wp_register_script($handle, $src, $depends);
+
+		wp_enqueue_script($handle);
+	} // end public function enqueue_script
 
 } // end class my_dynmamic_field_on_relationship
 
@@ -201,6 +239,8 @@ function prefix_enqueue_custom_style() {
 //     return $is_main_query;
 // }, 10, 2 );
 
+
+
 // Filter to fix facetwp hash error
 add_filter( 'facetwp_is_main_query', function( $is_main_query, $query ) {
     // if ( 'physicians' == $query->get( 'post_type' ) ) {
@@ -234,6 +274,7 @@ function fwp_disable_auto_refresh() {
 }
 add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
 
+/*
 add_action( 'wp_footer', function() {
     if ( !is_post_type_archive( 'physicians' ) || !is_post_type_archive( 'locations' ) ) {
     ?>
@@ -251,6 +292,7 @@ add_action( 'wp_footer', function() {
     <?php
     }
 }, 10 );
+*/
 
 // FacetWP scripts
 function fwp_facet_scripts() {
@@ -295,6 +337,11 @@ function fwp_facet_scripts() {
 	        	$('.facetwp-facet-condition_checkbox .facetwp-checkbox[data-value="<?php echo get_queried_object()->slug; ?>"]').click();
 				$('.condition-filter').hide();
 			}
+        }
+        if (FWP.loaded) {
+            $('html, body').animate({
+                scrollTop: $('main').offset().top
+            }, 500);
         }
     });
     $(document).on('facetwp-refresh', function() {
@@ -342,64 +389,6 @@ function fwp_facet_scripts() {
 }
 add_action( 'wp_footer', 'fwp_facet_scripts', 100 );
 
-// Adapted from https://gist.github.com/mgibbs189/f2469009a7039159e229efe5a01dab23
-// Add Load more and Load All buttons
-function fwp_load_more() {
-?>
-<script>
-(function($) {
-    $(function() {
-        if ('object' != typeof FWP) {
-            return;
-        }
-        FWP.hooks.addFilter('facetwp/template_html', function(resp, params) {
-            if (FWP.is_load_more) {
-                FWP.is_load_more = false;
-                $('.facetwp-template').append(params.html);
-                return true;
-            }
-            return resp;
-        });
-        $(document).on('click', '.fwp-load-more', function() {
-            $('.fwp-load-more').html('Loading more');
-            $('.fwp-load-more').after('<span class="fwp-loader"></span>');
-            FWP.is_load_more = true;
-            FWP.paged = parseInt(FWP.settings.pager.page) + 1;
-            FWP.soft_refresh = true;
-            FWP.refresh();
-        });
-        $(document).on('click', '.fwp-load-all', function() {
-            $('.fwp-load-all').html('Loading all');
-            $('.fwp-load-all').after('<span class="fwp-loader"></span>');
-            FWP.soft_refresh = true;
-            FWP.extras.per_page = 500
-            FWP.refresh();
-		});
-		$(document).on('click', '.fwp_paged', function() {
-			FWP.fetch_data();
-		});
-        // $(document).on('facetwp-loaded', function() {
-        //     $('.fwp-loader').hide();
-        //     if (FWP.settings.pager.page < FWP.settings.pager.total_pages) {
-        //         if (! FWP.loaded && 1 > $('.fwp-load-more').length) {
-        //             $('.facetwp-template').after('<div class="facetwp__loader"><button class="fwp-load-more btn btn-primary">Show more</button><button class="fwp-load-all btn btn-primary">Show all</button></div>');
-        //         }
-        //         else {
-        //             $('.fwp-load-more').html('Show more').show();
-        //         }
-        //     }
-        //     else {
-        //         $('.fwp-load-more').hide();
-        //         $('.fwp-load-all').hide();
-        //     }
-        // });
-    });
-})(jQuery);
-</script>
-<?php
-}
-// add_action( 'wp_head', 'fwp_load_more', 99 );
-
 // FacetWP Sort
 add_filter( 'facetwp_sort_options', function( $options, $params ) {
 	if ( is_post_type_archive( 'physicians' ) || is_singular( 'physicians' ) ) {
@@ -434,18 +423,6 @@ add_filter( 'facetwp_sort_options', function( $options, $params ) {
      unset( $options['date_asc'] );
     return $options;
 }, 10, 2 );
-
-//FacetWP Count
-// add_filter( 'facetwp_result_count', function( $output, $params ) {
-// 	if ( is_post_type_archive( 'physicians' ) || is_singular( 'physicians' ) ) {
-//     	$output = $params['total'] . ( $params['total'] > 1 ? ' Doctors' : ' Doctor' );
-//     } elseif ( in_array( get_post_type(), array( 'locations' )) ) {//is_post_type_archive( 'locations' ) || is_singular( 'locations' ) ) {
-//     	$output = $params['total'] . ( $params['total'] > 1 ? ' Locations' : ' Location' );
-//     } else {
-//     	$output = $params['total'];
-//     }
-//     return $output;
-// }, 10, 2 );
 
 add_filter( 'facetwp_pager_html', function( $output, $params ) {
     $output = '';
@@ -532,14 +509,14 @@ add_filter( 'facetwp_index_row', function( $params, $class ) {
     return $params;
 }, 10, 2 );
 
-add_filter( 'facetwp_preload_url_vars', function( $url_vars ) {
-    if ( 'physicians' == FWP()->helper->get_uri() ) {
-        if ( empty( $url_vars['searchable'] ) ) {
-            $url_vars['searchable'] = array( '1' );
-        }
-    }
-    return $url_vars;
-} );
+// add_filter( 'facetwp_preload_url_vars', function( $url_vars ) {
+//     if ( 'physicians' == FWP()->helper->get_uri() ) {
+//         if ( empty( $url_vars['searchable'] ) ) {
+//             $url_vars['searchable'] = array( '1' );
+//         }
+//     }
+//     return $url_vars;
+// } );
 
 // Admin Columns
 add_filter('manage_physicians_posts_columns', 'posts_physicians_columns', 10);
@@ -611,17 +588,51 @@ $request = wp_remote_get( 'https://transparency.nrchealth.com/widget/api/org-pro
 
 					$data = json_decode( $body );
 */
-
+add_filter('acf/prepare_field/key=field_physician_portal', 'set_default_portal', 20, 3);
+add_filter('acf/prepare_field/key=field_location_portal', 'set_default_portal', 20, 3);
+function set_default_portal( $field ) {
+    // Only if no value set
+    if( empty( $field['value'] ) ){
+        $term = get_term_by('slug', 'uams-mychart', 'portal');
+        $id = $term->term_id;
+        $default = array($id);
+        // Set field to default value
+        $field[ 'value' ] = $default ;
+    }
+    return $field;
+}
 add_filter('acf/load_value/key=field_physician_languages', 'set_default_language', 20, 3);
 function set_default_language($value, $post_id, $field) {
-	$term = get_term_by('slug', 'english', 'languages');
+    // Only add default content for new posts
+    if ( $value !== null ) {
+        return $value;
+    }
+    
+    $term = get_term_by('slug', 'english', 'languages');
 	$id = $term->term_id;
     $value = array($id);
   	return $value;
 }
+
+// Order for Portal - None slug set to "_none"
+add_filter('acf/fields/taxonomy/wp_list_categories/key=field_location_portal', 'my_taxonomy_query', 10, 2);
+add_filter('acf/fields/taxonomy/wp_list_categories/key=field_physician_portal', 'my_taxonomy_query', 10, 2);
+function my_taxonomy_query( $args, $field ) {
+    
+    // modify args
+    $args['orderby'] = 'slug';
+    $args['order'] = 'ASC';
+    
+    
+    // return
+    return $args;
+    
+}
 // add_filter('acf/fields/relationship/query/key=field_physician_expertise', 'limit_to_post_parent', 10, 3);
 // add_filter('acf/fields/relationship/query/key=field_location_expertise', 'limit_to_post_parent', 10, 3);
 // add_filter('acf/fields/relationship/query/key=field_expertise_associated', 'limit_to_post_parent', 10, 3);
+// add_filter('acf/fields/post_object/query/key=field_condition_expertise', 'limit_to_post_parent', 10, 3);
+// add_filter('acf/fields/post_object/query/key=field_treatment_procedure_expertise', 'limit_to_post_parent', 10, 3);
 function limit_to_post_parent( $args, $field, $post ) {
 
     $args['post_parent'] = 0;
@@ -696,7 +707,7 @@ function uamswp_fad_json_load_point( $paths ) {
 // }
 add_action( 'admin_init', 'uamswp_remove_genesis_term_meta', 11 ); // hook in after genesis adds the tax meta
 function uamswp_remove_genesis_term_meta() {
- $taxonomies = array( 'condition', 'treatment_procedure' );
+ $taxonomies = array( 'condition', 'treatment_procedure', 'portal' );
  foreach( $taxonomies as $taxonomy ) {
  remove_action( "{$taxonomy}_edit_form", 'genesis_taxonomy_archive_options', 10 );
  remove_action( "{$taxonomy}_edit_form", 'genesis_taxonomy_seo_options', 10 );
