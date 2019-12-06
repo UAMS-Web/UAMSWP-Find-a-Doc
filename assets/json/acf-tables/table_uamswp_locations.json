@@ -92,6 +92,14 @@
             }
         },
         {
+            "name": "location_clinic_phone_query",
+            "format": "%d",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_clinic_phone_query"
+            }
+        },
+        {
             "name": "location_phone",
             "map": {
                 "type": "acf_field_name",
@@ -99,10 +107,25 @@
             }
         },
         {
+            "name": "location_appointment_phone_query",
+            "format": "%d",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_appointment_phone_query"
+            }
+        },
+        {
             "name": "location_appointments_phone",
             "map": {
                 "type": "acf_field_name",
                 "identifier": "location_appointments_phone"
+            }
+        },
+        {
+            "name": "location_return_appointments_phone",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_return_appointments_phone"
             }
         },
         {
