@@ -37,6 +37,5 @@
                 <a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a>
                 <?php } ?>
             </div>
-        </p>
     </div><!-- .card-body -->
 </div><!-- .card --> 
