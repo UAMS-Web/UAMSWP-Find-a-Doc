@@ -203,8 +203,15 @@ while ( have_posts() ) : the_post(); ?>
                     <?php } ?>
                     <?php 
                         $l = 1;
+                        $location_valid = false;
                         $locations = get_field('physician_locations');
-                        if( $locations ): ?>
+                        foreach( $locations as $location ) {
+                            if ( get_post_status ( $location ) == 'publish' ) {
+                               $location_valid = true;
+                               $break;
+                            }
+                        }
+                        if( $locations && $location_valid ): ?>
                             <?php if ($eligible_appt) { ?>
                                 <h2>Primary Appointment Location</h2>
                             <?php } else { ?>
@@ -567,7 +574,16 @@ while ( have_posts() ) : the_post(); ?>
                 </div>
             </section>
         <?php endif; ?>
-        <?php if( $locations ): ?>
+        <?php 
+        $location_valid = false;
+        $locations = get_field('physician_locations');
+        foreach( $locations as $location ) {
+            if ( get_post_status ( $location ) == 'publish' ) {
+                $location_valid = true;
+                $break;
+            }
+        }
+        if( $locations && $location_valid ): ?>
         <section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="locations">
             <div class="row">
                 <div class="col-12">
