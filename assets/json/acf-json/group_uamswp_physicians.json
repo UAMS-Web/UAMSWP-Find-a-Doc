@@ -305,7 +305,7 @@
             "type": "taxonomy",
             "label": "Clinical Job Title",
             "instructions": "General Title for Patients \/ Public",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
@@ -348,6 +348,44 @@
             },
             "multiple": 0,
             "allow_null": 1
+        },
+        "field_physician_pid": {
+            "key": "field_physician_pid",
+            "name": "physician_pid",
+            "type": "number",
+            "label": "PID",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        "field_physician_npi": {
+            "key": "field_physician_npi",
+            "name": "physician_npi",
+            "type": "number",
+            "label": "NPI",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         },
         "field_physician_clinical_bio": {
             "key": "field_physician_clinical_bio",
@@ -436,7 +474,7 @@
             "name": "physician_locations",
             "type": "relationship",
             "label": "Locations",
-            "instructions": "Please put primary location first, will displayed in this order.",
+            "instructions": "Please put primary location first. You may choose the order in which locations display.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -493,7 +531,7 @@
             "type": "taxonomy",
             "label": "Portal (Optional)",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
@@ -520,7 +558,7 @@
             "type": "taxonomy",
             "label": "Patient Type(s)",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
@@ -734,6 +772,11 @@
                         "field": "field_physician_eligible_appointments",
                         "operator": "==",
                         "value": "1"
+                    },
+                    {
+                        "field": "field_physician_clinical_tab",
+                        "operator": "==",
+                        "value": "false"
                     }
                 ]
             ],
@@ -814,7 +857,7 @@
             "name": "physician_conditions",
             "type": "taxonomy",
             "label": "Conditions Treated",
-            "instructions": "Will displayed in this order.",
+            "instructions": "Will be displayed in the order they are entered. You may re-arrange as needed.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -839,7 +882,7 @@
             "name": "physician_treatments",
             "type": "taxonomy",
             "label": "Treatments & Procedures",
-            "instructions": "Will displayed in this order.",
+            "instructions": "Will be displayed in the order they are entered. You may re-arrange as needed.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -891,44 +934,6 @@
                 "acfe_bidirectional_enabled": "0"
             },
             "multiple": 0
-        },
-        "field_physician_pid": {
-            "key": "field_physician_pid",
-            "name": "physician_pid",
-            "type": "number",
-            "label": "PID",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        "field_physician_npi": {
-            "key": "field_physician_npi",
-            "name": "physician_npi",
-            "type": "number",
-            "label": "NPI",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
         },
         "field_physician_academic_profile_tab": {
             "key": "field_physician_academic_profile_tab",
@@ -1432,7 +1437,7 @@
             "name": "physician_associations",
             "type": "taxonomy",
             "label": "Associations",
-            "instructions": "",
+            "instructions": "Examples: Fellow of the American College of Obstetricians and Gynecologists, American Society of Breast Surgeons, American Burn Association, etc.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
