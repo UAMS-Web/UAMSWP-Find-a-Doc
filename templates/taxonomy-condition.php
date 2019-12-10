@@ -174,8 +174,8 @@
 			<div class="row">
 				<div class="col-12">
 					<h2 class="module-title">Locations Where <?php echo single_cat_title( '', false ); ?> Is Treated</h2>
-					<div class="card-list-container">
-						<div class="card-list card-list-locations">
+					<div class="card-list-container location-card-list-container">
+						<div class="card-list">
 						<?php 
 							while ( $location_query->have_posts() ) : $location_query->the_post();
 								$id = get_the_ID();
