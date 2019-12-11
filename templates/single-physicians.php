@@ -616,6 +616,7 @@ while ( have_posts() ) : the_post(); ?>
                                         <a href="<?php the_permalink(  $location ); ?>" class="btn btn-primary stretched-link" aria-label="Go to location page for <?php echo get_the_title( $location ); ?>">View Location</a>
                                     </div>
                                 </div>
+                                </div>
                                 <?php $l++; ?>
                             <?php } ?>
                         <?php endforeach; ?>
