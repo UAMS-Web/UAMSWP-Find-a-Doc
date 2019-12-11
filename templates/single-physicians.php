@@ -607,8 +607,6 @@ while ( have_posts() ) : the_post(); ?>
                                         <?php if (get_field('location_return_appointments_phone', $location)) { ?>
                                         <dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone', $location) ); ?></a> (Returning Patients)</dd>
                                         <?php } } ?>
-                                        </dl>
-                                    <?php } ?>
                                 </div>
                                 <div class="btn-container">
                                     <div class="inner-container">
