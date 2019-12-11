@@ -863,7 +863,7 @@
             "key": "field_physician_portal",
             "name": "physician_portal",
             "type": "taxonomy",
-            "label": "Portal (Optional)",
+            "label": "Portal",
             "instructions": "",
             "required": 1,
             "conditional_logic": 0,
