@@ -77,15 +77,27 @@ while ( have_posts() ) : the_post(); ?>
                     <dl>
                     <?php // Display area(s) of expertise
                     $expertises =  get_field('physician_expertise');
-                    if ($expertises && !empty($expertises)) { ?>
+                    $expertise_valid = false;
+                    if ($expertises && !empty($expertises)) { 
+                        foreach( $expertises as $expertise ) {
+                            if ( get_post_status ( $expertise ) == 'publish' ) {
+                               $expertise_valid = true;
+                               $break;
+                            }
+                        }
+                        if ( $expertise_valid ) {
+                        ?>
                         <dt>Area<?php echo( count($expertises) > 1 ? 's' : '' );?> of Expertise</dt>
                         <dd>
                             <?php foreach( $expertises as $expertise ) {
                                 $id = $expertise; 
-                                echo '<dd><a href="' . get_permalink($id) . '" target="_self">' . get_the_title($id) . '</a></dd>';
+                                if ( get_post_status ( $expertise ) == 'publish' ) {
+                                    echo '<dd><a href="' . get_permalink($id) . '" target="_self">' . get_the_title($id) . '</a></dd>';
+                                }
                             } ?>
                         </dd>                 
-                    <?php } ?>
+                        <?php }
+                    } ?>
                     <?php  // Display if they will provide second opinions
                         $second_opinion = get_field('physician_second_opinion');
                         if ($second_opinion) { ?>
@@ -191,17 +203,26 @@ while ( have_posts() ) : the_post(); ?>
                     <?php } ?>
                     <?php 
                         $l = 1;
+                        $location_valid = false;
                         $locations = get_field('physician_locations');
-                        if( $locations ): ?>
+                        foreach( $locations as $location ) {
+                            if ( get_post_status ( $location ) == 'publish' ) {
+                               $location_valid = true;
+                               $break;
+                            }
+                        }
+                        if( $locations && $location_valid ): ?>
                             <?php if ($eligible_appt) { ?>
                                 <h2>Primary Appointment Location</h2>
                             <?php } else { ?>
                                 <h2>Primary Location</h2>
                             <?php } // endif ?>
                             <?php foreach( $locations as $location ):
-                                    if ( 2 > $l ){ ?>
-                                <h3 class="h4"><?php echo get_the_title( $location ); ?></h3>
-                                <p><?php echo get_field( 'location_address_1', $location ); ?><br/>
+                                    if ( 2 > $l ){
+	                                    if ( get_post_status ( $location ) == 'publish' ) {
+                                    ?>
+                                <p><strong><?php echo get_the_title( $location ); ?></strong><br />
+                                <?php echo get_field( 'location_address_1', $location ); ?><br/>
                                 <?php echo ( get_field( 'location_address_2', $location ) ? get_field( 'location_address_2', $location ) . '<br/>' : ''); ?>
                                 <?php echo get_field( 'location_city', $location ); ?>, <?php echo get_field(' location_state', $location ); ?> <?php echo get_field( 'location_zip', $location ); ?>
                                 <?php $map = get_field( 'location_map', $location ); ?>
@@ -221,7 +242,7 @@ while ( have_posts() ) : the_post(); ?>
                                     </dl>
                                 <?php } ?>
                                 <div class="btn-container">
-                                    <a class="btn btn-primary" href="<?php echo get_permalink( $location, true ); ?>">
+                                    <a class="btn btn-primary" href="<?php echo get_the_permalink( $location ); ?>">
                                         View Location
                                     </a>
                                     <a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of locations for this doctor">
@@ -229,6 +250,7 @@ while ( have_posts() ) : the_post(); ?>
                                     </a>
                                 </div>
                                 <?php $l++;
+	                                }
                                 } ?>
 							<?php endforeach;
 								// wp_reset_postdata(); ?>
@@ -263,7 +285,7 @@ while ( have_posts() ) : the_post(); ?>
             $accept_new = get_field('physician_accepting_patients');
             $appointment_phone_name = 'the main UAMS appointment line'; // default (UAMS)
             $appointment_phone = '5016868000'; // default (UAMS)
-        
+            $show_portal = false;
             // Portal
             if ( get_field('physician_portal')) {
                 $portal = get_term(get_field('physician_portal'), "portal");
@@ -367,24 +389,36 @@ while ( have_posts() ) : the_post(); ?>
             include( UAMS_FAD_PATH . '/templates/loops/treatments-loop.php' );
         endif;
         $expertises =  get_field('physician_expertise');
-        if( $expertises ): ?>
-            <section class="uams-module expertise-list bg-auto" id="expertise">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <h2 class="module-title"><?php echo $short_name; ?>'s Areas of Expertise</h2>
-                            <div class="card-list-container">
-                                <div class="card-list">
-                                <?php foreach( $expertises as $expertise ) {
-                                    $id = $expertise; 
-                                    include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-                                } ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        <?php 
+        $expertise_valid = false;
+        if( $expertises ):
+	        foreach( $expertises as $expertise ) {
+	            if ( get_post_status ( $expertise ) == 'publish' ) {
+	                $expertise_valid = true;
+                    break;
+	            }
+	        }
+	        if ( $expertise_valid ) {
+	        ?>
+	            <section class="uams-module expertise-list bg-auto" id="expertise">
+	                <div class="container-fluid">
+	                    <div class="row">
+	                        <div class="col-12">
+	                            <h2 class="module-title"><?php echo $short_name; ?>'s Areas of Expertise</h2>
+	                            <div class="card-list-container">
+	                                <div class="card-list">
+	                                <?php foreach( $expertises as $expertise ) {
+	                                    $id = $expertise;
+	                                    if ( get_post_status ( $expertise ) == 'publish' ) {
+	                                        include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+	                                    }
+	                                } ?>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </section>
+	        <?php
+	        }
         endif;
         ?>
         <?php 
@@ -528,7 +562,16 @@ while ( have_posts() ) : the_post(); ?>
                 </div>
             </section>
         <?php endif; ?>
-        <?php if( $locations ): ?>
+        <?php 
+        $location_valid = false;
+        $locations = get_field('physician_locations');
+        foreach( $locations as $location ) {
+            if ( get_post_status ( $location ) == 'publish' ) {
+                $location_valid = true;
+                $break;
+            }
+        }
+        if( $locations && $location_valid ): ?>
         <section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="locations">
             <div class="row">
                 <div class="col-12">
@@ -536,46 +579,42 @@ while ( have_posts() ) : the_post(); ?>
                     <div class="card-list-container location-card-list-container">
                         <div class="card-list">
                         <?php $l = 1; ?>
-                        <?php foreach( $locations as $location ): ?>
-                            <div class="card">
-                                <?php if ( has_post_thumbnail($location) ) { ?>
-                                <?php echo get_the_post_thumbnail($location, 'aspect-16-9-small', ['class' => 'card-img-top']); ?>
-                                <?php } else { ?>
-                                <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" alt="<?php echo get_the_title( $location ); ?>" class="card-image-top" />
-                                <?php } ?>
-                                <div class="card-body">
-                                    <h3 class="card-title">
-                                        <span class="name"><?php echo get_the_title( $location ); ?></span>
-                                        <?php  if ( 1 == $l ) { ?>
-                                            <span class="subtitle">Primary Location</span>
-                                        <?php } ?>
-                                    </h3>
-                                    <p class="card-text">
-                                        <?php echo get_field('location_address_1', $location ); ?><br/>
-                                        <?php echo ( get_field('location_address_2', $location ) ? get_field('location_address_2', $location ) . '<br/>' : ''); ?>
-                                        <?php echo get_field('location_city', $location ); ?>, <?php echo get_field('location_state', $location ); ?> <?php echo get_field('location_zip', $location); ?>
-                                    </p>
-                                    <?php if (get_field('location_phone', $location)) { ?>
-                                        <dl>
-                                            <dt>Appointment Phone Number<?php echo get_field('field_location_appointment_phone_query', $location) ? 's' : ''; ?></dt>
-                                            <?php if (get_field('location_new_appointments_phone', $location) && get_field('location_clinic_phone_query', $location)) { ?>
-                                                <dd><a href="tel:<?php echo format_phone_dash( get_field('location_new_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_new_appointments_phone', $location) ); ?></a><?php echo get_field('field_location_appointment_phone_query', $location) ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
-                                                <?php if (get_field('location_return_appointments_phone', $location) && get_field('field_location_appointment_phone_query', $location)) { ?>
-                                                    <dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone', $location) ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
-                                                <?php } ?>
-                                            <?php } else { ?>
-                                                <dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone', $location) ); ?></a></dd>
-                                            <?php } ?>
-                                        </dl>
+                        <?php foreach( $locations as $location ): 
+                            if ( get_post_status ( $location ) == 'publish' ) { ?>
+                                <div class="card">
+                                    <?php if ( has_post_thumbnail($location) ) { ?>
+                                    <?php echo get_the_post_thumbnail($location, 'aspect-16-9-small', ['class' => 'card-img-top']); ?>
+                                    <?php } else { ?>
+                                    <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" alt="<?php echo get_the_title( $location ); ?>" class="card-image-top" />
                                     <?php } ?>
+                                    <div class="card-body">
+                                            <h3 class="card-title">
+                                                <span class="name"><?php echo get_the_title( $location ); ?></span>
+                                                <?php  if ( 1 == $l ) { ?>
+                                                    <span class="subtitle">Primary Location</span>
+                                                <?php } ?>
+                                            </h3>
+                                        <p class="card-text"><?php echo get_field('location_address_1', $location ); ?><br/>
+                                        <?php echo ( get_field('location_address_2', $location ) ? get_field('location_address_2', $location ) . '<br/>' : ''); ?>
+                                        <?php echo get_field('location_city', $location ); ?>, <?php echo get_field('location_state', $location ); ?> <?php echo get_field('location_zip', $location); ?></p>
+                                        <?php if (get_field('location_phone', $location)) { ?>
+                                        <dt>Clinic Phone Number</dt>
+                                        <dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone', $location) ); ?></a></dd>
+                                        <?php } ?>
+                                        <?php if (get_field('location_new_appointments_phone')) { ?>
+                                        <dt>Appointments Phone Number<?php echo get_field('field_location_appointment_phone_query', $location) ? 's' : ''; ?></dt>
+                                        <dd><a href="tel:<?php echo format_phone_dash( get_field('location_new_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_new_appointments_phone', $location) ); ?></a><?php echo get_field('field_location_appointment_phone_query', $location) ? ' (New Patients)' : ''; ?></dd>
+                                        <?php if (get_field('location_return_appointments_phone', $location)) { ?>
+                                        <dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone', $location) ); ?></a> (Returning Patients)</dd>
+                                        <?php } } ?>
                                 </div>
                                 <div class="btn-container">
                                     <div class="inner-container">
                                         <a href="<?php the_permalink(  $location ); ?>" class="btn btn-primary stretched-link" aria-label="Go to location page for <?php echo get_the_title( $location ); ?>">View Location</a>
                                     </div>
                                 </div>
-                            </div>
-                            <?php $l++; ?>
+                                <?php $l++; ?>
+                            <?php } ?>
                         <?php endforeach; ?>
                         </div>
                     </div>
@@ -660,7 +699,7 @@ while ( have_posts() ) : the_post(); ?>
                                 </div>
                             </div>
                         </div>
-                        <script src="https://transparency.nrchealth.com/widget/v2/uams/npi/1841276169/lotw.js" async></script>                           
+                        <script src="https://transparency.nrchealth.com/widget/v2/uams/npi/<?php echo $npi; ?>/lotw.js" async></script>                           
                         <?php // endif; ?>
                     </div>
                 </div>
