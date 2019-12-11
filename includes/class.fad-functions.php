@@ -616,6 +616,7 @@ function set_default_language($value, $post_id, $field) {
     $value = array($id);
   	return $value;
 }
+
 // Order for Portal - None slug set to "_none"
 add_filter('acf/fields/taxonomy/wp_list_categories/key=field_location_portal', 'my_taxonomy_query', 10, 2);
 add_filter('acf/fields/taxonomy/wp_list_categories/key=field_physician_portal', 'my_taxonomy_query', 10, 2);

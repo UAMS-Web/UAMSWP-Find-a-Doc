@@ -26,10 +26,7 @@
 	<div class="card">
 		<picture>
 			<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
-				<source srcset="<?php echo image_sizer(get_post_thumbnail_id($id), 506, 675, 'center', 'center'); ?>"
-					media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), 
-					(min-width: 1px) and (min-resolution: 192dpi)">
-				<source srcset="<?php echo image_sizer(get_post_thumbnail_id($id), 253, 337, 'center', 'center'); ?>"
+				<source srcset="<?php echo image_sizer(get_post_thumbnail_id($id), 253, 337, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id($id), 506, 675, 'center', 'center'); ?> 2x"
 					media="(min-width: 1px)">
 				<img src="<?php echo image_sizer(get_post_thumbnail_id(), 253, 337, 'center', 'center'); ?>" itemprop="image" class="card-img-top" alt="<?php echo $full_name; ?>" />
 			<?php } elseif ( has_post_thumbnail() ) { ?>
@@ -45,8 +42,6 @@
 					if(! empty( get_field('physician_title', $id) ) || ! empty( get_field('physician_service_line', $id) ) ){
 						echo '<span class="subtitle">';
 						echo (get_field('physician_title', $id) ? get_term( get_field('physician_title', $id), 'clinical_title' )->name : '');
-						echo ((! empty( get_field('physician_title', $id) )) && (! empty( get_field('physician_service_line', $id) ) ) ? ',<br/>' : '' );
-						echo (get_field('physician_service_line', $id) ? get_term( get_field('physician_service_line', $id), 'service_line' )->name : '');
 						echo '</span>';
 					}
 					?>

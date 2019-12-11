@@ -229,15 +229,18 @@ while ( have_posts() ) : the_post(); ?>
                                 <!-- <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a> -->
                                 </p>
                                 <?php if (get_field('location_phone', $location)) { ?>
-                                <dt>Clinic Phone Number</dt>
-                                <dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone', $location) ); ?></a></dd>
+                                    <dl>
+                                        <dt>Appointment Phone Number<?php echo get_field('field_location_appointment_phone_query', $location) ? 's' : ''; ?></dt>
+                                        <?php if (get_field('location_new_appointments_phone', $location) && get_field('location_clinic_phone_query', $location)) { ?>
+                                            <dd><a href="tel:<?php echo format_phone_dash( get_field('location_new_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_new_appointments_phone', $location) ); ?></a><?php echo get_field('field_location_appointment_phone_query', $location) ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
+                                            <?php if (get_field('location_return_appointments_phone', $location) && get_field('field_location_appointment_phone_query', $location)) { ?>
+                                                <dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone', $location) ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
+                                            <?php } ?>
+                                        <?php } else { ?>
+                                            <dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone', $location) ); ?></a></dd>
+                                        <?php } ?>
+                                    </dl>
                                 <?php } ?>
-                                <?php if (get_field('location_new_appointments_phone')) { ?>
-                                <dt>Appointments Phone Number<?php echo get_field('field_location_appointment_phone_query', $location) ? 's' : ''; ?></dt>
-                                <dd><a href="tel:<?php echo format_phone_dash( get_field('location_new_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_new_appointments_phone', $location) ); ?></a><?php echo get_field('field_location_appointment_phone_query', $location) ? ' (New Patients)' : ''; ?></dd>
-                                <?php if (get_field('location_return_appointments_phone', $location)) { ?>
-                                <dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone', $location) ); ?></a> (Returning Patients)</dd>
-                                <?php } } ?>
                                 <div class="btn-container">
                                     <a class="btn btn-primary" href="<?php echo get_the_permalink( $location ); ?>">
                                         View Location
@@ -257,30 +260,15 @@ while ( have_posts() ) : the_post(); ?>
                 <div class="col-12 col-xs px-0 px-xs-4 px-sm-8 order-1 image">
                     <picture>
                     <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center'); ?>"
-                            media="(min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2), 
-                            (min-width: 1200px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 389, 519, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 389, 519, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center'); ?> 2x"
                             media="(min-width: 1200px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 612, 816, 'center', 'center'); ?>"
-                            media="(min-width: 992px) and (-webkit-min-device-pixel-ratio: 2), 
-                            (min-width: 992px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 306, 408, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 306, 408, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 612, 816, 'center', 'center'); ?> 2x"
                             media="(min-width: 992px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 364, 486, 'center', 'center'); ?>"
-                            media="(min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), 
-                            (min-width: 768px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 182, 243, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 182, 243, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 364, 486, 'center', 'center'); ?> 2x"
                             media="(min-width: 768px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 172, 230, 'center', 'center'); ?>"
-                            media="(min-width: 576px) and (-webkit-min-device-pixel-ratio: 2), 
-                            (min-width: 576px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 86, 115, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 86, 115, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 172, 230, 'center', 'center'); ?> 2x"
                             media="(min-width: 576px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 760, 1013, 'center', 'center'); ?>"
-                            media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), 
-                            (min-width: 1px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 380, 507, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 380, 507, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 760, 1013, 'center', 'center'); ?> 2x"
                             media="(min-width: 1px)">
                         <img src="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center'); ?>" alt="<?php echo $full_name; ?>" />
                         <?php } else { ?>
@@ -588,7 +576,7 @@ while ( have_posts() ) : the_post(); ?>
             <div class="row">
                 <div class="col-12">
                     <h2 class="module-title">Locations Where <?php echo $short_name; ?> Practices</h2>
-                    <div class="card-list-container">
+                    <div class="card-list-container location-card-list-container">
                         <div class="card-list">
                         <?php $l = 1; ?>
                         <?php foreach( $locations as $location ): 
@@ -619,6 +607,11 @@ while ( have_posts() ) : the_post(); ?>
                                         <?php if (get_field('location_return_appointments_phone', $location)) { ?>
                                         <dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone', $location) ); ?></a> (Returning Patients)</dd>
                                         <?php } } ?>
+                                        </dl>
+                                    <?php } ?>
+                                </div>
+                                <div class="btn-container">
+                                    <div class="inner-container">
                                         <a href="<?php the_permalink(  $location ); ?>" class="btn btn-primary stretched-link" aria-label="Go to location page for <?php echo get_the_title( $location ); ?>">View Location</a>
                                     </div>
                                 </div>
