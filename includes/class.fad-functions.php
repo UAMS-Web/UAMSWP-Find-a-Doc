@@ -200,7 +200,7 @@ class pubmed_field_on_change {
 
 // Pubmed API shortcode
 // Example: [pubmed terms="Chernoff%20R%5BAuthor%5D" count="10"]
-function pubmed_register() {
+function fad_script_register() {
     global $post_type;
 	if ( !is_admin() ) {
 		wp_register_script( 'pubmed-api', UAMS_FAD_ROOT_URL . 'assets/js/pubmed-api-async.js', array('jquery'), null, true );
@@ -208,10 +208,13 @@ function pubmed_register() {
     if ( (is_single() && ('locations' == $post_type)) ) {
         wp_enqueue_style( 'leaflet-css', UAMS_FAD_ROOT_URL . 'assets/leaflet/leaflet.css', array(), '1.1', 'all');
         wp_enqueue_script( 'leaflet-js', UAMS_FAD_ROOT_URL . 'assets/leaflet/leaflet-bing.js', array(), null, false );
-	}
+    }
+    if ( (is_archive() && ('physicians' == $post_type)) ) {
+        wp_enqueue_script( 'mobile-filter-toggle', UAMS_FAD_ROOT_URL . 'assets/js/mobile-filter-toggle.js', array('jquery'), null, false );
+    }
 	wp_enqueue_style( 'fad-css', UAMS_FAD_ROOT_URL . 'assets/css/style.css', array(), '1.0', 'all');
 }
-add_action( 'wp_enqueue_scripts', 'pubmed_register' );
+add_action( 'wp_enqueue_scripts', 'fad_script_register' );
 function uams_pubmed_shortcode( $atts ) {
 
 	/* call the javascript to support the api */
@@ -225,10 +228,10 @@ function uams_pubmed_shortcode( $atts ) {
 }
 add_shortcode( 'pubmed', 'uams_pubmed_shortcode' );
 
-add_action( 'rwmb_enqueue_scripts', 'prefix_enqueue_custom_style' );
-function prefix_enqueue_custom_style() {
-    wp_enqueue_style( 'admin-mb-style', get_stylesheet_directory_uri() . '/admin.css' );
-}
+// add_action( 'rwmb_enqueue_scripts', 'prefix_enqueue_custom_style' );
+// function prefix_enqueue_custom_style() {
+//     wp_enqueue_style( 'admin-mb-style', get_stylesheet_directory_uri() . '/admin.css' );
+// }
 
 /* FacetWP functions */
 // factwp Main Query fix

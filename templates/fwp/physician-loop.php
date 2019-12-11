@@ -53,8 +53,8 @@
 						<div class="col-12 primary">
 						<h3 class="h4">
 							<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name; ?>"><span class="name"><?php echo $full_name; ?></span></a>
-							<?php if ( get_field('physician_service_line') ) { ?>
-							<span class="subtitle"><?php echo get_term( get_field('physician_service_line'), 'service_line' )->name; ?></span>
+							<?php if ( get_field('physician_title') ) { ?>
+							<span class="subtitle"><?php echo get_term( get_field('physician_title'), 'clinical_title' )->name; ?></span>
 							<?php } // endif ?>
 						</h3>
 						<?php
