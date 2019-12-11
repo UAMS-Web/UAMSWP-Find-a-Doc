@@ -610,12 +610,12 @@ while ( have_posts() ) : the_post(); ?>
                                                 <?php } ?>
                                             </dl>
                                         <?php } ?>
-                                </div>
-                                <div class="btn-container">
-                                    <div class="inner-container">
-                                        <a href="<?php the_permalink(  $location ); ?>" class="btn btn-primary stretched-link" aria-label="Go to location page for <?php echo get_the_title( $location ); ?>">View Location</a>
                                     </div>
-                                </div>
+                                    <div class="btn-container">
+                                        <div class="inner-container">
+                                            <a href="<?php the_permalink(  $location ); ?>" class="btn btn-primary stretched-link" aria-label="Go to location page for <?php echo get_the_title( $location ); ?>">View Location</a>
+                                        </div>
+                                    </div>
                                 </div>
                                 <?php $l++; ?>
                             <?php } ?>
