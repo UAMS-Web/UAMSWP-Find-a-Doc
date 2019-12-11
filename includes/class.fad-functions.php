@@ -760,3 +760,60 @@ function rlv_tax_excerpt_term_fields($content, $term) {
     }
     return $content;
 }
+// AJAX
+function uamswp_ajax_scripts() { 
+
+    // Register the script
+    wp_register_script( 'uamswp-loadmore', UAMS_FAD_ROOT_URL . 'assets/js/uamswp-loadmore.js', array('jquery'), false, true );
+ 
+    // Localize the script with new data
+    $script_data_array = array(
+        'ajaxurl' => admin_url( 'admin-ajax.php' ),
+        'security' => wp_create_nonce( 'load_more_posts' )
+    );
+    wp_localize_script( 'uamswp-loadmore', 'uamswp_loadmore', $script_data_array );
+ 
+    // Enqueued script with localized data.
+    wp_enqueue_script( 'uamswp-loadmore' );
+}
+add_action( 'wp_enqueue_scripts', 'uamswp_ajax_scripts' );
+
+
+add_action('wp_ajax_load_posts_by_ajax', 'uamswp_load_by_ajax_callback');
+add_action('wp_ajax_nopriv_load_posts_by_ajax', 'uamswp_load_by_ajax_callback');
+
+function uamswp_load_by_ajax_callback(){
+
+    $ppp = (isset($_POST["ppp"])) ? $_POST["ppp"] : 2; // Set this default value
+    $page = $_POST['page'];
+    $ids = $_POST['postid'];
+
+    $ids_array = explode(',', $ids);
+
+    header("Content-Type: text/html");
+
+    $args = array(
+        // 'suppress_filters' => true,
+        'post_type' => 'physicians',
+        'post_status' => 'publish',
+        "orderby" => "title",
+        "order" => "ASC",
+        'posts_per_page' => $ppp,
+        'paged'    => $page,
+        'post__in' => $ids_array,
+        
+    );
+
+    $loop = new WP_Query($args);
+
+    $out = '';
+
+    if ($loop -> have_posts()) :  while ($loop -> have_posts()) : $loop -> the_post();
+        
+        $id = get_the_ID();
+        $out .= include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' ); 
+
+    endwhile;
+    endif;
+    wp_die();
+}
