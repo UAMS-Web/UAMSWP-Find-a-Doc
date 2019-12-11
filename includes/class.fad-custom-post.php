@@ -1371,7 +1371,8 @@ function add_roles_on_plugin_activation() {
        			)
        	);
    }
-register_activation_hook( __FILE__, 'add_roles_on_plugin_activation' );
+// register_activation_hook( __FILE__, 'add_roles_on_plugin_activation' );
+add_action( 'init', 'add_roles_on_plugin_activation', 0 );
 
 function add_theme_caps() {
     // gets the author role
