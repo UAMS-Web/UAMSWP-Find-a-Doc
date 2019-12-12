@@ -30,6 +30,7 @@ $treatment_title = get_field('treatments_archive_headline', 'option');
 $treatment_text = get_field('treatments_archive_intro_text', 'option');
 
 get_header(); ?>
+<?php genesis_breadcrumb(); ?>
 <div class="content-sidebar-wrap row">
     <main class="content col-sm-12" id="genesis-content">
         <article class="entry">

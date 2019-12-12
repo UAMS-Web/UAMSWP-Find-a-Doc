@@ -5,7 +5,6 @@
  *  Designed for services single
  *
  */
-// add_action( 'genesis_after_header', 'page_options', 5 );
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
 // Removes entry meta from entry footer incl. markup.
@@ -36,6 +35,8 @@ add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 14 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 16 );
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 
+add_action( 'genesis_after_header', 'fad_breadcrumbs' );
+
 function uamswp_expertise_physicians() {
     $physicians = get_field( "expertise_physicians" );
     $postsPerPage = 12; // Set this value to preferred value
@@ -54,7 +55,6 @@ function uamswp_expertise_physicians() {
     $physicians_query = New WP_Query( $args );
     if($physicians_query->have_posts()) {   
     ?>
-?>
     <section class="uams-module bg-auto" id="doctors">
         <div class="container-fluid">
             <div class="row">

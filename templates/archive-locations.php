@@ -3,7 +3,7 @@
     add_filter( 'facetwp_template_use_archive', '__return_true' );
 
  ?>
-
+<?php genesis_breadcrumb(); ?>
 <main class="container-fluid p-8 p-sm-10 location-list bg-auto" id="locations">
     <div class="row">
         <div class="col-12">

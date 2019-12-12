@@ -6,7 +6,7 @@
   $service_text = get_field('service_archive_intro_text', 'option');
 
  ?>
-
+<?php genesis_breadcrumb(); ?>
 <div class="content-sidebar-wrap row">
     <div class="content col-sm-12" id="genesis-content">
         <section class="archive-description">
