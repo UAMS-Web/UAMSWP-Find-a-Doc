@@ -404,48 +404,50 @@ while ( have_posts() ) : the_post(); ?>
 	endif; ?>
 	<?php
 	$physicians = get_field( 'location_physicians' );
-	$postsPerPage = 2; // Set this value to preferred value
-    if(count($physicians) <= $postsCutoff ) {
-        $postsPerPage = -1;
-    }
-    $args = array(
-        "post_type" => "physicians",
-        "post_status" => "publish",
-        "posts_per_page" => $postsPerPage,
-        "orderby" => "title",
-        "order" => "ASC",
-        "post__in" => $physicians
-    );
-    $physicians_query = New WP_Query( $args );
-    if($physicians_query->have_posts()) { 
-	?>
-		<section class="uams-module bg-auto" id="doctors">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title">Providers at <?php the_title(); ?></h2>
-						<div class="card-list-container">
-							<div class="card-list card-list-doctors">
-								<?php 
-									while ($physicians_query->have_posts()) : $physicians_query->the_post();
-										$id = get_the_ID();
-										include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
-									endwhile;
-									wp_reset_postdata();
-								?>
+	if($physicians) {
+		$postsPerPage = 2; // Set this value to preferred value
+		if(count($physicians) <= $postsCutoff ) {
+			$postsPerPage = -1;
+		}
+		$args = array(
+			"post_type" => "physicians",
+			"post_status" => "publish",
+			"posts_per_page" => $postsPerPage,
+			"orderby" => "title",
+			"order" => "ASC",
+			"post__in" => $physicians
+		);
+		$physicians_query = New WP_Query( $args );
+		if($physicians_query->have_posts()) { 
+		?>
+			<section class="uams-module bg-auto" id="doctors">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<h2 class="module-title">Providers at <?php the_title(); ?></h2>
+							<div class="card-list-container">
+								<div class="card-list card-list-doctors">
+									<?php 
+										while ($physicians_query->have_posts()) : $physicians_query->the_post();
+											$id = get_the_ID();
+											include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+										endwhile;
+										wp_reset_postdata();
+									?>
+								</div>
 							</div>
+							<?php if ($postsPerPage !== -1) { ?>
+							<div class="more">
+								<button class="loadmore btn btn-primary stretched-link" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>">Load More</button>
+							</div>
+							<?php } ?>
 						</div>
-						<?php if ($postsPerPage !== -1) { ?>
-						<div class="more">
-							<button class="loadmore btn btn-primary stretched-link" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>">Load More</button>
-						</div>
-						<?php } ?>
 					</div>
 				</div>
-			</div>
-		</section>
-	<?php
-    }
+			</section>
+		<?php
+		}
+	}
 	?>
 	<?php // load all 'conditions' terms for the post
 	$title_append = ' at ' . get_the_title();
