@@ -43,7 +43,8 @@
 						<?php } elseif ( has_post_thumbnail() ) { ?>
 							<?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
 						<?php } else { ?>
-							<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.svg" alt="" />
+							<source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.svg" media="(min-width: 1px)">
+							<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg" alt="" />
 						<?php } ?>
 						</picture>
 					</a>
