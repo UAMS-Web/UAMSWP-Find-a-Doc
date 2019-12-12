@@ -46,6 +46,10 @@
 					}
 					?>
 				</h3>
-			<a href="<?php the_permalink($id); ?>" class="btn btn-primary stretched-link" aria-label="View profile for <?php echo $full_name; ?>">View Profile</a>
+		</div>
+		<div class="btn-container">
+			<div class="inner-container">
+				<a href="<?php the_permalink($id); ?>" class="btn btn-primary stretched-link" aria-label="View profile for <?php echo $full_name; ?>">View Profile</a>
+			</div>
 		</div>
 	</div>
