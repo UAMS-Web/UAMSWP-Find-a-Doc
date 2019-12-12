@@ -587,7 +587,7 @@ while ( have_posts() ) : the_post(); ?>
                                     <?php } else { ?>
                                     <picture>
                                         <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
-                                        <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" class="card-image-top" />
+                                        <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" class="card-img-top" />
                                     </picture>
                                     <?php } ?>
                                     <div class="card-body">
