@@ -32,7 +32,8 @@
 			<?php } elseif ( has_post_thumbnail() ) { ?>
 				<?php echo get_the_post_thumbnail( $id, 'medium',  array( 'itemprop' => 'image', 'class' => 'card-img-top' ) ); ?>
 			<?php } else { ?>
-				<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.svg" alt="" />
+				<source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.svg" media="(min-width: 1px)">
+				<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg" alt="" />
 			<?php } ?>
 		</picture>
 		<div class="card-body">

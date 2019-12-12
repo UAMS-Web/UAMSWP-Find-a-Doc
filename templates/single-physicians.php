@@ -585,7 +585,10 @@ while ( have_posts() ) : the_post(); ?>
                                     <?php if ( has_post_thumbnail($location) ) { ?>
                                     <?php echo get_the_post_thumbnail($location, 'aspect-16-9-small', ['class' => 'card-img-top']); ?>
                                     <?php } else { ?>
-                                    <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" alt="<?php echo get_the_title( $location ); ?>" class="card-image-top" />
+                                    <picture>
+                                        <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
+                                        <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" class="card-image-top" />
+                                    </picture>
                                     <?php } ?>
                                     <div class="card-body">
                                             <h3 class="card-title">
