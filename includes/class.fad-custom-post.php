@@ -1369,7 +1369,24 @@ function add_roles_on_plugin_activation() {
        				'upload_files' => true,
        				'edit_files' => true
        			)
-       	);
+		);
+		add_role( 'doc_admin', 'Doc Profile Admin',
+       		array( 	'read' => true,
+					'read_physician' => true,
+					'read_private_physicians' => true,
+					'edit_physician' => true,
+       				'edit_physicians' => true,
+					'edit_published_physicians' => true,
+					'edit_others_physicians' => true,
+       				'read_location' => true,
+       				'read_private_locations' => true,
+					'edit_locations' => true,
+					'edit_others_locations' => true,
+       				'edit_published_locations' => true,
+       				'upload_files' => true,
+       				'edit_files' => true
+       			)
+       	);  
    }
 // register_activation_hook( __FILE__, 'add_roles_on_plugin_activation' );
 add_action( 'init', 'add_roles_on_plugin_activation', 0 );
