@@ -16,7 +16,9 @@
 	}
 	add_action('wp_head','uamswp_keyword_hook_header');
 	
-   	get_header();
+	get_header();
+	   
+	genesis_breadcrumb();
 
 	$treatment_title = get_field('treatments_archive_headline', 'option');
 	$treatment_text = get_field('treatments_archive_intro_text', 'option');
