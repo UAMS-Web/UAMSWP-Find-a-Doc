@@ -121,43 +121,59 @@
 				)
 			)
 		]);
-		if($doctorQuery->have_posts()) : ?>
-			<section class="uams-module bg-auto" id="doctors">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-12">
+		if($doctorQuery->have_posts()) : 
+			$postsPerPage = 6; // Set this value to preferred value
+			$postsCutoff = 12; // Set cutoff value
+			if($doctorQuery->found_posts <= $postsCutoff ) { 
+				$postsPerPage = -1;
+			}
+			$args = array(
+				"post_type" => "physicians",
+				"post_status" => "publish",
+				"posts_per_page" => $postsPerPage,
+				"orderby" => "title",
+				"order" => "ASC",
+				"tax_query" => array(
+					array(
+					"taxonomy" => "treatment_procedure",
+					"field" => "slug",
+					"terms" => get_queried_object()->slug,
+					"operator" => "IN"
+					)
+				)
+			);
+			$physicians_query = New WP_Query( $args );
+			if($physicians_query->have_posts()) { 
+			?>
+				<section class="uams-module bg-auto" id="doctors">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-12">
 							<h2 class="module-title">Doctors Performing <?php echo single_cat_title( '', false ); ?></h2>
 							<p class="note">Note that every condition listed above may not be treated by each doctor listed below. Review each doctor for availability.</p>	
-							<div class="card-list-container">
-								<div class="card-list card-list-doctors facetwp-template">
-									<?php echo facetwp_display( 'template', 'treatment_physicians' ); ?>
+								<div class="card-list-container">
+									<div class="card-list card-list-doctors">
+										<?php 
+											while ($physicians_query->have_posts()) : $physicians_query->the_post();
+												$id = get_the_ID();
+												include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+											endwhile;
+											wp_reset_postdata();
+										?>
+									</div>
 								</div>
-							</div>
-							<div class="row list-pagination">
-								<div class="col">
-									<?php echo facetwp_display( 'pager' ); ?>
+								<?php if ($postsPerPage !== -1) { ?>
+								<div class="more">
+									<button class="loadmore btn btn-primary stretched-link" data-type="taxonomy" data-tax="treatment_procedure" data-slug="<?php echo get_queried_object()->slug; ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $doctorQuery->found_posts; ?>">Load More</button>
 								</div>
+								<?php } ?>
 							</div>
 						</div>
 					</div>
-				</div>
-				<?php // FacetWP Hide elements
-					// Set # value depending on element
-					?>
-				<script>
-					(function($) {
-						$(document).on('facetwp-loaded', function() {
-							if( 0 === FWP.settings.pager.total_rows ) {
-								$('#doctors').hide()
-							}
-							if (8 >= FWP.settings.pager.total_rows ) {
-								$('.list-pagination').hide()
-							}
-						});
-					})(jQuery);
-				</script>
-			</section>
-		<?php endif; ?>
+				</section>
+			<?php
+			} // $physicians_query loop
+		endif; ?>
 		<?php 
 		$locations = get_field('treatment_procedure_locations', $term);
 		$args = (array(
