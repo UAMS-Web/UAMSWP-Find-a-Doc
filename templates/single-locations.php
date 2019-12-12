@@ -213,7 +213,7 @@ while ( have_posts() ) : the_post(); ?>
 							media="(min-width: 576px)">
 						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 576, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1152, 648, 'center', 'center'); ?> 2x"
 							media="(min-width: 1px)">
-						<img src="<?php echo image_sizer(get_post_thumbnail_id(), 544, 408, 'center', 'center'); ?>" alt="<?php the_title(); ?>" />
+						<img src="<?php echo image_sizer(get_post_thumbnail_id(), 640, 480, 'center', 'center'); ?>" alt="<?php the_title(); ?>" />
 					<?php } else { ?>
 						<?php the_post_thumbnail( 'large',  array( 'itemprop' => 'image' ) ); ?>
 					<?php } //endif ?>
