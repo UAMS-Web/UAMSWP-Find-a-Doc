@@ -39,48 +39,49 @@ add_action( 'genesis_after_header', 'fad_breadcrumbs' );
 
 function uamswp_expertise_physicians() {
     $physicians = get_field( "expertise_physicians" );
-    $postsPerPage = 12; // Set this value to preferred value
-    $postsCutoff = 18; // Set cutoff value
-    if(count($physicians) <= $postsCutoff ) {
-        $postsPerPage = -1;
-    }
-    $args = array(
-        "post_type" => "physicians",
-        "post_status" => "publish",
-        "posts_per_page" => $postsPerPage,
-        "orderby" => "title",
-        "order" => "ASC",
-        "post__in" => $physicians
-    );
-    $physicians_query = New WP_Query( $args );
-    if($physicians_query->have_posts()) {   
-    ?>
-    <section class="uams-module bg-auto" id="doctors">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="module-title">Providers</h2>
-                    <div class="card-list-container">
-                        <div class="card-list card-list-doctors">
-                            <?php 
-                                while ($physicians_query->have_posts()) : $physicians_query->the_post();
-                                    $id = get_the_ID();
-                                    include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
-                                endwhile;
-                                wp_reset_postdata();
-                            ?>
+    if($physicians) {
+        $postsPerPage = 12; // Set this value to preferred value
+        $postsCutoff = 18; // Set cutoff value
+        if(count($physicians) <= $postsCutoff ) {
+            $postsPerPage = -1;
+        }
+        $args = array(
+            "post_type" => "physicians",
+            "post_status" => "publish",
+            "posts_per_page" => $postsPerPage,
+            "orderby" => "title",
+            "order" => "ASC",
+            "post__in" => $physicians
+        );
+        $physicians_query = New WP_Query( $args );
+        if($physicians_query->have_posts()) {   
+        ?>
+        <section class="uams-module bg-auto" id="doctors">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="module-title">Providers</h2>
+                        <div class="card-list-container">
+                            <div class="card-list card-list-doctors">
+                                <?php 
+                                    while ($physicians_query->have_posts()) : $physicians_query->the_post();
+                                        $id = get_the_ID();
+                                        include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+                                    endwhile;
+                                    wp_reset_postdata();
+                                ?>
+                            </div>
                         </div>
+                        <?php if ($postsPerPage !== -1) { ?>
+                        <div class="more">
+                            <button class="loadmore btn btn-primary stretched-link" data-posttype="post" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>">Load More</button>
+                        </div>
+                        <?php } ?>
                     </div>
-                    <?php if ($postsPerPage !== -1) { ?>
-                    <div class="more">
-                        <button class="loadmore btn btn-primary stretched-link" data-posttype="post" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>">Load More</button>
-                    </div>
-                    <?php } ?>
                 </div>
             </div>
-        </div>
-    </section>
-<?php
+        </section>
+    <?php }
     }
 }
 function uamswp_expertise_youtube() {
@@ -136,32 +137,35 @@ function uamswp_expertise_treatments() {
 }
 function uamswp_expertise_locations() {
     $locations = get_field('expertise_locations');
-    $args = (array(
-        'post_type' => "locations",
-        'order' => 'ASC',
-        'orderby' => 'title',
-        'posts_per_page' => -1,
-        'post_status' => 'publish',
-        'post__in'	=> $locations
-    ));
-    $location_query = new WP_Query( $args );
-    if( $location_query->have_posts() ): ?>
-        <section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="locations">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="module-title">Locations</h2>
-                    <div class="card-list-container location-card-list-container">
-                        <div class="card-list">
-                        <?php while ( $location_query->have_posts() ) : $location_query->the_post();
-                            $id = get_the_ID(); 
-                            include( UAMS_FAD_PATH . '/templates/loops/location-card.php' ); 
-                        endwhile; 
-                        wp_reset_postdata();?>
+    if($locations) {
+        $args = (array(
+            'post_type' => "locations",
+            'order' => 'ASC',
+            'orderby' => 'title',
+            'posts_per_page' => -1,
+            'post_status' => 'publish',
+            'post__in'	=> $locations
+        ));
+        $location_query = new WP_Query( $args );
+        if( $location_query->have_posts() ): ?>
+            <section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="locations">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="module-title">Locations</h2>
+                        <div class="card-list-container location-card-list-container">
+                            <div class="card-list">
+                            <?php while ( $location_query->have_posts() ) : $location_query->the_post();
+                                $id = get_the_ID(); 
+                                include( UAMS_FAD_PATH . '/templates/loops/location-card.php' ); 
+                            endwhile; 
+                            wp_reset_postdata();?>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    <?php endif;
+            </section>
+        <?php 
+        endif;
+    }
 }
 function uamswp_expertise_associated() {
     $expertises =  get_field('expertise_associated');
