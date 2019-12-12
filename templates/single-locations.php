@@ -25,7 +25,7 @@ while ( have_posts() ) : the_post(); ?>
 <main class="location-item" id="genesis-content">
 	<section class="container-fluid p-0 p-md-10 location-info bg-white">
 		<div class="row mx-0 mx-md-n8">
-			<div class="col-12 col-md p-8 p-sm-10 px-md-8 py-md-0 order-2 text">
+			<div class="col-12 col-md text">
 				<div class="content-width">
 					<h1 class="page-title"><?php the_title(); ?></h1>
 					<h2 class="sr-only">Address</h2>
@@ -200,11 +200,11 @@ while ( have_posts() ) : the_post(); ?>
 				</div>
 			</div>
 			<?php if ( has_post_thumbnail() ) { ?>
-			<div class="col-12 col-md px-0 px-md-8 order-1 image">
+			<div class="col-12 col-md image">
 				<picture>
 					<?php if ( function_exists( 'fly_add_image_size' ) && !empty(get_post_thumbnail_id()) ) { ?>
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 630, 473, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1260, 945, 'center', 'center'); ?> 2x"
-							media="(min-width: 1500px)">
+						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 640, 480, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1280, 960, 'center', 'center'); ?> 2x"
+							media="(min-width: 1350px)">
 						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 392, 294, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 784, 588, 'center', 'center'); ?> 2x"
 							media="(min-width: 992px)">
 						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 992, 558, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1984, 1116, 'center', 'center'); ?> 2x"
