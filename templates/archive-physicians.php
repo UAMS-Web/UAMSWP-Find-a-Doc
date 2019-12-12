@@ -21,7 +21,8 @@
 	add_filter( 'facetwp_template_use_archive', '__return_true' );
 
 ?>
-	<main class="container-fluid doctor-list">
+<div class="content-sidebar-wrap">
+	<main class="container-fluid doctor-list" id="genesis-content">
 		<div class="row">
 			<div class="col-12 col-sm filter-col collapse">
 				<h2>Filters</h2>
@@ -114,5 +115,6 @@
 			</div>
 		</div>
 	</main>
+</div>
 
 <?php get_footer(); ?>
