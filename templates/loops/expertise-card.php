@@ -10,6 +10,8 @@
 <div class="card">
     <?php if ( has_post_thumbnail($id) ) { ?>
     <?php echo get_the_post_thumbnail($id, 'aspect-16-9-small', ['class' => 'card-img-top']); ?>
+    <?php } else { ?>
+    <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" alt="" class="card-image-top" />
     <?php } ?>
     <?php $excerpt = get_the_excerpt($id); ?>
     <div class="card-body">
