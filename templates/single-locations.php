@@ -21,7 +21,8 @@ get_header();
 
 while ( have_posts() ) : the_post(); ?>
 <?php $map = get_field('location_map'); ?>
-<main class="location-item">
+<div class="content-sidebar-wrap">
+<main class="location-item" id="genesis-content">
 	<section class="container-fluid p-0 p-md-10 location-info bg-white">
 		<div class="row mx-0 mx-md-n8">
 			<div class="col-12 col-md p-8 p-sm-10 px-md-8 py-md-0 order-2 text">
@@ -536,6 +537,7 @@ while ( have_posts() ) : the_post(); ?>
 		</div>
 	</section> -->
 </main>
+</div>
 
 <?php endwhile; // end of the loop. ?>
 

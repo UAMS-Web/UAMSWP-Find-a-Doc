@@ -30,8 +30,8 @@ $treatment_title = get_field('treatments_archive_headline', 'option');
 $treatment_text = get_field('treatments_archive_intro_text', 'option');
 
 get_header(); ?>
-<div class="content-sidebar-wrap row">
-    <main class="content col-sm-12" id="genesis-content">
+<div class="content-sidebar-wrap">
+    <main id="genesis-content">
         <article class="entry">
             <header class="entry-header">
                 <h1 class="entry-title" itemprop="headline"><?php echo ( $treatment_title ? $treatment_title : 'Treatments &amp; Procedures' ); ?></h1>
