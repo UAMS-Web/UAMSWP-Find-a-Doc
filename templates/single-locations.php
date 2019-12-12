@@ -402,11 +402,10 @@ while ( have_posts() ) : the_post(); ?>
 	endif; ?>
 	<?php
 	$physicians = get_field( 'location_physicians' );
-	$postsPerPage = 6; // Set this value to preferred value
-    $postsCutoff = 12; // Set cutoff value
-	if($doctorQuery->found_posts <= $postsCutoff ) { 
-		$postsPerPage = -1;
-	}
+	$postsPerPage = 2; // Set this value to preferred value
+    if(count($physicians) <= $postsCutoff ) {
+        $postsPerPage = -1;
+    }
     $args = array(
         "post_type" => "physicians",
         "post_status" => "publish",

@@ -40,7 +40,7 @@ function uamswp_expertise_physicians() {
     $physicians = get_field( "expertise_physicians" );
     $postsPerPage = 12; // Set this value to preferred value
     $postsCutoff = 18; // Set cutoff value
-    if($doctorQuery->found_posts <= $postsCutoff ) { 
+    if(count($physicians) <= $postsCutoff ) {
         $postsPerPage = -1;
     }
     $args = array(
