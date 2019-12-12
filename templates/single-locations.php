@@ -401,57 +401,50 @@ while ( have_posts() ) : the_post(); ?>
 	endif; ?>
 	<?php
 	$physicians = get_field( 'location_physicians' );
-	if( $physicians ): ?>
+	$postsPerPage = 6; // Set this value to preferred value
+    $postsCutoff = 12; // Set cutoff value
+	if($doctorQuery->found_posts <= $postsCutoff ) { 
+		$postsPerPage = -1;
+	}
+    $args = array(
+        "post_type" => "physicians",
+        "post_status" => "publish",
+        "posts_per_page" => $postsPerPage,
+        "orderby" => "title",
+        "order" => "ASC",
+        "post__in" => $physicians
+    );
+    $physicians_query = New WP_Query( $args );
+    if($physicians_query->have_posts()) { 
+	?>
 		<section class="uams-module bg-auto" id="doctors">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
 						<h2 class="module-title">Providers at <?php the_title(); ?></h2>
-
-						<!-- <div class="list-legend">
-							<div class="az-filter">
-									<?php 
-										/* 
-										All Filters:
-										Disable any checkbox input that does not represent any conditions. Add "disabled" to input.
-										
-										A-Z Filter:
-										Start with "All"/"Any" checkbox input checked. Add "checked" attribute to input.
-										If user checks any other checkbox input, remove "checked" attribute from "All"/"Any" checkbox input.
-										If user checks "All"/"Any" checkbox input, remove "checked" attribute from checkbox input of other characters.
-										*/
-									?>
-									<?php  //echo facetwp_display( 'facet', 'location_doctors_cards' ); ?>
-							</div>
-						</div> -->
 						<div class="card-list-container">
-							<div class="card-list card-list-doctors facetwp-template">
-								<?php echo facetwp_display( 'template', 'physician_by_location' ); ?>
+							<div class="card-list card-list-doctors">
+								<?php 
+									while ($physicians_query->have_posts()) : $physicians_query->the_post();
+										$id = get_the_ID();
+										include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+									endwhile;
+									wp_reset_postdata();
+								?>
 							</div>
 						</div>
-						<div class="list-pagination">
-							<?php echo facetwp_display( 'pager' ); ?>
+						<?php if ($postsPerPage !== -1) { ?>
+						<div class="more">
+							<button class="loadmore btn btn-primary stretched-link" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>">Load More</button>
 						</div>
+						<?php } ?>
 					</div>
 				</div>
 			</div>
-			<?php // FacetWP Hide elements
-				// Set # value depending on element
-				?>
-			<script>
-				(function($) {
-					$(document).on('facetwp-loaded', function() {
-						if( 0 === FWP.settings.pager.total_rows ) {
-							$('#doctors').hide()
-						}
-						if (4 >= FWP.settings.pager.total_rows ) {
-							$('.list-pagination').hide()
-						}
-					});
-				})(jQuery);
-			</script>
 		</section>
-	<?php endif; ?>
+	<?php
+    }
+	?>
 	<?php // load all 'conditions' terms for the post
 	$title_append = ' at ' . get_the_title();
 	$conditions = get_field('location_conditions');

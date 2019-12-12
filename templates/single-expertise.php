@@ -37,7 +37,23 @@ add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 16 );
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 
 function uamswp_expertise_physicians() {
-    if(get_field('expertise_physicians')) {
+    $physicians = get_field( "expertise_physicians" );
+    $postsPerPage = 12; // Set this value to preferred value
+    $postsCutoff = 18; // Set cutoff value
+    if($doctorQuery->found_posts <= $postsCutoff ) { 
+        $postsPerPage = -1;
+    }
+    $args = array(
+        "post_type" => "physicians",
+        "post_status" => "publish",
+        "posts_per_page" => $postsPerPage,
+        "orderby" => "title",
+        "order" => "ASC",
+        "post__in" => $physicians
+    );
+    $physicians_query = New WP_Query( $args );
+    if($physicians_query->have_posts()) {   
+    ?>
 ?>
     <section class="uams-module bg-auto" id="doctors">
         <div class="container-fluid">
@@ -45,31 +61,24 @@ function uamswp_expertise_physicians() {
                 <div class="col-12">
                     <h2 class="module-title">Providers</h2>
                     <div class="card-list-container">
-                        <div class="card-list card-list-doctors facetwp-template">
-                            <?php echo facetwp_display( "template", "physicians_by_expertise" ); ?>
+                        <div class="card-list card-list-doctors">
+                            <?php 
+                                while ($physicians_query->have_posts()) : $physicians_query->the_post();
+                                    $id = get_the_ID();
+                                    include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+                                endwhile;
+                                wp_reset_postdata();
+                            ?>
                         </div>
                     </div>
-                    <div class="list-pagination">
-                    <?php echo facetwp_display( "pager" ); ?>
+                    <?php if ($postsPerPage !== -1) { ?>
+                    <div class="more">
+                        <button class="loadmore btn btn-primary stretched-link" data-posttype="post" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>">Load More</button>
                     </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
-        <?php // FacetWP Hide elements
-            // Set # value depending on element
-            ?>
-        <script>
-            (function($) {
-                $(document).on('facetwp-loaded', function() {
-                    if( 0 === FWP.settings.pager.total_rows ) {
-                        $('#doctors').hide()
-                    }
-                    if (4 >= FWP.settings.pager.total_rows ) {
-                        $('.list-pagination').hide()
-                    }
-                });
-            })(jQuery);
-        </script>
     </section>
 <?php
     }
