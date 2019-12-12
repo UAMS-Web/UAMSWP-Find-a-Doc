@@ -30,7 +30,6 @@ $condition_text = get_field('conditions_archive_intro_text', 'option');
 
 get_header(); ?>
 
-<?php genesis_breadcrumb(); ?>
 <div class="content-sidebar-wrap">
     <main id="genesis-content">
         <article class="entry">
