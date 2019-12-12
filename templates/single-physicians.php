@@ -57,7 +57,15 @@ function sp_titles_title($html) {
 }
 add_filter('seopress_titles_title', 'sp_titles_title');
 
+function be_remove_title_from_single_crumb( $crumb, $args ) { // Because BE is the man
+    global $full_name;
+    return substr( $crumb, 0, strrpos( $crumb, $args['sep'] ) ) . $args['sep'] . $full_name;
+}
+add_filter( 'genesis_single_crumb', 'be_remove_title_from_single_crumb', 10, 2 );
+
 get_header();
+
+genesis_breadcrumb();
 
 while ( have_posts() ) : the_post(); ?>
 

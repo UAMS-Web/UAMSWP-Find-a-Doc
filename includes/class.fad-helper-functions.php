@@ -30,3 +30,9 @@ if ( !function_exists('partition') ) {
         return $partition;
     }
 }
+
+if ( !function_exists('fad_breadcrumbs') ) {
+    function fad_breadcrumbs() {
+        return genesis_breadcrumb();
+    }
+}

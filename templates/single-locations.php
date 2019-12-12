@@ -19,6 +19,8 @@ add_filter('seopress_titles_desc', 'sp_titles_desc');
 
 get_header();
 
+genesis_breadcrumb();
+
 while ( have_posts() ) : the_post(); ?>
 <?php $map = get_field('location_map'); ?>
 <div class="content-sidebar-wrap">

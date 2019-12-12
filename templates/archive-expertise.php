@@ -7,6 +7,8 @@
 
  ?>
 
+<?php genesis_breadcrumb(); ?>
+
 <div class="content-sidebar-wrap">
     <main id="genesis-content">
         <section class="archive-description">
