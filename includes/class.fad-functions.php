@@ -775,18 +775,20 @@ function rlv_tax_excerpt_term_fields($content, $term) {
 }
 // AJAX
 function uamswp_ajax_scripts() { 
-    // Register the script
-    wp_register_script( 'uamswp-loadmore', UAMS_FAD_ROOT_URL . 'assets/js/uamswp-loadmore.js', array('jquery'), false, true );
- 
-    // Localize the script with new data
-    $script_data_array = array(
-        'ajaxurl' => admin_url( 'admin-ajax.php' ),
-        'security' => wp_create_nonce( 'load_more_posts' )
-    );
-    wp_localize_script( 'uamswp-loadmore', 'uamswp_loadmore', $script_data_array );
- 
-    // Enqueued script with localized data.
-    wp_enqueue_script( 'uamswp-loadmore' );
+    if ( is_singular( 'locations' ) || is_singular( 'expertise' ) || is_tax( 'condition' ) || is_tax( 'treatment_procedure' ) ) { // Only run on these template pages
+        // Register the script
+        wp_register_script( 'uamswp-loadmore', UAMS_FAD_ROOT_URL . 'assets/js/uamswp-loadmore.js', array('jquery'), false, true );
+    
+        // Localize the script with new data
+        $script_data_array = array(
+            'ajaxurl' => admin_url( 'admin-ajax.php' ),
+            'security' => wp_create_nonce( 'load_more_posts' )
+        );
+        wp_localize_script( 'uamswp-loadmore', 'uamswp_loadmore', $script_data_array );
+    
+        // Enqueued script with localized data.
+        wp_enqueue_script( 'uamswp-loadmore' );
+    }
 }
 add_action( 'wp_enqueue_scripts', 'uamswp_ajax_scripts' );
 
