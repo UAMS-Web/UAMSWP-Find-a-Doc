@@ -39,7 +39,6 @@
             </dl>
         <?php } ?>
     </div><!-- .card-body -->
-    <div style="visibility: hidden; flex-grow: 1;"></div>
     <div class="btn-container">
         <div class="inner-container">
             <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary" aria-label="Go to location page for <?php echo get_the_title($id); ?>">View Location</a>
