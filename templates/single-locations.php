@@ -200,6 +200,7 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 			<?php if ( has_post_thumbnail() ) { ?>
 			<div class="col-12 col-md image">
+				<div class="content-width">
 				<picture>
 					<?php if ( function_exists( 'fly_add_image_size' ) && !empty(get_post_thumbnail_id()) ) { ?>
 						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 640, 480, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1280, 960, 'center', 'center'); ?> 2x"
@@ -217,6 +218,7 @@ while ( have_posts() ) : the_post(); ?>
 						<?php the_post_thumbnail( 'large',  array( 'itemprop' => 'image' ) ); ?>
 					<?php } //endif ?>
 				</picture>
+				</div>
 			</div>
 			<?php } //endif ?>
 		</div>
