@@ -28,8 +28,8 @@
 	// Hard coded breadcrumbs
 	$tax = get_term_by("slug", get_query_var("term"), get_query_var("taxonomy") );
  ?>
-<div class="content-sidebar-wrap row">
-	<main class="content col-sm-12" id="genesis-content">
+<div class="content-sidebar-wrap">
+	<main id="genesis-content">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
 				<h1 class="entry-title"><?php echo ( $treatment_title ? $treatment_title : 'Treatment & Procedure' ); ?>: <?php echo single_cat_title( '', false ); ?></h1>
