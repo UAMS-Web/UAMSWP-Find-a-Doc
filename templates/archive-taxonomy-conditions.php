@@ -29,8 +29,8 @@ $condition_title = get_field('conditions_archive_headline', 'option');
 $condition_text = get_field('conditions_archive_intro_text', 'option');
 
 get_header(); ?>
-<div class="content-sidebar-wrap row">
-    <main class="content col-sm-12" id="genesis-content">
+<div class="content-sidebar-wrap">
+    <main id="genesis-content">
         <article class="entry">
             <header class="entry-header">
                 <h1 class="entry-title" itemprop="headline"><?php echo ( $condition_title ? $condition_title : 'Conditions' ); ?></h1>
