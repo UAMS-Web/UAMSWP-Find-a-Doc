@@ -1200,7 +1200,7 @@
             "name": "location_conditions",
             "type": "taxonomy",
             "label": "Conditions",
-            "instructions": "Will display in alphabetical order.",
+            "instructions": "The conditions will display in alphabetical order.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -1226,7 +1226,7 @@
             "name": "location_treatments",
             "type": "taxonomy",
             "label": "Treatments & Procedures",
-            "instructions": "Will display in alphabetical order.",
+            "instructions": "The treatments and procedures will display in alphabetical order.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -1421,7 +1421,7 @@
             "name": "location_physicians",
             "type": "relationship",
             "label": "Physicians",
-            "instructions": "",
+            "instructions": "The physicians will display in alphabetical order. If there are nine or fewer, they will all be visible when the page loads. If there are more than nine, six will display before prompting the user to load more.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
