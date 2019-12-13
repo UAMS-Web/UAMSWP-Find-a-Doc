@@ -21,7 +21,6 @@
 	add_filter( 'facetwp_template_use_archive', '__return_true' );
 
 ?>
-<?php genesis_breadcrumb(); ?>
 <div class="content-sidebar-wrap">
 	<main class="container-fluid doctor-list" id="genesis-content">
 		<div class="row">
