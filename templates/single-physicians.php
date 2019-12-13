@@ -697,11 +697,11 @@ while ( have_posts() ) : the_post(); ?>
                             <button class="btn btn-secondary" data-toggle="modal" data-target="#MoreReviews" aria-label="Load more individual reviews">View More</a>
                         </div>
                         <!-- Modal -->
-                        <div class="modal fade" id="MoreReviews" tabindex="-1" role="dialog" aria-labelledby="More_Reviews_Modal" aria-hidden="true">
+                        <div class="modal fade" id="MoreReviews" tabindex="-1" role="dialog" aria-labelledby="more-reviews-title" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="MoreReviews">More Reviews</h5>
+                                    <h5 class="modal-title" id="more-reviews-title">More Reviews</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
