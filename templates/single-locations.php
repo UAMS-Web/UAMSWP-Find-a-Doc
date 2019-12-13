@@ -420,7 +420,9 @@ while ( have_posts() ) : the_post(); ?>
 	<?php
 	$physicians = get_field( 'location_physicians' );
 	if($physicians) {
-		$postsPerPage = 2; // Set this value to preferred value
+		$postsPerPage = 6; // Set this value to preferred value (4, 6, 8, 10, 12). If you change the value, update the instruction text in the editor's JSON file.
+        $postsCutoff = 9; // Set cutoff value. If you change the value, update the instruction text in the editor's JSON file.
+		$postsCountClass = $postsPerPage;
 		if(count($physicians) <= $postsCutoff ) {
 			$postsPerPage = -1;
 		}
@@ -441,7 +443,7 @@ while ( have_posts() ) : the_post(); ?>
 						<div class="col-12">
 							<h2 class="module-title">Providers at <?php the_title(); ?></h2>
 							<div class="card-list-container">
-								<div class="card-list card-list-doctors">
+								<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
 									<?php 
 										while ($physicians_query->have_posts()) : $physicians_query->the_post();
 											$id = get_the_ID();
@@ -453,7 +455,7 @@ while ( have_posts() ) : the_post(); ?>
 							</div>
 							<?php if ($postsPerPage !== -1) { ?>
 							<div class="more">
-								<button class="loadmore btn btn-primary stretched-link" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>">Load More</button>
+								<button class="loadmore btn btn-primary" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more physicians">Load More</button>
 							</div>
 							<?php } ?>
 						</div>
