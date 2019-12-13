@@ -446,7 +446,7 @@ while ( have_posts() ) : the_post(); ?>
 							</div>
 							<?php if ($postsPerPage !== -1) { ?>
 							<div class="more">
-								<button class="loadmore btn btn-primary stretched-link" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>">Load More</button>
+								<button class="loadmore btn btn-primary" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more physicians">Load More</button>
 							</div>
 							<?php } ?>
 						</div>
