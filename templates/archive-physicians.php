@@ -36,6 +36,7 @@
 					<?php  echo do_shortcode( '[wpdreams_ajaxsearchpro id=1]' ); ?>
 					<?php  echo facetwp_display( 'facet', 'alpha' ); ?>
 					<?php  echo do_shortcode( '		<div class="fwp-filter">[facetwp facet="primary_care"]</div>
+													<div class="fwp-filter">[facetwp facet="areas_of_expertise"]</div>
 													<div class="fwp-filter">[facetwp facet="conditions"]</div>
 													<div class="fwp-filter">[facetwp facet="treatments_procedures"]</div>
 													<div class="fwp-filter">[facetwp facet="patient_types"]</div>
