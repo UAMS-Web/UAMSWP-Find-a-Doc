@@ -126,6 +126,7 @@
 		if($doctorQuery->have_posts()) : 
 			$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12)
 			$postsCutoff = 18; // Set cutoff value
+			$postsCountClass = $postsPerPage;
 			if($doctorQuery->found_posts <= $postsCutoff ) { 
 				$postsPerPage = -1;
 			}
@@ -154,7 +155,7 @@
 							<h2 class="module-title">Doctors Performing <?php echo single_cat_title( '', false ); ?></h2>
 							<p class="note">Note that every condition listed above may not be treated by each doctor listed below. Review each doctor for availability.</p>	
 								<div class="card-list-container">
-									<div class="card-list card-list-doctors">
+									<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
 										<?php 
 											while ($physicians_query->have_posts()) : $physicians_query->the_post();
 												$id = get_the_ID();
