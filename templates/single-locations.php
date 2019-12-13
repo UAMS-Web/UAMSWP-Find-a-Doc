@@ -234,20 +234,10 @@ while ( have_posts() ) : the_post(); ?>
 						<h2 class="module-title">About <?php the_title(); ?></h2>
 						<div class="module-body">
 							<?php echo get_field('location_about'); ?>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php } ?>
-	<?php if ( get_field('location_affiliation')) { ?>
-		<section class="uams-module bg-auto">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-12">
-						<h2 class="module-title">Affiliation</h2>
-						<div class="module-body">
-							<?php echo get_field('location_affiliation'); ?>
+							<?php if ( get_field('location_affiliation')) { ?>
+								<h3>Affiliation</h3>
+								<?php echo get_field('location_affiliation'); ?>
+							<?php } ?>
 						</div>
 					</div>
 				</div>
