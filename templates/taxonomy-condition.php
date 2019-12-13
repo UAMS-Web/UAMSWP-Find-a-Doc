@@ -18,8 +18,6 @@
 	add_action('wp_head','uamswp_keyword_hook_header');
 	   
 	   get_header();
-
-	genesis_breadcrumb();
 	   
 	$condition_title = get_field('conditions_archive_headline', 'option');
 	$condition_text = get_field('conditions_archive_intro_text', 'option');

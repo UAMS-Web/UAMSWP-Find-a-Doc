@@ -35,8 +35,6 @@ add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 14 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 16 );
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 
-add_action( 'genesis_after_header', 'fad_breadcrumbs' );
-
 function uamswp_expertise_physicians() {
     $physicians = get_field( "expertise_physicians" );
     if($physicians) {
