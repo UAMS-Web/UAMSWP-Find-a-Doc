@@ -1357,55 +1357,69 @@ function create_portal_taxonomy() {
 }
 
 function add_roles_on_plugin_activation() {
-       add_role( 'doc_editor', 'Doc Profile Editor',
-       		array( 	'read' => true,
-       				'read_physician' => true,
-       				'edit_physicians' => true,
-       				'edit_published_physicians' => true,
-       				'read_location' => true,
-       				'read_private_locations' => true,
-       				'edit_locations' => true,
-       				'edit_published_locations' => true,
-       				'upload_files' => true,
-       				'edit_files' => true
-       			)
-		);
-		add_role( 'doc_admin', 'Doc Profile Admin',
-       		array( 	'read' => true,
+	add_role( 'doc_editor', 'Doc Profile Editor',
+			array( 	'read' => true,
+					'level_1' => true, // Dropdown as author support
 					'read_physician' => true,
-					'read_private_physicians' => true,
 					'edit_physician' => true,
-       				'edit_physicians' => true,
+					'delete_physician' => true,
+					'delete_published_physicians' => false,
+					'edit_physicians' => true,
+					'edit_published_physicians' => true,
+					'edit_others_physicians' => false,
+					'publish_physicians' => false,
+					'read_private_physicians' => true,
+					'read_location' => true,
+					'read_private_locations' => true,
+					'edit_locations' => true,
+					'edit_published_locations' => true,
+					'upload_files' => true,
+					'edit_files' => true,
+
+				)
+	 );
+	 add_role( 'doc_admin', 'Doc Profile Admin',
+			array( 	'read' => true,
+					'level_1' => true, // Dropdown as author support
+					'read_physician' => true,
+					'edit_physician' => true,
+					'delete_physician' => true,
+					'delete_published_physicians' => false,
+					'edit_physicians' => true,
 					'edit_published_physicians' => true,
 					'edit_others_physicians' => true,
-       				'read_location' => true,
-       				'read_private_locations' => true,
-					'edit_locations' => true,
-					'edit_others_locations' => true,
-       				'edit_published_locations' => true,
-       				'upload_files' => true,
-       				'edit_files' => true
-       			)
-       	);  
-   }
+					'publish_physicians' => false,
+					'read_private_physicians' => true,
+					'read_location' => true,
+					'read_private_locations' => true,
+				 	'edit_locations' => true,
+				 	'edit_others_locations' => true,
+					'edit_published_locations' => true,
+					'upload_files' => true,
+					'edit_files' => true,
+				)
+		);
+}
 // register_activation_hook( __FILE__, 'add_roles_on_plugin_activation' );
 add_action( 'init', 'add_roles_on_plugin_activation', 0 );
 
 function add_theme_caps() {
-    // gets the author role
-    $role = get_role( 'administrator' );
+	// gets the author role
+	$role = get_role( 'administrator' );
 
-    // This only works, because it accesses the class instance.
-    // would allow the author to edit others' posts for current theme only
-    $role->add_cap( 'edit_others_posts' );
-    $role->add_cap( 'edit_physician' );
+	// This only works, because it accesses the class instance.
+	// would allow the author to edit others' posts for current theme only
+	$role->add_cap( 'edit_others_posts' );
+	$role->add_cap( 'edit_physician' );
 	$role->add_cap( 'read_physician');
 	$role->add_cap( 'delete_physician');
+	$role->add_cap( 'delete_published_physicians');
 	$role->add_cap( 'edit_physicians');
 	$role->add_cap( 'edit_others_physicians');
+	$role->add_cap( 'edit_published_physicians');
 	$role->add_cap( 'publish_physicians');
 	$role->add_cap( 'read_private_physicians');
-    $role->add_cap( 'edit_location');
+	$role->add_cap( 'edit_location');
 	$role->add_cap( 'read_location');
 	$role->add_cap( 'delete_location');
 	$role->add_cap( 'edit_locations');
@@ -1419,6 +1433,7 @@ function add_theme_caps() {
 	$role->add_cap( 'edit_others_expertises');
 	$role->add_cap( 'publish_expertises');
 	$role->add_cap( 'read_private_expertises');
+
 }
 add_action( 'admin_init', 'add_theme_caps');
 
