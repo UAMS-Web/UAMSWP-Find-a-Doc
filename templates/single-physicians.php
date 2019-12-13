@@ -65,8 +65,6 @@ add_filter( 'genesis_single_crumb', 'be_remove_title_from_single_crumb', 10, 2 )
 
 get_header();
 
-genesis_breadcrumb();
-
 while ( have_posts() ) : the_post(); ?>
 
 <div class="content-sidebar-wrap">
