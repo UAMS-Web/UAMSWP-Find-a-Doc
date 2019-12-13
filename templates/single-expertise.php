@@ -75,7 +75,7 @@ function uamswp_expertise_physicians() {
                         </div>
                         <?php if ($postsPerPage !== -1) { ?>
                         <div class="more">
-                            <button class="loadmore btn btn-primary stretched-link" data-posttype="post" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more physicians">Load More</button>
+                            <button class="loadmore btn btn-primary" data-posttype="post" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more physicians">Load More</button>
                         </div>
                         <?php } ?>
                     </div>
