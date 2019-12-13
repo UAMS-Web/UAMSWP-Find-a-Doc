@@ -40,8 +40,9 @@ add_action( 'genesis_after_header', 'fad_breadcrumbs' );
 function uamswp_expertise_physicians() {
     $physicians = get_field( "expertise_physicians" );
     if($physicians) {
-        $postsPerPage = 12; // Set this value to preferred value
-        $postsCutoff = 18; // Set cutoff value
+        $postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12). If you change the value, update the instruction text in the editor's JSON file.
+        $postsCutoff = 18; // Set cutoff value. If you change the value, update the instruction text in the editor's JSON file.
+		$postsCountClass = $postsPerPage;
         if(count($physicians) <= $postsCutoff ) {
             $postsPerPage = -1;
         }
@@ -62,7 +63,7 @@ function uamswp_expertise_physicians() {
                     <div class="col-12">
                         <h2 class="module-title">Providers</h2>
                         <div class="card-list-container">
-                            <div class="card-list card-list-doctors">
+                            <div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
                                 <?php 
                                     while ($physicians_query->have_posts()) : $physicians_query->the_post();
                                         $id = get_the_ID();
@@ -74,7 +75,7 @@ function uamswp_expertise_physicians() {
                         </div>
                         <?php if ($postsPerPage !== -1) { ?>
                         <div class="more">
-                            <button class="loadmore btn btn-primary stretched-link" data-posttype="post" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>">Load More</button>
+                            <button class="loadmore btn btn-primary stretched-link" data-posttype="post" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more physicians">Load More</button>
                         </div>
                         <?php } ?>
                     </div>
