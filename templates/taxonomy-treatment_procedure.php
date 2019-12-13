@@ -167,7 +167,7 @@
 								</div>
 								<?php if ($postsPerPage !== -1) { ?>
 								<div class="more">
-									<button class="loadmore btn btn-primary stretched-link" data-type="taxonomy" data-tax="treatment_procedure" data-slug="<?php echo get_queried_object()->slug; ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $doctorQuery->found_posts; ?>">Load More</button>
+									<button class="loadmore btn btn-primary stretched-link" data-type="taxonomy" data-tax="treatment_procedure" data-slug="<?php echo get_queried_object()->slug; ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $doctorQuery->found_posts; ?>" aria-label="Load more physicians">Load More</button>
 								</div>
 								<?php } ?>
 							</div>
