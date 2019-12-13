@@ -240,6 +240,20 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 		</section>
 	<?php } ?>
+	<?php if ( get_field('location_affiliation')) { ?>
+		<section class="uams-module bg-auto">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-12">
+						<h2 class="module-title">Affiliation</h2>
+						<div class="module-body">
+							<?php echo get_field('location_affiliation'); ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	<?php } ?>
 	<?php if (get_field('location_parking') || get_field('location_direction') || get_field('location_parking_map')) : ?>
 	<?php $parking_map = get_field('location_parking_map'); ?>
 		<section class="uams-module bg-auto">

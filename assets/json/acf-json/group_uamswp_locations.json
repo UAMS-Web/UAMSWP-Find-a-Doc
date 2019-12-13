@@ -361,7 +361,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "60",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -371,24 +371,24 @@
             "rows": 4,
             "new_lines": ""
         },
-        "field_location_hidden": {
-            "key": "field_location_hidden",
-            "name": "location_hidden",
-            "type": "true_false",
-            "label": "Hide",
-            "instructions": "",
+        "field_location_affiliation": {
+            "key": "field_location_affiliation",
+            "name": "location_affiliation",
+            "type": "textarea",
+            "label": "Affiliation",
+            "instructions": "Affiliations with other medical centers or clinics",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "25",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
-            "message": "Exclude from Primary Listing",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 4,
+            "new_lines": ""
         },
         "field_location_clinic_phone_query": {
             "key": "field_location_clinic_phone_query",
@@ -652,7 +652,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "30",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -669,6 +669,25 @@
             "acfe_validate": "",
             "acfe_update": "",
             "multiple": 0
+        },
+        "field_location_hidden": {
+            "key": "field_location_hidden",
+            "name": "location_hidden",
+            "type": "true_false",
+            "label": "Hide",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "Exclude from Primary Listing",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         "field_link_message": {
             "key": "field_link_message",

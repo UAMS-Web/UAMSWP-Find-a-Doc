@@ -555,7 +555,7 @@ while ( have_posts() ) : the_post(); ?>
                             <?php if( get_field('physician_pubmed_author_id') ): ?>
                                 <?php
                                     $pubmedid = trim(get_field('physician_pubmed_author_id'));
-                                    $pubmedcount = (get_field('pubmed_author_number') ? get_field('pubmed_author_number') : '3');
+                                    $pubmedcount = (get_field('physician_author_number') ? get_field('physician_author_number') : '3');
                                 ?>
                                 <h3>Latest Publications</h3>
                                 <p>Publications listed below are automatically derived from MEDLINE/PubMed and other sources, which might result in incorrect or missing publications.</p>
