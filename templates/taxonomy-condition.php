@@ -124,8 +124,8 @@
 					)
 			]);
 			if($doctorQuery->have_posts()) : 
-				$postsPerPage = 6; // Set this value to preferred value
-				$postsCutoff = 12; // Set cutoff value
+				$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12)
+				$postsCutoff = 18; // Set cutoff value
 				if($doctorQuery->found_posts <= $postsCutoff ) { 
 					$postsPerPage = -1;
 				}
