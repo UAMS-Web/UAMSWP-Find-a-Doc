@@ -28,7 +28,7 @@ function searchPubMed(term) {
 	var termResults = [];
 
 	var request = $.ajax({
-		url: 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=' + term +'&retmode=json',
+		url: 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=' + term +'&api_key=385886002e508dc61fd091eb8f962372b308&retmode=json',
 		async: false
 	});
 
@@ -64,7 +64,7 @@ function publicationJSON(id) {
 	var publications = [];
 
 	var request = $.ajax({
-		url: 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id='+id+'&retmode=json',
+		url: 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id='+id+'&api_key=385886002e508dc61fd091eb8f962372b308&retmode=json',
 		async: false
 	});
 
