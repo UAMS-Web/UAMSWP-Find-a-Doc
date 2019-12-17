@@ -187,7 +187,7 @@
 		));
 		$location_query = new WP_Query( $args );
     
-		if ( $location_query->have_posts() ) : ?>
+		if ( $locations && $location_query->have_posts() ) : ?>
 		<section class="container-fluid p-8 p-sm-10 bg-auto" id="locations">
 			<div class="row">
 				<div class="col-12">
@@ -218,7 +218,7 @@
 			));
 			$expertise_query = new WP_Query( $args );
 
-			if ( $expertise_query->have_posts() ): ?>
+			if ( $expertise && $expertise_query->have_posts() ): ?>
 			<section class="container-fluid p-8 p-sm-10 bg-auto" id="expertise">
 				<div class="row">
 					<div class="col-12">
