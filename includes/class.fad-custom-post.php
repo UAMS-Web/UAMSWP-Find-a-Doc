@@ -1403,6 +1403,15 @@ function add_roles_on_plugin_activation() {
 // register_activation_hook( __FILE__, 'add_roles_on_plugin_activation' );
 add_action( 'init', 'add_roles_on_plugin_activation', 0 );
 
+/* 
+// Remove roles, if they need to be reset
+function remove_roles_temp(){
+	remove_role( 'doc_editor' );
+	remove_role( 'doc_admin' );
+}
+add_action( 'init', 'remove_roles_temp' );
+*/
+
 function add_theme_caps() {
 	// gets the author role
 	$role = get_role( 'administrator' );
