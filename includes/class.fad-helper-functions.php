@@ -113,3 +113,23 @@ function uamswp_cpt_breadcrumb( $crumb, $args ) {
     return $crumb;
   }
   add_filter( 'genesis_cpt_crumb', 'uamswp_cpt_breadcrumb', 10, 2 );
+
+  /**
+ * Pass in a taxonomy value that is supported by WP's `get_taxonomy`
+ * and you will get back the url to the archive view.
+ * @param $taxonomy string|int
+ * @return string
+ */
+function get_taxonomy_archive_link( $taxonomy ) {
+  $tax = get_taxonomy( $taxonomy ) ;
+  return '/' . $tax->rewrite['slug'];
+}
+
+  function uamswp_add_blog_crumb( $crumb, $args ) {
+    if ( is_singular( 'condition' ) || is_singular( 'treatment_procedure' ) || is_tax( 'condition' ) || is_tax( 'treatment_procedure' ) )
+      return '<a href="' . get_taxonomy_archive_link( get_queried_object()->taxonomy ) . '">' . get_taxonomy( get_queried_object()->taxonomy )->labels->name .'</a> ' . $args['sep'] . ' ' . $crumb;
+    else
+      return $crumb;
+  }
+  add_filter( 'genesis_single_crumb', 'uamswp_add_blog_crumb', 10, 2 );
+  add_filter( 'genesis_archive_crumb', 'uamswp_add_blog_crumb', 10, 2 );
