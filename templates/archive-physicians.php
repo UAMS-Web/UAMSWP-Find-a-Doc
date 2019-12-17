@@ -35,14 +35,13 @@
 					<?php  echo do_shortcode( '[wpdreams_ajaxsearchpro id=1]' ); ?>
 					<?php  echo facetwp_display( 'facet', 'alpha' ); ?>
 					<?php  echo do_shortcode( '		<div class="fwp-filter">[facetwp facet="primary_care"]</div>
-													<div class="fwp-filter">[facetwp facet="areas_of_expertise"]</div>
+													<div class="fwp-filter">[facetwp facet="physician_areas_of_expertise"]</div>
 													<div class="fwp-filter">[facetwp facet="conditions"]</div>
 													<div class="fwp-filter">[facetwp facet="treatments_procedures"]</div>
 													<div class="fwp-filter">[facetwp facet="patient_types"]</div>
 													<div class="fwp-filter">[facetwp facet="physician_gender"]</div>
 													<div class="fwp-filter">[facetwp facet="physician_language"]</div>
 													<div class="fwp-filter">[facetwp facet="locations"]</div>
-													<div class="fwp-filter">[facetwp facet="physician_areas_of_expertise"]</div>
 													<button id="filter-apply" onclick="FWP.refresh();">Apply</button> <button onclick="FWP.reset()">Reset</button>
 												' );
 					?>
