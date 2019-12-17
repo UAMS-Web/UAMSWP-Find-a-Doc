@@ -81,7 +81,7 @@
 				'term_taxonomy_id' => $treatments
 			));
 			$treatments_query = new WP_Term_Query( $args );
-			if (!empty($treatments) && 0 < count($treatments)) {
+			if ( !empty($treatments_query->terms) ) {
 				
 		?>
 		<section class="uams-module conditions-treatments bg-auto">
@@ -143,7 +143,7 @@
 					)
 				);
 				$physicians_query = New WP_Query( $args );
-				if($physicians_query->have_posts()) { 
+				if( $physicians_query->have_posts() ) { 
 				?>
 					<section class="uams-module bg-auto" id="doctors">
 						<div class="container-fluid">
@@ -186,7 +186,7 @@
 			));
 			$location_query = new WP_Query( $args );
 
-			if ( $locations ) : ?>
+			if ( $location_query->have_posts() ) : ?>
 		<section class="container-fluid p-8 p-sm-10 bg-auto" id="locations">
 			<div class="row">
 				<div class="col-12">
@@ -218,7 +218,7 @@
 			));
 			$expertise_query = new WP_Query( $args );
 
-			if ( $expertise ) : ?>
+			if ( $expertise_query->have_posts() ): ?>
 			<section class="container-fluid p-8 p-sm-10 bg-auto" id="expertise">
 				<div class="row">
 					<div class="col-12">
