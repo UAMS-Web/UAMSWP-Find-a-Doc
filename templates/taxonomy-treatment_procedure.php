@@ -81,7 +81,7 @@
 			));
 			$conditions_query = new WP_Term_Query( $args );
 			
-			if ( !empty($conditions_query->terms) ) {
+			if ( $conditions && !empty($conditions_query->terms) ) {
 				
 		?>
 			<section class="uams-module conditions-treatments bg-auto">

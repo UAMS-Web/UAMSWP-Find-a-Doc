@@ -81,7 +81,7 @@
 				'term_taxonomy_id' => $treatments
 			));
 			$treatments_query = new WP_Term_Query( $args );
-			if ( !empty($treatments_query->terms) ) {
+			if ( $treatments && !empty($treatments_query->terms) ) {
 				
 		?>
 		<section class="uams-module conditions-treatments bg-auto">
