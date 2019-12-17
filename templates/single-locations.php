@@ -433,7 +433,7 @@ while ( have_posts() ) : the_post(); ?>
 			"post__in" => $physicians
 		);
 		$physicians_query = New WP_Query( $args );
-		if($physicians_query->have_posts()) { 
+		if( $physicians_query->have_posts() ) { 
 		?>
 			<section class="uams-module bg-auto" id="doctors">
 				<div class="container-fluid">
@@ -475,7 +475,7 @@ while ( have_posts() ) : the_post(); ?>
         'term_taxonomy_id' => $conditions
     ));
     $conditions_query = new WP_Term_Query( $args );
-	if( $conditions ):
+	if( !empty( $conditions_query->terms ) ):
         include( UAMS_FAD_PATH . '/templates/loops/conditions-loop.php' );
     endif;
 	$treatments = get_field('location_treatments');
@@ -487,11 +487,20 @@ while ( have_posts() ) : the_post(); ?>
         'term_taxonomy_id' => $treatments
     ));
     $treatments_query = new WP_Term_Query( $args );
-	if( $treatments ): 
+	if( !empty( $treatments_query->terms ) ): 
 		include( UAMS_FAD_PATH . '/templates/loops/treatments-loop.php' );
 	endif; 
 	$expertises =  get_field('location_expertise');
-	if( $expertises ): ?>
+	$args = (array(
+        'post_type' => "expertise",
+        'order' => 'ASC',
+        'orderby' => 'title',
+        'posts_per_page' => -1,
+        'post_status' => 'publish',
+        'post__in'	=> $expertises
+    ));
+    $expertise_query = new WP_Query( $args );
+	if( $expertise_query->have_posts() ): ?>
 		<section class="uams-module expertise-list bg-auto" id="expertise">
 			<div class="container-fluid">
 				<div class="row">
@@ -499,10 +508,13 @@ while ( have_posts() ) : the_post(); ?>
 						<h2 class="module-title">Areas of Expertise Represented at <?php the_title(); ?></h2>
 						<div class="card-list-container">
 							<div class="card-list">
-							<?php foreach( $expertises as $expertise ) {
-								$id = $expertise; 
+							<?php 
+							while ($expertise_query->have_posts()) : $expertise_query->the_post();
+								$id = get_the_ID();
 								include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-							} ?>
+							endwhile;
+							wp_reset_postdata();
+							?>
 						</div>
 					</div>
 				</div>

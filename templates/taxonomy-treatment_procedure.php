@@ -81,7 +81,7 @@
 			));
 			$conditions_query = new WP_Term_Query( $args );
 			
-			if (!empty($conditions) && 0 < count($conditions)) {
+			if ( !empty($conditions_query->terms) ) {
 				
 		?>
 			<section class="uams-module conditions-treatments bg-auto">
@@ -187,7 +187,7 @@
 		));
 		$location_query = new WP_Query( $args );
     
-		if ( $locations ) : ?>
+		if ( $location_query->have_posts() ) : ?>
 		<section class="container-fluid p-8 p-sm-10 bg-auto" id="locations">
 			<div class="row">
 				<div class="col-12">
@@ -218,7 +218,7 @@
 			));
 			$expertise_query = new WP_Query( $args );
 
-			if ( $expertise ) : ?>
+			if ( $expertise_query->have_posts() ): ?>
 			<section class="container-fluid p-8 p-sm-10 bg-auto" id="expertise">
 				<div class="row">
 					<div class="col-12">
