@@ -47,6 +47,18 @@ function asp_custom_link_meta_results( $results ) {
 	// }
 }
 
+
+function uamswp_admin_scripts ( $hook ) {
+     
+    if( $hook == 'post.php' ) {
+        wp_enqueue_script( 'acf-admin-js', UAMS_FAD_ROOT_URL . 'admin/js/acf-admin.js', array('jquery'), null, true );
+        // wp_enqueue_stylesheet( 'plugin-main-style', plugins_url( 'css/plugin-main.css', dirname( __FILE__) ) ); 
+    }
+}
+    
+add_action('admin_enqueue_scripts', 'uamswp_admin_scripts');
+    
+
 // add_filter( 'asp_result_image_after_prostproc', 'asp_get_post_type_image', 1, 2 );
 
 // function asp_get_post_type_image( $image, $id ) {
@@ -760,4 +772,76 @@ function rlv_tax_excerpt_term_fields($content, $term) {
         $content .= ' ' . get_field('treatment_procedure_content', $post_id);
     }
     return $content;
+}
+// AJAX
+function uamswp_ajax_scripts() { 
+    if ( is_singular( 'locations' ) || is_singular( 'expertise' ) || is_tax( 'condition' ) || is_tax( 'treatment_procedure' ) ) { // Only run on these template pages
+        // Register the script
+        wp_register_script( 'uamswp-loadmore', UAMS_FAD_ROOT_URL . 'assets/js/uamswp-loadmore.js', array('jquery'), false, true );
+    
+        // Localize the script with new data
+        $script_data_array = array(
+            'ajaxurl' => admin_url( 'admin-ajax.php' ),
+            'security' => wp_create_nonce( 'load_more_posts' )
+        );
+        wp_localize_script( 'uamswp-loadmore', 'uamswp_loadmore', $script_data_array );
+    
+        // Enqueued script with localized data.
+        wp_enqueue_script( 'uamswp-loadmore' );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'uamswp_ajax_scripts' );
+
+add_action('wp_ajax_load_posts_by_ajax', 'uamswp_load_by_ajax_callback');
+add_action('wp_ajax_nopriv_load_posts_by_ajax', 'uamswp_load_by_ajax_callback');
+function uamswp_load_by_ajax_callback(){
+    $ppp = (isset($_POST["ppp"])) ? $_POST["ppp"] : 6; // Set this default value
+    $page = $_POST['page'];
+    $type = (isset($_POST["posttype"])) ? $_POST["posttype"] : 'post'; // Assume its post if not set
+        
+    header("Content-Type: text/html");
+    if ('post' == $type) {
+        $ids = (isset($_POST["postid"])) ? $_POST["postid"] : '';
+        $ids_array = explode(',', $ids);
+        $args = array(
+            // 'suppress_filters' => true,
+            'post_type' => 'physicians',
+            'post_status' => 'publish',
+            "orderby" => "title",
+            "order" => "ASC",
+            'posts_per_page' => $ppp,
+            'paged'    => $page,
+            'post__in' => $ids_array,
+            
+        );
+    } else { // Taxonomy
+        $tax = (isset($_POST["tax"])) ? $_POST["tax"] : '';
+        $slug = (isset($_POST["slug"])) ? $_POST["slug"] : '';
+        $args = array(
+            "post_type" => "physicians",
+            "post_status" => "publish",
+            "posts_per_page" => $ppp,
+            "orderby" => "title",
+            "order" => "ASC",
+            'paged'    => $page,
+            "tax_query" => array(
+                array(
+                "taxonomy" => $tax,
+                "field" => "slug",
+                "terms" => $slug,
+                "operator" => "IN"
+                )
+            )
+        );
+    }
+    $loop = new WP_Query($args);
+    $out = '';
+    if ($loop -> have_posts()) :  while ($loop -> have_posts()) : $loop -> the_post();
+        
+        $id = get_the_ID();
+        $out .= include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' ); 
+        $out .= $args;
+    endwhile;
+    endif;
+    wp_die();
 }

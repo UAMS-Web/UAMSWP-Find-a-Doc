@@ -7,8 +7,8 @@
 
  ?>
 
-<div class="content-sidebar-wrap row">
-    <div class="content col-sm-12" id="genesis-content">
+<div class="content-sidebar-wrap">
+    <main id="genesis-content">
         <section class="archive-description">
             <header class="entry-header">
                 <h1 class="entry-title" itemprop="headline"><?php echo ($service_title ? $service_title : 'Areas of Expertise' ); ?></h1>
@@ -43,10 +43,15 @@
                         if (3 >= FWP.settings.pager.total_rows ) {
                             $('.list-pagination').hide()
                         }
+                        if (FWP.loaded) {
+                            $('html, body').animate({
+                                scrollTop: $('main').offset().top
+                            }, 500);
+                        }
                     });
                 })(jQuery);
             </script>
         </section>
-    </div>
+    </main>
 </div>
 <?php get_footer(); ?>

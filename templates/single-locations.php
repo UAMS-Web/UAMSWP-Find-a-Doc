@@ -21,10 +21,11 @@ get_header();
 
 while ( have_posts() ) : the_post(); ?>
 <?php $map = get_field('location_map'); ?>
-<main class="location-item">
+<div class="content-sidebar-wrap">
+<main class="location-item" id="genesis-content">
 	<section class="container-fluid p-0 p-md-10 location-info bg-white">
 		<div class="row mx-0 mx-md-n8">
-			<div class="col-12 col-md p-8 p-sm-10 px-md-8 py-md-0 order-2 text">
+			<div class="col-12 col-md text">
 				<div class="content-width">
 					<h1 class="page-title"><?php the_title(); ?></h1>
 					<h2 class="sr-only">Address</h2>
@@ -199,11 +200,12 @@ while ( have_posts() ) : the_post(); ?>
 				</div>
 			</div>
 			<?php if ( has_post_thumbnail() ) { ?>
-			<div class="col-12 col-md px-0 px-md-8 order-1 image">
+			<div class="col-12 col-md image">
+				<div class="content-width">
 				<picture>
 					<?php if ( function_exists( 'fly_add_image_size' ) && !empty(get_post_thumbnail_id()) ) { ?>
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 630, 473, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1260, 945, 'center', 'center'); ?> 2x"
-							media="(min-width: 1500px)">
+						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 640, 480, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1280, 960, 'center', 'center'); ?> 2x"
+							media="(min-width: 1350px)">
 						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 392, 294, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 784, 588, 'center', 'center'); ?> 2x"
 							media="(min-width: 992px)">
 						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 992, 558, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1984, 1116, 'center', 'center'); ?> 2x"
@@ -212,23 +214,37 @@ while ( have_posts() ) : the_post(); ?>
 							media="(min-width: 576px)">
 						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 576, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1152, 648, 'center', 'center'); ?> 2x"
 							media="(min-width: 1px)">
-						<img src="<?php echo image_sizer(get_post_thumbnail_id(), 544, 408, 'center', 'center'); ?>" alt="<?php the_title(); ?>" />
+						<img src="<?php echo image_sizer(get_post_thumbnail_id(), 640, 480, 'center', 'center'); ?>" alt="<?php the_title(); ?>" />
 					<?php } else { ?>
 						<?php the_post_thumbnail( 'large',  array( 'itemprop' => 'image' ) ); ?>
 					<?php } //endif ?>
 				</picture>
+				</div>
 			</div>
 			<?php } //endif ?>
 		</div>
 	</section>
-	<?php if ( get_field('location_about')) { ?>
+	<?php if ( get_field('location_about') || get_field('location_affiliation') ) { 
+			$about = get_field('location_about');
+			$affiliation = get_field('location_affiliation');
+		?>
 		<section class="uams-module bg-auto">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
+						<?php if ( $about ) { ?>
 						<h2 class="module-title">About <?php the_title(); ?></h2>
+						<?php } else { // Must be Affiliation
+							echo '<h2 class="module-title">Affiliation</h2>';
+						} ?>
 						<div class="module-body">
-							<?php echo get_field('location_about'); ?>
+							<?php echo $about ? $about : ''; ?>
+							<?php if ( $affiliation) { 
+								if ( !empty( $about ) ) { 
+									echo '<h3>Affiliation</h3>';
+								}
+								 echo $affiliation; ?>
+							<?php } ?>
 						</div>
 					</div>
 				</div>
@@ -401,85 +417,90 @@ while ( have_posts() ) : the_post(); ?>
 	endif; ?>
 	<?php
 	$physicians = get_field( 'location_physicians' );
-	if( $physicians ): ?>
-		<section class="uams-module bg-auto" id="doctors">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title">Providers at <?php the_title(); ?></h2>
-
-						<!-- <div class="list-legend">
-							<div class="az-filter">
+	if($physicians) {
+		$postsPerPage = 6; // Set this value to preferred value (4, 6, 8, 10, 12). If you change the value, update the instruction text in the editor's JSON file.
+        $postsCutoff = 9; // Set cutoff value. If you change the value, update the instruction text in the editor's JSON file.
+		$postsCountClass = $postsPerPage;
+		if(count($physicians) <= $postsCutoff ) {
+			$postsPerPage = -1;
+		}
+		$args = array(
+			"post_type" => "physicians",
+			"post_status" => "publish",
+			"posts_per_page" => $postsPerPage,
+			"orderby" => "title",
+			"order" => "ASC",
+			"post__in" => $physicians
+		);
+		$physicians_query = New WP_Query( $args );
+		if( $physicians_query->have_posts() ) { 
+		?>
+			<section class="uams-module bg-auto" id="doctors">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<h2 class="module-title">Providers at <?php the_title(); ?></h2>
+							<div class="card-list-container">
+								<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
 									<?php 
-										/* 
-										All Filters:
-										Disable any checkbox input that does not represent any conditions. Add "disabled" to input.
-										
-										A-Z Filter:
-										Start with "All"/"Any" checkbox input checked. Add "checked" attribute to input.
-										If user checks any other checkbox input, remove "checked" attribute from "All"/"Any" checkbox input.
-										If user checks "All"/"Any" checkbox input, remove "checked" attribute from checkbox input of other characters.
-										*/
+										while ($physicians_query->have_posts()) : $physicians_query->the_post();
+											$id = get_the_ID();
+											include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+										endwhile;
+										wp_reset_postdata();
 									?>
-									<?php  //echo facetwp_display( 'facet', 'location_doctors_cards' ); ?>
+								</div>
 							</div>
-						</div> -->
-						<div class="card-list-container">
-							<div class="card-list card-list-doctors facetwp-template">
-								<?php echo facetwp_display( 'template', 'physician_by_location' ); ?>
+							<?php if ($postsPerPage !== -1) { ?>
+							<div class="more">
+								<button class="loadmore btn btn-primary" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more physicians">Load More</button>
 							</div>
-						</div>
-						<div class="list-pagination">
-							<?php echo facetwp_display( 'pager' ); ?>
+							<?php } ?>
 						</div>
 					</div>
 				</div>
-			</div>
-			<?php // FacetWP Hide elements
-				// Set # value depending on element
-				?>
-			<script>
-				(function($) {
-					$(document).on('facetwp-loaded', function() {
-						if( 0 === FWP.settings.pager.total_rows ) {
-							$('#doctors').hide()
-						}
-						if (4 >= FWP.settings.pager.total_rows ) {
-							$('.list-pagination').hide()
-						}
-					});
-				})(jQuery);
-			</script>
-		</section>
-	<?php endif; ?>
+			</section>
+		<?php
+		}
+	}
+	?>
 	<?php // load all 'conditions' terms for the post
 	$title_append = ' at ' . get_the_title();
 	$conditions = get_field('location_conditions');
 	$args = (array(
-        'taxonomy' => "condition",
+		'taxonomy' => "condition",
         'order' => 'ASC',
         'orderby' => 'name',
         'hide_empty' => false,
         'term_taxonomy_id' => $conditions
     ));
     $conditions_query = new WP_Term_Query( $args );
-	if( $conditions ):
+	if( $conditions && !empty( $conditions_query->terms ) ):
         include( UAMS_FAD_PATH . '/templates/loops/conditions-loop.php' );
     endif;
 	$treatments = get_field('location_treatments');
 	$args = (array(
-        'taxonomy' => "treatment_procedure",
+		'taxonomy' => "treatment_procedure",
         'order' => 'ASC',
         'orderby' => 'name',
         'hide_empty' => false,
         'term_taxonomy_id' => $treatments
     ));
     $treatments_query = new WP_Term_Query( $args );
-	if( $treatments ): 
+	if( $treatments && !empty( $treatments_query->terms ) ): 
 		include( UAMS_FAD_PATH . '/templates/loops/treatments-loop.php' );
 	endif; 
 	$expertises =  get_field('location_expertise');
-	if( $expertises ): ?>
+	$args = (array(
+        'post_type' => "expertise",
+        'order' => 'ASC',
+        'orderby' => 'title',
+        'posts_per_page' => -1,
+        'post_status' => 'publish',
+        'post__in'	=> $expertises
+    ));
+    $expertise_query = new WP_Query( $args );
+	if( $expertises && $expertise_query->have_posts() ): ?>
 		<section class="uams-module expertise-list bg-auto" id="expertise">
 			<div class="container-fluid">
 				<div class="row">
@@ -487,10 +508,13 @@ while ( have_posts() ) : the_post(); ?>
 						<h2 class="module-title">Areas of Expertise Represented at <?php the_title(); ?></h2>
 						<div class="card-list-container">
 							<div class="card-list">
-							<?php foreach( $expertises as $expertise ) {
-								$id = $expertise; 
+							<?php 
+							while ($expertise_query->have_posts()) : $expertise_query->the_post();
+								$id = get_the_ID();
 								include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-							} ?>
+							endwhile;
+							wp_reset_postdata();
+							?>
 						</div>
 					</div>
 				</div>
@@ -544,6 +568,7 @@ while ( have_posts() ) : the_post(); ?>
 		</div>
 	</section> -->
 </main>
+</div>
 
 <?php endwhile; // end of the loop. ?>
 

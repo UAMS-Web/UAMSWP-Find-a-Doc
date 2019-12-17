@@ -16,7 +16,7 @@
 	}
 	add_action('wp_head','uamswp_keyword_hook_header');
 	
-   	get_header();
+	get_header();
 
 	$treatment_title = get_field('treatments_archive_headline', 'option');
 	$treatment_text = get_field('treatments_archive_intro_text', 'option');
@@ -26,8 +26,8 @@
 	// Hard coded breadcrumbs
 	$tax = get_term_by("slug", get_query_var("term"), get_query_var("taxonomy") );
  ?>
-<div class="content-sidebar-wrap row">
-	<main class="content col-sm-12" id="genesis-content">
+<div class="content-sidebar-wrap">
+	<main id="genesis-content">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
 				<h1 class="entry-title"><?php echo ( $treatment_title ? $treatment_title : 'Treatment & Procedure' ); ?>: <?php echo single_cat_title( '', false ); ?></h1>
@@ -81,7 +81,7 @@
 			));
 			$conditions_query = new WP_Term_Query( $args );
 			
-			if (!empty($conditions) && 0 < count($conditions)) {
+			if ( $conditions && !empty($conditions_query->terms) ) {
 				
 		?>
 			<section class="uams-module conditions-treatments bg-auto">
@@ -121,47 +121,65 @@
 				)
 			)
 		]);
-		if($doctorQuery->have_posts()) : ?>
-			<section class="uams-module bg-auto" id="doctors">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-12">
+		if($doctorQuery->have_posts()) : 
+			$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12)
+			$postsCutoff = 18; // Set cutoff value
+			$postsCountClass = $postsPerPage;
+			if($doctorQuery->found_posts <= $postsCutoff ) { 
+				$postsPerPage = -1;
+			}
+			$args = array(
+				"post_type" => "physicians",
+				"post_status" => "publish",
+				"posts_per_page" => $postsPerPage,
+				"orderby" => "title",
+				"order" => "ASC",
+				"tax_query" => array(
+					array(
+					"taxonomy" => "treatment_procedure",
+					"field" => "slug",
+					"terms" => get_queried_object()->slug,
+					"operator" => "IN"
+					)
+				)
+			);
+			$physicians_query = New WP_Query( $args );
+			if($physicians_query->have_posts()) { 
+			?>
+				<section class="uams-module bg-auto" id="doctors">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-12">
 							<h2 class="module-title">Doctors Performing <?php echo single_cat_title( '', false ); ?></h2>
 							<p class="note">Note that every condition listed above may not be treated by each doctor listed below. Review each doctor for availability.</p>	
-							<div class="card-list-container">
-								<div class="card-list card-list-doctors facetwp-template">
-									<?php echo facetwp_display( 'template', 'treatment_physicians' ); ?>
+								<div class="card-list-container">
+									<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
+										<?php 
+											while ($physicians_query->have_posts()) : $physicians_query->the_post();
+												$id = get_the_ID();
+												include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+											endwhile;
+											wp_reset_postdata();
+										?>
+									</div>
 								</div>
-							</div>
-							<div class="row list-pagination">
-								<div class="col">
-									<?php echo facetwp_display( 'pager' ); ?>
+								<?php if ($postsPerPage !== -1) { ?>
+								<div class="more">
+									<button class="loadmore btn btn-primary" data-type="taxonomy" data-tax="treatment_procedure" data-slug="<?php echo get_queried_object()->slug; ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $doctorQuery->found_posts; ?>" aria-label="Load more physicians">Load More</button>
 								</div>
+								<?php } ?>
 							</div>
 						</div>
 					</div>
-				</div>
-				<?php // FacetWP Hide elements
-					// Set # value depending on element
-					?>
-				<script>
-					(function($) {
-						$(document).on('facetwp-loaded', function() {
-							if( 0 === FWP.settings.pager.total_rows ) {
-								$('#doctors').hide()
-							}
-							if (8 >= FWP.settings.pager.total_rows ) {
-								$('.list-pagination').hide()
-							}
-						});
-					})(jQuery);
-				</script>
-			</section>
-		<?php endif; ?>
+				</section>
+			<?php
+			} // $physicians_query loop
+		endif; ?>
 		<?php 
 		$locations = get_field('treatment_procedure_locations', $term);
 		$args = (array(
 			'post_type' => "locations",
+			"post_status" => "publish",
 			'order' => 'ASC',
 			'orderby' => 'title',
 			'posts_per_page' => -1,
@@ -169,7 +187,7 @@
 		));
 		$location_query = new WP_Query( $args );
     
-		if ( $locations ) : ?>
+		if ( $locations && $location_query->have_posts() ) : ?>
 		<section class="container-fluid p-8 p-sm-10 bg-auto" id="locations">
 			<div class="row">
 				<div class="col-12">
@@ -192,6 +210,7 @@
 			$expertise = get_field('treatment_procedure_expertise', $term);
 			$args = (array(
 				'post_type' => "expertise",
+				"post_status" => "publish",
 				'order' => 'ASC',
 				'orderby' => 'title',
 				'posts_per_page' => -1,
@@ -199,7 +218,7 @@
 			));
 			$expertise_query = new WP_Query( $args );
 
-			if ( $expertise ) : ?>
+			if ( $expertise && $expertise_query->have_posts() ): ?>
 			<section class="container-fluid p-8 p-sm-10 bg-auto" id="expertise">
 				<div class="row">
 					<div class="col-12">

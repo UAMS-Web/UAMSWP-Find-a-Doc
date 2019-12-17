@@ -57,11 +57,18 @@ function sp_titles_title($html) {
 }
 add_filter('seopress_titles_title', 'sp_titles_title');
 
+function be_remove_title_from_single_crumb( $crumb, $args ) { // Because BE is the man
+    global $full_name;
+    return substr( $crumb, 0, strrpos( $crumb, $args['sep'] ) ) . $args['sep'] . $full_name;
+}
+add_filter( 'genesis_single_crumb', 'be_remove_title_from_single_crumb', 10, 2 );
+
 get_header();
 
 while ( have_posts() ) : the_post(); ?>
 
-<main class="doctor-item">
+<div class="content-sidebar-wrap">
+    <main class="doctor-item" id="genesis-content">
         <section class="container-fluid p-0 p-xs-8 p-sm-10 doctor-info bg-white">
             <div class="row mx-0 mx-xs-n4 mx-sm-n8">
                 <div class="col-12 col-xs p-4 py-xs-0 px-xs-4 px-sm-8 order-2 text">
@@ -546,7 +553,7 @@ while ( have_posts() ) : the_post(); ?>
                             <?php if( get_field('physician_pubmed_author_id') ): ?>
                                 <?php
                                     $pubmedid = trim(get_field('physician_pubmed_author_id'));
-                                    $pubmedcount = (get_field('pubmed_author_number') ? get_field('pubmed_author_number') : '3');
+                                    $pubmedcount = (get_field('physician_author_number') ? get_field('physician_author_number') : '3');
                                 ?>
                                 <h3>Latest Publications</h3>
                                 <p>Publications listed below are automatically derived from MEDLINE/PubMed and other sources, which might result in incorrect or missing publications.</p>
@@ -585,7 +592,10 @@ while ( have_posts() ) : the_post(); ?>
                                     <?php if ( has_post_thumbnail($location) ) { ?>
                                     <?php echo get_the_post_thumbnail($location, 'aspect-16-9-small', ['class' => 'card-img-top']); ?>
                                     <?php } else { ?>
-                                    <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" alt="<?php echo get_the_title( $location ); ?>" class="card-image-top" />
+                                    <picture>
+                                        <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
+                                        <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" class="card-img-top" />
+                                    </picture>
                                     <?php } ?>
                                     <div class="card-body">
                                             <h3 class="card-title">
@@ -598,19 +608,23 @@ while ( have_posts() ) : the_post(); ?>
                                         <?php echo ( get_field('location_address_2', $location ) ? get_field('location_address_2', $location ) . '<br/>' : ''); ?>
                                         <?php echo get_field('location_city', $location ); ?>, <?php echo get_field('location_state', $location ); ?> <?php echo get_field('location_zip', $location); ?></p>
                                         <?php if (get_field('location_phone', $location)) { ?>
-                                        <dt>Clinic Phone Number</dt>
-                                        <dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone', $location) ); ?></a></dd>
+                                            <dl>
+                                                <dt>Appointment Phone Number<?php echo (get_field('field_location_appointment_phone_query', $location) && get_field('location_clinic_phone_query', $location)) ? 's' : ''; ?></dt>
+                                                <?php if (get_field('location_new_appointments_phone', $location) && get_field('location_clinic_phone_query', $location)) { ?>
+                                                    <dd><a href="tel:<?php echo format_phone_dash( get_field('location_new_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_new_appointments_phone', $location) ); ?></a><?php echo get_field('field_location_appointment_phone_query', $location) ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
+                                                    <?php if (get_field('location_return_appointments_phone', $location) && get_field('field_location_appointment_phone_query', $location)) { ?>
+                                                        <dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone', $location) ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
+                                                    <?php } ?>
+                                                <?php } else { ?>
+                                                    <dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone', $location) ); ?></a><br/><span class="subtitle">New and Returning Patients</span></dd>
+                                                <?php } ?>
+                                            </dl>
                                         <?php } ?>
-                                        <?php if (get_field('location_new_appointments_phone')) { ?>
-                                        <dt>Appointments Phone Number<?php echo get_field('field_location_appointment_phone_query', $location) ? 's' : ''; ?></dt>
-                                        <dd><a href="tel:<?php echo format_phone_dash( get_field('location_new_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_new_appointments_phone', $location) ); ?></a><?php echo get_field('field_location_appointment_phone_query', $location) ? ' (New Patients)' : ''; ?></dd>
-                                        <?php if (get_field('location_return_appointments_phone', $location)) { ?>
-                                        <dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone', $location) ); ?></a> (Returning Patients)</dd>
-                                        <?php } } ?>
-                                </div>
-                                <div class="btn-container">
-                                    <div class="inner-container">
-                                        <a href="<?php the_permalink(  $location ); ?>" class="btn btn-primary stretched-link" aria-label="Go to location page for <?php echo get_the_title( $location ); ?>">View Location</a>
+                                    </div>
+                                    <div class="btn-container">
+                                        <div class="inner-container">
+                                            <a href="<?php the_permalink(  $location ); ?>" class="btn btn-primary stretched-link" aria-label="Go to location page for <?php echo get_the_title( $location ); ?>">View Location</a>
+                                        </div>
                                     </div>
                                 </div>
                                 <?php $l++; ?>
@@ -681,11 +695,11 @@ while ( have_posts() ) : the_post(); ?>
                             <button class="btn btn-secondary" data-toggle="modal" data-target="#MoreReviews" aria-label="Load more individual reviews">View More</a>
                         </div>
                         <!-- Modal -->
-                        <div class="modal fade" id="MoreReviews" tabindex="-1" role="dialog" aria-labelledby="More_Reviews_Modal" aria-hidden="true">
+                        <div class="modal fade" id="MoreReviews" tabindex="-1" role="dialog" aria-labelledby="more-reviews-title" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="MoreReviews">More Reviews</h5>
+                                    <h5 class="modal-title" id="more-reviews-title">More Reviews</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
@@ -779,6 +793,7 @@ while ( have_posts() ) : the_post(); ?>
             </section>
         <?php endif; ?>
     </main>
+</div>
 
 
 
