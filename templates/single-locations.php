@@ -472,7 +472,7 @@ while ( have_posts() ) : the_post(); ?>
         'term_taxonomy_id' => $conditions
     ));
     $conditions_query = new WP_Term_Query( $args );
-	if( !empty( $conditions_query->terms ) ):
+	if( $conditions && !empty( $conditions_query->terms ) ):
         include( UAMS_FAD_PATH . '/templates/loops/conditions-loop.php' );
     endif;
 	$treatments = get_field('location_treatments');
@@ -484,7 +484,7 @@ while ( have_posts() ) : the_post(); ?>
         'term_taxonomy_id' => $treatments
     ));
     $treatments_query = new WP_Term_Query( $args );
-	if( !empty( $treatments_query->terms ) ): 
+	if( $treatments && !empty( $treatments_query->terms ) ): 
 		include( UAMS_FAD_PATH . '/templates/loops/treatments-loop.php' );
 	endif; 
 	$expertises =  get_field('location_expertise');
