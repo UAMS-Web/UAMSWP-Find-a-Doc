@@ -500,7 +500,7 @@ while ( have_posts() ) : the_post(); ?>
         'post__in'	=> $expertises
     ));
     $expertise_query = new WP_Query( $args );
-	if( $expertise_query->have_posts() ): ?>
+	if( $expertises && $expertise_query->have_posts() ): ?>
 		<section class="uams-module expertise-list bg-auto" id="expertise">
 			<div class="container-fluid">
 				<div class="row">
