@@ -43,6 +43,11 @@
                         if (3 >= FWP.settings.pager.total_rows ) {
                             $('.list-pagination').hide()
                         }
+                        if (FWP.loaded) {
+                            $('html, body').animate({
+                                scrollTop: $('main').offset().top
+                            }, 500);
+                        }
                     });
                 })(jQuery);
             </script>
