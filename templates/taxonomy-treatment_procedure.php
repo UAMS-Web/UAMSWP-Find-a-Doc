@@ -178,6 +178,7 @@
 		$locations = get_field('treatment_procedure_locations', $term);
 		$args = (array(
 			'post_type' => "locations",
+			"post_status" => "publish",
 			'order' => 'ASC',
 			'orderby' => 'title',
 			'posts_per_page' => -1,
@@ -208,6 +209,7 @@
 			$expertise = get_field('treatment_procedure_expertise', $term);
 			$args = (array(
 				'post_type' => "expertise",
+				"post_status" => "publish",
 				'order' => 'ASC',
 				'orderby' => 'title',
 				'posts_per_page' => -1,

@@ -465,7 +465,7 @@ while ( have_posts() ) : the_post(); ?>
 	$title_append = ' at ' . get_the_title();
 	$conditions = get_field('location_conditions');
 	$args = (array(
-        'taxonomy' => "condition",
+		'taxonomy' => "condition",
         'order' => 'ASC',
         'orderby' => 'name',
         'hide_empty' => false,
@@ -477,7 +477,7 @@ while ( have_posts() ) : the_post(); ?>
     endif;
 	$treatments = get_field('location_treatments');
 	$args = (array(
-        'taxonomy' => "treatment_procedure",
+		'taxonomy' => "treatment_procedure",
         'order' => 'ASC',
         'orderby' => 'name',
         'hide_empty' => false,
