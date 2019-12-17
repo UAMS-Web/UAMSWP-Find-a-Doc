@@ -59,11 +59,13 @@ jQuery(function($) {
                     $('.card-list-doctors').append(data);
 					if ( page >= max_pages ) 
                         // button.remove(); // if last page, remove the button
+                        $('#doctors .more').hide();
                         $('.loadmore').hide();
                     page++;
 					// you can also fire the "post-load" event here if you use a plugin that requires it
 					// $( document.body ).trigger( 'post-load' );
 				} else {
+                    $('#doctors .more').hide();
                     $('.loadmore').hide();
 					// button.remove(); // if no data, remove the button as well
 				}
