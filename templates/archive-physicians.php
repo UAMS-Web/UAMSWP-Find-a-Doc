@@ -31,7 +31,7 @@
 				</button>
 				<fieldset>
 					<legend class="sr-only">Filter by...</legend>
-					<h3>Search Doctors, Specialty or Condition</h3>
+					<h3>Search Physicians, Specialty or Condition</h3>
 					<?php  echo do_shortcode( '[wpdreams_ajaxsearchpro id=1]' ); ?>
 					<?php  echo facetwp_display( 'facet', 'alpha' ); ?>
 					<?php  echo do_shortcode( '		<div class="fwp-filter">[facetwp facet="primary_care"]</div>
@@ -48,7 +48,7 @@
 				</fieldset>
 			</div>
 			<div class="col-12 col-sm list-col">
-				<h2 class="sr-only">List of Doctors</h2>
+				<h2 class="sr-only">List of Physicians</h2>
 				<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
 					If you think you are experiencing a medical emergency, call 911 immediately.
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -56,7 +56,7 @@
 					</button>
 				</div>
 				<div class="row list-col-header">
-					<div class="col result-count"><?php echo facetwp_display( 'counts' ); ?> Doctors</div>
+					<div class="col result-count"><?php echo facetwp_display( 'counts' ); ?> Physicians</div>
 					<div class="col filter-toggle-container">
 						<!-- When button is active, add "active" class. -->
 						<button title="Toggle Filter Tray" class="filter-toggle"><span class="sr-only">Toggle Filter Tray</span><span class="fas fa-filter"></span></button>
