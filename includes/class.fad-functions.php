@@ -496,9 +496,9 @@ add_filter( 'facetwp_pager_html', function( $output, $params ) {
     return $output;
 }, 10, 2 );
 
-add_filter( 'facetwp_per_page_options', function( $options ) {
-    return array( 1, 2, 25, 50, 100, 250 );
-});
+// add_filter( 'facetwp_per_page_options', function( $options ) {
+//     return array( 1, 2, 25, 50, 100, 250 );
+// });
 
 add_filter( 'facetwp_shortcode_html', function( $output, $atts ) {
     if ( $atts['template'] = 'locations' ) {
@@ -648,6 +648,40 @@ function my_taxonomy_query( $args, $field ) {
 // add_filter('acf/fields/relationship/query/key=field_expertise_associated', 'limit_to_post_parent', 10, 3);
 // add_filter('acf/fields/post_object/query/key=field_condition_expertise', 'limit_to_post_parent', 10, 3);
 // add_filter('acf/fields/post_object/query/key=field_treatment_procedure_expertise', 'limit_to_post_parent', 10, 3);
+
+add_action('acf/save_post', 'physician_save_post', 5); 
+function physician_save_post( $post_id ) {
+
+  // Bail early if no data sent.
+  if( empty($_POST['acf']) ) {
+    return;
+  }
+
+  // Create full name to store in 'physician_full_name' field
+  $first_name = $_POST['acf']['field_physician_first_name'];
+  $middle_name = $_POST['acf']['field_physician_middle_name'];
+  $last_name = $_POST['acf']['field_physician_last_name'];
+  $pedigree = $_POST['acf']['field_physician_pedigree'];
+  $degrees = $_POST['acf']['field_physician_degree'];
+
+  $i = 1;
+    if ( $degrees ) {
+        foreach( $degrees as $degree ):
+            $degree_name = get_term( $degree, 'degree');
+            $degree_list .= $degree_name->name;
+            if( count($degrees) > $i ) {
+                $degree_list .= ", ";
+            }
+            $i++;
+        endforeach;
+    }
+
+  $full_name = $first_name .' ' .( $middle_name ? $middle_name . ' ' : '') . $last_name . ( $pedigree ? '&nbsp;' . $pedigree : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+
+  $_POST['acf']['field_physician_full_name'] = $full_name;
+
+}
+
 function limit_to_post_parent( $args, $field, $post ) {
 
     $args['post_parent'] = 0;
