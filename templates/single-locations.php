@@ -372,7 +372,7 @@ while ( have_posts() ) : the_post(); ?>
 		</section>
 	<?php endif; ?>
 	<?php // Portal
-		if ( get_field('location_portal')) :
+		if ( get_field('location_portal') ) :
 			$portal = get_term(get_field('location_portal'), "portal");
 			$portal_slug = $portal->slug;
 			$portal_name = $portal->name;
