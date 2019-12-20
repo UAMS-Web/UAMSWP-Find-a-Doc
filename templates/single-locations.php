@@ -439,7 +439,7 @@ while ( have_posts() ) : the_post(); ?>
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-							<h2 class="module-title">Providers at <?php the_title(); ?></h2>
+							<h2 class="module-title">Physicians at <?php the_title(); ?></h2>
 							<div class="card-list-container">
 								<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
 									<?php 

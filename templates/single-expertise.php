@@ -60,7 +60,7 @@ function uamswp_expertise_physicians() {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="module-title">Providers</h2>
+                        <h2 class="module-title">Physicians</h2>
                         <div class="card-list-container">
                             <div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
                                 <?php 
@@ -179,7 +179,7 @@ function uamswp_expertise_associated() {
     ));
     $expertise_query = new WP_Query( $args );
     if( $expertises && $expertise_query->have_posts() ): ?>
-        <section class="uams-module link-list bg-auto" id="expertise">
+        <section class="uams-module link-list link-list-layout-split bg-auto" id="expertise" aria-label="List of associated Areas of Expertise">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12 col-md-6 heading">
@@ -191,9 +191,9 @@ function uamswp_expertise_associated() {
 						<ul>
 						<?php
 						while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
-							echo '<li><a href="'.get_permalink().'">';
+							echo '<li class="item"><span class="h5"><a href="'.get_permalink().'">';
 							echo get_the_title();
-							echo '</a></li>';
+							echo '</a></span></li>';
 						endwhile;
 						wp_reset_postdata(); ?>
 						</ul>
@@ -246,7 +246,8 @@ function uamswp_list_child_expertise() {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="module-title">Related Areas of Expertise <?php echo $hide_menu; ?></h2>
+                            <h2 class="module-title">Sub Areas of Expertise <?php echo $hide_menu; ?></h2>
+                            <p class="note">These are more specific Areas of Expertise within <?php echo get_the_title(); ?>.</p>
                             <div class="card-list-container">
                                 <div class="card-list">
                             <?php
