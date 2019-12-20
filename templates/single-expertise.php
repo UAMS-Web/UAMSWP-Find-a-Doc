@@ -179,7 +179,7 @@ function uamswp_expertise_associated() {
     ));
     $expertise_query = new WP_Query( $args );
     if( $expertises && $expertise_query->have_posts() ): ?>
-        <section class="uams-module link-list link-list-layout-split bg-auto" id="expertise">
+        <section class="uams-module link-list link-list-layout-split bg-auto" id="expertise" aria-label="List of associated Areas of Expertise">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12 col-md-6 heading">
