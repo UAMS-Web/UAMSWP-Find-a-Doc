@@ -179,12 +179,12 @@ function uamswp_expertise_associated() {
     ));
     $expertise_query = new WP_Query( $args );
     if( $expertises && $expertise_query->have_posts() ): ?>
-        <section class="uams-module link-list link-list-layout-split bg-auto" id="expertise" aria-label="List of associated Areas of Expertise">
+        <section class="uams-module link-list link-list-layout-split bg-auto" id="related-expertise" aria-labelledby="related-expertise-title">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12 col-md-6 heading">
 						<div class="text-container">
-							<h2 class="module-title"><span class="title">Associated Areas of Expertise</span></h2>
+							<h2 class="module-title" id="related-expertise-title"><span class="title">Related Areas of Expertise</span></h2>
 						</div>
             		</div>
             		<div class="col-12 col-md-6 list">
@@ -242,12 +242,11 @@ function uamswp_list_child_expertise() {
         );
         $pages = New WP_Query ( $args );
         if ( $pages->have_posts() ) { ?>
-            <section class="uams-module expertise-list bg-auto" aria-label="Sub Page List" >
+            <section class="uams-module expertise-list bg-auto" id="sub-expertise" aria-labelledby="sub-expertise-title" >
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="module-title">Sub Areas of Expertise <?php echo $hide_menu; ?></h2>
-                            <p class="note">These are more specific Areas of Expertise within <?php echo get_the_title(); ?>.</p>
+                            <h2 class="module-title" id="sub-expertise-title">Areas Within <?php echo get_the_title(); ?> <?php echo $hide_menu; ?></h2>
                             <div class="card-list-container">
                                 <div class="card-list">
                             <?php
