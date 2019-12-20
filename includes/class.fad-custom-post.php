@@ -1508,24 +1508,44 @@ function rest_api_physician_meta() {
             'update_callback' => null,
             'schema' => null,
         )
-    );
+	);
+	register_rest_field('locations', 'location_meta', array(
+			'get_callback' => 'get_location_meta',
+			'update_callback' => null,
+			'schema' => null,
+		)
+	);
 }
 function get_physician_meta($object) {
     $postId = $object['id'];
-    //$data = get_post_meta($postId); //Returns All
-    //$data = array();
-    //Physicians
-    $data['physician_first_name'] = get_post_meta( $postId, 'physician_first_name', true );
-    $data['physician_middle_name'] = get_post_meta( $postId, 'physician_middle_name', true );
-    $data['physician_last_name'] = get_post_meta( $postId, 'physician_last_name', true );
-    $data['physician_degree'] = get_post_meta( $postId, 'physician_degree', true );
-    //Physician Data
-    $data['physician_title'] = get_post_meta( $postId, 'physician_title', true );
-    $data['physician_clinical_bio'] = get_post_meta( $postId, 'physician_clinical_bio', true );
-    $data['physician_short_clinical_bio'] = wp_trim_words( get_post_meta( $postId, 'physician_short_clinical_bio', true ), 30, ' &hellip;' );
-    $data['physician_gender'] = get_post_meta( $postId, 'physician_gender', true );
-    $data['physician_youtube_link'] = get_post_meta( $postId, 'physician_youtube_link', true );
-    $data['physician_languages'] = get_post_meta( $postId, 'physician_languages', true );
+    //Physician
+    $data['physician_first_name'] = get_field('physician_first_name', $postId);
+    $data['physician_middle_name'] = get_field( 'physician_middle_name', $postId );
+    $data['physician_last_name'] = get_field( 'physician_last_name', $postId );
+	$degrees = get_field('physician_degree', $postId );
+	$degree_list = '';
+	$i = 1;
+	if ( $degrees ) {
+		foreach( $degrees as $degree ):
+			$degree_name = get_term( $degree, 'degree');
+			$degree_list .= $degree_name->name;
+			if( count($degrees) > $i ) {
+				$degree_list .= ", ";
+			}
+			$i++;
+		endforeach; 
+	} 
+	$full_name = get_field('physician_first_name', $postId) .' ' .(get_field('physician_middle_name', $postId) ? get_field('physician_middle_name', $postId) . ' ' : '') . get_field('physician_last_name', $postId) . (get_field('physician_pedigree', $postId) ? '&nbsp;' . get_field('physician_pedigree', $postId ) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+	$data['physician_full_name'] = $full_name;
+	//Physician Data
+	// $clinical_title = (get_field('physician_title', $id) ? get_term( get_field('physician_title', $id), 'clinical_title' )->name : '');
+	$data['physician_title'] = (get_field('physician_title', $postId) ? get_term( get_field('physician_title', $postId), 'clinical_title' )->name : '');
+	// $data['physician_service_line'] = get_field( 'physician_title', $postId );
+    $data['physician_clinical_bio'] = get_field( 'physician_clinical_bio', $postId );
+    $data['physician_short_clinical_bio'] = wp_trim_words( get_field( 'physician_short_clinical_bio', $postId ), 30, ' &hellip;' );
+    // $data['physician_gender'] = get_field( 'physician_gender', $postId );
+    // $data['physician_youtube_link'] = get_field( 'physician_youtube_link', $postId );
+    // $data['physician_languages'] = get_field( 'physician_languages', $postId );
     //$data['physician_locations_id'] = get_post_meta( $postId, 'physician_locations', true );
     //$data['physician_locations']['link'] = get_permalink( get_post_meta( $postId, 'physician_locations', true ) );
     //$data['physician_locations']['title'] = get_the_title( get_post_meta( $postId, 'physician_locations', true ) );
@@ -1536,99 +1556,152 @@ function get_physician_meta($object) {
 		$data['physician_locations'][$location]['link'] = get_permalink( $location );
 		$data['physician_locations'][$location]['title'] = get_the_title( $location );
 		$data['physician_locations'][$location]['slug'] = get_post_field( 'post_name', $location );
-		$data['physician_locations'][$location]['location_address_1'] = get_post_meta( $location, 'location_address_1', true );
-		$data['physician_locations'][$location]['location_address_2'] = get_post_meta( $location, 'location_address_2', true );
-		$data['physician_locations'][$location]['location_city'] = get_post_meta( $location, 'location_city', true );
-		$data['physician_locations'][$location]['location_state'] = get_post_meta( $location, 'location_state', true );
-		$data['physician_locations'][$location]['location_zip'] =  get_post_meta( $location, 'location_zip', true );
-		$data['physician_locations'][$location]['location_phone'] = get_post_meta( $location, 'location_phone', true );
-		$data['physician_locations'][$location]['location_fax'] = get_post_meta( $location, 'location_fax', true );
-		$data['physician_locations'][$location]['location_email'] = get_post_meta( $location, 'location_email', true );
-		$data['physician_locations'][$location]['location_web_name'] = get_post_meta( $location, 'location_web_name', true );
-		$data['physician_locations'][$location]['location_url'] = get_post_meta( $location, 'location_url', true );
+		// $data['physician_locations'][$location]['location_address_1'] = get_post_meta( $location, 'location_address_1', true );
+		// $data['physician_locations'][$location]['location_address_2'] = get_post_meta( $location, 'location_address_2', true );
+		// $data['physician_locations'][$location]['location_city'] = get_post_meta( $location, 'location_city', true );
+		// $data['physician_locations'][$location]['location_state'] = get_post_meta( $location, 'location_state', true );
+		// $data['physician_locations'][$location]['location_zip'] =  get_post_meta( $location, 'location_zip', true );
+		// $data['physician_locations'][$location]['location_phone'] = get_post_meta( $location, 'location_phone', true );
+		// $data['physician_locations'][$location]['location_fax'] = get_post_meta( $location, 'location_fax', true );
+		// $data['physician_locations'][$location]['location_email'] = get_post_meta( $location, 'location_email', true );
+		// $data['physician_locations'][$location]['location_web_name'] = get_post_meta( $location, 'location_web_name', true );
+		// $data['physician_locations'][$location]['location_url'] = get_post_meta( $location, 'location_url', true );
 		$map = get_post_meta( $location, 'location_map', true );
 		$data['physician_locations'][$location]['location_lat'] = $map['lat'];
 		$data['physician_locations'][$location]['location_lng'] = $map['lng'];
-		$data['physician_locations'][$location]['map_marker'] = '<div class="marker" data-lat="'. $map['lat'] .'" data-lng="'. $map['lng'] .'" data-label="'. $i .'"></div>';
+		$data['physician_locations'][$location]['location_directions'] = '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/'. $map['lat'] .','. $map['lng'] .'" target="_blank" aria-label="Get Directions to '. get_the_title( $location ) .'">Get Directions</a>';
+		// $data['physician_locations'][$location]['map_marker'] = '<div class="marker" data-lat="'. $map['lat'] .'" data-lng="'. $map['lng'] .'" data-label="'. $i .'"></div>';
 		$i++;
 		//$data['location_link'][$location] = get_post_permalink( $location );
 		//$data['location_title'] .= get_the_title( $location ) . ',';
 	}
-    $data['physician_affiliation'] = get_post_meta( $postId, 'physician_affiliation', true );
-    $data['physician_appointment_link'] = get_post_meta( $postId, 'physician_appointment_link', true );
-    $data['physician_primary_care'] = get_post_meta( $postId, 'physician_primary_care', true );
-    $data['physician_refferal_required'] = get_post_meta( $postId, 'physician_refferal_required', true );
-    $data['physician_accepting_patients'] = get_post_meta( $postId, 'physician_accepting_patients', true );
-    $data['physician_second_opinion'] = get_post_meta( $postId, 'physician_second_opinion', true );
-    $data['physician_patient_types'] = get_the_terms( $postId, 'patient_type' );
+    // $data['physician_affiliation'] = get_post_meta( $postId, 'physician_affiliation', true );
+    // $data['physician_appointment_link'] = get_post_meta( $postId, 'physician_appointment_link', true );
+    // $data['physician_primary_care'] = get_post_meta( $postId, 'physician_primary_care', true );
+    // $data['physician_refferal_required'] = get_post_meta( $postId, 'physician_refferal_required', true );
+    // $data['physician_accepting_patients'] = get_post_meta( $postId, 'physician_accepting_patients', true );
+    // $data['physician_second_opinion'] = get_post_meta( $postId, 'physician_second_opinion', true );
+    // $data['physician_patient_types'] = get_the_terms( $postId, 'patient_type' );
     $data['physician_npi'] = get_post_meta( $postId, 'physician_npi', true );
-    $data['medical_specialties'] = get_the_terms( $postId, 'specialty' );
-	$data['pphoto'] = wp_get_attachment_url( get_post_meta( $postId, 'physician_photo', true ), 'file' );
+    // $data['medical_specialties'] = get_the_terms( $postId, 'specialty' );
+	// $data['pphoto'] = wp_get_attachment_url( get_post_meta( $postId, 'physician_photo', true ), 'file' );
+	$data['physician_photo'] = image_sizer(get_post_thumbnail_id($postId), 253, 337, 'center', 'center');
+	$conditions = get_field('physician_conditions', $postId);
+            $args = (array(
+                'taxonomy' => "condition",
+                'hide_empty' => false,
+                'term_taxonomy_id' => $conditions
+            ));
+			$conditions_query = new WP_Term_Query( $args );
+			$condition_list = '';
+			foreach( $conditions_query->get_terms() as $condition ):
+				$condition_list .= $condition->name . ', ';
+ 			endforeach;
+	$data['physician_conditions_list'] = $condition_list;
+		$treatments = get_field('physician_treatments', $postId);
+		$args = (array(
+			'taxonomy' => "treatment_procedure",
+			'hide_empty' => false,
+			'term_taxonomy_id' => $treatments
+		));
+		$treatments_query = new WP_Term_Query( $args );
+		$treatment_list = '';
+		foreach( $treatments_query->get_terms() as $treatment ):
+			$treatment_list .= $treatment->name . ', ';
+		 endforeach;
+	$data['physician_treatments_list'] = $treatment_list;
 	$data['physician_conditions'] = get_the_terms( $postId, 'condition' );
-	$data['medical_procedures'] = get_the_terms( $postId, 'medical_procedures' );
-	$data['physician_boards'] = get_post_meta( $postId, 'physician_boards', true );
-	if( get_post_meta( $postId, 'physician_boards', true ) ) :
-		for( $i = 0; $i < get_post_meta( $postId, 'physician_boards', true ); $i++ ){
-			$data['physician_board_name'][$i] =  get_post_meta( $postId, 'physician_boards_' . $i .'_physician_board_name', true );
-		}
-	endif;
+	$data['physician_treatments'] = get_the_terms( $postId, 'treatment_procedure' );
+	// $data['physician_boards'] = get_post_meta( $postId, 'physician_boards', true );
+	// if( get_post_meta( $postId, 'physician_boards', true ) ) :
+	// 	for( $i = 0; $i < get_post_meta( $postId, 'physician_boards', true ); $i++ ){
+	// 		$data['physician_board_name'][$i] =  get_post_meta( $postId, 'physician_boards_' . $i .'_physician_board_name', true );
+	// 	}
+	// endif;
 	//Academic Data
-	$data['physician_academic_title'] = get_post_meta( $postId, 'physician_academic_title', true );
-	$data['physician_academic_college'] = get_the_terms( $postId, 'academic_colleges' );
-	$data['physician_academic_position'] = get_the_terms( $postId, 'academic_positions' );
-	$data['physician_academic_bio'] = get_post_meta( $postId, 'physician_academic_bio', true );
-	$data['physician_academic_short_bio'] = wp_trim_words( get_post_meta( $postId, 'physician_academic_short_bio', true ), 30, ' &hellip;' );
-	$data['physician_academic_office'] = get_post_meta( $postId, 'physician_academic_office', true );
-	$data['physician_academic_map'] = get_post_meta( $postId, 'physician_academic_map', true );
-	$data['physician_research_profiles_link'] = get_post_meta( $postId, 'physician_research_profiles_link', true );
-	$data['physician_pubmed_author_id'] = get_post_meta( $postId, 'physician_pubmed_author_id', true );
-	$data['pubmed_author_number'] = get_post_meta( $postId, 'pubmed_author_number', true );
-	if( get_post_meta( $postId, 'physician_publications', true ) ) :
-		$i = 0;
-		foreach (get_post_meta( $postId, 'physician_publications', true ) as $publication) {
-			$data['physician_publication'][$i] = get_post_meta( $postId, 'physician_publications_' . $i .'_publication_pubmed_info', true );
-			$i++;
-		}
-	endif;
-	if( get_post_meta( $postId, 'physician_contact_infomation', true ) ) :
-		for ( $i = 0; $i < get_post_meta( $postId, 'physician_contact_infomation', true ); $i++ ){
-			$data['office_full'][$i] = get_post_meta( $postId, 'physician_contact_infomation_' . $i . '_office_contact_type', true ) . ': ' . get_post_meta( $postId, 'physician_contact_infomation_' . $i . '_office_contact_value', true );
-			$data['office_contact_type'][$i] = get_post_meta( $postId, 'physician_contact_infomation_' . $i . '_office_contact_type', true );
-			$data['office_contact_value'][$i] =  get_post_meta( $postId, 'physician_contact_infomation_' . $i . '_office_contact_value', true );
-		}
-	endif;
-	if( get_post_meta( $postId, 'physician_academic_appointment', true ) ) :
-		for ( $i = 0; $i < get_post_meta( $postId, 'physician_academic_appointment', true ); $i++ ){
-			$data['physician_academic_appointment'][$i] = get_post_meta( $postId, 'physician_academic_appointment_' . $i .'_academic_title', true ) . ': ' . get_post_meta( $postId, 'physician_academic_appointment_' . $i .'_academic_department', true );
-			//$data['academic_title'][$i] = get_post_meta( $postId, 'physician_academic_appointment_' . $i .'_academic_title', true );
-			//$data['academic_department'][$i] =  get_post_meta( $postId, 'physician_academic_appointment_' . $i .'_academic_department', true );
-		}
-	endif;
-	if( get_post_meta( $postId, 'physician_education', true ) ) :
-		for ( $i = 0; $i < get_post_meta( $postId, 'physician_education', true ); $i++ ){
-			$data['physician_education'][$i] = get_post_meta( $postId, 'physician_education_' . $i .'_physician_education_type', true ) . ': ' . get_post_meta( $postId, 'physician_education_' . $i .'_physician_education_school', true ) . ' ' . get_post_meta( $postId, 'physician_education_' . $i .'_physician_education_description', true );
-			//$data['physician_education_type'][$i] = get_post_meta( $postId, 'physician_education_' . $i .'_physician_education_type', true );
-			//$data['physician_education_school'][$i] = get_post_meta( $postId, 'physician_education_' . $i .'_physician_education_school', true );
-			//$data['physician_education_description'][$i] =  get_post_meta( $postId, 'physician_education_' . $i .'_physician_education_description', true );
-		}
-	endif;
-	//Research
-	$data['physician_researcher_bio'] = get_post_meta( $postId, 'physician_researcher_bio', true );
-	$data['physician_research_interests'] = get_post_meta( $postId, 'physician_research_interests', true );
-	//Additional
-	if( get_post_meta( $postId, 'physician_awards', true ) ) :
-		for ( $i = 0; $i < get_post_meta( $postId, 'physician_awards', true ); $i++ ){
-			$data['physician_awards'][$i] = get_post_meta( $postId, 'physician_awards_' . $i .'_award_title', true ) . ' (' . get_post_meta( $postId, 'physician_awards_' . $i .'_award_year', true ) . ') ' . get_post_meta( $postId, 'physician_awards_' . $i .'_award_infor', true );
-			//$data['award_year'][$i] = get_post_meta( $postId, 'physician_awards_' . $i .'_award_year', true );
-			//$data['award_title'][$i] = get_post_meta( $postId, 'physician_awards_' . $i .'_award_title', true );
-			//$data['award_infor'][$i] =  get_post_meta( $postId, 'physician_awards_' . $i .'_award_infor', true );
-		}
-	endif;
-	$data['physician_additional_info'] = get_post_meta( $postId, 'physician_additional_info', true );
+	// $data['physician_academic_title'] = get_post_meta( $postId, 'physician_academic_title', true );
+	// $data['physician_academic_college'] = get_the_terms( $postId, 'academic_colleges' );
+	// $data['physician_academic_position'] = get_the_terms( $postId, 'academic_positions' );
+	// $data['physician_academic_bio'] = get_post_meta( $postId, 'physician_academic_bio', true );
+	// $data['physician_academic_short_bio'] = wp_trim_words( get_post_meta( $postId, 'physician_academic_short_bio', true ), 30, ' &hellip;' );
+	// $data['physician_academic_office'] = get_post_meta( $postId, 'physician_academic_office', true );
+	// $data['physician_academic_map'] = get_post_meta( $postId, 'physician_academic_map', true );
+	// $data['physician_research_profiles_link'] = get_post_meta( $postId, 'physician_research_profiles_link', true );
+	// $data['physician_pubmed_author_id'] = get_post_meta( $postId, 'physician_pubmed_author_id', true );
+	// $data['pubmed_author_number'] = get_post_meta( $postId, 'pubmed_author_number', true );
+	// if( get_post_meta( $postId, 'physician_publications', true ) ) :
+	// 	$i = 0;
+	// 	foreach (get_post_meta( $postId, 'physician_publications', true ) as $publication) {
+	// 		$data['physician_publication'][$i] = get_post_meta( $postId, 'physician_publications_' . $i .'_publication_pubmed_info', true );
+	// 		$i++;
+	// 	}
+	// endif;
+	// if( get_post_meta( $postId, 'physician_contact_infomation', true ) ) :
+	// 	for ( $i = 0; $i < get_post_meta( $postId, 'physician_contact_infomation', true ); $i++ ){
+	// 		$data['office_full'][$i] = get_post_meta( $postId, 'physician_contact_infomation_' . $i . '_office_contact_type', true ) . ': ' . get_post_meta( $postId, 'physician_contact_infomation_' . $i . '_office_contact_value', true );
+	// 		$data['office_contact_type'][$i] = get_post_meta( $postId, 'physician_contact_infomation_' . $i . '_office_contact_type', true );
+	// 		$data['office_contact_value'][$i] =  get_post_meta( $postId, 'physician_contact_infomation_' . $i . '_office_contact_value', true );
+	// 	}
+	// endif;
+	// if( get_post_meta( $postId, 'physician_academic_appointment', true ) ) :
+	// 	for ( $i = 0; $i < get_post_meta( $postId, 'physician_academic_appointment', true ); $i++ ){
+	// 		$data['physician_academic_appointment'][$i] = get_post_meta( $postId, 'physician_academic_appointment_' . $i .'_academic_title', true ) . ': ' . get_post_meta( $postId, 'physician_academic_appointment_' . $i .'_academic_department', true );
+	// 		//$data['academic_title'][$i] = get_post_meta( $postId, 'physician_academic_appointment_' . $i .'_academic_title', true );
+	// 		//$data['academic_department'][$i] =  get_post_meta( $postId, 'physician_academic_appointment_' . $i .'_academic_department', true );
+	// 	}
+	// endif;
+	// if( get_post_meta( $postId, 'physician_education', true ) ) :
+	// 	for ( $i = 0; $i < get_post_meta( $postId, 'physician_education', true ); $i++ ){
+	// 		$data['physician_education'][$i] = get_post_meta( $postId, 'physician_education_' . $i .'_physician_education_type', true ) . ': ' . get_post_meta( $postId, 'physician_education_' . $i .'_physician_education_school', true ) . ' ' . get_post_meta( $postId, 'physician_education_' . $i .'_physician_education_description', true );
+	// 		//$data['physician_education_type'][$i] = get_post_meta( $postId, 'physician_education_' . $i .'_physician_education_type', true );
+	// 		//$data['physician_education_school'][$i] = get_post_meta( $postId, 'physician_education_' . $i .'_physician_education_school', true );
+	// 		//$data['physician_education_description'][$i] =  get_post_meta( $postId, 'physician_education_' . $i .'_physician_education_description', true );
+	// 	}
+	// endif;
+	// //Research
+	// $data['physician_researcher_bio'] = get_post_meta( $postId, 'physician_researcher_bio', true );
+	// $data['physician_research_interests'] = get_post_meta( $postId, 'physician_research_interests', true );
+	// //Additional
+	// if( get_post_meta( $postId, 'physician_awards', true ) ) :
+	// 	for ( $i = 0; $i < get_post_meta( $postId, 'physician_awards', true ); $i++ ){
+	// 		$data['physician_awards'][$i] = get_post_meta( $postId, 'physician_awards_' . $i .'_award_title', true ) . ' (' . get_post_meta( $postId, 'physician_awards_' . $i .'_award_year', true ) . ') ' . get_post_meta( $postId, 'physician_awards_' . $i .'_award_infor', true );
+	// 		//$data['award_year'][$i] = get_post_meta( $postId, 'physician_awards_' . $i .'_award_year', true );
+	// 		//$data['award_title'][$i] = get_post_meta( $postId, 'physician_awards_' . $i .'_award_title', true );
+	// 		//$data['award_infor'][$i] =  get_post_meta( $postId, 'physician_awards_' . $i .'_award_infor', true );
+	// 	}
+	// endif;
+	// $data['physician_additional_info'] = get_post_meta( $postId, 'physician_additional_info', true );
 
     return $data;
 }
 add_action('rest_api_init', 'rest_api_physician_meta');
+
+function get_location_meta($object) {
+	$postId = $object['id'];
+	$data['location_title'] = get_the_title( $postId );
+	$data['location_link'] = get_permalink($postId );
+	$data['location_photo'] = get_the_post_thumbnail($postId, 'aspect-16-9-small', ['class' => 'card-img-top']);
+	$map = $map = get_field('location_map', $postId );
+	$data['location_lat'] = $map['lat'];
+	$data['location_lng'] = $map['lng'];
+	$data['location_address_1'] = get_field('location_address_1', $postId );
+	$data['location_address_2'] = ( get_field('location_address_2', $postId ) ? get_field('location_address_2', $postId ) . '<br/>' : '');
+	$data['location_city'] = get_field('location_city', $postId );
+	$data['location_state'] = get_field('location_state', $postId );
+	$data['location_zip'] = get_field('location_zip', $postId );
+	$data['locations_phone_title'] = 'Appointment Phone Number'. ( get_field('field_location_appointment_phone_query', $postId) ? 's' : '' );
+	$data['location_phone'] = get_field( 'location_phone', $postId );
+	$data['location_phone_text'] = '<span class="subtitle">New and Returning Patients</span>';
+	$dash['location_new_appointments_phone'] = get_field('location_new_appointments_phone', $postId );
+	$data['location_new_appointments_phonetext'] = ( get_field('location_new_appointments_phone', $postId ) && get_field( 'field_location_appointment_phone_query', $postId )) ? '<br/><span class="subtitle">New Patients</span>' : '<span class="subtitle">New and Returning Patients</span>';
+	$dash['location_return_appointments_phone'] = get_field('location_return_appointments_phone', $postId );
+	$data['location_return_appointments_phone_text'] = (get_field('location_return_appointments_phone', $postId ) && get_field('field_location_appointment_phone_query', $postId )) ? '<span class="subtitle">Returning Patients</span>' : '';
+	$data['location_directions_link'] = '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/'. $map['lat'] .','. $map['lng'] .'" target="_blank" aria-label="Get Directions to '. get_the_title($postId) .'">Get Directions</a>';
+
+	return $data;
+
+}
+add_action('rest_api_init', 'rest_api_location_meta');
 
 // Add REST API query var filters
 add_filter('rest_query_vars', 'physicians_add_rest_query_vars');
