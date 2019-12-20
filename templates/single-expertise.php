@@ -191,9 +191,11 @@ function uamswp_expertise_associated() {
 						<ul>
 						<?php
 						while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
-							echo '<li class="item"><div class="text-container"><span class="h5"><a href="'.get_permalink().'">';
+							echo '<li class="item"><div class="text-container"><h3 class="h5"><a href="'.get_permalink().'">';
 							echo get_the_title();
-							echo '</a></span></div></li>';
+                            echo '</a></h3>';
+                            echo ( has_excerpt() ? '<p>' . wp_trim_words( get_the_excerpt(), 30, '&nbsp;&hellip;' ) . '</p>' : '' );
+                            echo '</div></li>';
 						endwhile;
 						wp_reset_postdata(); ?>
 						</ul>
