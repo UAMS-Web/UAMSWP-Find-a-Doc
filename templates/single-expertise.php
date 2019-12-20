@@ -32,7 +32,8 @@ add_action( 'genesis_after_entry', 'uamswp_expertise_conditions', 8 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_treatments', 10 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 12 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 14 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 16 );
+add_action( 'genesis_after_entry', 'uamswp_list_child_expertise', 16);
+add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 20 );
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 
 function uamswp_expertise_physicians() {
@@ -177,24 +178,29 @@ function uamswp_expertise_associated() {
         'post__in'	=> $expertises
     ));
     $expertise_query = new WP_Query( $args );
-	if( $expertises && $expertise_query->have_posts() ): ?>
-		<section class="uams-module expertise-list bg-auto" id="expertise">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="module-title">Associated Areas of Expertise</h2>
-                        <div class="card-list-container">
-                            <div class="card-list">
-                            <?php while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
-                                $id = get_the_ID(); 
-                                include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-                            endwhile;
-                            wp_reset_postdata(); ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    if( $expertises && $expertise_query->have_posts() ): ?>
+        <section class="uams-module link-list bg-auto" id="expertise">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12 col-md-6 heading">
+						<div class="text-container">
+							<h2 class="module-title"><span class="title">Associated Areas of Expertise</span></h2>
+						</div>
+            		</div>
+            		<div class="col-12 col-md-6 list">
+						<ul>
+						<?php
+						while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
+							echo '<li><a href="'.get_permalink().'">';
+							echo get_the_title();
+							echo '</a></li>';
+						endwhile;
+						wp_reset_postdata(); ?>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
 	<?php 
     endif;
 }
@@ -213,5 +219,50 @@ function uamswp_expertise_header_metadata() {
         
         echo '<meta name="keywords" content="'. $keyword_text .'" />';
     endif;
+}
+function uamswp_list_child_expertise() {
+    $page_id = get_the_ID();
+    if ( !( get_post_meta( $page_id, 'hide_sub_areas_of_expertise', true) ) && ( 0 != count( get_pages( array( 'child_of' => $page_id, 'post_type' => 'expertise' ) ) ) ) ) { // If it's suppressed or none available, set to false
+        $args =  array(
+            "post_type" => "expertise",
+            "post_status" => "publish",
+            "post_parent" => $page_id,
+            'meta_query' => array(
+                "relation" => "OR",
+                array(
+                    "key" => "hide_from_sub_menu",
+                    "value" => "1",
+                    "compare" => "!=",
+                ),
+                array(
+                    "key" => "hide_from_sub_menu",
+                    "compare" => "NOT EXISTS",
+                ),
+            ),
+        );
+        $pages = New WP_Query ( $args );
+        if ( $pages->have_posts() ) { ?>
+            <section class="uams-module expertise-list bg-auto" aria-label="Sub Page List" >
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="module-title">Related Areas of Expertise <?php echo $hide_menu; ?></h2>
+                            <div class="card-list-container">
+                                <div class="card-list">
+                            <?php
+                                while ( $pages->have_posts() ) : $pages->the_post();
+                                    $id = get_the_ID(); 
+                                    include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+                                endwhile;
+                                wp_reset_postdata(); ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <?php
+        }
+    }
 }
 genesis();
