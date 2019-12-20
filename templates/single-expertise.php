@@ -247,7 +247,6 @@ function uamswp_list_child_expertise() {
                     <div class="row">
                         <div class="col-12">
                             <h2 class="module-title" id="sub-expertise-title">Areas Within <?php echo get_the_title(); ?> <?php echo $hide_menu; ?></h2>
-                            <p class="note">These are more specific Areas of Expertise within <?php echo get_the_title(); ?>.</p>
                             <div class="card-list-container">
                                 <div class="card-list">
                             <?php
