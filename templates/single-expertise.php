@@ -213,4 +213,8 @@ function uamswp_expertise_header_metadata() {
         echo '<meta name="keywords" content="'. $keyword_text .'" />';
     endif;
 }
+function uamswp_list_child_expertise() {
+    return uamswp_list_child_posts( "expertise", "Areas of Expertise" );
+}
+add_action('genesis_after_entry', 'uamswp_list_child_expertise', 20);
 genesis();
