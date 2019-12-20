@@ -191,9 +191,9 @@ function uamswp_expertise_associated() {
 						<ul>
 						<?php
 						while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
-							echo '<li class="item"><span class="h5"><a href="'.get_permalink().'">';
+							echo '<li class="item"><div class="text-container"><span class="h5"><a href="'.get_permalink().'">';
 							echo get_the_title();
-							echo '</a></span></li>';
+							echo '</a></span></div></li>';
 						endwhile;
 						wp_reset_postdata(); ?>
 						</ul>
