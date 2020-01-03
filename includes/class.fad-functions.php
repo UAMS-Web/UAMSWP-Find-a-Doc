@@ -312,6 +312,7 @@ add_action( 'wp_footer', function() {
 // FacetWP scripts
 function fwp_facet_scripts() {
 	if ( is_post_type_archive( 'physicians' ) || is_post_type_archive( 'locations' ) ) {
+    $taxonomy_slug = isset(get_queried_object()->slug) ? get_queried_object()->slug : '';
 ?>
 <script>
 (function($) {
@@ -331,25 +332,25 @@ function fwp_facet_scripts() {
         });
         if ($('body').hasClass('tax-specialty')) {
         	if (! FWP.loaded) {
-	        	$('.facetwp-facet-specialty_checkbox .facetwp-checkbox[data-value="<?php echo get_queried_object()->slug; ?>"]').click();
+	        	$('.facetwp-facet-specialty_checkbox .facetwp-checkbox[data-value="<?php echo $taxonomy_slug; ?>"]').click();
 				$('.specialty-filter').hide();
 			}
         }
         if ($('body').hasClass('tax-medical_terms')) {
         	if (! FWP.loaded) {
-	        	$('.facetwp-facet-terms_checkbox .facetwp-checkbox[data-value="<?php echo get_queried_object()->slug; ?>"]').click();
+	        	$('.facetwp-facet-terms_checkbox .facetwp-checkbox[data-value="<?php echo $taxonomy_slug; ?>"]').click();
 				$('.terms-filter').hide();
 			}
         }
         if ($('body').hasClass('tax-medical_procedures')) {
         	if (! FWP.loaded) {
-	        	$('.facetwp-facet-procedures_checkbox .facetwp-checkbox[data-value="<?php echo get_queried_object()->slug; ?>"]').click();
+	        	$('.facetwp-facet-procedures_checkbox .facetwp-checkbox[data-value="<?php echo $taxonomy_slug; ?>"]').click();
 				$('.procedures-filter').hide();
 			}
         }
         if ($('body').hasClass('tax-condition')) {
         	if (! FWP.loaded) {
-	        	$('.facetwp-facet-condition_checkbox .facetwp-checkbox[data-value="<?php echo get_queried_object()->slug; ?>"]').click();
+	        	$('.facetwp-facet-condition_checkbox .facetwp-checkbox[data-value="<?php echo $taxonomy_slug; ?>"]').click();
 				$('.condition-filter').hide();
 			}
         }
@@ -680,6 +681,30 @@ function physician_save_post( $post_id ) {
 
   $_POST['acf']['field_physician_full_name'] = $full_name;
 
+}
+
+add_action( 'acf/save_post', 'update_facetwp_index');
+function update_facetwp_index( $post_id ) {
+    if ( function_exists( 'FWP' ) ) {
+        FWP()->indexer->index( $post_id );
+    }
+}
+/** Cron Indexer **/
+function fwp_cron_index() {
+    FWP()->indexer->index();
+}
+add_action( 'fwp_indexer', 'fwp_cron_index' );
+// FacetWP Cron //
+// Add function to register event to WordPress init
+add_action( 'init', 'register_hourly_fwp_indexer');
+
+// Function which will register the event
+function register_hourly_fwp_indexer() {
+	// Make sure this event hasn't been scheduled
+	if( !wp_next_scheduled( 'fwp_indexer' ) ) {
+		// Schedule the event
+		wp_schedule_event( time(), 'hourly', 'fwp_indexer' );
+	}
 }
 
 function limit_to_post_parent( $args, $field, $post ) {
