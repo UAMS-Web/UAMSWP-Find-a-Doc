@@ -1587,28 +1587,43 @@ function get_physician_meta($object) {
 	// $data['pphoto'] = wp_get_attachment_url( get_post_meta( $postId, 'physician_photo', true ), 'file' );
 	$data['physician_photo'] = image_sizer(get_post_thumbnail_id($postId), 253, 337, 'center', 'center');
 	$conditions = get_field('physician_conditions', $postId);
-            $args = (array(
-                'taxonomy' => "condition",
-                'hide_empty' => false,
-                'term_taxonomy_id' => $conditions
-            ));
-			$conditions_query = new WP_Term_Query( $args );
-			$condition_list = '';
-			foreach( $conditions_query->get_terms() as $condition ):
-				$condition_list .= $condition->name . ', ';
- 			endforeach;
+	$condition_list = '';
+	$i = 1;
+	if( $conditions ) {
+        $args = (array(
+            'taxonomy' => 'condition',
+            'hide_empty' => false,
+            'term_taxonomy_id' => $conditions
+        ));
+		$conditions_query = new WP_Term_Query( $args );
+
+		foreach( $conditions_query->get_terms() as $condition ):
+			$condition_list .= $condition->name;
+			if( count($conditions) > $i ) {
+				$condition_list .= ', ';
+			}
+			$i++;
+		 endforeach;
+	}
 	$data['physician_conditions_list'] = $condition_list;
-		$treatments = get_field('physician_treatments', $postId);
+	$treatments = get_field('physician_treatments', $postId);
+	$treatment_list = '';
+	$i = 1;
+	if( $treatments ) {
 		$args = (array(
-			'taxonomy' => "treatment_procedure",
+			'taxonomy' => 'treatment_procedure',
 			'hide_empty' => false,
 			'term_taxonomy_id' => $treatments
 		));
 		$treatments_query = new WP_Term_Query( $args );
-		$treatment_list = '';
 		foreach( $treatments_query->get_terms() as $treatment ):
-			$treatment_list .= $treatment->name . ', ';
-		 endforeach;
+			$treatment_list .= $treatment->name;
+			if( count($treatments) > $i ) {
+				$treatment_list .= ', ';
+			}
+			$i++;
+		endforeach;
+	}
 	$data['physician_treatments_list'] = $treatment_list;
 	$data['physician_conditions'] = get_the_terms( $postId, 'condition' );
 	$data['physician_treatments'] = get_the_terms( $postId, 'treatment_procedure' );
