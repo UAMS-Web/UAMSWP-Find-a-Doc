@@ -1,29 +1,29 @@
 <?php
 
-// Register 'Physicians' Custom Post Type
-function physicians() {
+// Register 'Providers' Custom Post Type
+function providers() {
 
 	$labels = array(
-		'name'                  => 'Physicians',
-		'singular_name'         => 'Physician',
-		'menu_name'             => 'Physicians',
-		'name_admin_bar'        => 'Physician',
-		'archives'              => 'Physician Archives',
-		'attributes'            => 'Physician Attributes',
+		'name'                  => 'Providers',
+		'singular_name'         => 'Provider',
+		'menu_name'             => 'Providers',
+		'name_admin_bar'        => 'Provider',
+		'archives'              => 'Provider Archives',
+		'attributes'            => 'Provider Attributes',
 		'parent_item_colon'     => 'Parent Item:',
-		'all_items'             => 'All Physicians',
-		'add_new_item'          => 'Add New Physician',
+		'all_items'             => 'All Providers',
+		'add_new_item'          => 'Add New Provider',
 		'add_new'               => 'Add New',
-		'new_item'              => 'New Physician',
-		'edit_item'             => 'Edit Physician',
-		'update_item'           => 'Update Physician',
-		'view_item'             => 'View Physician',
-		'view_items'            => 'View Physicians',
-		'search_items'          => 'Search Physicians',
+		'new_item'              => 'New Provider',
+		'edit_item'             => 'Edit Provider',
+		'update_item'           => 'Update Provider',
+		'view_item'             => 'View Provider',
+		'view_items'            => 'View Providers',
+		'search_items'          => 'Search Providers',
 		'uploaded_to_this_item' => 'Uploaded to this item',
-		'items_list'            => 'Physicians list',
-		'items_list_navigation' => 'Physicians list navigation',
-		'filter_items_list'     => 'Filter Physicians list',
+		'items_list'            => 'Providers list',
+		'items_list_navigation' => 'Providers list navigation',
+		'filter_items_list'     => 'Filter Providers list',
 	);
 	$capabilities = array(
 		'edit_post'      		=> "edit_physician",
@@ -42,8 +42,8 @@ function physicians() {
         'edit_published_posts'  => "edit_published_physicians",
 	);
 	$args = array(
-		'label'                 => 'Physician',
-		'description'           => 'UAMS Physicians for Find-a-Doctor',
+		'label'                 => 'Provider',
+		'description'           => 'UAMS Providers for Find-a-Doctor',
 		'labels'                => $labels,
 		'supports'              => array( 'title', 'author', 'thumbnail', ),
 		'taxonomies'            => array( 'specialties', 'department', 'patient_type', 'medical_procedures', 'medical_terms', 'conditions' ),
@@ -55,20 +55,20 @@ function physicians() {
 		'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/physicians-icon.png',
 		'show_in_admin_bar'     => true,
 		'show_in_nav_menus'     => true,
-		'slug'					=> 'physicians',
+		'slug'					=> 'providers',
 		'can_export'            => true,
 		'has_archive'           => true,
 		'exclude_from_search'   => false,
 		'publicly_queryable'    => true,
 		'capabilities'          => $capabilities,
 		'show_in_rest'          => true,
-		'rest_base'             => 'physicians',
+		'rest_base'             => 'providers',
 		'rest_controller_class' => 'WP_REST_Posts_Controller',
 	);
-	register_post_type( 'physicians', $args );
+	register_post_type( 'providers', $args );
 
 }
-add_action( 'init', 'physicians', 0 );
+add_action( 'init', 'providers', 0 );
 
 if ( ! function_exists('locations') ) {
 
@@ -141,73 +141,6 @@ function locations() {
 add_action( 'init', 'locations', 0 );
 
 }
-/* Changing to Areas of Expertise */
-/* Deleting soon */
-// if ( ! function_exists('services_cpt') ) {
-// 	// Register 'Services' Custom Post Type
-// 	function services_cpt() {
-
-// 		$labels = array(
-// 			'name'                  => 'Services',
-// 			'singular_name'         => 'Service',
-// 			'menu_name'             => 'Services',
-// 			'name_admin_bar'        => 'Service',
-// 			'archives'              => 'Service Archives',
-// 			'attributes'            => 'Service Attributes',
-// 			'parent_item_colon'     => 'Parent Item:',
-// 			'all_items'             => 'All Services',
-// 			'add_new_item'          => 'Add New Service',
-// 			'add_new'               => 'Add New',
-// 			'new_item'              => 'New Service',
-// 			'edit_item'             => 'Edit Service',
-// 			'update_item'           => 'Update Service',
-// 			'view_item'             => 'View Service',
-// 			'view_items'            => 'View Services',
-// 			'search_items'          => 'Search Services',
-// 			'uploaded_to_this_item' => 'Uploaded to this item',
-// 			'items_list'            => 'Services list',
-// 			'items_list_navigation' => 'Services list navigation',
-// 			'filter_items_list'     => 'Filter Services list',
-// 		);
-// 		$capabilities = array(
-// 			'edit_post'             => 'edit_service',
-// 			'read_post'             => 'read_service',
-// 			'delete_post'           => 'delete_service',
-// 			'edit_posts'            => 'edit_services',
-// 			'edit_others_posts'     => 'edit_others_services',
-// 			'publish_posts'         => 'publish_services',
-// 			'read_private_posts'    => 'read_private_services',
-// 		);
-// 		$args = array(
-// 			'label'                 => 'Service',
-// 			'description'           => 'UAMS Services', 
-// 			'labels'                => $labels,
-// 			'supports'              => array( 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes', ),
-// 			'taxonomies'            => array( 'specialties', 'medical_terms', 'conditions' ),
-// 			'hierarchical'          => true,
-// 			'capability_type' 		=> 'page',
-// 			'public'                => true,
-// 			'show_ui'               => true,
-// 			'show_in_menu'          => true,
-// 			'menu_position'         => 20,
-// 			'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/services-icon.png',
-// 			'show_in_admin_bar'     => true,
-// 			'show_in_nav_menus'     => true,
-// 			'slug'					=> 'services',
-// 			'can_export'            => true,
-// 			'has_archive'           => true,
-// 			'exclude_from_search'   => false,
-// 			'publicly_queryable'    => true,
-// 			'capabilities'          => $capabilities,
-// 			'show_in_rest'          => true,
-// 			'rest_base'             => 'services',
-// 			'rest_controller_class' => 'WP_REST_Posts_Controller',
-// 		);
-// 		register_post_type( 'services', $args );
-
-// 	}
-// 	// add_action( 'init', 'services_cpt', 0 );
-// }
 
 if ( ! function_exists('expertise_cpt') ) {
 	// Register 'Areas of Expertise' Custom Post Type
@@ -339,7 +272,7 @@ function create_clinical_conditions_taxonomy() {
   		'rest_base'          		 => 'condition',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
 	);
-	register_taxonomy( 'condition', array( 'physicians' ), $args );
+	register_taxonomy( 'condition', array( 'providers' ), $args );
 
 }
 
@@ -402,7 +335,7 @@ function create_clinical_treatments_taxonomy() {
   		'rest_base'          		 => 'treatment_procedure',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
 	);
-	register_taxonomy( 'treatment_procedure', array( 'physicians' ), $args );
+	register_taxonomy( 'treatment_procedure', array( 'providers' ), $args );
 
 }
 
@@ -458,7 +391,7 @@ function create_clinical_treatments_taxonomy() {
 //   		'rest_base'          		 => 'specialties',
 //   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
 // 	);
-// 	register_taxonomy( 'specialty', array( 'physicians' ), $args );
+// 	register_taxonomy( 'specialty', array( 'providers' ), $args );
 
 // }
 // add_action( 'init', 'create_medical_specialties_taxonomy', 0 ); // Disabled
@@ -521,7 +454,7 @@ function create_departments_taxonomy() {
   		'rest_base'          		 => 'medical_department',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
 	);
-	register_taxonomy( 'department', array( 'physicians' ), $args );
+	register_taxonomy( 'department', array( 'providers' ), $args );
 
 }
 //hook into the init action and call create_book_taxonomies when it fires
@@ -582,7 +515,7 @@ function create_service_line_taxonomy() {
   		'rest_base'          		 => 'service_line',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
 	);
-	register_taxonomy( 'service_line', array( 'physicians' ), $args );
+	register_taxonomy( 'service_line', array( 'providers' ), $args );
 
 }
 //hook into the init action and call create_book_taxonomies when it fires
@@ -643,7 +576,7 @@ function create_degrees_taxonomy() {
   		'rest_base'          		 => 'medical_degree',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
 	);
-	register_taxonomy( 'degree', array( 'physicians' ), $args );
+	register_taxonomy( 'degree', array( 'providers' ), $args );
 
 }
 //hook into the init action and call create_book_taxonomies when it fires
@@ -704,7 +637,7 @@ function create_patient_type_taxonomy() {
   		'rest_base'          		 => 'patient_type',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
 	);
-	register_taxonomy( 'patient_type', array( 'physicians' ), $args );
+	register_taxonomy( 'patient_type', array( 'providers' ), $args );
 
 }
 
@@ -766,7 +699,7 @@ function create_clinical_title_taxonomy() {
   		'rest_base'          		 => 'clinical_title',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
 	);
-	register_taxonomy( 'clinical_title', array( 'physicians' ), $args );
+	register_taxonomy( 'clinical_title', array( 'providers' ), $args );
 
 }
 
@@ -820,7 +753,7 @@ function create_affiliations_taxonomy() {
 		'rest_base'                  => 'affiliations',
 		'rest_controller_class'      => 'WP_REST_Terms_Controller',
 	);
-	register_taxonomy( 'affiliations', array( 'physicians' ), $args );
+	register_taxonomy( 'affiliations', array( 'providers' ), $args );
 
 }
 
@@ -876,7 +809,7 @@ function create_languages_taxonomy() {
 		'rest_base'                  => 'languages',
 		'rest_controller_class'      => 'WP_REST_Terms_Controller',
 	);
-	register_taxonomy( 'languages', array( 'physicians' ), $args );
+	register_taxonomy( 'languages', array( 'providers' ), $args );
 
 }
 
@@ -929,7 +862,7 @@ function create_medical_terms_taxonomy() {
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
 	);
-	register_taxonomy( 'medical_terms', array( 'physicians' ), $args );
+	register_taxonomy( 'medical_terms', array( 'providers' ), $args );
 
 }
 // add_action( 'init', 'create_medical_terms_taxonomy', 0 ); // Disabled
@@ -982,7 +915,7 @@ function create_academic_position_taxonomy() {
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
 	);
-	register_taxonomy( 'academic_positions', array( 'physicians' ), $args );
+	register_taxonomy( 'academic_positions', array( 'providers' ), $args );
 
 }
 add_action( 'init', 'create_academic_position_taxonomy', 0 );
@@ -1035,7 +968,7 @@ function create_academic_college_taxonomy() {
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
 	);
-	register_taxonomy( 'academic_colleges', array( 'physicians' ), $args );
+	register_taxonomy( 'academic_colleges', array( 'providers' ), $args );
 
 }
 add_action( 'init', 'create_academic_college_taxonomy', 0 );
@@ -1088,7 +1021,7 @@ function create_schools_taxonomy() {
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
 	);
-	register_taxonomy( 'schools', array( 'physicians' ), $args );
+	register_taxonomy( 'schools', array( 'providers' ), $args );
 
 }
 add_action( 'init', 'create_schools_taxonomy', 0 );
@@ -1145,7 +1078,7 @@ function create_academic_departments_taxonomy() {
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
 	);
-	register_taxonomy( 'academic_department', array( 'physicians' ), $args );
+	register_taxonomy( 'academic_department', array( 'providers' ), $args );
 
 }
 
@@ -1198,7 +1131,7 @@ function create_boards_taxonomy() {
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
 	);
-	register_taxonomy( 'boards', array( 'physicians' ), $args );
+	register_taxonomy( 'boards', array( 'providers' ), $args );
 
 }
 
@@ -1251,7 +1184,7 @@ function create_associations_taxonomy() {
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
 	);
-	register_taxonomy( 'associations', array( 'physicians' ), $args );
+	register_taxonomy( 'associations', array( 'providers' ), $args );
 
 }
 
@@ -1303,7 +1236,7 @@ function create_education_taxonomy() {
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
 	);
-	register_taxonomy( 'educationtype', array( 'physicians' ), $args );
+	register_taxonomy( 'educationtype', array( 'providers' ), $args );
 
 }
 add_action( 'init', 'create_education_taxonomy', 0 );
@@ -1366,7 +1299,7 @@ function create_portal_taxonomy() {
   		'rest_base'          		 => 'portal',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
 	);
-	register_taxonomy( 'portal', array( 'physicians' ), $args );
+	register_taxonomy( 'portal', array( 'providers' ), $args );
 
 }
 
@@ -1470,17 +1403,17 @@ function add_theme_caps() {
 add_action( 'admin_init', 'add_theme_caps');
 
 // Remove the taxonomy metabox [slugnamediv]
-function remove_physician_meta() {
-	remove_meta_box( 'conditiondiv', 'physicians', 'side' );
-	remove_meta_box( 'specialtydiv', 'physicians', 'side' );
-	remove_meta_box( 'departmentdiv', 'physicians', 'side' );
-	remove_meta_box( 'patient_typediv', 'physicians', 'side' );
-	remove_meta_box( 'tagsdiv-medical_procedures', 'physicians', 'side' );
-	remove_meta_box( 'medical_termsdiv', 'physicians', 'side' );
-	remove_meta_box( 'custom-post-type-onomies-locations', 'physicians', 'side');
+function remove_provider_meta() {
+	remove_meta_box( 'conditiondiv', 'providers', 'side' );
+	remove_meta_box( 'specialtydiv', 'providers', 'side' );
+	remove_meta_box( 'departmentdiv', 'providers', 'side' );
+	remove_meta_box( 'patient_typediv', 'providers', 'side' );
+	remove_meta_box( 'tagsdiv-medical_procedures', 'providers', 'side' );
+	remove_meta_box( 'medical_termsdiv', 'providers', 'side' );
+	remove_meta_box( 'custom-post-type-onomies-locations', 'providers', 'side');
 }
 
-add_action( 'admin_menu' , 'remove_physician_meta' );
+add_action( 'admin_menu' , 'remove_provider_meta' );
 
 add_action('admin_head', 'acf_hide_title');
 
@@ -1508,7 +1441,7 @@ function acf_hide_title() {
  * @param 		object 		$labels 		Current post type labels
  * @return 		object 					Modified post type labels
  */
-function change_featured_image_labels_physician( $labels ) {
+function change_featured_image_labels_provider( $labels ) {
 
 	$labels->featured_image 	= 'Headshot';
 	$labels->set_featured_image 	= 'Set headshot';
@@ -1519,15 +1452,15 @@ function change_featured_image_labels_physician( $labels ) {
 
 } // change_featured_image_labels()
 
-add_filter( 'post_type_labels_physicians', 'change_featured_image_labels_physician', 10, 1 );
+add_filter( 'post_type_labels_providers', 'change_featured_image_labels_provider', 10, 1 );
 
 
 /**
  * Add REST API support to Teams Meta.
  */
-function rest_api_physician_meta() {
-    register_rest_field('physicians', 'physician_meta', array(
-            'get_callback' => 'get_physician_meta',
+function rest_api_provider_meta() {
+    register_rest_field('providers', 'provider_meta', array(
+            'get_callback' => 'get_provider_meta',
             'update_callback' => null,
             'schema' => null,
         )
@@ -1539,9 +1472,9 @@ function rest_api_physician_meta() {
 		)
 	);
 }
-function get_physician_meta($object) {
+function get_provider_meta($object) {
     $postId = $object['id'];
-    //Physician
+    //Provider
     $data['physician_first_name'] = get_field('physician_first_name', $postId);
     $data['physician_middle_name'] = get_field( 'physician_middle_name', $postId );
     $data['physician_last_name'] = get_field( 'physician_last_name', $postId );
@@ -1712,7 +1645,7 @@ function get_physician_meta($object) {
 
     return $data;
 }
-add_action('rest_api_init', 'rest_api_physician_meta');
+add_action('rest_api_init', 'rest_api_provider_meta');
 
 function get_location_meta($object) {
 	$postId = $object['id'];
@@ -1739,11 +1672,11 @@ function get_location_meta($object) {
 	return $data;
 
 }
-add_action('rest_api_init', 'rest_api_location_meta');
+// add_action('rest_api_init', 'rest_api_location_meta');
 
 // Add REST API query var filters
-add_filter('rest_query_vars', 'physicians_add_rest_query_vars');
-function physicians_add_rest_query_vars($query_vars) {
+add_filter('rest_query_vars', 'providers_add_rest_query_vars');
+function providers_add_rest_query_vars($query_vars) {
     $query_vars = array_merge( $query_vars, array('meta_key', 'meta_value', 'meta_compare') );
     return $query_vars;
 }

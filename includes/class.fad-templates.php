@@ -2,11 +2,11 @@
 // force use of templates from plugin folder
 function uamswp_force_template( $template )
 {	
-    if( is_post_type_archive( 'physicians' ) ) {
+    if( is_post_type_archive( 'providers' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__)))  .'/templates/archive-physicians.php';
 	}
 	
-	if( is_singular( 'physicians' ) ) {
+	if( is_singular( 'providers' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-physicians.php';
     }
     
@@ -33,18 +33,6 @@ function uamswp_force_template( $template )
     if( is_tax( 'treatment_procedure' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/taxonomy-treatment_procedure.php';
     }
-	
-	// if( is_tax( 'medical_procedures' ) ) {
-    //     $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/taxonomy-medical_procedures.php';
-    // }
-    
-    // if( is_tax( 'medical_terms' ) ) {
-    //     $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/taxonomy-medical_terms.php';
-    // }
-    
-    // if( is_tax( 'specialty' ) ) {
-    //     $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/taxonomy-specialty.php';
-	// }
 	
     return $template;
 }
@@ -84,10 +72,10 @@ function uamswp_fad_body_class( $classes ) {
 	return $classes;
  
 }
-// Custom redirect to archive page for physicians & locations
+// Custom redirect to archive page for providers & locations
 add_action( 'template_redirect', function() {
 	global $wp_query;
-    if ( ('physicians' == $wp_query->get('post_type') || 'locations' == $wp_query->get('post_type')) && is_404( ) ) {
+    if ( ('providers' == $wp_query->get('post_type') || 'locations' == $wp_query->get('post_type')) && is_404( ) ) {
         $redirectLink = get_post_type_archive_link( $wp_query->get('post_type') );
         wp_redirect( $redirectLink, 301 );
         exit;

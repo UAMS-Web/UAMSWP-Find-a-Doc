@@ -205,7 +205,7 @@
             },
             "acfe_permissions": "",
             "post_type": [
-                "physicians"
+                "providers"
             ],
             "taxonomy": "",
             "allow_null": 0,

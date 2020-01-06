@@ -46,7 +46,7 @@ function uamswp_expertise_physicians() {
             $postsPerPage = -1;
         }
         $args = array(
-            "post_type" => "physicians",
+            "post_type" => "providers",
             "post_status" => "publish",
             "posts_per_page" => $postsPerPage,
             "orderby" => "title",
@@ -60,7 +60,7 @@ function uamswp_expertise_physicians() {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="module-title">Physicians</h2>
+                        <h2 class="module-title">Providers</h2>
                         <div class="card-list-container">
                             <div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
                                 <?php 
@@ -74,7 +74,7 @@ function uamswp_expertise_physicians() {
                         </div>
                         <?php if ($postsPerPage !== -1) { ?>
                         <div class="more">
-                            <button class="loadmore btn btn-primary" data-posttype="post" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more physicians">Load More</button>
+                            <button class="loadmore btn btn-primary" data-posttype="post" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more providers">Load More</button>
                         </div>
                         <?php } ?>
                     </div>
