@@ -23,15 +23,15 @@ jQuery(function($) {
             'slug': slug
         };
 
-        console.log(page);
+        // console.log(page);
 
-        console.log(data);
+        // console.log(data);
 
         // docs = postids.split(",");
 
         max_pages = postcount / ppp; // Number of posts per page
 
-        console.log(max_pages);
+        // console.log(max_pages);
  
         // $.post(blog.ajaxurl, data, function(response) {
         //     if(response != '') {
@@ -53,14 +53,15 @@ jQuery(function($) {
 				$('.loadmore').text('Loading...'); // change the button text, you can also add a preloader image
 			},
 			success : function( data ){
-                console.log(data);
+                // console.log(data);
 				if( data ) { 
 					$('.loadmore').text( 'Load More' ); // insert new posts
                     $('.card-list-doctors').append(data);
-					if ( page >= max_pages ) 
+					if ( page >= max_pages ) {
                         // button.remove(); // if last page, remove the button
                         $('#doctors .more').hide();
                         $('.loadmore').hide();
+                    }
                     page++;
 					// you can also fire the "post-load" event here if you use a plugin that requires it
 					// $( document.body ).trigger( 'post-load' );
@@ -70,14 +71,14 @@ jQuery(function($) {
 					// button.remove(); // if no data, remove the button as well
 				}
             },
-            // error : function (jqXHR, textStatus, errorThrown) {
-			// 	$loader.html($.parseJSON(jqXHR.responseText) + ' :: ' + textStatus + ' :: ' + errorThrown);
-			// 	console.log(jqXHR);
-            // },
-            error: function(errorThrown){
-                alert(errorThrown);
-                alert("There is an error with AJAX!");
-            }
+            error : function (jqXHR, textStatus, errorThrown) {
+				$loader.html($.parseJSON(jqXHR.responseText) + ' :: ' + textStatus + ' :: ' + errorThrown);
+				console.log(jqXHR);
+            },
+            // error: function(errorThrown){
+            //     alert(errorThrown);
+            //     alert("There is an error with AJAX!");
+            // }
 
         });
     });

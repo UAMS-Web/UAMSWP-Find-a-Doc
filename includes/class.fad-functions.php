@@ -896,10 +896,8 @@ function uamswp_load_by_ajax_callback(){
     $loop = new WP_Query($args);
     $out = '';
     if ($loop -> have_posts()) :  while ($loop -> have_posts()) : $loop -> the_post();
-        
         $id = get_the_ID();
         $out .= include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' ); 
-        $out .= $args;
     endwhile;
     endif;
     wp_die();
