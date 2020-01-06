@@ -1,12 +1,12 @@
 {
     "key": "group_uamswp_physicians",
-    "title": "Physicians",
+    "title": "Providers",
     "location": [
         [
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "physicians"
+                "value": "providers"
             }
         ]
     ],

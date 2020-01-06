@@ -13,7 +13,7 @@ function asp_custom_link_meta_results( $results ) {
 	  $full_name = '';
 	  $new_desc = '';
 	  foreach ($results as $k=>$v) {
-		  if (($v->content_type == "pagepost") && (get_post_type($v->id) == "physicians")) {
+		  if (($v->content_type == "pagepost") && (get_post_type($v->id) == "providers")) {
                 $degrees = get_field('physician_degree', $v->id);
                 $degree_list = '';
                 $i = 1;
@@ -221,7 +221,7 @@ function fad_script_register() {
         wp_enqueue_style( 'leaflet-css', UAMS_FAD_ROOT_URL . 'assets/leaflet/leaflet.css', array(), '1.1', 'all');
         wp_enqueue_script( 'leaflet-js', UAMS_FAD_ROOT_URL . 'assets/leaflet/leaflet-bing.js', array(), null, false );
     }
-    if ( (is_archive() && ('physicians' == $post_type)) ) {
+    if ( (is_archive() && ('providers' == $post_type)) ) {
         wp_enqueue_script( 'mobile-filter-toggle', UAMS_FAD_ROOT_URL . 'assets/js/mobile-filter-toggle.js', array('jquery'), null, false );
     }
 	wp_enqueue_style( 'fad-css', UAMS_FAD_ROOT_URL . 'assets/css/style.css', array(), '1.0', 'all');
@@ -258,7 +258,7 @@ add_shortcode( 'pubmed', 'uams_pubmed_shortcode' );
 
 // Filter to fix facetwp hash error
 add_filter( 'facetwp_is_main_query', function( $is_main_query, $query ) {
-    // if ( 'physicians' == $query->get( 'post_type' ) ) {
+    // if ( 'providers' == $query->get( 'post_type' ) ) {
 		$is_main_query = false;
     // }
     return $is_main_query;
@@ -273,7 +273,7 @@ add_filter( 'facetwp_shortcode_html', function( $output, $atts) {
 }, 10, 2 );
 
 function fwp_disable_auto_refresh() {
-    if ( is_post_type_archive( 'physicians' ) ) {
+    if ( is_post_type_archive( 'providers' ) ) {
 	?>
 	<script>
 	(function($) {
@@ -291,7 +291,7 @@ add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
 
 /*
 add_action( 'wp_footer', function() {
-    if ( !is_post_type_archive( 'physicians' ) || !is_post_type_archive( 'locations' ) ) {
+    if ( !is_post_type_archive( 'providers' ) || !is_post_type_archive( 'locations' ) ) {
     ?>
         <script>
         (function($) {
@@ -311,7 +311,7 @@ add_action( 'wp_footer', function() {
 
 // FacetWP scripts
 function fwp_facet_scripts() {
-	if ( is_post_type_archive( 'physicians' ) || is_post_type_archive( 'locations' ) ) {
+	if ( is_post_type_archive( 'providers' ) || is_post_type_archive( 'locations' ) ) {
     $taxonomy_slug = isset(get_queried_object()->slug) ? get_queried_object()->slug : '';
 ?>
 <script>
@@ -407,7 +407,7 @@ add_action( 'wp_footer', 'fwp_facet_scripts', 100 );
 
 // FacetWP Sort
 add_filter( 'facetwp_sort_options', function( $options, $params ) {
-	if ( is_post_type_archive( 'physicians' ) || is_singular( 'physicians' ) ) {
+	if ( is_post_type_archive( 'providers' ) || is_singular( 'providers' ) ) {
 		$params = array(
 		    'template_name' => 'physicians',
 		);
@@ -526,7 +526,7 @@ add_filter( 'facetwp_index_row', function( $params, $class ) {
 }, 10, 2 );
 
 // add_filter( 'facetwp_preload_url_vars', function( $url_vars ) {
-//     if ( 'physicians' == FWP()->helper->get_uri() ) {
+//     if ( 'providers' == FWP()->helper->get_uri() ) {
 //         if ( empty( $url_vars['searchable'] ) ) {
 //             $url_vars['searchable'] = array( '1' );
 //         }
@@ -535,15 +535,15 @@ add_filter( 'facetwp_index_row', function( $params, $class ) {
 // } );
 
 // Admin Columns
-add_filter('manage_physicians_posts_columns', 'posts_physicians_columns', 10);
-add_action('manage_physicians_posts_custom_column', 'posts_physicians_custom_columns', 10, 2);
+add_filter('manage_providers_posts_columns', 'posts_providers_columns', 10);
+add_action('manage_providers_posts_custom_column', 'posts_providers_custom_columns', 10, 2);
 
-function posts_physicians_columns($columns){
+function posts_providers_columns($columns){
     $custom_columns = array();
     $title = 'title';
     foreach($columns as $key => $value) {
         if ($key==$title){
-            $custom_columns['physician_post_thumbs'] = __('Headshot');   // Move before title column
+            $custom_columns['provider_post_thumbs'] = __('Headshot');   // Move before title column
         }
           $custom_columns[$key] = $value;
       }
@@ -551,8 +551,8 @@ function posts_physicians_columns($columns){
     return $custom_columns;
 }
 
-function posts_physicians_custom_columns($column_name, $id){
-    if($column_name === 'physician_post_thumbs'){
+function posts_providers_custom_columns($column_name, $id){
+    if($column_name === 'provider_post_thumbs'){
         echo get_the_post_thumbnail( $id, array( 80, 80) );
     }
 }
@@ -864,7 +864,7 @@ function uamswp_load_by_ajax_callback(){
         $ids_array = explode(',', $ids);
         $args = array(
             // 'suppress_filters' => true,
-            'post_type' => 'physicians',
+            'post_type' => 'providers',
             'post_status' => 'publish',
             "orderby" => "title",
             "order" => "ASC",
@@ -877,7 +877,7 @@ function uamswp_load_by_ajax_callback(){
         $tax = (isset($_POST["tax"])) ? $_POST["tax"] : '';
         $slug = (isset($_POST["slug"])) ? $_POST["slug"] : '';
         $args = array(
-            "post_type" => "physicians",
+            "post_type" => "providers",
             "post_status" => "publish",
             "posts_per_page" => $ppp,
             "orderby" => "title",

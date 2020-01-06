@@ -1,6 +1,6 @@
 <?php 
     /**
-     *  Template Name: Physician Loop - Card layout
+     *  Template Name: Provider Loop - Card layout
      *  Designed for UAMS Find-a-Doc
      * 
      *  Must be used inside a loop
