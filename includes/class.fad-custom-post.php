@@ -1739,7 +1739,7 @@ function get_location_meta($object) {
 	return $data;
 
 }
-add_action('rest_api_init', 'rest_api_location_meta');
+// add_action('rest_api_init', 'rest_api_location_meta');
 
 // Add REST API query var filters
 add_filter('rest_query_vars', 'physicians_add_rest_query_vars');
