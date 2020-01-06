@@ -542,13 +542,13 @@
             "multiple": 0,
             "allow_null": 1
         },
-        "field_physician_pid": {
-            "key": "field_physician_pid",
-            "name": "physician_pid",
+        "field_physician_npi": {
+            "key": "field_physician_npi",
+            "name": "physician_npi",
             "type": "number",
-            "label": "PID",
+            "label": "NPI",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
@@ -561,13 +561,13 @@
             "append": "",
             "maxlength": ""
         },
-        "field_physician_npi": {
-            "key": "field_physician_npi",
-            "name": "physician_npi",
+        "field_physician_pid": {
+            "key": "field_physician_pid",
+            "name": "physician_pid",
             "type": "number",
-            "label": "NPI",
+            "label": "PID",
             "instructions": "",
-            "required": 1,
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
