@@ -78,23 +78,13 @@
 									} else { ?>
 									<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" href>Why not?</a></em></p>
 									<?php
-								/*	} else { ?>
-										<div class="rating">
-											<div class="star-ratings-sprite" title="0 out of 5"><div class="star-ratings-sprite-percentage" style="width: 0%;"></div></div>
-											<div class="ratings-count">No ratings - <a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
-										</div>
-									<?php */
 									}
 								}
 							} else { ?>
 								<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" href>Why not?</a></em></p>
 							<?php
-							/*	} else { ?>
-									<div class="rating">
-										<div class="star-ratings-sprite" title="0 out of 5"><div class="star-ratings-sprite-percentage" style="width: 0%;"></div></div>
-										<div class="ratings-count">No ratings - <a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
-									</div>
-							<?php */ } ?>
+							} 
+							?>
 						
 							<p><?php echo ( get_field('physician_short_clinical_bio') ? get_field( 'physician_short_clinical_bio') : wp_trim_words( get_field( 'physician_clinical_bio' ), 30, ' &hellip;' ) ); ?></p>
 						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>">Full Profile</a>
@@ -103,19 +93,10 @@
 						<h4 class="h5">Locations</h5>
 						<?php
 
-							// $locations = new WP_Query( array(
-							//     'relationship' => array(
-							//         'id'   => 'physicians_to_locations',
-							//         'from' => get_the_ID(), // You can pass object ID or full object
-							//     ),
-							//     'nopaging'     => true,
-							// ) );
-
 							$locations = get_field('physician_locations');
 
 							?>
 							<?php if( $locations ): ?>
-							<!-- <h3 data-fontsize="16" data-lineheight="24"><i class="fa fa-medkit"></i> Clinic(s)</h3> -->
 								<ul>
 								<?php foreach( $locations as $location): ?>
 									<li>
@@ -225,14 +206,6 @@
 							<?php endif; ?>
 							<?php
 
-							// $locations = new WP_Query( array(
-							//     'relationship' => array(
-							//         'id'   => 'physicians_to_locations',
-							//         'from' => get_the_ID(), // You can pass object ID or full object
-							//     ),
-							//     'nopaging'     => true,
-							// ) );
-
 							$locations = get_field('physician_locations');
 
 							?>
@@ -259,86 +232,6 @@
 	<?php endwhile; ?>
 		<link rel="stylesheet" type="text/css" href="https://www.docscores.com/resources/css/docscores-lotw.v1330-2018121714.css" />
 
-<!-- 	<script src="https://www.docscores.com/widget/v2/uams/npi/lotw.js" async></script> -->
-
-<!--
-	<script>
-		(function ($, window) {
-
-		var intervals = {};
-		var removeListener = function(selector) {
-
-			if (intervals[selector]) {
-
-				window.clearInterval(intervals[selector]);
-				intervals[selector] = null;
-			}
-		};
-		var found = 'waitUntilExists.found';
-
-		/**
-		 * @function
-		 * @property {object} jQuery plugin which runs handler function once specified
-		 *           element is inserted into the DOM
-		 * @param {function|string} handler
-		 *            A function to execute at the time when the element is inserted or
-		 *            string "remove" to remove the listener from the given selector
-		 * @param {bool} shouldRunHandlerOnce
-		 *            Optional: if true, handler is unbound after its first invocation
-		 * @example jQuery(selector).waitUntilExists(function);
-		 */
-
-		$.fn.waitUntilExists = function(handler, shouldRunHandlerOnce, isChild) {
-
-			var selector = this.selector;
-			var $this = $(selector);
-			var $elements = $this.not(function() { return $(this).data(found); });
-
-			if (handler === 'remove') {
-
-				// Hijack and remove interval immediately if the code requests
-				removeListener(selector);
-			}
-			else {
-
-				// Run the handler on all found elements and mark as found
-				$elements.each(handler).data(found, true);
-
-				if (shouldRunHandlerOnce && $this.length) {
-
-					// Element was found, implying the handler already ran for all
-					// matched elements
-					removeListener(selector);
-				}
-				else if (!isChild) {
-
-					// If this is a recurring search or if the target has not yet been
-					// found, create an interval to continue searching for the target
-					intervals[selector] = window.setInterval(function () {
-
-						$this.waitUntilExists(handler, shouldRunHandlerOnce, true);
-					}, 500);
-				}
-			}
-
-			return $this;
-		};
-
-		}(jQuery, window));
-	(function($) {
-		$(document).ready(function(){
-			$('.ds-average').waitUntilExists( function(){
-
-				$('.ds-average').attr('itemprop', 'ratingValue');
-				$('.ds-ratingcount').attr('itemprop', 'ratingCount');
-				$('.ds-summary').attr('itemtype', 'http://schema.org/AggregateRating');
-				$('.ds-summary').attr('itemprop', 'aggregateRating');
-				//$('.ds-comments').wrapInner('<a href="#PatientRatings"></a>');
-			});
-		});
-	})(jQuery);
-	</script>
--->
 	<?php else : ?>
-	<p><?php _e( 'Sorry, no physicians matched your criteria.' ); ?></p>
+	<p><?php _e( 'Sorry, no providers matched your criteria.' ); ?></p>
 	<?php endif; ?>

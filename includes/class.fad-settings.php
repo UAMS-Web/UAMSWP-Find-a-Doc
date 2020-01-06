@@ -33,7 +33,7 @@ class UAMSPhysicians_Settings
     }
 
     function add_settings_fields() {
-        add_settings_field('ajax_search_pro_id', 'Ajax Search Pro ID for Physicians:', array($this, 'ajax_search_pro_id_callback'), 'general');
+        add_settings_field('ajax_search_pro_id', 'Ajax Search Pro ID for Providers:', array($this, 'ajax_search_pro_id_callback'), 'general');
     }
 
     function ajax_search_pro_id_callback() {

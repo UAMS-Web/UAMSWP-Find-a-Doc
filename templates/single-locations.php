@@ -155,40 +155,6 @@ while ( have_posts() ) : the_post(); ?>
 							if ( 0 < $i ) {
 								echo '</dl>';
 							}
-							// echo '<h3>Holiday Hours</h3>';
-							// echo '<dl class="hours">';
-							// if( $hours ) {
-							// 	$hours_text = '';
-							// 	$day = ''; // Previous Day
-							// 	$comment = ''; // Comment on previous day
-							// 	foreach ($hours as $hour) :
-							// 		if( $day !== $hour['day'] || $comment ) {
-							// 			$hours_text .= '<dt>'. $hour['day'] .'</dt> ';
-							// 			$hours_text .= '<dd>';
-							// 		} else {
-							// 			$hours_text .= ', ';
-							// 		}
-							// 		if ( $hour['closed'] ) {
-							// 			$hours_text .= 'Closed ';
-							// 		} else {
-							// 			$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] )  ? '' . apStyleDate( $hour['open'] ) . ' &ndash; ' . apStyleDate( $hour['close'] ) . '' : '' );
-							// 			if ( $hour['comment'] ) {
-							// 				$hours_text .= ' ' .$hour['comment'];
-							// 				$comment = $hour['comment'];
-							// 			} else {
-							// 				$comment = '';
-							// 			}
-							// 		}
-							// 		if( $day !== $hour['day'] && $comment ) {
-							// 			$hours_text .= '</dd>';
-							// 		}
-							// 		$day = $hour['day']; // Reset the day
-							// 	endforeach;
-							// 	echo $hours_text;
-							// } else {
-							// 	echo '<dt>No information</dt>';
-							// }
-							// echo '</dl>';
 						endif; ?>
 					<?php if (get_field('location_after_hours') && !get_field('location_24_7')) { ?>
 					<h3>After Hours</h3>
@@ -425,7 +391,7 @@ while ( have_posts() ) : the_post(); ?>
 			$postsPerPage = -1;
 		}
 		$args = array(
-			"post_type" => "physicians",
+			"post_type" => "providers",
 			"post_status" => "publish",
 			"posts_per_page" => $postsPerPage,
 			"orderby" => "title",
@@ -439,7 +405,7 @@ while ( have_posts() ) : the_post(); ?>
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-							<h2 class="module-title">Physicians at <?php the_title(); ?></h2>
+							<h2 class="module-title">Providers at <?php the_title(); ?></h2>
 							<div class="card-list-container">
 								<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
 									<?php 
@@ -453,7 +419,7 @@ while ( have_posts() ) : the_post(); ?>
 							</div>
 							<?php if ($postsPerPage !== -1) { ?>
 							<div class="more">
-								<button class="loadmore btn btn-primary" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more physicians">Load More</button>
+								<button class="loadmore btn btn-primary" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more providers">Load More</button>
 							</div>
 							<?php } ?>
 						</div>

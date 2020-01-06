@@ -117,7 +117,7 @@
 					$postsPerPage = -1;
 				}
 			$args = (array(
-				'post_type' => "physicians",
+				'post_type' => "providers",
 				"post_status" => "publish",
 				'order' => 'ASC',
 				'orderby' => 'title',
@@ -132,7 +132,7 @@
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-12">
-								<h2 class="module-title">Physicians Treating <?php echo single_cat_title( '', false ); ?></h2>
+								<h2 class="module-title">Providers Treating <?php echo single_cat_title( '', false ); ?></h2>
 								<p class="note">Note that every treatment or procedure listed above may not be provided by each doctor listed below. Review each doctor for availability.</p>
 								<div class="card-list-container">
 									<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
@@ -147,7 +147,7 @@
 								</div>
 								<?php if ($postsPerPage !== -1) { ?>
 								<div class="more">
-									<button class="loadmore btn btn-primary" data-type="taxonomy" data-tax="condition" data-slug="<?php echo get_queried_object()->slug; ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physiciansCount; ?>" aria-label="Load more physicians">Load More</button>
+									<button class="loadmore btn btn-primary" data-type="taxonomy" data-tax="condition" data-slug="<?php echo get_queried_object()->slug; ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physiciansCount; ?>" aria-label="Load more providers">Load More</button>
 								</div>
 								<?php } ?>
 							</div>
