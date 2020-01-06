@@ -108,7 +108,7 @@
 			</section>
 		<?php } // endif ?>
 		<?php // Check if any doctors are connected	
-		$physicians = get_field('condition_physicians', $term);
+		$physicians = get_field('treatment_procedure_physicians', $term);
 		$physiciansCount = count($physicians);
 		$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12)
 		$postsCutoff = 18; // Set cutoff value
