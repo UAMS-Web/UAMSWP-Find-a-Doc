@@ -84,7 +84,7 @@ function uamswp_fad_body_class( $classes ) {
 	return $classes;
  
 }
-// Custom redirect to archive page
+// Custom redirect to archive page for physicians & locations
 add_action( 'template_redirect', function() {
 	global $wp_query;
     if ( ('physicians' == $wp_query->get('post_type') || 'locations' == $wp_query->get('post_type')) && is_404( ) ) {
