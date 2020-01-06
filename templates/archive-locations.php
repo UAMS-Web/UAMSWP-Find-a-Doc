@@ -17,12 +17,7 @@
                     <div class="col-xs-12">
                         <h2 class="module-title sr-only">List of Locations</h2>
                         <div class="card-list-container location-card-list-container">
-                            <?php //<div class="card-list"> ?>
-                                <?php echo facetwp_display( 'template', 'locations' ); ?>
-                                <?php //get_template_part( 'templates/physician-loop' ); ?>
-                                <?php // echo facetwp_display( 'pager' ); ?>
-                                <?php //echo do_shortcode('[facetwp load_more="true" label="Load more"]'); ?>
-                            <?php //</div> ?>
+                            <?php echo facetwp_display( 'template', 'locations' ); ?>
                         </div>
                         <div class="row list-pagination">
                             <div class="col">
@@ -35,9 +30,6 @@
         </section>
     </main>
 </div>
-<?php // FacetWP Hide elements
-		  // Set # value depending on element
-		  ?>
 	<script>
     (function($) {
         $(document).on('facetwp-loaded', function() {

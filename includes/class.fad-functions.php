@@ -3,13 +3,7 @@
 add_filter( 'asp_results', 'asp_custom_link_meta_results', 1, 2 );
 function asp_custom_link_meta_results( $results ) {
 
-  // Change this variable to whatever meta key you are using
-  //$key = 'profile_type';
-
   // Parse through each result item
-    // if ($id == '1') {
-	  // Parse through each result item
-	//   $new_url = '';
 	  $full_name = '';
 	  $new_desc = '';
 	  foreach ($results as $k=>$v) {
@@ -57,31 +51,6 @@ function uamswp_admin_scripts ( $hook ) {
 }
     
 add_action('admin_enqueue_scripts', 'uamswp_admin_scripts');
-    
-
-// add_filter( 'asp_result_image_after_prostproc', 'asp_get_post_type_image', 1, 2 );
-
-// function asp_get_post_type_image( $image, $id ) {
-
-//    if ( empty($image) ) {
-//        $type = get_post_type( $id );
-
-//        switch ($type) {
-//            case "physicians":
-//                $image = "/wp-content/uploads/2018/12/image01299.png";
-//                break;
-//            case "locations":
-//                $image = "/wp-content/uploads/2019/01/pin.png";
-//                break;
-//            default:
-//                $image = get_stylesheet_directory_uri() ."/assets/admin-icons/services-icon.png";
-//                break;
-//        }
-//    }
-
-//     return $image;
-// }
-
 
 // pubmed finder
 new pubmed_field_on_change();
@@ -183,13 +152,6 @@ class pubmed_field_on_change {
 		       loading scripts where you need them.
 		*/
 
-		// global $post;
-		// if (!$post ||
-		//     !isset($post->ID) ||
-		//     get_post_type($post->ID) != 'physicians') {
-		// 	return;
-		// }
-
 
 		// the handle should be changed to your own unique handle
 		$handle = 'pubmed_field_on_change';
@@ -240,22 +202,6 @@ function uams_pubmed_shortcode( $atts ) {
 }
 add_shortcode( 'pubmed', 'uams_pubmed_shortcode' );
 
-// add_action( 'rwmb_enqueue_scripts', 'prefix_enqueue_custom_style' );
-// function prefix_enqueue_custom_style() {
-//     wp_enqueue_style( 'admin-mb-style', get_stylesheet_directory_uri() . '/admin.css' );
-// }
-
-/* FacetWP functions */
-// factwp Main Query fix
-// add_filter( 'facetwp_is_main_query', function( $is_main_query, $query ) {
-//     if ( '' !== $query->get( 'facetwp' ) ) {
-//         $is_main_query = (bool) $query->get( 'facetwp' );
-//     }
-//     return $is_main_query;
-// }, 10, 2 );
-
-
-
 // Filter to fix facetwp hash error
 add_filter( 'facetwp_is_main_query', function( $is_main_query, $query ) {
     // if ( 'providers' == $query->get( 'post_type' ) ) {
@@ -288,26 +234,6 @@ function fwp_disable_auto_refresh() {
     }
 }
 add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
-
-/*
-add_action( 'wp_footer', function() {
-    if ( !is_post_type_archive( 'providers' ) || !is_post_type_archive( 'locations' ) ) {
-    ?>
-        <script>
-        (function($) {
-            $(document).on('facetwp-refresh', function() {
-            if (FWP.loaded) {
-                FWP.set_hash();
-                window.location.reload();
-                return false;
-            }
-            });
-        })(jQuery);
-        </script>
-    <?php
-    }
-}, 10 );
-*/
 
 // FacetWP scripts
 function fwp_facet_scripts() {
@@ -497,10 +423,6 @@ add_filter( 'facetwp_pager_html', function( $output, $params ) {
     return $output;
 }, 10, 2 );
 
-// add_filter( 'facetwp_per_page_options', function( $options ) {
-//     return array( 1, 2, 25, 50, 100, 250 );
-// });
-
 add_filter( 'facetwp_shortcode_html', function( $output, $atts ) {
     if ( $atts['template'] = 'locations' ) {
         $output = str_replace( 'facetwp-template row', 'facetwp-template row card-list', $output );
@@ -516,23 +438,8 @@ add_filter( 'facetwp_index_row', function( $params, $class ) {
             return false;
         }
     }
-    // if ( 'searchable' == $params['facet_name'] ) {
-    //     $included_terms = array( 'Yes' );
-    //     if ( ! in_array( $params['facet_display_value'], $included_terms ) ) {
-    //         return false;
-    //     }
-    // }
     return $params;
 }, 10, 2 );
-
-// add_filter( 'facetwp_preload_url_vars', function( $url_vars ) {
-//     if ( 'providers' == FWP()->helper->get_uri() ) {
-//         if ( empty( $url_vars['searchable'] ) ) {
-//             $url_vars['searchable'] = array( '1' );
-//         }
-//     }
-//     return $url_vars;
-// } );
 
 // Admin Columns
 add_filter('manage_providers_posts_columns', 'posts_providers_columns', 10);
@@ -578,32 +485,6 @@ function wp_nrc_cached_api( $npi ) {
 	return $request;
 }
 
-//$request = wp_nrc_cached_api(  );
-
-/*
-if ( is_wp_error( $request ) ) {
-	return false;
-}
-
-$body = wp_remote_retrieve_body( $request );
-$data = json_decode( $body );
-
-if ( ! empty( $data ) ) {
-	foreach ( $data as $object ) {
-		echo '<p>' . wp_kses_post( $object->introduction ) . '</p>';
-	}
-}
-
-$request = wp_remote_get( 'https://transparency.nrchealth.com/widget/api/org-profile/uams/npi/' . get_field( 'physician_npi' ) . '/0' );
-
-					if( is_wp_error( $request ) ) {
-						return false; // Bail early
-					}
-
-					$body = wp_remote_retrieve_body( $request );
-
-					$data = json_decode( $body );
-*/
 add_filter('acf/prepare_field/key=field_physician_portal', 'set_default_portal', 20, 3);
 add_filter('acf/prepare_field/key=field_location_portal', 'set_default_portal', 20, 3);
 function set_default_portal( $field ) {
@@ -644,11 +525,6 @@ function my_taxonomy_query( $args, $field ) {
     return $args;
     
 }
-// add_filter('acf/fields/relationship/query/key=field_physician_expertise', 'limit_to_post_parent', 10, 3);
-// add_filter('acf/fields/relationship/query/key=field_location_expertise', 'limit_to_post_parent', 10, 3);
-// add_filter('acf/fields/relationship/query/key=field_expertise_associated', 'limit_to_post_parent', 10, 3);
-// add_filter('acf/fields/post_object/query/key=field_condition_expertise', 'limit_to_post_parent', 10, 3);
-// add_filter('acf/fields/post_object/query/key=field_treatment_procedure_expertise', 'limit_to_post_parent', 10, 3);
 
 add_action('acf/save_post', 'physician_save_post', 5); 
 function physician_save_post( $post_id ) {
@@ -754,31 +630,6 @@ function uamswp_fad_json_load_point( $paths ) {
     return $paths;
     
 }
-/* 
- * Remove for production 
- */
-// // Convert php to json acf
-// // get all the local field groups 
-// $field_groups = acf_get_local_field_groups();
-
-// // loop over each of the gield gruops 
-// foreach( $field_groups as $field_group ) {
-
-// 	// get the field group key 
-// 	$key = $field_group['key'];
-
-// 	// if this field group has fields 
-// 	if( acf_have_local_fields( $key ) ) {
-	
-//       	// append the fields 
-// 		$field_group['fields'] = acf_get_local_fields( $key );
-
-// 	}
-
-// 	// save the acf-json file to the acf-json dir by default 
-// 	acf_write_json_field_group( $field_group );
-
-// }
 add_action( 'admin_init', 'uamswp_remove_genesis_term_meta', 11 ); // hook in after genesis adds the tax meta
 function uamswp_remove_genesis_term_meta() {
  $taxonomies = array( 'condition', 'treatment_procedure', 'portal' );

@@ -34,18 +34,6 @@ function uamswp_force_template( $template )
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/taxonomy-treatment_procedure.php';
     }
 	
-	// if( is_tax( 'medical_procedures' ) ) {
-    //     $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/taxonomy-medical_procedures.php';
-    // }
-    
-    // if( is_tax( 'medical_terms' ) ) {
-    //     $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/taxonomy-medical_terms.php';
-    // }
-    
-    // if( is_tax( 'specialty' ) ) {
-    //     $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/taxonomy-specialty.php';
-	// }
-	
     return $template;
 }
 add_filter( 'template_include', 'uamswp_force_template' );

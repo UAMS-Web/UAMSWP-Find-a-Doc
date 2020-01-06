@@ -65,22 +65,12 @@
 						<?php echo facetwp_display( 'sort' ); ?>
 					</div>
 				</div>
-				<!-- <div class="row list"> -->
-					<?php echo facetwp_display( 'template', 'physician' ); ?>
-					<!-- <div class="facetwp-template">
-						<?php //include( plugin_dir_path( __DIR__ ) . 'templates/fwp/physician-loop.php' ); ?>
-					</div> -->
-					<?php // echo facetwp_display( 'per_page' ); ?>
-					<?php //echo do_shortcode('[facetwp load_more="true" label="Load more"]'); ?>
-				<!-- </div> -->
+				<?php echo facetwp_display( 'template', 'physician' ); ?>
 				<div class="row list-pagination">
 					<div class="col">
 						<?php echo facetwp_display( 'pager' ); ?>
 					</div>
 				</div>
-				<?php // FacetWP Hide elements
-					// Set # value depending on element
-				?>
 				<script defer>
 					(function($) {
 						$(document).on('facetwp-loaded', function() {

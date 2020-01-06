@@ -155,40 +155,6 @@ while ( have_posts() ) : the_post(); ?>
 							if ( 0 < $i ) {
 								echo '</dl>';
 							}
-							// echo '<h3>Holiday Hours</h3>';
-							// echo '<dl class="hours">';
-							// if( $hours ) {
-							// 	$hours_text = '';
-							// 	$day = ''; // Previous Day
-							// 	$comment = ''; // Comment on previous day
-							// 	foreach ($hours as $hour) :
-							// 		if( $day !== $hour['day'] || $comment ) {
-							// 			$hours_text .= '<dt>'. $hour['day'] .'</dt> ';
-							// 			$hours_text .= '<dd>';
-							// 		} else {
-							// 			$hours_text .= ', ';
-							// 		}
-							// 		if ( $hour['closed'] ) {
-							// 			$hours_text .= 'Closed ';
-							// 		} else {
-							// 			$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] )  ? '' . apStyleDate( $hour['open'] ) . ' &ndash; ' . apStyleDate( $hour['close'] ) . '' : '' );
-							// 			if ( $hour['comment'] ) {
-							// 				$hours_text .= ' ' .$hour['comment'];
-							// 				$comment = $hour['comment'];
-							// 			} else {
-							// 				$comment = '';
-							// 			}
-							// 		}
-							// 		if( $day !== $hour['day'] && $comment ) {
-							// 			$hours_text .= '</dd>';
-							// 		}
-							// 		$day = $hour['day']; // Reset the day
-							// 	endforeach;
-							// 	echo $hours_text;
-							// } else {
-							// 	echo '<dt>No information</dt>';
-							// }
-							// echo '</dl>';
 						endif; ?>
 					<?php if (get_field('location_after_hours') && !get_field('location_24_7')) { ?>
 					<h3>After Hours</h3>

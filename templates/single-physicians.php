@@ -157,33 +157,13 @@ while ( have_posts() ) : the_post(); ?>
                                 } else { ?>
                                     <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" href>Why not?</a></em></p>
                                 <?php
-                                /* } else { ?>
-                                    <div class="rating" aria-label="Patient Rating">
-                                    <div class="ratings-count">No ratings - <a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
-                                    <!-- <div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div> -->
-                                    </div>
-                                <?php */
                                 }
                             }
                         } else { ?>
                             <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" href>Why not?</a></em></p>
                     <?php
-                        /* } else { ?>
-                            <div class="rating" aria-label="Patient Rating">
-                                <div class="ratings-count">No ratings - <a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
-                                <!-- <div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div> -->
-                            </div>
-                    <?php */
-                        } ?>
-                    <!-- <div class="rating" aria-label="Patient Rating">
-                        <div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: 94%;"></div></div>
-                        <div class="ratings-score">4.7<span class="sr-only"> out of 5</span></div>
-                        <div class="w-100"></div>
-                        <a href="#ratings" aria-label="Jump to Patient Ratings & Reviews">
-                            <div class="ratings-count-lg">595 Patient Satisfaction Ratings</div>
-                            <div class="ratings-comments-lg">100 comments</div>
-                        </a>
-                    </div> -->
+                        }
+                    ?>
                     <?php if( (!get_field('physician_npi')) || ( !empty($data) && !$rating_valid ) ) { ?>
                         <div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -724,7 +704,7 @@ while ( have_posts() ) : the_post(); ?>
             <div class="container-fluid"
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="module-title">Latest News for C. Lowry Barnes, M.D.</h2>
+                        <h2 class="module-title">Latest News for {Name}</h2>
                         <div class="card-list-container">
                             <div class="card-list">
                                 <div class="card">
