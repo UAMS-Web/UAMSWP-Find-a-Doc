@@ -24,7 +24,7 @@
     "acfe_note": "",
     "acfe_meta": "",
     "fields": {
-        "field_physician_youtube_link": {
+        "field_expertise_youtube_link": {
             "key": "field_expertise_youtube_link",
             "name": "expertise_youtube_link",
             "type": "url",
@@ -129,8 +129,8 @@
             "key": "field_expertise_physicians",
             "name": "expertise_physicians",
             "type": "relationship",
-            "label": "Physicians",
-            "instructions": "The physicians will display in alphabetical order. If there are 18 or fewer, they will all be visible when the page loads. If there are more than 18, 12 will display before prompting the user to load more.",
+            "label": "Providers",
+            "instructions": "The providers will display in alphabetical order. If there are 18 or fewer, they will all be visible when the page loads. If there are more than 18, 12 will display before prompting the user to load more.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -139,7 +139,7 @@
                 "id": ""
             },
             "post_type": [
-                "physicians"
+                "providers"
             ],
             "taxonomy": [],
             "filters": [
