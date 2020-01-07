@@ -66,3 +66,8 @@
     background-color: #9d2235;
     color: #fff;
 }
+
+.doctor-list .facetwp-type-fselect .fs-wrap,
+.doctor-list .facetwp-type-fselect .fs-dropdown {
+	width: 285px;
+}
