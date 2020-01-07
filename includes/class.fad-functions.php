@@ -7,7 +7,7 @@ function asp_custom_link_meta_results( $results ) {
 	  $full_name = '';
 	  $new_desc = '';
 	  foreach ($results as $k=>$v) {
-		  if (($v->content_type == "pagepost") && (get_post_type($v->id) == "providers")) {
+		  if (($v->content_type == "pagepost") && (get_post_type($v->id) == "provider")) {
                 $degrees = get_field('physician_degree', $v->id);
                 $degree_list = '';
                 $i = 1;
@@ -179,11 +179,11 @@ function fad_script_register() {
 	if ( !is_admin() ) {
 		wp_register_script( 'pubmed-api', UAMS_FAD_ROOT_URL . 'assets/js/pubmed-api-async.js', array('jquery'), null, true );
     }
-    if ( (is_single() && ('locations' == $post_type)) ) {
+    if ( (is_single() && ('location' == $post_type)) ) {
         wp_enqueue_style( 'leaflet-css', UAMS_FAD_ROOT_URL . 'assets/leaflet/leaflet.css', array(), '1.1', 'all');
         wp_enqueue_script( 'leaflet-js', UAMS_FAD_ROOT_URL . 'assets/leaflet/leaflet-bing.js', array(), null, false );
     }
-    if ( (is_archive() && ('providers' == $post_type)) ) {
+    if ( (is_archive() && ('provider' == $post_type)) ) {
         wp_enqueue_script( 'mobile-filter-toggle', UAMS_FAD_ROOT_URL . 'assets/js/mobile-filter-toggle.js', array('jquery'), null, false );
     }
 	wp_enqueue_style( 'fad-css', UAMS_FAD_ROOT_URL . 'assets/css/style.css', array(), '1.0', 'all');
@@ -204,7 +204,7 @@ add_shortcode( 'pubmed', 'uams_pubmed_shortcode' );
 
 // Filter to fix facetwp hash error
 add_filter( 'facetwp_is_main_query', function( $is_main_query, $query ) {
-    // if ( 'providers' == $query->get( 'post_type' ) ) {
+    // if ( 'provider' == $query->get( 'post_type' ) ) {
 		$is_main_query = false;
     // }
     return $is_main_query;
@@ -219,7 +219,7 @@ add_filter( 'facetwp_shortcode_html', function( $output, $atts) {
 }, 10, 2 );
 
 function fwp_disable_auto_refresh() {
-    if ( is_post_type_archive( 'providers' ) ) {
+    if ( is_post_type_archive( 'provider' ) ) {
 	?>
 	<script>
 	(function($) {
@@ -237,7 +237,7 @@ add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
 
 // FacetWP scripts
 function fwp_facet_scripts() {
-	if ( is_post_type_archive( 'providers' ) || is_post_type_archive( 'locations' ) ) {
+	if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) ) {
     $taxonomy_slug = isset(get_queried_object()->slug) ? get_queried_object()->slug : '';
 ?>
 <script>
@@ -333,7 +333,7 @@ add_action( 'wp_footer', 'fwp_facet_scripts', 100 );
 
 // FacetWP Sort
 add_filter( 'facetwp_sort_options', function( $options, $params ) {
-	if ( is_post_type_archive( 'providers' ) || is_singular( 'providers' ) ) {
+	if ( is_post_type_archive( 'provider' ) || is_singular( 'provider' ) ) {
 		$params = array(
 		    'template_name' => 'physicians',
 		);
@@ -355,7 +355,7 @@ add_filter( 'facetwp_sort_options', function( $options, $params ) {
 	    );
 	    unset( $options['title_asc'] );
      	unset( $options['title_desc'] );
-	 } elseif ( is_post_type_archive( 'locations' ) || is_singular( 'locations' ) ) {
+	 } elseif ( is_post_type_archive( 'location' ) || is_singular( 'location' ) ) {
 	 	$params = array(
 		    'template_name' => 'locations',
 		);
@@ -442,10 +442,10 @@ add_filter( 'facetwp_index_row', function( $params, $class ) {
 }, 10, 2 );
 
 // Admin Columns
-add_filter('manage_providers_posts_columns', 'posts_providers_columns', 10);
-add_action('manage_providers_posts_custom_column', 'posts_providers_custom_columns', 10, 2);
+add_filter('manage_provider_posts_columns', 'posts_provider_columns', 10);
+add_action('manage_provider_posts_custom_column', 'posts_provider_custom_columns', 10, 2);
 
-function posts_providers_columns($columns){
+function posts_provider_columns($columns){
     $custom_columns = array();
     $title = 'title';
     foreach($columns as $key => $value) {
@@ -458,7 +458,7 @@ function posts_providers_columns($columns){
     return $custom_columns;
 }
 
-function posts_providers_custom_columns($column_name, $id){
+function posts_provider_custom_columns($column_name, $id){
     if($column_name === 'provider_post_thumbs'){
         echo get_the_post_thumbnail( $id, array( 80, 80) );
     }
@@ -505,7 +505,7 @@ function set_default_language($value, $post_id, $field) {
         return $value;
     }
     
-    $term = get_term_by('slug', 'english', 'languages');
+    $term = get_term_by('slug', 'english', 'language');
 	$id = $term->term_id;
     $value = array($id);
   	return $value;
@@ -632,7 +632,7 @@ function uamswp_fad_json_load_point( $paths ) {
 }
 add_action( 'admin_init', 'uamswp_remove_genesis_term_meta', 11 ); // hook in after genesis adds the tax meta
 function uamswp_remove_genesis_term_meta() {
- $taxonomies = array( 'condition', 'treatment_procedure', 'portal' );
+ $taxonomies = array( 'condition', 'treatment', 'portal' );
  foreach( $taxonomies as $taxonomy ) {
  remove_action( "{$taxonomy}_edit_form", 'genesis_taxonomy_archive_options', 10 );
  remove_action( "{$taxonomy}_edit_form", 'genesis_taxonomy_seo_options', 10 );
@@ -655,7 +655,7 @@ add_filter('manage_edit-condition_columns', function ( $columns )
 
     return $columns;
 } );
-add_filter('manage_edit-treatment_procedure_columns', function ( $columns ) 
+add_filter('manage_edit-treatment_columns', function ( $columns ) 
 {
     if( isset( $columns['description'] ) )
         unset( $columns['description'] );   
@@ -685,7 +685,7 @@ function rlv_tax_excerpt_term_fields($content, $term) {
 }
 // AJAX
 function uamswp_ajax_scripts() { 
-    if ( is_singular( 'locations' ) || is_singular( 'expertise' ) || is_tax( 'condition' ) || is_tax( 'treatment_procedure' ) ) { // Only run on these template pages
+    if ( is_singular( 'location' ) || is_singular( 'expertise' ) || is_tax( 'condition' ) || is_tax( 'treatment' ) ) { // Only run on these template pages
         // Register the script
         wp_register_script( 'uamswp-loadmore', UAMS_FAD_ROOT_URL . 'assets/js/uamswp-loadmore.js', array('jquery'), false, true );
     
@@ -715,7 +715,7 @@ function uamswp_load_by_ajax_callback(){
         $ids_array = explode(',', $ids);
         $args = array(
             // 'suppress_filters' => true,
-            'post_type' => 'providers',
+            'post_type' => 'provider',
             'post_status' => 'publish',
             "orderby" => "title",
             "order" => "ASC",
@@ -728,7 +728,7 @@ function uamswp_load_by_ajax_callback(){
         $tax = (isset($_POST["tax"])) ? $_POST["tax"] : '';
         $slug = (isset($_POST["slug"])) ? $_POST["slug"] : '';
         $args = array(
-            "post_type" => "providers",
+            "post_type" => "provider",
             "post_status" => "publish",
             "posts_per_page" => $ppp,
             "orderby" => "title",

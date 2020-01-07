@@ -2,7 +2,7 @@
     "name": "uamswp_locations",
     "relationship": {
         "type": "post",
-        "post_type": "locations"
+        "post_type": "location"
     },
     "primary_key": [
         "id"

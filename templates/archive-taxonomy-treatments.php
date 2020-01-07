@@ -46,7 +46,7 @@ get_header(); ?>
                         <h2 class="module-title sr-only">List of Conditions</h2>
                             <?php
                             // if show all is set
-                            $taxonomy = 'treatment_procedure';
+                            $taxonomy = 'treatment';
                             if( isset($_GET['showall']) ):
 
                                 $args = array( 'taxonomy' => $taxonomy, 'hide_empty' => 0 );

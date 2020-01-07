@@ -2,19 +2,19 @@
 // force use of templates from plugin folder
 function uamswp_force_template( $template )
 {	
-    if( is_post_type_archive( 'providers' ) ) {
+    if( is_post_type_archive( 'provider' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__)))  .'/templates/archive-physicians.php';
 	}
 	
-	if( is_singular( 'providers' ) ) {
+	if( is_singular( 'provider' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-physicians.php';
     }
     
-    if( is_post_type_archive( 'locations' ) ) {
+    if( is_post_type_archive( 'location' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/archive-locations.php';
 	}
 	
-	if( is_singular( 'locations' ) ) {
+	if( is_singular( 'location' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-locations.php';
     }
     
@@ -30,7 +30,7 @@ function uamswp_force_template( $template )
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/taxonomy-condition.php';
     }
     
-    if( is_tax( 'treatment_procedure' ) ) {
+    if( is_tax( 'treatment' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/taxonomy-treatment_procedure.php';
     }
 	
@@ -65,7 +65,7 @@ add_action('init', function() {
 add_filter( 'body_class', 'uamswp_fad_body_class' );
 function uamswp_fad_body_class( $classes ) {
  
-	if ( is_tax( 'condition' ) || is_tax( 'treatment_procedure' ) ) {
+	if ( is_tax( 'condition' ) || is_tax( 'treatment' ) ) {
 		$classes[] = 'page-template-default';
 	}
  
@@ -75,7 +75,7 @@ function uamswp_fad_body_class( $classes ) {
 // Custom redirect to archive page for providers & locations
 add_action( 'template_redirect', function() {
 	global $wp_query;
-    if ( ('providers' == $wp_query->get('post_type') || 'locations' == $wp_query->get('post_type')) && is_404( ) ) {
+    if ( ('provider' == $wp_query->get('post_type') || 'location' == $wp_query->get('post_type')) && is_404( ) ) {
         $redirectLink = get_post_type_archive_link( $wp_query->get('post_type') );
         wp_redirect( $redirectLink, 301 );
         exit;

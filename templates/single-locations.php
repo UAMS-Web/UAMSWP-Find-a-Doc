@@ -391,7 +391,7 @@ while ( have_posts() ) : the_post(); ?>
 			$postsPerPage = -1;
 		}
 		$args = array(
-			"post_type" => "providers",
+			"post_type" => "provider",
 			"post_status" => "publish",
 			"posts_per_page" => $postsPerPage,
 			"orderby" => "title",
@@ -446,7 +446,7 @@ while ( have_posts() ) : the_post(); ?>
     endif;
 	$treatments = get_field('location_treatments');
 	$args = (array(
-		'taxonomy' => "treatment_procedure",
+		'taxonomy' => "treatment",
         'order' => 'ASC',
         'orderby' => 'name',
         'hide_empty' => false,

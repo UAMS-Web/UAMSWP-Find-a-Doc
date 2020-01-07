@@ -126,7 +126,7 @@ function get_taxonomy_archive_link( $taxonomy ) {
 }
 
   function uamswp_add_blog_crumb( $crumb, $args ) {
-    if ( is_singular( 'condition' ) || is_singular( 'treatment_procedure' ) || is_tax( 'condition' ) || is_tax( 'treatment_procedure' ) )
+    if ( is_singular( 'condition' ) || is_singular( 'treatment' ) || is_tax( 'condition' ) || is_tax( 'treatment' ) )
       return '<a href="' . get_taxonomy_archive_link( get_queried_object()->taxonomy ) . '">' . get_taxonomy( get_queried_object()->taxonomy )->labels->name .'</a> ' . $args['sep'] . ' ' . $crumb;
     else
       return $crumb;
