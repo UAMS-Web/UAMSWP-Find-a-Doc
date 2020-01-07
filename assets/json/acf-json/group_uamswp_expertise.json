@@ -79,7 +79,7 @@
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "treatment_procedure",
+            "taxonomy": "treatment",
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 0,
@@ -113,7 +113,7 @@
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "medical_terms",
+            "taxonomy": "medical_term",
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 0,
@@ -139,7 +139,7 @@
                 "id": ""
             },
             "post_type": [
-                "providers"
+                "provider"
             ],
             "taxonomy": [],
             "filters": [
@@ -170,7 +170,7 @@
                 "id": ""
             },
             "post_type": [
-                "locations"
+                "location"
             ],
             "taxonomy": [],
             "filters": [

@@ -6,7 +6,7 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "providers"
+                "value": "provider"
             }
         ]
     ],
@@ -621,7 +621,7 @@
             "default_value": [
                 "English"
             ],
-            "taxonomy": "languages",
+            "taxonomy": "language",
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 0,
@@ -759,7 +759,7 @@
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "treatment_procedure",
+            "taxonomy": "treatment",
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 0,
@@ -793,7 +793,7 @@
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "medical_terms",
+            "taxonomy": "medical_term",
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 0,
@@ -819,7 +819,7 @@
                 "id": ""
             },
             "post_type": [
-                "locations"
+                "location"
             ],
             "taxonomy": [],
             "filters": [
@@ -849,7 +849,7 @@
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "affiliations",
+            "taxonomy": "affiliation",
             "field_type": "checkbox",
             "add_term": 0,
             "save_terms": 0,
@@ -1079,7 +1079,7 @@
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "academic_colleges",
+            "taxonomy": "academic_college",
             "field_type": "checkbox",
             "add_term": 1,
             "save_terms": 0,
@@ -1104,7 +1104,7 @@
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "academic_positions",
+            "taxonomy": "academic_position",
             "field_type": "checkbox",
             "add_term": 1,
             "save_terms": 0,
@@ -1377,7 +1377,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "taxonomy": "schools",
+                    "taxonomy": "school",
                     "field_type": "select",
                     "add_term": 1,
                     "save_terms": 0,
@@ -1448,7 +1448,7 @@
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "associations",
+            "taxonomy": "association",
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 0,

@@ -46,7 +46,7 @@ function uamswp_expertise_physicians() {
             $postsPerPage = -1;
         }
         $args = array(
-            "post_type" => "providers",
+            "post_type" => "provider",
             "post_status" => "publish",
             "posts_per_page" => $postsPerPage,
             "orderby" => "title",
@@ -124,7 +124,7 @@ function uamswp_expertise_conditions() {
 function uamswp_expertise_treatments() {
     $treatments = get_field('expertise_treatments');
     $args = (array(
-        'taxonomy' => "treatment_procedure",
+        'taxonomy' => "treatment",
         'order' => 'ASC',
         'orderby' => 'name',
         'hide_empty' => false,
@@ -139,7 +139,7 @@ function uamswp_expertise_locations() {
     $locations = get_field('expertise_locations');
     if($locations) {
         $args = (array(
-            'post_type' => "locations",
+            'post_type' => "location",
             'order' => 'ASC',
             'orderby' => 'title',
             'posts_per_page' => -1,

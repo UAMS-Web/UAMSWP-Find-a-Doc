@@ -74,7 +74,7 @@
 		<?php 
 			$treatments = get_field('condition_treatments', $term);
 			$args = (array(
-				'taxonomy' => "treatment_procedure",
+				'taxonomy' => "treatment",
 				'order' => 'ASC',
 				'orderby' => 'name',
 				'hide_empty' => false,
@@ -117,7 +117,7 @@
 					$postsPerPage = -1;
 				}
 			$args = (array(
-				'post_type' => "providers",
+				'post_type' => "provider",
 				"post_status" => "publish",
 				'order' => 'ASC',
 				'orderby' => 'title',
@@ -133,7 +133,7 @@
 						<div class="row">
 							<div class="col-12">
 								<h2 class="module-title">Providers Treating <?php echo single_cat_title( '', false ); ?></h2>
-								<p class="note">Note that every treatment or procedure listed above may not be provided by each doctor listed below. Review each doctor for availability.</p>
+								<p class="note">Note that every treatment or procedure listed above may not be provided by each provider listed below. Review each provider for availability.</p>
 								<div class="card-list-container">
 									<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
 										<?php
@@ -159,7 +159,7 @@
 		<?php 
 			$locations = get_field('condition_locations', $term);
 			$args = (array(
-				'post_type' => "locations",
+				'post_type' => "location",
 				"post_status" => "publish",
 				'order' => 'ASC',
 				'orderby' => 'title',
