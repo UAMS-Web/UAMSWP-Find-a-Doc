@@ -147,7 +147,7 @@ while ( have_posts() ) : the_post(); ?>
                                 if ( $rating_valid ){
                                     echo '<div class="rating" itemprop="aggregateRating" itemscope="" itemtype="https://schema.org/AggregateRating" aria-label="Patient Rating">';
                                         echo '<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: '. floatval($data->profile->averageStarRatingStr)/5 * 100 .'%;"></div></div>';
-                                        echo '<div class="ratings-score">'. $data->profile->averageRatingStr .'<span class="sr-only"> out of 5</span></div>';
+                                        echo '<div class="ratings-score" itemprop="ratingValue">'. $data->profile->averageRatingStr .'<span class="sr-only"> out of 5</span></div>';
                                         echo '<div class="w-100"></div>';
                                         echo '<a href="#ratings" aria-label="Jump to Patient Ratings & Reviews">';
                                         echo '<div class="ratings-count-lg">'. $data->profile->reviewcount .' Patient Satisfaction Ratings</div>';
@@ -258,9 +258,11 @@ while ( have_posts() ) : the_post(); ?>
                         <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 380, 507, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 760, 1013, 'center', 'center'); ?> 2x"
                             media="(min-width: 1px)">
                         <img src="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center'); ?>" alt="<?php echo $full_name; ?>" />
-                        <?php } else { ?>
-                            <?php the_post_thumbnail( 'large',  array( 'itemprop' => 'image' ) ); ?>
-                        <?php } //endif ?>
+                        <?php $docphoto = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center');
+                             } else { 
+                                the_post_thumbnail( 'large',  array( 'itemprop' => 'image' ) );
+                                $docphoto = get_the_post_thumbnail( 'large');
+                             } //endif ?>
                     </picture>
                 </div>
                 <?php } //endif ?>
@@ -775,7 +777,20 @@ while ( have_posts() ) : the_post(); ?>
     </main>
 </div>
 
-
+<?php // Schema Data ?>
+<script type='application/ld+json'> 
+{
+  "@context": "http://www.schema.org",
+  "@type": "Physician",
+  "name": "<?php echo $full_name; ?>",
+  "url": "<?php echo get_permalink(); ?>",
+  "logo": "<?php echo get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png'; ?>",
+  "image": "<?php echo $docphoto; ?>",
+  <?php if ($bio) { ?>
+  "description": "<?php echo $bio; ?>"
+  <?php } ?>
+}
+ </script>
 
 <?php endwhile; // end of the loop. ?>
 
