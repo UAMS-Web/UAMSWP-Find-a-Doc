@@ -145,13 +145,17 @@ while ( have_posts() ) : the_post(); ?>
                                 $rating_valid = $data->valid;
 
                                 if ( $rating_valid ){
-                                    echo '<div class="rating" itemprop="aggregateRating" itemscope="" itemtype="https://schema.org/AggregateRating" aria-label="Patient Rating">';
-                                        echo '<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: '. floatval($data->profile->averageStarRatingStr)/5 * 100 .'%;"></div></div>';
-                                        echo '<div class="ratings-score">'. $data->profile->averageRatingStr .'<span class="sr-only"> out of 5</span></div>';
+                                    $avg_rating = $data->profile->averageRatingStr;
+	                                $avg_rating_dec = $data->profile->averageRating;
+	                                $review_count = $data->profile->reviewcount;
+	                                $comment_count = $data->profile->bodycount;
+                                    echo '<div class="rating" aria-label="Patient Rating">';
+                                        echo '<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: '. $avg_rating_dec/5 * 100 .'%;"></div></div>';
+                                        echo '<div class="ratings-score">'. $avg_rating .'<span class="sr-only"> out of 5</span></div>';
                                         echo '<div class="w-100"></div>';
                                         echo '<a href="#ratings" aria-label="Jump to Patient Ratings & Reviews">';
-                                        echo '<div class="ratings-count-lg">'. $data->profile->reviewcount .' Patient Satisfaction Ratings</div>';
-                                        echo '<div class="ratings-comments-lg">'. $data->profile->bodycount .' comments</div>';
+                                        echo '<div class="ratings-count-lg">'. $review_count .' Patient Satisfaction Ratings</div>';
+                                        echo '<div class="ratings-comments-lg">'.  $comment_count .' comments</div>';
                                         echo '</a>';
                                     echo '</div>';
                                 } else { ?>
@@ -258,9 +262,11 @@ while ( have_posts() ) : the_post(); ?>
                         <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 380, 507, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 760, 1013, 'center', 'center'); ?> 2x"
                             media="(min-width: 1px)">
                         <img src="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center'); ?>" alt="<?php echo $full_name; ?>" />
-                        <?php } else { ?>
-                            <?php the_post_thumbnail( 'large',  array( 'itemprop' => 'image' ) ); ?>
-                        <?php } //endif ?>
+                        <?php $docphoto = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center');
+                             } else {
+                                the_post_thumbnail( 'large',  array( 'itemprop' => 'image' ) );
+                                $docphoto = get_the_post_thumbnail( 'large');
+                             } //endif ?>
                     </picture>
                 </div>
                 <?php } //endif ?>
@@ -357,10 +363,19 @@ while ( have_posts() ) : the_post(); ?>
                 'term_taxonomy_id' => $conditions
             ));
             $conditions_query = new WP_Term_Query( $args );
-
+            $condition_schema = '';
             // we will use the first term to load ACF data from
             if( $conditions ):
                 include( UAMS_FAD_PATH . '/templates/loops/conditions-loop.php' );
+                $condition_schema .= '"medicalSpecialty": [';
+                foreach( $conditions as $condition ):
+                    $condition_schema .= '{
+                    "@type": "MedicalSpecialty",
+                    "name": "'. get_term( $condition, 'condition' )->name .'",
+                    "url":"'. get_term_link($condition) .'"
+                    },';
+                endforeach;
+                $condition_schema .= '"" ],'
             endif; 
              // load all 'treatments' terms for the post
             $treatments = get_field('physician_treatments');
@@ -396,7 +411,7 @@ while ( have_posts() ) : the_post(); ?>
 	                                <?php foreach( $expertises as $expertise ) {
 	                                    $id = $expertise;
 	                                    if ( get_post_status ( $expertise ) == 'publish' ) {
-	                                        include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+                                            include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
 	                                    }
 	                                } ?>
 	                            </div>
@@ -565,7 +580,9 @@ while ( have_posts() ) : the_post(); ?>
                     <h2 class="module-title">Locations Where <?php echo $short_name; ?> Practices</h2>
                     <div class="card-list-container location-card-list-container">
                         <div class="card-list">
-                        <?php $l = 1; ?>
+                        <?php $l = 1;
+                              $location_schema = ''; 
+                        ?>
                         <?php foreach( $locations as $location ): 
                             if ( get_post_status ( $location ) == 'publish' ) { ?>
                                 <div class="card">
@@ -607,6 +624,20 @@ while ( have_posts() ) : the_post(); ?>
                                         </div>
                                     </div>
                                 </div>
+                                <?php
+                                     // Schema data
+                                     $location_schema .= '
+                                     "address": {
+                                     "@type": "PostalAddress",
+                                     "streetAddress": "'. get_field('location_address_1', $location ) . ' '. get_field('location_address_2', $location ) .'",
+                                     "addressLocality": "'. get_field('location_city', $location ) .'",
+                                     "addressRegion": "'. get_field('location_state', $location ) .'",
+                                     "postalCode": "'. get_field('location_zip', $location) .'",
+                                     "telephone": "'. format_phone_dash( get_field('location_phone', $location) ) .'"
+                                     },
+                                     ';
+                                ?>
+
                                 <?php $l++; ?>
                             <?php } ?>
                         <?php endforeach; ?>
@@ -775,7 +806,30 @@ while ( have_posts() ) : the_post(); ?>
     </main>
 </div>
 
-
+<?php // Schema Data ?>
+<script type='application/ld+json'>
+{
+  "@context": "http://www.schema.org",
+  "@type": "Physician",
+  "name": "<?php echo $full_name; ?>",
+  "url": "<?php echo get_permalink(); ?>",
+  "logo": "<?php echo get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png'; ?>",
+  "image": "<?php echo $docphoto; ?>",
+  <?php if ($bio) { ?>
+  "description": "<?php echo $bio; ?>",
+  <?php } ?>
+  <?php echo $condition_schema; ?>
+  <?php echo $location_schema; ?>
+  <?php if ( $rating_valid ){ ?>
+  "aggregateRating": {
+  		"@type": "AggregateRating",
+        "ratingValue": "<?php echo $avg_rating; ?>",
+        "ratingCount": "<?php echo $review_count; ?>",
+        "reviewCount": "<?php echo $comment_count; ?>"
+   }
+  <?php } ?>
+}
+ </script>
 
 <?php endwhile; // end of the loop. ?>
 
