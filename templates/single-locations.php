@@ -92,7 +92,7 @@ while ( have_posts() ) : the_post(); ?>
 						?>
 					</dl>
 					<?php
-					$phone_schema .= '"" ],'
+					$phone_schema .= '"" ],';
 					$hours247 = get_field('location_24_7');
 					$hours = get_field('location_hours');
 					$hours_schema = '';
@@ -496,7 +496,7 @@ while ( have_posts() ) : the_post(); ?>
 			"url":"'. get_term_link($condition) .'"
 			},';
 		endforeach;
-		$condition_schema .= '"" ],'
+		$condition_schema .= '"" ],';
     endif;
 	$treatments = get_field('location_treatments');
 	$args = (array(
