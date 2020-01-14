@@ -559,10 +559,10 @@ while ( have_posts() ) : the_post(); ?>
                                 <p><a class="btn btn-outline-primary" href="<?php echo get_field('physician_research_profiles_link'); ?>">View <?php echo $short_name; ?>'s research profile</a></p>
                             <?php endif; ?>
                         </div>
-                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
         <?php endif; ?>
         <?php 
         $location_valid = false;
