@@ -236,10 +236,6 @@ function uamswp_list_child_expertise() {
                     "value" => "1",
                     "compare" => "!=",
                 ),
-                array(
-                    "key" => "hide_from_sub_menu",
-                    "compare" => "NOT EXISTS",
-                ),
             ),
         );
         $pages = New WP_Query ( $args );
