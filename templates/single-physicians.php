@@ -406,12 +406,12 @@ while ( have_posts() ) : the_post(); ?>
 	                            <h2 class="module-title"><?php echo $short_name; ?>'s Areas of Expertise</h2>
 	                            <div class="card-list-container">
 	                                <div class="card-list">
-	                                <?php foreach( $expertises as $expertise ) {
-	                                    $id = $expertise;
-	                                    if ( get_post_status ( $expertise ) == 'publish' ) {
-                                            include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-	                                    }
-	                                } ?>
+                                        <?php foreach( $expertises as $expertise ) {
+                                            $id = $expertise;
+                                            if ( get_post_status ( $expertise ) == 'publish' ) {
+                                                include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+                                            }
+                                        } ?>
                                     </div>
 	                            </div>
 	                        </div>
