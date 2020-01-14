@@ -508,7 +508,7 @@ while ( have_posts() ) : the_post(); ?>
                         <?php } // endif ?>
                     </div>
                 </div>
-            <div>
+            </div>
         </section>
         <?php endif; ?>
         <?php 
