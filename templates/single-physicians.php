@@ -95,14 +95,12 @@ while ( have_posts() ) : the_post(); ?>
                         if ( $expertise_valid ) {
                         ?>
                         <dt>Area<?php echo( count($expertises) > 1 ? 's' : '' );?> of Expertise</dt>
-                        <dd>
-                            <?php foreach( $expertises as $expertise ) {
-                                $id = $expertise; 
-                                if ( get_post_status ( $expertise ) == 'publish' ) {
-                                    echo '<dd><a href="' . get_permalink($id) . '" target="_self">' . get_the_title($id) . '</a></dd>';
-                                }
-                            } ?>
-                        </dd>                 
+                        <?php foreach( $expertises as $expertise ) {
+                            $id = $expertise; 
+                            if ( get_post_status ( $expertise ) == 'publish' ) {
+                                echo '<dd><a href="' . get_permalink($id) . '" target="_self">' . get_the_title($id) . '</a></dd>';
+                            }
+                        } ?>
                         <?php }
                     } ?>
                     <?php  // Display if they will provide second opinions
