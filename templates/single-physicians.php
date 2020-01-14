@@ -33,8 +33,10 @@ if ( $languages ) {
         $i++;
     endforeach;
 }
+
+$prefix = get_field('physician_prefix',$post->ID);
 $full_name = get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
-$short_name = get_field('physician_prefix',$post->ID) ? get_field('physician_prefix',$post->ID) .' ' .get_field('physician_last_name',$post->ID) : get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '');
+$short_name = $prefix ? $prefix .' ' .get_field('physician_last_name',$post->ID) : get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '');
 $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 $bio = get_field('physician_clinical_bio',$post->ID);
 $eligible_appt = get_field('physician_eligible_appointments',$post->ID);
@@ -43,6 +45,67 @@ if (empty($excerpt)){
         $excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 155, '...');
     }
 }
+
+// Classes for indicating presence of content
+$service_line = get_field('physician_service_line',$post->ID);
+$npi =  get_field('physician_npi',$post->ID);
+$bio_short = get_field('physician_short_clinical_bio',$post->ID);
+$video = get_field('physician_youtube_link',$post->ID);
+$affiliation = get_field('physician_affiliation',$post->ID);
+$hidden = get_field('physician_hidden',$post->ID);
+$college_affiliation = get_field('physician_academic_college',$post->ID);
+$position = get_field('physician_academic_position',$post->ID);
+$bio_academic = get_field('physician_academic_bio',$post->ID);
+$bio_academic_short = get_field('physician_academic_short_bio',$post->ID);
+$office_location = get_field('physician_academic_office',$post->ID);
+$office_building = get_field('physician_academic_map',$post->ID);
+$bio_research = get_field('physician_research_bio',$post->ID);
+$research_interests = get_field('physician_research_interests',$post->ID);
+$research_profile = get_field('physician_research_profiles_link',$post->ID);
+$additional_info = get_field('physician_additional_info',$post->ID);
+
+$provider_field_classes = '';
+if ($degrees && !empty($degrees)) { $provider_field_classes = $provider_field_classes . ' has-degrees'; }
+if ($prefix && !empty($prefix)) { $provider_field_classes = $provider_field_classes . ' has-prefix'; }
+if (has_post_thumbnail()) { $provider_field_classes = $provider_field_classes . ' has-image'; }
+if ($service_line && !empty($service_line)) { $provider_field_classes = $provider_field_classes . ' has-service-line'; }
+if ($npi && !empty($npi)) { $provider_field_classes = $provider_field_classes . ' has-npi'; }
+if ($bio && !empty($bio)) { $provider_field_classes = $provider_field_classes . ' has-clinical-bio'; }
+if ($bio_short && !empty($bio_short)) { $provider_field_classes = $provider_field_classes . ' has-short-clinical-bio'; }
+if ($video && !empty($video)) { $provider_field_classes = $provider_field_classes . ' has-video'; }
+if (get_field('physician_conditions',$post->ID) && !empty(get_field('physician_conditions',$post->ID))) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
+if (get_field('physician_treatments',$post->ID) && !empty(get_field('physician_treatments',$post->ID))) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
+if ($affiliation && !empty($affiliation)) { $provider_field_classes = $provider_field_classes . ' has-affiliation'; }
+if (get_field('physician_expertise',$post->ID) && !empty(get_field('physician_expertise',$post->ID))) { $provider_field_classes = $provider_field_classes . ' has-expertise'; }
+if ($hidden && !empty($hidden)) { $provider_field_classes = $provider_field_classes . ' has-hidden'; }
+// Add one instance of a class (' has-academic-appt') if there is a physician_academic_appointment row with a value in either/both of the fields.
+// Add one instance of a class (' has-empty-academic-title') if there is an empty academic title field in any of the physician_academic_appointment rows.
+// Add one instance of a class (' has-empty-academic-dept') if there is an empty academic department field in any of the physician_academic_appointment rows.
+if ($college_affiliation && !empty($college_affiliation)) { $provider_field_classes = $provider_field_classes . ' has-college-affiliation'; }
+if ($position && !empty($position)) { $provider_field_classes = $provider_field_classes . ' has-position'; }
+if ($bio_academic && !empty($bio_academic)) { $provider_field_classes = $provider_field_classes . ' has-academic-bio'; }
+if ($bio_academic_short && !empty($bio_academic_short)) { $provider_field_classes = $provider_field_classes . ' has-short-academic-bio'; }
+if ($office_location && !empty($office_location)) { $provider_field_classes = $provider_field_classes . ' has-office-location'; }
+if ($office_building && !empty($office_building)) { $provider_field_classes = $provider_field_classes . ' has-office-building'; }
+// Add one instance of a class (' has-contact-info') if there is a physician_contact_information row with a value in both of the fields.
+// Add one instance of a class (' has-empty-contact-info') if there is an empty information field in any of the physician_contact_information rows.
+// Add one instance of a class (' has-education') if there is a physician_education row with a value in either education_type or school.
+// Add one instance of a class (' has-empty-education-type') if there is an empty education_type field in any of the physician_education rows.
+// Add one instance of a class (' has-empty-education-school') if there is an empty school field in any of the physician_education rows.
+if (get_field('physician_boards',$post->ID) && !empty(get_field('physician_boards',$post->ID))) { $provider_field_classes = $provider_field_classes . ' has-boards'; }
+if (get_field('physician_associations',$post->ID) && !empty(get_field('physician_associations',$post->ID))) { $provider_field_classes = $provider_field_classes . ' has-associations'; }
+if ($bio_research && !empty($bio_research)) { $provider_field_classes = $provider_field_classes . ' has-research-bio'; }
+if ($research_interests && !empty($research_interests)) { $provider_field_classes = $provider_field_classes . ' has-research-interests'; }
+if ($research_profile && !empty($research_profile)) { $provider_field_classes = $provider_field_classes . ' has-research-profile'; }
+if (get_field('physician_pubmed_author_id',$post->ID) && !empty(get_field('physician_pubmed_author_id',$post->ID))) { $provider_field_classes = $provider_field_classes . ' has-pubmed-id'; }
+// Add one instance of a class (' has-selected-pubs') if there is a physician_select_publications row with a value in either/both of the pubmed_id_pmid and pubmed_information fields.
+// Add one instance of a class (' has-empty-selected-pub-id') if there is an empty pubmed_id_pmid field in any of the physician_select_publications rows.
+// Add one instance of a class (' has-empty-selected-pub-info') if there is an empty pubmed_information field in any of the physician_select_publications rows.
+// Add one instance of a class (' has-awards') if there is a physician_awards row with a value in either/both of the year and title fields.
+// Add one instance of a class (' has-empty-selected-pub-id') if there is an empty year field in any of the physician_awards rows.
+// Add one instance of a class (' has-empty-selected-pub-info') if there is an empty title field in any of the physician_awards rows.
+if ($additional_info && !empty($additional_info)) { $provider_field_classes = $provider_field_classes . ' has-additional-info'; }
+
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
@@ -95,14 +158,12 @@ while ( have_posts() ) : the_post(); ?>
                         if ( $expertise_valid ) {
                         ?>
                         <dt>Area<?php echo( count($expertises) > 1 ? 's' : '' );?> of Expertise</dt>
-                        <dd>
-                            <?php foreach( $expertises as $expertise ) {
-                                $id = $expertise; 
-                                if ( get_post_status ( $expertise ) == 'publish' ) {
-                                    echo '<dd><a href="' . get_permalink($id) . '" target="_self">' . get_the_title($id) . '</a></dd>';
-                                }
-                            } ?>
-                        </dd>                 
+                        <?php foreach( $expertises as $expertise ) {
+                            $id = $expertise; 
+                            if ( get_post_status ( $expertise ) == 'publish' ) {
+                                echo '<dd><a href="' . get_permalink($id) . '" target="_self">' . get_the_title($id) . '</a></dd>';
+                            }
+                        } ?>
                         <?php }
                     } ?>
                     <?php  // Display if they will provide second opinions
@@ -408,12 +469,13 @@ while ( have_posts() ) : the_post(); ?>
 	                            <h2 class="module-title"><?php echo $short_name; ?>'s Areas of Expertise</h2>
 	                            <div class="card-list-container">
 	                                <div class="card-list">
-	                                <?php foreach( $expertises as $expertise ) {
-	                                    $id = $expertise;
-	                                    if ( get_post_status ( $expertise ) == 'publish' ) {
-                                            include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-	                                    }
-	                                } ?>
+                                        <?php foreach( $expertises as $expertise ) {
+                                            $id = $expertise;
+                                            if ( get_post_status ( $expertise ) == 'publish' ) {
+                                                include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+                                            }
+                                        } ?>
+                                    </div>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -509,7 +571,7 @@ while ( have_posts() ) : the_post(); ?>
                         <?php } // endif ?>
                     </div>
                 </div>
-            <div>
+            </div>
         </section>
         <?php endif; ?>
         <?php 
@@ -562,7 +624,8 @@ while ( have_posts() ) : the_post(); ?>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
         <?php endif; ?>
         <?php 
         $location_valid = false;
@@ -706,7 +769,7 @@ while ( have_posts() ) : the_post(); ?>
                             </div>
                         </div>
                         <div class="view-more text-center mt-8 mt-sm-10">
-                            <button class="btn btn-secondary" data-toggle="modal" data-target="#MoreReviews" aria-label="Load more individual reviews">View More</a>
+                            <button class="btn btn-secondary" data-toggle="modal" data-target="#MoreReviews" aria-label="Load more individual reviews">View More</button>
                         </div>
                         <!-- Modal -->
                         <div class="modal fade" id="MoreReviews" tabindex="-1" role="dialog" aria-labelledby="more-reviews-title" aria-hidden="true">
