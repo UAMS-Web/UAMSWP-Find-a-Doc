@@ -703,7 +703,7 @@ while ( have_posts() ) : the_post(); ?>
                             </div>
                         </div>
                         <div class="view-more text-center mt-8 mt-sm-10">
-                            <button class="btn btn-secondary" data-toggle="modal" data-target="#MoreReviews" aria-label="Load more individual reviews">View More</a>
+                            <button class="btn btn-secondary" data-toggle="modal" data-target="#MoreReviews" aria-label="Load more individual reviews">View More</button>
                         </div>
                         <!-- Modal -->
                         <div class="modal fade" id="MoreReviews" tabindex="-1" role="dialog" aria-labelledby="more-reviews-title" aria-hidden="true">
