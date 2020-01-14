@@ -412,6 +412,7 @@ while ( have_posts() ) : the_post(); ?>
                                             include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
 	                                    }
 	                                } ?>
+                                    </div>
 	                            </div>
 	                        </div>
 	                    </div>
