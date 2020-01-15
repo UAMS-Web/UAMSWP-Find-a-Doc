@@ -158,14 +158,12 @@ while ( have_posts() ) : the_post(); ?>
                         if ( $expertise_valid ) {
                         ?>
                         <dt>Area<?php echo( count($expertises) > 1 ? 's' : '' );?> of Expertise</dt>
-                        <dd>
-                            <?php foreach( $expertises as $expertise ) {
-                                $id = $expertise; 
-                                if ( get_post_status ( $expertise ) == 'publish' ) {
-                                    echo '<dd><a href="' . get_permalink($id) . '" target="_self">' . get_the_title($id) . '</a></dd>';
-                                }
-                            } ?>
-                        </dd>                 
+                        <?php foreach( $expertises as $expertise ) {
+                            $id = $expertise; 
+                            if ( get_post_status ( $expertise ) == 'publish' ) {
+                                echo '<dd><a href="' . get_permalink($id) . '" target="_self">' . get_the_title($id) . '</a></dd>';
+                            }
+                        } ?>
                         <?php }
                     } ?>
                     <?php  // Display if they will provide second opinions
@@ -471,12 +469,13 @@ while ( have_posts() ) : the_post(); ?>
 	                            <h2 class="module-title"><?php echo $short_name; ?>'s Areas of Expertise</h2>
 	                            <div class="card-list-container">
 	                                <div class="card-list">
-	                                <?php foreach( $expertises as $expertise ) {
-	                                    $id = $expertise;
-	                                    if ( get_post_status ( $expertise ) == 'publish' ) {
-                                            include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-	                                    }
-	                                } ?>
+                                        <?php foreach( $expertises as $expertise ) {
+                                            $id = $expertise;
+                                            if ( get_post_status ( $expertise ) == 'publish' ) {
+                                                include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+                                            }
+                                        } ?>
+                                    </div>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -572,7 +571,7 @@ while ( have_posts() ) : the_post(); ?>
                         <?php } // endif ?>
                     </div>
                 </div>
-            <div>
+            </div>
         </section>
         <?php endif; ?>
         <?php 
@@ -625,7 +624,8 @@ while ( have_posts() ) : the_post(); ?>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
         <?php endif; ?>
         <?php 
         $location_valid = false;
@@ -766,7 +766,7 @@ while ( have_posts() ) : the_post(); ?>
                             </div>
                         </div>
                         <div class="view-more text-center mt-8 mt-sm-10">
-                            <button class="btn btn-secondary" data-toggle="modal" data-target="#MoreReviews" aria-label="Load more individual reviews">View More</a>
+                            <button class="btn btn-secondary" data-toggle="modal" data-target="#MoreReviews" aria-label="Load more individual reviews">View More</button>
                         </div>
                         <!-- Modal -->
                         <div class="modal fade" id="MoreReviews" tabindex="-1" role="dialog" aria-labelledby="more-reviews-title" aria-hidden="true">

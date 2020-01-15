@@ -357,7 +357,7 @@
             "name": "location_short_desc",
             "type": "textarea",
             "label": "Short Description (excerpt)",
-            "instructions": "Limit of 160 characters. Preferred length is approx 18 words.",
+            "instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {

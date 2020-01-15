@@ -657,7 +657,7 @@
             "name": "physician_short_clinical_bio",
             "type": "textarea",
             "label": "Short Bio",
-            "instructions": "Limit of 160 characters. Preferred length is approx 18 words.",
+            "instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -1140,7 +1140,7 @@
             "name": "physician_academic_short_bio",
             "type": "text",
             "label": "Short Academic Bio",
-            "instructions": "Limit of 160 characters. Preferred length is approx 18 words.",
+            "instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
