@@ -51,6 +51,14 @@ $service_line = get_field('physician_service_line',$post->ID);
 $npi =  get_field('physician_npi',$post->ID);
 $bio_short = get_field('physician_short_clinical_bio',$post->ID);
 $video = get_field('physician_youtube_link',$post->ID);
+$location_valid = false;
+$locations = get_field('physician_locations');
+foreach( $locations as $location ) {
+    if ( get_post_status ( $location ) == 'publish' ) {
+       $location_valid = true;
+       $break;
+    }
+}
 $affiliation = get_field('physician_affiliation',$post->ID);
 $hidden = get_field('physician_hidden',$post->ID);
 $college_affiliation = get_field('physician_academic_college',$post->ID);
@@ -75,6 +83,7 @@ if ($bio_short && !empty($bio_short)) { $provider_field_classes = $provider_fiel
 if ($video && !empty($video)) { $provider_field_classes = $provider_field_classes . ' has-video'; }
 if (get_field('physician_conditions',$post->ID) && !empty(get_field('physician_conditions',$post->ID))) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
 if (get_field('physician_treatments',$post->ID) && !empty(get_field('physician_treatments',$post->ID))) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
+if( $locations && $location_valid ) { $provider_field_classes = $provider_field_classes . ' has-location'; }
 if ($affiliation && !empty($affiliation)) { $provider_field_classes = $provider_field_classes . ' has-affiliation'; }
 if (get_field('physician_expertise',$post->ID) && !empty(get_field('physician_expertise',$post->ID))) { $provider_field_classes = $provider_field_classes . ' has-expertise'; }
 if ($hidden && !empty($hidden)) { $provider_field_classes = $provider_field_classes . ' has-hidden'; }
