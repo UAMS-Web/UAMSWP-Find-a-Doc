@@ -585,6 +585,7 @@ while ( have_posts() ) : the_post(); ?>
                         <h2 class="module-title"><?php echo $short_name; ?>'s Research</h2>
                         <div class="module-body">
                             <?php if( get_field('physician_research_bio') ) { ?>
+                                <h3 class="sr-only">Research Biography</h3>
                                 <?php echo get_field('physician_research_bio'); ?>
                             <?php } // endif
                             if( get_field('physician_research_interests') ) { ?>
