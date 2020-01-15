@@ -436,7 +436,7 @@ while ( have_posts() ) : the_post(); ?>
                     "url":"'. get_term_link($condition) .'"
                     },';
                 endforeach;
-                $condition_schema .= '"" ],'
+                $condition_schema .= '"" ],';
             endif; 
              // load all 'treatments' terms for the post
             $treatments = get_field('physician_treatments');
