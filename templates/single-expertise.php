@@ -34,6 +34,7 @@ add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 12 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 14 );
 add_action( 'genesis_after_entry', 'uamswp_list_child_expertise', 16);
 add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 20 );
+add_action( 'genesis_after_entry', 'uamswp_expertise_appointment', 22 );
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 
 function uamswp_expertise_physicians() {
@@ -266,5 +267,23 @@ function uamswp_list_child_expertise() {
         <?php
         }
     }
+}
+function uamswp_expertise_appointment() {
+    if ( get_field('expertise_locations') ) {
+        $appointment_location_url = '#locations';
+    } else {
+        $appointment_location_url = '/location/';
+    } ?>
+    <section class="uams-module cta-bar cta-bar-1 bg-auto">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>Make an Appointment</h2>
+                    <p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>">contacting a clinic directly</a> or by calling the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <?php
 }
 genesis();
