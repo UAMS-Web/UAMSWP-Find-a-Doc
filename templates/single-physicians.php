@@ -545,7 +545,7 @@ while ( have_posts() ) : the_post(); ?>
                             <h3>Professional Certifications</h3>
                             <ul>
                             <?php foreach ( $boards as $board ) :
-                                $board_name = get_term( $board, 'boards'); ?>
+                                $board_name = get_term( $board, 'board'); ?>
                                 <li><?php echo $board_name->name; ?></li>
                                 <?php // }; ?>
                             <?php endforeach; ?>
