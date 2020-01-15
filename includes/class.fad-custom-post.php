@@ -46,7 +46,7 @@ function providers() {
 		'description'           => 'UAMS Providers for Find-a-Doctor',
 		'labels'                => $labels,
 		'supports'              => array( 'title', 'author', 'thumbnail', ),
-		'taxonomies'            => array( 'specialties', 'department', 'patient_type', 'medical_procedures', 'medical_terms', 'conditions' ),
+		'taxonomies'            => array( 'department', 'patient_type', 'treatment', 'medical_term', 'condition' ),
 		'hierarchical'          => false,
 		'public'                => true,
 		'show_ui'               => true,

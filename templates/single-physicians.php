@@ -545,7 +545,7 @@ while ( have_posts() ) : the_post(); ?>
                             <h3>Professional Certifications</h3>
                             <ul>
                             <?php foreach ( $boards as $board ) :
-                                $board_name = get_term( $board, 'boards'); ?>
+                                $board_name = get_term( $board, 'board'); ?>
                                 <li><?php echo $board_name->name; ?></li>
                                 <?php // }; ?>
                             <?php endforeach; ?>
@@ -644,7 +644,7 @@ while ( have_posts() ) : the_post(); ?>
                     <div class="card-list-container location-card-list-container">
                         <div class="card-list">
                         <?php $l = 1;
-                              $location_schema = ''; 
+                              $location_schema = '"address": [';
                         ?>
                         <?php foreach( $locations as $location ): 
                             if ( get_post_status ( $location ) == 'publish' ) { ?>
@@ -690,7 +690,7 @@ while ( have_posts() ) : the_post(); ?>
                                 <?php
                                      // Schema data
                                      $location_schema .= '
-                                     "address": {
+                                     {
                                      "@type": "PostalAddress",
                                      "streetAddress": "'. get_field('location_address_1', $location ) . ' '. get_field('location_address_2', $location ) .'",
                                      "addressLocality": "'. get_field('location_city', $location ) .'",
@@ -703,7 +703,10 @@ while ( have_posts() ) : the_post(); ?>
 
                                 <?php $l++; ?>
                             <?php } ?>
-                        <?php endforeach; ?>
+                        <?php endforeach; 
+                            $location_schema .= '""],
+                            ';
+                        ?>
                         </div>
                     </div>
                 </div>
