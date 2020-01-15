@@ -590,7 +590,7 @@ while ( have_posts() ) : the_post(); ?>
                             <?php } // endif
                             if( get_field('physician_research_interests') ) { ?>
                                 <h3>Research Interests</h3>
-                                <?php echo get_field('physician_research_interests'); ?>
+                                <p><?php echo get_field('physician_research_interests'); ?></p>
                             <?php } // endif
                             if( !empty ( $publications ) ) { ?>
                                 <h3>Selected Publications</h3>
