@@ -131,7 +131,7 @@ get_header();
 while ( have_posts() ) : the_post(); ?>
 
 <div class="content-sidebar-wrap">
-    <main class="doctor-item" id="genesis-content">
+    <main class="doctor-item<?php echo $provider_field_classes; ?>" id="genesis-content">
         <section class="container-fluid p-0 p-xs-8 p-sm-10 doctor-info bg-white">
             <div class="row mx-0 mx-xs-n4 mx-sm-n8">
                 <div class="col-12 col-xs p-4 py-xs-0 px-xs-4 px-sm-8 order-2 text">
