@@ -127,7 +127,7 @@
         },
         "field_expertise_physicians": {
             "key": "field_expertise_physicians",
-            "name": "expertise_physicians",
+            "name": "physician_expertise",
             "type": "relationship",
             "label": "Providers",
             "instructions": "The providers will display in alphabetical order. If there are 18 or fewer, they will all be visible when the page loads. If there are more than 18, 12 will display before prompting the user to load more.",
@@ -149,16 +149,13 @@
             "min": "",
             "max": "",
             "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": true,
-                "acfe_bidirectional_related": "field_physician_expertise"
-            },
+            "acfe_bidirectional": "0",
             "acfe_validate": "",
             "acfe_update": ""
         },
         "field_expertise_locations": {
             "key": "field_expertise_locations",
-            "name": "expertise_locations",
+            "name": "location_expertise",
             "type": "relationship",
             "label": "Locations",
             "instructions": "",
@@ -180,10 +177,7 @@
             "min": "",
             "max": "",
             "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": true,
-                "acfe_bidirectional_related": "field_location_expertise"
-            },
+            "acfe_bidirectional": "0",
             "acfe_validate": "",
             "acfe_update": ""
         },

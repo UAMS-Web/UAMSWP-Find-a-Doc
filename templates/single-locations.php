@@ -426,7 +426,7 @@ while ( have_posts() ) : the_post(); ?>
 	<?php }
 	endif; ?>
 	<?php
-	$physicians = get_field( 'location_physicians' );
+	$physicians = get_field( 'physician_locations' );
 	if($physicians) {
 		$postsPerPage = 6; // Set this value to preferred value (4, 6, 8, 10, 12). If you change the value, update the instruction text in the editor's JSON file.
         $postsCutoff = 9; // Set cutoff value. If you change the value, update the instruction text in the editor's JSON file.

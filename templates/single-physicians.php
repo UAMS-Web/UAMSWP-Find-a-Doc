@@ -46,75 +46,6 @@ if (empty($excerpt)){
     }
 }
 
-// Classes for indicating presence of content
-$service_line = get_field('physician_service_line',$post->ID);
-$npi =  get_field('physician_npi',$post->ID);
-$bio_short = get_field('physician_short_clinical_bio',$post->ID);
-$video = get_field('physician_youtube_link',$post->ID);
-$location_valid = false;
-$locations = get_field('physician_locations');
-foreach( $locations as $location ) {
-    if ( get_post_status ( $location ) == 'publish' ) {
-       $location_valid = true;
-       $break;
-    }
-}
-$affiliation = get_field('physician_affiliation',$post->ID);
-$hidden = get_field('physician_hidden',$post->ID);
-$college_affiliation = get_field('physician_academic_college',$post->ID);
-$position = get_field('physician_academic_position',$post->ID);
-$bio_academic = get_field('physician_academic_bio',$post->ID);
-$bio_academic_short = get_field('physician_academic_short_bio',$post->ID);
-$office_location = get_field('physician_academic_office',$post->ID);
-$office_building = get_field('physician_academic_map',$post->ID);
-$bio_research = get_field('physician_research_bio',$post->ID);
-$research_interests = get_field('physician_research_interests',$post->ID);
-$research_profile = get_field('physician_research_profiles_link',$post->ID);
-$additional_info = get_field('physician_additional_info',$post->ID);
-
-$provider_field_classes = '';
-if ($degrees && !empty($degrees)) { $provider_field_classes = $provider_field_classes . ' has-degrees'; }
-if ($prefix && !empty($prefix)) { $provider_field_classes = $provider_field_classes . ' has-prefix'; }
-if (has_post_thumbnail()) { $provider_field_classes = $provider_field_classes . ' has-image'; }
-if ($service_line && !empty($service_line)) { $provider_field_classes = $provider_field_classes . ' has-service-line'; }
-if ($npi && !empty($npi)) { $provider_field_classes = $provider_field_classes . ' has-npi'; }
-if ($bio && !empty($bio)) { $provider_field_classes = $provider_field_classes . ' has-clinical-bio'; }
-if ($bio_short && !empty($bio_short)) { $provider_field_classes = $provider_field_classes . ' has-short-clinical-bio'; }
-if ($video && !empty($video)) { $provider_field_classes = $provider_field_classes . ' has-video'; }
-if (get_field('physician_conditions',$post->ID) && !empty(get_field('physician_conditions',$post->ID))) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
-if (get_field('physician_treatments',$post->ID) && !empty(get_field('physician_treatments',$post->ID))) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
-if( $locations && $location_valid ) { $provider_field_classes = $provider_field_classes . ' has-location'; }
-if ($affiliation && !empty($affiliation)) { $provider_field_classes = $provider_field_classes . ' has-affiliation'; }
-if (get_field('physician_expertise',$post->ID) && !empty(get_field('physician_expertise',$post->ID))) { $provider_field_classes = $provider_field_classes . ' has-expertise'; }
-if ($hidden && !empty($hidden)) { $provider_field_classes = $provider_field_classes . ' has-hidden'; }
-// Add one instance of a class (' has-academic-appt') if there is a physician_academic_appointment row with a value in either/both of the fields.
-// Add one instance of a class (' has-empty-academic-title') if there is an empty academic title field in any of the physician_academic_appointment rows.
-// Add one instance of a class (' has-empty-academic-dept') if there is an empty academic department field in any of the physician_academic_appointment rows.
-if ($college_affiliation && !empty($college_affiliation)) { $provider_field_classes = $provider_field_classes . ' has-college-affiliation'; }
-if ($position && !empty($position)) { $provider_field_classes = $provider_field_classes . ' has-position'; }
-if ($bio_academic && !empty($bio_academic)) { $provider_field_classes = $provider_field_classes . ' has-academic-bio'; }
-if ($bio_academic_short && !empty($bio_academic_short)) { $provider_field_classes = $provider_field_classes . ' has-short-academic-bio'; }
-if ($office_location && !empty($office_location)) { $provider_field_classes = $provider_field_classes . ' has-office-location'; }
-if ($office_building && !empty($office_building)) { $provider_field_classes = $provider_field_classes . ' has-office-building'; }
-// Add one instance of a class (' has-contact-info') if there is a physician_contact_information row with a value in both of the fields.
-// Add one instance of a class (' has-empty-contact-info') if there is an empty information field in any of the physician_contact_information rows.
-// Add one instance of a class (' has-education') if there is a physician_education row with a value in either education_type or school.
-// Add one instance of a class (' has-empty-education-type') if there is an empty education_type field in any of the physician_education rows.
-// Add one instance of a class (' has-empty-education-school') if there is an empty school field in any of the physician_education rows.
-if (get_field('physician_boards',$post->ID) && !empty(get_field('physician_boards',$post->ID))) { $provider_field_classes = $provider_field_classes . ' has-boards'; }
-if (get_field('physician_associations',$post->ID) && !empty(get_field('physician_associations',$post->ID))) { $provider_field_classes = $provider_field_classes . ' has-associations'; }
-if ($bio_research && !empty($bio_research)) { $provider_field_classes = $provider_field_classes . ' has-research-bio'; }
-if ($research_interests && !empty($research_interests)) { $provider_field_classes = $provider_field_classes . ' has-research-interests'; }
-if ($research_profile && !empty($research_profile)) { $provider_field_classes = $provider_field_classes . ' has-research-profile'; }
-if (get_field('physician_pubmed_author_id',$post->ID) && !empty(get_field('physician_pubmed_author_id',$post->ID))) { $provider_field_classes = $provider_field_classes . ' has-pubmed-id'; }
-// Add one instance of a class (' has-selected-pubs') if there is a physician_select_publications row with a value in either/both of the pubmed_id_pmid and pubmed_information fields.
-// Add one instance of a class (' has-empty-selected-pub-id') if there is an empty pubmed_id_pmid field in any of the physician_select_publications rows.
-// Add one instance of a class (' has-empty-selected-pub-info') if there is an empty pubmed_information field in any of the physician_select_publications rows.
-// Add one instance of a class (' has-awards') if there is a physician_awards row with a value in either/both of the year and title fields.
-// Add one instance of a class (' has-empty-selected-pub-id') if there is an empty year field in any of the physician_awards rows.
-// Add one instance of a class (' has-empty-selected-pub-info') if there is an empty title field in any of the physician_awards rows.
-if ($additional_info && !empty($additional_info)) { $provider_field_classes = $provider_field_classes . ' has-additional-info'; }
-
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
@@ -137,7 +68,96 @@ add_filter( 'genesis_single_crumb', 'be_remove_title_from_single_crumb', 10, 2 )
 
 get_header();
 
-while ( have_posts() ) : the_post(); ?>
+while ( have_posts() ) : the_post(); 
+    // ACF Fields - get_fields
+    $service_line = get_field('physician_service_line');
+    $npi =  get_field('physician_npi');
+    $bio_short = get_field('physician_short_clinical_bio');
+    $video = get_field('physician_youtube_link');
+    $affiliation = get_field('physician_affiliation');
+    $hidden = get_field('physician_hidden');
+    $college_affiliation = get_field('physician_academic_college');
+    $position = get_field('physician_academic_position');
+    $bio_academic = get_field('physician_academic_bio');
+    $bio_academic_short = get_field('physician_academic_short_bio');
+    $office_location = get_field('physician_academic_office');
+    $office_building = get_field('physician_academic_map');
+    $bio_research = get_field('physician_research_bio');
+    $research_interests = get_field('physician_research_interests');
+    $research_profile = get_field('physician_research_profiles_link');
+    $additional_info = get_field('physician_additional_info');
+    $boards = get_field( 'physician_boards' );
+    $conditions = get_field('physician_conditions');
+    $treatments = get_field('physician_treatments');
+    $phys_title = get_field('physician_title');
+    $expertises =  get_field('physician_expertise');
+    $second_opinion = get_field('physician_second_opinion');
+    $patients = get_field('physician_patient_types');
+    $locations = get_field('physician_locations');
+    $refer_req = get_field('physician_referral_required');
+    $accept_new = get_field('physician_accepting_patients');
+    $physician_portal = get_field('physician_portal');
+    $physician_clinical_bio = get_field('physician_clinical_bio');
+    $physician_youtube_link = get_field('physician_youtube_link');
+    $physician_awards = get_field('physician_awards');
+    $physician_additional_info = get_field('physician_additional_info');
+    $expertises =  get_field('physician_expertise');
+    $associations = get_field( 'physician_associations' );
+    $publications = get_field('physician_select_publications');
+    $locations = get_field('physician_locations');
+    $pubmed_author_id = get_field('physician_pubmed_author_id');
+    $pubmed_author_number = get_field('physician_author_number');
+    $education = get_field('physician_education');
+    $academic_bio = get_field('physician_academic_bio');
+    $academic_appointment = get_field('physician_academic_appointment');
+    $research_bio = get_field('physician_research_bio');
+    $research_interests = get_field('physician_research_interests');
+    $research_profiles_link = get_field('physician_research_profiles_link');
+
+
+    // Classes for indicating presence of content
+    $provider_field_classes = '';
+    if ($degrees && !empty($degrees)) { $provider_field_classes = $provider_field_classes . ' has-degrees'; }
+    if ($prefix && !empty($prefix)) { $provider_field_classes = $provider_field_classes . ' has-prefix'; }
+    if (has_post_thumbnail()) { $provider_field_classes = $provider_field_classes . ' has-image'; }
+    if ($service_line && !empty($service_line)) { $provider_field_classes = $provider_field_classes . ' has-service-line'; }
+    if ($npi && !empty($npi)) { $provider_field_classes = $provider_field_classes . ' has-npi'; }
+    if ($bio && !empty($bio)) { $provider_field_classes = $provider_field_classes . ' has-clinical-bio'; }
+    if ($bio_short && !empty($bio_short)) { $provider_field_classes = $provider_field_classes . ' has-short-clinical-bio'; }
+    if ($video && !empty($video)) { $provider_field_classes = $provider_field_classes . ' has-video'; }
+    if ($conditions && !empty($conditions)) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
+    if ($treatments && !empty($treatments)) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
+    if ($affiliation && !empty($affiliation)) { $provider_field_classes = $provider_field_classes . ' has-affiliation'; }
+    if ($expertises && !empty($expertises)) { $provider_field_classes = $provider_field_classes . ' has-expertise'; }
+    if ($hidden && !empty($hidden)) { $provider_field_classes = $provider_field_classes . ' has-hidden'; }
+    // Add one instance of a class (' has-academic-appt') if there is a physician_academic_appointment row with a value in either/both of the fields.
+    // Add one instance of a class (' has-empty-academic-title') if there is an empty academic title field in any of the physician_academic_appointment rows.
+    // Add one instance of a class (' has-empty-academic-dept') if there is an empty academic department field in any of the physician_academic_appointment rows.
+    if ($college_affiliation && !empty($college_affiliation)) { $provider_field_classes = $provider_field_classes . ' has-college-affiliation'; }
+    if ($position && !empty($position)) { $provider_field_classes = $provider_field_classes . ' has-position'; }
+    if ($bio_academic && !empty($bio_academic)) { $provider_field_classes = $provider_field_classes . ' has-academic-bio'; }
+    if ($bio_academic_short && !empty($bio_academic_short)) { $provider_field_classes = $provider_field_classes . ' has-short-academic-bio'; }
+    if ($office_location && !empty($office_location)) { $provider_field_classes = $provider_field_classes . ' has-office-location'; }
+    if ($office_building && !empty($office_building)) { $provider_field_classes = $provider_field_classes . ' has-office-building'; }
+    // Add one instance of a class (' has-contact-info') if there is a physician_contact_information row with a value in both of the fields.
+    // Add one instance of a class (' has-empty-contact-info') if there is an empty information field in any of the physician_contact_information rows.
+    // Add one instance of a class (' has-education') if there is a physician_education row with a value in either education_type or school.
+    // Add one instance of a class (' has-empty-education-type') if there is an empty education_type field in any of the physician_education rows.
+    // Add one instance of a class (' has-empty-education-school') if there is an empty school field in any of the physician_education rows.
+    if ($boards && !empty($boards)) { $provider_field_classes = $provider_field_classes . ' has-boards'; }
+    if ($associations && !empty($associations)) { $provider_field_classes = $provider_field_classes . ' has-associations'; }
+    if ($bio_research && !empty($bio_research)) { $provider_field_classes = $provider_field_classes . ' has-research-bio'; }
+    if ($research_interests && !empty($research_interests)) { $provider_field_classes = $provider_field_classes . ' has-research-interests'; }
+    if ($research_profile && !empty($research_profile)) { $provider_field_classes = $provider_field_classes . ' has-research-profile'; }
+    if ($pubmed_author_id && !empty($pubmed_author_id)) { $provider_field_classes = $provider_field_classes . ' has-pubmed-id'; }
+    // Add one instance of a class (' has-selected-pubs') if there is a physician_select_publications row with a value in either/both of the pubmed_id_pmid and pubmed_information fields.
+    // Add one instance of a class (' has-empty-selected-pub-id') if there is an empty pubmed_id_pmid field in any of the physician_select_publications rows.
+    // Add one instance of a class (' has-empty-selected-pub-info') if there is an empty pubmed_information field in any of the physician_select_publications rows.
+    // Add one instance of a class (' has-awards') if there is a physician_awards row with a value in either/both of the year and title fields.
+    // Add one instance of a class (' has-empty-selected-pub-id') if there is an empty year field in any of the physician_awards rows.
+    // Add one instance of a class (' has-empty-selected-pub-info') if there is an empty title field in any of the physician_awards rows.
+    if ($additional_info && !empty($additional_info)) { $provider_field_classes = $provider_field_classes . ' has-additional-info'; }
+?>
 
 <div class="content-sidebar-wrap">
     <main class="doctor-item<?php echo $provider_field_classes; ?>" id="genesis-content">
@@ -147,15 +167,14 @@ while ( have_posts() ) : the_post(); ?>
                     <h1 class="page-title">
                         <span class="name"><?php echo $full_name; ?></span>
                         <?php 
-                        $phys_title = get_field('physician_title');
+                        
                         if ($phys_title && !empty($phys_title)) { ?>
-                            <span class="subtitle"><?php echo (get_field('physician_title') ? get_term( get_field('physician_title'), 'clinical_title' )->name : ''); ?></span>
+                            <span class="subtitle"><?php echo ($phys_title ? get_term( $phys_title, 'clinical_title' )->name : ''); ?></span>
                         <?php } ?>
                     </h1>
                     <h2 class="sr-only">Overview</h2>
                     <dl>
                     <?php // Display area(s) of expertise
-                    $expertises =  get_field('physician_expertise');
                     $expertise_valid = false;
                     if ($expertises && !empty($expertises)) { 
                         foreach( $expertises as $expertise ) {
@@ -175,17 +194,15 @@ while ( have_posts() ) : the_post(); ?>
                         } ?>
                         <?php }
                     } ?>
-                    <?php  // Display if they will provide second opinions
-                        $second_opinion = get_field('physician_second_opinion');
-                        if ($second_opinion) { ?>
+                    <?php  // Display if they will provide second opinions    
+                    if ($second_opinion) { ?>
                         <dt>Provides Second Opinion</dt>
                         <dd>Yes</dd>
                     <?php } ?>
                     <?php // Display all patient types
-                        $patients = get_field('physician_patient_types');
                         if( $patients ): 
                         ?>
-                        <dt>Patient Type<?php echo( count($patients) > 1 ? 's' : '' );?></dt>
+                            <dt>Patient Type<?php echo( count($patients) > 1 ? 's' : '' );?></dt>
                             <?php foreach( $patients as $patient ): ?>
                                 <?php $patient_name = get_term( $patient, 'patient_type');
                                     echo '<dd>' . $patient_name->name . '</dd>';
@@ -203,9 +220,8 @@ while ( have_posts() ) : the_post(); ?>
                     <?php } //endif ?>
                     </dl>
                     <?php
-                        if(get_field('physician_npi')) {
-
-                            $npi =  get_field( 'physician_npi' );
+                        if($npi) {
+                            
                             $request = wp_nrc_cached_api( $npi );
 
                             $data = json_decode( $request );
@@ -238,7 +254,7 @@ while ( have_posts() ) : the_post(); ?>
                     <?php
                         }
                     ?>
-                    <?php if( (!get_field('physician_npi')) || ( !empty($data) && !$rating_valid ) ) { ?>
+                    <?php if( (!$npi) || ( !empty($data) && !$rating_valid ) ) { ?>
                         <div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
@@ -265,7 +281,6 @@ while ( have_posts() ) : the_post(); ?>
                     <?php 
                         $l = 1;
                         $location_valid = false;
-                        $locations = get_field('physician_locations');
                         foreach( $locations as $location ) {
                             if ( get_post_status ( $location ) == 'publish' ) {
                                $location_valid = true;
@@ -344,8 +359,6 @@ while ( have_posts() ) : the_post(); ?>
         </section>
         <?php if ($eligible_appt): ?>
         <?php 
-            $refer_req = get_field('physician_referral_required');
-            $accept_new = get_field('physician_accepting_patients');
             $appointment_phone_name = 'the main UAMS appointment line'; // default (UAMS)
             $appointment_phone = '5016868000'; // default (UAMS)
             $show_portal = false;
@@ -359,8 +372,8 @@ while ( have_posts() ) : the_post(); ?>
                 }
             }
             // Portal
-            if ( get_field('physician_portal')) {
-                $portal = get_term(get_field('physician_portal'), "portal");
+            if ( $physician_portal ) {
+                $portal = get_term($physician_portal, "portal");
                 $portal_slug = $portal->slug;
                 $portal_name = $portal->name;
                 $portal_content = get_field('portal_content', $portal);
@@ -430,7 +443,7 @@ while ( have_posts() ) : the_post(); ?>
             </div>
         </section>
         <?php endif; ?>
-        <?php if(get_field('physician_clinical_bio')|| !empty (get_field('physician_youtube_link')) || !empty (get_field('physician_awards')) || get_field('physician_additional_info')): ?>
+        <?php if($physician_clinical_bio|| !empty ($physician_youtube_link) || !empty ($physician_awards) || $physician_additional_info): ?>
         <section class="uams-module bg-auto">
             <div class="container-fluid">
                 <div class="row">
@@ -438,10 +451,10 @@ while ( have_posts() ) : the_post(); ?>
                         <h2 class="module-title">About <?php echo $short_name; ?>
                         </h2>
                         <div class="module-body">
-                            <?php echo get_field('physician_clinical_bio'); ?>
-                            <?php if(get_field('physician_youtube_link')) { ?>
+                            <?php echo $physician_clinical_bio; ?>
+                            <?php if($physician_youtube_link) { ?>
                             <div class="embed-responsive embed-responsive-16by9">
-                                <?php echo wp_oembed_get( get_field( 'physician_youtube_link' ) ); ?>
+                                <?php echo wp_oembed_get( $physician_youtube_link ); ?>
                             </div>
                             <?php } ?>
                         </div>
@@ -452,7 +465,6 @@ while ( have_posts() ) : the_post(); ?>
         <?php endif; ?>
         <?php // load all 'conditions' terms for the post
 	        $title_append = ' by ' . $short_name;
-            $conditions = get_field('physician_conditions');
             $args = (array(
                 'taxonomy' => "condition",
                 'hide_empty' => false,
@@ -461,7 +473,7 @@ while ( have_posts() ) : the_post(); ?>
             $conditions_query = new WP_Term_Query( $args );
             $condition_schema = '';
             // we will use the first term to load ACF data from
-            if( $conditions ):
+            if( $conditions && $conditions_query->have_posts() ):
                 include( UAMS_FAD_PATH . '/templates/loops/conditions-loop.php' );
                 $condition_schema .= '"medicalSpecialty": [';
                 foreach( $conditions as $condition ):
@@ -474,7 +486,6 @@ while ( have_posts() ) : the_post(); ?>
                 $condition_schema .= '"" ],';
             endif; 
              // load all 'treatments' terms for the post
-            $treatments = get_field('physician_treatments');
             $args = (array(
                 'taxonomy' => "treatment",
                 'hide_empty' => false,
@@ -483,10 +494,10 @@ while ( have_posts() ) : the_post(); ?>
             $treatments_query = new WP_Term_Query( $args );
 
             // we will use the first term to load ACF data from
-        if( $treatments ):
+        if( $treatments && $treatments_query->have_posts() ):
             include( UAMS_FAD_PATH . '/templates/loops/treatments-loop.php' );
         endif;
-        $expertises =  get_field('physician_expertise');
+        
         $expertise_valid = false;
         if( $expertises ):
 	        foreach( $expertises as $expertise ) {
@@ -522,11 +533,11 @@ while ( have_posts() ) : the_post(); ?>
         ?>
         <?php 
             $physician_academic_split = false;
-            if ( get_field('physician_academic_bio') && ( get_field('physician_academic_appointment') || get_field('physician_education') || get_field('physician_boards') ) ) {
+            if ( $academic_bio && ( $academic_appointment || $education || $boards ) ) {
                 $physician_academic_split = true;
             }
         
-            if(get_field('physician_academic_bio') || get_field('physician_academic_appointment') || get_field('physician_education') || get_field('physician_boards')): ?>
+            if($academic_bio || $academic_appointment || $education || $boards): ?>
         <section class="uams-module academic-info bg-auto">
             <div class="container-fluid">
                 <div class="row">
@@ -540,9 +551,9 @@ while ( have_posts() ) : the_post(); ?>
                         <?php } else { ?>
                             <div class="module-body">
                         <?php } // endif
-                        if ( get_field('physician_academic_bio') ) { ?>
+                        if ( $academic_bio ) { ?>
                             <h3 class="sr-only">Academic Biography</h3>
-                            <?php echo get_field('physician_academic_bio'); ?>
+                            <?php echo $academic_appointment; ?>
                         <?php } // endif?>
                         <?php if ( $physician_academic_split ) { ?>
                             </div>
@@ -575,7 +586,7 @@ while ( have_posts() ) : the_post(); ?>
                                     <?php endwhile; ?>
                                     </dl>
                             <?php endif;
-                                $boards = get_field( 'physician_boards' );
+                                
                                 if( ! empty( $boards ) ): ?>
                             <h3>Professional Certifications</h3>
                             <ul>
@@ -586,7 +597,7 @@ while ( have_posts() ) : the_post(); ?>
                             <?php endforeach; ?>
                             </ul>
                             <?php endif;
-                                $associations = get_field( 'physician_associations' );
+                                
                                 if( ! empty( $associations ) ): ?>
                             <h3>Associations</h3>
                             <ul>
@@ -610,45 +621,50 @@ while ( have_posts() ) : the_post(); ?>
         </section>
         <?php endif; ?>
         <?php 
-        $publications = get_field('physician_select_publications');
-
-        if( !empty(get_field('physician_research_bio')) || !empty(get_field('physician_research_interests')) || !empty ( $publications ) || get_field('physician_pubmed_author_id') || get_field('physician_research_profiles_link') ): ?>
+        if( !empty($research_bio) || !empty($esearch_interests) || !empty ( $publications ) || $pubmed_author_id || $research_profiles_link ): ?>
         <section class="uams-module research-info bg-auto">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
                         <h2 class="module-title"><?php echo $short_name; ?>'s Research</h2>
                         <div class="module-body">
-                            <?php if( get_field('physician_research_bio') ) { ?>
-                                <h3 class="sr-only">Research Biography</h3>
-                                <?php echo get_field('physician_research_bio'); ?>
-                            <?php } // endif
-                            if( get_field('physician_research_interests') ) { ?>
+                            <?php
+                                if($research_bio)
+                                {
+                                    echo $research_bio;
+                                }
+                            ?>
+                            <?php
+                                if($research_interests)
+                                { ?>
                                 <h3>Research Interests</h3>
-                                <p><?php echo get_field('physician_research_interests'); ?></p>
-                            <?php } // endif
-                            if( !empty ( $publications ) ) { ?>
-                                <h3>Selected Publications</h3>
-                                <ul>
-                                <?php foreach( $publications as $publication ): ?>
-                                    <li><?php echo $publication['pubmed_information']; ?></li>
-                                <?php endforeach; ?>
-                                </ul>
-                            <?php } //endif ?>
-                            <?php if( get_field('physician_pubmed_author_id') ) { ?>
+                            <?php
+                                    echo $research_interests;
+                                }
+                            ?>
+                            <?php
+                                if( !empty ( $publications ) ): ?>
+                            <h3>Selected Publications</h3>
+                            <ul>
+                            <?php foreach( $publications as $publication ): ?>
+                                <li><?php echo $publication['pubmed_information']; ?></li>
+                            <?php endforeach; ?>
+                            </ul>
+                            <?php endif; ?>
+                            <?php if( $pubmed_author_id ): ?>
                                 <?php
-                                    $pubmedid = trim(get_field('physician_pubmed_author_id'));
-                                    $pubmedcount = (get_field('physician_author_number') ? get_field('physician_author_number') : '3');
+                                    $pubmedid = trim($pubmed_author_id);
+                                    $pubmedcount = ($pubmed_author_number ? $pubmed_author_number : '3');
                                 ?>
                                 <h3>Latest Publications</h3>
                                 <p>Publications listed below are automatically derived from MEDLINE/PubMed and other sources, which might result in incorrect or missing publications.</p>
                                 <?php echo do_shortcode( '[pubmed terms="' . urlencode($pubmedid) .'%5BAuthor%5D" count="' . $pubmedcount .'"]' ); ?>
-                            <?php } //endif ?>
-                            <?php if( get_field('physician_research_profiles_link') ) { ?>
+                            <?php endif; ?>
+                            <?php if( $research_profiles_link ): ?>
                                 <h3>UAMS Research Profile</h3>
                                 <p>Each UAMS faculty member has a research profile page that includes biographical and contact information, a list of their most recent grant activity and a list of their PubMed publications.</p>
-                                <p><a class="btn btn-outline-primary" href="<?php echo get_field('physician_research_profiles_link'); ?>">View <?php echo $short_name; ?>'s research profile</a></p>
-                            <?php } //endif ?>
+                                <p><a class="btn btn-outline-primary" href="<?php echo $research_profiles_link; ?>">View <?php echo $short_name; ?>'s research profile</a></p>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -656,8 +672,7 @@ while ( have_posts() ) : the_post(); ?>
         </section>
         <?php endif; ?>
         <?php 
-        $location_valid = false;
-        $locations = get_field('physician_locations');
+        $location_valid = false;    
         foreach( $locations as $location ) {
             if ( get_post_status ( $location ) == 'publish' ) {
                 $location_valid = true;
