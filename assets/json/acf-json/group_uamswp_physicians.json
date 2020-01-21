@@ -829,10 +829,7 @@
             "min": 1,
             "max": "",
             "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": true,
-                "acfe_bidirectional_related": "field_location_physicians"
-            },
+            "acfe_bidirectional": "0",
             "acfe_validate": "",
             "acfe_update": ""
         },
@@ -912,10 +909,7 @@
             "min": "",
             "max": "",
             "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": true,
-                "acfe_bidirectional_related": "field_expertise_physicians"
-            },
+            "acfe_bidirectional": "0",
             "acfe_validate": "",
             "acfe_update": ""
         },
