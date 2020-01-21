@@ -1,0 +1,17 @@
+.facetwp-type-alpha {
+    margin-bottom: 20px;
+}
+.facetwp-alpha {
+    display: inline-block;
+    color: #ddd;
+    margin-right: 8px;
+    cursor: default;
+}
+.facetwp-alpha.available {
+    color: #333;
+    cursor: pointer;
+}
+.facetwp-alpha.selected {
+    color: #fff;
+    /* font-weight: bold; */
+}
