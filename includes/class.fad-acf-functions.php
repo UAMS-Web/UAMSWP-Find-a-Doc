@@ -201,3 +201,5 @@ add_filter('acf/update_value/key=field_expertise_physicians', 'bidirectional_acf
 // Location-to-expertise (location_expertise)
 add_filter('acf/update_value/key=field_location_expertise', 'bidirectional_acf_update_value', 10, 3);
 add_filter('acf/update_value/key=field_expertise_locations', 'bidirectional_acf_update_value', 10, 3);
+// Expertise-to-expertise
+add_filter('acf/update_value/name=expertise_associated', 'bidirectional_acf_update_value', 10, 3);
