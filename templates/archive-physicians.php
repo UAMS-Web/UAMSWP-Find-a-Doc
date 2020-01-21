@@ -33,7 +33,7 @@
 					<legend class="sr-only">Filter by...</legend>
 					<h3>Search Providers, Specialty or Condition</h3>
 					<?php  echo do_shortcode( '[wpdreams_ajaxsearchpro id=1]' ); ?>
-					<?php  echo facetwp_display( 'facet', 'alpha' ); ?>
+					<div class="fwp-filter"><?php  echo facetwp_display( 'facet', 'alpha' ); ?></div>
 					<?php  echo do_shortcode( '		<div class="fwp-filter">[facetwp facet="primary_care"]</div>
 													<div class="fwp-filter">[facetwp facet="physician_areas_of_expertise"]</div>
 													<div class="fwp-filter">[facetwp facet="conditions"]</div>
