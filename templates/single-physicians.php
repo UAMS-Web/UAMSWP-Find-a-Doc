@@ -447,7 +447,7 @@ while ( have_posts() ) : the_post();
             $conditions_query = new WP_Term_Query( $args );
             $condition_schema = '';
             // we will use the first term to load ACF data from
-            if( $conditions && $conditions_query->have_posts() ):
+            if( $conditions ):
                 include( UAMS_FAD_PATH . '/templates/loops/conditions-loop.php' );
                 $condition_schema .= '"medicalSpecialty": [';
                 foreach( $conditions as $condition ):
@@ -468,7 +468,7 @@ while ( have_posts() ) : the_post();
             $treatments_query = new WP_Term_Query( $args );
 
             // we will use the first term to load ACF data from
-        if( $treatments && $treatments_query->have_posts() ):
+        if( $treatments ):
             include( UAMS_FAD_PATH . '/templates/loops/treatments-loop.php' );
         endif;
         
