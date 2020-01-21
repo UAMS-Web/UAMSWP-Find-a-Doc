@@ -37,7 +37,7 @@ add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 20 );
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 
 function uamswp_expertise_physicians() {
-    $physicians = get_field( "expertise_physicians" );
+    $physicians = get_field( "physician_expertise" );
     if($physicians) {
         $postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12). If you change the value, update the instruction text in the editor's JSON file.
         $postsCutoff = 18; // Set cutoff value. If you change the value, update the instruction text in the editor's JSON file.
@@ -136,7 +136,7 @@ function uamswp_expertise_treatments() {
     endif;
 }
 function uamswp_expertise_locations() {
-    $locations = get_field('expertise_locations');
+    $locations = get_field('location_expertise');
     if($locations) {
         $args = (array(
             'post_type' => "location",
