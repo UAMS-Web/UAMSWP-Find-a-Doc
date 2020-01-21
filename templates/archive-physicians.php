@@ -23,6 +23,7 @@
 ?>
 <div class="content-sidebar-wrap">
 	<main class="container-fluid doctor-list" id="genesis-content">
+		<h1 class="sr-only">UAMS Providers</h1>
 		<div class="row">
 			<div class="col-12 col-sm filter-col collapse">
 				<h2>Filters</h2>
