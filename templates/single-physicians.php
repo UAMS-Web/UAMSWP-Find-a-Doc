@@ -527,7 +527,7 @@ while ( have_posts() ) : the_post();
                         <?php } // endif
                         if ( $academic_bio ) { ?>
                             <h3 class="sr-only">Academic Biography</h3>
-                            <?php echo $academic_appointment; ?>
+                            <?php echo $academic_bio; ?>
                         <?php } // endif?>
                         <?php if ( $physician_academic_split ) { ?>
                             </div>
