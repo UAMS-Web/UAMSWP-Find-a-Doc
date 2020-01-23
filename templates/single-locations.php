@@ -75,8 +75,10 @@ while ( have_posts() ) : the_post(); ?>
 						?>
 						<dt><?php echo $title; ?></dt>
 						<dd><a href="tel:<?php echo format_phone_dash( $phone ); ?>"><?php echo format_phone_us( $phone ); ?></a><?php echo ($text ? '<br/><span class="subtitle">'. $text .'</span>' : ''); ?></dd>
-						<?php $phone_schema .= ', "'. format_phone_dash( $phone ) .'"
-							'; ?>
+						<?php if ('' != $phone){
+							$phone_schema .= ', "'. format_phone_dash( $phone ) .'"
+							'; 
+							}?>
 						<?php endwhile; 
 							} ?>
 						<?php
@@ -92,7 +94,7 @@ while ( have_posts() ) : the_post(); ?>
 						?>
 					</dl>
 					<?php
-					$phone_schema .= '"" ],';
+					$phone_schema .= '],';
 					$hours247 = get_field('location_24_7');
 					$hours = get_field('location_hours');
 					$hours_schema = '';
