@@ -85,6 +85,13 @@
             }
         },
         {
+            "name": "location_youtube_link",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_youtube_link"
+            }
+        },
+        {
             "name": "location_short_desc",
             "map": {
                 "type": "acf_field_name",

@@ -352,6 +352,40 @@
             "media_upload": 1,
             "delay": 0
         },
+        "field_location_youtube_link": {
+            "key": "field_location_youtube_link",
+            "name": "location_youtube_link",
+            "type": "url",
+            "label": "Youtube Link",
+            "instructions": "Full URL, including https:\/\/",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        "field_location_spacer_1": {
+            "key": "field_location_spacer_1",
+            "label": "hidden",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "hide-acf-title",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "message": "&nbsp;",
+            "new_lines": "",
+            "esc_html": 0
+        },
         "field_location_short_desc": {
             "key": "field_location_short_desc",
             "name": "location_short_desc",
