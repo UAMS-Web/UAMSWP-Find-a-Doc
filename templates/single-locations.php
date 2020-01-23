@@ -147,7 +147,9 @@ while ( have_posts() ) : the_post(); ?>
 									if (!$hour['closed']) {
 										$hours_schema .= '"';
 									}
+									if (!$hour['closed']) {
 									$i++;
+									}
 								endforeach;
 								echo $hours_text;
 								$hours_schema .= '],';
