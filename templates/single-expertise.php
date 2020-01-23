@@ -11,7 +11,7 @@ function uamswp_title($html) {
 	$html = get_the_title() . ' | ' . get_bloginfo( "name" );
 	return $html;
 }
-add_filter('pre_get_document_title', 'uamswp_title');
+add_filter('pre_get_document_title', 'uamswp_title', 15, 2);
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
 // Removes entry meta from entry footer incl. markup.

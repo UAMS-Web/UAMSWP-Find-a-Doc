@@ -5,7 +5,7 @@ function uamswp_title($html) {
 	$html = 'Providers | ' . get_bloginfo( "name" );
 	return $html;
 }
-add_filter('pre_get_document_title', 'uamswp_title');
+add_filter('pre_get_document_title', 'uamswp_title', 15, 2);
 get_header();
 
 	function custom_field_excerpt($title) {
