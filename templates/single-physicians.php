@@ -332,7 +332,9 @@ while ( have_posts() ) : the_post();
 								// wp_reset_postdata(); ?>
 						<?php endif; ?> 
                 </div>
-                <?php if ( has_post_thumbnail() ) { ?>
+                <?php 
+                $docphoto = '/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg';
+                if ( has_post_thumbnail() ) { ?>
                 <div class="col-12 col-xs px-0 px-xs-4 px-sm-8 order-1 image">
                     <picture>
                     <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
@@ -449,7 +451,7 @@ while ( have_posts() ) : the_post();
             // we will use the first term to load ACF data from
             if( $conditions ):
                 include( UAMS_FAD_PATH . '/templates/loops/conditions-loop.php' );
-                $condition_schema .= '"medicalSpecialty": [';
+                $condition_schema .= ',"medicalSpecialty": [';
                 foreach( $conditions as $condition ):
                     $condition_schema .= '{
                     "@type": "MedicalSpecialty",
@@ -457,7 +459,7 @@ while ( have_posts() ) : the_post();
                     "url":"'. get_term_link($condition) .'"
                     },';
                 endforeach;
-                $condition_schema .= '"" ],';
+                $condition_schema .= '"" ]';
             endif; 
              // load all 'treatments' terms for the post
             $args = (array(
@@ -661,7 +663,7 @@ while ( have_posts() ) : the_post();
                     <div class="card-list-container location-card-list-container">
                         <div class="card-list">
                         <?php $l = 1;
-                              $location_schema = '"address": [';
+                              $location_schema = ',"address": [';
                         ?>
                         <?php foreach( $locations as $location ): 
                             if ( get_post_status ( $location ) == 'publish' ) { ?>
@@ -706,6 +708,9 @@ while ( have_posts() ) : the_post();
                                 </div>
                                 <?php
                                      // Schema data
+                                     if ($l > 1){
+                                        $location_schema .= ',';
+                                     }
                                      $location_schema .= '
                                      {
                                      "@type": "PostalAddress",
@@ -714,14 +719,14 @@ while ( have_posts() ) : the_post();
                                      "addressRegion": "'. get_field('location_state', $location ) .'",
                                      "postalCode": "'. get_field('location_zip', $location) .'",
                                      "telephone": "'. format_phone_dash( get_field('location_phone', $location) ) .'"
-                                     },
+                                     }
                                      ';
                                 ?>
 
                                 <?php $l++; ?>
                             <?php } ?>
                         <?php endforeach; 
-                            $location_schema .= '""],
+                            $location_schema .= ']
                             ';
                         ?>
                         </div>
@@ -897,14 +902,14 @@ while ( have_posts() ) : the_post();
   "name": "<?php echo $full_name; ?>",
   "url": "<?php echo get_permalink(); ?>",
   "logo": "<?php echo get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png'; ?>",
-  "image": "<?php echo $docphoto; ?>",
-  <?php if ($bio) { ?>
-  "description": "<?php echo $bio; ?>",
+  "image": "<?php echo $docphoto; ?>"
+  <?php if ($excerpt) { ?>
+  ,"description": "<?php echo $excerpt; ?>"
   <?php } ?>
   <?php echo $condition_schema; ?>
   <?php echo $location_schema; ?>
   <?php if ( $rating_valid ){ ?>
-  "aggregateRating": {
+  ,"aggregateRating": {
   		"@type": "AggregateRating",
         "ratingValue": "<?php echo $avg_rating; ?>",
         "ratingCount": "<?php echo $review_count; ?>",
