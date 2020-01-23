@@ -5,7 +5,7 @@ function uamswp_title($html) {
 	$html = 'Areas of Expertise | ' . get_bloginfo( "name" );
 	return $html;
 }
-add_filter('pre_get_document_title', 'uamswp_title');
+add_filter('pre_get_document_title', 'uamswp_title', 15, 2);
 get_header();
 
   add_filter( 'facetwp_template_use_archive', '__return_true' );

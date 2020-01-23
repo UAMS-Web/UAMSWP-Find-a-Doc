@@ -35,7 +35,7 @@ function uamswp_title($html) {
 	$html = ( $treatment_title ? $treatment_title : 'Treatments &amp; Procedures' ) . ' | ' . get_bloginfo( "name" );
 	return $html;
 }
-add_filter('pre_get_document_title', 'uamswp_title');
+add_filter('pre_get_document_title', 'uamswp_title', 15, 2);
 
 get_header(); ?>
 

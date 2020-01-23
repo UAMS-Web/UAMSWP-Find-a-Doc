@@ -17,6 +17,14 @@ function sp_titles_desc($html) {
 }
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
+function uamswp_title($html) { 
+
+	//you can add here all your conditions as if is_page(), is_category() etc.. 
+	$html = get_the_title() . ' | ' . get_bloginfo( "name" );
+	return $html;
+}
+add_filter('pre_get_document_title', 'uamswp_title', 15, 2);
+
 get_header();
 
 while ( have_posts() ) : the_post(); ?>
