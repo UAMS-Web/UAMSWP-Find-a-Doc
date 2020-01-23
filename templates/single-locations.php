@@ -249,18 +249,24 @@ while ( have_posts() ) : the_post(); ?>
 	<?php if ( get_field('location_about') || get_field('location_affiliation') ) { 
 			$about = get_field('location_about');
 			$affiliation = get_field('location_affiliation');
+			$youtube_link = get_field('location_youtube_link');
 		?>
 		<section class="uams-module bg-auto">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<?php if ( $about ) { ?>
+						<?php if ( $about || $youtube_link ) { ?>
 						<h2 class="module-title">About <?php the_title(); ?></h2>
 						<?php } else { // Must be Affiliation
 							echo '<h2 class="module-title">Affiliation</h2>';
 						} ?>
 						<div class="module-body">
 							<?php echo $about ? $about : ''; ?>
+							<?php if($youtube_link) { ?>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <?php echo wp_oembed_get( $youtube_link ); ?>
+                            </div>
+                            <?php } ?>
 							<?php if ( $affiliation) { 
 								if ( !empty( $about ) ) { 
 									echo '<h3>Affiliation</h3>';
