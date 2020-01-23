@@ -16,6 +16,14 @@
 	}
 	add_action('wp_head','uamswp_keyword_hook_header');
 	add_action('wp_head','uamswp_keyword_hook_header');
+
+	function uamswp_title($html) { 
+		// global $condition_title;
+		//you can add here all your conditions as if is_page(), is_category() etc.. 
+		$html = single_cat_title( '', false ) . ' | ' . get_bloginfo( "name" );
+		return $html;
+	}
+	add_filter('pre_get_document_title', 'uamswp_title');
 	   
 	   get_header();
 	   
