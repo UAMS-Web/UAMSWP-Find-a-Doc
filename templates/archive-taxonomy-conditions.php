@@ -28,13 +28,13 @@ function uamswp_terms_clauses( $clauses, $taxonomies, $args ){
 $condition_title = get_field('conditions_archive_headline', 'option');
 $condition_text = get_field('conditions_archive_intro_text', 'option');
 
-function uamswp_title($html) { 
+function uamswp_fad_title($html) { 
     global $condition_title;
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$html = ( $condition_title ? $condition_title : 'Conditions' ) . ' | ' . get_bloginfo( "name" );
 	return $html;
 }
-add_filter('pre_get_document_title', 'uamswp_title', 15, 2);
+add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
 
 get_header(); ?>
 

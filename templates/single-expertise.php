@@ -5,13 +5,13 @@
  *  Designed for services single
  *
  */
-function uamswp_title($html) { 
+function uamswp_fad_title($html) { 
 
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$html = get_the_title() . ' | ' . get_bloginfo( "name" );
 	return $html;
 }
-add_filter('pre_get_document_title', 'uamswp_title', 15, 2);
+add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
 // Removes entry meta from entry footer incl. markup.

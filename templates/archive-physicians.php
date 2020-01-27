@@ -1,11 +1,11 @@
 <?php
-function uamswp_title($html) { 
+function uamswp_fad_title($html) { 
 
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$html = 'Providers | ' . get_bloginfo( "name" );
 	return $html;
 }
-add_filter('pre_get_document_title', 'uamswp_title', 15, 2);
+add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
 get_header();
 
 	function custom_field_excerpt($title) {

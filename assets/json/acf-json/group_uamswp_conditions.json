@@ -88,6 +88,25 @@
             "acfe_update": ""
         },
         {
+            "key": "field_condition_short_desc",
+            "name": "condition_short_desc",
+            "type": "textarea",
+            "label": "Short Description (excerpt)",
+            "instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": 160,
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
             "key": "field_condition_youtube_link",
             "name": "condition_youtube_link",
             "type": "url",
