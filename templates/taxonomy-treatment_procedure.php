@@ -23,6 +23,21 @@
 		return $html;
 	}
 	add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
+
+	$excerpt = get_field( 'treatment_procedure_short_desc', get_queried_object() );
+	$content = get_field( 'treatment_procedure_content', get_queried_object() );
+	if (empty($excerpt)){
+		if ($content){
+			$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
+		}
+	}
+	// Use SeoPress hook for meta description
+	function sp_titles_desc($html) {
+		global $excerpt;
+		$html = $excerpt; 
+		return $html;
+	}
+	add_filter('seopress_titles_desc', 'sp_titles_desc');
 	
 	get_header();
 
