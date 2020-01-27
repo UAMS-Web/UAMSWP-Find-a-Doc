@@ -203,3 +203,42 @@ add_filter('acf/update_value/key=field_location_expertise', 'bidirectional_acf_u
 add_filter('acf/update_value/key=field_expertise_locations', 'bidirectional_acf_update_value', 10, 3);
 // Expertise-to-expertise
 add_filter('acf/update_value/name=expertise_associated', 'bidirectional_acf_update_value', 10, 3);
+
+add_action('acf/save_post', 'custom_excerpt_acf', 50);
+function custom_excerpt_acf() {
+
+    global $post;
+
+    $post_id        = ( $post->ID ); // Current post ID
+    $post_type      = get_post_type( $post_id ); // Get Post Type
+
+    if ( 'expertise' == $post_type || 'provider' == $post_type || 'location' == $post_type ) {
+
+        if ('expertise' == $post_type ) {
+            $post_excerpt   = get_field( 'post_excerpt', $post_id ); // ACF field
+        } elseif ( 'provider' == $post_type ) {
+            $post_excerpt   = get_field( 'physician_short_clinical_bio', $post_id ); // ACF field
+        } elseif ( 'location' == $post_type ) {
+            $post_excerpt   = get_field( 'location_short_desc', $post_id ); // ACF field
+        }
+
+        if ( ( !empty( $post_id ) ) AND ( $post_excerpt ) ) {
+
+            $post_array     = array(
+
+                'ID'            => $post_id,
+                'post_excerpt'	=> $post_excerpt
+
+            );
+
+            remove_action('save_post', 'custom_excerpt_acf', 50); // Unhook this function so it doesn't loop infinitely
+
+            wp_update_post( $post_array );
+
+            add_action( 'save_post', 'custom_excerpt_acf', 50); // Re-hook this function
+
+        }
+    
+    }
+
+}
