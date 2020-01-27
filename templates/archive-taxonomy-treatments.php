@@ -29,13 +29,13 @@ function uamswp_terms_clauses( $clauses, $taxonomies, $args ){
 $treatment_title = get_field('treatments_archive_headline', 'option');
 $treatment_text = get_field('treatments_archive_intro_text', 'option');
 
-function uamswp_title($html) { 
+function uamswp_fad_title($html) { 
     global $treatment_title;
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$html = ( $treatment_title ? $treatment_title : 'Treatments &amp; Procedures' ) . ' | ' . get_bloginfo( "name" );
 	return $html;
 }
-add_filter('pre_get_document_title', 'uamswp_title', 15, 2);
+add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
 
 get_header(); ?>
 
