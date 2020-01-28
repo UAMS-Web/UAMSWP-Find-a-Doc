@@ -287,13 +287,6 @@ while ( have_posts() ) : the_post();
                     <?php } ?>
                     <?php 
                         $l = 1;
-                        $location_valid = false;
-                        foreach( $locations as $location ) {
-                            if ( get_post_status ( $location ) == 'publish' ) {
-                               $location_valid = true;
-                               $break;
-                            }
-                        }
                         if( $locations && $location_valid ): ?>
                             <?php if ($eligible_appt) { ?>
                                 <h2>Primary Appointment Location</h2>
@@ -371,15 +364,6 @@ while ( have_posts() ) : the_post();
             $appointment_phone_name = 'the main UAMS appointment line'; // default (UAMS)
             $appointment_phone = '5016868000'; // default (UAMS)
             $show_portal = false;
-
-            $location_valid = false;
-            $locations = get_field('physician_locations');
-            foreach( $locations as $location ) {
-                if ( get_post_status ( $location ) == 'publish' ) {
-                    $location_valid = true;
-                    $break;
-                }
-            }
             // Portal
             if ( $physician_portal ) {
                 $portal = get_term($physician_portal, "portal");
@@ -681,13 +665,6 @@ while ( have_posts() ) : the_post();
         </section>
         <?php endif; ?>
         <?php 
-        $location_valid = false;    
-        foreach( $locations as $location ) {
-            if ( get_post_status ( $location ) == 'publish' ) {
-                $location_valid = true;
-                $break;
-            }
-        }
         if( $locations && $location_valid ): ?>
         <section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="locations">
             <div class="row">
