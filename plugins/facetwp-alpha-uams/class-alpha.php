@@ -104,7 +104,7 @@ class FacetWP_Facet_Alpha_Addon extends FacetWP_Facet
                 $output .= '<a class="facetwp-alpha available" role="link" aria-label="' . $char . '" aria-selected="false" tabindex="0" data-id="' . $char . '">' . $char . '</a>';
             }
             else {
-                $output .= '<a class="facetwp-alpha disabled" aria-disabled=“true” role="link" aria-label="' . $char . '" tabindex="0" data-id="' . $char . '">' . $char . '</a>';
+                $output .= '<a class="facetwp-alpha disabled" aria-disabled=“true” role="link" aria-label="' . $char . '" tabindex="-1" data-id="' . $char . '">' . $char . '</a>';
             }
         }
 
