@@ -104,7 +104,6 @@ while ( have_posts() ) : the_post();
     $expertises =  get_field('physician_expertise');
     $associations = get_field( 'physician_associations' );
     $publications = get_field('physician_select_publications');
-    $locations = get_field('physician_locations');
     $pubmed_author_id = get_field('physician_pubmed_author_id');
     $pubmed_author_number = get_field('physician_author_number');
     $education = get_field('physician_education');
