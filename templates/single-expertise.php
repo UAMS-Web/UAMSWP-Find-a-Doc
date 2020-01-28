@@ -5,6 +5,13 @@
  *  Designed for services single
  *
  */
+function uamswp_fad_title($html) { 
+
+	//you can add here all your conditions as if is_page(), is_category() etc.. 
+	$html = get_the_title() . ' | ' . get_bloginfo( "name" );
+	return $html;
+}
+add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
 // Removes entry meta from entry footer incl. markup.
@@ -34,10 +41,11 @@ add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 12 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 14 );
 add_action( 'genesis_after_entry', 'uamswp_list_child_expertise', 16);
 add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 20 );
+add_action( 'genesis_after_entry', 'uamswp_expertise_appointment', 22 );
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 
 function uamswp_expertise_physicians() {
-    $physicians = get_field( "expertise_physicians" );
+    $physicians = get_field( "physician_expertise" );
     if($physicians) {
         $postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12). If you change the value, update the instruction text in the editor's JSON file.
         $postsCutoff = 18; // Set cutoff value. If you change the value, update the instruction text in the editor's JSON file.
@@ -136,7 +144,7 @@ function uamswp_expertise_treatments() {
     endif;
 }
 function uamswp_expertise_locations() {
-    $locations = get_field('expertise_locations');
+    $locations = get_field('location_expertise');
     if($locations) {
         $args = (array(
             'post_type' => "location",
@@ -262,5 +270,23 @@ function uamswp_list_child_expertise() {
         <?php
         }
     }
+}
+function uamswp_expertise_appointment() {
+    if ( get_field('expertise_locations') ) {
+        $appointment_location_url = '#locations';
+    } else {
+        $appointment_location_url = '/location/';
+    } ?>
+    <section class="uams-module cta-bar cta-bar-1 bg-auto">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>Make an Appointment</h2>
+                    <p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>">contacting a clinic directly</a> or by calling the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <?php
 }
 genesis();

@@ -1,4 +1,12 @@
-<?php get_header();
+<?php
+function uamswp_fad_title($html) { 
+
+	//you can add here all your conditions as if is_page(), is_category() etc.. 
+	$html = 'Providers | ' . get_bloginfo( "name" );
+	return $html;
+}
+add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
+get_header();
 
 	function custom_field_excerpt($title) {
 			global $post;
@@ -23,6 +31,7 @@
 ?>
 <div class="content-sidebar-wrap">
 	<main class="container-fluid doctor-list" id="genesis-content">
+		<h1 class="sr-only">UAMS Providers</h1>
 		<div class="row">
 			<div class="col-12 col-sm filter-col collapse">
 				<h2>Filters</h2>
@@ -33,7 +42,7 @@
 					<legend class="sr-only">Filter by...</legend>
 					<h3>Search Providers, Specialty or Condition</h3>
 					<?php  echo do_shortcode( '[wpdreams_ajaxsearchpro id=1]' ); ?>
-					<?php  echo facetwp_display( 'facet', 'alpha' ); ?>
+					<div class="fwp-filter"><?php  echo facetwp_display( 'facet', 'alpha' ); ?></div>
 					<?php  echo do_shortcode( '		<div class="fwp-filter">[facetwp facet="primary_care"]</div>
 													<div class="fwp-filter">[facetwp facet="physician_areas_of_expertise"]</div>
 													<div class="fwp-filter">[facetwp facet="conditions"]</div>

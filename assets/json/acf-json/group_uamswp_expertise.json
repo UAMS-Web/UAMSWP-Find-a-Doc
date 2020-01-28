@@ -40,6 +40,25 @@
             "default_value": "",
             "placeholder": ""
         },
+        "field_expertise_short_desc": {
+            "key": "field_expertise_short_desc",
+            "name": "post_excerpt",
+            "type": "textarea",
+            "label": "Short Description (excerpt)",
+            "instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": 160,
+            "rows": 3,
+            "new_lines": ""
+        },
         "field_expertise_conditions": {
             "key": "field_expertise_conditions",
             "name": "expertise_conditions",
@@ -127,7 +146,7 @@
         },
         "field_expertise_physicians": {
             "key": "field_expertise_physicians",
-            "name": "expertise_physicians",
+            "name": "physician_expertise",
             "type": "relationship",
             "label": "Providers",
             "instructions": "The providers will display in alphabetical order. If there are 18 or fewer, they will all be visible when the page loads. If there are more than 18, 12 will display before prompting the user to load more.",
@@ -149,16 +168,13 @@
             "min": "",
             "max": "",
             "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": true,
-                "acfe_bidirectional_related": "field_physician_expertise"
-            },
+            "acfe_bidirectional": "0",
             "acfe_validate": "",
             "acfe_update": ""
         },
         "field_expertise_locations": {
             "key": "field_expertise_locations",
-            "name": "expertise_locations",
+            "name": "location_expertise",
             "type": "relationship",
             "label": "Locations",
             "instructions": "",
@@ -180,10 +196,7 @@
             "min": "",
             "max": "",
             "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": true,
-                "acfe_bidirectional_related": "field_location_expertise"
-            },
+            "acfe_bidirectional": "0",
             "acfe_validate": "",
             "acfe_update": ""
         },

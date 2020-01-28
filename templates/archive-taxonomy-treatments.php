@@ -29,6 +29,14 @@ function uamswp_terms_clauses( $clauses, $taxonomies, $args ){
 $treatment_title = get_field('treatments_archive_headline', 'option');
 $treatment_text = get_field('treatments_archive_intro_text', 'option');
 
+function uamswp_fad_title($html) { 
+    global $treatment_title;
+	//you can add here all your conditions as if is_page(), is_category() etc.. 
+	$html = ( $treatment_title ? $treatment_title : 'Treatments &amp; Procedures' ) . ' | ' . get_bloginfo( "name" );
+	return $html;
+}
+add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
+
 get_header(); ?>
 
 <div class="content-sidebar-wrap">
@@ -84,88 +92,88 @@ get_header(); ?>
                                         After that, if user checks any other checkbox input, remove "checked" attribute from "Any"/"All" checkbox input.
                                     -->
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>" aria-label="Remove any filter">All</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>" <?php echo ($_GET['alpha']) ? 'aria-selected="false"' : 'aria-selected="true"'; ?> aria-label="Remove any filter">All</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=0" aria-label="Show only the treatments and procedures that begin with a number">#</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=0" <?php echo ('0' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with a number">#</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=a" aria-label="Show only the treatments and procedures that begin with the letter A">A</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=a" <?php echo ('a' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter A">A</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=b" aria-label="Show only the treatments and procedures that begin with the letter B">B</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=b" <?php echo ('b' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter B">B</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=c" aria-label="Show only the treatments and procedures that begin with the letter C">C</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=c" <?php echo ('c' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter C">C</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=d" aria-label="Show only the treatments and procedures that begin with the letter D">D</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=d" <?php echo ('d' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter D">D</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=e" aria-label="Show only the treatments and procedures that begin with the letter E">E</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=e" <?php echo ('e' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter E">E</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=f" aria-label="Show only the treatments and procedures that begin with the letter F">F</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=f" <?php echo ('f' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter F">F</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=g" aria-label="Show only the treatments and procedures that begin with the letter G">G</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=g" <?php echo ('g' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter G">G</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=h" aria-label="Show only the treatments and procedures that begin with the letter H">H</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=h" <?php echo ('h' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter H">H</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=i" aria-label="Show only the treatments and procedures that begin with the letter I">I</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=i" <?php echo ('i' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter I">I</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=j" aria-label="Show only the treatments and procedures that begin with the letter J">J</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=j" <?php echo ('j' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter J">J</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=k" aria-label="Show only the treatments and procedures that begin with the letter K">K</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=k" <?php echo ('k' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter K">K</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=l" aria-label="Show only the treatments and procedures that begin with the letter L">L</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=l" <?php echo ('l' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter L">L</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=m" aria-label="Show only the treatments and procedures that begin with the letter M">M</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=m" <?php echo ('m' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter M">M</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=n" aria-label="Show only the treatments and procedures that begin with the letter N">N</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=n" <?php echo ('n' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter N">N</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=o" aria-label="Show only the treatments and procedures that begin with the letter O">O</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=o" <?php echo ('o' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter O">O</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=p" aria-label="Show only the treatments and procedures that begin with the letter P">P</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=p" <?php echo ('p' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter P">P</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=q" aria-label="Show only the treatments and procedures that begin with the letter Q">Q</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=q" <?php echo ('q' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter Q">Q</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=r" aria-label="Show only the treatments and procedures that begin with the letter R">R</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=r" <?php echo ('r' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter R">R</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=s" aria-label="Show only the treatments and procedures that begin with the letter S">S</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=s" <?php echo ('s' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter S">S</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=t" aria-label="Show only the treatments and procedures that begin with the letter T">T</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=t" <?php echo ('t' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter T">T</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=u" aria-label="Show only the treatments and procedures that begin with the letter U">U</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=u" <?php echo ('u' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter U">U</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=v" aria-label="Show only the treatments and procedures that begin with the letter V">V</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=v" <?php echo ('v' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter V">V</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=w" aria-label="Show only the treatments and procedures that begin with the letter W">W</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=w" <?php echo ('w' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter W">W</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=x" aria-label="Show only the treatments and procedures that begin with the letter X">X</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=x" <?php echo ('x' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter X">X</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=y" aria-label="Show only the treatments and procedures that begin with the letter Y">Y</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=y" <?php echo ('y' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter Y">Y</a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=z" aria-label="Show only the treatments and procedures that begin with the letter Z">Z</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=z" <?php echo ('z' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter Z">Z</a>
                                     </div>
                                 </div>
                             </div>

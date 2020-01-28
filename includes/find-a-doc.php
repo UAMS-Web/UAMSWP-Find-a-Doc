@@ -16,6 +16,8 @@ function bootstrap() {
     include_once (__DIR__ . '/class.fad-settings.php' );
     // include_once (__DIR__ . '/class.fad-expertise-attributes-meta-box.php' ); // Not used in 2020
     include_once (__DIR__ . '/class.fad-templates.php' );
+    include_once (__DIR__ . '/class.fad-acf-functions.php' ); // ACF specific functions
+    include_once (__DIR__ . '/class.fad-fwp-functions.php' ); // FacetWP specific functions
     include_once (__DIR__ . '/class.fad-functions.php' );
     include_once (__DIR__ . '/class.fad-settings-pages.php' );
     

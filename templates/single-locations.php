@@ -17,6 +17,14 @@ function sp_titles_desc($html) {
 }
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
+function uamswp_fad_title($html) { 
+
+	//you can add here all your conditions as if is_page(), is_category() etc.. 
+	$html = get_the_title() . ' | ' . get_bloginfo( "name" );
+	return $html;
+}
+add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
+
 get_header();
 
 while ( have_posts() ) : the_post(); ?>
@@ -75,8 +83,10 @@ while ( have_posts() ) : the_post(); ?>
 						?>
 						<dt><?php echo $title; ?></dt>
 						<dd><a href="tel:<?php echo format_phone_dash( $phone ); ?>"><?php echo format_phone_us( $phone ); ?></a><?php echo ($text ? '<br/><span class="subtitle">'. $text .'</span>' : ''); ?></dd>
-						<?php $phone_schema .= ', "'. format_phone_dash( $phone ) .'"
-							'; ?>
+						<?php if ('' != $phone){
+							$phone_schema .= ', "'. format_phone_dash( $phone ) .'"
+							'; 
+							}?>
 						<?php endwhile; 
 							} ?>
 						<?php
@@ -92,7 +102,7 @@ while ( have_posts() ) : the_post(); ?>
 						?>
 					</dl>
 					<?php
-					$phone_schema .= '"" ],';
+					$phone_schema .= '],';
 					$hours247 = get_field('location_24_7');
 					$hours = get_field('location_hours');
 					$hours_schema = '';
@@ -147,7 +157,9 @@ while ( have_posts() ) : the_post(); ?>
 									if (!$hour['closed']) {
 										$hours_schema .= '"';
 									}
+									if (!$hour['closed']) {
 									$i++;
+									}
 								endforeach;
 								echo $hours_text;
 								$hours_schema .= '],';
@@ -237,18 +249,24 @@ while ( have_posts() ) : the_post(); ?>
 	<?php if ( get_field('location_about') || get_field('location_affiliation') ) { 
 			$about = get_field('location_about');
 			$affiliation = get_field('location_affiliation');
+			$youtube_link = get_field('location_youtube_link');
 		?>
 		<section class="uams-module bg-auto">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<?php if ( $about ) { ?>
+						<?php if ( $about || $youtube_link ) { ?>
 						<h2 class="module-title">About <?php the_title(); ?></h2>
 						<?php } else { // Must be Affiliation
 							echo '<h2 class="module-title">Affiliation</h2>';
 						} ?>
 						<div class="module-body">
 							<?php echo $about ? $about : ''; ?>
+							<?php if($youtube_link) { ?>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <?php echo wp_oembed_get( $youtube_link ); ?>
+                            </div>
+                            <?php } ?>
 							<?php if ( $affiliation) { 
 								if ( !empty( $about ) ) { 
 									echo '<h3>Affiliation</h3>';
@@ -413,7 +431,7 @@ while ( have_posts() ) : the_post(); ?>
 								<?php }
 								if ( $portal_content ) { ?>
 								<div class="btn-container">
-									<a href="<?php echo $portal_url; ?>" aria-label="Access <?php echo $portal_name; ?>&nbsp;to view your patient information and medical records" class="btn" target="_blank" data-moduletitle="<?php echo $portal_name; ?>"><?php echo $portal_link_title ? $portal_link_title : 'Log in to '. $portal_name; ?></a>
+									<a href="<?php echo $portal_url; ?>" aria-label="Access <?php echo $portal_name; ?>&nbsp;to view your patient information and medical records" class="btn btn-white" target="_blank" data-moduletitle="<?php echo $portal_name; ?>"><?php echo $portal_link_title ? $portal_link_title : 'Log in to '. $portal_name; ?></a>
 								</div>
 								<?php } ?>
 							</div>
@@ -426,7 +444,7 @@ while ( have_posts() ) : the_post(); ?>
 	<?php }
 	endif; ?>
 	<?php
-	$physicians = get_field( 'location_physicians' );
+	$physicians = get_field( 'physician_locations' );
 	if($physicians) {
 		$postsPerPage = 6; // Set this value to preferred value (4, 6, 8, 10, 12). If you change the value, update the instruction text in the editor's JSON file.
         $postsCutoff = 9; // Set cutoff value. If you change the value, update the instruction text in the editor's JSON file.
