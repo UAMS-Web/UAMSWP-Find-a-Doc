@@ -94,6 +94,13 @@ while ( have_posts() ) : the_post();
     $second_opinion = get_field('physician_second_opinion');
     $patients = get_field('physician_patient_types');
     $locations = get_field('physician_locations');
+    $location_valid = false;
+    foreach( $locations as $location ) {
+        if ( get_post_status ( $location ) == 'publish' ) {
+            $location_valid = true;
+            $break;
+        }
+    }
     $refer_req = get_field('physician_referral_required');
     $accept_new = get_field('physician_accepting_patients');
     $physician_portal = get_field('physician_portal');
