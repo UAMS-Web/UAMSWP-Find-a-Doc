@@ -94,6 +94,13 @@ while ( have_posts() ) : the_post();
     $second_opinion = get_field('physician_second_opinion');
     $patients = get_field('physician_patient_types');
     $locations = get_field('physician_locations');
+    $location_valid = false;
+    foreach( $locations as $location ) {
+        if ( get_post_status ( $location ) == 'publish' ) {
+            $location_valid = true;
+            $break;
+        }
+    }
     $refer_req = get_field('physician_referral_required');
     $accept_new = get_field('physician_accepting_patients');
     $physician_portal = get_field('physician_portal');
@@ -104,7 +111,6 @@ while ( have_posts() ) : the_post();
     $expertises =  get_field('physician_expertise');
     $associations = get_field( 'physician_associations' );
     $publications = get_field('physician_select_publications');
-    $locations = get_field('physician_locations');
     $pubmed_author_id = get_field('physician_pubmed_author_id');
     $pubmed_author_number = get_field('physician_author_number');
     $education = get_field('physician_education');
@@ -127,6 +133,7 @@ while ( have_posts() ) : the_post();
     if ($video && !empty($video)) { $provider_field_classes = $provider_field_classes . ' has-video'; }
     if ($conditions && !empty($conditions)) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
     if ($treatments && !empty($treatments)) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
+    if ($locations && $location_valid) { $provider_field_classes = $provider_field_classes . ' has-location'; }
     if ($affiliation && !empty($affiliation)) { $provider_field_classes = $provider_field_classes . ' has-affiliation'; }
     if ($expertises && !empty($expertises)) { $provider_field_classes = $provider_field_classes . ' has-expertise'; }
     if ($hidden && !empty($hidden)) { $provider_field_classes = $provider_field_classes . ' has-hidden'; }
@@ -280,13 +287,6 @@ while ( have_posts() ) : the_post();
                     <?php } ?>
                     <?php 
                         $l = 1;
-                        $location_valid = false;
-                        foreach( $locations as $location ) {
-                            if ( get_post_status ( $location ) == 'publish' ) {
-                               $location_valid = true;
-                               $break;
-                            }
-                        }
                         if( $locations && $location_valid ): ?>
                             <?php if ($eligible_appt) { ?>
                                 <h2>Primary Appointment Location</h2>
@@ -364,15 +364,6 @@ while ( have_posts() ) : the_post();
             $appointment_phone_name = 'the main UAMS appointment line'; // default (UAMS)
             $appointment_phone = '5016868000'; // default (UAMS)
             $show_portal = false;
-
-            $location_valid = false;
-            $locations = get_field('physician_locations');
-            foreach( $locations as $location ) {
-                if ( get_post_status ( $location ) == 'publish' ) {
-                    $location_valid = true;
-                    $break;
-                }
-            }
             // Portal
             if ( $physician_portal ) {
                 $portal = get_term($physician_portal, "portal");
@@ -674,13 +665,6 @@ while ( have_posts() ) : the_post();
         </section>
         <?php endif; ?>
         <?php 
-        $location_valid = false;    
-        foreach( $locations as $location ) {
-            if ( get_post_status ( $location ) == 'publish' ) {
-                $location_valid = true;
-                $break;
-            }
-        }
         if( $locations && $location_valid ): ?>
         <section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="locations">
             <div class="row">
