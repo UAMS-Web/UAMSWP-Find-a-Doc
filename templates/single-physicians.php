@@ -133,6 +133,7 @@ while ( have_posts() ) : the_post();
     if ($video && !empty($video)) { $provider_field_classes = $provider_field_classes . ' has-video'; }
     if ($conditions && !empty($conditions)) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
     if ($treatments && !empty($treatments)) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
+    if ($locations && $location_valid) { $provider_field_classes = $provider_field_classes . ' has-location'; }
     if ($affiliation && !empty($affiliation)) { $provider_field_classes = $provider_field_classes . ' has-affiliation'; }
     if ($expertises && !empty($expertises)) { $provider_field_classes = $provider_field_classes . ' has-expertise'; }
     if ($hidden && !empty($hidden)) { $provider_field_classes = $provider_field_classes . ' has-hidden'; }
