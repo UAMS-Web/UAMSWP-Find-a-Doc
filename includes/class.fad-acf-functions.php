@@ -272,11 +272,12 @@ function acf_post_to_taxonomy_bidirectional( $post_field, $taxonomy_field, $taxo
     return $value;
 }
 
-function acf_taxonomy_to_post_bidirectional( $post_field, $taxonomy_field, $taxonomy, $post_id, $value ) {
+function acf_taxonomy_to_post_bidirectional( $post_field, $taxonomy_field, $taxonomy, $tax_id, $value ) {
     // vars
 // 	$field_name = $post_field;
 	$global_name = 'is_updating_' . $taxonomy_field;
-	$id = str_replace( 'term_', '', $post_id ); // Strip tax
+	$id = str_replace( 'term_', '', $tax_id ); // Strip term
+	$id = str_replace( $taxonomy.'_', '', $id ); // Strip tax, just in case
 
 	// bail early if this filter was triggered from the update_field() function called within the loop below
 	// - this prevents an inifinte loop
@@ -289,9 +290,9 @@ function acf_taxonomy_to_post_bidirectional( $post_field, $taxonomy_field, $taxo
 	// loop over selected posts and add this $post_id
 	if( is_array($value) ) {
 
-		foreach( $value as $post_id2 ) {
+		foreach( $value as $post_id ) {
 			// load existing related posts
-			$value2 = get_field($post_field, $post_id2, false);
+			$value2 = get_field($post_field, $post_id, false);
 
 			// allow for selected posts to not contain a value
 			if( empty($value2) ) {
@@ -305,21 +306,22 @@ function acf_taxonomy_to_post_bidirectional( $post_field, $taxonomy_field, $taxo
 			$value2[] = $id;
 
 			// update the selected post's value (use field's key for performance)
-			update_field($post_field, $value2, $post_id2);
+            update_field($post_field, $value2, $post_id);
+            wp_set_object_terms( $post_id, intval($id) , $taxonomy, true );
 // 			update_field('physician_short_clinical_bio', $post_id, $post_id2 );
 		}
 	}
 
 	// find posts which have been removed
-	$old_value = get_field($taxonomy_field, $post_id, false);
+	$old_value = get_field($taxonomy_field, $tax_id, false);
 	if( is_array($old_value) ) {
 
-		foreach( $old_value as $post_id2 ) {
+		foreach( $old_value as $post_id ) {
 			// bail early if this value has not been removed
-			if( is_array($value) && in_array($post_id2, $value) ) continue;
+			if( is_array($value) && in_array($post_id, $value) ) continue;
 
 			// load existing related posts
-			$value2 = get_field($post_field, $post_id2, false);
+			$value2 = get_field($post_field, $post_id, false);
 
 			// bail early if no value
 			if( empty($value2) ) continue;
@@ -331,7 +333,8 @@ function acf_taxonomy_to_post_bidirectional( $post_field, $taxonomy_field, $taxo
 			unset( $value2[ $pos] );
 
 			// update the un-selected post's value (use field's key for performance)
-			update_field($post_field, $value2, $post_id2);
+            update_field($post_field, $value2, $post_id);
+            wp_remove_object_terms( $post_id, intval($id) , $taxonomy );
 		}
 	}
 	// reset global varibale to allow this filter to function as per normal
@@ -451,22 +454,22 @@ function bidirectional_treatment_expertise( $value, $post_id, $field  ) {
 
 // Post to Taxonomy
 add_filter('acf/update_value/name=physician_conditions', 'bidirectional_physician_conditions', 10, 3);
-add_filter('acf/update_value/name=physician_treatments', 'bidirectional_physician_treatments', 10, 3);
+add_filter('acf/update_value/name=physician_treatments', 'bidirectional_physician_treatments', 15, 3);
 
 add_filter('acf/update_value/name=location_conditions', 'bidirectional_location_conditions', 10, 3);
-add_filter('acf/update_value/name=location_treatments', 'bidirectional_location_treatments', 10, 3);
+add_filter('acf/update_value/name=location_treatments', 'bidirectional_location_treatments', 15, 3);
 
 add_filter('acf/update_value/name=expertise_conditions', 'bidirectional_expertise_conditions', 10, 3);
-add_filter('acf/update_value/name=expertise_treatments', 'bidirectional_expertise_treatments', 10, 3);
+add_filter('acf/update_value/name=expertise_treatments', 'bidirectional_expertise_treatments', 15, 3);
 
 add_filter('acf/update_value/name=condition_physicians', 'bidirectional_condition_physicians', 10, 3);
-add_filter('acf/update_value/name=treatment_procedure_physicians', 'bidirectional_treatment_physicians', 10, 3);
+add_filter('acf/update_value/name=treatment_procedure_physicians', 'bidirectional_treatment_physicians', 15, 3);
 
 add_filter('acf/update_value/name=condition_locations', 'bidirectional_condition_locations', 10, 3);
-add_filter('acf/update_value/name=treatment_procedure_locations', 'bidirectional_treatment_locations', 10, 3);
+add_filter('acf/update_value/name=treatment_procedure_locations', 'bidirectional_treatment_locations', 15, 3);
 
 add_filter('acf/update_value/name=condition_expertise', 'bidirectional_condition_expertise', 10, 3);
-add_filter('acf/update_value/name=treatment_procedure_expertise', 'bidirectional_treatment_expertise', 10, 3);
+add_filter('acf/update_value/name=treatment_procedure_expertise', 'bidirectional_treatment_expertise', 15, 3);
 
 add_action('acf/save_post', 'custom_excerpt_acf', 50);
 function custom_excerpt_acf() {
