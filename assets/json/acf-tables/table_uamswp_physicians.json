@@ -149,6 +149,13 @@
             }
         },
         {
+            "name": "physician_portal",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "physician_portal"
+            }
+        },
+        {
             "name": "physician_patient_types",
             "map": {
                 "type": "acf_field_name",
@@ -251,6 +258,14 @@
             "map": {
                 "type": "acf_field_name",
                 "identifier": "physician_npi"
+            }
+        },
+        {
+            "name": "physician_hidden",
+            "format": "%d",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "physician_hidden"
             }
         },
         {
