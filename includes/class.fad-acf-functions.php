@@ -307,8 +307,8 @@ function acf_taxonomy_to_post_bidirectional( $post_field, $taxonomy_field, $taxo
 
 			// update the selected post's value (use field's key for performance)
             update_field($post_field, $value2, $post_id);
+            // Add the term relationship
             wp_set_object_terms( $post_id, intval($id) , $taxonomy, true );
-// 			update_field('physician_short_clinical_bio', $post_id, $post_id2 );
 		}
 	}
 
@@ -334,6 +334,7 @@ function acf_taxonomy_to_post_bidirectional( $post_field, $taxonomy_field, $taxo
 
 			// update the un-selected post's value (use field's key for performance)
             update_field($post_field, $value2, $post_id);
+            // Remove the term relationship
             wp_remove_object_terms( $post_id, intval($id) , $taxonomy );
 		}
 	}
