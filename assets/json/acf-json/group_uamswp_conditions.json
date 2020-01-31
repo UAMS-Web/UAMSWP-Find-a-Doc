@@ -140,8 +140,8 @@
             "field_type": "multi_select",
             "allow_null": 1,
             "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "1",
@@ -169,7 +169,7 @@
                 "expertise"
             ],
             "taxonomy": "",
-            "allow_null": 0,
+            "allow_null": 1,
             "multiple": 1,
             "return_format": "id",
             "acfe_bidirectional": 0,
@@ -195,7 +195,7 @@
                 "location"
             ],
             "taxonomy": "",
-            "allow_null": 0,
+            "allow_null": 1,
             "multiple": 1,
             "return_format": "id",
             "acfe_bidirectional": 0,
