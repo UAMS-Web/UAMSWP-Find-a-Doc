@@ -44,7 +44,7 @@
 							<?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
 						<?php } else { ?>
 							<source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.svg" media="(min-width: 1px)">
-							<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg" alt="" />
+							<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg" alt="" aria-hidden="true" />
 						<?php } ?>
 						</picture>
 					</a>
