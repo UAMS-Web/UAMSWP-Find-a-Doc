@@ -64,6 +64,20 @@
             }
         },
         {
+            "name": "location_map",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_map"
+            }
+        },
+        {
+            "name": "location_parking_map",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_parking_map"
+            }
+        },
+        {
             "name": "location_parking",
             "map": {
                 "type": "acf_field_name",
@@ -96,6 +110,13 @@
             "map": {
                 "type": "acf_field_name",
                 "identifier": "location_short_desc"
+            }
+        },
+        {
+            "name": "location_affiliation",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_affiliation"
             }
         },
         {
@@ -164,6 +185,14 @@
             }
         },
         {
+            "name": "location_hidden",
+            "format": "%d",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_hidden"
+            }
+        },
+        {
             "name": "location_web_name",
             "map": {
                 "type": "acf_field_name",
@@ -229,6 +258,20 @@
             }
         },
         {
+            "name": "location_conditions",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_conditions"
+            }
+        },
+        {
+            "name": "location_treatments",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_treatments"
+            }
+        },
+        {
             "name": "location_expertise",
             "map": {
                 "type": "acf_field_name",
@@ -263,13 +306,6 @@
             "map": {
                 "type": "acf_field_name",
                 "identifier": "location_facility"
-            }
-        },
-        {
-            "name": "location_physicians",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_physicians"
             }
         },
         {

@@ -140,8 +140,8 @@
             "field_type": "multi_select",
             "allow_null": 1,
             "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "1",
@@ -169,13 +169,10 @@
                 "expertise"
             ],
             "taxonomy": "",
-            "allow_null": 0,
+            "allow_null": 1,
             "multiple": 1,
             "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_expertise_conditions"
-            },
+            "acfe_bidirectional": 0,
             "acfe_validate": "",
             "acfe_update": "",
             "ui": 1
@@ -198,13 +195,10 @@
                 "location"
             ],
             "taxonomy": "",
-            "allow_null": 0,
+            "allow_null": 1,
             "multiple": 1,
             "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_location_conditions"
-            },
+            "acfe_bidirectional": 0,
             "acfe_validate": "",
             "acfe_update": "",
             "ui": 1
@@ -227,13 +221,10 @@
                 "provider"
             ],
             "taxonomy": "",
-            "allow_null": 0,
+            "allow_null": 1,
             "multiple": 1,
             "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_physician_conditions"
-            },
+            "acfe_bidirectional": 0,
             "acfe_validate": "",
             "acfe_update": "",
             "ui": 1

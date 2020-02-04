@@ -58,7 +58,7 @@ function sp_titles_title($html) {
 	$html = $full_name . ' | ' . get_bloginfo( "name" );
 	return $html;
 }
-add_filter('seopress_titles_title', 'sp_titles_title');
+add_filter('seopress_titles_title', 'sp_titles_title', 20, 2);
 
 function be_remove_title_from_single_crumb( $crumb, $args ) { // Because BE is the man
     global $full_name;
