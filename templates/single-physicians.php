@@ -125,7 +125,14 @@ while ( have_posts() ) : the_post();
     $provider_field_classes = '';
     if ($degrees && !empty($degrees)) { $provider_field_classes = $provider_field_classes . ' has-degrees'; }
     if ($prefix && !empty($prefix)) { $provider_field_classes = $provider_field_classes . ' has-prefix'; }
-    if (has_post_thumbnail()) { $provider_field_classes = $provider_field_classes . ' has-image'; }
+    if (has_post_thumbnail()) {
+        $provider_field_classes = $provider_field_classes . ' has-image';
+        $image_age = date('Y') - get_the_date( 'Y', get_post_thumbnail_id() ); // How old the provider image is in years
+        $image_age_threshold = 10; // Set the threshold for how old a provider image can be before a new photo is needed
+        if ( $image_age >= $image_age_threshold ) {
+            $image_age = $image_age_threshold . '+'; // Cap attribute value at the threshold
+        }
+    }
     if ($service_line && !empty($service_line)) { $provider_field_classes = $provider_field_classes . ' has-service-line'; }
     if ($npi && !empty($npi)) { $provider_field_classes = $provider_field_classes . ' has-npi'; }
     if ($bio && !empty($bio)) { $provider_field_classes = $provider_field_classes . ' has-clinical-bio'; }
@@ -167,7 +174,7 @@ while ( have_posts() ) : the_post();
 ?>
 
 <div class="content-sidebar-wrap">
-    <main class="doctor-item<?php echo $provider_field_classes; ?>" id="genesis-content"<?php echo ($service_line ? ' data-service-line="' . get_term( $service_line, 'service_line' )->name . '"' : ''); ?>>
+    <main class="doctor-item<?php echo $provider_field_classes; ?>" id="genesis-content"<?php echo (has_post_thumbnail() ? ' data-image-age="' . $image_age . '"' : ''); ?><?php echo ($service_line ? ' data-service-line="' . get_term( $service_line, 'service_line' )->name . '"' : ''); ?>>
         <section class="container-fluid p-0 p-xs-8 p-sm-10 doctor-info bg-white">
             <div class="row mx-0 mx-xs-n4 mx-sm-n8">
                 <div class="col-12 col-xs p-4 py-xs-0 px-xs-4 px-sm-8 order-2 text">
