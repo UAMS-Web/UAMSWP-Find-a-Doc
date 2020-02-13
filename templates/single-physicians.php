@@ -40,6 +40,13 @@ $medium_name = ($prefix ? $prefix .' ' : '') . get_field('physician_first_name',
 $short_name = $prefix ? $prefix .' ' .get_field('physician_last_name',$post->ID) : get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '');
 $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 $phys_title = get_field('physician_title',$post->ID);
+$phys_title_name = get_term( $phys_title, 'clinical_title' )->name;
+$vowels = array('a','e','i','o','u');
+if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
+    $phys_title_indef_article = 'an';
+} else {
+    $phys_title_indef_article = 'a';
+}
 $bio = get_field('physician_clinical_bio',$post->ID);
 $eligible_appt = get_field('physician_eligible_appointments',$post->ID);
 if (empty($excerpt)){
