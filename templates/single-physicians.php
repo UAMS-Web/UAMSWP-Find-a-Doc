@@ -36,22 +36,58 @@ if ( $languages ) {
 
 $prefix = get_field('physician_prefix',$post->ID);
 $full_name = get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+$medium_name = ($prefix ? $prefix .' ' : '') . get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID);
 $short_name = $prefix ? $prefix .' ' .get_field('physician_last_name',$post->ID) : get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '');
 $excerpt = get_field('physician_short_clinical_bio',$post->ID);
+$phys_title = get_field('physician_title',$post->ID);
+$phys_title_name = get_term( $phys_title, 'clinical_title' )->name;
+$vowels = array('a','e','i','o','u');
+if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
+    $phys_title_indef_article = 'an';
+} else {
+    $phys_title_indef_article = 'a';
+}
 $bio = get_field('physician_clinical_bio',$post->ID);
 $eligible_appt = get_field('physician_eligible_appointments',$post->ID);
+// Check for valid locations
+$locations = get_field('physician_locations',$post->ID);
+$location_valid = false;
+foreach( $locations as $location ) {
+    if ( get_post_status ( $location ) == 'publish' ) {
+        $location_valid = true;
+        $break;
+    }
+}
+// Get primary appointment location name
+$l = 1;
+if( $locations && $location_valid ) {
+    foreach( $locations as $location ) {
+        if ( 2 > $l ){
+            if ( get_post_status ( $location ) == 'publish' ) {
+                $primary_appointment_title = get_the_title( $location );
+                $l++;
+            }
+        }
+    } // endforeach
+}
+
+// Set meta description
 if (empty($excerpt)){
     if ($bio){
         $excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 155, '...');
+    } else {
+        $fallback_desc = $medium_name . ' is ' . ($phys_title ? $phys_title_indef_article . ' ' . strtolower($phys_title_name) : 'a health care provider' ) . ($primary_appointment_title ? ' at ' . $primary_appointment_title : '') .  ' employed by UAMS Health.';
+        $excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 155, '...');
     }
 }
-
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
 	return $html;
 }
 add_filter('seopress_titles_desc', 'sp_titles_desc');
+
+// Set meta title
 function sp_titles_title($html) { 
     global $full_name;
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
@@ -89,18 +125,9 @@ while ( have_posts() ) : the_post();
     $boards = get_field( 'physician_boards' );
     $conditions = get_field('physician_conditions');
     $treatments = get_field('physician_treatments');
-    $phys_title = get_field('physician_title');
     $expertises =  get_field('physician_expertise');
     $second_opinion = get_field('physician_second_opinion');
     $patients = get_field('physician_patient_types');
-    $locations = get_field('physician_locations');
-    $location_valid = false;
-    foreach( $locations as $location ) {
-        if ( get_post_status ( $location ) == 'publish' ) {
-            $location_valid = true;
-            $break;
-        }
-    }
     $refer_req = get_field('physician_referral_required');
     $accept_new = get_field('physician_accepting_patients');
     $physician_portal = get_field('physician_portal');
