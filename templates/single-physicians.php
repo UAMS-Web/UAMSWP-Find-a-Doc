@@ -49,6 +49,15 @@ if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, ba
 }
 $bio = get_field('physician_clinical_bio',$post->ID);
 $eligible_appt = get_field('physician_eligible_appointments',$post->ID);
+// Check for valid locations
+$locations = get_field('physician_locations',$post->ID);
+$location_valid = false;
+foreach( $locations as $location ) {
+    if ( get_post_status ( $location ) == 'publish' ) {
+        $location_valid = true;
+        $break;
+    }
+}
 if (empty($excerpt)){
     if ($bio){
         $excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 155, '...');
@@ -101,14 +110,6 @@ while ( have_posts() ) : the_post();
     $expertises =  get_field('physician_expertise');
     $second_opinion = get_field('physician_second_opinion');
     $patients = get_field('physician_patient_types');
-    $locations = get_field('physician_locations');
-    $location_valid = false;
-    foreach( $locations as $location ) {
-        if ( get_post_status ( $location ) == 'publish' ) {
-            $location_valid = true;
-            $break;
-        }
-    }
     $refer_req = get_field('physician_referral_required');
     $accept_new = get_field('physician_accepting_patients');
     $physician_portal = get_field('physician_portal');
