@@ -58,6 +58,18 @@ foreach( $locations as $location ) {
         $break;
     }
 }
+// Get primary appointment location name
+$l = 1;
+if( $locations && $location_valid ) {
+    foreach( $locations as $location ) {
+        if ( 2 > $l ){
+            if ( get_post_status ( $location ) == 'publish' ) {
+                $primary_appointment_title = get_the_title( $location );
+                $l++;
+            }
+        }
+    } // endforeach
+}
 if (empty($excerpt)){
     if ($bio){
         $excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 155, '...');
