@@ -39,6 +39,7 @@ $full_name = get_field('physician_first_name',$post->ID) .' ' .(get_field('physi
 $medium_name = ($prefix ? $prefix .' ' : '') . get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID);
 $short_name = $prefix ? $prefix .' ' .get_field('physician_last_name',$post->ID) : get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '');
 $excerpt = get_field('physician_short_clinical_bio',$post->ID);
+$phys_title = get_field('physician_title',$post->ID);
 $bio = get_field('physician_clinical_bio',$post->ID);
 $eligible_appt = get_field('physician_eligible_appointments',$post->ID);
 if (empty($excerpt)){
@@ -90,7 +91,6 @@ while ( have_posts() ) : the_post();
     $boards = get_field( 'physician_boards' );
     $conditions = get_field('physician_conditions');
     $treatments = get_field('physician_treatments');
-    $phys_title = get_field('physician_title');
     $expertises =  get_field('physician_expertise');
     $second_opinion = get_field('physician_second_opinion');
     $patients = get_field('physician_patient_types');
