@@ -70,6 +70,8 @@ if( $locations && $location_valid ) {
         }
     } // endforeach
 }
+
+// Set meta description
 if (empty($excerpt)){
     if ($bio){
         $excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 155, '...');
@@ -78,13 +80,14 @@ if (empty($excerpt)){
         $excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 155, '...');
     }
 }
-
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
 	return $html;
 }
 add_filter('seopress_titles_desc', 'sp_titles_desc');
+
+// Set meta title
 function sp_titles_title($html) { 
     global $full_name;
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
