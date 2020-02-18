@@ -58,6 +58,15 @@ foreach( $locations as $location ) {
         $break;
     }
 }
+// Get number of valid locations
+$location_count = 0;
+if( $locations && $location_valid ) {
+    foreach( $locations as $location ) {
+        if ( get_post_status ( $location ) == 'publish' ) {
+            $location_count++;
+        }
+    } // endforeach
+}
 // Get primary appointment location name
 $l = 1;
 if( $locations && $location_valid ) {
