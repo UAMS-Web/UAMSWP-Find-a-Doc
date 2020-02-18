@@ -480,7 +480,7 @@ while ( have_posts() ) : the_post();
                         <div class="module-body">
                             <?php echo $physician_clinical_bio; ?>
                             <?php if($physician_youtube_link) { ?>
-                            <div class="embed-responsive embed-responsive-16by9">
+                            <div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
                                 <?php echo wp_oembed_get( $physician_youtube_link ); ?>
                             </div>
                             <?php } ?>
