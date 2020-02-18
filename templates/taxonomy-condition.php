@@ -73,7 +73,7 @@
 				?>
 				<?php echo ( get_field('condition_content', $term) ? ''. get_field('condition_content', $term) . '' : '' ); ?>
 				<?php if( get_field('condition_youtube_link', $term) ) { ?>
-					<div class="embed-responsive embed-responsive-16by9">
+					<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
 					<?php echo wp_oembed_get( get_field('condition_youtube_link', $term) ); ?>
 					</div>
 				<?php } ?>

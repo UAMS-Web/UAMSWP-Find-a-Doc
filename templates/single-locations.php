@@ -263,7 +263,7 @@ while ( have_posts() ) : the_post(); ?>
 						<div class="module-body">
 							<?php echo $about ? $about : ''; ?>
 							<?php if($youtube_link) { ?>
-                            <div class="embed-responsive embed-responsive-16by9">
+                            <div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
                                 <?php echo wp_oembed_get( $youtube_link ); ?>
                             </div>
                             <?php } ?>
