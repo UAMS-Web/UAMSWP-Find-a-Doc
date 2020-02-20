@@ -58,6 +58,15 @@ foreach( $locations as $location ) {
         $break;
     }
 }
+// Get number of valid locations
+$location_count = 0;
+if( $locations && $location_valid ) {
+    foreach( $locations as $location ) {
+        if ( get_post_status ( $location ) == 'publish' ) {
+            $location_count++;
+        }
+    } // endforeach
+}
 // Get primary appointment location name
 $l = 1;
 if( $locations && $location_valid ) {
@@ -355,9 +364,11 @@ while ( have_posts() ) : the_post();
                                     <a class="btn btn-primary" href="<?php echo get_the_permalink( $location ); ?>">
                                         View Location
                                     </a>
-                                    <a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of locations for this provider">
-                                        View All Locations
-                                    </a>
+                                    <?php if (1 < $location_count) { ?>
+                                        <a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of locations for this provider">
+                                            View All Locations
+                                        </a>
+                                    <?php } ?>
                                 </div>
                                 <?php $l++;
 	                                }
