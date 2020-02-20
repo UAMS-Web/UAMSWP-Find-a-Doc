@@ -907,17 +907,42 @@
             "acfe_validate": "",
             "acfe_update": ""
         },
-        "field_physician_hidden": {
-            "key": "field_physician_hidden",
-            "name": "physician_hidden",
-            "type": "true_false",
-            "label": "Hide",
+        "field_physician_recognitions": {
+            "key": "field_physician_recognitions",
+            "name": "physician_recognitions",
+            "type": "taxonomy",
+            "label": "Recognition Lists",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
-                "class": "hide-acf-title",
+                "width": "75",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "recognition",
+            "field_type": "multi_select",
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 1,
+            "allow_null": 1
+        },
+        "field_physician_hidden": {
+            "key": "field_physician_hidden",
+            "name": "physician_hidden",
+            "type": "true_false",
+            "label": "Hide from Provider List",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
                 "id": ""
             },
             "message": "Exclude from Primary Listing",

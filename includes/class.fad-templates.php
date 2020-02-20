@@ -77,14 +77,14 @@ function provider_image_query_var( $vars ) {
 }
 add_filter( 'query_vars', 'provider_image_query_var' );
 
-// function provider_image_rewrite_templates() {
-//     if ( get_query_var( 'image' )) {
-//         add_filter( 'template_include', function() {
-//             return basename(dirname(dirname(__FILE__))) .'/templates/provider-image.php';
-//         });
-//     }
-// }
-// add_action( 'template_redirect', 'provider_image_rewrite_templates' );
+function provider_image_rewrite_templates() {
+    if ( get_query_var( 'image' )) {
+        add_filter( 'template_include', function() {
+            return WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/provider-image.php';
+        });
+    }
+}
+add_action( 'template_redirect', 'provider_image_rewrite_templates' );
 
 add_filter( 'body_class', 'uamswp_fad_body_class' );
 function uamswp_fad_body_class( $classes ) {
