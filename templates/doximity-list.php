@@ -122,15 +122,15 @@ function display_provider_image() {
                     echo '<td>'. $degree_list .'</td>';
 
                     // Email Address field
-                    $contact_row = 0;
+                    $e = 1;
                     echo '<td>';
-                        if( have_rows('physician_contact_information') ):
-                            while ( have_rows('physician_contact_information') ) : the_row();
+                        if( have_rows('physician_contact_information',$post_id) ):
+                            while ( have_rows('physician_contact_information',$post_id) ) : the_row();
                                 $contact_type = get_sub_field('type');
                                 $contact_info = get_sub_field('information');
-                                if ( $contact_type == 'email' && $contact_row < 1 ) { // Only display the first instance of an email row
+                                if ( $contact_type == 'email' && 2 > $e ) { // Only display the first instance of an email row
                                     echo $contact_info;
-                                    $contact_row++;
+                                    $e++;
                                 }
                             endwhile;
                         endif;
