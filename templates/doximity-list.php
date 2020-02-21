@@ -58,37 +58,76 @@ function display_provider_image() {
     $query = new WP_Query( $args );
 
     if ( $query->have_posts() ) : ?>
-        
-        <table>
-            <th>Provider Name</th>
-            <th>Degrees</th>
-        <?php 
-        while( $query->have_posts() ) : $query->the_post();
-            $post_id = get_the_ID();
-            echo '<tr>';
-            // Title field
-            echo '<td>'. get_the_title( $post_id ) .'</td>';
-            // Example of repeater list
-            $degrees = get_field('physician_degree',$post_id);
-            $degree_list = '';
-            $i = 1;
-            if ( $degrees ) {
-                foreach( $degrees as $degree ):
-                    $degree_name = get_term( $degree, 'degree');
-                    $degree_list .= $degree_name->name;
-                    if( count($degrees) > $i ) {
-                        $degree_list .= ", ";
-                    }
-                    $i++;
-                endforeach;
-            } 
-            echo '<td>'. $degree_list .'</td>';
-            echo '</tr>';
-                
-        endwhile;
-        ?>
-    
-    </table>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Required</th>
+                        <th colspan="4">Basic Information</th>
+                        <th colspan="8">Address and Phone</th>
+                        <th colspan="2">(Suggested) Expertise</th>
+                    </tr>
+                    <tr>
+                        <th>NPI Number</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Credentials (MD or DO)</th>
+                        <th>Email Address</th>
+                        <th>Facility Name</th>
+                        <th>Office Address 1</th>
+                        <th>Office Address 2</th>
+                        <th>Office City</th>
+                        <th>Office State</th>
+                        <th>Office Zip</th>
+                        <th>Phone</th>
+                        <th>Fax</th>
+                        <th>Specialty</th>
+                        <th>Sub-Specialty</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php 
+                while( $query->have_posts() ) : $query->the_post();
+                    $post_id = get_the_ID();
+                    echo '<tr>';
+                    
+                    // NPI Number field
+                    // First Name field
+                    // Last Name field
+                    // Credentials (MD or DO) field
+                    $degrees = get_field('physician_degree',$post_id);
+                    $degree_list = '';
+                    $i = 1;
+                    if ( $degrees ) {
+                        foreach( $degrees as $degree ):
+                            $degree_name = get_term( $degree, 'degree');
+                            $degree_list .= $degree_name->name;
+                            if( count($degrees) > $i ) {
+                                $degree_list .= ", ";
+                            }
+                            $i++;
+                        endforeach;
+                    } 
+                    echo '<td>'. $degree_list .'</td>';
+                    // Email Address field
+                    // Facility Name field
+                    // Office Address 1 field
+                    // Office Address 2 field
+                    // Office City field
+                    // Office State field
+                    // Office Zip field
+                    // Phone field
+                    // Fax field
+                    // Specialty field
+                    // Sub-Specialty field
+                    // Example of repeater list
+                    echo '</tr>';
+                        
+                endwhile;
+                ?>
+            </tbody>
+        </table>
+    </div>
     <?php
         else :
         echo 'No providers found';
