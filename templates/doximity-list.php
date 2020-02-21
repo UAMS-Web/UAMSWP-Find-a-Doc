@@ -119,8 +119,22 @@ function display_provider_image() {
                         endforeach;
                     } 
                     echo '<td>'. $degree_list .'</td>';
+
                     // Email Address field
-                    echo '<td>' . '</td>';
+                    $contact_row = 0;
+                    echo '<td>';
+                        if( have_rows('physician_contact_information') ):
+                            while ( have_rows('physician_contact_information') ) : the_row();
+                                $contact_type = get_sub_field('type');
+                                $contact_info = get_sub_field('information');
+                                if ( $contact_type == 'email' && $contact_row < 1 ) { // Only display the first instance of an email row
+                                    echo $contact_info;
+                                    $contact_row++;
+                                }
+                            endwhile;
+                        endif;
+                    echo '</td>';
+
                     // Facility Name field
                     echo '<td>' . '</td>';
                     // Office Address 1 field
