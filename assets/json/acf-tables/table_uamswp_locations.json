@@ -64,17 +64,10 @@
             }
         },
         {
-            "name": "location_map",
+            "name": "location_region",
             "map": {
                 "type": "acf_field_name",
-                "identifier": "location_map"
-            }
-        },
-        {
-            "name": "location_parking_map",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_parking_map"
+                "identifier": "location_region"
             }
         },
         {
@@ -182,14 +175,6 @@
             "map": {
                 "type": "acf_field_name",
                 "identifier": "location_portal"
-            }
-        },
-        {
-            "name": "location_hidden",
-            "format": "%d",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_hidden"
             }
         },
         {

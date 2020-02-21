@@ -1353,7 +1353,7 @@ function create_region_taxonomy() {
 	);
 	$rewrite = array(
 		'slug'                       => 'region',
-		'with_front'                 => true,
+		'with_front'                 => false,
 		'hierarchical'               => true,
 	);
 	$capabilities = array(
@@ -1365,7 +1365,7 @@ function create_region_taxonomy() {
 	$args = array(
 		'labels'                     => $labels,
 		'hierarchical'               => true,
-		'public'                     => true,
+		'public'                     => false,
 		'show_ui'                    => true,
 		'show_admin_column'          => false,
 		'show_in_nav_menus'          => false,
@@ -1485,7 +1485,10 @@ function remove_provider_meta() {
 	remove_meta_box( 'patient_typediv', 'provider', 'side' );
 	remove_meta_box( 'tagsdiv-medical_procedures', 'provider', 'side' );
 	remove_meta_box( 'medical_termsdiv', 'provider', 'side' );
+	remove_meta_box( 'tagsdiv-recognition', 'provider', 'side' );
 	remove_meta_box( 'custom-post-type-onomies-locations', 'provider', 'side');
+	// Location
+	remove_meta_box( 'regiondiv', 'location', 'side' );
 }
 
 add_action( 'admin_menu' , 'remove_provider_meta' );
