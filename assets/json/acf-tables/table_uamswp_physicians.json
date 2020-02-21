@@ -142,6 +142,13 @@
             }
         },
         {
+            "name": "physician_region",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "physician_region"
+            }
+        },
+        {
             "name": "physician_affiliation",
             "map": {
                 "type": "acf_field_name",
@@ -258,14 +265,6 @@
             "map": {
                 "type": "acf_field_name",
                 "identifier": "physician_npi"
-            }
-        },
-        {
-            "name": "physician_hidden",
-            "format": "%d",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_hidden"
             }
         },
         {

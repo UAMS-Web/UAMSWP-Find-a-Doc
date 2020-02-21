@@ -67,6 +67,19 @@ function set_default_language($value, $post_id, $field) {
   	return $value;
 }
 
+add_filter('acf/load_value/key=field_location_region', 'set_default_region', 20, 3);
+function set_default_region($value, $post_id, $field) {
+    // Only add default content for empty fields
+    if ( $value !== false ) {
+        return $value;
+    }
+    
+    $term = get_term_by('slug', 'central', 'region');
+	$id = $term->term_id;
+    $value = array($id);
+  	return $value;
+}
+
 // Order for Portal - None slug set to "_none"
 add_filter('acf/fields/taxonomy/wp_list_categories/key=field_location_portal', 'my_taxonomy_query', 10, 2);
 add_filter('acf/fields/taxonomy/wp_list_categories/key=field_physician_portal', 'my_taxonomy_query', 10, 2);
@@ -112,6 +125,19 @@ function physician_save_post( $post_id ) {
   $full_name = $first_name .' ' .( $middle_name ? $middle_name . ' ' : '') . $last_name . ( $pedigree ? '&nbsp;' . $pedigree : '') .  ( $degree_list ? ', ' . $degree_list : '' );
 
   $_POST['acf']['field_physician_full_name'] = $full_name;
+
+  // Add region
+  $locations = $_POST['acf']['field_physician_locations'];
+  if ( $locations ) {
+	foreach( $locations as $location ):
+		$region = get_field( 'location_region', $location);
+
+		// break loop after first iteration = primary location
+    	break; 
+	endforeach;
+  }
+
+  $_POST['acf']['field_physician_region'] = $region;
 
 }
 

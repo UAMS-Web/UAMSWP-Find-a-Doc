@@ -827,6 +827,39 @@
             "acfe_validate": "",
             "acfe_update": ""
         },
+        "field_physician_region": {
+            "key": "field_physician_region",
+            "name": "physician_region",
+            "type": "taxonomy",
+            "label": "Region",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_clinical_tab",
+                        "operator": "==",
+                        "value": "false"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "region",
+            "field_type": "select",
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 0,
+            "allow_null": 0
+        },
         "field_physician_affiliation": {
             "key": "field_physician_affiliation",
             "name": "physician_affiliation",
@@ -907,17 +940,42 @@
             "acfe_validate": "",
             "acfe_update": ""
         },
-        "field_physician_hidden": {
-            "key": "field_physician_hidden",
-            "name": "physician_hidden",
-            "type": "true_false",
-            "label": "Hide",
+        "field_physician_recognitions": {
+            "key": "field_physician_recognitions",
+            "name": "physician_recognitions",
+            "type": "taxonomy",
+            "label": "Recognition Lists",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
-                "class": "hide-acf-title",
+                "width": "75",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "recognition",
+            "field_type": "multi_select",
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 1,
+            "allow_null": 1
+        },
+        "field_physician_hidden": {
+            "key": "field_physician_hidden",
+            "name": "physician_hidden",
+            "type": "true_false",
+            "label": "Hide from Provider List",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
                 "id": ""
             },
             "message": "Exclude from Primary Listing",
@@ -994,7 +1052,7 @@
             "name": "physician_academic_appointment",
             "type": "repeater",
             "label": "Academic Appointment",
-            "instructions": "",
+            "instructions": "Both fields are required if you add a row.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -1013,8 +1071,8 @@
                     "label": "Academic Title",
                     "name": "academic_title",
                     "type": "text",
-                    "instructions": "",
-                    "required": 0,
+                    "instructions": "Professor, Associate Professor, Assistant Professor, etc.",
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
@@ -1033,7 +1091,7 @@
                     "name": "department",
                     "type": "taxonomy",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",

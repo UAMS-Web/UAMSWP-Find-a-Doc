@@ -36,22 +36,67 @@ if ( $languages ) {
 
 $prefix = get_field('physician_prefix',$post->ID);
 $full_name = get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+$medium_name = ($prefix ? $prefix .' ' : '') . get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID);
 $short_name = $prefix ? $prefix .' ' .get_field('physician_last_name',$post->ID) : get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '');
 $excerpt = get_field('physician_short_clinical_bio',$post->ID);
+$phys_title = get_field('physician_title',$post->ID);
+$phys_title_name = get_term( $phys_title, 'clinical_title' )->name;
+$vowels = array('a','e','i','o','u');
+if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
+    $phys_title_indef_article = 'an';
+} else {
+    $phys_title_indef_article = 'a';
+}
 $bio = get_field('physician_clinical_bio',$post->ID);
 $eligible_appt = get_field('physician_eligible_appointments',$post->ID);
+// Check for valid locations
+$locations = get_field('physician_locations',$post->ID);
+$location_valid = false;
+foreach( $locations as $location ) {
+    if ( get_post_status ( $location ) == 'publish' ) {
+        $location_valid = true;
+        $break;
+    }
+}
+// Get number of valid locations
+$location_count = 0;
+if( $locations && $location_valid ) {
+    foreach( $locations as $location ) {
+        if ( get_post_status ( $location ) == 'publish' ) {
+            $location_count++;
+        }
+    } // endforeach
+}
+// Get primary appointment location name
+$l = 1;
+if( $locations && $location_valid ) {
+    foreach( $locations as $location ) {
+        if ( 2 > $l ){
+            if ( get_post_status ( $location ) == 'publish' ) {
+                $primary_appointment_title = get_the_title( $location );
+                $l++;
+            }
+        }
+    } // endforeach
+}
+
+// Set meta description
 if (empty($excerpt)){
     if ($bio){
         $excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 155, '...');
+    } else {
+        $fallback_desc = $medium_name . ' is ' . ($phys_title ? $phys_title_indef_article . ' ' . strtolower($phys_title_name) : 'a health care provider' ) . ($primary_appointment_title ? ' at ' . $primary_appointment_title : '') .  ' employed by UAMS Health.';
+        $excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 155, '...');
     }
 }
-
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
 	return $html;
 }
 add_filter('seopress_titles_desc', 'sp_titles_desc');
+
+// Set meta title
 function sp_titles_title($html) { 
     global $full_name;
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
@@ -89,18 +134,9 @@ while ( have_posts() ) : the_post();
     $boards = get_field( 'physician_boards' );
     $conditions = get_field('physician_conditions');
     $treatments = get_field('physician_treatments');
-    $phys_title = get_field('physician_title');
     $expertises =  get_field('physician_expertise');
     $second_opinion = get_field('physician_second_opinion');
     $patients = get_field('physician_patient_types');
-    $locations = get_field('physician_locations');
-    $location_valid = false;
-    foreach( $locations as $location ) {
-        if ( get_post_status ( $location ) == 'publish' ) {
-            $location_valid = true;
-            $break;
-        }
-    }
     $refer_req = get_field('physician_referral_required');
     $accept_new = get_field('physician_accepting_patients');
     $physician_portal = get_field('physician_portal');
@@ -125,7 +161,14 @@ while ( have_posts() ) : the_post();
     $provider_field_classes = '';
     if ($degrees && !empty($degrees)) { $provider_field_classes = $provider_field_classes . ' has-degrees'; }
     if ($prefix && !empty($prefix)) { $provider_field_classes = $provider_field_classes . ' has-prefix'; }
-    if (has_post_thumbnail()) { $provider_field_classes = $provider_field_classes . ' has-image'; }
+    if (has_post_thumbnail()) {
+        $provider_field_classes = $provider_field_classes . ' has-image';
+        $image_age = date('Y') - get_the_date( 'Y', get_post_thumbnail_id() ); // How old the provider image is in years
+        $image_age_threshold = 10; // Set the threshold for how old a provider image can be before a new photo is needed
+        if ( $image_age >= $image_age_threshold ) {
+            $image_age = $image_age_threshold . '+'; // Cap attribute value at the threshold
+        }
+    }
     if ($service_line && !empty($service_line)) { $provider_field_classes = $provider_field_classes . ' has-service-line'; }
     if ($npi && !empty($npi)) { $provider_field_classes = $provider_field_classes . ' has-npi'; }
     if ($bio && !empty($bio)) { $provider_field_classes = $provider_field_classes . ' has-clinical-bio'; }
@@ -167,7 +210,7 @@ while ( have_posts() ) : the_post();
 ?>
 
 <div class="content-sidebar-wrap">
-    <main class="doctor-item<?php echo $provider_field_classes; ?>" id="genesis-content">
+    <main class="doctor-item<?php echo $provider_field_classes; ?>" id="genesis-content"<?php echo (has_post_thumbnail() ? ' data-image-age="' . $image_age . '"' : ''); ?><?php echo ($service_line ? ' data-service-line="' . get_term( $service_line, 'service_line' )->name . '"' : ''); ?>>
         <section class="container-fluid p-0 p-xs-8 p-sm-10 doctor-info bg-white">
             <div class="row mx-0 mx-xs-n4 mx-sm-n8">
                 <div class="col-12 col-xs p-4 py-xs-0 px-xs-4 px-sm-8 order-2 text">
@@ -321,9 +364,11 @@ while ( have_posts() ) : the_post();
                                     <a class="btn btn-primary" href="<?php echo get_the_permalink( $location ); ?>">
                                         View Location
                                     </a>
-                                    <a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of locations for this provider">
-                                        View All Locations
-                                    </a>
+                                    <?php if (1 < $location_count) { ?>
+                                        <a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of locations for this provider">
+                                            View All Locations
+                                        </a>
+                                    <?php } ?>
                                 </div>
                                 <?php $l++;
 	                                }
@@ -446,7 +491,7 @@ while ( have_posts() ) : the_post();
                         <div class="module-body">
                             <?php echo $physician_clinical_bio; ?>
                             <?php if($physician_youtube_link) { ?>
-                            <div class="embed-responsive embed-responsive-16by9">
+                            <div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
                                 <?php echo wp_oembed_get( $physician_youtube_link ); ?>
                             </div>
                             <?php } ?>
@@ -683,7 +728,7 @@ while ( have_posts() ) : the_post();
                                     <?php } else { ?>
                                     <picture>
                                         <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
-                                        <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" class="card-img-top" />
+                                        <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" class="card-img-top" />
                                     </picture>
                                     <?php } ?>
                                     <div class="card-body">

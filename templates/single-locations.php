@@ -267,7 +267,7 @@ while ( have_posts() ) : the_post(); ?>
 						<div class="module-body">
 							<?php echo $about ? $about : ''; ?>
 							<?php if($youtube_link) { ?>
-                            <div class="embed-responsive embed-responsive-16by9">
+                            <div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
                                 <?php echo wp_oembed_get( $youtube_link ); ?>
                             </div>
                             <?php } ?>
@@ -300,7 +300,7 @@ while ( have_posts() ) : the_post(); ?>
 							<?php if ( $parking_map ) { ?>
 								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank">Get Directions</a>
 							<?php } // endif ?>
-							<?php echo ( get_field('location_parking' ) ? '<h3>Directions From the Parking Area</h3>' : ''); // Display the directions heading here if there is a value for parking. ?>
+							<?php echo ( get_field('location_parking') && get_field('location_direction') ? '<h3>Directions From the Parking Area</h3>' : ''); // Display the directions heading here if there is a value for parking. ?>
 							<?php echo get_field('location_direction'); ?>
 						</div>
 					</div>
