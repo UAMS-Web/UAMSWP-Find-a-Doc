@@ -426,7 +426,7 @@
         },
         "field_location_clinic_phone_query": {
             "key": "field_location_clinic_phone_query",
-            "label": "Is there a seperate appointment number for patients?",
+            "label": "Is there a separate appointment number for patients?",
             "name": "location_clinic_phone_query",
             "type": "button_group",
             "instructions": "",
