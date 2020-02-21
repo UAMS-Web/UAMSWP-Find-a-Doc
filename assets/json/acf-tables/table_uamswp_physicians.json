@@ -261,14 +261,6 @@
             }
         },
         {
-            "name": "physician_hidden",
-            "format": "%d",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_hidden"
-            }
-        },
-        {
             "name": "physician_academic_title",
             "map": {
                 "type": "acf_field_name",
