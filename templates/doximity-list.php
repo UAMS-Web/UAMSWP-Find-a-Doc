@@ -92,49 +92,49 @@ function display_provider_image() {
                     echo '<tr>';
                     
                     // NPI Number field
-                    $npi = get_field('physician_npi',$post_id);
-                    echo '<td>';
-                    echo $npi ? $npi : ''; // only display value if value is not empty or zero
-                    echo '</td>';
+                        $npi = get_field('physician_npi',$post_id);
+                        echo '<td>';
+                        echo $npi ? $npi : ''; // only display value if value is not empty or zero
+                        echo '</td>';
 
                     // First Name field
-                    $first_name = get_field('physician_first_name',$post_id);
-                    echo '<td>' . $first_name . '</td>';
+                        $first_name = get_field('physician_first_name',$post_id);
+                        echo '<td>' . $first_name . '</td>';
 
                     // Last Name field
-                    $last_name = get_field('physician_last_name',$post_id);
-                    echo '<td>' . $last_name . '</td>';
+                        $last_name = get_field('physician_last_name',$post_id);
+                        echo '<td>' . $last_name . '</td>';
 
                     // Credentials (MD or DO) field
-                    $degrees = get_field('physician_degree',$post_id);
-                    $degree_list = '';
-                    $i = 1;
-                    if ( $degrees ) {
-                        foreach( $degrees as $degree ):
-                            $degree_name = get_term( $degree, 'degree');
-                            $degree_list .= $degree_name->name;
-                            if( count($degrees) > $i ) {
-                                $degree_list .= ", ";
-                            }
-                            $i++;
-                        endforeach;
-                    } 
-                    echo '<td>'. $degree_list .'</td>';
+                        $degrees = get_field('physician_degree',$post_id);
+                        $degree_list = '';
+                        $i = 1;
+                        if ( $degrees ) {
+                            foreach( $degrees as $degree ):
+                                $degree_name = get_term( $degree, 'degree');
+                                $degree_list .= $degree_name->name;
+                                if( count($degrees) > $i ) {
+                                    $degree_list .= ", ";
+                                }
+                                $i++;
+                            endforeach;
+                        } 
+                        echo '<td>'. $degree_list .'</td>';
 
                     // Email Address field
-                    $e = 1;
-                    echo '<td>';
-                        if( have_rows('physician_contact_information',$post_id) ):
-                            while ( have_rows('physician_contact_information',$post_id) ) : the_row();
-                                $contact_type = get_sub_field('type');
-                                $contact_info = get_sub_field('information');
-                                if ( $contact_type == 'email' && 2 > $e ) { // Only display the first instance of an email row
-                                    echo $contact_info;
-                                    $e++;
-                                }
-                            endwhile;
-                        endif;
-                    echo '</td>';
+                        $e = 1;
+                        echo '<td>';
+                            if( have_rows('physician_contact_information',$post_id) ):
+                                while ( have_rows('physician_contact_information',$post_id) ) : the_row();
+                                    $contact_type = get_sub_field('type');
+                                    $contact_info = get_sub_field('information');
+                                    if ( $contact_type == 'email' && 2 > $e ) { // Only display the first instance of an email row
+                                        echo $contact_info;
+                                        $e++;
+                                    }
+                                endwhile;
+                            endif;
+                        echo '</td>';
 
                     // Facility Name field
                     
@@ -214,10 +214,10 @@ function display_provider_image() {
                         echo '</td>';
 
                     // Specialty field
-                    echo '<td>' . '</td>';
+                        echo '<td>' . '</td>';
 
                     // Sub-Specialty field
-                    echo '<td>' . '</td>';
+                        echo '<td>' . '</td>';
 
                     echo '</tr>';
                         
