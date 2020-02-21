@@ -106,20 +106,43 @@ function display_provider_image() {
                         echo '<td>' . $last_name . '</td>';
 
                     // Credentials (MD or DO) field
+                        $degree_md = array( // list valid versions of MD
+                            'M.D.'
+                        );
+                        $degree_do = array( // list valid versions of DO
+                            'D.O.'
+                        );
+                        $degree_np = array( // list valid versions of NP
+                            'FNP-C'
+                        );
+                        $degree_pa = array( // list valid versions of PA
+                            'P.A.'
+                        );
                         $degrees = get_field('physician_degree',$post_id);
-                        $degree_list = '';
-                        $i = 1;
+                        $degree_valid = '';
+                        $d = 1;
                         if ( $degrees ) {
                             foreach( $degrees as $degree ):
-                                $degree_name = get_term( $degree, 'degree');
-                                $degree_list .= $degree_name->name;
-                                if( count($degrees) > $i ) {
-                                    $degree_list .= ", ";
+                                $degree_term = get_term( $degree, 'degree');
+                                $degree_name = $degree_term->name;
+                                if ( ( 2 > $d ) && ( in_array($degree_name, $degree_md) || in_array($degree_name, $degree_do) || in_array($degree_name, $degree_np) || in_array($degree_name, $degree_pa) ) ) {
+                                    $degree_valid = $degree_name;
+                                    if (in_array($degree_valid, $degree_md)) {
+                                        $degree_valid = 'MD';
+                                    } elseif (in_array($degree_valid, $degree_do)) {
+                                        $degree_valid = 'DO';
+                                    } elseif (in_array($degree_valid, $degree_np)) {
+                                        $degree_valid = 'NP';
+                                    } elseif (in_array($degree_valid, $degree_pa)) {
+                                        $degree_valid = 'PA';
+                                    } else {
+                                        $degree_valid = '';
+                                    }
+                                    $d++;
                                 }
-                                $i++;
                             endforeach;
                         } 
-                        echo '<td>'. $degree_list .'</td>';
+                        echo '<td>'. $degree_valid . '</td>';
 
                     // Email Address field
                         $e = 1;
