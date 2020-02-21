@@ -64,6 +64,13 @@
             }
         },
         {
+            "name": "location_region",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_region"
+            }
+        },
+        {
             "name": "location_parking",
             "map": {
                 "type": "acf_field_name",
