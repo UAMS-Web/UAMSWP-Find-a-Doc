@@ -69,7 +69,7 @@ function set_default_language($value, $post_id, $field) {
 
 add_filter('acf/load_value/key=field_location_region', 'set_default_region', 20, 3);
 function set_default_region($value, $post_id, $field) {
-    // Only add default content for new posts
+    // Only add default content for empty fields
     if ( $value !== false ) {
         return $value;
     }
