@@ -1353,7 +1353,7 @@ function create_region_taxonomy() {
 	);
 	$rewrite = array(
 		'slug'                       => 'region',
-		'with_front'                 => true,
+		'with_front'                 => false,
 		'hierarchical'               => true,
 	);
 	$capabilities = array(
@@ -1365,7 +1365,7 @@ function create_region_taxonomy() {
 	$args = array(
 		'labels'                     => $labels,
 		'hierarchical'               => true,
-		'public'                     => true,
+		'public'                     => false,
 		'show_ui'                    => true,
 		'show_admin_column'          => false,
 		'show_in_nav_menus'          => false,
