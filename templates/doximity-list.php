@@ -123,6 +123,8 @@ function display_provider_image() {
 
                     // Email Address field
                         $e = 1;
+                        $contact_type = '';
+                        $contact_info = '';
                         echo '<td>';
                             if( have_rows('physician_contact_information',$post_id) ):
                                 while ( have_rows('physician_contact_information',$post_id) ) : the_row();
