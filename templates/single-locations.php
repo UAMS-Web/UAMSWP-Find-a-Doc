@@ -63,10 +63,6 @@ while ( have_posts() ) : the_post(); ?>
 						<?php $phone_schema .= '"telephone": ["'. format_phone_dash( get_field('location_phone') ) .'"
 						'; ?>
 						<?php } ?>
-						<?php if (get_field('location_fax')) { ?>
-						<dt>Clinic Fax Number</dt>
-						<dd><?php echo format_phone_us( get_field('location_fax') ); ?></dd>
-						<?php } ?>
 						<?php if (get_field('location_new_appointments_phone') && get_field('location_clinic_phone_query')) { ?>
 							<dt>Appointment Phone Number<?php echo get_field('field_location_appointment_phone_query') ? 's' : ''; ?></dt>
 							<dd><a href="tel:<?php echo format_phone_dash( get_field('location_new_appointments_phone') ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_new_appointments_phone') ); ?></a><?php echo get_field('field_location_appointment_phone_query') ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
@@ -77,6 +73,10 @@ while ( have_posts() ) : the_post(); ?>
 								<?php $phone_schema .= ', "'. format_phone_dash( get_field('location_return_appointments_phone') ) .'"
 							'; ?>
 							<?php } ?>
+						<?php } ?>
+						<?php if (get_field('location_fax')) { ?>
+						<dt>Clinic Fax Number</dt>
+						<dd><?php echo format_phone_us( get_field('location_fax') ); ?></dd>
 						<?php } ?>
 						<?php if ( get_field('field_location_phone_numbers') ) { 
 							$phone_numbers = get_field('field_location_phone_numbers');
