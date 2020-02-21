@@ -94,7 +94,10 @@ function display_provider_image() {
                     // Title field
                     //echo '<td>'. get_the_title( $post_id ) .'</td>';
                     // NPI Number field
-                    echo '<td>' . '</td>';
+                    $npi = get_field('physician_npi',$post_id);
+                    echo '<td>';
+                    echo $npi ? $npi : ''; // only display value if value is not empty or zero
+                    echo '</td>';
                     // First Name field
                     $first_name = get_field('physician_first_name',$post_id);
                     echo '<td>' . $first_name . '</td>';
