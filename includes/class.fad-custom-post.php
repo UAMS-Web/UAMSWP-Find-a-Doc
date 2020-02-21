@@ -1485,7 +1485,10 @@ function remove_provider_meta() {
 	remove_meta_box( 'patient_typediv', 'provider', 'side' );
 	remove_meta_box( 'tagsdiv-medical_procedures', 'provider', 'side' );
 	remove_meta_box( 'medical_termsdiv', 'provider', 'side' );
+	remove_meta_box( 'tagsdiv-recognition', 'provider', 'side' );
 	remove_meta_box( 'custom-post-type-onomies-locations', 'provider', 'side');
+	// Location
+	remove_meta_box( 'regiondiv', 'location', 'side' );
 }
 
 add_action( 'admin_menu' , 'remove_provider_meta' );
