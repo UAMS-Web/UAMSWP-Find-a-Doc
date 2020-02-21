@@ -171,14 +171,6 @@
             }
         },
         {
-            "name": "location_hidden",
-            "format": "%d",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_hidden"
-            }
-        },
-        {
             "name": "location_web_name",
             "map": {
                 "type": "acf_field_name",
