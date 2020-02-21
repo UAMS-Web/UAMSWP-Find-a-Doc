@@ -137,28 +137,81 @@ function display_provider_image() {
                     echo '</td>';
 
                     // Facility Name field
-                    echo '<td>' . '</td>';
+                    
+                        // Check for valid locations
+                        $locations = get_field('physician_locations',$post_id);
+                        $location_valid = false;
+                        foreach( $locations as $location ) {
+                            if ( get_post_status ( $location ) == 'publish' ) {
+                                $location_valid = true;
+                                $break;
+                            }
+                        }
+                        // Get primary appointment location name
+                        $l = 1;
+                        $primary_appointment_title = '';
+                        $primary_appointment_address_1 = '';
+                        $primary_appointment_address_2 = '';
+                        $primary_appointment_city = '';
+                        $primary_appointment_state = '';
+                        $primary_appointment_zip = '';
+                        $primary_appointment_phone = '';
+                        $primary_appointment_fax = '';
+                        if( $locations && $location_valid ) {
+                            foreach( $locations as $location ) {
+                                if ( 2 > $l ){
+                                    if ( get_post_status ( $location ) == 'publish' ) {
+                                        $primary_appointment_title = get_the_title( $location );
+                                        $primary_appointment_address_1 = get_field( 'location_address_1', $location );
+                                        $primary_appointment_address_2 = get_field( 'location_address_2', $location );
+                                        $primary_appointment_city = get_field( 'location_city', $location );
+                                        $primary_appointment_state = get_field( 'location_state', $location );
+                                        $primary_appointment_zip = get_field( 'location_zip', $location );
+                                        $primary_appointment_phone = get_field( 'location_phone', $location );
+                                        $primary_appointment_fax = get_field( 'location_fax', $location );
+                                        $l++;
+                                    }
+                                }
+                            } // endforeach
+                        }
+                        echo '<td>';
+                        echo $primary_appointment_title ? $primary_appointment_title : '';
+                        echo '</td>';
 
                     // Office Address 1 field
-                    echo '<td>' . '</td>';
+                        echo '<td>';
+                        echo $primary_appointment_address_1 ? $primary_appointment_address_1 : '';
+                        echo '</td>';
 
                     // Office Address 2 field
-                    echo '<td>' . '</td>';
+                        echo '<td>';
+                        echo $primary_appointment_address_2 ? $primary_appointment_address_2 : '';
+                        echo '</td>';
 
                     // Office City field
-                    echo '<td>' . '</td>';
+                        echo '<td>';
+                        echo $primary_appointment_city ? $primary_appointment_city : '';
+                        echo '</td>';
 
                     // Office State field
-                    echo '<td>' . '</td>';
+                        echo '<td>';
+                        echo $primary_appointment_state ? $primary_appointment_state : '';
+                        echo '</td>';
 
                     // Office Zip field
-                    echo '<td>' . '</td>';
-                    
+                        echo '<td>';
+                        echo $primary_appointment_zip ? $primary_appointment_zip : '';
+                        echo '</td>';
+
                     // Phone field
-                    echo '<td>' . '</td>';
+                        echo '<td>';
+                        echo $primary_appointment_phone ? $primary_appointment_phone : '';
+                        echo '</td>';
 
                     // Fax field
-                    echo '<td>' . '</td>';
+                        echo '<td>';
+                        echo $primary_appointment_fax ? $primary_appointment_fax : '';
+                        echo '</td>';
 
                     // Specialty field
                     echo '<td>' . '</td>';
