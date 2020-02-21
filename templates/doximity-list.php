@@ -91,9 +91,14 @@ function display_provider_image() {
                     $post_id = get_the_ID();
                     echo '<tr>';
                     
+                    // Title field
+                    //echo '<td>'. get_the_title( $post_id ) .'</td>';
                     // NPI Number field
+                    echo '<td>' . '</td>';
                     // First Name field
+                    echo '<td>' . '</td>';
                     // Last Name field
+                    echo '<td>' . '</td>';
                     // Credentials (MD or DO) field
                     $degrees = get_field('physician_degree',$post_id);
                     $degree_list = '';
@@ -110,17 +115,27 @@ function display_provider_image() {
                     } 
                     echo '<td>'. $degree_list .'</td>';
                     // Email Address field
+                    echo '<td>' . '</td>';
                     // Facility Name field
+                    echo '<td>' . '</td>';
                     // Office Address 1 field
+                    echo '<td>' . '</td>';
                     // Office Address 2 field
+                    echo '<td>' . '</td>';
                     // Office City field
+                    echo '<td>' . '</td>';
                     // Office State field
+                    echo '<td>' . '</td>';
                     // Office Zip field
+                    echo '<td>' . '</td>';
                     // Phone field
+                    echo '<td>' . '</td>';
                     // Fax field
+                    echo '<td>' . '</td>';
                     // Specialty field
+                    echo '<td>' . '</td>';
                     // Sub-Specialty field
-                    // Example of repeater list
+                    echo '<td>' . '</td>';
                     echo '</tr>';
                         
                 endwhile;
