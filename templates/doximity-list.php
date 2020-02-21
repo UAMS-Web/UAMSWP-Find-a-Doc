@@ -96,7 +96,8 @@ function display_provider_image() {
                     // NPI Number field
                     echo '<td>' . '</td>';
                     // First Name field
-                    echo '<td>' . '</td>';
+                    $first_name = get_field('physician_first_name',$post_id);
+                    echo '<td>' . $first_name . '</td>';
                     // Last Name field
                     echo '<td>' . '</td>';
                     // Credentials (MD or DO) field
