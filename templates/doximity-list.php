@@ -99,7 +99,8 @@ function display_provider_image() {
                     $first_name = get_field('physician_first_name',$post_id);
                     echo '<td>' . $first_name . '</td>';
                     // Last Name field
-                    echo '<td>' . '</td>';
+                    $last_name = get_field('physician_last_name',$post_id);
+                    echo '<td>' . $last_name . '</td>';
                     // Credentials (MD or DO) field
                     $degrees = get_field('physician_degree',$post_id);
                     $degree_list = '';
