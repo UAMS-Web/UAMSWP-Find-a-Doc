@@ -565,6 +565,21 @@
             },
             "input_mask": "(999) 999-9999 [x 99999]"
         },
+        "field_location_fax": {
+            "key": "field_location_fax",
+            "name": "location_fax",
+            "type": "maskfield",
+            "label": "Clinic Fax Number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "input_mask": "(999) 999-9999 [x 99999]"
+        },
         "field_location_phone_numbers": {
             "key": "field_location_phone_numbers",
             "name": "location_phone_numbers",
