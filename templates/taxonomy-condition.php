@@ -194,7 +194,7 @@
 		<section class="container-fluid p-8 p-sm-10 bg-auto" id="locations">
 			<div class="row">
 				<div class="col-12">
-					<h2 class="module-title">Locations Where <?php echo single_cat_title( '', false ); ?> Is Treated</h2>
+					<h2 class="module-title">Locations Where Providers Treat <?php echo single_cat_title( '', false ); ?></h2>
 					<div class="card-list-container location-card-list-container">
 						<div class="card-list">
 						<?php 
