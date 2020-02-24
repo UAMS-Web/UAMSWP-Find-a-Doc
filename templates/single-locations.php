@@ -74,6 +74,10 @@ while ( have_posts() ) : the_post(); ?>
 							'; ?>
 							<?php } ?>
 						<?php } ?>
+						<?php if (get_field('location_fax')) { ?>
+						<dt>Clinic Fax Number</dt>
+						<dd><?php echo format_phone_us( get_field('location_fax') ); ?></dd>
+						<?php } ?>
 						<?php if ( get_field('field_location_phone_numbers') ) { 
 							$phone_numbers = get_field('field_location_phone_numbers');
 							while( have_rows('field_location_phone_numbers') ): the_row(); 

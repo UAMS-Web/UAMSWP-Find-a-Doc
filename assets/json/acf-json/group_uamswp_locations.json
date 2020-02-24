@@ -453,7 +453,7 @@
         },
         "field_location_clinic_phone_query": {
             "key": "field_location_clinic_phone_query",
-            "label": "Is there a seperate appointment number for patients?",
+            "label": "Is there a separate appointment number for patients?",
             "name": "location_clinic_phone_query",
             "type": "button_group",
             "instructions": "",
@@ -587,6 +587,21 @@
             ],
             "wrapper": {
                 "width": "70",
+                "class": "",
+                "id": ""
+            },
+            "input_mask": "(999) 999-9999 [x 99999]"
+        },
+        "field_location_fax": {
+            "key": "field_location_fax",
+            "name": "location_fax",
+            "type": "maskfield",
+            "label": "Clinic Fax Number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
                 "class": "",
                 "id": ""
             },
