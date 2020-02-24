@@ -50,7 +50,7 @@ function display_provider_image() {
     $args = array(
         "post_type" => "provider",
         "post_status" => "publish",
-        "posts_per_page" => "10",
+        "posts_per_page" => "-1", // Set for all
         "orderby" => "title",
         "order" => "ASC",
     );
@@ -106,6 +106,11 @@ function display_provider_image() {
                     $degrees = get_field('physician_degree',$post_id);
                     $degree_valid = '';
                     $d = 1;
+                    $npi = get_field('physician_npi',$post_id);
+                    $npi_valid = false;
+                    if ( !empty($npi) && '0' != $npi ) {
+	                    $npi_valid = true;
+                    }
                     if ( $degrees ) {
                         foreach( $degrees as $degree ):
                             $degree_term = get_term( $degree, 'degree');
@@ -127,12 +132,12 @@ function display_provider_image() {
                             }
                         endforeach;
                     } 
-                    if ( $degree_valid ) {
+                    if ( $degree_valid && $npi_valid ) {
                     
                         // NPI Number field
-                            $npi = get_field('physician_npi',$post_id);
+                            // $npi = get_field('physician_npi',$post_id); // Added above
                             echo '<td>';
-                            echo $npi ? $npi : ''; // only display value if value is not empty or zero
+                            echo $npi; // only display value if value is not empty or zero
                             echo '</td>';
 
                         // First Name field
