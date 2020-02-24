@@ -74,6 +74,7 @@ if( $locations && $location_valid ) {
         if ( 2 > $l ){
             if ( get_post_status ( $location ) == 'publish' ) {
                 $primary_appointment_title = get_the_title( $location );
+                $primary_appointment_url = get_the_permalink( $location );
                 $l++;
             }
         }
@@ -435,6 +436,15 @@ while ( have_posts() ) : the_post();
             
             $appointment_phone_tel = preg_replace('/^(\+?\d)?(\d{3})(\d{3})(\d{4})$/', '$2-$3-$4', $appointment_phone);
             $appointment_phone_text = preg_replace('/^(\+?\d)?(\d{3})(\d{3})(\d{4})$/', '($2) $3-$4', $appointment_phone);
+
+            if (1 == $location_count) {
+                $appointment_location_url = $primary_appointment_url;
+                $appointment_location_title = $primary_appointment_title;
+            } else {
+                $appointment_location_url = '#locations';
+                $appointment_location_title = 'Jump to list of locations for this provider';
+            }
+            
         ?>
         <section class="uams-module cta-bar cta-bar-1 bg-auto">
             <div class="container-fluid">
@@ -446,35 +456,35 @@ while ( have_posts() ) : the_post();
                             <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                         <?php } elseif ($refer_req && $accept_new && $show_portal) { ?>
                             <p>Appointments for new patients are by referral only. Please contact your primary care provider or visit one of our <a href="/provider/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care providers</a>.</p>
-                            <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this provider">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                            <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                         <?php } elseif (!$location_valid && $refer_req && $accept_new) { ?>
                             <p>Appointments for new patients are by referral only. Please contact your primary care provider or visit one of our <a href="/provider/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care providers</a>.</p>
                             <p>Existing patients can make an appointment by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                         <?php } elseif ($refer_req && $accept_new) { ?>
                             <p>Appointments for new patients are by referral only. Please contact your primary care provider or visit one of our <a href="/provider/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care providers</a>.</p>
-                            <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this provider">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                            <p>Existing patients can make an appointment by <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                         <?php } elseif (!$location_valid && $accept_new && $show_portal) { ?>
                             <p>New patients can make an appointment by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                             <p>Existing patients also have the option to <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>.</p>
                         <?php } elseif ($accept_new && $show_portal) { ?>
-                            <p>New patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this provider">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                            <p>New patients can make an appointment by <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                             <p>Existing patients also have the option to <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>.</p>
                         <?php } elseif (!$location_valid && $accept_new) { ?>
                             <p>New and existing patients can make an appointment by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                         <?php } elseif ($accept_new) { ?>
-                            <p>New and existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this provider">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                            <p>New and existing patients can make an appointment by <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                         <?php } elseif (!$location_valid && $show_portal) { ?>
                             <p>This provider is not currently accepting new patients.</p>
                             <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                         <?php } elseif ($show_portal) { ?>
                             <p>This provider is not currently accepting new patients.</p>
-                            <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this provider">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                            <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                         <?php } elseif (!$location_valid) { ?>
                             <p>This provider is not currently accepting new patients.</p>
                             <p>Existing patients can make an appointment by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                         <?php } else { ?>
                             <p>This provider is not currently accepting new patients.</p>
-                            <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this provider">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                            <p>Existing patients can make an appointment by <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                         <?php } ?>
                     </div>
                 </div>
@@ -928,35 +938,35 @@ while ( have_posts() ) : the_post();
                                 <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                             <?php } elseif ($refer_req && $accept_new && $show_portal) { ?>
                                 <p>Appointments for new patients are by referral only. Please contact your primary care provider or visit one of our <a href="/provider/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care providers</a>.</p>
-                                <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this provider">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                                <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                             <?php } elseif (!$location_valid && $refer_req && $accept_new) { ?>
                                 <p>Appointments for new patients are by referral only. Please contact your primary care provider or visit one of our <a href="/provider/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care providers</a>.</p>
                                 <p>Existing patients can make an appointment by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                             <?php } elseif ($refer_req && $accept_new) { ?>
                                 <p>Appointments for new patients are by referral only. Please contact your primary care provider or visit one of our <a href="/provider/?fwp_primary_care=1&fwp_searchable=1">Center for Primary Care providers</a>.</p>
-                                <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this provider">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                                <p>Existing patients can make an appointment by <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                             <?php } elseif (!$location_valid && $accept_new && $show_portal) { ?>
                                 <p>New patients can make an appointment by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                                 <p>Existing patients also have the option to <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>.</p>
                             <?php } elseif ($accept_new && $show_portal) { ?>
-                                <p>New patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this provider">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                                <p>New patients can make an appointment by <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                                 <p>Existing patients also have the option to <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>.</p>
                             <?php } elseif (!$location_valid && $accept_new) { ?>
                                 <p>New and existing patients can make an appointment by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                             <?php } elseif ($accept_new) { ?>
-                                <p>New and existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this provider">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                                <p>New and existing patients can make an appointment by <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                             <?php } elseif (!$location_valid && $show_portal) { ?>
                                 <p>This provider is not currently accepting new patients.</p>
                                 <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                             <?php } elseif ($show_portal) { ?>
                                 <p>This provider is not currently accepting new patients.</p>
-                                <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="#locations" aria-label="Jump to list of locations for this provider">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                                <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                             <?php } elseif (!$location_valid) { ?>
                                 <p>This provider is not currently accepting new patients.</p>
                                 <p>Existing patients can make an appointment by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                             <?php } else { ?>
                                 <p>This provider is not currently accepting new patients.</p>
-                                <p>Existing patients can make an appointment by <a href="#locations" aria-label="Jump to list of locations for this provider">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
+                                <p>Existing patients can make an appointment by <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break"><?php echo $appointment_phone_text; ?></a>.</p>
                             <?php } ?>
                         </div>
                     </div>
