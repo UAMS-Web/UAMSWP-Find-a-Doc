@@ -8,6 +8,7 @@
 	$excerpt = get_field( 'condition_short_desc', $term );
 	$video = get_field('condition_youtube_link', $term);
 	$treatments = get_field('condition_treatments', $term);
+	$expertise = get_field('condition_expertise', $term);
 
 	function uamswp_keyword_hook_header() {
 		$keyword_text = '';
@@ -62,6 +63,7 @@
     if ($excerpt && !empty($excerpt)) { $condition_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
     if ($video && !empty($video)) { $condition_field_classes .= ' has-video'; } // Video embed
     if ($treatments && !empty($treatments)) { $condition_field_classes .= ' has-treatment'; } // Treatments
+    if ($expertise && !empty($expertise)) { $condition_field_classes .= ' has-expertise'; } // Areas of Expertise
 
  ?>
 <div class="content-sidebar-wrap">
@@ -223,7 +225,6 @@
 		<?php wp_reset_postdata();
 		 endif; 
 		  
-			$expertise = get_field('condition_expertise', $term);
 			$args = (array(
 				'post_type' => "expertise",
 				"post_status" => "publish",
