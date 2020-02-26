@@ -1,6 +1,8 @@
 <?php
 	$term = get_queried_object();
 
+	// ACF Fields - get_fields
+
 	function uamswp_keyword_hook_header() {
 		$keywords = get_field('treatment_procedure_alternate', $term);
 		$keyword_text = '';
@@ -48,9 +50,13 @@
 
 	// Hard coded breadcrumbs
 	$tax = get_term_by("slug", get_query_var("term"), get_query_var("taxonomy") );
+
+	// Classes for indicating presence of content
+    $treatment_field_classes = '';	
+	
  ?>
 <div class="content-sidebar-wrap">
-	<main id="genesis-content">
+	<main id="genesis-content" class="treatment-item<?php echo $treatment_field_classes; ?>">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
 				<h1 class="entry-title"><?php echo ( $treatment_title ? $treatment_title : 'Treatment & Procedure' ); ?>: <?php echo single_cat_title( '', false ); ?></h1>
