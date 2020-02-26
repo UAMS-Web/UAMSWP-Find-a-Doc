@@ -2,9 +2,9 @@
 	$term = get_queried_object();
 
 	// ACF Fields - get_fields
+	$keywords = get_field('treatment_procedure_alternate', $term);
 
 	function uamswp_keyword_hook_header() {
-		$keywords = get_field('treatment_procedure_alternate', $term);
 		$keyword_text = '';
 		if( $keywords ): 
 			$i = 1;
@@ -53,6 +53,7 @@
 
 	// Classes for indicating presence of content
     $treatment_field_classes = '';	
+	if ($keywords && !empty($keywords)) { $treatment_field_classes .= ' has-keywords'; } // Alternate names
 	
  ?>
 <div class="content-sidebar-wrap">
@@ -63,7 +64,6 @@
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
 				<?php
-					$keywords = get_field('treatment_procedure_alternate', $term);
 					if( $keywords ): 
 						$i = 1;
 						$keyword_text = '';
