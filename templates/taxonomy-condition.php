@@ -3,6 +3,7 @@
 
 	// ACF Fields - get_fields
 	$keywords = get_field('condition_alternate', $term);
+	$clinical_trials = get_field('condition_clinical_trials', $term);
 
 	function uamswp_keyword_hook_header() {
 		$keyword_text = '';
@@ -54,6 +55,7 @@
 	// Classes for indicating presence of content
     $condition_field_classes = '';	
     if ($keywords && !empty($keywords)) { $condition_field_classes .= ' has-keywords'; } // Alternate names
+    if ($clinical_trials && !empty($clinical_trials)) { $condition_field_classes .= ' has-clinical-trials'; } // Alternate names
 
  ?>
 <div class="content-sidebar-wrap">
@@ -86,7 +88,6 @@
 			</div>
 		</section>
 		<?php
-		$clinical_trials = get_field('condition_clinical_trials', $term);
 		if (!empty($clinical_trials)): ?>
 		<section class="uams-module cta-bar cta-bar-1 bg-auto">
 			<div class="container-fluid">
