@@ -6,6 +6,7 @@
 	$clinical_trials = get_field('condition_clinical_trials', $term);
 	$content = get_field( 'condition_content', $term );
 	$excerpt = get_field( 'condition_short_desc', $term );
+	$excerpt_user = true;
 	$video = get_field('condition_youtube_link', $term);
 	$treatments = get_field('condition_treatments', $term);
 	$expertise = get_field('condition_expertise', $term);
@@ -37,6 +38,7 @@
 	add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
 
 	if (empty($excerpt)){
+		$excerpt_user = false;
 		if ($content){
 			$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
 		}
@@ -62,7 +64,7 @@
     if ($keywords && !empty($keywords)) { $condition_field_classes .= ' has-keywords'; } // Alternate names
     if ($clinical_trials && !empty($clinical_trials)) { $condition_field_classes .= ' has-clinical-trials'; } // Display clinical trials block
     if ($content && !empty($content)) { $condition_field_classes .= ' has-content'; } // Body content
-    if ($excerpt && !empty($excerpt)) { $condition_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
+    if ($excerpt && $excerpt_user == true ) { $condition_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
     if ($video && !empty($video)) { $condition_field_classes .= ' has-video'; } // Video embed
     if ($treatments && !empty($treatments)) { $condition_field_classes .= ' has-treatment'; } // Treatments
     if ($expertise && !empty($expertise)) { $condition_field_classes .= ' has-expertise'; } // Areas of Expertise
