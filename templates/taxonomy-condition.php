@@ -7,6 +7,7 @@
 	$content = get_field( 'condition_content', $term );
 	$excerpt = get_field( 'condition_short_desc', $term );
 	$video = get_field('condition_youtube_link', $term);
+	$treatments = get_field('condition_treatments', $term);
 
 	function uamswp_keyword_hook_header() {
 		$keyword_text = '';
@@ -60,6 +61,7 @@
     if ($content && !empty($content)) { $condition_field_classes .= ' has-content'; } // Body content
     if ($excerpt && !empty($excerpt)) { $condition_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
     if ($video && !empty($video)) { $condition_field_classes .= ' has-video'; } // Video embed
+    if ($treatments && !empty($treatments)) { $condition_field_classes .= ' has-treatment'; } // Treatments
 
  ?>
 <div class="content-sidebar-wrap">
@@ -105,7 +107,6 @@
 		</section>
 		<?php endif; ?>
 		<?php 
-			$treatments = get_field('condition_treatments', $term);
 			$args = (array(
 				'taxonomy' => "treatment",
 				'order' => 'ASC',
