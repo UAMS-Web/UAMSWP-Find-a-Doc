@@ -55,7 +55,7 @@
 	// Classes for indicating presence of content
     $condition_field_classes = '';	
     if ($keywords && !empty($keywords)) { $condition_field_classes .= ' has-keywords'; } // Alternate names
-    if ($clinical_trials && !empty($clinical_trials)) { $condition_field_classes .= ' has-clinical-trials'; } // Alternate names
+    if ($clinical_trials && !empty($clinical_trials)) { $condition_field_classes .= ' has-clinical-trials'; } // Display clinical trials block
 
  ?>
 <div class="content-sidebar-wrap">
