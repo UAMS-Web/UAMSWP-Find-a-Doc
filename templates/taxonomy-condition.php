@@ -1,6 +1,8 @@
 <?php
+	$term = get_queried_object();
+
 	function uamswp_keyword_hook_header() {
-		$keywords = get_field('condition_alternate', get_queried_object());
+		$keywords = get_field('condition_alternate', $term);
 		$keyword_text = '';
 		if( $keywords ): 
 			$i = 1;
@@ -24,8 +26,8 @@
 	}
 	add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
 
-	$excerpt = get_field( 'condition_short_desc', get_queried_object() );
-	$content = get_field( 'condition_content', get_queried_object() );
+	$excerpt = get_field( 'condition_short_desc', $term );
+	$content = get_field( 'condition_content', $term );
 	if (empty($excerpt)){
 		if ($content){
 			$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
@@ -43,8 +45,6 @@
 	   
 	$condition_title = get_field('conditions_archive_headline', 'option');
 	$condition_text = get_field('conditions_archive_intro_text', 'option');
-
-	$term = get_queried_object();
 
 	// Hard coded breadcrumbs
 	$tax = get_term_by("slug", get_query_var("term"), get_query_var("taxonomy") );
@@ -169,7 +169,7 @@
 								</div>
 								<?php if ($postsPerPage !== -1) { ?>
 								<div class="more">
-									<button class="loadmore btn btn-primary" data-type="taxonomy" data-tax="condition" data-slug="<?php echo get_queried_object()->slug; ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physiciansCount; ?>" aria-label="Load more providers">Load More</button>
+									<button class="loadmore btn btn-primary" data-type="taxonomy" data-tax="condition" data-slug="<?php echo $term->slug; ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physiciansCount; ?>" aria-label="Load more providers">Load More</button>
 								</div>
 								<?php } ?>
 							</div>
