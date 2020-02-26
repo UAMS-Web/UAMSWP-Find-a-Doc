@@ -6,6 +6,7 @@
 	$clinical_trials = get_field('condition_clinical_trials', $term);
 	$content = get_field( 'condition_content', $term );
 	$excerpt = get_field( 'condition_short_desc', $term );
+	$video = get_field('condition_youtube_link', $term);
 
 	function uamswp_keyword_hook_header() {
 		$keyword_text = '';
@@ -58,6 +59,7 @@
     if ($clinical_trials && !empty($clinical_trials)) { $condition_field_classes .= ' has-clinical-trials'; } // Display clinical trials block
     if ($content && !empty($content)) { $condition_field_classes .= ' has-content'; } // Body content
     if ($excerpt && !empty($excerpt)) { $condition_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
+    if ($video && !empty($video)) { $condition_field_classes .= ' has-video'; } // Video embed
 
  ?>
 <div class="content-sidebar-wrap">
@@ -82,9 +84,9 @@
 					endif;
 				?>
 				<?php echo ( $content ? ''. $content . '' : '' ); ?>
-				<?php if( get_field('condition_youtube_link', $term) ) { ?>
+				<?php if( $video ) { ?>
 					<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
-					<?php echo wp_oembed_get( get_field('condition_youtube_link', $term) ); ?>
+					<?php echo wp_oembed_get( $video ); ?>
 					</div>
 				<?php } ?>
 			</div>
