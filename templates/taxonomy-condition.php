@@ -9,6 +9,7 @@
 	$video = get_field('condition_youtube_link', $term);
 	$treatments = get_field('condition_treatments', $term);
 	$expertise = get_field('condition_expertise', $term);
+	$locations = get_field('condition_locations', $term);
 
 	function uamswp_keyword_hook_header() {
 		$keyword_text = '';
@@ -64,6 +65,7 @@
     if ($video && !empty($video)) { $condition_field_classes .= ' has-video'; } // Video embed
     if ($treatments && !empty($treatments)) { $condition_field_classes .= ' has-treatment'; } // Treatments
     if ($expertise && !empty($expertise)) { $condition_field_classes .= ' has-expertise'; } // Areas of Expertise
+    if ($locations && !empty($locations)) { $condition_field_classes .= ' has-location'; } // Locations
 
  ?>
 <div class="content-sidebar-wrap">
@@ -193,7 +195,6 @@
 			<?php
 			} // $physicians_query loop ?>
 		<?php 
-			$locations = get_field('condition_locations', $term);
 			$args = (array(
 				'post_type' => "location",
 				"post_status" => "publish",
