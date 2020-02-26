@@ -3,6 +3,15 @@
 
 	// ACF Fields - get_fields
 	$keywords = get_field('treatment_procedure_alternate', $term);
+	$clinical_trials = get_field('treatment_procedure_clinical_trials', $term);
+	$content = get_field( 'treatment_procedure_content', $term );
+	$excerpt = get_field( 'treatment_procedure_short_desc', $term );
+	$excerpt_user = true;
+	$video = get_field('treatment_procedure_youtube_link', $term);
+	$conditions = get_field('treatment_procedure_conditions', $term);
+	$expertise = get_field('treatment_procedure_expertise', $term);
+	$locations = get_field('treatment_procedure_locations', $term);
+	$physicians = get_field('treatment_procedure_physicians', $term);
 
 	function uamswp_keyword_hook_header() {
 		$keyword_text = '';
@@ -28,9 +37,8 @@
 	}
 	add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
 
-	$excerpt = get_field( 'treatment_procedure_short_desc', $term );
-	$content = get_field( 'treatment_procedure_content', $term );
 	if (empty($excerpt)){
+		$excerpt_user = false;
 		if ($content){
 			$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
 		}
@@ -54,6 +62,14 @@
 	// Classes for indicating presence of content
     $treatment_field_classes = '';	
 	if ($keywords && !empty($keywords)) { $treatment_field_classes .= ' has-keywords'; } // Alternate names
+    if ($clinical_trials && !empty($clinical_trials)) { $treatment_field_classes .= ' has-clinical-trials'; } // Display clinical trials block
+    if ($content && !empty($content)) { $treatment_field_classes .= ' has-content'; } // Body content
+    if ($excerpt && $excerpt_user == true ) { $treatment_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
+    if ($video && !empty($video)) { $treatment_field_classes .= ' has-video'; } // Video embed
+    if ($conditions && !empty($conditions)) { $treatment_field_classes .= ' has-condition'; } // Treatments
+    if ($expertise && !empty($expertise)) { $treatment_field_classes .= ' has-expertise'; } // Areas of Expertise
+    if ($locations && !empty($locations)) { $treatment_field_classes .= ' has-location'; } // Locations
+    if ($physicians && !empty($physicians)) { $treatment_field_classes .= ' has-provider'; } // Providers
 	
  ?>
 <div class="content-sidebar-wrap">
@@ -77,16 +93,15 @@
 						echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';
 					endif;
 				?>
-				<?php echo ( get_field('treatment_procedure_content', $term) ? ''. get_field('treatment_procedure_content', $term) . '' : '' ); ?>
-				<?php if( get_field('treatment_procedure_youtube_link', $term) ) { ?>
+				<?php echo ( $content ? ''. $content . '' : '' ); ?>
+				<?php if( $video ) { ?>
 					<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
-					<?php echo wp_oembed_get( get_field('treatment_procedure_youtube_link', $term) ); ?>
+					<?php echo wp_oembed_get( $video ); ?>
 					</div>
 				<?php } ?>
 			</div>
 		</section>
 		<?php
-		$clinical_trials = get_field('treatment_procedure_clinical_trials', $term);
 		if (!empty($clinical_trials)): ?>
 			<section class="uams-module cta-bar cta-bar-1 bg-auto">
 				<div class="container-fluid">
@@ -100,7 +115,6 @@
 			</section>
 		<?php endif; ?>
 		<?php 
-			$conditions = get_field('treatment_procedure_conditions', $term);
 			$args = (array(
 				'taxonomy' => "condition",
 				'order' => 'ASC',
@@ -137,7 +151,6 @@
 			</section>
 		<?php } // endif ?>
 		<?php // Check if any doctors are connected	
-		$physicians = get_field('treatment_procedure_physicians', $term);
 		$physiciansCount = count($physicians);
 		$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12)
 		$postsCutoff = 18; // Set cutoff value
@@ -186,7 +199,6 @@
 		<?php
 		} // $physicians_query loop ?>
 		<?php 
-		$locations = get_field('treatment_procedure_locations', $term);
 		$args = (array(
 			'post_type' => "location",
 			"post_status" => "publish",
@@ -217,7 +229,6 @@
 			</div>
 		</section>	
 		<?php endif; 
-			$expertise = get_field('treatment_procedure_expertise', $term);
 			$args = (array(
 				'post_type' => "expertise",
 				"post_status" => "publish",
