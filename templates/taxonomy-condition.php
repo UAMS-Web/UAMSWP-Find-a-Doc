@@ -1,5 +1,7 @@
 <?php
 	$term = get_queried_object();
+
+	// ACF Fields - get_fields
 	$keywords = get_field('condition_alternate', $term);
 
 	function uamswp_keyword_hook_header() {
@@ -48,9 +50,13 @@
 
 	// Hard coded breadcrumbs
 	$tax = get_term_by("slug", get_query_var("term"), get_query_var("taxonomy") );
+
+	// Classes for indicating presence of content
+    $condition_field_classes = '';	
+
  ?>
 <div class="content-sidebar-wrap">
-	<main id="genesis-content">
+	<main id="genesis-content" class="<?php echo $provider_field_classes; ?>">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
 				<h1 class="entry-title" itemprop="headline"><?php echo ( $condition_title ? $condition_title : 'Condition' ); ?>: <?php echo single_cat_title( '', false ); ?></h1>
