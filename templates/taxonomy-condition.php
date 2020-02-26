@@ -4,6 +4,7 @@
 	// ACF Fields - get_fields
 	$keywords = get_field('condition_alternate', $term);
 	$clinical_trials = get_field('condition_clinical_trials', $term);
+	$content = get_field( 'condition_content', $term );
 
 	function uamswp_keyword_hook_header() {
 		$keyword_text = '';
@@ -30,7 +31,6 @@
 	add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
 
 	$excerpt = get_field( 'condition_short_desc', $term );
-	$content = get_field( 'condition_content', $term );
 	if (empty($excerpt)){
 		if ($content){
 			$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
@@ -56,6 +56,7 @@
     $condition_field_classes = '';	
     if ($keywords && !empty($keywords)) { $condition_field_classes .= ' has-keywords'; } // Alternate names
     if ($clinical_trials && !empty($clinical_trials)) { $condition_field_classes .= ' has-clinical-trials'; } // Display clinical trials block
+    if ($content && !empty($content)) { $condition_field_classes .= ' has-content'; } // Body content
 
  ?>
 <div class="content-sidebar-wrap">
@@ -79,7 +80,7 @@
 						echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';
 					endif;
 				?>
-				<?php echo ( get_field('condition_content', $term) ? ''. get_field('condition_content', $term) . '' : '' ); ?>
+				<?php echo ( $content ? ''. $content . '' : '' ); ?>
 				<?php if( get_field('condition_youtube_link', $term) ) { ?>
 					<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
 					<?php echo wp_oembed_get( get_field('condition_youtube_link', $term) ); ?>
