@@ -71,7 +71,7 @@
 
  ?>
 <div class="content-sidebar-wrap">
-	<main id="genesis-content" class="<?php echo $provider_field_classes; ?>">
+	<main id="genesis-content" class="<?php echo $condition_field_classes; ?>">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
 				<h1 class="entry-title" itemprop="headline"><?php echo ( $condition_title ? $condition_title : 'Condition' ); ?>: <?php echo single_cat_title( '', false ); ?></h1>
