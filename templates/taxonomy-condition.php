@@ -5,6 +5,7 @@
 	$keywords = get_field('condition_alternate', $term);
 	$clinical_trials = get_field('condition_clinical_trials', $term);
 	$content = get_field( 'condition_content', $term );
+	$excerpt = get_field( 'condition_short_desc', $term );
 
 	function uamswp_keyword_hook_header() {
 		$keyword_text = '';
@@ -30,7 +31,6 @@
 	}
 	add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
 
-	$excerpt = get_field( 'condition_short_desc', $term );
 	if (empty($excerpt)){
 		if ($content){
 			$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
@@ -57,6 +57,7 @@
     if ($keywords && !empty($keywords)) { $condition_field_classes .= ' has-keywords'; } // Alternate names
     if ($clinical_trials && !empty($clinical_trials)) { $condition_field_classes .= ' has-clinical-trials'; } // Display clinical trials block
     if ($content && !empty($content)) { $condition_field_classes .= ' has-content'; } // Body content
+    if ($excerpt && !empty($excerpt)) { $condition_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
 
  ?>
 <div class="content-sidebar-wrap">
