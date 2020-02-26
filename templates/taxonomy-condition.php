@@ -53,6 +53,7 @@
 
 	// Classes for indicating presence of content
     $condition_field_classes = '';	
+    if ($keywords && !empty($keywords)) { $condition_field_classes .= ' has-keywords'; } // Alternate names
 
  ?>
 <div class="content-sidebar-wrap">
