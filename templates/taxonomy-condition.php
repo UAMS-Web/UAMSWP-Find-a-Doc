@@ -1,8 +1,8 @@
 <?php
 	$term = get_queried_object();
+	$keywords = get_field('condition_alternate', $term);
 
 	function uamswp_keyword_hook_header() {
-		$keywords = get_field('condition_alternate', $term);
 		$keyword_text = '';
 		if( $keywords ): 
 			$i = 1;
@@ -57,7 +57,6 @@
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
 				<?php 
-					$keywords = get_field('condition_alternate', $term);
 					$keyword_text = '';
 					if( $keywords ): 
 						$i = 1;
