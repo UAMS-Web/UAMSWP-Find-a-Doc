@@ -10,6 +10,7 @@
 	$treatments = get_field('condition_treatments', $term);
 	$expertise = get_field('condition_expertise', $term);
 	$locations = get_field('condition_locations', $term);
+	$physicians = get_field('condition_physicians', $term);
 
 	function uamswp_keyword_hook_header() {
 		$keyword_text = '';
@@ -66,6 +67,7 @@
     if ($treatments && !empty($treatments)) { $condition_field_classes .= ' has-treatment'; } // Treatments
     if ($expertise && !empty($expertise)) { $condition_field_classes .= ' has-expertise'; } // Areas of Expertise
     if ($locations && !empty($locations)) { $condition_field_classes .= ' has-location'; } // Locations
+    if ($physicians && !empty($physicians)) { $condition_field_classes .= ' has-provider'; } // Providers
 
  ?>
 <div class="content-sidebar-wrap">
@@ -146,7 +148,6 @@
 		</section>
 		<?php } // endif ?>
 		<?php // Check if any doctors are connected	
-			$physicians = get_field('condition_physicians', $term);
 			$physiciansCount = count($physicians);
 			$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12)
 			$postsCutoff = 18; // Set cutoff value
