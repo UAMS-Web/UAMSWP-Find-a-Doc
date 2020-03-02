@@ -81,7 +81,7 @@ get_header();
 						<?php echo facetwp_display( 'pager' ); ?>
 					</div>
 				</div>
-				<script defer>
+				<script>
 					(function($) {
 						$(document).on('facetwp-loaded', function() {
 							if (3 >= FWP.settings.pager.total_rows ) {
