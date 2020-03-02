@@ -51,6 +51,7 @@ get_header();
 													<div class="fwp-filter">[facetwp facet="physician_gender"]</div>
 													<div class="fwp-filter">[facetwp facet="physician_language"]</div>
 													<div class="fwp-filter">[facetwp facet="locations"]</div>
+													<div class="fwp-filter">[facetwp facet="provider_region"]</div>
 													<button id="filter-apply" onclick="FWP.refresh();">Apply</button> <button onclick="FWP.reset()">Reset</button>
 												' );
 					?>
@@ -80,7 +81,7 @@ get_header();
 						<?php echo facetwp_display( 'pager' ); ?>
 					</div>
 				</div>
-				<script defer>
+				<script>
 					(function($) {
 						$(document).on('facetwp-loaded', function() {
 							if (3 >= FWP.settings.pager.total_rows ) {

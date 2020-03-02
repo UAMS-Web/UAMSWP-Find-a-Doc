@@ -245,6 +245,33 @@
             "acfe_validate": "",
             "acfe_update": ""
         },
+        "field_location_region": {
+            "key": "field_location_region",
+            "name": "location_region",
+            "type": "taxonomy",
+            "label": "Region",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "region",
+            "field_type": "radio",
+            "allow_null": 0,
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "acfe_validate": "",
+            "acfe_update": "",
+            "multiple": 0
+        },
         "field_location_directions_tab": {
             "key": "field_location_directions_tab",
             "name": "",
@@ -426,7 +453,7 @@
         },
         "field_location_clinic_phone_query": {
             "key": "field_location_clinic_phone_query",
-            "label": "Is there a seperate appointment number for patients?",
+            "label": "Is there a separate appointment number for patients?",
             "name": "location_clinic_phone_query",
             "type": "button_group",
             "instructions": "",
@@ -560,6 +587,21 @@
             ],
             "wrapper": {
                 "width": "70",
+                "class": "",
+                "id": ""
+            },
+            "input_mask": "(999) 999-9999 [x 99999]"
+        },
+        "field_location_fax": {
+            "key": "field_location_fax",
+            "name": "location_fax",
+            "type": "maskfield",
+            "label": "Clinic Fax Number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
                 "class": "",
                 "id": ""
             },

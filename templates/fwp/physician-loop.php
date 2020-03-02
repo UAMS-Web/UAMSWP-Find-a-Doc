@@ -44,7 +44,7 @@
 							<?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
 						<?php } else { ?>
 							<source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.svg" media="(min-width: 1px)">
-							<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg" alt="" />
+							<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg" alt="" role="presentation" />
 						<?php } ?>
 						</picture>
 					</a>
@@ -76,12 +76,12 @@
 										echo '<div class="ratings-count">'. $data->profile->reviewcount .' Ratings</div>';
 										echo '</div>';
 									} else { ?>
-									<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" href>Why not?</a></em></p>
+									<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break">Why not?</a></em></p>
 									<?php
 									}
 								}
 							} else { ?>
-								<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" href>Why not?</a></em></p>
+								<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break">Why not?</a></em></p>
 							<?php
 							} 
 							?>
@@ -221,7 +221,7 @@
 								<?php endforeach; ?>
 								</ul>
 							<?php endif; ?>
-
+							-->
 	                    <!-- </div>.col-6 -->
 	                <!-- </div>.row -->
 

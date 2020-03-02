@@ -94,7 +94,7 @@ function uamswp_expertise_physicians() {
 }
 function uamswp_expertise_youtube() {
     if(get_field('expertise_youtube_link')) { ?>
-        <div class="embed-responsive embed-responsive-16by9">
+        <div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
             <?php echo wp_oembed_get( get_field( 'expertise_youtube_link' ) ); ?>
         </div>
     <?php }
