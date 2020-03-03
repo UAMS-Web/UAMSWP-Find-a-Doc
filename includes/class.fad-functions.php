@@ -379,3 +379,71 @@ function uamswp_load_by_ajax_callback(){
     endif;
     wp_die();
 }
+function provider_recognition_function( $atts ) {
+	extract(shortcode_atts(array(
+		'slug' => '',
+	 ), $atts));
+	
+	query_posts(
+		array(
+			'post_type' => 'provider', // We only want pages
+			'post_status' => 'publish', // We only want children of a defined post ID
+			'post_count' => -1, // We do not want to limit the post count
+			'order' => 'ASC',
+			'orderby' => 'title',
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'recognition',
+					'field'    => 'slug',
+					'terms'    => $slug,
+				),
+			),
+		// We can define any additional arguments that we need - see Codex for the full list
+		)
+	);
+	$recognition_list = '';
+	if (have_posts()):
+		$recognition_list .= '<table class="table table-striped">
+		<thead>
+		  <tr>
+			<th scope="col">Name</th>
+			<th scope="col">Title</th>
+		  </tr>
+		</thead>
+		<tbody>';
+
+		while( have_posts() ) : the_post();
+			$degrees = get_field('physician_degree');
+			$degree_list = '';
+			$i = 1;
+			if ( $degrees ) {
+				foreach( $degrees as $degree ):
+					$degree_name = get_term( $degree, 'degree');
+					$degree_list .= $degree_name->name;
+					if( count($degrees) > $i ) {
+						$degree_list .= ", ";
+					}
+					$i++;
+				endforeach;
+			} 
+			$full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+			$recognition_list .= '<tr>';
+			$recognition_list .= '<td><a href="'.get_permalink().'" title="'. $full_name .'">'. $full_name .'</a></td>';
+			$phys_title = get_field('physician_title');
+			if ($phys_title && !empty($phys_title)) {
+				$recognition_list .= '<td>'. ($phys_title ? get_term( $phys_title, 'clinical_title' )->name : '&nbsp;') .'</td>';
+			}
+			$recognition_list .= '</tr>';
+
+		endwhile;
+		$recognition_list .= '</tbody>';
+		$recognition_list .= '</table>';
+	endif;
+	wp_reset_query();
+	return $recognition_list;
+
+}
+function register_recognition_shortcodes(){
+	add_shortcode('recognition-list', 'provider_recognition_function');
+ }
+ add_action( 'init', 'register_recognition_shortcodes');
