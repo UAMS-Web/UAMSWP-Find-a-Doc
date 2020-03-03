@@ -382,13 +382,14 @@ function uamswp_load_by_ajax_callback(){
 function provider_recognition_function( $atts ) {
 	extract(shortcode_atts(array(
 		'slug' => '',
+		'layout' => 'table',
 	 ), $atts));
-	
+
 	query_posts(
 		array(
 			'post_type' => 'provider', // We only want pages
 			'post_status' => 'publish', // We only want children of a defined post ID
-			'post_count' => -1, // We do not want to limit the post count
+			'posts_per_page' => -1, // We do not want to limit the post count
 			'order' => 'ASC',
 			'orderby' => 'title',
 			'tax_query' => array(
@@ -403,41 +404,46 @@ function provider_recognition_function( $atts ) {
 	);
 	$recognition_list = '';
 	if (have_posts()):
-		$recognition_list .= '<table class="table table-striped">
-		<thead>
-		  <tr>
-			<th scope="col">Name</th>
-			<th scope="col">Title</th>
-		  </tr>
-		</thead>
-		<tbody>';
+		if ('table' == $layout || empty($layout)) {
+			$recognition_list .= '<div class="table-responsive">
+			<table class="table table-striped">
+			<thead>
+			<tr>
+				<th scope="col" class="col-6">Name</th>
+				<th scope="col" class="col-6">Title</th>
+			</tr>
+			</thead>
+			<tbody>';
 
-		while( have_posts() ) : the_post();
-			$degrees = get_field('physician_degree');
-			$degree_list = '';
-			$i = 1;
-			if ( $degrees ) {
-				foreach( $degrees as $degree ):
-					$degree_name = get_term( $degree, 'degree');
-					$degree_list .= $degree_name->name;
-					if( count($degrees) > $i ) {
-						$degree_list .= ", ";
-					}
-					$i++;
-				endforeach;
-			} 
-			$full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '') .  ( $degree_list ? ', ' . $degree_list : '' );
-			$recognition_list .= '<tr>';
-			$recognition_list .= '<td><a href="'.get_permalink().'" title="'. $full_name .'">'. $full_name .'</a></td>';
-			$phys_title = get_field('physician_title');
-			if ($phys_title && !empty($phys_title)) {
-				$recognition_list .= '<td>'. ($phys_title ? get_term( $phys_title, 'clinical_title' )->name : '&nbsp;') .'</td>';
-			}
-			$recognition_list .= '</tr>';
+			while( have_posts() ) : the_post();
+				$degrees = get_field('physician_degree');
+				$degree_list = '';
+				$i = 1;
+				if ( $degrees ) {
+					foreach( $degrees as $degree ):
+						$degree_name = get_term( $degree, 'degree');
+						$degree_list .= $degree_name->name;
+						if( count($degrees) > $i ) {
+							$degree_list .= ", ";
+						}
+						$i++;
+					endforeach;
+				}
+				$full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+				$recognition_list .= '<tr>';
+				$recognition_list .= '<td><a href="'.get_permalink().'" title="'. $full_name .'">'. $full_name .'</a></td>';
+				$phys_title = get_field('physician_title');
+				if ($phys_title && !empty($phys_title)) {
+					$recognition_list .= '<td>'. ($phys_title ? get_term( $phys_title, 'clinical_title' )->name : '&nbsp;') .'</td>';
+				}
+				$recognition_list .= '</tr>';
 
-		endwhile;
-		$recognition_list .= '</tbody>';
-		$recognition_list .= '</table>';
+			endwhile;
+			$recognition_list .= '</tbody>';
+			$recognition_list .= '</table>';
+			$recognition_list .= '</div>'; // responsive table
+		} // table layout
+		// Additional layouts
 	endif;
 	wp_reset_query();
 	return $recognition_list;
@@ -445,5 +451,5 @@ function provider_recognition_function( $atts ) {
 }
 function register_recognition_shortcodes(){
 	add_shortcode('recognition-list', 'provider_recognition_function');
- }
- add_action( 'init', 'register_recognition_shortcodes');
+}
+add_action( 'init', 'register_recognition_shortcodes');
