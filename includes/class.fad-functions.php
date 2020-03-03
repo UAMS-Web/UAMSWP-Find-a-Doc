@@ -403,7 +403,8 @@ function provider_recognition_function( $atts ) {
 	);
 	$recognition_list = '';
 	if (have_posts()):
-		$recognition_list .= '<table class="table table-striped">
+		$recognition_list .= '<div class="table-responsive">
+		<table class="table table-striped">
 		<thead>
 		  <tr>
 			<th scope="col">Name</th>
@@ -438,6 +439,7 @@ function provider_recognition_function( $atts ) {
 		endwhile;
 		$recognition_list .= '</tbody>';
 		$recognition_list .= '</table>';
+		$recognition_list .= '</div>';
 	endif;
 	wp_reset_query();
 	return $recognition_list;
