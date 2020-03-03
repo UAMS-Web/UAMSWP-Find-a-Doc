@@ -44,7 +44,7 @@
 							<?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
 						<?php } else { ?>
 							<source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.svg" media="(min-width: 1px)">
-							<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg" alt="" />
+							<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg" alt="" role="presentation" />
 						<?php } ?>
 						</picture>
 					</a>
@@ -90,7 +90,7 @@
 						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>">Full Profile</a>
 						</div>
 						<div class="col-12 secondary">
-						<h4 class="h5">Locations</h5>
+						<h4 class="h5">Locations</h4>
 						<?php
 
 							$locations = get_field('physician_locations');
