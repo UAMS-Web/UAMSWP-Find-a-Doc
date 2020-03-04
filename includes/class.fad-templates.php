@@ -42,6 +42,7 @@ function uamswp_taxonomy_archive_page_template ($templates) {
     $templates['archive-taxonomy-conditions.php'] = 'Conditions Archive';
     $templates['archive-taxonomy-treatments.php'] = 'Treatments Archive';
     $templates['provider-image.php'] = 'Provider Image';
+    $templates['doximity-list.php'] = 'Doximity List';
     return $templates;
     }
 add_filter ('theme_page_templates', 'uamswp_taxonomy_archive_page_template');
@@ -55,6 +56,8 @@ function uamswp_redirect_page_template ($template) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/archive-taxonomy-treatments.php';
     if ('provider-image.php' == basename ($page_template ))
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/provider-image.php';
+    if ('doximity-list.php' == basename ($page_template ))
+        $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/doximity-list.php';
     return $template;
     }
 add_filter ('page_template', 'uamswp_redirect_page_template');

@@ -260,7 +260,7 @@
             "label": "Headshot",
             "name": "_thumbnail_id",
             "type": "image",
-            "instructions": "",
+            "instructions": "The photo orientation must be portrait / vertical.<br />The photo should be high-resolution, preferably not having been resized at all. The minimum dimensions are 778x1038, but larger is preferred.<br />The photo should be less than 10 years old.<br />The provider should be wearing a white coat (if applicable) in front of a white background.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -1052,7 +1052,7 @@
             "name": "physician_academic_appointment",
             "type": "repeater",
             "label": "Academic Appointment",
-            "instructions": "",
+            "instructions": "Both fields are required if you add a row.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -1071,8 +1071,8 @@
                     "label": "Academic Title",
                     "name": "academic_title",
                     "type": "text",
-                    "instructions": "",
-                    "required": 0,
+                    "instructions": "Professor, Associate Professor, Assistant Professor, etc.",
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
@@ -1091,7 +1091,7 @@
                     "name": "department",
                     "type": "taxonomy",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
