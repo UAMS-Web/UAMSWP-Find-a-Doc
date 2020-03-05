@@ -17,7 +17,7 @@
                     <ul class="list">
                     <?php foreach( $conditions_query->get_terms() as $condition ): ?>
                         <li>
-                            <a href="<?php echo get_term_link( $condition->term_id ); ?>">
+                            <a href="<?php echo get_term_link( $condition->term_id ); ?>" aria-label="Go to Condition page for <?php echo $condition->name; ?>">
                                 <?php 
                                     echo $condition->name;
                                 ?>

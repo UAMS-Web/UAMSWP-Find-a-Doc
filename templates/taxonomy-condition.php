@@ -135,11 +135,7 @@
 							<ul class="list">
 							<?php foreach( $treatments_query->get_terms() as $treatment ): ?>
 								<li>
-									<a href="<?php echo get_term_link( $treatment->term_id ); ?>">
-									<?php
-										echo $treatment->name;
-									?>
-									</a>
+									<a href="<?php echo get_term_link( $treatment->term_id ); ?>" aria-label="Go to Treatment page for <?php echo $treatment->name; ?>"><?php echo $treatment->name; ?></a>
 								</li>
 							<?php endforeach; ?>
 							</ul>
