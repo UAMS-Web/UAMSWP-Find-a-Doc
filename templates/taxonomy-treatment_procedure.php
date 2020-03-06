@@ -81,7 +81,8 @@
 	}
 
 	if ( $locations && $location_query->have_posts() ) {
-		$location_content .= '<section class="container-fluid p-8 p-sm-10 bg-auto" id="locations">';
+		$location_content .= '<section class="uams-module bg-auto" id="locations">';
+		$location_content .= '<div class="container-fluid">';
 		$location_content .= '<div class="row">';
 		$location_content .= '<div class="col-12">';
 		$location_content .= '<h2 class="module-title">Locations Providing ' . single_cat_title( '', false ) . '</h2>';
@@ -94,6 +95,7 @@
 			include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
 		endwhile;
 		$location_content .= ob_get_clean();
+		$location_content .= '</div>';
 		$location_content .= '</div>';
 		$location_content .= '</div>';
 		$location_content .= '</div>';
@@ -254,19 +256,21 @@
 		$expertise_query = new WP_Query( $args );
 
 		if ( $expertise && $expertise_query->have_posts() ): ?>
-		<section class="container-fluid p-8 p-sm-10 bg-auto" id="expertise">
-			<div class="row">
-				<div class="col-12">
-					<h2 class="module-title">Areas of Expertise for <?php echo single_cat_title( '', false ); ?></h2>
-					<div class="card-list-container">
-						<div class="card-list card-list-expertise">
-						<?php 
-							while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
-								$id = get_the_ID();
-								include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-							endwhile; 
-							wp_reset_postdata();
-						?>
+		<section class="uams-module bg-auto" id="expertise">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<h2 class="module-title">Areas of Expertise for <?php echo single_cat_title( '', false ); ?></h2>
+						<div class="card-list-container">
+							<div class="card-list card-list-expertise">
+							<?php 
+								while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
+									$id = get_the_ID();
+									include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+								endwhile; 
+								wp_reset_postdata();
+							?>
+							</div>
 						</div>
 					</div>
 				</div>
