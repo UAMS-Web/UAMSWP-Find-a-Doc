@@ -721,79 +721,81 @@ while ( have_posts() ) : the_post();
         <?php endif; ?>
         <?php 
         if( $locations && $location_valid ): ?>
-        <section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="locations">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="module-title">Locations Where <?php echo $short_name; ?> Practices</h2>
-                    <div class="card-list-container location-card-list-container">
-                        <div class="card-list">
-                        <?php $l = 1;
-                              $location_schema = ',"address": [';
-                        ?>
-                        <?php foreach( $locations as $location ): 
-                            if ( get_post_status ( $location ) == 'publish' ) { ?>
-                                <div class="card">
-                                    <?php if ( has_post_thumbnail($location) ) { ?>
-                                    <?php echo get_the_post_thumbnail($location, 'aspect-16-9-small', ['class' => 'card-img-top']); ?>
-                                    <?php } else { ?>
-                                    <picture>
-                                        <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
-                                        <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" class="card-img-top" />
-                                    </picture>
-                                    <?php } ?>
-                                    <div class="card-body">
-                                            <h3 class="card-title">
-                                                <span class="name"><?php echo get_the_title( $location ); ?></span>
-                                                <?php  if ( 1 == $l ) { ?>
-                                                    <span class="subtitle">Primary Location</span>
-                                                <?php } ?>
-                                            </h3>
-                                        <p class="card-text"><?php echo get_field('location_address_1', $location ); ?><br/>
-                                        <?php echo ( get_field('location_address_2', $location ) ? get_field('location_address_2', $location ) . '<br/>' : ''); ?>
-                                        <?php echo get_field('location_city', $location ); ?>, <?php echo get_field('location_state', $location ); ?> <?php echo get_field('location_zip', $location); ?></p>
-                                        <?php if (get_field('location_phone', $location)) { ?>
-                                            <dl>
-                                                <dt>Appointment Phone Number<?php echo (get_field('field_location_appointment_phone_query', $location) && get_field('location_clinic_phone_query', $location)) ? 's' : ''; ?></dt>
-                                                <?php if (get_field('location_new_appointments_phone', $location) && get_field('location_clinic_phone_query', $location)) { ?>
-                                                    <dd><a href="tel:<?php echo format_phone_dash( get_field('location_new_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_new_appointments_phone', $location) ); ?></a><?php echo get_field('field_location_appointment_phone_query', $location) ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
-                                                    <?php if (get_field('location_return_appointments_phone', $location) && get_field('field_location_appointment_phone_query', $location)) { ?>
-                                                        <dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone', $location) ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
-                                                    <?php } ?>
-                                                <?php } else { ?>
-                                                    <dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone', $location) ); ?></a><br/><span class="subtitle">New and Returning Patients</span></dd>
-                                                <?php } ?>
-                                            </dl>
+        <section class="uams-module location-list bg-auto" id="locations">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="module-title">Locations Where <?php echo $short_name; ?> Practices</h2>
+                        <div class="card-list-container location-card-list-container">
+                            <div class="card-list">
+                            <?php $l = 1;
+                                $location_schema = ',"address": [';
+                            ?>
+                            <?php foreach( $locations as $location ): 
+                                if ( get_post_status ( $location ) == 'publish' ) { ?>
+                                    <div class="card">
+                                        <?php if ( has_post_thumbnail($location) ) { ?>
+                                        <?php echo get_the_post_thumbnail($location, 'aspect-16-9-small', ['class' => 'card-img-top']); ?>
+                                        <?php } else { ?>
+                                        <picture>
+                                            <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
+                                            <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" class="card-img-top" />
+                                        </picture>
                                         <?php } ?>
-                                    </div>
-                                    <div class="btn-container">
-                                        <div class="inner-container">
-                                            <a href="<?php the_permalink(  $location ); ?>" class="btn btn-primary stretched-link" aria-label="Go to location page for <?php echo get_the_title( $location ); ?>">View Location</a>
+                                        <div class="card-body">
+                                                <h3 class="card-title">
+                                                    <span class="name"><?php echo get_the_title( $location ); ?></span>
+                                                    <?php  if ( 1 == $l ) { ?>
+                                                        <span class="subtitle">Primary Location</span>
+                                                    <?php } ?>
+                                                </h3>
+                                            <p class="card-text"><?php echo get_field('location_address_1', $location ); ?><br/>
+                                            <?php echo ( get_field('location_address_2', $location ) ? get_field('location_address_2', $location ) . '<br/>' : ''); ?>
+                                            <?php echo get_field('location_city', $location ); ?>, <?php echo get_field('location_state', $location ); ?> <?php echo get_field('location_zip', $location); ?></p>
+                                            <?php if (get_field('location_phone', $location)) { ?>
+                                                <dl>
+                                                    <dt>Appointment Phone Number<?php echo (get_field('field_location_appointment_phone_query', $location) && get_field('location_clinic_phone_query', $location)) ? 's' : ''; ?></dt>
+                                                    <?php if (get_field('location_new_appointments_phone', $location) && get_field('location_clinic_phone_query', $location)) { ?>
+                                                        <dd><a href="tel:<?php echo format_phone_dash( get_field('location_new_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_new_appointments_phone', $location) ); ?></a><?php echo get_field('field_location_appointment_phone_query', $location) ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
+                                                        <?php if (get_field('location_return_appointments_phone', $location) && get_field('field_location_appointment_phone_query', $location)) { ?>
+                                                            <dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone', $location) ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
+                                                        <?php } ?>
+                                                    <?php } else { ?>
+                                                        <dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone', $location) ); ?></a><br/><span class="subtitle">New and Returning Patients</span></dd>
+                                                    <?php } ?>
+                                                </dl>
+                                            <?php } ?>
+                                        </div>
+                                        <div class="btn-container">
+                                            <div class="inner-container">
+                                                <a href="<?php the_permalink(  $location ); ?>" class="btn btn-primary stretched-link" aria-label="Go to location page for <?php echo get_the_title( $location ); ?>">View Location</a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <?php
-                                     // Schema data
-                                     if ($l > 1){
-                                        $location_schema .= ',';
-                                     }
-                                     $location_schema .= '
-                                     {
-                                     "@type": "PostalAddress",
-                                     "streetAddress": "'. get_field('location_address_1', $location ) . ' '. get_field('location_address_2', $location ) .'",
-                                     "addressLocality": "'. get_field('location_city', $location ) .'",
-                                     "addressRegion": "'. get_field('location_state', $location ) .'",
-                                     "postalCode": "'. get_field('location_zip', $location) .'",
-                                     "telephone": "'. format_phone_dash( get_field('location_phone', $location) ) .'"
-                                     }
-                                     ';
-                                ?>
+                                    <?php
+                                        // Schema data
+                                        if ($l > 1){
+                                            $location_schema .= ',';
+                                        }
+                                        $location_schema .= '
+                                        {
+                                        "@type": "PostalAddress",
+                                        "streetAddress": "'. get_field('location_address_1', $location ) . ' '. get_field('location_address_2', $location ) .'",
+                                        "addressLocality": "'. get_field('location_city', $location ) .'",
+                                        "addressRegion": "'. get_field('location_state', $location ) .'",
+                                        "postalCode": "'. get_field('location_zip', $location) .'",
+                                        "telephone": "'. format_phone_dash( get_field('location_phone', $location) ) .'"
+                                        }
+                                        ';
+                                    ?>
 
-                                <?php $l++; ?>
-                            <?php } ?>
-                        <?php endforeach; 
-                            $location_schema .= ']
-                            ';
-                        ?>
+                                    <?php $l++; ?>
+                                <?php } ?>
+                            <?php endforeach; 
+                                $location_schema .= ']
+                                ';
+                            ?>
+                            </div>
                         </div>
                     </div>
                 </div>
