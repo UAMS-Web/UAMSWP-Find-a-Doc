@@ -68,6 +68,7 @@
     if ($video && !empty($video)) { $treatment_field_classes .= ' has-video'; } // Video embed
     if ($conditions && !empty($conditions)) { $treatment_field_classes .= ' has-condition'; } // Treatments
     if ($expertise && !empty($expertise)) { $treatment_field_classes .= ' has-expertise'; } // Areas of Expertise
+    if ($locations && !empty($locations)) { $treatment_field_classes .= ' has-location'; } // Locations
     if ($physicians && !empty($physicians)) { $treatment_field_classes .= ' has-provider'; } // Providers
 	
  ?>
@@ -203,19 +204,6 @@
 			'post__in'	=> $locations
 		));
 		$location_query = new WP_Query( $args );
-
-		// Check for valid locations
-		$location_valid = false;
-		foreach( $locations as $location ) {
-			if ( get_post_status ( $location ) == 'publish' ) {
-				$location_valid = true;
-				$break;
-			}
-		}
-
-		if ($locations && $location_valid) { 
-			// Add 'has-location' class to main.treatment-item
-		}
     
 		if ( $locations && $location_query->have_posts() ) : ?>
 		<section class="container-fluid p-8 p-sm-10 bg-auto" id="locations">
