@@ -243,36 +243,36 @@
 		}
 		
 		// Expertise Section
-			$args = (array(
-				'post_type' => "expertise",
-				"post_status" => "publish",
-				'order' => 'ASC',
-				'orderby' => 'title',
-				'posts_per_page' => -1,
-				'post__in'	=> $expertise
-			));
-			$expertise_query = new WP_Query( $args );
+		$args = (array(
+			'post_type' => "expertise",
+			"post_status" => "publish",
+			'order' => 'ASC',
+			'orderby' => 'title',
+			'posts_per_page' => -1,
+			'post__in'	=> $expertise
+		));
+		$expertise_query = new WP_Query( $args );
 
-			if ( $expertise && $expertise_query->have_posts() ): ?>
-			<section class="container-fluid p-8 p-sm-10 bg-auto" id="expertise">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title">Areas of Expertise for <?php echo single_cat_title( '', false ); ?></h2>
-						<div class="card-list-container">
-							<div class="card-list card-list-expertise">
-							<?php 
-								while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
-									$id = get_the_ID();
-									include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-								endwhile; 
-								wp_reset_postdata();
-							?>
-							</div>
+		if ( $expertise && $expertise_query->have_posts() ): ?>
+		<section class="container-fluid p-8 p-sm-10 bg-auto" id="expertise">
+			<div class="row">
+				<div class="col-12">
+					<h2 class="module-title">Areas of Expertise for <?php echo single_cat_title( '', false ); ?></h2>
+					<div class="card-list-container">
+						<div class="card-list card-list-expertise">
+						<?php 
+							while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
+								$id = get_the_ID();
+								include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+							endwhile; 
+							wp_reset_postdata();
+						?>
 						</div>
 					</div>
 				</div>
-			</section>
-			<?php endif; ?>	
+			</div>
+		</section>
+		<?php endif; ?>	
 		<?php
 		include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
 		?>
