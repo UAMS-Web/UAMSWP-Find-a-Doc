@@ -607,6 +607,39 @@
             },
             "input_mask": "(999) 999-9999 [x 99999]"
         },
+        "field_location_email": {
+            "key": "field_location_email",
+            "name": "location_email",
+            "type": "maskfield",
+            "label": "Clinic Email Address",
+            "instructions": "Specify a common email account or distribution list.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "input_mask": "email",
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "acfe_validate": {
+                "row-5d43116652d09": {
+                    "acfe_validate_rules_and": {
+                        "row-5d43116852d0a": {
+                            "acfe_validate_function": "email_exists",
+                            "acfe_validate_operator": "==",
+                            "acfe_validate_match": "true"
+                        }
+                    },
+                    "acfe_validate_error": ""
+                }
+            },
+            "acfe_update": ""
+        },
         "field_location_phone_numbers": {
             "key": "field_location_phone_numbers",
             "name": "location_phone_numbers",
@@ -871,39 +904,6 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
-        },
-        "field_location_email": {
-            "key": "field_location_email",
-            "name": "location_email",
-            "type": "maskfield",
-            "label": "Email",
-            "instructions": "[Deprecated]",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "60",
-                "class": "",
-                "id": ""
-            },
-            "input_mask": "email",
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": "",
-            "acfe_validate": {
-                "row-5d43116652d09": {
-                    "acfe_validate_rules_and": {
-                        "row-5d43116852d0a": {
-                            "acfe_validate_function": "email_exists",
-                            "acfe_validate_operator": "==",
-                            "acfe_validate_match": "true"
-                        }
-                    },
-                    "acfe_validate_error": ""
-                }
-            },
-            "acfe_update": ""
         },
         "field_details_deprecated_end": {
             "key": "field_details_deprecated_end",
