@@ -74,6 +74,10 @@ while ( have_posts() ) : the_post(); ?>
 							'; ?>
 							<?php } ?>
 						<?php } ?>
+						<?php if (get_field('location_email')) { ?>
+						<dt>Clinic Email Address</dt>
+						<dd><a href="href:<?php echo get_field('location_email'); ?>"><?php echo get_field('location_email'); ?></a></dd>
+						<?php } ?>
 						<?php if (get_field('location_fax')) { ?>
 						<dt>Clinic Fax Number</dt>
 						<dd><a href="tel:<?php echo format_phone_dash( get_field('location_fax') ); ?>"><?php echo format_phone_us( get_field('location_fax') ); ?></a></dd>
