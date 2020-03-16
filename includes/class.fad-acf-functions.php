@@ -536,3 +536,78 @@ function custom_excerpt_acf() {
     }
 
 }
+
+// Custom Blocks
+if( function_exists('acf_register_block_type') ):
+
+	acf_register_block_type(array(
+		'name' => 'uamswp_fad_facetwp_cards',
+		'title' => 'FacetWP Cards',
+		'description' => '',
+		'category' => 'common',
+		'keywords' => array(
+			0 => 'provider',
+			1 => 'location',
+			2 => 'facetwp',
+		),
+		'mode' => 'auto',
+		'align' => '',
+		'render_template' => '',
+		'render_callback' => 'fad_facetwp_cards_callback',
+		'enqueue_style' => '',
+		'enqueue_script' => '',
+		'enqueue_assets' => '',
+		'icon' => 'id',
+		'supports' => array(
+			'align' => true,
+			'mode' => true,
+			'multiple' => true,
+		),
+	));
+	
+endif;
+
+
+/**
+ * FacetWP Cards Block Callback Function.
+ *
+ * @param   array $block The block settings and attributes.
+ * @param   string $content The block inner HTML (empty).
+ * @param   bool $is_preview True during AJAX preview.
+ * @param   (int|string) $post_id The post ID this block is saved to.
+ */
+function fad_facetwp_cards_callback( $block, $content = '', $is_preview = false, $post_id = 0 ) {
+
+    // Create id attribute allowing for custom "anchor" value.
+    $id = 'facetwp-cards-' . $block['id'];
+    if( !empty($block['anchor']) ) {
+        $id = $block['anchor'];
+    }
+
+    // Create class attribute allowing for custom "className" and "align" values.
+    $className = 'facetwp-cards';
+    if( !empty($block['className']) ) {
+        $className .= ' ' . $block['className'];
+    }
+    if( !empty($block['align']) ) {
+        $className .= ' align' . $block['align'];
+    }
+
+    // Load values and assing defaults.
+    $heading = get_field('facetwp_heading') ?: 'Cards List';
+    $template = get_field('facetwp_template_name');
+    $background_color = get_field('facetwp_background_color') ?: 'bg-white';
+
+    ?>
+	<section class="uams-module container-fluid p-8 p-sm-10 <?php echo $className; ?> <?php echo $background_color; ?>">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="module-title"><?php echo $heading; ?></h2>
+				<div class="card-list-container">
+					<?php echo facetwp_display( 'template', $template ); ?>
+				</div>
+			</div>
+		</div>
+	</section>
+    <?php
+}
