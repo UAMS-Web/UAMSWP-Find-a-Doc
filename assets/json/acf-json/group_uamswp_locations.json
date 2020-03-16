@@ -272,6 +272,33 @@
             "acfe_update": "",
             "multiple": 0
         },
+        "field_location_type": {
+            "key": "field_location_type",
+            "name": "location_type",
+            "type": "taxonomy",
+            "label": "Type",
+            "instructions": "Used for filtering only",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "location_type",
+            "field_type": "multi_select",
+            "allow_null": 0,
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "acfe_validate": "",
+            "acfe_update": "",
+            "multiple": 0
+        },
         "field_location_directions_tab": {
             "key": "field_location_directions_tab",
             "name": "",
