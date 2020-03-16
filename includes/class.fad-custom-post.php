@@ -187,7 +187,7 @@ if ( ! function_exists('expertise_cpt') ) {
 			'label'                 => 'Areas of Expertise',
 			'description'           => 'UAMS Areas of Expertise', 
 			'labels'                => $labels,
-			'supports'              => array( 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes', ),
+			'supports'              => array( 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes', 'revisions' ),
 			'taxonomies'            => array( 'treatment', 'condition' ),
 			'hierarchical'          => true,
 			'capability_type' 		=> 'page',
