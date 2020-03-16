@@ -559,7 +559,7 @@ if( function_exists('acf_register_block_type') ):
 		'enqueue_assets' => '',
 		'icon' => 'id',
 		'supports' => array(
-			'align' => true,
+			'align' => array('full'),
 			'mode' => true,
 			'multiple' => true,
 		),
