@@ -59,6 +59,50 @@
 	// Hard coded breadcrumbs
 	$tax = get_term_by("slug", get_query_var("term"), get_query_var("taxonomy") );
 
+	// Locations Content
+	$location_content = '';
+	$args = (array(
+		'post_type' => "location",
+		"post_status" => "publish",
+		'order' => 'ASC',
+		'orderby' => 'title',
+		'posts_per_page' => -1,
+		'post__in'	=> $locations
+	));
+	$location_query = new WP_Query( $args );
+
+	// Check for valid locations
+	$location_valid = false;
+	foreach( $locations as $location ) {
+		if ( get_post_status ( $location ) == 'publish' ) {
+			$location_valid = true;
+			$break;
+		}
+	}
+
+	if ( $locations && $location_query->have_posts() ) {
+		$location_content .= '<section class="uams-module bg-auto" id="locations">';
+		$location_content .= '<div class="container-fluid">';
+		$location_content .= '<div class="row">';
+		$location_content .= '<div class="col-12">';
+		$location_content .= '<h2 class="module-title">Locations Providing ' . single_cat_title( '', false ) . '</h2>';
+		$location_content .= '<div class="card-list-container location-card-list-container">';
+		$location_content .= '<div class="card-list">';
+		ob_start();
+		ob_clean();
+		while ( $location_query->have_posts() ) : $location_query->the_post();
+			$id = get_the_ID();
+			include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+		endwhile;
+		$location_content .= ob_get_clean();
+		$location_content .= '</div>';
+		$location_content .= '</div>';
+		$location_content .= '</div>';
+		$location_content .= '</div>';
+		$location_content .= '</div>';
+		$location_content .= '</section>';
+	}
+
 	// Classes for indicating presence of content
     $condition_field_classes = '';	
     if ($keywords && !empty($keywords)) { $condition_field_classes .= ' has-keywords'; } // Alternate names
@@ -68,7 +112,7 @@
     if ($video && !empty($video)) { $condition_field_classes .= ' has-video'; } // Video embed
     if ($treatments && !empty($treatments)) { $condition_field_classes .= ' has-treatment'; } // Treatments
     if ($expertise && !empty($expertise)) { $condition_field_classes .= ' has-expertise'; } // Areas of Expertise
-    if ($locations && !empty($locations)) { $condition_field_classes .= ' has-location'; } // Locations
+    if ($locations && $location_valid) { $treatment_field_classes .= ' has-location'; } // Locations
     if ($physicians && !empty($physicians)) { $condition_field_classes .= ' has-provider'; } // Providers
 
  ?>
@@ -192,39 +236,14 @@
 					</div>
 				</section>
 			<?php
-			} // $physicians_query loop ?>
-		<?php 
-			$args = (array(
-				'post_type' => "location",
-				"post_status" => "publish",
-				'order' => 'ASC',
-				'orderby' => 'title',
-				'posts_per_page' => -1,
-				'post__in'	=> $locations
-			));
-			$location_query = new WP_Query( $args );
-
-			if ( $locations && $location_query->have_posts() ) : ?>
-		<section class="container-fluid p-8 p-sm-10 bg-auto" id="locations">
-			<div class="row">
-				<div class="col-12">
-					<h2 class="module-title">Locations Where Providers Treat <?php echo single_cat_title( '', false ); ?></h2>
-					<div class="card-list-container location-card-list-container">
-						<div class="card-list">
-						<?php 
-							while ( $location_query->have_posts() ) : $location_query->the_post();
-								$id = get_the_ID();
-								include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
-							endwhile; 
-						?>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<?php wp_reset_postdata();
-		 endif; 
-		  
+			} // $physicians_query loop
+		
+			// Location Section
+			if (!empty($location_content)) {
+				echo $location_content; 
+			}
+			
+			// Expertise Section
 			$args = (array(
 				'post_type' => "expertise",
 				"post_status" => "publish",
@@ -236,19 +255,21 @@
 			$expertise_query = new WP_Query( $args );
 
 			if ( $expertise && $expertise_query->have_posts() ): ?>
-			<section class="container-fluid p-8 p-sm-10 bg-auto" id="expertise">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title">Areas of Expertise for <?php echo single_cat_title( '', false ); ?></h2>
-						<div class="card-list-container">
-							<div class="card-list card-list-expertise">
-							<?php 
-								while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
-									$id = get_the_ID();
-									include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-								endwhile; 
-								wp_reset_postdata();
-							?>
+			<section class="uams-module bg-auto" id="expertise">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<h2 class="module-title">Areas of Expertise for <?php echo single_cat_title( '', false ); ?></h2>
+							<div class="card-list-container">
+								<div class="card-list card-list-expertise">
+								<?php 
+									while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
+										$id = get_the_ID();
+										include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+									endwhile; 
+									wp_reset_postdata();
+								?>
+								</div>
 							</div>
 						</div>
 					</div>
