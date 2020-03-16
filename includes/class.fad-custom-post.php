@@ -45,7 +45,7 @@ function providers() {
 		'label'                 => 'Provider',
 		'description'           => 'UAMS Providers for Find-a-Doctor',
 		'labels'                => $labels,
-		'supports'              => array( 'title', 'author', 'thumbnail', ),
+		'supports'              => array( 'title', 'author', 'thumbnail', 'revisions' ),
 		'taxonomies'            => array( 'department', 'patient_type', 'treatment', 'medical_term', 'condition' ),
 		'hierarchical'          => false,
 		'public'                => true,
@@ -116,7 +116,7 @@ function locations() {
 	$args = array(
 		'label'                 => 'Location',
 		'labels'                => $labels,
-		'supports'              => array( 'title', 'author', 'thumbnail', ),
+		'supports'              => array( 'title', 'author', 'thumbnail','revisions' ),
 		'taxonomies'            => array( 'treatment', 'condition' ),
 		'hierarchical'          => false,
 		'public'                => true,
