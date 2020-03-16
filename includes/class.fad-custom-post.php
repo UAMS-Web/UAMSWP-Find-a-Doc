@@ -45,7 +45,7 @@ function providers() {
 		'label'                 => 'Provider',
 		'description'           => 'UAMS Providers for Find-a-Doctor',
 		'labels'                => $labels,
-		'supports'              => array( 'title', 'author', 'thumbnail', ),
+		'supports'              => array( 'title', 'author', 'thumbnail', 'revisions' ),
 		'taxonomies'            => array( 'department', 'patient_type', 'treatment', 'medical_term', 'condition' ),
 		'hierarchical'          => false,
 		'public'                => true,
@@ -116,7 +116,7 @@ function locations() {
 	$args = array(
 		'label'                 => 'Location',
 		'labels'                => $labels,
-		'supports'              => array( 'title', 'author', 'thumbnail', ),
+		'supports'              => array( 'title', 'author', 'thumbnail','revisions' ),
 		'taxonomies'            => array( 'treatment', 'condition' ),
 		'hierarchical'          => false,
 		'public'                => true,
@@ -187,7 +187,7 @@ if ( ! function_exists('expertise_cpt') ) {
 			'label'                 => 'Areas of Expertise',
 			'description'           => 'UAMS Areas of Expertise', 
 			'labels'                => $labels,
-			'supports'              => array( 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes', ),
+			'supports'              => array( 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes', 'revisions' ),
 			'taxonomies'            => array( 'treatment', 'condition' ),
 			'hierarchical'          => true,
 			'capability_type' 		=> 'page',
@@ -247,6 +247,7 @@ add_action( 'init', 'create_education_taxonomy', 0 );
 add_action( 'init', 'create_schools_taxonomy', 0 );
 // Locations Taxonomies
 add_action( 'init', 'create_region_taxonomy', 0 );
+add_action( 'init', 'create_location_type_taxonomy', 0 );
 
 /* Taxonomy Functions */
 function create_clinical_conditions_taxonomy() {
@@ -1374,6 +1375,56 @@ function create_region_taxonomy() {
 		'capabilities'               => $capabilities,
 	);
 	register_taxonomy( 'region', array( 'location' ), $args );
+
+}
+
+function create_location_type_taxonomy() {
+
+	$labels = array(
+		'name'                       => 'Location Types',
+		'singular_name'              => 'Location Type',
+		'menu_name'                  => 'Types',
+		'all_items'                  => 'All Types',
+		'parent_item'                => 'Parent Type',
+		'parent_item_colon'          => 'Parent Type:',
+		'new_item_name'              => 'New Type',
+		'add_new_item'               => 'Add New Type',
+		'edit_item'                  => 'Edit Type',
+		'update_item'                => 'Update Type',
+		'view_item'                  => 'View Type',
+		'separate_items_with_commas' => 'Separate Types with commas',
+		'add_or_remove_items'        => 'Add or remove Types',
+		'choose_from_most_used'      => 'Choose from the most used',
+		'popular_items'              => 'Popular Types',
+		'search_items'               => 'Search Types',
+		'not_found'                  => 'Not Found',
+		'no_terms'                   => 'No Types',
+		'items_list'                 => 'Types list',
+		'items_list_navigation'      => 'Types list navigation',
+	);
+	$rewrite = array(
+		'slug'                       => 'location_type',
+		'with_front'                 => false,
+		'hierarchical'               => true,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => false,
+		'show_ui'                    => true,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+	);
+	register_taxonomy( 'location_type', array( 'location' ), $args );
 
 }
 
