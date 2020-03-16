@@ -73,14 +73,16 @@
 
 	// Check for valid locations
 	$location_valid = false;
-	foreach( $locations as $location ) {
-		if ( get_post_status ( $location ) == 'publish' ) {
-			$location_valid = true;
-			$break;
+	if ( $locations && $location_query->have_posts() ) {
+		foreach( $locations as $location ) {
+			if ( get_post_status ( $location ) == 'publish' ) {
+				$location_valid = true;
+				$break;
+			}
 		}
 	}
 
-	if ( $locations && $location_query->have_posts() ) {
+	if ( $location_valid ) {
 		$location_content .= '<section class="uams-module bg-auto" id="locations">';
 		$location_content .= '<div class="container-fluid">';
 		$location_content .= '<div class="row">';
