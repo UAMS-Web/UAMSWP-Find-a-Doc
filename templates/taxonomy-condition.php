@@ -112,7 +112,7 @@
     if ($video && !empty($video)) { $condition_field_classes .= ' has-video'; } // Video embed
     if ($treatments && !empty($treatments)) { $condition_field_classes .= ' has-treatment'; } // Treatments
     if ($expertise && !empty($expertise)) { $condition_field_classes .= ' has-expertise'; } // Areas of Expertise
-    if ($locations && $location_valid) { $treatment_field_classes .= ' has-location'; } // Locations
+    if ($locations && $location_valid) { $condition_field_classes .= ' has-location'; } // Locations
     if ($physicians && !empty($physicians)) { $condition_field_classes .= ' has-provider'; } // Providers
 
  ?>
