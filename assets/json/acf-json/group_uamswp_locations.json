@@ -1537,6 +1537,109 @@
             "acfe_bidirectional": "0",
             "acfe_validate": "",
             "acfe_update": ""
+        },
+        "field_location_alert_tab": {
+            "key": "field_location_alert_tab",
+            "name": "",
+            "type": "tab",
+            "label": "<i class=\"dashicons-warning dashicons\"><\/i> Alert",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        "field_location_alert_suppress": {
+            "key": "field_location_alert_suppress",
+            "label": "Suppress alert from Find-a-Doc Settings?",
+            "name": "location_alert_suppress",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_location_alert_heading": {
+            "key": "field_location_alert_heading",
+            "name": "location_alert_heading",
+            "type": "text",
+            "label": "Alert Heading",
+            "instructions": "If there is an Alert Heading defined in Find-a-Doc Settings, setting this will override that.<br />If no value is set in either place, the heading will be 'Alert' but will be hidden.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        "field_location_alert_body": {
+            "key": "field_location_alert_body",
+            "name": "location_alert_body",
+            "type": "wysiwyg",
+            "label": "Alert Body",
+            "instructions": "If there is an Alert Body defined in Find-a-Doc Settings, setting this will override that.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0,
+            "acfe_validate": "",
+            "acfe_update": ""
+        },
+        "field_location_alert_color": {
+            "key": "field_location_alert_color",
+            "name": "location_alert_color",
+            "type": "select",
+            "label": "Alert Color",
+            "instructions": "If there is an Alert Color defined in Find-a-Doc Settings, setting this will override that.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "inherit": "Inherit from Find-a-Doc Settings",
+                "alert-success": "Success",
+                "alert-danger": "Danger",
+                "alert-warning": "Warning",
+                "alert-info": "Info"
+            },
+            "default_value": "",
+            "acfe_permissions": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         }
     },
     "modified": false

@@ -10,6 +10,26 @@ if (empty($excerpt)){
         $excerpt = mb_strimwidth(wp_strip_all_tags($about_loc), 0, 155, '...');
     }
 }
+
+$location_alert_title_sys = get_field('location_alert_heading_system', 'option');
+$location_alert_text_sys = get_field('location_alert_body_system', 'option');
+$location_alert_color_sys = get_field('location_alert_color_system', 'option');
+
+$location_alert_suppress = get_field('location_alert_suppress');
+$location_alert_title = get_field('location_alert_heading');
+$location_alert_text = get_field('location_alert_body');
+$location_alert_color = get_field('location_alert_color');
+
+if(empty($location_alert_title) && !$location_alert_suppress) {
+	$location_alert_title = $location_alert_title_sys;
+}
+if(empty($location_alert_text) && !$location_alert_suppress) {
+	$location_alert_text = $location_alert_text_sys;
+}
+if(empty($location_alert_color) || $location_alert_color == 'inherit') {
+	$location_alert_color = $location_alert_color_sys;
+}
+
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
@@ -45,7 +65,7 @@ while ( have_posts() ) : the_post(); ?>
 						<p><a class="btn btn-secondary" href="<?php echo get_field('location_url')['url']; ?>"><?php echo get_field('location_web_name'); ?> <span class="far fa-external-link-alt"></span></span></a></p>
 					<?php } 
 						// Schema data
-						$location_schema .= '"address": {
+						$location_schema = '"address": {
 						"@type": "PostalAddress",
 						"streetAddress": "'. get_field('location_address_1' ) . ' '. get_field('location_address_2' ) .'",
 						"addressLocality": "'. get_field('location_city') .'",
@@ -250,6 +270,19 @@ while ( have_posts() ) : the_post(); ?>
 			<?php } //endif ?>
 		</div>
 	</section>
+	<?php if ($location_alert_title || $location_alert_text) { ?>
+	<section class="uams-module location-alert location-<?php echo $location_alert_color ? $location_alert_color : 'alert-warning'; ?>">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12">
+					<h2 class="module-title<?php echo empty($location_alert_title) ? ' sr-only' : ''; ?>"><?php echo $location_alert_title ? $location_alert_title : 'Alert'; ?></h2>
+					<?php echo $location_alert_text ? '<div class="module-body"><p>' . $location_alert_text . '</p></div>' : ''; ?>
+				</div>
+			</div>
+		</div>
+	</section>
+	<?php
+	} ?>
 	<?php if ( get_field('location_about') || get_field('location_affiliation') ) { 
 			$about = get_field('location_about');
 			$affiliation = get_field('location_affiliation');
