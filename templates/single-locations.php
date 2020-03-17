@@ -10,6 +10,11 @@ if (empty($excerpt)){
         $excerpt = mb_strimwidth(wp_strip_all_tags($about_loc), 0, 155, '...');
     }
 }
+
+$location_alert_title = get_field('location_alert_headline', 'option');
+$location_alert_text = get_field('location_alert_body', 'option');
+$location_alert_color = get_field('location_alert_color', 'option');
+
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
@@ -250,6 +255,19 @@ while ( have_posts() ) : the_post(); ?>
 			<?php } //endif ?>
 		</div>
 	</section>
+	<?php if ($location_alert_title || $location_alert_text) { ?>
+	<section class="uams-module location-alert location-<?php echo $location_alert_color ? $location_alert_color : 'alert-warning'; ?>">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12">
+					<h2 class="module-title"><?php echo $location_alert_title ? $location_alert_title : 'Alert'; ?></h2>
+					<?php echo $location_alert_text ? '<div class="module-body"><p>' . $location_alert_text . '</p></div>' : ''; ?>
+				</div>
+			</div>
+		</div>
+	</section>
+	<?php
+	} ?>
 	<?php if ( get_field('location_about') || get_field('location_affiliation') ) { 
 			$about = get_field('location_about');
 			$affiliation = get_field('location_affiliation');
