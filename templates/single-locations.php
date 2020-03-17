@@ -274,7 +274,7 @@ while ( have_posts() ) : the_post(); ?>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-12">
-					<h2 class="module-title"><?php echo $location_alert_title ? $location_alert_title : 'Alert'; ?></h2>
+					<h2 class="module-title<?php echo empty($location_alert_title) ? ' sr-only' : ''; ?>"><?php echo $location_alert_title ? $location_alert_title : 'Alert'; ?></h2>
 					<?php echo $location_alert_text ? '<div class="module-body"><p>' . $location_alert_text . '</p></div>' : ''; ?>
 				</div>
 			</div>

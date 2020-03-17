@@ -1559,7 +1559,7 @@
             "name": "location_alert_heading",
             "type": "text",
             "label": "Alert Heading",
-            "instructions": "If there is an Alert Heading defined in Find-a-Doc Settings, setting this will override that.",
+            "instructions": "If there is an Alert Heading defined in Find-a-Doc Settings, setting this will override that. If no value is set in either place, the heading will be 'Alert' but will be hidden.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {

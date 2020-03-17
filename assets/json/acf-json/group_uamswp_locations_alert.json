@@ -8,7 +8,7 @@
             "label": "Alert Heading",
             "name": "location_alert_heading_system",
             "type": "text",
-            "instructions": "",
+            "instructions": "If no value is set, the heading will be 'Alert' but will be hidden.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
