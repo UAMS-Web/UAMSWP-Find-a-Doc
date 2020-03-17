@@ -53,6 +53,12 @@ function fwp_facet_scripts() {
         $('.fs-dropdown .fs-search input').each(function() {
             $(this).attr('aria-labelledby', "facet_" + $(this).closest('.facetwp-facet').attr('data-name') );
         });
+        $('select .facetwp-dropdown').each(function() {
+            $(this).attr('aria-labelledby', "facet_" + $(this).closest('.facetwp-facet').attr('data-name') );
+        });
+        $('select.facetwp-sort-select').each(function() {
+            $(this).attr('title', "Choose sort order" );
+        });
     });
     $(document).on('facetwp-loaded', function() {
         $.each(FWP.settings.num_choices, function(key, val) {
