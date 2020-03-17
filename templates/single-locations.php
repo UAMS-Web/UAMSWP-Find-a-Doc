@@ -11,9 +11,23 @@ if (empty($excerpt)){
     }
 }
 
-$location_alert_title = get_field('location_alert_headline', 'option');
-$location_alert_text = get_field('location_alert_body', 'option');
-$location_alert_color = get_field('location_alert_color', 'option');
+$location_alert_title_sys = get_field('location_alert_heading_system', 'option');
+$location_alert_text_sys = get_field('location_alert_body_system', 'option');
+$location_alert_color_sys = get_field('location_alert_color_system', 'option');
+
+$location_alert_title = get_field('location_alert_heading');
+$location_alert_text = get_field('location_alert_body');
+$location_alert_color = get_field('location_alert_color');
+
+if(empty($location_alert_title)) {
+	$location_alert_title = $location_alert_title_sys;
+}
+if(empty($location_alert_text)) {
+	$location_alert_text = $location_alert_text_sys;
+}
+if(empty($location_alert_color) || $location_alert_color == 'inherit') {
+	$location_alert_color = $location_alert_color_sys;
+}
 
 function sp_titles_desc($html) {
     global $excerpt;
