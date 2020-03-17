@@ -1554,12 +1554,31 @@
             "placement": "top",
             "endpoint": 0
         },
+        "field_location_alert_suppress": {
+            "key": "field_location_alert_suppress",
+            "label": "Suppress alert from Find-a-Doc Settings?",
+            "name": "location_alert_suppress",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
         "field_location_alert_heading": {
             "key": "field_location_alert_heading",
             "name": "location_alert_heading",
             "type": "text",
             "label": "Alert Heading",
-            "instructions": "If there is an Alert Heading defined in Find-a-Doc Settings, setting this will override that. If no value is set in either place, the heading will be 'Alert' but will be hidden.",
+            "instructions": "If there is an Alert Heading defined in Find-a-Doc Settings, setting this will override that.<br />If no value is set in either place, the heading will be 'Alert' but will be hidden.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
