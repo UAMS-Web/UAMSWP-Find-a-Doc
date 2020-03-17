@@ -4,9 +4,9 @@
     "title": "Clinical Locations Alert",
     "fields": [
         {
-            "key": "field_location_alert_headline",
-            "label": "Alert Headline",
-            "name": "location_alert_headline",
+            "key": "field_location_alert_heading_system",
+            "label": "Alert Heading",
+            "name": "location_alert_heading_system",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -26,9 +26,9 @@
             "acfe_update": ""
         },
         {
-            "key": "field_location_alert_body",
+            "key": "field_location_alert_body_system",
             "label": "Alert Body",
-            "name": "location_alert_body",
+            "name": "location_alert_body_system",
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
@@ -48,9 +48,9 @@
             "acfe_update": ""
         },
         {
-            "key": "field_location_alert_color",
+            "key": "field_location_alert_color_system",
             "label": "Alert Color",
-            "name": "location_alert_color",
+            "name": "location_alert_color_system",
             "type": "select",
             "instructions": "",
             "required": 0,
