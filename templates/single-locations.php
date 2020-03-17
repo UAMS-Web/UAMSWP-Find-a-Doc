@@ -65,7 +65,7 @@ while ( have_posts() ) : the_post(); ?>
 						<p><a class="btn btn-secondary" href="<?php echo get_field('location_url')['url']; ?>"><?php echo get_field('location_web_name'); ?> <span class="far fa-external-link-alt"></span></span></a></p>
 					<?php } 
 						// Schema data
-						$location_schema .= '"address": {
+						$location_schema = '"address": {
 						"@type": "PostalAddress",
 						"streetAddress": "'. get_field('location_address_1' ) . ' '. get_field('location_address_2' ) .'",
 						"addressLocality": "'. get_field('location_city') .'",
