@@ -10,6 +10,26 @@ if (empty($excerpt)){
         $excerpt = mb_strimwidth(wp_strip_all_tags($about_loc), 0, 155, '...');
     }
 }
+
+$location_alert_title_sys = get_field('location_alert_heading_system', 'option');
+$location_alert_text_sys = get_field('location_alert_body_system', 'option');
+$location_alert_color_sys = get_field('location_alert_color_system', 'option');
+
+$location_alert_suppress = get_field('location_alert_suppress');
+$location_alert_title = get_field('location_alert_heading');
+$location_alert_text = get_field('location_alert_body');
+$location_alert_color = get_field('location_alert_color');
+
+if(empty($location_alert_title) && !$location_alert_suppress) {
+	$location_alert_title = $location_alert_title_sys;
+}
+if(empty($location_alert_text) && !$location_alert_suppress) {
+	$location_alert_text = $location_alert_text_sys;
+}
+if(empty($location_alert_color) || $location_alert_color == 'inherit') {
+	$location_alert_color = $location_alert_color_sys;
+}
+
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
@@ -40,12 +60,12 @@ while ( have_posts() ) : the_post(); ?>
 					<p><?php echo get_field('location_address_1', get_the_ID() ); ?><br/>
 					<?php echo ( get_field('location_address_2' ) ? get_field('location_address_2') . '<br/>' : ''); ?>
 					<?php echo get_field('location_city'); ?>, <?php echo get_field('location_state'); ?> <?php echo get_field('location_zip', get_the_ID()); ?></p>
-						<p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a></p>
+						<p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php the_title(); ?>">Get Directions</a></p>
 					<?php if(get_field('location_web_name') && get_field('location_url')){ ?>
 						<p><a class="btn btn-secondary" href="<?php echo get_field('location_url')['url']; ?>"><?php echo get_field('location_web_name'); ?> <span class="far fa-external-link-alt"></span></span></a></p>
 					<?php } 
 						// Schema data
-						$location_schema .= '"address": {
+						$location_schema = '"address": {
 						"@type": "PostalAddress",
 						"streetAddress": "'. get_field('location_address_1' ) . ' '. get_field('location_address_2' ) .'",
 						"addressLocality": "'. get_field('location_city') .'",
@@ -250,6 +270,19 @@ while ( have_posts() ) : the_post(); ?>
 			<?php } //endif ?>
 		</div>
 	</section>
+	<?php if ($location_alert_title || $location_alert_text) { ?>
+	<section class="uams-module location-alert location-<?php echo $location_alert_color ? $location_alert_color : 'alert-warning'; ?>">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12">
+					<h2 class="module-title<?php echo empty($location_alert_title) ? ' sr-only' : ''; ?>"><?php echo $location_alert_title ? $location_alert_title : 'Alert'; ?></h2>
+					<?php echo $location_alert_text ? '<div class="module-body"><p>' . $location_alert_text . '</p></div>' : ''; ?>
+				</div>
+			</div>
+		</div>
+	</section>
+	<?php
+	} ?>
 	<?php if ( get_field('location_about') || get_field('location_affiliation') ) { 
 			$about = get_field('location_about');
 			$affiliation = get_field('location_affiliation');
@@ -298,7 +331,7 @@ while ( have_posts() ) : the_post(); ?>
 						<?php } // endif ?>
 							<?php echo get_field('location_parking'); ?>
 							<?php if ( $parking_map ) { ?>
-								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank">Get Directions</a>
+								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>
 							<?php } // endif ?>
 							<?php echo ( get_field('location_parking') && get_field('location_direction') ? '<h3>Directions From the Parking Area</h3>' : ''); // Display the directions heading here if there is a value for parking. ?>
 							<?php echo get_field('location_direction'); ?>
@@ -337,8 +370,8 @@ while ( have_posts() ) : the_post(); ?>
 								/* [lat, lon, fillColor, strokeColor, labelClass, iconText, popupText] */
 								var markers = [
 									// example [ 34.74376029995541, -92.31828863640054, "00F","000","white","A","I am a blue icon." ],
-									[ <?php echo $map['lat']; ?>, <?php echo $map['lng'] ?>, "9d2235","222", "transparentwhite", '1', 'Clinic<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a>' ],
-									[ <?php echo $parking_map['lat']; ?>, <?php echo $parking_map['lng'] ?>, "9d2235","222", "transparentwhite", '2', 'Parking<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank">Get Directions</a>' ]
+									[ <?php echo $map['lat']; ?>, <?php echo $map['lng'] ?>, "9d2235","222", "transparentwhite", '1', 'Clinic<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php the_title(); ?>">Get Directions</a>' ],
+									[ <?php echo $parking_map['lat']; ?>, <?php echo $parking_map['lng'] ?>, "9d2235","222", "transparentwhite", '2', 'Parking<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>' ]
 								]
 								//Loop through the markers array
 								var markerArray = [];
@@ -364,8 +397,8 @@ while ( have_posts() ) : the_post(); ?>
 							</script>
 							<div class="map-legend bg-info" aria-label="Legend for map">
 								<ol>
-									<li>Clinic (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a>)</li>
-									<li>Parking (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank">Get Directions</a>)</li>
+									<li>Clinic (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php the_title(); ?>">Get Directions</a>)</li>
+									<li>Parking (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>)</li>
 								</ol>
 							</div>
 						</div>

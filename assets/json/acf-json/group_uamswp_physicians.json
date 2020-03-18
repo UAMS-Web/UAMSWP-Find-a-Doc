@@ -1371,7 +1371,7 @@
             "name": "physician_education",
             "type": "repeater",
             "label": "Education",
-            "instructions": "",
+            "instructions": "Education Type and School are required if you add a row.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -1391,7 +1391,7 @@
                     "name": "education_type",
                     "type": "taxonomy",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
@@ -1416,7 +1416,7 @@
                     "name": "school",
                     "type": "taxonomy",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",

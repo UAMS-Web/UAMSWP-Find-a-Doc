@@ -156,17 +156,19 @@ function uamswp_expertise_locations() {
         ));
         $location_query = new WP_Query( $args );
         if( $locations && $location_query->have_posts() ): ?>
-            <section class="container-fluid p-8 p-sm-10 location-list bg-auto" id="locations">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="module-title">Locations</h2>
-                        <div class="card-list-container location-card-list-container">
-                            <div class="card-list">
-                            <?php while ( $location_query->have_posts() ) : $location_query->the_post();
-                                $id = get_the_ID(); 
-                                include( UAMS_FAD_PATH . '/templates/loops/location-card.php' ); 
-                            endwhile; 
-                            wp_reset_postdata();?>
+            <section class="uams-module location-list bg-auto" id="locations">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="module-title">Locations</h2>
+                            <div class="card-list-container location-card-list-container">
+                                <div class="card-list">
+                                <?php while ( $location_query->have_posts() ) : $location_query->the_post();
+                                    $id = get_the_ID(); 
+                                    include( UAMS_FAD_PATH . '/templates/loops/location-card.php' ); 
+                                endwhile; 
+                                wp_reset_postdata();?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -199,7 +201,7 @@ function uamswp_expertise_associated() {
 						<ul>
 						<?php
 						while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
-							echo '<li class="item"><div class="text-container"><h3 class="h5"><a href="'.get_permalink().'">';
+							echo '<li class="item"><div class="text-container"><h3 class="h5"><a href="'.get_permalink().'" aria-label="Go to Area of Expertise page for ' . get_the_title() . '">';
 							echo get_the_title();
                             echo '</a></h3>';
                             echo ( has_excerpt() ? '<p>' . wp_trim_words( get_the_excerpt(), 30, '&nbsp;&hellip;' ) . '</p>' : '' );

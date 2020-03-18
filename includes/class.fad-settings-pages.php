@@ -11,6 +11,14 @@ if( function_exists('acf_add_options_page') ) {
     ));
     
     acf_add_options_sub_page(array(
+		'page_title' 	=> 'Clinical Locations Options',
+        'menu_title'	=> 'Clinical Locations',
+        'menu_slug' 	=> 'uamswp-fad-locations',
+        'parent_slug'	=> 'fad-settings',
+        'redirect'		=> false
+    ));
+    
+    acf_add_options_sub_page(array(
 		'page_title' 	=> 'Areas of Expertise Options',
         'menu_title'	=> 'Clinical Areas of Expertise',
         'menu_slug' 	=> 'uamswp-fad-expertise',

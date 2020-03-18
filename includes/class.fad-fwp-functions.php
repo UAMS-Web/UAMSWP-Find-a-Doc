@@ -47,8 +47,17 @@ function fwp_facet_scripts() {
             var facet_name = $(this).attr('data-name');
             var facet_label = FWP.settings.labels[facet_name];
             if ($('.facet-label[data-for="' + facet_name + '"]').length < 1) {
-                $(this).before('<h3 class="facet-label" data-for="' + facet_name + '">' + facet_label + '</h3>');
+                $(this).before('<h3 class="facet-label" id="facet_' + facet_name + '" data-for="' + facet_name + '">' + facet_label + '</h3>');
             }
+        });
+        $('.fs-dropdown .fs-search input').each(function() {
+            $(this).attr('aria-labelledby', "facet_" + $(this).closest('.facetwp-facet').attr('data-name') );
+        });
+        $('select .facetwp-dropdown').each(function() {
+            $(this).attr('aria-labelledby', "facet_" + $(this).closest('.facetwp-facet').attr('data-name') );
+        });
+        $('select.facetwp-sort-select').each(function() {
+            $(this).attr('title', "Choose sort order" );
         });
     });
     $(document).on('facetwp-loaded', function() {

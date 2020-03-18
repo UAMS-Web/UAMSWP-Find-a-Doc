@@ -1,13 +1,13 @@
-var page = 2; // Default to start on page 2
-var $loader = $('.loadmore');
-var ppp = ("" !== $loader.data('ppp')) ? $loader.data('ppp') : 6; // Set default value
-var postcount = ("" !== $loader.data('postcount')) ? $loader.data('postcount') : 0; // Break 
-var type = ("" !== $loader.data('type')) ? $loader.data('type') : 'post';
-var postids = ("" !== $loader.data('postids')) ? $loader.data('postids') : 0; // Post
-var tax = ("" !== $loader.data('tax')) ? $loader.data('tax') : 0; // Taxonomy
-var slug = ("" !== $loader.data('slug')) ? $loader.data('slug') : 0; // Taxonomy
-
 jQuery(function($) {
+    var page = 2; // Default to start on page 2
+    var $loader = $('.loadmore');
+    var ppp = ("" !== $loader.data('ppp')) ? $loader.data('ppp') : 6; // Set default value
+    var postcount = ("" !== $loader.data('postcount')) ? $loader.data('postcount') : 0; // Break 
+    var type = ("" !== $loader.data('type')) ? $loader.data('type') : 'post';
+    var postids = ("" !== $loader.data('postids')) ? $loader.data('postids') : 0; // Post
+    var tax = ("" !== $loader.data('tax')) ? $loader.data('tax') : 0; // Taxonomy
+    var slug = ("" !== $loader.data('slug')) ? $loader.data('slug') : 0; // Taxonomy
+
     $('body').on('click', '.loadmore', function() {
         
 
