@@ -87,7 +87,7 @@
 		$location_content .= '<div class="container-fluid">';
 		$location_content .= '<div class="row">';
 		$location_content .= '<div class="col-12">';
-		$location_content .= '<h2 class="module-title">Locations Providing ' . single_cat_title( '', false ) . '</h2>';
+		$location_content .= '<h2 class="module-title">Locations Where Providers Treat ' . single_cat_title( '', false ) . '</h2>';
 		$location_content .= '<div class="card-list-container location-card-list-container">';
 		$location_content .= '<div class="card-list">';
 		ob_start();
