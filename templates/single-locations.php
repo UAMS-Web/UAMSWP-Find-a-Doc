@@ -45,6 +45,12 @@ if ( $photo_count ) {
 	}
 }
 
+if ( function_exists( 'fly_add_image_size' ) && !empty($single_photo) ) {
+	$locationphoto = image_sizer($single_photo, 640, 480, 'center', 'center');
+} else {
+	$locationphoto = wp_get_attachment_image_src($single_photo, 'large');
+}
+
 $location_alert_title_sys = get_field('location_alert_heading_system', 'option');
 $location_alert_text_sys = get_field('location_alert_body_system', 'option');
 $location_alert_color_sys = get_field('location_alert_color_system', 'option');
@@ -293,12 +299,9 @@ while ( have_posts() ) : the_post(); ?>
 								<source srcset="<?php echo image_sizer($single_photo, 576, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer($single_photo, 1152, 648, 'center', 'center'); ?> 2x"
 									media="(min-width: 1px)">
 								<img src="<?php echo image_sizer($single_photo, 640, 480, 'center', 'center'); ?>" alt="<?php the_title(); ?>" />
-							<?php 
-									$locationphoto = image_sizer($single_photo, 640, 480, 'center', 'center');
-								} else { 
-									the_post_thumbnail( 'large',  array( 'itemprop' => 'image' ) );
-									$locationphoto = wp_get_attachment_image_src($single_photo, 'large');
-								} //endif ?>
+							<?php } else { 
+								wp_get_attachment_image_src($single_photo, 'large');
+							} //endif ?>
 						</picture>
 					<?php } else {
 
