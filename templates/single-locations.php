@@ -11,6 +11,40 @@ if (empty($excerpt)){
     }
 }
 
+$featured_image_option = get_field('location_featured_image_option');
+$featured_image = get_post_thumbnail_id();
+$wayfinding_photo = get_field('location_wayfinding_photo');
+$photo_gallery = get_field('location_photo_gallery');
+
+// Count how many images are in the photo gallery
+$photo_gallery_count = 0;
+if ($photo_gallery) {
+	foreach( $photo_gallery_images as $photo_gallery_image ) {
+		$photo_gallery_count++;
+	}
+}
+
+// Count how many total images there are (wayfinding + gallery)
+$photo_count = 0;
+if ($wayfinding_photo || $photo_gallery) {
+    $photo_count = count($wayfinding_photo) + $photo_gallery_count;
+}
+
+$single_photo = '';
+$g = 1;
+if ( $photo_count ) {
+	if ( $wayfinding_photo ) {
+		$single_photo = $wayfinding_photo;
+	} else {
+		foreach( $photo_gallery_images as $photo_gallery_image ) {
+			if ( 2 > $g ){
+				$single_photo = $photo_gallery_image;
+				$g++;
+			}
+		} // endforeach
+	}
+}
+
 $location_alert_title_sys = get_field('location_alert_heading_system', 'option');
 $location_alert_text_sys = get_field('location_alert_body_system', 'option');
 $location_alert_color_sys = get_field('location_alert_color_system', 'option');
