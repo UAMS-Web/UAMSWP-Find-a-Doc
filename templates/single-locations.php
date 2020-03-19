@@ -14,7 +14,7 @@ if (empty($excerpt)){
 $featured_image_option = get_field('location_featured_image_option');
 $featured_image = get_post_thumbnail_id();
 $wayfinding_photo = get_field('location_wayfinding_photo');
-$photo_gallery = get_field('location_photo_gallery');
+$photo_gallery_images = get_field('location_photo_gallery');
 
 // Count how many images are in the photo gallery
 $photo_gallery_count = 0;
