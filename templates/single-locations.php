@@ -279,24 +279,30 @@ while ( have_posts() ) : the_post(); ?>
 			<?php if ( $photo_count ) { ?>
 			<div class="col-12 col-md image">
 				<div class="content-width">
-				<picture>
-					<?php if ( function_exists( 'fly_add_image_size' ) && !empty(get_post_thumbnail_id()) ) { ?>
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 640, 480, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1280, 960, 'center', 'center'); ?> 2x"
-							media="(min-width: 1350px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 392, 294, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 784, 588, 'center', 'center'); ?> 2x"
-							media="(min-width: 768px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 768, 432, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1536, 864, 'center', 'center'); ?> 2x"
-							media="(min-width: 576px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 576, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1152, 648, 'center', 'center'); ?> 2x"
-							media="(min-width: 1px)">
-						<img src="<?php echo image_sizer(get_post_thumbnail_id(), 640, 480, 'center', 'center'); ?>" alt="<?php the_title(); ?>" />
-					<?php 
-							$locationphoto = image_sizer(get_post_thumbnail_id(), 640, 480, 'center', 'center');
-						  } else { 
-							the_post_thumbnail( 'large',  array( 'itemprop' => 'image' ) );
-							$locationphoto = get_the_post_thumbnail( 'large');
-					 	  } //endif ?>
-				</picture>
+					<?php if ( $photo_count == 1 ) { ?>
+						<picture>
+							<?php if ( function_exists( 'fly_add_image_size' ) && !empty($single_photo) ) { ?>
+								<source srcset="<?php echo image_sizer($single_photo, 640, 480, 'center', 'center'); ?> 1x, <?php echo image_sizer($single_photo, 1280, 960, 'center', 'center'); ?> 2x"
+									media="(min-width: 1350px)">
+								<source srcset="<?php echo image_sizer($single_photo, 392, 294, 'center', 'center'); ?> 1x, <?php echo image_sizer($single_photo, 784, 588, 'center', 'center'); ?> 2x"
+									media="(min-width: 992px)">
+								<source srcset="<?php echo image_sizer($single_photo, 992, 558, 'center', 'center'); ?> 1x, <?php echo image_sizer($single_photo, 1984, 1116, 'center', 'center'); ?> 2x"
+									media="(min-width: 768px)">
+								<source srcset="<?php echo image_sizer($single_photo, 768, 432, 'center', 'center'); ?> 1x, <?php echo image_sizer($single_photo, 1536, 864, 'center', 'center'); ?> 2x"
+									media="(min-width: 576px)">
+								<source srcset="<?php echo image_sizer($single_photo, 576, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer($single_photo, 1152, 648, 'center', 'center'); ?> 2x"
+									media="(min-width: 1px)">
+								<img src="<?php echo image_sizer($single_photo, 640, 480, 'center', 'center'); ?>" alt="<?php the_title(); ?>" />
+							<?php 
+									$locationphoto = image_sizer($single_photo, 640, 480, 'center', 'center');
+								} else { 
+									the_post_thumbnail( 'large',  array( 'itemprop' => 'image' ) );
+									$locationphoto = wp_get_attachment_image_src($single_photo, 'large');
+								} //endif ?>
+						</picture>
+					<?php } else {
+
+					} //endif ?>
 				</div>
 			</div>
 			<?php } //endif ?>
