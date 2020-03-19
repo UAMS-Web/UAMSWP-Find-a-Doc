@@ -276,7 +276,7 @@ while ( have_posts() ) : the_post(); ?>
 					<?php } endif; ?>
 				</div>
 			</div>
-			<?php if ( has_post_thumbnail() ) { ?>
+			<?php if ( $photo_count ) { ?>
 			<div class="col-12 col-md image">
 				<div class="content-width">
 				<picture>
@@ -284,8 +284,6 @@ while ( have_posts() ) : the_post(); ?>
 						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 640, 480, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1280, 960, 'center', 'center'); ?> 2x"
 							media="(min-width: 1350px)">
 						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 392, 294, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 784, 588, 'center', 'center'); ?> 2x"
-							media="(min-width: 992px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 992, 558, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1984, 1116, 'center', 'center'); ?> 2x"
 							media="(min-width: 768px)">
 						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 768, 432, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1536, 864, 'center', 'center'); ?> 2x"
 							media="(min-width: 576px)">
