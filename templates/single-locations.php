@@ -18,7 +18,7 @@ $photo_gallery_images = get_field('location_photo_gallery');
 
 // Count how many images are in the photo gallery
 $photo_gallery_count = 0;
-if ($photo_gallery) {
+if ($photo_gallery_images) {
 	foreach( $photo_gallery_images as $photo_gallery_image ) {
 		$photo_gallery_count++;
 	}
