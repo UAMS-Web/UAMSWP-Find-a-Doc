@@ -937,39 +937,12 @@
             "placement": "top",
             "endpoint": 0
         },
-        "field_location_featured_image_option": {
-            "key": "field_location_featured_image_option",
-            "label": "Which image should be the featured image?",
-            "name": "location_featured_image_option",
-			"type": "radio",
-			"instructions": "",
-			"required": 1,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-            },
-			"acfe_permissions": "",
-			"choices": {
-				"wayfinding": "Wayfinding photo",
-				"gallery": "First photo in gallery"
-            },
-			"allow_null": 0,
-			"other_choice": 0,
-			"default_value": "wayfinding",
-			"layout": "vertical",
-			"return_format": "value",
-			"acfe_validate": "",
-			"acfe_update": "",
-			"save_other_choice": 0
-        },
         "field_location_featured_image": {
             "key": "field_location_featured_image",
             "label": "Featured Image",
             "name": "_thumbnail_id",
             "type": "image",
-            "instructions": "",
+            "instructions": "This image is used on card layouts, schema, social sharing, etc.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
