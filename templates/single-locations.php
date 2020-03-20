@@ -304,9 +304,9 @@ while ( have_posts() ) : the_post(); ?>
 								<source srcset="<?php echo image_sizer($single_photo, 576, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer($single_photo, 1152, 648, 'center', 'center'); ?> 2x"
 									media="(min-width: 1px)">
 								<img src="<?php echo image_sizer($single_photo, 640, 480, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $single_photo, '_wp_attachment_image_alt', true ); ?>" />
-							<?php } else { 
-								wp_get_attachment_image_src($single_photo, 'large');
-							} //endif ?>
+							<?php } else {  ?>
+								<img src="<?php wp_get_attachment_image_src($single_photo, 'large'); ?>">
+							<?php } //endif ?>
 						</picture>
 					<?php } else { ?>
 						<div class="carousel slide" id="location-info-carousel">
@@ -333,9 +333,9 @@ while ( have_posts() ) : the_post(); ?>
 												<source srcset="<?php echo image_sizer($wayfinding_photo, 576, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer($wayfinding_photo, 1152, 648, 'center', 'center'); ?> 2x"
 													media="(min-width: 1px)">
 												<img src="<?php echo image_sizer($wayfinding_photo, 640, 480, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $photo_gallery_image, '_wp_attachment_image_alt', true ); ?>" />
-											<?php } else { 
-												wp_get_attachment_image_src($wayfinding_photo, 'large');
-											} //endif ?>
+												<?php } else {  ?>
+													<img src="<?php wp_get_attachment_image_src($wayfinding_photo, 'large'); ?>">
+												<?php } //endif ?>
 										</picture>
 									</div>
 								<?php
@@ -357,9 +357,9 @@ while ( have_posts() ) : the_post(); ?>
 													<source srcset="<?php echo image_sizer($photo_gallery_image, 576, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer($photo_gallery_image, 1152, 648, 'center', 'center'); ?> 2x"
 														media="(min-width: 1px)">
 													<img src="<?php echo image_sizer($photo_gallery_image, 640, 480, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $photo_gallery_image, '_wp_attachment_image_alt', true ); ?>" />
-												<?php } else { 
-													wp_get_attachment_image_src($photo_gallery_image, 'large');
-												} //endif ?>
+												<?php } else {  ?>
+													<img src="<?php wp_get_attachment_image_src($photo_gallery_image, 'large'); ?>">
+												<?php } //endif ?>
 											</picture>
 										</div>
 										<?php
