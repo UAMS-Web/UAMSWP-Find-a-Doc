@@ -26,7 +26,7 @@ if ($photo_gallery_images) {
 
 // Count how many total images there are (wayfinding + gallery)
 $photo_count = 0;
-if ($wayfinding_photo || $photo_gallery) {
+if ($wayfinding_photo || $photo_gallery_images) {
     $photo_count = count($wayfinding_photo) + $photo_gallery_count;
 }
 
