@@ -342,7 +342,23 @@ while ( have_posts() ) : the_post(); ?>
 								<?php if ( $photo_gallery_images ) {
 									foreach( $photo_gallery_images as $photo_gallery_image ) { ?>
 										<div class="carousel-item<?php echo ($location_carousel_slide == 1) ? ' active' : '' ?>">
-											<img src="https://picsum.photos/id/100/640/480" class="d-block w-100" alt="...">
+											<picture>
+												<?php if ( function_exists( 'fly_add_image_size' ) && !empty($photo_gallery_image) ) { ?>
+													<source srcset="<?php echo image_sizer($photo_gallery_image, 640, 480, 'center', 'center'); ?> 1x, <?php echo image_sizer($photo_gallery_image, 1280, 960, 'center', 'center'); ?> 2x"
+														media="(min-width: 1350px)">
+													<source srcset="<?php echo image_sizer($photo_gallery_image, 392, 294, 'center', 'center'); ?> 1x, <?php echo image_sizer($photo_gallery_image, 784, 588, 'center', 'center'); ?> 2x"
+														media="(min-width: 992px)">
+													<source srcset="<?php echo image_sizer($photo_gallery_image, 992, 558, 'center', 'center'); ?> 1x, <?php echo image_sizer($photo_gallery_image, 1984, 1116, 'center', 'center'); ?> 2x"
+														media="(min-width: 768px)">
+													<source srcset="<?php echo image_sizer($photo_gallery_image, 768, 432, 'center', 'center'); ?> 1x, <?php echo image_sizer($photo_gallery_image, 1536, 864, 'center', 'center'); ?> 2x"
+														media="(min-width: 576px)">
+													<source srcset="<?php echo image_sizer($photo_gallery_image, 576, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer($photo_gallery_image, 1152, 648, 'center', 'center'); ?> 2x"
+														media="(min-width: 1px)">
+													<img src="<?php echo image_sizer($photo_gallery_image, 640, 480, 'center', 'center'); ?>" alt="<?php the_title(); ?>" />
+												<?php } else { 
+													wp_get_attachment_image_src($photo_gallery_image, 'large');
+												} //endif ?>
+											</picture>
 										</div>
 										<?php
 											$location_carousel_slide++;
