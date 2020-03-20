@@ -14,19 +14,19 @@ if (empty($excerpt)){
 $featured_image_option = get_field('location_featured_image_option');
 $featured_image = get_post_thumbnail_id();
 $wayfinding_photo = get_field('location_wayfinding_photo');
-$photo_gallery_images = get_field('location_photo_gallery');
+$photo_gallery = get_field('location_photo_gallery');
 
 // Count how many images are in the photo gallery
 $photo_gallery_count = 0;
-if ($photo_gallery_images) {
-	foreach( $photo_gallery_images as $photo_gallery_image ) {
+if ($photo_gallery) {
+	foreach( $photo_gallery as $photo_gallery_image ) {
 		$photo_gallery_count++;
 	}
 }
 
 // Count how many total images there are (wayfinding + gallery)
 $photo_count = 0;
-if ($wayfinding_photo || $photo_gallery_images) {
+if ($wayfinding_photo || $photo_gallery) {
 	if(!empty($wayfinding_photo)) {
 		$photo_count = $photo_count + count($wayfinding_photo);
 	}
@@ -40,7 +40,7 @@ if ( $photo_count == 1) {
 	if ( !empty($wayfinding_photo) ) {
 		$single_photo = $wayfinding_photo;
 	} else {
-		foreach( $photo_gallery_images as $photo_gallery_image ) {
+		foreach( $photo_gallery as $photo_gallery_image ) {
 			if ( 2 > $g ){
 				$single_photo = $photo_gallery_image;
 				$g++;
@@ -341,8 +341,8 @@ while ( have_posts() ) : the_post(); ?>
 								<?php
 									$location_carousel_slide++;
 								} ?>
-								<?php if ( $photo_gallery_images ) {
-									foreach( $photo_gallery_images as $photo_gallery_image ) { ?>
+								<?php if ( $photo_gallery ) {
+									foreach( $photo_gallery as $photo_gallery_image ) { ?>
 										<div class="carousel-item<?php echo ($location_carousel_slide == 1) ? ' active' : '' ?>">
 											<picture>
 												<?php if ( function_exists( 'fly_add_image_size' ) && !empty($photo_gallery_image) ) { ?>
