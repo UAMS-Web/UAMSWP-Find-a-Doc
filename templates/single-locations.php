@@ -49,10 +49,10 @@ if ( $photo_count == 1) {
 	}
 }
 
-if ( function_exists( 'fly_add_image_size' ) && !empty($single_photo) ) {
-	$locationphoto = image_sizer($single_photo, 640, 480, 'center', 'center');
+if ( function_exists( 'fly_add_image_size' ) && !empty($featured_image) ) {
+	$locationphoto = image_sizer($featured_image, 640, 480, 'center', 'center');
 } else {
-	$locationphoto = wp_get_attachment_image_src($single_photo, 'large');
+	$locationphoto = wp_get_attachment_image_src($featured_image, 'large');
 }
 
 $location_alert_title_sys = get_field('location_alert_heading_system', 'option');
