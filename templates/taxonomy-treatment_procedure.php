@@ -12,6 +12,9 @@
 	$expertise = get_field('treatment_procedure_expertise', $term);
 	$locations = get_field('treatment_procedure_locations', $term);
 	$physicians = get_field('treatment_procedure_physicians', $term);
+	$medline_type = get_field('treatment_procedure_medline_code_type', $term);
+	$medline_code = get_field('treatment_procedure_medline_code_id', $term);
+	$embed_code = get_field('treatment_procedure_embed_codes', $term);
 
 	function uamswp_keyword_hook_header() {
 		$keyword_text = '';
@@ -140,6 +143,16 @@
 					endif;
 				?>
 				<?php echo ( $content ? ''. $content . '' : '' ); ?>
+				<?php 
+					if ( $medline_type && 'none' != $medline_type && $medline_code ) {
+						echo display_medline_api_data( trim($medline_code), $medline_type );
+					}
+				?>
+				<?php 
+					if ( $embed_code ) {
+						echo $embed_code;
+					}
+				?>
 				<?php if( $video ) { ?>
 					<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
 					<?php echo wp_oembed_get( $video ); ?>
