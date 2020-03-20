@@ -287,7 +287,7 @@ while ( have_posts() ) : the_post(); ?>
 									media="(min-width: 1px)">
 								<img src="<?php echo image_sizer($location_images[0], 630, 473, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images[0], '_wp_attachment_image_alt', true ); ?>" class="single-image" />
 							<?php } else {  ?>
-								<img src="<?php wp_get_attachment_image_src($location_images[0], 'large'); ?>" class="single-image">
+								<img src="<?php echo wp_get_attachment_image_url($location_images[0], 'large'); ?>" class="single-image">
 							<?php } //endif ?>
 						</picture>
 					<?php } else { ?>
@@ -311,7 +311,7 @@ while ( have_posts() ) : the_post(); ?>
 													media="(min-width: 1px)">
 												<img src="<?php echo image_sizer($location_images_item, 630, 473, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images_item, '_wp_attachment_image_alt', true ); ?>" />
 											<?php } else {  ?>
-												<img src="<?php wp_get_attachment_image_src($location_images_item, 'large'); ?>">
+												<img src="<?php echo wp_get_attachment_image_url($location_images_item, 'large'); ?>">
 											<?php } //endif ?>
 										</picture>
 									</div>
@@ -331,9 +331,9 @@ while ( have_posts() ) : the_post(); ?>
 								<?php for ($i = 0; $i < $location_images_count; $i++) { ?>
 									<li data-target="#location-info-carousel" data-slide-to="<?php echo $i; ?>" <?php echo (0 == $i ? 'class="active"' : ''); ?>>
 										<?php if ( function_exists( 'fly_add_image_size' )) { ?>
-											<img src="<?php echo image_sizer($location_images[$i], 45, 34, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images[$i], '_wp_attachment_image_alt', true ); ?>" />
+											<img src="<?php echo image_sizer($location_images[$i], 60, 45, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images[$i], '_wp_attachment_image_alt', true ); ?>" />
 										<?php } else {  ?>
-											<img src="<?php wp_get_attachment_image_src($location_images[$i], 'large'); ?>" alt="<?php echo get_post_meta( $location_images[$i], '_wp_attachment_image_alt', true ); ?>">
+											<img src="<?php echo wp_get_attachment_image_url($location_images[$i], 'small'); ?>" alt="<?php echo get_post_meta( $location_images[$i], '_wp_attachment_image_alt', true ); ?>">
 										<?php } //endif ?>
 									</li>
 								<?php } ?>
