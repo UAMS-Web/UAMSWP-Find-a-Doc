@@ -322,7 +322,7 @@ while ( have_posts() ) : the_post(); ?>
 							<?php } //endif ?>
 						</picture>
 					<?php } else { ?>
-						<div class="carousel slide" id="location-info-carousel">
+						<div class="carousel slide carousel-thumbnails" id="location-info-carousel">
 							<ol class="carousel-indicators">
 								<?php for ($i = 0; $i < $photo_count; $i++) { ?>
 									<li data-target="#location-info-carousel" data-slide-to="<?php echo $i; ?>" <?php echo (0 == $i ? 'class="active"' : ''); ?>></li>
