@@ -323,11 +323,6 @@ while ( have_posts() ) : the_post(); ?>
 						</picture>
 					<?php } else { ?>
 						<div class="carousel slide carousel-thumbnails" id="location-info-carousel">
-							<ol class="carousel-indicators">
-								<?php for ($i = 0; $i < $photo_count; $i++) { ?>
-									<li data-target="#location-info-carousel" data-slide-to="<?php echo $i; ?>" <?php echo (0 == $i ? 'class="active"' : ''); ?>></li>
-								<?php } ?>
-							</ol>
 							<div class="carousel-inner">
 								<?php 
 								$location_carousel_slide = 1;
@@ -388,6 +383,11 @@ while ( have_posts() ) : the_post(); ?>
 								<span class="carousel-control-next-icon" aria-hidden="true"></span>
 								<span class="sr-only">Next</span>
 							</a>
+							<ol class="carousel-indicators">
+								<?php for ($i = 0; $i < $photo_count; $i++) { ?>
+									<li data-target="#location-info-carousel" data-slide-to="<?php echo $i; ?>" <?php echo (0 == $i ? 'class="active"' : ''); ?>></li>
+								<?php } ?>
+							</ol>
 						</div>
 					<?php } //endif ?>
 				</div>
