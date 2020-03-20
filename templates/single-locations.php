@@ -308,55 +308,55 @@ while ( have_posts() ) : the_post(); ?>
 						</picture>
 					<?php } else { ?>
 						<div class="carousel slide" id="location-info-carousel">
-						<ol class="carousel-indicators">
-							<?php for ($i = 0; $i < $photo_count; $i++) { ?>
-								<li data-target="#location-info-carousel" data-slide-to="<?php echo $i; ?>" <?php echo (0 == $i ? 'class="active"' : ''); ?>></li>
-							<?php } ?>
-						</ol>
-						<div class="carousel-inner">
-							<?php 
-							$location_carousel_slide = 1;
-							if ( $wayfinding_photo ) { ?>
-								<div class="carousel-item<?php echo ($location_carousel_slide == 1) ? ' active' : '' ?>">
-								<picture>
-									<?php if ( function_exists( 'fly_add_image_size' ) && !empty($wayfinding_photo) ) { ?>
-										<source srcset="<?php echo image_sizer($wayfinding_photo, 640, 480, 'center', 'center'); ?> 1x, <?php echo image_sizer($wayfinding_photo, 1280, 960, 'center', 'center'); ?> 2x"
-											media="(min-width: 1350px)">
-										<source srcset="<?php echo image_sizer($wayfinding_photo, 392, 294, 'center', 'center'); ?> 1x, <?php echo image_sizer($wayfinding_photo, 784, 588, 'center', 'center'); ?> 2x"
-											media="(min-width: 992px)">
-										<source srcset="<?php echo image_sizer($wayfinding_photo, 992, 558, 'center', 'center'); ?> 1x, <?php echo image_sizer($wayfinding_photo, 1984, 1116, 'center', 'center'); ?> 2x"
-											media="(min-width: 768px)">
-										<source srcset="<?php echo image_sizer($wayfinding_photo, 768, 432, 'center', 'center'); ?> 1x, <?php echo image_sizer($wayfinding_photo, 1536, 864, 'center', 'center'); ?> 2x"
-											media="(min-width: 576px)">
-										<source srcset="<?php echo image_sizer($wayfinding_photo, 576, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer($wayfinding_photo, 1152, 648, 'center', 'center'); ?> 2x"
-											media="(min-width: 1px)">
-										<img src="<?php echo image_sizer($wayfinding_photo, 640, 480, 'center', 'center'); ?>" alt="<?php the_title(); ?>" />
-									<?php } else { 
-										wp_get_attachment_image_src($wayfinding_photo, 'large');
-									} //endif ?>
-								</picture>
-								</div>
-							<?php
-								$location_carousel_slide++;
-							} ?>
-							<?php if ( $photo_gallery_images ) {
-								foreach( $photo_gallery_images as $photo_gallery_image ) { ?>
+							<ol class="carousel-indicators">
+								<?php for ($i = 0; $i < $photo_count; $i++) { ?>
+									<li data-target="#location-info-carousel" data-slide-to="<?php echo $i; ?>" <?php echo (0 == $i ? 'class="active"' : ''); ?>></li>
+								<?php } ?>
+							</ol>
+							<div class="carousel-inner">
+								<?php 
+								$location_carousel_slide = 1;
+								if ( $wayfinding_photo ) { ?>
 									<div class="carousel-item<?php echo ($location_carousel_slide == 1) ? ' active' : '' ?>">
-										<img src="https://picsum.photos/id/100/640/480" class="d-block w-100" alt="...">
+										<picture>
+											<?php if ( function_exists( 'fly_add_image_size' ) && !empty($wayfinding_photo) ) { ?>
+												<source srcset="<?php echo image_sizer($wayfinding_photo, 640, 480, 'center', 'center'); ?> 1x, <?php echo image_sizer($wayfinding_photo, 1280, 960, 'center', 'center'); ?> 2x"
+													media="(min-width: 1350px)">
+												<source srcset="<?php echo image_sizer($wayfinding_photo, 392, 294, 'center', 'center'); ?> 1x, <?php echo image_sizer($wayfinding_photo, 784, 588, 'center', 'center'); ?> 2x"
+													media="(min-width: 992px)">
+												<source srcset="<?php echo image_sizer($wayfinding_photo, 992, 558, 'center', 'center'); ?> 1x, <?php echo image_sizer($wayfinding_photo, 1984, 1116, 'center', 'center'); ?> 2x"
+													media="(min-width: 768px)">
+												<source srcset="<?php echo image_sizer($wayfinding_photo, 768, 432, 'center', 'center'); ?> 1x, <?php echo image_sizer($wayfinding_photo, 1536, 864, 'center', 'center'); ?> 2x"
+													media="(min-width: 576px)">
+												<source srcset="<?php echo image_sizer($wayfinding_photo, 576, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer($wayfinding_photo, 1152, 648, 'center', 'center'); ?> 2x"
+													media="(min-width: 1px)">
+												<img src="<?php echo image_sizer($wayfinding_photo, 640, 480, 'center', 'center'); ?>" alt="<?php the_title(); ?>" />
+											<?php } else { 
+												wp_get_attachment_image_src($wayfinding_photo, 'large');
+											} //endif ?>
+										</picture>
 									</div>
-									<?php
-										$location_carousel_slide++;
-									} // endforeach
-							} ?>
-						</div>
-						<a class="carousel-control-prev" href="#location-info-carousel" role="button" data-slide="prev">
-							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							<span class="sr-only">Previous</span>
-						</a>
-						<a class="carousel-control-next" href="#location-info-carousel" role="button" data-slide="next">
-							<span class="carousel-control-next-icon" aria-hidden="true"></span>
-							<span class="sr-only">Next</span>
-						</a>
+								<?php
+									$location_carousel_slide++;
+								} ?>
+								<?php if ( $photo_gallery_images ) {
+									foreach( $photo_gallery_images as $photo_gallery_image ) { ?>
+										<div class="carousel-item<?php echo ($location_carousel_slide == 1) ? ' active' : '' ?>">
+											<img src="https://picsum.photos/id/100/640/480" class="d-block w-100" alt="...">
+										</div>
+										<?php
+											$location_carousel_slide++;
+										} // endforeach
+								} ?>
+							</div>
+							<a class="carousel-control-prev" href="#location-info-carousel" role="button" data-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="sr-only">Previous</span>
+							</a>
+							<a class="carousel-control-next" href="#location-info-carousel" role="button" data-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="sr-only">Next</span>
+							</a>
 						</div>
 					<?php } //endif ?>
 				</div>
