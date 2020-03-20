@@ -318,7 +318,7 @@ while ( have_posts() ) : the_post(); ?>
 									media="(min-width: 1px)">
 								<img src="<?php echo image_sizer($single_photo, 640, 480, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $single_photo, '_wp_attachment_image_alt', true ); ?>" />
 							<?php } else {  ?>
-								<img src="<?php wp_get_attachment_image_src($single_photo, 'large'); ?>">
+								<img src="<?php wp_get_attachment_image_src($single_photo, 'large'); ?>" class="single-image">
 							<?php } //endif ?>
 						</picture>
 					<?php } else { ?>
