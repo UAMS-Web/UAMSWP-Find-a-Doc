@@ -310,7 +310,7 @@ while ( have_posts() ) : the_post(); ?>
 						<div class="carousel slide" id="location-info-carousel">
 						<ol class="carousel-indicators">
 							<?php for ($i = 0; $i < $photo_count; $i++) { ?>
-								<li data-target="#locationCarouselIndicators" data-slide-to="<?php echo $i; ?>" <?php echo (0 == $i ? 'class="active"' : ''); ?>></li>
+								<li data-target="#location-info-carousel" data-slide-to="<?php echo $i; ?>" <?php echo (0 == $i ? 'class="active"' : ''); ?>></li>
 							<?php } ?>
 						</ol>
 						<div class="carousel-inner">
@@ -349,11 +349,11 @@ while ( have_posts() ) : the_post(); ?>
 									} // endforeach
 							} ?>
 						</div>
-						<a class="carousel-control-prev" href="#locationCarouselIndicators" role="button" data-slide="prev">
+						<a class="carousel-control-prev" href="#location-info-carousel" role="button" data-slide="prev">
 							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 							<span class="sr-only">Previous</span>
 						</a>
-						<a class="carousel-control-next" href="#locationCarouselIndicators" role="button" data-slide="next">
+						<a class="carousel-control-next" href="#location-info-carousel" role="button" data-slide="next">
 							<span class="carousel-control-next-icon" aria-hidden="true"></span>
 							<span class="sr-only">Next</span>
 						</a>
