@@ -997,7 +997,7 @@
             "label": "Wayfinding Photo",
             "name": "location_wayfinding_photo",
             "type": "image",
-            "instructions": "",
+            "instructions": "Select an image that will help the patient find the appropriate building from the road.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -1025,7 +1025,7 @@
 			"label": "Photo Gallery",
 			"name": "location_photo_gallery",
 			"type": "gallery",
-			"instructions": "",
+			"instructions": "You may select up to four images.<br />These could include a photo of the interior entrance to the clinic or photos of the clinic in use.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
