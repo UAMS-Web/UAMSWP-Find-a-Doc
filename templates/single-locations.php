@@ -49,6 +49,7 @@ if ( $photo_count == 1) {
 	}
 }
 
+// Set image for schema
 if ( function_exists( 'fly_add_image_size' ) && !empty($featured_image) ) {
 	$locationphoto = image_sizer($featured_image, 640, 480, 'center', 'center');
 } else {
