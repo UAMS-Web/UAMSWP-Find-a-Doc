@@ -33,6 +33,7 @@ if ($wayfinding_photo || $photo_gallery_images) {
     $photo_count = $photo_count + $photo_gallery_count;
 }
 
+// Get the value of the photo from either image input if only one photo is set
 $single_photo = '';
 $g = 1;
 if ( $photo_count == 1) {
