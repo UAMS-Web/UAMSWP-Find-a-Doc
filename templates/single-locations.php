@@ -25,10 +25,17 @@ if ($photo_gallery && !empty($photo_gallery)) {
 $location_images_count = count($location_images);
 
 // Set image for schema
-if ( function_exists( 'fly_add_image_size' ) && !empty($featured_image) ) {
-	$locationphoto = image_sizer($featured_image, 640, 480, 'center', 'center');
+$featured_image = get_post_thumbnail_id();
+$schema_image = '';
+if ($featured_image) {
+	$schema_image = $featured_image;
+} elseif ($location_images) {
+	$schema_image = $location_images[0];
+}
+if ( function_exists( 'fly_add_image_size' ) && !empty($schema_image) ) {
+	$locationphoto = image_sizer($schema_image, 640, 480, 'center', 'center');
 } else {
-	$locationphoto = wp_get_attachment_image_src($featured_image, 'large');
+	$locationphoto = wp_get_attachment_image_src($schema_image, 'large');
 }
 
 $location_alert_title_sys = get_field('location_alert_heading_system', 'option');
