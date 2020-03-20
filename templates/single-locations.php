@@ -285,7 +285,7 @@ while ( have_posts() ) : the_post(); ?>
 									media="(min-width: 576px)">
 								<source srcset="<?php echo image_sizer($location_images[0], 576, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images[0], 1152, 648, 'center', 'center'); ?> 2x"
 									media="(min-width: 1px)">
-								<img src="<?php echo image_sizer($location_images[0], 630, 473, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images[0], '_wp_attachment_image_alt', true ); ?>" />
+								<img src="<?php echo image_sizer($location_images[0], 630, 473, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images[0], '_wp_attachment_image_alt', true ); ?>" class="single-image" />
 							<?php } else {  ?>
 								<img src="<?php wp_get_attachment_image_src($location_images[0], 'large'); ?>" class="single-image">
 							<?php } //endif ?>
