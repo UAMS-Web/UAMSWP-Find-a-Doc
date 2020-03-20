@@ -43,6 +43,19 @@ if ( $photo_count == 1) {
 	}
 }
 
+// Set featured image
+if ( $photo_count ) {
+	if ( $featured_image_option == 'wayfinding' && !empty($wayfinding_photo) ) { // if wayfinding image is selected as featured image and there is a value
+		$featured_image = $wayfinding_photo;
+	} elseif ( $featured_image_option == 'gallery' && !empty($photo_gallery) ) { // if first gallery image is selected as featured image and there is a value
+		$featured_image = $photo_gallery[0];
+	} elseif ( !empty($wayfinding_photo) ) { // Fall back to wayfinding photo if it exists
+		$featured_image = $wayfinding_photo;
+	} elseif ( !empty($photo_gallery) ) { // Fall back to first gallery image if it exists
+		$featured_image = $photo_gallery[0];
+	}
+}
+
 // Set image for schema
 if ( function_exists( 'fly_add_image_size' ) && !empty($featured_image) ) {
 	$locationphoto = image_sizer($featured_image, 640, 480, 'center', 'center');
@@ -95,6 +108,12 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="col-12 col-md text">
 				<div class="content-width">
 					<h1 class="page-title"><?php the_title(); ?></h1>
+					<p>$post_id = <?php echo $post_id; ?><br />
+					$featured_image_option = <?php echo $featured_image_option; ?><br />
+					$featured_image = <?php echo $featured_image; ?></p>
+					<img src="<?php echo image_sizer($featured_image, 640, 480, 'center', 'center'); ?>" alt="" />
+					<p>get_post_thumbnail_id() = <?php echo get_post_thumbnail_id(); ?></p>
+					<img src="<?php echo image_sizer(get_post_thumbnail_id(), 640, 480, 'center', 'center'); ?>" alt="" />
 					<h2 class="sr-only">Address</h2>
 					<p><?php echo get_field('location_address_1', get_the_ID() ); ?><br/>
 					<?php echo ( get_field('location_address_2' ) ? get_field('location_address_2') . '<br/>' : ''); ?>
