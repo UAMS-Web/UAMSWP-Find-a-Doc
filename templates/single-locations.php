@@ -275,9 +275,9 @@ while ( have_posts() ) : the_post(); ?>
 					<?php if ( $location_images_count == 1 ) { ?>
 						<picture>
 							<?php if ( function_exists( 'fly_add_image_size' ) && !empty($location_images[0]) ) { ?>
-								<source srcset="<?php echo image_sizer($location_images[0], 640, 480, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images[0], 1280, 960, 'center', 'center'); ?> 2x"
+								<source srcset="<?php echo image_sizer($location_images[0], 630, 473, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images[0], 1260, 946, 'center', 'center'); ?> 2x"
 									media="(min-width: 1350px)">
-								<source srcset="<?php echo image_sizer($location_images[0], 392, 294, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images[0], 784, 588, 'center', 'center'); ?> 2x"
+								<source srcset="<?php echo image_sizer($location_images[0], 572, 429, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images[0], 1144, 858, 'center', 'center'); ?> 2x"
 									media="(min-width: 992px)">
 								<source srcset="<?php echo image_sizer($location_images[0], 992, 558, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images[0], 1984, 1116, 'center', 'center'); ?> 2x"
 									media="(min-width: 768px)">
@@ -285,7 +285,7 @@ while ( have_posts() ) : the_post(); ?>
 									media="(min-width: 576px)">
 								<source srcset="<?php echo image_sizer($location_images[0], 576, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images[0], 1152, 648, 'center', 'center'); ?> 2x"
 									media="(min-width: 1px)">
-								<img src="<?php echo image_sizer($location_images[0], 640, 480, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images[0], '_wp_attachment_image_alt', true ); ?>" />
+								<img src="<?php echo image_sizer($location_images[0], 630, 473, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images[0], '_wp_attachment_image_alt', true ); ?>" />
 							<?php } else {  ?>
 								<img src="<?php wp_get_attachment_image_src($location_images[0], 'large'); ?>" class="single-image">
 							<?php } //endif ?>
@@ -299,9 +299,9 @@ while ( have_posts() ) : the_post(); ?>
 									<div class="carousel-item<?php echo ($location_carousel_slide == 1) ? ' active' : '' ?>">
 										<picture>
 											<?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
-												<source srcset="<?php echo image_sizer($location_images_item, 640, 480, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images_item, 1280, 960, 'center', 'center'); ?> 2x"
+												<source srcset="<?php echo image_sizer($location_images_item, 630, 473, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images_item, 1260, 946, 'center', 'center'); ?> 2x"
 													media="(min-width: 1350px)">
-												<source srcset="<?php echo image_sizer($location_images_item, 392, 294, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images_item, 784, 588, 'center', 'center'); ?> 2x"
+												<source srcset="<?php echo image_sizer($location_images_item, 572, 429, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images_item, 1144, 858, 'center', 'center'); ?> 2x"
 													media="(min-width: 992px)">
 												<source srcset="<?php echo image_sizer($location_images_item, 992, 558, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images_item, 1984, 1116, 'center', 'center'); ?> 2x"
 													media="(min-width: 768px)">
@@ -309,7 +309,7 @@ while ( have_posts() ) : the_post(); ?>
 													media="(min-width: 576px)">
 												<source srcset="<?php echo image_sizer($location_images_item, 576, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images_item, 1152, 648, 'center', 'center'); ?> 2x"
 													media="(min-width: 1px)">
-												<img src="<?php echo image_sizer($location_images_item, 640, 480, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images_item, '_wp_attachment_image_alt', true ); ?>" />
+												<img src="<?php echo image_sizer($location_images_item, 630, 473, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images_item, '_wp_attachment_image_alt', true ); ?>" />
 											<?php } else {  ?>
 												<img src="<?php wp_get_attachment_image_src($location_images_item, 'large'); ?>">
 											<?php } //endif ?>
