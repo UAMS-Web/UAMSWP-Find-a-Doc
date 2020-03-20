@@ -453,3 +453,94 @@ function register_recognition_shortcodes(){
 	add_shortcode('recognition-list', 'provider_recognition_function');
 }
 add_action( 'init', 'register_recognition_shortcodes');
+
+function get_medline_api_data( $code, $type ) {
+	// if ( 'none' == $type ) {
+	// 	 //
+	// }
+	// Build the $id
+	$id = 'medline-api-' . $type . '-' . $code; 
+
+	// Get API data
+	$transient = get_transient( $id );
+
+	if (!empty($transient)) {
+
+		return $transient;
+
+	} else {
+
+		$url = 'https://connect.medlineplus.gov/service?';
+
+		if ('icd' == $type) {
+			$arguments = array(
+				'mainSearchCriteria.v.cs' => '2.16.840.1.113883.6.90',
+				'knowledgeResponseType' => 'application/javascript',
+				'mainSearchCriteria.v.c' => $code
+			);
+		} elseif ('ndc' == $type) {
+			$arguments = array(
+				'mainSearchCriteria.v.cs' => '2.16.840.1.113883.6.69',
+				'knowledgeResponseType' => 'application%2Fjavascript',
+				'mainSearchCriteria.v.c' => $code
+			);
+		} elseif ('lonic' == $type) {
+			$arguments = array(
+				'mainSearchCriteria.v.cs' => '2.16.840.1.113883.6.1',
+				'knowledgeResponseType' => 'application%2Fjavascript',
+				'mainSearchCriteria.v.c' => $code
+			);
+		}
+
+		$url_parameters = array();
+		foreach ($arguments as $key => $value){
+			$url_parameters[] = $key.'='.$value;
+		}
+		$url = $url.implode('&', $url_parameters);
+
+		// echo $url .'<br/>';
+
+		$response = wp_remote_get( $url );
+
+
+		$response = $response['body'];
+
+		$response = str_replace('None(', '', $response);
+		$response = str_replace('});', '}', $response);
+
+		// var_dump( $response );
+		try {
+ 
+			// Note that we decode the body's response since it's the actual JSON feed
+			$json = json_decode( $response );
+	 
+		} catch ( Exception $ex ) {
+			$json = null;
+		} // end try/catch
+	 
+		set_transient( $id, $json, DAY_IN_SECONDS );
+		
+		return $json;
+
+	}
+}
+function display_medline_api_data( $code, $type ) {
+	// Get data for api
+	$json = get_medline_api_data( $code, $type );
+
+	$entry = $json->feed->entry;
+	//echo (count($entry->title));
+	if (isset($entry->title)) {
+		echo ('<h2>'. $entry->title->_value .'</h2>');
+		echo '<br>';
+		echo ($entry->summary->_value);
+	} else {
+		for($a=0;$a<count($entry);$a++) {
+			if (strpos($entry[$a]->link->href, 'medlineplus.gov') !== false) {
+				echo ('<h2>'. $entry[$a]->title->_value .'</h2>');
+				echo '<br>';
+				echo ($entry[$a]->summary->_value);
+			}
+		}
+	}
+}

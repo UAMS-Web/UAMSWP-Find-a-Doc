@@ -12,8 +12,12 @@
 	$expertise = get_field('condition_expertise', $term);
 	$locations = get_field('condition_locations', $term);
 	$physicians = get_field('condition_physicians', $term);
+	$medline_type = get_field('condition_medline_code_type', $term);
+	$medline_code = get_field('condition_medline_code_id', $term);
+	$embed_code = get_field('condition_embed_codes', $term);
 
 	function uamswp_keyword_hook_header() {
+		global $keywords;
 		$keyword_text = '';
 		if( $keywords ): 
 			$i = 1;
@@ -140,6 +144,16 @@
 					endif;
 				?>
 				<?php echo ( $content ? ''. $content . '' : '' ); ?>
+				<?php 
+					if ( $medline_type && 'none' != $medline_type && $medline_code ) {
+						echo display_medline_api_data( trim($medline_code), $medline_type );
+					}
+				?>
+				<?php 
+					if ( $embed_code ) {
+						echo $embed_code;
+					}
+				?>
 				<?php if( $video ) { ?>
 					<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
 					<?php echo wp_oembed_get( $video ); ?>
@@ -192,53 +206,55 @@
 		</section>
 		<?php } // endif ?>
 		<?php // Check if any doctors are connected	
-			$physiciansCount = count($physicians);
-			$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12)
-			$postsCutoff = 18; // Set cutoff value
-			$postsCountClass = $postsPerPage;
-			if($physiciansCount <= $postsCutoff ) {
-					$postsPerPage = -1;
-				}
-			$args = (array(
-				'post_type' => "provider",
-				"post_status" => "publish",
-				'order' => 'ASC',
-				'orderby' => 'title',
-				'posts_per_page' => $postsPerPage,
-				'post__in'	=> $physicians
-			));
-			$physicians_query = new WP_Query( $args );
+			if ($physicians) {
+				$physiciansCount = count($physicians);
+				$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12)
+				$postsCutoff = 18; // Set cutoff value
+				$postsCountClass = $postsPerPage;
+				if($physiciansCount <= $postsCutoff ) {
+						$postsPerPage = -1;
+					}
+				$args = (array(
+					'post_type' => "provider",
+					"post_status" => "publish",
+					'order' => 'ASC',
+					'orderby' => 'title',
+					'posts_per_page' => $postsPerPage,
+					'post__in'	=> $physicians
+				));
+				$physicians_query = new WP_Query( $args );
 
-			if( $physicians && $physicians_query->have_posts() ) {
-			?>
-				<section class="uams-module bg-auto" id="doctors">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-12">
-								<h2 class="module-title">Providers Treating <?php echo single_cat_title( '', false ); ?></h2>
-								<p class="note">Note that every treatment or procedure listed above may not be provided by each provider listed below. Review each provider for availability.</p>
-								<div class="card-list-container">
-									<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
-										<?php
-											while ($physicians_query->have_posts()) : $physicians_query->the_post();
-												$id = get_the_ID();
-												include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
-											endwhile;
-											wp_reset_postdata();
-										?>
+				if( $physicians && $physicians_query->have_posts() ) {
+				?>
+					<section class="uams-module bg-auto" id="doctors">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-12">
+									<h2 class="module-title">Providers Treating <?php echo single_cat_title( '', false ); ?></h2>
+									<p class="note">Note that every treatment or procedure listed above may not be provided by each provider listed below. Review each provider for availability.</p>
+									<div class="card-list-container">
+										<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
+											<?php
+												while ($physicians_query->have_posts()) : $physicians_query->the_post();
+													$id = get_the_ID();
+													include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+												endwhile;
+												wp_reset_postdata();
+											?>
+										</div>
 									</div>
+									<?php if ($postsPerPage !== -1) { ?>
+									<div class="more">
+										<button class="loadmore btn btn-primary" data-type="taxonomy" data-tax="condition" data-slug="<?php echo $term->slug; ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physiciansCount; ?>" aria-label="Load more providers">Load More</button>
+									</div>
+									<?php } ?>
 								</div>
-								<?php if ($postsPerPage !== -1) { ?>
-								<div class="more">
-									<button class="loadmore btn btn-primary" data-type="taxonomy" data-tax="condition" data-slug="<?php echo $term->slug; ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physiciansCount; ?>" aria-label="Load more providers">Load More</button>
-								</div>
-								<?php } ?>
 							</div>
 						</div>
-					</div>
-				</section>
-			<?php
-			} // $physicians_query loop
+					</section>
+				<?php
+				} // $physicians_query loop
+			}
 		
 			// Location Section
 			if (!empty($location_content)) {
