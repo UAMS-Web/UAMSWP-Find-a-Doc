@@ -36,7 +36,7 @@ if ($wayfinding_photo || $photo_gallery_images) {
 $single_photo = '';
 $g = 1;
 if ( $photo_count ) {
-	if ( $wayfinding_photo ) {
+	if ( !empty($wayfinding_photo) ) {
 		$single_photo = $wayfinding_photo;
 	} else {
 		foreach( $photo_gallery_images as $photo_gallery_image ) {
