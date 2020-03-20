@@ -35,11 +35,13 @@ if ($wayfinding_photo || $photo_gallery) {
 
 // Get the value of the photo from either image input if only one photo is set
 $single_photo = '';
-$g = 1;
 if ( $photo_count == 1) {
 	if ( !empty($wayfinding_photo) ) {
 		$single_photo = $wayfinding_photo;
-	} else {
+	} elseif ( !empty($photo_gallery) ) {
+		$single_photo = $photo_gallery[0];
+	}
+}
 		foreach( $photo_gallery as $photo_gallery_image ) {
 			if ( 2 > $g ){
 				$single_photo = $photo_gallery_image;
