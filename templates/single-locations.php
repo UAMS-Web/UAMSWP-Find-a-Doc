@@ -42,14 +42,6 @@ if ( $photo_count == 1) {
 		$single_photo = $photo_gallery[0];
 	}
 }
-		foreach( $photo_gallery as $photo_gallery_image ) {
-			if ( 2 > $g ){
-				$single_photo = $photo_gallery_image;
-				$g++;
-			}
-		} // endforeach
-	}
-}
 
 // Set image for schema
 if ( function_exists( 'fly_add_image_size' ) && !empty($featured_image) ) {
