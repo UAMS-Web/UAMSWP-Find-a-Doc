@@ -12,8 +12,8 @@
 	$expertise = get_field('treatment_procedure_expertise', $term);
 	$locations = get_field('treatment_procedure_locations', $term);
 	$physicians = get_field('treatment_procedure_physicians', $term);
-	$medline_type = get_field('treatment_procedure_medline_code_type', $term);
-	$medline_code = get_field('treatment_procedure_medline_code_id', $term);
+	$medline_type = get_field('medline_code_type', $term);
+	$medline_code = get_field('medline_code_id', $term);
 	$embed_code = get_field('treatment_procedure_embed_codes', $term);
 
 	function uamswp_keyword_hook_header() {
