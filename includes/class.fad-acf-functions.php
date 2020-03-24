@@ -147,6 +147,29 @@ function update_facetwp_index( $post_id ) {
         FWP()->indexer->index( $post_id );
     }
 }
+
+add_action('acf/save_post', 'location_save_post', 7); 
+function location_save_post( $post_id ) {
+
+  // Bail early if no data sent.
+  if( empty($_POST['acf']) ) {
+    return;
+  }
+
+  // Create full name to store in 'physician_full_name' field
+  $featured_image = $_POST['acf']['field_location_featured_image'];
+  $wayfinding_image = $_POST['acf']['field_location_wayfinding_photo'];
+
+  // If featured image is set & wayfinding is empty, set wayfinding image to featured image
+  if ($featured_image && empty($wayfinding_image)) {
+  	$_POST['acf']['field_location_wayfinding_photo'] = $featured_image;
+  }
+  // If wayfinding image is set & featured image is empty, set featured image to wayfinding image
+  if (empty($featured_image) && $wayfinding_image) {
+	$_POST['acf']['field_location_featured_image'] = $wayfinding_image;
+  }
+
+}
 // Bidrectional for posts/cpts. 
 // Field name _MUST_ be the same for each field.
 // Keys must different
