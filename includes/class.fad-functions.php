@@ -531,18 +531,32 @@ function display_medline_api_data( $code, $type ) {
 	// Get data for api
 	$json = get_medline_api_data( $code, $type );
 
-	$entry = $json->feed->entry;
+	$feed = $json->feed;
+	$entry = $feed->entry;
 	//echo (count($entry->title));
 	if (isset($entry->title)) {
-		echo ('<h2>'. $entry->title->_value .'</h2>');
-		echo '<br>';
-		echo ($entry->summary->_value);
+		// echo ('<h2>'. $entry->title->_value .'</h2>');
+		// echo '<br>';
+		echo '<p>'. ($entry->summary->_value) .'</p>';
+		echo '<div class="cite">';
+		echo '<p><em>Courtesy of <a href="https://medlineplus.gov/">MedlinePlus</a> from the <a href="https://www.nlm.nih.gov/">National Library of Medicine</a>.</em></p>';
+		echo '<p><strong>Syndicated Content Details:</strong><br />';
+		echo 'Source URL: <a href="'. $entry->link->href .'">'. $entry->link->href .'</a><br />';
+		echo 'Source Agency: <a href="https://www.nlm.nih.gov/">National Library of Medicine</a></p>';
+		echo '</div>';
 	} else {
 		for($a=0;$a<count($entry);$a++) {
 			if (strpos($entry[$a]->link->href, 'medlineplus.gov') !== false) {
-				echo ('<h2>'. $entry[$a]->title->_value .'</h2>');
-				echo '<br>';
-				echo ($entry[$a]->summary->_value);
+				if ($a != 0) {
+					echo ('<h2>'. $entry[$a]->title->_value .'</h2>'); // Add heading if there is more than one
+				}
+				echo '<p>'. ($entry[$a]->summary->_value) .'</p>';
+				echo '<div class="cite">';
+				echo '<p><em>Courtesy of <a href="https://medlineplus.gov/">MedlinePlus</a> from the <a href="https://www.nlm.nih.gov/">National Library of Medicine</a>.</em></p>';
+				echo '<p><strong>Syndicated Content Details:</strong><br />';
+				echo 'Source URL: <a href="'. $entry[$a]->link->href .'">'. $entry[$a]->link->href .'</a><br />';
+				echo 'Source Agency: <a href="https://www.nlm.nih.gov/">National Library of Medicine</a></p>';
+				echo '</div>';
 			}
 		}
 	}
