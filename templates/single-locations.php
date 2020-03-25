@@ -292,17 +292,6 @@ while ( have_posts() ) : the_post(); ?>
 						</picture>
 					<?php } else { ?>
 						<div class="carousel slide carousel-thumbnails" id="location-info-carousel">
-							<ol class="carousel-indicators">
-								<?php for ($i = 0; $i < $location_images_count; $i++) { ?>
-									<li data-target="#location-info-carousel" data-slide-to="<?php echo $i; ?>" <?php echo (0 == $i ? 'class="active"' : ''); ?>>
-										<?php if ( function_exists( 'fly_add_image_size' )) { ?>
-											<img src="<?php echo image_sizer($location_images[$i], 60, 45, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images[$i], '_wp_attachment_image_alt', true ); ?>" />
-										<?php } else {  ?>
-											<img src="<?php echo wp_get_attachment_image_url($location_images[$i], 'small'); ?>" alt="<?php echo get_post_meta( $location_images[$i], '_wp_attachment_image_alt', true ); ?>">
-										<?php } //endif ?>
-									</li>
-								<?php } ?>
-							</ol>
 							<div class="carousel-inner">
 								<?php 
 								$location_carousel_slide = 1;
@@ -338,6 +327,17 @@ while ( have_posts() ) : the_post(); ?>
 								<span class="carousel-control-next-icon" aria-hidden="true"></span>
 								<span class="sr-only">Next</span>
 							</a>
+							<ol class="carousel-indicators">
+								<?php for ($i = 0; $i < $location_images_count; $i++) { ?>
+									<li data-target="#location-info-carousel" data-slide-to="<?php echo $i; ?>" <?php echo (0 == $i ? 'class="active"' : ''); ?>>
+										<?php if ( function_exists( 'fly_add_image_size' )) { ?>
+											<img src="<?php echo image_sizer($location_images[$i], 60, 45, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images[$i], '_wp_attachment_image_alt', true ); ?>" />
+										<?php } else {  ?>
+											<img src="<?php echo wp_get_attachment_image_url($location_images[$i], 'small'); ?>" alt="<?php echo get_post_meta( $location_images[$i], '_wp_attachment_image_alt', true ); ?>">
+										<?php } //endif ?>
+									</li>
+								<?php } ?>
+							</ol>
 						</div>
 					<?php } //endif ?>
 				</div>
