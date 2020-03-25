@@ -892,7 +892,15 @@
             "label": "Portal",
             "instructions": "",
             "required": 1,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_clinical_tab",
+                        "operator": "==",
+                        "value": "false"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
