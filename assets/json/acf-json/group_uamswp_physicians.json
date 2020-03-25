@@ -1080,7 +1080,7 @@
                     "name": "academic_title",
                     "type": "text",
                     "instructions": "Deprecated - Moving to select. Please update.",
-                    "required": 1,
+                    "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
