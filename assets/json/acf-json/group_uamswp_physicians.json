@@ -1386,7 +1386,7 @@
             "button_label": "",
             "sub_fields": [
                 {
-                    "key": "field_5d409a9e05577",
+                    "key": "field_physician_appointment_education_type",
                     "label": "Education Type",
                     "name": "education_type",
                     "type": "taxonomy",
