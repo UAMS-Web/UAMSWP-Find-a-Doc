@@ -36,7 +36,11 @@
 	function uamswp_fad_title($html) { 
 		// global $condition_title;
 		//you can add here all your conditions as if is_page(), is_category() etc.. 
-		$html = single_cat_title( '', false ) . ' | ' . get_bloginfo( "name" );
+		if ( strlen(single_cat_title( '', false )) < 34 ) {
+			$html = single_cat_title( '', false ) . ' | Conditions | ' . get_bloginfo( "name" );
+		} else {
+			$html = single_cat_title( '', false ) . ' | ' . get_bloginfo( "name" );
+		}
 		return $html;
 	}
 	add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
