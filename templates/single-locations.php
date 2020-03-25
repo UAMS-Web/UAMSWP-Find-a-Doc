@@ -291,7 +291,7 @@ while ( have_posts() ) : the_post(); ?>
 							<?php } //endif ?>
 						</picture>
 					<?php } else { ?>
-						<div class="carousel slide carousel-thumbnails" id="location-info-carousel" data-keyboard="true">
+						<div class="carousel slide carousel-thumbnails" id="location-info-carousel" data-keyboard="true" data-interval="false" data-ride="carousel">
 							<div class="carousel-inner">
 								<?php 
 								$location_carousel_slide = 1;
