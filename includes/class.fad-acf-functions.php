@@ -131,13 +131,14 @@ function physician_save_post( $post_id ) {
   if ( $locations ) {
 	foreach( $locations as $location ):
 		$region = get_field( 'location_region', $location);
-
+		$portal = get_field( 'location_portal', $location);
 		// break loop after first iteration = primary location
     	break; 
 	endforeach;
   }
 
   $_POST['acf']['field_physician_region'] = $region;
+  $_POST['acf']['field_physician_portal'] = $portal;
 
 }
 
