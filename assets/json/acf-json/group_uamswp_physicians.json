@@ -1076,10 +1076,10 @@
             "sub_fields": [
                 {
                     "key": "field_physician_appointment_title",
-                    "label": "Academic Title",
+                    "label": "Academic Title (Original)",
                     "name": "academic_title",
                     "type": "text",
-                    "instructions": "Professor, Associate Professor, Assistant Professor, etc.",
+                    "instructions": "Deprecated - Moving to select. Please update.",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -1092,6 +1092,31 @@
                     "prepend": "",
                     "append": "",
                     "maxlength": ""
+                },
+                {
+                    "key": "field_physician_appointment_title_tax",
+                    "label": "Academic Title",
+                    "name": "academic_title_tax",
+                    "type": "taxonomy",
+                    "instructions": "Professor, Associate Professor, Assistant Professor, etc.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "academic_title",
+                    "field_type": "select",
+                    "add_term": 0,
+                    "save_terms": 1,
+                    "load_terms": 1,
+                    "return_format": "id",
+                    "acfe_bidirectional": {
+                        "acfe_bidirectional_enabled": "0"
+                    },
+                    "multiple": 0,
+                    "allow_null": 0
                 },
                 {
                     "key": "field_5d4099f605575",
@@ -1108,7 +1133,7 @@
                     },
                     "taxonomy": "academic_department",
                     "field_type": "select",
-                    "add_term": 1,
+                    "add_term": 0,
                     "save_terms": 0,
                     "load_terms": 0,
                     "return_format": "id",
