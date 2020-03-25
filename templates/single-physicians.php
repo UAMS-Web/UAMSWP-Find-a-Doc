@@ -617,8 +617,8 @@ while ( have_posts() ) : the_post();
                                     <?php while( have_rows('physician_academic_appointment') ): the_row(); ?>
                                     <?php 
                                         $department = get_term( get_sub_field('department'), 'academic_department' ); 
-                                        if ($academic_title_tax) {
                                         $academic_title_tax = get_term( get_sub_field('academic_title_tax'), 'academic_title' );
+                                        if ($academic_title_tax->name) {
                                             $academic_title = $academic_title_tax->name;
                                         } else {
                                             $academic_title = get_sub_field('academic_title');
