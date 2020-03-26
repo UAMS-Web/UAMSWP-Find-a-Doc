@@ -17,7 +17,7 @@ if ( have_posts() ) :
 $id = get_the_ID();
 // include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
 echo '<tr>';
-echo '<th scope="row">'. get_the_title() .'</th>';
+echo '<th scope="row"><a href="' . get_permalink() . '">'. get_the_title() .'</a></th>';
 if (get_field('location_phone', $id)) { ?>
     <td>
         <a href="tel:<?php echo format_phone_dash( get_field('location_phone', $id) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone', $id) ); ?></a>
