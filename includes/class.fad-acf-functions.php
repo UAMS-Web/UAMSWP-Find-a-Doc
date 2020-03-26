@@ -693,7 +693,8 @@ function fad_facetwp_blocks_callback( $block, $content = '', $is_preview = false
     $background_color = get_field('facetwp_block_background_color') ?: 'bg-white';
 
     ?>
-	<section class="uams-module container-fluid p-8 p-sm-10 <?php echo $className; ?> <?php echo $background_color; ?>">
+	<section class="uams-module <?php echo $className; ?> <?php echo $background_color; ?>">
+		<div class="container-fluid">
 		<div class="row">
 			<div class="col-12">
 				<h2 class="module-title<?php echo ('1' == $hideheading ? ' sr-only': ''); ?>" ><?php echo $heading; ?></h2>
@@ -715,6 +716,7 @@ function fad_facetwp_blocks_callback( $block, $content = '', $is_preview = false
 					?>
 				</div>
 			</div>
+		</div>
 		</div>
 	</section>
     <?php
