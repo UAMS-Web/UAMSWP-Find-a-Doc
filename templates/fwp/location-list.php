@@ -2,7 +2,7 @@
 if ( have_posts() ) { 
     // Generate a table
     ?>
-    <table class="table table-striped">
+    <table class="table table-striped bg-white">
         <thead>
             <tr>
                 <th scope="col">Location Name</th>
