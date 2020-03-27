@@ -19,13 +19,13 @@ if ( have_posts() ) {
                 ?>
                 <tr>
                     <th scope="row"><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title(); ?></a></th>
-                    <?php if (get_field('location_phone', $id)) { ?>
-                        <td>
+                    <td>
+                        <?php if (get_field('location_phone', $id)) { ?>
                             <a href="tel:<?php echo format_phone_dash( get_field('location_phone', $id) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone', $id) ); ?></a>
-                        </td>
-                    <?php } else { ?>
-                         <td>&nbsp;</td>
-                    <?php } ?>
+                        <?php } else { ?>
+                            &nbsp;
+                        <?php } ?>
+                    </td>
                     <?php if (get_field('location_new_appointments_phone', $id) && get_field('location_clinic_phone_query', $id)) { ?>
                         <td>
                             <dl>
