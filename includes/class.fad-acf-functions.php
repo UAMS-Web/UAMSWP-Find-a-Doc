@@ -714,7 +714,7 @@ function fad_facetwp_blocks_callback( $block, $content = '', $is_preview = false
 								echo '<div class="text-'. $postfacet['alignment'] .'">'. facetwp_display( 'facet', $postfacet['facet_name'] ) .'</div>';
 							}
 						} 
-						echo ($pager ? facetwp_display( 'pager' ) : '';)
+						echo ($pager ? facetwp_display( 'pager' ) : '');
 						?>
 					</div>
 				</div>
