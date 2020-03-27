@@ -16,7 +16,7 @@ add_filter( 'facetwp_shortcode_html', function( $output, $atts) {
         $output = str_replace( 'facetwp-template', 'facetwp-template row list', $output );
 	}
 	 if ( !empty( $atts['template'] ) && 'locations' == $atts['template'] ) {
-        $output = str_replace( 'facetwp-template row', 'facetwp-template row card-list', $output );
+        $output = str_replace( 'facetwp-template', 'facetwp-template card-list', $output );
     }
 	return $output;
 }, 10, 2 );
