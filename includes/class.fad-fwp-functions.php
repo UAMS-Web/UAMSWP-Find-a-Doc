@@ -233,7 +233,7 @@ add_filter( 'facetwp_pager_html', function( $output, $params ) {
 }, 10, 2 );
 
 add_filter( 'facetwp_shortcode_html', function( $output, $atts ) {
-    if ( $atts['template'] == 'locations' ) {
+    if ( 'locations' == $atts['template'] ) {
         $output = str_replace( 'facetwp-template row', 'facetwp-template row card-list', $output );
     }
     return $output;
