@@ -19,15 +19,15 @@ if ( have_posts() ) {
                 ?>
                 <tr>
                     <th scope="row"><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title(); ?></a></th>
-                    <?php if (get_field('location_phone', $id)) { ?>
-                        <td>
+                    <td>
+                        <?php if (get_field('location_phone', $id)) { ?>
                             <a href="tel:<?php echo format_phone_dash( get_field('location_phone', $id) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone', $id) ); ?></a>
-                        </td>
-                    <?php } else { ?>
-                         <td>&nbsp;</td>
-                    <?php } ?>
-                    <?php if (get_field('location_new_appointments_phone', $id) && get_field('location_clinic_phone_query', $id)) { ?>
-                        <td>
+                        <?php } else { ?>
+                            &nbsp;
+                        <?php } ?>
+                    </td>
+                    <td>
+                        <?php if (get_field('location_new_appointments_phone', $id) && get_field('location_clinic_phone_query', $id)) { ?>
                             <dl>
                                 <dt><?php echo get_field('field_location_appointment_phone_query', $id) ? 'New Patients' : 'New and Returning Patients'; ?></dt>
                                 <dd><a href="tel:<?php echo format_phone_dash( get_field('location_new_appointments_phone', $id) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_new_appointments_phone', $id) ); ?></a></dd>
@@ -36,10 +36,15 @@ if ( have_posts() ) {
                                     <dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone', $id) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone', $id) ); ?></a></dd>
                                 <?php } ?>
                             </dl>
-                        </td>
-                    <?php } else { ?>
-                        <td>&nbsp;</td>
-                    <?php } ?>
+                        <?php } elseif (get_field('location_phone', $id)) { ?>
+                            <dl>
+                                <dt>New and Returning Patients</dt>
+                                <dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone', $id) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone', $id) ); ?></a></dd>
+                            </dl>
+                        <?php } else { ?>
+                            &nbsp;
+                        <?php } ?>
+                    </td>
                 </tr>
 
             <?php endwhile; ?>
