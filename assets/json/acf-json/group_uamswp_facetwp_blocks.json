@@ -197,6 +197,26 @@
             ]
         },
         {
+            "key": "field_facetwp_block_include_pager",
+            "label": "Inlude Pager",
+            "name": "facetwp_block_include_pager",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "Include",
+            "ui_off_text": "None"
+        },
+        {
             "key": "field_facetwp_block_background_color",
             "label": "Background Color",
             "name": "facetwp_block_background_color",
