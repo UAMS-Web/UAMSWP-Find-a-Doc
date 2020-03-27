@@ -36,6 +36,11 @@ if ( have_posts() ) {
                                     <dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone', $id) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone', $id) ); ?></a></dd>
                                 <?php } ?>
                             </dl>
+                        <?php } elseif (get_field('location_phone', $id)) { ?>
+                            <dl>
+                                <dt>New and Returning Patients</dt>
+                                <dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone', $id) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone', $id) ); ?></a></dd>
+                            </dl>
                         <?php } else { ?>
                             &nbsp;
                         <?php } ?>
