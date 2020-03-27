@@ -690,6 +690,7 @@ function fad_facetwp_blocks_callback( $block, $content = '', $is_preview = false
 	$prefacets = get_field('facetwp_block_pre_template_facets');
 	$template = get_field('facetwp_block_facet_template');
 	$postfacets = get_field('facetwp_block_post_template_facets');
+	$pager = get_field('facetwp_block_include_pager');
     $background_color = get_field('facetwp_block_background_color') ?: 'bg-white';
 
     ?>
@@ -713,6 +714,7 @@ function fad_facetwp_blocks_callback( $block, $content = '', $is_preview = false
 								echo '<div class="text-'. $postfacet['alignment'] .'">'. facetwp_display( 'facet', $postfacet['facet_name'] ) .'</div>';
 							}
 						} 
+						echo ($pager ? facetwp_display( 'pager' ) : '';)
 						?>
 					</div>
 				</div>
