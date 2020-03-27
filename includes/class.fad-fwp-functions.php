@@ -233,6 +233,13 @@ add_filter( 'facetwp_pager_html', function( $output, $params ) {
 }, 10, 2 );
 
 add_filter( 'facetwp_shortcode_html', function( $output, $atts ) {
+    if ( 'location_list' == $atts['template'] ) {
+        $output = str_replace( 'facetwp-template row list', 'facetwp-template', $output );
+    }
+    return $output;
+}, 10, 2 );
+
+add_filter( 'facetwp_shortcode_html', function( $output, $atts ) {
     if ( 'locations' == $atts['template'] ) {
         $output = str_replace( 'facetwp-template row list', 'facetwp-template card-list', $output );
     }
