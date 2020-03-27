@@ -693,26 +693,28 @@ function fad_facetwp_blocks_callback( $block, $content = '', $is_preview = false
     $background_color = get_field('facetwp_block_background_color') ?: 'bg-white';
 
     ?>
-	<section class="uams-module container-fluid p-8 p-sm-10 <?php echo $className; ?> <?php echo $background_color; ?>">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="module-title<?php echo ('1' == $hideheading ? ' sr-only': ''); ?>" ><?php echo $heading; ?></h2>
-				<div class="">
-					<?php 
-					if ($prefacets) {
-						foreach ($prefacets as $prefacet) {
-							echo '<div class="text-'. $prefacet['alignment'] .'">'. facetwp_display( 'facet', $prefacet['facet_name'] ) .'</div>';
-						}
-					} 
-					?>
-					<?php echo facetwp_display( 'template', $template ); ?>
-					<?php 
-					if ($postfacets) {
-						foreach ($postfacets as $postfacet) {
-							echo '<div class="text-'. $postfacet['alignment'] .'">'. facetwp_display( 'facet', $postfacet['facet_name'] ) .'</div>';
-						}
-					} 
-					?>
+	<section class="uams-module <?php echo $className; ?> <?php echo $background_color; ?>">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<h2 class="module-title<?php echo ('1' == $hideheading ? ' sr-only': ''); ?>" ><?php echo $heading; ?></h2>
+					<div class="">
+						<?php 
+						if ($prefacets) {
+							foreach ($prefacets as $prefacet) {
+								echo '<div class="text-'. $prefacet['alignment'] .'">'. facetwp_display( 'facet', $prefacet['facet_name'] ) .'</div>';
+							}
+						} 
+						?>
+						<?php echo facetwp_display( 'template', $template ); ?>
+						<?php 
+						if ($postfacets) {
+							foreach ($postfacets as $postfacet) {
+								echo '<div class="text-'. $postfacet['alignment'] .'">'. facetwp_display( 'facet', $postfacet['facet_name'] ) .'</div>';
+							}
+						} 
+						?>
+					</div>
 				</div>
 			</div>
 		</div>
