@@ -1540,6 +1540,7 @@ function remove_provider_meta() {
 	remove_meta_box( 'custom-post-type-onomies-locations', 'provider', 'side');
 	// Location
 	remove_meta_box( 'regiondiv', 'location', 'side' );
+	remove_meta_box( 'location_typediv', 'location', 'side' );
 }
 
 add_action( 'admin_menu' , 'remove_provider_meta' );

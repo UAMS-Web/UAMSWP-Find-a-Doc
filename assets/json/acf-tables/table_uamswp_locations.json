@@ -213,6 +213,20 @@
             }
         },
         {
+            "name": "location_wayfinding_photo",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_wayfinding_photo"
+            }
+        },
+        {
+            "name": "location_photo_gallery",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_photo_gallery"
+            }
+        },
+        {
             "name": "location_24_7",
             "format": "%d",
             "map": {

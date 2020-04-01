@@ -11,6 +11,33 @@ if (empty($excerpt)){
     }
 }
 
+$wayfinding_photo = get_field('location_wayfinding_photo');
+$photo_gallery = get_field('location_photo_gallery');
+$location_images = array();
+if ($wayfinding_photo && !empty($wayfinding_photo)) {
+	$location_images[] = $wayfinding_photo;
+}
+if ($photo_gallery && !empty($photo_gallery)) {
+	foreach( $photo_gallery as $photo_gallery_image ) {
+		$location_images[] = $photo_gallery_image;
+	}
+}
+$location_images_count = count($location_images);
+
+// Set image for schema
+$featured_image = get_post_thumbnail_id();
+$schema_image = '';
+if ($featured_image) {
+	$schema_image = $featured_image;
+} elseif ($location_images) {
+	$schema_image = $location_images[0];
+}
+if ( function_exists( 'fly_add_image_size' ) && !empty($schema_image) ) {
+	$locationphoto = image_sizer($schema_image, 640, 480, 'center', 'center');
+} else {
+	$locationphoto = wp_get_attachment_image_src($schema_image, 'large');
+}
+
 $location_alert_title_sys = get_field('location_alert_heading_system', 'option');
 $location_alert_text_sys = get_field('location_alert_body_system', 'option');
 $location_alert_color_sys = get_field('location_alert_color_system', 'option');
@@ -242,29 +269,77 @@ while ( have_posts() ) : the_post(); ?>
 					<?php } endif; ?>
 				</div>
 			</div>
-			<?php if ( has_post_thumbnail() ) { ?>
+			<?php if ( $location_images_count ) { ?>
 			<div class="col-12 col-md image">
 				<div class="content-width">
-				<picture>
-					<?php if ( function_exists( 'fly_add_image_size' ) && !empty(get_post_thumbnail_id()) ) { ?>
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 640, 480, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1280, 960, 'center', 'center'); ?> 2x"
-							media="(min-width: 1350px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 392, 294, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 784, 588, 'center', 'center'); ?> 2x"
-							media="(min-width: 992px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 992, 558, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1984, 1116, 'center', 'center'); ?> 2x"
-							media="(min-width: 768px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 768, 432, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1536, 864, 'center', 'center'); ?> 2x"
-							media="(min-width: 576px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 576, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 1152, 648, 'center', 'center'); ?> 2x"
-							media="(min-width: 1px)">
-						<img src="<?php echo image_sizer(get_post_thumbnail_id(), 640, 480, 'center', 'center'); ?>" alt="<?php the_title(); ?>" />
-					<?php 
-							$locationphoto = image_sizer(get_post_thumbnail_id(), 640, 480, 'center', 'center');
-						  } else { 
-							the_post_thumbnail( 'large',  array( 'itemprop' => 'image' ) );
-							$locationphoto = get_the_post_thumbnail( 'large');
-					 	  } //endif ?>
-				</picture>
+					<?php if ( $location_images_count == 1 ) { ?>
+						<picture>
+							<?php if ( function_exists( 'fly_add_image_size' ) && !empty($location_images[0]) ) { ?>
+								<source srcset="<?php echo image_sizer($location_images[0], 630, 473, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images[0], 1260, 946, 'center', 'center'); ?> 2x"
+									media="(min-width: 1350px)">
+								<source srcset="<?php echo image_sizer($location_images[0], 572, 429, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images[0], 1144, 858, 'center', 'center'); ?> 2x"
+									media="(min-width: 992px)">
+								<source srcset="<?php echo image_sizer($location_images[0], 992, 558, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images[0], 1984, 1116, 'center', 'center'); ?> 2x"
+									media="(min-width: 768px)">
+								<source srcset="<?php echo image_sizer($location_images[0], 768, 432, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images[0], 1536, 864, 'center', 'center'); ?> 2x"
+									media="(min-width: 576px)">
+								<source srcset="<?php echo image_sizer($location_images[0], 576, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images[0], 1152, 648, 'center', 'center'); ?> 2x"
+									media="(min-width: 1px)">
+								<img src="<?php echo image_sizer($location_images[0], 630, 473, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images[0], '_wp_attachment_image_alt', true ); ?>" class="single-image" />
+							<?php } else {  ?>
+								<img src="<?php echo wp_get_attachment_image_url($location_images[0], 'large'); ?>" class="single-image">
+							<?php } //endif ?>
+						</picture>
+					<?php } else { ?>
+						<div class="carousel slide carousel-thumbnails" id="location-info-carousel" data-interval="false" data-ride="carousel">
+							<div class="carousel-inner">
+								<?php 
+								$location_carousel_slide = 1;
+								foreach( $location_images as $location_images_item ) { ?>
+									<div class="carousel-item<?php echo ($location_carousel_slide == 1) ? ' active' : '' ?>">
+										<picture>
+											<?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
+												<source srcset="<?php echo image_sizer($location_images_item, 630, 473, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images_item, 1260, 946, 'center', 'center'); ?> 2x"
+													media="(min-width: 1350px)">
+												<source srcset="<?php echo image_sizer($location_images_item, 572, 429, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images_item, 1144, 858, 'center', 'center'); ?> 2x"
+													media="(min-width: 992px)">
+												<source srcset="<?php echo image_sizer($location_images_item, 992, 558, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images_item, 1984, 1116, 'center', 'center'); ?> 2x"
+													media="(min-width: 768px)">
+												<source srcset="<?php echo image_sizer($location_images_item, 768, 432, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images_item, 1536, 864, 'center', 'center'); ?> 2x"
+													media="(min-width: 576px)">
+												<source srcset="<?php echo image_sizer($location_images_item, 576, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images_item, 1152, 648, 'center', 'center'); ?> 2x"
+													media="(min-width: 1px)">
+												<img src="<?php echo image_sizer($location_images_item, 630, 473, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images_item, '_wp_attachment_image_alt', true ); ?>" />
+											<?php } else {  ?>
+												<img src="<?php echo wp_get_attachment_image_url($location_images_item, 'large'); ?>">
+											<?php } //endif ?>
+										</picture>
+									</div>
+									<?php
+										$location_carousel_slide++;
+									} // endforeach ?>
+							</div>
+							<a class="carousel-control-prev" href="#location-info-carousel" role="button" data-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="sr-only">Previous</span>
+							</a>
+							<a class="carousel-control-next" href="#location-info-carousel" role="button" data-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="sr-only">Next</span>
+							</a>
+							<ol class="carousel-indicators">
+								<?php for ($i = 0; $i < $location_images_count; $i++) { ?>
+									<li data-target="#location-info-carousel" data-slide-to="<?php echo $i; ?>" <?php echo (0 == $i ? 'class="active"' : ''); ?>>
+										<?php if ( function_exists( 'fly_add_image_size' )) { ?>
+											<img src="<?php echo image_sizer($location_images[$i], 60, 45, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images[$i], '_wp_attachment_image_alt', true ); ?>" />
+										<?php } else {  ?>
+											<img src="<?php echo wp_get_attachment_image_url($location_images[$i], 'small'); ?>" alt="<?php echo get_post_meta( $location_images[$i], '_wp_attachment_image_alt', true ); ?>">
+										<?php } //endif ?>
+									</li>
+								<?php } ?>
+							</ol>
+						</div>
+					<?php } //endif ?>
 				</div>
 			</div>
 			<?php } //endif ?>

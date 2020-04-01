@@ -131,13 +131,14 @@ function physician_save_post( $post_id ) {
   if ( $locations ) {
 	foreach( $locations as $location ):
 		$region = get_field( 'location_region', $location);
-
+		$portal = get_field( 'location_portal', $location);
 		// break loop after first iteration = primary location
     	break; 
 	endforeach;
   }
 
   $_POST['acf']['field_physician_region'] = $region;
+  $_POST['acf']['field_physician_portal'] = $portal;
 
 }
 
@@ -146,6 +147,29 @@ function update_facetwp_index( $post_id ) {
     if ( function_exists( 'FWP' ) ) {
         FWP()->indexer->index( $post_id );
     }
+}
+
+add_action('acf/save_post', 'location_save_post', 7); 
+function location_save_post( $post_id ) {
+
+  // Bail early if no data sent.
+  if( empty($_POST['acf']) ) {
+    return;
+  }
+
+  // Create full name to store in 'physician_full_name' field
+  $featured_image = $_POST['acf']['field_location_featured_image'];
+  $wayfinding_image = $_POST['acf']['field_location_wayfinding_photo'];
+
+  // If featured image is set & wayfinding is empty, set wayfinding image to featured image
+  if ($featured_image && empty($wayfinding_image)) {
+  	$_POST['acf']['field_location_wayfinding_photo'] = $featured_image;
+  }
+  // If wayfinding image is set & featured image is empty, set featured image to wayfinding image
+  if (empty($featured_image) && $wayfinding_image) {
+	$_POST['acf']['field_location_featured_image'] = $wayfinding_image;
+  }
+
 }
 // Bidrectional for posts/cpts. 
 // Field name _MUST_ be the same for each field.
@@ -564,6 +588,29 @@ if( function_exists('acf_register_block_type') ):
 			'multiple' => true,
 		),
 	));
+	acf_register_block_type(array(
+		'name' => 'uamswp_fad_facetwp_blocks',
+		'title' => 'FacetWP Block',
+		'description' => '',
+		'category' => 'common',
+		'keywords' => array(
+			0 => 'facetwp',
+			1 => 'shortcode',
+		),
+		'mode' => 'auto',
+		'align' => '',
+		'render_template' => '',
+		'render_callback' => 'fad_facetwp_blocks_callback',
+		'enqueue_style' => '',
+		'enqueue_script' => '',
+		'enqueue_assets' => '',
+		'icon' => 'list-view',
+		'supports' => array(
+			'align' => true,
+			'mode' => true,
+			'multiple' => true,
+		),
+	));
 	
 endif;
 
@@ -605,6 +652,71 @@ function fad_facetwp_cards_callback( $block, $content = '', $is_preview = false,
 				<h2 class="module-title"><?php echo $heading; ?></h2>
 				<div class="card-list-container">
 					<?php echo facetwp_display( 'template', $template ); ?>
+				</div>
+			</div>
+		</div>
+	</section>
+    <?php
+}
+
+/**
+ * FacetWP Cards Block Callback Function.
+ *
+ * @param   array $block The block settings and attributes.
+ * @param   string $content The block inner HTML (empty).
+ * @param   bool $is_preview True during AJAX preview.
+ * @param   (int|string) $post_id The post ID this block is saved to.
+ */
+function fad_facetwp_blocks_callback( $block, $content = '', $is_preview = false, $post_id = 0 ) {
+
+    // Create id attribute allowing for custom "anchor" value.
+    $id = 'facetwp-block-' . $block['id'];
+    if( !empty($block['anchor']) ) {
+        $id = $block['anchor'];
+    }
+
+    // Create class attribute allowing for custom "className" and "align" values.
+    $className = 'facetwp-blocks';
+    if( !empty($block['className']) ) {
+        $className .= ' ' . $block['className'];
+    }
+    if( !empty($block['align']) ) {
+        $className .= ' align' . $block['align'];
+    }
+
+    // Load values and assing defaults.
+	$heading = get_field('facetwp_block_heading') ?: 'Cards List';
+	$hideheading = get_field('facetwp_block_hide_heading');
+	$prefacets = get_field('facetwp_block_pre_template_facets');
+	$template = get_field('facetwp_block_facet_template');
+	$postfacets = get_field('facetwp_block_post_template_facets');
+	$pager = get_field('facetwp_block_include_pager');
+    $background_color = get_field('facetwp_block_background_color') ?: 'bg-white';
+
+    ?>
+	<section class="uams-module <?php echo $className; ?> <?php echo $background_color; ?>">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<h2 class="module-title<?php echo ('1' == $hideheading ? ' sr-only': ''); ?>" ><?php echo $heading; ?></h2>
+					<div class="">
+						<?php 
+						if ($prefacets) {
+							foreach ($prefacets as $prefacet) {
+								echo '<div class="text-'. $prefacet['alignment'] .'">'. facetwp_display( 'facet', $prefacet['facet_name'] ) .'</div>';
+							}
+						} 
+						?>
+						<?php echo facetwp_display( 'template', $template ); ?>
+						<?php 
+						if ($postfacets) {
+							foreach ($postfacets as $postfacet) {
+								echo '<div class="text-'. $postfacet['alignment'] .'">'. facetwp_display( 'facet', $postfacet['facet_name'] ) .'</div>';
+							}
+						} 
+						echo ($pager ? facetwp_display( 'pager' ) : '');
+						?>
+					</div>
 				</div>
 			</div>
 		</div>

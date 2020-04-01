@@ -11,11 +11,14 @@ add_filter( 'facetwp_is_main_query', function( $is_main_query, $query ) {
 }, 10, 2 );
 
 add_filter( 'facetwp_shortcode_html', function( $output, $atts) {
-	if ( $atts['template'] = 'physician' ) { // replace 'example' with name of your template
+	if ( !empty( $atts['template'] ) && 'physician' == $atts['template'] ) { // replace 'example' with name of your template
         /** modify replacement as needed, make sure you keep the facetwp-template class **/
         $output = str_replace( 'facetwp-template', 'facetwp-template row list', $output );
 	}
-	return $output; 
+	 if ( !empty( $atts['template'] ) && 'locations' == $atts['template'] ) {
+        $output = str_replace( 'facetwp-template', 'facetwp-template card-list', $output );
+    }
+	return $output;
 }, 10, 2 );
 
 function fwp_disable_auto_refresh() {
@@ -37,6 +40,8 @@ add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
 
 // FacetWP scripts
 function fwp_facet_scripts() {
+    $classes = get_body_class();
+
 	if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) ) {
     $taxonomy_slug = isset(get_queried_object()->slug) ? get_queried_object()->slug : '';
 ?>
@@ -136,7 +141,7 @@ function fwp_facet_scripts() {
 })(jQuery);
 </script>
 <?php
-	}
+    }
 }
 add_action( 'wp_footer', 'fwp_facet_scripts', 100 );
 
@@ -232,13 +237,6 @@ add_filter( 'facetwp_pager_html', function( $output, $params ) {
     return $output;
 }, 10, 2 );
 
-add_filter( 'facetwp_shortcode_html', function( $output, $atts ) {
-    if ( $atts['template'] = 'locations' ) {
-        $output = str_replace( 'facetwp-template row', 'facetwp-template row card-list', $output );
-    }
-    return $output;
-}, 10, 2 );
-
 // Show only Yes values
 add_filter( 'facetwp_index_row', function( $params, $class ) {
     if ( 'primary_care' == $params['facet_name'] ) {
@@ -252,6 +250,9 @@ add_filter( 'facetwp_index_row', function( $params, $class ) {
 // Turn on FWP Accessibility features
 add_filter( 'facetwp_assets', function( $assets ) {
     $assets['accessibility.js'] = FACETWP_URL . '/assets/js/src/accessibility.js';
+    if ( !is_post_type_archive( 'provider' ) && !is_post_type_archive( 'location' ) ) {
+        $assets['fwp-pager-scroll.js'] = UAMS_FAD_ROOT_URL . 'assets/js/fwp-pager-scroll.js';
+    }
     return $assets;
 });
 

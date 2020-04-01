@@ -107,6 +107,107 @@
             "new_lines": ""
         },
         {
+            "key": "field_medline_code_type",
+            "label": "Code Type for Medline Plus",
+            "name": "medline_code_type",
+            "type": "button_group",
+            "instructions": "Pick which code type to choose",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "choices": {
+                "none": "None",
+                "icd": "ICD-10-CM (Conditions)",
+                "ndc": "NDC (Drug Codes)",
+                "lonic": "LONIC (Lab tests)"
+            },
+            "allow_null": 0,
+            "default_value": "none",
+            "layout": "horizontal",
+            "return_format": "value",
+            "acfe_settings": "",
+            "acfe_validate": "",
+            "acfe_form": true
+        },
+        {
+            "key": "field_medline_code_id",
+            "label": "Medline Code ID #",
+            "name": "medline_code_id",
+            "type": "text",
+            "instructions": "Find Codes: <a href=\"https://icd10cmtool.cdc.gov/\" target=\"_blank\">ICD-10</a> | <a href=\"https://ndclist.com/\" target=\"_blank\">NDC</a> | <a href=\"https://search.loinc.org/searchLOINC/\" target=\"_blank\">LONIC</a>",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_medline_code_type",
+                        "operator": "!=",
+                        "value": "none"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_medline_view_data",
+            "label": "Medline Data Verification",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_medline_code_type",
+                        "operator": "!=",
+                        "value": "none"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "message": "<div id=\"view-button-container\">\r\n<a href=\"#\" class=\"button button-secondary\" id=\"view-medline-data\" target=\"_blank\">View Medline Data<\/a>\r\n<\/div>",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        {
+            "key": "field_treatment_procedure_embed_codes",
+            "name": "treatment_procedure_embed_codes",
+            "type": "textarea",
+            "label": "Embed / Syndication Code",
+            "instructions": "Example: Syndication Code from HHS Syndication Storefront",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 4,
+            "new_lines": ""
+        },
+        {
             "key": "field_treatment_procedure_youtube_link",
             "name": "treatment_procedure_youtube_link",
             "type": "url",

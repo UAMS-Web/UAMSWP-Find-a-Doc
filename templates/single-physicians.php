@@ -296,12 +296,12 @@ while ( have_posts() ) : the_post();
                                         echo '</a>';
                                     echo '</div>';
                                 } else { ?>
-                                    <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0">Why not?</a></em></p>
+                                    <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#">Why not?</a></em></p> 
                                 <?php
                                 }
                             }
                         } else { ?>
-                            <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0">Why not?</a></em></p>
+                            <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#">Why not?</a></em></p>
                     <?php
                         }
                     ?>
@@ -615,9 +615,17 @@ while ( have_posts() ) : the_post();
                                     <h3>Academic Appointments</h3>
                                     <dl>
                                     <?php while( have_rows('physician_academic_appointment') ): the_row(); ?>
-                                    <?php $department = get_term( get_sub_field('department'), 'academic_department' ); ?>
+                                    <?php 
+                                        $department = get_term( get_sub_field('department'), 'academic_department' ); 
+                                        $academic_title_tax = get_term( get_sub_field('academic_title_tax'), 'academic_title' );
+                                        if ($academic_title_tax->name) {
+                                            $academic_title = $academic_title_tax->name;
+                                        } else {
+                                            $academic_title = get_sub_field('academic_title');
+                                        }
+                                    ?>
                                         <dt><?php echo $department->name; ?></dt>
-                                        <dd><?php the_sub_field('academic_title'); ?></dd>
+                                        <dd><?php echo $academic_title; ?></dd>
                                     <?php endwhile; ?>
                                     </dl>
                             <?php endif; ?>
