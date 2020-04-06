@@ -59,10 +59,27 @@ if(empty($location_alert_color) || $location_alert_color == 'inherit') {
 
 $location_closing = get_field('location_closing'); // true or false
 $location_closing_date = get_field('location_closing_date'); // F j, Y
+$location_closing_date_past = false;
+if (new DateTime() >= new DateTime($location_closing_date)) {
+	$location_closing_date_past = true;
+}
 $location_closing_length = get_field('location_closing_length');
 $location_reopen_known = get_field('location_reopen_known');
 $location_reopen_date = get_field('location_reopen_date'); // F j, Y
+$location_reopen_date_past = false;
+if (new DateTime() >= new DateTime($location_reopen_date)) {
+	$location_reopen_date_past = true;
+}
 $location_closing_info = get_field('location_closing_info');
+$location_closing_display = false;
+if (
+	$location_closing && (
+		$location_closing_length == 'permanent'
+		|| ($location_closing_length == 'temporary' && !$location_reopen_date_past)
+		)
+	) {
+	$location_closing_display = true;
+}
 
 function sp_titles_desc($html) {
     global $excerpt;
@@ -90,12 +107,15 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="col-12 col-md text">
 				<div class="content-width">
 					<h1 class="page-title"><?php the_title(); ?></h1>
-					<?php if ($location_closing) { ?>
+					<?php if ($location_closing_display) { ?>
 						<div class="alert alert-warning" role="alert">
-							<?php if (new DateTime() >= new DateTime($location_closing_date)) { ?>
+							<?php if ($location_closing_date_past) { ?>
 								This location is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed.
 							<?php } else { ?>
-								This location will be closing <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> beginning on <?php echo $location_closing_date; ?>.
+								This location will be closing <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>.
+							<?php } // endif
+							if ($location_closing_length == 'temporary' && $location_reopen_known == 'date' && !empty($location_reopen_date)) { ?>
+								It should reopen on <?php echo $location_reopen_date; ?>.
 							<?php } // endif ?>
 							
 							<a href="#" class="alert-link no-break" aria-label="Learn more information about the closure of this location" >Learn more</a>.
@@ -363,7 +383,7 @@ while ( have_posts() ) : the_post(); ?>
 			<?php } //endif ?>
 		</div>
 	</section>
-	<?php if ($location_alert_title || $location_alert_text) { ?>
+	<?php if ($location_alert_title && !$location_closing_date_past || $location_alert_text && !$location_closing_date_past) { ?>
 	<section class="uams-module location-alert location-<?php echo $location_alert_color ? $location_alert_color : 'alert-warning'; ?>">
 		<div class="container-fluid">
 			<div class="row">
@@ -374,8 +394,21 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 		</div>
 	</section>
-	<?php
-	} ?>
+	<?php } // endif
+	if ($location_closing_display && !empty($location_closing_info)) { ?>
+		<section class="uams-module location-alert location-<?php echo $location_alert_color ? $location_alert_color : 'alert-warning'; ?>">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-12">
+						<h2 class="module-title">Closing Information</h2>
+						<div class="module-body">
+							<?php echo $location_closing_info; ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	<?php } // endif ?>
 	<?php if ( get_field('location_about') || get_field('location_affiliation') ) { 
 			$about = get_field('location_about');
 			$affiliation = get_field('location_affiliation');
