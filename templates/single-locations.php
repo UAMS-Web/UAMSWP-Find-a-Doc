@@ -117,7 +117,7 @@ while ( have_posts() ) : the_post(); ?>
 							if ($location_closing_length == 'temporary' && $location_reopen_known == 'date' && !empty($location_reopen_date)) { ?>
 								It should reopen on <?php echo $location_reopen_date; ?>.
 							<?php } // endif ?>
-							<a href="#" class="alert-link no-break" aria-label="Learn more information about the closure of this location" >Learn more</a>.
+							<a href="#closing-info" class="alert-link no-break" aria-label="Learn more information about the closure of this location" >Learn more</a>.
 						</div>
 					<?php } // endif ?>
 					<h2 class="sr-only">Address</h2>
@@ -395,7 +395,7 @@ while ( have_posts() ) : the_post(); ?>
 	</section>
 	<?php } // endif
 	if ($location_closing_display && !empty($location_closing_info)) { ?>
-		<section class="uams-module location-alert location-<?php echo $location_alert_color ? $location_alert_color : 'alert-warning'; ?>">
+		<section class="uams-module location-alert location-<?php echo $location_alert_color ? $location_alert_color : 'alert-warning'; ?>" id="closing-info">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
