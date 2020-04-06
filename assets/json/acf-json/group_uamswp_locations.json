@@ -1714,6 +1714,184 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        "field_location_closing_tab": {
+            "key": "field_location_closing_tab",
+            "name": "",
+            "type": "tab",
+            "label": "<i class=\"dashicons-dismiss dashicons\"><\/i> Closing",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        "field_location_closing": {
+			"key": "field_location_closing",
+			"label": "Is this location closing?",
+			"name": "location_closing",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+            },
+			"acfe_permissions": "",
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		"field_location_closing_date": {
+			"key": "field_location_closing_date",
+			"label": "Closing Date",
+			"name": "location_closing_date",
+			"type": "date_picker",
+			"instructions": "",
+			"required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_closing",
+						"operator": "==",
+						"value": "1"
+                    }
+                ]
+            ],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+            },
+			"acfe_permissions": "",
+			"display_format": "F j, Y",
+			"return_format": "F j, Y",
+			"first_day": 0
+		},
+		"field_location_closing_length": {
+			"key": "field_location_closing_length",
+			"label": "Temporary or permanent?",
+			"name": "location_closing_length",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_closing",
+						"operator": "==",
+						"value": "1"
+                    }
+                ]
+            ],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+            },
+			"acfe_permissions": "",
+			"choices": {
+				"temporary": "Temporary",
+				"permanent": "Permanent"
+            },
+			"allow_null": 0,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_location_reopen_known": {
+			"key": "field_location_reopen_known",
+			"label": "Reopening date known?",
+			"name": "location_reopen_known",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_closing_length",
+						"operator": "==",
+						"value": "temporary"
+                    }
+                ]
+            ],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+            },
+			"acfe_permissions": "",
+			"choices": {
+				"tbd": "Date TBD",
+				"date": "Select Date"
+            },
+			"allow_null": 0,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_location_reopen_date": {
+			"key": "field_location_reopen_date",
+			"label": "Reopening date",
+			"name": "location_reopen_date",
+			"type": "date_picker",
+			"instructions": "",
+			"required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_reopen_known",
+						"operator": "==",
+						"value": "date"
+                    }
+                ]
+            ],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+            },
+			"acfe_permissions": "",
+			"display_format": "F j, Y",
+			"return_format": "F j, Y",
+			"first_day": 0
+		},
+		"field_location_closing_info": {
+			"key": "field_location_closing_info",
+			"label": "Closure Information",
+			"name": "location_closing_info",
+			"type": "wysiwyg",
+			"instructions": "",
+			"required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_closing",
+						"operator": "==",
+						"value": "1"
+                    }
+                ]
+            ],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+            },
+			"acfe_permissions": "",
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "basic",
+			"media_upload": 0,
+			"delay": 0
         }
     },
     "modified": false

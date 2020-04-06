@@ -20,6 +20,53 @@
         <h3 class="card-title">
             <span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self"><?php echo get_the_title($id); ?></a></span>
         </h3>
+        <?php 
+        $location_closing = get_field('location_closing', $id); // true or false
+        $location_closing_date = get_field('location_closing_date', $id); // F j, Y
+        $location_closing_date_past = false;
+        if (new DateTime() >= new DateTime($location_closing_date)) {
+            $location_closing_date_past = true;
+        }
+        $location_closing_length = get_field('location_closing_length', $id);
+        $location_reopen_known = get_field('location_reopen_known', $id);
+        $location_reopen_date = get_field('location_reopen_date', $id); // F j, Y
+        $location_reopen_date_past = false;
+        if (new DateTime() >= new DateTime($location_reopen_date)) {
+            $location_reopen_date_past = true;
+        }
+        $location_closing_info = get_field('location_closing_info', $id);
+        $location_closing_display = false;
+        if (
+            $location_closing && (
+                $location_closing_length == 'permanent'
+                || ($location_closing_length == 'temporary' && !$location_reopen_date_past)
+                )
+            ) {
+            $location_closing_display = true;
+        }
+        
+        if ($location_closing_display) { ?>
+            <div class="alert alert-warning" role="alert">
+                <?php if ($location_closing_date_past) { ?>
+                    This location is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed.
+                <?php } else { ?>
+                    This location will be closing <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>.
+                <?php } // endif
+                if (
+                    $location_closing_length == 'temporary' 
+                    && $location_reopen_known == 'date' 
+                    && !empty($location_reopen_date)
+                    && (new DateTime($location_reopen_date) >= new DateTime($location_closing_date))
+                ) { ?>
+                    It should reopen on <?php echo $location_reopen_date; ?>.
+                <?php } elseif (
+                    $location_closing_length == 'temporary' 
+                    && $location_reopen_known == 'tbd' 
+                ) { ?>
+                    It will remain closed until further notice.
+                <?php } // endif ?>
+            </div>
+        <?php } // endif ?>
         <?php $map = get_field('location_map', $id); ?>
         <p class="card-text"><?php echo get_field('location_address_1', $id ); ?><br/>
             <?php echo ( get_field('location_address_2', $id ) ? get_field('location_address_2', $id ) . '<br/>' : ''); ?>
