@@ -114,7 +114,12 @@ while ( have_posts() ) : the_post(); ?>
 							<?php } else { ?>
 								This location will be closing <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>.
 							<?php } // endif
-							if ($location_closing_length == 'temporary' && $location_reopen_known == 'date' && !empty($location_reopen_date)) { ?>
+							if (
+								$location_closing_length == 'temporary' 
+								&& $location_reopen_known == 'date' 
+								&& !empty($location_reopen_date)
+								&& (new DateTime($location_reopen_date) >= new DateTime($location_closing_date))
+								) { ?>
 								It should reopen on <?php echo $location_reopen_date; ?>.
 							<?php } // endif ?>
 							<a href="#closing-info" class="alert-link no-break" aria-label="Learn more information about the closure of this location" >Learn more</a>.
