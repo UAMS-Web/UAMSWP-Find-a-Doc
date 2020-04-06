@@ -126,8 +126,10 @@ while ( have_posts() ) : the_post(); ?>
 								&& $location_reopen_known == 'tbd' 
 							) { ?>
 								It will remain closed until further notice.
+							<?php } // endif
+							if (!empty($location_closing_info)) { ?>
+								<a href="#closing-info" class="alert-link no-break" aria-label="Learn more information about the closure of this location">Learn more</a>.
 							<?php } // endif ?>
-							<a href="#closing-info" class="alert-link no-break" aria-label="Learn more information about the closure of this location" >Learn more</a>.
 						</div>
 					<?php } // endif ?>
 					<h2 class="sr-only">Address</h2>
