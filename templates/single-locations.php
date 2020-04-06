@@ -121,6 +121,11 @@ while ( have_posts() ) : the_post(); ?>
 								&& (new DateTime($location_reopen_date) >= new DateTime($location_closing_date))
 								) { ?>
 								It should reopen on <?php echo $location_reopen_date; ?>.
+							<?php } elseif (
+								$location_closing_length == 'temporary' 
+								&& $location_reopen_known == 'tbd' 
+							) { ?>
+								It will remain closed until further notice.
 							<?php } // endif ?>
 							<a href="#closing-info" class="alert-link no-break" aria-label="Learn more information about the closure of this location" >Learn more</a>.
 						</div>
