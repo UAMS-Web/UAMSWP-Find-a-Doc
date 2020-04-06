@@ -160,7 +160,7 @@ while ( have_posts() ) : the_post(); ?>
 						<?php } ?>
 						<?php if (get_field('location_fax')) { ?>
 						<dt>Clinic Fax Number</dt>
-						<dd><?php echo format_phone_us( get_field('location_fax') ); ?></dd>
+						<dd><a href="tel:<?php echo format_phone_dash( get_field('location_fax') ); ?>"><?php echo format_phone_us( get_field('location_fax') ); ?></a></dd>
 						<?php } ?>
 						<?php if ( get_field('field_location_phone_numbers') ) { 
 							$phone_numbers = get_field('field_location_phone_numbers');
