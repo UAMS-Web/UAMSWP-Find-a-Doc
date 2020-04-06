@@ -60,8 +60,6 @@
                 ) { ?>
                     It should reopen on <?php echo $location_reopen_date; ?>.
                 <?php } elseif (
-                    It should reopen on <?php echo $location_reopen_date; ?>.
-                <?php } elseif (
                     $location_closing_length == 'temporary' 
                     && $location_reopen_known == 'tbd' 
                 ) { ?>
