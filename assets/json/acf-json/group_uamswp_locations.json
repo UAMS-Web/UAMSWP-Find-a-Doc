@@ -1734,7 +1734,7 @@
         "field_location_closing": {
 			"key": "field_location_closing",
 			"label": "Is this location closing?",
-			"name": "closing",
+			"name": "location_closing",
 			"type": "true_false",
 			"instructions": "",
 			"required": 0,
@@ -1754,7 +1754,7 @@
 		"field_location_closing_date": {
 			"key": "field_location_closing_date",
 			"label": "Closing Date",
-			"name": "closing_date",
+			"name": "location_closing_date",
 			"type": "date_picker",
 			"instructions": "",
 			"required": 1,
@@ -1780,7 +1780,7 @@
 		"field_location_closing_length": {
 			"key": "field_location_closing_length",
 			"label": "Temporary or permanent?",
-			"name": "temp_perm",
+			"name": "location_closing_length",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -1810,8 +1810,8 @@
 		},
 		"field_location_reopen_known": {
 			"key": "field_location_reopen_known",
-			"label": "Reopening known?",
-			"name": "reopening_date",
+			"label": "Reopening date known?",
+			"name": "location_reopen_known",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -1842,7 +1842,7 @@
 		"field_location_reopen_date": {
 			"key": "field_location_reopen_date",
 			"label": "Reopening date",
-			"name": "reopening_date",
+			"name": "location_reopen_date",
 			"type": "date_picker",
 			"instructions": "",
 			"required": 1,
@@ -1868,7 +1868,7 @@
 		"field_location_closing_info": {
 			"key": "field_location_closing_info",
 			"label": "Closure Information",
-			"name": "closure_information",
+			"name": "location_closing_info",
 			"type": "wysiwyg",
 			"instructions": "",
 			"required": 0,
