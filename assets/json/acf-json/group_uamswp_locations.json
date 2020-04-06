@@ -1805,7 +1805,7 @@
             },
 			"allow_null": 0,
 			"default_value": "",
-			"layout": "vertical",
+			"layout": "horizontal",
 			"return_format": "value"
 		},
 		"field_location_reopen_known": {
