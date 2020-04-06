@@ -395,7 +395,7 @@ while ( have_posts() ) : the_post(); ?>
 	</section>
 	<?php } // endif
 	if ($location_closing_display && !empty($location_closing_info)) { ?>
-		<section class="uams-module location-alert location-<?php echo $location_alert_color ? $location_alert_color : 'alert-warning'; ?>" id="closing-info">
+		<section class="uams-module location-alert location-alert-warning" id="closing-info">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
