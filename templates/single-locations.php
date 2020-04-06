@@ -90,6 +90,17 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="col-12 col-md text">
 				<div class="content-width">
 					<h1 class="page-title"><?php the_title(); ?></h1>
+					<?php if ($location_closing) { ?>
+						<div class="alert alert-warning" role="alert">
+							<?php if (new DateTime() >= new DateTime($location_closing_date)) { ?>
+								This location is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed.
+							<?php } else { ?>
+								This location will be closing <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> beginning on <?php echo $location_closing_date; ?>.
+							<?php } // endif ?>
+							
+							<a href="#" class="alert-link no-break" aria-label="Learn more information about the closure of this location" >Learn more</a>.
+						</div>
+					<?php } // endif ?>
 					<h2 class="sr-only">Address</h2>
 					<p><?php echo get_field('location_address_1', get_the_ID() ); ?><br/>
 					<?php echo ( get_field('location_address_2' ) ? get_field('location_address_2') . '<br/>' : ''); ?>
