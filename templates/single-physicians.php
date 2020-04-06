@@ -794,14 +794,14 @@ while ( have_posts() ) : the_post();
                                                         && $location_reopen_known == 'date' 
                                                         && !empty($location_reopen_date)
                                                         && (new DateTime($location_reopen_date) >= new DateTime($location_closing_date))
-                                                        ) { ?>
+                                                    ) { ?>
                                                         It should reopen on <?php echo $location_reopen_date; ?>.
-                                                        <?php } elseif (
-                                                            $location_closing_length == 'temporary' 
-                                                            && $location_reopen_known == 'tbd' 
-                                                        ) { ?>
-                                                            It will remain closed until further notice.
-                                                        <?php } // endif ?>
+                                                    <?php } elseif (
+                                                        $location_closing_length == 'temporary' 
+                                                        && $location_reopen_known == 'tbd' 
+                                                    ) { ?>
+                                                        It will remain closed until further notice.
+                                                    <?php } // endif ?>
                                                 </div>
                                             <?php } // endif ?>
                                             <p class="card-text"><?php echo get_field('location_address_1', $location ); ?><br/>

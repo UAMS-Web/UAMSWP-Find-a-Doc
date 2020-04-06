@@ -57,7 +57,7 @@
                     && $location_reopen_known == 'date' 
                     && !empty($location_reopen_date)
                     && (new DateTime($location_reopen_date) >= new DateTime($location_closing_date))
-                    ) { ?>
+                ) { ?>
                     It should reopen on <?php echo $location_reopen_date; ?>.
                 <?php } elseif (
                     It should reopen on <?php echo $location_reopen_date; ?>.
