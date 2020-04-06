@@ -57,6 +57,13 @@ if(empty($location_alert_color) || $location_alert_color == 'inherit') {
 	$location_alert_color = $location_alert_color_sys;
 }
 
+$location_closing = get_field('location_closing'); // true or false
+$location_closing_date = get_field('location_closing_date'); // F j, Y
+$location_closing_length = get_field('location_closing_length');
+$location_reopen_known = get_field('location_reopen_known');
+$location_reopen_date = get_field('location_reopen_date'); // F j, Y
+$location_closing_info = get_field('location_closing_info');
+
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
