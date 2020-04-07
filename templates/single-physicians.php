@@ -795,7 +795,7 @@ while ( have_posts() ) : the_post();
                                                         && !empty($location_reopen_date)
                                                         && (new DateTime($location_reopen_date) >= new DateTime($location_closing_date))
                                                     ) { ?>
-                                                        It should reopen on <?php echo $location_reopen_date; ?>.
+                                                        It is scheduled to reopen on <?php echo $location_reopen_date; ?>.
                                                     <?php } elseif (
                                                         $location_closing_length == 'temporary' 
                                                         && $location_reopen_known == 'tbd' 
