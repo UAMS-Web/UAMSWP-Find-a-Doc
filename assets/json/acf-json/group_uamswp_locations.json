@@ -1630,10 +1630,10 @@
         },
         "field_location_alert_suppress": {
             "key": "field_location_alert_suppress",
-            "label": "Suppress alert from Find-a-Doc Settings?",
+            "label": "Suppress alert from Find-a-Doc Settings? (Deprecated)",
             "name": "location_alert_suppress",
             "type": "true_false",
-            "instructions": "",
+            "instructions": "Move this value to the Alert Modification field. This field will be removed soon.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -1647,14 +1647,125 @@
             "ui_on_text": "",
             "ui_off_text": ""
         },
+        "field_location_alert_modification": {
+            "key": "field_location_alert_modification",
+            "label": "Alert Modification",
+            "name": "location_alert_modification",
+            "type": "radio",
+            "instructions": "How do you want to modify the alert from Find-a-Doc Settings?",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "choices": {
+                "nothing": "No modification",
+                "suppress": "Suppress alert",
+                "override": "Override alert",
+                "prepend": "Insert before alert",
+                "append": "Insert after alert"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "nothing",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        "field_location_alert_body_override_tip": {
+            "key": "field_location_alert_body_override_tip",
+            "name": "",
+            "type": "message",
+            "label": "Overriding the alert from Find-a-Doc Settings",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_alert_modification",
+						"operator": "==",
+						"value": "override"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "<p>If you are overriding the system alert, adding values to the Alert Heading or Alert Body fields will replace the value from Find-a-Doc Settings. Leaving them blank will inherit the values from Find-a-Doc Settings.<\/p>",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        "field_location_alert_body_prepend_tip": {
+            "key": "field_location_alert_body_prepend_tip",
+            "name": "",
+            "type": "message",
+            "label": "Inserting an alert before the alert from Find-a-Doc Settings",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_alert_modification",
+						"operator": "==",
+						"value": "prepend"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "<p>If you are inserting content before the system alert, make sure the system alert's body begins with a heading (Heading 2). This way, your alert value here will be separated from the system alert in the heading outline.<\/p>",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        "field_location_alert_body_append_tip": {
+            "key": "field_location_alert_body_append_tip",
+            "name": "",
+            "type": "message",
+            "label": "Inserting an alert after the alert from Find-a-Doc Settings",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_alert_modification",
+						"operator": "==",
+						"value": "append"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "<p>If you are inserting content after the system alert, make sure the your alert's body begins with a heading (Heading 2). This way, your alert value here will be separated from the system alert in the heading outline.<\/p>",
+            "new_lines": "",
+            "esc_html": 0
+        },
         "field_location_alert_heading": {
             "key": "field_location_alert_heading",
             "name": "location_alert_heading",
             "type": "text",
             "label": "Alert Heading",
-            "instructions": "If there is an Alert Heading defined in Find-a-Doc Settings, setting this will override that.<br />If no value is set in either place, the heading will be 'Alert' but will be hidden.",
+            "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_alert_modification",
+						"operator": "==",
+						"value": "override"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -1671,9 +1782,31 @@
             "name": "location_alert_body",
             "type": "wysiwyg",
             "label": "Alert Body",
-            "instructions": "If there is an Alert Body defined in Find-a-Doc Settings, setting this will override that.",
+            "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+						"field": "field_location_alert_modification",
+						"operator": "==",
+						"value": "override"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_location_alert_modification",
+						"operator": "==",
+						"value": "prepend"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_location_alert_modification",
+						"operator": "==",
+						"value": "append"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -1682,7 +1815,7 @@
             "acfe_permissions": "",
             "default_value": "",
             "tabs": "all",
-            "toolbar": "full",
+            "toolbar": "basic",
             "media_upload": 1,
             "delay": 0,
             "acfe_validate": "",
@@ -1693,9 +1826,17 @@
             "name": "location_alert_color",
             "type": "select",
             "label": "Alert Color",
-            "instructions": "If there is an Alert Color defined in Find-a-Doc Settings, setting this will override that.",
+            "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+						"field": "field_location_alert_modification",
+						"operator": "==",
+						"value": "override"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
