@@ -1815,7 +1815,7 @@
             "acfe_permissions": "",
             "default_value": "",
             "tabs": "all",
-            "toolbar": "basic",
+            "toolbar": "full",
             "media_upload": 1,
             "delay": 0,
             "acfe_validate": "",
