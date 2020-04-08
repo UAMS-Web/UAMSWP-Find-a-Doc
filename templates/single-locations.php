@@ -80,27 +80,33 @@ if ( $location_alert_modification == 'suppress' ) {
 }
 
 $location_closing = get_field('location_closing'); // true or false
-$location_closing_date = get_field('location_closing_date'); // F j, Y
+$location_closing_date = '';
 $location_closing_date_past = false;
-if (new DateTime() >= new DateTime($location_closing_date)) {
-	$location_closing_date_past = true;
-}
-$location_closing_length = get_field('location_closing_length');
-$location_reopen_known = get_field('location_reopen_known');
-$location_reopen_date = get_field('location_reopen_date'); // F j, Y
+$location_closing_length = '';
+$location_reopen_known = '';
+$location_reopen_date = '';
 $location_reopen_date_past = false;
-if (new DateTime() >= new DateTime($location_reopen_date)) {
-	$location_reopen_date_past = true;
-}
-$location_closing_info = get_field('location_closing_info');
+$location_closing_info = '';
 $location_closing_display = false;
-if (
-	$location_closing && (
+
+if ( $location_closing ) {
+	$location_closing_date = get_field('location_closing_date'); // F j, Y
+	if (new DateTime() >= new DateTime($location_closing_date)) {
+		$location_closing_date_past = true;
+	}
+	$location_closing_length = get_field('location_closing_length');
+	$location_reopen_known = get_field('location_reopen_known');
+	$location_reopen_date = get_field('location_reopen_date'); // F j, Y
+	if (new DateTime() >= new DateTime($location_reopen_date)) {
+		$location_reopen_date_past = true;
+	}
+	$location_closing_info = get_field('location_closing_info');
+	if (
 		$location_closing_length == 'permanent'
 		|| ($location_closing_length == 'temporary' && !$location_reopen_date_past)
-		)
-	) {
-	$location_closing_display = true;
+		) {
+		$location_closing_display = true;
+	}
 }
 
 function sp_titles_desc($html) {
