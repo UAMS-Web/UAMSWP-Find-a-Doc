@@ -1628,6 +1628,21 @@
             "placement": "top",
             "endpoint": 0
         },
+        "field_location_current_alert": {
+            "key": "field_location_current_alert",
+            "label": "Current Alert",
+            "name": "location_current_alert",
+            "type": "acfe_dynamic_message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": ""
+        },
         "field_location_alert_suppress": {
             "key": "field_location_alert_suppress",
             "label": "Suppress alert from Find-a-Doc Settings? (Deprecated)",
