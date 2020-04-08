@@ -38,47 +38,75 @@ if ( function_exists( 'fly_add_image_size' ) && !empty($schema_image) ) {
 	$locationphoto = wp_get_attachment_image_src($schema_image, 'large');
 }
 
+// Set alert values
+
 $location_alert_title_sys = get_field('location_alert_heading_system', 'option');
 $location_alert_text_sys = get_field('location_alert_body_system', 'option');
 $location_alert_color_sys = get_field('location_alert_color_system', 'option');
 
 $location_alert_suppress = get_field('location_alert_suppress');
-$location_alert_title = get_field('location_alert_heading');
-$location_alert_text = get_field('location_alert_body');
-$location_alert_color = get_field('location_alert_color');
+$location_alert_modification = get_field('location_alert_modification');
 
-if(empty($location_alert_title) && !$location_alert_suppress) {
-	$location_alert_title = $location_alert_title_sys;
+$location_alert_title_local = get_field('location_alert_heading');
+$location_alert_text_local = get_field('location_alert_body');
+$location_alert_color_local = get_field('location_alert_color');
+
+$location_alert_title = $location_alert_title_sys;
+
+if ( !empty($location_alert_title_local) && $location_alert_modification == 'override' ) {
+	$location_alert_title = $location_alert_title_local;
 }
-if(empty($location_alert_text) && !$location_alert_suppress) {
-	$location_alert_text = $location_alert_text_sys;
+
+$location_alert_color = $location_alert_color_sys;
+
+if ( $location_alert_modification == 'override' && $location_alert_color_local != 'inherit' ) {
+	$location_alert_color = $location_alert_color_local;
 }
-if(empty($location_alert_color) || $location_alert_color == 'inherit') {
-	$location_alert_color = $location_alert_color_sys;
+
+$location_alert_text = $location_alert_text_sys;
+
+if ( $location_alert_modification == 'override' && !empty($location_alert_text_local) ) {
+	$location_alert_text = $location_alert_text_local;
+} elseif ( $location_alert_modification == 'prepend' && !empty($location_alert_text_local) ) {
+	$location_alert_text = $location_alert_text_local . $location_alert_text_sys;
+} elseif ( $location_alert_modification == 'append' && !empty($location_alert_text_local) ) {
+	$location_alert_text = $location_alert_text_sys . $location_alert_text_local;
+}
+
+if ( $location_alert_modification == 'suppress' ) {
+	$location_alert_suppress = true;
+	$location_alert_title = '';
+	$location_alert_text = '';
 }
 
 $location_closing = get_field('location_closing'); // true or false
-$location_closing_date = get_field('location_closing_date'); // F j, Y
+$location_closing_date = '';
 $location_closing_date_past = false;
-if (new DateTime() >= new DateTime($location_closing_date)) {
-	$location_closing_date_past = true;
-}
-$location_closing_length = get_field('location_closing_length');
-$location_reopen_known = get_field('location_reopen_known');
-$location_reopen_date = get_field('location_reopen_date'); // F j, Y
+$location_closing_length = '';
+$location_reopen_known = '';
+$location_reopen_date = '';
 $location_reopen_date_past = false;
-if (new DateTime() >= new DateTime($location_reopen_date)) {
-	$location_reopen_date_past = true;
-}
-$location_closing_info = get_field('location_closing_info');
+$location_closing_info = '';
 $location_closing_display = false;
-if (
-	$location_closing && (
+
+if ( $location_closing ) {
+	$location_closing_date = get_field('location_closing_date'); // F j, Y
+	if (new DateTime() >= new DateTime($location_closing_date)) {
+		$location_closing_date_past = true;
+	}
+	$location_closing_length = get_field('location_closing_length');
+	$location_reopen_known = get_field('location_reopen_known');
+	$location_reopen_date = get_field('location_reopen_date'); // F j, Y
+	if (new DateTime() >= new DateTime($location_reopen_date)) {
+		$location_reopen_date_past = true;
+	}
+	$location_closing_info = get_field('location_closing_info');
+	if (
 		$location_closing_length == 'permanent'
 		|| ($location_closing_length == 'temporary' && !$location_reopen_date_past)
-		)
-	) {
-	$location_closing_display = true;
+		) {
+		$location_closing_display = true;
+	}
 }
 
 function sp_titles_desc($html) {
