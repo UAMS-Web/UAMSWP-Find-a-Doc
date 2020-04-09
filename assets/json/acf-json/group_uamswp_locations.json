@@ -1650,7 +1650,15 @@
             "type": "true_false",
             "instructions": "Move this value to the Alert Modification field. This field will be removed soon.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_alert_tab",
+                        "operator": "==",
+                        "value": "false"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
