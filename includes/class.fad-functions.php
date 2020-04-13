@@ -47,7 +47,7 @@ function uamswp_admin_scripts ( $hook ) {
         wp_enqueue_script( 'acf-admin-js', UAMS_FAD_ROOT_URL . 'admin/js/acf-admin.js', array('jquery'), null, true );
         // wp_enqueue_stylesheet( 'plugin-main-style', plugins_url( 'css/plugin-main.css', dirname( __FILE__) ) ); 
 	}
-	if( $hook == 'term.php' ) {
+	if( $hook == 'term.php' || $hook == 'edit-tags.php') {
 		wp_enqueue_script( 'medline-acf-js', UAMS_FAD_ROOT_URL . 'admin/js/acf-medline.js', array('jquery'), null, true );
 	}
 }   

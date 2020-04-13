@@ -1248,6 +1248,314 @@
             "media_upload": 0,
             "delay": 0
         },
+        "field_location_modified_hours": {
+            "key": "field_location_modified_hours",
+            "label": "Upcoming Modified Hours",
+            "name": "location_modified_hours",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_location_modified_hours_group": {
+            "key": "field_location_modified_hours_group",
+            "label": "Modified Hours",
+            "name": "location_modified_hours_group",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_modified_hours",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "acfe_repeater_stylised_button": 0,
+            "collapsed": "field_location_modified_hours_title",
+            "min": 1,
+            "max": 0,
+            "layout": "block",
+            "button_label": "Add Day \/ Time",
+            "sub_fields": [
+                {
+                    "key": "field_location_modified_hours_title",
+                    "label": "Title",
+                    "name": "location_modified_hours_title",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_location_modified_hours_start_date",
+                    "label": "Start Date",
+                    "name": "location_modified_hours_start_date",
+                    "type": "date_picker",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "display_format": "m\/d\/Y",
+                    "return_format": "m\/d\/Y",
+                    "first_day": 0
+                },
+                {
+                    "key": "field_location_modified_hours_end",
+                    "label": "End Date",
+                    "name": "location_modified_hours_end",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "Yes",
+                    "ui_off_text": "None"
+                },
+                {
+                    "key": "field_location_modified_hours_end_date",
+                    "label": "End Date",
+                    "name": "location_modified_hours_end_date",
+                    "type": "date_picker",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_modified_hours_end",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "display_format": "m\/d\/Y",
+                    "return_format": "m\/d\/Y",
+                    "first_day": 0
+                },
+                {
+                    "key": "field_location_modified_hours_information",
+                    "label": "Information",
+                    "name": "location_modified_hours_information",
+                    "type": "wysiwyg",
+                    "instructions": "Reason for modification. It can contain details of the modification.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "100",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 1
+                },
+                {
+                    "key": "field_location_modified_hours_times",
+                    "label": "Hours",
+                    "name": "location_modified_hours_times",
+                    "type": "repeater",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_modified_hours",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "acfe_repeater_stylised_button": 0,
+                    "collapsed": "field_location_modified_hours_day",
+                    "min": 0,
+                    "max": 0,
+                    "layout": "table",
+                    "button_label": "Add Day \/ Time",
+                    "sub_fields": [
+                        {
+                            "key": "field_location_modified_hours_day",
+                            "label": "Day",
+                            "name": "location_modified_hours_day",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "choices": {
+                                "Monday": "Monday",
+                                "Tuesday": "Tuesday",
+                                "Wednesday": "Wednesday",
+                                "Thursday": "Thursday",
+                                "Friday": "Friday",
+                                "Saturday": "Saturday",
+                                "Sunday": "Sunday",
+                                "Mon - Fri": "Mon - Fri"
+                            },
+                            "default_value": [],
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "placeholder": "",
+                            "ajax": 0
+                        },
+                        {
+                            "key": "field_location_modified_hours_closed",
+                            "label": "Closed",
+                            "name": "location_modified_hours_closed",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "message": "",
+                            "default_value": 0,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
+                            "key": "field_location_modified_hours_open",
+                            "label": "Open",
+                            "name": "location_modified_hours_open",
+                            "type": "time_picker",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_location_24_7",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "display_format": "g:i a",
+                            "return_format": "g:i a"
+                        },
+                        {
+                            "key": "field_location_modified_hours_close",
+                            "label": "Close",
+                            "name": "location_modified_hours_close",
+                            "type": "time_picker",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_location_24_7",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "display_format": "g:i a",
+                            "return_format": "g:i a"
+                        },
+                        {
+                            "key": "field_location_modified_hours_comment",
+                            "label": "Comment",
+                            "name": "location_modified_hours_comment",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        }
+                    ]
+                }
+            ]
+        },
         "field_location_holiday_hours": {
             "key": "field_location_holiday_hours",
             "name": "location_holiday_hours",
