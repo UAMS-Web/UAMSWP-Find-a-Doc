@@ -275,79 +275,81 @@ while ( have_posts() ) : the_post(); ?>
 										$active_end = strtotime($modified_end_date);
 									}
 								}
-								foreach ( $modified_times as $modified_time ) {
-									
-									if( $modified_day !== $modified_time['location_modified_hours_day'] || $modified_comment ) {
-										$modified_text .= '<dt>'. $modified_time['location_modified_hours_day'] .'</dt> ';
-										$modified_text .= '<dd>';
-
-										if (1 != $i) {
-											$modified_hours_schema .= '},
-											';
-										}
+								if (is_array($modified_times) || is_object($modified_times)) {
+									foreach ( $modified_times as $modified_time ) {
 										
-										$modified_hours_schema .= '{
-											';
-										$modified_hours_schema .= '"@type": "OpeningHoursSpecification",
-										';
-										$modified_hours_schema .= '"validFrom": "'. date("Y-m-d", strtotime($modified_start)) .'",
-										';
-										$modified_hours_schema .= $modified_end && $modified_end_date ? '"validThrough": "'. date("Y-m-d", strtotime($modified_end_date)) .'",
-											' : '';
-										// if (!$modified_time['location_modified_hours_closed']) {
-										// 	if (1 != $i) {
-										// 		$modified_hours_schema .= ', 
-										// 		';
-										// 	}
-										// 	// $modified_hours_schema .= '';
-										// }
-										if ('Mon - Fri' == $modified_time['location_modified_hours_day'] && !$modified_time['location_modified_hours_closed']) {
-											$modified_hours_schema .= '"dayOfWeek": [
-												"Monday",
-												"Tuesday",
-												"Wednesday",
-												"Thursday",
-												"Friday"
-											  ],
-											';
-										} else {
-											$modified_hours_schema .= '"dayOfWeek": "'. $modified_time['location_modified_hours_day'] .'",
-											'; //substr($modified_time['location_modified_hours_day'], 0, 2);
-										}
+										if( $modified_day !== $modified_time['location_modified_hours_day'] || $modified_comment ) {
+											$modified_text .= '<dt>'. $modified_time['location_modified_hours_day'] .'</dt> ';
+											$modified_text .= '<dd>';
 
-									} else {
-										$modified_text .= ', ';
-									}
-									if ( $modified_time['location_modified_hours_closed'] ) {
-										$modified_text .= 'Closed ';
-										$modified_hours_schema .= '"opens": "00:00",
-										"closes": "00:00"
-										';
-									} else {
-										$modified_text .= ( ( $modified_time['location_modified_hours_open'] && '00:00:00' != $modified_time['location_modified_hours_open'] )  ? '' . apStyleDate( $modified_time['location_modified_hours_open'] ) . ' &ndash; ' . apStyleDate( $modified_time['location_modified_hours_close'] ) . '' : '' );
-										$modified_hours_schema .= '"opens": "' . date('H:i', strtotime($modified_time['location_modified_hours_open'])) . '"';
-										$modified_hours_schema .= ',
-										"closes": "' . date('H:i', strtotime($modified_time['location_modified_hours_close'])) . '"
-										';
-										if ( $modified_time['location_modified_hours_comment'] ) {
-											$modified_text .= ' <br /><span class="subtitle">' .$modified_time['location_modified_hours_comment'] . '</span>';
-											$modified_comment = $modified_time['location_modified_hours_comment'];
+											if (1 != $i) {
+												$modified_hours_schema .= '},
+												';
+											}
+											
+											$modified_hours_schema .= '{
+												';
+											$modified_hours_schema .= '"@type": "OpeningHoursSpecification",
+											';
+											$modified_hours_schema .= '"validFrom": "'. date("Y-m-d", strtotime($modified_start)) .'",
+											';
+											$modified_hours_schema .= $modified_end && $modified_end_date ? '"validThrough": "'. date("Y-m-d", strtotime($modified_end_date)) .'",
+												' : '';
+											// if (!$modified_time['location_modified_hours_closed']) {
+											// 	if (1 != $i) {
+											// 		$modified_hours_schema .= ', 
+											// 		';
+											// 	}
+											// 	// $modified_hours_schema .= '';
+											// }
+											if ('Mon - Fri' == $modified_time['location_modified_hours_day'] && !$modified_time['location_modified_hours_closed']) {
+												$modified_hours_schema .= '"dayOfWeek": [
+													"Monday",
+													"Tuesday",
+													"Wednesday",
+													"Thursday",
+													"Friday"
+												],
+												';
+											} else {
+												$modified_hours_schema .= '"dayOfWeek": "'. $modified_time['location_modified_hours_day'] .'",
+												'; //substr($modified_time['location_modified_hours_day'], 0, 2);
+											}
+
 										} else {
-											$modified_comment = '';
+											$modified_text .= ', ';
 										}
-									}
-									if( $modified_day !== $modified_time['location_modified_hours_day'] || $modified_comment ) {
-										$modified_text .= '</dd>';
-									}
-									$modified_day = $modified_time['location_modified_hours_day']; // Reset the day
-									// if (!$modified_time['location_modified_hours_closed']) {
-									// 	$modified_hours_schema .= '';
-									// }
-									// if (!$modified_time['location_modified_hours_closed']) {
-										$i++;
-									// }
-									
-								} // endforeach
+										if ( $modified_time['location_modified_hours_closed'] ) {
+											$modified_text .= 'Closed ';
+											$modified_hours_schema .= '"opens": "00:00",
+											"closes": "00:00"
+											';
+										} else {
+											$modified_text .= ( ( $modified_time['location_modified_hours_open'] && '00:00:00' != $modified_time['location_modified_hours_open'] )  ? '' . apStyleDate( $modified_time['location_modified_hours_open'] ) . ' &ndash; ' . apStyleDate( $modified_time['location_modified_hours_close'] ) . '' : '' );
+											$modified_hours_schema .= '"opens": "' . date('H:i', strtotime($modified_time['location_modified_hours_open'])) . '"';
+											$modified_hours_schema .= ',
+											"closes": "' . date('H:i', strtotime($modified_time['location_modified_hours_close'])) . '"
+											';
+											if ( $modified_time['location_modified_hours_comment'] ) {
+												$modified_text .= ' <br /><span class="subtitle">' .$modified_time['location_modified_hours_comment'] . '</span>';
+												$modified_comment = $modified_time['location_modified_hours_comment'];
+											} else {
+												$modified_comment = '';
+											}
+										}
+										if( $modified_day !== $modified_time['location_modified_hours_day'] || $modified_comment ) {
+											$modified_text .= '</dd>';
+										}
+										$modified_day = $modified_time['location_modified_hours_day']; // Reset the day
+										// if (!$modified_time['location_modified_hours_closed']) {
+										// 	$modified_hours_schema .= '';
+										// }
+										// if (!$modified_time['location_modified_hours_closed']) {
+											$i++;
+										// }
+										
+									} // endforeach
+								} // End if (array)
 								
 							} // endif
 							
