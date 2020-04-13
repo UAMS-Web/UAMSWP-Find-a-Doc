@@ -735,8 +735,9 @@ function location_current_alert_message(){
 
 		$alert_txt = '<blockquote class="notice notice-warning">';
 		$alert_txt .=  '<h3 class="notice-title">'. $alert_title .'</h3>';
-		$alert_txt .= '<p><strong>Alert color:</strong> '. ucfirst(str_replace( 'alert-', '', $alert_color)) .'</p>';
 		$alert_txt .= $alert_body;
+		$alert_txt .= '<hr />';
+		$alert_txt .= '<p><strong>Alert color:</strong> '. ucfirst(str_replace( 'alert-', '', $alert_color)) .'</p>';
 		$alert_txt .= '</blockquote>';
 
 		echo $alert_txt;
