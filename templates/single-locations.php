@@ -241,8 +241,7 @@ while ( have_posts() ) : the_post(); ?>
 						$modified_text = '';
 						$modified_day = ''; // Previous Day
 						$modified_comment = ''; // Comment on previous day
-						$modified_hours_schema .= '"openingHoursSpecification": [
-							';
+						// $modified_hours_schema .= 
 						$i = 1;
 
 						$today = strtotime("today");
@@ -359,7 +358,8 @@ while ( have_posts() ) : the_post(); ?>
 						
 					endif; // End Modified Hours
 					if ('' != $modified_hours_schema) {
-						$modified_hours_schema .= '}
+						$modified_hours_schema ='"openingHoursSpecification": [
+							' . $modified_hours_schema . '}
 							],
 							';
 					}
