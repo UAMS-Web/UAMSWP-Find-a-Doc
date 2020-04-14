@@ -1557,7 +1557,7 @@
             "min": "",
             "max": "",
             "layout": "table",
-            "button_label": "Add Day",
+            "button_label": "Add Holiday",
             "sub_fields": [
                 {
                     "key": "field_holiday_date",
