@@ -1295,7 +1295,7 @@
             "min": 1,
             "max": 0,
             "layout": "block",
-            "button_label": "Add Day \/ Time",
+            "button_label": "Add Modified Hours Set",
             "sub_fields": [
                 {
                     "key": "field_location_modified_hours_title",
