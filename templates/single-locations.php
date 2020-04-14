@@ -474,10 +474,10 @@ while ( have_posts() ) : the_post(); ?>
 							}
 						endif; ?>
 					<?php if (get_field('location_after_hours') && !get_field('location_24_7')) { ?>
-					<h3>After Hours</h3>
+					<h2>After Hours</h2>
 					<?php echo get_field('location_after_hours'); ?>
 					<?php } elseif (!get_field('location_24_7')) { ?>
-					<h3>After Hours</h3>
+					<h2>After Hours</h2>
 					<p>If you are in need of urgent or emergency care call 911 or go to your nearest emergency department at your local hospital.</p>
 					<?php } endif;
 					} ?>
