@@ -235,19 +235,21 @@ while ( have_posts() ) : the_post(); ?>
 					$modified = get_field('location_modified_hours');
 					$modified_hours = get_field('location_modified_hours_group');
 					$modified_hours_schema ='';
+					$modified_text = '';
+					$active_start = '';
+					$active_end = '';
 					if ($modified && $modified_hours) : 
 					?>
 					<?php 
-						$modified_text = '';
+						
 						$modified_day = ''; // Previous Day
 						$modified_comment = ''; // Comment on previous day
 						// $modified_hours_schema .= 
 						$i = 1;
 
 						$today = strtotime("today");
-							$today_30 = strtotime("+30 days");
-							$active_start = '';
-							$active_end = '';
+						$today_30 = strtotime("+30 days");
+						
 
 						foreach ($modified_hours as $modified_hour) {
 
@@ -363,7 +365,7 @@ while ( have_posts() ) : the_post(); ?>
 							],
 							';
 					}
-					if (($active_start != '' && $active_start < $today) && ( strtotime($active_end) > $today || $active_end == 'TBD' ) ) {
+					if (($active_start != '' && $active_start <= $today) && ( strtotime($active_end) > $today || $active_end == 'TBD' ) ) {
 						// Do Nothing;
 						// Future Option
 					} else {
