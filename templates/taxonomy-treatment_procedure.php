@@ -210,7 +210,10 @@
 			</section>
 		<?php } // endif ?>
 		<?php // Check if any doctors are connected	
-		$physiciansCount = count($physicians);
+		$physiciansCount = 0;
+		if ($physicians) {
+			$physiciansCount = count($physicians);
+		}
 		$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12)
 		$postsCutoff = 18; // Set cutoff value
 		$postsCountClass = $postsPerPage;

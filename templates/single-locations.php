@@ -357,7 +357,7 @@ while ( have_posts() ) : the_post(); ?>
 							
 						}
 					 
-						echo $modified_text ? '<h2>Modified Hours</h2>' . $modified_text : '';
+						echo $modified_text ? '<h2>Modified Hours</h2><dl class="hours">' . $modified_text . '</dl>': '';
 						
 					endif; // End Modified Hours
 					if ('' != $modified_hours_schema) {
