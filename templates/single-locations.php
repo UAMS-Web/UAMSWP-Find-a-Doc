@@ -263,8 +263,9 @@ while ( have_posts() ) : the_post(); ?>
 							if( strtotime($modified_start) <= $today_30 && ( strtotime($modified_end_date) >= $today || !$modified_end ) ){
 								$modified_text .= $modified_title ? '<h3>'.$modified_title.'</h3>' : '';
 								$modified_text .= $modified_info ? $modified_info : '';
-								$modified_text .= 'Starting on ' . date("l, F j, Y", strtotime($modified_start));
-								$modified_text .= $modified_end && $modified_end_date ? '<br/>Ending on ' . date("l, F j, Y", strtotime($modified_end_date)) : '';
+								$modified_text .= '<p class="small font-italic">These modified hours start on ' . date("l, F j, Y", strtotime($modified_start)) . ', ';
+								$modified_text .= $modified_end && $modified_end_date ? 'and are scheduled to end after ' . date("l, F j, Y", strtotime($modified_end_date)) . '.' : 'and will remain in effect until further notice.';
+								$modified_text .= '</p>';
 
 								if ($active_start > strtotime($modified_start) || '' == $active_start) {
 									$active_start = strtotime($modified_start);
@@ -475,10 +476,10 @@ while ( have_posts() ) : the_post(); ?>
 							}
 						endif; ?>
 					<?php if (get_field('location_after_hours') && !get_field('location_24_7')) { ?>
-					<h3>After Hours</h3>
+					<h2>After Hours</h2>
 					<?php echo get_field('location_after_hours'); ?>
 					<?php } elseif (!get_field('location_24_7')) { ?>
-					<h3>After Hours</h3>
+					<h2>After Hours</h2>
 					<p>If you are in need of urgent or emergency care call 911 or go to your nearest emergency department at your local hospital.</p>
 					<?php } endif;
 					} ?>
