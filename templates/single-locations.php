@@ -233,6 +233,10 @@ while ( have_posts() ) : the_post(); ?>
 					$phone_schema .= '],';
 					$hours247 = get_field('location_24_7');
 					$modified = get_field('location_modified_hours');
+					$modified_reason = get_field('location_modified_hours_reason');
+					$modified_start = get_field('location_modified_hours_start_date');
+					$modified_end = get_field('location_modified_hours_end');
+					$modified_end_date = get_field('location_modified_hours_end_date');
 					$modified_hours = get_field('location_modified_hours_group');
 					$modified_hours_schema ='';
 					$modified_text = '';
@@ -249,24 +253,21 @@ while ( have_posts() ) : the_post(); ?>
 
 						$today = strtotime("today");
 						$today_30 = strtotime("+30 days");
-						
 
-						foreach ($modified_hours as $modified_hour) {
+						if( strtotime($modified_start) <= $today_30 && ( strtotime($modified_end_date) >= $today || !$modified_end ) ){
+							$modified_text .= $modified_reason;
+							$modified_text .= '<p class="small font-italic">These modified hours start on ' . date("l, F j, Y", strtotime($modified_start)) . ', ';
+							$modified_text .= $modified_end && $modified_end_date ? 'and are scheduled to end after ' . date("l, F j, Y", strtotime($modified_end_date)) . '.' : 'and will remain in effect until further notice.';
+							$modified_text .= '</p>';
 
-							$modified_title = $modified_hour['location_modified_hours_title'];
-							$modified_start = $modified_hour['location_modified_hours_start_date'];
-							$modified_end = $modified_hour['location_modified_hours_end'];
-							$modified_end_date = $modified_hour['location_modified_hours_end_date'];
-							$modified_info = $modified_hour['location_modified_hours_information'];
-							$modified_times = $modified_hour['location_modified_hours_times'];
-
-							if( strtotime($modified_start) <= $today_30 && ( strtotime($modified_end_date) >= $today || !$modified_end ) ){
+							foreach ($modified_hours as $modified_hour) {
+	
+								$modified_title = $modified_hour['location_modified_hours_title'];
+								$modified_info = $modified_hour['location_modified_hours_information'];
+								$modified_times = $modified_hour['location_modified_hours_times'];
 								$modified_text .= $modified_title ? '<h3>'.$modified_title.'</h3>' : '';
 								$modified_text .= $modified_info ? $modified_info : '';
-								$modified_text .= '<p class="small font-italic">These modified hours start on ' . date("l, F j, Y", strtotime($modified_start)) . ', ';
-								$modified_text .= $modified_end && $modified_end_date ? 'and are scheduled to end after ' . date("l, F j, Y", strtotime($modified_end_date)) . '.' : 'and will remain in effect until further notice.';
-								$modified_text .= '</p>';
-
+	
 								if ($active_start > strtotime($modified_start) || '' == $active_start) {
 									$active_start = strtotime($modified_start);
 								}
@@ -284,7 +285,7 @@ while ( have_posts() ) : the_post(); ?>
 										if( $modified_day !== $modified_time['location_modified_hours_day'] || $modified_comment ) {
 											$modified_text .= '<dt>'. $modified_time['location_modified_hours_day'] .'</dt> ';
 											$modified_text .= '<dd>';
-
+	
 											if (1 != $i) {
 												$modified_hours_schema .= '},
 												';
@@ -318,7 +319,7 @@ while ( have_posts() ) : the_post(); ?>
 												$modified_hours_schema .= '"dayOfWeek": "'. $modified_time['location_modified_hours_day'] .'",
 												'; //substr($modified_time['location_modified_hours_day'], 0, 2);
 											}
-
+	
 										} else {
 											$modified_text .= ', ';
 										}
@@ -355,8 +356,7 @@ while ( have_posts() ) : the_post(); ?>
 									$modified_text .= '</dl>';
 								} // End if (array)
 								
-							} // endif
-							
+							}
 						}
 					 
 						echo $modified_text ? '<h2>Modified Hours</h2>' . $modified_text: '';
