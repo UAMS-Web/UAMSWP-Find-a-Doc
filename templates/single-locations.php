@@ -278,6 +278,7 @@ while ( have_posts() ) : the_post(); ?>
 									}
 								}
 								if (is_array($modified_times) || is_object($modified_times)) {
+									$modified_text .= '<dl class="hours">';
 									foreach ( $modified_times as $modified_time ) {
 										
 										if( $modified_day !== $modified_time['location_modified_hours_day'] || $modified_comment ) {
@@ -351,13 +352,14 @@ while ( have_posts() ) : the_post(); ?>
 										// }
 										
 									} // endforeach
+									$modified_text .= '</dl>';
 								} // End if (array)
 								
 							} // endif
 							
 						}
 					 
-						echo $modified_text ? '<h2>Modified Hours</h2><dl class="hours">' . $modified_text . '</dl>': '';
+						echo $modified_text ? '<h2>Modified Hours</h2>' . $modified_text: '';
 						
 					endif; // End Modified Hours
 					if ('' != $modified_hours_schema) {
