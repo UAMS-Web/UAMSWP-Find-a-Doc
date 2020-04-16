@@ -265,7 +265,7 @@ while ( have_posts() ) : the_post(); ?>
 								$modified_title = $modified_hour['location_modified_hours_title'];
 								$modified_info = $modified_hour['location_modified_hours_information'];
 								$modified_times = $modified_hour['location_modified_hours_times'];
-								$modified_text .= $modified_title ? '<h3>'.$modified_title.'</h3>' : '';
+								$modified_text .= $modified_title ? '<h3 class="h4">'.$modified_title.'</h3>' : '';
 								$modified_text .= $modified_info ? $modified_info : '';
 	
 								if ($active_start > strtotime($modified_start) || '' == $active_start) {
