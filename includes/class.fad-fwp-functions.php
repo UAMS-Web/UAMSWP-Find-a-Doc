@@ -15,7 +15,7 @@ add_filter( 'facetwp_shortcode_html', function( $output, $atts) {
         /** modify replacement as needed, make sure you keep the facetwp-template class **/
         $output = str_replace( 'facetwp-template', 'facetwp-template row list', $output );
 	}
-	 if ( !empty( $atts['template'] ) && 'locations' == $atts['template'] ) {
+	 if ( !empty( $atts['template'] ) && ('locations' == $atts['template'] || 'expertise' == $atts['template']) ) {
         $output = str_replace( 'facetwp-template', 'facetwp-template card-list', $output );
     }
 	return $output;
