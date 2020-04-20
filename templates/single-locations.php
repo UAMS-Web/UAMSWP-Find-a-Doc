@@ -14,9 +14,11 @@ if (empty($excerpt)){
 // Phone values
 
 $location_phone = get_field('location_phone');
+$location_phone_link = '<a href="tel:' . format_phone_dash( $location_phone ) . '" class="icon-phone">' . format_phone_us( $location_phone ) . '</a>';
 $location_clinic_phone_query = get_field('location_clinic_phone_query'); // separate number for (new) appointments?
 if ($location_clinic_phone_query) {
 	$location_new_appointments_phone = get_field('location_new_appointments_phone'); // phone number for (new) appointments
+	$location_new_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_new_appointments_phone ) . '" class="icon-phone">' . format_phone_us( $location_new_appointments_phone ) . '</a>';
 	$location_appointment_phone_query = get_field('field_location_appointment_phone_query'); // separate number for existing appointments?
 } else {
 	$location_new_appointments_phone = '';
@@ -24,6 +26,7 @@ if ($location_clinic_phone_query) {
 }
 if ($location_appointment_phone_query) {
 	$location_return_appointments_phone = get_field('location_return_appointments_phone'); // phone number for existing appointments
+	$location_return_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_return_appointments_phone ) . '" class="icon-phone">' . format_phone_us( $location_return_appointments_phone ) . '</a>';
 } else {
 	$location_return_appointments_phone = '';
 }
