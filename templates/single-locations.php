@@ -11,6 +11,18 @@ if (empty($excerpt)){
     }
 }
 
+// Phone values
+
+$location_phone = get_field('location_phone');
+$location_clinic_phone_query = get_field('location_clinic_phone_query');
+$location_new_appointments_phone = get_field('location_new_appointments_phone');
+$location_appointment_phone_query = get_field('field_location_appointment_phone_query');
+$location_return_appointments_phone = get_field('location_return_appointments_phone');
+$location_fax = get_field('location_fax');
+$location_phone_numbers = get_field('field_location_phone_numbers');
+
+// Image values
+
 $wayfinding_photo = get_field('location_wayfinding_photo');
 $photo_gallery = get_field('location_photo_gallery');
 $location_images = array();
