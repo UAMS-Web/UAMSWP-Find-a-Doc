@@ -17,10 +17,11 @@ $location_phone = get_field('location_phone');
 $location_clinic_phone_query = get_field('location_clinic_phone_query'); // separate number for (new) appointments?
 if ($location_clinic_phone_query) {
 	$location_new_appointments_phone = get_field('location_new_appointments_phone'); // phone number for (new) appointments
+	$location_appointment_phone_query = get_field('field_location_appointment_phone_query'); // separate number for existing appointments?
 } else {
 	$location_new_appointments_phone = '';
+	$location_appointment_phone_query = '0';
 }
-$location_appointment_phone_query = get_field('field_location_appointment_phone_query'); // separate number for existing appointments?
 if ($location_appointment_phone_query) {
 	$location_return_appointments_phone = get_field('location_return_appointments_phone'); // phone number for existing appointments
 } else {
