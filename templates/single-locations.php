@@ -124,6 +124,7 @@ $location_reopen_known = '';
 $location_reopen_date = '';
 $location_reopen_date_past = false;
 $location_closing_info = '';
+$location_closing_telemed = '';
 $location_closing_display = false;
 
 if ( $location_closing ) {
@@ -138,6 +139,9 @@ if ( $location_closing ) {
 		$location_reopen_date_past = true;
 	}
 	$location_closing_info = get_field('location_closing_info');
+	if ($location_closing_length == 'temporary') {
+		$location_closing_telemed = get_field('location_closing_telemed'); // Will telemedicine be available during closure?
+	}
 	if (
 		$location_closing_length == 'permanent'
 		|| ($location_closing_length == 'temporary' && !$location_reopen_date_past)
@@ -174,6 +178,7 @@ while ( have_posts() ) : the_post(); ?>
 					<h1 class="page-title"><?php the_title(); ?></h1>
 					<?php if ($location_closing_display) { ?>
 						<div class="alert alert-warning" role="alert">
+							<p>
 							<?php if ($location_closing_date_past) { ?>
 								This location is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed.
 							<?php } else { ?>
@@ -195,6 +200,10 @@ while ( have_posts() ) : the_post(); ?>
 							if (!empty($location_closing_info)) { ?>
 								<a href="#closing-info" class="alert-link no-break" aria-label="Learn more information about the closure of this location">Learn more</a>.
 							<?php } // endif ?>
+							</p>
+							<?php if ($location_closing_telemed) { ?>
+								<p>Telemedicine will still be available. <a href="#telemedicine-info" class="alert-link no-break" aria-label="Learn more information about telemedicine at this location">Learn more</a>.</p>
+							<?php } ?>
 						</div>
 					<?php } // endif ?>
 					<h2 class="sr-only">Address</h2>
@@ -782,60 +791,72 @@ while ( have_posts() ) : the_post(); ?>
 	<?php endif; ?>
 	<?php // Telemedicine
 		if ($telemed_query) { ?>
-			<section class="uams-module bg-auto" aria-label="Telemedicine Information">
+			<section class="uams-module bg-auto" aria-label="Telemedicine Information" id="telemedicine-info">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
 							<h2 class="module-title">Telemedicine Information</h2>
-							<div class="row content-split-lg">
-								<div class="col-xs-12 col-lg-7">
-									<div class="content-width">
-										<p>Insert generic information about telemedicine here.</p>
-										<p>
-											<?php // Declare which patients can use the service.
-											if ($telemed_patients == 'all') { ?>
-												This service is available to both new and existing patients.
-											<?php } elseif ($telemed_patients == 'new') { ?>
-												This service is available to new patients only.
-											<?php } elseif ($telemed_patients == 'existing') { ?>
-												This service is available to existing patients only.
-											<?php } // endif
+							<?php if ($location_closing_display && !$location_closing_telemed) { ?>
+								<div class="module-body">
+									<p class="text-center"><strong>
+										<?php if ($location_closing_date_past) { ?>
+											Telemedicine is not available while this location is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed.
+										<?php } else { ?>
+											Telemedicine will not be available after this location closes <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>.
+										<?php } // endif ?>
+									</strong></p>
+								</div>
+							<?php } else { ?>
+								<div class="row content-split-lg">
+									<div class="col-xs-12 col-lg-7">
+										<div class="content-width">
+											<p>Insert generic information about telemedicine here.</p>
+											<p>
+												<?php // Declare which patients can use the service.
+												if ($telemed_patients == 'all') { ?>
+													This service is available to both new and existing patients.
+												<?php } elseif ($telemed_patients == 'new') { ?>
+													This service is available to new patients only.
+												<?php } elseif ($telemed_patients == 'existing') { ?>
+													This service is available to existing patients only.
+												<?php } // endif
 
-											// Declare which phone number should be called.
-												
-												if (!$location_clinic_phone_query) { // If there is only one phone number ?>
-													Patients should call <?php echo $location_phone_link; ?> to schedule a telemedicine appointment.
-												<?php } elseif ($location_clinic_phone_query && !$location_appointment_phone_query) { // If there is only one appointment number ?>
-													Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.
-												<?php } else { // If there are two appointment numbers (one for new, one for existing)
-													if ($telemed_patients == 'all') { ?>
-														New patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment, while existing patients should call <?php echo $location_return_appointments_phone_link; ?>.
-													<?php } elseif ($telemed_patients == 'new') { ?>
+												// Declare which phone number should be called.
+													
+													if (!$location_clinic_phone_query) { // If there is only one phone number ?>
+														Patients should call <?php echo $location_phone_link; ?> to schedule a telemedicine appointment.
+													<?php } elseif ($location_clinic_phone_query && !$location_appointment_phone_query) { // If there is only one appointment number ?>
 														Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.
-													<?php } elseif ($telemed_patients == 'existing') { ?>
-														Patients should call <?php echo $location_return_appointments_phone_link; ?> to schedule a telemedicine appointment.
-													<?php }
-												} // endif ?>
-										</p>
+													<?php } else { // If there are two appointment numbers (one for new, one for existing)
+														if ($telemed_patients == 'all') { ?>
+															New patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment, while existing patients should call <?php echo $location_return_appointments_phone_link; ?>.
+														<?php } elseif ($telemed_patients == 'new') { ?>
+															Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.
+														<?php } elseif ($telemed_patients == 'existing') { ?>
+															Patients should call <?php echo $location_return_appointments_phone_link; ?> to schedule a telemedicine appointment.
+														<?php }
+													} // endif ?>
+											</p>
+										</div>
+									</div>
+									<div class="col-xs-12 col-lg-5">
+										<div class="content-width">
+											<h3>Modified Hours</h3>
+											<dl class="hours">
+												<dt>Day</dt>
+												<dd>Time<br />
+												<span class="subtitle">Comment</span></dd>
+											</dl>
+											<h3>Typical Hours</h3>
+											<dl class="hours">
+												<dt>Day</dt>
+												<dd>Time<br />
+												<span class="subtitle">Comment</span></dd>
+											</dl>
+										</div>
 									</div>
 								</div>
-								<div class="col-xs-12 col-lg-5">
-									<div class="content-width">
-										<h3>Modified Hours</h3>
-										<dl class="hours">
-											<dt>Day</dt>
-											<dd>Time<br />
-											<span class="subtitle">Comment</span></dd>
-										</dl>
-										<h3>Typical Hours</h3>
-										<dl class="hours">
-											<dt>Day</dt>
-											<dd>Time<br />
-											<span class="subtitle">Comment</span></dd>
-										</dl>
-									</div>
-								</div>
-							</div>
+							<?php } // endif ?>
 						</div>
 					</div>
 				</div>
