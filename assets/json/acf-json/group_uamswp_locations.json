@@ -3050,7 +3050,40 @@
 			"toolbar": "full",
 			"media_upload": 0,
 			"delay": 0
-        }
+        },
+        "field_location_closing_telemed": {
+			"key": "field_location_closing_telemed",
+			"label": "Will telemedicine still be available?",
+			"name": "location_closing_telemed",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_closing_length",
+						"operator": "==",
+						"value": "temporary"
+                    },
+                    {
+                        "field": "field_location_telemed_query",
+						"operator": "==",
+						"value": "1"
+                    }
+                ]
+            ],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+            },
+			"acfe_permissions": "",
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		}
     },
     "modified": false
 }
