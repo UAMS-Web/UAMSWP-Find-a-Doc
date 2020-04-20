@@ -793,19 +793,30 @@ while ( have_posts() ) : the_post(); ?>
 									<div class="content-width">
 										<p>Insert generic information about telemedicine here.</p>
 										<p>
-											<?php if ($location_telemed_patients == 'all') { ?>
+											<?php // Declare which patients can use the service.
+											if ($location_telemed_patients == 'all') { ?>
 												This service is available to both new and existing patients.
 											<?php } elseif ($location_telemed_patients == 'new') { ?>
 												This service is available to new patients only.
 											<?php } elseif ($location_telemed_patients == 'existing') { ?>
 												This service is available to existing patients only.
 											<?php } // endif
-											if ($location_telemed_patients == 'all' || $location_telemed_patients == 'new') { ?>
-												New patients should call X to schedule a telemedicine appointment.
-											<?php } // endif
-											if ($location_telemed_patients == 'all' || $location_telemed_patients == 'existing') { ?>
-												Existing patients should call X to schedule a telemedicine appointment.
-											<?php } // endif ?>
+
+											// Declare which phone number should be called.
+												
+												if (!$location_clinic_phone_query) { // If there is only one phone number ?>
+													Patients should call <?php echo $location_phone_link; ?> to schedule a telemedicine appointment.
+												<?php } elseif ($location_clinic_phone_query && !$location_appointment_phone_query) { // If there is only one appointment number ?>
+													Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.
+												<?php } else { // If there are two appointment numbers (one for new, one for existing)
+													if ($location_telemed_patients == 'all') { ?>
+														New patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment, while existing patients should call <?php echo $location_return_appointments_phone_link; ?>.
+													<?php } elseif ($location_telemed_patients == 'new') { ?>
+														Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.
+													<?php } elseif ($location_telemed_patients == 'existing') { ?>
+														Patients should call <?php echo $location_return_appointments_phone_link; ?> to schedule a telemedicine appointment.
+													<?php }
+												} // endif ?>
 										</p>
 									</div>
 								</div>
