@@ -2114,13 +2114,48 @@
                     "type": "true_false",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_telemed_hours_24hr",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
                         "id": ""
                     },
                     "message": "Closed",
+                    "default_value": 0,
+                    "ui": 0,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_telemed_hours_24hr",
+                    "label": "Open 24 Hours",
+                    "name": "24hr",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_telemed_hours_closed",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "Open 24 Hours",
                     "default_value": 0,
                     "ui": 0,
                     "ui_on_text": "",
@@ -2137,6 +2172,11 @@
                         [
                             {
                                 "field": "field_telemed_hours_closed",
+                                "operator": "!=",
+                                "value": "1"
+                            },
+                            {
+                                "field": "field_telemed_hours_24hr",
                                 "operator": "!=",
                                 "value": "1"
                             }
@@ -2161,6 +2201,11 @@
                         [
                             {
                                 "field": "field_telemed_hours_closed",
+                                "operator": "!=",
+                                "value": "1"
+                            },
+                            {
+                                "field": "field_telemed_hours_24hr",
                                 "operator": "!=",
                                 "value": "1"
                             }
@@ -2487,7 +2532,15 @@
                             "type": "true_false",
                             "instructions": "",
                             "required": 0,
-                            "conditional_logic": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_location_telemed_modified_hours_24hr",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
                             "wrapper": {
                                 "width": "",
                                 "class": "",
@@ -2499,7 +2552,35 @@
                             "ui": 0,
                             "ui_on_text": "",
                             "ui_off_text": ""
-                        }
+                        },
+                        {
+                            "key": "field_location_telemed_modified_hours_24hr",
+                            "label": "Closed",
+                            "name": "location_telemed_modified_hours_24hr",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_location_telemed_modified_hours_closed",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "message": "",
+                            "default_value": 0,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
                         {
                             "key": "field_location_telemed_modified_hours_open",
                             "label": "Open",
@@ -2511,6 +2592,11 @@
                                 [
                                     {
                                         "field": "field_location_telemed_modified_hours_closed",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    },
+                                    {
+                                        "field": "field_location_telemed_modified_hours_24hr",
                                         "operator": "!=",
                                         "value": "1"
                                     }
@@ -2536,6 +2622,11 @@
                                 [
                                     {
                                         "field": "field_location_telemed_modified_hours_closed",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    },
+                                    {
+                                        "field": "field_location_telemed_modified_hours_24hr",
                                         "operator": "!=",
                                         "value": "1"
                                     }
