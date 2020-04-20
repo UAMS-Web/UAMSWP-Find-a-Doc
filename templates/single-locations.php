@@ -821,7 +821,13 @@ while ( have_posts() ) : the_post(); ?>
 								</div>
 								<div class="col-xs-12 col-lg-5">
 									<div class="content-width">
-										<h3>Hours</h3>
+										<h3>Modified Hours</h3>
+										<dl class="hours">
+											<dt>Day</dt>
+											<dd>Time<br />
+											<span class="subtitle">Comment</span></dd>
+										</dl>
+										<h3>Typical Hours</h3>
 										<dl class="hours">
 											<dt>Day</dt>
 											<dd>Time<br />
