@@ -40,6 +40,19 @@ if ( function_exists( 'fly_add_image_size' ) && !empty($schema_image) ) {
 
 // Set alert values
 
+$location_telemed_query = get_field('field_location_telemed_query'); // Is there telemedicine?
+$location_telemed_patients = get_field('field_location_telemed_patients'); // New patients, existing or both?
+$location_telemed_24_7 = get_field('field_location_telemed_24_7'); // typically 24/7?
+$location_telemed_hours_group = get_field('field_location_telemed_hours_group'); // typical hours repeater
+$location_telemed_modified_hours_query = get_field('field_location_telemed_modified_hours_query'); // Are there modified hours for telemedicine?
+$location_telemed_modified_hours_reason = get_field('field_location_telemed_modified_hours_reason'); // Why are there modified hours for telemedicine?
+$location_telemed_modified_hours_start_date = get_field('field_location_telemed_modified_hours_start_date'); // When do the modified telemedicine hours start?
+$location_telemed_modified_hours_end = get_field('field_location_telemed_modified_hours_end'); // Do we know when the modified telemedicine hours end?
+$location_telemed_modified_hours_end_date = get_field('field_location_telemed_modified_hours_end_date'); // When do the modified telemedicine hours end?
+$location_telemed_modified_hours_group = get_field('field_location_telemed_modified_hours_group'); // modified telemedicine hours repeater
+
+// Set alert values
+
 $location_alert_title_sys = get_field('location_alert_heading_system', 'option');
 $location_alert_text_sys = get_field('location_alert_body_system', 'option');
 $location_alert_color_sys = get_field('location_alert_color_system', 'option');
