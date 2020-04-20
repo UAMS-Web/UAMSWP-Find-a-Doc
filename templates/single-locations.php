@@ -63,18 +63,17 @@ if ( function_exists( 'fly_add_image_size' ) && !empty($schema_image) ) {
 	$locationphoto = wp_get_attachment_image_src($schema_image, 'large');
 }
 
-// Set alert values
+// Set telemedicine values
 
-$location_telemed_query = get_field('field_location_telemed_query'); // Is there telemedicine?
-$location_telemed_patients = get_field('field_location_telemed_patients'); // New patients, existing or both?
-$location_telemed_24_7 = get_field('field_location_telemed_24_7'); // typically 24/7?
-$location_telemed_hours_group = get_field('field_location_telemed_hours_group'); // typical hours repeater
-$location_telemed_modified_hours_query = get_field('field_location_telemed_modified_hours_query'); // Are there modified hours for telemedicine?
-$location_telemed_modified_hours_reason = get_field('field_location_telemed_modified_hours_reason'); // Why are there modified hours for telemedicine?
-$location_telemed_modified_hours_start_date = get_field('field_location_telemed_modified_hours_start_date'); // When do the modified telemedicine hours start?
-$location_telemed_modified_hours_end = get_field('field_location_telemed_modified_hours_end'); // Do we know when the modified telemedicine hours end?
-$location_telemed_modified_hours_end_date = get_field('field_location_telemed_modified_hours_end_date'); // When do the modified telemedicine hours end?
-$location_telemed_modified_hours_group = get_field('field_location_telemed_modified_hours_group'); // modified telemedicine hours repeater
+$telemed_query = get_field('field_location_telemed_query'); // Is there telemedicine?
+$telemed_patients = get_field('field_location_telemed_patients'); // New patients, existing or both?
+$telemed_hours247 = get_field('field_location_telemed_24_7'); // typically 24/7?
+$telemed_modified = get_field('field_location_telemed_modified_hours_query'); // Are there modified hours for telemedicine?
+$telemed_modified_reason = get_field('field_location_telemed_modified_hours_reason'); // Why are there modified hours for telemedicine?
+$telemed_modified_start = get_field('field_location_telemed_modified_hours_start_date'); // When do the modified telemedicine hours start?
+$telemed_modified_end = get_field('field_location_telemed_modified_hours_end'); // Do we know when the modified telemedicine hours end?
+$telemed_modified_end_date = get_field('field_location_telemed_modified_hours_end_date'); // When do the modified telemedicine hours end?
+$telemed_modified_hours = get_field('field_location_telemed_modified_hours_group'); // modified telemedicine hours repeater
 
 // Set alert values
 
@@ -782,7 +781,7 @@ while ( have_posts() ) : the_post(); ?>
 		</section>
 	<?php endif; ?>
 	<?php // Telemedicine
-		if ($location_telemed_query) { ?>
+		if ($telemed_query) { ?>
 			<section class="uams-module bg-auto" aria-label="Telemedicine Information">
 				<div class="container-fluid">
 					<div class="row">
@@ -794,11 +793,11 @@ while ( have_posts() ) : the_post(); ?>
 										<p>Insert generic information about telemedicine here.</p>
 										<p>
 											<?php // Declare which patients can use the service.
-											if ($location_telemed_patients == 'all') { ?>
+											if ($telemed_patients == 'all') { ?>
 												This service is available to both new and existing patients.
-											<?php } elseif ($location_telemed_patients == 'new') { ?>
+											<?php } elseif ($telemed_patients == 'new') { ?>
 												This service is available to new patients only.
-											<?php } elseif ($location_telemed_patients == 'existing') { ?>
+											<?php } elseif ($telemed_patients == 'existing') { ?>
 												This service is available to existing patients only.
 											<?php } // endif
 
@@ -809,11 +808,11 @@ while ( have_posts() ) : the_post(); ?>
 												<?php } elseif ($location_clinic_phone_query && !$location_appointment_phone_query) { // If there is only one appointment number ?>
 													Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.
 												<?php } else { // If there are two appointment numbers (one for new, one for existing)
-													if ($location_telemed_patients == 'all') { ?>
+													if ($telemed_patients == 'all') { ?>
 														New patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment, while existing patients should call <?php echo $location_return_appointments_phone_link; ?>.
-													<?php } elseif ($location_telemed_patients == 'new') { ?>
+													<?php } elseif ($telemed_patients == 'new') { ?>
 														Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.
-													<?php } elseif ($location_telemed_patients == 'existing') { ?>
+													<?php } elseif ($telemed_patients == 'existing') { ?>
 														Patients should call <?php echo $location_return_appointments_phone_link; ?> to schedule a telemedicine appointment.
 													<?php }
 												} // endif ?>
