@@ -756,6 +756,51 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 		</section>
 	<?php endif; ?>
+	<?php // Telemedicine
+		if ($location_telemed_query) { ?>
+			<section class="uams-module bg-auto" aria-label="Telemedicine Information">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<h2 class="module-title">Telemedicine Information</h2>
+							<div class="row content-split-lg">
+								<div class="col-xs-12 col-lg-7">
+									<div class="content-width">
+										<p>Insert generic information about telemedicine here.</p>
+										<p>
+											<?php if ($location_telemed_patients == 'all') { ?>
+												This service is available to both new and existing patients.
+											<?php } elseif ($location_telemed_patients == 'new') { ?>
+												This service is available to new patients only.
+											<?php } elseif ($location_telemed_patients == 'existing') { ?>
+												This service is available to existing patients only.
+											<?php } // endif
+											if ($location_telemed_patients == 'all' || $location_telemed_patients == 'new') { ?>
+												New patients should call X to schedule a telemedicine appointment.
+											<?php } // endif
+											if ($location_telemed_patients == 'all' || $location_telemed_patients == 'existing') { ?>
+												Existing patients should call X to schedule a telemedicine appointment.
+											<?php } // endif ?>
+										</p>
+									</div>
+								</div>
+								<div class="col-xs-12 col-lg-5">
+									<div class="content-width">
+										<h3>Hours</h3>
+										<dl class="hours">
+											<dt>Day</dt>
+											<dd>Time<br />
+											<span class="subtitle">Comment</span></dd>
+										</dl>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		<?php } // endif
+	// End Telemedicine ?>
 	<?php // Portal
 		if ( get_field('location_portal') ) :
 			$portal = get_term(get_field('location_portal'), "portal");
