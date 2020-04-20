@@ -206,29 +206,29 @@ while ( have_posts() ) : the_post(); ?>
 					?>
 					<h2>Contact Information</h2>
 					<dl>
-						<?php if (get_field('location_phone')) { ?>
+						<?php if ($location_phone) { ?>
 						<dt>Clinic Phone Number</dt>
-						<dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone') ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone') ); ?></a></dd>
-						<?php $phone_schema .= '"telephone": ["'. format_phone_dash( get_field('location_phone') ) .'"
+						<dd><a href="tel:<?php echo format_phone_dash( $location_phone ); ?>" class="icon-phone"><?php echo format_phone_us( $location_phone ); ?></a></dd>
+						<?php $phone_schema .= '"telephone": ["'. format_phone_dash( $location_phone ) .'"
 						'; ?>
 						<?php } ?>
-						<?php if (get_field('location_new_appointments_phone') && get_field('location_clinic_phone_query')) { ?>
-							<dt>Appointment Phone Number<?php echo get_field('field_location_appointment_phone_query') ? 's' : ''; ?></dt>
-							<dd><a href="tel:<?php echo format_phone_dash( get_field('location_new_appointments_phone') ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_new_appointments_phone') ); ?></a><?php echo get_field('field_location_appointment_phone_query') ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
-							<?php $phone_schema .= ', "'. format_phone_dash( get_field('location_new_appointments_phone') ) .'"
+						<?php if ($location_new_appointments_phone && $location_clinic_phone_query) { ?>
+							<dt>Appointment Phone Number<?php echo $location_appointment_phone_query ? 's' : ''; ?></dt>
+							<dd><a href="tel:<?php echo format_phone_dash( $location_new_appointments_phone ); ?>" class="icon-phone"><?php echo format_phone_us( $location_new_appointments_phone ); ?></a><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
+							<?php $phone_schema .= ', "'. format_phone_dash( $location_new_appointments_phone ) .'"
 							'; ?>
-							<?php if (get_field('location_return_appointments_phone') && get_field('field_location_appointment_phone_query')) { ?>
-								<dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone') ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone') ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
-								<?php $phone_schema .= ', "'. format_phone_dash( get_field('location_return_appointments_phone') ) .'"
+							<?php if ($location_return_appointments_phone && $location_appointment_phone_query) { ?>
+								<dd><a href="tel:<?php echo format_phone_dash( $location_return_appointments_phone ); ?>" class="icon-phone"><?php echo format_phone_us( $location_return_appointments_phone ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
+								<?php $phone_schema .= ', "'. format_phone_dash( $location_return_appointments_phone ) .'"
 							'; ?>
 							<?php } ?>
 						<?php } ?>
-						<?php if (get_field('location_fax')) { ?>
+						<?php if ($location_fax) { ?>
 						<dt>Clinic Fax Number</dt>
-						<dd><a href="tel:<?php echo format_phone_dash( get_field('location_fax') ); ?>"><?php echo format_phone_us( get_field('location_fax') ); ?></a></dd>
+						<dd><a href="tel:<?php echo format_phone_dash( $location_fax ); ?>"><?php echo format_phone_us( $location_fax ); ?></a></dd>
 						<?php } ?>
-						<?php if ( get_field('field_location_phone_numbers') ) { 
-							$phone_numbers = get_field('field_location_phone_numbers');
+						<?php if ( $location_phone_numbers ) { 
+							$phone_numbers = $location_phone_numbers;
 							while( have_rows('field_location_phone_numbers') ): the_row(); 
 								$title = get_sub_field('location_appointments_text');
 								$phone = get_sub_field('location_appointments_phone');
