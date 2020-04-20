@@ -221,24 +221,24 @@ while ( have_posts() ) : the_post(); ?>
 					<dl>
 						<?php if ($location_phone) { ?>
 						<dt>Clinic Phone Number</dt>
-						<dd><a href="tel:<?php echo format_phone_dash( $location_phone ); ?>" class="icon-phone"><?php echo format_phone_us( $location_phone ); ?></a></dd>
+						<dd><?php echo $location_phone_link; ?></dd>
 						<?php $phone_schema .= '"telephone": ["'. format_phone_dash( $location_phone ) .'"
 						'; ?>
 						<?php } ?>
 						<?php if ($location_new_appointments_phone && $location_clinic_phone_query) { ?>
 							<dt>Appointment Phone Number<?php echo $location_appointment_phone_query ? 's' : ''; ?></dt>
-							<dd><a href="tel:<?php echo format_phone_dash( $location_new_appointments_phone ); ?>" class="icon-phone"><?php echo format_phone_us( $location_new_appointments_phone ); ?></a><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
+							<dd><?php echo $location_new_appointments_phone_link; ?><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
 							<?php $phone_schema .= ', "'. format_phone_dash( $location_new_appointments_phone ) .'"
 							'; ?>
 							<?php if ($location_return_appointments_phone && $location_appointment_phone_query) { ?>
-								<dd><a href="tel:<?php echo format_phone_dash( $location_return_appointments_phone ); ?>" class="icon-phone"><?php echo format_phone_us( $location_return_appointments_phone ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
+								<dd><?php echo $location_return_appointments_phone_link; ?><br/><span class="subtitle">Returning Patients</span></dd>
 								<?php $phone_schema .= ', "'. format_phone_dash( $location_return_appointments_phone ) .'"
 							'; ?>
 							<?php } ?>
 						<?php } ?>
 						<?php if ($location_fax) { ?>
 						<dt>Clinic Fax Number</dt>
-						<dd><a href="tel:<?php echo format_phone_dash( $location_fax ); ?>"><?php echo format_phone_us( $location_fax ); ?></a></dd>
+						<dd><?php echo $location_fax_link; ?></dd>
 						<?php } ?>
 						<?php if ( $location_phone_numbers ) { 
 							$phone_numbers = $location_phone_numbers;
