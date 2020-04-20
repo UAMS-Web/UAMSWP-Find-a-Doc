@@ -31,6 +31,7 @@ if ($location_appointment_phone_query) {
 	$location_return_appointments_phone = '';
 }
 $location_fax = get_field('location_fax');
+$location_fax_link = '<a href="tel:' . format_phone_dash( $location_fax ) . '" class="icon-phone">' . format_phone_us( $location_fax ) . '</a>';
 $location_phone_numbers = get_field('field_location_phone_numbers');
 
 // Image values
