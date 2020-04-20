@@ -1108,7 +1108,7 @@
                     "name": "day",
                     "type": "select",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
@@ -1158,11 +1158,11 @@
                     "name": "open",
                     "type": "time_picker",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": [
                         [
                             {
-                                "field": "field_location_24_7",
+                                "field": "field_hours_closed",
                                 "operator": "!=",
                                 "value": "1"
                             }
@@ -1182,11 +1182,11 @@
                     "name": "close",
                     "type": "time_picker",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": [
                         [
                             {
-                                "field": "field_location_24_7",
+                                "field": "field_hours_closed",
                                 "operator": "!=",
                                 "value": "1"
                             }
@@ -1480,7 +1480,7 @@
                             "name": "location_modified_hours_day",
                             "type": "select",
                             "instructions": "",
-                            "required": 0,
+                            "required": 1,
                             "conditional_logic": 0,
                             "wrapper": {
                                 "width": "",
@@ -1532,8 +1532,16 @@
                             "name": "location_modified_hours_open",
                             "type": "time_picker",
                             "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
+                            "required": 1,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_location_modified_hours_closed",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
                             "wrapper": {
                                 "width": "",
                                 "class": "",
@@ -1549,8 +1557,16 @@
                             "name": "location_modified_hours_close",
                             "type": "time_picker",
                             "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
+                            "required": 1,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_location_modified_hours_closed",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
                             "wrapper": {
                                 "width": "",
                                 "class": "",
@@ -1609,7 +1625,7 @@
                     "name": "date",
                     "type": "date_picker",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
@@ -1626,7 +1642,7 @@
                     "name": "label",
                     "type": "text",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
@@ -1664,8 +1680,16 @@
                     "name": "open",
                     "type": "time_picker",
                     "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_holiday_closed",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -1680,8 +1704,16 @@
                     "name": "close",
                     "type": "time_picker",
                     "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_holiday_closed",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
