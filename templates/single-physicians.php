@@ -751,7 +751,7 @@ while ( have_posts() ) : the_post();
                                         </picture>
                                         <?php } ?>
                                         <div class="card-body">
-                                            <h3 class="card-title">
+                                            <h3 class="card-title h5">
                                                 <span class="name"><?php echo get_the_title( $location ); ?></span>
                                                 <?php  if ( 1 == $l ) { ?>
                                                     <span class="subtitle">Primary Location</span>

@@ -17,7 +17,7 @@
     </picture>
     <?php } ?>
     <div class="card-body">
-        <h3 class="card-title">
+        <h3 class="card-title h5">
             <span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self"><?php echo get_the_title($id); ?></a></span>
         </h3>
         <?php 
