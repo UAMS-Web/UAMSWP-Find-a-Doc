@@ -881,7 +881,7 @@ while ( have_posts() ) : the_post();
                                 </dl>
                             </div>
                             <div class="card-footer bg-transparent text-muted small">
-                                <p>Overall: <?php echo $data->profile->averageRatingStr; ?> out of 5</p>
+                                <p class="h5">Overall: <?php echo $data->profile->averageRatingStr; ?> out of 5</p>
                                 <p>(<?php echo $data->profile->reviewBodyCountStr; ?>)</p>
                             </div>
                         </div>
