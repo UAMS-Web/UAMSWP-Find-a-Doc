@@ -514,23 +514,23 @@ function bidirectional_treatment_expertise( $value, $post_id, $field  ) {
 }
 
 // Post to Taxonomy
-add_filter('acf/update_value/name=physician_conditions', 'bidirectional_physician_conditions', 10, 3);
-add_filter('acf/update_value/name=physician_treatments', 'bidirectional_physician_treatments', 15, 3);
+// add_filter('acf/update_value/name=physician_conditions', 'bidirectional_physician_conditions', 10, 3);
+// add_filter('acf/update_value/name=physician_treatments', 'bidirectional_physician_treatments', 15, 3);
 
-add_filter('acf/update_value/name=location_conditions', 'bidirectional_location_conditions', 10, 3);
-add_filter('acf/update_value/name=location_treatments', 'bidirectional_location_treatments', 15, 3);
+// add_filter('acf/update_value/name=location_conditions', 'bidirectional_location_conditions', 10, 3);
+// add_filter('acf/update_value/name=location_treatments', 'bidirectional_location_treatments', 15, 3);
 
-add_filter('acf/update_value/name=expertise_conditions', 'bidirectional_expertise_conditions', 10, 3);
-add_filter('acf/update_value/name=expertise_treatments', 'bidirectional_expertise_treatments', 15, 3);
+// add_filter('acf/update_value/name=expertise_conditions', 'bidirectional_expertise_conditions', 10, 3);
+// add_filter('acf/update_value/name=expertise_treatments', 'bidirectional_expertise_treatments', 15, 3);
 
-add_filter('acf/update_value/name=condition_physicians', 'bidirectional_condition_physicians', 10, 3);
-add_filter('acf/update_value/name=treatment_procedure_physicians', 'bidirectional_treatment_physicians', 15, 3);
+// add_filter('acf/update_value/name=condition_physicians', 'bidirectional_condition_physicians', 10, 3);
+// add_filter('acf/update_value/name=treatment_procedure_physicians', 'bidirectional_treatment_physicians', 15, 3);
 
-add_filter('acf/update_value/name=condition_locations', 'bidirectional_condition_locations', 10, 3);
-add_filter('acf/update_value/name=treatment_procedure_locations', 'bidirectional_treatment_locations', 15, 3);
+// add_filter('acf/update_value/name=condition_locations', 'bidirectional_condition_locations', 10, 3);
+// add_filter('acf/update_value/name=treatment_procedure_locations', 'bidirectional_treatment_locations', 15, 3);
 
-add_filter('acf/update_value/name=condition_expertise', 'bidirectional_condition_expertise', 10, 3);
-add_filter('acf/update_value/name=treatment_procedure_expertise', 'bidirectional_treatment_expertise', 15, 3);
+// add_filter('acf/update_value/name=condition_expertise', 'bidirectional_condition_expertise', 10, 3);
+// add_filter('acf/update_value/name=treatment_procedure_expertise', 'bidirectional_treatment_expertise', 15, 3);
 
 add_action('acf/save_post', 'custom_excerpt_acf', 50);
 function custom_excerpt_acf() {

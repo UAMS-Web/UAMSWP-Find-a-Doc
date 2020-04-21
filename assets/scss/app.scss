@@ -1,0 +1,27 @@
+.btn {
+    text-decoration: none;
+}
+
+.btn-container {
+    display: flex;
+    flex-flow: row wrap;
+    
+
+    .inner-container .btn,
+    .btn {
+        
+    }
+
+    @at-root .card #{&} {
+        
+        margin: auto 0 0;
+        justify-content: center;
+
+        .inner-container {
+           
+            .btn {
+                
+            }
+        }
+    }
+}
