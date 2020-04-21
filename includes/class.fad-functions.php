@@ -187,6 +187,7 @@ function fad_script_register() {
     if ( (is_archive() && ('provider' == $post_type)) ) {
         wp_enqueue_script( 'mobile-filter-toggle', UAMS_FAD_ROOT_URL . 'assets/js/mobile-filter-toggle.js', array('jquery'), null, false );
     }
+	wp_enqueue_style( 'fad-app-css', UAMS_FAD_ROOT_URL . 'assets/css/app.css', array(), '1.0', 'all');
 	wp_enqueue_style( 'fad-css', UAMS_FAD_ROOT_URL . 'assets/css/style.css', array(), '1.0', 'all');
 }
 add_action( 'wp_enqueue_scripts', 'fad_script_register' );
