@@ -1,0 +1,13 @@
+.btn {
+  text-decoration: none;
+}
+
+.btn-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.card .btn-container {
+  margin: auto 0 0;
+  justify-content: center;
+}
