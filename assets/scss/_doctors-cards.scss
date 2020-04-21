@@ -1,0 +1,114 @@
+$doctor-card-width: 255px;
+
+@function doctor-list-width-formula($count) {
+    @return ((($card-list-gap * 2) + $doctor-card-width) * $count);
+}
+
+@function doctor-list-mq-formula($count) {
+    @return doctor-list-width-formula($count) + ($uams-module-padding-px * 2);
+}
+
+$doctor-list-rows: (
+    // When the viewport is wide enough to display X number of cards, which eligible counts (how many cards are displayed by default) get to show X number of cards per row?
+    // cards-per-row-* is a container for the the combinations of cards per row and eligible counts. If you want to add a new amount of cards per row, add a new cards-per-row-*.
+    // Set the "cards" value to define the number of cards per row in each check.
+    // Set the "eligible-count" value for which counts get to show that amount per row.
+    // This map gets used in the "doctor-cards-eligible-count" and "doctor-cards-per-row" mixins below.
+    // The eligible count is the number defined in the PHP file (single-location.php, single-expertise.php, etc.)
+    cards-per-row-1: (
+        cards: 1,
+        eligible-count: (
+            4,
+            6,
+            8,
+            10,
+            12
+        )
+    ),
+    cards-per-row-2: (
+        cards: 2,
+        eligible-count: (
+            4,
+            6,
+            8,
+            10,
+            12
+        )
+    ),
+    cards-per-row-3: (
+        cards: 3,
+        eligible-count: (
+            6,
+            12
+        )
+    ),
+    cards-per-row-4: (
+        cards: 4,
+        eligible-count: (
+            4,
+            8,
+            12
+        )
+    ),
+    cards-per-row-5: (
+        cards: 5,
+        eligible-count: (
+            10
+        )
+    ),
+    cards-per-row-6: (
+        cards: 6,
+        eligible-count: (
+            6,
+            12
+        )
+    ),
+    cards-per-row-8: (
+        cards: 8,
+        eligible-count: (
+            8
+        )
+    ),
+    cards-per-row-10: (
+        cards: 10,
+        eligible-count: (
+            10
+        )
+    ),
+    cards-per-row-12: (
+        cards: 12,
+        eligible-count: (
+            12
+        )
+    )
+);
+
+@mixin doctor-cards-eligible-count($var, $count) {
+    @each $value in map-get(map-get($doctor-list-rows, $var), "eligible-count") {
+        &-count-#{$value} {
+            width: doctor-list-width-formula($count);
+        }
+    }
+}
+
+@mixin doctor-cards-per-row() {
+    @each $keyname, $value in $doctor-list-rows {
+        @each $cardvalue in map-get(map-get($doctor-list-rows, $keyname), "cards") {
+            @include media-custom-up(doctor-list-mq-formula($cardvalue)) {
+                @include doctor-cards-eligible-count($keyname, $cardvalue);
+            }
+        }
+    }
+}
+
+.card-list {
+    &-doctors {
+        margin-right: auto;
+        margin-left: auto;
+        @include doctor-cards-per-row();
+
+        .card {
+            width: $doctor-card-width;
+        }
+    }
+}
