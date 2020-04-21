@@ -68,6 +68,7 @@ if ( function_exists( 'fly_add_image_size' ) && !empty($schema_image) ) {
 $telemed_query = get_field('field_location_telemed_query'); // Is there telemedicine?
 $telemed_patients = get_field('field_location_telemed_patients'); // New patients, existing or both?
 $telemed_hours247 = get_field('field_location_telemed_24_7'); // typically 24/7?
+$telemed_hours = get_field('location_telemed_hours'); // telemedicine hours repeater
 $telemed_modified = get_field('field_location_telemed_modified_hours_query'); // Are there modified hours for telemedicine?
 $telemed_modified_reason = get_field('field_location_telemed_modified_hours_reason'); // Why are there modified hours for telemedicine?
 $telemed_modified_start = get_field('field_location_telemed_modified_hours_start_date'); // When do the modified telemedicine hours start?
@@ -328,8 +329,8 @@ while ( have_posts() ) : the_post(); ?>
 									$modified_text .= '<dl class="hours">';
 									foreach ( $modified_times as $modified_time ) {
 										
-										if( $modified_day !== $modified_time['location_modified_hours_day'] || $modified_comment ) {
-											$modified_text .= '<dt>'. $modified_time['location_modified_hours_day'] .'</dt> ';
+										// if( $modified_day !== $modified_time['location_modified_hours_day'] || $modified_comment ) { // change for single day
+											$modified_text .= $modified_day !== $modified_time['location_modified_hours_day'] ? '<dt>'. $modified_time['location_modified_hours_day'] .'</dt> ' : '';
 											$modified_text .= '<dd>';
 	
 											if (1 != $i) {
@@ -366,9 +367,9 @@ while ( have_posts() ) : the_post(); ?>
 												'; //substr($modified_time['location_modified_hours_day'], 0, 2);
 											}
 	
-										} else {
-											$modified_text .= ', ';
-										}
+										// } else { // change for single day
+										// 	$modified_text .= ', ';
+										// }
 										if ( $modified_time['location_modified_hours_closed'] ) {
 											$modified_text .= 'Closed ';
 											$modified_hours_schema .= '"opens": "00:00",
@@ -387,9 +388,9 @@ while ( have_posts() ) : the_post(); ?>
 												$modified_comment = '';
 											}
 										}
-										if( $modified_day !== $modified_time['location_modified_hours_day'] || $modified_comment ) {
+										// if( $modified_day !== $modified_time['location_modified_hours_day'] || $modified_comment ) { // change for single day
 											$modified_text .= '</dd>';
-										}
+										// }
 										$modified_day = $modified_time['location_modified_hours_day']; // Reset the day
 										// if (!$modified_time['location_modified_hours_closed']) {
 										// 	$modified_hours_schema .= '';
@@ -435,8 +436,8 @@ while ( have_posts() ) : the_post(); ?>
 									$hours_schema = '"openingHours": [';
 									$i = 1;
 									foreach ($hours as $hour) :
-										if( $day !== $hour['day'] || $comment ) {
-											$hours_text .= '<dt>'. $hour['day'] .'</dt> ';
+										// if( $day !== $hour['day'] || $comment ) { // change for single day
+											$hours_text .= $day !== $hour['day'] ? '<dt>'. $hour['day'] .'</dt> ' : '';
 											$hours_text .= '<dd>';
 											if (!$hour['closed']) {
 												if (1 != $i) {
@@ -449,9 +450,9 @@ while ( have_posts() ) : the_post(); ?>
 											} elseif ( !$hour['closed'] ) {
 												$hours_schema .= substr($hour['day'], 0, 2);
 											}
-										} else {
-											$hours_text .= ', ';
-										}
+										// } else { // Changed for single day
+										// 	$hours_text .= ', ';
+										// }
 										if ( $hour['closed'] ) {
 											$hours_text .= 'Closed ';
 										} else {
@@ -464,9 +465,9 @@ while ( have_posts() ) : the_post(); ?>
 												$comment = '';
 											}
 										}
-										if( $day !== $hour['day'] && $comment ) {
+										// if( $day !== $hour['day'] && $comment ) { // change for single day
 											$hours_text .= '</dd>';
-										}
+										// }
 										$day = $hour['day']; // Reset the day
 										if (!$hour['closed']) {
 											$hours_schema .= '"';
@@ -841,18 +842,134 @@ while ( have_posts() ) : the_post(); ?>
 									</div>
 									<div class="col-xs-12 col-lg-5">
 										<div class="content-width">
-											<h3>Modified Hours</h3>
-											<dl class="hours">
-												<dt>Day</dt>
-												<dd>Time<br />
-												<span class="subtitle">Comment</span></dd>
-											</dl>
-											<h3>Typical Hours</h3>
-											<dl class="hours">
-												<dt>Day</dt>
-												<dd>Time<br />
-												<span class="subtitle">Comment</span></dd>
-											</dl>
+										<?php
+										$telemed_modified_text = '';
+										$telemed_active_start = '';
+										$telemed_active_end = '';
+										if ($telemed_modified && $telemed_modified_hours) : 
+										?>
+										<?php 
+											
+											$telemed_modified_day = ''; // Previous Day
+											$telemed_modified_comment = ''; // Comment on previous day
+											$i = 1;
+
+											$telemed_today = strtotime("today");
+											$telemed_today_30 = strtotime("+30 days");
+
+											if( strtotime($telemed_modified_start) <= $telemed_today_30 && ( strtotime($telemed_modified_end_date) >= $telemed_today || !$telemed_modified_end ) ){
+												$telemed_modified_text .= $telemed_modified_reason;
+												$telemed_modified_text .= '<p class="small font-italic">These modified hours start on ' . date("l, F j, Y", strtotime($telemed_modified_start)) . ', ';
+												$telemed_modified_text .= $telemed_modified_end && $telemed_modified_end_date ? 'and are scheduled to end after ' . date("l, F j, Y", strtotime($telemed_modified_end_date)) . '.' : 'and will remain in effect until further notice.';
+												$telemed_modified_text .= '</p>';
+
+												foreach ($telemed_modified_hours as $telemed_modified_hour) {
+						
+													$telemed_modified_title = $telemed_modified_hour['location_telemed_modified_hours_title'];
+													$telemed_modified_info = $telemed_modified_hour['location_telemed_modified_hours_information'];
+													$telemed_modified_times = $telemed_modified_hour['location_telemed_modified_hours_times'];
+													$telemed_modified_text .= $telemed_modified_title ? '<h3 class="h4">'.$telemed_modified_title.'</h3>' : '';
+													$telemed_modified_text .= $telemed_modified_info ? $telemed_modified_info : '';
+						
+													if ($telemed_active_start > strtotime($telemed_modified_start) || '' == $telemed_active_start) {
+														$telemed_active_start = strtotime($telemed_modified_start);
+													}
+													if ( $telemed_active_end <= strtotime($telemed_modified_end_date) || !$telemed_modified_end ) {
+														if (!$telemed_modified_end) {
+															$telemed_active_end = 'TBD';
+														} else {
+															$telemed_active_end = strtotime($telemed_modified_end_date);
+														}
+													}
+													if (is_array($telemed_modified_times) || is_object($telemed_modified_times)) {
+														$telemed_modified_text .= '<dl class="hours">';
+														foreach ( $telemed_modified_times as $telemed_modified_time ) {
+															
+															// if( $telemed_modified_day !== $telemed_modified_time['location_telemed_modified_hours_day'] || $telemed_modified_comment ) { // change for single day
+																$telemed_modified_text .= $telemed_modified_day !== $telemed_modified_time['location_telemed_modified_hours_day'] ? '<dt>'. $telemed_modified_time['location_telemed_modified_hours_day'] .'</dt> ' : '';
+																$telemed_modified_text .= '<dd>';
+						
+															// } else { // change for single day
+															// 	// $telemed_modified_text .= ', ';
+															// }
+															if ( $telemed_modified_time['location_telemed_modified_hours_closed'] ) {
+																$telemed_modified_text .= 'Closed ';
+															} else {
+																$telemed_modified_text .= ( ( $telemed_modified_time['location_telemed_modified_hours_open'] && '00:00:00' != $telemed_modified_time['location_telemed_modified_hours_open'] )  ? '' . apStyleDate( $telemed_modified_time['location_telemed_modified_hours_open'] ) . ' &ndash; ' . apStyleDate( $telemed_modified_time['location_telemed_modified_hours_close'] ) . '' : '' );
+																if ( $telemed_modified_time['location_telemed_modified_hours_comment'] ) {
+																	$telemed_modified_text .= ' <br /><span class="subtitle">' .$telemed_modified_time['location_telemed_modified_hours_comment'] . '</span>';
+																	$telemed_modified_comment = $telemed_modified_time['location_telemed_modified_hours_comment'];
+																} else {
+																	$telemed_modified_comment = '';
+																}
+															}
+															// if( $telemed_modified_day !== $telemed_modified_time['location_telemed_modified_hours_day'] || $telemed_modified_comment ) { // change for single day
+																$telemed_modified_text .= '</dd>';
+															// }
+															$telemed_modified_day = $telemed_modified_time['location_telemed_modified_hours_day']; // Reset the day
+															$i++;
+															
+														} // endforeach
+														$telemed_modified_text .= '</dl>';
+													} // End if (array)
+													
+												}
+											}
+										
+											echo $telemed_modified_text ? '<h3>Modified Hours</h3>' . $telemed_modified_text: '';
+											
+										endif; // End Modified Hours
+										if (($telemed_active_start != '' && $telemed_active_start <= $telemed_today) && ( strtotime($telemed_active_end) > $telemed_today || $telemed_active_end == 'TBD' ) ) {
+											// Do Nothing;
+											// Future Option
+										} else {
+											if ( $telemed_hours247 || $telemed_hours[0]['day'] ) : ?>
+											<h3><?php echo $telemed_modified_text ? 'Typical ' : ''; ?>Hours</h3>
+											<?php
+												if ($telemed_hours247):
+													echo 'Open 24/7';
+												else :
+													echo '<dl class="hours">';
+													if( $telemed_hours ) {
+														$telemed_hours_text = '';
+														$telemed_day = ''; // Previous Day
+														$telemed_comment = ''; // Comment on previous day
+														$i = 1;
+														foreach ($telemed_hours as $telemed_hour) :
+															// if( $telemed_day !== $telemed_hour['day'] || $telemed_comment ) { // change for single day
+																$telemed_hours_text .= $telemed_day !== $telemed_hour['day'] ? '<dt>'. $telemed_hour['day'] .'</dt> ' : '';
+																$telemed_hours_text .= '<dd>';
+															// } else { // change for single day
+															// 	$telemed_hours_text .= ', ';
+															// }
+															if ( $telemed_hour['closed'] ) {
+																$telemed_hours_text .= 'Closed ';
+															} else {
+																$telemed_hours_text .= ( ( $telemed_hour['open'] && '00:00:00' != $telemed_hour['open'] )  ? '' . apStyleDate( $telemed_hour['open'] ) . ' &ndash; ' . apStyleDate( $telemed_hour['close'] ) . '' : '' );
+																if ( $telemed_hour['comment'] ) {
+																	$telemed_hours_text .= ' <br /><span class="subtitle">' .$telemed_hour['comment'] . '</span>';
+																	$telemed_comment = $telemed_hour['comment'];
+																} else {
+																	$telemed_comment = '';
+																}
+															}
+															// if( $telemed_day !== $telemed_hour['day'] && $telemed_comment ) { // change for single day
+																$telemed_hours_text .= '</dd>';
+															// }
+															$telemed_day = $telemed_hour['day']; // Reset the day
+															if (!$telemed_hour['closed']) {
+															$i++;
+															}
+														endforeach;
+														echo $telemed_hours_text;
+													} else {
+														echo '<dt>No information</dt>';
+													}
+													echo '</dl>';
+												endif; 
+											endif;
+											}
+											?>
 										</div>
 									</div>
 								</div>
