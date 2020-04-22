@@ -64,17 +64,30 @@ if ( function_exists( 'fly_add_image_size' ) && !empty($schema_image) ) {
 }
 
 // Set telemedicine values
+// Original Set
+// $telemed_query = get_field('field_location_telemed_query'); // Is there telemedicine?
+// $telemed_patients = get_field('field_location_telemed_patients'); // New patients, existing or both?
+// $telemed_hours247 = get_field('field_location_telemed_24_7'); // typically 24/7?
+// $telemed_hours = get_field('location_telemed_hours'); // telemedicine hours repeater
+// $telemed_modified = get_field('field_location_telemed_modified_hours_query'); // Are there modified hours for telemedicine?
+// $telemed_modified_reason = get_field('field_location_telemed_modified_hours_reason'); // Why are there modified hours for telemedicine?
+// $telemed_modified_start = get_field('field_location_telemed_modified_hours_start_date'); // When do the modified telemedicine hours start?
+// $telemed_modified_end = get_field('field_location_telemed_modified_hours_end'); // Do we know when the modified telemedicine hours end?
+// $telemed_modified_end_date = get_field('field_location_telemed_modified_hours_end_date'); // When do the modified telemedicine hours end?
+// $telemed_modified_hours = get_field('field_location_telemed_modified_hours_group'); // modified telemedicine hours repeater
+// Hours Grouping
+$location_hours_group = get_field('location_hours_group');
 
-$telemed_query = get_field('field_location_telemed_query'); // Is there telemedicine?
-$telemed_patients = get_field('field_location_telemed_patients'); // New patients, existing or both?
-$telemed_hours247 = get_field('field_location_telemed_24_7'); // typically 24/7?
-$telemed_hours = get_field('location_telemed_hours'); // telemedicine hours repeater
-$telemed_modified = get_field('field_location_telemed_modified_hours_query'); // Are there modified hours for telemedicine?
-$telemed_modified_reason = get_field('field_location_telemed_modified_hours_reason'); // Why are there modified hours for telemedicine?
-$telemed_modified_start = get_field('field_location_telemed_modified_hours_start_date'); // When do the modified telemedicine hours start?
-$telemed_modified_end = get_field('field_location_telemed_modified_hours_end'); // Do we know when the modified telemedicine hours end?
-$telemed_modified_end_date = get_field('field_location_telemed_modified_hours_end_date'); // When do the modified telemedicine hours end?
-$telemed_modified_hours = get_field('field_location_telemed_modified_hours_group'); // modified telemedicine hours repeater
+$telemed_query = $location_hours_group['location_telemed_query']; // Is there telemedicine?
+$telemed_patients = $location_hours_group['location_telemed_patients']; // New patients, existing or both?
+$telemed_hours247 = $location_hours_group['location_telemed_24_7']; // typically 24/7?
+$telemed_hours = $location_hours_group['location_telemed_hours']; // telemedicine hours repeater
+$telemed_modified = $location_hours_group['location_telemed_modified_hours_query']; // Are there modified hours for telemedicine?
+$telemed_modified_reason = $location_hours_group['location_telemed_modified_hours_reason']; // Why are there modified hours for telemedicine?
+$telemed_modified_start = $location_hours_group['location_telemed_modified_hours_start_date']; // When do the modified telemedicine hours start?
+$telemed_modified_end = $location_hours_group['location_telemed_modified_hours_end']; // Do we know when the modified telemedicine hours end?
+$telemed_modified_end_date = $location_hours_group['location_telemed_modified_hours_end_date']; // When do the modified telemedicine hours end?
+$telemed_modified_hours = $location_hours_group['location_telemed_modified_hours_group']; // modified telemedicine hours repeater
 
 // Set alert values
 
@@ -278,13 +291,13 @@ while ( have_posts() ) : the_post(); ?>
 					</dl>
 					<?php
 					$phone_schema .= '],';
-					$hours247 = get_field('location_24_7');
-					$modified = get_field('location_modified_hours');
-					$modified_reason = get_field('location_modified_hours_reason');
-					$modified_start = get_field('location_modified_hours_start_date');
-					$modified_end = get_field('location_modified_hours_end');
-					$modified_end_date = get_field('location_modified_hours_end_date');
-					$modified_hours = get_field('location_modified_hours_group');
+					$hours247 = $location_hours_group['location_24_7'];
+					$modified = $location_hours_group['location_modified_hours'];
+					$modified_reason = $location_hours_group['location_modified_hours_reason'];
+					$modified_start = $location_hours_group['location_modified_hours_start_date'];
+					$modified_end = $location_hours_group['location_modified_hours_end'];
+					$modified_end_date = $location_hours_group['location_modified_hours_end_date'];
+					$modified_hours = $location_hours_group['location_modified_hours_group'];
 					$modified_hours_schema ='';
 					$modified_text = '';
 					$active_start = '';
@@ -419,7 +432,7 @@ while ( have_posts() ) : the_post(); ?>
 						// Do Nothing;
 						// Future Option
 					} else {
-						$hours = get_field('location_hours');
+						$hours = $location_hours_group['location_hours'];
 						$hours_schema = '';
 						if ( $hours247 || $hours[0]['day'] ) : ?>
 						<h2><?php echo $modified_text ? 'Typical ' : ''; ?>Hours</h2>
@@ -524,10 +537,10 @@ while ( have_posts() ) : the_post(); ?>
 								echo '</dl>';
 							}
 						endif; ?>
-					<?php if (get_field('location_after_hours') && !get_field('location_24_7')) { ?>
+					<?php if ($location_hours_group['location_after_hours'] && !$location_hours_group['location_24_7']) { ?>
 					<h2>After Hours</h2>
-					<?php echo get_field('location_after_hours'); ?>
-					<?php } elseif (!get_field('location_24_7')) { ?>
+					<?php echo $location_hours_group['location_after_hours']; ?>
+					<?php } elseif (!$location_hours_group['location_24_7']) { ?>
 					<h2>After Hours</h2>
 					<p>If you are in need of urgent or emergency care call 911 or go to your nearest emergency department at your local hospital.</p>
 					<?php } endif;
