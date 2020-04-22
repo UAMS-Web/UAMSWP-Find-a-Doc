@@ -199,7 +199,7 @@
 								<ul class="list">
 								<?php foreach( $conditions_query->get_terms() as $condition ): ?>
 									<li>
-										<a href="<?php echo get_term_link( $condition->term_id ); ?>" aria-label="Go to Condition page for <?php echo $condition->name; ?>"><?php echo $condition->name; ?></a>
+										<a href="<?php echo get_term_link( $condition->term_id ); ?>" aria-label="Go to Condition page for <?php echo $condition->name; ?>" class="btn btn-outline-primary"><?php echo $condition->name; ?></a>
 									</li>
 								<?php endforeach; ?>
 								</ul>
