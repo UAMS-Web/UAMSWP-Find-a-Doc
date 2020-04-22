@@ -864,7 +864,7 @@
             "key": "field_physician_affiliation",
             "name": "physician_affiliation",
             "type": "taxonomy",
-            "label": "Affiliation",
+            "label": "Hospital Affiliations",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,

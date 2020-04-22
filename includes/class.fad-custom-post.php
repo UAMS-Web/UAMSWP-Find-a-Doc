@@ -685,21 +685,21 @@ function create_clinical_title_taxonomy() {
 
 function create_affiliations_taxonomy() {
   $labels = array(
-		'name'                           => 'Affiliations',
-		'singular_name'                  => 'Affiliations',
-		'search_items'                   => 'Search Affiliations',
-		'all_items'                      => 'All Affiliations',
-		'edit_item'                      => 'Edit Affiliation',
-		'update_item'                    => 'Update Affiliation',
-		'add_new_item'                   => 'Add New Affiliation',
-		'new_item_name'                  => 'New Affiliation',
-		'menu_name'                      => 'Affiliations',
-		'view_item'                      => 'View Affiliation',
-		'popular_items'                  => 'Popular Affiliation',
-		'separate_items_with_commas'     => 'Separate affiliations with commas',
-		'add_or_remove_items'            => 'Add or remove affiliations',
-		'choose_from_most_used'          => 'Choose from the most used affiliations',
-		'not_found'                      => 'No affiliations found'
+		'name'                           => 'Hospital Affiliations',
+		'singular_name'                  => 'Hospital Affiliations',
+		'search_items'                   => 'Search Hospital Affiliations',
+		'all_items'                      => 'All Hospital Affiliations',
+		'edit_item'                      => 'Edit Hospital Affiliation',
+		'update_item'                    => 'Update Hospital Affiliation',
+		'add_new_item'                   => 'Add New Hospital Affiliation',
+		'new_item_name'                  => 'New Hospital Affiliation',
+		'menu_name'                      => 'Hospital Affiliations',
+		'view_item'                      => 'View Hospital Affiliation',
+		'popular_items'                  => 'Popular Hospital Affiliation',
+		'separate_items_with_commas'     => 'Separate hospital affiliations with commas',
+		'add_or_remove_items'            => 'Add or remove hospital affiliations',
+		'choose_from_most_used'          => 'Choose from the most used hospital affiliations',
+		'not_found'                      => 'No hospital affiliations found'
 	);
   	$rewrite = array(
 		'slug'                       => 'affiliation',
@@ -713,7 +713,7 @@ function create_affiliations_taxonomy() {
 		'assign_terms'               => 'edit_physicians',
 	);
 	$args = array(
-		'label' 				 	 => __( 'Affiliations' ),
+		'label' 				 	 => __( 'Hospital Affiliations' ),
 		'labels'                     => $labels,
 		'hierarchical'               => false,
 		'public'                     => true,
@@ -729,6 +729,55 @@ function create_affiliations_taxonomy() {
 		'rest_controller_class'      => 'WP_REST_Terms_Controller',
 	);
 	register_taxonomy( 'affiliation', array( 'provider' ), $args );
+
+}
+
+function create_institute_affiliations_taxonomy() {
+  $labels = array(
+		'name'                           => 'Institute Affiliations',
+		'singular_name'                  => 'Institute Affiliations',
+		'search_items'                   => 'Search Institute Affiliations',
+		'all_items'                      => 'All Institute Affiliations',
+		'edit_item'                      => 'Edit Institute Affiliation',
+		'update_item'                    => 'Update Institute Affiliation',
+		'add_new_item'                   => 'Add New Institute Affiliation',
+		'new_item_name'                  => 'New Institute Affiliation',
+		'menu_name'                      => 'Institute Affiliations',
+		'view_item'                      => 'View Institute Affiliation',
+		'popular_items'                  => 'Popular Institute Affiliation',
+		'separate_items_with_commas'     => 'Separate institute affiliations with commas',
+		'add_or_remove_items'            => 'Add or remove institute affiliations',
+		'choose_from_most_used'          => 'Choose from the most used institute affiliations',
+		'not_found'                      => 'No institute affiliations found'
+	);
+  	$rewrite = array(
+		'slug'                       => 'institute_affiliation',
+		'with_front'                 => true,
+		'hierarchical'               => true,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'label' 				 	 => __( 'Institute Affiliations' ),
+		'labels'                     => $labels,
+		'hierarchical'               => false,
+		'public'                     => true,
+		'show_ui'                    => true, //make true to add another
+		'show_admin_column'          => false,
+		'meta_box_cb' 				 => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+ 		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+		'show_in_rest'               => true,
+		'rest_base'                  => 'institute_affiliation',
+		'rest_controller_class'      => 'WP_REST_Terms_Controller',
+	);
+	register_taxonomy( 'institute_affiliation', array( 'provider' ), $args );
 
 }
 
