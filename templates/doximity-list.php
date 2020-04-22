@@ -132,7 +132,14 @@ function display_provider_image() {
                             }
                         endforeach;
                     } 
-                    if ( $degree_valid && $npi_valid ) {
+                    // Check if there is a hospital affiliation
+                    $affiliation_valid = false;
+                    $affiliations = get_field('physician_affiliation',$post_id);
+                    if ( !empty($affiliations) ) {
+	                    $affiliation_valid = true;
+                    }
+                    // Create the table
+                    if ( $degree_valid && $npi_valid && $affiliation_valid ) {
                     
                         // NPI Number field
                             // $npi = get_field('physician_npi',$post_id); // Added above
@@ -169,7 +176,23 @@ function display_provider_image() {
                             echo '</td>';
 
                         // Facility Name field
-                        
+                            $affiliation_list = '';
+                            $i = 1;
+                            if ( $affiliations ) {
+                                foreach( $affiliations as $affiliation ):
+                                    $affiliation_name = get_term( $affiliation, 'affiliation');
+                                    $affiliation_list .= '<span class="no-break">' . $affiliation_name->name . '</span>';
+                                    if( count($affiliations) > $i ) {
+                                        $affiliation_list .= ', ';
+                                    }
+                                    $i++;
+                                endforeach;
+                            } 
+                            echo '<td>';
+                            echo $affiliation_list ? $affiliation_list : '';
+                            echo '</td>';
+
+                        // Office Address 1 field
                             // Check for valid locations
                             $locations = get_field('physician_locations',$post_id);
                             $location_valid = false;
@@ -206,11 +229,6 @@ function display_provider_image() {
                                     }
                                 } // endforeach
                             }
-                            echo '<td>';
-                            echo $primary_appointment_title ? $primary_appointment_title : '';
-                            echo '</td>';
-
-                        // Office Address 1 field
                             echo '<td>';
                             echo $primary_appointment_address_1 ? $primary_appointment_address_1 : '';
                             echo '</td>';
