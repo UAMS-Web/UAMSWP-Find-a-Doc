@@ -226,6 +226,7 @@ add_action( 'init', 'create_clinical_conditions_taxonomy', 0 );
 add_action( 'init', 'create_clinical_treatments_taxonomy', 0 );
 
 add_action( 'init', 'create_affiliations_taxonomy', 0 );
+add_action( 'init', 'create_institute_affiliations_taxonomy', 0 );
 add_action( 'init', 'create_clinical_title_taxonomy', 0 );
 add_action( 'init', 'create_languages_taxonomy', 0 );
 add_action( 'init', 'create_departments_taxonomy', 0 );
