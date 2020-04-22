@@ -149,7 +149,7 @@ function display_provider_image() {
                     }
                     // Create the table
                     if ( $degree_valid && $npi_valid && $affiliation_valid && $location_valid ) {
-                    
+                        echo '<tr>';
                         // NPI Number field
                             // $npi = get_field('physician_npi',$post_id); // Added above
                             echo '<td class="no-break">';
