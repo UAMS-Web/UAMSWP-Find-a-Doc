@@ -138,8 +138,17 @@ function display_provider_image() {
                     if ( !empty($affiliations) ) {
 	                    $affiliation_valid = true;
                     }
+                    // Check for valid locations
+                    $locations = get_field('physician_locations',$post_id);
+                    $location_valid = false;
+                    foreach( $locations as $location ) {
+                        if ( get_post_status ( $location ) == 'publish' ) {
+                            $location_valid = true;
+                            $break;
+                        }
+                    }
                     // Create the table
-                    if ( $degree_valid && $npi_valid && $affiliation_valid ) {
+                    if ( $degree_valid && $npi_valid && $affiliation_valid && $location_valid ) {
                     
                         // NPI Number field
                             // $npi = get_field('physician_npi',$post_id); // Added above
@@ -193,15 +202,7 @@ function display_provider_image() {
                             echo '</td>';
 
                         // Office Address 1 field
-                            // Check for valid locations
-                            $locations = get_field('physician_locations',$post_id);
-                            $location_valid = false;
-                            foreach( $locations as $location ) {
-                                if ( get_post_status ( $location ) == 'publish' ) {
-                                    $location_valid = true;
-                                    $break;
-                                }
-                            }
+                        
                             // Get primary appointment location name
                             $l = 1;
                             $primary_appointment_title = '';
