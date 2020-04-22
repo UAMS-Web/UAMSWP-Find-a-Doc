@@ -102,7 +102,7 @@ $doctor-list-rows: (
 }
 
 .card-list {
-    &-doctors {
+    &.card-list-doctors {
         margin-right: auto;
         margin-left: auto;
         @include doctor-cards-per-row();

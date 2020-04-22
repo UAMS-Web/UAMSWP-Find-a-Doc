@@ -15,10 +15,15 @@
         @include media-breakpoint-up(sm) {
             flex-basis: 265px;
             flex-grow: 0;
-            display: block;
         }
         @include media-breakpoint-up(md) {
             flex-basis: 350px;
+        }
+
+        &.collapse:not(.show) {
+            @include media-breakpoint-up(sm) {
+                display: block;
+            }
         }
 
         h2 {
