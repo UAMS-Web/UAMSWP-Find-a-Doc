@@ -751,7 +751,7 @@ while ( have_posts() ) : the_post();
                                         </picture>
                                         <?php } ?>
                                         <div class="card-body">
-                                            <h3 class="card-title">
+                                            <h3 class="card-title h5">
                                                 <span class="name"><?php echo get_the_title( $location ); ?></span>
                                                 <?php  if ( 1 == $l ) { ?>
                                                     <span class="subtitle">Primary Location</span>
@@ -881,7 +881,7 @@ while ( have_posts() ) : the_post();
                                 </dl>
                             </div>
                             <div class="card-footer bg-transparent text-muted small">
-                                <p>Overall: <?php echo $data->profile->averageRatingStr; ?> out of 5</p>
+                                <p class="h5">Overall: <?php echo $data->profile->averageRatingStr; ?> out of 5</p>
                                 <p>(<?php echo $data->profile->reviewBodyCountStr; ?>)</p>
                             </div>
                         </div>

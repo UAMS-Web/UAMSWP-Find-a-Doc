@@ -1,27 +1,35 @@
-.btn {
-    text-decoration: none;
-}
+// Bootstrap Core Variable Override
+@import "../../../../themes/uams-2020/assets/scss/supporting/variables-bootstrap-core-override";
 
-.btn-container {
-    display: flex;
-    flex-flow: row wrap;
-    
+// Bootstrap Genesis Theme Variables
+@import "../../../../themes/uams-2020/assets/scss/supporting/variables-bootstrap-genesis";
 
-    .inner-container .btn,
-    .btn {
-        
-    }
+// UAMS Bootstrap Variables Override
+@import "../../../../themes/uams-2020/assets/scss/uams-supporting/variables";
 
-    @at-root .card #{&} {
-        
-        margin: auto 0 0;
-        justify-content: center;
+// UAMS Bootstrap Mixins Override
+@import "../../../../themes/uams-2020/assets/scss/uams-supporting/mixins";
 
-        .inner-container {
-           
-            .btn {
-                
-            }
-        }
-    }
-}
+// Import Bootstrap Core Functions, Variables and Mixins
+@import "../../../../themes/uams-2020/node_modules/bootstrap/scss/functions";
+@import "../../../../themes/uams-2020/node_modules/bootstrap/scss/variables";
+@import "../../../../themes/uams-2020/node_modules/bootstrap/scss/mixins";
+
+// Ratings
+@import "ratings";
+
+// Doctors
+@import "doctors-list";
+@import "doctors-item";
+@import "doctors-cards";
+
+// Conditions and/or Treatments
+@import "conditions-treatments";
+
+// Locations
+@import "locations-list";
+@import "locations-item";
+@import "location-alert";
+
+// FacetWP
+@import "facetwp";
