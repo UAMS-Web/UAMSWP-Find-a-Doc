@@ -496,12 +496,12 @@
   margin-bottom: 0;
 }
 
-.card-list-doctors {
+.card-list.card-list-doctors {
   margin-right: auto;
   margin-left: auto;
 }
 
-.card-list-doctors .card {
+.card-list.card-list-doctors .card {
   width: 255px;
 }
 
@@ -880,11 +880,11 @@
 }
 
 @media (min-width:381px) {
-  .card-list-doctors-count-4,
-  .card-list-doctors-count-6,
-  .card-list-doctors-count-8,
-  .card-list-doctors-count-10,
-  .card-list-doctors-count-12 {
+  .card-list.card-list-doctors-count-4,
+  .card-list.card-list-doctors-count-6,
+  .card-list.card-list-doctors-count-8,
+  .card-list.card-list-doctors-count-10,
+  .card-list.card-list-doctors-count-12 {
     width: 285px;
   }
 }
@@ -961,11 +961,11 @@
 }
 
 @media (min-width:666px) {
-  .card-list-doctors-count-4,
-  .card-list-doctors-count-6,
-  .card-list-doctors-count-8,
-  .card-list-doctors-count-10,
-  .card-list-doctors-count-12 {
+  .card-list.card-list-doctors-count-4,
+  .card-list.card-list-doctors-count-6,
+  .card-list.card-list-doctors-count-8,
+  .card-list.card-list-doctors-count-10,
+  .card-list.card-list-doctors-count-12 {
     width: 570px;
   }
 }
@@ -974,6 +974,9 @@
   .doctor-list .filter-col {
     flex-basis: 265px;
     flex-grow: 0;
+  }
+
+  .doctor-list .filter-col.collapse:not(.show) {
     display: block;
   }
 
@@ -1003,8 +1006,8 @@
 }
 
 @media (min-width:951px) {
-  .card-list-doctors-count-6,
-  .card-list-doctors-count-12 {
+  .card-list.card-list-doctors-count-6,
+  .card-list.card-list-doctors-count-12 {
     width: 855px;
   }
 }
@@ -1139,9 +1142,9 @@
 }
 
 @media (min-width:1236px) {
-  .card-list-doctors-count-4,
-  .card-list-doctors-count-8,
-  .card-list-doctors-count-12 {
+  .card-list.card-list-doctors-count-4,
+  .card-list.card-list-doctors-count-8,
+  .card-list.card-list-doctors-count-12 {
     width: 1140px;
   }
 }
@@ -1157,7 +1160,7 @@
 }
 
 @media (min-width:1521px) {
-  .card-list-doctors-count-10 {
+  .card-list.card-list-doctors-count-10 {
     width: 1425px;
   }
 }
@@ -1173,26 +1176,26 @@
 }
 
 @media (min-width:1806px) {
-  .card-list-doctors-count-6,
-  .card-list-doctors-count-12 {
+  .card-list.card-list-doctors-count-6,
+  .card-list.card-list-doctors-count-12 {
     width: 1710px;
   }
 }
 
 @media (min-width:2376px) {
-  .card-list-doctors-count-8 {
+  .card-list.card-list-doctors-count-8 {
     width: 2280px;
   }
 }
 
 @media (min-width:2946px) {
-  .card-list-doctors-count-10 {
+  .card-list.card-list-doctors-count-10 {
     width: 2850px;
   }
 }
 
 @media (min-width:3516px) {
-  .card-list-doctors-count-12 {
+  .card-list.card-list-doctors-count-12 {
     width: 3420px;
   }
 }
