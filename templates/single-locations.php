@@ -881,7 +881,7 @@ while ( have_posts() ) : the_post(); ?>
 													$telemed_modified_title = $telemed_modified_hour['location_telemed_modified_hours_title'];
 													$telemed_modified_info = $telemed_modified_hour['location_telemed_modified_hours_information'];
 													$telemed_modified_times = $telemed_modified_hour['location_telemed_modified_hours_times'];
-													$telemed_modified_text .= $telemed_modified_title ? '<h3 class="h4">'.$telemed_modified_title.'</h3>' : '';
+													$telemed_modified_text .= $telemed_modified_title ? '<h4 class="h5">'.$telemed_modified_title.'</h4>' : '';
 													$telemed_modified_text .= $telemed_modified_info ? $telemed_modified_info : '';
 						
 													if ($telemed_active_start > strtotime($telemed_modified_start) || '' == $telemed_active_start) {
