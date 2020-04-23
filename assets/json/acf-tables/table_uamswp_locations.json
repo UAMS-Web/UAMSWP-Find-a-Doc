@@ -236,6 +236,13 @@
             }
         },
         {
+            "name": "location_hours_group",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_hours_group"
+            }
+        },
+        {
             "name": "location_hours",
             "map": {
                 "type": "acf_field_name",

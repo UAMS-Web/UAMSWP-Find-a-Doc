@@ -11,6 +11,31 @@ if (empty($excerpt)){
     }
 }
 
+// Phone values
+
+$location_phone = get_field('location_phone');
+$location_phone_link = '<a href="tel:' . format_phone_dash( $location_phone ) . '" class="icon-phone">' . format_phone_us( $location_phone ) . '</a>';
+$location_clinic_phone_query = get_field('location_clinic_phone_query'); // separate number for (new) appointments?
+if ($location_clinic_phone_query) {
+	$location_new_appointments_phone = get_field('location_new_appointments_phone'); // phone number for (new) appointments
+	$location_new_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_new_appointments_phone ) . '" class="icon-phone">' . format_phone_us( $location_new_appointments_phone ) . '</a>';
+	$location_appointment_phone_query = get_field('field_location_appointment_phone_query'); // separate number for existing appointments?
+} else {
+	$location_new_appointments_phone = '';
+	$location_appointment_phone_query = '0';
+}
+if ($location_appointment_phone_query) {
+	$location_return_appointments_phone = get_field('location_return_appointments_phone'); // phone number for existing appointments
+	$location_return_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_return_appointments_phone ) . '" class="icon-phone">' . format_phone_us( $location_return_appointments_phone ) . '</a>';
+} else {
+	$location_return_appointments_phone = '';
+}
+$location_fax = get_field('location_fax');
+$location_fax_link = '<a href="tel:' . format_phone_dash( $location_fax ) . '" class="icon-phone">' . format_phone_us( $location_fax ) . '</a>';
+$location_phone_numbers = get_field('field_location_phone_numbers');
+
+// Image values
+
 $wayfinding_photo = get_field('location_wayfinding_photo');
 $photo_gallery = get_field('location_photo_gallery');
 $location_images = array();
@@ -37,6 +62,32 @@ if ( function_exists( 'fly_add_image_size' ) && !empty($schema_image) ) {
 } else {
 	$locationphoto = wp_get_attachment_image_src($schema_image, 'large');
 }
+
+// Set telemedicine values
+// Original Set
+// $telemed_query = get_field('field_location_telemed_query'); // Is there telemedicine?
+// $telemed_patients = get_field('field_location_telemed_patients'); // New patients, existing or both?
+// $telemed_hours247 = get_field('field_location_telemed_24_7'); // typically 24/7?
+// $telemed_hours = get_field('location_telemed_hours'); // telemedicine hours repeater
+// $telemed_modified = get_field('field_location_telemed_modified_hours_query'); // Are there modified hours for telemedicine?
+// $telemed_modified_reason = get_field('field_location_telemed_modified_hours_reason'); // Why are there modified hours for telemedicine?
+// $telemed_modified_start = get_field('field_location_telemed_modified_hours_start_date'); // When do the modified telemedicine hours start?
+// $telemed_modified_end = get_field('field_location_telemed_modified_hours_end'); // Do we know when the modified telemedicine hours end?
+// $telemed_modified_end_date = get_field('field_location_telemed_modified_hours_end_date'); // When do the modified telemedicine hours end?
+// $telemed_modified_hours = get_field('field_location_telemed_modified_hours_group'); // modified telemedicine hours repeater
+// Hours Grouping
+$location_hours_group = get_field('location_hours_group');
+
+$telemed_query = $location_hours_group['location_telemed_query']; // Is there telemedicine?
+$telemed_patients = $location_hours_group['location_telemed_patients']; // New patients, existing or both?
+$telemed_hours247 = $location_hours_group['location_telemed_24_7']; // typically 24/7?
+$telemed_hours = $location_hours_group['location_telemed_hours']; // telemedicine hours repeater
+$telemed_modified = $location_hours_group['location_telemed_modified_hours_query']; // Are there modified hours for telemedicine?
+$telemed_modified_reason = $location_hours_group['location_telemed_modified_hours_reason']; // Why are there modified hours for telemedicine?
+$telemed_modified_start = $location_hours_group['location_telemed_modified_hours_start_date']; // When do the modified telemedicine hours start?
+$telemed_modified_end = $location_hours_group['location_telemed_modified_hours_end']; // Do we know when the modified telemedicine hours end?
+$telemed_modified_end_date = $location_hours_group['location_telemed_modified_hours_end_date']; // When do the modified telemedicine hours end?
+$telemed_modified_hours = $location_hours_group['location_telemed_modified_hours_group']; // modified telemedicine hours repeater
 
 // Set alert values
 
@@ -87,6 +138,7 @@ $location_reopen_known = '';
 $location_reopen_date = '';
 $location_reopen_date_past = false;
 $location_closing_info = '';
+$location_closing_telemed = '';
 $location_closing_display = false;
 
 if ( $location_closing ) {
@@ -101,6 +153,9 @@ if ( $location_closing ) {
 		$location_reopen_date_past = true;
 	}
 	$location_closing_info = get_field('location_closing_info');
+	if ($location_closing_length == 'temporary') {
+		$location_closing_telemed = get_field('location_closing_telemed'); // Will telemedicine be available during closure?
+	}
 	if (
 		$location_closing_length == 'permanent'
 		|| ($location_closing_length == 'temporary' && !$location_reopen_date_past)
@@ -137,6 +192,7 @@ while ( have_posts() ) : the_post(); ?>
 					<h1 class="page-title"><?php the_title(); ?></h1>
 					<?php if ($location_closing_display) { ?>
 						<div class="alert alert-warning" role="alert">
+							<p>
 							<?php if ($location_closing_date_past) { ?>
 								This location is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed.
 							<?php } else { ?>
@@ -158,6 +214,10 @@ while ( have_posts() ) : the_post(); ?>
 							if (!empty($location_closing_info)) { ?>
 								<a href="#closing-info" class="alert-link no-break" aria-label="Learn more information about the closure of this location">Learn more</a>.
 							<?php } // endif ?>
+							</p>
+							<?php if ($location_closing_telemed) { ?>
+								<p>Telemedicine will still be available. <a href="#telemedicine-info" class="alert-link no-break" aria-label="Learn more information about telemedicine at this location">Learn more</a>.</p>
+							<?php } ?>
 						</div>
 					<?php } // endif ?>
 					<h2 class="sr-only">Address</h2>
@@ -181,29 +241,29 @@ while ( have_posts() ) : the_post(); ?>
 					?>
 					<h2>Contact Information</h2>
 					<dl>
-						<?php if (get_field('location_phone')) { ?>
+						<?php if ($location_phone) { ?>
 						<dt>Clinic Phone Number</dt>
-						<dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone') ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone') ); ?></a></dd>
-						<?php $phone_schema .= '"telephone": ["'. format_phone_dash( get_field('location_phone') ) .'"
+						<dd><?php echo $location_phone_link; ?></dd>
+						<?php $phone_schema .= '"telephone": ["'. format_phone_dash( $location_phone ) .'"
 						'; ?>
 						<?php } ?>
-						<?php if (get_field('location_new_appointments_phone') && get_field('location_clinic_phone_query')) { ?>
-							<dt>Appointment Phone Number<?php echo get_field('field_location_appointment_phone_query') ? 's' : ''; ?></dt>
-							<dd><a href="tel:<?php echo format_phone_dash( get_field('location_new_appointments_phone') ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_new_appointments_phone') ); ?></a><?php echo get_field('field_location_appointment_phone_query') ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
-							<?php $phone_schema .= ', "'. format_phone_dash( get_field('location_new_appointments_phone') ) .'"
+						<?php if ($location_new_appointments_phone && $location_clinic_phone_query) { ?>
+							<dt>Appointment Phone Number<?php echo $location_appointment_phone_query ? 's' : ''; ?></dt>
+							<dd><?php echo $location_new_appointments_phone_link; ?><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
+							<?php $phone_schema .= ', "'. format_phone_dash( $location_new_appointments_phone ) .'"
 							'; ?>
-							<?php if (get_field('location_return_appointments_phone') && get_field('field_location_appointment_phone_query')) { ?>
-								<dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone') ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone') ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
-								<?php $phone_schema .= ', "'. format_phone_dash( get_field('location_return_appointments_phone') ) .'"
+							<?php if ($location_return_appointments_phone && $location_appointment_phone_query) { ?>
+								<dd><?php echo $location_return_appointments_phone_link; ?><br/><span class="subtitle">Returning Patients</span></dd>
+								<?php $phone_schema .= ', "'. format_phone_dash( $location_return_appointments_phone ) .'"
 							'; ?>
 							<?php } ?>
 						<?php } ?>
-						<?php if (get_field('location_fax')) { ?>
+						<?php if ($location_fax) { ?>
 						<dt>Clinic Fax Number</dt>
-						<dd><a href="tel:<?php echo format_phone_dash( get_field('location_fax') ); ?>"><?php echo format_phone_us( get_field('location_fax') ); ?></a></dd>
+						<dd><?php echo $location_fax_link; ?></dd>
 						<?php } ?>
-						<?php if ( get_field('field_location_phone_numbers') ) { 
-							$phone_numbers = get_field('field_location_phone_numbers');
+						<?php if ( $location_phone_numbers ) { 
+							$phone_numbers = $location_phone_numbers;
 							while( have_rows('field_location_phone_numbers') ): the_row(); 
 								$title = get_sub_field('location_appointments_text');
 								$phone = get_sub_field('location_appointments_phone');
@@ -231,13 +291,13 @@ while ( have_posts() ) : the_post(); ?>
 					</dl>
 					<?php
 					$phone_schema .= '],';
-					$hours247 = get_field('location_24_7');
-					$modified = get_field('location_modified_hours');
-					$modified_reason = get_field('location_modified_hours_reason');
-					$modified_start = get_field('location_modified_hours_start_date');
-					$modified_end = get_field('location_modified_hours_end');
-					$modified_end_date = get_field('location_modified_hours_end_date');
-					$modified_hours = get_field('location_modified_hours_group');
+					$hours247 = $location_hours_group['location_24_7'];
+					$modified = $location_hours_group['location_modified_hours'];
+					$modified_reason = $location_hours_group['location_modified_hours_reason'];
+					$modified_start = $location_hours_group['location_modified_hours_start_date'];
+					$modified_end = $location_hours_group['location_modified_hours_end'];
+					$modified_end_date = $location_hours_group['location_modified_hours_end_date'];
+					$modified_hours = $location_hours_group['location_modified_hours_group'];
 					$modified_hours_schema ='';
 					$modified_text = '';
 					$active_start = '';
@@ -282,8 +342,8 @@ while ( have_posts() ) : the_post(); ?>
 									$modified_text .= '<dl class="hours">';
 									foreach ( $modified_times as $modified_time ) {
 										
-										if( $modified_day !== $modified_time['location_modified_hours_day'] || $modified_comment ) {
-											$modified_text .= '<dt>'. $modified_time['location_modified_hours_day'] .'</dt> ';
+										// if( $modified_day !== $modified_time['location_modified_hours_day'] || $modified_comment ) { // change for single day
+											$modified_text .= $modified_day !== $modified_time['location_modified_hours_day'] ? '<dt>'. $modified_time['location_modified_hours_day'] .'</dt> ' : '';
 											$modified_text .= '<dd>';
 	
 											if (1 != $i) {
@@ -320,9 +380,9 @@ while ( have_posts() ) : the_post(); ?>
 												'; //substr($modified_time['location_modified_hours_day'], 0, 2);
 											}
 	
-										} else {
-											$modified_text .= ', ';
-										}
+										// } else { // change for single day
+										// 	$modified_text .= ', ';
+										// }
 										if ( $modified_time['location_modified_hours_closed'] ) {
 											$modified_text .= 'Closed ';
 											$modified_hours_schema .= '"opens": "00:00",
@@ -341,9 +401,9 @@ while ( have_posts() ) : the_post(); ?>
 												$modified_comment = '';
 											}
 										}
-										if( $modified_day !== $modified_time['location_modified_hours_day'] || $modified_comment ) {
+										// if( $modified_day !== $modified_time['location_modified_hours_day'] || $modified_comment ) { // change for single day
 											$modified_text .= '</dd>';
-										}
+										// }
 										$modified_day = $modified_time['location_modified_hours_day']; // Reset the day
 										// if (!$modified_time['location_modified_hours_closed']) {
 										// 	$modified_hours_schema .= '';
@@ -372,7 +432,7 @@ while ( have_posts() ) : the_post(); ?>
 						// Do Nothing;
 						// Future Option
 					} else {
-						$hours = get_field('location_hours');
+						$hours = $location_hours_group['location_hours'];
 						$hours_schema = '';
 						if ( $hours247 || $hours[0]['day'] ) : ?>
 						<h2><?php echo $modified_text ? 'Typical ' : ''; ?>Hours</h2>
@@ -389,8 +449,8 @@ while ( have_posts() ) : the_post(); ?>
 									$hours_schema = '"openingHours": [';
 									$i = 1;
 									foreach ($hours as $hour) :
-										if( $day !== $hour['day'] || $comment ) {
-											$hours_text .= '<dt>'. $hour['day'] .'</dt> ';
+										// if( $day !== $hour['day'] || $comment ) { // change for single day
+											$hours_text .= $day !== $hour['day'] ? '<dt>'. $hour['day'] .'</dt> ' : '';
 											$hours_text .= '<dd>';
 											if (!$hour['closed']) {
 												if (1 != $i) {
@@ -403,9 +463,9 @@ while ( have_posts() ) : the_post(); ?>
 											} elseif ( !$hour['closed'] ) {
 												$hours_schema .= substr($hour['day'], 0, 2);
 											}
-										} else {
-											$hours_text .= ', ';
-										}
+										// } else { // Changed for single day
+										// 	$hours_text .= ', ';
+										// }
 										if ( $hour['closed'] ) {
 											$hours_text .= 'Closed ';
 										} else {
@@ -418,9 +478,9 @@ while ( have_posts() ) : the_post(); ?>
 												$comment = '';
 											}
 										}
-										if( $day !== $hour['day'] && $comment ) {
+										// if( $day !== $hour['day'] && $comment ) { // change for single day
 											$hours_text .= '</dd>';
-										}
+										// }
 										$day = $hour['day']; // Reset the day
 										if (!$hour['closed']) {
 											$hours_schema .= '"';
@@ -477,10 +537,10 @@ while ( have_posts() ) : the_post(); ?>
 								echo '</dl>';
 							}
 						endif; ?>
-					<?php if (get_field('location_after_hours') && !get_field('location_24_7')) { ?>
+					<?php if ($location_hours_group['location_after_hours'] && !$location_hours_group['location_24_7']) { ?>
 					<h2>After Hours</h2>
-					<?php echo get_field('location_after_hours'); ?>
-					<?php } elseif (!get_field('location_24_7')) { ?>
+					<?php echo $location_hours_group['location_after_hours']; ?>
+					<?php } elseif (!$location_hours_group['location_24_7']) { ?>
 					<h2>After Hours</h2>
 					<p>If you are in need of urgent or emergency care call 911 or go to your nearest emergency department at your local hospital.</p>
 					<?php } endif;
@@ -743,6 +803,196 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 		</section>
 	<?php endif; ?>
+	<?php // Telemedicine
+		if ($telemed_query) { ?>
+			<section class="uams-module bg-auto" aria-label="Telemedicine Information" id="telemedicine-info">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<h2 class="module-title">Telemedicine Information</h2>
+							<?php if ($location_closing_display && !$location_closing_telemed) { ?>
+								<div class="module-body">
+									<p class="text-center"><strong>
+										<?php if ($location_closing_date_past) { ?>
+											Telemedicine is not available while this location is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed.
+										<?php } else { ?>
+											Telemedicine will not be available after this location closes <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>.
+										<?php } // endif ?>
+									</strong></p>
+								</div>
+							<?php } else { ?>
+								<div class="row content-split-lg">
+									<div class="col-xs-12 col-lg-7">
+										<div class="content-width">
+											<p>Insert generic information about telemedicine here.</p>
+											<p>
+												<?php // Declare which patients can use the service.
+												if ($telemed_patients == 'all') { ?>
+													This service is available to both new and existing patients.
+												<?php } elseif ($telemed_patients == 'new') { ?>
+													This service is available to new patients only.
+												<?php } elseif ($telemed_patients == 'existing') { ?>
+													This service is available to existing patients only.
+												<?php } // endif
+
+												// Declare which phone number should be called.
+													
+													if (!$location_clinic_phone_query) { // If there is only one phone number ?>
+														Patients should call <?php echo $location_phone_link; ?> to schedule a telemedicine appointment.
+													<?php } elseif ($location_clinic_phone_query && !$location_appointment_phone_query) { // If there is only one appointment number ?>
+														Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.
+													<?php } else { // If there are two appointment numbers (one for new, one for existing)
+														if ($telemed_patients == 'all') { ?>
+															New patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment, while existing patients should call <?php echo $location_return_appointments_phone_link; ?>.
+														<?php } elseif ($telemed_patients == 'new') { ?>
+															Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.
+														<?php } elseif ($telemed_patients == 'existing') { ?>
+															Patients should call <?php echo $location_return_appointments_phone_link; ?> to schedule a telemedicine appointment.
+														<?php }
+													} // endif ?>
+											</p>
+										</div>
+									</div>
+									<div class="col-xs-12 col-lg-5">
+										<div class="content-width">
+										<?php
+										$telemed_modified_text = '';
+										$telemed_active_start = '';
+										$telemed_active_end = '';
+										if ($telemed_modified && $telemed_modified_hours) : 
+										?>
+										<?php 
+											
+											$telemed_modified_day = ''; // Previous Day
+											$telemed_modified_comment = ''; // Comment on previous day
+											$i = 1;
+
+											$telemed_today = strtotime("today");
+											$telemed_today_30 = strtotime("+30 days");
+
+											if( strtotime($telemed_modified_start) <= $telemed_today_30 && ( strtotime($telemed_modified_end_date) >= $telemed_today || !$telemed_modified_end ) ){
+												$telemed_modified_text .= $telemed_modified_reason;
+												$telemed_modified_text .= '<p class="small font-italic">These modified hours start on ' . date("l, F j, Y", strtotime($telemed_modified_start)) . ', ';
+												$telemed_modified_text .= $telemed_modified_end && $telemed_modified_end_date ? 'and are scheduled to end after ' . date("l, F j, Y", strtotime($telemed_modified_end_date)) . '.' : 'and will remain in effect until further notice.';
+												$telemed_modified_text .= '</p>';
+
+												foreach ($telemed_modified_hours as $telemed_modified_hour) {
+						
+													$telemed_modified_title = $telemed_modified_hour['location_telemed_modified_hours_title'];
+													$telemed_modified_info = $telemed_modified_hour['location_telemed_modified_hours_information'];
+													$telemed_modified_times = $telemed_modified_hour['location_telemed_modified_hours_times'];
+													$telemed_modified_text .= $telemed_modified_title ? '<h3 class="h4">'.$telemed_modified_title.'</h3>' : '';
+													$telemed_modified_text .= $telemed_modified_info ? $telemed_modified_info : '';
+						
+													if ($telemed_active_start > strtotime($telemed_modified_start) || '' == $telemed_active_start) {
+														$telemed_active_start = strtotime($telemed_modified_start);
+													}
+													if ( $telemed_active_end <= strtotime($telemed_modified_end_date) || !$telemed_modified_end ) {
+														if (!$telemed_modified_end) {
+															$telemed_active_end = 'TBD';
+														} else {
+															$telemed_active_end = strtotime($telemed_modified_end_date);
+														}
+													}
+													if (is_array($telemed_modified_times) || is_object($telemed_modified_times)) {
+														$telemed_modified_text .= '<dl class="hours">';
+														foreach ( $telemed_modified_times as $telemed_modified_time ) {
+															
+															// if( $telemed_modified_day !== $telemed_modified_time['location_telemed_modified_hours_day'] || $telemed_modified_comment ) { // change for single day
+																$telemed_modified_text .= $telemed_modified_day !== $telemed_modified_time['location_telemed_modified_hours_day'] ? '<dt>'. $telemed_modified_time['location_telemed_modified_hours_day'] .'</dt> ' : '';
+																$telemed_modified_text .= '<dd>';
+						
+															// } else { // change for single day
+															// 	// $telemed_modified_text .= ', ';
+															// }
+															if ( $telemed_modified_time['location_telemed_modified_hours_closed'] ) {
+																$telemed_modified_text .= 'Closed ';
+															} else {
+																$telemed_modified_text .= ( ( $telemed_modified_time['location_telemed_modified_hours_open'] && '00:00:00' != $telemed_modified_time['location_telemed_modified_hours_open'] )  ? '' . apStyleDate( $telemed_modified_time['location_telemed_modified_hours_open'] ) . ' &ndash; ' . apStyleDate( $telemed_modified_time['location_telemed_modified_hours_close'] ) . '' : '' );
+																if ( $telemed_modified_time['location_telemed_modified_hours_comment'] ) {
+																	$telemed_modified_text .= ' <br /><span class="subtitle">' .$telemed_modified_time['location_telemed_modified_hours_comment'] . '</span>';
+																	$telemed_modified_comment = $telemed_modified_time['location_telemed_modified_hours_comment'];
+																} else {
+																	$telemed_modified_comment = '';
+																}
+															}
+															// if( $telemed_modified_day !== $telemed_modified_time['location_telemed_modified_hours_day'] || $telemed_modified_comment ) { // change for single day
+																$telemed_modified_text .= '</dd>';
+															// }
+															$telemed_modified_day = $telemed_modified_time['location_telemed_modified_hours_day']; // Reset the day
+															$i++;
+															
+														} // endforeach
+														$telemed_modified_text .= '</dl>';
+													} // End if (array)
+													
+												}
+											}
+										
+											echo $telemed_modified_text ? '<h3>Modified Hours</h3>' . $telemed_modified_text: '';
+											
+										endif; // End Modified Hours
+										if (($telemed_active_start != '' && $telemed_active_start <= $telemed_today) && ( strtotime($telemed_active_end) > $telemed_today || $telemed_active_end == 'TBD' ) ) {
+											// Do Nothing;
+											// Future Option
+										} else {
+											if ( $telemed_hours247 || $telemed_hours[0]['day'] ) : ?>
+											<h3><?php echo $telemed_modified_text ? 'Typical ' : ''; ?>Hours</h3>
+											<?php
+												if ($telemed_hours247):
+													echo 'Open 24/7';
+												else :
+													echo '<dl class="hours">';
+													if( $telemed_hours ) {
+														$telemed_hours_text = '';
+														$telemed_day = ''; // Previous Day
+														$telemed_comment = ''; // Comment on previous day
+														$i = 1;
+														foreach ($telemed_hours as $telemed_hour) :
+															// if( $telemed_day !== $telemed_hour['day'] || $telemed_comment ) { // change for single day
+																$telemed_hours_text .= $telemed_day !== $telemed_hour['day'] ? '<dt>'. $telemed_hour['day'] .'</dt> ' : '';
+																$telemed_hours_text .= '<dd>';
+															// } else { // change for single day
+															// 	$telemed_hours_text .= ', ';
+															// }
+															if ( $telemed_hour['closed'] ) {
+																$telemed_hours_text .= 'Closed ';
+															} else {
+																$telemed_hours_text .= ( ( $telemed_hour['open'] && '00:00:00' != $telemed_hour['open'] )  ? '' . apStyleDate( $telemed_hour['open'] ) . ' &ndash; ' . apStyleDate( $telemed_hour['close'] ) . '' : '' );
+																if ( $telemed_hour['comment'] ) {
+																	$telemed_hours_text .= ' <br /><span class="subtitle">' .$telemed_hour['comment'] . '</span>';
+																	$telemed_comment = $telemed_hour['comment'];
+																} else {
+																	$telemed_comment = '';
+																}
+															}
+															// if( $telemed_day !== $telemed_hour['day'] && $telemed_comment ) { // change for single day
+																$telemed_hours_text .= '</dd>';
+															// }
+															$telemed_day = $telemed_hour['day']; // Reset the day
+															if (!$telemed_hour['closed']) {
+															$i++;
+															}
+														endforeach;
+														echo $telemed_hours_text;
+													} else {
+														echo '<dt>No information</dt>';
+													}
+													echo '</dl>';
+												endif; 
+											endif;
+											}
+											?>
+										</div>
+									</div>
+								</div>
+							<?php } // endif ?>
+						</div>
+					</div>
+				</div>
+			</section>
+		<?php } // endif
+	// End Telemedicine ?>
 	<?php // Portal
 		if ( get_field('location_portal') ) :
 			$portal = get_term(get_field('location_portal'), "portal");
