@@ -54,6 +54,17 @@ function set_default_portal( $field ) {
     }
     return $field;
 }
+add_filter('acf/load_value/key=field_physician_affiliation', 'set_default_hospital', 20, 3);
+function set_default_hospital($value, $post_id, $field) {
+    // Only if no value set
+	if ( $value !== null ) {
+        return $value;
+    }
+	$term = get_term_by('slug', 'uams', 'affiliation');
+	$id = $term->term_id;
+	$value = 554;//$id;
+  	return $value;
+}
 add_filter('acf/load_value/key=field_physician_languages', 'set_default_language', 20, 3);
 function set_default_language($value, $post_id, $field) {
     // Only add default content for new posts
