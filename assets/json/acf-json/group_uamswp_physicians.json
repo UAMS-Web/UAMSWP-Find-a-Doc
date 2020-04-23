@@ -864,7 +864,32 @@
             "key": "field_physician_affiliation",
             "name": "physician_affiliation",
             "type": "taxonomy",
-            "label": "Affiliation",
+            "label": "Hospital Affiliations",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "affiliation",
+            "field_type": "checkbox",
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 0,
+            "allow_null": 0
+        },
+        "field_physician_institute_affiliation": {
+            "key": "field_physician_institute_affiliation",
+            "name": "physician_institute_affiliation",
+            "type": "taxonomy",
+            "label": "Institute Affiliations",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -873,7 +898,7 @@
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "affiliation",
+            "taxonomy": "institute_affiliation",
             "field_type": "checkbox",
             "add_term": 0,
             "save_terms": 0,

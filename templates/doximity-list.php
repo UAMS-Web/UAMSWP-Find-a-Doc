@@ -68,21 +68,21 @@ function display_provider_image() {
                         <th colspan="2">(Suggested) Expertise</th>
                     </tr>
                     <tr>
-                        <th>NPI Number</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Credentials (MD or DO)</th>
-                        <th>Email Address</th>
-                        <th>Facility Name</th>
-                        <th>Office Address 1</th>
-                        <th>Office Address 2</th>
-                        <th>Office City</th>
-                        <th>Office State</th>
-                        <th>Office Zip</th>
-                        <th>Phone</th>
-                        <th>Fax</th>
-                        <th>Specialty</th>
-                        <th>Sub-Specialty</th>
+                        <th class="no-break">NPI Number</th>
+                        <th class="no-break">First Name</th>
+                        <th class="no-break">Last Name</th>
+                        <th class="no-break">Credentials (MD or DO)</th>
+                        <th class="no-break">Email Address</th>
+                        <th class="no-break">Facility Name</th>
+                        <th class="no-break">Office Address 1</th>
+                        <th class="no-break">Office Address 2</th>
+                        <th class="no-break">Office City</th>
+                        <th class="no-break">Office State</th>
+                        <th class="no-break">Office Zip</th>
+                        <th class="no-break">Phone</th>
+                        <th class="no-break">Fax</th>
+                        <th class="no-break">Specialty</th>
+                        <th class="no-break">Sub-Specialty</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -132,30 +132,46 @@ function display_provider_image() {
                             }
                         endforeach;
                     } 
-                    if ( $degree_valid && $npi_valid ) {
-                    
+                    // Check if there is a hospital affiliation
+                    $affiliation_valid = false;
+                    $affiliations = get_field('physician_affiliation',$post_id);
+                    if ( !empty($affiliations) ) {
+	                    $affiliation_valid = true;
+                    }
+                    // Check for valid locations
+                    $locations = get_field('physician_locations',$post_id);
+                    $location_valid = false;
+                    foreach( $locations as $location ) {
+                        if ( get_post_status ( $location ) == 'publish' ) {
+                            $location_valid = true;
+                            $break;
+                        }
+                    }
+                    // Create the table
+                    if ( $degree_valid && $npi_valid && $affiliation_valid && $location_valid ) {
+                        echo '<tr>';
                         // NPI Number field
                             // $npi = get_field('physician_npi',$post_id); // Added above
-                            echo '<td>';
+                            echo '<td class="no-break">';
                             echo $npi; // only display value if value is not empty or zero
                             echo '</td>';
 
                         // First Name field
                             $first_name = get_field('physician_first_name',$post_id);
-                            echo '<td>' . $first_name . '</td>';
+                            echo '<td class="no-break">' . $first_name . '</td>';
 
                         // Last Name field
                             $last_name = get_field('physician_last_name',$post_id);
-                            echo '<td>' . $last_name . '</td>';
+                            echo '<td class="no-break">' . $last_name . '</td>';
 
                         // Credentials (MD or DO) field
-                            echo '<td>'. $degree_valid . '</td>';
+                            echo '<td class="no-break">'. $degree_valid . '</td>';
 
                         // Email Address field
                             $e = 1;
                             $contact_type = '';
                             $contact_info = '';
-                            echo '<td>';
+                            echo '<td class="no-break">';
                                 if( have_rows('physician_contact_information',$post_id) ):
                                     while ( have_rows('physician_contact_information',$post_id) ) : the_row();
                                         $contact_type = get_sub_field('type');
@@ -169,16 +185,24 @@ function display_provider_image() {
                             echo '</td>';
 
                         // Facility Name field
+                            $affiliation_list = '';
+                            $i = 1;
+                            if ( $affiliations ) {
+                                foreach( $affiliations as $affiliation ):
+                                    $affiliation_name = get_term( $affiliation, 'affiliation');
+                                    $affiliation_list .= '<span class="no-break">' . $affiliation_name->name . '</span>';
+                                    if( count($affiliations) > $i ) {
+                                        $affiliation_list .= ', ';
+                                    }
+                                    $i++;
+                                endforeach;
+                            } 
+                            echo '<td>';
+                            echo $affiliation_list ? $affiliation_list : '';
+                            echo '</td>';
+
+                        // Office Address 1 field
                         
-                            // Check for valid locations
-                            $locations = get_field('physician_locations',$post_id);
-                            $location_valid = false;
-                            foreach( $locations as $location ) {
-                                if ( get_post_status ( $location ) == 'publish' ) {
-                                    $location_valid = true;
-                                    $break;
-                                }
-                            }
                             // Get primary appointment location name
                             $l = 1;
                             $primary_appointment_title = '';
@@ -206,42 +230,37 @@ function display_provider_image() {
                                     }
                                 } // endforeach
                             }
-                            echo '<td>';
-                            echo $primary_appointment_title ? $primary_appointment_title : '';
-                            echo '</td>';
-
-                        // Office Address 1 field
-                            echo '<td>';
+                            echo '<td class="no-break">';
                             echo $primary_appointment_address_1 ? $primary_appointment_address_1 : '';
                             echo '</td>';
 
                         // Office Address 2 field
-                            echo '<td>';
+                            echo '<td class="no-break">';
                             echo $primary_appointment_address_2 ? $primary_appointment_address_2 : '';
                             echo '</td>';
 
                         // Office City field
-                            echo '<td>';
+                            echo '<td class="no-break">';
                             echo $primary_appointment_city ? $primary_appointment_city : '';
                             echo '</td>';
 
                         // Office State field
-                            echo '<td>';
+                            echo '<td class="no-break">';
                             echo $primary_appointment_state ? $primary_appointment_state : '';
                             echo '</td>';
 
                         // Office Zip field
-                            echo '<td>';
+                            echo '<td class="no-break">';
                             echo $primary_appointment_zip ? $primary_appointment_zip : '';
                             echo '</td>';
 
                         // Phone field
-                            echo '<td>';
+                            echo '<td class="no-break">';
                             echo $primary_appointment_phone ? $primary_appointment_phone : '';
                             echo '</td>';
 
                         // Fax field
-                            echo '<td>';
+                            echo '<td class="no-break">';
                             echo $primary_appointment_fax ? $primary_appointment_fax : '';
                             echo '</td>';
 
