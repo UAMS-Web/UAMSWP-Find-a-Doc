@@ -2224,7 +2224,15 @@
                     "label": "Is telemedicine available 24\/7 during these modified hours?",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_telemed_modified_hours_query",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -2245,6 +2253,11 @@
                     "required": 0,
                     "conditional_logic": [
                         [
+                            {
+                                "field": "field_location_telemed_modified_hours_query",
+                                "operator": "==",
+                                "value": "1"
+                            },
                             {
                                 "field": "field_location_telemed_modified_hours_24_7",
                                 "operator": "!=",
