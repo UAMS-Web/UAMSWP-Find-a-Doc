@@ -1087,7 +1087,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "message": "<p>Set the time for each day or 24\/7. Leave time blank for closed.<\/p>",
+                    "message": "<p>Set the time for each day or mark it as open 24\/7.<\/p>",
                     "new_lines": "",
                     "esc_html": 0
                 },
@@ -1095,7 +1095,7 @@
                     "key": "field_location_24_7",
                     "name": "location_24_7",
                     "type": "true_false",
-                    "label": "Open 24\/7",
+                    "label": "Is the location typically available 24/7?",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -1115,7 +1115,7 @@
                     "name": "location_hours",
                     "type": "repeater",
                     "label": "Typical Hours",
-                    "instructions": "",
+                    "instructions": "Set the time for all seven days.",
                     "required": 0,
                     "conditional_logic": [
                         [
@@ -1325,7 +1325,7 @@
                     "label": "Reason for Modified Hours",
                     "name": "location_modified_hours_reason",
                     "type": "wysiwyg",
-                    "instructions": "",
+                    "instructions": "Describe the overall reason the hours are being modified. This might be because of a holiday or public health emergency.<br /><br />The date range will be displayed automatically, so that does not have to be included in this field.",
                     "required": 1,
                     "conditional_logic": [
                         [
@@ -1371,7 +1371,7 @@
                     },
                     "acfe_permissions": "",
                     "display_format": "m\/d\/Y",
-                    "return_format": "m\/d\/Y",
+                    "return_format": "F j, Y",
                     "first_day": 0
                 },
                 {
@@ -1425,7 +1425,7 @@
                     },
                     "acfe_permissions": "",
                     "display_format": "m\/d\/Y",
-                    "return_format": "m\/d\/Y",
+                    "return_format": "F j, Y",
                     "first_day": 0
                 },
                 {
@@ -1482,7 +1482,7 @@
                             "label": "Information",
                             "name": "location_modified_hours_information",
                             "type": "wysiwyg",
-                            "instructions": "You can describe the modification instead of using the structured days and hours fields. Or you can add information in addition to the structured days and hours.",
+                            "instructions": "This field can include a description of the modification if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.<br /><br />Or you can add information in addition to the structured days and hours.",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -1521,7 +1521,7 @@
                             "label": "Hours",
                             "name": "location_modified_hours_times",
                             "type": "repeater",
-                            "instructions": "Set the time for each day. Leave time blank for closed.",
+                            "instructions": "Set the time for all seven days.",
                             "required": 0,
                             "conditional_logic": [
                                 [
@@ -1717,7 +1717,7 @@
                                 "id": ""
                             },
                             "display_format": "m\/d\/Y",
-                            "return_format": "m\/d\/Y",
+                            "return_format": "F j, Y",
                             "first_day": 0
                         },
                         {
@@ -1846,11 +1846,36 @@
                     "ui_off_text": ""
                 },
                 {
+                    "key": "field_location_telemed_info_message",
+                    "name": "",
+                    "type": "message",
+                    "label": "Telemedicine Information",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_telemed_query",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "<p>The general information included about telemedicine is set in Find-a-Doc Settings &gt; Clinical Locations.<\/p>",
+                    "new_lines": "",
+                    "esc_html": 0
+                },
+                {
                     "key": "field_location_telemed_patients",
                     "name": "location_telemed_patients",
                     "type": "radio",
                     "label": "Patient Type",
-                    "instructions": "",
+                    "instructions": "Which type of patients can use the telemedicine services offered at this location?",
                     "required": 1,
                     "conditional_logic": [
                         [
@@ -1862,7 +1887,7 @@
                         ]
                     ],
                     "wrapper": {
-                        "width": "40",
+                        "width": "",
                         "class": "",
                         "id": ""
                     },
@@ -1910,7 +1935,7 @@
                     "name": "location_telemed_hours",
                     "type": "repeater",
                     "label": "Typical Telemedicine Hours",
-                    "instructions": "",
+                    "instructions": "Set the time for all seven days.",
                     "required": 0,
                     "conditional_logic": [
                         [
@@ -2114,7 +2139,7 @@
                     "label": "Reason for Modified Telemedicine Hours",
                     "name": "location_telemed_modified_hours_reason",
                     "type": "wysiwyg",
-                    "instructions": "",
+                    "instructions": "Describe the overall reason the hours are being modified. This might be because of a holiday or public health emergency.<br /><br />This field can also include a description of the modification, if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.<br /><br />The date range will be displayed automatically, so that does not have to be included in this field..",
                     "required": 1,
                     "conditional_logic": [
                         [
@@ -2160,7 +2185,7 @@
                     },
                     "acfe_permissions": "",
                     "display_format": "m\/d\/Y",
-                    "return_format": "m\/d\/Y",
+                    "return_format": "F j, Y",
                     "first_day": 0
                 },
                 {
@@ -2214,7 +2239,7 @@
                     },
                     "acfe_permissions": "",
                     "display_format": "m\/d\/Y",
-                    "return_format": "m\/d\/Y",
+                    "return_format": "F j, Y",
                     "first_day": 0
                 },
                 {
@@ -2249,7 +2274,7 @@
                     "label": "Hours",
                     "name": "location_telemed_modified_hours_times",
                     "type": "repeater",
-                    "instructions": "",
+                    "instructions": "Set the time for all seven days.",
                     "required": 0,
                     "conditional_logic": [
                         [
@@ -2985,7 +3010,7 @@
 				"id": ""
             },
 			"acfe_permissions": "",
-			"display_format": "F j, Y",
+            "display_format": "m\/d\/Y",
 			"return_format": "F j, Y",
 			"first_day": 0
 		},
@@ -3073,7 +3098,7 @@
 				"id": ""
             },
 			"acfe_permissions": "",
-			"display_format": "F j, Y",
+            "display_format": "m\/d\/Y",
 			"return_format": "F j, Y",
 			"first_day": 0
 		},

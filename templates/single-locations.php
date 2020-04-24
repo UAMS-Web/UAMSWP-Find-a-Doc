@@ -89,6 +89,7 @@ $telemed_modified_end = $location_hours_group['location_telemed_modified_hours_e
 $telemed_modified_end_date = $location_hours_group['location_telemed_modified_hours_end_date']; // When do the modified telemedicine hours end?
 $telemed_modified_hours247 = $location_hours_group['location_telemed_modified_hours_24_7'];
 // $telemed_modified_hours = $location_hours_group['location_telemed_modified_hours_group']; // modified telemedicine hours repeater
+$telemed_info = get_field('location_telemed_descr_system', 'option'); // System-wide information about telemedicine at locations
 
 // Set alert values
 
@@ -317,8 +318,8 @@ while ( have_posts() ) : the_post(); ?>
 
 						if( strtotime($modified_start) <= $today_30 && ( strtotime($modified_end_date) >= $today || !$modified_end ) ){
 							$modified_text .= $modified_reason;
-							$modified_text .= '<p class="small font-italic">These modified hours start on ' . date("l, F j, Y", strtotime($modified_start)) . ', ';
-							$modified_text .= $modified_end && $modified_end_date ? 'and are scheduled to end after ' . date("l, F j, Y", strtotime($modified_end_date)) . '.' : 'and will remain in effect until further notice.';
+							$modified_text .= '<p class="small font-italic">These modified hours start on ' . $modified_start . ', ';
+							$modified_text .= $modified_end && $modified_end_date ? 'and are scheduled to end after ' . $modified_end_date . '.' : 'and will remain in effect until further notice.';
 							$modified_text .= '</p>';
 
 							foreach ($modified_hours as $modified_hour) {
@@ -824,7 +825,7 @@ while ( have_posts() ) : the_post(); ?>
 								<div class="row content-split-lg">
 									<div class="col-xs-12 col-lg-7">
 										<div class="content-width">
-											<p>Insert generic information about telemedicine here.</p>
+											<?php echo $telemed_info ? $telemed_info : '' ?>
 											<p>
 												<?php // Declare which patients can use the service.
 												if ($telemed_patients == 'all') { ?>
@@ -872,8 +873,8 @@ while ( have_posts() ) : the_post(); ?>
 
 											if( strtotime($telemed_modified_start) <= $telemed_today_30 && ( strtotime($telemed_modified_end_date) >= $telemed_today || !$telemed_modified_end ) ){
 												$telemed_modified_text .= $telemed_modified_reason;
-												$telemed_modified_text .= '<p class="small font-italic">These modified hours start on ' . date("l, F j, Y", strtotime($telemed_modified_start)) . ', ';
-												$telemed_modified_text .= $telemed_modified_end && $telemed_modified_end_date ? 'and are scheduled to end after ' . date("l, F j, Y", strtotime($telemed_modified_end_date)) . '.' : 'and will remain in effect until further notice.';
+												$telemed_modified_text .= '<p class="small font-italic">These modified hours start on ' . $telemed_modified_start . ', ';
+												$telemed_modified_text .= $telemed_modified_end && $telemed_modified_end_date ? 'and are scheduled to end after ' . $telemed_modified_end_date . '.' : 'and will remain in effect until further notice.';
 												$telemed_modified_text .= '</p>';
 
 												if ($telemed_modified_hours247):
