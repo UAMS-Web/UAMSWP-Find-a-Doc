@@ -88,7 +88,7 @@ $telemed_modified_start = $location_hours_group['location_telemed_modified_hours
 $telemed_modified_end = $location_hours_group['location_telemed_modified_hours_end']; // Do we know when the modified telemedicine hours end?
 $telemed_modified_end_date = $location_hours_group['location_telemed_modified_hours_end_date']; // When do the modified telemedicine hours end?
 $telemed_modified_hours247 = $location_hours_group['location_telemed_modified_hours_24_7'];
-$telemed_modified_hours = $location_hours_group['location_telemed_modified_hours_group']; // modified telemedicine hours repeater
+// $telemed_modified_hours = $location_hours_group['location_telemed_modified_hours_group']; // modified telemedicine hours repeater
 
 // Set alert values
 
@@ -298,7 +298,7 @@ while ( have_posts() ) : the_post(); ?>
 					$modified_start = $location_hours_group['location_modified_hours_start_date'];
 					$modified_end = $location_hours_group['location_modified_hours_end'];
 					$modified_end_date = $location_hours_group['location_modified_hours_end_date'];
-					$modified_hours247 = $location_hours_group['location_modified_24_7'];
+					$modified_hours247 = $location_hours_group['location_modified_hours_24_7'];
 					$modified_hours = $location_hours_group['location_modified_hours_group'];
 					$modified_hours_schema ='';
 					$modified_text = '';
