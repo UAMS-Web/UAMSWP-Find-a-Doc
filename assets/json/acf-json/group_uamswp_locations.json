@@ -1371,7 +1371,7 @@
                     },
                     "acfe_permissions": "",
                     "display_format": "m\/d\/Y",
-                    "return_format": "m\/d\/Y",
+                    "return_format": "F j, Y",
                     "first_day": 0
                 },
                 {
@@ -1425,7 +1425,7 @@
                     },
                     "acfe_permissions": "",
                     "display_format": "m\/d\/Y",
-                    "return_format": "m\/d\/Y",
+                    "return_format": "F j, Y",
                     "first_day": 0
                 },
                 {
@@ -1717,7 +1717,7 @@
                                 "id": ""
                             },
                             "display_format": "m\/d\/Y",
-                            "return_format": "m\/d\/Y",
+                            "return_format": "F j, Y",
                             "first_day": 0
                         },
                         {
@@ -2185,7 +2185,7 @@
                     },
                     "acfe_permissions": "",
                     "display_format": "m\/d\/Y",
-                    "return_format": "m\/d\/Y",
+                    "return_format": "F j, Y",
                     "first_day": 0
                 },
                 {
@@ -2239,7 +2239,7 @@
                     },
                     "acfe_permissions": "",
                     "display_format": "m\/d\/Y",
-                    "return_format": "m\/d\/Y",
+                    "return_format": "F j, Y",
                     "first_day": 0
                 },
                 {
