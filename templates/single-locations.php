@@ -341,7 +341,7 @@ while ( have_posts() ) : the_post(); ?>
 									}
 								}
 								if ($modified_hours247):
-									echo 'Open 24/7';
+									echo '<strong>Open 24/7</strong>';
 									$modified_hours_schema = '"dayOfWeek": [
 										"Monday",
 										"Tuesday",
@@ -438,7 +438,7 @@ while ( have_posts() ) : the_post(); ?>
 						<h2><?php echo $modified_text ? 'Typical ' : ''; ?>Hours</h2>
 						<?php
 							if ($hours247):
-								echo 'Open 24/7';
+								echo '<strong>Open 24/7</strong>';
 								$hours_schema = '"openingHours": "Mo-Su",';
 							else :
 								echo '<dl class="hours">';
@@ -877,7 +877,7 @@ while ( have_posts() ) : the_post(); ?>
 												$telemed_modified_text .= '</p>';
 
 												if ($telemed_modified_hours247):
-													$telemed_modified_text .= 'Open 24/7';
+													$telemed_modified_text .= '<strong>Open 24/7</strong>';
 												else :
 													$telemed_modified_times = $location_hours_group['location_telemed_modified_hours_times'];
 													if ($telemed_active_start > strtotime($telemed_modified_start) || '' == $telemed_active_start) {
@@ -931,7 +931,7 @@ while ( have_posts() ) : the_post(); ?>
 											<h3><?php echo $telemed_modified_text ? 'Typical ' : ''; ?>Hours</h3>
 											<?php
 												if ($telemed_hours247):
-													echo 'Open 24/7';
+													echo '<strong>Open 24/7</strong>';
 												else :
 													echo '<dl class="hours">';
 													if( $telemed_hours ) {
