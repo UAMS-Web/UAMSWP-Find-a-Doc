@@ -318,8 +318,8 @@ while ( have_posts() ) : the_post(); ?>
 
 						if( strtotime($modified_start) <= $today_30 && ( strtotime($modified_end_date) >= $today || !$modified_end ) ){
 							$modified_text .= $modified_reason;
-							$modified_text .= '<p class="small font-italic">These modified hours start on ' . date("l, F j, Y", strtotime($modified_start)) . ', ';
-							$modified_text .= $modified_end && $modified_end_date ? 'and are scheduled to end after ' . date("l, F j, Y", strtotime($modified_end_date)) . '.' : 'and will remain in effect until further notice.';
+							$modified_text .= '<p class="small font-italic">These modified hours start on ' . $modified_start . ', ';
+							$modified_text .= $modified_end && $modified_end_date ? 'and are scheduled to end after ' . $modified_end_date . '.' : 'and will remain in effect until further notice.';
 							$modified_text .= '</p>';
 
 							foreach ($modified_hours as $modified_hour) {
@@ -873,8 +873,8 @@ while ( have_posts() ) : the_post(); ?>
 
 											if( strtotime($telemed_modified_start) <= $telemed_today_30 && ( strtotime($telemed_modified_end_date) >= $telemed_today || !$telemed_modified_end ) ){
 												$telemed_modified_text .= $telemed_modified_reason;
-												$telemed_modified_text .= '<p class="small font-italic">These modified hours start on ' . date("l, F j, Y", strtotime($telemed_modified_start)) . ', ';
-												$telemed_modified_text .= $telemed_modified_end && $telemed_modified_end_date ? 'and are scheduled to end after ' . date("l, F j, Y", strtotime($telemed_modified_end_date)) . '.' : 'and will remain in effect until further notice.';
+												$telemed_modified_text .= '<p class="small font-italic">These modified hours start on ' . $telemed_modified_start . ', ';
+												$telemed_modified_text .= $telemed_modified_end && $telemed_modified_end_date ? 'and are scheduled to end after ' . $telemed_modified_end_date . '.' : 'and will remain in effect until further notice.';
 												$telemed_modified_text .= '</p>';
 
 												if ($telemed_modified_hours247):
