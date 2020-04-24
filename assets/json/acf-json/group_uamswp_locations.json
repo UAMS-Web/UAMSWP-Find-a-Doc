@@ -1846,6 +1846,31 @@
                     "ui_off_text": ""
                 },
                 {
+                    "key": "field_location_telemed_info_message",
+                    "name": "",
+                    "type": "message",
+                    "label": "Telemedicine Information",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_telemed_query",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "<p>The general information included about telemedicine is set in Find-a-Doc Settings &gt; Clinical Locations.<\/p>",
+                    "new_lines": "",
+                    "esc_html": 0
+                },
+                {
                     "key": "field_location_telemed_patients",
                     "name": "location_telemed_patients",
                     "type": "radio",
@@ -1862,7 +1887,7 @@
                         ]
                     ],
                     "wrapper": {
-                        "width": "40",
+                        "width": "",
                         "class": "",
                         "id": ""
                     },
