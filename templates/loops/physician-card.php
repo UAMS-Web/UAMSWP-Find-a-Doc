@@ -37,7 +37,7 @@
 			<?php } ?>
 		</picture>
 		<div class="card-body">
-				<h3 class="card-title">
+				<h3 class="card-title h6">
 					<span class="name"><?php echo $full_name; ?></span>
 					<?php 
 					if(! empty( get_field('physician_title', $id) ) || ! empty( get_field('physician_service_line', $id) ) ){

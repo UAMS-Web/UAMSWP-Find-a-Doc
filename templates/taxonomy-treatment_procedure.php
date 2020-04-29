@@ -199,7 +199,7 @@
 								<ul class="list">
 								<?php foreach( $conditions_query->get_terms() as $condition ): ?>
 									<li>
-										<a href="<?php echo get_term_link( $condition->term_id ); ?>" aria-label="Go to Condition page for <?php echo $condition->name; ?>"><?php echo $condition->name; ?></a>
+										<a href="<?php echo get_term_link( $condition->term_id ); ?>" aria-label="Go to Condition page for <?php echo $condition->name; ?>" class="btn btn-outline-primary"><?php echo $condition->name; ?></a>
 									</li>
 								<?php endforeach; ?>
 								</ul>
@@ -210,7 +210,10 @@
 			</section>
 		<?php } // endif ?>
 		<?php // Check if any doctors are connected	
-		$physiciansCount = count($physicians);
+		$physiciansCount = 0;
+		if ($physicians) {
+			$physiciansCount = count($physicians);
+		}
 		$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12)
 		$postsCutoff = 18; // Set cutoff value
 		$postsCountClass = $postsPerPage;

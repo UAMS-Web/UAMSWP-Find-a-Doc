@@ -191,23 +191,23 @@ function bidirectional_acf_update_value( $value, $post_id, $field  ) {
 	// loop over selected posts and add this $post_id
 	if( is_array($value) ) {
 
-		foreach( $value as $post_id2 ) {
+		foreach( $value as $post_id2new ) {
 			// load existing related posts
-			$value2 = get_field($field_name, $post_id2, false);
+			$value2new = get_field($field_name, $post_id2new, false);
 
 			// allow for selected posts to not contain a value
-			if( empty($value2) ) {
-				$value2 = array();
+			if( empty($value2new) ) {
+				$value2new = array();
 			}
 
-			// bail early if the current $post_id is already found in selected post's $value2
-			if( in_array($post_id, $value2) ) continue;
+			// bail early if the current $post_id is already found in selected post's $value2new
+			if( in_array($post_id, $value2new) ) continue;
 
 			// append the current $post_id to the selected post's 'related_posts' value
-			$value2[] = $post_id;
+			$value2new[] = $post_id;
 
 			// update the selected post's value (use field's key for performance)
-			update_field($field_key, $value2, $post_id2);
+			update_field($field_key, $value2new, $post_id2new);
 		}
 	}
 
@@ -215,24 +215,24 @@ function bidirectional_acf_update_value( $value, $post_id, $field  ) {
 	$old_value = get_field($field_name, $post_id, false);
 	if( is_array($old_value) ) {
 
-		foreach( $old_value as $post_id2 ) {
+		foreach( $old_value as $post_id2old ) {
 			// bail early if this value has not been removed
-			if( is_array($value) && in_array($post_id2, $value) ) continue;
+			if( is_array($value) && in_array($post_id2old, $value) ) continue;
 
 			// load existing related posts
-			$value2 = get_field($field_name, $post_id2, false);
+			$value2old = get_field($field_name, $post_id2old, false);
 
 			// bail early if no value
-			if( empty($value2) ) continue;
+			if( empty($value2old) ) continue;
 
-			// find the position of $post_id within $value2 so we can remove it
-			$pos = array_search($post_id, $value2);
+			// find the position of $post_id within $value2old so we can remove it
+			$pos = array_search($post_id, $value2old);
 
 			// remove
-			unset( $value2[ $pos] );
+			unset( $value2old[$pos] );
 
 			// update the un-selected post's value (use field's key for performance)
-			update_field($field_key, $value2, $post_id2);
+			update_field($field_key, $value2old, $post_id2old);
 		}
 	}
 	// reset global varibale to allow this filter to function as per normal
@@ -271,23 +271,28 @@ function acf_post_to_taxonomy_bidirectional( $post_field, $taxonomy_field, $taxo
 	// loop over selected posts and add this $post_id
 	if( is_array($value) ) {
 
-		foreach( $value as $post_id2 ) {
+		foreach( $value as $post_id2new ) {
 			// load existing related posts
-			$value2 = get_field($taxonomy_field, $taxonomy."_".$post_id2, false);
+			$value2new = get_field($taxonomy_field, $taxonomy."_".$post_id2new, false);
 
 			// allow for selected posts to not contain a value
-			if( empty($value2) ) {
-				$value2 = array();
+			if( empty($value2new) ) {
+				$value2new = array();
 			}
 
-			// bail early if the current $post_id is already found in selected post's $value2
-			if( in_array($post_id, $value2) ) continue;
+			// bail early if the current $post_id is already found in selected post's $value2new
+			if( in_array($post_id, $value2new) ) continue;
 
 			// append the current $post_id to the selected post's 'related_posts' value
-			$value2[] = $post_id;
+			$value2new[] = $post_id;
+
+			// Error Log to verify data
+			error_log(  'Tax Field: ' . print_r( $taxonomy_field, true ) );
+			error_log(  'Value2New: ' . print_r( $value2new, true ) );
+			error_log(  'Tax: ' . print_r( $taxonomy."_".$post_id2new, true ) );
 
 			// update the selected post's value (use field's key for performance)
-			update_field($taxonomy_field, $value2, $taxonomy."_".$post_id2);
+			update_field($taxonomy_field, $value2new, $taxonomy."_".$post_id2new);
 		}
 	}
 
@@ -295,24 +300,29 @@ function acf_post_to_taxonomy_bidirectional( $post_field, $taxonomy_field, $taxo
 	$old_value = get_field($field_name, $post_id, false);
 	if( is_array($old_value) ) {
 
-		foreach( $old_value as $post_id2 ) {
+		foreach( $old_value as $post_id2old ) {
 			// bail early if this value has not been removed
-			if( is_array($value) && in_array($post_id2, $value) ) continue;
+			if( is_array($value) && in_array($post_id2old, $value) ) continue;
 
 			// load existing related posts
-			$value2 = get_field($taxonomy_field, $taxonomy."_".$post_id2, false);
+			$value2old = get_field($taxonomy_field, $taxonomy."_".$post_id2old, false);
 
 			// bail early if no value
-			if( empty($value2) ) continue;
+			if( empty($value2old) ) continue;
 
-			// find the position of $post_id within $value2 so we can remove it
-			$pos = array_search($post_id, $value2);
+			// find the position of $post_id within $value2old so we can remove it
+			$pos = array_search($post_id, $value2old);
 
 			// remove
-			unset( $value2[ $pos] );
+			unset( $value2old[$pos] );
+
+			// Error Log to verify data
+			error_log(  'Tax Field: ' . print_r( $taxonomy_field, true ) );
+			error_log(  'Value2Old: ' . print_r( $value2old, true ) );
+			error_log(  'Position: ' . print_r( $pos, true ) );
 
 			// update the un-selected post's value (use field's key for performance)
-			update_field($taxonomy_field, $value2, $taxonomy."_".$post_id2);
+			update_field($taxonomy_field, $value2old, $taxonomy."_".$post_id2old);
 		}
 	}
 	// reset global varibale to allow this filter to function as per normal
@@ -342,21 +352,21 @@ function acf_taxonomy_to_post_bidirectional( $post_field, $taxonomy_field, $taxo
 
 		foreach( $value as $post_id ) {
 			// load existing related posts
-			$value2 = get_field($post_field, $post_id, false);
+			$value2news = get_field($post_field, $post_id, false);
 
 			// allow for selected posts to not contain a value
-			if( empty($value2) ) {
-				$value2 = array();
+			if( empty($value2news) ) {
+				$value2news = array();
 			}
 
-			// bail early if the current $post_id is already found in selected post's $value2
-			if( in_array($id, $value2) ) continue;
+			// bail early if the current $post_id is already found in selected post's $value2news
+			if( in_array($id, $value2news) ) continue;
 
 			// append the current $post_id to the selected post's 'related_posts' value
-			$value2[] = $id;
+			$value2news[] = $id;
 
 			// update the selected post's value (use field's key for performance)
-            update_field($post_field, $value2, $post_id);
+            update_field($post_field, $value2news, $post_id);
             // Add the term relationship
             wp_set_object_terms( $post_id, intval($id) , $taxonomy, true );
 		}
@@ -371,19 +381,19 @@ function acf_taxonomy_to_post_bidirectional( $post_field, $taxonomy_field, $taxo
 			if( is_array($value) && in_array($post_id, $value) ) continue;
 
 			// load existing related posts
-			$value2 = get_field($post_field, $post_id, false);
+			$value2old = get_field($post_field, $post_id, false);
 
 			// bail early if no value
-			if( empty($value2) ) continue;
+			if( empty($value2old) ) continue;
 
-			// find the position of $post_id within $value2 so we can remove it
-			$pos = array_search($id, $value2);
+			// find the position of $post_id within $value2old so we can remove it
+			$pos = array_search($id, $value2old);
 
 			// remove
-			unset( $value2[ $pos] );
+			unset( $value2old[$pos] );
 
 			// update the un-selected post's value (use field's key for performance)
-            update_field($post_field, $value2, $post_id);
+            update_field($post_field, $value2old, $post_id);
             // Remove the term relationship
             wp_remove_object_terms( $post_id, intval($id) , $taxonomy );
 		}
@@ -722,4 +732,28 @@ function fad_facetwp_blocks_callback( $block, $content = '', $is_preview = false
 		</div>
 	</section>
     <?php
+}
+add_action('acf/render_field/name=location_current_alert', 'location_current_alert_message');
+function location_current_alert_message(){
+
+	$alert_title = get_field('location_alert_heading_system', 'option');
+	$alert_body = get_field('location_alert_body_system', 'option');
+	$alert_color = get_field('location_alert_color_system', 'option');
+
+
+	if (!empty($alert_title) && !empty($alert_body)) {
+
+		$alert_txt = '<blockquote class="notice notice-warning">';
+		$alert_txt .=  '<h3 class="notice-title">'. $alert_title .'</h3>';
+		$alert_txt .= $alert_body;
+		$alert_txt .= '<hr />';
+		$alert_txt .= '<p><strong>Alert color:</strong> '. ucfirst(str_replace( 'alert-', '', $alert_color)) .'</p>';
+		$alert_txt .= '</blockquote>';
+
+		echo $alert_txt;
+
+	} else {
+		echo 'None active';
+	}  
+    
 }

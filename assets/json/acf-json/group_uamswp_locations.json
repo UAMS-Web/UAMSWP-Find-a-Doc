@@ -1039,11 +1039,11 @@
             "placement": "top",
             "endpoint": 0
         },
-        "field_hours_message": {
-            "key": "field_hours_message",
-            "name": "",
-            "type": "message",
-            "label": "Hours of Operation",
+        "field_location_hours_group": {
+            "key": "field_location_hours_group",
+            "label": "",
+            "name": "location_hours_group",
+            "type": "group",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -1052,117 +1052,900 @@
                 "class": "",
                 "id": ""
             },
-            "message": "<p>Set the time for each day or 24\/7. Leave time blank for closed.<\/p>",
-            "new_lines": "",
-            "esc_html": 0
-        },
-        "field_location_24_7": {
-            "key": "field_location_24_7",
-            "name": "location_24_7",
-            "type": "true_false",
-            "label": "Open 24\/7",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        "field_location_hours": {
-            "key": "field_location_hours",
-            "name": "location_hours",
-            "type": "repeater",
-            "label": "Typical Hours",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_24_7",
-                        "operator": "!=",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "collapsed": "field_hours_day",
-            "min": 1,
-            "max": 0,
-            "layout": "table",
-            "button_label": "Add Day \/ Time",
+            "acfe_permissions": "",
+            "layout": "block",
+            "acfe_seamless_style": 1,
+            "acfe_group_modal": 0,
             "sub_fields": [
                 {
-                    "key": "field_hours_day",
-                    "label": "Day",
-                    "name": "day",
-                    "type": "select",
+                    "key": "field_location_typical_hours_tab",
+                    "label": "Normal\/Typical Hours",
+                    "name": "",
+                    "type": "tab",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "placement": "left",
+                    "endpoint": 0
+                },
+                {
+                    "key": "field_hours_message",
+                    "name": "",
+                    "type": "message",
+                    "label": "Hours of Operation",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "<p>Set the time for each day or mark it as open 24\/7.<\/p>",
+                    "new_lines": "",
+                    "esc_html": 0
+                },
+                {
+                    "key": "field_location_24_7",
+                    "name": "location_24_7",
+                    "type": "true_false",
+                    "label": "Is the location typically available 24/7?",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_location_hours",
+                    "name": "location_hours",
+                    "type": "repeater",
+                    "label": "Typical Hours",
+                    "instructions": "Set the time for all seven days.",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_24_7",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "collapsed": "field_hours_day",
+                    "min": 1,
+                    "max": 0,
+                    "layout": "table",
+                    "button_label": "Add Day \/ Time",
+                    "sub_fields": [
+                        {
+                            "key": "field_hours_day",
+                            "label": "Day",
+                            "name": "day",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "Monday": "Monday",
+                                "Tuesday": "Tuesday",
+                                "Wednesday": "Wednesday",
+                                "Thursday": "Thursday",
+                                "Friday": "Friday",
+                                "Saturday": "Saturday",
+                                "Sunday": "Sunday",
+                                "Mon - Fri": "Mon - Fri"
+                            },
+                            "default_value": [],
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_hours_closed",
+                            "label": "Closed",
+                            "name": "closed",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "Closed",
+                            "default_value": 0,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
+                            "key": "field_hours_open",
+                            "label": "Open",
+                            "name": "open",
+                            "type": "time_picker",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_hours_closed",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "display_format": "g:i a",
+                            "return_format": "g:i a"
+                        },
+                        {
+                            "key": "field_hours_close",
+                            "label": "Close",
+                            "name": "close",
+                            "type": "time_picker",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_hours_closed",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "display_format": "g:i a",
+                            "return_format": "g:i a"
+                        },
+                        {
+                            "key": "field_hours_comment",
+                            "label": "Comment",
+                            "name": "comment",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_location_24_7",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        }
+                    ]
+                },
+                {
+                    "key": "field_after_hours",
+                    "name": "location_after_hours",
+                    "type": "wysiwyg",
+                    "label": "After Hours Information",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 0,
+                    "delay": 0
+                },
+                {
+                    "key": "field_location_modified_hours_tab",
+                    "label": "Modified Hours",
+                    "name": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "placement": "left",
+                    "endpoint": 0
+                },
+                {
+                    "key": "field_location_modified_hours",
+                    "label": "Upcoming Modified Hours",
+                    "name": "location_modified_hours",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_location_modified_hours_reason",
+                    "label": "Reason for Modified Hours",
+                    "name": "location_modified_hours_reason",
+                    "type": "wysiwyg",
+                    "instructions": "Describe the overall reason the hours are being modified. This might be because of a holiday or public health emergency.<br /><br />The date range will be displayed automatically, so that does not have to be included in this field.",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_modified_hours",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "100",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 1
+                },
+                {
+                    "key": "field_location_modified_hours_start_date",
+                    "label": "Modified Hours Start Date",
+                    "name": "location_modified_hours_start_date",
+                    "type": "date_picker",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_modified_hours",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "display_format": "m\/d\/Y",
+                    "return_format": "F j, Y",
+                    "first_day": 0
+                },
+                {
+                    "key": "field_location_modified_hours_end",
+                    "label": "Is there a Modified Hours End Date?",
+                    "name": "location_modified_hours_end",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_modified_hours",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "Yes",
+                    "ui_off_text": "None"
+                },
+                {
+                    "key": "field_location_modified_hours_end_date",
+                    "label": "Modified Hours End Date",
+                    "name": "location_modified_hours_end_date",
+                    "type": "date_picker",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_modified_hours_end",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "display_format": "m\/d\/Y",
+                    "return_format": "F j, Y",
+                    "first_day": 0
+                },
+                {
+                    "key": "field_location_modified_hours_group",
+                    "label": "Modified Hours",
+                    "name": "location_modified_hours_group",
+                    "type": "repeater",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_modified_hours",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "acfe_repeater_stylised_button": 0,
+                    "collapsed": "field_location_modified_hours_title",
+                    "min": 1,
+                    "max": 0,
+                    "layout": "block",
+                    "button_label": "Add Modified Hours Set",
+                    "sub_fields": [
+                        {
+                            "key": "field_location_modified_hours_title",
+                            "label": "Title",
+                            "name": "location_modified_hours_title",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_location_modified_hours_information",
+                            "label": "Information",
+                            "name": "location_modified_hours_information",
+                            "type": "wysiwyg",
+                            "instructions": "This field can include a description of the modification if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.<br /><br />Or you can add information in addition to the structured days and hours.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "100",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "default_value": "",
+                            "tabs": "all",
+                            "toolbar": "basic",
+                            "media_upload": 0,
+                            "delay": 1
+                        },
+                        {
+                            "key": "field_location_modified_hours_24_7",
+                            "name": "location_modified_hours_24_7",
+                            "type": "true_false",
+                            "label": "Is this location available 24\/7 during these modified hours?",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 0,
+                            "ui": 1,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
+                            "key": "field_location_modified_hours_times",
+                            "label": "Hours",
+                            "name": "location_modified_hours_times",
+                            "type": "repeater",
+                            "instructions": "Set the time for all seven days.",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_location_modified_hours",
+                                        "operator": "==",
+                                        "value": "1"
+                                    },
+                                    {
+                                        "field": "field_location_modified_hours_24_7",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "acfe_repeater_stylised_button": 0,
+                            "collapsed": "field_location_modified_hours_day",
+                            "min": 0,
+                            "max": 0,
+                            "layout": "table",
+                            "button_label": "Add Day \/ Time",
+                            "sub_fields": [
+                                {
+                                    "key": "field_location_modified_hours_day",
+                                    "label": "Day",
+                                    "name": "location_modified_hours_day",
+                                    "type": "select",
+                                    "instructions": "",
+                                    "required": 1,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "acfe_permissions": "",
+                                    "choices": {
+                                        "Monday": "Monday",
+                                        "Tuesday": "Tuesday",
+                                        "Wednesday": "Wednesday",
+                                        "Thursday": "Thursday",
+                                        "Friday": "Friday",
+                                        "Saturday": "Saturday",
+                                        "Sunday": "Sunday",
+                                        "Mon - Fri": "Mon - Fri"
+                                    },
+                                    "default_value": [],
+                                    "allow_null": 1,
+                                    "multiple": 0,
+                                    "ui": 0,
+                                    "return_format": "value",
+                                    "placeholder": "",
+                                    "ajax": 0
+                                },
+                                {
+                                    "key": "field_location_modified_hours_closed",
+                                    "label": "Closed",
+                                    "name": "location_modified_hours_closed",
+                                    "type": "true_false",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "acfe_permissions": "",
+                                    "message": "",
+                                    "default_value": 0,
+                                    "ui": 0,
+                                    "ui_on_text": "",
+                                    "ui_off_text": ""
+                                },
+                                {
+                                    "key": "field_location_modified_hours_open",
+                                    "label": "Open",
+                                    "name": "location_modified_hours_open",
+                                    "type": "time_picker",
+                                    "instructions": "",
+                                    "required": 1,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_location_modified_hours_closed",
+                                                "operator": "!=",
+                                                "value": "1"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "acfe_permissions": "",
+                                    "display_format": "g:i a",
+                                    "return_format": "g:i a"
+                                },
+                                {
+                                    "key": "field_location_modified_hours_close",
+                                    "label": "Close",
+                                    "name": "location_modified_hours_close",
+                                    "type": "time_picker",
+                                    "instructions": "",
+                                    "required": 1,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_location_modified_hours_closed",
+                                                "operator": "!=",
+                                                "value": "1"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "acfe_permissions": "",
+                                    "display_format": "g:i a",
+                                    "return_format": "g:i a"
+                                },
+                                {
+                                    "key": "field_location_modified_hours_comment",
+                                    "label": "Comment",
+                                    "name": "location_modified_hours_comment",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "acfe_permissions": "",
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "key": "field_location_holiday_hours",
+                    "name": "location_holiday_hours",
+                    "type": "repeater",
+                    "label": "Holiday Hours",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_modified_hours_tab",
+                                "operator": "==",
+                                "value": "false"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "collapsed": "field_holiday_day",
+                    "min": "",
+                    "max": "",
+                    "layout": "table",
+                    "button_label": "Add Holiday",
+                    "sub_fields": [
+                        {
+                            "key": "field_holiday_date",
+                            "label": "Date",
+                            "name": "date",
+                            "type": "date_picker",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "display_format": "m\/d\/Y",
+                            "return_format": "F j, Y",
+                            "first_day": 0
+                        },
+                        {
+                            "key": "field_holiday_label",
+                            "label": "Holiday Text",
+                            "name": "label",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_holiday_closed",
+                            "label": "Closed",
+                            "name": "closed",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "Closed",
+                            "default_value": 0,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
+                            "key": "field_holiday_open",
+                            "label": "Open",
+                            "name": "open",
+                            "type": "time_picker",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_holiday_closed",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "display_format": "g:i a",
+                            "return_format": "g:i a"
+                        },
+                        {
+                            "key": "field_holiday_close",
+                            "label": "Close",
+                            "name": "close",
+                            "type": "time_picker",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_holiday_closed",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "display_format": "g:i a",
+                            "return_format": "g:i a"
+                        }
+                    ]
+                },
+                {
+                    "key": "field_location_telemed_hours_tab",
+                    "label": "Telemedicine Hours",
+                    "name": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "placement": "left",
+                    "endpoint": 0
+                },
+                {
+                    "key": "field_location_telemed_query",
+                    "label": "Does this location offer a telemedicine option?",
+                    "name": "location_telemed_query",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_location_telemed_info_message",
+                    "name": "",
+                    "type": "message",
+                    "label": "Telemedicine Information",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_telemed_query",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "<p>The general information included about telemedicine is set in Find-a-Doc Settings &gt; Clinical Locations.<\/p>",
+                    "new_lines": "",
+                    "esc_html": 0
+                },
+                {
+                    "key": "field_location_telemed_patients",
+                    "name": "location_telemed_patients",
+                    "type": "radio",
+                    "label": "Patient Type",
+                    "instructions": "Which type of patients can use the telemedicine services offered at this location?",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_telemed_query",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
                         "id": ""
                     },
                     "choices": {
-                        "Monday": "Monday",
-                        "Tuesday": "Tuesday",
-                        "Wednesday": "Wednesday",
-                        "Thursday": "Thursday",
-                        "Friday": "Friday",
-                        "Saturday": "Saturday",
-                        "Sunday": "Sunday",
-                        "Mon - Fri": "Mon - Fri"
+                        "all": "New and Existing Patients",
+                        "existing": "Existing Patients Only",
+                        "new": "New Patients Only"
                     },
-                    "default_value": [],
-                    "allow_null": 1,
-                    "multiple": 0,
-                    "ui": 0,
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "default_value": "all",
+                    "layout": "vertical",
                     "return_format": "value",
-                    "ajax": 0,
-                    "placeholder": ""
+                    "save_other_choice": 0
                 },
                 {
-                    "key": "field_hours_closed",
-                    "label": "Closed",
-                    "name": "closed",
+                    "key": "field_location_telemed_24_7",
+                    "name": "location_telemed_24_7",
                     "type": "true_false",
+                    "label": "Is telemedicine typically available 24\/7?",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_telemed_query",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
                         "id": ""
                     },
-                    "message": "Closed",
+                    "message": "",
                     "default_value": 0,
-                    "ui": 0,
+                    "ui": 1,
                     "ui_on_text": "",
                     "ui_off_text": ""
                 },
                 {
-                    "key": "field_hours_open",
-                    "label": "Open",
-                    "name": "open",
-                    "type": "time_picker",
-                    "instructions": "",
+                    "key": "field_location_telemed_hours",
+                    "name": "location_telemed_hours",
+                    "type": "repeater",
+                    "label": "Typical Telemedicine Hours",
+                    "instructions": "Set the time for all seven days.",
                     "required": 0,
                     "conditional_logic": [
                         [
                             {
-                                "field": "field_location_24_7",
+                                "field": "field_location_telemed_query",
+                                "operator": "==",
+                                "value": "1"
+                            },
+                            {
+                                "field": "field_location_telemed_24_7",
                                 "operator": "!=",
                                 "value": "1"
                             }
@@ -1173,21 +1956,143 @@
                         "class": "",
                         "id": ""
                     },
-                    "display_format": "g:i a",
-                    "return_format": "g:i a"
+                    "collapsed": "field_telemed_hours_day",
+                    "min": 1,
+                    "max": 0,
+                    "layout": "table",
+                    "button_label": "Add Day \/ Time",
+                    "sub_fields": [
+                        {
+                            "key": "field_telemed_hours_day",
+                            "label": "Day",
+                            "name": "day",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "Monday": "Monday",
+                                "Tuesday": "Tuesday",
+                                "Wednesday": "Wednesday",
+                                "Thursday": "Thursday",
+                                "Friday": "Friday",
+                                "Saturday": "Saturday",
+                                "Sunday": "Sunday",
+                                "Mon - Fri": "Mon - Fri"
+                            },
+                            "default_value": [],
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_telemed_hours_closed",
+                            "label": "Closed",
+                            "name": "closed",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "Closed",
+                            "default_value": 0,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
+                            "key": "field_telemed_hours_open",
+                            "label": "Open Time",
+                            "name": "open",
+                            "type": "time_picker",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_telemed_hours_closed",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "display_format": "g:i a",
+                            "return_format": "g:i a"
+                        },
+                        {
+                            "key": "field_telemed_hours_close",
+                            "label": "Close Time",
+                            "name": "close",
+                            "type": "time_picker",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_telemed_hours_closed",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "display_format": "g:i a",
+                            "return_format": "g:i a"
+                        },
+                        {
+                            "key": "field_telemed_hours_comment",
+                            "label": "Comment",
+                            "name": "comment",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        }
+                    ]
                 },
                 {
-                    "key": "field_hours_close",
-                    "label": "Close",
-                    "name": "close",
-                    "type": "time_picker",
+                    "key": "field_location_telemed_modified_hours_tab",
+                    "label": "Telemedicine Modified Hours",
+                    "name": "",
+                    "type": "tab",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
                         [
                             {
-                                "field": "field_location_24_7",
-                                "operator": "!=",
+                                "field": "field_location_telemed_query",
+                                "operator": "==",
                                 "value": "1"
                             }
                         ]
@@ -1197,21 +2102,22 @@
                         "class": "",
                         "id": ""
                     },
-                    "display_format": "g:i a",
-                    "return_format": "g:i a"
+                    "acfe_permissions": "",
+                    "placement": "left",
+                    "endpoint": 0
                 },
                 {
-                    "key": "field_hours_comment",
-                    "label": "Comment",
-                    "name": "comment",
-                    "type": "text",
+                    "key": "field_location_telemed_modified_hours_query",
+                    "label": "Upcoming Modified Telemedicine Hours",
+                    "name": "location_telemed_modified_hours_query",
+                    "type": "true_false",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
                         [
                             {
-                                "field": "field_location_24_7",
-                                "operator": "!=",
+                                "field": "field_location_telemed_query",
+                                "operator": "==",
                                 "value": "1"
                             }
                         ]
@@ -1221,138 +2127,305 @@
                         "class": "",
                         "id": ""
                     },
+                    "acfe_permissions": "",
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_location_telemed_modified_hours_reason",
+                    "label": "Reason for Modified Telemedicine Hours",
+                    "name": "location_telemed_modified_hours_reason",
+                    "type": "wysiwyg",
+                    "instructions": "Describe the overall reason the hours are being modified. This might be because of a holiday or public health emergency.<br /><br />This field can also include a description of the modification, if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.<br /><br />The date range will be displayed automatically, so that does not have to be included in this field..",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_telemed_modified_hours_query",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "100",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
                     "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                }
-            ]
-        },
-        "field_after_hours": {
-            "key": "field_after_hours",
-            "name": "location_after_hours",
-            "type": "wysiwyg",
-            "label": "After Hours Information",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 0,
-            "delay": 0
-        },
-        "field_location_holiday_hours": {
-            "key": "field_location_holiday_hours",
-            "name": "location_holiday_hours",
-            "type": "repeater",
-            "label": "Holiday Hours",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "collapsed": "field_holiday_day",
-            "min": "",
-            "max": "",
-            "layout": "table",
-            "button_label": "Add Day",
-            "sub_fields": [
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 1
+                },
                 {
-                    "key": "field_holiday_date",
-                    "label": "Date",
-                    "name": "date",
+                    "key": "field_location_telemed_modified_hours_start_date",
+                    "label": "Modified Telemedicine Hours Start Date",
+                    "name": "location_telemed_modified_hours_start_date",
                     "type": "date_picker",
                     "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_telemed_modified_hours_query",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": {
-                        "width": "",
+                        "width": "25",
                         "class": "",
                         "id": ""
                     },
+                    "acfe_permissions": "",
                     "display_format": "m\/d\/Y",
-                    "return_format": "m\/d\/Y",
+                    "return_format": "F j, Y",
                     "first_day": 0
                 },
                 {
-                    "key": "field_holiday_label",
-                    "label": "Holiday Text",
-                    "name": "label",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_holiday_closed",
-                    "label": "Closed",
-                    "name": "closed",
+                    "key": "field_location_telemed_modified_hours_end",
+                    "label": "Is there a Modified Telemedicine Hours End Date?",
+                    "name": "location_telemed_modified_hours_end",
                     "type": "true_false",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_telemed_modified_hours_query",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "Yes",
+                    "ui_off_text": "None"
+                },
+                {
+                    "key": "field_location_telemed_modified_hours_end_date",
+                    "label": "Modified Telemedicine Hours End Date",
+                    "name": "location_telemed_modified_hours_end_date",
+                    "type": "date_picker",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_telemed_modified_hours_end",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "display_format": "m\/d\/Y",
+                    "return_format": "F j, Y",
+                    "first_day": 0
+                },
+                {
+                    "key": "field_location_telemed_modified_hours_24_7",
+                    "name": "location_telemed_modified_hours_24_7",
+                    "type": "true_false",
+                    "label": "Is telemedicine available 24\/7 during these modified hours?",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_telemed_modified_hours_query",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
                         "id": ""
                     },
-                    "message": "Closed",
+                    "message": "",
                     "default_value": 0,
-                    "ui": 0,
+                    "ui": 1,
                     "ui_on_text": "",
                     "ui_off_text": ""
                 },
                 {
-                    "key": "field_holiday_open",
-                    "label": "Open",
-                    "name": "open",
-                    "type": "time_picker",
-                    "instructions": "",
+                    "key": "field_location_telemed_modified_hours_times",
+                    "label": "Hours",
+                    "name": "location_telemed_modified_hours_times",
+                    "type": "repeater",
+                    "instructions": "Set the time for all seven days.",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_telemed_modified_hours_query",
+                                "operator": "==",
+                                "value": "1"
+                            },
+                            {
+                                "field": "field_location_telemed_modified_hours_24_7",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
                         "id": ""
                     },
-                    "display_format": "g:i a",
-                    "return_format": "g:i a"
-                },
-                {
-                    "key": "field_holiday_close",
-                    "label": "Close",
-                    "name": "close",
-                    "type": "time_picker",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "display_format": "g:i a",
-                    "return_format": "g:i a"
+                    "acfe_permissions": "",
+                    "acfe_repeater_stylised_button": 0,
+                    "collapsed": "field_location_telemed_modified_hours_day",
+                    "min": 0,
+                    "max": 0,
+                    "layout": "table",
+                    "button_label": "Add Day \/ Time",
+                    "sub_fields": [
+                        {
+                            "key": "field_location_telemed_modified_hours_day",
+                            "label": "Day",
+                            "name": "location_telemed_modified_hours_day",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "choices": {
+                                "Monday": "Monday",
+                                "Tuesday": "Tuesday",
+                                "Wednesday": "Wednesday",
+                                "Thursday": "Thursday",
+                                "Friday": "Friday",
+                                "Saturday": "Saturday",
+                                "Sunday": "Sunday",
+                                "Mon - Fri": "Mon - Fri"
+                            },
+                            "default_value": [],
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "placeholder": "",
+                            "ajax": 0
+                        },
+                        {
+                            "key": "field_location_telemed_modified_hours_closed",
+                            "label": "Closed",
+                            "name": "location_telemed_modified_hours_closed",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "message": "",
+                            "default_value": 0,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
+                            "key": "field_location_telemed_modified_hours_open",
+                            "label": "Open",
+                            "name": "location_telemed_modified_hours_open",
+                            "type": "time_picker",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_location_telemed_modified_hours_closed",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "display_format": "g:i a",
+                            "return_format": "g:i a"
+                        },
+                        {
+                            "key": "field_location_telemed_modified_hours_close",
+                            "label": "Close",
+                            "name": "location_telemed_modified_hours_close",
+                            "type": "time_picker",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_location_telemed_modified_hours_closed",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "display_format": "g:i a",
+                            "return_format": "g:i a"
+                        },
+                        {
+                            "key": "field_location_telemed_modified_hours_comment",
+                            "label": "Comment",
+                            "name": "location_telemed_modified_hours_comment",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        }
+                    ]
                 }
             ]
         },
@@ -1628,6 +2701,21 @@
             "placement": "top",
             "endpoint": 0
         },
+        "field_location_current_alert": {
+            "key": "field_location_current_alert",
+            "label": "Current Alert",
+            "name": "location_current_alert",
+            "type": "acfe_dynamic_message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": ""
+        },
         "field_location_alert_suppress": {
             "key": "field_location_alert_suppress",
             "label": "Suppress alert from Find-a-Doc Settings? (Deprecated)",
@@ -1635,7 +2723,15 @@
             "type": "true_false",
             "instructions": "Move this value to the Alert Modification field. This field will be removed soon.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_alert_tab",
+                        "operator": "==",
+                        "value": "false"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -1914,7 +3010,7 @@
 				"id": ""
             },
 			"acfe_permissions": "",
-			"display_format": "F j, Y",
+            "display_format": "m\/d\/Y",
 			"return_format": "F j, Y",
 			"first_day": 0
 		},
@@ -2002,7 +3098,7 @@
 				"id": ""
             },
 			"acfe_permissions": "",
-			"display_format": "F j, Y",
+            "display_format": "m\/d\/Y",
 			"return_format": "F j, Y",
 			"first_day": 0
 		},
@@ -2033,7 +3129,40 @@
 			"toolbar": "full",
 			"media_upload": 0,
 			"delay": 0
-        }
+        },
+        "field_location_closing_telemed": {
+			"key": "field_location_closing_telemed",
+			"label": "Will telemedicine still be available?",
+			"name": "location_closing_telemed",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_closing_length",
+						"operator": "==",
+						"value": "temporary"
+                    },
+                    {
+                        "field": "field_location_telemed_query",
+						"operator": "==",
+						"value": "1"
+                    }
+                ]
+            ],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+            },
+			"acfe_permissions": "",
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		}
     },
     "modified": false
 }
