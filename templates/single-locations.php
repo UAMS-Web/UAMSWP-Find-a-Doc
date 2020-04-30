@@ -624,7 +624,17 @@ while ( have_posts() ) : the_post(); ?>
 			<?php } //endif ?>
 		</div>
 	</section>
-	<?php if ($location_alert_title && !$location_closing_date_past || $location_alert_text && !$location_closing_date_past) { ?>
+	<?php if (
+		(
+			($location_closing && !$location_closing_date_past) // If location closing is toggled, but closing start date is future
+			||
+			($location_closing && $location_reopen_date_past) // If location closing is toggled, but reopening date is past (or is TBD)
+			||
+			!$location_closing // If location closing is not toggled
+		)
+		&& 
+		($location_alert_title || $location_alert_text) // If location title or description has value
+	 ) { ?>
 	<section class="uams-module location-alert location-<?php echo $location_alert_color ? $location_alert_color : 'alert-warning'; ?>">
 		<div class="container-fluid">
 			<div class="row">
