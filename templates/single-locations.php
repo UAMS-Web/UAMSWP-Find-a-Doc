@@ -626,6 +626,8 @@ while ( have_posts() ) : the_post(); ?>
 	</section>
 	<?php if (
 		(
+			($location_closing && !$location_closing_date_past) // If location closing is toggled, but closing start date is future
+			||
 			($location_closing && $location_reopen_date_past) // If location closing is toggled, but reopening date is past (or is TBD)
 			||
 			!$location_closing // If location closing is not toggled
