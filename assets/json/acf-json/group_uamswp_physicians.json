@@ -1106,7 +1106,15 @@
                     "type": "text",
                     "instructions": "Deprecated - Moving to select. Please update.",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_physician_academic_profile_tab",
+                                "operator": "==",
+                                "value": "false"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
