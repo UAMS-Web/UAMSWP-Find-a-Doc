@@ -696,13 +696,19 @@ while ( have_posts() ) : the_post(); ?>
                             <div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
                                 <?php echo wp_oembed_get( $youtube_link ); ?>
                             </div>
-                            <?php } ?>
-							<?php if ( $affiliation) { 
+							<?php }
+							if ( $affiliation) { 
 								if ( !empty( $about ) ) { 
 									echo '<h3>Affiliation</h3>';
 								}
-								 echo $affiliation; ?>
-							<?php } ?>
+								echo $affiliation;
+							}
+							if ( $prescription) { 
+								if ( !empty( $about ) || !empty( $affiliation ) ) { 
+									echo '<h3>Prescription Information</h3>';
+								}
+								echo $prescription;
+							} ?>
 						</div>
 					</div>
 				</div>
