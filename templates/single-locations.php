@@ -166,6 +166,20 @@ if ( $location_closing ) {
 	}
 }
 
+// Set prescription values
+
+$prescription_query = get_field('location_prescription_query'); // Display prescription information
+
+if ($prescription_query) {
+	$prescription_sys = get_field('location_prescription_descr_system', 'option'); // Text from Find-a-Doc settings (a.k.a. system)
+	$prescription = get_field('location_prescription'); // Text from location (a.k.a. local)
+	if (!$prescription && $prescription_sys) { // if no local text, but there is system text
+		$prescription = $prescription_sys; // Set prescription text to use system text
+	} elseif (!$prescription && !$prescription_sys) { // If there is neither system text nor local text
+		$prescription_query = false; // Deactivate prescription section
+	}
+}
+
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
