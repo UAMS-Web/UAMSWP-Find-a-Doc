@@ -757,3 +757,22 @@ function location_current_alert_message(){
 	}  
     
 }
+add_action('acf/render_field/name=location_current_prescription', 'location_current_prescription_message');
+function location_current_prescription_message(){
+
+	$prescription_sys = get_field('location_prescription_descr_system', 'option');
+
+
+	if (!empty($prescription_sys)) {
+
+		$prescr_txt = '<blockquote class="notice notice-info">';
+		$prescr_txt .= $prescription_sys;
+		$prescr_txt .= '</blockquote>';
+
+		echo $prescr_txt;
+
+	} else {
+		echo 'None active';
+	}  
+    
+}
