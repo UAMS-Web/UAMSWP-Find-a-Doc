@@ -499,12 +499,27 @@
             "new_lines": "",
             "esc_html": 0
         },
+        "field_location_current_prescription": {
+            "key": "field_location_current_prescription",
+            "label": "Current Text for Prescription Information",
+            "name": "location_current_prescription",
+            "type": "acfe_dynamic_message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "70",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": ""
+        },
         "field_location_prescription": {
             "key": "field_location_prescription",
             "name": "location_prescription",
             "type": "wysiwyg",
             "label": "Prescription Refills Information",
-            "instructions": "The default text for this section is set in Find-a-Doc Settings > Clinical Locations. You can override that by adding text to this field.",
+            "instructions": "The default body text for this section is set in Find-a-Doc Settings > Clinical Locations. You can override that by adding text to this field.",
             "required": 0,
             "conditional_logic": [
                 [
@@ -516,7 +531,7 @@
                 ]
             ],
             "wrapper": {
-                "width": "70",
+                "width": "",
                 "class": "",
                 "id": ""
             },
