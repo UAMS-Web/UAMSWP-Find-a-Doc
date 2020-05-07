@@ -683,7 +683,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<?php if ( $about || $youtube_link ) { ?>
+						<?php if ( $about || $youtube_link || ( !$about && $affiliation && $prescription ) ) { ?>
 						<h2 class="module-title">About <?php the_title(); ?></h2>
 						<?php } elseif ( $affiliation ) {
 							echo '<h2 class="module-title">Affiliation</h2>';
@@ -698,13 +698,13 @@ while ( have_posts() ) : the_post(); ?>
                             </div>
 							<?php }
 							if ( $affiliation) { 
-								if ( !empty( $about ) ) { 
+								if ( $about || $prescription ) { 
 									echo '<h3>Affiliation</h3>';
 								}
 								echo $affiliation;
 							}
 							if ( $prescription) { 
-								if ( !empty( $about ) || !empty( $affiliation ) ) { 
+								if ( $about || $affiliation ) { 
 									echo '<h3>Prescription Information</h3>';
 								}
 								echo $prescription;
