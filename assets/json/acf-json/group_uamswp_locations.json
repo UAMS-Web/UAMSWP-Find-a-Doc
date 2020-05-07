@@ -602,7 +602,7 @@
             "type": "wysiwyg",
             "label": "Custom Prescription Refills Information",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": [
                 [
                     {
