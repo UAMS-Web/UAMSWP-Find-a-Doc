@@ -166,6 +166,26 @@ if ( $location_closing ) {
 	}
 }
 
+// Set prescription values
+
+$prescription_query = get_field('location_prescription_query'); // Display prescription information
+$prescription_clinic_sys = get_field('location_prescription_clinic_system', 'option'); // Text from Find-a-Doc settings (a.k.a. system) for calling clinic
+$prescription_pharm_sys = get_field('location_prescription_pharm_system', 'option'); // Text from Find-a-Doc settings (a.k.a. system) for calling pharmacy
+
+if ($prescription_query) {
+	$prescription_info_type =  get_field('location_prescription_type'); // Which preset or custom text?
+	if ( $prescription_info_type == 'clinic' ) {
+		$prescription = $prescription_clinic_sys; // Text from location (a.k.a. local)
+	} elseif ( $prescription_info_type == 'pharm' ) {
+		$prescription = $prescription_pharm_sys; // Text from location (a.k.a. local)
+	} else {
+		$prescription = get_field('location_prescription'); // Text from location (a.k.a. local)
+	}
+	if ($prescription_query && !$prescription) { // If no prescription text
+		$prescription_query = false; // Deactivate prescription section
+	}
+}
+
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
@@ -660,7 +680,7 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 		</section>
 	<?php } // endif ?>
-	<?php if ( get_field('location_about') || get_field('location_affiliation') ) { 
+	<?php if ( get_field('location_about') || get_field('location_affiliation') || $prescription ) { 
 			$about = get_field('location_about');
 			$affiliation = get_field('location_affiliation');
 			$youtube_link = get_field('location_youtube_link');
@@ -669,10 +689,12 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<?php if ( $about || $youtube_link ) { ?>
+						<?php if ( $about || $youtube_link || ( !$about && $affiliation && $prescription ) ) { ?>
 						<h2 class="module-title">About <?php the_title(); ?></h2>
-						<?php } else { // Must be Affiliation
+						<?php } elseif ( $affiliation ) {
 							echo '<h2 class="module-title">Affiliation</h2>';
+						} elseif ( $prescription ) {
+							echo '<h2 class="module-title">Prescription Information</h2>';
 						} ?>
 						<div class="module-body">
 							<?php echo $about ? $about : ''; ?>
@@ -680,13 +702,19 @@ while ( have_posts() ) : the_post(); ?>
                             <div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
                                 <?php echo wp_oembed_get( $youtube_link ); ?>
                             </div>
-                            <?php } ?>
-							<?php if ( $affiliation) { 
-								if ( !empty( $about ) ) { 
+							<?php }
+							if ( $affiliation) { 
+								if ( $about || $prescription ) { 
 									echo '<h3>Affiliation</h3>';
 								}
-								 echo $affiliation; ?>
-							<?php } ?>
+								echo $affiliation;
+							}
+							if ( $prescription) { 
+								if ( $about || $affiliation ) { 
+									echo '<h3>Prescription Information</h3>';
+								}
+								echo $prescription;
+							} ?>
 						</div>
 					</div>
 				</div>
