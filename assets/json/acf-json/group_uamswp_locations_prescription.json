@@ -4,9 +4,31 @@
     "title": "General Prescription Information for Clinical Locations",
     "fields": [
         {
-            "key": "field_location_prescription_descr_system",
-            "label": "Prescription Description",
-            "name": "location_prescription_descr_system",
+            "key": "field_location_prescription_clinic_system",
+            "label": "Call Clinic for Prescription",
+            "name": "location_prescription_clinic_system",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0,
+            "acfe_validate": "",
+            "acfe_update": ""
+        },
+        {
+            "key": "field_location_prescription_pharm_system",
+            "label": "Call Pharmacy for Prescription",
+            "name": "location_prescription_pharm_system",
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
