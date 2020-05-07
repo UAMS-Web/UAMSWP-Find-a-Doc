@@ -685,8 +685,10 @@ while ( have_posts() ) : the_post(); ?>
 					<div class="col-xs-12">
 						<?php if ( $about || $youtube_link ) { ?>
 						<h2 class="module-title">About <?php the_title(); ?></h2>
-						<?php } else { // Must be Affiliation
+						<?php } elseif ( $affiliation ) {
 							echo '<h2 class="module-title">Affiliation</h2>';
+						} elseif ( $prescription ) {
+							echo '<h2 class="module-title">Prescription Information</h2>';
 						} ?>
 						<div class="module-body">
 							<?php echo $about ? $about : ''; ?>
