@@ -674,7 +674,7 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 		</section>
 	<?php } // endif ?>
-	<?php if ( get_field('location_about') || get_field('location_affiliation') ) { 
+	<?php if ( get_field('location_about') || get_field('location_affiliation') || $prescription ) { 
 			$about = get_field('location_about');
 			$affiliation = get_field('location_affiliation');
 			$youtube_link = get_field('location_youtube_link');
