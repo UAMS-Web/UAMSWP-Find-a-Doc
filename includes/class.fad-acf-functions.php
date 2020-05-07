@@ -757,16 +757,35 @@ function location_current_alert_message(){
 	}  
     
 }
-add_action('acf/render_field/name=location_current_prescription', 'location_current_prescription_message');
-function location_current_prescription_message(){
+add_action('acf/render_field/name=location_current_prescription_clinic', 'location_current_prescription_clinic_message');
+function location_current_prescription_clinic_message(){
 
-	$prescription_sys = get_field('location_prescription_descr_system', 'option');
+	$prescription_clinic_sys = get_field('location_prescription_clinic_system', 'option');
 
 
-	if (!empty($prescription_sys)) {
+	if (!empty($prescription_clinic_sys)) {
 
 		$prescr_txt = '<blockquote class="notice notice-info">';
-		$prescr_txt .= $prescription_sys;
+		$prescr_txt .= $prescription_clinic_sys;
+		$prescr_txt .= '</blockquote>';
+
+		echo $prescr_txt;
+
+	} else {
+		echo 'None active';
+	}  
+    
+}
+add_action('acf/render_field/name=location_current_prescription_pharm', 'location_current_prescription_pharm_message');
+function location_current_prescription_pharm_message(){
+
+	$prescription_pharm_sys = get_field('location_prescription_pharm_system', 'option');
+
+
+	if (!empty($prescription_pharm_sys)) {
+
+		$prescr_txt = '<blockquote class="notice notice-info">';
+		$prescr_txt .= $prescription_pharm_sys;
 		$prescr_txt .= '</blockquote>';
 
 		echo $prescr_txt;
