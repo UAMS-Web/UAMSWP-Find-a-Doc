@@ -481,12 +481,12 @@
             "new_lines": "",
             "esc_html": 0
         },
-        "field_location_current_prescription": {
-            "key": "field_location_current_prescription",
-            "label": "Current Text for Prescription Information",
-            "name": "location_current_prescription",
-            "type": "acfe_dynamic_message",
-            "instructions": "",
+        "field_location_prescription_type": {
+            "key": "field_location_prescription_type",
+            "label": "Which prescription information would you like to include?",
+            "name": "location_prescription_type",
+            "type": "radio",
+            "instructions": "Administrators can change the preset text in Find-a-Doc Settings > Clinical Locations.",
             "required": 0,
             "conditional_logic": [
                 [
@@ -502,14 +502,24 @@
                 "class": "",
                 "id": ""
             },
-            "acfe_permissions": ""
+            "choices": {
+                "pharm": "Preset text instructing patients to call their pharmacy",
+                "clinic": "Preset text instructing patients to call the clinic",
+                "custom": "Custom text"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "pharm",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
         },
-        "field_location_prescription": {
-            "key": "field_location_prescription",
-            "name": "location_prescription",
-            "type": "wysiwyg",
-            "label": "Prescription Refills Information",
-            "instructions": "The default body text for this section is set in Find-a-Doc Settings > Clinical Locations. You can override that by adding text to this field.",
+        "field_location_spacer_3": {
+            "key": "field_location_spacer_3",
+            "label": "hidden",
+            "name": "",
+            "type": "message",
+            "instructions": "",
             "required": 0,
             "conditional_logic": [
                 [
@@ -521,7 +531,94 @@
                 ]
             ],
             "wrapper": {
-                "width": "",
+                "width": "30",
+                "class": "hide-acf-title",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "message": "&nbsp;",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        "field_location_current_prescription_clinic": {
+            "key": "field_location_current_prescription_clinic",
+            "label": "Current prescription information instructing patients to call the clinic",
+            "name": "location_current_prescription_clinic",
+            "type": "acfe_dynamic_message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_prescription_query",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_prescription_type",
+                        "operator": "==",
+                        "value": "clinic"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "70",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": ""
+        },
+        "field_location_current_prescription_pharm": {
+            "key": "field_location_current_prescription_pharm",
+            "label": "Current prescription information instructing patients to call their pharmacy",
+            "name": "location_current_prescription_pharm",
+            "type": "acfe_dynamic_message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_prescription_query",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_prescription_type",
+                        "operator": "==",
+                        "value": "pharm"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "70",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": ""
+        },
+        "field_location_prescription": {
+            "key": "field_location_prescription",
+            "name": "location_prescription",
+            "type": "wysiwyg",
+            "label": "Custom Prescription Refills Information",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_prescription_query",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_prescription_type",
+                        "operator": "==",
+                        "value": "custom"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "70",
                 "class": "",
                 "id": ""
             },
