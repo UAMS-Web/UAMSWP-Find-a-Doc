@@ -169,13 +169,19 @@ if ( $location_closing ) {
 // Set prescription values
 
 $prescription_query = get_field('location_prescription_query'); // Display prescription information
+$prescription_clinic_sys = get_field('location_prescription_clinic_system', 'option'); // Text from Find-a-Doc settings (a.k.a. system) for calling clinic
+$prescription_pharm_sys = get_field('location_prescription_pharm_system', 'option'); // Text from Find-a-Doc settings (a.k.a. system) for calling pharmacy
 
 if ($prescription_query) {
-	$prescription_sys = get_field('location_prescription_descr_system', 'option'); // Text from Find-a-Doc settings (a.k.a. system)
-	$prescription = get_field('location_prescription'); // Text from location (a.k.a. local)
-	if (!$prescription && $prescription_sys) { // if no local text, but there is system text
-		$prescription = $prescription_sys; // Set prescription text to use system text
-	} elseif (!$prescription && !$prescription_sys) { // If there is neither system text nor local text
+	$prescription_info_type =  get_field('location_prescription_type'); // Which preset or custom text?
+	if ( $prescription_info_type == 'clinic' ) {
+		$prescription = $prescription_clinic_sys; // Text from location (a.k.a. local)
+	} elseif ( $prescription_info_type == 'pharm' ) {
+		$prescription = $prescription_pharm_sys; // Text from location (a.k.a. local)
+	} else {
+		$prescription = get_field('location_prescription'); // Text from location (a.k.a. local)
+	}
+	if ($prescription_query && !$prescription) { // If no prescription text
 		$prescription_query = false; // Deactivate prescription section
 	}
 }
