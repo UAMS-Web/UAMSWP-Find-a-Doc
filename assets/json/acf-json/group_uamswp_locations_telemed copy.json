@@ -4,9 +4,9 @@
     "title": "General Prescription Information for Clinical Locations",
     "fields": [
         {
-            "key": "field_location_group_location_prescription_descr_system",
+            "key": "field_location_prescription_descr_system",
             "label": "Prescription Description",
-            "name": "location_group_location_prescription_descr_system",
+            "name": "location_prescription_descr_system",
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
