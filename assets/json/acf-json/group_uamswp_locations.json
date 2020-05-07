@@ -450,6 +450,82 @@
             "new_lines": "",
             "esc_html": 0
         },
+        "field_location_prescription_query": {
+            "key": "field_location_prescription_query",
+            "label": "Include information about prescription refills?",
+            "name": "location_prescription_query",
+            "type": "button_group",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "choices": {
+                "1": "Yes",
+                "0": "No"
+            },
+            "allow_null": 0,
+            "default_value": 0,
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        "field_location_spacer_2": {
+            "key": "field_location_spacer_2",
+            "label": "hidden",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_prescription_query",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "70",
+                "class": "hide-acf-title",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "message": "&nbsp;",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        "field_location_prescription": {
+            "key": "field_location_prescription",
+            "name": "location_prescription",
+            "type": "wysiwyg",
+            "label": "Prescription Refills Information",
+            "instructions": "The default text for this section is set in Find-a-Doc Settings > Clinical Locations. You can override that by adding text to this field.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_prescription_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "70",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        },
         "field_location_clinic_phone_query": {
             "key": "field_location_clinic_phone_query",
             "label": "Is there a separate appointment number for patients?",
