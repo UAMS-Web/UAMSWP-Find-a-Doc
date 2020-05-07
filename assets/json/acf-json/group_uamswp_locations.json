@@ -416,39 +416,21 @@
         "field_location_affiliation": {
             "key": "field_location_affiliation",
             "name": "location_affiliation",
-            "type": "textarea",
+            "type": "wysiwyg",
             "label": "Affiliation",
             "instructions": "Affiliations with other medical centers or clinics",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "",
                 "class": "",
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": 4,
-            "new_lines": ""
-        },
-        "field_location_spacer_1": {
-            "key": "field_location_spacer_1",
-            "label": "hidden",
-            "name": "",
-            "type": "message",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "hide-acf-title",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "message": "&nbsp;",
-            "new_lines": "",
-            "esc_html": 0
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
         },
         "field_location_prescription_query": {
             "key": "field_location_prescription_query",
