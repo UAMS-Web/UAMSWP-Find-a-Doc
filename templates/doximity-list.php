@@ -98,6 +98,7 @@ function display_provider_image() {
                         'D.O.'
                     );
                     $degree_np = array( // list valid versions of NP
+                        'CNP',
                         'FNP-C'
                     );
                     $degree_pa = array( // list valid versions of PA
