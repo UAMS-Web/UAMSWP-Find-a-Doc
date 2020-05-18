@@ -758,6 +758,8 @@ while ( have_posts() ) : the_post();
                                                 <?php } ?>
                                             </h3>
                                             <?php 
+                                            // Check for if we should display a closure alert
+                                            
                                             $location_closing = get_field('location_closing', $location); // true or false
                                             $location_closing_date = get_field('location_closing_date', $location); // F j, Y
                                             $location_closing_date_past = false;
@@ -781,27 +783,83 @@ while ( have_posts() ) : the_post();
                                                 ) {
                                                 $location_closing_display = true;
                                             }
+
+                                            // Check for if we should display a modified hours alert
+
+                                            $location_hours_group = get_field('location_hours_group', $location);
+
+                                            $modified = $location_hours_group['location_modified_hours'];
+                                            $modified_start = $location_hours_group['location_modified_hours_start_date'];
+                                            $modified_end = $location_hours_group['location_modified_hours_end'];
+                                            $modified_end_date = $location_hours_group['location_modified_hours_end_date'];
+
+                                            $today = strtotime("today");
+                                            $today_30 = strtotime("+30 days");
+
+                                            $telemed_modified = $location_hours_group['location_telemed_modified_hours_query']; // Are there modified hours for telemedicine?
+                                            $telemed_modified_start = $location_hours_group['location_telemed_modified_hours_start_date']; // When do the modified telemedicine hours start?
+                                            $telemed_modified_end = $location_hours_group['location_telemed_modified_hours_end']; // Do we know when the modified telemedicine hours end?
+                                            $telemed_modified_end_date = $location_hours_group['location_telemed_modified_hours_end_date']; // When do the modified telemedicine hours end?
+
+                                            $telemed_today = $today;
+                                            $telemed_today_30 = $today_30;
+
+                                            if ( 
+                                                ( $modified && strtotime($modified_start) <= $today_30 && ( strtotime($modified_end_date) >= $today || !$modified_end ) ) ||
+                                                ( $telemed_modified && strtotime($telemed_modified_start) <= $telemed_today_30 && ( strtotime($telemed_modified_end_date) >= $telemed_today || !$telemed_modified_end ) )
+                                            ) {
+                                                $location_modified_hours_display = true;
+                                            } else {
+                                                $location_modified_hours_display = false;
+                                            }
+
+                                            //// Set start of modified hours based on the earliest of the two (clinic and telemedicine)
+
+                                            if ($location_modified_hours_display) {
+                                                if ( ($modified && $modified_start) && ($telemed_modified && $telemed_modified_start) ) {
+                                                    if ( strtotime($modified_start) <= strtotime($telemed_modified_start) ) {
+                                                        $location_modified_hours_start = $modified_start;
+                                                    } else {
+                                                        $location_modified_hours_start = $telemed_modified_start;
+                                                    }
+                                                } elseif ($modified_start) {
+                                                    $location_modified_hours_start = $modified_start;
+                                                } elseif ($telemed_modified_start) {
+                                                    $location_modified_hours_start = $telemed_modified_start;
+                                                }
+
+                                                if ( strtotime($location_modified_hours_start) <= $today ) {
+                                                    $location_modified_hours_date_past = true;
+                                                } else {
+                                                    $location_modified_hours_date_past = false;
+                                                }
+                                            }   
+
+                                            // Create the alert
                                             
-                                            if ($location_closing_display) { ?>
+                                            if ( $location_closing_display || $location_modified_hours_display ) { 
+                                                $alert_label = '';
+                                                if ($location_closing_display) {
+                                                    $alert_label = 'Learn more about the closure.';
+                                                } elseif ($location_modified_hours_display) {
+                                                    $alert_label = 'Learn more about the modified hours.';
+                                                }
+                                                ?>
                                                 <div class="alert alert-warning" role="alert">
-                                                    <?php if ($location_closing_date_past) { ?>
-                                                        This location is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed.
-                                                    <?php } else { ?>
-                                                        This location will be closing <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>.
-                                                    <?php } // endif
-                                                    if (
-                                                        $location_closing_length == 'temporary' 
-                                                        && $location_reopen_known == 'date' 
-                                                        && !empty($location_reopen_date)
-                                                        && (new DateTime($location_reopen_date) >= new DateTime($location_closing_date))
-                                                    ) { ?>
-                                                        It is scheduled to reopen on <?php echo $location_reopen_date; ?>.
-                                                    <?php } elseif (
-                                                        $location_closing_length == 'temporary' 
-                                                        && $location_reopen_known == 'tbd' 
-                                                    ) { ?>
-                                                        It will remain closed until further notice.
-                                                    <?php } // endif ?>
+                                                    <?php if ($location_closing_display) {
+                                                        if ($location_closing_date_past) { ?>
+                                                            This location is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed.
+                                                        <?php } else { ?>
+                                                            This location will be closing <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>.
+                                                        <?php } // endif
+                                                    } elseif ($location_modified_hours_display) {
+                                                        if ($location_modified_hours_date_past) { ?>
+                                                            This location's hours have been temporarily modified.
+                                                        <?php } else { ?>
+                                                            This location's hours will be temporarily modified beginning on <?php echo $telemed_modified_start; ?>.
+                                                        <?php } // endif
+                                                    } // endif ?>
+                                                    <p><a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $alert_label; ?>" class="alert-link">Learn more</a></p>
                                                 </div>
                                             <?php } // endif ?>
                                             <p class="card-text"><?php echo get_field('location_address_1', $location ); ?><br/>
