@@ -1207,7 +1207,7 @@
             "key": "field_physician_academic_position",
             "name": "physician_academic_position",
             "type": "taxonomy",
-            "label": "Position",
+            "label": "Academic Position Type",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
