@@ -506,7 +506,7 @@ while ( have_posts() ) : the_post();
         
             // Display section for Clinical Bio, Clinical Video, Clinical Administrative Title(s), Clinical Focus ... only if there is a bio or video.
             if ( $physician_clinical_bio || !empty ($physician_youtube_link) ) { ?>
-            <section class="uams-module bg-auto">
+            <section class="uams-module clinical-info bg-auto">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xs-12">
