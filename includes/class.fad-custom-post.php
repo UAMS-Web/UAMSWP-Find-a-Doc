@@ -244,6 +244,7 @@ add_action( 'init', 'create_boards_taxonomy', 0 );
 add_action( 'init', 'create_academic_departments_taxonomy', 0 );
 add_action( 'init', 'create_academic_position_taxonomy', 0 );
 add_action( 'init', 'create_academic_title_taxonomy', 0 );
+add_action( 'init', 'create_academic_admin_title_taxonomy', 0 );
 add_action( 'init', 'create_academic_college_taxonomy', 0 );
 add_action( 'init', 'create_education_taxonomy', 0 );
 add_action( 'init', 'create_schools_taxonomy', 0 );
@@ -1383,6 +1384,61 @@ function create_academic_title_taxonomy() {
 	register_taxonomy( 'academic_title', array( 'provider' ), $args );
 
 }
+
+function create_academic_admin_title_taxonomy() {
+	$labels = array(
+	  'name'                           => 'Academic Administrative Titles',
+	  'singular_name'                  => 'Academic Administrative Title',
+	  'search_items'                   => 'Search Titles',
+	  'all_items'                      => 'All Titles',
+	  'edit_item'                      => 'Edit Title',
+	  'update_item'                    => 'Update Title',
+	  'add_new_item'                   => 'Add New Title',
+	  'new_item_name'                  => 'New Title',
+	  'menu_name'                      => 'Academic Administrative Titles',
+	  'view_item'                      => 'View Title',
+	  'popular_items'                  => 'Popular Title',
+	  'separate_items_with_commas'     => 'Separate Titles with commas',
+	  'add_or_remove_items'            => 'Add or remove Titles',
+	  'choose_from_most_used'          => 'Choose from the most used Titles',
+	  'not_found'                      => 'No Titles found',
+	  'parent_item'                	 => 'Parent Title',
+	  'parent_item_colon'          	 => 'Parent Title:',
+	  'no_terms'                   	 => 'No Academic Administrative Titles',
+	  'items_list'                 	 => 'Academic Administrative Titles list',
+	  'items_list_navigation'      	 => 'Academic Administrative Titles list navigation',
+  );
+	$rewrite = array(
+	  'slug'                       => 'academic_admin_title',
+	  'with_front'                 => true,
+	  'hierarchical'               => true,
+  );
+  $capabilities = array(
+	  'manage_terms'               => 'manage_options',
+	  'edit_terms'                 => 'manage_options',
+	  'delete_terms'               => 'manage_options',
+	  'assign_terms'               => 'edit_physicians',
+  );
+  $args = array(
+	  'label' 					 => __( 'Academic Administrative Titles' ),
+	  'labels'                     => $labels,
+	  'hierarchical'               => true,
+	  'public'                     => true,
+	  'show_ui'                    => true,
+	  'meta_box_cb'				 => false,
+	  'show_admin_column'          => false,
+	  'show_in_nav_menus'          => false,
+	  'show_tagcloud'              => false,
+	  'rewrite'                    => $rewrite,
+	  'capabilities'               => $capabilities,
+	  'show_in_rest'       		 => true,
+		'rest_base'          		 => 'academic_admin_title',
+		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+  );
+  register_taxonomy( 'academic_admin_title', array( 'provider' ), $args );
+
+}
+
 function create_recognition_taxonomy() {
 
 	$labels = array(
