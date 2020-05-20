@@ -1084,7 +1084,7 @@
             "key": "field_physician_academic_appointment",
             "name": "physician_academic_appointment",
             "type": "repeater",
-            "label": "Academic Appointment",
+            "label": "Faculty Appointment",
             "instructions": "Both fields are required if you add a row.",
             "required": 0,
             "conditional_logic": 0,
@@ -1101,7 +1101,7 @@
             "sub_fields": [
                 {
                     "key": "field_physician_appointment_title",
-                    "label": "Academic Title (Original)",
+                    "label": "Faculty Title (Original)",
                     "name": "academic_title",
                     "type": "text",
                     "instructions": "Deprecated - Moving to select. Please update.",
@@ -1128,7 +1128,7 @@
                 },
                 {
                     "key": "field_physician_appointment_title_tax",
-                    "label": "Academic Title",
+                    "label": "Faculty Title",
                     "name": "academic_title_tax",
                     "type": "taxonomy",
                     "instructions": "Professor, Associate Professor, Assistant Professor, etc.",

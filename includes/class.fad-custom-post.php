@@ -1333,15 +1333,15 @@ function create_portal_taxonomy() {
 
 function create_academic_title_taxonomy() {
   	$labels = array(
-		'name'                           => 'Academic Titles',
-		'singular_name'                  => 'Academic Title',
+		'name'                           => 'Faculty Titles',
+		'singular_name'                  => 'Faculty Title',
 		'search_items'                   => 'Search Titles',
 		'all_items'                      => 'All Titles',
 		'edit_item'                      => 'Edit Title',
 		'update_item'                    => 'Update Title',
 		'add_new_item'                   => 'Add New Title',
 		'new_item_name'                  => 'New Title',
-		'menu_name'                      => 'Academic Titles',
+		'menu_name'                      => 'Faculty Titles',
 		'view_item'                      => 'View Title',
 		'popular_items'                  => 'Popular Title',
 		'separate_items_with_commas'     => 'Separate Titles with commas',
@@ -1350,9 +1350,9 @@ function create_academic_title_taxonomy() {
 		'not_found'                      => 'No Titles found',
 		'parent_item'                	 => 'Parent Title',
 		'parent_item_colon'          	 => 'Parent Title:',
-		'no_terms'                   	 => 'No Academic Titles',
-		'items_list'                 	 => 'Academic Titles list',
-		'items_list_navigation'      	 => 'Academic Titles list navigation',
+		'no_terms'                   	 => 'No Faculty Titles',
+		'items_list'                 	 => 'Faculty Titles list',
+		'items_list_navigation'      	 => 'Faculty Titles list navigation',
 	);
   	$rewrite = array(
 		'slug'                       => 'academic_title',
@@ -1366,7 +1366,7 @@ function create_academic_title_taxonomy() {
 		'assign_terms'               => 'edit_physicians',
 	);
 	$args = array(
-		'label' 					 => __( 'Academic Titles' ),
+		'label' 					 => __( 'Faculty Titles' ),
 		'labels'                     => $labels,
 		'hierarchical'               => true,
 		'public'                     => true,
