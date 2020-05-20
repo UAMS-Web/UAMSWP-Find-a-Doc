@@ -1107,12 +1107,15 @@
   }
 
   .academic-info .content-split-lg,
+  .clinical-info .content-split-lg,
   .research-info .content-split-lg {
     flex-wrap: nowrap;
   }
 
   .academic-info .content-split-lg>[class*=" col-lg-"]:first-child,
   .academic-info .content-split-lg>[class^=col-lg-]:first-child,
+  .clinical-info .content-split-lg>[class*=" col-lg-"]:first-child,
+  .clinical-info .content-split-lg>[class^=col-lg-]:first-child,
   .research-info .content-split-lg>[class*=" col-lg-"]:first-child,
   .research-info .content-split-lg>[class^=col-lg-]:first-child {
     width: auto;
@@ -1124,6 +1127,8 @@
 
   .academic-info .content-split-lg>[class*=" col-lg-"]:last-child,
   .academic-info .content-split-lg>[class^=col-lg-]:last-child,
+  .clinical-info .content-split-lg>[class*=" col-lg-"]:last-child,
+  .clinical-info .content-split-lg>[class^=col-lg-]:last-child,
   .research-info .content-split-lg>[class*=" col-lg-"]:last-child,
   .research-info .content-split-lg>[class^=col-lg-]:last-child {
     width: auto;
@@ -1135,6 +1140,8 @@
 
   .academic-info .content-split-lg>[class*=" col-lg-"]:last-child .content-width,
   .academic-info .content-split-lg>[class^=col-lg-]:last-child .content-width,
+  .clinical-info .content-split-lg>[class*=" col-lg-"]:last-child .content-width,
+  .clinical-info .content-split-lg>[class^=col-lg-]:last-child .content-width,
   .research-info .content-split-lg>[class*=" col-lg-"]:last-child .content-width,
   .research-info .content-split-lg>[class^=col-lg-]:last-child .content-width {
     width: 21em;
