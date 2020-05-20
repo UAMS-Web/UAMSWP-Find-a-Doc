@@ -144,6 +144,7 @@ while ( have_posts() ) : the_post();
     $physician_clinical_bio = get_field('physician_clinical_bio');
     $physician_youtube_link = get_field('physician_youtube_link');
     $physician_clinical_admin_title = get_field('physician_clinical_admin_title');
+    $physician_clinical_focus = get_field('physician_clinical_focus');
     $physician_awards = get_field('physician_awards');
     $physician_additional_info = get_field('physician_additional_info');
     $expertises =  get_field('physician_expertise');
@@ -498,12 +499,12 @@ while ( have_posts() ) : the_post();
             $physician_clinical_split = false;
             if (
                 ( $physician_clinical_bio || !empty ($physician_youtube_link) ) // column A stuff
-                && ( $physician_clinical_admin_title ) // column B stuff
+                && ( $physician_clinical_admin_title || $physician_clinical_focus ) // column B stuff
                 ) {
                 $physician_clinical_split = true; // If there is stuff for column A and column B, split the section into two columns
             }
         
-            // Display section for Clinical Bio, Clinical Video, Clinical Administrative Title(s) ... only if there is a bio or video.
+            // Display section for Clinical Bio, Clinical Video, Clinical Administrative Title(s), Clinical Focus ... only if there is a bio or video.
             if ( $physician_clinical_bio || !empty ($physician_youtube_link) ) { ?>
             <section class="uams-module bg-auto">
                 <div class="container-fluid">
@@ -547,6 +548,10 @@ while ( have_posts() ) : the_post();
                                 <?php endwhile; ?>
                                 </dl>
                             <?php endif;
+                            if($physician_clinical_focus) { ?>
+                                <h3 class="h4">Clinical Focus</h3>
+                                <?php echo $physician_clinical_focus; ?>
+                            <?php } // endif
                             if ( $physician_clinical_split ) { ?>
                                 </div>
                                 </div>
