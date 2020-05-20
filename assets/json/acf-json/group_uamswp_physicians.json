@@ -720,7 +720,7 @@
             "default_value": "",
             "tabs": "all",
             "toolbar": "full",
-            "media_upload": 1,
+            "media_upload": 0,
             "delay": 0
         },
         "field_physician_short_clinical_bio": {
