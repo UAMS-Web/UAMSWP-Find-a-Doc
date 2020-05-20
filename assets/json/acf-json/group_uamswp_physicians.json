@@ -1228,6 +1228,77 @@
                 }
             ]
         },
+        "field_physician_academic_admin_title": {
+            "key": "field_physician_academic_admin_title",
+            "name": "physician_academic_admin_title",
+            "type": "repeater",
+            "label": "Academic Administrative Title",
+            "instructions": "Both fields are required if you add a row.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_physician_academic_admin_title_tax",
+                    "label": "Administrative Title",
+                    "name": "academic_admin_title_tax",
+                    "type": "taxonomy",
+                    "instructions": "Dean, Department Chair, etc.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "academic_admin_title",
+                    "field_type": "select",
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "acfe_bidirectional": {
+                        "acfe_bidirectional_enabled": "0"
+                    },
+                    "multiple": 0,
+                    "allow_null": 0
+                },
+                {
+                    "key": "field_5d4099f605575",
+                    "label": "Academic Department",
+                    "name": "department",
+                    "type": "taxonomy",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "academic_department",
+                    "field_type": "select",
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "acfe_bidirectional": {
+                        "acfe_bidirectional_enabled": "0"
+                    },
+                    "multiple": 0,
+                    "allow_null": 0
+                }
+            ]
+        },
         "field_physician_academic_bio": {
             "key": "field_physician_academic_bio",
             "name": "physician_academic_bio",
