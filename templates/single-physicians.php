@@ -612,7 +612,7 @@ while ( have_posts() ) : the_post();
                         <?php } // endif ?>
                             <?php
                                 if( have_rows('physician_academic_admin_title') ): ?>
-                                    <h3>Administrative Roles</h3>
+                                    <h3 class="h4">Administrative Roles</h3>
                                     <dl>
                                     <?php while( have_rows('physician_academic_admin_title') ): the_row(); ?>
                                     <?php 
@@ -627,7 +627,7 @@ while ( have_posts() ) : the_post();
                             <?php
                                 // $academic_appointments = get_field('physician_academic_appointment');
                                 if( have_rows('physician_academic_appointment') ): ?>
-                                    <h3>Faculty Appointments</h3>
+                                    <h3 class="h4">Faculty Appointments</h3>
                                     <dl>
                                     <?php while( have_rows('physician_academic_appointment') ): the_row(); ?>
                                     <?php 
@@ -646,7 +646,7 @@ while ( have_posts() ) : the_post();
                             <?php endif; ?>
                             <?php
                                 if( have_rows('physician_education') ): ?>
-                                    <h3>Education</h3>
+                                    <h3 class="h4">Education</h3>
                                     <dl>
                                     <?php while( have_rows('physician_education') ): the_row();
                                         $school_name = get_term( get_sub_field('school'), 'school');
@@ -659,7 +659,7 @@ while ( have_posts() ) : the_post();
                             <?php endif;
                                 
                                 if( ! empty( $boards ) ): ?>
-                            <h3>Professional Certifications</h3>
+                            <h3 class="h4">Professional Certifications</h3>
                             <ul>
                             <?php foreach ( $boards as $board ) :
                                 $board_name = get_term( $board, 'board'); ?>
@@ -670,7 +670,7 @@ while ( have_posts() ) : the_post();
                             <?php endif;
                                 
                                 if( ! empty( $associations ) ): ?>
-                            <h3>Associations</h3>
+                            <h3 class="h4">Associations</h3>
                             <ul>
                             <?php foreach ( $associations as $association ) :
                                 $association_name = get_term( $association, 'association'); ?>
