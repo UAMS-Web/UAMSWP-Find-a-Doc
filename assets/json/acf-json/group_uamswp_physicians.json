@@ -758,6 +758,25 @@
             "default_value": "",
             "placeholder": ""
         }, 
+        "field_physician_clinical_focus": {
+            "key": "field_physician_clinical_focus",
+            "name": "physician_clinical_focus",
+            "type": "wysiwyg",
+            "label": "Clinical Focus",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
         "field_medical_specialties": {
             "key": "field_medical_specialties",
             "name": "physician_medical_specialties",
