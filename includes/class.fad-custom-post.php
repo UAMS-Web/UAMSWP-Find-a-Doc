@@ -228,6 +228,7 @@ add_action( 'init', 'create_clinical_treatments_taxonomy', 0 );
 add_action( 'init', 'create_affiliations_taxonomy', 0 );
 add_action( 'init', 'create_institute_affiliations_taxonomy', 0 );
 add_action( 'init', 'create_clinical_title_taxonomy', 0 );
+add_action( 'init', 'create_clinical_admin_title_taxonomy', 0 );
 add_action( 'init', 'create_languages_taxonomy', 0 );
 add_action( 'init', 'create_departments_taxonomy', 0 );
 add_action( 'init', 'create_degrees_taxonomy', 0 );
@@ -680,6 +681,60 @@ function create_clinical_title_taxonomy() {
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
 	);
 	register_taxonomy( 'clinical_title', array( 'provider' ), $args );
+
+}
+
+function create_clinical_admin_title_taxonomy() {
+  	$labels = array(
+		'name'                           => 'Clinical Administrative Titles',
+		'singular_name'                  => 'Clinical Administrative Title',
+		'search_items'                   => 'Search Titles',
+		'all_items'                      => 'All Titles',
+		'edit_item'                      => 'Edit Title',
+		'update_item'                    => 'Update Title',
+		'add_new_item'                   => 'Add New Title',
+		'new_item_name'                  => 'New Title',
+		'menu_name'                      => 'Clinical Administrative Titles',
+		'view_item'                      => 'View Title',
+		'popular_items'                  => 'Popular Title',
+		'separate_items_with_commas'     => 'Separate Titles with commas',
+		'add_or_remove_items'            => 'Add or remove Titles',
+		'choose_from_most_used'          => 'Choose from the most used Titles',
+		'not_found'                      => 'No Titles found',
+		'parent_item'                	 => 'Parent Title',
+		'parent_item_colon'          	 => 'Parent Title:',
+		'no_terms'                   	 => 'No Clinical Administrative Titles',
+		'items_list'                 	 => 'Clinical Administrative Titles list',
+		'items_list_navigation'      	 => 'Clinical Administrative Titles list navigation',
+	);
+  	$rewrite = array(
+		'slug'                       => 'clinical_admin_title',
+		'with_front'                 => true,
+		'hierarchical'               => true,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'label' 					 => __( 'Clinical Administrative Titles' ),
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => true,
+		'show_ui'                    => true,
+		'meta_box_cb'				 => false,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+		'show_in_rest'       		 => true,
+  		'rest_base'          		 => 'clinical_admin_title',
+  		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+	);
+	register_taxonomy( 'clinical_admin_title', array( 'provider' ), $args );
 
 }
 
