@@ -153,6 +153,7 @@ while ( have_posts() ) : the_post();
     $education = get_field('physician_education');
     $academic_bio = get_field('physician_academic_bio');
     $academic_appointment = get_field('physician_academic_appointment');
+    $academic_admin_title = get_field('physician_academic_admin_title');
     $research_bio = get_field('physician_research_bio');
     $research_interests = get_field('physician_research_interests');
     $research_profiles_link = get_field('physician_research_profiles_link');
@@ -581,11 +582,11 @@ while ( have_posts() ) : the_post();
         ?>
         <?php 
             $physician_academic_split = false;
-            if ( $academic_bio && ( $academic_appointment || $education || $boards ) ) {
+            if ( $academic_bio && ( $academic_appointment || $academic_admin_title || $education || $boards ) ) {
                 $physician_academic_split = true;
             }
         
-            if($academic_bio || $academic_appointment || $education || $boards): ?>
+            if($academic_bio || $academic_appointment || $academic_admin_title || $education || $boards): ?>
         <section class="uams-module academic-info bg-auto">
             <div class="container-fluid">
                 <div class="row">
@@ -610,9 +611,23 @@ while ( have_posts() ) : the_post();
                             <div class="content-width">
                         <?php } // endif ?>
                             <?php
+                                if( have_rows('physician_academic_admin_title') ): ?>
+                                    <h3>Administrative Roles</h3>
+                                    <dl>
+                                    <?php while( have_rows('physician_academic_admin_title') ): the_row(); ?>
+                                    <?php 
+                                        $department = get_term( get_sub_field('department'), 'academic_department' ); 
+                                        $academic_admin_title_tax = get_term( get_sub_field('academic_admin_title_tax'), 'academic_admin_title' );
+                                    ?>
+                                        <dt><?php echo $department->name; ?></dt>
+                                        <dd><?php echo $academic_admin_title_tax->name; ?></dd>
+                                    <?php endwhile; ?>
+                                    </dl>
+                            <?php endif; ?>
+                            <?php
                                 // $academic_appointments = get_field('physician_academic_appointment');
                                 if( have_rows('physician_academic_appointment') ): ?>
-                                    <h3>Academic Appointments</h3>
+                                    <h3>Faculty Appointments</h3>
                                     <dl>
                                     <?php while( have_rows('physician_academic_appointment') ): the_row(); ?>
                                     <?php 
