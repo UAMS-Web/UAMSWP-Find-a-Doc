@@ -1153,7 +1153,7 @@
                 },
                 {
                     "key": "field_5d4099f605575",
-                    "label": "Department",
+                    "label": "Academic Department",
                     "name": "department",
                     "type": "taxonomy",
                     "instructions": "",
