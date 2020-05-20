@@ -631,15 +631,15 @@ function create_patient_type_taxonomy() {
 
 function create_clinical_title_taxonomy() {
   	$labels = array(
-		'name'                           => 'Cinical Titles',
-		'singular_name'                  => 'Cinical Title',
+		'name'                           => 'Clinical Titles',
+		'singular_name'                  => 'Clinical Title',
 		'search_items'                   => 'Search Titles',
 		'all_items'                      => 'All Titles',
 		'edit_item'                      => 'Edit Title',
 		'update_item'                    => 'Update Title',
 		'add_new_item'                   => 'Add New Title',
 		'new_item_name'                  => 'New Title',
-		'menu_name'                      => 'Cinical Titles',
+		'menu_name'                      => 'Clinical Titles',
 		'view_item'                      => 'View Title',
 		'popular_items'                  => 'Popular Title',
 		'separate_items_with_commas'     => 'Separate Titles with commas',
@@ -648,9 +648,9 @@ function create_clinical_title_taxonomy() {
 		'not_found'                      => 'No Titles found',
 		'parent_item'                	 => 'Parent Title',
 		'parent_item_colon'          	 => 'Parent Title:',
-		'no_terms'                   	 => 'No Cinical Titles',
-		'items_list'                 	 => 'Cinical Titles list',
-		'items_list_navigation'      	 => 'Cinical Titles list navigation',
+		'no_terms'                   	 => 'No Clinical Titles',
+		'items_list'                 	 => 'Clinical Titles list',
+		'items_list_navigation'      	 => 'Clinical Titles list navigation',
 	);
   	$rewrite = array(
 		'slug'                       => 'clinical_title',
@@ -664,7 +664,7 @@ function create_clinical_title_taxonomy() {
 		'assign_terms'               => 'edit_physicians',
 	);
 	$args = array(
-		'label' 					 => __( 'Cinical Titles' ),
+		'label' 					 => __( 'Clinical Titles' ),
 		'labels'                     => $labels,
 		'hierarchical'               => true,
 		'public'                     => true,
