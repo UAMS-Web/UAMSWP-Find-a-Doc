@@ -1080,6 +1080,56 @@
             "append": "",
             "maxlength": ""
         },
+        "field_physician_academic_college": {
+            "key": "field_physician_academic_college",
+            "name": "physician_academic_college",
+            "type": "taxonomy",
+            "label": "College Affiliation",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "academic_college",
+            "field_type": "checkbox",
+            "add_term": 1,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 0,
+            "allow_null": 0
+        },
+        "field_physician_academic_position": {
+            "key": "field_physician_academic_position",
+            "name": "physician_academic_position",
+            "type": "taxonomy",
+            "label": "Academic Position Type",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "academic_position",
+            "field_type": "checkbox",
+            "add_term": 1,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 0,
+            "allow_null": 0
+        },
         "field_physician_academic_appointment": {
             "key": "field_physician_academic_appointment",
             "name": "physician_academic_appointment",
@@ -1177,56 +1227,6 @@
                     "allow_null": 0
                 }
             ]
-        },
-        "field_physician_academic_college": {
-            "key": "field_physician_academic_college",
-            "name": "physician_academic_college",
-            "type": "taxonomy",
-            "label": "College Affiliation",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "academic_college",
-            "field_type": "checkbox",
-            "add_term": 1,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
-            },
-            "multiple": 0,
-            "allow_null": 0
-        },
-        "field_physician_academic_position": {
-            "key": "field_physician_academic_position",
-            "name": "physician_academic_position",
-            "type": "taxonomy",
-            "label": "Academic Position Type",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "academic_position",
-            "field_type": "checkbox",
-            "add_term": 1,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
-            },
-            "multiple": 0,
-            "allow_null": 0
         },
         "field_physician_academic_bio": {
             "key": "field_physician_academic_bio",
