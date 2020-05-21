@@ -547,7 +547,7 @@
             "name": "physician_clinical_admin_title",
             "type": "repeater",
             "label": "Clinical Administrative Title",
-            "instructions": "Both fields are required if you add a row.",
+            "instructions": "Both fields are required if you add a row. This is not displayed on the front end at this time.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -566,7 +566,7 @@
                     "label": "Clinical Administrative Title",
                     "name": "clinical_admin_title_tax",
                     "type": "taxonomy",
-                    "instructions": "Service line director, medical director, etc.",
+                    "instructions": "Service line director, medical director, nursing director or administrator.",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
