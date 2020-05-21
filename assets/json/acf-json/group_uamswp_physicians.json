@@ -563,7 +563,7 @@
             "sub_fields": [
                 {
                     "key": "field_physician_clinical_admin_title_tax",
-                    "label": "Administrative Title",
+                    "label": "Clinical Administrative Title",
                     "name": "clinical_admin_title_tax",
                     "type": "taxonomy",
                     "instructions": "Service line director, medical director, etc.",
@@ -1224,7 +1224,7 @@
             "key": "field_physician_academic_appointment",
             "name": "physician_academic_appointment",
             "type": "repeater",
-            "label": "Faculty Appointment",
+            "label": "Faculty Title",
             "instructions": "Both fields are required if you add a row.",
             "required": 0,
             "conditional_logic": 0,
@@ -1241,7 +1241,7 @@
             "sub_fields": [
                 {
                     "key": "field_physician_appointment_title",
-                    "label": "Faculty Title (Original)",
+                    "label": "Title (Original)",
                     "name": "academic_title",
                     "type": "text",
                     "instructions": "Deprecated - Moving to select. Please update.",
@@ -1268,7 +1268,7 @@
                 },
                 {
                     "key": "field_physician_appointment_title_tax",
-                    "label": "Faculty Title",
+                    "label": "Title",
                     "name": "academic_title_tax",
                     "type": "taxonomy",
                     "instructions": "Professor, Associate Professor, Assistant Professor, etc.",
@@ -1339,7 +1339,7 @@
             "sub_fields": [
                 {
                     "key": "field_physician_academic_admin_title_tax",
-                    "label": "Administrative Title",
+                    "label": "Academic Administrative Title",
                     "name": "academic_admin_title_tax",
                     "type": "taxonomy",
                     "instructions": "Dean, Department Chair, etc.",
