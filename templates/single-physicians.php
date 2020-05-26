@@ -143,6 +143,8 @@ while ( have_posts() ) : the_post();
     $physician_portal = get_field('physician_portal');
     $physician_clinical_bio = get_field('physician_clinical_bio');
     $physician_youtube_link = get_field('physician_youtube_link');
+    $physician_clinical_admin_title = get_field('physician_clinical_admin_title');
+    $physician_clinical_focus = get_field('physician_clinical_focus');
     $physician_awards = get_field('physician_awards');
     $physician_additional_info = get_field('physician_additional_info');
     $expertises =  get_field('physician_expertise');
@@ -153,6 +155,7 @@ while ( have_posts() ) : the_post();
     $education = get_field('physician_education');
     $academic_bio = get_field('physician_academic_bio');
     $academic_appointment = get_field('physician_academic_appointment');
+    $academic_admin_title = get_field('physician_academic_admin_title');
     $research_bio = get_field('physician_research_bio');
     $research_interests = get_field('physician_research_interests');
     $research_profiles_link = get_field('physician_research_profiles_link');
@@ -491,26 +494,80 @@ while ( have_posts() ) : the_post();
             </div>
         </section>
         <?php endif; ?>
-        <?php if($physician_clinical_bio|| !empty ($physician_youtube_link) || !empty ($physician_awards) || $physician_additional_info): ?>
-        <section class="uams-module bg-auto">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h2 class="module-title">About <?php echo $short_name; ?>
-                        </h2>
-                        <div class="module-body">
-                            <?php echo $physician_clinical_bio; ?>
-                            <?php if($physician_youtube_link) { ?>
-                            <div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
-                                <?php echo wp_oembed_get( $physician_youtube_link ); ?>
-                            </div>
-                            <?php } ?>
+        
+        <?php 
+            $physician_clinical_split = false;
+            if (
+                ( $physician_clinical_bio || !empty ($physician_youtube_link) ) // column A stuff
+                && ( $physician_clinical_focus ) // column B stuff
+                // && ( $physician_clinical_admin_title || $physician_clinical_focus ) // Alternate column B stuff if we decide to display clinical admin title
+                ) {
+                $physician_clinical_split = true; // If there is stuff for column A and column B, split the section into two columns
+            }
+        
+            // Display section for Clinical Bio, Clinical Video, Clinical Administrative Title(s), Clinical Focus ... only if there is a bio or video.
+            if ( $physician_clinical_bio || !empty ($physician_youtube_link) ) { ?>
+            <section class="uams-module clinical-info bg-auto">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h2 class="module-title">About <?php echo $short_name; ?></h2>
+
+
+                            <?php if ( $physician_clinical_split ) {
+                                // If there is a bio or video AND at least one of the other clinical things, visually split the layout ?>
+                                <div class="row content-split-lg">
+                                <div class="col-xs-12 col-lg-7">
+                                <div class="content-width">
+                            <?php } else { ?>
+                                <div class="module-body">
+                            <?php } // endif
+                            if ( $physician_clinical_bio ) { ?>
+                                <h3 class="sr-only">Clinical Biography</h3>
+                                <?php echo $physician_clinical_bio; ?>
+                            <?php } // endif
+                            if($physician_youtube_link) { ?>
+                                <div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
+                                    <?php echo wp_oembed_get( $physician_youtube_link ); ?>
+                                </div>
+                            <?php } // endif
+                            if ( $physician_clinical_split ) { ?>
+                                </div>
+                                </div>
+                                <div class="col-xs-12 col-lg-5">
+                                <div class="content-width">
+                            <?php } // endif ?>
+                            <?php // Section for displaying clinical admin title
+                            if (true == false) { // Remove this if statement if we decide to display clinical admin title later.
+                                if( have_rows('physician_clinical_admin_title') ): ?>
+                                    <h3 class="h4">Administrative Roles</h3>
+                                    <dl>
+                                    <?php while( have_rows('physician_clinical_admin_title') ): the_row();
+                                        $department = get_term( get_sub_field('physician_clinical_admin_area'), 'service_line' ); 
+                                        $clinical_admin_title_tax = get_term( get_sub_field('clinical_admin_title_tax'), 'clinical_admin_title' );
+                                    ?>
+                                        <dt><?php echo $department->name; ?></dt>
+                                        <dd><?php echo $clinical_admin_title_tax->name; ?></dd>
+                                    <?php endwhile; ?>
+                                    </dl>
+                                <?php endif; 
+                            } // endif ?>
+                            <?php if($physician_clinical_focus) { ?>
+                                <h3 class="h4">Clinical Focus</h3>
+                                <?php echo $physician_clinical_focus; ?>
+                            <?php } // endif
+                            if ( $physician_clinical_split ) { ?>
+                                </div>
+                                </div>
+                                </div>
+                            <?php } else { ?>
+                                </div>
+                            <?php } // endif ?>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <?php endif; ?>
+            </section>
+        <?php } // endif ?>
         <?php // load all 'conditions' terms for the post
 	        $title_append = ' by ' . $short_name;
             $args = (array(
@@ -581,11 +638,11 @@ while ( have_posts() ) : the_post();
         ?>
         <?php 
             $physician_academic_split = false;
-            if ( $academic_bio && ( $academic_appointment || $education || $boards ) ) {
+            if ( $academic_bio && ( $academic_appointment || $academic_admin_title || $education || $boards ) ) {
                 $physician_academic_split = true;
             }
         
-            if($academic_bio || $academic_appointment || $education || $boards): ?>
+            if($academic_bio || $academic_appointment || $academic_admin_title || $education || $boards): ?>
         <section class="uams-module academic-info bg-auto">
             <div class="container-fluid">
                 <div class="row">
@@ -610,9 +667,23 @@ while ( have_posts() ) : the_post();
                             <div class="content-width">
                         <?php } // endif ?>
                             <?php
+                                if( have_rows('physician_academic_admin_title') ): ?>
+                                    <h3 class="h4">Administrative Roles</h3>
+                                    <dl>
+                                    <?php while( have_rows('physician_academic_admin_title') ): the_row(); ?>
+                                    <?php 
+                                        $department = get_term( get_sub_field('department'), 'academic_department' ); 
+                                        $academic_admin_title_tax = get_term( get_sub_field('academic_admin_title_tax'), 'academic_admin_title' );
+                                    ?>
+                                        <dt><?php echo $department->name; ?></dt>
+                                        <dd><?php echo $academic_admin_title_tax->name; ?></dd>
+                                    <?php endwhile; ?>
+                                    </dl>
+                            <?php endif; ?>
+                            <?php
                                 // $academic_appointments = get_field('physician_academic_appointment');
                                 if( have_rows('physician_academic_appointment') ): ?>
-                                    <h3>Academic Appointments</h3>
+                                    <h3 class="h4">Faculty Appointments</h3>
                                     <dl>
                                     <?php while( have_rows('physician_academic_appointment') ): the_row(); ?>
                                     <?php 
@@ -631,7 +702,7 @@ while ( have_posts() ) : the_post();
                             <?php endif; ?>
                             <?php
                                 if( have_rows('physician_education') ): ?>
-                                    <h3>Education</h3>
+                                    <h3 class="h4">Education</h3>
                                     <dl>
                                     <?php while( have_rows('physician_education') ): the_row();
                                         $school_name = get_term( get_sub_field('school'), 'school');
@@ -644,7 +715,7 @@ while ( have_posts() ) : the_post();
                             <?php endif;
                                 
                                 if( ! empty( $boards ) ): ?>
-                            <h3>Professional Certifications</h3>
+                            <h3 class="h4">Professional Certifications</h3>
                             <ul>
                             <?php foreach ( $boards as $board ) :
                                 $board_name = get_term( $board, 'board'); ?>
@@ -655,7 +726,7 @@ while ( have_posts() ) : the_post();
                             <?php endif;
                                 
                                 if( ! empty( $associations ) ): ?>
-                            <h3>Associations</h3>
+                            <h3 class="h4">Associations</h3>
                             <ul>
                             <?php foreach ( $associations as $association ) :
                                 $association_name = get_term( $association, 'association'); ?>
