@@ -30,6 +30,55 @@
     "active": true,
     "description": "",
     "fields": {
+        "field_location_parent": {
+            "key": "field_location_parent",
+            "name": "location_parent",
+            "type": "true_false",
+            "label": "Does it have a parent?",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_location_parent_id": {
+            "key": "field_location_parent_id",
+            "name": "location_parent_id",
+            "type": "post_object",
+            "label": "Parent Location",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "location"
+            ],
+            "taxonomy": "",
+            "allow_null": 1,
+            "multiple": 0,
+            "return_format": "id",
+            "ui": 1
+        },
         "field_location_address_tab": {
             "key": "field_location_address_tab",
             "name": "",
@@ -37,7 +86,15 @@
             "label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Address",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -278,7 +335,15 @@
             "label": "<i class=\"dashicons-randomize dashicons\"><\/i> Parking &amp; Directions",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
