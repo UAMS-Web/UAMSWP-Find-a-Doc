@@ -6,10 +6,47 @@
      *  Must be used inside a loop
      *  Required var: $id
      */
+
+    // Reset featured image var
+    $featured_image = '';
+
+    // Parent Location 
+    $location_has_parent = get_field('location_parent', $id);
+    $location_parent_id = get_field('location_parent_id', $id);
+    $parent_location = '';
+    $parent_id = '';
+    $parent_title = '';
+    $parent_url = '';
+    $override_parent_photo = '';
+    $override_parent_photo_featured = '';
+
+    if ($location_has_parent && $location_parent_id) { 
+        $parent_location = get_post( $location_parent_id );
+    }
+    // Get Post ID for Address & Image fields
+    if ($parent_location) {
+        $parent_id = $parent_location->ID;
+        $parent_title = $parent_location->post_title;
+        $parent_url = get_permalink( $parent_id );
+        $featured_image = get_the_post_thumbnail($parent_id, 'aspect-16-9-small', ['class' => 'card-img-top']);
+
+        $override_parent_photo = get_field('location_image_override_parent', $id);
+        $override_parent_photo_featured = get_field('location_image_override_parent_featured', $id);
+        
+        // Set featured image
+        if ( $override_parent_photo && $override_parent_photo_featured ) {
+            $featured_image = get_the_post_thumbnail($id, 'aspect-16-9-small', ['class' => 'card-img-top']);
+        }
+    } else {
+        // Set featured image
+        if ( has_post_thumbnail($id) ) {
+            $featured_image = get_the_post_thumbnail($id, 'aspect-16-9-small', ['class' => 'card-img-top']);
+        }
+    }
 ?>
 <div class="card">
-    <?php if ( has_post_thumbnail($id) ) { ?>
-    <?php echo get_the_post_thumbnail($id, 'aspect-16-9-small', ['class' => 'card-img-top']); ?>
+    <?php if ( $featured_image ) { ?>
+        <?php echo $featured_image; ?>
     <?php } else { ?>
     <picture>
         <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
