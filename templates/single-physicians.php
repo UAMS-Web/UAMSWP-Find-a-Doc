@@ -811,11 +811,51 @@ while ( have_posts() ) : the_post();
                                 $location_schema = ',"address": [';
                             ?>
                             <?php foreach( $locations as $location ): 
-                                if ( get_post_status ( $location ) == 'publish' ) { ?>
+                                if ( get_post_status ( $location ) == 'publish' ) { 
+                                    
+                                    // Reset variables
+                                    $featured_image = '';
+                                    $address_id = $location;
+
+                                    // Parent Location 
+                                    $location_has_parent = get_field('location_parent', $location);
+                                    $location_parent_id = get_field('location_parent_id', $location);
+                                    $parent_location = '';
+                                    $parent_id = '';
+                                    $parent_title = '';
+                                    $parent_url = '';
+                                    $override_parent_photo = '';
+                                    $override_parent_photo_featured = '';
+
+                                    if ($location_has_parent && $location_parent_id) { 
+                                        $parent_location = get_post( $location_parent_id );
+                                    }
+                                    // Get Post ID for Address & Image fields
+                                    if ($parent_location) {
+                                        $parent_id = $parent_location->ID;
+                                        $parent_title = $parent_location->post_title;
+                                        $parent_url = get_permalink( $parent_id );
+                                        $featured_image = get_the_post_thumbnail($parent_id, 'aspect-16-9-small', ['class' => 'card-img-top']);
+                                        $address_id = $parent_id;
+
+                                        $override_parent_photo = get_field('location_image_override_parent', $location);
+                                        $override_parent_photo_featured = get_field('location_image_override_parent_featured', $location);
+                                        
+                                        // Set featured image
+                                        if ( $override_parent_photo && $override_parent_photo_featured ) {
+                                            $featured_image = get_the_post_thumbnail($location, 'aspect-16-9-small', ['class' => 'card-img-top']);
+                                        }
+                                    } else {
+                                        // Set featured image
+                                        if ( has_post_thumbnail($location) ) {
+                                            $featured_image = get_the_post_thumbnail($location, 'aspect-16-9-small', ['class' => 'card-img-top']);
+                                        }
+                                    }
+                                ?>
                                     <div class="card">
-                                        <?php if ( has_post_thumbnail($location) ) { ?>
-                                        <?php echo get_the_post_thumbnail($location, 'aspect-16-9-small', ['class' => 'card-img-top']); ?>
-                                        <?php } else { ?>
+                                        <?php if ( $featured_image ) {
+                                            echo $featured_image;
+                                        } else { ?>
                                         <picture>
                                             <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
                                             <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" class="card-img-top" />
@@ -824,8 +864,11 @@ while ( have_posts() ) : the_post();
                                         <div class="card-body">
                                             <h3 class="card-title h5">
                                                 <span class="name"><?php echo get_the_title( $location ); ?></span>
+                                                <?php if ( $parent_location ) { ?>
+                                                    <span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
+                                                <?php } // endif ?>
                                                 <?php  if ( 1 == $l ) { ?>
-                                                    <span class="subtitle">Primary Location</span>
+                                                    <span class="subtitle"><span class="sr-only">, </span>Primary Location</span>
                                                 <?php } ?>
                                             </h3>
                                             <?php 
@@ -933,10 +976,11 @@ while ( have_posts() ) : the_post();
                                                     <p><a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $alert_label; ?>" class="alert-link">Learn more</a></p>
                                                 </div>
                                             <?php } // endif ?>
-                                            <p class="card-text"><?php echo get_field('location_address_1', $location ); ?><br/>
-                                            <?php echo ( get_field('location_address_2', $location ) ? get_field('location_address_2', $location ) . '<br/>' : ''); ?>
-                                            <?php echo get_field('location_city', $location ); ?>, <?php echo get_field('location_state', $location ); ?> <?php echo get_field('location_zip', $location); ?></p>
-                                            <?php if (get_field('location_phone', $location)) { ?>
+                                            <?php $map = get_field('location_map', $address_id); ?>
+                                            <p class="card-text"><?php echo get_field('location_address_1', $address_id ); ?><br/>
+                                            <?php echo ( get_field('location_address_2', $address_id ) ? get_field('location_address_2', $address_id ) . '<br/>' : ''); ?>
+                                            <?php echo get_field('location_city', $address_id ); ?>, <?php echo get_field('location_state', $address_id ); ?> <?php echo get_field('location_zip', $address_id); ?></p>
+                                            <?php if (get_field('location_phone', $address_id)) { ?>
                                                 <dl>
                                                     <dt>Appointment Phone Number<?php echo (get_field('field_location_appointment_phone_query', $location) && get_field('location_clinic_phone_query', $location)) ? 's' : ''; ?></dt>
                                                     <?php if (get_field('location_new_appointments_phone', $location) && get_field('location_clinic_phone_query', $location)) { ?>
@@ -953,6 +997,9 @@ while ( have_posts() ) : the_post();
                                         <div class="btn-container">
                                             <div class="inner-container">
                                                 <a href="<?php the_permalink(  $location ); ?>" class="btn btn-primary" aria-label="Go to location page for <?php echo get_the_title( $location ); ?>">View Location</a>
+                                                <?php if ($map) { ?>
+                                                    <a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get Directions to <?php echo get_the_title($id); ?>">Get Directions</a>
+                                                <?php } ?>
                                             </div>
                                         </div>
                                     </div>
