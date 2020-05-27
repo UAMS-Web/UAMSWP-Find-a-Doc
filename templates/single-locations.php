@@ -314,6 +314,7 @@ while ( have_posts() ) : the_post(); ?>
 					<?php
 					$phone_schema .= '],';
 					$hoursvary = $location_hours_group['location_hours_variable'];
+					$hoursvary_info = $location_hours_group['location_hours_variable_info'];
 					$hours247 = $location_hours_group['location_24_7'];
 					$modified = $location_hours_group['location_modified_hours'];
 					$modified_reason = $location_hours_group['location_modified_hours_reason'];
@@ -328,7 +329,7 @@ while ( have_posts() ) : the_post(); ?>
 
 					if ( $hoursvary ) {
 						echo '<h2>Hours Vary</h2>';
-						echo '<p>This is a test.</p>';
+						echo $hoursvary_info;
 					} else {
 						if ($modified && $modified_hours) : 
 						?>
