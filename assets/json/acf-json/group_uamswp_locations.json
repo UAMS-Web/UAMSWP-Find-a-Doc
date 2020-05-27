@@ -1274,7 +1274,7 @@
                     "name": "location_hours_variable",
                     "type": "true_false",
                     "label": "Do the location's hours vary?",
-                    "instructions": "",
+                    "instructions": "For example, does this location operate only periodically or as needed?",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -1293,7 +1293,7 @@
                     "name": "location_hours_variable_info",
                     "type": "wysiwyg",
                     "label": "Variable Hours Information",
-                    "instructions": "",
+                    "instructions": "Describe how the hours work for this location.",
                     "required": 1,
                     "conditional_logic": [
                         [
