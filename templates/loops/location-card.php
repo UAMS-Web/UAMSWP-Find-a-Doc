@@ -45,9 +45,9 @@
     }
 ?>
 <div class="card">
-    <?php if ( $featured_image ) { ?>
-        <?php echo $featured_image; ?>
-    <?php } else { ?>
+    <?php if ( $featured_image ) {
+        echo $featured_image;
+    } else { ?>
     <picture>
         <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
         <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" class="card-img-top" />
