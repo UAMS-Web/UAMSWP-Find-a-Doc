@@ -52,11 +52,18 @@ $location_phone_numbers = get_field('field_location_phone_numbers');
 
 // Image values
 $override_parent_photo = get_field('location_image_override_parent');
-if ($override_parent_photo && $parent_location) { // If child location & override is true
+$override_parent_photo_featured = get_field('location_image_override_parent_featured');
+$override_parent_photo_wayfinding = get_field('location_image_override_parent_wayfinding');
+$override_parent_photo_gallery = get_field('location_image_override_parent_gallery');
+// if ($override_parent_photo && $parent_location) { // If child location & override is true
+if ($override_parent_photo && $parent_location && $override_parent_photo_wayfinding) {
 	$wayfinding_photo = get_field('location_wayfinding_photo');
-	$photo_gallery = get_field('location_photo_gallery');
-} else { // Use parent images
+} else { // Use parent/standard images
 	$wayfinding_photo = get_field('location_wayfinding_photo', $post_id);
+}
+if ($override_parent_photo && $parent_location && $override_parent_photo_gallery) {
+	$photo_gallery = get_field('location_wayfinding_photo');
+} else { // Use parent/standard images
 	$photo_gallery = get_field('location_photo_gallery', $post_id);
 }
 
@@ -72,9 +79,9 @@ if ($photo_gallery && !empty($photo_gallery)) {
 $location_images_count = count($location_images);
 
 // Set image for schema
-if ($override_parent_photo && $parent_location) { // If child location & override is true
+if ($override_parent_photo && $parent_location && $override_parent_photo_featured) { // If child location & override is true
 	$featured_image = get_post_thumbnail_id();
-} else { // Use parent images
+} else { // Use parent/standard images
 	$featured_image = get_post_thumbnail_id($post_id);
 }
 
