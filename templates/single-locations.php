@@ -566,15 +566,16 @@ while ( have_posts() ) : the_post(); ?>
 							endif; ?>
 						
 
-						<?php if ($location_hours_group['location_after_hours'] && !$location_hours_group['location_24_7']) { ?>
+						<?php endif;
+						} // endif
+					} // endif ( if $hoursvary )
+					if ($location_hours_group['location_after_hours'] && !$location_hours_group['location_24_7']) { ?>
 						<h2>After Hours</h2>
 						<?php echo $location_hours_group['location_after_hours']; ?>
-						<?php } elseif (!$location_hours_group['location_24_7']) { ?>
+					<?php } elseif (!$location_hours_group['location_24_7']) { ?>
 						<h2>After Hours</h2>
 						<p>If you are in need of urgent or emergency care call 911 or go to your nearest emergency department at your local hospital.</p>
-						<?php } endif;
-						} // endif
-					} // endif ?>
+					<?php } // endif (after hours) ?>
 				</div>
 			</div>
 			<?php if ( $location_images_count ) { ?>
