@@ -1187,7 +1187,47 @@
             "label": "Override Parent Images?",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_location_image_override_parent_featured": {
+            "key": "field_location_image_override_parent_featured",
+            "name": "location_image_override_parent_featured",
+            "type": "true_false",
+            "label": "Override Parent Featured Image?",
+            "instructions": "To remove the parent featured image, select Yes and leave image blank",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_image_override_parent",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -1219,6 +1259,11 @@
                         "field": "field_location_image_override_parent",
                         "operator": "==",
                         "value": "1"
+                    },
+                    {
+                        "field": "field_location_image_override_parent_featured",
+                        "operator": "==",
+                        "value": "1"
                     }
                 ]
             ],
@@ -1242,6 +1287,38 @@
             "acfe_validate": "",
             "acfe_update": ""
         },
+        "field_location_image_override_parent_wayfinding": {
+            "key": "field_location_image_override_parent_wayfinding",
+            "name": "location_image_override_parent_wayfinding",
+            "type": "true_false",
+            "label": "Override Parent Wayfinding Photo?",
+            "instructions": "To remove the parent wayfinding photo, select Yes and leave photo blank",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_image_override_parent",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
         "field_location_wayfinding_photo": {
             "key": "field_location_wayfinding_photo",
             "label": "Wayfinding Photo",
@@ -1260,6 +1337,11 @@
                 [
                     {
                         "field": "field_location_image_override_parent",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_image_override_parent_wayfinding",
                         "operator": "==",
                         "value": "1"
                     }
@@ -1285,6 +1367,38 @@
             "acfe_validate": "",
             "acfe_update": ""
         },
+        "field_location_image_override_parent_gallery": {
+            "key": "field_location_image_override_parent_gallery",
+            "name": "location_image_override_parent_gallery",
+            "type": "true_false",
+            "label": "Override Parent Photo Gallery?",
+            "instructions": "To remove the parent gallery, select Yes and leave gallery empty",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_image_override_parent",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
         "field_location_photo_gallery": {
 			"key": "field_location_photo_gallery",
 			"label": "Photo Gallery",
@@ -1303,6 +1417,11 @@
                 [
                     {
                         "field": "field_location_image_override_parent",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_image_override_parent_gallery",
                         "operator": "==",
                         "value": "1"
                     }
