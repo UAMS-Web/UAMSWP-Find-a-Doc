@@ -240,7 +240,7 @@ while ( have_posts() ) : the_post(); ?>
 				<div class="content-width">
 					<h1 class="page-title"><?php the_title(); ?>
 					<?php if ($parent_location) { ?>
-					<div class="subtitle">Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a></div>
+					<span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
 					<?php } // endif ?>
 					</h1>
 					<?php if ($location_closing_display) { ?>

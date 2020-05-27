@@ -573,6 +573,10 @@
   margin: 5px;
 }
 
+.single-location .page-title .subtitle {
+  font-size: .5em;
+}
+
 .single-location dl.hours dd+dd {
   margin-top: .5em;
 }

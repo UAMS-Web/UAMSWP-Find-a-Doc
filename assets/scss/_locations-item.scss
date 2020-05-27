@@ -1,4 +1,9 @@
 .single-location {
+    .page-title {
+        .subtitle {
+            font-size: 0.5em;
+        }
+    }
     dl.hours {
         @include media-breakpoint-up(xs) {
             overflow: hidden;
