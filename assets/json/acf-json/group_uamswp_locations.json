@@ -1289,6 +1289,33 @@
                     "ui_off_text": ""
                 },
                 {
+                    "key": "field_location_hours_variable_info",
+                    "name": "location_hours_variable_info",
+                    "type": "wysiwyg",
+                    "label": "Variable Hours Information",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_hours_variable",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0
+                },
+                {
                     "key": "field_location_24_7",
                     "name": "location_24_7",
                     "type": "true_false",
