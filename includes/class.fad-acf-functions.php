@@ -95,50 +95,52 @@ function my_taxonomy_query( $args, $field ) {
     
 }
 
+// Fires before saving data to post - only updates ACF data
 add_action('acf/save_post', 'physician_save_post', 5); 
 function physician_save_post( $post_id ) {
+	$post_type = get_post_type($post_id);
 
-  // Bail early if no data sent.
-  if( empty($_POST['acf']) ) {
-    return;
-  }
+	// Bail early if no data sent.
+	if( empty($_POST['acf']) || ($post_type != 'provider')) {
+		return;
+	}
 
-  // Create full name to store in 'physician_full_name' field
-  $first_name = $_POST['acf']['field_physician_first_name'];
-  $middle_name = $_POST['acf']['field_physician_middle_name'];
-  $last_name = $_POST['acf']['field_physician_last_name'];
-  $pedigree = $_POST['acf']['field_physician_pedigree'];
-  $degrees = $_POST['acf']['field_physician_degree'];
+	// Create full name to store in 'physician_full_name' field
+	$first_name = $_POST['acf']['field_physician_first_name'];
+	$middle_name = $_POST['acf']['field_physician_middle_name'];
+	$last_name = $_POST['acf']['field_physician_last_name'];
+	$pedigree = $_POST['acf']['field_physician_pedigree'];
+	$degrees = $_POST['acf']['field_physician_degree'];
 
-  $i = 1;
-    if ( $degrees ) {
-        foreach( $degrees as $degree ):
-            $degree_name = get_term( $degree, 'degree');
-            $degree_list .= $degree_name->name;
-            if( count($degrees) > $i ) {
-                $degree_list .= ", ";
-            }
-            $i++;
-        endforeach;
-    }
+	$i = 1;
+		if ( $degrees ) {
+			foreach( $degrees as $degree ):
+				$degree_name = get_term( $degree, 'degree');
+				$degree_list .= $degree_name->name;
+				if( count($degrees) > $i ) {
+					$degree_list .= ", ";
+				}
+				$i++;
+			endforeach;
+		}
 
-  $full_name = $first_name .' ' .( $middle_name ? $middle_name . ' ' : '') . $last_name . ( $pedigree ? '&nbsp;' . $pedigree : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+	$full_name = $first_name .' ' .( $middle_name ? $middle_name . ' ' : '') . $last_name . ( $pedigree ? '&nbsp;' . $pedigree : '') .  ( $degree_list ? ', ' . $degree_list : '' );
 
-  $_POST['acf']['field_physician_full_name'] = $full_name;
+	$_POST['acf']['field_physician_full_name'] = $full_name;
 
-  // Add region
-  $locations = $_POST['acf']['field_physician_locations'];
-  if ( $locations ) {
-	foreach( $locations as $location ):
-		$region = get_field( 'location_region', $location);
-		$portal = get_field( 'location_portal', $location);
-		// break loop after first iteration = primary location
-    	break; 
-	endforeach;
-  }
+	// Add region
+	$locations = $_POST['acf']['field_physician_locations'];
+	if ( $locations ) {
+		foreach( $locations as $location ):
+			$region = get_field( 'location_region', $location);
+			$portal = get_field( 'location_portal', $location);
+			// break loop after first iteration = primary location
+			break; 
+		endforeach;
+	}
 
-  $_POST['acf']['field_physician_region'] = $region;
-  $_POST['acf']['field_physician_portal'] = $portal;
+	$_POST['acf']['field_physician_region'] = $region;
+	$_POST['acf']['field_physician_portal'] = $portal;
 
 }
 
@@ -149,28 +151,55 @@ function update_facetwp_index( $post_id ) {
     }
 }
 
+// Fires before saving data to post - only updates ACF data
 add_action('acf/save_post', 'location_save_post', 7); 
 function location_save_post( $post_id ) {
+	$post_type = get_post_type($post_id);
 
-  // Bail early if no data sent.
-  if( empty($_POST['acf']) ) {
-    return;
-  }
+	// Bail early if no data sent or not location post type
+	if( empty($_POST['acf']) || ($post_type != 'location') ) {
+		return;
+	}
 
-  // Create full name to store in 'physician_full_name' field
-  $featured_image = $_POST['acf']['field_location_featured_image'];
-  $wayfinding_image = $_POST['acf']['field_location_wayfinding_photo'];
+	// Create full name to store in 'physician_full_name' field
+	$featured_image = $_POST['acf']['field_location_featured_image'];
+	$wayfinding_image = $_POST['acf']['field_location_wayfinding_photo'];
 
-  // If featured image is set & wayfinding is empty, set wayfinding image to featured image
-  if ($featured_image && empty($wayfinding_image)) {
-  	$_POST['acf']['field_location_wayfinding_photo'] = $featured_image;
-  }
-  // If wayfinding image is set & featured image is empty, set featured image to wayfinding image
-  if (empty($featured_image) && $wayfinding_image) {
-	$_POST['acf']['field_location_featured_image'] = $wayfinding_image;
-  }
+	// If featured image is set & wayfinding is empty, set wayfinding image to featured image
+	if ($featured_image && empty($wayfinding_image)) {
+		$_POST['acf']['field_location_wayfinding_photo'] = $featured_image;
+	}
+	// If wayfinding image is set & featured image is empty, set featured image to wayfinding image
+	if (empty($featured_image) && $wayfinding_image) {
+		$_POST['acf']['field_location_featured_image'] = $wayfinding_image;
+	}
 
 }
+// Fires after saving data to post - change post data 
+add_action('acf/save_post', 'location_save_post_after', 20);
+function location_save_post_after( $post_id ) {
+	$post_type = get_post_type($post_id);
+	if ($post_type != 'location') {
+		return;
+	}
+	$post = get_post($post_id);
+	$location_has_parent = get_field('location_parent');
+	$location_parent_id = get_field('location_parent_id');
+	
+	// If location has parent & parent id set, set parent id
+	if ($location_has_parent && $location_parent_id) {
+		$post->post_parent = $location_parent_id;
+	} else { // clear the parent data
+		$post->post_parent = 0;
+	}
+	// remove this filter to prevent infinite loop
+	remove_filter('acf/save_post', 'save_location_parent');
+	wp_update_post($post);
+
+}
+
+
+
 // Bidrectional for posts/cpts. 
 // Field name _MUST_ be the same for each field.
 // Keys must different
@@ -794,4 +823,17 @@ function location_current_prescription_pharm_message(){
 		echo 'None active';
 	}  
     
+}
+
+add_filter('acf/fields/post_object/query/key=field_location_parent_id', 'limit_post_top_level', 10, 3);
+
+function limit_post_top_level( $args, $field, $post ) {
+
+    $args['post_parent'] = 0;
+    // $args['sort_order'] = 'ASC';
+    // $args['orderby'] = 'title';
+    // $args['order'] = 'ASC';
+    $args['post_status'] = 'publish';
+
+    return $args;
 }
