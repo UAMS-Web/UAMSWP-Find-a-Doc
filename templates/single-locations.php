@@ -10,6 +10,22 @@ if (empty($excerpt)){
         $excerpt = mb_strimwidth(wp_strip_all_tags($about_loc), 0, 155, '...');
     }
 }
+// Parent Location 
+$location_has_parent = get_field('location_parent');
+$location_parent_id = get_field('location_parent_id');
+$parent_title = '';
+$parent_url = '';
+if ($location_has_parent && $location_parent_id) { 
+	$parent_location = get_post( $location_parent_id );
+}
+// Get Post ID for Address & Image fields
+if ($parent_location) {
+	$post_id = $parent_location->ID;
+	$parent_title = $parent_location->post_title;
+	$parent_url = get_permalink( $post_id );
+} else {
+	$post_id = get_the_ID();
+}
 
 // Phone values
 
@@ -35,9 +51,15 @@ $location_fax_link = '<a href="tel:' . format_phone_dash( $location_fax ) . '" c
 $location_phone_numbers = get_field('field_location_phone_numbers');
 
 // Image values
+$override_parent_photo = get_field('location_image_override_parent');
+if ($override_parent_photo && $parent_location) { // If child location & override is true
+	$wayfinding_photo = get_field('location_wayfinding_photo');
+	$photo_gallery = get_field('location_photo_gallery');
+} else { // Use parent images
+	$wayfinding_photo = get_field('location_wayfinding_photo', $post_id);
+	$photo_gallery = get_field('location_photo_gallery', $post_id);
+}
 
-$wayfinding_photo = get_field('location_wayfinding_photo');
-$photo_gallery = get_field('location_photo_gallery');
 $location_images = array();
 if ($wayfinding_photo && !empty($wayfinding_photo)) {
 	$location_images[] = $wayfinding_photo;
@@ -50,7 +72,12 @@ if ($photo_gallery && !empty($photo_gallery)) {
 $location_images_count = count($location_images);
 
 // Set image for schema
-$featured_image = get_post_thumbnail_id();
+if ($override_parent_photo && $parent_location) { // If child location & override is true
+	$featured_image = get_post_thumbnail_id();
+} else { // Use parent images
+	$featured_image = get_post_thumbnail_id($post_id);
+}
+
 $schema_image = '';
 if ($featured_image) {
 	$schema_image = $featured_image;
@@ -204,14 +231,18 @@ add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
 get_header();
 
 while ( have_posts() ) : the_post(); ?>
-<?php $map = get_field('location_map'); ?>
+<?php $map = get_field('location_map', $post_id ); ?>
 <div class="content-sidebar-wrap">
 <main class="location-item" id="genesis-content">
 	<section class="container-fluid p-0 p-md-10 location-info bg-white">
 		<div class="row mx-0 mx-md-n8">
 			<div class="col-12 col-md text">
 				<div class="content-width">
-					<h1 class="page-title"><?php the_title(); ?></h1>
+					<h1 class="page-title"><?php the_title(); ?>
+					<?php if ($parent_location) { ?>
+					<div class="subtitle">Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a></div>
+					<?php } // endif ?>
+					</h1>
 					<?php if ($location_closing_display) { ?>
 						<div class="alert alert-warning" role="alert">
 							<p>
@@ -243,12 +274,12 @@ while ( have_posts() ) : the_post(); ?>
 						</div>
 					<?php } // endif ?>
 					<h2 class="sr-only">Address</h2>
-					<p><?php echo get_field('location_address_1', get_the_ID() ); ?><br/>
-					<?php echo ( get_field('location_address_2' ) ? get_field('location_address_2') . '<br/>' : ''); ?>
-					<?php echo get_field('location_city'); ?>, <?php echo get_field('location_state'); ?> <?php echo get_field('location_zip', get_the_ID()); ?></p>
-						<p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php the_title(); ?>">Get Directions</a></p>
-					<?php if(get_field('location_web_name') && get_field('location_url')){ ?>
-						<p><a class="btn btn-secondary" href="<?php echo get_field('location_url')['url']; ?>"><?php echo get_field('location_web_name'); ?> <span class="far fa-external-link-alt"></span></span></a></p>
+					<p><?php echo get_field('location_address_1', $post_id  ); ?><br/>
+					<?php echo ( get_field('location_address_2', $post_id  ) ? get_field('location_address_2', $post_id ) . '<br/>' : ''); ?>
+					<?php echo get_field('location_city', $post_id ); ?>, <?php echo get_field('location_state', $post_id ); ?> <?php echo get_field('location_zip', $post_id ); ?></p>
+						<p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo get_the_title($post_id); ?>">Get Directions</a></p>
+					<?php if(get_field('location_web_name', $post_id) && get_field('location_url', $post_id )){ ?>
+						<p><a class="btn btn-secondary" href="<?php echo get_field('location_url', $post_id )['url']; ?>"><?php echo get_field('location_web_name', $post_id ); ?> <span class="far fa-external-link-alt"></span></span></a></p>
 					<?php } 
 						// Schema data
 						$location_schema = '"address": {
@@ -732,25 +763,25 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 		</section>
 	<?php } ?>
-	<?php if (get_field('location_parking') || get_field('location_direction') || get_field('location_parking_map')) : ?>
-	<?php $parking_map = get_field('location_parking_map'); ?>
+	<?php if (get_field('location_parking', $post_id) || get_field('location_direction', $post_id) || get_field('location_parking_map', $post_id)) : ?>
+	<?php $parking_map = get_field('location_parking_map', $post_id); ?>
 		<section class="uams-module bg-auto">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12<?php echo $parking_map ? ' col-md-6' : ''  ?>">
 						<?php if ($parking_map) { ?>
 							<div class="module-body">
-							<h2><?php echo ( get_field('location_parking' ) ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
+							<h2><?php echo ( get_field('location_parking', $post_id ) ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
 						<?php } else { ?>
-							<h2 class="module-title"><?php echo ( get_field('location_parking' ) ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
+							<h2 class="module-title"><?php echo ( get_field('location_parking', $post_id ) ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
 							<div class="module-body">
 						<?php } // endif ?>
-							<?php echo get_field('location_parking'); ?>
+							<?php echo get_field('location_parking', $post_id); ?>
 							<?php if ( $parking_map ) { ?>
 								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>
 							<?php } // endif ?>
-							<?php echo ( get_field('location_parking') && get_field('location_direction') ? '<h3>Directions From the Parking Area</h3>' : ''); // Display the directions heading here if there is a value for parking. ?>
-							<?php echo get_field('location_direction'); ?>
+							<?php echo ( get_field('location_parking', $post_id) && get_field('location_direction', $post_id) ? '<h3>Directions From the Parking Area</h3>' : ''); // Display the directions heading here if there is a value for parking. ?>
+							<?php echo get_field('location_direction', $post_id); ?>
 						</div>
 					</div>
 					<?php if ( $parking_map ) { ?>

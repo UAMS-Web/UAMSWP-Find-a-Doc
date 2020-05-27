@@ -116,9 +116,9 @@ function locations() {
 	$args = array(
 		'label'                 => 'Location',
 		'labels'                => $labels,
-		'supports'              => array( 'title', 'author', 'thumbnail','revisions' ),
+		'supports'              => array( 'title', 'author', 'thumbnail','revisions','page-attributes' ),
 		'taxonomies'            => array( 'treatment', 'condition' ),
-		'hierarchical'          => false,
+		'hierarchical'          => true,
 		'public'                => true,
 		'show_ui'               => true,
 		'show_in_menu'          => true,
