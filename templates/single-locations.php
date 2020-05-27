@@ -1248,7 +1248,7 @@ while ( have_posts() ) : the_post(); ?>
   <?php echo $condition_schema; ?>
   <?php echo $location_schema; ?>
   <?php echo $modified_hours_schema; ?>
-  <?php echo $hours_schema; ?>
+  <?php echo $hoursvary ? '' : $hours_schema; ?>
   <?php echo $phone_schema; ?>
   "logo": "<?php echo get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png'; ?>"
 }
