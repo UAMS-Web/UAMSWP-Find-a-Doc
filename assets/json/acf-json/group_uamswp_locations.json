@@ -1270,13 +1270,40 @@
                     "esc_html": 0
                 },
                 {
+                    "key": "field_location_hours_variable",
+                    "name": "location_hours_variable",
+                    "type": "true_false",
+                    "label": "Do the location's hours vary?",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
                     "key": "field_location_24_7",
                     "name": "location_24_7",
                     "type": "true_false",
                     "label": "Is the location typically available 24/7?",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_hours_variable",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -1297,6 +1324,11 @@
                     "required": 0,
                     "conditional_logic": [
                         [
+                            {
+                                "field": "field_location_hours_variable",
+                                "operator": "!=",
+                                "value": "1"
+                            },
                             {
                                 "field": "field_location_24_7",
                                 "operator": "!=",
