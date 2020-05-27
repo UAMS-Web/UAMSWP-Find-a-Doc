@@ -62,7 +62,7 @@ if ($override_parent_photo && $parent_location && $override_parent_photo_wayfind
 	$wayfinding_photo = get_field('location_wayfinding_photo', $post_id);
 }
 if ($override_parent_photo && $parent_location && $override_parent_photo_gallery) {
-	$photo_gallery = get_field('location_wayfinding_photo');
+	$photo_gallery = get_field('location_photo_gallery');
 } else { // Use parent/standard images
 	$photo_gallery = get_field('location_photo_gallery', $post_id);
 }
