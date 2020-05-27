@@ -51,9 +51,15 @@ $location_fax_link = '<a href="tel:' . format_phone_dash( $location_fax ) . '" c
 $location_phone_numbers = get_field('field_location_phone_numbers');
 
 // Image values
+$override_parent_photo = get_field('location_image_override_parent');
+if ($override_parent_photo && $parent_location) { // If child location & override is true
+	$wayfinding_photo = get_field('location_wayfinding_photo');
+	$photo_gallery = get_field('location_photo_gallery');
+} else { // Use parent images
+	$wayfinding_photo = get_field('location_wayfinding_photo', $post_id);
+	$photo_gallery = get_field('location_photo_gallery', $post_id);
+}
 
-$wayfinding_photo = get_field('location_wayfinding_photo', $post_id);
-$photo_gallery = get_field('location_photo_gallery', $post_id);
 $location_images = array();
 if ($wayfinding_photo && !empty($wayfinding_photo)) {
 	$location_images[] = $wayfinding_photo;
@@ -66,7 +72,12 @@ if ($photo_gallery && !empty($photo_gallery)) {
 $location_images_count = count($location_images);
 
 // Set image for schema
-$featured_image = get_post_thumbnail_id($post_id);
+if ($override_parent_photo && $parent_location) { // If child location & override is true
+	$featured_image = get_post_thumbnail_id();
+} else { // Use parent images
+	$featured_image = get_post_thumbnail_id($post_id);
+}
+
 $schema_image = '';
 if ($featured_image) {
 	$schema_image = $featured_image;
@@ -741,25 +752,25 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 		</section>
 	<?php } ?>
-	<?php if (get_field('location_parking') || get_field('location_direction') || get_field('location_parking_map')) : ?>
-	<?php $parking_map = get_field('location_parking_map'); ?>
+	<?php if (get_field('location_parking', $post_id) || get_field('location_direction', $post_id) || get_field('location_parking_map', $post_id)) : ?>
+	<?php $parking_map = get_field('location_parking_map', $post_id); ?>
 		<section class="uams-module bg-auto">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12<?php echo $parking_map ? ' col-md-6' : ''  ?>">
 						<?php if ($parking_map) { ?>
 							<div class="module-body">
-							<h2><?php echo ( get_field('location_parking' ) ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
+							<h2><?php echo ( get_field('location_parking', $post_id ) ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
 						<?php } else { ?>
-							<h2 class="module-title"><?php echo ( get_field('location_parking' ) ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
+							<h2 class="module-title"><?php echo ( get_field('location_parking', $post_id ) ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
 							<div class="module-body">
 						<?php } // endif ?>
-							<?php echo get_field('location_parking'); ?>
+							<?php echo get_field('location_parking', $post_id); ?>
 							<?php if ( $parking_map ) { ?>
 								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>
 							<?php } // endif ?>
-							<?php echo ( get_field('location_parking') && get_field('location_direction') ? '<h3>Directions From the Parking Area</h3>' : ''); // Display the directions heading here if there is a value for parking. ?>
-							<?php echo get_field('location_direction'); ?>
+							<?php echo ( get_field('location_parking', $post_id) && get_field('location_direction', $post_id) ? '<h3>Directions From the Parking Area</h3>' : ''); // Display the directions heading here if there is a value for parking. ?>
+							<?php echo get_field('location_direction', $post_id); ?>
 						</div>
 					</div>
 					<?php if ( $parking_map ) { ?>
