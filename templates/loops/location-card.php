@@ -6,11 +6,50 @@
      *  Must be used inside a loop
      *  Required var: $id
      */
+
+    // Reset variables
+    $featured_image = '';
+    $address_id = $id;
+
+    // Parent Location 
+    $location_has_parent = get_field('location_parent', $id);
+    $location_parent_id = get_field('location_parent_id', $id);
+    $parent_location = '';
+    $parent_id = '';
+    $parent_title = '';
+    $parent_url = '';
+    $override_parent_photo = '';
+    $override_parent_photo_featured = '';
+
+    if ($location_has_parent && $location_parent_id) { 
+        $parent_location = get_post( $location_parent_id );
+    }
+    // Get Post ID for Address & Image fields
+    if ($parent_location) {
+        $parent_id = $parent_location->ID;
+        $parent_title = $parent_location->post_title;
+        $parent_url = get_permalink( $parent_id );
+        $featured_image = get_the_post_thumbnail($parent_id, 'aspect-16-9-small', ['class' => 'card-img-top']);
+        $address_id = $parent_id;
+
+        $override_parent_photo = get_field('location_image_override_parent', $id);
+        $override_parent_photo_featured = get_field('location_image_override_parent_featured', $id);
+        
+        // Set featured image
+        if ( $override_parent_photo && $override_parent_photo_featured ) {
+            $featured_image = get_the_post_thumbnail($id, 'aspect-16-9-small', ['class' => 'card-img-top']);
+        }
+    } else {
+        // Set featured image
+        if ( has_post_thumbnail($id) ) {
+            $featured_image = get_the_post_thumbnail($id, 'aspect-16-9-small', ['class' => 'card-img-top']);
+        }
+    }
 ?>
 <div class="card">
-    <?php if ( has_post_thumbnail($id) ) { ?>
-    <?php echo get_the_post_thumbnail($id, 'aspect-16-9-small', ['class' => 'card-img-top']); ?>
-    <?php } else { ?>
+    <?php if ( $featured_image ) {
+        echo $featured_image;
+    } else { ?>
     <picture>
         <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
         <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" class="card-img-top" />
@@ -19,6 +58,9 @@
     <div class="card-body">
         <h3 class="card-title h5">
             <span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self"><?php echo get_the_title($id); ?></a></span>
+            <?php if ( $parent_location ) { ?>
+                <span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
+            <?php } // endif ?>
         </h3>
         <?php 
         // Check for if we should display a closure alert
@@ -125,10 +167,10 @@
                 <p><a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $alert_label; ?>" class="alert-link">Learn more</a></p>
             </div>
         <?php } // endif ?>
-        <?php $map = get_field('location_map', $id); ?>
-        <p class="card-text"><?php echo get_field('location_address_1', $id ); ?><br/>
-            <?php echo ( get_field('location_address_2', $id ) ? get_field('location_address_2', $id ) . '<br/>' : ''); ?>
-            <?php echo get_field('location_city', $id ); ?>, <?php echo get_field('location_state', $id ); ?> <?php echo get_field('location_zip', $id); ?>
+        <?php $map = get_field('location_map', $address_id); ?>
+        <p class="card-text"><?php echo get_field('location_address_1', $address_id ); ?><br/>
+            <?php echo ( get_field('location_address_2', $address_id ) ? get_field('location_address_2', $address_id ) . '<br/>' : ''); ?>
+            <?php echo get_field('location_city', $address_id ); ?>, <?php echo get_field('location_state', $address_id ); ?> <?php echo get_field('location_zip', $address_id); ?>
         </p>
         <?php if (get_field('location_phone')) { ?>
             <dl>
