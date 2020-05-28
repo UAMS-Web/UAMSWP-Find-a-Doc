@@ -1240,22 +1240,19 @@ while ( have_posts() ) : the_post(); ?>
             <section class="uams-module location-list bg-auto" id="sub-clinics" aria-labelledby="sub-location-title" >
                 <div class="container-fluid">
                     <div class="row">
-						<div class="col-12 col-md-6 heading">
-							<div class="text-container">
-								<h2 class="module-title" id="sub-location-title"><span class="title">Additional Clinics Within <?php echo get_the_title(); ?></span></h2>
-							</div>
-						</div>
-            			<div class="col-12 col-md-6 list">
-							<ul>
+						<div class="col-12">
+							<h2 class="module-title" id="sub-location-title"><span class="title">Additional Clinics Within <?php echo get_the_title(); ?></span></h2>
+							<div class="card-list-container">
+                                <div class="card-list">
                             <?php
                                 while ( $children->have_posts() ) : $children->the_post();
-								echo '<li class="item"><div class="text-container"><span class="h5"><a href="'.get_permalink().'">';
-								echo get_the_title();
-								echo '</a></span></div></li>';
-							endwhile;
-							wp_reset_postdata(); ?>
-                            </ul>
-						</div>
+                                    $id = get_the_ID(); 
+                                    include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+                                endwhile;
+                                wp_reset_postdata(); ?>
+                                </div>
+                            </div>
+                        </div>
 					</div>
 				</div>
             </section>
