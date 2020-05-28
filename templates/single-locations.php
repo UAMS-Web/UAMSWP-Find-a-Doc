@@ -13,8 +13,9 @@ if (empty($excerpt)){
 // Parent Location 
 $location_has_parent = get_field('location_parent');
 $location_parent_id = get_field('location_parent_id');
-$parent_title = '';
-$parent_url = '';
+$parent_title = ''; // Eliminate PHP errors
+$parent_url = ''; // Eliminate PHP errors
+$parent_location = ''; // Eliminate PHP errors
 if ($location_has_parent && $location_parent_id) { 
 	$parent_location = get_post( $location_parent_id );
 }
@@ -205,6 +206,7 @@ if ( $location_closing ) {
 $prescription_query = get_field('location_prescription_query'); // Display prescription information
 $prescription_clinic_sys = get_field('location_prescription_clinic_system', 'option'); // Text from Find-a-Doc settings (a.k.a. system) for calling clinic
 $prescription_pharm_sys = get_field('location_prescription_pharm_system', 'option'); // Text from Find-a-Doc settings (a.k.a. system) for calling pharmacy
+$prescription = ''; // Eliminate PHP errors
 
 if ($prescription_query) {
 	$prescription_info_type =  get_field('location_prescription_type'); // Which preset or custom text?
@@ -1215,7 +1217,51 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
         </section>
 	<?php 
-    endif;
+	endif;
+	// Child locations
+	$current_id = get_the_ID();
+    if ( ( 0 != count( get_pages( array( 'child_of' => $current_id, 'post_type' => 'location' ) ) ) ) ) { // If none available, set to false
+        $args =  array(
+            "post_type" => "location",
+            "post_status" => "publish",
+			"post_parent" => $current_id,
+			'order' => 'ASC',
+			'orderby' => 'title',
+			'meta_query' => array(
+				array(
+					'key' => 'location_hidden',
+					'value' => '1',
+					'compare' => '!=',
+				)
+			),
+        );
+        $children = New WP_Query ( $args );
+        if ( $children->have_posts() ) { ?>
+            <section class="uams-module location-list bg-auto" id="sub-clinics" aria-labelledby="sub-location-title" >
+                <div class="container-fluid">
+                    <div class="row">
+						<div class="col-12 col-md-6 heading">
+							<div class="text-container">
+								<h2 class="module-title" id="sub-location-title"><span class="title">Additional Clinics Within <?php echo get_the_title(); ?></span></h2>
+							</div>
+						</div>
+            			<div class="col-12 col-md-6 list">
+							<ul>
+                            <?php
+                                while ( $children->have_posts() ) : $children->the_post();
+								echo '<li class="item"><div class="text-container"><span class="h5"><a href="'.get_permalink().'">';
+								echo get_the_title();
+								echo '</a></span></div></li>';
+							endwhile;
+							wp_reset_postdata(); ?>
+                            </ul>
+						</div>
+					</div>
+				</div>
+            </section>
+        <?php
+        }
+    }
 	?>
 	<!-- Latest News -->
 	<!-- <section class="uams-module news-list bg-auto">
