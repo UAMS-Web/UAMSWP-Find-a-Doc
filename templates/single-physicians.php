@@ -362,12 +362,37 @@ while ( have_posts() ) : the_post();
                             <?php foreach( $locations as $location ):
                                     if ( 2 > $l ){
 	                                    if ( get_post_status ( $location ) == 'publish' ) {
+
+                                            // Reset variables
+                                            $address_id = $location;
+                                        
+                                            // Parent Location 
+                                            $location_has_parent = get_field('location_parent', $location);
+                                            $location_parent_id = get_field('location_parent_id', $location);
+                                            $parent_location = '';
+                                            $parent_id = '';
+                                            $parent_title = '';
+                                            $parent_url = '';
+                                        
+                                            if ($location_has_parent && $location_parent_id) { 
+                                                $parent_location = get_post( $location_parent_id );
+                                            }
+                                            // Get Post ID for Address & Image fields
+                                            if ($parent_location) {
+                                                $parent_id = $parent_location->ID;
+                                                $parent_title = $parent_location->post_title;
+                                                $parent_url = get_permalink( $parent_id );
+                                                $address_id = $parent_id;
+                                            }
                                     ?>
                                 <p><strong><?php echo get_the_title( $location ); ?></strong><br />
-                                <?php echo get_field( 'location_address_1', $location ); ?><br/>
-                                <?php echo ( get_field( 'location_address_2', $location ) ? get_field( 'location_address_2', $location ) . '<br/>' : ''); ?>
-                                <?php echo get_field( 'location_city', $location ); ?>, <?php echo get_field(' location_state', $location ); ?> <?php echo get_field( 'location_zip', $location ); ?>
-                                <?php $map = get_field( 'location_map', $location ); ?>
+                                <?php if ( $parent_location ) { ?>
+                                    (Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a>)<br />
+                                <?php } // endif ?>
+                                <?php echo get_field( 'location_address_1', $address_id ); ?><br/>
+                                <?php echo ( get_field( 'location_address_2', $address_id ) ? get_field( 'location_address_2', $address_id ) . '<br/>' : ''); ?>
+                                <?php echo get_field( 'location_city', $address_id ); ?>, <?php echo get_field(' location_state', $address_id ); ?> <?php echo get_field( 'location_zip', $address_id ); ?>
+                                <?php $map = get_field( 'location_map', $address_id ); ?>
                                 <!-- <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a> -->
                                 </p>
                                 <?php if (get_field('location_phone', $location)) { ?>
