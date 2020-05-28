@@ -61,6 +61,9 @@
             <?php if ( $parent_location ) { ?>
                 <span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
             <?php } // endif ?>
+            <?php  if ( isset($l) && 1 == $l ) { ?>
+                <span class="subtitle"><span class="sr-only">, </span>Primary Location</span>
+            <?php } ?>
         </h3>
         <?php 
         // Check for if we should display a closure alert
