@@ -47,6 +47,11 @@ if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, ba
 } else {
     $phys_title_indef_article = 'a';
 }
+if ( substr($short_name, -1) == 's' ) { // Defines a or an, based on whether clinical title starts with vowel
+    $short_name_possessive = $short_name . '\'';
+} else {
+    $short_name_possessive = $short_name . '\'s';
+}
 $bio = get_field('physician_clinical_bio',$post->ID);
 $eligible_appt = get_field('physician_eligible_appointments',$post->ID);
 // Check for valid locations
@@ -679,7 +684,7 @@ while ( have_posts() ) : the_post();
 	                <div class="container-fluid">
 	                    <div class="row">
 	                        <div class="col-12">
-	                            <h2 class="module-title"><?php echo $short_name; ?>'s Areas of Expertise</h2>
+	                            <h2 class="module-title"><?php echo $short_name_possessive; ?> Areas of Expertise</h2>
 	                            <div class="card-list-container">
 	                                <div class="card-list">
                                         <?php foreach( $expertises as $expertise ) {
@@ -709,7 +714,7 @@ while ( have_posts() ) : the_post();
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
-                        <h2 class="module-title"><?php echo $short_name; ?>'s Academic Background</h2>
+                        <h2 class="module-title"><?php echo $short_name_possessive; ?> Academic Background</h2>
                         <?php if ( $physician_academic_split ) {
                             // If there is a bio AND at least one of the other academic things, visually split the layout ?>
                             <div class="row content-split-lg">
@@ -815,7 +820,7 @@ while ( have_posts() ) : the_post();
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
-                        <h2 class="module-title"><?php echo $short_name; ?>'s Research</h2>
+                        <h2 class="module-title"><?php echo $short_name_possessive; ?> Research</h2>
                         <div class="module-body">
                             <?php
                                 if($research_bio)
@@ -852,7 +857,7 @@ while ( have_posts() ) : the_post();
                             <?php if( $research_profiles_link ): ?>
                                 <h3>UAMS Research Profile</h3>
                                 <p>Each UAMS faculty member has a research profile page that includes biographical and contact information, a list of their most recent grant activity and a list of their PubMed publications.</p>
-                                <p><a class="btn btn-outline-primary" href="<?php echo $research_profiles_link; ?>">View <?php echo $short_name; ?>'s research profile</a></p>
+                                <p><a class="btn btn-outline-primary" href="<?php echo $research_profiles_link; ?>">View <?php echo $short_name_possessive; ?> research profile</a></p>
                             <?php endif; ?>
                         </div>
                     </div>
