@@ -352,6 +352,25 @@
             "placement": "top",
             "endpoint": 0
         },
+        "field_location_parking": {
+            "key": "field_location_parking",
+            "name": "location_parking",
+            "type": "wysiwyg",
+            "label": "Parking Instructions",
+            "instructions": "Give information about the parking situation, even if it's as simple as 'There is free parking available in front of the entrance.'",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
         "field_location_parking_map": {
             "key": "field_location_parking_map",
             "name": "location_parking_map",
@@ -369,25 +388,6 @@
             "center_lng": "-92.3198281",
             "zoom": 14,
             "height": 400
-        },
-        "field_location_parking": {
-            "key": "field_location_parking",
-            "name": "location_parking",
-            "type": "wysiwyg",
-            "label": "Parking Instructions",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0
         },
         "field_location_direction": {
             "key": "field_location_direction",
