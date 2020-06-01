@@ -108,7 +108,7 @@
             "name": "location_address_1",
             "type": "text",
             "label": "Address",
-            "instructions": "",
+            "instructions": "Use the abbreviations Ave., Blvd. and St. Spell out all other similar words (alley, drive, road, terrace, etc.).<br /><br />Always use figures for an address number: 9 Morningside Circle.<br /><br />Spell out and capitalize First through Ninth when used as street names; use figures for 10th and above: 7 Fifth Ave., 100 21st St.<br /><br />Abbreviate compass points used to indicate directional ends of a street or quadrants of a city in a numbered address: 222 E. 42nd St., 562 W. 43rd St., 600 K St. NW.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -127,7 +127,7 @@
             "name": "location_address_2",
             "type": "text",
             "label": "Address (2)",
-            "instructions": "",
+            "instructions": "If the clinic is within a building, add the building name here, followed by the floor number and suite (if applicable).<br /><br />For the floor number, spell out first through ninth. Use figures starting with 10th. (first, second, 10th, 25th, etc.)<br /><br />Example: 'Outpatient Center, Second Floor, Suite 2A'",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -261,7 +261,7 @@
             "name": "location_map",
             "type": "google_map",
             "label": "Map",
-            "instructions": "",
+            "instructions": "Place the pin on the entrance to the building.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -279,7 +279,7 @@
             "name": "location_region",
             "type": "taxonomy",
             "label": "Region",
-            "instructions": "",
+            "instructions": "The geographical region of Arkansas",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -394,7 +394,7 @@
             "name": "location_direction",
             "type": "wysiwyg",
             "label": "Directions From Parking Area",
-            "instructions": "",
+            "instructions": "Once the patient has parked, how do they get from their vehicle to the entrance to the actual clinic?",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -467,7 +467,7 @@
             "name": "location_youtube_link",
             "type": "url",
             "label": "Youtube Link",
-            "instructions": "Full URL, including https:\/\/",
+            "instructions": "Add the full URL, including https:\/\/",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -1595,7 +1595,7 @@
                     "name": "location_hours",
                     "type": "repeater",
                     "label": "Typical Hours",
-                    "instructions": "Set the time for all seven days.",
+                    "instructions": "Set the time for all seven days, beginning with Sunday.",
                     "required": 0,
                     "conditional_logic": [
                         [
@@ -1754,7 +1754,7 @@
                     "name": "location_after_hours",
                     "type": "wysiwyg",
                     "label": "After Hours Information",
-                    "instructions": "",
+                    "instructions": "Anything added here will override the default message, which is 'If you are in need of urgent or emergency care call 911 or go to your nearest emergency department at your local hospital.'",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
