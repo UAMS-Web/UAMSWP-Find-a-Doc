@@ -466,8 +466,8 @@
             "key": "field_location_youtube_link",
             "name": "location_youtube_link",
             "type": "url",
-            "label": "Youtube Link",
-            "instructions": "Add the full URL, including https:\/\/",
+            "label": "Featured Video",
+            "instructions": "Embeds a video player after the Location description. Supports YouTube or Vimeo. Add the full URL, including https:\/\/",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
