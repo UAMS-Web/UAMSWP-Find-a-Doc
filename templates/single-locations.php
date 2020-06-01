@@ -798,7 +798,7 @@ while ( have_posts() ) : the_post(); ?>
 					<div class="col-xs-12<?php echo $parking_map ? ' col-md-6' : ''  ?>">
 						<?php if ($parking_map) { ?>
 							<div class="module-body">
-							<h2><?php echo ( $location_parking ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
+							<h2><?php echo ( $location_parking || $parking_map ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
 						<?php } else { ?>
 							<h2 class="module-title"><?php echo ( $location_parking ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
 							<div class="module-body">
