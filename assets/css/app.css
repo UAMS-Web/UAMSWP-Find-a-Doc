@@ -546,6 +546,10 @@
   margin: .5rem;
 }
 
+.conditions-treatments .list-container.list-container-rows .list li a {
+  background-color: #fff;
+}
+
 .card-list-container.location-card-list-container .card-list .card {
   margin: 15px;
   text-align: center;
@@ -1213,7 +1217,7 @@
 
 @media (max-width:1200px) {
   .doctor-list .list-col .list-col-header .result-count p {
-    font-size: calc(1.26563rem + .1875vw);
+    font-size: calc(1.26562rem + .1875vw);
   }
 }
 
