@@ -377,7 +377,7 @@ while ( have_posts() ) : the_post();
                                 <?php } // endif ?>
                                 <?php echo get_field( 'location_address_1', $address_id ); ?><br/>
                                 <?php echo ( get_field( 'location_address_2', $address_id ) ? get_field( 'location_address_2', $address_id ) . '<br/>' : ''); ?>
-                                <?php echo get_field( 'location_city', $address_id ); ?>, <?php echo get_field(' location_state', $address_id ); ?> <?php echo get_field( 'location_zip', $address_id ); ?>
+                                <?php echo get_field( 'location_city', $address_id ); ?>, <?php echo get_field('location_state', $address_id ); ?> <?php echo get_field( 'location_zip', $address_id ); ?>
                                 <?php $map = get_field( 'location_map', $address_id ); ?>
                                 <!-- <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a> -->
                                 </p>
