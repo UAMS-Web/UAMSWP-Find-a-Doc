@@ -216,6 +216,7 @@ while ( have_posts() ) : the_post();
     // Add one instance of a class (' has-empty-contact-info') if there is an empty information field in any of the physician_contact_information rows.
     // Add one instance of a class (' has-education') if there is a physician_education row with a value in either education_type or school.
     // Add one instance of a class (' has-empty-education-type') if there is an empty education_type field in any of the physician_education rows.
+    if ($education && !empty($education)) { $provider_field_classes = $provider_field_classes . ' has-education'; }
     // Add one instance of a class (' has-empty-education-school') if there is an empty school field in any of the physician_education rows.
     if ($boards && !empty($boards)) { $provider_field_classes = $provider_field_classes . ' has-boards'; }
     if ($associations && !empty($associations)) { $provider_field_classes = $provider_field_classes . ' has-associations'; }
