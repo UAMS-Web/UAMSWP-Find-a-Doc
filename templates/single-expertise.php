@@ -35,7 +35,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 add_filter( 'genesis_entry_content', 'uamswp_expertise_keywords', 8 );
 add_action( 'genesis_entry_content', 'uamswp_expertise_youtube', 12 );
-add_action( 'genesis_after_entry', 'uamswp_list_child_expertise', 8);
+add_action( 'genesis_after_entry', 'uamswp_list_child_expertise', 8 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_conditions', 10 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_treatments', 12 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 14 );
