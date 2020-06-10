@@ -14,7 +14,16 @@
 	$physicians = get_field('treatment_procedure_physicians', $term);
 	$medline_type = get_field('medline_code_type', $term);
 	$medline_code = get_field('medline_code_id', $term);
-	$embed_code = get_field('treatment_procedure_embed_codes', $term);
+	$embed_code = get_field('treatment_procedure_embed_codes', $term); // Embed / Syndication Code
+	if (
+		( $medline_type && 'none' != $medline_type && $medline_code && !empty($medline_code) ) // if the medline plus syndication option is filled in
+		|| ( $embed_code && !empty($embed_code) ) // or if the syndication embed field has a value
+	) {
+		$syndication = true;
+	}
+	else {
+		$syndication = false;
+	}
 
 	function uamswp_keyword_hook_header() {
 		$keyword_text = '';
@@ -117,6 +126,7 @@
 	if ($keywords && !empty($keywords)) { $treatment_field_classes .= ' has-keywords'; } // Alternate names
     if ($clinical_trials && !empty($clinical_trials)) { $treatment_field_classes .= ' has-clinical-trials'; } // Display clinical trials block
     if ($content && !empty($content)) { $treatment_field_classes .= ' has-content'; } // Body content
+    if ($syndication) { $treatment_field_classes .= ' has-syndication'; } // Syndication content
     if ($excerpt && $excerpt_user == true ) { $treatment_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
     if ($video && !empty($video)) { $treatment_field_classes .= ' has-video'; } // Video embed
     if ($conditions && !empty($conditions)) { $treatment_field_classes .= ' has-condition'; } // Treatments
