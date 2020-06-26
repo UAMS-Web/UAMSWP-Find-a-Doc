@@ -1975,7 +1975,7 @@
                             "label": "Information",
                             "name": "location_modified_hours_information",
                             "type": "wysiwyg",
-                            "instructions": "This field can include a description of the modification if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.<br /><br />Or you can add information in addition to the structured days and hours.",
+                            "instructions": "This field can include a description of the modification if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning. Another would be if the modification was for a single day.<br /><br />Or you can add information in addition to the structured days and hours.",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -2632,7 +2632,7 @@
                     "label": "Reason for Modified Telemedicine Hours",
                     "name": "location_telemed_modified_hours_reason",
                     "type": "wysiwyg",
-                    "instructions": "Describe the overall reason the hours are being modified. This might be because of a holiday or public health emergency.<br /><br />This field can also include a description of the modification, if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.<br /><br />The date range will be displayed automatically, so that does not have to be included in this field..",
+                    "instructions": "Describe the overall reason the hours are being modified. This might be because of a holiday or public health emergency.<br /><br />This field can also include a description of the modification, if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning. Another would be if the modification was for a single day.<br /><br />The date range will be displayed automatically, so that does not have to be included in this field..",
                     "required": 1,
                     "conditional_logic": [
                         [
