@@ -164,7 +164,7 @@
                     if ($location_modified_hours_date_past) { ?>
                         This location's hours have been temporarily modified.
                     <?php } else { ?>
-                        This location's hours will be temporarily modified beginning on <?php echo $telemed_modified_start; ?>.
+                        This location's hours will be temporarily modified beginning on <?php echo $location_modified_hours_start; ?>.
                     <?php } // endif
                 } // endif ?>
                 <p><a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $alert_label; ?>" class="alert-link">Learn more</a></p>
