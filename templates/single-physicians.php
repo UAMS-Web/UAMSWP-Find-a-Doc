@@ -47,11 +47,6 @@ if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, ba
 } else {
     $phys_title_indef_article = 'a';
 }
-if ( substr($short_name, -1) == 's' ) { // Defines a or an, based on whether clinical title starts with vowel
-    $short_name_possessive = $short_name . '\'';
-} else {
-    $short_name_possessive = $short_name . '\'s';
-}
 $bio = get_field('physician_clinical_bio',$post->ID);
 $eligible_appt = get_field('physician_eligible_appointments',$post->ID);
 // Check for valid locations
@@ -117,15 +112,6 @@ function be_remove_title_from_single_crumb( $crumb, $args ) { // Because BE is t
 }
 add_filter( 'genesis_single_crumb', 'be_remove_title_from_single_crumb', 10, 2 );
 
-function sp_change_title_from_provider_crumb( $crumbs ) { // SEOPress
-    global $full_name;
-    $crumb = array_pop($crumbs);
-    $provider_name = array($full_name, get_permalink());
-    array_push($crumbs, $provider_name);
-    return $crumbs;
-}
-add_filter('seopress_pro_breadcrumbs_crumbs', 'sp_change_title_from_provider_crumb', 20);
-
 get_header();
 
 while ( have_posts() ) : the_post(); 
@@ -148,7 +134,9 @@ while ( have_posts() ) : the_post();
     $additional_info = get_field('physician_additional_info');
     $boards = get_field( 'physician_boards' );
     $conditions = get_field('physician_conditions');
+    $conditions_cpt = get_field('physician_conditions_cpt');
     $treatments = get_field('physician_treatments');
+    $treatments_cpt = get_field('physician_treatments_cpt');
     $expertises =  get_field('physician_expertise');
     $second_opinion = get_field('physician_second_opinion');
     $patients = get_field('physician_patient_types');
@@ -157,8 +145,6 @@ while ( have_posts() ) : the_post();
     $physician_portal = get_field('physician_portal');
     $physician_clinical_bio = get_field('physician_clinical_bio');
     $physician_youtube_link = get_field('physician_youtube_link');
-    $physician_clinical_admin_title = get_field('physician_clinical_admin_title');
-    $physician_clinical_focus = get_field('physician_clinical_focus');
     $physician_awards = get_field('physician_awards');
     $physician_additional_info = get_field('physician_additional_info');
     $expertises =  get_field('physician_expertise');
@@ -169,7 +155,6 @@ while ( have_posts() ) : the_post();
     $education = get_field('physician_education');
     $academic_bio = get_field('physician_academic_bio');
     $academic_appointment = get_field('physician_academic_appointment');
-    $academic_admin_title = get_field('physician_academic_admin_title');
     $research_bio = get_field('physician_research_bio');
     $research_interests = get_field('physician_research_interests');
     $research_profiles_link = get_field('physician_research_profiles_link');
@@ -193,7 +178,9 @@ while ( have_posts() ) : the_post();
     if ($bio_short && !empty($bio_short)) { $provider_field_classes = $provider_field_classes . ' has-short-clinical-bio'; }
     if ($video && !empty($video)) { $provider_field_classes = $provider_field_classes . ' has-video'; }
     if ($conditions && !empty($conditions)) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
+    if ($conditions_cpt && !empty($conditions_cpt)) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
     if ($treatments && !empty($treatments)) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
+    if ($treatments_cpt && !empty($treatments_cpt)) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
     if ($locations && $location_valid) { $provider_field_classes = $provider_field_classes . ' has-location'; }
     if ($affiliation && !empty($affiliation)) { $provider_field_classes = $provider_field_classes . ' has-affiliation'; }
     if ($expertises && !empty($expertises)) { $provider_field_classes = $provider_field_classes . ' has-expertise'; }
@@ -211,7 +198,6 @@ while ( have_posts() ) : the_post();
     // Add one instance of a class (' has-empty-contact-info') if there is an empty information field in any of the physician_contact_information rows.
     // Add one instance of a class (' has-education') if there is a physician_education row with a value in either education_type or school.
     // Add one instance of a class (' has-empty-education-type') if there is an empty education_type field in any of the physician_education rows.
-    if ($education && !empty($education)) { $provider_field_classes = $provider_field_classes . ' has-education'; }
     // Add one instance of a class (' has-empty-education-school') if there is an empty school field in any of the physician_education rows.
     if ($boards && !empty($boards)) { $provider_field_classes = $provider_field_classes . ' has-boards'; }
     if ($associations && !empty($associations)) { $provider_field_classes = $provider_field_classes . ' has-associations'; }
@@ -358,37 +344,12 @@ while ( have_posts() ) : the_post();
                             <?php foreach( $locations as $location ):
                                     if ( 2 > $l ){
 	                                    if ( get_post_status ( $location ) == 'publish' ) {
-
-                                            // Reset variables
-                                            $address_id = $location;
-                                        
-                                            // Parent Location 
-                                            $location_has_parent = get_field('location_parent', $location);
-                                            $location_parent_id = get_field('location_parent_id', $location);
-                                            $parent_location = '';
-                                            $parent_id = '';
-                                            $parent_title = '';
-                                            $parent_url = '';
-                                        
-                                            if ($location_has_parent && $location_parent_id) { 
-                                                $parent_location = get_post( $location_parent_id );
-                                            }
-                                            // Get Post ID for Address & Image fields
-                                            if ($parent_location) {
-                                                $parent_id = $parent_location->ID;
-                                                $parent_title = $parent_location->post_title;
-                                                $parent_url = get_permalink( $parent_id );
-                                                $address_id = $parent_id;
-                                            }
                                     ?>
                                 <p><strong><?php echo get_the_title( $location ); ?></strong><br />
-                                <?php if ( $parent_location ) { ?>
-                                    (Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a>)<br />
-                                <?php } // endif ?>
-                                <?php echo get_field( 'location_address_1', $address_id ); ?><br/>
-                                <?php echo ( get_field( 'location_address_2', $address_id ) ? get_field( 'location_address_2', $address_id ) . '<br/>' : ''); ?>
-                                <?php echo get_field( 'location_city', $address_id ); ?>, <?php echo get_field('location_state', $address_id ); ?> <?php echo get_field( 'location_zip', $address_id ); ?>
-                                <?php $map = get_field( 'location_map', $address_id ); ?>
+                                <?php echo get_field( 'location_address_1', $location ); ?><br/>
+                                <?php echo ( get_field( 'location_address_2', $location ) ? get_field( 'location_address_2', $location ) . '<br/>' : ''); ?>
+                                <?php echo get_field( 'location_city', $location ); ?>, <?php echo get_field(' location_state', $location ); ?> <?php echo get_field( 'location_zip', $location ); ?>
+                                <?php $map = get_field( 'location_map', $location ); ?>
                                 <!-- <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a> -->
                                 </p>
                                 <?php if (get_field('location_phone', $location)) { ?>
@@ -534,82 +495,29 @@ while ( have_posts() ) : the_post();
             </div>
         </section>
         <?php endif; ?>
-        
-        <?php 
-            $physician_clinical_split = false;
-            if (
-                ( $physician_clinical_bio || !empty ($physician_youtube_link) ) // column A stuff
-                && ( $physician_clinical_focus ) // column B stuff
-                // && ( $physician_clinical_admin_title || $physician_clinical_focus ) // Alternate column B stuff if we decide to display clinical admin title
-                ) {
-                $physician_clinical_split = true; // If there is stuff for column A and column B, split the section into two columns
-            }
-        
-            // Display section for Clinical Bio, Clinical Video, Clinical Administrative Title(s), Clinical Focus ... only if there is a bio or video.
-            if ( $physician_clinical_bio || !empty ($physician_youtube_link) ) { ?>
-            <section class="uams-module clinical-info bg-auto">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h2 class="module-title">About <?php echo $short_name; ?></h2>
-
-
-                            <?php if ( $physician_clinical_split ) {
-                                // If there is a bio or video AND at least one of the other clinical things, visually split the layout ?>
-                                <div class="row content-split-lg">
-                                <div class="col-xs-12 col-lg-7">
-                                <div class="content-width">
-                            <?php } else { ?>
-                                <div class="module-body">
-                            <?php } // endif
-                            if ( $physician_clinical_bio ) { ?>
-                                <h3 class="sr-only">Clinical Biography</h3>
-                                <?php echo $physician_clinical_bio; ?>
-                            <?php } // endif
-                            if($physician_youtube_link) { ?>
-                                <div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
-                                    <?php echo wp_oembed_get( $physician_youtube_link ); ?>
-                                </div>
-                            <?php } // endif
-                            if ( $physician_clinical_split ) { ?>
-                                </div>
-                                </div>
-                                <div class="col-xs-12 col-lg-5">
-                                <div class="content-width">
-                            <?php } // endif ?>
-                            <?php // Section for displaying clinical admin title
-                            if (true == false) { // Remove this if statement if we decide to display clinical admin title later.
-                                if( have_rows('physician_clinical_admin_title') ): ?>
-                                    <h3 class="h4">Administrative Roles</h3>
-                                    <dl>
-                                    <?php while( have_rows('physician_clinical_admin_title') ): the_row();
-                                        $department = get_term( get_sub_field('physician_clinical_admin_area'), 'service_line' ); 
-                                        $clinical_admin_title_tax = get_term( get_sub_field('clinical_admin_title_tax'), 'clinical_admin_title' );
-                                    ?>
-                                        <dt><?php echo $department->name; ?></dt>
-                                        <dd><?php echo $clinical_admin_title_tax->name; ?></dd>
-                                    <?php endwhile; ?>
-                                    </dl>
-                                <?php endif; 
-                            } // endif ?>
-                            <?php if($physician_clinical_focus) { ?>
-                                <h3 class="h4">Clinical Focus</h3>
-                                <?php echo $physician_clinical_focus; ?>
-                            <?php } // endif
-                            if ( $physician_clinical_split ) { ?>
-                                </div>
-                                </div>
-                                </div>
-                            <?php } else { ?>
-                                </div>
-                            <?php } // endif ?>
+        <?php if($physician_clinical_bio|| !empty ($physician_youtube_link) || !empty ($physician_awards) || $physician_additional_info): ?>
+        <section class="uams-module bg-auto">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h2 class="module-title">About <?php echo $short_name; ?>
+                        </h2>
+                        <div class="module-body">
+                            <?php echo $physician_clinical_bio; ?>
+                            <?php if($physician_youtube_link) { ?>
+                            <div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
+                                <?php echo wp_oembed_get( $physician_youtube_link ); ?>
+                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
-            </section>
-        <?php } // endif ?>
+            </div>
+        </section>
+        <?php endif; ?>
         <?php // load all 'conditions' terms for the post
-	        $title_append = ' by ' . $short_name;
+            $title_append = ' by ' . $short_name;
+            // Conditions Taxonomy
             $args = (array(
                 'taxonomy' => "condition",
                 'hide_empty' => false,
@@ -629,8 +537,33 @@ while ( have_posts() ) : the_post();
                     },';
                 endforeach;
                 $condition_schema .= '"" ]';
+            endif;
+             
+            // Conditions CPT
+            $args = (array(
+                'post_type' => "condition",
+                'post_status' => 'publish',
+                'orderby' => 'title',
+                'order' => 'ASC',
+                'post__in' => $conditions_cpt
+            ));
+            $conditions_cpt_query = new WP_Query( $args );
+            // $condition_schema = '';
+            // we will use the first term to load ACF data from
+            if( $conditions_cpt && $conditions_cpt_query->posts ):
+                include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
+                $condition_schema .= ',"medicalSpecialty": [';
+                foreach( $conditions_cpt_query->posts as $condition ):
+                    $condition_schema .= '{
+                    "@type": "MedicalSpecialty",
+                    "name": "'. $condition->post_title .'",
+                    "url":"'. get_the_permalink( $condition->ID ) .'"
+                    },';
+                endforeach;
+                $condition_schema .= '"" ]';
             endif; 
-             // load all 'treatments' terms for the post
+            // Treatments Taxonomy
+            // load all 'treatments' terms for the post
             $args = (array(
                 'taxonomy' => "treatment",
                 'hide_empty' => false,
@@ -639,9 +572,31 @@ while ( have_posts() ) : the_post();
             $treatments_query = new WP_Term_Query( $args );
 
             // we will use the first term to load ACF data from
-        if( $treatments ):
-            include( UAMS_FAD_PATH . '/templates/loops/treatments-loop.php' );
-        endif;
+            if( $treatments ):
+                include( UAMS_FAD_PATH . '/templates/loops/treatments-loop.php' );
+            endif;
+
+            // Treatments CPT
+            $args = (array(
+                'post_type' => "treatment",
+                'post_status' => 'publish',
+                'orderby' => 'title',
+                'order' => 'ASC',
+                'post__in' => $treatments_cpt
+            ));
+            $treatments_cpt_query = new WP_Query( $args );
+            if( $treatments_cpt && $treatments_cpt_query->posts ):
+                include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
+                $treatment_schema .= ',"medicalSpecialty": [';
+                foreach( $treatments_cpt_query->posts as $treatment ):
+                    $treatment_schema .= '{
+                    "@type": "MedicalSpecialty",
+                    "name": "'. $treatment->post_title .'",
+                    "url":"'. get_the_permalink( $treatment->ID ) .'"
+                    },';
+                endforeach;
+                $treatment_schema .= '"" ]';
+            endif; 
         
         $expertise_valid = false;
         if( $expertises ):
@@ -657,7 +612,7 @@ while ( have_posts() ) : the_post();
 	                <div class="container-fluid">
 	                    <div class="row">
 	                        <div class="col-12">
-	                            <h2 class="module-title"><?php echo $short_name_possessive; ?> Areas of Expertise</h2>
+	                            <h2 class="module-title"><?php echo $short_name; ?>'s Areas of Expertise</h2>
 	                            <div class="card-list-container">
 	                                <div class="card-list">
                                         <?php foreach( $expertises as $expertise ) {
@@ -678,16 +633,16 @@ while ( have_posts() ) : the_post();
         ?>
         <?php 
             $physician_academic_split = false;
-            if ( $academic_bio && ( $academic_appointment || $academic_admin_title || $education || $boards ) ) {
+            if ( $academic_bio && ( $academic_appointment || $education || $boards ) ) {
                 $physician_academic_split = true;
             }
         
-            if($academic_bio || $academic_appointment || $academic_admin_title || $education || $boards): ?>
+            if($academic_bio || $academic_appointment || $education || $boards): ?>
         <section class="uams-module academic-info bg-auto">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
-                        <h2 class="module-title"><?php echo $short_name_possessive; ?> Academic Background</h2>
+                        <h2 class="module-title"><?php echo $short_name; ?>'s Academic Background</h2>
                         <?php if ( $physician_academic_split ) {
                             // If there is a bio AND at least one of the other academic things, visually split the layout ?>
                             <div class="row content-split-lg">
@@ -707,23 +662,9 @@ while ( have_posts() ) : the_post();
                             <div class="content-width">
                         <?php } // endif ?>
                             <?php
-                                if( have_rows('physician_academic_admin_title') ): ?>
-                                    <h3 class="h4">Administrative Roles</h3>
-                                    <dl>
-                                    <?php while( have_rows('physician_academic_admin_title') ): the_row(); ?>
-                                    <?php 
-                                        $department = get_term( get_sub_field('department'), 'academic_department' ); 
-                                        $academic_admin_title_tax = get_term( get_sub_field('academic_admin_title_tax'), 'academic_admin_title' );
-                                    ?>
-                                        <dt><?php echo $department->name; ?></dt>
-                                        <dd><?php echo $academic_admin_title_tax->name; ?></dd>
-                                    <?php endwhile; ?>
-                                    </dl>
-                            <?php endif; ?>
-                            <?php
                                 // $academic_appointments = get_field('physician_academic_appointment');
                                 if( have_rows('physician_academic_appointment') ): ?>
-                                    <h3 class="h4">Faculty Appointments</h3>
+                                    <h3>Academic Appointments</h3>
                                     <dl>
                                     <?php while( have_rows('physician_academic_appointment') ): the_row(); ?>
                                     <?php 
@@ -742,7 +683,7 @@ while ( have_posts() ) : the_post();
                             <?php endif; ?>
                             <?php
                                 if( have_rows('physician_education') ): ?>
-                                    <h3 class="h4">Education</h3>
+                                    <h3>Education</h3>
                                     <dl>
                                     <?php while( have_rows('physician_education') ): the_row();
                                         $school_name = get_term( get_sub_field('school'), 'school');
@@ -755,7 +696,7 @@ while ( have_posts() ) : the_post();
                             <?php endif;
                                 
                                 if( ! empty( $boards ) ): ?>
-                            <h3 class="h4">Professional Certifications</h3>
+                            <h3>Professional Certifications</h3>
                             <ul>
                             <?php foreach ( $boards as $board ) :
                                 $board_name = get_term( $board, 'board'); ?>
@@ -766,7 +707,7 @@ while ( have_posts() ) : the_post();
                             <?php endif;
                                 
                                 if( ! empty( $associations ) ): ?>
-                            <h3 class="h4">Associations</h3>
+                            <h3>Associations</h3>
                             <ul>
                             <?php foreach ( $associations as $association ) :
                                 $association_name = get_term( $association, 'association'); ?>
@@ -793,7 +734,7 @@ while ( have_posts() ) : the_post();
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
-                        <h2 class="module-title"><?php echo $short_name_possessive; ?> Research</h2>
+                        <h2 class="module-title"><?php echo $short_name; ?>'s Research</h2>
                         <div class="module-body">
                             <?php
                                 if($research_bio)
@@ -830,7 +771,7 @@ while ( have_posts() ) : the_post();
                             <?php if( $research_profiles_link ): ?>
                                 <h3>UAMS Research Profile</h3>
                                 <p>Each UAMS faculty member has a research profile page that includes biographical and contact information, a list of their most recent grant activity and a list of their PubMed publications.</p>
-                                <p><a class="btn btn-outline-primary" href="<?php echo $research_profiles_link; ?>">View <?php echo $short_name_possessive; ?> research profile</a></p>
+                                <p><a class="btn btn-outline-primary" href="<?php echo $research_profiles_link; ?>">View <?php echo $short_name; ?>'s research profile</a></p>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -851,10 +792,94 @@ while ( have_posts() ) : the_post();
                                 $location_schema = ',"address": [';
                             ?>
                             <?php foreach( $locations as $location ): 
-                                if ( get_post_status ( $location ) == 'publish' ) { 
-
-                                    $id = $location; 
-                                    include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+                                if ( get_post_status ( $location ) == 'publish' ) { ?>
+                                    <div class="card">
+                                        <?php if ( has_post_thumbnail($location) ) { ?>
+                                        <?php echo get_the_post_thumbnail($location, 'aspect-16-9-small', ['class' => 'card-img-top']); ?>
+                                        <?php } else { ?>
+                                        <picture>
+                                            <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
+                                            <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" class="card-img-top" />
+                                        </picture>
+                                        <?php } ?>
+                                        <div class="card-body">
+                                            <h3 class="card-title h5">
+                                                <span class="name"><?php echo get_the_title( $location ); ?></span>
+                                                <?php  if ( 1 == $l ) { ?>
+                                                    <span class="subtitle">Primary Location</span>
+                                                <?php } ?>
+                                            </h3>
+                                            <?php 
+                                            $location_closing = get_field('location_closing', $location); // true or false
+                                            $location_closing_date = get_field('location_closing_date', $location); // F j, Y
+                                            $location_closing_date_past = false;
+                                            if (new DateTime() >= new DateTime($location_closing_date)) {
+                                                $location_closing_date_past = true;
+                                            }
+                                            $location_closing_length = get_field('location_closing_length', $location);
+                                            $location_reopen_known = get_field('location_reopen_known', $location);
+                                            $location_reopen_date = get_field('location_reopen_date', $location); // F j, Y
+                                            $location_reopen_date_past = false;
+                                            if (new DateTime() >= new DateTime($location_reopen_date)) {
+                                                $location_reopen_date_past = true;
+                                            }
+                                            $location_closing_info = get_field('location_closing_info', $location);
+                                            $location_closing_display = false;
+                                            if (
+                                                $location_closing && (
+                                                    $location_closing_length == 'permanent'
+                                                    || ($location_closing_length == 'temporary' && !$location_reopen_date_past)
+                                                    )
+                                                ) {
+                                                $location_closing_display = true;
+                                            }
+                                            
+                                            if ($location_closing_display) { ?>
+                                                <div class="alert alert-warning" role="alert">
+                                                    <?php if ($location_closing_date_past) { ?>
+                                                        This location is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed.
+                                                    <?php } else { ?>
+                                                        This location will be closing <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>.
+                                                    <?php } // endif
+                                                    if (
+                                                        $location_closing_length == 'temporary' 
+                                                        && $location_reopen_known == 'date' 
+                                                        && !empty($location_reopen_date)
+                                                        && (new DateTime($location_reopen_date) >= new DateTime($location_closing_date))
+                                                    ) { ?>
+                                                        It is scheduled to reopen on <?php echo $location_reopen_date; ?>.
+                                                    <?php } elseif (
+                                                        $location_closing_length == 'temporary' 
+                                                        && $location_reopen_known == 'tbd' 
+                                                    ) { ?>
+                                                        It will remain closed until further notice.
+                                                    <?php } // endif ?>
+                                                </div>
+                                            <?php } // endif ?>
+                                            <p class="card-text"><?php echo get_field('location_address_1', $location ); ?><br/>
+                                            <?php echo ( get_field('location_address_2', $location ) ? get_field('location_address_2', $location ) . '<br/>' : ''); ?>
+                                            <?php echo get_field('location_city', $location ); ?>, <?php echo get_field('location_state', $location ); ?> <?php echo get_field('location_zip', $location); ?></p>
+                                            <?php if (get_field('location_phone', $location)) { ?>
+                                                <dl>
+                                                    <dt>Appointment Phone Number<?php echo (get_field('field_location_appointment_phone_query', $location) && get_field('location_clinic_phone_query', $location)) ? 's' : ''; ?></dt>
+                                                    <?php if (get_field('location_new_appointments_phone', $location) && get_field('location_clinic_phone_query', $location)) { ?>
+                                                        <dd><a href="tel:<?php echo format_phone_dash( get_field('location_new_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_new_appointments_phone', $location) ); ?></a><?php echo get_field('field_location_appointment_phone_query', $location) ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
+                                                        <?php if (get_field('location_return_appointments_phone', $location) && get_field('field_location_appointment_phone_query', $location)) { ?>
+                                                            <dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone', $location) ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
+                                                        <?php } ?>
+                                                    <?php } else { ?>
+                                                        <dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone', $location) ); ?></a><br/><span class="subtitle">New and Returning Patients</span></dd>
+                                                    <?php } ?>
+                                                </dl>
+                                            <?php } ?>
+                                        </div>
+                                        <div class="btn-container">
+                                            <div class="inner-container">
+                                                <a href="<?php the_permalink(  $location ); ?>" class="btn btn-primary stretched-link" aria-label="Go to location page for <?php echo get_the_title( $location ); ?>">View Location</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php
                                         // Schema data
                                         if ($l > 1){
                                             $location_schema .= ',';
@@ -1073,6 +1098,7 @@ while ( have_posts() ) : the_post();
   ,"description": "<?php echo $excerpt; ?>"
   <?php } ?>
   <?php echo $condition_schema; ?>
+  <?php echo $treatment_schema; ?>
   <?php echo $location_schema; ?>
   <?php if ( $rating_valid ){ ?>
   ,"aggregateRating": {
