@@ -82,6 +82,31 @@
             "acfe_bidirectional": 0,
             "multiple": 0
         },
+        "field_expertise_conditions_cpt": {
+            "key": "field_expertise_conditions_cpt",
+            "name": "expertise_conditions_cpt",
+            "type": "post_object",
+            "label": "Conditions",
+            "instructions": "The conditions will display in alphabetical order.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "condition"
+            ],
+            "taxonomy": "",
+            "allow_null": 1,
+            "multiple": 1,
+            "return_format": "id",
+            "acfe_bidirectional": 0,
+            "acfe_validate": "",
+            "acfe_update": "",
+            "ui": 1
+        },
         "field_expertise_treatments": {
             "key": "field_expertise_treatments",
             "name": "expertise_treatments",
@@ -104,6 +129,31 @@
             "return_format": "id",
             "acfe_bidirectional": 0,
             "multiple": 0
+        },
+        "field_expertise_treatments_cpt": {
+            "key": "field_expertise_treatments_cpt",
+            "name": "expertise_treatments_cpt",
+            "type": "post_object",
+            "label": "Treatments & Procedures",
+            "instructions": "The treatments and procedures will display in alphabetical order.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "treatment"
+            ],
+            "taxonomy": "",
+            "allow_null": 1,
+            "multiple": 1,
+            "return_format": "id",
+            "acfe_bidirectional": 0,
+            "acfe_validate": "",
+            "acfe_update": "",
+            "ui": 1
         },
         "field_medical_terms": {
             "key": "field_expertise_medical_terms",
