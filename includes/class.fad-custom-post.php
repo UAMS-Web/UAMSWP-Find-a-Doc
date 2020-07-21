@@ -366,8 +366,8 @@ if ( ! function_exists('treatments_cpt') ) {
 // Actions for Taxonomy - place in order for sub-menu
 // Provider Taxonomies
 // Clinical
-// add_action( 'init', 'create_clinical_conditions_taxonomy', 0 );
-// add_action( 'init', 'create_clinical_treatments_taxonomy', 0 );
+add_action( 'init', 'create_clinical_conditions_taxonomy', 0 );
+add_action( 'init', 'create_clinical_treatments_taxonomy', 0 );
 
 add_action( 'init', 'create_affiliations_taxonomy', 0 );
 add_action( 'init', 'create_institute_affiliations_taxonomy', 0 );
