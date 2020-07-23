@@ -244,7 +244,10 @@
             "allow_null": 1,
             "multiple": 1,
             "return_format": "id",
-            "acfe_bidirectional": 0,
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_treatment_conditions"
+            },
             "acfe_validate": "",
             "acfe_update": "",
             "ui": 1
@@ -270,7 +273,10 @@
             "allow_null": 1,
             "multiple": 1,
             "return_format": "id",
-            "acfe_bidirectional": 0,
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_expertise_conditions_cpt"
+            },
             "acfe_validate": "",
             "acfe_update": "",
             "ui": 1
@@ -296,7 +302,10 @@
             "allow_null": 1,
             "multiple": 1,
             "return_format": "id",
-            "acfe_bidirectional": 0,
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_location_conditions_cpt"
+            },
             "acfe_validate": "",
             "acfe_update": "",
             "ui": 1
@@ -322,7 +331,10 @@
             "allow_null": 1,
             "multiple": 1,
             "return_format": "id",
-            "acfe_bidirectional": 0,
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_physician_conditions_cpt"
+            },
             "acfe_validate": "",
             "acfe_update": "",
             "ui": 1

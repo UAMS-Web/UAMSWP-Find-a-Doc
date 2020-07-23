@@ -244,7 +244,10 @@
             "allow_null": 1,
             "multiple": 1,
             "return_format": "id",
-            "acfe_bidirectional": 0,
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_condition_treatments"
+            },
             "acfe_validate": "",
             "acfe_update": "",
             "ui": 1
@@ -270,10 +273,7 @@
             "save_terms": 0,
             "load_terms": 0,
             "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_condition_treatments"
-            },
+            "acfe_bidirectional": 0,
             "acfe_validate": "",
             "acfe_update": "",
             "multiple": 0
@@ -299,7 +299,10 @@
             "allow_null": 1,
             "multiple": 1,
             "return_format": "id",
-            "acfe_bidirectional": 0,
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_expertise_treatments_cpt"
+            },
             "acfe_validate": "",
             "acfe_update": "",
             "ui": 1
@@ -325,7 +328,10 @@
             "allow_null": 1,
             "multiple": 1,
             "return_format": "id",
-            "acfe_bidirectional": 0,
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_location_treatments_cpt"
+            },
             "acfe_validate": "",
             "acfe_update": "",
             "ui": 1
@@ -351,7 +357,10 @@
             "allow_null": 1,
             "multiple": 1,
             "return_format": "id",
-            "acfe_bidirectional": 0,
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_physician_treatments_cpt"
+            },
             "acfe_validate": "",
             "acfe_update": "",
             "ui": 1
