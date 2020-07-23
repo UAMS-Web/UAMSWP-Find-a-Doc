@@ -110,6 +110,7 @@
 			$id = get_the_ID();
 			include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
 		endwhile;
+		wp_reset_postdata();
 		$location_content .= ob_get_clean();
 		$location_content .= '</div>';
 		$location_content .= '</div>';
