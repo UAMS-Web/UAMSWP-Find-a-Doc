@@ -1,19 +1,6 @@
 <?php
 	// ACF Fields - get_fields
 	$keywords = get_field('treatment_procedure_alternate');
-	$clinical_trials = get_field('treatment_procedure_clinical_trials');
-	$content = get_field( 'treatment_procedure_content' );
-	$excerpt = get_field( 'treatment_procedure_short_desc' );
-	$excerpt_user = true;
-	$video = get_field('treatment_procedure_youtube_link');
-	// $conditions = get_field('treatment_procedure_conditions');
-	$conditions_cpt = get_field('treatment_conditions');
-	$expertise = get_field('treatment_procedure_expertise');
-	$locations = get_field('treatment_procedure_locations');
-	$physicians = get_field('treatment_procedure_physicians');
-	$medline_type = get_field('medline_code_type');
-	$medline_code = get_field('medline_code_id');
-	$embed_code = get_field('treatment_procedure_embed_codes');
 
 	function uamswp_keyword_hook_header() {
 		$keyword_text = '';
@@ -65,6 +52,20 @@
 	add_filter( 'body_class', 'uams_default_page_body_class' );
 	
 	get_header();
+
+	$clinical_trials = get_field('treatment_procedure_clinical_trials');
+	$content = get_the_content(); //get_field( 'treatment_procedure_content' );
+	$excerpt = get_the_excerpt(); //get_field( 'treatment_procedure_short_desc' );
+	$excerpt_user = true;
+	$video = get_field('treatment_procedure_youtube_link');
+	// $conditions = get_field('treatment_procedure_conditions');
+	$conditions_cpt = get_field('treatment_conditions');
+	$expertise = get_field('treatment_procedure_expertise');
+	$locations = get_field('treatment_procedure_locations');
+	$physicians = get_field('treatment_procedure_physicians');
+	$medline_type = get_field('medline_code_type');
+	$medline_code = get_field('medline_code_id');
+	$embed_code = get_field('treatment_procedure_embed_codes');
 
 	$treatment_title = get_field('treatments_archive_headline', 'option');
 	$treatment_text = get_field('treatments_archive_intro_text', 'option');
@@ -154,7 +155,7 @@
 						echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';
 					endif;
 				?>
-				<?php echo ( $content ? ''. $content . '' : '' ); ?>
+				<?php the_content(); ?>
 				<?php 
 					if ( $medline_type && 'none' != $medline_type && $medline_code ) {
 						echo display_medline_api_data( trim($medline_code), $medline_type );

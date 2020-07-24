@@ -1,19 +1,5 @@
 <?php
-	// ACF Fields - get_fields
 	$keywords = get_field('condition_alternate');
-	$clinical_trials = get_field('condition_clinical_trials');
-	$content = get_field( 'condition_content' );
-	$excerpt = get_field( 'condition_short_desc' );
-	$excerpt_user = true;
-	$video = get_field('condition_youtube_link');
-	// $treatments = get_field('condition_treatments');
-	$treatments_cpt = get_field('condition_treatments');
-	$expertise = get_field('condition_expertise');
-	$locations = get_field('condition_locations');
-	$physicians = get_field('condition_physicians');
-	$medline_type = get_field('medline_code_type');
-	$medline_code = get_field('medline_code_id');
-	$embed_code = get_field('condition_embed_codes');
 
 	function uamswp_keyword_hook_header() {
 		global $keywords;
@@ -47,7 +33,7 @@
 	if (empty($excerpt)){
 		$excerpt_user = false;
 		if ($content){
-			$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
+			$excerpt = mb_strimwidth(wp_strip_all_tags(get_the_content()), 0, 155, '...');
 		}
 	}
 	// Use SeoPress hook for meta description
@@ -66,6 +52,22 @@
 	add_filter( 'body_class', 'uams_default_page_body_class' );
 
 	   get_header();
+
+	// ACF Fields - get_fields
+
+	$clinical_trials = get_field('condition_clinical_trials');
+	$content = get_the_content(); //get_field( 'condition_content' );
+	$excerpt = get_the_excerpt(); // get_field( 'condition_short_desc' );
+	$excerpt_user = true;
+	$video = get_field('condition_youtube_link');
+	// $treatments = get_field('condition_treatments');
+	$treatments_cpt = get_field('condition_treatments');
+	$expertise = get_field('condition_expertise');
+	$locations = get_field('condition_locations');
+	$physicians = get_field('condition_physicians');
+	$medline_type = get_field('medline_code_type');
+	$medline_code = get_field('medline_code_id');
+	$embed_code = get_field('condition_embed_codes');
 	   
 	$condition_title = get_field('conditions_archive_headline', 'option');
 	$condition_text = get_field('conditions_archive_intro_text', 'option');
@@ -155,7 +157,7 @@
 						echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';
 					endif;
 				?>
-				<?php echo ( $content ? ''. $content . '' : '' ); ?>
+				<?php the_content(); ?>
 				<?php 
 					if ( $medline_type && 'none' != $medline_type && $medline_code ) {
 						echo display_medline_api_data( trim($medline_code), $medline_type );
@@ -250,13 +252,14 @@
 		<?php } // endif ?>
 		<?php // Check if any doctors are connected	
 			if ($physicians) {
-				$physiciansCount = count($physicians);
+				// $physiciansCount = '';
+				// $physiciansCount = count($physicians);
 				$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12)
 				$postsCutoff = 18; // Set cutoff value
 				$postsCountClass = $postsPerPage;
-				if($physiciansCount <= $postsCutoff ) {
-						$postsPerPage = -1;
-					}
+				// if($physiciansCount <= $postsCutoff ) {
+				// 		$postsPerPage = -1;
+				// 	}
 				$args = (array(
 					'post_type' => "provider",
 					"post_status" => "publish",
@@ -282,7 +285,6 @@
 													$id = get_the_ID();
 													include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
 												endwhile;
-												wp_reset_postdata();
 											?>
 										</div>
 									</div>
@@ -297,6 +299,7 @@
 					</section>
 				<?php
 				} // $physicians_query loop
+				wp_reset_postdata();
 			}
 		
 			// Location Section
@@ -328,7 +331,6 @@
 										$id = get_the_ID();
 										include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
 									endwhile; 
-									wp_reset_postdata();
 								?>
 								</div>
 							</div>
@@ -336,7 +338,8 @@
 					</div>
 				</div>
 			</section>
-			<?php endif; ?>	
+			<?php endif;
+			wp_reset_postdata(); ?>	
 		<?php
 			include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
 		?>
