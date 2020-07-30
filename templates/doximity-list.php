@@ -98,10 +98,11 @@ function display_provider_image() {
                         'D.O.'
                     );
                     $degree_np = array( // list valid versions of NP
+                        'CNP',
                         'FNP-C'
                     );
                     $degree_pa = array( // list valid versions of PA
-                        'P.A.'
+                        'PA'
                     );
                     $degrees = get_field('physician_degree',$post_id);
                     $degree_valid = '';

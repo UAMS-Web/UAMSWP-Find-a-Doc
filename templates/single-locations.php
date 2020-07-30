@@ -10,6 +10,23 @@ if (empty($excerpt)){
         $excerpt = mb_strimwidth(wp_strip_all_tags($about_loc), 0, 155, '...');
     }
 }
+// Parent Location 
+$location_has_parent = get_field('location_parent');
+$location_parent_id = get_field('location_parent_id');
+$parent_title = ''; // Eliminate PHP errors
+$parent_url = ''; // Eliminate PHP errors
+$parent_location = ''; // Eliminate PHP errors
+if ($location_has_parent && $location_parent_id) { 
+	$parent_location = get_post( $location_parent_id );
+}
+// Get Post ID for Address & Image fields
+if ($parent_location) {
+	$post_id = $parent_location->ID;
+	$parent_title = $parent_location->post_title;
+	$parent_url = get_permalink( $post_id );
+} else {
+	$post_id = get_the_ID();
+}
 
 // Phone values
 
@@ -35,9 +52,22 @@ $location_fax_link = '<a href="tel:' . format_phone_dash( $location_fax ) . '" c
 $location_phone_numbers = get_field('field_location_phone_numbers');
 
 // Image values
+$override_parent_photo = get_field('location_image_override_parent');
+$override_parent_photo_featured = get_field('location_image_override_parent_featured');
+$override_parent_photo_wayfinding = get_field('location_image_override_parent_wayfinding');
+$override_parent_photo_gallery = get_field('location_image_override_parent_gallery');
+// if ($override_parent_photo && $parent_location) { // If child location & override is true
+if ($override_parent_photo && $parent_location && $override_parent_photo_wayfinding) {
+	$wayfinding_photo = get_field('location_wayfinding_photo');
+} else { // Use parent/standard images
+	$wayfinding_photo = get_field('location_wayfinding_photo', $post_id);
+}
+if ($override_parent_photo && $parent_location && $override_parent_photo_gallery) {
+	$photo_gallery = get_field('location_photo_gallery');
+} else { // Use parent/standard images
+	$photo_gallery = get_field('location_photo_gallery', $post_id);
+}
 
-$wayfinding_photo = get_field('location_wayfinding_photo');
-$photo_gallery = get_field('location_photo_gallery');
 $location_images = array();
 if ($wayfinding_photo && !empty($wayfinding_photo)) {
 	$location_images[] = $wayfinding_photo;
@@ -50,7 +80,12 @@ if ($photo_gallery && !empty($photo_gallery)) {
 $location_images_count = count($location_images);
 
 // Set image for schema
-$featured_image = get_post_thumbnail_id();
+if ($override_parent_photo && $parent_location && $override_parent_photo_featured) { // If child location & override is true
+	$featured_image = get_post_thumbnail_id();
+} else { // Use parent/standard images
+	$featured_image = get_post_thumbnail_id($post_id);
+}
+
 $schema_image = '';
 if ($featured_image) {
 	$schema_image = $featured_image;
@@ -171,6 +206,7 @@ if ( $location_closing ) {
 $prescription_query = get_field('location_prescription_query'); // Display prescription information
 $prescription_clinic_sys = get_field('location_prescription_clinic_system', 'option'); // Text from Find-a-Doc settings (a.k.a. system) for calling clinic
 $prescription_pharm_sys = get_field('location_prescription_pharm_system', 'option'); // Text from Find-a-Doc settings (a.k.a. system) for calling pharmacy
+$prescription = ''; // Eliminate PHP errors
 
 if ($prescription_query) {
 	$prescription_info_type =  get_field('location_prescription_type'); // Which preset or custom text?
@@ -204,14 +240,27 @@ add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
 get_header();
 
 while ( have_posts() ) : the_post(); ?>
-<?php $map = get_field('location_map'); ?>
+<?php 
+	$map = get_field('location_map', $post_id );
+	$location_address_1 = get_field('location_address_1', $post_id );
+	$location_address_2 = get_field('location_address_2', $post_id );
+	$location_city = get_field('location_city', $post_id);
+	$location_state = get_field('location_state', $post_id);
+	$location_zip = get_field('location_zip', $post_id);
+	$location_web_name = get_field('location_web_name', $post_id);
+	$location_url = get_field('location_url', $post_id);
+?>
 <div class="content-sidebar-wrap">
 <main class="location-item" id="genesis-content">
 	<section class="container-fluid p-0 p-md-10 location-info bg-white">
 		<div class="row mx-0 mx-md-n8">
 			<div class="col-12 col-md text">
 				<div class="content-width">
-					<h1 class="page-title"><?php the_title(); ?></h1>
+					<h1 class="page-title"><?php the_title(); ?>
+					<?php if ($parent_location) { ?>
+					<span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
+					<?php } // endif ?>
+					</h1>
 					<?php if ($location_closing_display) { ?>
 						<div class="alert alert-warning" role="alert">
 							<p>
@@ -243,12 +292,12 @@ while ( have_posts() ) : the_post(); ?>
 						</div>
 					<?php } // endif ?>
 					<h2 class="sr-only">Address</h2>
-					<p><?php echo get_field('location_address_1', get_the_ID() ); ?><br/>
-					<?php echo ( get_field('location_address_2' ) ? get_field('location_address_2') . '<br/>' : ''); ?>
-					<?php echo get_field('location_city'); ?>, <?php echo get_field('location_state'); ?> <?php echo get_field('location_zip', get_the_ID()); ?></p>
-						<p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php the_title(); ?>">Get Directions</a></p>
-					<?php if(get_field('location_web_name') && get_field('location_url')){ ?>
-						<p><a class="btn btn-secondary" href="<?php echo get_field('location_url')['url']; ?>"><?php echo get_field('location_web_name'); ?> <span class="far fa-external-link-alt"></span></span></a></p>
+					<p><?php echo $location_address_1; ?><br/>
+					<?php echo ( $location_address_2 ? $location_address_2 . '<br/>' : ''); ?>
+					<?php echo $location_city; ?>, <?php echo $location_state; ?> <?php echo $location_zip; ?></p>
+						<p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo get_the_title($post_id); ?>">Get Directions</a></p>
+					<?php if( $location_web_name && $location_url ){ ?>
+						<p><a class="btn btn-secondary" href="<?php echo $location_url['url']; ?>"><?php echo $location_web_name; ?> <span class="far fa-external-link-alt"></span></span></a></p>
 					<?php } 
 						// Schema data
 						$location_schema = '"address": {
@@ -313,6 +362,8 @@ while ( have_posts() ) : the_post(); ?>
 					</dl>
 					<?php
 					$phone_schema .= '],';
+					$hoursvary = $location_hours_group['location_hours_variable'];
+					$hoursvary_info = $location_hours_group['location_hours_variable_info'];
 					$hours247 = $location_hours_group['location_24_7'];
 					$modified = $location_hours_group['location_modified_hours'];
 					$modified_reason = $location_hours_group['location_modified_hours_reason'];
@@ -324,248 +375,257 @@ while ( have_posts() ) : the_post(); ?>
 					$modified_text = '';
 					$active_start = '';
 					$active_end = '';
-					if ($modified && $modified_hours) : 
-					?>
-					<?php 
-						
-						$modified_day = ''; // Previous Day
-						$modified_comment = ''; // Comment on previous day
-						// $modified_hours_schema .= 
-						$i = 1;
 
-						$today = strtotime("today");
-						$today_30 = strtotime("+30 days");
-
-						if( strtotime($modified_start) <= $today_30 && ( strtotime($modified_end_date) >= $today || !$modified_end ) ){
-							$modified_text .= $modified_reason;
-							$modified_text .= '<p class="small font-italic">These modified hours start on ' . $modified_start . ', ';
-							$modified_text .= $modified_end && $modified_end_date ? 'and are scheduled to end after ' . $modified_end_date . '.' : 'and will remain in effect until further notice.';
-							$modified_text .= '</p>';
-
-							foreach ($modified_hours as $modified_hour) {
-	
-								$modified_title = $modified_hour['location_modified_hours_title'];
-								$modified_info = $modified_hour['location_modified_hours_information'];
-								$modified_times = $modified_hour['location_modified_hours_times'];
-								$modified_hours247 = $modified_hour['location_modified_hours_24_7'];
-								$modified_text .= $modified_title ? '<h3 class="h4">'.$modified_title.'</h3>' : '';
-								$modified_text .= $modified_info ? $modified_info : '';
-	
-								if ($active_start > strtotime($modified_start) || '' == $active_start) {
-									$active_start = strtotime($modified_start);
-								}
-								if ( $active_end <= strtotime($modified_end_date) || !$modified_end ) {
-									if (!$modified_end) {
-										$active_end = 'TBD';
-									} else {
-										$active_end = strtotime($modified_end_date);
-									}
-								}
-								if ($modified_hours247):
-									echo '<strong>Open 24/7</strong>';
-									$modified_hours_schema = '"dayOfWeek": [
-										"Monday",
-										"Tuesday",
-										"Wednesday",
-										"Thursday",
-										"Friday",
-										"Saturday",
-										"Sunday"
-									],
-									"opens": "00:00",
-									"closes": "23:59"	
-									';
-								else :
-									if (is_array($modified_times) || is_object($modified_times)) {
-										$modified_text .= '<dl class="hours">';
-										foreach ( $modified_times as $modified_time ) {
-											
-											$modified_text .= $modified_day !== $modified_time['location_modified_hours_day'] ? '<dt>'. $modified_time['location_modified_hours_day'] .'</dt> ' : '';
-											$modified_text .= '<dd>';
-	
-											if (1 != $i) {
-												$modified_hours_schema .= '},
-												';
-											}
-											
-											$modified_hours_schema .= '{
-												';
-											$modified_hours_schema .= '"@type": "OpeningHoursSpecification",
-											';
-											$modified_hours_schema .= '"validFrom": "'. date("Y-m-d", strtotime($modified_start)) .'",
-											';
-											$modified_hours_schema .= $modified_end && $modified_end_date ? '"validThrough": "'. date("Y-m-d", strtotime($modified_end_date)) .'",
-												' : '';
-
-											if ('Mon - Fri' == $modified_time['location_modified_hours_day'] && !$modified_time['location_modified_hours_closed']) {
-												$modified_hours_schema .= '"dayOfWeek": [
-													"Monday",
-													"Tuesday",
-													"Wednesday",
-													"Thursday",
-													"Friday"
-												],
-												';
-											} else {
-												$modified_hours_schema .= '"dayOfWeek": "'. $modified_time['location_modified_hours_day'] .'",
-												'; //substr($modified_time['location_modified_hours_day'], 0, 2);
-											}
-		
-											if ( $modified_time['location_modified_hours_closed'] ) {
-												$modified_text .= 'Closed ';
-												$modified_hours_schema .= '"opens": "00:00",
-												"closes": "00:00"
-												';
-											} else {
-												$modified_text .= ( ( $modified_time['location_modified_hours_open'] && '00:00:00' != $modified_time['location_modified_hours_open'] )  ? '' . apStyleDate( $modified_time['location_modified_hours_open'] ) . ' &ndash; ' . apStyleDate( $modified_time['location_modified_hours_close'] ) . '' : '' );
-												$modified_hours_schema .= '"opens": "' . date('H:i', strtotime($modified_time['location_modified_hours_open'])) . '"';
-												$modified_hours_schema .= ',
-												"closes": "' . date('H:i', strtotime($modified_time['location_modified_hours_close'])) . '"
-												';
-											}
-											if ( $modified_time['location_modified_hours_comment'] ) {
-												$modified_text .= ' <br /><span class="subtitle">' .$modified_time['location_modified_hours_comment'] . '</span>';
-												$modified_comment = $modified_time['location_modified_hours_comment'];
-											} else {
-												$modified_comment = '';
-											}
-											$modified_text .= '</dd>';
-											$modified_day = $modified_time['location_modified_hours_day']; // Reset the day
-											$i++;
-											
-										} // endforeach
-										$modified_text .= '</dl>';
-									} // End if (array)
-								endif;
-							}
-						}
-					 
-						echo $modified_text ? '<h2>Modified Hours</h2>' . $modified_text: '';
-						
-					endif; // End Modified Hours
-					if ('' != $modified_hours_schema) {
-						$modified_hours_schema ='"openingHoursSpecification": [
-							' . $modified_hours_schema . '}
-							],
-							';
-					}
-					if (($active_start != '' && $active_start <= $today) && ( strtotime($active_end) > $today || $active_end == 'TBD' ) ) {
-						// Do Nothing;
-						// Future Option
+					if ( $hoursvary ) {
+						echo '<h2>Hours Vary</h2>';
+						echo $hoursvary_info;
 					} else {
-						$hours = $location_hours_group['location_hours'];
-						$hours_schema = '';
-						if ( $hours247 || $hours[0]['day'] ) : ?>
-						<h2><?php echo $modified_text ? 'Typical ' : ''; ?>Hours</h2>
-						<?php
-							if ($hours247):
-								echo '<strong>Open 24/7</strong>';
-								$hours_schema = '"openingHours": "Mo-Su",';
-							else :
-								echo '<dl class="hours">';
-								if( $hours ) {
-									$hours_text = '';
-									$day = ''; // Previous Day
-									$comment = ''; // Comment on previous day
-									$hours_schema = '"openingHours": [';
-									$i = 1;
-									foreach ($hours as $hour) :
-										// if( $day !== $hour['day'] || $comment ) { // change for single day
-											$hours_text .= $day !== $hour['day'] ? '<dt>'. $hour['day'] .'</dt> ' : '';
-											$hours_text .= '<dd>';
-											if (!$hour['closed']) {
+						if ($modified && $modified_hours) : 
+						?>
+						<?php 
+							
+							$modified_day = ''; // Previous Day
+							$modified_comment = ''; // Comment on previous day
+							// $modified_hours_schema .= 
+							$i = 1;
+
+							$today = strtotime("today");
+							$today_30 = strtotime("+30 days");
+
+							if( strtotime($modified_start) <= $today_30 && ( strtotime($modified_end_date) >= $today || !$modified_end ) ){
+								$modified_text .= $modified_reason;
+								$modified_text .= '<p class="small font-italic">These modified hours start on ' . $modified_start . ', ';
+								$modified_text .= $modified_end && $modified_end_date ? 'and are scheduled to end after ' . $modified_end_date . '.' : 'and will remain in effect until further notice.';
+								$modified_text .= '</p>';
+
+								foreach ($modified_hours as $modified_hour) {
+		
+									$modified_title = $modified_hour['location_modified_hours_title'];
+									$modified_info = $modified_hour['location_modified_hours_information'];
+									$modified_times = $modified_hour['location_modified_hours_times'];
+									$modified_hours247 = $modified_hour['location_modified_hours_24_7'];
+									$modified_text .= $modified_title ? '<h3 class="h4">'.$modified_title.'</h3>' : '';
+									$modified_text .= $modified_info ? $modified_info : '';
+		
+									if ($active_start > strtotime($modified_start) || '' == $active_start) {
+										$active_start = strtotime($modified_start);
+									}
+									if ( $active_end <= strtotime($modified_end_date) || !$modified_end ) {
+										if (!$modified_end) {
+											$active_end = 'TBD';
+										} else {
+											$active_end = strtotime($modified_end_date);
+										}
+									}
+									if ($modified_hours247):
+										echo '<strong>Open 24/7</strong>';
+										$modified_hours_schema = '"dayOfWeek": [
+											"Monday",
+											"Tuesday",
+											"Wednesday",
+											"Thursday",
+											"Friday",
+											"Saturday",
+											"Sunday"
+										],
+										"opens": "00:00",
+										"closes": "23:59"	
+										';
+									else :
+										if (is_array($modified_times) || is_object($modified_times)) {
+											$modified_text .= '<dl class="hours">';
+											foreach ( $modified_times as $modified_time ) {
+												
+												$modified_text .= $modified_day !== $modified_time['location_modified_hours_day'] ? '<dt>'. $modified_time['location_modified_hours_day'] .'</dt> ' : '';
+												$modified_text .= '<dd>';
+		
 												if (1 != $i) {
-													$hours_schema .= ', ';
+													$modified_hours_schema .= '},
+													';
 												}
+												
+												$modified_hours_schema .= '{
+													';
+												$modified_hours_schema .= '"@type": "OpeningHoursSpecification",
+												';
+												$modified_hours_schema .= '"validFrom": "'. date("Y-m-d", strtotime($modified_start)) .'",
+												';
+												$modified_hours_schema .= $modified_end && $modified_end_date ? '"validThrough": "'. date("Y-m-d", strtotime($modified_end_date)) .'",
+													' : '';
+
+												if ('Mon - Fri' == $modified_time['location_modified_hours_day'] && !$modified_time['location_modified_hours_closed']) {
+													$modified_hours_schema .= '"dayOfWeek": [
+														"Monday",
+														"Tuesday",
+														"Wednesday",
+														"Thursday",
+														"Friday"
+													],
+													';
+												} else {
+													$modified_hours_schema .= '"dayOfWeek": "'. $modified_time['location_modified_hours_day'] .'",
+													'; //substr($modified_time['location_modified_hours_day'], 0, 2);
+												}
+			
+												if ( $modified_time['location_modified_hours_closed'] ) {
+													$modified_text .= 'Closed ';
+													$modified_hours_schema .= '"opens": "00:00",
+													"closes": "00:00"
+													';
+												} else {
+													$modified_text .= ( ( $modified_time['location_modified_hours_open'] && '00:00:00' != $modified_time['location_modified_hours_open'] )  ? '' . apStyleDate( $modified_time['location_modified_hours_open'] ) . ' &ndash; ' . apStyleDate( $modified_time['location_modified_hours_close'] ) . '' : '' );
+													$modified_hours_schema .= '"opens": "' . date('H:i', strtotime($modified_time['location_modified_hours_open'])) . '"';
+													$modified_hours_schema .= ',
+													"closes": "' . date('H:i', strtotime($modified_time['location_modified_hours_close'])) . '"
+													';
+												}
+												if ( $modified_time['location_modified_hours_comment'] ) {
+													$modified_text .= ' <br /><span class="subtitle">' .$modified_time['location_modified_hours_comment'] . '</span>';
+													$modified_comment = $modified_time['location_modified_hours_comment'];
+												} else {
+													$modified_comment = '';
+												}
+												$modified_text .= '</dd>';
+												$modified_day = $modified_time['location_modified_hours_day']; // Reset the day
+												$i++;
+												
+											} // endforeach
+											$modified_text .= '</dl>';
+										} // End if (array)
+									endif;
+								}
+							}
+						
+							echo $modified_text ? '<h2>Modified Hours</h2>' . $modified_text: '';
+							
+						endif; // End Modified Hours
+						if ('' != $modified_hours_schema) {
+							$modified_hours_schema ='"openingHoursSpecification": [
+								' . $modified_hours_schema . '}
+								],
+								';
+						}
+						if (($active_start != '' && $active_start <= $today) && ( strtotime($active_end) > $today || $active_end == 'TBD' ) ) {
+							// Do Nothing;
+							// Future Option
+						} else {
+							$hours = $location_hours_group['location_hours'];
+							$hours_schema = '';
+							if ( $hours247 || $hours[0]['day'] ) : ?>
+							<h2><?php echo $modified_text ? 'Typical ' : ''; ?>Hours</h2>
+							<?php
+								if ($hours247):
+									echo '<strong>Open 24/7</strong>';
+									$hours_schema = '"openingHours": "Mo-Su",';
+								else :
+									echo '<dl class="hours">';
+									if( $hours ) {
+										$hours_text = '';
+										$day = ''; // Previous Day
+										$comment = ''; // Comment on previous day
+										$hours_schema = '"openingHours": [';
+										$i = 1;
+										foreach ($hours as $hour) :
+											// if( $day !== $hour['day'] || $comment ) { // change for single day
+												$hours_text .= $day !== $hour['day'] ? '<dt>'. $hour['day'] .'</dt> ' : '';
+												$hours_text .= '<dd>';
+												if (!$hour['closed']) {
+													if (1 != $i) {
+														$hours_schema .= ', ';
+													}
+													$hours_schema .= '"';
+												}
+												if ('Mon - Fri' == $hour['day'] && !$hour['closed']) {
+													$hours_schema .= 'Mo-Fr';
+												} elseif ( !$hour['closed'] ) {
+													$hours_schema .= substr($hour['day'], 0, 2);
+												}
+											// } else { // Changed for single day
+											// 	$hours_text .= ', ';
+											// }
+											if ( $hour['closed'] ) {
+												$hours_text .= 'Closed ';
+											} else {
+												$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] )  ? '' . apStyleDate( $hour['open'] ) . ' &ndash; ' . apStyleDate( $hour['close'] ) . '' : '' );
+												$hours_schema .= ' ' . date('H:i', strtotime($hour['open'])) . '-' . date('H:i', strtotime($hour['close']));
+											}
+											if ( $hour['comment'] ) {
+												$hours_text .= ' <br /><span class="subtitle">' .$hour['comment'] . '</span>';
+												$comment = $hour['comment'];
+											} else {
+												$comment = '';
+											}
+											// if( $day !== $hour['day'] && $comment ) { // change for single day
+												$hours_text .= '</dd>';
+											// }
+											$day = $hour['day']; // Reset the day
+											if (!$hour['closed']) {
 												$hours_schema .= '"';
 											}
-											if ('Mon - Fri' == $hour['day'] && !$hour['closed']) {
-												$hours_schema .= 'Mo-Fr';
-											} elseif ( !$hour['closed'] ) {
-												$hours_schema .= substr($hour['day'], 0, 2);
+											if (!$hour['closed']) {
+											$i++;
 											}
-										// } else { // Changed for single day
-										// 	$hours_text .= ', ';
-										// }
-										if ( $hour['closed'] ) {
-											$hours_text .= 'Closed ';
-										} else {
-											$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] )  ? '' . apStyleDate( $hour['open'] ) . ' &ndash; ' . apStyleDate( $hour['close'] ) . '' : '' );
-											$hours_schema .= ' ' . date('H:i', strtotime($hour['open'])) . '-' . date('H:i', strtotime($hour['close']));
-										}
-										if ( $hour['comment'] ) {
-											$hours_text .= ' <br /><span class="subtitle">' .$hour['comment'] . '</span>';
-											$comment = $hour['comment'];
-										} else {
-											$comment = '';
-										}
-										// if( $day !== $hour['day'] && $comment ) { // change for single day
-											$hours_text .= '</dd>';
-										// }
-										$day = $hour['day']; // Reset the day
-										if (!$hour['closed']) {
-											$hours_schema .= '"';
-										}
-										if (!$hour['closed']) {
-										$i++;
-										}
-									endforeach;
-									echo $hours_text;
-									$hours_schema .= '],';
-								} else {
-									echo '<dt>No information</dt>';
-								}
-								echo '</dl>';
-							endif;
-						$holidayhours = get_field('location_holiday_hours');
-						if ($holidayhours):
-							/**
-							 * Sort by date
-							 * if current date is before date & within 30 days
-							 * Display results
-							 */
-
-							$order = array();
-							// populate order
-							foreach( $holidayhours as $i => $row ) {	
-								$order[ $i ] = $row['date'];
-							}
-							
-							// multisort
-							array_multisort( $order, SORT_ASC, $holidayhours );
-
-							$i = 0;
-							foreach( $holidayhours as $row ):
-								$holidayDate = $row['date']; // Text
-								$holidayDateTime = DateTime::createFromFormat('m/d/Y', $holidayDate); // Date for evaluation
-								$dateNow = new DateTime("now", new DateTimeZone('America/Chicago') );
-								if (($dateNow < $holidayDateTime) && ($holidayDateTime->diff($dateNow)->days < 30)) {
-									if ( 0 == $i ) {
-										echo '<h3>Upcoming Holiday Hours</h3>';
-										echo '<dl class="hours">';
-										$i++;
-									}
-									echo '<dt>'. $row['label'] . '<br />' . $holidayDate . '<br/>';
-									echo '</dt>' . '<dd>';
-									if ( $row['closed'] ) {
-										echo $row['closed'] ? 'Closed</dd>': '';
+										endforeach;
+										echo $hours_text;
+										$hours_schema .= '],';
 									} else {
-										echo ( ( $hour['open'] && '00:00:00' != $row['open'] )  ? '' . apStyleDate( $row['open'] ) . ' &ndash; ' . apStyleDate( $row['close'] ) . ' ' : '' );
+										echo '<dt>No information</dt>';
 									}
-								}	
-							endforeach;
-							if ( 0 < $i ) {
-								echo '</dl>';
-							}
-						endif; ?>
-					<?php if ($location_hours_group['location_after_hours'] && !$location_hours_group['location_24_7']) { ?>
-					<h2>After Hours</h2>
-					<?php echo $location_hours_group['location_after_hours']; ?>
+									echo '</dl>';
+								endif;
+							$holidayhours = get_field('location_holiday_hours');
+							if ($holidayhours):
+								/**
+								 * Sort by date
+								 * if current date is before date & within 30 days
+								 * Display results
+								 */
+
+								$order = array();
+								// populate order
+								foreach( $holidayhours as $i => $row ) {	
+									$order[ $i ] = $row['date'];
+								}
+								
+								// multisort
+								array_multisort( $order, SORT_ASC, $holidayhours );
+
+								$i = 0;
+								foreach( $holidayhours as $row ):
+									$holidayDate = $row['date']; // Text
+									$holidayDateTime = DateTime::createFromFormat('m/d/Y', $holidayDate); // Date for evaluation
+									$dateNow = new DateTime("now", new DateTimeZone('America/Chicago') );
+									if (($dateNow < $holidayDateTime) && ($holidayDateTime->diff($dateNow)->days < 30)) {
+										if ( 0 == $i ) {
+											echo '<h3>Upcoming Holiday Hours</h3>';
+											echo '<dl class="hours">';
+											$i++;
+										}
+										echo '<dt>'. $row['label'] . '<br />' . $holidayDate . '<br/>';
+										echo '</dt>' . '<dd>';
+										if ( $row['closed'] ) {
+											echo $row['closed'] ? 'Closed</dd>': '';
+										} else {
+											echo ( ( $hour['open'] && '00:00:00' != $row['open'] )  ? '' . apStyleDate( $row['open'] ) . ' &ndash; ' . apStyleDate( $row['close'] ) . ' ' : '' );
+										}
+									}	
+								endforeach;
+								if ( 0 < $i ) {
+									echo '</dl>';
+								}
+							endif; ?>
+						
+
+						<?php endif;
+						} // endif
+					} // endif ( if $hoursvary )
+					if ($location_hours_group['location_after_hours'] && !$location_hours_group['location_24_7']) { ?>
+						<h2>After Hours</h2>
+						<?php echo $location_hours_group['location_after_hours']; ?>
 					<?php } elseif (!$location_hours_group['location_24_7']) { ?>
-					<h2>After Hours</h2>
-					<p>If you are in need of urgent or emergency care call 911 or go to your nearest emergency department at your local hospital.</p>
-					<?php } endif;
-					} ?>
+						<h2>After Hours</h2>
+						<p>If you are in need of urgent or emergency care call 911 or go to your nearest emergency department at your local hospital.</p>
+					<?php } // endif (after hours) ?>
 				</div>
 			</div>
 			<?php if ( $location_images_count ) { ?>
@@ -680,10 +740,15 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 		</section>
 	<?php } // endif ?>
-	<?php if ( get_field('location_about') || get_field('location_affiliation') || $prescription ) { 
-			$about = get_field('location_about');
-			$affiliation = get_field('location_affiliation');
-			$youtube_link = get_field('location_youtube_link');
+	<?php 
+		$location_about = get_field('location_about');
+		$location_affiliation = get_field('location_affiliation');
+		$location_youtube_link = get_field('location_youtube_link');
+	
+		if ( $location_about || $location_affiliation || $prescription ) { 
+			$about = $location_about;
+			$affiliation = $location_affiliation;
+			$youtube_link = $location_youtube_link;
 		?>
 		<section class="uams-module bg-auto">
 			<div class="container-fluid">
@@ -721,25 +786,29 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 		</section>
 	<?php } ?>
-	<?php if (get_field('location_parking') || get_field('location_direction') || get_field('location_parking_map')) : ?>
-	<?php $parking_map = get_field('location_parking_map'); ?>
+	<?php
+		$location_parking = get_field('location_parking', $post_id);
+		$location_direction = get_field('location_direction', $post_id);
+		$parking_map = get_field('location_parking_map', $post_id);
+	
+		if ( $location_parking || $location_direction || $parking_map ) : ?>
 		<section class="uams-module bg-auto">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12<?php echo $parking_map ? ' col-md-6' : ''  ?>">
 						<?php if ($parking_map) { ?>
 							<div class="module-body">
-							<h2><?php echo ( get_field('location_parking' ) ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
+							<h2><?php echo ( $location_parking || $parking_map ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
 						<?php } else { ?>
-							<h2 class="module-title"><?php echo ( get_field('location_parking' ) ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
+							<h2 class="module-title"><?php echo ( $location_parking ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
 							<div class="module-body">
 						<?php } // endif ?>
-							<?php echo get_field('location_parking'); ?>
+							<?php echo $location_parking; ?>
 							<?php if ( $parking_map ) { ?>
 								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>
 							<?php } // endif ?>
-							<?php echo ( get_field('location_parking') && get_field('location_direction') ? '<h3>Directions From the Parking Area</h3>' : ''); // Display the directions heading here if there is a value for parking. ?>
-							<?php echo get_field('location_direction'); ?>
+							<?php echo ( $location_parking && $location_direction ? '<h3>Directions From the Parking Area</h3>' : ''); // Display the directions heading here if there is a value for parking. ?>
+							<?php echo $location_direction; ?>
 						</div>
 					</div>
 					<?php if ( $parking_map ) { ?>
@@ -812,29 +881,33 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 		</section>
 	<?php endif; ?>
-	<?php if ( get_field('location_appointment') || get_field('location_appointment_bring')): ?>
+	<?php
+		$location_appointment = get_field('location_appointment');
+		$location_appointment_bring = get_field('location_appointment_bring');
+
+		if ( $location_appointment || $location_appointment_bring): ?>
 		<section class="uams-module bg-auto">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<?php if ( get_field('location_appointment') && get_field('location_appointment_bring') ) { ?>
+						<?php if ( $location_appointment && $location_appointment_bring ) { ?>
 							<h2 class="module-title">Appointment Information</h2>
 							<div class="module-body">
-								<?php echo get_field('location_appointment'); ?>
+								<?php echo $location_appointment; ?>
 								<h3>What to Bring to Your Appointment</h3>
-								<?php echo get_field('location_appointment_bring'); ?>
+								<?php echo $location_appointment_bring; ?>
 							</div>
 
-						<?php } elseif ( get_field('location_appointment') ) { ?>
+						<?php } elseif ( $location_appointment ) { ?>
 							<h2 class="module-title">Appointments</h2>
 							<div class="module-body">
-								<?php echo get_field('location_appointment'); ?>
+								<?php echo $location_appointment; ?>
 							</div>
 
-						<?php } elseif ( get_field('location_appointment_bring') ) { ?>
+						<?php } elseif ( $location_appointment_bring ) { ?>
 							<h2 class="module-title">What to Bring to Your Appointment</h2>
 							<div class="module-body">
-								<?php echo get_field('location_appointment_bring'); ?>
+								<?php echo $location_appointment_bring; ?>
 							</div>
 						<?php } // endif ?>
 					</div>
@@ -1019,8 +1092,10 @@ while ( have_posts() ) : the_post(); ?>
 		<?php } // endif
 	// End Telemedicine ?>
 	<?php // Portal
-		if ( get_field('location_portal') ) :
-			$portal = get_term(get_field('location_portal'), "portal");
+		$location_portal = get_field('location_portal');
+
+		if ( $location_portal ) :
+			$portal = get_term($location_portal, "portal");
 			$portal_slug = $portal->slug;
 			$portal_name = $portal->name;
 			$portal_content = get_field('portal_content', $portal);
@@ -1177,7 +1252,48 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
         </section>
 	<?php 
-    endif;
+	endif;
+	// Child locations
+	$current_id = get_the_ID();
+    if ( ( 0 != count( get_pages( array( 'child_of' => $current_id, 'post_type' => 'location' ) ) ) ) ) { // If none available, set to false
+        $args =  array(
+            "post_type" => "location",
+            "post_status" => "publish",
+			"post_parent" => $current_id,
+			'order' => 'ASC',
+			'orderby' => 'title',
+			'meta_query' => array(
+				array(
+					'key' => 'location_hidden',
+					'value' => '1',
+					'compare' => '!=',
+				)
+			),
+        );
+        $children = New WP_Query ( $args );
+        if ( $children->have_posts() ) { ?>
+            <section class="uams-module location-list bg-auto" id="sub-clinics" aria-labelledby="sub-location-title" >
+                <div class="container-fluid">
+                    <div class="row">
+						<div class="col-12">
+							<h2 class="module-title" id="sub-location-title"><span class="title">Additional Clinics Within <?php echo get_the_title(); ?></span></h2>
+							<div class="card-list-container">
+                                <div class="card-list">
+                            <?php
+                                while ( $children->have_posts() ) : $children->the_post();
+                                    $id = get_the_ID(); 
+                                    include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+                                endwhile;
+                                wp_reset_postdata(); ?>
+                                </div>
+                            </div>
+                        </div>
+					</div>
+				</div>
+            </section>
+        <?php
+        }
+    }
 	?>
 	<!-- Latest News -->
 	<!-- <section class="uams-module news-list bg-auto">
@@ -1237,7 +1353,7 @@ while ( have_posts() ) : the_post(); ?>
   <?php echo $condition_schema; ?>
   <?php echo $location_schema; ?>
   <?php echo $modified_hours_schema; ?>
-  <?php echo $hours_schema; ?>
+  <?php echo $hoursvary ? '' : $hours_schema; ?>
   <?php echo $phone_schema; ?>
   "logo": "<?php echo get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png'; ?>"
 }
