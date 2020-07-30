@@ -117,6 +117,7 @@ function be_remove_title_from_single_crumb( $crumb, $args ) { // Because BE is t
 }
 add_filter( 'genesis_single_crumb', 'be_remove_title_from_single_crumb', 10, 2 );
 
+// SEOPress Breadcrumbs Fix
 function sp_change_title_from_provider_crumb( $crumbs ) { // SEOPress
     global $full_name;
     $crumb = array_pop($crumbs);
