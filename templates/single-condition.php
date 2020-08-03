@@ -159,7 +159,7 @@
 				?>
 				<?php the_content(); ?>
 				<?php 
-					if ( $medline_type && 'none' != $medline_type && $medline_code ) {
+					if ( !empty($medline_type) && 'none' != $medline_type && !empty($medline_code) ) {
 						echo display_medline_api_data( trim($medline_code), $medline_type );
 					}
 				?>
