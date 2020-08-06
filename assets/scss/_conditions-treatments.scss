@@ -69,7 +69,9 @@
                     margin: map-get($spacers, 2);
 
                     a {
-                        background-color: $white;
+                        &:not(:hover) {
+                            background-color: $white;
+                        }
                     }
                 }
             }
