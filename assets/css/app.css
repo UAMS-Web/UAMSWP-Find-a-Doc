@@ -546,7 +546,7 @@
   margin: .5rem;
 }
 
-.conditions-treatments .list-container.list-container-rows .list li a {
+.conditions-treatments .list-container.list-container-rows .list li a:not(:hover) {
   background-color: #fff;
 }
 
