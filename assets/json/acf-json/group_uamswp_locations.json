@@ -30,55 +30,6 @@
     "active": true,
     "description": "",
     "fields": {
-        "field_location_parent": {
-            "key": "field_location_parent",
-            "name": "location_parent",
-            "type": "true_false",
-            "label": "Does it have a parent?",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        "field_location_parent_id": {
-            "key": "field_location_parent_id",
-            "name": "location_parent_id",
-            "type": "post_object",
-            "label": "Parent Location",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_parent",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "location"
-            ],
-            "taxonomy": "",
-            "allow_null": 1,
-            "multiple": 0,
-            "return_format": "id",
-            "ui": 1
-        },
         "field_location_address_tab": {
             "key": "field_location_address_tab",
             "name": "",
@@ -86,15 +37,7 @@
             "label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Address",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_parent",
-                        "operator": "!=",
-                        "value": "1"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -108,7 +51,7 @@
             "name": "location_address_1",
             "type": "text",
             "label": "Address",
-            "instructions": "Use the abbreviations Ave., Blvd. and St. Spell out all other similar words (alley, drive, road, terrace, etc.).<br /><br />Always use figures for an address number: 9 Morningside Circle.<br /><br />Spell out and capitalize First through Ninth when used as street names; use figures for 10th and above: 7 Fifth Ave., 100 21st St.<br /><br />Abbreviate compass points used to indicate directional ends of a street or quadrants of a city in a numbered address: 222 E. 42nd St., 562 W. 43rd St., 600 K St. NW.",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -127,7 +70,7 @@
             "name": "location_address_2",
             "type": "text",
             "label": "Address (2)",
-            "instructions": "If the clinic is within a building, add the building name here, followed by the floor number and suite (if applicable).<br /><br />For the floor number, spell out first through ninth. Use figures starting with 10th. (first, second, 10th, 25th, etc.)<br /><br />Example: 'Outpatient Center, Second Floor, Suite 2A'",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -261,7 +204,7 @@
             "name": "location_map",
             "type": "google_map",
             "label": "Map",
-            "instructions": "Place the pin on the entrance to the building.",
+            "instructions": "",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -279,7 +222,7 @@
             "name": "location_region",
             "type": "taxonomy",
             "label": "Region",
-            "instructions": "The geographical region of Arkansas",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -335,15 +278,7 @@
             "label": "<i class=\"dashicons-randomize dashicons\"><\/i> Parking &amp; Directions",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_parent",
-                        "operator": "!=",
-                        "value": "1"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -351,25 +286,6 @@
             },
             "placement": "top",
             "endpoint": 0
-        },
-        "field_location_parking": {
-            "key": "field_location_parking",
-            "name": "location_parking",
-            "type": "wysiwyg",
-            "label": "Parking Instructions",
-            "instructions": "Give information about the parking situation, even if it's as simple as 'There is free parking available in front of the entrance.'",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 0,
-            "delay": 0
         },
         "field_location_parking_map": {
             "key": "field_location_parking_map",
@@ -389,12 +305,12 @@
             "zoom": 14,
             "height": 400
         },
-        "field_location_direction": {
-            "key": "field_location_direction",
-            "name": "location_direction",
+        "field_location_parking": {
+            "key": "field_location_parking",
+            "name": "location_parking",
             "type": "wysiwyg",
-            "label": "Directions From Parking Area",
-            "instructions": "Once the patient has parked, how do they get from their vehicle to the entrance to the actual clinic?",
+            "label": "Parking Instructions",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -405,7 +321,26 @@
             "default_value": "",
             "tabs": "all",
             "toolbar": "full",
-            "media_upload": 0,
+            "media_upload": 1,
+            "delay": 0
+        },
+        "field_location_direction": {
+            "key": "field_location_direction",
+            "name": "location_direction",
+            "type": "wysiwyg",
+            "label": "Directions From Parking Area",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
             "delay": 0
         },
         "field_location_details_tab": {
@@ -440,7 +375,7 @@
             "default_value": "",
             "tabs": "all",
             "toolbar": "full",
-            "media_upload": 0,
+            "media_upload": 1,
             "delay": 0
         },
         "field_location_short_desc": {
@@ -466,8 +401,8 @@
             "key": "field_location_youtube_link",
             "name": "location_youtube_link",
             "type": "url",
-            "label": "Featured Video",
-            "instructions": "Embeds a video player after the Location description. Supports YouTube or Vimeo. Add the full URL, including https:\/\/",
+            "label": "Youtube Link",
+            "instructions": "Full URL, including https:\/\/",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -939,7 +874,7 @@
             "default_value": "",
             "tabs": "all",
             "toolbar": "full",
-            "media_upload": 0,
+            "media_upload": 1,
             "delay": 0
         },
         "field_location_appointment_bring": {
@@ -1180,65 +1115,6 @@
             "placement": "top",
             "endpoint": 0
         },
-        "field_location_image_override_parent": {
-            "key": "field_location_image_override_parent",
-            "name": "location_image_override_parent",
-            "type": "true_false",
-            "label": "Override Parent Images?",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_parent",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        "field_location_image_override_parent_featured": {
-            "key": "field_location_image_override_parent_featured",
-            "name": "location_image_override_parent_featured",
-            "type": "true_false",
-            "label": "Override Parent Featured Image?",
-            "instructions": "To remove the parent featured image, select Yes and leave image blank",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_parent",
-                        "operator": "==",
-                        "value": "1"
-                    },
-                    {
-                        "field": "field_location_image_override_parent",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
         "field_location_featured_image": {
             "key": "field_location_featured_image",
             "label": "Featured Image",
@@ -1246,27 +1122,7 @@
             "type": "image",
             "instructions": "Select an image that will be used on card layouts, schema data, social sharing, etc.<br />You can select an image that is also used as the Wayfinding Photo or in the Photo Gallery.<br />The photo orientation must be landscape / horizontal.<br />Minimum dimensions: 1200x630.",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_parent",
-                        "operator": "!=",
-                        "value": "1"
-                    }
-                ],
-                [
-                    {
-                        "field": "field_location_image_override_parent",
-                        "operator": "==",
-                        "value": "1"
-                    },
-                    {
-                        "field": "field_location_image_override_parent_featured",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -1287,38 +1143,6 @@
             "acfe_validate": "",
             "acfe_update": ""
         },
-        "field_location_image_override_parent_wayfinding": {
-            "key": "field_location_image_override_parent_wayfinding",
-            "name": "location_image_override_parent_wayfinding",
-            "type": "true_false",
-            "label": "Override Parent Wayfinding Photo?",
-            "instructions": "To remove the parent wayfinding photo, select Yes and leave photo blank",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_parent",
-                        "operator": "==",
-                        "value": "1"
-                    },
-                    {
-                        "field": "field_location_image_override_parent",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
         "field_location_wayfinding_photo": {
             "key": "field_location_wayfinding_photo",
             "label": "Wayfinding Photo",
@@ -1326,27 +1150,7 @@
             "type": "image",
             "instructions": "Select an image that will help the patient find the appropriate building from the road.<br />The photo orientation must be landscape / horizontal.<br />Minimum dimensions: 1984x1116",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_parent",
-                        "operator": "!=",
-                        "value": "1"
-                    }
-                ],
-                [
-                    {
-                        "field": "field_location_image_override_parent",
-                        "operator": "==",
-                        "value": "1"
-                    },
-                    {
-                        "field": "field_location_image_override_parent_wayfinding",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -1367,38 +1171,6 @@
             "acfe_validate": "",
             "acfe_update": ""
         },
-        "field_location_image_override_parent_gallery": {
-            "key": "field_location_image_override_parent_gallery",
-            "name": "location_image_override_parent_gallery",
-            "type": "true_false",
-            "label": "Override Parent Photo Gallery?",
-            "instructions": "To remove the parent gallery, select Yes and leave gallery empty",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_parent",
-                        "operator": "==",
-                        "value": "1"
-                    },
-                    {
-                        "field": "field_location_image_override_parent",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
         "field_location_photo_gallery": {
 			"key": "field_location_photo_gallery",
 			"label": "Photo Gallery",
@@ -1406,27 +1178,7 @@
 			"type": "gallery",
 			"instructions": "You may select up to four images.<br />These could include a photo of the interior entrance to the clinic or photos of the clinic in use.<br />The photo orientation must be landscape / horizontal.<br />Minimum dimensions: 1984x1116",
 			"required": 0,
-			"conditional_logic": [
-                [
-                    {
-                        "field": "field_location_parent",
-                        "operator": "!=",
-                        "value": "1"
-                    }
-                ],
-                [
-                    {
-                        "field": "field_location_image_override_parent",
-                        "operator": "==",
-                        "value": "1"
-                    },
-                    {
-                        "field": "field_location_image_override_parent_gallery",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -1518,67 +1270,13 @@
                     "esc_html": 0
                 },
                 {
-                    "key": "field_location_hours_variable",
-                    "name": "location_hours_variable",
-                    "type": "true_false",
-                    "label": "Do the location's hours vary?",
-                    "instructions": "For example, does this location operate only periodically or as needed?",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "message": "",
-                    "default_value": 0,
-                    "ui": 1,
-                    "ui_on_text": "",
-                    "ui_off_text": ""
-                },
-                {
-                    "key": "field_location_hours_variable_info",
-                    "name": "location_hours_variable_info",
-                    "type": "wysiwyg",
-                    "label": "Variable Hours Information",
-                    "instructions": "Describe how the hours work for this location.",
-                    "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_location_hours_variable",
-                                "operator": "==",
-                                "value": "1"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "tabs": "all",
-                    "toolbar": "basic",
-                    "media_upload": 0,
-                    "delay": 0
-                },
-                {
                     "key": "field_location_24_7",
                     "name": "location_24_7",
                     "type": "true_false",
                     "label": "Is the location typically available 24/7?",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_location_hours_variable",
-                                "operator": "!=",
-                                "value": "1"
-                            }
-                        ]
-                    ],
+                    "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -1595,15 +1293,10 @@
                     "name": "location_hours",
                     "type": "repeater",
                     "label": "Typical Hours",
-                    "instructions": "Set the time for all seven days, beginning with Sunday.",
+                    "instructions": "Set the time for all seven days.",
                     "required": 0,
                     "conditional_logic": [
                         [
-                            {
-                                "field": "field_location_hours_variable",
-                                "operator": "!=",
-                                "value": "1"
-                            },
                             {
                                 "field": "field_location_24_7",
                                 "operator": "!=",
@@ -1754,7 +1447,7 @@
                     "name": "location_after_hours",
                     "type": "wysiwyg",
                     "label": "After Hours Information",
-                    "instructions": "Anything added here will override the default message, which is 'If you are in need of urgent or emergency care call 911 or go to your nearest emergency department at your local hospital.'",
+                    "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -1775,15 +1468,7 @@
                     "type": "tab",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_location_hours_variable",
-                                "operator": "!=",
-                                "value": "1"
-                            }
-                        ]
-                    ],
+                    "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -1975,7 +1660,7 @@
                             "label": "Information",
                             "name": "location_modified_hours_information",
                             "type": "wysiwyg",
-                            "instructions": "This field can include a description of the modification if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning. Another would be if the modification was for a single day.<br /><br />Or you can add information in addition to the structured days and hours.",
+                            "instructions": "This field can include a description of the modification if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.<br /><br />Or you can add information in addition to the structured days and hours.",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -2632,7 +2317,7 @@
                     "label": "Reason for Modified Telemedicine Hours",
                     "name": "location_telemed_modified_hours_reason",
                     "type": "wysiwyg",
-                    "instructions": "Describe the overall reason the hours are being modified. This might be because of a holiday or public health emergency.<br /><br />This field can also include a description of the modification, if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning. Another would be if the modification was for a single day.<br /><br />The date range will be displayed automatically, so that does not have to be included in this field..",
+                    "instructions": "Describe the overall reason the hours are being modified. This might be because of a holiday or public health emergency.<br /><br />This field can also include a description of the modification, if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.<br /><br />The date range will be displayed automatically, so that does not have to be included in this field..",
                     "required": 1,
                     "conditional_logic": [
                         [
@@ -2942,7 +2627,7 @@
             "key": "field_location_conditions",
             "name": "location_conditions",
             "type": "taxonomy",
-            "label": "Conditions",
+            "label": "Conditions (Orig)",
             "instructions": "The conditions will display in alphabetical order.",
             "required": 0,
             "conditional_logic": 0,
@@ -2961,11 +2646,40 @@
             "acfe_bidirectional": 0,
             "multiple": 0
         },
+        "field_location_conditions_cpt": {
+            "key": "field_location_conditions_cpt",
+            "name": "location_conditions_cpt",
+            "type": "post_object",
+            "label": "Conditions",
+            "instructions": "The conditions will display in alphabetical order.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "post_type": [
+                "condition"
+            ],
+            "taxonomy": "",
+            "allow_null": 1,
+            "multiple": 1,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_condition_locations"
+            },
+            "acfe_validate": "",
+            "acfe_update": "",
+            "ui": 1
+        },
         "field_location_treatments": {
             "key": "field_location_treatments",
             "name": "location_treatments",
             "type": "taxonomy",
-            "label": "Treatments & Procedures",
+            "label": "Treatments & Procedures (Orig)",
             "instructions": "The treatments and procedures will display in alphabetical order.",
             "required": 0,
             "conditional_logic": 0,
@@ -2983,6 +2697,35 @@
             "return_format": "id",
             "acfe_bidirectional": 0,
             "multiple": 0
+        },
+        "field_location_treatments_cpt": {
+            "key": "field_location_treatments_cpt",
+            "name": "location_treatments_cpt",
+            "type": "post_object",
+            "label": "Treatments & Procedures",
+            "instructions": "The treatments and procedures will display in alphabetical order.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "post_type": [
+                "treatment"
+            ],
+            "taxonomy": "",
+            "allow_null": 1,
+            "multiple": 1,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_treatment_procedure_locations"
+            },
+            "acfe_validate": "",
+            "acfe_update": "",
+            "ui": 1
         },
         "field_location_expertise": {
             "key": "field_location_expertise",
@@ -3008,7 +2751,10 @@
             "min": "",
             "max": "",
             "return_format": "id",
-            "acfe_bidirectional": "0",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_expertise_locations"
+            },
             "acfe_validate": "",
             "acfe_update": ""
         },
@@ -3174,7 +2920,10 @@
             "min": "",
             "max": "",
             "return_format": "id",
-            "acfe_bidirectional": "0",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_physician_locations"
+            },
             "acfe_validate": "",
             "acfe_update": ""
         },
