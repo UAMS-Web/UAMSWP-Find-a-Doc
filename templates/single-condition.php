@@ -252,14 +252,13 @@
 		<?php } // endif ?>
 		<?php // Check if any doctors are connected	
 			if ($physicians) {
-				// $physiciansCount = '';
-				// $physiciansCount = count($physicians);
+				$physiciansCount = count($physicians);
 				$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12)
 				$postsCutoff = 18; // Set cutoff value
 				$postsCountClass = $postsPerPage;
-				// if($physiciansCount <= $postsCutoff ) {
-				// 		$postsPerPage = -1;
-				// 	}
+				if($physiciansCount <= $postsCutoff ) {
+					$postsPerPage = -1;
+				}
 				$args = (array(
 					'post_type' => "provider",
 					"post_status" => "publish",
