@@ -112,6 +112,16 @@ function be_remove_title_from_single_crumb( $crumb, $args ) { // Because BE is t
 }
 add_filter( 'genesis_single_crumb', 'be_remove_title_from_single_crumb', 10, 2 );
 
+// SEOPress Breadcrumbs Fix
+function sp_change_title_from_provider_crumb( $crumbs ) { // SEOPress
+    global $full_name;
+    $crumb = array_pop($crumbs);
+    $provider_name = array($full_name, get_permalink());
+    array_push($crumbs, $provider_name);
+    return $crumbs;
+}
+add_filter('seopress_pro_breadcrumbs_crumbs', 'sp_change_title_from_provider_crumb', 20);
+
 get_header();
 
 while ( have_posts() ) : the_post(); 
