@@ -44,12 +44,13 @@ function asp_custom_link_meta_results( $results ) {
 function uamswp_admin_scripts ( $hook ) {
      
     if( $hook == 'post.php' ) {
-        wp_enqueue_script( 'acf-admin-js', UAMS_FAD_ROOT_URL . 'admin/js/acf-admin.js', array('jquery'), null, true );
+		wp_enqueue_script( 'acf-admin-js', UAMS_FAD_ROOT_URL . 'admin/js/acf-admin.js', array('jquery'), null, true );
+		wp_enqueue_script( 'medline-acf-js', UAMS_FAD_ROOT_URL . 'admin/js/acf-medline.js', array('jquery'), null, true );
         // wp_enqueue_stylesheet( 'plugin-main-style', plugins_url( 'css/plugin-main.css', dirname( __FILE__) ) ); 
 	}
-	if( $hook == 'term.php' || $hook == 'edit-tags.php') {
-		wp_enqueue_script( 'medline-acf-js', UAMS_FAD_ROOT_URL . 'admin/js/acf-medline.js', array('jquery'), null, true );
-	}
+	// if( $hook == 'term.php' || $hook == 'edit-tags.php') {
+	// 	wp_enqueue_script( 'medline-acf-js', UAMS_FAD_ROOT_URL . 'admin/js/acf-medline.js', array('jquery'), null, true );
+	// }
 }   
 add_action('admin_enqueue_scripts', 'uamswp_admin_scripts');
 
@@ -315,7 +316,7 @@ function rlv_tax_excerpt_term_fields($content, $term) {
 }
 // AJAX
 function uamswp_ajax_scripts() { 
-    if ( is_singular( 'location' ) || is_singular( 'expertise' ) || is_tax( 'condition' ) || is_tax( 'treatment' ) ) { // Only run on these template pages
+    if ( is_singular( 'location' ) || is_singular( 'expertise' ) || is_singular( 'condition' ) || is_singular( 'treatment' ) ) { // Only run on these template pages
         // Register the script
         wp_register_script( 'uamswp-loadmore', UAMS_FAD_ROOT_URL . 'assets/js/uamswp-loadmore.js', array('jquery'), false, true );
     
