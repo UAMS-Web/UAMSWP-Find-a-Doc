@@ -4,7 +4,7 @@
 if ( !function_exists('apStyleDate') ) {
 	function apStyleDate($date){
 
-		$date = strftime("%l:%M %P", strtotime($date));
+		$date = strftime("%l:%M %p", strtotime($date));
 	
 		$date = str_replace(":00", "", $date);
 		$date = str_replace("m", ".m.", $date);
@@ -133,7 +133,7 @@ function get_taxonomy_archive_link( $taxonomy ) {
   // }
   // add_filter( 'genesis_single_crumb', 'uamswp_add_blog_crumb', 10, 2 );
   // add_filter( 'genesis_archive_crumb', 'uamswp_add_blog_crumb', 10, 2 );
-  add_filter('seopress_pro_breadcrumbs_crumbs', 'uamswp_fad_taxonomy_breadcrumbs_crumbs');
+  // add_filter('seopress_pro_breadcrumbs_crumbs', 'uamswp_fad_taxonomy_breadcrumbs_crumbs');
   function uamswp_fad_taxonomy_breadcrumbs_crumbs($crumbs) {
     if ( is_singular( 'condition' ) || is_singular( 'treatment' ) || is_tax( 'condition' ) || is_tax( 'treatment' ) ) {
       $taxonomy = array(get_taxonomy( get_queried_object()->taxonomy )->labels->name, get_taxonomy_archive_link( get_queried_object()->taxonomy ));
