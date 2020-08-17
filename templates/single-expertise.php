@@ -88,23 +88,6 @@ function uamswp_expertise_physicians() {
                     </div>
                 </div>
             </div>
-            <?php 
-            $terms = get_terms( 'condition', array(
-                // 'slug' => 'acid-reflux'
-                'hide_empty' => false
-            ) );
-            // $term_id = $terms[0]->term_id;
-            // $meta = get_term_meta($term_id);
-            // var_dump($terms);
-            // echo $term_id;
-            // var_dump($meta);
-            // foreach($meta as $key=>$val){
-            //     echo $key . ' : ' . $val[0] . '<br/>';
-            // }
-            foreach ( $terms as $term ) {
-                echo ($term->name) . '<br/>';
-            }
-            ?>
         </section>
     <?php }
     }
