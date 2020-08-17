@@ -455,7 +455,7 @@ while ( have_posts() ) : the_post();
         </section>
         <?php if ($eligible_appt): ?>
         <?php 
-            $appointment_phone_name = 'the main UAMS appointment line'; // default (UAMS)
+            $appointment_phone_name = 'the UAMS Health appointment line'; // default (UAMS)
             $appointment_phone = '5016868000'; // default (UAMS)
             $show_portal = false;
             // Portal
