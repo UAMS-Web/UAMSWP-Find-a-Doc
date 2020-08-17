@@ -33,15 +33,13 @@ function uamswp_add_entry_class( $attributes ) {
 }
 add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
-add_filter( 'genesis_entry_content', 'uamswp_expertise_keywords', 8);
+add_filter( 'genesis_entry_content', 'uamswp_expertise_keywords', 8 );
 add_action( 'genesis_entry_content', 'uamswp_expertise_youtube', 12 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_conditions', 8 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_conditions_cpt', 8 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_treatments', 10 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_treatments_cpt', 10 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 12 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 14 );
-add_action( 'genesis_after_entry', 'uamswp_list_child_expertise', 16);
+add_action( 'genesis_after_entry', 'uamswp_list_child_expertise', 8 );
+add_action( 'genesis_after_entry', 'uamswp_expertise_conditions', 10 );
+add_action( 'genesis_after_entry', 'uamswp_expertise_treatments', 12 );
+add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 14 );
+add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 16 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 20 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_appointment', 22 );
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
@@ -90,23 +88,6 @@ function uamswp_expertise_physicians() {
                     </div>
                 </div>
             </div>
-            <?php 
-            $terms = get_terms( 'condition', array(
-                // 'slug' => 'acid-reflux'
-                'hide_empty' => false
-            ) );
-            // $term_id = $terms[0]->term_id;
-            // $meta = get_term_meta($term_id);
-            // var_dump($terms);
-            // echo $term_id;
-            // var_dump($meta);
-            // foreach($meta as $key=>$val){
-            //     echo $key . ' : ' . $val[0] . '<br/>';
-            // }
-            foreach ( $terms as $term ) {
-                echo ($term->name) . '<br/>';
-            }
-            ?>
         </section>
     <?php }
     }

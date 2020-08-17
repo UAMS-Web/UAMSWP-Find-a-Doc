@@ -30,6 +30,55 @@
     "active": true,
     "description": "",
     "fields": {
+        "field_location_parent": {
+            "key": "field_location_parent",
+            "name": "location_parent",
+            "type": "true_false",
+            "label": "Does it have a parent?",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_location_parent_id": {
+            "key": "field_location_parent_id",
+            "name": "location_parent_id",
+            "type": "post_object",
+            "label": "Parent Location",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "location"
+            ],
+            "taxonomy": "",
+            "allow_null": 1,
+            "multiple": 0,
+            "return_format": "id",
+            "ui": 1
+        },
         "field_location_address_tab": {
             "key": "field_location_address_tab",
             "name": "",
@@ -37,7 +86,15 @@
             "label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Address",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -278,7 +335,15 @@
             "label": "<i class=\"dashicons-randomize dashicons\"><\/i> Parking &amp; Directions",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -1115,6 +1180,65 @@
             "placement": "top",
             "endpoint": 0
         },
+        "field_location_image_override_parent": {
+            "key": "field_location_image_override_parent",
+            "name": "location_image_override_parent",
+            "type": "true_false",
+            "label": "Override Parent Images?",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_location_image_override_parent_featured": {
+            "key": "field_location_image_override_parent_featured",
+            "name": "location_image_override_parent_featured",
+            "type": "true_false",
+            "label": "Override Parent Featured Image?",
+            "instructions": "To remove the parent featured image, select Yes and leave image blank",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_image_override_parent",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
         "field_location_featured_image": {
             "key": "field_location_featured_image",
             "label": "Featured Image",
@@ -1122,7 +1246,27 @@
             "type": "image",
             "instructions": "Select an image that will be used on card layouts, schema data, social sharing, etc.<br />You can select an image that is also used as the Wayfinding Photo or in the Photo Gallery.<br />The photo orientation must be landscape / horizontal.<br />Minimum dimensions: 1200x630.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_location_image_override_parent",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_image_override_parent_featured",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -1143,6 +1287,38 @@
             "acfe_validate": "",
             "acfe_update": ""
         },
+        "field_location_image_override_parent_wayfinding": {
+            "key": "field_location_image_override_parent_wayfinding",
+            "name": "location_image_override_parent_wayfinding",
+            "type": "true_false",
+            "label": "Override Parent Wayfinding Photo?",
+            "instructions": "To remove the parent wayfinding photo, select Yes and leave photo blank",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_image_override_parent",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
         "field_location_wayfinding_photo": {
             "key": "field_location_wayfinding_photo",
             "label": "Wayfinding Photo",
@@ -1150,7 +1326,27 @@
             "type": "image",
             "instructions": "Select an image that will help the patient find the appropriate building from the road.<br />The photo orientation must be landscape / horizontal.<br />Minimum dimensions: 1984x1116",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_location_image_override_parent",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_image_override_parent_wayfinding",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -1171,6 +1367,38 @@
             "acfe_validate": "",
             "acfe_update": ""
         },
+        "field_location_image_override_parent_gallery": {
+            "key": "field_location_image_override_parent_gallery",
+            "name": "location_image_override_parent_gallery",
+            "type": "true_false",
+            "label": "Override Parent Photo Gallery?",
+            "instructions": "To remove the parent gallery, select Yes and leave gallery empty",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_image_override_parent",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
         "field_location_photo_gallery": {
 			"key": "field_location_photo_gallery",
 			"label": "Photo Gallery",
@@ -1178,7 +1406,27 @@
 			"type": "gallery",
 			"instructions": "You may select up to four images.<br />These could include a photo of the interior entrance to the clinic or photos of the clinic in use.<br />The photo orientation must be landscape / horizontal.<br />Minimum dimensions: 1984x1116",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_location_image_override_parent",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_image_override_parent_gallery",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -1270,13 +1518,67 @@
                     "esc_html": 0
                 },
                 {
+                    "key": "field_location_hours_variable",
+                    "name": "location_hours_variable",
+                    "type": "true_false",
+                    "label": "Do the location's hours vary?",
+                    "instructions": "For example, does this location operate only periodically or as needed?",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_location_hours_variable_info",
+                    "name": "location_hours_variable_info",
+                    "type": "wysiwyg",
+                    "label": "Variable Hours Information",
+                    "instructions": "Describe how the hours work for this location.",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_hours_variable",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0
+                },
+                {
                     "key": "field_location_24_7",
                     "name": "location_24_7",
                     "type": "true_false",
                     "label": "Is the location typically available 24/7?",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_hours_variable",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -1297,6 +1599,11 @@
                     "required": 0,
                     "conditional_logic": [
                         [
+                            {
+                                "field": "field_location_hours_variable",
+                                "operator": "!=",
+                                "value": "1"
+                            },
                             {
                                 "field": "field_location_24_7",
                                 "operator": "!=",
@@ -1468,7 +1775,15 @@
                     "type": "tab",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_hours_variable",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
