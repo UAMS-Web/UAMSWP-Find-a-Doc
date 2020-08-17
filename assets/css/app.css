@@ -1217,7 +1217,7 @@
 
 @media (max-width:1200px) {
   .doctor-list .list-col .list-col-header .result-count p {
-    font-size: calc(1.26562rem + .1875vw);
+    font-size: calc(1.26563rem + .1875vw);
   }
 }
 
