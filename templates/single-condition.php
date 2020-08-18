@@ -30,6 +30,8 @@
 	}
 	add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
 
+	$excerpt = get_the_excerpt(); // get_field( 'condition_short_desc' );
+	$excerpt_user = true;
 	if (empty($excerpt)){
 		$excerpt_user = false;
 		if ($content){
@@ -56,8 +58,6 @@
 	// ACF Fields - get_fields
 	$clinical_trials = get_field('condition_clinical_trials');
 	$content = get_the_content(); //get_field( 'condition_content' );
-	$excerpt = get_the_excerpt(); // get_field( 'condition_short_desc' );
-	$excerpt_user = true;
 	$video = get_field('condition_youtube_link');
 	$treatments_cpt = get_field('condition_treatments');
 	$expertise = get_field('condition_expertise');
