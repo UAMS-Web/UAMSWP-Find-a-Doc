@@ -129,7 +129,7 @@
 	if ($conditions_cpt && array_filter($conditions_cpt)) { $treatment_field_classes .= ' has-condition'; } // Treatments
     if ($expertise && array_filter($expertise)) { $treatment_field_classes .= ' has-expertise'; } // Areas of Expertise
     if ($locations && $location_valid) { $treatment_field_classes .= ' has-location'; } // Locations
-    if ($physicians && !empty($physicians)) { $treatment_field_classes .= ' has-provider'; } // Providers
+    if ($physicians && array_filter($physicians)) { $treatment_field_classes .= ' has-provider'; } // Providers
 	
  ?>
 <div class="content-sidebar-wrap">
