@@ -54,7 +54,7 @@
 	   get_header();
 
 	// ACF Fields - get_fields
-
+	$keywords = get_field('condition_alternate');
 	$clinical_trials = get_field('condition_clinical_trials');
 	$content = get_the_content(); //get_field( 'condition_content' );
 	$excerpt = get_the_excerpt(); // get_field( 'condition_short_desc' );
