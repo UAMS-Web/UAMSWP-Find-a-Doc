@@ -121,7 +121,7 @@
 
 	// Classes for indicating presence of content
     $treatment_field_classes = '';	
-	if ($keywords && !empty($keywords)) { $treatment_field_classes .= ' has-keywords'; } // Alternate names
+	if ($keywords && array_filter($keywords)) { $treatment_field_classes .= ' has-keywords'; } // Alternate names
     if ($clinical_trials && !empty($clinical_trials)) { $treatment_field_classes .= ' has-clinical-trials'; } // Display clinical trials block
     if ($content && !empty($content)) { $treatment_field_classes .= ' has-content'; } // Body content
     if ($excerpt && $excerpt_user == true ) { $treatment_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
