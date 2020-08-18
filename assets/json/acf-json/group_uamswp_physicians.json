@@ -763,7 +763,7 @@
             "name": "physician_clinical_focus",
             "type": "wysiwyg",
             "label": "Clinical Focus",
-            "instructions": "If it's a list, use a bulleted list. If it is full sentences, then a paragraph works.<br />Keep it brief. Try to limit it to less than 344 characters.",
+            "instructions": "If it's a list, used a bulleted list. If it is full sentences, then a paragraph works.<br />Keep it brief. Try to limit it to less than 344 characters.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -810,29 +810,6 @@
             },
             "multiple": 0
         },
-        "field_physician_conditions": {
-            "key": "field_physician_conditions",
-            "name": "physician_conditions",
-            "type": "taxonomy",
-            "label": "Conditions Treated (Orig)",
-            "instructions": "Will be displayed in the order they are entered. You may re-arrange as needed.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "condition",
-            "field_type": "multi_select",
-            "allow_null": 1,
-            "add_term": 0,
-            "save_terms": 1,
-            "load_terms": 1,
-            "return_format": "id",
-            "acfe_bidirectional": 0,
-            "multiple": 0
-        },
         "field_physician_conditions_cpt": {
             "key": "field_physician_conditions_cpt",
             "name": "physician_conditions_cpt",
@@ -861,29 +838,6 @@
             "acfe_validate": "",
             "acfe_update": "",
             "ui": 1
-        },
-        "field_physician_treatments": {
-            "key": "field_physician_treatments",
-            "name": "physician_treatments",
-            "type": "taxonomy",
-            "label": "Treatments & Procedures (Orig)",
-            "instructions": "Will be displayed in the order they are entered. You may re-arrange as needed.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "treatment",
-            "field_type": "multi_select",
-            "allow_null": 1,
-            "add_term": 0,
-            "save_terms": 1,
-            "load_terms": 1,
-            "return_format": "id",
-            "acfe_bidirectional": 0,
-            "multiple": 0
         },
         "field_physician_treatments_cpt": {
             "key": "field_physician_treatments_cpt",
@@ -971,10 +925,7 @@
             "min": 1,
             "max": "",
             "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_location_physicians"
-            },
+            "acfe_bidirectional": 0,
             "acfe_validate": "",
             "acfe_update": ""
         },
