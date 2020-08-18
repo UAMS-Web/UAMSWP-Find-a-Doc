@@ -763,7 +763,7 @@
             "name": "physician_clinical_focus",
             "type": "wysiwyg",
             "label": "Clinical Focus",
-            "instructions": "If it's a list, used a bulleted list. If it is full sentences, then a paragraph works.<br />Keep it brief. Try to limit it to less than 344 characters.",
+            "instructions": "If it's a list, use a bulleted list. If it is full sentences, then a paragraph works.<br />Keep it brief. Try to limit it to less than 344 characters.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
