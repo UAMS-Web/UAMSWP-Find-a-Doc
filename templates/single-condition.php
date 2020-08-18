@@ -135,6 +135,7 @@
     if ($clinical_trials && !empty($clinical_trials)) { $condition_field_classes .= ' has-clinical-trials'; } // Display clinical trials block
     if ($content && !empty($content)) { $condition_field_classes .= ' has-content'; } // Body content
     if ($excerpt && $excerpt_user == true ) { $condition_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
+    if ($syndication ) { $condition_field_classes .= ' has-syndication'; } // Content Syndication
     if ($video && !empty($video)) { $condition_field_classes .= ' has-video'; } // Video embed
 	if ($treatments_cpt && !empty($treatments_cpt)) { $condition_field_classes .= ' has-treatment'; } // Treatments
     if ($expertise && !empty($expertise)) { $condition_field_classes .= ' has-expertise'; } // Areas of Expertise
