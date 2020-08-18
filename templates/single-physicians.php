@@ -195,9 +195,9 @@ while ( have_posts() ) : the_post();
     if ($bio && !empty($bio)) { $provider_field_classes = $provider_field_classes . ' has-clinical-bio'; }
     if ($bio_short && !empty($bio_short)) { $provider_field_classes = $provider_field_classes . ' has-short-clinical-bio'; }
     if ($video && !empty($video)) { $provider_field_classes = $provider_field_classes . ' has-video'; }
-    if ($conditions && !empty($conditions)) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
+    // if ($conditions && !empty($conditions)) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
     if ($conditions_cpt && !empty($conditions_cpt)) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
-    if ($treatments && !empty($treatments)) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
+    // if ($treatments && !empty($treatments)) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
     if ($treatments_cpt && !empty($treatments_cpt)) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
     if ($locations && $location_valid) { $provider_field_classes = $provider_field_classes . ' has-location'; }
     if ($affiliation && !empty($affiliation)) { $provider_field_classes = $provider_field_classes . ' has-affiliation'; }

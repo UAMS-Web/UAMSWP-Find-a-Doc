@@ -58,7 +58,6 @@
 	$excerpt = get_the_excerpt(); //get_field( 'treatment_procedure_short_desc' );
 	$excerpt_user = true;
 	$video = get_field('treatment_procedure_youtube_link');
-	// $conditions = get_field('treatment_procedure_conditions');
 	$conditions_cpt = get_field('treatment_conditions');
 	$expertise = get_field('treatment_procedure_expertise');
 	$locations = get_field('treatment_procedure_locations');
@@ -127,7 +126,6 @@
     if ($content && !empty($content)) { $treatment_field_classes .= ' has-content'; } // Body content
     if ($excerpt && $excerpt_user == true ) { $treatment_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
     if ($video && !empty($video)) { $treatment_field_classes .= ' has-video'; } // Video embed
-	if ($conditions && !empty($conditions)) { $treatment_field_classes .= ' has-condition'; } // Treatments
 	if ($conditions_cpt && !empty($conditions_cpt)) { $treatment_field_classes .= ' has-condition'; } // Treatments
     if ($expertise && !empty($expertise)) { $treatment_field_classes .= ' has-expertise'; } // Areas of Expertise
     if ($locations && $location_valid) { $treatment_field_classes .= ' has-location'; } // Locations
@@ -186,15 +184,7 @@
 				</div>
 			</section>
 		<?php endif; ?>
-		<?php 
-			// $args = (array(
-			// 	'taxonomy' => "condition",
-			// 	'order' => 'ASC',
-			// 	'orderby' => 'name',
-			// 	'hide_empty' => false,
-			// 	'term_taxonomy_id' => $conditions
-			// ));
-			// $conditions_query = new WP_Term_Query( $args );
+		<?php
 
 			$args = (array(
 				'post_type' => "condition",
@@ -267,8 +257,7 @@
 								</div>
 								<?php if ($postsPerPage !== -1) { ?>
 								<div class="more">
-									<button class="loadmore btn btn-primary" data-type="taxonomy" data-tax="treatment_procedure" data-slug="<?php echo $term->slug; ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physiciansCount; ?>" aria-label="Load more providers">Load More</button>
-								</div>
+									<button class="loadmore btn btn-primary" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more providers">Load More</button>								</div>
 								<?php } ?>
 							</div>
 						</div>
