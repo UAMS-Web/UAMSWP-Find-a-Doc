@@ -68,7 +68,16 @@
 	$medline_type = get_field('medline_code_type');
 	$medline_code = get_field('medline_code_id');
 	$embed_code = get_field('condition_embed_codes');
-	   
+	if (
+		( $medline_type && 'none' != $medline_type && $medline_code && !empty($medline_code) ) // if the medline plus syndication option is filled in
+		|| ( $embed_code && !empty($embed_code) ) // or if the syndication embed field has a value
+	) {
+		$syndication = true;
+	}
+	else {
+		$syndication = false;
+	}
+
 	$condition_title = get_field('conditions_archive_headline', 'option');
 	$condition_text = get_field('conditions_archive_intro_text', 'option');
 
