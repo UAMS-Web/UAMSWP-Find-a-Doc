@@ -127,7 +127,7 @@
     if ($content && !empty($content)) { $treatment_field_classes .= ' has-content'; } // Body content
     if ($excerpt && $excerpt_user == true ) { $treatment_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
     if ($video && !empty($video)) { $treatment_field_classes .= ' has-video'; } // Video embed
-	if ($conditions && !empty($conditions)) { $treatment_field_classes .= ' has-condition'; } // Treatments
+	// if ($conditions && !empty($conditions)) { $treatment_field_classes .= ' has-condition'; } // Treatments
 	if ($conditions_cpt && !empty($conditions_cpt)) { $treatment_field_classes .= ' has-condition'; } // Treatments
     if ($expertise && !empty($expertise)) { $treatment_field_classes .= ' has-expertise'; } // Areas of Expertise
     if ($locations && $location_valid) { $treatment_field_classes .= ' has-location'; } // Locations
