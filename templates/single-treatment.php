@@ -30,6 +30,8 @@
 	}
 	add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
 
+	$excerpt = get_the_excerpt(); //get_field( 'treatment_procedure_short_desc' );
+	$excerpt_user = true;
 	if (empty($excerpt)){
 		$excerpt_user = false;
 		if ($content){
@@ -55,8 +57,6 @@
 
 	$clinical_trials = get_field('treatment_procedure_clinical_trials');
 	$content = get_the_content(); //get_field( 'treatment_procedure_content' );
-	$excerpt = get_the_excerpt(); //get_field( 'treatment_procedure_short_desc' );
-	$excerpt_user = true;
 	$video = get_field('treatment_procedure_youtube_link');
 	$conditions_cpt = get_field('treatment_conditions');
 	$expertise = get_field('treatment_procedure_expertise');
