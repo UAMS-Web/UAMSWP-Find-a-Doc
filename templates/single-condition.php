@@ -137,8 +137,8 @@
     if ($excerpt && $excerpt_user == true ) { $condition_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
     if ($syndication ) { $condition_field_classes .= ' has-syndication'; } // Content Syndication
     if ($video && !empty($video)) { $condition_field_classes .= ' has-video'; } // Video embed
-    if ($expertise && !empty($expertise)) { $condition_field_classes .= ' has-expertise'; } // Areas of Expertise
 	if ($treatments_cpt && array_filter($treatments_cpt)) { $condition_field_classes .= ' has-treatment'; } // Treatments
+    if ($expertise && array_filter($expertise)) { $condition_field_classes .= ' has-expertise'; } // Areas of Expertise
     if ($locations && $location_valid) { $condition_field_classes .= ' has-location'; } // Locations
     if ($physicians && !empty($physicians)) { $condition_field_classes .= ' has-provider'; } // Providers
 
