@@ -30,6 +30,8 @@
 	}
 	add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
 
+	$excerpt = get_the_excerpt(); //get_field( 'treatment_procedure_short_desc' );
+	$excerpt_user = true;
 	if (empty($excerpt)){
 		$excerpt_user = false;
 		if ($content){
@@ -55,8 +57,6 @@
 
 	$clinical_trials = get_field('treatment_procedure_clinical_trials');
 	$content = get_the_content(); //get_field( 'treatment_procedure_content' );
-	$excerpt = get_the_excerpt(); //get_field( 'treatment_procedure_short_desc' );
-	$excerpt_user = true;
 	$video = get_field('treatment_procedure_youtube_link');
 	$conditions_cpt = get_field('treatment_conditions');
 	$expertise = get_field('treatment_procedure_expertise');
@@ -121,15 +121,15 @@
 
 	// Classes for indicating presence of content
     $treatment_field_classes = '';	
-	if ($keywords && !empty($keywords)) { $treatment_field_classes .= ' has-keywords'; } // Alternate names
+	if ($keywords && array_filter($keywords)) { $treatment_field_classes .= ' has-keywords'; } // Alternate names
     if ($clinical_trials && !empty($clinical_trials)) { $treatment_field_classes .= ' has-clinical-trials'; } // Display clinical trials block
     if ($content && !empty($content)) { $treatment_field_classes .= ' has-content'; } // Body content
     if ($excerpt && $excerpt_user == true ) { $treatment_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
     if ($video && !empty($video)) { $treatment_field_classes .= ' has-video'; } // Video embed
-	if ($conditions_cpt && !empty($conditions_cpt)) { $treatment_field_classes .= ' has-condition'; } // Treatments
-    if ($expertise && !empty($expertise)) { $treatment_field_classes .= ' has-expertise'; } // Areas of Expertise
+	if ($conditions_cpt && array_filter($conditions_cpt)) { $treatment_field_classes .= ' has-condition'; } // Treatments
+    if ($expertise && array_filter($expertise)) { $treatment_field_classes .= ' has-expertise'; } // Areas of Expertise
     if ($locations && $location_valid) { $treatment_field_classes .= ' has-location'; } // Locations
-    if ($physicians && !empty($physicians)) { $treatment_field_classes .= ' has-provider'; } // Providers
+    if ($physicians && array_filter($physicians)) { $treatment_field_classes .= ' has-provider'; } // Providers
 	
  ?>
 <div class="content-sidebar-wrap">
