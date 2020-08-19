@@ -198,27 +198,74 @@ function location_save_post_after( $post_id ) {
 
 }
 
+add_action('acf/save_post', 'uamswp_sync_acf_save_post', 5);
+function uamswp_sync_acf_save_post( $post_id ) {
+	// Setup the variables
+	$post_type = get_post_type( $post_id );
+	$values = $_POST['acf'];
 
+	if ('location' == $post_type ) {
+		$field_name = 'physician_locations';
+		$field_key = 'field_location_physicians';
+		// Get submitted values.
+		$value = $values[$field_key];
+		bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
 
-// Bidrectional for posts/cpts. 
-// Field name _MUST_ be the same for each field.
-// Keys must different
-function bidirectional_acf_update_value( $value, $post_id, $field  ) {
-	// vars
-	$field_name = $field['name'];
-	$field_key = $field['key'];
-	$global_name = 'is_updating_' . $field_name;
+		$field_name = 'location_expertise';
+		$field_key = 'field_location_expertise';
+		// Get submitted values.
+		$value = $values[$field_key];
+		bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
+	}
 
-	// bail early if this filter was triggered from the update_field() function called within the loop below
-	// - this prevents an inifinte loop
-	if( !empty($GLOBALS[ $global_name ]) ) return $value;
+	if ('provider' == $post_type ) {
+		$field_name = 'physician_locations';
+		$field_key = 'field_physician_locations';
+		// Get submitted values.
+		$value = $values[$field_key];
+		bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
 
-	// set global variable to avoid inifite loop
-	// - could also remove_filter() then add_filter() again, but this is simpler
-	$GLOBALS[ $global_name ] = 1;
+		$field_name = 'physician_expertise';
+		$field_key = 'field_physician_expertise';
+		// Get submitted values.
+		$value = $values[$field_key];
+		bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
+	}
 
-	// loop over selected posts and add this $post_id
-	if( is_array($value) ) {
+	if ('expertise' == $post_type ) {
+		$field_name = 'location_expertise';
+		$field_key = 'field_expertise_locations';
+		// Get submitted values.
+		$value = $values[$field_key];
+		bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
+
+		$field_name = 'physician_expertise';
+		$field_key = 'field_expertise_physicians';
+		// Get submitted values.
+		$value = $values[$field_key];
+		bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
+
+		$field_name = 'expertise_associated';
+		$field_key = 'field_expertise_associated';
+		// Get submitted values.
+		$value = $values[$field_key];
+		bidirectional_acf_update( $field_name, $field_key, $value, $post_id );
+	}
+}
+/*
+ * Function for Bidirectional ACF
+ * Req:
+ * $field_name = ACF field name
+ * $field_key = ACF field key of field with new value
+ * $value = incoming/new value
+ * $post_id = $post_id being updated
+ *
+ */
+function bidirectional_acf_update( $field_name, $field_key, $value, $post_id ){
+	// Get previous values.
+	$old_value = get_field($field_name, $post_id, false);
+
+	if( isset($value) && is_array($value) ) {
 
 		foreach( $value as $post_id2new ) {
 			// load existing related posts
@@ -228,7 +275,7 @@ function bidirectional_acf_update_value( $value, $post_id, $field  ) {
 			if( empty($value2new) ) {
 				$value2new = array();
 			}
-
+			// write_log('New Values for ' . $post_id2new . ': '. print_r($value2new, true));
 			// bail early if the current $post_id is already found in selected post's $value2new
 			if( in_array($post_id, $value2new) ) continue;
 
@@ -240,9 +287,7 @@ function bidirectional_acf_update_value( $value, $post_id, $field  ) {
 		}
 	}
 
-	// find posts which have been removed
-	$old_value = get_field($field_name, $post_id, false);
-	if( is_array($old_value) ) {
+	if( isset($old_value) && is_array($old_value) ) {
 
 		foreach( $old_value as $post_id2old ) {
 			// bail early if this value has not been removed
@@ -264,24 +309,8 @@ function bidirectional_acf_update_value( $value, $post_id, $field  ) {
 			update_field($field_key, $value2old, $post_id2old);
 		}
 	}
-	// reset global varibale to allow this filter to function as per normal
-    $GLOBALS[ $global_name ] = 0;
-    
-	// return
-    return $value;
+
 }
-// Add filter for each bidirectional field. BOTH sides.
-// Physician-to-locations (physician_locations)
-add_filter('acf/update_value/key=field_physician_locations', 'bidirectional_acf_update_value', 10, 3);
-add_filter('acf/update_value/key=field_location_physicians', 'bidirectional_acf_update_value', 10, 3);
-// Physician-to-expertise (physician_expertise)
-add_filter('acf/update_value/key=field_physician_expertise', 'bidirectional_acf_update_value', 10, 3);
-add_filter('acf/update_value/key=field_expertise_physicians', 'bidirectional_acf_update_value', 10, 3);
-// Location-to-expertise (location_expertise)
-add_filter('acf/update_value/key=field_location_expertise', 'bidirectional_acf_update_value', 10, 3);
-add_filter('acf/update_value/key=field_expertise_locations', 'bidirectional_acf_update_value', 10, 3);
-// Expertise-to-expertise
-add_filter('acf/update_value/name=expertise_associated', 'bidirectional_acf_update_value', 10, 3);
 
 add_action('acf/save_post', 'custom_excerpt_acf', 50);
 function custom_excerpt_acf() {
