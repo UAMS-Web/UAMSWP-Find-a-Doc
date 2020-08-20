@@ -615,27 +615,6 @@ while ( have_posts() ) : the_post();
         <?php } // endif ?>
         <?php // load all 'conditions' terms for the post
             $title_append = ' by ' . $short_name;
-            // Conditions Taxonomy
-            $args = (array(
-                'taxonomy' => "condition",
-                'hide_empty' => false,
-                'term_taxonomy_id' => $conditions
-            ));
-            $conditions_query = new WP_Term_Query( $args );
-            $condition_schema = '';
-            // we will use the first term to load ACF data from
-            if( $conditions ):
-                include( UAMS_FAD_PATH . '/templates/loops/conditions-loop.php' );
-                $condition_schema .= ',"medicalSpecialty": [';
-                foreach( $conditions as $condition ):
-                    $condition_schema .= '{
-                    "@type": "MedicalSpecialty",
-                    "name": "'. get_term( $condition, 'condition' )->name .'",
-                    "url":"'. get_term_link($condition) .'"
-                    },';
-                endforeach;
-                $condition_schema .= '"" ]';
-            endif;
              
             // Conditions CPT
             $args = (array(
@@ -660,19 +639,6 @@ while ( have_posts() ) : the_post();
                 endforeach;
                 $condition_schema .= '"" ]';
             endif; 
-            // Treatments Taxonomy
-            // load all 'treatments' terms for the post
-            $args = (array(
-                'taxonomy' => "treatment",
-                'hide_empty' => false,
-                'term_taxonomy_id' => $treatments
-            ));
-            $treatments_query = new WP_Term_Query( $args );
-            $treatment_schema = '';
-            // we will use the first term to load ACF data from
-            if( $treatments ):
-                include( UAMS_FAD_PATH . '/templates/loops/treatments-loop.php' );
-            endif;
 
             // Treatments CPT
             $args = (array(

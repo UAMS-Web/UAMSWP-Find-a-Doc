@@ -1184,30 +1184,8 @@ while ( have_posts() ) : the_post(); ?>
 	?>
 	<?php // load all 'conditions' terms for the post
 	$title_append = ' at ' . get_the_title();
-	$conditions = get_field('location_conditions');
 	$conditions_cpt = get_field('location_conditions_cpt');
 	$condition_schema = '';
-	// Conditions Taxonomy
-	$args = (array(
-		'taxonomy' => "condition",
-        'order' => 'ASC',
-        'orderby' => 'name',
-        'hide_empty' => false,
-        'term_taxonomy_id' => $conditions
-    ));
-    $conditions_query = new WP_Term_Query( $args );
-	if( $conditions && !empty( $conditions_query->terms ) ):
-		include( UAMS_FAD_PATH . '/templates/loops/conditions-loop.php' );
-		$condition_schema .= '"medicalSpecialty": [';
-		foreach( $conditions as $condition ):
-			$condition_schema .= '{
-			"@type": "MedicalSpecialty",
-			"name": "'. get_term( $condition, 'condition' )->name .'",
-			"url":"'. get_term_link($condition) .'"
-			},';
-		endforeach;
-		$condition_schema .= '"" ],';
-	endif;
 	// Conditions CPT
 	$args = (array(
 		'post_type' => "condition",
@@ -1231,21 +1209,8 @@ while ( have_posts() ) : the_post(); ?>
 		endforeach;
 		$condition_schema .= '"" ]';
 	endif;
-	$treatments = get_field('location_treatments');
 	$treatments_cpt = get_field('location_treatments_cpt');
 	$treatment_schema = '';
-	// Treatments Taxonomy
-	$args = (array(
-		'taxonomy' => "treatment",
-        'order' => 'ASC',
-        'orderby' => 'name',
-        'hide_empty' => false,
-        'term_taxonomy_id' => $treatments
-    ));
-    $treatments_query = new WP_Term_Query( $args );
-	if( $treatments && !empty( $treatments_query->terms ) ): 
-		include( UAMS_FAD_PATH . '/templates/loops/treatments-loop.php' );
-	endif; 
 	// Treatments CPT
 	$args = (array(
 		'post_type' => "treatment",
