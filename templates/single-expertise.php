@@ -131,7 +131,7 @@ function uamswp_expertise_conditions_cpt() {
     endif;
 }
 function uamswp_expertise_treatments_cpt() {
-    $treatments = get_field('expertise_treatments_cpt');
+    $treatments_cpt = get_field('expertise_treatments_cpt');
     // Treatments CPT
     $args = (array(
         'post_type' => "treatment",
