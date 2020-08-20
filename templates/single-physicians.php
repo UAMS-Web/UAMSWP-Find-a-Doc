@@ -668,7 +668,7 @@ while ( have_posts() ) : the_post();
                 'term_taxonomy_id' => $treatments
             ));
             $treatments_query = new WP_Term_Query( $args );
-
+            $treatment_schema = '';
             // we will use the first term to load ACF data from
             if( $treatments ):
                 include( UAMS_FAD_PATH . '/templates/loops/treatments-loop.php' );
