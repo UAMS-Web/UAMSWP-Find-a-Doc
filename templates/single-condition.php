@@ -30,6 +30,8 @@
 	}
 	add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
 
+	$excerpt = get_the_excerpt(); // get_field( 'condition_short_desc' );
+	$excerpt_user = true;
 	if (empty($excerpt)){
 		$excerpt_user = false;
 		if ($content){
@@ -54,11 +56,8 @@
 	   get_header();
 
 	// ACF Fields - get_fields
-
 	$clinical_trials = get_field('condition_clinical_trials');
 	$content = get_the_content(); //get_field( 'condition_content' );
-	$excerpt = get_the_excerpt(); // get_field( 'condition_short_desc' );
-	$excerpt_user = true;
 	$video = get_field('condition_youtube_link');
 	$treatments_cpt = get_field('condition_treatments');
 	$expertise = get_field('condition_expertise');
@@ -67,7 +66,16 @@
 	$medline_type = get_field('medline_code_type');
 	$medline_code = get_field('medline_code_id');
 	$embed_code = get_field('condition_embed_codes');
-	   
+	if (
+		( $medline_type && 'none' != $medline_type && $medline_code && !empty($medline_code) ) // if the medline plus syndication option is filled in
+		|| ( $embed_code && !empty($embed_code) ) // or if the syndication embed field has a value
+	) {
+		$syndication = true;
+	}
+	else {
+		$syndication = false;
+	}
+
 	$condition_title = get_field('conditions_archive_headline', 'option');
 	$condition_text = get_field('conditions_archive_intro_text', 'option');
 
@@ -123,15 +131,16 @@
 
 	// Classes for indicating presence of content
     $condition_field_classes = '';	
-    if ($keywords && !empty($keywords)) { $condition_field_classes .= ' has-keywords'; } // Alternate names
+    if ($keywords && array_filter($keywords)) { $condition_field_classes .= ' has-keywords'; } // Alternate names
     if ($clinical_trials && !empty($clinical_trials)) { $condition_field_classes .= ' has-clinical-trials'; } // Display clinical trials block
     if ($content && !empty($content)) { $condition_field_classes .= ' has-content'; } // Body content
     if ($excerpt && $excerpt_user == true ) { $condition_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
+    if ($syndication ) { $condition_field_classes .= ' has-syndication'; } // Content Syndication
     if ($video && !empty($video)) { $condition_field_classes .= ' has-video'; } // Video embed
-	if ($treatments_cpt && !empty($treatments_cpt)) { $condition_field_classes .= ' has-treatment'; } // Treatments
-    if ($expertise && !empty($expertise)) { $condition_field_classes .= ' has-expertise'; } // Areas of Expertise
+	if ($treatments_cpt && array_filter($treatments_cpt)) { $condition_field_classes .= ' has-treatment'; } // Treatments
+    if ($expertise && array_filter($expertise)) { $condition_field_classes .= ' has-expertise'; } // Areas of Expertise
     if ($locations && $location_valid) { $condition_field_classes .= ' has-location'; } // Locations
-    if ($physicians && !empty($physicians)) { $condition_field_classes .= ' has-provider'; } // Providers
+    if ($physicians && array_filter($physicians)) { $condition_field_classes .= ' has-provider'; } // Providers
 
  ?>
 <div class="content-sidebar-wrap">
