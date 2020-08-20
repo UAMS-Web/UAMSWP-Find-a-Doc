@@ -746,36 +746,33 @@ while ( have_posts() ) : the_post(); ?>
 		$location_youtube_link = get_field('location_youtube_link');
 	
 		if ( $location_about || $location_affiliation || $prescription ) { 
-				$about = $location_about;
-				$affiliation = $location_affiliation;
-				$youtube_link = $location_youtube_link;
 		?>
 		<section class="uams-module bg-auto">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<?php if ( $about || $youtube_link || ( !$about && $affiliation && $prescription ) ) { ?>
+						<?php if ( $location_about || $location_youtube_link || ( !$location_about && $location_affiliation && $prescription ) ) { ?>
 						<h2 class="module-title">About <?php the_title(); ?></h2>
-						<?php } elseif ( $affiliation ) {
+						<?php } elseif ( $location_affiliation ) {
 							echo '<h2 class="module-title">Affiliation</h2>';
 						} elseif ( $prescription ) {
 							echo '<h2 class="module-title">Prescription Information</h2>';
 						} ?>
 						<div class="module-body">
-							<?php echo $about ? $about : ''; ?>
-							<?php if($youtube_link) { ?>
+							<?php echo $location_about ? $location_about : ''; ?>
+							<?php if($location_youtube_link) { ?>
                             <div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
-                                <?php echo wp_oembed_get( $youtube_link ); ?>
+                                <?php echo wp_oembed_get( $location_youtube_link ); ?>
                             </div>
 							<?php }
-							if ( $affiliation) { 
-								if ( $about || $prescription ) { 
+							if ( $location_affiliation) { 
+								if ( $location_about || $prescription ) { 
 									echo '<h3>Affiliation</h3>';
 								}
-								echo $affiliation;
+								echo $location_affiliation;
 							}
 							if ( $prescription) { 
-								if ( $about || $affiliation ) { 
+								if ( $location_about || $location_affiliation ) { 
 									echo '<h3>Prescription Information</h3>';
 								}
 								echo $prescription;
