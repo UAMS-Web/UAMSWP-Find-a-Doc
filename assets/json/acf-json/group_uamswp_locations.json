@@ -2938,29 +2938,6 @@
             "placement": "top",
             "endpoint": 0
         },
-        "field_location_conditions": {
-            "key": "field_location_conditions",
-            "name": "location_conditions",
-            "type": "taxonomy",
-            "label": "Conditions (Orig)",
-            "instructions": "The conditions will display in alphabetical order.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "condition",
-            "field_type": "multi_select",
-            "allow_null": 1,
-            "add_term": 0,
-            "save_terms": 1,
-            "load_terms": 1,
-            "return_format": "id",
-            "acfe_bidirectional": 0,
-            "multiple": 0
-        },
         "field_location_conditions_cpt": {
             "key": "field_location_conditions_cpt",
             "name": "location_conditions_cpt",
@@ -2989,29 +2966,6 @@
             "acfe_validate": "",
             "acfe_update": "",
             "ui": 1
-        },
-        "field_location_treatments": {
-            "key": "field_location_treatments",
-            "name": "location_treatments",
-            "type": "taxonomy",
-            "label": "Treatments & Procedures (Orig)",
-            "instructions": "The treatments and procedures will display in alphabetical order.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "treatment",
-            "field_type": "multi_select",
-            "allow_null": 1,
-            "add_term": 0,
-            "save_terms": 1,
-            "load_terms": 1,
-            "return_format": "id",
-            "acfe_bidirectional": 0,
-            "multiple": 0
         },
         "field_location_treatments_cpt": {
             "key": "field_location_treatments_cpt",
@@ -3235,10 +3189,7 @@
             "min": "",
             "max": "",
             "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_physician_locations"
-            },
+            "acfe_bidirectional": 0,
             "acfe_validate": "",
             "acfe_update": ""
         },

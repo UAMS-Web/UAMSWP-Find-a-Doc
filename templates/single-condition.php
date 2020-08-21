@@ -30,6 +30,8 @@
 	}
 	add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
 
+	$excerpt = get_the_excerpt(); // get_field( 'condition_short_desc' );
+	$excerpt_user = true;
 	if (empty($excerpt)){
 		$excerpt_user = false;
 		if ($content){
@@ -54,13 +56,9 @@
 	   get_header();
 
 	// ACF Fields - get_fields
-
 	$clinical_trials = get_field('condition_clinical_trials');
 	$content = get_the_content(); //get_field( 'condition_content' );
-	$excerpt = get_the_excerpt(); // get_field( 'condition_short_desc' );
-	$excerpt_user = true;
 	$video = get_field('condition_youtube_link');
-	// $treatments = get_field('condition_treatments');
 	$treatments_cpt = get_field('condition_treatments');
 	$expertise = get_field('condition_expertise');
 	$locations = get_field('condition_locations');
@@ -68,7 +66,16 @@
 	$medline_type = get_field('medline_code_type');
 	$medline_code = get_field('medline_code_id');
 	$embed_code = get_field('condition_embed_codes');
-	   
+	if (
+		( $medline_type && 'none' != $medline_type && $medline_code && !empty($medline_code) ) // if the medline plus syndication option is filled in
+		|| ( $embed_code && !empty($embed_code) ) // or if the syndication embed field has a value
+	) {
+		$syndication = true;
+	}
+	else {
+		$syndication = false;
+	}
+
 	$condition_title = get_field('conditions_archive_headline', 'option');
 	$condition_text = get_field('conditions_archive_intro_text', 'option');
 
@@ -124,16 +131,16 @@
 
 	// Classes for indicating presence of content
     $condition_field_classes = '';	
-    if ($keywords && !empty($keywords)) { $condition_field_classes .= ' has-keywords'; } // Alternate names
+    if ($keywords && array_filter($keywords)) { $condition_field_classes .= ' has-keywords'; } // Alternate names
     if ($clinical_trials && !empty($clinical_trials)) { $condition_field_classes .= ' has-clinical-trials'; } // Display clinical trials block
     if ($content && !empty($content)) { $condition_field_classes .= ' has-content'; } // Body content
     if ($excerpt && $excerpt_user == true ) { $condition_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
+    if ($syndication ) { $condition_field_classes .= ' has-syndication'; } // Content Syndication
     if ($video && !empty($video)) { $condition_field_classes .= ' has-video'; } // Video embed
-	if ($treatments && !empty($treatments)) { $condition_field_classes .= ' has-treatment'; } // Treatments
-	if ($treatments_cpt && !empty($treatments_cpt)) { $condition_field_classes .= ' has-treatment'; } // Treatments
-    if ($expertise && !empty($expertise)) { $condition_field_classes .= ' has-expertise'; } // Areas of Expertise
+	if ($treatments_cpt && array_filter($treatments_cpt)) { $condition_field_classes .= ' has-treatment'; } // Treatments
+    if ($expertise && array_filter($expertise)) { $condition_field_classes .= ' has-expertise'; } // Areas of Expertise
     if ($locations && $location_valid) { $condition_field_classes .= ' has-location'; } // Locations
-    if ($physicians && !empty($physicians)) { $condition_field_classes .= ' has-provider'; } // Providers
+    if ($physicians && array_filter($physicians)) { $condition_field_classes .= ' has-provider'; } // Providers
 
  ?>
 <div class="content-sidebar-wrap">
@@ -188,37 +195,6 @@
 			</div>
 		</section>
 		<?php endif; ?>
-		<?php 
-			$args = (array(
-				'taxonomy' => "treatment",
-				'order' => 'ASC',
-				'orderby' => 'name',
-				'hide_empty' => false,
-				'term_taxonomy_id' => $treatments
-			));
-			$treatments_query = new WP_Term_Query( $args );
-			if ( $treatments && !empty($treatments_query->terms) ) {
-				
-		?>
-		<section class="uams-module conditions-treatments bg-auto">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-12">
-						<h2 class="module-title">Treatments and Procedures Related to <?php echo get_the_title(); ?></h2>
-						<div class="list-container list-container-rows">
-							<ul class="list">
-							<?php foreach( $treatments_query->get_terms() as $treatment ): ?>
-								<li>
-									<a href="<?php echo get_term_link( $treatment->term_id ); ?>" aria-label="Go to Treatment page for <?php echo $treatment->name; ?>" class="btn btn-outline-primary"><?php echo $treatment->name; ?></a>
-								</li>
-							<?php endforeach; ?>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<?php } // endif ?>
 		<?php 
 			$args = (array(
 				'post_type' => 'treatment',
@@ -289,7 +265,7 @@
 									</div>
 									<?php if ($postsPerPage !== -1) { ?>
 									<div class="more">
-										<button class="loadmore btn btn-primary" data-type="taxonomy" data-tax="condition" data-slug="<?php echo $term->slug; ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physiciansCount; ?>" aria-label="Load more providers">Load More</button>
+										<button class="loadmore btn btn-primary" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more providers">Load More</button>
 									</div>
 									<?php } ?>
 								</div>

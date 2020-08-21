@@ -36,8 +36,8 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 add_filter( 'genesis_entry_content', 'uamswp_expertise_keywords', 8 );
 add_action( 'genesis_entry_content', 'uamswp_expertise_youtube', 12 );
 add_action( 'genesis_after_entry', 'uamswp_list_child_expertise', 8 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_conditions', 10 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_treatments', 12 );
+add_action( 'genesis_after_entry', 'uamswp_expertise_conditions_cpt', 10 );
+add_action( 'genesis_after_entry', 'uamswp_expertise_treatments_cpt', 12 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 14 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 16 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 20 );
@@ -114,21 +114,6 @@ function uamswp_expertise_keywords() {
         echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';
     endif;
 }
-function uamswp_expertise_conditions() {
-    // load all 'conditions' terms for the post
-    $conditions = get_field('expertise_conditions');
-    $args = (array(
-        'taxonomy' => "condition",
-        'order' => 'ASC',
-        'orderby' => 'name',
-        'hide_empty' => false,
-        'term_taxonomy_id' => $conditions
-    ));
-    $conditions_query = new WP_Term_Query( $args );
-    if( $conditions && !empty( $conditions_query->terms ) ):
-        include( UAMS_FAD_PATH . '/templates/loops/conditions-loop.php' );
-    endif;
-}
 function uamswp_expertise_conditions_cpt() {
     // load all 'conditions' terms for the post
     $conditions_cpt = get_field('expertise_conditions_cpt');
@@ -145,22 +130,8 @@ function uamswp_expertise_conditions_cpt() {
         include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
     endif;
 }
-function uamswp_expertise_treatments() {
-    $treatments = get_field('expertise_treatments');
-    $args = (array(
-        'taxonomy' => "treatment",
-        'order' => 'ASC',
-        'orderby' => 'name',
-        'hide_empty' => false,
-        'term_taxonomy_id' => $treatments
-    ));
-    $treatments_query = new WP_Term_Query( $args );
-    if( $treatments && !empty( $treatments_query->terms ) ): 
-        include( UAMS_FAD_PATH . '/templates/loops/treatments-loop.php' );
-    endif;
-}
 function uamswp_expertise_treatments_cpt() {
-    $treatments = get_field('expertise_treatments_cpt');
+    $treatments_cpt = get_field('expertise_treatments_cpt');
     // Treatments CPT
     $args = (array(
         'post_type' => "treatment",
@@ -315,7 +286,7 @@ function uamswp_expertise_appointment() {
             <div class="row">
                 <div class="col-xs-12">
                     <h2>Make an Appointment</h2>
-                    <p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>">contacting a clinic directly</a> or by calling the main UAMS appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                    <p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>">contacting a clinic directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
                 </div>
             </div>
         </div>

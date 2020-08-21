@@ -195,9 +195,9 @@ while ( have_posts() ) : the_post();
     if ($bio && !empty($bio)) { $provider_field_classes = $provider_field_classes . ' has-clinical-bio'; }
     if ($bio_short && !empty($bio_short)) { $provider_field_classes = $provider_field_classes . ' has-short-clinical-bio'; }
     if ($video && !empty($video)) { $provider_field_classes = $provider_field_classes . ' has-video'; }
-    if ($conditions && !empty($conditions)) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
+    // if ($conditions && !empty($conditions)) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
     if ($conditions_cpt && !empty($conditions_cpt)) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
-    if ($treatments && !empty($treatments)) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
+    // if ($treatments && !empty($treatments)) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
     if ($treatments_cpt && !empty($treatments_cpt)) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
     if ($locations && $location_valid) { $provider_field_classes = $provider_field_classes . ' has-location'; }
     if ($affiliation && !empty($affiliation)) { $provider_field_classes = $provider_field_classes . ' has-affiliation'; }
@@ -455,7 +455,7 @@ while ( have_posts() ) : the_post();
         </section>
         <?php if ($eligible_appt): ?>
         <?php 
-            $appointment_phone_name = 'the main UAMS appointment line'; // default (UAMS)
+            $appointment_phone_name = 'the UAMS&nbsp;Health appointment line'; // default (UAMS)
             $appointment_phone = '5016868000'; // default (UAMS)
             $show_portal = false;
             // Portal
@@ -615,27 +615,6 @@ while ( have_posts() ) : the_post();
         <?php } // endif ?>
         <?php // load all 'conditions' terms for the post
             $title_append = ' by ' . $short_name;
-            // Conditions Taxonomy
-            $args = (array(
-                'taxonomy' => "condition",
-                'hide_empty' => false,
-                'term_taxonomy_id' => $conditions
-            ));
-            $conditions_query = new WP_Term_Query( $args );
-            $condition_schema = '';
-            // we will use the first term to load ACF data from
-            if( $conditions ):
-                include( UAMS_FAD_PATH . '/templates/loops/conditions-loop.php' );
-                $condition_schema .= ',"medicalSpecialty": [';
-                foreach( $conditions as $condition ):
-                    $condition_schema .= '{
-                    "@type": "MedicalSpecialty",
-                    "name": "'. get_term( $condition, 'condition' )->name .'",
-                    "url":"'. get_term_link($condition) .'"
-                    },';
-                endforeach;
-                $condition_schema .= '"" ]';
-            endif;
              
             // Conditions CPT
             $args = (array(
@@ -660,19 +639,6 @@ while ( have_posts() ) : the_post();
                 endforeach;
                 $condition_schema .= '"" ]';
             endif; 
-            // Treatments Taxonomy
-            // load all 'treatments' terms for the post
-            $args = (array(
-                'taxonomy' => "treatment",
-                'hide_empty' => false,
-                'term_taxonomy_id' => $treatments
-            ));
-            $treatments_query = new WP_Term_Query( $args );
-
-            // we will use the first term to load ACF data from
-            if( $treatments ):
-                include( UAMS_FAD_PATH . '/templates/loops/treatments-loop.php' );
-            endif;
 
             // Treatments CPT
             $args = (array(

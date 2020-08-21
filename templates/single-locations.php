@@ -240,7 +240,16 @@ add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
 get_header();
 
 while ( have_posts() ) : the_post(); ?>
-<?php $map = get_field('location_map', $post_id ); ?>
+<?php 
+	$map = get_field('location_map', $post_id );
+	$location_address_1 = get_field('location_address_1', $post_id );
+	$location_address_2 = get_field('location_address_2', $post_id );
+	$location_city = get_field('location_city', $post_id);
+	$location_state = get_field('location_state', $post_id);
+	$location_zip = get_field('location_zip', $post_id);
+	$location_web_name = get_field('location_web_name', $post_id);
+	$location_url = get_field('location_url', $post_id);
+?>
 <div class="content-sidebar-wrap">
 <main class="location-item" id="genesis-content">
 	<section class="container-fluid p-0 p-md-10 location-info bg-white">
@@ -283,12 +292,12 @@ while ( have_posts() ) : the_post(); ?>
 						</div>
 					<?php } // endif ?>
 					<h2 class="sr-only">Address</h2>
-					<p><?php echo get_field('location_address_1', $post_id  ); ?><br/>
-					<?php echo ( get_field('location_address_2', $post_id  ) ? get_field('location_address_2', $post_id ) . '<br/>' : ''); ?>
-					<?php echo get_field('location_city', $post_id ); ?>, <?php echo get_field('location_state', $post_id ); ?> <?php echo get_field('location_zip', $post_id ); ?></p>
+					<p><?php echo $location_address_1; ?><br/>
+					<?php echo ( $location_address_2 ? $location_address_2 . '<br/>' : ''); ?>
+					<?php echo $location_city; ?>, <?php echo $location_state; ?> <?php echo $location_zip; ?></p>
 						<p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo get_the_title($post_id); ?>">Get Directions</a></p>
-					<?php if(get_field('location_web_name', $post_id) && get_field('location_url', $post_id )){ ?>
-						<p><a class="btn btn-secondary" href="<?php echo get_field('location_url', $post_id )['url']; ?>"><?php echo get_field('location_web_name', $post_id ); ?> <span class="far fa-external-link-alt"></span></span></a></p>
+						<?php if( $location_web_name && $location_url ){ ?>
+							<p><a class="btn btn-secondary" href="<?php echo $location_url['url']; ?>"><?php echo $location_web_name; ?> <span class="far fa-external-link-alt"></span></span></a></p>
 					<?php } 
 						// Schema data
 						$location_schema = '"address": {
@@ -731,37 +740,39 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 		</section>
 	<?php } // endif ?>
-	<?php if ( get_field('location_about') || get_field('location_affiliation') || $prescription ) { 
-			$about = get_field('location_about');
-			$affiliation = get_field('location_affiliation');
-			$youtube_link = get_field('location_youtube_link');
+	<?php 
+		$location_about = get_field('location_about');
+		$location_affiliation = get_field('location_affiliation');
+		$location_youtube_link = get_field('location_youtube_link');
+	
+		if ( $location_about || $location_affiliation || $prescription ) { 
 		?>
 		<section class="uams-module bg-auto">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<?php if ( $about || $youtube_link || ( !$about && $affiliation && $prescription ) ) { ?>
+						<?php if ( $location_about || $location_youtube_link || ( !$location_about && $location_affiliation && $prescription ) ) { ?>
 						<h2 class="module-title">About <?php the_title(); ?></h2>
-						<?php } elseif ( $affiliation ) {
+						<?php } elseif ( $location_affiliation ) {
 							echo '<h2 class="module-title">Affiliation</h2>';
 						} elseif ( $prescription ) {
 							echo '<h2 class="module-title">Prescription Information</h2>';
 						} ?>
 						<div class="module-body">
-							<?php echo $about ? $about : ''; ?>
-							<?php if($youtube_link) { ?>
+							<?php echo $location_about ? $location_about : ''; ?>
+							<?php if($location_youtube_link) { ?>
                             <div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
-                                <?php echo wp_oembed_get( $youtube_link ); ?>
+                                <?php echo wp_oembed_get( $location_youtube_link ); ?>
                             </div>
 							<?php }
-							if ( $affiliation) { 
-								if ( $about || $prescription ) { 
+							if ( $location_affiliation) { 
+								if ( $location_about || $prescription ) { 
 									echo '<h3>Affiliation</h3>';
 								}
-								echo $affiliation;
+								echo $location_affiliation;
 							}
 							if ( $prescription) { 
-								if ( $about || $affiliation ) { 
+								if ( $location_about || $location_affiliation ) { 
 									echo '<h3>Prescription Information</h3>';
 								}
 								echo $prescription;
@@ -772,25 +783,29 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 		</section>
 	<?php } ?>
-	<?php if (get_field('location_parking', $post_id) || get_field('location_direction', $post_id) || get_field('location_parking_map', $post_id)) : ?>
-	<?php $parking_map = get_field('location_parking_map', $post_id); ?>
+	<?php 
+		$location_parking = get_field('location_parking', $post_id);
+		$location_direction = get_field('location_direction', $post_id);
+		$parking_map = get_field('location_parking_map', $post_id);
+	
+		if ( $location_parking || $location_direction || $parking_map ) : ?>
 		<section class="uams-module bg-auto">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12<?php echo $parking_map ? ' col-md-6' : ''  ?>">
 						<?php if ($parking_map) { ?>
 							<div class="module-body">
-							<h2><?php echo ( get_field('location_parking', $post_id ) ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
+							<h2><?php echo ( $location_parking ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
 						<?php } else { ?>
-							<h2 class="module-title"><?php echo ( get_field('location_parking', $post_id ) ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
+							<h2 class="module-title"><?php echo ( $location_parking ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
 							<div class="module-body">
 						<?php } // endif ?>
-							<?php echo get_field('location_parking', $post_id); ?>
+							<?php echo $location_parking; ?>
 							<?php if ( $parking_map ) { ?>
 								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>
 							<?php } // endif ?>
-							<?php echo ( get_field('location_parking', $post_id) && get_field('location_direction', $post_id) ? '<h3>Directions From the Parking Area</h3>' : ''); // Display the directions heading here if there is a value for parking. ?>
-							<?php echo get_field('location_direction', $post_id); ?>
+							<?php echo ( $location_parking && $location_direction ? '<h3>Directions From the Parking Area</h3>' : ''); // Display the directions heading here if there is a value for parking. ?>
+							<?php echo $location_direction; ?>
 						</div>
 					</div>
 					<?php if ( $parking_map ) { ?>
@@ -863,29 +878,33 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 		</section>
 	<?php endif; ?>
-	<?php if ( get_field('location_appointment') || get_field('location_appointment_bring')): ?>
+	<?php
+		$location_appointment = get_field('location_appointment');
+		$location_appointment_bring = get_field('location_appointment_bring');
+
+		if ( $location_appointment || $location_appointment_bring): ?>
 		<section class="uams-module bg-auto">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<?php if ( get_field('location_appointment') && get_field('location_appointment_bring') ) { ?>
+						<?php if ( $location_appointment && $location_appointment_bring ) { ?>
 							<h2 class="module-title">Appointment Information</h2>
 							<div class="module-body">
-								<?php echo get_field('location_appointment'); ?>
+								<?php echo $location_appointment; ?>
 								<h3>What to Bring to Your Appointment</h3>
-								<?php echo get_field('location_appointment_bring'); ?>
+								<?php echo $location_appointment_bring; ?>
 							</div>
 
-						<?php } elseif ( get_field('location_appointment') ) { ?>
+						<?php } elseif ( $location_appointment ) { ?>
 							<h2 class="module-title">Appointments</h2>
 							<div class="module-body">
-								<?php echo get_field('location_appointment'); ?>
+								<?php echo $location_appointment; ?>
 							</div>
 
-						<?php } elseif ( get_field('location_appointment_bring') ) { ?>
+						<?php } elseif ( $location_appointment_bring ) { ?>
 							<h2 class="module-title">What to Bring to Your Appointment</h2>
 							<div class="module-body">
-								<?php echo get_field('location_appointment_bring'); ?>
+								<?php echo $location_appointment_bring; ?>
 							</div>
 						<?php } // endif ?>
 					</div>
@@ -1070,8 +1089,10 @@ while ( have_posts() ) : the_post(); ?>
 		<?php } // endif
 	// End Telemedicine ?>
 	<?php // Portal
-		if ( get_field('location_portal') ) :
-			$portal = get_term(get_field('location_portal'), "portal");
+		$location_portal = get_field('location_portal');
+		
+		if ( $location_portal ) :
+			$portal = get_term($location_portal, "portal");
 			$portal_slug = $portal->slug;
 			$portal_name = $portal->name;
 			$portal_content = get_field('portal_content', $portal);
@@ -1163,30 +1184,8 @@ while ( have_posts() ) : the_post(); ?>
 	?>
 	<?php // load all 'conditions' terms for the post
 	$title_append = ' at ' . get_the_title();
-	$conditions = get_field('location_conditions');
 	$conditions_cpt = get_field('location_conditions_cpt');
 	$condition_schema = '';
-	// Conditions Taxonomy
-	$args = (array(
-		'taxonomy' => "condition",
-        'order' => 'ASC',
-        'orderby' => 'name',
-        'hide_empty' => false,
-        'term_taxonomy_id' => $conditions
-    ));
-    $conditions_query = new WP_Term_Query( $args );
-	if( $conditions && !empty( $conditions_query->terms ) ):
-		include( UAMS_FAD_PATH . '/templates/loops/conditions-loop.php' );
-		$condition_schema .= '"medicalSpecialty": [';
-		foreach( $conditions as $condition ):
-			$condition_schema .= '{
-			"@type": "MedicalSpecialty",
-			"name": "'. get_term( $condition, 'condition' )->name .'",
-			"url":"'. get_term_link($condition) .'"
-			},';
-		endforeach;
-		$condition_schema .= '"" ],';
-	endif;
 	// Conditions CPT
 	$args = (array(
 		'post_type' => "condition",
@@ -1210,21 +1209,8 @@ while ( have_posts() ) : the_post(); ?>
 		endforeach;
 		$condition_schema .= '"" ]';
 	endif;
-	$treatments = get_field('location_treatments');
 	$treatments_cpt = get_field('location_treatments_cpt');
 	$treatment_schema = '';
-	// Treatments Taxonomy
-	$args = (array(
-		'taxonomy' => "treatment",
-        'order' => 'ASC',
-        'orderby' => 'name',
-        'hide_empty' => false,
-        'term_taxonomy_id' => $treatments
-    ));
-    $treatments_query = new WP_Term_Query( $args );
-	if( $treatments && !empty( $treatments_query->terms ) ): 
-		include( UAMS_FAD_PATH . '/templates/loops/treatments-loop.php' );
-	endif; 
 	// Treatments CPT
 	$args = (array(
 		'post_type' => "treatment",
