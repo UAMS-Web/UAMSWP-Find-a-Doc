@@ -22,7 +22,7 @@ get_header();
 				</button>
                 <h2 class="h4">Search Locations</h2>
                 <?php  echo do_shortcode( '[wpdreams_ajaxsearchpro id=2]' ); ?>
-                <h2 class="h3">Filters</h2>
+                <h2 class="h4">Filters</h2>
                 <fieldset>
                     <legend class="sr-only">Filter by...</legend>
                     <div class="fwp-filter"><?php echo facetwp_display( 'facet', 'location_search' ); ?></div>
