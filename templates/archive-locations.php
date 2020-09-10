@@ -32,11 +32,8 @@ get_header();
             </div>
             <div class="col-12 col-sm list-col">
                 <h2 class="sr-only">List of Locations</h2>
-                <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                <div class="alert alert-danger text-center" role="alert">
 					If you think you are experiencing a medical emergency, call 911 immediately.
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
 				</div>
                 <div class="row list-col-header">
                     <div class="col result-count"><?php echo facetwp_display( 'counts' ); ?> Locations</div>
