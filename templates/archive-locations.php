@@ -17,12 +17,12 @@ get_header();
         <h1 class="sr-only" itemprop="headline">Locations</h1>
         <div class="row">
             <div class="col-12 col-sm filter-col collapse">
-                <h2 class="h4">Search Locations</h2>
-                <?php  echo do_shortcode( '[wpdreams_ajaxsearchpro id=2]' ); ?>
-                <h2 class="h3">Filters</h2>
                 <button type="button" class="close" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
+                <h2 class="h4">Search Locations</h2>
+                <?php  echo do_shortcode( '[wpdreams_ajaxsearchpro id=2]' ); ?>
+                <h2 class="h3">Filters</h2>
                 <fieldset>
                     <legend class="sr-only">Filter by...</legend>
                     <div class="fwp-filter"><?php echo facetwp_display( 'facet', 'location_search' ); ?></div>
