@@ -255,6 +255,7 @@ add_filter( 'facetwp_assets', function( $assets ) {
     }
     return $assets;
 });
+add_filter( 'facetwp_load_a11y', '__return_true' );
 
 /** Cron Indexer **/
 function fwp_cron_index() {
