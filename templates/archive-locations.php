@@ -25,7 +25,6 @@ get_header();
                 <h2 class="h4">Filters</h2>
                 <fieldset>
                     <legend class="sr-only">Filter by...</legend>
-                    <div class="fwp-filter"><?php echo facetwp_display( 'facet', 'location_search' ); ?></div>
                     <div class="fwp-filter"><?php echo facetwp_display( 'facet', 'location_type' ); ?></div>
                     <div class="fwp-filter"><?php echo facetwp_display( 'facet', 'location_aoe' ); ?></div>
                     <div class="fwp-filter"><?php echo facetwp_display( 'facet', 'location_region' ); ?></div>
