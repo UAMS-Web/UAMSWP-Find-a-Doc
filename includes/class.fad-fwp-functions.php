@@ -22,7 +22,7 @@ add_filter( 'facetwp_shortcode_html', function( $output, $atts) {
 }, 10, 2 );
 
 function fwp_disable_auto_refresh() {
-    if ( is_post_type_archive( 'provider' ) ) {
+    if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) ) {
 	?>
 	<script>
 	(function($) {
