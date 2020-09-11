@@ -887,14 +887,9 @@
   width: 285px;
 }
 
-body .ajaxsearchpro#ajaxsearchpro2_1.focus,
-body .ajaxsearchpro#ajaxsearchpro2_1:focus-within,
-body .ajaxsearchpro#ajaxsearchpro2_2.focus,
-body .ajaxsearchpro#ajaxsearchpro2_2:focus-within,
-body .ajaxsearchpro[id^=ajaxsearchpro].focus,
-body .ajaxsearchpro[id^=ajaxsearchpro]:focus-within {
+.ajaxsearchpro[id^=ajaxsearchpro]:focus-within {
   outline: 0;
-  box-shadow: 0 0 0 .2rem rgba(157,34,53,.25);
+  box-shadow: 0 0 0 .2rem rgba(157,34,53,.25)!important;
 }
 
 @media (min-width:381px) {
