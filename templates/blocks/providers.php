@@ -50,8 +50,8 @@ if($filter_id) {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="module-title"><?php echo $heading; ?></h2>
-                        <?php echo $content_block ? $content_block : ''; ?>
+                        <h2 class="module-title"><span class="title"><?php echo $heading; ?></span></h2>
+                        <div class="module-body text-center"><p><?php echo $content_block ? $content_block : ''; ?></p></div>
                         <div class="card-list-container">
                             <div class="card-list card-list-doctors">
                                 <div class="card-list">
