@@ -31,6 +31,8 @@ if ( empty($content_block) )
     $content_block = get_field('block_fad_providers_description');
 if ( empty($background_color) )
     $background_color = get_field('block_fad_providers_background_color');
+if ( empty($count) )
+    $count = get_field('block_fad_providers_count');
 
 $filter_id = get_field('block_fad_providers_filter_ids');
 
@@ -46,14 +48,14 @@ if($filter_id) {
     $provider_query = new WP_Query( $args );
 
     if ( $provider_query->have_posts() ) : ?>
-        <section class="uams-module provider-list alignfull <?php echo $background_color ? $background_color : 'bg-auto'; ?>" id="<?php echo $id; ?>">
+        <section class="uams-module provider-list  alignfull <?php echo $background_color ? $background_color : 'bg-auto'; ?>" id="<?php echo $id; ?>">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <h2 class="module-title"><span class="title"><?php echo $heading; ?></span></h2>
                         <div class="module-body text-center"><p><?php echo $content_block ? $content_block : ''; ?></p></div>
                         <div class="card-list-container">
-                            <div class="card-list card-list-doctors">
+                            <div class="card-list card-list-doctors card-list-doctors-count-<?php echo $count; ?>">
                                 <div class="card-list">
                                 <?php while ( $provider_query->have_posts() ) : $provider_query->the_post();
                                     $id = get_the_ID(); 
