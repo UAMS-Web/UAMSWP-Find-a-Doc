@@ -114,13 +114,6 @@ if( function_exists('acf_add_local_field_group') ):
                 'choices' => array(
                     'bg-white' => 'White',
                     'bg-gray' => 'Gray',
-                    'bg-red' => 'Red',
-                    'bg-black' => 'Black',
-                    'bg-blue' => 'Blue',
-                    'bg-green' => 'Green',
-                    'bg-teal' => 'Teal',
-                    'bg-eggplant' => 'Eggplant',
-                    'bg-orange' => 'Orange',
                 ),
                 'default_value' => array(
                     0 => 'bg-white',
@@ -298,13 +291,6 @@ if( function_exists('acf_add_local_field_group') ):
                 'choices' => array(
                     'bg-white' => 'White',
                     'bg-gray' => 'Gray',
-                    'bg-red' => 'Red',
-                    'bg-black' => 'Black',
-                    'bg-blue' => 'Blue',
-                    'bg-green' => 'Green',
-                    'bg-teal' => 'Teal',
-                    'bg-eggplant' => 'Eggplant',
-                    'bg-orange' => 'Orange',
                 ),
                 'default_value' => array(
                     0 => 'bg-white',
