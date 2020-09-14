@@ -14,7 +14,7 @@ if ( empty ($id) ) {
     $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
 }
 
-$id = 'content-' . $id;  
+$id = 'providers-' . $id;  
     
 $className = '';
 if( !empty($block['className']) ) {
@@ -46,7 +46,7 @@ if($filter_id) {
     $provider_query = new WP_Query( $args );
 
     if ( $provider_query->have_posts() ) : ?>
-        <section class="uams-module provider-list alignfull <?php echo $background_color ? $background_color : 'bg-auto'; ?>" id="doctors">
+        <section class="uams-module provider-list alignfull <?php echo $background_color ? $background_color : 'bg-auto'; ?>" id="<?php echo $id; ?>">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">

@@ -14,7 +14,7 @@ if ( empty ($id) ) {
     $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
 }
 
-$id = 'content-' . $id;  
+$id = 'locations-' . $id;  
     
 $className = '';
 if( !empty($block['className']) ) {
@@ -63,7 +63,7 @@ if($filter_type || $filter_region) {
     $location_query = new WP_Query( $args );
 
     if ( $location_query->have_posts() ) : ?>
-        <section class="uams-module location-list alignfull <?php echo $background_color ? $background_color : 'bg-auto'; ?>" id="locations">
+        <section class="uams-module location-list alignfull <?php echo $background_color ? $background_color : 'bg-auto'; ?>" id="<?php echo $id; ?>">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
