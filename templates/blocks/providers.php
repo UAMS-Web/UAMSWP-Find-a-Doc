@@ -1,7 +1,7 @@
 <?php
 /*
  *
- * UAMS Provider Block
+ * UAMS Find-a-Doc Providers Block
  * 
  */
 

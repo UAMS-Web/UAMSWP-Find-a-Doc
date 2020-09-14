@@ -13,7 +13,7 @@ function uams_fad_register_blocks() {
     if( function_exists('acf_register_block_type') ) {
         acf_register_block_type(array(
             'name'              => 'fad-locations',
-            'title'             => __('UAMS F-a-D Locations'),
+            'title'             => __('UAMS Find-a-Doc Locations'),
             'description'       => __('Filtered Clinical Locations'),
             'category'          => 'common',
             'icon'              => 'location',
@@ -24,7 +24,7 @@ function uams_fad_register_blocks() {
         ));
         acf_register_block_type(array(
             'name'              => 'fad-providers',
-            'title'             => __('UAMS F-a-D Providers'),
+            'title'             => __('UAMS Find-a-Doc Providers'),
             'description'       => __('Filtered Providers'),
             'category'          => 'common',
             'icon'              => 'id',

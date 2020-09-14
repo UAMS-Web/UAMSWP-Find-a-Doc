@@ -1,7 +1,7 @@
 <?php
 /*
  *
- * UAMS Content Block
+ * UAMS Find-a-Doc Locations Block
  * 
  */
 
