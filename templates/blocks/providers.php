@@ -46,7 +46,7 @@ if($filter_id) {
     $provider_query = new WP_Query( $args );
 
     if ( $provider_query->have_posts() ) : ?>
-        <section class="uams-module provider-list <?php echo $background_color ? $background_color : 'bg-auto'; ?>" id="doctors">
+        <section class="uams-module provider-list alignfull <?php echo $background_color ? $background_color : 'bg-auto'; ?>" id="doctors">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">

@@ -63,7 +63,7 @@ if($filter_type || $filter_region) {
     $location_query = new WP_Query( $args );
 
     if ( $location_query->have_posts() ) : ?>
-        <section class="uams-module location-list <?php echo $background_color ? $background_color : 'bg-auto'; ?>" id="locations">
+        <section class="uams-module location-list alignfull <?php echo $background_color ? $background_color : 'bg-auto'; ?>" id="locations">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
