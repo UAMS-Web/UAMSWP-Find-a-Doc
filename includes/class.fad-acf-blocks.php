@@ -332,7 +332,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'label' => 'Cards Per Row',
                 'name' => 'block_fad_providers_count',
                 'type' => 'select',
-                'instructions' => 'Set the maximum number of provider cards per row at the largest viewport size.',
+                'instructions' => 'Set the maximum number of provider cards per row at the largest viewport size. Recommend only changing this value to prevent orphaned cards.',
                 'required' => 1,
                 'conditional_logic' => 0,
                 'wrapper' => array(
