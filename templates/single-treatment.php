@@ -191,6 +191,7 @@
 				"post_status" => "publish",
 				'order' => 'ASC',
 				'orderby' => 'title',
+				'posts_per_page' => -1,
 				'post__in'	=> $conditions_cpt
 			));
 			$conditions_query_cpt = new WP_Query( $args );

@@ -201,6 +201,7 @@
 				'post_status' => 'publish',
 				'order' => 'ASC',
 				'orderby' => 'title',
+				'posts_per_page' => -1,
 				'post__in' => $treatments_cpt
 			));
 			$treatments_query_cpt = new WP_Query( $args );
