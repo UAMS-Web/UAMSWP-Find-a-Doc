@@ -35,15 +35,19 @@ if ( empty($background_color) )
 $filter_type = get_field('block_fad_locations_filter_type');
 $filter_region = get_field('block_fad_locations_filter_region');
 
-$tax_query = array('relation' => 'AND');
-if (isset($filter_type))
+$tax_query = array();
+if (!empty($filter_region) && !empty($filter_type))
+{
+	$tax_query[] = array('relation' => 'AND');
+}
+if (!empty($filter_type))
 {
     $tax_query[] =  array(
             'taxonomy' => 'location_type',
             'terms' => $filter_type
         );
 }
-if (isset($filter_region))
+if (!empty($filter_region))
 {
     $tax_query[] =  array(
             'taxonomy' => 'region',
