@@ -276,31 +276,6 @@ if( function_exists('acf_add_local_field_group') ):
                 'new_lines' => '',
             ),
             array(
-                'key' => 'field_block_fad_providers_filter_ids',
-                'label' => 'Providers',
-                'name' => 'block_fad_providers_filter_ids',
-                'type' => 'relationship',
-                'instructions' => '',
-                'required' => 1,
-                'conditional_logic' => 0,
-                'wrapper' => array(
-                    'width' => '',
-                    'class' => '',
-                    'id' => '',
-                ),
-                'post_type' => array(
-                    0 => 'provider',
-                ),
-                'taxonomy' => '',
-                'filters' => array(
-                    0 => 'search',
-                ),
-                'elements' => '',
-                'min' => '',
-                'max' => '',
-                'return_format' => 'id',
-            ),
-            array(
                 'key' => 'field_block_fad_providers_filter_aoe',
                 'label' => 'Areas of Expertise',
                 'name' => 'block_fad_providers_filter_aoe',
@@ -373,6 +348,31 @@ if( function_exists('acf_add_local_field_group') ):
                 'load_terms' => 0,
                 'return_format' => 'id',
                 'multiple' => 0,
+            ),
+            array(
+                'key' => 'field_block_fad_providers_filter_ids',
+                'label' => 'Providers',
+                'name' => 'block_fad_providers_filter_ids',
+                'type' => 'relationship',
+                'instructions' => '',
+                'required' => 1,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'post_type' => array(
+                    0 => 'provider',
+                ),
+                'taxonomy' => '',
+                'filters' => array(
+                    0 => 'search',
+                ),
+                'elements' => '',
+                'min' => '',
+                'max' => '',
+                'return_format' => 'id',
             ),
             array(
                 'key' => 'field_block_fad_providers_count',
