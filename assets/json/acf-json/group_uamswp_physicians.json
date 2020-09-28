@@ -299,6 +299,25 @@
             "placement": "top",
             "endpoint": 0
         },
+        "field_physician_resident": {
+            "key": "field_physician_resident",
+            "name": "physician_resident",
+            "type": "true_false",
+            "label": "Is the provider a resident?",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
         "field_spacer_1": {
             "key": "field_spacer_1",
             "label": "",
