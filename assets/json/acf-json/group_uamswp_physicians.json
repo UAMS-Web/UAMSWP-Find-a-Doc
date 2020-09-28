@@ -1085,7 +1085,15 @@
             "label": "Institute Affiliations",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
