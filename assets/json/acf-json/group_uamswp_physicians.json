@@ -1430,6 +1430,31 @@
                     "maxlength": ""
                 },
                 {
+                    "key": "field_physician_resident_school",
+                    "label": "Medical School",
+                    "type": "taxonomy",
+                    "name": "physician_resident_school",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "school",
+                    "field_type": "select",
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "acfe_bidirectional": {
+                        "acfe_bidirectional_enabled": "0"
+                    },
+                    "multiple": 0,
+                    "allow_null": 0
+                },
+                {
                     "key": "field_physician_resident_bio",
                     "name": "physician_resident_bio",
                     "type": "wysiwyg",
