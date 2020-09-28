@@ -1463,25 +1463,6 @@
                     "allow_null": 0
                 },
                 {
-                    "key": "field_physician_resident_bio",
-                    "name": "physician_resident_bio",
-                    "type": "wysiwyg",
-                    "label": "Resident Bio",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "tabs": "all",
-                    "toolbar": "full",
-                    "media_upload": 0,
-                    "delay": 0
-                },
-                {
                     "key": "field_physician_resident_academic",
                     "label": "Program Details",
                     "name": "",
