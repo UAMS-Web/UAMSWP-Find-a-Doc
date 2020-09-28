@@ -608,7 +608,15 @@
             "label": "Clinical Administrative Title",
             "instructions": "Both fields are required if you add a row. This is not displayed on the front end at this time.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
