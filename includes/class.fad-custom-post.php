@@ -392,6 +392,7 @@ add_action( 'init', 'create_academic_admin_title_taxonomy', 0 );
 add_action( 'init', 'create_academic_college_taxonomy', 0 );
 add_action( 'init', 'create_education_taxonomy', 0 );
 add_action( 'init', 'create_schools_taxonomy', 0 );
+add_action( 'init', 'create_residency_years_taxonomy', 0 );
 // Locations Taxonomies
 add_action( 'init', 'create_region_taxonomy', 0 );
 add_action( 'init', 'create_location_type_taxonomy', 0 );
@@ -1227,6 +1228,57 @@ function create_schools_taxonomy() {
 		'capabilities'               => $capabilities,
 	);
 	register_taxonomy( 'school', array( 'provider' ), $args );
+
+}
+
+
+function create_residency_years_taxonomy() {
+	$labels = array(
+		'name'                       => 'Residency Years',
+		'singular_name'              => 'Residency Year',
+		'menu_name'                  => 'Residency Years',
+		'all_items'                  => 'All Residency Years',
+		'parent_item'                => 'Parent Residency Year',
+		'parent_item_colon'          => 'Parent Residency Year:',
+		'new_item_name'              => 'New Residency Year',
+		'add_new_item'               => 'Add New Residency Year',
+		'edit_item'                  => 'Edit Residency Year',
+		'update_item'                => 'Update Residency Year',
+		'view_item'                  => 'View Residency Year',
+		'separate_items_with_commas' => 'Separate residency year with commas',
+		'add_or_remove_items'        => 'Add or remove residency years',
+		'choose_from_most_used'      => 'Choose from the most used',
+		'popular_items'              => 'Popular Residency Year',
+		'search_items'               => 'Search Residency Year',
+		'not_found'                  => 'Not Found',
+		'no_terms'                   => 'No Residency Year',
+		'items_list'                 => 'Residency Year list',
+		'items_list_navigation'      => 'Residency Year list navigation',
+	);
+	$rewrite = array(
+		'slug'                       => 'residency_year',
+		'with_front'                 => false,
+		'hierarchical'               => false,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => false,
+		'public'                     => true,
+		'show_ui'                    => true,  //Made true to add / edit
+		'meta_box_cb'				 => false,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+	);
+	register_taxonomy( 'residency_year', array( 'provider' ), $args );
 
 }
 
