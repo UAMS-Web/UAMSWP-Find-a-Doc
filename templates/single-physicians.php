@@ -39,8 +39,10 @@ $full_name = get_field('physician_first_name',$post->ID) .' ' .(get_field('physi
 $medium_name = ($prefix ? $prefix .' ' : '') . get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID);
 $short_name = $prefix ? $prefix .' ' .get_field('physician_last_name',$post->ID) : get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '');
 $excerpt = get_field('physician_short_clinical_bio',$post->ID);
+$resident = get_field('physician_resident',$post->ID);
+$resident_title_name = 'Resident Physician';
 $phys_title = get_field('physician_title',$post->ID);
-$phys_title_name = get_term( $phys_title, 'clinical_title' )->name;
+$phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
 $vowels = array('a','e','i','o','u');
 if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
     $phys_title_indef_article = 'an';
@@ -242,8 +244,8 @@ while ( have_posts() ) : the_post();
                         <span class="name"><?php echo $full_name; ?></span>
                         <?php 
                         
-                        if ($phys_title && !empty($phys_title)) { ?>
-                            <span class="subtitle"><?php echo ($phys_title ? get_term( $phys_title, 'clinical_title' )->name : ''); ?></span>
+                        if ($phys_title_name && !empty($phys_title_name)) { ?>
+                            <span class="subtitle"><?php echo ($phys_title_name ? $phys_title_name : ''); ?></span>
                         <?php } ?>
                     </h1>
                     <h2 class="sr-only">Overview</h2>
