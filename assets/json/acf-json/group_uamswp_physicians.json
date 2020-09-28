@@ -1141,6 +1141,30 @@
             "ui_on_text": "",
             "ui_off_text": ""
         },
+        "field_physician_resident_profile_tab": {
+            "key": "field_physician_resident_profile_tab",
+            "name": "",
+            "type": "tab",
+            "label": "<i class=\"dashicons dashicons-id-alt\"><\/i> Resident Profile",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
         "field_physician_academic_profile_tab": {
             "key": "field_physician_academic_profile_tab",
             "name": "",
