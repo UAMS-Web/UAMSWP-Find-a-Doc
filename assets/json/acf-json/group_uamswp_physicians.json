@@ -1505,13 +1505,40 @@
                     "allow_null": 0
                 },
                 {
+                    "key": "field_physician_resident_academic_chief",
+                    "name": "physician_resident_academic_chief",
+                    "type": "true_false",
+                    "label": "Chief Resident?",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
                     "key": "field_physician_resident_academic_year",
                     "name": "physician_resident_academic_year",
                     "type": "taxonomy",
                     "label": "Residency Year",
                     "instructions": "",
                     "required": 1,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_physician_resident_academic_chief",
+                                "operator": "==",
+                                "value": "0"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
