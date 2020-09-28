@@ -1245,6 +1245,278 @@
             "placement": "top",
             "endpoint": 0
         },
+        "field_physician_resident_profile_group": {
+            "key": "field_physician_resident_profile_group",
+            "label": "",
+            "name": "physician_resident_profile_group",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "layout": "block",
+            "acfe_seamless_style": 1,
+            "acfe_group_modal": 0,
+            "sub_fields": [
+                {
+                    "key": "field_physician_resident_hometown",
+                    "label": "Personal Details",
+                    "name": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "placement": "left",
+                    "endpoint": 0
+                },
+                {
+                    "key": "field_physician_resident_hometown_international",
+                    "name": "physician_resident_hometown_international",
+                    "type": "true_false",
+                    "label": "Is the hometown outside the U.S.?",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_physician_resident_hometown_city",
+                    "name": "physician_resident_hometown_city",
+                    "type": "text",
+                    "label": "Hometown City",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_physician_resident_hometown_state",
+                    "name": "physician_resident_hometown_state",
+                    "type": "select",
+                    "label": "Hometown State \/ District \/ Territory",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_physician_resident_hometown_international",
+                                "operator": "==",
+                                "value": "0"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "Alabama": "Alabama",
+                        "Alaska": "Alaska",
+                        "Arizona": "Arizona",
+                        "Arkansas": "Arkansas",
+                        "California": "California",
+                        "Colorado": "Colorado",
+                        "Connecticut": "Connecticut",
+                        "Delaware": "Delaware",
+                        "D.C.": "District of Columbia",
+                        "Florida": "Florida",
+                        "Georgia": "Georgia",
+                        "Guam": "Guam",
+                        "Hawaii": "Hawaii",
+                        "Idaho": "Idaho",
+                        "Illinois": "Illinois",
+                        "Indiana": "Indiana",
+                        "Iowa": "Iowa",
+                        "Kansas": "Kansas",
+                        "Kentucky": "Kentucky",
+                        "Louisiana": "Louisiana",
+                        "Maine": "Maine",
+                        "Maryland": "Maryland",
+                        "Massachusetts": "Massachusetts",
+                        "Michigan": "Michigan",
+                        "Minnesota": "Minnesota",
+                        "Mississippi": "Mississippi",
+                        "Missouri": "Missouri",
+                        "Montana": "Montana",
+                        "Nebraska": "Nebraska",
+                        "Nevada": "Nevada",
+                        "New Hampshire": "New Hampshire",
+                        "New Jersey": "New Jersey",
+                        "New Mexico": "New Mexico",
+                        "New York": "New York",
+                        "North Carolina": "North Carolina",
+                        "North Dakota": "North Dakota",
+                        "Northern Mariana Islands": "Northern Mariana Islands",
+                        "Ohio": "Ohio",
+                        "Oklahoma": "Oklahoma",
+                        "Oregon": "Oregon",
+                        "Pennsylvania": "Pennsylvania",
+                        "Puerto Rico": "Puerto Rico",
+                        "Rhode Island": "Rhode Island",
+                        "South Carolina": "South Carolina",
+                        "South Dakota": "South Dakota",
+                        "Tennessee": "Tennessee",
+                        "Texas": "Texas",
+                        "Utah": "Utah",
+                        "Vermont": "Vermont",
+                        "Virgin Islands": "Virgin Islands",
+                        "Virginia": "Virginia",
+                        "Washington": "Washington",
+                        "West Virginia": "West Virginia",
+                        "Wisconsin": "Wisconsin",
+                        "Wyoming": "Wyoming"
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_physician_resident_hometown_country",
+                    "name": "physician_resident_hometown_country",
+                    "type": "text",
+                    "label": "Hometown Country",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_physician_resident_hometown_international",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_physician_resident_bio",
+                    "name": "physician_resident_bio",
+                    "type": "wysiwyg",
+                    "label": "Resident Bio",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 0,
+                    "delay": 0
+                },
+                {
+                    "key": "field_physician_resident_academic",
+                    "label": "Program Details",
+                    "name": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "placement": "left",
+                    "endpoint": 0
+                },
+                {
+                    "key": "field_physician_resident_academic_department",
+                    "name": "physician_resident_academic_department",
+                    "type": "taxonomy",
+                    "label": "Academic Department",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "academic_department",
+                    "field_type": "select",
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "acfe_bidirectional": {
+                        "acfe_bidirectional_enabled": "0"
+                    },
+                    "multiple": 0,
+                    "allow_null": 0
+                },
+                {
+                    "key": "field_physician_resident_academic_year",
+                    "name": "physician_resident_academic_year",
+                    "type": "taxonomy",
+                    "label": "Residency Year",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "residency_year",
+                    "field_type": "select",
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "acfe_bidirectional": {
+                        "acfe_bidirectional_enabled": "0"
+                    },
+                    "multiple": 0,
+                    "allow_null": 0
+                }
+            ]
+        },
         "field_physician_academic_profile_tab": {
             "key": "field_physician_academic_profile_tab",
             "name": "",
