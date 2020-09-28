@@ -1464,7 +1464,7 @@
                 },
                 {
                     "key": "field_physician_resident_academic",
-                    "label": "Program Details",
+                    "label": "Residency Program Details",
                     "name": "",
                     "type": "tab",
                     "instructions": "",
