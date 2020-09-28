@@ -34,17 +34,17 @@
 					<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name; ?>" class="stretched-link">
 						<picture>
 						<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 486, 648, 'center', 'center'); ?> 2x"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
 								media="(min-width: 2054px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?> 2x"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
 								media="(min-width: 1784px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 486, 648, 'center', 'center'); ?> 2x"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
 								media="(min-width: 1200px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?> 2x"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
 								media="(min-width: 768px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 95, 127, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 190, 254, 'center', 'center'); ?> 2x"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 95, 127, 'center', 'center'); ?>"
 								media="(min-width: 576px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?> 2x"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
 								media="(min-width: 1px)">
 							<img src="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>" alt="<?php echo $full_name; ?>" />
 						<?php } elseif ( has_post_thumbnail() ) { ?>
