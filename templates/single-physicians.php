@@ -139,6 +139,18 @@ while ( have_posts() ) : the_post();
     $video = get_field('physician_youtube_link');
     $affiliation = get_field('physician_affiliation');
     $hidden = get_field('physician_hidden');
+    $resident_profile_group = get_field('physician_resident_profile_group');
+    // $resident_hometown_international = $resident_profile_group['physician_resident_hometown_international'];
+    // $resident_hometown_city = $resident_profile_group['physician_resident_hometown_city'];
+    // $resident_hometown_state = $resident_profile_group['physician_resident_hometown_state'];
+    // $resident_hometown_country = $resident_profile_group['physician_resident_hometown_country'];
+    // $resident_medical_school = $resident_profile_group['physician_resident_hometown_country'];
+    $resident_academic_department = $resident_profile_group['physician_resident_academic_department'];
+    $resident_academic_department_name = get_term( $resident_academic_department, 'academic_department' )->name;
+    $resident_academic_chief = $resident_profile_group['physician_resident_academic_chief'];
+    $resident_academic_chief_name = $resident_academic_chief ? 'Chief Resident' : '';
+    $resident_academic_year = $resident_profile_group['physician_resident_academic_year'];
+    $resident_academic_name = $resident_academic_chief ? $resident_academic_chief_name : $resident_academic_year->name;
     $college_affiliation = get_field('physician_academic_college');
     $position = get_field('physician_academic_position');
     $bio_academic = get_field('physician_academic_bio');
@@ -233,6 +245,7 @@ while ( have_posts() ) : the_post();
     // Add one instance of a class (' has-empty-selected-pub-id') if there is an empty year field in any of the physician_awards rows.
     // Add one instance of a class (' has-empty-selected-pub-info') if there is an empty title field in any of the physician_awards rows.
     if ($additional_info && !empty($additional_info)) { $provider_field_classes = $provider_field_classes . ' has-additional-info'; }
+    if ($resident && !empty($resident)) { $provider_field_classes = $provider_field_classes . ' is-resident'; }
 ?>
 
 <div class="content-sidebar-wrap">
@@ -705,7 +718,7 @@ while ( have_posts() ) : the_post();
                 $physician_academic_split = true;
             }
         
-            if($academic_bio || $academic_appointment || $academic_admin_title || $education || $boards): ?>
+            if( $resident || $academic_bio || $academic_appointment || $academic_admin_title || $education || $boards): ?>
         <section class="uams-module academic-info bg-auto">
             <div class="container-fluid">
                 <div class="row">
@@ -761,6 +774,14 @@ while ( have_posts() ) : the_post();
                                         <dt><?php echo $department->name; ?></dt>
                                         <dd><?php echo $academic_title; ?></dd>
                                     <?php endwhile; ?>
+                                    </dl>
+                            <?php endif; ?>
+                            <?php
+                                if( $resident ): ?>
+                                    <h3 class="h4">Residency Program</h3>
+                                    <dl>
+                                        <dt><?php echo $resident_academic_department_name; ?></dt>
+                                        <dd><?php echo $resident_academic_name; ?></dd>
                                     </dl>
                             <?php endif; ?>
                             <?php
