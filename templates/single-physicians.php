@@ -55,7 +55,7 @@ if ( substr($short_name, -1) == 's' ) { // Defines a or an, based on whether cli
     $short_name_possessive = $short_name . '\'s';
 }
 $bio = get_field('physician_clinical_bio',$post->ID);
-$eligible_appt = get_field('physician_eligible_appointments',$post->ID);
+$eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$post->ID);
 // Check for valid locations
 $locations = get_field('physician_locations',$post->ID);
 $location_valid = false;
