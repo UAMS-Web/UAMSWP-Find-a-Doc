@@ -1241,6 +1241,12 @@
                 "width": "",
                 "class": "",
                 "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         },
         "field_physician_resident_profile_tab": {
             "key": "field_physician_resident_profile_tab",
@@ -1272,11 +1278,6 @@
             "name": "physician_resident_profile_group",
             "type": "group",
             "instructions": "",
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
             "acfe_permissions": "",
             "layout": "block",
             "acfe_seamless_style": 1,
