@@ -634,12 +634,12 @@ while ( have_posts() ) : the_post();
                         <div class="col-12">
                             <h2 class="module-title"><span class="title">UAMS Health Talk Podcast</span></h2>
                             <div class="module-body text-center">
-                                <p class="lead">Stuff about the podcast series and that this is the episodes about <?php echo $short_name; ?>.</p>
+                                <p class="lead">In the UAMS Health Talk podcast, experts from UAMS talk about a variety of health topics, providing tips and guidelines to help people lead healthier lives. Listen to the episode(s) featuring <?php echo $short_name; ?>.</p>
                             </div>
                             <div class="content-width mt-8" id="radiomd-embedded-filtered-doctor"></div>
                         </div>
                         <div class="col-12 more">
-                            <p class="lead">Stuff about more podcast episodes.</p>
+                            <p class="lead">Find other great episodes on other topics and from other UAMS providers.</p>
                             <div class="cta-container">
                                 <a href="/podcast" class="btn btn-primary" aria-label="More UAMS Health Talk podcast episodes">Listen to More Episodes</a>
                             </div>
