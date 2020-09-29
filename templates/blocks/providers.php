@@ -34,12 +34,17 @@ if ( empty($background_color) )
 if ( empty($count) )
     $count = get_field('block_fad_providers_count');
 
+// Set up Vars to hold Post Ids
 $post_ids = array();
+$location_ids = array();
+$aoe_ids = array();
+// Grab ACF values
 $filter_id = get_field('block_fad_providers_filter_ids') ?: array();
 $filter_aoe = get_field('block_fad_providers_filter_aoe') ?: array();
 $filter_region = get_field('block_fad_providers_filter_region');
 $filter_location = get_field('block_fad_providers_filter_location');
 
+// Build Taxonomy Query, if region is set
 $tax_query = array();
 if (!empty($filter_region))
 {
@@ -48,82 +53,55 @@ if (!empty($filter_region))
         'terms' => $filter_region
     );
 }
-
-// $meta_query = array();
+// Use custom table function
 if (!empty($filter_location))
 {   
-        // Declare the global wpdb variable
-        global $wpdb;
-
-        $custom_table = $wpdb->prefix."uamswp_physicians";
-
-        $filter_where ='';        
-        $i = 1;
-        foreach ($filter_location as $value) {
-            if ($i > 1) {
-                $filter_where .= " OR ";
-            }
-            $filter_where .= "`physician_locations` LIKE '%" . $value . "%'";
-            $i++;
-        }
-    
-        // Write our custom query. In this query, we're only selecting the post_id field of each row that matches our set of
-        // conditions. Note the %s placeholders – these are dynamic and indicate that we'll be injecting strings in their place.
-        $SQL = "SELECT `post_id` FROM `" . $custom_table . "`
-                WHERE $filter_where
-                ORDER BY `post_id` ASC;";
-    
-        // Query the database with our SQL statement, fetching the first column of the matched rows. In our case, we
-        // only queried the post_id field of each row so we know that the post_id fields will be the first column. The result
-        // here is an array of post_ids (provided we have a match)
-        $post_ids = $wpdb->get_col( $SQL );
+    $location_ids = uamswp_custom_table_query('uamswp_physicians', 'physician_locations', $filter_location);
 }
 if (!empty($filter_aoe))
 {   
-        // Declare the global wpdb variable
-        global $wpdb;
-
-        $custom_table = $wpdb->prefix."uamswp_physicians";
-
-        $filter_where ='';        
-        $i = 1;
-        foreach ($filter_aoe as $value) {
-            if ($i > 1) {
-                $filter_where .= " OR ";
-            }
-            $filter_where .= "`physician_expertise` LIKE '%" . $value . "%'";
-            $i++;
-        }
-    
-        // Write our custom query. In this query, we're only selecting the post_id field of each row that matches our set of
-        // conditions. Note the %s placeholders – these are dynamic and indicate that we'll be injecting strings in their place.
-        $SQL = "SELECT `post_id` FROM `" . $custom_table . "`
-                WHERE $filter_where
-                ORDER BY `post_id` ASC;";
-    
-        // Query the database with our prepared SQL statement, fetching the first column of the matched rows. In our case, we
-        // only queried the post_id field of each row so we know that the post_id fields will be the first column. The result
-        // here is an array of post_ids (provided we have a match)
-        $aoe_ids = $wpdb->get_col( $SQL );
-}
-if(!empty($filter_id) || !empty($filter_location) || !empty($filter_aoe)) {
-    $filter_id = array_unique( array_merge( $filter_id, $post_ids, $aoe_ids ) );
+    $aoe_ids = uamswp_custom_table_query('uamswp_physicians', 'physician_expertise', $filter_aoe);
 }
 
-if($filter_id || $filter_region || $filter_location) {
+// Build $post_ids from $location_ids and $aoe_ids
+if (!empty($location_ids) && !empty($aoe_ids)){
+    $post_ids = array_intersect($location_ids, $aoe_ids);
+} else {
+    $post_ids = array_merge($location_ids, $aoe_ids);
+}
+    
+// If values are set
+if($filter_id || $filter_region || $filter_location || $filter_aoe) {
+    // If region or location 
+    if ($filter_region || $filter_location || $filter_aoe) {
+        // Build Query to get Ids from filters
+        $args = (array(
+            'post_type' => "provider",
+            'order' => 'ASC',
+            'orderby' => 'title',
+            'posts_per_page' => -1,
+            'post_status' => 'publish',
+            'post__in' => $post_ids,
+            'tax_query' => $tax_query,
+            'fields' => 'ids',
+        ));
+        $filtered_query = new WP_Query( $args ); 
+        $filter_id = array_unique( array_merge( $filter_id,  $filtered_query->posts ) );
+    }
+    // Build Main Query from Post Ids (Filtered IDs + Specific IDs)
     $args = (array(
         'post_type' => "provider",
         'order' => 'ASC',
         'orderby' => 'title',
         'posts_per_page' => -1,
         'post_status' => 'publish',
-        'post__in' => $filter_id,
-        'tax_query' => $tax_query,
+        'post__in' => $filter_id
     ));
     $provider_query = new WP_Query( $args ); 
 
-    echo '<pre>'; print_r($SQL); echo '</pre>';
-    // echo '<pre>'; print_r($filter_id); echo '</pre>';
+    // echo '<pre>'; print_r($SQL); echo '</pre>';
+    // echo '<pre>'; print_r($post_ids); echo '</pre>';
+    // echo '<pre>'; print_r($args); echo '</pre>';
     
     if ( $provider_query->have_posts() ) : ?>
         <section class="uams-module provider-list  alignfull <?php echo $background_color ? $background_color : 'bg-auto'; ?>" id="<?php echo $id; ?>">
