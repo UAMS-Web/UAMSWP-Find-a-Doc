@@ -176,6 +176,7 @@ while ( have_posts() ) : the_post();
     $research_bio = get_field('physician_research_bio');
     $research_interests = get_field('physician_research_interests');
     $research_profiles_link = get_field('physician_research_profiles_link');
+    $podcast_name = get_field('physician_podcast_name');
 
 
     // Classes for indicating presence of content
@@ -613,6 +614,40 @@ while ( have_posts() ) : the_post();
                 </div>
             </section>
         <?php } // endif ?>
+        <?php
+            // UAMS Health Talk Podcast
+            if ($podcast_name) {
+        ?>
+            <section class="uams-module podcast-list bg-auto" id="podcast">
+                <script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
+                </script>
+                <script type="text/javascript">
+                    radiomd_embedded_filtered_doctor("uams","radiomd-embedded-filtered-doctor",303,1837,"<?php echo $podcast_name; ?>"); </script>
+                <style type="text/css">
+                    #radiomd-embedded-filtered-doctor iframe {
+                        width: 100%;
+                        border: none;
+                    }
+                </style>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="module-title"><span class="title">UAMS Health Talk Podcast</span></h2>
+                            <div class="module-body text-center">
+                                <p class="lead">Stuff about the podcast series and that this is the episodes about <?php echo $short_name; ?>.</p>
+                            </div>
+                            <div class="content-width mt-8" id="radiomd-embedded-filtered-doctor"></div>
+                        </div>
+                        <div class="col-12 more">
+                            <p class="lead">Stuff about more podcast episodes.</p>
+                            <div class="cta-container">
+                                <a href="/podcast" class="btn btn-primary" aria-label="More UAMS Health Talk podcast episodes">Listen to More Episodes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <?php } ?>
         <?php // load all 'conditions' terms for the post
             $title_append = ' by ' . $short_name;
              
