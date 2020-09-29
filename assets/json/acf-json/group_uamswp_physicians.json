@@ -1229,6 +1229,19 @@
             "ui_on_text": "",
             "ui_off_text": ""
         },
+        "field_physician_podcast_name": {
+            "key": "field_physician_podcast_name",
+            "name": "physician_podcast_name",
+            "type": "text",
+            "label": "UAMS Health Talk Podcast Doctor Name",
+            "instructions": "Doctor name as listed in the dropdown",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+        },
         "field_physician_resident_profile_tab": {
             "key": "field_physician_resident_profile_tab",
             "name": "",
@@ -1259,13 +1272,11 @@
             "name": "physician_resident_profile_group",
             "type": "group",
             "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
             "acfe_permissions": "",
             "layout": "block",
             "acfe_seamless_style": 1,
