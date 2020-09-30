@@ -22,7 +22,7 @@ add_filter( 'facetwp_shortcode_html', function( $output, $atts) {
 }, 10, 2 );
 
 function fwp_disable_auto_refresh() {
-    if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) ) {
+    if ( is_post_type_archive( 'provider' ) ) {
 	?>
 	<script>
 	(function($) {
@@ -58,7 +58,7 @@ function fwp_facet_scripts() {
         $('.fs-dropdown .fs-search input').each(function() {
             $(this).attr('aria-labelledby', "facet_" + $(this).closest('.facetwp-facet').attr('data-name') );
         });
-        $('.facetwp-sort-select, .facetwp-dropdown').each(function() {
+        $('select .facetwp-dropdown').each(function() {
             $(this).attr('aria-labelledby', "facet_" + $(this).closest('.facetwp-facet').attr('data-name') );
         });
         $('select.facetwp-sort-select').each(function() {
@@ -255,7 +255,6 @@ add_filter( 'facetwp_assets', function( $assets ) {
     }
     return $assets;
 });
-add_filter( 'facetwp_load_a11y', '__return_true' );
 
 /** Cron Indexer **/
 function fwp_cron_index() {

@@ -634,15 +634,15 @@ while ( have_posts() ) : the_post(); ?>
 					<?php if ( $location_images_count == 1 ) { ?>
 						<picture>
 							<?php if ( function_exists( 'fly_add_image_size' ) && !empty($location_images[0]) ) { ?>
-								<source srcset="<?php echo image_sizer($location_images[0], 630, 473, 'center', 'center'); ?>"
+								<source srcset="<?php echo image_sizer($location_images[0], 630, 473, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images[0], 1260, 946, 'center', 'center'); ?> 2x"
 									media="(min-width: 1350px)">
-								<source srcset="<?php echo image_sizer($location_images[0], 572, 429, 'center', 'center'); ?>"
+								<source srcset="<?php echo image_sizer($location_images[0], 572, 429, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images[0], 1144, 858, 'center', 'center'); ?> 2x"
 									media="(min-width: 992px)">
-								<source srcset="<?php echo image_sizer($location_images[0], 992, 558, 'center', 'center'); ?>"
+								<source srcset="<?php echo image_sizer($location_images[0], 992, 558, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images[0], 1984, 1116, 'center', 'center'); ?> 2x"
 									media="(min-width: 768px)">
-								<source srcset="<?php echo image_sizer($location_images[0], 768, 432, 'center', 'center'); ?>"
+								<source srcset="<?php echo image_sizer($location_images[0], 768, 432, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images[0], 1536, 864, 'center', 'center'); ?> 2x"
 									media="(min-width: 576px)">
-								<source srcset="<?php echo image_sizer($location_images[0], 576, 324, 'center', 'center'); ?>"
+								<source srcset="<?php echo image_sizer($location_images[0], 576, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images[0], 1152, 648, 'center', 'center'); ?> 2x"
 									media="(min-width: 1px)">
 								<img src="<?php echo image_sizer($location_images[0], 630, 473, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images[0], '_wp_attachment_image_alt', true ); ?>" class="single-image" />
 							<?php } else {  ?>
@@ -658,15 +658,15 @@ while ( have_posts() ) : the_post(); ?>
 									<div class="carousel-item<?php echo ($location_carousel_slide == 1) ? ' active' : '' ?>">
 										<picture>
 											<?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
-												<source srcset="<?php echo image_sizer($location_images_item, 630, 473, 'center', 'center'); ?>"
+												<source srcset="<?php echo image_sizer($location_images_item, 630, 473, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images_item, 1260, 946, 'center', 'center'); ?> 2x"
 													media="(min-width: 1350px)">
-												<source srcset="<?php echo image_sizer($location_images_item, 572, 429, 'center', 'center'); ?>"
+												<source srcset="<?php echo image_sizer($location_images_item, 572, 429, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images_item, 1144, 858, 'center', 'center'); ?> 2x"
 													media="(min-width: 992px)">
-												<source srcset="<?php echo image_sizer($location_images_item, 992, 558, 'center', 'center'); ?>"
+												<source srcset="<?php echo image_sizer($location_images_item, 992, 558, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images_item, 1984, 1116, 'center', 'center'); ?> 2x"
 													media="(min-width: 768px)">
-												<source srcset="<?php echo image_sizer($location_images_item, 768, 432, 'center', 'center'); ?>"
+												<source srcset="<?php echo image_sizer($location_images_item, 768, 432, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images_item, 1536, 864, 'center', 'center'); ?> 2x"
 													media="(min-width: 576px)">
-												<source srcset="<?php echo image_sizer($location_images_item, 576, 324, 'center', 'center'); ?>"
+												<source srcset="<?php echo image_sizer($location_images_item, 576, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer($location_images_item, 1152, 648, 'center', 'center'); ?> 2x"
 													media="(min-width: 1px)">
 												<img src="<?php echo image_sizer($location_images_item, 630, 473, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images_item, '_wp_attachment_image_alt', true ); ?>" />
 											<?php } else {  ?>
@@ -1317,7 +1317,7 @@ while ( have_posts() ) : the_post(); ?>
 					<div class="card-list-container">
 						<div class="card-list">
 							<div class="card">
-								<img srcset="https://picsum.photos/434/244?image=1066" src="https://picsum.photos/434/244?image=1066" class="card-img-top" alt="Image description or Story title">
+								<img srcset="https://picsum.photos/434/244?image=1066 1x, https://picsum.photos/868/488?image=1066 2x" src="https://picsum.photos/434/244?image=1066" class="card-img-top" alt="Image description or Story title">
 								<div class="card-body">
 									<h3 class="card-title">
 										<span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
@@ -1327,7 +1327,7 @@ while ( have_posts() ) : the_post(); ?>
 								</div>
 							</div>
 							<div class="card">
-								<img srcset="https://picsum.photos/434/244?image=348" src="https://picsum.photos/434/244?image=348" class="card-img-top" alt="Image description or Story title">
+								<img srcset="https://picsum.photos/434/244?image=348 1x, https://picsum.photos/868/488?image=348 2x" src="https://picsum.photos/434/244?image=348" class="card-img-top" alt="Image description or Story title">
 								<div class="card-body">
 									<h3 class="card-title">
 										<span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
@@ -1337,7 +1337,7 @@ while ( have_posts() ) : the_post(); ?>
 								</div>
 							</div>
 							<div class="card">
-								<img srcset="https://picsum.photos/434/244?image=823" src="https://picsum.photos/434/244?image=823" class="card-img-top" alt="Image description or Story title">
+								<img srcset="https://picsum.photos/434/244?image=823 1x, https://picsum.photos/868/488?image=823 2x" src="https://picsum.photos/434/244?image=823" class="card-img-top" alt="Image description or Story title">
 								<div class="card-body">
 									<h3 class="card-title">
 										<span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
