@@ -191,45 +191,45 @@ add_filter( 'facetwp_pager_html', function( $output, $params ) {
 
         // First Page
         if ( 3 < $page ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link first-page" data-page="1"><span class="fas fa-fast-backward" aria-hidden="true"></span></a></li>';
+            $output .= '<li class="page-item"><a class="facetwp-page page-link first-page" title="First Page" data-page="1"><span class="fas fa-fast-backward" aria-hidden="true"></span></a></li>';
         }
-        
+
         // Previous page (NEW)
         if ( $page > 1 ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page - 1) . '"><span class="fas fa-angle-left" aria-hidden="true"></span></a></li>';
+            $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Previous Page" data-page="' . ($page - 1) . '"><span class="fas fa-angle-left" aria-hidden="true"></span></a></li>';
         }
-        
+
         if ( 1 < ( $page - 10 ) ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page - 10) . '">' . ($page - 10) . '</a></li>';
+            $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Page ' . ($page - 10) . '" data-page="' . ($page - 10) . '">' . ($page - 10) . '</a></li>';
         }
         for ( $i = 2; $i > 0; $i-- ) {
             if ( 0 < ( $page - $i ) ) {
-                $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page - $i) . '">' . ($page - $i) . '</a></li>';
+                $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Page ' . ($page - $i) . '" data-page="' . ($page - $i) . '">' . ($page - $i) . '</a></li>';
             }
         }
 
         // Current page
-        $output .= '<li class="page-item"><a class="facetwp-page page-link active" data-page="' . $page . '">' . $page . '</a></li>';
+        $output .= '<li class="page-item"><a class="facetwp-page page-link active" title="Page ' . $page . '" data-page="' . $page . '">' . $page . '</a></li>';
 
         for ( $i = 1; $i <= 2; $i++ ) {
             if ( $total_pages >= ( $page + $i ) ) {
-                $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page + $i) . '">' . ($page + $i) . '</a></li>';
+                $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Page ' . ($page + $i) . '" data-page="' . ($page + $i) . '">' . ($page + $i) . '</a></li>';
             }
         }
         if ( $total_pages > ( $page + 10 ) ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page + 10) . '">' . ($page + 10) . '</a></li>';
+            $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Page ' . ($page + 10) . '" data-page="' . ($page + 10) . '">' . ($page + 10) . '</a></li>';
         }
 
         // Next page (NEW)
         if ( $page < $total_pages ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page + 1) . '"><span class="fas fa-angle-right" aria-hidden="true"></span></a>';
+            $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Next Page" data-page="' . ($page + 1) . '"><span class="fas fa-angle-right" aria-hidden="true"></span></a>';
         }
-        
+
         // Last Page
         if ( $total_pages > ( $page + 2 ) ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link last-page" data-page="' . $total_pages . '"><span class="fas fa-fast-forward aria-hidden="true"></span></a></li>';
+            $output .= '<li class="page-item"><a class="facetwp-page page-link last-page" title="Last Page" data-page="' . $total_pages . '"><span class="fas fa-fast-forward aria-hidden="true"></span></a></li>';
         }
-		
+
 		$output .= '</ul></nav>';
 
     }
