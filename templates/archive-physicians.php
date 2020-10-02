@@ -31,7 +31,7 @@ get_header();
 ?>
 <div class="content-sidebar-wrap">
 	<main class="container-fluid doctor-list" id="genesis-content">
-		<h1 class="sr-only" itemprop="headline">UAMS Providers</h1>
+		<h1 class="sr-only">UAMS Providers</h1>
 		<div class="row">
 			<div class="col-12 col-sm filter-col collapse">
 				<h2 class="h3">Filters</h2>
@@ -59,8 +59,11 @@ get_header();
 			</div>
 			<div class="col-12 col-sm list-col">
 				<h2 class="sr-only">List of Providers</h2>
-				<div class="alert alert-danger text-center" role="alert">
+				<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
 					If you think you are experiencing a medical emergency, call 911 immediately.
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
 				<div class="row list-col-header">
 					<div class="col result-count"><?php echo facetwp_display( 'counts' ); ?> Providers</div>
@@ -97,11 +100,10 @@ get_header();
 								</button>
 							</div>
 							<div class="modal-body">
-								<p>There is no publicly available rating for this medical professional for one of three reasons:</p>
+								<p>There is no publicly available rating for this medical professional for one of two reasons:</p>
 								<ul>
 									<li>He or she does not see patients</li>
 									<li>He or she sees patients but has not yet received the minimum number of Patient Satisfaction Reviews. To be eligible for display, we require a minimum of 30 surveys. This ensures that the rating is statistically reliable and a true reflection of patient satisfaction.</li>
-									<li>He or she is a resident physician.</li>
 								</ul>
 							</div>
 							<div class="modal-footer">
