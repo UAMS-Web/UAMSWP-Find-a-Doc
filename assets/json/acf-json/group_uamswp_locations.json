@@ -1244,7 +1244,7 @@
             "label": "Featured Image",
             "name": "_thumbnail_id",
             "type": "image",
-            "instructions": "Select an image that will be used on card layouts, schema data, social sharing, etc.<br />You can select an image that is also used as the Wayfinding Photo or in the Photo Gallery.<br />The photo orientation must be landscape / horizontal.<br />Minimum dimensions: 1200x630.",
+            "instructions": "Select an image that will be used on card layouts, schema data, social sharing, etc.<br />You can select an image that is also used as the Wayfinding Photo or in the Photo Gallery.<br />The photo orientation must be landscape / horizontal.<br />Minimum dimensions: 1200x675.",
             "required": 0,
             "conditional_logic": [
                 [
@@ -1277,7 +1277,7 @@
             "preview_size": "medium",
             "library": "all",
             "min_width": 1200,
-            "min_height": 630,
+            "min_height": 675,
             "min_size": "",
             "max_width": "",
             "max_height": "",
