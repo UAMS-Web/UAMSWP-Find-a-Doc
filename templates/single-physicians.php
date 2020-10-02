@@ -39,10 +39,8 @@ $full_name = get_field('physician_first_name',$post->ID) .' ' .(get_field('physi
 $medium_name = ($prefix ? $prefix .' ' : '') . get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID);
 $short_name = $prefix ? $prefix .'&nbsp;' .get_field('physician_last_name',$post->ID) : get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '');
 $excerpt = get_field('physician_short_clinical_bio',$post->ID);
-$resident = get_field('physician_resident',$post->ID);
-$resident_title_name = 'Resident Physician';
 $phys_title = get_field('physician_title',$post->ID);
-$phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
+$phys_title_name = get_term( $phys_title, 'clinical_title' )->name;
 $vowels = array('a','e','i','o','u');
 if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
     $phys_title_indef_article = 'an';
@@ -55,7 +53,7 @@ if ( substr($short_name, -1) == 's' ) { // Defines a or an, based on whether cli
     $short_name_possessive = $short_name . '\'s';
 }
 $bio = get_field('physician_clinical_bio',$post->ID);
-$eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$post->ID);
+$eligible_appt = get_field('physician_eligible_appointments',$post->ID);
 // Check for valid locations
 $locations = get_field('physician_locations',$post->ID);
 $location_valid = false;
@@ -139,19 +137,6 @@ while ( have_posts() ) : the_post();
     $video = get_field('physician_youtube_link');
     $affiliation = get_field('physician_affiliation');
     $hidden = get_field('physician_hidden');
-    $resident_profile_group = get_field('physician_resident_profile_group');
-    // $resident_hometown_international = $resident_profile_group['physician_resident_hometown_international'];
-    // $resident_hometown_city = $resident_profile_group['physician_resident_hometown_city'];
-    // $resident_hometown_state = $resident_profile_group['physician_resident_hometown_state'];
-    // $resident_hometown_country = $resident_profile_group['physician_resident_hometown_country'];
-    // $resident_medical_school = $resident_profile_group['physician_resident_hometown_country'];
-    $resident_academic_department = $resident_profile_group['physician_resident_academic_department'];
-    $resident_academic_department_name = get_term( $resident_academic_department, 'academic_department' )->name;
-    $resident_academic_chief = $resident_profile_group['physician_resident_academic_chief'];
-    $resident_academic_chief_name = $resident_academic_chief ? 'Chief Resident' : '';
-    $resident_academic_year = $resident_profile_group['physician_resident_academic_year'];
-    $resident_academic_year_name = get_term( $resident_academic_year, 'residency_year' )->name;
-    $resident_academic_name = $resident_academic_chief ? $resident_academic_chief_name : $resident_academic_year_name;
     $college_affiliation = get_field('physician_academic_college');
     $position = get_field('physician_academic_position');
     $bio_academic = get_field('physician_academic_bio');
@@ -247,7 +232,6 @@ while ( have_posts() ) : the_post();
     // Add one instance of a class (' has-empty-selected-pub-id') if there is an empty year field in any of the physician_awards rows.
     // Add one instance of a class (' has-empty-selected-pub-info') if there is an empty title field in any of the physician_awards rows.
     if ($additional_info && !empty($additional_info)) { $provider_field_classes = $provider_field_classes . ' has-additional-info'; }
-    if ($resident && !empty($resident)) { $provider_field_classes = $provider_field_classes . ' is-resident'; }
 ?>
 
 <div class="content-sidebar-wrap">
@@ -259,8 +243,8 @@ while ( have_posts() ) : the_post();
                         <span class="name"><?php echo $full_name; ?></span>
                         <?php 
                         
-                        if ($phys_title_name && !empty($phys_title_name)) { ?>
-                            <span class="subtitle"><?php echo ($phys_title_name ? $phys_title_name : ''); ?></span>
+                        if ($phys_title && !empty($phys_title)) { ?>
+                            <span class="subtitle"><?php echo ($phys_title ? get_term( $phys_title, 'clinical_title' )->name : ''); ?></span>
                         <?php } ?>
                     </h1>
                     <h2 class="sr-only">Overview</h2>
@@ -356,11 +340,10 @@ while ( have_posts() ) : the_post();
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>There is no publicly available rating for this medical professional for one of three reasons:</p>
+                                        <p>There is no publicly available rating for this medical professional for one of two reasons:</p>
                                         <ul>
                                             <li>He or she does not see patients</li>
                                             <li>He or she sees patients but has not yet received the minimum number of Patient Satisfaction Reviews. To be eligible for display, we require a minimum of 30 surveys. This ensures that the rating is statistically reliable and a true reflection of patient satisfaction.</li>
-                                            <li>He or she is a resident physician.</li>
                                         </ul>
                                     </div>
                                     <div class="modal-footer">
@@ -450,15 +433,15 @@ while ( have_posts() ) : the_post();
                 <div class="col-12 col-xs px-0 px-xs-4 px-sm-8 order-1 image">
                     <picture>
                     <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 389, 519, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 389, 519, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center'); ?> 2x"
                             media="(min-width: 1200px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 306, 408, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 306, 408, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 612, 816, 'center', 'center'); ?> 2x"
                             media="(min-width: 992px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 182, 243, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 182, 243, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 364, 486, 'center', 'center'); ?> 2x"
                             media="(min-width: 768px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 86, 115, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 86, 115, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 172, 230, 'center', 'center'); ?> 2x"
                             media="(min-width: 576px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 380, 507, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 380, 507, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 760, 1013, 'center', 'center'); ?> 2x"
                             media="(min-width: 1px)">
                         <img src="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center'); ?>" alt="<?php echo $full_name; ?>" />
                         <?php $docphoto = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center');
@@ -755,7 +738,7 @@ while ( have_posts() ) : the_post();
                 $physician_academic_split = true;
             }
         
-            if( $resident || $academic_bio || $academic_appointment || $academic_admin_title || $education || $boards): ?>
+            if($academic_bio || $academic_appointment || $academic_admin_title || $education || $boards): ?>
         <section class="uams-module academic-info bg-auto">
             <div class="container-fluid">
                 <div class="row">
@@ -811,14 +794,6 @@ while ( have_posts() ) : the_post();
                                         <dt><?php echo $department->name; ?></dt>
                                         <dd><?php echo $academic_title; ?></dd>
                                     <?php endwhile; ?>
-                                    </dl>
-                            <?php endif; ?>
-                            <?php
-                                if( $resident ): ?>
-                                    <h3 class="h4">Residency Program</h3>
-                                    <dl>
-                                        <dt><?php echo $resident_academic_department_name; ?></dt>
-                                        <dd><?php echo $resident_academic_name; ?></dd>
                                     </dl>
                             <?php endif; ?>
                             <?php
@@ -1057,7 +1032,7 @@ while ( have_posts() ) : the_post();
                         <div class="card-list-container">
                             <div class="card-list">
                                 <div class="card">
-                                    <img srcset="https://picsum.photos/434/244?image=1066" src="https://picsum.photos/434/244?image=1066" class="card-img-top" alt="Image description or Story title">
+                                    <img srcset="https://picsum.photos/434/244?image=1066 1x, https://picsum.photos/868/488?image=1066 2x" src="https://picsum.photos/434/244?image=1066" class="card-img-top" alt="Image description or Story title">
                                     <div class="card-body">
                                         <h3 class="card-title">
                                             <span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
@@ -1067,7 +1042,7 @@ while ( have_posts() ) : the_post();
                                     </div>
                                 </div>
                                 <div class="card">
-                                    <img srcset="https://picsum.photos/434/244?image=348" src="https://picsum.photos/434/244?image=348" class="card-img-top" alt="Image description or Story title">
+                                    <img srcset="https://picsum.photos/434/244?image=348 1x, https://picsum.photos/868/488?image=348 2x" src="https://picsum.photos/434/244?image=348" class="card-img-top" alt="Image description or Story title">
                                     <div class="card-body">
                                         <h3 class="card-title">
                                             <span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
@@ -1077,7 +1052,7 @@ while ( have_posts() ) : the_post();
                                     </div>
                                 </div>
                                 <div class="card">
-                                    <img srcset="https://picsum.photos/434/244?image=823" src="https://picsum.photos/434/244?image=823" class="card-img-top" alt="Image description or Story title">
+                                    <img srcset="https://picsum.photos/434/244?image=823 1x, https://picsum.photos/868/488?image=823 2x" src="https://picsum.photos/434/244?image=823" class="card-img-top" alt="Image description or Story title">
                                     <div class="card-body">
                                         <h3 class="card-title">
                                             <span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
