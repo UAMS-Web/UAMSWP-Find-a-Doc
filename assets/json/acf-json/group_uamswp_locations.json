@@ -1324,7 +1324,7 @@
             "label": "Wayfinding Photo",
             "name": "location_wayfinding_photo",
             "type": "image",
-            "instructions": "Select an image that will help the patient find the appropriate building from the road.<br />The photo orientation must be landscape / horizontal.<br />Minimum dimensions: 1984x1116",
+            "instructions": "Select an image that will help the patient find the appropriate building from the road.<br />The photo orientation must be landscape / horizontal.<br />Minimum dimensions: 1200x675",
             "required": 0,
             "conditional_logic": [
                 [
@@ -1356,8 +1356,8 @@
             "return_format": "id",
             "preview_size": "medium",
             "library": "all",
-            "min_width": 1984,
-            "min_height": 1116,
+            "min_width": 1200,
+            "min_height": 675,
             "min_size": "",
             "max_width": "",
             "max_height": "",
@@ -1404,7 +1404,7 @@
 			"label": "Photo Gallery",
 			"name": "location_photo_gallery",
 			"type": "gallery",
-			"instructions": "You may select up to four images.<br />These could include a photo of the interior entrance to the clinic or photos of the clinic in use.<br />The photo orientation must be landscape / horizontal.<br />Minimum dimensions: 1984x1116",
+			"instructions": "You may select up to four images.<br />These could include a photo of the interior entrance to the clinic or photos of the clinic in use.<br />The photo orientation must be landscape / horizontal.<br />Minimum dimensions: 1200x675",
 			"required": 0,
 			"conditional_logic": [
                 [
@@ -1439,8 +1439,8 @@
 			"library": "all",
 			"min": "",
 			"max": 4,
-			"min_width": 1984,
-			"min_height": 1116,
+			"min_width": 1200,
+			"min_height": 675,
 			"min_size": "",
 			"max_width": "",
 			"max_height": "",
