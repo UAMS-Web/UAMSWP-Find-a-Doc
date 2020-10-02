@@ -176,15 +176,15 @@
             <?php echo get_field('location_city', $address_id ); ?>, <?php echo get_field('location_state', $address_id ); ?> <?php echo get_field('location_zip', $address_id); ?>
         </p>
         <?php 
-        $location_phone = get_field('location_phone', );
+        $location_phone = get_field('location_phone', $id);
         $location_phone_format_dash = format_phone_dash( $location_phone );
         $location_phone_format_us = format_phone_us( $location_phone );
-        $location_appointment_phone_query = get_field('location_appointment_phone_query');
-        $location_new_appointments_phone = get_field('location_new_appointments_phone');
+        $location_appointment_phone_query = get_field('location_appointment_phone_query', $id);
+        $location_new_appointments_phone = get_field('location_new_appointments_phone', $id);
         $location_new_appointments_phone_format_dash = format_phone_dash( $location_new_appointments_phone );
         $location_new_appointments_phone_format_us = format_phone_us( $location_new_appointments_phone );
-        $location_clinic_phone_query = get_field('location_clinic_phone_query');
-        $location_return_appointments_phone = get_field('location_return_appointments_phone');
+        $location_clinic_phone_query = get_field('location_clinic_phone_query', $id);
+        $location_return_appointments_phone = get_field('location_return_appointments_phone', $id);
         $location_return_appointments_phone_format_dash = format_phone_dash( $location_return_appointments_phone );
         $location_return_appointments_phone_format_us = format_phone_us( $location_return_appointments_phone );
 
