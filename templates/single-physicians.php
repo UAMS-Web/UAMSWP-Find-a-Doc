@@ -442,8 +442,8 @@ while ( have_posts() ) : the_post();
                             media="(min-width: 576px)">
                         <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 380, 507, 'center', 'center'); ?>"
                             media="(min-width: 1px)">
-                        <img src="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center'); ?>" alt="<?php echo $full_name; ?>" />
-                        <?php $docphoto = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center');
+                        <img src="<?php echo image_sizer(get_post_thumbnail_id(), 389, 519, 'center', 'center'); ?>" alt="<?php echo $full_name; ?>" />
+                        <?php $docphoto = image_sizer(get_post_thumbnail_id(), 389, 519, 'center', 'center');
                              } else {
                                 the_post_thumbnail( 'large',  array( 'itemprop' => 'image' ) );
                                 $docphoto = get_the_post_thumbnail( 'large');
