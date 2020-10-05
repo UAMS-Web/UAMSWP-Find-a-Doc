@@ -1454,7 +1454,7 @@
                     "label": "Medical School",
                     "type": "taxonomy",
                     "name": "physician_resident_school",
-                    "instructions": "",
+                    "instructions": "The medical school the resident graduated from, not an institution associated with their current residency program",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
