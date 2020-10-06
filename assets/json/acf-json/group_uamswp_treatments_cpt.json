@@ -364,25 +364,6 @@
             "acfe_validate": "",
             "acfe_update": "",
             "ui": 1
-        },
-        {
-            "key": "field_treatment_procedure_podcast_name",
-            "name": "treatment_procedure_podcast_name",
-            "type": "text",
-            "label": "UAMS Health Talk Podcast Topic Name",
-            "instructions": "Topic name as listed in the dropdown",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
         }
     ],
     "location": [
