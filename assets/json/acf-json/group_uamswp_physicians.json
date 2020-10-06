@@ -46,7 +46,7 @@
             "type": "text",
             "label": "First Name",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "25",
@@ -84,7 +84,7 @@
             "type": "text",
             "label": "Last Name",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "25",
@@ -260,7 +260,7 @@
             "label": "Headshot",
             "name": "_thumbnail_id",
             "type": "image",
-            "instructions": "The photo orientation must be portrait / vertical.</p><p class='description' style='margin-top: 0.5em;'>The photo must be high-resolution, preferably not having been resized at all. The minimum dimensions are 1200x1600, but larger is preferred. <strong>Do not just increase the size of a smaller image to these dimensions to meet the minimum size.</strong></p><p class='description' style='margin-top: 0.5em;'>The image should be a cropped to a 3:4 aspect ratio before uploading. Otherwise, it will automatically be cropped to fit.</p><p class='description' style='margin-top: 0.5em;'>The photo should be less than 10 years old.</p><p class='description' style='margin-top: 0.5em;'>The provider should be wearing a white coat (if applicable) in front of a white background.</p><p class='description' style='margin-top: 0.5em;'>The provider should be facing to the right side of the frame (the provider's left).",
+            "instructions": "The photo orientation must be portrait / vertical.</p><p class='description' style='margin-top: 0.5em;'>The photo must be high-resolution, preferably not having been resized at all. The minimum dimensions are 778x1038, but larger is preferred. <strong>Do not just increase the size of a smaller image to these dimensions to meet the minimum size.</strong></p><p class='description' style='margin-top: 0.5em;'>The image should be a cropped to a 3:4 aspect ratio before uploading. Otherwise, it will automatically be cropped to fit.</p><p class='description' style='margin-top: 0.5em;'>The photo should be less than 10 years old.</p><p class='description' style='margin-top: 0.5em;'>The provider should be wearing a white coat (if applicable) in front of a white background.</p><p class='description' style='margin-top: 0.5em;'>The provider should be facing to the right side of the frame (the provider's left).",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -272,8 +272,8 @@
             "return_format": "id",
             "preview_size": "medium",
             "library": "all",
-            "min_width": 1200,
-            "min_height": 1600,
+            "min_width": 778,
+            "min_height": 1038,
             "min_size": "",
             "max_width": "",
             "max_height": "",
@@ -299,6 +299,25 @@
             "placement": "top",
             "endpoint": 0
         },
+        "field_physician_resident": {
+            "key": "field_physician_resident",
+            "name": "physician_resident",
+            "type": "true_false",
+            "label": "Is the provider a resident?",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
         "field_spacer_1": {
             "key": "field_spacer_1",
             "label": "",
@@ -306,7 +325,15 @@
             "type": "message",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -324,7 +351,15 @@
             "label": "Eligible for appointments",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "hide-acf-title",
@@ -481,7 +516,15 @@
             "type": "message",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -499,7 +542,15 @@
             "label": "Clinical Job Title",
             "instructions": "General Title for Patients \/ Public",
             "required": 1,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -524,7 +575,15 @@
             "label": "Service Line",
             "instructions": "&nbsp;",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -549,7 +608,15 @@
             "label": "Clinical Administrative Title",
             "instructions": "Both fields are required if you add a row. This is not displayed on the front end at this time.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -749,7 +816,15 @@
             "label": "Youtube Link",
             "instructions": "Full URL, including https:\/\/",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -765,7 +840,15 @@
             "label": "Clinical Focus",
             "instructions": "If it's a list, used a bulleted list. If it is full sentences, then a paragraph works.<br />Keep it brief. Try to limit it to less than 344 characters.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -969,7 +1052,15 @@
             "label": "Hospital Affiliations",
             "instructions": "",
             "required": 1,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -994,7 +1085,15 @@
             "label": "Institute Affiliations",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -1054,7 +1153,15 @@
             "label": "Areas of Expertise",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -1470,7 +1577,15 @@
             "label": "<i class=\"dashicons dashicons-edit\"><\/i> Academic Profile",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -2046,7 +2161,15 @@
             "label": "Boards",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -2071,7 +2194,15 @@
             "label": "Associations",
             "instructions": "Examples: Fellow of the American College of Obstetricians and Gynecologists, American Society of Breast Surgeons, American Burn Association, etc.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -2150,7 +2281,15 @@
             "label": "UAMS Profiles Link",
             "instructions": "Please include the full URL, including https:\/\/",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "33",
                 "class": "",
