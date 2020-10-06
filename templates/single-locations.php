@@ -1192,6 +1192,7 @@ while ( have_posts() ) : the_post(); ?>
 		'post_status' => 'publish',
 		'orderby' => 'title',
 		'order' => 'ASC',
+		'posts_per_page' => -1,
 		'post__in' => $conditions_cpt
 	));
 	$conditions_cpt_query = new WP_Query( $args );
@@ -1217,6 +1218,7 @@ while ( have_posts() ) : the_post(); ?>
 		'post_status' => 'publish',
 		'orderby' => 'title',
 		'order' => 'ASC',
+		'posts_per_page' => -1,
 		'post__in' => $treatments_cpt
 	));
 	$treatments_cpt_query = new WP_Query( $args );

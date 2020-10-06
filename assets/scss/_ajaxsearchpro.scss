@@ -1,8 +1,0 @@
-.ajaxsearchpro {
-    &[id^="ajaxsearchpro"] {
-        &:focus-within {
-          outline: 0;
-          box-shadow: $btn-focus-box-shadow !important;
-        }
-    }
-}
