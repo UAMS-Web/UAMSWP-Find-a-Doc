@@ -291,8 +291,8 @@
             "field_type": "radio",
             "allow_null": 0,
             "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
