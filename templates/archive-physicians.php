@@ -100,11 +100,10 @@ get_header();
 								</button>
 							</div>
 							<div class="modal-body">
-								<p>There is no publicly available rating for this medical professional for one of three reasons:</p>
+								<p>There is no publicly available rating for this medical professional for one of two reasons:</p>
 								<ul>
 									<li>He or she does not see patients</li>
 									<li>He or she sees patients but has not yet received the minimum number of Patient Satisfaction Reviews. To be eligible for display, we require a minimum of 30 surveys. This ensures that the rating is statistically reliable and a true reflection of patient satisfaction.</li>
-									<li>He or she is a resident physician.</li>
 								</ul>
 							</div>
 							<div class="modal-footer">

@@ -37,12 +37,10 @@ if ( $languages ) {
 $prefix = get_field('physician_prefix',$post->ID);
 $full_name = get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
 $medium_name = ($prefix ? $prefix .' ' : '') . get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID);
-$short_name = $prefix ? $prefix .' ' .get_field('physician_last_name',$post->ID) : get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '');
+$short_name = $prefix ? $prefix .'&nbsp;' .get_field('physician_last_name',$post->ID) : get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '');
 $excerpt = get_field('physician_short_clinical_bio',$post->ID);
-$resident = get_field('physician_resident',$post->ID);
-$resident_title_name = 'Resident Physician';
 $phys_title = get_field('physician_title',$post->ID);
-$phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
+$phys_title_name = get_term( $phys_title, 'clinical_title' )->name;
 $vowels = array('a','e','i','o','u');
 if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
     $phys_title_indef_article = 'an';
@@ -55,7 +53,7 @@ if ( substr($short_name, -1) == 's' ) { // Defines a or an, based on whether cli
     $short_name_possessive = $short_name . '\'s';
 }
 $bio = get_field('physician_clinical_bio',$post->ID);
-$eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$post->ID);
+$eligible_appt = get_field('physician_eligible_appointments',$post->ID);
 // Check for valid locations
 $locations = get_field('physician_locations',$post->ID);
 $location_valid = false;
@@ -139,19 +137,6 @@ while ( have_posts() ) : the_post();
     $video = get_field('physician_youtube_link');
     $affiliation = get_field('physician_affiliation');
     $hidden = get_field('physician_hidden');
-    $resident_profile_group = get_field('physician_resident_profile_group');
-    // $resident_hometown_international = $resident_profile_group['physician_resident_hometown_international'];
-    // $resident_hometown_city = $resident_profile_group['physician_resident_hometown_city'];
-    // $resident_hometown_state = $resident_profile_group['physician_resident_hometown_state'];
-    // $resident_hometown_country = $resident_profile_group['physician_resident_hometown_country'];
-    // $resident_medical_school = $resident_profile_group['physician_resident_hometown_country'];
-    $resident_academic_department = $resident_profile_group['physician_resident_academic_department'];
-    $resident_academic_department_name = get_term( $resident_academic_department, 'academic_department' )->name;
-    $resident_academic_chief = $resident_profile_group['physician_resident_academic_chief'];
-    $resident_academic_chief_name = $resident_academic_chief ? 'Chief Resident' : '';
-    $resident_academic_year = $resident_profile_group['physician_resident_academic_year'];
-    $resident_academic_year_name = get_term( $resident_academic_year, 'residency_year' )->name;
-    $resident_academic_name = $resident_academic_chief ? $resident_academic_chief_name : $resident_academic_year_name;
     $college_affiliation = get_field('physician_academic_college');
     $position = get_field('physician_academic_position');
     $bio_academic = get_field('physician_academic_bio');
@@ -191,6 +176,7 @@ while ( have_posts() ) : the_post();
     $research_bio = get_field('physician_research_bio');
     $research_interests = get_field('physician_research_interests');
     $research_profiles_link = get_field('physician_research_profiles_link');
+    $podcast_name = get_field('physician_podcast_name');
 
 
     // Classes for indicating presence of content
@@ -246,7 +232,6 @@ while ( have_posts() ) : the_post();
     // Add one instance of a class (' has-empty-selected-pub-id') if there is an empty year field in any of the physician_awards rows.
     // Add one instance of a class (' has-empty-selected-pub-info') if there is an empty title field in any of the physician_awards rows.
     if ($additional_info && !empty($additional_info)) { $provider_field_classes = $provider_field_classes . ' has-additional-info'; }
-    if ($resident && !empty($resident)) { $provider_field_classes = $provider_field_classes . ' is-resident'; }
 ?>
 
 <div class="content-sidebar-wrap">
@@ -258,8 +243,8 @@ while ( have_posts() ) : the_post();
                         <span class="name"><?php echo $full_name; ?></span>
                         <?php 
                         
-                        if ($phys_title_name && !empty($phys_title_name)) { ?>
-                            <span class="subtitle"><?php echo ($phys_title_name ? $phys_title_name : ''); ?></span>
+                        if ($phys_title && !empty($phys_title)) { ?>
+                            <span class="subtitle"><?php echo ($phys_title ? get_term( $phys_title, 'clinical_title' )->name : ''); ?></span>
                         <?php } ?>
                     </h1>
                     <h2 class="sr-only">Overview</h2>
@@ -355,11 +340,10 @@ while ( have_posts() ) : the_post();
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>There is no publicly available rating for this medical professional for one of three reasons:</p>
+                                        <p>There is no publicly available rating for this medical professional for one of two reasons:</p>
                                         <ul>
                                             <li>He or she does not see patients</li>
                                             <li>He or she sees patients but has not yet received the minimum number of Patient Satisfaction Reviews. To be eligible for display, we require a minimum of 30 surveys. This ensures that the rating is statistically reliable and a true reflection of patient satisfaction.</li>
-                                            <li>He or she is a resident physician.</li>
                                         </ul>
                                     </div>
                                     <div class="modal-footer">
@@ -630,6 +614,40 @@ while ( have_posts() ) : the_post();
                 </div>
             </section>
         <?php } // endif ?>
+        <?php
+            // UAMS Health Talk Podcast
+            if ($podcast_name) {
+        ?>
+            <section class="uams-module podcast-list bg-auto" id="podcast">
+                <script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
+                </script>
+                <script type="text/javascript">
+                    radiomd_embedded_filtered_doctor("uams","radiomd-embedded-filtered-doctor",303,1837,"<?php echo $podcast_name; ?>"); </script>
+                <style type="text/css">
+                    #radiomd-embedded-filtered-doctor iframe {
+                        width: 100%;
+                        border: none;
+                    }
+                </style>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="module-title"><span class="title">UAMS Health Talk Podcast</span></h2>
+                            <div class="module-body text-center">
+                                <p class="lead">In the UAMS Health Talk podcast, experts from UAMS talk about a variety of health topics, providing tips and guidelines to help people lead healthier lives. Listen to the episode(s) featuring <?php echo $short_name; ?>.</p>
+                            </div>
+                            <div class="content-width mt-8" id="radiomd-embedded-filtered-doctor"></div>
+                        </div>
+                        <div class="col-12 more">
+                            <p class="lead">Find other great episodes on other topics and from other UAMS providers.</p>
+                            <div class="cta-container">
+                                <a href="/podcast/" class="btn btn-primary" aria-label="More UAMS Health Talk podcast episodes">Listen to More Episodes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <?php } ?>
         <?php // load all 'conditions' terms for the post
             $title_append = ' by ' . $short_name;
              
@@ -720,7 +738,7 @@ while ( have_posts() ) : the_post();
                 $physician_academic_split = true;
             }
         
-            if( $resident || $academic_bio || $academic_appointment || $academic_admin_title || $education || $boards): ?>
+            if($academic_bio || $academic_appointment || $academic_admin_title || $education || $boards): ?>
         <section class="uams-module academic-info bg-auto">
             <div class="container-fluid">
                 <div class="row">
@@ -776,14 +794,6 @@ while ( have_posts() ) : the_post();
                                         <dt><?php echo $department->name; ?></dt>
                                         <dd><?php echo $academic_title; ?></dd>
                                     <?php endwhile; ?>
-                                    </dl>
-                            <?php endif; ?>
-                            <?php
-                                if( $resident ): ?>
-                                    <h3 class="h4">Residency Program</h3>
-                                    <dl>
-                                        <dt><?php echo $resident_academic_department_name; ?></dt>
-                                        <dd><?php echo $resident_academic_name; ?></dd>
                                     </dl>
                             <?php endif; ?>
                             <?php

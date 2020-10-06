@@ -299,25 +299,6 @@
             "placement": "top",
             "endpoint": 0
         },
-        "field_physician_resident": {
-            "key": "field_physician_resident",
-            "name": "physician_resident",
-            "type": "true_false",
-            "label": "Is the provider a resident?",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
         "field_spacer_1": {
             "key": "field_spacer_1",
             "label": "",
@@ -325,15 +306,7 @@
             "type": "message",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_resident",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -351,15 +324,7 @@
             "label": "Eligible for appointments",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_resident",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "hide-acf-title",
@@ -516,15 +481,7 @@
             "type": "message",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_resident",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -542,15 +499,7 @@
             "label": "Clinical Job Title",
             "instructions": "General Title for Patients \/ Public",
             "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_resident",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -575,15 +524,7 @@
             "label": "Service Line",
             "instructions": "&nbsp;",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_resident",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -608,15 +549,7 @@
             "label": "Clinical Administrative Title",
             "instructions": "Both fields are required if you add a row. This is not displayed on the front end at this time.",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_resident",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -816,15 +749,7 @@
             "label": "Youtube Link",
             "instructions": "Full URL, including https:\/\/",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_resident",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -840,15 +765,7 @@
             "label": "Clinical Focus",
             "instructions": "If it's a list, used a bulleted list. If it is full sentences, then a paragraph works.<br />Keep it brief. Try to limit it to less than 344 characters.",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_resident",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -1052,15 +969,7 @@
             "label": "Hospital Affiliations",
             "instructions": "",
             "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_resident",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -1085,15 +994,7 @@
             "label": "Institute Affiliations",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_resident",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -1153,15 +1054,7 @@
             "label": "Areas of Expertise",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_resident",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -1229,36 +1122,12 @@
             "ui_on_text": "",
             "ui_off_text": ""
         },
-        "field_physician_resident_profile_tab": {
-            "key": "field_physician_resident_profile_tab",
-            "name": "",
-            "type": "tab",
-            "label": "<i class=\"dashicons dashicons-id-alt\"><\/i> Resident Profile",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_resident",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
-        },
-        "field_physician_resident_profile_group": {
-            "key": "field_physician_resident_profile_group",
-            "label": "",
-            "name": "physician_resident_profile_group",
-            "type": "group",
-            "instructions": "",
+        "field_physician_podcast_name": {
+            "key": "field_physician_podcast_name",
+            "name": "physician_podcast_name",
+            "type": "text",
+            "label": "UAMS Health Talk Podcast Doctor Name",
+            "instructions": "Doctor name as listed in the dropdown",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -1266,6 +1135,11 @@
                 "class": "",
                 "id": ""
             },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
             "acfe_permissions": "",
             "layout": "block",
             "acfe_seamless_style": 1,
@@ -1565,15 +1439,7 @@
             "label": "<i class=\"dashicons dashicons-edit\"><\/i> Academic Profile",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_resident",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -2149,15 +2015,7 @@
             "label": "Boards",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_resident",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -2182,15 +2040,7 @@
             "label": "Associations",
             "instructions": "Examples: Fellow of the American College of Obstetricians and Gynecologists, American Society of Breast Surgeons, American Burn Association, etc.",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_resident",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -2269,15 +2119,7 @@
             "label": "UAMS Profiles Link",
             "instructions": "Please include the full URL, including https:\/\/",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_resident",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "33",
                 "class": "",
