@@ -20,5 +20,5 @@ function bootstrap() {
     include_once (__DIR__ . '/class.fad-fwp-functions.php' ); // FacetWP specific functions
     include_once (__DIR__ . '/class.fad-functions.php' );
     include_once (__DIR__ . '/class.fad-settings-pages.php' );
-    
+    include_once (__DIR__ . '/class.fad-acf-blocks.php' );
 }
