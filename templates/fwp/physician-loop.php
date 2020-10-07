@@ -19,7 +19,14 @@
 			$i++;
 		endforeach;
  	} ?>
-	<?php $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '') . ( $degree_list ? ', ' . $degree_list : '' ); ?>
+	<?php 
+		$full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '') . ( $degree_list ? ', ' . $degree_list : '' );
+		$physician_resident = get_field('physician_resident');
+		$physician_resident_name = 'Resident Physician';
+		$physician_title = get_field('physician_title');
+		$physician_title_name = $physician_resident ? $physician_resident_name : get_term( $physician_title, 'clinical_title' )->name;
+		$physician_service_line = get_field('physician_service_line');
+	?>
 	<div class="col item-container">
 		<div class="item">
 			<div class="row">
@@ -27,17 +34,17 @@
 					<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name; ?>" class="stretched-link">
 						<picture>
 						<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 486, 648, 'center', 'center'); ?> 2x"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
 								media="(min-width: 2054px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?> 2x"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
 								media="(min-width: 1784px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 486, 648, 'center', 'center'); ?> 2x"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
 								media="(min-width: 1200px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?> 2x"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
 								media="(min-width: 768px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 95, 127, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 190, 254, 'center', 'center'); ?> 2x"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 95, 127, 'center', 'center'); ?>"
 								media="(min-width: 576px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?> 1x, <?php echo image_sizer(get_post_thumbnail_id(), 368, 490, 'center', 'center'); ?> 2x"
+							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
 								media="(min-width: 1px)">
 							<img src="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>" alt="<?php echo $full_name; ?>" />
 						<?php } elseif ( has_post_thumbnail() ) { ?>
@@ -54,8 +61,8 @@
 						<div class="col-12 primary">
 						<h3 class="h4">
 							<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name; ?>"><span class="name"><?php echo $full_name; ?></span></a>
-							<?php if ( get_field('physician_title') ) { ?>
-							<span class="subtitle"><?php echo get_term( get_field('physician_title'), 'clinical_title' )->name; ?></span>
+							<?php if ( $physician_title_name ) { ?>
+							<span class="subtitle"><?php echo $physician_title_name; ?></span>
 							<?php } // endif ?>
 						</h3>
 						<?php
@@ -117,11 +124,11 @@
 	<!--
 				<a href="<?php echo get_permalink($post->ID); ?>"><h2 class="margin-top-none margin-bottom-none" itemprop="name"><?php echo $full_name; ?></h2></a>
 				<?php
-					if(! empty( get_field('physician_clinical_title') ) || ! empty( get_field('physician_service_line') ) ){
+					if(! empty( get_field('physician_clinical_title') ) || ! empty( $physician_service_line ) ){
 						echo '<h4>';
 						echo (get_field('physician_clinical_title') ? get_field('physician_clinical_title')->name : '');
-						echo ((! empty( get_field('physician_clinical_title') )) && (! empty( get_field('physician_service_line') ) ) ? ', ' : '' );
-						echo (get_field('physician_service_line') ? get_term( get_field('physician_service_line'), 'service_line' )->name : '');
+						echo ((! empty( get_field('physician_clinical_title') )) && (! empty( $physician_service_line ) ) ? ', ' : '' );
+						echo ($physician_service_line ? get_term( $physician_service_line, 'service_line' )->name : '');
 						echo '</h4>';
 					}
 				?>
