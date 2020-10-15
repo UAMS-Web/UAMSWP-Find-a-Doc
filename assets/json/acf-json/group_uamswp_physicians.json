@@ -573,7 +573,7 @@
             "name": "physician_service_line",
             "type": "taxonomy",
             "label": "Service Line",
-            "instructions": "&nbsp;",
+            "instructions": "",
             "required": 1,
             "conditional_logic": [
                 [
