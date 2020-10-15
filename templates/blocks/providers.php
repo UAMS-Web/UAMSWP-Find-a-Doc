@@ -34,19 +34,75 @@ if ( empty($background_color) )
 if ( empty($count) )
     $count = get_field('block_fad_providers_count');
 
-$filter_id = get_field('block_fad_providers_filter_ids');
+// Set up Vars to hold Post Ids
+$post_ids = array();
+$location_ids = array();
+$aoe_ids = array();
+// Grab ACF values
+$filter_id = get_field('block_fad_providers_filter_ids') ?: array();
+$filter_aoe = get_field('block_fad_providers_filter_aoe') ?: array();
+$filter_region = get_field('block_fad_providers_filter_region');
+$filter_location = get_field('block_fad_providers_filter_location');
 
-if($filter_id) {
+// Build Taxonomy Query, if region is set
+$tax_query = array();
+if (!empty($filter_region))
+{
+    $tax_query[] =  array(
+        'taxonomy' => 'region',
+        'terms' => $filter_region
+    );
+}
+// Use custom table function
+if (!empty($filter_location))
+{   
+    $location_ids = uamswp_custom_table_query('uamswp_physicians', 'physician_locations', $filter_location);
+}
+if (!empty($filter_aoe))
+{   
+    $aoe_ids = uamswp_custom_table_query('uamswp_physicians', 'physician_expertise', $filter_aoe);
+}
+
+// Build $post_ids from $location_ids and $aoe_ids
+if (!empty($location_ids) && !empty($aoe_ids)){
+    $post_ids = array_intersect($location_ids, $aoe_ids);
+} else {
+    $post_ids = array_merge($location_ids, $aoe_ids);
+}
+    
+// If values are set
+if($filter_id || $filter_region || $filter_location || $filter_aoe) {
+    // If region or location 
+    if ($filter_region || $filter_location || $filter_aoe) {
+        // Build Query to get Ids from filters
+        $args = (array(
+            'post_type' => "provider",
+            'order' => 'ASC',
+            'orderby' => 'title',
+            'posts_per_page' => -1,
+            'post_status' => 'publish',
+            'post__in' => $post_ids,
+            'tax_query' => $tax_query,
+            'fields' => 'ids',
+        ));
+        $filtered_query = new WP_Query( $args ); 
+        $filter_id = array_unique( array_merge( $filter_id,  $filtered_query->posts ) );
+    }
+    // Build Main Query from Post Ids (Filtered IDs + Specific IDs)
     $args = (array(
         'post_type' => "provider",
         'order' => 'ASC',
         'orderby' => 'title',
         'posts_per_page' => -1,
         'post_status' => 'publish',
-        'post__in' => $filter_id,
+        'post__in' => $filter_id
     ));
-    $provider_query = new WP_Query( $args );
+    $provider_query = new WP_Query( $args ); 
 
+    // echo '<pre>'; print_r($SQL); echo '</pre>';
+    // echo '<pre>'; print_r($post_ids); echo '</pre>';
+    // echo '<pre>'; print_r($args); echo '</pre>';
+    
     if ( $provider_query->have_posts() ) : ?>
         <section class="uams-module provider-list  alignfull <?php echo $background_color ? $background_color : 'bg-auto'; ?>" id="<?php echo $id; ?>">
             <div class="container-fluid">

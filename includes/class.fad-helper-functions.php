@@ -141,3 +141,39 @@ function get_taxonomy_archive_link( $taxonomy ) {
     }
     return $crumbs;
   }
+
+  // Query custom table values
+  function uamswp_custom_table_query($table_name, $field_name, $query_values) {
+    // Declare the global wpdb variable
+    global $wpdb;
+ 
+    $custom_table = $wpdb->prefix.$table_name;
+ 
+    $filter_where ='';        
+    $i = 1;
+    foreach ($query_values as $value) {
+        if ($i > 1) {
+            $filter_where .= " OR ";
+        }
+        $filter_where .= "`$field_name` LIKE '%" . $value . "%'";
+        $i++;
+    }
+ 
+    // Write our custom query. In this query, we're only selecting the post_id field of each row that matches our set of
+    // conditions. Note the %s placeholders – these are dynamic and indicate that we'll be injecting strings in their place.
+    $SQL = "SELECT `post_id` FROM `" . $custom_table . "`
+            WHERE $filter_where
+            ORDER BY `post_id` ASC;";
+ 
+ 
+    // Use $wpdb's prepare() method to replace the placeholders with our actual data. Doing it this way protects against
+    // injection hacks as the prepare() method santizes the data accordingly. The output is a prepared, sanitized SQL
+    // statement ready to be executed.
+    // $SQL = $wpdb->prepare( $SQL );
+ 
+    // Query the database with our prepared SQL statement, fetching the first column of the matched rows. In our case, we
+    // only queried the post_id field of each row so we know that the post_id fields will be the first column. The result
+    // here is an array of post_ids (provided we have a match)
+    $post_ids = $wpdb->get_col( $SQL );
+    return $post_ids;
+ }
