@@ -22,7 +22,7 @@ add_filter( 'facetwp_shortcode_html', function( $output, $atts) {
 }, 10, 2 );
 
 function fwp_disable_auto_refresh() {
-    if ( is_post_type_archive( 'provider' ) ) {
+    if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) ) {
 	?>
 	<script>
 	(function($) {
@@ -58,7 +58,7 @@ function fwp_facet_scripts() {
         $('.fs-dropdown .fs-search input').each(function() {
             $(this).attr('aria-labelledby', "facet_" + $(this).closest('.facetwp-facet').attr('data-name') );
         });
-        $('select .facetwp-dropdown').each(function() {
+        $('.facetwp-sort-select, .facetwp-dropdown').each(function() {
             $(this).attr('aria-labelledby', "facet_" + $(this).closest('.facetwp-facet').attr('data-name') );
         });
         $('select.facetwp-sort-select').each(function() {
@@ -191,45 +191,45 @@ add_filter( 'facetwp_pager_html', function( $output, $params ) {
 
         // First Page
         if ( 3 < $page ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link first-page" data-page="1"><span class="fas fa-fast-backward" aria-hidden="true"></span></a></li>';
+            $output .= '<li class="page-item"><a class="facetwp-page page-link first-page" title="First Page" data-page="1"><span class="fas fa-fast-backward" aria-hidden="true"></span></a></li>';
         }
-        
+
         // Previous page (NEW)
         if ( $page > 1 ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page - 1) . '"><span class="fas fa-angle-left" aria-hidden="true"></span></a></li>';
+            $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Previous Page" data-page="' . ($page - 1) . '"><span class="fas fa-angle-left" aria-hidden="true"></span></a></li>';
         }
-        
+
         if ( 1 < ( $page - 10 ) ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page - 10) . '">' . ($page - 10) . '</a></li>';
+            $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Page ' . ($page - 10) . '" data-page="' . ($page - 10) . '">' . ($page - 10) . '</a></li>';
         }
         for ( $i = 2; $i > 0; $i-- ) {
             if ( 0 < ( $page - $i ) ) {
-                $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page - $i) . '">' . ($page - $i) . '</a></li>';
+                $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Page ' . ($page - $i) . '" data-page="' . ($page - $i) . '">' . ($page - $i) . '</a></li>';
             }
         }
 
         // Current page
-        $output .= '<li class="page-item"><a class="facetwp-page page-link active" data-page="' . $page . '">' . $page . '</a></li>';
+        $output .= '<li class="page-item"><a class="facetwp-page page-link active" title="Page ' . $page . '" data-page="' . $page . '">' . $page . '</a></li>';
 
         for ( $i = 1; $i <= 2; $i++ ) {
             if ( $total_pages >= ( $page + $i ) ) {
-                $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page + $i) . '">' . ($page + $i) . '</a></li>';
+                $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Page ' . ($page + $i) . '" data-page="' . ($page + $i) . '">' . ($page + $i) . '</a></li>';
             }
         }
         if ( $total_pages > ( $page + 10 ) ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page + 10) . '">' . ($page + 10) . '</a></li>';
+            $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Page ' . ($page + 10) . '" data-page="' . ($page + 10) . '">' . ($page + 10) . '</a></li>';
         }
 
         // Next page (NEW)
         if ( $page < $total_pages ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page + 1) . '"><span class="fas fa-angle-right" aria-hidden="true"></span></a>';
+            $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Next Page" data-page="' . ($page + 1) . '"><span class="fas fa-angle-right" aria-hidden="true"></span></a>';
         }
-        
+
         // Last Page
         if ( $total_pages > ( $page + 2 ) ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link last-page" data-page="' . $total_pages . '"><span class="fas fa-fast-forward aria-hidden="true"></span></a></li>';
+            $output .= '<li class="page-item"><a class="facetwp-page page-link last-page" title="Last Page" data-page="' . $total_pages . '"><span class="fas fa-fast-forward aria-hidden="true"></span></a></li>';
         }
-		
+
 		$output .= '</ul></nav>';
 
     }
@@ -255,6 +255,7 @@ add_filter( 'facetwp_assets', function( $assets ) {
     }
     return $assets;
 });
+add_filter( 'facetwp_load_a11y', '__return_true' );
 
 /** Cron Indexer **/
 function fwp_cron_index() {

@@ -175,19 +175,32 @@
             <?php echo ( get_field('location_address_2', $address_id ) ? get_field('location_address_2', $address_id ) . '<br/>' : ''); ?>
             <?php echo get_field('location_city', $address_id ); ?>, <?php echo get_field('location_state', $address_id ); ?> <?php echo get_field('location_zip', $address_id); ?>
         </p>
-        <?php if (get_field('location_phone')) { ?>
+        <?php 
+        $location_phone = get_field('location_phone', $id);
+        $location_phone_format_dash = format_phone_dash( $location_phone );
+        $location_phone_format_us = format_phone_us( $location_phone );
+        $location_appointment_phone_query = get_field('location_appointment_phone_query', $id);
+        $location_new_appointments_phone = get_field('location_new_appointments_phone', $id);
+        $location_new_appointments_phone_format_dash = format_phone_dash( $location_new_appointments_phone );
+        $location_new_appointments_phone_format_us = format_phone_us( $location_new_appointments_phone );
+        $location_clinic_phone_query = get_field('location_clinic_phone_query', $id);
+        $location_return_appointments_phone = get_field('location_return_appointments_phone', $id);
+        $location_return_appointments_phone_format_dash = format_phone_dash( $location_return_appointments_phone );
+        $location_return_appointments_phone_format_us = format_phone_us( $location_return_appointments_phone );
+
+        if ( $location_phone ) { ?>
             <dl>
-                <dt>Appointment Phone Number<?php echo get_field('field_location_appointment_phone_query') ? 's' : ''; ?></dt>
-                <?php if (get_field('location_new_appointments_phone') && get_field('location_clinic_phone_query')) { ?>
-                    <dd><a href="tel:<?php echo format_phone_dash( get_field('location_new_appointments_phone') ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_new_appointments_phone') ); ?></a><?php echo get_field('field_location_appointment_phone_query') ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
-                    <?php if (get_field('location_return_appointments_phone') && get_field('field_location_appointment_phone_query')) { ?>
-                        <dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone') ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone') ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
+                <dt>Appointment Phone Number<?php echo $location_appointment_phone_query ? 's' : ''; ?></dt>
+                <?php if ($location_new_appointments_phone && $location_clinic_phone_query) { ?>
+                    <dd><a href="tel:<?php echo $location_new_appointments_phone_format_dash; ?>" class="icon-phone"><?php echo $location_new_appointments_phone_format_us; ?></a><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
+                    <?php if ($location_return_appointments_phone && $location_appointment_phone_query) { ?>
+                        <dd><a href="tel:<?php echo $location_return_appointments_phone_format_dash; ?>" class="icon-phone"><?php echo $location_return_appointments_phone_format_us; ?></a><br/><span class="subtitle">Returning Patients</span></dd>
                     <?php } ?>
                 <?php } else { ?>
-                    <dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone') ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone') ); ?></a><br/><span class="subtitle">New and Returning Patients</span></dd>
+                    <dd><a href="tel:<?php echo $location_phone_format_dash; ?>" class="icon-phone"><?php echo $location_phone_format_us; ?></a><br/><span class="subtitle">New and Returning Patients</span></dd>
                 <?php } ?>
             </dl>
-        <?php } ?>
+        <?php } // endif ?>
     </div><!-- .card-body -->
     <div class="btn-container">
         <div class="inner-container">
