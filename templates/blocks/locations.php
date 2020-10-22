@@ -34,6 +34,16 @@ if ( empty($background_color) )
 
 $filter_type = get_field('block_fad_locations_filter_type');
 $filter_region = get_field('block_fad_locations_filter_region');
+$filter_aoe = get_field('block_fad_locations_filter_aoe') ?: array();
+
+$post_ids = array();
+if (!empty($filter_aoe))
+{   
+    $aoe_ids = uamswp_custom_table_query('uamswp_locations', 'location_expertise', $filter_aoe);
+}
+if (!empty($aoe_ids)){
+    $post_ids = $aoe_ids;
+}
 
 $tax_query = array();
 if (!empty($filter_region) && !empty($filter_type))
@@ -55,13 +65,14 @@ if (!empty($filter_region))
         );
 }
 
-if($filter_type || $filter_region) {
+if($filter_type || $filter_region || $filter_aoe) {
     $args = (array(
         'post_type' => "location",
         'order' => 'ASC',
         'orderby' => 'title',
         'posts_per_page' => -1,
         'post_status' => 'publish',
+        'post__in' => $post_ids,
         'tax_query' => $tax_query,
     ));
     $location_query = new WP_Query( $args );
