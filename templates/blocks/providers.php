@@ -143,7 +143,7 @@ if($filter_id || $filter_region || $filter_location || $filter_aoe) {
                             <div class="more">
                                 <p class="lead"><?php echo $more_text; ?></p>
                                 <div class="cta-container">
-                                    <a href="<?php echo $more_button_url['url']; ?>" class="btn btn-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
+                                    <a href="<?php echo $more_button_url['url']; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
                                 </div>
                             </div>
                         <?php } // endif ?>
