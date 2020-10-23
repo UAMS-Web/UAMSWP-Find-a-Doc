@@ -31,6 +31,25 @@ if ( empty($content_block) )
     $content_block = get_field('block_fad_providers_description');
 if ( empty($background_color) )
     $background_color = get_field('block_fad_providers_background_color');
+if ( empty($more) )
+    $more = get_field('block_fad_providers_more');
+if ( $more ) {
+    if ( empty($more_text) )
+        $more_text = get_field('block_fad_providers_more_text');
+    if ( empty($more_button_text) )
+        $more_button_text = get_field('block_fad_providers_more_button_text');
+    if ( empty($more_button_url) )
+        $more_button_url = get_field('block_fad_providers_more_button_url');
+    if ( empty($more_button_target) ) 
+        $more_button_target = $more_button_url['target'];
+    if ( empty($more_button_description) )
+        $more_button_description = get_field('block_fad_providers_more_button_description');
+    if ( empty($more_button_color) && ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) ) {
+        $more_button_color = 'primary';
+    } else {
+        $more_button_color = 'white';
+    }
+}
 if ( empty($count) )
     $count = get_field('block_fad_providers_count');
 
@@ -120,6 +139,14 @@ if($filter_id || $filter_region || $filter_location || $filter_aoe) {
                                 wp_reset_postdata();?>
                             </div>
                         </div>
+                        <?php if ( $more ) { ?>
+                            <div class="more">
+                                <p class="lead"><?php echo $more_text; ?></p>
+                                <div class="cta-container">
+                                    <a href="<?php echo $more_button_url['url']; ?>" class="btn btn-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
+                                </div>
+                            </div>
+                        <?php } // endif ?>
                     </div>
                 </div>
             </div>
