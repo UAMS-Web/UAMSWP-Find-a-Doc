@@ -82,8 +82,8 @@ if($filter_type || $filter_region || $filter_aoe) {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                    <h2 class="module-title"><span class="title"><?php echo $heading; ?></span></h2>
-                        <div class="module-body text-center"><p><?php echo $content_block ? $content_block : ''; ?></p></div>
+                        <h2 class="module-title"><span class="title"><?php echo $heading; ?></span></h2>
+                        <?php echo $content_block ? '<div class="module-description"><p>' . $content_block . '</p></div>' : ''; ?>
                         <div class="card-list-container location-card-list-container">
                             <div class="card-list">
                             <?php while ( $location_query->have_posts() ) : $location_query->the_post();
