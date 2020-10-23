@@ -31,6 +31,25 @@ if ( empty($content_block) )
     $content_block = get_field('block_fad_locations_description');
 if ( empty($background_color) )
     $background_color = get_field('block_fad_locations_background_color');
+if ( empty($more) )
+    $more = get_field('block_fad_locations_more');
+if ( $more ) {
+    if ( empty($more_text) )
+        $more_text = get_field('block_fad_locations_more_text');
+    if ( empty($more_button_text) )
+        $more_button_text = get_field('block_fad_locations_more_button_text');
+    if ( empty($more_button_url) )
+        $more_button_url = get_field('block_fad_locations_more_button_url');
+    if ( empty($more_button_target) ) 
+        $more_button_target = $more_button_url['target'];
+    if ( empty($more_button_description) )
+        $more_button_description = get_field('block_fad_locations_more_button_description');
+    if ( empty($more_button_color) && ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) ) {
+        $more_button_color = 'primary';
+    } else {
+        $more_button_color = 'white';
+    }
+}
 
 $filter_type = get_field('block_fad_locations_filter_type');
 $filter_region = get_field('block_fad_locations_filter_region');
@@ -82,8 +101,8 @@ if($filter_type || $filter_region || $filter_aoe) {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                    <h2 class="module-title"><span class="title"><?php echo $heading; ?></span></h2>
-                        <div class="module-body text-center"><p><?php echo $content_block ? $content_block : ''; ?></p></div>
+                        <h2 class="module-title"><span class="title"><?php echo $heading; ?></span></h2>
+                        <?php echo $content_block ? '<div class="module-description"><p>' . $content_block . '</p></div>' : ''; ?>
                         <div class="card-list-container location-card-list-container">
                             <div class="card-list">
                             <?php while ( $location_query->have_posts() ) : $location_query->the_post();
@@ -92,6 +111,14 @@ if($filter_type || $filter_region || $filter_aoe) {
                             endwhile; 
                             wp_reset_postdata();?>
                         </div>
+                        <?php if ( $more ) { ?>
+                            <div class="more">
+                                <p class="lead"><?php echo $more_text; ?></p>
+                                <div class="cta-container">
+                                    <a href="<?php echo $more_button_url['url']; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
+                                </div>
+                            </div>
+                        <?php } // endif ?>
                     </div>
                 </div>
             </div>
