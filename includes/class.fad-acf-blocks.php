@@ -230,7 +230,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'placeholder' => '',
             ),
             array(
-                'key' => 'field_block_fad_locations_more'. $suffix,
+                'key' => 'field_block_fad_locations_more',
                 'label' => 'Include link to something?',
                 'name' => 'block_fad_locations_more',
                 'type' => 'true_false',
@@ -250,7 +250,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'ui_off_text' => '',
             ),
             array(
-                'key' => 'field_block_fad_locations_more_text'. $suffix,
+                'key' => 'field_block_fad_locations_more_text',
                 'label' => 'Heading',
                 'name' => 'block_fad_locations_more_text',
                 'type' => 'text',
@@ -259,7 +259,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'conditional_logic' => array(
                     array(
                         array(
-                            'field' => 'field_block_fad_locations_more'. $suffix,
+                            'field' => 'field_block_fad_locations_more',
                             'operator' => '==',
                             'value' => '1',
                         ),
@@ -278,7 +278,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'maxlength' => '',
             ),
             array(
-                'key' => 'field_block_fad_locations_more_button_text'. $suffix,
+                'key' => 'field_block_fad_locations_more_button_text',
                 'label' => 'Button Text',
                 'name' => 'block_fad_locations_more_button_text',
                 'type' => 'text',
@@ -287,7 +287,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'conditional_logic' => array(
                     array(
                         array(
-                            'field' => 'field_block_fad_locations_more'. $suffix,
+                            'field' => 'field_block_fad_locations_more',
                             'operator' => '==',
                             'value' => '1',
                         ),
@@ -305,7 +305,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'maxlength' => '',
             ),
             array(
-                'key' => 'field_block_fad_locations_more_button_url'. $suffix,
+                'key' => 'field_block_fad_locations_more_button_url',
                 'label' => 'Button URL',
                 'name' => 'block_fad_locations_more_button_url',
                 'type' => 'link',
@@ -314,7 +314,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'conditional_logic' => array(
                     array(
                         array(
-                            'field' => 'field_block_fad_locations_more'. $suffix,
+                            'field' => 'field_block_fad_locations_more',
                             'operator' => '==',
                             'value' => '1',
                         ),
@@ -328,7 +328,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'return_format' => 'array',
             ),
             array(
-                'key' => 'field_block_fad_locations_more_button_description'. $suffix,
+                'key' => 'field_block_fad_locations_more_button_description',
                 'label' => 'Button Link Description',
                 'name' => 'block_fad_locations_more_button_description',
                 'type' => 'text',
@@ -337,7 +337,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'conditional_logic' => array(
                     array(
                         array(
-                            'field' => 'field_block_fad_locations_more'. $suffix,
+                            'field' => 'field_block_fad_locations_more',
                             'operator' => '==',
                             'value' => '1',
                         ),
@@ -695,7 +695,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'placeholder' => '',
             ),
             array(
-                'key' => 'field_block_fad_providers_more'. $suffix,
+                'key' => 'field_block_fad_providers_more',
                 'label' => 'Include link to something?',
                 'name' => 'block_fad_providers_more',
                 'type' => 'true_false',
@@ -715,7 +715,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'ui_off_text' => '',
             ),
             array(
-                'key' => 'field_block_fad_providers_more_text'. $suffix,
+                'key' => 'field_block_fad_providers_more_text',
                 'label' => 'Heading',
                 'name' => 'block_fad_providers_more_text',
                 'type' => 'text',
@@ -724,7 +724,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'conditional_logic' => array(
                     array(
                         array(
-                            'field' => 'field_block_fad_providers_more'. $suffix,
+                            'field' => 'field_block_fad_providers_more',
                             'operator' => '==',
                             'value' => '1',
                         ),
@@ -743,7 +743,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'maxlength' => '',
             ),
             array(
-                'key' => 'field_block_fad_providers_more_button_text'. $suffix,
+                'key' => 'field_block_fad_providers_more_button_text',
                 'label' => 'Button Text',
                 'name' => 'block_fad_providers_more_button_text',
                 'type' => 'text',
@@ -752,7 +752,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'conditional_logic' => array(
                     array(
                         array(
-                            'field' => 'field_block_fad_providers_more'. $suffix,
+                            'field' => 'field_block_fad_providers_more',
                             'operator' => '==',
                             'value' => '1',
                         ),
@@ -770,7 +770,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'maxlength' => '',
             ),
             array(
-                'key' => 'field_block_fad_providers_more_button_url'. $suffix,
+                'key' => 'field_block_fad_providers_more_button_url',
                 'label' => 'Button URL',
                 'name' => 'block_fad_providers_more_button_url',
                 'type' => 'link',
@@ -779,7 +779,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'conditional_logic' => array(
                     array(
                         array(
-                            'field' => 'field_block_fad_providers_more'. $suffix,
+                            'field' => 'field_block_fad_providers_more',
                             'operator' => '==',
                             'value' => '1',
                         ),
@@ -793,7 +793,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'return_format' => 'array',
             ),
             array(
-                'key' => 'field_block_fad_providers_more_button_description'. $suffix,
+                'key' => 'field_block_fad_providers_more_button_description',
                 'label' => 'Button Link Description',
                 'name' => 'block_fad_providers_more_button_description',
                 'type' => 'text',
@@ -802,7 +802,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'conditional_logic' => array(
                     array(
                         array(
-                            'field' => 'field_block_fad_providers_more'. $suffix,
+                            'field' => 'field_block_fad_providers_more',
                             'operator' => '==',
                             'value' => '1',
                         ),
