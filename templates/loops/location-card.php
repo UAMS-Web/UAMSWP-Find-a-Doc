@@ -12,7 +12,7 @@
     $address_id = $id;
 
     $location_title = get_the_title($id);
-    $location_title_attr = str_replace('"', "", $location_title);
+    $location_title_attr = str_replace('"', '\'', $location_title);
 
     // Parent Location 
     $location_has_parent = get_field('location_parent', $id);
