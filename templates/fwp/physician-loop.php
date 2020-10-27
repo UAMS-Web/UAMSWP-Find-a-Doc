@@ -94,7 +94,7 @@
 							?>
 						
 							<p><?php echo ( get_field('physician_short_clinical_bio') ? get_field( 'physician_short_clinical_bio') : wp_trim_words( get_field( 'physician_clinical_bio' ), 30, ' &hellip;' ) ); ?></p>
-						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>">Full Profile</a>
+						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name; ?>">Full Profile</a>
 						</div>
 						<div class="col-12 secondary">
 						<h4 class="h5">Locations</h4>
