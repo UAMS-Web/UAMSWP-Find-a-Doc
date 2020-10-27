@@ -11,6 +11,8 @@
     $featured_image = '';
     $address_id = $id;
 
+    $location_title = get_the_title($id);
+
     // Parent Location 
     $location_has_parent = get_field('location_parent', $id);
     $location_parent_id = get_field('location_parent_id', $id);
@@ -57,7 +59,7 @@
     <?php } ?>
     <div class="card-body">
         <h3 class="card-title h5">
-            <span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self"><?php echo get_the_title($id); ?></a></span>
+            <span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self"><?php echo $location_title; ?></a></span>
             <?php if ( $parent_location ) { ?>
                 <span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
             <?php } // endif ?>
@@ -148,7 +150,7 @@
         if ( $location_closing_display || $location_modified_hours_display ) { 
             $alert_label = '';
             if ($location_closing_display) {
-                $alert_label = 'Learn more about the closure.';
+                $alert_label = 'Learn more about the closure of ' . $location_title . '.';
             } elseif ($location_modified_hours_display) {
                 $alert_label = 'Learn more about the modified hours.';
             }
@@ -204,9 +206,9 @@
     </div><!-- .card-body -->
     <div class="btn-container">
         <div class="inner-container">
-            <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary" aria-label="Go to location page for <?php echo get_the_title($id); ?>">View Location</a>
+            <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary" aria-label="Go to location page for <?php echo $location_title; ?>">View Location</a>
             <?php if ($map) { ?>
-            <a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get Directions to <?php echo get_the_title($id); ?>">Get Directions</a>
+            <a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get Directions to <?php echo $location_title; ?>">Get Directions</a>
             <?php } ?>
         </div>
     </div>
