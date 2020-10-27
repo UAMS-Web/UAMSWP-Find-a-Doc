@@ -150,7 +150,7 @@
         if ( $location_closing_display || $location_modified_hours_display ) { 
             $alert_label = '';
             if ($location_closing_display) {
-                $alert_label = 'Learn more about the closure.';
+                $alert_label = 'Learn more about the closure of ' . $location_title . '.';
             } elseif ($location_modified_hours_display) {
                 $alert_label = 'Learn more about the modified hours.';
             }
