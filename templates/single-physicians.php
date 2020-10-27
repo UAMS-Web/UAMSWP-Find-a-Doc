@@ -36,8 +36,11 @@ if ( $languages ) {
 
 $prefix = get_field('physician_prefix',$post->ID);
 $full_name = get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+$full_name_attr = str_replace('"', '\'', $full_name);
 $medium_name = ($prefix ? $prefix .' ' : '') . get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID);
+$medium_name_attr = str_replace('"', '\'', $medium_name);
 $short_name = $prefix ? $prefix .'&nbsp;' .get_field('physician_last_name',$post->ID) : get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '');
+$short_name_attr = str_replace('"', '\'', $short_name);
 $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 $resident = get_field('physician_resident',$post->ID);
 $resident_title_name = 'Resident Physician';
@@ -460,7 +463,7 @@ while ( have_posts() ) : the_post();
                             media="(min-width: 576px)">
                         <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 380, 507, 'center', 'center'); ?>"
                             media="(min-width: 1px)">
-                        <img src="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center'); ?>" alt="<?php echo $full_name; ?>" />
+                        <img src="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center'); ?>" alt="<?php echo $full_name_attr; ?>" />
                         <?php $docphoto = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center');
                              } else {
                                 the_post_thumbnail( 'large',  array( 'itemprop' => 'image' ) );
@@ -1146,7 +1149,7 @@ while ( have_posts() ) : the_post();
 {
   "@context": "http://www.schema.org",
   "@type": "Physician",
-  "name": "<?php echo $full_name; ?>",
+  "name": "<?php echo $full_name_attr; ?>",
   "url": "<?php echo get_permalink(); ?>",
   "logo": "<?php echo get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png'; ?>",
   "image": "<?php echo $docphoto; ?>"
