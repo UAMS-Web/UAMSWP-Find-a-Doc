@@ -12,6 +12,7 @@
     $address_id = $id;
 
     $location_title = get_the_title($id);
+    $location_title_attr = str_replace('"', '\'', $location_title);
 
     // Parent Location 
     $location_has_parent = get_field('location_parent', $id);
@@ -150,7 +151,7 @@
         if ( $location_closing_display || $location_modified_hours_display ) { 
             $alert_label = '';
             if ($location_closing_display) {
-                $alert_label = 'Learn more about the closure of ' . $location_title . '.';
+                $alert_label = 'Learn more about the closure of ' . $location_title_attr . '.';
             } elseif ($location_modified_hours_display) {
                 $alert_label = 'Learn more about the modified hours.';
             }
@@ -206,7 +207,7 @@
     </div><!-- .card-body -->
     <div class="btn-container">
         <div class="inner-container">
-            <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary" aria-label="Go to location page for <?php echo $location_title; ?>">View Location</a>
+            <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary" aria-label="Go to location page for <?php echo $location_title_attr; ?>">View Location</a>
             <?php if ($map) { ?>
             <a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get Directions to <?php echo $location_title; ?>">Get Directions</a>
             <?php } ?>
