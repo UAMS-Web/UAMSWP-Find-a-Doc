@@ -31,7 +31,7 @@
 		<div class="item">
 			<div class="row">
 				<div class="col image">
-					<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name; ?>" class="stretched-link">
+					<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name; ?>" data-providername="<?php echo $full_name; ?>" class="stretched-link">
 						<picture>
 						<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
 							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
@@ -94,7 +94,7 @@
 							?>
 						
 							<p><?php echo ( get_field('physician_short_clinical_bio') ? get_field( 'physician_short_clinical_bio') : wp_trim_words( get_field( 'physician_clinical_bio' ), 30, ' &hellip;' ) ); ?></p>
-						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>">Full Profile</a>
+						<a class="btn btn-primary" data-providername="<?php echo $full_name; ?>" href="<?php echo get_permalink($post->ID); ?>">Full Profile</a>
 						</div>
 						<div class="col-12 secondary">
 						<h4 class="h5">Locations</h4>
@@ -107,7 +107,7 @@
 								<ul>
 								<?php foreach( $locations as $location): ?>
 									<li>
-										<a href="<?php echo get_permalink( $location ); ?>">
+										<a href="<?php echo get_permalink( $location ); ?>" data-providername="<?php echo $full_name; ?>">
 											<?php echo get_the_title( $location ); ?>
 										</a>
 									</li>
@@ -221,7 +221,7 @@
 								<ul>
 								<?php foreach( $locations as $location): ?>
 									<li>
-										<a href="<?php echo get_permalink( $location ); ?>">
+										<a href="<?php echo get_permalink( $location ); ?>" data-providername="<?php echo $full_name; ?>">
 											<?php echo get_the_title( $location ); ?>
 										</a>
 									</li>
