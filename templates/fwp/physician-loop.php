@@ -107,7 +107,7 @@
 								<ul>
 								<?php foreach( $locations as $location): ?>
 									<li>
-										<a href="<?php echo get_permalink( $location ); ?>" data-providername="<?php echo $full_name; ?>">
+										<a href="<?php echo get_permalink( $location ); ?>" data-providername="<?php echo $full_name; ?>" data-linktype="location">
 											<?php echo get_the_title( $location ); ?>
 										</a>
 									</li>
