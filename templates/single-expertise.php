@@ -54,12 +54,24 @@ function uamswp_expertise_physicians() {
         if(count($physicians) <= $postsCutoff ) {
             $postsPerPage = -1;
         }
+        $filter_region = explode(",", $_GET[ '_provider_region' ]);
+        $tax_query = array();
+        if (!empty($filter_region))
+        {
+            $tax_query[] =  array(
+                'taxonomy' => 'region',
+                'field'    => 'slug',
+                'terms' =>  $filter_region,
+                'operator' => 'IN'
+            );
+        }
         $args = array(
             "post_type" => "provider",
             "post_status" => "publish",
             "posts_per_page" => $postsPerPage,
             "orderby" => "title",
             "order" => "ASC",
+            "tax_query" => $tax_query,
             "post__in" => $physicians
         );
         $physicians_query = New WP_Query( $args );
@@ -151,12 +163,24 @@ function uamswp_expertise_treatments_cpt() {
 function uamswp_expertise_locations() {
     $locations = get_field('location_expertise');
     if($locations) {
+        $filter_region = explode(",", $_GET[ '_provider_region' ]);
+        $tax_query = array();
+        if (!empty($filter_region))
+        {
+            $tax_query[] =  array(
+                'taxonomy' => 'region',
+                'field'    => 'slug',
+                'terms' =>  $filter_region,
+                'operator' => 'IN'
+            );
+        }
         $args = (array(
             'post_type' => "location",
             'order' => 'ASC',
             'orderby' => 'title',
             'posts_per_page' => -1,
             'post_status' => 'publish',
+            "tax_query" => $tax_query,
             'post__in'	=> $locations
         ));
         $location_query = new WP_Query( $args );
