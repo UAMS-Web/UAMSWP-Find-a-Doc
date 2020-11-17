@@ -21,6 +21,7 @@
  	} ?>
 	<?php 
 		$full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '') . ( $degree_list ? ', ' . $degree_list : '' );
+		$full_name_attr = str_replace('"', '\'', $full_name);
 		$physician_resident = get_field('physician_resident');
 		$physician_resident_name = 'Resident Physician';
 		$physician_title = get_field('physician_title');
@@ -31,7 +32,7 @@
 		<div class="item">
 			<div class="row">
 				<div class="col image">
-					<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name; ?>" class="stretched-link">
+					<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" class="stretched-link">
 						<picture>
 						<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
 							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
@@ -46,7 +47,7 @@
 								media="(min-width: 576px)">
 							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>"
 								media="(min-width: 1px)">
-							<img src="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>" alt="<?php echo $full_name; ?>" />
+							<img src="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>" alt="<?php echo $full_name_attr; ?>" />
 						<?php } elseif ( has_post_thumbnail() ) { ?>
 							<?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
 						<?php } else { ?>
@@ -60,7 +61,7 @@
 					<div class="row">
 						<div class="col-12 primary">
 						<h3 class="h4">
-							<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name; ?>"><span class="name"><?php echo $full_name; ?></span></a>
+							<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>"><span class="name"><?php echo $full_name; ?></span></a>
 							<?php if ( $physician_title_name ) { ?>
 							<span class="subtitle"><?php echo $physician_title_name; ?></span>
 							<?php } // endif ?>
@@ -94,7 +95,7 @@
 							?>
 						
 							<p><?php echo ( get_field('physician_short_clinical_bio') ? get_field( 'physician_short_clinical_bio') : wp_trim_words( get_field( 'physician_clinical_bio' ), 30, ' &hellip;' ) ); ?></p>
-						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>">Full Profile</a>
+						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>">Full Profile</a>
 						</div>
 						<div class="col-12 secondary">
 						<h4 class="h5">Locations</h4>
@@ -114,7 +115,7 @@
 								<?php endforeach; ?>
 								</ul>
 							<?php endif; ?>
-						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name; ?>">Full Profile</a>
+						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>">Full Profile</a>
 						</div>
 					</div>
 				</div>
