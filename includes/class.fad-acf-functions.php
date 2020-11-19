@@ -128,6 +128,50 @@ function physician_save_post( $post_id ) {
 
 	$_POST['acf']['field_physician_full_name'] = $full_name;
 
+	$expertises = $_POST['acf']['field_physician_expertise'];
+	$conditions = $_POST['acf']['field_physician_conditions_cpt'];
+	$treatments = $_POST['acf']['field_physician_treatments_cpt'];
+
+	
+	if ( $expertises ) {
+		$i = 1;
+		foreach( $expertises as $expertise ):
+			$expertise_name = get_the_title( $expertise );
+			$expertise_list .= $expertise_name;
+			if( count($expertises) > $i ) {
+				$expertise_list .= ", ";
+			}
+			$i++;
+		endforeach;
+	}
+
+	if ( $conditions ) {
+		$i = 1;
+		foreach( $conditions as $condition ):
+			$condition_name = get_the_title( $condition );
+			$condition_list .= $condition_name;
+			if( count($conditions) > $i ) {
+				$condition_list .= ", ";
+			}
+			$i++;
+		endforeach;
+	}
+
+	if ( $treatments ) {
+		$i = 1;
+		foreach( $treatments as $treatment ):
+			$treatment_name = get_the_title( $treatment );
+			$treatment_list .= $treatment_name;
+			if( count($treatments) > $i ) {
+				$treatment_list .= ", ";
+			}
+			$i++;
+		endforeach;
+	}
+
+	$filter_list = $expertise_list . ', ' . $condition_list . ', ' . $treatment_list;
+	$_POST['acf']['field_physician_asp_filter'] = $filter_list;
+
 	// Add region
 	$locations = $_POST['acf']['field_physician_locations'];
 	if ( $locations ) {
