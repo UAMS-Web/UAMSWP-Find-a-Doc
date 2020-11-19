@@ -1248,6 +1248,33 @@
             "append": "",
             "maxlength": ""
         },
+        "field_physician_asp_filter": {
+            "key": "field_physician_asp_filter",
+            "name": "physician_asp_filter",
+            "type": "text",
+            "label": "Ajax Search Filter",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_clinical_tab",
+                        "operator": "==",
+                        "value": "false"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
         "field_physician_resident_profile_tab": {
             "key": "field_physician_resident_profile_tab",
             "name": "",
