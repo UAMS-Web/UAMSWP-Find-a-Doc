@@ -318,32 +318,6 @@
             "ui_on_text": "",
             "ui_off_text": ""
         },
-        "field_spacer_1": {
-            "key": "field_spacer_1",
-            "label": "",
-            "name": "",
-            "type": "message",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_resident",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "message": "&nbsp;",
-            "new_lines": "",
-            "esc_html": 0
-        },
         "field_physician_eligible_appointments": {
             "key": "field_physician_eligible_appointments",
             "name": "physician_eligible_appointments",
@@ -523,32 +497,6 @@
             },
             "default_value": "https:\/\/uamshealth.com\/appointments",
             "placeholder": "https:\/\/uamshealth.com\/appointments"
-        },
-        "field_spacer_2": {
-            "key": "field_spacer_2",
-            "label": "",
-            "name": "",
-            "type": "message",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_resident",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "message": "&nbsp;",
-            "new_lines": "",
-            "esc_html": 0
         },
         "field_physician_title": {
             "key": "field_physician_title",
