@@ -182,7 +182,7 @@
             "type": "radio",
             "label": "Gender",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "40",
@@ -194,7 +194,7 @@
                 "male": "Male",
                 "other": "Other"
             },
-            "allow_null": 0,
+            "allow_null": 1,
             "other_choice": 0,
             "default_value": "",
             "layout": "horizontal",
