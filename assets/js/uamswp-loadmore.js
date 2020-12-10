@@ -7,6 +7,7 @@ jQuery(function($) {
     var postids = ("" !== $loader.data('postids')) ? $loader.data('postids') : 0; // Post
     var tax = ("" !== $loader.data('tax')) ? $loader.data('tax') : 0; // Taxonomy
     var slug = ("" !== $loader.data('slug')) ? $loader.data('slug') : 0; // Taxonomy
+    var region = ("" !== $loader.data('region')) ? $loader.data('region') : ''; //  Region
 
     $('body').on('click', '.loadmore', function() {
         
@@ -20,7 +21,8 @@ jQuery(function($) {
             'postcount': postcount,
             'posttype': type,
             'tax': tax,
-            'slug': slug
+            'slug': slug,
+            'region': region
         };
 
         // console.log(page);
