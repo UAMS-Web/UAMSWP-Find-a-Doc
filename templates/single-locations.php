@@ -10,6 +10,13 @@ if (empty($excerpt)){
         $excerpt = mb_strimwidth(wp_strip_all_tags($about_loc), 0, 155, '...');
     }
 }
+// Region
+if (!isset($filter_region)){
+	$filter_region = '';
+	if (isset($_GET[ '_provider_region' ])) {
+		$filter_region = explode(",", $_GET[ '_provider_region' ]);
+	}
+}
 // Parent Location 
 $location_has_parent = get_field('location_parent');
 $location_parent_id = get_field('location_parent_id');
@@ -23,7 +30,7 @@ if ($location_has_parent && $location_parent_id) {
 if ($parent_location) {
 	$post_id = $parent_location->ID;
 	$parent_title = $parent_location->post_title;
-	$parent_url = get_permalink( $post_id );
+	$parent_url = return_region(get_permalink( $post_id ), $filter_region);
 } else {
 	$post_id = get_the_ID();
 }
@@ -297,7 +304,7 @@ while ( have_posts() ) : the_post(); ?>
 					<?php echo $location_city; ?>, <?php echo $location_state; ?> <?php echo $location_zip; ?></p>
 						<p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo get_the_title($post_id); ?>">Get Directions</a></p>
 						<?php if( $location_web_name && $location_url ){ ?>
-							<p><a class="btn btn-secondary" href="<?php echo $location_url['url']; ?>"><?php echo $location_web_name; ?> <span class="far fa-external-link-alt"></span></span></a></p>
+							<p><a class="btn btn-secondary" href="<?php echo return_region($location_url['url'], $filter_region); ?>"><?php echo $location_web_name; ?> <span class="far fa-external-link-alt"></span></span></a></p>
 					<?php } 
 						// Schema data
 						$location_schema = '"address": {

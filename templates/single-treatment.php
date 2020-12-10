@@ -76,12 +76,29 @@
 
 	// Locations Content
 	$location_content = '';
+	if (!isset($filter_region)){
+		$filter_region = '';
+		if (isset($_GET[ '_provider_region' ])) {
+			$filter_region = explode(",", $_GET[ '_provider_region' ]);
+		}
+	}
+	$tax_query = array();
+	if (!empty($filter_region))
+	{
+		$tax_query[] =  array(
+			'taxonomy' => 'region',
+			'field'    => 'slug',
+			'terms' =>  $filter_region,
+			'operator' => 'IN'
+		);
+	}
 	$args = (array(
 		'post_type' => "location",
 		"post_status" => "publish",
 		'order' => 'ASC',
 		'orderby' => 'title',
 		'posts_per_page' => -1,
+		"tax_query" => $tax_query,
 		'post__in'	=> $locations
 	));
 	$location_query = new WP_Query( $args );
@@ -222,13 +239,23 @@
 			</section>
 		<?php endif; ?>
 		<?php
-
+			$tax_query = array();
+			if (!empty($filter_region))
+			{
+				$tax_query[] =  array(
+					'taxonomy' => 'region',
+					'field'    => 'slug',
+					'terms' =>  $filter_region,
+					'operator' => 'IN'
+				);
+			}
 			$args = (array(
 				'post_type' => "condition",
 				"post_status" => "publish",
 				'order' => 'ASC',
 				'orderby' => 'title',
 				'posts_per_page' => -1,
+				"tax_query" => $tax_query,
 				'post__in'	=> $conditions_cpt
 			));
 			$conditions_query_cpt = new WP_Query( $args );
@@ -245,7 +272,7 @@
 								<ul class="list">
 								<?php while ($conditions_query_cpt->have_posts()) : $conditions_query_cpt->the_post(); ?>
 									<li>
-										<a href="<?php echo get_permalink( get_the_ID() ); ?>" aria-label="Go to Condition page for <?php echo get_the_title(); ?>" class="btn btn-outline-primary"><?php echo get_the_title(); ?></a>
+										<a href="<?php echo return_region(get_permalink( get_the_ID() ), $filter_region); ?>" aria-label="Go to Condition page for <?php echo get_the_title(); ?>" class="btn btn-outline-primary"><?php echo get_the_title(); ?></a>
 									</li>
 								<?php endwhile;
 									  wp_reset_postdata(); ?>
@@ -265,12 +292,24 @@
 			if($physiciansCount <= $postsCutoff ) {
 				$postsPerPage = -1;
 			}
+			$tax_query = array();
+			if (!empty($filter_region))
+			{
+				$tax_query[] =  array(
+					'taxonomy' => 'region',
+					'field'    => 'slug',
+					'terms' =>  $filter_region,
+					'operator' => 'IN'
+				);
+				$postsPerPage = -1;
+			}
 			$args = (array(
 				'post_type' => "provider",
 				"post_status" => "publish",
 				'order' => 'ASC',
 				'orderby' => 'title',
 				'posts_per_page' => $postsPerPage,
+				"tax_query" => $tax_query,
 				'post__in'	=> $physicians
 			));
 			$physicians_query = new WP_Query( $args );
@@ -288,6 +327,7 @@
 										<?php
 											while ($physicians_query->have_posts()) : $physicians_query->the_post();
 												$id = get_the_ID();
+												$region = $filter_region;
 												include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
 											endwhile;
 										?>
@@ -295,7 +335,7 @@
 								</div>
 								<?php if ($postsPerPage !== -1) { ?>
 								<div class="more">
-									<button class="loadmore btn btn-primary" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more providers">Load More</button>								</div>
+									<button class="loadmore btn btn-primary" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" data-region="<?php echo $_GET['_provider_region']; ?>" aria-label="Load more providers">Load More</button>								</div>
 								<?php } ?>
 							</div>
 						</div>
@@ -312,12 +352,23 @@
 		}
 		
 		// Expertise Section
+		$tax_query = array();
+		if (!empty($filter_region))
+		{
+			$tax_query[] =  array(
+				'taxonomy' => 'region',
+				'field'    => 'slug',
+				'terms' =>  $filter_region,
+				'operator' => 'IN'
+			);
+		}
 		$args = (array(
 			'post_type' => "expertise",
 			"post_status" => "publish",
 			'order' => 'ASC',
 			'orderby' => 'title',
 			'posts_per_page' => -1,
+			"tax_query" => $tax_query,
 			'post__in'	=> $expertise
 		));
 		$expertise_query = new WP_Query( $args );

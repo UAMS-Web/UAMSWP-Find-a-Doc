@@ -33,6 +33,13 @@ if ( $languages ) {
         $i++;
     endforeach;
 }
+// Region
+if (!isset($filter_region)){
+    $filter_region = '';
+    if (isset($_GET[ '_provider_region' ])) {
+        $filter_region = explode(",", $_GET[ '_provider_region' ]);
+    }
+}
 
 $prefix = get_field('physician_prefix',$post->ID);
 $full_name = get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
@@ -84,7 +91,7 @@ if( $locations && $location_valid ) {
         if ( 2 > $l ){
             if ( get_post_status ( $location ) == 'publish' ) {
                 $primary_appointment_title = get_the_title( $location );
-                $primary_appointment_url = get_the_permalink( $location );
+                $primary_appointment_url = return_region(get_the_permalink( $location ), $filter_region);
                 $l++;
             }
         }
@@ -283,7 +290,7 @@ while ( have_posts() ) : the_post();
                         <?php foreach( $expertises as $expertise ) {
                             $id = $expertise; 
                             if ( get_post_status ( $expertise ) == 'publish' ) {
-                                echo '<dd><a href="' . get_permalink($id) . '" target="_self">' . get_the_title($id) . '</a></dd>';
+                                echo '<dd><a href="' . return_region(get_permalink($id), $filter_region) . '" target="_self">' . get_the_title($id) . '</a></dd>';
                             }
                         } ?>
                         <?php }
@@ -403,7 +410,7 @@ while ( have_posts() ) : the_post();
                                             if ($parent_location) {
                                                 $parent_id = $parent_location->ID;
                                                 $parent_title = $parent_location->post_title;
-                                                $parent_url = get_permalink( $parent_id );
+                                                $parent_url = return_region(get_permalink( $parent_id ), $filter_region);
                                                 $address_id = $parent_id;
                                             }
                                     ?>
@@ -431,7 +438,7 @@ while ( have_posts() ) : the_post();
                                     </dl>
                                 <?php } ?>
                                 <div class="btn-container">
-                                    <a class="btn btn-primary" href="<?php echo get_the_permalink( $location ); ?>">
+                                    <a class="btn btn-primary" href="<?php echo return_region(get_the_permalink( $location ), $filter_region); ?>">
                                         View Location
                                     </a>
                                     <?php if (1 < $location_count) { ?>

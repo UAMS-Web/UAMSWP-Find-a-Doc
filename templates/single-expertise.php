@@ -54,7 +54,12 @@ function uamswp_expertise_physicians() {
         if(count($physicians) <= $postsCutoff ) {
             $postsPerPage = -1;
         }
-        $filter_region = explode(",", $_GET[ '_provider_region' ]);
+        if (!isset($filter_region)){
+            $filter_region = '';
+            if (isset($_GET[ '_provider_region' ])) {
+                $filter_region = explode(",", $_GET[ '_provider_region' ]);
+            }
+        }
         $tax_query = array();
         if (!empty($filter_region))
         {
@@ -64,6 +69,7 @@ function uamswp_expertise_physicians() {
                 'terms' =>  $filter_region,
                 'operator' => 'IN'
             );
+            $postsPerPage = -1;
         }
         $args = array(
             "post_type" => "provider",
@@ -95,7 +101,7 @@ function uamswp_expertise_physicians() {
                         </div>
                         <?php if ($postsPerPage !== -1) { ?>
                         <div class="more">
-                            <button class="loadmore btn btn-primary" data-posttype="post" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more providers">Load More</button>
+                            <button class="loadmore btn btn-primary" data-posttype="post" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" data-region="<?php echo $_GET['_provider_region']; ?>" aria-label="Load more providers">Load More</button>
                         </div>
                         <?php } ?>
                     </div>
@@ -131,12 +137,29 @@ function uamswp_expertise_conditions_cpt() {
     // load all 'conditions' terms for the post
     $conditions_cpt = get_field('expertise_conditions_cpt');
     // Conditions CPT
+    if (!isset($filter_region)){
+		$filter_region = '';
+		if (isset($_GET[ '_provider_region' ])) {
+			$filter_region = explode(",", $_GET[ '_provider_region' ]);
+		}
+	}
+    $tax_query = array();
+    if (!empty($filter_region))
+    {
+        $tax_query[] =  array(
+            'taxonomy' => 'region',
+            'field'    => 'slug',
+            'terms' =>  $filter_region,
+            'operator' => 'IN'
+        );
+    }
     $args = (array(
         'post_type' => "condition",
         'post_status' => 'publish',
         'orderby' => 'title',
         'order' => 'ASC',
         'posts_per_page' => -1,
+        "tax_query" => $tax_query,
         'post__in' => $conditions_cpt
     ));
     $conditions_cpt_query = new WP_Query( $args );
@@ -147,12 +170,29 @@ function uamswp_expertise_conditions_cpt() {
 function uamswp_expertise_treatments_cpt() {
     $treatments_cpt = get_field('expertise_treatments_cpt');
     // Treatments CPT
+    if (!isset($filter_region)){
+		$filter_region = '';
+		if (isset($_GET[ '_provider_region' ])) {
+			$filter_region = explode(",", $_GET[ '_provider_region' ]);
+		}
+	}
+    $tax_query = array();
+    if (!empty($filter_region))
+    {
+        $tax_query[] =  array(
+            'taxonomy' => 'region',
+            'field'    => 'slug',
+            'terms' =>  $filter_region,
+            'operator' => 'IN'
+        );
+    }
     $args = (array(
         'post_type' => "treatment",
         'post_status' => 'publish',
         'orderby' => 'title',
         'order' => 'ASC',
         'posts_per_page' => -1,
+        "tax_query" => $tax_query,
         'post__in' => $treatments_cpt
     ));
     $treatments_cpt_query = new WP_Query( $args );
@@ -163,7 +203,12 @@ function uamswp_expertise_treatments_cpt() {
 function uamswp_expertise_locations() {
     $locations = get_field('location_expertise');
     if($locations) {
-        $filter_region = explode(",", $_GET[ '_provider_region' ]);
+        if (!isset($filter_region)){
+            $filter_region = '';
+            if (isset($_GET[ '_provider_region' ])) {
+                $filter_region = explode(",", $_GET[ '_provider_region' ]);
+            }
+        }
         $tax_query = array();
         if (!empty($filter_region))
         {
@@ -208,12 +253,29 @@ function uamswp_expertise_locations() {
 }
 function uamswp_expertise_associated() {
     $expertises =  get_field('expertise_associated');
+    if (!isset($filter_region)){
+		$filter_region = '';
+		if (isset($_GET[ '_provider_region' ])) {
+			$filter_region = explode(",", $_GET[ '_provider_region' ]);
+		}
+	}
+    $tax_query = array();
+    if (!empty($filter_region))
+    {
+        $tax_query[] =  array(
+            'taxonomy' => 'region',
+            'field'    => 'slug',
+            'terms' =>  $filter_region,
+            'operator' => 'IN'
+        );
+    }
     $args = (array(
         'post_type' => "expertise",
         'order' => 'ASC',
         'orderby' => 'title',
         'posts_per_page' => -1,
         'post_status' => 'publish',
+        "tax_query" => $tax_query,
         'post__in'	=> $expertises
     ));
     $expertise_query = new WP_Query( $args );
@@ -230,7 +292,7 @@ function uamswp_expertise_associated() {
 						<ul>
 						<?php
 						while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
-							echo '<li class="item"><div class="text-container"><h3 class="h5"><a href="'.get_permalink().'" aria-label="Go to Area of Expertise page for ' . get_the_title() . '">';
+							echo '<li class="item"><div class="text-container"><h3 class="h5"><a href="'.return_region(get_permalink(), $filter_region).'" aria-label="Go to Area of Expertise page for ' . get_the_title() . '">';
 							echo get_the_title();
                             echo '</a></h3>';
                             echo ( has_excerpt() ? '<p>' . wp_trim_words( get_the_excerpt(), 30, '&nbsp;&hellip;' ) . '</p>' : '' );
