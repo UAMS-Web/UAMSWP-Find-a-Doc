@@ -21,6 +21,12 @@
 			$i++;
 		endforeach; 
 	} 
+	if (!isset($filter_region)){
+		$filter_region = '';
+		if (isset($_GET[ '_provider_region' ])) {
+			$filter_region = explode(",", $_GET[ '_provider_region' ]);
+		}
+	}
 	?>
 	<?php
 		$full_name = get_field('physician_first_name', $id) .' ' .(get_field('physician_middle_name', $id) ? get_field('physician_middle_name', $id) . ' ' : '') . get_field('physician_last_name', $id) . (get_field('physician_pedigree', $id) ? '&nbsp;' . get_field('physician_pedigree', $id) : '') .  ( $degree_list ? ', ' . $degree_list : '' ); 
@@ -58,7 +64,7 @@
 		</div>
 		<div class="btn-container">
 			<div class="inner-container">
-				<a href="<?php the_permalink($id); ?>" class="btn btn-primary stretched-link" aria-label="View profile for <?php echo $full_name; ?>">View Profile</a>
+				<a href="<?php echo return_region(get_permalink($id), $filter_region); ?>" class="btn btn-primary stretched-link" aria-label="View profile for <?php echo $full_name; ?>">View Profile</a>
 			</div>
 		</div>
 	</div>

@@ -14,6 +14,14 @@
     $location_title = get_the_title($id);
     $location_title_attr = str_replace('"', '\'', $location_title);
 
+    // Regions
+    if (!isset($filter_region)){
+		$filter_region = '';
+		if (isset($_GET[ '_provider_region' ])) {
+			$filter_region = explode(",", $_GET[ '_provider_region' ]);
+		}
+	}
+
     // Parent Location 
     $location_has_parent = get_field('location_parent', $id);
     $location_parent_id = get_field('location_parent_id', $id);
@@ -31,7 +39,7 @@
     if ($parent_location) {
         $parent_id = $parent_location->ID;
         $parent_title = $parent_location->post_title;
-        $parent_url = get_permalink( $parent_id );
+        $parent_url = return_region(get_permalink( $parent_id ), $filter_region);
         $featured_image = get_the_post_thumbnail($parent_id, 'aspect-16-9-small', ['class' => 'card-img-top']);
         $address_id = $parent_id;
 
@@ -60,7 +68,7 @@
     <?php } ?>
     <div class="card-body">
         <h3 class="card-title h5">
-            <span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self"><?php echo $location_title; ?></a></span>
+            <span class="name"><a href="<?php echo return_region(get_permalink($id), $filter_region); ?>" target="_self"><?php echo $location_title; ?></a></span>
             <?php if ( $parent_location ) { ?>
                 <span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
             <?php } // endif ?>
@@ -170,7 +178,7 @@
                         This location's hours will be temporarily modified beginning on <?php echo $location_modified_hours_start; ?>.
                     <?php } // endif
                 } // endif ?>
-                <p><a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $alert_label; ?>" class="alert-link">Learn more</a></p>
+                <p><a href="<?php echo return_region(get_permalink($id), $filter_region); ?>" aria-label="<?php echo $alert_label; ?>" class="alert-link">Learn more</a></p>
             </div>
         <?php } // endif ?>
         <?php $map = get_field('location_map', $address_id); ?>
@@ -207,7 +215,7 @@
     </div><!-- .card-body -->
     <div class="btn-container">
         <div class="inner-container">
-            <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary" aria-label="Go to location page for <?php echo $location_title_attr; ?>">View Location</a>
+            <a href="<?php echo return_region(get_permalink($id), $filter_region); ?>" class="btn btn-primary" aria-label="Go to location page for <?php echo $location_title_attr; ?>">View Location</a>
             <?php if ($map) { ?>
             <a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get Directions to <?php echo $location_title; ?>">Get Directions</a>
             <?php } ?>

@@ -6,6 +6,12 @@
      *  Must be used inside a loop
      *  Required var: $conditions
      */
+    if (!isset($filter_region)){
+		$filter_region = '';
+		if (isset($_GET[ '_provider_region' ])) {
+			$filter_region = explode(",", $_GET[ '_provider_region' ]);
+		}
+	}
 ?>
 <section class="uams-module conditions-treatments bg-auto">
     <div class="container-fluid">
@@ -17,7 +23,7 @@
                     <ul class="list">
                     <?php foreach( $conditions_cpt_query->posts as $condition ): ?>
                         <li>
-                            <a href="<?php echo get_the_permalink( $condition->ID ); ?>" aria-label="Go to Condition page for <?php echo $condition->post_title; ?>" class="btn btn-outline-primary">
+                            <a href="<?php echo return_region(get_the_permalink( $condition->ID ), $filter_region); ?>" aria-label="Go to Condition page for <?php echo $condition->post_title; ?>" class="btn btn-outline-primary">
                                 <?php 
                                     echo $condition->post_title;
                                 ?>

@@ -22,12 +22,17 @@
     if ($parent_expertise) {
         $parent_id = $parent_expertise->ID;
         $parent_title = $parent_expertise->post_title;
-        $parent_url = get_permalink( $parent_id );
+        $parent_url = return_region(get_permalink( $parent_id ), $filter_region);
     }
-
+    if (!isset($filter_region)){
+		$filter_region = '';
+		if (isset($_GET[ '_provider_region' ])) {
+			$filter_region = explode(",", $_GET[ '_provider_region' ]);
+		}
+	}
 ?>
 <div class="card">
-    <a href="<?php echo get_permalink($id); ?>" target="_self" aria-label="Go to Area of Expertise page for <?php echo get_the_title($id); ?>">
+    <a href="<?php echo return_region(get_permalink($id), $filter_region); ?>" target="_self" aria-label="Go to Area of Expertise page for <?php echo get_the_title($id); ?>">
         <?php if ( has_post_thumbnail($id) ) { ?>
         <?php echo get_the_post_thumbnail($id, 'aspect-16-9-small', ['class' => 'card-img-top']); ?>
         <?php } else { ?>
@@ -40,7 +45,7 @@
     <?php $excerpt = get_the_excerpt($id); ?>
     <div class="card-body">
         <h3 class="card-title h5">
-            <span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self" aria-label="Go to Area of Expertise page for <?php echo get_the_title($id); ?>"><?php echo get_the_title($id); ?></a></span>
+            <span class="name"><a href="<?php echo return_region(get_permalink($id), $filter_region); ?>" target="_self" aria-label="Go to Area of Expertise page for <?php echo get_the_title($id); ?>"><?php echo get_the_title($id); ?></a></span>
             <?php if ( $parent_expertise ) { ?>
                 <span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>" aria-label="Go to Area of Expertise page for <?php echo $parent_title; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
             <?php } // endif ?>
@@ -49,7 +54,7 @@
     </div><!-- .card-body -->
     <div class="btn-container">
         <div class="inner-container">
-            <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary" aria-label="Go to Area of Expertise page for <?php echo get_the_title($id); ?>">View Area of Expertise</a>
+            <a href="<?php echo return_region(get_permalink($id), $filter_region); ?>" class="btn btn-primary" aria-label="Go to Area of Expertise page for <?php echo get_the_title($id); ?>">View Area of Expertise</a>
         </div>
     </div>
 </div><!-- .card --> 
