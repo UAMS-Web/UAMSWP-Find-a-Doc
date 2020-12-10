@@ -838,7 +838,7 @@
             "name": "physician_clinical_focus",
             "type": "wysiwyg",
             "label": "Clinical Focus",
-            "instructions": "If it's a list, used a bulleted list. If it is full sentences, then a paragraph works.<br />Keep it brief. Try to limit it to less than 344 characters.",
+            "instructions": "This should not be an outline of their services (that is covered by Conditions Treated and Treatments &amp; Procedures). It is meant to be a quick glimpse of the provider's main focus.</p><p class='description' style='margin-top: 0.5em;'>If it's a list, use a single-level bulleted list. If it is full sentences, then use a paragraph.</p><p class='description' style='margin-top: 0.5em;'>Keep it brief. Try to limit it to less than 344 characters.",
             "required": 0,
             "conditional_logic": [
                 [
