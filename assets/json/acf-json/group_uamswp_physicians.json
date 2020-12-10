@@ -182,7 +182,7 @@
             "type": "radio",
             "label": "Gender",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "40",
@@ -194,7 +194,7 @@
                 "male": "Male",
                 "other": "Other"
             },
-            "allow_null": 0,
+            "allow_null": 1,
             "other_choice": 0,
             "default_value": "",
             "layout": "horizontal",
@@ -318,13 +318,13 @@
             "ui_on_text": "",
             "ui_off_text": ""
         },
-        "field_spacer_1": {
-            "key": "field_spacer_1",
-            "label": "",
-            "name": "",
-            "type": "message",
+        "field_physician_eligible_appointments": {
+            "key": "field_physician_eligible_appointments",
+            "name": "physician_eligible_appointments",
+            "type": "button_group",
+            "label": "Eligible for appointments",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": [
                 [
                     {
@@ -339,45 +339,22 @@
                 "class": "",
                 "id": ""
             },
-            "acfe_permissions": "",
-            "message": "&nbsp;",
-            "new_lines": "",
-            "esc_html": 0
-        },
-        "field_physician_eligible_appointments": {
-            "key": "field_physician_eligible_appointments",
-            "name": "physician_eligible_appointments",
-            "type": "true_false",
-            "label": "Eligible for appointments",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_resident",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "hide-acf-title",
-                "id": ""
+            "choices": {
+                "0": "No",
+                "1": "Yes"
             },
-            "message": "Eligible for appointments?",
-            "default_value": 1,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
+            "allow_null": 1,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value"
         },
         "field_physician_primary_care": {
             "key": "field_physician_primary_care",
             "name": "physician_primary_care",
-            "type": "true_false",
+            "type": "button_group",
             "label": "Primary Care Physician",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": [
                 [
                     {
@@ -389,22 +366,25 @@
             ],
             "wrapper": {
                 "width": "",
-                "class": "hide-acf-title",
+                "class": "",
                 "id": ""
             },
-            "message": "Primary Care Physician?",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+            "allow_null": 1,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value"
         },
         "field_physician_referral_required": {
             "key": "field_physician_referral_required",
             "name": "physician_referral_required",
-            "type": "true_false",
+            "type": "button_group",
             "label": "Referral required for new patients",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": [
                 [
                     {
@@ -416,22 +396,25 @@
             ],
             "wrapper": {
                 "width": "",
-                "class": "hide-acf-title",
+                "class": "",
                 "id": ""
             },
-            "message": "Referral required for new patients",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+            "allow_null": 1,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value"
         },
         "field_physician_accepting_patients": {
             "key": "field_physician_accepting_patients",
             "name": "physician_accepting_patients",
-            "type": "true_false",
+            "type": "button_group",
             "label": "Accepting new patients",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": [
                 [
                     {
@@ -443,22 +426,25 @@
             ],
             "wrapper": {
                 "width": "",
-                "class": "hide-acf-title",
+                "class": "",
                 "id": ""
             },
-            "message": "Currently accepting new patients",
-            "default_value": 1,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+            "allow_null": 1,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value"
         },
         "field_physician_second_opinion": {
             "key": "field_physician_second_opinion",
             "name": "physician_second_opinion",
-            "type": "true_false",
+            "type": "button_group",
             "label": "Provides second opinion",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": [
                 [
                     {
@@ -470,14 +456,17 @@
             ],
             "wrapper": {
                 "width": "",
-                "class": "hide-acf-title",
+                "class": "",
                 "id": ""
             },
-            "message": "Provides second opinion",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+            "allow_null": 1,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value"
         },
 
         "field_physician_appointment_link": {
@@ -508,32 +497,6 @@
             },
             "default_value": "https:\/\/uamshealth.com\/appointments",
             "placeholder": "https:\/\/uamshealth.com\/appointments"
-        },
-        "field_spacer_2": {
-            "key": "field_spacer_2",
-            "label": "",
-            "name": "",
-            "type": "message",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_resident",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "message": "&nbsp;",
-            "new_lines": "",
-            "esc_html": 0
         },
         "field_physician_title": {
             "key": "field_physician_title",
