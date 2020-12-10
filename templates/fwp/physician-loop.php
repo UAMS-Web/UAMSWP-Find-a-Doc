@@ -18,21 +18,26 @@
 			}
 			$i++;
 		endforeach;
- 	} ?>
-	<?php 
-		$full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '') . ( $degree_list ? ', ' . $degree_list : '' );
-		$full_name_attr = str_replace('"', '\'', $full_name);
-		$physician_resident = get_field('physician_resident');
-		$physician_resident_name = 'Resident Physician';
-		$physician_title = get_field('physician_title');
-		$physician_title_name = $physician_resident ? $physician_resident_name : get_term( $physician_title, 'clinical_title' )->name;
-		$physician_service_line = get_field('physician_service_line');
+ 	} 
+	$full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '') . ( $degree_list ? ', ' . $degree_list : '' );
+	$full_name_attr = str_replace('"', '\'', $full_name);
+	$physician_resident = get_field('physician_resident');
+	$physician_resident_name = 'Resident Physician';
+	$physician_title = get_field('physician_title');
+	$physician_title_name = $physician_resident ? $physician_resident_name : get_term( $physician_title, 'clinical_title' )->name;
+	$physician_service_line = get_field('physician_service_line');
+	if (!isset($filter_region)){
+		$filter_region = '';
+		if (isset($_GET[ '_provider_region' ])) {
+			$filter_region = explode(",", $_GET[ '_provider_region' ]);
+		}
+	}
 	?>
 	<div class="col item-container">
 		<div class="item">
 			<div class="row">
 				<div class="col image">
-					<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" class="stretched-link">
+					<a href="<?php echo return_region(get_permalink($post->ID), $filter_region); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" class="stretched-link">
 						<picture>
 						<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
 							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
@@ -61,7 +66,7 @@
 					<div class="row">
 						<div class="col-12 primary">
 						<h3 class="h4">
-							<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>"><span class="name"><?php echo $full_name; ?></span></a>
+							<a href="<?php echo return_region(get_permalink($post->ID), $filter_region); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>"><span class="name"><?php echo $full_name; ?></span></a>
 							<?php if ( $physician_title_name ) { ?>
 							<span class="subtitle"><?php echo $physician_title_name; ?></span>
 							<?php } // endif ?>
@@ -95,7 +100,7 @@
 							?>
 						
 							<p><?php echo ( get_field('physician_short_clinical_bio') ? get_field( 'physician_short_clinical_bio') : wp_trim_words( get_field( 'physician_clinical_bio' ), 30, ' &hellip;' ) ); ?></p>
-						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>">Full Profile</a>
+						<a class="btn btn-primary" href="<?php echo return_region(get_permalink($post->ID), $filter_region); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>">Full Profile</a>
 						</div>
 						<div class="col-12 secondary">
 						<h4 class="h5">Locations</h4>
@@ -108,14 +113,14 @@
 								<ul>
 								<?php foreach( $locations as $location): ?>
 									<li>
-										<a href="<?php echo get_permalink( $location ); ?>">
+										<a href="<?php echo return_region(get_permalink( $location ), $filter_region); ?>">
 											<?php echo get_the_title( $location ); ?>
 										</a>
 									</li>
 								<?php endforeach; ?>
 								</ul>
 							<?php endif; ?>
-						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>">Full Profile</a>
+						<a class="btn btn-primary" href="<?php echo return_region(get_permalink($post->ID), $filter_region); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>">Full Profile</a>
 						</div>
 					</div>
 				</div>
@@ -222,7 +227,7 @@
 								<ul>
 								<?php foreach( $locations as $location): ?>
 									<li>
-										<a href="<?php echo get_permalink( $location ); ?>">
+										<a href="<?php echo return_region(get_permalink( $location ), $filter_region); ?>">
 											<?php echo get_the_title( $location ); ?>
 										</a>
 									</li>
