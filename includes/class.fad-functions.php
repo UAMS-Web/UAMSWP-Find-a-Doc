@@ -338,7 +338,8 @@ add_action('wp_ajax_nopriv_load_posts_by_ajax', 'uamswp_load_by_ajax_callback');
 function uamswp_load_by_ajax_callback(){
     $ppp = (isset($_POST["ppp"])) ? $_POST["ppp"] : 6; // Set this default value
     $page = $_POST['page'];
-    $type = (isset($_POST["posttype"])) ? $_POST["posttype"] : 'post'; // Assume its post if not set
+	$type = (isset($_POST["posttype"])) ? $_POST["posttype"] : 'post'; // Assume its post if not set
+	$region = $_POST['region'];
         
     header("Content-Type: text/html");
     if ('post' == $type) {
@@ -378,7 +379,8 @@ function uamswp_load_by_ajax_callback(){
     $loop = new WP_Query($args);
     $out = '';
     if ($loop -> have_posts()) :  while ($loop -> have_posts()) : $loop -> the_post();
-        $id = get_the_ID();
+		$id = get_the_ID();
+		$filter_region = $region;
         $out .= include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' ); 
     endwhile;
     endif;
@@ -561,5 +563,16 @@ function display_medline_api_data( $code, $type ) {
 				echo '</div>';
 			}
 		}
+	}
+}
+function return_region( $url, $region ) {
+	if (is_array($region)){
+		$region = implode(",", $region);
+	}
+	$region_enable = get_option('options_fad_enable_region');
+	if (!empty($region) && $region_enable){
+		return esc_url( add_query_arg( '_provider_region', $region, $url ));
+	} else {
+		return $url;
 	}
 }
