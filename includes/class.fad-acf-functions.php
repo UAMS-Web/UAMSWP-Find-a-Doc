@@ -198,6 +198,78 @@ function location_save_post_after( $post_id ) {
 
 }
 
+// Fires before saving data to post - only updates ACF data
+add_action('acf/save_post', 'condition_save_post', 5); 
+function condition_save_post( $post_id ) {
+	$post_type = get_post_type($post_id);
+
+	// Bail early if no data sent.
+	if( empty($_POST['acf']) || ($post_type != 'condition')) {
+		return;
+	}
+
+	// Add region
+	$locations = $_POST['acf']['field_condition_locations'];
+	if ( $locations ) {
+		$regions = array();
+		foreach( $locations as $location ):
+			$region = get_field( 'location_region', $location); 
+			$regions[] = $region;
+		endforeach;
+	}
+
+	$_POST['acf']['field_condition_region'] = $regions;
+
+}
+
+// Fires before saving data to post - only updates ACF data
+add_action('acf/save_post', 'treatment_save_post', 5); 
+function treatment_save_post( $post_id ) {
+	$post_type = get_post_type($post_id);
+
+	// Bail early if no data sent.
+	if( empty($_POST['acf']) || ($post_type != 'treatment')) {
+		return;
+	}
+
+	// Add region
+	$locations = $_POST['acf']['field_treatment_procedure_locations'];
+	if ( $locations ) {
+		$regions = array();
+		foreach( $locations as $location ):
+			$region = get_field( 'location_region', $location); 
+			$regions[] = $region;
+		endforeach;
+	}
+
+	$_POST['acf']['field_treatment_procedure_region'] = $regions;
+
+}
+
+// Fires before saving data to post - only updates ACF data
+add_action('acf/save_post', 'expertise_save_post', 5); 
+function expertise_save_post( $post_id ) {
+	$post_type = get_post_type($post_id);
+
+	// Bail early if no data sent.
+	if( empty($_POST['acf']) || ($post_type != 'expertise')) {
+		return;
+	}
+
+	// Add region
+	$locations = $_POST['acf']['field_expertise_locations'];
+	if ( $locations ) {
+		$regions = array();
+		foreach( $locations as $location ):
+			$region = get_field( 'location_region', $location); 
+			$regions[] = $region;
+		endforeach;
+	}
+
+	$_POST['acf']['field_expertise_region'] = $regions;
+
+}
+
 add_action('acf/save_post', 'uamswp_sync_acf_save_post', 5);
 function uamswp_sync_acf_save_post( $post_id ) {
 	// Setup the variables
