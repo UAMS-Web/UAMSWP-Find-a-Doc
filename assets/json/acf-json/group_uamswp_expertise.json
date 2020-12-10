@@ -210,6 +210,39 @@
             "acfe_validate": "",
             "acfe_update": ""
         },
+        "field_expertise_region": {
+            "key": "field_expertise_region",
+            "name": "expertise_region",
+            "type": "taxonomy",
+            "label": "Region",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "1",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "region",
+            "field_type": "multi_select",
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 0,
+            "allow_null": 0
+        },
         "field_expertise_associated": {
             "key": "field_expertise_associated",
             "name": "expertise_associated",
