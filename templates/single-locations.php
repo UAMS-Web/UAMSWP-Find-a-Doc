@@ -436,7 +436,7 @@ while ( have_posts() ) : the_post(); ?>
 											$modified_text .= '<dl class="hours">';
 											foreach ( $modified_times as $modified_time ) {
 												
-												$modified_text .= $modified_day !== $modified_time['location_modified_hours_day'] ? '<dt>'. $modified_time['location_modified_hours_day'] .'</dt> ' : '';
+												$modified_text .= $modified_day !== $modified_time['location_modified_hours_day'] || $modified_time['location_modified_hours_closed'] ? '<dt>'. $modified_time['location_modified_hours_day'] .'</dt> ' : '';
 												$modified_text .= '<dd>';
 		
 												if (1 != $i) {
