@@ -290,7 +290,7 @@
 							<div class="row">
 								<div class="col-12">
 									<h2 class="module-title">Providers Treating <?php echo get_the_title(); ?></h2>
-									<p class="note">Note that every treatment or procedure listed above may not be provided by each provider listed below. Review each provider for availability.</p>
+									<p class="note">Note that every provider listed below may not be involved in all treatments or procedures related to <?php echo get_the_title(); ?>. Review each provider for availability.</p>
 									<div class="card-list-container">
 										<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
 											<?php
