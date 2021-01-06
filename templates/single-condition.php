@@ -278,7 +278,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<h2 class="module-title">Treatments and Procedures Related to <?php echo get_the_title(); ?></h2>
+						<h2 class="module-title">Treatments and Procedures[ in {region(s)}] Related to <?php echo get_the_title(); ?></h2>
 						<div class="list-container list-container-rows">
 							<ul class="list">
 							<?php foreach( $treatments_query_cpt->posts as $treatment ): ?>
@@ -330,8 +330,8 @@
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col-12">
-									<h2 class="module-title">Providers Treating <?php echo get_the_title(); ?></h2>
 									<p class="note">Note that every treatment or procedure listed above may not be provided by each provider listed below. Review each provider for availability.</p>
+									<h2 class="module-title">Providers[ in {region(s)}] Treating <?php echo get_the_title(); ?></h2>
 									<div class="card-list-container">
 										<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
 											<?php
@@ -388,7 +388,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-							<h2 class="module-title">Areas of Expertise for <?php echo get_the_title(); ?></h2>
+							<h2 class="module-title">Areas of Expertise for <?php echo get_the_title(); ?>[ in {region(s)}]</h2>
 							<div class="card-list-container">
 								<div class="card-list card-list-expertise">
 								<?php 

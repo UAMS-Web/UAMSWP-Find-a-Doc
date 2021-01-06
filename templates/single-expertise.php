@@ -87,7 +87,7 @@ function uamswp_expertise_physicians() {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="module-title">Providers</h2>
+                        <h2 class="module-title">Providers[ in {region(s)}]</h2>
                         <div class="card-list-container">
                             <div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
                                 <?php 
@@ -234,7 +234,7 @@ function uamswp_expertise_locations() {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="module-title">Locations</h2>
+                            <h2 class="module-title">Locations[ in {region(s)}]</h2>
                             <div class="card-list-container location-card-list-container">
                                 <div class="card-list">
                                 <?php while ( $location_query->have_posts() ) : $location_query->the_post();
@@ -285,7 +285,7 @@ function uamswp_expertise_associated() {
 				<div class="row">
 					<div class="col-12 col-md-6 heading">
 						<div class="text-container">
-							<h2 class="module-title" id="related-expertise-title"><span class="title">Related Areas of Expertise</span></h2>
+							<h2 class="module-title" id="related-expertise-title"><span class="title">Related Areas of Expertise[ in {region(s)}]</span></h2>
 						</div>
             		</div>
             		<div class="col-12 col-md-6 list">
@@ -380,7 +380,7 @@ function uamswp_list_child_expertise() {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="module-title" id="sub-expertise-title">Areas Within <?php echo get_the_title(); ?> <?php echo $hide_menu; ?></h2>
+                            <h2 class="module-title" id="sub-expertise-title">Areas Within <?php echo get_the_title(); ?> <?php echo $hide_menu; ?>[ in {region(s)}]</h2>
                             <div class="card-list-container">
                                 <div class="card-list">
                             <?php

@@ -267,7 +267,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-xs-12">
-							<h2 class="module-title">Conditions Related to <?php echo get_the_title(); ?></h2>
+							<h2 class="module-title">Conditions Related to <?php echo get_the_title(); ?>[ Addressed in {region(s)}]</h2>
 							<div class="list-container list-container-rows">
 								<ul class="list">
 								<?php while ($conditions_query_cpt->have_posts()) : $conditions_query_cpt->the_post(); ?>
@@ -320,8 +320,8 @@
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-12">
-							<h2 class="module-title">Providers Performing <?php echo get_the_title(); ?></h2>
 							<p class="note">Note that every condition listed above may not be treated by each provider listed below. Review each provider for availability.</p>	
+							<h2 class="module-title">Providers[ in {region(s)}] Performing <?php echo get_the_title(); ?></h2>
 								<div class="card-list-container">
 									<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
 										<?php
@@ -378,7 +378,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title">Areas of Expertise for <?php echo get_the_title(); ?></h2>
+						<h2 class="module-title">Areas of Expertise for <?php echo get_the_title(); ?>[ in {region(s)}]</h2>
 						<div class="card-list-container">
 							<div class="card-list card-list-expertise">
 							<?php 
