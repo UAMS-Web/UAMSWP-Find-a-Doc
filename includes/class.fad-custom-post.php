@@ -1979,13 +1979,18 @@ function get_provider_meta($object) {
 		endforeach; 
 	} 
 	$full_name = get_field('physician_first_name', $postId) .' ' .(get_field('physician_middle_name', $postId) ? get_field('physician_middle_name', $postId) . ' ' : '') . get_field('physician_last_name', $postId) . (get_field('physician_pedigree', $postId) ? '&nbsp;' . get_field('physician_pedigree', $postId ) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+	$physician_resident = get_field('physician_resident', $postId);
+	$physician_resident_name = 'Resident Physician';
+	$physician_title = get_field('physician_title', $postId);
+	$physician_title_name = $physician_resident ? $physician_resident_name : get_term( $physician_title, 'clinical_title' )->name;
+	$physician_service_line = get_field('physician_service_line', $postId);
 	$data['physician_full_name'] = $full_name;
 	//Physician Data
 	// $clinical_title = (get_field('physician_title', $id) ? get_term( get_field('physician_title', $id), 'clinical_title' )->name : '');
-	$data['physician_title'] = (get_field('physician_title', $postId) ? get_term( get_field('physician_title', $postId), 'clinical_title' )->name : '');
-	// $data['physician_service_line'] = get_field( 'physician_title', $postId );
+	$data['physician_title'] = $physician_title_name; //(get_field('physician_title', $postId) ? get_term( get_field('physician_title', $postId), 'clinical_title' )->name : '');
+	$data['physician_service_line'] = $physician_service_line ? get_term( $physician_service_line, 'service_line' )->name : '';
     $data['physician_clinical_bio'] = get_field( 'physician_clinical_bio', $postId );
-    $data['physician_short_clinical_bio'] = wp_trim_words( get_field( 'physician_short_clinical_bio', $postId ), 30, ' &hellip;' );
+    $data['physician_short_clinical_bio'] = get_field('physician_short_clinical_bio', $postId) ? get_field( 'physician_short_clinical_bio', $postId) : wp_trim_words( get_field( 'physician_clinical_bio', $postId ), 30, ' &hellip;' );
     // $data['physician_gender'] = get_field( 'physician_gender', $postId );
     // $data['physician_youtube_link'] = get_field( 'physician_youtube_link', $postId );
     // $data['physician_languages'] = get_field( 'physician_languages', $postId );
@@ -1994,8 +1999,9 @@ function get_provider_meta($object) {
     //$data['physician_locations']['title'] = get_the_title( get_post_meta( $postId, 'physician_locations', true ) );
     //$data['physician_locations']['slug'] = get_post_field( 'post_name', get_post_meta( $postId, 'physician_locations', true ) );
     //Locations
-    $i = 1;
-	foreach (get_post_meta( $postId, 'physician_locations', true ) as $location) {
+	$i = 1;
+	$locations = get_field('physician_locations', $postId);
+	foreach ($locations as $location) {
 		$data['physician_locations'][$location]['link'] = get_permalink( $location );
 		$data['physician_locations'][$location]['title'] = get_the_title( $location );
 		$data['physician_locations'][$location]['slug'] = get_post_field( 'post_name', $location );
@@ -2025,51 +2031,100 @@ function get_provider_meta($object) {
     // $data['physician_accepting_patients'] = get_post_meta( $postId, 'physician_accepting_patients', true );
     // $data['physician_second_opinion'] = get_post_meta( $postId, 'physician_second_opinion', true );
     // $data['physician_patient_types'] = get_the_terms( $postId, 'patient_type' );
-    $data['physician_npi'] = get_post_meta( $postId, 'physician_npi', true );
+    $data['physician_npi'] = get_field( 'physician_npi', $postId );
     // $data['medical_specialties'] = get_the_terms( $postId, 'specialty' );
 	// $data['pphoto'] = wp_get_attachment_url( get_post_meta( $postId, 'physician_photo', true ), 'file' );
 	$data['physician_photo'] = image_sizer(get_post_thumbnail_id($postId), 253, 337, 'center', 'center');
-	$conditions = get_field('physician_conditions', $postId);
+	// Conditions
+	$conditions_cpt = get_field('physician_conditions_cpt', $postId);
 	$condition_list = '';
 	$i = 1;
-	if( $conditions ) {
-        $args = (array(
-            'taxonomy' => 'condition',
-            'hide_empty' => false,
-            'term_taxonomy_id' => $conditions
-        ));
-		$conditions_query = new WP_Term_Query( $args );
+	if( $conditions_cpt ) {
+		$args = (array(
+			'post_type' => "condition",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $conditions_cpt
+		));
+		$conditions_cpt_query = new WP_Query( $args );
 
-		foreach( $conditions_query->get_terms() as $condition ):
-			$condition_list .= $condition->name;
-			if( count($conditions) > $i ) {
-				$condition_list .= ', ';
-			}
-			$i++;
-		 endforeach;
+		if( $conditions_cpt && $conditions_cpt_query->posts ):
+
+			foreach( $conditions_cpt_query->posts as $condition ):
+				$data['physician_conditions'][$condition->ID]['link'] = get_permalink( $condition->ID );
+				$data['physician_conditions'][$condition->ID]['title'] = $condition->post_title;
+				$data['physician_conditions'][$condition->ID]['slug'] = $condition->post_name;
+				$condition_list .= $condition->post_title;
+				if( count($conditions_cpt) > $i ) {
+					$condition_list .= ', ';
+				}
+				$i++;
+			endforeach;
+		endif; 
 	}
 	$data['physician_conditions_list'] = $condition_list;
-	$treatments = get_field('physician_treatments', $postId);
+	// Treatments
+	$treatments_cpt = get_field('physician_treatments_cpt', $postId);
 	$treatment_list = '';
 	$i = 1;
-	if( $treatments ) {
+	if( $treatments_cpt ) {
 		$args = (array(
-			'taxonomy' => 'treatment',
-			'hide_empty' => false,
-			'term_taxonomy_id' => $treatments
+			'post_type' => "treatment",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $treatments_cpt
 		));
-		$treatments_query = new WP_Term_Query( $args );
-		foreach( $treatments_query->get_terms() as $treatment ):
-			$treatment_list .= $treatment->name;
-			if( count($treatments) > $i ) {
-				$treatment_list .= ', ';
-			}
-			$i++;
-		endforeach;
+		$treatments_cpt_query = new WP_Query( $args );
+		if( $treatments_cpt && $treatments_cpt_query->posts ):
+
+			foreach( $treatments_cpt_query->posts as $treatment ):
+				$data['physician_treatments'][$treatment->ID]['link'] = get_permalink( $treatment->ID );
+				$data['physician_treatments'][$treatment->ID]['title'] = $treatment->post_title;
+				$data['physician_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
+				$treatment_list .= $treatment->post_title;
+				if( count($treatments_cpt) > $i ) {
+					$treatment_list .= ', ';
+				}
+				$i++;
+			endforeach;
+		endif;
 	}
 	$data['physician_treatments_list'] = $treatment_list;
-	$data['physician_conditions'] = get_the_terms( $postId, 'condition' );
-	$data['physician_treatments'] = get_the_terms( $postId, 'treatment' );
+	// Expertise
+	$expertises = get_field('physician_expertise', $postId);
+	$expertise_list = '';
+	$i = 1;
+	if( $expertises ) {
+		$args = (array(
+			'post_type' => "expertise",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $expertises
+		));
+		$expertise_query = new WP_Query( $args );
+		if( $expertises && $expertise_query->posts ):
+
+			foreach( $expertise_query->posts as $expertise ):
+				$data['physician_expertise'][$expertise->ID]['link'] = get_permalink( $expertise->ID );
+				$data['physician_expertise'][$expertise->ID]['title'] = $expertise->post_title;
+				$data['physician_expertise'][$expertise->ID]['slug'] = $expertise->post_name;
+				$expertise_list .= $expertise->post_title;
+				if( count($expertises) > $i ) {
+					$expertise_list .= ', ';
+				}
+				$i++;
+			endforeach;
+		endif;
+	}
+	$data['physician_expertise_list'] = $expertise_list;
+	// $data['physician_conditions'] = get_the_terms( $postId, 'condition' );
+	// $data['physician_treatments'] = get_the_terms( $postId, 'treatment' );
 	// $data['physician_boards'] = get_post_meta( $postId, 'physician_boards', true );
 	// if( get_post_meta( $postId, 'physician_boards', true ) ) :
 	// 	for( $i = 0; $i < get_post_meta( $postId, 'physician_boards', true ); $i++ ){
