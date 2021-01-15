@@ -109,7 +109,7 @@
             "type": "text",
             "label": "Address",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -147,7 +147,7 @@
             "type": "text",
             "label": "City",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
@@ -166,7 +166,7 @@
             "type": "select",
             "label": "State",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "30",
@@ -242,7 +242,7 @@
             "type": "maskfield",
             "label": "Zip",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "20",
@@ -280,7 +280,7 @@
             "type": "taxonomy",
             "label": "Region",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
