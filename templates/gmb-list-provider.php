@@ -193,7 +193,7 @@ function display_provider_image() {
                     $phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
 
                     // Create the table
-                    if ( $locations && $location_valid ) {
+                    if ( $locations && $location_valid && !$resident ) {
 
                         // Create row for each valid location
                         foreach( $locations as $location ) {
