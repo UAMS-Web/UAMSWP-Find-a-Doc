@@ -348,7 +348,12 @@ function display_provider_image() {
 
                                     // Labels
                                     // Intentionally left blank
-                                        echo '<td data-gmb-column="Labels"></td>';
+                                    $service_line = '';
+                                    $service_line = get_term( get_field('physician_service_line'), 'service_line' )->name;
+    
+                                        echo '<td data-gmb-column="Labels" class="no-break">';
+                                        echo $service_line ? $service_line : '';
+                                        echo '</td>';
 
                                     // AdWords location extensions phone
                                     // Intentionally left blank
