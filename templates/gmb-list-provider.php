@@ -529,8 +529,8 @@ function display_provider_image() {
 
                                 $l++;
                             }
-                    } // endforeach
-                }
+                        } // endforeach
+                    }
                         
                 endwhile;
                 ?>
