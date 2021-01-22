@@ -474,9 +474,8 @@ function display_provider_image() {
                                         echo '<td data-gmb-column="Payments: NFC mobile payments (pay_mobile_nfc)" class="no-break">[NOT APPLICABLE]</td>';
 
                                     // Place page URLs: Appointment links (url_appointment)
-                                        echo '<td data-gmb-column="Place page URLs: Appointment links (url_appointment)" class="no-break">';
-                                        echo 'https://uamshealth.com/provider/' . $profile_slug . '/?utm_source=google&amp;utm_medium=gmb&amp;utm_campaign=clinical&amp;utm_term=provider&amp;utm_content=appointment-links';
-                                        echo '</td>';
+                                    // Intentionally left blank
+                                        echo '<td data-gmb-column="Place page URLs: Appointment links (url_appointment)" class="no-break"></td>';
 
                                     // Place page URLs: COVID-19 info link (url_covid_19_info_page)
                                         echo '<td data-gmb-column="Place page URLs: COVID-19 info link (url_covid_19_info_page)" class="no-break">';
