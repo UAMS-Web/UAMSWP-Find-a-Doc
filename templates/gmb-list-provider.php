@@ -404,8 +404,9 @@ function display_provider_image() {
                                         echo '<td data-gmb-column="From the business: Identifies as women-led (is_owned_by_women)" class="no-break"></td>';
 
                                     // Health &amp; safety: Appointment required (requires_appointments)
+                                    // Intentionally left blank for now
                                         echo '<td data-gmb-column="Health &amp; safety: Appointment required (requires_appointments)" class="no-break">';
-                                        echo $covid19 ?  'Yes' : '';
+                                        //echo $covid19 ?  'Yes' : '';
                                         echo '</td>';
 
                                     // Health &amp; safety: Mask required (requires_masks_customers)
