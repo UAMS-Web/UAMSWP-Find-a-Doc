@@ -339,7 +339,7 @@ function display_provider_image() {
                                         echo '<td data-gmb-column="Special hours" class="no-break"></td>';
 
                                     // From the business
-                                        $excerpt = get_field('physician_short_clinical_bio',$post_id);
+                                        $excerpt = '';
                                         $bio = get_field('physician_clinical_bio',$post_id);
                                         $bio_short = get_field('physician_short_clinical_bio',$post_id);
 
@@ -362,9 +362,8 @@ function display_provider_image() {
                                         echo '<td data-gmb-column="Opening date" class="no-break"></td>';
 
                                     // Labels
-                                    // Intentionally left blank
                                         $service_line = '';
-                                        $service_line = get_term( get_field('physician_service_line'), 'service_line' )->name;
+                                        $service_line = get_term( get_field('physician_service_line',$post_id), 'service_line' )->name;
     
                                         echo '<td data-gmb-column="Labels" class="no-break">';
                                         echo $service_line ? $service_line : '';
