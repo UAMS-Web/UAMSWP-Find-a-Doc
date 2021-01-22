@@ -77,8 +77,8 @@ function display_provider_image() {
                         <th class="no-break">Primary phone</th>
                         <th class="no-break">Additional phones</th>
                         <th class="no-break">Website</th>
-                        <th class="no-break">Primary category</th>
-                        <th class="no-break">Additional categories</th>
+                        <!-- <th class="no-break">Primary category</th>
+                        <th class="no-break">Additional categories</th> -->
                         <th class="no-break">Sunday hours</th>
                         <th class="no-break">Monday hours</th>
                         <th class="no-break">Tuesday hours</th>
@@ -181,7 +181,7 @@ function display_provider_image() {
                     $location_zip = '';
                     $location_phone = '';
                     $location_fax = '';
-                    $location_telemed = '';
+                    $location_telemed_query = '';
 
                     // Create the description variables
                     $prefix = get_field('physician_prefix',$post_id);
@@ -229,7 +229,8 @@ function display_provider_image() {
                                         $location_zip = get_field( 'location_zip', $location );
                                         $location_phone = get_field( 'location_phone', $location );
                                         $location_fax = get_field( 'location_fax', $location );
-                                        $location_telemed = get_field( 'location_telemed_query', $location );
+                                        $location_hours_group = get_field('location_hours_group', $location );
+                                        $location_telemed_query = $location_hours_group['location_telemed_query'];
 
                                         echo '<td data-gmb-column="Address line 1" class="no-break">';
                                         echo $location_address_1 ? $location_address_1 : '';
@@ -487,7 +488,7 @@ function display_provider_image() {
 
                                     // Place page URLs: Virtual care link (url_facility_telemedicine_page)
                                         echo '<td data-gmb-column="Place page URLs: Virtual care link (url_facility_telemedicine_page)" class="no-break">';
-                                        echo '';
+                                        echo $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=virtual-care-link#telemedicine-info' : '';
                                         echo '</td>';
 
                                     // Planning: LGBTQ friendly (welcomes_lgbtq)
@@ -518,7 +519,7 @@ function display_provider_image() {
                                     // Service options: Online care (has_video_visits)
                                     // Value based on the relevant location profile
                                         echo '<td data-gmb-column="Service options: Online care (has_video_visits)" class="no-break">';
-                                        echo $location_telemed ? 'Yes' : '';
+                                        echo $location_telemed_query ? 'Yes' : '';
                                         echo '</td>';
 
                                     // Service options: Same-day delivery (has_delivery_same_day)
