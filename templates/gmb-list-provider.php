@@ -208,16 +208,10 @@ function display_provider_image() {
 
                                     // Store code
                                         $location_slug = get_post_field( 'post_name', $location );
+                                        $store_code = $profile_slug . '_' . $location_slug;
 
-                                        // Option 1: Provider slug plus numeral
-                                        // echo '<td data-gmb-column="Store code" class="no-break">';
-                                        // echo $profile_slug;
-                                        // echo $l > 1 ? '-' . $l : '';
-                                        // echo '</td>';
-
-                                        // Option 2: Provider slug plus Location slug
                                         echo '<td data-gmb-column="Store code" class="no-break">';
-                                        echo $profile_slug . '_' . $location_slug;
+                                        echo $store_code;
                                         echo '</td>';
 
                                     // Business name
