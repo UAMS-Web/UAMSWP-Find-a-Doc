@@ -203,10 +203,18 @@ function display_provider_image() {
                                     echo '<tr>';
 
                                     // Store code
+                                        $location_slug = get_post_field( 'post_name', $location );
+
+                                        // Option 1: Provider slug plus numeral
                                         echo '<td data-gmb-column="Store code" class="no-break">';
-                                        echo $profile_slug; // only display value if value is not empty or zero
+                                        echo $profile_slug;
                                         echo $l > 1 ? '-' . $l : '';
                                         echo '</td>';
+
+                                        // Option 2: Provider slug plus Location slug
+                                        // echo '<td data-gmb-column="Store code" class="no-break">';
+                                        // echo $profile_slug . '_' . $location_slug;
+                                        // echo '</td>';
 
                                     // Business name
                                         echo '<td data-gmb-column="Business name" class="no-break">UAMS - ' . $full_name . '</td>';
