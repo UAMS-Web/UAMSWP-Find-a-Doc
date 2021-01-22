@@ -89,6 +89,10 @@ function display_provider_image() {
                         <th class="no-break">Special hours</th>
                         <th class="no-break">From the business</th>
                         <th class="no-break">Opening date</th>
+                        <th class="no-break">Preferred photo</th>
+                        <th class="no-break">Logo photo</th>
+                        <th class="no-break">Cover photo</th>
+                        <th class="no-break">Other photos</th>
                         <th class="no-break">Labels</th>
                         <th class="no-break">AdWords location extensions phone</th>
                         <th class="no-break">Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)</th>
@@ -360,6 +364,26 @@ function display_provider_image() {
                                     // Opening date
                                     // Intentionally left blank
                                         echo '<td data-gmb-column="Opening date" class="no-break"></td>';
+
+                                    // Preferred photo
+                                    $featured_img_url = get_the_post_thumbnail_url($post_id,'full');
+
+                                        echo '<td data-gmb-column="Preferred photo" class="no-break">';
+                                        echo ( $featured_img_url && !empty($featured_img_url) ) ? 'Cover' : '';
+                                        echo '</td>';
+
+                                    // Logo photo
+                                    // Intentionally left blank
+                                        echo '<td data-gmb-column="Logo photo" class="no-break"></td>';
+
+                                    // Cover photo
+                                        echo '<td data-gmb-column="Cover photo" class="no-break">';
+                                        echo $featured_img_url;
+                                        echo '</td>';
+
+                                    // Other photos
+                                    // Intentionally left blank
+                                        echo '<td data-gmb-column="Other photos" class="no-break"></td>';
 
                                     // Labels
                                         $service_line = '';
