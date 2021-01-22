@@ -338,8 +338,13 @@ function display_provider_image() {
 
                                     // From the business
                                         $excerpt = get_field('physician_short_clinical_bio',$post_id);
+                                        $bio = get_field('physician_clinical_bio',$post_id);
+                                        $bio_short = get_field('physician_short_clinical_bio',$post_id);
+
                                         if (empty($excerpt)){
-                                            if ($bio){
+                                            if ($bio_short){
+                                                $excerpt = mb_strimwidth(wp_strip_all_tags($bio_short), 0, 747, '...');
+                                            } elseif ($bio) {
                                                 $excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 747, '...');
                                             } else {
                                                 $fallback_desc = $medium_name . ' is ' . ($phys_title ? $phys_title_indef_article . ' ' . strtolower($phys_title_name) : 'a health care provider' ) . ($location_title ? ' at ' . $location_title : '') .  ' employed by UAMS Health.';
