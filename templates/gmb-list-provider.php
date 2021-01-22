@@ -290,12 +290,12 @@ function display_provider_image() {
                                         echo '</td>';
 
                                     // Primary category
-                                    // Intentionally left as "Doctor". Only include this column for new listings. Remove it for when updating existing listings so that it doesn't overwrite the chosen category with "Doctor".
-                                        echo '<td data-gmb-column="Primary category" class="no-break">Doctor</td>';
+                                    // Hiding this column so that we don't overwrite existing data. Will need to instead download/reimport data from GMB to update category in bulk.
+                                    //    echo '<td data-gmb-column="Primary category" class="no-break">Doctor</td>';
 
                                     // Additional categories
-                                    // Intentionally left blank. Only include this column for new listings. Remove it for when updating existing listings so that it doesn't remove any chosen additional categories.
-                                        echo '<td data-gmb-column="Additional categories" class="no-break"></td>';
+                                    // Hiding this column so that we don't overwrite existing data. Will need to instead download/reimport data from GMB to update category in bulk.
+                                    //    echo '<td data-gmb-column="Additional categories" class="no-break"></td>';
 
                                     // Sunday hours
                                     // Intentionally left blank for now
