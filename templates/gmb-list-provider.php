@@ -236,8 +236,9 @@ function display_provider_image() {
                                         echo '</td>';
 
                                     // Address line 2
+                                    // Intentionally left blank for now. Line 2 isn't separated with a comma when displayed in Google.
                                         echo '<td data-gmb-column="Address line 2" class="no-break">';
-                                        echo $location_address_2 ? $location_address_2 : '';
+                                        //echo $location_address_2 ? $location_address_2 : '';
                                         echo '</td>';
 
                                     // Address line 3
