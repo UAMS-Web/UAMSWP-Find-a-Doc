@@ -258,7 +258,11 @@ function display_provider_image() {
 
                                     // Address line 2
                                         echo '<td data-gmb-column="Address line 2" class="no-break">';
-                                        echo $location_address_2 ? $location_address_2 : '';
+                                        if ( $location_has_parent ) {
+                                            echo ( $location_address_2 && !empty($location_address_2) ) ? $location_address_2 : $location_title;
+                                        } else {
+                                            echo ( $location_address_2 && !empty($location_address_2) ) ? $location_address_2 : '';
+                                        }
                                         echo '</td>';
 
                                     // Address line 3
