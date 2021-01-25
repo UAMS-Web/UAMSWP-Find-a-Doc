@@ -91,7 +91,6 @@ function display_provider_image() {
                         <th class="no-break">Special hours</th>
                         <th class="no-break">From the business</th>
                         <th class="no-break">Opening date</th>
-                        <th class="no-break">Preferred photo</th>
                         <th class="no-break">Logo photo</th>
                         <th class="no-break">Cover photo</th>
                         <th class="no-break">Other photos</th>
