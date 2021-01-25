@@ -220,6 +220,24 @@ function display_provider_image() {
 
                                     // Address line 1
 
+                                        // Parent Location 
+                                        $location_post_id = $location;
+                                        $location_child_id = $location;
+                                        $location_has_parent = get_field('location_parent',$location_post_id);
+                                        $location_parent_id = get_field('location_parent_id',$location_post_id);
+                                        $location_parent_title = ''; // Eliminate PHP errors
+                                        $location_parent_url = ''; // Eliminate PHP errors
+                                        $location_parent_location = ''; // Eliminate PHP errors
+                                        if ($location_has_parent && $location_parent_id) { 
+                                            $location_parent_location = get_post( $location_parent_id );
+                                        }
+                                        // Get Post ID for Address & Image fields
+                                        if ($location_parent_location) {
+                                            $location = $location_parent_location->ID;
+                                            $location_parent_title = $location_parent_location->post_title;
+                                            $location_parent_url = get_permalink( $location );
+                                        }
+
                                         $location_title = get_the_title( $location );
                                         $location_address_1 = get_field( 'location_address_1', $location );
                                         $location_address_2 = get_field( 'location_address_2', $location );
