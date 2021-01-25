@@ -98,7 +98,6 @@ function display_provider_image() {
                         <th class="no-break">Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)</th>
                         <th class="no-break">Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)</th>
                         <th class="no-break">Amenities: Restroom (has_restroom)</th>
-                        <th class="no-break">Amenities: Wi-Fi (wi_fi)</th>
                         <th class="no-break">From the business: Identifies as Black-owned (is_black_owned)</th>
                         <th class="no-break">From the business: Identifies as veteran-led (is_owned_by_veterans)</th>
                         <th class="no-break">From the business: Identifies as women-led (is_owned_by_women)</th>
@@ -402,9 +401,6 @@ function display_provider_image() {
 
                         // Amenities: Restroom (has_restroom)
                             echo '<td data-gmb-column="Amenities: Restroom (has_restroom)" class="no-break">Yes</td>';
-
-                        // Amenities: Wi-Fi (wi_fi)
-                            echo '<td data-gmb-column="Amenities: Wi-Fi (wi_fi)" class="no-break">[NOT APPLICABLE]</td>';
 
                         // From the business: Identifies as Black-owned (is_black_owned)
                         // Intentionally left blank
