@@ -359,20 +359,14 @@ function display_provider_image() {
                                     // Intentionally left blank
                                         echo '<td data-gmb-column="Opening date" class="no-break"></td>';
 
-                                    // Preferred photo
-                                    $featured_img_url = get_the_post_thumbnail_url($post_id,'full');
-
-                                        echo '<td data-gmb-column="Preferred photo" class="no-break">';
-                                        echo ( $featured_img_url && !empty($featured_img_url) ) ? 'Cover' : '';
-                                        echo '</td>';
-
                                     // Logo photo
                                     // Intentionally left blank
                                         echo '<td data-gmb-column="Logo photo" class="no-break"></td>';
 
                                     // Cover photo
+                                    // Intentionally left blank, for now
                                         echo '<td data-gmb-column="Cover photo" class="no-break">';
-                                        echo $featured_img_url;
+                                        //echo $featured_img_url;
                                         echo '</td>';
 
                                     // Other photos
