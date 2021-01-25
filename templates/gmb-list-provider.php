@@ -238,15 +238,15 @@ function display_provider_image() {
                                             $location_parent_url = get_permalink( $location );
                                         }
 
-                                        $location_title = get_the_title( $location );
+                                        $location_title = get_the_title( $location_child_id );
                                         $location_address_1 = get_field( 'location_address_1', $location );
                                         $location_address_2 = get_field( 'location_address_2', $location );
                                         $location_city = get_field( 'location_city', $location );
                                         $location_state = get_field( 'location_state', $location );
                                         $location_zip = get_field( 'location_zip', $location );
-                                        $location_phone = get_field( 'location_phone', $location );
-                                        $location_fax = get_field( 'location_fax', $location );
-                                        $location_hours_group = get_field('location_hours_group', $location );
+                                        $location_phone = get_field( 'location_phone', $location_child_id );
+                                        $location_fax = get_field( 'location_fax', $location_child_id );
+                                        $location_hours_group = get_field('location_hours_group', $location_child_id );
                                         $location_telemed_query = $location_hours_group['location_telemed_query'];
                                         $location_map = get_field( 'location_map', $location );
                                         $location_latitude = $location_map['lat'];
