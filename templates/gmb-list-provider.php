@@ -74,6 +74,8 @@ function display_provider_image() {
                         <th class="no-break">Administrative area</th>
                         <th class="no-break">Country / Region</th>
                         <th class="no-break">Postal code</th>
+                        <th class="no-break">Latitude</th>
+                        <th class="no-break">Longitude</th>
                         <th class="no-break">Primary phone</th>
                         <th class="no-break">Additional phones</th>
                         <th class="no-break">Website</th>
@@ -229,6 +231,9 @@ function display_provider_image() {
                                         $location_fax = get_field( 'location_fax', $location );
                                         $location_hours_group = get_field('location_hours_group', $location );
                                         $location_telemed_query = $location_hours_group['location_telemed_query'];
+                                        $location_map = get_field( 'location_map', $location );
+                                        $location_latitude = $location_map['lat'];
+                                        $location_longitude = $location_map['lng'];
 
                                         echo '<td data-gmb-column="Address line 1" class="no-break">';
                                         echo $location_address_1 ? $location_address_1 : '';
@@ -272,6 +277,17 @@ function display_provider_image() {
                                     // Postal code
                                         echo '<td data-gmb-column="Postal code" class="no-break">';
                                         echo $location_zip ? $location_zip : '';
+                                        echo '</td>';
+
+                                    // Latitude
+
+                                        echo '<td data-gmb-column="Latitude" class="no-break">';
+                                        echo $location_latitude ? $location_latitude : '';
+                                        echo '</td>';
+
+                                    // Longitude
+                                        echo '<td data-gmb-column="Longitude" class="no-break">';
+                                        echo $location_longitude ? $location_longitude : '';
                                         echo '</td>';
 
                                     // Primary phone
