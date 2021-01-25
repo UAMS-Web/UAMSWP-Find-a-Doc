@@ -96,7 +96,6 @@ function display_provider_image() {
                         <th class="no-break">AdWords location extensions phone</th>
                         <th class="no-break">Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)</th>
                         <th class="no-break">Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)</th>
-                        <th class="no-break">Accessibility: Wheelchair accessible parking lot (has_wheelchair_accessible_parking)</th>
                         <th class="no-break">Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)</th>
                         <th class="no-break">Amenities: Restroom (has_restroom)</th>
                         <th class="no-break">Amenities: Wi-Fi (wi_fi)</th>
@@ -397,9 +396,6 @@ function display_provider_image() {
 
                         // Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)
                             echo '<td data-gmb-column="Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)" class="no-break">Yes</td>';
-
-                        // Accessibility: Wheelchair accessible parking lot (has_wheelchair_accessible_parking)
-                            echo '<td data-gmb-column="Accessibility: Wheelchair accessible parking lot (has_wheelchair_accessible_parking)" class="no-break">[NOT APPLICABLE]</td>';
 
                         // Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)
                             echo '<td data-gmb-column="Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)" class="no-break">Yes</td>';
