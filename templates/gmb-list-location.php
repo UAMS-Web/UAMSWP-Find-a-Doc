@@ -89,6 +89,9 @@ function display_provider_image() {
                         <th class="no-break">Special hours</th>
                         <th class="no-break">From the business</th>
                         <th class="no-break">Opening date</th>
+                        <th class="no-break">Logo photo</th>
+                        <th class="no-break">Cover photo</th>
+                        <th class="no-break">Other photos</th>
                         <th class="no-break">Labels</th>
                         <th class="no-break">AdWords location extensions phone</th>
                         <th class="no-break">Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)</th>
@@ -137,25 +140,42 @@ function display_provider_image() {
                 <tbody>
                 <?php 
                 while( $query->have_posts() ) : $query->the_post();
-                    $post_id = get_the_ID();
+                    // Parent Location 
+                    $location_post_id = get_the_ID();
+                    $location_child_id = get_the_ID();
+                    $location_has_parent = get_field('location_parent',$location_post_id);
+                    $location_parent_id = get_field('location_parent_id',$location_post_id);
+                    $location_parent_title = ''; // Eliminate PHP errors
+                    $location_parent_url = ''; // Eliminate PHP errors
+                    $location_parent_location = ''; // Eliminate PHP errors
+                    if ($location_has_parent && $location_parent_id) { 
+                        $location_parent_location = get_post( $location_parent_id );
+                    }
+                    // Get Post ID for Address & Image fields
+                    if ($location_parent_location) {
+                        $location_post_id = $location_parent_location->ID;
+                        $location_parent_title = $location_parent_location->post_title;
+                        $location_parent_url = get_permalink( $location_post_id );
+                    }
 
                     // COVID-19 Restrictions
                     // Set to true if COVID-19 restrictions are still in place.
                     $covid19 = true;
 
                     // Get slug
-                    $location_slug = get_post_field( 'post_name', $post_id );
+                    $store_code = ( $location_parent_location ? get_post_field( 'post_name', $location_post_id ) . '_' : '' ) . get_post_field( 'post_name', $location_child_id );
+                    $location_slug = ( $location_parent_location ? get_post_field( 'post_name', $location_post_id ) . '/' : '' ) . get_post_field( 'post_name', $location_child_id );
                         
                     // Create location variables
-                    $location_title = get_the_title( $post_id );
-                    $location_address_1 = get_field( 'location_address_1', $post_id );
-                    $location_address_2 = get_field( 'location_address_2', $post_id );
-                    $location_city = get_field( 'location_city', $post_id );
-                    $location_state = get_field( 'location_state', $post_id );
-                    $location_zip = get_field( 'location_zip', $post_id );
-                    $location_phone = get_field( 'location_phone', $post_id );
-                    $location_fax = get_field( 'location_fax', $post_id );
-                    $location_hours_group = get_field('location_hours_group', $post_id );
+                    $location_title = get_the_title( $location_child_id );
+                    $location_address_1 = get_field( 'location_address_1', $location_post_id );
+                    $location_address_2 = get_field( 'location_address_2', $location_post_id );
+                    $location_city = get_field( 'location_city', $location_post_id );
+                    $location_state = get_field( 'location_state', $location_post_id );
+                    $location_zip = get_field( 'location_zip', $location_post_id );
+                    $location_phone = get_field( 'location_phone', $location_child_id );
+                    $location_fax = get_field( 'location_fax', $location_child_id );
+                    $location_hours_group = get_field('location_hours_group', $location_child_id );
                     $location_telemed_query = $location_hours_group['location_telemed_query'];
 
                     // Create the table
@@ -167,23 +187,24 @@ function display_provider_image() {
 
                             // Option 1: Provider slug plus numeral
                             echo '<td data-gmb-column="Store code" class="no-break">';
-                            echo $location_slug;
+                            echo $store_code;
                             echo '</td>';
 
                         // Business name
                             echo '<td data-gmb-column="Business name" class="no-break">UAMS Health - ' . $location_title . '</td>';
 
                         // Address line 1
-
-
                             echo '<td data-gmb-column="Address line 1" class="no-break">';
                             echo $location_address_1 ? $location_address_1 : '';
                             echo '</td>';
 
                         // Address line 2
-                        // Intentionally left blank for now. Line 2 isn't separated with a comma when displayed in Google.
                             echo '<td data-gmb-column="Address line 2" class="no-break">';
-                            //echo $location_address_2 ? $location_address_2 : '';
+                            if ( $location_has_parent ) {
+                                echo ( $location_address_2 && !empty($location_address_2) ) ? $location_address_2 : $location_title;
+                            } else {
+                                echo ( $location_address_2 && !empty($location_address_2) ) ? $location_address_2 : '';
+                            }
                             echo '</td>';
 
                         // Address line 3
@@ -231,7 +252,7 @@ function display_provider_image() {
 
                         // Website
                             echo '<td data-gmb-column="Website" class="no-break">';
-                            echo 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=profile';
+                            echo 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=profile&amp;utm_specs=' . $store_code;
                             echo '</td>';
 
                         // Primary category
@@ -284,8 +305,8 @@ function display_provider_image() {
 
                         // From the business
                             $excerpt = '';
-                            $descr = get_field('location_about',$post_id);
-                            $descr_short = get_field('location_short_desc',$post_id);
+                            $descr = get_field('location_about',$location_post_id);
+                            $descr_short = get_field('location_short_desc',$location_post_id);
 
                             if (empty($excerpt)){
                                 if ($descr_short){
@@ -304,8 +325,64 @@ function display_provider_image() {
                         // Intentionally left blank
                             echo '<td data-gmb-column="Opening date" class="no-break"></td>';
 
+                        // Logo photo
+                        // Intentionally left blank
+                            echo '<td data-gmb-column="Logo photo" class="no-break"></td>';
+
+                        // Cover photo
+                        
+                            // Image values
+                            $featured_image = get_post_thumbnail_id($location_post_id);
+                            $featured_img_url = get_the_post_thumbnail_url($location_post_id,'full');
+                            $override_parent_photo = get_field('location_image_override_parent',$location_child_id);
+                            $override_parent_photo_featured = get_field('location_image_override_parent_featured',$location_child_id);
+                            $override_parent_photo_wayfinding = get_field('location_image_override_parent_wayfinding',$location_child_id);
+                            $override_parent_photo_gallery = get_field('location_image_override_parent_gallery',$location_child_id);
+                            // if ($override_parent_photo && $location_parent_location) { // If child location & override is true
+                            if ($override_parent_photo && $location_parent_location && $override_parent_photo_wayfinding) {
+                                $wayfinding_photo = get_field('location_wayfinding_photo',$location_child_id);
+                            } else { // Use parent/standard images
+                                $wayfinding_photo = get_field('location_wayfinding_photo',$location_post_id);
+                            }
+                            if ($override_parent_photo && $location_parent_location && $override_parent_photo_gallery) {
+                                $photo_gallery = get_field('location_photo_gallery',$location_child_id);
+                            } else { // Use parent/standard images
+                                $photo_gallery = get_field('location_photo_gallery',$location_post_id);
+                            }
+
+                            $location_images = array();
+                            if ($featured_image && !empty($featured_image)) {
+                                $location_images[] = $featured_image;
+                            }
+                            if ($wayfinding_photo && !empty($wayfinding_photo)) {
+                                $location_images[] = $wayfinding_photo;
+                            }
+                            if ($photo_gallery && !empty($photo_gallery)) {
+                                foreach( $photo_gallery as $photo_gallery_image ) {
+                                    $location_images[] = $photo_gallery_image;
+                                }
+                            }
+                            $location_images = array_unique($location_images);
+                            $location_images_count = count($location_images);
+
+                            echo '<td data-gmb-column="Cover photo" class="no-break">';
+                            // echo wp_get_attachment_image_url($location_images[0], 'full');
+                            echo '</td>';
+
+                        // Other photos
+                            echo '<td data-gmb-column="Other photos" class="no-break">';
+                            // if ( $location_images_count > 1 ) {
+                            //     $p = 1;
+                            //     foreach( $location_images as $location_images_item ) {
+                            //         echo wp_get_attachment_image_url($location_images[$p], 'full');
+                            //         echo $p < $location_images_count ? ',' : '';
+                            //         $p++;
+                            //     } // endforeach
+                            // }
+                            echo '</td>';
+
                         // Labels
-                            $region = get_term( get_field('location_region',$post_id), 'region' )->name;
+                            $region = get_term( get_field('location_region',$location_post_id), 'region' )->name;
 
                             echo '<td data-gmb-column="Labels" class="no-break">';
                             echo $region ? $region : '';
@@ -421,7 +498,7 @@ function display_provider_image() {
 
                         // Place page URLs: COVID-19 info link (url_covid_19_info_page)
                             echo '<td data-gmb-column="Place page URLs: COVID-19 info link (url_covid_19_info_page)" class="no-break">';
-                            echo 'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=covid-19-info-link';
+                            echo 'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=covid-19-info-link&amp;utm_specs=' . $store_code;
                             echo '</td>';
 
                         // Place page URLs: Menu link (url_menu)
@@ -429,7 +506,7 @@ function display_provider_image() {
 
                         // Place page URLs: Virtual care link (url_facility_telemedicine_page)
                             echo '<td data-gmb-column="Place page URLs: Virtual care link (url_facility_telemedicine_page)" class="no-break">';
-                            echo $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=virtual-care-link' : '';
+                            echo $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=virtual-care-link&amp;utm_specs=' . $store_code : '';
                             echo '</td>';
 
                         // Planning: LGBTQ friendly (welcomes_lgbtq)
