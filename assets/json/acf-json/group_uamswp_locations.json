@@ -3707,7 +3707,7 @@
 			"allow_null": "1",
 			"default_value": "",
 			"layout": "horizontal",
-			"return_format": "value"
+			"return_format": "label"
 		},
         "field_location_gmb_has_wheelchair_accessible_entrance": {
 			"key": "field_location_gmb_has_wheelchair_accessible_entrance",
@@ -3729,7 +3729,7 @@
 			"allow_null": "1",
 			"default_value": "",
 			"layout": "horizontal",
-			"return_format": "value"
+			"return_format": "label"
 		},
         "field_location_gmb_has_wheelchair_accessible_restroom": {
 			"key": "field_location_gmb_has_wheelchair_accessible_restroom",
@@ -3751,7 +3751,7 @@
 			"allow_null": "1",
 			"default_value": "",
 			"layout": "horizontal",
-			"return_format": "value"
+			"return_format": "label"
 		},
         "field_location_gmb_has_restroom": {
 			"key": "field_location_gmb_has_restroom",
@@ -3773,7 +3773,7 @@
 			"allow_null": "1",
 			"default_value": "",
 			"layout": "horizontal",
-			"return_format": "value"
+			"return_format": "label"
 		},
         "field_location_gmb_requires_appointments": {
 			"key": "field_location_gmb_requires_appointments",
@@ -3795,7 +3795,7 @@
 			"allow_null": "1",
 			"default_value": "",
 			"layout": "horizontal",
-			"return_format": "value"
+			"return_format": "label"
 		},
         "field_location_gmb_requires_temperature_check_customers": {
 			"key": "field_location_gmb_requires_temperature_check_customers",
@@ -3817,7 +3817,7 @@
 			"allow_null": "1",
 			"default_value": "",
 			"layout": "horizontal",
-			"return_format": "value"
+			"return_format": "label"
 		},
         "field_location_gmb_requires_masks_customers": {
 			"key": "field_location_gmb_requires_masks_customers",
@@ -3839,7 +3839,7 @@
 			"allow_null": "1",
 			"default_value": "",
 			"layout": "horizontal",
-			"return_format": "value"
+			"return_format": "label"
 		},
         "field_location_gmb_requires_temperature_check_staff": {
 			"key": "field_location_gmb_requires_temperature_check_staff",
@@ -3861,7 +3861,7 @@
 			"allow_null": "1",
 			"default_value": "",
 			"layout": "horizontal",
-			"return_format": "value"
+			"return_format": "label"
 		},
         "field_location_gmb_requires_masks_staff": {
 			"key": "field_location_gmb_requires_masks_staff",
@@ -3883,7 +3883,7 @@
 			"allow_null": "1",
 			"default_value": "",
 			"layout": "horizontal",
-			"return_format": "value"
+			"return_format": "label"
 		},
         "field_location_gmb_is_sanitizing_between_customers": {
 			"key": "field_location_gmb_is_sanitizing_between_customers",
@@ -3905,7 +3905,7 @@
 			"allow_null": "1",
 			"default_value": "",
 			"layout": "horizontal",
-			"return_format": "value"
+			"return_format": "label"
 		}
     },
     "modified": false
