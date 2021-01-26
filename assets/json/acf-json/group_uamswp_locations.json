@@ -182,7 +182,7 @@
             "choices": {
 				"": "(Select an option)",
 				"0": "Single-Story Building",
-				"-1": "Basement",
+				"B": "Basement",
 				"G": "Ground Floor",
 				"1": "First Floor",
 				"2": "Second Floor",
@@ -209,7 +209,7 @@
 			"allow_null": "0",
 			"multiple": "0",
 			"ui": "0",
-			"return_format": "array",
+			"return_format": "value",
 			"ajax": "0",
 			"placeholder": ""
         },
