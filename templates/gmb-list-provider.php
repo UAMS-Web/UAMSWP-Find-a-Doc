@@ -233,22 +233,23 @@ function display_provider_image() {
                                         }
                                         // Get Post ID for Address & Image fields
                                         if ($location_parent_location) {
-                                            $location = $location_parent_location->ID;
+                                            $location_post_id = $location_parent_location->ID;
                                             $location_parent_title = $location_parent_location->post_title;
-                                            $location_parent_url = get_permalink( $location );
+                                            $location_parent_url = get_permalink( $location_post_id );
                                         }
 
+                                        // Create location variables
                                         $location_title = get_the_title( $location_child_id );
-                                        $location_address_1 = get_field( 'location_address_1', $location );
-                                        $location_address_2 = get_field( 'location_address_2', $location );
-                                        $location_city = get_field( 'location_city', $location );
-                                        $location_state = get_field( 'location_state', $location );
-                                        $location_zip = get_field( 'location_zip', $location );
+                                        $location_address_1 = get_field( 'location_address_1', $location_post_id );
+                                        $location_address_2 = get_field( 'location_address_2', $location_post_id );
+                                        $location_city = get_field( 'location_city', $location_post_id );
+                                        $location_state = get_field( 'location_state', $location_post_id );
+                                        $location_zip = get_field( 'location_zip', $location_post_id );
                                         $location_phone = get_field( 'location_phone', $location_child_id );
                                         $location_fax = get_field( 'location_fax', $location_child_id );
                                         $location_hours_group = get_field('location_hours_group', $location_child_id );
                                         $location_telemed_query = $location_hours_group['location_telemed_query'];
-                                        $location_map = get_field( 'location_map', $location );
+                                        $location_map = get_field( 'location_map', $location_post_id );
                                         $location_latitude = $location_map['lat'];
                                         $location_longitude = $location_map['lng'];
 
