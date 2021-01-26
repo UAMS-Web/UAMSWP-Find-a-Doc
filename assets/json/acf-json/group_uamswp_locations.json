@@ -3670,6 +3670,242 @@
 			"ui": 1,
 			"ui_on_text": "",
 			"ui_off_text": ""
+		},
+        "field_location_gmb_tab": {
+            "key": "field_location_gmb_tab",
+            "name": "",
+            "type": "tab",
+            "label": "<i class=\"dashicons-location dashicons\"><\/i> Google My Business",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        "field_location_gmb_has_wheelchair_accessible_elevator": {
+			"key": "field_location_gmb_has_wheelchair_accessible_elevator",
+			"label": "Accessibility: Wheelchair accessible elevator",
+			"name": "has_wheelchair_accessible_elevator",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+			"conditional_logic": "0",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+        "field_location_gmb_has_wheelchair_accessible_entrance": {
+			"key": "field_location_gmb_has_wheelchair_accessible_entrance",
+			"label": "Accessibility: Wheelchair accessible entrance",
+			"name": "has_wheelchair_accessible_entrance",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+			"conditional_logic": "0",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+        "field_location_gmb_has_wheelchair_accessible_restroom": {
+			"key": "field_location_gmb_has_wheelchair_accessible_restroom",
+			"label": "Accessibility: Wheelchair accessible restroom",
+			"name": "has_wheelchair_accessible_restroom",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+			"conditional_logic": "0",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+        "field_location_gmb_has_restroom": {
+			"key": "field_location_gmb_has_restroom",
+			"label": "Amenities: Restroom",
+			"name": "has_restroom",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+			"conditional_logic": "0",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+        "field_location_gmb_requires_appointments": {
+			"key": "field_location_gmb_requires_appointments",
+			"label": "Health and safety: Appointment required",
+			"name": "requires_appointments",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+			"conditional_logic": "0",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+        "field_location_gmb_requires_masks_customers": {
+			"key": "field_location_gmb_requires_masks_customers",
+			"label": "Health and safety: Mask required",
+			"name": "requires_masks_customers",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+			"conditional_logic": "0",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+        "field_location_gmb_requires_temperature_check_staff": {
+			"key": "field_location_gmb_requires_temperature_check_staff",
+			"label": "Health and safety: Staff get temperature checks",
+			"name": "requires_temperature_check_staff",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+			"conditional_logic": "0",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+        "field_location_gmb_is_sanitizing_between_customers": {
+			"key": "field_location_gmb_is_sanitizing_between_customers",
+			"label": "Health and safety: Staff required to disinfect surfaces between visits",
+			"name": "is_sanitizing_between_customers",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+			"conditional_logic": "0",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+        "field_location_gmb_requires_masks_staff": {
+			"key": "field_location_gmb_requires_masks_staff",
+			"label": "Health and safety: Staff wear masks",
+			"name": "requires_masks_staff",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+			"conditional_logic": "0",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+        "field_location_gmb_requires_temperature_check_customers": {
+			"key": "field_location_gmb_requires_temperature_check_customers",
+			"label": "Health and safety: Temperature check required",
+			"name": "requires_temperature_check_customers",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+			"conditional_logic": "0",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
 		}
     },
     "modified": false
