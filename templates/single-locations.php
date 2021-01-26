@@ -243,7 +243,30 @@ while ( have_posts() ) : the_post(); ?>
 <?php 
 	$map = get_field('location_map', $post_id );
 	$location_address_1 = get_field('location_address_1', $post_id );
-	$location_address_2 = get_field('location_address_2', $post_id );
+	$location_building = get_field('location_building', $post_id );
+	if ($location_building) {
+		$building = get_term($location_building, "building");
+		$building_slug = $building->slug;
+		$building_name = $building->name;
+	}
+	$location_floor = get_field_object('location_building_floor', $post_id );
+		$location_floor_value = $location_floor['value'];
+		$location_floor_label = $location_floor['choices'][ $location_floor_value ];
+	$location_suite = get_field('location_suite', $post_id );
+	$location_address_2 =
+		( $location_building ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? ', ' : '' ) : '' )
+		. ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ', ' : '' ) : '' )
+		. ( $location_suite ? $location_suite : '' );
+	$location_address_2_schema =
+		( $location_building ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? ' ' : '' ) : '' )
+		. ( $location_floor && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ' ' : '' ) : '' )
+		. ( $location_suite ? $location_suite : '' );
+
+	$location_address_2_deprecated = get_field('location_address_2', $post_id );
+	if (!$location_address_2) {
+		$location_address_2_schema = $location_address_2_deprecated;
+	}
+
 	$location_city = get_field('location_city', $post_id);
 	$location_state = get_field('location_state', $post_id);
 	$location_zip = get_field('location_zip', $post_id);
@@ -293,7 +316,7 @@ while ( have_posts() ) : the_post(); ?>
 					<?php } // endif ?>
 					<h2 class="sr-only">Address</h2>
 					<p><?php echo $location_address_1; ?><br/>
-					<?php echo ( $location_address_2 ? $location_address_2 . '<br/>' : ''); ?>
+					<?php echo ( $location_address_2 ? $location_address_2 . '<br/>' : ( $location_address_2_deprecated ? $location_address_2_deprecated . '<br/>' : '')); ?>
 					<?php echo $location_city; ?>, <?php echo $location_state; ?> <?php echo $location_zip; ?></p>
 						<p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo get_the_title($post_id); ?>">Get Directions</a></p>
 						<?php if( $location_web_name && $location_url ){ ?>
@@ -302,7 +325,7 @@ while ( have_posts() ) : the_post(); ?>
 						// Schema data
 						$location_schema = '"address": {
 						"@type": "PostalAddress",
-						"streetAddress": "'. get_field('location_address_1' ) . ' '. get_field('location_address_2' ) .'",
+						"streetAddress": "'. get_field('location_address_1' ) . ' '. $location_address_2_schema .'",
 						"addressLocality": "'. get_field('location_city') .'",
 						"addressRegion": "'. get_field('location_state' ) .'",
 						"postalCode": "'. get_field('location_zip') .'"
