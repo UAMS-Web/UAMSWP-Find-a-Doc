@@ -401,8 +401,9 @@ function display_provider_image() {
                             echo '<td data-gmb-column="AdWords location extensions phone" class="no-break"></td>';
 
                         // Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)
-                            echo '<td data-gmb-column="Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)" class="no-break">';
-                            if ( $location_gmb_wheelchair_elevator && !empty($location_gmb_wheelchair_elevator) ) {
+                            echo '<td data-gmb-column="Accessibility: Wheelchair accessible elevat  or (has_wheelchair_accessible_elevator)" class="no-break">';
+                            echo $location_gmb_wheelchair_elevator . '<br />';
+                            if (!empty($location_gmb_wheelchair_elevator)) {
                                 echo $location_gmb_wheelchair_elevator;
                             } else {
                                 echo 'Yes';
@@ -411,7 +412,7 @@ function display_provider_image() {
 
                         // Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)
                             echo '<td data-gmb-column="Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)" class="no-break">';
-                            if ( $location_gmb_wheelchair_entrance && !empty($location_gmb_wheelchair_entrance) ) {
+                            if (!empty($location_gmb_wheelchair_entrance)) {
                                 echo $location_gmb_wheelchair_entrance;
                             } else {
                                 echo 'Yes';
@@ -420,7 +421,7 @@ function display_provider_image() {
 
                         // Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)
                             echo '<td data-gmb-column="Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)" class="no-break">';
-                            if ( $location_gmb_wheelchair_restroom && !empty($location_gmb_wheelchair_restroom) ) {
+                            if (!empty($location_gmb_wheelchair_restroom)) {
                                 echo $location_gmb_wheelchair_restroom;
                             } else {
                                 echo 'Yes';
@@ -429,7 +430,7 @@ function display_provider_image() {
 
                         // Amenities: Restroom (has_restroom)
                             echo '<td data-gmb-column="Amenities: Restroom (has_restroom)" class="no-break">';
-                            if ( $location_gmb_restroom && !empty($location_gmb_restroom) ) {
+                            if (!empty($location_gmb_restroom)) {
                                 echo $location_gmb_restroom;
                             } else {
                                 echo 'Yes';
@@ -451,7 +452,7 @@ function display_provider_image() {
                         // Health &amp; safety: Appointment required (requires_appointments)
                             echo '<td data-gmb-column="Health &amp; safety: Appointment required (requires_appointments)" class="no-break">';
                             if ( $covid19 ) {
-                                if ( $location_gmb_appointments && !empty($location_gmb_appointments) ) {
+                                if (!empty($location_gmb_appointments)) {
                                     echo $location_gmb_appointments;
                                 } else {
                                     echo '';
@@ -464,7 +465,7 @@ function display_provider_image() {
                         // Health &amp; safety: Mask required (requires_masks_customers)
                             echo '<td data-gmb-column="Health &amp; safety: Mask required (requires_masks_customers)" class="no-break">';
                             if ( $covid19 ) {
-                                if ( $location_gmb_masks_customers && !empty($location_gmb_masks_customers) ) {
+                                if (!empty($location_gmb_masks_customers)) {
                                     echo $location_gmb_masks_customers;
                                 } else {
                                     echo 'Yes';
@@ -480,7 +481,7 @@ function display_provider_image() {
                         // Health &amp; safety: Staff get temperature checks (requires_temperature_check_staff)
                             echo '<td data-gmb-column="Health &amp; safety: Staff get temperature checks (requires_temperature_check_staff)" class="no-break">';
                             if ( $covid19 ) {
-                                if ( $location_gmb_temp_staff && !empty($location_gmb_temp_staff) ) {
+                                if (!empty($location_gmb_temp_staff)) {
                                     echo $location_gmb_temp_staff;
                                 } else {
                                     echo 'Yes';
@@ -493,7 +494,7 @@ function display_provider_image() {
                         // Health &amp; safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)
                             echo '<td data-gmb-column="Health &amp; safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)" class="no-break">';
                             if ( $covid19 ) {
-                                if ( $location_gmb_sanitizing && !empty($location_gmb_sanitizing) ) {
+                                if (!empty($location_gmb_sanitizing)) {
                                     echo $location_gmb_sanitizing;
                                 } else {
                                     echo 'Yes';
@@ -506,7 +507,7 @@ function display_provider_image() {
                         // Health &amp; safety: Staff wear masks (requires_masks_staff)
                             echo '<td data-gmb-column="Health &amp; safety: Staff wear masks (requires_masks_staff)" class="no-break">';
                             if ( $covid19 ) {
-                                if ( $location_gmb_masks_staff && !empty($location_gmb_masks_staff) ) {
+                                if (!empty($location_gmb_masks_staff)) {
                                     echo $location_gmb_masks_staff;
                                 } else {
                                     echo 'Yes';
@@ -519,7 +520,7 @@ function display_provider_image() {
                         // Health &amp; safety: Temperature check required (requires_temperature_check_customers)
                             echo '<td data-gmb-column="Health &amp; safety: Temperature check required (requires_temperature_check_customers)" class="no-break">';
                             if ( $covid19 ) {
-                                if ( $location_gmb_temp_customers && !empty($location_gmb_temp_customers) ) {
+                                if (!empty($location_gmb_temp_customers)) {
                                     echo $location_gmb_temp_customers;
                                 } else {
                                     echo 'Yes';
