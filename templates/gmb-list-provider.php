@@ -301,7 +301,6 @@ function display_provider_image() {
                                         echo '</td>';
 
                                     // Latitude
-
                                         echo '<td data-gmb-column="Latitude" class="no-break">';
                                         echo $location_latitude ? $location_latitude : '';
                                         echo '</td>';
