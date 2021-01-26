@@ -396,6 +396,7 @@ add_action( 'init', 'create_residency_years_taxonomy', 0 );
 // Locations Taxonomies
 add_action( 'init', 'create_region_taxonomy', 0 );
 add_action( 'init', 'create_location_type_taxonomy', 0 );
+add_action( 'init', 'create_building_taxonomy', 0 );
 
 /* Taxonomy Functions */
 function create_clinical_conditions_taxonomy() {
@@ -1785,6 +1786,57 @@ function create_location_type_taxonomy() {
 
 }
 
+function create_building_taxonomy() {
+	// Plugin assumes there is a 'None' taxonomy item with slug '_none'
+
+	$labels = array(
+		'name'                       => 'Buildings',
+		'singular_name'              => 'Building',
+		'menu_name'                  => 'Buildings',
+		'all_items'                  => 'All Buildings',
+		'parent_item'                => 'Parent Building',
+		'parent_item_colon'          => 'Parent Building:',
+		'new_item_name'              => 'New Building',
+		'add_new_item'               => 'Add New Building',
+		'edit_item'                  => 'Edit Building',
+		'update_item'                => 'Update Building',
+		'view_item'                  => 'View Building',
+		'separate_items_with_commas' => 'Separate Buildings with commas',
+		'add_or_remove_items'        => 'Add or remove Buildings',
+		'choose_from_most_used'      => 'Choose from the most used',
+		'popular_items'              => 'Popular Buildings',
+		'search_items'               => 'Search Buildings',
+		'not_found'                  => 'Not Found',
+		'no_terms'                   => 'No Buildings',
+		'items_list'                 => 'Buildings list',
+		'items_list_navigation'      => 'Buildings list navigation',
+	);
+	$rewrite = array(
+		'slug'                       => 'building',
+		'with_front'                 => false,
+		'hierarchical'               => true,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => false,
+		'show_ui'                    => true,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+	);
+	register_taxonomy( 'building', array( 'location' ), $args );
+
+}
+
 /* Custom Roles */
 function add_roles_on_plugin_activation() {
 	add_role( 'doc_editor', 'Doc Profile Editor',
@@ -1898,6 +1950,7 @@ function remove_provider_meta() {
 	// Location
 	remove_meta_box( 'regiondiv', 'location', 'side' );
 	remove_meta_box( 'location_typediv', 'location', 'side' );
+	remove_meta_box( 'buildingdiv', 'location', 'side' );
 }
 
 add_action( 'admin_menu' , 'remove_provider_meta' );
