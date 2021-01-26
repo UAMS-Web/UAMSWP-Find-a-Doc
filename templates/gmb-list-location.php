@@ -169,7 +169,42 @@ function display_provider_image() {
                     // Create location variables
                     $location_title = get_the_title( $location_child_id );
                     $location_address_1 = get_field( 'location_address_1', $location_post_id );
-                    $location_address_2 = get_field( 'location_address_2', $location_post_id );
+                    $location_building = get_field('location_building', $location_post_id );
+                    if ($location_building) {
+                        $building = get_term($location_building, "building");
+                        $building_slug = $building->slug;
+                        $building_name = $building->name;
+                    }
+                    $location_floor = get_field_object('location_building_floor', $location_post_id );
+                        $location_floor_value = $location_floor['value'];
+                        $location_floor_label = $location_floor['choices'][ $location_floor_value ];
+                    $location_suite = get_field('location_suite', $location_post_id );
+                    $location_address_2_single =
+                        ( $location_building ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? ', ' : '' ) : '' )
+                        . ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ', ' : '' ) : '' )
+                        . ( $location_suite ? $location_suite : '' );
+
+                        // Set Address Lines 2-5
+                        $location_addresses = [];
+                        if ( $location_building ) {
+                            array_push($location_addresses, $building_name);
+                        }
+                        if ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ) {
+                            array_push($location_addresses, $location_floor_label);
+                        }
+                        if ( $location_suite ) {
+                            array_push($location_addresses, $location_suite);
+                        }
+                        $location_address_2 = $location_addresses[0];
+                        $location_address_3 = $location_addresses[1];
+                        $location_address_4 = $location_addresses[2];
+                        $location_address_5 = '';
+
+                    
+                    $location_address_2_deprecated = get_field('location_address_2', $location_post_id );
+                    if (!$location_address_2) {
+                        $location_address_2 = $location_address_2_deprecated;
+                    }
                     $location_city = get_field( 'location_city', $location_post_id );
                     $location_state = get_field( 'location_state', $location_post_id );
                     $location_zip = get_field( 'location_zip', $location_post_id );
@@ -213,24 +248,23 @@ function display_provider_image() {
 
                         // Address line 2
                             echo '<td data-gmb-column="Address line 2" class="no-break">';
-                            if ( $location_has_parent ) {
-                                echo ( $location_address_2 && !empty($location_address_2) ) ? $location_address_2 : $location_title;
-                            } else {
-                                echo ( $location_address_2 && !empty($location_address_2) ) ? $location_address_2 : '';
-                            }
+                            echo ( $location_address_2 && !empty($location_address_2) ) ? $location_address_2 : '';
                             echo '</td>';
 
                         // Address line 3
-                        // Intentionally left blank
-                            echo '<td data-gmb-column="Address line 3" class="no-break"></td>';
+                            echo '<td data-gmb-column="Address line 3" class="no-break">';
+                            echo ( $location_address_3 && !empty($location_address_3) ) ? $location_address_3 : '';
+                            echo '</td>';
 
                         // Address line 4
-                        // Intentionally left blank
-                            echo '<td data-gmb-column="Address line 4" class="no-break"></td>';
+                            echo '<td data-gmb-column="Address line 4" class="no-break">';
+                            echo ( $location_address_4 && !empty($location_address_4) ) ? $location_address_4 : '';
+                            echo '</td>';
 
                         // Address line 5
-                        // Intentionally left blank
-                            echo '<td data-gmb-column="Address line 5" class="no-break"></td>';
+                            echo '<td data-gmb-column="Address line 5" class="no-break">';
+                            echo ( $location_address_5 && !empty($location_address_5) ) ? $location_address_5 : '';
+                            echo '</td>';
 
                         // Sub-locality
                         // Intentionally left blank
