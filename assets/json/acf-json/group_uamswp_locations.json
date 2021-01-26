@@ -109,7 +109,7 @@
             "type": "text",
             "label": "Address",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -127,7 +127,7 @@
             "name": "location_address_2",
             "type": "text",
             "label": "Address (2)",
-            "instructions": "",
+            "instructions": "<strong>Deprecated</strong>. Move information to Building, Building Floor, Suite fields.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -141,13 +141,104 @@
             "append": "",
             "maxlength": ""
         },
+        "field_location_building": {
+			"key": "field_location_building",
+			"label": "Building (if any)",
+			"name": "location_building",
+			"type": "taxonomy",
+			"instructions": "Select the building this location is inside. If this is not part of a larger building, select None.",
+			"required": "1",
+			"conditional_logic": "0",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+			"taxonomy": "building",
+			"field_type": "select",
+			"add_term": "0",
+			"save_terms": "1",
+			"load_terms": "1",
+			"return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+			"multiple": "0",
+			"allow_null": "0"
+        },
+        "field_location_building_floor": {
+			"key": "field_location_building_floor",
+			"label": "Building Floor",
+			"name": "location_building_floor",
+			"type": "select",
+			"instructions": "Select the floor of the building where the patient would first check in.",
+			"required": "1",
+			"conditional_logic": "0",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+				"": "(Select an option)",
+				"0": "Single-Story Building",
+				"-1": "Basement",
+				"G": "Ground Floor",
+				"1": "First Floor",
+				"2": "Second Floor",
+				"3": "Third Floor",
+				"4": "Fourth Floor",
+				"5": "Fifth Floor",
+				"6": "Sixth Floor",
+				"7": "Seventh Floor",
+				"8": "Eighth Floor",
+				"9": "Ninth Floor",
+				"10": "Tenth Floor",
+				"11": "Eleventh Floor",
+				"12": "Twelfth Floor",
+				"13": "Thirteenth Floor",
+				"14": "Fourteenth Floor",
+				"15": "Fifteenth Floor",
+				"16": "Sixteenth Floor",
+				"17": "Seventeenth Floor",
+				"18": "Eighteenth Floor",
+				"19": "Nineteenth Floor",
+				"20": "Twentieth Floor"
+            },
+			"default_value": "false",
+			"allow_null": "0",
+			"multiple": "0",
+			"ui": "0",
+			"return_format": "array",
+			"ajax": "0",
+			"placeholder": ""
+        },
+        "field_location_suite": {
+			"key": "field_location_suite",
+			"label": "Suite or other unit",
+			"name": "location_suite",
+			"type": "text",
+			"instructions": "Do not just include the number. Example: enter \"Suite 1A\" not just \"1A.\"",
+			"required": "0",
+			"conditional_logic": "0",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+        },
         "field_location_city": {
             "key": "field_location_city",
             "name": "location_city",
             "type": "text",
             "label": "City",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
@@ -166,7 +257,7 @@
             "type": "select",
             "label": "State",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "30",
@@ -240,9 +331,9 @@
             "key": "field_location_zip",
             "name": "location_zip",
             "type": "maskfield",
-            "label": "Zip",
+            "label": "ZIP Code",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "20",
@@ -250,8 +341,8 @@
                 "id": ""
             },
             "input_mask": "99999[-999]",
-            "default_value": 72205,
-            "placeholder": 72205,
+            "default_value": "",
+            "placeholder": "",
             "prepend": "",
             "append": "",
             "maxlength": ""
@@ -280,7 +371,7 @@
             "type": "taxonomy",
             "label": "Region",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
@@ -289,7 +380,7 @@
             },
             "taxonomy": "region",
             "field_type": "radio",
-            "allow_null": 0,
+            "allow_null": 1,
             "add_term": 0,
             "save_terms": 1,
             "load_terms": 1,
