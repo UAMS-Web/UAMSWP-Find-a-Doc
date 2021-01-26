@@ -402,7 +402,6 @@ function display_provider_image() {
 
                         // Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)
                             echo '<td data-gmb-column="Accessibility: Wheelchair accessible elevat  or (has_wheelchair_accessible_elevator)" class="no-break">';
-                            echo $location_gmb_wheelchair_elevator . '<br />';
                             if (!empty($location_gmb_wheelchair_elevator)) {
                                 echo $location_gmb_wheelchair_elevator;
                             } else {
