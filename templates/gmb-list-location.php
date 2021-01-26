@@ -74,6 +74,8 @@ function display_provider_image() {
                         <th class="no-break">Administrative area</th>
                         <th class="no-break">Country / Region</th>
                         <th class="no-break">Postal code</th>
+                        <th class="no-break">Latitude</th>
+                        <th class="no-break">Longitude</th>
                         <th class="no-break">Primary phone</th>
                         <th class="no-break">Additional phones</th>
                         <th class="no-break">Website</th>
@@ -185,6 +187,9 @@ function display_provider_image() {
                     $location_gmb_temp_staff = get_field( 'requires_temperature_check_staff', $location_post_id );
                     $location_gmb_masks_staff = get_field( 'requires_masks_staff', $location_post_id );
                     $location_gmb_sanitizing = get_field( 'is_sanitizing_between_customers', $location_post_id );
+                    $location_map = get_field( 'location_map', $location_post_id );
+                    $location_latitude = $location_map['lat'];
+                    $location_longitude = $location_map['lng'];
 
                     // Create the table
         
@@ -247,6 +252,16 @@ function display_provider_image() {
                         // Postal code
                             echo '<td data-gmb-column="Postal code" class="no-break">';
                             echo $location_zip ? $location_zip : '';
+                            echo '</td>';
+
+                        // Latitude
+                            echo '<td data-gmb-column="Latitude" class="no-break">';
+                            echo $location_latitude ? $location_latitude : '';
+                            echo '</td>';
+
+                        // Longitude
+                            echo '<td data-gmb-column="Longitude" class="no-break">';
+                            echo $location_longitude ? $location_longitude : '';
                             echo '</td>';
 
                         // Primary phone
