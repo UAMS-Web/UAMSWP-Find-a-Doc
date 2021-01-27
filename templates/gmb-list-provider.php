@@ -249,24 +249,54 @@ function display_provider_image() {
                                             $location_floor_value = $location_floor['value'];
                                             $location_floor_label = $location_floor['choices'][ $location_floor_value ];
                                         $location_suite = get_field('location_suite', $location_post_id );
-                                        $location_addresses = [];
-                                        if ( $location_building ) {
-                                            array_push($location_addresses, $building_name);
-                                        }
-                                        if ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ) {
-                                            array_push($location_addresses, $location_floor_label);
-                                        }
-                                        if ( $location_suite ) {
-                                            array_push($location_addresses, $location_suite);
-                                        }
-                                        $location_address_2 = $location_addresses[0];
-                                        $location_address_3 = $location_addresses[1];
-                                        $location_address_4 = $location_addresses[2];
-                                        $location_address_5 = '';
-                                        $location_address_2_deprecated = get_field('location_address_2', $location_post_id );
-                                        if (!$location_address_2) {
-                                            $location_address_2 = $location_address_2_deprecated;
-                                        }
+                    
+                                            // Option 1: 
+                                            // Address Line 1 = Street address (covered above)
+                                            // Address Line 2+ = Cascading options based on presence of values...
+                                            //   Building Name
+                                            //   Building Floor Number
+                                            //   Suite Number
+
+                                            // $location_addresses = [];
+                                            // if ( $location_building && $building_slug != '_none' ) {
+                                            //     array_push($location_addresses, $building_name);
+                                            // }
+                                            // if ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ) {
+                                            //     array_push($location_addresses, $location_floor_label);
+                                            // }
+                                            // if ( $location_suite && !empty($location_suite) ) {
+                                            //     array_push($location_addresses, $location_suite);
+                                            // }
+                                            // $location_address_2 = $location_addresses[0];
+                                            // $location_address_3 = $location_addresses[1];
+                                            // $location_address_4 = $location_addresses[2];
+                                            // $location_address_5 = $location_addresses[3];
+                                            // $location_address_2_deprecated = get_field('location_address_2', $location_post_id );
+                                            // if (!$location_address_2) {
+                                            //     $location_address_2 = $location_address_2_deprecated;
+                                            // }
+                    
+                                            // Option 2: 
+                                            // Address Line 1 = Street address (covered above)
+                                            // Address Line 2+ = Cascading options based on presence of values...
+                                            //   Building Name
+                                            //   Top-Level Location Name
+                                            //   Child Location Name
+                    
+                                            $location_addresses = [];
+                                            if ( $location_building && $building_slug != '_none' ) {
+                                                array_push($location_addresses, $building_name);
+                                            }
+                                            if ( !$location_has_parent ) {
+                                                array_push($location_addresses, $location_title);
+                                            } else {
+                                                array_push($location_addresses, $location_parent_title, $location_title);
+                                            }
+                                            $location_address_2 = $location_addresses[0];
+                                            $location_address_3 = $location_addresses[1];
+                                            $location_address_4 = $location_addresses[2];
+                                            $location_address_5 = $location_addresses[3];
+                                        
                                         $location_city = get_field( 'location_city', $location_post_id );
                                         $location_state = get_field( 'location_state', $location_post_id );
                                         $location_zip = get_field( 'location_zip', $location_post_id );
