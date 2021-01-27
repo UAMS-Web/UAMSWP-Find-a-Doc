@@ -74,6 +74,8 @@ function display_provider_image() {
                         <th class="no-break">Administrative area</th>
                         <th class="no-break">Country / Region</th>
                         <th class="no-break">Postal code</th>
+                        <th class="no-break">Latitude</th>
+                        <th class="no-break">Longitude</th>
                         <th class="no-break">Primary phone</th>
                         <th class="no-break">Additional phones</th>
                         <th class="no-break">Website</th>
@@ -89,14 +91,15 @@ function display_provider_image() {
                         <th class="no-break">Special hours</th>
                         <th class="no-break">From the business</th>
                         <th class="no-break">Opening date</th>
+                        <th class="no-break">Logo photo</th>
+                        <th class="no-break">Cover photo</th>
+                        <th class="no-break">Other photos</th>
                         <th class="no-break">Labels</th>
                         <th class="no-break">AdWords location extensions phone</th>
                         <th class="no-break">Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)</th>
                         <th class="no-break">Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)</th>
-                        <th class="no-break">Accessibility: Wheelchair accessible parking lot (has_wheelchair_accessible_parking)</th>
                         <th class="no-break">Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)</th>
                         <th class="no-break">Amenities: Restroom (has_restroom)</th>
-                        <th class="no-break">Amenities: Wi-Fi (wi_fi)</th>
                         <th class="no-break">From the business: Identifies as Black-owned (is_black_owned)</th>
                         <th class="no-break">From the business: Identifies as veteran-led (is_owned_by_veterans)</th>
                         <th class="no-break">From the business: Identifies as women-led (is_owned_by_women)</th>
@@ -137,26 +140,113 @@ function display_provider_image() {
                 <tbody>
                 <?php 
                 while( $query->have_posts() ) : $query->the_post();
-                    $post_id = get_the_ID();
+                    // Parent Location 
+                    $location_post_id = get_the_ID();
+                    $location_child_id = get_the_ID();
+                    $location_has_parent = get_field('location_parent',$location_post_id);
+                    $location_parent_id = get_field('location_parent_id',$location_post_id);
+                    $location_parent_title = ''; // Eliminate PHP errors
+                    $location_parent_url = ''; // Eliminate PHP errors
+                    $location_parent_location = ''; // Eliminate PHP errors
+                    if ($location_has_parent && $location_parent_id) { 
+                        $location_parent_location = get_post( $location_parent_id );
+                    }
+                    // Get Post ID for Address & Image fields
+                    if ($location_parent_location) {
+                        $location_post_id = $location_parent_location->ID;
+                        $location_parent_title = $location_parent_location->post_title;
+                        $location_parent_url = get_permalink( $location_post_id );
+                    }
 
                     // COVID-19 Restrictions
                     // Set to true if COVID-19 restrictions are still in place.
                     $covid19 = true;
 
                     // Get slug
-                    $location_slug = get_post_field( 'post_name', $post_id );
+                    $store_code = ( $location_parent_location ? get_post_field( 'post_name', $location_post_id ) . '_' : '' ) . get_post_field( 'post_name', $location_child_id );
+                    $location_slug = ( $location_parent_location ? get_post_field( 'post_name', $location_post_id ) . '/' : '' ) . get_post_field( 'post_name', $location_child_id );
                         
                     // Create location variables
-                    $location_title = get_the_title( $post_id );
-                    $location_address_1 = get_field( 'location_address_1', $post_id );
-                    $location_address_2 = get_field( 'location_address_2', $post_id );
-                    $location_city = get_field( 'location_city', $post_id );
-                    $location_state = get_field( 'location_state', $post_id );
-                    $location_zip = get_field( 'location_zip', $post_id );
-                    $location_phone = get_field( 'location_phone', $post_id );
-                    $location_fax = get_field( 'location_fax', $post_id );
-                    $location_hours_group = get_field('location_hours_group', $post_id );
+                    $location_title = get_the_title( $location_child_id );
+                    $location_address_1 = get_field( 'location_address_1', $location_post_id );
+                    $location_building = get_field('location_building', $location_post_id );
+                    if ($location_building) {
+                        $building = get_term($location_building, "building");
+                        $building_slug = $building->slug;
+                        $building_name = $building->name;
+                    }
+                    $location_floor = get_field_object('location_building_floor', $location_post_id );
+                        $location_floor_value = $location_floor['value'];
+                        $location_floor_label = $location_floor['choices'][ $location_floor_value ];
+                    $location_suite = get_field('location_suite', $location_post_id );
+
+                        // Option 1: 
+                        // Address Line 1 = Street address (covered above)
+                        // Address Line 2+ = Cascading options based on presence of values...
+                        //   Building Name
+                        //   Building Floor Number
+                        //   Suite Number
+
+                        $location_addresses = [];
+                        if ( $location_building && $building_slug != '_none' ) {
+                            array_push($location_addresses, $building_name);
+                        }
+                        if ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ) {
+                            array_push($location_addresses, $location_floor_label);
+                        }
+                        if ( $location_suite && !empty($location_suite) ) {
+                            array_push($location_addresses, $location_suite);
+                        }
+                        $location_address_2 = $location_addresses[0];
+                        $location_address_3 = $location_addresses[1];
+                        $location_address_4 = $location_addresses[2];
+                        $location_address_5 = $location_addresses[3];
+                        $location_address_2_deprecated = get_field('location_address_2', $location_post_id );
+                        if (!$location_address_2) {
+                            $location_address_2 = $location_address_2_deprecated;
+                        }
+
+                        // Option 2: 
+                        // Address Line 1 = Street address (covered above)
+                        // Address Line 2+ = Cascading options based on presence of values...
+                        //   Building Name
+                        //   Top-Level Location Name
+                        //   Child Location Name
+
+                        // $location_addresses = [];
+                        // if ( $location_building && $building_slug != '_none' ) {
+                        //     array_push($location_addresses, $building_name);
+                        // }
+                        // if ( !$location_has_parent ) {
+                        //     array_push($location_addresses, $location_title);
+                        // } else {
+                        //     array_push($location_addresses, $location_parent_title, $location_title);
+                        // }
+                        // $location_address_2 = $location_addresses[0];
+                        // $location_address_3 = $location_addresses[1];
+                        // $location_address_4 = $location_addresses[2];
+                        // $location_address_5 = $location_addresses[3];
+                    
+                    $location_city = get_field( 'location_city', $location_post_id );
+                    $location_state = get_field( 'location_state', $location_post_id );
+                    $location_zip = get_field( 'location_zip', $location_post_id );
+                    $location_phone = get_field( 'location_phone', $location_child_id );
+                    $location_fax = get_field( 'location_fax', $location_child_id );
+                    $location_hours_group = get_field('location_hours_group', $location_child_id );
                     $location_telemed_query = $location_hours_group['location_telemed_query'];
+                    $location_gmb_wheelchair_elevator = get_field( 'has_wheelchair_accessible_elevator', $location_post_id );
+                    $location_gmb_wheelchair_entrance = get_field( 'has_wheelchair_accessible_entrance', $location_post_id );
+                    $location_gmb_wheelchair_restroom = get_field( 'has_wheelchair_accessible_restroom', $location_post_id );
+                    $location_gmb_restroom = get_field( 'has_restroom', $location_post_id );
+                    $location_gmb_appointments = get_field( 'requires_appointments', $location_post_id );
+                    $location_gmb_temp_customers = get_field( 'requires_temperature_check_customers', $location_post_id );
+                    $location_gmb_masks_customers = get_field( 'requires_masks_customers', $location_post_id );
+                    $location_gmb_temp_staff = get_field( 'requires_temperature_check_staff', $location_post_id );
+                    $location_gmb_masks_staff = get_field( 'requires_masks_staff', $location_post_id );
+                    $location_gmb_sanitizing = get_field( 'is_sanitizing_between_customers', $location_post_id );
+                    $location_map = get_field( 'location_map', $location_post_id );
+                    $location_latitude = $location_map['lat'];
+                    $location_longitude = $location_map['lng'];
 
                     // Create the table
         
@@ -167,36 +257,36 @@ function display_provider_image() {
 
                             // Option 1: Provider slug plus numeral
                             echo '<td data-gmb-column="Store code" class="no-break">';
-                            echo $location_slug;
+                            echo $store_code;
                             echo '</td>';
 
                         // Business name
                             echo '<td data-gmb-column="Business name" class="no-break">UAMS Health - ' . $location_title . '</td>';
 
                         // Address line 1
-
-
                             echo '<td data-gmb-column="Address line 1" class="no-break">';
                             echo $location_address_1 ? $location_address_1 : '';
                             echo '</td>';
 
                         // Address line 2
-                        // Intentionally left blank for now. Line 2 isn't separated with a comma when displayed in Google.
                             echo '<td data-gmb-column="Address line 2" class="no-break">';
-                            //echo $location_address_2 ? $location_address_2 : '';
+                            echo ( $location_address_2 && !empty($location_address_2) ) ? $location_address_2 : '';
                             echo '</td>';
 
                         // Address line 3
-                        // Intentionally left blank
-                            echo '<td data-gmb-column="Address line 3" class="no-break"></td>';
+                            echo '<td data-gmb-column="Address line 3" class="no-break">';
+                            echo ( $location_address_3 && !empty($location_address_3) ) ? $location_address_3 : '';
+                            echo '</td>';
 
                         // Address line 4
-                        // Intentionally left blank
-                            echo '<td data-gmb-column="Address line 4" class="no-break"></td>';
+                            echo '<td data-gmb-column="Address line 4" class="no-break">';
+                            echo ( $location_address_4 && !empty($location_address_4) ) ? $location_address_4 : '';
+                            echo '</td>';
 
                         // Address line 5
-                        // Intentionally left blank
-                            echo '<td data-gmb-column="Address line 5" class="no-break"></td>';
+                            echo '<td data-gmb-column="Address line 5" class="no-break">';
+                            echo ( $location_address_5 && !empty($location_address_5) ) ? $location_address_5 : '';
+                            echo '</td>';
 
                         // Sub-locality
                         // Intentionally left blank
@@ -220,6 +310,16 @@ function display_provider_image() {
                             echo $location_zip ? $location_zip : '';
                             echo '</td>';
 
+                        // Latitude
+                            echo '<td data-gmb-column="Latitude" class="no-break">';
+                            echo $location_latitude ? $location_latitude : '';
+                            echo '</td>';
+
+                        // Longitude
+                            echo '<td data-gmb-column="Longitude" class="no-break">';
+                            echo $location_longitude ? $location_longitude : '';
+                            echo '</td>';
+
                         // Primary phone
                             echo '<td data-gmb-column="Primary phone" class="no-break">';
                             echo $location_phone ? $location_phone : '';
@@ -231,7 +331,7 @@ function display_provider_image() {
 
                         // Website
                             echo '<td data-gmb-column="Website" class="no-break">';
-                            echo 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=profile';
+                            echo 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=profile&amp;utm_specs=' . $store_code;
                             echo '</td>';
 
                         // Primary category
@@ -284,8 +384,8 @@ function display_provider_image() {
 
                         // From the business
                             $excerpt = '';
-                            $descr = get_field('location_about',$post_id);
-                            $descr_short = get_field('location_short_desc',$post_id);
+                            $descr = get_field('location_about',$location_post_id);
+                            $descr_short = get_field('location_short_desc',$location_post_id);
 
                             if (empty($excerpt)){
                                 if ($descr_short){
@@ -304,8 +404,64 @@ function display_provider_image() {
                         // Intentionally left blank
                             echo '<td data-gmb-column="Opening date" class="no-break"></td>';
 
+                        // Logo photo
+                        // Intentionally left blank
+                            echo '<td data-gmb-column="Logo photo" class="no-break"></td>';
+
+                        // Cover photo
+                        
+                            // Image values
+                            $featured_image = get_post_thumbnail_id($location_post_id);
+                            $featured_img_url = get_the_post_thumbnail_url($location_post_id,'full');
+                            $override_parent_photo = get_field('location_image_override_parent',$location_child_id);
+                            $override_parent_photo_featured = get_field('location_image_override_parent_featured',$location_child_id);
+                            $override_parent_photo_wayfinding = get_field('location_image_override_parent_wayfinding',$location_child_id);
+                            $override_parent_photo_gallery = get_field('location_image_override_parent_gallery',$location_child_id);
+                            // if ($override_parent_photo && $location_parent_location) { // If child location & override is true
+                            if ($override_parent_photo && $location_parent_location && $override_parent_photo_wayfinding) {
+                                $wayfinding_photo = get_field('location_wayfinding_photo',$location_child_id);
+                            } else { // Use parent/standard images
+                                $wayfinding_photo = get_field('location_wayfinding_photo',$location_post_id);
+                            }
+                            if ($override_parent_photo && $location_parent_location && $override_parent_photo_gallery) {
+                                $photo_gallery = get_field('location_photo_gallery',$location_child_id);
+                            } else { // Use parent/standard images
+                                $photo_gallery = get_field('location_photo_gallery',$location_post_id);
+                            }
+
+                            $location_images = array();
+                            if ($featured_image && !empty($featured_image)) {
+                                $location_images[] = $featured_image;
+                            }
+                            if ($wayfinding_photo && !empty($wayfinding_photo)) {
+                                $location_images[] = $wayfinding_photo;
+                            }
+                            if ($photo_gallery && !empty($photo_gallery)) {
+                                foreach( $photo_gallery as $photo_gallery_image ) {
+                                    $location_images[] = $photo_gallery_image;
+                                }
+                            }
+                            $location_images = array_unique($location_images);
+                            $location_images_count = count($location_images);
+
+                            echo '<td data-gmb-column="Cover photo" class="no-break">';
+                            // echo wp_get_attachment_image_url($location_images[0], 'full');
+                            echo '</td>';
+
+                        // Other photos
+                            echo '<td data-gmb-column="Other photos" class="no-break">';
+                            // if ( $location_images_count > 1 ) {
+                            //     $p = 1;
+                            //     foreach( $location_images as $location_images_item ) {
+                            //         echo wp_get_attachment_image_url($location_images[$p], 'full');
+                            //         echo $p < $location_images_count ? ',' : '';
+                            //         $p++;
+                            //     } // endforeach
+                            // }
+                            echo '</td>';
+
                         // Labels
-                            $region = get_term( get_field('location_region',$post_id), 'region' )->name;
+                            $region = get_term( get_field('location_region',$location_post_id), 'region' )->name;
 
                             echo '<td data-gmb-column="Labels" class="no-break">';
                             echo $region ? $region : '';
@@ -316,22 +472,40 @@ function display_provider_image() {
                             echo '<td data-gmb-column="AdWords location extensions phone" class="no-break"></td>';
 
                         // Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)
-                            echo '<td data-gmb-column="Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)" class="no-break">Yes</td>';
+                            echo '<td data-gmb-column="Accessibility: Wheelchair accessible elevat  or (has_wheelchair_accessible_elevator)" class="no-break">';
+                            if (!empty($location_gmb_wheelchair_elevator)) {
+                                echo $location_gmb_wheelchair_elevator;
+                            } else {
+                                echo 'Yes';
+                            }
+                            echo '</td>';
 
                         // Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)
-                            echo '<td data-gmb-column="Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)" class="no-break">Yes</td>';
-
-                        // Accessibility: Wheelchair accessible parking lot (has_wheelchair_accessible_parking)
-                            echo '<td data-gmb-column="Accessibility: Wheelchair accessible parking lot (has_wheelchair_accessible_parking)" class="no-break">[NOT APPLICABLE]</td>';
+                            echo '<td data-gmb-column="Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)" class="no-break">';
+                            if (!empty($location_gmb_wheelchair_entrance)) {
+                                echo $location_gmb_wheelchair_entrance;
+                            } else {
+                                echo 'Yes';
+                            }
+                            echo '</td>';
 
                         // Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)
-                            echo '<td data-gmb-column="Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)" class="no-break">Yes</td>';
+                            echo '<td data-gmb-column="Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)" class="no-break">';
+                            if (!empty($location_gmb_wheelchair_restroom)) {
+                                echo $location_gmb_wheelchair_restroom;
+                            } else {
+                                echo 'Yes';
+                            }
+                            echo '</td>';
 
                         // Amenities: Restroom (has_restroom)
-                            echo '<td data-gmb-column="Amenities: Restroom (has_restroom)" class="no-break">Yes</td>';
-
-                        // Amenities: Wi-Fi (wi_fi)
-                            echo '<td data-gmb-column="Amenities: Wi-Fi (wi_fi)" class="no-break">[NOT APPLICABLE]</td>';
+                            echo '<td data-gmb-column="Amenities: Restroom (has_restroom)" class="no-break">';
+                            if (!empty($location_gmb_restroom)) {
+                                echo $location_gmb_restroom;
+                            } else {
+                                echo 'Yes';
+                            }
+                            echo '</td>';
 
                         // From the business: Identifies as Black-owned (is_black_owned)
                         // Intentionally left blank
@@ -346,14 +520,29 @@ function display_provider_image() {
                             echo '<td data-gmb-column="From the business: Identifies as women-led (is_owned_by_women)" class="no-break"></td>';
 
                         // Health &amp; safety: Appointment required (requires_appointments)
-                        // Intentionally left blank for now
                             echo '<td data-gmb-column="Health &amp; safety: Appointment required (requires_appointments)" class="no-break">';
-                            //echo $covid19 ?  'Yes' : '';
+                            if ( $covid19 ) {
+                                if (!empty($location_gmb_appointments)) {
+                                    echo $location_gmb_appointments;
+                                } else {
+                                    echo '';
+                                }
+                            } else {
+                                echo '';
+                            }
                             echo '</td>';
 
                         // Health &amp; safety: Mask required (requires_masks_customers)
                             echo '<td data-gmb-column="Health &amp; safety: Mask required (requires_masks_customers)" class="no-break">';
-                            echo $covid19 ?  'Yes' : '';
+                            if ( $covid19 ) {
+                                if (!empty($location_gmb_masks_customers)) {
+                                    echo $location_gmb_masks_customers;
+                                } else {
+                                    echo 'Yes';
+                                }
+                            } else {
+                                echo 'No';
+                            }
                             echo '</td>';
 
                         // Health &amp; safety: Safety dividers at checkout (has_plexiglass_at_checkout)
@@ -361,22 +550,54 @@ function display_provider_image() {
 
                         // Health &amp; safety: Staff get temperature checks (requires_temperature_check_staff)
                             echo '<td data-gmb-column="Health &amp; safety: Staff get temperature checks (requires_temperature_check_staff)" class="no-break">';
-                            echo $covid19 ?  'Yes' : '';
+                            if ( $covid19 ) {
+                                if (!empty($location_gmb_temp_staff)) {
+                                    echo $location_gmb_temp_staff;
+                                } else {
+                                    echo 'Yes';
+                                }
+                            } else {
+                                echo 'No';
+                            }
                             echo '</td>';
 
                         // Health &amp; safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)
                             echo '<td data-gmb-column="Health &amp; safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)" class="no-break">';
-                            echo $covid19 ?  'Yes' : '';
+                            if ( $covid19 ) {
+                                if (!empty($location_gmb_sanitizing)) {
+                                    echo $location_gmb_sanitizing;
+                                } else {
+                                    echo 'Yes';
+                                }
+                            } else {
+                                echo 'No';
+                            }
                             echo '</td>';
 
                         // Health &amp; safety: Staff wear masks (requires_masks_staff)
                             echo '<td data-gmb-column="Health &amp; safety: Staff wear masks (requires_masks_staff)" class="no-break">';
-                            echo $covid19 ?  'Yes' : '';
+                            if ( $covid19 ) {
+                                if (!empty($location_gmb_masks_staff)) {
+                                    echo $location_gmb_masks_staff;
+                                } else {
+                                    echo 'Yes';
+                                }
+                            } else {
+                                echo 'No';
+                            }
                             echo '</td>';
 
                         // Health &amp; safety: Temperature check required (requires_temperature_check_customers)
                             echo '<td data-gmb-column="Health &amp; safety: Temperature check required (requires_temperature_check_customers)" class="no-break">';
-                            echo $covid19 ?  'Yes' : '';
+                            if ( $covid19 ) {
+                                if (!empty($location_gmb_temp_customers)) {
+                                    echo $location_gmb_temp_customers;
+                                } else {
+                                    echo 'Yes';
+                                }
+                            } else {
+                                echo 'No';
+                            }
                             echo '</td>';
 
                         // Offerings: Passport photos (has_onsite_passport_photos)
@@ -421,7 +642,7 @@ function display_provider_image() {
 
                         // Place page URLs: COVID-19 info link (url_covid_19_info_page)
                             echo '<td data-gmb-column="Place page URLs: COVID-19 info link (url_covid_19_info_page)" class="no-break">';
-                            echo 'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=covid-19-info-link';
+                            echo 'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=covid-19-info-link&amp;utm_specs=' . $store_code;
                             echo '</td>';
 
                         // Place page URLs: Menu link (url_menu)
@@ -429,7 +650,7 @@ function display_provider_image() {
 
                         // Place page URLs: Virtual care link (url_facility_telemedicine_page)
                             echo '<td data-gmb-column="Place page URLs: Virtual care link (url_facility_telemedicine_page)" class="no-break">';
-                            echo $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=virtual-care-link' : '';
+                            echo $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=virtual-care-link&amp;utm_specs=' . $store_code : '';
                             echo '</td>';
 
                         // Planning: LGBTQ friendly (welcomes_lgbtq)
