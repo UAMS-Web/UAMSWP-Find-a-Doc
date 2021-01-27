@@ -231,8 +231,8 @@ function display_provider_image() {
                                                 $primary_appointment_floor_label = $primary_appointment_floor['choices'][ $primary_appointment_floor_value ];
                                             $primary_appointment_suite = get_field('location_suite', $location );
                                             $primary_appointment_address_2 =
-                                                ( $primary_appointment_building ? $building_name . ( ( ($primary_appointment_floor && $primary_appointment_floor_value) || $primary_appointment_suite ) ? ', ' : '' ) : '' )
-                                                . ( $primary_appointment_floor && !empty($primary_appointment_floor_value) && $primary_appointment_floor_value != "0" ? $primary_appointment_floor_label . ( ( $primary_appointment_suite ) ? ', ' : '' ) : '' )
+                                                ( ( $primary_appointment_building && $building_slug != '_none' ) ? $building_name . ( ( ($primary_appointment_floor && $primary_appointment_floor_value) || $primary_appointment_suite ) ? '<br />' : '' ) : '' )
+                                                . ( $primary_appointment_floor && !empty($primary_appointment_floor_value) && $primary_appointment_floor_value != "0" ? $primary_appointment_floor_label . ( ( $primary_appointment_suite ) ? '<br />' : '' ) : '' )
                                                 . ( $primary_appointment_suite ? $primary_appointment_suite : '' );
                                             $primary_appointment_address_2_deprecated = get_field('location_address_2', $location );
                                             if (!$primary_appointment_address_2) {
