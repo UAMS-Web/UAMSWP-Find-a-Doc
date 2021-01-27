@@ -326,10 +326,10 @@ while ( have_posts() ) : the_post(); ?>
 						// Schema data
 						$location_schema = '"address": {
 						"@type": "PostalAddress",
-						"streetAddress": "'. get_field('location_address_1' ) . ' '. $location_address_2_schema .'",
-						"addressLocality": "'. get_field('location_city') .'",
-						"addressRegion": "'. get_field('location_state' ) .'",
-						"postalCode": "'. get_field('location_zip') .'"
+						"streetAddress": "'. $location_address_1 . ' '. $location_address_2_schema .'",
+						"addressLocality": "'. $location_city .'",
+						"addressRegion": "'. $location_state .'",
+						"postalCode": "'. $location_zip .'"
 						},
 						';
 						$phone_schema = '';
