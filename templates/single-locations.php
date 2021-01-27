@@ -264,6 +264,7 @@ while ( have_posts() ) : the_post(); ?>
 
 	$location_address_2_deprecated = get_field('location_address_2', $post_id );
 	if (!$location_address_2) {
+        $location_address_2 = $location_address_2_deprecated;
 		$location_address_2_schema = $location_address_2_deprecated;
 	}
 
