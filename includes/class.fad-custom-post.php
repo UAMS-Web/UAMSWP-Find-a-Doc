@@ -1814,7 +1814,7 @@ function create_building_taxonomy() {
 	$rewrite = array(
 		'slug'                       => 'building',
 		'with_front'                 => false,
-		'hierarchical'               => true,
+		'hierarchical'               => false,
 	);
 	$capabilities = array(
 		'manage_terms'               => 'manage_options',
