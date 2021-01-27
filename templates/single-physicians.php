@@ -648,90 +648,6 @@ while ( have_posts() ) : the_post();
                 </div>
             </section>
         <?php } ?>
-        <?php // load all 'conditions' terms for the post
-            $title_append = ' by ' . $short_name;
-             
-            // Conditions CPT
-            $args = (array(
-                'post_type' => "condition",
-                'post_status' => 'publish',
-                'orderby' => 'title',
-                'order' => 'ASC',
-                'posts_per_page' => -1,
-                'post__in' => $conditions_cpt
-            ));
-            $conditions_cpt_query = new WP_Query( $args );
-            // $condition_schema = '';
-            // we will use the first term to load ACF data from
-            if( $conditions_cpt && $conditions_cpt_query->posts ):
-                include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
-                $condition_schema .= ',"medicalSpecialty": [';
-                foreach( $conditions_cpt_query->posts as $condition ):
-                    $condition_schema .= '{
-                    "@type": "MedicalSpecialty",
-                    "name": "'. $condition->post_title .'",
-                    "url":"'. get_the_permalink( $condition->ID ) .'"
-                    },';
-                endforeach;
-                $condition_schema .= '"" ]';
-            endif; 
-
-            // Treatments CPT
-            $args = (array(
-                'post_type' => "treatment",
-                'post_status' => 'publish',
-                'orderby' => 'title',
-                'order' => 'ASC',
-                'posts_per_page' => -1,
-                'post__in' => $treatments_cpt
-            ));
-            $treatments_cpt_query = new WP_Query( $args );
-            if( $treatments_cpt && $treatments_cpt_query->posts ):
-                include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
-                $treatment_schema .= ',"medicalSpecialty": [';
-                foreach( $treatments_cpt_query->posts as $treatment ):
-                    $treatment_schema .= '{
-                    "@type": "MedicalSpecialty",
-                    "name": "'. $treatment->post_title .'",
-                    "url":"'. get_the_permalink( $treatment->ID ) .'"
-                    },';
-                endforeach;
-                $treatment_schema .= '"" ]';
-            endif; 
-        
-        $expertise_valid = false;
-        if( $expertises ):
-	        foreach( $expertises as $expertise ) {
-	            if ( get_post_status ( $expertise ) == 'publish' ) {
-	                $expertise_valid = true;
-                    break;
-	            }
-	        }
-	        if ( $expertise_valid ) {
-	        ?>
-	            <section class="uams-module expertise-list bg-auto" id="expertise">
-	                <div class="container-fluid">
-	                    <div class="row">
-	                        <div class="col-12">
-	                            <h2 class="module-title"><?php echo $short_name_possessive; ?> Areas of Expertise</h2>
-	                            <div class="card-list-container">
-	                                <div class="card-list">
-                                        <?php foreach( $expertises as $expertise ) {
-                                            $id = $expertise;
-                                            if ( get_post_status ( $expertise ) == 'publish' ) {
-                                                include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-                                            }
-                                        } ?>
-                                    </div>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </section>
-	        <?php
-	        }
-        endif;
-        ?>
         <?php 
             $physician_academic_split = false;
             if ( $academic_bio && ( $academic_appointment || $academic_admin_title || $education || $boards ) ) {
@@ -902,6 +818,90 @@ while ( have_posts() ) : the_post();
             </div>
         </section>
         <?php endif; ?>
+        <?php // load all 'conditions' terms for the post
+            $title_append = ' by ' . $short_name;
+             
+            // Conditions CPT
+            $args = (array(
+                'post_type' => "condition",
+                'post_status' => 'publish',
+                'orderby' => 'title',
+                'order' => 'ASC',
+                'posts_per_page' => -1,
+                'post__in' => $conditions_cpt
+            ));
+            $conditions_cpt_query = new WP_Query( $args );
+            // $condition_schema = '';
+            // we will use the first term to load ACF data from
+            if( $conditions_cpt && $conditions_cpt_query->posts ):
+                include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
+                $condition_schema .= ',"medicalSpecialty": [';
+                foreach( $conditions_cpt_query->posts as $condition ):
+                    $condition_schema .= '{
+                    "@type": "MedicalSpecialty",
+                    "name": "'. $condition->post_title .'",
+                    "url":"'. get_the_permalink( $condition->ID ) .'"
+                    },';
+                endforeach;
+                $condition_schema .= '"" ]';
+            endif; 
+
+            // Treatments CPT
+            $args = (array(
+                'post_type' => "treatment",
+                'post_status' => 'publish',
+                'orderby' => 'title',
+                'order' => 'ASC',
+                'posts_per_page' => -1,
+                'post__in' => $treatments_cpt
+            ));
+            $treatments_cpt_query = new WP_Query( $args );
+            if( $treatments_cpt && $treatments_cpt_query->posts ):
+                include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
+                $treatment_schema .= ',"medicalSpecialty": [';
+                foreach( $treatments_cpt_query->posts as $treatment ):
+                    $treatment_schema .= '{
+                    "@type": "MedicalSpecialty",
+                    "name": "'. $treatment->post_title .'",
+                    "url":"'. get_the_permalink( $treatment->ID ) .'"
+                    },';
+                endforeach;
+                $treatment_schema .= '"" ]';
+            endif; 
+        
+        $expertise_valid = false;
+        if( $expertises ):
+	        foreach( $expertises as $expertise ) {
+	            if ( get_post_status ( $expertise ) == 'publish' ) {
+	                $expertise_valid = true;
+                    break;
+	            }
+	        }
+	        if ( $expertise_valid ) {
+	        ?>
+	            <section class="uams-module expertise-list bg-auto" id="expertise">
+	                <div class="container-fluid">
+	                    <div class="row">
+	                        <div class="col-12">
+	                            <h2 class="module-title"><?php echo $short_name_possessive; ?> Areas of Expertise</h2>
+	                            <div class="card-list-container">
+	                                <div class="card-list">
+                                        <?php foreach( $expertises as $expertise ) {
+                                            $id = $expertise;
+                                            if ( get_post_status ( $expertise ) == 'publish' ) {
+                                                include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+                                            }
+                                        } ?>
+                                    </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </section>
+	        <?php
+	        }
+        endif;
+        ?>
         <?php 
         if( $locations && $location_valid ): ?>
         <section class="uams-module location-list bg-auto" id="locations">
