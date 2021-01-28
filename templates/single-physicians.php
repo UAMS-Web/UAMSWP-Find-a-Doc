@@ -266,100 +266,13 @@ while ( have_posts() ) : the_post();
                             <span class="subtitle"><?php echo ($phys_title_name ? $phys_title_name : ''); ?></span>
                         <?php } ?>
                     </h1>
-                    <h2 class="sr-only">Overview</h2>
-                    <dl>
-                    <?php  // Display if they will provide second opinions    
-                    if ($second_opinion) { ?>
-                        <dt>Provides Second Opinion</dt>
-                        <dd>Yes</dd>
-                    <?php } ?>
-                    <?php // Display all patient types
-                        if( $patients ): 
-                        ?>
-                            <dt>Patient Type<?php echo( count($patients) > 1 ? 's' : '' );?></dt>
-                            <?php foreach( $patients as $patient ): ?>
-                                <?php $patient_name = get_term( $patient, 'patient_type');
-                                    echo '<dd>' . $patient_name->name . '</dd>';
-                                ?>
-                            <?php endforeach; ?>
-                    <?php endif; ?>
-                    <?php // Display all languages
-                        if( $languages && $language_list == 'English') { 
-                        ?>
-                        <dt class="sr-only">Language</dt>
-                        <?php echo '<dd class="sr-only">' . $language_list . '</dd>';?>
-                    <?php } else { ?>
-                        <dt>Language<?php echo( $language_count > 1 ? 's' : '' );?></dt>
-                        <?php echo '<dd>' . $language_list . '</dd>';?>
-                    <?php } //endif ?>
-                    </dl>
-                    <?php
-                        if($npi) {
-                            
-                            $request = wp_nrc_cached_api( $npi );
-
-                            $data = json_decode( $request );
-
-                            if( ! empty( $data ) ) {
-
-                                $rating_valid = $data->valid;
-
-                                if ( $rating_valid ){
-                                    $avg_rating = $data->profile->averageRatingStr;
-	                                $avg_rating_dec = $data->profile->averageRating;
-	                                $review_count = $data->profile->reviewcount;
-	                                $comment_count = $data->profile->bodycount;
-                                    echo '<div class="rating" aria-label="Patient Rating">';
-                                        echo '<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: '. $avg_rating_dec/5 * 100 .'%;"></div></div>';
-                                        echo '<div class="ratings-score">'. $avg_rating .'<span class="sr-only"> out of 5</span></div>';
-                                        echo '<div class="w-100"></div>';
-                                        echo '<a href="#ratings" aria-label="Jump to Patient Ratings & Reviews">';
-                                        echo '<div class="ratings-count-lg">'. $review_count .' Patient Satisfaction Ratings</div>';
-                                        echo '<div class="ratings-comments-lg">'.  $comment_count .' comments</div>';
-                                        echo '</a>';
-                                    echo '</div>';
-                                } else { ?>
-                                    <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#">Why not?</a></em></p> 
-                                <?php
-                                }
-                            }
-                        } else { ?>
-                            <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#">Why not?</a></em></p>
-                    <?php
-                        }
-                    ?>
-                    <?php if( (!$npi) || ( !empty($data) && !$rating_valid ) ) { ?>
-                        <div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="WhyNotTitle">Why are there no ratings?</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>There is no publicly available rating for this medical professional for one of three reasons:</p>
-                                        <ul>
-                                            <li>He or she does not see patients</li>
-                                            <li>He or she sees patients but has not yet received the minimum number of Patient Satisfaction Reviews. To be eligible for display, we require a minimum of 30 surveys. This ensures that the rating is statistically reliable and a true reflection of patient satisfaction.</li>
-                                            <li>He or she is a resident physician.</li>
-                                        </ul>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
                     <?php 
                         $l = 1;
                         if( $locations && $location_valid ): ?>
                             <?php if ($eligible_appt) { ?>
-                                <h2>Primary Appointment Location</h2>
+                                <h2 class="h3">Primary Appointment Location</h2>
                             <?php } else { ?>
-                                <h2>Primary Location</h2>
+                                <h2 class="h3">Primary Location</h2>
                             <?php } // endif ?>
                             <?php foreach( $locations as $location ):
                                     if ( 2 > $l ){
@@ -457,6 +370,93 @@ while ( have_posts() ) : the_post();
 							<?php endforeach;
 								// wp_reset_postdata(); ?>
 						<?php endif; ?> 
+                    <h2 class="h3">Overview</h2>
+                    <dl>
+                    <?php  // Display if they will provide second opinions    
+                    if ($second_opinion) { ?>
+                        <dt>Provides Second Opinion</dt>
+                        <dd>Yes</dd>
+                    <?php } ?>
+                    <?php // Display all patient types
+                        if( $patients ): 
+                        ?>
+                            <dt>Patient Type<?php echo( count($patients) > 1 ? 's' : '' );?></dt>
+                            <?php foreach( $patients as $patient ): ?>
+                                <?php $patient_name = get_term( $patient, 'patient_type');
+                                    echo '<dd>' . $patient_name->name . '</dd>';
+                                ?>
+                            <?php endforeach; ?>
+                    <?php endif; ?>
+                    <?php // Display all languages
+                        if( $languages && $language_list == 'English') { 
+                        ?>
+                        <dt class="sr-only">Language</dt>
+                        <?php echo '<dd class="sr-only">' . $language_list . '</dd>';?>
+                    <?php } else { ?>
+                        <dt>Language<?php echo( $language_count > 1 ? 's' : '' );?></dt>
+                        <?php echo '<dd>' . $language_list . '</dd>';?>
+                    <?php } //endif ?>
+                    </dl>
+                    <?php
+                        if($npi) {
+                            
+                            $request = wp_nrc_cached_api( $npi );
+
+                            $data = json_decode( $request );
+
+                            if( ! empty( $data ) ) {
+
+                                $rating_valid = $data->valid;
+
+                                if ( $rating_valid ){
+                                    $avg_rating = $data->profile->averageRatingStr;
+	                                $avg_rating_dec = $data->profile->averageRating;
+	                                $review_count = $data->profile->reviewcount;
+	                                $comment_count = $data->profile->bodycount;
+                                    echo '<div class="rating" aria-label="Patient Rating">';
+                                        echo '<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: '. $avg_rating_dec/5 * 100 .'%;"></div></div>';
+                                        echo '<div class="ratings-score">'. $avg_rating .'<span class="sr-only"> out of 5</span></div>';
+                                        echo '<div class="w-100"></div>';
+                                        echo '<a href="#ratings" aria-label="Jump to Patient Ratings & Reviews">';
+                                        echo '<div class="ratings-count-lg">'. $review_count .' Patient Satisfaction Ratings</div>';
+                                        echo '<div class="ratings-comments-lg">'.  $comment_count .' comments</div>';
+                                        echo '</a>';
+                                    echo '</div>';
+                                } else { ?>
+                                    <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#">Why not?</a></em></p> 
+                                <?php
+                                }
+                            }
+                        } else { ?>
+                            <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#">Why not?</a></em></p>
+                    <?php
+                        }
+                    ?>
+                    <?php if( (!$npi) || ( !empty($data) && !$rating_valid ) ) { ?>
+                        <div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="WhyNotTitle">Why are there no ratings?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>There is no publicly available rating for this medical professional for one of three reasons:</p>
+                                        <ul>
+                                            <li>He or she does not see patients</li>
+                                            <li>He or she sees patients but has not yet received the minimum number of Patient Satisfaction Reviews. To be eligible for display, we require a minimum of 30 surveys. This ensures that the rating is statistically reliable and a true reflection of patient satisfaction.</li>
+                                            <li>He or she is a resident physician.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
                 </div>
                 <?php 
                 $docphoto = '/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg';
