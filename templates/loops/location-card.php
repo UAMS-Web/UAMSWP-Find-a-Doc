@@ -48,6 +48,38 @@
             $featured_image = get_the_post_thumbnail($id, 'aspect-16-9-small', ['class' => 'card-img-top']);
         }
     }
+                                            
+    $location_address_1 = get_field('location_address_1', $address_id );
+    $location_building = get_field('location_building', $address_id );
+    if ($location_building) {
+        $building = get_term($location_building, "building");
+        $building_slug = $building->slug;
+        $building_name = $building->name;
+    }
+    $location_floor = get_field_object('location_building_floor', $address_id );
+        $location_floor_value = $location_floor['value'];
+        $location_floor_label = $location_floor['choices'][ $location_floor_value ];
+    $location_suite = get_field('location_suite', $address_id );
+    $location_address_2 =
+        ( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? '<br />' : '' ) : '' )
+        . ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ', ' : '' ) : '' )
+        . ( $location_suite ? $location_suite : '' );
+    $location_address_2_schema =
+        ( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? ' ' : '' ) : '' )
+        . ( $location_floor && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ' ' : '' ) : '' )
+        . ( $location_suite ? $location_suite : '' );
+
+    $location_address_2_deprecated = get_field('location_address_2', $address_id );
+    if (!$location_address_2) {
+        $location_address_2 = $location_address_2_deprecated;
+        $location_address_2_schema = $location_address_2_deprecated;
+    }
+
+    $location_city = get_field('location_city', $address_id);
+    $location_state = get_field('location_state', $address_id);
+    $location_zip = get_field('location_zip', $address_id);
+
+
 ?>
 <div class="card">
     <?php if ( $featured_image ) {
@@ -174,9 +206,9 @@
             </div>
         <?php } // endif ?>
         <?php $map = get_field('location_map', $address_id); ?>
-        <p class="card-text"><?php echo get_field('location_address_1', $address_id ); ?><br/>
-            <?php echo ( get_field('location_address_2', $address_id ) ? get_field('location_address_2', $address_id ) . '<br/>' : ''); ?>
-            <?php echo get_field('location_city', $address_id ); ?>, <?php echo get_field('location_state', $address_id ); ?> <?php echo get_field('location_zip', $address_id); ?>
+        <p class="card-text"><?php echo $location_address_1; ?><br/>
+            <?php echo $location_address_2 ? $location_address_2 . '<br/>' : ''; ?>
+            <?php echo $location_city . ', ' . $location_state . ' ' . $location_zip; ?>
         </p>
         <?php 
         $location_phone = get_field('location_phone', $id);
