@@ -146,7 +146,7 @@
 			"label": "Building (if any)",
 			"name": "location_building",
 			"type": "taxonomy",
-			"instructions": "Select the building this location is inside. If this is not part of a larger building, select None.",
+			"instructions": "Select the building this location is inside. If this is not in building with a name, or if it is not a part of a larger building, select None.",
 			"required": "1",
 			"conditional_logic": "0",
             "wrapper": {
@@ -218,7 +218,7 @@
 			"label": "Suite or other unit",
 			"name": "location_suite",
 			"type": "text",
-			"instructions": "Do not just include the number. Example: enter \"Suite 1A\" not just \"1A.\"",
+			"instructions": "Indicate the area where the patient would first check in.<br />Do not just include the number (Example: enter \"Suite 1A\" not just \"1A.\").<br />Do not include landmarks (don't say \"Next to this other thing\").<br />If you are putting the name of another clinic here, this location should instead be set as a child of that location.",
 			"required": "0",
 			"conditional_logic": "0",
             "wrapper": {
@@ -3778,10 +3778,10 @@
             "placement": "top",
             "endpoint": 0
         },
-        "field_location_gmb_has_wheelchair_accessible_elevator": {
-			"key": "field_location_gmb_has_wheelchair_accessible_elevator",
-			"label": "Accessibility: Wheelchair accessible elevator (for patients)",
-			"name": "has_wheelchair_accessible_elevator",
+        "field_location_gmb_exclude": {
+			"key": "field_location_gmb_exclude",
+			"label": "Exclude Listing in Google My Business",
+			"name": "location_gmb_exclude",
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
@@ -3796,7 +3796,30 @@
                 "1": "Yes"
             },
 			"allow_null": "1",
-			"default_value": "",
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+        "field_location_gmb_has_wheelchair_accessible_elevator": {
+			"key": "field_location_gmb_has_wheelchair_accessible_elevator",
+			"label": "Accessibility: Wheelchair accessible elevator (for patients)",
+			"name": "has_wheelchair_accessible_elevator",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+			"conditional_logic": "0",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "notapplicable" : "Not Applicable",
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "1",
 			"layout": "horizontal",
 			"return_format": "label"
 		},
@@ -3814,11 +3837,12 @@
                 "id": ""
             },
             "choices": {
+                "notapplicable" : "Not Applicable",
                 "0": "No",
                 "1": "Yes"
             },
 			"allow_null": "1",
-			"default_value": "",
+			"default_value": "1",
 			"layout": "horizontal",
 			"return_format": "label"
 		},
@@ -3836,11 +3860,12 @@
                 "id": ""
             },
             "choices": {
+                "notapplicable" : "Not Applicable",
                 "0": "No",
                 "1": "Yes"
             },
 			"allow_null": "1",
-			"default_value": "",
+			"default_value": "1",
 			"layout": "horizontal",
 			"return_format": "label"
 		},
@@ -3858,11 +3883,12 @@
                 "id": ""
             },
             "choices": {
+                "notapplicable" : "Not Applicable",
                 "0": "No",
                 "1": "Yes"
             },
 			"allow_null": "1",
-			"default_value": "",
+			"default_value": "1",
 			"layout": "horizontal",
 			"return_format": "label"
 		},
@@ -3880,11 +3906,12 @@
                 "id": ""
             },
             "choices": {
+                "notapplicable" : "Not Applicable",
                 "0": "No",
                 "1": "Yes"
             },
 			"allow_null": "1",
-			"default_value": "",
+			"default_value": "1",
 			"layout": "horizontal",
 			"return_format": "label"
 		},
@@ -3902,11 +3929,12 @@
                 "id": ""
             },
             "choices": {
+                "notapplicable" : "Not Applicable",
                 "0": "No",
                 "1": "Yes"
             },
 			"allow_null": "1",
-			"default_value": "",
+			"default_value": "1",
 			"layout": "horizontal",
 			"return_format": "label"
 		},
@@ -3924,11 +3952,12 @@
                 "id": ""
             },
             "choices": {
+                "notapplicable" : "Not Applicable",
                 "0": "No",
                 "1": "Yes"
             },
 			"allow_null": "1",
-			"default_value": "",
+			"default_value": "1",
 			"layout": "horizontal",
 			"return_format": "label"
 		},
@@ -3946,11 +3975,12 @@
                 "id": ""
             },
             "choices": {
+                "notapplicable" : "Not Applicable",
                 "0": "No",
                 "1": "Yes"
             },
 			"allow_null": "1",
-			"default_value": "",
+			"default_value": "1",
 			"layout": "horizontal",
 			"return_format": "label"
 		},
@@ -3968,11 +3998,12 @@
                 "id": ""
             },
             "choices": {
+                "notapplicable" : "Not Applicable",
                 "0": "No",
                 "1": "Yes"
             },
 			"allow_null": "1",
-			"default_value": "",
+			"default_value": "1",
 			"layout": "horizontal",
 			"return_format": "label"
 		},
@@ -3990,11 +4021,12 @@
                 "id": ""
             },
             "choices": {
+                "notapplicable" : "Not Applicable",
                 "0": "No",
                 "1": "Yes"
             },
 			"allow_null": "1",
-			"default_value": "",
+			"default_value": "1",
 			"layout": "horizontal",
 			"return_format": "label"
 		}

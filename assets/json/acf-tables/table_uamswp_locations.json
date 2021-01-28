@@ -343,6 +343,13 @@
             }
         },
         {
+            "name": "location_gmb_exclude",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_gmb_exclude"
+            }
+        },
+        {
             "name": "has_wheelchair_accessible_elevator",
             "map": {
                 "type": "acf_field_name",
