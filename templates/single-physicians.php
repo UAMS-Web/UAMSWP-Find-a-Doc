@@ -266,80 +266,7 @@ while ( have_posts() ) : the_post();
                             <span class="subtitle"><?php echo ($phys_title_name ? $phys_title_name : ''); ?></span>
                         <?php } ?>
                     </h1>
-                    <?php 
-                        $l = 1;
-                        if( $locations && $location_valid ): ?>
-                            <?php if ($eligible_appt) { ?>
-                                <h2 class="h3">Primary Appointment Location</h2>
-                            <?php } else { ?>
-                                <h2 class="h3">Primary Location</h2>
-                            <?php } // endif ?>
-                            <?php foreach( $locations as $location ):
-                                    if ( 2 > $l ){
-	                                    if ( get_post_status ( $location ) == 'publish' ) {
-
-                                            // Reset variables
-                                            $address_id = $location;
-                                        
-                                            // Parent Location 
-                                            $location_has_parent = get_field('location_parent', $location);
-                                            $location_parent_id = get_field('location_parent_id', $location);
-                                            $parent_location = '';
-                                            $parent_id = '';
-                                            $parent_title = '';
-                                            $parent_url = '';
-                                        
-                                            if ($location_has_parent && $location_parent_id) { 
-                                                $parent_location = get_post( $location_parent_id );
-                                            }
-                                            // Get Post ID for Address & Image fields
-                                            if ($parent_location) {
-                                                $parent_id = $parent_location->ID;
-                                                $parent_title = $parent_location->post_title;
-                                                $parent_url = get_permalink( $parent_id );
-                                                $address_id = $parent_id;
-                                            }
-                                    ?>
-                                <p><strong><?php echo get_the_title( $location ); ?></strong><br />
-                                <?php if ( $parent_location ) { ?>
-                                    (Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a>)<br />
-                                <?php } // endif ?>
-                                <?php echo get_field( 'location_address_1', $address_id ); ?><br/>
-                                <?php echo ( get_field( 'location_address_2', $address_id ) ? get_field( 'location_address_2', $address_id ) . '<br/>' : ''); ?>
-                                <?php echo get_field( 'location_city', $address_id ); ?>, <?php echo get_field('location_state', $address_id ); ?> <?php echo get_field( 'location_zip', $address_id ); ?>
-                                <?php $map = get_field( 'location_map', $address_id ); ?>
-                                <!-- <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a> -->
-                                </p>
-                                <?php if (get_field('location_phone', $location)) { ?>
-                                    <dl>
-                                        <dt>Appointment Phone Number<?php echo get_field('field_location_appointment_phone_query', $location) ? 's' : ''; ?></dt>
-                                        <?php if (get_field('location_new_appointments_phone', $location) && get_field('location_clinic_phone_query', $location)) { ?>
-                                            <dd><a href="tel:<?php echo format_phone_dash( get_field('location_new_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_new_appointments_phone', $location) ); ?></a><?php echo get_field('field_location_appointment_phone_query', $location) ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
-                                            <?php if (get_field('location_return_appointments_phone', $location) && get_field('field_location_appointment_phone_query', $location)) { ?>
-                                                <dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone', $location) ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
-                                            <?php } ?>
-                                        <?php } else { ?>
-                                            <dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone', $location) ); ?></a></dd>
-                                        <?php } ?>
-                                    </dl>
-                                <?php } ?>
-                                <div class="btn-container">
-                                    <a class="btn btn-primary" href="<?php echo get_the_permalink( $location ); ?>">
-                                        View Location
-                                    </a>
-                                    <?php if (1 < $location_count) { ?>
-                                        <a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of locations for this provider">
-                                            View All Locations
-                                        </a>
-                                    <?php } ?>
-                                </div>
-                                <?php $l++;
-	                                }
-                                } ?>
-							<?php endforeach;
-								// wp_reset_postdata(); ?>
-						<?php endif; ?> 
-                    <h2 class="h3">Overview</h2>
+                    <h2 class="sr-only">Overview</h2>
                     <dl>
                     <?php  // Display if they will provide second opinions    
                     if ($second_opinion) { ?>
@@ -426,6 +353,79 @@ while ( have_posts() ) : the_post();
                             </div>
                         </div>
                     <?php } ?>
+                    <?php 
+                        $l = 1;
+                        if( $locations && $location_valid ): ?>
+                            <?php if ($eligible_appt) { ?>
+                                <h2>Primary Appointment Location</h2>
+                            <?php } else { ?>
+                                <h2>Primary Location</h2>
+                            <?php } // endif ?>
+                            <?php foreach( $locations as $location ):
+                                    if ( 2 > $l ){
+	                                    if ( get_post_status ( $location ) == 'publish' ) {
+
+                                            // Reset variables
+                                            $address_id = $location;
+                                        
+                                            // Parent Location 
+                                            $location_has_parent = get_field('location_parent', $location);
+                                            $location_parent_id = get_field('location_parent_id', $location);
+                                            $parent_location = '';
+                                            $parent_id = '';
+                                            $parent_title = '';
+                                            $parent_url = '';
+                                        
+                                            if ($location_has_parent && $location_parent_id) { 
+                                                $parent_location = get_post( $location_parent_id );
+                                            }
+                                            // Get Post ID for Address & Image fields
+                                            if ($parent_location) {
+                                                $parent_id = $parent_location->ID;
+                                                $parent_title = $parent_location->post_title;
+                                                $parent_url = get_permalink( $parent_id );
+                                                $address_id = $parent_id;
+                                            }
+                                    ?>
+                                <p><strong><?php echo get_the_title( $location ); ?></strong><br />
+                                <?php if ( $parent_location ) { ?>
+                                    (Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a>)<br />
+                                <?php } // endif ?>
+                                <?php echo get_field( 'location_address_1', $address_id ); ?><br/>
+                                <?php echo ( get_field( 'location_address_2', $address_id ) ? get_field( 'location_address_2', $address_id ) . '<br/>' : ''); ?>
+                                <?php echo get_field( 'location_city', $address_id ); ?>, <?php echo get_field('location_state', $address_id ); ?> <?php echo get_field( 'location_zip', $address_id ); ?>
+                                <?php $map = get_field( 'location_map', $address_id ); ?>
+                                <!-- <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a> -->
+                                </p>
+                                <?php if (get_field('location_phone', $location)) { ?>
+                                    <dl>
+                                        <dt>Appointment Phone Number<?php echo get_field('field_location_appointment_phone_query', $location) ? 's' : ''; ?></dt>
+                                        <?php if (get_field('location_new_appointments_phone', $location) && get_field('location_clinic_phone_query', $location)) { ?>
+                                            <dd><a href="tel:<?php echo format_phone_dash( get_field('location_new_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_new_appointments_phone', $location) ); ?></a><?php echo get_field('field_location_appointment_phone_query', $location) ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
+                                            <?php if (get_field('location_return_appointments_phone', $location) && get_field('field_location_appointment_phone_query', $location)) { ?>
+                                                <dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone', $location) ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
+                                            <?php } ?>
+                                        <?php } else { ?>
+                                            <dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone', $location) ); ?></a></dd>
+                                        <?php } ?>
+                                    </dl>
+                                <?php } ?>
+                                <div class="btn-container">
+                                    <a class="btn btn-primary" href="<?php echo get_the_permalink( $location ); ?>">
+                                        View Location
+                                    </a>
+                                    <?php if (1 < $location_count) { ?>
+                                        <a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of locations for this provider">
+                                            View All Locations
+                                        </a>
+                                    <?php } ?>
+                                </div>
+                                <?php $l++;
+	                                }
+                                } ?>
+							<?php endforeach;
+								// wp_reset_postdata(); ?>
+						<?php endif; ?> 
                 </div>
                 <?php 
                 $docphoto = '/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg';
