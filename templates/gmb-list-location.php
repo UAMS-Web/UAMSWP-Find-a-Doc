@@ -247,8 +247,10 @@ function display_provider_image() {
                     $location_map = get_field( 'location_map', $location_post_id );
                     $location_latitude = $location_map['lat'];
                     $location_longitude = $location_map['lng'];
+                    $location_gmb_exclude = get_field( 'location_gmb_exclude', $location_post_id );
 
                     // Create the table
+                    if ( !$location_gmb_exclude ) {
         
                         // Start table row
                         echo '<tr>';
@@ -688,6 +690,8 @@ function display_provider_image() {
                             echo '<td data-gmb-column="Service options: Same-day delivery (has_delivery_same_day)" class="no-break">[NOT APPLICABLE]</td>';
 
                         echo '</tr>';
+                        
+                    } // endif
                         
                 endwhile;
                 ?>

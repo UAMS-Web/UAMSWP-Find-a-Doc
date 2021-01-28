@@ -3778,6 +3778,28 @@
             "placement": "top",
             "endpoint": 0
         },
+        "field_location_gmb_exclude": {
+			"key": "field_location_gmb_exclude",
+			"label": "Exclude Listing in Google My Business",
+			"name": "location_gmb_exclude",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+			"conditional_logic": "0",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
         "field_location_gmb_has_wheelchair_accessible_elevator": {
 			"key": "field_location_gmb_has_wheelchair_accessible_elevator",
 			"label": "Accessibility: Wheelchair accessible elevator (for patients)",
@@ -3792,6 +3814,7 @@
                 "id": ""
             },
             "choices": {
+                "notapplicable" : "Not Applicable",
                 "0": "No",
                 "1": "Yes"
             },
@@ -3814,11 +3837,12 @@
                 "id": ""
             },
             "choices": {
+                "notapplicable" : "Not Applicable",
                 "0": "No",
                 "1": "Yes"
             },
 			"allow_null": "1",
-			"default_value": "",
+			"default_value": "1",
 			"layout": "horizontal",
 			"return_format": "label"
 		},
@@ -3836,6 +3860,7 @@
                 "id": ""
             },
             "choices": {
+                "notapplicable" : "Not Applicable",
                 "0": "No",
                 "1": "Yes"
             },
@@ -3858,6 +3883,7 @@
                 "id": ""
             },
             "choices": {
+                "notapplicable" : "Not Applicable",
                 "0": "No",
                 "1": "Yes"
             },
@@ -3880,6 +3906,7 @@
                 "id": ""
             },
             "choices": {
+                "notapplicable" : "Not Applicable",
                 "0": "No",
                 "1": "Yes"
             },
@@ -3902,6 +3929,7 @@
                 "id": ""
             },
             "choices": {
+                "notapplicable" : "Not Applicable",
                 "0": "No",
                 "1": "Yes"
             },
@@ -3924,6 +3952,7 @@
                 "id": ""
             },
             "choices": {
+                "notapplicable" : "Not Applicable",
                 "0": "No",
                 "1": "Yes"
             },
@@ -3946,6 +3975,7 @@
                 "id": ""
             },
             "choices": {
+                "notapplicable" : "Not Applicable",
                 "0": "No",
                 "1": "Yes"
             },
@@ -3968,6 +3998,7 @@
                 "id": ""
             },
             "choices": {
+                "notapplicable" : "Not Applicable",
                 "0": "No",
                 "1": "Yes"
             },
@@ -3990,6 +4021,7 @@
                 "id": ""
             },
             "choices": {
+                "notapplicable" : "Not Applicable",
                 "0": "No",
                 "1": "Yes"
             },
