@@ -146,7 +146,7 @@
 			"label": "Building (if any)",
 			"name": "location_building",
 			"type": "taxonomy",
-			"instructions": "Select the building this location is inside. If this is not part of a larger building, select None.",
+			"instructions": "Select the building this location is inside. If this is not in building with a name, or if it is not a part of a larger building, select None.",
 			"required": "1",
 			"conditional_logic": "0",
             "wrapper": {
