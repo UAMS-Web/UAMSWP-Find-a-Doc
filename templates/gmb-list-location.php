@@ -234,16 +234,27 @@ function display_provider_image() {
                     $location_fax = get_field( 'location_fax', $location_child_id );
                     $location_hours_group = get_field('location_hours_group', $location_child_id );
                     $location_telemed_query = $location_hours_group['location_telemed_query'];
+
                     $location_gmb_wheelchair_elevator = get_field( 'has_wheelchair_accessible_elevator', $location_post_id );
+                    $location_gmb_wheelchair_elevator = ( $location_gmb_wheelchair_elevator == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_elevator;
                     $location_gmb_wheelchair_entrance = get_field( 'has_wheelchair_accessible_entrance', $location_post_id );
+                    $location_gmb_wheelchair_entrance = ( $location_gmb_wheelchair_entrance == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_entrance;
                     $location_gmb_wheelchair_restroom = get_field( 'has_wheelchair_accessible_restroom', $location_post_id );
+                    $location_gmb_wheelchair_restroom = ( $location_gmb_wheelchair_restroom == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_restroom;
                     $location_gmb_restroom = get_field( 'has_restroom', $location_post_id );
+                    $location_gmb_restroom = ( $location_gmb_restroom == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_restroom;
                     $location_gmb_appointments = get_field( 'requires_appointments', $location_post_id );
+                    $location_gmb_appointments = ( $location_gmb_appointments == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_appointments;
                     $location_gmb_temp_customers = get_field( 'requires_temperature_check_customers', $location_post_id );
+                    $location_gmb_temp_customers = ( $location_gmb_temp_customers == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_temp_customers;
                     $location_gmb_masks_customers = get_field( 'requires_masks_customers', $location_post_id );
+                    $location_gmb_masks_customers = ( $location_gmb_masks_customers == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_masks_customers;
                     $location_gmb_temp_staff = get_field( 'requires_temperature_check_staff', $location_post_id );
+                    $location_gmb_temp_staff = ( $location_gmb_temp_staff == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_temp_staff;
                     $location_gmb_masks_staff = get_field( 'requires_masks_staff', $location_post_id );
+                    $location_gmb_masks_staff = ( $location_gmb_masks_staff == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_masks_staff;
                     $location_gmb_sanitizing = get_field( 'is_sanitizing_between_customers', $location_post_id );
+                    $location_gmb_sanitizing = ( $location_gmb_sanitizing == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_sanitizing;
                     $location_map = get_field( 'location_map', $location_post_id );
                     $location_latitude = $location_map['lat'];
                     $location_longitude = $location_map['lng'];
