@@ -406,14 +406,45 @@ while ( have_posts() ) : the_post();
                                                 $parent_url = get_permalink( $parent_id );
                                                 $address_id = $parent_id;
                                             }
+                                            
+                                            $location_address_1 = get_field('location_address_1', $address_id );
+                                            $location_building = get_field('location_building', $address_id );
+                                            if ($location_building) {
+                                                $building = get_term($location_building, "building");
+                                                $building_slug = $building->slug;
+                                                $building_name = $building->name;
+                                            }
+                                            $location_floor = get_field_object('location_building_floor', $address_id );
+                                                $location_floor_value = $location_floor['value'];
+                                                $location_floor_label = $location_floor['choices'][ $location_floor_value ];
+                                            $location_suite = get_field('location_suite', $address_id );
+                                            $location_address_2 =
+                                                ( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? '<br />' : '' ) : '' )
+                                                . ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ', ' : '' ) : '' )
+                                                . ( $location_suite ? $location_suite : '' );
+                                            $location_address_2_schema =
+                                                ( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? ' ' : '' ) : '' )
+                                                . ( $location_floor && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ' ' : '' ) : '' )
+                                                . ( $location_suite ? $location_suite : '' );
+
+                                            $location_address_2_deprecated = get_field('location_address_2', $address_id );
+                                            if (!$location_address_2) {
+                                                $location_address_2 = $location_address_2_deprecated;
+                                                $location_address_2_schema = $location_address_2_deprecated;
+                                            }
+
+                                            $location_city = get_field('location_city', $address_id);
+                                            $location_state = get_field('location_state', $address_id);
+                                            $location_zip = get_field('location_zip', $address_id);
+
                                     ?>
                                 <p><strong><?php echo get_the_title( $location ); ?></strong><br />
                                 <?php if ( $parent_location ) { ?>
                                     (Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a>)<br />
                                 <?php } // endif ?>
-                                <?php echo get_field( 'location_address_1', $address_id ); ?><br/>
-                                <?php echo ( get_field( 'location_address_2', $address_id ) ? get_field( 'location_address_2', $address_id ) . '<br/>' : ''); ?>
-                                <?php echo get_field( 'location_city', $address_id ); ?>, <?php echo get_field('location_state', $address_id ); ?> <?php echo get_field( 'location_zip', $address_id ); ?>
+                                <?php echo $location_address_1; ?><br/>
+                                <?php echo $location_address_2 ? $location_address_2 . '<br/>' : ''; ?>
+                                <?php echo $location_city . ', ' . $location_state . ' ' . $location_zip; ?>
                                 <?php $map = get_field( 'location_map', $address_id ); ?>
                                 <!-- <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a> -->
                                 </p>
@@ -946,10 +977,10 @@ while ( have_posts() ) : the_post();
                                         $location_schema .= '
                                         {
                                         "@type": "PostalAddress",
-                                        "streetAddress": "'. get_field('location_address_1', $location ) . ' '. get_field('location_address_2', $location ) .'",
-                                        "addressLocality": "'. get_field('location_city', $location ) .'",
-                                        "addressRegion": "'. get_field('location_state', $location ) .'",
-                                        "postalCode": "'. get_field('location_zip', $location) .'",
+                                        "streetAddress": "'. $location_address_1 . ' '. $location_address_2_schema .'",
+                                        "addressLocality": "'. $location_city .'",
+                                        "addressRegion": "'. $location_state .'",
+                                        "postalCode": "'. $location_zip .'",
                                         "telephone": "'. format_phone_dash( get_field('location_phone', $location) ) .'"
                                         }
                                         ';
