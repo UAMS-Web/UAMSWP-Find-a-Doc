@@ -218,7 +218,7 @@
 			"label": "Suite or other unit",
 			"name": "location_suite",
 			"type": "text",
-			"instructions": "Do not just include the number. Example: enter \"Suite 1A\" not just \"1A.\"",
+			"instructions": "Indicate the area where the patient would first check in. Do not just include the number. Example: enter \"Suite 1A\" not just \"1A.\"",
 			"required": "0",
 			"conditional_logic": "0",
             "wrapper": {
