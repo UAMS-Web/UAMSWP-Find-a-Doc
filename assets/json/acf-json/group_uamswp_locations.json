@@ -3807,7 +3807,15 @@
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
-			"conditional_logic": "0",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -3830,7 +3838,15 @@
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
-			"conditional_logic": "0",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -3853,7 +3869,15 @@
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
-			"conditional_logic": "0",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -3876,7 +3900,15 @@
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
-			"conditional_logic": "0",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -3899,7 +3931,15 @@
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
-			"conditional_logic": "0",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -3922,7 +3962,15 @@
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
-			"conditional_logic": "0",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -3945,7 +3993,15 @@
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
-			"conditional_logic": "0",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -3968,7 +4024,15 @@
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
-			"conditional_logic": "0",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -3991,7 +4055,15 @@
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
-			"conditional_logic": "0",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -4014,7 +4086,15 @@
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
-			"conditional_logic": "0",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
