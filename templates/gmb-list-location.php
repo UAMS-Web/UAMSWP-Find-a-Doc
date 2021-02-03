@@ -259,6 +259,7 @@ function display_provider_image() {
                     $location_latitude = $location_map['lat'];
                     $location_longitude = $location_map['lng'];
                     $location_gmb_exclude = get_field( 'location_gmb_exclude', $location_post_id );
+                    $location_gmb_prefix = get_field( 'location_gmb_prefix', $location_post_id );
 
                     // Create the table
                     if ( !$location_gmb_exclude ) {
@@ -274,7 +275,7 @@ function display_provider_image() {
                             echo '</td>';
 
                         // Business name
-                            echo '<td data-gmb-column="Business name" class="no-break">UAMS Health - ' . $location_title . '</td>';
+                            echo '<td data-gmb-column="Business name" class="no-break">' . ($location_gmb_prefix ? 'UAMS Health - ' : '') . $location_title . '</td>';
 
                         // Address line 1
                             echo '<td data-gmb-column="Address line 1" class="no-break">';
