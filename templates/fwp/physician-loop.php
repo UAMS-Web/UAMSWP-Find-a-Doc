@@ -97,13 +97,19 @@
 							<p><?php echo ( get_field('physician_short_clinical_bio') ? get_field( 'physician_short_clinical_bio') : wp_trim_words( get_field( 'physician_clinical_bio' ), 30, ' &hellip;' ) ); ?></p>
 						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>">Full Profile</a>
 						</div>
+						<?php 
+						// Check for valid locations
+						$locations = get_field('physician_locations');
+						$location_valid = false;
+						foreach( $locations as $location ) {
+							if ( get_post_status ( $location ) == 'publish' ) {
+								$location_valid = true;
+								$break;
+							}
+						}
+						if( $locations && $location_valid ) { ?>
 						<div class="col-12 secondary">
 						<h4 class="h5">Locations</h4>
-						<?php
-
-							$locations = get_field('physician_locations');
-
-							?>
 							<?php if( $locations ): ?>
 								<ul>
 								<?php foreach( $locations as $location): ?>
@@ -117,6 +123,7 @@
 							<?php endif; ?>
 						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>">Full Profile</a>
 						</div>
+						<?php } // endif ?> 
 					</div>
 				</div>
 			</div>
