@@ -110,7 +110,6 @@
 						if( $locations && $location_valid ) { ?>
 							<div class="col-12 secondary">
 								<h4 class="h5">Locations</h4>
-									<?php if( $locations ): ?>
 										<ul>
 										<?php foreach( $locations as $location): ?>
 											<li>
@@ -120,7 +119,6 @@
 											</li>
 										<?php endforeach; ?>
 										</ul>
-									<?php endif; ?>
 								<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>">Full Profile</a>
 							</div>
 						<?php } // endif ?> 
