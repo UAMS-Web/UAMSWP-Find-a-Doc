@@ -111,13 +111,15 @@
 							<div class="col-12 secondary">
 								<h4 class="h5">Locations</h4>
 									<ul>
-										<?php foreach( $locations as $location): ?>
+										<?php foreach( $locations as $location):
+											if ( get_post_status ( $location ) == 'publish' ) { ?>
 											<li>
 												<a href="<?php echo get_permalink( $location ); ?>">
 													<?php echo get_the_title( $location ); ?>
 												</a>
 											</li>
-										<?php endforeach; ?>
+										<?php } // endif
+										endforeach; ?>
 									</ul>
 								<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>">Full Profile</a>
 							</div>
