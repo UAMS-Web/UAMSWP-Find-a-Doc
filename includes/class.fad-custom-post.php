@@ -380,6 +380,7 @@ add_action( 'init', 'create_patient_type_taxonomy', 0 );
 add_action( 'init', 'create_portal_taxonomy', 0 );
 add_action( 'init', 'create_recognition_taxonomy', 0 );
 add_action( 'init', 'create_service_line_taxonomy', 0 );
+add_action( 'init', 'create_gmb_cat_provider_taxonomy', 0 );
 // add_action( 'init', 'create_medical_specialties_taxonomy', 0 ); // Disabled
 // add_action( 'init', 'create_medical_terms_taxonomy', 0 ); // Disabled
 // Academic
@@ -397,6 +398,7 @@ add_action( 'init', 'create_residency_years_taxonomy', 0 );
 add_action( 'init', 'create_region_taxonomy', 0 );
 add_action( 'init', 'create_location_type_taxonomy', 0 );
 add_action( 'init', 'create_building_taxonomy', 0 );
+add_action( 'init', 'create_gmb_cat_location_taxonomy', 0 );
 
 /* Taxonomy Functions */
 function create_clinical_conditions_taxonomy() {
@@ -1783,6 +1785,106 @@ function create_location_type_taxonomy() {
 		'capabilities'               => $capabilities,
 	);
 	register_taxonomy( 'location_type', array( 'location' ), $args );
+
+}
+
+function create_gmb_cat_provider_taxonomy() {
+
+	$labels = array(
+		'name'                       => 'Google My Business Categories for Providers',
+		'singular_name'              => 'Google My Business Category for Providers',
+		'menu_name'                  => 'Google My Business Categories',
+		'all_items'                  => 'All Categories',
+		'parent_item'                => 'Parent Category',
+		'parent_item_colon'          => 'Parent Category:',
+		'new_item_name'              => 'New Category',
+		'add_new_item'               => 'Add New Category',
+		'edit_item'                  => 'Edit Category',
+		'update_item'                => 'Update Category',
+		'view_item'                  => 'View Category',
+		'separate_items_with_commas' => 'Separate Categories with commas',
+		'add_or_remove_items'        => 'Add or remove Categories',
+		'choose_from_most_used'      => 'Choose from the most used',
+		'popular_items'              => 'Popular Categories',
+		'search_items'               => 'Search Categories',
+		'not_found'                  => 'Not Found',
+		'no_terms'                   => 'No Categories',
+		'items_list'                 => 'Categories list',
+		'items_list_navigation'      => 'Categories list navigation',
+	);
+	$rewrite = array(
+		'slug'                       => 'gmb_cat_provider',
+		'with_front'                 => false,
+		'hierarchical'               => false,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => false,
+		'show_ui'                    => true,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+	);
+	register_taxonomy( 'gmb_cat_provider', array( 'provider' ), $args );
+
+}
+
+function create_gmb_cat_location_taxonomy() {
+
+	$labels = array(
+		'name'                       => 'Google My Business Categories for Locations',
+		'singular_name'              => 'Google My Business Category for Locations',
+		'menu_name'                  => 'Google My Business Categories',
+		'all_items'                  => 'All Categories',
+		'parent_item'                => 'Parent Category',
+		'parent_item_colon'          => 'Parent Category:',
+		'new_item_name'              => 'New Category',
+		'add_new_item'               => 'Add New Category',
+		'edit_item'                  => 'Edit Category',
+		'update_item'                => 'Update Category',
+		'view_item'                  => 'View Category',
+		'separate_items_with_commas' => 'Separate Categories with commas',
+		'add_or_remove_items'        => 'Add or remove Categories',
+		'choose_from_most_used'      => 'Choose from the most used',
+		'popular_items'              => 'Popular Categories',
+		'search_items'               => 'Search Categories',
+		'not_found'                  => 'Not Found',
+		'no_terms'                   => 'No Categories',
+		'items_list'                 => 'Categories list',
+		'items_list_navigation'      => 'Categories list navigation',
+	);
+	$rewrite = array(
+		'slug'                       => 'gmb_cat_location',
+		'with_front'                 => false,
+		'hierarchical'               => false,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => false,
+		'show_ui'                    => true,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+	);
+	register_taxonomy( 'gmb_cat_location', array( 'location' ), $args );
 
 }
 
