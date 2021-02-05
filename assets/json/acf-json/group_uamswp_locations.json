@@ -182,7 +182,7 @@
             "choices": {
 				"": "(Select an option)",
 				"0": "Single-Story Building",
-				"B": "Basement",
+				"B": "Level B",
 				"G": "Ground Floor",
 				"1": "First Floor",
 				"2": "Second Floor",
@@ -3830,7 +3830,7 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-        "field_location_gmb_cat": {
+    "field_location_gmb_cat": {
 			"key": "field_location_gmb_cat",
 			"label": "Category",
 			"name": "location_gmb_cat",
@@ -3862,15 +3862,23 @@
             },
 			"multiple": "0",
 			"allow_null": "0"
-        },
-        "field_location_gmb_has_wheelchair_accessible_elevator": {
+    },
+    "field_location_gmb_has_wheelchair_accessible_elevator": {
 			"key": "field_location_gmb_has_wheelchair_accessible_elevator",
 			"label": "Accessibility: Wheelchair accessible elevator (for patients)",
 			"name": "has_wheelchair_accessible_elevator",
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
-			"conditional_logic": "0",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -3893,7 +3901,15 @@
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
-			"conditional_logic": "0",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -3916,7 +3932,15 @@
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
-			"conditional_logic": "0",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -3939,7 +3963,15 @@
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
-			"conditional_logic": "0",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -3962,7 +3994,15 @@
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
-			"conditional_logic": "0",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -3985,7 +4025,15 @@
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
-			"conditional_logic": "0",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -4008,7 +4056,15 @@
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
-			"conditional_logic": "0",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -4031,7 +4087,15 @@
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
-			"conditional_logic": "0",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -4054,7 +4118,15 @@
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
-			"conditional_logic": "0",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -4077,7 +4149,15 @@
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
-			"conditional_logic": "0",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",

@@ -507,7 +507,7 @@ while ( have_posts() ) : the_post();
                 }
                 if ($portal_slug == "ach-mychart") {
                     $appointment_phone_name = 'the main Arkansas Children\'s Hospital appointment line';
-                    $appointment_phone = '5013641202';
+                    $appointment_phone = '5013644000';
                 } elseif ($portal_slug == "my-healthevet") {
                     $appointment_phone_name = 'the main Central Arkansas Veterans Healthcare System appointment line';
                     $appointment_phone = '5012573999';
