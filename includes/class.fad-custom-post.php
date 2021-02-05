@@ -2049,10 +2049,12 @@ function remove_provider_meta() {
 	remove_meta_box( 'medical_termsdiv', 'provider', 'side' );
 	remove_meta_box( 'tagsdiv-recognition', 'provider', 'side' );
 	remove_meta_box( 'custom-post-type-onomies-locations', 'provider', 'side');
+	remove_meta_box( 'gmb_cat_providerdiv', 'location', 'side' );
 	// Location
 	remove_meta_box( 'regiondiv', 'location', 'side' );
 	remove_meta_box( 'location_typediv', 'location', 'side' );
 	remove_meta_box( 'buildingdiv', 'location', 'side' );
+	remove_meta_box( 'gmb_cat_locationdiv', 'location', 'side' );
 }
 
 add_action( 'admin_menu' , 'remove_provider_meta' );
