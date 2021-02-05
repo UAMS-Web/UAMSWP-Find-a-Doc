@@ -350,17 +350,10 @@
             }
         },
         {
-            "name": "location_gmb_cat_primary",
+            "name": "location_gmb_cat",
             "map": {
                 "type": "acf_field_name",
-                "identifier": "location_gmb_cat_primary"
-            }
-        },
-        {
-            "name": "location_gmb_cat_additional",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_gmb_cat_additional"
+                "identifier": "location_gmb_cat"
             }
         },
         {
