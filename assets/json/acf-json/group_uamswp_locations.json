@@ -3800,6 +3800,72 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
+        "field_location_gmb_cat_primary": {
+			"key": "field_location_gmb_cat_primary",
+			"label": "Primary Category",
+			"name": "location_gmb_cat_primary",
+			"type": "taxonomy",
+			"instructions": "Select one primary category. \"Doctor\" is a good standard choice, if you cannot find a better option.",
+			"required": "1",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+			"taxonomy": "gmb_cat_location",
+			"field_type": "select",
+			"add_term": "0",
+			"save_terms": "1",
+			"load_terms": "1",
+			"return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+			"multiple": "0",
+			"allow_null": "0"
+        },
+        "field_location_gmb_cat_additional": {
+			"key": "field_location_gmb_cat_additional",
+			"label": "Additional Categories (if any)",
+			"name": "location_gmb_cat_additional",
+			"type": "taxonomy",
+			"instructions": "Select up to nine additional categories.",
+			"required": "0",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+			"taxonomy": "gmb_cat_location",
+			"field_type": "multi_select",
+			"add_term": "0",
+			"save_terms": "1",
+			"load_terms": "1",
+			"return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+			"multiple": "0",
+			"allow_null": "0"
+        },
         "field_location_gmb_has_wheelchair_accessible_elevator": {
 			"key": "field_location_gmb_has_wheelchair_accessible_elevator",
 			"label": "Accessibility: Wheelchair accessible elevator (for patients)",

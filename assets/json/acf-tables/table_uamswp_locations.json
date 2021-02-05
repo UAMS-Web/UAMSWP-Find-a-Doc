@@ -350,6 +350,20 @@
             }
         },
         {
+            "name": "location_gmb_cat_primary",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_gmb_cat_primary"
+            }
+        },
+        {
+            "name": "location_gmb_cat_additional",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_gmb_cat_additional"
+            }
+        },
+        {
             "name": "has_wheelchair_accessible_elevator",
             "map": {
                 "type": "acf_field_name",
