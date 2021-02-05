@@ -3800,6 +3800,36 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
+        "field_location_gmb_prefix": {
+			"key": "field_location_gmb_prefix",
+			"label": "Include \"UAMS Health - \" prefix in listing name",
+			"name": "location_gmb_prefix",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
         "field_location_gmb_cat": {
 			"key": "field_location_gmb_cat",
 			"label": "Category",
