@@ -79,8 +79,8 @@ function display_provider_image() {
                         <th class="no-break">Primary phone</th>
                         <th class="no-break">Additional phones</th>
                         <th class="no-break">Website</th>
-                        <!-- <th class="no-break">Primary category</th>
-                        <th class="no-break">Additional categories</th> -->
+                        <th class="no-break">Primary category</th>
+                        <th class="no-break">Additional categories</th>
                         <th class="no-break">Sunday hours</th>
                         <th class="no-break">Monday hours</th>
                         <th class="no-break">Tuesday hours</th>
@@ -235,6 +235,24 @@ function display_provider_image() {
                     $location_hours_group = get_field('location_hours_group', $location_child_id );
                     $location_telemed_query = $location_hours_group['location_telemed_query'];
 
+                    $location_gmb_cats = get_field( 'location_gmb_cat', $location_child_id );
+                    $location_gmb_cat_primary_name = '';
+                    $location_gmb_cat_additional_names = '';
+                    $c = 1;
+                    if( $location_gmb_cats ) {
+                        foreach( $location_gmb_cats as $location_gmb_cat ) {
+                            $location_gmb_cat_term = get_term($location_gmb_cat, "gmb_cat_location");
+                            if ( 2 > $c ){
+                                $location_gmb_cat_primary_name = esc_html( $location_gmb_cat_term->name );
+                            } elseif ( 2 == $c ) {
+                                $location_gmb_cat_additional_names = esc_html( $location_gmb_cat_term->name );
+                            } else {
+                                $location_gmb_cat_additional_names .= ', ' . esc_html( $location_gmb_cat_term->name );
+                            }
+                            $c++;
+                        } // endforeach
+                    }
+                    
                     $location_gmb_wheelchair_elevator = get_field( 'has_wheelchair_accessible_elevator', $location_post_id );
                     $location_gmb_wheelchair_elevator = ( $location_gmb_wheelchair_elevator == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_elevator;
                     $location_gmb_wheelchair_entrance = get_field( 'has_wheelchair_accessible_entrance', $location_post_id );
@@ -348,12 +366,14 @@ function display_provider_image() {
                             echo '</td>';
 
                         // Primary category
-                        // Hiding this column so that we don't overwrite existing data. Will need to instead download/reimport data from GMB to update category in bulk.
-                        //    echo '<td data-gmb-column="Primary category" class="no-break">Doctor</td>';
+                            echo '<td data-gmb-column="Primary category" class="no-break">';
+                            echo $location_gmb_cat_primary_name;
+                            echo '</td>';
 
                         // Additional categories
-                        // Hiding this column so that we don't overwrite existing data. Will need to instead download/reimport data from GMB to update category in bulk.
-                        //    echo '<td data-gmb-column="Additional categories" class="no-break"></td>';
+                            echo '<td data-gmb-column="Additional categories" class="no-break">';
+                            echo $location_gmb_cat_additional_names;
+                            echo '</td>';
 
                         // Sunday hours
                         // Intentionally left blank for now
