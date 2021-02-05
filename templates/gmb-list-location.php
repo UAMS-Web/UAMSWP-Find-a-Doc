@@ -236,7 +236,7 @@ function display_provider_image() {
                     $location_telemed_query = $location_hours_group['location_telemed_query'];
 
                     $location_gmb_cats = get_field( 'location_gmb_cat', $location_child_id );
-                    $location_gmb_cat_primary_name = '';
+                    $location_gmb_cat_primary_name = 'Medical Clinic';
                     $location_gmb_cat_additional_names = '';
                     $c = 1;
                     if( $location_gmb_cats ) {
