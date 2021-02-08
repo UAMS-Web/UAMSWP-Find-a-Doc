@@ -206,7 +206,7 @@ function display_provider_image() {
                                 $provider_gmb_cat_primary_name = esc_html( $provider_gmb_cat_term->name );
                             } elseif ( 2 == $c ) {
                                 $provider_gmb_cat_additional_names = esc_html( $provider_gmb_cat_term->name );
-                            } else {
+                            } elseif ( 11 > $c ) {
                                 $provider_gmb_cat_additional_names .= ', ' . esc_html( $provider_gmb_cat_term->name );
                             }
                             $c++;
