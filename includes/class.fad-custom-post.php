@@ -1754,6 +1754,7 @@ function create_region_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'region', array( 'location' ), $args );
 
@@ -1804,6 +1805,7 @@ function create_location_type_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => true,
 	);
 	register_taxonomy( 'location_type', array( 'location' ), $args );
 
@@ -1957,6 +1959,7 @@ function create_building_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'building', array( 'location' ), $args );
 
