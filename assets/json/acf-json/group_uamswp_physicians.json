@@ -2463,37 +2463,37 @@
 			"return_format": "value"
 		},
         "field_physician_gmb_cat": {
-                "key": "field_physician_gmb_cat",
-                "label": "Category",
-                "name": "physician_gmb_cat",
-                "type": "taxonomy",
-                "instructions": "Select up to ten categories. Rearrange them so that the first item is the primary category. \"Doctor\" is a good standard choice, if you cannot find a better option.<br />For reference, you can <a href='https://communications.uams.edu/web/kbtopic/google-my-business/' target='_blank'>view a list of available categories.</a>",
-                "required": "1",
-                "conditional_logic": [
-                    [
-                        {
-                            "field": "field_physician_gmb_exclude",
-                            "operator": "==",
-                            "value": "0"
-                        }
-                    ]
-                ],
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "taxonomy": "gmb_cat_provider",
-                "field_type": "multi_select",
-                "add_term": "0",
-                "save_terms": "1",
-                "load_terms": "1",
-                "return_format": "id",
-                "acfe_bidirectional": {
-                    "acfe_bidirectional_enabled": "0"
-                },
-                "multiple": "0",
-                "allow_null": "0"
+            "key": "field_physician_gmb_cat",
+            "label": "Category",
+            "name": "physician_gmb_cat",
+            "type": "taxonomy",
+            "instructions": "Select up to ten categories. Rearrange them so that the first item is the primary category. \"Doctor\" is a good standard choice, if you cannot find a better option.<br />For reference, you can <a href='https://communications.uams.edu/web/kbtopic/google-my-business/' target='_blank'>view a list of available categories.</a>",
+            "required": "1",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "gmb_cat_provider",
+            "field_type": "multi_select",
+            "add_term": "0",
+            "save_terms": "1",
+            "load_terms": "1",
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": "0",
+            "allow_null": "0"
         },
         "field_physician_extra_tab": {
             "key": "field_physician_extra_tab",
