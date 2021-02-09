@@ -176,10 +176,12 @@ function display_provider_image() {
                     // Check for valid locations
                     $locations = get_field('physician_locations',$post_id);
                     $location_valid = false;
-                    foreach( $locations as $location ) {
-                        if ( get_post_status ( $location ) == 'publish' ) {
-                            $location_valid = true;
-                            $break;
+                    if ( $locations ) {
+                        foreach( $locations as $location ) {
+                            if ( get_post_status ( $location ) == 'publish' ) {
+                                $location_valid = true;
+                                $break;
+                            }
                         }
                     }
                         
