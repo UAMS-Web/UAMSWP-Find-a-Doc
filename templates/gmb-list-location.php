@@ -185,8 +185,12 @@ function display_provider_image() {
                         $building_name = $building->name;
                     }
                     $location_floor = get_field_object('location_building_floor', $location_post_id );
-                        $location_floor_value = $location_floor['value'];
-                        $location_floor_label = $location_floor['choices'][ $location_floor_value ];
+                        $location_floor_value = '';
+                        $location_floor_label = '';
+                        if ( $location_floor ) {
+                            $location_floor_value = $location_floor['value'];
+                            $location_floor_label = $location_floor['choices'][ $location_floor_value ];
+                        }
                     $location_suite = get_field('location_suite', $location_post_id );
 
                         // Option 1: 
@@ -265,8 +269,12 @@ function display_provider_image() {
                     $location_gmb_sanitizing = get_field( 'is_sanitizing_between_customers', $location_post_id );
                     $location_gmb_sanitizing = ( $location_gmb_sanitizing == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_sanitizing;
                     $location_map = get_field( 'location_map', $location_post_id );
-                    $location_latitude = $location_map['lat'];
-                    $location_longitude = $location_map['lng'];
+                        $location_latitude = '';
+                        $location_longitude = '';
+                        if ( $location_map ) {
+                            $location_latitude = $location_map['lat'];
+                            $location_longitude = $location_map['lng'];
+                        }
                     $location_gmb_exclude = get_field( 'location_gmb_exclude', $location_post_id );
                     $location_gmb_prefix = get_field( 'location_gmb_prefix', $location_post_id );
 
