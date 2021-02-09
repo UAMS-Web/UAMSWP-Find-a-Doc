@@ -26,6 +26,8 @@ add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_c
 
 // Remove Breadcrumbs
 remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
+remove_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
+remove_action( 'genesis_after_header', 'sp_breadcrumb_after_header' );
 
 // Remove Skip Links from a template
 remove_action ( 'genesis_before_header', 'genesis_skip_links', 5 );
