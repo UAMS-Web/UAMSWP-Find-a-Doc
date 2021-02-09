@@ -195,6 +195,7 @@ function display_provider_image() {
                     $phys_title = get_field('physician_title',$post_id);
                     $phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
 
+                    $provider_gmb_exclude = get_field( 'physician_gmb_exclude', $post_id );
                     $provider_gmb_cats = get_field( 'physician_gmb_cat', $post_id );
                     $provider_gmb_cat_primary_name = 'Doctor';
                     $provider_gmb_cat_additional_names = '';
@@ -214,7 +215,7 @@ function display_provider_image() {
                     }
 
                     // Create the table
-                    if ( $locations && $location_valid && !$resident ) {
+                    if ( $locations && $location_valid && !$resident && !$provider_gmb_exclude ) {
 
                         // Create row for each valid location
                         foreach( $locations as $location ) {
