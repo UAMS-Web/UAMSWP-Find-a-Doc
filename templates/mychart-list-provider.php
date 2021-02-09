@@ -13,6 +13,9 @@ remove_action( 'genesis_header', 'genesis_do_header' );
 remove_action( 'genesis_header', 'genesis_header_markup_open', 5 );
 remove_action( 'genesis_header', 'genesis_header_markup_close', 15 );
 
+// Remove primary nav
+remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
+
 // Remove Footer Widgets
 remove_action( 'genesis_before_footer', 'genesis_footer_widget_areas' );
 
