@@ -202,7 +202,13 @@ function display_provider_image() {
                     $short_name = $prefix ? $prefix .'&nbsp;' .get_field('physician_last_name',$post_id) : get_field('physician_first_name',$post_id) .' ' .(get_field('physician_middle_name',$post_id) ? get_field('physician_middle_name',$post_id) . ' ' : '') . get_field('physician_last_name',$post_id) . (get_field('physician_pedigree',$post_id) ? '&nbsp;' . get_field('physician_pedigree',$post_id) : '');
                     $resident = get_field('physician_resident',$post_id);
                     $phys_title = get_field('physician_title',$post_id);
-                    $phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
+                    $phys_title_name = get_term( $phys_title, 'clinical_title' )->name;
+                    $vowels = array('a','e','i','o','u');
+                    if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
+                        $phys_title_indef_article = 'an';
+                    } else {
+                        $phys_title_indef_article = 'a';
+                    }
 
                     // Create the table
                     if ( $locations && $location_valid && !$resident ) {
