@@ -259,7 +259,7 @@ function display_provider_image() {
                                 $location_gmb_cat_primary_name = esc_html( $location_gmb_cat_term->name );
                             } elseif ( 2 == $c ) {
                                 $location_gmb_cat_additional_names = esc_html( $location_gmb_cat_term->name );
-                            } else {
+                            } elseif ( 11 > $c ) {
                                 $location_gmb_cat_additional_names .= ', ' . esc_html( $location_gmb_cat_term->name );
                             }
                             $c++;
