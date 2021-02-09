@@ -380,6 +380,7 @@ add_action( 'init', 'create_patient_type_taxonomy', 0 );
 add_action( 'init', 'create_portal_taxonomy', 0 );
 add_action( 'init', 'create_recognition_taxonomy', 0 );
 add_action( 'init', 'create_service_line_taxonomy', 0 );
+add_action( 'init', 'create_gmb_cat_provider_taxonomy', 0 );
 // add_action( 'init', 'create_medical_specialties_taxonomy', 0 ); // Disabled
 // add_action( 'init', 'create_medical_terms_taxonomy', 0 ); // Disabled
 // Academic
@@ -397,6 +398,7 @@ add_action( 'init', 'create_residency_years_taxonomy', 0 );
 add_action( 'init', 'create_region_taxonomy', 0 );
 add_action( 'init', 'create_location_type_taxonomy', 0 );
 add_action( 'init', 'create_building_taxonomy', 0 );
+add_action( 'init', 'create_gmb_cat_location_taxonomy', 0 );
 
 /* Taxonomy Functions */
 function create_clinical_conditions_taxonomy() {
@@ -610,6 +612,7 @@ function create_departments_taxonomy() {
 		'show_in_rest'       		 => true,
   		'rest_base'          		 => 'medical_department',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'department', array( 'provider' ), $args );
 
@@ -664,6 +667,7 @@ function create_service_line_taxonomy() {
 		'show_in_rest'       		 => true,
   		'rest_base'          		 => 'service_line',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'service_line', array( 'provider' ), $args );
 
@@ -718,6 +722,7 @@ function create_degrees_taxonomy() {
 		'show_in_rest'       		 => true,
   		'rest_base'          		 => 'medical_degree',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'degree', array( 'provider' ), $args );
 
@@ -772,6 +777,7 @@ function create_patient_type_taxonomy() {
 		'show_in_rest'       		 => true,
   		'rest_base'          		 => 'patient_type',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'patient_type', array( 'provider' ), $args );
 
@@ -826,6 +832,7 @@ function create_clinical_title_taxonomy() {
 		'show_in_rest'       		 => true,
   		'rest_base'          		 => 'clinical_title',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'clinical_title', array( 'provider' ), $args );
 
@@ -880,6 +887,7 @@ function create_clinical_admin_title_taxonomy() {
 		'show_in_rest'       		 => true,
   		'rest_base'          		 => 'clinical_admin_title',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'clinical_admin_title', array( 'provider' ), $args );
 
@@ -929,6 +937,7 @@ function create_affiliations_taxonomy() {
 		'show_in_rest'               => true,
 		'rest_base'                  => 'affiliation',
 		'rest_controller_class'      => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'affiliation', array( 'provider' ), $args );
 
@@ -978,6 +987,7 @@ function create_institute_affiliations_taxonomy() {
 		'show_in_rest'               => true,
 		'rest_base'                  => 'institute_affiliation',
 		'rest_controller_class'      => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'institute_affiliation', array( 'provider' ), $args );
 
@@ -1027,6 +1037,7 @@ function create_languages_taxonomy() {
 		'show_in_rest'               => true,
 		'rest_base'                  => 'language',
 		'rest_controller_class'      => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'language', array( 'provider' ), $args );
 
@@ -1127,6 +1138,7 @@ function create_academic_position_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'academic_position', array( 'provider' ), $args );
 
@@ -1177,6 +1189,7 @@ function create_academic_college_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'academic_college', array( 'provider' ), $args );
 
@@ -1227,6 +1240,7 @@ function create_schools_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'school', array( 'provider' ), $args );
 
@@ -1278,6 +1292,7 @@ function create_residency_years_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'residency_year', array( 'provider' ), $args );
 
@@ -1326,6 +1341,7 @@ function create_academic_departments_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'academic_department', array( 'provider' ), $args );
 
@@ -1372,6 +1388,7 @@ function create_boards_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'board', array( 'provider' ), $args );
 
@@ -1418,6 +1435,7 @@ function create_associations_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'association', array( 'provider' ), $args );
 
@@ -1469,6 +1487,7 @@ function create_education_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'educationtype', array( 'provider' ), $args );
 
@@ -1523,6 +1542,7 @@ function create_portal_taxonomy() {
 		'show_in_rest'       		 => true,
   		'rest_base'          		 => 'portal',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'portal', array( 'provider' ), $args );
 
@@ -1577,6 +1597,7 @@ function create_academic_title_taxonomy() {
 		'show_in_rest'       		 => true,
   		'rest_base'          		 => 'academic_title',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'academic_title', array( 'provider' ), $args );
 
@@ -1631,6 +1652,7 @@ function create_academic_admin_title_taxonomy() {
 	  'show_in_rest'       		 => true,
 		'rest_base'          		 => 'academic_admin_title',
 		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+	  'show_in_quick_edit'         => false,
   );
   register_taxonomy( 'academic_admin_title', array( 'provider' ), $args );
 
@@ -1681,6 +1703,7 @@ function create_recognition_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'recognition', array( 'provider' ), $args );
 
@@ -1731,6 +1754,7 @@ function create_region_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'region', array( 'location' ), $args );
 
@@ -1781,8 +1805,111 @@ function create_location_type_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => true,
 	);
 	register_taxonomy( 'location_type', array( 'location' ), $args );
+
+}
+
+function create_gmb_cat_provider_taxonomy() {
+
+	$labels = array(
+		'name'                       => 'Google My Business Categories for Providers',
+		'singular_name'              => 'Google My Business Category for Providers',
+		'menu_name'                  => 'Google My Business Categories',
+		'all_items'                  => 'All Categories',
+		'parent_item'                => 'Parent Category',
+		'parent_item_colon'          => 'Parent Category:',
+		'new_item_name'              => 'New Category',
+		'add_new_item'               => 'Add New Category',
+		'edit_item'                  => 'Edit Category',
+		'update_item'                => 'Update Category',
+		'view_item'                  => 'View Category',
+		'separate_items_with_commas' => 'Separate Categories with commas',
+		'add_or_remove_items'        => 'Add or remove Categories',
+		'choose_from_most_used'      => 'Choose from the most used',
+		'popular_items'              => 'Popular Categories',
+		'search_items'               => 'Search Categories',
+		'not_found'                  => 'Not Found',
+		'no_terms'                   => 'No Categories',
+		'items_list'                 => 'Categories list',
+		'items_list_navigation'      => 'Categories list navigation',
+	);
+	$rewrite = array(
+		'slug'                       => 'gmb_cat_provider',
+		'with_front'                 => false,
+		'hierarchical'               => false,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => false,
+		'show_ui'                    => true,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => true,
+	);
+	register_taxonomy( 'gmb_cat_provider', array( 'provider' ), $args );
+
+}
+
+function create_gmb_cat_location_taxonomy() {
+
+	$labels = array(
+		'name'                       => 'Google My Business Categories for Locations',
+		'singular_name'              => 'Google My Business Category for Locations',
+		'menu_name'                  => 'Google My Business Categories',
+		'all_items'                  => 'All Categories',
+		'parent_item'                => 'Parent Category',
+		'parent_item_colon'          => 'Parent Category:',
+		'new_item_name'              => 'New Category',
+		'add_new_item'               => 'Add New Category',
+		'edit_item'                  => 'Edit Category',
+		'update_item'                => 'Update Category',
+		'view_item'                  => 'View Category',
+		'separate_items_with_commas' => 'Separate Categories with commas',
+		'add_or_remove_items'        => 'Add or remove Categories',
+		'choose_from_most_used'      => 'Choose from the most used',
+		'popular_items'              => 'Popular Categories',
+		'search_items'               => 'Search Categories',
+		'not_found'                  => 'Not Found',
+		'no_terms'                   => 'No Categories',
+		'items_list'                 => 'Categories list',
+		'items_list_navigation'      => 'Categories list navigation',
+	);
+	$rewrite = array(
+		'slug'                       => 'gmb_cat_location',
+		'with_front'                 => false,
+		'hierarchical'               => false,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => false,
+		'show_ui'                    => true,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => true,
+	);
+	register_taxonomy( 'gmb_cat_location', array( 'location' ), $args );
 
 }
 
@@ -1832,6 +1959,7 @@ function create_building_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'building', array( 'location' ), $args );
 
@@ -1947,10 +2075,12 @@ function remove_provider_meta() {
 	remove_meta_box( 'medical_termsdiv', 'provider', 'side' );
 	remove_meta_box( 'tagsdiv-recognition', 'provider', 'side' );
 	remove_meta_box( 'custom-post-type-onomies-locations', 'provider', 'side');
+	remove_meta_box( 'gmb_cat_providerdiv', 'provider', 'side' );
 	// Location
 	remove_meta_box( 'regiondiv', 'location', 'side' );
 	remove_meta_box( 'location_typediv', 'location', 'side' );
 	remove_meta_box( 'buildingdiv', 'location', 'side' );
+	remove_meta_box( 'gmb_cat_locationdiv', 'location', 'side' );
 }
 
 add_action( 'admin_menu' , 'remove_provider_meta' );

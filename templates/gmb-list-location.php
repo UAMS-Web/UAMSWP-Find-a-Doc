@@ -1,9 +1,7 @@
 <?php
 	/**
-	 *  Template Name: Full Screem
+	 *  Template Name: GMB Location List
 	 */
-
-    // $image = (isset($wp->query_vars['provider'])) ? ' highlight="' . $wp->query_vars['marker'] . '"' : '';
 
 // Remove the primary navigation
 remove_action( 'genesis_after_header', 'genesis_do_nav' ); 
@@ -12,6 +10,9 @@ remove_action( 'genesis_after_header', 'genesis_do_nav' );
 remove_action( 'genesis_header', 'genesis_do_header' );
 remove_action( 'genesis_header', 'genesis_header_markup_open', 5 );
 remove_action( 'genesis_header', 'genesis_header_markup_close', 15 );
+
+// Remove primary nav
+remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
 
 // Remove Footer Widgets
 remove_action( 'genesis_before_footer', 'genesis_footer_widget_areas' );
@@ -26,6 +27,8 @@ add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_c
 
 // Remove Breadcrumbs
 remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
+remove_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
+remove_action( 'genesis_after_header', 'sp_breadcrumb_after_header' );
 
 // Remove Skip Links from a template
 remove_action ( 'genesis_before_header', 'genesis_skip_links', 5 );
@@ -34,12 +37,18 @@ remove_action ( 'genesis_before_header', 'genesis_skip_links', 5 );
 remove_action ( 'genesis_header', 'uamswp_site_image', 5 );
 remove_action ( 'genesis_after_header', 'genesis_do_breadcrumbs' );
 remove_action ( 'genesis_entry_header', 'genesis_do_post_title' );
+remove_action ( 'genesis_before_header', 'uams_toggle_search', 12);
+remove_action ( 'genesis_before_header', 'uamswp_skip_links', 5 );
 
 // Dequeue Skip Links Script
 add_action( 'wp_enqueue_scripts','child_dequeue_skip_links' );
 function child_dequeue_skip_links() {
 	wp_dequeue_script( 'skip-links' );
 }
+
+// Remove GTM container
+remove_action( 'wp_head', 'uamswp_gtm_1' );
+remove_action( 'genesis_before', 'uamswp_gtm_2' );
 
 add_filter ( 'wp_nav_menu', '__return_false' );
 
@@ -79,8 +88,8 @@ function display_provider_image() {
                         <th class="no-break">Primary phone</th>
                         <th class="no-break">Additional phones</th>
                         <th class="no-break">Website</th>
-                        <!-- <th class="no-break">Primary category</th>
-                        <th class="no-break">Additional categories</th> -->
+                        <th class="no-break">Primary category</th>
+                        <th class="no-break">Additional categories</th>
                         <th class="no-break">Sunday hours</th>
                         <th class="no-break">Monday hours</th>
                         <th class="no-break">Tuesday hours</th>
@@ -176,8 +185,12 @@ function display_provider_image() {
                         $building_name = $building->name;
                     }
                     $location_floor = get_field_object('location_building_floor', $location_post_id );
-                        $location_floor_value = $location_floor['value'];
-                        $location_floor_label = $location_floor['choices'][ $location_floor_value ];
+                        $location_floor_value = '';
+                        $location_floor_label = '';
+                        if ( $location_floor ) {
+                            $location_floor_value = $location_floor['value'];
+                            $location_floor_label = $location_floor['choices'][ $location_floor_value ];
+                        }
                     $location_suite = get_field('location_suite', $location_post_id );
 
                         // Option 1: 
@@ -197,10 +210,10 @@ function display_provider_image() {
                         if ( $location_suite && !empty($location_suite) ) {
                             array_push($location_addresses, $location_suite);
                         }
-                        $location_address_2 = $location_addresses[0];
-                        $location_address_3 = $location_addresses[1];
-                        $location_address_4 = $location_addresses[2];
-                        $location_address_5 = $location_addresses[3];
+                        $location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
+                        $location_address_3 = array_key_exists(1, $location_addresses) ? $location_addresses[1] : '';
+                        $location_address_4 = array_key_exists(2, $location_addresses) ? $location_addresses[2] : '';
+                        $location_address_5 = array_key_exists(3, $location_addresses) ? $location_addresses[3] : '';
                         $location_address_2_deprecated = get_field('location_address_2', $location_post_id );
                         if (!$location_address_2) {
                             $location_address_2 = $location_address_2_deprecated;
@@ -235,6 +248,24 @@ function display_provider_image() {
                     $location_hours_group = get_field('location_hours_group', $location_child_id );
                     $location_telemed_query = $location_hours_group['location_telemed_query'];
 
+                    $location_gmb_cats = get_field( 'location_gmb_cat', $location_child_id );
+                    $location_gmb_cat_primary_name = 'Medical Clinic';
+                    $location_gmb_cat_additional_names = '';
+                    $c = 1;
+                    if( $location_gmb_cats ) {
+                        foreach( $location_gmb_cats as $location_gmb_cat ) {
+                            $location_gmb_cat_term = get_term($location_gmb_cat, "gmb_cat_location");
+                            if ( 2 > $c ){
+                                $location_gmb_cat_primary_name = esc_html( $location_gmb_cat_term->name );
+                            } elseif ( 2 == $c ) {
+                                $location_gmb_cat_additional_names = esc_html( $location_gmb_cat_term->name );
+                            } elseif ( 11 > $c ) {
+                                $location_gmb_cat_additional_names .= ', ' . esc_html( $location_gmb_cat_term->name );
+                            }
+                            $c++;
+                        } // endforeach
+                    }
+                    
                     $location_gmb_wheelchair_elevator = get_field( 'has_wheelchair_accessible_elevator', $location_post_id );
                     $location_gmb_wheelchair_elevator = ( $location_gmb_wheelchair_elevator == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_elevator;
                     $location_gmb_wheelchair_entrance = get_field( 'has_wheelchair_accessible_entrance', $location_post_id );
@@ -256,9 +287,14 @@ function display_provider_image() {
                     $location_gmb_sanitizing = get_field( 'is_sanitizing_between_customers', $location_post_id );
                     $location_gmb_sanitizing = ( $location_gmb_sanitizing == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_sanitizing;
                     $location_map = get_field( 'location_map', $location_post_id );
-                    $location_latitude = $location_map['lat'];
-                    $location_longitude = $location_map['lng'];
+                        $location_latitude = '';
+                        $location_longitude = '';
+                        if ( $location_map ) {
+                            $location_latitude = $location_map['lat'];
+                            $location_longitude = $location_map['lng'];
+                        }
                     $location_gmb_exclude = get_field( 'location_gmb_exclude', $location_post_id );
+                    $location_gmb_prefix = get_field( 'location_gmb_prefix', $location_post_id );
 
                     // Create the table
                     if ( !$location_gmb_exclude ) {
@@ -274,7 +310,7 @@ function display_provider_image() {
                             echo '</td>';
 
                         // Business name
-                            echo '<td data-gmb-column="Business name" class="no-break">UAMS Health - ' . $location_title . '</td>';
+                            echo '<td data-gmb-column="Business name" class="no-break">' . ($location_gmb_prefix ? 'UAMS Health - ' : '') . $location_title . '</td>';
 
                         // Address line 1
                             echo '<td data-gmb-column="Address line 1" class="no-break">';
@@ -348,12 +384,14 @@ function display_provider_image() {
                             echo '</td>';
 
                         // Primary category
-                        // Hiding this column so that we don't overwrite existing data. Will need to instead download/reimport data from GMB to update category in bulk.
-                        //    echo '<td data-gmb-column="Primary category" class="no-break">Doctor</td>';
+                            echo '<td data-gmb-column="Primary category" class="no-break">';
+                            echo $location_gmb_cat_primary_name;
+                            echo '</td>';
 
                         // Additional categories
-                        // Hiding this column so that we don't overwrite existing data. Will need to instead download/reimport data from GMB to update category in bulk.
-                        //    echo '<td data-gmb-column="Additional categories" class="no-break"></td>';
+                            echo '<td data-gmb-column="Additional categories" class="no-break">';
+                            echo $location_gmb_cat_additional_names;
+                            echo '</td>';
 
                         // Sunday hours
                         // Intentionally left blank for now
