@@ -510,10 +510,11 @@ function display_provider_image() {
 
                                     // Labels
                                         $service_line = '';
-                                        $service_line = get_term( get_field('physician_service_line',$post_id), 'service_line' )->name;
+                                        $service_line = get_field('physician_service_line',$post_id);
+                                        $service_line_name = $service_line ? get_term( $service_line, 'service_line' )->name : '';
     
                                         echo '<td data-gmb-column="Labels" class="no-break">';
-                                        echo $service_line ? $service_line : '';
+                                        echo $service_line_name;
                                         echo '</td>';
 
                                     // AdWords location extensions phone
