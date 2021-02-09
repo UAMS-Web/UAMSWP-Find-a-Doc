@@ -2467,7 +2467,7 @@
             "label": "Category",
             "name": "physician_gmb_cat",
             "type": "taxonomy",
-            "instructions": "Select up to ten categories. Rearrange them so that the first item is the primary category. \"Doctor\" is a good standard choice, if you cannot find a better option.<br />For reference, you can <a href='https://communications.uams.edu/web/kbtopic/google-my-business/' target='_blank'>view a list of available categories.</a>",
+            "instructions": "Select up to ten categories. Rearrange them so that the first item is the primary category. \"Doctor\" is a good standard choice, if you cannot find a better option.<br />For reference, you can <a href='https://communications.uams.edu/web/kb/google-my-business-categories/' target='_blank'>view a list of available categories.</a>",
             "required": "1",
             "conditional_logic": [
                 [
