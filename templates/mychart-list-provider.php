@@ -36,6 +36,8 @@ remove_action ( 'genesis_before_header', 'genesis_skip_links', 5 );
 remove_action ( 'genesis_header', 'uamswp_site_image', 5 );
 remove_action ( 'genesis_after_header', 'genesis_do_breadcrumbs' );
 remove_action ( 'genesis_entry_header', 'genesis_do_post_title' );
+remove_action ( 'genesis_before_header', 'uams_toggle_search', 12);
+remove_action ( 'genesis_before_header', 'uamswp_skip_links', 5 );
 
 // Dequeue Skip Links Script
 add_action( 'wp_enqueue_scripts','child_dequeue_skip_links' );
