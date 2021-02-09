@@ -61,6 +61,7 @@ function uamswp_taxonomy_archive_page_template ($templates) {
     $templates['doximity-list.php'] = 'Doximity List';
     $templates['gmb-list-provider.php'] = 'GMB Provider List';
     $templates['gmb-list-location.php'] = 'GMB Location List';
+    $templates['mychart-list-provider.php'] = 'MyChart Provider List';
     return $templates;
     }
 add_filter ('theme_page_templates', 'uamswp_taxonomy_archive_page_template');
@@ -80,6 +81,8 @@ function uamswp_redirect_page_template ($template) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/gmb-list-provider.php';
     if ('gmb-list-location.php' == basename ($page_template ))
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/gmb-list-location.php';
+    if ('mychart-list-provider.php' == basename ($page_template ))
+        $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/mychart-list-provider.php';
     return $template;
     }
 add_filter ('page_template', 'uamswp_redirect_page_template');
