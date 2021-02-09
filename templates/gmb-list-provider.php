@@ -307,10 +307,11 @@ function display_provider_image() {
                                             } else {
                                                 array_push($location_addresses, $location_parent_title, $location_title);
                                             }
-                                            $location_address_2 = $location_addresses[0];
-                                            $location_address_3 = $location_addresses[1];
-                                            $location_address_4 = $location_addresses[2];
-                                            $location_address_5 = $location_addresses[3];
+                                            
+                                            $location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
+                                            $location_address_3 = array_key_exists(1, $location_addresses) ? $location_addresses[1] : '';
+                                            $location_address_4 = array_key_exists(2, $location_addresses) ? $location_addresses[2] : '';
+                                            $location_address_5 = array_key_exists(3, $location_addresses) ? $location_addresses[3] : '';
                                         
                                         $location_city = get_field( 'location_city', $location_post_id );
                                         $location_state = get_field( 'location_state', $location_post_id );
