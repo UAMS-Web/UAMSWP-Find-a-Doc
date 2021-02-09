@@ -1,9 +1,7 @@
 <?php
 	/**
-	 *  Template Name: Full Screem
+	 *  Template Name: MyChart Provider List
 	 */
-
-    // $image = (isset($wp->query_vars['provider'])) ? ' highlight="' . $wp->query_vars['marker'] . '"' : '';
 
 // Remove the primary navigation
 remove_action( 'genesis_after_header', 'genesis_do_nav' ); 
