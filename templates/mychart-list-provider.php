@@ -71,9 +71,9 @@ function display_provider_image() {
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th class="no-break">PID</th>
-                        <th class="no-break">Name</th>
-                        <th class="no-break">Profile URL</th>
+                        <th class="no-break">Provider ID</th>
+                        <th class="no-break">Provider Name</th>
+                        <th class="no-break">Provider Profile URL</th>
                     </tr>
                 </thead>
                 <tbody>
