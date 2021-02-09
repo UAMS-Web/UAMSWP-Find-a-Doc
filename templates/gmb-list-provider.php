@@ -79,8 +79,8 @@ function display_provider_image() {
                         <th class="no-break">Primary phone</th>
                         <th class="no-break">Additional phones</th>
                         <th class="no-break">Website</th>
-                        <!-- <th class="no-break">Primary category</th>
-                        <th class="no-break">Additional categories</th> -->
+                        <th class="no-break">Primary category</th>
+                        <th class="no-break">Additional categories</th>
                         <th class="no-break">Sunday hours</th>
                         <th class="no-break">Monday hours</th>
                         <th class="no-break">Tuesday hours</th>
@@ -194,6 +194,24 @@ function display_provider_image() {
                     $resident = get_field('physician_resident',$post_id);
                     $phys_title = get_field('physician_title',$post_id);
                     $phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
+
+                    $provider_gmb_cats = get_field( 'physician_gmb_cat', $post_id );
+                    $provider_gmb_cat_primary_name = 'Doctor';
+                    $provider_gmb_cat_additional_names = '';
+                    $c = 1;
+                    if( $provider_gmb_cats ) {
+                        foreach( $provider_gmb_cats as $provider_gmb_cat ) {
+                            $provider_gmb_cat_term = get_term($provider_gmb_cat, "gmb_cat_provider");
+                            if ( 2 > $c ){
+                                $provider_gmb_cat_primary_name = esc_html( $provider_gmb_cat_term->name );
+                            } elseif ( 2 == $c ) {
+                                $provider_gmb_cat_additional_names = esc_html( $provider_gmb_cat_term->name );
+                            } elseif ( 11 > $c ) {
+                                $provider_gmb_cat_additional_names .= ', ' . esc_html( $provider_gmb_cat_term->name );
+                            }
+                            $c++;
+                        } // endforeach
+                    }
 
                     // Create the table
                     if ( $locations && $location_valid && !$resident ) {
@@ -400,12 +418,14 @@ function display_provider_image() {
                                         echo '</td>';
 
                                     // Primary category
-                                    // Hiding this column so that we don't overwrite existing data. Will need to instead download/reimport data from GMB to update category in bulk.
-                                    //    echo '<td data-gmb-column="Primary category" class="no-break">Doctor</td>';
-
+                                        echo '<td data-gmb-column="Primary category" class="no-break">';
+                                        echo $provider_gmb_cat_primary_name;
+                                        echo '</td>';
+            
                                     // Additional categories
-                                    // Hiding this column so that we don't overwrite existing data. Will need to instead download/reimport data from GMB to update category in bulk.
-                                    //    echo '<td data-gmb-column="Additional categories" class="no-break"></td>';
+                                        echo '<td data-gmb-column="Additional categories" class="no-break">';
+                                        echo $provider_gmb_cat_additional_names;
+                                        echo '</td>';
 
                                     // Sunday hours
                                     // Intentionally left blank for now
