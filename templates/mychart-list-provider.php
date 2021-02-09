@@ -45,6 +45,9 @@ function child_dequeue_skip_links() {
 	wp_dequeue_script( 'skip-links' );
 }
 
+remove_action( 'wp_head', 'uamswp_gtm_1' );
+remove_action( 'genesis_before', 'uamswp_gtm_2' );
+
 add_filter ( 'wp_nav_menu', '__return_false' );
 
 remove_action( 'genesis_loop', 'genesis_do_loop' );
