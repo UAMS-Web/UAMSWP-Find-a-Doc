@@ -206,10 +206,10 @@ function display_provider_image() {
                         if ( $location_suite && !empty($location_suite) ) {
                             array_push($location_addresses, $location_suite);
                         }
-                        $location_address_2 = $location_addresses[0];
-                        $location_address_3 = $location_addresses[1];
-                        $location_address_4 = $location_addresses[2];
-                        $location_address_5 = $location_addresses[3];
+                        $location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
+                        $location_address_3 = array_key_exists(1, $location_addresses) ? $location_addresses[1] : '';
+                        $location_address_4 = array_key_exists(2, $location_addresses) ? $location_addresses[2] : '';
+                        $location_address_5 = array_key_exists(3, $location_addresses) ? $location_addresses[3] : '';
                         $location_address_2_deprecated = get_field('location_address_2', $location_post_id );
                         if (!$location_address_2) {
                             $location_address_2 = $location_address_2_deprecated;

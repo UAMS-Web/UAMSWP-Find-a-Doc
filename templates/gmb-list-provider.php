@@ -202,7 +202,13 @@ function display_provider_image() {
                     $short_name = $prefix ? $prefix .'&nbsp;' .get_field('physician_last_name',$post_id) : get_field('physician_first_name',$post_id) .' ' .(get_field('physician_middle_name',$post_id) ? get_field('physician_middle_name',$post_id) . ' ' : '') . get_field('physician_last_name',$post_id) . (get_field('physician_pedigree',$post_id) ? '&nbsp;' . get_field('physician_pedigree',$post_id) : '');
                     $resident = get_field('physician_resident',$post_id);
                     $phys_title = get_field('physician_title',$post_id);
-                    $phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
+                    $phys_title_name = get_term( $phys_title, 'clinical_title' )->name;
+                    $vowels = array('a','e','i','o','u');
+                    if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
+                        $phys_title_indef_article = 'an';
+                    } else {
+                        $phys_title_indef_article = 'a';
+                    }
 
                     $provider_gmb_cats = get_field( 'physician_gmb_cat', $post_id );
                     $provider_gmb_cat_primary_name = 'Doctor';
@@ -319,10 +325,11 @@ function display_provider_image() {
                                             } else {
                                                 array_push($location_addresses, $location_parent_title, $location_title);
                                             }
-                                            $location_address_2 = $location_addresses[0];
-                                            $location_address_3 = $location_addresses[1];
-                                            $location_address_4 = $location_addresses[2];
-                                            $location_address_5 = $location_addresses[3];
+                                            
+                                            $location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
+                                            $location_address_3 = array_key_exists(1, $location_addresses) ? $location_addresses[1] : '';
+                                            $location_address_4 = array_key_exists(2, $location_addresses) ? $location_addresses[2] : '';
+                                            $location_address_5 = array_key_exists(3, $location_addresses) ? $location_addresses[3] : '';
                                         
                                         $location_city = get_field( 'location_city', $location_post_id );
                                         $location_state = get_field( 'location_state', $location_post_id );
