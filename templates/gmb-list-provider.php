@@ -1,9 +1,7 @@
 <?php
 	/**
-	 *  Template Name: Full Screem
+	 *  Template Name: GMB Provider List
 	 */
-
-    // $image = (isset($wp->query_vars['provider'])) ? ' highlight="' . $wp->query_vars['marker'] . '"' : '';
 
 // Remove the primary navigation
 remove_action( 'genesis_after_header', 'genesis_do_nav' ); 
@@ -12,6 +10,9 @@ remove_action( 'genesis_after_header', 'genesis_do_nav' );
 remove_action( 'genesis_header', 'genesis_do_header' );
 remove_action( 'genesis_header', 'genesis_header_markup_open', 5 );
 remove_action( 'genesis_header', 'genesis_header_markup_close', 15 );
+
+// Remove primary nav
+remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
 
 // Remove Footer Widgets
 remove_action( 'genesis_before_footer', 'genesis_footer_widget_areas' );
@@ -26,6 +27,8 @@ add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_c
 
 // Remove Breadcrumbs
 remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
+remove_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
+remove_action( 'genesis_after_header', 'sp_breadcrumb_after_header' );
 
 // Remove Skip Links from a template
 remove_action ( 'genesis_before_header', 'genesis_skip_links', 5 );
@@ -34,12 +37,18 @@ remove_action ( 'genesis_before_header', 'genesis_skip_links', 5 );
 remove_action ( 'genesis_header', 'uamswp_site_image', 5 );
 remove_action ( 'genesis_after_header', 'genesis_do_breadcrumbs' );
 remove_action ( 'genesis_entry_header', 'genesis_do_post_title' );
+remove_action ( 'genesis_before_header', 'uams_toggle_search', 12);
+remove_action ( 'genesis_before_header', 'uamswp_skip_links', 5 );
 
 // Dequeue Skip Links Script
 add_action( 'wp_enqueue_scripts','child_dequeue_skip_links' );
 function child_dequeue_skip_links() {
 	wp_dequeue_script( 'skip-links' );
 }
+
+// Remove GTM container
+remove_action( 'wp_head', 'uamswp_gtm_1' );
+remove_action( 'genesis_before', 'uamswp_gtm_2' );
 
 add_filter ( 'wp_nav_menu', '__return_false' );
 
@@ -167,10 +176,12 @@ function display_provider_image() {
                     // Check for valid locations
                     $locations = get_field('physician_locations',$post_id);
                     $location_valid = false;
-                    foreach( $locations as $location ) {
-                        if ( get_post_status ( $location ) == 'publish' ) {
-                            $location_valid = true;
-                            $break;
+                    if ( $locations ) {
+                        foreach( $locations as $location ) {
+                            if ( get_post_status ( $location ) == 'publish' ) {
+                                $location_valid = true;
+                                $break;
+                            }
                         }
                     }
                         
@@ -193,7 +204,13 @@ function display_provider_image() {
                     $short_name = $prefix ? $prefix .'&nbsp;' .get_field('physician_last_name',$post_id) : get_field('physician_first_name',$post_id) .' ' .(get_field('physician_middle_name',$post_id) ? get_field('physician_middle_name',$post_id) . ' ' : '') . get_field('physician_last_name',$post_id) . (get_field('physician_pedigree',$post_id) ? '&nbsp;' . get_field('physician_pedigree',$post_id) : '');
                     $resident = get_field('physician_resident',$post_id);
                     $phys_title = get_field('physician_title',$post_id);
-                    $phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
+                    $phys_title_name = get_term( $phys_title, 'clinical_title' )->name;
+                    $vowels = array('a','e','i','o','u');
+                    if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
+                        $phys_title_indef_article = 'an';
+                    } else {
+                        $phys_title_indef_article = 'a';
+                    }
 
                     // Create the table
                     if ( $locations && $location_valid && !$resident ) {
@@ -246,8 +263,12 @@ function display_provider_image() {
                                             $building_name = $building->name;
                                         }
                                         $location_floor = get_field_object('location_building_floor', $location_post_id );
-                                            $location_floor_value = $location_floor['value'];
-                                            $location_floor_label = $location_floor['choices'][ $location_floor_value ];
+                                            $location_floor_value = '';
+                                            $location_floor_label = '';
+                                            if ( $location_floor ) {
+                                                $location_floor_value = $location_floor['value'];
+                                                $location_floor_label = $location_floor['choices'][ $location_floor_value ];
+                                            }
                                         $location_suite = get_field('location_suite', $location_post_id );
                     
                                             // Option 1: 
@@ -292,10 +313,11 @@ function display_provider_image() {
                                             } else {
                                                 array_push($location_addresses, $location_parent_title, $location_title);
                                             }
-                                            $location_address_2 = $location_addresses[0];
-                                            $location_address_3 = $location_addresses[1];
-                                            $location_address_4 = $location_addresses[2];
-                                            $location_address_5 = $location_addresses[3];
+                                            
+                                            $location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
+                                            $location_address_3 = array_key_exists(1, $location_addresses) ? $location_addresses[1] : '';
+                                            $location_address_4 = array_key_exists(2, $location_addresses) ? $location_addresses[2] : '';
+                                            $location_address_5 = array_key_exists(3, $location_addresses) ? $location_addresses[3] : '';
                                         
                                         $location_city = get_field( 'location_city', $location_post_id );
                                         $location_state = get_field( 'location_state', $location_post_id );
@@ -326,8 +348,12 @@ function display_provider_image() {
                                         $location_gmb_sanitizing = get_field( 'is_sanitizing_between_customers', $location_post_id );
                                         $location_gmb_sanitizing = ( $location_gmb_sanitizing == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_sanitizing;
                                         $location_map = get_field( 'location_map', $location_post_id );
-                                        $location_latitude = $location_map['lat'];
-                                        $location_longitude = $location_map['lng'];
+                                            $location_latitude = '';
+                                            $location_longitude = '';
+                                            if ( $location_map ) {
+                                                $location_latitude = $location_map['lat'];
+                                                $location_longitude = $location_map['lng'];
+                                            }
 
                                         echo '<td data-gmb-column="Address line 1" class="no-break">';
                                         echo $location_address_1 ? $location_address_1 : '';
@@ -486,10 +512,11 @@ function display_provider_image() {
 
                                     // Labels
                                         $service_line = '';
-                                        $service_line = get_term( get_field('physician_service_line',$post_id), 'service_line' )->name;
+                                        $service_line = get_field('physician_service_line',$post_id);
+                                        $service_line_name = $service_line ? get_term( $service_line, 'service_line' )->name : '';
     
                                         echo '<td data-gmb-column="Labels" class="no-break">';
-                                        echo $service_line ? $service_line : '';
+                                        echo $service_line_name;
                                         echo '</td>';
 
                                     // AdWords location extensions phone

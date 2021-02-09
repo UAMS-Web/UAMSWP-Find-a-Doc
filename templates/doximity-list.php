@@ -1,9 +1,7 @@
 <?php
 	/**
-	 *  Template Name: Full Screem
+	 *  Template Name: Doximity List
 	 */
-
-    // $image = (isset($wp->query_vars['provider'])) ? ' highlight="' . $wp->query_vars['marker'] . '"' : '';
 
 // Remove the primary navigation
 remove_action( 'genesis_after_header', 'genesis_do_nav' ); 
@@ -12,6 +10,9 @@ remove_action( 'genesis_after_header', 'genesis_do_nav' );
 remove_action( 'genesis_header', 'genesis_do_header' );
 remove_action( 'genesis_header', 'genesis_header_markup_open', 5 );
 remove_action( 'genesis_header', 'genesis_header_markup_close', 15 );
+
+// Remove primary nav
+remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
 
 // Remove Footer Widgets
 remove_action( 'genesis_before_footer', 'genesis_footer_widget_areas' );
@@ -26,6 +27,8 @@ add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_c
 
 // Remove Breadcrumbs
 remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
+remove_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
+remove_action( 'genesis_after_header', 'sp_breadcrumb_after_header' );
 
 // Remove Skip Links from a template
 remove_action ( 'genesis_before_header', 'genesis_skip_links', 5 );
@@ -34,12 +37,18 @@ remove_action ( 'genesis_before_header', 'genesis_skip_links', 5 );
 remove_action ( 'genesis_header', 'uamswp_site_image', 5 );
 remove_action ( 'genesis_after_header', 'genesis_do_breadcrumbs' );
 remove_action ( 'genesis_entry_header', 'genesis_do_post_title' );
+remove_action ( 'genesis_before_header', 'uams_toggle_search', 12);
+remove_action ( 'genesis_before_header', 'uamswp_skip_links', 5 );
 
 // Dequeue Skip Links Script
 add_action( 'wp_enqueue_scripts','child_dequeue_skip_links' );
 function child_dequeue_skip_links() {
 	wp_dequeue_script( 'skip-links' );
 }
+
+// Remove GTM container
+remove_action( 'wp_head', 'uamswp_gtm_1' );
+remove_action( 'genesis_before', 'uamswp_gtm_2' );
 
 add_filter ( 'wp_nav_menu', '__return_false' );
 
