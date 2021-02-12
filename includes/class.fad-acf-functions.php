@@ -757,3 +757,10 @@ function limit_post_top_level( $args, $field, $post ) {
 		// return the errors
 		return $errors;
 	} // end function acf_image_aspect_ratio_validate
+
+	function pubmed_information_format_value( $value, $post_id, $field ) {
+
+		// Render shortcodes in all textarea values.
+		return html_entity_decode( $value );
+	}
+	add_filter('acf/format_value/key=field_physician_select_publications_pubmed', 'pubmed_information_format_value', 10, 3);
