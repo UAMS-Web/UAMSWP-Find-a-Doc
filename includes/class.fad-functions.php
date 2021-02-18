@@ -7,7 +7,7 @@ function asp_custom_link_meta_results( $results ) {
 	  $full_name = '';
 	  $new_desc = '';
 	  foreach ($results as $k=>$v) {
-		  if (($v->content_type == "pagepost") && (get_post_type($v->id) == "providers")) {
+		  if (($v->content_type == "pagepost") && (get_post_type($v->id) == "provider")) {
                 $degrees = get_field('physician_degree', $v->id);
                 $degree_list = '';
                 $i = 1;
@@ -40,16 +40,18 @@ function asp_custom_link_meta_results( $results ) {
 	  return $results;
 	// }
 }
-
-
+// Enqueue for Admin
 function uamswp_admin_scripts ( $hook ) {
      
     if( $hook == 'post.php' ) {
-        wp_enqueue_script( 'acf-admin-js', UAMS_FAD_ROOT_URL . 'admin/js/acf-admin.js', array('jquery'), null, true );
+		wp_enqueue_script( 'acf-admin-js', UAMS_FAD_ROOT_URL . 'admin/js/acf-admin.js', array('jquery'), null, true );
+		wp_enqueue_script( 'medline-acf-js', UAMS_FAD_ROOT_URL . 'admin/js/acf-medline.js', array('jquery'), null, true );
         // wp_enqueue_stylesheet( 'plugin-main-style', plugins_url( 'css/plugin-main.css', dirname( __FILE__) ) ); 
-    }
-}
-    
+	}
+	// if( $hook == 'term.php' || $hook == 'edit-tags.php') {
+	// 	wp_enqueue_script( 'medline-acf-js', UAMS_FAD_ROOT_URL . 'admin/js/acf-medline.js', array('jquery'), null, true );
+	// }
+}   
 add_action('admin_enqueue_scripts', 'uamswp_admin_scripts');
 
 // pubmed finder
@@ -179,13 +181,14 @@ function fad_script_register() {
 	if ( !is_admin() ) {
 		wp_register_script( 'pubmed-api', UAMS_FAD_ROOT_URL . 'assets/js/pubmed-api-async.js', array('jquery'), null, true );
     }
-    if ( (is_single() && ('locations' == $post_type)) ) {
+    if ( (is_single() && ('location' == $post_type)) ) {
         wp_enqueue_style( 'leaflet-css', UAMS_FAD_ROOT_URL . 'assets/leaflet/leaflet.css', array(), '1.1', 'all');
         wp_enqueue_script( 'leaflet-js', UAMS_FAD_ROOT_URL . 'assets/leaflet/leaflet-bing.js', array(), null, false );
     }
-    if ( (is_archive() && ('providers' == $post_type)) ) {
+    if ( (is_archive() && (('provider' == $post_type) || ('location' == $post_type))) ) {
         wp_enqueue_script( 'mobile-filter-toggle', UAMS_FAD_ROOT_URL . 'assets/js/mobile-filter-toggle.js', array('jquery'), null, false );
     }
+	wp_enqueue_style( 'fad-app-css', UAMS_FAD_ROOT_URL . 'assets/css/app.css', array(), '1.0', 'all');
 	wp_enqueue_style( 'fad-css', UAMS_FAD_ROOT_URL . 'assets/css/style.css', array(), '1.0', 'all');
 }
 add_action( 'wp_enqueue_scripts', 'fad_script_register' );
@@ -202,250 +205,13 @@ function uams_pubmed_shortcode( $atts ) {
 }
 add_shortcode( 'pubmed', 'uams_pubmed_shortcode' );
 
-// Filter to fix facetwp hash error
-add_filter( 'facetwp_is_main_query', function( $is_main_query, $query ) {
-    // if ( 'providers' == $query->get( 'post_type' ) ) {
-		$is_main_query = false;
-    // }
-    return $is_main_query;
-}, 10, 2 );
 
-add_filter( 'facetwp_shortcode_html', function( $output, $atts) {
-	if ( $atts['template'] = 'physician' ) { // replace 'example' with name of your template
-        /** modify replacement as needed, make sure you keep the facetwp-template class **/
-        $output = str_replace( 'facetwp-template', 'facetwp-template row list', $output );
-	}
-	return $output; 
-}, 10, 2 );
-
-function fwp_disable_auto_refresh() {
-    if ( is_post_type_archive( 'providers' ) ) {
-	?>
-	<script>
-	(function($) {
-		$(function() {
-			if ('undefined' !== typeof FWP) {
-				FWP.auto_refresh = false;
-			}
-		});
-	})(jQuery);
-	</script>
-<?php
-    }
-}
-add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
-
-// FacetWP scripts
-function fwp_facet_scripts() {
-	if ( is_post_type_archive( 'providers' ) || is_post_type_archive( 'locations' ) ) {
-    $taxonomy_slug = isset(get_queried_object()->slug) ? get_queried_object()->slug : '';
-?>
-<script>
-(function($) {
-    $(document).on('facetwp-loaded', function() {
-        $('.facetwp-facet').each(function() {
-            var facet_name = $(this).attr('data-name');
-            var facet_label = FWP.settings.labels[facet_name];
-            if ($('.facet-label[data-for="' + facet_name + '"]').length < 1) {
-                $(this).before('<h4 class="facet-label" data-for="' + facet_name + '">' + facet_label + '</h4>');
-            }
-        });
-    });
-    $(document).on('facetwp-loaded', function() {
-        $.each(FWP.settings.num_choices, function(key, val) {
-            var $parent = $('.facetwp-facet-' + key).closest('.fwp-filter');
-            (0 === val) ? $parent.hide() : $parent.show();
-        });
-        if ($('body').hasClass('tax-specialty')) {
-        	if (! FWP.loaded) {
-	        	$('.facetwp-facet-specialty_checkbox .facetwp-checkbox[data-value="<?php echo $taxonomy_slug; ?>"]').click();
-				$('.specialty-filter').hide();
-			}
-        }
-        if ($('body').hasClass('tax-medical_terms')) {
-        	if (! FWP.loaded) {
-	        	$('.facetwp-facet-terms_checkbox .facetwp-checkbox[data-value="<?php echo $taxonomy_slug; ?>"]').click();
-				$('.terms-filter').hide();
-			}
-        }
-        if ($('body').hasClass('tax-medical_procedures')) {
-        	if (! FWP.loaded) {
-	        	$('.facetwp-facet-procedures_checkbox .facetwp-checkbox[data-value="<?php echo $taxonomy_slug; ?>"]').click();
-				$('.procedures-filter').hide();
-			}
-        }
-        if ($('body').hasClass('tax-condition')) {
-        	if (! FWP.loaded) {
-	        	$('.facetwp-facet-condition_checkbox .facetwp-checkbox[data-value="<?php echo $taxonomy_slug; ?>"]').click();
-				$('.condition-filter').hide();
-			}
-        }
-        if (FWP.loaded) {
-            $('html, body').animate({
-                scrollTop: $('main').offset().top
-            }, 500);
-        }
-    });
-    $(document).on('facetwp-refresh', function() {
-        if (! FWP.loaded) {
-            //FWP.set_hash = function() { /* empty function */ }
-            if ($('body').hasClass('tax-specialty')) {
-            	FWP.set_hash = function() { /* empty function */ } // Exclude hash function
-            	$('.specialty-filter').hide();
-            }
-            if ($('body').hasClass('tax-medical_terms')) {
-            	FWP.set_hash = function() { /* empty function */ } // Exclude hash function
-            	$('.terms-filter').hide();
-            }
-            if ($('body').hasClass('tax-medical_procedures')) {
-            	FWP.set_hash = function() { /* empty function */ } // Exclude hash function
-            	$('.procedures-filter').hide();
-            }
-            if ($('body').hasClass('tax-condition')) {
-            	FWP.set_hash = function() { /* empty function */ } // Exclude hash function
-            	$('.condition-filter').hide();
-            }
-        }
-    });
-	$(function() {
-        FWP.hooks.addAction('facetwp/refresh/alpha', function($this, facet_name) {
-            FWP.facets[facet_name] = $this.find('.facetwp-alpha.selected').attr('data-id') || '';
-        });
-    });
-
-    $(document).on('click', '.facetwp-alpha.available', function() {
-        $parent = $(this).closest('.facetwp-facet');
-        $parent.find('.facetwp-alpha').removeClass('selected');
-        var facet_name = $parent.attr('data-name');
-        $(this).addClass('selected');
-
-        if ('' !== $(this).attr('data-id')) {
-            FWP.frozen_facets[facet_name] = 'soft';
-        }
-        // FWP.refresh();
-    });
-})(jQuery);
-</script>
-<?php
-	}
-}
-add_action( 'wp_footer', 'fwp_facet_scripts', 100 );
-
-// FacetWP Sort
-add_filter( 'facetwp_sort_options', function( $options, $params ) {
-	if ( is_post_type_archive( 'providers' ) || is_singular( 'providers' ) ) {
-		$params = array(
-		    'template_name' => 'physicians',
-		);
-	    $options['name_asc'] = array(
-	        'label' => __( 'Name (A-Z)', 'fwp' ),
-	        'query_args' => array(
-	            'orderby' => 'meta_value',
-				'meta_key' => 'physician_full_name',
-				'order' => 'ASC',
-	        )
-	    );
-	    $options['name_desc'] = array(
-	        'label' => __( 'Name (Z-A)', 'fwp' ),
-	        'query_args' => array(
-	            'orderby' => 'meta_value',
-				'meta_key' => 'physician_full_name',
-	            'order' => 'DESC',
-	        )
-	    );
-	    unset( $options['title_asc'] );
-     	unset( $options['title_desc'] );
-	 } elseif ( is_post_type_archive( 'locations' ) || is_singular( 'locations' ) ) {
-	 	$params = array(
-		    'template_name' => 'locations',
-		);
-	 }
-    //);
-     unset( $options['date_desc'] );
-     unset( $options['date_asc'] );
-    return $options;
-}, 10, 2 );
-
-add_filter( 'facetwp_pager_html', function( $output, $params ) {
-    $output = '';
-    $page = $params['page'];
-    $total_pages = $params['total_pages'];
-
-    if ( 1 < $total_pages ) {
-
-		$output .= '<nav aria-label="list pagination"><ul class="pagination">';
-
-        // First Page
-        if ( 3 < $page ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link first-page" data-page="1"><span class="fas fa-fast-backward" aria-hidden="true"></span></a></li>';
-        }
-        
-        // Previous page (NEW)
-        if ( $page > 1 ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page - 1) . '"><span class="fas fa-angle-left" aria-hidden="true"></span></a></li>';
-        }
-        
-        if ( 1 < ( $page - 10 ) ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page - 10) . '">' . ($page - 10) . '</a></li>';
-        }
-        for ( $i = 2; $i > 0; $i-- ) {
-            if ( 0 < ( $page - $i ) ) {
-                $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page - $i) . '">' . ($page - $i) . '</a></li>';
-            }
-        }
-
-        // Current page
-        $output .= '<li class="page-item"><a class="facetwp-page page-link active" data-page="' . $page . '">' . $page . '</a></li>';
-
-        for ( $i = 1; $i <= 2; $i++ ) {
-            if ( $total_pages >= ( $page + $i ) ) {
-                $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page + $i) . '">' . ($page + $i) . '</a></li>';
-            }
-        }
-        if ( $total_pages > ( $page + 10 ) ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page + 10) . '">' . ($page + 10) . '</a></li>';
-        }
-
-        // Next page (NEW)
-        if ( $page < $total_pages ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link" data-page="' . ($page + 1) . '"><span class="fas fa-angle-right" aria-hidden="true"></span></a>';
-        }
-        
-        // Last Page
-        if ( $total_pages > ( $page + 2 ) ) {
-            $output .= '<li class="page-item"><a class="facetwp-page page-link last-page" data-page="' . $total_pages . '"><span class="fas fa-fast-forward aria-hidden="true"></span></a></li>';
-        }
-		
-		$output .= '</ul></nav>';
-
-    }
-
-    return $output;
-}, 10, 2 );
-
-add_filter( 'facetwp_shortcode_html', function( $output, $atts ) {
-    if ( $atts['template'] = 'locations' ) {
-        $output = str_replace( 'facetwp-template row', 'facetwp-template row card-list', $output );
-    }
-    return $output;
-}, 10, 2 );
-
-// Show only Yes values
-add_filter( 'facetwp_index_row', function( $params, $class ) {
-    if ( 'primary_care' == $params['facet_name'] ) {
-        $included_terms = array( 'Yes' );
-        if ( ! in_array( $params['facet_display_value'], $included_terms ) ) {
-            return false;
-        }
-    }
-    return $params;
-}, 10, 2 );
 
 // Admin Columns
-add_filter('manage_providers_posts_columns', 'posts_providers_columns', 10);
-add_action('manage_providers_posts_custom_column', 'posts_providers_custom_columns', 10, 2);
+add_filter('manage_provider_posts_columns', 'posts_provider_columns', 10);
+add_action('manage_provider_posts_custom_column', 'posts_provider_custom_columns', 10, 2);
 
-function posts_providers_columns($columns){
+function posts_provider_columns($columns){
     $custom_columns = array();
     $title = 'title';
     foreach($columns as $key => $value) {
@@ -458,7 +224,7 @@ function posts_providers_columns($columns){
     return $custom_columns;
 }
 
-function posts_providers_custom_columns($column_name, $id){
+function posts_provider_custom_columns($column_name, $id){
     if($column_name === 'provider_post_thumbs'){
         echo get_the_post_thumbnail( $id, array( 80, 80) );
     }
@@ -485,104 +251,6 @@ function wp_nrc_cached_api( $npi ) {
 	return $request;
 }
 
-add_filter('acf/prepare_field/key=field_physician_portal', 'set_default_portal', 20, 3);
-add_filter('acf/prepare_field/key=field_location_portal', 'set_default_portal', 20, 3);
-function set_default_portal( $field ) {
-    // Only if no value set
-    if( empty( $field['value'] ) ){
-        $term = get_term_by('slug', 'uams-mychart', 'portal');
-        $id = $term->term_id;
-        $default = array($id);
-        // Set field to default value
-        $field[ 'value' ] = $default ;
-    }
-    return $field;
-}
-add_filter('acf/load_value/key=field_physician_languages', 'set_default_language', 20, 3);
-function set_default_language($value, $post_id, $field) {
-    // Only add default content for new posts
-    if ( $value !== null ) {
-        return $value;
-    }
-    
-    $term = get_term_by('slug', 'english', 'languages');
-	$id = $term->term_id;
-    $value = array($id);
-  	return $value;
-}
-
-// Order for Portal - None slug set to "_none"
-add_filter('acf/fields/taxonomy/wp_list_categories/key=field_location_portal', 'my_taxonomy_query', 10, 2);
-add_filter('acf/fields/taxonomy/wp_list_categories/key=field_physician_portal', 'my_taxonomy_query', 10, 2);
-function my_taxonomy_query( $args, $field ) {
-    
-    // modify args
-    $args['orderby'] = 'slug';
-    $args['order'] = 'ASC';
-    
-    
-    // return
-    return $args;
-    
-}
-
-add_action('acf/save_post', 'physician_save_post', 5); 
-function physician_save_post( $post_id ) {
-
-  // Bail early if no data sent.
-  if( empty($_POST['acf']) ) {
-    return;
-  }
-
-  // Create full name to store in 'physician_full_name' field
-  $first_name = $_POST['acf']['field_physician_first_name'];
-  $middle_name = $_POST['acf']['field_physician_middle_name'];
-  $last_name = $_POST['acf']['field_physician_last_name'];
-  $pedigree = $_POST['acf']['field_physician_pedigree'];
-  $degrees = $_POST['acf']['field_physician_degree'];
-
-  $i = 1;
-    if ( $degrees ) {
-        foreach( $degrees as $degree ):
-            $degree_name = get_term( $degree, 'degree');
-            $degree_list .= $degree_name->name;
-            if( count($degrees) > $i ) {
-                $degree_list .= ", ";
-            }
-            $i++;
-        endforeach;
-    }
-
-  $full_name = $first_name .' ' .( $middle_name ? $middle_name . ' ' : '') . $last_name . ( $pedigree ? '&nbsp;' . $pedigree : '') .  ( $degree_list ? ', ' . $degree_list : '' );
-
-  $_POST['acf']['field_physician_full_name'] = $full_name;
-
-}
-
-add_action( 'acf/save_post', 'update_facetwp_index');
-function update_facetwp_index( $post_id ) {
-    if ( function_exists( 'FWP' ) ) {
-        FWP()->indexer->index( $post_id );
-    }
-}
-/** Cron Indexer **/
-function fwp_cron_index() {
-    FWP()->indexer->index();
-}
-add_action( 'fwp_indexer', 'fwp_cron_index' );
-// FacetWP Cron //
-// Add function to register event to WordPress init
-add_action( 'init', 'register_hourly_fwp_indexer');
-
-// Function which will register the event
-function register_hourly_fwp_indexer() {
-	// Make sure this event hasn't been scheduled
-	if( !wp_next_scheduled( 'fwp_indexer' ) ) {
-		// Schedule the event
-		wp_schedule_event( time(), 'hourly', 'fwp_indexer' );
-	}
-}
-
 function limit_to_post_parent( $args, $field, $post ) {
 
     $args['post_parent'] = 0;
@@ -592,47 +260,10 @@ function limit_to_post_parent( $args, $field, $post ) {
     return $args;
 }
 
-// ACF Custom Tables
-/*
- * Changes the ACF Custom Database Tables JSON directory.
- * This needs to run before the 'plugins_loaded' action hook, so 
- * you need to put this in a plugin or in your wp-config.php file.
- */
-define( 'ACFCDT_JSON_DIR', WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) . '/assets/json/acf-tables' );
-/*
- * Disables storing of meta data values in core meta tables where a custom 
- * database table has been defined for fields. Any fields that aren't mapped
- * to a custom database table will still be stored in the core meta tables. 
- */
-add_filter( 'acfcdt/settings/store_acf_values_in_core_meta', '__return_false' );
 
-/*
- * Disables storing of ACF field key references in core meta tables where a custom 
- * database table has been defined for fields. Any fields that aren't mapped to a 
- * custom database table will still have their key references stored in the core 
- * meta tables. 
- */
-// add_filter( 'acfcdt/settings/store_acf_keys_in_core_meta', '__return_false' );
-
-add_filter('acf/settings/load_json', 'uamswp_fad_json_load_point');
-
-function uamswp_fad_json_load_point( $paths ) {
-    
-    // remove original path (optional)
-    // unset($paths[0]);
-    
-    
-    // append path
-    $paths[] = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) . '/assets/json/acf-json';
-    
-    
-    // return
-    return $paths;
-    
-}
 add_action( 'admin_init', 'uamswp_remove_genesis_term_meta', 11 ); // hook in after genesis adds the tax meta
 function uamswp_remove_genesis_term_meta() {
- $taxonomies = array( 'condition', 'treatment_procedure', 'portal' );
+ $taxonomies = array( 'condition', 'treatment', 'portal' );
  foreach( $taxonomies as $taxonomy ) {
  remove_action( "{$taxonomy}_edit_form", 'genesis_taxonomy_archive_options', 10 );
  remove_action( "{$taxonomy}_edit_form", 'genesis_taxonomy_seo_options', 10 );
@@ -655,7 +286,7 @@ add_filter('manage_edit-condition_columns', function ( $columns )
 
     return $columns;
 } );
-add_filter('manage_edit-treatment_procedure_columns', function ( $columns ) 
+add_filter('manage_edit-treatment_columns', function ( $columns ) 
 {
     if( isset( $columns['description'] ) )
         unset( $columns['description'] );   
@@ -685,7 +316,7 @@ function rlv_tax_excerpt_term_fields($content, $term) {
 }
 // AJAX
 function uamswp_ajax_scripts() { 
-    if ( is_singular( 'locations' ) || is_singular( 'expertise' ) || is_tax( 'condition' ) || is_tax( 'treatment_procedure' ) ) { // Only run on these template pages
+    if ( is_singular( 'location' ) || is_singular( 'expertise' ) || is_singular( 'condition' ) || is_singular( 'treatment' ) ) { // Only run on these template pages
         // Register the script
         wp_register_script( 'uamswp-loadmore', UAMS_FAD_ROOT_URL . 'assets/js/uamswp-loadmore.js', array('jquery'), false, true );
     
@@ -715,7 +346,7 @@ function uamswp_load_by_ajax_callback(){
         $ids_array = explode(',', $ids);
         $args = array(
             // 'suppress_filters' => true,
-            'post_type' => 'providers',
+            'post_type' => 'provider',
             'post_status' => 'publish',
             "orderby" => "title",
             "order" => "ASC",
@@ -728,7 +359,7 @@ function uamswp_load_by_ajax_callback(){
         $tax = (isset($_POST["tax"])) ? $_POST["tax"] : '';
         $slug = (isset($_POST["slug"])) ? $_POST["slug"] : '';
         $args = array(
-            "post_type" => "providers",
+            "post_type" => "provider",
             "post_status" => "publish",
             "posts_per_page" => $ppp,
             "orderby" => "title",
@@ -752,4 +383,183 @@ function uamswp_load_by_ajax_callback(){
     endwhile;
     endif;
     wp_die();
+}
+function provider_recognition_function( $atts ) {
+	extract(shortcode_atts(array(
+		'slug' => '',
+		'layout' => 'table',
+	 ), $atts));
+
+	query_posts(
+		array(
+			'post_type' => 'provider', // We only want pages
+			'post_status' => 'publish', // We only want children of a defined post ID
+			'posts_per_page' => -1, // We do not want to limit the post count
+			'order' => 'ASC',
+			'orderby' => 'title',
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'recognition',
+					'field'    => 'slug',
+					'terms'    => $slug,
+				),
+			),
+		// We can define any additional arguments that we need - see Codex for the full list
+		)
+	);
+	$recognition_list = '';
+	if (have_posts()):
+		if ('table' == $layout || empty($layout)) {
+			$recognition_list .= '<div class="table-responsive">
+			<table class="table table-striped">
+			<thead>
+			<tr>
+				<th scope="col" class="col-6">Name</th>
+				<th scope="col" class="col-6">Title</th>
+			</tr>
+			</thead>
+			<tbody>';
+
+			while( have_posts() ) : the_post();
+				$degrees = get_field('physician_degree');
+				$degree_list = '';
+				$i = 1;
+				if ( $degrees ) {
+					foreach( $degrees as $degree ):
+						$degree_name = get_term( $degree, 'degree');
+						$degree_list .= $degree_name->name;
+						if( count($degrees) > $i ) {
+							$degree_list .= ", ";
+						}
+						$i++;
+					endforeach;
+				}
+				$full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+				$recognition_list .= '<tr>';
+				$recognition_list .= '<td><a href="'.get_permalink().'" title="'. $full_name .'">'. $full_name .'</a></td>';
+				$phys_title = get_field('physician_title');
+				if ($phys_title && !empty($phys_title)) {
+					$recognition_list .= '<td>'. ($phys_title ? get_term( $phys_title, 'clinical_title' )->name : '&nbsp;') .'</td>';
+				}
+				$recognition_list .= '</tr>';
+
+			endwhile;
+			$recognition_list .= '</tbody>';
+			$recognition_list .= '</table>';
+			$recognition_list .= '</div>'; // responsive table
+		} // table layout
+		// Additional layouts
+	endif;
+	wp_reset_query();
+	return $recognition_list;
+
+}
+function register_recognition_shortcodes(){
+	add_shortcode('recognition-list', 'provider_recognition_function');
+}
+add_action( 'init', 'register_recognition_shortcodes');
+
+function get_medline_api_data( $code, $type ) {
+	// if ( 'none' == $type ) {
+	// 	 //
+	// }
+	// Build the $id
+	$id = 'medline-api-' . $type . '-' . $code; 
+
+	// Get API data
+	$transient = get_transient( $id );
+
+	if (!empty($transient)) {
+
+		return $transient;
+
+	} else {
+
+		$url = 'https://connect.medlineplus.gov/service?';
+
+		if ('icd' == $type) {
+			$arguments = array(
+				'mainSearchCriteria.v.cs' => '2.16.840.1.113883.6.90',
+				'knowledgeResponseType' => 'application/javascript',
+				'mainSearchCriteria.v.c' => $code
+			);
+		} elseif ('ndc' == $type) {
+			$arguments = array(
+				'mainSearchCriteria.v.cs' => '2.16.840.1.113883.6.69',
+				'knowledgeResponseType' => 'application%2Fjavascript',
+				'mainSearchCriteria.v.c' => $code
+			);
+		} elseif ('lonic' == $type) {
+			$arguments = array(
+				'mainSearchCriteria.v.cs' => '2.16.840.1.113883.6.1',
+				'knowledgeResponseType' => 'application%2Fjavascript',
+				'mainSearchCriteria.v.c' => $code
+			);
+		}
+
+		$url_parameters = array();
+		foreach ($arguments as $key => $value){
+			$url_parameters[] = $key.'='.$value;
+		}
+		$url = $url.implode('&', $url_parameters);
+
+		// echo $url .'<br/>';
+
+		$response = wp_remote_get( $url );
+
+
+		$response = $response['body'];
+
+		$response = str_replace('None(', '', $response);
+		$response = str_replace('});', '}', $response);
+
+		// var_dump( $response );
+		try {
+ 
+			// Note that we decode the body's response since it's the actual JSON feed
+			$json = json_decode( $response );
+	 
+		} catch ( Exception $ex ) {
+			$json = null;
+		} // end try/catch
+	 
+		set_transient( $id, $json, DAY_IN_SECONDS );
+		
+		return $json;
+
+	}
+}
+function display_medline_api_data( $code, $type ) {
+	// Get data for api
+	$json = get_medline_api_data( $code, $type );
+
+	$feed = $json->feed;
+	$entry = $feed->entry;
+	//echo (count($entry->title));
+	if (isset($entry->title)) {
+		// echo ('<h2>'. $entry->title->_value .'</h2>');
+		// echo '<br>';
+		echo '<p>'. ($entry->summary->_value) .'</p>';
+		echo '<div class="cite">';
+		echo '<p><em>Courtesy of <a href="https://medlineplus.gov/">MedlinePlus</a> from the <a href="https://www.nlm.nih.gov/">National Library of Medicine</a>.</em></p>';
+		echo '<p><strong>Syndicated Content Details:</strong><br />';
+		echo 'Source URL: <a href="'. $entry->link->href .'">'. $entry->link->href .'</a><br />';
+		echo 'Source Agency: <a href="https://www.nlm.nih.gov/">National Library of Medicine</a></p>';
+		echo '</div>';
+	} else {
+		for($a=0;$a<count($entry);$a++) {
+			if (strpos($entry[$a]->link->href, 'medlineplus.gov') !== false) {
+				if ($a != 0) {
+					echo ('<h2>'. $entry[$a]->title->_value .'</h2>'); // Add heading if there is more than one
+				}
+				echo '<p>'. ($entry[$a]->summary->_value) .'</p>';
+				echo '<div class="cite">';
+				echo '<p><em>Courtesy of <a href="https://medlineplus.gov/">MedlinePlus</a> from the <a href="https://www.nlm.nih.gov/">National Library of Medicine</a>.</em></p>';
+				echo '<p><strong>Syndicated Content Details:</strong><br />';
+				echo 'Source URL: <a href="'. $entry[$a]->link->href .'">'. $entry[$a]->link->href .'</a><br />';
+				echo 'Source Agency: <a href="https://www.nlm.nih.gov/">National Library of Medicine</a></p>';
+				echo '</div>';
+			}
+		}
+	}
 }

@@ -12,16 +12,12 @@
         <div class="row">
             <div class="col-xs-12">
                 <h2 class="module-title">Medical Treatments and Procedures Performed<?php //echo $title_append; ?></h2>
-                <p class="note">UAMS providers perform a broad range of treatments and procedures, some of which may not be listed below.</p>
+                <p class="note">UAMS providers perform and prescribe a broad range of treatments and procedures, some of which may not be listed below.</p>
                 <div class="list-container list-container-rows">
                     <ul class="list">
                     <?php foreach( $treatments_query->get_terms() as $treatment ): ?>
                         <li>
-                            <a href="<?php echo get_term_link( $treatment->term_id ); ?>">
-                            <?php
-                                echo $treatment->name;
-                            ?>
-                            </a>
+                            <a href="<?php echo get_term_link( $treatment->term_id ); ?>" aria-label="Go to Treatment page for <?php echo $treatment->name; ?>" class="btn btn-outline-primary"><?php echo $treatment->name; ?></a>
                         </li>
                     <?php endforeach; ?>
                     </ul>

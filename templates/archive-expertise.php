@@ -1,9 +1,17 @@
-<?php get_header();
+<?php
+function uamswp_fad_title($html) { 
+
+	//you can add here all your conditions as if is_page(), is_category() etc.. 
+	$html = 'Areas of Expertise | ' . get_bloginfo( "name" );
+	return $html;
+}
+add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
+get_header();
 
   add_filter( 'facetwp_template_use_archive', '__return_true' );
 
-  $service_title = get_field('service_archive_headline', 'option');
-  $service_text = get_field('service_archive_intro_text', 'option');
+  $expertise_title = get_field('expertise_archive_headline', 'option');
+  $expertise_text = get_field('expertise_archive_intro_text', 'option');
 
  ?>
 
@@ -11,9 +19,9 @@
     <main id="genesis-content">
         <section class="archive-description">
             <header class="entry-header">
-                <h1 class="entry-title" itemprop="headline"><?php echo ($service_title ? $service_title : 'Areas of Expertise' ); ?></h1>
+                <h1 class="entry-title" itemprop="headline"><?php echo ($expertise_title ? $expertise_title : 'Areas of Expertise' ); ?></h1>
             </header>
-            <?php echo ($service_text ? '<div class="entry-content clearfix" itemprop="text">' . $service_text . '</div>' : '' ); ?>
+            <?php echo ($expertise_text ? '<div class="entry-content clearfix" itemprop="text">' . $expertise_text . '</div>' : '' ); ?>
         </section>
         <section class="uams-module">
             <div class="container-fluid">

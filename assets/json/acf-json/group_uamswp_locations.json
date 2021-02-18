@@ -6,7 +6,7 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "locations"
+                "value": "location"
             }
         ]
     ],
@@ -30,6 +30,55 @@
     "active": true,
     "description": "",
     "fields": {
+        "field_location_parent": {
+            "key": "field_location_parent",
+            "name": "location_parent",
+            "type": "true_false",
+            "label": "Does it have a parent?",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_location_parent_id": {
+            "key": "field_location_parent_id",
+            "name": "location_parent_id",
+            "type": "post_object",
+            "label": "Parent Location",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "location"
+            ],
+            "taxonomy": "",
+            "allow_null": 1,
+            "multiple": 0,
+            "return_format": "id",
+            "ui": 1
+        },
         "field_location_address_tab": {
             "key": "field_location_address_tab",
             "name": "",
@@ -37,7 +86,15 @@
             "label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Address",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -52,7 +109,7 @@
             "type": "text",
             "label": "Address",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -70,7 +127,7 @@
             "name": "location_address_2",
             "type": "text",
             "label": "Address (2)",
-            "instructions": "",
+            "instructions": "<strong>Deprecated</strong>. Move information to Building, Building Floor, Suite fields.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -84,13 +141,104 @@
             "append": "",
             "maxlength": ""
         },
+        "field_location_building": {
+			"key": "field_location_building",
+			"label": "Building (if any)",
+			"name": "location_building",
+			"type": "taxonomy",
+			"instructions": "Select the building this location is inside. If this is not in building with a name, or if it is not a part of a larger building, select None.",
+			"required": "1",
+			"conditional_logic": "0",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+			"taxonomy": "building",
+			"field_type": "select",
+			"add_term": "0",
+			"save_terms": "1",
+			"load_terms": "1",
+			"return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+			"multiple": "0",
+			"allow_null": "0"
+        },
+        "field_location_building_floor": {
+			"key": "field_location_building_floor",
+			"label": "Building Floor",
+			"name": "location_building_floor",
+			"type": "select",
+			"instructions": "Select the floor of the building where the patient would first check in.",
+			"required": "1",
+			"conditional_logic": "0",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+				"": "(Select an option)",
+				"0": "Single-Story Building",
+				"B": "Level B",
+				"G": "Ground Floor",
+				"1": "First Floor",
+				"2": "Second Floor",
+				"3": "Third Floor",
+				"4": "Fourth Floor",
+				"5": "Fifth Floor",
+				"6": "Sixth Floor",
+				"7": "Seventh Floor",
+				"8": "Eighth Floor",
+				"9": "Ninth Floor",
+				"10": "Tenth Floor",
+				"11": "Eleventh Floor",
+				"12": "Twelfth Floor",
+				"13": "Thirteenth Floor",
+				"14": "Fourteenth Floor",
+				"15": "Fifteenth Floor",
+				"16": "Sixteenth Floor",
+				"17": "Seventeenth Floor",
+				"18": "Eighteenth Floor",
+				"19": "Nineteenth Floor",
+				"20": "Twentieth Floor"
+            },
+			"default_value": "false",
+			"allow_null": "0",
+			"multiple": "0",
+			"ui": "0",
+			"return_format": "value",
+			"ajax": "0",
+			"placeholder": ""
+        },
+        "field_location_suite": {
+			"key": "field_location_suite",
+			"label": "Suite or other unit",
+			"name": "location_suite",
+			"type": "text",
+			"instructions": "Indicate the area where the patient would first check in.<br />Do not just include the number (Example: enter \"Suite 1A\" not just \"1A.\").<br />Do not include landmarks (don't say \"Next to this other thing\").<br />If you are putting the name of another clinic here, this location should instead be set as a child of that location.",
+			"required": "0",
+			"conditional_logic": "0",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+        },
         "field_location_city": {
             "key": "field_location_city",
             "name": "location_city",
             "type": "text",
             "label": "City",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
@@ -109,7 +257,7 @@
             "type": "select",
             "label": "State",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "30",
@@ -183,9 +331,9 @@
             "key": "field_location_zip",
             "name": "location_zip",
             "type": "maskfield",
-            "label": "Zip",
+            "label": "ZIP Code",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "20",
@@ -193,8 +341,8 @@
                 "id": ""
             },
             "input_mask": "99999[-999]",
-            "default_value": 72205,
-            "placeholder": 72205,
+            "default_value": "",
+            "placeholder": "",
             "prepend": "",
             "append": "",
             "maxlength": ""
@@ -217,33 +365,59 @@
             "zoom": 14,
             "height": 400
         },
-        "field_location_featured_image": {
-            "key": "field_location_featured_image",
-            "label": "Featured Image",
-            "name": "_thumbnail_id",
-            "type": "image",
+        "field_location_region": {
+            "key": "field_location_region",
+            "name": "location_region",
+            "type": "taxonomy",
+            "label": "Region",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
-            "acfe_permissions": "",
+            "taxonomy": "region",
+            "field_type": "radio",
+            "allow_null": 1,
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
-            "preview_size": "medium",
-            "library": "all",
-            "min_width": 1984,
-            "min_height": 1116,
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
-            "acfe_thumbnail": "",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
             "acfe_validate": "",
-            "acfe_update": ""
+            "acfe_update": "",
+            "multiple": 0
+        },
+        "field_location_type": {
+            "key": "field_location_type",
+            "name": "location_type",
+            "type": "taxonomy",
+            "label": "Type",
+            "instructions": "Used for filtering only",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "location_type",
+            "field_type": "multi_select",
+            "allow_null": 0,
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "acfe_validate": "",
+            "acfe_update": "",
+            "multiple": 0
         },
         "field_location_directions_tab": {
             "key": "field_location_directions_tab",
@@ -252,7 +426,15 @@
             "label": "<i class=\"dashicons-randomize dashicons\"><\/i> Parking &amp; Directions",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -357,7 +539,7 @@
             "name": "location_short_desc",
             "type": "textarea",
             "label": "Short Description (excerpt)",
-            "instructions": "Limit of 160 characters. Preferred length is approx 18 words.",
+            "instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -371,12 +553,12 @@
             "rows": 4,
             "new_lines": ""
         },
-        "field_location_affiliation": {
-            "key": "field_location_affiliation",
-            "name": "location_affiliation",
-            "type": "textarea",
-            "label": "Affiliation",
-            "instructions": "Affiliations with other medical centers or clinics",
+        "field_location_youtube_link": {
+            "key": "field_location_youtube_link",
+            "name": "location_youtube_link",
+            "type": "url",
+            "label": "Youtube Link",
+            "instructions": "Full URL, including https:\/\/",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -385,14 +567,226 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": 4,
-            "new_lines": ""
+            "placeholder": ""
+        },
+        "field_location_affiliation": {
+            "key": "field_location_affiliation",
+            "name": "location_affiliation",
+            "type": "wysiwyg",
+            "label": "Affiliation",
+            "instructions": "Affiliations with other medical centers or clinics",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        },
+        "field_location_prescription_query": {
+            "key": "field_location_prescription_query",
+            "label": "Include information about prescription refills?",
+            "name": "location_prescription_query",
+            "type": "button_group",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "choices": {
+                "1": "Yes",
+                "0": "No"
+            },
+            "allow_null": 0,
+            "default_value": 0,
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        "field_location_spacer_2": {
+            "key": "field_location_spacer_2",
+            "label": "hidden",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_prescription_query",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "70",
+                "class": "hide-acf-title",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "message": "&nbsp;",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        "field_location_prescription_type": {
+            "key": "field_location_prescription_type",
+            "label": "Which prescription information would you like to include?",
+            "name": "location_prescription_type",
+            "type": "radio",
+            "instructions": "Administrators can change the preset text in Find-a-Doc Settings > Clinical Locations.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_prescription_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "70",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "pharm": "Preset text instructing patients to call their pharmacy",
+                "clinic": "Preset text instructing patients to call the clinic",
+                "custom": "Custom text"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "pharm",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        "field_location_spacer_3": {
+            "key": "field_location_spacer_3",
+            "label": "hidden",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_prescription_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "30",
+                "class": "hide-acf-title",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "message": "&nbsp;",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        "field_location_current_prescription_clinic": {
+            "key": "field_location_current_prescription_clinic",
+            "label": "Current prescription information instructing patients to call the clinic",
+            "name": "location_current_prescription_clinic",
+            "type": "acfe_dynamic_message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_prescription_query",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_prescription_type",
+                        "operator": "==",
+                        "value": "clinic"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "70",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": ""
+        },
+        "field_location_current_prescription_pharm": {
+            "key": "field_location_current_prescription_pharm",
+            "label": "Current prescription information instructing patients to call their pharmacy",
+            "name": "location_current_prescription_pharm",
+            "type": "acfe_dynamic_message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_prescription_query",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_prescription_type",
+                        "operator": "==",
+                        "value": "pharm"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "70",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": ""
+        },
+        "field_location_prescription": {
+            "key": "field_location_prescription",
+            "name": "location_prescription",
+            "type": "wysiwyg",
+            "label": "Custom Prescription Refills Information",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_prescription_query",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_prescription_type",
+                        "operator": "==",
+                        "value": "custom"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "70",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
         },
         "field_location_clinic_phone_query": {
             "key": "field_location_clinic_phone_query",
-            "label": "Is there a seperate appointment number for patients?",
+            "label": "Is there a separate appointment number for patients?",
             "name": "location_clinic_phone_query",
             "type": "button_group",
             "instructions": "",
@@ -526,6 +920,21 @@
             ],
             "wrapper": {
                 "width": "70",
+                "class": "",
+                "id": ""
+            },
+            "input_mask": "(999) 999-9999 [x 99999]"
+        },
+        "field_location_fax": {
+            "key": "field_location_fax",
+            "name": "location_fax",
+            "type": "maskfield",
+            "label": "Clinic Fax Number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -846,6 +1255,291 @@
             "multi_expand": 0,
             "endpoint": 1
         },
+        "field_location_photos_tab": {
+            "key": "field_location_photos_tab",
+            "name": "",
+            "type": "tab",
+            "label": "<i class=\"dashicons-format-gallery dashicons\"><\/i> Photos",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        "field_location_image_override_parent": {
+            "key": "field_location_image_override_parent",
+            "name": "location_image_override_parent",
+            "type": "true_false",
+            "label": "Override Parent Images?",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_location_image_override_parent_featured": {
+            "key": "field_location_image_override_parent_featured",
+            "name": "location_image_override_parent_featured",
+            "type": "true_false",
+            "label": "Override Parent Featured Image?",
+            "instructions": "To remove the parent featured image, select Yes and leave image blank",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_image_override_parent",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_location_featured_image": {
+            "key": "field_location_featured_image",
+            "label": "Featured Image",
+            "name": "_thumbnail_id",
+            "type": "image",
+            "instructions": "Select an image that will be used on card layouts, schema data, social sharing, etc.<br />You can select an image that is also used as the Wayfinding Photo or in the Photo Gallery.<br />The photo orientation must be landscape / horizontal.<br />Minimum dimensions: 1200x675.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_location_image_override_parent",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_image_override_parent_featured",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": 1200,
+            "min_height": 675,
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "acfe_thumbnail": "",
+            "acfe_validate": "",
+            "acfe_update": ""
+        },
+        "field_location_image_override_parent_wayfinding": {
+            "key": "field_location_image_override_parent_wayfinding",
+            "name": "location_image_override_parent_wayfinding",
+            "type": "true_false",
+            "label": "Override Parent Wayfinding Photo?",
+            "instructions": "To remove the parent wayfinding photo, select Yes and leave photo blank",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_image_override_parent",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_location_wayfinding_photo": {
+            "key": "field_location_wayfinding_photo",
+            "label": "Wayfinding Photo",
+            "name": "location_wayfinding_photo",
+            "type": "image",
+            "instructions": "Select an image that will help the patient find the appropriate building from the road.<br />The photo orientation must be landscape / horizontal.<br />Minimum dimensions: 1200x675",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_location_image_override_parent",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_image_override_parent_wayfinding",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": 1200,
+            "min_height": 675,
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "acfe_thumbnail": "",
+            "acfe_validate": "",
+            "acfe_update": ""
+        },
+        "field_location_image_override_parent_gallery": {
+            "key": "field_location_image_override_parent_gallery",
+            "name": "location_image_override_parent_gallery",
+            "type": "true_false",
+            "label": "Override Parent Photo Gallery?",
+            "instructions": "To remove the parent gallery, select Yes and leave gallery empty",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_image_override_parent",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_location_photo_gallery": {
+			"key": "field_location_photo_gallery",
+			"label": "Photo Gallery",
+			"name": "location_photo_gallery",
+			"type": "gallery",
+			"instructions": "You may select up to four images.<br />These could include a photo of the interior entrance to the clinic or photos of the clinic in use.<br />The photo orientation must be landscape / horizontal.<br />Minimum dimensions: 1200x675",
+			"required": 0,
+			"conditional_logic": [
+                [
+                    {
+                        "field": "field_location_parent",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_location_image_override_parent",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_image_override_parent_gallery",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+            },
+			"acfe_permissions": "",
+			"return_format": "id",
+			"preview_size": "medium",
+			"insert": "append",
+			"library": "all",
+			"min": "",
+			"max": 4,
+			"min_width": 1200,
+			"min_height": 675,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+        },
         "field_location_hours_tab": {
             "key": "field_location_hours_tab",
             "name": "",
@@ -862,11 +1556,11 @@
             "placement": "top",
             "endpoint": 0
         },
-        "field_hours_message": {
-            "key": "field_hours_message",
-            "name": "",
-            "type": "message",
-            "label": "Hours of Operation",
+        "field_location_hours_group": {
+            "key": "field_location_hours_group",
+            "label": "",
+            "name": "location_hours_group",
+            "type": "group",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -875,117 +1569,967 @@
                 "class": "",
                 "id": ""
             },
-            "message": "<p>Set the time for each day or 24\/7. Leave time blank for closed.<\/p>",
-            "new_lines": "",
-            "esc_html": 0
-        },
-        "field_location_24_7": {
-            "key": "field_location_24_7",
-            "name": "location_24_7",
-            "type": "true_false",
-            "label": "Open 24\/7",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        "field_location_hours": {
-            "key": "field_location_hours",
-            "name": "location_hours",
-            "type": "repeater",
-            "label": "Typical Hours",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_24_7",
-                        "operator": "!=",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "collapsed": "field_hours_day",
-            "min": 1,
-            "max": 0,
-            "layout": "table",
-            "button_label": "Add Day \/ Time",
+            "acfe_permissions": "",
+            "layout": "block",
+            "acfe_seamless_style": 1,
+            "acfe_group_modal": 0,
             "sub_fields": [
                 {
-                    "key": "field_hours_day",
-                    "label": "Day",
-                    "name": "day",
-                    "type": "select",
+                    "key": "field_location_typical_hours_tab",
+                    "label": "Normal\/Typical Hours",
+                    "name": "",
+                    "type": "tab",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "placement": "left",
+                    "endpoint": 0
+                },
+                {
+                    "key": "field_hours_message",
+                    "name": "",
+                    "type": "message",
+                    "label": "Hours of Operation",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "<p>Set the time for each day or mark it as open 24\/7.<\/p>",
+                    "new_lines": "",
+                    "esc_html": 0
+                },
+                {
+                    "key": "field_location_hours_variable",
+                    "name": "location_hours_variable",
+                    "type": "true_false",
+                    "label": "Do the location's hours vary?",
+                    "instructions": "For example, does this location operate only periodically or as needed?",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_location_hours_variable_info",
+                    "name": "location_hours_variable_info",
+                    "type": "wysiwyg",
+                    "label": "Variable Hours Information",
+                    "instructions": "Describe how the hours work for this location.",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_hours_variable",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0
+                },
+                {
+                    "key": "field_location_24_7",
+                    "name": "location_24_7",
+                    "type": "true_false",
+                    "label": "Is the location typically available 24/7?",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_hours_variable",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_location_hours",
+                    "name": "location_hours",
+                    "type": "repeater",
+                    "label": "Typical Hours",
+                    "instructions": "Set the time for all seven days.",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_hours_variable",
+                                "operator": "!=",
+                                "value": "1"
+                            },
+                            {
+                                "field": "field_location_24_7",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "collapsed": "field_hours_day",
+                    "min": 1,
+                    "max": 0,
+                    "layout": "table",
+                    "button_label": "Add Day \/ Time",
+                    "sub_fields": [
+                        {
+                            "key": "field_hours_day",
+                            "label": "Day",
+                            "name": "day",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "Monday": "Monday",
+                                "Tuesday": "Tuesday",
+                                "Wednesday": "Wednesday",
+                                "Thursday": "Thursday",
+                                "Friday": "Friday",
+                                "Saturday": "Saturday",
+                                "Sunday": "Sunday",
+                                "Mon - Fri": "Mon - Fri"
+                            },
+                            "default_value": [],
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_hours_closed",
+                            "label": "Closed",
+                            "name": "closed",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "Closed",
+                            "default_value": 0,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
+                            "key": "field_hours_open",
+                            "label": "Open",
+                            "name": "open",
+                            "type": "time_picker",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_hours_closed",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "display_format": "g:i a",
+                            "return_format": "g:i a"
+                        },
+                        {
+                            "key": "field_hours_close",
+                            "label": "Close",
+                            "name": "close",
+                            "type": "time_picker",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_hours_closed",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "display_format": "g:i a",
+                            "return_format": "g:i a"
+                        },
+                        {
+                            "key": "field_hours_comment",
+                            "label": "Comment",
+                            "name": "comment",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_location_24_7",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        }
+                    ]
+                },
+                {
+                    "key": "field_after_hours",
+                    "name": "location_after_hours",
+                    "type": "wysiwyg",
+                    "label": "After Hours Information",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 0,
+                    "delay": 0
+                },
+                {
+                    "key": "field_location_modified_hours_tab",
+                    "label": "Modified Hours",
+                    "name": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_hours_variable",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "placement": "left",
+                    "endpoint": 0
+                },
+                {
+                    "key": "field_location_modified_hours",
+                    "label": "Upcoming Modified Hours",
+                    "name": "location_modified_hours",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_location_modified_hours_reason",
+                    "label": "Reason for Modified Hours",
+                    "name": "location_modified_hours_reason",
+                    "type": "wysiwyg",
+                    "instructions": "Describe the overall reason the hours are being modified. This might be because of a holiday or public health emergency.<br /><br />The date range will be displayed automatically, so that does not have to be included in this field.",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_modified_hours",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "100",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 1
+                },
+                {
+                    "key": "field_location_modified_hours_start_date",
+                    "label": "Modified Hours Start Date",
+                    "name": "location_modified_hours_start_date",
+                    "type": "date_picker",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_modified_hours",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "display_format": "m\/d\/Y",
+                    "return_format": "F j, Y",
+                    "first_day": 0
+                },
+                {
+                    "key": "field_location_modified_hours_end",
+                    "label": "Is there a Modified Hours End Date?",
+                    "name": "location_modified_hours_end",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_modified_hours",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "Yes",
+                    "ui_off_text": "None"
+                },
+                {
+                    "key": "field_location_modified_hours_end_date",
+                    "label": "Modified Hours End Date",
+                    "name": "location_modified_hours_end_date",
+                    "type": "date_picker",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_modified_hours_end",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "display_format": "m\/d\/Y",
+                    "return_format": "F j, Y",
+                    "first_day": 0
+                },
+                {
+                    "key": "field_location_modified_hours_group",
+                    "label": "Modified Hours",
+                    "name": "location_modified_hours_group",
+                    "type": "repeater",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_modified_hours",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "acfe_repeater_stylised_button": 0,
+                    "collapsed": "field_location_modified_hours_title",
+                    "min": 1,
+                    "max": 0,
+                    "layout": "block",
+                    "button_label": "Add Modified Hours Set",
+                    "sub_fields": [
+                        {
+                            "key": "field_location_modified_hours_title",
+                            "label": "Title",
+                            "name": "location_modified_hours_title",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_location_modified_hours_information",
+                            "label": "Information",
+                            "name": "location_modified_hours_information",
+                            "type": "wysiwyg",
+                            "instructions": "This field can include a description of the modification if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.<br /><br />Or you can add information in addition to the structured days and hours.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "100",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "default_value": "",
+                            "tabs": "all",
+                            "toolbar": "basic",
+                            "media_upload": 0,
+                            "delay": 1
+                        },
+                        {
+                            "key": "field_location_modified_hours_24_7",
+                            "name": "location_modified_hours_24_7",
+                            "type": "true_false",
+                            "label": "Is this location available 24\/7 during these modified hours?",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 0,
+                            "ui": 1,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
+                            "key": "field_location_modified_hours_times",
+                            "label": "Hours",
+                            "name": "location_modified_hours_times",
+                            "type": "repeater",
+                            "instructions": "Set the time for all seven days.",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_location_modified_hours",
+                                        "operator": "==",
+                                        "value": "1"
+                                    },
+                                    {
+                                        "field": "field_location_modified_hours_24_7",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "acfe_repeater_stylised_button": 0,
+                            "collapsed": "field_location_modified_hours_day",
+                            "min": 0,
+                            "max": 0,
+                            "layout": "table",
+                            "button_label": "Add Day \/ Time",
+                            "sub_fields": [
+                                {
+                                    "key": "field_location_modified_hours_day",
+                                    "label": "Day",
+                                    "name": "location_modified_hours_day",
+                                    "type": "select",
+                                    "instructions": "",
+                                    "required": 1,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "acfe_permissions": "",
+                                    "choices": {
+                                        "Monday": "Monday",
+                                        "Tuesday": "Tuesday",
+                                        "Wednesday": "Wednesday",
+                                        "Thursday": "Thursday",
+                                        "Friday": "Friday",
+                                        "Saturday": "Saturday",
+                                        "Sunday": "Sunday",
+                                        "Mon - Fri": "Mon - Fri"
+                                    },
+                                    "default_value": [],
+                                    "allow_null": 1,
+                                    "multiple": 0,
+                                    "ui": 0,
+                                    "return_format": "value",
+                                    "placeholder": "",
+                                    "ajax": 0
+                                },
+                                {
+                                    "key": "field_location_modified_hours_closed",
+                                    "label": "Closed",
+                                    "name": "location_modified_hours_closed",
+                                    "type": "true_false",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "acfe_permissions": "",
+                                    "message": "",
+                                    "default_value": 0,
+                                    "ui": 0,
+                                    "ui_on_text": "",
+                                    "ui_off_text": ""
+                                },
+                                {
+                                    "key": "field_location_modified_hours_open",
+                                    "label": "Open",
+                                    "name": "location_modified_hours_open",
+                                    "type": "time_picker",
+                                    "instructions": "",
+                                    "required": 1,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_location_modified_hours_closed",
+                                                "operator": "!=",
+                                                "value": "1"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "acfe_permissions": "",
+                                    "display_format": "g:i a",
+                                    "return_format": "g:i a"
+                                },
+                                {
+                                    "key": "field_location_modified_hours_close",
+                                    "label": "Close",
+                                    "name": "location_modified_hours_close",
+                                    "type": "time_picker",
+                                    "instructions": "",
+                                    "required": 1,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_location_modified_hours_closed",
+                                                "operator": "!=",
+                                                "value": "1"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "acfe_permissions": "",
+                                    "display_format": "g:i a",
+                                    "return_format": "g:i a"
+                                },
+                                {
+                                    "key": "field_location_modified_hours_comment",
+                                    "label": "Comment",
+                                    "name": "location_modified_hours_comment",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "acfe_permissions": "",
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "key": "field_location_holiday_hours",
+                    "name": "location_holiday_hours",
+                    "type": "repeater",
+                    "label": "Holiday Hours",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_modified_hours_tab",
+                                "operator": "==",
+                                "value": "false"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "collapsed": "field_holiday_day",
+                    "min": "",
+                    "max": "",
+                    "layout": "table",
+                    "button_label": "Add Holiday",
+                    "sub_fields": [
+                        {
+                            "key": "field_holiday_date",
+                            "label": "Date",
+                            "name": "date",
+                            "type": "date_picker",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "display_format": "m\/d\/Y",
+                            "return_format": "F j, Y",
+                            "first_day": 0
+                        },
+                        {
+                            "key": "field_holiday_label",
+                            "label": "Holiday Text",
+                            "name": "label",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_holiday_closed",
+                            "label": "Closed",
+                            "name": "closed",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "Closed",
+                            "default_value": 0,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
+                            "key": "field_holiday_open",
+                            "label": "Open",
+                            "name": "open",
+                            "type": "time_picker",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_holiday_closed",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "display_format": "g:i a",
+                            "return_format": "g:i a"
+                        },
+                        {
+                            "key": "field_holiday_close",
+                            "label": "Close",
+                            "name": "close",
+                            "type": "time_picker",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_holiday_closed",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "display_format": "g:i a",
+                            "return_format": "g:i a"
+                        }
+                    ]
+                },
+                {
+                    "key": "field_location_telemed_hours_tab",
+                    "label": "Telemedicine Hours",
+                    "name": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "placement": "left",
+                    "endpoint": 0
+                },
+                {
+                    "key": "field_location_telemed_query",
+                    "label": "Does this location offer a telemedicine option?",
+                    "name": "location_telemed_query",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_location_telemed_info_message",
+                    "name": "",
+                    "type": "message",
+                    "label": "Telemedicine Information",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_telemed_query",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "<p>The general information included about telemedicine is set in Find-a-Doc Settings &gt; Clinical Locations.<\/p>",
+                    "new_lines": "",
+                    "esc_html": 0
+                },
+                {
+                    "key": "field_location_telemed_patients",
+                    "name": "location_telemed_patients",
+                    "type": "radio",
+                    "label": "Patient Type",
+                    "instructions": "Which type of patients can use the telemedicine services offered at this location?",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_telemed_query",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
                         "id": ""
                     },
                     "choices": {
-                        "Monday": "Monday",
-                        "Tuesday": "Tuesday",
-                        "Wednesday": "Wednesday",
-                        "Thursday": "Thursday",
-                        "Friday": "Friday",
-                        "Saturday": "Saturday",
-                        "Sunday": "Sunday",
-                        "Mon - Fri": "Mon - Fri"
+                        "all": "New and Existing Patients",
+                        "existing": "Existing Patients Only",
+                        "new": "New Patients Only"
                     },
-                    "default_value": [],
-                    "allow_null": 1,
-                    "multiple": 0,
-                    "ui": 0,
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "default_value": "all",
+                    "layout": "vertical",
                     "return_format": "value",
-                    "ajax": 0,
-                    "placeholder": ""
+                    "save_other_choice": 0
                 },
                 {
-                    "key": "field_hours_closed",
-                    "label": "Closed",
-                    "name": "closed",
+                    "key": "field_location_telemed_24_7",
+                    "name": "location_telemed_24_7",
                     "type": "true_false",
+                    "label": "Is telemedicine typically available 24\/7?",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_telemed_query",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
                         "id": ""
                     },
-                    "message": "Closed",
+                    "message": "",
                     "default_value": 0,
-                    "ui": 0,
+                    "ui": 1,
                     "ui_on_text": "",
                     "ui_off_text": ""
                 },
                 {
-                    "key": "field_hours_open",
-                    "label": "Open",
-                    "name": "open",
-                    "type": "time_picker",
-                    "instructions": "",
+                    "key": "field_location_telemed_hours",
+                    "name": "location_telemed_hours",
+                    "type": "repeater",
+                    "label": "Typical Telemedicine Hours",
+                    "instructions": "Set the time for all seven days.",
                     "required": 0,
                     "conditional_logic": [
                         [
                             {
-                                "field": "field_location_24_7",
+                                "field": "field_location_telemed_query",
+                                "operator": "==",
+                                "value": "1"
+                            },
+                            {
+                                "field": "field_location_telemed_24_7",
                                 "operator": "!=",
                                 "value": "1"
                             }
@@ -996,21 +2540,143 @@
                         "class": "",
                         "id": ""
                     },
-                    "display_format": "g:i a",
-                    "return_format": "g:i a"
+                    "collapsed": "field_telemed_hours_day",
+                    "min": 1,
+                    "max": 0,
+                    "layout": "table",
+                    "button_label": "Add Day \/ Time",
+                    "sub_fields": [
+                        {
+                            "key": "field_telemed_hours_day",
+                            "label": "Day",
+                            "name": "day",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "Monday": "Monday",
+                                "Tuesday": "Tuesday",
+                                "Wednesday": "Wednesday",
+                                "Thursday": "Thursday",
+                                "Friday": "Friday",
+                                "Saturday": "Saturday",
+                                "Sunday": "Sunday",
+                                "Mon - Fri": "Mon - Fri"
+                            },
+                            "default_value": [],
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_telemed_hours_closed",
+                            "label": "Closed",
+                            "name": "closed",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "Closed",
+                            "default_value": 0,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
+                            "key": "field_telemed_hours_open",
+                            "label": "Open Time",
+                            "name": "open",
+                            "type": "time_picker",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_telemed_hours_closed",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "display_format": "g:i a",
+                            "return_format": "g:i a"
+                        },
+                        {
+                            "key": "field_telemed_hours_close",
+                            "label": "Close Time",
+                            "name": "close",
+                            "type": "time_picker",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_telemed_hours_closed",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "display_format": "g:i a",
+                            "return_format": "g:i a"
+                        },
+                        {
+                            "key": "field_telemed_hours_comment",
+                            "label": "Comment",
+                            "name": "comment",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        }
+                    ]
                 },
                 {
-                    "key": "field_hours_close",
-                    "label": "Close",
-                    "name": "close",
-                    "type": "time_picker",
+                    "key": "field_location_telemed_modified_hours_tab",
+                    "label": "Telemedicine Modified Hours",
+                    "name": "",
+                    "type": "tab",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
                         [
                             {
-                                "field": "field_location_24_7",
-                                "operator": "!=",
+                                "field": "field_location_telemed_query",
+                                "operator": "==",
                                 "value": "1"
                             }
                         ]
@@ -1020,21 +2686,22 @@
                         "class": "",
                         "id": ""
                     },
-                    "display_format": "g:i a",
-                    "return_format": "g:i a"
+                    "acfe_permissions": "",
+                    "placement": "left",
+                    "endpoint": 0
                 },
                 {
-                    "key": "field_hours_comment",
-                    "label": "Comment",
-                    "name": "comment",
-                    "type": "text",
+                    "key": "field_location_telemed_modified_hours_query",
+                    "label": "Upcoming Modified Telemedicine Hours",
+                    "name": "location_telemed_modified_hours_query",
+                    "type": "true_false",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
                         [
                             {
-                                "field": "field_location_24_7",
-                                "operator": "!=",
+                                "field": "field_location_telemed_query",
+                                "operator": "==",
                                 "value": "1"
                             }
                         ]
@@ -1044,138 +2711,305 @@
                         "class": "",
                         "id": ""
                     },
+                    "acfe_permissions": "",
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_location_telemed_modified_hours_reason",
+                    "label": "Reason for Modified Telemedicine Hours",
+                    "name": "location_telemed_modified_hours_reason",
+                    "type": "wysiwyg",
+                    "instructions": "Describe the overall reason the hours are being modified. This might be because of a holiday or public health emergency.<br /><br />This field can also include a description of the modification, if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.<br /><br />The date range will be displayed automatically, so that does not have to be included in this field..",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_telemed_modified_hours_query",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "100",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
                     "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                }
-            ]
-        },
-        "field_after_hours": {
-            "key": "field_after_hours",
-            "name": "location_after_hours",
-            "type": "wysiwyg",
-            "label": "After Hours Information",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 0,
-            "delay": 0
-        },
-        "field_location_holiday_hours": {
-            "key": "field_location_holiday_hours",
-            "name": "location_holiday_hours",
-            "type": "repeater",
-            "label": "Holiday Hours",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "collapsed": "field_holiday_day",
-            "min": "",
-            "max": "",
-            "layout": "table",
-            "button_label": "Add Day",
-            "sub_fields": [
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 1
+                },
                 {
-                    "key": "field_holiday_date",
-                    "label": "Date",
-                    "name": "date",
+                    "key": "field_location_telemed_modified_hours_start_date",
+                    "label": "Modified Telemedicine Hours Start Date",
+                    "name": "location_telemed_modified_hours_start_date",
                     "type": "date_picker",
                     "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_telemed_modified_hours_query",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": {
-                        "width": "",
+                        "width": "25",
                         "class": "",
                         "id": ""
                     },
+                    "acfe_permissions": "",
                     "display_format": "m\/d\/Y",
-                    "return_format": "m\/d\/Y",
+                    "return_format": "F j, Y",
                     "first_day": 0
                 },
                 {
-                    "key": "field_holiday_label",
-                    "label": "Holiday Text",
-                    "name": "label",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_holiday_closed",
-                    "label": "Closed",
-                    "name": "closed",
+                    "key": "field_location_telemed_modified_hours_end",
+                    "label": "Is there a Modified Telemedicine Hours End Date?",
+                    "name": "location_telemed_modified_hours_end",
                     "type": "true_false",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_telemed_modified_hours_query",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "Yes",
+                    "ui_off_text": "None"
+                },
+                {
+                    "key": "field_location_telemed_modified_hours_end_date",
+                    "label": "Modified Telemedicine Hours End Date",
+                    "name": "location_telemed_modified_hours_end_date",
+                    "type": "date_picker",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_telemed_modified_hours_end",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "display_format": "m\/d\/Y",
+                    "return_format": "F j, Y",
+                    "first_day": 0
+                },
+                {
+                    "key": "field_location_telemed_modified_hours_24_7",
+                    "name": "location_telemed_modified_hours_24_7",
+                    "type": "true_false",
+                    "label": "Is telemedicine available 24\/7 during these modified hours?",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_telemed_modified_hours_query",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
                         "id": ""
                     },
-                    "message": "Closed",
+                    "message": "",
                     "default_value": 0,
-                    "ui": 0,
+                    "ui": 1,
                     "ui_on_text": "",
                     "ui_off_text": ""
                 },
                 {
-                    "key": "field_holiday_open",
-                    "label": "Open",
-                    "name": "open",
-                    "type": "time_picker",
-                    "instructions": "",
+                    "key": "field_location_telemed_modified_hours_times",
+                    "label": "Hours",
+                    "name": "location_telemed_modified_hours_times",
+                    "type": "repeater",
+                    "instructions": "Set the time for all seven days.",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_telemed_modified_hours_query",
+                                "operator": "==",
+                                "value": "1"
+                            },
+                            {
+                                "field": "field_location_telemed_modified_hours_24_7",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
                         "id": ""
                     },
-                    "display_format": "g:i a",
-                    "return_format": "g:i a"
-                },
-                {
-                    "key": "field_holiday_close",
-                    "label": "Close",
-                    "name": "close",
-                    "type": "time_picker",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "display_format": "g:i a",
-                    "return_format": "g:i a"
+                    "acfe_permissions": "",
+                    "acfe_repeater_stylised_button": 0,
+                    "collapsed": "field_location_telemed_modified_hours_day",
+                    "min": 0,
+                    "max": 0,
+                    "layout": "table",
+                    "button_label": "Add Day \/ Time",
+                    "sub_fields": [
+                        {
+                            "key": "field_location_telemed_modified_hours_day",
+                            "label": "Day",
+                            "name": "location_telemed_modified_hours_day",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "choices": {
+                                "Monday": "Monday",
+                                "Tuesday": "Tuesday",
+                                "Wednesday": "Wednesday",
+                                "Thursday": "Thursday",
+                                "Friday": "Friday",
+                                "Saturday": "Saturday",
+                                "Sunday": "Sunday",
+                                "Mon - Fri": "Mon - Fri"
+                            },
+                            "default_value": [],
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "placeholder": "",
+                            "ajax": 0
+                        },
+                        {
+                            "key": "field_location_telemed_modified_hours_closed",
+                            "label": "Closed",
+                            "name": "location_telemed_modified_hours_closed",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "message": "",
+                            "default_value": 0,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
+                            "key": "field_location_telemed_modified_hours_open",
+                            "label": "Open",
+                            "name": "location_telemed_modified_hours_open",
+                            "type": "time_picker",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_location_telemed_modified_hours_closed",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "display_format": "g:i a",
+                            "return_format": "g:i a"
+                        },
+                        {
+                            "key": "field_location_telemed_modified_hours_close",
+                            "label": "Close",
+                            "name": "location_telemed_modified_hours_close",
+                            "type": "time_picker",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_location_telemed_modified_hours_closed",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "display_format": "g:i a",
+                            "return_format": "g:i a"
+                        },
+                        {
+                            "key": "field_location_telemed_modified_hours_comment",
+                            "label": "Comment",
+                            "name": "location_telemed_modified_hours_comment",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        }
+                    ]
                 }
             ]
         },
@@ -1195,10 +3029,10 @@
             "placement": "top",
             "endpoint": 0
         },
-        "field_location_conditions": {
-            "key": "field_location_conditions",
-            "name": "location_conditions",
-            "type": "taxonomy",
+        "field_location_conditions_cpt": {
+            "key": "field_location_conditions_cpt",
+            "name": "location_conditions_cpt",
+            "type": "post_object",
             "label": "Conditions",
             "instructions": "The conditions will display in alphabetical order.",
             "required": 0,
@@ -1208,23 +3042,26 @@
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "condition",
-            "field_type": "multi_select",
-            "allow_null": 0,
-            "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
+            "acfe_permissions": "",
+            "post_type": [
+                "condition"
+            ],
+            "taxonomy": "",
+            "allow_null": 1,
+            "multiple": 1,
             "return_format": "id",
             "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": true,
+                "acfe_bidirectional_enabled": "1",
                 "acfe_bidirectional_related": "field_condition_locations"
             },
-            "multiple": 0
+            "acfe_validate": "",
+            "acfe_update": "",
+            "ui": 1
         },
-        "field_location_treatments": {
-            "key": "field_location_treatments",
-            "name": "location_treatments",
-            "type": "taxonomy",
+        "field_location_treatments_cpt": {
+            "key": "field_location_treatments_cpt",
+            "name": "location_treatments_cpt",
+            "type": "post_object",
             "label": "Treatments & Procedures",
             "instructions": "The treatments and procedures will display in alphabetical order.",
             "required": 0,
@@ -1234,18 +3071,21 @@
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "treatment_procedure",
-            "field_type": "multi_select",
-            "allow_null": 0,
-            "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
+            "acfe_permissions": "",
+            "post_type": [
+                "treatment"
+            ],
+            "taxonomy": "",
+            "allow_null": 1,
+            "multiple": 1,
             "return_format": "id",
             "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": true,
+                "acfe_bidirectional_enabled": "1",
                 "acfe_bidirectional_related": "field_treatment_procedure_locations"
             },
-            "multiple": 0
+            "acfe_validate": "",
+            "acfe_update": "",
+            "ui": 1
         },
         "field_location_expertise": {
             "key": "field_location_expertise",
@@ -1272,7 +3112,7 @@
             "max": "",
             "return_format": "id",
             "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": true,
+                "acfe_bidirectional_enabled": "1",
                 "acfe_bidirectional_related": "field_expertise_locations"
             },
             "acfe_validate": "",
@@ -1310,7 +3150,7 @@
             },
             "taxonomy": "specialty",
             "field_type": "multi_select",
-            "allow_null": 0,
+            "allow_null": 1,
             "add_term": 0,
             "save_terms": 1,
             "load_terms": 1,
@@ -1333,9 +3173,9 @@
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "medical_terms",
+            "taxonomy": "medical_term",
             "field_type": "multi_select",
-            "allow_null": 0,
+            "allow_null": 1,
             "add_term": 0,
             "save_terms": 1,
             "load_terms": 1,
@@ -1418,7 +3258,7 @@
         },
         "field_location_physicians": {
             "key": "field_location_physicians",
-            "name": "location_physicians",
+            "name": "physician_locations",
             "type": "relationship",
             "label": "Providers",
             "instructions": "The providers will display in alphabetical order. If there are nine or fewer, they will all be visible when the page loads. If there are more than nine, six will display before prompting the user to load more.",
@@ -1430,7 +3270,7 @@
                 "id": ""
             },
             "post_type": [
-                "providers"
+                "provider"
             ],
             "taxonomy": [],
             "filters": [
@@ -1440,13 +3280,899 @@
             "min": "",
             "max": "",
             "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": true,
-                "acfe_bidirectional_related": "field_physician_locations"
-            },
+            "acfe_bidirectional": 0,
             "acfe_validate": "",
             "acfe_update": ""
-        }
+        },
+        "field_location_alert_tab": {
+            "key": "field_location_alert_tab",
+            "name": "",
+            "type": "tab",
+            "label": "<i class=\"dashicons-warning dashicons\"><\/i> Alert",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        "field_location_current_alert": {
+            "key": "field_location_current_alert",
+            "label": "Current Alert",
+            "name": "location_current_alert",
+            "type": "acfe_dynamic_message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": ""
+        },
+        "field_location_alert_suppress": {
+            "key": "field_location_alert_suppress",
+            "label": "Suppress alert from Find-a-Doc Settings? (Deprecated)",
+            "name": "location_alert_suppress",
+            "type": "true_false",
+            "instructions": "Move this value to the Alert Modification field. This field will be removed soon.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_alert_tab",
+                        "operator": "==",
+                        "value": "false"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_location_alert_modification": {
+            "key": "field_location_alert_modification",
+            "label": "Alert Modification",
+            "name": "location_alert_modification",
+            "type": "radio",
+            "instructions": "How do you want to modify the alert from Find-a-Doc Settings?",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "choices": {
+                "nothing": "No modification",
+                "suppress": "Suppress alert",
+                "override": "Override alert",
+                "prepend": "Insert before alert",
+                "append": "Insert after alert"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "nothing",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        "field_location_alert_body_override_tip": {
+            "key": "field_location_alert_body_override_tip",
+            "name": "",
+            "type": "message",
+            "label": "Overriding the alert from Find-a-Doc Settings",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_alert_modification",
+						"operator": "==",
+						"value": "override"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "<p>If you are overriding the system alert, adding values to the Alert Heading or Alert Body fields will replace the value from Find-a-Doc Settings. Leaving them blank will inherit the values from Find-a-Doc Settings.<\/p>",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        "field_location_alert_body_prepend_tip": {
+            "key": "field_location_alert_body_prepend_tip",
+            "name": "",
+            "type": "message",
+            "label": "Inserting an alert before the alert from Find-a-Doc Settings",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_alert_modification",
+						"operator": "==",
+						"value": "prepend"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "<p>If you are inserting content before the system alert, make sure the system alert's body begins with a heading (Heading 2). This way, your alert value here will be separated from the system alert in the heading outline.<\/p>",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        "field_location_alert_body_append_tip": {
+            "key": "field_location_alert_body_append_tip",
+            "name": "",
+            "type": "message",
+            "label": "Inserting an alert after the alert from Find-a-Doc Settings",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_alert_modification",
+						"operator": "==",
+						"value": "append"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "<p>If you are inserting content after the system alert, make sure the your alert's body begins with a heading (Heading 2). This way, your alert value here will be separated from the system alert in the heading outline.<\/p>",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        "field_location_alert_heading": {
+            "key": "field_location_alert_heading",
+            "name": "location_alert_heading",
+            "type": "text",
+            "label": "Alert Heading",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_alert_modification",
+						"operator": "==",
+						"value": "override"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        "field_location_alert_body": {
+            "key": "field_location_alert_body",
+            "name": "location_alert_body",
+            "type": "wysiwyg",
+            "label": "Alert Body",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+						"field": "field_location_alert_modification",
+						"operator": "==",
+						"value": "override"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_location_alert_modification",
+						"operator": "==",
+						"value": "prepend"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_location_alert_modification",
+						"operator": "==",
+						"value": "append"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0,
+            "acfe_validate": "",
+            "acfe_update": ""
+        },
+        "field_location_alert_color": {
+            "key": "field_location_alert_color",
+            "name": "location_alert_color",
+            "type": "select",
+            "label": "Alert Color",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+						"field": "field_location_alert_modification",
+						"operator": "==",
+						"value": "override"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "inherit": "Inherit from Find-a-Doc Settings",
+                "alert-success": "Success",
+                "alert-danger": "Danger",
+                "alert-warning": "Warning",
+                "alert-info": "Info"
+            },
+            "default_value": "",
+            "acfe_permissions": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        "field_location_closing_tab": {
+            "key": "field_location_closing_tab",
+            "name": "",
+            "type": "tab",
+            "label": "<i class=\"dashicons-dismiss dashicons\"><\/i> Closing",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        "field_location_closing": {
+			"key": "field_location_closing",
+			"label": "Is this location closing?",
+			"name": "location_closing",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+            },
+			"acfe_permissions": "",
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		"field_location_closing_date": {
+			"key": "field_location_closing_date",
+			"label": "Closing Date",
+			"name": "location_closing_date",
+			"type": "date_picker",
+			"instructions": "",
+			"required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_closing",
+						"operator": "==",
+						"value": "1"
+                    }
+                ]
+            ],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+            },
+			"acfe_permissions": "",
+            "display_format": "m\/d\/Y",
+			"return_format": "F j, Y",
+			"first_day": 0
+		},
+		"field_location_closing_length": {
+			"key": "field_location_closing_length",
+			"label": "Temporary or permanent?",
+			"name": "location_closing_length",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_closing",
+						"operator": "==",
+						"value": "1"
+                    }
+                ]
+            ],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+            },
+			"acfe_permissions": "",
+			"choices": {
+				"temporary": "Temporary",
+				"permanent": "Permanent"
+            },
+			"allow_null": 0,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_location_reopen_known": {
+			"key": "field_location_reopen_known",
+			"label": "Reopening date known?",
+			"name": "location_reopen_known",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_closing_length",
+						"operator": "==",
+						"value": "temporary"
+                    }
+                ]
+            ],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+            },
+			"acfe_permissions": "",
+			"choices": {
+				"tbd": "Date TBD",
+				"date": "Select Date"
+            },
+			"allow_null": 0,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_location_reopen_date": {
+			"key": "field_location_reopen_date",
+			"label": "Reopening date",
+			"name": "location_reopen_date",
+			"type": "date_picker",
+			"instructions": "",
+			"required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_reopen_known",
+						"operator": "==",
+						"value": "date"
+                    }
+                ]
+            ],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+            },
+			"acfe_permissions": "",
+            "display_format": "m\/d\/Y",
+			"return_format": "F j, Y",
+			"first_day": 0
+		},
+		"field_location_closing_info": {
+			"key": "field_location_closing_info",
+			"label": "Closure Information",
+			"name": "location_closing_info",
+			"type": "wysiwyg",
+			"instructions": "",
+			"required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_closing",
+						"operator": "==",
+						"value": "1"
+                    }
+                ]
+            ],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+            },
+			"acfe_permissions": "",
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 0,
+			"delay": 0
+        },
+        "field_location_closing_telemed": {
+			"key": "field_location_closing_telemed",
+			"label": "Will telemedicine still be available?",
+			"name": "location_closing_telemed",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_closing_length",
+						"operator": "==",
+						"value": "temporary"
+                    },
+                    {
+                        "field": "field_location_telemed_query",
+						"operator": "==",
+						"value": "1"
+                    }
+                ]
+            ],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+            },
+			"acfe_permissions": "",
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+        "field_location_gmb_tab": {
+            "key": "field_location_gmb_tab",
+            "name": "",
+            "type": "tab",
+            "label": "<i class=\"dashicons-location dashicons\"><\/i> Google My Business",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        "field_location_gmb_exclude": {
+			"key": "field_location_gmb_exclude",
+			"label": "Exclude Listing in Google My Business",
+			"name": "location_gmb_exclude",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+			"conditional_logic": "0",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+        "field_location_gmb_prefix": {
+			"key": "field_location_gmb_prefix",
+			"label": "Include \"UAMS Health - \" prefix in listing name",
+			"name": "location_gmb_prefix",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+    "field_location_gmb_cat": {
+			"key": "field_location_gmb_cat",
+			"label": "Category",
+			"name": "location_gmb_cat",
+			"type": "taxonomy",
+			"instructions": "Select up to ten categories. Rearrange them so that the first item is the primary category. \"Medical Clinic\" is a good standard choice, if you cannot find a better option.<br />For reference, you can <a href='https://communications.uams.edu/web/kb/google-my-business-categories/' target='_blank'>view a list of available categories.</a>",
+			"required": "1",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+			"taxonomy": "gmb_cat_location",
+			"field_type": "multi_select",
+			"add_term": "0",
+			"save_terms": "1",
+			"load_terms": "1",
+			"return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+			"multiple": "0",
+			"allow_null": "0"
+    },
+    "field_location_gmb_has_wheelchair_accessible_elevator": {
+			"key": "field_location_gmb_has_wheelchair_accessible_elevator",
+			"label": "Accessibility: Wheelchair accessible elevator (for patients)",
+			"name": "has_wheelchair_accessible_elevator",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "notapplicable" : "Not Applicable",
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+        "field_location_gmb_has_wheelchair_accessible_entrance": {
+			"key": "field_location_gmb_has_wheelchair_accessible_entrance",
+			"label": "Accessibility: Wheelchair accessible entrance (for patients)",
+			"name": "has_wheelchair_accessible_entrance",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "notapplicable" : "Not Applicable",
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+        "field_location_gmb_has_wheelchair_accessible_restroom": {
+			"key": "field_location_gmb_has_wheelchair_accessible_restroom",
+			"label": "Accessibility: Wheelchair accessible restroom (for patients)",
+			"name": "has_wheelchair_accessible_restroom",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "notapplicable" : "Not Applicable",
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+        "field_location_gmb_has_restroom": {
+			"key": "field_location_gmb_has_restroom",
+			"label": "Amenities: Restroom (for patients)",
+			"name": "has_restroom",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "notapplicable" : "Not Applicable",
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+        "field_location_gmb_requires_appointments": {
+			"key": "field_location_gmb_requires_appointments",
+			"label": "Health and safety: Appointment required",
+			"name": "requires_appointments",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "notapplicable" : "Not Applicable",
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+        "field_location_gmb_requires_temperature_check_customers": {
+			"key": "field_location_gmb_requires_temperature_check_customers",
+			"label": "Health and safety: Temperature check required (for patients)",
+			"name": "requires_temperature_check_customers",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "notapplicable" : "Not Applicable",
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+        "field_location_gmb_requires_masks_customers": {
+			"key": "field_location_gmb_requires_masks_customers",
+			"label": "Health and safety: Mask required (for patients)",
+			"name": "requires_masks_customers",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "notapplicable" : "Not Applicable",
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+        "field_location_gmb_requires_temperature_check_staff": {
+			"key": "field_location_gmb_requires_temperature_check_staff",
+			"label": "Health and safety: Staff get temperature checks",
+			"name": "requires_temperature_check_staff",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "notapplicable" : "Not Applicable",
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+        "field_location_gmb_requires_masks_staff": {
+			"key": "field_location_gmb_requires_masks_staff",
+			"label": "Health and safety: Staff wear masks",
+			"name": "requires_masks_staff",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "notapplicable" : "Not Applicable",
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "label"
+		},
+        "field_location_gmb_is_sanitizing_between_customers": {
+			"key": "field_location_gmb_is_sanitizing_between_customers",
+			"label": "Health and safety: Staff required to disinfect surfaces between visits",
+			"name": "is_sanitizing_between_customers",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "notapplicable" : "Not Applicable",
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "label"
+		}
     },
     "modified": false
 }

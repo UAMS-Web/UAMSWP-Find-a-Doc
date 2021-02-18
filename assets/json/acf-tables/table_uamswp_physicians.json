@@ -2,7 +2,7 @@
     "name": "uamswp_physicians",
     "relationship": {
         "type": "post",
-        "post_type": "providers"
+        "post_type": "provider"
     },
     "primary_key": [
         "id"
@@ -142,10 +142,24 @@
             }
         },
         {
+            "name": "physician_region",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "physician_region"
+            }
+        },
+        {
             "name": "physician_affiliation",
             "map": {
                 "type": "acf_field_name",
                 "identifier": "physician_affiliation"
+            }
+        },
+        {
+            "name": "physician_portal",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "physician_portal"
             }
         },
         {

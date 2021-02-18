@@ -6,7 +6,7 @@
             {
                 "param": "taxonomy",
                 "operator": "==",
-                "value": "academic_colleges"
+                "value": "academic_college"
             }
         ]
     ],

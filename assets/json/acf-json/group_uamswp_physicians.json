@@ -6,7 +6,7 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "providers"
+                "value": "provider"
             }
         ]
     ],
@@ -46,7 +46,7 @@
             "type": "text",
             "label": "First Name",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "25",
@@ -84,7 +84,7 @@
             "type": "text",
             "label": "Last Name",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "25",
@@ -131,7 +131,7 @@
             },
             "taxonomy": "degree",
             "field_type": "multi_select",
-            "add_term": 1,
+            "add_term": 0,
             "save_terms": 0,
             "load_terms": 0,
             "return_format": "id",
@@ -182,7 +182,7 @@
             "type": "radio",
             "label": "Gender",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "40",
@@ -194,7 +194,7 @@
                 "male": "Male",
                 "other": "Other"
             },
-            "allow_null": 0,
+            "allow_null": 1,
             "other_choice": 0,
             "default_value": "",
             "layout": "horizontal",
@@ -260,7 +260,7 @@
             "label": "Headshot",
             "name": "_thumbnail_id",
             "type": "image",
-            "instructions": "",
+            "instructions": "The photo orientation must be portrait / vertical.</p><p class='description' style='margin-top: 0.5em;'>The photo must be high-resolution, preferably not having been resized at all. The minimum dimensions are 1200x1600, but larger is preferred. <strong>Do not just increase the size of a smaller image to these dimensions to meet the minimum size.</strong></p><p class='description' style='margin-top: 0.5em;'>The image should be a cropped to a 3:4 aspect ratio before uploading. Otherwise, it will automatically be cropped to fit.</p><p class='description' style='margin-top: 0.5em;'>The photo should be less than 10 years old.</p><p class='description' style='margin-top: 0.5em;'>The provider should be wearing a white coat (if applicable) in front of a white background.</p><p class='description' style='margin-top: 0.5em;'>The provider should be facing to the right side of the frame (the provider's left).",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -272,14 +272,45 @@
             "return_format": "id",
             "preview_size": "medium",
             "library": "all",
-            "min_width": 778,
-            "min_height": 1038,
+            "min_width": 1200,
+            "min_height": 1600,
             "min_size": "",
             "max_width": "",
             "max_height": "",
             "max_size": "",
             "mime_types": "",
             "acfe_thumbnail": "",
+            "acfe_validate": "",
+            "acfe_update": ""
+        },
+        "field_physician_wide_image": {
+            "key": "field_physician_image_wide",
+            "label": "Wide Image",
+            "name": "physician_image_wide",
+            "type": "image",
+            "instructions": "This image will be used for social sharing and Google My Business cover photo. It is restricted to a 16:9 aspect ratio and has a minimum dimension of 1200x675.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": 1200,
+            "min_height": 675,
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 10,
+            "acfe_thumbnail": 0,
             "acfe_validate": "",
             "acfe_update": ""
         },
@@ -299,11 +330,11 @@
             "placement": "top",
             "endpoint": 0
         },
-        "field_spacer_1": {
-            "key": "field_spacer_1",
-            "label": "",
-            "name": "",
-            "type": "message",
+        "field_physician_resident": {
+            "key": "field_physician_resident",
+            "name": "physician_resident",
+            "type": "true_false",
+            "label": "Is the provider a resident?",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -312,37 +343,49 @@
                 "class": "",
                 "id": ""
             },
-            "acfe_permissions": "",
-            "message": "&nbsp;",
-            "new_lines": "",
-            "esc_html": 0
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         "field_physician_eligible_appointments": {
             "key": "field_physician_eligible_appointments",
             "name": "physician_eligible_appointments",
-            "type": "true_false",
+            "type": "button_group",
             "label": "Eligible for appointments",
             "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
-                "class": "hide-acf-title",
+                "class": "",
                 "id": ""
             },
-            "message": "Eligible for appointments?",
-            "default_value": 1,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+            "allow_null": 1,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value"
         },
         "field_physician_primary_care": {
             "key": "field_physician_primary_care",
             "name": "physician_primary_care",
-            "type": "true_false",
+            "type": "button_group",
             "label": "Primary Care Physician",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": [
                 [
                     {
@@ -354,22 +397,25 @@
             ],
             "wrapper": {
                 "width": "",
-                "class": "hide-acf-title",
+                "class": "",
                 "id": ""
             },
-            "message": "Primary Care Physician?",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+            "allow_null": 1,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value"
         },
         "field_physician_referral_required": {
             "key": "field_physician_referral_required",
             "name": "physician_referral_required",
-            "type": "true_false",
+            "type": "button_group",
             "label": "Referral required for new patients",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": [
                 [
                     {
@@ -381,22 +427,25 @@
             ],
             "wrapper": {
                 "width": "",
-                "class": "hide-acf-title",
+                "class": "",
                 "id": ""
             },
-            "message": "Referral required for new patients",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+            "allow_null": 1,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value"
         },
         "field_physician_accepting_patients": {
             "key": "field_physician_accepting_patients",
             "name": "physician_accepting_patients",
-            "type": "true_false",
+            "type": "button_group",
             "label": "Accepting new patients",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": [
                 [
                     {
@@ -408,22 +457,25 @@
             ],
             "wrapper": {
                 "width": "",
-                "class": "hide-acf-title",
+                "class": "",
                 "id": ""
             },
-            "message": "Currently accepting new patients",
-            "default_value": 1,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+            "allow_null": 1,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value"
         },
         "field_physician_second_opinion": {
             "key": "field_physician_second_opinion",
             "name": "physician_second_opinion",
-            "type": "true_false",
+            "type": "button_group",
             "label": "Provides second opinion",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": [
                 [
                     {
@@ -435,16 +487,19 @@
             ],
             "wrapper": {
                 "width": "",
-                "class": "hide-acf-title",
+                "class": "",
                 "id": ""
             },
-            "message": "Provides second opinion",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+            "allow_null": 1,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value"
         },
-        
+
         "field_physician_appointment_link": {
             "key": "field_physician_appointment_link",
             "name": "physician_appointment_link",
@@ -474,24 +529,6 @@
             "default_value": "https:\/\/uamshealth.com\/appointments",
             "placeholder": "https:\/\/uamshealth.com\/appointments"
         },
-        "field_spacer_2": {
-            "key": "field_spacer_2",
-            "label": "",
-            "name": "",
-            "type": "message",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "message": "&nbsp;",
-            "new_lines": "",
-            "esc_html": 0
-        },
         "field_physician_title": {
             "key": "field_physician_title",
             "name": "physician_title",
@@ -499,7 +536,15 @@
             "label": "Clinical Job Title",
             "instructions": "General Title for Patients \/ Public",
             "required": 1,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -509,8 +554,8 @@
             "field_type": "select",
             "allow_null": 1,
             "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
+            "save_terms": 1,
+            "load_terms": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
@@ -522,9 +567,17 @@
             "name": "physician_service_line",
             "type": "taxonomy",
             "label": "Service Line",
-            "instructions": "&nbsp;",
-            "required": 0,
-            "conditional_logic": 0,
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -532,7 +585,7 @@
             },
             "taxonomy": "service_line",
             "field_type": "select",
-            "add_term": 1,
+            "add_term": 0,
             "save_terms": 0,
             "load_terms": 0,
             "return_format": "id",
@@ -542,11 +595,90 @@
             "multiple": 0,
             "allow_null": 1
         },
+        "field_physician_clinical_admin_title": {
+            "key": "field_physician_clinical_admin_title",
+            "name": "physician_clinical_admin_title",
+            "type": "repeater",
+            "label": "Clinical Administrative Title",
+            "instructions": "Both fields are required if you add a row. This is not displayed on the front end at this time.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_physician_clinical_admin_title_tax",
+                    "label": "Clinical Administrative Title",
+                    "name": "clinical_admin_title_tax",
+                    "type": "taxonomy",
+                    "instructions": "Service line director, medical director, nursing director or administrator.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "clinical_admin_title",
+                    "field_type": "select",
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "acfe_bidirectional": {
+                        "acfe_bidirectional_enabled": "0"
+                    },
+                    "multiple": 0,
+                    "allow_null": 0
+                },
+                {
+                    "key": "field_physician_clinical_admin_area",
+                    "label": "Service Line",
+                    "name": "physician_clinical_admin_area",
+                    "type": "taxonomy",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "service_line",
+                    "field_type": "select",
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "acfe_bidirectional": {
+                        "acfe_bidirectional_enabled": "0"
+                    },
+                    "multiple": 0,
+                    "allow_null": 0
+                }
+            ]
+        },
         "field_physician_npi": {
             "key": "field_physician_npi",
             "name": "physician_npi",
             "type": "number",
-            "label": "NPI",
+            "label": "National Provider Identifier (NPI)",
             "instructions": "",
             "required": 1,
             "conditional_logic": 0,
@@ -565,9 +697,9 @@
             "key": "field_physician_pid",
             "name": "physician_pid",
             "type": "number",
-            "label": "PID",
+            "label": "Provider ID",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
@@ -621,7 +753,7 @@
             "default_value": [
                 "English"
             ],
-            "taxonomy": "languages",
+            "taxonomy": "language",
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 0,
@@ -649,7 +781,7 @@
             "default_value": "",
             "tabs": "all",
             "toolbar": "full",
-            "media_upload": 1,
+            "media_upload": 0,
             "delay": 0
         },
         "field_physician_short_clinical_bio": {
@@ -657,7 +789,7 @@
             "name": "physician_short_clinical_bio",
             "type": "textarea",
             "label": "Short Bio",
-            "instructions": "Limit of 160 characters. Preferred length is approx 18 words.",
+            "instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -678,7 +810,15 @@
             "label": "Youtube Link",
             "instructions": "Full URL, including https:\/\/",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -687,6 +827,33 @@
             "default_value": "",
             "placeholder": ""
         }, 
+        "field_physician_clinical_focus": {
+            "key": "field_physician_clinical_focus",
+            "name": "physician_clinical_focus",
+            "type": "wysiwyg",
+            "label": "Clinical Focus",
+            "instructions": "This should not be an outline of their services (that is covered by Conditions Treated and Treatments &amp; Procedures). It is meant to be a quick glimpse of the provider's main focus.</p><p class='description' style='margin-top: 0.5em;'>If it's a list, use a single-level bulleted list. If it is full sentences, then use a paragraph.</p><p class='description' style='margin-top: 0.5em;'>Keep it brief. Try to limit it to less than 344 characters.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
         "field_medical_specialties": {
             "key": "field_medical_specialties",
             "name": "physician_medical_specialties",
@@ -710,7 +877,7 @@
             },
             "taxonomy": "specialty",
             "field_type": "multi_select",
-            "allow_null": 0,
+            "allow_null": 1,
             "add_term": 0,
             "save_terms": 1,
             "load_terms": 1,
@@ -720,10 +887,10 @@
             },
             "multiple": 0
         },
-        "field_physician_conditions": {
-            "key": "field_physician_conditions",
-            "name": "physician_conditions",
-            "type": "taxonomy",
+        "field_physician_conditions_cpt": {
+            "key": "field_physician_conditions_cpt",
+            "name": "physician_conditions_cpt",
+            "type": "post_object",
             "label": "Conditions Treated",
             "instructions": "Will be displayed in the order they are entered. You may re-arrange as needed.",
             "required": 0,
@@ -733,23 +900,26 @@
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "condition",
-            "field_type": "multi_select",
-            "allow_null": 0,
-            "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
+            "acfe_permissions": "",
+            "post_type": [
+                "condition"
+            ],
+            "taxonomy": "",
+            "allow_null": 1,
+            "multiple": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "1",
                 "acfe_bidirectional_related": "field_condition_physicians"
             },
-            "multiple": 0
+            "acfe_validate": "",
+            "acfe_update": "",
+            "ui": 1
         },
-        "field_physician_treatments": {
-            "key": "field_physician_treatments",
-            "name": "physician_treatments",
-            "type": "taxonomy",
+        "field_physician_treatments_cpt": {
+            "key": "field_physician_treatments_cpt",
+            "name": "physician_treatments_cpt",
+            "type": "post_object",
             "label": "Treatments & Procedures",
             "instructions": "Will be displayed in the order they are entered. You may re-arrange as needed.",
             "required": 0,
@@ -759,18 +929,21 @@
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "treatment_procedure",
-            "field_type": "multi_select",
-            "allow_null": 0,
-            "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
+            "acfe_permissions": "",
+            "post_type": [
+                "treatment"
+            ],
+            "taxonomy": "",
+            "allow_null": 1,
+            "multiple": 1,
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "1",
                 "acfe_bidirectional_related": "field_treatment_procedure_physicians"
             },
-            "multiple": 0
+            "acfe_validate": "",
+            "acfe_update": "",
+            "ui": 1
         },
         "field_medical_terms": {
             "key": "field_medical_terms",
@@ -793,9 +966,9 @@
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "medical_terms",
+            "taxonomy": "medical_term",
             "field_type": "multi_select",
-            "allow_null": 0,
+            "allow_null": 1,
             "add_term": 0,
             "save_terms": 1,
             "load_terms": 1,
@@ -819,7 +992,7 @@
                 "id": ""
             },
             "post_type": [
-                "locations"
+                "location"
             ],
             "taxonomy": [],
             "filters": [
@@ -829,27 +1002,98 @@
             "min": 1,
             "max": "",
             "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": true,
-                "acfe_bidirectional_related": "field_location_physicians"
-            },
+            "acfe_bidirectional": 0,
             "acfe_validate": "",
             "acfe_update": ""
+        },
+        "field_physician_region": {
+            "key": "field_physician_region",
+            "name": "physician_region",
+            "type": "taxonomy",
+            "label": "Region",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_clinical_tab",
+                        "operator": "==",
+                        "value": "false"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "region",
+            "field_type": "select",
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 0,
+            "allow_null": 0
         },
         "field_physician_affiliation": {
             "key": "field_physician_affiliation",
             "name": "physician_affiliation",
             "type": "taxonomy",
-            "label": "Affiliation",
+            "label": "Hospital Affiliations",
             "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "affiliations",
+            "taxonomy": "affiliation",
+            "field_type": "checkbox",
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 0,
+            "allow_null": 0
+        },
+        "field_physician_institute_affiliation": {
+            "key": "field_physician_institute_affiliation",
+            "name": "physician_institute_affiliation",
+            "type": "taxonomy",
+            "label": "Institute Affiliations",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "institute_affiliation",
             "field_type": "checkbox",
             "add_term": 0,
             "save_terms": 0,
@@ -868,7 +1112,15 @@
             "label": "Portal",
             "instructions": "",
             "required": 1,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_clinical_tab",
+                        "operator": "==",
+                        "value": "false"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -895,7 +1147,15 @@
             "label": "Areas of Expertise",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -913,23 +1173,48 @@
             "max": "",
             "return_format": "id",
             "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": true,
+                "acfe_bidirectional_enabled": "1",
                 "acfe_bidirectional_related": "field_expertise_physicians"
             },
             "acfe_validate": "",
             "acfe_update": ""
         },
-        "field_physician_hidden": {
-            "key": "field_physician_hidden",
-            "name": "physician_hidden",
-            "type": "true_false",
-            "label": "Hide",
+        "field_physician_recognitions": {
+            "key": "field_physician_recognitions",
+            "name": "physician_recognitions",
+            "type": "taxonomy",
+            "label": "Recognition Lists",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
-                "class": "hide-acf-title",
+                "width": "75",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "recognition",
+            "field_type": "multi_select",
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 1,
+            "allow_null": 1
+        },
+        "field_physician_hidden": {
+            "key": "field_physician_hidden",
+            "name": "physician_hidden",
+            "type": "true_false",
+            "label": "Hide from Provider List",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
                 "id": ""
             },
             "message": "Exclude from Primary Listing",
@@ -938,6 +1223,374 @@
             "ui_on_text": "",
             "ui_off_text": ""
         },
+        "field_physician_podcast_name": {
+            "key": "field_physician_podcast_name",
+            "name": "physician_podcast_name",
+            "type": "text",
+            "label": "UAMS Health Talk Podcast Doctor Name",
+            "instructions": "Doctor name as listed in the dropdown",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        "field_physician_asp_filter": {
+            "key": "field_physician_asp_filter",
+            "name": "physician_asp_filter",
+            "type": "text",
+            "label": "Ajax Search Filter",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_clinical_tab",
+                        "operator": "==",
+                        "value": "false"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        "field_physician_resident_profile_tab": {
+            "key": "field_physician_resident_profile_tab",
+            "name": "",
+            "type": "tab",
+            "label": "<i class=\"dashicons dashicons-id-alt\"><\/i> Resident Profile",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        "field_physician_resident_profile_group": {
+            "key": "field_physician_resident_profile_group",
+            "label": "",
+            "name": "physician_resident_profile_group",
+            "type": "group",
+            "instructions": "",
+            "acfe_permissions": "",
+            "layout": "block",
+            "acfe_seamless_style": 1,
+            "acfe_group_modal": 0,
+            "sub_fields": [
+                {
+                    "key": "field_physician_resident_hometown",
+                    "label": "Personal Details",
+                    "name": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "placement": "left",
+                    "endpoint": 0
+                },
+                {
+                    "key": "field_physician_resident_hometown_international",
+                    "name": "physician_resident_hometown_international",
+                    "type": "true_false",
+                    "label": "Is the hometown outside the U.S.?",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_physician_resident_hometown_city",
+                    "name": "physician_resident_hometown_city",
+                    "type": "text",
+                    "label": "Hometown City",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_physician_resident_hometown_state",
+                    "name": "physician_resident_hometown_state",
+                    "type": "select",
+                    "label": "Hometown State \/ District \/ Territory",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_physician_resident_hometown_international",
+                                "operator": "==",
+                                "value": "0"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "Alabama": "Alabama",
+                        "Alaska": "Alaska",
+                        "Arizona": "Arizona",
+                        "Arkansas": "Arkansas",
+                        "California": "California",
+                        "Colorado": "Colorado",
+                        "Connecticut": "Connecticut",
+                        "Delaware": "Delaware",
+                        "D.C.": "District of Columbia",
+                        "Florida": "Florida",
+                        "Georgia": "Georgia",
+                        "Guam": "Guam",
+                        "Hawaii": "Hawaii",
+                        "Idaho": "Idaho",
+                        "Illinois": "Illinois",
+                        "Indiana": "Indiana",
+                        "Iowa": "Iowa",
+                        "Kansas": "Kansas",
+                        "Kentucky": "Kentucky",
+                        "Louisiana": "Louisiana",
+                        "Maine": "Maine",
+                        "Maryland": "Maryland",
+                        "Massachusetts": "Massachusetts",
+                        "Michigan": "Michigan",
+                        "Minnesota": "Minnesota",
+                        "Mississippi": "Mississippi",
+                        "Missouri": "Missouri",
+                        "Montana": "Montana",
+                        "Nebraska": "Nebraska",
+                        "Nevada": "Nevada",
+                        "New Hampshire": "New Hampshire",
+                        "New Jersey": "New Jersey",
+                        "New Mexico": "New Mexico",
+                        "New York": "New York",
+                        "North Carolina": "North Carolina",
+                        "North Dakota": "North Dakota",
+                        "Northern Mariana Islands": "Northern Mariana Islands",
+                        "Ohio": "Ohio",
+                        "Oklahoma": "Oklahoma",
+                        "Oregon": "Oregon",
+                        "Pennsylvania": "Pennsylvania",
+                        "Puerto Rico": "Puerto Rico",
+                        "Rhode Island": "Rhode Island",
+                        "South Carolina": "South Carolina",
+                        "South Dakota": "South Dakota",
+                        "Tennessee": "Tennessee",
+                        "Texas": "Texas",
+                        "Utah": "Utah",
+                        "Vermont": "Vermont",
+                        "Virgin Islands": "Virgin Islands",
+                        "Virginia": "Virginia",
+                        "Washington": "Washington",
+                        "West Virginia": "West Virginia",
+                        "Wisconsin": "Wisconsin",
+                        "Wyoming": "Wyoming"
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_physician_resident_hometown_country",
+                    "name": "physician_resident_hometown_country",
+                    "type": "text",
+                    "label": "Hometown Country",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_physician_resident_hometown_international",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_physician_resident_school",
+                    "label": "Medical School",
+                    "type": "taxonomy",
+                    "name": "physician_resident_school",
+                    "instructions": "The medical school the resident graduated from, not an institution associated with their current residency program",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "school",
+                    "field_type": "select",
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "acfe_bidirectional": {
+                        "acfe_bidirectional_enabled": "0"
+                    },
+                    "multiple": 0,
+                    "allow_null": 0
+                },
+                {
+                    "key": "field_physician_resident_academic",
+                    "label": "Residency Program Details",
+                    "name": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "placement": "left",
+                    "endpoint": 0
+                },
+                {
+                    "key": "field_physician_resident_academic_department",
+                    "name": "physician_resident_academic_department",
+                    "type": "taxonomy",
+                    "label": "Academic Department",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "academic_department",
+                    "field_type": "select",
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "acfe_bidirectional": {
+                        "acfe_bidirectional_enabled": "0"
+                    },
+                    "multiple": 0,
+                    "allow_null": 0
+                },
+                {
+                    "key": "field_physician_resident_academic_chief",
+                    "name": "physician_resident_academic_chief",
+                    "type": "true_false",
+                    "label": "Chief Resident?",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_physician_resident_academic_year",
+                    "name": "physician_resident_academic_year",
+                    "type": "taxonomy",
+                    "label": "Residency Year",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_physician_resident_academic_chief",
+                                "operator": "==",
+                                "value": "0"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "residency_year",
+                    "field_type": "select",
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "acfe_bidirectional": {
+                        "acfe_bidirectional_enabled": "0"
+                    },
+                    "multiple": 0,
+                    "allow_null": 0
+                }
+            ]
+        },
         "field_physician_academic_profile_tab": {
             "key": "field_physician_academic_profile_tab",
             "name": "",
@@ -945,7 +1598,15 @@
             "label": "<i class=\"dashicons dashicons-edit\"><\/i> Academic Profile",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -1001,12 +1662,62 @@
             "append": "",
             "maxlength": ""
         },
+        "field_physician_academic_college": {
+            "key": "field_physician_academic_college",
+            "name": "physician_academic_college",
+            "type": "taxonomy",
+            "label": "College Affiliation",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "academic_college",
+            "field_type": "checkbox",
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 0,
+            "allow_null": 0
+        },
+        "field_physician_academic_position": {
+            "key": "field_physician_academic_position",
+            "name": "physician_academic_position",
+            "type": "taxonomy",
+            "label": "Academic Position Type",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "academic_position",
+            "field_type": "checkbox",
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 0,
+            "allow_null": 0
+        },
         "field_physician_academic_appointment": {
             "key": "field_physician_academic_appointment",
             "name": "physician_academic_appointment",
             "type": "repeater",
-            "label": "Academic Appointment",
-            "instructions": "",
+            "label": "Faculty Title",
+            "instructions": "Both fields are required if you add a row.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -1022,12 +1733,20 @@
             "sub_fields": [
                 {
                     "key": "field_physician_appointment_title",
-                    "label": "Academic Title",
+                    "label": "Title (Original)",
                     "name": "academic_title",
                     "type": "text",
-                    "instructions": "",
+                    "instructions": "Deprecated - Moving to select. Please update.",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_physician_academic_profile_tab",
+                                "operator": "==",
+                                "value": "false"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -1040,12 +1759,37 @@
                     "maxlength": ""
                 },
                 {
+                    "key": "field_physician_appointment_title_tax",
+                    "label": "Title",
+                    "name": "academic_title_tax",
+                    "type": "taxonomy",
+                    "instructions": "Professor, Associate Professor, Assistant Professor, etc.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "academic_title",
+                    "field_type": "select",
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "acfe_bidirectional": {
+                        "acfe_bidirectional_enabled": "0"
+                    },
+                    "multiple": 0,
+                    "allow_null": 0
+                },
+                {
                     "key": "field_5d4099f605575",
-                    "label": "Department",
+                    "label": "Academic Department",
                     "name": "department",
                     "type": "taxonomy",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
@@ -1054,7 +1798,7 @@
                     },
                     "taxonomy": "academic_department",
                     "field_type": "select",
-                    "add_term": 1,
+                    "add_term": 0,
                     "save_terms": 0,
                     "load_terms": 0,
                     "return_format": "id",
@@ -1066,55 +1810,76 @@
                 }
             ]
         },
-        "field_physician_academic_college": {
-            "key": "field_physician_academic_college",
-            "name": "physician_academic_college",
-            "type": "taxonomy",
-            "label": "College Affiliation",
-            "instructions": "",
+        "field_physician_academic_admin_title": {
+            "key": "field_physician_academic_admin_title",
+            "name": "physician_academic_admin_title",
+            "type": "repeater",
+            "label": "Academic Administrative Title",
+            "instructions": "Both fields are required if you add a row.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "",
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "academic_colleges",
-            "field_type": "checkbox",
-            "add_term": 1,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
-            },
-            "multiple": 0,
-            "allow_null": 0
-        },
-        "field_physician_academic_position": {
-            "key": "field_physician_academic_position",
-            "name": "physician_academic_position",
-            "type": "taxonomy",
-            "label": "Position",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "academic_positions",
-            "field_type": "checkbox",
-            "add_term": 1,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
-            },
-            "multiple": 0,
-            "allow_null": 0
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_physician_academic_admin_title_tax",
+                    "label": "Academic Administrative Title",
+                    "name": "academic_admin_title_tax",
+                    "type": "taxonomy",
+                    "instructions": "Dean, Department Chair, etc.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "academic_admin_title",
+                    "field_type": "select",
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "acfe_bidirectional": {
+                        "acfe_bidirectional_enabled": "0"
+                    },
+                    "multiple": 0,
+                    "allow_null": 0
+                },
+                {
+                    "key": "field_5d4099f605575",
+                    "label": "Academic Department",
+                    "name": "department",
+                    "type": "taxonomy",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "academic_department",
+                    "field_type": "select",
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "acfe_bidirectional": {
+                        "acfe_bidirectional_enabled": "0"
+                    },
+                    "multiple": 0,
+                    "allow_null": 0
+                }
+            ]
         },
         "field_physician_academic_bio": {
             "key": "field_physician_academic_bio",
@@ -1140,7 +1905,7 @@
             "name": "physician_academic_short_bio",
             "type": "text",
             "label": "Short Academic Bio",
-            "instructions": "Limit of 160 characters. Preferred length is approx 18 words.",
+            "instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -1325,7 +2090,7 @@
             "name": "physician_education",
             "type": "repeater",
             "label": "Education",
-            "instructions": "",
+            "instructions": "Education Type and School are required if you add a row.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -1340,12 +2105,12 @@
             "button_label": "",
             "sub_fields": [
                 {
-                    "key": "field_5d409a9e05577",
+                    "key": "field_physician_appointment_education_type",
                     "label": "Education Type",
                     "name": "education_type",
                     "type": "taxonomy",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
@@ -1354,7 +2119,7 @@
                     },
                     "taxonomy": "educationtype",
                     "field_type": "select",
-                    "add_term": 1,
+                    "add_term": 0,
                     "save_terms": 0,
                     "load_terms": 0,
                     "return_format": "id",
@@ -1370,16 +2135,16 @@
                     "name": "school",
                     "type": "taxonomy",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
                         "class": "",
                         "id": ""
                     },
-                    "taxonomy": "schools",
+                    "taxonomy": "school",
                     "field_type": "select",
-                    "add_term": 1,
+                    "add_term": 0,
                     "save_terms": 0,
                     "load_terms": 0,
                     "return_format": "id",
@@ -1417,13 +2182,21 @@
             "label": "Boards",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "boards",
+            "taxonomy": "board",
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 0,
@@ -1442,13 +2215,21 @@
             "label": "Associations",
             "instructions": "Examples: Fellow of the American College of Obstetricians and Gynecologists, American Society of Breast Surgeons, American Burn Association, etc.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
-            "taxonomy": "associations",
+            "taxonomy": "association",
             "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 0,
@@ -1521,7 +2302,15 @@
             "label": "UAMS Profiles Link",
             "instructions": "Please include the full URL, including https:\/\/",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "33",
                 "class": "",
@@ -1634,6 +2423,77 @@
                     "new_lines": ""
                 }
             ]
+        },
+        "field_physician_gmb_tab": {
+            "key": "field_physician_gmb_tab",
+            "name": "",
+            "type": "tab",
+            "label": "<i class=\"dashicons-location dashicons\"><\/i> Google My Business",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        "field_physician_gmb_exclude": {
+			"key": "field_physician_gmb_exclude",
+			"label": "Exclude Listing in Google My Business",
+			"name": "physician_gmb_exclude",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+			"conditional_logic": "0",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+			"allow_null": "1",
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+        "field_physician_gmb_cat": {
+            "key": "field_physician_gmb_cat",
+            "label": "Category",
+            "name": "physician_gmb_cat",
+            "type": "taxonomy",
+            "instructions": "Select up to ten categories. Rearrange them so that the first item is the primary category. \"Doctor\" is a good standard choice, if you cannot find a better option.<br />For reference, you can <a href='https://communications.uams.edu/web/kb/google-my-business-categories/' target='_blank'>view a list of available categories.</a>",
+            "required": "1",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_gmb_exclude",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "gmb_cat_provider",
+            "field_type": "multi_select",
+            "add_term": "0",
+            "save_terms": "1",
+            "load_terms": "1",
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": "0",
+            "allow_null": "0"
         },
         "field_physician_extra_tab": {
             "key": "field_physician_extra_tab",

@@ -45,27 +45,27 @@ function providers() {
 		'label'                 => 'Provider',
 		'description'           => 'UAMS Providers for Find-a-Doctor',
 		'labels'                => $labels,
-		'supports'              => array( 'title', 'author', 'thumbnail', ),
-		'taxonomies'            => array( 'specialties', 'department', 'patient_type', 'medical_procedures', 'medical_terms', 'conditions' ),
+		'supports'              => array( 'title', 'author', 'thumbnail', 'revisions' ),
+		'taxonomies'            => array( 'department', 'patient_type', 'treatment', 'medical_term', 'condition' ),
 		'hierarchical'          => false,
 		'public'                => true,
 		'show_ui'               => true,
 		'show_in_menu'          => true,
-		'menu_position'         => 20,
+		'menu_position'         => 30,
 		'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/physicians-icon.png',
 		'show_in_admin_bar'     => true,
 		'show_in_nav_menus'     => true,
-		'slug'					=> 'providers',
+		'slug'					=> 'provider',
 		'can_export'            => true,
 		'has_archive'           => true,
 		'exclude_from_search'   => false,
 		'publicly_queryable'    => true,
 		'capabilities'          => $capabilities,
 		'show_in_rest'          => true,
-		'rest_base'             => 'providers',
+		'rest_base'             => 'provider',
 		'rest_controller_class' => 'WP_REST_Posts_Controller',
 	);
-	register_post_type( 'providers', $args );
+	register_post_type( 'provider', $args );
 
 }
 add_action( 'init', 'providers', 0 );
@@ -116,13 +116,13 @@ function locations() {
 	$args = array(
 		'label'                 => 'Location',
 		'labels'                => $labels,
-		'supports'              => array( 'title', 'author', 'thumbnail', ),
-		'taxonomies'            => array( 'treatment_procedure', 'conditions' ),
-		'hierarchical'          => false,
+		'supports'              => array( 'title', 'author', 'thumbnail','revisions','page-attributes' ),
+		'taxonomies'            => array( 'treatment', 'condition' ),
+		'hierarchical'          => true,
 		'public'                => true,
 		'show_ui'               => true,
 		'show_in_menu'          => true,
-		'menu_position'         => 20,
+		'menu_position'         => 30,
 		'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/locations-icon.png',
 		'show_in_admin_bar'     => true,
 		'show_in_nav_menus'     => true,
@@ -132,10 +132,10 @@ function locations() {
 		'publicly_queryable'    => true,
 		'capabilities'          => $capabilities,
 		'show_in_rest'          => true,
-		'rest_base'             => 'locations',
+		'rest_base'             => 'location',
 		'rest_controller_class' => 'WP_REST_Posts_Controller',
 	);
-	register_post_type( 'locations', $args );
+	register_post_type( 'location', $args );
 
 }
 add_action( 'init', 'locations', 0 );
@@ -178,7 +178,7 @@ if ( ! function_exists('expertise_cpt') ) {
 			'read_private_posts'    => 'read_private_expertises',
 		);
 		$rewrite = array(
-			'slug'                  => 'area-of-expertise',
+			'slug'                  => 'expertise',
 			'with_front'            => true,
 			'pages'                 => true,
 			'feeds'                 => true,
@@ -187,14 +187,14 @@ if ( ! function_exists('expertise_cpt') ) {
 			'label'                 => 'Areas of Expertise',
 			'description'           => 'UAMS Areas of Expertise', 
 			'labels'                => $labels,
-			'supports'              => array( 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes', ),
-			'taxonomies'            => array( 'treatment_procedure', 'conditions' ),
+			'supports'              => array( 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes', 'revisions' ),
+			'taxonomies'            => array( 'treatment', 'condition' ),
 			'hierarchical'          => true,
 			'capability_type' 		=> 'page',
 			'public'                => true,
 			'show_ui'               => true,
 			'show_in_menu'          => true,
-			'menu_position'         => 20,
+			'menu_position'         => 30,
 			'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/services-icon.png',
 			'show_in_admin_bar'     => true,
 			'show_in_nav_menus'     => true,
@@ -214,16 +214,195 @@ if ( ! function_exists('expertise_cpt') ) {
 	add_action( 'init', 'expertise_cpt', 0 );
 }
 
-add_action( 'init', 'create_clinical_conditions_taxonomy', 0 );
+if ( ! function_exists('conditions_cpt') ) {
 
-//create a custom taxonomy name it topics for your posts
+	// Register Custom Post Type
+	function conditions_cpt() {
+	
+		$labels = array(
+			'name'                  => 'Conditions',
+			'singular_name'         => 'Condition',
+			'menu_name'             => 'Conditions',
+			'name_admin_bar'        => 'Condition',
+			'archives'              => 'Condition Archives',
+			'attributes'            => 'Condition Attributes',
+			'parent_item_colon'     => 'Parent Item:',
+			'all_items'             => 'All Conditions',
+			'add_new_item'          => 'Add New Condition',
+			'add_new'               => 'Add New',
+			'new_item'              => 'New Condition',
+			'edit_item'             => 'Edit Condition',
+			'update_item'           => 'Update Condition',
+			'view_item'             => 'View Condition',
+			'view_items'            => 'View Conditions',
+			'search_items'          => 'Search Conditions',
+			'uploaded_to_this_item' => 'Uploaded to this item',
+			'items_list'            => 'Conditions list',
+			'items_list_navigation' => 'Conditions list navigation',
+			'filter_items_list'     => 'Filter Conditions list',
+		);
+		$capabilities = array(
+			'edit_post'      		=> "edit_condition",
+			'read_post'      		=> "read_condition",
+			'delete_post'        	=> "delete_condition",
+			'edit_posts'         	=> "edit_conditions",
+			'edit_others_posts'  	=> "edit_others_conditions",
+			'publish_posts'      	=> "publish_conditions",
+			'read_private_posts'    => "read_private_conditions",
+			'read'                  => "read",
+			'delete_posts'          => "delete_conditions",
+			'delete_private_posts'  => "delete_private_conditions",
+			'delete_published_posts' => "delete_published_conditions",
+			'delete_others_posts'   => "delete_others_conditions",
+			'edit_private_posts'    => "edit_private_conditions",
+			'edit_published_posts'  => "edit_published_conditions",
+		);
+		$args = array(
+			'label'                 => 'Conditions',
+			'labels'                => $labels,
+			'supports'              => array( 'title', 'editor', 'author', 'thumbnail','revisions','custom-fields' ),
+			'taxonomies'            => array( ),
+			'hierarchical'          => false,
+			'public'                => true,
+			'show_ui'               => true,
+			'show_in_menu'          => true,
+			'menu_position'         => 30,
+			'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/locations-icon.png',
+			'show_in_admin_bar'     => true,
+			'show_in_nav_menus'     => true,
+			'can_export'            => true,
+			'has_archive'           => true,
+			'exclude_from_search'   => false,
+			'publicly_queryable'    => true,
+			'capabilities'          => $capabilities,
+			'show_in_rest'          => true,
+			'rest_base'             => 'condition',
+			'rest_controller_class' => 'WP_REST_Posts_Controller',
+		);
+		register_post_type( 'condition', $args );
+	
+	}
+	add_action( 'init', 'conditions_cpt', 0 );
+	
+}
 
+if ( ! function_exists('treatments_cpt') ) {
+
+	// Register Custom Post Type
+	function treatments_cpt() {
+	
+		$labels = array(
+			'name'                  => 'Treatments & Procedures',
+			'singular_name'         => 'Treatment & Procedure',
+			'menu_name'             => 'Treatments & Procedures',
+			'name_admin_bar'        => 'Treatment & Procedure',
+			'archives'              => 'Treatments & Procedure Archives',
+			'attributes'            => 'Treatments & Procedure Attributes',
+			'parent_item_colon'     => 'Parent Item:',
+			'all_items'             => 'All Treatments & Procedures',
+			'add_new_item'          => 'Add New Treatment & Procedure',
+			'add_new'               => 'Add New',
+			'new_item'              => 'New Treatment & Procedure',
+			'edit_item'             => 'Edit Treatment & Procedure',
+			'update_item'           => 'Update Treatment & Procedure',
+			'view_item'             => 'View Treatment & Procedure',
+			'view_items'            => 'View Treatments & Procedures',
+			'search_items'          => 'Search Treatments & Procedures',
+			'uploaded_to_this_item' => 'Uploaded to this item',
+			'items_list'            => 'Treatments & Procedures list',
+			'items_list_navigation' => 'Treatments & Procedures list navigation',
+			'filter_items_list'     => 'Filter Treatments & Procedures list',
+		);
+		$capabilities = array(
+			'edit_post'      		=> "edit_treatment",
+			'read_post'      		=> "read_treatment",
+			'delete_post'        	=> "delete_treatment",
+			'edit_posts'         	=> "edit_treatments",
+			'edit_others_posts'  	=> "edit_others_treatments",
+			'publish_posts'      	=> "publish_treatments",
+			'read_private_posts'    => "read_private_treatments",
+			'read'                  => "read",
+			'delete_posts'          => "delete_treatments",
+			'delete_private_posts'  => "delete_private_treatments",
+			'delete_published_posts' => "delete_published_treatments",
+			'delete_others_posts'   => "delete_others_treatments",
+			'edit_private_posts'    => "edit_private_treatments",
+			'edit_published_posts'  => "edit_published_treatments",
+		);
+		$args = array(
+			'label'                 => 'Treatments & Procedures',
+			'labels'                => $labels,
+			'supports'              => array( 'title', 'editor', 'author', 'thumbnail','revisions','custom-fields' ),
+			'taxonomies'            => array( ),
+			'hierarchical'          => false,
+			'public'                => true,
+			'show_ui'               => true,
+			'show_in_menu'          => true,
+			'menu_position'         => 30,
+			'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/locations-icon.png',
+			'show_in_admin_bar'     => true,
+			'show_in_nav_menus'     => true,
+			'can_export'            => true,
+			'has_archive'           => true,
+			'exclude_from_search'   => false,
+			'publicly_queryable'    => true,
+			'capabilities'          => $capabilities,
+			'show_in_rest'          => true,
+			'rest_base'             => 'treatment',
+			'rest_controller_class' => 'WP_REST_Posts_Controller',
+		);
+		register_post_type( 'treatment', $args );
+	
+	}
+	add_action( 'init', 'treatments_cpt', 0 );
+	
+}
+
+/*
+ *
+ * Register Taxonomies
+ * 
+ */
+// Actions for Taxonomy - place in order for sub-menu
+// Provider Taxonomies
+// Clinical
+// add_action( 'init', 'create_clinical_conditions_taxonomy', 0 );
+// add_action( 'init', 'create_clinical_treatments_taxonomy', 0 );
+
+add_action( 'init', 'create_affiliations_taxonomy', 0 );
+add_action( 'init', 'create_institute_affiliations_taxonomy', 0 );
+add_action( 'init', 'create_clinical_title_taxonomy', 0 );
+add_action( 'init', 'create_clinical_admin_title_taxonomy', 0 );
+add_action( 'init', 'create_languages_taxonomy', 0 );
+add_action( 'init', 'create_departments_taxonomy', 0 );
+add_action( 'init', 'create_degrees_taxonomy', 0 );
+add_action( 'init', 'create_patient_type_taxonomy', 0 );
+add_action( 'init', 'create_portal_taxonomy', 0 );
+add_action( 'init', 'create_recognition_taxonomy', 0 );
+add_action( 'init', 'create_service_line_taxonomy', 0 );
+add_action( 'init', 'create_gmb_cat_provider_taxonomy', 0 );
+// add_action( 'init', 'create_medical_specialties_taxonomy', 0 ); // Disabled
+// add_action( 'init', 'create_medical_terms_taxonomy', 0 ); // Disabled
+// Academic
+add_action( 'init', 'create_associations_taxonomy', 0 );
+add_action( 'init', 'create_boards_taxonomy', 0 );
+add_action( 'init', 'create_academic_departments_taxonomy', 0 );
+add_action( 'init', 'create_academic_position_taxonomy', 0 );
+add_action( 'init', 'create_academic_title_taxonomy', 0 );
+add_action( 'init', 'create_academic_admin_title_taxonomy', 0 );
+add_action( 'init', 'create_academic_college_taxonomy', 0 );
+add_action( 'init', 'create_education_taxonomy', 0 );
+add_action( 'init', 'create_schools_taxonomy', 0 );
+add_action( 'init', 'create_residency_years_taxonomy', 0 );
+// Locations Taxonomies
+add_action( 'init', 'create_region_taxonomy', 0 );
+add_action( 'init', 'create_location_type_taxonomy', 0 );
+add_action( 'init', 'create_building_taxonomy', 0 );
+add_action( 'init', 'create_gmb_cat_location_taxonomy', 0 );
+
+/* Taxonomy Functions */
 function create_clinical_conditions_taxonomy() {
-
-// Add new taxonomy, make it hierarchical like categories
-// first do the translations part for GUI
-
-  $labels = array(
+  	$labels = array(
 		'name'                           => 'Conditions',
 		'singular_name'                  => 'Condition',
 		'search_items'                   => 'Search Conditions',
@@ -246,7 +425,7 @@ function create_clinical_conditions_taxonomy() {
 		'items_list_navigation'      	 => 'Condition list navigation',
 	);
   	$rewrite = array(
-		'slug'                       => 'conditions',
+		'slug'                       => 'condition',
 		'with_front'                 => true,
 		'hierarchical'               => true,
 	);
@@ -272,21 +451,12 @@ function create_clinical_conditions_taxonomy() {
   		'rest_base'          		 => 'condition',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
 	);
-	register_taxonomy( 'condition', array( 'providers' ), $args );
+	register_taxonomy( 'condition', array( 'provider' ), $args );
 
 }
 
-//hook into the init action and call create_book_taxonomies when it fires
-add_action( 'init', 'create_clinical_treatments_taxonomy', 0 );
-
-//create a custom taxonomy name it topics for your posts
-
 function create_clinical_treatments_taxonomy() {
-
-// Add new taxonomy, make it hierarchical like categories
-// first do the translations part for GUI
-
-  $labels = array(
+  	$labels = array(
 		'name'                           => 'Treatments & Procedures',
 		'singular_name'                  => 'Treatments & Procedures',
 		'search_items'                   => 'Search Treatments & Procedures',
@@ -309,7 +479,7 @@ function create_clinical_treatments_taxonomy() {
 		'items_list_navigation'      	 => 'Treatment & Procedure list navigation',
 	);
   	$rewrite = array(
-		'slug'                       => 'treatment-procedure',
+		'slug'                       => 'treatment',
 		'with_front'                 => true,
 		'hierarchical'               => true,
 	);
@@ -332,16 +502,14 @@ function create_clinical_treatments_taxonomy() {
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
 		'show_in_rest'       		 => true,
-  		'rest_base'          		 => 'treatment_procedure',
+  		'rest_base'          		 => 'treatment',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
 	);
-	register_taxonomy( 'treatment_procedure', array( 'providers' ), $args );
+	register_taxonomy( 'treatment', array( 'provider' ), $args );
 
 }
 
-// Register Custom Taxonomy
 // function create_medical_specialties_taxonomy() {
-
 // 	$labels = array(
 // 		'name'                       => 'Medical Specialties',
 // 		'singular_name'              => 'Medical Specialty',
@@ -391,20 +559,11 @@ function create_clinical_treatments_taxonomy() {
 //   		'rest_base'          		 => 'specialties',
 //   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
 // 	);
-// 	register_taxonomy( 'specialty', array( 'providers' ), $args );
+// 	register_taxonomy( 'specialty', array( 'provider' ), $args );
 
 // }
-// add_action( 'init', 'create_medical_specialties_taxonomy', 0 ); // Disabled
 
-//hook into the init action and call create_book_taxonomies when it fires
-add_action( 'init', 'create_departments_taxonomy', 0 );
-
-//create a custom taxonomy name it topics for your posts
 function create_departments_taxonomy() {
-
-// Add new taxonomy, make it hierarchical like categories
-// first do the translations part for GUI
-
   $labels = array(
 		'name'                           => 'Medical Departments',
 		'singular_name'                  => 'Medical Departments',
@@ -453,20 +612,14 @@ function create_departments_taxonomy() {
 		'show_in_rest'       		 => true,
   		'rest_base'          		 => 'medical_department',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
 	);
-	register_taxonomy( 'department', array( 'providers' ), $args );
+	register_taxonomy( 'department', array( 'provider' ), $args );
 
 }
-//hook into the init action and call create_book_taxonomies when it fires
-add_action( 'init', 'create_service_line_taxonomy', 0 );
 
-//create a custom taxonomy name it topics for your posts
 function create_service_line_taxonomy() {
-
-// Add new taxonomy, make it hierarchical like categories
-// first do the translations part for GUI
-
-  $labels = array(
+  	$labels = array(
 		'name'                           => 'Service Lines',
 		'singular_name'                  => 'Service Lines',
 		'search_items'                   => 'Search Service Lines',
@@ -514,19 +667,13 @@ function create_service_line_taxonomy() {
 		'show_in_rest'       		 => true,
   		'rest_base'          		 => 'service_line',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
 	);
-	register_taxonomy( 'service_line', array( 'providers' ), $args );
+	register_taxonomy( 'service_line', array( 'provider' ), $args );
 
 }
-//hook into the init action and call create_book_taxonomies when it fires
-add_action( 'init', 'create_degrees_taxonomy', 0 );
 
-//create a custom taxonomy name it topics for your posts
 function create_degrees_taxonomy() {
-
-// Add new taxonomy, make it hierarchical like categories
-// first do the translations part for GUI
-
   $labels = array(
 		'name'                           => 'Medical Degrees',
 		'singular_name'                  => 'Medical Degrees',
@@ -575,19 +722,13 @@ function create_degrees_taxonomy() {
 		'show_in_rest'       		 => true,
   		'rest_base'          		 => 'medical_degree',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
 	);
-	register_taxonomy( 'degree', array( 'providers' ), $args );
+	register_taxonomy( 'degree', array( 'provider' ), $args );
 
 }
-//hook into the init action and call create_book_taxonomies when it fires
-add_action( 'init', 'create_patient_type_taxonomy', 0 );
 
-//create a custom taxonomy name it topics for your posts
 function create_patient_type_taxonomy() {
-
-// Add new taxonomy, make it hierarchical like categories
-// first do the translations part for GUI
-
   	$labels = array(
 		'name'                           => 'Patient Types',
 		'singular_name'                  => 'Patient Type',
@@ -636,30 +777,23 @@ function create_patient_type_taxonomy() {
 		'show_in_rest'       		 => true,
   		'rest_base'          		 => 'patient_type',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
 	);
-	register_taxonomy( 'patient_type', array( 'providers' ), $args );
+	register_taxonomy( 'patient_type', array( 'provider' ), $args );
 
 }
 
-//hook into the init action and call create_book_taxonomies when it fires
-add_action( 'init', 'create_clinical_title_taxonomy', 0 );
-
-//create a custom taxonomy name it topics for your posts
 function create_clinical_title_taxonomy() {
-
-// Add new taxonomy, make it hierarchical like categories
-// first do the translations part for GUI
-
   	$labels = array(
-		'name'                           => 'Cinical Titles',
-		'singular_name'                  => 'Cinical Title',
+		'name'                           => 'Clinical Titles',
+		'singular_name'                  => 'Clinical Title',
 		'search_items'                   => 'Search Titles',
 		'all_items'                      => 'All Titles',
 		'edit_item'                      => 'Edit Title',
 		'update_item'                    => 'Update Title',
 		'add_new_item'                   => 'Add New Title',
 		'new_item_name'                  => 'New Title',
-		'menu_name'                      => 'Cinical Titles',
+		'menu_name'                      => 'Clinical Titles',
 		'view_item'                      => 'View Title',
 		'popular_items'                  => 'Popular Title',
 		'separate_items_with_commas'     => 'Separate Titles with commas',
@@ -668,9 +802,9 @@ function create_clinical_title_taxonomy() {
 		'not_found'                      => 'No Titles found',
 		'parent_item'                	 => 'Parent Title',
 		'parent_item_colon'          	 => 'Parent Title:',
-		'no_terms'                   	 => 'No Cinical Titles',
-		'items_list'                 	 => 'Cinical Titles list',
-		'items_list_navigation'      	 => 'Cinical Titles list navigation',
+		'no_terms'                   	 => 'No Clinical Titles',
+		'items_list'                 	 => 'Clinical Titles list',
+		'items_list_navigation'      	 => 'Clinical Titles list navigation',
 	);
   	$rewrite = array(
 		'slug'                       => 'clinical_title',
@@ -684,7 +818,7 @@ function create_clinical_title_taxonomy() {
 		'assign_terms'               => 'edit_physicians',
 	);
 	$args = array(
-		'label' 					 => __( 'Cinical Titles' ),
+		'label' 					 => __( 'Clinical Titles' ),
 		'labels'                     => $labels,
 		'hierarchical'               => true,
 		'public'                     => true,
@@ -698,36 +832,37 @@ function create_clinical_title_taxonomy() {
 		'show_in_rest'       		 => true,
   		'rest_base'          		 => 'clinical_title',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
 	);
-	register_taxonomy( 'clinical_title', array( 'providers' ), $args );
+	register_taxonomy( 'clinical_title', array( 'provider' ), $args );
 
 }
 
-//create a custom taxonomy name it topics for your posts
-function create_affiliations_taxonomy() {
-
-// Add new taxonomy, make it hierarchical like categories
-// first do the translations part for GUI
-
-  $labels = array(
-		'name'                           => 'Affiliations',
-		'singular_name'                  => 'Affiliations',
-		'search_items'                   => 'Search Affiliations',
-		'all_items'                      => 'All Affiliations',
-		'edit_item'                      => 'Edit Affiliation',
-		'update_item'                    => 'Update Affiliation',
-		'add_new_item'                   => 'Add New Affiliation',
-		'new_item_name'                  => 'New Affiliation',
-		'menu_name'                      => 'Affiliations',
-		'view_item'                      => 'View Affiliation',
-		'popular_items'                  => 'Popular Affiliation',
-		'separate_items_with_commas'     => 'Separate affiliations with commas',
-		'add_or_remove_items'            => 'Add or remove affiliations',
-		'choose_from_most_used'          => 'Choose from the most used affiliations',
-		'not_found'                      => 'No affiliations found'
+function create_clinical_admin_title_taxonomy() {
+  	$labels = array(
+		'name'                           => 'Clinical Administrative Titles',
+		'singular_name'                  => 'Clinical Administrative Title',
+		'search_items'                   => 'Search Titles',
+		'all_items'                      => 'All Titles',
+		'edit_item'                      => 'Edit Title',
+		'update_item'                    => 'Update Title',
+		'add_new_item'                   => 'Add New Title',
+		'new_item_name'                  => 'New Title',
+		'menu_name'                      => 'Clinical Administrative Titles',
+		'view_item'                      => 'View Title',
+		'popular_items'                  => 'Popular Title',
+		'separate_items_with_commas'     => 'Separate Titles with commas',
+		'add_or_remove_items'            => 'Add or remove Titles',
+		'choose_from_most_used'          => 'Choose from the most used Titles',
+		'not_found'                      => 'No Titles found',
+		'parent_item'                	 => 'Parent Title',
+		'parent_item_colon'          	 => 'Parent Title:',
+		'no_terms'                   	 => 'No Clinical Administrative Titles',
+		'items_list'                 	 => 'Clinical Administrative Titles list',
+		'items_list_navigation'      	 => 'Clinical Administrative Titles list navigation',
 	);
   	$rewrite = array(
-		'slug'                       => 'affiliations',
+		'slug'                       => 'clinical_admin_title',
 		'with_front'                 => true,
 		'hierarchical'               => true,
 	);
@@ -738,7 +873,57 @@ function create_affiliations_taxonomy() {
 		'assign_terms'               => 'edit_physicians',
 	);
 	$args = array(
-		'label' 				 	 => __( 'Affiliations' ),
+		'label' 					 => __( 'Clinical Administrative Titles' ),
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => true,
+		'show_ui'                    => true,
+		'meta_box_cb'				 => false,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+		'show_in_rest'       		 => true,
+  		'rest_base'          		 => 'clinical_admin_title',
+  		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
+	);
+	register_taxonomy( 'clinical_admin_title', array( 'provider' ), $args );
+
+}
+
+function create_affiliations_taxonomy() {
+  $labels = array(
+		'name'                           => 'Hospital Affiliations',
+		'singular_name'                  => 'Hospital Affiliations',
+		'search_items'                   => 'Search Hospital Affiliations',
+		'all_items'                      => 'All Hospital Affiliations',
+		'edit_item'                      => 'Edit Hospital Affiliation',
+		'update_item'                    => 'Update Hospital Affiliation',
+		'add_new_item'                   => 'Add New Hospital Affiliation',
+		'new_item_name'                  => 'New Hospital Affiliation',
+		'menu_name'                      => 'Hospital Affiliations',
+		'view_item'                      => 'View Hospital Affiliation',
+		'popular_items'                  => 'Popular Hospital Affiliation',
+		'separate_items_with_commas'     => 'Separate hospital affiliations with commas',
+		'add_or_remove_items'            => 'Add or remove hospital affiliations',
+		'choose_from_most_used'          => 'Choose from the most used hospital affiliations',
+		'not_found'                      => 'No hospital affiliations found'
+	);
+  	$rewrite = array(
+		'slug'                       => 'affiliation',
+		'with_front'                 => true,
+		'hierarchical'               => true,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'label' 				 	 => __( 'Hospital Affiliations' ),
 		'labels'                     => $labels,
 		'hierarchical'               => false,
 		'public'                     => true,
@@ -750,21 +935,65 @@ function create_affiliations_taxonomy() {
  		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
 		'show_in_rest'               => true,
-		'rest_base'                  => 'affiliations',
+		'rest_base'                  => 'affiliation',
 		'rest_controller_class'      => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
 	);
-	register_taxonomy( 'affiliations', array( 'providers' ), $args );
+	register_taxonomy( 'affiliation', array( 'provider' ), $args );
 
 }
 
-add_action( 'init', 'create_affiliations_taxonomy', 0 );
+function create_institute_affiliations_taxonomy() {
+  $labels = array(
+		'name'                           => 'Institute Affiliations',
+		'singular_name'                  => 'Institute Affiliations',
+		'search_items'                   => 'Search Institute Affiliations',
+		'all_items'                      => 'All Institute Affiliations',
+		'edit_item'                      => 'Edit Institute Affiliation',
+		'update_item'                    => 'Update Institute Affiliation',
+		'add_new_item'                   => 'Add New Institute Affiliation',
+		'new_item_name'                  => 'New Institute Affiliation',
+		'menu_name'                      => 'Institute Affiliations',
+		'view_item'                      => 'View Institute Affiliation',
+		'popular_items'                  => 'Popular Institute Affiliation',
+		'separate_items_with_commas'     => 'Separate institute affiliations with commas',
+		'add_or_remove_items'            => 'Add or remove institute affiliations',
+		'choose_from_most_used'          => 'Choose from the most used institute affiliations',
+		'not_found'                      => 'No institute affiliations found'
+	);
+  	$rewrite = array(
+		'slug'                       => 'institute_affiliation',
+		'with_front'                 => true,
+		'hierarchical'               => true,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'label' 				 	 => __( 'Institute Affiliations' ),
+		'labels'                     => $labels,
+		'hierarchical'               => false,
+		'public'                     => true,
+		'show_ui'                    => true, //make true to add another
+		'show_admin_column'          => false,
+		'meta_box_cb' 				 => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+ 		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+		'show_in_rest'               => true,
+		'rest_base'                  => 'institute_affiliation',
+		'rest_controller_class'      => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
+	);
+	register_taxonomy( 'institute_affiliation', array( 'provider' ), $args );
 
-//create a custom taxonomy name it topics for your posts
+}
+
 function create_languages_taxonomy() {
-
-// Add new taxonomy, make it hierarchical like categories
-// first do the translations part for GUI
-
   	$labels = array(
 		'name'                           => 'Languages',
 		'singular_name'                  => 'Languages',
@@ -783,7 +1012,7 @@ function create_languages_taxonomy() {
 		'not_found'                      => 'No languages found'
 	);
   	$rewrite = array(
-		'slug'                       => 'languages',
+		'slug'                       => 'language',
 		'with_front'                 => true,
 		'hierarchical'               => false,
 	);
@@ -806,91 +1035,86 @@ function create_languages_taxonomy() {
  		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
 		'show_in_rest'               => true,
-		'rest_base'                  => 'languages',
+		'rest_base'                  => 'language',
 		'rest_controller_class'      => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
 	);
-	register_taxonomy( 'languages', array( 'providers' ), $args );
+	register_taxonomy( 'language', array( 'provider' ), $args );
 
 }
 
-add_action( 'init', 'create_languages_taxonomy', 0 );
+// function create_medical_terms_taxonomy() {
 
-// Register Custom Taxonomy
-function create_medical_terms_taxonomy() {
+// 	$labels = array(
+// 		'name'                       => 'Medical Terms',
+// 		'singular_name'              => 'Medical Term',
+// 		'menu_name'                  => 'Medical Terms',
+// 		'all_items'                  => 'All Terms',
+// 		'parent_item'                => 'Parent Term',
+// 		'parent_item_colon'          => 'Parent Term:',
+// 		'new_item_name'              => 'New Term',
+// 		'add_new_item'               => 'Add New Term',
+// 		'edit_item'                  => 'Edit Term',
+// 		'update_item'                => 'Update Term',
+// 		'view_item'                  => 'View Term',
+// 		'separate_items_with_commas' => 'Separate terms with commas',
+// 		'add_or_remove_items'        => 'Add or remove terms',
+// 		'choose_from_most_used'      => 'Choose from the most used',
+// 		'popular_items'              => 'Popular Terms',
+// 		'search_items'               => 'Search Terms',
+// 		'not_found'                  => 'Not Found',
+// 		'no_terms'                   => 'No Terms',
+// 		'items_list'                 => 'Terms list',
+// 		'items_list_navigation'      => 'Terms list navigation',
+// 	);
+// 	$rewrite = array(
+// 		'slug'                       => 'medical-term',
+// 		'with_front'                 => true,
+// 		'hierarchical'               => false,
+// 	);
+// 	$capabilities = array(
+// 		'manage_terms'               => 'manage_options',
+// 		'edit_terms'                 => 'manage_options',
+// 		'delete_terms'               => 'manage_options',
+// 		'assign_terms'               => 'edit_physicians',
+// 	);
+// 	$args = array(
+// 		'labels'                     => $labels,
+// 		'hierarchical'               => true,
+// 		'public'                     => true,
+// 		'show_ui'                    => true,
+// 		'show_admin_column'          => false,
+// 		'show_in_nav_menus'          => false,
+// 		'show_tagcloud'              => false,
+// 		'rewrite'                    => $rewrite,
+// 		'capabilities'               => $capabilities,
+// 	);
+// 	register_taxonomy( 'medical_term', array( 'provider' ), $args );
 
-	$labels = array(
-		'name'                       => 'Medical Terms',
-		'singular_name'              => 'Medical Term',
-		'menu_name'                  => 'Medical Terms',
-		'all_items'                  => 'All Terms',
-		'parent_item'                => 'Parent Term',
-		'parent_item_colon'          => 'Parent Term:',
-		'new_item_name'              => 'New Term',
-		'add_new_item'               => 'Add New Term',
-		'edit_item'                  => 'Edit Term',
-		'update_item'                => 'Update Term',
-		'view_item'                  => 'View Term',
-		'separate_items_with_commas' => 'Separate terms with commas',
-		'add_or_remove_items'        => 'Add or remove terms',
-		'choose_from_most_used'      => 'Choose from the most used',
-		'popular_items'              => 'Popular Terms',
-		'search_items'               => 'Search Terms',
-		'not_found'                  => 'Not Found',
-		'no_terms'                   => 'No Terms',
-		'items_list'                 => 'Terms list',
-		'items_list_navigation'      => 'Terms list navigation',
-	);
-	$rewrite = array(
-		'slug'                       => 'medical-terms',
-		'with_front'                 => true,
-		'hierarchical'               => false,
-	);
-	$capabilities = array(
-		'manage_terms'               => 'manage_options',
-		'edit_terms'                 => 'manage_options',
-		'delete_terms'               => 'manage_options',
-		'assign_terms'               => 'edit_physicians',
-	);
-	$args = array(
-		'labels'                     => $labels,
-		'hierarchical'               => true,
-		'public'                     => true,
-		'show_ui'                    => true,
-		'show_admin_column'          => false,
-		'show_in_nav_menus'          => false,
-		'show_tagcloud'              => false,
-		'rewrite'                    => $rewrite,
-		'capabilities'               => $capabilities,
-	);
-	register_taxonomy( 'medical_terms', array( 'providers' ), $args );
+// }
 
-}
-// add_action( 'init', 'create_medical_terms_taxonomy', 0 ); // Disabled
-
-// Register Custom Taxonomy
 function create_academic_position_taxonomy() {
-
 	$labels = array(
-		'name'                       => 'Positions',
-		'singular_name'              => 'Position',
-		'menu_name'                  => 'Academic Positions',
-		'all_items'                  => 'All Positions',
-		'parent_item'                => 'Parent Position',
-		'parent_item_colon'          => 'Parent Position:',
-		'new_item_name'              => 'New Position',
-		'add_new_item'               => 'Add New Position',
-		'edit_item'                  => 'Edit Position',
-		'update_item'                => 'Update Position',
-		'view_item'                  => 'View Position',
-		'separate_items_with_commas' => 'Separate positions with commas',
-		'add_or_remove_items'        => 'Add or remove positions',
+		'name'                       => 'Position Types',
+		'singular_name'              => 'Position Type',
+		'menu_name'                  => 'Academic Position Types',
+		'all_items'                  => 'All Position Types',
+		'parent_item'                => 'Parent Position Type',
+		'parent_item_colon'          => 'Parent Position Type:',
+		'new_item_name'              => 'New Position Type',
+		'add_new_item'               => 'Add New Position Type',
+		'edit_item'                  => 'Edit Position Type',
+		'update_item'                => 'Update Position Type',
+		'view_item'                  => 'View Position Type',
+		'separate_items_with_commas' => 'Separate position types with commas',
+		'add_or_remove_items'        => 'Add or remove position types',
 		'choose_from_most_used'      => 'Choose from the most used',
-		'popular_items'              => 'Popular Positions',
-		'search_items'               => 'Search Positions',
+		'popular_items'              => 'Popular Position Types',
+		'search_items'               => 'Search Position Types',
 		'not_found'                  => 'Not Found',
-		'no_terms'                   => 'No Positions',
-		'items_list'                 => 'Positions list',
-		'items_list_navigation'      => 'Positions list navigation',
+		'no_terms'                   => 'No Position Types',
+		'items_list'                 => 'Position Types list',
+		'items_list_navigation'      => 'Position Types list navigation',
 	);
 	$rewrite = array(
 		'slug'                       => 'academic-position',
@@ -914,15 +1138,13 @@ function create_academic_position_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
 	);
-	register_taxonomy( 'academic_positions', array( 'providers' ), $args );
+	register_taxonomy( 'academic_position', array( 'provider' ), $args );
 
 }
-add_action( 'init', 'create_academic_position_taxonomy', 0 );
 
-// Register Custom Taxonomy
 function create_academic_college_taxonomy() {
-
 	$labels = array(
 		'name'                       => 'Colleges',
 		'singular_name'              => 'College',
@@ -967,15 +1189,13 @@ function create_academic_college_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
 	);
-	register_taxonomy( 'academic_colleges', array( 'providers' ), $args );
+	register_taxonomy( 'academic_college', array( 'provider' ), $args );
 
 }
-add_action( 'init', 'create_academic_college_taxonomy', 0 );
 
-// Register Custom Taxonomy
 function create_schools_taxonomy() {
-
 	$labels = array(
 		'name'                       => 'Schools',
 		'singular_name'              => 'School',
@@ -1020,22 +1240,66 @@ function create_schools_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
 	);
-	register_taxonomy( 'schools', array( 'providers' ), $args );
+	register_taxonomy( 'school', array( 'provider' ), $args );
 
 }
-add_action( 'init', 'create_schools_taxonomy', 0 );
 
 
-add_action( 'init', 'create_academic_departments_taxonomy', 0 );//hook into the init action and call create_book_taxonomies when it fires
+function create_residency_years_taxonomy() {
+	$labels = array(
+		'name'                       => 'Residency Years',
+		'singular_name'              => 'Residency Year',
+		'menu_name'                  => 'Residency Years',
+		'all_items'                  => 'All Residency Years',
+		'parent_item'                => 'Parent Residency Year',
+		'parent_item_colon'          => 'Parent Residency Year:',
+		'new_item_name'              => 'New Residency Year',
+		'add_new_item'               => 'Add New Residency Year',
+		'edit_item'                  => 'Edit Residency Year',
+		'update_item'                => 'Update Residency Year',
+		'view_item'                  => 'View Residency Year',
+		'separate_items_with_commas' => 'Separate residency year with commas',
+		'add_or_remove_items'        => 'Add or remove residency years',
+		'choose_from_most_used'      => 'Choose from the most used',
+		'popular_items'              => 'Popular Residency Year',
+		'search_items'               => 'Search Residency Year',
+		'not_found'                  => 'Not Found',
+		'no_terms'                   => 'No Residency Year',
+		'items_list'                 => 'Residency Year list',
+		'items_list_navigation'      => 'Residency Year list navigation',
+	);
+	$rewrite = array(
+		'slug'                       => 'residency_year',
+		'with_front'                 => false,
+		'hierarchical'               => false,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => false,
+		'public'                     => true,
+		'show_ui'                    => true,  //Made true to add / edit
+		'meta_box_cb'				 => false,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
+	);
+	register_taxonomy( 'residency_year', array( 'provider' ), $args );
 
-//create a custom taxonomy name it topics for your posts
+}
+
 function create_academic_departments_taxonomy() {
-
-// Add new taxonomy, make it hierarchical like categories
-// first do the translations part for GUI
-
-  $labels = array(
+	$labels = array(
 		'name'                           => 'Academic Departments',
 		'singular_name'                  => 'Academic Departments',
 		'search_items'                   => 'Search Departments',
@@ -1077,20 +1341,14 @@ function create_academic_departments_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
 	);
-	register_taxonomy( 'academic_department', array( 'providers' ), $args );
+	register_taxonomy( 'academic_department', array( 'provider' ), $args );
 
 }
 
-add_action( 'init', 'create_boards_taxonomy', 0 );//hook into the init action and call create_book_taxonomies when it fires
-
-//create a custom taxonomy name it topics for your posts
 function create_boards_taxonomy() {
-
-// Add new taxonomy, make it hierarchical like categories
-// first do the translations part for GUI
-
-  $labels = array(
+  	$labels = array(
 		'name'                           => 'Boards',
 		'singular_name'                  => 'Board',
 		'search_items'                   => 'Search Boards',
@@ -1130,20 +1388,14 @@ function create_boards_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
 	);
-	register_taxonomy( 'boards', array( 'providers' ), $args );
+	register_taxonomy( 'board', array( 'provider' ), $args );
 
 }
 
-add_action( 'init', 'create_associations_taxonomy', 0 );//hook into the init action and call create_book_taxonomies when it fires
-
-//create a custom taxonomy name it topics for your posts
 function create_associations_taxonomy() {
-
-// Add new taxonomy, make it hierarchical like categories
-// first do the translations part for GUI
-
-  $labels = array(
+  	$labels = array(
 		'name'                           => 'Associations',
 		'singular_name'                  => 'Association',
 		'search_items'                   => 'Search Associations',
@@ -1161,7 +1413,7 @@ function create_associations_taxonomy() {
 		'not_found'                      => 'No associations found'
 	);
   	$rewrite = array(
-		'slug'                       => 'associations',
+		'slug'                       => 'association',
 		'with_front'                 => false,
 		'hierarchical'               => false,
 	);
@@ -1183,12 +1435,12 @@ function create_associations_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
 	);
-	register_taxonomy( 'associations', array( 'providers' ), $args );
+	register_taxonomy( 'association', array( 'provider' ), $args );
 
 }
 
-// Register Custom Taxonomy
 function create_education_taxonomy() {
 
 	$labels = array(
@@ -1235,21 +1487,13 @@ function create_education_taxonomy() {
 		'show_tagcloud'              => false,
 		'rewrite'                    => $rewrite,
 		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
 	);
-	register_taxonomy( 'educationtype', array( 'providers' ), $args );
+	register_taxonomy( 'educationtype', array( 'provider' ), $args );
 
 }
-add_action( 'init', 'create_education_taxonomy', 0 );
 
-//hook into the init action and call create_book_taxonomies when it fires
-add_action( 'init', 'create_portal_taxonomy', 0 );
-
-//create a custom taxonomy name it topics for your posts
 function create_portal_taxonomy() {
-
-// Add new taxonomy, make it hierarchical like categories
-// first do the translations part for GUI
-
   	$labels = array(
 		'name'                           => 'Portals',
 		'singular_name'                  => 'Portal',
@@ -1298,11 +1542,430 @@ function create_portal_taxonomy() {
 		'show_in_rest'       		 => true,
   		'rest_base'          		 => 'portal',
   		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
 	);
-	register_taxonomy( 'portal', array( 'providers' ), $args );
+	register_taxonomy( 'portal', array( 'provider' ), $args );
 
 }
 
+function create_academic_title_taxonomy() {
+  	$labels = array(
+		'name'                           => 'Faculty Titles',
+		'singular_name'                  => 'Faculty Title',
+		'search_items'                   => 'Search Titles',
+		'all_items'                      => 'All Titles',
+		'edit_item'                      => 'Edit Title',
+		'update_item'                    => 'Update Title',
+		'add_new_item'                   => 'Add New Title',
+		'new_item_name'                  => 'New Title',
+		'menu_name'                      => 'Faculty Titles',
+		'view_item'                      => 'View Title',
+		'popular_items'                  => 'Popular Title',
+		'separate_items_with_commas'     => 'Separate Titles with commas',
+		'add_or_remove_items'            => 'Add or remove Titles',
+		'choose_from_most_used'          => 'Choose from the most used Titles',
+		'not_found'                      => 'No Titles found',
+		'parent_item'                	 => 'Parent Title',
+		'parent_item_colon'          	 => 'Parent Title:',
+		'no_terms'                   	 => 'No Faculty Titles',
+		'items_list'                 	 => 'Faculty Titles list',
+		'items_list_navigation'      	 => 'Faculty Titles list navigation',
+	);
+  	$rewrite = array(
+		'slug'                       => 'academic_title',
+		'with_front'                 => true,
+		'hierarchical'               => true,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'label' 					 => __( 'Faculty Titles' ),
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => true,
+		'show_ui'                    => true,
+		'meta_box_cb'				 => false,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+		'show_in_rest'       		 => true,
+  		'rest_base'          		 => 'academic_title',
+  		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+		'show_in_quick_edit'         => false,
+	);
+	register_taxonomy( 'academic_title', array( 'provider' ), $args );
+
+}
+
+function create_academic_admin_title_taxonomy() {
+	$labels = array(
+	  'name'                           => 'Academic Administrative Titles',
+	  'singular_name'                  => 'Academic Administrative Title',
+	  'search_items'                   => 'Search Titles',
+	  'all_items'                      => 'All Titles',
+	  'edit_item'                      => 'Edit Title',
+	  'update_item'                    => 'Update Title',
+	  'add_new_item'                   => 'Add New Title',
+	  'new_item_name'                  => 'New Title',
+	  'menu_name'                      => 'Academic Administrative Titles',
+	  'view_item'                      => 'View Title',
+	  'popular_items'                  => 'Popular Title',
+	  'separate_items_with_commas'     => 'Separate Titles with commas',
+	  'add_or_remove_items'            => 'Add or remove Titles',
+	  'choose_from_most_used'          => 'Choose from the most used Titles',
+	  'not_found'                      => 'No Titles found',
+	  'parent_item'                	 => 'Parent Title',
+	  'parent_item_colon'          	 => 'Parent Title:',
+	  'no_terms'                   	 => 'No Academic Administrative Titles',
+	  'items_list'                 	 => 'Academic Administrative Titles list',
+	  'items_list_navigation'      	 => 'Academic Administrative Titles list navigation',
+  );
+	$rewrite = array(
+	  'slug'                       => 'academic_admin_title',
+	  'with_front'                 => true,
+	  'hierarchical'               => true,
+  );
+  $capabilities = array(
+	  'manage_terms'               => 'manage_options',
+	  'edit_terms'                 => 'manage_options',
+	  'delete_terms'               => 'manage_options',
+	  'assign_terms'               => 'edit_physicians',
+  );
+  $args = array(
+	  'label' 					 => __( 'Academic Administrative Titles' ),
+	  'labels'                     => $labels,
+	  'hierarchical'               => true,
+	  'public'                     => true,
+	  'show_ui'                    => true,
+	  'meta_box_cb'				 => false,
+	  'show_admin_column'          => false,
+	  'show_in_nav_menus'          => false,
+	  'show_tagcloud'              => false,
+	  'rewrite'                    => $rewrite,
+	  'capabilities'               => $capabilities,
+	  'show_in_rest'       		 => true,
+		'rest_base'          		 => 'academic_admin_title',
+		'rest_controller_class' 	 => 'WP_REST_Terms_Controller',
+	  'show_in_quick_edit'         => false,
+  );
+  register_taxonomy( 'academic_admin_title', array( 'provider' ), $args );
+
+}
+
+function create_recognition_taxonomy() {
+
+	$labels = array(
+		'name'                       => 'Recognition Lists',
+		'singular_name'              => 'Recognition List',
+		'menu_name'                  => 'Recognition Lists',
+		'all_items'                  => 'All Recognitions',
+		'parent_item'                => 'Parent Recognition',
+		'parent_item_colon'          => 'Parent Recognition:',
+		'new_item_name'              => 'New Recognition',
+		'add_new_item'               => 'Add New Recognition',
+		'edit_item'                  => 'Edit Recognition',
+		'update_item'                => 'Update Recognition',
+		'view_item'                  => 'View Recognition',
+		'separate_items_with_commas' => 'Separate recognitions with commas',
+		'add_or_remove_items'        => 'Add or remove recognitions',
+		'choose_from_most_used'      => 'Choose from the most used',
+		'popular_items'              => 'Popular Recognitions',
+		'search_items'               => 'Search Recognitions',
+		'not_found'                  => 'Not Found',
+		'no_terms'                   => 'No Recognitions',
+		'items_list'                 => 'Recognitions list',
+		'items_list_navigation'      => 'Recognitions list navigation',
+	);
+	$rewrite = array(
+		'slug'                       => 'recognition',
+		'with_front'                 => false,
+		'hierarchical'               => false,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => false,
+		'public'                     => false,
+		'show_ui'                    => true,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
+	);
+	register_taxonomy( 'recognition', array( 'provider' ), $args );
+
+}
+
+function create_region_taxonomy() {
+
+	$labels = array(
+		'name'                       => 'Regions',
+		'singular_name'              => 'Region',
+		'menu_name'                  => 'Regions',
+		'all_items'                  => 'All Regions',
+		'parent_item'                => 'Parent Region',
+		'parent_item_colon'          => 'Parent Region:',
+		'new_item_name'              => 'New Region',
+		'add_new_item'               => 'Add New Region',
+		'edit_item'                  => 'Edit Region',
+		'update_item'                => 'Update Region',
+		'view_item'                  => 'View Region',
+		'separate_items_with_commas' => 'Separate Regions with commas',
+		'add_or_remove_items'        => 'Add or remove Regions',
+		'choose_from_most_used'      => 'Choose from the most used',
+		'popular_items'              => 'Popular Regions',
+		'search_items'               => 'Search Regions',
+		'not_found'                  => 'Not Found',
+		'no_terms'                   => 'No Regions',
+		'items_list'                 => 'Regions list',
+		'items_list_navigation'      => 'Regions list navigation',
+	);
+	$rewrite = array(
+		'slug'                       => 'region',
+		'with_front'                 => false,
+		'hierarchical'               => true,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => false,
+		'show_ui'                    => true,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
+	);
+	register_taxonomy( 'region', array( 'location' ), $args );
+
+}
+
+function create_location_type_taxonomy() {
+
+	$labels = array(
+		'name'                       => 'Location Types',
+		'singular_name'              => 'Location Type',
+		'menu_name'                  => 'Types',
+		'all_items'                  => 'All Types',
+		'parent_item'                => 'Parent Type',
+		'parent_item_colon'          => 'Parent Type:',
+		'new_item_name'              => 'New Type',
+		'add_new_item'               => 'Add New Type',
+		'edit_item'                  => 'Edit Type',
+		'update_item'                => 'Update Type',
+		'view_item'                  => 'View Type',
+		'separate_items_with_commas' => 'Separate Types with commas',
+		'add_or_remove_items'        => 'Add or remove Types',
+		'choose_from_most_used'      => 'Choose from the most used',
+		'popular_items'              => 'Popular Types',
+		'search_items'               => 'Search Types',
+		'not_found'                  => 'Not Found',
+		'no_terms'                   => 'No Types',
+		'items_list'                 => 'Types list',
+		'items_list_navigation'      => 'Types list navigation',
+	);
+	$rewrite = array(
+		'slug'                       => 'location_type',
+		'with_front'                 => false,
+		'hierarchical'               => true,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => false,
+		'show_ui'                    => true,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => true,
+	);
+	register_taxonomy( 'location_type', array( 'location' ), $args );
+
+}
+
+function create_gmb_cat_provider_taxonomy() {
+
+	$labels = array(
+		'name'                       => 'Google My Business Categories for Providers',
+		'singular_name'              => 'Google My Business Category for Providers',
+		'menu_name'                  => 'Google My Business Categories',
+		'all_items'                  => 'All Categories',
+		'parent_item'                => 'Parent Category',
+		'parent_item_colon'          => 'Parent Category:',
+		'new_item_name'              => 'New Category',
+		'add_new_item'               => 'Add New Category',
+		'edit_item'                  => 'Edit Category',
+		'update_item'                => 'Update Category',
+		'view_item'                  => 'View Category',
+		'separate_items_with_commas' => 'Separate Categories with commas',
+		'add_or_remove_items'        => 'Add or remove Categories',
+		'choose_from_most_used'      => 'Choose from the most used',
+		'popular_items'              => 'Popular Categories',
+		'search_items'               => 'Search Categories',
+		'not_found'                  => 'Not Found',
+		'no_terms'                   => 'No Categories',
+		'items_list'                 => 'Categories list',
+		'items_list_navigation'      => 'Categories list navigation',
+	);
+	$rewrite = array(
+		'slug'                       => 'gmb_cat_provider',
+		'with_front'                 => false,
+		'hierarchical'               => false,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => false,
+		'show_ui'                    => true,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => true,
+	);
+	register_taxonomy( 'gmb_cat_provider', array( 'provider' ), $args );
+
+}
+
+function create_gmb_cat_location_taxonomy() {
+
+	$labels = array(
+		'name'                       => 'Google My Business Categories for Locations',
+		'singular_name'              => 'Google My Business Category for Locations',
+		'menu_name'                  => 'Google My Business Categories',
+		'all_items'                  => 'All Categories',
+		'parent_item'                => 'Parent Category',
+		'parent_item_colon'          => 'Parent Category:',
+		'new_item_name'              => 'New Category',
+		'add_new_item'               => 'Add New Category',
+		'edit_item'                  => 'Edit Category',
+		'update_item'                => 'Update Category',
+		'view_item'                  => 'View Category',
+		'separate_items_with_commas' => 'Separate Categories with commas',
+		'add_or_remove_items'        => 'Add or remove Categories',
+		'choose_from_most_used'      => 'Choose from the most used',
+		'popular_items'              => 'Popular Categories',
+		'search_items'               => 'Search Categories',
+		'not_found'                  => 'Not Found',
+		'no_terms'                   => 'No Categories',
+		'items_list'                 => 'Categories list',
+		'items_list_navigation'      => 'Categories list navigation',
+	);
+	$rewrite = array(
+		'slug'                       => 'gmb_cat_location',
+		'with_front'                 => false,
+		'hierarchical'               => false,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => false,
+		'show_ui'                    => true,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => true,
+	);
+	register_taxonomy( 'gmb_cat_location', array( 'location' ), $args );
+
+}
+
+function create_building_taxonomy() {
+	// Plugin assumes there is a 'None' taxonomy item with slug '_none'
+
+	$labels = array(
+		'name'                       => 'Buildings',
+		'singular_name'              => 'Building',
+		'menu_name'                  => 'Buildings',
+		'all_items'                  => 'All Buildings',
+		'parent_item'                => 'Parent Building',
+		'parent_item_colon'          => 'Parent Building:',
+		'new_item_name'              => 'New Building',
+		'add_new_item'               => 'Add New Building',
+		'edit_item'                  => 'Edit Building',
+		'update_item'                => 'Update Building',
+		'view_item'                  => 'View Building',
+		'separate_items_with_commas' => 'Separate Buildings with commas',
+		'add_or_remove_items'        => 'Add or remove Buildings',
+		'choose_from_most_used'      => 'Choose from the most used',
+		'popular_items'              => 'Popular Buildings',
+		'search_items'               => 'Search Buildings',
+		'not_found'                  => 'Not Found',
+		'no_terms'                   => 'No Buildings',
+		'items_list'                 => 'Buildings list',
+		'items_list_navigation'      => 'Buildings list navigation',
+	);
+	$rewrite = array(
+		'slug'                       => 'building',
+		'with_front'                 => false,
+		'hierarchical'               => false,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => false,
+		'show_ui'                    => true,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
+	);
+	register_taxonomy( 'building', array( 'location' ), $args );
+
+}
+
+/* Custom Roles */
 function add_roles_on_plugin_activation() {
 	add_role( 'doc_editor', 'Doc Profile Editor',
 			array( 	'read' => true,
@@ -1316,15 +1979,15 @@ function add_roles_on_plugin_activation() {
 					'edit_others_physicians' => false,
 					'publish_physicians' => false,
 					'read_private_physicians' => true,
-					// 'read_location' => true,
-					// 'edit_location' => true,
-					// 'delete_location' => true,
-					// 'delete_published_locations' => false,
-					// 'edit_locations' => true,
-					// 'edit_published_locations' => true,
-					// 'edit_others_locations' => false,
-					// 'publish_locations' => false,
-					// 'read_private_locations' => true,
+					'read_location' => true,
+					'edit_location' => true,
+					'delete_location' => true,
+					'delete_published_locations' => false,
+					'edit_locations' => true,
+					'edit_published_locations' => true,
+					'edit_others_locations' => false,
+					'publish_locations' => false,
+					'read_private_locations' => true,
 					'upload_files' => true,
 					'edit_files' => true,
 
@@ -1342,15 +2005,15 @@ function add_roles_on_plugin_activation() {
 					'edit_others_physicians' => true,
 					'publish_physicians' => false,
 					'read_private_physicians' => true,
-					// 'read_location' => true,
-					// 'edit_location' => true,
-					// 'delete_location' => true,
-					// 'delete_published_locations' => false,
-					// 'edit_locations' => true,
-					// 'edit_published_locations' => true,
-					// 'edit_others_locations' => true,
-					// 'publish_locations' => false,
-					// 'read_private_locations' => true,
+					'read_location' => true,
+					'edit_location' => true,
+					'delete_location' => true,
+					'delete_published_locations' => false,
+					'edit_locations' => true,
+					'edit_published_locations' => true,
+					'edit_others_locations' => true,
+					'publish_locations' => false,
+					'read_private_locations' => true,
 					'upload_files' => true,
 					'edit_files' => true,
 				)
@@ -1404,13 +2067,20 @@ add_action( 'admin_init', 'add_theme_caps');
 
 // Remove the taxonomy metabox [slugnamediv]
 function remove_provider_meta() {
-	remove_meta_box( 'conditiondiv', 'providers', 'side' );
-	remove_meta_box( 'specialtydiv', 'providers', 'side' );
-	remove_meta_box( 'departmentdiv', 'providers', 'side' );
-	remove_meta_box( 'patient_typediv', 'providers', 'side' );
-	remove_meta_box( 'tagsdiv-medical_procedures', 'providers', 'side' );
-	remove_meta_box( 'medical_termsdiv', 'providers', 'side' );
-	remove_meta_box( 'custom-post-type-onomies-locations', 'providers', 'side');
+	remove_meta_box( 'conditiondiv', 'provider', 'side' );
+	remove_meta_box( 'specialtydiv', 'provider', 'side' );
+	remove_meta_box( 'departmentdiv', 'provider', 'side' );
+	remove_meta_box( 'patient_typediv', 'provider', 'side' );
+	remove_meta_box( 'tagsdiv-medical_procedures', 'provider', 'side' );
+	remove_meta_box( 'medical_termsdiv', 'provider', 'side' );
+	remove_meta_box( 'tagsdiv-recognition', 'provider', 'side' );
+	remove_meta_box( 'custom-post-type-onomies-locations', 'provider', 'side');
+	remove_meta_box( 'gmb_cat_providerdiv', 'provider', 'side' );
+	// Location
+	remove_meta_box( 'regiondiv', 'location', 'side' );
+	remove_meta_box( 'location_typediv', 'location', 'side' );
+	remove_meta_box( 'buildingdiv', 'location', 'side' );
+	remove_meta_box( 'gmb_cat_locationdiv', 'location', 'side' );
 }
 
 add_action( 'admin_menu' , 'remove_provider_meta' );
@@ -1452,14 +2122,14 @@ function change_featured_image_labels_provider( $labels ) {
 
 } // change_featured_image_labels()
 
-add_filter( 'post_type_labels_providers', 'change_featured_image_labels_provider', 10, 1 );
+add_filter( 'post_type_labels_provider', 'change_featured_image_labels_provider', 10, 1 );
 
 
 /**
  * Add REST API support to Teams Meta.
  */
 function rest_api_provider_meta() {
-    register_rest_field('providers', 'provider_meta', array(
+    register_rest_field('provider', 'provider_meta', array(
             'get_callback' => 'get_provider_meta',
             'update_callback' => null,
             'schema' => null,
@@ -1492,13 +2162,18 @@ function get_provider_meta($object) {
 		endforeach; 
 	} 
 	$full_name = get_field('physician_first_name', $postId) .' ' .(get_field('physician_middle_name', $postId) ? get_field('physician_middle_name', $postId) . ' ' : '') . get_field('physician_last_name', $postId) . (get_field('physician_pedigree', $postId) ? '&nbsp;' . get_field('physician_pedigree', $postId ) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+	$physician_resident = get_field('physician_resident', $postId);
+	$physician_resident_name = 'Resident Physician';
+	$physician_title = get_field('physician_title', $postId);
+	$physician_title_name = $physician_resident ? $physician_resident_name : get_term( $physician_title, 'clinical_title' )->name;
+	$physician_service_line = get_field('physician_service_line', $postId);
 	$data['physician_full_name'] = $full_name;
 	//Physician Data
 	// $clinical_title = (get_field('physician_title', $id) ? get_term( get_field('physician_title', $id), 'clinical_title' )->name : '');
-	$data['physician_title'] = (get_field('physician_title', $postId) ? get_term( get_field('physician_title', $postId), 'clinical_title' )->name : '');
-	// $data['physician_service_line'] = get_field( 'physician_title', $postId );
+	$data['physician_title'] = $physician_title_name; //(get_field('physician_title', $postId) ? get_term( get_field('physician_title', $postId), 'clinical_title' )->name : '');
+	$data['physician_service_line'] = $physician_service_line ? get_term( $physician_service_line, 'service_line' )->name : '';
     $data['physician_clinical_bio'] = get_field( 'physician_clinical_bio', $postId );
-    $data['physician_short_clinical_bio'] = wp_trim_words( get_field( 'physician_short_clinical_bio', $postId ), 30, ' &hellip;' );
+    $data['physician_short_clinical_bio'] = get_field('physician_short_clinical_bio', $postId) ? get_field( 'physician_short_clinical_bio', $postId) : wp_trim_words( get_field( 'physician_clinical_bio', $postId ), 30, ' &hellip;' );
     // $data['physician_gender'] = get_field( 'physician_gender', $postId );
     // $data['physician_youtube_link'] = get_field( 'physician_youtube_link', $postId );
     // $data['physician_languages'] = get_field( 'physician_languages', $postId );
@@ -1507,8 +2182,9 @@ function get_provider_meta($object) {
     //$data['physician_locations']['title'] = get_the_title( get_post_meta( $postId, 'physician_locations', true ) );
     //$data['physician_locations']['slug'] = get_post_field( 'post_name', get_post_meta( $postId, 'physician_locations', true ) );
     //Locations
-    $i = 1;
-	foreach (get_post_meta( $postId, 'physician_locations', true ) as $location) {
+	$i = 1;
+	$locations = get_field('physician_locations', $postId);
+	foreach ($locations as $location) {
 		$data['physician_locations'][$location]['link'] = get_permalink( $location );
 		$data['physician_locations'][$location]['title'] = get_the_title( $location );
 		$data['physician_locations'][$location]['slug'] = get_post_field( 'post_name', $location );
@@ -1538,51 +2214,100 @@ function get_provider_meta($object) {
     // $data['physician_accepting_patients'] = get_post_meta( $postId, 'physician_accepting_patients', true );
     // $data['physician_second_opinion'] = get_post_meta( $postId, 'physician_second_opinion', true );
     // $data['physician_patient_types'] = get_the_terms( $postId, 'patient_type' );
-    $data['physician_npi'] = get_post_meta( $postId, 'physician_npi', true );
+    $data['physician_npi'] = get_field( 'physician_npi', $postId );
     // $data['medical_specialties'] = get_the_terms( $postId, 'specialty' );
 	// $data['pphoto'] = wp_get_attachment_url( get_post_meta( $postId, 'physician_photo', true ), 'file' );
 	$data['physician_photo'] = image_sizer(get_post_thumbnail_id($postId), 253, 337, 'center', 'center');
-	$conditions = get_field('physician_conditions', $postId);
+	// Conditions
+	$conditions_cpt = get_field('physician_conditions_cpt', $postId);
 	$condition_list = '';
 	$i = 1;
-	if( $conditions ) {
-        $args = (array(
-            'taxonomy' => 'condition',
-            'hide_empty' => false,
-            'term_taxonomy_id' => $conditions
-        ));
-		$conditions_query = new WP_Term_Query( $args );
+	if( $conditions_cpt ) {
+		$args = (array(
+			'post_type' => "condition",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $conditions_cpt
+		));
+		$conditions_cpt_query = new WP_Query( $args );
 
-		foreach( $conditions_query->get_terms() as $condition ):
-			$condition_list .= $condition->name;
-			if( count($conditions) > $i ) {
-				$condition_list .= ', ';
-			}
-			$i++;
-		 endforeach;
+		if( $conditions_cpt && $conditions_cpt_query->posts ):
+
+			foreach( $conditions_cpt_query->posts as $condition ):
+				$data['physician_conditions'][$condition->ID]['link'] = get_permalink( $condition->ID );
+				$data['physician_conditions'][$condition->ID]['title'] = $condition->post_title;
+				$data['physician_conditions'][$condition->ID]['slug'] = $condition->post_name;
+				$condition_list .= $condition->post_title;
+				if( count($conditions_cpt) > $i ) {
+					$condition_list .= ', ';
+				}
+				$i++;
+			endforeach;
+		endif; 
 	}
 	$data['physician_conditions_list'] = $condition_list;
-	$treatments = get_field('physician_treatments', $postId);
+	// Treatments
+	$treatments_cpt = get_field('physician_treatments_cpt', $postId);
 	$treatment_list = '';
 	$i = 1;
-	if( $treatments ) {
+	if( $treatments_cpt ) {
 		$args = (array(
-			'taxonomy' => 'treatment_procedure',
-			'hide_empty' => false,
-			'term_taxonomy_id' => $treatments
+			'post_type' => "treatment",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $treatments_cpt
 		));
-		$treatments_query = new WP_Term_Query( $args );
-		foreach( $treatments_query->get_terms() as $treatment ):
-			$treatment_list .= $treatment->name;
-			if( count($treatments) > $i ) {
-				$treatment_list .= ', ';
-			}
-			$i++;
-		endforeach;
+		$treatments_cpt_query = new WP_Query( $args );
+		if( $treatments_cpt && $treatments_cpt_query->posts ):
+
+			foreach( $treatments_cpt_query->posts as $treatment ):
+				$data['physician_treatments'][$treatment->ID]['link'] = get_permalink( $treatment->ID );
+				$data['physician_treatments'][$treatment->ID]['title'] = $treatment->post_title;
+				$data['physician_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
+				$treatment_list .= $treatment->post_title;
+				if( count($treatments_cpt) > $i ) {
+					$treatment_list .= ', ';
+				}
+				$i++;
+			endforeach;
+		endif;
 	}
 	$data['physician_treatments_list'] = $treatment_list;
-	$data['physician_conditions'] = get_the_terms( $postId, 'condition' );
-	$data['physician_treatments'] = get_the_terms( $postId, 'treatment_procedure' );
+	// Expertise
+	$expertises = get_field('physician_expertise', $postId);
+	$expertise_list = '';
+	$i = 1;
+	if( $expertises ) {
+		$args = (array(
+			'post_type' => "expertise",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $expertises
+		));
+		$expertise_query = new WP_Query( $args );
+		if( $expertises && $expertise_query->posts ):
+
+			foreach( $expertise_query->posts as $expertise ):
+				$data['physician_expertise'][$expertise->ID]['link'] = get_permalink( $expertise->ID );
+				$data['physician_expertise'][$expertise->ID]['title'] = $expertise->post_title;
+				$data['physician_expertise'][$expertise->ID]['slug'] = $expertise->post_name;
+				$expertise_list .= $expertise->post_title;
+				if( count($expertises) > $i ) {
+					$expertise_list .= ', ';
+				}
+				$i++;
+			endforeach;
+		endif;
+	}
+	$data['physician_expertise_list'] = $expertise_list;
+	// $data['physician_conditions'] = get_the_terms( $postId, 'condition' );
+	// $data['physician_treatments'] = get_the_terms( $postId, 'treatment' );
 	// $data['physician_boards'] = get_post_meta( $postId, 'physician_boards', true );
 	// if( get_post_meta( $postId, 'physician_boards', true ) ) :
 	// 	for( $i = 0; $i < get_post_meta( $postId, 'physician_boards', true ); $i++ ){
@@ -1591,8 +2316,8 @@ function get_provider_meta($object) {
 	// endif;
 	//Academic Data
 	// $data['physician_academic_title'] = get_post_meta( $postId, 'physician_academic_title', true );
-	// $data['physician_academic_college'] = get_the_terms( $postId, 'academic_colleges' );
-	// $data['physician_academic_position'] = get_the_terms( $postId, 'academic_positions' );
+	// $data['physician_academic_college'] = get_the_terms( $postId, 'academic_college' );
+	// $data['physician_academic_position'] = get_the_terms( $postId, 'academic_position' );
 	// $data['physician_academic_bio'] = get_post_meta( $postId, 'physician_academic_bio', true );
 	// $data['physician_academic_short_bio'] = wp_trim_words( get_post_meta( $postId, 'physician_academic_short_bio', true ), 30, ' &hellip;' );
 	// $data['physician_academic_office'] = get_post_meta( $postId, 'physician_academic_office', true );
@@ -1675,8 +2400,8 @@ function get_location_meta($object) {
 // add_action('rest_api_init', 'rest_api_location_meta');
 
 // Add REST API query var filters
-add_filter('rest_query_vars', 'providers_add_rest_query_vars');
-function providers_add_rest_query_vars($query_vars) {
+add_filter('rest_query_vars', 'provider_add_rest_query_vars');
+function provider_add_rest_query_vars($query_vars) {
     $query_vars = array_merge( $query_vars, array('meta_key', 'meta_value', 'meta_compare') );
     return $query_vars;
 }

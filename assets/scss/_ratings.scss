@@ -1,0 +1,74 @@
+.rating {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 1rem;
+    margin-bottom: $font-size-base;
+
+    &.rating-center {
+        text-align: center;
+
+        .star-ratings-sprite {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    .star-ratings-sprite {
+        position: relative;
+        display: block;
+        width: 8rem;
+        padding: 0;
+        overflow: hidden;
+
+        &:before {
+            content: "";
+            display: block;
+            padding-top: 19.007793195210036%;
+            background-position: 0 0;
+            background-size: cover;
+            background-image: url("../svg/five-stars_sprite.svg");
+            background-repeat: no-repeat;
+        }
+        
+        .star-ratings-sprite-percentage {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            background-position: 0 100%;
+            background-size: cover;
+            background-image: url("../svg/five-stars_sprite.svg");
+            background-repeat: no-repeat;
+            background-size: auto 200%;
+        }
+    }
+    .ratings-score,
+    .ratings-count {
+        @include font-size($font-size-sm);
+        line-height: 1;
+        margin-left: 0.5em;
+        &:before {
+            content: "(";
+        }
+        &:after {
+            content: ")";
+        }
+        &-lg {
+            width: 100%;
+        margin-top: 0.5em;
+        }
+    }
+    a {
+        display: inline-block;
+        margin-top: 0.5em;
+    }
+}

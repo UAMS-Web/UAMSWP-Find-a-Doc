@@ -2,7 +2,7 @@
     "name": "uamswp_locations",
     "relationship": {
         "type": "post",
-        "post_type": "locations"
+        "post_type": "location"
     },
     "primary_key": [
         "id"
@@ -43,6 +43,27 @@
             }
         },
         {
+            "name": "location_building",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_building"
+            }
+        },
+        {
+            "name": "location_building_floor",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_building_floor"
+            }
+        },
+        {
+            "name": "location_suite",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_suite"
+            }
+        },
+        {
             "name": "location_city",
             "map": {
                 "type": "acf_field_name",
@@ -61,6 +82,13 @@
             "map": {
                 "type": "acf_field_name",
                 "identifier": "location_zip"
+            }
+        },
+        {
+            "name": "location_region",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_region"
             }
         },
         {
@@ -85,10 +113,24 @@
             }
         },
         {
+            "name": "location_youtube_link",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_youtube_link"
+            }
+        },
+        {
             "name": "location_short_desc",
             "map": {
                 "type": "acf_field_name",
                 "identifier": "location_short_desc"
+            }
+        },
+        {
+            "name": "location_affiliation",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_affiliation"
             }
         },
         {
@@ -192,12 +234,33 @@
             }
         },
         {
+            "name": "location_wayfinding_photo",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_wayfinding_photo"
+            }
+        },
+        {
+            "name": "location_photo_gallery",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_photo_gallery"
+            }
+        },
+        {
             "name": "location_24_7",
             "format": "%d",
             "map": {
                 "type": "acf_field_name",
                 "identifier": "location_24_7"
                 
+            }
+        },
+        {
+            "name": "location_hours_group",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_hours_group"
             }
         },
         {
@@ -219,6 +282,20 @@
             "map": {
                 "type": "acf_field_name",
                 "identifier": "location_holiday_hours"
+            }
+        },
+        {
+            "name": "location_conditions",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_conditions"
+            }
+        },
+        {
+            "name": "location_treatments",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_treatments"
             }
         },
         {
@@ -259,10 +336,101 @@
             }
         },
         {
-            "name": "location_physicians",
+            "name": "physician_locations",
             "map": {
                 "type": "acf_field_name",
-                "identifier": "location_physicians"
+                "identifier": "physician_locations"
+            }
+        },
+        {
+            "name": "location_gmb_exclude",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_gmb_exclude"
+            }
+        },
+        {
+            "name": "location_gmb_prefix",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_gmb_prefix"
+            }
+        },
+        {
+            "name": "location_gmb_cat",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "location_gmb_cat"
+            }
+        },
+        {
+            "name": "has_wheelchair_accessible_elevator",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "has_wheelchair_accessible_elevator"
+            }
+        },
+        {
+            "name": "has_wheelchair_accessible_entrance",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "has_wheelchair_accessible_entrance"
+            }
+        },
+        {
+            "name": "has_wheelchair_accessible_restroom",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "has_wheelchair_accessible_restroom"
+            }
+        },
+        {
+            "name": "has_restroom",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "has_restroom"
+            }
+        },
+        {
+            "name": "requires_appointments",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "requires_appointments"
+            }
+        },
+        {
+            "name": "requires_temperature_check_customers",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "requires_temperature_check_customers"
+            }
+        },
+        {
+            "name": "requires_masks_customers",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "requires_masks_customers"
+            }
+        },
+        {
+            "name": "requires_temperature_check_staff",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "requires_temperature_check_staff"
+            }
+        },
+        {
+            "name": "requires_masks_staff",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "requires_masks_staff"
+            }
+        },
+        {
+            "name": "is_sanitizing_between_customers",
+            "map": {
+                "type": "acf_field_name",
+                "identifier": "is_sanitizing_between_customers"
             }
         }
     ],

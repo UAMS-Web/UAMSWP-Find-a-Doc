@@ -1,4 +1,4 @@
-$(document).ready(function(){
+jQuery(document).ready(function($){
 
 	$('.pubmed-list').each(function(){
 
@@ -16,7 +16,7 @@ $(document).ready(function(){
 
 function searchPubMed(terms, wrapper, count) {
 
-	var request = $.ajax({
+	var request = jQuery.ajax({
 		url: 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=' + terms + '&api_key=385886002e508dc61fd091eb8f962372b308&retmode=json&retmax=' + count,
 		async: true
 	});
@@ -34,7 +34,7 @@ function iterateJSON(idlist, publications, wrapper) {
 	var list = wrapper;
 	var id = idlist.shift();
 
-	var request = $.ajax({
+	var request = jQuery.ajax({
 		url: 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id='+id+'&api_key=385886002e508dc61fd091eb8f962372b308&retmode=json',
 		async: true
 	});
