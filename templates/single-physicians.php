@@ -100,6 +100,7 @@ if (empty($excerpt)){
         $excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 155, '...');
     }
 }
+$schema_description = $excerpt;  // Used for Schema Data. Should ALWAYS have a value
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
@@ -1176,9 +1177,8 @@ while ( have_posts() ) : the_post();
   "name": "<?php echo $full_name; ?>",
   "url": "<?php echo get_permalink(); ?>",
   "logo": "<?php echo get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png'; ?>",
-  "image": "<?php echo $docphoto; ?>"
-  <?php if ($excerpt) { ?>
-  ,"description": "<?php echo $excerpt; ?>"
+  "image": "<?php echo $docphoto; ?>",
+  "description": "<?php echo $schema_description; ?>"
   <?php }
         if ($condition_schema || $treatment_schema) {
             echo ',';
