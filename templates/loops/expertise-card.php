@@ -7,6 +7,9 @@
      *  Required var: $id
      */
 
+    $expertise_title = get_the_title($id);
+    $expertise_title_attr = str_replace('"', '\'', $expertise_title);
+
     // Parent Location 
     $expertise_parent_id = wp_get_post_parent_id($id);
     $expertise_has_parent = $expertise_parent_id ? true : false;
@@ -22,12 +25,13 @@
     if ($parent_expertise) {
         $parent_id = $parent_expertise->ID;
         $parent_title = $parent_expertise->post_title;
+        $parent_title_attr = str_replace('"', '\'', $parent_title);
         $parent_url = get_permalink( $parent_id );
     }
 
 ?>
 <div class="card">
-    <a href="<?php echo get_permalink($id); ?>" target="_self" aria-label="Go to Area of Expertise page for <?php echo get_the_title($id); ?>">
+    <a href="<?php echo get_permalink($id); ?>" target="_self" aria-label="Go to Area of Expertise page for <?php echo $expertise_title_attr; ?>">
         <?php if ( has_post_thumbnail($id) ) { ?>
         <?php echo get_the_post_thumbnail($id, 'aspect-16-9-small', ['class' => 'card-img-top']); ?>
         <?php } else { ?>
@@ -40,16 +44,16 @@
     <?php $excerpt = get_the_excerpt($id); ?>
     <div class="card-body">
         <h3 class="card-title h5">
-            <span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self" aria-label="Go to Area of Expertise page for <?php echo get_the_title($id); ?>"><?php echo get_the_title($id); ?></a></span>
+            <span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self" aria-label="Go to Area of Expertise page for <?php echo $expertise_title_attr; ?>"><?php echo $expertise_title; ?></a></span>
             <?php if ( $parent_expertise ) { ?>
-                <span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>" aria-label="Go to Area of Expertise page for <?php echo $parent_title; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
+                <span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>" aria-label="Go to Area of Expertise page for <?php echo $parent_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
             <?php } // endif ?>
         </h3>
         <p class="card-text"><?php echo ( $excerpt ? wp_trim_words( $excerpt, 30, ' &hellip;' ) : wp_trim_words( wp_strip_all_tags( get_the_content($id), 30, ' &hellip;' ) ) ); ?></p>
     </div><!-- .card-body -->
     <div class="btn-container">
         <div class="inner-container">
-            <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary" aria-label="Go to Area of Expertise page for <?php echo get_the_title($id); ?>">View Area of Expertise</a>
+            <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary" aria-label="Go to Area of Expertise page for <?php echo $expertise_title_attr; ?>">View Area of Expertise</a>
         </div>
     </div>
 </div><!-- .card --> 
