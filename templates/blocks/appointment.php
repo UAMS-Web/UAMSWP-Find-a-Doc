@@ -12,7 +12,7 @@
         $appointment_location_label = 'View a list of UAMS Health locations';
     }
 ?>
-<section class="uams-module cta-bar cta-bar-1 bg-auto">
+<section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info">
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12">
