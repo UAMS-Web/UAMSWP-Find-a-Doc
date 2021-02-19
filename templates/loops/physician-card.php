@@ -24,6 +24,7 @@
 	?>
 	<?php
 		$full_name = get_field('physician_first_name', $id) .' ' .(get_field('physician_middle_name', $id) ? get_field('physician_middle_name', $id) . ' ' : '') . get_field('physician_last_name', $id) . (get_field('physician_pedigree', $id) ? '&nbsp;' . get_field('physician_pedigree', $id) : '') .  ( $degree_list ? ', ' . $degree_list : '' ); 
+		$full_name_attr = str_replace('"', '\'', $full_name);
 		$physician_resident = get_field('physician_resident', $id);
 		$physician_resident_name = 'Resident Physician';
 		$physician_title = get_field('physician_title', $id);
@@ -36,7 +37,7 @@
 			<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
 				<source srcset="<?php echo image_sizer(get_post_thumbnail_id($id), 253, 337, 'center', 'center'); ?>"
 					media="(min-width: 1px)">
-				<img src="<?php echo image_sizer(get_post_thumbnail_id(), 253, 337, 'center', 'center'); ?>" itemprop="image" class="card-img-top" alt="<?php echo $full_name; ?>" />
+				<img src="<?php echo image_sizer(get_post_thumbnail_id(), 253, 337, 'center', 'center'); ?>" itemprop="image" class="card-img-top" alt="<?php echo $full_name_attr; ?>" />
 			<?php } elseif ( has_post_thumbnail() ) { ?>
 				<?php echo get_the_post_thumbnail( $id, 'medium',  array( 'itemprop' => 'image', 'class' => 'card-img-top' ) ); ?>
 			<?php } else { ?>
@@ -58,7 +59,7 @@
 		</div>
 		<div class="btn-container">
 			<div class="inner-container">
-				<a href="<?php the_permalink($id); ?>" class="btn btn-primary stretched-link" aria-label="View profile for <?php echo $full_name; ?>">View Profile</a>
+				<a href="<?php the_permalink($id); ?>" class="btn btn-primary stretched-link" aria-label="View profile for <?php echo $full_name_attr; ?>">View Profile</a>
 			</div>
 		</div>
 	</div>
