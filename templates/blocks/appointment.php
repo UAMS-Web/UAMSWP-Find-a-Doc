@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <h2>Make an Appointment</h2>
-                <p>Request an appointment by <a href="/location/">contacting a clinic directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                <p>Request an appointment by <a href="/location/" aria-label="View a list of UAMS Health locations" data-itemtitle="Contact a clinic directly">contacting a clinic directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
             </div>
         </div>
     </div>
