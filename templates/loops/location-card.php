@@ -227,12 +227,12 @@
             <dl>
                 <dt>Appointment Phone Number<?php echo $location_appointment_phone_query ? 's' : ''; ?></dt>
                 <?php if ($location_new_appointments_phone && $location_clinic_phone_query) { ?>
-                    <dd><a href="tel:<?php echo $location_new_appointments_phone_format_dash; ?>" class="icon-phone"><?php echo $location_new_appointments_phone_format_us; ?></a><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
+                    <dd><a href="tel:<?php echo $location_new_appointments_phone_format_dash; ?>" class="icon-phone" data-itemtitle="New Patients"><?php echo $location_new_appointments_phone_format_us; ?></a><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
                     <?php if ($location_return_appointments_phone && $location_appointment_phone_query) { ?>
-                        <dd><a href="tel:<?php echo $location_return_appointments_phone_format_dash; ?>" class="icon-phone"><?php echo $location_return_appointments_phone_format_us; ?></a><br/><span class="subtitle">Returning Patients</span></dd>
+                        <dd><a href="tel:<?php echo $location_return_appointments_phone_format_dash; ?>" class="icon-phone" data-itemtitle="Returning Patients"><?php echo $location_return_appointments_phone_format_us; ?></a><br/><span class="subtitle">Returning Patients</span></dd>
                     <?php } ?>
                 <?php } else { ?>
-                    <dd><a href="tel:<?php echo $location_phone_format_dash; ?>" class="icon-phone"><?php echo $location_phone_format_us; ?></a><br/><span class="subtitle">New and Returning Patients</span></dd>
+                    <dd><a href="tel:<?php echo $location_phone_format_dash; ?>" class="icon-phone" data-itemtitle="New and Returning Patients"><?php echo $location_phone_format_us; ?></a><br/><span class="subtitle">New and Returning Patients</span></dd>
                 <?php } ?>
             </dl>
         <?php } // endif ?>
