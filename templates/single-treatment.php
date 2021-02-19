@@ -210,7 +210,7 @@
         <?php } ?>
 		<?php
 		if (!empty($clinical_trials)): ?>
-			<section class="uams-module cta-bar cta-bar-1 bg-auto">
+			<section class="uams-module cta-bar cta-bar-1 bg-auto" id="clinical-trials">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-xs-12">
