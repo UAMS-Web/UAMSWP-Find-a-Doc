@@ -739,7 +739,7 @@ while ( have_posts() ) : the_post(); ?>
 		&& 
 		($location_alert_title || $location_alert_text) // If location title or description has value
 	 ) { ?>
-	<section class="uams-module location-alert location-<?php echo $location_alert_color ? $location_alert_color : 'alert-warning'; ?>">
+	<section class="uams-module location-alert location-<?php echo $location_alert_color ? $location_alert_color : 'alert-warning'; ?>" id="location-alert">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-12">
@@ -771,7 +771,7 @@ while ( have_posts() ) : the_post(); ?>
 	
 		if ( $location_about || $location_affiliation || $prescription ) { 
 		?>
-		<section class="uams-module bg-auto">
+		<section class="uams-module bg-auto" id="description">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
@@ -813,7 +813,7 @@ while ( have_posts() ) : the_post(); ?>
 		$parking_map = get_field('location_parking_map', $post_id);
 	
 		if ( $location_parking || $location_direction || $parking_map ) : ?>
-		<section class="uams-module bg-auto">
+		<section class="uams-module bg-auto" id="directions">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12<?php echo $parking_map ? ' col-md-6' : ''  ?>">
@@ -907,7 +907,7 @@ while ( have_posts() ) : the_post(); ?>
 		$location_appointment_bring = get_field('location_appointment_bring');
 
 		if ( $location_appointment || $location_appointment_bring): ?>
-		<section class="uams-module bg-auto">
+		<section class="uams-module bg-auto" id="appointment-info">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
@@ -1128,7 +1128,7 @@ while ( have_posts() ) : the_post(); ?>
 
 			if ($portal && $portal_slug !== "_none") {
 	?>
-		<section class="uams-module cta-bar cta-bar-weighted bg-blue" aria-label="Patient Portal">
+		<section class="uams-module cta-bar cta-bar-weighted bg-blue" aria-label="Patient Portal" id="portal-info">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
@@ -1333,7 +1333,7 @@ while ( have_posts() ) : the_post(); ?>
     }
 	?>
 	<!-- Latest News -->
-	<!-- <section class="uams-module news-list bg-auto">
+	<!-- <section class="uams-module news-list bg-auto" id="news">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-12">

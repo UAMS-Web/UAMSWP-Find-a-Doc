@@ -526,7 +526,7 @@ while ( have_posts() ) : the_post();
             }
             
         ?>
-        <section class="uams-module cta-bar cta-bar-1 bg-auto">
+        <section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info-1">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
@@ -584,7 +584,7 @@ while ( have_posts() ) : the_post();
         
             // Display section for Clinical Bio, Clinical Video, Clinical Administrative Title(s), Clinical Focus ... only if there is a bio or video.
             if ( $physician_clinical_bio || !empty ($physician_youtube_link) ) { ?>
-            <section class="uams-module clinical-info bg-auto">
+            <section class="uams-module clinical-info bg-auto" id="clinical-info">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xs-12">
@@ -686,7 +686,7 @@ while ( have_posts() ) : the_post();
             }
         
             if( $resident || $academic_bio || $academic_appointment || $academic_admin_title || $education || $boards): ?>
-        <section class="uams-module academic-info bg-auto">
+        <section class="uams-module academic-info bg-auto" id="academic-info">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
@@ -800,7 +800,7 @@ while ( have_posts() ) : the_post();
         <?php endif; ?>
         <?php 
         if( !empty($research_bio) || !empty($esearch_interests) || !empty ( $publications ) || $pubmed_author_id || $research_profiles_link ): ?>
-        <section class="uams-module research-info bg-auto">
+        <section class="uams-module research-info bg-auto" id="research-info">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
@@ -1063,7 +1063,7 @@ while ( have_posts() ) : the_post();
             </div>
         </section>
         <?php endif; ?>
-        <!-- <section class="uams-module news-list bg-auto">
+        <!-- <section class="uams-module news-list bg-auto" id="news">
             <div class="container-fluid"
                 <div class="row">
                     <div class="col-12">
@@ -1107,7 +1107,7 @@ while ( have_posts() ) : the_post();
             </div>
         </section> -->
         <?php if ($eligible_appt): ?>
-            <section class="uams-module cta-bar cta-bar-1 bg-auto">
+            <section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info-2">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xs-12">

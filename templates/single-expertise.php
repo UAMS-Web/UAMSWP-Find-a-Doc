@@ -322,7 +322,7 @@ function uamswp_expertise_appointment() {
     } else {
         $appointment_location_url = '/location/';
     } ?>
-    <section class="uams-module cta-bar cta-bar-1 bg-auto">
+    <section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">

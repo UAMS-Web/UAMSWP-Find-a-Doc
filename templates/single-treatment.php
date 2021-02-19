@@ -236,7 +236,7 @@
 			if ( $conditions_cpt && !empty($conditions_query_cpt->have_posts()) ) {
 				
 		?>
-			<section class="uams-module conditions-treatments bg-auto">
+			<section class="uams-module conditions-treatments bg-auto" id="conditions">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-xs-12">
