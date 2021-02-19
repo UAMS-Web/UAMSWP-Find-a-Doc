@@ -83,6 +83,9 @@
 		'order' => 'ASC',
 		'orderby' => 'title',
 		'posts_per_page' => -1,
+		'no_found_rows' => true, // counts posts, remove if pagination required
+		'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
+		'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
 		'post__in'	=> $locations
 	));
 	$location_query = new WP_Query( $args );
@@ -230,6 +233,9 @@
 				'order' => 'ASC',
 				'orderby' => 'title',
 				'posts_per_page' => -1,
+				'no_found_rows' => true, // counts posts, remove if pagination required
+				'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
+				'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
 				'post__in'	=> $conditions_cpt
 			));
 			$conditions_query_cpt = new WP_Query( $args );
@@ -272,6 +278,9 @@
 				'order' => 'ASC',
 				'orderby' => 'title',
 				'posts_per_page' => $postsPerPage,
+				// 'no_found_rows' => true, // counts posts, remove if pagination required
+				'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
+				'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
 				'post__in'	=> $physicians
 			));
 			$physicians_query = new WP_Query( $args );
@@ -319,6 +328,9 @@
 			'order' => 'ASC',
 			'orderby' => 'title',
 			'posts_per_page' => -1,
+			'no_found_rows' => true, // counts posts, remove if pagination required
+			'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
+			'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
 			'post__in'	=> $expertise
 		));
 		$expertise_query = new WP_Query( $args );
