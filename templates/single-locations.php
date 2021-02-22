@@ -813,7 +813,7 @@ while ( have_posts() ) : the_post(); ?>
 		$parking_map = get_field('location_parking_map', $post_id);
 	
 		if ( $location_parking || $location_direction || $parking_map ) : ?>
-		<section class="uams-module bg-auto" id="directions">
+		<section class="uams-module bg-auto" id="parking-info">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12<?php echo $parking_map ? ' col-md-6' : ''  ?>">
