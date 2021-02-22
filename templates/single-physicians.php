@@ -269,6 +269,7 @@ while ( have_posts() ) : the_post();
                     <?php 
                         $l = 1;
                         if( $locations && $location_valid ): ?>
+                        <div data-sectiontitle="Primary Location">
                             <?php if ($eligible_appt) { ?>
                                 <h2 class="h3">Primary Appointment Location</h2>
                             <?php } else { ?>
@@ -369,6 +370,7 @@ while ( have_posts() ) : the_post();
                                 } ?>
 							<?php endforeach;
 								// wp_reset_postdata(); ?>
+                        </div>
 						<?php endif; ?> 
                     <h2 class="h3">Overview</h2>
                     <dl>
