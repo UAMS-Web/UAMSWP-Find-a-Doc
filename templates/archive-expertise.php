@@ -23,7 +23,7 @@ get_header();
             </header>
             <?php echo ($expertise_text ? '<div class="entry-content clearfix" itemprop="text">' . $expertise_text . '</div>' : '' ); ?>
         </section>
-        <section class="uams-module">
+        <section class="uams-module" id="expertise">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
