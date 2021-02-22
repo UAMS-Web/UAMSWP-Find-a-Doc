@@ -337,7 +337,7 @@ while ( have_posts() ) : the_post();
                                             $location_return_appointments_phone = get_field('location_return_appointments_phone', $location);
 
                                     ?>
-                                <p><strong><?php echo get_the_title( $location ); ?></strong><br />
+                                <p><strong><?php echo $primary_appointment_title; ?></strong><br />
                                 <?php if ( $parent_location ) { ?>
                                     (Part of <a href="<?php echo $parent_url; ?>" data-categorytitle="Parent Name"><?php echo $parent_title; ?></a>)<br />
                                 <?php } // endif ?>
@@ -351,12 +351,12 @@ while ( have_posts() ) : the_post();
                                     <dl data-categorytitle="Telephone Number">
                                         <dt>Appointment Phone Number<?php echo $location_appointment_phone_query ? 's' : ''; ?></dt>
                                         <?php if ($location_new_appointments_phone && $location_clinic_phone_query) { ?>
-                                            <dd><a href="tel:<?php echo format_phone_dash( $location_new_appointments_phone ); ?>" class="icon-phone" data-itemtitle="<?php echo get_the_title( $location ); ?>" data-typetitle="Appointment Phone Number for New<?php echo $location_appointment_phone_query ? '' : ' and Returning' ; ?> Patients"><?php echo format_phone_us( $location_new_appointments_phone ); ?></a><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
+                                            <dd><a href="tel:<?php echo format_phone_dash( $location_new_appointments_phone ); ?>" class="icon-phone" data-itemtitle="<?php echo $primary_appointment_title; ?>" data-typetitle="Appointment Phone Number for New<?php echo $location_appointment_phone_query ? '' : ' and Returning' ; ?> Patients"><?php echo format_phone_us( $location_new_appointments_phone ); ?></a><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
                                             <?php if ($location_return_appointments_phone && $location_appointment_phone_query) { ?>
-                                                <dd><a href="tel:<?php echo format_phone_dash( $location_return_appointments_phone ); ?>" class="icon-phone" data-itemtitle="<?php echo get_the_title( $location ); ?>" data-typetitle="Appointment Phone Number for Returning Patients"><?php echo format_phone_us( $location_return_appointments_phone ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
+                                                <dd><a href="tel:<?php echo format_phone_dash( $location_return_appointments_phone ); ?>" class="icon-phone" data-itemtitle="<?php echo $primary_appointment_title; ?>" data-typetitle="Appointment Phone Number for Returning Patients"><?php echo format_phone_us( $location_return_appointments_phone ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
                                             <?php } ?>
                                         <?php } else { ?>
-                                            <dd><a href="tel:<?php echo format_phone_dash( $location_phone ); ?>" class="icon-phone" data-itemtitle="<?php echo get_the_title( $location ); ?>" data-typetitle="Appointment Phone Number for New and Returning Patients"><?php echo format_phone_us( $location_phone ); ?></a><br/><span class="subtitle">New and Returning Patients</span></dd>
+                                            <dd><a href="tel:<?php echo format_phone_dash( $location_phone ); ?>" class="icon-phone" data-itemtitle="<?php echo $primary_appointment_title; ?>" data-typetitle="Appointment Phone Number for New and Returning Patients"><?php echo format_phone_us( $location_phone ); ?></a><br/><span class="subtitle">New and Returning Patients</span></dd>
                                         <?php } ?>
                                     </dl>
                                 <?php } ?>
