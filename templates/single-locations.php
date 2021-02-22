@@ -36,7 +36,7 @@ $location_clinic_phone_query = get_field('location_clinic_phone_query'); // sepa
 if ($location_clinic_phone_query) {
 	$location_new_appointments_phone = get_field('location_new_appointments_phone'); // phone number for (new) appointments
 	$location_appointment_phone_query = get_field('field_location_appointment_phone_query'); // separate number for existing appointments?
-	$location_new_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_new_appointments_phone ) . '" class="icon-phone" data-typetitle="Appointment Phone Number for New' . ($location_appointment_phone_query ? '' : ' and Returning') . ' Appointments">' . format_phone_us( $location_new_appointments_phone ) . '</a>';
+	$location_new_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_new_appointments_phone ) . '" class="icon-phone" data-typetitle="Appointment Phone Number for New' . ($location_appointment_phone_query ? '' : ' and Returning') . ' Patients">' . format_phone_us( $location_new_appointments_phone ) . '</a>';
 } else {
 	$location_new_appointments_phone = '';
 	$location_appointment_phone_query = '0';
