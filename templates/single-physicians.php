@@ -343,9 +343,8 @@ while ( have_posts() ) : the_post();
                                 <!-- <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a> -->
                                 </p>
                                 <?php if (get_field('location_phone', $location)) { ?>
-                                    <dl>
-                                        <dt>Appointment Phone Number<?php echo get_field('field_location_appointment_phone_query', $location) ? 's' : ''; ?></dt>
                                     <dl data-categorytitle="Telephone Number">
+                                        <dt>Appointment Phone Number<?php echo get_field('field_location_appointment_phone_query', $location) ? 's' : ''; ?></dt>
                                         <?php if (get_field('location_new_appointments_phone', $location) && get_field('location_clinic_phone_query', $location)) { ?>
                                             <dd><a href="tel:<?php echo format_phone_dash( get_field('location_new_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_new_appointments_phone', $location) ); ?></a><?php echo get_field('field_location_appointment_phone_query', $location) ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
                                             <?php if (get_field('location_return_appointments_phone', $location) && get_field('field_location_appointment_phone_query', $location)) { ?>
@@ -369,7 +368,7 @@ while ( have_posts() ) : the_post();
                                 <?php $l++;
 	                                }
                                 } ?>
-							<?php endforeach;
+                            <?php endforeach;
 								// wp_reset_postdata(); ?>
                         </div>
 						<?php endif; ?> 
