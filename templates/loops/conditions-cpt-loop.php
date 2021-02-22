@@ -7,7 +7,7 @@
      *  Required var: $conditions
      */
 ?>
-<section class="uams-module conditions-treatments bg-auto">
+<section class="uams-module conditions-treatments bg-auto" id="conditions">
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12">
