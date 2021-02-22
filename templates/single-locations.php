@@ -319,7 +319,7 @@ while ( have_posts() ) : the_post(); ?>
 					<p><?php echo $location_address_1; ?><br/>
 					<?php echo ( $location_address_2 ? $location_address_2 . '<br/>' : ( $location_address_2_deprecated ? $location_address_2_deprecated . '<br/>' : '')); ?>
 					<?php echo $location_city; ?>, <?php echo $location_state; ?> <?php echo $location_zip; ?></p>
-						<p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo get_the_title($post_id); ?>">Get Directions</a></p>
+						<p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo get_the_title($post_id); ?>" data-categorytitle="Get Directions">Get Directions</a></p>
 						<?php if( $location_web_name && $location_url ){ ?>
 							<p><a class="btn btn-secondary" href="<?php echo $location_url['url']; ?>"><?php echo $location_web_name; ?> <span class="far fa-external-link-alt"></span></span></a></p>
 					<?php } 
