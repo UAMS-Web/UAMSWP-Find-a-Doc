@@ -228,12 +228,12 @@
             <dl>
                 <dt>Appointment Phone Number<?php echo $location_appointment_phone_query ? 's' : ''; ?></dt>
                 <?php if ($location_new_appointments_phone && $location_clinic_phone_query) { ?>
-                    <dd><a href="tel:<?php echo $location_new_appointments_phone_format_dash; ?>" class="icon-phone" data-categorytitle="Telephone Number" data-itemtitle="<?php echo $location_title_attr; ?>" data-typetitle="New Patients"><?php echo $location_new_appointments_phone_format_us; ?></a><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
+                    <dd><a href="tel:<?php echo $location_new_appointments_phone_format_dash; ?>" class="icon-phone" data-categorytitle="Telephone Number" data-itemtitle="<?php echo $location_title_attr; ?>" data-typetitle="Appointment Phone Number for New Patients"><?php echo $location_new_appointments_phone_format_us; ?></a><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
                     <?php if ($location_return_appointments_phone && $location_appointment_phone_query) { ?>
-                        <dd><a href="tel:<?php echo $location_return_appointments_phone_format_dash; ?>" class="icon-phone" data-categorytitle="Telephone Number" data-itemtitle="<?php echo $location_title_attr; ?>" data-typetitle="Returning Patients"><?php echo $location_return_appointments_phone_format_us; ?></a><br/><span class="subtitle">Returning Patients</span></dd>
+                        <dd><a href="tel:<?php echo $location_return_appointments_phone_format_dash; ?>" class="icon-phone" data-categorytitle="Telephone Number" data-itemtitle="<?php echo $location_title_attr; ?>" data-typetitle="Appointment Phone Number for Returning Patients"><?php echo $location_return_appointments_phone_format_us; ?></a><br/><span class="subtitle">Returning Patients</span></dd>
                     <?php } ?>
                 <?php } else { ?>
-                    <dd><a href="tel:<?php echo $location_phone_format_dash; ?>" class="icon-phone" data-categorytitle="Telephone Number" data-itemtitle="<?php echo $location_title_attr; ?>" data-typetitle="New and Returning Patients"><?php echo $location_phone_format_us; ?></a><br/><span class="subtitle">New and Returning Patients</span></dd>
+                    <dd><a href="tel:<?php echo $location_phone_format_dash; ?>" class="icon-phone" data-categorytitle="Telephone Number" data-itemtitle="<?php echo $location_title_attr; ?>" data-typetitle="Appointment Phone Number for New and Returning Patients"><?php echo $location_phone_format_us; ?></a><br/><span class="subtitle">New and Returning Patients</span></dd>
                 <?php } ?>
             </dl>
         <?php } // endif ?>
