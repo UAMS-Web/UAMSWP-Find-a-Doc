@@ -356,16 +356,16 @@ while ( have_posts() ) : the_post();
                                                 <dd><a href="tel:<?php echo format_phone_dash( $location_return_appointments_phone ); ?>" class="icon-phone"><?php echo format_phone_us( $location_return_appointments_phone ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
                                             <?php } ?>
                                         <?php } else { ?>
-                                            <dd><a href="tel:<?php echo format_phone_dash( $location_phone ); ?>" class="icon-phone" data-typetitle="Appointment Phone Number for New and Returning Patients"><?php echo format_phone_us( $location_phone ); ?></a><br/><span class="subtitle">New and Returning Patients</span></dd>
+                                            <dd><a href="tel:<?php echo format_phone_dash( $location_phone ); ?>" class="icon-phone" data-itemtitle="<?php echo get_the_title( $location ); ?>" data-typetitle="Appointment Phone Number for New and Returning Patients"><?php echo format_phone_us( $location_phone ); ?></a><br/><span class="subtitle">New and Returning Patients</span></dd>
                                         <?php } ?>
                                     </dl>
                                 <?php } ?>
                                 <div class="btn-container">
-                                    <a class="btn btn-primary" href="<?php echo get_the_permalink( $location ); ?>">
+                                    <a class="btn btn-primary" href="<?php echo get_the_permalink( $location ); ?>" data-categorytitle="View Location">
                                         View Location
                                     </a>
                                     <?php if (1 < $location_count) { ?>
-                                        <a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of locations for this provider">
+                                        <a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of locations for this provider" data-categorytitle="View All Locations">
                                             View All Locations
                                         </a>
                                     <?php } ?>
