@@ -335,7 +335,7 @@ while ( have_posts() ) : the_post(); ?>
 						$phone_schema = '';
 					?>
 					<h2>Contact Information</h2>
-					<dl>
+					<dl data-categorytitle="Telephone Number">
 						<?php if ($location_phone) { ?>
 						<dt>Clinic Phone Number</dt>
 						<dd><?php echo $location_phone_link; ?></dd>
