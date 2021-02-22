@@ -1275,7 +1275,7 @@ while ( have_posts() ) : the_post(); ?>
 					<div class="col-12">
 						<h2 class="module-title">Areas of Expertise Represented at <?php the_title(); ?></h2>
 						<div class="card-list-container">
-							<div class="card-list">
+							<div class="card-list card-list-expertise">
 							<?php 
 							while ($expertise_query->have_posts()) : $expertise_query->the_post();
 								$id = get_the_ID();

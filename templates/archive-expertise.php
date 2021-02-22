@@ -29,7 +29,7 @@ get_header();
                     <div class="col-xs-12">
                         <h2 class="module-title sr-only">List of Areas of Expertise</h2>
                         <div class="card-list-container">
-                            <div class="card-list">
+                            <div class="card-list card-list-expertise">
                                 <?php echo facetwp_display( 'template', 'expertise' ); ?>
                                 <?php //get_template_part( 'templates/physician-loop' ); ?>
                             </div>

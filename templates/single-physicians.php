@@ -916,7 +916,7 @@ while ( have_posts() ) : the_post();
 	                        <div class="col-12">
 	                            <h2 class="module-title"><?php echo $short_name_possessive; ?> Areas of Expertise</h2>
 	                            <div class="card-list-container">
-	                                <div class="card-list">
+	                                <div class="card-list card-list-expertise">
                                         <?php foreach( $expertises as $expertise ) {
                                             $id = $expertise;
                                             if ( get_post_status ( $expertise ) == 'publish' ) {
