@@ -430,12 +430,12 @@ while ( have_posts() ) : the_post();
                                     echo '<div class="ratings-comments-lg">'.  $comment_count .' comments</div>';
                                     echo '</a>';
                                 } else { ?>
-                                    <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#">Why not?</a></em></p> 
+                                    <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this provider">Why not?</a></em></p> 
                                 <?php
                                 }
                             }
                         } else { ?>
-                            <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#">Why not?</a></em></p>
+                            <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this provider">Why not?</a></em></p>
                     <?php
                         }
                         echo '</div>';
