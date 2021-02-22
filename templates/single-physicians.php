@@ -405,6 +405,7 @@ while ( have_posts() ) : the_post();
                     <?php } //endif ?>
                     </dl>
                     <?php
+                        echo '<div class="rating" aria-label="Patient Rating">';
                         if($npi) {
                             
                             $request = wp_nrc_cached_api( $npi );
@@ -415,7 +416,6 @@ while ( have_posts() ) : the_post();
 
                                 $rating_valid = $data->valid;
 
-                                echo '<div class="rating" aria-label="Patient Rating">';
 
                                 if ( $rating_valid ){
                                     $avg_rating = $data->profile->averageRatingStr;
@@ -433,12 +433,12 @@ while ( have_posts() ) : the_post();
                                     <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#">Why not?</a></em></p> 
                                 <?php
                                 }
-                                echo '</div>';
                             }
                         } else { ?>
                             <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#">Why not?</a></em></p>
                     <?php
                         }
+                        echo '</div>';
                     ?>
                     <?php if( (!$npi) || ( !empty($data) && !$rating_valid ) ) { ?>
                         <div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-hidden="true">
