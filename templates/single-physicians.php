@@ -334,7 +334,7 @@ while ( have_posts() ) : the_post();
                                     ?>
                                 <p><strong><?php echo get_the_title( $location ); ?></strong><br />
                                 <?php if ( $parent_location ) { ?>
-                                    (Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a>)<br />
+                                    (Part of <a href="<?php echo $parent_url; ?>" data-categorytitle="Parent Name"><?php echo $parent_title; ?></a>)<br />
                                 <?php } // endif ?>
                                 <?php echo $location_address_1; ?><br/>
                                 <?php echo $location_address_2 ? $location_address_2 . '<br/>' : ''; ?>
