@@ -415,24 +415,25 @@ while ( have_posts() ) : the_post();
 
                                 $rating_valid = $data->valid;
 
+                                echo '<div class="rating" aria-label="Patient Rating">';
+
                                 if ( $rating_valid ){
                                     $avg_rating = $data->profile->averageRatingStr;
 	                                $avg_rating_dec = $data->profile->averageRating;
 	                                $review_count = $data->profile->reviewcount;
 	                                $comment_count = $data->profile->bodycount;
-                                    echo '<div class="rating" aria-label="Patient Rating">';
-                                        echo '<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: '. $avg_rating_dec/5 * 100 .'%;"></div></div>';
-                                        echo '<div class="ratings-score">'. $avg_rating .'<span class="sr-only"> out of 5</span></div>';
-                                        echo '<div class="w-100"></div>';
-                                        echo '<a href="#ratings" aria-label="Jump to Patient Ratings & Reviews">';
-                                        echo '<div class="ratings-count-lg">'. $review_count .' Patient Satisfaction Ratings</div>';
-                                        echo '<div class="ratings-comments-lg">'.  $comment_count .' comments</div>';
-                                        echo '</a>';
-                                    echo '</div>';
+                                    echo '<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: '. $avg_rating_dec/5 * 100 .'%;"></div></div>';
+                                    echo '<div class="ratings-score">'. $avg_rating .'<span class="sr-only"> out of 5</span></div>';
+                                    echo '<div class="w-100"></div>';
+                                    echo '<a href="#ratings" aria-label="Jump to Patient Ratings & Reviews">';
+                                    echo '<div class="ratings-count-lg">'. $review_count .' Patient Satisfaction Ratings</div>';
+                                    echo '<div class="ratings-comments-lg">'.  $comment_count .' comments</div>';
+                                    echo '</a>';
                                 } else { ?>
                                     <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#">Why not?</a></em></p> 
                                 <?php
                                 }
+                                echo '</div>';
                             }
                         } else { ?>
                             <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#">Why not?</a></em></p>
