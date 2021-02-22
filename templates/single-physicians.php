@@ -425,7 +425,7 @@ while ( have_posts() ) : the_post();
                                     echo '<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: '. $avg_rating_dec/5 * 100 .'%;"></div></div>';
                                     echo '<div class="ratings-score">'. $avg_rating .'<span class="sr-only"> out of 5</span></div>';
                                     echo '<div class="w-100"></div>';
-                                    echo '<a href="#ratings" aria-label="Jump to Patient Ratings & Reviews">';
+                                    echo '<a href="#ratings" aria-label="Jump to Patient Ratings and Reviews">';
                                     echo '<div class="ratings-count-lg">'. $review_count .' Patient Satisfaction Ratings</div>';
                                     echo '<div class="ratings-comments-lg">'.  $comment_count .' comments</div>';
                                     echo '</a>';
