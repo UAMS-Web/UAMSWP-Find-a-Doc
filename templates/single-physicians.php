@@ -356,7 +356,7 @@ while ( have_posts() ) : the_post();
                                                 <dd><a href="tel:<?php echo format_phone_dash( $location_return_appointments_phone ); ?>" class="icon-phone"><?php echo format_phone_us( $location_return_appointments_phone ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
                                             <?php } ?>
                                         <?php } else { ?>
-                                            <dd><a href="tel:<?php echo format_phone_dash( $location_phone ); ?>" class="icon-phone"><?php echo format_phone_us( $location_phone ); ?></a></dd>
+                                            <dd><a href="tel:<?php echo format_phone_dash( $location_phone ); ?>" class="icon-phone"><?php echo format_phone_us( $location_phone ); ?></a><br/><span class="subtitle">New and Returning Patients</span></dd>
                                         <?php } ?>
                                     </dl>
                                 <?php } ?>
