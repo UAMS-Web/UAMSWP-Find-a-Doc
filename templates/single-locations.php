@@ -31,24 +31,24 @@ if ($parent_location) {
 // Phone values
 
 $location_phone = get_field('location_phone');
-$location_phone_link = '<a href="tel:' . format_phone_dash( $location_phone ) . '" class="icon-phone" data-categorytitle="Clinic Phone Number">' . format_phone_us( $location_phone ) . '</a>';
+$location_phone_link = '<a href="tel:' . format_phone_dash( $location_phone ) . '" class="icon-phone" data-typetitle="Clinic Phone Number">' . format_phone_us( $location_phone ) . '</a>';
 $location_clinic_phone_query = get_field('location_clinic_phone_query'); // separate number for (new) appointments?
 if ($location_clinic_phone_query) {
 	$location_new_appointments_phone = get_field('location_new_appointments_phone'); // phone number for (new) appointments
 	$location_appointment_phone_query = get_field('field_location_appointment_phone_query'); // separate number for existing appointments?
-	$location_new_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_new_appointments_phone ) . '" class="icon-phone" data-categorytitle="Appointment Phone Number for New' . ($location_appointment_phone_query ? '' : ' and Returning') . ' Appointments">' . format_phone_us( $location_new_appointments_phone ) . '</a>';
+	$location_new_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_new_appointments_phone ) . '" class="icon-phone" data-typetitle="Appointment Phone Number for New' . ($location_appointment_phone_query ? '' : ' and Returning') . ' Appointments">' . format_phone_us( $location_new_appointments_phone ) . '</a>';
 } else {
 	$location_new_appointments_phone = '';
 	$location_appointment_phone_query = '0';
 }
 if ($location_appointment_phone_query) {
 	$location_return_appointments_phone = get_field('location_return_appointments_phone'); // phone number for existing appointments
-	$location_return_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_return_appointments_phone ) . '" class="icon-phone" data-categorytitle="Appointment Phone Number for Returning Patients">' . format_phone_us( $location_return_appointments_phone ) . '</a>';
+	$location_return_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_return_appointments_phone ) . '" class="icon-phone" data-typetitle="Appointment Phone Number for Returning Patients">' . format_phone_us( $location_return_appointments_phone ) . '</a>';
 } else {
 	$location_return_appointments_phone = '';
 }
 $location_fax = get_field('location_fax');
-$location_fax_link = '<a href="tel:' . format_phone_dash( $location_fax ) . '" class="icon-phone" data-categorytitle="Clinic Fax Number">' . format_phone_us( $location_fax ) . '</a>';
+$location_fax_link = '<a href="tel:' . format_phone_dash( $location_fax ) . '" class="icon-phone" data-typetitle="Clinic Fax Number">' . format_phone_us( $location_fax ) . '</a>';
 $location_phone_numbers = get_field('field_location_phone_numbers');
 
 // Image values
@@ -365,7 +365,7 @@ while ( have_posts() ) : the_post(); ?>
 								$text = get_sub_field('location_appointments_additional_text');
 						?>
 						<dt><?php echo $title; ?></dt>
-						<dd><a href="tel:<?php echo format_phone_dash( $phone ); ?>" data-categorytitle="Additional Phone Number: <?php echo $title; ?>"><?php echo format_phone_us( $phone ); ?></a><?php echo ($text ? '<br/><span class="subtitle">'. $text .'</span>' : ''); ?></dd>
+						<dd><a href="tel:<?php echo format_phone_dash( $phone ); ?>" data-typetitle="Additional Phone Number: <?php echo $title; ?>"><?php echo format_phone_us( $phone ); ?></a><?php echo ($text ? '<br/><span class="subtitle">'. $text .'</span>' : ''); ?></dd>
 						<?php if ('' != $phone){
 							$phone_schema .= ', "'. format_phone_dash( $phone ) .'"
 							'; 
