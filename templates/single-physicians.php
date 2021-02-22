@@ -333,6 +333,7 @@ while ( have_posts() ) : the_post();
                                             $location_appointment_phone_query = get_field('field_location_appointment_phone_query', $location);
                                             $location_new_appointments_phone = get_field('location_new_appointments_phone', $location);
                                             $location_clinic_phone_query = get_field('location_clinic_phone_query', $location);
+                                            $location_return_appointments_phone = get_field('location_return_appointments_phone', $location);
 
                                     ?>
                                 <p><strong><?php echo get_the_title( $location ); ?></strong><br />
@@ -350,8 +351,8 @@ while ( have_posts() ) : the_post();
                                         <dt>Appointment Phone Number<?php echo $location_appointment_phone_query ? 's' : ''; ?></dt>
                                         <?php if ($location_new_appointments_phone && $location_clinic_phone_query) { ?>
                                             <dd><a href="tel:<?php echo format_phone_dash( $location_new_appointments_phone ); ?>" class="icon-phone"><?php echo format_phone_us( $location_new_appointments_phone ); ?></a><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
-                                            <?php if (get_field('location_return_appointments_phone', $location) && $location_appointment_phone_query) { ?>
-                                                <dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone', $location) ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
+                                            <?php if ($location_return_appointments_phone && $location_appointment_phone_query) { ?>
+                                                <dd><a href="tel:<?php echo format_phone_dash( $location_return_appointments_phone ); ?>" class="icon-phone"><?php echo format_phone_us( $location_return_appointments_phone ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
                                             <?php } ?>
                                         <?php } else { ?>
                                             <dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone', $location) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone', $location) ); ?></a></dd>
