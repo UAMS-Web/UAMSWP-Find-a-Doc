@@ -271,8 +271,8 @@ while ( have_posts() ) : the_post(); ?>
 	$location_city = get_field('location_city', $post_id);
 	$location_state = get_field('location_state', $post_id);
 	$location_zip = get_field('location_zip', $post_id);
-	$location_web_name = get_field('location_web_name', $post_id);
-	$location_url = get_field('location_url', $post_id);
+	$location_web_name = get_field('location_web_name');
+	$location_url = get_field('location_url');
 ?>
 <div class="content-sidebar-wrap">
 <main class="location-item" id="genesis-content">
@@ -321,7 +321,7 @@ while ( have_posts() ) : the_post(); ?>
 					<?php echo $location_city; ?>, <?php echo $location_state; ?> <?php echo $location_zip; ?></p>
 						<p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo get_the_title($post_id); ?>">Get Directions</a></p>
 						<?php if( $location_web_name && $location_url ){ ?>
-							<p><a class="btn btn-secondary" href="<?php echo $location_url['url']; ?>"><?php echo $location_web_name; ?> <span class="far fa-external-link-alt"></span></span></a></p>
+							<p><a class="btn btn-secondary" href="<?php echo $location_url['url']; ?>" target="_blank"><?php echo $location_web_name; ?> <span class="far fa-external-link-alt"></span></span></a></p>
 					<?php } 
 						// Schema data
 						$location_schema = '"address": {
