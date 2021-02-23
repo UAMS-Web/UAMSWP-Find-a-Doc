@@ -504,7 +504,8 @@ while ( have_posts() ) : the_post();
                 $portal = get_term($physician_portal, "portal");
                 $portal_slug = $portal->slug;
                 $portal_name = $portal->name;
-                $portal_name_attr = str_replace('&nbsp;', ' ', $portal_name);
+                $portal_name_attr = str_replace('"', '\'', $portal_name);
+                $portal_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($portal_name, null, 'utf-8')));
                 $portal_content = get_field('portal_content', $portal);
                 $portal_link = get_field('portal_url', $portal);
                 if ($portal_link) {
@@ -522,7 +523,8 @@ while ( have_posts() ) : the_post();
                     $appointment_phone_name = 'the main Central Arkansas Veterans Healthcare System appointment line';
                     $appointment_phone = '5012573999';
                 }
-                $appointment_phone_name_attr = str_replace('&nbsp;', ' ', $appointment_phone_name);
+                $appointment_phone_name_attr = str_replace('"', '\'', $appointment_phone_name);
+                $appointment_phone_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($appointment_phone_name, null, 'utf-8')));
             }
             
             $appointment_phone_tel = preg_replace('/^(\+?\d)?(\d{3})(\d{3})(\d{4})$/', '$2-$3-$4', $appointment_phone);
