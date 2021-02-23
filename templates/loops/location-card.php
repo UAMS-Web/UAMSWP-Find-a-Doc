@@ -13,6 +13,7 @@
 
     $location_title = get_the_title($id);
     $location_title_attr = str_replace('"', '\'', $location_title);
+    $location_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($location_title_attr, null, 'utf-8')));
 
     // Parent Location 
     $location_has_parent = get_field('location_parent', $id);
