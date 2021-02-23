@@ -268,7 +268,11 @@
                 "class": "",
                 "id": ""
             },
-            "acfe_permissions": "",
+            "acfe_permissions": [
+                "super_admin",
+                "administrator",
+                "editor"
+            ],
             "return_format": "id",
             "preview_size": "medium",
             "library": "all",
@@ -296,7 +300,11 @@
                 "class": "",
                 "id": ""
             },
-            "acfe_permissions": "",
+            "acfe_permissions": [
+                "super_admin",
+                "administrator",
+                "editor"
+            ],
             "return_format": "id",
             "preview_size": "medium",
             "library": "all",
@@ -679,7 +687,7 @@
             "name": "physician_npi",
             "type": "number",
             "label": "National Provider Identifier (NPI)",
-            "instructions": "",
+            "instructions": "This value can be found in Epic under \"9300-MPI ID TYPE.\"<br />It can also be found at <a href='http://echo.uams.edu/echonet/payerportal/DrListing.asp' title='Echonet' target='_blank'>http://echo.uams.edu/echonet/payerportal/DrListing.asp</a> (when on campus network or on VPN).",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -698,7 +706,7 @@
             "name": "physician_pid",
             "type": "number",
             "label": "Provider ID",
-            "instructions": "",
+            "instructions": "This value can be found in Epic under \"9300-MPI ID TYPE.\"",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -2405,7 +2413,7 @@
                 },
                 {
                     "key": "field_physician_select_publications_pubmed",
-                    "label": "Pubmed Information",
+                    "label": "Pubmed Information (HTML)",
                     "name": "pubmed_information",
                     "type": "textarea",
                     "instructions": "",
@@ -2419,7 +2427,20 @@
                     "default_value": "",
                     "placeholder": "",
                     "maxlength": "",
-                    "rows": "",
+                    "rows": 4,
+                    "acfe_textarea_code": 1,
+                    "acfe_settings": {
+                        "6026a0f4f4295": {
+                            "acfe_settings_location": "",
+                            "acfe_settings_settings": {
+                                "6026a0f5f4296": {
+                                    "acfe_settings_setting_type": "custom",
+                                    "acfe_settings_setting_name": "readonly",
+                                    "acfe_settings_setting_operator": "true"
+                                }
+                            }
+                        }
+                    },
                     "new_lines": ""
                 }
             ]
@@ -2431,7 +2452,15 @@
             "label": "<i class=\"dashicons-location dashicons\"><\/i> Google My Business",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_resident",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",

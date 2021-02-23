@@ -271,8 +271,8 @@ while ( have_posts() ) : the_post(); ?>
 	$location_city = get_field('location_city', $post_id);
 	$location_state = get_field('location_state', $post_id);
 	$location_zip = get_field('location_zip', $post_id);
-	$location_web_name = get_field('location_web_name', $post_id);
-	$location_url = get_field('location_url', $post_id);
+	$location_web_name = get_field('location_web_name');
+	$location_url = get_field('location_url');
 ?>
 <div class="content-sidebar-wrap">
 <main class="location-item" id="genesis-content">
