@@ -299,7 +299,7 @@ function uamswp_list_child_expertise() {
                         <div class="col-12">
                             <h2 class="module-title" id="sub-expertise-title">Areas Within <?php echo get_the_title(); ?> <?php echo $hide_menu; ?></h2>
                             <div class="card-list-container">
-                                <div class="card-list">
+                                <div class="card-list card-list-expertise">
                             <?php
                                 while ( $pages->have_posts() ) : $pages->the_post();
                                     $id = get_the_ID(); 
