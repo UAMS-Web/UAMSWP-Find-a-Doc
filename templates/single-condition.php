@@ -224,7 +224,7 @@
         <?php } ?>
 		<?php
 		if (!empty($clinical_trials)): ?>
-		<section class="uams-module cta-bar cta-bar-1 bg-auto">
+		<section class="uams-module cta-bar cta-bar-1 bg-auto" id="clinical-trials">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
@@ -251,7 +251,7 @@
 			if ( $treatments_cpt && !empty($treatments_query_cpt->posts) ) {
 				
 		?>
-		<section class="uams-module conditions-treatments bg-auto">
+		<section class="uams-module conditions-treatments bg-auto" id="treatments">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">

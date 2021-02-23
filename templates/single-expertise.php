@@ -299,7 +299,7 @@ function uamswp_list_child_expertise() {
                         <div class="col-12">
                             <h2 class="module-title" id="sub-expertise-title">Areas Within <?php echo get_the_title(); ?> <?php echo $hide_menu; ?></h2>
                             <div class="card-list-container">
-                                <div class="card-list">
+                                <div class="card-list card-list-expertise">
                             <?php
                                 while ( $pages->have_posts() ) : $pages->the_post();
                                     $id = get_the_ID(); 
@@ -319,15 +319,17 @@ function uamswp_list_child_expertise() {
 function uamswp_expertise_appointment() {
     if ( get_field('expertise_locations') ) {
         $appointment_location_url = '#locations';
+        $appointment_location_label = 'Go to the list of relevant locations';
     } else {
         $appointment_location_url = '/location/';
+        $appointment_location_label = 'View a list of UAMS Health locations';
     } ?>
-    <section class="uams-module cta-bar cta-bar-1 bg-auto">
+    <section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
                     <h2>Make an Appointment</h2>
-                    <p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>">contacting a clinic directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break">(501) 686-8000</a>.</p>
+                    <p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_label; ?>" data-itemtitle="Contact a clinic directly">contacting a clinic directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
                 </div>
             </div>
         </div>
