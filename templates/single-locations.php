@@ -31,24 +31,24 @@ if ($parent_location) {
 // Phone values
 
 $location_phone = get_field('location_phone');
-$location_phone_link = '<a href="tel:' . format_phone_dash( $location_phone ) . '" class="icon-phone">' . format_phone_us( $location_phone ) . '</a>';
+$location_phone_link = '<a href="tel:' . format_phone_dash( $location_phone ) . '" class="icon-phone" data-typetitle="Clinic Phone Number">' . format_phone_us( $location_phone ) . '</a>';
 $location_clinic_phone_query = get_field('location_clinic_phone_query'); // separate number for (new) appointments?
 if ($location_clinic_phone_query) {
 	$location_new_appointments_phone = get_field('location_new_appointments_phone'); // phone number for (new) appointments
-	$location_new_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_new_appointments_phone ) . '" class="icon-phone">' . format_phone_us( $location_new_appointments_phone ) . '</a>';
 	$location_appointment_phone_query = get_field('field_location_appointment_phone_query'); // separate number for existing appointments?
+	$location_new_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_new_appointments_phone ) . '" class="icon-phone" data-typetitle="Appointment Phone Number for New' . ($location_appointment_phone_query ? '' : ' and Returning') . ' Patients">' . format_phone_us( $location_new_appointments_phone ) . '</a>';
 } else {
 	$location_new_appointments_phone = '';
 	$location_appointment_phone_query = '0';
 }
 if ($location_appointment_phone_query) {
 	$location_return_appointments_phone = get_field('location_return_appointments_phone'); // phone number for existing appointments
-	$location_return_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_return_appointments_phone ) . '" class="icon-phone">' . format_phone_us( $location_return_appointments_phone ) . '</a>';
+	$location_return_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_return_appointments_phone ) . '" class="icon-phone" data-typetitle="Appointment Phone Number for Returning Patients">' . format_phone_us( $location_return_appointments_phone ) . '</a>';
 } else {
 	$location_return_appointments_phone = '';
 }
 $location_fax = get_field('location_fax');
-$location_fax_link = '<a href="tel:' . format_phone_dash( $location_fax ) . '" class="icon-phone">' . format_phone_us( $location_fax ) . '</a>';
+$location_fax_link = '<a href="tel:' . format_phone_dash( $location_fax ) . '" class="icon-phone" data-typetitle="Clinic Fax Number">' . format_phone_us( $location_fax ) . '</a>';
 $location_phone_numbers = get_field('field_location_phone_numbers');
 
 // Image values
@@ -271,8 +271,8 @@ while ( have_posts() ) : the_post(); ?>
 	$location_city = get_field('location_city', $post_id);
 	$location_state = get_field('location_state', $post_id);
 	$location_zip = get_field('location_zip', $post_id);
-	$location_web_name = get_field('location_web_name', $post_id);
-	$location_url = get_field('location_url', $post_id);
+	$location_web_name = get_field('location_web_name');
+	$location_url = get_field('location_url');
 ?>
 <div class="content-sidebar-wrap">
 <main class="location-item" id="genesis-content">
@@ -319,9 +319,9 @@ while ( have_posts() ) : the_post(); ?>
 					<p><?php echo $location_address_1; ?><br/>
 					<?php echo ( $location_address_2 ? $location_address_2 . '<br/>' : ( $location_address_2_deprecated ? $location_address_2_deprecated . '<br/>' : '')); ?>
 					<?php echo $location_city; ?>, <?php echo $location_state; ?> <?php echo $location_zip; ?></p>
-						<p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo get_the_title($post_id); ?>">Get Directions</a></p>
+						<p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo get_the_title($post_id); ?>" data-typetitle="Get directions to the clinic">Get Directions</a></p>
 						<?php if( $location_web_name && $location_url ){ ?>
-							<p><a class="btn btn-secondary" href="<?php echo $location_url['url']; ?>"><?php echo $location_web_name; ?> <span class="far fa-external-link-alt"></span></span></a></p>
+							<p><a class="btn btn-secondary" href="<?php echo $location_url['url']; ?>" target="_blank"><?php echo $location_web_name; ?> <span class="far fa-external-link-alt"></span></span></a></p>
 					<?php } 
 						// Schema data
 						$location_schema = '"address": {
@@ -335,7 +335,7 @@ while ( have_posts() ) : the_post(); ?>
 						$phone_schema = '';
 					?>
 					<h2>Contact Information</h2>
-					<dl>
+					<dl data-categorytitle="Telephone Number">
 						<?php if ($location_phone) { ?>
 						<dt>Clinic Phone Number</dt>
 						<dd><?php echo $location_phone_link; ?></dd>
@@ -365,7 +365,7 @@ while ( have_posts() ) : the_post(); ?>
 								$text = get_sub_field('location_appointments_additional_text');
 						?>
 						<dt><?php echo $title; ?></dt>
-						<dd><a href="tel:<?php echo format_phone_dash( $phone ); ?>"><?php echo format_phone_us( $phone ); ?></a><?php echo ($text ? '<br/><span class="subtitle">'. $text .'</span>' : ''); ?></dd>
+						<dd><a href="tel:<?php echo format_phone_dash( $phone ); ?>" data-typetitle="Additional Phone Number: <?php echo $title; ?>"><?php echo format_phone_us( $phone ); ?></a><?php echo ($text ? '<br/><span class="subtitle">'. $text .'</span>' : ''); ?></dd>
 						<?php if ('' != $phone){
 							$phone_schema .= ', "'. format_phone_dash( $phone ) .'"
 							'; 
@@ -739,7 +739,7 @@ while ( have_posts() ) : the_post(); ?>
 		&& 
 		($location_alert_title || $location_alert_text) // If location title or description has value
 	 ) { ?>
-	<section class="uams-module location-alert location-<?php echo $location_alert_color ? $location_alert_color : 'alert-warning'; ?>">
+	<section class="uams-module location-alert location-<?php echo $location_alert_color ? $location_alert_color : 'alert-warning'; ?>" id="location-alert">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-12">
@@ -771,7 +771,7 @@ while ( have_posts() ) : the_post(); ?>
 	
 		if ( $location_about || $location_affiliation || $prescription ) { 
 		?>
-		<section class="uams-module bg-auto">
+		<section class="uams-module bg-auto" id="description">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
@@ -813,7 +813,7 @@ while ( have_posts() ) : the_post(); ?>
 		$parking_map = get_field('location_parking_map', $post_id);
 	
 		if ( $location_parking || $location_direction || $parking_map ) : ?>
-		<section class="uams-module bg-auto">
+		<section class="uams-module bg-auto" id="parking-info">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12<?php echo $parking_map ? ' col-md-6' : ''  ?>">
@@ -826,7 +826,7 @@ while ( have_posts() ) : the_post(); ?>
 						<?php } // endif ?>
 							<?php echo $location_parking; ?>
 							<?php if ( $parking_map ) { ?>
-								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>
+								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area" data-typetitle="Get directions to the parking area">Get Directions</a>
 							<?php } // endif ?>
 							<?php echo ( $location_parking && $location_direction ? '<h3>Directions From the Parking Area</h3>' : ''); // Display the directions heading here if there is a value for parking. ?>
 							<?php echo $location_direction; ?>
@@ -865,8 +865,8 @@ while ( have_posts() ) : the_post(); ?>
 								/* [lat, lon, fillColor, strokeColor, labelClass, iconText, popupText] */
 								var markers = [
 									// example [ 34.74376029995541, -92.31828863640054, "00F","000","white","A","I am a blue icon." ],
-									[ <?php echo $map['lat']; ?>, <?php echo $map['lng'] ?>, "9d2235","222", "transparentwhite", '1', 'Clinic<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php the_title(); ?>">Get Directions</a>' ],
-									[ <?php echo $parking_map['lat']; ?>, <?php echo $parking_map['lng'] ?>, "9d2235","222", "transparentwhite", '2', 'Parking<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>' ]
+									[ <?php echo $map['lat']; ?>, <?php echo $map['lng'] ?>, "9d2235","222", "transparentwhite", '1', 'Clinic<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php the_title(); ?>" data-typetitle="Get directions to the clinic">Get Directions</a>' ],
+									[ <?php echo $parking_map['lat']; ?>, <?php echo $parking_map['lng'] ?>, "9d2235","222", "transparentwhite", '2', 'Parking<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area" data-typetitle="Get directions to the parking area">Get Directions</a>' ]
 								]
 								//Loop through the markers array
 								var markerArray = [];
@@ -891,9 +891,9 @@ while ( have_posts() ) : the_post(); ?>
 								}
 							</script>
 							<div class="map-legend bg-info" aria-label="Legend for map">
-								<ol>
-									<li>Clinic (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php the_title(); ?>">Get Directions</a>)</li>
-									<li>Parking (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>)</li>
+								<ol data-categorytitle="Directions">
+									<li>Clinic (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php the_title(); ?>" data-typetitle="Get directions to the clinic">Get Directions</a>)</li>
+									<li>Parking (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area" data-typetitle="Get directions to the parking area">Get Directions</a>)</li>
 								</ol>
 							</div>
 						</div>
@@ -907,7 +907,7 @@ while ( have_posts() ) : the_post(); ?>
 		$location_appointment_bring = get_field('location_appointment_bring');
 
 		if ( $location_appointment || $location_appointment_bring): ?>
-		<section class="uams-module bg-auto">
+		<section class="uams-module bg-auto" id="appointment-info">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
@@ -1128,7 +1128,7 @@ while ( have_posts() ) : the_post(); ?>
 
 			if ($portal && $portal_slug !== "_none") {
 	?>
-		<section class="uams-module cta-bar cta-bar-weighted bg-blue" aria-label="Patient Portal">
+		<section class="uams-module cta-bar cta-bar-weighted bg-blue" aria-label="Patient Portal" id="portal-info">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
@@ -1275,7 +1275,7 @@ while ( have_posts() ) : the_post(); ?>
 					<div class="col-12">
 						<h2 class="module-title">Areas of Expertise Represented at <?php the_title(); ?></h2>
 						<div class="card-list-container">
-							<div class="card-list">
+							<div class="card-list card-list-expertise">
 							<?php 
 							while ($expertise_query->have_posts()) : $expertise_query->the_post();
 								$id = get_the_ID();
@@ -1333,7 +1333,7 @@ while ( have_posts() ) : the_post(); ?>
     }
 	?>
 	<!-- Latest News -->
-	<!-- <section class="uams-module news-list bg-auto">
+	<!-- <section class="uams-module news-list bg-auto" id="news">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-12">

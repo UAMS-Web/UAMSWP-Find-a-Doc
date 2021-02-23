@@ -701,7 +701,7 @@ function display_provider_image() {
 
                         // Place page URLs: Virtual care link (url_facility_telemedicine_page)
                             echo '<td data-gmb-column="Place page URLs: Virtual care link (url_facility_telemedicine_page)" class="no-break">';
-                            echo $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=virtual-care-link&amp;utm_specs=' . $store_code : '';
+                            echo $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=virtual-care-link&amp;utm_specs=' . $store_code . '#telemedicine-info' : '';
                             echo '</td>';
 
                         // Planning: LGBTQ friendly (welcomes_lgbtq)

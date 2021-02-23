@@ -128,7 +128,7 @@ class pubmed_field_on_change {
 
 			// put all the values into an array and return it as json
 			$array = array(
-			  'full' => $full,
+			  'full' => htmlentities($full),
 			  'title' => $title,
 			  'authors' => $authors,
 			  'url' => $url,

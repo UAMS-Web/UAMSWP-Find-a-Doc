@@ -86,6 +86,9 @@ function display_provider_image() {
                     $pid = ( $pid == 0 ) ? '' : $pid;
                     $sort_name = get_the_title($post_id);
                     $profile_url = get_the_permalink($post_id);
+
+                    // Get slug
+                    $profile_slug = get_post_field( 'post_name', $post_id );
                     
                     $resident = get_field('physician_resident',$post_id);
                     
@@ -102,7 +105,7 @@ function display_provider_image() {
                             echo '<td class="no-break">' . $sort_name . '</td>';
 
                         // Provider Profile URL
-                            echo '<td class="no-break">' . $profile_url . '</td>';
+                            echo '<td class="no-break">' . $profile_url . '?utm_source=mychart&utm_medium=link&utm_campaign=clinical_service&utm_term=provider&utm_content=' . $profile_slug . '</td>';
 
                         echo '</tr>';
 

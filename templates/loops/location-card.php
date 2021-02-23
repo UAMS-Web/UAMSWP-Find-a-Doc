@@ -13,6 +13,7 @@
 
     $location_title = get_the_title($id);
     $location_title_attr = str_replace('"', '\'', $location_title);
+    $location_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($location_title_attr, null, 'utf-8')));
 
     // Parent Location 
     $location_has_parent = get_field('location_parent', $id);
@@ -31,6 +32,7 @@
     if ($parent_location) {
         $parent_id = $parent_location->ID;
         $parent_title = $parent_location->post_title;
+        $parent_title_attr = str_replace('"', '\'', $parent_title);
         $parent_url = get_permalink( $parent_id );
         $featured_image = get_the_post_thumbnail($parent_id, 'aspect-16-9-small', ['class' => 'card-img-top']);
         $address_id = $parent_id;
@@ -87,14 +89,14 @@
     } else { ?>
     <picture>
         <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
-        <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" class="card-img-top" />
+        <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" class="card-img-top" data-categorytitle="Photo" data-itemtitle="<?php echo $location_title_attr; ?>" />
     </picture>
     <?php } ?>
     <div class="card-body">
         <h3 class="card-title h5">
-            <span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self"><?php echo $location_title; ?></a></span>
+            <span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self" data-categorytitle="Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $location_title; ?></a></span>
             <?php if ( $parent_location ) { ?>
-                <span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
+                <span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
             <?php } // endif ?>
             <?php  if ( isset($l) && 1 == $l ) { ?>
                 <span class="subtitle"><span class="sr-only">, </span>Primary Location</span>
@@ -202,7 +204,7 @@
                         This location's hours will be temporarily modified beginning on <?php echo $location_modified_hours_start; ?>.
                     <?php } // endif
                 } // endif ?>
-                <p><a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $alert_label; ?>" class="alert-link">Learn more</a></p>
+                <p><a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $alert_label; ?>" class="alert-link" data-categorytitle="Alert" data-itemtitle="<?php echo $location_title_attr; ?>">Learn more</a></p>
             </div>
         <?php } // endif ?>
         <?php $map = get_field('location_map', $address_id); ?>
@@ -227,21 +229,21 @@
             <dl>
                 <dt>Appointment Phone Number<?php echo $location_appointment_phone_query ? 's' : ''; ?></dt>
                 <?php if ($location_new_appointments_phone && $location_clinic_phone_query) { ?>
-                    <dd><a href="tel:<?php echo $location_new_appointments_phone_format_dash; ?>" class="icon-phone"><?php echo $location_new_appointments_phone_format_us; ?></a><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
+                    <dd><a href="tel:<?php echo $location_new_appointments_phone_format_dash; ?>" class="icon-phone" data-categorytitle="Telephone Number" data-itemtitle="<?php echo $location_title_attr; ?>" data-typetitle="Appointment Phone Number for New Patients"><?php echo $location_new_appointments_phone_format_us; ?></a><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
                     <?php if ($location_return_appointments_phone && $location_appointment_phone_query) { ?>
-                        <dd><a href="tel:<?php echo $location_return_appointments_phone_format_dash; ?>" class="icon-phone"><?php echo $location_return_appointments_phone_format_us; ?></a><br/><span class="subtitle">Returning Patients</span></dd>
+                        <dd><a href="tel:<?php echo $location_return_appointments_phone_format_dash; ?>" class="icon-phone" data-categorytitle="Telephone Number" data-itemtitle="<?php echo $location_title_attr; ?>" data-typetitle="Appointment Phone Number for Returning Patients"><?php echo $location_return_appointments_phone_format_us; ?></a><br/><span class="subtitle">Returning Patients</span></dd>
                     <?php } ?>
                 <?php } else { ?>
-                    <dd><a href="tel:<?php echo $location_phone_format_dash; ?>" class="icon-phone"><?php echo $location_phone_format_us; ?></a><br/><span class="subtitle">New and Returning Patients</span></dd>
+                    <dd><a href="tel:<?php echo $location_phone_format_dash; ?>" class="icon-phone" data-categorytitle="Telephone Number" data-itemtitle="<?php echo $location_title_attr; ?>" data-typetitle="Appointment Phone Number for New and Returning Patients"><?php echo $location_phone_format_us; ?></a><br/><span class="subtitle">New and Returning Patients</span></dd>
                 <?php } ?>
             </dl>
         <?php } // endif ?>
     </div><!-- .card-body -->
     <div class="btn-container">
         <div class="inner-container">
-            <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary" aria-label="Go to location page for <?php echo $location_title_attr; ?>">View Location</a>
+            <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary" aria-label="Go to location page for <?php echo $location_title_attr; ?>" data-categorytitle="View Location" data-itemtitle="<?php echo $location_title_attr; ?>">View Location</a>
             <?php if ($map) { ?>
-            <a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get Directions to <?php echo $location_title; ?>">Get Directions</a>
+            <a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get Directions to <?php echo $location_title; ?>" data-categorytitle="Get Directions" data-itemtitle="<?php echo $location_title_attr; ?>">Get Directions</a>
             <?php } ?>
         </div>
     </div>

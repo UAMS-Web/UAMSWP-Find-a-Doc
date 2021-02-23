@@ -23,13 +23,13 @@ get_header();
             </header>
             <?php echo ($expertise_text ? '<div class="entry-content clearfix" itemprop="text">' . $expertise_text . '</div>' : '' ); ?>
         </section>
-        <section class="uams-module">
+        <section class="uams-module" id="expertise">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
                         <h2 class="module-title sr-only">List of Areas of Expertise</h2>
                         <div class="card-list-container">
-                            <div class="card-list">
+                            <div class="card-list card-list-expertise">
                                 <?php echo facetwp_display( 'template', 'expertise' ); ?>
                                 <?php //get_template_part( 'templates/physician-loop' ); ?>
                             </div>
