@@ -268,7 +268,11 @@
                 "class": "",
                 "id": ""
             },
-            "acfe_permissions": "",
+            "acfe_permissions": [
+                "super_admin",
+                "administrator",
+                "editor"
+            ],
             "return_format": "id",
             "preview_size": "medium",
             "library": "all",
@@ -296,7 +300,11 @@
                 "class": "",
                 "id": ""
             },
-            "acfe_permissions": "",
+            "acfe_permissions": [
+                "super_admin",
+                "administrator",
+                "editor"
+            ],
             "return_format": "id",
             "preview_size": "medium",
             "library": "all",

@@ -1269,6 +1269,11 @@
                 "id": ""
             },
             "placement": "top",
+            "acfe_permissions": [
+                "super_admin",
+                "administrator",
+                "editor"
+            ],
             "endpoint": 0
         },
         "field_location_image_override_parent": {
