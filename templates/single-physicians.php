@@ -100,6 +100,7 @@ if (empty($excerpt)){
         $excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 155, '...');
     }
 }
+$schema_description = $excerpt;  // Used for Schema Data. Should ALWAYS have a value
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
@@ -862,19 +863,25 @@ while ( have_posts() ) : the_post();
                 'post__in' => $conditions_cpt
             ));
             $conditions_cpt_query = new WP_Query( $args );
-            // $condition_schema = '';
+            $condition_schema = '';
             // we will use the first term to load ACF data from
             if( $conditions_cpt && $conditions_cpt_query->posts ):
                 include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
-                $condition_schema .= ',"medicalSpecialty": [';
+                // $condition_schema .= ',"medicalSpecialty": [';
+                $i = 0;
                 foreach( $conditions_cpt_query->posts as $condition ):
+                    if ($i > 0) {
+                        $condition_schema .= ',
+            ';
+                    }
                     $condition_schema .= '{
-                    "@type": "MedicalSpecialty",
-                    "name": "'. $condition->post_title .'",
-                    "url":"'. get_the_permalink( $condition->ID ) .'"
-                    },';
+        "@type": "MedicalSpecialty",
+        "name": "'. $condition->post_title .'",
+        "url":"'. get_the_permalink( $condition->ID ) .'"
+        }';
+                    $i++;
                 endforeach;
-                $condition_schema .= '"" ]';
+                // $condition_schema .= '"" ]';
             endif; 
 
             // Treatments CPT
@@ -887,18 +894,25 @@ while ( have_posts() ) : the_post();
                 'post__in' => $treatments_cpt
             ));
             $treatments_cpt_query = new WP_Query( $args );
+            $treatment_schema = '';
             if( $treatments_cpt && $treatments_cpt_query->posts ):
                 include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
-                $treatment_schema .= ',"medicalSpecialty": [';
+                // $treatment_schema .= ',"medicalSpecialty": [';
+                $i = 0;
                 foreach( $treatments_cpt_query->posts as $treatment ):
+                    if ($i > 0 || $condition_schema) {
+                        $treatment_schema .= ',
+            ';
+                    }
                     $treatment_schema .= '{
-                    "@type": "MedicalSpecialty",
-                    "name": "'. $treatment->post_title .'",
-                    "url":"'. get_the_permalink( $treatment->ID ) .'"
-                    },';
+        "@type": "MedicalSpecialty",
+        "name": "'. $treatment->post_title .'",
+        "url":"'. get_the_permalink( $treatment->ID ) .'"
+        }';
+                    $i++;
                 endforeach;
-                $treatment_schema .= '"" ]';
-            endif; 
+                // $treatment_schema .= ']';
+            endif;  
         
         $expertise_valid = false;
         if( $expertises ):
@@ -943,7 +957,8 @@ while ( have_posts() ) : the_post();
                         <div class="card-list-container location-card-list-container">
                             <div class="card-list">
                             <?php $l = 1;
-                                $location_schema = ',"address": [';
+                                $location_schema = ',
+    "address": [';
                             ?>
                             <?php foreach( $locations as $location ): 
                                 if ( get_post_status ( $location ) == 'publish' ) { 
@@ -955,15 +970,14 @@ while ( have_posts() ) : the_post();
                                             $location_schema .= ',';
                                         }
                                         $location_schema .= '
-                                        {
-                                        "@type": "PostalAddress",
-                                        "streetAddress": "'. $location_address_1 . ' '. $location_address_2_schema .'",
-                                        "addressLocality": "'. $location_city .'",
-                                        "addressRegion": "'. $location_state .'",
-                                        "postalCode": "'. $location_zip .'",
-                                        "telephone": "'. format_phone_dash( get_field('location_phone', $location) ) .'"
-                                        }
-                                        ';
+        {   
+            "@type": "PostalAddress",
+            "streetAddress": "'. $location_address_1 . ' '. $location_address_2_schema .'",
+            "addressLocality": "'. $location_city .'",
+            "addressRegion": "'. $location_state .'",
+            "postalCode": "'. $location_zip .'",
+            "telephone": "'. format_phone_dash( get_field('location_phone', $location) ) .'"
+        }';
                                     ?>
 
                                     <?php $l++; ?>
@@ -1160,22 +1174,28 @@ while ( have_posts() ) : the_post();
 {
   "@context": "http://www.schema.org",
   "@type": "Physician",
-  "name": "<?php echo $full_name_attr; ?>",
+  "name": "<?php echo $full_name; ?>",
   "url": "<?php echo get_permalink(); ?>",
   "logo": "<?php echo get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png'; ?>",
-  "image": "<?php echo $docphoto; ?>"
-  <?php if ($excerpt) { ?>
-  ,"description": "<?php echo $excerpt; ?>"
-  <?php } ?>
-  <?php echo $condition_schema; ?>
-  <?php echo $treatment_schema; ?>
-  <?php echo $location_schema; ?>
+  "image": "<?php echo $docphoto; ?>",
+  "description": "<?php echo $schema_description; ?>"
+  <?php }
+        if ($condition_schema || $treatment_schema) {
+            echo ',';
+            echo '"medicalSpecialty": [';
+            echo $condition_schema;
+            echo $treatment_schema;
+            echo ']';
+        }
+    echo $location_schema; ?>
   <?php if ( $rating_valid ){ ?>
-  ,"aggregateRating": {
-  		"@type": "AggregateRating",
-        "ratingValue": "<?php echo $avg_rating; ?>",
-        "ratingCount": "<?php echo $review_count; ?>",
-        "reviewCount": "<?php echo $comment_count; ?>"
+,
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "<?php echo $avg_rating; ?>",
+    "ratingCount": "<?php echo $review_count; ?>"
+    <?php echo ($comment_count  && '0' != $comment_count) ? ',
+"reviewCount": "'. $comment_count . '"' : ''; ?>
    }
   <?php } ?>
 }
