@@ -1179,7 +1179,7 @@ while ( have_posts() ) : the_post();
   "logo": "<?php echo get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png'; ?>",
   "image": "<?php echo $docphoto; ?>",
   "description": "<?php echo $schema_description; ?>"
-  <?php }
+  <?php 
         if ($condition_schema || $treatment_schema) {
             echo ',';
             echo '"medicalSpecialty": [';
