@@ -2405,7 +2405,7 @@
                 },
                 {
                     "key": "field_physician_select_publications_pubmed",
-                    "label": "Pubmed Information",
+                    "label": "Pubmed Information (HTML)",
                     "name": "pubmed_information",
                     "type": "textarea",
                     "instructions": "",
@@ -2419,7 +2419,20 @@
                     "default_value": "",
                     "placeholder": "",
                     "maxlength": "",
-                    "rows": "",
+                    "rows": 4,
+                    "acfe_textarea_code": 1,
+                    "acfe_settings": {
+                        "6026a0f4f4295": {
+                            "acfe_settings_location": "",
+                            "acfe_settings_settings": {
+                                "6026a0f5f4296": {
+                                    "acfe_settings_setting_type": "custom",
+                                    "acfe_settings_setting_name": "readonly",
+                                    "acfe_settings_setting_operator": "true"
+                                }
+                            }
+                        }
+                    },
                     "new_lines": ""
                 }
             ]
