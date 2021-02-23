@@ -853,7 +853,7 @@ while ( have_posts() ) : the_post();
                             <?php if( $research_profiles_link ): ?>
                                 <h3>UAMS Research Profile</h3>
                                 <p>Each UAMS faculty member has a research profile page that includes biographical and contact information, a list of their most recent grant activity and a list of their PubMed publications.</p>
-                                <p><a class="btn btn-outline-primary" href="<?php echo $research_profiles_link; ?>">View <?php echo $short_name_possessive; ?> research profile</a></p>
+                                <p><a class="btn btn-outline-primary" href="<?php echo $research_profiles_link; ?>" data-categorytitle="View Research Profile">View <?php echo $short_name_possessive; ?> research profile</a></p>
                             <?php endif; ?>
                         </div>
                     </div>
