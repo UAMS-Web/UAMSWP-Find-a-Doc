@@ -227,7 +227,7 @@
             "key": "field_condition_treatments",
             "label": "Treatments",
             "name": "condition_treatments",
-            "type": "post_object",
+            "type": "relationship",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -240,9 +240,13 @@
             "post_type": [
                 "treatment"
             ],
-            "taxonomy": "",
-            "allow_null": 1,
-            "multiple": 1,
+            "taxonomy": [],
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "1",
@@ -256,7 +260,7 @@
             "key": "field_condition_expertise",
             "label": "Related Areas of Expertise",
             "name": "condition_expertise",
-            "type": "post_object",
+            "type": "relationship",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -270,8 +274,12 @@
                 "expertise"
             ],
             "taxonomy": "",
-            "allow_null": 1,
-            "multiple": 1,
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "1",
@@ -285,7 +293,7 @@
             "key": "field_condition_locations",
             "label": "Locations treating this condition",
             "name": "condition_locations",
-            "type": "post_object",
+            "type": "relationship",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -299,8 +307,12 @@
                 "location"
             ],
             "taxonomy": "",
-            "allow_null": 1,
-            "multiple": 1,
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "1",
@@ -314,7 +326,7 @@
             "key": "field_condition_physicians",
             "label": "Providers treating this condition",
             "name": "condition_physicians",
-            "type": "post_object",
+            "type": "relationship",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -328,8 +340,12 @@
                 "provider"
             ],
             "taxonomy": "",
-            "allow_null": 1,
-            "multiple": 1,
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "1",

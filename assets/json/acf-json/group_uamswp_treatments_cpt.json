@@ -227,7 +227,7 @@
             "key": "field_treatment_conditions",
             "label": "Conditions",
             "name": "treatment_conditions",
-            "type": "post_object",
+            "type": "relationship",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -241,8 +241,12 @@
                 "condition"
             ],
             "taxonomy": "",
-            "allow_null": 1,
-            "multiple": 1,
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "1",
@@ -253,36 +257,10 @@
             "ui": 1
         },
         {
-            "key": "field_treatment_procedure_conditions",
-            "label": "Conditions (Old)",
-            "name": "treatment_procedure_conditions",
-            "type": "taxonomy",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "taxonomy": "condition",
-            "field_type": "multi_select",
-            "allow_null": 1,
-            "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "id",
-            "acfe_bidirectional": 0,
-            "acfe_validate": "",
-            "acfe_update": "",
-            "multiple": 0
-        },
-        {
             "key": "field_treatment_procedure_expertise",
             "label": "Related Areas of Expertise",
             "name": "treatment_procedure_expertise",
-            "type": "post_object",
+            "type": "relationship",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -296,8 +274,12 @@
                 "expertise"
             ],
             "taxonomy": "",
-            "allow_null": 1,
-            "multiple": 1,
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "1",
@@ -311,7 +293,7 @@
             "key": "field_treatment_procedure_locations",
             "label": "Locations for this Treatment or Procedure",
             "name": "treatment_procedure_locations",
-            "type": "post_object",
+            "type": "relationship",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -325,8 +307,12 @@
                 "location"
             ],
             "taxonomy": "",
-            "allow_null": 1,
-            "multiple": 1,
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "1",
@@ -340,7 +326,7 @@
             "key": "field_treatment_procedure_physicians",
             "label": "Physicians for this Treatment or Procedure",
             "name": "treatment_procedure_physicians",
-            "type": "post_object",
+            "type": "relationship",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -354,8 +340,12 @@
                 "provider"
             ],
             "taxonomy": "",
-            "allow_null": 1,
-            "multiple": 1,
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
             "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "1",
