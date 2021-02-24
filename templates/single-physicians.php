@@ -96,7 +96,7 @@ if (empty($excerpt)){
     if ($bio){
         $excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 155, '...');
     } else {
-        $fallback_desc = $medium_name . ' is ' . ($phys_title ? $phys_title_indef_article . ' ' . strtolower($phys_title_name) : 'a health care provider' ) . ($primary_appointment_title ? ' at ' . $primary_appointment_title : '') .  ' employed by UAMS Health.';
+        $fallback_desc = $medium_name_attr . ' is ' . ($phys_title ? $phys_title_indef_article . ' ' . strtolower($phys_title_name) : 'a health care provider' ) . ($primary_appointment_title ? ' at ' . $primary_appointment_title : '') .  ' employed by UAMS Health.';
         $excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 155, '...');
     }
 }
@@ -1189,12 +1189,12 @@ while ( have_posts() ) : the_post();
 {
   "@context": "http://www.schema.org",
   "@type": "Physician",
-  "name": "<?php echo $full_name; ?>",
+  "name": "<?php echo $full_name_attr; ?>",
   "url": "<?php echo get_permalink(); ?>",
   "logo": "<?php echo get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png'; ?>",
   "image": "<?php echo $docphoto; ?>",
   "description": "<?php echo $schema_description; ?>"
-  <?php
+  <?php 
         if ($condition_schema || $treatment_schema) {
             echo ',';
             echo '"medicalSpecialty": [';
