@@ -33,6 +33,7 @@
         $parent_id = $parent_location->ID;
         $parent_title = $parent_location->post_title;
         $parent_title_attr = str_replace('"', '\'', $parent_title);
+        $parent_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($parent_title_attr, null, 'utf-8')));
         $parent_url = get_permalink( $parent_id );
         $featured_image = get_the_post_thumbnail($parent_id, 'aspect-16-9-small', ['class' => 'card-img-top']);
         $address_id = $parent_id;
@@ -189,6 +190,8 @@
             } elseif ($location_modified_hours_display) {
                 $alert_label = 'Learn more about the modified hours.';
             }
+            $alert_label_attr = str_replace('"', '\'', $alert_label);
+            $alert_label_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($alert_label_attr, null, 'utf-8')));
             ?>
             <div class="alert alert-warning" role="alert">
                 <?php if ($location_closing_display) {
@@ -204,7 +207,7 @@
                         This location's hours will be temporarily modified beginning on <?php echo $location_modified_hours_start; ?>.
                     <?php } // endif
                 } // endif ?>
-                <p><a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $alert_label; ?>" class="alert-link" data-categorytitle="Alert" data-itemtitle="<?php echo $location_title_attr; ?>">Learn more</a></p>
+                <p><a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $alert_label_attr; ?>" class="alert-link" data-categorytitle="Alert" data-itemtitle="<?php echo $location_title_attr; ?>">Learn more</a></p>
             </div>
         <?php } // endif ?>
         <?php $map = get_field('location_map', $address_id); ?>
