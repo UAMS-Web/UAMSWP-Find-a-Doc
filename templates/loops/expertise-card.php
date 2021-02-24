@@ -9,6 +9,7 @@
 
     $expertise_title = get_the_title($id);
     $expertise_title_attr = str_replace('"', '\'', $expertise_title);
+    $expertise_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($expertise_title_attr, null, 'utf-8')));
 
     // Parent Location 
     $expertise_parent_id = wp_get_post_parent_id($id);
@@ -26,6 +27,7 @@
         $parent_id = $parent_expertise->ID;
         $parent_title = $parent_expertise->post_title;
         $parent_title_attr = str_replace('"', '\'', $parent_title);
+        $parent_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($parent_title_attr, null, 'utf-8')));
         $parent_url = get_permalink( $parent_id );
     }
 
