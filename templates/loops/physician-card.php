@@ -25,6 +25,7 @@
 	<?php
 		$full_name = get_field('physician_first_name', $id) .' ' .(get_field('physician_middle_name', $id) ? get_field('physician_middle_name', $id) . ' ' : '') . get_field('physician_last_name', $id) . (get_field('physician_pedigree', $id) ? '&nbsp;' . get_field('physician_pedigree', $id) : '') .  ( $degree_list ? ', ' . $degree_list : '' ); 
 		$full_name_attr = str_replace('"', '\'', $full_name);
+		$full_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($full_name_attr, null, 'utf-8')));
 		$physician_resident = get_field('physician_resident', $id);
 		$physician_resident_name = 'Resident Physician';
 		$physician_title = get_field('physician_title', $id);

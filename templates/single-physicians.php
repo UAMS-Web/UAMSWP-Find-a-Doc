@@ -37,10 +37,13 @@ if ( $languages ) {
 $prefix = get_field('physician_prefix',$post->ID);
 $full_name = get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
 $full_name_attr = str_replace('"', '\'', $full_name);
+$full_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($full_name_attr, null, 'utf-8')));
 $medium_name = ($prefix ? $prefix .' ' : '') . get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID);
 $medium_name_attr = str_replace('"', '\'', $medium_name);
+$medium_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($medium_name_attr, null, 'utf-8')));
 $short_name = $prefix ? $prefix .'&nbsp;' .get_field('physician_last_name',$post->ID) : get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '');
 $short_name_attr = str_replace('"', '\'', $short_name);
+$short_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($short_name_attr, null, 'utf-8')));
 $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 $resident = get_field('physician_resident',$post->ID);
 $resident_title_name = 'Resident Physician';
@@ -84,6 +87,8 @@ if( $locations && $location_valid ) {
         if ( 2 > $l ){
             if ( get_post_status ( $location ) == 'publish' ) {
                 $primary_appointment_title = get_the_title( $location );
+                $primary_appointment_title_attr = str_replace('"', '\'', $primary_appointment_title);
+                $primary_appointment_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($primary_appointment_title_attr, null, 'utf-8')));
                 $primary_appointment_url = get_the_permalink( $location );
                 $l++;
             }
@@ -352,12 +357,12 @@ while ( have_posts() ) : the_post();
                                     <dl data-categorytitle="Telephone Number">
                                         <dt>Appointment Phone Number<?php echo $location_appointment_phone_query ? 's' : ''; ?></dt>
                                         <?php if ($location_new_appointments_phone && $location_clinic_phone_query) { ?>
-                                            <dd><a href="tel:<?php echo format_phone_dash( $location_new_appointments_phone ); ?>" class="icon-phone" data-itemtitle="<?php echo $primary_appointment_title; ?>" data-typetitle="Appointment Phone Number for New<?php echo $location_appointment_phone_query ? '' : ' and Returning' ; ?> Patients"><?php echo format_phone_us( $location_new_appointments_phone ); ?></a><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
+                                            <dd><a href="tel:<?php echo format_phone_dash( $location_new_appointments_phone ); ?>" class="icon-phone" data-itemtitle="<?php echo $primary_appointment_title_attr; ?>" data-typetitle="Appointment Phone Number for New<?php echo $location_appointment_phone_query ? '' : ' and Returning' ; ?> Patients"><?php echo format_phone_us( $location_new_appointments_phone ); ?></a><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
                                             <?php if ($location_return_appointments_phone && $location_appointment_phone_query) { ?>
-                                                <dd><a href="tel:<?php echo format_phone_dash( $location_return_appointments_phone ); ?>" class="icon-phone" data-itemtitle="<?php echo $primary_appointment_title; ?>" data-typetitle="Appointment Phone Number for Returning Patients"><?php echo format_phone_us( $location_return_appointments_phone ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
+                                                <dd><a href="tel:<?php echo format_phone_dash( $location_return_appointments_phone ); ?>" class="icon-phone" data-itemtitle="<?php echo $primary_appointment_title_attr; ?>" data-typetitle="Appointment Phone Number for Returning Patients"><?php echo format_phone_us( $location_return_appointments_phone ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
                                             <?php } ?>
                                         <?php } else { ?>
-                                            <dd><a href="tel:<?php echo format_phone_dash( $location_phone ); ?>" class="icon-phone" data-itemtitle="<?php echo $primary_appointment_title; ?>" data-typetitle="Appointment Phone Number for New and Returning Patients"><?php echo format_phone_us( $location_phone ); ?></a><br/><span class="subtitle">New and Returning Patients</span></dd>
+                                            <dd><a href="tel:<?php echo format_phone_dash( $location_phone ); ?>" class="icon-phone" data-itemtitle="<?php echo $primary_appointment_title_attr; ?>" data-typetitle="Appointment Phone Number for New and Returning Patients"><?php echo format_phone_us( $location_phone ); ?></a><br/><span class="subtitle">New and Returning Patients</span></dd>
                                         <?php } ?>
                                     </dl>
                                 <?php } ?>
@@ -505,7 +510,7 @@ while ( have_posts() ) : the_post();
                 $portal_slug = $portal->slug;
                 $portal_name = $portal->name;
                 $portal_name_attr = str_replace('"', '\'', $portal_name);
-                $portal_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($portal_name, null, 'utf-8')));
+                $portal_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($portal_name_attr, null, 'utf-8')));
                 $portal_content = get_field('portal_content', $portal);
                 $portal_link = get_field('portal_url', $portal);
                 if ($portal_link) {
@@ -524,7 +529,7 @@ while ( have_posts() ) : the_post();
                     $appointment_phone = '5012573999';
                 }
                 $appointment_phone_name_attr = str_replace('"', '\'', $appointment_phone_name);
-                $appointment_phone_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($appointment_phone_name, null, 'utf-8')));
+                $appointment_phone_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($appointment_phone_name_attr, null, 'utf-8')));
             }
             
             $appointment_phone_tel = preg_replace('/^(\+?\d)?(\d{3})(\d{3})(\d{4})$/', '$2-$3-$4', $appointment_phone);

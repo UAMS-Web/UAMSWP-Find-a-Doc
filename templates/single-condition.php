@@ -258,11 +258,18 @@
 						<h2 class="module-title">Treatments and Procedures Related to <?php echo get_the_title(); ?></h2>
 						<div class="list-container list-container-rows">
 							<ul class="list">
-							<?php foreach( $treatments_query_cpt->posts as $treatment ): ?>
+							<?php while ($treatments_query_cpt->have_posts()) : $treatments_query_cpt->the_post(); 
+								$treatment_id = get_the_ID();
+								$treatment_permalink = get_permalink( $treatment_id );
+								$treatment_title = get_the_title();
+								$treatment_title_attr = str_replace('"', '\'', $treatment_title);
+								$treatment_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($treatment_title_attr, null, 'utf-8')));
+							?>
 								<li>
-									<a href="<?php echo get_the_permalink( $treatment->ID ); ?>" aria-label="Go to Treatment page for <?php echo $treatment->post_title; ?>" class="btn btn-outline-primary"><?php echo $treatment->post_title; ?></a>
+									<a href="<?php echo $treatment_permalink; ?>" aria-label="Go to Treatment page for <?php echo $treatment_title_attr; ?>" class="btn btn-outline-primary"><?php echo $treatment_title; ?></a>
 								</li>
-							<?php endforeach; ?>
+							<?php endwhile;
+									wp_reset_postdata(); ?>
 							</ul>
 						</div>
 					</div>

@@ -250,9 +250,15 @@
 							<h2 class="module-title">Conditions Related to <?php echo get_the_title(); ?></h2>
 							<div class="list-container list-container-rows">
 								<ul class="list">
-								<?php while ($conditions_query_cpt->have_posts()) : $conditions_query_cpt->the_post(); ?>
+								<?php while ($conditions_query_cpt->have_posts()) : $conditions_query_cpt->the_post(); 
+									$condition_id = get_the_ID();
+									$condition_permalink = get_permalink( $condition_id );
+									$condition_title = get_the_title();
+									$condition_title_attr = str_replace('"', '\'', $condition_title);
+									$condition_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($condition_title_attr, null, 'utf-8')));
+								?>
 									<li>
-										<a href="<?php echo get_permalink( get_the_ID() ); ?>" aria-label="Go to Condition page for <?php echo get_the_title(); ?>" class="btn btn-outline-primary"><?php echo get_the_title(); ?></a>
+										<a href="<?php echo $condition_permalink; ?>" aria-label="Go to Condition page for <?php echo $condition_title_attr; ?>" class="btn btn-outline-primary"><?php echo $condition_title; ?></a>
 									</li>
 								<?php endwhile;
 									  wp_reset_postdata(); ?>

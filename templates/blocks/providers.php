@@ -44,6 +44,8 @@ if ( $more ) {
         $more_button_target = $more_button_url['target'];
     if ( empty($more_button_description) )
         $more_button_description = get_field('block_fad_providers_more_button_description');
+        $more_button_description_attr = str_replace('"', '\'', $more_button_description);
+        $more_button_description_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($more_button_description_attr, null, 'utf-8')));
     if ( empty($more_button_color) && ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) ) {
         $more_button_color = 'primary';
     } else {
@@ -143,7 +145,7 @@ if($filter_id || $filter_region || $filter_location || $filter_aoe) {
                             <div class="more">
                                 <p class="lead"><?php echo $more_text; ?></p>
                                 <div class="cta-container">
-                                    <a href="<?php echo $more_button_url['url']; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
+                                    <a href="<?php echo $more_button_url['url']; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description_attr; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
                                 </div>
                             </div>
                         <?php } // endif ?>
