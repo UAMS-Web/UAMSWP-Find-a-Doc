@@ -321,7 +321,7 @@ while ( have_posts() ) : the_post(); ?>
 					<?php echo $location_city; ?>, <?php echo $location_state; ?> <?php echo $location_zip; ?></p>
 						<p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo get_the_title($post_id); ?>" data-typetitle="Get directions to the clinic">Get Directions</a></p>
 						<?php if( $location_web_name && $location_url ){ ?>
-							<p><a class="btn btn-secondary" href="<?php echo $location_url['url']; ?>" target="_blank"><?php echo $location_web_name; ?> <span class="far fa-external-link-alt"></span></span></a></p>
+							<p><a class="btn btn-secondary" href="<?php echo $location_url['url']; ?>" target="_blank" data-categorytitle="External Link"><?php echo $location_web_name; ?> <span class="far fa-external-link-alt"></span></span></a></p>
 					<?php } 
 						// Schema data
 						$location_schema = '"address": {
@@ -361,11 +361,13 @@ while ( have_posts() ) : the_post(); ?>
 							$phone_numbers = $location_phone_numbers;
 							while( have_rows('field_location_phone_numbers') ): the_row(); 
 								$title = get_sub_field('location_appointments_text');
+								$title_attr = str_replace('"', '\'', $title);
+								$title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($title_attr, null, 'utf-8')));
 								$phone = get_sub_field('location_appointments_phone');
 								$text = get_sub_field('location_appointments_additional_text');
 						?>
 						<dt><?php echo $title; ?></dt>
-						<dd><a href="tel:<?php echo format_phone_dash( $phone ); ?>" data-typetitle="Additional Phone Number: <?php echo $title; ?>"><?php echo format_phone_us( $phone ); ?></a><?php echo ($text ? '<br/><span class="subtitle">'. $text .'</span>' : ''); ?></dd>
+						<dd><a href="tel:<?php echo format_phone_dash( $phone ); ?>" data-typetitle="Additional Phone Number: <?php echo $title_attr; ?>"><?php echo format_phone_us( $phone ); ?></a><?php echo ($text ? '<br/><span class="subtitle">'. $text .'</span>' : ''); ?></dd>
 						<?php if ('' != $phone){
 							$phone_schema .= ', "'. format_phone_dash( $phone ) .'"
 							'; 
@@ -1119,6 +1121,8 @@ while ( have_posts() ) : the_post(); ?>
 			$portal = get_term($location_portal, "portal");
 			$portal_slug = $portal->slug;
 			$portal_name = $portal->name;
+			$portal_name_attr = str_replace('"', '\'', $portal_name);
+			$portal_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($portal_name_attr, null, 'utf-8')));
 			$portal_content = get_field('portal_content', $portal);
 			$portal_link = get_field('portal_url', $portal);
 			if ($portal_link) {
@@ -1145,7 +1149,7 @@ while ( have_posts() ) : the_post(); ?>
 								<?php }
 								if ( $portal_content ) { ?>
 								<div class="btn-container">
-									<a href="<?php echo $portal_url; ?>" aria-label="Access <?php echo $portal_name; ?>&nbsp;to view your patient information and medical records" class="btn btn-white" target="_blank" data-moduletitle="<?php echo $portal_name; ?>"><?php echo $portal_link_title ? $portal_link_title : 'Log in to '. $portal_name; ?></a>
+									<a href="<?php echo $portal_url; ?>" aria-label="Access <?php echo $portal_name_attr; ?> to view your patient information and medical records" class="btn btn-white" target="_blank" data-moduletitle="<?php echo $portal_name_attr; ?>"><?php echo $portal_link_title ? $portal_link_title : 'Log in to '. $portal_name; ?></a>
 								</div>
 								<?php } ?>
 							</div>
