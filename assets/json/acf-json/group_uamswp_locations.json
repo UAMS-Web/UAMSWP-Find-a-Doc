@@ -1018,8 +1018,8 @@
             "key": "field_location_appointment",
             "name": "location_appointment",
             "type": "wysiwyg",
-            "instructions": "Information on setting up an appointment",
             "label": "Information on setting up an appointment",
+            "instructions": "This section should ideally not contain headings. But if it does, use Heading 3 and down.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -1038,7 +1038,7 @@
             "name": "location_appointment_bring",
             "type": "wysiwyg",
             "label": "What to Bring to Your Appointment",
-            "instructions": "",
+            "instructions": "This section should ideally not contain headings. But if it does ...<br />If \"Information on setting up an appointment\" or \"What to Expect at Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -1057,7 +1057,7 @@
             "name": "location_appointment_expect",
             "type": "wysiwyg",
             "label": "What to Expect at Your Appointment",
-            "instructions": "",
+            "instructions": "This section should ideally not contain headings. But if it does ...<br />If \"Information on setting up an appointment\" or \"What to Bring to Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
