@@ -47,25 +47,6 @@
             ]
         },
         {
-            "key": "field_condition_clinical_trials",
-            "name": "condition_clinical_trials",
-            "type": "true_false",
-            "label": "Display clinical trials",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "Display clinical trials block",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
             "key": "field_condition_content",
             "label": "Content",
             "name": "condition_content",
@@ -121,6 +102,25 @@
             "maxlength": 160,
             "rows": 2,
             "new_lines": ""
+        },
+        {
+            "key": "field_condition_clinical_trials",
+            "name": "condition_clinical_trials",
+            "type": "true_false",
+            "label": "Display clinical trials",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Display clinical trials block",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
             "key": "field_medline_code_type",
