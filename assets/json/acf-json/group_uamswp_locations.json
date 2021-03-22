@@ -1018,8 +1018,8 @@
             "key": "field_location_appointment",
             "name": "location_appointment",
             "type": "wysiwyg",
-            "label": "Appointments Information",
             "instructions": "Information on setting up an appointment",
+            "label": "Information on setting up an appointment",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
