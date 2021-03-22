@@ -88,6 +88,22 @@
             "acfe_update": ""
         },
         {
+            "key": "field_condition_youtube_link",
+            "name": "condition_youtube_link",
+            "type": "url",
+            "label": "Featured Youtube video",
+            "instructions": "Full URL, including https:\/\/",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
             "key": "field_condition_short_desc",
             "name": "condition_short_desc",
             "type": "textarea",
@@ -96,7 +112,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -206,22 +222,6 @@
             "maxlength": "",
             "rows": 4,
             "new_lines": ""
-        },
-        {
-            "key": "field_condition_youtube_link",
-            "name": "condition_youtube_link",
-            "type": "url",
-            "label": "Featured Youtube video",
-            "instructions": "Full URL, including https:\/\/",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": ""
         },
         {
             "key": "field_condition_treatments",
