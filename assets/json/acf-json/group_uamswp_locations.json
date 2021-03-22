@@ -1052,6 +1052,25 @@
             "media_upload": 1,
             "delay": 0
         },
+        "field_location_appointment_expect": {
+            "key": "field_location_appointment_expect",
+            "name": "location_appointment_expect",
+            "type": "wysiwyg",
+            "label": "What to Expect at Your Appointment",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
         "field_location_portal": {
             "key": "field_location_portal",
             "name": "location_portal",
