@@ -1025,7 +1025,8 @@ while ( have_posts() ) : the_post();
                                 <dl>
                                     <?php
                                     $questionRatings = $data->profile->questionRatings;
-                                    foreach( $questionRatings as $questionRating ): ?>
+                                    foreach( $questionRatings as $questionRating ): 
+                                        if ($questionRating->questionCount > 0){ ?>
                                     <dt><?php echo $questionRating->question; ?></dt>
                                     <dd>
                                         <div class="rating" aria-label="Patient Rating">
@@ -1033,7 +1034,8 @@ while ( have_posts() ) : the_post();
                                             <div class="ratings-score-lg"><?php echo $questionRating->averageRatingStr; ?><span class="sr-only"> out of 5</span></div>
                                         </div>
                                     </dd>
-                                    <?php endforeach; ?>
+                                    <?php }
+                                    endforeach; ?>
                                 </dl>
                             </div>
                             <div class="card-footer bg-transparent text-muted small">
