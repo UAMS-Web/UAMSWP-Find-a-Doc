@@ -499,6 +499,43 @@ while ( have_posts() ) : the_post();
                 <?php } //endif ?>
             </div>
         </section>
+        <nav class="uams-module less-padding navbar navbar-expand-sm jump-links bg-primary" id="jump-links">
+            <h2>On This Page</h2>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#jump-link-nav" aria-controls="jump-link-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="jump-link-nav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Make an Appointment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Podcast</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Academic Background</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Research</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Conditions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Treatments &amp; Procedures</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Locations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ratings &amp; Reviews</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
         <?php if ($eligible_appt): ?>
         <?php 
             $appointment_phone_name = 'the UAMS&nbsp;Health appointment line'; // default (UAMS)
