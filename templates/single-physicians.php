@@ -583,8 +583,8 @@ while ( have_posts() ) : the_post();
             </div>
         </section>
         <?php // Begin Jump Links Section ?>
-            <h2>On This Page</h2>
         <nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
+            <h2>Contents</h2>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#jump-link-nav" aria-controls="jump-link-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
