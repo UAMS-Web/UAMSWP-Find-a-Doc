@@ -556,52 +556,52 @@ while ( have_posts() ) : the_post();
                 <ul class="navbar-nav">
                     <?php if ($eligible_appt) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Make an Appointment</a>
+                            <a class="nav-link" href="#appointment-info-1">Make an Appointment</a>
                         </li>
                     <?php } ?>
                     <?php if ( $show_clinical_bio_section ) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
+                            <a class="nav-link" href="#clinical-info">About</a>
                         </li>
                     <?php } ?>
                     <?php if ($podcast_name) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Podcast</a>
+                            <a class="nav-link" href="#podcast">Podcast</a>
                         </li>
                     <?php } ?>
                     <?php if ($show_academic_section) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Academic Background</a>
+                            <a class="nav-link" href="#academic-info">Academic Background</a>
                         </li>
                     <?php } ?>
                     <?php if ($show_research_section) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Research</a>
+                            <a class="nav-link" href="#research-info">Research</a>
                         </li>
                     <?php } ?>
                     <?php if ( $show_conditions_section ) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Conditions</a>
+                            <a class="nav-link" href="#conditions">Conditions</a>
                         </li>
                     <?php } ?>
                     <?php if ( $show_treatments_section ) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Treatments &amp; Procedures</a>
+                            <a class="nav-link" href="#treatments">Treatments &amp; Procedures</a>
                         </li>
                     <?php } ?>
                     <?php if ( $show_aoe_section ) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Areas of Expertise</a>
+                            <a class="nav-link" href="#expertise">Areas of Expertise</a>
                         </li>
                     <?php } ?>
                     <?php if ($show_locations_section) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Locations</a>
+                            <a class="nav-link" href="#locations">Locations</a>
                         </li>
                     <?php } ?>
                     <?php if ($show_ratings_section) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Ratings &amp; Reviews</a>
+                            <a class="nav-link" href="#ratings">Ratings &amp; Reviews</a>
                         </li>
                     <?php } ?>
                 </ul>
