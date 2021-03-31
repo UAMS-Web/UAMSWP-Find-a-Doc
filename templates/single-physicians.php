@@ -258,6 +258,19 @@ while ( have_posts() ) : the_post();
     if ($additional_info && !empty($additional_info)) { $provider_field_classes = $provider_field_classes . ' has-additional-info'; }
     if ($resident && !empty($resident)) { $provider_field_classes = $provider_field_classes . ' is-resident'; }
 
+    // Set Ratings variables
+
+    $rating_request = '';
+    $rating_data = '';
+    $rating_valid = '';
+    if ( $npi ) {
+        $rating_request = wp_nrc_cached_api( $npi );
+        $rating_data = json_decode( $rating_request );
+        if ( !empty( $rating_data ) ) {
+            $rating_valid = $rating_data->valid;
+        }
+    }
+
     // Check if Clinical Bio section should be displayed
     if ( $physician_clinical_bio || !empty ($physician_youtube_link) ) {
         $show_clinical_bio_section = true;
@@ -302,7 +315,7 @@ while ( have_posts() ) : the_post();
     }
 
     // Check if Ratings section should be displayed
-    if ( 1 == 1 ) {
+    if ( $rating_valid ) {
         $show_ratings_section = true;
     } else {
         $show_ratings_section = false;
@@ -462,41 +475,25 @@ while ( have_posts() ) : the_post();
                     </dl>
                     <?php
                         echo '<div class="rating" aria-label="Patient Rating">';
-                        if($npi) {
-                            
-                            $rating_request = wp_nrc_cached_api( $npi );
-
-                            $rating_data = json_decode( $rating_request );
-
-                            if( ! empty( $rating_data ) ) {
-
-                                $rating_valid = $rating_data->valid;
-
-
-                                if ( $rating_valid ){
-                                    $avg_rating = $rating_data->profile->averageRatingStr;
-	                                $avg_rating_dec = $rating_data->profile->averageRating;
-	                                $review_count = $rating_data->profile->reviewcount;
-	                                $comment_count = $rating_data->profile->bodycount;
-                                    echo '<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: '. $avg_rating_dec/5 * 100 .'%;"></div></div>';
-                                    echo '<div class="ratings-score">'. $avg_rating .'<span class="sr-only"> out of 5</span></div>';
-                                    echo '<div class="w-100"></div>';
-                                    echo '<a href="#ratings" aria-label="Jump to Patient Ratings and Reviews">';
-                                    echo '<div class="ratings-count-lg">'. $review_count .' Patient Satisfaction Ratings</div>';
-                                    echo '<div class="ratings-comments-lg">'.  $comment_count .' comments</div>';
-                                    echo '</a>';
-                                } else { ?>
-                                    <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this provider">Why not?</a></em></p> 
-                                <?php
-                                }
-                            }
+                        if ( $rating_valid ){
+                            $avg_rating = $rating_data->profile->averageRatingStr;
+                            $avg_rating_dec = $rating_data->profile->averageRating;
+                            $review_count = $rating_data->profile->reviewcount;
+                            $comment_count = $rating_data->profile->bodycount;
+                            echo '<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: '. $avg_rating_dec/5 * 100 .'%;"></div></div>';
+                            echo '<div class="ratings-score">'. $avg_rating .'<span class="sr-only"> out of 5</span></div>';
+                            echo '<div class="w-100"></div>';
+                            echo '<a href="#ratings" aria-label="Jump to Patient Ratings and Reviews">';
+                            echo '<div class="ratings-count-lg">'. $review_count .' Patient Satisfaction Ratings</div>';
+                            echo '<div class="ratings-comments-lg">'.  $comment_count .' comments</div>';
+                            echo '</a>';
                         } else { ?>
-                            <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this provider">Why not?</a></em></p>
-                    <?php
+                            <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this provider">Why not?</a></em></p> 
+                        <?php
                         }
                         echo '</div>';
                     ?>
-                    <?php if( (!$npi) || ( !empty($rating_data) && !$rating_valid ) ) { ?>
+                    <?php if( !$rating_valid ) { ?>
                         <div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
@@ -1125,7 +1122,7 @@ while ( have_posts() ) : the_post();
             </div>
         </section>
         <?php endif; ?> 
-        <?php if ( $rating_valid ) : ?>
+        <?php if ( $show_ratings_section ) : ?>
         <section class="uams-module ratings-and-reviews bg-auto" id="ratings">
             <div class="container-fluid">
                 <div class="row">
