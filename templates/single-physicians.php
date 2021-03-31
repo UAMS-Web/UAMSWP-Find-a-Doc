@@ -258,8 +258,18 @@ while ( have_posts() ) : the_post();
     if ($additional_info && !empty($additional_info)) { $provider_field_classes = $provider_field_classes . ' has-additional-info'; }
     if ($resident && !empty($resident)) { $provider_field_classes = $provider_field_classes . ' is-resident'; }
 
-    // Set Ratings variables
+    // Set Areas of Expertise Variables
+    $expertise_valid = false;
+    if ( $expertises ) {
+        foreach ( $expertises as $expertise ) {
+            if ( get_post_status ( $expertise ) == 'publish' ) {
+                $expertise_valid = true;
+                break;
+            }
+        }
+    }
 
+    // Set Ratings variables
     $rating_request = '';
     $rating_data = '';
     $rating_valid = '';
@@ -308,7 +318,7 @@ while ( have_posts() ) : the_post();
     }
 
     // Check if Areas of Expertise section should be displayed
-    if ( 1 == 1 ) {
+    if ( $expertise_valid ) {
         $show_aoe_section = true;
     } else {
         $show_aoe_section = false;
@@ -1042,39 +1052,27 @@ while ( have_posts() ) : the_post();
                 // $treatment_schema .= ']';
             endif;  
         
-        $expertise_valid = false;
-        if( $expertises ):
-	        foreach( $expertises as $expertise ) {
-	            if ( get_post_status ( $expertise ) == 'publish' ) {
-	                $expertise_valid = true;
-                    break;
-	            }
-	        }
-	        if ( $expertise_valid ) {
-	        ?>
-	            <section class="uams-module expertise-list bg-auto" id="expertise">
-	                <div class="container-fluid">
-	                    <div class="row">
-	                        <div class="col-12">
-	                            <h2 class="module-title"><?php echo $short_name_possessive; ?> Areas of Expertise</h2>
-	                            <div class="card-list-container">
-	                                <div class="card-list card-list-expertise">
-                                        <?php foreach( $expertises as $expertise ) {
-                                            $id = $expertise;
-                                            if ( get_post_status ( $expertise ) == 'publish' ) {
-                                                include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-                                            }
-                                        } ?>
-                                    </div>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </section>
-	        <?php
-	        }
-        endif;
-        ?>
+        if ( $show_aoe_section ) { ?>
+            <section class="uams-module expertise-list bg-auto" id="expertise">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="module-title"><?php echo $short_name_possessive; ?> Areas of Expertise</h2>
+                            <div class="card-list-container">
+                                <div class="card-list card-list-expertise">
+                                    <?php foreach( $expertises as $expertise ) {
+                                        $id = $expertise;
+                                        if ( get_post_status ( $expertise ) == 'publish' ) {
+                                            include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+                                        }
+                                    } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <?php } // endif ?>
         <?php 
         if( $show_locations_section ): ?>
         <section class="uams-module location-list bg-auto" id="locations">
