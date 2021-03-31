@@ -814,7 +814,7 @@ while ( have_posts() ) : the_post();
                 $physician_academic_split = true;
             }
         
-            if( $show_academic_background_section ): ?>
+            if( $show_academic_section ): ?>
         <section class="uams-module academic-info bg-auto" id="academic-info">
             <div class="container-fluid">
                 <div class="row">
