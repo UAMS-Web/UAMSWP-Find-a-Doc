@@ -583,13 +583,13 @@ while ( have_posts() ) : the_post();
             </div>
         </section>
         <?php // Begin Jump Links Section ?>
-        <nav class="uams-module less-padding navbar navbar-expand-sm jump-links bg-primary" id="jump-links">
             <h2>On This Page</h2>
+        <nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#jump-link-nav" aria-controls="jump-link-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="jump-link-nav">
-                <ul class="navbar-nav">
+            <div class="collapse navbar-collapse inner-container" id="jump-link-nav">
+                <ul class="nav navbar-nav">
                     <?php if ($eligible_appt) { ?>
                         <li class="nav-item">
                             <a class="nav-link" href="#appointment-info-1">Make an Appointment</a>
