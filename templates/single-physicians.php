@@ -464,20 +464,20 @@ while ( have_posts() ) : the_post();
                         echo '<div class="rating" aria-label="Patient Rating">';
                         if($npi) {
                             
-                            $request = wp_nrc_cached_api( $npi );
+                            $rating_request = wp_nrc_cached_api( $npi );
 
-                            $data = json_decode( $request );
+                            $rating_data = json_decode( $rating_request );
 
-                            if( ! empty( $data ) ) {
+                            if( ! empty( $rating_data ) ) {
 
-                                $rating_valid = $data->valid;
+                                $rating_valid = $rating_data->valid;
 
 
                                 if ( $rating_valid ){
-                                    $avg_rating = $data->profile->averageRatingStr;
-	                                $avg_rating_dec = $data->profile->averageRating;
-	                                $review_count = $data->profile->reviewcount;
-	                                $comment_count = $data->profile->bodycount;
+                                    $avg_rating = $rating_data->profile->averageRatingStr;
+	                                $avg_rating_dec = $rating_data->profile->averageRating;
+	                                $review_count = $rating_data->profile->reviewcount;
+	                                $comment_count = $rating_data->profile->bodycount;
                                     echo '<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: '. $avg_rating_dec/5 * 100 .'%;"></div></div>';
                                     echo '<div class="ratings-score">'. $avg_rating .'<span class="sr-only"> out of 5</span></div>';
                                     echo '<div class="w-100"></div>';
@@ -496,7 +496,7 @@ while ( have_posts() ) : the_post();
                         }
                         echo '</div>';
                     ?>
-                    <?php if( (!$npi) || ( !empty($data) && !$rating_valid ) ) { ?>
+                    <?php if( (!$npi) || ( !empty($rating_data) && !$rating_valid ) ) { ?>
                         <div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
@@ -1136,7 +1136,7 @@ while ( have_posts() ) : the_post();
                                 <h3 class="sr-only">Average Ratings</h3>
                                 <dl>
                                     <?php
-                                    $questionRatings = $data->profile->questionRatings;
+                                    $questionRatings = $rating_data->profile->questionRatings;
                                     foreach( $questionRatings as $questionRating ): 
                                         if ($questionRating->questionCount > 0){ ?>
                                     <dt><?php echo $questionRating->question; ?></dt>
@@ -1151,14 +1151,14 @@ while ( have_posts() ) : the_post();
                                 </dl>
                             </div>
                             <div class="card-footer bg-transparent text-muted small">
-                                <p class="h5">Overall: <?php echo $data->profile->averageRatingStr; ?> out of 5</p>
-                                <p>(<?php echo $data->profile->reviewBodyCountStr; ?>)</p>
+                                <p class="h5">Overall: <?php echo $rating_data->profile->averageRatingStr; ?> out of 5</p>
+                                <p>(<?php echo $rating_data->profile->reviewBodyCountStr; ?>)</p>
                             </div>
                         </div>
                         <?php 
-                        $reviews = $data->reviews;
+                        $reviews = $rating_data->reviews;
                         // if ( $reviews ) : ?>
-                        <?php //print_r($data); ?>
+                        <?php //print_r($rating_data); ?>
                         <h3 class="sr-only">Individual Reviews</h3>
                         <div class="card-list-container">
                             <div class="card-list">
