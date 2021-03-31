@@ -258,6 +258,32 @@ while ( have_posts() ) : the_post();
     if ($additional_info && !empty($additional_info)) { $provider_field_classes = $provider_field_classes . ' has-additional-info'; }
     if ($resident && !empty($resident)) { $provider_field_classes = $provider_field_classes . ' is-resident'; }
 
+    $title_append = ' by ' . $short_name;
+            
+    // Set Conditions variables
+    $args = (array(
+        'post_type' => "condition",
+        'post_status' => 'publish',
+        'orderby' => 'title',
+        'order' => 'ASC',
+        'posts_per_page' => -1,
+        'post__in' => $conditions_cpt
+    ));
+    $conditions_cpt_query = new WP_Query( $args );
+    $condition_schema = '';
+
+    // Set Treatments variables
+    $args = (array(
+        'post_type' => "treatment",
+        'post_status' => 'publish',
+        'orderby' => 'title',
+        'order' => 'ASC',
+        'posts_per_page' => -1,
+        'post__in' => $treatments_cpt
+    ));
+    $treatments_cpt_query = new WP_Query( $args );
+    $treatment_schema = '';
+
     // Set Areas of Expertise Variables
     $expertise_valid = false;
     if ( $expertises ) {
@@ -304,14 +330,14 @@ while ( have_posts() ) : the_post();
     }
 
     // Check if Conditions section should be displayed
-    if ( 1 == 1 ) {
+    if ( $conditions_cpt && $conditions_cpt_query->posts ) {
         $show_conditions_section = true;
     } else {
         $show_conditions_section = false;
     }
 
     // Check if Treatments section should be displayed
-    if ( 1 == 1 ) {
+    if ( $treatments_cpt && $treatments_cpt_query->posts ) {
         $show_treatments_section = true;
     } else {
         $show_treatments_section = false;
@@ -989,25 +1015,14 @@ while ( have_posts() ) : the_post();
         </section>
         <?php endif; ?>
         <?php // load all 'conditions' terms for the post
-            $title_append = ' by ' . $short_name;
              
             // Conditions CPT
-            $args = (array(
-                'post_type' => "condition",
-                'post_status' => 'publish',
-                'orderby' => 'title',
-                'order' => 'ASC',
-                'posts_per_page' => -1,
-                'post__in' => $conditions_cpt
-            ));
-            $conditions_cpt_query = new WP_Query( $args );
-            $condition_schema = '';
             // we will use the first term to load ACF data from
-            if( $conditions_cpt && $conditions_cpt_query->posts ):
+            if( $show_conditions_section ) {
                 include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
                 // $condition_schema .= ',"medicalSpecialty": [';
                 $i = 0;
-                foreach( $conditions_cpt_query->posts as $condition ):
+                foreach( $conditions_cpt_query->posts as $condition ) {
                     if ($i > 0) {
                         $condition_schema .= ',
             ';
@@ -1018,26 +1033,16 @@ while ( have_posts() ) : the_post();
         "url":"'. get_the_permalink( $condition->ID ) .'"
         }';
                     $i++;
-                endforeach;
+                } // endforeach;
                 // $condition_schema .= '"" ]';
-            endif; 
+            } // endif; 
 
             // Treatments CPT
-            $args = (array(
-                'post_type' => "treatment",
-                'post_status' => 'publish',
-                'orderby' => 'title',
-                'order' => 'ASC',
-                'posts_per_page' => -1,
-                'post__in' => $treatments_cpt
-            ));
-            $treatments_cpt_query = new WP_Query( $args );
-            $treatment_schema = '';
-            if( $treatments_cpt && $treatments_cpt_query->posts ):
+            if( $show_treatments_section ) {
                 include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
                 // $treatment_schema .= ',"medicalSpecialty": [';
                 $i = 0;
-                foreach( $treatments_cpt_query->posts as $treatment ):
+                foreach( $treatments_cpt_query->posts as $treatment ) {
                     if ($i > 0 || $condition_schema) {
                         $treatment_schema .= ',
             ';
@@ -1048,9 +1053,9 @@ while ( have_posts() ) : the_post();
         "url":"'. get_the_permalink( $treatment->ID ) .'"
         }';
                     $i++;
-                endforeach;
+                } // endforeach
                 // $treatment_schema .= ']';
-            endif;  
+            } // endif
         
         if ( $show_aoe_section ) { ?>
             <section class="uams-module expertise-list bg-auto" id="expertise">
