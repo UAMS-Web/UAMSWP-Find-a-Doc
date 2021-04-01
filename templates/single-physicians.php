@@ -314,6 +314,13 @@ while ( have_posts() ) : the_post();
         $show_clinical_bio_section = false;
     }
 
+    // Check if Make an Appointment section should be displayed
+    if ( $eligible_appt ) {
+        $show_appointment_section = true;
+        $jump_link_count++;
+    } else {
+        $show_appointment_section = false;
+    }
 
     // Check if Academic Background section should be displayed
     if ( $resident || $academic_bio || $academic_appointment || $academic_admin_title || $education || $boards ) {
@@ -590,7 +597,7 @@ while ( have_posts() ) : the_post();
             </button>
             <div class="collapse navbar-collapse inner-container" id="jump-link-nav">
                 <ul class="nav navbar-nav">
-                    <?php if ($eligible_appt) { ?>
+                    <?php if ( $show_appointment_section ) { ?>
                         <li class="nav-item">
                             <a class="nav-link" href="#appointment-info-1">Make an Appointment</a>
                         </li>
@@ -644,7 +651,7 @@ while ( have_posts() ) : the_post();
             </div>
         </nav>
         <?php // End Jump Links Section ?>
-        <?php if ($eligible_appt): ?>
+        <?php if ( $show_appointment_section ): ?>
         <?php 
             $appointment_phone_name = 'the UAMS&nbsp;Health appointment line'; // default (UAMS)
             $appointment_phone = '5016868000'; // default (UAMS)
@@ -1254,7 +1261,7 @@ while ( have_posts() ) : the_post();
                 </div>
             </div>
         </section> -->
-        <?php if ($eligible_appt): ?>
+        <?php if ( $show_appointment_section ): ?>
             <section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info-2">
                 <div class="container-fluid">
                     <div class="row">
