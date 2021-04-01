@@ -315,6 +315,7 @@ while ( have_posts() ) : the_post();
     }
 
     // Set logic for displaying jump links and sections
+    $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
     $jump_link_count = 0;
 
         // Check if Make an Appointment section should be displayed
@@ -374,7 +375,7 @@ while ( have_posts() ) : the_post();
         }
 
         // Check if Jump Links section should be displayed
-        if ( $jump_link_count > 1 ) {
+        if ( $jump_link_count >= $jump_link_count_min = 2 ) {
             $show_jump_links_section = true;
         } else {
             $show_jump_links_section = false;
