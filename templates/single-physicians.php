@@ -366,6 +366,14 @@ while ( have_posts() ) : the_post();
             $show_aoe_section = false;
         }
 
+        // Check if Locations section should be displayed
+        if ( $locations && $location_valid ) {
+            $show_locations_section = true;
+            $jump_link_count++;
+        } else {
+            $show_locations_section = false;
+        }
+
         // Check if Ratings section should be displayed
         if ( $rating_valid ) {
             $show_ratings_section = true;
