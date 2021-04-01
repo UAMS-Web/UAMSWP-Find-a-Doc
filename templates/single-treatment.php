@@ -251,7 +251,7 @@
 	<main id="genesis-content" class="treatment-item<?php echo $treatment_field_classes; ?>">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
-				<h1 class="entry-title"><?php echo ( $treatment_title ? $treatment_title : 'Treatment & Procedure' ); ?>: <?php echo get_the_title(); ?></h1>
+				<h1 class="entry-title"><span class="supertitle"><?php echo ( $treatment_title ? $treatment_title : 'Treatment & Procedure' ); ?></span><span class="sr-only">:</span> <?php echo get_the_title(); ?></h1>
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
 				<?php

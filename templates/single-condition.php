@@ -262,7 +262,7 @@
 	<main id="genesis-content" class="condition-item<?php echo $condition_field_classes; ?>">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
-				<h1 class="entry-title" itemprop="headline"><?php echo ( $condition_title ? $condition_title : 'Condition' ); ?>: <?php echo get_the_title(); ?></h1>
+				<h1 class="entry-title" itemprop="headline"><span class="supertitle"><?php echo ( $condition_title ? $condition_title : 'Condition' ); ?></span><span class="sr-only">:</span> <?php echo get_the_title(); ?></h1>
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
 				<?php 
