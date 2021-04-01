@@ -730,7 +730,9 @@ while ( have_posts() ) : the_post(); ?>
 			<?php } //endif ?>
 		</div>
 	</section>
-	<?php if (
+
+	<?php // Begin Location Alert Section
+	if (
 		(
 			($location_closing && !$location_closing_date_past) // If location closing is toggled, but closing start date is future
 			||
@@ -765,14 +767,11 @@ while ( have_posts() ) : the_post(); ?>
 				</div>
 			</div>
 		</section>
-	<?php } // endif ?>
-	<?php 
-		$location_about = get_field('location_about');
-		$location_affiliation = get_field('location_affiliation');
-		$location_youtube_link = get_field('location_youtube_link');
+	<?php } // endif
+	// End Location Alert Section
 	
-		if ( $location_about || $location_affiliation || $prescription ) { 
-		?>
+	// Begin About Section
+	if ( $location_about || $location_affiliation || $prescription ) { ?>
 		<section class="uams-module bg-auto" id="description">
 			<div class="container-fluid">
 				<div class="row">
@@ -808,13 +807,15 @@ while ( have_posts() ) : the_post(); ?>
 				</div>
 			</div>
 		</section>
-	<?php } ?>
-	<?php 
-		$location_parking = get_field('location_parking', $post_id);
-		$location_direction = get_field('location_direction', $post_id);
-		$parking_map = get_field('location_parking_map', $post_id);
+	<?php }
+	// End About Section
 	
-		if ( $location_parking || $location_direction || $parking_map ) : ?>
+	// Begin Parking and Directions Section
+	$location_parking = get_field('location_parking', $post_id);
+	$location_direction = get_field('location_direction', $post_id);
+	$parking_map = get_field('location_parking_map', $post_id);
+	
+	if ( $location_parking || $location_direction || $parking_map ) { ?>
 		<section class="uams-module bg-auto" id="parking-info">
 			<div class="container-fluid">
 				<div class="row">
@@ -903,12 +904,14 @@ while ( have_posts() ) : the_post(); ?>
 				</div>
 			</div>
 		</section>
-	<?php endif; ?>
-	<?php
-		$location_appointment = get_field('location_appointment');
-		$location_appointment_bring = get_field('location_appointment_bring');
+	<?php } // endif
+	// End Parking and Directions Section
 
-		if ( $location_appointment || $location_appointment_bring): ?>
+	// Begin Appointment Information Section
+	$location_appointment = get_field('location_appointment');
+	$location_appointment_bring = get_field('location_appointment_bring');
+
+	if ( $location_appointment || $location_appointment_bring) { ?>
 		<section class="uams-module bg-auto" id="appointment-info">
 			<div class="container-fluid">
 				<div class="row">
@@ -937,231 +940,234 @@ while ( have_posts() ) : the_post(); ?>
 				</div>
 			</div>
 		</section>
-	<?php endif; ?>
-	<?php // Telemedicine
-		if ($telemed_query) { ?>
-			<section class="uams-module bg-auto" aria-label="Telemedicine Information" id="telemedicine-info">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-12">
-							<h2 class="module-title">Telemedicine Information</h2>
-							<?php if ($location_closing_display && !$location_closing_telemed) { ?>
-								<div class="module-body">
-									<p class="text-center"><strong>
-										<?php if ($location_closing_date_past) { ?>
-											Telemedicine is not available while this location is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed.
-										<?php } else { ?>
-											Telemedicine will not be available after this location closes <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>.
-										<?php } // endif ?>
-									</strong></p>
-								</div>
-							<?php } else { ?>
-								<div class="row content-split-lg">
-									<div class="col-xs-12 col-lg-7">
-										<div class="content-width">
-											<?php echo $telemed_info ? $telemed_info : '' ?>
-											<p>
-												<?php // Declare which patients can use the service.
-												if ($telemed_patients == 'all') { ?>
-													This service is available to both new and existing patients.
-												<?php } elseif ($telemed_patients == 'new') { ?>
-													This service is available to new patients only.
-												<?php } elseif ($telemed_patients == 'existing') { ?>
-													This service is available to existing patients only.
-												<?php } // endif
+	<?php } // endif
+	// End Appointment Information Section
 
-												// Declare which phone number should be called.
-													
-													if (!$location_clinic_phone_query) { // If there is only one phone number ?>
-														Patients should call <?php echo $location_phone_link; ?> to schedule a telemedicine appointment.
-													<?php } elseif ($location_clinic_phone_query && !$location_appointment_phone_query) { // If there is only one appointment number ?>
-														Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.
-													<?php } else { // If there are two appointment numbers (one for new, one for existing)
-														if ($telemed_patients == 'all') { ?>
-															New patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment, while existing patients should call <?php echo $location_return_appointments_phone_link; ?>.
-														<?php } elseif ($telemed_patients == 'new') { ?>
-															Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.
-														<?php } elseif ($telemed_patients == 'existing') { ?>
-															Patients should call <?php echo $location_return_appointments_phone_link; ?> to schedule a telemedicine appointment.
-														<?php }
-													} // endif ?>
-											</p>
-										</div>
-									</div>
-									<div class="col-xs-12 col-lg-5">
-										<div class="content-width">
-										<?php
-										$telemed_modified_text = '';
-										$telemed_active_start = '';
-										$telemed_active_end = '';
-										if ($telemed_modified) : 
-										?>
-										<?php 
-											
-											$telemed_modified_day = ''; // Previous Day
-											$telemed_modified_comment = ''; // Comment on previous day
-											$i = 1;
-
-											$telemed_today = strtotime("today");
-											$telemed_today_30 = strtotime("+30 days");
-
-											if( strtotime($telemed_modified_start) <= $telemed_today_30 && ( strtotime($telemed_modified_end_date) >= $telemed_today || !$telemed_modified_end ) ){
-												$telemed_modified_text .= $telemed_modified_reason;
-												$telemed_modified_text .= '<p class="small font-italic">These modified hours start on ' . $telemed_modified_start . ', ';
-												$telemed_modified_text .= $telemed_modified_end && $telemed_modified_end_date ? 'and are scheduled to end after ' . $telemed_modified_end_date . '.' : 'and will remain in effect until further notice.';
-												$telemed_modified_text .= '</p>';
-
-												if ($telemed_modified_hours247):
-													$telemed_modified_text .= '<strong>Open 24/7</strong>';
-												else :
-													$telemed_modified_times = $location_hours_group['location_telemed_modified_hours_times'];
-													if ($telemed_active_start > strtotime($telemed_modified_start) || '' == $telemed_active_start) {
-														$telemed_active_start = strtotime($telemed_modified_start);
-													}
-													if ( $telemed_active_end <= strtotime($telemed_modified_end_date) || !$telemed_modified_end ) {
-														if (!$telemed_modified_end) {
-															$telemed_active_end = 'TBD';
-														} else {
-															$telemed_active_end = strtotime($telemed_modified_end_date);
-														}
-													}
-											
-													if (is_array($telemed_modified_times) || is_object($telemed_modified_times)) {
-														$telemed_modified_text .= '<dl class="hours">';
-														foreach ( $telemed_modified_times as $telemed_modified_time ) {
-															
-															$telemed_modified_text .= $telemed_modified_day !== $telemed_modified_time['location_telemed_modified_hours_day'] ? '<dt>'. $telemed_modified_time['location_telemed_modified_hours_day'] .'</dt> ' : '';
-															$telemed_modified_text .= '<dd>';
-						
-															if ( $telemed_modified_time['location_telemed_modified_hours_closed'] ) {
-																$telemed_modified_text .= 'Closed ';
-															} else {
-																$telemed_modified_text .= ( ( $telemed_modified_time['location_telemed_modified_hours_open'] && '00:00:00' != $telemed_modified_time['location_telemed_modified_hours_open'] )  ? '' . apStyleDate( $telemed_modified_time['location_telemed_modified_hours_open'] ) . ' &ndash; ' . apStyleDate( $telemed_modified_time['location_telemed_modified_hours_close'] ) . '' : '' );
-															}
-															if ( $telemed_modified_time['location_telemed_modified_hours_comment'] ) {
-																$telemed_modified_text .= ' <br /><span class="subtitle">' .$telemed_modified_time['location_telemed_modified_hours_comment'] . '</span>';
-																$telemed_modified_comment = $telemed_modified_time['location_telemed_modified_hours_comment'];
-															} else {
-																$telemed_modified_comment = '';
-															}
-															$telemed_modified_text .= '</dd>';
-															$telemed_modified_day = $telemed_modified_time['location_telemed_modified_hours_day']; // Reset the day
-															$i++;
-															
-														} // endforeach
-														$telemed_modified_text .= '</dl>';
-													
-													} // End if (array)
-												endif;
-											}
-										
-											echo $telemed_modified_text ? '<h3>Modified Hours</h3>' . $telemed_modified_text: '';
-											
-										endif; // End Modified Hours
-										if (($telemed_active_start != '' && $telemed_active_start <= $telemed_today) && ( strtotime($telemed_active_end) > $telemed_today || $telemed_active_end == 'TBD' ) ) {
-											// Do Nothing;
-											// Future Option
-										} else {
-											if ( $telemed_hours247 || $telemed_hours[0]['day'] ) : ?>
-											<h3><?php echo $telemed_modified_text ? 'Typical ' : ''; ?>Hours</h3>
-											<?php
-												if ($telemed_hours247):
-													echo '<strong>Open 24/7</strong>';
-												else :
-													echo '<dl class="hours">';
-													if( $telemed_hours ) {
-														$telemed_hours_text = '';
-														$telemed_day = ''; // Previous Day
-														$telemed_comment = ''; // Comment on previous day
-														$i = 1;
-														foreach ($telemed_hours as $telemed_hour) :
-															$telemed_hours_text .= $telemed_day !== $telemed_hour['day'] ? '<dt>'. $telemed_hour['day'] .'</dt> ' : '';
-															$telemed_hours_text .= '<dd>';
-
-															if ( $telemed_hour['closed'] ) {
-																$telemed_hours_text .= 'Closed ';
-															} else {
-																$telemed_hours_text .= ( ( $telemed_hour['open'] && '00:00:00' != $telemed_hour['open'] )  ? '' . apStyleDate( $telemed_hour['open'] ) . ' &ndash; ' . apStyleDate( $telemed_hour['close'] ) . '' : '' );
-															}
-															if ( $telemed_hour['comment'] ) {
-																$telemed_hours_text .= ' <br /><span class="subtitle">' .$telemed_hour['comment'] . '</span>';
-																$telemed_comment = $telemed_hour['comment'];
-															} else {
-																$telemed_comment = '';
-															}
-															$telemed_hours_text .= '</dd>';
-															$telemed_day = $telemed_hour['day']; // Reset the day
-															if (!$telemed_hour['closed']) {
-															$i++;
-															}
-														endforeach;
-														echo $telemed_hours_text;
-													} else {
-														echo '<dt>No information</dt>';
-													}
-													echo '</dl>';
-												endif; 
-											endif;
-											}
-											?>
-										</div>
-									</div>
-								</div>
-							<?php } // endif ?>
-						</div>
-					</div>
-				</div>
-			</section>
-		<?php } // endif
-	// End Telemedicine ?>
-	<?php // Portal
-		$location_portal = get_field('location_portal');
-		
-		if ( $location_portal ) :
-			$portal = get_term($location_portal, "portal");
-			$portal_slug = $portal->slug;
-			$portal_name = $portal->name;
-			$portal_name_attr = str_replace('"', '\'', $portal_name);
-			$portal_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($portal_name_attr, null, 'utf-8')));
-			$portal_content = get_field('portal_content', $portal);
-			$portal_link = get_field('portal_url', $portal);
-			if ($portal_link) {
-				$portal_url = $portal_link['url'];
-				$portal_link_title = $portal_link['title'];
-			}
-
-			if ($portal && $portal_slug !== "_none") {
-	?>
-		<section class="uams-module cta-bar cta-bar-weighted bg-blue" aria-label="Patient Portal" id="portal-info">
+	// Begin Telemedicine Information Section
+	if ($telemed_query) { ?>
+		<section class="uams-module bg-auto" aria-label="Telemedicine Information" id="telemedicine-info">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<div class="inner-container">
-							<div class="cta-heading">
-								<h2><?php echo $portal_name; ?></h2>
+						<h2 class="module-title">Telemedicine Information</h2>
+						<?php if ($location_closing_display && !$location_closing_telemed) { ?>
+							<div class="module-body">
+								<p class="text-center"><strong>
+									<?php if ($location_closing_date_past) { ?>
+										Telemedicine is not available while this location is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed.
+									<?php } else { ?>
+										Telemedicine will not be available after this location closes <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>.
+									<?php } // endif ?>
+								</strong></p>
 							</div>
-							<?php if ( $portal_content || $portal_link ) { ?>
-							<div class="cta-body">
-								<?php if ( $portal_content ) { ?>
-								<div class="text-container">
-									<?php echo $portal_content; ?>
+						<?php } else { ?>
+							<div class="row content-split-lg">
+								<div class="col-xs-12 col-lg-7">
+									<div class="content-width">
+										<?php echo $telemed_info ? $telemed_info : '' ?>
+										<p>
+											<?php // Declare which patients can use the service.
+											if ($telemed_patients == 'all') { ?>
+												This service is available to both new and existing patients.
+											<?php } elseif ($telemed_patients == 'new') { ?>
+												This service is available to new patients only.
+											<?php } elseif ($telemed_patients == 'existing') { ?>
+												This service is available to existing patients only.
+											<?php } // endif
+
+											// Declare which phone number should be called.
+												
+												if (!$location_clinic_phone_query) { // If there is only one phone number ?>
+													Patients should call <?php echo $location_phone_link; ?> to schedule a telemedicine appointment.
+												<?php } elseif ($location_clinic_phone_query && !$location_appointment_phone_query) { // If there is only one appointment number ?>
+													Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.
+												<?php } else { // If there are two appointment numbers (one for new, one for existing)
+													if ($telemed_patients == 'all') { ?>
+														New patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment, while existing patients should call <?php echo $location_return_appointments_phone_link; ?>.
+													<?php } elseif ($telemed_patients == 'new') { ?>
+														Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.
+													<?php } elseif ($telemed_patients == 'existing') { ?>
+														Patients should call <?php echo $location_return_appointments_phone_link; ?> to schedule a telemedicine appointment.
+													<?php }
+												} // endif ?>
+										</p>
+									</div>
 								</div>
-								<?php }
-								if ( $portal_content ) { ?>
-								<div class="btn-container">
-									<a href="<?php echo $portal_url; ?>" aria-label="Access <?php echo $portal_name_attr; ?> to view your patient information and medical records" class="btn btn-white" target="_blank" data-moduletitle="<?php echo $portal_name_attr; ?>"><?php echo $portal_link_title ? $portal_link_title : 'Log in to '. $portal_name; ?></a>
+								<div class="col-xs-12 col-lg-5">
+									<div class="content-width">
+									<?php
+									$telemed_modified_text = '';
+									$telemed_active_start = '';
+									$telemed_active_end = '';
+									if ($telemed_modified) : 
+									?>
+									<?php 
+										
+										$telemed_modified_day = ''; // Previous Day
+										$telemed_modified_comment = ''; // Comment on previous day
+										$i = 1;
+
+										$telemed_today = strtotime("today");
+										$telemed_today_30 = strtotime("+30 days");
+
+										if( strtotime($telemed_modified_start) <= $telemed_today_30 && ( strtotime($telemed_modified_end_date) >= $telemed_today || !$telemed_modified_end ) ){
+											$telemed_modified_text .= $telemed_modified_reason;
+											$telemed_modified_text .= '<p class="small font-italic">These modified hours start on ' . $telemed_modified_start . ', ';
+											$telemed_modified_text .= $telemed_modified_end && $telemed_modified_end_date ? 'and are scheduled to end after ' . $telemed_modified_end_date . '.' : 'and will remain in effect until further notice.';
+											$telemed_modified_text .= '</p>';
+
+											if ($telemed_modified_hours247):
+												$telemed_modified_text .= '<strong>Open 24/7</strong>';
+											else :
+												$telemed_modified_times = $location_hours_group['location_telemed_modified_hours_times'];
+												if ($telemed_active_start > strtotime($telemed_modified_start) || '' == $telemed_active_start) {
+													$telemed_active_start = strtotime($telemed_modified_start);
+												}
+												if ( $telemed_active_end <= strtotime($telemed_modified_end_date) || !$telemed_modified_end ) {
+													if (!$telemed_modified_end) {
+														$telemed_active_end = 'TBD';
+													} else {
+														$telemed_active_end = strtotime($telemed_modified_end_date);
+													}
+												}
+										
+												if (is_array($telemed_modified_times) || is_object($telemed_modified_times)) {
+													$telemed_modified_text .= '<dl class="hours">';
+													foreach ( $telemed_modified_times as $telemed_modified_time ) {
+														
+														$telemed_modified_text .= $telemed_modified_day !== $telemed_modified_time['location_telemed_modified_hours_day'] ? '<dt>'. $telemed_modified_time['location_telemed_modified_hours_day'] .'</dt> ' : '';
+														$telemed_modified_text .= '<dd>';
+					
+														if ( $telemed_modified_time['location_telemed_modified_hours_closed'] ) {
+															$telemed_modified_text .= 'Closed ';
+														} else {
+															$telemed_modified_text .= ( ( $telemed_modified_time['location_telemed_modified_hours_open'] && '00:00:00' != $telemed_modified_time['location_telemed_modified_hours_open'] )  ? '' . apStyleDate( $telemed_modified_time['location_telemed_modified_hours_open'] ) . ' &ndash; ' . apStyleDate( $telemed_modified_time['location_telemed_modified_hours_close'] ) . '' : '' );
+														}
+														if ( $telemed_modified_time['location_telemed_modified_hours_comment'] ) {
+															$telemed_modified_text .= ' <br /><span class="subtitle">' .$telemed_modified_time['location_telemed_modified_hours_comment'] . '</span>';
+															$telemed_modified_comment = $telemed_modified_time['location_telemed_modified_hours_comment'];
+														} else {
+															$telemed_modified_comment = '';
+														}
+														$telemed_modified_text .= '</dd>';
+														$telemed_modified_day = $telemed_modified_time['location_telemed_modified_hours_day']; // Reset the day
+														$i++;
+														
+													} // endforeach
+													$telemed_modified_text .= '</dl>';
+												
+												} // End if (array)
+											endif;
+										}
+									
+										echo $telemed_modified_text ? '<h3>Modified Hours</h3>' . $telemed_modified_text: '';
+										
+									endif; // End Modified Hours
+									if (($telemed_active_start != '' && $telemed_active_start <= $telemed_today) && ( strtotime($telemed_active_end) > $telemed_today || $telemed_active_end == 'TBD' ) ) {
+										// Do Nothing;
+										// Future Option
+									} else {
+										if ( $telemed_hours247 || $telemed_hours[0]['day'] ) : ?>
+										<h3><?php echo $telemed_modified_text ? 'Typical ' : ''; ?>Hours</h3>
+										<?php
+											if ($telemed_hours247):
+												echo '<strong>Open 24/7</strong>';
+											else :
+												echo '<dl class="hours">';
+												if( $telemed_hours ) {
+													$telemed_hours_text = '';
+													$telemed_day = ''; // Previous Day
+													$telemed_comment = ''; // Comment on previous day
+													$i = 1;
+													foreach ($telemed_hours as $telemed_hour) :
+														$telemed_hours_text .= $telemed_day !== $telemed_hour['day'] ? '<dt>'. $telemed_hour['day'] .'</dt> ' : '';
+														$telemed_hours_text .= '<dd>';
+
+														if ( $telemed_hour['closed'] ) {
+															$telemed_hours_text .= 'Closed ';
+														} else {
+															$telemed_hours_text .= ( ( $telemed_hour['open'] && '00:00:00' != $telemed_hour['open'] )  ? '' . apStyleDate( $telemed_hour['open'] ) . ' &ndash; ' . apStyleDate( $telemed_hour['close'] ) . '' : '' );
+														}
+														if ( $telemed_hour['comment'] ) {
+															$telemed_hours_text .= ' <br /><span class="subtitle">' .$telemed_hour['comment'] . '</span>';
+															$telemed_comment = $telemed_hour['comment'];
+														} else {
+															$telemed_comment = '';
+														}
+														$telemed_hours_text .= '</dd>';
+														$telemed_day = $telemed_hour['day']; // Reset the day
+														if (!$telemed_hour['closed']) {
+														$i++;
+														}
+													endforeach;
+													echo $telemed_hours_text;
+												} else {
+													echo '<dt>No information</dt>';
+												}
+												echo '</dl>';
+											endif; 
+										endif;
+										}
+										?>
+									</div>
 								</div>
-								<?php } ?>
 							</div>
-							<?php } ?>
-						</div>
+						<?php } // endif ?>
 					</div>
 				</div>
 			</div>
 		</section>
-	<?php }
-	endif; ?>
-	<?php
+	<?php } // endif
+	// End Telemedicine Information Section
+	
+	// Begin Portal Section
+	$location_portal = get_field('location_portal');
+	
+	if ( $location_portal ) {
+		$portal = get_term($location_portal, "portal");
+		$portal_slug = $portal->slug;
+		$portal_name = $portal->name;
+		$portal_name_attr = str_replace('"', '\'', $portal_name);
+		$portal_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($portal_name_attr, null, 'utf-8')));
+		$portal_content = get_field('portal_content', $portal);
+		$portal_link = get_field('portal_url', $portal);
+		if ($portal_link) {
+			$portal_url = $portal_link['url'];
+			$portal_link_title = $portal_link['title'];
+		}
+		if ($portal && $portal_slug !== "_none") { ?>
+			<section class="uams-module cta-bar cta-bar-weighted bg-blue" aria-label="Patient Portal" id="portal-info">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<div class="inner-container">
+								<div class="cta-heading">
+									<h2><?php echo $portal_name; ?></h2>
+								</div>
+								<?php if ( $portal_content || $portal_link ) { ?>
+								<div class="cta-body">
+									<?php if ( $portal_content ) { ?>
+									<div class="text-container">
+										<?php echo $portal_content; ?>
+									</div>
+									<?php }
+									if ( $portal_content ) { ?>
+									<div class="btn-container">
+										<a href="<?php echo $portal_url; ?>" aria-label="Access <?php echo $portal_name_attr; ?> to view your patient information and medical records" class="btn btn-white" target="_blank" data-moduletitle="<?php echo $portal_name_attr; ?>"><?php echo $portal_link_title ? $portal_link_title : 'Log in to '. $portal_name; ?></a>
+									</div>
+									<?php } ?>
+								</div>
+								<?php } ?>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		<?php }
+	} // endif
+	// End Portal Section
+
+	// Begin Providers Section
 	$physicians = get_field( 'physician_locations' );
 	if($physicians) {
 		$postsPerPage = 6; // Set this value to preferred value (4, 6, 8, 10, 12). If you change the value, update the instruction text in the editor's JSON file.
@@ -1179,8 +1185,7 @@ while ( have_posts() ) : the_post(); ?>
 			"post__in" => $physicians
 		);
 		$physicians_query = New WP_Query( $args );
-		if( $physicians_query->have_posts() ) { 
-		?>
+		if( $physicians_query->have_posts() ) { ?>
 			<section class="uams-module bg-auto" id="doctors">
 				<div class="container-fluid">
 					<div class="row">
@@ -1206,11 +1211,12 @@ while ( have_posts() ) : the_post(); ?>
 					</div>
 				</div>
 			</section>
-		<?php
-		}
+		<?php }
 	}
-	?>
-	<?php // load all 'conditions' terms for the post
+	// End Providers Section
+
+	// Begin Conditions Section
+	// load all 'conditions' terms for the post
 	$title_append = ' at ' . get_the_title();
 	$conditions_cpt = get_field('location_conditions_cpt');
 	$condition_schema = '';
@@ -1226,18 +1232,21 @@ while ( have_posts() ) : the_post(); ?>
 	$conditions_cpt_query = new WP_Query( $args );
 	// $condition_schema = '';
 	// we will use the first term to load ACF data from
-	if( $conditions_cpt && $conditions_cpt_query->posts ):
+	if( $conditions_cpt && $conditions_cpt_query->posts ) {
 		include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
 		$condition_schema .= ',"medicalSpecialty": [';
-		foreach( $conditions_cpt_query->posts as $condition ):
+		foreach( $conditions_cpt_query->posts as $condition ) {
 			$condition_schema .= '{
 			"@type": "MedicalSpecialty",
 			"name": "'. $condition->post_title .'",
 			"url":"'. get_the_permalink( $condition->ID ) .'"
 			},';
-		endforeach;
+		} // endforeach
 		$condition_schema .= '"" ]';
-	endif;
+	} // endif
+	// End Conditions Section
+
+	// Begin Treatments and Procedures Section
 	$treatments_cpt = get_field('location_treatments_cpt');
 	$treatment_schema = '';
 	// Treatments CPT
@@ -1250,18 +1259,21 @@ while ( have_posts() ) : the_post(); ?>
 		'post__in' => $treatments_cpt
 	));
 	$treatments_cpt_query = new WP_Query( $args );
-	if( $treatments_cpt && $treatments_cpt_query->posts ):
+	if( $treatments_cpt && $treatments_cpt_query->posts ) {
 		include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
 		$treatment_schema .= ',"medicalSpecialty": [';
-		foreach( $treatments_cpt_query->posts as $treatment ):
+		foreach( $treatments_cpt_query->posts as $treatment ) {
 			$treatment_schema .= '{
 			"@type": "MedicalSpecialty",
 			"name": "'. $treatment->post_title .'",
 			"url":"'. get_the_permalink( $treatment->ID ) .'"
 			},';
-		endforeach;
+		} // endforeach
 		$treatment_schema .= '"" ]';
-	endif; 
+	} // endif 
+	// End Treatments and Procedures Section
+
+	// Begin Areas of Expertise Section
 	$expertises =  get_field('location_expertise');
 	$args = (array(
         'post_type' => "expertise",
@@ -1272,7 +1284,7 @@ while ( have_posts() ) : the_post(); ?>
         'post__in'	=> $expertises
     ));
     $expertise_query = new WP_Query( $args );
-	if( $expertises && $expertise_query->have_posts() ): ?>
+	if( $expertises && $expertise_query->have_posts() ) { ?>
 		<section class="uams-module expertise-list bg-auto" id="expertise">
 			<div class="container-fluid">
 				<div class="row">
@@ -1292,9 +1304,10 @@ while ( have_posts() ) : the_post(); ?>
 				</div>
 			</div>
         </section>
-	<?php 
-	endif;
-	// Child locations
+	<?php } // endif
+	// End Areas of Expertise Section
+	
+	// Begin Child Locations Section
 	$current_id = get_the_ID();
     if ( ( 0 != count( get_pages( array( 'child_of' => $current_id, 'post_type' => 'location' ) ) ) ) ) { // If none available, set to false
         $args =  array(
@@ -1332,54 +1345,59 @@ while ( have_posts() ) : the_post(); ?>
 					</div>
 				</div>
             </section>
-        <?php
-        }
+        <?php }
     }
-	?>
-	<!-- Latest News -->
-	<!-- <section class="uams-module news-list bg-auto" id="news">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-12">
-					<h2 class="module-title">Latest News for <?php the_title(); ?></h2>
-					<div class="card-list-container">
-						<div class="card-list">
-							<div class="card">
-								<img srcset="https://picsum.photos/434/244?image=1066" src="https://picsum.photos/434/244?image=1066" class="card-img-top" alt="Image description or Story title">
-								<div class="card-body">
-									<h3 class="card-title">
-										<span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
-									</h3>
-									<p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.&nbsp;...</p>
-									<a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Story title">Read Full Story</a>
+	// End Child Locations Section
+
+	// Begin News Section
+	if ( true == false ) { ?>
+		<!-- Latest News -->
+		<!-- <section class="uams-module news-list bg-auto" id="news">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<h2 class="module-title">Latest News for <?php the_title(); ?></h2>
+						<div class="card-list-container">
+							<div class="card-list">
+								<div class="card">
+									<img srcset="https://picsum.photos/434/244?image=1066" src="https://picsum.photos/434/244?image=1066" class="card-img-top" alt="Image description or Story title">
+									<div class="card-body">
+										<h3 class="card-title">
+											<span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
+										</h3>
+										<p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.&nbsp;...</p>
+										<a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Story title">Read Full Story</a>
+									</div>
 								</div>
-							</div>
-							<div class="card">
-								<img srcset="https://picsum.photos/434/244?image=348" src="https://picsum.photos/434/244?image=348" class="card-img-top" alt="Image description or Story title">
-								<div class="card-body">
-									<h3 class="card-title">
-										<span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
-									</h3>
-									<p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.&nbsp;...</p>
-									<a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Story title">Read Full Story</a>
+								<div class="card">
+									<img srcset="https://picsum.photos/434/244?image=348" src="https://picsum.photos/434/244?image=348" class="card-img-top" alt="Image description or Story title">
+									<div class="card-body">
+										<h3 class="card-title">
+											<span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
+										</h3>
+										<p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.&nbsp;...</p>
+										<a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Story title">Read Full Story</a>
+									</div>
 								</div>
-							</div>
-							<div class="card">
-								<img srcset="https://picsum.photos/434/244?image=823" src="https://picsum.photos/434/244?image=823" class="card-img-top" alt="Image description or Story title">
-								<div class="card-body">
-									<h3 class="card-title">
-										<span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
-									</h3>
-									<p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.&nbsp;...</p>
-									<a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Story title">Read Full Story</a>
+								<div class="card">
+									<img srcset="https://picsum.photos/434/244?image=823" src="https://picsum.photos/434/244?image=823" class="card-img-top" alt="Image description or Story title">
+									<div class="card-body">
+										<h3 class="card-title">
+											<span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
+										</h3>
+										<p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.&nbsp;...</p>
+										<a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Story title">Read Full Story</a>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</section> -->
+		</section> -->
+	<? }
+	// End News Section
+	?>
 </main>
 </div>
 
