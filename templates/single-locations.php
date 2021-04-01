@@ -754,6 +754,9 @@ while ( have_posts() ) : the_post(); ?>
 		</div>
 	</section>
 	<?php } // endif
+	// End Location Alert Section
+
+	// Beginning Closing Information Section
 	if ($location_closing_display && !empty($location_closing_info)) { ?>
 		<section class="uams-module location-alert location-alert-warning" id="closing-info">
 			<div class="container-fluid">
@@ -768,7 +771,7 @@ while ( have_posts() ) : the_post(); ?>
 			</div>
 		</section>
 	<?php } // endif
-	// End Location Alert Section
+	// End Closing Information Section
 	
 	// Begin About Section
 	if ( $location_about || $location_affiliation || $prescription ) { ?>
