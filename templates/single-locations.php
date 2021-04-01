@@ -308,10 +308,30 @@ while ( have_posts() ) : the_post(); ?>
 		$location_about = get_field('location_about');
 		$location_affiliation = get_field('location_affiliation');
 		$location_youtube_link = get_field('location_youtube_link');
+		$about_section_title = '';
+		$about_section_title_short = '';
+		$about_section_submenu = false;
+		$about_section_label = 'Jump to the section of this page with the location description';
 		
 		if ( $location_about || $location_affiliation || $prescription ) {
             $show_about_section = true;
             $jump_link_count++;
+			if ( $location_about || $location_youtube_link || ( !$location_about && $location_affiliation && $prescription ) ) {
+				$about_section_title = 'About ' . get_the_title();
+				$about_section_title_short = 'About';
+
+				if ($location_affiliation || $prescription) {
+					$about_section_submenu = true;
+				}
+			} elseif ( $location_affiliation ) {
+				$about_section_title = 'Affiliation';
+				$about_section_title_short = $about_section_title;
+				$about_section_label = 'Jump to the section of this page about ' . $about_section_title;
+			} elseif ( $prescription ) {
+				$about_section_title = 'Prescription Information';
+				$about_section_title_short = $about_section_title;
+				$about_section_label = 'Jump to the section of this page about ' . $about_section_title;
+			}
         } else {
             $show_about_section = false;
         }
@@ -969,8 +989,22 @@ while ( have_posts() ) : the_post(); ?>
 						</li>
 					<?php } ?>
 					<?php if ( $show_about_section ) { ?>
-						<li class="nav-item">
-							<a class="nav-link" href="#description" title="Jump to the section of this page with the location description">About</a>
+						<li class="nav-item<?php echo $about_section_submenu ? ' dropdown' : '' ?>">
+							<a class="nav-link" href="#description" title="<?php echo $about_section_label; ?>"><?php echo $about_section_title_short; ?></a>
+							<?php if ( $about_section_submenu ) { ?>
+								<ul class="dropdown-menu">
+								<?php if ( $location_affiliation ) { ?>
+									<li class="nav-item">
+										<a class="nav-link" href="#affiliation" title="Jump to the section of this page about Affiliation">Affiliation</a>
+									</li>
+								<?php }
+								if ( $prescription ) { ?>
+									<li class="Prescription Information">
+										<a class="nav-link" href="#prescription-info" title="Jump to the section of this page about Prescription Information">Prescription Information</a>
+									</li>
+								<?php } ?>
+								</ul>
+							<?php }?>
 						</li>
 					<?php } ?>
 					<?php if ( $show_parking_section ) { ?>
@@ -1052,34 +1086,29 @@ while ( have_posts() ) : the_post(); ?>
 	// End Closing Information Section
 	
 	// Begin About Section
-	if ( $show_about_section ) { ?>
+	if ( $show_about_section ) {
+	?>
 		<section class="uams-module bg-auto" id="description">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<?php if ( $location_about || $location_youtube_link || ( !$location_about && $location_affiliation && $prescription ) ) { ?>
-						<h2 class="module-title">About <?php the_title(); ?></h2>
-						<?php } elseif ( $location_affiliation ) {
-							echo '<h2 class="module-title">Affiliation</h2>';
-						} elseif ( $prescription ) {
-							echo '<h2 class="module-title">Prescription Information</h2>';
-						} ?>
+						<h2 class="module-title"><?php echo $about_section_title; ?></h2>
 						<div class="module-body">
 							<?php echo $location_about ? $location_about : ''; ?>
-							<?php if($location_youtube_link) { ?>
-                            <div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
-                                <?php echo wp_oembed_get( $location_youtube_link ); ?>
-                            </div>
+							<?php if ( $location_youtube_link ) { ?>
+								<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
+									<?php echo wp_oembed_get( $location_youtube_link ); ?>
+								</div>
 							<?php }
 							if ( $location_affiliation) { 
 								if ( $location_about || $prescription ) { 
-									echo '<h3>Affiliation</h3>';
+									echo '<h3 id="affiliation">Affiliation</h3>';
 								}
 								echo $location_affiliation;
 							}
 							if ( $prescription) { 
 								if ( $location_about || $location_affiliation ) { 
-									echo '<h3>Prescription Information</h3>';
+									echo '<h3 id="prescription-info">Prescription Information</h3>';
 								}
 								echo $prescription;
 							} ?>
