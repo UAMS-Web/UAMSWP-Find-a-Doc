@@ -980,7 +980,7 @@ while ( have_posts() ) : the_post(); ?>
 				<ul class="nav navbar-nav">
 					<?php if ( $show_location_alert_section ) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#location-alert" title="Jump to the section of this page with alert regarding this location">Alert</a>
+							<a class="nav-link" href="#location-alert" title="Jump to the section of this page with the alert regarding this location"><?php echo $location_alert_title ? $location_alert_title : 'Alert'; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ( $show_closing_section ) { ?>
