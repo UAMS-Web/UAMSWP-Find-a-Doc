@@ -307,13 +307,6 @@ while ( have_posts() ) : the_post();
         }
     }
 
-    // Check if Clinical Bio section should be displayed
-    if ( $physician_clinical_bio || !empty ($physician_youtube_link) ) {
-        $show_clinical_bio_section = true;
-    } else {
-        $show_clinical_bio_section = false;
-    }
-
     // Set logic for displaying jump links and sections
     $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
     $jump_link_count = 0;
@@ -324,6 +317,13 @@ while ( have_posts() ) : the_post();
             $jump_link_count++;
         } else {
             $show_appointment_section = false;
+        }
+
+        // Check if Clinical Bio section should be displayed
+        if ( $physician_clinical_bio || !empty ($physician_youtube_link) ) {
+            $show_clinical_bio_section = true;
+        } else {
+            $show_clinical_bio_section = false;
         }
 
         // Check if Academic Background section should be displayed
