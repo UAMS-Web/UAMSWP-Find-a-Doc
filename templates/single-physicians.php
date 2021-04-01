@@ -314,6 +314,9 @@ while ( have_posts() ) : the_post();
         $show_clinical_bio_section = false;
     }
 
+    // Set logic for displaying jump links and sections
+    $jump_link_count = 0;
+
     // Check if Make an Appointment section should be displayed
     if ( $eligible_appt ) {
         $show_appointment_section = true;
@@ -325,6 +328,7 @@ while ( have_posts() ) : the_post();
     // Check if Academic Background section should be displayed
     if ( $resident || $academic_bio || $academic_appointment || $academic_admin_title || $education || $boards ) {
         $show_academic_section = true;
+        $jump_link_count++;
     } else {
         $show_academic_section = false;
     }
@@ -332,6 +336,7 @@ while ( have_posts() ) : the_post();
     // Check if Research section should be displayed
     if ( !empty($research_bio) || !empty($esearch_interests) || !empty ( $publications ) || $pubmed_author_id || $research_profiles_link ) {
         $show_research_section = true;
+        $jump_link_count++;
     } else {
         $show_research_section = false;
     }
@@ -339,6 +344,7 @@ while ( have_posts() ) : the_post();
     // Check if Conditions section should be displayed
     if ( $conditions_cpt && $conditions_cpt_query->posts ) {
         $show_conditions_section = true;
+        $jump_link_count++;
     } else {
         $show_conditions_section = false;
     }
@@ -346,6 +352,7 @@ while ( have_posts() ) : the_post();
     // Check if Treatments section should be displayed
     if ( $treatments_cpt && $treatments_cpt_query->posts ) {
         $show_treatments_section = true;
+        $jump_link_count++;
     } else {
         $show_treatments_section = false;
     }
@@ -353,6 +360,7 @@ while ( have_posts() ) : the_post();
     // Check if Areas of Expertise section should be displayed
     if ( $expertise_valid ) {
         $show_aoe_section = true;
+        $jump_link_count++;
     } else {
         $show_aoe_section = false;
     }
@@ -360,8 +368,16 @@ while ( have_posts() ) : the_post();
     // Check if Ratings section should be displayed
     if ( $rating_valid ) {
         $show_ratings_section = true;
+        $jump_link_count++;
     } else {
         $show_ratings_section = false;
+    }
+
+    // Check if Jump Links section should be displayed
+    if ( $jump_link_count > 1 ) {
+        $show_jump_links_section = true;
+    } else {
+        $show_jump_links_section = false;
     }
 ?>
 
@@ -589,7 +605,8 @@ while ( have_posts() ) : the_post();
                 <?php } //endif ?>
             </div>
         </section>
-        <?php // Begin Jump Links Section ?>
+        <?php // Begin Jump Links Section
+        if ( $show_jump_links_section ) { ?>
         <nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
             <h2>Contents</h2>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#jump-link-nav" aria-controls="jump-link-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -650,6 +667,7 @@ while ( have_posts() ) : the_post();
                 </ul>
             </div>
         </nav>
+        <?php } // endif ?>
         <?php // End Jump Links Section ?>
         <?php if ( $show_appointment_section ): ?>
         <?php 
