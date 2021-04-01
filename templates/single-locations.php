@@ -273,6 +273,224 @@ while ( have_posts() ) : the_post(); ?>
 	$location_zip = get_field('location_zip', $post_id);
 	$location_web_name = get_field('location_web_name');
 	$location_url = get_field('location_url');
+
+    // Set logic for displaying jump links and sections
+    $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
+    $jump_link_count = 0;
+
+        // Check if Location Alert section should be displayed
+        if (
+			(
+				($location_closing && !$location_closing_date_past) // If location closing is toggled, but closing start date is future
+				||
+				($location_closing && $location_reopen_date_past) // If location closing is toggled, but reopening date is past (or is TBD)
+				||
+				!$location_closing // If location closing is not toggled
+			)
+			&& 
+			($location_alert_title || $location_alert_text) // If location title or description has value
+		 ) {
+            $show_location_alert_section = true;
+            $jump_link_count++;
+        } else {
+            $show_location_alert_section = false;
+        }
+
+        // Check if Closing Information section should be displayed
+        if ( $location_closing_display && !empty($location_closing_info) ) {
+            $show_closing_section = true;
+            $jump_link_count++;
+        } else {
+            $show_closing_section = false;
+        }
+
+        // Check if About section should be displayed
+		$location_about = get_field('location_about');
+		$location_affiliation = get_field('location_affiliation');
+		$location_youtube_link = get_field('location_youtube_link');
+		
+		if ( $location_about || $location_affiliation || $prescription ) {
+            $show_about_section = true;
+            $jump_link_count++;
+        } else {
+            $show_about_section = false;
+        }
+
+        // Check if Parking and Directions section should be displayed
+		$location_parking = get_field('location_parking', $post_id);
+		$location_direction = get_field('location_direction', $post_id);
+		$parking_map = get_field('location_parking_map', $post_id);
+		
+		if ( $location_parking || $location_direction || $parking_map ) {
+            $show_parking_section = true;
+            $jump_link_count++;
+        } else {
+            $show_parking_section = false;
+        }
+
+        // Check if Appointment Information section should be displayed
+		$location_appointment = get_field('location_appointment');
+		$location_appointment_bring = get_field('location_appointment_bring');
+
+		if ( $location_appointment || $location_appointment_bring) {
+            $show_appointment_section = true;
+            $jump_link_count++;
+        } else {
+            $show_appointment_section = false;
+        }
+
+        // Check if Telemedicine Information section should be displayed
+		if ( $telemed_query ) {
+            $show_telemed_section = true;
+            $jump_link_count++;
+        } else {
+            $show_telemed_section = false;
+        }
+
+        // Check if Portal Information section should be displayed
+		$location_portal = get_field('location_portal');
+		
+		if ( $location_portal ) {
+			$portal = get_term($location_portal, "portal");
+			$portal_slug = $portal->slug;
+			$portal_name = $portal->name;
+			$portal_name_attr = str_replace('"', '\'', $portal_name);
+			$portal_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($portal_name_attr, null, 'utf-8')));
+			$portal_content = get_field('portal_content', $portal);
+			$portal_link = get_field('portal_url', $portal);
+			if ($portal_link) {
+				$portal_url = $portal_link['url'];
+				$portal_link_title = $portal_link['title'];
+			}
+		}
+		if ($portal && $portal_slug !== "_none") {
+            $show_portal_section = true;
+            $jump_link_count++;
+        } else {
+            $show_portal_section = false;
+        }
+
+        // Check if Providers section should be displayed
+		$physicians = get_field( 'physician_locations' );
+		if ( $physicians ) {
+			$postsPerPage = 6; // Set this value to preferred value (4, 6, 8, 10, 12). If you change the value, update the instruction text in the editor's JSON file.
+			$postsCutoff = 9; // Set cutoff value. If you change the value, update the instruction text in the editor's JSON file.
+			$postsCountClass = $postsPerPage;
+			if ( count($physicians) <= $postsCutoff ) {
+				$postsPerPage = -1;
+			}
+			$args = array(
+				"post_type" => "provider",
+				"post_status" => "publish",
+				"posts_per_page" => $postsPerPage,
+				"orderby" => "title",
+				"order" => "ASC",
+				"post__in" => $physicians
+			);
+			$physicians_query = New WP_Query( $args );
+		}
+		if ( $physicians_query->have_posts() ) {
+			$show_providers_section = true;
+			$jump_link_count++;
+		} else {
+			$show_providers_section = false;
+		}
+
+
+        // Check if Conditions section should be displayed
+		// load all 'conditions' terms for the post
+		$title_append = ' at ' . get_the_title();
+		$conditions_cpt = get_field('location_conditions_cpt');
+		$condition_schema = '';
+		// Conditions CPT
+		$args = (array(
+			'post_type' => "condition",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $conditions_cpt
+		));
+		$conditions_cpt_query = new WP_Query( $args );
+		// $condition_schema = '';
+		// we will use the first term to load ACF data from
+		if( $conditions_cpt && $conditions_cpt_query->posts ) {
+            $show_conditions_section = true;
+            $jump_link_count++;
+        } else {
+            $show_conditions_section = false;
+        }
+
+        // Check if Treatments section should be displayed
+		$treatments_cpt = get_field('location_treatments_cpt');
+		$treatment_schema = '';
+		// Treatments CPT
+		$args = (array(
+			'post_type' => "treatment",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $treatments_cpt
+		));
+		$treatments_cpt_query = new WP_Query( $args );
+		if( $treatments_cpt && $treatments_cpt_query->posts ) {
+            $show_treatments_section = true;
+            $jump_link_count++;
+        } else {
+            $show_treatments_section = false;
+        }
+
+        // Check if Areas of Expertise section should be displayed
+		$expertises =  get_field('location_expertise');
+		$args = (array(
+			'post_type' => "expertise",
+			'order' => 'ASC',
+			'orderby' => 'title',
+			'posts_per_page' => -1,
+			'post_status' => 'publish',
+			'post__in'	=> $expertises
+		));
+		$expertise_query = new WP_Query( $args );
+		if( $expertises && $expertise_query->have_posts() ) {
+            $show_aoe_section = true;
+            $jump_link_count++;
+        } else {
+            $show_aoe_section = false;
+        }
+
+        // Check if Child Locations section should be displayed
+		$current_id = get_the_ID();
+		if ( ( 0 != count( get_pages( array( 'child_of' => $current_id, 'post_type' => 'location' ) ) ) ) ) { // If none available, set to false
+			$args =  array(
+				"post_type" => "location",
+				"post_status" => "publish",
+				"post_parent" => $current_id,
+				'order' => 'ASC',
+				'orderby' => 'title',
+				'meta_query' => array(
+					array(
+						'key' => 'location_hidden',
+						'value' => '1',
+						'compare' => '!=',
+					)
+				),
+			);
+			$children = New WP_Query ( $args );
+		}
+		if ( $children->have_posts() ) {
+            $show_child_locations_section = true;
+            $jump_link_count++;
+        } else {
+            $show_child_locations_section = false;
+        }
+
+        // Check if Jump Links section should be displayed
+        if ( $jump_link_count >= $jump_link_count_min ) {
+            $show_jump_links_section = true;
+        } else {
+            $show_jump_links_section = false;
+        }
 ?>
 <div class="content-sidebar-wrap">
 <main class="location-item" id="genesis-content">
@@ -731,18 +949,78 @@ while ( have_posts() ) : the_post(); ?>
 		</div>
 	</section>
 
-	<?php // Begin Location Alert Section
-	if (
-		(
-			($location_closing && !$location_closing_date_past) // If location closing is toggled, but closing start date is future
-			||
-			($location_closing && $location_reopen_date_past) // If location closing is toggled, but reopening date is past (or is TBD)
-			||
-			!$location_closing // If location closing is not toggled
-		)
-		&& 
-		($location_alert_title || $location_alert_text) // If location title or description has value
-	 ) { ?>
+	<?php // Begin Jump Links Section
+	if ( $show_jump_links_section ) { ?>
+		<nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
+			<h2>Contents</h2>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#jump-link-nav" aria-controls="jump-link-nav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse inner-container" id="jump-link-nav">
+				<ul class="nav navbar-nav">
+					<?php if ( $show_location_alert_section ) { ?>
+						<li class="nav-item">
+							<a class="nav-link" href="#location-alert" title="Jump to the section of this page with alert regarding this location">Alert</a>
+						</li>
+					<?php } ?>
+					<?php if ( $show_closing_section ) { ?>
+						<li class="nav-item">
+							<a class="nav-link" href="#closing-info" title="Jump to the section of this page with the closing information">Closing Information</a>
+						</li>
+					<?php } ?>
+					<?php if ( $show_about_section ) { ?>
+						<li class="nav-item">
+							<a class="nav-link" href="#description" title="Jump to the section of this page with the location description">About</a>
+						</li>
+					<?php } ?>
+					<?php if ( $show_parking_section ) { ?>
+						<li class="nav-item">
+							<a class="nav-link" href="#parking-info" title="Jump to the section of this page about Parking Information">Parking Information</a>
+						</li>
+					<?php } ?>
+					<?php if ( $show_appointment_section ) { ?>
+						<li class="nav-item">
+							<a class="nav-link" href="#appointment-info" title="Jump to the section of this page about Appointment Information">Appointment Information</a>
+						</li>
+					<?php } ?>
+					<?php if ( $show_providers_section ) { ?>
+						<li class="nav-item">
+							<a class="nav-link" href="#telemedicine-info" title="Jump to the section of this page about Telemedicine Information">Telemedicine</a>
+						</li>
+					<?php } ?>
+					<?php if ( $show_providers_section ) { ?>
+						<li class="nav-item">
+							<a class="nav-link" href="#portal-info" title="Jump to the section of this page about the Patient Portal">Patient Portal</a>
+						</li>
+					<?php } ?>
+					<?php if ( $show_providers_section ) { ?>
+						<li class="nav-item">
+							<a class="nav-link" href="#providers" title="Jump to the section of this page about Providers">Providers</a>
+						</li>
+					<?php } ?>
+					<?php if ( $show_conditions_section ) { ?>
+						<li class="nav-item">
+							<a class="nav-link" href="#conditions" title="Jump to the section of this page about Conditions">Conditions</a>
+						</li>
+					<?php } ?>
+					<?php if ( $show_treatments_section ) { ?>
+						<li class="nav-item">
+							<a class="nav-link" href="#treatments" title="Jump to the section of this page about Treatments and Procedures">Treatments &amp; Procedures</a>
+						</li>
+					<?php } ?>
+					<?php if ( $show_aoe_section ) { ?>
+						<li class="nav-item">
+							<a class="nav-link" href="#expertise" title="Jump to the section of this page about Areas of Expertise">Areas of Expertise</a>
+						</li>
+					<?php } ?>
+				</ul>
+			</div>
+		</nav>
+	<?php } // endif
+	// End Jump Links Section
+	
+	// Begin Location Alert Section
+	if ( $show_location_alert_section ) { ?>
 	<section class="uams-module location-alert location-<?php echo $location_alert_color ? $location_alert_color : 'alert-warning'; ?>" id="location-alert">
 		<div class="container-fluid">
 			<div class="row">
@@ -757,7 +1035,7 @@ while ( have_posts() ) : the_post(); ?>
 	// End Location Alert Section
 
 	// Beginning Closing Information Section
-	if ($location_closing_display && !empty($location_closing_info)) { ?>
+	if ( $show_closing_section ) { ?>
 		<section class="uams-module location-alert location-alert-warning" id="closing-info">
 			<div class="container-fluid">
 				<div class="row">
@@ -774,7 +1052,7 @@ while ( have_posts() ) : the_post(); ?>
 	// End Closing Information Section
 	
 	// Begin About Section
-	if ( $location_about || $location_affiliation || $prescription ) { ?>
+	if ( $show_about_section ) { ?>
 		<section class="uams-module bg-auto" id="description">
 			<div class="container-fluid">
 				<div class="row">
@@ -810,15 +1088,11 @@ while ( have_posts() ) : the_post(); ?>
 				</div>
 			</div>
 		</section>
-	<?php }
+	<?php } // endif
 	// End About Section
 	
 	// Begin Parking and Directions Section
-	$location_parking = get_field('location_parking', $post_id);
-	$location_direction = get_field('location_direction', $post_id);
-	$parking_map = get_field('location_parking_map', $post_id);
-	
-	if ( $location_parking || $location_direction || $parking_map ) { ?>
+	if ( $show_parking_section ) { ?>
 		<section class="uams-module bg-auto" id="parking-info">
 			<div class="container-fluid">
 				<div class="row">
@@ -911,10 +1185,7 @@ while ( have_posts() ) : the_post(); ?>
 	// End Parking and Directions Section
 
 	// Begin Appointment Information Section
-	$location_appointment = get_field('location_appointment');
-	$location_appointment_bring = get_field('location_appointment_bring');
-
-	if ( $location_appointment || $location_appointment_bring) { ?>
+	if ( $show_appointment_section ) { ?>
 		<section class="uams-module bg-auto" id="appointment-info">
 			<div class="container-fluid">
 				<div class="row">
@@ -947,7 +1218,7 @@ while ( have_posts() ) : the_post(); ?>
 	// End Appointment Information Section
 
 	// Begin Telemedicine Information Section
-	if ($telemed_query) { ?>
+	if ( $show_telemed_section ) { ?>
 		<section class="uams-module bg-auto" aria-label="Telemedicine Information" id="telemedicine-info">
 			<div class="container-fluid">
 				<div class="row">
@@ -1124,118 +1395,69 @@ while ( have_posts() ) : the_post(); ?>
 	// End Telemedicine Information Section
 	
 	// Begin Portal Section
-	$location_portal = get_field('location_portal');
-	
-	if ( $location_portal ) {
-		$portal = get_term($location_portal, "portal");
-		$portal_slug = $portal->slug;
-		$portal_name = $portal->name;
-		$portal_name_attr = str_replace('"', '\'', $portal_name);
-		$portal_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($portal_name_attr, null, 'utf-8')));
-		$portal_content = get_field('portal_content', $portal);
-		$portal_link = get_field('portal_url', $portal);
-		if ($portal_link) {
-			$portal_url = $portal_link['url'];
-			$portal_link_title = $portal_link['title'];
-		}
-		if ($portal && $portal_slug !== "_none") { ?>
-			<section class="uams-module cta-bar cta-bar-weighted bg-blue" aria-label="Patient Portal" id="portal-info">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-12">
-							<div class="inner-container">
-								<div class="cta-heading">
-									<h2><?php echo $portal_name; ?></h2>
+	if ( $show_portal_section ) { ?>
+		<section class="uams-module cta-bar cta-bar-weighted bg-blue" aria-label="Patient Portal" id="portal-info">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<div class="inner-container">
+							<div class="cta-heading">
+								<h2><?php echo $portal_name; ?></h2>
+							</div>
+							<?php if ( $portal_content || $portal_link ) { ?>
+							<div class="cta-body">
+								<?php if ( $portal_content ) { ?>
+								<div class="text-container">
+									<?php echo $portal_content; ?>
 								</div>
-								<?php if ( $portal_content || $portal_link ) { ?>
-								<div class="cta-body">
-									<?php if ( $portal_content ) { ?>
-									<div class="text-container">
-										<?php echo $portal_content; ?>
-									</div>
-									<?php }
-									if ( $portal_content ) { ?>
-									<div class="btn-container">
-										<a href="<?php echo $portal_url; ?>" aria-label="Access <?php echo $portal_name_attr; ?> to view your patient information and medical records" class="btn btn-white" target="_blank" data-moduletitle="<?php echo $portal_name_attr; ?>"><?php echo $portal_link_title ? $portal_link_title : 'Log in to '. $portal_name; ?></a>
-									</div>
-									<?php } ?>
+								<?php }
+								if ( $portal_content ) { ?>
+								<div class="btn-container">
+									<a href="<?php echo $portal_url; ?>" aria-label="Access <?php echo $portal_name_attr; ?> to view your patient information and medical records" class="btn btn-white" target="_blank" data-moduletitle="<?php echo $portal_name_attr; ?>"><?php echo $portal_link_title ? $portal_link_title : 'Log in to '. $portal_name; ?></a>
 								</div>
 								<?php } ?>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-		<?php }
-	} // endif
-	// End Portal Section
-
-	// Begin Providers Section
-	$physicians = get_field( 'physician_locations' );
-	if($physicians) {
-		$postsPerPage = 6; // Set this value to preferred value (4, 6, 8, 10, 12). If you change the value, update the instruction text in the editor's JSON file.
-        $postsCutoff = 9; // Set cutoff value. If you change the value, update the instruction text in the editor's JSON file.
-		$postsCountClass = $postsPerPage;
-		if(count($physicians) <= $postsCutoff ) {
-			$postsPerPage = -1;
-		}
-		$args = array(
-			"post_type" => "provider",
-			"post_status" => "publish",
-			"posts_per_page" => $postsPerPage,
-			"orderby" => "title",
-			"order" => "ASC",
-			"post__in" => $physicians
-		);
-		$physicians_query = New WP_Query( $args );
-		if( $physicians_query->have_posts() ) { ?>
-			<section class="uams-module bg-auto" id="doctors">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-12">
-							<h2 class="module-title">Providers at <?php the_title(); ?></h2>
-							<div class="card-list-container">
-								<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
-									<?php 
-										while ($physicians_query->have_posts()) : $physicians_query->the_post();
-											$id = get_the_ID();
-											include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
-										endwhile;
-										wp_reset_postdata();
-									?>
-								</div>
-							</div>
-							<?php if ($postsPerPage !== -1) { ?>
-							<div class="more">
-								<button class="loadmore btn btn-primary" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more providers">Load More</button>
 							</div>
 							<?php } ?>
 						</div>
 					</div>
 				</div>
-			</section>
-		<?php }
-	}
+			</div>
+		</section>
+	<?php } // endif
+	// End Portal Section
+
+	// Begin Providers Section
+	if( $show_providers_section ) { ?>
+		<section class="uams-module bg-auto" id="providers">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<h2 class="module-title">Providers at <?php the_title(); ?></h2>
+						<div class="card-list-container">
+							<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
+								<?php 
+									while ($physicians_query->have_posts()) : $physicians_query->the_post();
+										$id = get_the_ID();
+										include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+									endwhile;
+									wp_reset_postdata();
+								?>
+							</div>
+						</div>
+						<?php if ($postsPerPage !== -1) { ?>
+						<div class="more">
+							<button class="loadmore btn btn-primary" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more providers">Load More</button>
+						</div>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+		</section>
+	<?php } // endif
 	// End Providers Section
 
 	// Begin Conditions Section
-	// load all 'conditions' terms for the post
-	$title_append = ' at ' . get_the_title();
-	$conditions_cpt = get_field('location_conditions_cpt');
-	$condition_schema = '';
-	// Conditions CPT
-	$args = (array(
-		'post_type' => "condition",
-		'post_status' => 'publish',
-		'orderby' => 'title',
-		'order' => 'ASC',
-		'posts_per_page' => -1,
-		'post__in' => $conditions_cpt
-	));
-	$conditions_cpt_query = new WP_Query( $args );
-	// $condition_schema = '';
-	// we will use the first term to load ACF data from
-	if( $conditions_cpt && $conditions_cpt_query->posts ) {
+	if( $show_conditions_section ) {
 		include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
 		$condition_schema .= ',"medicalSpecialty": [';
 		foreach( $conditions_cpt_query->posts as $condition ) {
@@ -1250,19 +1472,7 @@ while ( have_posts() ) : the_post(); ?>
 	// End Conditions Section
 
 	// Begin Treatments and Procedures Section
-	$treatments_cpt = get_field('location_treatments_cpt');
-	$treatment_schema = '';
-	// Treatments CPT
-	$args = (array(
-		'post_type' => "treatment",
-		'post_status' => 'publish',
-		'orderby' => 'title',
-		'order' => 'ASC',
-		'posts_per_page' => -1,
-		'post__in' => $treatments_cpt
-	));
-	$treatments_cpt_query = new WP_Query( $args );
-	if( $treatments_cpt && $treatments_cpt_query->posts ) {
+	if( $show_treatments_section ) {
 		include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
 		$treatment_schema .= ',"medicalSpecialty": [';
 		foreach( $treatments_cpt_query->posts as $treatment ) {
@@ -1277,17 +1487,7 @@ while ( have_posts() ) : the_post(); ?>
 	// End Treatments and Procedures Section
 
 	// Begin Areas of Expertise Section
-	$expertises =  get_field('location_expertise');
-	$args = (array(
-        'post_type' => "expertise",
-        'order' => 'ASC',
-        'orderby' => 'title',
-        'posts_per_page' => -1,
-        'post_status' => 'publish',
-        'post__in'	=> $expertises
-    ));
-    $expertise_query = new WP_Query( $args );
-	if( $expertises && $expertise_query->have_posts() ) { ?>
+	if( $show_aoe_section ) { ?>
 		<section class="uams-module expertise-list bg-auto" id="expertise">
 			<div class="container-fluid">
 				<div class="row">
@@ -1311,45 +1511,27 @@ while ( have_posts() ) : the_post(); ?>
 	// End Areas of Expertise Section
 	
 	// Begin Child Locations Section
-	$current_id = get_the_ID();
-    if ( ( 0 != count( get_pages( array( 'child_of' => $current_id, 'post_type' => 'location' ) ) ) ) ) { // If none available, set to false
-        $args =  array(
-            "post_type" => "location",
-            "post_status" => "publish",
-			"post_parent" => $current_id,
-			'order' => 'ASC',
-			'orderby' => 'title',
-			'meta_query' => array(
-				array(
-					'key' => 'location_hidden',
-					'value' => '1',
-					'compare' => '!=',
-				)
-			),
-        );
-        $children = New WP_Query ( $args );
-        if ( $children->have_posts() ) { ?>
-            <section class="uams-module location-list bg-auto" id="sub-clinics" aria-labelledby="sub-location-title" >
-                <div class="container-fluid">
-                    <div class="row">
-						<div class="col-12">
-							<h2 class="module-title" id="sub-location-title"><span class="title">Additional Clinics Within <?php echo get_the_title(); ?></span></h2>
-							<div class="card-list-container">
-                                <div class="card-list">
-                            <?php
-                                while ( $children->have_posts() ) : $children->the_post();
-                                    $id = get_the_ID(); 
-                                    include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
-                                endwhile;
-                                wp_reset_postdata(); ?>
-                                </div>
-                            </div>
-                        </div>
+	if ( $show_child_locations_section ) { ?>
+		<section class="uams-module location-list bg-auto" id="sub-clinics" aria-labelledby="sub-location-title" >
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<h2 class="module-title" id="sub-location-title"><span class="title">Additional Clinics Within <?php echo get_the_title(); ?></span></h2>
+						<div class="card-list-container">
+							<div class="card-list">
+						<?php
+							while ( $children->have_posts() ) : $children->the_post();
+								$id = get_the_ID(); 
+								include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+							endwhile;
+							wp_reset_postdata(); ?>
+							</div>
+						</div>
 					</div>
 				</div>
-            </section>
-        <?php }
-    }
+			</div>
+		</section>
+	<?php } // endif
 	// End Child Locations Section
 
 	// Begin News Section
