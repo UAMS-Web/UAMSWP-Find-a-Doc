@@ -404,6 +404,7 @@
 					<div class="row">
 						<div class="col-xs-12">
 							<h2 class="module-title">Treatments and Procedures Related to <?php echo get_the_title(); ?></h2>
+							<p class="note">UAMS providers perform and prescribe a broad range of treatments and procedures, some of which may not be listed below.</p>
 							<div class="list-container list-container-rows">
 								<ul class="list">
 								<?php while ($treatments_query_cpt->have_posts()) : $treatments_query_cpt->the_post(); 
