@@ -391,7 +391,7 @@ while ( have_posts() ) : the_post();
         }
 
         // Check if Jump Links section should be displayed
-        if ( $jump_link_count >= $jump_link_count_min = 2 ) {
+        if ( $jump_link_count >= $jump_link_count_min ) {
             $show_jump_links_section = true;
         } else {
             $show_jump_links_section = false;
