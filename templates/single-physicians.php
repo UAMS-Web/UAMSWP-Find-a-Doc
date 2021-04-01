@@ -317,68 +317,68 @@ while ( have_posts() ) : the_post();
     // Set logic for displaying jump links and sections
     $jump_link_count = 0;
 
-    // Check if Make an Appointment section should be displayed
-    if ( $eligible_appt ) {
-        $show_appointment_section = true;
-        $jump_link_count++;
-    } else {
-        $show_appointment_section = false;
-    }
+        // Check if Make an Appointment section should be displayed
+        if ( $eligible_appt ) {
+            $show_appointment_section = true;
+            $jump_link_count++;
+        } else {
+            $show_appointment_section = false;
+        }
 
-    // Check if Academic Background section should be displayed
-    if ( $resident || $academic_bio || $academic_appointment || $academic_admin_title || $education || $boards ) {
-        $show_academic_section = true;
-        $jump_link_count++;
-    } else {
-        $show_academic_section = false;
-    }
+        // Check if Academic Background section should be displayed
+        if ( $resident || $academic_bio || $academic_appointment || $academic_admin_title || $education || $boards ) {
+            $show_academic_section = true;
+            $jump_link_count++;
+        } else {
+            $show_academic_section = false;
+        }
 
-    // Check if Research section should be displayed
-    if ( !empty($research_bio) || !empty($esearch_interests) || !empty ( $publications ) || $pubmed_author_id || $research_profiles_link ) {
-        $show_research_section = true;
-        $jump_link_count++;
-    } else {
-        $show_research_section = false;
-    }
+        // Check if Research section should be displayed
+        if ( !empty($research_bio) || !empty($esearch_interests) || !empty ( $publications ) || $pubmed_author_id || $research_profiles_link ) {
+            $show_research_section = true;
+            $jump_link_count++;
+        } else {
+            $show_research_section = false;
+        }
 
-    // Check if Conditions section should be displayed
-    if ( $conditions_cpt && $conditions_cpt_query->posts ) {
-        $show_conditions_section = true;
-        $jump_link_count++;
-    } else {
-        $show_conditions_section = false;
-    }
+        // Check if Conditions section should be displayed
+        if ( $conditions_cpt && $conditions_cpt_query->posts ) {
+            $show_conditions_section = true;
+            $jump_link_count++;
+        } else {
+            $show_conditions_section = false;
+        }
 
-    // Check if Treatments section should be displayed
-    if ( $treatments_cpt && $treatments_cpt_query->posts ) {
-        $show_treatments_section = true;
-        $jump_link_count++;
-    } else {
-        $show_treatments_section = false;
-    }
+        // Check if Treatments section should be displayed
+        if ( $treatments_cpt && $treatments_cpt_query->posts ) {
+            $show_treatments_section = true;
+            $jump_link_count++;
+        } else {
+            $show_treatments_section = false;
+        }
 
-    // Check if Areas of Expertise section should be displayed
-    if ( $expertise_valid ) {
-        $show_aoe_section = true;
-        $jump_link_count++;
-    } else {
-        $show_aoe_section = false;
-    }
+        // Check if Areas of Expertise section should be displayed
+        if ( $expertise_valid ) {
+            $show_aoe_section = true;
+            $jump_link_count++;
+        } else {
+            $show_aoe_section = false;
+        }
 
-    // Check if Ratings section should be displayed
-    if ( $rating_valid ) {
-        $show_ratings_section = true;
-        $jump_link_count++;
-    } else {
-        $show_ratings_section = false;
-    }
+        // Check if Ratings section should be displayed
+        if ( $rating_valid ) {
+            $show_ratings_section = true;
+            $jump_link_count++;
+        } else {
+            $show_ratings_section = false;
+        }
 
-    // Check if Jump Links section should be displayed
-    if ( $jump_link_count > 1 ) {
-        $show_jump_links_section = true;
-    } else {
-        $show_jump_links_section = false;
-    }
+        // Check if Jump Links section should be displayed
+        if ( $jump_link_count > 1 ) {
+            $show_jump_links_section = true;
+        } else {
+            $show_jump_links_section = false;
+        }
 ?>
 
 <div class="content-sidebar-wrap">
@@ -607,68 +607,68 @@ while ( have_posts() ) : the_post();
         </section>
         <?php // Begin Jump Links Section
         if ( $show_jump_links_section ) { ?>
-        <nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
-            <h2>Contents</h2>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#jump-link-nav" aria-controls="jump-link-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse inner-container" id="jump-link-nav">
-                <ul class="nav navbar-nav">
-                    <?php if ( $show_appointment_section ) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#appointment-info-1">Make an Appointment</a>
-                        </li>
-                    <?php } ?>
-                    <?php if ( $show_clinical_bio_section ) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#clinical-info">About</a>
-                        </li>
-                    <?php } ?>
-                    <?php if ($podcast_name) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#podcast">Podcast</a>
-                        </li>
-                    <?php } ?>
-                    <?php if ($show_academic_section) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#academic-info">Academic Background</a>
-                        </li>
-                    <?php } ?>
-                    <?php if ($show_research_section) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#research-info">Research</a>
-                        </li>
-                    <?php } ?>
-                    <?php if ( $show_conditions_section ) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#conditions">Conditions</a>
-                        </li>
-                    <?php } ?>
-                    <?php if ( $show_treatments_section ) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#treatments">Treatments &amp; Procedures</a>
-                        </li>
-                    <?php } ?>
-                    <?php if ( $show_aoe_section ) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#expertise">Areas of Expertise</a>
-                        </li>
-                    <?php } ?>
-                    <?php if ($show_locations_section) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#locations">Locations</a>
-                        </li>
-                    <?php } ?>
-                    <?php if ($show_ratings_section) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#ratings">Ratings &amp; Reviews</a>
-                        </li>
-                    <?php } ?>
-                </ul>
-            </div>
-        </nav>
-        <?php } // endif ?>
-        <?php // End Jump Links Section ?>
+            <nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
+                <h2>Contents</h2>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#jump-link-nav" aria-controls="jump-link-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse inner-container" id="jump-link-nav">
+                    <ul class="nav navbar-nav">
+                        <?php if ( $show_appointment_section ) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#appointment-info-1">Make an Appointment</a>
+                            </li>
+                        <?php } ?>
+                        <?php if ( $show_clinical_bio_section ) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#clinical-info">About</a>
+                            </li>
+                        <?php } ?>
+                        <?php if ($podcast_name) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#podcast">Podcast</a>
+                            </li>
+                        <?php } ?>
+                        <?php if ($show_academic_section) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#academic-info">Academic Background</a>
+                            </li>
+                        <?php } ?>
+                        <?php if ($show_research_section) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#research-info">Research</a>
+                            </li>
+                        <?php } ?>
+                        <?php if ( $show_conditions_section ) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#conditions">Conditions</a>
+                            </li>
+                        <?php } ?>
+                        <?php if ( $show_treatments_section ) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#treatments">Treatments &amp; Procedures</a>
+                            </li>
+                        <?php } ?>
+                        <?php if ( $show_aoe_section ) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#expertise">Areas of Expertise</a>
+                            </li>
+                        <?php } ?>
+                        <?php if ($show_locations_section) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#locations">Locations</a>
+                            </li>
+                        <?php } ?>
+                        <?php if ($show_ratings_section) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#ratings">Ratings &amp; Reviews</a>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </nav>
+        <?php } // endif
+        // End Jump Links Section ?>
         <?php if ( $show_appointment_section ): ?>
         <?php 
             $appointment_phone_name = 'the UAMS&nbsp;Health appointment line'; // default (UAMS)
