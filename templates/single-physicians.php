@@ -334,6 +334,14 @@ while ( have_posts() ) : the_post();
             $show_academic_section = false;
         }
 
+        // Check if Podcast section should be displayed
+        if ( $podcast_name ) {
+            $show_podcast_section = true;
+            $jump_link_count++;
+        } else {
+            $show_podcast_section = false;
+        }
+
         // Check if Research section should be displayed
         if ( !empty($research_bio) || !empty($esearch_interests) || !empty ( $publications ) || $pubmed_author_id || $research_profiles_link ) {
             $show_research_section = true;
@@ -633,7 +641,7 @@ while ( have_posts() ) : the_post();
                                 <a class="nav-link" href="#clinical-info">About</a>
                             </li>
                         <?php } ?>
-                        <?php if ($podcast_name) { ?>
+                        <?php if ( $show_podcast_section ) { ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="#podcast">Podcast</a>
                             </li>
