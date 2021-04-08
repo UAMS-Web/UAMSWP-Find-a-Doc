@@ -1047,6 +1047,11 @@ while ( have_posts() ) : the_post(); ?>
 							<a class="nav-link" href="#expertise" title="Jump to the section of this page about Areas of Expertise">Areas of Expertise</a>
 						</li>
 					<?php } ?>
+					<?php if ( $show_child_locations_section ) { ?>
+						<li class="nav-item">
+							<a class="nav-link" href="#sub-clinics" title="Jump to the section of this page about additional clinics within this location">Clinics Within This Location</a>
+						</li>
+					<?php } ?>
 				</ul>
 			</div>
 		</nav>
