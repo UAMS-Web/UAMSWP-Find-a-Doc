@@ -84,6 +84,8 @@
 	// Hard coded breadcrumbs
 	// $tax = get_term_by("slug", get_query_var("term"), get_query_var("taxonomy") );
 
+    $cta_repeater = get_field('condition_cta');
+
 	// Locations Content
 	$location_content = '';
 	$args = (array(
@@ -187,6 +189,89 @@
 				<?php } ?>
 			</div>
 		</section>
+        <?php
+            // CTA Bar(s)
+			if( $cta_repeater ) {
+				$i = 1;
+				foreach( $cta_repeater as $cta ) { 
+					$cta_heading = $cta['cta_bar_heading'];
+					$cta_body = $cta['cta_bar_body'];
+					$cta_action_type = $cta['cta_bar_action_type'];
+		
+					$cta_button_text = '';
+					$cta_button_url = '';
+					$cta_button_target = '';
+					$cta_button_desc = '';
+					if ( $cta_action_type == 'url' ) {
+						$cta_button_text = $cta['cta_bar_button_text'];
+						$cta_button_url = $cta['cta_bar_button_url'];
+						if ( $cta_button_url ) {
+							$cta_button_target = $button_url['target'];
+						}
+						$cta_button_desc = $cta['cta_bar_button_description'];
+					}
+		
+					$cta_phone_prepend = '';
+					$cta_phone = '';
+					$cta_phone_link = '';
+					if ( $cta_action_type == 'phone' ) {
+						$cta_phone_prepend = $cta['cta_bar_phone_prepend'] ? $cta['cta_bar_phone_prepend'] : 'Call';
+						$cta_phone = $cta['cta_bar_phone'];
+						$cta_phone_link = '<a href="tel:' . format_phone_dash( $cta_phone ) . '">' . format_phone_us( $cta_phone ) . '</a>';
+					}
+					
+					$cta_layout = 'cta-bar-centered';
+					$cta_size = 'normal';
+					$cta_use_image = false;
+					$cta_image = '';
+					$cta_background_color = 'bg-auto';
+					$cta_btn_color = 'primary';
+		
+					$cta_className = '';  
+					$cta_className .= ' ' . $cta_layout;
+					$cta_className .= ' ' . $cta_background_color;
+					$cta_className .= $cta_use_image ? ' bg-image' : '';
+					if ( $cta_cta_size == 'small' ) {
+						$cta_className .= ' cta-bar-sm';
+					} elseif ( $cta_size == 'large' ) {
+						$cta_className .= ' extra-padding cta-bar-lg';
+					}
+					if ( $cta_action_type == 'none' ) {
+						$cta_className .= ' no-link';
+					}
+		
+					echo '<section class="uams-module cta-bar' . $cta_className . '" id="cta-bar-' . $i . '" aria-label="' . $cta_heading . '">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-12">
+									<div class="inner-container">
+										<div class="cta-heading">
+											<h2>' . $cta_heading . '</h2>
+										</div>
+										<div class="cta-body">
+											<div class="text-container">
+												' . $cta_body . '
+											</div>';
+											echo $cta_action_type == 'url' ?
+											'<div class="btn-container">
+												<a href="' . $cta_button_url['url'] . '" aria-label="' . $cta_button_desc . '" class=" btn btn-' . $cta_btn_color . ( $cta_size == 'large' ? ' btn-lg' : '' ) . '"' . ( $cta_button_target ? ' target="'. $cta_button_target . '"' : '' ) . ' data-moduletitle="' . $cta_heading . '">' . $cta_button_text . '</a>
+											</div>'
+											: '';
+											echo $cta_action_type == 'phone' ?
+											'<div class="btn-container">
+												<a href="tel:' . $cta_phone . '" data-moduletitle="' . $cta_heading . '">' . $cta_phone_prepend . ' <span class="no-break">' . $cta_phone . '</span></a>
+											</div>'
+											: '';
+										echo '</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>';
+					$i++;
+				} 
+			} // endif;
+		?>
         <?php
             // UAMS Health Talk Podcast
             if ($podcast_name) {
