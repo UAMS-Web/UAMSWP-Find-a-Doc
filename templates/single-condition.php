@@ -323,11 +323,6 @@
                                 <a class="nav-link" href="#treatments" title="Jump to the section of this page about Treatments and Procedures">Treatments &amp; Procedures</a>
                             </li>
                         <?php } ?>
-                        <?php if ( $show_aoe_section ) { ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#expertise" title="Jump to the section of this page about Areas of Expertise">Areas of Expertise</a>
-                            </li>
-                        <?php } ?>
                         <?php if ( $show_providers_section ) { ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="#providers" title="Jump to the section of this page about Providers">Providers</a>
@@ -336,6 +331,11 @@
                         <?php if ( $show_locations_section ) { ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="#locations" title="Jump to the section of this page about Locations">Locations</a>
+                            </li>
+                        <?php } ?>
+                        <?php if ( $show_aoe_section ) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#expertise" title="Jump to the section of this page about Areas of Expertise">Areas of Expertise</a>
                             </li>
                         <?php } ?>
                         <?php if ( $show_appointment_section ) { ?>
