@@ -289,7 +289,6 @@ function uamswp_expertise_locations() {
     } // endif
 }
 function uamswp_expertise_associated() {
-    global $page_title;
     global $show_related_aoe_section;
     global $expertise_query;
 
@@ -306,8 +305,8 @@ function uamswp_expertise_associated() {
 						<ul>
 						<?php
 						while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
-							echo '<li class="item"><div class="text-container"><h3 class="h5"><a href="'.get_permalink().'" aria-label="Go to Area of Expertise page for ' . $page_title . '">';
-							echo $page_title;
+							echo '<li class="item"><div class="text-container"><h3 class="h5"><a href="'.get_permalink().'" aria-label="Go to Area of Expertise page for ' . get_the_title() . '">';
+							echo get_the_title();
                             echo '</a></h3>';
                             echo ( has_excerpt() ? '<p>' . wp_trim_words( get_the_excerpt(), 30, '&nbsp;&hellip;' ) . '</p>' : '' );
                             echo '</div></li>';
