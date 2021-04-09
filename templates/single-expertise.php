@@ -376,6 +376,7 @@ function uamswp_expertise_podcast() {
     }
 }
 function uamswp_list_child_expertise() {
+    global $page_id;
     global $page_title;
     global $show_child_aoe_section;
     
@@ -402,7 +403,7 @@ function uamswp_list_child_expertise() {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="module-title" id="sub-expertise-title">Areas Within <?php echo $page_title; ?> <?php echo $hide_menu; ?></h2>
+                            <h2 class="module-title" id="sub-expertise-title">Areas Within <?php echo $page_title; ?></h2>
                             <div class="card-list-container">
                                 <div class="card-list card-list-expertise">
                             <?php
