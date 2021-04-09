@@ -50,12 +50,12 @@ get_header(); ?>
 
 <div class="content-sidebar-wrap">
     <main id="genesis-content">
-        <article class="entry">
+        <section class="archive-description">
             <header class="entry-header">
                 <h1 class="entry-title" itemprop="headline"><?php echo ( $treatment_title ? $treatment_title : 'Treatments &amp; Procedures' ); ?></h1>
             </header>
             <?php echo ($treatment_text ? '<div class="entry-content clearfix" itemprop="text">' . $treatment_text . '</div>' : '' ); ?>
-        </article>
+        </section>
         <section class="uams-module conditions-treatments">
             <div class="container-fluid">
                 <div class="row">
