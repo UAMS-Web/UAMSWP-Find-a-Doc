@@ -426,7 +426,7 @@ function uamswp_expertise_appointment() {
     global $show_appointment_section;
     
     if ( $show_appointment_section ) {
-        if ( get_field('expertise_locations') ) {
+        if ( get_field('location_expertise') ) {
             $appointment_location_url = '#locations';
             $appointment_location_label = 'Go to the list of relevant locations';
         } else {
