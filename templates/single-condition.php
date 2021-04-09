@@ -315,17 +315,12 @@
                         <?php } ?>
                         <?php if ( $show_clinical_trials_section ) { ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="#podcast" title="Jump to the section of this page about Clinical Trials">Clinical Trials</a>
+                                <a class="nav-link" href="#clinical-trials" title="Jump to the section of this page about Clinical Trials">Clinical Trials</a>
                             </li>
                         <?php } ?>
                         <?php if ( $show_treatments_section ) { ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="#treatments" title="Jump to the section of this page about Treatments and Procedures">Treatments &amp; Procedures</a>
-                            </li>
-                        <?php } ?>
-                        <?php if ( $show_aoe_section ) { ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#expertise" title="Jump to the section of this page about Areas of Expertise">Areas of Expertise</a>
                             </li>
                         <?php } ?>
                         <?php if ( $show_providers_section ) { ?>
@@ -336,6 +331,11 @@
                         <?php if ( $show_locations_section ) { ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="#locations" title="Jump to the section of this page about Locations">Locations</a>
+                            </li>
+                        <?php } ?>
+                        <?php if ( $show_aoe_section ) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#expertise" title="Jump to the section of this page about Areas of Expertise">Areas of Expertise</a>
                             </li>
                         <?php } ?>
                         <?php if ( $show_appointment_section ) { ?>
@@ -432,7 +432,7 @@
 
 		// Begin Providers Section
 		if( $show_providers_section ) { ?>
-			<section class="uams-module bg-auto" id="doctors">
+			<section class="uams-module bg-auto" id="providers">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
