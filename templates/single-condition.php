@@ -432,7 +432,7 @@
 
 		// Begin Providers Section
 		if( $show_providers_section ) { ?>
-			<section class="uams-module bg-auto" id="doctors">
+			<section class="uams-module bg-auto" id="providers">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
