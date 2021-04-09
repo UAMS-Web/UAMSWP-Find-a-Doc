@@ -304,7 +304,7 @@
                         <?php } ?>
                         <?php if ( $show_clinical_trials_section ) { ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="#podcast" title="Jump to the section of this page about Clinical Trials">Clinical Trials</a>
+                                <a class="nav-link" href="#clinical-trials" title="Jump to the section of this page about Clinical Trials">Clinical Trials</a>
                             </li>
                         <?php } ?>
                         <?php if ( $show_conditions_section ) { ?>
