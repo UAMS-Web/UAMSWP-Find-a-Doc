@@ -376,6 +376,7 @@ function uamswp_expertise_podcast() {
     }
 }
 function uamswp_list_child_expertise() {
+    global $page_id;
     global $page_title;
     global $show_child_aoe_section;
     
