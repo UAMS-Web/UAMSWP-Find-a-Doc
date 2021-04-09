@@ -84,6 +84,8 @@
 	// Hard coded breadcrumbs
 	// $tax = get_term_by("slug", get_query_var("term"), get_query_var("taxonomy") );
 
+    $cta_repeater = get_field('condition_cta');
+
 	// Locations Content
 	$location_content = '';
 	$args = (array(

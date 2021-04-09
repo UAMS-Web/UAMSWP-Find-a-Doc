@@ -50,8 +50,6 @@ add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 20 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_appointment', 22 );
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 
-
-
 // Set logic for displaying jump links and sections
 $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
 $jump_link_count = 0;

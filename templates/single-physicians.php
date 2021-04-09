@@ -506,7 +506,7 @@ while ( have_posts() ) : the_post();
                                     </dl>
                                 <?php } ?>
                                 <div class="btn-container">
-                                    <a class="btn btn-primary" href="<?php echo get_the_permalink( $location ); ?>" data-categorytitle="View Location">
+                                    <a class="btn btn-primary" href="<?php echo get_the_permalink( $location ); ?>" data-itemtitle="<?php echo $primary_appointment_title_attr; ?>" data-categorytitle="View Location">
                                         View Location
                                     </a>
                                     <?php if (1 < $location_count) { ?>

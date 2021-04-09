@@ -1224,24 +1224,37 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<?php if ( $location_appointment && $location_appointment_bring ) { ?>
+						<?php if ( $location_appointment ) { ?>
+							<h2 class="module-title"><?php echo $location_appointment_heading; ?></h2>
+							<div class="module-body">
+								<?php echo $location_appointment; ?>
+								<?php if ( $location_appointment_bring ) { ?>
+									<h3><?php echo $location_appointment_bring_heading; ?></h3>
+									<?php echo $location_appointment_bring; ?>
+								<?php } // endif ?>
+								<?php if ( $location_appointment_expect ) { ?>
+									<h3><?php echo $location_appointment_expect_heading; ?></h3>
+									<?php echo $location_appointment_expect; ?>
+								<?php } // endif ?>
+							</div>
+
+						<?php } elseif ( $location_appointment_bring && $location_appointment_expect ) { ?>
 							<h2 class="module-title">Appointment Information</h2>
 							<div class="module-body">
-								<?php echo $location_appointment; ?>
-								<h3>What to Bring to Your Appointment</h3>
+								<h3><?php echo $location_appointment_bring_heading; ?></h3>
 								<?php echo $location_appointment_bring; ?>
+								<h3><?php echo $location_appointment_expect_heading; ?></h3>
+								<?php echo $location_appointment_expect; ?>
 							</div>
-
-						<?php } elseif ( $location_appointment ) { ?>
-							<h2 class="module-title">Appointments</h2>
-							<div class="module-body">
-								<?php echo $location_appointment; ?>
-							</div>
-
 						<?php } elseif ( $location_appointment_bring ) { ?>
-							<h2 class="module-title">What to Bring to Your Appointment</h2>
+							<h2 class="module-title"><?php echo $location_appointment_bring_heading; ?></h2>
 							<div class="module-body">
 								<?php echo $location_appointment_bring; ?>
+							</div>
+						<?php } elseif ( $location_appointment_expect ) { ?>
+							<h2 class="module-title"><?php echo $location_appointment_expect_heading; ?></h2>
+							<div class="module-body">
+								<?php echo $location_appointment_expect; ?>
 							</div>
 						<?php } // endif ?>
 					</div>
