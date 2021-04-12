@@ -992,7 +992,7 @@
             "type": "relationship",
             "label": "Locations",
             "instructions": "Please put primary location first. You may choose the order in which locations display.",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
