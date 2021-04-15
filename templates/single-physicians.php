@@ -183,7 +183,7 @@ while ( have_posts() ) : the_post();
     $accept_new = get_field('physician_accepting_patients');
     $physician_portal = get_field('physician_portal');
     $physician_clinical_bio = get_field('physician_clinical_bio');
-    $physician_youtube_link = get_field('physician_youtube_link');
+    // $physician_youtube_link = get_field('physician_youtube_link');
     $physician_clinical_admin_title = get_field('physician_clinical_admin_title');
     $physician_clinical_focus = get_field('physician_clinical_focus');
     $physician_awards = get_field('physician_awards');
@@ -595,7 +595,7 @@ while ( have_posts() ) : the_post();
         <?php 
             $physician_clinical_split = false;
             if (
-                ( $physician_clinical_bio || !empty ($physician_youtube_link) ) // column A stuff
+                ( $physician_clinical_bio || !empty ( $video ) ) // column A stuff
                 && ( $physician_clinical_focus ) // column B stuff
                 // && ( $physician_clinical_admin_title || $physician_clinical_focus ) // Alternate column B stuff if we decide to display clinical admin title
                 ) {
@@ -603,7 +603,7 @@ while ( have_posts() ) : the_post();
             }
         
             // Display section for Clinical Bio, Clinical Video, Clinical Administrative Title(s), Clinical Focus ... only if there is a bio or video.
-            if ( $physician_clinical_bio || !empty ($physician_youtube_link) ) { ?>
+            if ( $physician_clinical_bio || !empty ($video) ) { ?>
             <section class="uams-module clinical-info bg-auto" id="clinical-info">
                 <div class="container-fluid">
                     <div class="row">
@@ -623,10 +623,16 @@ while ( have_posts() ) : the_post();
                                 <h3 class="sr-only">Clinical Biography</h3>
                                 <?php echo $physician_clinical_bio; ?>
                             <?php } // endif
-                            if($physician_youtube_link) { ?>
-                                <div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
-                                    <?php echo wp_oembed_get( $physician_youtube_link ); ?>
-                                </div>
+                            if($video) { ?>
+                                <?php if(function_exists('lyte_preparse')) {
+                                    echo '<div class="alignwide">';
+                                    echo lyte_parse( $video ); 
+                                    echo '</div>';
+                                } else {
+                                    echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
+                                    echo wp_oembed_get( $video ); 
+                                    echo '</div>';
+                                } ?>
                             <?php } // endif
                             if ( $physician_clinical_split ) { ?>
                                 </div>
