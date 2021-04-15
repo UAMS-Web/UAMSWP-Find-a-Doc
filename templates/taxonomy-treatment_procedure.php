@@ -169,14 +169,14 @@
 				?>
 				<?php if( $video ) { ?>
 					<?php if(function_exists('lyte_preparse')) {
-						echo '<div class="alignwide">';
-						echo lyte_parse( $video ); 
-						echo '</div>';
-					} else {
-						echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
-						echo wp_oembed_get( $video ); 
-						echo '</div>';
-					} ?>
+							echo '<div class="alignwide">';
+							echo lyte_parse( $video ); 
+							echo '</div>';
+						} else {
+							echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
+							echo wp_oembed_get( $video ); 
+							echo '</div>';
+						} ?>
 				<?php } ?>
 			</div>
 		</section>
