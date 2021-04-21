@@ -727,17 +727,17 @@
 }
 
 .location-alert-warning {
-  color: #7a3b18;
-  background-color: #fbe3d5;
-  border-color: #f9d7c5;
+  color: #69280f;
+  background-color: #f4dbd2;
+  border-color: #f0cdc0;
 }
 
 .location-alert-warning hr {
-  border-top-color: #f7c7ae;
+  border-top-color: #ebbdab;
 }
 
 .location-alert-warning .alert-link {
-  color: #4f2610;
+  color: #3c1709;
 }
 
 .location-alert-danger {
