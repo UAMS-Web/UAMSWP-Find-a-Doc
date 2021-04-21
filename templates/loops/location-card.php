@@ -35,7 +35,7 @@
         $parent_title_attr = str_replace('"', '\'', $parent_title);
         $parent_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($parent_title_attr, null, 'utf-8')));
         $parent_url = get_permalink( $parent_id );
-        $featured_image = get_the_post_thumbnail($parent_id, 'aspect-16-9-small', ['class' => 'card-img-top']);
+        $featured_image = get_the_post_thumbnail($parent_id, 'aspect-16-9-small', [ 'class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr ]);
         $address_id = $parent_id;
 
         $override_parent_photo = get_field('location_image_override_parent', $id);
@@ -43,12 +43,12 @@
         
         // Set featured image
         if ( $override_parent_photo && $override_parent_photo_featured ) {
-            $featured_image = get_the_post_thumbnail($id, 'aspect-16-9-small', ['class' => 'card-img-top']);
+            $featured_image = get_the_post_thumbnail($id, 'aspect-16-9-small', [ 'class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr ]);
         }
     } else {
         // Set featured image
         if ( has_post_thumbnail($id) ) {
-            $featured_image = get_the_post_thumbnail($id, 'aspect-16-9-small', ['class' => 'card-img-top']);
+            $featured_image = get_the_post_thumbnail($id, 'aspect-16-9-small', [ 'class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr ]);
         }
     }
                                             
