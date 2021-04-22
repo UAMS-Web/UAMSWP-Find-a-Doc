@@ -351,6 +351,7 @@ while ( have_posts() ) : the_post(); ?>
         // Check if Appointment Information section should be displayed
 		$location_appointment = get_field('location_appointment');
 		$location_appointment_bring = get_field('location_appointment_bring');
+		$location_appointment_expect = get_field('location_appointment_expect');
 
 		if ( $location_appointment || $location_appointment_bring) {
             $show_appointment_section = true;
@@ -1219,7 +1220,11 @@ while ( have_posts() ) : the_post(); ?>
 	// End Parking and Directions Section
 
 	// Begin Appointment Information Section
-	if ( $show_appointment_section ) { ?>
+	if ( $show_appointment_section ) {
+		$location_appointment_heading = 'Appointment Information';
+		$location_appointment_bring_heading = 'What to Bring to Your Appointment';
+		$location_appointment_expect_heading = 'What to Expect at Your Appointment';
+		?>
 		<section class="uams-module bg-auto" id="appointment-info">
 			<div class="container-fluid">
 				<div class="row">
@@ -1239,7 +1244,7 @@ while ( have_posts() ) : the_post(); ?>
 							</div>
 
 						<?php } elseif ( $location_appointment_bring && $location_appointment_expect ) { ?>
-							<h2 class="module-title">Appointment Information</h2>
+							<h2 class="module-title"><?php echo $location_appointment_heading; ?></h2>
 							<div class="module-body">
 								<h3><?php echo $location_appointment_bring_heading; ?></h3>
 								<?php echo $location_appointment_bring; ?>
