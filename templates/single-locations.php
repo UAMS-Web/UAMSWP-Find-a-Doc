@@ -1018,12 +1018,12 @@ while ( have_posts() ) : the_post(); ?>
 							<a class="nav-link" href="#appointment-info" title="Jump to the section of this page about Appointment Information">Appointment Information</a>
 						</li>
 					<?php } ?>
-					<?php if ( $show_providers_section ) { ?>
+					<?php if ( $show_telemed_section ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#telemedicine-info" title="Jump to the section of this page about Telemedicine Information">Telemedicine</a>
 						</li>
 					<?php } ?>
-					<?php if ( $show_providers_section ) { ?>
+					<?php if ( $show_portal_section ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#portal-info" title="Jump to the section of this page about the Patient Portal">Patient Portal</a>
 						</li>
