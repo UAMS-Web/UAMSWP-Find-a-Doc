@@ -353,7 +353,7 @@ while ( have_posts() ) : the_post(); ?>
 		$location_appointment_bring = get_field('location_appointment_bring');
 		$location_appointment_expect = get_field('location_appointment_expect');
 
-		if ( $location_appointment || $location_appointment_bring) {
+		if ( $location_appointment || $location_appointment_bring || $location_appointment_expect ) {
             $show_appointment_section = true;
             $jump_link_count++;
         } else {
