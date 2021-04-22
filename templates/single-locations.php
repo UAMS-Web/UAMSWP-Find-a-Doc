@@ -351,6 +351,7 @@ while ( have_posts() ) : the_post(); ?>
         // Check if Appointment Information section should be displayed
 		$location_appointment = get_field('location_appointment');
 		$location_appointment_bring = get_field('location_appointment_bring');
+		$location_appointment_expect = get_field('location_appointment_expect');
 
 		if ( $location_appointment || $location_appointment_bring) {
             $show_appointment_section = true;
