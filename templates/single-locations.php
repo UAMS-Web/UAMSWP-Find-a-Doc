@@ -1230,7 +1230,7 @@ while ( have_posts() ) : the_post(); ?>
 				<div class="row">
 					<div class="col-xs-12">
 						<?php if ( $location_appointment ) { ?>
-							<h2 class="module-title">Appointment Information</h2>
+							<h2 class="module-title"><?php echo $location_appointment_heading; ?></h2>
 							<div class="module-body">
 								<?php echo $location_appointment; ?>
 								<?php if ( $location_appointment_bring ) { ?>
@@ -1244,7 +1244,7 @@ while ( have_posts() ) : the_post(); ?>
 							</div>
 
 						<?php } elseif ( $location_appointment_bring && $location_appointment_expect ) { ?>
-							<h2 class="module-title">Appointment Information</h2>
+							<h2 class="module-title"><?php echo $location_appointment_heading; ?></h2>
 							<div class="module-body">
 								<h3><?php echo $location_appointment_bring_heading; ?></h3>
 								<?php echo $location_appointment_bring; ?>
