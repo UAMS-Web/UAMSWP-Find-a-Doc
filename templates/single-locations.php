@@ -1220,7 +1220,11 @@ while ( have_posts() ) : the_post(); ?>
 	// End Parking and Directions Section
 
 	// Begin Appointment Information Section
-	if ( $show_appointment_section ) { ?>
+	if ( $show_appointment_section ) {
+		$location_appointment_heading = 'Appointment Information';
+		$location_appointment_bring_heading = 'What to Bring to Your Appointment';
+		$location_appointment_expect_heading = 'What to Expect at Your Appointment';
+		?>
 		<section class="uams-module bg-auto" id="appointment-info">
 			<div class="container-fluid">
 				<div class="row">
