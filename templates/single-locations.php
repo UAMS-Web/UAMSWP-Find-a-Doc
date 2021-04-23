@@ -351,8 +351,9 @@ while ( have_posts() ) : the_post(); ?>
         // Check if Appointment Information section should be displayed
 		$location_appointment = get_field('location_appointment');
 		$location_appointment_bring = get_field('location_appointment_bring');
+		$location_appointment_expect = get_field('location_appointment_expect');
 
-		if ( $location_appointment || $location_appointment_bring) {
+		if ( $location_appointment || $location_appointment_bring || $location_appointment_expect ) {
             $show_appointment_section = true;
             $jump_link_count++;
         } else {
@@ -409,7 +410,7 @@ while ( have_posts() ) : the_post(); ?>
 			);
 			$physicians_query = New WP_Query( $args );
 		}
-		if ( $physicians_query->have_posts() ) {
+		if ( $physicians_query && $physicians_query->have_posts() ) {
 			$show_providers_section = true;
 			$jump_link_count++;
 		} else {
@@ -498,7 +499,7 @@ while ( have_posts() ) : the_post(); ?>
 			);
 			$children = New WP_Query ( $args );
 		}
-		if ( $children->have_posts() ) {
+		if ( $children && $children->have_posts() ) {
             $show_child_locations_section = true;
             $jump_link_count++;
         } else {
@@ -1017,12 +1018,12 @@ while ( have_posts() ) : the_post(); ?>
 							<a class="nav-link" href="#appointment-info" title="Jump to the section of this page about Appointment Information">Appointment Information</a>
 						</li>
 					<?php } ?>
-					<?php if ( $show_providers_section ) { ?>
+					<?php if ( $show_telemed_section ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#telemedicine-info" title="Jump to the section of this page about Telemedicine Information">Telemedicine</a>
 						</li>
 					<?php } ?>
-					<?php if ( $show_providers_section ) { ?>
+					<?php if ( $show_portal_section ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#portal-info" title="Jump to the section of this page about the Patient Portal">Patient Portal</a>
 						</li>
@@ -1219,7 +1220,11 @@ while ( have_posts() ) : the_post(); ?>
 	// End Parking and Directions Section
 
 	// Begin Appointment Information Section
-	if ( $show_appointment_section ) { ?>
+	if ( $show_appointment_section ) {
+		$location_appointment_heading = 'Appointment Information';
+		$location_appointment_bring_heading = 'What to Bring to Your Appointment';
+		$location_appointment_expect_heading = 'What to Expect at Your Appointment';
+		?>
 		<section class="uams-module bg-auto" id="appointment-info">
 			<div class="container-fluid">
 				<div class="row">
@@ -1239,7 +1244,7 @@ while ( have_posts() ) : the_post(); ?>
 							</div>
 
 						<?php } elseif ( $location_appointment_bring && $location_appointment_expect ) { ?>
-							<h2 class="module-title">Appointment Information</h2>
+							<h2 class="module-title"><?php echo $location_appointment_heading; ?></h2>
 							<div class="module-body">
 								<h3><?php echo $location_appointment_bring_heading; ?></h3>
 								<?php echo $location_appointment_bring; ?>
