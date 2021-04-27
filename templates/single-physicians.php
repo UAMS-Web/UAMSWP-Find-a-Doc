@@ -752,7 +752,11 @@ while ( have_posts() ) : the_post();
                             <p>Existing patients can make an appointment by <?php echo $appointment_reference_portal; ?> or <?php echo $appointment_reference_main; ?>.</p>
                         <?php } elseif ($refer_req && $accept_new && $show_portal) { ?>
                             <p><?php echo $appointment_reference_referral; ?></p>
-                            <p>Existing patients can make an appointment by <?php echo $appointment_reference_portal; ?>, <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.</p>
+                            <p>Existing patients can make an appointment by <?php if ( $appointment_show_main_line ) { ?>
+                                <?php echo $appointment_reference_portal; ?>, <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
+                            <?php } else { ?>
+                                <?php echo $appointment_reference_portal; ?> or <?php echo $appointment_reference_direct; ?>.
+                            <?php } ?></p>
                         <?php } elseif (!$location_valid && $refer_req && $accept_new) {
                             // Showing main appointment line reference here regardless of 
                             // decision on main appointment line, as there is no valid location 
@@ -763,7 +767,11 @@ while ( have_posts() ) : the_post();
                             <p>Existing patients can make an appointment <?php echo $appointment_reference_main; ?>.</p>
                         <?php } elseif ($refer_req && $accept_new) { ?>
                             <p><?php echo $appointment_reference_referral; ?></p>
-                            <p>Existing patients can make an appointment <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.</p>
+                            <p>Existing patients can make an appointment <?php if ( $appointment_show_main_line ) { ?>
+                                <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
+                            <? } else { ?>
+                                <?php echo $appointment_reference_direct; ?>.
+                            <?php } ?></p>
                         <?php } elseif (!$location_valid && $accept_new && $show_portal) {
                             // Showing main appointment line reference here regardless of 
                             // decision on main appointment line, as there is no valid location 
@@ -773,7 +781,11 @@ while ( have_posts() ) : the_post();
                             <p>New patients can make an appointment <?php echo $appointment_reference_main; ?>.</p>
                             <p>Existing patients also have the option of <?php echo $appointment_reference_portal; ?>.</p>
                         <?php } elseif ($accept_new && $show_portal) { ?>
-                            <p>New patients can make an appointment <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.</p>
+                            <p>New patients can make an appointment <?php if ( $appointment_show_main_line ) { ?>
+                                <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
+                            <?php } else { ?>
+                                <?php echo $appointment_reference_direct; ?>.
+                            <?php } ?></p>
                             <p>Existing patients also have the option of <?php echo $appointment_reference_portal; ?>.</p>
                         <?php } elseif (!$location_valid && $accept_new) {
                             // Showing main appointment line reference here regardless of 
@@ -783,7 +795,11 @@ while ( have_posts() ) : the_post();
                         ?>
                             <p>New and existing patients can make an appointment <?php echo $appointment_reference_main; ?>.</p>
                         <?php } elseif ($accept_new) { ?>
-                            <p>New and existing patients can make an appointment <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.</p>
+                            <p>New and existing patients can make an appointment <?php if ( $appointment_show_main_line ) { ?>
+                                <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
+                            <?php } else { ?>
+                                <?php echo $appointment_reference_direct; ?>.
+                            <?php } ?></p>
                         <?php } elseif (!$location_valid && $show_portal) {
                             // Showing main appointment line reference here regardless of 
                             // decision on main appointment line, as there is no valid location 
@@ -794,7 +810,11 @@ while ( have_posts() ) : the_post();
                             <p>Existing patients can make an appointment by <?php echo $appointment_reference_portal; ?> or <?php echo $appointment_reference_main; ?>.</p>
                         <?php } elseif ($show_portal) { ?>
                             <p>This provider is not currently accepting new patients.</p>
-                            <p>Existing patients can make an appointment by <?php echo $appointment_reference_portal; ?>, <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.</p>
+                            <p>Existing patients can make an appointment by <?php if ( $appointment_show_main_line ) { ?>
+                                <?php echo $appointment_reference_portal; ?>, <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.</p>
+                            <?php } else { ?>
+                                <?php echo $appointment_reference_portal; ?> or <?php echo $appointment_reference_direct; ?>.</p>
+                            <?php } ?>
                         <?php } elseif (!$location_valid) {
                             // Showing main appointment line reference here regardless of 
                             // decision on main appointment line, as there is no valid location 
@@ -805,7 +825,11 @@ while ( have_posts() ) : the_post();
                             <p>Existing patients can make an appointment <?php echo $appointment_reference_main; ?>.</p>
                         <?php } else { ?>
                             <p>This provider is not currently accepting new patients.</p>
-                            <p>Existing patients can make an appointment <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.</p>
+                            <p>Existing patients can make an appointment <?php if ( $appointment_show_main_line ) { ?>
+                                <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
+                            <?php } else { ?>
+                                <?php echo $appointment_reference_direct; ?>.
+                            <?php } ?></p>
                         <?php } ?>
                     </div>
                 </div>
@@ -1346,7 +1370,11 @@ while ( have_posts() ) : the_post();
                                 <p>Existing patients can make an appointment by <?php echo $appointment_reference_portal; ?> or <?php echo $appointment_reference_main; ?>.</p>
                             <?php } elseif ($refer_req && $accept_new && $show_portal) { ?>
                                 <p><?php echo $appointment_reference_referral; ?></p>
-                                <p>Existing patients can make an appointment by <?php echo $appointment_reference_portal; ?>, <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.</p>
+                                <p>Existing patients can make an appointment by <?php if ( $appointment_show_main_line ) { ?>
+                                    <?php echo $appointment_reference_portal; ?>, <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
+                                <?php } else { ?>
+                                    <?php echo $appointment_reference_portal; ?> or <?php echo $appointment_reference_direct; ?>.
+                                <?php } ?></p>
                             <?php } elseif (!$location_valid && $refer_req && $accept_new) {
                                 // Showing main appointment line reference here regardless of 
                                 // decision on main appointment line, as there is no valid location 
@@ -1357,7 +1385,11 @@ while ( have_posts() ) : the_post();
                                 <p>Existing patients can make an appointment <?php echo $appointment_reference_main; ?>.</p>
                             <?php } elseif ($refer_req && $accept_new) { ?>
                                 <p><?php echo $appointment_reference_referral; ?></p>
-                                <p>Existing patients can make an appointment <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.</p>
+                                <p>Existing patients can make an appointment <?php if ( $appointment_show_main_line ) { ?>
+                                    <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
+                                <? } else { ?>
+                                    <?php echo $appointment_reference_direct; ?>.
+                                <?php } ?></p>
                             <?php } elseif (!$location_valid && $accept_new && $show_portal) {
                                 // Showing main appointment line reference here regardless of 
                                 // decision on main appointment line, as there is no valid location 
@@ -1367,7 +1399,11 @@ while ( have_posts() ) : the_post();
                                 <p>New patients can make an appointment <?php echo $appointment_reference_main; ?>.</p>
                                 <p>Existing patients also have the option of <?php echo $appointment_reference_portal; ?>.</p>
                             <?php } elseif ($accept_new && $show_portal) { ?>
-                                <p>New patients can make an appointment <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.</p>
+                                <p>New patients can make an appointment <?php if ( $appointment_show_main_line ) { ?>
+                                    <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
+                                <?php } else { ?>
+                                    <?php echo $appointment_reference_direct; ?>.
+                                <?php } ?></p>
                                 <p>Existing patients also have the option of <?php echo $appointment_reference_portal; ?>.</p>
                             <?php } elseif (!$location_valid && $accept_new) {
                                 // Showing main appointment line reference here regardless of 
@@ -1377,7 +1413,11 @@ while ( have_posts() ) : the_post();
                             ?>
                                 <p>New and existing patients can make an appointment <?php echo $appointment_reference_main; ?>.</p>
                             <?php } elseif ($accept_new) { ?>
-                                <p>New and existing patients can make an appointment <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.</p>
+                                <p>New and existing patients can make an appointment <?php if ( $appointment_show_main_line ) { ?>
+                                    <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
+                                <?php } else { ?>
+                                    <?php echo $appointment_reference_direct; ?>.
+                                <?php } ?></p>
                             <?php } elseif (!$location_valid && $show_portal) {
                                 // Showing main appointment line reference here regardless of 
                                 // decision on main appointment line, as there is no valid location 
@@ -1388,7 +1428,11 @@ while ( have_posts() ) : the_post();
                                 <p>Existing patients can make an appointment by <?php echo $appointment_reference_portal; ?> or <?php echo $appointment_reference_main; ?>.</p>
                             <?php } elseif ($show_portal) { ?>
                                 <p>This provider is not currently accepting new patients.</p>
-                                <p>Existing patients can make an appointment by <?php echo $appointment_reference_portal; ?>, <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.</p>
+                                <p>Existing patients can make an appointment by <?php if ( $appointment_show_main_line ) { ?>
+                                    <?php echo $appointment_reference_portal; ?>, <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.</p>
+                                <?php } else { ?>
+                                    <?php echo $appointment_reference_portal; ?> or <?php echo $appointment_reference_direct; ?>.</p>
+                                <?php } ?>
                             <?php } elseif (!$location_valid) {
                                 // Showing main appointment line reference here regardless of 
                                 // decision on main appointment line, as there is no valid location 
@@ -1399,7 +1443,11 @@ while ( have_posts() ) : the_post();
                                 <p>Existing patients can make an appointment <?php echo $appointment_reference_main; ?>.</p>
                             <?php } else { ?>
                                 <p>This provider is not currently accepting new patients.</p>
-                                <p>Existing patients can make an appointment <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.</p>
+                                <p>Existing patients can make an appointment <?php if ( $appointment_show_main_line ) { ?>
+                                    <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
+                                <?php } else { ?>
+                                    <?php echo $appointment_reference_direct; ?>.
+                                <?php } ?></p>
                             <?php } ?>
                         </div>
                     </div>
