@@ -770,10 +770,10 @@ while ( have_posts() ) : the_post();
                             // appointment with this provider.
                         ?>
                             <p>New patients can make an appointment by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                            <p>Existing patients also have the option to <?php echo $appointment_reference_portal; ?>.</p>
+                            <p>Existing patients also have the option of <?php echo $appointment_reference_portal; ?>.</p>
                         <?php } elseif ($accept_new && $show_portal) { ?>
                             <p>New patients can make an appointment <?php echo $appointment_reference_direct; ?> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                            <p>Existing patients also have the option to <?php echo $appointment_reference_portal; ?>.</p>
+                            <p>Existing patients also have the option of <?php echo $appointment_reference_portal; ?>.</p>
                         <?php } elseif (!$location_valid && $accept_new) {
                             // Showing main appointment line reference here regardless of 
                             // decision on main appointment line, as there is no valid location 
@@ -1364,10 +1364,10 @@ while ( have_posts() ) : the_post();
                                 // appointment with this provider.
                             ?>
                                 <p>New patients can make an appointment by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                                <p>Existing patients also have the option to <?php echo $appointment_reference_portal; ?>.</p>
+                                <p>Existing patients also have the option of <?php echo $appointment_reference_portal; ?>.</p>
                             <?php } elseif ($accept_new && $show_portal) { ?>
                                 <p>New patients can make an appointment <?php echo $appointment_reference_direct; ?> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                                <p>Existing patients also have the option to <?php echo $appointment_reference_portal; ?>.</p>
+                                <p>Existing patients also have the option of <?php echo $appointment_reference_portal; ?>.</p>
                             <?php } elseif (!$location_valid && $accept_new) {
                                 // Showing main appointment line reference here regardless of 
                                 // decision on main appointment line, as there is no valid location 
