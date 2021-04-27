@@ -732,6 +732,7 @@ while ( have_posts() ) : the_post();
                 $appointment_location_title = 'Jump to list of locations for this provider';
                 $appointment_location_data = 'Contact the Clinic Directly | Anchor Link';
             }
+            $appointment_reference_referral = 'Appointments for new patients are by referral only.';
             $appointment_reference_portal = '<a href="' . $portal_url . '" aria-label="' . $portal_name . '" target="_blank" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Request an Appointment Online | ' . $portal_name_attr . '">request an appointment online</a> through ' . $portal_name;
             
         ?>
