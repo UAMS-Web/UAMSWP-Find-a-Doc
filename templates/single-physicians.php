@@ -688,6 +688,7 @@ while ( have_posts() ) : the_post();
         // End Jump Links Section ?>
         <?php if ( $show_appointment_section ): ?>
         <?php 
+            $appointment_show_main_line = false;
             $appointment_phone_name = 'the UAMS&nbsp;Health appointment line'; // default (UAMS)
             $appointment_phone = '5016868000'; // default (UAMS)
             $show_portal = false;
