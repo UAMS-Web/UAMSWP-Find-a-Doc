@@ -4,7 +4,8 @@
      *  Designed for UAMS Find-a-Doc
      */
 
-    $appointment_show_main_line = false;
+    $appointment_show_main_line_sys = get_field('provider_mainline', 'option');
+    
     $appointment_phone_name = 'the UAMS&nbsp;Health appointment line'; // default (UAMS)
     $appointment_phone = '5016868000'; // default (UAMS)
     $show_portal = false;
@@ -68,7 +69,7 @@
                     <p>Existing patients can make an appointment by <?php echo $appointment_reference_portal; ?> or <?php echo $appointment_reference_main; ?>.</p>
                 <?php } elseif ($refer_req && $accept_new && $show_portal) { ?>
                     <p><?php echo $appointment_reference_referral; ?></p>
-                    <p>Existing patients can make an appointment by <?php if ( $appointment_show_main_line ) { ?>
+                    <p>Existing patients can make an appointment by <?php if ( $appointment_show_main_line_sys ) { ?>
                         <?php echo $appointment_reference_portal; ?>, <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
                     <?php } else { ?>
                         <?php echo $appointment_reference_portal; ?> or <?php echo $appointment_reference_direct; ?>.
@@ -83,7 +84,7 @@
                     <p>Existing patients can make an appointment <?php echo $appointment_reference_main; ?>.</p>
                 <?php } elseif ($refer_req && $accept_new) { ?>
                     <p><?php echo $appointment_reference_referral; ?></p>
-                    <p>Existing patients can make an appointment <?php if ( $appointment_show_main_line ) { ?>
+                    <p>Existing patients can make an appointment <?php if ( $appointment_show_main_line_sys ) { ?>
                         <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
                     <? } else { ?>
                         <?php echo $appointment_reference_direct; ?>.
@@ -97,7 +98,7 @@
                     <p>New patients can make an appointment <?php echo $appointment_reference_main; ?>.</p>
                     <p>Existing patients also have the option of <?php echo $appointment_reference_portal; ?>.</p>
                 <?php } elseif ($accept_new && $show_portal) { ?>
-                    <p>New patients can make an appointment <?php if ( $appointment_show_main_line ) { ?>
+                    <p>New patients can make an appointment <?php if ( $appointment_show_main_line_sys ) { ?>
                         <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
                     <?php } else { ?>
                         <?php echo $appointment_reference_direct; ?>.
@@ -111,7 +112,7 @@
                 ?>
                     <p>New and existing patients can make an appointment <?php echo $appointment_reference_main; ?>.</p>
                 <?php } elseif ($accept_new) { ?>
-                    <p>New and existing patients can make an appointment <?php if ( $appointment_show_main_line ) { ?>
+                    <p>New and existing patients can make an appointment <?php if ( $appointment_show_main_line_sys ) { ?>
                         <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
                     <?php } else { ?>
                         <?php echo $appointment_reference_direct; ?>.
@@ -126,7 +127,7 @@
                     <p>Existing patients can make an appointment by <?php echo $appointment_reference_portal; ?> or <?php echo $appointment_reference_main; ?>.</p>
                 <?php } elseif ($show_portal) { ?>
                     <p>This provider is not currently accepting new patients.</p>
-                    <p>Existing patients can make an appointment by <?php if ( $appointment_show_main_line ) { ?>
+                    <p>Existing patients can make an appointment by <?php if ( $appointment_show_main_line_sys ) { ?>
                         <?php echo $appointment_reference_portal; ?>, <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.</p>
                     <?php } else { ?>
                         <?php echo $appointment_reference_portal; ?> or <?php echo $appointment_reference_direct; ?>.</p>
@@ -141,7 +142,7 @@
                     <p>Existing patients can make an appointment <?php echo $appointment_reference_main; ?>.</p>
                 <?php } else { ?>
                     <p>This provider is not currently accepting new patients.</p>
-                    <p>Existing patients can make an appointment <?php if ( $appointment_show_main_line ) { ?>
+                    <p>Existing patients can make an appointment <?php if ( $appointment_show_main_line_sys ) { ?>
                         <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
                     <?php } else { ?>
                         <?php echo $appointment_reference_direct; ?>.
