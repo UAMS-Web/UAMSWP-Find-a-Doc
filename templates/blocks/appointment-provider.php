@@ -59,15 +59,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <h2>Make an Appointment With <?php echo $short_name; ?></h2>
-                <?php if (!$location_valid && $refer_req && $accept_new && $show_portal) {
-                    // Showing main appointment line reference here regardless of 
-                    // decision on main appointment line, as there is no valid location 
-                    // in this scenario. There would otherwise be no manner to make an 
-                    // appointment with this provider.
-                ?>
-                    <p><?php echo $appointment_reference_referral; ?></p>
-                    <p>Existing patients can make an appointment <?php echo $appointment_reference_main; ?>.</p>
-                <?php } elseif ($refer_req && $accept_new && $show_portal) { ?>
+                <?php if ($refer_req && $accept_new && $show_portal) { ?>
                     <p><?php echo $appointment_reference_referral; ?></p>
                     <p>Existing patients can make an appointment by <?php if ( $appointment_show_main_line_sys ) { ?>
                         <?php echo $appointment_reference_portal; ?>, <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
