@@ -66,7 +66,7 @@
                     // appointment with this provider.
                 ?>
                     <p><?php echo $appointment_reference_referral; ?></p>
-                    <p>Existing patients can make an appointment by <?php echo $appointment_reference_portal; ?> or <?php echo $appointment_reference_main; ?>.</p>
+                    <p>Existing patients can make an appointment <?php echo $appointment_reference_main; ?>.</p>
                 <?php } elseif ($refer_req && $accept_new && $show_portal) { ?>
                     <p><?php echo $appointment_reference_referral; ?></p>
                     <p>Existing patients can make an appointment by <?php if ( $appointment_show_main_line_sys ) { ?>
@@ -89,14 +89,6 @@
                     <? } else { ?>
                         <?php echo $appointment_reference_direct; ?>.
                     <?php } ?></p>
-                <?php } elseif (!$location_valid && $accept_new && $show_portal) {
-                    // Showing main appointment line reference here regardless of 
-                    // decision on main appointment line, as there is no valid location 
-                    // in this scenario. There would otherwise be no manner to make an 
-                    // appointment with this provider.
-                ?>
-                    <p>New patients can make an appointment <?php echo $appointment_reference_main; ?>.</p>
-                    <p>Existing patients also have the option of <?php echo $appointment_reference_portal; ?>.</p>
                 <?php } elseif ($accept_new && $show_portal) { ?>
                     <p>New patients can make an appointment <?php if ( $appointment_show_main_line_sys ) { ?>
                         <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
@@ -117,14 +109,6 @@
                     <?php } else { ?>
                         <?php echo $appointment_reference_direct; ?>.
                     <?php } ?></p>
-                <?php } elseif (!$location_valid && $show_portal) {
-                    // Showing main appointment line reference here regardless of 
-                    // decision on main appointment line, as there is no valid location 
-                    // in this scenario. There would otherwise be no manner to make an 
-                    // appointment with this provider.
-                ?>
-                    <p>This provider is not currently accepting new patients.</p>
-                    <p>Existing patients can make an appointment by <?php echo $appointment_reference_portal; ?> or <?php echo $appointment_reference_main; ?>.</p>
                 <?php } elseif ($show_portal) { ?>
                     <p>This provider is not currently accepting new patients.</p>
                     <p>Existing patients can make an appointment by <?php if ( $appointment_show_main_line_sys ) { ?>
