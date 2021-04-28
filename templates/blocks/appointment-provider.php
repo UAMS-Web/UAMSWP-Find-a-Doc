@@ -23,7 +23,7 @@
             $portal_link_title = $portal_link['title'];
         }
 
-        if ($portal && $portal_slug !== "_none") {
+        if ($location_valid && $portal && $portal_slug !== "_none") {
             $show_portal = true;
         }
         if ($portal_slug == "ach-mychart") {
