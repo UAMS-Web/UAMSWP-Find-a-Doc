@@ -1208,7 +1208,20 @@ while ( have_posts() ) : the_post();
                 </div>
             </div>
         </section> -->
-        <?php if ( $show_appointment_section ) {
+        <?php if (
+            $show_appointment_section && 
+            ( 
+                $show_clinical_bio_section
+                || $show_academic_section
+                || $show_podcast_section
+                || $show_research_section
+                || $show_conditions_section
+                || $show_treatments_section
+                || $show_aoe_section
+                || $show_locations_section
+                || $show_ratings_section
+            )
+        ) {
             $appointment_block_instance = 2;
 			include( UAMS_FAD_PATH . '/templates/blocks/appointment-provider.php' );
 		} ?>
