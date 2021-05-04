@@ -1104,7 +1104,7 @@ while ( have_posts() ) : the_post(); ?>
 							<?php if($location_youtube_link) { ?>
 								<?php if(function_exists('lyte_preparse')) {
                                     echo '<div class="alignwide">';
-                                    echo lyte_parse( $location_youtube_link ); 
+                                    echo lyte_parse( str_replace( 'https', 'httpv', $location_youtube_link ) ); 
                                     echo '</div>';
                                 } else {
                                     echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
