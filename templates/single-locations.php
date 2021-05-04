@@ -1101,10 +1101,16 @@ while ( have_posts() ) : the_post(); ?>
 						<h2 class="module-title"><?php echo $about_section_title; ?></h2>
 						<div class="module-body">
 							<?php echo $location_about ? $location_about : ''; ?>
-							<?php if ( $location_youtube_link ) { ?>
-								<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
-									<?php echo wp_oembed_get( $location_youtube_link ); ?>
-								</div>
+							<?php if($location_youtube_link) { ?>
+								<?php if(function_exists('lyte_preparse')) {
+                                    echo '<div class="alignwide">';
+                                    echo lyte_parse( str_replace( 'https', 'httpv', $location_youtube_link ) ); 
+                                    echo '</div>';
+                                } else {
+                                    echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
+                                    echo wp_oembed_get( $location_youtube_link ); 
+                                    echo '</div>';
+                                } ?>
 							<?php }
 							if ( $location_affiliation) { 
 								if ( $location_about || $prescription ) { 

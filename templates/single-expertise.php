@@ -311,10 +311,17 @@ function uamswp_expertise_physicians() {
     <?php }
 }
 function uamswp_expertise_youtube() {
-    if(get_field('expertise_youtube_link')) { ?>
-        <div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
-            <?php echo wp_oembed_get( get_field( 'expertise_youtube_link' ) ); ?>
-        </div>
+    $video = get_field('expertise_youtube_link');
+    if( $video ) { ?>
+        <?php if(function_exists('lyte_preparse')) {
+            echo '<div class="alignwide">';
+            echo lyte_parse( str_replace( 'https', 'httpv', $video ) ); 
+            echo '</div>';
+        } else {
+            echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
+            echo wp_oembed_get( $video ); 
+            echo '</div>';
+        } ?>
     <?php }
 }
 function uamswp_expertise_keywords() {
