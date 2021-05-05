@@ -155,11 +155,11 @@ while ( have_posts() ) : the_post();
     // $resident_hometown_country = $resident_profile_group['physician_resident_hometown_country'];
     // $resident_medical_school = $resident_profile_group['physician_resident_hometown_country'];
     $resident_academic_department = $resident_profile_group['physician_resident_academic_department'];
-    $resident_academic_department_name = get_term( $resident_academic_department, 'academic_department' )->name;
+    $resident_academic_department_name = $resident_academic_department ? get_term( $resident_academic_department, 'academic_department' )->name : '';
     $resident_academic_chief = $resident_profile_group['physician_resident_academic_chief'];
     $resident_academic_chief_name = $resident_academic_chief ? 'Chief Resident' : '';
     $resident_academic_year = $resident_profile_group['physician_resident_academic_year'];
-    $resident_academic_year_name = get_term( $resident_academic_year, 'residency_year' )->name;
+    $resident_academic_year_name = $resident_academic_year ? get_term( $resident_academic_year, 'residency_year' )->name : '';
     $resident_academic_name = $resident_academic_chief ? $resident_academic_chief_name : $resident_academic_year_name;
     $college_affiliation = get_field('physician_academic_college');
     $position = get_field('physician_academic_position');
@@ -183,7 +183,7 @@ while ( have_posts() ) : the_post();
     $accept_new = get_field('physician_accepting_patients');
     $physician_portal = get_field('physician_portal');
     $physician_clinical_bio = get_field('physician_clinical_bio');
-    $physician_youtube_link = get_field('physician_youtube_link');
+    // $physician_youtube_link = get_field('physician_youtube_link');
     $physician_clinical_admin_title = get_field('physician_clinical_admin_title');
     $physician_clinical_focus = get_field('physician_clinical_focus');
     $physician_awards = get_field('physician_awards');
@@ -320,7 +320,7 @@ while ( have_posts() ) : the_post();
         }
 
         // Check if Clinical Bio section should be displayed
-        if ( $physician_clinical_bio || !empty ($physician_youtube_link) ) {
+        if ( $physician_clinical_bio || !empty ($video) ) {
             $show_clinical_bio_section = true;
         } else {
             $show_clinical_bio_section = false;
@@ -686,98 +686,10 @@ while ( have_posts() ) : the_post();
             </nav>
         <?php } // endif
         // End Jump Links Section ?>
-        <?php if ( $show_appointment_section ): ?>
-        <?php 
-            $appointment_phone_name = 'the UAMS&nbsp;Health appointment line'; // default (UAMS)
-            $appointment_phone = '5016868000'; // default (UAMS)
-            $show_portal = false;
-            // Portal
-            if ( $physician_portal ) {
-                $portal = get_term($physician_portal, "portal");
-                $portal_slug = $portal->slug;
-                $portal_name = $portal->name;
-                $portal_name_attr = str_replace('"', '\'', $portal_name);
-                $portal_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($portal_name_attr, null, 'utf-8')));
-                $portal_content = get_field('portal_content', $portal);
-                $portal_link = get_field('portal_url', $portal);
-                if ($portal_link) {
-                    $portal_url = $portal_link['url'];
-                    $portal_link_title = $portal_link['title'];
-                }
-
-                if ($portal && $portal_slug !== "_none") {
-                    $show_portal = true;
-                }
-                if ($portal_slug == "ach-mychart") {
-                    $appointment_phone_name = 'the main Arkansas Children\'s Hospital appointment line';
-                    $appointment_phone = '5013644000';
-                } elseif ($portal_slug == "my-healthevet") {
-                    $appointment_phone_name = 'the main Central Arkansas Veterans Healthcare System appointment line';
-                    $appointment_phone = '5012573999';
-                }
-                $appointment_phone_name_attr = str_replace('"', '\'', $appointment_phone_name);
-                $appointment_phone_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($appointment_phone_name_attr, null, 'utf-8')));
-            }
-            
-            $appointment_phone_tel = preg_replace('/^(\+?\d)?(\d{3})(\d{3})(\d{4})$/', '$2-$3-$4', $appointment_phone);
-            $appointment_phone_text = preg_replace('/^(\+?\d)?(\d{3})(\d{3})(\d{4})$/', '($2) $3-$4', $appointment_phone);
-
-            if (1 == $location_count) {
-                $appointment_location_url = $primary_appointment_url;
-                $appointment_location_title = $primary_appointment_title;
-                $appointment_location_data = 'Contact the Clinic Directly | Direct Link | ' . $primary_appointment_title;
-            } else {
-                $appointment_location_url = '#locations';
-                $appointment_location_title = 'Jump to list of locations for this provider';
-                $appointment_location_data = 'Contact the Clinic Directly | Anchor Link';
-            }
-            
-        ?>
-        <section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info-1">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h2>Make an Appointment With <?php echo $short_name; ?></h2>
-                        <?php if (!$location_valid && $refer_req && $accept_new && $show_portal) { ?>
-                            <p>Appointments for new patients are by referral only.</p>
-                            <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Request an Appointment Online | <?php echo $portal_name_attr; ?>">request an appointment online</a> through <?php echo $portal_name; ?> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                        <?php } elseif ($refer_req && $accept_new && $show_portal) { ?>
-                            <p>Appointments for new patients are by referral only.</p>
-                            <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Request an Appointment Online | <?php echo $portal_name_attr; ?>">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>" data-categorytitle="Make an Appointment | Block 1" data-typetitle="<?php echo $appointment_location_data; ?>">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                        <?php } elseif (!$location_valid && $refer_req && $accept_new) { ?>
-                            <p>Appointments for new patients are by referral only.</p>
-                            <p>Existing patients can make an appointment by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                        <?php } elseif ($refer_req && $accept_new) { ?>
-                            <p>Appointments for new patients are by referral only.</p>
-                            <p>Existing patients can make an appointment by <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>" data-categorytitle="Make an Appointment | Block 1" data-typetitle="<?php echo $appointment_location_data; ?>">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                        <?php } elseif (!$location_valid && $accept_new && $show_portal) { ?>
-                            <p>New patients can make an appointment by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                            <p>Existing patients also have the option to <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Request an Appointment Online | <?php echo $portal_name_attr; ?>">request an appointment online</a> through <?php echo $portal_name; ?>.</p>
-                        <?php } elseif ($accept_new && $show_portal) { ?>
-                            <p>New patients can make an appointment by <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>" data-categorytitle="Make an Appointment | Block 1" data-typetitle="<?php echo $appointment_location_data; ?>">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                            <p>Existing patients also have the option to <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Request an Appointment Online | <?php echo $portal_name_attr; ?>">request an appointment online</a> through <?php echo $portal_name; ?>.</p>
-                        <?php } elseif (!$location_valid && $accept_new) { ?>
-                            <p>New and existing patients can make an appointment by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                        <?php } elseif ($accept_new) { ?>
-                            <p>New and existing patients can make an appointment by <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>" data-categorytitle="Make an Appointment | Block 1" data-typetitle="<?php echo $appointment_location_data; ?>">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                        <?php } elseif (!$location_valid && $show_portal) { ?>
-                            <p>This provider is not currently accepting new patients.</p>
-                            <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Request an Appointment Online | <?php echo $portal_name_attr; ?>">request an appointment online</a> through <?php echo $portal_name; ?> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                        <?php } elseif ($show_portal) { ?>
-                            <p>This provider is not currently accepting new patients.</p>
-                            <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Request an Appointment Online | <?php echo $portal_name_attr; ?>">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>" data-categorytitle="Make an Appointment | Block 1" data-typetitle="<?php echo $appointment_location_data; ?>">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                        <?php } elseif (!$location_valid) { ?>
-                            <p>This provider is not currently accepting new patients.</p>
-                            <p>Existing patients can make an appointment by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                        <?php } else { ?>
-                            <p>This provider is not currently accepting new patients.</p>
-                            <p>Existing patients can make an appointment by <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>" data-categorytitle="Make an Appointment | Block 1" data-typetitle="<?php echo $appointment_location_data; ?>">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                        <?php } ?>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <?php endif; ?>
+        <?php if ( $show_appointment_section ) {
+            $appointment_block_instance = 1;
+			include( UAMS_FAD_PATH . '/templates/blocks/appointment-provider.php' );
+		} ?>
         
         <?php 
             $physician_clinical_split = false;
@@ -810,10 +722,16 @@ while ( have_posts() ) : the_post();
                                 <h3 class="sr-only">Clinical Biography</h3>
                                 <?php echo $physician_clinical_bio; ?>
                             <?php } // endif
-                            if($physician_youtube_link) { ?>
-                                <div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
-                                    <?php echo wp_oembed_get( $physician_youtube_link ); ?>
-                                </div>
+                            if($video) { ?>
+                                <?php if(function_exists('lyte_preparse')) {
+                                    echo '<div class="alignwide">';
+                                    echo lyte_parse( str_replace('https', 'httpv', $video ) ); 
+                                    echo '</div>';
+                                } else {
+                                    echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
+                                    echo wp_oembed_get( $video ); 
+                                    echo '</div>';
+                                } ?>
                             <?php } // endif
                             if ( $physician_clinical_split ) { ?>
                                 </div>
@@ -1296,52 +1214,23 @@ while ( have_posts() ) : the_post();
                 </div>
             </div>
         </section> -->
-        <?php if ( $show_appointment_section ): ?>
-            <section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info-2">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h2>Make an Appointment With <?php echo $short_name; ?></h2>
-                            <?php if (!$location_valid && $refer_req && $accept_new && $show_portal) { ?>
-                                <p>Appointments for new patients are by referral only.</p>
-                                <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank" data-categorytitle="Make an Appointment | Block 2" data-typetitle="Request an Appointment Online | <?php echo $portal_name_attr; ?>">request an appointment online</a> through <?php echo $portal_name; ?> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 2" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                            <?php } elseif ($refer_req && $accept_new && $show_portal) { ?>
-                                <p>Appointments for new patients are by referral only.</p>
-                                <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank" data-categorytitle="Make an Appointment | Block 2" data-typetitle="Request an Appointment Online | <?php echo $portal_name_attr; ?>">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>" data-categorytitle="Make an Appointment | Block 2" data-typetitle="<?php echo $appointment_location_data; ?>">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 2" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                            <?php } elseif (!$location_valid && $refer_req && $accept_new) { ?>
-                                <p>Appointments for new patients are by referral only.</p>
-                                <p>Existing patients can make an appointment by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 2" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                            <?php } elseif ($refer_req && $accept_new) { ?>
-                                <p>Appointments for new patients are by referral only.</p>
-                                <p>Existing patients can make an appointment by <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>" data-categorytitle="Make an Appointment | Block 2" data-typetitle="<?php echo $appointment_location_data; ?>">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 2" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                            <?php } elseif (!$location_valid && $accept_new && $show_portal) { ?>
-                                <p>New patients can make an appointment by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 2" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                                <p>Existing patients also have the option to <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank" data-categorytitle="Make an Appointment | Block 2" data-typetitle="Request an Appointment Online | <?php echo $portal_name_attr; ?>">request an appointment online</a> through <?php echo $portal_name; ?>.</p>
-                            <?php } elseif ($accept_new && $show_portal) { ?>
-                                <p>New patients can make an appointment by <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>" data-categorytitle="Make an Appointment | Block 2" data-typetitle="<?php echo $appointment_location_data; ?>">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 2" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                                <p>Existing patients also have the option to <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank" data-categorytitle="Make an Appointment | Block 2" data-typetitle="Request an Appointment Online | <?php echo $portal_name_attr; ?>">request an appointment online</a> through <?php echo $portal_name; ?>.</p>
-                            <?php } elseif (!$location_valid && $accept_new) { ?>
-                                <p>New and existing patients can make an appointment by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 2" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                            <?php } elseif ($accept_new) { ?>
-                                <p>New and existing patients can make an appointment by <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>" data-categorytitle="Make an Appointment | Block 2" data-typetitle="<?php echo $appointment_location_data; ?>">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 2" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                            <?php } elseif (!$location_valid && $show_portal) { ?>
-                                <p>This provider is not currently accepting new patients.</p>
-                                <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank" data-categorytitle="Make an Appointment | Block 2" data-typetitle="Request an Appointment Online | <?php echo $portal_name_attr; ?>">request an appointment online</a> through <?php echo $portal_name; ?> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 2" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                            <?php } elseif ($show_portal) { ?>
-                                <p>This provider is not currently accepting new patients.</p>
-                                <p>Existing patients can either <a href="<?php echo $portal_url; ?>" aria-label="<?php echo $portal_name; ?>" target="_blank" data-categorytitle="Make an Appointment | Block 2" data-typetitle="Request an Appointment Online | <?php echo $portal_name_attr; ?>">request an appointment online</a> through <?php echo $portal_name; ?>, <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>" data-categorytitle="Make an Appointment | Block 2" data-typetitle="<?php echo $appointment_location_data; ?>">contact the clinic directly</a> or call <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 2" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                            <?php } elseif (!$location_valid) { ?>
-                                <p>This provider is not currently accepting new patients.</p>
-                                <p>Existing patients can make an appointment by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 2" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                            <?php } else { ?>
-                                <p>This provider is not currently accepting new patients.</p>
-                                <p>Existing patients can make an appointment by <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_title; ?>" data-categorytitle="Make an Appointment | Block 2" data-typetitle="<?php echo $appointment_location_data; ?>">contacting the clinic directly</a> or by calling <?php echo $appointment_phone_name; ?> at <a href="tel:<?php echo $appointment_phone_tel; ?>" class="no-break" data-categorytitle="Make an Appointment | Block 2" data-typetitle="Main Appointment Line | <?php echo $appointment_phone_name_attr; ?>"><?php echo $appointment_phone_text; ?></a>.</p>
-                            <?php } ?>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        <?php endif; ?>
+        <?php if (
+            $show_appointment_section && 
+            ( 
+                $show_clinical_bio_section
+                || $show_academic_section
+                || $show_podcast_section
+                || $show_research_section
+                || $show_conditions_section
+                || $show_treatments_section
+                || $show_aoe_section
+                || $show_locations_section
+                || $show_ratings_section
+            )
+        ) {
+            $appointment_block_instance = 2;
+			include( UAMS_FAD_PATH . '/templates/blocks/appointment-provider.php' );
+		} ?>
     </main>
 </div>
 
