@@ -3053,6 +3053,106 @@
             "placement": "top",
             "endpoint": 0
         },
+        "field_location_scheduling_query": {
+            "key": "field_location_scheduling_query",
+            "name": "location_scheduling_query",
+            "type": "true_false",
+            "label": "Enable MyChart Scheduling?",
+            "instructions": "Check with the MyChart team before doing anything here.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_location_scheduling_ser": {
+            "key": "field_location_scheduling_ser",
+            "name": "location_scheduling_ser",
+            "type": "text",
+            "label": "SER IDs",
+            "instructions": "A list of all available providers delimited with a comma \",\"",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_scheduling_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        "field_location_scheduling_dep": {
+            "key": "field_location_scheduling_dep",
+            "name": "location_scheduling_dep",
+            "type": "text",
+            "label": "DEP IDs",
+            "instructions": "A list of all available departments delimited with a comma \",\"",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_scheduling_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        "field_location_scheduling_vt": {
+            "key": "field_location_scheduling_vt",
+            "name": "location_scheduling_vt",
+            "type": "text",
+            "label": "VT IDs",
+            "instructions": "The visit type to be used in the widget",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_scheduling_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
         "field_location_medical_tab": {
             "key": "field_location_medical_tab",
             "name": "",
