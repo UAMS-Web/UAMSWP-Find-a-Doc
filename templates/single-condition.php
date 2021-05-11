@@ -118,7 +118,7 @@
 		$location_content .= '<div class="row">';
 		$location_content .= '<div class="col-12">';
 		$location_content .= '<h2 class="module-title">Locations Where Providers Treat ' . get_the_title() . '</h2>';
-		$location_content .= '<p class="note">Note that the treatment of ' . get_the_title() . ' may not be <em>performed</em> at every location listed below. The list may include locations where the treatment is prescribed after a patient visit.</p>';
+		$location_content .= '<p class="note">Note that the treatment of ' . get_the_title() . ' may not be <em>performed</em> at every location listed below. The list may include locations where the treatment plan is developed during and after a patient visit.</p>';
 		$location_content .= '<div class="card-list-container location-card-list-container">';
 		$location_content .= '<div class="card-list">';
 		ob_start();
