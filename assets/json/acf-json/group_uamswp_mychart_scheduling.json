@@ -4,9 +4,9 @@
     "title": "MyChart Scheduling",
     "fields": [
         {
-            "key": "field_mychart_scheduling_query_sys",
+            "key": "field_mychart_scheduling_query_system",
             "label": "Allow optional MyChart scheduling?",
-            "name": "mychart_scheduling_query_sys",
+            "name": "mychart_scheduling_query_system",
             "type": "true_false",
             "instructions": "Grant the ability at the page level to enable MyChart scheduling.",
             "required": 0,
@@ -33,7 +33,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_mychart_scheduling_query_sys",
+                        "field": "field_mychart_scheduling_query_system",
                         "operator": "==",
                         "value": "1"
                     }
@@ -60,7 +60,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_mychart_scheduling_query_sys",
+                        "field": "field_mychart_scheduling_query_system",
                         "operator": "==",
                         "value": "1"
                     }
