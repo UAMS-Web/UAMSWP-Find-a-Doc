@@ -893,7 +893,6 @@ while ( have_posts() ) : the_post(); ?>
 					<?php } elseif (!$location_hours_group['location_24_7']) { ?>
 						<h2>After Hours</h2>
 						<?php echo $afterhours_system; ?>
-						
 					<?php } // endif (after hours) ?>
 				</div>
 			</div>
