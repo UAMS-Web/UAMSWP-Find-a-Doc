@@ -1322,7 +1322,7 @@ while ( have_posts() ) : the_post(); ?>
 								'hostname':'<?php echo $mychart_scheduling_domain; ?>',
 
 								// Must equal media query in EpicWP.css + any left/right margin of the host page. Should also change in EmbeddedWidget.css
-								'matchMediaString':'(max-width: 747px)',
+								'matchMediaString':'(max-width: 991.98px)',
 
 								//Show a button on top of the widget that lets the user see the slots in fullscreen.
 							'showToggleBtn':true,
