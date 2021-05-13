@@ -126,6 +126,9 @@ $telemed_modified_hours247 = $location_hours_group['location_telemed_modified_ho
 // $telemed_modified_hours = $location_hours_group['location_telemed_modified_hours_group']; // modified telemedicine hours repeater
 $telemed_info = get_field('location_telemed_descr_system', 'option'); // System-wide information about telemedicine at locations
 
+$afterhours_system = get_field('location_afterhours_descr_system', 'option'); // System-wide information about telemedicine at locations
+$afterhours_system = $afterhours_system ? $afterhours_system : '<p>If you are in need of urgent or emergency care, call 911 or go to your nearest emergency department at your local hospital.</p>'; // System-wide information about telemedicine at locations
+
 // Set alert values
 
 $location_alert_title_sys = get_field('location_alert_heading_system', 'option');
@@ -905,7 +908,7 @@ while ( have_posts() ) : the_post(); ?>
 						<?php echo $location_hours_group['location_after_hours']; ?>
 					<?php } elseif (!$location_hours_group['location_24_7']) { ?>
 						<h2>After Hours</h2>
-						<p>If you are in need of urgent or emergency care call 911 or go to your nearest emergency department at your local hospital.</p>
+						<?php echo $afterhours_system; ?>
 					<?php } // endif (after hours) ?>
 				</div>
 			</div>
