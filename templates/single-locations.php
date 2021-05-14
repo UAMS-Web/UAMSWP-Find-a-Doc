@@ -1319,7 +1319,7 @@ while ( have_posts() ) : the_post(); ?>
 							var EWC = new EmbeddedWidgetController({
 
 								// Replace with the hostname of your Open Scheduling site
-								'hostname':'<?php echo $mychart_scheduling_domain; ?>',
+								'hostname':'https://<?php echo $mychart_scheduling_domain; ?>',
 
 								// Must equal media query in EpicWP.css + any left/right margin of the host page. Should also change in EmbeddedWidget.css
 								'matchMediaString':'(max-width: 991.98px)',
