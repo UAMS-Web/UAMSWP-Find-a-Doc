@@ -365,7 +365,7 @@ if ( ! function_exists('clinical_resources_cpt') ) {
 	
 		$labels = array(
 			'name'                  => 'Clinical Resource',
-			'singular_name'         => 'Resource',
+			'singular_name'         => 'Clinical Resource',
 			'menu_name'             => 'Clinical Resource',
 			'name_admin_bar'        => 'Resource',
 			'archives'              => 'Resource Archives',
@@ -471,8 +471,6 @@ add_action( 'init', 'create_region_taxonomy', 0 );
 add_action( 'init', 'create_location_type_taxonomy', 0 );
 add_action( 'init', 'create_building_taxonomy', 0 );
 add_action( 'init', 'create_gmb_cat_location_taxonomy', 0 );
-// Library Taxonomies
-add_action( 'init', 'create_library_topic_taxonomy', 5 );
 
 /* Taxonomy Functions */
 function create_clinical_conditions_taxonomy() {
