@@ -49,6 +49,10 @@ function uamswp_force_template( $template )
     if( is_post_type_archive( 'treatment' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/archive-treatments.php';
 	}
+
+    if( is_singular( 'clinical-resource' ) ) {
+        $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-clinical-resource.php';
+    }
 	
     return $template;
 }
