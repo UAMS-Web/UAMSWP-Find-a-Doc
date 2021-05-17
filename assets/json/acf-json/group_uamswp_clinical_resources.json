@@ -101,7 +101,7 @@
             },
             "uploader": "wp",
             "acfe_thumbnail": 0,
-            "return_format": "array",
+            "return_format": "id",
             "preview_size": "medium",
             "library": "all",
             "min_width": "",
