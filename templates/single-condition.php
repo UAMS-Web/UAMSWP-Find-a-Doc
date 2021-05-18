@@ -84,6 +84,8 @@
 	// Hard coded breadcrumbs
 	// $tax = get_term_by("slug", get_query_var("term"), get_query_var("taxonomy") );
 
+    $cta_repeater = get_field('condition_cta');
+
 	// Locations Content
 	$location_content = '';
 	$args = (array(
@@ -147,12 +149,122 @@
     if ($locations && $location_valid) { $condition_field_classes .= ' has-location'; } // Locations
     if ($physicians && array_filter($physicians)) { $condition_field_classes .= ' has-provider'; } // Providers
 
+    // Set logic for displaying jump links and sections
+    $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
+    $jump_link_count = 0;
+
+        // Check if Podcast section should be displayed
+        if ( $podcast_name ) {
+            $show_podcast_section = true;
+            $jump_link_count++;
+        } else {
+            $show_podcast_section = false;
+        }
+
+        // Check if Clinical Trials section should be displayed
+        if ( !empty($clinical_trials) ) {
+            $show_clinical_trials_section = true;
+        } else {
+            $show_clinical_trials_section = false;
+        }
+
+        // Check if Treatments section should be displayed
+		$args = (array(
+			'post_type' => 'treatment',
+			'post_status' => 'publish',
+			'order' => 'ASC',
+			'orderby' => 'title',
+			'posts_per_page' => -1,
+			'no_found_rows' => true, // counts posts, remove if pagination required
+			'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
+			'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
+			'post__in' => $treatments_cpt
+		));
+		$treatments_query_cpt = new WP_Query( $args );
+        if ( $treatments_cpt && !empty($treatments_query_cpt->posts) ) {
+            $show_treatments_section = true;
+            $jump_link_count++;
+        } else {
+            $show_treatments_section = false;
+        }
+
+        // Check if Providers section should be displayed	
+		if ($physicians) {
+			$physiciansCount = count($physicians);
+			$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12)
+			$postsCutoff = 18; // Set cutoff value
+			$postsCountClass = $postsPerPage;
+			if($physiciansCount <= $postsCutoff ) {
+				$postsPerPage = -1;
+			}
+			$args = (array(
+				'post_type' => "provider",
+				"post_status" => "publish",
+				'order' => 'ASC',
+				'orderby' => 'title',
+				'posts_per_page' => $postsPerPage,
+				// 'no_found_rows' => true, // counts posts, remove if pagination required
+				'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
+				'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
+				'post__in'	=> $physicians
+			));
+			$physicians_query = new WP_Query( $args );
+		}
+
+		if( $physicians && $physicians_query->have_posts() ) {
+			$show_providers_section = true;
+			$jump_link_count++;
+		} else {
+			$show_providers_section = false;
+		}
+
+        // Check if Areas of Expertise section should be displayed
+		$args = (array(
+			'post_type' => "expertise",
+			"post_status" => "publish",
+			'order' => 'ASC',
+			'orderby' => 'title',
+			'posts_per_page' => -1,
+			'no_found_rows' => true, // counts posts, remove if pagination required
+			'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
+			'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
+			'post__in'	=> $expertise
+		));
+		$expertise_query = new WP_Query( $args );
+
+		if ( $expertise && $expertise_query->have_posts() ) {
+            $show_aoe_section = true;
+            $jump_link_count++;
+        } else {
+            $show_aoe_section = false;
+        }
+
+        // Check if Locations section should be displayed
+        if ( !empty($location_content) ) {
+            $show_locations_section = true;
+            $jump_link_count++;
+        } else {
+            $show_locations_section = false;
+        }
+
+        // Check if Make an Appointment section should be displayed
+		// It should always be displayed.
+		$show_appointment_section = true;
+		$jump_link_count++;
+
+        // Check if Jump Links section should be displayed
+        if ( $jump_link_count >= $jump_link_count_min ) {
+            $show_jump_links_section = true;
+        } else {
+            $show_jump_links_section = false;
+        }
+
  ?>
 <div class="content-sidebar-wrap">
 	<main id="genesis-content" class="condition-item<?php echo $condition_field_classes; ?>">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
-				<h1 class="entry-title" itemprop="headline"><?php echo ( $condition_title ? $condition_title : 'Condition' ); ?>: <?php echo get_the_title(); ?></h1>
+				<h1 class="entry-title" itemprop="headline"><span class="supertitle"><?php echo ( $condition_title ? $condition_title : 'Condition' ); ?></span><span class="sr-only">:</span> <?php echo get_the_title(); ?></h1>
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
 				<?php 
@@ -181,16 +293,153 @@
 					}
 				?>
 				<?php if( $video ) { ?>
-					<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
-					<?php echo wp_oembed_get( $video ); ?>
-					</div>
+					<?php if(function_exists('lyte_preparse')) {
+						echo '<div class="alignwide">';
+						echo lyte_parse( str_replace( 'https', 'httpv', $video ) ); 
+						echo '</div>';
+					} else {
+						echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
+						echo wp_oembed_get( $video ); 
+						echo '</div>';
+					} ?>
 				<?php } ?>
 			</div>
 		</section>
-        <?php
-            // UAMS Health Talk Podcast
-            if ($podcast_name) {
-        ?>
+    <?php // Begin CTA Bar(s)
+			if( $cta_repeater ) {
+				$i = 1;
+				foreach( $cta_repeater as $cta ) { 
+					$cta_heading = $cta['cta_bar_heading'];
+					$cta_body = $cta['cta_bar_body'];
+					$cta_action_type = $cta['cta_bar_action_type'];
+		
+					$cta_button_text = '';
+					$cta_button_url = '';
+					$cta_button_target = '';
+					$cta_button_desc = '';
+					if ( $cta_action_type == 'url' ) {
+						$cta_button_text = $cta['cta_bar_button_text'];
+						$cta_button_url = $cta['cta_bar_button_url'];
+						if ( $cta_button_url ) {
+							$cta_button_target = $button_url['target'];
+						}
+						$cta_button_desc = $cta['cta_bar_button_description'];
+					}
+		
+					$cta_phone_prepend = '';
+					$cta_phone = '';
+					$cta_phone_link = '';
+					if ( $cta_action_type == 'phone' ) {
+						$cta_phone_prepend = $cta['cta_bar_phone_prepend'] ? $cta['cta_bar_phone_prepend'] : 'Call';
+						$cta_phone = $cta['cta_bar_phone'];
+						$cta_phone_link = '<a href="tel:' . format_phone_dash( $cta_phone ) . '">' . format_phone_us( $cta_phone ) . '</a>';
+					}
+					
+					$cta_layout = 'cta-bar-centered';
+					$cta_size = 'normal';
+					$cta_use_image = false;
+					$cta_image = '';
+					$cta_background_color = 'bg-auto';
+					$cta_btn_color = 'primary';
+		
+					$cta_className = '';  
+					$cta_className .= ' ' . $cta_layout;
+					$cta_className .= ' ' . $cta_background_color;
+					$cta_className .= $cta_use_image ? ' bg-image' : '';
+					if ( $cta_cta_size == 'small' ) {
+						$cta_className .= ' cta-bar-sm';
+					} elseif ( $cta_size == 'large' ) {
+						$cta_className .= ' extra-padding cta-bar-lg';
+					}
+					if ( $cta_action_type == 'none' ) {
+						$cta_className .= ' no-link';
+					}
+		
+					echo '<section class="uams-module cta-bar' . $cta_className . '" id="cta-bar-' . $i . '" aria-label="' . $cta_heading . '">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-12">
+									<div class="inner-container">
+										<div class="cta-heading">
+											<h2>' . $cta_heading . '</h2>
+										</div>
+										<div class="cta-body">
+											<div class="text-container">
+												' . $cta_body . '
+											</div>';
+											echo $cta_action_type == 'url' ?
+											'<div class="btn-container">
+												<a href="' . $cta_button_url['url'] . '" aria-label="' . $cta_button_desc . '" class=" btn btn-' . $cta_btn_color . ( $cta_size == 'large' ? ' btn-lg' : '' ) . '"' . ( $cta_button_target ? ' target="'. $cta_button_target . '"' : '' ) . ' data-moduletitle="' . $cta_heading . '">' . $cta_button_text . '</a>
+											</div>'
+											: '';
+											echo $cta_action_type == 'phone' ?
+											'<div class="btn-container">
+												<a href="tel:' . $cta_phone . '" data-moduletitle="' . $cta_heading . '">' . $cta_phone_prepend . ' <span class="no-break">' . $cta_phone . '</span></a>
+											</div>'
+											: '';
+										echo '</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>';
+					$i++;
+				} 
+			} // endif;
+			// End CTA Bar(s)
+    
+			// Begin Jump Links Section
+        if ( $show_jump_links_section ) { ?>
+            <nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
+                <h2>Contents</h2>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#jump-link-nav" aria-controls="jump-link-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse inner-container" id="jump-link-nav">
+                    <ul class="nav navbar-nav">
+                        <?php if ( $show_podcast_section ) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#podcast" title="Jump to the section of this page about UAMS Health Talk Podcast">Podcast</a>
+                            </li>
+                        <?php } ?>
+                        <?php if ( $show_clinical_trials_section ) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#clinical-trials" title="Jump to the section of this page about Clinical Trials">Clinical Trials</a>
+                            </li>
+                        <?php } ?>
+                        <?php if ( $show_treatments_section ) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#treatments" title="Jump to the section of this page about Treatments and Procedures">Treatments &amp; Procedures</a>
+                            </li>
+                        <?php } ?>
+                        <?php if ( $show_providers_section ) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#providers" title="Jump to the section of this page about Providers">Providers</a>
+                            </li>
+                        <?php } ?>
+                        <?php if ( $show_locations_section ) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#locations" title="Jump to the section of this page about Locations">Locations</a>
+                            </li>
+                        <?php } ?>
+                        <?php if ( $show_aoe_section ) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#expertise" title="Jump to the section of this page about Areas of Expertise">Areas of Expertise</a>
+                            </li>
+                        <?php } ?>
+                        <?php if ( $show_appointment_section ) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#appointment-info" title="Jump to the section of this page about making an appointment">Make an Appointment</a>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </nav>
+        <?php } // endif
+        // End Jump Links Section
+
+			// Begin UAMS Health Talk Podcast Section
+			if ( $show_podcast_section ) { ?>
             <section class="uams-module podcast-list bg-auto" id="podcast">
                 <script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
                 </script>
@@ -221,136 +470,94 @@
                     </div>
                 </div>
             </section>
-        <?php } ?>
-		<?php
-		if (!empty($clinical_trials)): ?>
-		<section class="uams-module cta-bar cta-bar-1 bg-auto" id="clinical-trials">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-12">
-						<h2>Clinical Trials</h2>
-						<p><a href="https://uams.trialstoday.org/" aria-label="Search UAMS Clinical Trials">Search our clinical trials</a> for those related to <?php echo get_the_title(); ?>.</p>
-					</div>
-				</div>
-			</div>
-		</section>
-		<?php endif; ?>
-		<?php 
-			$args = (array(
-				'post_type' => 'treatment',
-				'post_status' => 'publish',
-				'order' => 'ASC',
-				'orderby' => 'title',
-				'posts_per_page' => -1,
-				'no_found_rows' => true, // counts posts, remove if pagination required
-				'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
-				'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
-				'post__in' => $treatments_cpt
-			));
-			$treatments_query_cpt = new WP_Query( $args );
-			if ( $treatments_cpt && !empty($treatments_query_cpt->posts) ) {
-				
-		?>
-		<section class="uams-module conditions-treatments bg-auto" id="treatments">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-12">
-						<h2 class="module-title">Treatments and Procedures Related to <?php echo get_the_title(); ?></h2>
-						<div class="list-container list-container-rows">
-							<ul class="list">
-							<?php while ($treatments_query_cpt->have_posts()) : $treatments_query_cpt->the_post(); 
-								$treatment_id = get_the_ID();
-								$treatment_permalink = get_permalink( $treatment_id );
-								$treatment_title = get_the_title();
-								$treatment_title_attr = str_replace('"', '\'', $treatment_title);
-								$treatment_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($treatment_title_attr, null, 'utf-8')));
-							?>
-								<li>
-									<a href="<?php echo $treatment_permalink; ?>" aria-label="Go to Treatment page for <?php echo $treatment_title_attr; ?>" class="btn btn-outline-primary"><?php echo $treatment_title; ?></a>
-								</li>
-							<?php endwhile;
-									wp_reset_postdata(); ?>
-							</ul>
+        <?php }
+		// End UAMS Health Talk Podcast Section
+
+		// Begin Clinical Trials Section
+		if ( $show_clinical_trials_section ) { ?>
+			<section class="uams-module cta-bar cta-bar-1 bg-auto" id="clinical-trials">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12">
+							<h2>Clinical Trials</h2>
+							<p><a href="https://uams.trialstoday.org/" aria-label="Search UAMS Clinical Trials">Search our clinical trials</a> for those related to <?php echo get_the_title(); ?>.</p>
 						</div>
 					</div>
 				</div>
-			</div>
-		</section>
-		<?php } // endif ?>
-		<?php // Check if any doctors are connected	
-			if ($physicians) {
-				$physiciansCount = count($physicians);
-				$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12)
-				$postsCutoff = 18; // Set cutoff value
-				$postsCountClass = $postsPerPage;
-				if($physiciansCount <= $postsCutoff ) {
-					$postsPerPage = -1;
-				}
-				$args = (array(
-					'post_type' => "provider",
-					"post_status" => "publish",
-					'order' => 'ASC',
-					'orderby' => 'title',
-					'posts_per_page' => $postsPerPage,
-					// 'no_found_rows' => true, // counts posts, remove if pagination required
-					'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
-					'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
-					'post__in'	=> $physicians
-				));
-				$physicians_query = new WP_Query( $args );
+			</section>
+		<?php } // endif
+		// End Clinical Trials Section
 
-				if( $physicians && $physicians_query->have_posts() ) {
-				?>
-					<section class="uams-module bg-auto" id="doctors">
-						<div class="container-fluid">
-							<div class="row">
-								<div class="col-12">
-									<h2 class="module-title">Providers Treating <?php echo get_the_title(); ?></h2>
-									<p class="note">Note that every provider listed below may not perform or prescribe all treatments or procedures related to <?php echo get_the_title(); ?>. Review each provider for availability.</p>
-									<div class="card-list-container">
-										<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
-											<?php
-												while ($physicians_query->have_posts()) : $physicians_query->the_post();
-													$id = get_the_ID();
-													include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
-												endwhile;
-											?>
-										</div>
-									</div>
-									<?php if ($postsPerPage !== -1) { ?>
-									<div class="more">
-										<button class="loadmore btn btn-primary" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more providers">Load More</button>
-									</div>
-									<?php } ?>
-								</div>
+		// Begin Treatments and Procedures Section
+		if ( $show_treatments_section ) { ?>
+			<section class="uams-module conditions-treatments bg-auto" id="treatments">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12">
+							<h2 class="module-title">Treatments and Procedures Related to <?php echo get_the_title(); ?></h2>
+							<p class="note">UAMS providers perform and prescribe a broad range of treatments and procedures, some of which may not be listed below.</p>
+							<div class="list-container list-container-rows">
+								<ul class="list">
+								<?php while ($treatments_query_cpt->have_posts()) : $treatments_query_cpt->the_post(); 
+									$treatment_id = get_the_ID();
+									$treatment_permalink = get_permalink( $treatment_id );
+									$treatment_title = get_the_title();
+									$treatment_title_attr = str_replace('"', '\'', $treatment_title);
+									$treatment_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($treatment_title_attr, null, 'utf-8')));
+								?>
+									<li>
+										<a href="<?php echo $treatment_permalink; ?>" aria-label="Go to Treatment page for <?php echo $treatment_title_attr; ?>" class="btn btn-outline-primary"><?php echo $treatment_title; ?></a>
+									</li>
+								<?php endwhile;
+										wp_reset_postdata(); ?>
+								</ul>
 							</div>
 						</div>
-					</section>
-				<?php
-				} // $physicians_query loop
-				wp_reset_postdata();
-			}
-		
-			// Location Section
-			if (!empty($location_content)) {
-				echo $location_content; 
-			}
-			
-			// Expertise Section
-			$args = (array(
-				'post_type' => "expertise",
-				"post_status" => "publish",
-				'order' => 'ASC',
-				'orderby' => 'title',
-				'posts_per_page' => -1,
-				'no_found_rows' => true, // counts posts, remove if pagination required
-				'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
-				'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
-				'post__in'	=> $expertise
-			));
-			$expertise_query = new WP_Query( $args );
+					</div>
+				</div>
+			</section>
+		<?php } // endif
+		// End Treatments and Procedures Section
 
-			if ( $expertise && $expertise_query->have_posts() ): ?>
+		// Begin Providers Section
+		if( $show_providers_section ) { ?>
+			<section class="uams-module bg-auto" id="providers">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<h2 class="module-title">Providers Treating <?php echo get_the_title(); ?></h2>
+							<p class="note">Note that every provider listed below may not perform or prescribe all treatments or procedures related to <?php echo get_the_title(); ?>. Review each provider for availability.</p>
+							<div class="card-list-container">
+								<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
+									<?php
+										while ($physicians_query->have_posts()) : $physicians_query->the_post();
+											$id = get_the_ID();
+											include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+										endwhile;
+									?>
+								</div>
+							</div>
+							<?php if ($postsPerPage !== -1) { ?>
+							<div class="more">
+								<button class="loadmore btn btn-primary" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more providers">Load More</button>
+							</div>
+							<?php } ?>
+						</div>
+					</div>
+				</div>
+			</section>
+		<?php } // $physicians_query loop
+		wp_reset_postdata();
+		// End Providers Section
+		
+		// Begin Location Section
+		if ( $show_locations_section ) {
+			echo $location_content; 
+		}
+		// End Location Section
+			
+		// Begin Areas of Expertise Section
+		if ( $show_aoe_section ) { ?>
 			<section class="uams-module bg-auto" id="expertise">
 				<div class="container-fluid">
 					<div class="row">
@@ -370,10 +577,15 @@
 					</div>
 				</div>
 			</section>
-			<?php endif;
-			wp_reset_postdata(); ?>	
-		<?php
+		<?php } // endif
+		wp_reset_postdata();
+		// End Areas of Expertise Section
+			
+		// Begin Appointment Information Section
+		if ( $show_appointment_section ) {
 			include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
+		}
+		// End Appointment Information Section
 		?>
 	</main>
 </div>

@@ -169,9 +169,15 @@
 					}
 				?>
 				<?php if( $video ) { ?>
-					<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
-					<?php echo wp_oembed_get( $video ); ?>
-					</div>
+					<?php if(function_exists('lyte_preparse')) {
+						echo '<div class="alignwide">';
+						echo lyte_parse( str_replace( 'https', 'httpv', $video ) ); 
+						echo '</div>';
+					} else {
+						echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
+						echo wp_oembed_get( $video ); 
+						echo '</div>';
+					} ?>
 				<?php } ?>
 			</div>
 		</section>
