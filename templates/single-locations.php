@@ -360,6 +360,23 @@ while ( have_posts() ) : the_post(); ?>
             $show_appointment_section = false;
         }
 
+        // Check if Appointment Scheduling section should be displayed
+		$mychart_scheduling_query_system = get_field('mychart_scheduling_query_system', 'option');
+		$location_scheduling_query = get_field('location_scheduling_query');
+
+		$mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
+		$mychart_scheduling_instance = get_field('mychart_scheduling_instance', 'option');
+		$location_scheduling_ser = get_field('location_scheduling_ser');
+		$location_scheduling_dep = get_field('location_scheduling_dep');
+		$location_scheduling_vt = get_field('location_scheduling_vt');
+		$location_scheduling_fallback = get_field('location_scheduling_fallback');
+
+		if ( $mychart_scheduling_query_system && $location_scheduling_query ) {
+            $show_mychart_scheduling_section = true;
+        } else {
+            $show_mychart_scheduling_section = false;
+        }
+
         // Check if Telemedicine Information section should be displayed
 		if ( $telemed_query ) {
             $show_telemed_section = true;
@@ -1018,6 +1035,11 @@ while ( have_posts() ) : the_post(); ?>
 							<a class="nav-link" href="#appointment-info" title="Jump to the section of this page about Appointment Information">Appointment Information</a>
 						</li>
 					<?php } ?>
+					<?php if ( $show_mychart_scheduling_section ) { ?>
+						<li class="nav-item">
+							<a class="nav-link" href="#scheduling" title="Jump to the section of this page about scheduling an appointment in MyChart">Schedule an Appointment</a>
+						</li>
+					<?php } ?>
 					<?php if ( $show_telemed_section ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#telemedicine-info" title="Jump to the section of this page about Telemedicine Information">Telemedicine</a>
@@ -1274,6 +1296,52 @@ while ( have_posts() ) : the_post(); ?>
 		</section>
 	<?php } // endif
 	// End Appointment Information Section
+
+	// Begin MyChart Scheduling Section
+	if ( $show_mychart_scheduling_section ) { ?>
+		<section class="uams-module mychart-scheduling-module bg-auto" id="scheduling">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-12">
+						<h2 class="module-title">Schedule an Appointment</h2>
+						<div class="module-body">
+							<div id="scheduleContainer">
+								<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>"></iframe>
+							</div>
+
+							<!-- <link href="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
+
+							<script src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidgetController.js" type="text/javascript"></script>
+
+							<script type="text/javascript">
+							var EWC = new EmbeddedWidgetController({
+
+								// Replace with the hostname of your Open Scheduling site
+								'hostname':'https://<?php echo $mychart_scheduling_domain; ?>',
+
+								// Must equal media query in EpicWP.css + any left/right margin of the host page. Should also change in EmbeddedWidget.css
+								'matchMediaString':'(max-width: 991.98px)',
+
+								//Show a button on top of the widget that lets the user see the slots in fullscreen.
+							'showToggleBtn':true,
+							
+								//The toggle button’s help text for screen reader.
+							'toggleBtnExpandHelpText': 'Expand to see the slots in fullscreen',
+							'toggleBtnCollapseHelpText': 'Exit fullscreen',
+							});
+							</script>
+							<?php if ( $location_scheduling_fallback && !empty($location_scheduling_fallback) ) { ?>
+								<div class="more">
+									<?php echo $location_scheduling_fallback; ?>
+								</div>
+							<?php } ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	<?php }
+	// End MyChart Scheduling Section
 
 	// Begin Telemedicine Information Section
 	if ( $show_telemed_section ) { ?>
