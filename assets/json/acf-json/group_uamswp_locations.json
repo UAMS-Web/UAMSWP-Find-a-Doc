@@ -3153,6 +3153,34 @@
             "append": "",
             "maxlength": ""
         },
+		"field_location_scheduling_fallback": {
+			"key": "field_location_scheduling_fallback",
+			"label": "Fallback Information",
+			"name": "location_scheduling_fallback",
+			"type": "wysiwyg",
+			"instructions": "Optional paragraph to follow the scheduling widget that explains an alternative to using the scheduling widget.",
+			"required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_scheduling_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+            },
+			"acfe_permissions": "",
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "basic",
+			"media_upload": 0,
+			"delay": 0
+        },
         "field_location_medical_tab": {
             "key": "field_location_medical_tab",
             "name": "",

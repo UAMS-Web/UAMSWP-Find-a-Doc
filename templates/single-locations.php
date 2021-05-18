@@ -372,6 +372,7 @@ while ( have_posts() ) : the_post(); ?>
 		$location_scheduling_ser = get_field('location_scheduling_ser');
 		$location_scheduling_dep = get_field('location_scheduling_dep');
 		$location_scheduling_vt = get_field('location_scheduling_vt');
+		$location_scheduling_fallback = get_field('location_scheduling_fallback');
 
 		if ( $mychart_scheduling_query_system && $location_scheduling_query ) {
             $show_mychart_scheduling_section = true;
@@ -1332,6 +1333,11 @@ while ( have_posts() ) : the_post(); ?>
 							'toggleBtnCollapseHelpText': 'Exit fullscreen',
 							});
 							</script>
+							<?php if ( $location_scheduling_fallback && !empty($location_scheduling_fallback) ) { ?>
+								<div class="more">
+									<?php echo $location_scheduling_fallback; ?>
+								</div>
+							<?php } ?>
 						</div>
 					</div>
 				</div>
