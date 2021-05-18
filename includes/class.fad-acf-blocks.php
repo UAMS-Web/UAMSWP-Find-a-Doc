@@ -121,7 +121,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'name' => 'block_fad_locations_filter_type',
                 'type' => 'taxonomy',
                 'instructions' => '',
-                'required' => 0,
+                'required' => 1,
                 'conditional_logic' => 0,
                 'wrapper' => array(
                     'width' => '',
@@ -184,31 +184,6 @@ if( function_exists('acf_add_local_field_group') ):
                 'load_terms' => 0,
                 'return_format' => 'id',
                 'multiple' => 0,
-            ),
-            array(
-                'key' => 'field_block_fad_locations_filter_ids',
-                'label' => 'Locations',
-                'name' => 'block_fad_locations_filter_ids',
-                'type' => 'relationship',
-                'instructions' => 'Will be included regardless of other filters.',
-                'required' => 0,
-                'conditional_logic' => 0,
-                'wrapper' => array(
-                    'width' => '',
-                    'class' => '',
-                    'id' => '',
-                ),
-                'post_type' => array(
-                    0 => 'location',
-                ),
-                'taxonomy' => '',
-                'filters' => array(
-                    0 => 'search',
-                ),
-                'elements' => '',
-                'min' => '',
-                'max' => '',
-                'return_format' => 'id',
             ),
             array(
                 'key' => 'field_block_fad_locations_display',

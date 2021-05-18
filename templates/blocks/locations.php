@@ -53,7 +53,6 @@ if ( $more ) {
     }
 }
 
-$filter_ids = get_field('block_fad_locations_filter_ids') ?: array();
 $filter_type = get_field('block_fad_locations_filter_type');
 $filter_region = get_field('block_fad_locations_filter_region');
 $filter_aoe = get_field('block_fad_locations_filter_aoe') ?: array();
@@ -87,26 +86,7 @@ if (!empty($filter_region))
         );
 }
 
-if($filter_type || $filter_region || $filter_aoe || $filter_ids) {
-    if ($filter_type || $filter_region || $filter_aoe) {
-        // Build Query to get Ids from filters
-        $args = (array(
-            'post_type' => "location",
-            'order' => 'ASC',
-            'orderby' => 'title',
-            'posts_per_page' => -1,
-            'post_status' => 'publish',
-            'post__in' => $post_ids,
-            'tax_query' => $tax_query,
-            'fields' => 'ids',
-        ));
-        $filtered_query = new WP_Query( $args ); 
-        $post_ids = array_unique( array_merge( $filter_ids,  $filtered_query->posts ) );
-    } else {
-        $post_ids = $filter_ids;
-    }
-
-    // Build Main Query from Post Ids (Filtered IDs + Specific IDs)
+if($filter_type || $filter_region || $filter_aoe) {
     $args = (array(
         'post_type' => "location",
         'order' => 'ASC',
@@ -114,6 +94,7 @@ if($filter_type || $filter_region || $filter_aoe || $filter_ids) {
         'posts_per_page' => -1,
         'post_status' => 'publish',
         'post__in' => $post_ids,
+        'tax_query' => $tax_query,
     ));
     $location_query = new WP_Query( $args );
 
