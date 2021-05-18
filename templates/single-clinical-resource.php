@@ -37,6 +37,7 @@ function uamswp_add_entry_class( $attributes ) {
 }
 add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
+add_action( 'genesis_entry_content', 'uamswp_resource_excerpt', 2 );
 add_action( 'genesis_entry_content', 'uamswp_resource_text', 8 );
 add_action( 'genesis_entry_content', 'uamswp_resource_photo', 10 );
 add_action( 'genesis_entry_content', 'uamswp_resource_youtube', 12 );
@@ -185,6 +186,24 @@ if ( $jump_link_count >= $jump_link_count_min ) {
     $show_jump_links_section = true;
 } else {
     $show_jump_links_section = false;
+}
+function uamswp_resource_excerpt() {
+    $excerpt = get_field('clinical_resource_excerpt');
+    $display_excerpt = get_field('clinical_resource_excerpt_display');
+
+    if( $display_excerpt && !empty($excerpt) ) {
+        ?>
+        <section class="uams-module bg-auto" id="content-text">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <?php echo $excerpt; ?>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <?php
+    }
 }
 function uamswp_resource_text() {
     global $resource_type;
@@ -417,16 +436,16 @@ function uamswp_resource_expertise() {
 }
 function uamswp_expertise_jump_links() {
     global $page_title;
-    global $jump_link_count_min;
-    global $jump_link_count;
-    global $show_appointment_section;
-    global $show_podcast_section;
-    global $show_child_aoe_section;
-    global $show_conditions_section;
-    global $show_treatments_section;
-    global $show_providers_section;
-    global $show_locations_section;
-    global $show_related_aoe_section;
+    // global $jump_link_count_min;
+    // global $jump_link_count;
+    // global $show_appointment_section;
+    // global $show_podcast_section;
+    // global $show_child_aoe_section;
+    // global $show_conditions_section;
+    // global $show_treatments_section;
+    // global $show_providers_section;
+    // global $show_locations_section;
+    // global $show_related_aoe_section;
     global $show_jump_links_section;
     
     // Begin Jump Links Section
