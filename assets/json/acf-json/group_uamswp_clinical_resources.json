@@ -11,7 +11,7 @@
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "75",
                 "class": "",
                 "id": ""
             },
@@ -21,6 +21,25 @@
             "rows": 4,
             "new_lines": "",
             "acfe_textarea_code": 0
+        },
+        {
+            "key": "field_clinical_resource_excerpt_display",
+            "label": "Display the excerpt on the resource?",
+            "name": "clinical_resource_excerpt_display",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
             "key": "field_clinical_resource_type",
