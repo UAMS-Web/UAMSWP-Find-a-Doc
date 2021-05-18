@@ -33,6 +33,14 @@ if( function_exists('acf_add_options_page') ) {
         'parent_slug'	=> 'fad-settings',
         'redirect'		=> false
     ));
+
+    acf_add_options_sub_page(array(
+		'page_title' 	=> 'Clinical Resource Options',
+        'menu_title'	=> 'Clinical Resources',
+        'menu_slug' 	=> 'uamswp-fad-resources',
+        'parent_slug'	=> 'fad-settings',
+        'redirect'		=> false
+    ));
     
     acf_add_options_sub_page(array(
 		'page_title' 	=> 'Taxonomy Options',
