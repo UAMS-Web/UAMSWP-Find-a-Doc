@@ -892,6 +892,80 @@
   box-shadow: 0 0 0 .2rem rgba(157,34,53,.25)!important;
 }
 
+.mychart-scheduling-module .module-body {
+  width: 700px;
+}
+
+#openSchedulingFrame,
+#scheduleContainer {
+  box-sizing: content-box!important;
+}
+
+#scheduleContainer {
+  background: #fff;
+  text-align: center;
+}
+
+#openSchedulingFrame {
+  width: 700px;
+  height: 500px;
+  border: 1px solid #ccc;
+}
+
+html.viewportmax :not(.keepshown) {
+  display: none;
+}
+
+.viewportmax,
+html.viewportmax .keepshown {
+  margin: 0!important;
+  padding: 0!important;
+  width: auto;
+}
+
+#openSchedulingFrame.viewportmax {
+  width: 100%;
+  padding: 0;
+  border: none;
+}
+
+#scheduleContainer.viewportmax {
+  height: 100%;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+body.poppedOut,
+html.poppedOut {
+  position: fixed;
+  overflow: hidden;
+  margin: 0;
+}
+
+#scheduleContainer.poppedOut {
+  position: fixed;
+  padding: 0;
+  z-index: 99999999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#openSchedulingFrame.poppedOut {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+}
+
+#openSchedulingFrame.buttonOnly {
+  width: 100%;
+  max-width: 300px;
+  height: 11rem;
+  border: none;
+}
+
 @media (min-width:381px) {
   .card-list.card-list-doctors-count-4,
   .card-list.card-list-doctors-count-6,
@@ -1223,6 +1297,36 @@
 @media (max-width:1200px) {
   .doctor-list .list-col .list-col-header .result-count p {
     font-size: calc(1.26563rem + .1875vw);
+  }
+}
+
+@media only screen and (max-width:991.98px) {
+  #openSchedulingFrame {
+    width: 100%;
+    max-width: 699px;
+    height: 400px;
+    padding-top: 1px;
+  }
+
+  #openSchedulingFrame[data-oswstep="0"]+#toggleBtn {
+    -webkit-perspective: 1000;
+    display: block;
+    margin: -5.5em auto 2.5em;
+    height: 3em;
+    width: 5em;
+    border-radius: 1.5em;
+    box-shadow: 0 2px 5px #000;
+    opacity: .8;
+    background: #666;
+    background-size: auto 65%;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAyCAYAAAAA9rgCAAACv0lEQVR42u2aT0hUQRzH1y1sE0lDgzKkqNCC0KC8SBFdtoN4iIgOe5C1ULBDaJcMVMzq0CXyUC1EihQZdOhULFQU1AodPHmSqEgQtT8sikVo2Xfgt/B4zJv33rx9M6vOwAfe2307O583b347M7+NrKyzEjHCRniNC0fWWPEsjMNTYNsqFNwFkiDqV/g1+AfGwU0QB5sLULCcOucOmCSNDzI93M0ZAr/BS3AZHM7dRcWCxeA4GABjYJnTzhsywg0eYsB3MAxiCkQ3ghGw4KFdJ2SEN4AfLhX/AicV9u4husmisgg2+Rami5+6yMY1PNJu0i+kojRd3C6ouF9joOoStOtSEOG9gor/gCYNsk303U6lTlqYPvCpUKQ9yM6AoqDCKcuY7QRZHdIOslmaZOTG9CPpmZblA2co8sXp/IiDdE2IsrUOsg22QJbMh3CFPRpzpPsU9PB1nqwtelcFFhY0ICfdq3AMD/Bk87J48FjZDg1Remcoq6V1tzw0wkbYCBthI2yEjbARNsI6hXH5BdCjsPFsy6lMizAubaON+hUVKyZaKbGSAVtCE+ZVjtdaLbK5clHRWpiVd6DUdk2JdXs2iPB7cMxy3sLZ7f/CcjohCt/i7F+9ZZL0fgykWUYikDBOK8FfMA8aQYIj+xXsCflxLgKDHOlXlFt6TufXggqftbw1z5GdAvsUBSwmfZcj/dNynAkqnBJsiU6HuXEnkL4vaNOSPeb4Ff7oUPEsOKDpdzUKhgTSzVLCONwtqPQbqNckzJJ8TwRtuy0rfN4lSzcHDmqQfejSrglZ4cce8rDs0d6vcPwOeWgTmx9s9yVMlc84VLhMs52r4ChLVCvs4Wp68kZdUqYJv8J1tpc/g3vgNNhaIIuCKP1L4Qp4Y0vFPPArfA48Ax2qfmfzcANKKeHGJihpszw0wua/lkbYCK/G8h8oTTqT902BRQAAAABJRU5ErkJggg==);
+  }
+
+  #openSchedulingFrame.poppedOut[data-oswstep="0"]+#toggleBtn {
+    margin-top: -6em;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAyCAYAAAAA9rgCAAACgElEQVR42u2az0tUURTHr7nTVZRCmJvSFkKglYgo6UKUfuwGoVpIrmRo4ybBpoHAlQi6j1JwIboQ/wIliDYtSlAE3UjUKkMFizLB1/foEa9v7rvvpamn8XzhO8x7M+dyPvPevXd45xgDBUFwEX4HN5s8E5j64ddwgbFgPwa7+gHfziPYvmBfBH2OTr4NDmoDbggF3oJLBYOVO869CHKVoQ8a4e+hD9bheg68Aa/CDwUDz8Pt1vFzB+wH+PzeF5r4dg5DP4a/8fErobCXOb/fcAruccDO0tQNB7Y4oG0tCwXusHLccuQ9B5dEBbfCPz3QVwUCj3ryXYhde/CFtGeALoHAX6LuSPhSXHAF/NkDPCEMtsqTK03PFl/wlRhY0srOXiYH+ElMvgTd5AosgEfgX0G8qgUBTyXIl6CvRw1QBN+BB3lvc+mpENhCeC0ix6/wONxJ29bfDFrGe/EYDyJVm/AM3Avf/CfTjgaBawTC3oWLj/NWEqWTmDtnG/gUFisFVmAFVmAFVmAFVmAFVmAFVmAFVmAFVmB9xKPACuyALIUfwcMCn0tnqVuBKhFHAaSSSxs8wNXzbesJf7ERIi4L2R0LU1xguxYXSFWFWi5VTHuKam+MINGP78n1E7VpwA9yOgBwojvh7ZMxwkQXIWHtqT4cmE0QWCcQOJMANhUV7INeO9LCcHzAdYeC5eB7EZ0wpEkjUFwnXvXM4zIf7Kbn10oboaKL4cl7MQc6Aja8+lUKBk7H9GrtQ+PNfQfsOm9TWclNaRZwpT1nI7rxlnag8fLeBRtayF4a4eKrmLKOXdDPwu3DB2Dtv5b/AbCro9aGHrJ7pi/wBl5r8kwMPbR3/AefABKT7Ta/AQAAAABJRU5ErkJggg==);
   }
 }
 
