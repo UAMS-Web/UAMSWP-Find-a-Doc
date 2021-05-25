@@ -211,18 +211,7 @@ function uamswp_resource_text() {
     $text = get_field('clinical_resource_text');
 
     if( 'text' == $resource_type && $text ) { // $show_text_section ) {
-        ?>
-        <section class="uams-module bg-auto" id="content-text">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="module-title">Text</h2>
-                        <?php echo $text; ?>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <?php
+        echo $text;
     }
 }
 function uamswp_resource_photo() {
