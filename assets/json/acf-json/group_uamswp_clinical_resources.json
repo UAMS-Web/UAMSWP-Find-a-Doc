@@ -58,7 +58,8 @@
                 "text": "Text",
                 "photo": "Photo",
                 "youtube": "YouTube Video",
-                "doc": "Document"
+                "doc": "Document",
+                "nci": "National Cancer Institute (NCI) Syndication"
             },
             "default_value": false,
             "allow_null": 0,
@@ -280,6 +281,25 @@
                     "mime_types": ""
                 }
             ]
+        },
+        {
+            "key": "field_clinical_resource_nci_embed",
+            "name": "clinical_resource_nci_embed",
+            "type": "textarea",
+            "label": "National Cancer Institute (NCI) Syndication Embed / Syndication Code",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 6,
+            "new_lines": ""
         },
         {
             "key": "field_clinical_resource_relationships",
