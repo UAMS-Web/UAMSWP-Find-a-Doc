@@ -218,7 +218,7 @@
             "label": "Document Description",
             "name": "clinical_resource_document_descr",
             "type": "wysiwyg",
-            "instructions": "Summarize the key points and critical information from the attached documents.",
+            "instructions": "Summarize the key points and critical information from the attached.",
             "required": 1,
             "conditional_logic": [
                 [
