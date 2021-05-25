@@ -292,9 +292,15 @@ function uamswp_resource_physicians() {
 function uamswp_resource_youtube() {
     global $resource_type;
     $video = get_field('clinical_resource_youtube');
+    $video_descr = get_field('clinical_resource_youtube_descr');
     $video_transcript = get_field('clinical_resource_youtube_transcript');
     if( 'youtube' == $resource_type && $video ) { ?>
-        <?php if(function_exists('lyte_preparse')) {
+        <?php if ( $video_descr ) {
+            echo '<h2 class="sr-only">Description</h2>';
+            echo $video_descr;
+        }
+        echo '<h2 class="sr-only">Video Player</h2>';
+        if(function_exists('lyte_preparse')) {
             echo '<div class="alignwide">';
             echo lyte_parse( str_replace( 'https', 'httpv', $video ) ); 
             echo '</div>';
@@ -302,11 +308,11 @@ function uamswp_resource_youtube() {
             echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
             echo wp_oembed_get( $video ); 
             echo '</div>';
-        } ?>
-    <?php }
-    if ( 'youtube' == $resource_type && $video_transcript ) {
-        echo '<h2>Transcript</h2>';
-        echo $video_transcript;
+        }
+        if ( $video_transcript ) {
+            echo '<h2>Transcript</h2>';
+            echo $video_transcript;
+        }
     }
 }
 function uamswp_resource_conditions_cpt() {
