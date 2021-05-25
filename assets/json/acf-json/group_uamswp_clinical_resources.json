@@ -162,9 +162,9 @@
             "key": "field_clinical_resource_youtube_transcript",
             "label": "Transcript",
             "name": "clinical_resource_youtube_transcript",
-            "type": "textarea",
+            "type": "wysiwyg",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": [
                 [
                     {
@@ -180,11 +180,10 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": 6,
-            "new_lines": "wpautop",
-            "acfe_textarea_code": 0
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 1
         },
         {
             "key": "field_clinical_resource_document",
