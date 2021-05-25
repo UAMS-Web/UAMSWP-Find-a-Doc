@@ -160,6 +160,33 @@
             "placeholder": ""
         },
         {
+            "key": "field_clinical_resource_youtube_descr",
+            "label": "Content",
+            "name": "clinical_resource_youtube_descr",
+            "type": "wysiwyg",
+            "instructions": "Describe the video and entice users to watch it.",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_clinical_resource_type",
+                        "operator": "==",
+                        "value": "youtube"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 1
+        },
+        {
             "key": "field_clinical_resource_youtube_transcript",
             "label": "Transcript",
             "name": "clinical_resource_youtube_transcript",
