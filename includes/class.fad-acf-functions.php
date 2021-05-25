@@ -773,7 +773,7 @@ function limit_post_top_level( $args, $field, $post ) {
 
 // 1. Add the key=[NAME_OF_RELATIONSHIP_FIELD].
 add_filter('acf/fields/relationship/query/key=field_clinical_resource_related', 'relationship_exclude_id', 10, 3);
-
+add_filter('acf/fields/relationship/query/key=field_expertise_associated', 'relationship_exclude_id', 10, 3);
 // 2. Add the $field and $post arguments.
 function relationship_exclude_id ( $args, $field, $post_id ) {
 
