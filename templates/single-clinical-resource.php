@@ -227,26 +227,22 @@ function uamswp_resource_photo() {
 }
 function uamswp_resource_document() {
     global $resource_type;
+    $document_descr = get_field('clinical_resource_document_descr');
     $document = get_field('clinical_resource_document');
 
-    if( 'doc' == $resource_type && have_rows('clinical_resource_document') ): ?>
-        <section class="uams-module bg-auto" id="content-document">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="module-title">Document</h2>
-                        <?php while( have_rows('clinical_resource_document') ): the_row();
-                            $document_title = get_sub_field('document_title');
-                            $document_file = get_sub_field('document_file');
-                            $document_url = $document_file['url'];
-                        ?>
-                        <a href="<?php echo $document_url; ?>" title="<?php echo $document_title; ?>"><?php echo $document_title; ?></a><br/>
-                        <?php endwhile; ?>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <?php
+    if( 'doc' == $resource_type && have_rows('clinical_resource_document') ):
+        echo $document_descr;
+        echo '<hr />';
+        echo '<h2>Attachments</h2>';
+        echo '<ul>';
+        while( have_rows('clinical_resource_document') ): the_row();
+            $document_title = get_sub_field('document_title');
+            $document_file = get_sub_field('document_file');
+            $document_url = $document_file['url'];
+        ?>
+            <li><a href="<?php echo $document_url; ?>" title="<?php echo $document_title; ?>"><?php echo $document_title; ?></a></li>
+        <?php endwhile;
+        echo '</ul>';
     endif;
 }
 function uamswp_resource_nci() {
