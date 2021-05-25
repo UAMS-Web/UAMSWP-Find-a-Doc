@@ -7,7 +7,7 @@
             "label": "Excerpt",
             "name": "clinical_resource_excerpt",
             "type": "textarea",
-            "instructions": "What is the resource about?",
+            "instructions": "What is the resource about? <br />Limit of 160 characters. Preferred length is at least 110 characters.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -17,7 +17,7 @@
             },
             "default_value": "",
             "placeholder": "",
-            "maxlength": "",
+            "maxlength": 160,
             "rows": 4,
             "new_lines": "",
             "acfe_textarea_code": 0
