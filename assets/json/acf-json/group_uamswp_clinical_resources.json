@@ -250,7 +250,7 @@
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "75",
+                        "width": "60",
                         "class": "",
                         "id": ""
                     },
@@ -269,7 +269,7 @@
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "25",
+                        "width": "40",
                         "class": "",
                         "id": ""
                     },
