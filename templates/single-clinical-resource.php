@@ -240,7 +240,7 @@ function uamswp_resource_document() {
             $document_file = get_sub_field('document_file');
             $document_url = $document_file['url'];
         ?>
-            <li><a href="<?php echo $document_url; ?>" title="<?php echo $document_title; ?>"><?php echo $document_title; ?></a></li>
+            <li><a href="<?php echo $document_url; ?>" title="<?php echo $document_title; ?>" target="_blank"><?php echo $document_title; ?></a></li>
         <?php endwhile;
         echo '</ul>';
     endif;
