@@ -42,6 +42,7 @@ add_action( 'genesis_entry_content', 'uamswp_resource_text', 8 );
 add_action( 'genesis_entry_content', 'uamswp_resource_photo', 10 );
 add_action( 'genesis_entry_content', 'uamswp_resource_youtube', 12 );
 add_action( 'genesis_entry_content', 'uamswp_resource_document', 14 );
+add_action( 'genesis_entry_content', 'uamswp_resource_nci', 16 );
 add_action( 'genesis_after_entry', 'uamswp_resource_jump_links', 8 );
 add_action( 'genesis_after_entry', 'uamswp_resource_conditions_cpt', 14 );
 add_action( 'genesis_after_entry', 'uamswp_resource_treatments_cpt', 15 );
@@ -270,6 +271,14 @@ function uamswp_resource_document() {
             </div>
         </section>
         <?php
+    endif;
+}
+function uamswp_resource_nci() {
+    global $resource_type;
+    $nci_embed = get_field('clinical_resource_nci_embed');
+
+    if( 'nci' == $resource_type && !empty($nci_embed) ):
+        echo $nci_embed;
     endif;
 }
 function uamswp_resource_physicians() {
