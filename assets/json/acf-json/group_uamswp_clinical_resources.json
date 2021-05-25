@@ -118,7 +118,7 @@
         },
         {
             "key": "field_clinical_resource_infographic_descr",
-            "label": "Description",
+            "label": "Infographic Introduction \/ Description",
             "name": "clinical_resource_infographic_descr",
             "type": "wysiwyg",
             "instructions": "Describe the infographic and entice users to look at it.",
@@ -196,7 +196,7 @@
         },
         {
             "key": "field_clinical_resource_youtube_descr",
-            "label": "Content",
+            "label": "Video Introduction \/ Description",
             "name": "clinical_resource_youtube_descr",
             "type": "wysiwyg",
             "instructions": "Describe the video and entice users to watch it.",
@@ -250,7 +250,7 @@
         },
         {
             "key": "field_clinical_resource_document_descr",
-            "label": "Document Description",
+            "label": "Document Introduction \/ Description",
             "name": "clinical_resource_document_descr",
             "type": "wysiwyg",
             "instructions": "Summarize the key points and critical information from the attached.",
