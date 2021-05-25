@@ -247,7 +247,7 @@
                     "name": "document_title",
                     "type": "text",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "75",
@@ -266,7 +266,7 @@
                     "name": "document_file",
                     "type": "file",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "25",
