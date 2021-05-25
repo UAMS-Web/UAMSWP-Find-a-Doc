@@ -351,10 +351,10 @@ function uamswp_resource_locations() {
     } // endif
 }
 function uamswp_resource_associated() {
-    global $show_related_rources_section;
+    global $show_related_resource_section;
     global $resource_query;
 
-    if( $show_related_rources_section ) { ?>
+    if( $show_related_resource_section ) { ?>
         <section class="uams-module link-list link-list-layout-split bg-auto" id="related-resource" aria-labelledby="related-resource-title">
 			<div class="container-fluid">
 				<div class="row">
