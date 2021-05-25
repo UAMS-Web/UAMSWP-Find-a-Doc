@@ -53,4 +53,9 @@
             margin-left: 0.25em;
         }
     }
+    div.syndicate {
+        h1 {
+            @include pagetitle();
+        }
+    }
 }
