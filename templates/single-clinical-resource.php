@@ -220,22 +220,9 @@ function uamswp_resource_photo() {
     $size = 'full';
 
     if( 'photo' == $resource_type && $photo ) {
-        ?>
-        <section class="uams-module bg-auto" id="content-photo">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="module-title">Photo</h2>
-                        <?php
-                            if( $photo ) {
-                                echo wp_get_attachment_image( $photo, $size );
-                            }
-                        ?>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <?php
+        if( $photo ) {
+            echo wp_get_attachment_image( $photo, $size );
+        }
     }
 }
 function uamswp_resource_document() {
