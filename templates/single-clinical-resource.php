@@ -305,9 +305,8 @@ function uamswp_resource_youtube() {
         } ?>
     <?php }
     if ( 'youtube' == $resource_type && $video_transcript ) {
-        echo '<div>';
+        echo '<h2>Transcript</h2>';
         echo $video_transcript;
-        echo '</div>';
     }
 }
 function uamswp_resource_conditions_cpt() {
