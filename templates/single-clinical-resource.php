@@ -202,19 +202,22 @@ function uamswp_resource_infographic() {
     $infographic_transcript = get_field('clinical_resource_infographic_transcript');
     $size = 'content-image-wide';
 
-    echo '<h2 class="sr-only">Description</h2>';
-    echo $infographic_descr;
-
-    echo '<h2 class="sr-only">Infographic</h2>';
     if( 'infographic' == $resource_type && $infographic ) {
-        if( $infographic ) {
-            echo '<div class="alignwide">';
-            echo wp_get_attachment_image( $infographic, $size );
-            echo '</div>';
+        if ( $infographic_descr ) {
+            echo '<h2 class="sr-only">Description</h2>';
+            echo $infographic_descr;
+        }
+
+        echo '<h2 class="sr-only">Infographic</h2>';
+        echo '<div class="alignwide">';
+        echo wp_get_attachment_image( $infographic, $size );
+        echo '</div>';
+
+        if ( $infographic_transcript ) {
+            echo '<h2>Transcript</h2>';
+            echo $infographic_transcript;
         }
     }
-    echo '<h2>Transcript</h2>';
-    echo $infographic_transcript;
 }
 function uamswp_resource_document() {
     global $resource_type;
