@@ -288,7 +288,7 @@
             "type": "textarea",
             "label": "National Cancer Institute (NCI) Syndication Embed / Syndication Code",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
