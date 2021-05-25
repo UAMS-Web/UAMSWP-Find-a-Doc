@@ -288,7 +288,7 @@
                     "maxlength": ""
                 },
                 {
-                    "key": "field_6document_file",
+                    "key": "field_document_file",
                     "label": "File",
                     "name": "document_file",
                     "type": "file",
