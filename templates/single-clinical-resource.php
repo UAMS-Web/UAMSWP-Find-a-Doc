@@ -39,7 +39,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 add_action( 'genesis_entry_content', 'uamswp_resource_excerpt', 2 );
 add_action( 'genesis_entry_content', 'uamswp_resource_text', 8 );
-add_action( 'genesis_entry_content', 'uamswp_resource_photo', 10 );
+add_action( 'genesis_entry_content', 'uamswp_resource_infographic', 10 );
 add_action( 'genesis_entry_content', 'uamswp_resource_youtube', 12 );
 add_action( 'genesis_entry_content', 'uamswp_resource_document', 14 );
 add_action( 'genesis_entry_content', 'uamswp_resource_nci', 16 );
@@ -214,16 +214,26 @@ function uamswp_resource_text() {
         echo $text;
     }
 }
-function uamswp_resource_photo() {
+function uamswp_resource_infographic() {
     global $resource_type;
-    $photo = get_field('clinical_resource_photo');
-    $size = 'full';
+    $infographic = get_field('clinical_resource_infographic');
+    $infographic_descr = get_field('clinical_resource_infographic_descr');
+    $infographic_transcript = get_field('clinical_resource_infographic_transcript');
+    $size = 'content-image-wide';
 
-    if( 'photo' == $resource_type && $photo ) {
-        if( $photo ) {
-            echo wp_get_attachment_image( $photo, $size );
+    echo '<h2 class="sr-only">Description</h2>';
+    echo $infographic_descr;
+
+    echo '<h2 class="sr-only">Infographic</h2>';
+    if( 'infographic' == $resource_type && $infographic ) {
+        if( $infographic ) {
+            echo '<div class="alignwide">';
+            echo wp_get_attachment_image( $infographic, $size );
+            echo '</div>';
         }
     }
+    echo '<h2>Transcript</h2>';
+    echo $infographic_transcript;
 }
 function uamswp_resource_document() {
     global $resource_type;

@@ -56,7 +56,7 @@
             },
             "choices": {
                 "text": "Text",
-                "photo": "Photo",
+                "infographic": "Infographic",
                 "youtube": "YouTube Video",
                 "doc": "Document",
                 "nci": "National Cancer Institute (NCI) Syndication"
@@ -99,9 +99,9 @@
             "delay": 1
         },
         {
-            "key": "field_clinical_resource_photo",
-            "label": "Photo",
-            "name": "clinical_resource_photo",
+            "key": "field_clinical_resource_infographic",
+            "label": "Infographic",
+            "name": "clinical_resource_infographic",
             "type": "image",
             "instructions": "",
             "required": 1,
@@ -110,7 +110,7 @@
                     {
                         "field": "field_clinical_resource_type",
                         "operator": "==",
-                        "value": "photo"
+                        "value": "infographic"
                     }
                 ]
             ],
@@ -134,6 +134,60 @@
             "ratio_width": 0,
             "ratio_height": 0,
             "ratio_margin": 0
+        },
+        {
+            "key": "field_clinical_resource_infographic_descr",
+            "label": "Description",
+            "name": "clinical_resource_infographic_descr",
+            "type": "wysiwyg",
+            "instructions": "Describe the infographic and entice users to look at it.",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_clinical_resource_type",
+                        "operator": "==",
+                        "value": "infographic"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 1
+        },
+        {
+            "key": "field_clinical_resource_infographic_transcript",
+            "label": "Transcript",
+            "name": "clinical_resource_infographic_transcript",
+            "type": "wysiwyg",
+            "instructions": "Full-text version of the infographic that screen readers recognize and is therefore accessible to all users",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_clinical_resource_type",
+                        "operator": "==",
+                        "value": "infographic"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 1
         },
         {
             "key": "field_clinical_resource_youtube",
