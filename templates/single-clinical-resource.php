@@ -224,17 +224,38 @@ function uamswp_resource_document() {
     $document_descr = get_field('clinical_resource_document_descr');
     $document = get_field('clinical_resource_document');
 
+    $icon_file = 'far fa-file';
+    $icon_pdf = 'far fa-file-pdf';
+    $icon_word = 'far fa-file-word';
+    $icon_powerpoint = 'far fa-file-powerpoint';
+    $icon_excel = 'far fa-file-excel';
+    $icon_image = 'far fa-file-image';
+
     if( 'doc' == $resource_type && have_rows('clinical_resource_document') ):
         echo $document_descr;
         echo '<hr />';
         echo '<h2>Attachments</h2>';
-        echo '<ul>';
+        echo '<ul class="attachments">';
         while( have_rows('clinical_resource_document') ): the_row();
             $document_title = get_sub_field('document_title');
             $document_file = get_sub_field('document_file');
             $document_url = $document_file['url'];
+            $document_url_path = pathinfo($document_url);
+            $document_url_extension = $document_url_path['extension'];
+
+            if ( $document_url_extension == 'pdf' ) {
+                $icon_file = $icon_pdf;
+            } elseif ( $document_url_extension == 'doc' || $document_url_extension == 'docx' ) {
+                $icon_file = $icon_word;
+            } elseif ( $document_url_extension == 'ppt' || $document_url_extension == 'pptx' ) {
+                $icon_file = $icon_powerpoint;
+            } elseif ( $document_url_extension == 'xls' || $document_url_extension == 'xlsx' ) {
+                $icon_file = $icon_excel;
+            } elseif ( $document_url_extension == 'jpg' ||  $document_url_extension == 'jpeg' || $document_url_extension == 'gif' || $document_url_extension == 'png' || $document_url_extension == 'bmp' ) {
+                $icon_file = $icon_image;
+            }
         ?>
-            <li><a href="<?php echo $document_url; ?>" title="<?php echo $document_title; ?>" target="_blank"><?php echo $document_title; ?></a></li>
+            <li><a class="attachment-link" href="<?php echo $document_url; ?>" title="<?php echo $document_title; ?>" target="_blank"><span class="<?php echo $icon_file; ?> fa-fw"></span><span class="attachment-label"><?php echo $document_title; ?></span></a></li>
         <?php endwhile;
         echo '</ul>';
     endif;
