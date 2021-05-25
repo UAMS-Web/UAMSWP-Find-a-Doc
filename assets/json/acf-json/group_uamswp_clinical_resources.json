@@ -289,7 +289,15 @@
             "label": "National Cancer Institute (NCI) Syndication Embed / Syndication Code",
             "instructions": "",
             "required": 1,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_clinical_resource_type",
+                        "operator": "==",
+                        "value": "nci"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
