@@ -73,7 +73,7 @@
         },
         {
             "key": "field_clinical_resource_text",
-            "label": "Text",
+            "label": "Content",
             "name": "clinical_resource_text",
             "type": "wysiwyg",
             "instructions": "",
@@ -188,7 +188,7 @@
         },
         {
             "key": "field_clinical_resource_document_descr",
-            "label": "Text",
+            "label": "Document Description",
             "name": "clinical_resource_document_descr",
             "type": "wysiwyg",
             "instructions": "",
