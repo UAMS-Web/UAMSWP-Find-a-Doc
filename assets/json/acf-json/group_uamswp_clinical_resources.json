@@ -305,7 +305,7 @@
                     "library": "all",
                     "min_size": "",
                     "max_size": "",
-                    "mime_types": ""
+                    "mime_types": "pdf"
                 }
             ]
         },
