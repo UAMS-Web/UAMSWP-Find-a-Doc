@@ -186,6 +186,33 @@
             "delay": 1
         },
         {
+            "key": "field_clinical_resource_document_descr",
+            "label": "Text",
+            "name": "clinical_resource_document_descr",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_clinical_resource_type",
+                        "operator": "==",
+                        "value": "doc"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 1
+        },
+        {
             "key": "field_clinical_resource_document",
             "label": "Document(s)",
             "name": "clinical_resource_document",
