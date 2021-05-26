@@ -579,6 +579,37 @@
             "max": "",
             "return_format": "id"
         },
+        "field_expertise_clinical_resources": {
+            "key": "field_expertise_clinical_resources",
+            "name": "expertise_clinical_resources",
+            "type": "relationship",
+            "label": "Clinical Resources",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "clinical-resource"
+            ],
+            "taxonomy": [],
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_clinical_resource_aoe"
+            },
+            "acfe_validate": "",
+            "acfe_update": ""
+        },
         "field_physician_podcast_name": {
             "key": "field_expertise_podcast_name",
             "name": "expertise_podcast_name",
