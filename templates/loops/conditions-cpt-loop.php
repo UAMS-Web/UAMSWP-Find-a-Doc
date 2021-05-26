@@ -6,7 +6,8 @@
      *  Must be used inside a loop
      *  Required var:
      *      $conditions
-     *      $condition_heading_related
+     *      $condition_heading_related_resource
+     *      $condition_heading_related_treatment
      *      $condition_heading_treated
      *      $condition_disclaimer
      */
