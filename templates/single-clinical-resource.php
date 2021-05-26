@@ -8,8 +8,8 @@
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title();
-$resource_title_system = get_field('clinical_resource_archive_headline', 'option');
-$resource_title = $resource_title_system ? $resource_title_system : 'Clinical Resource';
+$resource_archive_title_system = get_field('clinical_resource_archive_headline', 'option');
+$resource_archive_title = $resource_archive_title_system ? $resource_archive_title_system : 'Clinical Resource';
 
 function uamswp_fad_title($html) { 
     global $page_title;
@@ -45,9 +45,9 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
     add_action( 'genesis_entry_header', 'uamswp_resource_post_title' );
 
     function uamswp_resource_post_title() {
-        global $resource_title;
+        global $resource_archive_title;
         echo '<h1 class="entry-title" itemprop="headline">';
-        echo '<span class="supertitle">'. $resource_title . '</span><span class="sr-only">:</span> ';
+        echo '<span class="supertitle">'. $resource_archive_title . '</span><span class="sr-only">:</span> ';
         echo get_the_title();
         echo '</h1>';
     }
