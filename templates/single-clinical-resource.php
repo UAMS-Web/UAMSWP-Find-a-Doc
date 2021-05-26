@@ -54,7 +54,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 add_action( 'genesis_entry_content', 'uamswp_resource_text', 8 );
 add_action( 'genesis_entry_content', 'uamswp_resource_infographic', 10 );
-add_action( 'genesis_entry_content', 'uamswp_resource_youtube', 12 );
+add_action( 'genesis_entry_content', 'uamswp_resource_video', 12 );
 add_action( 'genesis_entry_content', 'uamswp_resource_document', 14 );
 add_action( 'genesis_entry_content', 'uamswp_resource_nci', 16 );
 add_action( 'genesis_after_entry', 'uamswp_resource_jump_links', 8 );
@@ -322,18 +322,18 @@ function uamswp_resource_physicians() {
         </section>
     <?php }
 }
-function uamswp_resource_youtube() {
+function uamswp_resource_video() {
     global $resource_type;
-    $video = get_field('clinical_resource_youtube');
-    $video_descr = get_field('clinical_resource_youtube_descr');
-    $video_transcript = get_field('clinical_resource_youtube_transcript');
+    $video = get_field('clinical_resource_video');
+    $video_descr = get_field('clinical_resource_video_descr');
+    $video_transcript = get_field('clinical_resource_video_transcript');
 
     $video_source = '';
     if ( (strpos($video, 'youtube') !== false) || (strpos($video, 'youtu.be') !== false) ) {
         $video_source = 'youtube';
     }
 
-    if( 'youtube' == $resource_type && $video ) { ?>
+    if( 'video' == $resource_type && $video ) { ?>
         <?php if ( $video_descr ) {
             echo '<h2 class="sr-only">Description</h2>';
             echo $video_descr;

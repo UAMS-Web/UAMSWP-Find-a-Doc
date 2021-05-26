@@ -38,7 +38,7 @@
             "choices": {
                 "text": "Text",
                 "infographic": "Infographic",
-                "youtube": "YouTube Video",
+                "video": "Video",
                 "doc": "Document",
                 "nci": "National Cancer Institute (NCI) Syndication"
             },
@@ -171,18 +171,18 @@
             "delay": 1
         },
         {
-            "key": "field_clinical_resource_youtube",
-            "label": "Youtube Video",
-            "name": "clinical_resource_youtube",
+            "key": "field_clinical_resource_video",
+            "label": "Youtube or Vimeo Video",
+            "name": "clinical_resource_video",
             "type": "url",
-            "instructions": "Enter Youtube url including https:\/\/",
+            "instructions": "Enter YouTube or Vimeo URL, including https:\/\/",
             "required": 1,
             "conditional_logic": [
                 [
                     {
                         "field": "field_clinical_resource_type",
                         "operator": "==",
-                        "value": "youtube"
+                        "value": "video"
                     }
                 ]
             ],
@@ -195,9 +195,9 @@
             "placeholder": ""
         },
         {
-            "key": "field_clinical_resource_youtube_descr",
+            "key": "field_clinical_resource_video_descr",
             "label": "Video Introduction \/ Description",
-            "name": "clinical_resource_youtube_descr",
+            "name": "clinical_resource_video_descr",
             "type": "wysiwyg",
             "instructions": "Describe the video and entice users to watch it.",
             "required": 1,
@@ -206,7 +206,7 @@
                     {
                         "field": "field_clinical_resource_type",
                         "operator": "==",
-                        "value": "youtube"
+                        "value": "video"
                     }
                 ]
             ],
@@ -222,9 +222,9 @@
             "delay": 1
         },
         {
-            "key": "field_clinical_resource_youtube_transcript",
+            "key": "field_clinical_resource_video_transcript",
             "label": "Transcript",
-            "name": "clinical_resource_youtube_transcript",
+            "name": "clinical_resource_video_transcript",
             "type": "wysiwyg",
             "instructions": "",
             "required": 1,
@@ -233,7 +233,7 @@
                     {
                         "field": "field_clinical_resource_type",
                         "operator": "==",
-                        "value": "youtube"
+                        "value": "video"
                     }
                 ]
             ],
