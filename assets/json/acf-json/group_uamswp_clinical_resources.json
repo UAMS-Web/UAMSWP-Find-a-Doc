@@ -36,7 +36,7 @@
                 "id": ""
             },
             "choices": {
-                "text": "Text",
+                "text": "Article",
                 "infographic": "Infographic",
                 "video": "Video",
                 "doc": "Document",
@@ -54,7 +54,7 @@
         },
         {
             "key": "field_clinical_resource_text",
-            "label": "Content",
+            "label": "Article Content",
             "name": "clinical_resource_text",
             "type": "wysiwyg",
             "instructions": "",
