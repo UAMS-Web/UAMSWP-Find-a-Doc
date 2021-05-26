@@ -417,30 +417,25 @@ function uamswp_resource_expertise() {
     global $expertise_query;
 
     if( $show_aoe_section ) { ?>
-        <section class="uams-module link-list link-list-layout-split bg-auto" id="areas-of-expertise" aria-labelledby="areas-of-expertise-title">
+		<section class="uams-module expertise-list bg-auto" id="expertise" aria-labelledby="areas-of-expertise-title">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-12 col-md-6 heading">
-						<div class="text-container">
-							<h2 class="module-title" id="areas-of-expertise-title"><span class="title">Related Areas of Expertise</span></h2>
+					<div class="col-12">
+						<h2 class="module-title" id="areas-of-expertise-title">Related Areas of Expertise</h2>
+						<div class="card-list-container">
+							<div class="card-list card-list-expertise">
+							<?php 
+							while ($expertise_query->have_posts()) : $expertise_query->the_post();
+								$id = get_the_ID();
+								include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+							endwhile;
+							wp_reset_postdata();
+							?>
 						</div>
-            		</div>
-            		<div class="col-12 col-md-6 list">
-						<ul>
-						<?php
-						while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
-							echo '<li class="item"><div class="text-container"><h3 class="h5"><a href="'.get_permalink().'" aria-label="Go to Area of Expertise page for ' . get_the_title() . '">';
-							echo get_the_title();
-                            echo '</a></h3>';
-                            echo ( has_excerpt() ? '<p>' . wp_trim_words( get_the_excerpt(), 30, '&nbsp;&hellip;' ) . '</p>' : '' );
-                            echo '</div></li>';
-						endwhile;
-						wp_reset_postdata(); ?>
-						</ul>
 					</div>
 				</div>
 			</div>
-		</section>
+        </section>
 	<?php 
     } // endif
 }
