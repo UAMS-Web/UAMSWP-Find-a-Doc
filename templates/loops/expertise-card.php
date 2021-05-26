@@ -33,6 +33,12 @@
 
     $expertise_label = 'Go to the Area of Expertise page for' . $expertise_title_attr;
     
+    $expertise_excerpt = get_the_excerpt($id) ? get_the_excerpt($id) : wp_strip_all_tags( get_the_content($id) );
+    $expertise_excerpt_len = strlen($expertise_excerpt);
+    if ( $expertise_excerpt_len > 160 ) {
+        $expertise_excerpt = wp_trim_words( $expertise_excerpt, 23, ' &hellip;' );
+    }
+
 ?>
 <div class="card">
     <a href="<?php echo get_permalink($id); ?>" target="_self" aria-label="<?php echo $expertise_label; ?>" data-categorytitle="Photo" data-itemtitle="<?php echo $expertise_title_attr; ?>">
@@ -53,7 +59,7 @@
                 <span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>" aria-label="Go to Area of Expertise page for <?php echo $parent_title_attr; ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $expertise_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
             <?php } // endif ?>
         </h3>
-        <p class="card-text"><?php echo ( $excerpt ? wp_trim_words( $excerpt, 30, ' &hellip;' ) : wp_trim_words( wp_strip_all_tags( get_the_content($id), 30, ' &hellip;' ) ) ); ?></p>
+        <p class="card-text"><?php echo $expertise_excerpt; ?></p>
     </div><!-- .card-body -->
     <div class="btn-container">
         <div class="inner-container">
