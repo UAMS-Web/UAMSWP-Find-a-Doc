@@ -148,7 +148,7 @@
             "label": "Transcript",
             "name": "clinical_resource_infographic_transcript",
             "type": "wysiwyg",
-            "instructions": "Full-text version of the infographic that screen readers recognize and is therefore accessible to all users",
+            "instructions": "Full-text version of the infographic so that we ensure the content of the infographic is accessible to all, including people with disabilities who cannot see images",
             "required": 1,
             "conditional_logic": [
                 [
@@ -226,7 +226,7 @@
             "label": "Transcript",
             "name": "clinical_resource_video_transcript",
             "type": "wysiwyg",
-            "instructions": "",
+            "instructions": "Full-text version of the video so that we ensure the content of the video is accessible to all, including people with disabilities who cannot hear audio or see video",
             "required": 1,
             "conditional_logic": [
                 [
