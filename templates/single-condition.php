@@ -86,7 +86,7 @@
 
     $cta_repeater = get_field('condition_cta');
 
-	// Check if Locations section should be displayed
+	// Check if Clinical Resources section should be displayed
 	$resources =  get_field('condition_clinical_resources');
 	$args = (array(
 		'post_type' => "clinical-resource",
