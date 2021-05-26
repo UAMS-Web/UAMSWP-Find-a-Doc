@@ -307,6 +307,18 @@ while ( have_posts() ) : the_post();
         }
     }
 
+	// Clinical Resources
+	$resources =  get_field('physician_clinical_resources');
+	$args = (array(
+		'post_type' => "clinical-resource",
+		'order' => 'ASC',
+		'orderby' => 'title',
+		'posts_per_page' => -1,
+		'post_status' => 'publish',
+		'post__in'	=> $resources
+	));
+	$resource_query = new WP_Query( $args );
+
     // Set logic for displaying jump links and sections
     $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
     $jump_link_count = 0;
@@ -340,6 +352,14 @@ while ( have_posts() ) : the_post();
             $jump_link_count++;
         } else {
             $show_podcast_section = false;
+        }
+
+	    // Check if Clinical Resources section should be displayed
+        if( $resources && $resource_query->have_posts() ) {
+            $show_related_resource_section = true;
+            $jump_link_count++;
+        } else {
+            $show_related_resource_section = false;
         }
 
         // Check if Research section should be displayed
@@ -646,6 +666,11 @@ while ( have_posts() ) : the_post();
                                 <a class="nav-link" href="#podcast">Podcast</a>
                             </li>
                         <?php } ?>
+                        <?php if ( $show_related_resource_section ) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#resources" title="Jump to the section of this page about Resources">Resources</a>
+                            </li>
+                        <?php } ?>
                         <?php if ($show_academic_section) { ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="#academic-info">Academic Background</a>
@@ -803,9 +828,35 @@ while ( have_posts() ) : the_post();
                     </div>
                 </div>
             </section>
-        <?php } ?>
-        <?php 
-            $physician_academic_split = false;
+        <?php }
+        // End UAMS Health Talk Podcast
+        
+        // Begin Clinical Resources Section
+        if ( $show_related_resource_section ) { ?>
+            <section class="uams-module resource-list bg-auto" id="related-resources" aria-labelledby="related-resources-title">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="module-title" id="related-resources-title">Resources Related to <?php echo $short_name; ?></h2>
+                            <div class="card-list-container">
+                                <div class="card-list card-list-resource">
+                                <?php 
+                                while ($resource_query->have_posts()) : $resource_query->the_post();
+                                    $id = get_the_ID();
+                                    include( UAMS_FAD_PATH . '/templates/loops/resource-card.php' );
+                                endwhile;
+                                wp_reset_postdata();
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <?php }
+        // End Clinical Resources Section
+        
+        // Begin Academic Bio Section
+        $physician_academic_split = false;
             if ( $academic_bio && ( $academic_appointment || $academic_admin_title || $education || $boards ) ) {
                 $physician_academic_split = true;
             }
@@ -922,8 +973,10 @@ while ( have_posts() ) : the_post();
                 </div>
             </div>
         </section>
-        <?php endif; ?>
-        <?php 
+        <?php endif;
+        // End Academic Bio Section
+
+        // Begin Research Bio Section
         if( $show_research_section ): ?>
         <section class="uams-module research-info bg-auto" id="research-info">
             <div class="container-fluid">
@@ -973,8 +1026,11 @@ while ( have_posts() ) : the_post();
                 </div>
             </div>
         </section>
-        <?php endif; ?>
-        <?php // load all 'conditions' terms for the post
+        <?php endif;
+        // End Research Bio Section
+
+        // Begin Conditions Section
+        // load all 'conditions' terms for the post
              
             // Conditions CPT
             // we will use the first term to load ACF data from
