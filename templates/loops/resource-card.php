@@ -32,6 +32,12 @@
     }
 
     $resource_label = 'Go to the Clinical Resource page for' . $resource_title_attr;
+    
+    $resource_excerpt = get_the_excerpt($id) ? get_the_excerpt($id) : wp_strip_all_tags( get_the_content($id) );
+    $resource_excerpt_len = strlen($resource_excerpt);
+    if ( $resource_excerpt_len > 160 ) {
+        $resource_excerpt = wp_trim_words( $resource_excerpt, 23, ' &hellip;' );
+    }
 
 ?>
 <div class="card">
@@ -45,7 +51,6 @@
         </picture>
         <?php } ?>
     </a>
-    <?php $excerpt = get_the_excerpt($id); ?>
     <div class="card-body">
         <h3 class="card-title h5">
             <span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self" aria-label="<?php echo $resource_label; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $resource_title_attr; ?>"><?php echo $resource_title; ?></a></span>
@@ -53,7 +58,7 @@
                 <span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>" aria-label="Go to Clinical Resource page for <?php echo $parent_title_attr; ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $resource_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
             <?php } // endif ?>
         </h3>
-        <p class="card-text"><?php echo ( $excerpt ? wp_trim_words( $excerpt, 30, ' &hellip;' ) : wp_trim_words( wp_strip_all_tags( get_the_content($id), 30, ' &hellip;' ) ) ); ?></p>
+        <p class="card-text"><?php echo $resource_excerpt; ?></p>
     </div><!-- .card-body -->
     <div class="btn-container">
         <div class="inner-container">
