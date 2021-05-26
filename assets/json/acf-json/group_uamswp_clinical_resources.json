@@ -121,7 +121,7 @@
             "label": "Infographic Introduction \/ Description",
             "name": "clinical_resource_infographic_descr",
             "type": "wysiwyg",
-            "instructions": "Describe the intent of the infographic and entice users to look at it.",
+            "instructions": "Describe the purpose of the infographic and entice users to look at it.",
             "required": 1,
             "conditional_logic": [
                 [
@@ -199,7 +199,7 @@
             "label": "Video Introduction \/ Description",
             "name": "clinical_resource_video_descr",
             "type": "wysiwyg",
-            "instructions": "Describe the video and entice users to watch it.",
+            "instructions": "Describe the purpose of the video and entice users to watch it.",
             "required": 1,
             "conditional_logic": [
                 [
