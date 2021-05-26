@@ -43,12 +43,12 @@ add_action( 'genesis_entry_content', 'uamswp_resource_youtube', 12 );
 add_action( 'genesis_entry_content', 'uamswp_resource_document', 14 );
 add_action( 'genesis_entry_content', 'uamswp_resource_nci', 16 );
 add_action( 'genesis_after_entry', 'uamswp_resource_jump_links', 8 );
-add_action( 'genesis_after_entry', 'uamswp_resource_conditions_cpt', 14 );
-add_action( 'genesis_after_entry', 'uamswp_resource_treatments_cpt', 15 );
+add_action( 'genesis_after_entry', 'uamswp_resource_associated', 10 );
+add_action( 'genesis_after_entry', 'uamswp_resource_conditions_cpt', 12 );
+add_action( 'genesis_after_entry', 'uamswp_resource_treatments_cpt', 14 );
 add_action( 'genesis_after_entry', 'uamswp_resource_physicians', 16 );
-add_action( 'genesis_after_entry', 'uamswp_resource_locations', 20 );
-add_action( 'genesis_after_entry', 'uamswp_resource_expertise', 22 );
-add_action( 'genesis_after_entry', 'uamswp_resource_associated', 24 );
+add_action( 'genesis_after_entry', 'uamswp_resource_locations', 18 );
+add_action( 'genesis_after_entry', 'uamswp_resource_expertise', 20 );
 
 // Set logic for displaying jump links and sections
 $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
