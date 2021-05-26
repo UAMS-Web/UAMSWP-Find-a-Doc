@@ -23,6 +23,36 @@
             "acfe_textarea_code": 0
         },
         {
+            "key": "field_clinical_resource_featured_image",
+            "label": "Featured Image",
+            "name": "clinical_resource_featured_image",
+            "type": "image",
+            "instructions": "This image will be used for social sharing and displaying across UAMS web content. It is restricted to a 16:9 aspect ratio and has a minimum dimension of 1200x675.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "75",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": 1200,
+            "min_height": 675,
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 20,
+            "acfe_thumbnail": 0,
+            "acfe_validate": "",
+            "acfe_update": ""
+        },
+        {
             "key": "field_clinical_resource_type",
             "label": "Resource Type",
             "name": "clinical_resource_type",
