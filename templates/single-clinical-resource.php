@@ -364,7 +364,7 @@ function uamswp_resource_locations() {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="module-title">Locations</h2>
+                        <h2 class="module-title">Related Locations</h2>
                         <div class="card-list-container location-card-list-container">
                             <div class="card-list">
                             <?php while ( $location_query->have_posts() ) : $location_query->the_post();
