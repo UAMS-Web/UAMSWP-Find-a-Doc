@@ -8,6 +8,8 @@
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title();
+$expertise_title_system = get_field('expertise_archive_headline', 'option');
+$expertise_title = $expertise_title_system ? $expertise_title_system : 'Area of Expertise';
 
 function uamswp_fad_title($html) { 
     global $page_title;
@@ -36,6 +38,19 @@ function uamswp_add_entry_class( $attributes ) {
     return $attributes;
 }
 add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
+
+// Modify Entry Title
+
+    remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+    add_action( 'genesis_entry_header', 'uamswp_expertise_post_title' );
+
+    function uamswp_expertise_post_title() {
+        global $expertise_title;
+        echo '<h1 class="entry-title" itemprop="headline">';
+        echo '<span class="supertitle">'. $expertise_title . '</span><span class="sr-only">:</span> ';
+        echo get_the_title();
+        echo '</h1>';
+    }
 
 add_filter( 'genesis_entry_content', 'uamswp_expertise_keywords', 8 );
 add_action( 'genesis_entry_content', 'uamswp_expertise_youtube', 12 );
