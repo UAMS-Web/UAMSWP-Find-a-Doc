@@ -47,7 +47,8 @@ add_action( 'genesis_after_entry', 'uamswp_resource_conditions_cpt', 14 );
 add_action( 'genesis_after_entry', 'uamswp_resource_treatments_cpt', 15 );
 add_action( 'genesis_after_entry', 'uamswp_resource_physicians', 16 );
 add_action( 'genesis_after_entry', 'uamswp_resource_locations', 20 );
-add_action( 'genesis_after_entry', 'uamswp_resource_associated', 22 );
+add_action( 'genesis_after_entry', 'uamswp_resource_expertise', 22 );
+add_action( 'genesis_after_entry', 'uamswp_resource_associated', 24 );
 
 // Set logic for displaying jump links and sections
 $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
