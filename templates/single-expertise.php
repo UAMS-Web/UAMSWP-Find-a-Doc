@@ -58,12 +58,13 @@ add_action( 'genesis_after_entry', 'uamswp_expertise_cta', 6 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_jump_links', 8 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_podcast', 10 );
 add_action( 'genesis_after_entry', 'uamswp_list_child_expertise', 12 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_conditions_cpt', 14 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_treatments_cpt', 15 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 16 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 20 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 22 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_appointment', 24 );
+add_action( 'genesis_after_entry', 'uamswp_expertise_resource', 14 );
+add_action( 'genesis_after_entry', 'uamswp_expertise_conditions_cpt', 16 );
+add_action( 'genesis_after_entry', 'uamswp_expertise_treatments_cpt', 18 );
+add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 20 );
+add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 22 );
+add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 24 );
+add_action( 'genesis_after_entry', 'uamswp_expertise_appointment', 26 );
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 
 // Set logic for displaying jump links and sections
@@ -77,6 +78,26 @@ if ($podcast_name) {
     $jump_link_count++;
 } else {
     $show_podcast_section = false;
+}
+
+// Clinical Resources
+$resources =  get_field('expertise_clinical_resources');
+$args = (array(
+    'post_type' => "clinical-resource",
+    'order' => 'ASC',
+    'orderby' => 'title',
+    'posts_per_page' => -1,
+    'post_status' => 'publish',
+    'post__in'	=> $resources
+));
+$resource_query = new WP_Query( $args );
+
+// Check if Clinical Resources section should be displayed
+if( $resources && $resource_query->have_posts() ) {
+    $show_related_resource_section = true;
+    $jump_link_count++;
+} else {
+    $show_related_resource_section = false;
 }
 
 // Check if Child Areas of Expertise section should be displayed
@@ -489,6 +510,33 @@ function uamswp_expertise_podcast() {
     </section>';
     }
 }
+function uamswp_expertise_resource() {
+    global $page_title;
+    global $show_related_resource_section;
+    global $resource_query;
+
+    if ( $show_related_resource_section ) { ?>
+        <section class="uams-module resource-list bg-auto" id="related-resources" aria-labelledby="related-resources-title">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="module-title" id="related-resources-title">Resources Related to <?php echo $page_title; ?></h2>
+                        <div class="card-list-container">
+                            <div class="card-list card-list-resource">
+                            <?php 
+                            while ($resource_query->have_posts()) : $resource_query->the_post();
+                                $id = get_the_ID();
+                                include( UAMS_FAD_PATH . '/templates/loops/resource-card.php' );
+                            endwhile;
+                            wp_reset_postdata();
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <?php }
+}
 function uamswp_list_child_expertise() {
     global $page_id;
     global $page_title;
@@ -566,6 +614,7 @@ function uamswp_expertise_jump_links() {
     global $show_appointment_section;
     global $show_podcast_section;
     global $show_child_aoe_section;
+    global $show_related_resource_section;
     global $show_conditions_section;
     global $show_treatments_section;
     global $show_providers_section;
@@ -590,6 +639,11 @@ function uamswp_expertise_jump_links() {
                     <?php if ($show_child_aoe_section) { ?>
                         <li class="nav-item">
                             <a class="nav-link" href="#sub-expertise" title="Jump to the section of this page about Areas Within Cancer Care">Areas Within <?php echo $page_title; ?></a>
+                        </li>
+                    <?php } ?>
+                    <?php if ( $show_related_resource_section ) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#resources" title="Jump to the section of this page about Resources">Resources</a>
                         </li>
                     <?php } ?>
                     <?php if ( $show_conditions_section ) { ?>
