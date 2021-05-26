@@ -25,7 +25,7 @@
         {
             "key": "field_clinical_resource_featured_image",
             "label": "Featured Image",
-            "name": "clinical_resource_featured_image",
+            "name": "_thumbnail_id",
             "type": "image",
             "instructions": "This image will be used for social sharing and displaying across UAMS web content. It is restricted to a 16:9 aspect ratio and has a minimum dimension of 1200x675.",
             "required": 1,
