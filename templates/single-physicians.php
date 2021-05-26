@@ -979,6 +979,11 @@ while ( have_posts() ) : the_post();
             // Conditions CPT
             // we will use the first term to load ACF data from
             if( $show_conditions_section ) {
+                $condition_heading_related_resource = false;
+                $condition_heading_related_treatment = false;
+                $condition_heading_treated = true;
+                $condition_disclaimer = true;
+
                 include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
                 // $condition_schema .= ',"medicalSpecialty": [';
                 $i = 0;
@@ -999,6 +1004,10 @@ while ( have_posts() ) : the_post();
 
             // Treatments CPT
             if( $show_treatments_section ) {
+                $treatment_heading_related_resource = false;
+                $treatment_heading_related_condition = false;
+                $treatment_heading_performed = true;
+                $treatment_disclaimer = true;
                 include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
                 // $treatment_schema .= ',"medicalSpecialty": [';
                 $i = 0;

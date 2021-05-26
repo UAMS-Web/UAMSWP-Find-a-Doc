@@ -8,6 +8,8 @@
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title();
+$expertise_title_system = get_field('expertise_archive_headline', 'option');
+$expertise_title = $expertise_title_system ? $expertise_title_system : 'Area of Expertise';
 
 function uamswp_fad_title($html) { 
     global $page_title;
@@ -36,6 +38,19 @@ function uamswp_add_entry_class( $attributes ) {
     return $attributes;
 }
 add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
+
+// Modify Entry Title
+
+    remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+    add_action( 'genesis_entry_header', 'uamswp_expertise_post_title' );
+
+    function uamswp_expertise_post_title() {
+        global $expertise_title;
+        echo '<h1 class="entry-title" itemprop="headline">';
+        echo '<span class="supertitle">'. $expertise_title . '</span><span class="sr-only">:</span> ';
+        echo get_the_title();
+        echo '</h1>';
+    }
 
 add_filter( 'genesis_entry_content', 'uamswp_expertise_keywords', 8 );
 add_action( 'genesis_entry_content', 'uamswp_expertise_youtube', 12 );
@@ -342,6 +357,10 @@ function uamswp_expertise_keywords() {
 function uamswp_expertise_conditions_cpt() {
     global $show_conditions_section;
     global $conditions_cpt_query;
+    $condition_heading_related_resource = false;
+    $condition_heading_related_treatment = false;
+    $condition_heading_treated = true;
+    $condition_disclaimer = true;
 
     if( $show_conditions_section ) {
         include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
@@ -350,6 +369,10 @@ function uamswp_expertise_conditions_cpt() {
 function uamswp_expertise_treatments_cpt() {
     global $show_treatments_section;
     global $treatments_cpt_query;
+    $treatment_heading_related_resource = false;
+    $treatment_heading_related_condition = false;
+    $treatment_heading_performed = true;
+    $treatment_disclaimer = true;
 
     if( $show_treatments_section ) {
         include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );

@@ -8,6 +8,8 @@
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title();
+$resource_title_system = get_field('clinical_resource_archive_headline', 'option');
+$resource_title = $resource_title_system ? $resource_title_system : 'Clinical Resource';
 
 function uamswp_fad_title($html) { 
     global $page_title;
@@ -37,18 +39,33 @@ function uamswp_add_entry_class( $attributes ) {
 }
 add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
+// Modify Entry Title
+
+    remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+    add_action( 'genesis_entry_header', 'uamswp_resource_post_title' );
+
+    function uamswp_resource_post_title() {
+        global $resource_title;
+        echo '<h1 class="entry-title" itemprop="headline">';
+        echo '<span class="supertitle">'. $resource_title . '</span><span class="sr-only">:</span> ';
+        echo get_the_title();
+        echo '</h1>';
+    }
+
 add_action( 'genesis_entry_content', 'uamswp_resource_text', 8 );
 add_action( 'genesis_entry_content', 'uamswp_resource_infographic', 10 );
-add_action( 'genesis_entry_content', 'uamswp_resource_youtube', 12 );
+add_action( 'genesis_entry_content', 'uamswp_resource_video', 12 );
 add_action( 'genesis_entry_content', 'uamswp_resource_document', 14 );
 add_action( 'genesis_entry_content', 'uamswp_resource_nci', 16 );
 add_action( 'genesis_after_entry', 'uamswp_resource_jump_links', 8 );
-add_action( 'genesis_after_entry', 'uamswp_resource_conditions_cpt', 14 );
-add_action( 'genesis_after_entry', 'uamswp_resource_treatments_cpt', 15 );
+add_action( 'genesis_after_entry', 'uamswp_resource_associated', 10 );
+add_action( 'genesis_after_entry', 'uamswp_resource_conditions_cpt', 12 );
+add_action( 'genesis_after_entry', 'uamswp_resource_treatments_cpt', 14 );
 add_action( 'genesis_after_entry', 'uamswp_resource_physicians', 16 );
-add_action( 'genesis_after_entry', 'uamswp_resource_locations', 20 );
-add_action( 'genesis_after_entry', 'uamswp_resource_expertise', 22 );
-add_action( 'genesis_after_entry', 'uamswp_resource_associated', 24 );
+add_action( 'genesis_after_entry', 'uamswp_resource_locations', 18 );
+add_action( 'genesis_after_entry', 'uamswp_resource_expertise', 20 );
+add_action( 'genesis_after_entry', 'uamswp_resource_appointment', 22 );
+
 
 // Set logic for displaying jump links and sections
 $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
@@ -282,7 +299,7 @@ function uamswp_resource_physicians() {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="module-title">Providers</h2>
+                        <h2 class="module-title">Related Providers</h2>
                         <div class="card-list-container">
                             <div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
                                 <?php 
@@ -305,18 +322,24 @@ function uamswp_resource_physicians() {
         </section>
     <?php }
 }
-function uamswp_resource_youtube() {
+function uamswp_resource_video() {
     global $resource_type;
-    $video = get_field('clinical_resource_youtube');
-    $video_descr = get_field('clinical_resource_youtube_descr');
-    $video_transcript = get_field('clinical_resource_youtube_transcript');
-    if( 'youtube' == $resource_type && $video ) { ?>
+    $video = get_field('clinical_resource_video');
+    $video_descr = get_field('clinical_resource_video_descr');
+    $video_transcript = get_field('clinical_resource_video_transcript');
+
+    $video_source = '';
+    if ( (strpos($video, 'youtube') !== false) || (strpos($video, 'youtu.be') !== false) ) {
+        $video_source = 'youtube';
+    }
+
+    if( 'video' == $resource_type && $video ) { ?>
         <?php if ( $video_descr ) {
             echo '<h2 class="sr-only">Description</h2>';
             echo $video_descr;
         }
         echo '<h2 class="sr-only">Video Player</h2>';
-        if(function_exists('lyte_preparse')) {
+        if( function_exists('lyte_preparse') && $video_source == 'youtube' ) {
             echo '<div class="alignwide">';
             echo lyte_parse( str_replace( 'https', 'httpv', $video ) ); 
             echo '</div>';
@@ -334,6 +357,10 @@ function uamswp_resource_youtube() {
 function uamswp_resource_conditions_cpt() {
     global $show_conditions_section;
     global $conditions_cpt_query;
+    $condition_heading_related_resource = true;
+    $condition_heading_related_treatment = false;
+    $condition_heading_treated = false;
+    $condition_disclaimer = false;
 
     if( $show_conditions_section ) {
         include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
@@ -342,6 +369,10 @@ function uamswp_resource_conditions_cpt() {
 function uamswp_resource_treatments_cpt() {
     global $show_treatments_section;
     global $treatments_cpt_query;
+    $treatment_heading_related_resource = true;
+    $treatment_heading_related_condition = false;
+    $treatment_heading_performed = false;
+    $treatment_disclaimer = false;
 
     if( $show_treatments_section ) {
         include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
@@ -356,7 +387,7 @@ function uamswp_resource_locations() {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="module-title">Locations</h2>
+                        <h2 class="module-title">Related Locations</h2>
                         <div class="card-list-container location-card-list-container">
                             <div class="card-list">
                             <?php while ( $location_query->have_posts() ) : $location_query->the_post();
@@ -409,69 +440,56 @@ function uamswp_resource_expertise() {
     global $expertise_query;
 
     if( $show_aoe_section ) { ?>
-        <section class="uams-module link-list link-list-layout-split bg-auto" id="areas-of-expertise" aria-labelledby="areas-of-expertise-title">
+		<section class="uams-module expertise-list bg-auto" id="expertise" aria-labelledby="areas-of-expertise-title">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-12 col-md-6 heading">
-						<div class="text-container">
-							<h2 class="module-title" id="areas-of-expertise-title"><span class="title">Areas of Expertise</span></h2>
+					<div class="col-12">
+						<h2 class="module-title" id="areas-of-expertise-title">Related Areas of Expertise</h2>
+						<div class="card-list-container">
+							<div class="card-list card-list-expertise">
+							<?php 
+							while ($expertise_query->have_posts()) : $expertise_query->the_post();
+								$id = get_the_ID();
+								include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+							endwhile;
+							wp_reset_postdata();
+							?>
 						</div>
-            		</div>
-            		<div class="col-12 col-md-6 list">
-						<ul>
-						<?php
-						while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
-							echo '<li class="item"><div class="text-container"><h3 class="h5"><a href="'.get_permalink().'" aria-label="Go to Area of Expertise page for ' . get_the_title() . '">';
-							echo get_the_title();
-                            echo '</a></h3>';
-                            echo ( has_excerpt() ? '<p>' . wp_trim_words( get_the_excerpt(), 30, '&nbsp;&hellip;' ) . '</p>' : '' );
-                            echo '</div></li>';
-						endwhile;
-						wp_reset_postdata(); ?>
-						</ul>
 					</div>
 				</div>
 			</div>
-		</section>
+        </section>
 	<?php 
     } // endif
 }
-function uamswp_expertise_jump_links() {
+function uamswp_resource_jump_links() {
     global $page_title;
-    // global $jump_link_count_min;
-    // global $jump_link_count;
-    // global $show_appointment_section;
-    // global $show_podcast_section;
-    // global $show_child_aoe_section;
-    // global $show_conditions_section;
-    // global $show_treatments_section;
-    // global $show_providers_section;
-    // global $show_locations_section;
-    // global $show_related_aoe_section;
+    global $show_related_resource_section;
+    global $show_conditions_section;
+    global $show_treatments_section;
+    global $show_providers_section;
+    global $show_locations_section;
+    global $show_aoe_section;
     global $show_jump_links_section;
+    global $show_appointment_section;
     
     // Begin Jump Links Section
     if ( $show_jump_links_section ) { ?>
         <nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
-            <h2>Contents</h2>
+            <h2>Related Content</h2>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#jump-link-nav" aria-controls="jump-link-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse inner-container" id="jump-link-nav">
                 <ul class="nav navbar-nav">
-                    <?php if ( $show_podcast_section ) { ?>
+                    <?php if ( $show_related_resource_section ) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#podcast" title="Jump to the section of this page about UAMS Health Talk Podcast">Podcast</a>
-                        </li>
-                    <?php } ?>
-                    <?php if ($show_child_aoe_section) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#sub-expertise" title="Jump to the section of this page about Areas Within Cancer Care">Areas Within <?php echo $page_title; ?></a>
+                            <a class="nav-link" href="#related-resource" title="Jump to the section of this page about Related Resources">Resources</a>
                         </li>
                     <?php } ?>
                     <?php if ( $show_conditions_section ) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#conditions" title="Jump to the section of this page about Conditions Treated">Conditions</a>
+                            <a class="nav-link" href="#conditions" title="Jump to the section of this page about Related Conditions">Conditions</a>
                         </li>
                     <?php } ?>
                     <?php if ( $show_treatments_section ) { ?>
@@ -489,9 +507,9 @@ function uamswp_expertise_jump_links() {
                             <a class="nav-link" href="#locations" title="Jump to the section of this page about Locations">Locations</a>
                         </li>
                     <?php } ?>
-                    <?php if ( $show_related_resource_section ) { ?>
+                    <?php if ($show_aoe_section) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#related-resource" title="Jump to the section of this page about Related Resources">Related Areas</a>
+                            <a class="nav-link" href="#expertise" title="Jump to the section of this page about Related Areas of Expertise">Areas of Expertise</a>
                         </li>
                     <?php } ?>
                     <?php if ( $show_appointment_section ) { ?>
@@ -502,6 +520,25 @@ function uamswp_expertise_jump_links() {
                 </ul>
             </div>
         </nav>
+    <?php }
+}
+function uamswp_resource_appointment() {
+    global $show_appointment_section;
+    
+    if ( $show_appointment_section ) {
+        $appointment_location_url = '/location/';
+        $appointment_location_label = 'View a list of UAMS Health locations';
+        ?>
+        <section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h2>Make an Appointment</h2>
+                        <p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_label; ?>" data-itemtitle="Contact a clinic directly">contacting a clinic directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     <?php }
 }
 genesis();
