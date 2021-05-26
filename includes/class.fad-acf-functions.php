@@ -754,7 +754,7 @@ function limit_post_top_level( $args, $field, $post ) {
 		if ($height < $min || $height > $max) {
 			// does not meet the requirement, generate an error
 			$errors['aspect_ratio'] = __('Image does not meet Aspect Ratio Requirements of ').
-			                          $ratio_width.__(':').$ratio_height.__('&plusmn;').$ratio_margin.__('%');
+			                          $ratio_width.__(':').$ratio_height.__(' (±').($margin*100).__('%)');
 		}
 		// return the errors
 		return $errors;
