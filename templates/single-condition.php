@@ -171,13 +171,13 @@
     $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
     $jump_link_count = 0;
 
-        // Check if Podcast section should be displayed
-        if ( $podcast_name ) {
-            $show_podcast_section = true;
-            $jump_link_count++;
-        } else {
-            $show_podcast_section = false;
-        }
+		// Check if Podcast section should be displayed
+		if ( $podcast_name ) {
+			$show_podcast_section = true;
+			$jump_link_count++;
+		} else {
+			$show_podcast_section = false;
+		}
 
         // Check if Clinical Trials section should be displayed
         if ( !empty($clinical_trials) ) {
@@ -461,8 +461,8 @@
         <?php } // endif
         // End Jump Links Section
 
-			// Begin UAMS Health Talk Podcast Section
-			if ( $show_podcast_section ) { ?>
+		// Begin UAMS Health Talk Podcast Section
+		if ( $show_podcast_section ) { ?>
             <section class="uams-module podcast-list bg-auto" id="podcast">
                 <script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
                 </script>
