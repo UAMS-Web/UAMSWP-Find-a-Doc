@@ -515,18 +515,10 @@
 		// End Clinical Resources Section
 
 		// Begin Clinical Trials Section
-		if ( $show_clinical_trials_section ) { ?>
-			<section class="uams-module cta-bar cta-bar-1 bg-auto" id="clinical-trials">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-xs-12">
-							<h2>Clinical Trials</h2>
-							<p><a href="https://uams.trialstoday.org/" aria-label="Search UAMS Clinical Trials">Search our clinical trials</a> for those related to <?php echo get_the_title(); ?>.</p>
-						</div>
-					</div>
-				</div>
-			</section>
-		<?php } // endif
+		if ( $show_clinical_trials_section ) {
+			$clinical_trial_title = get_the_title();
+			include( UAMS_FAD_PATH . '/templates/blocks/clinical-trials.php' );
+		} // endif
 		// End Clinical Trials Section
 
 		// Begin Treatments and Procedures Section
