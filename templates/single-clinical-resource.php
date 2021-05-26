@@ -334,6 +334,10 @@ function uamswp_resource_youtube() {
 function uamswp_resource_conditions_cpt() {
     global $show_conditions_section;
     global $conditions_cpt_query;
+    $condition_heading_related_resource = true;
+    $condition_heading_related_treatment = false;
+    $condition_heading_treated = false;
+    $condition_disclaimer = false;
 
     if( $show_conditions_section ) {
         include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );

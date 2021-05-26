@@ -979,6 +979,11 @@ while ( have_posts() ) : the_post();
             // Conditions CPT
             // we will use the first term to load ACF data from
             if( $show_conditions_section ) {
+                $condition_heading_related_resource = false;
+                $condition_heading_related_treatment = false;
+                $condition_heading_treated = true;
+                $condition_disclaimer = true;
+
                 include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
                 // $condition_schema .= ',"medicalSpecialty": [';
                 $i = 0;

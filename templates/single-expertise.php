@@ -342,6 +342,10 @@ function uamswp_expertise_keywords() {
 function uamswp_expertise_conditions_cpt() {
     global $show_conditions_section;
     global $conditions_cpt_query;
+    $condition_heading_related_resource = false;
+    $condition_heading_related_treatment = false;
+    $condition_heading_treated = true;
+    $condition_disclaimer = true;
 
     if( $show_conditions_section ) {
         include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );

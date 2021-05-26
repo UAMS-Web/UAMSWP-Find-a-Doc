@@ -1516,6 +1516,11 @@ while ( have_posts() ) : the_post(); ?>
 
 	// Begin Conditions Section
 	if( $show_conditions_section ) {
+		$condition_heading_related_resource = false;
+		$condition_heading_related_treatment = false;
+		$condition_heading_treated = true;
+		$condition_disclaimer = true;
+
 		include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
 		$condition_schema .= ',"medicalSpecialty": [';
 		foreach( $conditions_cpt_query->posts as $condition ) {
