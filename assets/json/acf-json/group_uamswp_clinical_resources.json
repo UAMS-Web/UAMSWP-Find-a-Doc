@@ -413,7 +413,8 @@
             "max": "",
             "return_format": "id",
             "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_physician_clinical_resources"
             }
         },
         {
@@ -441,7 +442,8 @@
             "max": "",
             "return_format": "id",
             "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_location_clinical_resources"
             }
         },
         {
@@ -469,7 +471,8 @@
             "max": "",
             "return_format": "id",
             "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_expertise_clinical_resources"
             }
         },
         {
@@ -497,7 +500,8 @@
             "max": "",
             "return_format": "id",
             "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_condition_clinical_resources"
             }
         },
         {
@@ -525,7 +529,8 @@
             "max": "",
             "return_format": "id",
             "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_treatment_procedure_clinical_resources"
             }
         },
         {
