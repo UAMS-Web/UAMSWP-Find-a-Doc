@@ -46,7 +46,10 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
     function uamswp_resource_post_title() {
         global $resource_title;
-        echo '<h1 class="entry-title" itemprop="headline"><span class="supertitle">'. $resource_title . '</span><span class="sr-only">:</span> ' . get_the_title() . '</h1>';
+        echo '<h1 class="entry-title" itemprop="headline">';
+        echo '<span class="supertitle">'. $resource_title . '</span><span class="sr-only">:</span> ';
+        echo get_the_title();
+        echo '</h1>';
     }
 
 add_action( 'genesis_entry_content', 'uamswp_resource_text', 8 );
@@ -62,6 +65,7 @@ add_action( 'genesis_after_entry', 'uamswp_resource_physicians', 16 );
 add_action( 'genesis_after_entry', 'uamswp_resource_locations', 18 );
 add_action( 'genesis_after_entry', 'uamswp_resource_expertise', 20 );
 add_action( 'genesis_after_entry', 'uamswp_resource_appointment', 22 );
+
 
 // Set logic for displaying jump links and sections
 $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
