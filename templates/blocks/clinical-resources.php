@@ -31,7 +31,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h2 class="module-title" id="related-resources-title"><?php echo $resource_heading; ?></h2>
+                <h2 class="module-title" id="related-resources-title"><span class="title"><?php echo $resource_heading; ?></span></h2>
                 <div class="card-list-container">
                     <div class="card-list card-list-resource">
                     <?php 

@@ -11,7 +11,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12">
-                <h2 class="module-title">Conditions Treated<?php //echo $title_append; ?></h2>
+                <h2 class="module-title"><span class="title">Conditions Treated<?php //echo $title_append; ?></span></h2>
                 <p class="note">UAMS providers care for a broad range of conditions, some of which may not be listed below.</p>
                 <div class="list-container list-container-rows">
                     <ul class="list">

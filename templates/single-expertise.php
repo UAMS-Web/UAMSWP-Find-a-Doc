@@ -327,7 +327,7 @@ function uamswp_expertise_physicians() {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="module-title">Providers</h2>
+                        <h2 class="module-title"><span class="title">Providers</span></h2>
                         <div class="card-list-container">
                             <div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
                                 <?php 
@@ -412,7 +412,7 @@ function uamswp_expertise_locations() {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="module-title">Locations</h2>
+                        <h2 class="module-title"><span class="title">Locations</span></h2>
                         <div class="card-list-container location-card-list-container">
                             <div class="card-list">
                             <?php while ( $location_query->have_posts() ) : $location_query->the_post();
@@ -555,7 +555,7 @@ function uamswp_list_child_expertise() {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="module-title" id="sub-expertise-title">Areas Within <?php echo $page_title; ?></h2>
+                            <h2 class="module-title" id="sub-expertise-title"><span class="title">Areas Within <?php echo $page_title; ?></span></h2>
                             <div class="card-list-container">
                                 <div class="card-list card-list-expertise">
                             <?php

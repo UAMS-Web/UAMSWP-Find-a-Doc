@@ -1105,7 +1105,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<h2 class="module-title">Closing Information</h2>
+						<h2 class="module-title"><span class="title">Closing Information</span></h2>
 						<div class="module-body">
 							<?php echo $location_closing_info; ?>
 						</div>
@@ -1123,7 +1123,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<h2 class="module-title"><?php echo $about_section_title; ?></h2>
+						<h2 class="module-title"><span class="title"><?php echo $about_section_title; ?></span></h2>
 						<div class="module-body">
 							<?php echo $location_about ? $location_about : ''; ?>
 							<?php if($location_youtube_link) { ?>
@@ -1167,7 +1167,7 @@ while ( have_posts() ) : the_post(); ?>
 							<div class="module-body">
 							<h2><?php echo ( $location_parking ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
 						<?php } else { ?>
-							<h2 class="module-title"><?php echo ( $location_parking ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
+							<h2 class="module-title"><span class="title"><?php echo ( $location_parking ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></span></h2>
 							<div class="module-body">
 						<?php } // endif ?>
 							<?php echo $location_parking; ?>
@@ -1261,7 +1261,7 @@ while ( have_posts() ) : the_post(); ?>
 				<div class="row">
 					<div class="col-xs-12">
 						<?php if ( $location_appointment ) { ?>
-							<h2 class="module-title"><?php echo $location_appointment_heading; ?></h2>
+							<h2 class="module-title"><span class="title"><?php echo $location_appointment_heading; ?></span></h2>
 							<div class="module-body">
 								<?php echo $location_appointment; ?>
 								<?php if ( $location_appointment_bring ) { ?>
@@ -1275,7 +1275,7 @@ while ( have_posts() ) : the_post(); ?>
 							</div>
 
 						<?php } elseif ( $location_appointment_bring && $location_appointment_expect ) { ?>
-							<h2 class="module-title"><?php echo $location_appointment_heading; ?></h2>
+							<h2 class="module-title"><span class="title"><?php echo $location_appointment_heading; ?></span></h2>
 							<div class="module-body">
 								<h3><?php echo $location_appointment_bring_heading; ?></h3>
 								<?php echo $location_appointment_bring; ?>
@@ -1283,12 +1283,12 @@ while ( have_posts() ) : the_post(); ?>
 								<?php echo $location_appointment_expect; ?>
 							</div>
 						<?php } elseif ( $location_appointment_bring ) { ?>
-							<h2 class="module-title"><?php echo $location_appointment_bring_heading; ?></h2>
+							<h2 class="module-title"><span class="title"><?php echo $location_appointment_bring_heading; ?></span></h2>
 							<div class="module-body">
 								<?php echo $location_appointment_bring; ?>
 							</div>
 						<?php } elseif ( $location_appointment_expect ) { ?>
-							<h2 class="module-title"><?php echo $location_appointment_expect_heading; ?></h2>
+							<h2 class="module-title"><span class="title"><?php echo $location_appointment_expect_heading; ?></span></h2>
 							<div class="module-body">
 								<?php echo $location_appointment_expect; ?>
 							</div>
@@ -1306,7 +1306,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title">Telemedicine Information</h2>
+						<h2 class="module-title"><span class="title">Telemedicine Information</span></h2>
 						<?php if ($location_closing_display && !$location_closing_telemed) { ?>
 							<div class="module-body">
 								<p class="text-center"><strong>
@@ -1515,7 +1515,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title">Providers at <?php the_title(); ?></h2>
+						<h2 class="module-title"><span class="title">Providers at <?php the_title(); ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
 								<?php 
@@ -1584,7 +1584,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title">Areas of Expertise Represented at <?php the_title(); ?></h2>
+						<h2 class="module-title"><span class="title">Areas of Expertise Represented at <?php the_title(); ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list card-list-expertise">
 							<?php 
@@ -1632,7 +1632,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title" id="related-resources-title">Resources Related to <?php echo get_the_title(); ?></h2>
+						<h2 class="module-title" id="related-resources-title"><span class="title">Resources Related to <?php echo get_the_title(); ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list card-list-resource">
 							<?php 
@@ -1657,7 +1657,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title">Latest News for <?php the_title(); ?></h2>
+						<h2 class="module-title"><span class="title">Latest News for <?php the_title(); ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list">
 								<div class="card">

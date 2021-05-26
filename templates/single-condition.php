@@ -131,7 +131,7 @@
 		$location_content .= '<div class="container-fluid">';
 		$location_content .= '<div class="row">';
 		$location_content .= '<div class="col-12">';
-		$location_content .= '<h2 class="module-title">Locations Where Providers Treat ' . get_the_title() . '</h2>';
+		$location_content .= '<h2 class="module-title"><span class="title">Locations Where Providers Treat ' . get_the_title() . '</span></h2>';
 		$location_content .= '<div class="card-list-container location-card-list-container">';
 		$location_content .= '<div class="card-list">';
 		ob_start();
@@ -535,7 +535,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-xs-12">
-							<h2 class="module-title">Treatments and Procedures Related to <?php echo get_the_title(); ?></h2>
+							<h2 class="module-title"><span class="title">Treatments and Procedures Related to <?php echo get_the_title(); ?></span></h2>
 							<p class="note">UAMS providers perform and prescribe a broad range of treatments and procedures, some of which may not be listed below.</p>
 							<div class="list-container list-container-rows">
 								<ul class="list">
@@ -566,7 +566,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-							<h2 class="module-title">Providers Treating <?php echo get_the_title(); ?></h2>
+							<h2 class="module-title"><span class="title">Providers Treating <?php echo get_the_title(); ?></span></h2>
 							<p class="note">Note that every provider listed below may not perform or prescribe all treatments or procedures related to <?php echo get_the_title(); ?>. Review each provider for availability.</p>
 							<div class="card-list-container">
 								<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
@@ -603,7 +603,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-							<h2 class="module-title">Areas of Expertise for <?php echo get_the_title(); ?></h2>
+							<h2 class="module-title"><span class="title">Areas of Expertise for <?php echo get_the_title(); ?></span></h2>
 							<div class="card-list-container">
 								<div class="card-list card-list-expertise">
 								<?php 

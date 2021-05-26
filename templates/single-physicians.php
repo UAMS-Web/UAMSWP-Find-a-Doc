@@ -736,7 +736,7 @@ while ( have_posts() ) : the_post();
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xs-12">
-                            <h2 class="module-title">About <?php echo $short_name; ?></h2>
+                            <h2 class="module-title"><span class="title">About <?php echo $short_name; ?></span></h2>
 
 
                             <?php if ( $physician_clinical_split ) {
@@ -856,7 +856,7 @@ while ( have_posts() ) : the_post();
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
-                        <h2 class="module-title"><?php echo $short_name_possessive; ?> Academic Background</h2>
+                        <h2 class="module-title"><span class="title"><?php echo $short_name_possessive; ?> Academic Background</span></h2>
                         <?php if ( $physician_academic_split ) {
                             // If there is a bio AND at least one of the other academic things, visually split the layout ?>
                             <div class="row content-split-lg">
@@ -972,7 +972,7 @@ while ( have_posts() ) : the_post();
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
-                        <h2 class="module-title"><?php echo $short_name_possessive; ?> Research</h2>
+                        <h2 class="module-title"><span class="title"><?php echo $short_name_possessive; ?> Research</span></h2>
                         <div class="module-body">
                             <?php
                                 if($research_bio)
@@ -1077,7 +1077,7 @@ while ( have_posts() ) : the_post();
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="module-title"><?php echo $short_name_possessive; ?> Areas of Expertise</h2>
+                            <h2 class="module-title"><span class="title"><?php echo $short_name_possessive; ?> Areas of Expertise</span></h2>
                             <div class="card-list-container">
                                 <div class="card-list card-list-expertise">
                                     <?php foreach( $expertises as $expertise ) {
@@ -1099,7 +1099,7 @@ while ( have_posts() ) : the_post();
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="module-title">Locations Where <?php echo $short_name; ?> Practices</h2>
+                        <h2 class="module-title"><span class="title">Locations Where <?php echo $short_name; ?> Practices</span></h2>
                         <div class="card-list-container location-card-list-container">
                             <div class="card-list">
                             <?php $l = 1;
@@ -1145,7 +1145,7 @@ while ( have_posts() ) : the_post();
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="module-title">Patient Ratings &amp; Reviews</h2>
+                        <h2 class="module-title"><span class="title">Patient Ratings &amp; Reviews</span></h2>
                         <div class="card overall-ratings text-center">
                             <div class="card-body">
                                 <h3 class="sr-only">Average Ratings</h3>
@@ -1230,7 +1230,7 @@ while ( have_posts() ) : the_post();
             <div class="container-fluid"
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="module-title">Latest News for {Name}</h2>
+                        <h2 class="module-title"><span class="title">Latest News for {Name}</span></h2>
                         <div class="card-list-container">
                             <div class="card-list">
                                 <div class="card">

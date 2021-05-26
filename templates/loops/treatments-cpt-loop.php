@@ -30,7 +30,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12">
-                <h2 class="module-title"><?php echo $treatment_heading; ?></h2>
+                <h2 class="module-title"><span class="title"><?php echo $treatment_heading; ?></span></h2>
                 <?php if ( $treatment_disclaimer ) { ?>
                     <p class="note">UAMS providers perform and prescribe a broad range of treatments and procedures, some of which may not be listed below.</p>
                 <?php } ?>

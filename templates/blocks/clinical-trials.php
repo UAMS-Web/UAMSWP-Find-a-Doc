@@ -8,8 +8,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12">
-                <h2>Clinical Trials</h2>
                 <p><a href="https://uams.trialstoday.org/" aria-label="Search UAMS Clinical Trials">Search our clinical trials</a> for those related to <?php echo single_cat_title( '', false ); ?>.</p>
+                <h2 class="module-title"><span class="title">Clinical Trials</span></h2>
             </div>
         </div>
     </div>
