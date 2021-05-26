@@ -327,13 +327,19 @@ function uamswp_resource_youtube() {
     $video = get_field('clinical_resource_youtube');
     $video_descr = get_field('clinical_resource_youtube_descr');
     $video_transcript = get_field('clinical_resource_youtube_transcript');
+
+    $video_source = '';
+    if ( (strpos($video, 'youtube') !== false) || (strpos($video, 'youtu.be') !== false) ) {
+        $video_source = 'youtube';
+    }
+
     if( 'youtube' == $resource_type && $video ) { ?>
         <?php if ( $video_descr ) {
             echo '<h2 class="sr-only">Description</h2>';
             echo $video_descr;
         }
         echo '<h2 class="sr-only">Video Player</h2>';
-        if(function_exists('lyte_preparse')) {
+        if( function_exists('lyte_preparse') && $video_source == 'youtube' ) {
             echo '<div class="alignwide">';
             echo lyte_parse( str_replace( 'https', 'httpv', $video ) ); 
             echo '</div>';
