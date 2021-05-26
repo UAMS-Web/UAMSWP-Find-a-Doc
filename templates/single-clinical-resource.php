@@ -8,6 +8,8 @@
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title();
+$resource_title_system = get_field('clinical_resource_archive_headline', 'option');
+$resource_title = $resource_title_system ? $resource_title_system : 'Clinical Resource';
 
 function uamswp_fad_title($html) { 
     global $page_title;
@@ -36,6 +38,16 @@ function uamswp_add_entry_class( $attributes ) {
     return $attributes;
 }
 add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
+
+// Modify Entry Title
+
+    remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+    add_action( 'genesis_entry_header', 'uamswp_resource_post_title' );
+
+    function uamswp_resource_post_title() {
+        global $resource_title;
+        echo '<h1 class="entry-title" itemprop="headline"><span class="supertitle">'. $resource_title . '</span><span class="sr-only">:</span> ' . get_the_title() . '</h1>';
+    }
 
 add_action( 'genesis_entry_content', 'uamswp_resource_text', 8 );
 add_action( 'genesis_entry_content', 'uamswp_resource_infographic', 10 );
