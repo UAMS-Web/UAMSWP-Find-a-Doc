@@ -57,5 +57,8 @@
         h1 {
             @include pagetitle();
         }
+        &:not(:first-child) {
+            @include cite();
+        }
     }
 }
