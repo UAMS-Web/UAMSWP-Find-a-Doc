@@ -440,42 +440,34 @@ function uamswp_resource_expertise() {
 	<?php 
     } // endif
 }
-function uamswp_expertise_jump_links() {
+function uamswp_resource_jump_links() {
     global $page_title;
-    // global $jump_link_count_min;
-    // global $jump_link_count;
-    // global $show_appointment_section;
-    // global $show_podcast_section;
-    // global $show_child_aoe_section;
-    // global $show_conditions_section;
-    // global $show_treatments_section;
-    // global $show_providers_section;
-    // global $show_locations_section;
-    // global $show_related_aoe_section;
+    global $show_related_resource_section;
+    global $show_conditions_section;
+    global $show_treatments_section;
+    global $show_providers_section;
+    global $show_locations_section;
+    global $show_aoe_section;
     global $show_jump_links_section;
+    global $show_appointment_section;
     
     // Begin Jump Links Section
     if ( $show_jump_links_section ) { ?>
         <nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
-            <h2>Contents</h2>
+            <h2>Related Content</h2>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#jump-link-nav" aria-controls="jump-link-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse inner-container" id="jump-link-nav">
                 <ul class="nav navbar-nav">
-                    <?php if ( $show_podcast_section ) { ?>
+                    <?php if ( $show_related_resource_section ) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#podcast" title="Jump to the section of this page about UAMS Health Talk Podcast">Podcast</a>
-                        </li>
-                    <?php } ?>
-                    <?php if ($show_child_aoe_section) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#sub-expertise" title="Jump to the section of this page about Areas Within Cancer Care">Areas Within <?php echo $page_title; ?></a>
+                            <a class="nav-link" href="#related-resource" title="Jump to the section of this page about Related Resources">Resources</a>
                         </li>
                     <?php } ?>
                     <?php if ( $show_conditions_section ) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#conditions" title="Jump to the section of this page about Conditions Treated">Conditions</a>
+                            <a class="nav-link" href="#conditions" title="Jump to the section of this page about Related Conditions">Conditions</a>
                         </li>
                     <?php } ?>
                     <?php if ( $show_treatments_section ) { ?>
@@ -493,9 +485,9 @@ function uamswp_expertise_jump_links() {
                             <a class="nav-link" href="#locations" title="Jump to the section of this page about Locations">Locations</a>
                         </li>
                     <?php } ?>
-                    <?php if ( $show_related_resource_section ) { ?>
+                    <?php if ($show_aoe_section) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#related-resource" title="Jump to the section of this page about Related Resources">Related Areas</a>
+                            <a class="nav-link" href="#expertise" title="Jump to the section of this page about Related Areas of Expertise">Areas of Expertise</a>
                         </li>
                     <?php } ?>
                     <?php if ( $show_appointment_section ) { ?>
