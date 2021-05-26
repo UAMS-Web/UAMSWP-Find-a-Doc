@@ -49,6 +49,14 @@ if( function_exists('acf_add_options_page') ) {
         'parent_slug'	=> 'fad-settings',
         'redirect'		=> false
     ));
+    
+    acf_add_options_sub_page(array(
+		'page_title' 	=> 'MyChart Scheduling Options',
+        'menu_title'	=> 'MyChart Scheduling',
+        'menu_slug' 	=> 'uamswp-fad-mychart',
+        'parent_slug'	=> 'fad-settings',
+        'redirect'		=> false
+    ));
 
 }
 
