@@ -767,9 +767,7 @@ function limit_post_top_level( $args, $field, $post ) {
 	}
 	add_filter('acf/format_value/key=field_physician_select_publications_pubmed', 'pubmed_information_format_value', 10, 3);
 
-/**
- * Exclude current post/page from relationship field results
- */
+// Exclude current post/page from relationship field results
 
 // 1. Add the key=[NAME_OF_RELATIONSHIP_FIELD].
 add_filter('acf/fields/relationship/query/key=field_clinical_resource_related', 'relationship_exclude_id', 10, 3);
@@ -782,6 +780,7 @@ function relationship_exclude_id ( $args, $field, $post_id ) {
     
     return $args;
 }
+
 // Conditional Logic to check if Find-a-Doc Settings are set to allow MyChart Scheduling
 function uamswp_mychart_scheduling_query($field) {
     // Set to field name for option
