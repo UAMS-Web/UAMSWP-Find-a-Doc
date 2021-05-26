@@ -518,7 +518,7 @@
 				</div>
 			</section>
         <?php }
-		// End UAMS Health Talk Podcast Section
+		// End Clinical Resources Section
 
 		// Begin Clinical Trials Section
 		if ( $show_clinical_trials_section ) { ?>
