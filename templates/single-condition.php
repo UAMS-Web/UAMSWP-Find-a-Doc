@@ -86,7 +86,7 @@
 
     $cta_repeater = get_field('condition_cta');
 
-	// Check if Clinical Resources section should be displayed
+	// Clinical Resources
 	$resources =  get_field('condition_clinical_resources');
 	$args = (array(
 		'post_type' => "clinical-resource",
@@ -97,12 +97,6 @@
 		'post__in'	=> $resources
 	));
 	$resource_query = new WP_Query( $args );
-	if( $resources && $resource_query->have_posts() ) {
-		$show_related_resource_section = true;
-		$jump_link_count++;
-	} else {
-		$show_related_resource_section = false;
-	}
 
 	// Locations Content
 	$location_content = '';
@@ -177,6 +171,14 @@
 			$jump_link_count++;
 		} else {
 			$show_podcast_section = false;
+		}
+
+		// Check if Clinical Resources section should be displayed
+		if( $resources && $resource_query->have_posts() ) {
+			$show_related_resource_section = true;
+			$jump_link_count++;
+		} else {
+			$show_related_resource_section = false;
 		}
 
         // Check if Clinical Trials section should be displayed
