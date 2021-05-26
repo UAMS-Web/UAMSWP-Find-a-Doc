@@ -408,30 +408,25 @@ function uamswp_resource_associated() {
     global $resource_query;
 
     if( $show_related_resource_section ) { ?>
-        <section class="uams-module link-list link-list-layout-split bg-auto" id="related-resource" aria-labelledby="related-resource-title">
+		<section class="uams-module expertise-list bg-auto" id="related-resource" aria-labelledby="related-resource-title">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-12 col-md-6 heading">
-						<div class="text-container">
-							<h2 class="module-title" id="related-resource-title"><span class="title">Related Resources</span></h2>
+					<div class="col-12">
+						<h2 class="module-title" id="related-resource-title">Related Resources</h2>
+						<div class="card-list-container">
+							<div class="card-list card-list-resource">
+							<?php 
+							while ($resource_query->have_posts()) : $resource_query->the_post();
+								$id = get_the_ID();
+								include( UAMS_FAD_PATH . '/templates/loops/resource-card.php' );
+							endwhile;
+							wp_reset_postdata();
+							?>
 						</div>
-            		</div>
-            		<div class="col-12 col-md-6 list">
-						<ul>
-						<?php
-						while ( $resource_query->have_posts() ) : $resource_query->the_post();
-							echo '<li class="item"><div class="text-container"><h3 class="h5"><a href="'.get_permalink().'" aria-label="Go to Clinical Resource page for ' . get_the_title() . '">';
-							echo get_the_title();
-                            echo '</a></h3>';
-                            echo ( has_excerpt() ? '<p>' . wp_trim_words( get_the_excerpt(), 30, '&nbsp;&hellip;' ) . '</p>' : '' );
-                            echo '</div></li>';
-						endwhile;
-						wp_reset_postdata(); ?>
-						</ul>
 					</div>
 				</div>
 			</div>
-		</section>
+        </section>
 	<?php 
     } // endif
 }
