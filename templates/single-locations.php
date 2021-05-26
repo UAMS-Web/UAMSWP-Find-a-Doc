@@ -222,6 +222,24 @@ if ($prescription_query) {
 	}
 }
 
+// Check if Clinical Resources section should be displayed
+$resources =  get_field('location_clinical_resources');
+$args = (array(
+	'post_type' => "clinical-resource",
+	'order' => 'ASC',
+	'orderby' => 'title',
+	'posts_per_page' => -1,
+	'post_status' => 'publish',
+	'post__in'	=> $resources
+));
+$resource_query = new WP_Query( $args );
+if( $resources && $resource_query->have_posts() ) {
+	$show_related_resource_section = true;
+	$jump_link_count++;
+} else {
+	$show_related_resource_section = false;
+}
+
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
@@ -1053,6 +1071,11 @@ while ( have_posts() ) : the_post(); ?>
 							<a class="nav-link" href="#sub-clinics" title="Jump to the section of this page about additional clinics within this location">Clinics Within This Location</a>
 						</li>
 					<?php } ?>
+					<?php if ( $show_related_resource_section ) { ?>
+						<li class="nav-item">
+							<a class="nav-link" href="#resources" title="Jump to the section of this page about Resources">Resources</a>
+						</li>
+					<?php } ?>
 				</ul>
 			</div>
 		</nav>
@@ -1600,6 +1623,30 @@ while ( have_posts() ) : the_post(); ?>
 		</section>
 	<?php } // endif
 	// End Child Locations Section
+
+	// Begin Clinical Resources Section
+	if ( $show_related_resource_section ) { ?>
+		<section class="uams-module resource-list bg-auto" id="related-resources" aria-labelledby="related-resources-title">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<h2 class="module-title" id="related-resources-title">Resources Related to <?php echo get_the_title(); ?></h2>
+						<div class="card-list-container">
+							<div class="card-list card-list-resource">
+							<?php 
+							while ($resource_query->have_posts()) : $resource_query->the_post();
+								$id = get_the_ID();
+								include( UAMS_FAD_PATH . '/templates/loops/resource-card.php' );
+							endwhile;
+							wp_reset_postdata();
+							?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	<?php }
+	// End Clinical Resources Section
 
 	// Begin News Section
 	if ( true == false ) { ?>
