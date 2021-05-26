@@ -121,7 +121,7 @@
             "label": "Infographic Introduction \/ Description",
             "name": "clinical_resource_infographic_descr",
             "type": "wysiwyg",
-            "instructions": "Describe the infographic and entice users to look at it.",
+            "instructions": "Describe the intent of the infographic and entice users to look at it.",
             "required": 1,
             "conditional_logic": [
                 [
