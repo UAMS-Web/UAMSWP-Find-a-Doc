@@ -1004,6 +1004,10 @@ while ( have_posts() ) : the_post();
 
             // Treatments CPT
             if( $show_treatments_section ) {
+                $treatment_heading_related_resource = false;
+                $treatment_heading_related_condition = false;
+                $treatment_heading_performed = true;
+                $treatment_disclaimer = true;
                 include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
                 // $treatment_schema .= ',"medicalSpecialty": [';
                 $i = 0;

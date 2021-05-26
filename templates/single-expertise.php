@@ -354,6 +354,10 @@ function uamswp_expertise_conditions_cpt() {
 function uamswp_expertise_treatments_cpt() {
     global $show_treatments_section;
     global $treatments_cpt_query;
+    $treatment_heading_related_resource = false;
+    $treatment_heading_related_condition = false;
+    $treatment_heading_performed = true;
+    $treatment_disclaimer = true;
 
     if( $show_treatments_section ) {
         include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
