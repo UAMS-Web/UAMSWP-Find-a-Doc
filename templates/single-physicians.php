@@ -309,15 +309,17 @@ while ( have_posts() ) : the_post();
 
 	// Clinical Resources
 	$resources =  get_field('physician_clinical_resources');
-	$args = (array(
-		'post_type' => "clinical-resource",
-		'order' => 'ASC',
-		'orderby' => 'title',
-		'posts_per_page' => -1,
-		'post_status' => 'publish',
-		'post__in'	=> $resources
-	));
-	$resource_query = new WP_Query( $args );
+    $resource_postsPerPage = 4; // Set this value to preferred value (4, 6, 8, 10, 12)
+    $resource_more = false;
+    $args = (array(
+        'post_type' => "clinical-resource",
+        'order' => 'ASC',
+        'orderby' => 'title',
+        'posts_per_page' => $resource_postsPerPage,
+        'post_status' => 'publish',
+        'post__in'	=> $resources
+    ));
+    $resource_query = new WP_Query( $args );
 
     // Set logic for displaying jump links and sections
     $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
@@ -357,6 +359,8 @@ while ( have_posts() ) : the_post();
 	    // Check if Clinical Resources section should be displayed
         if( $resources && $resource_query->have_posts() ) {
             $show_related_resource_section = true;
+            $resource_count = count($resources);
+            $resource_more = ( $resource_count > $resource_postsPerPage ) ? true : false;
             $jump_link_count++;
         } else {
             $show_related_resource_section = false;
@@ -832,27 +836,13 @@ while ( have_posts() ) : the_post();
         // End UAMS Health Talk Podcast
         
         // Begin Clinical Resources Section
-        if ( $show_related_resource_section ) { ?>
-            <section class="uams-module resource-list bg-auto" id="related-resources" aria-labelledby="related-resources-title">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <h2 class="module-title" id="related-resources-title">Resources Related to <?php echo $short_name; ?></h2>
-                            <div class="card-list-container">
-                                <div class="card-list card-list-resource">
-                                <?php 
-                                while ($resource_query->have_posts()) : $resource_query->the_post();
-                                    $id = get_the_ID();
-                                    include( UAMS_FAD_PATH . '/templates/loops/resource-card.php' );
-                                endwhile;
-                                wp_reset_postdata();
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        <?php }
+        $resource_heading_related_pre = false; // "Related Resources"
+        $resource_heading_related_post = true; // "Resources Related to __"
+        $resource_heading_related_name = $short_name; // To what is it related?
+        $resource_more_suppress = false; // Force div.more to not display
+        if( $show_related_resource_section ) {
+            include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
+        }
         // End Clinical Resources Section
         
         // Begin Academic Bio Section

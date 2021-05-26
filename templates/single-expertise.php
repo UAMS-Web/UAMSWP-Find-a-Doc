@@ -82,11 +82,13 @@ if ($podcast_name) {
 
 // Clinical Resources
 $resources =  get_field('expertise_clinical_resources');
+$resource_postsPerPage = 4; // Set this value to preferred value (4, 6, 8, 10, 12)
+$resource_more = false;
 $args = (array(
     'post_type' => "clinical-resource",
     'order' => 'ASC',
     'orderby' => 'title',
-    'posts_per_page' => -1,
+    'posts_per_page' => $resource_postsPerPage,
     'post_status' => 'publish',
     'post__in'	=> $resources
 ));
@@ -95,6 +97,8 @@ $resource_query = new WP_Query( $args );
 // Check if Clinical Resources section should be displayed
 if( $resources && $resource_query->have_posts() ) {
     $show_related_resource_section = true;
+    $resource_count = count($resources);
+    $resource_more = ( $resource_count > $resource_postsPerPage ) ? true : false;
     $jump_link_count++;
 } else {
     $show_related_resource_section = false;
@@ -514,28 +518,14 @@ function uamswp_expertise_resource() {
     global $page_title;
     global $show_related_resource_section;
     global $resource_query;
-
-    if ( $show_related_resource_section ) { ?>
-        <section class="uams-module resource-list bg-auto" id="related-resources" aria-labelledby="related-resources-title">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="module-title" id="related-resources-title">Resources Related to <?php echo $page_title; ?></h2>
-                        <div class="card-list-container">
-                            <div class="card-list card-list-resource">
-                            <?php 
-                            while ($resource_query->have_posts()) : $resource_query->the_post();
-                                $id = get_the_ID();
-                                include( UAMS_FAD_PATH . '/templates/loops/resource-card.php' );
-                            endwhile;
-                            wp_reset_postdata();
-                            ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    <?php }
+    global $resource_more;
+    $resource_heading_related_pre = true; // "Related Resources"
+    $resource_heading_related_post = false; // "Resources Related to __"
+    $resource_heading_related_name = $page_title; // To what is it related?
+    $resource_more_suppress = false; // Force div.more to not display
+    if( $show_related_resource_section ) {
+        include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
+    }
 }
 function uamswp_list_child_expertise() {
     global $page_id;
