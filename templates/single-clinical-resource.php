@@ -422,7 +422,7 @@ function uamswp_resource_expertise() {
 				<div class="row">
 					<div class="col-12 col-md-6 heading">
 						<div class="text-container">
-							<h2 class="module-title" id="areas-of-expertise-title"><span class="title">Areas of Expertise</span></h2>
+							<h2 class="module-title" id="areas-of-expertise-title"><span class="title">Related Areas of Expertise</span></h2>
 						</div>
             		</div>
             		<div class="col-12 col-md-6 list">
