@@ -176,7 +176,7 @@ if( $expertises && $expertise_query->have_posts() ) {
     $show_aoe_section = false;
 }
 
-// Check if Locations section should be displayed
+// Check if Clinical Resources section should be displayed
 $resources =  get_field('clinical_resource_related');
 $args = (array(
     'post_type' => "clinical-resource",
@@ -408,11 +408,11 @@ function uamswp_resource_associated() {
     global $resource_query;
 
     if( $show_related_resource_section ) { ?>
-		<section class="uams-module expertise-list bg-auto" id="related-resource" aria-labelledby="related-resource-title">
+		<section class="uams-module resource-list bg-auto" id="related-resources" aria-labelledby="related-resources-title">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title" id="related-resource-title">Related Resources</h2>
+						<h2 class="module-title" id="related-resources-title">Related Resources</h2>
 						<div class="card-list-container">
 							<div class="card-list card-list-resource">
 							<?php 
@@ -479,7 +479,7 @@ function uamswp_resource_jump_links() {
                 <ul class="nav navbar-nav">
                     <?php if ( $show_related_resource_section ) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#related-resource" title="Jump to the section of this page about Related Resources">Resources</a>
+                            <a class="nav-link" href="#related-resources" title="Jump to the section of this page about Related Resources">Resources</a>
                         </li>
                     <?php } ?>
                     <?php if ( $show_conditions_section ) { ?>
