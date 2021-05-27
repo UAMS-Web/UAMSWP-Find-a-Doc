@@ -18,7 +18,7 @@
         $treatment_heading = 'Related ' . $treatment_heading;
     }
 
-    if ( $treatment_heading_related_treatment ) {
+    if ( $treatment_heading_related_condition ) {
         $treatment_heading = $treatment_heading . ' Related to ' . get_the_title();
     }
 
