@@ -79,7 +79,7 @@
 
 	// Clinical Resources
 	$resources =  get_field('treatment_procedure_clinical_resources');
-	$resource_postsPerPage = 4; // Set this value to preferred value (4, 6, 8, 10, 12)
+	$resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
 	$resource_more = false;
 	$args = (array(
 		'post_type' => "clinical-resource",
@@ -169,8 +169,6 @@
 		// Check if Clinical Resources section should be displayed
 		if( $resources && $resource_query->have_posts() ) {
 			$show_related_resource_section = true;
-			$resource_count = count($resources);
-			$resource_more = ( $resource_count > $resource_postsPerPage ) ? true : false;
 			$jump_link_count++;
 		} else {
 			$show_related_resource_section = false;
@@ -494,8 +492,8 @@
 		// End UAMS Health Talk Podcast Section
 
 		// Begin Clinical Resources Section
-		$resource_heading_related_pre = true; // "Related Resources"
-		$resource_heading_related_post = false; // "Resources Related to __"
+		$resource_heading_related_pre = false; // "Related Resources"
+		$resource_heading_related_post = true; // "Resources Related to __"
 		$resource_heading_related_name = get_the_title(); // To what is it related?
 		$resource_more_suppress = false; // Force div.more to not display
 		if( $show_related_resource_section ) {

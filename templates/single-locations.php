@@ -227,11 +227,13 @@ if ($prescription_query) {
 
 // Clinical Resources
 $resources =  get_field('location_clinical_resources');
+$resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
+$resource_more = false;
 $args = (array(
 	'post_type' => "clinical-resource",
 	'order' => 'ASC',
 	'orderby' => 'title',
-	'posts_per_page' => -1,
+	'posts_per_page' => $resource_postsPerPage,
 	'post_status' => 'publish',
 	'post__in'	=> $resources
 ));
@@ -1698,27 +1700,15 @@ while ( have_posts() ) : the_post(); ?>
 	// End Child Locations Section
 
 	// Begin Clinical Resources Section
-	if ( $show_related_resource_section ) { ?>
-		<section class="uams-module resource-list bg-auto" id="related-resources" aria-labelledby="related-resources-title">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title" id="related-resources-title"><span class="title">Resources Related to <?php echo get_the_title(); ?></span></h2>
-						<div class="card-list-container">
-							<div class="card-list card-list-resource">
-							<?php 
-							while ($resource_query->have_posts()) : $resource_query->the_post();
-								$id = get_the_ID();
-								include( UAMS_FAD_PATH . '/templates/loops/resource-card.php' );
-							endwhile;
-							wp_reset_postdata();
-							?>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php }
+	if ( $show_related_resource_section ) {
+		$resource_heading_related_pre = false; // "Related Resources"
+		$resource_heading_related_post = true; // "Resources Related to __"
+		$resource_heading_related_name = get_the_title(); // To what is it related?
+		$resource_more_suppress = false; // Force div.more to not display
+		if( $show_related_resource_section ) {
+			include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
+		}
+	}
 	// End Clinical Resources Section
 
 	// Begin News Section

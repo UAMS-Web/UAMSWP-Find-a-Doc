@@ -82,7 +82,7 @@ if ($podcast_name) {
 
 // Clinical Resources
 $resources =  get_field('expertise_clinical_resources');
-$resource_postsPerPage = 4; // Set this value to preferred value (4, 6, 8, 10, 12)
+$resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
 $resource_more = false;
 $args = (array(
     'post_type' => "clinical-resource",
@@ -97,8 +97,6 @@ $resource_query = new WP_Query( $args );
 // Check if Clinical Resources section should be displayed
 if( $resources && $resource_query->have_posts() ) {
     $show_related_resource_section = true;
-    $resource_count = count($resources);
-    $resource_more = ( $resource_count > $resource_postsPerPage ) ? true : false;
     $jump_link_count++;
 } else {
     $show_related_resource_section = false;
@@ -517,8 +515,9 @@ function uamswp_expertise_podcast() {
 function uamswp_expertise_resource() {
     global $page_title;
     global $show_related_resource_section;
+    global $resources;
     global $resource_query;
-    global $resource_more;
+    global $resource_postsPerPage;
     $resource_heading_related_pre = true; // "Related Resources"
     $resource_heading_related_post = false; // "Resources Related to __"
     $resource_heading_related_name = $page_title; // To what is it related?

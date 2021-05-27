@@ -309,7 +309,7 @@ while ( have_posts() ) : the_post();
 
 	// Clinical Resources
 	$resources =  get_field('physician_clinical_resources');
-    $resource_postsPerPage = 4; // Set this value to preferred value (4, 6, 8, 10, 12)
+    $resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
     $resource_more = false;
     $args = (array(
         'post_type' => "clinical-resource",
@@ -359,8 +359,6 @@ while ( have_posts() ) : the_post();
 	    // Check if Clinical Resources section should be displayed
         if( $resources && $resource_query->have_posts() ) {
             $show_related_resource_section = true;
-            $resource_count = count($resources);
-            $resource_more = ( $resource_count > $resource_postsPerPage ) ? true : false;
             $jump_link_count++;
         } else {
             $show_related_resource_section = false;
