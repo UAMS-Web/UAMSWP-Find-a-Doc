@@ -11,26 +11,6 @@
     $resource_title_attr = str_replace('"', '\'', $resource_title);
     $resource_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($resource_title_attr, null, 'utf-8')));
 
-    // Parent Location 
-    $resource_parent_id = wp_get_post_parent_id($id);
-    $resource_has_parent = $resource_parent_id ? true : false;
-    $parent_resource = '';
-    $parent_id = '';
-    $parent_title = '';
-    $parent_url = '';
-
-    if ($resource_has_parent && $resource_parent_id) { 
-        $parent_resource = get_post( $resource_parent_id );
-    }
-    // Get Post ID for Address & Image fields
-    if ($parent_resource) {
-        $parent_id = $parent_resource->ID;
-        $parent_title = $parent_resource->post_title;
-        $parent_title_attr = str_replace('"', '\'', $parent_title);
-        $parent_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($parent_title_attr, null, 'utf-8')));
-        $parent_url = get_permalink( $parent_id );
-    }
-
     $resource_label = 'Go to the Clinical Resource page for' . $resource_title_attr;
     
     $resource_excerpt = get_the_excerpt($id) ? get_the_excerpt($id) : wp_strip_all_tags( get_the_content($id) );
