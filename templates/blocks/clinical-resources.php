@@ -27,30 +27,29 @@
     $more_button_target = '_blank';
     $more_button_text = 'View the Full List';
 ?>
-<section class="uams-module resource-list bg-auto" id="related-resources" aria-labelledby="related-resources-title">
+<section class="uams-module stacked-image-text bg-auto" id="related-resources" aria-labelledby="related-resources-title">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12<?php echo ($hide_heading && empty($description)) ? " sr-only" : ""; ?>">
                 <h2 class="module-title" id="related-resources-title"><span class="title"><?php echo $resource_heading; ?></span></h2>
-                <div class="card-list-container">
-                    <div class="card-list card-list-resource">
-                    <?php 
-                    while ($resource_query->have_posts()) : $resource_query->the_post();
-                        $id = get_the_ID();
-                        include( UAMS_FAD_PATH . '/templates/loops/resource-card.php' );
-                    endwhile;
-                    wp_reset_postdata();
-                    ?>
-                </div>
-                <?php if ( $resource_more ) { ?>
-                    <div class="more">
-                        <p class="lead"><?php echo $more_text; ?></p>
-                        <div class="cta-container">
-                            <a href="<?php echo $more_button_url; ?>" class="btn btn-outline-primary" aria-label="<?php echo $more_button_description_attr; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
-                        </div>
-                    </div>
-                <?php } ?>
             </div>
-        </div>
-    </div>
+            <div class="card-list card-list-left col-12">
+                <?php 
+                while ($resource_query->have_posts()) : $resource_query->the_post();
+                    $id = get_the_ID();
+                    include( UAMS_FAD_PATH . '/templates/loops/resource-card.php' );
+                endwhile;
+                wp_reset_postdata();
+                ?>
+            </div>
+            <?php if ( $resource_more ) { ?>
+                <div class="col-12 more">
+                    <p class="lead"><?php echo $more_text; ?></p>
+                    <div class="cta-container">
+                        <a href="<?php echo $more_button_url; ?>" class="btn btn-outline-primary" aria-label="<?php echo $more_button_description_attr; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
+                    </div>
+                </div>
+            <?php } ?>
+        </div><!-- End .row -->
+    </div><!-- End .container-fluid -->
 </section>

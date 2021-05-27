@@ -40,29 +40,22 @@
     }
 
 ?>
-<div class="card">
-    <a href="<?php echo get_permalink($id); ?>" target="_self" aria-label="<?php echo $resource_label; ?>" data-categorytitle="Photo" data-itemtitle="<?php echo $resource_title_attr; ?>">
-        <?php if ( has_post_thumbnail($id) ) { ?>
-        <?php echo get_the_post_thumbnail($id, 'aspect-16-9-small', ['class' => 'card-img-top']); ?>
-        <?php } else { ?>
-        <picture>
-            <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
-            <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" class="card-img-top" />
-        </picture>
-        <?php } ?>
-    </a>
-    <div class="card-body">
-        <h3 class="card-title h5">
-            <span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self" aria-label="<?php echo $resource_label; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $resource_title_attr; ?>"><?php echo $resource_title; ?></a></span>
-            <?php if ( $parent_resource ) { ?>
-                <span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>" aria-label="Go to Clinical Resource page for <?php echo $parent_title_attr; ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $resource_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
-            <?php } // endif ?>
-        </h3>
-        <p class="card-text"><?php echo $resource_excerpt; ?></p>
-    </div><!-- .card-body -->
-    <div class="btn-container">
-        <div class="inner-container">
-            <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary" aria-label="<?php echo $resource_label; ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo $resource_title_attr; ?>">View Clinical Resource</a>
+<div class="col-12 col-sm-6 col-xl-3 item">
+    <div class="card">
+        <div class="card-img-top">
+            <?php if ( has_post_thumbnail($id) ) { ?>
+                <?php echo get_the_post_thumbnail($id, 'aspect-16-9-small'); ?>
+            <?php } else { ?>
+                <picture>
+                    <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
+                    <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" />
+                </picture>
+            <?php } ?>
         </div>
-    </div>
-</div><!-- .card --> 
+        <div class="card-body">
+            <h3 class="card-title h5"><?php echo $resource_title; ?></h3>
+            <p class="card-text"><?php echo $resource_excerpt; ?></p>
+            <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary stretched-link" aria-label="<?php echo $resource_label; ?>">View Clinical Resource</a>
+        </div><!-- .card-body -->
+    </div><!-- .card --> 
+</div><!-- .col-* --> 
