@@ -543,8 +543,6 @@ while ( have_posts() ) : the_post(); ?>
 		// Check if Clinical Resources section should be displayed
 		if( $resources && $resource_query->have_posts() ) {
 			$show_related_resource_section = true;
-			$resource_count = count($resources);
-			$resource_more = ( $resource_count > $resource_postsPerPage ) ? true : false;
 			$jump_link_count++;
 		} else {
 			$show_related_resource_section = false;
