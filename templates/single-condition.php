@@ -505,8 +505,8 @@
 
 		// Begin Clinical Resources Section
 		if ( $show_related_resource_section ) {
-			$resource_heading_related_pre = true; // "Related Resources"
-			$resource_heading_related_post = false; // "Resources Related to __"
+			$resource_heading_related_pre = false; // "Related Resources"
+			$resource_heading_related_post = true; // "Resources Related to __"
 			$resource_heading_related_name = get_the_title(); // To what is it related?
 			$resource_more_suppress = false; // Force div.more to not display
 			if( $show_related_resource_section ) {
