@@ -77,7 +77,7 @@
             "multiple": 0,
             "ui": 1,
             "ajax": 0,
-            "return_format": "value",
+            "return_format": "array",
             "allow_custom": 0,
             "search_placeholder": "Select one",
             "placeholder": ""

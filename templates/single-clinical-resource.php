@@ -72,6 +72,8 @@ $jump_link_count_min = 2; // How many links have to exist before displaying the 
 $jump_link_count = 0;
 
 $resource_type = get_field('clinical_resource_type');
+$resource_type_value = $resource_type['value'];
+$resource_type_label = $resource_type['label'];
 
 // Check if Conditions section should be displayed
 // load all 'conditions' terms for the post
@@ -211,21 +213,21 @@ if ( $jump_link_count >= $jump_link_count_min ) {
     $show_jump_links_section = false;
 }
 function uamswp_resource_text() {
-    global $resource_type;
+    global $resource_type_value;
     $text = get_field('clinical_resource_text');
 
-    if( 'text' == $resource_type && $text ) { // $show_text_section ) {
+    if( 'text' == $resource_type_value && $text ) { // $show_text_section ) {
         echo $text;
     }
 }
 function uamswp_resource_infographic() {
-    global $resource_type;
+    global $resource_type_value;
     $infographic = get_field('clinical_resource_infographic');
     $infographic_descr = get_field('clinical_resource_infographic_descr');
     $infographic_transcript = get_field('clinical_resource_infographic_transcript');
     $size = 'content-image-wide';
 
-    if( 'infographic' == $resource_type && $infographic ) {
+    if( 'infographic' == $resource_type_value && $infographic ) {
         if ( $infographic_descr ) {
             echo '<h2 class="sr-only">Description</h2>';
             echo $infographic_descr;
@@ -243,7 +245,7 @@ function uamswp_resource_infographic() {
     }
 }
 function uamswp_resource_document() {
-    global $resource_type;
+    global $resource_type_value;
     $document_descr = get_field('clinical_resource_document_descr');
     $document = get_field('clinical_resource_document');
 
@@ -254,7 +256,7 @@ function uamswp_resource_document() {
     $icon_excel = 'far fa-file-excel';
     $icon_image = 'far fa-file-image';
 
-    if( 'doc' == $resource_type && have_rows('clinical_resource_document') ):
+    if( 'doc' == $resource_type_value && have_rows('clinical_resource_document') ):
         echo $document_descr;
         echo '<hr />';
         echo '<h2>Attachments</h2>';
@@ -284,10 +286,10 @@ function uamswp_resource_document() {
     endif;
 }
 function uamswp_resource_nci() {
-    global $resource_type;
+    global $resource_type_value;
     $nci_embed = get_field('clinical_resource_nci_embed');
 
-    if( 'nci' == $resource_type && !empty($nci_embed) ):
+    if( 'nci' == $resource_type_value && !empty($nci_embed) ):
         echo $nci_embed;
     endif;
 }
@@ -328,7 +330,7 @@ function uamswp_resource_physicians() {
     <?php }
 }
 function uamswp_resource_video() {
-    global $resource_type;
+    global $resource_type_value;
     $video = get_field('clinical_resource_video');
     $video_descr = get_field('clinical_resource_video_descr');
     $video_transcript = get_field('clinical_resource_video_transcript');
@@ -338,7 +340,7 @@ function uamswp_resource_video() {
         $video_source = 'youtube';
     }
 
-    if( 'video' == $resource_type && $video ) { ?>
+    if( 'video' == $resource_type_value && $video ) { ?>
         <?php if ( $video_descr ) {
             echo '<h2 class="sr-only">Description</h2>';
             echo $video_descr;
