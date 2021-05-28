@@ -55,7 +55,8 @@
     }
     div.syndicate {
         h1 {
-            @include pagetitle();
+            //@include pagetitle();
+            display: none;
         }
         &:not(:first-child) {
             @include cite();
