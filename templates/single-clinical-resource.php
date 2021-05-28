@@ -215,9 +215,13 @@ if ( $jump_link_count >= $jump_link_count_min ) {
 function uamswp_resource_text() {
     global $resource_type_value;
     $text = get_field('clinical_resource_text');
+    $nci_query = get_field('clinical_resource_text_nci_query');
+    $nci_embed = get_field('clinical_resource_nci_embed');
 
-    if( 'text' == $resource_type_value && $text ) { // $show_text_section ) {
+    if( 'text' == $resource_type_value && $text && !$nci_query ) { // $show_text_section ) {
         echo $text;
+    } elseif ( 'text' == $resource_type_value && $nci_query && $nci_embed ) {
+        echo $nci_embed;
     }
 }
 function uamswp_resource_infographic() {
@@ -283,14 +287,6 @@ function uamswp_resource_document() {
             <li><a class="attachment-link" href="<?php echo $document_url; ?>" title="<?php echo $document_title; ?>" target="_blank"><span class="<?php echo $icon_file; ?> fa-fw"></span><span class="attachment-label"><?php echo $document_title; ?></span></a></li>
         <?php endwhile;
         echo '</ul>';
-    endif;
-}
-function uamswp_resource_nci() {
-    global $resource_type_value;
-    $nci_embed = get_field('clinical_resource_nci_embed');
-
-    if( 'nci' == $resource_type_value && !empty($nci_embed) ):
-        echo $nci_embed;
     endif;
 }
 function uamswp_resource_physicians() {
