@@ -165,11 +165,16 @@
                                             $resource_count = $provider_count;
                                             $associates = $providers;
                                             foreach( $associates as $associate) {
-                                                $full_name = get_field('physician_first_name', $associate) .' ' .(get_field('physician_middle_name', $associate) ? get_field('physician_middle_name', $associate) . ' ' : '') . get_field('physician_last_name', $associate) . (get_field('physician_pedigree', $associate) ? '&nbsp;' . get_field('physician_pedigree', $associate) : '') .  ( $degree_list ? ', ' . $degree_list : '' ); 
+                                                $provider_prefix = get_field('physician_prefix', $associate);
+                                                $provider_first_name = get_field('physician_first_name', $associate);
+                                                $provider_middle_name = get_field('physician_middle_name', $associate);
+                                                $provider_last_name = get_field('physician_last_name', $associate);
+                                                $provider_pedigree = get_field('physician_pedigree', $associate);
+                                                $provider_medium_name = ($provider_prefix ? $provider_prefix .' ' : '') . $provider_first_name .' ' .($provider_middle_name ? $provider_middle_name . ' ' : '') . $provider_last_name . ($provider_pedigree ? ' ' . $provider_pedigree : '');
 
                                                 if ( get_post_status ( $associate ) == 'publish' ) {
                                                     if ( $resource_i < $resource_related_max ) {
-                                                        echo '<a href="' . get_permalink( $associate ) . '">' . $full_name . '</a>';
+                                                        echo '<a href="' . get_permalink( $associate ) . '">' . $provider_medium_name . '</a>';
                                                         $resource_i++;
                                                         if ( 
                                                             ( $resource_count > $resource_related_max && $resource_i != $resource_related_max )
