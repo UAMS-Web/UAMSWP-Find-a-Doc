@@ -69,8 +69,7 @@
                 "text": "Article",
                 "infographic": "Infographic",
                 "video": "Video",
-                "doc": "Document",
-                "nci": "National Cancer Institute (NCI) Syndication"
+                "doc": "Document"
             },
             "default_value": false,
             "allow_null": 0,
@@ -83,12 +82,12 @@
             "placeholder": ""
         },
         {
-            "key": "field_clinical_resource_text",
-            "label": "Article Content",
-            "name": "clinical_resource_text",
-            "type": "wysiwyg",
+            "key": "field_clinical_resource_text_nci_query",
+            "label": "Is this this National Cancer Institute (NCI) syndicated content?",
+            "name": "clinical_resource_text_nci_query",
+            "type": "true_false",
             "instructions": "",
-            "required": 1,
+            "required": 0,
             "conditional_logic": [
                 [
                     {
@@ -103,11 +102,75 @@
                 "class": "",
                 "id": ""
             },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_clinical_resource_text",
+            "label": "Article Content",
+            "name": "clinical_resource_text",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_clinical_resource_type",
+                        "operator": "==",
+                        "value": "text"
+                    },
+                    {
+                        "field": "field_clinical_resource_text_nci_query",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "",
             "tabs": "all",
             "toolbar": "full",
             "media_upload": 1,
             "delay": 1
+        },
+        {
+            "key": "field_clinical_resource_nci_embed",
+            "name": "clinical_resource_nci_embed",
+            "type": "textarea",
+            "label": "National Cancer Institute (NCI) Syndication Embed / Syndication Code",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_clinical_resource_type",
+                        "operator": "==",
+                        "value": "text"
+                    },
+                    {
+                        "field": "field_clinical_resource_text_nci_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 6,
+            "new_lines": ""
         },
         {
             "key": "field_clinical_resource_infographic",
@@ -373,33 +436,6 @@
                     "mime_types": "pdf"
                 }
             ]
-        },
-        {
-            "key": "field_clinical_resource_nci_embed",
-            "name": "clinical_resource_nci_embed",
-            "type": "textarea",
-            "label": "National Cancer Institute (NCI) Syndication Embed / Syndication Code",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_clinical_resource_type",
-                        "operator": "==",
-                        "value": "nci"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": 6,
-            "new_lines": ""
         },
         {
             "key": "field_clinical_resource_relationships",
