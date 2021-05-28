@@ -17,7 +17,7 @@ get_header();
  ?>
 
 <div class="content-sidebar-wrap">
-    <main class="container-fluid doctor-list" id="genesis-content">
+    <main class="container-fluid resource-list" id="genesis-content">
         <h1 class="sr-only" itemprop="headline"><?php echo ($resource_title ? $resource_title : 'Clinical Resources' ); ?></h1>
         <div class="row">
             <div class="col-12 col-sm filter-col collapse">
