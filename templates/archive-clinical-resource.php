@@ -52,12 +52,8 @@ get_header();
                         <button title="Toggle Filter Tray" class="filter-toggle"><span class="sr-only">Toggle Filter Tray</span><span class="fas fa-filter"></span></button>
                     </div>
                 </div>
-                <div class="card-list-container">
-                    <div class="card-list card-list-clinical-resources">
-                        <?php echo facetwp_display( 'template', 'clinical_resources' ); ?>
-                        <?php //get_template_part( 'templates/physician-loop' ); ?>
-                    </div>
-                </div>
+                <?php echo facetwp_display( 'template', 'clinical_resources' ); ?>
+                <?php //get_template_part( 'templates/physician-loop' ); ?>
                 <div class="row list-pagination">
                     <div class="col">
                         <?php echo facetwp_display( 'pager' ); ?>

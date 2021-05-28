@@ -11,7 +11,7 @@ add_filter( 'facetwp_is_main_query', function( $is_main_query, $query ) {
 }, 10, 2 );
 
 add_filter( 'facetwp_shortcode_html', function( $output, $atts) {
-	if ( !empty( $atts['template'] ) && 'physician' == $atts['template'] ) { // replace 'example' with name of your template
+	if ( !empty( $atts['template'] ) && ( 'physician' == $atts['template'] || 'clinical_resources' == $atts['template']) ) { // replace 'example' with name of your template
         /** modify replacement as needed, make sure you keep the facetwp-template class **/
         $output = str_replace( 'facetwp-template', 'facetwp-template row list', $output );
 	}
