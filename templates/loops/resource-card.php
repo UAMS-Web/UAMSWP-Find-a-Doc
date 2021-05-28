@@ -40,6 +40,7 @@
             $break;
         } // endif
     } // endforeach;
+    $provider = '';
     // Count published providers
     $provider_count = 0;
     foreach( $providers as $provider) {
@@ -47,6 +48,7 @@
             $provider_count++;
         } // endif
     } // endforeach;
+    $provider = '';
     $provider_label = $provider_count > 1 ? 'Providers' : 'Provider';
     
 
@@ -59,6 +61,7 @@
             $break;
         } // endif
     } // endforeach;
+    $location = '';
     // Count published locations
     $location_count = 0;
     foreach( $locations as $location) {
@@ -66,6 +69,7 @@
             $location_count++;
         } // endif
     } // endforeach;
+    $location = '';
     $location_label = $location_count > 1 ? 'Locations' : 'Location';
     
 
@@ -78,6 +82,7 @@
             $break;
         } // endif
     } // endforeach;
+    $condition = '';
     // Count published conditions
     $condition_count = 0;
     foreach( $conditions as $condition) {
@@ -85,6 +90,7 @@
             $condition_count++;
         } // endif
     } // endforeach;
+    $condition = '';
     $condition_label = $condition_count > 1 ? 'Conditions' : 'Condition';
     
 
@@ -97,6 +103,7 @@
             $break;
         } // endif
     } // endforeach;
+    $treatment = '';
     // Count published treatments
     $treatment_count = 0;
     foreach( $treatments as $treatment) {
@@ -104,6 +111,7 @@
             $treatment_count++;
         } // endif
     } // endforeach;
+    $treatment = '';
     $treatment_label = $treatment_count > 1 ? 'Treatments/Procedures' : 'Treatment/Procedure';
     
 
@@ -116,6 +124,7 @@
             $break;
         } // endif
     } // endforeach;
+    $expertise = '';
     // Count areas of expertise
     $expertise_count = 0;
     foreach( $expertises as $expertise) {
@@ -123,6 +132,7 @@
             $expertise_count++;
         } // endif
     } // endforeach;
+    $expertise = '';
     $expertise_label = $expertise_count > 1 ? 'Areas of Expertise' : 'Area of Expertise';
 
 
@@ -194,7 +204,12 @@
                                                 }
                                             } // endforeach; ?>
                                         </dd>
-                                    <?php } // endif ?> 
+                                    <?php } // endif
+                                        $resource_i = 0;
+                                        $resource_count = '';
+                                        $associates = '';
+                                        $associates = '';
+                                    ?> 
                                     <?php if( $locations && $location_valid ) { ?>
                                         <dt><?php echo $location_label; ?></dt>
                                         <dd>
@@ -225,7 +240,12 @@
                                                 }
                                             } // endforeach; ?>
                                         </dd>
-                                    <?php } // endif ?> 
+                                    <?php } // endif
+                                        $resource_i = 0;
+                                        $resource_count = '';
+                                        $associates = '';
+                                        $associates = '';
+                                    ?> 
                                     <?php if( $conditions && $condition_valid ) { ?>
                                         <dt><?php echo $condition_label; ?></dt>
                                         <dd>
@@ -256,7 +276,12 @@
                                                 }
                                             } // endforeach; ?>
                                         </dd>
-                                    <?php } // endif ?> 
+                                    <?php } // endif
+                                        $resource_i = 0;
+                                        $resource_count = '';
+                                        $associates = '';
+                                        $associates = '';
+                                    ?> 
                                     <?php if( $treatments && $treatment_valid ) { ?>
                                         <dt><?php echo $treatment_label; ?></dt>
                                         <dd>
@@ -287,7 +312,12 @@
                                                 }
                                             } // endforeach; ?>
                                         </dd>
-                                    <?php } // endif ?> 
+                                    <?php } // endif
+                                        $resource_i = 0;
+                                        $resource_count = '';
+                                        $associates = '';
+                                        $associates = '';
+                                    ?> 
                                     <?php if( $expertises && $expertise_valid ) { ?>
                                         <dt><?php echo $expertise_label; ?></dt>
                                         <dd>
@@ -318,7 +348,12 @@
                                                 }
                                             } // endforeach; ?>
                                         </dd>
-                                    <?php } // endif ?> 
+                                    <?php } // endif
+                                        $resource_i = 0;
+                                        $resource_count = '';
+                                        $associates = '';
+                                        $associates = '';
+                                    ?> 
                                 </dl>
 								<a class="btn btn-primary" href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>">View Clinical Resource</a>
 							</div>
