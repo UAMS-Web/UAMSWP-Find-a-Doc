@@ -563,3 +563,161 @@ function display_medline_api_data( $code, $type ) {
 		}
 	}
 }
+/**
+ * Register custom statuses.
+ */
+function fad_custom_status_creation(){
+	register_post_status( 'separated', array(
+		'label'                     => _x( 'Separated', 'Left UAMS', 'uamswp-fad' ),
+		'public'                    => true,
+		'label_count'               => _n_noop( 'Separated <span class="count">(%s)</span>', 'separated <span class="count">(%s)</span>', 'uamswp-fad' ),
+		'post_type'                 => array( 'provider' ), // Define one or more post types the status can be applied to.
+		'show_in_admin_all_list'    => true,
+		'show_in_admin_status_list' => true,
+		'show_in_metabox_dropdown'  => true,
+		'show_in_inline_dropdown'   => true,
+		'dashicon'                  => 'dashicons-external',
+	) );
+
+	register_post_status( 'inactive', array(
+		'label'                     => _x( 'Inactive', 'Inactive', 'uamswp-fad' ),
+		'public'                    => true,
+		'label_count'               => _n_noop( 'Inactive <span class="count">(%s)</span>', 'Inactives <span class="count">(%s)</span>', 'uamswp-fad' ),
+		'post_type'                 => array( 'provider', 'location' ), // Define one or more post types the status can be applied to.
+		'show_in_admin_all_list'    => true,
+		'show_in_admin_status_list' => true,
+		'show_in_metabox_dropdown'  => true,
+		'show_in_inline_dropdown'   => true,
+		'dashicon'                  => 'dashicons-dismiss',
+	) );
+
+	register_post_status( 'pending', array(
+		'label'                     => _x( 'Pending Review', 'Post needs to be reviewed by an editor.', 'uamswp-fad' ),
+		// 'public'                    => false,
+		'label_count'               => _n_noop( 'Pending Review <span class="count">(%s)</span>', 'Pending Review <span class="count">(%s)</span>', 'uamswp-fad' ),
+		'post_type'                 => array( 'provider', 'location' ), // Define one or more post types the status can be applied to.
+		'show_in_admin_all_list'    => true,
+		'show_in_admin_status_list' => true,
+		'show_in_metabox_dropdown'  => true,
+		'show_in_inline_dropdown'   => true,
+		'dashicon'                  => 'dashicons-visibility',
+	) );
+
+	register_post_status( 'temporarily-removed', array(
+		'label'                     => _x( 'Temporarily Removed', 'Temp status for demo', 'uamswp-fad' ),
+		'public'                    => true,
+		'label_count'               => _n_noop( 'Temporarily Removed <span class="count">(%s)</span>', 'Temporarily Removed <span class="count">(%s)</span>', 'uamswp-fad' ),
+		'post_type'                 => array( 'provider', 'location' ), // Define one or more post types the status can be applied to.
+		'show_in_admin_all_list'    => true,
+		'show_in_admin_status_list' => true,
+		'show_in_metabox_dropdown'  => true,
+		'show_in_inline_dropdown'   => true,
+		'dashicon'                  => 'dashicons-controls-pause',
+	) );
+}
+add_action( 'init', 'fad_custom_status_creation' );
+/**
+ * Only keep Draft & Pending statuses but do not use other builtin statuses.
+ *
+ * PS: you should at least keep Draft & Pending.
+ *
+ * @param  array  $post_types  The list of registered Post Types for the status.
+ * @param  string $status_name Name of the status to apply to Post Types.
+ * @return array               The list of registered Post Types for the status.
+ */
+// function example_restrict_statuses_for_tickets( $post_types = array(), $status_name = '' ) {
+// 	if ( 'draft' === $status_name || 'pending' === $status_name || 'publish' === $status_name ) {
+// 		return $post_types;
+// 	}
+
+// 	// All other statuses (eg: Publish, Private...) won't be applied to tickets
+// 	return array_diff( $post_types, array( 'provider', 'location' ) );
+// }
+// add_filter( 'wp_statuses_get_registered_post_types', 'example_restrict_statuses_for_tickets', 10, 2 );
+/**
+ * Makes sure we can directly "Publish" using custom statuses.
+ *
+ * @param  array  $data    A list of arguments to use to insert a new Post Type's item.
+ * @param  array  $postarr WordPress' version of posted var.
+ * @return array           A list of arguments to use to insert a new Post Type's item.
+ */
+// function example_insert_using_custom_status( $data = array(), $postarr = array() ) {
+
+// 	if ( empty( $postarr['publish'] ) ) {
+// 		return $data;
+// 	}
+
+// 	if ( 'provider' !== $data['post_type'] && 'location' !== $data['post_type'] ) {
+// 		return $data;
+// 	}
+
+// 	if ( ! empty( $postarr['_wp_statuses_status'] ) && in_array( $postarr['_wp_statuses_status'], array(
+// 		'separated',
+// 		'inactive',
+// 		'temporarily-removed',
+// 	), true ) ) {
+// 		$data['post_status'] = sanitize_key( $postarr['_wp_statuses_status'] );
+
+// 	// Default status for the tickets Post Type is assigned.
+// 	// } else {
+// 	// 	$data['post_status'] = 'pending';
+// 	}
+
+// 	return $data;
+// }
+// add_filter( 'wp_insert_post_data', 'example_insert_using_custom_status', 10, 2 );
+add_filter( 'wp_statuses_use_custom_status', '__return_true' );
+// function separated_custom_status_add_in_quick_edit() {
+// 	echo "<script>
+// 	jQuery(document).ready( function() {
+// 		jQuery( 'select[name=\"_status\"]' ).append( '<option value=\"separated\">Separated</option>' );      
+// 	}); 
+// 	</script>";
+// }
+// add_action('admin_footer-edit.php','separated_custom_status_add_in_quick_edit');
+// function separated_custom_status_add_in_post_page() {
+// 	echo "<script>
+// 	jQuery(document).ready( function() {        
+// 		jQuery( 'select[name=\"post_status\"]' ).append( '<option value=\"separated\">Separated</option>' );
+// 	});
+// 	</script>";
+// }
+// add_action('admin_footer-post.php', 'separated_custom_status_add_in_post_page');
+// add_action('admin_footer-post-new.php', 'separated_custom_status_add_in_post_page');
+
+// expire provider posts on date field.
+// if (!wp_next_scheduled('expire_posts')){
+// 	wp_schedule_event(time(), 'hourly', 'expire_posts'); // this can be hourly, twicedaily, or daily
+// }
+
+// add_action('expire_posts', 'expire_posts_function');
+
+// function expire_posts_function() {
+// 	$today = date('Ymd');
+// 	$args = array(
+// 		'post_type' => array('provider'), // post types you want to check
+// 		'posts_per_page' => -1 
+// 	);
+// 	$posts = get_posts($args);
+// 	foreach($posts as $p){
+// 		$leavedate = get_field('physician_separated_leave_date', $p->ID, false, false); // get the raw date from the db
+// 		$expiredate = get_field('physician_separated_end_date', $p->ID, false, false); // get the raw date from the db
+// 		$separated = get_field('physician_separated', $p->ID, false, false);
+// 		if ($separated && (!empty($expiredate) || !empty($leavedate)) ) {
+// 			if(!empty($leavedate) && $leavedate <= $today && $expiredate > $today){
+// 				$postdata = array(
+// 					'ID' => $p->ID,
+// 					'post_status' => 'separated'
+// 				);
+// 				wp_update_post($postdata);
+// 			}
+// 			if(!empty($expiredate) && $expiredate <= $today){
+// 				$postdata = array(
+// 					'ID' => $p->ID,
+// 					'post_status' => 'inactive'
+// 				);
+// 				wp_update_post($postdata);
+// 			}
+// 		}
+// 	}
+// }
