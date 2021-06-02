@@ -625,15 +625,15 @@ add_action( 'init', 'fad_custom_status_creation' );
  * @param  string $status_name Name of the status to apply to Post Types.
  * @return array               The list of registered Post Types for the status.
  */
-// function example_restrict_statuses_for_tickets( $post_types = array(), $status_name = '' ) {
-// 	if ( 'draft' === $status_name || 'pending' === $status_name || 'publish' === $status_name ) {
-// 		return $post_types;
-// 	}
+function uamswp_fad_restrict_statuses_for_providers_locations( $post_types = array(), $status_name = '' ) {
+	if ( 'draft' === $status_name || 'pending' === $status_name || 'publish' === $status_name ) {
+		return $post_types;
+	}
 
-// 	// All other statuses (eg: Publish, Private...) won't be applied to tickets
-// 	return array_diff( $post_types, array( 'provider', 'location' ) );
-// }
-// add_filter( 'wp_statuses_get_registered_post_types', 'example_restrict_statuses_for_tickets', 10, 2 );
+	// All other statuses (eg: Publish, Private...) won't be applied to tickets
+	return array_diff( $post_types, array( 'provider', 'location' ) );
+}
+add_filter( 'wp_statuses_get_registered_post_types', 'uamswp_fad_restrict_statuses_for_providers_locations', 10, 2 );
 /**
  * Makes sure we can directly "Publish" using custom statuses.
  *
@@ -641,31 +641,31 @@ add_action( 'init', 'fad_custom_status_creation' );
  * @param  array  $postarr WordPress' version of posted var.
  * @return array           A list of arguments to use to insert a new Post Type's item.
  */
-// function example_insert_using_custom_status( $data = array(), $postarr = array() ) {
+function uamswp_fad_insert_using_custom_status( $data = array(), $postarr = array() ) {
 
-// 	if ( empty( $postarr['publish'] ) ) {
-// 		return $data;
-// 	}
+	if ( empty( $postarr['publish'] ) ) {
+		return $data;
+	}
 
-// 	if ( 'provider' !== $data['post_type'] && 'location' !== $data['post_type'] ) {
-// 		return $data;
-// 	}
+	if ( 'provider' !== $data['post_type'] && 'location' !== $data['post_type'] ) {
+		return $data;
+	}
 
-// 	if ( ! empty( $postarr['_wp_statuses_status'] ) && in_array( $postarr['_wp_statuses_status'], array(
-// 		'separated',
-// 		'inactive',
-// 		'temporarily-removed',
-// 	), true ) ) {
-// 		$data['post_status'] = sanitize_key( $postarr['_wp_statuses_status'] );
+	if ( ! empty( $postarr['_wp_statuses_status'] ) && in_array( $postarr['_wp_statuses_status'], array(
+		'separated',
+		'inactive',
+		'temporarily-removed',
+	), true ) ) {
+		$data['post_status'] = sanitize_key( $postarr['_wp_statuses_status'] );
 
-// 	// Default status for the tickets Post Type is assigned.
-// 	// } else {
-// 	// 	$data['post_status'] = 'pending';
-// 	}
+	// Default status for the tickets Post Type is assigned.
+	// } else {
+	// 	$data['post_status'] = 'pending';
+	}
 
-// 	return $data;
-// }
-// add_filter( 'wp_insert_post_data', 'example_insert_using_custom_status', 10, 2 );
+	return $data;
+}
+add_filter( 'wp_insert_post_data', 'uamswp_fad_insert_using_custom_status', 10, 2 );
 add_filter( 'wp_statuses_use_custom_status', '__return_true' );
 // function separated_custom_status_add_in_quick_edit() {
 // 	echo "<script>
@@ -686,38 +686,38 @@ add_filter( 'wp_statuses_use_custom_status', '__return_true' );
 // add_action('admin_footer-post-new.php', 'separated_custom_status_add_in_post_page');
 
 // expire provider posts on date field.
-// if (!wp_next_scheduled('expire_posts')){
-// 	wp_schedule_event(time(), 'hourly', 'expire_posts'); // this can be hourly, twicedaily, or daily
-// }
+if (!wp_next_scheduled('expire_posts')){
+	wp_schedule_event(time(), 'hourly', 'expire_posts'); // this can be hourly, twicedaily, or daily
+}
 
-// add_action('expire_posts', 'expire_posts_function');
+add_action('expire_posts', 'expire_posts_function');
 
-// function expire_posts_function() {
-// 	$today = date('Ymd');
-// 	$args = array(
-// 		'post_type' => array('provider'), // post types you want to check
-// 		'posts_per_page' => -1 
-// 	);
-// 	$posts = get_posts($args);
-// 	foreach($posts as $p){
-// 		$leavedate = get_field('physician_separated_leave_date', $p->ID, false, false); // get the raw date from the db
-// 		$expiredate = get_field('physician_separated_end_date', $p->ID, false, false); // get the raw date from the db
-// 		$separated = get_field('physician_separated', $p->ID, false, false);
-// 		if ($separated && (!empty($expiredate) || !empty($leavedate)) ) {
-// 			if(!empty($leavedate) && $leavedate <= $today && $expiredate > $today){
-// 				$postdata = array(
-// 					'ID' => $p->ID,
-// 					'post_status' => 'separated'
-// 				);
-// 				wp_update_post($postdata);
-// 			}
-// 			if(!empty($expiredate) && $expiredate <= $today){
-// 				$postdata = array(
-// 					'ID' => $p->ID,
-// 					'post_status' => 'inactive'
-// 				);
-// 				wp_update_post($postdata);
-// 			}
-// 		}
-// 	}
-// }
+function expire_posts_function() {
+	$today = date('Ymd');
+	$args = array(
+		'post_type' => array('provider'), // post types you want to check
+		'posts_per_page' => -1 
+	);
+	$posts = get_posts($args);
+	foreach($posts as $p){
+		$leavedate = get_field('physician_separated_leave_date', $p->ID, false, false); // get the raw date from the db
+		$expiredate = get_field('physician_separated_end_date', $p->ID, false, false); // get the raw date from the db
+		$separated = get_field('physician_separated', $p->ID, false, false);
+		if ($separated && (!empty($expiredate) || !empty($leavedate)) ) {
+			if(!empty($leavedate) && $leavedate <= $today && $expiredate > $today){
+				$postdata = array(
+					'ID' => $p->ID,
+					'post_status' => 'separated'
+				);
+				wp_update_post($postdata);
+			}
+			if(!empty($expiredate) && $expiredate <= $today){
+				$postdata = array(
+					'ID' => $p->ID,
+					'post_status' => 'inactive'
+				);
+				wp_update_post($postdata);
+			}
+		}
+	}
+}
