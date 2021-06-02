@@ -691,7 +691,6 @@ if (!wp_next_scheduled('expire_posts')){
 }
 
 add_action('expire_posts', 'expire_posts_function');
-
 function expire_posts_function() {
 	$today = date('Ymd');
 	$args = array(
