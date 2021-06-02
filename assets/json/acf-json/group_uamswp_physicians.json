@@ -347,7 +347,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -2523,6 +2523,395 @@
             },
             "multiple": "0",
             "allow_null": "0"
+        },
+        "field_physician_separated_tab": {
+            "key": "field_physician_separated_tab",
+            "name": "",
+            "type": "tab",
+            "label": "<i class=\"dashicons dashicons-exit\"><\/i> Leaving/Left",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        "field_physician_separated": {
+            "key": "field_physician_separated",
+            "name": "physician_separated",
+            "type": "true_false",
+            "label": "Is the provider leaving or left UAMS?",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_physician_separated_message": {
+            "key": "field_physician_separated_message",
+            "name": "",
+            "type": "message",
+            "label": "Leaving UAMS?",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_separated",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "This information is designed for those that are leaving UAMS.",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        "field_physician_separated_leave_date": {
+            "key": "field_physician_separated_leave_date",
+            "label": "Leave Date",
+            "name": "physician_separated_leave_date",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_separated",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "display_format": "m\/d\/Y",
+            "return_format": "m\/d\/Y",
+            "first_day": 0,
+            "acfe_settings": {
+                "60b693cb6a0cf": {
+                    "acfe_settings_location": "",
+                    "acfe_settings_settings": {
+                        "60b693d06a0d0": {
+                            "acfe_settings_setting_type": "default_value",
+                            "acfe_settings_setting_operator": "=",
+                            "acfe_settings_setting_value": "today()"
+                        }
+                    }
+                }
+            },
+            "acfe_validate": ""
+        },
+        "field_physician_separated_taking_over": {
+            "key": "field_physician_separated_taking_over",
+            "label": "Provider Taking Over?",
+            "name": "physician_separated_taking_over",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_separated",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "acfe_settings": "",
+            "acfe_validate": ""
+        },
+        "field_physician_separated_replacement": {
+            "key": "field_physician_separated_replacement",
+            "label": "Name of Provider",
+            "name": "physician_separated_replacement",
+            "type": "relationship",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_separated",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_physician_separated_taking_over",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "67",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "post_type": [
+                "provider"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "acfe_settings": "",
+            "acfe_validate": ""
+        },
+        "field_physician_separated_new_location": {
+            "key": "field_physician_separated_new_location",
+            "label": "New Location",
+            "name": "physician_separated_new_location",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_separated",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "acfe_settings": "",
+            "acfe_validate": ""
+        },
+        "field_physician_separated_location_name": {
+            "key": "field_physician_separated_location_name",
+            "label": "Location Name",
+            "name": "physician_separated_location_name",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_separated",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_physician_separated_new_location",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "acfe_settings": "",
+            "acfe_validate": ""
+        },
+        "field_physician_separated_location_url": {
+            "key": "field_physician_separated_location_url",
+            "label": "Location URL",
+            "name": "physician_separated_location_url",
+            "type": "url",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_separated",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_physician_separated_new_location",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "default_value": "",
+            "placeholder": "",
+            "acfe_settings": "",
+            "acfe_validate": ""
+        },
+        "field_physician_separated_location_start_date": {
+            "key": "field_physician_separated_location_start_date",
+            "label": "Location Start Date",
+            "name": "physician_separated_location_start_date",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_separated",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_physician_separated_new_location",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "display_format": "m\/d\/Y",
+            "return_format": "m\/d\/Y",
+            "first_day": 0,
+            "acfe_settings": "",
+            "acfe_validate": ""
+        },
+        "field_physician_separated_location_end_message_date": {
+            "key": "field_physician_separated_location_end_message_date",
+            "label": "Location End Message Date",
+            "name": "physician_separated_location_end_message_date",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_separated",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_physician_separated_new_location",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "display_format": "m\/d\/Y",
+            "return_format": "m\/d\/Y",
+            "first_day": 0,
+            "acfe_settings": "",
+            "acfe_validate": ""
+        },
+        "field_physician_separated_end_date_message": {
+            "key": "field_physician_separated_end_date_message",
+            "name": "",
+            "type": "message",
+            "label": "End Date",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_separated",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "Set the date for when the provider is removed.",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        "field_physician_separated_end_date": {
+            "key": "field_physician_separated_end_date",
+            "label": "End Date",
+            "name": "physician_separated_end_date",
+            "type": "date_picker",
+            "instructions": "Default is 12 months (legal). Recommend an extra week for safety.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_separated",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "display_format": "m\/d\/Y",
+            "return_format": "m\/d\/Y",
+            "first_day": 0,
+            "acfe_settings": "",
+            "acfe_validate": ""
         },
         "field_physician_extra_tab": {
             "key": "field_physician_extra_tab",
