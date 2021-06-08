@@ -141,7 +141,7 @@
             <div class="item">
                 <div class="row">
                     <div class="col image">
-                        <a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>">
+                        <a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="Photo" data-itemtitle="<?php echo $resource_title_attr; ?>">
                             <picture>
                                 <?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
                                     <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 243, 'center', 'center'); ?>"
@@ -172,13 +172,13 @@
                         <div class="row">
                             <div class="col-12 primary">
                                 <h3 class="h4">
-                                    <a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>">
+                                    <a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $resource_title_attr; ?>">
                                         <span class="name"><?php echo $resource_title; ?></span>
                                     </a>
                                     <span class="subtitle"><?php echo esc_html($resource_type_label); ?></span>
                                 </h3>
                                 <p><?php echo $resource_excerpt; ?></p>
-                                <a class="btn btn-primary" href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>">View Clinical Resource</a>
+                                <a class="btn btn-primary" href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo $resource_title_attr; ?>">View Clinical Resource</a>
                             </div>
                             <div class="col-12 secondary">
 								<h4 class="h5">Related Content</h4>
@@ -200,7 +200,11 @@
 
                                                 if ( get_post_status ( $associate ) == 'publish' ) {
                                                     if ( $resource_i < $resource_related_max ) {
-                                                        echo '<a href="' . get_permalink( $associate ) . '">' . $provider_medium_name . '</a>';
+                                                        $associate_title = $provider_medium_name;
+                                                        $associate_title_attr = str_replace('"', '\'', $associate_title);
+                                                        $associate_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($associate_title_attr, null, 'utf-8')));
+        
+                                                        echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . $resource_title_attr . '">' . $associate_title . '</a>';
                                                         $resource_i++;
                                                         if ( 
                                                             ( $resource_count > $resource_related_max && $resource_i != $resource_related_max )
@@ -236,7 +240,11 @@
                                             foreach( $associates as $associate) {
                                                 if ( get_post_status ( $associate ) == 'publish' ) {
                                                     if ( $resource_i < $resource_related_max ) {
-                                                        echo '<a href="' . get_permalink( $associate ) . '">' . get_the_title( $associate ) . '</a>';
+                                                        $associate_title = get_the_title( $associate );
+                                                        $associate_title_attr = str_replace('"', '\'', $associate_title);
+                                                        $associate_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($associate_title_attr, null, 'utf-8')));
+        
+                                                        echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . $resource_title_attr . '">' . $associate_title . '</a>';
                                                         $resource_i++;
                                                         if ( 
                                                             ( $resource_count > $resource_related_max && $resource_i != $resource_related_max )
@@ -272,7 +280,11 @@
                                             foreach( $associates as $associate) {
                                                 if ( get_post_status ( $associate ) == 'publish' ) {
                                                     if ( $resource_i < $resource_related_max ) {
-                                                        echo '<a href="' . get_permalink( $associate ) . '">' . get_the_title( $associate ) . '</a>';
+                                                        $associate_title = get_the_title( $associate );
+                                                        $associate_title_attr = str_replace('"', '\'', $associate_title);
+                                                        $associate_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($associate_title_attr, null, 'utf-8')));
+        
+                                                        echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . $resource_title_attr . '">' . $associate_title . '</a>';
                                                         $resource_i++;
                                                         if ( 
                                                             ( $resource_count > $resource_related_max && $resource_i != $resource_related_max )
@@ -308,7 +320,11 @@
                                             foreach( $associates as $associate) {
                                                 if ( get_post_status ( $associate ) == 'publish' ) {
                                                     if ( $resource_i < $resource_related_max ) {
-                                                        echo '<a href="' . get_permalink( $associate ) . '">' . get_the_title( $associate ) . '</a>';
+                                                        $associate_title = get_the_title( $associate );
+                                                        $associate_title_attr = str_replace('"', '\'', $associate_title);
+                                                        $associate_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($associate_title_attr, null, 'utf-8')));
+        
+                                                        echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . $resource_title_attr . '">' . $associate_title . '</a>';
                                                         $resource_i++;
                                                         if ( 
                                                             ( $resource_count > $resource_related_max && $resource_i != $resource_related_max )
@@ -344,7 +360,11 @@
                                             foreach( $associates as $associate) {
                                                 if ( get_post_status ( $associate ) == 'publish' ) {
                                                     if ( $resource_i < $resource_related_max ) {
-                                                        echo '<a href="' . get_permalink( $associate ) . '">' . get_the_title( $associate ) . '</a>';
+                                                        $associate_title = get_the_title( $associate );
+                                                        $associate_title_attr = str_replace('"', '\'', $associate_title);
+                                                        $associate_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($associate_title_attr, null, 'utf-8')));
+        
+                                                        echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . $resource_title_attr . '">' . $associate_title . '</a>';
                                                         $resource_i++;
                                                         if ( 
                                                             ( $resource_count > $resource_related_max && $resource_i != $resource_related_max )
@@ -371,7 +391,7 @@
                                         $associates = '';
                                     ?> 
                                 </dl>
-								<a class="btn btn-primary" href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>">View Clinical Resource</a>
+								<a class="btn btn-primary" href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo $resource_title_attr; ?>">View Clinical Resource</a>
 							</div>
                         </div>
                     </div>
@@ -394,7 +414,7 @@
                 <div class="card-body">
                     <h3 class="card-title h5"><?php echo $resource_title; ?></h3>
                     <p class="card-text"><?php echo $resource_excerpt; ?></p>
-                    <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary stretched-link" aria-label="<?php echo $resource_label; ?>">View Clinical Resource</a>
+                    <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary stretched-link" aria-label="<?php echo $resource_label; ?>" data-itemtitle="<?php echo $resource_title_attr; ?>">View Clinical Resource</a>
                 </div>
             </div>
         </div>
