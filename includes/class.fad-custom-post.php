@@ -411,7 +411,7 @@ if ( ! function_exists('clinical_resources_cpt') ) {
 			'show_ui'               => true,
 			'show_in_menu'          => true,
 			'menu_position'         => 30,
-			'menu_icon'             => 'dashicons-book-alt', //plugin_dir_url( __FILE__ ) .'../admin/admin-icons/locations-icon.png',
+			'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/trl-cube.svg',
 			'show_in_admin_bar'     => true,
 			'show_in_nav_menus'     => true,
 			'can_export'            => true,
