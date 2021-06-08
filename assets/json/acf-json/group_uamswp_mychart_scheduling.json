@@ -76,6 +76,33 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_mychart_scheduling_linksource",
+            "label": "Instance",
+            "name": "mychart_scheduling_linksource",
+            "type": "text",
+            "instructions": "Defaults to \"uamshealth.com\"",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_mychart_scheduling_query_system",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         }
     ],
     "location": [

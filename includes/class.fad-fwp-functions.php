@@ -141,6 +141,22 @@ function fwp_facet_scripts() {
 })(jQuery);
 </script>
 <?php
+    } elseif ( is_post_type_archive( 'clinical-resource' ) ) {
+        ?>
+<script>
+(function($) {
+    $(document).on('facetwp-loaded', function() {
+        $('.facetwp-facet').each(function() {
+            var facet_name = $(this).attr('data-name');
+            var facet_label = FWP.settings.labels[facet_name];
+            if ($('.facet-label[data-for="' + facet_name + '"]').length < 1) {
+                $(this).before('<h3 class="facet-label h6" id="facet_' + facet_name + '" data-for="' + facet_name + '">' + facet_label + '</h3>');
+            }
+        });
+    });
+})(jQuery);
+</script>
+<?php
     }
 }
 add_action( 'wp_footer', 'fwp_facet_scripts', 100 );
