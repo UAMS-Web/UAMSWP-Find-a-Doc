@@ -383,6 +383,8 @@ while ( have_posts() ) : the_post(); ?>
 
 		$mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
 		$mychart_scheduling_instance = get_field('mychart_scheduling_instance', 'option');
+		$mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
+		$mychart_scheduling_linksource = $mychart_scheduling_linksource ? $mychart_scheduling_linksource : 'uamshealth.com';
 		$location_scheduling_ser = get_field('location_scheduling_ser');
 		$location_scheduling_dep = get_field('location_scheduling_dep');
 		$location_scheduling_vt = get_field('location_scheduling_vt');
@@ -1336,7 +1338,7 @@ while ( have_posts() ) : the_post(); ?>
 						<h2 class="module-title">Schedule an Appointment</h2>
 						<div class="module-body">
 							<div id="scheduleContainer">
-								<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>"></iframe>
+								<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
 							</div>
 
 							<!-- <link href="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->

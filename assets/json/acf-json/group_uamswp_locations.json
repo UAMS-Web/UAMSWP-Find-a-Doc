@@ -965,7 +965,7 @@
                     "name": "location_appointments_text",
                     "type": "text",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
@@ -984,7 +984,7 @@
                     "name": "location_appointments_phone",
                     "type": "maskfield",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
