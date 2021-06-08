@@ -141,15 +141,31 @@
             <div class="item">
                 <div class="row">
                     <div class="col image">
-                        <a href="#">
-                            <?php if ( has_post_thumbnail($id) ) { ?>
-                                <?php echo get_the_post_thumbnail($id, 'aspect-16-9-small'); ?>
-                            <?php } else { ?>
-                                <picture>
+                        <a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>">
+                            <picture>
+                                <?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
+                                    <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 243, 'center', 'center'); ?>"
+                                        media="(min-width: 2054px)">
+                                    <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 184, 'center', 'center'); ?>"
+                                        media="(min-width: 1784px)">
+                                    <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 243, 'center', 'center'); ?>"
+                                        media="(min-width: 1200px)">
+                                    <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 184, 'center', 'center'); ?>"
+                                        media="(min-width: 930px)">
+                                    <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 580, 326, 'center', 'center'); ?>"
+                                        media="(min-width: 768px)">
+                                    <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 95, 95, 'center', 'center'); ?>"
+                                        media="(min-width: 576px)">
+                                    <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 510, 286, 'center', 'center'); ?>"
+                                        media="(min-width: 1px)">
+                                    <img src="<?php echo image_sizer(get_post_thumbnail_id(), 510, 286, 'center', 'center'); ?>" alt="" role="presentation" />
+                                <?php } elseif ( has_post_thumbnail() ) { ?>
+                                    <?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
+                                <?php } else { ?>
                                     <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
                                     <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" />
-                                </picture>
-                            <?php } ?>
+                                <?php } ?>
+                            </picture>
                         </a>
                     </div>
                     <div class="col text">
