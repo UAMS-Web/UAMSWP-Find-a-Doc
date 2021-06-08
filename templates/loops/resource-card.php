@@ -28,6 +28,10 @@
         $resource_excerpt = wp_trim_words( $resource_excerpt, 23, ' &hellip;' );
     }
 
+    $resource_image_wide = get_post_thumbnail_id($id);
+    $resource_image_square = get_field('clinical_resource_image_square', $id);
+    $resource_image_square = $resource_image_square ? $resource_image_square : $resource_image_wide;
+
     $resource_related_max = 3; // Set how many of each related item type to display
     
 
@@ -144,21 +148,21 @@
                         <a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="Photo" data-itemtitle="<?php echo $resource_title_attr; ?>">
                             <picture>
                                 <?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
-                                    <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 243, 'center', 'center'); ?>"
+                                    <source srcset="<?php echo image_sizer($resource_image_square, 243, 243, 'center', 'center'); ?>"
                                         media="(min-width: 2054px)">
-                                    <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 184, 'center', 'center'); ?>"
+                                    <source srcset="<?php echo image_sizer($resource_image_square, 184, 184, 'center', 'center'); ?>"
                                         media="(min-width: 1784px)">
-                                    <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 243, 'center', 'center'); ?>"
+                                    <source srcset="<?php echo image_sizer($resource_image_square, 243, 243, 'center', 'center'); ?>"
                                         media="(min-width: 1200px)">
-                                    <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 184, 'center', 'center'); ?>"
+                                    <source srcset="<?php echo image_sizer($resource_image_square, 184, 184, 'center', 'center'); ?>"
                                         media="(min-width: 930px)">
-                                    <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 580, 326, 'center', 'center'); ?>"
+                                    <source srcset="<?php echo image_sizer($resource_image_wide, 580, 326, 'center', 'center'); ?>"
                                         media="(min-width: 768px)">
-                                    <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 95, 95, 'center', 'center'); ?>"
+                                    <source srcset="<?php echo image_sizer($resource_image_square, 95, 95, 'center', 'center'); ?>"
                                         media="(min-width: 576px)">
-                                    <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 510, 286, 'center', 'center'); ?>"
+                                    <source srcset="<?php echo image_sizer($resource_image_wide, 510, 286, 'center', 'center'); ?>"
                                         media="(min-width: 1px)">
-                                    <img src="<?php echo image_sizer(get_post_thumbnail_id(), 510, 286, 'center', 'center'); ?>" alt="" role="presentation" />
+                                    <img src="<?php echo image_sizer($resource_image_wide, 510, 286, 'center', 'center'); ?>" alt="" role="presentation" />
                                 <?php } elseif ( has_post_thumbnail() ) { ?>
                                     <?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
                                 <?php } else { ?>
