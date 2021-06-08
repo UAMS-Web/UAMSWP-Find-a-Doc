@@ -1,4 +1,5 @@
-.doctor-list {
+.doctor-list,
+.resource-list {
     .filter-col,
     .list-col {
         padding: ($spacer * 2);
@@ -323,8 +324,7 @@
 
                             @media
                             (max-width: ($breakpoint-xs - 1)),
-                            (min-width: $breakpoint-sm) and (max-width: (930px - 1)) { // Fixed image height, auto width
-                                max-height:245px;
+                            (min-width: $breakpoint-sm) and (max-width: (930px - 1)) {
                                 width: auto;
                             }
 
@@ -424,6 +424,26 @@
 
             .pagination {
                 justify-content: center;
+            }
+        }
+    }
+}
+
+.doctor-list {
+    .list-col {
+        .list {
+            .item {
+                .row {
+                    .image {
+                        img {
+                            @media
+                            (max-width: ($breakpoint-xs - 1)),
+                            (min-width: $breakpoint-sm) and (max-width: (930px - 1)) { // Fixed image height, auto width
+                                max-height:245px;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

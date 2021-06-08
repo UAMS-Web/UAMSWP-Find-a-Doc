@@ -656,6 +656,39 @@
             "ui": 1
         },
         {
+            "key": "field_treatment_procedure_clinical_resources",
+            "label": "Clinical Resources for this Treatment or Procedure",
+            "name": "treatment_procedure_clinical_resources",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "post_type": [
+                "clinical-resource"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_clinical_resource_treatments"
+            },
+            "acfe_validate": "",
+            "acfe_update": "",
+            "ui": 1
+        },
+        {
             "key": "field_treatment_procedure_podcast_name",
             "name": "treatment_procedure_podcast_name",
             "type": "text",

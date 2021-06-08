@@ -1,0 +1,28 @@
+<?php 
+    /**
+     *  Template Name: Clinical Resource Loop - Card layout
+     *  Designed for UAMS Find-a-Doc
+     * 
+     *  Must be used inside a loop
+     *  Required var: $id
+     */
+
+    $resource_title = get_the_title($id);
+    $resource_title_attr = str_replace('"', '\'', $resource_title);
+    $resource_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($resource_title_attr, null, 'utf-8')));
+
+    $resource_label = 'Go to the Clinical Resource page for' . $resource_title_attr;
+    
+    $resource_excerpt = get_the_excerpt($id) ? get_the_excerpt($id) : wp_strip_all_tags( get_the_content($id) );
+    $resource_excerpt_len = strlen($resource_excerpt);
+    if ( $resource_excerpt_len > 160 ) {
+        $resource_excerpt = wp_trim_words( $resource_excerpt, 23, ' &hellip;' );
+    }
+
+?>
+<li class="item">
+    <div class="text-container">
+        <h3 class="h5"><a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo get_permalink($resource_label); ?>"><?php echo get_the_title(); ?></a></h3>
+        <p><?php echo $resource_excerpt; ?></p>
+    </div>
+</li>

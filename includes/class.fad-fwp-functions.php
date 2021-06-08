@@ -11,7 +11,7 @@ add_filter( 'facetwp_is_main_query', function( $is_main_query, $query ) {
 }, 10, 2 );
 
 add_filter( 'facetwp_shortcode_html', function( $output, $atts) {
-	if ( !empty( $atts['template'] ) && 'physician' == $atts['template'] ) { // replace 'example' with name of your template
+	if ( !empty( $atts['template'] ) && ( 'physician' == $atts['template'] || 'clinical_resources' == $atts['template']) ) { // replace 'example' with name of your template
         /** modify replacement as needed, make sure you keep the facetwp-template class **/
         $output = str_replace( 'facetwp-template', 'facetwp-template row list', $output );
 	}
@@ -137,6 +137,22 @@ function fwp_facet_scripts() {
             FWP.frozen_facets[facet_name] = 'soft';
         }
         // FWP.refresh();
+    });
+})(jQuery);
+</script>
+<?php
+    } elseif ( is_post_type_archive( 'clinical-resource' ) ) {
+        ?>
+<script>
+(function($) {
+    $(document).on('facetwp-loaded', function() {
+        $('.facetwp-facet').each(function() {
+            var facet_name = $(this).attr('data-name');
+            var facet_label = FWP.settings.labels[facet_name];
+            if ($('.facet-label[data-for="' + facet_name + '"]').length < 1) {
+                $(this).before('<h3 class="facet-label h6" id="facet_' + facet_name + '" data-for="' + facet_name + '">' + facet_label + '</h3>');
+            }
+        });
     });
 })(jQuery);
 </script>
