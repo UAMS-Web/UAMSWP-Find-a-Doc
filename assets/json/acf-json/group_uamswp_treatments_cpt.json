@@ -657,7 +657,7 @@
         },
         {
             "key": "field_treatment_procedure_clinical_resources",
-            "label": "Clinical Resources for this Treatment or Procedure",
+            "label": "Clinical Resources",
             "name": "treatment_procedure_clinical_resources",
             "type": "relationship",
             "instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
