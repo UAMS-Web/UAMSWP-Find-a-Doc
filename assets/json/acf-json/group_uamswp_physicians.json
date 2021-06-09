@@ -1191,8 +1191,8 @@
             "key": "field_physician_clinical_resources",
             "name": "physician_clinical_resources",
             "type": "relationship",
-            "label": "Additional Clinical Resources",
-            "instructions": "",
+            "label": "Clinical Resources",
+            "instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
             "required": 0,
             "conditional_logic": [
                 [

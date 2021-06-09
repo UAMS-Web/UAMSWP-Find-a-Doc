@@ -86,8 +86,8 @@ $resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 1
 $resource_more = false;
 $args = (array(
     'post_type' => "clinical-resource",
-    'order' => 'ASC',
-    'orderby' => 'title',
+    'order' => 'DESC',
+    'orderby' => 'post_date',
     'posts_per_page' => $resource_postsPerPage,
     'post_status' => 'publish',
     'post__in'	=> $resources
@@ -522,6 +522,8 @@ function uamswp_expertise_resource() {
     $resource_heading_related_post = false; // "Resources Related to __"
     $resource_heading_related_name = $page_title; // To what is it related?
     $resource_more_suppress = false; // Force div.more to not display
+    $resource_more_key = 'fwp_resource_aoe';
+    $resource_more_value = get_the_ID();
     if( $show_related_resource_section ) {
         include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
     }

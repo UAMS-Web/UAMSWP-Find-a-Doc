@@ -10,7 +10,7 @@
      *      $resource_page = 'single' or 'archive' (default to 'single')
      */
 
-    $resource_page = $resource_page ? $resource_page : 'single';
+    $resource_page = ( isset($resource_page) && !empty($resource_page) ) ? $resource_page : 'single';
 
     $resource_title = get_the_title($id);
     $resource_title_attr = str_replace('"', '\'', $resource_title);
@@ -38,23 +38,25 @@
     // Check for valid providers
     $providers = get_field('clinical_resource_providers');
     $provider_valid = false;
-    foreach( $providers as $provider ) {
-        if ( get_post_status ( $provider ) == 'publish' ) {
-            $provider_valid = true;
-            $break;
-        } // endif
-    } // endforeach;
-    $provider = '';
-    // Count published providers
-    $provider_count = 0;
-    foreach( $providers as $provider) {
-        if ( get_post_status ( $provider ) == 'publish' ) {
-            $provider_count++;
-        } // endif
-    } // endforeach;
-    $provider = '';
-    $provider_label = $provider_count > 1 ? 'Providers' : 'Provider';
-    
+    if ( !empty($providers) ) {
+        foreach( $providers as $provider ) {
+            if ( get_post_status ( $provider ) == 'publish' ) {
+                $provider_valid = true;
+                $break;
+            } // endif
+        } // endforeach;
+        $provider = '';
+        // Count published providers
+        $provider_count = 0;
+        foreach( $providers as $provider) {
+            if ( get_post_status ( $provider ) == 'publish' ) {
+                $provider_count++;
+            } // endif
+        } // endforeach;
+        $provider = '';
+        $provider_label = $provider_count > 1 ? 'Providers' : 'Provider';
+    }
+
 
     // Check for valid locations
     $locations = get_field('clinical_resource_locations');
@@ -103,7 +105,7 @@
     // Check for valid treatments
     $treatments = get_field('clinical_resource_treatments');
     $treatment_valid = false;
-        if ( !empty($treatments) ){
+    if ( !empty($treatments) ) {
         foreach( $treatments as $treatment ) {
             if ( get_post_status ( $treatment ) == 'publish' ) {
                 $treatment_valid = true;
@@ -121,12 +123,11 @@
         $treatment = '';
         $treatment_label = $treatment_count > 1 ? 'Treatments/Procedures' : 'Treatment/Procedure';
     }
-    
 
     // Check for valid areas of expertise
     $expertises = get_field('clinical_resource_aoe');
     $expertise_valid = false;
-    if ( !empty($expertises) ){
+    if ( !empty($expertises) ) {
         foreach( $expertises as $expertise ) {
             if ( get_post_status ( $expertise ) == 'publish' ) {
                 $expertise_valid = true;
