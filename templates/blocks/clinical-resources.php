@@ -46,7 +46,7 @@
         <section class="uams-module stacked-image-text bg-auto" id="related-resources" aria-labelledby="related-resources-title">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12<?php echo ($hide_heading && empty($description)) ? " sr-only" : ""; ?>">
+                    <div class="col-12">
                         <h2 class="module-title" id="related-resources-title"><span class="title"><?php echo $resource_heading; ?></span></h2>
                     </div>
                     <div class="card-list card-list-left col-12">
