@@ -10,7 +10,7 @@
      *      $resource_page = 'single' or 'archive' (default to 'single')
      */
 
-    $resource_page = $resource_page ? $resource_page : 'single';
+    $resource_page = ( isset($resource_page) && !empty($resource_page) ) ? $resource_page : 'single';
 
     $resource_title = get_the_title($id);
     $resource_title_attr = str_replace('"', '\'', $resource_title);
