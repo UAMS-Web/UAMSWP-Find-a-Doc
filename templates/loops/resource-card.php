@@ -61,7 +61,7 @@
     // Check for valid locations
     $locations = get_field('clinical_resource_locations');
     $location_valid = false;
-    if ( !empty($locations) ) {
+    if( !empty($locations) ) {
         foreach( $locations as $location ) {
             if ( get_post_status ( $location ) == 'publish' ) {
                 $location_valid = true;
@@ -79,7 +79,6 @@
         $location = '';
         $location_label = $location_count > 1 ? 'Locations' : 'Location';
     }
-    
 
     // Check for valid conditions
     $conditions = get_field('clinical_resource_conditions');
@@ -103,7 +102,6 @@
         $condition_label = $condition_count > 1 ? 'Conditions' : 'Condition';
     }
 
-
     // Check for valid treatments
     $treatments = get_field('clinical_resource_treatments');
     $treatment_valid = false;
@@ -126,7 +124,6 @@
         $treatment_label = $treatment_count > 1 ? 'Treatments/Procedures' : 'Treatment/Procedure';
     }
 
-
     // Check for valid areas of expertise
     $expertises = get_field('clinical_resource_aoe');
     $expertise_valid = false;
@@ -148,7 +145,6 @@
         $expertise = '';
         $expertise_label = $expertise_count > 1 ? 'Areas of Expertise' : 'Area of Expertise';
     }
-
 
     if ( $resource_page == 'archive' ) { ?>
         <div class="col item-container">
