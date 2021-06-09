@@ -8,6 +8,8 @@
      *      $resource_query
      *      $resource_postsPerPage
      *      $resource_more_suppress
+     *      $resource_more_key
+     *      $resource_more_value
      *      $resource_heading_related_pre
      *      $resource_heading_related_post
      *      $resource_heading_related_name
@@ -23,7 +25,7 @@
         $resource_heading = $resource_heading . ' Related to ' . $resource_heading_related_name;
     }
     $resource_count = count($resources);
-    $resource_more = ( $resource_postsPerPage != -1 && $resource_count > $resource_postsPerPage ) ? true : false;
+    $resource_more = ( $resource_postsPerPage != -1 && $resource_count > $resource_postsPerPage && ( $resource_more_key && !empty($resource_more_key) && $resource_more_value && !empty($resource_more_value) ) ) ? true : false;
     if ( $resource_more_suppress ) {
         $resource_more = false;
     }
@@ -33,7 +35,7 @@
         $resource_layout = 'card';
     }
     $more_text = 'Want to find more resources related to ' . $resource_heading_related_name . '?';
-    $more_button_url = '/clinical-resource/';
+    $more_button_url = '/clinical-resource/?' . $resource_more_key . '=' . $resource_more_value;
     $more_button_description = 'View the full list of clinical resources related to ' . $resource_heading_related_name;
     $more_button_description_attr = str_replace('"', '\'', $more_button_description);
     $more_button_description_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($more_button_description_attr, null, 'utf-8')));

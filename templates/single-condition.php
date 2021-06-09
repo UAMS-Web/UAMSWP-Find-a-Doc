@@ -507,6 +507,8 @@
 			$resource_heading_related_post = true; // "Resources Related to __"
 			$resource_heading_related_name = get_the_title(); // To what is it related?
 			$resource_more_suppress = false; // Force div.more to not display
+			$resource_more_key = 'fwp_resource_conditions';
+			$resource_more_value = get_the_ID();
 			if( $show_related_resource_section ) {
 				include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
 			}
