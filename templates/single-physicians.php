@@ -65,10 +65,12 @@ $eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$po
 // Check for valid locations
 $locations = get_field('physician_locations',$post->ID);
 $location_valid = false;
-foreach( $locations as $location ) {
-    if ( get_post_status ( $location ) == 'publish' ) {
-        $location_valid = true;
-        $break;
+if ( !empty($locations) ) {
+    foreach( $locations as $location ) {
+        if ( get_post_status ( $location ) == 'publish' ) {
+            $location_valid = true;
+            $break;
+        }
     }
 }
 // Get number of valid locations
