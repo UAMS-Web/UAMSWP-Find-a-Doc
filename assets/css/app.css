@@ -1048,7 +1048,9 @@
 }
 
 .doctor-list .facetwp-type-fselect .fs-dropdown,
-.doctor-list .facetwp-type-fselect .fs-wrap {
+.doctor-list .facetwp-type-fselect .fs-wrap,
+.resource-list .facetwp-type-fselect .fs-dropdown,
+.resource-list .facetwp-type-fselect .fs-wrap {
   width: 285px;
 }
 
