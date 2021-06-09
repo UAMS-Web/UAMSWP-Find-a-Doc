@@ -59,86 +59,91 @@
     // Check for valid locations
     $locations = get_field('clinical_resource_locations');
     $location_valid = false;
-    foreach( $locations as $location ) {
-        if ( get_post_status ( $location ) == 'publish' ) {
-            $location_valid = true;
-            $break;
-        } // endif
-    } // endforeach;
-    $location = '';
-    // Count published locations
-    $location_count = 0;
-    foreach( $locations as $location) {
-        if ( get_post_status ( $location ) == 'publish' ) {
-            $location_count++;
-        } // endif
-    } // endforeach;
-    $location = '';
-    $location_label = $location_count > 1 ? 'Locations' : 'Location';
-    
+    if( !empty($locations) ) {
+        foreach( $locations as $location ) {
+            if ( get_post_status ( $location ) == 'publish' ) {
+                $location_valid = true;
+                $break;
+            } // endif
+        } // endforeach;
+        $location = '';
+        // Count published locations
+        $location_count = 0;
+        foreach( $locations as $location) {
+            if ( get_post_status ( $location ) == 'publish' ) {
+                $location_count++;
+            } // endif
+        } // endforeach;
+        $location = '';
+        $location_label = $location_count > 1 ? 'Locations' : 'Location';
+    }
 
     // Check for valid conditions
     $conditions = get_field('clinical_resource_conditions');
     $condition_valid = false;
-    foreach( $conditions as $condition ) {
-        if ( get_post_status ( $condition ) == 'publish' ) {
-            $condition_valid = true;
-            $break;
-        } // endif
-    } // endforeach;
-    $condition = '';
-    // Count published conditions
-    $condition_count = 0;
-    foreach( $conditions as $condition) {
-        if ( get_post_status ( $condition ) == 'publish' ) {
-            $condition_count++;
-        } // endif
-    } // endforeach;
-    $condition = '';
-    $condition_label = $condition_count > 1 ? 'Conditions' : 'Condition';
-    
+    if ( !empty($conditions) ) {
+        foreach( $conditions as $condition ) {
+            if ( get_post_status ( $condition ) == 'publish' ) {
+                $condition_valid = true;
+                $break;
+            } // endif
+        } // endforeach;
+        $condition = '';
+        // Count published conditions
+        $condition_count = 0;
+        foreach( $conditions as $condition) {
+            if ( get_post_status ( $condition ) == 'publish' ) {
+                $condition_count++;
+            } // endif
+        } // endforeach;
+        $condition = '';
+        $condition_label = $condition_count > 1 ? 'Conditions' : 'Condition';
+    }
 
     // Check for valid treatments
     $treatments = get_field('clinical_resource_treatments');
     $treatment_valid = false;
-    foreach( $treatments as $treatment ) {
-        if ( get_post_status ( $treatment ) == 'publish' ) {
-            $treatment_valid = true;
-            $break;
-        } // endif
-    } // endforeach;
-    $treatment = '';
-    // Count published treatments
-    $treatment_count = 0;
-    foreach( $treatments as $treatment) {
-        if ( get_post_status ( $treatment ) == 'publish' ) {
-            $treatment_count++;
-        } // endif
-    } // endforeach;
-    $treatment = '';
-    $treatment_label = $treatment_count > 1 ? 'Treatments/Procedures' : 'Treatment/Procedure';
+        if ( !empty($treatments) ){
+        foreach( $treatments as $treatment ) {
+            if ( get_post_status ( $treatment ) == 'publish' ) {
+                $treatment_valid = true;
+                $break;
+            } // endif
+        } // endforeach;
+        $treatment = '';
+        // Count published treatments
+        $treatment_count = 0;
+        foreach( $treatments as $treatment) {
+            if ( get_post_status ( $treatment ) == 'publish' ) {
+                $treatment_count++;
+            } // endif
+        } // endforeach;
+        $treatment = '';
+        $treatment_label = $treatment_count > 1 ? 'Treatments/Procedures' : 'Treatment/Procedure';
+    }
     
 
     // Check for valid areas of expertise
     $expertises = get_field('clinical_resource_aoe');
     $expertise_valid = false;
-    foreach( $expertises as $expertise ) {
-        if ( get_post_status ( $expertise ) == 'publish' ) {
-            $expertise_valid = true;
-            $break;
-        } // endif
-    } // endforeach;
-    $expertise = '';
-    // Count areas of expertise
-    $expertise_count = 0;
-    foreach( $expertises as $expertise) {
-        if ( get_post_status ( $expertise ) == 'publish' ) {
-            $expertise_count++;
-        } // endif
-    } // endforeach;
-    $expertise = '';
-    $expertise_label = $expertise_count > 1 ? 'Areas of Expertise' : 'Area of Expertise';
-
+    if ( !empty($expertises) ){
+        foreach( $expertises as $expertise ) {
+            if ( get_post_status ( $expertise ) == 'publish' ) {
+                $expertise_valid = true;
+                $break;
+            } // endif
+        } // endforeach;
+        $expertise = '';
+        // Count areas of expertise
+        $expertise_count = 0;
+        foreach( $expertises as $expertise) {
+            if ( get_post_status ( $expertise ) == 'publish' ) {
+                $expertise_count++;
+            } // endif
+        } // endforeach;
+        $expertise = '';
+        $expertise_label = $expertise_count > 1 ? 'Areas of Expertise' : 'Area of Expertise';
+    }
 
     if ( $resource_page == 'archive' ) { ?>
         <div class="col item-container">
