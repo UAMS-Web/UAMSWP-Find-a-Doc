@@ -519,7 +519,7 @@ while ( have_posts() ) : the_post(); ?>
 			);
 			$children = New WP_Query ( $args );
 		}
-		if ( $children && $children->have_posts() ) {
+		if ( isset($children) && $children->have_posts() ) {
             $show_child_locations_section = true;
             $jump_link_count++;
         } else {
