@@ -313,8 +313,8 @@ while ( have_posts() ) : the_post();
     $resource_more = false;
     $args = (array(
         'post_type' => "clinical-resource",
-        'order' => 'ASC',
-        'orderby' => 'title',
+        'order' => 'DESC',
+        'orderby' => 'post_date',
         'posts_per_page' => $resource_postsPerPage,
         'post_status' => 'publish',
         'post__in'	=> $resources
