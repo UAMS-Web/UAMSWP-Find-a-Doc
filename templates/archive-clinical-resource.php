@@ -30,6 +30,7 @@ get_header();
                 <fieldset>
                     <legend class="sr-only">Filter by...</legend>
                     <div class="fwp-filter"><?php echo facetwp_display( 'facet', 'resource_provider' ); ?></div>
+                    <div class="fwp-filter"><?php echo facetwp_display( 'facet', 'resource_locations' ); ?></div>
                     <div class="fwp-filter"><?php echo facetwp_display( 'facet', 'resource_type' ); ?></div>
                     <div class="fwp-filter"><?php echo facetwp_display( 'facet', 'resource_aoe' ); ?></div>
                     <div class="fwp-filter"><?php echo facetwp_display( 'facet', 'resource_conditions' ); ?></div>
