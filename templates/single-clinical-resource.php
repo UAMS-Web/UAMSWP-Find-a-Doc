@@ -56,7 +56,6 @@ add_action( 'genesis_entry_content', 'uamswp_resource_text', 8 );
 add_action( 'genesis_entry_content', 'uamswp_resource_infographic', 10 );
 add_action( 'genesis_entry_content', 'uamswp_resource_video', 12 );
 add_action( 'genesis_entry_content', 'uamswp_resource_document', 14 );
-add_action( 'genesis_entry_content', 'uamswp_resource_nci', 16 );
 add_action( 'genesis_after_entry', 'uamswp_resource_jump_links', 8 );
 add_action( 'genesis_after_entry', 'uamswp_resource_associated', 10 );
 add_action( 'genesis_after_entry', 'uamswp_resource_conditions_cpt', 12 );
