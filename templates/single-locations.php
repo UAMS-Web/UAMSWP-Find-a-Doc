@@ -430,7 +430,7 @@ while ( have_posts() ) : the_post(); ?>
 			);
 			$physicians_query = New WP_Query( $args );
 		}
-		if ( $physicians_query && $physicians_query->have_posts() ) {
+		if ( isset($physicians_query) && $physicians_query->have_posts() ) {
 			$show_providers_section = true;
 			$jump_link_count++;
 		} else {
