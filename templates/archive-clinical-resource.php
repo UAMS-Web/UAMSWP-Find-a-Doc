@@ -52,6 +52,9 @@ get_header();
                         <!-- When button is active, add "active" class. -->
                         <button title="Toggle Filter Tray" class="filter-toggle"><span class="sr-only">Toggle Filter Tray</span><span class="fas fa-filter"></span></button>
                     </div>
+					<div class="col sort-select">
+						<?php echo facetwp_display( 'sort' ); ?>
+					</div>
                 </div>
                 <?php echo facetwp_display( 'template', 'clinical_resources' ); ?>
                 <?php //get_template_part( 'templates/physician-loop' ); ?>
