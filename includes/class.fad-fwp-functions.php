@@ -193,7 +193,59 @@ add_filter( 'facetwp_sort_options', function( $options, $params ) {
 		);
         unset( $options['date_desc'] );
         unset( $options['date_asc'] );
-	}
+	} elseif ( is_post_type_archive( 'clinical-resource' ) || is_singular( 'clinical-resource' ) ) {
+        $params = array(
+           'template_name' => 'clinical-resources',
+       );
+       $options = [
+            'default' => [
+                'label' => __( 'Sort by', 'fwp' ),
+                'query_args' => []
+            ],
+            'date_desc' => [
+                'label' => __( 'Date Published (Newest)', 'fwp' ),
+                'query_args' => [
+                    'orderby' => 'date',
+                    'order' => 'DESC',
+                ]
+            ],
+            'date_asc' => [
+                'label' => __( 'Date Published (Oldest)', 'fwp' ),
+                'query_args' => [
+                    'orderby' => 'date',
+                    'order' => 'ASC',
+                ]
+            ],
+            'modified_desc' => [
+                'label' => __( 'Date Modified (Newest)', 'fwp' ),
+                'query_args' => [
+                    'orderby' => 'modified',
+                    'order' => 'DESC',
+                ]
+            ],
+            'modified_asc' => [
+                'label' => __( 'Date Modified (Oldest)', 'fwp' ),
+                'query_args' => [
+                    'orderby' => 'modified',
+                    'order' => 'ASC',
+                ]
+            ],
+            'title_asc' => [
+                'label' => __( 'Title (A-Z)', 'fwp' ),
+                'query_args' => [
+                    'orderby' => 'title',
+                    'order' => 'ASC',
+                ]
+            ],
+            'title_desc' => [
+                'label' => __( 'Title (Z-A)', 'fwp' ),
+                'query_args' => [
+                    'orderby' => 'title',
+                    'order' => 'DESC',
+                ]
+            ]
+        ];
+   }
     //);
     // unset( $options['date_desc'] );
     // unset( $options['date_asc'] );
