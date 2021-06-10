@@ -167,26 +167,28 @@ add_filter( 'facetwp_sort_options', function( $options, $params ) {
 		$params = array(
 		    'template_name' => 'physicians',
 		);
-	    $options['name_asc'] = array(
-	        'label' => __( 'Name (A-Z)', 'fwp' ),
-	        'query_args' => array(
-	            'orderby' => 'meta_value',
-				'meta_key' => 'physician_full_name',
-				'order' => 'ASC',
-	        )
-	    );
-	    $options['name_desc'] = array(
-	        'label' => __( 'Name (Z-A)', 'fwp' ),
-	        'query_args' => array(
-	            'orderby' => 'meta_value',
-				'meta_key' => 'physician_full_name',
-	            'order' => 'DESC',
-	        )
-	    );
-	    unset( $options['title_asc'] );
-     	unset( $options['title_desc'] );
-        unset( $options['date_desc'] );
-        unset( $options['date_asc'] );
+        $options = [
+            'default' => [
+                'label' => __( 'Sort by', 'fwp' ),
+                'query_args' => []
+            ],
+            'title_asc' => [
+                'label' => __( 'Name (A-Z)', 'fwp' ),
+                'query_args' => [
+                    'orderby' => 'meta_value',
+                    'meta_key' => 'physician_full_name',
+                    'order' => 'ASC',
+                ]
+            ],
+            'title_desc' => [
+                'label' => __( 'Name (Z-A)', 'fwp' ),
+                'query_args' => [
+                    'orderby' => 'meta_value',
+                    'meta_key' => 'physician_full_name',
+                    'order' => 'DESC',
+                ]
+            ]
+        ];
 	} elseif ( is_post_type_archive( 'location' ) || is_singular( 'location' ) ) {
 	 	$params = array(
 		    'template_name' => 'locations',
@@ -196,8 +198,8 @@ add_filter( 'facetwp_sort_options', function( $options, $params ) {
 	} elseif ( is_post_type_archive( 'clinical-resource' ) || is_singular( 'clinical-resource' ) ) {
         $params = array(
            'template_name' => 'clinical-resources',
-       );
-       $options = [
+        );
+        $options = [
             'default' => [
                 'label' => __( 'Sort by', 'fwp' ),
                 'query_args' => []
