@@ -165,7 +165,7 @@
         .list-col-header {
             display: flex;
             flex-wrap: nowrap;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: ($spacer * 2);
 
             .col {
