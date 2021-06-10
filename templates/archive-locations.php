@@ -13,7 +13,7 @@ get_header();
  ?>
 
 <div class="content-sidebar-wrap">
-    <main class="container-fluid doctor-list" id="genesis-content">
+    <main class="container-fluid location-list" id="genesis-content">
         <h1 class="sr-only" itemprop="headline">Locations</h1>
         <div class="row">
             <div class="col-12 col-sm filter-col collapse">
