@@ -42,7 +42,21 @@ add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
 function fwp_facet_scripts() {
     $classes = get_body_class();
 
-	if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) ) {
+	if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) || is_post_type_archive( 'clinical-resource' ) ) { ?>
+        <script>
+            (function($) {
+                $(document).on('facetwp-loaded', function() {
+                    if (FWP.loaded) {
+                        $('html, body').animate({
+                            scrollTop: $('main').offset().top
+                        }, 500);
+                    }
+                });
+            })(jQuery);
+        </script>
+<?php }
+
+    if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) ) {
     $taxonomy_slug = isset(get_queried_object()->slug) ? get_queried_object()->slug : '';
 ?>
 <script>
@@ -93,11 +107,6 @@ function fwp_facet_scripts() {
 	        	$('.facetwp-facet-condition_checkbox .facetwp-checkbox[data-value="<?php echo $taxonomy_slug; ?>"]').click();
 				$('.condition-filter').hide();
 			}
-        }
-        if (FWP.loaded) {
-            $('html, body').animate({
-                scrollTop: $('main').offset().top
-            }, 500);
         }
     });
     $(document).on('facetwp-refresh', function() {
@@ -342,7 +351,7 @@ add_filter( 'facetwp_index_row', function( $params, $class ) {
 // Turn on FWP Accessibility features
 add_filter( 'facetwp_assets', function( $assets ) {
     $assets['accessibility.js'] = FACETWP_URL . '/assets/js/src/accessibility.js';
-    if ( !is_post_type_archive( 'provider' ) && !is_post_type_archive( 'location' ) ) {
+    if ( !is_post_type_archive( 'provider' ) && !is_post_type_archive( 'location' ) && !is_post_type_archive( 'clinical-resource' ) ) {
         $assets['fwp-pager-scroll.js'] = UAMS_FAD_ROOT_URL . 'assets/js/fwp-pager-scroll.js';
     }
     return $assets;
