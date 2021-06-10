@@ -185,14 +185,18 @@ add_filter( 'facetwp_sort_options', function( $options, $params ) {
 	    );
 	    unset( $options['title_asc'] );
      	unset( $options['title_desc'] );
-	 } elseif ( is_post_type_archive( 'location' ) || is_singular( 'location' ) ) {
+        unset( $options['date_desc'] );
+        unset( $options['date_asc'] );
+	} elseif ( is_post_type_archive( 'location' ) || is_singular( 'location' ) ) {
 	 	$params = array(
 		    'template_name' => 'locations',
 		);
-	 }
+        unset( $options['date_desc'] );
+        unset( $options['date_asc'] );
+	}
     //);
-     unset( $options['date_desc'] );
-     unset( $options['date_asc'] );
+    // unset( $options['date_desc'] );
+    // unset( $options['date_asc'] );
     return $options;
 }, 10, 2 );
 
