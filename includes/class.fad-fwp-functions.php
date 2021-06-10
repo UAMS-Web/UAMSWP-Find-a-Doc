@@ -193,8 +193,26 @@ add_filter( 'facetwp_sort_options', function( $options, $params ) {
 	 	$params = array(
 		    'template_name' => 'locations',
 		);
-        unset( $options['date_desc'] );
-        unset( $options['date_asc'] );
+        $options = [
+            'default' => [
+                'label' => __( 'Sort by', 'fwp' ),
+                'query_args' => []
+            ],
+            'title_asc' => [
+                'label' => __( 'Name (A-Z)', 'fwp' ),
+                'query_args' => [
+                    'orderby' => 'title',
+                    'order' => 'ASC',
+                ]
+            ],
+            'title_desc' => [
+                'label' => __( 'Name (Z-A)', 'fwp' ),
+                'query_args' => [
+                    'orderby' => 'title',
+                    'order' => 'DESC',
+                ]
+            ]
+        ];
 	} elseif ( is_post_type_archive( 'clinical-resource' ) || is_singular( 'clinical-resource' ) ) {
         $params = array(
            'template_name' => 'clinical-resources',
