@@ -203,14 +203,14 @@ add_filter( 'facetwp_sort_options', function( $options, $params ) {
                 'query_args' => []
             ],
             'date_desc' => [
-                'label' => __( 'Date Published (Newest)', 'fwp' ),
+                'label' => __( 'Date Added (Newest)', 'fwp' ),
                 'query_args' => [
                     'orderby' => 'date',
                     'order' => 'DESC',
                 ]
             ],
             'date_asc' => [
-                'label' => __( 'Date Published (Oldest)', 'fwp' ),
+                'label' => __( 'Date Added (Oldest)', 'fwp' ),
                 'query_args' => [
                     'orderby' => 'date',
                     'order' => 'ASC',
