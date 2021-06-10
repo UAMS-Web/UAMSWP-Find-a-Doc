@@ -47,7 +47,10 @@ get_header();
             <div class="col-12 col-sm list-col">
                 <h2 class="module-title sr-only">List of Clinical Resources</h2>
                 <div class="row list-col-header">
-                    <div class="col result-count"><?php echo facetwp_display( 'counts' ); ?> Clinical Resources</div>
+                    <div class="col result-count">
+                        <span><?php echo facetwp_display( 'counts' ); ?> Clinical Resources</span>
+                        <span><?php echo facetwp_display( 'selections' ); ?></span>
+                    </div>
                     <div class="col filter-toggle-container">
                         <!-- When button is active, add "active" class. -->
                         <button title="Toggle Filter Tray" class="filter-toggle"><span class="sr-only">Toggle Filter Tray</span><span class="fas fa-filter"></span></button>
