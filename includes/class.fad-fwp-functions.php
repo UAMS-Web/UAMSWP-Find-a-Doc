@@ -356,6 +356,18 @@ add_filter( 'facetwp_assets', function( $assets ) {
 });
 add_filter( 'facetwp_load_a11y', '__return_true' );
 
+add_filter( 'facetwp_index_row', function( $params, $class ) {
+    if ( 'resource_provider' == $params['facet_name'] ) {
+        if ( ! empty( $params['facet_value'] ) ) {
+            $post = get_post( (int) $params['facet_value'] );
+            $post_id = $post->ID;// (int) $params['facet_value'];
+            $params['facet_value'] = $post->post_name;
+            $params['facet_display_value'] = get_field( 'physician_full_name', $post_id );
+        }
+    }
+    return $params;
+}, 10, 2 );
+
 /** Cron Indexer **/
 function fwp_cron_index() {
     FWP()->indexer->index();
