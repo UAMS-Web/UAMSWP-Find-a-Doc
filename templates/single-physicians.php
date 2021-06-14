@@ -35,13 +35,17 @@ if ( $languages ) {
 }
 
 $prefix = get_field('physician_prefix',$post->ID);
-$full_name = get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+$first_name = get_field('physician_first_name',$post->ID);
+$middle_name = get_field('physician_middle_name',$post->ID);
+$last_name = get_field('physician_last_name',$post->ID);
+$pedigree = get_field('physician_pedigree',$post->ID);
+$full_name = $first_name . ' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '') .  ( $degree_list ? ', ' . $degree_list : '' );
 $full_name_attr = str_replace('"', '\'', $full_name);
 $full_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($full_name_attr, null, 'utf-8')));
-$medium_name = ($prefix ? $prefix .' ' : '') . get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID);
+$medium_name = ($prefix ? $prefix .' ' : '') . $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name;
 $medium_name_attr = str_replace('"', '\'', $medium_name);
 $medium_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($medium_name_attr, null, 'utf-8')));
-$short_name = $prefix ? $prefix .'&nbsp;' .get_field('physician_last_name',$post->ID) : get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '');
+$short_name = $prefix ? $prefix .'&nbsp;' .$last_name : $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '');
 $short_name_attr = str_replace('"', '\'', $short_name);
 $short_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($short_name_attr, null, 'utf-8')));
 $excerpt = get_field('physician_short_clinical_bio',$post->ID);
