@@ -32,6 +32,14 @@ function fwp_disable_auto_refresh() {
 			}
 		});
 	})(jQuery);
+    (function($) {
+        $(document).on('change', '.facetwp-sort .facetwp-sort-select', function() {
+            FWP.extras.sort = $(this).val();
+            FWP.soft_refresh = true;
+            FWP.autoload();
+            FWP.refresh();
+        });
+    })(jQuery);
 	</script>
 <?php
     }
@@ -182,20 +190,20 @@ add_filter( 'facetwp_sort_options', function( $options, $params ) {
             'title_asc' => [
                 'label' => __( 'Name (A-Z)', 'fwp' ),
                 'query_args' => [
-                    'orderby' => 'meta_value',
-                    'meta_key' => 'physician_full_name',
+                    'orderby' => 'title',
                     'order' => 'ASC',
                 ]
             ],
             'title_desc' => [
                 'label' => __( 'Name (Z-A)', 'fwp' ),
                 'query_args' => [
-                    'orderby' => 'meta_value',
-                    'meta_key' => 'physician_full_name',
+                    'orderby' => 'title',
                     'order' => 'DESC',
                 ]
             ]
         ];
+        unset( $options['date_desc'] );
+        unset( $options['date_asc'] );
 	} elseif ( is_post_type_archive( 'location' ) || is_singular( 'location' ) ) {
 	 	$params = array(
 		    'template_name' => 'locations',
@@ -220,6 +228,8 @@ add_filter( 'facetwp_sort_options', function( $options, $params ) {
                 ]
             ]
         ];
+        unset( $options['date_desc'] );
+        unset( $options['date_asc'] );
 	} elseif ( is_post_type_archive( 'clinical-resource' ) || is_singular( 'clinical-resource' ) ) {
         $params = array(
            'template_name' => 'clinical-resources',
