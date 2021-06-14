@@ -360,8 +360,8 @@ add_filter( 'facetwp_index_row', function( $params, $class ) {
     if ( 'resource_provider' == $params['facet_name'] ) {
         if ( ! empty( $params['facet_value'] ) ) {
             $post = get_post( (int) $params['facet_value'] );
-            $post_id = $post->ID;// (int) $params['facet_value'];
-            $params['facet_value'] = $post->post_name;
+            $post_id = $post->ID;
+            $params['facet_value'] = sanitize_title_with_dashes( $post->post_title ); //$post->post_name;
             $params['facet_display_value'] = get_field( 'physician_full_name', $post_id );
         }
     }
