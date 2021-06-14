@@ -361,8 +361,19 @@ add_filter( 'facetwp_index_row', function( $params, $class ) {
         if ( ! empty( $params['facet_value'] ) ) {
             $post = get_post( (int) $params['facet_value'] );
             $post_id = $post->ID;
-            $params['facet_value'] = sanitize_title_with_dashes( $post->post_title ); //$post->post_name;
+            $lastname = get_field( 'physician_last_name', $post_id );
+            $firstname = get_field( 'physician_first_name', $post_id );
+            $middlename = get_field( 'physician_middle_name', $post_id );
+            $params['facet_value'] = sanitize_title_with_dashes( $lastname . ' ' . $firstname . ' ' . $middlename ); //$post->post_name;
             $params['facet_display_value'] = get_field( 'physician_full_name', $post_id );
+        }
+    } elseif ( 'resource_locations' == $params['facet_name'] ||
+               'resource_aoe' == $params['facet_name'] || 
+               'resource_conditions' == $params['facet_name'] || 
+               'resource_treatments' == $params['facet_name'] ) { 
+        if ( ! empty( $params['facet_value'] ) ) {
+            $post = get_post( (int) $params['facet_value'] );
+            $params['facet_value'] = $post->post_name;
         }
     }
     return $params;
