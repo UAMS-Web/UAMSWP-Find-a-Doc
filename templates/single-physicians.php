@@ -48,6 +48,8 @@ $medium_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($
 $short_name = $prefix ? $prefix .'&nbsp;' .$last_name : $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '');
 $short_name_attr = str_replace('"', '\'', $short_name);
 $short_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($short_name_attr, null, 'utf-8')));
+$sort_name = $last_name . ', ' . $first_name . ' ' . $middle_name;
+$sort_name_param_value = sanitize_title_with_dashes($sort_name);
 $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 $resident = get_field('physician_resident',$post->ID);
 $resident_title_name = 'Resident Physician';
@@ -843,7 +845,7 @@ while ( have_posts() ) : the_post();
         $resource_heading_related_name = $short_name; // To what is it related?
         $resource_more_suppress = false; // Force div.more to not display
         $resource_more_key = '_resource_provider';
-        $resource_more_value = get_the_ID();
+        $resource_more_value = $sort_name_param_value;
         if( $show_related_resource_section ) {
             include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
         }
