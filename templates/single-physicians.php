@@ -37,15 +37,21 @@ if ( $languages ) {
 }
 
 $prefix = get_field('physician_prefix',$post->ID);
-$full_name = get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+$first_name = get_field('physician_first_name',$post->ID);
+$middle_name = get_field('physician_middle_name',$post->ID);
+$last_name = get_field('physician_last_name',$post->ID);
+$pedigree = get_field('physician_pedigree',$post->ID);
+$full_name = $first_name . ' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '') .  ( $degree_list ? ', ' . $degree_list : '' );
 $full_name_attr = str_replace('"', '\'', $full_name);
 $full_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($full_name_attr, null, 'utf-8')));
-$medium_name = ($prefix ? $prefix .' ' : '') . get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID);
+$medium_name = ($prefix ? $prefix .' ' : '') . $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name;
 $medium_name_attr = str_replace('"', '\'', $medium_name);
 $medium_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($medium_name_attr, null, 'utf-8')));
-$short_name = $prefix ? $prefix .'&nbsp;' .get_field('physician_last_name',$post->ID) : get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '');
+$short_name = $prefix ? $prefix .'&nbsp;' .$last_name : $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '');
 $short_name_attr = str_replace('"', '\'', $short_name);
 $short_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($short_name_attr, null, 'utf-8')));
+$sort_name = $last_name . ', ' . $first_name . ' ' . $middle_name;
+$sort_name_param_value = sanitize_title_with_dashes($sort_name);
 $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 $resident = get_field('physician_resident',$post->ID);
 $resident_title_name = 'Resident Physician';
@@ -843,7 +849,7 @@ while ( have_posts() ) : the_post();
         $resource_heading_related_name = $short_name; // To what is it related?
         $resource_more_suppress = false; // Force div.more to not display
         $resource_more_key = '_resource_provider';
-        $resource_more_value = get_the_ID();
+        $resource_more_value = $sort_name_param_value;
         if( $show_related_resource_section ) {
             include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
         }

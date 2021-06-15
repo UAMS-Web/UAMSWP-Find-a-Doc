@@ -1,4 +1,5 @@
 .doctor-list,
+.location-list,
 .resource-list {
     .filter-col,
     .list-col {
@@ -164,9 +165,14 @@
 
         .list-col-header {
             display: flex;
-            flex-wrap: nowrap;
-            align-items: center;
-            margin-bottom: ($spacer * 2);
+            flex-wrap: wrap;
+            align-items: flex-start;
+            margin-bottom: ($spacer-px * 2 - $spacer-min);
+            line-height: 1;
+
+            @include media-breakpoint-up(md) {
+                flex-wrap: nowrap;
+            }
 
             .col {
                 flex-basis: auto;
@@ -174,13 +180,56 @@
                 width: auto;
             }
 
-            .result-count {
+            .result-status,
+            .filter-toggle-container,
+            .sort-select {
+                margin-bottom: $spacer-min;
+            }
+
+            .result-status {
                 margin-right: auto;
 
-                p {
+                .result-count,
+                .facetwp-selections,
+                .facetwp-selections ul {
+                    display: inline-block;
                     margin: 0;
+                    padding: 0;
+                }
+
+                .result-count {
                     font-weight: $font-weight-medium;
-                    @include font-size($lead-font-size);
+                    margin-right: $spacer-min / 2;
+                    margin-bottom: $spacer-min;
+                    padding: 0.5em 0 0;
+                    white-space: nowrap;
+                }
+
+                .facetwp-selections {
+                    margin: -$spacer-min / 2;
+
+                    &:empty {
+                        display: none;
+                    }
+
+                    li {
+                        background-color: $gray-300;
+                        margin: $spacer-min / 2;
+                        padding: 0.5em;
+                        border-radius: 1em;
+
+                        .facetwp-selection-label {
+                            font-weight: $font-weight-medium;
+                        }
+                    }
+
+                    .facetwp-selection-value {
+                        margin-right: 0;
+
+                        &:nth-child(n+3) {
+                            margin-left: $spacer-min;
+                        }
+                    }
                 }
             }
 
@@ -222,8 +271,15 @@
             }
 
             .sort-select {
+                @include media-breakpoint-down(xs) {
+                    flex-basis: 100%;
+                }
 
+                .facetwp-sort-select {
+                    padding: 0.2778em;
+                }
             }
+
             .custom-select {
                 width: auto;
             }
