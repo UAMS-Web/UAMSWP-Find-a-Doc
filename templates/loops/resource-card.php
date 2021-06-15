@@ -422,7 +422,7 @@
                     <?php } ?>
                 </div>
                 <div class="card-body">
-                    <h3 class="card-title h5"><?php echo $resource_title; ?></h3>
+                    <h3 class="card-title h5"><?php echo $resource_title; ?> <span class="subtitle"><span class="sr-only">(</span><?php echo esc_html($resource_type_label); ?><span class="sr-only">)</span></span></h3>
                     <p class="card-text"><?php echo $resource_excerpt; ?></p>
                     <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary stretched-link" aria-label="<?php echo $resource_label; ?>" data-itemtitle="<?php echo $resource_title_attr; ?>">View Clinical Resource</a>
                 </div>
