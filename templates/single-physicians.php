@@ -96,6 +96,27 @@ if( $locations && $location_valid ) {
     } // endforeach
 }
 
+// Hide Sections
+$hide_medical_ontology = false;
+$provider_region = get_field('physician_region',$post->ID);
+$provider_service_line = get_field('physician_service_line',$post->ID);
+if( have_rows('removal_criteria', 'option') ):
+    while( have_rows('removal_criteria', 'option') ): the_row();
+        $remove_region = get_sub_field('remove_regions', 'option');
+        $remove_service_line = get_sub_field('remove_service_lines', 'option');
+        if ( (!empty($remove_region) && in_array($provider_region, $remove_region)) && empty($remove_service_line) ) { 
+            $hide_medical_ontology = true;
+            break;
+        } elseif ( empty($remove_region) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
+            $hide_medical_ontology = true;
+            break;
+        } elseif( (!empty($remove_region) && in_array($provider_region, $remove_region)) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
+            $hide_medical_ontology = true;
+            break;
+        }
+    endwhile;
+endif;
+
 // Set meta description
 if (empty($excerpt)){
     if ($bio){
@@ -351,7 +372,7 @@ while ( have_posts() ) : the_post();
         }
 
         // Check if Conditions section should be displayed
-        if ( $conditions_cpt && $conditions_cpt_query->posts ) {
+        if ( $conditions_cpt && $conditions_cpt_query->posts && !$hide_medical_ontology ) {
             $show_conditions_section = true;
             $jump_link_count++;
         } else {
@@ -359,7 +380,7 @@ while ( have_posts() ) : the_post();
         }
 
         // Check if Treatments section should be displayed
-        if ( $treatments_cpt && $treatments_cpt_query->posts ) {
+        if ( $treatments_cpt && $treatments_cpt_query->posts && !$hide_medical_ontology ) {
             $show_treatments_section = true;
             $jump_link_count++;
         } else {
@@ -367,7 +388,7 @@ while ( have_posts() ) : the_post();
         }
 
         // Check if Areas of Expertise section should be displayed
-        if ( $expertise_valid ) {
+        if ( $expertise_valid && !$hide_medical_ontology ) {
             $show_aoe_section = true;
             $jump_link_count++;
         } else {
