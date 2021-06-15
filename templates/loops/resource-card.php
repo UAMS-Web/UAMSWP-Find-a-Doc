@@ -185,7 +185,7 @@
                                     <a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $resource_title_attr; ?>">
                                         <span class="name"><?php echo $resource_title; ?></span>
                                     </a>
-                                    <span class="subtitle"><?php echo esc_html($resource_type_label); ?></span>
+                                    <span class="subtitle"><span class="sr-only"> (</span><?php echo esc_html($resource_type_label); ?><span class="sr-only">)</span></span>
                                 </h3>
                                 <p><?php echo $resource_excerpt; ?></p>
                                 <a class="btn btn-primary" href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo $resource_title_attr; ?>">View Clinical Resource</a>
