@@ -100,8 +100,8 @@ if( $locations && $location_valid ) {
 $hide_medical_ontology = false;
 $provider_region = get_field('physician_region',$post->ID);
 $provider_service_line = get_field('physician_service_line',$post->ID);
-if( have_rows('removal_criteria', 'option') ):
-    while( have_rows('removal_criteria', 'option') ): the_row();
+if( have_rows('remove_ontology_criteria', 'option') ):
+    while( have_rows('remove_ontology_criteria', 'option') ): the_row();
         $remove_region = get_sub_field('remove_regions', 'option');
         $remove_service_line = get_sub_field('remove_service_lines', 'option');
         if ( (!empty($remove_region) && in_array($provider_region, $remove_region)) && empty($remove_service_line) ) { 
