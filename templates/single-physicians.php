@@ -25,10 +25,12 @@ $language_list = '';
 $i = 1;
 if ( $languages ) {
     foreach( $languages as $language ):
-        $language_name = get_term( $language, 'language');
-        $language_list .= $language_name->name;
-        if( $language_count > $i ) {
-            $language_list .= ", ";
+        $language_name = get_term_by( 'id', $language, 'language');
+        if( is_object($language_name) ) {
+            $language_list .= $language_name->name;
+            if( $language_count > $i ) {
+                $language_list .= ", ";
+            }
         }
         $i++;
     endforeach;
@@ -65,10 +67,12 @@ $eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$po
 // Check for valid locations
 $locations = get_field('physician_locations',$post->ID);
 $location_valid = false;
-foreach( $locations as $location ) {
-    if ( get_post_status ( $location ) == 'publish' ) {
-        $location_valid = true;
-        $break;
+if ( !empty($locations) ) {
+    foreach( $locations as $location ) {
+        if ( get_post_status ( $location ) == 'publish' ) {
+            $location_valid = true;
+            $break;
+        }
     }
 }
 // Get number of valid locations
