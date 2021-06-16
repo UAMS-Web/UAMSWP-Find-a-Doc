@@ -63,7 +63,10 @@ get_header();
 					If you think you are experiencing a medical emergency, call 911 immediately.
 				</div>
 				<div class="row list-col-header">
-					<div class="col result-count"><?php echo facetwp_display( 'counts' ); ?> Providers</div>
+                    <div class="col result-status">
+                        <span class="result-count"><?php echo facetwp_display( 'counts' ); ?> Providers</span>
+                        <?php echo facetwp_display( 'selections' ); ?>
+                    </div>
 					<div class="col filter-toggle-container">
 						<!-- When button is active, add "active" class. -->
 						<button title="Toggle Filter Tray" class="filter-toggle"><span class="sr-only">Toggle Filter Tray</span><span class="fas fa-filter"></span></button>
@@ -87,7 +90,7 @@ get_header();
 						});
 					})(jQuery);
 				</script>
-				<div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why-not-title" aria-hidden="true">
+				<div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why-not-title" aria-modal="true">
 					<div class="modal-dialog modal-dialog-centered" role="document">
 						<div class="modal-content">
 							<div class="modal-header">

@@ -358,6 +358,78 @@ if ( ! function_exists('treatments_cpt') ) {
 	
 }
 
+if ( ! function_exists('clinical_resources_cpt') ) {
+
+	// Register Custom Post Type
+	function clinical_resources_cpt() {
+	
+		$labels = array(
+			'name'                  => 'Clinical Resources',
+			'singular_name'         => 'Clinical Resource',
+			'menu_name'             => 'Clinical Resources',
+			'name_admin_bar'        => 'Resource',
+			'archives'              => 'Resource Archives',
+			'attributes'            => 'Resource Attributes',
+			'parent_item_colon'     => 'Parent Resource:',
+			'all_items'             => 'All Resources',
+			'add_new_item'          => 'Add New Resource',
+			'add_new'               => 'Add New',
+			'new_item'              => 'New Resource',
+			'edit_item'             => 'Edit Resource',
+			'update_item'           => 'Update Resource',
+			'view_item'             => 'View Resource',
+			'view_items'            => 'View Resources',
+			'search_items'          => 'Search Resources',
+			'uploaded_to_this_item' => 'Uploaded to this item',
+			'items_list'            => 'Resources list',
+			'items_list_navigation' => 'Resources list navigation',
+			'filter_items_list'     => 'Filter Resources list',
+		);
+		$capabilities = array(
+			'edit_post'      		=> "edit_clinical_resource",
+			'read_post'      		=> "read_clinical_resource",
+			'delete_post'        	=> "delete_clinical_resource",
+			'edit_posts'         	=> "edit_clinical_resources",
+			'edit_others_posts'  	=> "edit_others_clinical_resources",
+			'publish_posts'      	=> "publish_clinical_resources",
+			'read_private_posts'    => "read_private_clinical_resources",
+			'read'                  => "read",
+			'delete_posts'          => "delete_clinical_resources",
+			'delete_private_posts'  => "delete_private_clinical_resources",
+			'delete_published_posts' => "delete_published_clinical_resources",
+			'delete_others_posts'   => "delete_others_clinical_resources",
+			'edit_private_posts'    => "edit_private_clinical_resources",
+			'edit_published_posts'  => "edit_published_clinical_resources",
+		);
+		$args = array(
+			'label'                 => 'Resources',
+			'labels'                => $labels,
+			'supports'              => array( 'title', 'author', 'revisions','custom-fields' ),
+			'taxonomies'            => array(),
+			'hierarchical'          => false,
+			'public'                => true,
+			'show_ui'               => true,
+			'show_in_menu'          => true,
+			'menu_position'         => 30,
+			'menu_icon'             => plugin_dir_url( __FILE__ ) .'../admin/admin-icons/trl-cube.svg',
+			'show_in_admin_bar'     => true,
+			'show_in_nav_menus'     => true,
+			'can_export'            => true,
+			'has_archive'           => true,
+			'exclude_from_search'   => false,
+			'publicly_queryable'    => true,
+			'capabilities'          => $capabilities,
+			'show_in_rest'          => true,
+			'rest_base'             => 'clinical_resource',
+			'rest_controller_class' => 'WP_REST_Posts_Controller',
+		);
+		register_post_type( 'clinical-resource', $args );
+	
+	}
+	add_action( 'init', 'clinical_resources_cpt', 0 );
+	
+}
+
 /*
  *
  * Register Taxonomies

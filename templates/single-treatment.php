@@ -77,6 +77,20 @@
 
     $cta_repeater = get_field('treatment_procedure_cta');
 
+	// Clinical Resources
+	$resources =  get_field('treatment_procedure_clinical_resources');
+	$resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
+	$resource_more = false;
+	$args = (array(
+		'post_type' => "clinical-resource",
+		'order' => 'DESC',
+        'orderby' => 'post_date',
+		'posts_per_page' => $resource_postsPerPage,
+		'post_status' => 'publish',
+		'post__in'	=> $resources
+	));
+	$resource_query = new WP_Query( $args );
+
 	// Locations Content
 	$location_content = '';
 	$args = (array(
@@ -108,7 +122,7 @@
 		$location_content .= '<div class="container-fluid">';
 		$location_content .= '<div class="row">';
 		$location_content .= '<div class="col-12">';
-		$location_content .= '<h2 class="module-title">Locations Providing ' . get_the_title() . '</h2>';
+		$location_content .= '<h2 class="module-title"><span class="title">Locations Providing ' . get_the_title() . '</span></h2>';
 		$location_content .= '<p class="note">Note that ' . get_the_title() . ' may not be <em>performed</em> at every location listed below. The list may include locations where the treatment plan is developed during and after a patient visit.</p>';
 		$location_content .= '<div class="card-list-container location-card-list-container">';
 		$location_content .= '<div class="card-list">';
@@ -151,6 +165,14 @@
         } else {
             $show_podcast_section = false;
         }
+	
+		// Check if Clinical Resources section should be displayed
+		if( $resources && $resource_query->have_posts() ) {
+			$show_related_resource_section = true;
+			$jump_link_count++;
+		} else {
+			$show_related_resource_section = false;
+		}
 
         // Check if Clinical Trials section should be displayed
         if ( !empty($clinical_trials) ) {
@@ -393,6 +415,11 @@
                                 <a class="nav-link" href="#podcast" title="Jump to the section of this page about UAMS Health Talk Podcast">Podcast</a>
                             </li>
                         <?php } ?>
+                        <?php if ( $show_related_resource_section ) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#resources" title="Jump to the section of this page about Resources">Resources</a>
+                            </li>
+                        <?php } ?>
                         <?php if ( $show_clinical_trials_section ) { ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="#clinical-trials" title="Jump to the section of this page about Clinical Trials">Clinical Trials</a>
@@ -463,20 +490,24 @@
             </section>
         <?php }
 		// End UAMS Health Talk Podcast Section
+
+		// Begin Clinical Resources Section
+		$resource_heading_related_pre = false; // "Related Resources"
+		$resource_heading_related_post = true; // "Resources Related to __"
+		$resource_heading_related_name = get_the_title(); // To what is it related?
+		$resource_more_suppress = false; // Force div.more to not display
+        $resource_more_key = '_resource_treatments';
+        $resource_more_value = $post->post_name;
+		if( $show_related_resource_section ) {
+			include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
+		}
+		// End Clinical Resources Section
 		
 		// Begin Clinical Trials Section
-		if ( $show_clinical_trials_section ) { ?>
-			<section class="uams-module cta-bar cta-bar-1 bg-auto" id="clinical-trials">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-xs-12">
-							<h2>Clinical Trials</h2>
-							<p><a href="https://uams.trialstoday.org/" aria-label="Search UAMS Clinical Trials">Search our clinical trials</a> for those related to <?php echo get_the_title(); ?>.</p>
-						</div>
-					</div>
-				</div>
-			</section>
-		<?php } // endif
+		if ( $show_clinical_trials_section ) {
+			$clinical_trial_title = get_the_title();
+			include( UAMS_FAD_PATH . '/templates/blocks/clinical-trials.php' );
+		} // endif
 		// End Clinical Trials Section
 		
 		// Begin Conditions Section
@@ -485,7 +516,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-xs-12">
-							<h2 class="module-title">Conditions Related to <?php echo get_the_title(); ?></h2>
+							<h2 class="module-title"><span class="title">Conditions Related to <?php echo get_the_title(); ?></span></h2>
 							<p class="note">UAMS providers care for a broad range of conditions, some of which may not be listed below.</p>
 							<div class="list-container list-container-rows">
 								<ul class="list">
@@ -516,7 +547,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-						<h2 class="module-title">Providers Performing <?php echo get_the_title(); ?></h2>
+						<h2 class="module-title"><span class="title">Providers Performing <?php echo get_the_title(); ?></span></h2>
 						<p class="note">Note that every provider listed below may not perform or prescribe <?php echo get_the_title(); ?> for all conditions related to it. Review each provider for availability.</p>   
 							<div class="card-list-container">
 								<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
@@ -553,7 +584,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title">Areas of Expertise for <?php echo get_the_title(); ?></h2>
+						<h2 class="module-title"><span class="title">Areas of Expertise for <?php echo get_the_title(); ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list card-list-expertise">
 							<?php 
