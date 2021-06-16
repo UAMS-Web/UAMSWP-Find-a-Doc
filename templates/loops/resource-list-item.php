@@ -12,6 +12,10 @@
     $resource_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($resource_title_attr, null, 'utf-8')));
 
     $resource_label = 'Go to the Clinical Resource page for' . $resource_title_attr;
+
+    $resource_type = get_field('clinical_resource_type', $id);
+    $resource_type_value = $resource_type['value'];
+    $resource_type_label = $resource_type['label'];
     
     $resource_excerpt = get_the_excerpt($id) ? get_the_excerpt($id) : wp_strip_all_tags( get_the_content($id) );
     $resource_excerpt_len = strlen($resource_excerpt);
@@ -22,7 +26,7 @@
 ?>
 <li class="item">
     <div class="text-container">
-        <h3 class="h5"><a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo get_permalink($resource_label); ?>"><?php echo get_the_title(); ?></a></h3>
+        <h3 class="h5"><a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo get_permalink($resource_label); ?>"><?php echo get_the_title($id); ?></a> <span class="subtitle"><span class="sr-only">(</span><?php echo esc_html($resource_type_label); ?><span class="sr-only">)</span></span></h3>
         <p><?php echo $resource_excerpt; ?></p>
     </div>
 </li>

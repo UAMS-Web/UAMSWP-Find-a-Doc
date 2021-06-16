@@ -36,114 +36,114 @@
     
 
     // Check for valid providers
-    $providers = get_field('clinical_resource_providers');
-    $provider_valid = false;
-    if ( !empty($providers) ) {
-        foreach( $providers as $provider ) {
-            if ( get_post_status ( $provider ) == 'publish' ) {
-                $provider_valid = true;
+    $resource_providers = get_field('clinical_resource_providers');
+    $resource_provider_valid = false;
+    if ( !empty($resource_providers) ) {
+        foreach( $resource_providers as $resource_provider ) {
+            if ( get_post_status ( $resource_provider ) == 'publish' ) {
+                $resource_provider_valid = true;
                 $break;
             } // endif
         } // endforeach;
-        $provider = '';
+        $resource_provider = '';
         // Count published providers
-        $provider_count = 0;
-        foreach( $providers as $provider) {
-            if ( get_post_status ( $provider ) == 'publish' ) {
-                $provider_count++;
+        $resource_provider_count = 0;
+        foreach( $resource_providers as $resource_provider) {
+            if ( get_post_status ( $resource_provider ) == 'publish' ) {
+                $resource_provider_count++;
             } // endif
         } // endforeach;
-        $provider = '';
-        $provider_label = $provider_count > 1 ? 'Providers' : 'Provider';
+        $resource_provider = '';
+        $resource_provider_label = $resource_provider_count > 1 ? 'Providers' : 'Provider';
     }
 
 
     // Check for valid locations
-    $locations = get_field('clinical_resource_locations');
-    $location_valid = false;
-    if( !empty($locations) ) {
-        foreach( $locations as $location ) {
-            if ( get_post_status ( $location ) == 'publish' ) {
-                $location_valid = true;
+    $resource_locations = get_field('clinical_resource_locations');
+    $resource_location_valid = false;
+    if( !empty($resource_locations) ) {
+        foreach( $resource_locations as $resource_location ) {
+            if ( get_post_status ( $resource_location ) == 'publish' ) {
+                $resource_location_valid = true;
                 $break;
             } // endif
         } // endforeach;
-        $location = '';
+        $resource_location = '';
         // Count published locations
-        $location_count = 0;
-        foreach( $locations as $location) {
-            if ( get_post_status ( $location ) == 'publish' ) {
-                $location_count++;
+        $resource_location_count = 0;
+        foreach( $resource_locations as $resource_location) {
+            if ( get_post_status ( $resource_location ) == 'publish' ) {
+                $resource_location_count++;
             } // endif
         } // endforeach;
-        $location = '';
-        $location_label = $location_count > 1 ? 'Locations' : 'Location';
+        $resource_location = '';
+        $resource_location_label = $resource_location_count > 1 ? 'Locations' : 'Location';
     }
 
     // Check for valid conditions
-    $conditions = get_field('clinical_resource_conditions');
-    $condition_valid = false;
-    if ( !empty($conditions) ) {
-        foreach( $conditions as $condition ) {
-            if ( get_post_status ( $condition ) == 'publish' ) {
-                $condition_valid = true;
+    $resource_conditions = get_field('clinical_resource_conditions');
+    $resource_condition_valid = false;
+    if ( !empty($resource_conditions) ) {
+        foreach( $resource_conditions as $resource_condition ) {
+            if ( get_post_status ( $resource_condition ) == 'publish' ) {
+                $resource_condition_valid = true;
                 $break;
             } // endif
         } // endforeach;
-        $condition = '';
+        $resource_condition = '';
         // Count published conditions
-        $condition_count = 0;
-        foreach( $conditions as $condition) {
-            if ( get_post_status ( $condition ) == 'publish' ) {
-                $condition_count++;
+        $resource_condition_count = 0;
+        foreach( $resource_conditions as $resource_condition) {
+            if ( get_post_status ( $resource_condition ) == 'publish' ) {
+                $resource_condition_count++;
             } // endif
         } // endforeach;
-        $condition = '';
-        $condition_label = $condition_count > 1 ? 'Conditions' : 'Condition';
+        $resource_condition = '';
+        $resource_condition_label = $resource_condition_count > 1 ? 'Conditions' : 'Condition';
     }
 
     // Check for valid treatments
-    $treatments = get_field('clinical_resource_treatments');
-    $treatment_valid = false;
-    if ( !empty($treatments) ) {
-        foreach( $treatments as $treatment ) {
-            if ( get_post_status ( $treatment ) == 'publish' ) {
-                $treatment_valid = true;
+    $resource_treatments = get_field('clinical_resource_treatments');
+    $resource_treatment_valid = false;
+    if ( !empty($resource_treatments) ) {
+        foreach( $resource_treatments as $resource_treatment ) {
+            if ( get_post_status ( $resource_treatment ) == 'publish' ) {
+                $resource_treatment_valid = true;
                 $break;
             } // endif
         } // endforeach;
-        $treatment = '';
+        $resource_treatment = '';
         // Count published treatments
-        $treatment_count = 0;
-        foreach( $treatments as $treatment) {
-            if ( get_post_status ( $treatment ) == 'publish' ) {
-                $treatment_count++;
+        $resource_treatment_count = 0;
+        foreach( $resource_treatments as $resource_treatment) {
+            if ( get_post_status ( $resource_treatment ) == 'publish' ) {
+                $resource_treatment_count++;
             } // endif
         } // endforeach;
-        $treatment = '';
-        $treatment_label = $treatment_count > 1 ? 'Treatments/Procedures' : 'Treatment/Procedure';
+        $resource_treatment = '';
+        $resource_treatment_label = $resource_treatment_count > 1 ? 'Treatments/Procedures' : 'Treatment/Procedure';
     }
 
     // Check for valid areas of expertise
-    $expertises = get_field('clinical_resource_aoe');
-    $expertise_valid = false;
-    if ( !empty($expertises) ) {
-        foreach( $expertises as $expertise ) {
-            if ( get_post_status ( $expertise ) == 'publish' ) {
-                $expertise_valid = true;
+    $resource_expertises = get_field('clinical_resource_aoe');
+    $resource_expertise_valid = false;
+    if ( !empty($resource_expertises) ) {
+        foreach( $resource_expertises as $resource_expertise ) {
+            if ( get_post_status ( $resource_expertise ) == 'publish' ) {
+                $resource_expertise_valid = true;
                 $break;
             } // endif
         } // endforeach;
-        $expertise = '';
+        $resource_expertise = '';
         // Count areas of expertise
-        $expertise_count = 0;
-        foreach( $expertises as $expertise) {
-            if ( get_post_status ( $expertise ) == 'publish' ) {
-                $expertise_count++;
+        $resource_expertise_count = 0;
+        foreach( $resource_expertises as $resource_expertise) {
+            if ( get_post_status ( $resource_expertise ) == 'publish' ) {
+                $resource_expertise_count++;
             } // endif
         } // endforeach;
-        $expertise = '';
-        $expertise_label = $expertise_count > 1 ? 'Areas of Expertise' : 'Area of Expertise';
+        $resource_expertise = '';
+        $resource_expertise_label = $resource_expertise_count > 1 ? 'Areas of Expertise' : 'Area of Expertise';
     }
 
     if ( $resource_page == 'archive' ) { ?>
@@ -185,7 +185,7 @@
                                     <a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $resource_title_attr; ?>">
                                         <span class="name"><?php echo $resource_title; ?></span>
                                     </a>
-                                    <span class="subtitle"><?php echo esc_html($resource_type_label); ?></span>
+                                    <span class="subtitle"><span class="sr-only"> (</span><?php echo esc_html($resource_type_label); ?><span class="sr-only">)</span></span>
                                 </h3>
                                 <p><?php echo $resource_excerpt; ?></p>
                                 <a class="btn btn-primary" href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo $resource_title_attr; ?>">View Clinical Resource</a>
@@ -193,13 +193,13 @@
                             <div class="col-12 secondary">
 								<h4 class="h5">Related Content</h4>
                                 <dl>
-                                    <?php if( $providers && $provider_valid ) { ?>
-                                        <dt><?php echo $provider_label; ?></dt>
+                                    <?php if( $resource_providers && $resource_provider_valid ) { ?>
+                                        <dt><?php echo $resource_provider_label; ?></dt>
                                         <dd>
                                             <?php
                                             $resource_i = 0;
-                                            $resource_count = $provider_count;
-                                            $associates = $providers;
+                                            $resource_count = $resource_provider_count;
+                                            $associates = $resource_providers;
                                             foreach( $associates as $associate) {
                                                 $provider_prefix = get_field('physician_prefix', $associate);
                                                 $provider_first_name = get_field('physician_first_name', $associate);
@@ -238,15 +238,14 @@
                                         $resource_i = 0;
                                         $resource_count = '';
                                         $associates = '';
-                                        $associates = '';
                                     ?> 
-                                    <?php if( $locations && $location_valid ) { ?>
+                                    <?php if( $resource_locations && $resource_location_valid ) { ?>
                                         <dt><?php echo $location_label; ?></dt>
                                         <dd>
                                             <?php
                                             $resource_i = 0;
-                                            $resource_count = $location_count;
-                                            $associates = $locations;
+                                            $resource_count = $resource_location_count;
+                                            $associates = $resource_locations;
                                             foreach( $associates as $associate) {
                                                 if ( get_post_status ( $associate ) == 'publish' ) {
                                                     if ( $resource_i < $resource_related_max ) {
@@ -278,15 +277,14 @@
                                         $resource_i = 0;
                                         $resource_count = '';
                                         $associates = '';
-                                        $associates = '';
                                     ?> 
-                                    <?php if( $conditions && $condition_valid ) { ?>
+                                    <?php if( $resource_conditions && $resource_condition_valid ) { ?>
                                         <dt><?php echo $condition_label; ?></dt>
                                         <dd>
                                             <?php
                                             $resource_i = 0;
-                                            $resource_count = $condition_count;
-                                            $associates = $conditions;
+                                            $resource_count = $resource_condition_count;
+                                            $associates = $resource_conditions;
                                             foreach( $associates as $associate) {
                                                 if ( get_post_status ( $associate ) == 'publish' ) {
                                                     if ( $resource_i < $resource_related_max ) {
@@ -318,15 +316,14 @@
                                         $resource_i = 0;
                                         $resource_count = '';
                                         $associates = '';
-                                        $associates = '';
                                     ?> 
-                                    <?php if( $treatments && $treatment_valid ) { ?>
+                                    <?php if( $resource_treatments && $resource_treatment_valid ) { ?>
                                         <dt><?php echo $treatment_label; ?></dt>
                                         <dd>
                                             <?php
                                             $resource_i = 0;
-                                            $resource_count = $treatment_count;
-                                            $associates = $treatments;
+                                            $resource_count = $resource_treatment_count;
+                                            $associates = $resource_treatments;
                                             foreach( $associates as $associate) {
                                                 if ( get_post_status ( $associate ) == 'publish' ) {
                                                     if ( $resource_i < $resource_related_max ) {
@@ -358,15 +355,14 @@
                                         $resource_i = 0;
                                         $resource_count = '';
                                         $associates = '';
-                                        $associates = '';
                                     ?> 
-                                    <?php if( $expertises && $expertise_valid ) { ?>
+                                    <?php if( $resource_expertises && $resource_expertise_valid ) { ?>
                                         <dt><?php echo $expertise_label; ?></dt>
                                         <dd>
                                             <?php
                                             $resource_i = 0;
-                                            $resource_count = $expertise_count;
-                                            $associates = $expertises;
+                                            $resource_count = $resource_expertise_count;
+                                            $associates = $resource_expertises;
                                             foreach( $associates as $associate) {
                                                 if ( get_post_status ( $associate ) == 'publish' ) {
                                                     if ( $resource_i < $resource_related_max ) {
@@ -397,7 +393,6 @@
                                     <?php } // endif
                                         $resource_i = 0;
                                         $resource_count = '';
-                                        $associates = '';
                                         $associates = '';
                                     ?> 
                                 </dl>
@@ -422,7 +417,7 @@
                     <?php } ?>
                 </div>
                 <div class="card-body">
-                    <h3 class="card-title h5"><?php echo $resource_title; ?></h3>
+                    <h3 class="card-title h5"><?php echo $resource_title; ?> <span class="subtitle"><span class="sr-only">(</span><?php echo esc_html($resource_type_label); ?><span class="sr-only">)</span></span></h3>
                     <p class="card-text"><?php echo $resource_excerpt; ?></p>
                     <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary stretched-link" aria-label="<?php echo $resource_label; ?>" data-itemtitle="<?php echo $resource_title_attr; ?>">View Clinical Resource</a>
                 </div>
