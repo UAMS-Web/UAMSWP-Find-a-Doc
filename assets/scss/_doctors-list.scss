@@ -229,6 +229,10 @@
                         &:nth-child(n+3) {
                             margin-left: $spacer-min;
                         }
+
+                        @include hover-focus() {
+                            text-decoration: underline;
+                        }
                     }
                 }
             }
