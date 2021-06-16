@@ -121,14 +121,14 @@
             } // endif
         } // endforeach;
         $resource_treatment = '';
-        $resource_treatment_label = $treatment_count > 1 ? 'Treatments/Procedures' : 'Treatment/Procedure';
+        $resource_treatment_label = $resource_treatment_count > 1 ? 'Treatments/Procedures' : 'Treatment/Procedure';
     }
 
     // Check for valid areas of expertise
     $resource_expertises = get_field('clinical_resource_aoe');
     $resource_expertise_valid = false;
     if ( !empty($resource_expertises) ) {
-        foreach( $resource_expertises as $expertise ) {
+        foreach( $resource_expertises as $resource_expertise ) {
             if ( get_post_status ( $resource_expertise ) == 'publish' ) {
                 $resource_expertise_valid = true;
                 $break;
@@ -240,7 +240,7 @@
                                         $associates = '';
                                     ?> 
                                     <?php if( $resource_locations && $resource_location_valid ) { ?>
-                                        <dt><?php echo $location_label; ?></dt>
+                                        <dt><?php echo $resource_location_label; ?></dt>
                                         <dd>
                                             <?php
                                             $resource_i = 0;
@@ -279,7 +279,7 @@
                                         $associates = '';
                                     ?> 
                                     <?php if( $resource_conditions && $resource_condition_valid ) { ?>
-                                        <dt><?php echo $condition_label; ?></dt>
+                                        <dt><?php echo $resource_condition_label; ?></dt>
                                         <dd>
                                             <?php
                                             $resource_i = 0;
@@ -318,7 +318,7 @@
                                         $associates = '';
                                     ?> 
                                     <?php if( $resource_treatments && $resource_treatment_valid ) { ?>
-                                        <dt><?php echo $treatment_label; ?></dt>
+                                        <dt><?php echo $resource_treatment_label; ?></dt>
                                         <dd>
                                             <?php
                                             $resource_i = 0;
@@ -357,7 +357,7 @@
                                         $associates = '';
                                     ?> 
                                     <?php if( $resource_expertises && $resource_expertise_valid ) { ?>
-                                        <dt><?php echo $expertise_label; ?></dt>
+                                        <dt><?php echo $resource_expertise_label; ?></dt>
                                         <dd>
                                             <?php
                                             $resource_i = 0;
