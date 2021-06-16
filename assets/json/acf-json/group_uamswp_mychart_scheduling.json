@@ -79,7 +79,7 @@
         },
         {
             "key": "field_mychart_scheduling_linksource",
-            "label": "Instance",
+            "label": "Link Source",
             "name": "mychart_scheduling_linksource",
             "type": "text",
             "instructions": "Defaults to \"uamshealth.com\"",
