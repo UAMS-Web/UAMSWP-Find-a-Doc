@@ -83,6 +83,21 @@
             "acfe_update": ""
         },
         {
+            "key": "field_clinical_resource_asp_filter",
+            "name": "clinical_resource_asp_filter",
+            "type": "acfe_hidden",
+            "label": "Ajax Search Filter",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": ""
+        },
+        {
             "key": "field_clinical_resource_type",
             "label": "Resource Type",
             "name": "clinical_resource_type",
