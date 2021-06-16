@@ -364,9 +364,9 @@ if ( ! function_exists('clinical_resources_cpt') ) {
 	function clinical_resources_cpt() {
 	
 		$labels = array(
-			'name'                  => 'Clinical Resource',
+			'name'                  => 'Clinical Resources',
 			'singular_name'         => 'Clinical Resource',
-			'menu_name'             => 'Clinical Resource',
+			'menu_name'             => 'Clinical Resources',
 			'name_admin_bar'        => 'Resource',
 			'archives'              => 'Resource Archives',
 			'attributes'            => 'Resource Attributes',
