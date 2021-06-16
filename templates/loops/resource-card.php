@@ -201,16 +201,16 @@
                                             $resource_count = $resource_provider_count;
                                             $associates = $resource_providers;
                                             foreach( $associates as $associate) {
-                                                $provider_prefix = get_field('physician_prefix', $associate);
-                                                $provider_first_name = get_field('physician_first_name', $associate);
-                                                $provider_middle_name = get_field('physician_middle_name', $associate);
-                                                $provider_last_name = get_field('physician_last_name', $associate);
-                                                $provider_pedigree = get_field('physician_pedigree', $associate);
-                                                $provider_medium_name = ($provider_prefix ? $provider_prefix .' ' : '') . $provider_first_name .' ' .($provider_middle_name ? $provider_middle_name . ' ' : '') . $provider_last_name . ($provider_pedigree ? ' ' . $provider_pedigree : '');
+                                                $resource_provider_prefix = get_field('physician_prefix', $associate);
+                                                $resource_provider_first_name = get_field('physician_first_name', $associate);
+                                                $resource_provider_middle_name = get_field('physician_middle_name', $associate);
+                                                $resource_provider_last_name = get_field('physician_last_name', $associate);
+                                                $resource_provider_pedigree = get_field('physician_pedigree', $associate);
+                                                $resource_provider_medium_name = ($resource_provider_prefix ? $resource_provider_prefix .' ' : '') . $resource_provider_first_name .' ' .($resource_provider_middle_name ? $resource_provider_middle_name . ' ' : '') . $resource_provider_last_name . ($resource_provider_pedigree ? ' ' . $resource_provider_pedigree : '');
 
                                                 if ( get_post_status ( $associate ) == 'publish' ) {
                                                     if ( $resource_i < $resource_related_max ) {
-                                                        $associate_title = $provider_medium_name;
+                                                        $associate_title = $resource_provider_medium_name;
                                                         $associate_title_attr = str_replace('"', '\'', $associate_title);
                                                         $associate_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($associate_title_attr, null, 'utf-8')));
         
@@ -240,7 +240,7 @@
                                         $associates = '';
                                     ?> 
                                     <?php if( $resource_locations && $resource_location_valid ) { ?>
-                                        <dt><?php echo $location_label; ?></dt>
+                                        <dt><?php echo $resource_location_label; ?></dt>
                                         <dd>
                                             <?php
                                             $resource_i = 0;
@@ -279,7 +279,7 @@
                                         $associates = '';
                                     ?> 
                                     <?php if( $resource_conditions && $resource_condition_valid ) { ?>
-                                        <dt><?php echo $condition_label; ?></dt>
+                                        <dt><?php echo $resource_condition_label; ?></dt>
                                         <dd>
                                             <?php
                                             $resource_i = 0;
@@ -318,7 +318,7 @@
                                         $associates = '';
                                     ?> 
                                     <?php if( $resource_treatments && $resource_treatment_valid ) { ?>
-                                        <dt><?php echo $treatment_label; ?></dt>
+                                        <dt><?php echo $resource_treatment_label; ?></dt>
                                         <dd>
                                             <?php
                                             $resource_i = 0;
@@ -357,7 +357,7 @@
                                         $associates = '';
                                     ?> 
                                     <?php if( $resource_expertises && $resource_expertise_valid ) { ?>
-                                        <dt><?php echo $expertise_label; ?></dt>
+                                        <dt><?php echo $resource_expertise_label; ?></dt>
                                         <dd>
                                             <?php
                                             $resource_i = 0;
