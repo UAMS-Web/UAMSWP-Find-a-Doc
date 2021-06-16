@@ -30,7 +30,7 @@
 
     $resource_image_wide = get_post_thumbnail_id($id);
     $resource_image_square = get_field('clinical_resource_image_square', $id);
-    $resource_image_square = $resource_image_square ? $resource_image_square : $resource_image_wide;
+    $resource_image_square = ( isset($resource_image_square) && !empty($resource_image_square) ) ? $resource_image_square : $resource_image_wide;
 
     $resource_related_max = 3; // Set how many of each related item type to display
     
