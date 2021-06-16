@@ -121,14 +121,14 @@
             } // endif
         } // endforeach;
         $resource_treatment = '';
-        $resource_treatment_label = $treatment_count > 1 ? 'Treatments/Procedures' : 'Treatment/Procedure';
+        $resource_treatment_label = $resource_treatment_count > 1 ? 'Treatments/Procedures' : 'Treatment/Procedure';
     }
 
     // Check for valid areas of expertise
     $resource_expertises = get_field('clinical_resource_aoe');
     $resource_expertise_valid = false;
     if ( !empty($resource_expertises) ) {
-        foreach( $resource_expertises as $expertise ) {
+        foreach( $resource_expertises as $resource_expertise ) {
             if ( get_post_status ( $resource_expertise ) == 'publish' ) {
                 $resource_expertise_valid = true;
                 $break;
