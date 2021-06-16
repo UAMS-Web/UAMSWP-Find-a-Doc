@@ -3286,6 +3286,32 @@
             "acfe_validate": "",
             "acfe_update": ""
         },
+        "field_location_service_line": {
+            "key": "field_location_service_line",
+            "name": "location_service_line",
+            "type": "taxonomy",
+            "label": "Service Line(s)",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "taxonomy": "service_line",
+            "field_type": "multi_select",
+            "allow_null": 1,
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 0
+        },
         "field_info_depreciated_open": {
             "key": "field_info_depreciated_open",
             "name": "",
