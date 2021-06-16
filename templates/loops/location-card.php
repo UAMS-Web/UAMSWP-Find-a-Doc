@@ -62,7 +62,7 @@
     $location_floor = get_field_object('location_building_floor', $address_id );
         $location_floor_value = '';
         $location_floor_label = '';
-        if ( $location_floor ) {
+        if ( $location_floor && is_object($location_floor) ) {
             $location_floor_value = $location_floor['value'];
             $location_floor_label = $location_floor['choices'][ $location_floor_value ];
         }
