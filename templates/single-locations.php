@@ -225,6 +225,32 @@ if ($prescription_query) {
 	}
 }
 
+// Hide Sections
+global $hide_medical_ontology;
+$hide_medical_ontology = false;
+$location_region = get_field('location_region',$post->ID);
+$location_service_lines = get_field('location_service_line',$post->ID);
+if( have_rows('remove_ontology_criteria', 'option') ):
+    while( have_rows('remove_ontology_criteria', 'option') ): the_row();
+        $remove_region = get_sub_field('remove_regions', 'option');
+        $remove_service_line = get_sub_field('remove_service_lines', 'option');
+		if ( !empty($location_service_lines) ) {
+			foreach ($location_service_lines as $location_service_line) {
+				if ( (!empty($remove_region) && in_array($location_region, $remove_region)) && empty($remove_service_line) ) { 
+					$hide_medical_ontology = true;
+					break 2;
+				} elseif ( empty($remove_region) && (!empty($remove_service_line) && in_array($location_service_line, $remove_service_line) ) ) {
+					$hide_medical_ontology = true;
+					break 2;
+				} elseif( (!empty($remove_region) && in_array($location_region, $remove_region)) && (!empty($remove_service_line) && in_array($location_service_line, $remove_service_line) ) ) {
+					$hide_medical_ontology = true;
+					break 2;
+				}
+			}
+		}
+    endwhile;
+endif;
+
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
@@ -455,7 +481,7 @@ while ( have_posts() ) : the_post(); ?>
 		$conditions_cpt_query = new WP_Query( $args );
 		// $condition_schema = '';
 		// we will use the first term to load ACF data from
-		if( $conditions_cpt && $conditions_cpt_query->posts ) {
+		if( $conditions_cpt && $conditions_cpt_query->posts && !$hide_medical_ontology ) {
             $show_conditions_section = true;
             $jump_link_count++;
         } else {
@@ -475,7 +501,7 @@ while ( have_posts() ) : the_post(); ?>
 			'post__in' => $treatments_cpt
 		));
 		$treatments_cpt_query = new WP_Query( $args );
-		if( $treatments_cpt && $treatments_cpt_query->posts ) {
+		if( $treatments_cpt && $treatments_cpt_query->posts && !$hide_medical_ontology ) {
             $show_treatments_section = true;
             $jump_link_count++;
         } else {
@@ -493,7 +519,7 @@ while ( have_posts() ) : the_post(); ?>
 			'post__in'	=> $expertises
 		));
 		$expertise_query = new WP_Query( $args );
-		if( $expertises && $expertise_query->have_posts() ) {
+		if( $expertises && $expertise_query->have_posts() && !$hide_medical_ontology ) {
             $show_aoe_section = true;
             $jump_link_count++;
         } else {
@@ -519,7 +545,7 @@ while ( have_posts() ) : the_post(); ?>
 			);
 			$children = New WP_Query ( $args );
 		}
-		if ( $children && $children->have_posts() ) {
+		if ( isset($children) && $children->have_posts() ) {
             $show_child_locations_section = true;
             $jump_link_count++;
         } else {
@@ -1124,6 +1150,7 @@ while ( have_posts() ) : the_post(); ?>
 				<div class="row">
 					<div class="col-xs-12">
 						<h2 class="module-title"><?php echo $about_section_title; ?></h2>
+						<div></php print_r($location_service_lines); ?></div>
 						<div class="module-body">
 							<?php echo $location_about ? $location_about : ''; ?>
 							<?php if($location_youtube_link) { ?>
