@@ -370,7 +370,7 @@ while ( have_posts() ) : the_post(); ?>
 		$mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
 		$mychart_scheduling_instance = get_field('mychart_scheduling_instance', 'option');
 		$mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
-		$mychart_scheduling_linksource = $mychart_scheduling_linksource ? $mychart_scheduling_linksource : 'uamshealth.com';
+		$mychart_scheduling_linksource = ( isset($mychart_scheduling_linksource) && !empty($mychart_scheduling_linksource) ) ? $mychart_scheduling_linksource : 'uamshealth.com';
 		$location_scheduling_ser = get_field('location_scheduling_ser');
 		$location_scheduling_dep = get_field('location_scheduling_dep');
 		$location_scheduling_vt = get_field('location_scheduling_vt');
