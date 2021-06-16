@@ -188,6 +188,99 @@ function physician_save_post( $post_id ) {
 
 }
 
+add_action('acf/save_post', 'resources_save_post', 6); 
+function resources_save_post( $post_id ) {
+	$post_type = get_post_type($post_id);
+
+	// Bail early if no data sent.
+	if( empty($_POST['acf']) || ($post_type != 'clinical-resource')) {
+		return;
+	}
+
+	$providers = $_POST['acf']['field_clinical_resource_providers'];
+	$locations = $_POST['acf']['field_clinical_resource_locations'];
+	$expertises = $_POST['acf']['field_clinical_resource_aoe'];
+	$conditions = $_POST['acf']['field_clinical_resource_conditions'];
+	$treatments = $_POST['acf']['field_clinical_resource_treatments'];
+	$resources = $_POST['acf']['field_clinical_resource_related'];
+
+	
+	if ( $providers ) {
+		$i = 1;
+		foreach( $providers as $provider ):
+			$provider_name = get_the_title( $provider );
+			$provider_list .= $provider_name;
+			if( count($providers) > $i ) {
+				$provider_list .= ", ";
+			}
+			$i++;
+		endforeach;
+	}
+
+	if ( $locations ) {
+		$i = 1;
+		foreach( $locations as $location ):
+			$location_name = get_the_title( $location );
+			$location_list .= $location_name;
+			if( count($locations) > $i ) {
+				$location_list .= ", ";
+			}
+			$i++;
+		endforeach;
+	}
+
+	if ( $expertises ) {
+		$i = 1;
+		foreach( $expertises as $expertise ):
+			$expertise_name = get_the_title( $expertise );
+			$expertise_list .= $expertise_name;
+			if( count($expertises) > $i ) {
+				$expertise_list .= ", ";
+			}
+			$i++;
+		endforeach;
+	}
+
+	if ( $conditions ) {
+		$i = 1;
+		foreach( $conditions as $condition ):
+			$condition_name = get_the_title( $condition );
+			$condition_list .= $condition_name;
+			if( count($conditions) > $i ) {
+				$condition_list .= ", ";
+			}
+			$i++;
+		endforeach;
+	}
+
+	if ( $treatments ) {
+		$i = 1;
+		foreach( $treatments as $treatment ):
+			$treatment_name = get_the_title( $treatment );
+			$treatment_list .= $treatment_name;
+			if( count($treatments) > $i ) {
+				$treatment_list .= ", ";
+			}
+			$i++;
+		endforeach;
+	}
+
+	if ( $resources ) {
+		$i = 1;
+		foreach( $resources as $resource ):
+			$resource_name = get_the_title( $resource );
+			$resource_list .= $resource_name;
+			if( count($resources) > $i ) {
+				$resource_list .= ", ";
+			}
+			$i++;
+		endforeach;
+	}
+
+	$filter_list = $provider_list . ', ' . $location_list . ', ' . $expertise_list . ', ' . $condition_list . ', ' . $treatment_list . ', ' . $resource_list;
+	$_POST['acf']['field_clinical_resource_asp_filter'] = $filter_list;
+}
+
 add_action( 'acf/save_post', 'update_facetwp_index');
 function update_facetwp_index( $post_id ) {
     if ( function_exists( 'FWP' ) ) {
