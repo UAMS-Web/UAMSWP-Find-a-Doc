@@ -32,7 +32,7 @@
 		<div class="item">
 			<div class="row">
 				<div class="col image">
-					<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" class="stretched-link">
+					<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" class="stretched-link" data-categorytitle="Photo" data-itemtitle="<?php echo $full_name_attr; ?>">
 						<picture>
 						<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
 							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
@@ -61,7 +61,7 @@
 					<div class="row">
 						<div class="col-12 primary">
 						<h3 class="h4">
-							<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>"><span class="name"><?php echo $full_name; ?></span></a>
+							<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $full_name_attr; ?>"><span class="name"><?php echo $full_name; ?></span></a>
 							<?php if ( $physician_title_name ) { ?>
 							<span class="subtitle"><?php echo $physician_title_name; ?></span>
 							<?php } // endif ?>
@@ -84,18 +84,18 @@
 										echo '<div class="ratings-count">'. $data->profile->reviewcount .' Ratings</div>';
 										echo '</div>';
 									} else { ?>
-									<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#">Why not?</a></em></p>
+									<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" data-categorytitle="Ratings Modal" data-itemtitle="<?php echo $full_name_attr; ?>">Why not?</a></em></p>
 									<?php
 									}
 								}
 							} else { ?>
-								<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#">Why not?</a></em></p>
+								<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" data-categorytitle="Ratings Modal" data-itemtitle="<?php echo $full_name_attr; ?>">Why not?</a></em></p>
 							<?php
 							} 
 							?>
 						
 							<p><?php echo ( get_field('physician_short_clinical_bio') ? get_field( 'physician_short_clinical_bio') : wp_trim_words( get_field( 'physician_clinical_bio' ), 30, ' &hellip;' ) ); ?></p>
-						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>">Full Profile</a>
+						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" data-categorytitle="View Full Profile" data-itemtitle="<?php echo $full_name_attr; ?>">Full Profile</a>
 						</div>
 						<?php 
 						// Check for valid locations
@@ -112,16 +112,20 @@
 								<h4 class="h5">Locations</h4>
 									<ul>
 										<?php foreach( $locations as $location):
-											if ( get_post_status ( $location ) == 'publish' ) { ?>
+											if ( get_post_status ( $location ) == 'publish' ) {
+												$related_location = get_the_title( $location );
+												$related_location_attr = str_replace('"', '\'', $related_location);
+												$related_location_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($related_location_attr, null, 'utf-8')));
+											?>
 											<li>
-												<a href="<?php echo get_permalink( $location ); ?>">
+												<a href="<?php echo get_permalink( $location ); ?>" data-categorytitle="Related Location" data-typetitle="<?php echo $related_location_attr; ?>" data-itemtitle="<?php echo $full_name_attr; ?>">
 													<?php echo get_the_title( $location ); ?>
 												</a>
 											</li>
 										<?php } // endif
 										endforeach; ?>
 									</ul>
-								<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>">Full Profile</a>
+								<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" data-categorytitle="View Full Profile" data-itemtitle="<?php echo $full_name_attr; ?>">Full Profile</a>
 							</div>
 						<?php } // endif ?> 
 					</div>
