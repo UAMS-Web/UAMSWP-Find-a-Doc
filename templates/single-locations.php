@@ -1150,7 +1150,6 @@ while ( have_posts() ) : the_post(); ?>
 				<div class="row">
 					<div class="col-xs-12">
 						<h2 class="module-title"><?php echo $about_section_title; ?></h2>
-						<div></php print_r($location_service_lines); ?></div>
 						<div class="module-body">
 							<?php echo $location_about ? $location_about : ''; ?>
 							<?php if($location_youtube_link) { ?>
