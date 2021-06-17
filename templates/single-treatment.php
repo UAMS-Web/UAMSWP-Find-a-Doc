@@ -417,7 +417,7 @@
                         <?php } ?>
                         <?php if ( $show_related_resource_section ) { ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="#resources" title="Jump to the section of this page about Resources">Resources</a>
+                                <a class="nav-link" href="#related-resources" title="Jump to the section of this page about Resources">Resources</a>
                             </li>
                         <?php } ?>
                         <?php if ( $show_clinical_trials_section ) { ?>
