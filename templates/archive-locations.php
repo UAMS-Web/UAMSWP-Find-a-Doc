@@ -13,7 +13,7 @@ get_header();
  ?>
 
 <div class="content-sidebar-wrap">
-    <main class="container-fluid doctor-list" id="genesis-content">
+    <main class="container-fluid location-list" id="genesis-content">
         <h1 class="sr-only" itemprop="headline">Locations</h1>
         <div class="row">
             <div class="col-12 col-sm filter-col collapse">
@@ -37,10 +37,16 @@ get_header();
 					If you think you are experiencing a medical emergency, call 911 immediately.
 				</div>
                 <div class="row list-col-header">
-                    <div class="col result-count"><?php echo facetwp_display( 'counts' ); ?> Locations</div>
+                    <div class="col result-status">
+                        <span class="result-count"><?php echo facetwp_display( 'counts' ); ?> Locations</span>
+                        <?php echo facetwp_display( 'selections' ); ?>
+                    </div>
                     <div class="col filter-toggle-container">
 						<!-- When button is active, add "active" class. -->
 						<button title="Toggle Filter Tray" class="filter-toggle"><span class="sr-only">Toggle Filter Tray</span><span class="fas fa-filter"></span></button>
+					</div>
+					<div class="col sort-select">
+						<?php echo facetwp_display( 'sort' ); ?>
 					</div>
                 </div>
                 <?php echo facetwp_display( 'template', 'locations' ); ?>
