@@ -25,25 +25,33 @@ $language_list = '';
 $i = 1;
 if ( $languages ) {
     foreach( $languages as $language ):
-        $language_name = get_term( $language, 'language');
-        $language_list .= $language_name->name;
-        if( $language_count > $i ) {
-            $language_list .= ", ";
+        $language_name = get_term_by( 'id', $language, 'language');
+        if( is_object($language_name) ) {
+            $language_list .= $language_name->name;
+            if( $language_count > $i ) {
+                $language_list .= ", ";
+            }
         }
         $i++;
     endforeach;
 }
 
 $prefix = get_field('physician_prefix',$post->ID);
-$full_name = get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+$first_name = get_field('physician_first_name',$post->ID);
+$middle_name = get_field('physician_middle_name',$post->ID);
+$last_name = get_field('physician_last_name',$post->ID);
+$pedigree = get_field('physician_pedigree',$post->ID);
+$full_name = $first_name . ' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '') .  ( $degree_list ? ', ' . $degree_list : '' );
 $full_name_attr = str_replace('"', '\'', $full_name);
 $full_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($full_name_attr, null, 'utf-8')));
-$medium_name = ($prefix ? $prefix .' ' : '') . get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID);
+$medium_name = ($prefix ? $prefix .' ' : '') . $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name;
 $medium_name_attr = str_replace('"', '\'', $medium_name);
 $medium_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($medium_name_attr, null, 'utf-8')));
-$short_name = $prefix ? $prefix .'&nbsp;' .get_field('physician_last_name',$post->ID) : get_field('physician_first_name',$post->ID) .' ' .(get_field('physician_middle_name',$post->ID) ? get_field('physician_middle_name',$post->ID) . ' ' : '') . get_field('physician_last_name',$post->ID) . (get_field('physician_pedigree',$post->ID) ? '&nbsp;' . get_field('physician_pedigree',$post->ID) : '');
+$short_name = $prefix ? $prefix .'&nbsp;' .$last_name : $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '');
 $short_name_attr = str_replace('"', '\'', $short_name);
 $short_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($short_name_attr, null, 'utf-8')));
+$sort_name = $last_name . ', ' . $first_name . ' ' . $middle_name;
+$sort_name_param_value = sanitize_title_with_dashes($sort_name);
 $excerpt = get_field('physician_short_clinical_bio',$post->ID);
 $resident = get_field('physician_resident',$post->ID);
 $resident_title_name = 'Resident Physician';
@@ -65,10 +73,12 @@ $eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$po
 // Check for valid locations
 $locations = get_field('physician_locations',$post->ID);
 $location_valid = false;
-foreach( $locations as $location ) {
-    if ( get_post_status ( $location ) == 'publish' ) {
-        $location_valid = true;
-        $break;
+if ( !empty($locations) ) {
+    foreach( $locations as $location ) {
+        if ( get_post_status ( $location ) == 'publish' ) {
+            $location_valid = true;
+            $break;
+        }
     }
 }
 // Get number of valid locations
@@ -307,6 +317,20 @@ while ( have_posts() ) : the_post();
         }
     }
 
+	// Clinical Resources
+	$resources =  get_field('physician_clinical_resources');
+    $resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
+    $resource_more = false;
+    $args = (array(
+        'post_type' => "clinical-resource",
+        'order' => 'DESC',
+        'orderby' => 'post_date',
+        'posts_per_page' => $resource_postsPerPage,
+        'post_status' => 'publish',
+        'post__in'	=> $resources
+    ));
+    $resource_query = new WP_Query( $args );
+
     // Set logic for displaying jump links and sections
     $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
     $jump_link_count = 0;
@@ -340,6 +364,14 @@ while ( have_posts() ) : the_post();
             $jump_link_count++;
         } else {
             $show_podcast_section = false;
+        }
+
+	    // Check if Clinical Resources section should be displayed
+        if( $resources && $resource_query->have_posts() ) {
+            $show_related_resource_section = true;
+            $jump_link_count++;
+        } else {
+            $show_related_resource_section = false;
         }
 
         // Check if Research section should be displayed
@@ -454,8 +486,12 @@ while ( have_posts() ) : the_post();
                                                 $building_name = $building->name;
                                             }
                                             $location_floor = get_field_object('location_building_floor', $address_id );
-                                                $location_floor_value = $location_floor['value'];
-                                                $location_floor_label = $location_floor['choices'][ $location_floor_value ];
+                                                $location_floor_value = '';
+                                                $location_floor_label = '';
+                                                if ( $location_floor && is_object($location_floor) ) {
+                                                    $location_floor_value = $location_floor['value'];
+                                                    $location_floor_label = $location_floor['choices'][ $location_floor_value ];
+                                                }
                                             $location_suite = get_field('location_suite', $address_id );
                                             $location_address_2 =
                                                 ( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? '<br />' : '' ) : '' )
@@ -570,7 +606,7 @@ while ( have_posts() ) : the_post();
                         echo '</div>';
                     ?>
                     <?php if( !$rating_valid ) { ?>
-                        <div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-hidden="true">
+                        <div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-modal="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -646,6 +682,11 @@ while ( have_posts() ) : the_post();
                                 <a class="nav-link" href="#podcast">Podcast</a>
                             </li>
                         <?php } ?>
+                        <?php if ( $show_related_resource_section ) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#related-resources" title="Jump to the section of this page about Resources">Resources</a>
+                            </li>
+                        <?php } ?>
                         <?php if ($show_academic_section) { ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="#academic-info">Academic Background</a>
@@ -707,7 +748,7 @@ while ( have_posts() ) : the_post();
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xs-12">
-                            <h2 class="module-title">About <?php echo $short_name; ?></h2>
+                            <h2 class="module-title"><span class="title">About <?php echo $short_name; ?></span></h2>
 
 
                             <?php if ( $physician_clinical_split ) {
@@ -803,9 +844,23 @@ while ( have_posts() ) : the_post();
                     </div>
                 </div>
             </section>
-        <?php } ?>
-        <?php 
-            $physician_academic_split = false;
+        <?php }
+        // End UAMS Health Talk Podcast
+        
+        // Begin Clinical Resources Section
+        $resource_heading_related_pre = false; // "Related Resources"
+        $resource_heading_related_post = true; // "Resources Related to __"
+        $resource_heading_related_name = $short_name; // To what is it related?
+        $resource_more_suppress = false; // Force div.more to not display
+        $resource_more_key = '_resource_provider';
+        $resource_more_value = $sort_name_param_value;
+        if( $show_related_resource_section ) {
+            include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
+        }
+        // End Clinical Resources Section
+        
+        // Begin Academic Bio Section
+        $physician_academic_split = false;
             if ( $academic_bio && ( $academic_appointment || $academic_admin_title || $education || $boards ) ) {
                 $physician_academic_split = true;
             }
@@ -815,7 +870,7 @@ while ( have_posts() ) : the_post();
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
-                        <h2 class="module-title"><?php echo $short_name_possessive; ?> Academic Background</h2>
+                        <h2 class="module-title"><span class="title"><?php echo $short_name_possessive; ?> Academic Background</span></h2>
                         <?php if ( $physician_academic_split ) {
                             // If there is a bio AND at least one of the other academic things, visually split the layout ?>
                             <div class="row content-split-lg">
@@ -922,14 +977,16 @@ while ( have_posts() ) : the_post();
                 </div>
             </div>
         </section>
-        <?php endif; ?>
-        <?php 
+        <?php endif;
+        // End Academic Bio Section
+
+        // Begin Research Bio Section
         if( $show_research_section ): ?>
         <section class="uams-module research-info bg-auto" id="research-info">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
-                        <h2 class="module-title"><?php echo $short_name_possessive; ?> Research</h2>
+                        <h2 class="module-title"><span class="title"><?php echo $short_name_possessive; ?> Research</span></h2>
                         <div class="module-body">
                             <?php
                                 if($research_bio)
@@ -973,12 +1030,20 @@ while ( have_posts() ) : the_post();
                 </div>
             </div>
         </section>
-        <?php endif; ?>
-        <?php // load all 'conditions' terms for the post
+        <?php endif;
+        // End Research Bio Section
+
+        // Begin Conditions Section
+        // load all 'conditions' terms for the post
              
             // Conditions CPT
             // we will use the first term to load ACF data from
             if( $show_conditions_section ) {
+                $condition_heading_related_resource = false;
+                $condition_heading_related_treatment = false;
+                $condition_heading_treated = true;
+                $condition_disclaimer = true;
+
                 include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
                 // $condition_schema .= ',"medicalSpecialty": [';
                 $i = 0;
@@ -999,6 +1064,10 @@ while ( have_posts() ) : the_post();
 
             // Treatments CPT
             if( $show_treatments_section ) {
+                $treatment_heading_related_resource = false;
+                $treatment_heading_related_condition = false;
+                $treatment_heading_performed = true;
+                $treatment_disclaimer = true;
                 include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
                 // $treatment_schema .= ',"medicalSpecialty": [';
                 $i = 0;
@@ -1022,7 +1091,7 @@ while ( have_posts() ) : the_post();
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="module-title"><?php echo $short_name_possessive; ?> Areas of Expertise</h2>
+                            <h2 class="module-title"><span class="title"><?php echo $short_name_possessive; ?> Areas of Expertise</span></h2>
                             <div class="card-list-container">
                                 <div class="card-list card-list-expertise">
                                     <?php foreach( $expertises as $expertise ) {
@@ -1044,7 +1113,7 @@ while ( have_posts() ) : the_post();
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="module-title">Locations Where <?php echo $short_name; ?> Practices</h2>
+                        <h2 class="module-title"><span class="title">Locations Where <?php echo $short_name; ?> Practices</span></h2>
                         <div class="card-list-container location-card-list-container">
                             <div class="card-list">
                             <?php $l = 1;
@@ -1090,7 +1159,7 @@ while ( have_posts() ) : the_post();
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="module-title">Patient Ratings &amp; Reviews</h2>
+                        <h2 class="module-title"><span class="title">Patient Ratings &amp; Reviews</span></h2>
                         <div class="card overall-ratings text-center">
                             <div class="card-body">
                                 <h3 class="sr-only">Average Ratings</h3>
@@ -1146,7 +1215,7 @@ while ( have_posts() ) : the_post();
                             <button class="btn btn-secondary" data-toggle="modal" data-target="#MoreReviews" aria-label="Load more individual reviews">View More</button>
                         </div>
                         <!-- Modal -->
-                        <div class="modal fade" id="MoreReviews" tabindex="-1" role="dialog" aria-labelledby="more-reviews-title" aria-hidden="true">
+                        <div class="modal fade" id="MoreReviews" tabindex="-1" role="dialog" aria-labelledby="more-reviews-title" aria-modal="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                 <div class="modal-header">
@@ -1175,7 +1244,7 @@ while ( have_posts() ) : the_post();
             <div class="container-fluid"
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="module-title">Latest News for {Name}</h2>
+                        <h2 class="module-title"><span class="title">Latest News for {Name}</span></h2>
                         <div class="card-list-container">
                             <div class="card-list">
                                 <div class="card">

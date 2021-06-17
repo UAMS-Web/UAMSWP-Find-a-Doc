@@ -86,6 +86,20 @@
 
     $cta_repeater = get_field('condition_cta');
 
+	// Clinical Resources
+	$resources =  get_field('condition_clinical_resources');
+	$resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
+	$resource_more = false;
+	$args = (array(
+		'post_type' => "clinical-resource",
+		'order' => 'DESC',
+		'orderby' => 'post_date',
+		'posts_per_page' => $resource_postsPerPage,
+		'post_status' => 'publish',
+		'post__in'	=> $resources
+	));
+	$resource_query = new WP_Query( $args );
+
 	// Locations Content
 	$location_content = '';
 	$args = (array(
@@ -117,7 +131,7 @@
 		$location_content .= '<div class="container-fluid">';
 		$location_content .= '<div class="row">';
 		$location_content .= '<div class="col-12">';
-		$location_content .= '<h2 class="module-title">Locations Where Providers Treat ' . get_the_title() . '</h2>';
+		$location_content .= '<h2 class="module-title"><span class="title">Locations Where Providers Treat ' . get_the_title() . '</span></h2>';
 		$location_content .= '<p class="note">Note that the treatment of ' . get_the_title() . ' may not be <em>performed</em> at every location listed below. The list may include locations where the treatment plan is developed during and after a patient visit.</p>';
 		$location_content .= '<div class="card-list-container location-card-list-container">';
 		$location_content .= '<div class="card-list">';
@@ -154,13 +168,21 @@
     $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
     $jump_link_count = 0;
 
-        // Check if Podcast section should be displayed
-        if ( $podcast_name ) {
-            $show_podcast_section = true;
-            $jump_link_count++;
-        } else {
-            $show_podcast_section = false;
-        }
+		// Check if Podcast section should be displayed
+		if ( $podcast_name ) {
+			$show_podcast_section = true;
+			$jump_link_count++;
+		} else {
+			$show_podcast_section = false;
+		}
+
+		// Check if Clinical Resources section should be displayed
+		if( $resources && $resource_query->have_posts() ) {
+			$show_related_resource_section = true;
+			$jump_link_count++;
+		} else {
+			$show_related_resource_section = false;
+		}
 
         // Check if Clinical Trials section should be displayed
         if ( !empty($clinical_trials) ) {
@@ -403,6 +425,11 @@
                                 <a class="nav-link" href="#podcast" title="Jump to the section of this page about UAMS Health Talk Podcast">Podcast</a>
                             </li>
                         <?php } ?>
+                        <?php if ( $show_related_resource_section ) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#related-resources" title="Jump to the section of this page about Resources">Resources</a>
+                            </li>
+                        <?php } ?>
                         <?php if ( $show_clinical_trials_section ) { ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="#clinical-trials" title="Jump to the section of this page about Clinical Trials">Clinical Trials</a>
@@ -439,8 +466,8 @@
         <?php } // endif
         // End Jump Links Section
 
-			// Begin UAMS Health Talk Podcast Section
-			if ( $show_podcast_section ) { ?>
+		// Begin UAMS Health Talk Podcast Section
+		if ( $show_podcast_section ) { ?>
             <section class="uams-module podcast-list bg-auto" id="podcast">
                 <script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
                 </script>
@@ -474,19 +501,25 @@
         <?php }
 		// End UAMS Health Talk Podcast Section
 
+		// Begin Clinical Resources Section
+		if ( $show_related_resource_section ) {
+			$resource_heading_related_pre = false; // "Related Resources"
+			$resource_heading_related_post = true; // "Resources Related to __"
+			$resource_heading_related_name = get_the_title(); // To what is it related?
+			$resource_more_suppress = false; // Force div.more to not display
+			$resource_more_key = '_resource_conditions';
+			$resource_more_value = $post->post_name;
+			if( $show_related_resource_section ) {
+				include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
+			}
+		}
+		// End Clinical Resources Section
+
 		// Begin Clinical Trials Section
-		if ( $show_clinical_trials_section ) { ?>
-			<section class="uams-module cta-bar cta-bar-1 bg-auto" id="clinical-trials">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-xs-12">
-							<h2>Clinical Trials</h2>
-							<p><a href="https://uams.trialstoday.org/" aria-label="Search UAMS Clinical Trials">Search our clinical trials</a> for those related to <?php echo get_the_title(); ?>.</p>
-						</div>
-					</div>
-				</div>
-			</section>
-		<?php } // endif
+		if ( $show_clinical_trials_section ) {
+			$clinical_trial_title = get_the_title();
+			include( UAMS_FAD_PATH . '/templates/blocks/clinical-trials.php' );
+		} // endif
 		// End Clinical Trials Section
 
 		// Begin Treatments and Procedures Section
@@ -495,7 +528,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-xs-12">
-							<h2 class="module-title">Treatments and Procedures Related to <?php echo get_the_title(); ?></h2>
+							<h2 class="module-title"><span class="title">Treatments and Procedures Related to <?php echo get_the_title(); ?></span></h2>
 							<p class="note">UAMS providers perform and prescribe a broad range of treatments and procedures, some of which may not be listed below.</p>
 							<div class="list-container list-container-rows">
 								<ul class="list">
@@ -526,7 +559,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-							<h2 class="module-title">Providers Treating <?php echo get_the_title(); ?></h2>
+							<h2 class="module-title"><span class="title">Providers Treating <?php echo get_the_title(); ?></span></h2>
 							<p class="note">Note that every provider listed below may not perform or prescribe all treatments or procedures related to <?php echo get_the_title(); ?>. Review each provider for availability.</p>
 							<div class="card-list-container">
 								<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
@@ -563,7 +596,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-							<h2 class="module-title">Areas of Expertise for <?php echo get_the_title(); ?></h2>
+							<h2 class="module-title"><span class="title">Areas of Expertise for <?php echo get_the_title(); ?></span></h2>
 							<div class="card-list-container">
 								<div class="card-list card-list-expertise">
 								<?php 

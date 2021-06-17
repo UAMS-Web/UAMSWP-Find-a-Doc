@@ -656,6 +656,39 @@
             "ui": 1
         },
         {
+            "key": "field_condition_clinical_resources",
+            "label": "Clinical Resources",
+            "name": "condition_clinical_resources",
+            "type": "relationship",
+            "instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "post_type": [
+                "clinical-resource"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_clinical_resource_conditions"
+            },
+            "acfe_validate": "",
+            "acfe_update": "",
+            "ui": 1
+        },
+        {
             "key": "field_condition_podcast_name",
             "name": "condition_podcast_name",
             "type": "text",

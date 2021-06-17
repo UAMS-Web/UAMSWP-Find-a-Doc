@@ -127,7 +127,7 @@ $telemed_modified_hours247 = $location_hours_group['location_telemed_modified_ho
 $telemed_info = get_field('location_telemed_descr_system', 'option'); // System-wide information about telemedicine at locations
 
 $afterhours_system = get_field('location_afterhours_descr_system', 'option'); // System-wide information about telemedicine at locations
-$afterhours_system = $afterhours_system ? $afterhours_system : '<p>If you are in need of urgent or emergency care, call 911 or go to your nearest emergency department at your local hospital.</p>'; // System-wide information about telemedicine at locations
+$afterhours_system = ( isset($afterhours_system) && !empty($afterhours_system) ) ? $afterhours_system : '<p>If you are in need of urgent or emergency care, call 911 or go to your nearest emergency department at your local hospital.</p>'; // System-wide information about telemedicine at locations
 
 // Set alert values
 
@@ -225,6 +225,20 @@ if ($prescription_query) {
 	}
 }
 
+// Clinical Resources
+$resources =  get_field('location_clinical_resources');
+$resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
+$resource_more = false;
+$args = (array(
+	'post_type' => "clinical-resource",
+	'order' => 'DESC',
+	'orderby' => 'post_date',
+	'posts_per_page' => $resource_postsPerPage,
+	'post_status' => 'publish',
+	'post__in'	=> $resources
+));
+$resource_query = new WP_Query( $args );
+
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
@@ -253,8 +267,12 @@ while ( have_posts() ) : the_post(); ?>
 		$building_name = $building->name;
 	}
 	$location_floor = get_field_object('location_building_floor', $post_id );
-		$location_floor_value = $location_floor['value'];
-		$location_floor_label = $location_floor['choices'][ $location_floor_value ];
+		$location_floor_value = '';
+		$location_floor_label = '';
+		if ( $location_floor ) {
+			$location_floor_value = $location_floor['value'];
+			$location_floor_label = $location_floor['choices'][ $location_floor_value ];
+		}
 	$location_suite = get_field('location_suite', $post_id );
 	$location_address_2 =
 		( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? '<br />' : '' ) : '' )
@@ -369,6 +387,8 @@ while ( have_posts() ) : the_post(); ?>
 
 		$mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
 		$mychart_scheduling_instance = get_field('mychart_scheduling_instance', 'option');
+		$mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
+		$mychart_scheduling_linksource = ( isset($mychart_scheduling_linksource) && !empty($mychart_scheduling_linksource) ) ? $mychart_scheduling_linksource : 'uamshealth.com';
 		$location_scheduling_ser = get_field('location_scheduling_ser');
 		$location_scheduling_dep = get_field('location_scheduling_dep');
 		$location_scheduling_vt = get_field('location_scheduling_vt');
@@ -430,7 +450,7 @@ while ( have_posts() ) : the_post(); ?>
 			);
 			$physicians_query = New WP_Query( $args );
 		}
-		if ( $physicians_query && $physicians_query->have_posts() ) {
+		if ( isset($physicians_query) && $physicians_query->have_posts() ) {
 			$show_providers_section = true;
 			$jump_link_count++;
 		} else {
@@ -519,12 +539,20 @@ while ( have_posts() ) : the_post(); ?>
 			);
 			$children = New WP_Query ( $args );
 		}
-		if ( $children && $children->have_posts() ) {
+		if ( isset($children) && $children->have_posts() ) {
             $show_child_locations_section = true;
             $jump_link_count++;
         } else {
             $show_child_locations_section = false;
         }
+		
+		// Check if Clinical Resources section should be displayed
+		if( $resources && $resource_query->have_posts() ) {
+			$show_related_resource_section = true;
+			$jump_link_count++;
+		} else {
+			$show_related_resource_section = false;
+		}
 
         // Check if Jump Links section should be displayed
         if ( $jump_link_count >= $jump_link_count_min ) {
@@ -1078,6 +1106,11 @@ while ( have_posts() ) : the_post(); ?>
 							<a class="nav-link" href="#sub-clinics" title="Jump to the section of this page about additional clinics within this location">Clinics Within This Location</a>
 						</li>
 					<?php } ?>
+					<?php if ( $show_related_resource_section ) { ?>
+						<li class="nav-item">
+							<a class="nav-link" href="#related-resources" title="Jump to the section of this page about Resources">Resources</a>
+						</li>
+					<?php } ?>
 				</ul>
 			</div>
 		</nav>
@@ -1105,7 +1138,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<h2 class="module-title">Closing Information</h2>
+						<h2 class="module-title"><span class="title">Closing Information</span></h2>
 						<div class="module-body">
 							<?php echo $location_closing_info; ?>
 						</div>
@@ -1123,7 +1156,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<h2 class="module-title"><?php echo $about_section_title; ?></h2>
+						<h2 class="module-title"><span class="title"><?php echo $about_section_title; ?></span></h2>
 						<div class="module-body">
 							<?php echo $location_about ? $location_about : ''; ?>
 							<?php if($location_youtube_link) { ?>
@@ -1167,7 +1200,7 @@ while ( have_posts() ) : the_post(); ?>
 							<div class="module-body">
 							<h2><?php echo ( $location_parking ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
 						<?php } else { ?>
-							<h2 class="module-title"><?php echo ( $location_parking ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
+							<h2 class="module-title"><span class="title"><?php echo ( $location_parking ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></span></h2>
 							<div class="module-body">
 						<?php } // endif ?>
 							<?php echo $location_parking; ?>
@@ -1261,7 +1294,7 @@ while ( have_posts() ) : the_post(); ?>
 				<div class="row">
 					<div class="col-xs-12">
 						<?php if ( $location_appointment ) { ?>
-							<h2 class="module-title"><?php echo $location_appointment_heading; ?></h2>
+							<h2 class="module-title"><span class="title"><?php echo $location_appointment_heading; ?></span></h2>
 							<div class="module-body">
 								<?php echo $location_appointment; ?>
 								<?php if ( $location_appointment_bring ) { ?>
@@ -1275,7 +1308,7 @@ while ( have_posts() ) : the_post(); ?>
 							</div>
 
 						<?php } elseif ( $location_appointment_bring && $location_appointment_expect ) { ?>
-							<h2 class="module-title"><?php echo $location_appointment_heading; ?></h2>
+							<h2 class="module-title"><span class="title"><?php echo $location_appointment_heading; ?></span></h2>
 							<div class="module-body">
 								<h3><?php echo $location_appointment_bring_heading; ?></h3>
 								<?php echo $location_appointment_bring; ?>
@@ -1283,12 +1316,12 @@ while ( have_posts() ) : the_post(); ?>
 								<?php echo $location_appointment_expect; ?>
 							</div>
 						<?php } elseif ( $location_appointment_bring ) { ?>
-							<h2 class="module-title"><?php echo $location_appointment_bring_heading; ?></h2>
+							<h2 class="module-title"><span class="title"><?php echo $location_appointment_bring_heading; ?></span></h2>
 							<div class="module-body">
 								<?php echo $location_appointment_bring; ?>
 							</div>
 						<?php } elseif ( $location_appointment_expect ) { ?>
-							<h2 class="module-title"><?php echo $location_appointment_expect_heading; ?></h2>
+							<h2 class="module-title"><span class="title"><?php echo $location_appointment_expect_heading; ?></span></h2>
 							<div class="module-body">
 								<?php echo $location_appointment_expect; ?>
 							</div>
@@ -1309,7 +1342,7 @@ while ( have_posts() ) : the_post(); ?>
 						<h2 class="module-title">Schedule an Appointment</h2>
 						<div class="module-body">
 							<div id="scheduleContainer">
-								<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>"></iframe>
+								<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
 							</div>
 
 							<!-- <link href="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
@@ -1352,7 +1385,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title">Telemedicine Information</h2>
+						<h2 class="module-title"><span class="title">Telemedicine Information</span></h2>
 						<?php if ($location_closing_display && !$location_closing_telemed) { ?>
 							<div class="module-body">
 								<p class="text-center"><strong>
@@ -1561,7 +1594,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title">Providers at <?php the_title(); ?></h2>
+						<h2 class="module-title"><span class="title">Providers at <?php the_title(); ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
 								<?php 
@@ -1587,6 +1620,11 @@ while ( have_posts() ) : the_post(); ?>
 
 	// Begin Conditions Section
 	if( $show_conditions_section ) {
+		$condition_heading_related_resource = false;
+		$condition_heading_related_treatment = false;
+		$condition_heading_treated = true;
+		$condition_disclaimer = true;
+
 		include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
 		$condition_schema .= ',"medicalSpecialty": [';
 		foreach( $conditions_cpt_query->posts as $condition ) {
@@ -1602,6 +1640,10 @@ while ( have_posts() ) : the_post(); ?>
 
 	// Begin Treatments and Procedures Section
 	if( $show_treatments_section ) {
+		$treatment_heading_related_resource = false;
+		$treatment_heading_related_condition = false;
+		$treatment_heading_performed = true;
+		$treatment_disclaimer = true;
 		include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
 		$treatment_schema .= ',"medicalSpecialty": [';
 		foreach( $treatments_cpt_query->posts as $treatment ) {
@@ -1621,7 +1663,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title">Areas of Expertise Represented at <?php the_title(); ?></h2>
+						<h2 class="module-title"><span class="title">Areas of Expertise Represented at <?php the_title(); ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list card-list-expertise">
 							<?php 
@@ -1663,6 +1705,20 @@ while ( have_posts() ) : the_post(); ?>
 	<?php } // endif
 	// End Child Locations Section
 
+	// Begin Clinical Resources Section
+	if ( $show_related_resource_section ) {
+		$resource_heading_related_pre = false; // "Related Resources"
+		$resource_heading_related_post = true; // "Resources Related to __"
+		$resource_heading_related_name = get_the_title(); // To what is it related?
+		$resource_more_suppress = false; // Force div.more to not display
+        $resource_more_key = '_resource_locations';
+        $resource_more_value = $post->post_name;
+		if( $show_related_resource_section ) {
+			include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
+		}
+	}
+	// End Clinical Resources Section
+
 	// Begin News Section
 	if ( true == false ) { ?>
 		<!-- Latest News -->
@@ -1670,7 +1726,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title">Latest News for <?php the_title(); ?></h2>
+						<h2 class="module-title"><span class="title">Latest News for <?php the_title(); ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list">
 								<div class="card">

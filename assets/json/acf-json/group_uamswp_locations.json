@@ -965,7 +965,7 @@
                     "name": "location_appointments_text",
                     "type": "text",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
@@ -984,7 +984,7 @@
                     "name": "location_appointments_phone",
                     "type": "maskfield",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
@@ -3282,6 +3282,37 @@
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "1",
                 "acfe_bidirectional_related": "field_expertise_locations"
+            },
+            "acfe_validate": "",
+            "acfe_update": ""
+        },
+        "field_location_clinical_resources": {
+            "key": "field_location_clinical_resources",
+            "name": "location_clinical_resources",
+            "type": "relationship",
+            "label": "Clinical Resources",
+            "instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "clinical-resource"
+            ],
+            "taxonomy": [],
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "1",
+                "acfe_bidirectional_related": "field_clinical_resource_locations"
             },
             "acfe_validate": "",
             "acfe_update": ""

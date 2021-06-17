@@ -188,6 +188,99 @@ function physician_save_post( $post_id ) {
 
 }
 
+add_action('acf/save_post', 'resources_save_post', 6); 
+function resources_save_post( $post_id ) {
+	$post_type = get_post_type($post_id);
+
+	// Bail early if no data sent.
+	if( empty($_POST['acf']) || ($post_type != 'clinical-resource')) {
+		return;
+	}
+
+	$providers = $_POST['acf']['field_clinical_resource_providers'];
+	$locations = $_POST['acf']['field_clinical_resource_locations'];
+	$expertises = $_POST['acf']['field_clinical_resource_aoe'];
+	$conditions = $_POST['acf']['field_clinical_resource_conditions'];
+	$treatments = $_POST['acf']['field_clinical_resource_treatments'];
+	$resources = $_POST['acf']['field_clinical_resource_related'];
+
+	
+	if ( $providers ) {
+		$i = 1;
+		foreach( $providers as $provider ):
+			$provider_name = get_the_title( $provider );
+			$provider_list .= $provider_name;
+			if( count($providers) > $i ) {
+				$provider_list .= ", ";
+			}
+			$i++;
+		endforeach;
+	}
+
+	if ( $locations ) {
+		$i = 1;
+		foreach( $locations as $location ):
+			$location_name = get_the_title( $location );
+			$location_list .= $location_name;
+			if( count($locations) > $i ) {
+				$location_list .= ", ";
+			}
+			$i++;
+		endforeach;
+	}
+
+	if ( $expertises ) {
+		$i = 1;
+		foreach( $expertises as $expertise ):
+			$expertise_name = get_the_title( $expertise );
+			$expertise_list .= $expertise_name;
+			if( count($expertises) > $i ) {
+				$expertise_list .= ", ";
+			}
+			$i++;
+		endforeach;
+	}
+
+	if ( $conditions ) {
+		$i = 1;
+		foreach( $conditions as $condition ):
+			$condition_name = get_the_title( $condition );
+			$condition_list .= $condition_name;
+			if( count($conditions) > $i ) {
+				$condition_list .= ", ";
+			}
+			$i++;
+		endforeach;
+	}
+
+	if ( $treatments ) {
+		$i = 1;
+		foreach( $treatments as $treatment ):
+			$treatment_name = get_the_title( $treatment );
+			$treatment_list .= $treatment_name;
+			if( count($treatments) > $i ) {
+				$treatment_list .= ", ";
+			}
+			$i++;
+		endforeach;
+	}
+
+	if ( $resources ) {
+		$i = 1;
+		foreach( $resources as $resource ):
+			$resource_name = get_the_title( $resource );
+			$resource_list .= $resource_name;
+			if( count($resources) > $i ) {
+				$resource_list .= ", ";
+			}
+			$i++;
+		endforeach;
+	}
+
+	$filter_list = $provider_list . ', ' . $location_list . ', ' . $expertise_list . ', ' . $condition_list . ', ' . $treatment_list . ', ' . $resource_list;
+	$_POST['acf']['field_clinical_resource_asp_filter'] = $filter_list;
+}
+
 add_action( 'acf/save_post', 'update_facetwp_index');
 function update_facetwp_index( $post_id ) {
     if ( function_exists( 'FWP' ) ) {
@@ -364,7 +457,7 @@ function custom_excerpt_acf() {
     $post_id        = ( $post->ID ); // Current post ID
     $post_type      = get_post_type( $post_id ); // Get Post Type
 
-    if ( 'expertise' == $post_type || 'provider' == $post_type || 'location' == $post_type ) {
+    if ( 'expertise' == $post_type || 'provider' == $post_type || 'location' == $post_type || 'clinical-resource' == $post_type  ) {
 
         if ('expertise' == $post_type ) {
             $post_excerpt   = get_field( 'post_excerpt', $post_id ); // ACF field
@@ -372,7 +465,9 @@ function custom_excerpt_acf() {
             $post_excerpt   = get_field( 'physician_short_clinical_bio', $post_id ); // ACF field
         } elseif ( 'location' == $post_type ) {
             $post_excerpt   = get_field( 'location_short_desc', $post_id ); // ACF field
-        }
+        } elseif ( 'clinical-resource' == $post_type ){
+			$post_excerpt   = get_field( 'clinical_resource_excerpt', $post_id );
+		}
 
         if ( ( !empty( $post_id ) ) AND ( $post_excerpt ) ) {
 
@@ -752,7 +847,7 @@ function limit_post_top_level( $args, $field, $post ) {
 		if ($height < $min || $height > $max) {
 			// does not meet the requirement, generate an error
 			$errors['aspect_ratio'] = __('Image does not meet Aspect Ratio Requirements of ').
-			                          $ratio_width.__(':').$ratio_height.__('&plusmn;').$ratio_margin.__('%');
+			                          $ratio_width.__(':').$ratio_height.__(' (±').($margin*100).__('%)');
 		}
 		// return the errors
 		return $errors;
@@ -764,6 +859,20 @@ function limit_post_top_level( $args, $field, $post ) {
 		return html_entity_decode( $value );
 	}
 	add_filter('acf/format_value/key=field_physician_select_publications_pubmed', 'pubmed_information_format_value', 10, 3);
+
+// Exclude current post/page from relationship field results
+
+// 1. Add the key=[NAME_OF_RELATIONSHIP_FIELD].
+add_filter('acf/fields/relationship/query/key=field_clinical_resource_related', 'relationship_exclude_id', 10, 3);
+add_filter('acf/fields/relationship/query/key=field_expertise_associated', 'relationship_exclude_id', 10, 3);
+// 2. Add the $field and $post arguments.
+function relationship_exclude_id ( $args, $field, $post_id ) {
+
+    //3. $post argument passed in from the query hook is the $post_id.
+    $args['post__not_in'] = array( $post_id );
+    
+    return $args;
+}
 
 // Conditional Logic to check if Find-a-Doc Settings are set to allow MyChart Scheduling
 function uamswp_mychart_scheduling_query($field) {

@@ -104,7 +104,7 @@
 		$location_content .= '<div class="container-fluid">';
 		$location_content .= '<div class="row">';
 		$location_content .= '<div class="col-12">';
-		$location_content .= '<h2 class="module-title">Locations Where Providers Treat ' . single_cat_title( '', false ) . '</h2>';
+		$location_content .= '<h2 class="module-title"><span class="title">Locations Where Providers Treat ' . single_cat_title( '', false ) . '</span></h2>';
 		$location_content .= '<div class="card-list-container location-card-list-container">';
 		$location_content .= '<div class="card-list">';
 		ob_start();
@@ -210,7 +210,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<h2 class="module-title">Treatments and Procedures Related to <?php echo single_cat_title( '', false ); ?></h2>
+						<h2 class="module-title"><span class="title">Treatments and Procedures Related to <?php echo single_cat_title( '', false ); ?></span></h2>
 						<div class="list-container list-container-rows">
 							<ul class="list">
 							<?php foreach( $treatments_query->get_terms() as $treatment ): ?>
@@ -250,7 +250,7 @@
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col-12">
-									<h2 class="module-title">Providers Treating <?php echo single_cat_title( '', false ); ?></h2>
+									<h2 class="module-title"><span class="title">Providers Treating <?php echo single_cat_title( '', false ); ?></span></h2>
 									<p class="note">Note that every treatment or procedure listed above may not be provided by each provider listed below. Review each provider for availability.</p>
 									<div class="card-list-container">
 										<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
@@ -297,7 +297,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-							<h2 class="module-title">Areas of Expertise for <?php echo single_cat_title( '', false ); ?></h2>
+							<h2 class="module-title"><span class="title">Areas of Expertise for <?php echo single_cat_title( '', false ); ?></span></h2>
 							<div class="card-list-container">
 								<div class="card-list card-list-expertise">
 								<?php 
