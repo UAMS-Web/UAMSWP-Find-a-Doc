@@ -1588,7 +1588,7 @@ while ( have_posts() ) : the_post(); ?>
 	// Begin Conditions Section
 	if( $show_conditions_section ) {
 		include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
-		$condition_schema .= ',"medicalSpecialty": [';
+		$condition_schema .= '"medicalSpecialty": [';
 		foreach( $conditions_cpt_query->posts as $condition ) {
 			$condition_schema .= '{
 			"@type": "MedicalSpecialty",
@@ -1596,14 +1596,14 @@ while ( have_posts() ) : the_post(); ?>
 			"url":"'. get_the_permalink( $condition->ID ) .'"
 			},';
 		} // endforeach
-		$condition_schema .= '"" ]';
+		$condition_schema .= '"" ],';
 	} // endif
 	// End Conditions Section
 
 	// Begin Treatments and Procedures Section
 	if( $show_treatments_section ) {
 		include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
-		$treatment_schema .= ',"medicalSpecialty": [';
+		$treatment_schema .= '"medicalSpecialty": [';
 		foreach( $treatments_cpt_query->posts as $treatment ) {
 			$treatment_schema .= '{
 			"@type": "MedicalSpecialty",
@@ -1611,7 +1611,7 @@ while ( have_posts() ) : the_post(); ?>
 			"url":"'. get_the_permalink( $treatment->ID ) .'"
 			},';
 		} // endforeach
-		$treatment_schema .= '"" ]';
+		$treatment_schema .= '"" ],';
 	} // endif 
 	// End Treatments and Procedures Section
 
