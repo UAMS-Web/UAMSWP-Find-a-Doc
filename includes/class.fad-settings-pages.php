@@ -58,6 +58,14 @@ if( function_exists('acf_add_options_page') ) {
         'redirect'		=> false
     ));
 
+    acf_add_options_sub_page(array(
+		'page_title' 	=> 'Remove Medical Ontology Options',
+        'menu_title'	=> 'Remove Medical Ontology',
+        'menu_slug' 	=> 'uamswp-fad-remove-ontology',
+        'parent_slug'	=> 'fad-settings',
+        'redirect'		=> false
+    ));
+
 }
 
 // Add metaboxes for Settings page
