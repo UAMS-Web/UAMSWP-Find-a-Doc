@@ -1952,8 +1952,20 @@ function rest_api_provider_meta() {
             'schema' => null,
         )
 	);
-	register_rest_field('locations', 'location_meta', array(
+	register_rest_field('location', 'location_meta', array(
 			'get_callback' => 'get_location_meta',
+			'update_callback' => null,
+			'schema' => null,
+		)
+	);
+	register_rest_field('expertise', 'expertise_meta', array(
+			'get_callback' => 'get_expertise_meta',
+			'update_callback' => null,
+			'schema' => null,
+		)
+	);
+	register_rest_field('condition', 'condition_meta', array(
+			'get_callback' => 'get_condition_meta',
 			'update_callback' => null,
 			'schema' => null,
 		)
@@ -1994,11 +2006,11 @@ function get_provider_meta($object) {
     // $data['physician_gender'] = get_field( 'physician_gender', $postId );
     // $data['physician_youtube_link'] = get_field( 'physician_youtube_link', $postId );
     // $data['physician_languages'] = get_field( 'physician_languages', $postId );
-    //$data['physician_locations_id'] = get_post_meta( $postId, 'physician_locations', true );
-    //$data['physician_locations']['link'] = get_permalink( get_post_meta( $postId, 'physician_locations', true ) );
-    //$data['physician_locations']['title'] = get_the_title( get_post_meta( $postId, 'physician_locations', true ) );
-    //$data['physician_locations']['slug'] = get_post_field( 'post_name', get_post_meta( $postId, 'physician_locations', true ) );
-    //Locations
+    // $data['physician_locations_id'] = get_post_meta( $postId, 'physician_locations', true );
+    // $data['physician_locations']['link'] = get_permalink( get_post_meta( $postId, 'physician_locations', true ) );
+    // $data['physician_locations']['title'] = get_the_title( get_post_meta( $postId, 'physician_locations', true ) );
+    // $data['physician_locations']['slug'] = get_post_field( 'post_name', get_post_meta( $postId, 'physician_locations', true ) );
+    // Locations
 	$i = 1;
 	$locations = get_field('physician_locations', $postId);
 	foreach ($locations as $location) {
@@ -2010,7 +2022,26 @@ function get_provider_meta($object) {
 		// $data['physician_locations'][$location]['location_city'] = get_post_meta( $location, 'location_city', true );
 		// $data['physician_locations'][$location]['location_state'] = get_post_meta( $location, 'location_state', true );
 		// $data['physician_locations'][$location]['location_zip'] =  get_post_meta( $location, 'location_zip', true );
-		// $data['physician_locations'][$location]['location_phone'] = get_post_meta( $location, 'location_phone', true );
+		$data['locations_phone_title'] = 'Clinic Phone Number';
+		$data['physician_locations'][$location]['location_clinic_phone'] = get_field( 'location_phone', $location );
+		$location_clinic_phone_query = get_field('location_clinic_phone_query', $location ); // separate number for (new) appointments?
+		if ($location_clinic_phone_query) {
+			$location_new_appointments_phone = get_field('location_new_appointments_phone', $location ); // phone number for (new) appointments
+			$location_appointment_phone_query = get_field('field_location_appointment_phone_query', $location ); // separate number for existing appointments?
+		} else {
+			$location_new_appointments_phone = '';
+			$location_appointment_phone_query = '0';
+		}
+		if ($location_appointment_phone_query) {
+			$location_return_appointments_phone = get_field('location_return_appointments_phone', $location ); // phone number for existing appointments
+		} else {
+			$location_return_appointments_phone = '';
+		}
+		$data['physician_locations'][$location]['location_phone_text'] = 'Appointment Phone Number'. ( $location_clinic_phone_query ? 's' : '' );
+		$data['physician_locations'][$location]['location_new_appointments_phone'] = $location_new_appointments_phone;
+		$data['physician_locations'][$location]['location_new_appointments_phonetext'] = ( $location_new_appointments_phone && $location_clinic_phone_query) ? 'New Patients' : 'New and Returning Patients';
+		$data['physician_locations'][$location]['location_return_appointments_phone'] = $location_return_appointments_phone;
+		$data['physician_locations'][$location]['location_return_appointments_phone_text'] = ($location_return_appointments_phone && $location_clinic_phone_query) ? 'Returning Patients' : '';
 		// $data['physician_locations'][$location]['location_fax'] = get_post_meta( $location, 'location_fax', true );
 		// $data['physician_locations'][$location]['location_email'] = get_post_meta( $location, 'location_email', true );
 		// $data['physician_locations'][$location]['location_web_name'] = get_post_meta( $location, 'location_web_name', true );
@@ -2021,15 +2052,15 @@ function get_provider_meta($object) {
 		$data['physician_locations'][$location]['location_directions'] = '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/'. $map['lat'] .','. $map['lng'] .'" target="_blank" aria-label="Get Directions to '. get_the_title( $location ) .'">Get Directions</a>';
 		// $data['physician_locations'][$location]['map_marker'] = '<div class="marker" data-lat="'. $map['lat'] .'" data-lng="'. $map['lng'] .'" data-label="'. $i .'"></div>';
 		$i++;
-		//$data['location_link'][$location] = get_post_permalink( $location );
-		//$data['location_title'] .= get_the_title( $location ) . ',';
+		// $data['location_link'][$location] = get_post_permalink( $location );
+		// $data['location_title'] .= get_the_title( $location ) . ',';
 	}
     // $data['physician_affiliation'] = get_post_meta( $postId, 'physician_affiliation', true );
     // $data['physician_appointment_link'] = get_post_meta( $postId, 'physician_appointment_link', true );
     // $data['physician_primary_care'] = get_post_meta( $postId, 'physician_primary_care', true );
     // $data['physician_refferal_required'] = get_post_meta( $postId, 'physician_refferal_required', true );
     // $data['physician_accepting_patients'] = get_post_meta( $postId, 'physician_accepting_patients', true );
-    // $data['physician_second_opinion'] = get_post_meta( $postId, 'physician_second_opinion', true );
+    $data['physician_second_opinion'] = get_field( 'physician_second_opinion', $postId );
     // $data['physician_patient_types'] = get_the_terms( $postId, 'patient_type' );
     $data['physician_npi'] = get_field( 'physician_npi', $postId );
     // $data['medical_specialties'] = get_the_terms( $postId, 'specialty' );
@@ -2123,8 +2154,6 @@ function get_provider_meta($object) {
 		endif;
 	}
 	$data['physician_expertise_list'] = $expertise_list;
-	// $data['physician_conditions'] = get_the_terms( $postId, 'condition' );
-	// $data['physician_treatments'] = get_the_terms( $postId, 'treatment' );
 	// $data['physician_boards'] = get_post_meta( $postId, 'physician_boards', true );
 	// if( get_post_meta( $postId, 'physician_boards', true ) ) :
 	// 	for( $i = 0; $i < get_post_meta( $postId, 'physician_boards', true ); $i++ ){
@@ -2202,19 +2231,418 @@ function get_location_meta($object) {
 	$data['location_city'] = get_field('location_city', $postId );
 	$data['location_state'] = get_field('location_state', $postId );
 	$data['location_zip'] = get_field('location_zip', $postId );
-	$data['locations_phone_title'] = 'Appointment Phone Number'. ( get_field('field_location_appointment_phone_query', $postId) ? 's' : '' );
-	$data['location_phone'] = get_field( 'location_phone', $postId );
-	$data['location_phone_text'] = '<span class="subtitle">New and Returning Patients</span>';
-	$dash['location_new_appointments_phone'] = get_field('location_new_appointments_phone', $postId );
-	$data['location_new_appointments_phonetext'] = ( get_field('location_new_appointments_phone', $postId ) && get_field( 'field_location_appointment_phone_query', $postId )) ? '<br/><span class="subtitle">New Patients</span>' : '<span class="subtitle">New and Returning Patients</span>';
-	$dash['location_return_appointments_phone'] = get_field('location_return_appointments_phone', $postId );
-	$data['location_return_appointments_phone_text'] = (get_field('location_return_appointments_phone', $postId ) && get_field('field_location_appointment_phone_query', $postId )) ? '<span class="subtitle">Returning Patients</span>' : '';
+	$location_phone = get_field('location_phone', $postId );
+	$location_phone_link = '<a href="tel:' . format_phone_dash( $location_phone ) . '" class="icon-phone">' . format_phone_us( $location_phone ) . '</a>';
+	$location_clinic_phone_query = get_field('location_clinic_phone_query', $postId ); // separate number for (new) appointments?
+	if ($location_clinic_phone_query) {
+		$location_new_appointments_phone = get_field('location_new_appointments_phone', $postId ); // phone number for (new) appointments
+		$location_new_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_new_appointments_phone ) . '" class="icon-phone">' . format_phone_us( $location_new_appointments_phone ) . '</a>';
+		$location_appointment_phone_query = get_field('field_location_appointment_phone_query', $postId ); // separate number for existing appointments?
+	} else {
+		$location_new_appointments_phone = '';
+		$location_appointment_phone_query = '0';
+	}
+	if ($location_appointment_phone_query) {
+		$location_return_appointments_phone = get_field('location_return_appointments_phone', $postId ); // phone number for existing appointments
+		$location_return_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_return_appointments_phone ) . '" class="icon-phone">' . format_phone_us( $location_return_appointments_phone ) . '</a>';
+	} else {
+		$location_return_appointments_phone = '';
+	}
+	$data['locations_phone_title'] = 'Clinic Phone Number';
+	$data['location_phone'] = $location_phone;
+	$data['location_phone_text'] = 'Appointment Phone Number'. ( $location_clinic_phone_query ? 's' : '' );
+	$data['location_new_appointments_phone'] = $location_new_appointments_phone;
+	$data['location_new_appointments_phonetext'] = ( $location_new_appointments_phone && $location_clinic_phone_query) ? 'New Patients' : 'New and Returning Patients';
+	$data['location_return_appointments_phone'] = $location_return_appointments_phone;
+	$data['location_return_appointments_phone_text'] = ($location_return_appointments_phone && $location_clinic_phone_query) ? 'Returning Patients' : '';
+	$data['location_about'] = get_field('location_about', $postId);
+	$providers = get_field('physician_locations', $postId);
+	$provider_list = '';
+	$i = 1;
+	if( $providers ) {
+		$args = (array(
+			'post_type' => "provider",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $providers
+		));
+		$provider_query = new WP_Query( $args );
+		if( $providers && $provider_query->posts ):
+
+			foreach( $provider_query->posts as $provider ):
+				$data['location_provider'][$provider->ID]['link'] = get_permalink( $provider->ID );
+				$data['location_provider'][$provider->ID]['title'] = get_field('physician_full_name', $provider->ID);
+				$data['location_provider'][$provider->ID]['slug'] = $provider->post_name;
+				$provider_list .= get_field('physician_full_name', $provider->ID);
+				if( count($providers) > $i ) {
+					$provider_list .= ' | ';
+				}
+				$i++;
+			endforeach;
+		endif;
+	}
+	$data['location_provider_list'] = $provider_list;
+	$expertises =  get_field('location_expertise', $postId);
+	$expertise_list = '';
+	$i = 1;
+	if( $expertises ) {
+		$args = (array(
+			'post_type' => "expertise",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $expertises
+		));
+		$expertise_query = new WP_Query( $args );
+		if( $expertises && $expertise_query->posts ):
+
+			foreach( $expertise_query->posts as $expertise ):
+				$data['location_expertise'][$expertise->ID]['link'] = get_permalink( $expertise->ID );
+				$data['location_expertise'][$expertise->ID]['title'] = $expertise->post_title;
+				$data['location_expertise'][$expertise->ID]['slug'] = $expertise->post_name;
+				$expertise_list .= $expertise->post_title;
+				if( count($expertises) > $i ) {
+					$expertise_list .= ', ';
+				}
+				$i++;
+			endforeach;
+		endif;
+	}
+	$data['location_expertise_list'] = $expertise_list;
+	$conditions_cpt = get_field('location_conditions_cpt', $postId);
+	$condition_list = '';
+	$i = 1;
+	if( $conditions_cpt ) {
+		$args = (array(
+			'post_type' => "condition",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $conditions_cpt
+		));
+		$conditions_cpt_query = new WP_Query( $args );
+
+		if( $conditions_cpt && $conditions_cpt_query->posts ):
+
+			foreach( $conditions_cpt_query->posts as $condition ):
+				$data['location_conditions'][$condition->ID]['link'] = get_permalink( $condition->ID );
+				$data['location_conditions'][$condition->ID]['title'] = $condition->post_title;
+				$data['location_conditions'][$condition->ID]['slug'] = $condition->post_name;
+				$condition_list .= $condition->post_title;
+				if( count($conditions_cpt) > $i ) {
+					$condition_list .= ', ';
+				}
+				$i++;
+			endforeach;
+		endif; 
+	}
+	$data['location_conditions_list'] = $condition_list;
+	// Treatments
+	$treatments_cpt = get_field('location_treatments_cpt', $postId);
+	$treatment_list = '';
+	$i = 1;
+	if( $treatments_cpt ) {
+		$args = (array(
+			'post_type' => "treatment",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $treatments_cpt
+		));
+		$treatments_cpt_query = new WP_Query( $args );
+		if( $treatments_cpt && $treatments_cpt_query->posts ):
+
+			foreach( $treatments_cpt_query->posts as $treatment ):
+				$data['location_treatments'][$treatment->ID]['link'] = get_permalink( $treatment->ID );
+				$data['location_treatments'][$treatment->ID]['title'] = $treatment->post_title;
+				$data['location_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
+				$treatment_list .= $treatment->post_title;
+				if( count($treatments_cpt) > $i ) {
+					$treatment_list .= ', ';
+				}
+				$i++;
+			endforeach;
+		endif;
+	}
+	$data['location_treatments_list'] = $treatment_list;
+	$data['location_parking'] = get_field('location_parking', $postId);
+	$parking_map = get_field('location_parking_map', $postId);
+	$data['location_parking_link'] = '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'. $parking_map['lat'] .','. $parking_map['lng'] .'" target="_blank" aria-label="Get directions to the parking area">Get Directions</a>';
 	$data['location_directions_link'] = '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/'. $map['lat'] .','. $map['lng'] .'" target="_blank" aria-label="Get Directions to '. get_the_title($postId) .'">Get Directions</a>';
 
 	return $data;
 
 }
-// add_action('rest_api_init', 'rest_api_location_meta');
+add_action('rest_api_init', 'rest_api_location_meta');
+
+function get_expertise_meta($object) {
+	$postId = $object['id'];
+	$data['expertise_title'] = get_the_title( $postId );
+	$data['expertise_link'] = get_permalink($postId );
+	$podcast_name = get_field('expertise_podcast_name', $postId);
+	$data['expertise_podcast'] = '<script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
+	</script>
+	<script type="text/javascript">
+		radiomd_embedded_filtered_tag("uams","radiomd-embedded-filtered-tag",303,"' . $podcast_name . '");
+	</script>
+	<style type="text/css">
+		#radiomd-embedded-filtered-tag iframe {
+		width: 100%;
+		border: none;
+	}
+	</style>
+	<div class="content-width mt-8" id="radiomd-embedded-filtered-tag"></div>';
+	// Conditions
+	$conditions_cpt = get_field('expertise_conditions_cpt', $postId);
+	$condition_list = '';
+	$i = 1;
+	if( $conditions_cpt ) {
+		$args = (array(
+			'post_type' => "condition",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $conditions_cpt
+		));
+		$conditions_cpt_query = new WP_Query( $args );
+
+		if( $conditions_cpt && $conditions_cpt_query->posts ):
+
+			foreach( $conditions_cpt_query->posts as $condition ):
+				$data['expertise_conditions'][$condition->ID]['link'] = get_permalink( $condition->ID );
+				$data['expertise_conditions'][$condition->ID]['title'] = $condition->post_title;
+				$data['expertise_conditions'][$condition->ID]['slug'] = $condition->post_name;
+				$condition_list .= $condition->post_title;
+				if( count($conditions_cpt) > $i ) {
+					$condition_list .= ', ';
+				}
+				$i++;
+			endforeach;
+		endif; 
+	}
+	$data['expertise_conditions_list'] = $condition_list;
+	// Treatments
+	$treatments_cpt = get_field('expertise_treatments_cpt', $postId);
+	$treatment_list = '';
+	$i = 1;
+	if( $treatments_cpt ) {
+		$args = (array(
+			'post_type' => "treatment",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $treatments_cpt
+		));
+		$treatments_cpt_query = new WP_Query( $args );
+		if( $treatments_cpt && $treatments_cpt_query->posts ):
+
+			foreach( $treatments_cpt_query->posts as $treatment ):
+				$data['expertise_treatments'][$treatment->ID]['link'] = get_permalink( $treatment->ID );
+				$data['expertise_treatments'][$treatment->ID]['title'] = $treatment->post_title;
+				$data['expertise_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
+				$treatment_list .= $treatment->post_title;
+				if( count($treatments_cpt) > $i ) {
+					$treatment_list .= ', ';
+				}
+				$i++;
+			endforeach;
+		endif;
+	}
+	$data['expertise_treatments_list'] = $treatment_list;
+	// Providers
+	$providers = get_field('physician_expertise', $postId);
+	$provider_list = '';
+	$i = 1;
+	if( $providers ) {
+		$args = (array(
+			'post_type' => "provider",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $providers
+		));
+		$provider_query = new WP_Query( $args );
+		if( $providers && $provider_query->posts ):
+
+			foreach( $provider_query->posts as $provider ):
+				$data['expertise_provider'][$provider->ID]['link'] = get_permalink( $provider->ID );
+				$data['expertise_provider'][$provider->ID]['title'] = get_field('physician_full_name', $provider->ID);
+				$data['expertise_provider'][$provider->ID]['slug'] = $provider->post_name;
+				$provider_list .= get_field('physician_full_name', $provider->ID);
+				if( count($providers) > $i ) {
+					$provider_list .= ' | ';
+				}
+				$i++;
+			endforeach;
+		endif;
+	}
+	$data['expertise_provider_list'] = $provider_list;
+	// Locations
+	$locations = get_field('location_expertise', $postId);
+	$location_list = '';
+	$i = 1;
+	if( $locations ) {
+		$args = (array(
+			'post_type' => "location",
+            'order' => 'ASC',
+            'orderby' => 'title',
+            'posts_per_page' => -1,
+            'post_status' => 'publish',
+            'post__in'	=> $locations
+		));
+		$location_query = new WP_Query( $args );
+		if( $locations && $location_query->posts ):
+
+			foreach( $location_query->posts as $location ):
+				$data['expertise_location'][$location->ID]['link'] = get_permalink( $location->ID );
+				$data['expertise_location'][$location->ID]['title'] = $location->post_title;
+				$data['expertise_location'][$location->ID]['slug'] = $location->post_name;
+				$location_list .= $location->post_title;
+				if( count($locations) > $i ) {
+					$location_list .= ', ';
+				}
+				$i++;
+			endforeach;
+		endif;
+	}
+	$data['expertise_location_list'] = $location_list;
+
+	return $data;
+
+}
+add_action('rest_api_init', 'rest_api_expertise_meta');
+
+function get_condition_meta($object) {
+	$postId = $object['id'];
+	// Expertise
+	$expertises =  get_field('condition_expertise', $postId);
+	$expertise_list = '';
+	$i = 1;
+	if( $expertises ) {
+		$args = (array(
+			'post_type' => "expertise",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $expertises
+		));
+		$expertise_query = new WP_Query( $args );
+		if( $expertises && $expertise_query->posts ):
+
+			foreach( $expertise_query->posts as $expertise ):
+				$data['condition_expertise'][$expertise->ID]['link'] = get_permalink( $expertise->ID );
+				$data['condition_expertise'][$expertise->ID]['title'] = $expertise->post_title;
+				$data['condition_expertise'][$expertise->ID]['slug'] = $expertise->post_name;
+				$expertise_list .= $expertise->post_title;
+				if( count($expertises) > $i ) {
+					$expertise_list .= ', ';
+				}
+				$i++;
+			endforeach;
+		endif;
+	}
+	$data['condition_expertise_list'] = $expertise_list;
+	// Treatments
+	$treatments_cpt = get_field('condition_treatments', $postId);
+	$treatment_list = '';
+	$i = 1;
+	if( $treatments_cpt ) {
+		$args = (array(
+			'post_type' => "treatment",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $treatments_cpt
+		));
+		$treatments_cpt_query = new WP_Query( $args );
+		if( $treatments_cpt && $treatments_cpt_query->posts ):
+
+			foreach( $treatments_cpt_query->posts as $treatment ):
+				$data['condition_treatments'][$treatment->ID]['link'] = get_permalink( $treatment->ID );
+				$data['condition_treatments'][$treatment->ID]['title'] = $treatment->post_title;
+				$data['condition_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
+				$treatment_list .= $treatment->post_title;
+				if( count($treatments_cpt) > $i ) {
+					$treatment_list .= ', ';
+				}
+				$i++;
+			endforeach;
+		endif;
+	}
+	$data['condition_treatments_list'] = $treatment_list;
+	// Providers
+	$providers = get_field('condition_physicians', $postId);
+	$provider_list = '';
+	$i = 1;
+	if( $providers ) {
+		$args = (array(
+			'post_type' => "provider",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $providers
+		));
+		$provider_query = new WP_Query( $args );
+		if( $providers && $provider_query->posts ):
+
+			foreach( $provider_query->posts as $provider ):
+				$data['condition_provider'][$provider->ID]['link'] = get_permalink( $provider->ID );
+				$data['condition_provider'][$provider->ID]['title'] = get_field('physician_full_name', $provider->ID);
+				$data['condition_provider'][$provider->ID]['slug'] = $provider->post_name;
+				$provider_list .= get_field('physician_full_name', $provider->ID);
+				if( count($providers) > $i ) {
+					$provider_list .= ' | ';
+				}
+				$i++;
+			endforeach;
+		endif;
+	}
+	$data['condition_provider_list'] = $provider_list;
+	// Locations
+	$locations = get_field('condition_locations', $postId);
+	$location_list = '';
+	$i = 1;
+	if( $locations ) {
+		$args = (array(
+			'post_type' => "location",
+            'order' => 'ASC',
+            'orderby' => 'title',
+            'posts_per_page' => -1,
+            'post_status' => 'publish',
+            'post__in'	=> $locations
+		));
+		$location_query = new WP_Query( $args );
+		if( $locations && $location_query->posts ):
+
+			foreach( $location_query->posts as $location ):
+				$data['condition_location'][$location->ID]['link'] = get_permalink( $location->ID );
+				$data['condition_location'][$location->ID]['title'] = $location->post_title;
+				$data['condition_location'][$location->ID]['slug'] = $location->post_name;
+				$location_list .= $location->post_title;
+				if( count($locations) > $i ) {
+					$location_list .= ', ';
+				}
+				$i++;
+			endforeach;
+		endif;
+	}
+	$data['condition_location_list'] = $location_list;
+
+	return $data;
+
+}
+add_action('rest_api_init', 'rest_api_condition_meta');
 
 // Add REST API query var filters
 add_filter('rest_query_vars', 'provider_add_rest_query_vars');
