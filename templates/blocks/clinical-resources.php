@@ -41,7 +41,7 @@
     } else {
         $resource_layout = 'card';
     }
-    $resource_more = ( $resource_postsPerPage != -1 && $resource_count > $resource_postsPerPage && ( $resource_more_key && !empty($resource_more_key) && $resource_more_value && !empty($resource_more_value) ) ) ? true : false;
+    $resource_more = ( $resource_layout == 'card' && $resource_count > $resource_postsPerPage && ( $resource_more_key && !empty($resource_more_key) && $resource_more_value && !empty($resource_more_value) ) ) ? true : false;
     if ( $resource_more_suppress ) {
         $resource_more = false;
     }
