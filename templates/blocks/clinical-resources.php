@@ -40,7 +40,7 @@
     if ( $resource_more_suppress ) {
         $resource_more = false;
     }
-    if ( $resource_count > 4 && $resource_postsPerPage != -1 ) {
+    if ( $resource_count > 4 && $resource_postsPerPage == -1 ) {
         $resource_layout = 'list';
     } else {
         $resource_layout = 'card';
