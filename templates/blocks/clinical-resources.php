@@ -36,14 +36,14 @@
 		}
 	}
     
-    $resource_more = ( $resource_postsPerPage != -1 && $resource_count > $resource_postsPerPage && ( $resource_more_key && !empty($resource_more_key) && $resource_more_value && !empty($resource_more_value) ) ) ? true : false;
-    if ( $resource_more_suppress ) {
-        $resource_more = false;
-    }
     if ( $resource_count > 4 && $resource_postsPerPage == -1 ) {
         $resource_layout = 'list';
     } else {
         $resource_layout = 'card';
+    }
+    $resource_more = ( $resource_postsPerPage != -1 && $resource_count > $resource_postsPerPage && ( $resource_more_key && !empty($resource_more_key) && $resource_more_value && !empty($resource_more_value) ) ) ? true : false;
+    if ( $resource_more_suppress ) {
+        $resource_more = false;
     }
     $more_text = 'Want to find more resources related to ' . $resource_heading_related_name . '?';
     $more_button_url = '/clinical-resource/?' . $resource_more_key . '=' . $resource_more_value;
