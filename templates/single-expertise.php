@@ -513,6 +513,7 @@ function uamswp_expertise_podcast() {
     }
 }
 function uamswp_expertise_resource() {
+    global $post;
     global $page_title;
     global $show_related_resource_section;
     global $resources;
