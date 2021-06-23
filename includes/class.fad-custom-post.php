@@ -1998,18 +1998,51 @@ function get_provider_meta($object) {
 	$physician_service_line = get_field('physician_service_line', $postId);
 	$data['physician_full_name'] = $full_name;
 	//Physician Data
-	// $clinical_title = (get_field('physician_title', $id) ? get_term( get_field('physician_title', $id), 'clinical_title' )->name : '');
 	$data['physician_title'] = $physician_title_name; //(get_field('physician_title', $postId) ? get_term( get_field('physician_title', $postId), 'clinical_title' )->name : '');
 	$data['physician_service_line'] = $physician_service_line ? get_term( $physician_service_line, 'service_line' )->name : '';
     $data['physician_clinical_bio'] = get_field( 'physician_clinical_bio', $postId );
     $data['physician_short_clinical_bio'] = get_field('physician_short_clinical_bio', $postId) ? get_field( 'physician_short_clinical_bio', $postId) : wp_trim_words( get_field( 'physician_clinical_bio', $postId ), 30, ' &hellip;' );
-    // $data['physician_gender'] = get_field( 'physician_gender', $postId );
-    // $data['physician_youtube_link'] = get_field( 'physician_youtube_link', $postId );
-    // $data['physician_languages'] = get_field( 'physician_languages', $postId );
-    // $data['physician_locations_id'] = get_post_meta( $postId, 'physician_locations', true );
-    // $data['physician_locations']['link'] = get_permalink( get_post_meta( $postId, 'physician_locations', true ) );
-    // $data['physician_locations']['title'] = get_the_title( get_post_meta( $postId, 'physician_locations', true ) );
-    // $data['physician_locations']['slug'] = get_post_field( 'post_name', get_post_meta( $postId, 'physician_locations', true ) );
+    $data['physician_gender'] = get_field( 'physician_gender', $postId );
+	$data['physician_accepting_new_patients'] = get_post_meta( $postId, 'physician_accepting_patients', true );
+    $data['physician_second_opinion'] = get_field( 'physician_second_opinion', $postId );
+    $data['physician_patient_types'] = get_the_terms( $postId, 'patient_type' );
+    $data['physician_npi'] = get_field( 'physician_npi', $postId );
+    $data['physician_youtube_link'] = get_field( 'physician_youtube_link', $postId );
+		$languages = get_field('physician_languages',$postId);
+		$language_list = '';
+		$i = 1;
+		if ( $languages ) {
+			foreach( $languages as $language ):
+				$language_name = get_term( $language, 'language');
+				$language_list .= $language_name->name;
+				if( $language_count > $i ) {
+					$language_list .= ", ";
+				}
+				$i++;
+			endforeach;
+		}
+    $data['physician_languages'] = $language_list;
+	$data['physician_eligible_appointments'] = $physician_resident ? 0 : get_field('physician_eligible_appointments',$postId);
+	$data['physician_photo'] = image_sizer(get_post_thumbnail_id($postId), 253, 337, 'center', 'center');
+	//
+	$physician_portal = get_field('physician_portal', $postId);
+    $physician_clinical_admin_title = get_field('physician_clinical_admin_title');
+    $physician_clinical_focus = get_field('physician_clinical_focus');
+    $physician_awards = get_field('physician_awards');
+    $physician_additional_info = get_field('physician_additional_info');
+    $associations = get_field( 'physician_associations' );
+    $publications = get_field('physician_select_publications');
+    $pubmed_author_id = get_field('physician_pubmed_author_id');
+    $pubmed_author_number = get_field('physician_author_number');
+    $education = get_field('physician_education');
+    $academic_bio = get_field('physician_academic_bio');
+    $academic_appointment = get_field('physician_academic_appointment');
+    $academic_admin_title = get_field('physician_academic_admin_title');
+    $research_bio = get_field('physician_research_bio');
+    $research_interests = get_field('physician_research_interests');
+    $research_profiles_link = get_field('physician_research_profiles_link');
+    $podcast_name = get_field('physician_podcast_name');
+
     // Locations
 	$i = 1;
 	$locations = get_field('physician_locations', $postId);
@@ -2055,17 +2088,6 @@ function get_provider_meta($object) {
 		// $data['location_link'][$location] = get_post_permalink( $location );
 		// $data['location_title'] .= get_the_title( $location ) . ',';
 	}
-    // $data['physician_affiliation'] = get_post_meta( $postId, 'physician_affiliation', true );
-    // $data['physician_appointment_link'] = get_post_meta( $postId, 'physician_appointment_link', true );
-    // $data['physician_primary_care'] = get_post_meta( $postId, 'physician_primary_care', true );
-    // $data['physician_refferal_required'] = get_post_meta( $postId, 'physician_refferal_required', true );
-    // $data['physician_accepting_patients'] = get_post_meta( $postId, 'physician_accepting_patients', true );
-    $data['physician_second_opinion'] = get_field( 'physician_second_opinion', $postId );
-    // $data['physician_patient_types'] = get_the_terms( $postId, 'patient_type' );
-    $data['physician_npi'] = get_field( 'physician_npi', $postId );
-    // $data['medical_specialties'] = get_the_terms( $postId, 'specialty' );
-	// $data['pphoto'] = wp_get_attachment_url( get_post_meta( $postId, 'physician_photo', true ), 'file' );
-	$data['physician_photo'] = image_sizer(get_post_thumbnail_id($postId), 253, 337, 'center', 'center');
 	// Conditions
 	$conditions_cpt = get_field('physician_conditions_cpt', $postId);
 	$condition_list = '';
