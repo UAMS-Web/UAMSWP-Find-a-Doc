@@ -563,3 +563,132 @@ function display_medline_api_data( $code, $type ) {
 		}
 	}
 }
+
+function provider_ajax_filter_scripts() {
+	wp_enqueue_script( 'provider_ajax_filter', UAMS_FAD_ROOT_URL . 'assets/js/ajax-script.js', array(), '1.0', true );
+    wp_localize_script( 'provider_ajax_filter', 'ajax_url', admin_url('admin-ajax.php') );
+}
+
+// Provider AJAX
+function uamswp_provider_ajax_filter_shortcode( $atts ) {
+	$a = shortcode_atts( array(
+		'providers' => ''
+	), $atts);
+	$providers = explode(",", $a['providers']);
+	$provider_titles = array();
+	$provider_titles_list = array();
+	$regions = array();
+	foreach($providers as $provider) {
+		if ( get_post_status ( $provider ) == 'publish' ) {
+			// Clinical Title
+			$provider_resident = get_field('physician_resident',$provider);
+			$provider_resident_title_name = 'Resident Physician';
+			$provider_phys_title = get_field('physician_title',$provider);
+			if(!empty($provider_phys_title) || $provider_resident){
+				$provider_phys_title_name = $provider_resident ? $provider_resident_title_name : get_term( $provider_phys_title, 'clinical_title' )->name;
+				$provider_titles[$provider_phys_title] = $provider_phys_title_name;
+			}
+			// Region
+			$provider_region = get_field('physician_region', $provider);
+			$provider_regions[] = $provider_region;
+		}
+	}
+	$provider_titles_list = array_unique($provider_titles);
+	asort($provider_titles_list);
+	$provider_regions_ids = array_unique($provider_regions);
+	sort($provider_regions_ids);
+
+	provider_ajax_filter_scripts();
+
+	ob_start(); ?>
+
+	<div id="provider-ajax-filter">
+        <form action="" method="get">
+            <!-- <input type="text" name="search" id="search" value="" placeholder="Search Here.."> -->
+            <div class="row">
+                <div class="col-6">
+                    <label for="region">Region</label>
+                    <select name="region" id="region">
+						<option value="">Any Region</option>
+					<?php $regions = get_terms('region', 'orderby=name&hide_empty=0');
+					foreach($regions as $region) : ?>
+                        <option value="<?php echo $region->slug; ?>"<?php echo in_array($region->term_id, $provider_regions_ids) ? '' : ' disabled' ?>><?php echo $region->name; ?></option>
+					<?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <label for="title">Clinical Title</label>
+                    <select name="title" id="title">
+                        <option value="">Any Title</option>
+						<?php foreach($provider_titles_list as $key => $title) : ?>
+                        <option value="<?= $key; ?>"><?= $title; ?></option>
+					<?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+			<input type="hidden" id="providers" name="providers" value="<?php echo implode(",", $providers); ?>">
+            <input type="submit" id="submit" name="submit" value="Search">
+        </form>
+    </div>
+
+	<?php
+	return ob_get_clean();
+}
+add_shortcode ('uamswp_provider_ajax_filter', 'uamswp_provider_ajax_filter_shortcode');
+
+// Ajax Callback
+add_action('wp_ajax_nopriv_provider_ajax_filter', 'provider_ajax_filter_callback'); 
+add_action('wp_ajax_provider_ajax_filter', 'provider_ajax_filter_callback');
+ 
+function provider_ajax_filter_callback() {
+  
+    $tax_query = array('relation' => 'AND');
+ 
+    if(isset($_POST['title'])) {
+        $clinical_title = sanitize_text_field( $_POST['title'] );
+        $tax_query[] = array(
+            'taxonomy' => 'clinical_title',
+			'field' => 'term_id',
+            'terms' => $clinical_title,
+
+        );
+    }
+
+	if(isset($_POST['region'])) {
+        $region = sanitize_text_field( $_POST['region'] );
+        $tax_query[] = array(
+            'taxonomy' => 'region',
+			'field' => 'slug',
+            'terms' => $region
+        );
+    }
+
+	if(isset($_POST['providers'])) {
+        $providers = sanitize_text_field( $_POST['providers'] );
+		$providers = explode(",", $providers);
+    }
+ 
+    $args = array(
+        'post_type' => 'provider',
+		'post_status' => 'publish',
+		'orderby' => 'title',
+		'order' => 'ASC',
+        'posts_per_page' => -1,
+		'post__in' => $providers,
+        'tax_query' => $tax_query
+    );
+ 
+    $search_query = new WP_Query( $args );
+ 
+    if ( $search_query->have_posts() && !empty($providers) ) {
+ 
+        while ( $search_query->have_posts() ) : $search_query->the_post();
+            $id = get_the_ID();
+			include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+        endwhile;
+ 
+    } else {
+        echo 'No matching providers found. Try a different filter or search keyword';
+    }
+    wp_die();
+}
