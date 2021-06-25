@@ -2299,8 +2299,8 @@ function get_provider_meta($object) {
 	}
     $data['physician_languages'] = $language_list;
 	$data['physician_eligible_appointments'] = $physician_resident ? 0 : get_field('physician_eligible_appointments',$postId);
-	$data['physician_photo'] = image_sizer(get_post_thumbnail_id($postId), 253, 337, 'center', 'center');
-	//
+	$data['physician_thumbnail'] = image_sizer(get_post_thumbnail_id($postId), 253, 337, 'center', 'center');
+	$data['physician_photo'] = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center');
 	$data['physician_referral_required'] = get_field('physician_referral_required', $postId);
 	$physician_portal = get_field('physician_portal', $postId);
 	$portal = get_term($physician_portal, "portal");
