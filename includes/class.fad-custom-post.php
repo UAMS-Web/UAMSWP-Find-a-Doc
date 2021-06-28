@@ -2260,7 +2260,60 @@ function get_location_meta($object) {
 	$postId = $object['id'];
 	$data['location_title'] = get_the_title( $postId );
 	$data['location_link'] = get_permalink($postId );
-	$data['location_photo'] = get_the_post_thumbnail($postId, 'aspect-16-9-small', ['class' => 'card-img-top']);
+	// Parent Location 
+	$location_has_parent = get_field('location_parent');
+	$location_parent_id = get_field('location_parent_id');
+	$parent_title = ''; // Eliminate PHP errors
+	$parent_url = ''; // Eliminate PHP errors
+	$parent_location = ''; // Eliminate PHP errors
+	if ($location_has_parent && $location_parent_id) { 
+		$parent_location = get_post( $location_parent_id );
+	}
+	// Get Post ID for Address & Image fields
+	if ($parent_location) {
+		$post_id = $parent_location->ID;
+		$parent_title = $parent_location->post_title;
+		$parent_url = get_permalink( $post_id );
+	} else {
+		$post_id = $postId;
+	}
+	// Image values
+	$override_parent_photo = get_field('location_image_override_parent', $postId);
+	$override_parent_photo_featured = get_field('location_image_override_parent_featured', $postId);
+	$override_parent_photo_wayfinding = get_field('location_image_override_parent_wayfinding', $postId);
+	$override_parent_photo_gallery = get_field('location_image_override_parent_gallery', $postId);
+	// if ($override_parent_photo && $parent_location) { // If child location & override is true
+	if ($override_parent_photo && $parent_location && $override_parent_photo_wayfinding) {
+		$wayfinding_photo = get_field('location_wayfinding_photo', $postId);
+	} else { // Use parent/standard images
+		$wayfinding_photo = get_field('location_wayfinding_photo', $post_id);
+	}
+	if ($override_parent_photo && $parent_location && $override_parent_photo_gallery) {
+		$photo_gallery = get_field('location_photo_gallery', $postId);
+	} else { // Use parent/standard images
+		$photo_gallery = get_field('location_photo_gallery', $post_id);
+	}
+
+	$location_images = array();
+	if ($wayfinding_photo && !empty($wayfinding_photo)) {
+		$location_images[] = $wayfinding_photo;
+	}
+	if ($photo_gallery && !empty($photo_gallery)) {
+		foreach( $photo_gallery as $photo_gallery_image ) {
+			$location_images[] = $photo_gallery_image;
+		}
+	}
+	if( ! empty( $location_images ) ){
+		$i = 0;
+		foreach ($location_images as $location_images_item) {
+			$data['location_photo'][$i]['thumbnail'] = image_sizer($location_images_item, 60, 45, 'center', 'center');
+			$data['location_photo'][$i]['small'] = image_sizer($location_images_item, 576, 324, 'center', 'center');
+			$data['location_photo'][$i]['med'] = image_sizer($location_images_item, 630, 473, 'center', 'center');
+			$data['location_photo'][$i]['large'] = image_sizer($location_images_item, 992, 558, 'center', 'center');
+			$i++;
+		}
+	}	
+	//$data['location_photo'] = get_the_post_thumbnail($postId, 'aspect-16-9-small', ['class' => 'card-img-top']);
 	$map = $map = get_field('location_map', $postId );
 	$data['location_lat'] = $map['lat'];
 	$data['location_lng'] = $map['lng'];
@@ -2293,6 +2346,80 @@ function get_location_meta($object) {
 	$data['location_new_appointments_phonetext'] = ( $location_new_appointments_phone && $location_clinic_phone_query) ? 'New Patients' : 'New and Returning Patients';
 	$data['location_return_appointments_phone'] = $location_return_appointments_phone;
 	$data['location_return_appointments_phone_text'] = ($location_return_appointments_phone && $location_clinic_phone_query) ? 'Returning Patients' : '';
+	// Hours
+	$location_hours_group = get_field('location_hours_group', $postId);
+	$data['location_hours_variable'] = $location_hours_group['location_hours_variable'];
+	$data['location_hours_variable_info'] = $location_hours_group['location_hours_variable_info'];
+	$data['location_24_7'] = $location_hours_group['location_24_7'];
+	$data['location_modified'] = $location_hours_group['location_modified_hours'];
+	$data['location_modified_reason'] = $location_hours_group['location_modified_hours_reason'];
+	$data['location_modified_start_date'] = $location_hours_group['location_modified_hours_start_date'];
+	$data['location_modified_end'] = $location_hours_group['location_modified_hours_end'];
+	$data['location_modified_end_date'] = $location_hours_group['location_modified_hours_end_date'];
+	$modified_hours = $location_hours_group['location_modified_hours_group'];
+	$i=0;
+	foreach ($modified_hours as $modified_hour) {
+		$data['location_modified_hours'][$i]['title'] = $modified_hour['location_modified_hours_title'];
+		$data['location_modified_hours'][$i]['information'] = $modified_hour['location_modified_hours_information'];
+		$data['location_modified_hours'][$i]['times'] = $modified_hour['location_modified_hours_times'];
+		$data['location_modified_hours'][$i]['24_7'] = $modified_hour['location_modified_hours_24_7'];
+		$i++;
+	}
+	$hours = $location_hours_group['location_hours'];
+	$i=0;
+	foreach ($hours as $hour) :
+		$data['location_hours'][$i]['day'] = $hour['day'];
+		$data['location_hours'][$i]['closed'] = $hour['closed'];
+		$data['location_hours'][$i]['open'] = $hour['open'];
+		$data['location_hours'][$i]['close'] = $hour['close'];
+		$data['location_hours'][$i]['comment'] = $hour['comment'];
+	endforeach;
+	// Holiday Hours - Deprecated for Modified Hours
+	$holidayhours = get_field('location_holiday_hours',$postId);
+	if ($holidayhours):
+		$order = array();
+		// populate order
+		foreach( $holidayhours as $i => $row ) {	
+			$order[ $i ] = $row['date'];
+		}
+		// multisort
+		array_multisort( $order, SORT_ASC, $holidayhours );
+		$i = 1;
+		foreach( $holidayhours as $holidayhour ):
+			$data['location_holiday_hours'][$i]['day'] = $holidayhour['date'];
+			$data['location_holiday_hours'][$i]['label'] = $holidayhour['label'];
+			$data['location_holiday_hours'][$i]['closed'] = $holidayhour['closed'];
+			$data['location_holiday_hours'][$i]['open'] = $holidayhour['open'];
+			$data['location_holiday_hours'][$i]['close'] = $holidayhour['close'];
+		endforeach;
+	endif;
+	
+	$data['location_after_hours'] = $location_hours_group['location_after_hours'];
+
+	$data['location_telemed_query'] = $location_hours_group['location_telemed_query']; // Is there telemedicine?
+	$data['location_telemed_patients'] = $location_hours_group['location_telemed_patients']; // New patients, existing or both?
+	$data['location_telemed_hours247'] = $location_hours_group['location_telemed_24_7']; // typically 24/7?
+	$data['location_telemed_hours'] = $location_hours_group['location_telemed_hours']; // telemedicine hours repeater
+	$data['location_telemed_modified'] = $location_hours_group['location_telemed_modified_hours_query']; // Are there modified hours for telemedicine?
+	$data['location_telemed_modified_reason'] = $location_hours_group['location_telemed_modified_hours_reason']; // Why are there modified hours for telemedicine?
+	$data['location_telemed_modified_start'] = $location_hours_group['location_telemed_modified_hours_start_date']; // When do the modified telemedicine hours start?
+	$data['location_telemed_modified_end'] = $location_hours_group['location_telemed_modified_hours_end']; // Do we know when the modified telemedicine hours end?
+	$data['location_telemed_modified_end_date'] = $location_hours_group['location_telemed_modified_hours_end_date']; // When do the modified telemedicine hours end?
+	$data['location_telemed_modified_hours247'] = $location_hours_group['location_telemed_modified_hours_24_7'];
+
+	$data['location_closing'] = get_field('location_closing',$postId); // true or false
+	$data['location_closing_date'] = get_field('location_closing_date',$postId);
+	$data['location_closing_length'] = get_field('location_closing_length',$postId);
+	$data['location_reopen_known'] = get_field('location_reopen_known',$postId);
+	$data['location_reopen_date'] = get_field('location_reopen_date',$postId);
+	$data['location_closing_info'] = get_field('location_closing_info',$postId);
+	$data['location_closing_telemed'] = get_field('location_closing_telemed',$postId);
+
+	$data['location_prescription_query'] = get_field('location_prescription_query',$postId);
+	$data['location_prescription_type'] = get_field('location_prescription_type',$postId);
+	$data['location_prescription'] = get_field('location_prescription',$postId);
+	
+	
 	$data['location_about'] = get_field('location_about', $postId);
 	$providers = get_field('physician_locations', $postId);
 	$provider_list = '';
