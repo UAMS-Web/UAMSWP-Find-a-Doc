@@ -2428,7 +2428,7 @@ function get_location_meta($object) {
 	$data['location_appointment'] = get_field('location_appointment',$postId);
 	$data['location_appointment_bring'] = get_field('location_appointment_bring',$postId);
 	$location_portal = get_field('location_portal', $postId);
-	$portal = get_term($physician_portal, "portal");
+	$portal = get_term($location_portal, "portal");
 	$data['location_portal']['name'] = $portal->name;
 	$data['location_portal']['content'] = get_field('portal_content', $portal);
 	$data['location_portal']['url'] = get_field('portal_url', $portal);
