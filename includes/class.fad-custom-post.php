@@ -2433,6 +2433,42 @@ function get_location_meta($object) {
 	$data['location_portal']['content'] = get_field('portal_content', $portal);
 	$data['location_portal']['url'] = get_field('portal_url', $portal);
 
+	// Alert with logic
+	$location_alert_title_sys = get_field('location_alert_heading_system', 'option');
+	$location_alert_text_sys = get_field('location_alert_body_system', 'option');
+	$location_alert_color_sys = get_field('location_alert_color_system', 'option');
+
+	$location_alert_suppress = get_field('location_alert_suppress',$postId);
+	$location_alert_modification = get_field('location_alert_modification',$postId);
+
+	$location_alert_title_local = get_field('location_alert_heading',$postId);
+	$location_alert_text_local = get_field('location_alert_body',$postId);
+	$location_alert_color_local = get_field('location_alert_color',$postId);
+
+	$location_alert_title = $location_alert_title_sys;
+	if ( !empty($location_alert_title_local) && $location_alert_modification == 'override' ) {
+		$location_alert_title = $location_alert_title_local;
+	}
+	$location_alert_color = $location_alert_color_sys;
+	if ( $location_alert_modification == 'override' && $location_alert_color_local != 'inherit' ) {
+		$location_alert_color = $location_alert_color_local;
+	}
+	$location_alert_text = $location_alert_text_sys;
+	if ( $location_alert_modification == 'override' && !empty($location_alert_text_local) ) {
+		$location_alert_text = $location_alert_text_local;
+	} elseif ( $location_alert_modification == 'prepend' && !empty($location_alert_text_local) ) {
+		$location_alert_text = $location_alert_text_local . $location_alert_text_sys;
+	} elseif ( $location_alert_modification == 'append' && !empty($location_alert_text_local) ) {
+		$location_alert_text = $location_alert_text_sys . $location_alert_text_local;
+	}
+	if ( $location_alert_modification == 'suppress' ) {
+		$location_alert_suppress = true;
+		$location_alert_title = '';
+		$location_alert_text = '';
+	}
+	$data['location_alert_title'] = $location_alert_title ? $location_alert_title : '';
+	$data['location_alert_text'] = $location_alert_text ? $location_alert_text : '';
+	$data['location_alert_color'] = $location_alert_color ? $location_alert_color : 'alert-warning';
 
 	$providers = get_field('physician_locations', $postId);
 	$provider_list = '';
