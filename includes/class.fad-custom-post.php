@@ -2261,8 +2261,8 @@ function get_location_meta($object) {
 	$data['location_title'] = get_the_title( $postId );
 	$data['location_link'] = get_permalink($postId );
 	// Parent Location 
-	$location_has_parent = get_field('location_parent');
-	$location_parent_id = get_field('location_parent_id');
+	$location_has_parent = get_field('location_parent',$postId);
+	$location_parent_id = get_field('location_parent_id',$postId);
 	$parent_title = ''; // Eliminate PHP errors
 	$parent_url = ''; // Eliminate PHP errors
 	$parent_location = ''; // Eliminate PHP errors
@@ -2277,6 +2277,10 @@ function get_location_meta($object) {
 	} else {
 		$post_id = $postId;
 	}
+	// Parent Location
+	$data['location_parent']['id'] = $location_parent_id;
+	$data['location_parent']['title'] = $parent_title;
+	$data['location_parent']['url'] = $parent_url;
 	// Image values
 	$override_parent_photo = get_field('location_image_override_parent', $postId);
 	$override_parent_photo_featured = get_field('location_image_override_parent_featured', $postId);
@@ -2306,15 +2310,15 @@ function get_location_meta($object) {
 	if( ! empty( $location_images ) ){
 		$i = 0;
 		foreach ($location_images as $location_images_item) {
-			$data['location_photo'][$i]['thumbnail'] = image_sizer($location_images_item, 60, 45, 'center', 'center');
-			$data['location_photo'][$i]['small'] = image_sizer($location_images_item, 576, 324, 'center', 'center');
+			$data['location_photo'][$i]['thumb'] = image_sizer($location_images_item, 60, 45, 'center', 'center');
+			$data['location_photo'][$i]['sml'] = image_sizer($location_images_item, 576, 324, 'center', 'center');
 			$data['location_photo'][$i]['med'] = image_sizer($location_images_item, 630, 473, 'center', 'center');
-			$data['location_photo'][$i]['large'] = image_sizer($location_images_item, 992, 558, 'center', 'center');
+			$data['location_photo'][$i]['lrg'] = image_sizer($location_images_item, 992, 558, 'center', 'center');
 			$i++;
 		}
 	}	
 	//$data['location_photo'] = get_the_post_thumbnail($postId, 'aspect-16-9-small', ['class' => 'card-img-top']);
-	$map = $map = get_field('location_map', $postId );
+	$map = get_field('location_map', $postId );
 	$data['location_lat'] = $map['lat'];
 	$data['location_lng'] = $map['lng'];
 	$data['location_address_1'] = get_field('location_address_1', $postId );
@@ -2373,26 +2377,27 @@ function get_location_meta($object) {
 		$data['location_hours'][$i]['open'] = $hour['open'];
 		$data['location_hours'][$i]['close'] = $hour['close'];
 		$data['location_hours'][$i]['comment'] = $hour['comment'];
+		$i++;
 	endforeach;
 	// Holiday Hours - Deprecated for Modified Hours
-	$holidayhours = get_field('location_holiday_hours',$postId);
-	if ($holidayhours):
-		$order = array();
-		// populate order
-		foreach( $holidayhours as $i => $row ) {	
-			$order[ $i ] = $row['date'];
-		}
-		// multisort
-		array_multisort( $order, SORT_ASC, $holidayhours );
-		$i = 1;
-		foreach( $holidayhours as $holidayhour ):
-			$data['location_holiday_hours'][$i]['day'] = $holidayhour['date'];
-			$data['location_holiday_hours'][$i]['label'] = $holidayhour['label'];
-			$data['location_holiday_hours'][$i]['closed'] = $holidayhour['closed'];
-			$data['location_holiday_hours'][$i]['open'] = $holidayhour['open'];
-			$data['location_holiday_hours'][$i]['close'] = $holidayhour['close'];
-		endforeach;
-	endif;
+	// $holidayhours = get_field('location_holiday_hours',$postId);
+	// if ($holidayhours):
+	// 	$order = array();
+	// 	// populate order
+	// 	foreach( $holidayhours as $i => $row ) {	
+	// 		$order[ $i ] = $row['date'];
+	// 	}
+	// 	// multisort
+	// 	array_multisort( $order, SORT_ASC, $holidayhours );
+	// 	$i = 1;
+	// 	foreach( $holidayhours as $holidayhour ):
+	// 		$data['location_holiday_hours'][$i]['day'] = $holidayhour['date'];
+	// 		$data['location_holiday_hours'][$i]['label'] = $holidayhour['label'];
+	// 		$data['location_holiday_hours'][$i]['closed'] = $holidayhour['closed'];
+	// 		$data['location_holiday_hours'][$i]['open'] = $holidayhour['open'];
+	// 		$data['location_holiday_hours'][$i]['close'] = $holidayhour['close'];
+	// 	endforeach;
+	// endif;
 	
 	$data['location_after_hours'] = $location_hours_group['location_after_hours'];
 
@@ -2419,8 +2424,16 @@ function get_location_meta($object) {
 	$data['location_prescription_type'] = get_field('location_prescription_type',$postId);
 	$data['location_prescription'] = get_field('location_prescription',$postId);
 	
-	
 	$data['location_about'] = get_field('location_about', $postId);
+	$data['location_appointment'] = get_field('location_appointment',$postId);
+	$data['location_appointment_bring'] = get_field('location_appointment_bring',$postId);
+	$location_portal = get_field('location_portal', $postId);
+	$portal = get_term($physician_portal, "portal");
+	$data['location_portal']['name'] = $portal->name;
+	$data['location_portal']['content'] = get_field('portal_content', $portal);
+	$data['location_portal']['url'] = get_field('portal_url', $portal);
+
+
 	$providers = get_field('physician_locations', $postId);
 	$provider_list = '';
 	$i = 1;
