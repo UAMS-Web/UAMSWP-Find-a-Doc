@@ -723,7 +723,7 @@ function provider_ajax_filter_callback() {
 		
     } else {
 		//var_dump($args);
-        echo 'No matching providers found. Try a different filter or search keyword';
+        echo 'No matching providers found. Try a different filter or resetting filters';
     }
     wp_die();
 }
