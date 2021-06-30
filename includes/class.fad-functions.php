@@ -338,10 +338,10 @@ add_action('wp_ajax_nopriv_load_posts_by_ajax', 'uamswp_load_by_ajax_callback');
 function uamswp_load_by_ajax_callback(){
     $ppp = (isset($_POST["ppp"])) ? $_POST["ppp"] : 6; // Set this default value
     $page = $_POST['page'];
-    $type = (isset($_POST["posttype"])) ? $_POST["posttype"] : 'post'; // Assume its post if not set
+    // $type = (isset($_POST["posttype"])) ? $_POST["posttype"] : 'post'; // Assume its post if not set
         
     header("Content-Type: text/html");
-    if ('post' == $type) {
+    // if ('post' == $type) {
         $ids = (isset($_POST["postid"])) ? $_POST["postid"] : '';
         $ids_array = explode(',', $ids);
         $args = array(
@@ -355,26 +355,26 @@ function uamswp_load_by_ajax_callback(){
             'post__in' => $ids_array,
             
         );
-    } else { // Taxonomy
-        $tax = (isset($_POST["tax"])) ? $_POST["tax"] : '';
-        $slug = (isset($_POST["slug"])) ? $_POST["slug"] : '';
-        $args = array(
-            "post_type" => "provider",
-            "post_status" => "publish",
-            "posts_per_page" => $ppp,
-            "orderby" => "title",
-            "order" => "ASC",
-            'paged'    => $page,
-            "tax_query" => array(
-                array(
-                "taxonomy" => $tax,
-                "field" => "slug",
-                "terms" => $slug,
-                "operator" => "IN"
-                )
-            )
-        );
-    }
+    // } else { // Taxonomy
+    //     $tax = (isset($_POST["tax"])) ? $_POST["tax"] : '';
+    //     $slug = (isset($_POST["slug"])) ? $_POST["slug"] : '';
+    //     $args = array(
+    //         "post_type" => "provider",
+    //         "post_status" => "publish",
+    //         "posts_per_page" => $ppp,
+    //         "orderby" => "title",
+    //         "order" => "ASC",
+    //         'paged'    => $page,
+    //         "tax_query" => array(
+    //             array(
+    //             "taxonomy" => $tax,
+    //             "field" => "slug",
+    //             "terms" => $slug,
+    //             "operator" => "IN"
+    //             )
+    //         )
+    //     );
+    // }
     $loop = new WP_Query($args);
     $out = '';
     if ($loop -> have_posts()) :  while ($loop -> have_posts()) : $loop -> the_post();
@@ -572,9 +572,11 @@ function provider_ajax_filter_scripts() {
 // Provider AJAX
 function uamswp_provider_ajax_filter_shortcode( $atts ) {
 	$a = shortcode_atts( array(
-		'providers' => ''
+		'providers' => '',
+		'ppp' => ''
 	), $atts);
 	$providers = explode(",", $a['providers']);
+	$ppp = $a['ppp'];
 	$provider_titles = array();
 	$provider_titles_list = array();
 	$regions = array();
@@ -598,7 +600,15 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
 	$provider_regions_ids = array_unique($provider_regions);
 	sort($provider_regions_ids);
 
-	provider_ajax_filter_scripts();
+	$provider_region = '';
+	if( isset($_COOKIE['providerRegion']) ) {
+		$provider_region = $_COOKIE['providerRegion'];
+	}
+	$provider_title = '';
+	if( isset($_COOKIE['providerTitle']) ) {
+		$provider_title = $_COOKIE['providerTitle'] ;
+	}
+	//provider_ajax_filter_scripts();
 
 	ob_start(); ?>
 
@@ -612,7 +622,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
 						<option value="">Any Region</option>
 					<?php $regions = get_terms('region', 'orderby=name&hide_empty=0');
 					foreach($regions as $region) : ?>
-                        <option value="<?php echo $region->slug; ?>"<?php echo in_array($region->term_id, $provider_regions_ids) ? '' : ' disabled' ?>><?php echo $region->name; ?></option>
+                        <option value="<?php echo $region->slug; ?>"<?php echo in_array($region->term_id, $provider_regions_ids) ? '' : ' disabled'; ?><?php echo ($region->slug === $provider_region) ? ' selected' : ''; ?>><?php echo $region->name; ?></option>
 					<?php endforeach; ?>
                     </select>
                 </div>
@@ -621,13 +631,15 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
                     <select name="title" id="title">
                         <option value="">Any Title</option>
 						<?php foreach($provider_titles_list as $key => $title) : ?>
-                        <option value="<?= $key; ?>"><?= $title; ?></option>
+                        <option value="<?= $key; ?>"<?php echo ($key == $provider_title) ? ' selected' : ''; ?>><?= $title; ?></option>
 					<?php endforeach; ?>
                     </select>
                 </div>
             </div>
 			<input type="hidden" id="providers" name="providers" value="<?php echo implode(",", $providers); ?>">
+			<input type="hidden" id="ppp" name="ppp" value="<?php echo $ppp; ?>">
             <input type="submit" id="submit" name="submit" value="Search">
+			<input type="button" id="clear" name="clear" value="Reset">
         </form>
     </div>
 
@@ -643,19 +655,32 @@ add_action('wp_ajax_provider_ajax_filter', 'provider_ajax_filter_callback');
 function provider_ajax_filter_callback() {
   
     $tax_query = array('relation' => 'AND');
+
+	$provider_title = '';
+	if( isset($_COOKIE['providerTitle']) ) {
+		$provider_title = $_COOKIE['providerTitle'] ;
+	} elseif(isset($_POST['title'])){
+		$provider_title = sanitize_text_field( $_POST['title'] );
+	}
+
+	$provider_region = '';
+	if( isset($_COOKIE['providerRegion']) ) {
+		$provider_region = $_COOKIE['providerRegion'];
+	} elseif(isset($_POST['region'])){
+		$provider_region = sanitize_text_field( $_POST['region'] );
+	}
  
-    if(isset($_POST['title'])) {
-        $clinical_title = sanitize_text_field( $_POST['title'] );
+    if(!empty($provider_title) ) {
+        $clinical_title = $provider_title ;
         $tax_query[] = array(
             'taxonomy' => 'clinical_title',
 			'field' => 'term_id',
             'terms' => $clinical_title,
-
         );
     }
 
-	if(isset($_POST['region'])) {
-        $region = sanitize_text_field( $_POST['region'] );
+	if(!empty($provider_region)) {
+        $region =  $provider_region;
         $tax_query[] = array(
             'taxonomy' => 'region',
 			'field' => 'slug',
@@ -667,6 +692,10 @@ function provider_ajax_filter_callback() {
         $providers = sanitize_text_field( $_POST['providers'] );
 		$providers = explode(",", $providers);
     }
+
+	if(isset($_POST['ppp'])) {
+        $ppp = sanitize_text_field( $_POST['ppp'] );
+    }
  
     $args = array(
         'post_type' => 'provider',
@@ -674,6 +703,7 @@ function provider_ajax_filter_callback() {
 		'orderby' => 'title',
 		'order' => 'ASC',
         'posts_per_page' => -1,
+		'fields' => 'ids',
 		'post__in' => $providers,
         'tax_query' => $tax_query
     );
@@ -681,14 +711,24 @@ function provider_ajax_filter_callback() {
     $search_query = new WP_Query( $args );
  
     if ( $search_query->have_posts() && !empty($providers) ) {
- 
-        while ( $search_query->have_posts() ) : $search_query->the_post();
+		$provider_ids = $search_query->posts;
+		//echo $_POST['ppp'];
+		echo '<data id="provider_ids" data-postids="'. implode(',', $provider_ids) .'"></data>';
+		$z=0;
+        while ( $z < $ppp && $search_query->have_posts() ) : $search_query->the_post();
             $id = get_the_ID();
 			include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+			$z++;
         endwhile;
- 
+		
     } else {
+		//var_dump($args);
         echo 'No matching providers found. Try a different filter or search keyword';
     }
     wp_die();
+}
+// Load More
+function uamswp_load_more_providers_scripts() {
+
+	
 }
