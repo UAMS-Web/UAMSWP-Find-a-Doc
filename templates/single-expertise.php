@@ -155,24 +155,22 @@ if( $treatments_cpt && $treatments_cpt_query->posts ) {
 // Check if Providers section should be displayed
 $physicians = get_field( "physician_expertise" );
 if($physicians) {
-    $postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12). If you change the value, update the instruction text in the editor's JSON file.
-    $postsCutoff = 18; // Set cutoff value. If you change the value, update the instruction text in the editor's JSON file.
-    $postsCountClass = $postsPerPage;
-    if(count($physicians) <= $postsCutoff ) {
-        $postsPerPage = -1;
-    }
     $args = array(
         "post_type" => "provider",
         "post_status" => "publish",
-        "posts_per_page" => $postsPerPage,
+        "posts_per_page" => -1,
         "orderby" => "title",
         "order" => "ASC",
+        "fields" => "ids",
         "post__in" => $physicians
+        // 'tax_query' => $tax_query
     );
     $physicians_query = New WP_Query( $args );
     if($physicians_query && $physicians_query->have_posts()) {
         $show_providers_section = true;
         $jump_link_count++;
+        $provider_ids = $physicians_query->posts;
+        wp_reset_postdata();
     } else {
         $show_providers_section = false;
     }
@@ -314,34 +312,95 @@ function uamswp_expertise_cta() {
 
 function uamswp_expertise_physicians() {
     global $show_providers_section;
-    global $postsCountClass;
+    //global $postsCountClass;
     global $physicians_query;
-    global $postsPerPage;
+    //global $postsPerPage;
     global $physicians;
+    global $provider_ids;
+
+    // if cookies are set, run modified physician query
+	if ( isset($_COOKIE['providerTitle']) || isset($_COOKIE['providerRegion']) ) {
+
+        $tax_query = array('relation' => 'AND');
+
+        $provider_title = '';
+        if( isset($_COOKIE['providerTitle']) ) {
+            $provider_title = $_COOKIE['providerTitle'] ;
+        }
+
+        $provider_region = '';
+        if( isset($_COOKIE['providerRegion']) ) {
+            $provider_region = $_COOKIE['providerRegion'];
+        }
+    
+        if(!empty($provider_title) ) {
+            $clinical_title = $provider_title ;
+            $tax_query[] = array(
+                'taxonomy' => 'clinical_title',
+                'field' => 'term_id',
+                'terms' => $clinical_title,
+            );
+        }
+
+        if(!empty($provider_region)) {
+            $region =  $provider_region;
+            $tax_query[] = array(
+                'taxonomy' => 'region',
+                'field' => 'slug',
+                'terms' => $region
+            );
+        }
+        $postsPerPage = -1;
+        $args = array(
+            "post_type" => "provider",
+            "post_status" => "publish",
+            "posts_per_page" => $postsPerPage,
+            "orderby" => "title",
+            "order" => "ASC",
+            "fields" => "ids",
+            "post__in" => $physicians,
+            'tax_query' => $tax_query
+        );
+        $physicians_query = New WP_Query( $args );
+    }
 
     if($show_providers_section) {   
+        $provider_count = count($physicians_query->posts);
+        $postsPerPage = 6; // Set this value to preferred value (4, 6, 8, 10, 12). If you change the value, update the instruction text in the editor's JSON file.
+        $postsCutoff = 9; // Set cutoff value. If you change the value, update the instruction text in the editor's JSON file.
+        if($provider_count <= $postsCutoff) {
+            $postsPerPage = $postsCutoff;
+        }
+        $postsCountClass = $postsPerPage;
+
         ?>
         <section class="uams-module bg-auto" id="providers">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <h2 class="module-title"><span class="title">Providers</span></h2>
+                        <?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'" ppp="'. $postsPerPage .'"]' ); ?>
                         <div class="card-list-container">
                             <div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
                                 <?php 
-                                    while ($physicians_query->have_posts()) : $physicians_query->the_post();
-                                        $id = get_the_ID();
-                                        include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
-                                    endwhile;
+                                    echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'"></data>';
+                                    $p=0;
+                                    if($provider_count > 0){
+                                        while ($p < $postsPerPage && $physicians_query->have_posts()) : $physicians_query->the_post();
+                                            $id = get_the_ID();
+                                            include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+                                            $p++;
+                                        endwhile;
+                                    } else {
+                                        echo 'No matching providers found. Try a different filter or resetting filters';
+                                    }
                                     wp_reset_postdata();
                                 ?>
                             </div>
                         </div>
-                        <?php if ($postsPerPage !== -1) { ?>
-                        <div class="more">
-                            <button class="loadmore btn btn-primary" data-posttype="post" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more providers">Load More</button>
+                        <div class="more" style="<?php echo ($postsPerPage < $provider_count) ? '' : 'display:none;' ; ?>">
+                            <button class="loadmore btn btn-primary <?php echo $provider_count; ?>" data-ppp="<?php echo $postsPerPage; ?>" aria-label="Load more providers">Load More</button>
                         </div>
-                        <?php } ?>
                     </div>
                 </div>
             </div>

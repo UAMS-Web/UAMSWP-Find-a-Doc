@@ -204,19 +204,13 @@
 
         // Check if Providers section should be displayed	
 		if ( $physicians ) {
-			$physiciansCount = count($physicians);
-			$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12)
-			$postsCutoff = 18; // Set cutoff value
-			$postsCountClass = $postsPerPage;
-			if($physiciansCount <= $postsCutoff ) {
-				$postsPerPage = -1;
-			}
 			$args = (array(
 				'post_type' => "provider",
 				"post_status" => "publish",
 				'order' => 'ASC',
 				'orderby' => 'title',
-				'posts_per_page' => $postsPerPage,
+				'posts_per_page' => -1,
+				'fields' => 'ids',
 				// 'no_found_rows' => true, // counts posts, remove if pagination required
 				'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
 				'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
@@ -227,6 +221,8 @@
 		if( $physicians && $physicians_query->have_posts() ) {
 			$show_providers_section = true;
 			$jump_link_count++;
+			$provider_ids = $physicians_query->posts;
+        	wp_reset_postdata();
 		} else {
 			$show_providers_section = false;
 		}
@@ -542,34 +538,95 @@
 		// End Conditions Section
 
 		// Begin Providers Section
-		if( $show_providers_section ) { ?>
+		if( $show_providers_section ) { 
+			if ( isset($_COOKIE['providerTitle']) || isset($_COOKIE['providerRegion']) ) {
+
+				$tax_query = array('relation' => 'AND');
+		
+				$provider_title = '';
+				if( isset($_COOKIE['providerTitle']) ) {
+					$provider_title = $_COOKIE['providerTitle'] ;
+				}
+		
+				$provider_region = '';
+				if( isset($_COOKIE['providerRegion']) ) {
+					$provider_region = $_COOKIE['providerRegion'];
+				}
+			
+				if(!empty($provider_title) ) {
+					$clinical_title = $provider_title ;
+					$tax_query[] = array(
+						'taxonomy' => 'clinical_title',
+						'field' => 'term_id',
+						'terms' => $clinical_title,
+					);
+				}
+		
+				if(!empty($provider_region)) {
+					$region =  $provider_region;
+					$tax_query[] = array(
+						'taxonomy' => 'region',
+						'field' => 'slug',
+						'terms' => $region
+					);
+				}
+				$postsPerPage = -1;
+				$args = array(
+					"post_type" => "provider",
+					"post_status" => "publish",
+					"posts_per_page" => $postsPerPage,
+					"orderby" => "title",
+					"order" => "ASC",
+					"fields" => "ids",
+					"post__in" => $physicians,
+					'tax_query' => $tax_query
+				);
+				$physicians_query = New WP_Query( $args );
+			}
+	
+			$provider_count = count($physicians_query->posts);
+			$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12)
+			$postsCutoff = 18; // Set cutoff value
+			if($provider_count <= $postsCutoff) {
+				$postsPerPage = $postsCutoff;
+			}
+			$postsCountClass = $postsPerPage;
+			?>
 			<section class="uams-module bg-auto" id="providers">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
 						<h2 class="module-title"><span class="title">Providers Performing <?php echo get_the_title(); ?></span></h2>
 						<p class="note">Note that every provider listed below may not perform or prescribe <?php echo get_the_title(); ?> for all conditions related to it. Review each provider for availability.</p>   
+						<?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'" ppp="'. $postsPerPage .'"]' ); ?>
 							<div class="card-list-container">
 								<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
-									<?php
-										while ($physicians_query->have_posts()) : $physicians_query->the_post();
-											$id = get_the_ID();
-											include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
-										endwhile;
+								<?php 
+										echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'"></data>';
+										$p=0;
+										if($provider_count > 0){
+											while ($p < $postsPerPage && $physicians_query->have_posts()) : $physicians_query->the_post();
+												$id = get_the_ID();
+												include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+												$p++;
+											endwhile;
+										} else {
+											echo 'No matching providers found. Try a different filter or resetting filters';
+										}
+										wp_reset_postdata();
 									?>
 								</div>
 							</div>
-							<?php if ($postsPerPage !== -1) { ?>
-							<div class="more">
-								<button class="loadmore btn btn-primary" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more providers">Load More</button>								</div>
-							<?php } ?>
+							<div class="more" style="<?php echo ($postsPerPage < $provider_count) ? '' : 'display:none;' ; ?>">
+								<button class="loadmore btn btn-primary" data-ppp="<?php echo $postsPerPage; ?>" aria-label="Load more providers">Load More</button>
+							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 		<?php
 		} // $physicians_query loop
-		wp_reset_postdata();
+		// wp_reset_postdata();
 		// End Providers Section
 		
 		// Begin Locations Section
