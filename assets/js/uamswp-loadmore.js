@@ -1,21 +1,14 @@
 jQuery(function($) {
-    //var page = 2; // Default to start on page 2
     var $loader = $('.loadmore');
     var ppp = ("" !== $loader.data('ppp')) ? $loader.data('ppp') : 6; // Set default value
-    // var postcount = ("" !== $loader.data('postcount')) ? $loader.data('postcount') : 0; // Break 
-    // var type = ("" !== $loader.data('type')) ? $loader.data('type') : 'post';
     var postids = ("" !== $('#provider_ids').data('postids')) ? $('#provider_ids').data('postids') : 0; // Post
-    // var tax = ("" !== $loader.data('tax')) ? $loader.data('tax') : 0; // Taxonomy
-    // var slug = ("" !== $loader.data('slug')) ? $loader.data('slug') : 0; // Taxonomy
     
-    //postids = $('#provider_ids').data('postids');
-
     $('body').on('click', '.loadmore', function() {
         
         postids = $('#provider_ids').data('postids');
         postcount = postids.split(",").length;
         page = ($('.card-list-doctors .card').length / ppp)+1;
-        console.log(ppp);
+        // console.log(page);
 
         var data = {
             'action': 'load_posts_by_ajax',
@@ -28,17 +21,6 @@ jQuery(function($) {
         max_pages = postcount / ppp; // Number of posts per page
 
         // console.log(max_pages);
- 
-        // $.post(blog.ajaxurl, data, function(response) {
-        //     if(response != '') {
-        //         $('.card-list-doctors').append(response);
-        //         if ( page >= max_pages )
-        //             $('.loadmore').hide();
-        //         page++;
-        //     } else {
-        //         $('.loadmore').hide();
-        //     }
-        // });
 
         $.ajax({
             url : uamswp_loadmore.ajaxurl,
@@ -49,7 +31,6 @@ jQuery(function($) {
 				$('.loadmore').text('Loading...'); // change the button text, you can also add a preloader image
 			},
 			success : function( data ){
-                // console.log(data);
 				if( data ) { 
 					$('.loadmore').text( 'Load More' ); // insert new posts
                     $('.card-list-doctors').append(data);
@@ -58,8 +39,7 @@ jQuery(function($) {
                     max_pages = postcount / ppp;
                     // console.log(page + ' ' + max_pages);
 					if ( page >= max_pages ) {
-                        // button.remove(); // if last page, remove the button
-                        $('#providers .more').hide();
+                        $('#providers .more').hide(); // if last page, remove the button
                         $('.loadmore').hide();
                     }
                     page++;
@@ -68,17 +48,12 @@ jQuery(function($) {
 				} else {
                     $('#providers .more').hide();
                     $('.loadmore').hide();
-					// button.remove(); // if no data, remove the button as well
 				}
             },
             error : function (jqXHR, textStatus, errorThrown) {
 				$loader.html($.parseJSON(jqXHR.responseText) + ' :: ' + textStatus + ' :: ' + errorThrown);
 				console.log(jqXHR);
             },
-            // error: function(errorThrown){
-            //     alert(errorThrown);
-            //     alert("There is an error with AJAX!");
-            // }
 
         });
     });
@@ -93,6 +68,9 @@ jQuery(function($) {
 
         pafForm.find("#region").prop('selectedIndex', 0);
         pafForm.find("#title").prop('selectedIndex', 0);
+        
+        deleteCookie('providerRegion');
+        deleteCookie('providerTitle');
 
         pafForm.submit();
 
@@ -118,19 +96,21 @@ jQuery(function($) {
         }
 
         if (region){
-            createCookie('providerRegion', region);
-            console.log('cookie set: ' + region);
+            createCookie('providerRegion', region, 1);
+            // console.log('cookie set: ' + region);
         } else {
-           createCookie('providerRegion', '');
+           deleteCookie('providerRegion');
+        //    console.log('cookie emptied' + getCookie('providerRegion'));
         }
         if(title){
-            createCookie('providerTitle', title);
-            console.log('cookie set: ' + title);
+            createCookie('providerTitle', title, 1);
+            // console.log('cookie set: ' + title);
         } else {
-           createCookie('providerTitle', '');
+           deleteCookie('providerTitle');
+        //    console.log('cookie emptied' + getCookie('providerTitle'));
         }
 
-        console.log(providers);
+        //console.log(providers);
 
     
         $.ajax({
@@ -167,6 +147,7 @@ jQuery(function($) {
      
     });
 });
+// Cookie Functions
 function createCookie(name, value, days) {
     var expires = "";
     if (days) {
@@ -174,5 +155,25 @@ function createCookie(name, value, days) {
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         expires = "; expires=" + date.toUTCString();
     }
-    document.cookie = name + "=" + value + expires + "; path=/";
+    var domain = "; domain=" + window.location.hostname;
+    document.cookie = name + "=" + value + expires + "; path=/" + domain;
 }
+function deleteCookie( name ) {
+    if( getCookie( name ) ) {
+      document.cookie = name + "=" +";expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain=" + window.location.hostname;
+    }
+}
+function getCookie(cname) {
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
