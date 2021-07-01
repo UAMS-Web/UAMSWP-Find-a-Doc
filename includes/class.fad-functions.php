@@ -727,8 +727,3 @@ function provider_ajax_filter_callback() {
     }
     wp_die();
 }
-// Load More
-function uamswp_load_more_providers_scripts() {
-
-	
-}
