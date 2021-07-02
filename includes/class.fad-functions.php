@@ -727,3 +727,21 @@ function provider_ajax_filter_callback() {
     }
     wp_die();
 }
+function uamswp_add_trench(){
+	if(is_page( )) {
+		$trench = get_field('page_filter_region');
+		if (isset($trench) && $trench){	
+			?>
+			<script type="text/javascript">
+				var days = 1; // Expiration value
+				var date = new Date();
+				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+				expires = "; expires=" + date.toUTCString();
+				var domain = "; domain=" + window.location.hostname;
+    			document.cookie = "providerRegion=<?php echo $trench->slug; ?>" + expires + "; path=/" + domain;
+			</script>
+		<?php
+		}
+	}
+}
+add_action('wp_footer', 'uamswp_add_trench');
