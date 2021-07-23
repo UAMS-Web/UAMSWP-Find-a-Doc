@@ -114,6 +114,30 @@ function fwp_facet_scripts() {
 				$('.condition-filter').hide();
 			}
         }
+        /*
+        After FacetWP reloads, store any updates into a cookie
+        */
+        var date = new Date();
+        var facets = window.location.search;
+        date.setTime(date.getTime()+(24*60*60*1000));
+        // document.cookie = "facetdata="+facets+"; expires="+date.toGMTString()+"; path=/";
+        const params = new URLSearchParams(facets);
+        locationregion = params.get("_location_region");
+        providerregion = params.get("_provider_region");
+        var region;
+        // Is location region set
+        if (null != locationregion && '' != locationregion) {
+            region = locationregion;
+        }
+        // Is provider region set
+        if (null != providerregion && '' != providerregion) {
+            region = providerregion;
+        }
+        // If region is set, then write the cookie
+        if (region) {
+            // console.log(region);
+            document.cookie = "_filter_region="+region+"; expires="+date.toGMTString()+"; path=/";
+        }
     });
     $(document).on('facetwp-refresh', function() {
         if (! FWP.loaded) {
@@ -134,6 +158,42 @@ function fwp_facet_scripts() {
             	FWP.set_hash = function() { /* empty function */ } // Exclude hash function
             	$('.condition-filter').hide();
             }
+            /*
+            When FacetWP first initializes, look for the "facetdata" cookie
+            If it exists, set window.location.search= facetdata
+            */
+            var facets = window.location.search;
+            const params = new URLSearchParams(facets);
+            var region = '';
+        <?php if (is_post_type_archive( 'location' )) { ?>
+            locationregion = params.get('_location_region');
+            if (null != locationregion && '' != locationregion) {
+                region = locationregion;
+            }
+        <?php } elseif (is_post_type_archive( 'provider' )) { ?>
+            providerregion = params.get('_provider_region');
+            if (null != providerregion && '' != providerregion) {
+                region = providerregion;
+            }
+        <?php } ?>
+            var regiondata = readCookie('_filter_region');
+            // console.log(facets);
+            // console.log(regiondata);
+            // No qs and cookie has value
+            if ( !region && null != regiondata && '' != regiondata ) {
+                document.cookie = '_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
+                // window.location.search = '_location_region='+regiondata;
+                params.set('_location_region', regiondata);
+                // window.history.replaceState({}, '', `${location.pathname}?${params}`)
+                window.location.search = `?${params}`;
+            }
+            // QS & no location set 
+            if ( facets && regiondata && region != regiondata ) {
+                document.cookie = '_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
+                // window.location.search = '_location_region='+regiondata;
+                params.set('_location_region', regiondata);
+                window.location.search = `?${params}`;
+            }
         }
     });
 	$(function() {
@@ -153,6 +213,19 @@ function fwp_facet_scripts() {
         }
         // FWP.refresh();
     });
+    /*
+    Cookie handler
+    */
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
 })(jQuery);
 </script>
 <?php
