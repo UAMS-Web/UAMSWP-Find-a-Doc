@@ -137,6 +137,8 @@ function fwp_facet_scripts() {
         if (region) {
             // console.log(region);
             document.cookie = "_filter_region="+region+"; expires="+date.toGMTString()+"; path=/";
+        } else {
+            document.cookie = '_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
         }
     });
     $(document).on('facetwp-refresh', function() {
