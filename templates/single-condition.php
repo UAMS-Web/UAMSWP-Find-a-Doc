@@ -552,7 +552,7 @@
 		// Begin Providers Section
 		if( $show_providers_section ) { 
 
-			if ( isset($_COOKIE['providerTitle']) || isset($_COOKIE['providerRegion']) ) {
+			if ( isset($_COOKIE['providerTitle']) || isset($_COOKIE['_filter_region']) ) {
 
 				$tax_query = array('relation' => 'AND');
 		
@@ -562,8 +562,8 @@
 				}
 		
 				$provider_region = '';
-				if( isset($_COOKIE['providerRegion']) ) {
-					$provider_region = $_COOKIE['providerRegion'];
+				if( isset($_COOKIE['_filter_region']) ) {
+					$provider_region = $_COOKIE['_filter_region'];
 				}
 			
 				if(!empty($provider_title) ) {
