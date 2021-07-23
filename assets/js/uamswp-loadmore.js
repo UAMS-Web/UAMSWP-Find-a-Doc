@@ -69,8 +69,8 @@ jQuery(function($) {
         pafForm.find("#region").prop('selectedIndex', 0);
         pafForm.find("#title").prop('selectedIndex', 0);
         
-        deleteCookie('providerRegion');
-        deleteCookie('providerTitle');
+        deleteCookie('_filter_region');
+        // deleteCookie('_provider_title');
 
         pafForm.submit();
 
@@ -96,19 +96,19 @@ jQuery(function($) {
         }
 
         if (region){
-            createCookie('providerRegion', region, 1);
-            // console.log('cookie set: ' + region);
+            createCookie('_filter_region', region, 1);
+            console.log('cookie set: ' + region);
         } else {
-           deleteCookie('providerRegion');
-        //    console.log('cookie emptied' + getCookie('providerRegion'));
+           deleteCookie('_filter_region');
+           console.log('cookie emptied' + getCookie('_filter_region'));
         }
-        if(title){
-            createCookie('providerTitle', title, 1);
-            // console.log('cookie set: ' + title);
-        } else {
-           deleteCookie('providerTitle');
-        //    console.log('cookie emptied' + getCookie('providerTitle'));
-        }
+        // if(title){
+        //     createCookie('_provider_title', title, 1);
+        //     // console.log('cookie set: ' + title);
+        // } else {
+        //    deleteCookie('_provider_title');
+        // //    console.log('cookie emptied' + getCookie('_provider_title'));
+        // }
 
         //console.log(providers);
 
