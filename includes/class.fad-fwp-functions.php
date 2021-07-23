@@ -188,11 +188,11 @@ function fwp_facet_scripts() {
                 window.location.search = `?${params}`;
             }
             // QS & no location set 
-            if ( facets && regiondata && region != regiondata ) {
+            if ( facets && region && regiondata && region != regiondata ) {
                 document.cookie = '_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
                 // window.location.search = '_location_region='+regiondata;
-                params.set('_location_region', regiondata);
-                window.location.search = `?${params}`;
+                // params.set('_location_region', regiondata);
+                // window.location.search = `?${params}`;
             }
         }
     });
