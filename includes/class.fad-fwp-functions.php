@@ -182,9 +182,6 @@ function fwp_facet_scripts() {
             regionname = "_provider_region";
         <?php } ?>
             var regiondata = readCookie('_filter_region');
-            // console.log(facets);
-            // console.log(regiondata);
-            console.log(regionname);
             // No qs and cookie has value
             if ( !region && null != regiondata && '' != regiondata ) {
                 document.cookie = '_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
