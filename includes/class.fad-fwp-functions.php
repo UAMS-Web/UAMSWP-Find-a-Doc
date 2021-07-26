@@ -167,25 +167,29 @@ function fwp_facet_scripts() {
             var facets = window.location.search;
             const params = new URLSearchParams(facets);
             var region = '';
+            var regionname = '';
         <?php if (is_post_type_archive( 'location' )) { ?>
             locationregion = params.get('_location_region');
             if (null != locationregion && '' != locationregion) {
                 region = locationregion;
             }
+            regionname = "_location_region";
         <?php } elseif (is_post_type_archive( 'provider' )) { ?>
             providerregion = params.get('_provider_region');
             if (null != providerregion && '' != providerregion) {
                 region = providerregion;
             }
+            regionname = "_provider_region";
         <?php } ?>
             var regiondata = readCookie('_filter_region');
             // console.log(facets);
             // console.log(regiondata);
+            console.log(regionname);
             // No qs and cookie has value
             if ( !region && null != regiondata && '' != regiondata ) {
                 document.cookie = '_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
                 // window.location.search = '_location_region='+regiondata;
-                params.set('_location_region', regiondata);
+                params.set(regionname, regiondata);
                 // window.history.replaceState({}, '', `${location.pathname}?${params}`)
                 window.location.search = `?${params}`;
             }
