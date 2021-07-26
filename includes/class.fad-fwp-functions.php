@@ -124,7 +124,7 @@ function fwp_facet_scripts() {
         const params = new URLSearchParams(facets);
         locationregion = params.get("_location_region");
         providerregion = params.get("_provider_region");
-        var region;
+        var region = '';
         // Is location region set
         if (null != locationregion && '' != locationregion) {
             region = locationregion;
@@ -134,11 +134,11 @@ function fwp_facet_scripts() {
             region = providerregion;
         }
         // If region is set, then write the cookie
+        // console.log(region);
         if (region) {
-            // console.log(region);
-            document.cookie = "_filter_region="+region+"; expires="+date.toGMTString()+"; path=/";
+            document.cookie = "_filter_region="+region+"; expires="+date.toGMTString()+"; path=/; domain="+window.location.hostname;
         } else {
-            document.cookie = '_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
+            document.cookie = '_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
         }
     });
     $(document).on('facetwp-refresh', function() {
@@ -182,9 +182,10 @@ function fwp_facet_scripts() {
             regionname = "_provider_region";
         <?php } ?>
             var regiondata = readCookie('_filter_region');
+            console.log(window.location.hostname);
             // No qs and cookie has value
             if ( !region && null != regiondata && '' != regiondata ) {
-                document.cookie = '_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
+                document.cookie = '_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
                 // window.location.search = '_location_region='+regiondata;
                 params.set(regionname, regiondata);
                 // window.history.replaceState({}, '', `${location.pathname}?${params}`)
@@ -192,7 +193,7 @@ function fwp_facet_scripts() {
             }
             // QS & no location set 
             if ( facets && region && regiondata && region != regiondata ) {
-                document.cookie = '_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
+                document.cookie = '_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
                 // window.location.search = '_location_region='+regiondata;
                 // params.set('_location_region', regiondata);
                 // window.location.search = `?${params}`;

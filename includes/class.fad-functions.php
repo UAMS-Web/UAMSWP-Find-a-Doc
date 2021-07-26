@@ -736,9 +736,9 @@ function uamswp_add_trench(){
 				var days = 1; // Expiration value
 				var date = new Date();
 				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-				expires = "; expires=" + date.toUTCString();
+				// expires = "; expires=" + date.toUTCString();
 				// var domain = "; domain=" + window.location.hostname;
-    			document.cookie = "_filter_region=<?php echo $trench->slug; ?>" + expires + "; path=/";
+    			document.cookie = "_filter_region=<?php echo $trench->slug; ?> expires="+date.toGMTString()+"; path=/; domain="+window.location.hostname;
 			</script>
 		<?php
 		}
