@@ -601,8 +601,8 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
 	sort($provider_regions_ids);
 
 	$provider_region = '';
-	if( isset($_COOKIE['_filter_region']) ) {
-		$provider_region = $_COOKIE['_filter_region'];
+	if( isset($_COOKIE['_filter_region']) || isset($_GET['_filter_region']) ) {
+		$provider_region = $_GET['_filter_region'] ? $_GET['_filter_region'] : $_COOKIE['_filter_region'];
 	}
 	$provider_title = '';
 	if( isset($_COOKIE['_provider_title']) ) {
@@ -664,7 +664,10 @@ function provider_ajax_filter_callback() {
 	}
 
 	$provider_region = '';
-	if( isset($_COOKIE['_filter_region']) ) {
+	if( isset($_COOKIE['_filter_region']) || isset($_GET['_filter_region']) ) {
+		if ( isset($_GET['_filter_region']) ) {
+			setcookie("_filter_region", htmlspecialchars($_GET['_filter_region']), time()+(24 * 60 * 60 * 1000), "/", $_SERVER['HTTP_HOST'] );
+		}
 		$provider_region = $_COOKIE['_filter_region'];
 	} elseif(isset($_POST['region'])){
 		$provider_region = sanitize_text_field( $_POST['region'] );
@@ -730,7 +733,9 @@ function provider_ajax_filter_callback() {
 function uamswp_add_trench(){
 	if(is_page( )) {
 		$trench = get_field('page_filter_region');
-		if (isset($trench) && $trench){	
+		$trenchQS = $_GET['_filter_region'];
+		if ((isset($trench) && $trench) || $trenchQS){	
+			$region = $trench->slug ? $trench->slug : htmlspecialchars($trenchQS);
 			?>
 			<script type="text/javascript">
 				var days = 1; // Expiration value
@@ -738,7 +743,7 @@ function uamswp_add_trench(){
 				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
 				// expires = "; expires=" + date.toUTCString();
 				// var domain = "; domain=" + window.location.hostname;
-    			document.cookie = "_filter_region=<?php echo $trench->slug; ?> expires="+date.toGMTString()+"; path=/; domain="+window.location.hostname;
+    			document.cookie = "_filter_region=<?php echo $region; ?>; expires="+date.toGMTString()+"; path=/; domain="+window.location.hostname;
 			</script>
 		<?php
 		}
