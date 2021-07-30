@@ -2013,7 +2013,18 @@ function get_provider_meta($object) {
     $data['physician_gender'] = get_field( 'physician_gender', $postId );
 	$data['physician_accepting_new_patients'] = get_post_meta( $postId, 'physician_accepting_patients', true );
     $data['physician_second_opinion'] = get_field( 'physician_second_opinion', $postId );
-    $data['physician_patient_types'] = get_the_terms( $postId, 'patient_type' );
+    $patients = get_field('physician_patient_types',$postId);
+    $patient_list = '';
+    if( $patients ) {
+	    $i = 1;
+	    foreach( $patients as $patient ):
+        	$patient_name = get_term( $patient, 'patient_type');
+        	$patient_list != '' ? ',' : '';
+        	$patient_list .= $patient_name->name;
+			$i++;
+        endforeach;
+    }
+    $data['physician_patient_types'] = $patient_list;
     $data['physician_npi'] = get_field( 'physician_npi', $postId );
     $data['physician_youtube_link'] = get_field( 'physician_youtube_link', $postId );
 	$podcast_name = get_field('physician_podcast_name',$postId);
