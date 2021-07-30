@@ -552,27 +552,11 @@
 		// Begin Providers Section
 		if( $show_providers_section ) { 
 
-			if ( isset($_COOKIE['providerTitle']) || isset($_COOKIE['_filter_region']) || isset($_GET['_filter_region']) ) {
-
-				$tax_query = array('relation' => 'AND');
-		
-				$provider_title = '';
-				if( isset($_COOKIE['providerTitle']) ) {
-					$provider_title = $_COOKIE['providerTitle'] ;
-				}
+			if ( isset($_COOKIE['_filter_region']) || isset($_GET['_filter_region']) ) {		
 		
 				$provider_region = '';
 				if( isset($_COOKIE['_filter_region']) || isset($_GET['_filter_region']) ) {
 					$provider_region = $_GET['_filter_region'] ? $_GET['_filter_region'] : $_COOKIE['_filter_region'];
-				}
-			
-				if(!empty($provider_title) ) {
-					$clinical_title = $provider_title ;
-					$tax_query[] = array(
-						'taxonomy' => 'clinical_title',
-						'field' => 'term_id',
-						'terms' => $clinical_title,
-					);
 				}
 		
 				if(!empty($provider_region)) {
@@ -637,19 +621,16 @@
 					</div>
 				</div>
 			</section>
-		<?php 
+			<?php 
 			if ( isset($_GET['_filter_region']) ) { ?>
 			<script type="text/javascript">
 				var days = 1; // Expiration value
 				var date = new Date();
 				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-				// expires = "; expires=" + date.toUTCString();
-				// var domain = "; domain=" + window.location.hostname;
     			document.cookie = "_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; expires="+date.toGMTString()+"; path=/; domain="+window.location.hostname;
 			</script>
 			<?php }
 		} // $physicians_query loop
-		// wp_reset_postdata();
 		// End Providers Section
 		
 		// Begin Location Section
