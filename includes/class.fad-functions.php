@@ -733,7 +733,10 @@ function provider_ajax_filter_callback() {
 function uamswp_add_trench(){
 	if(is_page( )) {
 		$trench = get_field('page_filter_region');
-		$trenchQS = $_GET['_filter_region'];
+		$trenchQS = '';
+		if ( isset($_GET['_filter_region']) ) {
+			$trenchQS = $_GET['_filter_region'];
+		}
 		if ((isset($trench) && $trench) || $trenchQS){	
 			$region = $trench->slug ? $trench->slug : htmlspecialchars($trenchQS);
 			?>
