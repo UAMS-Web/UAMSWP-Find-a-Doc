@@ -162,8 +162,10 @@ if($physicians) {
         "orderby" => "title",
         "order" => "ASC",
         "fields" => "ids",
+        // 'no_found_rows' => true, // counts posts, remove if pagination required
+        'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
+        'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
         "post__in" => $physicians
-        // 'tax_query' => $tax_query
     );
     $physicians_query = New WP_Query( $args );
     if($physicians_query && $physicians_query->have_posts()) {
@@ -319,27 +321,11 @@ function uamswp_expertise_physicians() {
     global $provider_ids;
 
     // if cookies are set, run modified physician query
-	if ( isset($_COOKIE['providerTitle']) || isset($_COOKIE['providerRegion']) ) {
-
-        $tax_query = array('relation' => 'AND');
-
-        $provider_title = '';
-        if( isset($_COOKIE['providerTitle']) ) {
-            $provider_title = $_COOKIE['providerTitle'] ;
-        }
-
+	if ( isset($_COOKIE['_filter_region']) || isset($_GET['_filter_region']) ) {		
+		
         $provider_region = '';
-        if( isset($_COOKIE['providerRegion']) ) {
-            $provider_region = $_COOKIE['providerRegion'];
-        }
-    
-        if(!empty($provider_title) ) {
-            $clinical_title = $provider_title ;
-            $tax_query[] = array(
-                'taxonomy' => 'clinical_title',
-                'field' => 'term_id',
-                'terms' => $clinical_title,
-            );
+        if( isset($_COOKIE['_filter_region']) || isset($_GET['_filter_region']) ) {
+            $provider_region = $_GET['_filter_region'] ? $_GET['_filter_region'] : $_COOKIE['_filter_region'];
         }
 
         if(!empty($provider_region)) {
@@ -405,7 +391,16 @@ function uamswp_expertise_physicians() {
                 </div>
             </div>
         </section>
-    <?php }
+        <?php 
+			if ( isset($_GET['_filter_region']) ) { ?>
+			<script type="text/javascript">
+				var days = 1; // Expiration value
+				var date = new Date();
+				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    			document.cookie = "_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; expires="+date.toGMTString()+"; path=/; domain="+window.location.hostname;
+			</script>
+    <?php   }
+    }
 }
 function uamswp_expertise_youtube() {
     $video = get_field('expertise_youtube_link');
