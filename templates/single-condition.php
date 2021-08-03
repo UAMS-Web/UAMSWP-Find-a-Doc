@@ -608,7 +608,7 @@
 												$p++;
 											endwhile;
 										} else {
-											echo '<span class="lead line-length-ideal text-center">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
+											echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
 										}
 										wp_reset_postdata();
 									?>
