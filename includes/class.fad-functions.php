@@ -617,7 +617,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
         <form action="" method="get">
             <!-- <input type="text" name="search" id="search" value="" placeholder="Search Here.."> -->
             <div class="form-row align-items-center justify-content-center">
-                <div class="col-auto">
+                <div class="col-12 mb-4 col-sm-auto mb-sm-0">
                     <label class="sr-only" for="region">Region</label>
                     <select name="region" id="region" class="form-control">
 						<option value="">Any Region</option>
@@ -627,7 +627,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
 						<?php endforeach; ?>
                     </select>
                 </div>
-                <div class="col-auto">
+                <div class="col-12 mb-4 col-sm-auto mb-sm-0">
                     <label class="sr-only" for="title">Clinical Title</label>
                     <select name="title" id="title" class="form-control">
                         <option value="">Any Clinical Title</option>
