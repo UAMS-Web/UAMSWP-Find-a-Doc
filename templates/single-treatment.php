@@ -543,9 +543,10 @@
 		
 				$provider_region = '';
 				if( isset($_COOKIE['_filter_region']) || isset($_GET['_filter_region']) ) {
-					$provider_region = $_GET['_filter_region'] ? $_GET['_filter_region'] : $_COOKIE['_filter_region'];
+					$provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['_filter_region'];
 				}
-		
+				
+				$tax_query = array();
 				if(!empty($provider_region)) {
 					$region =  $provider_region;
 					$tax_query[] = array(
