@@ -647,6 +647,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
             </div>
         </form>
     </div>
+	<hr />
 
 	<?php
 	return ob_get_clean();
