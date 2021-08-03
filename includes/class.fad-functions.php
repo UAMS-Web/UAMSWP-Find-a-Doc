@@ -592,7 +592,10 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
 			}
 			// Region
 			$provider_region = get_field('physician_region', $provider);
-			$provider_regions[] = $provider_region;
+			foreach($provider_region as $region){
+				$provider_regions[] = $region;
+			}
+			//$provider_regions[] = $provider_region;
 		}
 	}
 	$provider_titles_list = array_unique($provider_titles);
@@ -602,7 +605,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
 
 	$provider_region = '';
 	if( isset($_COOKIE['_filter_region']) || isset($_GET['_filter_region']) ) {
-		$provider_region = $_GET['_filter_region'] ? $_GET['_filter_region'] : $_COOKIE['_filter_region'];
+		$provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['_filter_region'];
 	}
 	$provider_title = '';
 	if( isset($_COOKIE['_provider_title']) ) {
