@@ -615,31 +615,35 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
 	<div class="ajax-filter" id="provider-ajax-filter">
         <form action="" method="get">
             <!-- <input type="text" name="search" id="search" value="" placeholder="Search Here.."> -->
-            <div class="row">
-                <div class="col-6">
-                    <label for="region">Region</label>
-                    <select name="region" id="region">
+            <div class="form-row align-items-center justify-content-center">
+                <div class="col-auto">
+                    <label class="sr-only" for="region">Region</label>
+                    <select name="region" id="region" class="form-control">
 						<option value="">Any Region</option>
-					<?php $regions = get_terms('region', 'orderby=name&hide_empty=0');
-					foreach($regions as $region) : ?>
-                        <option value="<?php echo $region->slug; ?>"<?php echo in_array($region->term_id, $provider_regions_ids) ? '' : ' disabled'; ?><?php echo ($region->slug === $provider_region) ? ' selected' : ''; ?>><?php echo $region->name; ?></option>
-					<?php endforeach; ?>
+						<?php $regions = get_terms('region', 'orderby=name&hide_empty=0');
+						foreach($regions as $region) : ?>
+							<option value="<?php echo $region->slug; ?>"<?php echo in_array($region->term_id, $provider_regions_ids) ? '' : ' disabled'; ?><?php echo ($region->slug === $provider_region) ? ' selected' : ''; ?>><?php echo $region->name; ?></option>
+						<?php endforeach; ?>
                     </select>
                 </div>
-                <div class="col-6">
-                    <label for="title">Clinical Title</label>
-                    <select name="title" id="title">
-                        <option value="">Any Title</option>
+                <div class="col-auto">
+                    <label class="sr-only" for="title">Clinical Title</label>
+                    <select name="title" id="title" class="form-control">
+                        <option value="">Any Clinical Title</option>
 						<?php foreach($provider_titles_list as $key => $title) : ?>
-                        <option value="<?= $key; ?>"<?php echo ($key == $provider_title) ? ' selected' : ''; ?>><?= $title; ?></option>
-					<?php endforeach; ?>
+							<option value="<?= $key; ?>"<?php echo ($key == $provider_title) ? ' selected' : ''; ?>><?= $title; ?></option>
+						<?php endforeach; ?>
                     </select>
                 </div>
+				<div class="col-auto">
+					<input type="hidden" id="providers" name="providers" value="<?php echo implode(",", $providers); ?>">
+					<input type="hidden" id="ppp" name="ppp" value="<?php echo $ppp; ?>">
+					<input type="submit" id="submit" name="submit" value="Search" class="btn btn-primary">
+				</div>
+				<div class="col-auto">
+					<input type="button" id="clear" name="clear" value="Reset" class="btn btn-outline-primary">
+				</div>
             </div>
-			<input type="hidden" id="providers" name="providers" value="<?php echo implode(",", $providers); ?>">
-			<input type="hidden" id="ppp" name="ppp" value="<?php echo $ppp; ?>">
-            <input type="submit" id="submit" name="submit" value="Search">
-			<input type="button" id="clear" name="clear" value="Reset">
         </form>
     </div>
 
