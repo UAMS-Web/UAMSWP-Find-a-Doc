@@ -1,6 +1,12 @@
 .ajax-filter {
     select.form-control {
         font-weight: $font-weight-normal;
+
+        option:invalid,
+        option:disabled,
+        option[disabled] {
+            color: $body-color-lightest;
+        }
     }
 
     .no-results {
