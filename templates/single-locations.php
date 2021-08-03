@@ -1685,7 +1685,7 @@ while ( have_posts() ) : the_post(); ?>
 											$p++;
 										endwhile;
 									} else {
-										echo 'No matching providers found. Try a different filter or resetting filters';
+										echo '<span class="lead line-length-ideal text-center">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
 									}
                                     wp_reset_postdata();
                                 ?>
