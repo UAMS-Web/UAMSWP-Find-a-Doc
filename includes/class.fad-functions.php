@@ -612,7 +612,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
 
 	ob_start(); ?>
 
-	<div id="provider-ajax-filter">
+	<div class="ajax-filter" id="provider-ajax-filter">
         <form action="" method="get">
             <!-- <input type="text" name="search" id="search" value="" placeholder="Search Here.."> -->
             <div class="row">
