@@ -2314,7 +2314,7 @@ function get_provider_meta($object) {
     //$data['physician_additional_info'] = get_field('physician_additional_info',$postId);
 	// Academic
 	//$data['physician_college_affiliation'] = get_field('physician_academic_college',$postId);
-    $data['physician_academic_bio'] = get_post_meta( $postId, 'physician_academic_bio', true );
+    $data['physician_academic_bio'] = get_field('physician_academic_bio',$postId);
 	$educations = get_field('physician_education',$postId);
 	if( ! empty( $educations ) ){
 		$i = 0;
