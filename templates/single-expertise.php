@@ -379,7 +379,7 @@ function uamswp_expertise_physicians() {
                                             $p++;
                                         endwhile;
                                     } else {
-                                        echo 'No matching providers found. Try a different filter or resetting filters';
+                                        echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
                                     }
                                     wp_reset_postdata();
                                 ?>
@@ -391,17 +391,16 @@ function uamswp_expertise_physicians() {
                     </div>
                 </div>
             </div>
+            <?php if ( isset($_GET['_filter_region']) ) { ?>
+                <script type="text/javascript">
+                    var days = 1; // Expiration value
+                    var date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    document.cookie = "_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; expires="+date.toGMTString()+"; path=/; domain="+window.location.hostname;
+                </script>
+            <?php } ?>
         </section>
-        <?php 
-			if ( isset($_GET['_filter_region']) ) { ?>
-			<script type="text/javascript">
-				var days = 1; // Expiration value
-				var date = new Date();
-				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    			document.cookie = "_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; expires="+date.toGMTString()+"; path=/; domain="+window.location.hostname;
-			</script>
-    <?php   }
-    }
+    <?php }
 }
 function uamswp_expertise_youtube() {
     $video = get_field('expertise_youtube_link');
