@@ -10,9 +10,13 @@
     }
 
     .no-results {
-        @extend .lead;
-        @extend .line-length-ideal;
-        @extend .text-center;
+        width: $line-length-ideal + em;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
         padding: ($grid-gutter-width / 2) 0;
+        font-size: $lead-font-size;
+        font-weight: $lead-font-weight;
+        text-align: center;
     }
 }
