@@ -728,6 +728,17 @@
   width: 255px;
 }
 
+.card-list .no-results {
+  width: 28.4375em;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px 0;
+  font-size: 1.40625rem;
+  font-weight: 300;
+  text-align: center;
+}
+
 .conditions-treatments .list-legend {
   margin-top: 0;
 }
@@ -1222,17 +1233,6 @@
 .ajax-filter select.form-control option:invalid,
 .ajax-filter select.form-control option[disabled] {
   color: #5d5b5c;
-}
-
-.ajax-filter .no-results {
-  width: 28.4375em;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 15px 0;
-  font-size: 1.40625rem;
-  font-weight: 300;
-  text-align: center;
 }
 
 .mychart-scheduling-module .module-body {
