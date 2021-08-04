@@ -100,6 +100,10 @@ jQuery(function($) {
             console.log('cookie set: ' + region);
         } else {
            deleteCookie('_filter_region');
+           var url = window.location.toString();
+           var clean_url = removeURLParameter(url, '_filter_region');
+        //    console.log(removeURLParameter(url, '_filter_region'));
+           window.history.replaceState({}, document.title, clean_url);
            console.log('cookie emptied' + getCookie('_filter_region'));
         }
         // if(title){
@@ -176,4 +180,26 @@ function getCookie(cname) {
       }
     }
     return "";
-  }
+}
+function removeURLParameter(url, parameter) {
+    //prefer to use l.search if you have a location/link object
+    var urlparts= url.split('?');   
+    if (urlparts.length>=2) {
+
+        var prefix= encodeURIComponent(parameter)+'=';
+        var pars= urlparts[1].split(/[&;]/g);
+
+        //reverse iteration as may be destructive
+        for (var i= pars.length; i-- > 0;) {    
+            //idiom for string.startsWith
+            if (pars[i].lastIndexOf(prefix, 0) !== -1) {  
+                pars.splice(i, 1);
+            }
+        }
+
+        url= urlparts[0]+'?'+pars.join('&');
+        return url;
+    } else {
+        return url;
+    }
+}
