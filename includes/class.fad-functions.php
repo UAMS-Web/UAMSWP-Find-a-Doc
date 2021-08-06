@@ -725,14 +725,22 @@ function provider_ajax_filter_callback() {
     if ( $search_query->have_posts() && !empty($providers) ) {
 		$provider_ids = $search_query->posts;
 		//echo $_POST['ppp'];
-		echo '<data id="provider_ids" data-postids="'. implode(',', $provider_ids) .'"></data>';
 		$z=0;
+		$title_list = array();
+		$region_IDs = array();
         while ( $z < $ppp && $search_query->have_posts() ) : $search_query->the_post();
             $id = get_the_ID();
 			include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
 			$z++;
+			$title_list[] = get_field('physician_title', $id);
+			$region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
         endwhile;
-		
+		$region_IDs = array_unique($region_IDs);
+		$region_list = array();
+		foreach ($region_IDs as $region_ID){
+			$region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
+		}
+		echo '<data id="provider_ids" data-postids="'. implode(',', $provider_ids) .'," data-regions="'. implode(',', $region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
     } else {
 		//var_dump($args);
         echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
