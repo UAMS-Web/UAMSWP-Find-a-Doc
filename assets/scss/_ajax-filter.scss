@@ -8,11 +8,4 @@
             color: $body-color-lightest;
         }
     }
-
-    .no-results {
-        @extend .lead;
-        @extend .line-length-ideal;
-        @extend .text-center;
-        padding: ($grid-gutter-width / 2) 0;
-    }
 }
