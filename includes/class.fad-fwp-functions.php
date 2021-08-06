@@ -25,13 +25,13 @@ function fwp_disable_auto_refresh() {
     if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) || is_post_type_archive( 'clinical-resource' ) ) {
 	?>
 	<script>
-	(function($) {
-		$(function() {
-			if ('undefined' !== typeof FWP) {
-				FWP.auto_refresh = false;
-			}
-		});
-	})(jQuery);
+	// (function($) {
+	// 	$(function() {
+	// 		if ('undefined' !== typeof FWP) {
+	// 			FWP.auto_refresh = false;
+	// 		}
+	// 	});
+	// })(jQuery);
     (function($) {
         $(document).on('change', '.facetwp-sort .facetwp-sort-select', function() {
             FWP.extras.sort = $(this).val();
@@ -215,7 +215,7 @@ function fwp_facet_scripts() {
         if ('' !== $(this).attr('data-id')) {
             FWP.frozen_facets[facet_name] = 'soft';
         }
-        // FWP.refresh();
+        FWP.refresh();
     });
     /*
     Cookie handler
