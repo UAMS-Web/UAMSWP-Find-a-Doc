@@ -80,11 +80,14 @@ jQuery(function($) {
         e.preventDefault(); 
      
         console.log("form submitted");
+
+        // console.log(pafForm.find("#region").val());
+        // console.log(pafForm.find("#title").val());
     
-        if(pafForm.find("#region").val().length !== 0) {
+        if(null != pafForm.find("#region").val() && pafForm.find("#region").val().length !== 0) {
             var region = pafForm.find("#region").val();
         }
-        if(pafForm.find("#title").val().length !== 0) {
+        if(null != pafForm.find("#title").val() && pafForm.find("#title").val().length !== 0) {
             var title = pafForm.find("#title").val();
         }
         if(pafForm.find("#providers").val().length !== 0) {
@@ -102,7 +105,6 @@ jQuery(function($) {
            deleteCookie('_filter_region');
            var url = window.location.toString();
            var clean_url = removeURLParameter(url, '_filter_region');
-        //    console.log(removeURLParameter(url, '_filter_region'));
            window.history.replaceState({}, document.title, clean_url);
            console.log('cookie emptied' + getCookie('_filter_region'));
         }
@@ -133,22 +135,74 @@ jQuery(function($) {
                 $('.card-list-doctors').text('Loading...'); 
             },
             success : function(res) { 
-              $('.card-list-doctors').html(res);
-              provider_list = $('#provider_ids').data('postids');
-              var provider_array = [];
-              if (provider_list) {
-                provider_array = provider_list.split(",");
-                max_pages = provider_array.length / ppp;
-              } else {
-                max_pages = 0;
-              }
-              if ( provider_array.length > ppp && 1 < max_pages ) {
-                $('#providers .more').show();
-                $('.loadmore').show();
-              }
+                $('.card-list-doctors').html(res);
+                provider_list = $('#provider_ids').data('postids');
+                // console.log(provider_list);
+                var provider_array = [];
+                if (provider_list) {
+                    provider_array = provider_list.split(",");
+                    // console.log(provider_array);
+                    max_pages = provider_array.length / ppp;
+                } else {
+                    max_pages = 0;
+                }
+                if ( provider_array.length > ppp && 1 < max_pages ) {
+                    $('#providers .more').show();
+                    $('.loadmore').show();
+                }  
             },
-          });
+            complete : function () {
+                $("#title > option").attr("disabled", function() {
+                    available_title = $('#provider_ids').data('titles').toString();
+                    titleArray = [];
+                    titleArray = available_title.split(",");
+                    // console.log(titleArray);
+                    if( $.inArray( $(this).val(), titleArray ) == -1 ) {
+                        return true; //available_title.includes( $(this).val() );
+                    } else {
+                        return false;
+                    }
+                });
+                $("#region > option").attr("disabled", function() {
+                    available_regions = $('#provider_ids').data('regions');
+                    regionArray = [];
+                    regionArray = available_regions.split(",");
+                    // console.log(regionArray); 
+                    if( $.inArray( $(this).val(), regionArray ) == -1 ) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+        
+                });
+            },
+        });
      
+    });
+});
+jQuery(document).ready(function($){
+    $("#title > option").attr("disabled", function() {
+        available_title = $('#provider_ids').data('titles').toString();
+        titleArray = [];
+        titleArray = available_title.split(",");
+        // console.log(titleArray);
+        if( $.inArray( $(this).val(), titleArray ) == -1 ) {
+            return true; //available_title.includes( $(this).val() );
+        } else {
+            return false;
+        }
+    });
+    $("#region > option").attr("disabled", function() {
+        available_regions = $('#provider_ids').data('regions');
+        regionArray = [];
+        regionArray = available_regions.split(","); 
+        // console.log(regionArray);
+        if( $.inArray( $(this).val(), regionArray ) == -1 ) {
+            return true;
+        } else {
+            return false;
+        }
+
     });
 });
 // Cookie Functions
@@ -164,20 +218,20 @@ function createCookie(name, value, days) {
 }
 function deleteCookie( name ) {
     if( getCookie( name ) ) {
-      document.cookie = name + "=" +";expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain=" + window.location.hostname;
+        document.cookie = name + "=" +";expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain=" + window.location.hostname;
     }
 }
 function getCookie(cname) {
     let name = cname + "=";
     let ca = document.cookie.split(';');
     for(let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
     }
     return "";
 }
