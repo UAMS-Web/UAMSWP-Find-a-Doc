@@ -600,14 +600,23 @@
 							<div class="card-list-container">
 								<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
 									<?php 
-										echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'"></data>';
 										$p=0;
 										if($provider_count > 0){
+											$title_list = array();
+											$region_IDs = array();
 											while ($p < $postsPerPage && $physicians_query->have_posts()) : $physicians_query->the_post();
 												$id = get_the_ID();
 												include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
 												$p++;
+												$title_list[] = get_field('physician_title', $id);
+												$region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
 											endwhile;
+											$region_IDs = array_unique($region_IDs);
+											$region_list = array();
+											foreach ($region_IDs as $region_ID){
+												$region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
+											}
+											echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'" data-regions="'. implode(',', $region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
 										} else {
 											echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
 										}
@@ -629,6 +638,34 @@
 					document.cookie = "_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; expires="+date.toGMTString()+"; path=/; domain="+window.location.hostname;
 				</script>
             <?php } ?>
+				<script>
+				jQuery(document).ready(function($){
+					$("#title > option").attr("disabled", function() {
+						available_title = $('#provider_ids').data('titles').toString();
+						titleArray = [];
+						titleArray = available_title.split(",");
+						titleArray = $.map(titleArray, function(a){
+							return a;
+						});
+						if( $.inArray( $(this).val(), titleArray ) == -1 ) {
+							return true; //available_title.includes( $(this).val() );
+						} else {
+							return false;
+						}
+					});
+					$("#region > option").attr("disabled", function() {
+						available_regions = $('#provider_ids').data('regions');
+						regionArray = [];
+						regionArray = available_regions.split(","); 
+						if( $.inArray( $(this).val(), regionArray ) == -1 ) {
+							return true;
+						} else {
+							return false;
+						}
+			
+					});
+				});
+				</script>
         </section>
 		<?php } // $physicians_query loop
 		// End Providers Section
