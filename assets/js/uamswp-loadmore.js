@@ -61,6 +61,10 @@ jQuery(function($) {
     var paf = $("#provider-ajax-filter"); 
     var pafForm = paf.find("form");
 
+    pafForm.find('select').on('change', function(){
+        pafForm.submit();
+    });
+
     pafForm.find("#clear").on('click', function(e){
         e.preventDefault(); 
      
@@ -80,9 +84,6 @@ jQuery(function($) {
         e.preventDefault(); 
      
         console.log("form submitted");
-
-        // console.log(pafForm.find("#region").val());
-        // console.log(pafForm.find("#title").val());
     
         if(null != pafForm.find("#region").val() && pafForm.find("#region").val().length !== 0) {
             var region = pafForm.find("#region").val();
