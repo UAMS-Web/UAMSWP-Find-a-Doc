@@ -6,6 +6,12 @@ function uamswp_fad_title($html) {
 	return $html;
 }
 add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
+if (isset( $_COOKIE['_filter_region']) && !isset($_GET['_location_region'])) {
+    $region =  $_COOKIE['_filter_region'];
+    $url .= $url.(parse_url($url, PHP_URL_QUERY) ? '&' : '?').'_location_region='. $region;
+    header("Location: ". $url);
+    exit();
+}
 get_header();
 
     add_filter( 'facetwp_template_use_archive', '__return_true' );
