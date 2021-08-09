@@ -592,9 +592,11 @@
 										if($provider_count > 0){
 											$title_list = array();
 											$region_IDs = array();
-											while ($p < $postsPerPage && $physicians_query->have_posts()) : $physicians_query->the_post();
+											while ($physicians_query->have_posts()) : $physicians_query->the_post();
 												$id = get_the_ID();
-												include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+												if ($p < $postsPerPage) {
+													include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+												}
 												$p++;
 												$title_list[] = get_field('physician_title', $id);
 												$region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
