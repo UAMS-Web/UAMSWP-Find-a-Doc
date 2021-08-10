@@ -764,6 +764,12 @@ function uamswp_add_trench(){
 				// expires = "; expires=" + date.toUTCString();
 				// var domain = "; domain=" + window.location.hostname;
     			document.cookie = "_filter_region=<?php echo $region; ?>; expires="+date.toGMTString()+"; path=/; domain="+window.location.hostname;
+				function setSession(variable, value) {
+					xmlhttp = new XMLHttpRequest();
+					xmlhttp.open("GET", "/wp-content/plugins/UAMSWP-Find-a-Doc/includes/class.fad-set-session.php?variable=" + variable + "&value=" + value, true);
+					xmlhttp.send();
+				}
+				setSession('_filter_region', '<?php echo $region; ?>');
 			</script>
 		<?php
 		}

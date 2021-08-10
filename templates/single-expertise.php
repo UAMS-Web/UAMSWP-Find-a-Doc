@@ -5,6 +5,10 @@
  *  Designed for services single
  *
  */
+session_start();
+if ( isset($_GET['_filter_region']) ) {
+    $_SESSION["_filter_region"] = htmlspecialchars($_GET['_filter_region']);
+}
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title();
@@ -320,12 +324,12 @@ function uamswp_expertise_physicians() {
     global $physicians;
     global $provider_ids;
 
-    // if cookies are set, run modified physician query
-	if ( isset($_COOKIE['_filter_region']) || isset($_GET['_filter_region']) ) {		
+    // if session is set, run modified physician query
+	if ( isset($_SESSION['_filter_region']) || isset($_GET['_filter_region']) ) {		
 		
         $provider_region = '';
-        if( isset($_COOKIE['_filter_region']) || isset($_GET['_filter_region']) ) {
-            $provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['_filter_region'];
+        if( isset($_SESSION['_filter_region']) || isset($_GET['_filter_region']) ) {
+            $provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_SESSION['_filter_region'];
         }
 
         $tax_query = array();
@@ -409,6 +413,7 @@ function uamswp_expertise_physicians() {
                     var date = new Date();
                     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
                     document.cookie = "_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; expires="+date.toGMTString()+"; path=/; domain="+window.location.hostname;
+                    setSession('_filter_region', '<?php echo htmlspecialchars($_GET['_filter_region']); ?>');
                 </script>
             <?php } ?>
         </section>

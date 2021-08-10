@@ -74,6 +74,7 @@ jQuery(function($) {
         pafForm.find("#title").prop('selectedIndex', 0);
         
         deleteCookie('_filter_region');
+        setSession('_filter_region', '');
         // deleteCookie('_provider_title');
 
         pafForm.submit();
@@ -101,13 +102,15 @@ jQuery(function($) {
 
         if (region){
             createCookie('_filter_region', region, 1);
+            setSession('_filter_region', region);
             console.log('cookie set: ' + region);
         } else {
            deleteCookie('_filter_region');
+           setSession('_filter_region', '');
            var url = window.location.toString();
            var clean_url = removeURLParameter(url, '_filter_region');
            window.history.replaceState({}, document.title, clean_url);
-           console.log('cookie emptied' + getCookie('_filter_region'));
+           console.log('session emptied' + getCookie('_filter_region'));
         }
         // if(title){
         //     createCookie('_provider_title', title, 1);
@@ -206,6 +209,12 @@ jQuery(document).ready(function($){
 
     });
 });
+// Set Session Function
+function setSession(variable, value) {
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", "/wp-content/plugins/UAMSWP-Find-a-Doc/includes/class.fad-set-session.php?variable=" + variable + "&value=" + value, true);
+    xmlhttp.send();
+}
 // Cookie Functions
 function createCookie(name, value, days) {
     var expires = "";

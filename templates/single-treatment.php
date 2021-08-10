@@ -1,4 +1,9 @@
 <?php
+// Set Session
+session_start();
+if ( isset($_GET['_filter_region']) ) {
+	$_SESSION["_filter_region"] = htmlspecialchars($_GET['_filter_region']);
+}
 	// ACF Fields - get_fields
 	$keywords = get_field('treatment_procedure_alternate');
 
@@ -539,11 +544,13 @@
 
 		// Begin Providers Section
 		if( $show_providers_section ) { 
-			if ( isset($_COOKIE['_filter_region']) || isset($_GET['_filter_region']) ) {		
+			
+			// if session is set, run modified physician query
+			if ( isset($_SESSION['_filter_region']) || isset($_GET['_filter_region']) ) {		
 		
 				$provider_region = '';
-				if( isset($_COOKIE['_filter_region']) || isset($_GET['_filter_region']) ) {
-					$provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['_filter_region'];
+				if( isset($_SESSION['_filter_region']) || isset($_GET['_filter_region']) ) {
+					$provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_SESSION['_filter_region'];
 				}
 				
 				$tax_query = array();
@@ -626,6 +633,7 @@
 						var date = new Date();
 						date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
 						document.cookie = "_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; expires="+date.toGMTString()+"; path=/; domain="+window.location.hostname;
+						setSession('_filter_region', '<?php echo htmlspecialchars($_GET['_filter_region']); ?>');
 					</script>
 				<?php } ?>
 			</section>
