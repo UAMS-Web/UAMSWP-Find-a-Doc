@@ -764,12 +764,24 @@ function uamswp_add_trench(){
 				// expires = "; expires=" + date.toUTCString();
 				// var domain = "; domain=" + window.location.hostname;
     			document.cookie = "_filter_region=<?php echo $region; ?>; expires="+date.toGMTString()+"; path=/; domain="+window.location.hostname;
+				// Set Session Function
 				function setSession(variable, value) {
-					xmlhttp = new XMLHttpRequest();
-					xmlhttp.open("GET", "/wp-content/plugins/UAMSWP-Find-a-Doc/includes/class.fad-set-session.php?variable=" + variable + "&value=" + value, true);
-					xmlhttp.send();
+					return new Promise(function(resolve, reject) {
+						xmlhttp = new XMLHttpRequest();
+						xmlhttp.onload = function() {
+							resolve(this.responseText);
+						};
+						xmlhttp.open("GET", "/wp-content/plugins/UAMSWP-Find-a-Doc/includes/class.fad-set-session.php?variable=" + variable + "&value=" + value, true);
+						xmlhttp.send();
+					});
 				}
-				setSession('_filter_region', '<?php echo $region; ?>');
+				setSession('_filter_region', '<?php echo $region; ?>')
+				.then(function(result) {
+                    console.log(result); // Code depending on result
+                })
+                .catch(function() {
+                    // An error occurred
+                });
 			</script>
 		<?php
 		}

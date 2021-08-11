@@ -633,7 +633,13 @@ if ( isset($_GET['_filter_region']) ) {
 						var date = new Date();
 						date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
 						document.cookie = "_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; expires="+date.toGMTString()+"; path=/; domain="+window.location.hostname;
-						setSession('_filter_region', '<?php echo htmlspecialchars($_GET['_filter_region']); ?>');
+						setSession('_filter_region', '<?php echo htmlspecialchars($_GET['_filter_region']); ?>')
+						.then(function(result) {
+							console.log(result); // Code depending on result
+						})
+						.catch(function() {
+							// An error occurred
+						});
 					</script>
 				<?php } ?>
 			</section>

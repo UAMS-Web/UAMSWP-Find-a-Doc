@@ -5,4 +5,5 @@ if(isset($_REQUEST['variable']) && isset($_REQUEST['value'])) {
     $variable = $_REQUEST['variable'];
     $value = $_REQUEST['value'];
     $_SESSION[$variable] = $value;
+    echo ( 'Session: ' .$variable .'; Value: '. $_SESSION[$variable] .';' );
 }

@@ -137,10 +137,22 @@ function fwp_facet_scripts() {
         // console.log(region);
         if (region) {
             document.cookie = "_filter_region="+region+"; expires="+date.toGMTString()+"; path=/; domain="+window.location.hostname;
-            setSession('_filter_region', region);
+            setSession('_filter_region', region)
+            .then(function(result) {
+                console.log(result); // Code depending on result
+            })
+            .catch(function() {
+                // An error occurred
+            });
         } else {
             document.cookie = '_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
-            setSession('_filter_region', '');
+            setSession('_filter_region', '')
+            .then(function(result) {
+                console.log(result); // Code depending on result
+            })
+            .catch(function() {
+                // An error occurred
+            });
         }
     });
     $(document).on('facetwp-refresh', function() {
@@ -188,7 +200,13 @@ function fwp_facet_scripts() {
             // No qs and cookie has value
             if ( !region && null != regiondata && '' != regiondata ) {
                 document.cookie = '_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
-                setSession('_filter_region', '');
+                setSession('_filter_region', '')
+                .then(function(result) {
+                    console.log(result); // Code depending on result
+                })
+                .catch(function() {
+                    // An error occurred
+                });
                 // window.location.search = '_location_region='+regiondata;
                 params.set(regionname, regiondata);
                 // window.history.replaceState({}, '', `${location.pathname}?${params}`)
@@ -197,7 +215,13 @@ function fwp_facet_scripts() {
             // QS & no location set 
             if ( facets && region && regiondata && region != regiondata ) {
                 document.cookie = '_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
-                setSession('_filter_region', '');
+                setSession('_filter_region', '')
+                .then(function(result) {
+                    console.log(result); // Code depending on result
+                })
+                .catch(function() {
+                    // An error occurred
+                });
                 // window.location.search = '_location_region='+regiondata;
                 // params.set('_location_region', regiondata);
                 // window.location.search = `?${params}`;
@@ -236,9 +260,14 @@ function fwp_facet_scripts() {
     }
     // Set Session Function
     function setSession(variable, value) {
-        xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", "/wp-content/plugins/UAMSWP-Find-a-Doc/includes/class.fad-set-session.php?variable=" + variable + "&value=" + value, true);
-        xmlhttp.send();
+        return new Promise(function(resolve, reject) {
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function() {
+                resolve(this.responseText);
+            };
+            xmlhttp.open("GET", "/wp-content/plugins/UAMSWP-Find-a-Doc/includes/class.fad-set-session.php?variable=" + variable + "&value=" + value, true);
+            xmlhttp.send();
+        });
     }
 })(jQuery);
 </script>
