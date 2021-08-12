@@ -226,6 +226,10 @@ jQuery(document).ready(function($){
         }
 
     });
+    if(getCookie('_filter_region') != null) {
+        // set the option to selected that corresponds to what the cookie is set to
+        $('#region option[value="' + getCookie('_filter_region') + '"]').attr('selected', 'selected');
+    }
 });
 // Set Session Function
 function setSession(variable, value ) {
