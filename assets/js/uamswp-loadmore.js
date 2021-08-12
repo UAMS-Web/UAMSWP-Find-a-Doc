@@ -227,6 +227,7 @@ jQuery(document).ready(function($){
 
     });
     if(getCookie('_filter_region') != null) {
+        // console.log(getCookie('_filter_region'));
         // set the option to selected that corresponds to what the cookie is set to
         $('#region option[value="' + getCookie('_filter_region') + '"]').attr('selected', 'selected');
     }
