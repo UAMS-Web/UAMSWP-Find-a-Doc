@@ -107,7 +107,7 @@ jQuery(function($) {
         }
 
         if (region){
-            createCookie('_filter_region', region, 1);
+            createCookie('_filter_region', region);
             console.log('cookie set: ' + region);
             setSession('_filter_region', region)
                 .then(function(result) {

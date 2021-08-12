@@ -675,7 +675,7 @@ function provider_ajax_filter_callback() {
 	$provider_region = '';
 	if( isset($_SESSION['_filter_region']) || isset($_GET['_filter_region']) ) {
 		if ( isset($_GET['_filter_region']) ) {
-			setcookie("_filter_region", htmlspecialchars($_GET['_filter_region']), time()+(24 * 60 * 60 * 1000), "/", $_SERVER['HTTP_HOST'] );
+			setcookie("_filter_region", htmlspecialchars($_GET['_filter_region']), "", "/", $_SERVER['HTTP_HOST'] );
 		}
 		$provider_region = $_SESSION['_filter_region'];
 	} elseif(isset($_POST['region'])){
@@ -763,7 +763,7 @@ function uamswp_add_trench(){
 				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
 				// expires = "; expires=" + date.toUTCString();
 				// var domain = "; domain=" + window.location.hostname;
-    			document.cookie = "_filter_region=<?php echo $region; ?>; expires="+date.toGMTString()+"; path=/; domain="+window.location.hostname;
+    			document.cookie = "_filter_region=<?php echo $region; ?>; path=/; domain="+window.location.hostname;
 				// Set Session Function
 				function setSession(variable, value) {
 					return new Promise(function(resolve, reject) {
