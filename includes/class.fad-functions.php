@@ -604,12 +604,12 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
 	sort($provider_regions_ids);
 
 	$provider_region = '';
-	if( isset($_COOKIE['_filter_region']) || isset($_GET['_filter_region']) ) {
-		$provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['_filter_region'];
+	if( isset($_SESSION['_filter_region']) || isset($_GET['_filter_region']) ) {
+		$provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_SESSION['_filter_region'];
 	}
 	$provider_title = '';
-	if( isset($_COOKIE['_provider_title']) ) {
-		$provider_title = $_COOKIE['_provider_title'] ;
+	if( isset($_SESSION['_provider_title']) ) {
+		$provider_title = $_SESSION['_provider_title'] ;
 	}
 	//provider_ajax_filter_scripts();
 
@@ -666,18 +666,18 @@ function provider_ajax_filter_callback() {
     $tax_query = array('relation' => 'AND');
 
 	$provider_title = '';
-	if( isset($_COOKIE['_provider_title']) ) {
-		$provider_title = $_COOKIE['_provider_title'] ;
+	if( isset($_SESSION['_provider_title']) ) {
+		$provider_title = $_SESSION['_provider_title'] ;
 	} elseif(isset($_POST['title'])){
 		$provider_title = sanitize_text_field( $_POST['title'] );
 	}
 
 	$provider_region = '';
-	if( isset($_COOKIE['_filter_region']) || isset($_GET['_filter_region']) ) {
+	if( isset($_SESSION['_filter_region']) || isset($_GET['_filter_region']) ) {
 		if ( isset($_GET['_filter_region']) ) {
 			setcookie("_filter_region", htmlspecialchars($_GET['_filter_region']), time()+(24 * 60 * 60 * 1000), "/", $_SERVER['HTTP_HOST'] );
 		}
-		$provider_region = $_COOKIE['_filter_region'];
+		$provider_region = $_SESSION['_filter_region'];
 	} elseif(isset($_POST['region'])){
 		$provider_region = sanitize_text_field( $_POST['region'] );
 	}
