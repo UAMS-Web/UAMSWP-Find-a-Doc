@@ -183,9 +183,11 @@ jQuery(function($) {
 });
 jQuery(document).ready(function($){
     $("#title > option").attr("disabled", function() {
-        available_title = $('#provider_ids').data('titles').toString();
         titleArray = [];
-        titleArray = available_title.split(",");
+        if ($('#provider_ids').data('titles')){
+            available_title = $('#provider_ids').data('titles').toString();
+            titleArray = available_title.split(",");
+        }
         // console.log(titleArray);
         if( $.inArray( $(this).val(), titleArray ) == -1 ) {
             return true; //available_title.includes( $(this).val() );
@@ -194,9 +196,11 @@ jQuery(document).ready(function($){
         }
     });
     $("#region > option").attr("disabled", function() {
-        available_regions = $('#provider_ids').data('regions');
         regionArray = [];
-        regionArray = available_regions.split(","); 
+        if ($('#provider_ids').data('regions')) {
+            available_regions = $('#provider_ids').data('regions');
+            regionArray = available_regions.split(","); 
+        }
         // console.log(regionArray);
         if( $.inArray( $(this).val(), regionArray ) == -1 ) {
             return true;
