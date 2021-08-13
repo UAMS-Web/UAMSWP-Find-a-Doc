@@ -604,12 +604,12 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
 	sort($provider_regions_ids);
 
 	$provider_region = '';
-	if( isset($_SESSION['_filter_region']) || isset($_GET['_filter_region']) ) {
-		$provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_SESSION['_filter_region'];
+	if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+		$provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
 	}
 	$provider_title = '';
-	if( isset($_SESSION['_provider_title']) ) {
-		$provider_title = $_SESSION['_provider_title'] ;
+	if( isset($_COOKIE['_provider_title']) ) {
+		$provider_title = $_COOKIE['_provider_title'] ;
 	}
 	//provider_ajax_filter_scripts();
 
@@ -666,18 +666,18 @@ function provider_ajax_filter_callback() {
     $tax_query = array('relation' => 'AND');
 
 	$provider_title = '';
-	if( isset($_SESSION['_provider_title']) ) {
-		$provider_title = $_SESSION['_provider_title'] ;
+	if( isset($_COOKIE['_provider_title']) ) {
+		$provider_title = $_COOKIE['_provider_title'] ;
 	} elseif(isset($_POST['title'])){
 		$provider_title = sanitize_text_field( $_POST['title'] );
 	}
 
 	$provider_region = '';
-	if( isset($_SESSION['_filter_region']) || isset($_GET['_filter_region']) ) {
+	if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
 		if ( isset($_GET['_filter_region']) ) {
-			setcookie("_filter_region", htmlspecialchars($_GET['_filter_region']), "", "/", $_SERVER['HTTP_HOST'] );
+			setcookie("wp_filter_region", htmlspecialchars($_GET['_filter_region']), "", "/", $_SERVER['HTTP_HOST'] );
 		}
-		$provider_region = $_SESSION['_filter_region'];
+		$provider_region = $_COOKIE['wp_filter_region'];
 	} elseif(isset($_POST['region'])){
 		$provider_region = sanitize_text_field( $_POST['region'] );
 	}
@@ -763,25 +763,7 @@ function uamswp_add_trench(){
 				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
 				// expires = "; expires=" + date.toUTCString();
 				// var domain = "; domain=" + window.location.hostname;
-    			document.cookie = "_filter_region=<?php echo $region; ?>; path=/; domain="+window.location.hostname;
-				// Set Session Function
-				function setSession(variable, value) {
-					return new Promise(function(resolve, reject) {
-						xmlhttp = new XMLHttpRequest();
-						xmlhttp.onload = function() {
-							resolve(this.responseText);
-						};
-						xmlhttp.open("GET", "/wp-content/plugins/UAMSWP-Find-a-Doc/includes/class.fad-set-session.php?variable=" + variable + "&value=" + value, true);
-						xmlhttp.send();
-					});
-				}
-				setSession('_filter_region', '<?php echo $region; ?>')
-				.then(function(result) {
-                    console.log(result); // Code depending on result
-                })
-                .catch(function() {
-                    // An error occurred
-                });
+    			document.cookie = "wp_filter_region=<?php echo $region; ?>; path=/; domain="+window.location.hostname;
 			</script>
 		<?php
 		}

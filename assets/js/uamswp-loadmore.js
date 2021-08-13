@@ -73,14 +73,7 @@ jQuery(function($) {
         pafForm.find("#region").prop('selectedIndex', 0);
         pafForm.find("#title").prop('selectedIndex', 0);
         
-        deleteCookie('_filter_region');
-        setSession('_filter_region', '')
-            .then(function(result) {
-                console.log(result); // Code depending on result
-            })
-            .catch(function() {
-                // An error occurred
-            });
+        deleteCookie('wp_filter_region');
         // deleteCookie('_provider_title');
 
         pafForm.submit();
@@ -107,24 +100,10 @@ jQuery(function($) {
         }
 
         if (region){
-            createCookie('_filter_region', region);
+            createCookie('wp_filter_region', region);
             console.log('cookie set: ' + region);
-            setSession('_filter_region', region)
-                .then(function(result) {
-                    console.log(result); // Code depending on result
-                })
-                .catch(function() {
-                    // An error occurred
-                });
         } else {
-            deleteCookie('_filter_region');
-            setSession('_filter_region', '')
-                .then(function(result) {
-                    console.log(result); // Code depending on result
-                })
-                .catch(function() {
-                    // An error occurred
-                });
+            deleteCookie('wp_filter_region');
             var url = window.location.toString();
             var clean_url = removeURLParameter(url, '_filter_region');
             window.history.replaceState({}, document.title, clean_url);
@@ -226,23 +205,12 @@ jQuery(document).ready(function($){
         }
 
     });
-    if(getCookie('_filter_region') != null) {
-        // console.log(getCookie('_filter_region'));
+    if(getCookie('wp_filter_region') != null) {
+        // console.log(getCookie('wp_filter_region'));
         // set the option to selected that corresponds to what the cookie is set to
-        $('#region option[value="' + getCookie('_filter_region') + '"]').attr('selected', 'selected');
+        $('#region option[value="' + getCookie('wp_filter_region') + '"]').attr('selected', 'selected');
     }
 });
-// Set Session Function
-function setSession(variable, value ) {
-    return new Promise(function(resolve, reject) {
-        xmlhttp = new XMLHttpRequest();
-        xmlhttp.onload = function() {
-            resolve(this.responseText);
-        };
-        xmlhttp.open("GET", "/wp-content/plugins/UAMSWP-Find-a-Doc/includes/class.fad-set-session.php?variable=" + variable + "&value=" + value, true);
-        xmlhttp.send();
-    });
-}
 // Cookie Functions
 function createCookie(name, value, days) {
     var expires = "";
