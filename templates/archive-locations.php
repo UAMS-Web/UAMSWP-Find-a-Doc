@@ -34,7 +34,7 @@ get_header();
                     <div class="fwp-filter"><?php echo facetwp_display( 'facet', 'location_type' ); ?></div>
                     <div class="fwp-filter"><?php echo facetwp_display( 'facet', 'location_aoe' ); ?></div>
                     <div class="fwp-filter"><?php echo facetwp_display( 'facet', 'location_region' ); ?></div>
-                    <button class="btn btn-primary" id="filter-apply" onclick="FWP.refresh();">Apply</button> <button class="btn btn-outline-primary" id="filter-reset" onclick="FWP.reset()">Reset</button>
+                    <button class="btn btn-outline-primary" id="filter-reset" onclick="FWP.reset()">Reset</button>
                 </fieldset>
             </div>
             <div class="col-12 col-sm list-col">

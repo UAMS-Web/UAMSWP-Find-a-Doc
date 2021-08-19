@@ -59,7 +59,7 @@ get_header();
 													<div class="fwp-filter">[facetwp facet="physician_language"]</div>
 													<div class="fwp-filter">[facetwp facet="locations"]</div>
 													<div class="fwp-filter">[facetwp facet="provider_region"]</div>
-													<button class="btn btn-primary" id="filter-apply" onclick="FWP.refresh();">Apply</button> <button class="btn btn-outline-primary" id="filter-reset" onclick="FWP.reset()">Reset</button>
+													<button class="btn btn-outline-primary" id="filter-reset" onclick="FWP.reset()">Reset</button>
 												' );
 					?>
 				</fieldset>
