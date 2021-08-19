@@ -573,10 +573,12 @@ function provider_ajax_filter_scripts() {
 function uamswp_provider_ajax_filter_shortcode( $atts ) {
 	$a = shortcode_atts( array(
 		'providers' => '',
-		'ppp' => ''
+		'ppp' => '',
+		'hide_region' => ''
 	), $atts);
 	$providers = explode(",", $a['providers']);
 	$ppp = $a['ppp'];
+	$hide_region = $a['hide_region'];
 	$provider_titles = array();
 	$provider_titles_list = array();
 	$regions = array();
@@ -629,7 +631,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
 						<?php endforeach; ?>
                     </select>
                 </div>
-				<div class="col-12 mb-4 col-sm-auto mb-sm-0">
+				<div class="col-12 mb-4 col-sm-auto mb-sm-0<?php echo $hide_region ? ' d-none' : '' ?>">
                     <label class="sr-only" for="region">Region</label>
                     <select name="region" id="region" class="form-control">
 						<option value="">Any Region</option>
@@ -642,7 +644,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
                 <div class="col-auto">
 					<input type="hidden" id="providers" name="providers" value="<?php echo implode(",", $providers); ?>">
 					<input type="hidden" id="ppp" name="ppp" value="<?php echo $ppp; ?>">
-					<input type="submit" id="submit" name="submit" value="Search" class="btn btn-primary">
+					<!-- <input type="submit" id="submit" name="submit" value="Search" class="btn btn-primary"> -->
 				</div>
 				<div class="col-auto">
 					<input type="button" id="clear" name="clear" value="Reset" class="btn btn-outline-primary">
