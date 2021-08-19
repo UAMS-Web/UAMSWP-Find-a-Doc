@@ -70,11 +70,11 @@ function fwp_facet_scripts() {
                     $('select.facetwp-sort-select').each(function() {
                         $(this).attr('title', "Choose sort order" );
                     });
-                    if (FWP.loaded) {
-                        $('html, body').animate({
-                            scrollTop: $('main').offset().top
-                        }, 500);
-                    }
+                    // if (FWP.loaded) {
+                    //     $('html, body').animate({
+                    //         scrollTop: $('main').offset().top
+                    //     }, 500);
+                    // }
                 });
             })(jQuery);
         </script>
