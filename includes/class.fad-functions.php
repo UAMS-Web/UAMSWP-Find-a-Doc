@@ -574,11 +574,11 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
 	$a = shortcode_atts( array(
 		'providers' => '',
 		'ppp' => '',
-		'hide_region' => ''
+		'region' => ''
 	), $atts);
 	$providers = explode(",", $a['providers']);
 	$ppp = $a['ppp'];
-	$hide_region = $a['hide_region'];
+	$display_region = $a['region'];
 	$provider_titles = array();
 	$provider_titles_list = array();
 	$regions = array();
@@ -631,7 +631,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
 						<?php endforeach; ?>
                     </select>
                 </div>
-				<div class="col-12 mb-4 col-sm-auto mb-sm-0<?php echo $hide_region ? ' d-none' : '' ?>">
+				<div class="col-12 mb-4 col-sm-auto mb-sm-0<?php echo $display_region == 'hide' ? ' d-none' : '' ?>">
                     <label class="sr-only" for="region">Region</label>
                     <select name="region" id="region" class="form-control">
 						<option value="">Any Region</option>
