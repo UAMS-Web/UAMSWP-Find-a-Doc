@@ -574,7 +574,6 @@
 				
 				$tax_query = array();
 				if(!empty($provider_region)) {
-					//$region =  $provider_region;
 					$tax_query[] = array(
 						'taxonomy' => 'region',
 						'field' => 'slug',
@@ -640,10 +639,8 @@
 				</div>
             <?php if ( isset($_GET['_filter_region']) ) { ?>
                 <script type="text/javascript">
-					var days = 1; // Expiration value
-					var date = new Date();
-					date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-					document.cookie = "wp_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; expires="+date.toGMTString()+"; path=/; domain="+window.location.hostname;
+					// Set cookie to expire at end of session
+					document.cookie = "wp_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; path=/; domain="+window.location.hostname;
 				</script>
             <?php } ?>
         </section>
