@@ -57,6 +57,8 @@
 	
 	get_header();
 
+	$page_title = get_the_title( );
+
 	$clinical_trials = get_field('treatment_procedure_clinical_trials');
 	$video = get_field('treatment_procedure_youtube_link');
 	$conditions_cpt = get_field('treatment_conditions');
@@ -99,6 +101,7 @@
 		'order' => 'ASC',
 		'orderby' => 'title',
 		'posts_per_page' => -1,
+		'fields' => 'ids',
 		'no_found_rows' => true, // counts posts, remove if pagination required
 		'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
 		'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
@@ -118,20 +121,73 @@
 	}
 
 	if ( $location_valid ) {
+		$location_ids = $location_query->posts;
+
+		$location_region_IDs = array();
+		// while ($location_query->have_posts()) : $location_query->the_post();
+		foreach($location_ids as $location_id) {
+			// $id = get_the_ID();
+			$location_region_IDs[] = get_field('location_region', $location_id);
+		}
+		// endwhile;
+		$location_region_IDs = array_unique($location_region_IDs);
+		$location_region_list = array();
+		foreach ($location_region_IDs as $location_region_ID){
+			$location_region_list[] = get_term_by( 'ID', $location_region_ID, 'region' )->slug;
+		}
+
+		// if cookie is set, run modified physician query
+		if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {		
+		
+			$location_region = '';
+			if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+				$location_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
+			}
+			
+			$tax_query = array();
+			if(!empty($location_region)) {
+				$tax_query[] = array(
+					'taxonomy' => 'region',
+					'field' => 'slug',
+					'terms' => $location_region
+				);
+			}
+			$args = array(
+				'post_type' => "location",
+				'post_status' => 'publish',
+				'order' => 'ASC',
+				'orderby' => 'title',
+				'posts_per_page' => -1,
+				'fields' => 'ids',
+				'no_found_rows' => true, // counts posts, remove if pagination required
+				'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
+				'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
+				'post__in'	=> $locations,
+				'tax_query' => $tax_query
+			);
+			$location_query = New WP_Query( $args );
+		}
+
 		$location_content .= '<section class="uams-module bg-auto" id="locations">';
 		$location_content .= '<div class="container-fluid">';
 		$location_content .= '<div class="row">';
 		$location_content .= '<div class="col-12">';
-		$location_content .= '<h2 class="module-title"><span class="title">Locations Providing ' . get_the_title() . '</span></h2>';
-		$location_content .= '<p class="note">Note that ' . get_the_title() . ' may not be <em>performed</em> at every location listed below. The list may include locations where the treatment plan is developed during and after a patient visit.</p>';
+		$location_content .= '<h2 class="module-title"><span class="title">Locations Providing ' . $page_title . '</span></h2>';
+		$location_content .= '<p class="note">Note that ' . $page_title . ' may not be <em>performed</em> at every location listed below. The list may include locations where the treatment plan is developed during and after a patient visit.</p>';
+		$location_content .= do_shortcode( '[uamswp_location_ajax_filter locations="'. implode(",", $location_ids) .'"]' );
 		$location_content .= '<div class="card-list-container location-card-list-container">';
-		$location_content .= '<div class="card-list">';
+		$location_content .= '<div class="card-list card-list-locations">';
 		ob_start();
 		ob_clean();
-		while ( $location_query->have_posts() ) : $location_query->the_post();
-			$id = get_the_ID();
-			include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
-		endwhile;
+		if ($location_query->have_posts()){
+			while ( $location_query->have_posts() ) : $location_query->the_post();
+				$id = get_the_ID();
+				include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+			endwhile;
+			echo '<data id="location_ids" data-postids="'. implode(',', $location_query->posts) .'," data-regions="'. implode(',', $location_region_list) .',"></data>';
+		} else {
+			echo '<span class="no-results">Sorry, there are no locations matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
+		}
 		wp_reset_postdata();
 		$location_content .= ob_get_clean();
 		$location_content .= '</div>';
@@ -272,7 +328,7 @@
 	<main id="genesis-content" class="treatment-item<?php echo $treatment_field_classes; ?>">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
-				<h1 class="entry-title"><span class="supertitle"><?php echo ( $treatment_title ? $treatment_title : 'Treatment & Procedure' ); ?></span><span class="sr-only">:</span> <?php echo get_the_title(); ?></h1>
+				<h1 class="entry-title"><span class="supertitle"><?php echo ( $treatment_title ? $treatment_title : 'Treatment & Procedure' ); ?></span><span class="sr-only">:</span> <?php echo $page_title; ?></h1>
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
 				<?php
@@ -471,7 +527,7 @@
                         <div class="col-12">
                             <h2 class="module-title"><span class="title">UAMS Health Talk Podcast</span></h2>
                             <div class="module-body text-center">
-                                <p class="lead">In the UAMS Health Talk podcast, experts from UAMS talk about a variety of health topics, providing tips and guidelines to help people lead healthier lives. Listen to the episode(s) featuring the topic of <?php echo get_the_title(); ?>.</p>
+                                <p class="lead">In the UAMS Health Talk podcast, experts from UAMS talk about a variety of health topics, providing tips and guidelines to help people lead healthier lives. Listen to the episode(s) featuring the topic of <?php echo $page_title; ?>.</p>
                             </div>
                             <div class="content-width mt-8" id="radiomd-embedded-filtered-tag"></div>
                         </div>
@@ -490,7 +546,7 @@
 		// Begin Clinical Resources Section
 		$resource_heading_related_pre = false; // "Related Resources"
 		$resource_heading_related_post = true; // "Resources Related to __"
-		$resource_heading_related_name = get_the_title(); // To what is it related?
+		$resource_heading_related_name = $page_title; // To what is it related?
 		$resource_more_suppress = false; // Force div.more to not display
         $resource_more_key = '_resource_treatments';
         $resource_more_value = $post->post_name;
@@ -501,7 +557,7 @@
 		
 		// Begin Clinical Trials Section
 		if ( $show_clinical_trials_section ) {
-			$clinical_trial_title = get_the_title();
+			$clinical_trial_title = $page_title;
 			include( UAMS_FAD_PATH . '/templates/blocks/clinical-trials.php' );
 		} // endif
 		// End Clinical Trials Section
@@ -512,7 +568,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-xs-12">
-							<h2 class="module-title"><span class="title">Conditions Related to <?php echo get_the_title(); ?></span></h2>
+							<h2 class="module-title"><span class="title">Conditions Related to <?php echo $page_title; ?></span></h2>
 							<p class="note">UAMS providers care for a broad range of conditions, some of which may not be listed below.</p>
 							<div class="list-container list-container-rows">
 								<ul class="list">
@@ -594,8 +650,8 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-						<h2 class="module-title"><span class="title">Providers Performing <?php echo get_the_title(); ?></span></h2>
-						<p class="note">Note that every provider listed below may not perform or prescribe <?php echo get_the_title(); ?> for all conditions related to it. Review each provider for availability.</p>   
+						<h2 class="module-title"><span class="title">Providers Performing <?php echo $page_title; ?></span></h2>
+						<p class="note">Note that every provider listed below may not perform or prescribe <?php echo $page_title; ?> for all conditions related to it. Review each provider for availability.</p>   
 						<?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'" ppp="'. $postsPerPage .'"]' ); ?>
 							<div class="card-list-container">
 								<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
@@ -648,7 +704,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title"><span class="title">Areas of Expertise for <?php echo get_the_title(); ?></span></h2>
+						<h2 class="module-title"><span class="title">Areas of Expertise for <?php echo $page_title; ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list card-list-expertise">
 							<?php 
