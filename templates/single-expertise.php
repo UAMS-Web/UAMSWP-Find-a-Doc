@@ -320,31 +320,18 @@ function uamswp_expertise_physicians() {
     global $physicians;
     global $provider_ids;
 
-    $multi_array = array();
-    foreach ($provider_ids as $provider_id){
-        $title_array = get_field('physician_title', $provider_id);
-        $region_array_ids = get_field('physician_region', $provider_id);
-        $region_array_list = array();
-        foreach($region_array_ids as $region_array_id){
-            $region_array_list[] = get_term_by( 'ID', $region_array_id, 'region' )->slug;
-        }
-        $multi_array[] = array(
-            'id'        => $provider_id, 
-            'title'     => $title_array, 
-            'region'    => implode(',', $region_array_list)
-        );
+    
+    // Get available regions - All available, since no titles set on initial load
+    $region_IDs = array();
+    while ($physicians_query->have_posts()) : $physicians_query->the_post();
+        $id = get_the_ID();
+        $region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
+    endwhile;
+    $region_IDs = array_unique($region_IDs);
+    $region_list = array();
+    foreach ($region_IDs as $region_ID){
+        $region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
     }
-
-    function mygetvalue($products, $return, $field, $value) {
-        $productIDs = array();
-        foreach($products as $array_key => $product)
-        {
-            if ( $product[$field] === $value )
-            $productIDs[] = $product[$return];
-        }
-        return $productIDs;
-    }
-    $region = '';
 
     // if cookie is set, run modified physician query
 	if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {		
@@ -356,11 +343,10 @@ function uamswp_expertise_physicians() {
 
         $tax_query = array();
         if(!empty($provider_region)) {
-            $region =  $provider_region;
             $tax_query[] = array(
                 'taxonomy' => 'region',
                 'field' => 'slug',
-                'terms' => $region
+                'terms' => $provider_region
             );
         }
         $postsPerPage = -1;
@@ -393,12 +379,6 @@ function uamswp_expertise_physicians() {
                     <div class="col-12">
                         <h2 class="module-title"><span class="title">Providers</span></h2>
                         <?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'" ppp="'. $postsPerPage .'"]' ); ?>
-                        <?php   //print_r($multi_array);
-                                $regionValueIDs = mygetvalue($multi_array, 'id', 'region', $region);
-                                // $titleValueIDs = mygetvalue($multi_array, 'id', 'title', 5518);
-                                print_r($regionValueIDs);
-                                // print_r($titleValueIDs);
-                         ?>
                         <div class="card-list-container">
                             <div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
                                 <?php 
@@ -406,7 +386,6 @@ function uamswp_expertise_physicians() {
                                     $p=0;
                                     if($provider_count > 0){
                                         $title_list = array();
-										$region_IDs = array();
                                         while ($physicians_query->have_posts()) : $physicians_query->the_post();
                                             $id = get_the_ID();
                                             if ($p < $postsPerPage) {
@@ -414,14 +393,8 @@ function uamswp_expertise_physicians() {
                                             }
                                             $p++;
                                             $title_list[] = get_field('physician_title', $id);
-											$region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
                                         endwhile;
-                                        $region_IDs = array_unique($region_IDs);
-                                        $region_list = array();
-                                        foreach ($region_IDs as $region_ID){
-                                            $region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
-                                        }
-                                        echo '<data id="provider_ids" data-regionids="'. implode(",", $regionValueIDs) .'" data-titleids="" data-postids="'. implode(',', $physicians_query->posts) .'," data-regions="'. implode(',', $region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
+                                        echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'," data-regions="'. implode(',', $region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
                                     } else {
                                         echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
                                     }
@@ -437,10 +410,8 @@ function uamswp_expertise_physicians() {
             </div>
             <?php if ( isset($_GET['_filter_region']) ) { ?>
                 <script type="text/javascript">
-                    var days = 1; // Expiration value
-                    var date = new Date();
-                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                    document.cookie = "wp_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; expires="+date.toGMTString()+"; path=/; domain="+window.location.hostname;
+                    // Set cookie to expire at end of session
+                    document.cookie = "wp_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; path=/; domain="+window.location.hostname;
                 </script>
             <?php } ?>
         </section>
