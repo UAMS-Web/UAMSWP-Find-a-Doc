@@ -61,22 +61,32 @@ jQuery(function($) {
     var paf = $("#provider-ajax-filter"); 
     var pafForm = paf.find("form");
 
+    var laf = $("#location-ajax-filter"); 
+    var lafForm = laf.find("form");
+
     pafForm.find('select').on('change', function(){
         pafForm.submit();
     });
 
-    pafForm.find("#clear").on('click', function(e){
+    lafForm.find('select').on('change', function(){
+        lafForm.submit();
+    });
+
+    pafForm.find("#provider_clear").on('click', function(e){
         e.preventDefault(); 
      
         console.log("form cleared");
 
-        pafForm.find("#region").prop('selectedIndex', 0);
-        pafForm.find("#title").prop('selectedIndex', 0);
+        pafForm.find("#provider_region").prop('selectedIndex', 0);
+        pafForm.find("#provider_title").prop('selectedIndex', 0);
+
+        lafForm.find("#location_region").prop('selectedIndex', 0);
         
         deleteCookie('wp_filter_region');
         // deleteCookie('_provider_title');
 
         pafForm.submit();
+        lafForm.submit();
 
     });
 
@@ -85,11 +95,11 @@ jQuery(function($) {
      
         console.log("form submitted");
     
-        if(null != pafForm.find("#region").val() && pafForm.find("#region").val().length !== 0) {
-            var region = pafForm.find("#region").val();
+        if(null != pafForm.find("#provider_region").val() && pafForm.find("#provider_region").val().length !== 0) {
+            var region = pafForm.find("#provider_region").val();
         }
-        if(null != pafForm.find("#title").val() && pafForm.find("#title").val().length !== 0) {
-            var title = pafForm.find("#title").val();
+        if(null != pafForm.find("#provider_title").val() && pafForm.find("#provider_title").val().length !== 0) {
+            var title = pafForm.find("#provider_title").val();
         }
         if(pafForm.find("#providers").val().length !== 0) {
             var providers = pafForm.find("#providers").val();
@@ -153,7 +163,7 @@ jQuery(function($) {
                 }  
             },
             complete : function () {
-                $("#title > option").attr("disabled", function() {
+                $("#provider_title > option").attr("disabled", function() {
                     available_title = $('#provider_ids').data('titles').toString();
                     titleArray = [];
                     titleArray = available_title.split(",");
@@ -164,8 +174,73 @@ jQuery(function($) {
                         return false;
                     }
                 });
-                $("#region > option").attr("disabled", function() {
+                $("#provider_region > option").attr("disabled", function() {
                     available_regions = $('#provider_ids').data('regions');
+                    regionArray = [];
+                    regionArray = available_regions.split(",");
+                    // console.log(regionArray); 
+                    if( $.inArray( $(this).val(), regionArray ) == -1 ) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+        
+                });
+            },
+        });
+     
+    });
+    lafForm.submit(function(e){
+        e.preventDefault(); 
+     
+        console.log("form submitted");
+    
+        if(null != lafForm.find("#location_region").val() && lafForm.find("#location_region").val().length !== 0) {
+            var region = lafForm.find("#location_region").val();
+        }
+
+        if(lafForm.find("#locations").val().length !== 0) {
+            var locations = lafForm.find("#locations").val();
+        }
+
+        if (region){
+            createCookie('wp_filter_region', region);
+            console.log('cookie set: ' + region);
+        } else {
+            deleteCookie('wp_filter_region');
+            var url = window.location.toString();
+            var clean_url = removeURLParameter(url, '_filter_region');
+            window.history.replaceState({}, document.title, clean_url);
+            //console.log('session emptied' + getCookie('_filter_region'));
+        }
+        // if(title){
+        //     createCookie('_provider_title', title, 1);
+        //     // console.log('cookie set: ' + title);
+        // } else {
+        //    deleteCookie('_provider_title');
+        // //    console.log('cookie emptied' + getCookie('_provider_title'));
+        // }
+
+        //console.log(providers);
+
+    
+        $.ajax({
+            type: 'POST',
+            url: '/wp-admin/admin-ajax.php',
+            dataType: 'html',
+            data: {
+                action : "location_ajax_filter",
+                region : region,
+                locations : locations,
+            },
+            success : function(res) { 
+                $('.card-list-locations').html(res);
+                location_list = $('#location_ids').data('postids');
+                // console.log(location_list);
+            },
+            complete : function () {
+                $("#location_region > option").attr("disabled", function() {
+                    available_regions = $('#location_ids').data('regions');
                     regionArray = [];
                     regionArray = available_regions.split(",");
                     // console.log(regionArray); 
@@ -182,7 +257,7 @@ jQuery(function($) {
     });
 });
 jQuery(document).ready(function($){
-    $("#title > option").attr("disabled", function() {
+    $("#provider_title > option").attr("disabled", function() {
         titleArray = [];
         if ($('#provider_ids').data('titles')){
             available_title = $('#provider_ids').data('titles').toString();
@@ -195,7 +270,7 @@ jQuery(document).ready(function($){
             return false;
         }
     });
-    $("#region > option").attr("disabled", function() {
+    $("#provider_region > option").attr("disabled", function() {
         regionArray = [];
         if ($('#provider_ids').data('regions')) {
             available_regions = $('#provider_ids').data('regions');
@@ -208,6 +283,28 @@ jQuery(document).ready(function($){
             return false;
         }
 
+    });
+    $("#location_region > option").attr("disabled", function() {
+        regionArray = [];
+        if ($('#location_ids').data('regions')) {
+            available_regions = $('#location_ids').data('regions');
+            regionArray = available_regions.split(","); 
+        }
+        // console.log(regionArray);
+        if( $.inArray( $(this).val(), regionArray ) == -1 ) {
+            return true;
+        } else {
+            return false;
+        }
+
+    });
+    $("#provider_region").change(function(){
+        $("#location_region").val( this.value );
+        $("#location-ajax-filter form").submit();
+    });
+    $("#location_region").change(function(){
+        $("#provider_region").val( this.value );
+        $("#provider-ajax-filter form").submit();
     });
     if(getCookie('wp_filter_region') != null) {
         // console.log(getCookie('wp_filter_region'));
