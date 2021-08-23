@@ -667,6 +667,7 @@ function provider_ajax_filter_callback() {
   
     $tax_query = array('relation' => 'AND');
 
+	// Get data variables
 	$provider_title = '';
 	if( isset($_COOKIE['_provider_title']) ) {
 		$provider_title = $_COOKIE['_provider_title'] ;
@@ -684,28 +685,84 @@ function provider_ajax_filter_callback() {
 		$provider_region = sanitize_text_field( $_POST['region'] );
 	}
  
-    if(!empty($provider_title) ) {
+    if(isset($_POST['providers'])) {
+        $providers = sanitize_text_field( $_POST['providers'] );
+		$providers = explode(",", $providers);
+    }
+	
+	// Build query for regions, based on titles
+	if(!empty($provider_title) ) {
         $clinical_title = $provider_title ;
-        $tax_query[] = array(
+        $tax_query_title[] = array(
             'taxonomy' => 'clinical_title',
 			'field' => 'term_id',
             'terms' => $clinical_title,
         );
+		// Merge into full tax query 
+		$tax_query = array_merge($tax_query, $tax_query_title);
     }
 
+	$args = array(
+        'post_type' => 'provider',
+		'post_status' => 'publish',
+		'orderby' => 'title',
+		'order' => 'ASC',
+        'posts_per_page' => -1,
+		'fields' => 'ids',
+		'post__in' => $providers,
+        'tax_query' => $tax_query_title
+    );
+
+	$region_prov_ids = new WP_Query( $args );
+	
+	$region_IDs = array();
+	while ($region_prov_ids->have_posts()) : $region_prov_ids->the_post();
+		$id = get_the_ID();
+		$region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
+	endwhile;
+	$region_IDs = array_unique($region_IDs);
+	$region_list = array();
+	foreach ($region_IDs as $region_ID){
+		$region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
+	}
+
+	// Build query for titles, based on regions
 	if(!empty($provider_region)) {
         $region =  $provider_region;
-        $tax_query[] = array(
+        $tax_query_region[] = array(
             'taxonomy' => 'region',
 			'field' => 'slug',
             'terms' => $region
         );
+		// Merge into full tax query
+		$tax_query = array_merge($tax_query, $tax_query_region);
     }
 
-	if(isset($_POST['providers'])) {
-        $providers = sanitize_text_field( $_POST['providers'] );
-		$providers = explode(",", $providers);
-    }
+	// Query providers based full tax query
+	$args = array(
+        'post_type' => 'provider',
+		'post_status' => 'publish',
+		'orderby' => 'title',
+		'order' => 'ASC',
+        'posts_per_page' => -1,
+		'fields' => 'ids',
+		'post__in' => $providers,
+        'tax_query' => $tax_query_region
+    );
+
+	$title_prov_ids = new WP_Query( $args );
+	
+	$title_list = array();
+	while ($title_prov_ids->have_posts()) : $title_prov_ids->the_post();
+		$id = get_the_ID();
+		$title_list[] = get_field('physician_title', $id);
+	endwhile;
+	
+
+	// if(isset($_POST['providers'])) {
+    //     $providers = sanitize_text_field( $_POST['providers'] );
+	// 	$providers = explode(",", $providers);
+    // }
 
 	if(isset($_POST['ppp'])) {
         $ppp = sanitize_text_field( $_POST['ppp'] );
@@ -728,21 +785,15 @@ function provider_ajax_filter_callback() {
 		$provider_ids = $search_query->posts;
 		//echo $_POST['ppp'];
 		$z=0;
-		$title_list = array();
-		$region_IDs = array();
         while ( $z < $ppp && $search_query->have_posts() ) : $search_query->the_post();
             $id = get_the_ID();
 			include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
 			$z++;
-			$title_list[] = get_field('physician_title', $id);
-			$region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
         endwhile;
-		$region_IDs = array_unique($region_IDs);
-		$region_list = array();
-		foreach ($region_IDs as $region_ID){
-			$region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
-		}
 		echo '<data id="provider_ids" data-postids="'. implode(',', $provider_ids) .'," data-regions="'. implode(',', $region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
+		// var_dump($tax_query_title);
+		// var_dump($tax_query_region);
+		// var_dump($tax_query);
     } else {
 		//var_dump($args);
         echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
@@ -760,11 +811,7 @@ function uamswp_add_trench(){
 			$region = $trench->slug ? $trench->slug : htmlspecialchars($trenchQS);
 			?>
 			<script type="text/javascript">
-				var days = 1; // Expiration value
-				var date = new Date();
-				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-				// expires = "; expires=" + date.toUTCString();
-				// var domain = "; domain=" + window.location.hostname;
+				// Set cookie to expire at end of session
     			document.cookie = "wp_filter_region=<?php echo $region; ?>; path=/; domain="+window.location.hostname;
 			</script>
 		<?php
