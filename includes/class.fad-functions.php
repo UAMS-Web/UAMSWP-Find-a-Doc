@@ -624,7 +624,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
             <div class="form-row align-items-center justify-content-center">
                 <div class="col-12 mb-4 col-sm-auto mb-sm-0">
                     <label class="sr-only" for="title">Clinical Title</label>
-                    <select name="title" id="title" class="form-control">
+                    <select name="provider_title" id="provider_title" class="form-control">
                         <option value="">Any Clinical Title</option>
 						<?php foreach($provider_titles_list as $key => $title) : ?>
 							<option value="<?= $key; ?>"<?php echo ($key == $provider_title) ? ' selected' : ''; ?>><?= $title; ?></option>
@@ -633,7 +633,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
                 </div>
 				<div class="col-12 mb-4 col-sm-auto mb-sm-0<?php echo $display_region == 'hide' ? ' d-none' : '' ?>">
                     <label class="sr-only" for="region">Region</label>
-                    <select name="region" id="region" class="form-control">
+                    <select name="provider_region" id="provider_region" class="form-control">
 						<option value="">Any Region</option>
 						<?php $regions = get_terms('region', 'orderby=name&hide_empty=0');
 						foreach($regions as $region) : ?>
@@ -647,7 +647,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
 					<!-- <input type="submit" id="submit" name="submit" value="Search" class="btn btn-primary"> -->
 				</div>
 				<div class="col-auto">
-					<input type="button" id="clear" name="clear" value="Reset" class="btn btn-outline-primary">
+					<input type="button" id="provider_clear" name="provider_clear" value="Reset" class="btn btn-outline-primary">
 				</div>
             </div>
         </form>
@@ -671,8 +671,8 @@ function provider_ajax_filter_callback() {
 	$provider_title = '';
 	if( isset($_COOKIE['_provider_title']) ) {
 		$provider_title = $_COOKIE['_provider_title'] ;
-	} elseif(isset($_POST['title'])){
-		$provider_title = sanitize_text_field( $_POST['title'] );
+	} elseif(isset($_POST['provider_title'])){
+		$provider_title = sanitize_text_field( $_POST['provider_title'] );
 	}
 
 	$provider_region = '';
@@ -681,8 +681,8 @@ function provider_ajax_filter_callback() {
 			setcookie("wp_filter_region", htmlspecialchars($_GET['_filter_region']), "", "/", $_SERVER['HTTP_HOST'] );
 		}
 		$provider_region = $_COOKIE['wp_filter_region'];
-	} elseif(isset($_POST['region'])){
-		$provider_region = sanitize_text_field( $_POST['region'] );
+	} elseif(isset($_POST['provider_region'])){
+		$provider_region = sanitize_text_field( $_POST['provider_region'] );
 	}
  
     if(isset($_POST['providers'])) {
@@ -800,6 +800,179 @@ function provider_ajax_filter_callback() {
     }
     wp_die();
 }
+// Location AJAX functions
+function uamswp_location_ajax_filter_shortcode( $atts ) {
+	$a = shortcode_atts( array(
+		'locations' => '',
+		'region' => ''
+	), $atts);
+	$locations = explode(",", $a['locations']);
+	$display_region = $a['region'];
+	$location_titles = array();
+	$location_titles_list = array();
+	$regions = array();
+	foreach($locations as $location) {
+		if ( get_post_status ( $location ) == 'publish' ) {
+			// Region
+			$location_region[] = get_field('location_region', $location);
+			foreach($location_region as $region){
+				$location_regions[] = $region;
+			}
+		}
+	}
+	$location_regions_ids = array_unique($location_regions);
+	sort($location_regions_ids);
+
+	$location_region = '';
+	if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+		$location_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
+	}
+	//location_ajax_filter_scripts();
+
+	ob_start(); ?>
+
+	<div class="ajax-filter" id="location-ajax-filter">
+		<h3 class="sr-only">Filter the Locations</h3>
+        <form action="" method="get">
+            <!-- <?php print_r($locations); ?> -->
+            <div class="form-row align-items-center justify-content-center">
+				<div class="col-12 mb-4 col-sm-auto mb-sm-0<?php echo $display_region == 'hide' ? ' d-none' : '' ?>">
+                    <label class="sr-only" for="region">Region</label>
+                    <select name="location_region" id="location_region" class="form-control">
+						<option value="">Any Region</option>
+						<?php $regions = get_terms('region', 'orderby=name&hide_empty=0');
+						foreach($regions as $region) : ?>
+							<option value="<?php echo $region->slug; ?>"<?php echo in_array($region->term_id, $location_regions_ids) ? '' : ' disabled'; ?><?php echo ($region->slug === $location_region) ? ' selected' : ''; ?>><?php echo $region->name; ?></option>
+						<?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="col-auto">
+					<input type="hidden" id="locations" name="locations" value="<?php echo implode(",", $locations); ?>">
+					<!-- <input type="submit" id="submit" name="submit" value="Search" class="btn btn-primary"> -->
+				</div>
+				<div class="col-auto">
+					<input type="button" id="location_clear" name="location_clear" value="Reset" class="btn btn-outline-primary">
+				</div>
+            </div>
+        </form>
+    </div>
+	<hr />
+
+	<?php
+	return ob_get_clean();
+}
+add_shortcode ('uamswp_location_ajax_filter', 'uamswp_location_ajax_filter_shortcode');
+// Ajax Callback
+add_action('wp_ajax_nopriv_location_ajax_filter', 'location_ajax_filter_callback'); 
+add_action('wp_ajax_location_ajax_filter', 'location_ajax_filter_callback');
+ 
+function location_ajax_filter_callback() {
+  
+    $tax_query = array();
+
+	// Get data variables
+	$location_region = '';
+	if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+		if ( isset($_GET['_filter_region']) ) {
+			setcookie("wp_filter_region", htmlspecialchars($_GET['_filter_region']), "", "/", $_SERVER['HTTP_HOST'] );
+		}
+		$location_region = $_COOKIE['wp_filter_region'];
+	} elseif(isset($_POST['location_region'])){
+		$location_region = sanitize_text_field( $_POST['location_region'] );
+	}
+ 
+    if(isset($_POST['locations'])) {
+        $locations = sanitize_text_field( $_POST['locations'] );
+		$locations = explode(",", $locations);
+    }
+
+	// Build query for regions
+	$args = array(
+		'post_type' => 'location',
+		'post_status' => 'publish',
+		'orderby' => 'title',
+		'order' => 'ASC',
+		'posts_per_page' => -1,
+		'fields' => 'ids',
+		'post__in' => $locations,
+	);
+	$region_loc_ids = new WP_Query( $args );
+	
+	$region_IDs = array();
+	while ($region_loc_ids->have_posts()) : $region_loc_ids->the_post();
+		$id = get_the_ID();
+		$region_IDs[] = get_field('location_region', $id);
+	endwhile;
+	$region_IDs = array_unique($region_IDs);
+	$region_list = array();
+	foreach ($region_IDs as $region_ID){
+		$region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
+	}
+
+	// Build query for titles, based on regions
+	if(!empty($location_region)) {
+        $region =  $location_region;
+        $tax_query[] = array(
+            'taxonomy' => 'region',
+			'field' => 'slug',
+            'terms' => $region
+        );
+		// Merge into full tax query
+		// $tax_query = array_merge($tax_query, $tax_query_region);
+    }
+
+	// // Query locations based full tax query
+	// $args = array(
+    //     'post_type' => 'location',
+	// 	'post_status' => 'publish',
+	// 	'orderby' => 'title',
+	// 	'order' => 'ASC',
+    //     'posts_per_page' => -1,
+	// 	'fields' => 'ids',
+	// 	'post__in' => $locations,
+    //     'tax_query' => $tax_query_region
+    // );
+
+	// $title_prov_ids = new WP_Query( $args );
+	
+	// $title_list = array();
+	// while ($title_prov_ids->have_posts()) : $title_prov_ids->the_post();
+	// 	$id = get_the_ID();
+	// 	$title_list[] = get_field('physician_title', $id);
+	// endwhile;
+	
+
+ 
+    $args = array(
+        'post_type' => 'location',
+		'post_status' => 'publish',
+		'orderby' => 'title',
+		'order' => 'ASC',
+        'posts_per_page' => -1,
+		'fields' => 'ids',
+		'post__in' => $locations,
+        'tax_query' => $tax_query
+    );
+ 
+    $search_query = new WP_Query( $args );
+ 
+    if ( $search_query->have_posts() && !empty($locations) ) {
+		$location_ids = $search_query->posts;
+        while ( $search_query->have_posts() ) : $search_query->the_post();
+            $id = get_the_ID();
+			include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+        endwhile;
+		echo '<data id="location_ids" data-postids="'. implode(',', $location_ids) .'," data-regions="'. implode(',', $region_list) .',"></data>';
+		// var_dump($tax_query_title);
+		// var_dump($tax_query_region);
+		// var_dump($tax_query);
+    } else {
+		//var_dump($args);
+        echo '<span class="no-results">Sorry, there are no locations matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
+    }
+    wp_die();
+}
+
 function uamswp_add_trench(){
 	if(is_page( )) {
 		$trench = get_field('page_filter_region');
