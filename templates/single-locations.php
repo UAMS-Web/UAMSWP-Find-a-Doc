@@ -10,6 +10,7 @@ if (empty($excerpt)){
         $excerpt = mb_strimwidth(wp_strip_all_tags($about_loc), 0, 155, '...');
     }
 }
+$page_title = get_the_title( );
 // Parent Location 
 $location_has_parent = get_field('location_parent');
 $location_parent_id = get_field('location_parent_id');
@@ -364,7 +365,7 @@ while ( have_posts() ) : the_post(); ?>
             $show_about_section = true;
             $jump_link_count++;
 			if ( $location_about || $location_youtube_link || ( !$location_about && $location_affiliation && $prescription ) ) {
-				$about_section_title = 'About ' . get_the_title();
+				$about_section_title = 'About ' . $page_title;
 				$about_section_title_short = 'About';
 
 				if ($location_affiliation || $prescription) {
@@ -483,7 +484,7 @@ while ( have_posts() ) : the_post(); ?>
 
         // Check if Conditions section should be displayed
 		// load all 'conditions' terms for the post
-		$title_append = ' at ' . get_the_title();
+		$title_append = ' at ' . $page_title;
 		$conditions_cpt = get_field('location_conditions_cpt');
 		$condition_schema = '';
 		// Conditions CPT
@@ -590,7 +591,7 @@ while ( have_posts() ) : the_post(); ?>
 		<div class="row mx-0 mx-md-n8">
 			<div class="col-12 col-md text">
 				<div class="content-width">
-					<h1 class="page-title"><?php the_title(); ?>
+					<h1 class="page-title"><?php echo $page_title; ?>
 					<?php if ($parent_location) { ?>
 					<span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
 					<?php } // endif ?>
@@ -1267,7 +1268,7 @@ while ( have_posts() ) : the_post(); ?>
 								/* [lat, lon, fillColor, strokeColor, labelClass, iconText, popupText] */
 								var markers = [
 									// example [ 34.74376029995541, -92.31828863640054, "00F","000","white","A","I am a blue icon." ],
-									[ <?php echo $map['lat']; ?>, <?php echo $map['lng'] ?>, "9d2235","222", "transparentwhite", '1', 'Clinic<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php the_title(); ?>" data-typetitle="Get directions to the clinic">Get Directions</a>' ],
+									[ <?php echo $map['lat']; ?>, <?php echo $map['lng'] ?>, "9d2235","222", "transparentwhite", '1', 'Clinic<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>' ],
 									[ <?php echo $parking_map['lat']; ?>, <?php echo $parking_map['lng'] ?>, "9d2235","222", "transparentwhite", '2', 'Parking<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area" data-typetitle="Get directions to the parking area">Get Directions</a>' ]
 								]
 								//Loop through the markers array
@@ -1294,7 +1295,7 @@ while ( have_posts() ) : the_post(); ?>
 							</script>
 							<div class="map-legend bg-info" aria-label="Legend for map">
 								<ol data-categorytitle="Directions">
-									<li>Clinic (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php the_title(); ?>" data-typetitle="Get directions to the clinic">Get Directions</a>)</li>
+									<li>Clinic (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>)</li>
 									<li>Parking (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area" data-typetitle="Get directions to the parking area">Get Directions</a>)</li>
 								</ol>
 							</div>
@@ -1669,7 +1670,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title"><span class="title">Providers at <?php the_title(); ?></span></h2>
+						<h2 class="module-title"><span class="title">Providers at <?php echo $page_title; ?></span></h2>
 						<?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'" ppp="'. $postsPerPage .'" region="hide"]' ); ?>
 						<div class="card-list-container">
 							<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
@@ -1754,7 +1755,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title"><span class="title">Areas of Expertise Represented at <?php the_title(); ?></span></h2>
+						<h2 class="module-title"><span class="title">Areas of Expertise Represented at <?php echo $page_title; ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list card-list-expertise">
 							<?php 
@@ -1778,7 +1779,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title" id="sub-location-title"><span class="title">Additional Clinics Within <?php echo get_the_title(); ?></span></h2>
+						<h2 class="module-title" id="sub-location-title"><span class="title">Additional Clinics Within <?php echo $page_title; ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list">
 						<?php
@@ -1800,7 +1801,7 @@ while ( have_posts() ) : the_post(); ?>
 	if ( $show_related_resource_section ) {
 		$resource_heading_related_pre = false; // "Related Resources"
 		$resource_heading_related_post = true; // "Resources Related to __"
-		$resource_heading_related_name = get_the_title(); // To what is it related?
+		$resource_heading_related_name = $page_title; // To what is it related?
 		$resource_more_suppress = false; // Force div.more to not display
         $resource_more_key = '_resource_locations';
         $resource_more_value = $post->post_name;
@@ -1817,7 +1818,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title"><span class="title">Latest News for <?php the_title(); ?></span></h2>
+						<h2 class="module-title"><span class="title">Latest News for <?php echo $page_title; ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list">
 								<div class="card">
@@ -1867,7 +1868,7 @@ while ( have_posts() ) : the_post(); ?>
 {
   "@context": "http://www.schema.org",
   "@type": "MedicalClinic",
-  "name": "<?php echo get_the_title(); ?>",
+  "name": "<?php echo $page_title; ?>",
   "url": "<?php echo get_permalink(); ?>",
   "image": "<?php echo $locationphoto; ?>",
   <?php echo $condition_schema; ?>
