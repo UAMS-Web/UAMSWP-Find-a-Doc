@@ -1614,35 +1614,33 @@ while ( have_posts() ) : the_post(); ?>
 	// Begin Providers Section
 	if( $show_providers_section ) { 
 
-		if ( isset($_COOKIE['providerTitle']) || isset($_COOKIE['providerRegion']) ) {
+		// Get available regions - All available, since no titles set on initial load
+		$region_IDs = array();
+		while ($physicians_query->have_posts()) : $physicians_query->the_post();
+			$id = get_the_ID();
+			$region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
+		endwhile;
+		$region_IDs = array_unique($region_IDs);
+		$region_list = array();
+		foreach ($region_IDs as $region_ID){
+			$region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
+		}
+
+		if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
 
 			$tax_query = array('relation' => 'AND');
 	
-			$provider_title = '';
-			if( isset($_COOKIE['providerTitle']) ) {
-				$provider_title = $_COOKIE['providerTitle'] ;
-			}
-	
 			$provider_region = '';
-			if( isset($_COOKIE['providerRegion']) ) {
-				$provider_region = $_COOKIE['providerRegion'];
-			}
-		
-			if(!empty($provider_title) ) {
-				$clinical_title = $provider_title ;
-				$tax_query[] = array(
-					'taxonomy' => 'clinical_title',
-					'field' => 'term_id',
-					'terms' => $clinical_title,
-				);
+			if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+				$provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
 			}
 	
+			$tax_query = array();
 			if(!empty($provider_region)) {
-				$region =  $provider_region;
 				$tax_query[] = array(
 					'taxonomy' => 'region',
 					'field' => 'slug',
-					'terms' => $region
+					'terms' => $provider_region
 				);
 			}
 			$postsPerPage = -1;
@@ -1679,7 +1677,6 @@ while ( have_posts() ) : the_post(); ?>
                                     $p=0;
                                     if($provider_count > 0){
                                         $title_list = array();
-										$region_IDs = array();
                                         while ($physicians_query->have_posts()) : $physicians_query->the_post();
                                             $id = get_the_ID();
                                             if ($p < $postsPerPage) {
@@ -1687,13 +1684,7 @@ while ( have_posts() ) : the_post(); ?>
                                             }
                                             $p++;
                                             $title_list[] = get_field('physician_title', $id);
-											$region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
                                         endwhile;
-                                        $region_IDs = array_unique($region_IDs);
-                                        $region_list = array();
-                                        foreach ($region_IDs as $region_ID){
-                                            $region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
-                                        }
                                         echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'," data-regions="'. implode(',', $region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
 									} else {
 										echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
@@ -1708,6 +1699,12 @@ while ( have_posts() ) : the_post(); ?>
 					</div>
 				</div>
 			</div>
+			<?php if ( isset($_GET['_filter_region']) ) { ?>
+                <script type="text/javascript">
+                    // Set cookie to expire at end of session
+                    document.cookie = "wp_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; path=/; domain="+window.location.hostname;
+                </script>
+            <?php } ?>
 		</section>
 	<?php } // endif
 	// End Providers Section
