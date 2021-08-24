@@ -117,9 +117,9 @@ function fwp_facet_scripts() {
         /*
         After FacetWP reloads, store any updates into a cookie
         */
-        var date = new Date();
+        // var date = new Date();
         var facets = window.location.search;
-        date.setTime(date.getTime()+(24*60*60*1000));
+        // date.setTime(date.getTime()+(24*60*60*1000));
         // document.cookie = "facetdata="+facets+"; expires="+date.toGMTString()+"; path=/";
         const params = new URLSearchParams(facets);
         locationregion = params.get("_location_region");
@@ -136,7 +136,7 @@ function fwp_facet_scripts() {
         // If region is set, then write the cookie
         // console.log(region);
         if (region) {
-            document.cookie = "wp_filter_region="+region+"; expires="+date.toGMTString()+"; path=/; domain="+window.location.hostname;
+            document.cookie = "wp_filter_region="+region+"; path=/; domain="+window.location.hostname;
         } else {
             document.cookie = 'wp_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
         }
