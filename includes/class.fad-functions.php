@@ -336,7 +336,7 @@ add_action( 'wp_enqueue_scripts', 'uamswp_ajax_scripts' );
 add_action('wp_ajax_load_posts_by_ajax', 'uamswp_load_by_ajax_callback');
 add_action('wp_ajax_nopriv_load_posts_by_ajax', 'uamswp_load_by_ajax_callback');
 function uamswp_load_by_ajax_callback(){
-    $ppp = (isset($_POST["ppp"])) ? $_POST["ppp"] : 6; // Set this default value
+    // $ppp = (isset($_POST["ppp"])) ? $_POST["ppp"] : 6; // Set this default value
     $page = $_POST['page'];
     // $type = (isset($_POST["posttype"])) ? $_POST["posttype"] : 'post'; // Assume its post if not set
         
@@ -350,8 +350,7 @@ function uamswp_load_by_ajax_callback(){
             'post_status' => 'publish',
             "orderby" => "title",
             "order" => "ASC",
-            'posts_per_page' => $ppp,
-            'paged'    => $page,
+            'posts_per_page' => -1,
             'post__in' => $ids_array,
             
         );
@@ -573,11 +572,11 @@ function provider_ajax_filter_scripts() {
 function uamswp_provider_ajax_filter_shortcode( $atts ) {
 	$a = shortcode_atts( array(
 		'providers' => '',
-		'ppp' => '',
+		// 'ppp' => '',
 		'region' => ''
 	), $atts);
 	$providers = explode(",", $a['providers']);
-	$ppp = $a['ppp'];
+	// $ppp = $a['ppp'];
 	$display_region = $a['region'];
 	$provider_titles = array();
 	$provider_titles_list = array();
@@ -643,7 +642,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
                 </div>
                 <div class="col-auto">
 					<input type="hidden" id="providers" name="providers" value="<?php echo implode(",", $providers); ?>">
-					<input type="hidden" id="ppp" name="ppp" value="<?php echo $ppp; ?>">
+					<!-- <input type="hidden" id="ppp" name="ppp" value="<?php // echo $ppp; ?>"> -->
 					<!-- <input type="submit" id="submit" name="submit" value="Search" class="btn btn-primary"> -->
 				</div>
 				<div class="col-auto">
@@ -666,6 +665,8 @@ add_action('wp_ajax_provider_ajax_filter', 'provider_ajax_filter_callback');
 function provider_ajax_filter_callback() {
   
     $tax_query = array('relation' => 'AND');
+	$tax_query_title = array();
+	$tax_query_region = array();
 
 	// Get data variables
 	$provider_title = '';
@@ -700,21 +701,24 @@ function provider_ajax_filter_callback() {
         );
 		// Merge into full tax query 
 		$tax_query = array_merge($tax_query, $tax_query_title);
-    }
+
+	}
 
 	$args = array(
-        'post_type' => 'provider',
+		'post_type' => 'provider',
 		'post_status' => 'publish',
 		'orderby' => 'title',
 		'order' => 'ASC',
-        'posts_per_page' => -1,
+		'posts_per_page' => -1,
 		'fields' => 'ids',
 		'post__in' => $providers,
-        'tax_query' => $tax_query_title
-    );
+		'tax_query' => $tax_query_title
+	);
 
 	$region_prov_ids = new WP_Query( $args );
-	
+
+
+
 	$region_IDs = array();
 	while ($region_prov_ids->have_posts()) : $region_prov_ids->the_post();
 		$id = get_the_ID();
@@ -736,21 +740,24 @@ function provider_ajax_filter_callback() {
         );
 		// Merge into full tax query
 		$tax_query = array_merge($tax_query, $tax_query_region);
-    }
+    
+	}
 
 	// Query providers based full tax query
 	$args = array(
-        'post_type' => 'provider',
+		'post_type' => 'provider',
 		'post_status' => 'publish',
 		'orderby' => 'title',
 		'order' => 'ASC',
-        'posts_per_page' => -1,
+		'posts_per_page' => -1,
 		'fields' => 'ids',
 		'post__in' => $providers,
-        'tax_query' => $tax_query_region
-    );
+		'tax_query' => $tax_query_region
+	);
 
 	$title_prov_ids = new WP_Query( $args );
+	
+	
 	
 	$title_list = array();
 	while ($title_prov_ids->have_posts()) : $title_prov_ids->the_post();
@@ -764,9 +771,9 @@ function provider_ajax_filter_callback() {
 	// 	$providers = explode(",", $providers);
     // }
 
-	if(isset($_POST['ppp'])) {
-        $ppp = sanitize_text_field( $_POST['ppp'] );
-    }
+	// if(isset($_POST['ppp'])) {
+    //     $ppp = sanitize_text_field( $_POST['ppp'] );
+    // }
  
     $args = array(
         'post_type' => 'provider',
@@ -784,11 +791,11 @@ function provider_ajax_filter_callback() {
     if ( $search_query->have_posts() && !empty($providers) ) {
 		$provider_ids = $search_query->posts;
 		//echo $_POST['ppp'];
-		$z=0;
-        while ( $z < $ppp && $search_query->have_posts() ) : $search_query->the_post();
+		// $z=0;
+        while ( $search_query->have_posts() ) : $search_query->the_post();
             $id = get_the_ID();
 			include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
-			$z++;
+			// $z++;
         endwhile;
 		echo '<data id="provider_ids" data-postids="'. implode(',', $provider_ids) .'," data-regions="'. implode(',', $region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
 		// var_dump($tax_query_title);
