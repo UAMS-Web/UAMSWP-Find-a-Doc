@@ -687,8 +687,11 @@
 									?>
 								</div>
 							</div>
-							<div class="more" style="<?php echo ($postsPerPage < $provider_count) ? '' : 'display:none;' ; ?>">
+							<!-- <div class="more" style="<?php echo ($postsPerPage < $provider_count) ? '' : 'display:none;' ; ?>">
 								<button class="loadmore btn btn-primary" data-ppp="<?php echo $postsPerPage; ?>" aria-label="Load more providers">Load More</button>
+							</div> -->
+							<div class="ajax-filter-load-more">
+								<button class="btn btn-lg btn-primary" aria-label="Load more providers">Load More</button>
 							</div>
 						</div>
 					</div>
@@ -699,6 +702,52 @@
 					document.cookie = "wp_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; path=/; domain="+window.location.hostname;
 				</script>
             <?php } ?>
+			<script type="text/javascript">
+				jQuery(document).ready(function($){
+
+					// Dynamically adjust max-height of card list
+					$(document).ready(ajaxHideContent);
+					$(window).resize(ajaxHideContent);
+					function ajaxHideContent(){
+						// Find the height of the relevant elements
+						var $providerLoadMore = $('#providers .ajax-filter-load-more').outerHeight();
+						var $providerCardHeight = $('#providers .card:first-child').outerHeight() + 15;
+						var $providerCardListHeight = $('#providers .card-list').outerHeight();
+						console.log($providerCardListHeight);
+						var $providerHideContentHeight = $providerCardHeight + ($providerLoadMore * 0.9);
+
+						// Set the max-height of the card list container based on that math
+						$('#providers.hideContent .card-list-container').css("max-height", $providerHideContentHeight);
+					}
+
+					// Make the Load More button do things
+					$(".ajax-filter-load-more button").on("click", function() {
+						var $this = $(this); 
+						var $content = $("div.card-list-container");
+						var $providerCardListHeight = $('#providers .card-list').outerHeight();
+						$("#providers").addClass("expanded");
+						//$("#providers .card-list-container").removeAttr( "style" );
+						$("#providers .card-list-container").css("max-height", $providerCardListHeight);
+					});
+
+					// Dynamically determine if Load More button is necessary
+					$(document).ready(ajaxShowLoadMore);
+					$(window).resize(ajaxShowLoadMore);
+					function ajaxShowLoadMore() {
+						// Find the height of the relevant elements
+						var $providerCardHeight = $('#providers .card:first-child').outerHeight() + 15;
+						var $providerCardListHeight = $('#providers .card-list').outerHeight() - 15;
+						$("#providers.expanded .card-list-container").css("max-height", "none").css("transition", "none");
+
+						if ($providerCardListHeight > $providerCardHeight) {
+							$("#providers").addClass("overflow");
+						} else {
+							$("#providers").removeClass("overflow");
+						}
+					}
+
+				});
+			</script>
         </section>
 		<?php } // $physicians_query loop
 		// End Providers Section
