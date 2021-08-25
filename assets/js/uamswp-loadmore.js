@@ -1,62 +1,62 @@
 jQuery(function($) {
-    var $loader = $('.loadmore');
-    var ppp = ("" !== $loader.data('ppp')) ? $loader.data('ppp') : 6; // Set default value
-    var postids = ("" !== $('#provider_ids').data('postids')) ? $('#provider_ids').data('postids') : 0; // Post
+//     var $loader = $('.loadmore');
+//     var ppp = ("" !== $loader.data('ppp')) ? $loader.data('ppp') : 6; // Set default value
+//     var postids = ("" !== $('#provider_ids').data('postids')) ? $('#provider_ids').data('postids') : 0; // Post
     
-    $('body').on('click', '.loadmore', function() {
+//     $('body').on('click', '.loadmore', function() {
         
-        postids = $('#provider_ids').data('postids');
-        postcount = postids.split(",").length;
-        page = ($('.card-list-doctors .card').length / ppp)+1;
-        // console.log(page);
+//         postids = $('#provider_ids').data('postids');
+//         postcount = postids.split(",").length;
+//         page = ($('.card-list-doctors .card').length / ppp)+1;
+//         // console.log(page);
 
-        var data = {
-            'action': 'load_posts_by_ajax',
-            'page': page,
-            'postid': postids,
-            'security': uamswp_loadmore.security,
-            'ppp': ppp
-        };
+//         var data = {
+//             'action': 'load_posts_by_ajax',
+//             'page': page,
+//             'postid': postids,
+//             'security': uamswp_loadmore.security,
+//             'ppp': ppp
+//         };
 
-        max_pages = postcount / ppp; // Number of posts per page
+//         max_pages = postcount / ppp; // Number of posts per page
 
-        // console.log(max_pages);
+//         // console.log(max_pages);
 
-        $.ajax({
-            url : uamswp_loadmore.ajaxurl,
-            data : data,
-            type : 'POST',
-            datatype : 'html',
-            beforeSend : function ( xhr ) {
-				$('.loadmore').text('Loading...'); // change the button text, you can also add a preloader image
-			},
-			success : function( data ){
-				if( data ) { 
-					$('.loadmore').text( 'Load More' ); // insert new posts
-                    $('.card-list-doctors').append(data);
-                    postcount = postids.split(",").length;
-                    page = $('.card-list-doctors .card').length / ppp;
-                    max_pages = postcount / ppp;
-                    // console.log(page + ' ' + max_pages);
-					if ( page >= max_pages ) {
-                        $('#providers .more').hide(); // if last page, remove the button
-                        $('.loadmore').hide();
-                    }
-                    page++;
-					// you can also fire the "post-load" event here if you use a plugin that requires it
-					// $( document.body ).trigger( 'post-load' );
-				} else {
-                    $('#providers .more').hide();
-                    $('.loadmore').hide();
-				}
-            },
-            error : function (jqXHR, textStatus, errorThrown) {
-				$loader.html($.parseJSON(jqXHR.responseText) + ' :: ' + textStatus + ' :: ' + errorThrown);
-				console.log(jqXHR);
-            },
+//         $.ajax({
+//             url : uamswp_loadmore.ajaxurl,
+//             data : data,
+//             type : 'POST',
+//             datatype : 'html',
+//             beforeSend : function ( xhr ) {
+// 				$('.loadmore').text('Loading...'); // change the button text, you can also add a preloader image
+// 			},
+// 			success : function( data ){
+// 				if( data ) { 
+// 					$('.loadmore').text( 'Load More' ); // insert new posts
+//                     $('.card-list-doctors').append(data);
+//                     postcount = postids.split(",").length;
+//                     page = $('.card-list-doctors .card').length / ppp;
+//                     max_pages = postcount / ppp;
+//                     // console.log(page + ' ' + max_pages);
+// 					if ( page >= max_pages ) {
+//                         $('#providers .more').hide(); // if last page, remove the button
+//                         $('.loadmore').hide();
+//                     }
+//                     page++;
+// 					// you can also fire the "post-load" event here if you use a plugin that requires it
+// 					// $( document.body ).trigger( 'post-load' );
+// 				} else {
+//                     $('#providers .more').hide();
+//                     $('.loadmore').hide();
+// 				}
+//             },
+//             error : function (jqXHR, textStatus, errorThrown) {
+// 				$loader.html($.parseJSON(jqXHR.responseText) + ' :: ' + textStatus + ' :: ' + errorThrown);
+// 				console.log(jqXHR);
+//             },
 
-        });
-    });
+//         });
+//     });
 
     var paf = $("#provider-ajax-filter"); 
     var pafForm = paf.find("form");
@@ -122,9 +122,9 @@ jQuery(function($) {
             var providers = pafForm.find("#providers").val();
         }
 
-        if(pafForm.find("#ppp").val().length !== 0) {
-            var ppp = pafForm.find("#ppp").val();
-        }
+        // if(pafForm.find("#ppp").val().length !== 0) {
+        //     var ppp = pafForm.find("#ppp").val();
+        // }
 
         if (region){
             createCookie('wp_filter_region', region);
@@ -155,8 +155,7 @@ jQuery(function($) {
                 action : "provider_ajax_filter",
                 provider_region : region,
                 provider_title : title,
-                providers : providers,
-                ppp : ppp
+                providers : providers
             },
             beforeSend : function ( xhr ) {
                 // $('#providers .more').hide();
@@ -164,7 +163,7 @@ jQuery(function($) {
             },
             success : function(res) { 
                 $('.card-list-doctors').html(res);
-                provider_list = $('#provider_ids').data('postids');
+                // provider_list = $('#provider_ids').data('postids');
                 // console.log(provider_list);
                 // var provider_array = [];
                 // if (provider_list) {
@@ -248,7 +247,7 @@ jQuery(function($) {
             data: {
                 action : "location_ajax_filter",
                 region : region,
-                locations : locations,
+                locations : locations
             },
             beforeSend : function ( xhr ) {
                 $('.card-list-locations').text('Loading...'); 
