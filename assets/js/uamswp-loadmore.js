@@ -233,6 +233,9 @@ jQuery(function($) {
                 region : region,
                 locations : locations,
             },
+            beforeSend : function ( xhr ) {
+                $('.card-list-locations').text('Loading...'); 
+            },
             success : function(res) { 
                 $('.card-list-locations').html(res);
                 location_list = $('#location_ids').data('postids');
