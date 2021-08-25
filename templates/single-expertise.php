@@ -383,7 +383,7 @@ function uamswp_expertise_physicians() {
                 <div class="row">
                     <div class="col-12">
                         <h2 class="module-title"><span class="title">Providers</span></h2>
-                        <?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'" ppp="'. $postsPerPage .'"]' ); ?>
+                        <?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'"]' ); ?>
                         <div class="card-list-container">
                             <div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
                                 <?php 
@@ -407,9 +407,9 @@ function uamswp_expertise_physicians() {
                                 ?>
                             </div>
                         </div>
-                        <div class="more" style="<?php echo ($postsPerPage < $provider_count) ? '' : 'display:none;' ; ?>">
-                            <button class="loadmore btn btn-primary <?php echo $provider_count; ?>" data-ppp="<?php echo $postsPerPage; ?>" aria-label="Load more providers">Load More</button>
-                        </div>
+                        <!-- <div class="more" style="<?php //echo ($postsPerPage < $provider_count) ? '' : 'display:none;' ; ?>">
+                            <button class="loadmore btn btn-primary <?php //echo $provider_count; ?>" data-ppp="<?php //echo $postsPerPage; ?>" aria-label="Load more providers">Load More</button>
+                        </div> -->
                     </div>
                 </div>
             </div>
