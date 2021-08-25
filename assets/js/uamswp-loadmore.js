@@ -90,6 +90,23 @@ jQuery(function($) {
 
     });
 
+    lafForm.find("#location_clear").on('click', function(e){
+        e.preventDefault(); 
+     
+        console.log("form cleared");
+
+        pafForm.find("#provider_region").prop('selectedIndex', 0);
+
+        lafForm.find("#location_region").prop('selectedIndex', 0);
+        
+        deleteCookie('wp_filter_region');
+        // deleteCookie('_provider_title');
+
+        pafForm.submit();
+        lafForm.submit();
+
+    });
+
     pafForm.submit(function(e){
         e.preventDefault(); 
      
@@ -136,31 +153,31 @@ jQuery(function($) {
             dataType: 'html',
             data: {
                 action : "provider_ajax_filter",
-                region : region,
-                title : title,
+                provider_region : region,
+                provider_title : title,
                 providers : providers,
                 ppp : ppp
             },
             beforeSend : function ( xhr ) {
-                $('#providers .more').hide();
+                // $('#providers .more').hide();
                 $('.card-list-doctors').text('Loading...'); 
             },
             success : function(res) { 
                 $('.card-list-doctors').html(res);
                 provider_list = $('#provider_ids').data('postids');
                 // console.log(provider_list);
-                var provider_array = [];
-                if (provider_list) {
-                    provider_array = provider_list.split(",");
-                    // console.log(provider_array);
-                    max_pages = provider_array.length / ppp;
-                } else {
-                    max_pages = 0;
-                }
-                if ( provider_array.length > ppp && 1 < max_pages ) {
-                    $('#providers .more').show();
-                    $('.loadmore').show();
-                }  
+                // var provider_array = [];
+                // if (provider_list) {
+                //     provider_array = provider_list.split(",");
+                //     // console.log(provider_array);
+                //     max_pages = provider_array.length / ppp;
+                // } else {
+                //     max_pages = 0;
+                // }
+                // if ( provider_array.length > ppp && 1 < max_pages ) {
+                //     // $('#providers .more').show();
+                //     $('.loadmore').show();
+                // }  
             },
             complete : function () {
                 $("#provider_title > option").attr("disabled", function() {
