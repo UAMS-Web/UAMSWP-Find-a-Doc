@@ -57,6 +57,25 @@ jQuery(function($) {
 
 //         });
 //     });
+    $(document).ready(ajaxHideContent);
+    $(window).resize(ajaxHideContent);
+    function ajaxHideContent(){
+        // Find the height of the relevant elements
+        var $providerLoadMore = $('#providers .ajax-filter-load-more').outerHeight();
+        var $providerCardHeight = $('#providers .card:first-child').outerHeight() + 15;
+        var $providerCardListHeight = $('#providers .card-list').outerHeight() - 15;
+        // console.log($providerCardListHeight);
+        var $providerHideContentHeight = $providerCardHeight + ($providerLoadMore * 0.9);
+
+        // Set the max-height of the card list container based on that math
+        $('#providers.hideContent .card-list-container').css("max-height", $providerHideContentHeight);
+        // Add / remove overflow class based on math
+        if ($providerCardListHeight > $providerCardHeight) {
+            $("#providers").addClass("overflow");
+        } else {
+            $("#providers").removeClass("overflow");
+        }
+    }
 
     var paf = $("#provider-ajax-filter"); 
     var pafForm = paf.find("form");
@@ -202,6 +221,7 @@ jQuery(function($) {
                     }
         
                 });
+                ajaxHideContent();
             },
         });
      
@@ -301,7 +321,6 @@ jQuery(document).ready(function($){
         } else {
             return false;
         }
-
     });
     $("#location_region > option").attr("disabled", function() {
         regionArray = [];
@@ -330,6 +349,19 @@ jQuery(document).ready(function($){
         // set the option to selected that corresponds to what the cookie is set to
         $('#region option[value="' + getCookie('wp_filter_region') + '"]').attr('selected', 'selected');
     }
+    // Make the Load More button do things
+    $(".ajax-filter-load-more button").on("click", function() {
+        var $providerCardListHeight = $('#providers .card-list').outerHeight() - 15;
+        // Transition the container
+        $("#providers .card-list-container").css("max-height", $providerCardListHeight);
+        $("#providers").addClass("expanded");
+        //$("#providers .card-list-container").removeAttr( "style" );
+        // Set max-height to none and remove transition after transition
+        setTimeout(function() {
+            // $("#providers.expanded .card-list-container").css("max-height", "none").css("transition", "none");
+            $("#providers.expanded .card-list-container").css("max-height", "none");
+        }, 1000);
+    });
 });
 // Cookie Functions
 function createCookie(name, value, days) {
