@@ -362,6 +362,10 @@ jQuery(document).ready(function($){
             $("#providers.expanded .card-list-container").css("max-height", "none");
         }, 1000);
     });
+    // Set the load more background colors based on the section's background color
+    var $ajaxSectionBGColor = $( "#providers" ).css( "background-color" ).replace("rgb(", "").replace(")", '');
+    $( "#providers .ajax-filter-load-more" ).css( "background-image", "linear-gradient(180deg, rgba(" + $ajaxSectionBGColor + ",0) 0%, rgba(" + $ajaxSectionBGColor + ",1) 75%)" );
+    $( "#providers .ajax-filter-load-more .btn" ).css( "box-shadow", "0 0 1rem 1rem rgb(" + $ajaxSectionBGColor + ",0.5)" );
 });
 // Cookie Functions
 function createCookie(name, value, days) {
