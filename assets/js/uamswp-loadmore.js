@@ -177,8 +177,9 @@ jQuery(function($) {
                 providers : providers
             },
             beforeSend : function ( xhr ) {
-                // $('#providers .more').hide();
-                $('.card-list-doctors').text('Loading...'); 
+                $('.card-list-doctors .card').css('transition', '0.3s').css('opacity', '0');
+                $('#providers .ajax-filter-load-more').css('transition', '0.3s').css('opacity', '0');
+                $('.card-list-doctors').fadeIn(300, function() { $(this).before('<div class="ajax-loading" style="text-align:center">Loading...</div>'); });
             },
             success : function(res) { 
                 $('.card-list-doctors').html(res);
@@ -198,6 +199,12 @@ jQuery(function($) {
                 // }  
             },
             complete : function () {
+                $('.ajax-loading').remove();
+                $('.card-list-doctors').css('transition', '1s').css('opacity', '1');
+                $('#providers .ajax-filter-load-more').css('transition', '1s').css('opacity', '1');
+                setTimeout(function() {
+                    $('.card-list-doctors').removeAttr( "style" );
+                }, 1001);
                 $("#provider_title > option").attr("disabled", function() {
                     available_title = $('#provider_ids').data('titles').toString();
                     titleArray = [];
@@ -360,7 +367,7 @@ jQuery(document).ready(function($){
         setTimeout(function() {
             // $("#providers.expanded .card-list-container").css("max-height", "none").css("transition", "none");
             $("#providers.expanded .card-list-container").css("max-height", "none");
-        }, 1000);
+        }, 1001);
     });
     // Set the load more background colors based on the section's background color
     var $ajaxSectionBGColor = $( "#providers" ).css( "background-color" ).replace("rgb(", "").replace(")", '');
