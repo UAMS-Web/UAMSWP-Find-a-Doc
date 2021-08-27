@@ -179,7 +179,7 @@ jQuery(function($) {
             beforeSend : function ( xhr ) {
                 $('.card-list-doctors .card').css('transition', '0.3s').css('opacity', '0');
                 $('#providers .ajax-filter-load-more').css('transition', '0.3s').css('opacity', '0');
-                $('.card-list-doctors').fadeIn(300, function() { $(this).before('<div class="ajax-loading" style="text-align:center">Loading...</div>'); });
+                $('.card-list-doctors').fadeIn(300, function() { $(this).before('<div class="ajax-loading">Loading...</div>'); });
             },
             success : function(res) { 
                 $('.card-list-doctors').html(res);
