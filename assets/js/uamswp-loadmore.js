@@ -179,7 +179,7 @@ jQuery(function($) {
             beforeSend : function ( xhr ) {
                 $('.card-list-doctors .card').css('transition', '0.3s').css('opacity', '0');
                 $('#providers .ajax-filter-load-more').css('transition', '0.3s').css('opacity', '0');
-                $('.card-list-doctors').fadeIn(300, function() { $(this).before('<div class="ajax-loading">Loading...</div>'); });
+                $('.card-list-doctors').fadeIn(300, function() { $(this).before('<div id="ajax-loading-doctors" class="ajax-loading">Loading...</div>'); });
             },
             success : function(res) { 
                 $('.card-list-doctors').html(res);
@@ -199,7 +199,7 @@ jQuery(function($) {
                 // }  
             },
             complete : function () {
-                $('.ajax-loading').remove();
+                $('#ajax-loading-doctors').remove();
                 $('.card-list-doctors').css('transition', '1s').css('opacity', '1');
                 $('#providers .ajax-filter-load-more').css('transition', '1s').css('opacity', '1');
                 setTimeout(function() {
@@ -277,7 +277,8 @@ jQuery(function($) {
                 locations : locations
             },
             beforeSend : function ( xhr ) {
-                $('.card-list-locations').text('Loading...'); 
+                $('.card-list-locations .card').css('transition', '0.3s').css('opacity', '0');
+                $('.card-list-locations').fadeIn(300, function() { $(this).before('<div id="ajax-loading-locations" class="ajax-loading">Loading...</div>'); });
             },
             success : function(res) { 
                 $('.card-list-locations').html(res);
@@ -285,6 +286,11 @@ jQuery(function($) {
                 // console.log(location_list);
             },
             complete : function () {
+                $('#ajax-loading-locations').remove();
+                $('.card-list-locations').css('transition', '1s').css('opacity', '1');
+                setTimeout(function() {
+                    $('.card-list-locations').removeAttr( "style" );
+                }, 1001);
                 $("#location_region > option").attr("disabled", function() {
                     available_regions = $('#location_ids').data('regions');
                     regionArray = [];
