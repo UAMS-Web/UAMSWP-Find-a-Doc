@@ -728,6 +728,7 @@
   width: 255px;
 }
 
+.card-list-container .ajax-loading,
 .card-list .no-results {
   width: 28.4375em;
   max-width: 100%;
