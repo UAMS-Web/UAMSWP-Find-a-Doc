@@ -50,8 +50,8 @@
         $appointment_location_data = 'Contact the Clinic Directly | Anchor Link';
     }
     $appointment_reference_referral = 'Appointments for new patients are by referral only.';
-    $appointment_reference_portal = '<a href="' . $portal_url . '" aria-label="' . $portal_name . '" target="_blank" data-categorytitle="Make an Appointment | Block ' . $appointment_block_instance . '" data-typetitle="Request an Appointment Online | ' . $portal_name_attr . '">requesting an appointment online</a> through ' . $portal_name;
-    $appointment_reference_direct = 'by <a href="' . $appointment_location_url . '" aria-label="' . $appointment_location_title . '" data-categorytitle="Make an Appointment | Block ' . $appointment_block_instance . '" data-typetitle="' . $appointment_location_data . '">contacting the clinic&nbsp;directly</a>';
+    $appointment_reference_portal = '<a href="' . $portal_url . '" target="_blank" data-categorytitle="Make an Appointment | Block ' . $appointment_block_instance . '" data-typetitle="Request an Appointment Online | ' . $portal_name_attr . '">requesting an appointment online</a> through ' . $portal_name;
+    $appointment_reference_direct = 'by <a href="' . $appointment_location_url . '" data-categorytitle="Make an Appointment | Block ' . $appointment_block_instance . '" data-typetitle="' . $appointment_location_data . '">contacting the clinic&nbsp;directly</a>';
     $appointment_reference_main = 'by calling ' . $appointment_phone_name . ' at <a href="tel:' . $appointment_phone_tel . '" class="no-break" data-categorytitle="Make an Appointment | Block ' . $appointment_block_instance . '" data-typetitle="Main Appointment Line | ' . $appointment_phone_name_attr . '">' . $appointment_phone_text . '</a>';
 ?>
 <section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info-<? echo $appointment_block_instance; ?>">

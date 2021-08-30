@@ -84,12 +84,12 @@
 										echo '<div class="ratings-count">'. $data->profile->reviewcount .' Ratings</div>';
 										echo '</div>';
 									} else { ?>
-									<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" data-categorytitle="Ratings Modal" data-itemtitle="<?php echo $full_name_attr; ?>">Why not?</a></em></p>
+									<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" data-categorytitle="Ratings Modal" data-itemtitle="<?php echo $full_name_attr; ?>" aria-label="Learn why ratings are not available for this provider"><span aria-hidden="true">Why not?</span></a></em></p>
 									<?php
 									}
 								}
 							} else { ?>
-								<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" data-categorytitle="Ratings Modal" data-itemtitle="<?php echo $full_name_attr; ?>">Why not?</a></em></p>
+								<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" data-categorytitle="Ratings Modal" data-itemtitle="<?php echo $full_name_attr; ?>" aria-label="Learn why ratings are not available for this provider"><span aria-hidden="true">Why not?</span></a></em></p>
 							<?php
 							} 
 							?>
@@ -177,7 +177,7 @@
 									<div class="ds-title">Patient Rating</div>
 									<div><span class="ds-stars ds-stars0"></span></div>
 									<div class="small bold">No Patient Satisfaction Reviews</div>
-									<div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div>
+									<div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?" aria-label="Learn why ratings are not available for this provider"><span aria-hidden="true">Why not?</span></a></div>
 									</div>
 								<?php
 								}
@@ -187,7 +187,7 @@
 							<div class="ds-title">Patient Rating</div>
 							<div><span class="ds-stars ds-stars0"></span></div>
 							<div class="small bold">No Patient Satisfaction Reviews</div>
-							<div><a data-toggle="modal" data-target="#why_not_modal">Why Not?</a></div>
+							<div><a data-toggle="modal" data-target="#why_not_modal" aria-label="Learn why ratings are not available for this provider"><span aria-hidden="true">Why not?</span></a></div>
 							</div>
 						<?php }
 				*/	?>
