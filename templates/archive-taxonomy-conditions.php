@@ -91,10 +91,10 @@ get_header(); ?>
                                         After that, if user checks any other checkbox input, remove "checked" attribute from "Any"/"All" checkbox input.
                                     -->
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>" <?php echo ($_GET['alpha']) ? 'aria-selected="false"' : 'aria-selected="true"'; ?> aria-label="Remove any filter">All</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>" <?php echo ($_GET['alpha']) ? 'aria-selected="false"' : 'aria-selected="true"'; ?> aria-label="Remove any filter"><span aria-hidden="true">All</span></a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=0" <?php echo ('0' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the conditions that begin with a number">#</a>
+                                        <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=0" <?php echo ('0' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the conditions that begin with a number"><span aria-hidden="true">#</span></a>
                                     </div>
                                     <div class="custom-control">
                                         <a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=a" <?php echo ('a' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the conditions that begin with the letter A">A</a>

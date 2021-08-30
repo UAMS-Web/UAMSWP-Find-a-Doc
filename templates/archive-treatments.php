@@ -102,10 +102,10 @@ get_header(); ?>
                                         After that, if user checks any other checkbox input, remove "checked" attribute from "Any"/"All" checkbox input.
                                     -->
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>" <?php echo ('' != $alpha) ? 'aria-selected="false"' : 'aria-selected="true"'; ?> aria-label="Remove any filter">All</a>
+                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>" <?php echo ('' != $alpha) ? 'aria-selected="false"' : 'aria-selected="true"'; ?> aria-label="Remove any filter"><span aria-hidden="true">All</span></a>
                                     </div>
                                     <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=0" <?php echo ('0' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with a number">#</a>
+                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=0" <?php echo ('0' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with a number"><span aria-hidden="true">#</span></a>
                                     </div>
                                     <div class="custom-control">
                                         <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=a" <?php echo ('a' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter A">A</a>
