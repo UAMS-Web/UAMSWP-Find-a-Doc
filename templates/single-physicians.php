@@ -617,8 +617,8 @@ while ( have_posts() ) : the_post();
                             echo '<div class="ratings-score">'. $avg_rating .'<span class="sr-only"> out of 5</span></div>';
                             echo '<div class="w-100"></div>';
                             echo '<a href="#ratings" aria-label="Jump to Patient Ratings and Reviews">';
-                            echo '<div class="ratings-count-lg">'. $review_count .' Patient Satisfaction Ratings</div>';
-                            echo '<div class="ratings-comments-lg">'.  $comment_count .' comments</div>';
+                            echo '<div class="ratings-count-lg" aria-hidden="true">'. $review_count .' Patient Satisfaction Ratings</div>';
+                            echo '<div class="ratings-comments-lg" aria-hidden="true">'.  $comment_count .' comments</div>';
                             echo '</a>';
                         } else { ?>
                             <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this provider"><span aria-hidden="true">Why not?</span></a></em></p> 
