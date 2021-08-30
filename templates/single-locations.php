@@ -1601,7 +1601,7 @@ while ( have_posts() ) : the_post(); ?>
 								<?php }
 								if ( $portal_content ) { ?>
 								<div class="btn-container">
-									<a href="<?php echo $portal_url; ?>" aria-label="Access <?php echo $portal_name_attr; ?> to view your patient information and medical records" class="btn btn-white" target="_blank" data-moduletitle="<?php echo $portal_name_attr; ?>"><?php echo $portal_link_title ? $portal_link_title : 'Log in to '. $portal_name; ?></a>
+									<a href="<?php echo $portal_url; ?>" aria-label="Log in to <?php echo $portal_name_attr; ?> to view your patient information and medical records" class="btn btn-white" target="_blank" data-moduletitle="<?php echo $portal_name_attr; ?>"><?php echo $portal_link_title ? $portal_link_title : 'Log in to '. $portal_name; ?></a>
 								</div>
 								<?php } ?>
 							</div>
