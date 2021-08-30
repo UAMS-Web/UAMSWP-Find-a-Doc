@@ -2234,15 +2234,11 @@ function get_provider_meta($object) {
     $data['physician_last_name'] = get_field( 'physician_last_name', $postId );
 	$degrees = get_field('physician_degree', $postId );
 	$degree_list = '';
-	$i = 1;
 	if ( $degrees ) {
 		foreach( $degrees as $degree ):
 			$degree_name = get_term( $degree, 'degree');
+			$degree_list .= $degree_list != '' ? ', ' : '';
 			$degree_list .= $degree_name->name;
-			if( count($degrees) > $i ) {
-				$degree_list .= ", ";
-			}
-			$i++;
 		endforeach; 
 	} 
 	$full_name = get_field('physician_first_name', $postId) .' ' .(get_field('physician_middle_name', $postId) ? get_field('physician_middle_name', $postId) . ' ' : '') . get_field('physician_last_name', $postId) . (get_field('physician_pedigree', $postId) ? '&nbsp;' . get_field('physician_pedigree', $postId ) : '') .  ( $degree_list ? ', ' . $degree_list : '' );
@@ -2268,7 +2264,16 @@ function get_provider_meta($object) {
     $data['physician_gender'] = get_field( 'physician_gender', $postId );
 	$data['physician_accepting_new_patients'] = get_post_meta( $postId, 'physician_accepting_patients', true );
     $data['physician_second_opinion'] = get_field( 'physician_second_opinion', $postId );
-    $data['physician_patient_types'] = get_the_terms( $postId, 'patient_type' );
+    $patients = get_field('physician_patient_types',$postId);
+    $patient_list = '';
+    if( $patients ) {
+	    foreach( $patients as $patient ):
+        	$patient_name = get_term( $patient, 'patient_type');
+        	$patient_list .= $patient_list != '' ? ', ' : '';
+        	$patient_list .= $patient_name->name;
+        endforeach;
+    }
+    $data['physician_patient_types'] = $patient_list;
     $data['physician_npi'] = get_field( 'physician_npi', $postId );
     $data['physician_youtube_link'] = get_field( 'physician_youtube_link', $postId );
 	$podcast_name = get_field('physician_podcast_name',$postId);
@@ -2287,14 +2292,10 @@ function get_provider_meta($object) {
 	$languages = get_field('physician_languages',$postId);
 	$language_list = '';
 	if ( $languages ) {
-		$i = 1;
 		foreach( $languages as $language ):
 			$language_name = get_term( $language, 'language');
+			$language_list .= $language_list != '' ? ', ' : '';
 			$language_list .= $language_name->name;
-			if( $language_count > $i ) {
-				$language_list .= ", ";
-			}
-			$i++;
 		endforeach;
 	}
     $data['physician_languages'] = $language_list;
@@ -2313,7 +2314,7 @@ function get_provider_meta($object) {
     //$data['physician_additional_info'] = get_field('physician_additional_info',$postId);
 	// Academic
 	//$data['physician_college_affiliation'] = get_field('physician_academic_college',$postId);
-    $data['physician_academic_bio'] = get_post_meta( $postId, 'physician_academic_bio', true );
+    $data['physician_academic_bio'] = get_field('physician_academic_bio',$postId);
 	$educations = get_field('physician_education',$postId);
 	if( ! empty( $educations ) ){
 		$i = 0;
