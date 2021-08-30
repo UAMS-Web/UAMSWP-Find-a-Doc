@@ -56,7 +56,7 @@
 									<div class="ds-title">Patient Rating</div>
 									<div><span class="ds-stars ds-stars0"></span></div>
 									<div class="small bold">No Patient Satisfaction Reviews</div>
-									<div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?">Why Not?</a></div>
+									<div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?" aria-label="Learn why ratings are not available for this provider"><span aria-hidden="true">Why not?</span></a></div>
 									</div>
 								<?php
 								}
@@ -66,7 +66,7 @@
 							<div class="ds-title">Patient Rating</div>
 							<div><span class="ds-stars ds-stars0"></span></div>
 							<div class="small bold">No Patient Satisfaction Reviews</div>
-							<div><a href="#why_not_modal" data-lity>Why Not?</a></div>
+							<div><a href="#why_not_modal" aria-label="Learn why ratings are not available for this provider" data-lity><span aria-hidden="true">Why not?</span></a></div>
 							</div>
 						<?php }
 					?>
