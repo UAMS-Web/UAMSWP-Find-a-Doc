@@ -563,3 +563,12 @@ function display_medline_api_data( $code, $type ) {
 		}
 	}
 }
+// Remove unused / overly agressive scripts
+function uamswp_fad_disable_scripts() {
+	// Add pages Ajax Search is used
+	if ( !is_post_type_archive( 'location' ) && !is_post_type_archive( 'provider' ) && !is_post_type_archive( 'clinical-resource' ) ) {
+		wp_dequeue_script('wd-asp-async-loader');
+		wp_dequeue_script( 'wd-asp-ajaxsearchpro' );
+	}
+}
+add_action('wp_enqueue_scripts', 'uamswp_fad_disable_scripts', 100);
