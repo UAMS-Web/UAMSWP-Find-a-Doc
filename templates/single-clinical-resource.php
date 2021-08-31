@@ -313,11 +313,14 @@ function uamswp_resource_physicians() {
                                 ?>
                             </div>
                         </div>
-                        <?php if ($postsPerPage !== -1) { ?>
+                        <!-- <?php if ($postsPerPage !== -1) { ?>
                         <div class="more">
                             <button class="loadmore btn btn-primary" data-posttype="post" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more providers">Load More</button>
                         </div>
-                        <?php } ?>
+                        <?php } ?> -->
+                        <div class="ajax-filter-load-more">
+                            <button class="btn btn-lg btn-primary" aria-label="Load all providers">Load All</button>
+                        </div>
                     </div>
                 </div>
             </div>
