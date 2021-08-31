@@ -627,7 +627,7 @@
             "label": "Physicians for this Treatment or Procedure",
             "name": "treatment_procedure_physicians",
             "type": "relationship",
-            "instructions": "",
+            "instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
