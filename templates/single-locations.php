@@ -1697,6 +1697,9 @@ while ( have_posts() ) : the_post(); ?>
                         <!-- <div class="more" style="<?php //echo ($postsPerPage < $provider_count) ? '' : 'display:none;' ; ?>">
                             <button class="loadmore btn btn-primary" data-ppp="<?php //echo $postsPerPage; ?>" aria-label="Load more providers">Load More</button>
                         </div> -->
+						<div class="ajax-filter-load-more">
+							<button class="btn btn-lg btn-primary" aria-label="Load all providers">Load All</button>
+						</div>
 					</div>
 				</div>
 			</div>
