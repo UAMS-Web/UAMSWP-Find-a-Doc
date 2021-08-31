@@ -385,7 +385,7 @@ function uamswp_expertise_physicians() {
                         <h2 class="module-title"><span class="title">Providers</span></h2>
                         <?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'"]' ); ?>
                         <div class="card-list-container">
-                            <div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
+                            <div class="card-list card-list-doctors">
                                 <?php 
                                     // echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'"></data>';
                                     $p=0;

@@ -1673,7 +1673,7 @@ while ( have_posts() ) : the_post(); ?>
 						<h2 class="module-title"><span class="title">Providers at <?php echo $page_title; ?></span></h2>
 						<?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'" region="hide"]' ); ?>
 						<div class="card-list-container">
-							<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
+							<div class="card-list card-list-doctors">
 								<?php 
                                     $p=0;
                                     if($provider_count > 0){

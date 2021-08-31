@@ -303,7 +303,7 @@ function uamswp_resource_physicians() {
                     <div class="col-12">
                         <h2 class="module-title"><span class="title">Related Providers</span></h2>
                         <div class="card-list-container">
-                            <div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
+                            <div class="card-list card-list-doctors">
                                 <?php 
                                     while ($physicians_query->have_posts()) : $physicians_query->the_post();
                                         $id = get_the_ID();

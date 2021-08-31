@@ -666,7 +666,7 @@
 							<p class="note">Note that every provider listed below may not perform or prescribe all treatments or procedures related to <?php echo $page_title; ?>. Review each provider for availability.</p>
 							<?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'"]' ); ?>
 							<div class="card-list-container">
-								<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
+								<div class="card-list card-list-doctors">
 									<?php 
 										$p=0;
 										if($provider_count > 0){
