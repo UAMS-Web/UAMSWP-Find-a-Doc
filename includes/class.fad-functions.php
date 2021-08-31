@@ -316,7 +316,7 @@ function rlv_tax_excerpt_term_fields($content, $term) {
 }
 // AJAX
 function uamswp_ajax_scripts() { 
-    if ( is_singular( 'location' ) || is_singular( 'expertise' ) || is_singular( 'condition' ) || is_singular( 'treatment' ) ) { // Only run on these template pages
+    if ( is_singular( 'location' ) || is_singular( 'expertise' ) || is_singular( 'condition' ) || is_singular( 'treatment' ) || is_singular( 'clinical-resource' ) ) { // Only run on these template pages
         // Register the script
         wp_register_script( 'uamswp-loadmore', UAMS_FAD_ROOT_URL . 'assets/js/uamswp-loadmore.js', array('jquery'), false, true );
     
