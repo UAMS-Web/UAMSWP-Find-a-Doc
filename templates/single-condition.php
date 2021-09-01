@@ -636,11 +636,10 @@
 						'terms' => $provider_region
 					);
 				}
-				$postsPerPage = -1;
 				$args = array(
 					"post_type" => "provider",
 					"post_status" => "publish",
-					"posts_per_page" => $postsPerPage,
+					"posts_per_page" => -1,
 					"orderby" => "title",
 					"order" => "ASC",
 					"fields" => "ids",
@@ -651,12 +650,6 @@
 			}
 	
 			$provider_count = count($physicians_query->posts);
-			$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12)
-			$postsCutoff = 18; // Set cutoff value
-			if($provider_count <= $postsCutoff) {
-				$postsPerPage = $postsCutoff;
-			}
-			$postsCountClass = $postsPerPage;
 			?>
 			<section class="uams-module bg-auto" id="providers">
 				<div class="container-fluid">
@@ -668,15 +661,11 @@
 							<div class="card-list-container">
 								<div class="card-list card-list-doctors">
 									<?php 
-										$p=0;
 										if($provider_count > 0){
 											$title_list = array();
 											while ($physicians_query->have_posts()) : $physicians_query->the_post();
 												$id = get_the_ID();
-												if ($p < $postsPerPage) {
-													include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
-												}
-												$p++;
+												include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
 												$title_list[] = get_field('physician_title', $id);
 											endwhile;
 											echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'," data-regions="'. implode(',', $region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
