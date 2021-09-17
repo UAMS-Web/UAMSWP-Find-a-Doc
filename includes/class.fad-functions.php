@@ -650,9 +650,11 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
 				</div>
             </div>
         </form>
+		<?php if( isset($_COOKIE['wp_filter_region']) ) { ?>
+		<p class="text-center pt-5" id="provider-ajax-filter-message">Insert message here.</p>
+		<?php } ?>
     </div>
 	<hr />
-
 	<?php
 	return ob_get_clean();
 }
@@ -862,6 +864,9 @@ function uamswp_location_ajax_filter_shortcode( $atts ) {
 				</div>
             </div>
         </form>
+		<?php if( isset($_COOKIE['wp_filter_region']) ) { ?>
+		<p class="text-center pt-5" id="location-ajax-filter-message">Insert message here.</p>
+		<?php } ?>
     </div>
 	<hr />
 
