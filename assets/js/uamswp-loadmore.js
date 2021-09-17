@@ -104,9 +104,6 @@ jQuery(function($) {
         deleteCookie('wp_filter_region');
         // deleteCookie('_provider_title');
 
-        $("#provider-ajax-filter-message").hide();
-        $("#location-ajax-filter-message").hide();
-
         pafForm.submit();
         lafForm.submit();
 
@@ -123,9 +120,6 @@ jQuery(function($) {
         
         deleteCookie('wp_filter_region');
         // deleteCookie('_provider_title');
-
-        $("#provider-ajax-filter-message").hide();
-        $("#location-ajax-filter-message").hide();
 
         pafForm.submit();
         lafForm.submit();
@@ -161,6 +155,9 @@ jQuery(function($) {
             window.history.replaceState({}, document.title, clean_url);
             //console.log('session emptied' + getCookie('_filter_region'));
         }
+
+        $("#provider-ajax-filter-message").hide();
+        $("#location-ajax-filter-message").hide();
         // if(title){
         //     createCookie('_provider_title', title, 1);
         //     // console.log('cookie set: ' + title);
@@ -271,6 +268,9 @@ jQuery(function($) {
         // }
 
         //console.log(providers);
+
+        $("#provider-ajax-filter-message").hide();
+        $("#location-ajax-filter-message").hide();
 
     
         $.ajax({
