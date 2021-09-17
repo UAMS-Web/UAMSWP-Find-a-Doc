@@ -104,6 +104,9 @@ jQuery(function($) {
         deleteCookie('wp_filter_region');
         // deleteCookie('_provider_title');
 
+        $("#provider-ajax-filter-message").hide();
+        $("#location-ajax-filter-message").hide();
+
         pafForm.submit();
         lafForm.submit();
 
@@ -120,6 +123,9 @@ jQuery(function($) {
         
         deleteCookie('wp_filter_region');
         // deleteCookie('_provider_title');
+
+        $("#provider-ajax-filter-message").hide();
+        $("#location-ajax-filter-message").hide();
 
         pafForm.submit();
         lafForm.submit();
