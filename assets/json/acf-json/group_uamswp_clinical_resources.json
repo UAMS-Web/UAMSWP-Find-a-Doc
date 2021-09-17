@@ -674,6 +674,54 @@
                     "field_clinical_resource_related"
                 ]
             }
+        },
+        {
+            "key": "field_clinical_resource_syndicated",
+            "label": "Is this syndicated from another source?",
+            "name": "clinical_resource_syndicated",
+            "type": "radio",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "1": "Yes",
+                "0": "No"
+            },
+            "allow_null": 1,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_clinical_resource_syndication_url",
+            "label": "Syndication Source URL",
+            "name": "clinical_resource_syndication_url",
+            "type": "url",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_clinical_resource_syndicated",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
         }
     ],
     "location": [
