@@ -10,6 +10,7 @@ if (empty($excerpt)){
         $excerpt = mb_strimwidth(wp_strip_all_tags($about_loc), 0, 155, '...');
     }
 }
+$page_title = get_the_title( );
 // Parent Location 
 $location_has_parent = get_field('location_parent');
 $location_parent_id = get_field('location_parent_id');
@@ -364,7 +365,7 @@ while ( have_posts() ) : the_post(); ?>
             $show_about_section = true;
             $jump_link_count++;
 			if ( $location_about || $location_youtube_link || ( !$location_about && $location_affiliation && $prescription ) ) {
-				$about_section_title = 'About ' . get_the_title();
+				$about_section_title = 'About ' . $page_title;
 				$about_section_title_short = 'About';
 
 				if ($location_affiliation || $prescription) {
@@ -460,18 +461,13 @@ while ( have_posts() ) : the_post(); ?>
         // Check if Providers section should be displayed
 		$physicians = get_field( 'physician_locations' );
 		if ( $physicians ) {
-			$postsPerPage = 6; // Set this value to preferred value (4, 6, 8, 10, 12). If you change the value, update the instruction text in the editor's JSON file.
-			$postsCutoff = 9; // Set cutoff value. If you change the value, update the instruction text in the editor's JSON file.
-			$postsCountClass = $postsPerPage;
-			if ( count($physicians) <= $postsCutoff ) {
-				$postsPerPage = -1;
-			}
 			$args = array(
 				"post_type" => "provider",
 				"post_status" => "publish",
-				"posts_per_page" => $postsPerPage,
+				"posts_per_page" => -1,
 				"orderby" => "title",
 				"order" => "ASC",
+				"fields" => "ids",
 				"post__in" => $physicians
 			);
 			$physicians_query = New WP_Query( $args );
@@ -479,6 +475,8 @@ while ( have_posts() ) : the_post(); ?>
 		if ( isset($physicians_query) && $physicians_query->have_posts() ) {
 			$show_providers_section = true;
 			$jump_link_count++;
+			$provider_ids = $physicians_query->posts;
+        	wp_reset_postdata();
 		} else {
 			$show_providers_section = false;
 		}
@@ -486,7 +484,7 @@ while ( have_posts() ) : the_post(); ?>
 
         // Check if Conditions section should be displayed
 		// load all 'conditions' terms for the post
-		$title_append = ' at ' . get_the_title();
+		$title_append = ' at ' . $page_title;
 		$conditions_cpt = get_field('location_conditions_cpt');
 		$condition_schema = '';
 		// Conditions CPT
@@ -593,7 +591,7 @@ while ( have_posts() ) : the_post(); ?>
 		<div class="row mx-0 mx-md-n8">
 			<div class="col-12 col-md text">
 				<div class="content-width">
-					<h1 class="page-title"><?php the_title(); ?>
+					<h1 class="page-title"><?php echo $page_title; ?>
 					<?php if ($parent_location) { ?>
 					<span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
 					<?php } // endif ?>
@@ -1270,7 +1268,7 @@ while ( have_posts() ) : the_post(); ?>
 								/* [lat, lon, fillColor, strokeColor, labelClass, iconText, popupText] */
 								var markers = [
 									// example [ 34.74376029995541, -92.31828863640054, "00F","000","white","A","I am a blue icon." ],
-									[ <?php echo $map['lat']; ?>, <?php echo $map['lng'] ?>, "9d2235","222", "transparentwhite", '1', 'Clinic<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php the_title(); ?>" data-typetitle="Get directions to the clinic">Get Directions</a>' ],
+									[ <?php echo $map['lat']; ?>, <?php echo $map['lng'] ?>, "9d2235","222", "transparentwhite", '1', 'Clinic<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>' ],
 									[ <?php echo $parking_map['lat']; ?>, <?php echo $parking_map['lng'] ?>, "9d2235","222", "transparentwhite", '2', 'Parking<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area" data-typetitle="Get directions to the parking area">Get Directions</a>' ]
 								]
 								//Loop through the markers array
@@ -1297,7 +1295,7 @@ while ( have_posts() ) : the_post(); ?>
 							</script>
 							<div class="map-legend bg-info" aria-label="Legend for map">
 								<ol data-categorytitle="Directions">
-									<li>Clinic (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php the_title(); ?>" data-typetitle="Get directions to the clinic">Get Directions</a>)</li>
+									<li>Clinic (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>)</li>
 									<li>Parking (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area" data-typetitle="Get directions to the parking area">Get Directions</a>)</li>
 								</ol>
 							</div>
@@ -1615,31 +1613,91 @@ while ( have_posts() ) : the_post(); ?>
 	// End Portal Section
 
 	// Begin Providers Section
-	if( $show_providers_section ) { ?>
+	if( $show_providers_section ) { 
+
+		// Get available regions - All available, since no titles set on initial load
+		$region_IDs = array();
+		while ($physicians_query->have_posts()) : $physicians_query->the_post();
+			$id = get_the_ID();
+			$region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
+		endwhile;
+		$region_IDs = array_unique($region_IDs);
+		$region_list = array();
+		foreach ($region_IDs as $region_ID){
+			$region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
+		}
+
+		if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+
+			$tax_query = array('relation' => 'AND');
+	
+			$provider_region = '';
+			if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+				$provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
+			}
+	
+			$tax_query = array();
+			if(!empty($provider_region)) {
+				$tax_query[] = array(
+					'taxonomy' => 'region',
+					'field' => 'slug',
+					'terms' => $provider_region
+				);
+			}
+			$args = array(
+				"post_type" => "provider",
+				"post_status" => "publish",
+				"posts_per_page" => -1,
+				"orderby" => "title",
+				"order" => "ASC",
+				"fields" => "ids",
+				"post__in" => $physicians,
+				'tax_query' => $tax_query
+			);
+			$physicians_query = New WP_Query( $args );
+		}
+
+		$provider_count = count($physicians_query->posts);
+		?>
 		<section class="uams-module bg-auto" id="providers">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title"><span class="title">Providers at <?php the_title(); ?></span></h2>
+						<h2 class="module-title"><span class="title">Providers at <?php echo $page_title; ?></span></h2>
+						<?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'" region="hide"]' ); ?>
 						<div class="card-list-container">
-							<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
+							<div class="card-list card-list-doctors">
 								<?php 
-									while ($physicians_query->have_posts()) : $physicians_query->the_post();
-										$id = get_the_ID();
-										include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
-									endwhile;
-									wp_reset_postdata();
-								?>
+                                    if($provider_count > 0){
+                                        $title_list = array();
+                                        while ($physicians_query->have_posts()) : $physicians_query->the_post();
+                                            $id = get_the_ID();
+                                            include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+                                            $title_list[] = get_field('physician_title', $id);
+                                        endwhile;
+                                        echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'," data-regions="'. implode(',', $region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
+									} else {
+										echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
+									}
+                                    wp_reset_postdata();
+                                ?>
 							</div>
 						</div>
-						<?php if ($postsPerPage !== -1) { ?>
-						<div class="more">
-							<button class="loadmore btn btn-primary" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more providers">Load More</button>
+                        <!-- <div class="more" style="<?php //echo ($postsPerPage < $provider_count) ? '' : 'display:none;' ; ?>">
+                            <button class="loadmore btn btn-primary" data-ppp="<?php //echo $postsPerPage; ?>" aria-label="Load more providers">Load More</button>
+                        </div> -->
+						<div class="ajax-filter-load-more">
+							<button class="btn btn-lg btn-primary" aria-label="Load all providers">Load All</button>
 						</div>
-						<?php } ?>
 					</div>
 				</div>
 			</div>
+			<?php if ( isset($_GET['_filter_region']) ) { ?>
+                <script type="text/javascript">
+                    // Set cookie to expire at end of session
+                    document.cookie = "wp_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; path=/; domain="+window.location.hostname;
+                </script>
+            <?php } ?>
 		</section>
 	<?php } // endif
 	// End Providers Section
@@ -1689,7 +1747,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title"><span class="title">Areas of Expertise Represented at <?php the_title(); ?></span></h2>
+						<h2 class="module-title"><span class="title">Areas of Expertise Represented at <?php echo $page_title; ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list card-list-expertise">
 							<?php 
@@ -1713,7 +1771,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title" id="sub-location-title"><span class="title">Additional Clinics Within <?php echo get_the_title(); ?></span></h2>
+						<h2 class="module-title" id="sub-location-title"><span class="title">Additional Clinics Within <?php echo $page_title; ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list">
 						<?php
@@ -1735,7 +1793,7 @@ while ( have_posts() ) : the_post(); ?>
 	if ( $show_related_resource_section ) {
 		$resource_heading_related_pre = false; // "Related Resources"
 		$resource_heading_related_post = true; // "Resources Related to __"
-		$resource_heading_related_name = get_the_title(); // To what is it related?
+		$resource_heading_related_name = $page_title; // To what is it related?
 		$resource_more_suppress = false; // Force div.more to not display
         $resource_more_key = '_resource_locations';
         $resource_more_value = $post->post_name;
@@ -1752,7 +1810,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title"><span class="title">Latest News for <?php the_title(); ?></span></h2>
+						<h2 class="module-title"><span class="title">Latest News for <?php echo $page_title; ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list">
 								<div class="card">
@@ -1802,7 +1860,7 @@ while ( have_posts() ) : the_post(); ?>
 {
   "@context": "http://www.schema.org",
   "@type": "MedicalClinic",
-  "name": "<?php echo get_the_title(); ?>",
+  "name": "<?php echo $page_title; ?>",
   "url": "<?php echo get_permalink(); ?>",
   "image": "<?php echo $locationphoto; ?>",
   <?php echo $condition_schema; ?>

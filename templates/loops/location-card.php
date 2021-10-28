@@ -35,7 +35,7 @@
         $parent_title_attr = str_replace('"', '\'', $parent_title);
         $parent_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($parent_title_attr, null, 'utf-8')));
         $parent_url = get_permalink( $parent_id );
-        $featured_image = get_the_post_thumbnail($parent_id, 'aspect-16-9-small', [ 'class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr ]);
+        $featured_image = get_the_post_thumbnail($parent_id, 'aspect-16-9-small', [ 'class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr , 'loading' => 'lazy' ]);
         $address_id = $parent_id;
 
         $override_parent_photo = get_field('location_image_override_parent', $id);
@@ -43,12 +43,12 @@
         
         // Set featured image
         if ( $override_parent_photo && $override_parent_photo_featured ) {
-            $featured_image = get_the_post_thumbnail($id, 'aspect-16-9-small', [ 'class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr ]);
+            $featured_image = get_the_post_thumbnail($id, 'aspect-16-9-small', [ 'class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr , 'loading' => 'lazy' ]);
         }
     } else {
         // Set featured image
         if ( has_post_thumbnail($id) ) {
-            $featured_image = get_the_post_thumbnail($id, 'aspect-16-9-small', [ 'class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr ]);
+            $featured_image = get_the_post_thumbnail($id, 'aspect-16-9-small', [ 'class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr , 'loading' => 'lazy' ]);
         }
     }
                                             
@@ -94,7 +94,7 @@
     } else { ?>
     <picture>
         <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
-        <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" class="card-img-top" data-categorytitle="Photo" data-itemtitle="<?php echo $location_title_attr; ?>" />
+        <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" class="card-img-top" data-categorytitle="Photo" data-itemtitle="<?php echo $location_title_attr; ?>" loading="lazy" />
     </picture>
     <?php } ?>
     <div class="card-body">

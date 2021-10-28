@@ -6,6 +6,12 @@ function uamswp_fad_title($html) {
 	return $html;
 }
 add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
+if ( isset( $_COOKIE['wp_filter_region']) && !isset($_GET['_location_region'])) {
+    $region = $_COOKIE['wp_filter_region'];
+    $url .= $url.(parse_url($url, PHP_URL_QUERY) ? '&' : '?').'_location_region='. $region;
+    header("Location: ". $url);
+    exit();
+}
 get_header();
 
     add_filter( 'facetwp_template_use_archive', '__return_true' );
@@ -28,7 +34,7 @@ get_header();
                     <div class="fwp-filter"><?php echo facetwp_display( 'facet', 'location_type' ); ?></div>
                     <div class="fwp-filter"><?php echo facetwp_display( 'facet', 'location_aoe' ); ?></div>
                     <div class="fwp-filter"><?php echo facetwp_display( 'facet', 'location_region' ); ?></div>
-                    <button class="btn btn-primary" id="filter-apply" onclick="FWP.refresh();">Apply</button> <button class="btn btn-outline-primary" id="filter-reset" onclick="FWP.reset()">Reset</button>
+                    <button class="btn btn-outline-primary" id="filter-reset" onclick="FWP.reset()">Reset</button>
                 </fieldset>
             </div>
             <div class="col-12 col-sm list-col">

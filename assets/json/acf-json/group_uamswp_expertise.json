@@ -497,7 +497,7 @@
             "name": "physician_expertise",
             "type": "relationship",
             "label": "Providers",
-            "instructions": "The providers will display in alphabetical order. If there are 18 or fewer, they will all be visible when the page loads. If there are more than 18, 12 will display before prompting the user to load more.",
+            "instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
