@@ -172,7 +172,6 @@ if($physicians) {
         $show_providers_section = true;
         $jump_link_count++;
         $provider_ids = $physicians_query->posts;
-        wp_reset_postdata();
     } else {
         $show_providers_section = false;
     }
@@ -197,7 +196,6 @@ if($locations) {
     if( $locations && $location_query->have_posts() ) {
         $show_locations_section = true;
         $jump_link_count++;
-        $break;
     } else {
         $show_locations_section = false;
     }
