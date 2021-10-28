@@ -534,7 +534,7 @@
                         <div class="col-12 more">
                             <p class="lead">Find other great episodes on other topics and from other UAMS providers.</p>
                             <div class="cta-container">
-                                <a href="/podcast/" class="btn btn-primary" aria-label="More UAMS Health Talk podcast episodes">Listen to More Episodes</a>
+                                <a href="/podcast/" class="btn btn-primary" aria-label="Listen to more episodes of the UAMS Health Talk podcast">Listen to More Episodes</a>
                             </div>
                         </div>
                     </div>

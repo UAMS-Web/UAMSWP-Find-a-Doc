@@ -24,15 +24,26 @@
     if ( $resource_heading_related_post ) {
         $resource_heading = $resource_heading . ' Related to ' . $resource_heading_related_name;
     }
-    $resource_count = count($resources);
-    $resource_more = ( $resource_postsPerPage != -1 && $resource_count > $resource_postsPerPage && ( $resource_more_key && !empty($resource_more_key) && $resource_more_value && !empty($resource_more_value) ) ) ? true : false;
-    if ( $resource_more_suppress ) {
-        $resource_more = false;
-    }
-    if ( $resource_count > 4 && $resource_more == false ) {
+    
+	// Count valid resources
+    //$resource_count = count($resources);
+	$resource_count = 0;
+	if ( $resources && $resource_query->have_posts() ) {
+		foreach( $resources as $resource ) {
+			if ( get_post_status ( $resource ) == 'publish' ) {
+				$resource_count++;
+			}
+		}
+	}
+    
+    if ( $resource_count > 4 && $resource_postsPerPage == -1 ) {
         $resource_layout = 'list';
     } else {
         $resource_layout = 'card';
+    }
+    $resource_more = ( $resource_layout == 'card' && $resource_count > $resource_postsPerPage && ( $resource_more_key && !empty($resource_more_key) && $resource_more_value && !empty($resource_more_value) ) ) ? true : false;
+    if ( $resource_more_suppress ) {
+        $resource_more = false;
     }
     $more_text = 'Want to find more resources related to ' . $resource_heading_related_name . '?';
     $more_button_url = '/clinical-resource/?' . $resource_more_key . '=' . $resource_more_value;
@@ -43,7 +54,7 @@
     $more_button_text = 'View the Full List';
 
     if ( $resource_layout == 'card') { ?>
-        <section class="uams-module stacked-image-text bg-auto" id="related-resources" aria-labelledby="related-resources-title">
+        <section class="uams-module stacked-image-text bg-auto alignfull" id="related-resources" aria-labelledby="related-resources-title">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">

@@ -621,7 +621,7 @@ function uamswp_expertise_podcast() {
                 <div class="col-12 more">
                     <p class="lead">Find other great episodes on other topics and from other UAMS providers.</p>
                     <div class="cta-container">
-                        <a href="/podcast/" class="btn btn-primary" aria-label="More UAMS Health Talk podcast episodes">Listen to More Episodes</a>
+                        <a href="/podcast/" class="btn btn-primary" aria-label="Listen to more episodes of the UAMS Health Talk podcast">Listen to More Episodes</a>
                     </div>
                 </div>
             </div>
@@ -699,17 +699,17 @@ function uamswp_expertise_appointment() {
     if ( $show_appointment_section ) {
         if ( get_field('location_expertise') ) {
             $appointment_location_url = '#locations';
-            $appointment_location_label = 'Go to the list of relevant locations';
+            //$appointment_location_label = 'Go to the list of relevant locations';
         } else {
             $appointment_location_url = '/location/';
-            $appointment_location_label = 'View a list of UAMS Health locations';
+            //$appointment_location_label = 'View a list of UAMS Health locations';
         } ?>
         <section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
                         <h2>Make an Appointment</h2>
-                        <p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_label; ?>" data-itemtitle="Contact a clinic directly">contacting a clinic directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
+                        <p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>" data-itemtitle="Contact a clinic directly">contacting a clinic directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
                     </div>
                 </div>
             </div>

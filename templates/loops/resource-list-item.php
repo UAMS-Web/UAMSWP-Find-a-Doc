@@ -11,7 +11,7 @@
     $resource_title_attr = str_replace('"', '\'', $resource_title);
     $resource_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($resource_title_attr, null, 'utf-8')));
 
-    $resource_label = 'Go to the Clinical Resource page for' . $resource_title_attr;
+    $resource_label = 'View Clinical Resource page for ' . $resource_title_attr;
 
     $resource_type = get_field('clinical_resource_type', $id);
     $resource_type_value = $resource_type['value'];
