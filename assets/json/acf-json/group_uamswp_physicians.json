@@ -2437,10 +2437,10 @@
                     "name": "pubmed_id_pmid",
                     "type": "text",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "30",
                         "class": "",
                         "id": ""
                     },
@@ -2451,6 +2451,27 @@
                     "maxlength": ""
                 },
                 {
+                    "key": "field_physician_select_publications_lookup",
+                    "label": "PubMed Lookup",
+                    "name": "pubmed_id_lookup",
+                    "type": "acfe_button",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "button_value": "Lookup",
+                    "button_type": "button",
+                    "button_class": "button button-primary",
+                    "button_id": "",
+                    "button_before": "",
+                    "button_after": "",
+                    "button_ajax": 1
+                },
+                {
                     "key": "field_physician_select_publications_pubmed",
                     "label": "Pubmed Information (HTML)",
                     "name": "pubmed_information",
@@ -2459,7 +2480,7 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "50",
                         "class": "",
                         "id": ""
                     },
