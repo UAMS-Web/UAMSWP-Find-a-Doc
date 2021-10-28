@@ -18,6 +18,17 @@ function uamswp_fad_title($html) {
 	return $html;
 }
 add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
+$syndicated = get_field('clinical_resource_syndicated');
+$syndication_url = get_field('clinical_resource_syndication_url');
+function uamswp_fad_canonical($html) {
+    global $syndicated;
+    global $syndication_url;
+	if ( $syndicated && !empty($syndication_url) ) {
+	$html = '<link rel="canonical" href="'.htmlspecialchars(urldecode($syndication_url)).'" />'; 
+    }
+	return $html;
+}
+add_filter('seopress_titles_canonical','uamswp_fad_canonical');
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
 // Removes entry meta from entry footer incl. markup.
