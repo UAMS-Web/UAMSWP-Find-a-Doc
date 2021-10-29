@@ -2582,6 +2582,8 @@ function get_location_meta($object) {
 	$data['location_city'] = get_field('location_city', $postId );
 	$data['location_state'] = get_field('location_state', $postId );
 	$data['location_zip'] = get_field('location_zip', $postId );
+	$location_region = get_field('location_region', $postId );
+	$data['location_region'] = get_term($location_region, "region")->slug;
 	$location_phone = get_field('location_phone', $postId );
 	$location_phone_link = '<a href="tel:' . format_phone_dash( $location_phone ) . '" class="icon-phone">' . format_phone_us( $location_phone ) . '</a>';
 	$location_clinic_phone_query = get_field('location_clinic_phone_query', $postId ); // separate number for (new) appointments?
@@ -2606,6 +2608,15 @@ function get_location_meta($object) {
 	$data['location_new_appointments_phonetext'] = ( $location_new_appointments_phone && $location_clinic_phone_query) ? 'New Patients' : 'New and Returning Patients';
 	$data['location_return_appointments_phone'] = $location_return_appointments_phone;
 	$data['location_return_appointments_phone_text'] = ($location_return_appointments_phone && $location_clinic_phone_query) ? 'Returning Patients' : '';
+	$data['location_fax'] = get_field('location_fax', $postId);
+	$additional_phones = get_field('location_phone_numbers', $postId);
+	$i=0;
+	foreach ($additional_phones as $additional_phone) {
+		$data['location_additional_phone_numbers'][$i]['text'] = $additional_phone['location_appointments_text'];
+		$data['location_additional_phone_numbers'][$i]['phone'] = $additional_phone['location_appointments_phone'];
+		$data['location_additional_phone_numbers'][$i]['additional_text'] = $additional_phone['location_appointments_additional_text'];
+		$i++;
+	}
 	// Hours
 	$location_hours_group = get_field('location_hours_group', $postId);
 	$data['location_hours_variable'] = $location_hours_group['location_hours_variable'];
