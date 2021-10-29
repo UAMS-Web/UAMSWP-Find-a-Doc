@@ -2465,7 +2465,7 @@
                     },
                     "button_value": "Lookup",
                     "button_type": "button",
-                    "button_class": "button button-primary",
+                    "button_class": "button button-secondary",
                     "button_id": "",
                     "button_before": "",
                     "button_after": "",
