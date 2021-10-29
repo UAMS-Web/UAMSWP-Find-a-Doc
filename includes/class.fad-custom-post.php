@@ -2423,6 +2423,7 @@ function get_location_meta($object) {
 	$data['location_telemed_modified_end'] = $location_hours_group['location_telemed_modified_hours_end']; // Do we know when the modified telemedicine hours end?
 	$data['location_telemed_modified_end_date'] = $location_hours_group['location_telemed_modified_hours_end_date']; // When do the modified telemedicine hours end?
 	$data['location_telemed_modified_hours247'] = $location_hours_group['location_telemed_modified_hours_24_7'];
+	$data['location_telemed_info'] = get_field('location_telemed_descr_system', 'option');
 
 	$data['location_closing'] = get_field('location_closing',$postId); // true or false
 	$data['location_closing_date'] = get_field('location_closing_date',$postId);
