@@ -622,7 +622,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
             <!-- <input type="text" name="search" id="search" value="" placeholder="Search Here.."> -->
             <div class="form-row align-items-center justify-content-center">
                 <div class="col-12 mb-4 col-sm-auto mb-sm-0">
-                    <label class="sr-only" for="title">Clinical Title</label>
+                    <label class="sr-only" for="provider_title">Clinical Title</label>
                     <select name="provider_title" id="provider_title" class="form-control">
                         <option value="">Any Clinical Title</option>
 						<?php foreach($provider_titles_list as $key => $title) : ?>
@@ -631,7 +631,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
                     </select>
                 </div>
 				<div class="col-12 mb-4 col-sm-auto mb-sm-0<?php echo $display_region == 'hide' ? ' d-none' : '' ?>">
-                    <label class="sr-only" for="region">Region</label>
+                    <label class="sr-only" for="provider_region">Region</label>
                     <select name="provider_region" id="provider_region" class="form-control">
 						<option value="">Any Region</option>
 						<?php $regions = get_terms('region', 'orderby=name&hide_empty=0');
@@ -641,7 +641,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
                     </select>
                 </div>
                 <div class="col-auto">
-					<input type="hidden" id="providers" name="providers" value="<?php echo implode(",", $providers); ?>">
+					<input type="hidden" id="providers-ids" name="providers-ids" value="<?php echo implode(",", $providers); ?>">
 					<!-- <input type="hidden" id="ppp" name="ppp" value="<?php // echo $ppp; ?>"> -->
 					<!-- <input type="submit" id="submit" name="submit" value="Search" class="btn btn-primary"> -->
 				</div>
@@ -846,7 +846,7 @@ function uamswp_location_ajax_filter_shortcode( $atts ) {
             <!-- <?php print_r($locations); ?> -->
             <div class="form-row align-items-center justify-content-center">
 				<div class="col-12 mb-4 col-sm-auto mb-sm-0<?php echo $display_region == 'hide' ? ' d-none' : '' ?>">
-                    <label class="sr-only" for="region">Region</label>
+                    <label class="sr-only" for="location_region">Region</label>
                     <select name="location_region" id="location_region" class="form-control">
 						<option value="">Any Region</option>
 						<?php $regions = get_terms('region', 'orderby=name&hide_empty=0');
