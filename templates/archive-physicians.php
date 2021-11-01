@@ -6,6 +6,13 @@ function uamswp_fad_title($html) {
 	return $html;
 }
 add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
+// Region Cookie
+if ( isset($_COOKIE['wp_filter_region']) && !isset($_GET['_provider_region']) ) {
+    $region = $_COOKIE['wp_filter_region'];
+    $url .= $url.(parse_url($url, PHP_URL_QUERY) ? '&' : '?').'_provider_region='. $region;
+    header("Location: ". $url);
+    exit();
+}
 get_header();
 
 	function custom_field_excerpt($title) {
@@ -52,7 +59,7 @@ get_header();
 													<div class="fwp-filter">[facetwp facet="physician_language"]</div>
 													<div class="fwp-filter">[facetwp facet="locations"]</div>
 													<div class="fwp-filter">[facetwp facet="provider_region"]</div>
-													<button class="btn btn-primary" id="filter-apply" onclick="FWP.refresh();">Apply</button> <button class="btn btn-outline-primary" id="filter-reset" onclick="FWP.reset()">Reset</button>
+													<button class="btn btn-outline-primary" id="filter-reset" onclick="FWP.reset()">Reset</button>
 												' );
 					?>
 				</fieldset>

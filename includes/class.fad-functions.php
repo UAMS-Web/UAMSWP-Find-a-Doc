@@ -316,7 +316,7 @@ function rlv_tax_excerpt_term_fields($content, $term) {
 }
 // AJAX
 function uamswp_ajax_scripts() { 
-    if ( is_singular( 'location' ) || is_singular( 'expertise' ) || is_singular( 'condition' ) || is_singular( 'treatment' ) ) { // Only run on these template pages
+    if ( is_singular( 'location' ) || is_singular( 'expertise' ) || is_singular( 'condition' ) || is_singular( 'treatment' ) || is_singular( 'clinical-resource' ) ) { // Only run on these template pages
         // Register the script
         wp_register_script( 'uamswp-loadmore', UAMS_FAD_ROOT_URL . 'assets/js/uamswp-loadmore.js', array('jquery'), false, true );
     
@@ -336,12 +336,12 @@ add_action( 'wp_enqueue_scripts', 'uamswp_ajax_scripts' );
 add_action('wp_ajax_load_posts_by_ajax', 'uamswp_load_by_ajax_callback');
 add_action('wp_ajax_nopriv_load_posts_by_ajax', 'uamswp_load_by_ajax_callback');
 function uamswp_load_by_ajax_callback(){
-    $ppp = (isset($_POST["ppp"])) ? $_POST["ppp"] : 6; // Set this default value
+    // $ppp = (isset($_POST["ppp"])) ? $_POST["ppp"] : 6; // Set this default value
     $page = $_POST['page'];
-    $type = (isset($_POST["posttype"])) ? $_POST["posttype"] : 'post'; // Assume its post if not set
+    // $type = (isset($_POST["posttype"])) ? $_POST["posttype"] : 'post'; // Assume its post if not set
         
     header("Content-Type: text/html");
-    if ('post' == $type) {
+    // if ('post' == $type) {
         $ids = (isset($_POST["postid"])) ? $_POST["postid"] : '';
         $ids_array = explode(',', $ids);
         $args = array(
@@ -350,31 +350,30 @@ function uamswp_load_by_ajax_callback(){
             'post_status' => 'publish',
             "orderby" => "title",
             "order" => "ASC",
-            'posts_per_page' => $ppp,
-            'paged'    => $page,
+            'posts_per_page' => -1,
             'post__in' => $ids_array,
             
         );
-    } else { // Taxonomy
-        $tax = (isset($_POST["tax"])) ? $_POST["tax"] : '';
-        $slug = (isset($_POST["slug"])) ? $_POST["slug"] : '';
-        $args = array(
-            "post_type" => "provider",
-            "post_status" => "publish",
-            "posts_per_page" => $ppp,
-            "orderby" => "title",
-            "order" => "ASC",
-            'paged'    => $page,
-            "tax_query" => array(
-                array(
-                "taxonomy" => $tax,
-                "field" => "slug",
-                "terms" => $slug,
-                "operator" => "IN"
-                )
-            )
-        );
-    }
+    // } else { // Taxonomy
+    //     $tax = (isset($_POST["tax"])) ? $_POST["tax"] : '';
+    //     $slug = (isset($_POST["slug"])) ? $_POST["slug"] : '';
+    //     $args = array(
+    //         "post_type" => "provider",
+    //         "post_status" => "publish",
+    //         "posts_per_page" => $ppp,
+    //         "orderby" => "title",
+    //         "order" => "ASC",
+    //         'paged'    => $page,
+    //         "tax_query" => array(
+    //             array(
+    //             "taxonomy" => $tax,
+    //             "field" => "slug",
+    //             "terms" => $slug,
+    //             "operator" => "IN"
+    //             )
+    //         )
+    //     );
+    // }
     $loop = new WP_Query($args);
     $out = '';
     if ($loop -> have_posts()) :  while ($loop -> have_posts()) : $loop -> the_post();
@@ -563,6 +562,423 @@ function display_medline_api_data( $code, $type ) {
 		}
 	}
 }
+
+function provider_ajax_filter_scripts() {
+	wp_enqueue_script( 'provider_ajax_filter', UAMS_FAD_ROOT_URL . 'assets/js/ajax-script.js', array(), '1.0', true );
+    wp_localize_script( 'provider_ajax_filter', 'ajax_url', admin_url('admin-ajax.php') );
+}
+
+// Provider AJAX
+function uamswp_provider_ajax_filter_shortcode( $atts ) {
+	$a = shortcode_atts( array(
+		'providers' => '',
+		// 'ppp' => '',
+		'region' => ''
+	), $atts);
+	$providers = explode(",", $a['providers']);
+	// $ppp = $a['ppp'];
+	$display_region = $a['region'];
+	$provider_titles = array();
+	$provider_titles_list = array();
+	$regions = array();
+	foreach($providers as $provider) {
+		if ( get_post_status ( $provider ) == 'publish' ) {
+			// Clinical Title
+			$provider_resident = get_field('physician_resident',$provider);
+			$provider_resident_title_name = 'Resident Physician';
+			$provider_phys_title = get_field('physician_title',$provider);
+			if(!empty($provider_phys_title) || $provider_resident){
+				$provider_phys_title_name = $provider_resident ? $provider_resident_title_name : get_term( $provider_phys_title, 'clinical_title' )->name;
+				$provider_titles[$provider_phys_title] = $provider_phys_title_name;
+			}
+			// Region
+			$provider_region = get_field('physician_region', $provider);
+			foreach($provider_region as $region){
+				$provider_regions[] = $region;
+			}
+			//$provider_regions[] = $provider_region;
+		}
+	}
+	$provider_titles_list = array_unique($provider_titles);
+	asort($provider_titles_list);
+	$provider_regions_ids = array_unique($provider_regions);
+	sort($provider_regions_ids);
+
+	$provider_region = '';
+	if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+		$provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
+	}
+	$provider_title = '';
+	if( isset($_COOKIE['_provider_title']) ) {
+		$provider_title = $_COOKIE['_provider_title'] ;
+	}
+	//provider_ajax_filter_scripts();
+
+	ob_start(); ?>
+
+	<div class="ajax-filter" id="provider-ajax-filter">
+		<h3 class="sr-only">Filter the Providers</h3>
+        <form action="" method="get">
+            <!-- <input type="text" name="search" id="search" value="" placeholder="Search Here.."> -->
+            <div class="form-row align-items-center justify-content-center">
+                <div class="col-12 mb-4 col-sm-auto mb-sm-0">
+                    <label class="sr-only" for="title">Clinical Title</label>
+                    <select name="provider_title" id="provider_title" class="form-control">
+                        <option value="">Any Clinical Title</option>
+						<?php foreach($provider_titles_list as $key => $title) : ?>
+							<option value="<?= $key; ?>"<?php echo ($key == $provider_title) ? ' selected' : ''; ?>><?= $title; ?></option>
+						<?php endforeach; ?>
+                    </select>
+                </div>
+				<div class="col-12 mb-4 col-sm-auto mb-sm-0<?php echo $display_region == 'hide' ? ' d-none' : '' ?>">
+                    <label class="sr-only" for="region">Region</label>
+                    <select name="provider_region" id="provider_region" class="form-control">
+						<option value="">Any Region</option>
+						<?php $regions = get_terms('region', 'orderby=name&hide_empty=0');
+						foreach($regions as $region) : ?>
+							<option value="<?php echo $region->slug; ?>"<?php echo in_array($region->term_id, $provider_regions_ids) ? '' : ' disabled'; ?><?php echo ($region->slug === $provider_region) ? ' selected' : ''; ?>><?php echo $region->name; ?></option>
+						<?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="col-auto">
+					<input type="hidden" id="providers" name="providers" value="<?php echo implode(",", $providers); ?>">
+					<!-- <input type="hidden" id="ppp" name="ppp" value="<?php // echo $ppp; ?>"> -->
+					<!-- <input type="submit" id="submit" name="submit" value="Search" class="btn btn-primary"> -->
+				</div>
+				<div class="col-auto">
+					<input type="button" id="provider_clear" name="provider_clear" value="Reset" class="btn btn-outline-primary">
+				</div>
+            </div>
+        </form>
+		<?php if( isset($_COOKIE['wp_filter_region']) ) { ?>
+		<p class="ajax-filter-message" id="provider-ajax-filter-message">The results below are filtered by region based on your previous selections. View UAMS&nbsp;Health providers in all areas of the state by clicking the "Reset" button&nbsp;above.</p>
+		<?php } ?>
+    </div>
+	<hr />
+	<?php
+	return ob_get_clean();
+}
+add_shortcode ('uamswp_provider_ajax_filter', 'uamswp_provider_ajax_filter_shortcode');
+
+// Ajax Callback
+add_action('wp_ajax_nopriv_provider_ajax_filter', 'provider_ajax_filter_callback'); 
+add_action('wp_ajax_provider_ajax_filter', 'provider_ajax_filter_callback');
+ 
+function provider_ajax_filter_callback() {
+  
+    $tax_query = array('relation' => 'AND');
+	$tax_query_title = array();
+	$tax_query_region = array();
+
+	// Get data variables
+	$provider_title = '';
+	if( isset($_COOKIE['_provider_title']) ) {
+		$provider_title = $_COOKIE['_provider_title'] ;
+	} elseif(isset($_POST['provider_title'])){
+		$provider_title = sanitize_text_field( $_POST['provider_title'] );
+	}
+
+	$provider_region = '';
+	if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+		if ( isset($_GET['_filter_region']) ) {
+			setcookie("wp_filter_region", htmlspecialchars($_GET['_filter_region']), "", "/", $_SERVER['HTTP_HOST'] );
+		}
+		$provider_region = $_COOKIE['wp_filter_region'];
+	} elseif(isset($_POST['provider_region'])){
+		$provider_region = sanitize_text_field( $_POST['provider_region'] );
+	}
+ 
+    if(isset($_POST['providers'])) {
+        $providers = sanitize_text_field( $_POST['providers'] );
+		$providers = explode(",", $providers);
+    }
+	
+	// Build query for regions, based on titles
+	if(!empty($provider_title) ) {
+        $clinical_title = $provider_title ;
+        $tax_query_title[] = array(
+            'taxonomy' => 'clinical_title',
+			'field' => 'term_id',
+            'terms' => $clinical_title,
+        );
+		// Merge into full tax query 
+		$tax_query = array_merge($tax_query, $tax_query_title);
+
+	}
+
+	$args = array(
+		'post_type' => 'provider',
+		'post_status' => 'publish',
+		'orderby' => 'title',
+		'order' => 'ASC',
+		'posts_per_page' => -1,
+		'fields' => 'ids',
+		'post__in' => $providers,
+		'tax_query' => $tax_query_title
+	);
+
+	$region_prov_ids = new WP_Query( $args );
+
+
+
+	$region_IDs = array();
+	while ($region_prov_ids->have_posts()) : $region_prov_ids->the_post();
+		$id = get_the_ID();
+		$region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
+	endwhile;
+	$region_IDs = array_unique($region_IDs);
+	$region_list = array();
+	foreach ($region_IDs as $region_ID){
+		$region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
+	}
+
+	// Build query for titles, based on regions
+	if(!empty($provider_region)) {
+        $region =  $provider_region;
+        $tax_query_region[] = array(
+            'taxonomy' => 'region',
+			'field' => 'slug',
+            'terms' => $region
+        );
+		// Merge into full tax query
+		$tax_query = array_merge($tax_query, $tax_query_region);
+    
+	}
+
+	// Query providers based full tax query
+	$args = array(
+		'post_type' => 'provider',
+		'post_status' => 'publish',
+		'orderby' => 'title',
+		'order' => 'ASC',
+		'posts_per_page' => -1,
+		'fields' => 'ids',
+		'post__in' => $providers,
+		'tax_query' => $tax_query_region
+	);
+
+	$title_prov_ids = new WP_Query( $args );
+	
+	
+	
+	$title_list = array();
+	while ($title_prov_ids->have_posts()) : $title_prov_ids->the_post();
+		$id = get_the_ID();
+		$title_list[] = get_field('physician_title', $id);
+	endwhile;
+	
+
+	// if(isset($_POST['providers'])) {
+    //     $providers = sanitize_text_field( $_POST['providers'] );
+	// 	$providers = explode(",", $providers);
+    // }
+
+	// if(isset($_POST['ppp'])) {
+    //     $ppp = sanitize_text_field( $_POST['ppp'] );
+    // }
+ 
+    $args = array(
+        'post_type' => 'provider',
+		'post_status' => 'publish',
+		'orderby' => 'title',
+		'order' => 'ASC',
+        'posts_per_page' => -1,
+		'fields' => 'ids',
+		'post__in' => $providers,
+        'tax_query' => $tax_query
+    );
+ 
+    $search_query = new WP_Query( $args );
+ 
+    if ( $search_query->have_posts() && !empty($providers) ) {
+		$provider_ids = $search_query->posts;
+		//echo $_POST['ppp'];
+		// $z=0;
+        while ( $search_query->have_posts() ) : $search_query->the_post();
+            $id = get_the_ID();
+			include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+			// $z++;
+        endwhile;
+		echo '<data id="provider_ids" data-postids="'. implode(',', $provider_ids) .'," data-regions="'. implode(',', $region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
+		// var_dump($tax_query_title);
+		// var_dump($tax_query_region);
+		// var_dump($tax_query);
+    } else {
+		//var_dump($args);
+        echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
+    }
+    wp_die();
+}
+// Location AJAX functions
+function uamswp_location_ajax_filter_shortcode( $atts ) {
+	$a = shortcode_atts( array(
+		'locations' => '',
+		'region' => ''
+	), $atts);
+	$locations = explode(",", $a['locations']);
+	$display_region = $a['region'];
+	$location_titles = array();
+	$location_titles_list = array();
+	$regions = array();
+	foreach($locations as $location) {
+		if ( get_post_status ( $location ) == 'publish' ) {
+			// Region
+			$location_region[] = get_field('location_region', $location);
+			foreach($location_region as $region){
+				$location_regions[] = $region;
+			}
+		}
+	}
+	$location_regions_ids = array_unique($location_regions);
+	sort($location_regions_ids);
+
+	$location_region = '';
+	if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+		$location_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
+	}
+	//location_ajax_filter_scripts();
+
+	ob_start(); ?>
+
+	<div class="ajax-filter" id="location-ajax-filter">
+		<h3 class="sr-only">Filter the Locations</h3>
+        <form action="" method="get">
+            <!-- <?php print_r($locations); ?> -->
+            <div class="form-row align-items-center justify-content-center">
+				<div class="col-12 mb-4 col-sm-auto mb-sm-0<?php echo $display_region == 'hide' ? ' d-none' : '' ?>">
+                    <label class="sr-only" for="region">Region</label>
+                    <select name="location_region" id="location_region" class="form-control">
+						<option value="">Any Region</option>
+						<?php $regions = get_terms('region', 'orderby=name&hide_empty=0');
+						foreach($regions as $region) : ?>
+							<option value="<?php echo $region->slug; ?>"<?php echo in_array($region->term_id, $location_regions_ids) ? '' : ' disabled'; ?><?php echo ($region->slug === $location_region) ? ' selected' : ''; ?>><?php echo $region->name; ?></option>
+						<?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="col-auto">
+					<input type="hidden" id="locations" name="locations" value="<?php echo implode(",", $locations); ?>">
+					<!-- <input type="submit" id="submit" name="submit" value="Search" class="btn btn-primary"> -->
+				</div>
+				<div class="col-auto">
+					<input type="button" id="location_clear" name="location_clear" value="Reset" class="btn btn-outline-primary">
+				</div>
+            </div>
+        </form>
+		<?php if( isset($_COOKIE['wp_filter_region']) ) { ?>
+		<p class="ajax-filter-message" id="location-ajax-filter-message">The results below are filtered by region based on your previous selections. View UAMS&nbsp;Health locations in all areas of the state by clicking the "Reset" button&nbsp;above.</p>
+		<?php } ?>
+    </div>
+	<hr />
+
+	<?php
+	return ob_get_clean();
+}
+add_shortcode ('uamswp_location_ajax_filter', 'uamswp_location_ajax_filter_shortcode');
+// Ajax Callback
+add_action('wp_ajax_nopriv_location_ajax_filter', 'location_ajax_filter_callback'); 
+add_action('wp_ajax_location_ajax_filter', 'location_ajax_filter_callback');
+ 
+function location_ajax_filter_callback() {
+  
+    $tax_query = array();
+
+	// Get data variables
+	$location_region = '';
+	if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+		if ( isset($_GET['_filter_region']) ) {
+			setcookie("wp_filter_region", htmlspecialchars($_GET['_filter_region']), "", "/", $_SERVER['HTTP_HOST'] );
+		}
+		$location_region = $_COOKIE['wp_filter_region'];
+	} elseif(isset($_POST['location_region'])){
+		$location_region = sanitize_text_field( $_POST['location_region'] );
+	}
+ 
+    if(isset($_POST['locations'])) {
+        $locations = sanitize_text_field( $_POST['locations'] );
+		$locations = explode(",", $locations);
+    }
+
+	// Build query for regions
+	$args = array(
+		'post_type' => 'location',
+		'post_status' => 'publish',
+		'orderby' => 'title',
+		'order' => 'ASC',
+		'posts_per_page' => -1,
+		'fields' => 'ids',
+		'post__in' => $locations,
+	);
+	$region_loc_ids = new WP_Query( $args );
+	
+	$region_IDs = array();
+	while ($region_loc_ids->have_posts()) : $region_loc_ids->the_post();
+		$id = get_the_ID();
+		$region_IDs[] = get_field('location_region', $id);
+	endwhile;
+	$region_IDs = array_unique($region_IDs);
+	$region_list = array();
+	foreach ($region_IDs as $region_ID){
+		$region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
+	}
+
+	// Build query for titles, based on regions
+	if(!empty($location_region)) {
+        $region =  $location_region;
+        $tax_query[] = array(
+            'taxonomy' => 'region',
+			'field' => 'slug',
+            'terms' => $region
+        );
+		// Merge into full tax query
+		// $tax_query = array_merge($tax_query, $tax_query_region);
+    }
+ 
+    $args = array(
+        'post_type' => 'location',
+		'post_status' => 'publish',
+		'orderby' => 'title',
+		'order' => 'ASC',
+        'posts_per_page' => -1,
+		'fields' => 'ids',
+		'post__in' => $locations,
+        'tax_query' => $tax_query
+    );
+ 
+    $search_query = new WP_Query( $args );
+ 
+    if ( $search_query->have_posts() && !empty($locations) ) {
+		$location_ids = $search_query->posts;
+        while ( $search_query->have_posts() ) : $search_query->the_post();
+            $id = get_the_ID();
+			include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+        endwhile;
+		echo '<data id="location_ids" data-postids="'. implode(',', $location_ids) .'," data-regions="'. implode(',', $region_list) .',"></data>';
+    } else {
+        echo '<span class="no-results">Sorry, there are no locations matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
+    }
+    wp_die();
+}
+
+function uamswp_add_trench(){
+	if(is_page( )) {
+		$trench = get_field('page_filter_region');
+		$trenchQS = '';
+		if ( isset($_GET['_filter_region']) ) {
+			$trenchQS = $_GET['_filter_region'];
+		}
+		if ((isset($trench) && $trench) || $trenchQS){	
+			$region = $trench->slug ? $trench->slug : htmlspecialchars($trenchQS);
+			?>
+			<script type="text/javascript">
+				// Set cookie to expire at end of session
+    			document.cookie = "wp_filter_region=<?php echo $region; ?>; path=/; domain="+window.location.hostname;
+			</script>
+		<?php
+		}
+	}
+}
+add_action('wp_footer', 'uamswp_add_trench');
+
 // Remove unused / overly agressive scripts
 function uamswp_fad_disable_scripts() {
 	// Add pages Ajax Search is used
@@ -571,4 +987,5 @@ function uamswp_fad_disable_scripts() {
 		wp_dequeue_script( 'wd-asp-ajaxsearchpro' );
 	}
 }
+
 add_action('wp_enqueue_scripts', 'uamswp_fad_disable_scripts', 100);

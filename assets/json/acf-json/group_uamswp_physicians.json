@@ -1036,7 +1036,7 @@
                 "id": ""
             },
             "taxonomy": "region",
-            "field_type": "select",
+            "field_type": "multi_select",
             "add_term": 0,
             "save_terms": 1,
             "load_terms": 1,

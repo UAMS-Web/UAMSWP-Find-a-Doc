@@ -314,7 +314,7 @@ function uamswp_resource_physicians() {
                     <div class="col-12">
                         <h2 class="module-title"><span class="title">Related Providers</span></h2>
                         <div class="card-list-container">
-                            <div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
+                            <div class="card-list card-list-doctors">
                                 <?php 
                                     while ($physicians_query->have_posts()) : $physicians_query->the_post();
                                         $id = get_the_ID();
@@ -324,11 +324,14 @@ function uamswp_resource_physicians() {
                                 ?>
                             </div>
                         </div>
-                        <?php if ($postsPerPage !== -1) { ?>
+                        <!-- <?php if ($postsPerPage !== -1) { ?>
                         <div class="more">
                             <button class="loadmore btn btn-primary" data-posttype="post" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more providers">Load More</button>
                         </div>
-                        <?php } ?>
+                        <?php } ?> -->
+                        <div class="ajax-filter-load-more">
+                            <button class="btn btn-lg btn-primary" aria-label="Load all providers">Load All</button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -18,15 +18,15 @@ class FacetWP_Facet_Alpha_Addon extends FacetWP_Facet
         $facet = $params['facet'];
         $selected_values = (array) $params['selected_values'];
 
-        if ( '' !== $selected_values ) {
-            // "Any" selected value = false
-            $any_selected = ' selected';
-            $any_aria_value = 'true';
-        } else {
-            // "Any" selected value = true
-            $any_selected = '';
-            $any_aria_value = 'false';
-        }
+        // if ( '' !== $selected_values ) {
+        //     // "Any" selected value = false
+        //     $any_selected = ' selected';
+        //     $any_aria_value = 'true';
+        // } else {
+        // "Any" selected value = true
+        $any_selected = ' selected';
+        $any_aria_value = 'true';
+        // }
 
         // Simulate "OR" mode (ignore this facet's selection)
         if ( isset( FWP()->or_values ) && ( 1 < count( FWP()->or_values ) || ! isset( FWP()->or_values[ $facet['name'] ] ) ) ) {
@@ -54,7 +54,7 @@ class FacetWP_Facet_Alpha_Addon extends FacetWP_Facet
 
 
 		// Value is selected, set "Any" = false
-        if ( isset( FWP()->or_values )) {
+        if ( isset( FWP()->or_values[ $facet['name'] ] )) {
 	            $any_selected = '';
 				$any_aria_value = 'false';
         }
@@ -79,7 +79,7 @@ class FacetWP_Facet_Alpha_Addon extends FacetWP_Facet
             'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
             'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' );
 
-        $output .= '<a class="facetwp-alpha available'. $any_selected .'"  role="link" aria-label="Any" aria-selected="'. $any_aria_value .'" tabindex="0 data-id="">' . __( 'Any', 'fwp' ) . '</a>';
+        $output .= '<a class="facetwp-alpha available'. $any_selected .'"  role="link" aria-label="Any" aria-selected="'. $any_aria_value .'" tabindex="0" data-id="">' . __( 'Any', 'fwp' ) . '</a>';
 
         foreach ( $available_chars as $char ) {
             $match = false;
