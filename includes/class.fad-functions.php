@@ -622,7 +622,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
             <!-- <input type="text" name="search" id="search" value="" placeholder="Search Here.."> -->
             <div class="form-row align-items-center justify-content-center">
                 <div class="col-12 mb-4 col-sm-auto mb-sm-0">
-                    <label class="sr-only" for="title">Clinical Title</label>
+                    <label class="sr-only" for="provider_title">Clinical Title</label>
                     <select name="provider_title" id="provider_title" class="form-control">
                         <option value="">Any Clinical Title</option>
 						<?php foreach($provider_titles_list as $key => $title) : ?>
@@ -631,7 +631,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
                     </select>
                 </div>
 				<div class="col-12 mb-4 col-sm-auto mb-sm-0<?php echo $display_region == 'hide' ? ' d-none' : '' ?>">
-                    <label class="sr-only" for="region">Region</label>
+                    <label class="sr-only" for="provider_region">Region</label>
                     <select name="provider_region" id="provider_region" class="form-control">
 						<option value="">Any Region</option>
 						<?php $regions = get_terms('region', 'orderby=name&hide_empty=0');
@@ -641,7 +641,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
                     </select>
                 </div>
                 <div class="col-auto">
-					<input type="hidden" id="providers" name="providers" value="<?php echo implode(",", $providers); ?>">
+					<input type="hidden" id="providers-ids" name="providers-ids" value="<?php echo implode(",", $providers); ?>">
 					<!-- <input type="hidden" id="ppp" name="ppp" value="<?php // echo $ppp; ?>"> -->
 					<!-- <input type="submit" id="submit" name="submit" value="Search" class="btn btn-primary"> -->
 				</div>
@@ -651,7 +651,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
             </div>
         </form>
 		<?php if( isset($_COOKIE['wp_filter_region']) ) { ?>
-		<p class="ajax-filter-message" id="provider-ajax-filter-message">The results below are filtered by region based on your previous selections. View UAMS&nbsp;Health providers in all areas of the state by clicking the "Reset" button&nbsp;above.</p>
+		<p class="ajax-filter-message" id="provider-ajax-filter-message">The results below are filtered by region based on your previous selections. Use the "Reset" button above to view UAMS&nbsp;Health providers in all areas of&nbsp;the&nbsp;state.</p>
 		<?php } ?>
     </div>
 	<hr />
@@ -846,7 +846,7 @@ function uamswp_location_ajax_filter_shortcode( $atts ) {
             <!-- <?php print_r($locations); ?> -->
             <div class="form-row align-items-center justify-content-center">
 				<div class="col-12 mb-4 col-sm-auto mb-sm-0<?php echo $display_region == 'hide' ? ' d-none' : '' ?>">
-                    <label class="sr-only" for="region">Region</label>
+                    <label class="sr-only" for="location_region">Region</label>
                     <select name="location_region" id="location_region" class="form-control">
 						<option value="">Any Region</option>
 						<?php $regions = get_terms('region', 'orderby=name&hide_empty=0');
@@ -865,7 +865,7 @@ function uamswp_location_ajax_filter_shortcode( $atts ) {
             </div>
         </form>
 		<?php if( isset($_COOKIE['wp_filter_region']) ) { ?>
-		<p class="ajax-filter-message" id="location-ajax-filter-message">The results below are filtered by region based on your previous selections. View UAMS&nbsp;Health locations in all areas of the state by clicking the "Reset" button&nbsp;above.</p>
+		<p class="ajax-filter-message" id="location-ajax-filter-message">The results below are filtered by region based on your previous selections. Use the "Reset" button above to view UAMS&nbsp;Health locations in all areas of&nbsp;the&nbsp;state.</p>
 		<?php } ?>
     </div>
 	<hr />
@@ -932,28 +932,6 @@ function location_ajax_filter_callback() {
 		// Merge into full tax query
 		// $tax_query = array_merge($tax_query, $tax_query_region);
     }
-
-	// // Query locations based full tax query
-	// $args = array(
-    //     'post_type' => 'location',
-	// 	'post_status' => 'publish',
-	// 	'orderby' => 'title',
-	// 	'order' => 'ASC',
-    //     'posts_per_page' => -1,
-	// 	'fields' => 'ids',
-	// 	'post__in' => $locations,
-    //     'tax_query' => $tax_query_region
-    // );
-
-	// $title_prov_ids = new WP_Query( $args );
-	
-	// $title_list = array();
-	// while ($title_prov_ids->have_posts()) : $title_prov_ids->the_post();
-	// 	$id = get_the_ID();
-	// 	$title_list[] = get_field('physician_title', $id);
-	// endwhile;
-	
-
  
     $args = array(
         'post_type' => 'location',
@@ -975,11 +953,7 @@ function location_ajax_filter_callback() {
 			include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
         endwhile;
 		echo '<data id="location_ids" data-postids="'. implode(',', $location_ids) .'," data-regions="'. implode(',', $region_list) .',"></data>';
-		// var_dump($tax_query_title);
-		// var_dump($tax_query_region);
-		// var_dump($tax_query);
     } else {
-		//var_dump($args);
         echo '<span class="no-results">Sorry, there are no locations matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
     }
     wp_die();
@@ -1004,6 +978,7 @@ function uamswp_add_trench(){
 	}
 }
 add_action('wp_footer', 'uamswp_add_trench');
+
 // Remove unused / overly agressive scripts
 function uamswp_fad_disable_scripts() {
 	// Add pages Ajax Search is used
@@ -1012,4 +987,5 @@ function uamswp_fad_disable_scripts() {
 		wp_dequeue_script( 'wd-asp-ajaxsearchpro' );
 	}
 }
+
 add_action('wp_enqueue_scripts', 'uamswp_fad_disable_scripts', 100);
