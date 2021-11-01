@@ -2860,7 +2860,7 @@ function get_location_meta($object) {
 	return $data;
 
 }
-add_action('rest_api_init', 'rest_api_location_meta');
+// add_action('rest_api_init', 'rest_api_location_meta');
 
 function get_expertise_meta($object) {
 	$postId = $object['id'];
@@ -3000,7 +3000,7 @@ function get_expertise_meta($object) {
 	return $data;
 
 }
-add_action('rest_api_init', 'rest_api_expertise_meta');
+// add_action('rest_api_init', 'rest_api_expertise_meta');
 
 function get_condition_meta($object) {
 	$postId = $object['id'];
@@ -3124,7 +3124,7 @@ function get_condition_meta($object) {
 	return $data;
 
 }
-add_action('rest_api_init', 'rest_api_condition_meta');
+// add_action('rest_api_init', 'rest_api_condition_meta');
 
 // Add REST API query var filters
 add_filter('rest_query_vars', 'provider_add_rest_query_vars');
