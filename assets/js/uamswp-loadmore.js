@@ -137,8 +137,8 @@ jQuery(function($) {
         if(null != pafForm.find("#provider_title").val() && pafForm.find("#provider_title").val().length !== 0) {
             var title = pafForm.find("#provider_title").val();
         }
-        if(pafForm.find("#providers").val().length !== 0) {
-            var providers = pafForm.find("#providers").val();
+        if(pafForm.find("#providers-ids").val().length !== 0) {
+            var providers = pafForm.find("#providers-ids").val();
         }
 
         // if(pafForm.find("#ppp").val().length !== 0) {
