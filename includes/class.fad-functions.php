@@ -651,7 +651,7 @@ function uamswp_provider_ajax_filter_shortcode( $atts ) {
             </div>
         </form>
 		<?php if( isset($_COOKIE['wp_filter_region']) ) { ?>
-		<p class="ajax-filter-message" id="provider-ajax-filter-message">The providers displayed below have been filtered by region, based on your previous&nbsp;selections.</p>
+		<p class="ajax-filter-message" id="provider-ajax-filter-message">The results below are filtered by region based on your previous selections. View UAMS&nbsp;Health providers in all areas of the state by clicking the "Reset" button&nbsp;above.</p>
 		<?php } ?>
     </div>
 	<hr />
@@ -865,7 +865,7 @@ function uamswp_location_ajax_filter_shortcode( $atts ) {
             </div>
         </form>
 		<?php if( isset($_COOKIE['wp_filter_region']) ) { ?>
-		<p class="ajax-filter-message" id="location-ajax-filter-message">The locations displayed below have been filtered by region, based on your previous&nbsp;selections.</p>
+		<p class="ajax-filter-message" id="location-ajax-filter-message">The results below are filtered by region based on your previous selections. View UAMS&nbsp;Health locations in all areas of the state by clicking the "Reset" button&nbsp;above.</p>
 		<?php } ?>
     </div>
 	<hr />
