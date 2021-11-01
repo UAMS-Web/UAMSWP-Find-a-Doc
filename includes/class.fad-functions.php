@@ -932,28 +932,6 @@ function location_ajax_filter_callback() {
 		// Merge into full tax query
 		// $tax_query = array_merge($tax_query, $tax_query_region);
     }
-
-	// // Query locations based full tax query
-	// $args = array(
-    //     'post_type' => 'location',
-	// 	'post_status' => 'publish',
-	// 	'orderby' => 'title',
-	// 	'order' => 'ASC',
-    //     'posts_per_page' => -1,
-	// 	'fields' => 'ids',
-	// 	'post__in' => $locations,
-    //     'tax_query' => $tax_query_region
-    // );
-
-	// $title_prov_ids = new WP_Query( $args );
-	
-	// $title_list = array();
-	// while ($title_prov_ids->have_posts()) : $title_prov_ids->the_post();
-	// 	$id = get_the_ID();
-	// 	$title_list[] = get_field('physician_title', $id);
-	// endwhile;
-	
-
  
     $args = array(
         'post_type' => 'location',
@@ -975,11 +953,7 @@ function location_ajax_filter_callback() {
 			include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
         endwhile;
 		echo '<data id="location_ids" data-postids="'. implode(',', $location_ids) .'," data-regions="'. implode(',', $region_list) .',"></data>';
-		// var_dump($tax_query_title);
-		// var_dump($tax_query_region);
-		// var_dump($tax_query);
     } else {
-		//var_dump($args);
         echo '<span class="no-results">Sorry, there are no locations matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
     }
     wp_die();
@@ -1004,6 +978,7 @@ function uamswp_add_trench(){
 	}
 }
 add_action('wp_footer', 'uamswp_add_trench');
+
 // Remove unused / overly agressive scripts
 function uamswp_fad_disable_scripts() {
 	// Add pages Ajax Search is used
@@ -1012,4 +987,5 @@ function uamswp_fad_disable_scripts() {
 		wp_dequeue_script( 'wd-asp-ajaxsearchpro' );
 	}
 }
+
 add_action('wp_enqueue_scripts', 'uamswp_fad_disable_scripts', 100);
