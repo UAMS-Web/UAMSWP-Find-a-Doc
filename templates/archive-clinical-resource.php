@@ -35,7 +35,7 @@ get_header();
                     <div class="fwp-filter"><?php echo facetwp_display( 'facet', 'resource_aoe' ); ?></div>
                     <div class="fwp-filter"><?php echo facetwp_display( 'facet', 'resource_conditions' ); ?></div>
                     <div class="fwp-filter"><?php echo facetwp_display( 'facet', 'resource_treatments' ); ?></div>
-                    <button class="btn btn-primary" id="filter-apply" onclick="FWP.refresh();">Apply</button> <button class="btn btn-outline-primary" id="filter-reset" onclick="FWP.reset()">Reset</button>
+                    <button class="btn btn-outline-primary" id="filter-reset" onclick="FWP.reset()">Reset</button>
                 </fieldset>
             </div>
         <!-- <section class="archive-description">
@@ -76,11 +76,6 @@ get_header();
                 $(document).on('facetwp-loaded', function() {
                     if (3 >= FWP.settings.pager.total_rows ) {
                         $('.list-pagination').hide()
-                    }
-                    if (FWP.loaded) {
-                        $('html, body').animate({
-                            scrollTop: $('main').offset().top
-                        }, 500);
                     }
                 });
             })(jQuery);
