@@ -111,4 +111,17 @@ $doctor-list-rows: (
             width: $doctor-card-width;
         }
     }
+    .no-results {
+    }
+}
+.card-list .no-results,
+.card-list-container .ajax-loading {
+    width: $line-length-ideal + em;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: ($grid-gutter-width / 2) 0;
+    font-size: $lead-font-size;
+    font-weight: $lead-font-weight;
+    text-align: center;
 }

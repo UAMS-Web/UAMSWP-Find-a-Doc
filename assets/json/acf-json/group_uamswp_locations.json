@@ -3486,7 +3486,7 @@
             "name": "physician_locations",
             "type": "relationship",
             "label": "Providers",
-            "instructions": "The providers will display in alphabetical order. If there are nine or fewer, they will all be visible when the page loads. If there are more than nine, six will display before prompting the user to load more.",
+            "instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {

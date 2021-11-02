@@ -728,6 +728,18 @@
   width: 255px;
 }
 
+.card-list-container .ajax-loading,
+.card-list .no-results {
+  width: 28.4375em;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px 0;
+  font-size: 1.40625rem;
+  font-weight: 300;
+  text-align: center;
+}
+
 .conditions-treatments .list-legend {
   margin-top: 0;
 }
@@ -1214,6 +1226,53 @@
   box-shadow: 0 0 0 .2rem rgba(157,34,53,.25)!important;
 }
 
+.ajax-filter select.form-control {
+  font-weight: 300;
+}
+
+.ajax-filter select.form-control option:disabled,
+.ajax-filter select.form-control option:invalid,
+.ajax-filter select.form-control option[disabled] {
+  color: #5d5b5c;
+}
+
+.ajax-filter .ajax-filter-message {
+  width: 35em;
+  max-width: 100%;
+  margin: 2rem auto;
+  font-weight: 500;
+  text-align: center;
+}
+
+#providers.overflow:not(.expanded) .card-list-container {
+  overflow: hidden;
+  max-height: 36.36088rem;
+}
+
+#providers.overflow:not(.expanded) .ajax-filter-load-more {
+  display: flex;
+  justify-content: center;
+  padding-top: 1.0625rem;
+  margin-top: -4.08713rem;
+  position: relative;
+  z-index: 1;
+  background-image: linear-gradient(180deg,hsla(0,0%,100%,0) 0,#fff 75%);
+  background-repeat: repeat-x;
+}
+
+#providers.overflow:not(.expanded) .ajax-filter-load-more .btn {
+  box-shadow: 0 0 1rem 1rem hsla(0,0%,100%,.5);
+}
+
+#providers .card-list-container {
+  max-height: 999999999rem;
+  transition: max-height 1s cubic-bezier(0,1,0,1);
+}
+
+#providers .ajax-filter-load-more {
+  display: none;
+}
+
 .mychart-scheduling-module .module-body {
   width: 700px;
 }
@@ -1421,6 +1480,15 @@ html.poppedOut {
 
   .parking-map-container {
     margin-top: 3rem;
+  }
+
+  #providers.overflow:not(.expanded) .card-list-container {
+    max-height: 37.36438rem;
+  }
+
+  #providers.overflow:not(.expanded) .ajax-filter-load-more {
+    margin-top: -5.09063rem;
+    padding-top: 2.0625rem;
   }
 }
 
