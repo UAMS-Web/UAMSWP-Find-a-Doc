@@ -1107,7 +1107,7 @@ while ( have_posts() ) : the_post();
                 // $treatment_schema .= ']';
             } // endif
         
-        if ( $show_aoe_section ) { ?>
+        if ( $show_aoe_section && !empty($expertises) ) { ?>
             <section class="uams-module expertise-list bg-auto" id="expertise">
                 <div class="container-fluid">
                     <div class="row">
@@ -1129,7 +1129,7 @@ while ( have_posts() ) : the_post();
             </section>
         <?php } // endif ?>
         <?php 
-        if( $show_locations_section ): ?>
+        if( $show_locations_section && !empty($locations) ): ?>
         <section class="uams-module location-list bg-auto" id="locations">
             <div class="container-fluid">
                 <div class="row">

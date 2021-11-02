@@ -13,10 +13,12 @@
 	$i = 1;
 	if ( $degrees ) {
 		foreach( $degrees as $degree ):
-			$degree_name = get_term( $degree, 'degree');
-			$degree_list .= $degree_name->name;
-			if( count($degrees) > $i ) {
-				$degree_list .= ", ";
+			if( is_object($degree) ) {
+				$degree_name = get_term( $degree, 'degree');
+				$degree_list .= $degree_name->name;
+				if( count($degrees) > $i ) {
+					$degree_list .= ", ";
+				}
 			}
 			$i++;
 		endforeach; 
