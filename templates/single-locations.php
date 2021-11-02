@@ -1615,48 +1615,6 @@ while ( have_posts() ) : the_post(); ?>
 	// Begin Providers Section
 	if( $show_providers_section ) { 
 
-		// Get available regions - All available, since no titles set on initial load
-		$region_IDs = array();
-		while ($physicians_query->have_posts()) : $physicians_query->the_post();
-			$id = get_the_ID();
-			$region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
-		endwhile;
-		$region_IDs = array_unique($region_IDs);
-		$region_list = array();
-		foreach ($region_IDs as $region_ID){
-			$region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
-		}
-
-		if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
-
-			$tax_query = array('relation' => 'AND');
-	
-			$provider_region = '';
-			if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
-				$provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
-			}
-	
-			$tax_query = array();
-			if(!empty($provider_region)) {
-				$tax_query[] = array(
-					'taxonomy' => 'region',
-					'field' => 'slug',
-					'terms' => $provider_region
-				);
-			}
-			$args = array(
-				"post_type" => "provider",
-				"post_status" => "publish",
-				"posts_per_page" => -1,
-				"orderby" => "title",
-				"order" => "ASC",
-				"fields" => "ids",
-				"post__in" => $physicians,
-				'tax_query' => $tax_query
-			);
-			$physicians_query = New WP_Query( $args );
-		}
-
 		$provider_count = count($physicians_query->posts);
 		?>
 		<section class="uams-module bg-auto" id="providers">
@@ -1664,7 +1622,7 @@ while ( have_posts() ) : the_post(); ?>
 				<div class="row">
 					<div class="col-12">
 						<h2 class="module-title"><span class="title">Providers at <?php echo $page_title; ?></span></h2>
-						<?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'" region="hide"]' ); ?>
+						<?php echo do_shortcode( '[uamswp_provider_title_ajax_filter providers="'. implode(",", $provider_ids) .'"]' ); ?>
 						<div class="card-list-container">
 							<div class="card-list card-list-doctors">
 								<?php 
@@ -1675,7 +1633,7 @@ while ( have_posts() ) : the_post(); ?>
                                             include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
                                             $title_list[] = get_field('physician_title', $id);
                                         endwhile;
-                                        echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'," data-regions="'. implode(',', $region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
+                                        echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
 									} else {
 										echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
 									}
@@ -1683,21 +1641,12 @@ while ( have_posts() ) : the_post(); ?>
                                 ?>
 							</div>
 						</div>
-                        <!-- <div class="more" style="<?php //echo ($postsPerPage < $provider_count) ? '' : 'display:none;' ; ?>">
-                            <button class="loadmore btn btn-primary" data-ppp="<?php //echo $postsPerPage; ?>" aria-label="Load more providers">Load More</button>
-                        </div> -->
 						<div class="ajax-filter-load-more">
 							<button class="btn btn-lg btn-primary" aria-label="Load all providers">Load All</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			<?php if ( isset($_GET['_filter_region']) ) { ?>
-                <script type="text/javascript">
-                    // Set cookie to expire at end of session
-                    document.cookie = "wp_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; path=/; domain="+window.location.hostname;
-                </script>
-            <?php } ?>
 		</section>
 	<?php } // endif
 	// End Providers Section
