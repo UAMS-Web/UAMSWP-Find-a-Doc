@@ -5,7 +5,7 @@ Plugin URI: -
 Description: Find-a-doc plugin for uamshealth.com
 Author: uams, Todd McKee, MEd
 Author URI: http://www.uams.edu/
-Version: 1.3.8
+Version: 1.3.9
 */
 
 // If this file is called directly, abort.
