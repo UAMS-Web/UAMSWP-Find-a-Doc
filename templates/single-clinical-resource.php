@@ -18,6 +18,17 @@ function uamswp_fad_title($html) {
 	return $html;
 }
 add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
+$syndicated = get_field('clinical_resource_syndicated');
+$syndication_url = get_field('clinical_resource_syndication_url');
+function uamswp_fad_canonical($html) {
+    global $syndicated;
+    global $syndication_url;
+	if ( $syndicated && !empty($syndication_url) ) {
+	$html = '<link rel="canonical" href="'.htmlspecialchars(urldecode($syndication_url)).'" />'; 
+    }
+	return $html;
+}
+add_filter('seopress_titles_canonical','uamswp_fad_canonical');
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
 // Removes entry meta from entry footer incl. markup.
@@ -303,7 +314,7 @@ function uamswp_resource_physicians() {
                     <div class="col-12">
                         <h2 class="module-title"><span class="title">Related Providers</span></h2>
                         <div class="card-list-container">
-                            <div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
+                            <div class="card-list card-list-doctors">
                                 <?php 
                                     while ($physicians_query->have_posts()) : $physicians_query->the_post();
                                         $id = get_the_ID();
@@ -313,11 +324,14 @@ function uamswp_resource_physicians() {
                                 ?>
                             </div>
                         </div>
-                        <?php if ($postsPerPage !== -1) { ?>
+                        <!-- <?php if ($postsPerPage !== -1) { ?>
                         <div class="more">
                             <button class="loadmore btn btn-primary" data-posttype="post" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more providers">Load More</button>
                         </div>
-                        <?php } ?>
+                        <?php } ?> -->
+                        <div class="ajax-filter-load-more">
+                            <button class="btn btn-lg btn-primary" aria-label="Load all providers">Load All</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -513,14 +527,14 @@ function uamswp_resource_appointment() {
     
     if ( $show_appointment_section ) {
         $appointment_location_url = '/location/';
-        $appointment_location_label = 'View a list of UAMS Health locations';
+        //$appointment_location_label = 'View a list of UAMS Health locations';
         ?>
         <section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
                         <h2>Make an Appointment</h2>
-                        <p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>" aria-label="<?php echo $appointment_location_label; ?>" data-itemtitle="Contact a clinic directly">contacting a clinic directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
+                        <p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>" data-itemtitle="Contact a clinic directly">contacting a clinic directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
                     </div>
                 </div>
             </div>

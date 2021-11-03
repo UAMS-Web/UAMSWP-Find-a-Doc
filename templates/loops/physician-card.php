@@ -13,10 +13,12 @@
 	$i = 1;
 	if ( $degrees ) {
 		foreach( $degrees as $degree ):
-			$degree_name = get_term( $degree, 'degree');
-			$degree_list .= $degree_name->name;
-			if( count($degrees) > $i ) {
-				$degree_list .= ", ";
+			if( is_object($degree) ) {
+				$degree_name = get_term( $degree, 'degree');
+				$degree_list .= $degree_name->name;
+				if( count($degrees) > $i ) {
+					$degree_list .= ", ";
+				}
 			}
 			$i++;
 		endforeach; 
@@ -38,12 +40,12 @@
 			<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
 				<source srcset="<?php echo image_sizer(get_post_thumbnail_id($id), 253, 337, 'center', 'center'); ?>"
 					media="(min-width: 1px)">
-				<img src="<?php echo image_sizer(get_post_thumbnail_id(), 253, 337, 'center', 'center'); ?>" itemprop="image" class="card-img-top" alt="<?php echo $full_name_attr; ?>" />
+				<img src="<?php echo image_sizer(get_post_thumbnail_id(), 253, 337, 'center', 'center'); ?>" itemprop="image" class="card-img-top" alt="<?php echo $full_name_attr; ?>" loading="lazy" />
 			<?php } elseif ( has_post_thumbnail() ) { ?>
-				<?php echo get_the_post_thumbnail( $id, 'medium',  array( 'itemprop' => 'image', 'class' => 'card-img-top' ) ); ?>
+				<?php echo get_the_post_thumbnail( $id, 'medium',  array( 'itemprop' => 'image', 'class' => 'card-img-top', 'loading' => 'lazy' ) ); ?>
 			<?php } else { ?>
 				<source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.svg" media="(min-width: 1px)">
-				<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg" alt="" role="presentation" />
+				<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg" alt="" role="presentation" loading="lazy" />
 			<?php } ?>
 		</picture>
 		<div class="card-body">

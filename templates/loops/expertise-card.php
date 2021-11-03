@@ -31,7 +31,7 @@
         $parent_url = get_permalink( $parent_id );
     }
 
-    $expertise_label = 'Go to the Area of Expertise page for' . $expertise_title_attr;
+    $expertise_label = 'View Area of Expertise page for' . $expertise_title_attr;
     
     $expertise_excerpt = get_the_excerpt($id) ? get_the_excerpt($id) : wp_strip_all_tags( get_the_content($id) );
     $expertise_excerpt_len = strlen($expertise_excerpt);
@@ -43,11 +43,11 @@
 <div class="card">
     <a href="<?php echo get_permalink($id); ?>" target="_self" aria-label="<?php echo $expertise_label; ?>" data-categorytitle="Photo" data-itemtitle="<?php echo $expertise_title_attr; ?>">
         <?php if ( has_post_thumbnail($id) ) { ?>
-        <?php echo get_the_post_thumbnail($id, 'aspect-16-9-small', ['class' => 'card-img-top']); ?>
+        <?php echo get_the_post_thumbnail($id, 'aspect-16-9-small', ['class' => 'card-img-top', 'loading' => 'lazy']); ?>
         <?php } else { ?>
         <picture>
             <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
-            <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" class="card-img-top" />
+            <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" class="card-img-top" loading="lazy" />
         </picture>
         <?php } ?>
     </a>

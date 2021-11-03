@@ -2133,7 +2133,27 @@ function add_theme_caps() {
 	$role->add_cap( 'edit_others_expertises');
 	$role->add_cap( 'publish_expertises');
 	$role->add_cap( 'read_private_expertises');
-
+	$role->add_cap( 'edit_condition');
+	$role->add_cap( 'read_condition');
+	$role->add_cap( 'delete_condition');
+	$role->add_cap( 'edit_conditions');
+	$role->add_cap( 'edit_others_conditions');
+	$role->add_cap( 'publish_conditions');
+	$role->add_cap( 'read_private_conditions');
+	$role->add_cap( 'edit_treatment');
+	$role->add_cap( 'read_treatment');
+	$role->add_cap( 'delete_treatment');
+	$role->add_cap( 'edit_treatments');
+	$role->add_cap( 'edit_others_treatments');
+	$role->add_cap( 'publish_treatments');
+	$role->add_cap( 'read_private_treatments');
+	$role->add_cap( 'edit_clinical-resource');
+	$role->add_cap( 'read_clinical-resource');
+	$role->add_cap( 'delete_clinical-resource');
+	$role->add_cap( 'edit_clinical-resources');
+	$role->add_cap( 'edit_others_clinical-resources');
+	$role->add_cap( 'publish_clinical-resources');
+	$role->add_cap( 'read_private_clinical-resources');
 }
 add_action( 'admin_init', 'add_theme_caps');
 

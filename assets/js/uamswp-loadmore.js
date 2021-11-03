@@ -1,85 +1,45 @@
-jQuery(function($) {
-    var page = 2; // Default to start on page 2
-    var $loader = $('.loadmore');
-    var ppp = ("" !== $loader.data('ppp')) ? $loader.data('ppp') : 6; // Set default value
-    var postcount = ("" !== $loader.data('postcount')) ? $loader.data('postcount') : 0; // Break 
-    var type = ("" !== $loader.data('type')) ? $loader.data('type') : 'post';
-    var postids = ("" !== $loader.data('postids')) ? $loader.data('postids') : 0; // Post
-    var tax = ("" !== $loader.data('tax')) ? $loader.data('tax') : 0; // Taxonomy
-    var slug = ("" !== $loader.data('slug')) ? $loader.data('slug') : 0; // Taxonomy
+// -- Used in title only & region filter -- //
+// -- Moved inside each file to avoid errors -- //
 
-    $('body').on('click', '.loadmore', function() {
-        
+// jQuery(function($) {
+//     $(document).ready(ajaxHideContent);
+//     $(window).resize(ajaxHideContent);
+//     function ajaxHideContent(){
+//         // Find the height of the relevant elements
+//         var $providerLoadMore = $('#providers .ajax-filter-load-more').outerHeight();
+//         var $providerCardHeight = $('#providers .card:first-child').outerHeight() + 15;
+//         var $providerCardListHeight = $('#providers .card-list').outerHeight() - 15;
+//         // console.log($providerCardListHeight);
+//         var $providerHideContentHeight = $providerCardHeight + ($providerLoadMore * 0.9);
 
-        var data = {
-            'action': 'load_posts_by_ajax',
-            'page': page,
-            'security': uamswp_loadmore.security,
-            'postid': postids,
-            'ppp': ppp,
-            'postcount': postcount,
-            'posttype': type,
-            'tax': tax,
-            'slug': slug
-        };
-
-        // console.log(page);
-
-        // console.log(data);
-
-        // docs = postids.split(",");
-
-        max_pages = postcount / ppp; // Number of posts per page
-
-        // console.log(max_pages);
- 
-        // $.post(blog.ajaxurl, data, function(response) {
-        //     if(response != '') {
-        //         $('.card-list-doctors').append(response);
-        //         if ( page >= max_pages )
-        //             $('.loadmore').hide();
-        //         page++;
-        //     } else {
-        //         $('.loadmore').hide();
-        //     }
-        // });
-
-        $.ajax({
-            url : uamswp_loadmore.ajaxurl,
-            data : data,
-            type : 'POST',
-            datatype : 'html',
-            beforeSend : function ( xhr ) {
-				$('.loadmore').text('Loading...'); // change the button text, you can also add a preloader image
-			},
-			success : function( data ){
-                // console.log(data);
-				if( data ) { 
-					$('.loadmore').text( 'Load More' ); // insert new posts
-                    $('.card-list-doctors').append(data);
-					if ( page >= max_pages ) {
-                        // button.remove(); // if last page, remove the button
-                        $('#providers .more').hide();
-                        $('.loadmore').hide();
-                    }
-                    page++;
-					// you can also fire the "post-load" event here if you use a plugin that requires it
-					// $( document.body ).trigger( 'post-load' );
-				} else {
-                    $('#providers .more').hide();
-                    $('.loadmore').hide();
-					// button.remove(); // if no data, remove the button as well
-				}
-            },
-            error : function (jqXHR, textStatus, errorThrown) {
-				$loader.html($.parseJSON(jqXHR.responseText) + ' :: ' + textStatus + ' :: ' + errorThrown);
-				console.log(jqXHR);
-            },
-            // error: function(errorThrown){
-            //     alert(errorThrown);
-            //     alert("There is an error with AJAX!");
-            // }
-
-        });
-    });
-});
+//         // Set the max-height of the card list container based on that math
+//         $('#providers.hideContent .card-list-container').css("max-height", $providerHideContentHeight);
+//         // Add / remove overflow class based on math
+//         if ($providerCardListHeight > $providerCardHeight) {
+//             $("#providers").addClass("overflow");
+//         } else {
+//             $("#providers").removeClass("overflow");
+//         }
+//     }
+// });
+// jQuery(document).ready(function($){
+//     // Make the Load More button do things
+//     $(".ajax-filter-load-more button").on("click", function() {
+//         var $providerCardListHeight = $('#providers .card-list').outerHeight() - 15;
+//         // Transition the container
+//         $("#providers .card-list-container").css("max-height", $providerCardListHeight);
+//         $("#providers").addClass("expanded");
+//         //$("#providers .card-list-container").removeAttr( "style" );
+//         // Set max-height to none and remove transition after transition
+//         setTimeout(function() {
+//             // $("#providers.expanded .card-list-container").css("max-height", "none").css("transition", "none");
+//             $("#providers.expanded .card-list-container").css("max-height", "none");
+//         }, 1001);
+//     });
+//     if( $('#providers').length ) {
+//         // Set the load more background colors based on the section's background color
+//         var $ajaxSectionBGColor = $( "#providers" ).css( "background-color" ).replace("rgb(", "").replace(")", '');
+//         $( "#providers .ajax-filter-load-more" ).css( "background-image", "linear-gradient(180deg, rgba(" + $ajaxSectionBGColor + ",0) 0%, rgba(" + $ajaxSectionBGColor + ",1) 75%)" );
+//         $( "#providers .ajax-filter-load-more .btn" ).css( "box-shadow", "0 0 1rem 1rem rgb(" + $ajaxSectionBGColor + ",0.5)" );
+//     }
+// });

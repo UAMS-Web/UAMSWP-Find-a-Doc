@@ -25,13 +25,13 @@ function fwp_disable_auto_refresh() {
     if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) || is_post_type_archive( 'clinical-resource' ) ) {
 	?>
 	<script>
-	(function($) {
-		$(function() {
-			if ('undefined' !== typeof FWP) {
-				FWP.auto_refresh = false;
-			}
-		});
-	})(jQuery);
+	// (function($) {
+	// 	$(function() {
+	// 		if ('undefined' !== typeof FWP) {
+	// 			FWP.auto_refresh = false;
+	// 		}
+	// 	});
+	// })(jQuery);
     (function($) {
         $(document).on('change', '.facetwp-sort .facetwp-sort-select', function() {
             FWP.extras.sort = $(this).val();
@@ -53,7 +53,7 @@ function fwp_facet_scripts() {
 	if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) || is_post_type_archive( 'clinical-resource' ) ) { ?>
         <script>
             (function($) {
-                $(document).on('facetwp-loaded', function() {
+                document.addEventListener('facetwp-loaded', function() {
                     $('.facetwp-facet').each(function() {
                         var facet_name = $(this).attr('data-name');
                         var facet_label = FWP.settings.labels[facet_name];
@@ -62,19 +62,15 @@ function fwp_facet_scripts() {
                         }
                     });
                     $('.fs-dropdown .fs-search input').each(function() {
-                        $(this).attr('aria-labelledby', "facet_" + $(this).closest('.facetwp-facet').attr('data-name') );
+                        $(this).attr('aria-label', "Search");
                     });
                     $('.facetwp-sort-select, .facetwp-dropdown').each(function() {
                         $(this).attr('aria-labelledby', "facet_" + $(this).closest('.facetwp-facet').attr('data-name') );
                     });
                     $('select.facetwp-sort-select').each(function() {
                         $(this).attr('title', "Choose sort order" );
+                        $(this).removeAttr('aria-labelledby');
                     });
-                    if (FWP.loaded) {
-                        $('html, body').animate({
-                            scrollTop: $('main').offset().top
-                        }, 500);
-                    }
                 });
             })(jQuery);
         </script>
@@ -85,7 +81,7 @@ function fwp_facet_scripts() {
 ?>
 <script>
 (function($) {
-    $(document).on('facetwp-loaded', function() {
+    document.addEventListener('facetwp-loaded', function() {
         $.each(FWP.settings.num_choices, function(key, val) {
             var $parent = $('.facetwp-facet-' + key).closest('.fwp-filter');
             (0 === val) ? $parent.hide() : $parent.show();
@@ -114,6 +110,32 @@ function fwp_facet_scripts() {
 				$('.condition-filter').hide();
 			}
         }
+        /*
+        After FacetWP reloads, store any updates into a cookie
+        */
+        // var date = new Date();
+        var facets = window.location.search;
+        // date.setTime(date.getTime()+(24*60*60*1000));
+        // document.cookie = "facetdata="+facets+"; expires="+date.toGMTString()+"; path=/";
+        const params = new URLSearchParams(facets);
+        locationregion = params.get("_location_region");
+        providerregion = params.get("_provider_region");
+        var region = '';
+        // Is location region set
+        if (null != locationregion && '' != locationregion) {
+            region = locationregion;
+        }
+        // Is provider region set
+        if (null != providerregion && '' != providerregion) {
+            region = providerregion;
+        }
+        // If region is set, then write the cookie
+        // console.log(region);
+        if (region) {
+            document.cookie = "wp_filter_region="+region+"; path=/; domain="+window.location.hostname;
+        } else {
+            document.cookie = 'wp_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
+        }
     });
     $(document).on('facetwp-refresh', function() {
         if (! FWP.loaded) {
@@ -134,6 +156,44 @@ function fwp_facet_scripts() {
             	FWP.set_hash = function() { /* empty function */ } // Exclude hash function
             	$('.condition-filter').hide();
             }
+            /*
+            When FacetWP first initializes, look for the "facetdata" cookie
+            If it exists, set window.location.search= facetdata
+            */
+            var facets = window.location.search;
+            const params = new URLSearchParams(facets);
+            var region = '';
+            var regionname = '';
+        <?php if (is_post_type_archive( 'location' )) { ?>
+            locationregion = params.get('_location_region');
+            if (null != locationregion && '' != locationregion) {
+                region = locationregion;
+            }
+            regionname = "_location_region";
+        <?php } elseif (is_post_type_archive( 'provider' )) { ?>
+            providerregion = params.get('_provider_region');
+            if (null != providerregion && '' != providerregion) {
+                region = providerregion;
+            }
+            regionname = "_provider_region";
+        <?php } ?>
+            var regiondata = readCookie('wp_filter_region');
+            console.log(window.location.hostname);
+            // No qs and cookie has value
+            if ( !region && null != regiondata && '' != regiondata ) {
+                document.cookie = 'wp_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
+                // window.location.search = '_location_region='+regiondata;
+                params.set(regionname, regiondata);
+                // window.history.replaceState({}, '', `${location.pathname}?${params}`)
+                window.location.search = `?${params}`;
+            }
+            // QS & no location set 
+            if ( facets && region && regiondata && region != regiondata ) {
+                document.cookie = 'wp_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
+                // window.location.search = '_location_region='+regiondata;
+                // params.set('_location_region', regiondata);
+                // window.location.search = `?${params}`;
+            }
         }
     });
 	$(function() {
@@ -151,8 +211,21 @@ function fwp_facet_scripts() {
         if ('' !== $(this).attr('data-id')) {
             FWP.frozen_facets[facet_name] = 'soft';
         }
-        // FWP.refresh();
+        FWP.refresh();
     });
+    /*
+    Cookie handler
+    */
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
 })(jQuery);
 </script>
 <?php
@@ -160,7 +233,7 @@ function fwp_facet_scripts() {
         ?>
 <script>
 (function($) {
-    $(document).on('facetwp-loaded', function() {
+   document.addEventListener('facetwp-loaded', function() {
         $('.facetwp-facet').each(function() {
             var facet_name = $(this).attr('data-name');
             var facet_label = FWP.settings.labels[facet_name];
