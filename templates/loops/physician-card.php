@@ -8,7 +8,7 @@
      */
 ?>
 <?php
-	$degrees = get_field('physician_degree', $post->ID);
+	$degrees = get_field('physician_degree', $id);
 	$degree_list = '';
 	$i = 1;
 	if ( $degrees ) {
