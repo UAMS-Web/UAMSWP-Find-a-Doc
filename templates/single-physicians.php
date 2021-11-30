@@ -114,13 +114,13 @@ if( have_rows('remove_ontology_criteria', 'option') ):
     while( have_rows('remove_ontology_criteria', 'option') ): the_row();
         $remove_region = get_sub_field('remove_regions', 'option');
         $remove_service_line = get_sub_field('remove_service_lines', 'option');
-        if ( (!empty($remove_region) && in_array($provider_region, $remove_region)) && empty($remove_service_line) ) { 
+        if ( (!empty($remove_region) && in_array(implode('',$provider_region), $remove_region)) && empty($remove_service_line) ) { 
             $hide_medical_ontology = true;
             break;
         } elseif ( empty($remove_region) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
             $hide_medical_ontology = true;
             break;
-        } elseif( (!empty($remove_region) && in_array($provider_region, $remove_region)) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
+        } elseif( (!empty($remove_region) && in_array(implode('',$provider_region), $remove_region)) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
             $hide_medical_ontology = true;
             break;
         }
@@ -1107,7 +1107,7 @@ while ( have_posts() ) : the_post();
                 // $treatment_schema .= ']';
             } // endif
         
-        if ( $show_aoe_section ) { ?>
+        if ( $show_aoe_section && !empty($expertises) ) { ?>
             <section class="uams-module expertise-list bg-auto" id="expertise">
                 <div class="container-fluid">
                     <div class="row">
@@ -1129,7 +1129,7 @@ while ( have_posts() ) : the_post();
             </section>
         <?php } // endif ?>
         <?php 
-        if( $show_locations_section ): ?>
+        if( $show_locations_section && !empty($locations) ): ?>
         <section class="uams-module location-list bg-auto" id="locations">
             <div class="container-fluid">
                 <div class="row">

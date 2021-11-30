@@ -53,7 +53,7 @@ function fwp_facet_scripts() {
 	if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) || is_post_type_archive( 'clinical-resource' ) ) { ?>
         <script>
             (function($) {
-                $(document).on('facetwp-loaded', function() {
+                document.addEventListener('facetwp-loaded', function() {
                     $('.facetwp-facet').each(function() {
                         var facet_name = $(this).attr('data-name');
                         var facet_label = FWP.settings.labels[facet_name];
@@ -62,19 +62,15 @@ function fwp_facet_scripts() {
                         }
                     });
                     $('.fs-dropdown .fs-search input').each(function() {
-                        $(this).attr('aria-labelledby', "facet_" + $(this).closest('.facetwp-facet').attr('data-name') );
+                        $(this).attr('aria-label', "Search");
                     });
                     $('.facetwp-sort-select, .facetwp-dropdown').each(function() {
                         $(this).attr('aria-labelledby', "facet_" + $(this).closest('.facetwp-facet').attr('data-name') );
                     });
                     $('select.facetwp-sort-select').each(function() {
                         $(this).attr('title', "Choose sort order" );
+                        $(this).removeAttr('aria-labelledby');
                     });
-                    // if (FWP.loaded) {
-                    //     $('html, body').animate({
-                    //         scrollTop: $('main').offset().top
-                    //     }, 500);
-                    // }
                 });
             })(jQuery);
         </script>
@@ -85,7 +81,7 @@ function fwp_facet_scripts() {
 ?>
 <script>
 (function($) {
-    $(document).on('facetwp-loaded', function() {
+    document.addEventListener('facetwp-loaded', function() {
         $.each(FWP.settings.num_choices, function(key, val) {
             var $parent = $('.facetwp-facet-' + key).closest('.fwp-filter');
             (0 === val) ? $parent.hide() : $parent.show();
@@ -237,7 +233,7 @@ function fwp_facet_scripts() {
         ?>
 <script>
 (function($) {
-    $(document).on('facetwp-loaded', function() {
+   document.addEventListener('facetwp-loaded', function() {
         $('.facetwp-facet').each(function() {
             var facet_name = $(this).attr('data-name');
             var facet_label = FWP.settings.labels[facet_name];
