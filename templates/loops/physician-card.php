@@ -8,13 +8,13 @@
      */
 ?>
 <?php
-	$degrees = get_field('physician_degree', $post->ID);
+	$degrees = get_field('physician_degree', $id);
 	$degree_list = '';
 	$i = 1;
 	if ( $degrees ) {
 		foreach( $degrees as $degree ):
-			if( is_object($degree) ) {
-				$degree_name = get_term( $degree, 'degree');
+			$degree_name = get_term( $degree, 'degree');
+			if( is_object($degree_name) ) {
 				$degree_list .= $degree_name->name;
 				if( count($degrees) > $i ) {
 					$degree_list .= ", ";
