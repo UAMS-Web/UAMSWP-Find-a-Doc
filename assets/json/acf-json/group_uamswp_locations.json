@@ -3158,7 +3158,7 @@
             "name": "location_scheduling_title",
             "type": "text",
             "label": "Appointment Section Title (Optional)",
-            "instructions": "If you do not define a value, \"Schedule an Appointment\" will be used.",
+            "instructions": "If you do not define a value, \"Schedule an Appointment\" will be used. If you set this value, use a short descriptive phrase. Do not use the name of a condition or treatment.",
             "required": 0,
             "conditional_logic": [
                 [
