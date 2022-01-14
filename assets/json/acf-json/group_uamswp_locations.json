@@ -3180,33 +3180,24 @@
             "append": "",
             "maxlength": ""
         },
-		"field_location_scheduling_intro": {
-			"key": "field_location_scheduling_intro",
-			"label": "Appointment Section Introduction",
-			"name": "location_scheduling_intro",
-			"type": "wysiwyg",
-			"instructions": "Optional paragraph to precede the scheduling widget where you can explain what is being scheduled. Keep it brief, limiting it to one or two sentences in a single paragraph.",
-			"required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_scheduling_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
+        "field_location_scheduling_intro": {
+            "key": "field_location_scheduling_intro",
+            "name": "location_scheduling_intro",
+            "type": "textarea",
+            "label": "Appointment Section Introduction",
+            "instructions": "Optional paragraph to precede the scheduling widget where you can provide brief information about this MyChart open scheduling widget. 221 character limit.",
+            "required": 0,
+            "conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
 				"id": ""
             },
-			"acfe_permissions": "",
-			"default_value": "",
-			"tabs": "all",
-			"toolbar": "basic",
-			"media_upload": 0,
-			"delay": 0
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": 221,
+            "rows": 3,
+            "new_lines": ""
         },
 		"field_location_scheduling_fallback": {
 			"key": "field_location_scheduling_fallback",
