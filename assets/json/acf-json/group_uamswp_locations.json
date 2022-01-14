@@ -3213,7 +3213,7 @@
 			"label": "Fallback Information",
 			"name": "location_scheduling_fallback",
 			"type": "wysiwyg",
-			"instructions": "Optional paragraph to follow the scheduling widget that explains an alternative to using the scheduling widget.",
+			"instructions": "Optional paragraph to follow the scheduling widget where you can present an alternative to using the scheduling widget. Keep it brief, limiting it to one or two sentences in a single paragraph.",
 			"required": 0,
             "conditional_logic": [
                 [
