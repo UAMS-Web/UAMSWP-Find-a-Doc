@@ -419,6 +419,9 @@ while ( have_posts() ) : the_post(); ?>
 		$location_scheduling_ser = get_field('location_scheduling_ser');
 		$location_scheduling_dep = get_field('location_scheduling_dep');
 		$location_scheduling_vt = get_field('location_scheduling_vt');
+		$location_scheduling_title = get_field('location_scheduling_title');
+		$location_scheduling_title = ( isset($location_scheduling_title) && !empty($location_scheduling_title) ) ? $location_scheduling_title : 'Schedule an Appointment Online';
+		$location_scheduling_intro = get_field('location_scheduling_intro');
 		$location_scheduling_fallback = get_field('location_scheduling_fallback');
 
 		if ( $mychart_scheduling_query_system && $location_scheduling_query ) {
@@ -1092,7 +1095,7 @@ while ( have_posts() ) : the_post(); ?>
 					<?php } ?>
 					<?php if ( $show_mychart_scheduling_section ) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#scheduling" title="Jump to the section of this page about scheduling an appointment in MyChart">Schedule an Appointment</a>
+							<a class="nav-link" href="#scheduling" title="Jump to the section of this page about scheduling an appointment in MyChart"><?php echo $location_scheduling_title; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ( $show_telemed_section ) { ?>
@@ -1363,7 +1366,12 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<h2 class="module-title">Schedule an Appointment</h2>
+						<h2 class="module-title"><?php echo $location_scheduling_title; ?></h2>
+						<?php if ( $location_scheduling_intro && !empty($location_scheduling_intro) ) { ?>
+							<p class="note">
+								<?php echo $location_scheduling_intro; ?>
+							</p>
+						<?php } ?>
 						<div class="module-body">
 							<div id="scheduleContainer">
 								<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
