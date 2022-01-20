@@ -3072,6 +3072,52 @@
             "ui_on_text": "",
             "ui_off_text": ""
         },
+        "field_location_scheduling_title": {
+            "key": "field_location_scheduling_title",
+            "name": "location_scheduling_title",
+            "type": "text",
+            "label": "Appointment Section Title (Optional)",
+            "instructions": "If you set this value, use a very short phrase that makes the purpose of this schedule clear to the user. Do not use the name of a condition or treatment. If you do not define a value, \"Schedule an Appointment Online\" will be used.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_scheduling_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "Schedule an Appointment Online",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        "field_location_scheduling_intro": {
+            "key": "field_location_scheduling_intro",
+            "name": "location_scheduling_intro",
+            "type": "textarea",
+            "label": "Appointment Section Introduction",
+            "instructions": "Optional paragraph to precede the scheduling widget where you can provide brief information about this MyChart open scheduling widget. 221 character limit.",
+            "required": 0,
+            "conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": 221,
+            "rows": 3,
+            "new_lines": ""
+        },
         "field_location_scheduling_ser": {
             "key": "field_location_scheduling_ser",
             "name": "location_scheduling_ser",
@@ -3152,52 +3198,6 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
-        },
-        "field_location_scheduling_title": {
-            "key": "field_location_scheduling_title",
-            "name": "location_scheduling_title",
-            "type": "text",
-            "label": "Appointment Section Title (Optional)",
-            "instructions": "If you set this value, use a very short phrase that makes the purpose of this schedule clear to the user. Do not use the name of a condition or treatment. If you do not define a value, \"Schedule an Appointment Online\" will be used.",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_scheduling_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "Schedule an Appointment Online",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        "field_location_scheduling_intro": {
-            "key": "field_location_scheduling_intro",
-            "name": "location_scheduling_intro",
-            "type": "textarea",
-            "label": "Appointment Section Introduction",
-            "instructions": "Optional paragraph to precede the scheduling widget where you can provide brief information about this MyChart open scheduling widget. 221 character limit.",
-            "required": 0,
-            "conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "maxlength": 221,
-            "rows": 3,
-            "new_lines": ""
         },
 		"field_location_scheduling_fallback": {
 			"key": "field_location_scheduling_fallback",
