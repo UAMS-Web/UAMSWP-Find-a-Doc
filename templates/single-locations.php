@@ -1109,7 +1109,7 @@ while ( have_posts() ) : the_post(); ?>
 					<?php } ?>
 					<?php if ( $show_mychart_scheduling_section ) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#scheduling" title="Jump to the section of this page about scheduling an appointment in MyChart">Scheduling<?php //echo $location_scheduling_title; ?></a>
+							<a class="nav-link" href="#scheduling" title="Jump to the section of this page about scheduling an appointment in MyChart"><?php echo $location_scheduling_title; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ( $show_telemed_section ) { ?>
