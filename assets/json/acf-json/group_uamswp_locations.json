@@ -3237,8 +3237,8 @@
                     "name": "location_scheduling_ser",
                     "type": "text",
                     "label": "Provider (SER) ID from Epic",
-                    "instructions": "One or more IDs for providers available for scheduling in this specific widget. Separate multiple values with a comma (\",\"). <br />If you specify a department, you <em>can</em> omit the list of provider IDs so all providers who are enabled for open scheduling in that department with that visit type are automatically included in the widget.",
-                    "required": 1,
+                    "instructions": "ID for one or more providers available for scheduling in this specific widget. Separate multiple values with a comma (\",\"). <br />If you specify a department, you <em>can</em> omit the list of provider IDs so all providers who are enabled for open scheduling in that department with that visit type are automatically included in the widget. <br /><strong>Be sure to include an ID for either provider or department (or both). Otherwise, <em>all</em> providers departments with that visit type will be displayed.</strong>",
+                    "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
@@ -3256,8 +3256,8 @@
                     "name": "location_scheduling_dep",
                     "type": "text",
                     "label": "Department (DEP) ID from Epic",
-                    "instructions": "One or more IDs for departments available for scheduling in this widget. Separate multiple values with a comma (\",\"). <br />If you specify a provider, you can omit the list of department IDs so all departments who are enabled for open scheduling with that provider and visit type are automatically included in the widget.",
-                    "required": 1,
+                    "instructions": "ID for one or more departments available for scheduling in this widget. Separate multiple values with a comma (\",\"). <br />If you specify a provider, you can omit the list of department IDs so all departments who are enabled for open scheduling with that provider and visit type are automatically included in the widget. <br /><strong>Be sure to include an ID for either provider or department (or both). Otherwise, <em>all</em> providers departments with that visit type will be displayed.</strong>",
+                    "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
