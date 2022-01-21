@@ -3225,8 +3225,8 @@
                     "key": "field_location_scheduling_ser",
                     "name": "location_scheduling_ser",
                     "type": "text",
-                    "label": "SER IDs",
-                    "instructions": "A list of all available providers delimited with a comma \",\"",
+                    "label": "Provider (SER) ID from Epic",
+                    "instructions": "ID for one or more providers available for scheduling in this specific widget. Separate multiple values with a comma (\",\"). <br />If you specify a department, you <em>can</em> omit the list of provider IDs so all providers who are enabled for open scheduling in that department with that visit type are automatically included in the widget. <br /><strong>Be sure to include an ID for either provider or department (or both). Otherwise, <em>all</em> providers departments with that visit type will be displayed.</strong>",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -3244,8 +3244,8 @@
                     "key": "field_location_scheduling_dep",
                     "name": "location_scheduling_dep",
                     "type": "text",
-                    "label": "DEP IDs",
-                    "instructions": "A list of all available departments delimited with a comma \",\"",
+                    "label": "Department (DEP) ID from Epic",
+                    "instructions": "ID for one or more departments available for scheduling in this widget. Separate multiple values with a comma (\",\"). <br />If you specify a provider, you can omit the list of department IDs so all departments who are enabled for open scheduling with that provider and visit type are automatically included in the widget. <br /><strong>Be sure to include an ID for either provider or department (or both). Otherwise, <em>all</em> providers departments with that visit type will be displayed.</strong>",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -3263,8 +3263,8 @@
                     "key": "field_location_scheduling_vt",
                     "name": "location_scheduling_vt",
                     "type": "text",
-                    "label": "VT IDs",
-                    "instructions": "The visit type to be used in the widget",
+                    "label": "Visit Type (VT) ID from Epic",
+                    "instructions": "A single visit type available for scheduling in this specific widget.",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
