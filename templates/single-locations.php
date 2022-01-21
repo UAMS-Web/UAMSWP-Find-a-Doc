@@ -1382,9 +1382,7 @@ while ( have_posts() ) : the_post(); ?>
 					<div class="col-xs-12">
 						<h2 class="module-title"><span class="title"><?php echo $location_scheduling_title; ?></span></h2>
 						<?php if ( $location_scheduling_intro && !empty($location_scheduling_intro) ) { ?>
-							<p class="note">
-								<?php echo $location_scheduling_intro; ?>
-							</p>
+							<p class="note"><?php echo $location_scheduling_intro; ?></p>
 						<?php } ?>
 						<div class="module-body">
 							<?php if ($location_scheduling_query && (count((array)$location_scheduling_options) > 1)) { ?>
