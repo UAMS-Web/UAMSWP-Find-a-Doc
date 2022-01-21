@@ -1380,7 +1380,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<h2 class="module-title"><?php echo $location_scheduling_title; ?></h2>
+						<h2 class="module-title"><span class="title"><?php echo $location_scheduling_title; ?></span></h2>
 						<?php if ( $location_scheduling_intro && !empty($location_scheduling_intro) ) { ?>
 							<p class="note">
 								<?php echo $location_scheduling_intro; ?>
