@@ -1116,7 +1116,7 @@ add_action('wp_ajax_nopriv_schedule_ajax_filter', 'schedule_ajax_filter_callback
 add_action('wp_ajax_schedule_ajax_filter', 'schedule_ajax_filter_callback');
 function schedule_ajax_filter_callback() {
 	if (!isset($_POST['pid']) || !isset($_POST['schedule_options'])) {
-		echo json_encode(false);
+		// echo json_encode(false);
 		exit;
 	}
 
