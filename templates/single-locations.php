@@ -1379,7 +1379,7 @@ while ( have_posts() ) : the_post(); ?>
 		<section class="uams-module mychart-scheduling-module bg-auto" id="scheduling">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-xs-12 mychart-scheduling">
+					<div class="col-xs-12">
 						<h2 class="module-title"><?php echo $location_scheduling_title; ?></h2>
 						<?php if ( $location_scheduling_intro && !empty($location_scheduling_intro) ) { ?>
 							<p class="note">
@@ -1427,6 +1427,7 @@ while ( have_posts() ) : the_post(); ?>
 							<?php } ?>
 						</div>
 						<?php } else { ?>
+							<div class="mychart-scheduling">
 							<form action="" method="get">
 								<div class="form-row align-items-center justify-content-center">
 									<div class="col-12 mb-4 col-sm-auto mb-sm-0">
@@ -1445,6 +1446,7 @@ while ( have_posts() ) : the_post(); ?>
 									<input type="hidden" id="pid" name="pid" value="<?php echo get_the_id(); ?>">
 								</div>
         					</form>
+							<div>
 						<?php } ?>
 						<div class="module-body">
 							<div id="scheduleContainer">
