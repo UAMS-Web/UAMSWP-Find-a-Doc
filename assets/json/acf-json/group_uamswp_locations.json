@@ -3184,6 +3184,44 @@
                     "new_lines": ""
                 },
                 {
+                    "key": "field_location_scheduling_item_text_nested",
+                    "name": "location_scheduling_item_text_nested",
+                    "type": "text",
+                    "label": "Nested Heading Text",
+                    "instructions": "If this is one of multiple scheduling widgets, this field defines the text of the heading immediately preceding this specific scheduling widget. This heading will be nested below the main section heading (defined by <em>Appointment Section Title</em>) in the heading outline. This will also set the label of the multiple choice option the user can select to display this specific scheduling widget. <br />Use a very short phrase, visit type name or treatment name that makes the purpose of this specific scheduling widget clear to the user.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_location_scheduling_item_intro_nested",
+                    "name": "location_scheduling_item_intro_nested",
+                    "type": "textarea",
+                    "label": "Nested Appointment Section Introduction",
+                    "instructions": "If this is one of multiple scheduling widgets, this field defines the paragraph introducing this specific scheduling widget. This paragraph will not need to cover information addressed in the <em>Appointment Section Introduction</em> field.<br />Optional paragraph to precede the scheduling widget where you can provide brief information about this specific scheduling widget. There is a 221 character limit.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": 221,
+                    "rows": 3,
+                    "new_lines": ""
+                },
+                {
                     "key": "field_location_scheduling_ser",
                     "name": "location_scheduling_ser",
                     "type": "text",
