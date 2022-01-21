@@ -2,4 +2,14 @@
     .module-body {
         width: 700px;
     }
+
+    .mychart-scheduling {
+        &:not(:empty) {
+            margin-top: $uams-module-padding-mobile;
+
+            @include media-breakpoint-up(sm) {
+                margin-top: $uams-module-padding;
+            }
+        }
+    }
 }
