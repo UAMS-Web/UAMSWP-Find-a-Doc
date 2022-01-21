@@ -3184,8 +3184,8 @@
                     "new_lines": ""
                 },
                 {
-                    "key": "field_location_scheduling_item_text_nested",
-                    "name": "location_scheduling_item_text_nested",
+                    "key": "field_location_scheduling_item_title_nested",
+                    "name": "location_scheduling_item_title_nested",
                     "type": "text",
                     "label": "Nested Heading Text",
                     "instructions": "If this is one of multiple scheduling widgets, this field defines the text of the heading immediately preceding this specific scheduling widget. This heading will be nested below the main section heading (defined by <em>Appointment Section Title</em>) in the heading outline. This will also set the label of the multiple choice option the user can select to display this specific scheduling widget. <br />Use a very short phrase, visit type name or treatment name that makes the purpose of this specific scheduling widget clear to the user.",
