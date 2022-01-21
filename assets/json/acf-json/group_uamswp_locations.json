@@ -3118,114 +3118,179 @@
             "rows": 3,
             "new_lines": ""
         },
-        "field_location_scheduling_ser": {
-            "key": "field_location_scheduling_ser",
-            "name": "location_scheduling_ser",
-            "type": "text",
-            "label": "SER IDs",
-            "instructions": "A list of all available providers delimited with a comma \",\"",
+        "field_location_scheduling_repeater": {
+            "key": "field_location_scheduling_item",
+            "name": "location_scheduling_item",
+            "type": "repeater",
+            "label": "MyChart Open Scheduling Widget(s)",
+            "instructions": "Define the information for each specific open scheduling widget. One or more must be defined.",
             "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_scheduling_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        "field_location_scheduling_dep": {
-            "key": "field_location_scheduling_dep",
-            "name": "location_scheduling_dep",
-            "type": "text",
-            "label": "DEP IDs",
-            "instructions": "A list of all available departments delimited with a comma \",\"",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_scheduling_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        "field_location_scheduling_vt": {
-            "key": "field_location_scheduling_vt",
-            "name": "location_scheduling_vt",
-            "type": "text",
-            "label": "VT IDs",
-            "instructions": "The visit type to be used in the widget",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_scheduling_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-		"field_location_scheduling_fallback": {
-			"key": "field_location_scheduling_fallback",
-			"label": "Fallback Information",
-			"name": "location_scheduling_fallback",
-			"type": "wysiwyg",
-			"instructions": "Optional paragraph to follow the scheduling widget where you can present an alternative to using the scheduling widget. Keep it brief, limiting it to one or two sentences in a single paragraph.",
-			"required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_scheduling_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
 				"id": ""
             },
-			"acfe_permissions": "",
-			"default_value": "",
-			"tabs": "all",
-			"toolbar": "basic",
-			"media_upload": 0,
-			"delay": 0
+            "collapsed": "field_location_appointments_text",
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_location_scheduling_item_text_standalone",
+                    "name": "location_scheduling_item_text_standalone",
+                    "type": "text",
+                    "label": "Standalone Heading Text",
+                    "instructions": "If this is the only scheduling widget, this will replace the section heading. <br />Use a very short phrase that makes the purpose of this specific scheduling widget clear to the user. Do not just use the name of a condition or treatment.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_location_scheduling_item_intro_standalone",
+                    "name": "location_scheduling_item_intro_standalone",
+                    "type": "textarea",
+                    "label": "Standalone Appointment Section Introduction",
+                    "instructions": "If this is the only scheduling widget, you can define a value here to replace the main section introduction (defined by <em>Appointment Section Introduction</em>) if that general introduction does not adequately introduce this specific widget. <br />The paragraph should provide brief general information about MyChart open scheduling. There is a 221 character limit.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": 221,
+                    "rows": 3,
+                    "new_lines": ""
+                },
+                {
+                    "key": "field_location_scheduling_item_text_nested",
+                    "name": "location_scheduling_item_text_nested",
+                    "type": "text",
+                    "label": "Nested Heading Text",
+                    "instructions": "If this is one of multiple scheduling widgets, this field defines the text of the heading immediately preceding this specific scheduling widget. This heading will be nested below the main section heading (defined by <em>Appointment Section Title</em>) in the heading outline. This will also set the label of the multiple choice option the user can select to display this specific scheduling widget. <br />Use a very short phrase, visit type name or treatment name that makes the purpose of this specific scheduling widget clear to the user.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_location_scheduling_item_intro_nested",
+                    "name": "location_scheduling_item_intro_nested",
+                    "type": "textarea",
+                    "label": "Nested Appointment Section Introduction",
+                    "instructions": "If this is one of multiple scheduling widgets, this field defines the paragraph introducing this specific scheduling widget. This paragraph will not need to cover information addressed in the <em>Appointment Section Introduction</em> field.<br />Optional paragraph to precede the scheduling widget where you can provide brief information about this specific scheduling widget. 221 character limit.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": 221,
+                    "rows": 3,
+                    "new_lines": ""
+                },
+                {
+                    "key": "field_location_scheduling_vt",
+                    "name": "location_scheduling_vt",
+                    "type": "text",
+                    "label": "Visit Type (VT) ID from Epic",
+                    "instructions": "A single visit type available for scheduling in this specific widget.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_location_scheduling_ser",
+                    "name": "location_scheduling_ser",
+                    "type": "text",
+                    "label": "Provider (SER) ID from Epic",
+                    "instructions": "One or more IDs for providers available for scheduling in this specific widget. Separate multiple values with a comma (\",\"). <br />If you specify a department, you <em>can</em> omit the list of provider IDs so all providers who are enabled for open scheduling in that department with that visit type are automatically included in the widget.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_location_scheduling_dep",
+                    "name": "location_scheduling_dep",
+                    "type": "text",
+                    "label": "Department (DEP) ID from Epic",
+                    "instructions": "One or more IDs for departments available for scheduling in this widget. Separate multiple values with a comma (\",\"). <br />If you specify a provider, you can omit the list of department IDs so all departments who are enabled for open scheduling with that provider and visit type are automatically included in the widget.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_location_scheduling_fallback",
+                    "label": "Fallback Information",
+                    "name": "location_scheduling_fallback",
+                    "type": "wysiwyg",
+                    "instructions": "This is an optional paragraph that appears after this specific scheduling widget where you can present users an alternative scheduling options. Keep it as brief as possible, limiting it to one to three sentences in a single paragraph. Add tel links to any phone numbers (href=\"tel:501-555-6162\"). <br /> Example Paragraph: \"If you are unable to register for your appointment using the method above, call 501-555-6162 to schedule an appointment. This line is staffed Monday thru Friday from 10 a.m. – 5:30 p.m. If the lines are busy, you will be prompted to leave a voicemail.\"",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0
+                }
+            ]
         },
         "field_location_medical_tab": {
             "key": "field_location_medical_tab",
