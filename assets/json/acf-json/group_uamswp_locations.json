@@ -3149,9 +3149,9 @@
                     "key": "field_location_scheduling_title",
                     "name": "location_scheduling_title",
                     "type": "text",
-                    "label": "Appointment Section Title (Optional)",
-                    "instructions": "If you set this value, use a very short phrase that makes the purpose of this schedule clear to the user. Do not use the name of a condition or treatment. If you do not define a value, \"Schedule an Appointment Online\" will be used.",
-                    "required": 0,
+                    "label": "Standalone Heading Text",
+                    "instructions": "If this is the only scheduling widget, this will replace the section heading. <br />Use a very short phrase that makes the purpose of this specific scheduling widget clear to the user. Do not just use the name of a condition or treatment.",
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
@@ -3159,7 +3159,7 @@
                         "id": ""
                     },
                     "default_value": "",
-                    "placeholder": "Schedule an Appointment Online",
+                    "placeholder": "",
                     "prepend": "",
                     "append": "",
                     "maxlength": ""
@@ -3168,8 +3168,8 @@
                     "key": "field_location_scheduling_intro",
                     "name": "location_scheduling_intro",
                     "type": "textarea",
-                    "label": "Appointment Section Introduction",
-                    "instructions": "Optional paragraph to precede the scheduling widget where you can provide brief information about this MyChart open scheduling widget. 221 character limit.",
+                    "label": "Standalone Appointment Section Introduction",
+                    "instructions": "If this is the only scheduling widget, you can define a value here to replace the main section introduction (defined by <em>Appointment Section Introduction</em>) if that general introduction does not adequately introduce this specific widget. <br />The paragraph should provide brief general information about MyChart open scheduling. There is a 221 character limit.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
