@@ -3142,7 +3142,7 @@
             "collapsed": "field_location_scheduling_title",
             "min": 1,
             "max": 0,
-            "layout": "row",
+            "layout": "block",
             "button_label": "Add Scheduling Widget Option",
             "sub_fields": [
                 {
