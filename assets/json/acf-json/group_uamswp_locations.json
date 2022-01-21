@@ -3097,7 +3097,7 @@
             "min": 1,
             "max": 0,
             "layout": "row",
-            "button_label": "Add Appointment Option",
+            "button_label": "Add Scheduling Widget Option",
             "sub_fields": [
                 {
                     "key": "field_location_scheduling_title",
