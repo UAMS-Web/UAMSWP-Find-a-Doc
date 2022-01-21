@@ -1139,23 +1139,6 @@ function schedule_ajax_filter_callback() {
 	$location_scheduling_intro = $row['location_scheduling_intro'];
 	$location_scheduling_fallback = $row['location_scheduling_fallback'];
 	?>
-	<form action="" method="get">
-		<div class="form-row align-items-center justify-content-center">
-			<div class="col-12 mb-4 col-sm-auto mb-sm-0">
-				<label class="sr-only" for="schedule_options">Scheduling options</label>
-				I would like to: <select name="schedule_options" id="schedule_options" class="form-control">
-					<option value="">Select an option</option>
-					<?php foreach($location_scheduling_options as $key => $title) : 
-						$location_scheduling_title = $title['location_scheduling_title'];
-						$location_scheduling_title = ( isset($location_scheduling_title) && !empty($location_scheduling_title) ) ? $location_scheduling_title : 'Schedule an Appointment Online';
-						?>
-						<option value="<?= $key; ?>"<?php echo ($key == $schedule_key) ? ' selected' : ''; ?>><? echo $location_scheduling_title; ?></option>
-					<?php endforeach; ?>
-				</select>
-			</div>
-			<input type="hidden" id="pid" name="pid" value="<?php echo get_the_id(); ?>">
-		</div>
-	</form>
 	<h2 class="module-title"><?php echo $location_scheduling_title; ?></h2>
 	<?php if ( $location_scheduling_intro && !empty($location_scheduling_intro) ) { ?>
 		<p class="note">
