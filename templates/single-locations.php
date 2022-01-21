@@ -1387,33 +1387,33 @@ while ( have_posts() ) : the_post(); ?>
 							</p>
 						<?php } ?>
 						<div class="module-body">
-						<?php if ($location_scheduling_query && (count((array)$location_scheduling_options) > 1)) { ?>
-							<form action="" method="get">
-								<div class="form-row align-items-center justify-content-center">
-									<div class="col-12 mb-4 col-sm-auto mb-sm-0">
-										<label class="sr-only" for="schedule_options">Scheduling options</label>
-										I would like to: <select name="schedule_options" id="schedule_options" class="form-control">
-											<option value="">Select an option</option>
-											<?php foreach($location_scheduling_options as $key => $title) : 
-												$location_scheduling_title = $title['location_scheduling_title'];
-												$location_scheduling_title = ( isset($location_scheduling_title) && !empty($location_scheduling_title) ) ? $location_scheduling_title : 'Schedule an Appointment Online';
-												?>
-												<option value="<?= $key; ?>"<?php //echo ($key == $provider_title) ? ' selected' : ''; ?>><? echo $location_scheduling_title; ?></option>
-											<?php endforeach; ?>
-										</select>
+							<?php if ($location_scheduling_query && (count((array)$location_scheduling_options) > 1)) { ?>
+								<form action="" method="get">
+									<div class="form-row align-items-center justify-content-center">
+										<div class="col-12 mb-4 col-sm-auto mb-sm-0">
+											<label class="sr-only" for="schedule_options">Scheduling options</label>
+											I would like to: <select name="schedule_options" id="schedule_options" class="form-control">
+												<option value="">Select an option</option>
+												<?php foreach($location_scheduling_options as $key => $title) : 
+													$location_scheduling_title = $title['location_scheduling_title'];
+													$location_scheduling_title = ( isset($location_scheduling_title) && !empty($location_scheduling_title) ) ? $location_scheduling_title : 'Schedule an Appointment Online';
+													?>
+													<option value="<?= $key; ?>"<?php //echo ($key == $provider_title) ? ' selected' : ''; ?>><? echo $location_scheduling_title; ?></option>
+												<?php endforeach; ?>
+											</select>
+										</div>
+										<input type="hidden" id="pid" name="pid" value="<?php echo get_the_id(); ?>">
 									</div>
-									<input type="hidden" id="pid" name="pid" value="<?php echo get_the_id(); ?>">
-								</div>
-							</form>
-							<div class="mychart-scheduling"></div>
-							<?php //var_dump($location_scheduling_options); ?>
-						<?php } else {
-							$row = $location_scheduling_options[0];
-							$location_scheduling_ser = $row['location_scheduling_ser'];
-							$location_scheduling_dep = $row['location_scheduling_dep'];
-							$location_scheduling_vt = $row['location_scheduling_vt'];
-							$location_scheduling_fallback = $row['location_scheduling_fallback'];
-						?>
+								</form>
+								<div class="mychart-scheduling"></div>
+								<?php //var_dump($location_scheduling_options); ?>
+							<?php } else {
+								$row = $location_scheduling_options[0];
+								$location_scheduling_ser = $row['location_scheduling_ser'];
+								$location_scheduling_dep = $row['location_scheduling_dep'];
+								$location_scheduling_vt = $row['location_scheduling_vt'];
+								$location_scheduling_fallback = $row['location_scheduling_fallback'];
+							?>
 								<div id="scheduleContainer">
 									<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
 								</div>
@@ -1444,7 +1444,7 @@ while ( have_posts() ) : the_post(); ?>
 										<?php echo $location_scheduling_fallback; ?>
 									</div>
 								<?php } ?>
-						<?php } ?>
+							<?php } ?>
 						</div>
 					</div>
 				</div>

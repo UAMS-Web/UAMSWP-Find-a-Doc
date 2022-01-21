@@ -1145,36 +1145,36 @@ function schedule_ajax_filter_callback() {
 			<?php echo $location_scheduling_intro; ?>
 		</p>
 	<?php } ?>
-		<div id="scheduleContainer">
-			<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
+	<div id="scheduleContainer">
+		<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
+	</div>
+
+	<!-- <link href="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
+
+	<script src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidgetController.js" type="text/javascript"></script>
+
+	<script type="text/javascript">
+	var EWC = new EmbeddedWidgetController({
+
+		// Replace with the hostname of your Open Scheduling site
+		'hostname':'https://<?php echo $mychart_scheduling_domain; ?>',
+
+		// Must equal media query in EpicWP.css + any left/right margin of the host page. Should also change in EmbeddedWidget.css
+		'matchMediaString':'(max-width: 991.98px)',
+
+		//Show a button on top of the widget that lets the user see the slots in fullscreen.
+		'showToggleBtn':true,
+	
+		//The toggle button’s help text for screen reader.
+		'toggleBtnExpandHelpText': 'Expand to see the slots in fullscreen',
+		'toggleBtnCollapseHelpText': 'Exit fullscreen',
+	});
+	</script>
+	<?php if ( $location_scheduling_fallback && !empty($location_scheduling_fallback) ) { ?>
+		<div class="more">
+			<?php echo $location_scheduling_fallback; ?>
 		</div>
-
-		<!-- <link href="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
-
-		<script src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidgetController.js" type="text/javascript"></script>
-
-		<script type="text/javascript">
-		var EWC = new EmbeddedWidgetController({
-
-			// Replace with the hostname of your Open Scheduling site
-			'hostname':'https://<?php echo $mychart_scheduling_domain; ?>',
-
-			// Must equal media query in EpicWP.css + any left/right margin of the host page. Should also change in EmbeddedWidget.css
-			'matchMediaString':'(max-width: 991.98px)',
-
-			//Show a button on top of the widget that lets the user see the slots in fullscreen.
-			'showToggleBtn':true,
-		
-			//The toggle button’s help text for screen reader.
-			'toggleBtnExpandHelpText': 'Expand to see the slots in fullscreen',
-			'toggleBtnCollapseHelpText': 'Exit fullscreen',
-		});
-		</script>
-		<?php if ( $location_scheduling_fallback && !empty($location_scheduling_fallback) ) { ?>
-			<div class="more">
-				<?php echo $location_scheduling_fallback; ?>
-			</div>
-		<?php } ?>
+	<?php } ?>
 	<?php
 	
 	wp_die();
