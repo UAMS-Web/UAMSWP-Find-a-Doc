@@ -3076,9 +3076,9 @@
             "key": "field_location_scheduling_options",
             "name": "location_scheduling_options",
             "type": "repeater",
-            "label": "Online Scheduling",
-            "instructions": "Add instructions here",
-            "required": 0,
+            "label": "MyChart Open Scheduling Widget Option(s)",
+            "instructions": "Define the information for each specific open scheduling widget. One or more must be defined.",
+            "required": 1,
             "conditional_logic": [
                 [
                     {
