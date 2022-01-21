@@ -1395,10 +1395,10 @@ while ( have_posts() ) : the_post(); ?>
 											I would like to: <select name="schedule_options" id="schedule_options" class="form-control">
 												<option value="">Select an option</option>
 												<?php foreach($location_scheduling_options as $key => $title) : 
-													$location_scheduling_title = $title['location_scheduling_title'];
-													$location_scheduling_title = ( isset($location_scheduling_title) && !empty($location_scheduling_title) ) ? $location_scheduling_title : 'Schedule an Appointment Online';
+													$location_scheduling_item_title_nested = $title['location_scheduling_item_title_nested'];
+													$location_scheduling_item_title_nested = ( isset($location_scheduling_item_title_nested) && !empty($location_scheduling_item_title_nested) ) ? $location_scheduling_item_title_nested : 'Schedule an Appointment Online';
 													?>
-													<option value="<?= $key; ?>"<?php //echo ($key == $provider_title) ? ' selected' : ''; ?>><? echo $location_scheduling_title; ?></option>
+													<option value="<?= $key; ?>"<?php //echo ($key == $provider_title) ? ' selected' : ''; ?>><? echo $location_scheduling_item_title_nested; ?></option>
 												<?php endforeach; ?>
 											</select>
 										</div>

@@ -1134,15 +1134,15 @@ function schedule_ajax_filter_callback() {
 	$location_scheduling_ser = $row['location_scheduling_ser'];
 	$location_scheduling_dep = $row['location_scheduling_dep'];
 	$location_scheduling_vt = $row['location_scheduling_vt'];
-	$location_scheduling_title = $row['location_scheduling_title'];
-	$location_scheduling_title = ( isset($location_scheduling_title) && !empty($location_scheduling_title) ) ? $location_scheduling_title : 'Schedule an Appointment Online';
-	$location_scheduling_intro = $row['location_scheduling_intro'];
+	$location_scheduling_item_title_nested = $row['location_scheduling_item_title_nested'];
+	$location_scheduling_item_title_nested = ( isset($location_scheduling_item_title_nested) && !empty($location_scheduling_item_title_nested) ) ? $location_scheduling_item_title_nested : 'Schedule an Appointment Online';
+	$location_scheduling_item_intro_nested = $row['location_scheduling_item_intro_nested'];
 	$location_scheduling_fallback = $row['location_scheduling_fallback'];
 	?>
-	<h3 class="module-title"><?php echo $location_scheduling_title; ?></h3>
-	<?php if ( $location_scheduling_intro && !empty($location_scheduling_intro) ) { ?>
+	<h3 class="module-title"><?php echo $location_scheduling_item_title_nested; ?></h3>
+	<?php if ( $location_scheduling_item_intro_nested && !empty($location_scheduling_item_intro_nested) ) { ?>
 		<p class="note">
-			<?php echo $location_scheduling_intro; ?>
+			<?php echo $location_scheduling_item_intro_nested; ?>
 		</p>
 	<?php } ?>
 	<div id="scheduleContainer">
