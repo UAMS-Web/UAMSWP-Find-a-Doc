@@ -1396,11 +1396,11 @@ while ( have_posts() ) : the_post(); ?>
 								'matchMediaString':'(max-width: 991.98px)',
 
 								//Show a button on top of the widget that lets the user see the slots in fullscreen.
-							'showToggleBtn':true,
+								'showToggleBtn':true,
 							
 								//The toggle button’s help text for screen reader.
-							'toggleBtnExpandHelpText': 'Expand to see the slots in fullscreen',
-							'toggleBtnCollapseHelpText': 'Exit fullscreen',
+								'toggleBtnExpandHelpText': 'Expand to see the slots in fullscreen',
+								'toggleBtnCollapseHelpText': 'Exit fullscreen',
 							});
 							</script>
 							<?php if ( $location_scheduling_fallback && !empty($location_scheduling_fallback) ) { ?>
