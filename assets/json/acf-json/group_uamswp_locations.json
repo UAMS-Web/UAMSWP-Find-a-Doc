@@ -3077,7 +3077,7 @@
             "name": "location_scheduling_title_general",
             "type": "text",
             "label": "Appointment Section Title (Optional Override)",
-            "instructions": "If there are multiple scheduling widgets, this will define the text used in the main section heading. If you do not define a value here, \"Schedule an Appointment Online\" will be used. If you define a value here, use a very short phrase that makes the purpose of the online scheduling section clear to the user. Do not just use the name of a condition or treatment. <br />If there is only one scheduling widget, the heading will be defined by a value from within the <em>MyChart Open Scheduling Widget(s)</em> repeater instead.",
+            "instructions": "If there are multiple scheduling widgets, this will define the text used in the main section heading. If you do not define a value here, \"Schedule an Appointment Online\" will be used. <br />If you define a value here, use a very short phrase that makes the purpose of the online scheduling section clear to the user. Do not just use the name of a condition or treatment. <br />If there is only one scheduling widget, the heading will be defined by a value from within the <em>MyChart Open Scheduling Widget(s)</em> repeater instead.",
             "required": 0,
             "conditional_logic": [
                 [
@@ -3150,7 +3150,7 @@
                     "name": "location_scheduling_title",
                     "type": "text",
                     "label": "Standalone Heading Text",
-                    "instructions": "If this is the only scheduling widget, this will replace the section heading. <br />Use a very short phrase that makes the purpose of this specific scheduling widget clear to the user. Do not just use the name of a condition or treatment.",
+                    "instructions": "If this is the only scheduling widget, this value will replace the main section heading (defined by <em>Appointment Section Title</em>). <br />Use a very short phrase that makes the purpose of this specific scheduling widget clear to the user. Do not just use the name of a condition or treatment.",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -3168,7 +3168,7 @@
                     "key": "field_location_scheduling_intro",
                     "name": "location_scheduling_intro",
                     "type": "textarea",
-                    "label": "Standalone Appointment Section Introduction",
+                    "label": "Standalone Appointment Section Introduction (Optional Override)",
                     "instructions": "If this is the only scheduling widget, you can define a value here to replace the main section introduction (defined by <em>Appointment Section Introduction</em>) if that general introduction does not adequately introduce this specific widget. <br />The paragraph should provide brief general information about MyChart open scheduling. There is a 221 character limit.",
                     "required": 0,
                     "conditional_logic": 0,
