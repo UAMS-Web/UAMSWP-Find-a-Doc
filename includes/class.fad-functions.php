@@ -72,7 +72,7 @@ class pubmed_field_on_change {
 
 		// check for our other required values
 		if (!isset($_POST['pmid'])) {
-			echo json_encode(false);
+			//echo json_encode(false);
 			exit;
 		}
 
@@ -1139,13 +1139,12 @@ function schedule_ajax_filter_callback() {
 	$location_scheduling_intro = $row['location_scheduling_intro'];
 	$location_scheduling_fallback = $row['location_scheduling_fallback'];
 	?>
-	<h2 class="module-title"><?php echo $location_scheduling_title; ?></h2>
+	<h3 class="module-title"><?php echo $location_scheduling_title; ?></h3>
 	<?php if ( $location_scheduling_intro && !empty($location_scheduling_intro) ) { ?>
 		<p class="note">
 			<?php echo $location_scheduling_intro; ?>
 		</p>
 	<?php } ?>
-	<div class="module-body">
 		<div id="scheduleContainer">
 			<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
 		</div>
@@ -1164,11 +1163,11 @@ function schedule_ajax_filter_callback() {
 			'matchMediaString':'(max-width: 991.98px)',
 
 			//Show a button on top of the widget that lets the user see the slots in fullscreen.
-		'showToggleBtn':true,
+			'showToggleBtn':true,
 		
 			//The toggle button’s help text for screen reader.
-		'toggleBtnExpandHelpText': 'Expand to see the slots in fullscreen',
-		'toggleBtnCollapseHelpText': 'Exit fullscreen',
+			'toggleBtnExpandHelpText': 'Expand to see the slots in fullscreen',
+			'toggleBtnCollapseHelpText': 'Exit fullscreen',
 		});
 		</script>
 		<?php if ( $location_scheduling_fallback && !empty($location_scheduling_fallback) ) { ?>
@@ -1176,7 +1175,6 @@ function schedule_ajax_filter_callback() {
 				<?php echo $location_scheduling_fallback; ?>
 			</div>
 		<?php } ?>
-	</div>
 	<?php
 	
 	wp_die();
