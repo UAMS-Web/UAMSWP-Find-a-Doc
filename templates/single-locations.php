@@ -411,18 +411,12 @@ while ( have_posts() ) : the_post(); ?>
         // Check if Appointment Scheduling section should be displayed
 		$mychart_scheduling_query_system = get_field('mychart_scheduling_query_system', 'option');
 		$location_scheduling_query = get_field('location_scheduling_query');
+		$location_scheduling_options = get_field('location_scheduling_options');
 
 		$mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
 		$mychart_scheduling_instance = get_field('mychart_scheduling_instance', 'option');
 		$mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
 		$mychart_scheduling_linksource = ( isset($mychart_scheduling_linksource) && !empty($mychart_scheduling_linksource) ) ? $mychart_scheduling_linksource : 'uamshealth.com';
-		$location_scheduling_ser = get_field('location_scheduling_ser');
-		$location_scheduling_dep = get_field('location_scheduling_dep');
-		$location_scheduling_vt = get_field('location_scheduling_vt');
-		$location_scheduling_title = get_field('location_scheduling_title');
-		$location_scheduling_title = ( isset($location_scheduling_title) && !empty($location_scheduling_title) ) ? $location_scheduling_title : 'Schedule an Appointment Online';
-		$location_scheduling_intro = get_field('location_scheduling_intro');
-		$location_scheduling_fallback = get_field('location_scheduling_fallback');
 
 		if ( $mychart_scheduling_query_system && $location_scheduling_query ) {
             $show_mychart_scheduling_section = true;
@@ -1095,7 +1089,7 @@ while ( have_posts() ) : the_post(); ?>
 					<?php } ?>
 					<?php if ( $show_mychart_scheduling_section ) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#scheduling" title="Jump to the section of this page about scheduling an appointment in MyChart"><?php echo $location_scheduling_title; ?></a>
+							<a class="nav-link" href="#scheduling" title="Jump to the section of this page about scheduling an appointment in MyChart">Scheduling<?php //echo $location_scheduling_title; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ( $show_telemed_section ) { ?>
@@ -1365,7 +1359,18 @@ while ( have_posts() ) : the_post(); ?>
 		<section class="uams-module mychart-scheduling-module bg-auto" id="scheduling">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-xs-12">
+					<div class="col-xs-12 mychart-scheduling">
+						<?php //var_dump($location_scheduling_options); ?>
+						<?php if ($location_scheduling_query && (count((array)$location_scheduling_options) < 2)) {
+							$row = $location_scheduling_options[0];
+							$location_scheduling_ser = $row['location_scheduling_ser'];
+							$location_scheduling_dep = $row['location_scheduling_dep'];
+							$location_scheduling_vt = $row['location_scheduling_vt'];
+							$location_scheduling_title = $row['location_scheduling_title'];
+							$location_scheduling_title = ( isset($location_scheduling_title) && !empty($location_scheduling_title) ) ? $location_scheduling_title : 'Schedule an Appointment Online';
+							$location_scheduling_intro = $row['location_scheduling_intro'];
+							$location_scheduling_fallback = $row['location_scheduling_fallback'];
+							?>
 						<h2 class="module-title"><?php echo $location_scheduling_title; ?></h2>
 						<?php if ( $location_scheduling_intro && !empty($location_scheduling_intro) ) { ?>
 							<p class="note">
@@ -1403,6 +1408,30 @@ while ( have_posts() ) : the_post(); ?>
 									<?php echo $location_scheduling_fallback; ?>
 								</div>
 							<?php } ?>
+						</div>
+						<?php } else { ?>
+							<form action="" method="get">
+								<div class="form-row align-items-center justify-content-center">
+									<div class="col-12 mb-4 col-sm-auto mb-sm-0">
+										<label class="sr-only" for="schedule_options">Scheduling options</label>
+										I would like to: <select name="schedule_options" id="schedule_options" class="form-control">
+											<option value="">Select an option</option>
+											<?php foreach($location_scheduling_options as $key => $title) : 
+												$location_scheduling_title = $title['location_scheduling_title'];
+												$location_scheduling_title = ( isset($location_scheduling_title) && !empty($location_scheduling_title) ) ? $location_scheduling_title : 'Schedule an Appointment Online';
+												?>
+												<option value="<?= $key; ?>"<?php //echo ($key == $provider_title) ? ' selected' : ''; ?>><? echo $location_scheduling_title; ?></option>
+											<?php endforeach; ?>
+										</select>
+									</div>
+									<input type="hidden" id="pid" name="pid" value="<?php echo get_the_id(); ?>">
+								</div>
+        					</form>
+						<?php } ?>
+						<div class="module-body">
+							<div id="scheduleContainer">
+								<!-- Empty content -->
+							</div>
 						</div>
 					</div>
 				</div>

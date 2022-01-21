@@ -3072,12 +3072,12 @@
             "ui_on_text": "",
             "ui_off_text": ""
         },
-        "field_location_scheduling_title": {
-            "key": "field_location_scheduling_title",
-            "name": "location_scheduling_title",
-            "type": "text",
-            "label": "Appointment Section Title (Optional)",
-            "instructions": "If you set this value, use a very short phrase that makes the purpose of this schedule clear to the user. Do not use the name of a condition or treatment. If you do not define a value, \"Schedule an Appointment Online\" will be used.",
+        "field_location_scheduling_options": {
+            "key": "field_location_scheduling_options",
+            "name": "location_scheduling_options",
+            "type": "repeater",
+            "label": "Online Scheduling",
+            "instructions": "Add instructions here",
             "required": 0,
             "conditional_logic": [
                 [
@@ -3093,139 +3093,128 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "Schedule an Appointment Online",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        "field_location_scheduling_intro": {
-            "key": "field_location_scheduling_intro",
-            "name": "location_scheduling_intro",
-            "type": "textarea",
-            "label": "Appointment Section Introduction",
-            "instructions": "Optional paragraph to precede the scheduling widget where you can provide brief information about this MyChart open scheduling widget. 221 character limit.",
-            "required": 0,
-            "conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "maxlength": 221,
-            "rows": 3,
-            "new_lines": ""
-        },
-        "field_location_scheduling_ser": {
-            "key": "field_location_scheduling_ser",
-            "name": "location_scheduling_ser",
-            "type": "text",
-            "label": "SER IDs",
-            "instructions": "A list of all available providers delimited with a comma \",\"",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_scheduling_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        "field_location_scheduling_dep": {
-            "key": "field_location_scheduling_dep",
-            "name": "location_scheduling_dep",
-            "type": "text",
-            "label": "DEP IDs",
-            "instructions": "A list of all available departments delimited with a comma \",\"",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_scheduling_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        "field_location_scheduling_vt": {
-            "key": "field_location_scheduling_vt",
-            "name": "location_scheduling_vt",
-            "type": "text",
-            "label": "VT IDs",
-            "instructions": "The visit type to be used in the widget",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_scheduling_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-		"field_location_scheduling_fallback": {
-			"key": "field_location_scheduling_fallback",
-			"label": "Fallback Information",
-			"name": "location_scheduling_fallback",
-			"type": "wysiwyg",
-			"instructions": "Optional paragraph to follow the scheduling widget where you can present an alternative to using the scheduling widget. Keep it brief, limiting it to one or two sentences in a single paragraph.",
-			"required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_scheduling_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-            },
-			"acfe_permissions": "",
-			"default_value": "",
-			"tabs": "all",
-			"toolbar": "basic",
-			"media_upload": 0,
-			"delay": 0
+            "collapsed": "field_location_scheduling_title",
+            "min": 1,
+            "max": 0,
+            "layout": "row",
+            "button_label": "Add Appointment Option",
+            "sub_fields": [
+                {
+                    "key": "field_location_scheduling_title",
+                    "name": "location_scheduling_title",
+                    "type": "text",
+                    "label": "Appointment Section Title (Optional)",
+                    "instructions": "If you set this value, use a very short phrase that makes the purpose of this schedule clear to the user. Do not use the name of a condition or treatment. If you do not define a value, \"Schedule an Appointment Online\" will be used.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "Schedule an Appointment Online",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_location_scheduling_intro",
+                    "name": "location_scheduling_intro",
+                    "type": "textarea",
+                    "label": "Appointment Section Introduction",
+                    "instructions": "Optional paragraph to precede the scheduling widget where you can provide brief information about this MyChart open scheduling widget. 221 character limit.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": 221,
+                    "rows": 3,
+                    "new_lines": ""
+                },
+                {
+                    "key": "field_location_scheduling_ser",
+                    "name": "location_scheduling_ser",
+                    "type": "text",
+                    "label": "SER IDs",
+                    "instructions": "A list of all available providers delimited with a comma \",\"",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_location_scheduling_dep",
+                    "name": "location_scheduling_dep",
+                    "type": "text",
+                    "label": "DEP IDs",
+                    "instructions": "A list of all available departments delimited with a comma \",\"",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_location_scheduling_vt",
+                    "name": "location_scheduling_vt",
+                    "type": "text",
+                    "label": "VT IDs",
+                    "instructions": "The visit type to be used in the widget",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_location_scheduling_fallback",
+                    "label": "Fallback Information",
+                    "name": "location_scheduling_fallback",
+                    "type": "wysiwyg",
+                    "instructions": "Optional paragraph to follow the scheduling widget where you can present an alternative to using the scheduling widget. Keep it brief, limiting it to one or two sentences in a single paragraph.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0
+                }
+            ]
         },
         "field_location_medical_tab": {
             "key": "field_location_medical_tab",
