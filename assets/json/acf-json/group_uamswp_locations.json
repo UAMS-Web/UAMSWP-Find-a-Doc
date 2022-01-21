@@ -3169,7 +3169,7 @@
                     "name": "location_scheduling_intro",
                     "type": "textarea",
                     "label": "Standalone Appointment Section Introduction (Optional Override)",
-                    "instructions": "If this is the only scheduling widget, you can define a value here to replace the main section introduction (defined by <em>Appointment Section Introduction</em>) if that general introduction does not adequately introduce this specific widget. <br />The paragraph should provide brief general information about MyChart open scheduling. There is a 221 character limit.",
+                    "instructions": "If this is the only scheduling widget, you can define a value here to replace the main section introduction (defined by <em>Appointment Section Introduction</em>) if that general introduction does not adequately introduce this specific widget. <br />If used, this paragraph should provide general information about MyChart open scheduling and a brief overview of anything necessary for users to know about this specific scheduling widget. There is a 221 character limit.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -3206,8 +3206,8 @@
                     "key": "field_location_scheduling_item_intro_nested",
                     "name": "location_scheduling_item_intro_nested",
                     "type": "textarea",
-                    "label": "Nested Appointment Section Introduction",
-                    "instructions": "If this is one of multiple scheduling widgets, this field defines the paragraph introducing this specific scheduling widget. This paragraph will not need to cover information addressed in the <em>Appointment Section Introduction</em> field.<br />Optional paragraph to precede the scheduling widget where you can provide brief information about this specific scheduling widget. There is a 221 character limit.",
+                    "label": "Nested Appointment Section Introduction (Optional)",
+                    "instructions": "If this is one of multiple scheduling widgets, this field defines the paragraph introducing this specific scheduling widget. If used, this paragraph will not need to cover information addressed in the <em>Appointment Section Introduction</em> field, but should provide a brief overview of any information necessary for users to know about this specific scheduling widget. There is a 221 character limit.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
