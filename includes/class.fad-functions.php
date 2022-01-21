@@ -72,7 +72,7 @@ class pubmed_field_on_change {
 
 		// check for our other required values
 		if (!isset($_POST['pmid'])) {
-			echo json_encode(false);
+			//echo json_encode(false);
 			exit;
 		}
 
