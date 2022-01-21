@@ -1386,6 +1386,7 @@ while ( have_posts() ) : the_post(); ?>
 								<?php echo $location_scheduling_intro; ?>
 							</p>
 						<?php } ?>
+						<div class="module-body">
 						<?php if ($location_scheduling_query && (count((array)$location_scheduling_options) > 1)) { ?>
 							<form action="" method="get">
 								<div class="form-row align-items-center justify-content-center">
@@ -1413,7 +1414,6 @@ while ( have_posts() ) : the_post(); ?>
 							$location_scheduling_vt = $row['location_scheduling_vt'];
 							$location_scheduling_fallback = $row['location_scheduling_fallback'];
 						?>
-							<div class="module-body">
 								<div id="scheduleContainer">
 									<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
 								</div>
@@ -1444,8 +1444,8 @@ while ( have_posts() ) : the_post(); ?>
 										<?php echo $location_scheduling_fallback; ?>
 									</div>
 								<?php } ?>
-							</div>
 						<?php } ?>
+						</div>
 					</div>
 				</div>
 			</div>

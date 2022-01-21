@@ -1145,7 +1145,6 @@ function schedule_ajax_filter_callback() {
 			<?php echo $location_scheduling_intro; ?>
 		</p>
 	<?php } ?>
-	<div class="module-body">
 		<div id="scheduleContainer">
 			<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
 		</div>
@@ -1176,7 +1175,6 @@ function schedule_ajax_filter_callback() {
 				<?php echo $location_scheduling_fallback; ?>
 			</div>
 		<?php } ?>
-	</div>
 	<?php
 	
 	wp_die();
