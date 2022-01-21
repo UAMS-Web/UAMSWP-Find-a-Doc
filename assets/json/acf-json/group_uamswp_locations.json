@@ -3076,8 +3076,8 @@
             "key": "field_location_scheduling_title",
             "name": "location_scheduling_title",
             "type": "text",
-            "label": "Appointment Section Title (Optional)",
-            "instructions": "If you set this value, use a very short phrase that makes the purpose of this schedule clear to the user. Do not use the name of a condition or treatment. If you do not define a value, \"Schedule an Appointment Online\" will be used.",
+            "label": "Appointment Section Title (Optional Override)",
+            "instructions": "If there are multiple scheduling widgets, this will define the text used in the main section heading. If you do not define a value here, \"Schedule an Appointment Online\" will be used. If you define a value here, use a very short phrase that makes the purpose of the online scheduling section clear to the user. Do not just use the name of a condition or treatment. <br />If there is only one scheduling widget, the heading will be defined by a value from within the <em>MyChart Open Scheduling Widget(s)</em> repeater instead.",
             "required": 0,
             "conditional_logic": [
                 [
@@ -3103,8 +3103,8 @@
             "key": "field_location_scheduling_intro",
             "name": "location_scheduling_intro",
             "type": "textarea",
-            "label": "Appointment Section Introduction",
-            "instructions": "Optional paragraph to precede the scheduling widget where you can provide brief information about this MyChart open scheduling widget. 221 character limit.",
+            "label": "Appointment Section Introduction (Optional Override)",
+            "instructions": "This paragraph introduces the online scheduling section. If you do not define a value here, it will display \"Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.\" <br />The paragraph should provide brief general information about MyChart open scheduling. There is a 221 character limit.",
             "required": 0,
             "conditional_logic": 0,
 			"wrapper": {
@@ -3113,7 +3113,7 @@
 				"id": ""
             },
             "default_value": "",
-            "placeholder": "",
+            "placeholder": "Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.",
             "maxlength": 221,
             "rows": 3,
             "new_lines": ""
