@@ -3199,7 +3199,7 @@
                     "label": "Fallback Information",
                     "name": "location_scheduling_fallback",
                     "type": "wysiwyg",
-                    "instructions": "Optional paragraph to follow the scheduling widget where you can present an alternative to using the scheduling widget. Keep it brief, limiting it to one or two sentences in a single paragraph.",
+                    "instructions": "This is an optional paragraph that appears after this specific scheduling widget where you can present users an alternative scheduling options. Keep it as brief as possible, limiting it to one to three sentences in a single paragraph. Add tel links to any phone numbers (href=\"tel:501-555-6162\"). <br /> Example Paragraph: \"If you are unable to register for your appointment using the method above, call 501-555-6162 to schedule an appointment. This line is staffed Monday thru Friday from 10 a.m. – 5:30 p.m. If the lines are busy, you will be prompted to leave a voicemail.\"",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
