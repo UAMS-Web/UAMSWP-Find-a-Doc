@@ -3199,7 +3199,7 @@
                     "name": "location_scheduling_item_intro_nested",
                     "type": "textarea",
                     "label": "Nested Appointment Section Introduction",
-                    "instructions": "If this is one of multiple scheduling widgets, this field defines the paragraph introducing this specific scheduling widget. This paragraph will not need to cover information addressed in the <em>Appointment Section Introduction</em> field.<br />Optional paragraph to precede the scheduling widget where you can provide brief information about this specific scheduling widget. 221 character limit.",
+                    "instructions": "If this is one of multiple scheduling widgets, this field defines the paragraph introducing this specific scheduling widget. This paragraph will not need to cover information addressed in the <em>Appointment Section Introduction</em> field.<br />Optional paragraph to precede the scheduling widget where you can provide brief information about this specific scheduling widget. There is a 221 character limit.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
