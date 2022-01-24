@@ -32,5 +32,9 @@
                 margin-top: $uams-module-padding;
             }
         }
+
+        .more p {
+            @include line-length-em(max);
+        }
     }
 }
