@@ -1139,7 +1139,7 @@ function schedule_ajax_filter_callback() {
 	$location_scheduling_item_intro_nested = $row['location_scheduling_item_intro_nested'];
 	$location_scheduling_fallback = $row['location_scheduling_fallback'];
 	?>
-	<h3 class="module-inner-title"><?php echo $location_scheduling_item_title_nested; ?></h3>
+	<h3 class="sr-only module-inner-title"><?php echo $location_scheduling_item_title_nested; ?></h3>
 	<?php if ( $location_scheduling_item_intro_nested && !empty($location_scheduling_item_intro_nested) ) { ?>
 		<p class="note">
 			<?php echo $location_scheduling_item_intro_nested; ?>
