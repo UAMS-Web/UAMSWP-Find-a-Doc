@@ -3,6 +3,27 @@
         width: 700px;
     }
 
+    .mychart-scheduling-select {
+        display: flex;
+        justify-content: center;
+
+        .form-group {
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            label {
+                display: block;
+                font-weight: $font-weight-bold;
+                text-align: center;
+            }
+            select, select option {
+                font-size: $lead-font-size;
+                font-weight: $font-weight-base;
+            }
+        }
+    }
+
     .mychart-scheduling {
         &:not(:empty) {
             margin-top: $uams-module-padding-mobile;
