@@ -1386,20 +1386,18 @@ while ( have_posts() ) : the_post(); ?>
 						<?php } ?>
 						<div class="module-body">
 							<?php if ($location_scheduling_query && (count((array)$location_scheduling_options) > 1)) { ?>
-								<form action="" method="get">
-									<div class="form-row align-items-center justify-content-center">
-										<div class="col-12 mb-4 col-sm-auto mb-sm-0">
-											<label class="sr-only" for="schedule_options">Scheduling options</label>
-											I would like to: <select name="schedule_options" id="schedule_options" class="form-control">
-												<option value="">Select an option</option>
-												<?php foreach($location_scheduling_options as $key => $title) : 
-													$location_scheduling_item_title_nested = $title['location_scheduling_item_title_nested'];
-													$location_scheduling_item_title_nested = ( isset($location_scheduling_item_title_nested) && !empty($location_scheduling_item_title_nested) ) ? $location_scheduling_item_title_nested : 'Schedule an Appointment Online';
-													?>
-													<option value="<?= $key; ?>"<?php //echo ($key == $provider_title) ? ' selected' : ''; ?>><? echo $location_scheduling_item_title_nested; ?></option>
-												<?php endforeach; ?>
-											</select>
-										</div>
+								<form action="" method="get" class="mychart-scheduling-select">
+									<div class="form-group">
+										<label for="schedule_options" class="lead">Available Services</label>
+										<select name="schedule_options" id="schedule_options" class="form-control">
+											<option value="">Select an option</option>
+											<?php foreach($location_scheduling_options as $key => $title) : 
+												$location_scheduling_item_title_nested = $title['location_scheduling_item_title_nested'];
+												$location_scheduling_item_title_nested = ( isset($location_scheduling_item_title_nested) && !empty($location_scheduling_item_title_nested) ) ? $location_scheduling_item_title_nested : 'Schedule an Appointment Online';
+												?>
+												<option value="<?= $key; ?>"<?php //echo ($key == $provider_title) ? ' selected' : ''; ?>><? echo $location_scheduling_item_title_nested; ?></option>
+											<?php endforeach; ?>
+										</select>
 										<input type="hidden" id="pid" name="pid" value="<?php echo get_the_id(); ?>">
 									</div>
 								</form>
