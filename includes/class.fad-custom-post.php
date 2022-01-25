@@ -2245,6 +2245,12 @@ function rest_api_provider_meta() {
 			'schema' => null,
 		)
 	);
+	register_rest_field('treatment', 'treatment_meta', array(
+		'get_callback' => 'get_treatment_meta',
+		'update_callback' => null,
+		'schema' => null,
+	)
+);
 }
 function get_provider_meta($object) {
     $postId = $object['id'];
@@ -2296,6 +2302,7 @@ function get_provider_meta($object) {
     $data['physician_patient_types'] = $patient_list;
     $data['physician_npi'] = get_field( 'physician_npi', $postId );
     $data['physician_youtube_link'] = get_field( 'physician_youtube_link', $postId );
+	$data['physician_hidden'] = get_field( 'physician_hidden', $postId );
 	$podcast_name = get_field('physician_podcast_name',$postId);
 	$data['provider_podcast'] = '<script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
 	</script>
@@ -2603,7 +2610,17 @@ function get_location_meta($object) {
 	$data['location_state'] = get_field('location_state', $postId );
 	$data['location_zip'] = get_field('location_zip', $postId );
 	$location_region = get_field('location_region', $postId );
+	$data['location_hidden'] = get_field( 'location_hidden', $postId );
 	$data['location_region'] = get_term($location_region, "region")->slug;
+	$types = get_field('location_type',$postId);
+	$data['location_types'] ='';
+	if( ! empty( $types ) ):
+		foreach ( $types as $type ) :
+			$type_name = get_term( $type, 'location_type');
+			$data['location_types'] .= $data['location_types'] != '' ? ',' : '';
+			$data['location_types'] .= $type_name->name;
+		endforeach;
+	endif;
 	$location_phone = get_field('location_phone', $postId );
 	$location_phone_link = '<a href="tel:' . format_phone_dash( $location_phone ) . '" class="icon-phone">' . format_phone_us( $location_phone ) . '</a>';
 	$location_clinic_phone_query = get_field('location_clinic_phone_query', $postId ); // separate number for (new) appointments?
@@ -3145,6 +3162,129 @@ function get_condition_meta($object) {
 
 }
 // add_action('rest_api_init', 'rest_api_condition_meta');
+// Treatments API
+function get_treatment_meta($object) {
+	$postId = $object['id'];
+	// Expertise
+	$expertises =  get_field('treatment_procedure_expertise', $postId);
+	$expertise_list = '';
+	$i = 1;
+	if( $expertises ) {
+		$args = (array(
+			'post_type' => "expertise",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $expertises
+		));
+		$expertise_query = new WP_Query( $args );
+		if( $expertises && $expertise_query->posts ):
+
+			foreach( $expertise_query->posts as $expertise ):
+				$data['treatment_expertise'][$expertise->ID]['link'] = get_permalink( $expertise->ID );
+				$data['treatment_expertise'][$expertise->ID]['title'] = $expertise->post_title;
+				$data['treatment_expertise'][$expertise->ID]['slug'] = $expertise->post_name;
+				$expertise_list .= $expertise->post_title;
+				if( count($expertises) > $i ) {
+					$expertise_list .= ', ';
+				}
+				$i++;
+			endforeach;
+		endif;
+	}
+	$data['treatment_expertise_list'] = $expertise_list;
+	// Conditions
+	$conditions_cpt = get_field('treatment_conditions', $postId);
+	$condition_list = '';
+	$i = 1;
+	if( $conditions_cpt ) {
+		$args = (array(
+			'post_type' => "condition",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $conditions_cpt
+		));
+		$conditions_cpt_query = new WP_Query( $args );
+		if( $conditions_cpt && $conditions_cpt_query->posts ):
+
+			foreach( $conditions_cpt_query->posts as $condition ):
+				$data['treatment_conditions'][$condition->ID]['link'] = get_permalink( $condition->ID );
+				$data['treatment_conditions'][$condition->ID]['title'] = $condition->post_title;
+				$data['treatment_conditions'][$condition->ID]['slug'] = $condition->post_name;
+				$condition_list .= $condition->post_title;
+				if( count($conditions_cpt) > $i ) {
+					$condition_list .= ', ';
+				}
+				$i++;
+			endforeach;
+		endif;
+	}
+	$data['treatment_conditions_list'] = $condition_list;
+	// Providers
+	$providers = get_field('treatment_procedure_physicians', $postId);
+	$provider_list = '';
+	$i = 1;
+	if( $providers ) {
+		$args = (array(
+			'post_type' => "provider",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $providers
+		));
+		$provider_query = new WP_Query( $args );
+		if( $providers && $provider_query->posts ):
+
+			foreach( $provider_query->posts as $provider ):
+				$data['treatment_provider'][$provider->ID]['link'] = get_permalink( $provider->ID );
+				$data['treatment_provider'][$provider->ID]['title'] = get_field('physician_full_name', $provider->ID);
+				$data['treatment_provider'][$provider->ID]['slug'] = $provider->post_name;
+				$provider_list .= get_field('physician_full_name', $provider->ID);
+				if( count($providers) > $i ) {
+					$provider_list .= ' | ';
+				}
+				$i++;
+			endforeach;
+		endif;
+	}
+	$data['treatment_provider_list'] = $provider_list;
+	// Locations
+	$locations = get_field('treatment_procedure_locations', $postId);
+	$location_list = '';
+	$i = 1;
+	if( $locations ) {
+		$args = (array(
+			'post_type' => "location",
+            'order' => 'ASC',
+            'orderby' => 'title',
+            'posts_per_page' => -1,
+            'post_status' => 'publish',
+            'post__in'	=> $locations
+		));
+		$location_query = new WP_Query( $args );
+		if( $locations && $location_query->posts ):
+
+			foreach( $location_query->posts as $location ):
+				$data['treatment_location'][$location->ID]['link'] = get_permalink( $location->ID );
+				$data['treatment_location'][$location->ID]['title'] = $location->post_title;
+				$data['treatment_location'][$location->ID]['slug'] = $location->post_name;
+				$location_list .= $location->post_title;
+				if( count($locations) > $i ) {
+					$location_list .= ', ';
+				}
+				$i++;
+			endforeach;
+		endif;
+	}
+	$data['treatment_location_list'] = $location_list;
+
+	return $data;
+
+}
 
 // Add REST API query var filters
 add_filter('rest_query_vars', 'provider_add_rest_query_vars');
