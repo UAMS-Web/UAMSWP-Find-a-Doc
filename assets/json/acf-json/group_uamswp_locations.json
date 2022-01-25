@@ -3225,7 +3225,7 @@
                     "key": "field_location_scheduling_vt",
                     "name": "location_scheduling_vt",
                     "type": "text",
-                    "label": "Visit Type (VT) ID from Epic",
+                    "label": "Visit Type (PRC) ID from Epic",
                     "instructions": "A single visit type available for scheduling in this specific widget.",
                     "required": 1,
                     "conditional_logic": 0,
