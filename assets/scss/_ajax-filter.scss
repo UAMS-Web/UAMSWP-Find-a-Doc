@@ -9,9 +9,9 @@
         }
     }
     .ajax-filter-message {
-        width: $line-length-max + em;
-        max-width: 100%;
-        margin: $uams-module-padding-mobile auto;
+        @include line-length-em(max);
+        margin-top: $uams-module-padding-mobile;
+        margin-bottom: $uams-module-padding-mobile;
         font-weight: $font-weight-medium;
         text-align: center;
     }
