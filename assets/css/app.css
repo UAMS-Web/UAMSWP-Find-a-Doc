@@ -728,8 +728,8 @@
   width: 255px;
 }
 
-.card-list-container .ajax-loading,
-.card-list .no-results {
+.card-list .no-results,
+.card-list-container .ajax-loading {
   font-size: 1.40625rem;
   font-weight: 300;
   margin-left: auto;
@@ -1047,11 +1047,11 @@
   color: inherit;
 }
 
-.location-alert ol:last-child,
 .location-alert ol li:last-child,
+.location-alert ol:last-child,
 .location-alert p:last-child,
-.location-alert ul:last-child,
-.location-alert ul li:last-child {
+.location-alert ul li:last-child,
+.location-alert ul:last-child {
   margin-bottom: 0;
 }
 
@@ -1277,8 +1277,36 @@
   width: 700px;
 }
 
+.mychart-scheduling-module .mychart-scheduling-select {
+  display: flex;
+  justify-content: center;
+}
+
+.mychart-scheduling-module .mychart-scheduling-select .form-group:last-child {
+  margin-bottom: 0;
+}
+
+.mychart-scheduling-module .mychart-scheduling-select .form-group label {
+  display: block;
+  font-weight: 600;
+  text-align: center;
+}
+
+.mychart-scheduling-module .mychart-scheduling-select .form-group select,
+.mychart-scheduling-module .mychart-scheduling-select .form-group select option {
+  font-size: 1.40625rem;
+  font-weight: 300;
+}
+
 .mychart-scheduling-module .mychart-scheduling:not(:empty) {
   margin-top: 2rem;
+}
+
+.mychart-scheduling-module .mychart-scheduling .more p {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  width: 35em;
 }
 
 #openSchedulingFrame,
@@ -1352,11 +1380,11 @@ html.poppedOut {
 }
 
 @media (min-width:381px) {
+  .card-list.card-list-doctors-count-10,
+  .card-list.card-list-doctors-count-12,
   .card-list.card-list-doctors-count-4,
   .card-list.card-list-doctors-count-6,
-  .card-list.card-list-doctors-count-8,
-  .card-list.card-list-doctors-count-10,
-  .card-list.card-list-doctors-count-12 {
+  .card-list.card-list-doctors-count-8 {
     width: 285px;
   }
 }
@@ -1435,11 +1463,11 @@ html.poppedOut {
 }
 
 @media (min-width:666px) {
+  .card-list.card-list-doctors-count-10,
+  .card-list.card-list-doctors-count-12,
   .card-list.card-list-doctors-count-4,
   .card-list.card-list-doctors-count-6,
-  .card-list.card-list-doctors-count-8,
-  .card-list.card-list-doctors-count-10,
-  .card-list.card-list-doctors-count-12 {
+  .card-list.card-list-doctors-count-8 {
     width: 570px;
   }
 }
@@ -1501,8 +1529,8 @@ html.poppedOut {
 }
 
 @media (min-width:951px) {
-  .card-list.card-list-doctors-count-6,
-  .card-list.card-list-doctors-count-12 {
+  .card-list.card-list-doctors-count-12,
+  .card-list.card-list-doctors-count-6 {
     width: 855px;
   }
 }
@@ -1652,9 +1680,9 @@ html.poppedOut {
 }
 
 @media (min-width:1236px) {
+  .card-list.card-list-doctors-count-12,
   .card-list.card-list-doctors-count-4,
-  .card-list.card-list-doctors-count-8,
-  .card-list.card-list-doctors-count-12 {
+  .card-list.card-list-doctors-count-8 {
     width: 1140px;
   }
 }
@@ -1688,8 +1716,8 @@ html.poppedOut {
 }
 
 @media (min-width:1806px) {
-  .card-list.card-list-doctors-count-6,
-  .card-list.card-list-doctors-count-12 {
+  .card-list.card-list-doctors-count-12,
+  .card-list.card-list-doctors-count-6 {
     width: 1710px;
   }
 }
@@ -1805,7 +1833,7 @@ html.poppedOut {
   }
 }
 
-@media (min-width:930px) and (max-width:1294px),(min-width:1784px) and (max-width:2053px) {
+@media (min-width:1784px) and (max-width:2053px),(min-width:930px) and (max-width:1294px) {
   .doctor-list .list-col .list .item .row .image,
   .location-list .list-col .list .item .row .image,
   .resource-list .list-col .list .item .row .image {
