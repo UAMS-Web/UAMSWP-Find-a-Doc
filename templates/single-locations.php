@@ -859,7 +859,7 @@ while ( have_posts() ) : the_post(); ?>
 								],
 								';
 						}
-						if (($active_start != '' && $active_start <= $today) && ( strtotime($active_end) > $today || $active_end == 'TBD' ) ) {
+						if (($active_start != '' && $active_start <= $today) && ( $active_end > $today_30 || $active_end == 'TBD' ) ) {
 							// Do Nothing;
 							// Future Option
 						} else {
