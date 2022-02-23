@@ -560,7 +560,7 @@
             "name": "location_phone",
             "type": "maskfield",
             "label": "Clinic Phone Number",
-            "instructions": "",
+            "instructions": "The phone number that patients can call for general information related to this location",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
