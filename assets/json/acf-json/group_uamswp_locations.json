@@ -607,6 +607,32 @@
             "layout": "horizontal",
             "return_format": "value"
         },
+        "field_location_clinic_phone_query_spacer": {
+            "key": "field_location_clinic_phone_query_spacer",
+            "label": "",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "message": "&nbsp;",
+            "new_lines": "",
+            "esc_html": 0
+        },
         "field_location_new_appointments_phone": {
             "key": "field_location_new_appointments_phone",
             "name": "location_new_appointments_phone",
@@ -667,6 +693,32 @@
             "default_value": 0,
             "layout": "horizontal",
             "return_format": "value"
+        },
+        "field_location_appointment_phone_query_spacer": {
+            "key": "field_location_appointment_phone_query_spacer",
+            "label": "",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "message": "&nbsp;",
+            "new_lines": "",
+            "esc_html": 0
         },
         "field_location_return_appointments_phone": {
             "key": "field_location_return_appointments_phone",
