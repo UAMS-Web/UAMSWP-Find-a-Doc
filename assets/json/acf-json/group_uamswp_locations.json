@@ -1193,7 +1193,7 @@
             "key": "field_link_message",
             "name": "",
             "type": "message",
-            "label": "External Sites",
+            "label": "",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -1202,7 +1202,7 @@
                 "class": "",
                 "id": ""
             },
-            "message": "<p>Include Title and link to external sites<\/p>",
+            "message": "<h3>External Website<\/h3><p>Include a title and URL for a link to an external non-UAMS website. This is intended for use when the location is a non-UAMS location where our providers practice.<\/p><p>This link should only be used when it is critical to the patient experience (e.g. for becoming a patient, making an appointment, receiving follow-up information). This is not to be used as a link to secondary things like a social media account.<\/p>",
             "new_lines": "",
             "esc_html": 0
         },
