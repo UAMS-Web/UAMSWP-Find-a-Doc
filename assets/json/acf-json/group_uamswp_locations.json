@@ -814,7 +814,21 @@
             "type": "button_group",
             "instructions": "",
             "required": 1,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==empty"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "30",
                 "class": "",
@@ -890,6 +904,13 @@
                         "operator": "==",
                         "value": "1"
                     }
+                ],
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
                 ]
             ],
             "wrapper": {
@@ -955,7 +976,21 @@
             "label": "Clinic Fax Number",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==empty"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -970,7 +1005,21 @@
             "label": "Additional Phone Numbers (if needed):",
             "instructions": "Example: <br\/>After Hours: ###-###-####",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==empty"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
