@@ -565,7 +565,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "input_mask": "(999) 999-9999 [x 99999]"
@@ -594,7 +594,7 @@
             ],
             "wrapper": {
                 "width": "50",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "acfe_permissions": "",
@@ -625,7 +625,7 @@
             ],
             "wrapper": {
                 "width": "50",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "acfe_permissions": "",
@@ -658,7 +658,7 @@
             ],
             "wrapper": {
                 "width": "50",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "input_mask": "(999) 999-9999 [x 99999]"
@@ -681,7 +681,7 @@
             ],
             "wrapper": {
                 "width": "50",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "acfe_permissions": "",
@@ -712,7 +712,7 @@
             ],
             "wrapper": {
                 "width": "50",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "acfe_permissions": "",
@@ -738,7 +738,7 @@
             ],
             "wrapper": {
                 "width": "50",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "input_mask": "(999) 999-9999 [x 99999]"
@@ -761,7 +761,7 @@
             ],
             "wrapper": {
                 "width": "50",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "acfe_permissions": "",
@@ -793,7 +793,7 @@
             ],
             "wrapper": {
                 "width": "50",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "input_mask": "(999) 999-9999 [x 99999]"
@@ -822,7 +822,7 @@
             ],
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "collapsed": "field_location_appointments_text",
@@ -913,7 +913,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "default_value": "",
@@ -932,7 +932,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "default_value": "",
@@ -951,7 +951,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "default_value": "",
@@ -967,7 +967,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "default_value": "",
@@ -986,7 +986,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "30",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "acfe_permissions": "",
@@ -1043,7 +1043,7 @@
             ],
             "wrapper": {
                 "width": "70",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "choices": {
@@ -1107,7 +1107,7 @@
             ],
             "wrapper": {
                 "width": "70",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "acfe_permissions": ""
@@ -1135,7 +1135,7 @@
             ],
             "wrapper": {
                 "width": "70",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "acfe_permissions": ""
@@ -1163,7 +1163,7 @@
             ],
             "wrapper": {
                 "width": "70",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "default_value": "",
@@ -1199,7 +1199,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "default_value": "",
@@ -1218,7 +1218,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "default_value": "",
@@ -1237,7 +1237,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "default_value": "",
@@ -1256,7 +1256,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "taxonomy": "portal",
@@ -1283,7 +1283,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "25",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "message": "Exclude from Primary Listing",
@@ -1319,7 +1319,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "60",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "default_value": "",
@@ -1338,7 +1338,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "60",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "return_format": "array",
