@@ -517,26 +517,22 @@
         },
         "field_location_ac_query": {
             "key": "field_location_ac_query",
-            "label": "Is this an Arkansas Children's location?",
             "name": "location_ac_query",
-            "type": "button_group",
+            "type": "true_false",
+            "label": "Is this an Arkansas Children's location?",
             "instructions": "",
-            "required": 1,
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
-            "acfe_permissions": "",
-            "choices": {
-                "1": "Yes",
-                "0": "No"
-            },
-            "allow_null": 0,
+            "message": "",
             "default_value": 0,
-            "layout": "horizontal",
-            "return_format": "value"
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         "field_location_contact_message": {
             "key": "field_location_contact_message",
