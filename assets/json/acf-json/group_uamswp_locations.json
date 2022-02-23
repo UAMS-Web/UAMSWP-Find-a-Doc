@@ -824,7 +824,7 @@
         },
         "field_location_appointment_phone_query": {
             "key": "field_location_appointment_phone_query",
-            "label": "Is there a seperate number for returning patients?",
+            "label": "Is there a separate number for returning patients?",
             "name": "location_appointment_phone_query",
             "type": "button_group",
             "instructions": "",
@@ -858,7 +858,7 @@
             "name": "location_new_appointments_phone",
             "type": "maskfield",
             "label": "Appointments Phone Number",
-            "instructions": "For new patients, if seperate numbers for new and returning patients",
+            "instructions": "For new patients, if separate numbers for new and returning patients",
             "required": 1,
             "conditional_logic": [
                 [
