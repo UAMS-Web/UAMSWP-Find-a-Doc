@@ -1246,52 +1246,6 @@
             "media_upload": 1,
             "delay": 0
         },
-        "field_location_portal": {
-            "key": "field_location_portal",
-            "name": "location_portal",
-            "type": "taxonomy",
-            "label": "Portal (Optional)",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "hide-acf-border",
-                "id": ""
-            },
-            "taxonomy": "portal",
-            "field_type": "radio",
-            "allow_null": 0,
-            "add_term": 0,
-            "save_terms": 1,
-            "load_terms": 1,
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
-            },
-            "acfe_validate": "",
-            "acfe_update": "",
-            "multiple": 0
-        },
-        "field_location_hidden": {
-            "key": "field_location_hidden",
-            "name": "location_hidden",
-            "type": "true_false",
-            "label": "Hide",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "hide-acf-border",
-                "id": ""
-            },
-            "message": "Exclude from Primary Listing",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
         "field_link_message": {
             "key": "field_link_message",
             "name": "",
@@ -1343,6 +1297,69 @@
             },
             "return_format": "array",
             "endpoint": 0
+        },
+        "field_details_other_message": {
+            "key": "field_details_other_message",
+            "name": "",
+            "type": "message",
+            "label": "",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "<h3>Other Details<\/h3>",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        "field_location_portal": {
+            "key": "field_location_portal",
+            "name": "location_portal",
+            "type": "taxonomy",
+            "label": "Patient Portal",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "taxonomy": "portal",
+            "field_type": "radio",
+            "allow_null": 0,
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "acfe_validate": "",
+            "acfe_update": "",
+            "multiple": 0
+        },
+        "field_location_hidden": {
+            "key": "field_location_hidden",
+            "name": "location_hidden",
+            "type": "true_false",
+            "label": "Exclude from Primary Location List?",
+            "instructions": "Setting this to \"Yes\" will remove this location from the Location archive. This input will not affect whether the location will be displayed on profiles and search results.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         "field_details_deprecated_open": {
             "key": "field_details_deprecated_open",
