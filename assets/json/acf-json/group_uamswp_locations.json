@@ -538,6 +538,319 @@
             "layout": "horizontal",
             "return_format": "value"
         },
+        "field_location_contact_message": {
+            "key": "field_location_contact_message",
+            "label": "",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "<h3>Contact Information<\/h3>",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        "field_location_phone": {
+            "key": "field_location_phone",
+            "name": "location_phone",
+            "type": "maskfield",
+            "label": "Clinic Phone Number",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "input_mask": "(999) 999-9999 [x 99999]"
+        },
+        "field_location_clinic_phone_query": {
+            "key": "field_location_clinic_phone_query",
+            "label": "Is there a separate appointment number for patients?",
+            "name": "location_clinic_phone_query",
+            "type": "button_group",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==empty"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "choices": {
+                "1": "Yes",
+                "0": "No"
+            },
+            "allow_null": 0,
+            "default_value": 0,
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        "field_location_new_appointments_phone": {
+            "key": "field_location_new_appointments_phone",
+            "name": "location_new_appointments_phone",
+            "type": "maskfield",
+            "label": "Appointments Phone Number",
+            "instructions": "For new patients, if separate numbers for new and returning patients",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_clinic_phone_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "input_mask": "(999) 999-9999 [x 99999]"
+        },
+        "field_location_appointment_phone_query": {
+            "key": "field_location_appointment_phone_query",
+            "label": "Is there a separate number for returning patients?",
+            "name": "location_appointment_phone_query",
+            "type": "button_group",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_clinic_phone_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "choices": {
+                "1": "Yes",
+                "0": "No"
+            },
+            "allow_null": 0,
+            "default_value": 0,
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        "field_location_return_appointments_phone": {
+            "key": "field_location_return_appointments_phone",
+            "name": "location_return_appointments_phone",
+            "type": "maskfield",
+            "label": "Appointments Phone Number for Returning Patients",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_appointment_phone_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "input_mask": "(999) 999-9999 [x 99999]"
+        },
+        "field_phone_spacer": {
+            "key": "field_phone_spacer",
+            "label": "",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_appointment_phone_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "message": "&nbsp;",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        "field_location_fax": {
+            "key": "field_location_fax",
+            "name": "location_fax",
+            "type": "maskfield",
+            "label": "Clinic Fax Number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==empty"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "input_mask": "(999) 999-9999 [x 99999]"
+        },
+        "field_location_phone_numbers": {
+            "key": "field_location_phone_numbers",
+            "name": "location_phone_numbers",
+            "type": "repeater",
+            "label": "Additional Phone Numbers (if needed):",
+            "instructions": "Example: <br\/>After Hours: ###-###-####",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==empty"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "field_location_appointments_text",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_location_appointments_text",
+                    "label": "Text",
+                    "name": "location_appointments_text",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_location_appointments_phone",
+                    "label": "Phone #",
+                    "name": "location_appointments_phone",
+                    "type": "maskfield",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "input_mask": "(999) 999-9999 [x 99999]"
+                },
+                {
+                    "key": "field_location_appointments_additional_text",
+                    "label": "Additional Text",
+                    "name": "location_appointments_additional_text",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
+        },
+        "field_location_about_message": {
+            "key": "field_location_about_message",
+            "label": "",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "<h3>\"About\" Section<\/h3>",
+            "new_lines": "",
+            "esc_html": 0
+        },
         "field_location_about": {
             "key": "field_location_about",
             "name": "location_about",
@@ -807,284 +1120,22 @@
             "media_upload": 0,
             "delay": 0
         },
-        "field_location_clinic_phone_query": {
-            "key": "field_location_clinic_phone_query",
-            "label": "Is there a separate appointment number for patients?",
-            "name": "location_clinic_phone_query",
-            "type": "button_group",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_ac_query",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ],
-                [
-                    {
-                        "field": "field_location_ac_query",
-                        "operator": "==empty"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "30",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "choices": {
-                "1": "Yes",
-                "0": "No"
-            },
-            "allow_null": 0,
-            "default_value": 0,
-            "layout": "horizontal",
-            "return_format": "value"
-        },
-        "field_location_phone": {
-            "key": "field_location_phone",
-            "name": "location_phone",
-            "type": "maskfield",
-            "label": "Clinic Phone Number",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "70",
-                "class": "",
-                "id": ""
-            },
-            "input_mask": "(999) 999-9999 [x 99999]"
-        },
-        "field_location_appointment_phone_query": {
-            "key": "field_location_appointment_phone_query",
-            "label": "Is there a separate number for returning patients?",
-            "name": "location_appointment_phone_query",
-            "type": "button_group",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_clinic_phone_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "30",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "choices": {
-                "1": "Yes",
-                "0": "No"
-            },
-            "allow_null": 0,
-            "default_value": 0,
-            "layout": "horizontal",
-            "return_format": "value"
-        },
-        "field_location_new_appointments_phone": {
-            "key": "field_location_new_appointments_phone",
-            "name": "location_new_appointments_phone",
-            "type": "maskfield",
-            "label": "Appointments Phone Number",
-            "instructions": "For new patients, if separate numbers for new and returning patients",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_clinic_phone_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ],
-                [
-                    {
-                        "field": "field_location_ac_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "70",
-                "class": "",
-                "id": ""
-            },
-            "input_mask": "(999) 999-9999 [x 99999]"
-        },
-        "field_phone_spacer": {
-            "key": "field_phone_spacer",
+        "field_location_appointment_message": {
+            "key": "field_location_appointment_message",
             "label": "",
             "name": "",
             "type": "message",
             "instructions": "",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_appointment_phone_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "30",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "message": "&nbsp;",
-            "new_lines": "",
-            "esc_html": 0
-        },
-        "field_location_return_appointments_phone": {
-            "key": "field_location_return_appointments_phone",
-            "name": "location_return_appointments_phone",
-            "type": "maskfield",
-            "label": "Appointments Phone Number for Returning Patients",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_appointment_phone_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "70",
-                "class": "",
-                "id": ""
-            },
-            "input_mask": "(999) 999-9999 [x 99999]"
-        },
-        "field_location_fax": {
-            "key": "field_location_fax",
-            "name": "location_fax",
-            "type": "maskfield",
-            "label": "Clinic Fax Number",
-            "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_ac_query",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ],
-                [
-                    {
-                        "field": "field_location_ac_query",
-                        "operator": "==empty"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "input_mask": "(999) 999-9999 [x 99999]"
-        },
-        "field_location_phone_numbers": {
-            "key": "field_location_phone_numbers",
-            "name": "location_phone_numbers",
-            "type": "repeater",
-            "label": "Additional Phone Numbers (if needed):",
-            "instructions": "Example: <br\/>After Hours: ###-###-####",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_ac_query",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ],
-                [
-                    {
-                        "field": "field_location_ac_query",
-                        "operator": "==empty"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
-            "collapsed": "field_location_appointments_text",
-            "min": 0,
-            "max": 0,
-            "layout": "table",
-            "button_label": "",
-            "sub_fields": [
-                {
-                    "key": "field_location_appointments_text",
-                    "label": "Text",
-                    "name": "location_appointments_text",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_location_appointments_phone",
-                    "label": "Phone #",
-                    "name": "location_appointments_phone",
-                    "type": "maskfield",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "input_mask": "(999) 999-9999 [x 99999]"
-                },
-                {
-                    "key": "field_location_appointments_additional_text",
-                    "label": "Additional Text",
-                    "name": "location_appointments_additional_text",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                }
-            ]
+            "message": "<h3>\"Appointment Information\" Section<\/h3>",
+            "new_lines": "",
+            "esc_html": 0
         },
         "field_location_appointment": {
             "key": "field_location_appointment",
