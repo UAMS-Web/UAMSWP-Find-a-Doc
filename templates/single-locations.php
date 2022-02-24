@@ -700,7 +700,7 @@ while ( have_posts() ) : the_post(); ?>
 						<?php } ?>
 						<?php if ($location_new_appointments_phone && $location_clinic_phone_query) { ?>
 							<dt>Appointments</dt>
-							<dd><?php echo $location_new_appointments_phone_link; ?><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
+							<dd><?php echo $location_new_appointments_phone_link; ?><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : ''; ?></dd>
 							<?php $phone_schema .= ', "'. format_phone_dash( $location_new_appointments_phone ) .'"
 							'; ?>
 							<?php if ($location_return_appointments_phone && $location_appointment_phone_query) { ?>
