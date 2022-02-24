@@ -693,13 +693,13 @@ while ( have_posts() ) : the_post(); ?>
 					<h2>Contact Information</h2>
 					<dl data-categorytitle="Telephone Number">
 						<?php if ($location_phone) { ?>
-						<dt>Clinic Phone Number</dt>
+						<dt>General Information</dt>
 						<dd><?php echo $location_phone_link; ?></dd>
 						<?php $phone_schema .= '"telephone": ["'. format_phone_dash( $location_phone ) .'"
 						'; ?>
 						<?php } ?>
 						<?php if ($location_new_appointments_phone && $location_clinic_phone_query) { ?>
-							<dt>Appointment Phone Number<?php echo $location_appointment_phone_query ? 's' : ''; ?></dt>
+							<dt>Appointments</dt>
 							<dd><?php echo $location_new_appointments_phone_link; ?><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
 							<?php $phone_schema .= ', "'. format_phone_dash( $location_new_appointments_phone ) .'"
 							'; ?>
@@ -710,7 +710,7 @@ while ( have_posts() ) : the_post(); ?>
 							<?php } ?>
 						<?php } ?>
 						<?php if ($location_fax) { ?>
-						<dt>Clinic Fax Number</dt>
+						<dt>Fax Number</dt>
 						<dd><?php echo $location_fax_link; ?></dd>
 						<?php } ?>
 						<?php if ( $location_phone_numbers ) { 
