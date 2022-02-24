@@ -131,7 +131,7 @@ function fwp_facet_scripts() {
         }
         // If region is set, then write the cookie
         // console.log(region);
-        if (region) {
+        if (region && 'all' != region) {
             document.cookie = "wp_filter_region="+region+"; path=/; domain="+window.location.hostname;
         } else {
             document.cookie = 'wp_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
@@ -179,8 +179,15 @@ function fwp_facet_scripts() {
         <?php } ?>
             var regiondata = readCookie('wp_filter_region');
             console.log(window.location.hostname);
+            console.log(region);
+            // region = all => clear cookie & remove qs value
+            if ('all' == region || 'all' == regiondata){
+	            document.cookie = 'wp_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
+	            params.delete(regionname);
+	            window.location.search = `?${params}`;
+            }
             // No qs and cookie has value
-            if ( !region && null != regiondata && '' != regiondata ) {
+            if ( 'all' != region && !region && null != regiondata && '' != regiondata ) {
                 document.cookie = 'wp_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
                 // window.location.search = '_location_region='+regiondata;
                 params.set(regionname, regiondata);
@@ -190,9 +197,6 @@ function fwp_facet_scripts() {
             // QS & no location set 
             if ( facets && region && regiondata && region != regiondata ) {
                 document.cookie = 'wp_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
-                // window.location.search = '_location_region='+regiondata;
-                // params.set('_location_region', regiondata);
-                // window.location.search = `?${params}`;
             }
         }
     });
