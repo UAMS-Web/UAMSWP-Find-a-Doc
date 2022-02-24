@@ -34,81 +34,6 @@ if ($parent_location) {
 $location_ac_query = get_field('location_ac_query'); // Is this an Arkansas Children's location?
 
 
-// Phone values
-
-// General information phone number
-$location_phone = get_field('location_phone');
-$location_phone_format_dash = format_phone_dash( $location_phone );
-$location_phone_format_us = format_phone_us( $location_phone );
-$location_phone_link = '<a href="tel:' . $location_phone_format_dash . '" class="icon-phone" data-typetitle="Clinic Phone Number">' . $location_phone_format_us . '</a>'; // Build the anchor element for the general information phone number
-$location_clinic_phone_query = false; // Are there main appointment phone numbers other than the general information phone number?
-
-// Arkansas Children's appointment phone numbers
-$location_ac_appointments_query = false; // Does this Arkansas Children's location have separate phone numbers for primary care appointments and specialty care appointments?
-$location_ac_appointments_primary = ''; // Arkansas Children's appointment phone number for primary care
-$location_ac_appointments_specialty = ''; // Arkansas Children's appointment phone number for specialty care
-if ( $location_ac_query ) {
-	// IF this is an Arkansas Children's location...
-	$location_clinic_phone_query = true;
-	$location_ac_appointments_query = get_field('location_ac_appointments_query'); // Get the input
-	if ( $location_ac_appointments_query ) {
-		// IF this Arkansas Children's location has separate phone numbers for primary care appointments and specialty care appointments...
-		$location_ac_appointments_primary = get_field('location_ac_appointments_primary'); // Get the input
-		$location_ac_appointments_primary_format_dash = format_phone_dash( $location_ac_appointments_primary );
-		$location_ac_appointments_primary_format_us = format_phone_us( $location_ac_appointments_primary );
-		$location_ac_appointments_primary_link = '<a href="tel:' . $location_ac_appointments_primary_format_dash . '" class="icon-phone" data-typetitle="Arkansas Children\'s Primary Care Appointments Phone Number">' . $location_ac_appointments_primary_format_us . '</a>'; // Build the anchor element for the Arkansas Children's primary care appointments phone number
-		$location_ac_appointments_specialty = get_field('location_ac_appointments_specialty'); // Get the input
-		$location_ac_appointments_specialty_format_dash = format_phone_dash( $location_ac_appointments_specialty );
-		$location_ac_appointments_specialty_format_us = format_phone_us( $location_ac_appointments_specialty );
-		$location_ac_appointments_specialty_link = '<a href="tel:' . $location_ac_appointments_specialty_format_dash . '" class="icon-phone" data-typetitle="Arkansas Children\'s Specialty Care Appointments Phone Number">' . $location_ac_appointments_specialty_format_us . '</a>'; // Build the anchor element for the Arkansas Children's specialty care appointments phone number
-	} // Otherwise, the single appointments phone number is set below
-}
-
-// Appointment phone number for new (or new AND returning) patients
-$location_new_appointments_phone = ''; // Establishing the variable to be used later for the appointment phone number for (new) patients
-if ( !$location_ac_query ) {
-	// IF this is not an Arkansas Children's location...
-	$location_clinic_phone_query = get_field('location_clinic_phone_query'); // Get the input value (for locations that aren't Arkansas Children's locations)
-}
-if ( $location_clinic_phone_query  && !$location_ac_appointments_query ) {
-	// IF there are main appointment phone numbers other than the general information phone number...
-	// AND IF this is not set as an Arkansas Children's location with separate phone numbers for primary care appointments and specialty care appointments...
-	$location_new_appointments_phone = get_field('location_new_appointments_phone'); // Get the appointment phone number for (new) patients?
-	$location_new_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_new_appointments_phone ) . '" class="icon-phone" data-typetitle="Appointment Phone Number for New' . ($location_appointment_phone_query ? '' : ' and Returning') . ' Patients">' . format_phone_us( $location_new_appointments_phone ) . '</a>'; // Build the anchor element for the appointment phone for (new) patients
-}
-
-// Appointment phone number for returning patients
-$location_return_appointments_phone = ''; // Establishing the variable to be used later for the appointment phone number for returning patients
-$location_return_appointments_phone_link = ''; // Establishing the variable to be used later for the anchor element for the appointment phone for returning patients
-$location_appointment_phone_query = false; // Is there a separate phone number for returning patients?
-if ( $location_clinic_phone_query && !$location_ac_query ) {
-	// IF there is a a separate appointment phone number for (new) patients...
-	// AND IF this isn't an Arkansas Children's location...
-	$location_appointment_phone_query = get_field('field_location_appointment_phone_query'); // Check if there is a separate appointment phone number for returning patients
-}
-if ( $location_appointment_phone_query ) {
-	// IF there is a a separate appointment phone number for returning patients...
-	$location_return_appointments_phone = get_field('location_return_appointments_phone'); // Get the appointment phone number for returning patients
-	$location_return_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_return_appointments_phone ) . '" class="icon-phone" data-typetitle="Appointment Phone Number for Returning Patients">' . format_phone_us( $location_return_appointments_phone ) . '</a>'; // Build the anchor element for the appointment phone number for returning patients
-}
-
-// Fax number
-$location_fax = ''; // Establishing the variable to be used later for the fax number
-$location_fax_link = ''; // // Establishing the variable to be used later for the anchor element for the fax number
-if ( !$location_ac_query ) {
-	// IF this is not an Arkansas Children's location...
-	$location_fax = get_field('location_fax'); // Get the fax number
-	$location_fax_link = '<a href="tel:' . format_phone_dash( $location_fax ) . '" class="icon-phone" data-typetitle="Clinic Fax Number">' . format_phone_us( $location_fax ) . '</a>'; // Build the anchor element for the fax number
-}
-
-// Additional phone numbers
-$location_phone_numbers = ''; //Establishing the variable to be used later for the repeater for additional phone numbers
-if ( !$location_ac_query ) {
-	// IF this is not an Arkansas Children's location...
-	$location_phone_numbers = get_field('field_location_phone_numbers'); // Get the repeater for additional phone numbers
-}
-
-
 // Image values
 $override_parent_photo = get_field('location_image_override_parent');
 $override_parent_photo_featured = get_field('location_image_override_parent_featured');
@@ -720,67 +645,13 @@ while ( have_posts() ) : the_post(); ?>
 						$phone_schema = '';
 					?>
 					<h2>Contact Information</h2>
-					<dl data-categorytitle="Telephone Number">
-						<?php if ($location_phone) { ?>
-						<dt>General Information<?php echo $location_clinic_phone_query ? '' : ' and Appointments'; ?></dt>
-						<dd><?php echo $location_phone_link; ?></dd>
-						<?php $phone_schema .= '"telephone": ["'. $location_phone_format_dash .'"
-						'; ?>
-						<?php } ?>
-						<?php if ($location_new_appointments_phone && $location_clinic_phone_query) { ?>
-							<dt>Appointments</dt>
-							<dd><?php echo $location_new_appointments_phone_link; ?><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : ''; ?></dd>
-							<?php $phone_schema .= ', "'. format_phone_dash( $location_new_appointments_phone ) .'"
-							'; ?>
-							<?php if ($location_return_appointments_phone && $location_appointment_phone_query) { ?>
-								<dd><?php echo $location_return_appointments_phone_link; ?><br/><span class="subtitle">Returning Patients</span></dd>
-								<?php $phone_schema .= ', "'. format_phone_dash( $location_return_appointments_phone ) .'"
-							'; ?>
-							<?php } ?>
-						<?php } elseif ( $location_ac_appointments_query ) { ?>
-							<dt>Appointments</dt>
-							<dd><?php echo $location_ac_appointments_primary_link; ?><br/><span class="subtitle">Primary Care</span></dd>
-							<?php $phone_schema .= ', "'. $location_ac_appointments_primary_format_dash .'"
-							'; ?>
-							<dd><?php echo $location_ac_appointments_specialty_link; ?><br/><span class="subtitle">Specialty Care</span></dd>
-							<?php $phone_schema .= ', "'. $location_ac_appointments_specialty_format_dash .'"
-							'; ?>
-						<?php } ?>
-						<?php if ($location_fax) { ?>
-						<dt>Fax Number</dt>
-						<dd><?php echo $location_fax_link; ?></dd>
-						<?php } ?>
-						<?php if ( $location_phone_numbers ) { 
-							$phone_numbers = $location_phone_numbers;
-							while( have_rows('field_location_phone_numbers') ): the_row(); 
-								$title = get_sub_field('location_appointments_text');
-								$title_attr = str_replace('"', '\'', $title);
-								$title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($title_attr, null, 'utf-8')));
-								$phone = get_sub_field('location_appointments_phone');
-								$text = get_sub_field('location_appointments_additional_text');
-						?>
-						<dt><?php echo $title; ?></dt>
-						<dd><a href="tel:<?php echo format_phone_dash( $phone ); ?>" data-typetitle="Additional Phone Number: <?php echo $title_attr; ?>"><?php echo format_phone_us( $phone ); ?></a><?php echo ($text ? '<br/><span class="subtitle">'. $text .'</span>' : ''); ?></dd>
-						<?php if ('' != $phone){
-							$phone_schema .= ', "'. format_phone_dash( $phone ) .'"
-							'; 
-							}?>
-						<?php endwhile; 
-							} ?>
-						<?php
-							$phone_numbers = get_field('location_appointments');
-							if ( ! empty( $phone_numbers ) && ! empty( $phone_numbers[0]['number'] ) ) {
-								foreach ( $phone_numbers as $phone_number ) {
-									if (! empty($phone_number['text']) && ! empty($phone_number['number']) ) {
-										echo '<dt>' . $phone_number['text'] . '</dt>';
-										echo '<dd><a href="tel:'. $phone_number['number'] .'" class="icon-phone">'. $phone_number['number'] .'</a> ' . $phone_number['after'] .'</dd>'; // Display sub-field value
-									}
-								}
-							}
-						?>
-					</dl>
-					<?php
-					$phone_schema .= '],';
+					<?php 
+					// Phone values
+					$phone_output_id = $id;
+					$phone_output = 'location_profile';
+					include( UAMS_FAD_PATH . '/templates/blocks/locations-phone.php' );
+					
+					// Hours values
 					$hoursvary = $location_hours_group['location_hours_variable'];
 					$hoursvary_info = $location_hours_group['location_hours_variable_info'];
 					$hours247 = $location_hours_group['location_24_7'];

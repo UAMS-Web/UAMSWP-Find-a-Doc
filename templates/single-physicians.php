@@ -532,11 +532,6 @@ while ( have_posts() ) : the_post();
                                             $location_city = get_field('location_city', $address_id);
                                             $location_state = get_field('location_state', $address_id);
                                             $location_zip = get_field('location_zip', $address_id);
-                                            $location_phone = get_field('location_phone', $location);
-                                            $location_appointment_phone_query = get_field('field_location_appointment_phone_query', $location);
-                                            $location_new_appointments_phone = get_field('location_new_appointments_phone', $location);
-                                            $location_clinic_phone_query = get_field('location_clinic_phone_query', $location);
-                                            $location_return_appointments_phone = get_field('location_return_appointments_phone', $location);
 
                                     ?>
                                 <p><strong><?php echo $primary_appointment_title; ?></strong><br />
@@ -549,19 +544,14 @@ while ( have_posts() ) : the_post();
                                 <?php $map = get_field( 'location_map', $address_id ); ?>
                                 <!-- <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a> -->
                                 </p>
-                                <?php if ($location_phone) { ?>
-                                    <dl data-categorytitle="Telephone Number">
-                                        <dt>Appointment Phone Number<?php echo $location_appointment_phone_query ? 's' : ''; ?></dt>
-                                        <?php if ($location_new_appointments_phone && $location_clinic_phone_query) { ?>
-                                            <dd><a href="tel:<?php echo format_phone_dash( $location_new_appointments_phone ); ?>" class="icon-phone" data-itemtitle="<?php echo $primary_appointment_title_attr; ?>" data-typetitle="Appointment Phone Number for New<?php echo $location_appointment_phone_query ? '' : ' and Returning' ; ?> Patients"><?php echo format_phone_us( $location_new_appointments_phone ); ?></a><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
-                                            <?php if ($location_return_appointments_phone && $location_appointment_phone_query) { ?>
-                                                <dd><a href="tel:<?php echo format_phone_dash( $location_return_appointments_phone ); ?>" class="icon-phone" data-itemtitle="<?php echo $primary_appointment_title_attr; ?>" data-typetitle="Appointment Phone Number for Returning Patients"><?php echo format_phone_us( $location_return_appointments_phone ); ?></a><br/><span class="subtitle">Returning Patients</span></dd>
-                                            <?php } ?>
-                                        <?php } else { ?>
-                                            <dd><a href="tel:<?php echo format_phone_dash( $location_phone ); ?>" class="icon-phone" data-itemtitle="<?php echo $primary_appointment_title_attr; ?>" data-typetitle="Appointment Phone Number for New and Returning Patients"><?php echo format_phone_us( $location_phone ); ?></a><br/><span class="subtitle">New and Returning Patients</span></dd>
-                                        <?php } ?>
-                                    </dl>
-                                <?php } ?>
+                                <?php
+                                    $location_ac_query = get_field('location_ac_query', $location); // Is this an Arkansas Children's location?
+
+                                    // Phone values
+                                    $phone_output_id = $location;
+                                    $phone_output = 'associated_locations';
+                                    include( UAMS_FAD_PATH . '/templates/blocks/locations-phone.php' );
+                                 ?>
                                 <div class="btn-container">
                                     <a class="btn btn-primary" href="<?php echo get_the_permalink( $location ); ?>" data-itemtitle="<?php echo $primary_appointment_title_attr; ?>" data-categorytitle="View Location">
                                         View Location
