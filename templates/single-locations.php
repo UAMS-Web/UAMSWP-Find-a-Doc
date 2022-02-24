@@ -31,7 +31,7 @@ if ($parent_location) {
 } else {
 	$post_id = get_the_ID();
 }
-$location_ac_query = get_field('location_ac_query');
+$location_ac_query = get_field('location_ac_query'); // Is this an Arkansas Children's location?
 
 
 // Phone values
@@ -57,10 +57,13 @@ if ( $location_clinic_phone_query ) { // IF there is a a separate appointment ph
 $location_return_appointments_phone = ''; // Establishing the variable to be used later for the appointment phone number for returning patients
 $location_return_appointments_phone_link = ''; // Establishing the variable to be used later for the anchor element for the appointment phone for returning patients
 $location_appointment_phone_query = false; // Is there a separate phone number for returning patients?
-if ( $location_clinic_phone_query && !$location_ac_query ) { // IF there is a a separate appointment phone number for (new) patients AND IF this isn't an Arkansas Children's location...
+if ( $location_clinic_phone_query && !$location_ac_query ) {
+	// IF there is a a separate appointment phone number for (new) patients...
+	// AND IF this isn't an Arkansas Children's location...
 	$location_appointment_phone_query = get_field('field_location_appointment_phone_query'); // Check if there is a separate appointment phone number for returning patients
 }
-if ( $location_appointment_phone_query ) { // IF there is a a separate appointment phone number for returning patients...
+if ( $location_appointment_phone_query ) {
+	// IF there is a a separate appointment phone number for returning patients...
 	$location_return_appointments_phone = get_field('location_return_appointments_phone'); // Get the appointment phone number for returning patients
 	$location_return_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_return_appointments_phone ) . '" class="icon-phone" data-typetitle="Appointment Phone Number for Returning Patients">' . format_phone_us( $location_return_appointments_phone ) . '</a>'; // Build the anchor element for the appointment phone number for returning patients
 }
@@ -68,14 +71,16 @@ if ( $location_appointment_phone_query ) { // IF there is a a separate appointme
 // Fax number
 $location_fax = ''; // Establishing the variable to be used later for the fax number
 $location_fax_link = ''; // // Establishing the variable to be used later for the anchor element for the fax number
-if ( !$location_ac_query ) { // IF this is not an Arkansas Children's location...
+if ( !$location_ac_query ) {
+	// IF this is not an Arkansas Children's location...
 	$location_fax = get_field('location_fax'); // Get the fax number
 	$location_fax_link = '<a href="tel:' . format_phone_dash( $location_fax ) . '" class="icon-phone" data-typetitle="Clinic Fax Number">' . format_phone_us( $location_fax ) . '</a>'; // Build the anchor element for the fax number
 }
 
 // Additional phone numbers
 $location_phone_numbers = ''; //Establishing the variable to be used later for the repeater for additional phone numbers
-if ( !$location_ac_query ) { // IF this is not an Arkansas Children's location...
+if ( !$location_ac_query ) {
+	// IF this is not an Arkansas Children's location...
 	$location_phone_numbers = get_field('field_location_phone_numbers'); // Get the repeater for additional phone numbers
 }
 
