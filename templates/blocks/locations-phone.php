@@ -34,11 +34,12 @@ if ( $phone_output == 'associated_locations' ) {
 $location_phone = get_field('location_phone', $phone_output_id);
 $location_phone_format_dash = format_phone_dash( $location_phone );
 $location_phone_format_us = format_phone_us( $location_phone );
-$location_phone_link_data_typetitle = 'Clinic Phone Number';
 if ( $location_appointments_query && ( $phone_output == 'associated_locations' ) ) {
     // IF a patient can schedule an appointment for services rendered at this location...
     // AND IF the output is on references to associated locations like location cards and a Provider profile's primary location section...
     $location_phone_link_data_typetitle = 'Appointment Phone Number for New and Returning Patients';
+} else {
+    $location_phone_link_data_typetitle = 'Clinic Phone Number';
 }
 $location_phone_link = '<a href="tel:' . $location_phone_format_dash . '" class="icon-phone"' . ($location_phone_data_categorytitle ? ' data-categorytitle="' . $location_phone_data_categorytitle . '"' : '') . ($location_phone_data_itemtitle ? ' data-itemtitle="' . $location_phone_data_itemtitle . '"' : '') . ($location_phone_link_data_typetitle ? ' data-typetitle="' . $location_phone_link_data_typetitle . '"' : '') . '>' . $location_phone_format_us . '</a>'; // Build the anchor element for the general information phone number
 $location_clinic_phone_query = false; // Are there main appointment phone numbers other than the general information phone number?
