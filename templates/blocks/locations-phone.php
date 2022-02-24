@@ -35,7 +35,11 @@ $location_phone = get_field('location_phone', $phone_output_id);
 $location_phone_format_dash = format_phone_dash( $location_phone );
 $location_phone_format_us = format_phone_us( $location_phone );
 $location_phone_link_data_typetitle = 'Clinic Phone Number';
-$location_phone_link_data_typetitle = ( $phone_output == 'associated_locations' ) ? 'Appointment Phone Number for New and Returning Patients' : $location_phone_link_data_typetitle;
+if ( $location_appointments_query && ( $phone_output == 'associated_locations' ) ) {
+    // IF a patient can schedule an appointment for services rendered at this location...
+    // AND IF the output is on references to associated locations like location cards and a Provider profile's primary location section...
+    $location_phone_link_data_typetitle = 'Appointment Phone Number for New and Returning Patients';
+}
 $location_phone_link = '<a href="tel:' . $location_phone_format_dash . '" class="icon-phone"' . ($location_phone_data_categorytitle ? ' data-categorytitle="' . $location_phone_data_categorytitle . '"' : '') . ($location_phone_data_itemtitle ? ' data-itemtitle="' . $location_phone_data_itemtitle . '"' : '') . ($location_phone_link_data_typetitle ? ' data-typetitle="' . $location_phone_link_data_typetitle . '"' : '') . '>' . $location_phone_format_us . '</a>'; // Build the anchor element for the general information phone number
 $location_clinic_phone_query = false; // Are there main appointment phone numbers other than the general information phone number?
 
@@ -203,31 +207,34 @@ if ( $phone_output == 'location_profile' ) { ?>
 if ( $phone_output == 'associated_locations' ) { ?>
     <?php if ( $location_phone ) { ?>
         <dl <?php echo $location_phone_data_categorytitle ? 'data-categorytitle="' . $location_phone_data_categorytitle . '"' : '' ?>>
-            <dt><?php if ( $location_appointments_query ) {
+            <?php if ( $location_appointments_query ) {
                 // IF a patient can schedule an appointment for services rendered at this location...
-                echo 'Appointment Phone Number' . ($location_phone_appointments_multiple_query ? 's' : '');
-            } else {
-                echo 'General Information';
-            }
-            ?></dt>
-            <?php if ( $location_new_appointments_phone && $location_clinic_phone_query ) {
-            // Appointments
-            ?>
-                <dd><?php echo $location_new_appointments_phone_link; ?><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
-                <?php if ($location_return_appointments_phone && $location_appointment_phone_query) { ?>
-                    <dd><?php echo $location_return_appointments_phone_link; ?><br/><span class="subtitle">Returning Patients</span></dd>
+                ?>
+                <dt>Appointment Phone Number<?php echo $location_phone_appointments_multiple_query ? 's' : ''; ?></dt>
+                <?php if ( $location_new_appointments_phone && $location_clinic_phone_query ) {
+                    // Appointments
+                    ?>
+                    <dd><?php echo $location_new_appointments_phone_link; ?><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
+                    <?php if ($location_return_appointments_phone && $location_appointment_phone_query) { ?>
+                        <dd><?php echo $location_return_appointments_phone_link; ?><br/><span class="subtitle">Returning Patients</span></dd>
+                    <?php } ?>
+                <?php } elseif ( $location_ac_appointments_query ) {
+                    // Arkansas Children's Primary Care and Specialty Care Appointments
+                    ?>
+                    <dd><?php echo $location_ac_appointments_primary_link; ?><br/><span class="subtitle">Primary Care</span></dd>
+                    <dd><?php echo $location_ac_appointments_specialty_link; ?><br/><span class="subtitle">Specialty Care</span></dd>
+                <?php } else {
+                    // Display general information number as the appointments number
+                    ?>
+                    <dd><?php echo $location_phone_link; ?><br/><span class="subtitle">New and Returning Patients</span></dd>
                 <?php } ?>
-            <?php } elseif ( $location_ac_appointments_query ) {
-            // Arkansas Children's Primary Care and Specialty Care Appointments
-            ?>
-                <dd><?php echo $location_ac_appointments_primary_link; ?><br/><span class="subtitle">Primary Care</span></dd>
-                <dd><?php echo $location_ac_appointments_specialty_link; ?><br/><span class="subtitle">Specialty Care</span></dd>
             <?php } else {
-            // Display general information number as the appointments number
-            ?>
-                <dd><?php echo $location_phone_link; ?><br/><span class="subtitle">New and Returning Patients</span></dd>
+                // IF a patient cannot schedule an appointment for services rendered at this location...
+                ?>
+                <dt>General Information</dt>
+                <dd><?php echo $location_phone_link; ?></dd>
             <?php } ?>
         </dl>
-    <?php } // endif ?>
-<?php } // endif
+    <?php } // endif $location_phone ?>
+<?php } // endif $phone_output == 'associated_locations'
 ?>
