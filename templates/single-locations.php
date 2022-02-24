@@ -39,25 +39,34 @@ if ($parent_location) {
 $location_phone = get_field('location_phone');
 $location_phone_link = '<a href="tel:' . format_phone_dash( $location_phone ) . '" class="icon-phone" data-typetitle="Clinic Phone Number">' . format_phone_us( $location_phone ) . '</a>'; // Build the anchor element for the general information phone number
 
-// Appointment phone numbers
+// Appointment phone number for new (or new AND returning) patients
+$location_new_appointments_phone = ''; // Establishing the variable to be used later for the appointment phone number for (new) patients
+$location_new_appointments_phone_link = ''; // Establishing the variable to be used later for the anchor element for the appointment phone for (new) patients
 $location_clinic_phone_query = get_field('location_clinic_phone_query'); // Is there a separate appointment phone number for (new) patients?
-if ($location_clinic_phone_query) {
+if ( $location_clinic_phone_query ) { // If there is a a separate appointment phone number for (new) patients...
 	$location_new_appointments_phone = get_field('location_new_appointments_phone'); // Get the appointment phone number for (new) patients?
-	$location_appointment_phone_query = get_field('field_location_appointment_phone_query'); // Is there a separate appointment phone number for returning patients?
-	$location_new_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_new_appointments_phone ) . '" class="icon-phone" data-typetitle="Appointment Phone Number for New' . ($location_appointment_phone_query ? '' : ' and Returning') . ' Patients">' . format_phone_us( $location_new_appointments_phone ) . '</a>'; // Build the anchor element for the appointment phone number
-} else {
-	$location_new_appointments_phone = '';
-	$location_appointment_phone_query = '0';
+	$location_new_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_new_appointments_phone ) . '" class="icon-phone" data-typetitle="Appointment Phone Number for New' . ($location_appointment_phone_query ? '' : ' and Returning') . ' Patients">' . format_phone_us( $location_new_appointments_phone ) . '</a>'; // Build the anchor element for the appointment phone for (new) patients
 }
-if ($location_appointment_phone_query) {
-	$location_return_appointments_phone = get_field('location_return_appointments_phone'); // Get the phone number for existing appointments
+
+// Appointment phone number for returning patients
+$location_return_appointments_phone = ''; // Establishing the variable to be used later for the appointment phone number for returning patients
+$location_return_appointments_phone_link = ''; // Establishing the variable to be used later for the anchor element for the appointment phone for returning patients
+$location_appointment_phone_query = false; // Is there a separate phone number for returning patients?
+if ( $location_clinic_phone_query ) { // If there is a a separate appointment phone number for (new) patients...
+	$location_appointment_phone_query = get_field('field_location_appointment_phone_query'); // Check if there is a separate appointment phone number for returning patients
+}
+if ( $location_appointment_phone_query ) { // If there is a a separate appointment phone number for returning patients...
+	$location_return_appointments_phone = get_field('location_return_appointments_phone'); // Get the appointment phone number for returning patients
 	$location_return_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_return_appointments_phone ) . '" class="icon-phone" data-typetitle="Appointment Phone Number for Returning Patients">' . format_phone_us( $location_return_appointments_phone ) . '</a>'; // Build the anchor element for the appointment phone number for returning patients
-} else {
-	$location_return_appointments_phone = '';
 }
+
+// Fax number
 $location_fax = get_field('location_fax'); // Get the fax number
 $location_fax_link = '<a href="tel:' . format_phone_dash( $location_fax ) . '" class="icon-phone" data-typetitle="Clinic Fax Number">' . format_phone_us( $location_fax ) . '</a>'; // Build the anchor element for the fax number
+
+// Additional phone numbers
 $location_phone_numbers = get_field('field_location_phone_numbers'); // Get the repeater for additional phone numbers
+
 
 // Image values
 $override_parent_photo = get_field('location_image_override_parent');
