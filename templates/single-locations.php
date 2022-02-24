@@ -35,8 +35,11 @@ if ($parent_location) {
 
 // Phone values
 
+// General information phone number
 $location_phone = get_field('location_phone');
 $location_phone_link = '<a href="tel:' . format_phone_dash( $location_phone ) . '" class="icon-phone" data-typetitle="Clinic Phone Number">' . format_phone_us( $location_phone ) . '</a>';
+
+// Appointment phone numbers
 $location_clinic_phone_query = get_field('location_clinic_phone_query'); // separate number for (new) appointments?
 if ($location_clinic_phone_query) {
 	$location_new_appointments_phone = get_field('location_new_appointments_phone'); // phone number for (new) appointments
