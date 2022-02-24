@@ -538,7 +538,7 @@
             "key": "field_location_appointments_query",
             "name": "location_appointments_query",
             "type": "true_false",
-            "label": "Can a prospective patient schedule an appointment for services rendered at this location?",
+            "label": "Can a patient schedule an appointment for services rendered at this location?",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
