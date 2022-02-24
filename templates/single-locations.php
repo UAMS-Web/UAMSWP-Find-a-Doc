@@ -38,7 +38,9 @@ $location_ac_query = get_field('location_ac_query'); // Is this an Arkansas Chil
 
 // General information phone number
 $location_phone = get_field('location_phone');
-$location_phone_link = '<a href="tel:' . format_phone_dash( $location_phone ) . '" class="icon-phone" data-typetitle="Clinic Phone Number">' . format_phone_us( $location_phone ) . '</a>'; // Build the anchor element for the general information phone number
+$location_phone_format_dash = format_phone_dash( $location_phone );
+$location_phone_format_us = format_phone_us( $location_phone );
+$location_phone_link = '<a href="tel:' . $location_phone_format_dash . '" class="icon-phone" data-typetitle="Clinic Phone Number">' . $location_phone_format_us . '</a>'; // Build the anchor element for the general information phone number
 $location_clinic_phone_query = false; // Are there main appointment phone numbers other than the general information phone number?
 
 // Arkansas Children's appointment phone numbers
@@ -52,9 +54,13 @@ if ( $location_ac_query ) {
 	if ( $location_ac_appointments_query ) {
 		// IF this Arkansas Children's location has separate phone numbers for primary care appointments and specialty care appointments...
 		$location_ac_appointments_primary = get_field('location_ac_appointments_primary'); // Get the input
-		$location_ac_appointments_primary_link = '<a href="tel:' . format_phone_dash( $location_ac_appointments_primary ) . '" class="icon-phone" data-typetitle="Arkansas Children\'s Primary Care Appointments Phone Number">' . format_phone_us( $location_ac_appointments_primary ) . '</a>'; // Build the anchor element for the Arkansas Children's primary care appointments phone number
+		$location_ac_appointments_primary_format_dash = format_phone_dash( $location_ac_appointments_primary );
+		$location_ac_appointments_primary_format_us = format_phone_us( $location_ac_appointments_primary );
+		$location_ac_appointments_primary_link = '<a href="tel:' . $location_ac_appointments_primary_format_dash . '" class="icon-phone" data-typetitle="Arkansas Children\'s Primary Care Appointments Phone Number">' . $location_ac_appointments_primary_format_us . '</a>'; // Build the anchor element for the Arkansas Children's primary care appointments phone number
 		$location_ac_appointments_specialty = get_field('location_ac_appointments_specialty'); // Get the input
-		$location_ac_appointments_specialty_link = '<a href="tel:' . format_phone_dash( $location_ac_appointments_specialty ) . '" class="icon-phone" data-typetitle="Arkansas Children\'s Specialty Care Appointments Phone Number">' . format_phone_us( $location_ac_appointments_specialty ) . '</a>'; // Build the anchor element for the Arkansas Children's specialty care appointments phone number
+		$location_ac_appointments_specialty_format_dash = format_phone_dash( $location_ac_appointments_specialty );
+		$location_ac_appointments_specialty_format_us = format_phone_us( $location_ac_appointments_specialty );
+		$location_ac_appointments_specialty_link = '<a href="tel:' . $location_ac_appointments_specialty_format_dash . '" class="icon-phone" data-typetitle="Arkansas Children\'s Specialty Care Appointments Phone Number">' . $location_ac_appointments_specialty_format_us . '</a>'; // Build the anchor element for the Arkansas Children's specialty care appointments phone number
 	} // Otherwise, the single appointments phone number is set below
 }
 
@@ -718,7 +724,7 @@ while ( have_posts() ) : the_post(); ?>
 						<?php if ($location_phone) { ?>
 						<dt>General Information<?php echo $location_clinic_phone_query ? '' : ' and Appointments'; ?></dt>
 						<dd><?php echo $location_phone_link; ?></dd>
-						<?php $phone_schema .= '"telephone": ["'. format_phone_dash( $location_phone ) .'"
+						<?php $phone_schema .= '"telephone": ["'. $location_phone_format_dash .'"
 						'; ?>
 						<?php } ?>
 						<?php if ($location_new_appointments_phone && $location_clinic_phone_query) { ?>
@@ -734,10 +740,10 @@ while ( have_posts() ) : the_post(); ?>
 						<?php } elseif ( $location_ac_appointments_query ) { ?>
 							<dt>Appointments</dt>
 							<dd><?php echo $location_ac_appointments_primary_link; ?><br/><span class="subtitle">Primary Care</span></dd>
-							<?php $phone_schema .= ', "'. format_phone_dash( $location_ac_appointments_primary ) .'"
+							<?php $phone_schema .= ', "'. $location_ac_appointments_primary_format_dash .'"
 							'; ?>
 							<dd><?php echo $location_ac_appointments_specialty_link; ?><br/><span class="subtitle">Specialty Care</span></dd>
-							<?php $phone_schema .= ', "'. format_phone_dash( $location_ac_appointments_specialty ) .'"
+							<?php $phone_schema .= ', "'. $location_ac_appointments_specialty_format_dash .'"
 							'; ?>
 						<?php } ?>
 						<?php if ($location_fax) { ?>
