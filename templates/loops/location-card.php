@@ -220,14 +220,10 @@
             <?php echo $location_city . ', ' . $location_state . ' ' . $location_zip; ?>
         </p>
         <?php 
-
-        $location_ac_query = get_field('location_ac_query', $id); // Is this an Arkansas Children's location?
-
         // Phone values
         $phone_output_id = $id;
         $phone_output = 'associated_locations';
         include( UAMS_FAD_PATH . '/templates/blocks/locations-phone.php' );
-        
         ?>
     </div><!-- .card-body -->
     <div class="btn-container">

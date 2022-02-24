@@ -31,7 +31,6 @@ if ($parent_location) {
 } else {
 	$post_id = get_the_ID();
 }
-$location_ac_query = get_field('location_ac_query'); // Is this an Arkansas Children's location?
 
 
 // Image values

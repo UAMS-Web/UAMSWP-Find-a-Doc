@@ -5,7 +5,6 @@
      * 
      *  Required vars:
      *      $phone_output_id (ID of location)
-     *      $location_ac_query (check if location is an Arkansas Children's location, true/false)
      *      $phone_output
      *          (
      *              valid values for $phone_output:
@@ -13,6 +12,8 @@
      *              'associated_locations' for references to associated locations like location cards and Provider profile primary location
      *          )
      */
+
+$location_ac_query = get_field('location_ac_query', $phone_output_id); // Is this an Arkansas Children's location?
 
 // Data attributes
 $location_phone_data_categorytitle = 'Telephone Number';

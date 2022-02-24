@@ -545,8 +545,6 @@ while ( have_posts() ) : the_post();
                                 <!-- <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a> -->
                                 </p>
                                 <?php
-                                    $location_ac_query = get_field('location_ac_query', $location); // Is this an Arkansas Children's location?
-
                                     // Phone values
                                     $phone_output_id = $location;
                                     $phone_output = 'associated_locations';
