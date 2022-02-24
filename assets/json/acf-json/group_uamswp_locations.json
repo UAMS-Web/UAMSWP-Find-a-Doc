@@ -570,7 +570,7 @@
             "key": "field_location_clinic_phone_query",
             "label": "Is there a separate appointment number for patients?",
             "name": "location_clinic_phone_query",
-            "type": "button_group",
+            "type": "true_false",
             "instructions": "",
             "required": 1,
             "conditional_logic": [
@@ -593,15 +593,11 @@
                 "class": "hide-acf-border",
                 "id": ""
             },
-            "acfe_permissions": "",
-            "choices": {
-                "1": "Yes",
-                "0": "No"
-            },
-            "allow_null": 0,
+            "message": "",
             "default_value": 0,
-            "layout": "horizontal",
-            "return_format": "value"
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         "field_location_clinic_phone_query_spacer": {
             "key": "field_location_clinic_phone_query_spacer",
@@ -663,7 +659,7 @@
             "key": "field_location_appointment_phone_query",
             "label": "Is there a separate number for returning patients?",
             "name": "location_appointment_phone_query",
-            "type": "button_group",
+            "type": "true_false",
             "instructions": "",
             "required": 1,
             "conditional_logic": [
@@ -680,15 +676,11 @@
                 "class": "hide-acf-border",
                 "id": ""
             },
-            "acfe_permissions": "",
-            "choices": {
-                "1": "Yes",
-                "0": "No"
-            },
-            "allow_null": 0,
+            "message": "",
             "default_value": 0,
-            "layout": "horizontal",
-            "return_format": "value"
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         "field_location_appointment_phone_query_spacer": {
             "key": "field_location_appointment_phone_query_spacer",
