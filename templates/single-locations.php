@@ -60,10 +60,9 @@ if ( $location_ac_query ) {
 
 // Appointment phone number for new (or new AND returning) patients
 $location_new_appointments_phone = ''; // Establishing the variable to be used later for the appointment phone number for (new) patients
-if ( $location_ac_query ) { // IF this is an Arkansas Children's location...
-	$location_clinic_phone_query = true;
-} else {
-	$location_clinic_phone_query = get_field('location_clinic_phone_query'); // Get the input value for locations that aren't Arkansas Children's locations
+if ( !$location_ac_query ) {
+	// IF this is not an Arkansas Children's location...
+	$location_clinic_phone_query = get_field('location_clinic_phone_query'); // Get the input value (for locations that aren't Arkansas Children's locations)
 }
 if ( $location_clinic_phone_query ) { // IF there is a a separate appointment phone number for (new) patients...
 	$location_new_appointments_phone = get_field('location_new_appointments_phone'); // Get the appointment phone number for (new) patients?
