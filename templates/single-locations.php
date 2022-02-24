@@ -41,6 +41,23 @@ $location_phone = get_field('location_phone');
 $location_phone_link = '<a href="tel:' . format_phone_dash( $location_phone ) . '" class="icon-phone" data-typetitle="Clinic Phone Number">' . format_phone_us( $location_phone ) . '</a>'; // Build the anchor element for the general information phone number
 $location_clinic_phone_query = false; // Are there main appointment phone numbers other than the general information phone number?
 
+// Arkansas Children's appointment phone numbers
+$location_ac_appointments_query = false; // Does this Arkansas Children's location have separate phone numbers for primary care appointments and specialty care appointments?
+$location_ac_appointments_primary = ''; // Arkansas Children's appointment phone number for primary care
+$location_ac_appointments_specialty = ''; // Arkansas Children's appointment phone number for specialty care
+if ( $location_ac_query ) {
+	// IF this is an Arkansas Children's location...
+	$location_clinic_phone_query = true;
+	$location_ac_appointments_query = get_field('location_ac_appointments_query'); // Get the input
+	if ( $location_ac_appointments_query ) {
+		// IF this Arkansas Children's location has separate phone numbers for primary care appointments and specialty care appointments...
+		$location_ac_appointments_primary = get_field('location_ac_appointments_primary'); // Get the input
+		$location_ac_appointments_primary_link = '<a href="tel:' . format_phone_dash( $location_ac_appointments_primary ) . '" class="icon-phone" data-typetitle="Arkansas Children\'s Primary Care Appointments Phone Number">' . format_phone_us( $location_ac_appointments_primary ) . '</a>'; // Build the anchor element for the Arkansas Children's primary care appointments phone number
+		$location_ac_appointments_specialty = get_field('location_ac_appointments_specialty'); // Get the input
+		$location_ac_appointments_specialty_link = '<a href="tel:' . format_phone_dash( $location_ac_appointments_specialty ) . '" class="icon-phone" data-typetitle="Arkansas Children\'s Specialty Care Appointments Phone Number">' . format_phone_us( $location_ac_appointments_specialty ) . '</a>'; // Build the anchor element for the Arkansas Children's specialty care appointments phone number
+	} // Otherwise, the single appointments phone number is set below
+}
+
 // Appointment phone number for new (or new AND returning) patients
 $location_new_appointments_phone = ''; // Establishing the variable to be used later for the appointment phone number for (new) patients
 if ( $location_ac_query ) { // IF this is an Arkansas Children's location...
