@@ -625,6 +625,33 @@
             "new_lines": "",
             "esc_html": 0
         },
+        "field_location_ac_appointments_query": {
+            "key": "field_location_ac_appointments_query",
+            "label": "Does this Arkansas Children's location have separate phone numbers for primary care appointments and specialty care appointments?",
+            "name": "location_ac_appointments_query",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
         "field_location_new_appointments_phone": {
             "key": "field_location_new_appointments_phone",
             "name": "location_new_appointments_phone",
@@ -643,6 +670,57 @@
                 [
                     {
                         "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_ac_appointments_query",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "input_mask": "(999) 999-9999 [x 99999]"
+        },
+        "field_location_ac_appointments_primary": {
+            "key": "field_location_ac_appointments_primary",
+            "name": "location_ac_appointments_primary",
+            "type": "maskfield",
+            "label": "Arkansas Children's Primary Care Appointments Phone Number",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_ac_appointments_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "input_mask": "(999) 999-9999 [x 99999]"
+        },
+        "field_location_ac_appointments_specialty": {
+            "key": "field_location_ac_appointments_specialty",
+            "name": "location_ac_appointments_specialty",
+            "type": "maskfield",
+            "label": "Arkansas Children's Specialty Care Appointments Phone Number",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_ac_appointments_query",
                         "operator": "==",
                         "value": "1"
                     }
