@@ -16,6 +16,10 @@
 // Check if this is an Arkansas Children's location
 $location_ac_query = get_field('location_ac_query', $phone_output_id);
 
+// Check if a patient can schedule an appointment for services rendered at this location
+$location_appointments_query = get_field('location_appointments_query', $phone_output_id); // Get the input
+$location_appointments_query = isset($location_appointments_query) ? $location_appointments_query : true; // Fallback value of 'true' for if value is otherwise null
+
 // Data attributes
 $location_phone_data_categorytitle = 'Telephone Number';
 $location_phone_data_itemtitle = '';
@@ -39,8 +43,9 @@ $location_clinic_phone_query = false; // Are there main appointment phone number
 $location_ac_appointments_query = false; // Does this Arkansas Children's location have separate phone numbers for primary care appointments and specialty care appointments?
 $location_ac_appointments_primary = ''; // Arkansas Children's appointment phone number for primary care
 $location_ac_appointments_specialty = ''; // Arkansas Children's appointment phone number for specialty care
-if ( $location_ac_query ) {
+if ( $location_ac_query && $location_appointments_query ) {
 	// IF this is an Arkansas Children's location...
+    // AND IF a patient can schedule an appointment for services rendered at this location...
 	$location_clinic_phone_query = true;
 	$location_ac_appointments_query = get_field('location_ac_appointments_query', $phone_output_id); // Get the input
 	if ( $location_ac_appointments_query ) {
@@ -59,8 +64,9 @@ if ( $location_ac_query ) {
 // Appointment phone number for new (or new AND returning) patients
 $location_new_appointments_phone = ''; // Establishing the variable to be used later for the appointment phone number for (new) patients
 $location_new_appointments_phone_link = ''; // Establishing the variable to be used later for building the anchor element for the appointment phone for (new) patients
-if ( !$location_ac_query ) {
+if ( !$location_ac_query && $location_appointments_query ) {
 	// IF this is not an Arkansas Children's location...
+    // AND IF a patient can schedule an appointment for services rendered at this location...
 	$location_clinic_phone_query = get_field('location_clinic_phone_query', $phone_output_id); // Get the input value (for locations that aren't Arkansas Children's locations)
 }
 if ( $location_clinic_phone_query && !$location_ac_appointments_query ) {
@@ -119,7 +125,7 @@ if ( $phone_output == 'location_profile' ) { ?>
         <?php if ( !empty($location_phone) ) {
         // General Information
         ?>
-            <dt>General Information<?php echo $location_clinic_phone_query ? '' : ' and Appointments'; ?></dt>
+            <dt>General Information<?php echo ( $location_clinic_phone_query || !$location_appointments_query ) ? '' : ' and Appointments'; ?></dt>
             <dd><?php echo !empty($location_phone_link) ? $location_phone_link : $location_phone; ?></dd>
             <?php isset($phone_schema) ? $phone_schema .= '"telephone": ["'. $location_phone_format_dash .'"
             ' : ''; ?>
@@ -197,7 +203,13 @@ if ( $phone_output == 'location_profile' ) { ?>
 if ( $phone_output == 'associated_locations' ) { ?>
     <?php if ( $location_phone ) { ?>
         <dl <?php echo $location_phone_data_categorytitle ? 'data-categorytitle="' . $location_phone_data_categorytitle . '"' : '' ?>>
-            <dt>Appointment Phone Number<?php echo $location_phone_appointments_multiple_query ? 's' : ''; ?></dt>
+            <dt><?php if ( $location_appointments_query ) {
+                // IF a patient can schedule an appointment for services rendered at this location...
+                echo 'Appointment Phone Number' . ($location_phone_appointments_multiple_query ? 's' : '');
+            } else {
+                echo 'General Information';
+            }
+            ?></dt>
             <?php if ( $location_new_appointments_phone && $location_clinic_phone_query ) {
             // Appointments
             ?>
