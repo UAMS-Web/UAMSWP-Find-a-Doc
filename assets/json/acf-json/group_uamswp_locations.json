@@ -534,6 +534,25 @@
             "ui_on_text": "",
             "ui_off_text": ""
         },
+        "field_location_appointments_query": {
+            "key": "field_location_appointments_query",
+            "name": "location_appointments_query",
+            "type": "true_false",
+            "label": "Can a prospective patient schedule an appointment for services rendered at this location?",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
         "field_location_contact_message": {
             "key": "field_location_contact_message",
             "label": "",
@@ -579,6 +598,11 @@
                         "field": "field_location_ac_query",
                         "operator": "==",
                         "value": "0"
+                    },
+                    {
+                        "field": "field_location_appointments_query",
+                        "operator": "==",
+                        "value": "1"
                     }
                 ]
             ],
@@ -607,6 +631,13 @@
                         "operator": "==",
                         "value": "1"
                     }
+                ],
+                [
+                    {
+                        "field": "field_location_appointments_query",
+                        "operator": "==",
+                        "value": "0"
+                    }
                 ]
             ],
             "wrapper": {
@@ -630,6 +661,11 @@
                 [
                     {
                         "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_appointments_query",
                         "operator": "==",
                         "value": "1"
                     }
@@ -765,6 +801,11 @@
                 [
                     {
                         "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_appointments_query",
                         "operator": "==",
                         "value": "1"
                     }
