@@ -11,7 +11,10 @@ if (empty($excerpt)){
     }
 }
 $page_title = get_the_title( );
+
+
 // Parent Location 
+
 $location_has_parent = get_field('location_parent');
 $location_parent_id = get_field('location_parent_id');
 $parent_title = ''; // Eliminate PHP errors
@@ -28,6 +31,7 @@ if ($parent_location) {
 } else {
 	$post_id = get_the_ID();
 }
+
 
 // Phone values
 
