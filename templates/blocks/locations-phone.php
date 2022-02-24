@@ -8,8 +8,8 @@
      *      $phone_output
      *          (
      *              valid values for $phone_output:
-     *              'location_profile' for location profile's contact information section,
-     *              'associated_locations' for references to associated locations like location cards and Provider profile primary location
+     *              'location_profile' is for a Location profile's contact information section,
+     *              'associated_locations' is for references to associated locations like location cards and a Provider profile's primary location section
      *          )
      */
 
