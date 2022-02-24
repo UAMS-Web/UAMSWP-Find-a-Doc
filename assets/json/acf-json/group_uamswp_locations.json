@@ -555,7 +555,7 @@
             "key": "field_location_phone",
             "name": "location_phone",
             "type": "maskfield",
-            "label": "Clinic Phone Number",
+            "label": "General Information Phone Number",
             "instructions": "The phone number that patients can call for general information related to this location",
             "required": 1,
             "conditional_logic": 0,
