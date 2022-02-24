@@ -572,7 +572,7 @@
             "name": "location_clinic_phone_query",
             "type": "true_false",
             "instructions": "",
-            "required": 1,
+            "required": 0,
             "conditional_logic": [
                 [
                     {
@@ -661,7 +661,7 @@
             "name": "location_appointment_phone_query",
             "type": "true_false",
             "instructions": "",
-            "required": 1,
+            "required": 0,
             "conditional_logic": [
                 [
                     {
