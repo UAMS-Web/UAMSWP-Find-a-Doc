@@ -114,38 +114,44 @@ if ( $phone_output == 'location_profile' ) {
 // Display phone numbers on location profile's contact information section 
 if ( $phone_output == 'location_profile' ) { ?>
     <dl <?php echo $location_phone_data_categorytitle ? 'data-categorytitle="' . $location_phone_data_categorytitle . '"' : '' ?>>
-        <?php if ($location_phone) {
+        <?php if ( !empty($location_phone) ) {
         // General Information
         ?>
             <dt>General Information<?php echo $location_clinic_phone_query ? '' : ' and Appointments'; ?></dt>
-            <dd><?php echo $location_phone_link; ?></dd>
+            <dd><?php echo !empty($location_phone_link) ? $location_phone_link : $location_phone; ?></dd>
             <?php isset($phone_schema) ? $phone_schema .= '"telephone": ["'. $location_phone_format_dash .'"
             ' : ''; ?>
         <?php } ?>
-        <?php if ( $location_new_appointments_phone && $location_clinic_phone_query ) {
+        <?php if ( $location_clinic_phone_query && ( !empty($location_new_appointments_phone) || ( !empty($location_return_appointments_phone) && $location_appointment_phone_query ) ) ) {
         // Appointments
         ?>
             <dt>Appointments</dt>
-            <dd><?php echo $location_new_appointments_phone_link; ?><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : ''; ?></dd>
-            <?php isset($phone_schema) ? $phone_schema .= ', "'. $location_new_appointments_phone_format_dash .'"
-            ' : ''; ?>
-            <?php if ($location_return_appointments_phone && $location_appointment_phone_query) { ?>
-                <dd><?php echo $location_return_appointments_phone_link; ?><br/><span class="subtitle">Returning Patients</span></dd>
-                <?php isset($phone_schema) ? $phone_schema .= ', "'. format_phone_dash( $location_return_appointments_phone ) .'"
-            ' : ''; ?>
+            <?php if ( !empty($location_new_appointments_phone) ) { ?>
+                <dd><?php echo !empty($location_new_appointments_phone_link) ? $location_new_appointments_phone_link : $location_new_appointments_phone; ?><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : ''; ?></dd>
+                <?php isset($phone_schema) ? $phone_schema .= ', "'. $location_new_appointments_phone_format_dash .'"
+                ' : ''; ?>
             <?php } ?>
-        <?php } elseif ( $location_ac_appointments_query ) {
+            <?php if ( !empty($location_return_appointments_phone) && $location_appointment_phone_query ) { ?>
+                <dd><?php echo !empty($location_return_appointments_phone_link) ? $location_return_appointments_phone_link : $location_return_appointments_phone; ?><br/><span class="subtitle">Returning Patients</span></dd>
+                <?php isset($phone_schema) ? $phone_schema .= ', "'. format_phone_dash( $location_return_appointments_phone ) .'"
+                ' : ''; ?>
+            <?php } ?>
+        <?php } elseif ( $location_ac_appointments_query && ( !empty($location_ac_appointments_primary) || !empty($location_ac_appointments_specialty) ) ) {
         // Arkansas Children's Primary Care and Specialty Care Appointments
         ?>
             <dt>Appointments</dt>
-            <dd><?php echo $location_ac_appointments_primary_link; ?><br/><span class="subtitle">Primary Care</span></dd>
-            <?php isset($phone_schema) ? $phone_schema .= ', "'. $location_ac_appointments_primary_format_dash .'"
-            ' : ''; ?>
-            <dd><?php echo $location_ac_appointments_specialty_link; ?><br/><span class="subtitle">Specialty Care</span></dd>
-            <?php isset($phone_schema) ? $phone_schema .= ', "'. $location_ac_appointments_specialty_format_dash .'"
-            ' : ''; ?>
+            <?php if ( !empty($location_ac_appointments_primary) ) { ?>
+                <dd><?php echo !empty($location_ac_appointments_primary_link) ? $location_ac_appointments_primary_link : $location_ac_appointments_primary; ?><br/><span class="subtitle">Primary Care</span></dd>
+                <?php isset($phone_schema) ? $phone_schema .= ', "'. $location_ac_appointments_primary_format_dash .'"
+                ' : ''; ?>
+            <?php } ?>
+            <?php if ( !empty($location_ac_appointments_specialty) ) { ?>
+                <dd><?php echo !empty($location_ac_appointments_specialty_link) ? $location_ac_appointments_specialty_link : $location_ac_appointments_specialty; ?><br/><span class="subtitle">Specialty Care</span></dd>
+                <?php isset($phone_schema) ? $phone_schema .= ', "'. $location_ac_appointments_specialty_format_dash .'"
+                ' : ''; ?>
+            <?php } ?>
         <?php } ?>
-        <?php if ($location_fax) {
+        <?php if ( !empty($location_fax) ) {
         // Fax
         ?>
             <dt>Fax Number</dt>
