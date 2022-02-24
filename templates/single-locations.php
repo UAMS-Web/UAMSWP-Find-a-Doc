@@ -693,7 +693,7 @@ while ( have_posts() ) : the_post(); ?>
 					<h2>Contact Information</h2>
 					<dl data-categorytitle="Telephone Number">
 						<?php if ($location_phone) { ?>
-						<dt>General Information</dt>
+						<dt>General Information<?php echo $location_clinic_phone_query ? '' : ' and Appointments'; ?></dt>
 						<dd><?php echo $location_phone_link; ?></dd>
 						<?php $phone_schema .= '"telephone": ["'. format_phone_dash( $location_phone ) .'"
 						'; ?>
