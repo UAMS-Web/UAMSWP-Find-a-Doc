@@ -13,7 +13,8 @@
      *          )
      */
 
-$location_ac_query = get_field('location_ac_query', $phone_output_id); // Is this an Arkansas Children's location?
+// Check if this is an Arkansas Children's location
+$location_ac_query = get_field('location_ac_query', $phone_output_id);
 
 // Data attributes
 $location_phone_data_categorytitle = 'Telephone Number';
