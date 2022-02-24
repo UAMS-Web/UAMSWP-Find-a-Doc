@@ -155,7 +155,7 @@ if ( $phone_output == 'location_profile' ) { ?>
         // Fax
         ?>
             <dt>Fax Number</dt>
-            <dd><?php echo $location_fax_link; ?></dd>
+            <dd><?php echo $location_fax; ?></dd>
         <?php } ?>
         <?php if ( $location_phone_numbers ) {
         // Additional phone numbers
