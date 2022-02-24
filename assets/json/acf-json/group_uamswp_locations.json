@@ -580,12 +580,6 @@
                         "operator": "==",
                         "value": "0"
                     }
-                ],
-                [
-                    {
-                        "field": "field_location_ac_query",
-                        "operator": "==empty"
-                    }
                 ]
             ],
             "wrapper": {
@@ -849,12 +843,6 @@
                         "operator": "==",
                         "value": "0"
                     }
-                ],
-                [
-                    {
-                        "field": "field_location_ac_query",
-                        "operator": "==empty"
-                    }
                 ]
             ],
             "wrapper": {
@@ -877,12 +865,6 @@
                         "field": "field_location_ac_query",
                         "operator": "==",
                         "value": "0"
-                    }
-                ],
-                [
-                    {
-                        "field": "field_location_ac_query",
-                        "operator": "==empty"
                     }
                 ]
             ],
