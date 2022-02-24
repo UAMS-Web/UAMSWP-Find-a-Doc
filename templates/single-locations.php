@@ -39,10 +39,10 @@ $location_ac_query = get_field('location_ac_query'); // Is this an Arkansas Chil
 // General information phone number
 $location_phone = get_field('location_phone');
 $location_phone_link = '<a href="tel:' . format_phone_dash( $location_phone ) . '" class="icon-phone" data-typetitle="Clinic Phone Number">' . format_phone_us( $location_phone ) . '</a>'; // Build the anchor element for the general information phone number
+$location_clinic_phone_query = false; // Are there main appointment phone numbers other than the general information phone number?
 
 // Appointment phone number for new (or new AND returning) patients
 $location_new_appointments_phone = ''; // Establishing the variable to be used later for the appointment phone number for (new) patients
-$location_clinic_phone_query = false; // Is there a separate appointment phone number for (new) patients?
 if ( $location_ac_query ) { // IF this is an Arkansas Children's location...
 	$location_clinic_phone_query = true;
 } else {
