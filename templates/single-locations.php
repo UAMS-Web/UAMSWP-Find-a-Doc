@@ -731,6 +731,14 @@ while ( have_posts() ) : the_post(); ?>
 								<?php $phone_schema .= ', "'. format_phone_dash( $location_return_appointments_phone ) .'"
 							'; ?>
 							<?php } ?>
+						<?php } elseif ( $location_ac_appointments_query ) { ?>
+							<dt>Appointments</dt>
+							<dd><?php echo $location_ac_appointments_primary_link; ?><br/><span class="subtitle">Primary Care</span></dd>
+							<?php $phone_schema .= ', "'. format_phone_dash( $location_ac_appointments_primary ) .'"
+							'; ?>
+							<dd><?php echo $location_ac_appointments_specialty_link; ?><br/><span class="subtitle">Specialty Care</span></dd>
+							<?php $phone_schema .= ', "'. format_phone_dash( $location_ac_appointments_specialty ) .'"
+							'; ?>
 						<?php } ?>
 						<?php if ($location_fax) { ?>
 						<dt>Fax Number</dt>
