@@ -2060,7 +2060,7 @@
                     "acfe_permissions": "",
                     "acfe_repeater_stylised_button": 0,
                     "collapsed": "field_location_modified_hours_title",
-                    "min": 1,
+                    "min": 0,
                     "max": 0,
                     "layout": "block",
                     "button_label": "Add Modified Hours Set",
