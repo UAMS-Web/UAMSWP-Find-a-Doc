@@ -11,6 +11,7 @@ $page_title = get_the_title();
 $expertise_archive_title_system = get_field('expertise_archive_headline', 'option');
 $expertise_archive_title = $expertise_archive_title_system ? $expertise_archive_title_system : 'Area of Expertise';
 
+// Override theme's method of defining the page title
 function uamswp_fad_title($html) { 
     global $page_title;
 	//you can add here all your conditions as if is_page(), is_category() etc.. 

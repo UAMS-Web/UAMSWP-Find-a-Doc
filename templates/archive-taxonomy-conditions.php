@@ -28,6 +28,7 @@ function uamswp_terms_clauses( $clauses, $taxonomies, $args ){
 $condition_title = get_field('conditions_archive_headline', 'option');
 $condition_text = get_field('conditions_archive_intro_text', 'option');
 
+// Override theme's method of defining the page title
 function uamswp_fad_title($html) { 
     global $condition_title;
 	//you can add here all your conditions as if is_page(), is_category() etc.. 

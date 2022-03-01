@@ -273,6 +273,7 @@ function sp_titles_desc($html) {
 }
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
+// Override theme's method of defining the page title
 function uamswp_fad_title($html) { 
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$html = get_the_title() . ' | ' . get_bloginfo( "name" );
