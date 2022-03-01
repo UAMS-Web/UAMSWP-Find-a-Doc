@@ -6,7 +6,7 @@ function uamswp_fad_title($html) {
 	$html = 'Locations | ' . get_bloginfo( "name" );
 	return $html;
 }
-add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 if ( isset( $_COOKIE['wp_filter_region']) && !isset($_GET['_location_region'])) {
     $region = $_COOKIE['wp_filter_region'];

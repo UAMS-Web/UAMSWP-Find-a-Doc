@@ -279,7 +279,7 @@ function uamswp_fad_title($html) {
 	$html = get_the_title() . ' | ' . get_bloginfo( "name" );
 	return $html;
 }
-add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 get_header();
 

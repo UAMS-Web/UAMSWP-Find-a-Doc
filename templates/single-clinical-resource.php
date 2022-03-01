@@ -18,7 +18,7 @@ function uamswp_fad_title($html) {
 	$html = $page_title . ' | ' . get_bloginfo( "name" );
 	return $html;
 }
-add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 $syndicated = get_field('clinical_resource_syndicated');
 $syndication_url = get_field('clinical_resource_syndication_url');
