@@ -51,7 +51,7 @@
 		}
 		return $html;
 	}
-	add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
+	add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 	if (empty($excerpt)){
 		$excerpt_user = false;

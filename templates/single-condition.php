@@ -28,7 +28,7 @@
 		}
 		return $html;
 	}
-	add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
+	add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 	$excerpt = get_the_excerpt(); // get_field( 'condition_short_desc' );
 	$content = get_the_content(); //get_field( 'condition_content' );
