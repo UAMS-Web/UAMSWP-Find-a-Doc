@@ -72,7 +72,7 @@ class pubmed_field_on_change {
 
 		// check for our other required values
 		if (!isset($_POST['pmid'])) {
-			echo json_encode(false);
+			//echo json_encode(false);
 			exit;
 		}
 
@@ -188,8 +188,8 @@ function fad_script_register() {
     if ( (is_archive() && (('provider' == $post_type) || ('location' == $post_type))) ) {
         wp_enqueue_script( 'mobile-filter-toggle', UAMS_FAD_ROOT_URL . 'assets/js/mobile-filter-toggle.js', array('jquery'), null, false );
     }
-	wp_enqueue_style( 'fad-app-css', UAMS_FAD_ROOT_URL . 'assets/css/app.css', array(), '1.3.9', 'all');
-	wp_enqueue_style( 'fad-css', UAMS_FAD_ROOT_URL . 'assets/css/style.css', array(), '1.3.9', 'all');
+	wp_enqueue_style( 'fad-app-css', UAMS_FAD_ROOT_URL . 'assets/css/app.css', array(), '2.0.0', 'all');
+	wp_enqueue_style( 'fad-css', UAMS_FAD_ROOT_URL . 'assets/css/style.css', array(), '2.0.0', 'all');
 }
 add_action( 'wp_enqueue_scripts', 'fad_script_register' );
 function uams_pubmed_shortcode( $atts ) {
@@ -332,6 +332,9 @@ function uamswp_ajax_scripts() {
     }
 	if ( is_singular( 'location' ) ) {
 		wp_register_script( 'uamswp-title-filter', UAMS_FAD_ROOT_URL . 'assets/js/uamswp-title-filter.js', array('jquery'), false, true );
+
+		// Register the script
+		wp_register_script( 'uamswp-schedule-filter', UAMS_FAD_ROOT_URL . 'assets/js/uamswp-schedule.js', array('jquery'), false, true );
     
         // Localize the script with new data
         $script_data_array = array(
@@ -339,9 +342,11 @@ function uamswp_ajax_scripts() {
             'security' => wp_create_nonce( 'load_more_posts' )
         );
         wp_localize_script( 'uamswp-title-filter', 'uamswp_ajax_scripts', $script_data_array );
+		wp_localize_script( 'uamswp-schedule-filter', 'uamswp_ajax_scripts', $script_data_array );
     
         // Enqueued script with localized data.
         wp_enqueue_script( 'uamswp-title-filter' );
+		wp_enqueue_script( 'uamswp-schedule-filter' );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'uamswp_ajax_scripts' );
@@ -1105,6 +1110,75 @@ function uamswp_add_trench(){
 	}
 }
 add_action('wp_footer', 'uamswp_add_trench');
+
+// Ajax Callback
+add_action('wp_ajax_nopriv_schedule_ajax_filter', 'schedule_ajax_filter_callback'); 
+add_action('wp_ajax_schedule_ajax_filter', 'schedule_ajax_filter_callback');
+function schedule_ajax_filter_callback() {
+	if (!isset($_POST['pid']) || !isset($_POST['schedule_options'])) {
+		// echo json_encode(false);
+		exit;
+	}
+
+	$pid = $_POST['pid'];
+	$schedule_key = $_POST['schedule_options'];
+
+	$schedules = get_field('location_scheduling_options', $pid);
+	$row = $schedules[$schedule_key];
+	$mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
+	$mychart_scheduling_instance = get_field('mychart_scheduling_instance', 'option');
+	$mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
+	$mychart_scheduling_linksource = ( isset($mychart_scheduling_linksource) && !empty($mychart_scheduling_linksource) ) ? $mychart_scheduling_linksource : 'uamshealth.com';
+	$location_scheduling_options = get_field('location_scheduling_options', $pid);
+
+	$location_scheduling_ser = $row['location_scheduling_ser'];
+	$location_scheduling_dep = $row['location_scheduling_dep'];
+	$location_scheduling_vt = $row['location_scheduling_vt'];
+	$location_scheduling_item_title_nested = $row['location_scheduling_item_title_nested'];
+	$location_scheduling_item_title_nested = ( isset($location_scheduling_item_title_nested) && !empty($location_scheduling_item_title_nested) ) ? $location_scheduling_item_title_nested : 'Schedule an Appointment Online';
+	$location_scheduling_item_intro_nested = $row['location_scheduling_item_intro_nested'];
+	$location_scheduling_fallback = $row['location_scheduling_fallback'];
+	?>
+	<h3 class="sr-only module-inner-title"><?php echo $location_scheduling_item_title_nested; ?></h3>
+	<?php if ( $location_scheduling_item_intro_nested && !empty($location_scheduling_item_intro_nested) ) { ?>
+		<p class="note">
+			<?php echo $location_scheduling_item_intro_nested; ?>
+		</p>
+	<?php } ?>
+	<div id="scheduleContainer">
+		<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
+	</div>
+
+	<!-- <link href="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
+
+	<script src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidgetController.js" type="text/javascript"></script>
+
+	<script type="text/javascript">
+	var EWC = new EmbeddedWidgetController({
+
+		// Replace with the hostname of your Open Scheduling site
+		'hostname':'https://<?php echo $mychart_scheduling_domain; ?>',
+
+		// Must equal media query in EpicWP.css + any left/right margin of the host page. Should also change in EmbeddedWidget.css
+		'matchMediaString':'(max-width: 991.98px)',
+
+		//Show a button on top of the widget that lets the user see the slots in fullscreen.
+		'showToggleBtn':true,
+	
+		//The toggle button’s help text for screen reader.
+		'toggleBtnExpandHelpText': 'Expand to see the slots in fullscreen',
+		'toggleBtnCollapseHelpText': 'Exit fullscreen',
+	});
+	</script>
+	<?php if ( $location_scheduling_fallback && !empty($location_scheduling_fallback) ) { ?>
+		<div class="more">
+			<?php echo $location_scheduling_fallback; ?>
+		</div>
+	<?php } ?>
+	<?php
+	
+	wp_die();
+}
 
 // Remove unused / overly agressive scripts
 function uamswp_fad_disable_scripts() {
