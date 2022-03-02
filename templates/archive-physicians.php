@@ -9,7 +9,8 @@ add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
 // Region Cookie
 if ( isset($_COOKIE['wp_filter_region']) && !isset($_GET['_provider_region']) ) {
     $region = $_COOKIE['wp_filter_region'];
-    $url .= $url.(parse_url($url, PHP_URL_QUERY) ? '&' : '?').'_provider_region='. $region;
+	$url = $_SERVER["REQUEST_URI"];
+    $url .= (parse_url($url, PHP_URL_QUERY) ? '&' : '?').'_provider_region='. $region;
     header("Location: ". $url);
     exit();
 }

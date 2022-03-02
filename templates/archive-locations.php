@@ -8,7 +8,8 @@ function uamswp_fad_title($html) {
 add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
 if ( isset( $_COOKIE['wp_filter_region']) && !isset($_GET['_location_region'])) {
     $region = $_COOKIE['wp_filter_region'];
-    $url .= $url.(parse_url($url, PHP_URL_QUERY) ? '&' : '?').'_location_region='. $region;
+    $url = $_SERVER["REQUEST_URI"];
+    $url .= (parse_url($url, PHP_URL_QUERY) ? '&' : '?').'_location_region='. $region;
     header("Location: ". $url);
     exit();
 }
