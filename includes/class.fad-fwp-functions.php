@@ -203,9 +203,6 @@ function fwp_facet_scripts() {
             // QS & no location set 
             else if ( facets && region && regiondata && region != regiondata ) {
                 document.cookie = 'wp_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
-                // window.location.search = '_location_region='+regiondata;
-                // params.set('_location_region', regiondata);
-                // window.location.search = `?${params}`;
             }
         }
     });

@@ -515,11 +515,49 @@
             "placement": "top",
             "endpoint": 0
         },
-        "field_location_about": {
-            "key": "field_location_about",
-            "name": "location_about",
-            "type": "wysiwyg",
-            "label": "About \/ Description",
+        "field_location_ac_query": {
+            "key": "field_location_ac_query",
+            "name": "location_ac_query",
+            "type": "true_false",
+            "label": "Is this an Arkansas Children's location?",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_location_appointments_query": {
+            "key": "field_location_appointments_query",
+            "name": "location_appointments_query",
+            "type": "true_false",
+            "label": "Can a patient schedule an appointment for services rendered at this location?",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_location_contact_message": {
+            "key": "field_location_contact_message",
+            "label": "",
+            "name": "",
+            "type": "message",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -528,356 +566,59 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0
-        },
-        "field_location_short_desc": {
-            "key": "field_location_short_desc",
-            "name": "location_short_desc",
-            "type": "textarea",
-            "label": "Short Description (excerpt)",
-            "instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "maxlength": 160,
-            "rows": 4,
-            "new_lines": ""
-        },
-        "field_location_youtube_link": {
-            "key": "field_location_youtube_link",
-            "name": "location_youtube_link",
-            "type": "url",
-            "label": "Youtube Link",
-            "instructions": "Full URL, including https:\/\/",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": ""
-        },
-        "field_location_affiliation": {
-            "key": "field_location_affiliation",
-            "name": "location_affiliation",
-            "type": "wysiwyg",
-            "label": "Affiliation",
-            "instructions": "Affiliations with other medical centers or clinics",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 0,
-            "delay": 0
-        },
-        "field_location_prescription_query": {
-            "key": "field_location_prescription_query",
-            "label": "Include information about prescription refills?",
-            "name": "location_prescription_query",
-            "type": "button_group",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "30",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "choices": {
-                "1": "Yes",
-                "0": "No"
-            },
-            "allow_null": 0,
-            "default_value": 0,
-            "layout": "horizontal",
-            "return_format": "value"
-        },
-        "field_location_spacer_2": {
-            "key": "field_location_spacer_2",
-            "label": "hidden",
-            "name": "",
-            "type": "message",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_prescription_query",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "70",
-                "class": "hide-acf-title",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "message": "&nbsp;",
+            "message": "<h3>Contact Information<\/h3>",
             "new_lines": "",
             "esc_html": 0
-        },
-        "field_location_prescription_type": {
-            "key": "field_location_prescription_type",
-            "label": "Which prescription information would you like to include?",
-            "name": "location_prescription_type",
-            "type": "radio",
-            "instructions": "Administrators can change the preset text in Find-a-Doc Settings > Clinical Locations.",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_prescription_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "70",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "pharm": "Preset text instructing patients to call their pharmacy",
-                "clinic": "Preset text instructing patients to call the clinic",
-                "custom": "Custom text"
-            },
-            "allow_null": 0,
-            "other_choice": 0,
-            "default_value": "pharm",
-            "layout": "vertical",
-            "return_format": "value",
-            "save_other_choice": 0
-        },
-        "field_location_spacer_3": {
-            "key": "field_location_spacer_3",
-            "label": "hidden",
-            "name": "",
-            "type": "message",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_prescription_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "30",
-                "class": "hide-acf-title",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "message": "&nbsp;",
-            "new_lines": "",
-            "esc_html": 0
-        },
-        "field_location_current_prescription_clinic": {
-            "key": "field_location_current_prescription_clinic",
-            "label": "Current prescription information instructing patients to call the clinic",
-            "name": "location_current_prescription_clinic",
-            "type": "acfe_dynamic_message",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_prescription_query",
-                        "operator": "==",
-                        "value": "1"
-                    },
-                    {
-                        "field": "field_location_prescription_type",
-                        "operator": "==",
-                        "value": "clinic"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "70",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": ""
-        },
-        "field_location_current_prescription_pharm": {
-            "key": "field_location_current_prescription_pharm",
-            "label": "Current prescription information instructing patients to call their pharmacy",
-            "name": "location_current_prescription_pharm",
-            "type": "acfe_dynamic_message",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_prescription_query",
-                        "operator": "==",
-                        "value": "1"
-                    },
-                    {
-                        "field": "field_location_prescription_type",
-                        "operator": "==",
-                        "value": "pharm"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "70",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": ""
-        },
-        "field_location_prescription": {
-            "key": "field_location_prescription",
-            "name": "location_prescription",
-            "type": "wysiwyg",
-            "label": "Custom Prescription Refills Information",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_prescription_query",
-                        "operator": "==",
-                        "value": "1"
-                    },
-                    {
-                        "field": "field_location_prescription_type",
-                        "operator": "==",
-                        "value": "custom"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "70",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 0,
-            "delay": 0
-        },
-        "field_location_clinic_phone_query": {
-            "key": "field_location_clinic_phone_query",
-            "label": "Is there a separate appointment number for patients?",
-            "name": "location_clinic_phone_query",
-            "type": "button_group",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "30",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "choices": {
-                "1": "Yes",
-                "0": "No"
-            },
-            "allow_null": 0,
-            "default_value": 0,
-            "layout": "horizontal",
-            "return_format": "value"
         },
         "field_location_phone": {
             "key": "field_location_phone",
             "name": "location_phone",
             "type": "maskfield",
-            "label": "Clinic Phone Number",
-            "instructions": "",
+            "label": "General Information Phone Number",
+            "instructions": "The phone number that patients can call for general information related to this location",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "70",
-                "class": "",
+                "width": "50",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "input_mask": "(999) 999-9999 [x 99999]"
         },
-        "field_location_appointment_phone_query": {
-            "key": "field_location_appointment_phone_query",
-            "label": "Is there a seperate number for returning patients?",
-            "name": "location_appointment_phone_query",
-            "type": "button_group",
+        "field_location_clinic_phone_query": {
+            "key": "field_location_clinic_phone_query",
+            "label": "Is there a separate appointment number for patients?",
+            "name": "location_clinic_phone_query",
+            "type": "true_false",
             "instructions": "",
-            "required": 1,
+            "required": 0,
             "conditional_logic": [
                 [
                     {
-                        "field": "field_location_clinic_phone_query",
+                        "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "0"
+                    },
+                    {
+                        "field": "field_location_appointments_query",
                         "operator": "==",
                         "value": "1"
                     }
                 ]
             ],
             "wrapper": {
-                "width": "30",
-                "class": "",
+                "width": "50",
+                "class": "hide-acf-border",
                 "id": ""
             },
-            "acfe_permissions": "",
-            "choices": {
-                "1": "Yes",
-                "0": "No"
-            },
-            "allow_null": 0,
+            "message": "",
             "default_value": 0,
-            "layout": "horizontal",
-            "return_format": "value"
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
-        "field_location_new_appointments_phone": {
-            "key": "field_location_new_appointments_phone",
-            "name": "location_new_appointments_phone",
-            "type": "maskfield",
-            "label": "Appointments Phone Number",
-            "instructions": "For new patients, if seperate numbers for new and returning patients",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_clinic_phone_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "70",
-                "class": "",
-                "id": ""
-            },
-            "input_mask": "(999) 999-9999 [x 99999]"
-        },
-        "field_phone_spacer": {
-            "key": "field_phone_spacer",
+        "field_location_clinic_phone_query_spacer": {
+            "key": "field_location_clinic_phone_query_spacer",
             "label": "",
             "name": "",
             "type": "message",
@@ -886,15 +627,193 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_location_appointment_phone_query",
+                        "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_location_appointments_query",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "message": "&nbsp;",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        "field_location_ac_appointments_query": {
+            "key": "field_location_ac_appointments_query",
+            "label": "Does this Arkansas Children's location have separate phone numbers for primary care appointments and specialty care appointments?",
+            "name": "location_ac_appointments_query",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_appointments_query",
                         "operator": "==",
                         "value": "1"
                     }
                 ]
             ],
             "wrapper": {
-                "width": "30",
-                "class": "",
+                "width": "",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_location_new_appointments_phone": {
+            "key": "field_location_new_appointments_phone",
+            "name": "location_new_appointments_phone",
+            "type": "maskfield",
+            "label": "Appointments Phone Number",
+            "instructions": "For new patients, if separate numbers for new and returning patients",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_clinic_phone_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_ac_appointments_query",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "input_mask": "(999) 999-9999 [x 99999]"
+        },
+        "field_location_ac_appointments_primary": {
+            "key": "field_location_ac_appointments_primary",
+            "name": "location_ac_appointments_primary",
+            "type": "maskfield",
+            "label": "Arkansas Children's Primary Care Appointments Phone Number",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_ac_appointments_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "input_mask": "(999) 999-9999 [x 99999]"
+        },
+        "field_location_ac_appointments_specialty": {
+            "key": "field_location_ac_appointments_specialty",
+            "name": "location_ac_appointments_specialty",
+            "type": "maskfield",
+            "label": "Arkansas Children's Specialty Care Appointments Phone Number",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_ac_appointments_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "input_mask": "(999) 999-9999 [x 99999]"
+        },
+        "field_location_appointment_phone_query": {
+            "key": "field_location_appointment_phone_query",
+            "label": "Is there a separate number for returning patients?",
+            "name": "location_appointment_phone_query",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_clinic_phone_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_location_appointment_phone_query_spacer": {
+            "key": "field_location_appointment_phone_query_spacer",
+            "label": "",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_appointments_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "acfe_permissions": "",
@@ -919,11 +838,37 @@
                 ]
             ],
             "wrapper": {
-                "width": "70",
-                "class": "",
+                "width": "50",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "input_mask": "(999) 999-9999 [x 99999]"
+        },
+        "field_phone_spacer": {
+            "key": "field_phone_spacer",
+            "label": "",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_appointment_phone_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "message": "&nbsp;",
+            "new_lines": "",
+            "esc_html": 0
         },
         "field_location_fax": {
             "key": "field_location_fax",
@@ -932,10 +877,18 @@
             "label": "Clinic Fax Number",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "input_mask": "(999) 999-9999 [x 99999]"
@@ -947,10 +900,18 @@
             "label": "Additional Phone Numbers (if needed):",
             "instructions": "Example: <br\/>After Hours: ###-###-####",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "collapsed": "field_location_appointments_text",
@@ -1014,6 +975,309 @@
                 }
             ]
         },
+        "field_location_about_message": {
+            "key": "field_location_about_message",
+            "label": "",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "<h3>\"About\" Section<\/h3>",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        "field_location_about": {
+            "key": "field_location_about",
+            "name": "location_about",
+            "type": "wysiwyg",
+            "label": "About \/ Description",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        "field_location_short_desc": {
+            "key": "field_location_short_desc",
+            "name": "location_short_desc",
+            "type": "textarea",
+            "label": "Short Description (excerpt)",
+            "instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": 160,
+            "rows": 4,
+            "new_lines": ""
+        },
+        "field_location_youtube_link": {
+            "key": "field_location_youtube_link",
+            "name": "location_youtube_link",
+            "type": "url",
+            "label": "Youtube Link",
+            "instructions": "Full URL, including https:\/\/",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        "field_location_affiliation": {
+            "key": "field_location_affiliation",
+            "name": "location_affiliation",
+            "type": "wysiwyg",
+            "label": "Affiliation",
+            "instructions": "Affiliations with other medical centers or clinics",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        },
+        "field_location_prescription_query": {
+            "key": "field_location_prescription_query",
+            "label": "Include information about prescription refills?",
+            "name": "location_prescription_query",
+            "type": "button_group",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "30",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "choices": {
+                "1": "Yes",
+                "0": "No"
+            },
+            "allow_null": 0,
+            "default_value": 0,
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        "field_location_spacer_2": {
+            "key": "field_location_spacer_2",
+            "label": "hidden",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_prescription_query",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "70",
+                "class": "hide-acf-title",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "message": "&nbsp;",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        "field_location_prescription_type": {
+            "key": "field_location_prescription_type",
+            "label": "Which prescription information would you like to include?",
+            "name": "location_prescription_type",
+            "type": "radio",
+            "instructions": "Administrators can change the preset text in Find-a-Doc Settings > Clinical Locations.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_prescription_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "70",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "choices": {
+                "pharm": "Preset text instructing patients to call their pharmacy",
+                "clinic": "Preset text instructing patients to call the clinic",
+                "custom": "Custom text"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "pharm",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        "field_location_spacer_3": {
+            "key": "field_location_spacer_3",
+            "label": "hidden",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_prescription_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "30",
+                "class": "hide-acf-title",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "message": "&nbsp;",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        "field_location_current_prescription_clinic": {
+            "key": "field_location_current_prescription_clinic",
+            "label": "Current prescription information instructing patients to call the clinic",
+            "name": "location_current_prescription_clinic",
+            "type": "acfe_dynamic_message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_prescription_query",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_prescription_type",
+                        "operator": "==",
+                        "value": "clinic"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "70",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "acfe_permissions": ""
+        },
+        "field_location_current_prescription_pharm": {
+            "key": "field_location_current_prescription_pharm",
+            "label": "Current prescription information instructing patients to call their pharmacy",
+            "name": "location_current_prescription_pharm",
+            "type": "acfe_dynamic_message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_prescription_query",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_prescription_type",
+                        "operator": "==",
+                        "value": "pharm"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "70",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "acfe_permissions": ""
+        },
+        "field_location_prescription": {
+            "key": "field_location_prescription",
+            "name": "location_prescription",
+            "type": "wysiwyg",
+            "label": "Custom Prescription Refills Information",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_prescription_query",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_location_prescription_type",
+                        "operator": "==",
+                        "value": "custom"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "70",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        },
+        "field_location_appointment_message": {
+            "key": "field_location_appointment_message",
+            "label": "",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "<h3>\"Appointment Information\" Section<\/h3>",
+            "new_lines": "",
+            "esc_html": 0
+        },
         "field_location_appointment": {
             "key": "field_location_appointment",
             "name": "location_appointment",
@@ -1024,7 +1288,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "default_value": "",
@@ -1043,7 +1307,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "default_value": "",
@@ -1062,7 +1326,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "default_value": "",
@@ -1071,17 +1335,86 @@
             "media_upload": 1,
             "delay": 0
         },
-        "field_location_portal": {
-            "key": "field_location_portal",
-            "name": "location_portal",
-            "type": "taxonomy",
-            "label": "Portal (Optional)",
+        "field_link_message": {
+            "key": "field_link_message",
+            "name": "",
+            "type": "message",
+            "label": "",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "<h3>External Website<\/h3><p>Include a title and URL for a link to an external non-UAMS website. This is intended for use when the location is a non-UAMS location where our providers practice.<\/p><p>This link should only be used when it is critical to the patient experience (e.g. for becoming a patient, making an appointment, receiving follow-up information). This is not to be used as a link to secondary things like a social media account.<\/p>",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        "field_location_web_name": {
+            "key": "field_location_web_name",
+            "name": "location_web_name",
+            "type": "text",
+            "label": "Website Name",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        "field_location_url": {
+            "key": "field_location_url",
+            "name": "location_url",
+            "type": "link",
+            "label": "URL",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "return_format": "array",
+            "endpoint": 0
+        },
+        "field_details_other_message": {
+            "key": "field_details_other_message",
+            "name": "",
+            "type": "message",
+            "label": "",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
                 "class": "",
+                "id": ""
+            },
+            "message": "<h3>Other Details<\/h3>",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        "field_location_portal": {
+            "key": "field_location_portal",
+            "name": "location_portal",
+            "type": "taxonomy",
+            "label": "Patient Portal",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "hide-acf-border",
                 "id": ""
             },
             "taxonomy": "portal",
@@ -1102,72 +1435,20 @@
             "key": "field_location_hidden",
             "name": "location_hidden",
             "type": "true_false",
-            "label": "Hide",
-            "instructions": "",
+            "label": "Exclude from Primary Location List?",
+            "instructions": "Setting this to \"Yes\" will remove this location from the Location archive. This input will not affect whether the location will be displayed on profiles and search results.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "25",
-                "class": "",
+                "width": "50",
+                "class": "hide-acf-border",
                 "id": ""
             },
-            "message": "Exclude from Primary Listing",
+            "message": "",
             "default_value": 0,
-            "ui": 0,
+            "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
-        },
-        "field_link_message": {
-            "key": "field_link_message",
-            "name": "",
-            "type": "message",
-            "label": "External Sites",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "<p>Include Title and link to external sites<\/p>",
-            "new_lines": "",
-            "esc_html": 0
-        },
-        "field_location_web_name": {
-            "key": "field_location_web_name",
-            "name": "location_web_name",
-            "type": "text",
-            "label": "Website Name",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "60",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        "field_location_url": {
-            "key": "field_location_url",
-            "name": "location_url",
-            "type": "link",
-            "label": "URL",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "60",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array",
-            "endpoint": 0
         },
         "field_details_deprecated_open": {
             "key": "field_details_deprecated_open",
@@ -2060,7 +2341,7 @@
                     "acfe_permissions": "",
                     "acfe_repeater_stylised_button": 0,
                     "collapsed": "field_location_modified_hours_title",
-                    "min": 1,
+                    "min": 0,
                     "max": 0,
                     "layout": "block",
                     "button_label": "Add Modified Hours Set",
