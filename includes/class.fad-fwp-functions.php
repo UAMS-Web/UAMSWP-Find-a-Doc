@@ -115,8 +115,6 @@ function fwp_facet_scripts() {
         */
         // var date = new Date();
         var facets = window.location.search;
-        // date.setTime(date.getTime()+(24*60*60*1000));
-        // document.cookie = "facetdata="+facets+"; expires="+date.toGMTString()+"; path=/";
         const params = new URLSearchParams(facets);
         locationregion = params.get("_location_region");
         providerregion = params.get("_provider_region");
@@ -130,8 +128,7 @@ function fwp_facet_scripts() {
             region = providerregion;
         }
         // If region is set, then write the cookie
-        // console.log(region);
-        if (region) {
+        if (region && 'all' != region) {
             document.cookie = "wp_filter_region="+region+"; path=/; domain="+window.location.hostname;
         } else {
             document.cookie = 'wp_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
@@ -156,7 +153,7 @@ function fwp_facet_scripts() {
             	FWP.set_hash = function() { /* empty function */ } // Exclude hash function
             	$('.condition-filter').hide();
             }
-            /*
+           /*
             When FacetWP first initializes, look for the "facetdata" cookie
             If it exists, set window.location.search= facetdata
             */
@@ -178,17 +175,33 @@ function fwp_facet_scripts() {
             regionname = "_provider_region";
         <?php } ?>
             var regiondata = readCookie('wp_filter_region');
-            console.log(window.location.hostname);
+            var fwpregionname = regionname.substring(1); // Remove _ from regionname
+            if ('all' == region || 'all' == regiondata){
+	            FWP.facets[fwpregionname] = []; // Remove regionname
+	            FWP.setHash(); // set the new URL
+	            document.cookie = 'wp_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
+            }
             // No qs and cookie has value
-            if ( !region && null != regiondata && '' != regiondata ) {
+            if ( 'all' != region && !region && null != regiondata && '' != regiondata ) {
+	            FWP.facets[fwpregionname] = [regiondata];
+                FWP.setHash();
                 document.cookie = 'wp_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
-                // window.location.search = '_location_region='+regiondata;
                 params.set(regionname, regiondata);
-                // window.history.replaceState({}, '', `${location.pathname}?${params}`)
                 window.location.search = `?${params}`;
             }
+            // qs and cookie has value
+            // else if ( region && null != regiondata && '' != regiondata ) {
+            //     // FWP.facets[regionname] = [region];
+            //     // FWP.setHash();
+            //     // FWP.fetchData();
+            //     document.cookie = 'wp_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
+            //     // window.location.search = '_location_region='+regiondata;
+            //     params.append(regionname, regiondata);
+            //     // window.history.replaceState({}, '', `${location.pathname}?${params}`)
+            //     window.location.search = `?${params}`;
+            // }
             // QS & no location set 
-            if ( facets && region && regiondata && region != regiondata ) {
+            else if ( facets && region && regiondata && region != regiondata ) {
                 document.cookie = 'wp_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
                 // window.location.search = '_location_region='+regiondata;
                 // params.set('_location_region', regiondata);
@@ -248,6 +261,24 @@ function fwp_facet_scripts() {
     }
 }
 add_action( 'wp_footer', 'fwp_facet_scripts', 100 );
+
+// fix facets for 'all'
+add_filter( 'facetwp_preload_url_vars', function( $url_vars ) {
+	// Remove provider_region if 'all'
+    if ( 'provider' == FWP()->helper->get_uri() ) {
+        if ( !empty( $url_vars['provider_region'] ) && ['all'] == $url_vars['provider_region'] ) {
+            unset($url_vars['provider_region']);
+        }
+    }
+    // Remove location_region if 'all'
+    if ( 'provider' == FWP()->helper->get_uri() ) {
+        if ( !empty( $url_vars['location_region'] ) && ['all'] == $url_vars['location_region'] ) {
+            unset($url_vars['location_region']);
+        }
+    }
+
+    return $url_vars;
+} );
 
 // FacetWP Sort
 add_filter( 'facetwp_sort_options', function( $options, $params ) {
