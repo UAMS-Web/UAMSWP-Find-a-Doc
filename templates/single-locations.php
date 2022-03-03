@@ -772,7 +772,7 @@ while ( have_posts() ) : the_post(); ?>
 										}
 									}
 									if ($modified_hours247):
-										echo '<strong>Open 24/7</strong>';
+										$modified_text .= '<strong>Open 24/7</strong>';
 										$modified_hours_schema = '"dayOfWeek": [
 											"Monday",
 											"Tuesday",
