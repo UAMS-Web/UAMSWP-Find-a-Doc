@@ -11,13 +11,15 @@ $page_title = get_the_title();
 $expertise_archive_title_system = get_field('expertise_archive_headline', 'option');
 $expertise_archive_title = $expertise_archive_title_system ? $expertise_archive_title_system : 'Area of Expertise';
 
+// Override theme's method of defining the page title
 function uamswp_fad_title($html) { 
     global $page_title;
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$html = $page_title . ' | ' . get_bloginfo( "name" );
 	return $html;
 }
-add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
+// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
 // Removes entry meta from entry footer incl. markup.
