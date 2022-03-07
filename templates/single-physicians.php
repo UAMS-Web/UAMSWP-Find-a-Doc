@@ -219,7 +219,6 @@ while ( have_posts() ) : the_post();
     $physician_clinical_focus = get_field('physician_clinical_focus');
     $physician_awards = get_field('physician_awards');
     $physician_additional_info = get_field('physician_additional_info');
-    $expertises =  get_field('physician_expertise');
     $associations = get_field( 'physician_associations' );
     $publications = get_field('physician_select_publications');
     $pubmed_author_id = get_field('physician_pubmed_author_id');
