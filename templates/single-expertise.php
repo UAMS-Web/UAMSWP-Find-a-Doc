@@ -8,8 +8,8 @@
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title();
-$expertise_archive_title_system = get_field('expertise_archive_headline', 'option');
-$expertise_archive_title = $expertise_archive_title_system ? $expertise_archive_title_system : 'Area of Expertise';
+$expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
+$expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
 
 // Override theme's method of defining the page title
 function uamswp_fad_title($html) { 
@@ -47,9 +47,9 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
     add_action( 'genesis_entry_header', 'uamswp_expertise_post_title' );
 
     function uamswp_expertise_post_title() {
-        global $expertise_archive_title;
+        global $expertise_single_name;
         echo '<h1 class="entry-title" itemprop="headline">';
-        echo '<span class="supertitle">'. $expertise_archive_title . '</span><span class="sr-only">:</span> ';
+        echo '<span class="supertitle">'. $expertise_single_name . '</span><span class="sr-only">:</span> ';
         echo get_the_title();
         echo '</h1>';
     }
