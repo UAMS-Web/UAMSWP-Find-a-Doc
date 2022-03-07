@@ -29,7 +29,7 @@ function title_filter( $where, $query ){
 
 }
 
-$condition_title = get_field('conditions_archive_headline', 'option');
+$condition_title = get_field('conditions_archive_headline', 'option') ?: 'Conditions';
 $condition_text = get_field('conditions_archive_intro_text', 'option');
 $condition_link = get_post_type_archive_link( get_query_var('post_type') );
 
@@ -42,7 +42,7 @@ if (isset($_GET['alpha'])) {
 function uamswp_fad_title($html) { 
     global $condition_title;
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
-	$html = ( $condition_title ? $condition_title : 'Conditions' ) . ' | ' . get_bloginfo( "name" );
+	$html = $condition_title . ' | ' . get_bloginfo( "name" );
 	return $html;
 }
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
@@ -53,7 +53,7 @@ get_header(); ?>
     <main id="genesis-content">
         <section class="archive-description">
             <header class="entry-header">
-                <h1 class="entry-title" itemprop="headline"><?php echo ( $condition_title ? $condition_title : 'Conditions' ); ?></h1>
+                <h1 class="entry-title" itemprop="headline"><?php echo $condition_title; ?></h1>
             </header>
             <?php echo ($condition_text ? '<div class="entry-content clearfix" itemprop="text">' . $condition_text . '</div>' : '' ); ?>
         </section>

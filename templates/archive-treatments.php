@@ -29,7 +29,7 @@ function title_filter( $where, $query ){
 
 }
 
-$treatment_title = get_field('treatments_archive_headline', 'option');
+$treatment_title = get_field('treatments_archive_headline', 'option') ?: 'Treatments &amp; Procedures';
 $treatment_text = get_field('treatments_archive_intro_text', 'option');
 $treatment_link = get_post_type_archive_link( get_query_var('post_type') );
 
@@ -42,7 +42,7 @@ if (isset($_GET['alpha'])) {
 function uamswp_fad_title($html) { 
     global $treatment_title;
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
-	$html = ( $treatment_title ? $treatment_title : 'Treatments &amp; Procedures' ) . ' | ' . get_bloginfo( "name" );
+	$html = $treatment_title . ' | ' . get_bloginfo( "name" );
 	return $html;
 }
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
@@ -53,7 +53,7 @@ get_header(); ?>
     <main id="genesis-content">
         <section class="archive-description">
             <header class="entry-header">
-                <h1 class="entry-title" itemprop="headline"><?php echo ( $treatment_title ? $treatment_title : 'Treatments &amp; Procedures' ); ?></h1>
+                <h1 class="entry-title" itemprop="headline"><?php echo $treatment_title; ?></h1>
             </header>
             <?php echo ($treatment_text ? '<div class="entry-content clearfix" itemprop="text">' . $treatment_text . '</div>' : '' ); ?>
         </section>
