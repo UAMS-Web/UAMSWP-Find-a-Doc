@@ -11,6 +11,26 @@ $page_title = get_the_title();
 $expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
 $expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
 
+// Parent Area of Expertise 
+$expertise_parent_id = wp_get_post_parent_id($page_id);
+$expertise_has_parent = $expertise_parent_id ? true : false;
+$parent_expertise = '';
+$parent_id = '';
+$parent_title = '';
+$parent_url = '';
+
+if ($expertise_has_parent && $expertise_parent_id) { 
+    $parent_expertise = get_post( $expertise_parent_id );
+}
+// Get attributes of parent Area of Expertise
+if ($parent_expertise) {
+    $parent_id = $parent_expertise->ID;
+    $parent_title = $parent_expertise->post_title;
+    $parent_title_attr = str_replace('"', '\'', $parent_title);
+    $parent_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($parent_title_attr, null, 'utf-8')));
+    $parent_url = get_permalink( $parent_id );
+}
+
 // Override theme's method of defining the page title
 function uamswp_fad_title($html) { 
     global $page_title;
