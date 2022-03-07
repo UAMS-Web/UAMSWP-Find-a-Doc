@@ -26,6 +26,28 @@
             "acfe_update": ""
         },
         {
+            "key": "field_expertise_archive_single",
+            "label": "Single Item Name",
+            "name": "expertise_archive_single",
+            "type": "text",
+            "instructions": "If you leave this blank, the default name for a single item will be used.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "default_value": "",
+            "placeholder": "Area of Expertise",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "acfe_validate": "",
+            "acfe_update": ""
+        },
+        {
             "key": "field_expertise_archive_intro_text",
             "label": "Archive Intro Text",
             "name": "expertise_archive_intro_text",
