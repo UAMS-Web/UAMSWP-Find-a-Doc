@@ -81,10 +81,10 @@ if ( !empty($phys_title_indef_article_exceptions) ) {
         }
     }
 }
-if ( substr($short_name, -1) == 's' ) { // Defines a or an, based on whether clinical title starts with vowel
-    $short_name_possessive = $short_name . '\'';
+if ( substr($short_name, -1) == 's' ) { // If the provider's name ends in "s"...
+    $short_name_possessive = $short_name . '\''; // Use an apostrophe with no "s" when indicating the possessive form
 } else {
-    $short_name_possessive = $short_name . '\'s';
+    $short_name_possessive = $short_name . '\'s'; // Use an apostrophe with an "s" when indicating the possessive form
 }
 $bio = get_field('physician_clinical_bio',$post->ID);
 $eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$post->ID);
