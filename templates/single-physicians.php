@@ -57,11 +57,11 @@ $resident = get_field('physician_resident',$post->ID);
 $resident_title_name = 'Resident Physician';
 $phys_title = get_field('physician_title',$post->ID);
 $phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
-$vowels = array('a','e','i','o','u');
+$vowels = array('a','e','i','o','u'); // Define a list of variables for use in determining which indefinite article to use (a vs. an)
 if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
-    $phys_title_indef_article = 'an';
+    $phys_title_indef_article = 'an'; // If the clinical title starts with a vowel, use "an"
 } else {
-    $phys_title_indef_article = 'a';
+    $phys_title_indef_article = 'a'; // If the clinical title does not start with a vowel, use "a"
 }
 if ( substr($short_name, -1) == 's' ) { // Defines a or an, based on whether clinical title starts with vowel
     $short_name_possessive = $short_name . '\'';
