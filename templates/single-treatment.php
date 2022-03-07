@@ -70,6 +70,7 @@
 	$medline_code = get_field('medline_code_id');
 	$embed_code = get_field('treatment_procedure_embed_codes');
 
+	$treatment_archive_title = get_field('treatments_archive_headline', 'option') ?: 'Treatments &amp; Procedures';
 	$treatment_title = get_field('treatments_single_name', 'option') ?: 'Treatment/Procedure';
 	$treatment_text = get_field('treatments_archive_intro_text', 'option');
 	

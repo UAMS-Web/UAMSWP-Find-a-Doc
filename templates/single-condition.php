@@ -77,6 +77,7 @@
 		$syndication = false;
 	}
 
+	$condition_archive_title = get_field('conditions_archive_headline', 'option') ?: 'Conditions';
 	$condition_title = get_field('conditions_single_name', 'option') ?: 'Condition';
 	$condition_text = get_field('conditions_archive_intro_text', 'option');
 
