@@ -22,7 +22,7 @@
     if ($expertise_has_parent && $expertise_parent_id) { 
         $parent_expertise = get_post( $expertise_parent_id );
     }
-    // Get Post ID for Address & Image fields
+    // Get attributes of parent Area of Expertise
     if ($parent_expertise) {
         $parent_id = $parent_expertise->ID;
         $parent_title = $parent_expertise->post_title;
