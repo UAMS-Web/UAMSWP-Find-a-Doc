@@ -628,7 +628,15 @@ while ( have_posts() ) : the_post(); ?>
 					<p><?php echo $location_address_1; ?><br/>
 					<?php echo ( $location_address_2 ? $location_address_2 . '<br/>' : ( $location_address_2_deprecated ? $location_address_2_deprecated . '<br/>' : '')); ?>
 					<?php echo $location_city; ?>, <?php echo $location_state; ?> <?php echo $location_zip; ?></p>
-						<p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo get_the_title($post_id); ?>" data-typetitle="Get directions to the clinic">Get Directions</a></p>
+						<div class="btn-container">
+							<div class="inner-container">
+								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>
+								<?php if ($show_parking_section) { ?>
+									<a class="btn btn-outline-primary" href="#parking-info" aria-label="Parking instructions for <?php echo $page_title; ?>" data-typetitle="Parking instructions for the clinic">Parking Instructions</a>
+								<?php } // endif $show_parking_section ?>
+								
+							</div>
+						</div>
 						<?php if( $location_web_name && $location_url ){ ?>
 							<p><a class="btn btn-secondary" href="<?php echo $location_url['url']; ?>" target="_blank" data-categorytitle="External Link"><?php echo $location_web_name; ?> <span class="far fa-external-link-alt"></span></span></a></p>
 					<?php } 
