@@ -12,7 +12,7 @@ get_header();
 
   add_filter( 'facetwp_template_use_archive', '__return_true' );
 
-  $expertise_title = get_field('expertise_archive_headline', 'option');
+  $expertise_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
   $expertise_text = get_field('expertise_archive_intro_text', 'option');
 
  ?>
@@ -21,7 +21,7 @@ get_header();
     <main id="genesis-content">
         <section class="archive-description">
             <header class="entry-header">
-                <h1 class="entry-title" itemprop="headline"><?php echo ($expertise_title ? $expertise_title : 'Areas of Expertise' ); ?></h1>
+                <h1 class="entry-title" itemprop="headline"><?php echo $expertise_title; ?></h1>
             </header>
             <?php echo ($expertise_text ? '<div class="entry-content clearfix" itemprop="text">' . $expertise_text . '</div>' : '' ); ?>
         </section>

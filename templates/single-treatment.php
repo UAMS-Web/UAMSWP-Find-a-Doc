@@ -70,7 +70,8 @@
 	$medline_code = get_field('medline_code_id');
 	$embed_code = get_field('treatment_procedure_embed_codes');
 
-	$treatment_title = get_field('treatments_archive_headline', 'option');
+	$treatment_archive_title = get_field('treatments_archive_headline', 'option') ?: 'Treatments &amp; Procedures';
+	$treatment_title = get_field('treatments_single_name', 'option') ?: 'Treatment/Procedure';
 	$treatment_text = get_field('treatments_archive_intro_text', 'option');
 	
     $podcast_name = get_field('treatment_procedure_podcast_name');
@@ -329,7 +330,7 @@
 	<main id="genesis-content" class="treatment-item<?php echo $treatment_field_classes; ?>">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
-				<h1 class="entry-title"><span class="supertitle"><?php echo ( $treatment_title ? $treatment_title : 'Treatment & Procedure' ); ?></span><span class="sr-only">:</span> <?php echo $page_title; ?></h1>
+				<h1 class="entry-title"><span class="supertitle"><?php echo $treatment_title; ?></span><span class="sr-only">:</span> <?php echo $page_title; ?></h1>
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
 				<?php
