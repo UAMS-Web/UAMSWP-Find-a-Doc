@@ -1707,12 +1707,13 @@ while ( have_posts() ) : the_post(); ?>
 						<h2 class="module-title" id="sub-location-title"><span class="title">Additional Clinics Within <?php echo $page_title; ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list">
-						<?php
-							while ( $children->have_posts() ) : $children->the_post();
-								$id = get_the_ID(); 
-								include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
-							endwhile;
-							wp_reset_postdata(); ?>
+								<?php
+									while ( $children->have_posts() ) : $children->the_post();
+										$id = get_the_ID(); 
+										include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+									endwhile;
+									wp_reset_postdata();
+								?>
 							</div>
 						</div>
 					</div>
