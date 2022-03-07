@@ -11,7 +11,7 @@
     $expertise_title_attr = str_replace('"', '\'', $expertise_title);
     $expertise_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($expertise_title_attr, null, 'utf-8')));
 
-    // Parent Location 
+    // Parent Area of Expertise 
     $expertise_parent_id = wp_get_post_parent_id($id);
     $expertise_has_parent = $expertise_parent_id ? true : false;
     $parent_expertise = '';
