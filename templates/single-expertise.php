@@ -355,49 +355,50 @@ function uamswp_expertise_physicians() {
     global $physicians;
     global $provider_ids;
 
+
+    if($show_providers_section) {
     
-    // Get available regions - All available, since no titles set on initial load
-    $region_IDs = array();
-    while ($physicians_query->have_posts()) : $physicians_query->the_post();
-        $id = get_the_ID();
-        $region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
-    endwhile;
-    $region_IDs = array_unique($region_IDs);
-    $region_list = array();
-    foreach ($region_IDs as $region_ID){
-        $region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
-    }
-
-    // if cookie is set, run modified physician query
-	if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {		
-		
-        $provider_region = '';
-        if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
-            $provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
+        // Get available regions - All available, since no titles set on initial load
+        $region_IDs = array();
+        while ($physicians_query->have_posts()) : $physicians_query->the_post();
+            $id = get_the_ID();
+            $region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
+        endwhile;
+        $region_IDs = array_unique($region_IDs);
+        $region_list = array();
+        foreach ($region_IDs as $region_ID){
+            $region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
         }
 
-        $tax_query = array();
-        if(!empty($provider_region)) {
-            $tax_query[] = array(
-                'taxonomy' => 'region',
-                'field' => 'slug',
-                'terms' => $provider_region
+        // if cookie is set, run modified physician query
+        if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {		
+            
+            $provider_region = '';
+            if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+                $provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
+            }
+
+            $tax_query = array();
+            if(!empty($provider_region)) {
+                $tax_query[] = array(
+                    'taxonomy' => 'region',
+                    'field' => 'slug',
+                    'terms' => $provider_region
+                );
+            }
+            $args = array(
+                "post_type" => "provider",
+                "post_status" => "publish",
+                "posts_per_page" => -1,
+                "orderby" => "title",
+                "order" => "ASC",
+                "fields" => "ids",
+                "post__in" => $physicians,
+                'tax_query' => $tax_query
             );
+            $physicians_query = New WP_Query( $args );
         }
-        $args = array(
-            "post_type" => "provider",
-            "post_status" => "publish",
-            "posts_per_page" => -1,
-            "orderby" => "title",
-            "order" => "ASC",
-            "fields" => "ids",
-            "post__in" => $physicians,
-            'tax_query' => $tax_query
-        );
-        $physicians_query = New WP_Query( $args );
-    }
-
-    if($show_providers_section) {   
+        
         $provider_count = count($physicians_query->posts);
         ?>
         <section class="uams-module bg-auto" id="providers">
