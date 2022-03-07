@@ -67,10 +67,18 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
     add_action( 'genesis_entry_header', 'uamswp_expertise_post_title' );
 
     function uamswp_expertise_post_title() {
+        global $page_title;
         global $expertise_single_name;
+        global $parent_expertise;
+        global $parent_title;
+        global $parent_title_attr;
+        global $parent_url;
         echo '<h1 class="entry-title" itemprop="headline">';
         echo '<span class="supertitle">'. $expertise_single_name . '</span><span class="sr-only">:</span> ';
-        echo get_the_title();
+        echo $page_title;
+        if ( $parent_expertise ) {
+           echo '<span class="subtitle"><span class="sr-only">(</span>Part of <a href="' . $parent_url . '" aria-label="Go to Area of Expertise page for ' . $parent_title_attr . '" data-categorytitle="Parent Name">' . $parent_title . '</a><span class="sr-only">)</span></span>';
+        } // endif
         echo '</h1>';
     }
 
