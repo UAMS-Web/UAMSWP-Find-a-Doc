@@ -8,6 +8,8 @@
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title();
+$page_title_attr = str_replace('"', '\'', $page_title);
+$page_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($page_title_attr, null, 'utf-8')));
 $expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
 $expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
 
