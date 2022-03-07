@@ -77,7 +77,7 @@
 		$syndication = false;
 	}
 
-	$condition_title = get_field('conditions_archive_headline', 'option');
+	$condition_title = get_field('conditions_single_name', 'option') ?: 'Condition';
 	$condition_text = get_field('conditions_archive_intro_text', 'option');
 
 	$page_title = get_the_title( );
@@ -340,7 +340,7 @@
 	<main id="genesis-content" class="condition-item<?php echo $condition_field_classes; ?>">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
-				<h1 class="entry-title" itemprop="headline"><span class="supertitle"><?php echo ( $condition_title ? $condition_title : 'Condition' ); ?></span><span class="sr-only">:</span> <?php echo $page_title; ?></h1>
+				<h1 class="entry-title" itemprop="headline"><span class="supertitle"><?php echo $condition_title; ?></span><span class="sr-only">:</span> <?php echo $page_title; ?></h1>
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
 				<?php 
