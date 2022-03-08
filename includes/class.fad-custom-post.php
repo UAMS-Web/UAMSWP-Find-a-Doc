@@ -1421,21 +1421,21 @@ function create_academic_departments_taxonomy() {
 
 function create_boards_taxonomy() {
   	$labels = array(
-		'name'                           => 'Boards',
-		'singular_name'                  => 'Board',
-		'search_items'                   => 'Search Boards',
-		'all_items'                      => 'All Boards',
-		'edit_item'                      => 'Edit Board',
-		'update_item'                    => 'Update Board',
-		'add_new_item'                   => 'Add New Board',
-		'new_item_name'                  => 'New Board',
-		'menu_name'                      => 'Academic Boards',
-		'view_item'                      => 'View Board',
-		'popular_items'                  => 'Popular Boards',
-		'separate_items_with_commas'     => 'Separate boards with commas',
-		'add_or_remove_items'            => 'Add or remove boards',
-		'choose_from_most_used'          => 'Choose from the most used boards',
-		'not_found'                      => 'No boards found'
+		'name'                           => 'Boards and Certifications',
+		'singular_name'                  => 'Board or Certification',
+		'search_items'                   => 'Search Boards and Certifications',
+		'all_items'                      => 'All Boards and Certifications',
+		'edit_item'                      => 'Edit Board or Certification',
+		'update_item'                    => 'Update Board or Certification',
+		'add_new_item'                   => 'Add New Board or Certification',
+		'new_item_name'                  => 'New Board or Certification',
+		'menu_name'                      => 'Boards and Certifications',
+		'view_item'                      => 'View Board or Certification',
+		'popular_items'                  => 'Popular Boards and Certifications',
+		'separate_items_with_commas'     => 'Separate boards and certifications with commas',
+		'add_or_remove_items'            => 'Add or remove boards and certifications',
+		'choose_from_most_used'          => 'Choose from the most used boards and certifications',
+		'not_found'                      => 'No boards or certifications found'
 	);
   	$rewrite = array(
 		'slug'                       => 'board',
@@ -1449,7 +1449,7 @@ function create_boards_taxonomy() {
 		'assign_terms'               => 'edit_physicians',
 	);
 	$args = array(
-		'label' 					 => __( 'Boards' ),
+		'label' 					 => __( 'Boards and Certifications' ),
 		'labels'                     => $labels,
 		'hierarchical'               => false,
 		'public'                     => true,
