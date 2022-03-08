@@ -2136,8 +2136,8 @@
             "key": "field_physician_appointment_education",
             "name": "physician_education",
             "type": "repeater",
-            "label": "Education",
-            "instructions": "Education Type and School are required if you add a row.",
+            "label": "Education and Training",
+            "instructions": "Education Type and Organization are required if you add a row.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -2153,7 +2153,7 @@
             "sub_fields": [
                 {
                     "key": "field_physician_appointment_education_type",
-                    "label": "Education Type",
+                    "label": "Education or Training Type",
                     "name": "education_type",
                     "type": "taxonomy",
                     "instructions": "",
@@ -2178,10 +2178,10 @@
                 },
                 {
                     "key": "field_physician_appointment_school",
-                    "label": "School",
+                    "label": "Organization",
                     "name": "school",
                     "type": "taxonomy",
-                    "instructions": "",
+                    "instructions": "The organization that provided the education or training to the provider",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -2206,7 +2206,7 @@
                     "label": "Description",
                     "name": "description",
                     "type": "text",
-                    "instructions": "Description of the Education (if needed)",
+                    "instructions": "Describe the education or training. List things like specific degrees (non-abbreviated) and/or areas of focus or specialization.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -2226,7 +2226,7 @@
             "key": "field_physician_boards",
             "name": "physician_boards",
             "type": "taxonomy",
-            "label": "Boards",
+            "label": "Boards and Certifications",
             "instructions": "",
             "required": 0,
             "conditional_logic": [
