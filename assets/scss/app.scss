@@ -15,10 +15,13 @@
 @import "../../../../themes/uams-2020/node_modules/bootstrap/scss/variables";
 @import "../../../../themes/uams-2020/node_modules/bootstrap/scss/mixins";
 
+// Find-a-Doc Variables
+@import "variables";
+
 // Ratings
 @import "ratings";
 
-// Doctors
+// Providers (a.k.a. Doctors)
 @import "doctors-list";
 @import "doctors-item";
 @import "doctors-cards";
@@ -29,11 +32,18 @@
 // Locations
 @import "locations-list";
 @import "locations-item";
+@import "locations-cards";
 @import "location-alert";
+
+// Areas of Expertise
+@import "expertise-list";
+@import "expertise-item";
+@import "expertise-cards";
 
 // Clinical Resources
 @import "resources-list";
 @import "resources-item";
+@import "resources-cards";
 
 // FacetWP
 @import "facetwp";

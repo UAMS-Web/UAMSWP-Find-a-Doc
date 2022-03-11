@@ -11,7 +11,7 @@
     $expertise_title_attr = str_replace('"', '\'', $expertise_title);
     $expertise_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($expertise_title_attr, null, 'utf-8')));
 
-    // Parent Location 
+    // Parent Area of Expertise 
     $expertise_parent_id = wp_get_post_parent_id($id);
     $expertise_has_parent = $expertise_parent_id ? true : false;
     $parent_expertise = '';
@@ -22,7 +22,7 @@
     if ($expertise_has_parent && $expertise_parent_id) { 
         $parent_expertise = get_post( $expertise_parent_id );
     }
-    // Get Post ID for Address & Image fields
+    // Get attributes of parent Area of Expertise
     if ($parent_expertise) {
         $parent_id = $parent_expertise->ID;
         $parent_title = $parent_expertise->post_title;
