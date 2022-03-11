@@ -570,7 +570,7 @@ while ( have_posts() ) : the_post();
                     <dl data-sectiontitle="Overview">
                     <?php // Display area(s) of expertise
                     $expertise_valid = false;
-                    if ($expertises && !empty($expertises)) { 
+                    if ($expertises && !empty($expertises) && !$hide_medical_ontology) { 
                         foreach( $expertises as $expertise ) {
                             if ( get_post_status ( $expertise ) == 'publish' ) {
                                $expertise_valid = true;
