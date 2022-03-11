@@ -57,16 +57,34 @@ $resident = get_field('physician_resident',$post->ID);
 $resident_title_name = 'Resident Physician';
 $phys_title = get_field('physician_title',$post->ID);
 $phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
-$vowels = array('a','e','i','o','u');
+$vowels = array('a','e','i','o','u'); // Define a list of variables for use in determining which indefinite article to use (a vs. an)
 if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
-    $phys_title_indef_article = 'an';
+    $phys_title_indef_article = 'an'; // If the clinical title starts with a vowel, use "an"
 } else {
-    $phys_title_indef_article = 'a';
+    $phys_title_indef_article = 'a'; // If the clinical title does not start with a vowel, use "a"
 }
-if ( substr($short_name, -1) == 's' ) { // Defines a or an, based on whether clinical title starts with vowel
-    $short_name_possessive = $short_name . '\'';
+// Define a list of exceptions to the vowel-based determination of which indefinite article to use.
+// Use "a" before consonant sounds: a historic event, a one-year term.
+// Use "an" before vowel sounds: an honor, an NBA record.
+// Write the key as the characters at the beginning of the exception. It can be a complete or incomplete title.
+// Write the value as the indefinite article to use in that case ('a' or 'an').
+$phys_title_indef_article_exceptions = array(
+    'SNF' => 'an',
+    'Urolog' => 'a',
+    'Uveitis' => 'a'
+);
+if ( !empty($phys_title_indef_article_exceptions) ) {
+    foreach( $phys_title_indef_article_exceptions as $exception => $indef_article ) {
+        $exception_length = strlen($exception); // Get the charactter length of the exception key
+        if (substr(strtolower($phys_title_name), 0, $exception_length) == strtolower($exception)) { // If the clinical title begins with the exception key...
+            $phys_title_indef_article = $indef_article; // Use the key's value as the indefinite article
+        }
+    }
+}
+if ( substr($short_name, -1) == 's' ) { // If the provider's name ends in "s"...
+    $short_name_possessive = $short_name . '\''; // Use an apostrophe with no "s" when indicating the possessive form
 } else {
-    $short_name_possessive = $short_name . '\'s';
+    $short_name_possessive = $short_name . '\'s'; // Use an apostrophe with an "s" when indicating the possessive form
 }
 $bio = get_field('physician_clinical_bio',$post->ID);
 $eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$post->ID);
