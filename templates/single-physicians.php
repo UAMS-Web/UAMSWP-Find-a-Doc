@@ -219,7 +219,6 @@ while ( have_posts() ) : the_post();
     $physician_clinical_focus = get_field('physician_clinical_focus');
     $physician_awards = get_field('physician_awards');
     $physician_additional_info = get_field('physician_additional_info');
-    $expertises =  get_field('physician_expertise');
     $associations = get_field( 'physician_associations' );
     $publications = get_field('physician_select_publications');
     $pubmed_author_id = get_field('physician_pubmed_author_id');
@@ -568,7 +567,27 @@ while ( have_posts() ) : the_post();
                         </div>
 						<?php endif; ?> 
                     <h2 class="h3">Overview</h2>
-                    <dl>
+                    <dl data-sectiontitle="Overview">
+                    <?php // Display area(s) of expertise
+                    $expertise_valid = false;
+                    if ($expertises && !empty($expertises) && !$hide_medical_ontology) { 
+                        foreach( $expertises as $expertise ) {
+                            if ( get_post_status ( $expertise ) == 'publish' ) {
+                               $expertise_valid = true;
+                               $break;
+                            }
+                        }
+                        if ( $expertise_valid ) {
+                        ?>
+                        <dt>Area<?php echo( count($expertises) > 1 ? 's' : '' );?> of Expertise</dt>
+                        <?php foreach( $expertises as $expertise ) {
+                            $id = $expertise; 
+                            if ( get_post_status ( $expertise ) == 'publish' && $expertise !== 0 ) {
+                                echo '<dd><a href="' . get_permalink($id) . '" target="_self" data-sectiontitle="Overview" data-categorytitle="View Area of Expertise">' . get_the_title($id) . '</a></dd>';
+                            }
+                        } ?>
+                        <?php }
+                    } ?>
                     <?php  // Display if they will provide second opinions    
                     if ($second_opinion) { ?>
                         <dt>Provides Second Opinion</dt>
@@ -604,12 +623,12 @@ while ( have_posts() ) : the_post();
                             echo '<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: '. $avg_rating_dec/5 * 100 .'%;"></div></div>';
                             echo '<div class="ratings-score">'. $avg_rating .'<span class="sr-only"> out of 5</span></div>';
                             echo '<div class="w-100"></div>';
-                            echo '<a href="#ratings" aria-label="Jump to Patient Ratings and Reviews">';
+                            echo '<a href="#ratings" aria-label="Jump to Patient Ratings and Reviews" data-sectiontitle="Overview">';
                             echo '<div class="ratings-count-lg" aria-hidden="true">'. $review_count .' Patient Satisfaction Ratings</div>';
                             echo '<div class="ratings-comments-lg" aria-hidden="true">'.  $comment_count .' comments</div>';
                             echo '</a>';
                         } else { ?>
-                            <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this provider"><span aria-hidden="true">Why not?</span></a></em></p> 
+                            <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this provider" data-sectiontitle="Overview"><span aria-hidden="true">Why not?</span></a></em></p> 
                         <?php
                         }
                         echo '</div>';
