@@ -407,14 +407,28 @@
         <div class="item">
             <div class="card">
                 <div class="card-img-top">
-                    <?php if ( has_post_thumbnail($id) ) { ?>
-                        <?php echo get_the_post_thumbnail($id, 'aspect-16-9-small'); ?>
-                    <?php } else { ?>
-                        <picture>
+                    <picture>
+                        <?php if ( has_post_thumbnail($id) && function_exists( 'fly_add_image_size' ) ) { ?>  
+                            <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center'); ?>" 
+                                media="(min-width: 1921px)">
+                            <source srcset="<?php echo image_sizer($resource_image_wide, 433, 244, 'center', 'center'); ?>" 
+                                media="(min-width: 1500px)">
+                            <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center'); ?>" 
+                                media="(min-width: 992px)">
+                            <source srcset="<?php echo image_sizer($resource_image_wide, 433, 244, 'center', 'center'); ?>" 
+                                media="(min-width: 768px)">
+                            <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center'); ?>" 
+                                media="(min-width: 1px)">
+                            <!-- Fallback -->
+                            <img src="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center'); ?>" alt="" role="presentation" />
+                        <?php } elseif ( has_post_thumbnail($id) ) { ?>
+                            <!-- Fallback -->
+                            <img src="<?php echo wp_get_attachment_image_url( $resource_image_wide, 'aspect-16-9-small' ); ?>" alt="" role="presentation" />
+                        <?php } else { ?>
                             <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
                             <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" />
-                        </picture>
-                    <?php } ?>
+                        <?php } ?>
+                    </picture>
                 </div>
                 <div class="card-body">
                     <h3 class="card-title h5"><?php echo $resource_title; ?> <span class="subtitle"><span class="sr-only">(</span><?php echo esc_html($resource_type_label); ?><span class="sr-only">)</span></span></h3>
