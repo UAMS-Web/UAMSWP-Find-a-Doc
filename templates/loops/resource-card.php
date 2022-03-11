@@ -404,7 +404,7 @@
             </div>
         </div>
     <?php } else { ?>
-        <div class="col-12 col-sm-6 col-xl-3 item">
+        <div class="item">
             <div class="card">
                 <div class="card-img-top">
                     <?php if ( has_post_thumbnail($id) ) { ?>
