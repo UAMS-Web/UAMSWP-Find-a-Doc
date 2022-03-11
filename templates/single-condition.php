@@ -18,6 +18,7 @@
 	}
 	add_action('wp_head','uamswp_keyword_hook_header');
 
+	// Override theme's method of defining the page title
 	function uamswp_fad_title($html) { 
 		// global $condition_title;
 		//you can add here all your conditions as if is_page(), is_category() etc.. 
@@ -28,7 +29,7 @@
 		}
 		return $html;
 	}
-	add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
+	add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 	$excerpt = get_the_excerpt(); // get_field( 'condition_short_desc' );
 	$content = get_the_content(); //get_field( 'condition_content' );

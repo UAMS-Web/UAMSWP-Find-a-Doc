@@ -11,7 +11,10 @@ if (empty($excerpt)){
     }
 }
 $page_title = get_the_title( );
+
+
 // Parent Location 
+
 $location_has_parent = get_field('location_parent');
 $location_parent_id = get_field('location_parent_id');
 $parent_title = ''; // Eliminate PHP errors
@@ -29,28 +32,6 @@ if ($parent_location) {
 	$post_id = get_the_ID();
 }
 
-// Phone values
-
-$location_phone = get_field('location_phone');
-$location_phone_link = '<a href="tel:' . format_phone_dash( $location_phone ) . '" class="icon-phone" data-typetitle="Clinic Phone Number">' . format_phone_us( $location_phone ) . '</a>';
-$location_clinic_phone_query = get_field('location_clinic_phone_query'); // separate number for (new) appointments?
-if ($location_clinic_phone_query) {
-	$location_new_appointments_phone = get_field('location_new_appointments_phone'); // phone number for (new) appointments
-	$location_appointment_phone_query = get_field('field_location_appointment_phone_query'); // separate number for existing appointments?
-	$location_new_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_new_appointments_phone ) . '" class="icon-phone" data-typetitle="Appointment Phone Number for New' . ($location_appointment_phone_query ? '' : ' and Returning') . ' Patients">' . format_phone_us( $location_new_appointments_phone ) . '</a>';
-} else {
-	$location_new_appointments_phone = '';
-	$location_appointment_phone_query = '0';
-}
-if ($location_appointment_phone_query) {
-	$location_return_appointments_phone = get_field('location_return_appointments_phone'); // phone number for existing appointments
-	$location_return_appointments_phone_link = '<a href="tel:' . format_phone_dash( $location_return_appointments_phone ) . '" class="icon-phone" data-typetitle="Appointment Phone Number for Returning Patients">' . format_phone_us( $location_return_appointments_phone ) . '</a>';
-} else {
-	$location_return_appointments_phone = '';
-}
-$location_fax = get_field('location_fax');
-$location_fax_link = '<a href="tel:' . format_phone_dash( $location_fax ) . '" class="icon-phone" data-typetitle="Clinic Fax Number">' . format_phone_us( $location_fax ) . '</a>';
-$location_phone_numbers = get_field('field_location_phone_numbers');
 
 // Image values
 $override_parent_photo = get_field('location_image_override_parent');
@@ -273,13 +254,13 @@ function sp_titles_desc($html) {
 }
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
+// Override theme's method of defining the page title
 function uamswp_fad_title($html) { 
-
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$html = get_the_title() . ' | ' . get_bloginfo( "name" );
 	return $html;
 }
-add_filter('pre_get_document_title', 'uamswp_fad_title', 15, 2);
+// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 get_header();
 
@@ -663,59 +644,13 @@ while ( have_posts() ) : the_post(); ?>
 						$phone_schema = '';
 					?>
 					<h2>Contact Information</h2>
-					<dl data-categorytitle="Telephone Number">
-						<?php if ($location_phone) { ?>
-						<dt>Clinic Phone Number</dt>
-						<dd><?php echo $location_phone_link; ?></dd>
-						<?php $phone_schema .= '"telephone": ["'. format_phone_dash( $location_phone ) .'"
-						'; ?>
-						<?php } ?>
-						<?php if ($location_new_appointments_phone && $location_clinic_phone_query) { ?>
-							<dt>Appointment Phone Number<?php echo $location_appointment_phone_query ? 's' : ''; ?></dt>
-							<dd><?php echo $location_new_appointments_phone_link; ?><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '<br/><span class="subtitle">New and Returning Patients</span>'; ?></dd>
-							<?php $phone_schema .= ', "'. format_phone_dash( $location_new_appointments_phone ) .'"
-							'; ?>
-							<?php if ($location_return_appointments_phone && $location_appointment_phone_query) { ?>
-								<dd><?php echo $location_return_appointments_phone_link; ?><br/><span class="subtitle">Returning Patients</span></dd>
-								<?php $phone_schema .= ', "'. format_phone_dash( $location_return_appointments_phone ) .'"
-							'; ?>
-							<?php } ?>
-						<?php } ?>
-						<?php if ($location_fax) { ?>
-						<dt>Clinic Fax Number</dt>
-						<dd><?php echo $location_fax_link; ?></dd>
-						<?php } ?>
-						<?php if ( $location_phone_numbers ) { 
-							$phone_numbers = $location_phone_numbers;
-							while( have_rows('field_location_phone_numbers') ): the_row(); 
-								$title = get_sub_field('location_appointments_text');
-								$title_attr = str_replace('"', '\'', $title);
-								$title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($title_attr, null, 'utf-8')));
-								$phone = get_sub_field('location_appointments_phone');
-								$text = get_sub_field('location_appointments_additional_text');
-						?>
-						<dt><?php echo $title; ?></dt>
-						<dd><a href="tel:<?php echo format_phone_dash( $phone ); ?>" data-typetitle="Additional Phone Number: <?php echo $title_attr; ?>"><?php echo format_phone_us( $phone ); ?></a><?php echo ($text ? '<br/><span class="subtitle">'. $text .'</span>' : ''); ?></dd>
-						<?php if ('' != $phone){
-							$phone_schema .= ', "'. format_phone_dash( $phone ) .'"
-							'; 
-							}?>
-						<?php endwhile; 
-							} ?>
-						<?php
-							$phone_numbers = get_field('location_appointments');
-							if ( ! empty( $phone_numbers ) && ! empty( $phone_numbers[0]['number'] ) ) {
-								foreach ( $phone_numbers as $phone_number ) {
-									if (! empty($phone_number['text']) && ! empty($phone_number['number']) ) {
-										echo '<dt>' . $phone_number['text'] . '</dt>';
-										echo '<dd><a href="tel:'. $phone_number['number'] .'" class="icon-phone">'. $phone_number['number'] .'</a> ' . $phone_number['after'] .'</dd>'; // Display sub-field value
-									}
-								}
-							}
-						?>
-					</dl>
-					<?php
-					$phone_schema .= '],';
+					<?php 
+					// Phone values
+					$phone_output_id = $id;
+					$phone_output = 'location_profile';
+					include( UAMS_FAD_PATH . '/templates/blocks/locations-phone.php' );
+					
+					// Hours values
 					$hoursvary = $location_hours_group['location_hours_variable'];
 					$hoursvary_info = $location_hours_group['location_hours_variable_info'];
 					$hours247 = $location_hours_group['location_24_7'];
@@ -734,7 +669,7 @@ while ( have_posts() ) : the_post(); ?>
 						echo '<h2>Hours Vary</h2>';
 						echo $hoursvary_info;
 					} else {
-						if ($modified && $modified_hours) : 
+						if ($modified) : 
 						?>
 						<?php 
 							
@@ -752,101 +687,104 @@ while ( have_posts() ) : the_post(); ?>
 								$modified_text .= $modified_end && $modified_end_date ? 'and are scheduled to end after ' . $modified_end_date . '.' : 'and will remain in effect until further notice.';
 								$modified_text .= '</p>';
 
-								foreach ($modified_hours as $modified_hour) {
-		
-									$modified_title = $modified_hour['location_modified_hours_title'];
-									$modified_text .= $modified_title ? '<h3 class="h4">'.$modified_title.'</h3>' : '';
-									$modified_info = $modified_hour['location_modified_hours_information'];
-									$modified_text .= $modified_info ? $modified_info : '';
-									$modified_times = $modified_hour['location_modified_hours_times'];
-									$modified_hours247 = $modified_hour['location_modified_hours_24_7'];
-		
-									if ($active_start > strtotime($modified_start) || '' == $active_start) {
-										$active_start = strtotime($modified_start);
-									}
-									if ( $active_end <= strtotime($modified_end_date) || !$modified_end ) {
-										if (!$modified_end) {
-											$active_end = 'TBD';
-										} else {
-											$active_end = strtotime($modified_end_date);
-										}
-									}
-									if ($modified_hours247):
-										$modified_text .= '<strong>Open 24/7</strong>';
-										$modified_hours_schema = '"dayOfWeek": [
-											"Monday",
-											"Tuesday",
-											"Wednesday",
-											"Thursday",
-											"Friday",
-											"Saturday",
-											"Sunday"
-										],
-										"opens": "00:00",
-										"closes": "23:59"	
-										';
-									else :
-										if (is_array($modified_times) || is_object($modified_times)) {
-											$modified_text .= '<dl class="hours">';
-											foreach ( $modified_times as $modified_time ) {
-												
-												$modified_text .= $modified_day !== $modified_time['location_modified_hours_day'] ? '<dt>'. $modified_time['location_modified_hours_day'] .'</dt> ' : '';
-												$modified_text .= '<dd>';
-		
-												if (1 != $i) {
-													$modified_hours_schema .= '},
-													';
-												}
-												
-												$modified_hours_schema .= '{
-													';
-												$modified_hours_schema .= '"@type": "OpeningHoursSpecification",
-												';
-												$modified_hours_schema .= '"validFrom": "'. date("Y-m-d", strtotime($modified_start)) .'",
-												';
-												$modified_hours_schema .= $modified_end && $modified_end_date ? '"validThrough": "'. date("Y-m-d", strtotime($modified_end_date)) .'",
-													' : '';
-
-												if ('Mon - Fri' == $modified_time['location_modified_hours_day'] && !$modified_time['location_modified_hours_closed']) {
-													$modified_hours_schema .= '"dayOfWeek": [
-														"Monday",
-														"Tuesday",
-														"Wednesday",
-														"Thursday",
-														"Friday"
-													],
-													';
-												} else {
-													$modified_hours_schema .= '"dayOfWeek": "'. $modified_time['location_modified_hours_day'] .'",
-													'; //substr($modified_time['location_modified_hours_day'], 0, 2);
-												}
+								if ( $modified_hours ) {
+									
+									foreach ($modified_hours as $modified_hour) {
 			
-												if ( $modified_time['location_modified_hours_closed'] ) {
-													$modified_text .= 'Closed ';
-													$modified_hours_schema .= '"opens": "00:00",
-													"closes": "00:00"
+										$modified_title = $modified_hour['location_modified_hours_title'];
+										$modified_text .= $modified_title ? '<h3 class="h4">'.$modified_title.'</h3>' : '';
+										$modified_info = $modified_hour['location_modified_hours_information'];
+										$modified_text .= $modified_info ? $modified_info : '';
+										$modified_times = $modified_hour['location_modified_hours_times'];
+										$modified_hours247 = $modified_hour['location_modified_hours_24_7'];
+			
+										if ($active_start > strtotime($modified_start) || '' == $active_start) {
+											$active_start = strtotime($modified_start);
+										}
+										if ( $active_end <= strtotime($modified_end_date) || !$modified_end ) {
+											if (!$modified_end) {
+												$active_end = 'TBD';
+											} else {
+												$active_end = strtotime($modified_end_date);
+											}
+										}
+										if ($modified_hours247):
+											$modified_text .= '<strong>Open 24/7</strong>';
+											$modified_hours_schema = '"dayOfWeek": [
+												"Monday",
+												"Tuesday",
+												"Wednesday",
+												"Thursday",
+												"Friday",
+												"Saturday",
+												"Sunday"
+											],
+											"opens": "00:00",
+											"closes": "23:59"	
+											';
+										else :
+											if (is_array($modified_times) || is_object($modified_times)) {
+												$modified_text .= '<dl class="hours">';
+												foreach ( $modified_times as $modified_time ) {
+													
+													$modified_text .= $modified_day !== $modified_time['location_modified_hours_day'] ? '<dt>'. $modified_time['location_modified_hours_day'] .'</dt> ' : '';
+													$modified_text .= '<dd>';
+			
+													if (1 != $i) {
+														$modified_hours_schema .= '},
+														';
+													}
+													
+													$modified_hours_schema .= '{
+														';
+													$modified_hours_schema .= '"@type": "OpeningHoursSpecification",
 													';
-												} else {
-													$modified_text .= ( ( $modified_time['location_modified_hours_open'] && '00:00:00' != $modified_time['location_modified_hours_open'] )  ? '' . apStyleDate( $modified_time['location_modified_hours_open'] ) . ' &ndash; ' . apStyleDate( $modified_time['location_modified_hours_close'] ) . '' : '' );
-													$modified_hours_schema .= '"opens": "' . date('H:i', strtotime($modified_time['location_modified_hours_open'])) . '"';
-													$modified_hours_schema .= ',
-													"closes": "' . date('H:i', strtotime($modified_time['location_modified_hours_close'])) . '"
+													$modified_hours_schema .= '"validFrom": "'. date("Y-m-d", strtotime($modified_start)) .'",
 													';
-												}
-												if ( $modified_time['location_modified_hours_comment'] ) {
-													$modified_text .= ' <br /><span class="subtitle">' .$modified_time['location_modified_hours_comment'] . '</span>';
-													$modified_comment = $modified_time['location_modified_hours_comment'];
-												} else {
-													$modified_comment = '';
-												}
-												$modified_text .= '</dd>';
-												$modified_day = $modified_time['location_modified_hours_day']; // Reset the day
-												$i++;
-												
-											} // endforeach
-											$modified_text .= '</dl>';
-										} // End if (array)
-									endif;
+													$modified_hours_schema .= $modified_end && $modified_end_date ? '"validThrough": "'. date("Y-m-d", strtotime($modified_end_date)) .'",
+														' : '';
+
+													if ('Mon - Fri' == $modified_time['location_modified_hours_day'] && !$modified_time['location_modified_hours_closed']) {
+														$modified_hours_schema .= '"dayOfWeek": [
+															"Monday",
+															"Tuesday",
+															"Wednesday",
+															"Thursday",
+															"Friday"
+														],
+														';
+													} else {
+														$modified_hours_schema .= '"dayOfWeek": "'. $modified_time['location_modified_hours_day'] .'",
+														'; //substr($modified_time['location_modified_hours_day'], 0, 2);
+													}
+				
+													if ( $modified_time['location_modified_hours_closed'] ) {
+														$modified_text .= 'Closed ';
+														$modified_hours_schema .= '"opens": "00:00",
+														"closes": "00:00"
+														';
+													} else {
+														$modified_text .= ( ( $modified_time['location_modified_hours_open'] && '00:00:00' != $modified_time['location_modified_hours_open'] )  ? '' . apStyleDate( $modified_time['location_modified_hours_open'] ) . ' &ndash; ' . apStyleDate( $modified_time['location_modified_hours_close'] ) . '' : '' );
+														$modified_hours_schema .= '"opens": "' . date('H:i', strtotime($modified_time['location_modified_hours_open'])) . '"';
+														$modified_hours_schema .= ',
+														"closes": "' . date('H:i', strtotime($modified_time['location_modified_hours_close'])) . '"
+														';
+													}
+													if ( $modified_time['location_modified_hours_comment'] ) {
+														$modified_text .= ' <br /><span class="subtitle">' .$modified_time['location_modified_hours_comment'] . '</span>';
+														$modified_comment = $modified_time['location_modified_hours_comment'];
+													} else {
+														$modified_comment = '';
+													}
+													$modified_text .= '</dd>';
+													$modified_day = $modified_time['location_modified_hours_day']; // Reset the day
+													$i++;
+													
+												} // endforeach
+												$modified_text .= '</dl>';
+											} // End if (array)
+										endif;
+									}
 								}
 							}
 						
