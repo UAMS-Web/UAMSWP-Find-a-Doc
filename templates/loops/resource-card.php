@@ -170,7 +170,7 @@
                                         media="(min-width: 1px)">
                                     <img src="<?php echo image_sizer($resource_image_wide, 510, 286, 'center', 'center'); ?>" alt="" role="presentation" />
                                 <?php } elseif ( has_post_thumbnail() ) { ?>
-                                    <?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
+                                    <?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image', 'alt' => '', 'role' => 'presentation' ) ); ?>
                                 <?php } else { ?>
                                     <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
                                     <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" />
