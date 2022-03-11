@@ -354,6 +354,7 @@ while ( have_posts() ) : the_post();
             $rating_valid = $rating_data->valid;
         }
     }
+    if ($rating_valid) { $provider_field_classes = $provider_field_classes . ' has-ratings'; }
 
 	// Clinical Resources
 	$resources =  get_field('physician_clinical_resources');
