@@ -417,11 +417,11 @@
             "layout": "horizontal",
             "return_format": "value"
         },
-        "field_physician_referral_required": {
-            "key": "field_physician_referral_required",
-            "name": "physician_referral_required",
+        "field_physician_accepting_patients": {
+            "key": "field_physician_accepting_patients",
+            "name": "physician_accepting_patients",
             "type": "button_group",
-            "label": "Does the Provider Require a Referral for New Patients?",
+            "label": "Is the Provider Accepting New Patients?",
             "instructions": "",
             "required": 1,
             "conditional_logic": [
@@ -447,17 +447,17 @@
             "layout": "horizontal",
             "return_format": "value"
         },
-        "field_physician_accepting_patients": {
-            "key": "field_physician_accepting_patients",
-            "name": "physician_accepting_patients",
+        "field_physician_referral_required": {
+            "key": "field_physician_referral_required",
+            "name": "physician_referral_required",
             "type": "button_group",
-            "label": "Is the Provider Accepting New Patients?",
+            "label": "Does the Provider Require a Referral for New Patients?",
             "instructions": "",
             "required": 1,
             "conditional_logic": [
                 [
                     {
-                        "field": "field_physician_eligible_appointments",
+                        "field": "field_physician_accepting_patients",
                         "operator": "==",
                         "value": "1"
                     }
