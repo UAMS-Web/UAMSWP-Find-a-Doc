@@ -361,7 +361,7 @@
             "key": "field_physician_eligible_appointments",
             "name": "physician_eligible_appointments",
             "type": "button_group",
-            "label": "Eligible for appointments",
+            "label": "Sees patients via appointments",
             "instructions": "",
             "required": 1,
             "conditional_logic": [
