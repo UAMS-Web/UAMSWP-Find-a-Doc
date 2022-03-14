@@ -8,6 +8,8 @@ Author URI: http://www.uams.edu/
 Version: 2.1.0
 */
 
+define('UAMS_FAD_VERSION', '2.1.0');
+
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
