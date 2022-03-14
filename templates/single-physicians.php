@@ -569,6 +569,19 @@ while ( have_posts() ) : the_post();
 						<?php endif; ?> 
                     <h2 class="h3">Overview</h2>
                     <dl>
+                    <?php // Display if they accept new patients
+                    if ( $eligible_appt ) { ?>
+                        <dt>Accepting New Patients</dt>
+                        <?php 
+                        if ($accept_new) {
+                            // Display if they require referrals for new patients
+                            if ( $refer_req ) { ?>
+                                <dd>Yes (Referral Required)</dd>
+                            <?php } else { ?>
+                                <dd>Yes</dd>
+                            <?php }
+                        } else { ?>
+                            <dd>No</dd>
                     <?php  // Display if they will provide second opinions    
                     if ($second_opinion) { ?>
                         <dt>Provides Second Opinion</dt>
