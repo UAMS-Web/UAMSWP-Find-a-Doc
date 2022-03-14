@@ -607,13 +607,28 @@ while ( have_posts() ) : the_post();
                         } ?>
                         <?php }
                     } ?>
+                    <?php // Display if they accept new patients
+                    if ( $eligible_appt ) { ?>
+                        <dt>Accepting New Patients</dt>
+                        <?php 
+                        if ($accept_new) {
+                            // Display if they require referrals for new patients
+                            if ( $refer_req ) { ?>
+                                <dd>Yes (Referral Required)</dd>
+                            <?php } else { ?>
+                                <dd>Yes</dd>
+                            <?php }
+                        } else { ?>
+                            <dd>No</dd>
+                        <?php } // endif
+                    } // endif ?>
                     <?php  // Display if they will provide second opinions    
                     if ($second_opinion) { ?>
                         <dt>Provides Second Opinion</dt>
                         <dd>Yes</dd>
                     <?php } ?>
                     <?php // Display all patient types
-                        if( $patients ): 
+                        if( $patients ) { 
                         ?>
                             <dt>Patient Type<?php echo( count($patients) > 1 ? 's' : '' );?></dt>
                             <?php foreach( $patients as $patient ): ?>
@@ -621,7 +636,7 @@ while ( have_posts() ) : the_post();
                                     echo '<dd>' . $patient_name->name . '</dd>';
                                 ?>
                             <?php endforeach; ?>
-                    <?php endif; ?>
+                    <?php } // endif ?>
                     <?php // Display all languages
                         if( $languages && $language_list == 'English') { 
                         ?>
