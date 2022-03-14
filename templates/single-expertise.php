@@ -713,6 +713,7 @@ function uamswp_list_child_expertise() {
                             <?php
                                 while ( $pages->have_posts() ) : $pages->the_post();
                                     $id = get_the_ID(); 
+                                    $child_expertise_list = true; // Indicate that this is a list of child Areas of Expertise within this Area of Expertise
                                     include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
                                 endwhile;
                                 wp_reset_postdata(); ?>
