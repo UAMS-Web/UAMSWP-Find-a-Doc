@@ -101,8 +101,8 @@
             "key": "field_physician_pedigree",
             "name": "physician_pedigree",
             "type": "text",
-            "label": "Pedigree",
-            "instructions": "Example: Jr.",
+            "label": "Suffix",
+            "instructions": "Example: Jr., Sr., III",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -120,8 +120,8 @@
             "key": "field_physician_degree",
             "name": "physician_degree",
             "type": "taxonomy",
-            "label": "Degree(s)",
-            "instructions": "Select Multiple (if necessary)",
+            "label": "Degree and/or Credential",
+            "instructions": "Select multiple if necessary. These items will be displayed in the order they are entered. You may click and drag to rearrange.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -342,7 +342,7 @@
             "key": "field_physician_resident",
             "name": "physician_resident",
             "type": "true_false",
-            "label": "Is the provider a resident?",
+            "label": "Is the Provider a Resident?",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -361,7 +361,7 @@
             "key": "field_physician_eligible_appointments",
             "name": "physician_eligible_appointments",
             "type": "button_group",
-            "label": "Eligible for appointments",
+            "label": "Does the Provider See Patients Via Appointments?",
             "instructions": "",
             "required": 1,
             "conditional_logic": [
@@ -391,37 +391,7 @@
             "key": "field_physician_primary_care",
             "name": "physician_primary_care",
             "type": "button_group",
-            "label": "Primary Care Physician",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_eligible_appointments",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "0": "No",
-                "1": "Yes"
-            },
-            "allow_null": 1,
-            "default_value": "",
-            "layout": "horizontal",
-            "return_format": "value"
-        },
-        "field_physician_referral_required": {
-            "key": "field_physician_referral_required",
-            "name": "physician_referral_required",
-            "type": "button_group",
-            "label": "Referral required for new patients",
+            "label": "Is the Provider a Primary Care Provider?",
             "instructions": "",
             "required": 1,
             "conditional_logic": [
@@ -451,7 +421,7 @@
             "key": "field_physician_accepting_patients",
             "name": "physician_accepting_patients",
             "type": "button_group",
-            "label": "Accepting new patients",
+            "label": "Is the Provider Accepting New Patients?",
             "instructions": "",
             "required": 1,
             "conditional_logic": [
@@ -477,11 +447,41 @@
             "layout": "horizontal",
             "return_format": "value"
         },
+        "field_physician_referral_required": {
+            "key": "field_physician_referral_required",
+            "name": "physician_referral_required",
+            "type": "button_group",
+            "label": "Does the Provider Require a Referral for New Patients?",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_accepting_patients",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "0": "No",
+                "1": "Yes"
+            },
+            "allow_null": 1,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value"
+        },
         "field_physician_second_opinion": {
             "key": "field_physician_second_opinion",
             "name": "physician_second_opinion",
             "type": "button_group",
-            "label": "Provides second opinion",
+            "label": "Does the Provider Offer Second Opinions?",
             "instructions": "",
             "required": 1,
             "conditional_logic": [
@@ -750,7 +750,7 @@
             "name": "physician_languages",
             "type": "taxonomy",
             "label": "Language(s)",
-            "instructions": "",
+            "instructions": "Select multiple if necessary. These items will be displayed in the order they are entered. You may click and drag to rearrange.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -778,7 +778,7 @@
             "name": "physician_clinical_bio",
             "type": "wysiwyg",
             "label": "Clinical Bio",
-            "instructions": "",
+            "instructions": "Describe the benefit this provider can have for the patient. Move any academic and training background to the Academic Bio.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -796,7 +796,7 @@
             "key": "field_physician_short_clinical_bio",
             "name": "physician_short_clinical_bio",
             "type": "textarea",
-            "label": "Short Bio",
+            "label": "Short Clinical Bio",
             "instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
             "required": 0,
             "conditional_logic": 0,
@@ -815,8 +815,8 @@
             "key": "field_physician_youtube_link",
             "name": "physician_youtube_link",
             "type": "url",
-            "label": "Youtube Link",
-            "instructions": "Full URL, including https:\/\/",
+            "label": "YouTube Link",
+            "instructions": "Select a video that supports the Clinical Bio. Include the full URL, including https:\/\/.",
             "required": 0,
             "conditional_logic": [
                 [
@@ -900,7 +900,7 @@
             "name": "physician_conditions_cpt",
             "type": "post_object",
             "label": "Conditions Treated",
-            "instructions": "Will be displayed in the order they are entered. You may re-arrange as needed.",
+            "instructions": "Select any conditions this provider treats or diagnoses. These items will be displayed in the order they are entered. You may click and drag to rearrange.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -929,7 +929,7 @@
             "name": "physician_treatments_cpt",
             "type": "post_object",
             "label": "Treatments & Procedures",
-            "instructions": "Will be displayed in the order they are entered. You may re-arrange as needed.",
+            "instructions": "Select any treatments or procedures this provider performs or prescribes. These items will be displayed in the order they are entered. You may click and drag to rearrange.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -991,7 +991,7 @@
             "name": "physician_locations",
             "type": "relationship",
             "label": "Locations",
-            "instructions": "Please put primary location first. You may choose the order in which locations display.",
+            "instructions": "These items will be displayed in the order they are entered. You may click and drag to rearrange. Put the provider's primary location first.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -1153,7 +1153,7 @@
             "name": "physician_expertise",
             "type": "relationship",
             "label": "Areas of Expertise",
-            "instructions": "",
+            "instructions": "Areas of Expertise are hierarchical. If a child area is included here (e.g., Lung Cancer Care), please also select the parent area (e.g., Cancer Care).",
             "required": 0,
             "conditional_logic": [
                 [
@@ -1666,7 +1666,7 @@
             "key": "field_profile_message",
             "name": "",
             "type": "message",
-            "label": "PROFILE INFORMATION",
+            "label": "Profile Information",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -2136,8 +2136,8 @@
             "key": "field_physician_appointment_education",
             "name": "physician_education",
             "type": "repeater",
-            "label": "Education",
-            "instructions": "Education Type and School are required if you add a row.",
+            "label": "Education and Training",
+            "instructions": "Education Type and Organization are required if you add a row.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -2153,7 +2153,7 @@
             "sub_fields": [
                 {
                     "key": "field_physician_appointment_education_type",
-                    "label": "Education Type",
+                    "label": "Education or Training Type",
                     "name": "education_type",
                     "type": "taxonomy",
                     "instructions": "",
@@ -2178,10 +2178,10 @@
                 },
                 {
                     "key": "field_physician_appointment_school",
-                    "label": "School",
+                    "label": "Organization",
                     "name": "school",
                     "type": "taxonomy",
-                    "instructions": "",
+                    "instructions": "The organization that provided the education or training to the provider",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -2206,7 +2206,7 @@
                     "label": "Description",
                     "name": "description",
                     "type": "text",
-                    "instructions": "Description of the Education (if needed)",
+                    "instructions": "Describe the education or training. List things like specific degrees (non-abbreviated) and/or areas of focus or specialization.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -2226,7 +2226,7 @@
             "key": "field_physician_boards",
             "name": "physician_boards",
             "type": "taxonomy",
-            "label": "Boards",
+            "label": "Boards and Certifications",
             "instructions": "",
             "required": 0,
             "conditional_logic": [
@@ -2389,7 +2389,7 @@
             "key": "field_physician_author_number",
             "name": "physician_author_number",
             "type": "select",
-            "label": "Number Latest Articles",
+            "label": "Number of Latest Articles to Display",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -2553,7 +2553,7 @@
 		},
         "field_physician_gmb_cat": {
             "key": "field_physician_gmb_cat",
-            "label": "Category",
+            "label": "Google My Business Category",
             "name": "physician_gmb_cat",
             "type": "taxonomy",
             "instructions": "Select up to ten categories. Rearrange them so that the first item is the primary category. \"Doctor\" is a good standard choice, if you cannot find a better option.<br />For reference, you can <a href='https://communications.uams.edu/web/kb/google-my-business-categories/' target='_blank'>view a list of available categories.</a>",

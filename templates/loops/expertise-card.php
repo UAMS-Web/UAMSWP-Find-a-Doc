@@ -7,11 +7,15 @@
      *  Required var: $id
      */
 
+    // $child_expertise_list indicates whether this is a list of child Areas of Expertise within this Area of Expertise
+    // Check if $child_expertise_list is set. Otherwise create the variable and set its value to false.
+    $child_expertise_list = isset($child_expertise_list) ? $child_expertise_list : false;
+
     $expertise_title = get_the_title($id);
     $expertise_title_attr = str_replace('"', '\'', $expertise_title);
     $expertise_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($expertise_title_attr, null, 'utf-8')));
 
-    // Parent Location 
+    // Parent Area of Expertise 
     $expertise_parent_id = wp_get_post_parent_id($id);
     $expertise_has_parent = $expertise_parent_id ? true : false;
     $parent_expertise = '';
@@ -22,7 +26,7 @@
     if ($expertise_has_parent && $expertise_parent_id) { 
         $parent_expertise = get_post( $expertise_parent_id );
     }
-    // Get Post ID for Address & Image fields
+    // Get attributes of parent Area of Expertise
     if ($parent_expertise) {
         $parent_id = $parent_expertise->ID;
         $parent_title = $parent_expertise->post_title;
@@ -55,7 +59,7 @@
     <div class="card-body">
         <h3 class="card-title h5">
             <span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self" aria-label="<?php echo $expertise_label; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $expertise_title_attr; ?>"><?php echo $expertise_title; ?></a></span>
-            <?php if ( $parent_expertise ) { ?>
+            <?php if ( $parent_expertise && !$child_expertise_list ) { ?>
                 <span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>" aria-label="Go to Area of Expertise page for <?php echo $parent_title_attr; ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $expertise_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
             <?php } // endif ?>
         </h3>

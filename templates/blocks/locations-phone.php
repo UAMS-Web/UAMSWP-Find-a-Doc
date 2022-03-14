@@ -66,6 +66,7 @@ if ( $location_ac_query && $location_appointments_query ) {
 // Appointment phone number for new (or new AND returning) patients
 $location_new_appointments_phone = ''; // Establishing the variable to be used later for the appointment phone number for (new) patients
 $location_new_appointments_phone_link = ''; // Establishing the variable to be used later for building the anchor element for the appointment phone for (new) patients
+$location_appointment_phone_query = false; // Is there a separate phone number for returning patients?
 if ( !$location_ac_query && $location_appointments_query ) {
 	// IF this is not an Arkansas Children's location...
     // AND IF a patient can schedule an appointment for services rendered at this location...
@@ -82,7 +83,6 @@ if ( $location_clinic_phone_query && !$location_ac_appointments_query ) {
 // Appointment phone number for returning patients
 $location_return_appointments_phone = ''; // Establishing the variable to be used later for the appointment phone number for returning patients
 $location_return_appointments_phone_link = ''; // Establishing the variable to be used later for the anchor element for the appointment phone for returning patients
-$location_appointment_phone_query = false; // Is there a separate phone number for returning patients?
 if ( $location_clinic_phone_query && !$location_ac_query ) {
 	// IF there is a a separate appointment phone number for (new) patients...
 	// AND IF this isn't an Arkansas Children's location...

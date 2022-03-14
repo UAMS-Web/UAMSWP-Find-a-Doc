@@ -16,11 +16,26 @@
     $resource_title_attr = str_replace('"', '\'', $resource_title);
     $resource_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($resource_title_attr, null, 'utf-8')));
 
-    $resource_label = 'View Clinical Resource for ' . $resource_title_attr;
-
     $resource_type = get_field('clinical_resource_type', $id);
     $resource_type_value = $resource_type['value'];
     $resource_type_label = $resource_type['label'];
+
+    // Build an array of resource type values (keys) with the corresponding button text (values)
+    $resource_button_text_arr = array(
+        'text' => 'Read the Article',
+        'infographic' => 'View the Infographic',
+        'video' => 'Watch the Video',
+        'doc' => 'Read the Document'
+    );
+    $resource_button_text = 'View the Clinical Resource'; // Set fallback button text
+    if ( isset($resource_type) && isset($resource_button_text_arr[$resource_type_value]) ) {
+        // IF resource type is set...
+        // AND IF the resource type value is in $resource_button_text_arr...
+        $resource_button_text = $resource_button_text_arr[$resource_type_value]; // Set the button text from the corresponding value from the array
+    }
+    $resource_button_text_attr = str_replace('"', '\'', $resource_button_text);
+    $resource_button_text_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($resource_button_text_attr, null, 'utf-8')));
+    $resource_label = $resource_button_text_attr . ', ' . $resource_title_attr;
     
     $resource_excerpt = get_the_excerpt($id) ? get_the_excerpt($id) : wp_strip_all_tags( get_the_content($id) );
     $resource_excerpt_len = strlen($resource_excerpt);
@@ -170,7 +185,7 @@
                                         media="(min-width: 1px)">
                                     <img src="<?php echo image_sizer($resource_image_wide, 510, 286, 'center', 'center'); ?>" alt="" role="presentation" />
                                 <?php } elseif ( has_post_thumbnail() ) { ?>
-                                    <?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image' ) ); ?>
+                                    <?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image', 'alt' => '', 'role' => 'presentation' ) ); ?>
                                 <?php } else { ?>
                                     <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
                                     <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" />
@@ -188,7 +203,7 @@
                                     <span class="subtitle"><span class="sr-only"> (</span><?php echo esc_html($resource_type_label); ?><span class="sr-only">)</span></span>
                                 </h3>
                                 <p><?php echo $resource_excerpt; ?></p>
-                                <a class="btn btn-primary" href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo $resource_title_attr; ?>">View Clinical Resource</a>
+                                <a class="btn btn-primary" href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo $resource_title_attr; ?>"><?php echo $resource_button_text; ?></a>
                             </div>
                             <div class="col-12 secondary">
 								<h4 class="h5">Related Content</h4>
@@ -396,7 +411,7 @@
                                         $associates = '';
                                     ?> 
                                 </dl>
-								<a class="btn btn-primary" href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo $resource_title_attr; ?>">View Clinical Resource</a>
+								<a class="btn btn-primary" href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo $resource_title_attr; ?>"><?php echo $resource_button_text; ?></a>
 							</div>
                         </div>
                     </div>
@@ -404,22 +419,36 @@
             </div>
         </div>
     <?php } else { ?>
-        <div class="col-12 col-sm-6 col-xl-3 item">
+        <div class="item">
             <div class="card">
                 <div class="card-img-top">
-                    <?php if ( has_post_thumbnail($id) ) { ?>
-                        <?php echo get_the_post_thumbnail($id, 'aspect-16-9-small'); ?>
-                    <?php } else { ?>
-                        <picture>
+                    <picture>
+                        <?php if ( has_post_thumbnail($id) && function_exists( 'fly_add_image_size' ) ) { ?>  
+                            <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center'); ?>" 
+                                media="(min-width: 1921px)">
+                            <source srcset="<?php echo image_sizer($resource_image_wide, 433, 244, 'center', 'center'); ?>" 
+                                media="(min-width: 1500px)">
+                            <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center'); ?>" 
+                                media="(min-width: 992px)">
+                            <source srcset="<?php echo image_sizer($resource_image_wide, 433, 244, 'center', 'center'); ?>" 
+                                media="(min-width: 768px)">
+                            <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center'); ?>" 
+                                media="(min-width: 1px)">
+                            <!-- Fallback -->
+                            <img src="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center'); ?>" alt="" role="presentation" />
+                        <?php } elseif ( has_post_thumbnail($id) ) { ?>
+                            <!-- Fallback -->
+                            <?php the_post_thumbnail( 'aspect-16-9-small',  array( 'alt' => '', 'role' => 'presentation' ) ); ?>
+                        <?php } else { ?>
                             <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
                             <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" />
-                        </picture>
-                    <?php } ?>
+                        <?php } ?>
+                    </picture>
                 </div>
                 <div class="card-body">
                     <h3 class="card-title h5"><?php echo $resource_title; ?> <span class="subtitle"><span class="sr-only">(</span><?php echo esc_html($resource_type_label); ?><span class="sr-only">)</span></span></h3>
                     <p class="card-text"><?php echo $resource_excerpt; ?></p>
-                    <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary stretched-link" aria-label="<?php echo $resource_label; ?>" data-itemtitle="<?php echo $resource_title_attr; ?>">View Clinical Resource</a>
+                    <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary stretched-link" aria-label="<?php echo $resource_label; ?>" data-itemtitle="<?php echo $resource_title_attr; ?>"><?php echo $resource_button_text; ?></a>
                 </div>
             </div>
         </div>

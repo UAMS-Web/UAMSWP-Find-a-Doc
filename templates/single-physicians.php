@@ -57,16 +57,34 @@ $resident = get_field('physician_resident',$post->ID);
 $resident_title_name = 'Resident Physician';
 $phys_title = get_field('physician_title',$post->ID);
 $phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
-$vowels = array('a','e','i','o','u');
+$vowels = array('a','e','i','o','u'); // Define a list of variables for use in determining which indefinite article to use (a vs. an)
 if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
-    $phys_title_indef_article = 'an';
+    $phys_title_indef_article = 'an'; // If the clinical title starts with a vowel, use "an"
 } else {
-    $phys_title_indef_article = 'a';
+    $phys_title_indef_article = 'a'; // If the clinical title does not start with a vowel, use "a"
 }
-if ( substr($short_name, -1) == 's' ) { // Defines a or an, based on whether clinical title starts with vowel
-    $short_name_possessive = $short_name . '\'';
+// Define a list of exceptions to the vowel-based determination of which indefinite article to use.
+// Use "a" before consonant sounds: a historic event, a one-year term.
+// Use "an" before vowel sounds: an honor, an NBA record.
+// Write the key as the characters at the beginning of the exception. It can be a complete or incomplete title.
+// Write the value as the indefinite article to use in that case ('a' or 'an').
+$phys_title_indef_article_exceptions = array(
+    'SNF' => 'an',
+    'Urolog' => 'a',
+    'Uveitis' => 'a'
+);
+if ( !empty($phys_title_indef_article_exceptions) ) {
+    foreach( $phys_title_indef_article_exceptions as $exception => $indef_article ) {
+        $exception_length = strlen($exception); // Get the charactter length of the exception key
+        if (substr(strtolower($phys_title_name), 0, $exception_length) == strtolower($exception)) { // If the clinical title begins with the exception key...
+            $phys_title_indef_article = $indef_article; // Use the key's value as the indefinite article
+        }
+    }
+}
+if ( substr($short_name, -1) == 's' ) { // If the provider's name ends in "s"...
+    $short_name_possessive = $short_name . '\''; // Use an apostrophe with no "s" when indicating the possessive form
 } else {
-    $short_name_possessive = $short_name . '\'s';
+    $short_name_possessive = $short_name . '\'s'; // Use an apostrophe with an "s" when indicating the possessive form
 }
 $bio = get_field('physician_clinical_bio',$post->ID);
 $eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$post->ID);
@@ -219,7 +237,6 @@ while ( have_posts() ) : the_post();
     $physician_clinical_focus = get_field('physician_clinical_focus');
     $physician_awards = get_field('physician_awards');
     $physician_additional_info = get_field('physician_additional_info');
-    $expertises =  get_field('physician_expertise');
     $associations = get_field( 'physician_associations' );
     $publications = get_field('physician_select_publications');
     $pubmed_author_id = get_field('physician_pubmed_author_id');
@@ -337,6 +354,7 @@ while ( have_posts() ) : the_post();
             $rating_valid = $rating_data->valid;
         }
     }
+    if ($rating_valid) { $provider_field_classes = $provider_field_classes . ' has-ratings'; }
 
 	// Clinical Resources
 	$resources =  get_field('physician_clinical_resources');
@@ -568,14 +586,49 @@ while ( have_posts() ) : the_post();
                         </div>
 						<?php endif; ?> 
                     <h2 class="h3">Overview</h2>
-                    <dl>
+                    <dl data-sectiontitle="Overview">
+                    <?php // Display area(s) of expertise
+                    $expertise_valid = false;
+                    if ($expertises && !empty($expertises) && !$hide_medical_ontology) { 
+                        foreach( $expertises as $expertise ) {
+                            if ( get_post_status ( $expertise ) == 'publish' ) {
+                               $expertise_valid = true;
+                               $break;
+                            }
+                        }
+                        if ( $expertise_valid ) {
+                        ?>
+                        <dt>Area<?php echo( count($expertises) > 1 ? 's' : '' );?> of Expertise</dt>
+                        <?php foreach( $expertises as $expertise ) {
+                            $id = $expertise; 
+                            if ( get_post_status ( $expertise ) == 'publish' && $expertise !== 0 ) {
+                                echo '<dd><a href="' . get_permalink($id) . '" target="_self" data-sectiontitle="Overview" data-categorytitle="View Area of Expertise">' . get_the_title($id) . '</a></dd>';
+                            }
+                        } ?>
+                        <?php }
+                    } ?>
+                    <?php // Display if they accept new patients
+                    if ( $eligible_appt ) { ?>
+                        <dt>Accepting New Patients</dt>
+                        <?php 
+                        if ($accept_new) {
+                            // Display if they require referrals for new patients
+                            if ( $refer_req ) { ?>
+                                <dd>Yes (Referral Required)</dd>
+                            <?php } else { ?>
+                                <dd>Yes</dd>
+                            <?php }
+                        } else { ?>
+                            <dd>No</dd>
+                        <?php } // endif
+                    } // endif ?>
                     <?php  // Display if they will provide second opinions    
                     if ($second_opinion) { ?>
                         <dt>Provides Second Opinion</dt>
                         <dd>Yes</dd>
                     <?php } ?>
                     <?php // Display all patient types
-                        if( $patients ): 
+                        if( $patients ) { 
                         ?>
                             <dt>Patient Type<?php echo( count($patients) > 1 ? 's' : '' );?></dt>
                             <?php foreach( $patients as $patient ): ?>
@@ -583,7 +636,7 @@ while ( have_posts() ) : the_post();
                                     echo '<dd>' . $patient_name->name . '</dd>';
                                 ?>
                             <?php endforeach; ?>
-                    <?php endif; ?>
+                    <?php } // endif ?>
                     <?php // Display all languages
                         if( $languages && $language_list == 'English') { 
                         ?>
@@ -604,12 +657,12 @@ while ( have_posts() ) : the_post();
                             echo '<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: '. $avg_rating_dec/5 * 100 .'%;"></div></div>';
                             echo '<div class="ratings-score">'. $avg_rating .'<span class="sr-only"> out of 5</span></div>';
                             echo '<div class="w-100"></div>';
-                            echo '<a href="#ratings" aria-label="Jump to Patient Ratings and Reviews">';
+                            echo '<a href="#ratings" aria-label="Jump to Patient Ratings and Reviews" data-sectiontitle="Overview">';
                             echo '<div class="ratings-count-lg" aria-hidden="true">'. $review_count .' Patient Satisfaction Ratings</div>';
                             echo '<div class="ratings-comments-lg" aria-hidden="true">'.  $comment_count .' comments</div>';
                             echo '</a>';
                         } else { ?>
-                            <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this provider"><span aria-hidden="true">Why not?</span></a></em></p> 
+                            <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this provider" data-sectiontitle="Overview"><span aria-hidden="true">Why not?</span></a></em></p> 
                         <?php
                         }
                         echo '</div>';

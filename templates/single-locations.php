@@ -628,7 +628,15 @@ while ( have_posts() ) : the_post(); ?>
 					<p><?php echo $location_address_1; ?><br/>
 					<?php echo ( $location_address_2 ? $location_address_2 . '<br/>' : ( $location_address_2_deprecated ? $location_address_2_deprecated . '<br/>' : '')); ?>
 					<?php echo $location_city; ?>, <?php echo $location_state; ?> <?php echo $location_zip; ?></p>
-						<p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo get_the_title($post_id); ?>" data-typetitle="Get directions to the clinic">Get Directions</a></p>
+						<div class="btn-container">
+							<div class="inner-container">
+								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>
+								<?php if ($show_parking_section) { ?>
+									<a class="btn btn-outline-primary" href="#parking-info" aria-label="Parking instructions for <?php echo $page_title; ?>" data-typetitle="Parking instructions for the clinic">Parking Instructions</a>
+								<?php } // endif $show_parking_section ?>
+								
+							</div>
+						</div>
 						<?php if( $location_web_name && $location_url ){ ?>
 							<p><a class="btn btn-secondary" href="<?php echo $location_url['url']; ?>" target="_blank" data-categorytitle="External Link"><?php echo $location_web_name; ?> <span class="far fa-external-link-alt"></span></span></a></p>
 					<?php } 
@@ -692,11 +700,11 @@ while ( have_posts() ) : the_post(); ?>
 									foreach ($modified_hours as $modified_hour) {
 			
 										$modified_title = $modified_hour['location_modified_hours_title'];
+										$modified_text .= $modified_title ? '<h3 class="h4">'.$modified_title.'</h3>' : '';
 										$modified_info = $modified_hour['location_modified_hours_information'];
+										$modified_text .= $modified_info ? $modified_info : '';
 										$modified_times = $modified_hour['location_modified_hours_times'];
 										$modified_hours247 = $modified_hour['location_modified_hours_24_7'];
-										$modified_text .= $modified_title ? '<h3 class="h4">'.$modified_title.'</h3>' : '';
-										$modified_text .= $modified_info ? $modified_info : '';
 			
 										if ($active_start > strtotime($modified_start) || '' == $active_start) {
 											$active_start = strtotime($modified_start);
@@ -709,7 +717,7 @@ while ( have_posts() ) : the_post(); ?>
 											}
 										}
 										if ($modified_hours247):
-											echo '<strong>Open 24/7</strong>';
+											$modified_text .= '<strong>Open 24/7</strong>';
 											$modified_hours_schema = '"dayOfWeek": [
 												"Monday",
 												"Tuesday",
@@ -1707,12 +1715,14 @@ while ( have_posts() ) : the_post(); ?>
 						<h2 class="module-title" id="sub-location-title"><span class="title">Additional Clinics Within <?php echo $page_title; ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list">
-						<?php
-							while ( $children->have_posts() ) : $children->the_post();
-								$id = get_the_ID(); 
-								include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
-							endwhile;
-							wp_reset_postdata(); ?>
+								<?php
+									while ( $children->have_posts() ) : $children->the_post();
+										$id = get_the_ID(); 
+										$child_location_list = true; // Indicate that this is a list of child locations within this location
+										include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+									endwhile;
+									wp_reset_postdata();
+								?>
 							</div>
 						</div>
 					</div>
