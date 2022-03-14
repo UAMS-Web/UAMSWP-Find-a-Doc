@@ -582,6 +582,8 @@ while ( have_posts() ) : the_post();
                             <?php }
                         } else { ?>
                             <dd>No</dd>
+                        <?php } // endif
+                    } // endif ?>
                     <?php  // Display if they will provide second opinions    
                     if ($second_opinion) { ?>
                         <dt>Provides Second Opinion</dt>
