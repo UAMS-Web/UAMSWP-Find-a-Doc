@@ -700,11 +700,11 @@ while ( have_posts() ) : the_post(); ?>
 									foreach ($modified_hours as $modified_hour) {
 			
 										$modified_title = $modified_hour['location_modified_hours_title'];
+										$modified_text .= $modified_title ? '<h3 class="h4">'.$modified_title.'</h3>' : '';
 										$modified_info = $modified_hour['location_modified_hours_information'];
+										$modified_text .= $modified_info ? $modified_info : '';
 										$modified_times = $modified_hour['location_modified_hours_times'];
 										$modified_hours247 = $modified_hour['location_modified_hours_24_7'];
-										$modified_text .= $modified_title ? '<h3 class="h4">'.$modified_title.'</h3>' : '';
-										$modified_text .= $modified_info ? $modified_info : '';
 			
 										if ($active_start > strtotime($modified_start) || '' == $active_start) {
 											$active_start = strtotime($modified_start);
@@ -717,7 +717,7 @@ while ( have_posts() ) : the_post(); ?>
 											}
 										}
 										if ($modified_hours247):
-											echo '<strong>Open 24/7</strong>';
+											$modified_text .= '<strong>Open 24/7</strong>';
 											$modified_hours_schema = '"dayOfWeek": [
 												"Monday",
 												"Tuesday",
