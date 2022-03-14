@@ -590,7 +590,7 @@ while ( have_posts() ) : the_post();
                         <dd>Yes</dd>
                     <?php } ?>
                     <?php // Display all patient types
-                        if( $patients ): 
+                        if( $patients ) { 
                         ?>
                             <dt>Patient Type<?php echo( count($patients) > 1 ? 's' : '' );?></dt>
                             <?php foreach( $patients as $patient ): ?>
@@ -598,7 +598,7 @@ while ( have_posts() ) : the_post();
                                     echo '<dd>' . $patient_name->name . '</dd>';
                                 ?>
                             <?php endforeach; ?>
-                    <?php endif; ?>
+                    <?php } // endif ?>
                     <?php // Display all languages
                         if( $languages && $language_list == 'English') { 
                         ?>
