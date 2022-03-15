@@ -60,14 +60,16 @@
                     <div class="col-12">
                         <h2 class="module-title" id="related-resources-title"><span class="title"><?php echo $resource_heading; ?></span></h2>
                     </div>
-                    <div class="card-list card-list-left col-12">
-                        <?php 
-                        while ($resource_query->have_posts()) : $resource_query->the_post();
-                            $id = get_the_ID();
-                            include( UAMS_FAD_PATH . '/templates/loops/resource-card.php' );
-                        endwhile;
-                        wp_reset_postdata();
-                        ?>
+                    <div class="col-12">
+                        <div class="card-list card-list-left">
+                            <?php 
+                            while ($resource_query->have_posts()) : $resource_query->the_post();
+                                $id = get_the_ID();
+                                include( UAMS_FAD_PATH . '/templates/loops/resource-card.php' );
+                            endwhile;
+                            wp_reset_postdata();
+                            ?>
+                        </div>
                     </div>
                     <?php if ( $resource_more ) { ?>
                         <div class="col-12 more">
