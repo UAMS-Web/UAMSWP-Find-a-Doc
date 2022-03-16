@@ -1059,6 +1059,11 @@
   color: inherit;
 }
 
+.single-expertise .entry-title .subtitle,
+.single-expertise .page-title .subtitle {
+  font-size: .5em;
+}
+
 .resource-list .list-col .item dl dt {
   clear: left;
   float: left;

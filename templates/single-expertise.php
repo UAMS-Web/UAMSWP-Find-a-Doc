@@ -8,8 +8,30 @@
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title();
-$expertise_archive_title_system = get_field('expertise_archive_headline', 'option');
-$expertise_archive_title = $expertise_archive_title_system ? $expertise_archive_title_system : 'Area of Expertise';
+$page_title_attr = str_replace('"', '\'', $page_title);
+$page_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($page_title_attr, null, 'utf-8')));
+$expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
+$expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
+
+// Parent Area of Expertise 
+$expertise_parent_id = wp_get_post_parent_id($page_id);
+$expertise_has_parent = $expertise_parent_id ? true : false;
+$parent_expertise = '';
+$parent_id = '';
+$parent_title = '';
+$parent_url = '';
+
+if ($expertise_has_parent && $expertise_parent_id) { 
+    $parent_expertise = get_post( $expertise_parent_id );
+}
+// Get attributes of parent Area of Expertise
+if ($parent_expertise) {
+    $parent_id = $parent_expertise->ID;
+    $parent_title = $parent_expertise->post_title;
+    $parent_title_attr = str_replace('"', '\'', $parent_title);
+    $parent_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($parent_title_attr, null, 'utf-8')));
+    $parent_url = get_permalink( $parent_id );
+}
 
 // Override theme's method of defining the page title
 function uamswp_fad_title($html) { 
@@ -47,10 +69,18 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
     add_action( 'genesis_entry_header', 'uamswp_expertise_post_title' );
 
     function uamswp_expertise_post_title() {
-        global $expertise_archive_title;
+        global $page_title;
+        global $expertise_single_name;
+        global $parent_expertise;
+        global $parent_title;
+        global $parent_title_attr;
+        global $parent_url;
         echo '<h1 class="entry-title" itemprop="headline">';
-        echo '<span class="supertitle">'. $expertise_archive_title . '</span><span class="sr-only">:</span> ';
-        echo get_the_title();
+        echo '<span class="supertitle">'. $expertise_single_name . '</span><span class="sr-only">:</span> ';
+        echo $page_title;
+        if ( $parent_expertise ) {
+           echo '<span class="subtitle"><span class="sr-only">(</span>Part of <a href="' . $parent_url . '" aria-label="Go to Area of Expertise page for ' . $parent_title_attr . '" data-categorytitle="Parent Name">' . $parent_title . '</a><span class="sr-only">)</span></span>';
+        } // endif
         echo '</h1>';
     }
 
@@ -325,49 +355,50 @@ function uamswp_expertise_physicians() {
     global $physicians;
     global $provider_ids;
 
+
+    if($show_providers_section) {
     
-    // Get available regions - All available, since no titles set on initial load
-    $region_IDs = array();
-    while ($physicians_query->have_posts()) : $physicians_query->the_post();
-        $id = get_the_ID();
-        $region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
-    endwhile;
-    $region_IDs = array_unique($region_IDs);
-    $region_list = array();
-    foreach ($region_IDs as $region_ID){
-        $region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
-    }
-
-    // if cookie is set, run modified physician query
-	if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {		
-		
-        $provider_region = '';
-        if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
-            $provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
+        // Get available regions - All available, since no titles set on initial load
+        $region_IDs = array();
+        while ($physicians_query->have_posts()) : $physicians_query->the_post();
+            $id = get_the_ID();
+            $region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
+        endwhile;
+        $region_IDs = array_unique($region_IDs);
+        $region_list = array();
+        foreach ($region_IDs as $region_ID){
+            $region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
         }
 
-        $tax_query = array();
-        if(!empty($provider_region)) {
-            $tax_query[] = array(
-                'taxonomy' => 'region',
-                'field' => 'slug',
-                'terms' => $provider_region
+        // if cookie is set, run modified physician query
+        if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {		
+            
+            $provider_region = '';
+            if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+                $provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
+            }
+
+            $tax_query = array();
+            if(!empty($provider_region)) {
+                $tax_query[] = array(
+                    'taxonomy' => 'region',
+                    'field' => 'slug',
+                    'terms' => $provider_region
+                );
+            }
+            $args = array(
+                "post_type" => "provider",
+                "post_status" => "publish",
+                "posts_per_page" => -1,
+                "orderby" => "title",
+                "order" => "ASC",
+                "fields" => "ids",
+                "post__in" => $physicians,
+                'tax_query' => $tax_query
             );
+            $physicians_query = New WP_Query( $args );
         }
-        $args = array(
-            "post_type" => "provider",
-            "post_status" => "publish",
-            "posts_per_page" => -1,
-            "orderby" => "title",
-            "order" => "ASC",
-            "fields" => "ids",
-            "post__in" => $physicians,
-            'tax_query' => $tax_query
-        );
-        $physicians_query = New WP_Query( $args );
-    }
-
-    if($show_providers_section) {   
+        
         $provider_count = count($physicians_query->posts);
         ?>
         <section class="uams-module bg-auto" id="providers">
@@ -682,6 +713,7 @@ function uamswp_list_child_expertise() {
                             <?php
                                 while ( $pages->have_posts() ) : $pages->the_post();
                                     $id = get_the_ID(); 
+                                    $child_expertise_list = true; // Indicate that this is a list of child Areas of Expertise within this Area of Expertise
                                     include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
                                 endwhile;
                                 wp_reset_postdata(); ?>
