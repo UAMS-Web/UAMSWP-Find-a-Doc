@@ -101,7 +101,7 @@
             "key": "field_physician_pedigree",
             "name": "physician_pedigree",
             "type": "select",
-            "label": "Suffix",
+            "label": "Generational Suffix",
             "instructions": "Example: Jr., Sr., III",
             "required": 0,
             "conditional_logic": 0,
