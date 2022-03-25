@@ -11,7 +11,11 @@ $page_title = get_the_title();
 $page_title_attr = str_replace('"', '\'', $page_title);
 $page_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($page_title_attr, null, 'utf-8')));
 $expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
+$expertise_archive_title_attr = str_replace('"', '\'', $expertise_archive_title);
+$expertise_archive_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($expertise_archive_title_attr, null, 'utf-8')));
 $expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
+$expertise_single_name_attr = str_replace('"', '\'', $expertise_single_name);
+$expertise_single_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($expertise_single_name_attr, null, 'utf-8')));
 
 // Parent Area of Expertise 
 $expertise_parent_id = wp_get_post_parent_id($page_id);
@@ -36,12 +40,12 @@ if ($parent_expertise) {
 // Override theme's method of defining the page title
 function uamswp_fad_title($html) { 
     global $page_title_attr;
+    global $expertise_single_name_attr;
     //you can add here all your conditions as if is_page(), is_category() etc.. 
     $meta_title_chars_max = 60;
     $meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
     $meta_title_base_chars = strlen( $meta_title_base );
-    $meta_title_enhanced_addition_name = 'Area of Expertise';
-    $meta_title_enhanced_addition = ' | ' . $meta_title_enhanced_addition_name;
+    $meta_title_enhanced_addition = ' | ' . $expertise_single_name_attr;
     $meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
     $meta_title_enhanced_chars = strlen( $meta_title_enhanced );
     if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
