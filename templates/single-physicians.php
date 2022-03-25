@@ -57,6 +57,8 @@ $resident = get_field('physician_resident',$post->ID);
 $resident_title_name = 'Resident Physician';
 $phys_title = get_field('physician_title',$post->ID);
 $phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
+$phys_title_name_attr = str_replace('"', '\'', $phys_title_name);
+$phys_title_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($phys_title_name_attr, null, 'utf-8')));
 $vowels = array('a','e','i','o','u'); // Define a list of variables for use in determining which indefinite article to use (a vs. an)
 if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
     $phys_title_indef_article = 'an'; // If the clinical title starts with a vowel, use "an"
@@ -118,6 +120,9 @@ if( $locations && $location_valid ) {
                 $primary_appointment_title_attr = str_replace('"', '\'', $primary_appointment_title);
                 $primary_appointment_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($primary_appointment_title_attr, null, 'utf-8')));
                 $primary_appointment_url = get_the_permalink( $location );
+                $primary_appointment_city = get_field('location_city', $location);
+                $primary_appointment_city_attr = str_replace('"', '\'', $primary_appointment_city);
+                $primary_appointment_city_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($primary_appointment_city_attr, null, 'utf-8')));
                 $l++;
             }
         }
@@ -150,11 +155,13 @@ if (empty($excerpt)){
     if ($bio){
         $excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 155, '...');
     } else {
-        $fallback_desc = $medium_name_attr . ' is ' . ($phys_title ? $phys_title_indef_article . ' ' . strtolower($phys_title_name) : 'a health care provider' ) . ($primary_appointment_title ? ' at ' . $primary_appointment_title : '') .  ' employed by UAMS Health.';
+        $fallback_desc = $medium_name_attr . ' is ' . ($phys_title ? $phys_title_indef_article . ' ' . strtolower($phys_title_name) : 'a health care provider' ) . ($primary_appointment_title_attr ? ' at ' . $primary_appointment_title_attr : '') .  ' employed by UAMS Health.';
         $excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 155, '...');
     }
 }
 $schema_description = $excerpt;  // Used for Schema Data. Should ALWAYS have a value
+
+// Override theme's method of defining the meta description
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
@@ -162,14 +169,32 @@ function sp_titles_desc($html) {
 }
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
-// Set meta title
-function sp_titles_title($html) { 
-    global $full_name;
-	//you can add here all your conditions as if is_page(), is_category() etc.. 
-	$html = $full_name . ' | ' . get_bloginfo( "name" );
-	return $html;
+// Override theme's method of defining the page title
+function uamswp_fad_title($html) { 
+    global $full_name_attr;
+    global $phys_title_name_attr;
+    global $primary_appointment_city_attr;
+    //you can add here all your conditions as if is_page(), is_category() etc.. 
+    $meta_title_chars_max = 60;
+    $meta_title_base = $full_name_attr . ' | ' . get_bloginfo( "name" );
+    $meta_title_base_chars = strlen( $meta_title_base );
+    $meta_title_enhanced_addition = ' | ' . $phys_title_name_attr;
+    $meta_title_enhanced = $full_name_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
+    $meta_title_enhanced_chars = strlen( $meta_title_enhanced );
+    $meta_title_enhanced_x2_addition = $meta_title_enhanced_addition . ' | ' . $primary_appointment_city_attr;
+    $meta_title_enhanced_x2 = $full_name_attr . $meta_title_enhanced_x2_addition . ' | ' . get_bloginfo( "name" );
+    $meta_title_enhanced_x2_chars = strlen( $meta_title_enhanced_x2 );
+    if ( $primary_appointment_city_attr && ( $meta_title_enhanced_x2_chars <= $meta_title_chars_max ) ) {
+        $html = $meta_title_enhanced_x2;
+    } elseif ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
+        $html = $meta_title_enhanced;
+    } else {
+        $html = $meta_title_base;
+    }
+    return $html;
 }
-add_filter('seopress_titles_title', 'sp_titles_title', 20, 2);
+// add_filter('seopress_titles_title', 'uamswp_fad_title', 20, 2);
+add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 function be_remove_title_from_single_crumb( $crumb, $args ) { // Because BE is the man
     global $full_name;
