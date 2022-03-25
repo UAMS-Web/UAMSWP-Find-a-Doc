@@ -35,12 +35,23 @@ if ($parent_expertise) {
 
 // Override theme's method of defining the page title
 function uamswp_fad_title($html) { 
-    global $page_title;
-	//you can add here all your conditions as if is_page(), is_category() etc.. 
-	$html = $page_title . ' | ' . get_bloginfo( "name" );
-	return $html;
+    global $page_title_attr;
+    //you can add here all your conditions as if is_page(), is_category() etc.. 
+    $meta_title_chars_max = 60;
+    $meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
+    $meta_title_base_chars = strlen( $meta_title_base );
+    $meta_title_enhanced_addition_name = 'Area of Expertise';
+    $meta_title_enhanced_addition = ' | ' . $meta_title_enhanced_addition_name;
+    $meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
+    $meta_title_enhanced_chars = strlen( $meta_title_enhanced );
+    if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
+        $html = $meta_title_enhanced;
+    } else {
+        $html = $meta_title_base;
+    }
+    return $html;
 }
-// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
