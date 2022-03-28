@@ -186,24 +186,24 @@ function uamswp_fad_title($html) {
     global $primary_appointment_city_attr;
     global $expertise_primary_name;
 
-    //you can add here all your conditions as if is_page(), is_category() etc.. 
-    $meta_title_chars_max = 60;
-    $meta_title_separator = ' | ';
+    $meta_title_chars_max = 60; // The recommended length for meta titles is 50-60 characters. Sets the max to 60.
+    $meta_title_separator = ' | '; // Characters separating components of the meta title
 
-    $meta_title_base = $full_name_attr . $meta_title_separator . get_bloginfo( "name" );
-    $meta_title_base_chars = strlen( $meta_title_base );
+    // Base meta title ("{Full display name} | UAMS Health")
+    $meta_title_base = $full_name_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
+    $meta_title_base_chars = strlen( $meta_title_base ); // Count the characters in the meta title
 
-    $meta_title_enhanced_addition = $meta_title_separator . $phys_title_name_attr;
-    $meta_title_enhanced = $full_name_attr . $meta_title_enhanced_addition . $meta_title_separator . get_bloginfo( "name" );
-    $meta_title_enhanced_chars = strlen( $meta_title_enhanced );
+    // Base meta title ("{Full display name} | {Clinical title} | UAMS Health")
+    $meta_title_enhanced = $full_name_attr . $meta_title_separator . $phys_title_name_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
+    $meta_title_enhanced_chars = strlen( $meta_title_enhanced ); // Count the characters in the meta title
 
-    $meta_title_enhanced_x2_addition = $meta_title_separator . $phys_title_name_attr . $meta_title_separator . $primary_appointment_city_attr;
-    $meta_title_enhanced_x2 = $full_name_attr . $meta_title_enhanced_x2_addition . $meta_title_separator . get_bloginfo( "name" );
-    $meta_title_enhanced_x2_chars = strlen( $meta_title_enhanced_x2 );
+    // Enhanced meta title level 1 ("{Full display name} | {Clinical title} | {City of primary location} | UAMS Health")
+    $meta_title_enhanced_x2 = $full_name_attr . $meta_title_separator . $phys_title_name_attr . $meta_title_separator . $primary_appointment_city_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
+    $meta_title_enhanced_x2_chars = strlen( $meta_title_enhanced_x2 ); // Count the characters in the meta title
 
-    $meta_title_enhanced_x3_addition = $meta_title_separator . $phys_title_name_attr . $meta_title_separator . $expertise_primary_name . $meta_title_separator . $primary_appointment_city_attr;
-    $meta_title_enhanced_x3 = $full_name_attr . $meta_title_enhanced_x3_addition . $meta_title_separator . get_bloginfo( "name" );
-    $meta_title_enhanced_x3_chars = strlen( $meta_title_enhanced_x3 );
+    // Enhanced meta title level 2 ("{Full display name} | {Clinical title} | {Primary area of expertise} | {City of primary location} | UAMS Health")
+    $meta_title_enhanced_x3 = $full_name_attr . $meta_title_separator . $phys_title_name_attr . $meta_title_separator . $expertise_primary_name . $meta_title_separator . $primary_appointment_city_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
+    $meta_title_enhanced_x3_chars = strlen( $meta_title_enhanced_x3 ); // Count the characters in the meta title
 
     if ( $expertise_primary_name && ( $meta_title_enhanced_x3_chars <= $meta_title_chars_max ) ) {
         $html = $meta_title_enhanced_x3;
