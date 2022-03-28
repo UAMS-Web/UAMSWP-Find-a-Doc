@@ -6,24 +6,43 @@
      *  Must be used inside a loop
      *  Required var:
      *      $conditions
-     *      $condition_heading_related_resource
-     *      $condition_heading_related_treatment
-     *      $condition_heading_treated
-     *      $condition_disclaimer
+     *      $conditions_cpt_query
+     *      $condition_context = 'single-provider', 'single-location', 'single-condition', 'single-treatment', 'single-expertise', 'single-resource'
+     *      $condition_heading_related_name
+     *      $condition_disclaimer = 'true', 'false'
      */
 
     $condition_heading = 'Conditions';
+    $condition_disclaimer = false;
+    $condition_disclaimer_text = 'UAMS Health providers care for a broad range of conditions, some of which may not be listed below.';
 
-    if ( $condition_heading_related_resource ) {
+    if ( $condition_context == 'single-provider' ) {
+
+        $condition_heading = $condition_heading . ' Diagnosed or Treated by ' . $condition_heading_related_name;
+        $condition_disclaimer = true;
+
+    } elseif ( $condition_context == 'single-location' ) {
+
+        $condition_heading = $condition_heading . ' Diagnosed or Treated at ' . $condition_heading_related_name;
+        $condition_disclaimer = true;
+
+    } elseif ( $condition_context == 'single-condition' ) {
+
+        $condition_heading = $condition_heading . ' Related to ' . $condition_heading_related_name;
+
+    } elseif ( $condition_context == 'single-treatment' ) {
+
         $condition_heading = 'Related ' . $condition_heading;
-    }
 
-    if ( $condition_heading_related_treatment ) {
-        $condition_heading = $condition_heading . ' Related to ' . get_the_title();
-    }
+    } elseif ( $condition_context == 'single-expertise' ) {
 
-    if ( $condition_heading_treated ) {
-        $condition_heading = $condition_heading . ' Treated';
+        $condition_heading = 'Related ' . $condition_heading;
+        $condition_disclaimer = true;
+
+    } elseif ( $condition_context == 'single-resource' ) {
+
+        $condition_heading = 'Related ' . $condition_heading;
+
     }
 ?>
 <section class="uams-module conditions-treatments bg-auto" id="conditions">
@@ -32,7 +51,7 @@
             <div class="col-xs-12">
                 <h2 class="module-title"><span class="title"><?php echo $condition_heading; ?></span></h2>
                 <?php if ( $condition_disclaimer ) { ?>
-                    <p class="note">UAMS providers care for a broad range of conditions, some of which may not be listed below.</p>
+                    <p class="note"><?php echo $condition_disclaimer_text; ?></p>
                 <?php } ?>
                 <div class="list-container list-container-rows">
                     <ul class="list">
