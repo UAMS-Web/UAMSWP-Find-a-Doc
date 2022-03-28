@@ -1204,7 +1204,7 @@ while ( have_posts() ) : the_post();
                                 <div class="card-list card-list-expertise">
                                     <?php foreach( $expertises as $expertise ) {
                                         $id = $expertise;
-                                        if ( get_post_status ( $expertise ) == 'publish' ) {
+                                        if ( get_post_status ( $expertise ) == 'publish' && $expertise !== 0 ) {
                                             include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
                                         }
                                     } ?>
