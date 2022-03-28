@@ -128,7 +128,16 @@ if( $locations && $location_valid ) {
         }
     } // endforeach
 }
+// Set Areas of Expertise Variables
 $expertises =  get_field('physician_expertise',$post->ID);
+if ( $expertises ) {
+    foreach ( $expertises as $expertise ) {
+        if ( get_post_status ( $expertise ) == 'publish' ) {
+            $expertise_primary_name = get_the_title($expertise);
+            break;
+        }
+    }
+}
 
 // Hide Sections
 $hide_medical_ontology = false;
@@ -175,17 +184,30 @@ function uamswp_fad_title($html) {
     global $full_name_attr;
     global $phys_title_name_attr;
     global $primary_appointment_city_attr;
+    global $expertise_primary_name;
+
     //you can add here all your conditions as if is_page(), is_category() etc.. 
     $meta_title_chars_max = 60;
-    $meta_title_base = $full_name_attr . ' | ' . get_bloginfo( "name" );
+    $meta_title_separator = ' | ';
+
+    $meta_title_base = $full_name_attr . $meta_title_separator . get_bloginfo( "name" );
     $meta_title_base_chars = strlen( $meta_title_base );
-    $meta_title_enhanced_addition = ' | ' . $phys_title_name_attr;
-    $meta_title_enhanced = $full_name_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
+
+    $meta_title_enhanced_addition = $meta_title_separator . $phys_title_name_attr;
+    $meta_title_enhanced = $full_name_attr . $meta_title_enhanced_addition . $meta_title_separator . get_bloginfo( "name" );
     $meta_title_enhanced_chars = strlen( $meta_title_enhanced );
-    $meta_title_enhanced_x2_addition = $meta_title_enhanced_addition . ' | ' . $primary_appointment_city_attr;
-    $meta_title_enhanced_x2 = $full_name_attr . $meta_title_enhanced_x2_addition . ' | ' . get_bloginfo( "name" );
+
+    $meta_title_enhanced_x2_addition = $meta_title_separator . $phys_title_name_attr . $meta_title_separator . $primary_appointment_city_attr;
+    $meta_title_enhanced_x2 = $full_name_attr . $meta_title_enhanced_x2_addition . $meta_title_separator . get_bloginfo( "name" );
     $meta_title_enhanced_x2_chars = strlen( $meta_title_enhanced_x2 );
-    if ( $primary_appointment_city_attr && ( $meta_title_enhanced_x2_chars <= $meta_title_chars_max ) ) {
+
+    $meta_title_enhanced_x3_addition = $meta_title_separator . $phys_title_name_attr . $meta_title_separator . $expertise_primary_name . $meta_title_separator . $primary_appointment_city_attr;
+    $meta_title_enhanced_x3 = $full_name_attr . $meta_title_enhanced_x3_addition . $meta_title_separator . get_bloginfo( "name" );
+    $meta_title_enhanced_x3_chars = strlen( $meta_title_enhanced_x3 );
+
+    if ( $expertise_primary_name && ( $meta_title_enhanced_x3_chars <= $meta_title_chars_max ) ) {
+        $html = $meta_title_enhanced_x3;
+    } elseif ( $primary_appointment_city_attr && ( $meta_title_enhanced_x2_chars <= $meta_title_chars_max ) ) {
         $html = $meta_title_enhanced_x2;
     } elseif ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
         $html = $meta_title_enhanced;
