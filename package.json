@@ -4,8 +4,8 @@
   "description": "Find-a-doc plugin for uamshealth.com",
   "main": "gulpfile.js",
   "dependencies": {
-    "autoprefixer": "^10.4.2",
-    "cssnano": "^5.0.16",
+    "autoprefixer": "^10.4.4",
+    "cssnano": "^5.1.7",
     "gulp": "^4.0.2",
     "gulp-changed": "^4.0.3",
     "gulp-concat": "^2.6.1",
@@ -13,10 +13,10 @@
     "gulp-notify": "^4.0.0",
     "gulp-postcss": "^9.0.1",
     "gulp-rename": "^2.0.0",
-    "gulp-sass": "^4.1.1",
-    "postcss": "^8.4.5",
-    "postcss-discard-comments": "^5.0.2",
-    "sass": "^1.49.0"
+    "gulp-sass": "^5.1.0",
+    "postcss": "^8.4.12",
+    "postcss-discard-comments": "^5.1.1",
+    "sass": "^1.49.11"
   },
   "devDependencies": {},
   "scripts": {

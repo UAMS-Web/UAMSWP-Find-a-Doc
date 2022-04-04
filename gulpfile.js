@@ -1,14 +1,14 @@
-var gulp = require('gulp');
-    sass = require('gulp-sass')(require('sass'));
-    postcss = require('gulp-postcss');
-    autoprefixer = require('autoprefixer'),
-    rename = require('gulp-rename'),
-    concat = require('gulp-concat'),
-    notify = require('gulp-notify'),
-    cssnano = require('cssnano'),
-    changed = require('gulp-changed'),
-    comments = require('postcss-discard-comments'),
-    groupmq = require('gulp-group-css-media-queries');
+const gulp = require('gulp');
+const sass = require('gulp-sass')(require('sass'));
+const postcss = require('gulp-postcss');
+const autoprefixer = require('autoprefixer');
+const rename = require('gulp-rename');
+const concat = require('gulp-concat');
+const notify = require('gulp-notify');
+const cssnano = require('cssnano');
+const changed = require('gulp-changed');
+const comments = require('postcss-discard-comments');
+const groupmq = require('gulp-group-css-media-queries');
 
 var plugins = [
     autoprefixer,
