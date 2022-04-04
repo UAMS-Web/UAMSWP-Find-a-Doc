@@ -934,13 +934,14 @@ while ( have_posts() ) : the_post(); ?>
 								} // endif ( if $hoursvary )
 
 								// After Hours Information
-								if ($location_hours_group['location_after_hours'] && !$location_hours_group['location_24_7']) { ?>
-									<h3>After Hours</h3>
-									<?php echo $location_hours_group['location_after_hours']; ?>
-								<?php } elseif (!$location_hours_group['location_24_7']) { ?>
-									<h3>After Hours</h3>
-									<?php echo $afterhours_system; ?>
-								<?php } // endif (after hours) ?>
+								if ( !$location_hours_group['location_24_7'] ) { // If the location is not open 24/7 ?>
+									<h3 class="h5">After Hours</h3>
+									<?php if ( $location_hours_group['location_after_hours'] ) { // If after hours information is set at the location-level ?>
+										<?php echo $location_hours_group['location_after_hours']; // Use the location-level after hours information ?>
+									<?php } else { ?>
+										<?php echo $afterhours_system; // Use the system-level after hours information ?>
+									<?php }
+								} // endif ?>
 							</div>
 							<div class="col-lg">
 								

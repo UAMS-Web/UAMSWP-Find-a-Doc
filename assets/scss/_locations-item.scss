@@ -41,6 +41,12 @@
                 padding: map-get($spacers, 0) map-get($spacers, 8) !important; // equivalent of @extend .px-md-8 and @extend .py-md-0;
             }
             order: 2;
+
+            p, ul, ol, li, dl, dd, dt {
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
     
             .content-width {
                 @include media-breakpoint-up(md) {
@@ -55,6 +61,15 @@
                     @include media-breakpoint-up(md) {
                         margin-left: auto;
                     }
+                }
+            }
+
+            .text-subsection {
+                margin-top: $uams-module-padding-mobile;
+
+                + .text-subsection {
+                    border-top: $hr-border-width solid $hr-border-color;
+                    padding-top: $uams-module-padding-mobile;
                 }
             }
         }
