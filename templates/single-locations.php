@@ -624,43 +624,45 @@ while ( have_posts() ) : the_post(); ?>
 							<?php } ?>
 						</div>
 					<?php } // endif ?>
-					<div class="row">
-						<div class="col-lg">
-							<h2 class="h5">Address</h2>
-							<p><?php echo $location_address_1; ?><br/>
-							<?php echo ( $location_address_2 ? $location_address_2 . '<br/>' : ( $location_address_2_deprecated ? $location_address_2_deprecated . '<br/>' : '')); ?>
-							<?php echo $location_city; ?>, <?php echo $location_state; ?> <?php echo $location_zip; ?></p>
-							<?php
-								// Schema data
-								$location_schema = '"address": {
-								"@type": "PostalAddress",
-								"streetAddress": "'. $location_address_1 . ' '. $location_address_2_schema .'",
-								"addressLocality": "'. $location_city .'",
-								"addressRegion": "'. $location_state .'",
-								"postalCode": "'. $location_zip .'"
-								},
-								';
-								$phone_schema = '';
-							?>
-							<ul class="location-address-links">
-								<li><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title; ?>" data-typetitle="Get directions to the clinic"><span class="link-text">Get Directions</span><span class="fas fa-map link-icon"></span></span></a></li>
-								<?php if ($show_parking_section) { ?>
-									<li><a href="#parking-info" aria-label="Parking instructions for <?php echo $page_title; ?>" data-typetitle="Parking instructions for the clinic"><span class="link-text">Parking Instructions</span><span class="fas fa-car link-icon"></span></span></a></li>
-								<?php } // endif $show_parking_section ?>
-								<?php if( $location_web_name && $location_url ){ ?>
-									<li><a href="<?php echo $location_url['url']; ?>" target="_blank" data-categorytitle="External Link"><span class="link-text"><?php echo $location_web_name; ?></span><span class="far fa-external-link-alt link-icon"></span></span></a></li>
-								<?php } // endif ( $location_web_name && $location_url ) ?>
-								</ul>
+					<div>
+						<div class="row">
+							<div class="col-lg">
+								<h2 class="h5">Address</h2>
+								<p><?php echo $location_address_1; ?><br/>
+								<?php echo ( $location_address_2 ? $location_address_2 . '<br/>' : ( $location_address_2_deprecated ? $location_address_2_deprecated . '<br/>' : '')); ?>
+								<?php echo $location_city; ?>, <?php echo $location_state; ?> <?php echo $location_zip; ?></p>
+								<?php
+									// Schema data
+									$location_schema = '"address": {
+									"@type": "PostalAddress",
+									"streetAddress": "'. $location_address_1 . ' '. $location_address_2_schema .'",
+									"addressLocality": "'. $location_city .'",
+									"addressRegion": "'. $location_state .'",
+									"postalCode": "'. $location_zip .'"
+									},
+									';
+									$phone_schema = '';
+								?>
+								<ul class="location-address-links">
+									<li><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title; ?>" data-typetitle="Get directions to the clinic"><span class="link-text">Get Directions</span><span class="fas fa-map link-icon"></span></span></a></li>
+									<?php if ($show_parking_section) { ?>
+										<li><a href="#parking-info" aria-label="Parking instructions for <?php echo $page_title; ?>" data-typetitle="Parking instructions for the clinic"><span class="link-text">Parking Instructions</span><span class="fas fa-car link-icon"></span></span></a></li>
+									<?php } // endif $show_parking_section ?>
+									<?php if( $location_web_name && $location_url ){ ?>
+										<li><a href="<?php echo $location_url['url']; ?>" target="_blank" data-categorytitle="External Link"><span class="link-text"><?php echo $location_web_name; ?></span><span class="far fa-external-link-alt link-icon"></span></span></a></li>
+									<?php } // endif ( $location_web_name && $location_url ) ?>
+									</ul>
 
-						</div>
-						<div class="col-lg">
-							<h2 class="h5">Contact Information</h2>
-							<?php
-								// Phone values
-								$phone_output_id = $id;
-								$phone_output = 'location_profile';
-								include( UAMS_FAD_PATH . '/templates/blocks/locations-phone.php' );
-							?>
+							</div>
+							<div class="col-lg">
+								<h2 class="h5">Contact Information</h2>
+								<?php
+									// Phone values
+									$phone_output_id = $id;
+									$phone_output = 'location_profile';
+									include( UAMS_FAD_PATH . '/templates/blocks/locations-phone.php' );
+								?>
+							</div>
 						</div>
 					</div>
 					<?php 
