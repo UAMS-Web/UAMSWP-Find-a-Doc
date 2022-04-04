@@ -3581,6 +3581,25 @@
                 }
             ]
         },
+        "field_location_appt_request_query": {
+            "key": "field_location_appt_request_query",
+            "name": "location_appt_request_query",
+            "type": "true_false",
+            "label": "Enable Specialty Care Appointment Request?",
+            "instructions": "Displays a link to an online appointment request form.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
         "field_location_medical_tab": {
             "key": "field_location_medical_tab",
             "name": "",
