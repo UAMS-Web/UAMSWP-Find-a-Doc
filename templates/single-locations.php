@@ -687,7 +687,7 @@ while ( have_posts() ) : the_post(); ?>
 								$active_end = '';
 
 								if ( $hoursvary ) {
-									echo '<h2>Hours Vary</h2>';
+									echo '<h2 class="h4">Hours Vary</h2>';
 									echo $hoursvary_info;
 								} else {
 									if ($modified) : 
@@ -713,7 +713,7 @@ while ( have_posts() ) : the_post(); ?>
 												foreach ($modified_hours as $modified_hour) {
 						
 													$modified_title = $modified_hour['location_modified_hours_title'];
-													$modified_text .= $modified_title ? '<h3 class="h4">'.$modified_title.'</h3>' : '';
+													$modified_text .= $modified_title ? '<h3 class="h5">'.$modified_title.'</h3>' : '';
 													$modified_info = $modified_hour['location_modified_hours_information'];
 													$modified_text .= $modified_info ? $modified_info : '';
 													$modified_times = $modified_hour['location_modified_hours_times'];
@@ -809,7 +809,7 @@ while ( have_posts() ) : the_post(); ?>
 											}
 										}
 									
-										echo $modified_text ? '<h2>Modified Hours</h2>' . $modified_text: '';
+										echo $modified_text ? '<h2 class="h4">Modified Hours</h2>' . $modified_text: '';
 										
 									endif; // End Modified Hours
 									if ('' != $modified_hours_schema) {
@@ -825,7 +825,7 @@ while ( have_posts() ) : the_post(); ?>
 										$hours = $location_hours_group['location_hours'];
 										$hours_schema = '';
 										if ( $hours247 || $hours[0]['day'] ) : ?>
-										<h2><?php echo $modified_text ? 'Typical ' : ''; ?>Hours</h2>
+										<h2 class="h4"><?php echo $modified_text ? 'Typical ' : ''; ?>Hours</h2>
 										<?php
 											if ($hours247):
 												echo '<strong>Open 24/7</strong>';
