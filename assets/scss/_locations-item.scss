@@ -190,6 +190,22 @@
             font-size: $single-profile-subtitle-small;
         }
     }
+    .location-address-links {
+        @include list-unstyled;
+
+        li {
+            a {
+                .link-icon {
+                    &:first-child {
+                        margin-right: 0.375em;
+                    }
+                    &:last-child {
+                        margin-left: 0.375em;
+                    }
+                }
+            }
+        }
+    }
     dl.hours {
         @include media-breakpoint-up(xs) {
             overflow: hidden;

@@ -642,18 +642,16 @@ while ( have_posts() ) : the_post(); ?>
 								';
 								$phone_schema = '';
 							?>
-								<div class="btn-container">
-									<div class="inner-container">
-										<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>
-										<?php if ($show_parking_section) { ?>
-											<a class="btn btn-outline-primary" href="#parking-info" aria-label="Parking instructions for <?php echo $page_title; ?>" data-typetitle="Parking instructions for the clinic">Parking Instructions</a>
-										<?php } // endif $show_parking_section ?>
-										
-									</div>
-								</div>
+							<ul class="location-address-links">
+								<li><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title; ?>" data-typetitle="Get directions to the clinic"><span class="link-text">Get Directions</span><span class="fas fa-map link-icon"></span></span></a></li>
+								<?php if ($show_parking_section) { ?>
+									<li><a href="#parking-info" aria-label="Parking instructions for <?php echo $page_title; ?>" data-typetitle="Parking instructions for the clinic"><span class="link-text">Parking Instructions</span><span class="fas fa-car link-icon"></span></span></a></li>
+								<?php } // endif $show_parking_section ?>
 								<?php if( $location_web_name && $location_url ){ ?>
-									<p><a class="btn btn-secondary" href="<?php echo $location_url['url']; ?>" target="_blank" data-categorytitle="External Link"><?php echo $location_web_name; ?> <span class="far fa-external-link-alt"></span></span></a></p>
-							<?php } ?>
+									<li><a href="<?php echo $location_url['url']; ?>" target="_blank" data-categorytitle="External Link"><span class="link-text"><?php echo $location_web_name; ?></span><span class="far fa-external-link-alt link-icon"></span></span></a></li>
+								<?php } // endif ( $location_web_name && $location_url ) ?>
+								</ul>
+
 						</div>
 						<div class="col-lg">
 							<h2 class="h5">Contact Information</h2>
