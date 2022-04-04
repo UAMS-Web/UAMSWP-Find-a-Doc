@@ -624,7 +624,7 @@ while ( have_posts() ) : the_post(); ?>
 							<?php } ?>
 						</div>
 					<?php } // endif ?>
-					<?php // Begin Address and Contact Information ?>
+					<?php // Begin Row for Address and Contact Information ?>
 					<div class="text-subsection">
 						<div class="row">
 							<div class="col-lg">
@@ -666,10 +666,11 @@ while ( have_posts() ) : the_post(); ?>
 							</div>
 						</div>
 					</div>
-					<?php // End Address and Contact Information ?>
-					<?php // Begin Hours and Appointment Information ?>
+					<?php // End Row for Address and Contact Information ?>
+					<?php // Begin Row for Hours and Appointment Information ?>
 					<div class="text-subsection">
 						<div class="row">
+							<?php // Begin Hours Information ?>
 							<div class="col-lg">
 								<?php // Hours values
 								$hoursvary = $location_hours_group['location_hours_variable'];
@@ -943,6 +944,8 @@ while ( have_posts() ) : the_post(); ?>
 									<?php }
 								} // endif ?>
 							</div>
+							<?php // End Hours Information ?>
+							<?php // Begin Appointment Information ?>
 							<div class="col-lg">
 								<h2 class="h4">Appointments</h2>
 								<p>Find a provider at this location to book an appointment online.</p>
@@ -967,7 +970,7 @@ while ( have_posts() ) : the_post(); ?>
 							</div>
 						</div>
 					</div>
-					<?php // End Hours and Appointment Information ?>
+					<?php // End Row for Hours and Appointment Information ?>
 				</div>
 			</div>
 			<?php if ( $location_images_count ) { ?>
