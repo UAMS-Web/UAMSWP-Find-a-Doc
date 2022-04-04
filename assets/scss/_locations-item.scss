@@ -42,6 +42,11 @@
 }
 
 .location-info {
+    padding: 0;
+
+    @include media-breakpoint-up(md) {
+        padding: map-get($spacers, 10);;
+    }
 
     > .row {
         justify-content: center;

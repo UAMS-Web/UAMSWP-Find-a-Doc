@@ -585,7 +585,7 @@ while ( have_posts() ) : the_post(); ?>
 ?>
 <div class="content-sidebar-wrap">
 <main class="location-item" id="genesis-content">
-	<section class="container-fluid p-0 p-md-10 location-info bg-white">
+	<section class="container-fluid location-info bg-white">
 		<div class="row mx-0 mx-md-n8">
 			<div class="col-12 col-md text">
 				<div class="content-width">
