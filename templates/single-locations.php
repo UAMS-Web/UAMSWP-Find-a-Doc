@@ -625,7 +625,7 @@ while ( have_posts() ) : the_post(); ?>
 						</div>
 					<?php } // endif ?>
 					<?php // Begin Address and Contact Information ?>
-					<div>
+					<div class="text-subsection">
 						<div class="row">
 							<div class="col-lg">
 								<h2 class="h5">Address</h2>
@@ -668,7 +668,7 @@ while ( have_posts() ) : the_post(); ?>
 					</div>
 					<?php // End Address and Contact Information ?>
 					<?php // Begin Hours and Appointment Information ?>
-					<div>
+					<div class="text-subsection">
 						<div class="row">
 							<div class="col-lg">
 								<?php // Hours values
