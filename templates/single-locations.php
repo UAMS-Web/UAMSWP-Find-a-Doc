@@ -656,7 +656,7 @@ while ( have_posts() ) : the_post(); ?>
 
 							</div>
 							<div class="col-lg">
-								<h2 class="h5">Contact Information</h2>
+								<h2 class="h5">Phone Numbers</h2>
 								<?php
 									// Phone values
 									$phone_output_id = $id;
