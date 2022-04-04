@@ -470,6 +470,7 @@ add_action( 'init', 'create_residency_years_taxonomy', 0 );
 add_action( 'init', 'create_region_taxonomy', 0 );
 add_action( 'init', 'create_location_type_taxonomy', 0 );
 add_action( 'init', 'create_building_taxonomy', 0 );
+add_action( 'init', 'create_appointment_request_taxonomy', 0 );
 add_action( 'init', 'create_gmb_cat_location_taxonomy', 0 );
 
 /* Taxonomy Functions */
@@ -2034,6 +2035,57 @@ function create_building_taxonomy() {
 		'show_in_quick_edit'         => false,
 	);
 	register_taxonomy( 'building', array( 'location' ), $args );
+
+}
+
+function create_appointment_request_taxonomy() {
+
+	$labels = array(
+		'name'                       => 'Appointment Request Forms',
+		'singular_name'              => 'Appointment Request Form',
+		'menu_name'                  => 'Appointment Request Forms',
+		'all_items'                  => 'All Appointment Request Forms',
+		'parent_item'                => 'Parent Appointment Request Form',
+		'parent_item_colon'          => 'Parent Appointment Request Form:',
+		'new_item_name'              => 'New Appointment Request Form',
+		'add_new_item'               => 'Add New Appointment Request Form',
+		'edit_item'                  => 'Edit Appointment Request Form',
+		'update_item'                => 'Update Appointment Request Form',
+		'view_item'                  => 'View Appointment Request Form',
+		'separate_items_with_commas' => 'Separate Appointment Request Forms with commas',
+		'add_or_remove_items'        => 'Add or remove Appointment Request Forms',
+		'choose_from_most_used'      => 'Choose from the most used',
+		'popular_items'              => 'Popular Appointment Request Forms',
+		'search_items'               => 'Search Appointment Request Forms',
+		'not_found'                  => 'Not Found',
+		'no_terms'                   => 'No Appointment Request Forms',
+		'items_list'                 => 'Appointment Request Forms list',
+		'items_list_navigation'      => 'Appointment Request Forms list navigation',
+	);
+	$rewrite = array(
+		'slug'                       => 'appointment_request',
+		'with_front'                 => false,
+		'hierarchical'               => false,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => false,
+		'public'                     => false,
+		'show_ui'                    => true,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
+	);
+	register_taxonomy( 'appointment_request', array( 'location' ), $args );
 
 }
 

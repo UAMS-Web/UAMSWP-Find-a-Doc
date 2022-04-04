@@ -1,0 +1,49 @@
+{
+    "key": "group_uamswp_appointment_request",
+    "title": "Additional Information",
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "appointment_request"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "description"
+    ],
+    "active": 1,
+    "description": "",
+    "acfe_display_title": "",
+    "acfe_autosync": "",
+    "acfe_permissions": "",
+    "acfe_note": "",
+    "acfe_meta": "",
+    "fields": {
+        "field_specialty_url": {
+            "key": "field_appointment_request_url",
+            "name": "appointment_request_url",
+            "type": "url",
+            "label": "URL for Appointment Request Form",
+            "instructions": "Full URL, including https:\/\/",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "return_format": "array",
+            "acfe_validate": "",
+            "acfe_update": ""
+        }
+    },
+    "modified": false
+}
