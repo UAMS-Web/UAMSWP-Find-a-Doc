@@ -12,9 +12,9 @@
 }
 
 #openSchedulingFrame {
-	width: 700px; /* = native width of Open Scheduling widget in desktop mode */
-	height: 500px;
-	border: 1px solid #ccc;
+	width: $mychart-widget-width;
+	height: $mychart-widget-height;
+	border: $mychart-widget-border-width $mychart-widget-border-style $mychart-widget-border-color;
 }
 /*Fullscreen for signup steps */
 html.viewportmax *:not(.keepshown) {

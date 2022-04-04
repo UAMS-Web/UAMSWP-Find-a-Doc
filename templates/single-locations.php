@@ -419,10 +419,20 @@ while ( have_posts() ) : the_post(); ?>
 		$mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
 		$mychart_scheduling_linksource = ( isset($mychart_scheduling_linksource) && !empty($mychart_scheduling_linksource) ) ? $mychart_scheduling_linksource : 'uamshealth.com';
 
-		if ( $mychart_scheduling_query_system && $location_scheduling_query ) {
+		if ( $mychart_scheduling_query_system && $location_scheduling_query && have_rows('location_scheduling_options') ) {
             $show_mychart_scheduling_section = true;
         } else {
             $show_mychart_scheduling_section = false;
+        }
+
+		// Check if specialty care appointment request link should be displayed
+		$location_appt_request_query = get_field('location_appt_request_query');
+
+		// Check if online appointment scheduling/request section should be displayed in the top section
+		if ( $show_mychart_scheduling_section || $location_appt_request_query ) {
+            $show_online_scheduling_section = true;
+        } else {
+            $show_online_scheduling_section = false;
         }
 
         // Check if Telemedicine Information section should be displayed
@@ -671,7 +681,7 @@ while ( have_posts() ) : the_post(); ?>
 					<div class="text-subsection">
 						<div class="row">
 							<?php // Begin Hours Information ?>
-							<div class="col-lg">
+							<div class="<?php echo $show_online_scheduling_section ? 'col-lg' : 'col'; ?>">
 								<?php // Hours values
 								$hoursvary = $location_hours_group['location_hours_variable'];
 								$hoursvary_info = $location_hours_group['location_hours_variable_info'];
@@ -945,29 +955,61 @@ while ( have_posts() ) : the_post(); ?>
 								} // endif ?>
 							</div>
 							<?php // End Hours Information ?>
-							<?php // Begin Appointment Information ?>
+							<?php // Begin Appointment Information
+							if ( $show_online_scheduling_section ) {
+								$appointments_heading = 'Appointments';
+							?>
 							<div class="col-lg">
-								<h2 class="h4">Appointments</h2>
-								<p>Find a provider at this location to book an appointment online.</p>
-								<div class="btn-container">
-									<div class="inner-container">
-										<div class="dropdown">
-											<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">Book an Appointment</button>
-											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-												<a class="dropdown-item" href="#">In-Person Visit</a>
-												<a class="dropdown-item" href="#">Online Video Visit</a>
+								<?php // Begin MyChart Scheduling Links Section
+								// Check rows exists.
+								if ( $show_mychart_scheduling_section ) { ?>
+									<h2 class="h4"><?php echo $appointments_heading; ?></h2>
+									<p>Find a provider at this location to book an appointment online.</p>
+									<div class="btn-container">
+										<div class="inner-container">
+											<div class="dropdown">
+												<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">Book an Appointment</button>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+													<?php // Loop through rows.
+													while( have_rows('location_scheduling_options') ) : the_row();
+
+														$i = 0;
+														// Load sub field value.
+														$location_scheduling_item_title_nested = get_sub_field('location_scheduling_item_title_nested');
+
+														// Do something... ?>
+														<a class="dropdown-item" href="#" data-toggle="modal" data-target="#mychart-scheduling_<?php echo $i; ?>"><?php echo $location_scheduling_item_title_nested; ?></a>
+														<?php
+														$i++;
+													endwhile; // End loop (have_rows) ?>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-								<h3 class="h5">Specialized Care</h3>
-								<p>Some appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.</p>
-								<div class="btn-container">
-									<div class="inner-container">
-										<a class="btn btn-outline-primary" href="#">Request an Appointment</a>
+								<?php } // endif have_rows
+								// End MyChart Scheduling Links Section
+								// Begin link to specialized care appointment request
+								if ( $location_appt_request_query ) {
+									$location_appt_request_heading = 'Specialized Care';
+									$location_appt_request_heading_standalone = $appointments_heading;
+									$location_appt_request_intro = 'Some appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.';
+									$location_appt_request_intro_standalone = 'Appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.';
+									if ( $show_mychart_scheduling_section ) {
+										echo '<h3 class="h5">' . $location_appt_request_heading . '</h3>';
+										echo '<p>' . $location_appt_request_intro . '</p>';
+									} else {
+										echo '<h2 class="h4">' . $location_appt_request_heading_standalone . '</h2>';
+										echo '<p>' . $location_appt_request_intro_standalone . '</p>';
+									} ?>
+									<div class="btn-container">
+										<div class="inner-container">
+											<a class="btn btn-outline-primary" href="#">Request an Appointment</a>
+										</div>
 									</div>
-								</div>
+								<?php } // endif $location_appt_request_query
+								// End link to specialized care appointment request ?>
 							</div>
+							<?php } ?>
 						</div>
 					</div>
 					<?php // End Row for Hours and Appointment Information ?>
@@ -1096,11 +1138,6 @@ while ( have_posts() ) : the_post(); ?>
 					<?php if ( $show_appointment_section ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#appointment-info" title="Jump to the section of this page about Appointment Information">Appointment Information</a>
-						</li>
-					<?php } ?>
-					<?php if ( $show_mychart_scheduling_section ) { ?>
-						<li class="nav-item">
-							<a class="nav-link" href="#scheduling" title="Jump to the section of this page about scheduling an appointment in MyChart"><?php echo $location_scheduling_title; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ( $show_telemed_section ) { ?>
@@ -1364,81 +1401,6 @@ while ( have_posts() ) : the_post(); ?>
 		</section>
 	<?php } // endif
 	// End Appointment Information Section
-
-	// Begin MyChart Scheduling Section
-	if ( $show_mychart_scheduling_section ) { ?>
-		<section class="uams-module mychart-scheduling-module bg-auto" id="scheduling">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-12">
-						<h2 class="module-title"><span class="title"><?php echo $location_scheduling_title; ?></span></h2>
-						<?php if ( $location_scheduling_intro && !empty($location_scheduling_intro) ) { ?>
-							<p class="note"><?php echo $location_scheduling_intro; ?></p>
-						<?php } ?>
-						<div class="module-body">
-							<?php if ($location_scheduling_query && (count((array)$location_scheduling_options) > 1)) { ?>
-								<form action="" method="get" class="mychart-scheduling-select">
-									<div class="form-group">
-										<label for="schedule_options" class="lead">Available Services</label>
-										<select name="schedule_options" id="schedule_options" class="form-control">
-											<option value="">Select an option</option>
-											<?php foreach($location_scheduling_options as $key => $title) : 
-												$location_scheduling_item_title_nested = $title['location_scheduling_item_title_nested'];
-												$location_scheduling_item_title_nested = ( isset($location_scheduling_item_title_nested) && !empty($location_scheduling_item_title_nested) ) ? $location_scheduling_item_title_nested : 'Schedule an Appointment Online';
-												?>
-												<option value="<?= $key; ?>"<?php //echo ($key == $provider_title) ? ' selected' : ''; ?>><? echo $location_scheduling_item_title_nested; ?></option>
-											<?php endforeach; ?>
-										</select>
-										<input type="hidden" id="pid" name="pid" value="<?php echo get_the_id(); ?>">
-									</div>
-								</form>
-								<div class="mychart-scheduling"></div>
-								<?php //var_dump($location_scheduling_options); ?>
-							<?php } else {
-								$row = $location_scheduling_options[0];
-								$location_scheduling_ser = $row['location_scheduling_ser'];
-								$location_scheduling_dep = $row['location_scheduling_dep'];
-								$location_scheduling_vt = $row['location_scheduling_vt'];
-								$location_scheduling_fallback = $row['location_scheduling_fallback'];
-							?>
-								<div id="scheduleContainer">
-									<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
-								</div>
-
-								<!-- <link href="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
-
-								<script src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidgetController.js" type="text/javascript"></script>
-
-								<script type="text/javascript">
-								var EWC = new EmbeddedWidgetController({
-
-									// Replace with the hostname of your Open Scheduling site
-									'hostname':'https://<?php echo $mychart_scheduling_domain; ?>',
-
-									// Must equal media query in EpicWP.css + any left/right margin of the host page. Should also change in EmbeddedWidget.css
-									'matchMediaString':'(max-width: 991.98px)',
-
-									//Show a button on top of the widget that lets the user see the slots in fullscreen.
-									'showToggleBtn':true,
-								
-									//The toggle button’s help text for screen reader.
-									'toggleBtnExpandHelpText': 'Expand to see the slots in fullscreen',
-									'toggleBtnCollapseHelpText': 'Exit fullscreen',
-								});
-								</script>
-								<?php if ( $location_scheduling_fallback && !empty($location_scheduling_fallback) ) { ?>
-									<div class="more">
-										<?php echo $location_scheduling_fallback; ?>
-									</div>
-								<?php } ?>
-							<?php } ?>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php }
-	// End MyChart Scheduling Section
 
 	// Begin Telemedicine Information Section
 	if ( $show_telemed_section ) { ?>
@@ -1841,6 +1803,149 @@ while ( have_posts() ) : the_post(); ?>
 	// End News Section
 	?>
 </main>
+<?php
+// Create MyChart Open Scheduling Modals
+
+if( $show_mychart_scheduling_section ):
+
+    // Loop through rows.
+    while( have_rows('location_scheduling_options') ) : the_row();
+
+		$i = 0;
+        // Load sub field value.
+        $location_scheduling_title = get_sub_field('location_scheduling_title');
+        $location_scheduling_intro = get_sub_field('location_scheduling_intro');
+        $location_scheduling_item_title_nested = get_sub_field('location_scheduling_item_title_nested');
+        $location_scheduling_item_intro_nested = get_sub_field('location_scheduling_item_intro_nested');
+        $location_scheduling_vt = get_sub_field('location_scheduling_vt');
+        $location_scheduling_ser = get_sub_field('location_scheduling_ser');
+        $location_scheduling_dep = get_sub_field('location_scheduling_dep');
+        $location_scheduling_fallback = get_sub_field('location_scheduling_fallback');
+
+        // Do something... ?>
+		<div id="mychart-scheduling_<?php echo $i; ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mychart-scheduling_<?php echo $i; ?>_label" aria-modal="true">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-mychart-scheduling" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h2 class="modal-title" id="mychart-scheduling_<?php echo $i; ?>_label"><?php echo $location_scheduling_title; ?></h2>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<?php if ( $location_scheduling_intro && !empty($location_scheduling_intro)) {
+							echo '<p>' . $location_scheduling_intro . '</p>';
+						} ?>
+						<div id="scheduleContainer">
+							<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
+						</div>
+						<?php echo $location_scheduling_fallback; ?>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php
+		$i++;
+	endwhile; // End loop (have_rows) ?>
+<!-- <link href="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
+
+<script src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidgetController.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+var EWC = new EmbeddedWidgetController({
+
+	// Replace with the hostname of your Open Scheduling site
+	'hostname':'https://<?php echo $mychart_scheduling_domain; ?>',
+
+	// Must equal media query in EpicWP.css + any left/right margin of the host page. Should also change in EmbeddedWidget.css
+	'matchMediaString':'(max-width: 991.98px)',
+
+	//Show a button on top of the widget that lets the user see the slots in fullscreen.
+	'showToggleBtn':true,
+
+	//The toggle button’s help text for screen reader.
+	'toggleBtnExpandHelpText': 'Expand to see the slots in fullscreen',
+	'toggleBtnCollapseHelpText': 'Exit fullscreen',
+});
+</script>
+<?php endif; // have_rows ?>
+
+<?php if ( true == false ) { // Keep the code for reference, but disable it
+if ( $show_mychart_scheduling_section ) { ?>
+	<section class="uams-module mychart-scheduling-module bg-auto" id="scheduling">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12">
+					<h2 class="module-title"><span class="title"><?php echo $location_scheduling_title; ?></span></h2>
+					<?php if ( $location_scheduling_intro && !empty($location_scheduling_intro) ) { ?>
+						<p class="note"><?php echo $location_scheduling_intro; ?></p>
+					<?php } ?>
+					<div class="module-body">
+						<?php if ($location_scheduling_query && (count((array)$location_scheduling_options) > 1)) { ?>
+							<form action="" method="get" class="mychart-scheduling-select">
+								<div class="form-group">
+									<label for="schedule_options" class="lead">Available Services</label>
+									<select name="schedule_options" id="schedule_options" class="form-control">
+										<option value="">Select an option</option>
+										<?php foreach($location_scheduling_options as $key => $title) : 
+											$location_scheduling_item_title_nested = $title['location_scheduling_item_title_nested'];
+											$location_scheduling_item_title_nested = ( isset($location_scheduling_item_title_nested) && !empty($location_scheduling_item_title_nested) ) ? $location_scheduling_item_title_nested : 'Schedule an Appointment Online';
+											?>
+											<option value="<?= $key; ?>"<?php //echo ($key == $provider_title) ? ' selected' : ''; ?>><? echo $location_scheduling_item_title_nested; ?></option>
+										<?php endforeach; ?>
+									</select>
+									<input type="hidden" id="pid" name="pid" value="<?php echo get_the_id(); ?>">
+								</div>
+							</form>
+							<div class="mychart-scheduling"></div>
+							<?php //var_dump($location_scheduling_options); ?>
+						<?php } else {
+							$row = $location_scheduling_options[0];
+							$location_scheduling_ser = $row['location_scheduling_ser'];
+							$location_scheduling_dep = $row['location_scheduling_dep'];
+							$location_scheduling_vt = $row['location_scheduling_vt'];
+							$location_scheduling_fallback = $row['location_scheduling_fallback'];
+						?>
+							<div id="scheduleContainer">
+								<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
+							</div>
+
+							<!-- <link href="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
+
+							<script src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidgetController.js" type="text/javascript"></script>
+
+							<script type="text/javascript">
+							var EWC = new EmbeddedWidgetController({
+
+								// Replace with the hostname of your Open Scheduling site
+								'hostname':'https://<?php echo $mychart_scheduling_domain; ?>',
+
+								// Must equal media query in EpicWP.css + any left/right margin of the host page. Should also change in EmbeddedWidget.css
+								'matchMediaString':'(max-width: 991.98px)',
+
+								//Show a button on top of the widget that lets the user see the slots in fullscreen.
+								'showToggleBtn':true,
+							
+								//The toggle button’s help text for screen reader.
+								'toggleBtnExpandHelpText': 'Expand to see the slots in fullscreen',
+								'toggleBtnCollapseHelpText': 'Exit fullscreen',
+							});
+							</script>
+							<?php if ( $location_scheduling_fallback && !empty($location_scheduling_fallback) ) { ?>
+								<div class="more">
+									<?php echo $location_scheduling_fallback; ?>
+								</div>
+							<?php } ?>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+<?php }
+// End MyChart Scheduling Section
+}
+?>
 </div>
 
 <?php // Schema Data ?>

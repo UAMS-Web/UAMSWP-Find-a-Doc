@@ -326,3 +326,13 @@
         margin-top: 0;
     }
 }
+
+.modal-dialog.modal-dialog-mychart-scheduling {
+    max-width: ($mychart-widget-width + ($mychart-widget-border-width * 2) + ($modal-content-border-width * 2) + ($onerem * 2));
+
+    p, ul, ol, li, dl, dt, dd {
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
