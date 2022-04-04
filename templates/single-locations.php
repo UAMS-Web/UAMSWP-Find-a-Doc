@@ -626,7 +626,7 @@ while ( have_posts() ) : the_post(); ?>
 					<?php } // endif ?>
 					<div class="row">
 						<div class="col-lg">
-							<h2 class="sr-only">Address</h2>
+							<h2 class="h5">Address</h2>
 							<p><?php echo $location_address_1; ?><br/>
 							<?php echo ( $location_address_2 ? $location_address_2 . '<br/>' : ( $location_address_2_deprecated ? $location_address_2_deprecated . '<br/>' : '')); ?>
 							<?php echo $location_city; ?>, <?php echo $location_state; ?> <?php echo $location_zip; ?></p>
@@ -655,7 +655,7 @@ while ( have_posts() ) : the_post(); ?>
 							?>
 						</div>
 						<div class="col-lg">
-							<h2>Contact Information</h2>
+							<h2 class="h5">Contact Information</h2>
 							<?php
 								// Phone values
 								$phone_output_id = $id;
