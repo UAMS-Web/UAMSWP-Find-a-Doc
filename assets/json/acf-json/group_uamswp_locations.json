@@ -3387,7 +3387,15 @@
             "label": "Appointment Section Introduction (Optional Override)",
             "instructions": "This paragraph introduces the online scheduling section. If you do not define a value here, it will display \"Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.\" <br />The paragraph should provide brief general information about MyChart open scheduling. There is a 221 character limit.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_scheduling_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
 			"wrapper": {
 				"width": "",
 				"class": "",
