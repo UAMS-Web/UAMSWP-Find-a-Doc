@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-    sass = require('gulp-sass');
+    sass = require('gulp-sass')(require('sass'));
     postcss = require('gulp-postcss');
     autoprefixer = require('autoprefixer'),
     rename = require('gulp-rename'),
@@ -29,7 +29,7 @@ var paths = {
 function style() {
     return gulp.src(paths.styles.src)
         .pipe(changed(paths.styles.dest))
-        .pipe(sass.sync().on('error', sass.logError))
+        .pipe(sass().on('error', sass.logError))
         .pipe(concat('app.scss'))
         .pipe(postcss(plugins))
         .pipe(groupmq()) // Group media queries!
