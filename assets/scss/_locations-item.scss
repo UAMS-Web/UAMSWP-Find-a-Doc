@@ -47,6 +47,18 @@
                     margin-bottom: 0;
                 }
             }
+
+            .btn-container {
+                margin-bottom: 1em;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+
+            .dropdown {
+                white-space: normal;
+            }
     
             .content-width {
                 @include media-breakpoint-up(md) {

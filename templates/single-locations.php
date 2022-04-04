@@ -944,7 +944,26 @@ while ( have_posts() ) : the_post(); ?>
 								} // endif ?>
 							</div>
 							<div class="col-lg">
-								
+								<h2 class="h4">Appointments</h2>
+								<p>Find a provider at this location to book an appointment online.</p>
+								<div class="btn-container">
+									<div class="inner-container">
+										<div class="dropdown">
+											<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">Book an Appointment</button>
+											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+												<a class="dropdown-item" href="#">In-Person Visit</a>
+												<a class="dropdown-item" href="#">Online Video Visit</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<h3 class="h5">Specialized Care</h3>
+								<p>Some appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.</p>
+								<div class="btn-container">
+									<div class="inner-container">
+										<a class="btn btn-outline-primary" href="#">Request an Appointment</a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
