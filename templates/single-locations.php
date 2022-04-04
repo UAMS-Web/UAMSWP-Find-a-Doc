@@ -586,7 +586,7 @@ while ( have_posts() ) : the_post(); ?>
 <div class="content-sidebar-wrap">
 <main class="location-item" id="genesis-content">
 	<section class="container-fluid location-info bg-white">
-		<div class="row mx-0 mx-md-n8">
+		<div class="row">
 			<div class="col-12 col-md text">
 				<div class="content-width">
 					<h1 class="page-title"><?php echo $page_title; ?>

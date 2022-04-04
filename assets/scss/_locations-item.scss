@@ -9,6 +9,13 @@
     
         > .row {
             justify-content: center;
+            margin-right: 0;
+            margin-left: 0;
+
+            @include media-breakpoint-up(md) {
+                margin-right: -(map-get($spacers, 8));
+                margin-left: -(map-get($spacers, 8));
+            }
         }
         .text, .image {
             @include media-breakpoint-up(md) {
