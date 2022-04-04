@@ -1093,6 +1093,20 @@
   margin-top: 2rem;
 }
 
+.modal-dialog.modal-dialog-mychart-scheduling {
+  max-width: 734px;
+}
+
+.modal-dialog.modal-dialog-mychart-scheduling dd:last-child,
+.modal-dialog.modal-dialog-mychart-scheduling dl:last-child,
+.modal-dialog.modal-dialog-mychart-scheduling dt:last-child,
+.modal-dialog.modal-dialog-mychart-scheduling li:last-child,
+.modal-dialog.modal-dialog-mychart-scheduling ol:last-child,
+.modal-dialog.modal-dialog-mychart-scheduling p:last-child,
+.modal-dialog.modal-dialog-mychart-scheduling ul:last-child {
+  margin-bottom: 0;
+}
+
 .location-alert a {
   color: inherit;
 }
@@ -1375,7 +1389,7 @@
 }
 
 #openSchedulingFrame {
-  border: 1px solid #ccc;
+  border: 0 solid #ccc;
   height: 500px;
   width: 700px;
 }
