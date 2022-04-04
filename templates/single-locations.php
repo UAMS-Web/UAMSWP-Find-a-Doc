@@ -1003,7 +1003,7 @@ while ( have_posts() ) : the_post(); ?>
 									} ?>
 									<div class="btn-container">
 										<div class="inner-container">
-											<a class="btn btn-outline-primary" href="#">Request an Appointment</a>
+											<a class="btn btn-outline-primary" href="#" target="_blank">Request an Appointment</a>
 										</div>
 									</div>
 								<?php } // endif $location_appt_request_query
