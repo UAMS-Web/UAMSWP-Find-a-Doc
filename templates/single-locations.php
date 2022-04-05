@@ -990,7 +990,8 @@ while ( have_posts() ) : the_post(); ?>
 													<?php 
 													$i = 0;
 													// Loop through rows.
-													while( have_rows('location_scheduling_options') ) : the_row();
+													while( have_rows('location_scheduling_options') ) {
+														the_row();
 														// Load sub field value.
 														$location_scheduling_item_title_nested = get_sub_field('location_scheduling_item_title_nested');
 
@@ -998,7 +999,7 @@ while ( have_posts() ) : the_post(); ?>
 														<a class="dropdown-item" href="#" data-toggle="modal" data-target="#mychart-scheduling_<?php echo $i; ?>"><?php echo $location_scheduling_item_title_nested; ?></a>
 														<?php
 														$i++;
-													endwhile; // End loop (have_rows) ?>
+													} // endwhile (have_rows) ?>
 												</div>
 											</div>
 										</div>
@@ -1861,7 +1862,8 @@ while ( have_posts() ) : the_post(); ?>
 if( $show_mychart_scheduling_section ):
 	$i = 0;
     // Loop through rows.
-    while( have_rows('location_scheduling_options') ) : the_row();
+    while( have_rows('location_scheduling_options') ) {
+		the_row();
         // Load sub field value.
         $location_scheduling_title = get_sub_field('location_scheduling_title');
         $location_scheduling_intro_default = 'Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.'; // Default value for appointment section intro
@@ -1898,7 +1900,7 @@ if( $show_mychart_scheduling_section ):
 		</div>
 		<?php
 		$i++;
-	endwhile; // End loop (have_rows) ?>
+	} // endwhile (have_rows) ?>
 <!-- <link href="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
 
 <script src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidgetController.js" type="text/javascript"></script>
