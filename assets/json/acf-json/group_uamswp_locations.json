@@ -3608,6 +3608,39 @@
             "ui_on_text": "",
             "ui_off_text": ""
         },
+        "field_location_appt_request_form": {
+			"key": "field_location_appt_request_form",
+			"label": "Appointment Request Form",
+			"name": "location_appt_request_form",
+			"type": "taxonomy",
+			"instructions": "",
+			"required": "1",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_appt_request_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+			"taxonomy": "appointment_request",
+			"field_type": "select",
+			"add_term": "0",
+			"save_terms": "1",
+			"load_terms": "1",
+			"return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+			"multiple": "0",
+			"allow_null": "0"
+        },
         "field_location_medical_tab": {
             "key": "field_location_medical_tab",
             "name": "",
