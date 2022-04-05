@@ -39,10 +39,8 @@
                 "class": "",
                 "id": ""
             },
-            "acfe_permissions": "",
-            "return_format": "array",
-            "acfe_validate": "",
-            "acfe_update": ""
+            "default_value": "",
+            "placeholder": ""
         }
     },
     "modified": false
