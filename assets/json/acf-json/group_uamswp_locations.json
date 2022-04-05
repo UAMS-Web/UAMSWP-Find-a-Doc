@@ -3613,8 +3613,8 @@
 			"label": "Appointment Request Form",
 			"name": "location_appt_request_form",
 			"type": "taxonomy",
-			"instructions": "",
-			"required": "1",
+            "instructions": "Select multiple if necessary. These items will be displayed in the order they are entered. You may click and drag to rearrange.",
+            "required": 1,
             "conditional_logic": [
                 [
                     {
@@ -3630,16 +3630,21 @@
                 "id": ""
             },
 			"taxonomy": "appointment_request",
-			"field_type": "select",
-			"add_term": "0",
-			"save_terms": "1",
-			"load_terms": "1",
-			"return_format": "id",
+			"field_type": "multi_select",
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
             },
-			"multiple": "0",
-			"allow_null": "0"
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "multiple": 1,
+            "allow_null": 0
         },
         "field_location_medical_tab": {
             "key": "field_location_medical_tab",
