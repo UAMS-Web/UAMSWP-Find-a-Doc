@@ -3439,9 +3439,17 @@
                     "name": "location_scheduling_title",
                     "type": "text",
                     "label": "Open Scheduling Widget Heading Text",
-                    "instructions": "This sets the text of the heading in the window that appears with the open scheduling widget. <br />Use a very short action phrase that makes the purpose of this specific scheduling widget clear to the user. Do not just use the name of a condition or treatment.",
+                    "instructions": "(Deprecated)",
                     "required": 1,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_scheduling_tab",
+                                "operator": "==",
+                                "value": "false"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -3458,9 +3466,17 @@
                     "name": "location_scheduling_intro",
                     "type": "textarea",
                     "label": "Specific Open Scheduling Widget Introduction (Optional Override)",
-                    "instructions": "You can define a value here to replace the main section introduction (defined by <em>General MyChart Open Scheduling Widget Introduction</em>) if that general introduction does not adequately introduce this specific widget. <br />If used, this paragraph should provide general information about MyChart open scheduling and a brief overview of anything necessary for users to know about this specific scheduling widget. There is a 221 character limit.",
+                    "instructions": "(Deprecated)",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_scheduling_tab",
+                                "operator": "==",
+                                "value": "false"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -3477,9 +3493,17 @@
                     "name": "location_scheduling_item_title_nested",
                     "type": "text",
                     "label": "Open Scheduling Widget Link Text",
-                    "instructions": "This sets the text of the link in the \"Book an Appointment\" dropdown. <br />Use a very short phrase, visit type name or treatment name that makes the purpose of this specific scheduling widget clear to the user.",
+                    "instructions": "(Deprecated)",
                     "required": 1,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_scheduling_tab",
+                                "operator": "==",
+                                "value": "false"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
