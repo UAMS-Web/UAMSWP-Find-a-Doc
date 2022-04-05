@@ -3353,6 +3353,33 @@
             "ui_on_text": "",
             "ui_off_text": ""
         },
+        "field_location_dep_id": {
+            "key": "field_location_dep_id",
+            "name": "location_dep_id",
+            "type": "text",
+            "label": "Department / DEP ID(s) from Epic",
+            "instructions": "ID for one or more Epic departments associated with this location. These will be used when generating open scheduling widgets. <br />Separate multiple values with a comma (\",\"). <br />The department(s) included here should correspond to this physical location. <br />Check the External Name field of each department record in Epic to ensure it is patient-friendly and matches up with how this location is named since it will be visible to users in the open scheduling widget.",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_scheduling_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
         "field_location_scheduling_title_general": {
             "key": "field_location_scheduling_title_general",
             "name": "location_scheduling_title_general",
@@ -3571,9 +3598,9 @@
                     "key": "field_location_scheduling_dep",
                     "name": "location_scheduling_dep",
                     "type": "text",
-                    "label": "Department / DEP ID(s) from Epic",
-                    "instructions": "ID for one or more departments available for scheduling in this widget. Separate multiple values with a comma (\",\"). <br />The department(s) included here should correspond to this physical location. <br />Check the External Name field of each department record in Epic to ensure it is patient-friendly and matches up with how this location is named since it will be visible to users in the open scheduling widget.",
-                    "required": 1,
+                    "label": "Override for Department / DEP ID(s) from Epic",
+                    "instructions": "Optional override for which Epic department ID(s) to use when generating this open scheduling widget. <br />The department(s) included here should still correspond to this physical location. <br />Separate multiple values with a comma (\",\"). <br />Check the External Name field of each department record in Epic to ensure it is patient-friendly and matches up with how this location is named since it will be visible to users in the open scheduling widget.",
+                    "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
