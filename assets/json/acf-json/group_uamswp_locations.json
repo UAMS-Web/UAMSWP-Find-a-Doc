@@ -3543,25 +3543,6 @@
                     "new_lines": ""
                 },
                 {
-                    "key": "field_location_scheduling_dep",
-                    "name": "location_scheduling_dep",
-                    "type": "text",
-                    "label": "Department / DEP ID(s) from Epic",
-                    "instructions": "ID for one or more departments available for scheduling in this widget. Separate multiple values with a comma (\",\"). <br />The department(s) included here should correspond to this physical location. <br />Check the External Name field of each department record in Epic to ensure it is patient-friendly and matches up with how this location is named since it will be visible to users in the open scheduling widget.",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
                     "key": "field_location_scheduling_vt",
                     "name": "location_scheduling_vt",
                     "type": "taxonomy",
@@ -3585,6 +3566,25 @@
                         "acfe_bidirectional_enabled": "0"
                     },
                     "multiple": 0
+                },
+                {
+                    "key": "field_location_scheduling_dep",
+                    "name": "location_scheduling_dep",
+                    "type": "text",
+                    "label": "Department / DEP ID(s) from Epic",
+                    "instructions": "ID for one or more departments available for scheduling in this widget. Separate multiple values with a comma (\",\"). <br />The department(s) included here should correspond to this physical location. <br />Check the External Name field of each department record in Epic to ensure it is patient-friendly and matches up with how this location is named since it will be visible to users in the open scheduling widget.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
                 },
                 {
                     "key": "field_location_scheduling_ser",
