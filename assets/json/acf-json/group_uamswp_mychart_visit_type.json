@@ -1,0 +1,108 @@
+{
+    "key": "group_uamswp_mychart_visit_type",
+    "title": "Additional Information",
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "mychart_visit_type"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "description"
+    ],
+    "active": 1,
+    "description": "",
+    "acfe_display_title": "",
+    "acfe_autosync": "",
+    "acfe_permissions": "",
+    "acfe_note": "",
+    "acfe_meta": "",
+    "fields": {
+        "field_mychart_visit_type_heading": {
+            "key": "field_mychart_visit_type_heading",
+            "label": "Open Scheduling Widget Heading Text",
+            "name": "mychart_visit_type_heading",
+            "type": "text",
+            "instructions": "This sets the text of the heading in the window that appears with the open scheduling widget. <br \/>\r\nUse a very short action phrase that makes the purpose of this specific scheduling widget clear to the user. Do not just use the name of a condition or treatment.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        "field_mychart_visit_type_intro": {
+            "key": "field_mychart_visit_type_intro",
+            "label": "Specific Open Scheduling Widget Introduction (Optional Override)",
+            "name": "mychart_visit_type_intro",
+            "type": "textarea",
+            "instructions": "You can define a value here to replace the main section introduction (defined by <em>General MyChart Open Scheduling Widget Introduction</em>) if that general introduction does not adequately introduce this specific widget. <br>If used, this paragraph should provide general information about MyChart open scheduling and a brief overview of anything necessary for users to know about this specific scheduling widget. <br>There is a 221 character limit.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 3,
+            "new_lines": "",
+            "acfe_textarea_code": 0
+        },
+        "field_mychart_visit_type_link_text": {
+            "key": "field_mychart_visit_type_link_text",
+            "label": "Open Scheduling Widget Link Text",
+            "name": "mychart_visit_type_link_text",
+            "type": "text",
+            "instructions": "You can define a value here to replace the main section introduction (defined by <em>General MyChart Open Scheduling Widget Introduction</em>) if that general introduction does not adequately introduce this specific widget. <br>If used, this paragraph should provide general information about MyChart open scheduling and a brief overview of anything necessary for users to know about this specific scheduling widget. <br>There is a 221 character limit.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        "field_mychart_visit_type_id": {
+            "key": "field_mychart_visit_type_id",
+            "label": "Visit Type \/ PRC ID from Epic",
+            "name": "mychart_visit_type_id",
+            "type": "text",
+            "instructions": "A single visit type available for scheduling in this specific widget. <br>Check the External Name field of the visit type record in Epic to ensure it is patient-friendly since it will be visible to users in the open scheduling widget.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    },
+    "modified": false
+}

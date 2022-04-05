@@ -470,6 +470,7 @@ add_action( 'init', 'create_residency_years_taxonomy', 0 );
 add_action( 'init', 'create_region_taxonomy', 0 );
 add_action( 'init', 'create_location_type_taxonomy', 0 );
 add_action( 'init', 'create_building_taxonomy', 0 );
+add_action( 'init', 'create_mychart_visit_type_taxonomy', 0 );
 add_action( 'init', 'create_appointment_request_taxonomy', 0 );
 add_action( 'init', 'create_gmb_cat_location_taxonomy', 0 );
 
@@ -2038,6 +2039,57 @@ function create_building_taxonomy() {
 
 }
 
+function create_mychart_visit_type_taxonomy() {
+
+	$labels = array(
+		'name'                       => 'Epic Visit Types',
+		'singular_name'              => 'Epic Visit Type',
+		'menu_name'                  => 'Epic Visit Types',
+		'all_items'                  => 'All Epic Visit Types',
+		'parent_item'                => 'Parent Epic Visit Type',
+		'parent_item_colon'          => 'Parent Epic Visit Type:',
+		'new_item_name'              => 'New Epic Visit Type',
+		'add_new_item'               => 'Add New Epic Visit Type',
+		'edit_item'                  => 'Edit Epic Visit Type',
+		'update_item'                => 'Update Epic Visit Type',
+		'view_item'                  => 'View Epic Visit Type',
+		'separate_items_with_commas' => 'Separate Epic Visit Types with commas',
+		'add_or_remove_items'        => 'Add or remove Epic Visit Types',
+		'choose_from_most_used'      => 'Choose from the most used',
+		'popular_items'              => 'Popular Epic Visit Types',
+		'search_items'               => 'Search Epic Visit Types',
+		'not_found'                  => 'Not Found',
+		'no_terms'                   => 'No Epic Visit Types',
+		'items_list'                 => 'Epic Visit Types list',
+		'items_list_navigation'      => 'Epic Visit Types list navigation',
+	);
+	$rewrite = array(
+		'slug'                       => 'mychart_visit_type',
+		'with_front'                 => false,
+		'hierarchical'               => false,
+	);
+	$capabilities = array(
+		'manage_terms'               => 'manage_options',
+		'edit_terms'                 => 'manage_options',
+		'delete_terms'               => 'manage_options',
+		'assign_terms'               => 'edit_physicians',
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => false,
+		'public'                     => false,
+		'show_ui'                    => true,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'capabilities'               => $capabilities,
+		'show_in_quick_edit'         => false,
+	);
+	register_taxonomy( 'mychart_visit_type', array( 'location' ), $args );
+
+}
+
 function create_appointment_request_taxonomy() {
 
 	$labels = array(
@@ -2225,6 +2277,7 @@ function remove_provider_meta() {
 	remove_meta_box( 'location_typediv', 'location', 'side' );
 	remove_meta_box( 'buildingdiv', 'location', 'side' );
 	remove_meta_box( 'tagsdiv-appointment_request', 'location', 'side' );
+	remove_meta_box( 'tagsdiv-mychart_visit_type', 'location', 'side' );
 	remove_meta_box( 'gmb_cat_locationdiv', 'location', 'side' );
 }
 
