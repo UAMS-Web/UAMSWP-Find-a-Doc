@@ -1638,6 +1638,74 @@
                 }
             ]
         },
+        "field_physician_scheduling_tab": {
+            "key": "field_physician_scheduling_tab",
+            "name": "",
+            "type": "tab",
+            "label": "<i class=\"dashicons-calendar-alt dashicons\"><\/i> Online Scheduling",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        "field_physician_scheduling_query": {
+            "key": "field_physician_scheduling_query",
+            "name": "physician_scheduling_query",
+            "type": "true_false",
+            "label": "Enable MyChart Scheduling?",
+            "instructions": "Check with Web Services and the MyChart team before doing anything here.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_physician_scheduling_vt": {
+            "key": "field_physician_scheduling_vt",
+            "name": "physician_scheduling_vt",
+            "type": "taxonomy",
+            "label": "Visit Type(s) / PRC ID(s) from Epic",
+            "instructions": "Visit type(s) to use for generating MyChart open scheduling widget(s).",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_scheduling_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "mychart_visit_type",
+            "field_type": "checkbox",
+            "allow_null": 0,
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 1
+        },
         "field_physician_academic_profile_tab": {
             "key": "field_physician_academic_profile_tab",
             "name": "",
