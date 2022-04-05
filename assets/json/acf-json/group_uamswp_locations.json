@@ -3519,6 +3519,25 @@
                     "new_lines": ""
                 },
                 {
+                    "key": "field_location_scheduling_dep",
+                    "name": "location_scheduling_dep",
+                    "type": "text",
+                    "label": "Department (DEP) ID from Epic",
+                    "instructions": "ID for one or more departments available for scheduling in this widget. Separate multiple values with a comma (\",\"). <br />If you specify a provider, you can omit the list of department IDs so all departments who are enabled for open scheduling with that provider and visit type are automatically included in the widget.</strong>",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
                     "key": "field_location_scheduling_vt",
                     "name": "location_scheduling_vt",
                     "type": "text",
@@ -3544,25 +3563,6 @@
                     "label": "Provider (SER) ID from Epic (Optional)",
                     "instructions": "ID for one or more providers available for scheduling in this specific widget. Separate multiple values with a comma (\",\"). <br />If you do not include one or more provider IDs, all providers who are enabled for open scheduling in the department(s) with the visit type are will automatically be included in the widget.",
                     "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_location_scheduling_dep",
-                    "name": "location_scheduling_dep",
-                    "type": "text",
-                    "label": "Department (DEP) ID from Epic",
-                    "instructions": "ID for one or more departments available for scheduling in this widget. Separate multiple values with a comma (\",\"). <br />If you specify a provider, you can omit the list of department IDs so all departments who are enabled for open scheduling with that provider and visit type are automatically included in the widget.</strong>",
-                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
