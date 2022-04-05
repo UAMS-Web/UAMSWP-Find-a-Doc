@@ -987,10 +987,10 @@ while ( have_posts() ) : the_post(); ?>
 											<div class="dropdown">
 												<button class="btn btn-primary dropdown-toggle" type="button" id="mychart_scheduling_dropdown" data-toggle="dropdown" aria-expanded="false">Book an Appointment</button>
 												<div class="dropdown-menu" aria-labelledby="mychart_scheduling_dropdown">
-													<?php // Loop through rows.
+													<?php 
+													$i = 0;
+													// Loop through rows.
 													while( have_rows('location_scheduling_options') ) : the_row();
-
-														$i = 0;
 														// Load sub field value.
 														$location_scheduling_item_title_nested = get_sub_field('location_scheduling_item_title_nested');
 
@@ -1859,11 +1859,9 @@ while ( have_posts() ) : the_post(); ?>
 // Create MyChart Open Scheduling Modals
 
 if( $show_mychart_scheduling_section ):
-
+	$i = 0;
     // Loop through rows.
     while( have_rows('location_scheduling_options') ) : the_row();
-
-		$i = 0;
         // Load sub field value.
         $location_scheduling_title = get_sub_field('location_scheduling_title');
         $location_scheduling_intro_default = 'Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.'; // Default value for appointment section intro
