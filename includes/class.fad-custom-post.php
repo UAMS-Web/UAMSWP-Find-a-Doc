@@ -2209,7 +2209,7 @@ function add_theme_caps() {
 }
 add_action( 'admin_init', 'add_theme_caps');
 
-// Remove the taxonomy metabox [slugnamediv]
+// Remove the taxonomy metabox [slugnamediv] or [tagsdiv-slugname]
 function remove_provider_meta() {
 	remove_meta_box( 'conditiondiv', 'provider', 'side' );
 	remove_meta_box( 'specialtydiv', 'provider', 'side' );
@@ -2224,6 +2224,7 @@ function remove_provider_meta() {
 	remove_meta_box( 'regiondiv', 'location', 'side' );
 	remove_meta_box( 'location_typediv', 'location', 'side' );
 	remove_meta_box( 'buildingdiv', 'location', 'side' );
+	remove_meta_box( 'tagsdiv-appointment_request', 'location', 'side' );
 	remove_meta_box( 'gmb_cat_locationdiv', 'location', 'side' );
 }
 
