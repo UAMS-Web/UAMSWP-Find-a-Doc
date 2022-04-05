@@ -1038,7 +1038,7 @@ while ( have_posts() ) : the_post(); ?>
 																$form_object_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($form_object_name_attr, null, 'utf-8')));
 																$form_url = get_field('appointment_request_url', $form_object);
 																?>
-																<a class="dropdown-item" href="<?php echo $form_url; ?>"><?php echo $form_object_name; ?></a>
+																<a class="dropdown-item" href="<?php echo $form_url; ?>" target="_blank"><?php echo $form_object_name; ?></a>
 															<?php }
 														} ?>
 													</div>
