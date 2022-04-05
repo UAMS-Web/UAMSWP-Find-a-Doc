@@ -3358,14 +3358,14 @@
             "name": "location_scheduling_title_general",
             "type": "text",
             "label": "Appointment Section Title (Optional Override)",
-            "instructions": "If there are multiple scheduling widgets, this will define the text used in the main section heading. If you do not define a value here, \"Schedule an Appointment Online\" will be used. <br />If you define a value here, use a very short phrase that makes the purpose of the online scheduling section clear to the user. Do not just use the name of a condition or treatment. <br />If there is only one scheduling widget, the heading will be defined by a value from within the <em>MyChart Open Scheduling Widget(s)</em> repeater instead.",
+            "instructions": "(Deprecated)",
             "required": 0,
             "conditional_logic": [
                 [
                     {
-                        "field": "field_location_scheduling_query",
+                        "field": "field_location_scheduling_tab",
                         "operator": "==",
-                        "value": "1"
+                        "value": "false"
                     }
                 ]
             ],
@@ -3496,9 +3496,17 @@
                     "name": "location_scheduling_item_intro_nested",
                     "type": "textarea",
                     "label": "Nested Appointment Section Introduction (Optional)",
-                    "instructions": "If this is one of multiple scheduling widgets, this field defines the paragraph introducing this specific scheduling widget. If used, this paragraph will not need to cover information addressed in the <em>Appointment Section Introduction</em> field, but should provide a brief overview of any information necessary for users to know about this specific scheduling widget. There is a 221 character limit.",
+                    "instructions": "(Deprecated)",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_scheduling_tab",
+                                "operator": "==",
+                                "value": "false"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
