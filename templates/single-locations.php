@@ -427,21 +427,19 @@ while ( have_posts() ) : the_post(); ?>
 
 		// Check if specialty care appointment request link should be displayed
 		$location_appt_request_query = get_field('location_appt_request_query');
-		$location_appt_request_form = get_field('location_appt_request_form');
-		$appt_request_form = '';
-		$appt_request_form_slug = '';
-		$appt_request_form_name = '';
-		$appt_request_form_name_attr = '';
-		$appt_request_form_url = '';
-		if ( $location_appt_request_form ) {
-			$appt_request_form = get_term($location_appt_request_form, "appointment_request");
-			// $appt_request_form_slug = $appt_request_form->slug;
-			// $appt_request_form_name = $appt_request_form->name;
-			// $appt_request_form_name_attr = str_replace('"', '\'', $appt_request_form);
-			// $appt_request_form_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($appt_request_form_name_attr, null, 'utf-8')));
-			$appt_request_form_url = get_field('appointment_request_url', $appt_request_form);
+		$location_appt_request_forms = get_field('location_appt_request_form');
+		// Check for valid forms
+		$location_appt_request_form_valid = false;
+		if ( $location_appt_request_query && $location_appt_request_forms ) {
+			foreach( $location_appt_request_forms as $form ) {
+				$form_object = get_term_by( 'id', $form, 'appointment_request');
+				if ( $form_object ) {
+					$location_appt_request_form_valid = true;
+					$break;
+				}
+			}
 		}
-		if ( $location_appt_request_query && $appt_request_form_url && !empty($appt_request_form_url) ) {
+		if ( $location_appt_request_form_valid ) {
 			$show_appt_request_section = true;
 		} else {
 			$show_appt_request_section = false;
@@ -987,8 +985,8 @@ while ( have_posts() ) : the_post(); ?>
 									<div class="btn-container">
 										<div class="inner-container">
 											<div class="dropdown">
-												<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">Book an Appointment</button>
-												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+												<button class="btn btn-primary dropdown-toggle" type="button" id="mychart_scheduling_dropdown" data-toggle="dropdown" aria-expanded="false">Book an Appointment</button>
+												<div class="dropdown-menu" aria-labelledby="mychart_scheduling_dropdown">
 													<?php // Loop through rows.
 													while( have_rows('location_scheduling_options') ) : the_row();
 
@@ -1008,11 +1006,16 @@ while ( have_posts() ) : the_post(); ?>
 								<?php } // endif have_rows
 								// End MyChart Scheduling Links Section
 								// Begin link to specialized care appointment request
+
 								if ( $show_appt_request_section ) {
+									$location_appt_request_form_count = count($location_appt_request_forms);
+
 									$location_appt_request_heading = 'Specialized Care';
 									$location_appt_request_heading_standalone = $appointments_heading;
 									$location_appt_request_intro = 'Some appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.';
 									$location_appt_request_intro_standalone = 'Appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.';
+									$location_appt_request_button_text = 'Request an Appointment';
+									
 									if ( $show_mychart_scheduling_section ) {
 										echo '<h3 class="h5">' . $location_appt_request_heading . '</h3>';
 										echo '<p>' . $location_appt_request_intro . '</p>';
@@ -1022,10 +1025,40 @@ while ( have_posts() ) : the_post(); ?>
 									} ?>
 									<div class="btn-container">
 										<div class="inner-container">
-											<a class="btn btn-outline-primary" href="<?php echo $appt_request_form_url; ?>" target="_blank">Request an Appointment</a>
+											<?php
+											if ( $location_appt_request_form_count > 1 ) { ?>
+												<div class="dropdown">
+													<button class="btn btn-outline-primary dropdown-toggle" type="button" id="appt_request_form_dropdown" data-toggle="dropdown" aria-expanded="false"><?php echo $location_appt_request_button_text; ?></button>
+													<div class="dropdown-menu" aria-labelledby="appt_request_form_dropdown">
+														<?php foreach( $location_appt_request_forms as $form ) {
+															$form_object = get_term_by( 'id', $form, 'appointment_request');
+															if ( $form_object ) {
+																$form_object_name = $form_object->name;
+																$form_object_name_attr = str_replace('"', '\'', $form_object_name);
+																$form_object_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($form_object_name_attr, null, 'utf-8')));
+																$form_url = get_field('appointment_request_url', $form_object);
+																?>
+																<a class="dropdown-item" href="<?php echo $form_url; ?>"><?php echo $form_object_name; ?></a>
+															<?php }
+														} ?>
+													</div>
+												</div>
+											<?php } else {
+												foreach( $location_appt_request_forms as $form ) {
+													$form_object = get_term_by( 'id', $form, 'appointment_request');
+													if ( $form_object ) {
+														$form_object_name = $form_object->name;
+														$form_object_name_attr = str_replace('"', '\'', $form_object_name);
+														$form_object_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($form_object_name_attr, null, 'utf-8')));
+														$form_url = get_field('appointment_request_url', $form_object);
+														?>
+														<a class="btn btn-outline-primary" href="<?php echo $form_url; ?>" target="_blank" aria-label="<?php echo $location_appt_request_button_text . ', ' . $form_object_name_attr; ?>"><?php echo $location_appt_request_button_text; ?></a>
+													<?php }
+												}
+											} ?>
 										</div>
 									</div>
-								<?php } // endif $location_appt_request_query
+								<?php }
 								// End link to specialized care appointment request ?>
 							</div>
 							<?php } ?>
