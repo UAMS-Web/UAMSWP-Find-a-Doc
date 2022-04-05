@@ -3476,7 +3476,7 @@
                     "key": "field_location_scheduling_item_title_nested",
                     "name": "location_scheduling_item_title_nested",
                     "type": "text",
-                    "label": "Open Scheduling Link Text",
+                    "label": "Open Scheduling Widget Link Text",
                     "instructions": "This sets the text of the link in the \"Book an Appointment\" dropdown. <br />Use a very short phrase, visit type name or treatment name that makes the purpose of this specific scheduling widget clear to the user.",
                     "required": 1,
                     "conditional_logic": 0,
