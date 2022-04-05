@@ -427,9 +427,28 @@ while ( have_posts() ) : the_post(); ?>
 
 		// Check if specialty care appointment request link should be displayed
 		$location_appt_request_query = get_field('location_appt_request_query');
+		$location_appt_request_form = get_field('location_appt_request_form');
+		$appt_request_form = '';
+		$appt_request_form_slug = '';
+		$appt_request_form_name = '';
+		$appt_request_form_name_attr = '';
+		$appt_request_form_url = '';
+		if ( $location_appt_request_form ) {
+			$appt_request_form = get_term($location_appt_request_form, "appointment_request");
+			// $appt_request_form_slug = $appt_request_form->slug;
+			// $appt_request_form_name = $appt_request_form->name;
+			// $appt_request_form_name_attr = str_replace('"', '\'', $appt_request_form);
+			// $appt_request_form_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($appt_request_form_name_attr, null, 'utf-8')));
+			$appt_request_form_url = get_field('appointment_request_url', $appt_request_form);
+		}
+		if ( $location_appt_request_query && $appt_request_form_url && !empty($appt_request_form_url) ) {
+			$show_appt_request_section = true;
+		} else {
+			$show_appt_request_section = false;
+		}
 
 		// Check if online appointment scheduling/request section should be displayed in the top section
-		if ( $show_mychart_scheduling_section || $location_appt_request_query ) {
+		if ( $show_mychart_scheduling_section || $show_appt_request_section ) {
             $show_online_scheduling_section = true;
         } else {
             $show_online_scheduling_section = false;
@@ -989,7 +1008,7 @@ while ( have_posts() ) : the_post(); ?>
 								<?php } // endif have_rows
 								// End MyChart Scheduling Links Section
 								// Begin link to specialized care appointment request
-								if ( $location_appt_request_query ) {
+								if ( $show_appt_request_section ) {
 									$location_appt_request_heading = 'Specialized Care';
 									$location_appt_request_heading_standalone = $appointments_heading;
 									$location_appt_request_intro = 'Some appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.';
@@ -1003,7 +1022,7 @@ while ( have_posts() ) : the_post(); ?>
 									} ?>
 									<div class="btn-container">
 										<div class="inner-container">
-											<a class="btn btn-outline-primary" href="#" target="_blank">Request an Appointment</a>
+											<a class="btn btn-outline-primary" href="<?php echo $appt_request_form_url; ?>" target="_blank">Request an Appointment</a>
 										</div>
 									</div>
 								<?php } // endif $location_appt_request_query
