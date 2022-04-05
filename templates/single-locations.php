@@ -1869,8 +1869,8 @@ if( $show_mychart_scheduling_section ):
         $location_scheduling_intro_default = 'Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.'; // Default value for appointment section intro
 		$location_scheduling_intro_general = get_field('location_scheduling_intro_general'); // Get input for general appointment section intro
 		$location_scheduling_intro = ( isset($location_scheduling_intro_general) && !empty($location_scheduling_intro_general) ) ? $location_scheduling_intro_general : $location_scheduling_intro_default; // Set main intro from general intro input. If general intro value is empty, set to default value.
-		$location_scheduling_item_title_nested = get_sub_field('location_scheduling_item_title_nested');
-        $location_scheduling_item_intro_nested = get_sub_field('location_scheduling_item_intro_nested');
+		// $location_scheduling_item_title_nested = get_sub_field('location_scheduling_item_title_nested');
+        // $location_scheduling_item_intro_nested = get_sub_field('location_scheduling_item_intro_nested');
         $location_scheduling_vt = get_sub_field('location_scheduling_vt');
         $location_scheduling_ser = get_sub_field('location_scheduling_ser');
         $location_scheduling_dep = get_sub_field('location_scheduling_dep');
