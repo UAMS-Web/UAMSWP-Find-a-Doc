@@ -3540,7 +3540,7 @@
                 {
                     "key": "field_location_scheduling_vt",
                     "name": "location_scheduling_vt",
-                    "type": "text",
+                    "type": "taxonomy",
                     "label": "Visit Type / PRC ID from Epic",
                     "instructions": "A single visit type available for scheduling in this specific widget. <br />Check the External Name field of the visit type record in Epic to ensure it is patient-friendly since it will be visible to users in the open scheduling widget.",
                     "required": 1,
@@ -3550,11 +3550,17 @@
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
+                    "taxonomy": "mychart_visit_type",
+                    "field_type": "select",
+                    "allow_null": 0,
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "acfe_bidirectional": {
+                        "acfe_bidirectional_enabled": "0"
+                    },
+                    "multiple": 0
                 },
                 {
                     "key": "field_location_scheduling_ser",
