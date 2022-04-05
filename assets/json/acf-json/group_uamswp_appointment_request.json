@@ -32,7 +32,7 @@
             "type": "url",
             "label": "URL for Appointment Request Form",
             "instructions": "Full URL, including https:\/\/",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
