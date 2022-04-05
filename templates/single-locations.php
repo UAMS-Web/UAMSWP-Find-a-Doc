@@ -1871,6 +1871,7 @@ if( $show_mychart_scheduling_section ):
 	$location_scheduling_intro_default = 'Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.'; // Default value for appointment section intro
 	$location_scheduling_intro_general = get_field('location_scheduling_intro_general'); // Get input for general appointment section intro
 	$location_scheduling_intro_general = ( isset($location_scheduling_intro_general) && !empty($location_scheduling_intro_general) ) ? $location_scheduling_intro_general : $location_scheduling_intro_default;
+	$location_dep_general = get_field('location_dep_general');
 	$i = 0;
     // Loop through rows.
     while( have_rows('location_scheduling_options') ) {
@@ -1889,6 +1890,7 @@ if( $show_mychart_scheduling_section ):
 			$visit_type_id = get_field('mychart_visit_type_id', $visit_type_object);
 			$location_scheduling_ser = get_sub_field('location_scheduling_ser');
 			$location_scheduling_dep = get_sub_field('location_scheduling_dep');
+			$location_scheduling_dep = ( isset($location_scheduling_dep) && !empty($location_scheduling_dep) ) ? $location_scheduling_dep : $location_dep_general;
 			$location_scheduling_fallback = get_sub_field('location_scheduling_fallback');
 			?>
 			<div id="mychart-scheduling_<?php echo $i; ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mychart-scheduling_<?php echo $i; ?>_label" aria-modal="true">
