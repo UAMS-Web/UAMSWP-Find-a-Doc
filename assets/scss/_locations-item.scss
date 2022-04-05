@@ -75,15 +75,6 @@
                     }
                 }
             }
-
-            .text-subsection {
-                margin-top: $uams-module-padding-mobile;
-
-                + .text-subsection {
-                    border-top: $hr-border-width solid $hr-border-color;
-                    padding-top: $uams-module-padding-mobile;
-                }
-            }
         }
         .image {
             padding-right: 0 !important; // equivalent of @extend .px-md-8

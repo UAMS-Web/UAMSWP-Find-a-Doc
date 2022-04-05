@@ -1,3 +1,15 @@
+.single-location .location-info .text,
+.single-provider .doctor-info .text {
+    .text-subsection {
+        margin-top: $uams-module-padding-mobile;
+
+        + .text-subsection {
+            border-top: $hr-border-width solid $hr-border-color;
+            padding-top: $uams-module-padding-mobile;
+        }
+    }
+}
+
 .doctor-item,
 .location-item,
 .location-card-list-container {
@@ -23,7 +35,7 @@
 
 }
 
-.doctor-item .doctor-info {
+.single-provider .doctor-info {
     padding: 0;
 
     @include media-breakpoint-up(xs) {
