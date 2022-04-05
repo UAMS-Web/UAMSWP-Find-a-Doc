@@ -471,9 +471,9 @@ while ( have_posts() ) : the_post();
 
 <div class="content-sidebar-wrap">
     <main class="doctor-item<?php echo $provider_field_classes; ?>" id="genesis-content"<?php echo (has_post_thumbnail() ? ' data-image-age="' . $image_age . '"' : ''); ?><?php echo ($service_line ? ' data-service-line="' . get_term( $service_line, 'service_line' )->name . '"' : ''); ?>>
-        <section class="container-fluid p-0 p-xs-8 p-sm-10 doctor-info bg-white">
-            <div class="row mx-0 mx-xs-n4 mx-sm-n8">
-                <div class="col-12 col-xs p-4 py-xs-0 px-xs-4 px-sm-8 order-2 text">
+        <section class="container-fluid doctor-info bg-white">
+            <div class="row">
+                <div class="col-12 col-xs text">
                     <h1 class="page-title">
                         <span class="name"><?php echo $full_name; ?></span>
                         <?php 
@@ -696,7 +696,7 @@ while ( have_posts() ) : the_post();
                 <?php 
                 $docphoto = '/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg';
                 if ( has_post_thumbnail() ) { ?>
-                <div class="col-12 col-xs px-0 px-xs-4 px-sm-8 order-1 image">
+                <div class="col-12 col-xs image">
                     <picture>
                     <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
                         <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 389, 519, 'center', 'center'); ?>"
