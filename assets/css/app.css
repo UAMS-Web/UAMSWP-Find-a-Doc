@@ -644,6 +644,17 @@
   justify-content: center;
 }
 
+.single-location .location-info .text .text-subsection,
+.single-provider .doctor-info .text .text-subsection {
+  margin-top: 2rem;
+}
+
+.single-location .location-info .text .text-subsection+.text-subsection,
+.single-provider .doctor-info .text .text-subsection+.text-subsection {
+  border-top: 1px solid rgba(0,0,0,.1);
+  padding-top: 2rem;
+}
+
 .doctor-item dl,
 .location-card-list-container dl,
 .location-item dl {
@@ -674,20 +685,31 @@
   margin: .5em 0 0;
 }
 
-.doctor-info>.row {
+.single-provider .doctor-info {
+  padding: 0;
+}
+
+.single-provider .doctor-info>.row {
   justify-content: center;
+  margin-left: 0;
+  margin-right: 0;
 }
 
-.doctor-info .text {
+.single-provider .doctor-info .text {
   max-width: 44rem;
+  order: 2;
+  padding: 1rem;
 }
 
-.doctor-info .image {
+.single-provider .doctor-info .image {
   background-color: #a9a7a8;
+  order: 1;
+  padding-left: 0;
+  padding-right: 0;
   text-align: center;
 }
 
-.doctor-info .page-title {
+.single-provider .doctor-info .page-title {
   border-bottom: 1px solid #dcdadb;
   margin: 0 0 1.125rem!important;
   padding-bottom: 1.125rem;
@@ -851,15 +873,6 @@
 
 .single-location .location-info .text:first-child:last-child {
   order: 0;
-}
-
-.single-location .location-info .text .text-subsection {
-  margin-top: 2rem;
-}
-
-.single-location .location-info .text .text-subsection+.text-subsection {
-  border-top: 1px solid rgba(0,0,0,.1);
-  padding-top: 2rem;
 }
 
 .single-location .location-info .image {
@@ -1466,25 +1479,34 @@ html.poppedOut {
     flex-shrink: 0;
   }
 
-  .doctor-info>.row {
-    flex-wrap: nowrap;
+  .single-provider .doctor-info {
+    padding: 2rem;
   }
 
-  .doctor-info .text {
+  .single-provider .doctor-info>.row {
+    flex-wrap: nowrap;
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+
+  .single-provider .doctor-info .text {
     flex-basis: auto;
     flex-grow: 1;
     flex-shrink: 1;
+    padding: 0 1rem;
   }
 
-  .doctor-info .image {
+  .single-provider .doctor-info .image {
     background-color: transparent;
     flex-basis: 118px;
     flex-grow: 0;
     flex-shrink: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
     text-align: left;
   }
 
-  .doctor-info .image img {
+  .single-provider .doctor-info .image img {
     max-width: 100%;
   }
 
@@ -1567,8 +1589,24 @@ html.poppedOut {
     display: none;
   }
 
-  .doctor-info .image {
+  .single-provider .doctor-info {
+    padding: 4rem;
+  }
+
+  .single-provider .doctor-info>.row {
+    margin-left: -2rem;
+    margin-right: -2rem;
+  }
+
+  .single-provider .doctor-info .text {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .single-provider .doctor-info .image {
     flex-basis: 246px;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
   .conditions-treatments .list-legend+.list-container {
@@ -1617,7 +1655,7 @@ html.poppedOut {
     flex-wrap: nowrap;
   }
 
-  .doctor-info .image {
+  .single-provider .doctor-info .image {
     flex-basis: 370px;
   }
 
@@ -1711,7 +1749,7 @@ html.poppedOut {
 }
 
 @media (min-width:1200px) {
-  .doctor-info .image {
+  .single-provider .doctor-info .image {
     flex-basis: 453px;
   }
 
