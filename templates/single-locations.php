@@ -389,7 +389,7 @@ while ( have_posts() ) : the_post(); ?>
             $show_appointment_section = false;
         }
 
-        // Check if Appointment Scheduling section should be displayed
+        // Check if MyChart Open Scheduling section should be displayed
 		$mychart_scheduling_query_system = get_field('mychart_scheduling_query_system', 'option');
 		$mychart_scheduling_query = get_field('location_scheduling_query');
 		$mychart_scheduling_options = get_field('location_scheduling_options');
@@ -405,7 +405,7 @@ while ( have_posts() ) : the_post(); ?>
             $show_mychart_scheduling_section = false;
         }
 
-		// Check if specialty care appointment request link should be displayed
+		// Check if Appointment Request link should be displayed
 		$appointment_request_query = get_field('location_appt_request_query');
 		$appointment_request_forms = get_field('location_appt_request_form');
 		// Check for valid forms
@@ -425,7 +425,7 @@ while ( have_posts() ) : the_post(); ?>
 			$show_appointment_request_section = false;
 		}
 
-		// Check if online appointment scheduling/request section should be displayed in the top section
+		// Check if appointment scheduling information should be displayed in the top section
 		if ( $show_mychart_scheduling_section || $show_appointment_request_section ) {
             $show_online_scheduling_section = true;
         } else {
