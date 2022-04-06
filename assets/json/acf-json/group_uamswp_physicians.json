@@ -705,7 +705,7 @@
             "key": "field_physician_pid",
             "name": "physician_pid",
             "type": "number",
-            "label": "Provider ID",
+            "label": "Provider / SER ID from Epic",
             "instructions": "This value can be found in Epic under \"9300-MPI ID TYPE.\"",
             "required": 1,
             "conditional_logic": 0,
