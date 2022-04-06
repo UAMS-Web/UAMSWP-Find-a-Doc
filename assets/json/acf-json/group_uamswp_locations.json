@@ -3325,7 +3325,20 @@
             "label": "<i class=\"dashicons-calendar-alt dashicons\"><\/i> Online Scheduling",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "0"
+                    },
+                    {
+                        "field": "field_location_appointments_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
