@@ -1659,7 +1659,7 @@
             "name": "physician_scheduling_query",
             "type": "true_false",
             "label": "Enable MyChart Scheduling?",
-            "instructions": "Check with Web Services and the MyChart team before doing anything here.",
+            "instructions": "Display a dropdown with links to MyChart open scheduling widgets. <br /><strong>Check with Web Services and the MyChart team before doing anything here.</strong>",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
