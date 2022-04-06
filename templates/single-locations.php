@@ -304,6 +304,8 @@ while ( have_posts() ) : the_post(); ?>
 	$location_url = get_field('location_url');
 
 	// Check if MyChart Open Scheduling section should be displayed
+	$location_ac_query = get_field('location_ac_query');
+	$location_appointments_query = get_field('location_appointments_query');
 	$mychart_scheduling_query_system = get_field('mychart_scheduling_query_system', 'option');
 	$mychart_scheduling_query = get_field('location_scheduling_query');
 	$mychart_scheduling_options = get_field('location_scheduling_options');
@@ -313,7 +315,7 @@ while ( have_posts() ) : the_post(); ?>
 	$mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
 	$mychart_scheduling_linksource = ( isset($mychart_scheduling_linksource) && !empty($mychart_scheduling_linksource) ) ? $mychart_scheduling_linksource : 'uamshealth.com';
 
-	if ( $mychart_scheduling_query_system && $mychart_scheduling_query && have_rows('location_scheduling_options') ) {
+	if ( $mychart_scheduling_query_system && $mychart_scheduling_query && have_rows('location_scheduling_options') && !$location_ac_query && $location_appointments_query ) {
 		$show_mychart_scheduling_section = true;
 	} else {
 		$show_mychart_scheduling_section = false;
@@ -324,7 +326,7 @@ while ( have_posts() ) : the_post(); ?>
 	$appointment_request_forms = get_field('location_appt_request_form');
 	// Check for valid forms
 	$appointment_request_form_valid = false;
-	if ( $appointment_request_query && $appointment_request_forms ) {
+	if ( $mychart_scheduling_query_system && $appointment_request_query && $appointment_request_forms && !$location_ac_query && $location_appointments_query ) {
 		foreach( $appointment_request_forms as $form ) {
 			$form_object = get_term_by( 'id', $form, 'appointment_request');
 			if ( $form_object ) {
