@@ -41,6 +41,27 @@
             },
             "default_value": "",
             "placeholder": ""
+        },
+        "field_appointment_request_order": {
+            "key": "field_appointment_request_order",
+            "label": "Display Order",
+            "name": "appointment_request_order",
+            "type": "number",
+            "instructions": "This number value will determine the order in which appointment request forms are displayed. Higher number values will be displayed first. When the order values are equal, they will be displayed in alphabetical order based on the title.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 0,
+            "max": "",
+            "step": 1
         }
     },
     "modified": false
