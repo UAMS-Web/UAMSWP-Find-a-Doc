@@ -630,11 +630,7 @@ while ( have_posts() ) : the_post();
                                     $l = 1;
                                     if( $locations && $location_valid ): ?>
                                     <div data-sectiontitle="Primary Location">
-                                        <?php if ($eligible_appt) { ?>
-                                            <h2 class="h5">Primary Appointment Location</h2>
-                                        <?php } else { ?>
-                                            <h2 class="h5">Primary Location</h2>
-                                        <?php } // endif ?>
+                                        <h2 class="h5">Primary Location</h2>
                                         <?php foreach( $locations as $location ):
                                                 if ( 2 > $l ){
                                                     if ( get_post_status ( $location ) == 'publish' ) {
