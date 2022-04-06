@@ -394,24 +394,6 @@ while ( have_posts() ) : the_post(); ?>
 		$location_scheduling_query = get_field('location_scheduling_query');
 		$location_scheduling_options = get_field('location_scheduling_options');
 
-			// Set main appointment scheduling section title
-			// $location_scheduling_title_default = 'Schedule an Appointment Online'; // Default value for appointment section title
-			// $location_scheduling_title_general = get_field('location_scheduling_title_general'); // Get input for general appointment section title
-			// $location_scheduling_title = ( isset($location_scheduling_title_general) && !empty($location_scheduling_title_general) ) ? $location_scheduling_title_general : $location_scheduling_title_default; // Set main title from general title input. If general title value is empty, set to default value.
-
-			// Set main appointment scheduling section intro
-			// $location_scheduling_intro_default = 'Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.'; // Default value for appointment section intro
-			// $location_scheduling_intro_general = get_field('location_scheduling_intro_general'); // Get input for general appointment section intro
-			// $location_scheduling_intro = ( isset($location_scheduling_intro_general) && !empty($location_scheduling_intro_general) ) ? $location_scheduling_intro_general : $location_scheduling_intro_default; // Set main intro from general intro input. If general intro value is empty, set to default value.
-			
-			// Change main appointment scheduling section title and intro if only one scheduling widget
-			// if ($location_scheduling_query && (count((array)$location_scheduling_options) < 2)) {
-			// 	$row = $location_scheduling_options[0];
-			// 	$location_scheduling_item_title_main = $row['location_scheduling_title']; // Get input for specific appointment section standalone title
-			// 	$location_scheduling_title = ( isset($location_scheduling_item_title_main) && !empty($location_scheduling_item_title_main) ) ? $location_scheduling_item_title_main : $location_scheduling_title; // If input for specific appointment section title exists, use that. Otherwise, keep original value.
-			// 	$location_scheduling_item_intro_main = $row['location_scheduling_intro']; // Get input for specific appointment section standalone intro
-			// 	$location_scheduling_intro = ( isset($location_scheduling_item_intro_main) && !empty($location_scheduling_item_intro_main) ) ? $location_scheduling_item_intro_main : $location_scheduling_intro; // If input for specific appointment section intro exists, use that. Otherwise, keep original value.
-			// }
 			
 			
 		$mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
