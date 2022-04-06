@@ -309,8 +309,9 @@ while ( have_posts() ) : the_post(); ?>
 	$mychart_scheduling_query_system = get_field('mychart_scheduling_query_system', 'option');
 	$mychart_scheduling_query = get_field('location_scheduling_query');
 	$mychart_scheduling_options = get_field('location_scheduling_options');
+	$mychart_scheduling_options_rows = have_rows('location_scheduling_options');
 
-	if ( $mychart_scheduling_query_system && $mychart_scheduling_query && have_rows('location_scheduling_options') && !$location_ac_query && $location_appointments_query ) {
+	if ( $mychart_scheduling_query_system && $mychart_scheduling_query && $mychart_scheduling_options_rows && !$location_ac_query && $location_appointments_query ) {
 		$show_mychart_scheduling_section = true;
 	} else {
 		$show_mychart_scheduling_section = false;
