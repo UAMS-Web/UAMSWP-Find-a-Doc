@@ -26,6 +26,25 @@
     "acfe_note": "",
     "acfe_meta": "",
     "fields": {
+        "field_mychart_visit_type_id": {
+            "key": "field_mychart_visit_type_id",
+            "label": "Visit Type \/ PRC ID from Epic",
+            "name": "mychart_visit_type_id",
+            "type": "text",
+            "instructions": "A single visit type available for scheduling in this specific widget. <br>Check the External Name field of the visit type record in Epic to ensure it is patient-friendly since it will be visible to users in the open scheduling widget.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
         "field_mychart_visit_type_heading": {
             "key": "field_mychart_visit_type_heading",
             "label": "Open Scheduling Widget Heading Text",
@@ -71,25 +90,6 @@
             "name": "mychart_visit_type_link_text",
             "type": "text",
             "instructions": "You can define a value here to replace the main section introduction (defined by <em>General MyChart Open Scheduling Widget Introduction</em>) if that general introduction does not adequately introduce this specific widget. <br>If used, this paragraph should provide general information about MyChart open scheduling and a brief overview of anything necessary for users to know about this specific scheduling widget. <br>There is a 221 character limit.",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        "field_mychart_visit_type_id": {
-            "key": "field_mychart_visit_type_id",
-            "label": "Visit Type \/ PRC ID from Epic",
-            "name": "mychart_visit_type_id",
-            "type": "text",
-            "instructions": "A single visit type available for scheduling in this specific widget. <br>Check the External Name field of the visit type record in Epic to ensure it is patient-friendly since it will be visible to users in the open scheduling widget.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
