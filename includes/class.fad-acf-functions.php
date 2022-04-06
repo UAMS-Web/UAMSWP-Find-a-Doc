@@ -888,3 +888,4 @@ function uamswp_mychart_scheduling_query($field) {
 }
 // Make sure to use correct field key for tab
 add_filter('acf/prepare_field/key=field_location_scheduling_tab', 'uamswp_mychart_scheduling_query', 20);
+add_filter('acf/prepare_field/key=field_physician_scheduling_tab', 'uamswp_mychart_scheduling_query', 20);
