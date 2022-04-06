@@ -1846,7 +1846,7 @@ while ( have_posts() ) : the_post(); ?>
 <?php
 // Create MyChart Open Scheduling Modals
 
-if( $show_mychart_scheduling_section ):
+if( $show_mychart_scheduling_section ) {
 	$mychart_scheduling_intro = 'Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.'; // Default value for appointment section intro
 	$mychart_scheduling_intro_override = get_field('location_scheduling_intro_general'); // Override at the location profile level
 	$mychart_scheduling_intro = ( isset($mychart_scheduling_intro_override) && !empty($mychart_scheduling_intro_override) ) ? $mychart_scheduling_intro_override : $mychart_scheduling_intro;
@@ -1919,7 +1919,7 @@ var EWC = new EmbeddedWidgetController({
 	'toggleBtnCollapseHelpText': 'Exit fullscreen',
 });
 </script>
-<?php endif; // have_rows ?>
+<?php } // endif $show_mychart_scheduling_section ?>
 </div>
 
 <?php // Schema Data ?>
