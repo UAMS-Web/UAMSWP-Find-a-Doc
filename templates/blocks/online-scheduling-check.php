@@ -21,9 +21,9 @@
     // Check if MyChart Open Scheduling section should be displayed
     if (
         $mychart_scheduling_query_system
-        && $mychart_scheduling_query
         && !$location_ac_query
         && $location_appointments_query
+        && $mychart_scheduling_query
         && $mychart_scheduling_options_rows
     ) {
 		$show_mychart_scheduling_section = true;
@@ -32,8 +32,14 @@
 	}
 
     // Check if link(s) to appointment request form(s) should be displayed
-    $appointment_request_form_valid = false;
-	if ( $mychart_scheduling_query_system && $appointment_request_query && $appointment_request_forms && !$location_ac_query && $location_appointments_query ) {
+    $appointment_request_form_valid = false;    
+	if (
+        $mychart_scheduling_query_system
+        && !$location_ac_query
+        && $location_appointments_query
+        && $appointment_request_query
+        && $appointment_request_forms
+    ) {
 		foreach( $appointment_request_forms as $form ) {
 			$form_object = get_term_by( 'id', $form, 'appointment_request');
 			if ( $form_object ) {
@@ -47,5 +53,4 @@
 	} else {
 		$show_appointment_request_section = false;
 	}
-
 ?>
