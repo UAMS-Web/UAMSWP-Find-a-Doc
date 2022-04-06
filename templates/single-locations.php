@@ -936,33 +936,7 @@ while ( have_posts() ) : the_post(); ?>
 								if ( $show_mychart_scheduling_section ) { ?>
 									<h2 class="h4"><?php echo $appointments_heading; ?></h2>
 									<p>Find a provider at this location to book an appointment online.</p>
-									<div class="btn-container">
-										<div class="inner-container">
-											<div class="dropdown">
-												<button class="btn btn-primary dropdown-toggle" type="button" id="mychart_scheduling_dropdown" data-toggle="dropdown" aria-expanded="false">Book an Appointment</button>
-												<div class="dropdown-menu" aria-labelledby="mychart_scheduling_dropdown">
-													<?php 
-													$i = 0;
-													// Loop through rows.
-													while( have_rows('location_scheduling_options') ) {
-														the_row();
-														// Load sub field value.
-														$visit_type = get_sub_field('location_scheduling_vt');
-														$visit_type_object = get_term_by( 'id', $visit_type, 'mychart_visit_type');
-
-														// Do something...
-														if ( $visit_type_object ) {
-															$visit_type_link_text = get_field('mychart_visit_type_link_text', $visit_type_object);
-															?>
-															<a class="dropdown-item" href="#" data-toggle="modal" data-target="#mychart-scheduling_<?php echo $i; ?>"><?php echo $visit_type_link_text; ?></a>
-														<?php }
-														$i++;
-
-													} // endwhile (have_rows) ?>
-												</div>
-											</div>
-										</div>
-									</div>
+									<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-appointment-link.php' ); ?>
 								<?php } // endif have_rows
 								// End MyChart Scheduling Links Section
 								// Begin link to specialized care appointment request
