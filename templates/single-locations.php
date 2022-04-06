@@ -303,6 +303,49 @@ while ( have_posts() ) : the_post(); ?>
 	$location_web_name = get_field('location_web_name');
 	$location_url = get_field('location_url');
 
+	// Check if MyChart Open Scheduling section should be displayed
+	$mychart_scheduling_query_system = get_field('mychart_scheduling_query_system', 'option');
+	$mychart_scheduling_query = get_field('location_scheduling_query');
+	$mychart_scheduling_options = get_field('location_scheduling_options');
+
+	$mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
+	$mychart_scheduling_instance = get_field('mychart_scheduling_instance', 'option');
+	$mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
+	$mychart_scheduling_linksource = ( isset($mychart_scheduling_linksource) && !empty($mychart_scheduling_linksource) ) ? $mychart_scheduling_linksource : 'uamshealth.com';
+
+	if ( $mychart_scheduling_query_system && $mychart_scheduling_query && have_rows('location_scheduling_options') ) {
+		$show_mychart_scheduling_section = true;
+	} else {
+		$show_mychart_scheduling_section = false;
+	}
+
+	// Check if Appointment Request link should be displayed
+	$appointment_request_query = get_field('location_appt_request_query');
+	$appointment_request_forms = get_field('location_appt_request_form');
+	// Check for valid forms
+	$appointment_request_form_valid = false;
+	if ( $appointment_request_query && $appointment_request_forms ) {
+		foreach( $appointment_request_forms as $form ) {
+			$form_object = get_term_by( 'id', $form, 'appointment_request');
+			if ( $form_object ) {
+				$appointment_request_form_valid = true;
+				$break;
+			}
+		}
+	}
+	if ( $appointment_request_form_valid ) {
+		$show_appointment_request_section = true;
+	} else {
+		$show_appointment_request_section = false;
+	}
+
+	// Check if appointment scheduling information should be displayed in the top section
+	if ( $show_mychart_scheduling_section || $show_appointment_request_section ) {
+		$show_online_scheduling_section = true;
+	} else {
+		$show_online_scheduling_section = false;
+	}
+
     // Set logic for displaying jump links and sections
     $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
     $jump_link_count = 0;
@@ -387,49 +430,6 @@ while ( have_posts() ) : the_post(); ?>
             $jump_link_count++;
         } else {
             $show_appointment_section = false;
-        }
-
-        // Check if MyChart Open Scheduling section should be displayed
-		$mychart_scheduling_query_system = get_field('mychart_scheduling_query_system', 'option');
-		$mychart_scheduling_query = get_field('location_scheduling_query');
-		$mychart_scheduling_options = get_field('location_scheduling_options');
-	
-		$mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
-		$mychart_scheduling_instance = get_field('mychart_scheduling_instance', 'option');
-		$mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
-		$mychart_scheduling_linksource = ( isset($mychart_scheduling_linksource) && !empty($mychart_scheduling_linksource) ) ? $mychart_scheduling_linksource : 'uamshealth.com';
-
-		if ( $mychart_scheduling_query_system && $mychart_scheduling_query && have_rows('location_scheduling_options') ) {
-            $show_mychart_scheduling_section = true;
-        } else {
-            $show_mychart_scheduling_section = false;
-        }
-
-		// Check if Appointment Request link should be displayed
-		$appointment_request_query = get_field('location_appt_request_query');
-		$appointment_request_forms = get_field('location_appt_request_form');
-		// Check for valid forms
-		$appointment_request_form_valid = false;
-		if ( $appointment_request_query && $appointment_request_forms ) {
-			foreach( $appointment_request_forms as $form ) {
-				$form_object = get_term_by( 'id', $form, 'appointment_request');
-				if ( $form_object ) {
-					$appointment_request_form_valid = true;
-					$break;
-				}
-			}
-		}
-		if ( $appointment_request_form_valid ) {
-			$show_appointment_request_section = true;
-		} else {
-			$show_appointment_request_section = false;
-		}
-
-		// Check if appointment scheduling information should be displayed in the top section
-		if ( $show_mychart_scheduling_section || $show_appointment_request_section ) {
-            $show_online_scheduling_section = true;
-        } else {
-            $show_online_scheduling_section = false;
         }
 
         // Check if Telemedicine Information section should be displayed
