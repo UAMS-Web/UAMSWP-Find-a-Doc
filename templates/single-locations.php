@@ -391,17 +391,15 @@ while ( have_posts() ) : the_post(); ?>
 
         // Check if Appointment Scheduling section should be displayed
 		$mychart_scheduling_query_system = get_field('mychart_scheduling_query_system', 'option');
-		$location_scheduling_query = get_field('location_scheduling_query');
-		$location_scheduling_options = get_field('location_scheduling_options');
-
-			
-			
+		$mychart_scheduling_query = get_field('location_scheduling_query');
+		$mychart_scheduling_options = get_field('location_scheduling_options');
+	
 		$mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
 		$mychart_scheduling_instance = get_field('mychart_scheduling_instance', 'option');
 		$mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
 		$mychart_scheduling_linksource = ( isset($mychart_scheduling_linksource) && !empty($mychart_scheduling_linksource) ) ? $mychart_scheduling_linksource : 'uamshealth.com';
 
-		if ( $mychart_scheduling_query_system && $location_scheduling_query && have_rows('location_scheduling_options') ) {
+		if ( $mychart_scheduling_query_system && $mychart_scheduling_query && have_rows('location_scheduling_options') ) {
             $show_mychart_scheduling_section = true;
         } else {
             $show_mychart_scheduling_section = false;
@@ -980,10 +978,7 @@ while ( have_posts() ) : the_post(); ?>
 
 														// Do something...
 														if ( $visit_type_object ) {
-															$visit_type_heading = get_field('mychart_visit_type_heading', $visit_type_object);
-															$visit_type_intro = get_field('mychart_visit_type_intro', $visit_type_object);
 															$visit_type_link_text = get_field('mychart_visit_type_link_text', $visit_type_object);
-															$visit_type_id = get_field('mychart_visit_type_id', $visit_type_object);
 															?>
 															<a class="dropdown-item" href="#" data-toggle="modal" data-target="#mychart-scheduling_<?php echo $i; ?>"><?php echo $visit_type_link_text; ?></a>
 														<?php }
@@ -1850,10 +1845,10 @@ while ( have_posts() ) : the_post(); ?>
 // Create MyChart Open Scheduling Modals
 
 if( $show_mychart_scheduling_section ):
-	$location_scheduling_intro_default = 'Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.'; // Default value for appointment section intro
-	$location_scheduling_intro_general = get_field('location_scheduling_intro_general'); // Get input for general appointment section intro
-	$location_scheduling_intro_general = ( isset($location_scheduling_intro_general) && !empty($location_scheduling_intro_general) ) ? $location_scheduling_intro_general : $location_scheduling_intro_default;
-	$location_dep_general = get_field('location_dep_general');
+	$mychart_scheduling_intro = 'Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.'; // Default value for appointment section intro
+	$mychart_scheduling_intro_override = get_field('location_scheduling_intro_general'); // Override at the location profile level
+	$mychart_scheduling_intro = ( isset($mychart_scheduling_intro_override) && !empty($mychart_scheduling_intro_override) ) ? $mychart_scheduling_intro_override : $mychart_scheduling_intro;
+	$mychart_scheduling_dep = get_field('location_dep_general');
 	$i = 0;
     // Loop through rows.
     while( have_rows('location_scheduling_options') ) {
@@ -1865,35 +1860,35 @@ if( $show_mychart_scheduling_section ):
 
 		// Do something...
 		if ( $visit_type_object ) {
-			$visit_type_heading = get_field('mychart_visit_type_heading', $visit_type_object);
+			$mychart_scheduling_title = get_field('mychart_visit_type_heading', $visit_type_object);
 			$visit_type_intro = get_field('mychart_visit_type_intro', $visit_type_object);
-			$visit_type_intro = ( isset($visit_type_intro) && !empty($visit_type_intro) ) ? $visit_type_intro : $location_scheduling_intro_general;
+			$mychart_scheduling_intro = ( isset($visit_type_intro) && !empty($visit_type_intro) ) ? $visit_type_intro : $mychart_scheduling_intro;
 			// $visit_type_link_text = get_field('mychart_visit_type_link_text', $visit_type_object);
-			$visit_type_id = get_field('mychart_visit_type_id', $visit_type_object);
-			$location_scheduling_ser = get_sub_field('location_scheduling_ser');
-			$location_scheduling_dep = get_sub_field('location_scheduling_dep');
-			$location_scheduling_dep = ( isset($location_scheduling_dep) && !empty($location_scheduling_dep) ) ? $location_scheduling_dep : $location_dep_general;
+			$mychart_scheduling_visit_type_id = get_field('mychart_visit_type_id', $visit_type_object);
+			$mychart_scheduling_ser = get_sub_field('location_scheduling_ser');
+			$mychart_scheduling_dep_override = get_sub_field('location_scheduling_dep'); // Override at the repeater level
+			$mychart_scheduling_dep = ( isset($mychart_scheduling_dep_override) && !empty($mychart_scheduling_dep_override) ) ? $mychart_scheduling_dep_override : $mychart_scheduling_dep;
 			$visit_type_fallback = get_field('mychart_visit_type_fallback', $visit_type_object);
-			$visit_type_fallback_override = get_sub_field('location_scheduling_fallback');
-			$visit_type_fallback = ( isset($visit_type_fallback_override) && !empty($visit_type_fallback_override) ) ? $visit_type_fallback_override : $visit_type_fallback;
+			$mychart_scheduling_fallback_override = get_sub_field('location_scheduling_fallback'); // Override at the repeater level
+			$mychart_scheduling_fallback = ( isset($mychart_scheduling_fallback_override) && !empty($mychart_scheduling_fallback_override) ) ? $mychart_scheduling_fallback_override : $visit_type_fallback;
 			?>
 			<div id="mychart-scheduling_<?php echo $i; ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mychart-scheduling_<?php echo $i; ?>_label" aria-modal="true">
 				<div class="modal-dialog modal-dialog-centered modal-dialog-mychart-scheduling" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h2 class="modal-title" id="mychart-scheduling_<?php echo $i; ?>_label"><?php echo $visit_type_heading; ?></h2>
+							<h2 class="modal-title" id="mychart-scheduling_<?php echo $i; ?>_label"><?php echo $mychart_scheduling_title; ?></h2>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
 						<div class="modal-body">
-							<?php if ( isset($visit_type_intro) && !empty($visit_type_intro)) {
-								echo '<p>' . $visit_type_intro . '</p>';
+							<?php if ( isset($mychart_scheduling_intro) && !empty($mychart_scheduling_intro)) {
+								echo '<p>' . $mychart_scheduling_intro . '</p>';
 							} ?>
 							<div id="scheduleContainer">
-								<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $visit_type_id; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
+								<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $mychart_scheduling_ser; ?>&dept=<?php echo $mychart_scheduling_dep; ?>&vt=<?php echo $mychart_scheduling_visit_type_id; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
 							</div>
-							<?php echo $visit_type_fallback; ?>
+							<?php echo $mychart_scheduling_fallback; ?>
 						</div>
 					</div>
 				</div>
