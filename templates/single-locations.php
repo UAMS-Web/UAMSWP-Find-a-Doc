@@ -1752,6 +1752,8 @@ while ( have_posts() ) : the_post(); ?>
 </main>
 <?php
 // Create MyChart Open Scheduling Modals
+$mychart_scheduling_intro_override = get_field('location_scheduling_intro_general'); // Override at the location profile level
+$mychart_scheduling_dep = get_field('location_dep_general');
 include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-modal.php' );
 ?>
 </div>
