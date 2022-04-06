@@ -391,7 +391,7 @@ while ( have_posts() ) : the_post();
 	$appointment_request_forms = get_field('physician_appt_request_form');
 	// Check for valid forms
 	$appointment_request_form_valid = false;
-	if ( $appointment_request_query && $appointment_request_forms ) {
+	if ( $mychart_scheduling_query_system && $appointment_request_query && $appointment_request_forms ) {
 		foreach( $appointment_request_forms as $form ) {
 			$form_object = get_term_by( 'id', $form, 'appointment_request');
 			if ( $form_object ) {
