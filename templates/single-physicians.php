@@ -534,7 +534,7 @@ while ( have_posts() ) : the_post();
                                 // Begin MyChart Scheduling Links Section
                                 if ($show_mychart_scheduling_section) { ?>
                                     <div class="col-lg">
-                                        <h2 class="h4"><?php echo $appointments_heading; ?></h2>
+                                        <h2 class="h5"><?php echo $appointments_heading; ?></h2>
                                         <p>Book an appointment with this provider online.</p>
                                         <div class="btn-container">
                                             <div class="inner-container">
@@ -565,7 +565,7 @@ while ( have_posts() ) : the_post();
                                 if ($show_appointment_request_section) {
                                     $appointment_request_form_count = count($appointment_request_forms);
 
-                                    $appointment_request_heading = 'Specialized Care';
+                                    $appointment_request_heading = 'Specialized Care Appointments';
                                     $appointment_request_heading_standalone = $appointments_heading;
                                     $appointment_request_intro = 'Some appointments for specialized care with this provider cannot be scheduled online. For those, submit a request for an appointment.';
                                     $appointment_request_intro_standalone = 'Appointments for specialized care with this provider cannot be scheduled online. However, you can submit a request for an appointment.';
