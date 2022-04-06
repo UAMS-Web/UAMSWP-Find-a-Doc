@@ -370,6 +370,49 @@ while ( have_posts() ) : the_post();
     ));
     $resource_query = new WP_Query( $args );
 
+    // Check if MyChart Open Scheduling section should be displayed
+	$mychart_scheduling_query_system = get_field('mychart_scheduling_query_system', 'option');
+	$mychart_scheduling_query = get_field('physician_scheduling_query');
+	$mychart_scheduling_visit_type = get_field('physician_scheduling_vt');
+
+	$mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
+	$mychart_scheduling_instance = get_field('mychart_scheduling_instance', 'option');
+	$mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
+	$mychart_scheduling_linksource = ( isset($mychart_scheduling_linksource) && !empty($mychart_scheduling_linksource) ) ? $mychart_scheduling_linksource : 'uamshealth.com';
+
+	if ( $mychart_scheduling_query_system && $mychart_scheduling_query && isset($mychart_scheduling_visit_type) && !empty($mychart_scheduling_visit_type) ) {
+		$show_mychart_scheduling_section = true;
+	} else {
+		$show_mychart_scheduling_section = false;
+	}
+
+	// Check if Appointment Request link should be displayed
+	$appointment_request_query = get_field('physician_appt_request_query');
+	$appointment_request_forms = get_field('physician_appt_request_form');
+	// Check for valid forms
+	$appointment_request_form_valid = false;
+	if ( $appointment_request_query && $appointment_request_forms ) {
+		foreach( $appointment_request_forms as $form ) {
+			$form_object = get_term_by( 'id', $form, 'appointment_request');
+			if ( $form_object ) {
+				$appointment_request_form_valid = true;
+				$break;
+			}
+		}
+	}
+	if ( $appointment_request_form_valid ) {
+		$show_appointment_request_section = true;
+	} else {
+		$show_appointment_request_section = false;
+	}
+
+	// Check if appointment scheduling information should be displayed in the top section
+	if ( $show_mychart_scheduling_section || $show_appointment_request_section ) {
+		$show_online_scheduling_section = true;
+	} else {
+		$show_online_scheduling_section = false;
+	}
+
     // Set logic for displaying jump links and sections
     $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
     $jump_link_count = 0;
@@ -484,14 +527,102 @@ while ( have_posts() ) : the_post();
                     </h1>
                     <div class="text-subsection">
 						<div class="row">
-							<div class="col-lg">
-                                Online Appointment Stuff
-                            </div>
-							<div class="col-lg">
-                                Other Potential Stuff
-                            </div>
-                        </div>
-                    </div>
+                            <?php // Begin Appointment Information
+							if ( $show_online_scheduling_section ) {
+								$appointments_heading = 'Appointments';
+
+                                // Begin MyChart Scheduling Links Section
+                                if ($show_mychart_scheduling_section) { ?>
+                                    <div class="col-lg">
+                                        <h2 class="h4"><?php echo $appointments_heading; ?></h2>
+                                        <p>Book an appointment with this provider online.</p>
+                                        <div class="btn-container">
+                                            <div class="inner-container">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-primary dropdown-toggle" type="button" id="mychart_scheduling_dropdown" data-toggle="dropdown" aria-expanded="false">Book an Appointment</button>
+                                                    <div class="dropdown-menu" aria-labelledby="mychart_scheduling_dropdown">
+                                                        <?php 
+                                                        $i = 0;
+                                                        // Loop through options.
+                                                        foreach($mychart_scheduling_visit_type as $visit_type) {
+                                                            $visit_type_object = get_term_by( 'id', $visit_type, 'mychart_visit_type');
+                                                            if ( $visit_type_object ) {
+                                                                $visit_type_link_text = get_field('mychart_visit_type_link_text', $visit_type_object);
+                                                                ?>
+                                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#mychart-scheduling_<?php echo $i; ?>"><?php echo $visit_type_link_text; ?></a>
+                                                            <?php }
+                                                            $i++;
+                                                        } // end foreach ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } // endif $show_mychart_scheduling_section
+                                // End MyChart Scheduling Links Section
+
+                                // Begin link to specialized care appointment request
+                                if ($show_appointment_request_section) {
+                                    $appointment_request_form_count = count($appointment_request_forms);
+
+                                    $appointment_request_heading = 'Specialized Care';
+                                    $appointment_request_heading_standalone = $appointments_heading;
+                                    $appointment_request_intro = 'Some appointments for specialized care with this provider cannot be scheduled online. For those, submit a request for an appointment.';
+                                    $appointment_request_intro_standalone = 'Appointments for specialized care with this provider cannot be scheduled online. However, you can submit a request for an appointment.';
+                                    $appointment_request_button_text = 'Request an Appointment';
+                                    ?>
+                                    <div class="col-lg">
+                                        <?php
+                                        if ( $show_mychart_scheduling_section ) {
+                                            echo '<h3 class="h5">' . $appointment_request_heading . '</h3>';
+                                            echo '<p>' . $appointment_request_intro . '</p>';
+                                        } else {
+                                            echo '<h2 class="h4">' . $appointment_request_heading_standalone . '</h2>';
+                                            echo '<p>' . $appointment_request_intro_standalone . '</p>';
+                                        }
+                                        ?>
+                                        <div class="btn-container">
+                                            <div class="inner-container">
+                                                <?php
+                                                if ( $appointment_request_form_count > 1 ) { ?>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="appt_request_form_dropdown" data-toggle="dropdown" aria-expanded="false"><?php echo $appointment_request_button_text; ?></button>
+                                                        <div class="dropdown-menu" aria-labelledby="appt_request_form_dropdown">
+                                                            <?php foreach( $appointment_request_forms as $form ) {
+                                                                $form_object = get_term_by( 'id', $form, 'appointment_request');
+                                                                if ( $form_object ) {
+                                                                    $form_object_name = $form_object->name;
+                                                                    $form_object_name_attr = str_replace('"', '\'', $form_object_name);
+                                                                    $form_object_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($form_object_name_attr, null, 'utf-8')));
+                                                                    $form_url = get_field('appointment_request_url', $form_object);
+                                                                    ?>
+                                                                    <a class="dropdown-item" href="<?php echo $form_url; ?>" target="_blank"><?php echo $form_object_name; ?></a>
+                                                                <?php }
+                                                            } ?>
+                                                        </div>
+                                                    </div>
+                                                <?php } else {
+                                                    foreach( $appointment_request_forms as $form ) {
+                                                        $form_object = get_term_by( 'id', $form, 'appointment_request');
+                                                        if ( $form_object ) {
+                                                            $form_object_name = $form_object->name;
+                                                            $form_object_name_attr = str_replace('"', '\'', $form_object_name);
+                                                            $form_object_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($form_object_name_attr, null, 'utf-8')));
+                                                            $form_url = get_field('appointment_request_url', $form_object);
+                                                            ?>
+                                                            <a class="btn btn-outline-primary" href="<?php echo $form_url; ?>" target="_blank" aria-label="<?php echo $appointment_request_button_text . ', ' . $form_object_name_attr; ?>"><?php echo $appointment_request_button_text; ?></a>
+                                                        <?php }
+                                                    }
+                                                } ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } // endif $show_appointment_request_section
+                                // End link to specialized care appointment request ?>
+							<?php } // endif $show_online_scheduling_section
+                            // End Appointment Information ?>
+                        </div><?php // end div.row ?>
+                    </div><?php // end div.text-subsection ?>
                     <div class="text-subsection">
 						<div class="row">
 							<div class="col-lg">
