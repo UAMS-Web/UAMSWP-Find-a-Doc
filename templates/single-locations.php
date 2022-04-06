@@ -304,39 +304,15 @@ while ( have_posts() ) : the_post(); ?>
 	$location_url = get_field('location_url');
 
 	// Check if MyChart Open Scheduling section should be displayed
-	$location_ac_query = get_field('location_ac_query');
-	$location_appointments_query = get_field('location_appointments_query');
-	$mychart_scheduling_query_system = get_field('mychart_scheduling_query_system', 'option');
 	$mychart_scheduling_query = get_field('location_scheduling_query');
-	$mychart_scheduling_options = get_field('location_scheduling_options');
-	$mychart_scheduling_options_rows = have_rows('location_scheduling_options');
-
-	if ( $mychart_scheduling_query_system && $mychart_scheduling_query && $mychart_scheduling_options_rows && !$location_ac_query && $location_appointments_query ) {
-		$show_mychart_scheduling_section = true;
-	} else {
-		$show_mychart_scheduling_section = false;
-	}
-
-	// Check if Appointment Request link should be displayed
 	$appointment_request_query = get_field('location_appt_request_query');
 	$appointment_request_forms = get_field('location_appt_request_form');
-	// Check for valid forms
-	$appointment_request_form_valid = false;
-	if ( $mychart_scheduling_query_system && $appointment_request_query && $appointment_request_forms && !$location_ac_query && $location_appointments_query ) {
-		foreach( $appointment_request_forms as $form ) {
-			$form_object = get_term_by( 'id', $form, 'appointment_request');
-			if ( $form_object ) {
-				$appointment_request_form_valid = true;
-				$break;
-			}
-		}
-	}
-	if ( $appointment_request_form_valid ) {
-		$show_appointment_request_section = true;
-	} else {
-		$show_appointment_request_section = false;
-	}
-
+	$location_ac_query = get_field('location_ac_query');
+	$location_appointments_query = get_field('location_appointments_query');
+	$mychart_scheduling_options = get_field('location_scheduling_options');
+	$mychart_scheduling_options_rows = have_rows('location_scheduling_options');
+	include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-check.php' );
+	
 	// Check if appointment scheduling information should be displayed in the top section
 	if ( $show_mychart_scheduling_section || $show_appointment_request_section ) {
 		$show_online_scheduling_section = true;
