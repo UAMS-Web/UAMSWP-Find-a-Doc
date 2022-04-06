@@ -12,8 +12,18 @@
      *      $mychart_scheduling_dep
      * 
      *  Optional vars from single provider template:
-     *      
+     *      $mychart_scheduling_visit_type
+     *      $mychart_scheduling_ser
      */
+
+// Check optional vars from single location template
+$mychart_scheduling_options = isset($mychart_scheduling_options) ? $mychart_scheduling_options : '';
+$mychart_scheduling_intro_override = isset($mychart_scheduling_intro_override) ? $mychart_scheduling_intro_override : '';
+$mychart_scheduling_dep = isset($mychart_scheduling_dep) ? $mychart_scheduling_dep : '';
+
+// Check optional vars from single provider template
+$mychart_scheduling_visit_type = isset($mychart_scheduling_visit_type) ? $mychart_scheduling_visit_type : '';
+$mychart_scheduling_ser = isset($mychart_scheduling_ser) ? $mychart_scheduling_ser : '';
 
 if( $show_mychart_scheduling_section ) {
     // Get system settings for constructing common parts of MyChart Open Scheduling iframe src value
@@ -26,14 +36,15 @@ if( $show_mychart_scheduling_section ) {
     $mychart_scheduling_intro = ( isset($mychart_scheduling_intro_override) && !empty($mychart_scheduling_intro_override) ) ? $mychart_scheduling_intro_override : $mychart_scheduling_intro;
     $i = 0;
     // Loop through repeater rows.
-    if ( $mychart_scheduling_options ) {
-        foreach( $mychart_scheduling_options as $option ) {
+    if ( $mychart_scheduling_options || $mychart_scheduling_visit_type) {
+        $options = $mychart_scheduling_options ?: $mychart_scheduling_visit_type;
+        foreach( $options as $option ) {
             // Load sub field value.
-            $visit_type = $option['location_scheduling_vt'];
+            $visit_type = $option['location_scheduling_vt'] ?: $option;
             $visit_type_object = get_term_by( 'id', $visit_type, 'mychart_visit_type');
-            $mychart_scheduling_ser = $option['location_scheduling_ser'];
-            $mychart_scheduling_dep_override = $option['location_scheduling_dep']; // Override at the repeater level
-            $mychart_scheduling_fallback_override = $option['location_scheduling_fallback']; // Override at the repeater level
+            $mychart_scheduling_ser = $option['location_scheduling_ser'] ?: $mychart_scheduling_ser;
+            $mychart_scheduling_dep_override = $option['location_scheduling_dep'] ?: ''; // Override at the repeater level
+            $mychart_scheduling_fallback_override = $option['location_scheduling_fallback'] ?: ''; // Override at the repeater level
 
             // Do something...
             if ( $visit_type_object ) {
