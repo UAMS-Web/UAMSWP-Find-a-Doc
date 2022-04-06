@@ -303,7 +303,7 @@ while ( have_posts() ) : the_post(); ?>
 	$location_web_name = get_field('location_web_name');
 	$location_url = get_field('location_url');
 
-	// Check if MyChart Open Scheduling section should be displayed
+	// Check if online scheduling sections should be displayed
 	$mychart_scheduling_query = get_field('location_scheduling_query');
 	$appointment_request_query = get_field('location_appt_request_query');
 	$appointment_request_forms = get_field('location_appt_request_form');
