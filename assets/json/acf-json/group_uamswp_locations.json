@@ -3599,7 +3599,7 @@
                     "name": "location_scheduling_dep",
                     "type": "text",
                     "label": "Override for Department / DEP ID(s) from Epic",
-                    "instructions": "Optional override for which Epic department ID(s) to use when generating this open scheduling widget. <br />The department(s) included here should still correspond to this physical location. <br />Separate multiple values with a comma (\",\"). <br />Check the External Name field of each department record in Epic to ensure it is patient-friendly and matches up with how this location is named since it will be visible to users in the open scheduling widget.",
+                    "instructions": "The open scheduling widget will be generated using the department ID(s) set for this location in general, or it can be overridden here. <br />The Epic department(s) whose ID(s) included here should still correspond to this physical location. <br />Separate multiple values with a comma (\",\"). <br />Check the External Name field of each department record in Epic to ensure it is patient-friendly and matches up with how this location is named since it will be visible to users in the open scheduling widget.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
