@@ -1706,6 +1706,58 @@
             },
             "multiple": 1
         },
+        "field_physician_appt_request_query": {
+            "key": "field_physician_appt_request_query",
+            "name": "physician_appt_request_query",
+            "type": "true_false",
+            "label": "Enable Linking to Appointment Request Forms?",
+            "instructions": "Display a link or dropdown to one or more online appointment request forms.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_physician_appt_request_form": {
+            "key": "field_physician_appt_request_form",
+            "name": "physician_appt_request_form",
+            "type": "taxonomy",
+			"label": "Appointment Request Form(s)",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_appt_request_query",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "appointment_request",
+            "field_type": "checkbox",
+            "allow_null": 0,
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 1
+        },
         "field_physician_academic_profile_tab": {
             "key": "field_physician_academic_profile_tab",
             "name": "",
