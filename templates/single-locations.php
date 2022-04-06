@@ -932,12 +932,11 @@ while ( have_posts() ) : the_post(); ?>
 							?>
 							<div class="col-lg">
 								<?php // Begin MyChart Scheduling Links Section
-								// Check rows exists.
 								if ( $show_mychart_scheduling_section ) { ?>
 									<h2 class="h4"><?php echo $appointments_heading; ?></h2>
 									<p>Find a provider at this location to book an appointment online.</p>
 									<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-appointment-link.php' ); ?>
-								<?php } // endif have_rows
+								<?php } // endif $show_mychart_scheduling_section
 								// End MyChart Scheduling Links Section
 								// Begin link to specialized care appointment request
 
