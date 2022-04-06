@@ -525,13 +525,12 @@ while ( have_posts() ) : the_post();
                             <span class="subtitle"><?php echo ($phys_title_name ? $phys_title_name : ''); ?></span>
                         <?php } ?>
                     </h1>
-                    <div class="text-subsection">
-						<div class="row">
-                            <?php // Begin Appointment Information
-							if ( $show_online_scheduling_section ) {
-								$appointments_heading = 'Appointments';
-
-                                // Begin MyChart Scheduling Links Section
+                    <?php // Begin Appointment Information
+                    if ( $show_online_scheduling_section ) {
+                        $appointments_heading = 'Appointments'; ?>
+                        <div class="text-subsection">
+                            <div class="row">
+                                <?php // Begin MyChart Scheduling Links Section
                                 if ($show_mychart_scheduling_section) { ?>
                                     <div class="col-lg">
                                         <h2 class="h5"><?php echo $appointments_heading; ?></h2>
@@ -619,10 +618,10 @@ while ( have_posts() ) : the_post();
                                     </div>
                                 <?php } // endif $show_appointment_request_section
                                 // End link to specialized care appointment request ?>
-							<?php } // endif $show_online_scheduling_section
-                            // End Appointment Information ?>
-                        </div><?php // end div.row ?>
-                    </div><?php // end div.text-subsection ?>
+                            </div><?php // end div.row ?>
+                        </div><?php // end div.text-subsection ?>
+                    <?php } // endif $show_online_scheduling_section
+                    // End Appointment Information ?>
                     <div class="text-subsection">
 						<div class="row">
 							<div class="col-lg">
