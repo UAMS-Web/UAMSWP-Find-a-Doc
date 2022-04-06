@@ -310,11 +310,6 @@ while ( have_posts() ) : the_post(); ?>
 	$mychart_scheduling_query = get_field('location_scheduling_query');
 	$mychart_scheduling_options = get_field('location_scheduling_options');
 
-	$mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
-	$mychart_scheduling_instance = get_field('mychart_scheduling_instance', 'option');
-	$mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
-	$mychart_scheduling_linksource = ( isset($mychart_scheduling_linksource) && !empty($mychart_scheduling_linksource) ) ? $mychart_scheduling_linksource : 'uamshealth.com';
-
 	if ( $mychart_scheduling_query_system && $mychart_scheduling_query && have_rows('location_scheduling_options') && !$location_ac_query && $location_appointments_query ) {
 		$show_mychart_scheduling_section = true;
 	} else {
@@ -1847,6 +1842,13 @@ while ( have_posts() ) : the_post(); ?>
 // Create MyChart Open Scheduling Modals
 
 if( $show_mychart_scheduling_section ) {
+
+    // Get system settings for constructing common parts of MyChart Open Scheduling iframe src value
+	$mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
+	$mychart_scheduling_instance = get_field('mychart_scheduling_instance', 'option');
+	$mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
+	$mychart_scheduling_linksource = ( isset($mychart_scheduling_linksource) && !empty($mychart_scheduling_linksource) ) ? $mychart_scheduling_linksource : 'uamshealth.com';
+
 	$mychart_scheduling_intro = 'Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.'; // Default value for appointment section intro
 	$mychart_scheduling_intro_override = get_field('location_scheduling_intro_general'); // Override at the location profile level
 	$mychart_scheduling_intro = ( isset($mychart_scheduling_intro_override) && !empty($mychart_scheduling_intro_override) ) ? $mychart_scheduling_intro_override : $mychart_scheduling_intro;
