@@ -56,8 +56,9 @@ function fwp_facet_scripts() {
                 document.addEventListener('facetwp-loaded', function() {
                     $('.facetwp-facet').each(function() {
                         var facet_name = $(this).attr('data-name');
+                        var facet_type = $(this).attr('data-type');
                         var facet_label = FWP.settings.labels[facet_name];
-                        if ($('.facet-label[data-for="' + facet_name + '"]').length < 1) {
+                        if ( ($('.facet-label[data-for="' + facet_name + '"]').length < 1) && ("sort" != facet_type) ) {
                             $(this).before('<h3 class="facet-label h6" id="facet_' + facet_name + '" data-for="' + facet_name + '">' + facet_label + '</h3>');
                         }
                     });
@@ -67,9 +68,10 @@ function fwp_facet_scripts() {
                     $('.facetwp-sort-select, .facetwp-dropdown').each(function() {
                         $(this).attr('aria-labelledby', "facet_" + $(this).closest('.facetwp-facet').attr('data-name') );
                     });
-                    $('select.facetwp-sort-select').each(function() {
+                    $('.facetwp-type-sort select').each(function() {
+                        $(this).attr('aria-label', $(this).children('option').first().text() );
                         $(this).attr('title', "Choose sort order" );
-                        $(this).removeAttr('aria-labelledby');
+                        // $(this).removeAttr('aria-labelledby');
                     });
                 });
             })(jQuery);
@@ -276,119 +278,6 @@ add_filter( 'facetwp_preload_url_vars', function( $url_vars ) {
 
     return $url_vars;
 } );
-
-// FacetWP Sort
-add_filter( 'facetwp_sort_options', function( $options, $params ) {
-	if ( is_post_type_archive( 'provider' ) || is_singular( 'provider' ) ) {
-		$params = array(
-		    'template_name' => 'physicians',
-		);
-        $options = [
-            'default' => [
-                'label' => __( 'Sort by', 'fwp' ),
-                'query_args' => []
-            ],
-            'title_asc' => [
-                'label' => __( 'Name (A-Z)', 'fwp' ),
-                'query_args' => [
-                    'orderby' => 'title',
-                    'order' => 'ASC',
-                ]
-            ],
-            'title_desc' => [
-                'label' => __( 'Name (Z-A)', 'fwp' ),
-                'query_args' => [
-                    'orderby' => 'title',
-                    'order' => 'DESC',
-                ]
-            ]
-        ];
-        unset( $options['date_desc'] );
-        unset( $options['date_asc'] );
-	} elseif ( is_post_type_archive( 'location' ) || is_singular( 'location' ) ) {
-	 	$params = array(
-		    'template_name' => 'locations',
-		);
-        $options = [
-            'default' => [
-                'label' => __( 'Sort by', 'fwp' ),
-                'query_args' => []
-            ],
-            'title_asc' => [
-                'label' => __( 'Name (A-Z)', 'fwp' ),
-                'query_args' => [
-                    'orderby' => 'title',
-                    'order' => 'ASC',
-                ]
-            ],
-            'title_desc' => [
-                'label' => __( 'Name (Z-A)', 'fwp' ),
-                'query_args' => [
-                    'orderby' => 'title',
-                    'order' => 'DESC',
-                ]
-            ]
-        ];
-        unset( $options['date_desc'] );
-        unset( $options['date_asc'] );
-	} elseif ( is_post_type_archive( 'clinical-resource' ) || is_singular( 'clinical-resource' ) ) {
-        $params = array(
-           'template_name' => 'clinical-resources',
-        );
-        $options = [
-            'default' => [
-                'label' => __( 'Sort by', 'fwp' ),
-                'query_args' => []
-            ],
-            'date_desc' => [
-                'label' => __( 'Date Added (Newest)', 'fwp' ),
-                'query_args' => [
-                    'orderby' => 'date',
-                    'order' => 'DESC',
-                ]
-            ],
-            'date_asc' => [
-                'label' => __( 'Date Added (Oldest)', 'fwp' ),
-                'query_args' => [
-                    'orderby' => 'date',
-                    'order' => 'ASC',
-                ]
-            ],
-            'modified_desc' => [
-                'label' => __( 'Date Modified (Newest)', 'fwp' ),
-                'query_args' => [
-                    'orderby' => 'modified',
-                    'order' => 'DESC',
-                ]
-            ],
-            'modified_asc' => [
-                'label' => __( 'Date Modified (Oldest)', 'fwp' ),
-                'query_args' => [
-                    'orderby' => 'modified',
-                    'order' => 'ASC',
-                ]
-            ],
-            'title_asc' => [
-                'label' => __( 'Title (A-Z)', 'fwp' ),
-                'query_args' => [
-                    'orderby' => 'title',
-                    'order' => 'ASC',
-                ]
-            ],
-            'title_desc' => [
-                'label' => __( 'Title (Z-A)', 'fwp' ),
-                'query_args' => [
-                    'orderby' => 'title',
-                    'order' => 'DESC',
-                ]
-            ]
-        ];
-   }
-    //);
-    // unset( $options['date_desc'] );
-    // unset( $options['date_asc'] );
-    return $options;
-}, 10, 2 );
 
 add_filter( 'facetwp_pager_html', function( $output, $params ) {
     $output = '';
