@@ -122,6 +122,27 @@
             "toolbar": "basic",
             "media_upload": 0,
             "delay": 0
+        },
+        "field_mychart_visit_type_order": {
+            "key": "field_mychart_visit_type_order",
+            "label": "Display Order",
+            "name": "mychart_visit_type_order",
+            "type": "number",
+            "instructions": "This number value will determine the order in which visit types are displayed. Higher number values will be displayed first. When the order values are equal, they will be displayed in alphabetical order based on the <em>Open Scheduling Widget Link Text</em> value.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 0,
+            "max": "",
+            "step": 1
         }
     },
     "modified": false
