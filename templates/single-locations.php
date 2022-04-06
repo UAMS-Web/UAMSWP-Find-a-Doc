@@ -1891,7 +1891,9 @@ if( $show_mychart_scheduling_section ):
 			$location_scheduling_ser = get_sub_field('location_scheduling_ser');
 			$location_scheduling_dep = get_sub_field('location_scheduling_dep');
 			$location_scheduling_dep = ( isset($location_scheduling_dep) && !empty($location_scheduling_dep) ) ? $location_scheduling_dep : $location_dep_general;
-			$location_scheduling_fallback = get_sub_field('location_scheduling_fallback');
+			$visit_type_fallback = get_field('mychart_visit_type_fallback', $visit_type_object);
+			$visit_type_fallback_override = get_sub_field('location_scheduling_fallback');
+			$visit_type_fallback = ( isset($visit_type_fallback_override) && !empty($visit_type_fallback_override) ) ? $visit_type_fallback_override : $visit_type_fallback;
 			?>
 			<div id="mychart-scheduling_<?php echo $i; ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mychart-scheduling_<?php echo $i; ?>_label" aria-modal="true">
 				<div class="modal-dialog modal-dialog-centered modal-dialog-mychart-scheduling" role="document">
@@ -1909,7 +1911,7 @@ if( $show_mychart_scheduling_section ):
 							<div id="scheduleContainer">
 								<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $visit_type_id; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
 							</div>
-							<?php echo $location_scheduling_fallback; ?>
+							<?php echo $visit_type_fallback; ?>
 						</div>
 					</div>
 				</div>

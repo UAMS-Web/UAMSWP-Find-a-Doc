@@ -3634,10 +3634,10 @@
                 },
                 {
                     "key": "field_location_scheduling_fallback",
-                    "label": "Fallback Information",
+                    "label": "Override for Fallback Information",
                     "name": "location_scheduling_fallback",
                     "type": "wysiwyg",
-                    "instructions": "This is an optional paragraph that appears after this specific scheduling widget where you can present users an alternative scheduling options. Keep it as brief as possible, limiting it to one to three sentences in a single paragraph. Add tel links to any phone numbers (href=\"tel:501-555-6162\"). <br /> Example Paragraph: \"If you are unable to register for your appointment using the method above, call 501-555-6162 to schedule an appointment. This line is staffed Monday thru Friday from 10 a.m. – 5:30 p.m. If the lines are busy, you will be prompted to leave a voicemail.\"",
+                    "instructions": "The selected visit type may already have fallback information related to it, but it can be overriden here. <br />This optional paragraph appears after this visit type's scheduling widget where you can present users an alternative scheduling options. Keep it as brief as possible, limiting it to one to three sentences in a single paragraph. Add tel links to any phone numbers (href=\"tel:501-555-6162\"). <br /> Example Paragraph: \"If you are unable to register for your appointment using the method above, call 501-555-6162 to schedule an appointment. This line is staffed Monday thru Friday from 10 a.m. – 5:30 p.m. If the lines are busy, you will be prompted to leave a voicemail.\"",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
