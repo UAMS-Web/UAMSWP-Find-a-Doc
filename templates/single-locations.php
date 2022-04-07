@@ -29,6 +29,7 @@ if ($parent_location) {
 	$post_id = $parent_location->ID;
 	$parent_title = $parent_location->post_title;
 	$parent_url = get_permalink( $post_id );
+	$parent_slug = $parent_location->post_name;
 } else {
 	$post_id = get_the_ID();
 }
@@ -957,7 +958,8 @@ while ( have_posts() ) : the_post(); ?>
 									}
 
 									$appointment_request_utm_medium_val = 'single-location';
-									$appointment_request_utm_content_val = $page_slug;
+									$appointment_request_utm_content_val = $parent_slug ? $parent_slug . '_' . $page_slug : $page_slug;
+									echo '<p>$appointment_request_utm_content_val = ' . $appointment_request_utm_content_val . '</p>';
 									include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-request.php' );
 								}
 								// End link to specialized care appointment request ?>
