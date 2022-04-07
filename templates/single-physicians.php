@@ -90,7 +90,7 @@ if ( substr($short_name, -1) == 's' ) { // If the provider's name ends in "s"...
     $short_name_possessive = $short_name . '\'s'; // Use an apostrophe with an "s" when indicating the possessive form
 }
 $bio = get_field('physician_clinical_bio',$post->ID);
-$eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$post->ID);
+$eligible_appointments = $resident ? 0 : get_field('physician_eligible_appointments',$post->ID);
 // Check for valid locations
 $locations = get_field('physician_locations',$post->ID);
 $location_valid = false;
@@ -231,8 +231,8 @@ while ( have_posts() ) : the_post();
     $expertises =  get_field('physician_expertise');
     $second_opinion = get_field('physician_second_opinion');
     $patients = get_field('physician_patient_types');
-    $refer_req = get_field('physician_referral_required');
-    $accept_new = get_field('physician_accepting_patients');
+    $referral_required = get_field('physician_referral_required');
+    $accepting_patients = get_field('physician_accepting_patients');
     $physician_portal = get_field('physician_portal');
     $physician_clinical_bio = get_field('physician_clinical_bio');
     // $physician_youtube_link = get_field('physician_youtube_link');
@@ -375,6 +375,7 @@ while ( have_posts() ) : the_post();
 
 	// Check if online scheduling sections should be displayed
     $online_scheduling_template = 'single-provider';
+	$online_appointments_query = $eligible_appointments && $accepting_patients && !$referral_required;
     $mychart_scheduling_query = get_field('physician_scheduling_query');
 	$appointment_request_query = get_field('physician_appt_request_query');
 	$appointment_request_forms = get_field('physician_appt_request_form');
@@ -398,7 +399,7 @@ while ( have_posts() ) : the_post();
     $jump_link_count = 0;
 
         // Check if Make an Appointment section should be displayed
-        if ( $eligible_appt ) {
+        if ( $eligible_appointments ) {
             $show_appointment_section = true;
             $jump_link_count++;
         } else {
@@ -678,12 +679,12 @@ while ( have_posts() ) : the_post();
                                     <?php }
                                 } ?>
                                 <?php // Display if they accept new patients
-                                if ( $eligible_appt ) { ?>
+                                if ( $eligible_appointments ) { ?>
                                     <dt>Accepting New Patients</dt>
                                     <?php 
-                                    if ($accept_new) {
+                                    if ($accepting_patients) {
                                         // Display if they require referrals for new patients
-                                        if ( $refer_req ) { ?>
+                                        if ( $referral_required ) { ?>
                                             <dd>Yes (Referral Required)</dd>
                                         <?php } else { ?>
                                             <dd>Yes</dd>

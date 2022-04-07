@@ -311,7 +311,7 @@ while ( have_posts() ) : the_post(); ?>
 	$appointment_request_query = get_field('location_appt_request_query');
 	$appointment_request_forms = get_field('location_appt_request_form');
 	$location_ac_query = get_field('location_ac_query');
-	$location_appointments_query = get_field('location_appointments_query');
+	$online_appointments_query = get_field('location_appointments_query');
 	$mychart_scheduling_options = get_field('location_scheduling_options');
 	$mychart_scheduling_options_rows = have_rows('location_scheduling_options');
 	// $mychart_scheduling_visit_type = '';

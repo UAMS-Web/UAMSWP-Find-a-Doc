@@ -1645,7 +1645,25 @@
             "label": "<i class=\"dashicons-calendar-alt dashicons\"><\/i> Online Scheduling",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_physician_eligible_appointments",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_physician_accepting_patients",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_physician_referral_required",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",

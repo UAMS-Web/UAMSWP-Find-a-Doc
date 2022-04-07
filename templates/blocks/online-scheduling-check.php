@@ -4,6 +4,7 @@
      *  Designed for UAMS Find-a-Doc
      * 
      *  Required vars:
+     *      $online_appointments_query
      *      $mychart_scheduling_query
      *      $appointment_request_query
      *      $appointment_request_forms
@@ -15,7 +16,6 @@
      * 
      *  Optional vars from single location template:
      *      $location_ac_query
-     *      $location_appointments_query
      *      $mychart_scheduling_options
      *      $mychart_scheduling_options_rows
      * 
@@ -25,13 +25,12 @@
 
     // Check optional vars from single location template
     $location_ac_query = isset($location_ac_query) ? $location_ac_query : '';
-    $location_appointments_query = isset($location_appointments_query) ? $location_appointments_query : '';
     $mychart_scheduling_options = isset($mychart_scheduling_options) ? $mychart_scheduling_options : '';
     $mychart_scheduling_options_rows = isset($mychart_scheduling_options_rows) ? $mychart_scheduling_options_rows : '';
 
     // Check optional vars from single provider template
     $mychart_scheduling_visit_type = isset($mychart_scheduling_visit_type) ? $mychart_scheduling_visit_type : '';
-    
+
     // Get system setting for whether MyChart Open Scheduling is enabled
     $mychart_scheduling_query_system = get_field('mychart_scheduling_query_system', 'option');
 
@@ -39,12 +38,12 @@
     if (
         $mychart_scheduling_query_system
         && $mychart_scheduling_query
+        && $online_appointments_query
         && (
             // Location-specific check
             (
                 $online_scheduling_template == 'single-location'
                 && !$location_ac_query
-                && $location_appointments_query
                 && $mychart_scheduling_options_rows
             )
             ||
@@ -68,12 +67,12 @@
         $mychart_scheduling_query_system
         && $appointment_request_query
         && $appointment_request_forms
+        && $online_appointments_query
         && (
             // Location-specific check
             (
                 $online_scheduling_template == 'single-location'
                 && !$location_ac_query
-                && $location_appointments_query
             )
             ||
             // Provider-specific check
