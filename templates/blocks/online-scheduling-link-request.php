@@ -39,7 +39,7 @@
     if ($appointment_request_utm_source_val) { // If value exists for URL parameter
         $appointment_request_utm_arr[] = 'utm_source=' . $appointment_request_utm_source_val; // Add URL parameter to UTM construction array
     }
-    $appointment_request_utm_medium_val = isset($appointment_request_utm_medium) ? $appointment_request_utm_medium : ''; // Verify value exists for utm_medium URL parameter
+    $appointment_request_utm_medium_val = isset($appointment_request_utm_medium_val) ? $appointment_request_utm_medium_val : ''; // Verify value exists for utm_medium URL parameter
     if ($appointment_request_utm_medium_val) { // If value exists for URL parameter
         $appointment_request_utm_arr[] = 'utm_medium=' . $appointment_request_utm_medium_val; // Add URL parameter to UTM construction array
     }
@@ -47,7 +47,7 @@
     if ($appointment_request_utm_campaign_val) { // If value exists for URL parameter
         $appointment_request_utm_arr[] = 'utm_campaign=' . $appointment_request_utm_campaign_val; // Add URL parameter to UTM construction array
     }
-    $appointment_request_utm_content_val = isset($appointment_request_utm_content) ? $appointment_request_utm_content : ''; // Verify value exists for utm_content URL parameter
+    $appointment_request_utm_content_val = isset($appointment_request_utm_content_val) ? $appointment_request_utm_content_val : ''; // Verify value exists for utm_content URL parameter
     if ($appointment_request_utm_content_val) { // If value exists for URL parameter
         $appointment_request_utm_arr[] = 'utm_content=' . $appointment_request_utm_content_val; // Add URL parameter to UTM construction array
     }
