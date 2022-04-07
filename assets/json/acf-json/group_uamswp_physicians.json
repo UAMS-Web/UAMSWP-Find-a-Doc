@@ -49,7 +49,7 @@
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -68,7 +68,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "15",
                 "class": "",
                 "id": ""
             },
@@ -87,7 +87,7 @@
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -100,35 +100,17 @@
         "field_physician_pedigree": {
             "key": "field_physician_pedigree",
             "name": "physician_pedigree",
-            "type": "select",
-            "label": "Generational Suffix",
+            "type": "text",
+            "label": "Suffix",
             "instructions": "Example: Jr., Sr., III",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "10",
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "Jr.": "Jr.",
-                "Sr.": "Sr.",
-                "II": "II",
-                "III": "III",
-                "IV": "IV",
-                "V": "V",
-                "VI": "VI",
-                "VII": "VII",
-                "VIII": "VIII",
-                "IX": "IX",
-                "X": "X"
-            },
-            "default_value": [],
-            "allow_null": 1,
-            "multiple": 0,
-            "ui": 1,
-            "ajax": 0,
-            "return_format": "value",
+            "default_value": "",
             "placeholder": "",
             "prepend": "",
             "append": "",
@@ -143,7 +125,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -173,7 +155,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -203,7 +185,7 @@
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "40",
                 "class": "",
                 "id": ""
             },

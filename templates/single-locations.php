@@ -11,8 +11,6 @@ if (empty($excerpt)){
     }
 }
 $page_title = get_the_title( );
-$page_title_attr = str_replace('"', '\'', $page_title);
-$page_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($page_title_attr, null, 'utf-8')));
 
 
 // Parent Location 
@@ -249,7 +247,6 @@ $args = (array(
 ));
 $resource_query = new WP_Query( $args );
 
-// Override theme's method of defining the meta description
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
@@ -258,25 +255,12 @@ function sp_titles_desc($html) {
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
 // Override theme's method of defining the page title
-$location_city = get_field('location_city', $post_id);
 function uamswp_fad_title($html) { 
-    global $page_title_attr;
-	global $location_city;
-    //you can add here all your conditions as if is_page(), is_category() etc.. 
-    $meta_title_chars_max = 60;
-    $meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
-    $meta_title_base_chars = strlen( $meta_title_base );
-    $meta_title_enhanced_addition = ' | ' . $location_city;
-    $meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
-    $meta_title_enhanced_chars = strlen( $meta_title_enhanced );
-    if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
-        $html = $meta_title_enhanced;
-    } else {
-        $html = $meta_title_base;
-    }
-    return $html;
+	//you can add here all your conditions as if is_page(), is_category() etc.. 
+	$html = get_the_title() . ' | ' . get_bloginfo( "name" );
+	return $html;
 }
-add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 get_header();
 
@@ -318,11 +302,6 @@ while ( have_posts() ) : the_post(); ?>
 	$location_zip = get_field('location_zip', $post_id);
 	$location_web_name = get_field('location_web_name');
 	$location_url = get_field('location_url');
-
-	// Check if the word "the" should be prepended to the location name
-	$location_portal = get_field('location_prepend_the');
-	$page_title_prepend = $location_portal ? 'the ' : '';
-	$page_title_phrase = $page_title_prepend . $page_title;
 
     // Set logic for displaying jump links and sections
     $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
@@ -367,7 +346,7 @@ while ( have_posts() ) : the_post(); ?>
             $show_about_section = true;
             $jump_link_count++;
 			if ( $location_about || $location_youtube_link || ( !$location_about && $location_affiliation && $prescription ) ) {
-				$about_section_title = 'About ' . $page_title_phrase;
+				$about_section_title = 'About ' . $page_title;
 				$about_section_title_short = 'About';
 
 				if ($location_affiliation || $prescription) {
@@ -503,7 +482,7 @@ while ( have_posts() ) : the_post(); ?>
 
         // Check if Conditions section should be displayed
 		// load all 'conditions' terms for the post
-		$title_append = ' at ' . $page_title_phrase;
+		$title_append = ' at ' . $page_title;
 		$conditions_cpt = get_field('location_conditions_cpt');
 		$condition_schema = '';
 		// Conditions CPT
@@ -651,9 +630,9 @@ while ( have_posts() ) : the_post(); ?>
 					<?php echo $location_city; ?>, <?php echo $location_state; ?> <?php echo $location_zip; ?></p>
 						<div class="btn-container">
 							<div class="inner-container">
-								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title_phrase; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>
+								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>
 								<?php if ($show_parking_section) { ?>
-									<a class="btn btn-outline-primary" href="#parking-info" aria-label="Parking instructions for <?php echo $page_title_phrase; ?>" data-typetitle="Parking instructions for the clinic">Parking Instructions</a>
+									<a class="btn btn-outline-primary" href="#parking-info" aria-label="Parking instructions for <?php echo $page_title; ?>" data-typetitle="Parking instructions for the clinic">Parking Instructions</a>
 								<?php } // endif $show_parking_section ?>
 								
 							</div>
@@ -793,7 +772,7 @@ while ( have_posts() ) : the_post(); ?>
 														"closes": "00:00"
 														';
 													} else {
-														$modified_text .= ( ( $modified_time['location_modified_hours_open'] && '00:00:00' != $modified_time['location_modified_hours_open'] )  ? '' . ap_time_span( strtotime($modified_time['location_modified_hours_open']), strtotime($modified_time['location_modified_hours_close']) ). '' : '' );
+														$modified_text .= ( ( $modified_time['location_modified_hours_open'] && '00:00:00' != $modified_time['location_modified_hours_open'] )  ? '' . apStyleDate( $modified_time['location_modified_hours_open'] ) . ' &ndash; ' . apStyleDate( $modified_time['location_modified_hours_close'] ) . '' : '' );
 														$modified_hours_schema .= '"opens": "' . date('H:i', strtotime($modified_time['location_modified_hours_open'])) . '"';
 														$modified_hours_schema .= ',
 														"closes": "' . date('H:i', strtotime($modified_time['location_modified_hours_close'])) . '"
@@ -867,7 +846,7 @@ while ( have_posts() ) : the_post(); ?>
 											if ( $hour['closed'] ) {
 												$hours_text .= 'Closed ';
 											} else {
-												$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] )  ? '' . ap_time_span( strtotime($hour['open']), strtotime($hour['close']) ) . '' : '' );
+												$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] )  ? '' . apStyleDate( $hour['open'] ) . ' &ndash; ' . apStyleDate( $hour['close'] ) . '' : '' );
 												$hours_schema .= ' ' . date('H:i', strtotime($hour['open'])) . '-' . date('H:i', strtotime($hour['close']));
 											}
 											if ( $hour['comment'] ) {
@@ -927,7 +906,7 @@ while ( have_posts() ) : the_post(); ?>
 										if ( $row['closed'] ) {
 											echo $row['closed'] ? 'Closed</dd>': '';
 										} else {
-											echo ( ( $hour['open'] && '00:00:00' != $row['open'] )  ? '' . ap_time_span( strtotime($row['open']), strtotime($row['close']) ) . ' ' : '' );
+											echo ( ( $hour['open'] && '00:00:00' != $row['open'] )  ? '' . apStyleDate( $row['open'] ) . ' &ndash; ' . apStyleDate( $row['close'] ) . ' ' : '' );
 										}
 									}	
 								endforeach;
@@ -1252,7 +1231,7 @@ while ( have_posts() ) : the_post(); ?>
 								/* [lat, lon, fillColor, strokeColor, labelClass, iconText, popupText] */
 								var markers = [
 									// example [ 34.74376029995541, -92.31828863640054, "00F","000","white","A","I am a blue icon." ],
-									[ <?php echo $map['lat']; ?>, <?php echo $map['lng'] ?>, "9d2235","222", "transparentwhite", '1', 'Clinic<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title_phrase; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>' ],
+									[ <?php echo $map['lat']; ?>, <?php echo $map['lng'] ?>, "9d2235","222", "transparentwhite", '1', 'Clinic<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>' ],
 									[ <?php echo $parking_map['lat']; ?>, <?php echo $parking_map['lng'] ?>, "9d2235","222", "transparentwhite", '2', 'Parking<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area" data-typetitle="Get directions to the parking area">Get Directions</a>' ]
 								]
 								//Loop through the markers array
@@ -1279,7 +1258,7 @@ while ( have_posts() ) : the_post(); ?>
 							</script>
 							<div class="map-legend bg-info" aria-label="Legend for map">
 								<ol data-categorytitle="Directions">
-									<li>Clinic (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title_phrase; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>)</li>
+									<li>Clinic (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>)</li>
 									<li>Parking (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area" data-typetitle="Get directions to the parking area">Get Directions</a>)</li>
 								</ol>
 							</div>
@@ -1514,7 +1493,7 @@ while ( have_posts() ) : the_post(); ?>
 														if ( $telemed_modified_time['location_telemed_modified_hours_closed'] ) {
 															$telemed_modified_text .= 'Closed ';
 														} else {
-															$telemed_modified_text .= ( ( $telemed_modified_time['location_telemed_modified_hours_open'] && '00:00:00' != $telemed_modified_time['location_telemed_modified_hours_open'] )  ? '' . ap_time_span( strtotime($telemed_modified_time['location_telemed_modified_hours_open']), strtotime($telemed_modified_time['location_telemed_modified_hours_close']) ) . '' : '' );
+															$telemed_modified_text .= ( ( $telemed_modified_time['location_telemed_modified_hours_open'] && '00:00:00' != $telemed_modified_time['location_telemed_modified_hours_open'] )  ? '' . apStyleDate( $telemed_modified_time['location_telemed_modified_hours_open'] ) . ' &ndash; ' . apStyleDate( $telemed_modified_time['location_telemed_modified_hours_close'] ) . '' : '' );
 														}
 														if ( $telemed_modified_time['location_telemed_modified_hours_comment'] ) {
 															$telemed_modified_text .= ' <br /><span class="subtitle">' .$telemed_modified_time['location_telemed_modified_hours_comment'] . '</span>';
@@ -1559,7 +1538,7 @@ while ( have_posts() ) : the_post(); ?>
 														if ( $telemed_hour['closed'] ) {
 															$telemed_hours_text .= 'Closed ';
 														} else {
-															$telemed_hours_text .= ( ( $telemed_hour['open'] && '00:00:00' != $telemed_hour['open'] )  ? '' . ap_time_span( strtotime($telemed_hour['open']), strtotime($telemed_hour['close']) ) . '' : '' );
+															$telemed_hours_text .= ( ( $telemed_hour['open'] && '00:00:00' != $telemed_hour['open'] )  ? '' . apStyleDate( $telemed_hour['open'] ) . ' &ndash; ' . apStyleDate( $telemed_hour['close'] ) . '' : '' );
 														}
 														if ( $telemed_hour['comment'] ) {
 															$telemed_hours_text .= ' <br /><span class="subtitle">' .$telemed_hour['comment'] . '</span>';
@@ -1634,7 +1613,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title"><span class="title">Providers at <?php echo $page_title_phrase; ?></span></h2>
+						<h2 class="module-title"><span class="title">Providers at <?php echo $page_title; ?></span></h2>
 						<?php echo do_shortcode( '[uamswp_provider_title_ajax_filter providers="'. implode(",", $provider_ids) .'"]' ); ?>
 						<div class="card-list-container">
 							<div class="card-list card-list-doctors">
@@ -1666,8 +1645,10 @@ while ( have_posts() ) : the_post(); ?>
 
 	// Begin Conditions Section
 	if( $show_conditions_section ) {
-		$condition_context = 'single-location';
-		$condition_heading_related_name = $page_title_phrase; // To what is it related?
+		$condition_heading_related_resource = false;
+		$condition_heading_related_treatment = false;
+		$condition_heading_treated = true;
+		$condition_disclaimer = true;
 
 		include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
 		$condition_schema .= '"medicalSpecialty": [';
@@ -1684,8 +1665,10 @@ while ( have_posts() ) : the_post(); ?>
 
 	// Begin Treatments and Procedures Section
 	if( $show_treatments_section ) {
-		$treatment_context = 'single-location';
-		$treatment_heading_related_name = $page_title_phrase; // To what is it related?
+		$treatment_heading_related_resource = false;
+		$treatment_heading_related_condition = false;
+		$treatment_heading_performed = true;
+		$treatment_disclaimer = true;
 		include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
 		$treatment_schema .= '"medicalSpecialty": [';
 		foreach( $treatments_cpt_query->posts as $treatment ) {
@@ -1705,7 +1688,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title"><span class="title">Areas of Expertise Represented at <?php echo $page_title_phrase; ?></span></h2>
+						<h2 class="module-title"><span class="title">Areas of Expertise Represented at <?php echo $page_title; ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list card-list-expertise">
 							<?php 
@@ -1729,7 +1712,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title" id="sub-location-title"><span class="title">Additional Clinics Within <?php echo $page_title_phrase; ?></span></h2>
+						<h2 class="module-title" id="sub-location-title"><span class="title">Additional Clinics Within <?php echo $page_title; ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list">
 								<?php
@@ -1753,7 +1736,7 @@ while ( have_posts() ) : the_post(); ?>
 	if ( $show_related_resource_section ) {
 		$resource_heading_related_pre = false; // "Related Resources"
 		$resource_heading_related_post = true; // "Resources Related to __"
-		$resource_heading_related_name = $page_title_phrase; // To what is it related?
+		$resource_heading_related_name = $page_title; // To what is it related?
 		$resource_more_suppress = false; // Force div.more to not display
         $resource_more_key = '_resource_locations';
         $resource_more_value = $post->post_name;
@@ -1770,7 +1753,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title"><span class="title">Latest News for <?php echo $page_title_phrase; ?></span></h2>
+						<h2 class="module-title"><span class="title">Latest News for <?php echo $page_title; ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list">
 								<div class="card">
