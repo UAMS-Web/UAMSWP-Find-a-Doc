@@ -11,7 +11,11 @@ $page_title = get_the_title();
 $page_title_attr = str_replace('"', '\'', $page_title);
 $page_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($page_title_attr, null, 'utf-8')));
 $expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
+$expertise_archive_title_attr = str_replace('"', '\'', $expertise_archive_title);
+$expertise_archive_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($expertise_archive_title_attr, null, 'utf-8')));
 $expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
+$expertise_single_name_attr = str_replace('"', '\'', $expertise_single_name);
+$expertise_single_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($expertise_single_name_attr, null, 'utf-8')));
 
 // Parent Area of Expertise 
 $expertise_parent_id = wp_get_post_parent_id($page_id);
@@ -35,12 +39,23 @@ if ($parent_expertise) {
 
 // Override theme's method of defining the page title
 function uamswp_fad_title($html) { 
-    global $page_title;
-	//you can add here all your conditions as if is_page(), is_category() etc.. 
-	$html = $page_title . ' | ' . get_bloginfo( "name" );
-	return $html;
+    global $page_title_attr;
+    global $expertise_single_name_attr;
+    //you can add here all your conditions as if is_page(), is_category() etc.. 
+    $meta_title_chars_max = 60;
+    $meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
+    $meta_title_base_chars = strlen( $meta_title_base );
+    $meta_title_enhanced_addition = ' | ' . $expertise_single_name_attr;
+    $meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
+    $meta_title_enhanced_chars = strlen( $meta_title_enhanced );
+    if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
+        $html = $meta_title_enhanced;
+    } else {
+        $html = $meta_title_base;
+    }
+    return $html;
 }
-// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
@@ -473,24 +488,22 @@ function uamswp_expertise_keywords() {
     endif;
 }
 function uamswp_expertise_conditions_cpt() {
+    global $page_title;
     global $show_conditions_section;
     global $conditions_cpt_query;
-    $condition_heading_related_resource = false;
-    $condition_heading_related_treatment = false;
-    $condition_heading_treated = true;
-    $condition_disclaimer = true;
+    $condition_context = 'single-expertise';
+    $condition_heading_related_name = $page_title; // To what is it related?
 
     if( $show_conditions_section ) {
         include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
     }
 }
 function uamswp_expertise_treatments_cpt() {
+    global $page_title;
     global $show_treatments_section;
     global $treatments_cpt_query;
-    $treatment_heading_related_resource = false;
-    $treatment_heading_related_condition = false;
-    $treatment_heading_performed = true;
-    $treatment_disclaimer = true;
+    $treatment_context = 'single-expertise';
+    $treatment_heading_related_name = $page_title; // To what is it related?
 
     if( $show_treatments_section ) {
         include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );

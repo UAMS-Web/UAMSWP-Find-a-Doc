@@ -18,14 +18,30 @@
 	}
 	add_action('wp_head','uamswp_keyword_hook_header');
 
+	$page_title = get_the_title();
+	$page_title_attr = str_replace('"', '\'', $page_title);
+	$page_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($page_title_attr, null, 'utf-8')));
+	$condition_archive_title = get_field('conditions_archive_headline', 'option') ?: 'Conditions';
+	$condition_title = get_field('conditions_single_name', 'option') ?: 'Condition';
+	$condition_title_attr = str_replace('"', '\'', $condition_title);
+	$condition_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($condition_title_attr, null, 'utf-8')));
+	$condition_text = get_field('conditions_archive_intro_text', 'option');
+
 	// Override theme's method of defining the page title
 	function uamswp_fad_title($html) { 
-		// global $condition_title;
+		global $page_title_attr;
+		global $condition_title_attr;
 		//you can add here all your conditions as if is_page(), is_category() etc.. 
-		if ( strlen(get_the_title()) < 34 ) {
-			$html = get_the_title() . ' | Conditions | ' . get_bloginfo( "name" );
+		$meta_title_chars_max = 60;
+		$meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
+		$meta_title_base_chars = strlen( $meta_title_base );
+		$meta_title_enhanced_addition = ' | ' . $condition_title_attr;
+		$meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
+		$meta_title_enhanced_chars = strlen( $meta_title_enhanced );
+		if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
+			$html = $meta_title_enhanced;
 		} else {
-			$html = get_the_title() . ' | ' . get_bloginfo( "name" );
+			$html = $meta_title_base;
 		}
 		return $html;
 	}
@@ -77,11 +93,6 @@
 		$syndication = false;
 	}
 
-	$condition_archive_title = get_field('conditions_archive_headline', 'option') ?: 'Conditions';
-	$condition_title = get_field('conditions_single_name', 'option') ?: 'Condition';
-	$condition_text = get_field('conditions_archive_intro_text', 'option');
-
-	$page_title = get_the_title( );
 	
 	$podcast_name = get_field('condition_podcast_name');
 	
