@@ -1672,109 +1672,291 @@
             "placement": "top",
             "endpoint": 0
         },
-        "field_physician_scheduling_query": {
-            "key": "field_physician_scheduling_query",
-            "name": "physician_scheduling_query",
-            "type": "true_false",
-            "label": "Enable MyChart Scheduling?",
-            "instructions": "Display a dropdown with links to MyChart open scheduling widgets. <br /><strong>Check with Web Services and the MyChart team before doing anything here.</strong>",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        "field_physician_scheduling_vt": {
-            "key": "field_physician_scheduling_vt",
-            "name": "physician_scheduling_vt",
-            "type": "taxonomy",
-            "label": "Visit Type(s) / PRC ID(s) from Epic",
-            "instructions": "Visit type(s) to use for generating MyChart open scheduling widget(s).",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_scheduling_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "mychart_visit_type",
-            "field_type": "checkbox",
-            "allow_null": 0,
-            "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
-            },
-            "multiple": 1
-        },
-        "field_physician_appt_request_query": {
-            "key": "field_physician_appt_request_query",
-            "name": "physician_appt_request_query",
-            "type": "true_false",
-            "label": "Enable Linking to Appointment Request Forms?",
-            "instructions": "Display a link or dropdown to one or more online appointment request forms.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        "field_physician_appt_request_form": {
-            "key": "field_physician_appt_request_form",
-            "name": "physician_appt_request_form",
-            "type": "taxonomy",
-			"label": "Appointment Request Form(s)",
+        "field_physician_scheduling_group": {
+            "key": "field_physician_scheduling_group",
+            "label": "",
+            "name": "physician_scheduling_group",
+            "type": "group",
             "instructions": "",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_physician_appt_request_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "appointment_request",
-            "field_type": "checkbox",
-            "allow_null": 0,
-            "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
-            },
-            "multiple": 1
+            "acfe_permissions": "",
+            "layout": "block",
+            "acfe_seamless_style": 1,
+            "acfe_group_modal": 0,
+            "sub_fields": [
+                {
+                    "key": "field_physician_scheduling_mychart",
+                    "label": "MyChart Open Scheduling",
+                    "name": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "placement": "left",
+                    "endpoint": 0
+                },
+                {
+                    "key": "field_physician_scheduling_mychart_query",
+                    "name": "physician_scheduling_mychart_query",
+                    "type": "true_false",
+                    "label": "Enable MyChart Open Scheduling for This Provider?",
+                    "instructions": "Check with Web Services and the MyChart team before doing anything here.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_physician_scheduling_mychart_type",
+                    "name": "physician_scheduling_mychart_type",
+                    "label": "Which Type(s) of MyChart Open Scheduling?",
+                    "type": "checkbox",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_physician_scheduling_mychart_query",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "book": "Appointment Booking",
+                        "preregister": "Visit Pre-registration"
+                    },
+                    "allow_custom": 0,
+                    "default_value": [],
+                    "layout": "vertical",
+                    "toggle": 0,
+                    "return_format": "value",
+                    "save_custom": 0
+                },
+                {
+                    "key": "field_physician_scheduling_mychart_book_message",
+                    "label": "",
+                    "name": "",
+                    "type": "message",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_physician_scheduling_mychart_query",
+                                "operator": "==",
+                                "value": "1"
+                            },
+                            {
+                                "field": "field_physician_scheduling_mychart_type",
+                                "operator": "==",
+                                "value": "book"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "<h3>Appointment Booking<\/h3>",
+                    "new_lines": "",
+                    "esc_html": 0
+                },
+                {
+                    "key": "field_physician_scheduling_mychart_book_vt",
+                    "name": "physician_scheduling_mychart_book_vt",
+                    "type": "taxonomy",
+                    "label": "Visit Type(s) / PRC ID(s) from Epic for Appointment Booking",
+                    "instructions": "Visit type(s) to use for generating MyChart open scheduling widget(s).",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_physician_scheduling_mychart_query",
+                                "operator": "==",
+                                "value": "1"
+                            },
+                            {
+                                "field": "field_physician_scheduling_mychart_type",
+                                "operator": "==",
+                                "value": "book"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "mychart_visit_type",
+                    "field_type": "checkbox",
+                    "allow_null": 0,
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "acfe_bidirectional": {
+                        "acfe_bidirectional_enabled": "0"
+                    },
+                    "multiple": 1
+                },
+                {
+                    "key": "field_physician_scheduling_mychart_preregister_message",
+                    "label": "",
+                    "name": "",
+                    "type": "message",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_physician_scheduling_mychart_query",
+                                "operator": "==",
+                                "value": "1"
+                            },
+                            {
+                                "field": "field_physician_scheduling_mychart_type",
+                                "operator": "==",
+                                "value": "preregister"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "<h3>Visit Pre-registration<\/h3>",
+                    "new_lines": "",
+                    "esc_html": 0
+                },
+                {
+                    "key": "field_physician_scheduling_mychart_preregister_vt",
+                    "name": "physician_scheduling_mychart_preregister_vt",
+                    "type": "taxonomy",
+                    "label": "Visit Type(s) / PRC ID(s) from Epic for Visit Pre-registration",
+                    "instructions": "Visit type(s) to use for generating MyChart open scheduling widget(s).",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_physician_scheduling_mychart_query",
+                                "operator": "==",
+                                "value": "1"
+                            },
+                            {
+                                "field": "field_physician_scheduling_mychart_type",
+                                "operator": "==",
+                                "value": "preregister"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "mychart_visit_type",
+                    "field_type": "checkbox",
+                    "allow_null": 0,
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "acfe_bidirectional": {
+                        "acfe_bidirectional_enabled": "0"
+                    },
+                    "multiple": 1
+                },
+                {
+                    "key": "field_physician_scheduling_request",
+                    "label": "Appointment Request Forms",
+                    "name": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "placement": "left",
+                    "endpoint": 0
+                },
+                {
+                    "key": "field_physician_scheduling_request_query",
+                    "name": "physician_scheduling_request_query",
+                    "type": "true_false",
+                    "label": "Enable Linking to Appointment Request Forms?",
+                    "instructions": "Display a link or dropdown to one or more online appointment request forms.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_physician_scheduling_request_form",
+                    "name": "physician_scheduling_request_form",
+                    "type": "taxonomy",
+                    "label": "Appointment Request Form(s)",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_physician_scheduling_request_query",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "appointment_request",
+                    "field_type": "checkbox",
+                    "allow_null": 0,
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "acfe_bidirectional": {
+                        "acfe_bidirectional_enabled": "0"
+                    },
+                    "multiple": 1
+                }
+            ]
         },
         "field_physician_academic_profile_tab": {
             "key": "field_physician_academic_profile_tab",

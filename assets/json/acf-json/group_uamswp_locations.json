@@ -515,6 +515,25 @@
             "placement": "top",
             "endpoint": 0
         },
+        "field_location_dep": {
+            "key": "field_location_dep",
+            "name": "location_dep",
+            "type": "text",
+            "label": "Department / DEP ID(s) from Epic",
+            "instructions": "ID for one or more Epic departments associated with this location. These will be used when generating things like open scheduling widgets. <br />Separate multiple values with a comma (\",\"). <br />The department(s) included here should correspond to this physical location. <br />Check the External Name field of each department record in Epic to ensure it is patient-friendly and matches up with how this location is named since it will be visible to users in the open scheduling widget.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
         "field_location_ac_query": {
             "key": "field_location_ac_query",
             "name": "location_ac_query",
@@ -3347,14 +3366,530 @@
             "placement": "top",
             "endpoint": 0
         },
+        "field_location_scheduling_group": {
+            "key": "field_location_scheduling_group",
+            "label": "",
+            "name": "location_scheduling_group",
+            "type": "group",
+            "instructions": "",
+            "acfe_permissions": "",
+            "layout": "block",
+            "acfe_seamless_style": 1,
+            "acfe_group_modal": 0,
+            "sub_fields": [
+                {
+                    "key": "field_location_scheduling_mychart",
+                    "label": "MyChart Open Scheduling",
+                    "name": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "placement": "left",
+                    "endpoint": 0
+                },
+                {
+                    "key": "field_location_scheduling_mychart_query",
+                    "name": "location_scheduling_mychart_query",
+                    "type": "true_false",
+                    "label": "Enable MyChart Open Scheduling for This Location?",
+                    "instructions": "Check with Web Services and the MyChart team before doing anything here.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_location_scheduling_mychart_type",
+                    "name": "location_scheduling_mychart_type",
+                    "label": "Which Type(s) of MyChart Open Scheduling?",
+                    "type": "checkbox",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_scheduling_mychart_query",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "book": "Appointment Booking",
+                        "preregister": "Visit Pre-registration"
+                    },
+                    "allow_custom": 0,
+                    "default_value": [],
+                    "layout": "vertical",
+                    "toggle": 0,
+                    "return_format": "value",
+                    "save_custom": 0
+                },
+                {
+                    "key": "field_location_scheduling_mychart_book_message",
+                    "label": "",
+                    "name": "",
+                    "type": "message",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_scheduling_mychart_query",
+                                "operator": "==",
+                                "value": "1"
+                            },
+                            {
+                                "field": "field_location_scheduling_mychart_type",
+                                "operator": "==",
+                                "value": "book"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "<h3>Appointment Booking<\/h3>",
+                    "new_lines": "",
+                    "esc_html": 0
+                },
+                {
+                    "key": "field_location_scheduling_mychart_book_intro",
+                    "name": "location_scheduling_mychart_book_intro",
+                    "type": "textarea",
+                    "label": "General MyChart Open Scheduling Widget Introduction for Appointment Booking (Optional Override)",
+                    "instructions": "This paragraph introduces each MyChart open scheduling widget. If you do not define a value here, it will display the system default. <br />The paragraph should provide brief general information about MyChart open scheduling. There is a 221 character limit.",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_scheduling_mychart_query",
+                                "operator": "==",
+                                "value": "1"
+                            },
+                            {
+                                "field": "field_location_scheduling_mychart_type",
+                                "operator": "==",
+                                "value": "book"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.",
+                    "maxlength": 221,
+                    "rows": 3,
+                    "new_lines": ""
+                },
+                {
+                    "key": "field_location_scheduling_mychart_book_options",
+                    "name": "location_scheduling_mychart_book_options",
+                    "type": "repeater",
+                    "label": "MyChart Open Scheduling Widget Option(s) for Appointment Booking",
+                    "instructions": "Define the information for each specific open scheduling widget. One or more must be defined.",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_scheduling_mychart_query",
+                                "operator": "==",
+                                "value": "1"
+                            },
+                            {
+                                "field": "field_location_scheduling_mychart_type",
+                                "operator": "==",
+                                "value": "book"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "collapsed": "field_location_scheduling_title",
+                    "min": 1,
+                    "max": 0,
+                    "layout": "block",
+                    "button_label": "Add Scheduling Widget Option",
+                    "sub_fields": [
+                        {
+                            "key": "field_location_scheduling_vt",
+                            "name": "location_scheduling_vt",
+                            "type": "taxonomy",
+                            "label": "Visit Type",
+                            "instructions": "The single visit type available for scheduling in this specific widget.",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "taxonomy": "mychart_visit_type",
+                            "field_type": "select",
+                            "allow_null": 0,
+                            "add_term": 0,
+                            "save_terms": 0,
+                            "load_terms": 0,
+                            "return_format": "id",
+                            "acfe_bidirectional": {
+                                "acfe_bidirectional_enabled": "0"
+                            },
+                            "multiple": 0
+                        },
+                        {
+                            "key": "field_location_scheduling_dep",
+                            "name": "location_scheduling_dep",
+                            "type": "text",
+                            "label": "Override for Department / DEP ID(s) from Epic",
+                            "instructions": "The open scheduling widget will be generated using the department ID(s) set for this location in general, or it can be overridden here. <br />The Epic department(s) whose ID(s) included here should still correspond to this physical location. <br />Separate multiple values with a comma (\",\"). <br />Check the External Name field of each department record in Epic to ensure it is patient-friendly and matches up with how this location is named since it will be visible to users in the open scheduling widget.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_location_scheduling_ser",
+                            "name": "location_scheduling_ser",
+                            "type": "text",
+                            "label": "Provider / SER ID(s) from Epic (Optional)",
+                            "instructions": "ID for one or more providers available for scheduling in this specific widget. Separate multiple values with a comma (\",\"). <br />If you do not include one or more provider IDs, all providers who are enabled for open scheduling in the department(s) with the visit type are will automatically be included in the widget. <br />Check the External Name field of each provider record in Epic to ensure it is patient-friendly since it will be visible to users in the open scheduling widget. If the provider record corresponds to a provider on uamshealth.com, make sure the External Name value matches the display name on uamshealth.com.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_location_scheduling_fallback",
+                            "label": "Override for Fallback Information",
+                            "name": "location_scheduling_fallback",
+                            "type": "wysiwyg",
+                            "instructions": "The selected visit type may already have fallback information related to it, but it can be overriden here. <br />This optional paragraph appears after this visit type's scheduling widget where you can present users an alternative scheduling options. Keep it as brief as possible, limiting it to one to three sentences in a single paragraph. Add tel links to any phone numbers (href=\"tel:501-555-6162\"). <br /> Example Paragraph: \"If you are unable to register for your appointment using the method above, call 501-555-6162 to schedule an appointment. This line is staffed Monday thru Friday from 10 a.m. – 5:30 p.m. If the lines are busy, you will be prompted to leave a voicemail.\"",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "default_value": "",
+                            "tabs": "all",
+                            "toolbar": "basic",
+                            "media_upload": 0,
+                            "delay": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "field_location_scheduling_mychart_preregister_message",
+                    "label": "",
+                    "name": "",
+                    "type": "message",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_scheduling_mychart_query",
+                                "operator": "==",
+                                "value": "1"
+                            },
+                            {
+                                "field": "field_location_scheduling_mychart_type",
+                                "operator": "==",
+                                "value": "preregister"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "<h3>Visit Pre-registration<\/h3>",
+                    "new_lines": "",
+                    "esc_html": 0
+                },
+                {
+                    "key": "field_location_scheduling_mychart_preregister_intro",
+                    "name": "location_scheduling_mychart_preregister_intro",
+                    "type": "textarea",
+                    "label": "General MyChart Open Scheduling Widget Introduction for Visit Pre-registration (Optional Override)",
+                    "instructions": "This paragraph introduces each MyChart open scheduling widget. If you do not define a value here, it will display the system default. <br />The paragraph should provide brief general information about MyChart open scheduling. There is a 221 character limit.",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_scheduling_mychart_query",
+                                "operator": "==",
+                                "value": "1"
+                            },
+                            {
+                                "field": "field_location_scheduling_mychart_type",
+                                "operator": "==",
+                                "value": "preregister"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.",
+                    "maxlength": 221,
+                    "rows": 3,
+                    "new_lines": ""
+                },
+                {
+                    "key": "field_location_scheduling_mychart_preregister_options",
+                    "name": "location_scheduling_mychart_preregister_options",
+                    "type": "repeater",
+                    "label": "MyChart Open Scheduling Widget Option(s) for Visit Pre-registration",
+                    "instructions": "Define the information for each specific open scheduling widget. One or more must be defined.",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_scheduling_mychart_query",
+                                "operator": "==",
+                                "value": "1"
+                            },
+                            {
+                                "field": "field_location_scheduling_mychart_type",
+                                "operator": "==",
+                                "value": "preregister"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "collapsed": "field_location_scheduling_title",
+                    "min": 1,
+                    "max": 0,
+                    "layout": "block",
+                    "button_label": "Add Scheduling Widget Option",
+                    "sub_fields": [
+                        {
+                            "key": "field_location_scheduling_vt",
+                            "name": "location_scheduling_vt",
+                            "type": "taxonomy",
+                            "label": "Visit Type",
+                            "instructions": "The single visit type available for scheduling in this specific widget.",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "taxonomy": "mychart_visit_type",
+                            "field_type": "select",
+                            "allow_null": 0,
+                            "add_term": 0,
+                            "save_terms": 0,
+                            "load_terms": 0,
+                            "return_format": "id",
+                            "acfe_bidirectional": {
+                                "acfe_bidirectional_enabled": "0"
+                            },
+                            "multiple": 0
+                        },
+                        {
+                            "key": "field_location_scheduling_dep",
+                            "name": "location_scheduling_dep",
+                            "type": "text",
+                            "label": "Override for Department / DEP ID(s) from Epic",
+                            "instructions": "The open scheduling widget will be generated using the department ID(s) set for this location in general, or it can be overridden here. <br />The Epic department(s) whose ID(s) included here should still correspond to this physical location. <br />Separate multiple values with a comma (\",\"). <br />Check the External Name field of each department record in Epic to ensure it is patient-friendly and matches up with how this location is named since it will be visible to users in the open scheduling widget.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_location_scheduling_ser",
+                            "name": "location_scheduling_ser",
+                            "type": "text",
+                            "label": "Provider / SER ID(s) from Epic (Optional)",
+                            "instructions": "ID for one or more providers available for scheduling in this specific widget. Separate multiple values with a comma (\",\"). <br />If you do not include one or more provider IDs, all providers who are enabled for open scheduling in the department(s) with the visit type are will automatically be included in the widget. <br />Check the External Name field of each provider record in Epic to ensure it is patient-friendly since it will be visible to users in the open scheduling widget. If the provider record corresponds to a provider on uamshealth.com, make sure the External Name value matches the display name on uamshealth.com.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_location_scheduling_fallback",
+                            "label": "Override for Fallback Information",
+                            "name": "location_scheduling_fallback",
+                            "type": "wysiwyg",
+                            "instructions": "The selected visit type may already have fallback information related to it, but it can be overriden here. <br />This optional paragraph appears after this visit type's scheduling widget where you can present users an alternative scheduling options. Keep it as brief as possible, limiting it to one to three sentences in a single paragraph. Add tel links to any phone numbers (href=\"tel:501-555-6162\"). <br /> Example Paragraph: \"If you are unable to register for your appointment using the method above, call 501-555-6162 to schedule an appointment. This line is staffed Monday thru Friday from 10 a.m. – 5:30 p.m. If the lines are busy, you will be prompted to leave a voicemail.\"",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_permissions": "",
+                            "default_value": "",
+                            "tabs": "all",
+                            "toolbar": "basic",
+                            "media_upload": 0,
+                            "delay": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "field_location_scheduling_request",
+                    "label": "Appointment Request Forms",
+                    "name": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_permissions": "",
+                    "placement": "left",
+                    "endpoint": 0
+                },
+                {
+                    "key": "field_location_scheduling_request_query",
+                    "name": "location_scheduling_request_query",
+                    "type": "true_false",
+                    "label": "Enable Linking to Appointment Request Forms?",
+                    "instructions": "Display a link or dropdown to one or more online appointment request forms.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_location_scheduling_request_form",
+                    "name": "location_scheduling_request_form",
+                    "type": "taxonomy",
+                    "label": "Appointment Request Form(s)",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_scheduling_request_query",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "appointment_request",
+                    "field_type": "checkbox",
+                    "allow_null": 0,
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "acfe_bidirectional": {
+                        "acfe_bidirectional_enabled": "0"
+                    },
+                    "multiple": 1
+                }
+            ]
+        },
         "field_location_scheduling_query": {
             "key": "field_location_scheduling_query",
             "name": "location_scheduling_query",
             "type": "true_false",
-            "label": "Enable MyChart Scheduling?",
-            "instructions": "Check with Web Services and the MyChart team before doing anything here.",
+            "label": "Enable MyChart Scheduling? (Deprecated)",
+            "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_scheduling_tab",
+                        "operator": "==",
+                        "value": "false"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -3366,39 +3901,12 @@
             "ui_on_text": "",
             "ui_off_text": ""
         },
-        "field_location_dep_general": {
-            "key": "field_location_dep_general",
-            "name": "location_dep_general",
-            "type": "text",
-            "label": "Department / DEP ID(s) from Epic",
-            "instructions": "ID for one or more Epic departments associated with this location. These will be used when generating open scheduling widgets. <br />Separate multiple values with a comma (\",\"). <br />The department(s) included here should correspond to this physical location. <br />Check the External Name field of each department record in Epic to ensure it is patient-friendly and matches up with how this location is named since it will be visible to users in the open scheduling widget.",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_scheduling_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
         "field_location_scheduling_title_general": {
             "key": "field_location_scheduling_title_general",
             "name": "location_scheduling_title_general",
             "type": "text",
-            "label": "Appointment Section Title (Optional Override)",
-            "instructions": "(Deprecated)",
+            "label": "Appointment Section Title (Deprecated)",
+            "instructions": "",
             "required": 0,
             "conditional_logic": [
                 [
@@ -3424,15 +3932,15 @@
             "key": "field_location_scheduling_intro_general",
             "name": "location_scheduling_intro_general",
             "type": "textarea",
-            "label": "General MyChart Open Scheduling Widget Introduction (Optional Override)",
-            "instructions": "This paragraph introduces the each MyChart open scheduling widget. If you do not define a value here, it will display \"Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.\" <br />The paragraph should provide brief general information about MyChart open scheduling. There is a 221 character limit.",
+            "label": "General MyChart Open Scheduling Widget Introduction (Optional Override) (Deprecated)",
+            "instructions": "",
             "required": 0,
             "conditional_logic": [
                 [
                     {
-                        "field": "field_location_scheduling_query",
+                        "field": "field_location_scheduling_tab",
                         "operator": "==",
-                        "value": "1"
+                        "value": "false"
                     }
                 ]
             ],
@@ -3451,15 +3959,15 @@
             "key": "field_location_scheduling_options",
             "name": "location_scheduling_options",
             "type": "repeater",
-            "label": "MyChart Open Scheduling Widget Option(s)",
-            "instructions": "Define the information for each specific open scheduling widget. One or more must be defined.",
-            "required": 1,
+            "label": "MyChart Open Scheduling Widget Option(s) (Deprecated)",
+            "instructions": "",
+            "required": 0,
             "conditional_logic": [
                 [
                     {
-                        "field": "field_location_scheduling_query",
+                        "field": "field_location_scheduling_tab",
                         "operator": "==",
-                        "value": "1"
+                        "value": "false"
                     }
                 ]
             ],
@@ -3478,9 +3986,9 @@
                     "key": "field_location_scheduling_title",
                     "name": "location_scheduling_title",
                     "type": "text",
-                    "label": "Open Scheduling Widget Heading Text",
-                    "instructions": "(Deprecated)",
-                    "required": 1,
+                    "label": "Open Scheduling Widget Heading Text (Deprecated)",
+                    "instructions": "",
+                    "required": 0,
                     "conditional_logic": [
                         [
                             {
@@ -3505,8 +4013,8 @@
                     "key": "field_location_scheduling_intro",
                     "name": "location_scheduling_intro",
                     "type": "textarea",
-                    "label": "Specific Open Scheduling Widget Introduction (Optional Override)",
-                    "instructions": "(Deprecated)",
+                    "label": "Specific Open Scheduling Widget Introduction (Optional Override) (Deprecated)",
+                    "instructions": "",
                     "required": 0,
                     "conditional_logic": [
                         [
@@ -3532,9 +4040,9 @@
                     "key": "field_location_scheduling_item_title_nested",
                     "name": "location_scheduling_item_title_nested",
                     "type": "text",
-                    "label": "Open Scheduling Widget Link Text",
-                    "instructions": "(Deprecated)",
-                    "required": 1,
+                    "label": "Open Scheduling Widget Link Text (Deprecated)",
+                    "instructions": "",
+                    "required": 0,
                     "conditional_logic": [
                         [
                             {
@@ -3586,10 +4094,18 @@
                     "key": "field_location_scheduling_vt",
                     "name": "location_scheduling_vt",
                     "type": "taxonomy",
-                    "label": "Visit Type / PRC ID from Epic",
-                    "instructions": "A single visit type available for scheduling in this specific widget. <br />Check the External Name field of the visit type record in Epic to ensure it is patient-friendly since it will be visible to users in the open scheduling widget.",
-                    "required": 1,
-                    "conditional_logic": 0,
+                    "label": "Visit Type / PRC ID from Epic (Deprecated)",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_scheduling_tab",
+                                "operator": "==",
+                                "value": "false"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -3608,13 +4124,21 @@
                     "multiple": 0
                 },
                 {
-                    "key": "field_location_scheduling_dep",
-                    "name": "location_scheduling_dep",
+                    "key": "field_location_scheduling_ser",
+                    "name": "location_scheduling_ser",
                     "type": "text",
-                    "label": "Override for Department / DEP ID(s) from Epic",
-                    "instructions": "The open scheduling widget will be generated using the department ID(s) set for this location in general, or it can be overridden here. <br />The Epic department(s) whose ID(s) included here should still correspond to this physical location. <br />Separate multiple values with a comma (\",\"). <br />Check the External Name field of each department record in Epic to ensure it is patient-friendly and matches up with how this location is named since it will be visible to users in the open scheduling widget.",
+                    "label": "Provider / SER ID(s) from Epic (Optional) (Deprecated)",
+                    "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_scheduling_tab",
+                                "operator": "==",
+                                "value": "false"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -3627,13 +4151,21 @@
                     "maxlength": ""
                 },
                 {
-                    "key": "field_location_scheduling_ser",
-                    "name": "location_scheduling_ser",
+                    "key": "field_location_scheduling_dep",
+                    "name": "location_scheduling_dep",
                     "type": "text",
-                    "label": "Provider / SER ID(s) from Epic (Optional)",
-                    "instructions": "ID for one or more providers available for scheduling in this specific widget. Separate multiple values with a comma (\",\"). <br />If you do not include one or more provider IDs, all providers who are enabled for open scheduling in the department(s) with the visit type are will automatically be included in the widget. <br />Check the External Name field of each provider record in Epic to ensure it is patient-friendly since it will be visible to users in the open scheduling widget. If the provider record corresponds to a provider on uamshealth.com, make sure the External Name value matches the display name on uamshealth.com.",
+                    "label": "Override for Department / DEP ID(s) from Epic (Deprecated)",
+                    "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_scheduling_tab",
+                                "operator": "==",
+                                "value": "false"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -3647,12 +4179,20 @@
                 },
                 {
                     "key": "field_location_scheduling_fallback",
-                    "label": "Override for Fallback Information",
                     "name": "location_scheduling_fallback",
                     "type": "wysiwyg",
-                    "instructions": "The selected visit type may already have fallback information related to it, but it can be overriden here. <br />This optional paragraph appears after this visit type's scheduling widget where you can present users an alternative scheduling options. Keep it as brief as possible, limiting it to one to three sentences in a single paragraph. Add tel links to any phone numbers (href=\"tel:501-555-6162\"). <br /> Example Paragraph: \"If you are unable to register for your appointment using the method above, call 501-555-6162 to schedule an appointment. This line is staffed Monday thru Friday from 10 a.m. – 5:30 p.m. If the lines are busy, you will be prompted to leave a voicemail.\"",
+                    "label": "Override for Fallback Information (Deprecated)",
+                    "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_location_scheduling_tab",
+                                "operator": "==",
+                                "value": "false"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -3666,63 +4206,6 @@
                     "delay": 0
                 }
             ]
-        },
-        "field_location_appt_request_query": {
-            "key": "field_location_appt_request_query",
-            "name": "location_appt_request_query",
-            "type": "true_false",
-            "label": "Enable Appointment Request Form Link?",
-            "instructions": "Displays a link to an online appointment request form.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        "field_location_appt_request_form": {
-			"key": "field_location_appt_request_form",
-			"label": "Appointment Request Form",
-			"name": "location_appt_request_form",
-			"type": "taxonomy",
-            "instructions": "Select multiple if necessary.",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_location_appt_request_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-			"taxonomy": "appointment_request",
-			"field_type": "multi_select",
-            "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": "",
-            "multiple": 1,
-            "allow_null": 0
         },
         "field_location_medical_tab": {
             "key": "field_location_medical_tab",

@@ -307,13 +307,14 @@ while ( have_posts() ) : the_post(); ?>
 
 	// Check if online scheduling sections should be displayed
     $online_scheduling_template = 'single-location';
-	$mychart_scheduling_query = get_field('location_scheduling_query');
-	$appointment_request_query = get_field('location_appt_request_query');
-	$appointment_request_forms = get_field('location_appt_request_form');
+    $online_scheduling_group = get_field('location_scheduling_group');
+    $mychart_scheduling_query = $online_scheduling_group['location_scheduling_mychart_query'];
+    $appointment_request_query = $online_scheduling_group['location_scheduling_request_query'];
+    $appointment_request_forms = $online_scheduling_group['location_scheduling_request_form'];
 	$location_ac_query = get_field('location_ac_query');
-	$online_appointments_query = get_field('location_appointments_query');
-	$mychart_scheduling_options = get_field('location_scheduling_options');
-	$mychart_scheduling_options_rows = have_rows('location_scheduling_options');
+	$online_scheduling_query = get_field('location_appointments_query');
+    $mychart_scheduling_options = $online_scheduling_group['location_scheduling_mychart_book_options'];
+	// $mychart_scheduling_options_rows = have_rows($mychart_scheduling_options);
 	// $mychart_scheduling_visit_type = '';
 	include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-check.php' );
 	

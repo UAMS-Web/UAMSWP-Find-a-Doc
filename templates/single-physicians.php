@@ -375,15 +375,16 @@ while ( have_posts() ) : the_post();
 
 	// Check if online scheduling sections should be displayed
     $online_scheduling_template = 'single-provider';
-	$online_appointments_query = $eligible_appointments && $accepting_patients && !$referral_required;
-    $mychart_scheduling_query = get_field('physician_scheduling_query');
-	$appointment_request_query = get_field('physician_appt_request_query');
-	$appointment_request_forms = get_field('physician_appt_request_form');
+	$online_scheduling_query = $eligible_appointments && $accepting_patients && !$referral_required;
+    $online_scheduling_group = get_field('physician_scheduling_group');
+    $mychart_scheduling_query = $online_scheduling_group['physician_scheduling_mychart_query'];
+    $appointment_request_query = $online_scheduling_group['physician_scheduling_request_query'];
+    $appointment_request_forms = $online_scheduling_group['physician_scheduling_request_form'];
 	// $location_ac_query = '';
 	// $location_appointments_query = '';
 	// $mychart_scheduling_options = '';
 	// $mychart_scheduling_options_rows = '';
-	$mychart_scheduling_visit_type = get_field('physician_scheduling_vt');
+    $mychart_scheduling_visit_type = $online_scheduling_group['physician_scheduling_mychart_book_vt'];
     include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-check.php' );
 
 

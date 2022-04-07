@@ -4,7 +4,7 @@
      *  Designed for UAMS Find-a-Doc
      * 
      *  Required vars:
-     *      $online_appointments_query
+     *      $online_scheduling_query
      *      $mychart_scheduling_query
      *      $appointment_request_query
      *      $appointment_request_forms
@@ -38,13 +38,13 @@
     if (
         $mychart_scheduling_query_system
         && $mychart_scheduling_query
-        && $online_appointments_query
+        && $online_scheduling_query
         && (
             // Location-specific check
             (
                 $online_scheduling_template == 'single-location'
                 && !$location_ac_query
-                && $mychart_scheduling_options_rows
+                // && $mychart_scheduling_options_rows
             )
             ||
             // Provider-specific check
@@ -67,7 +67,7 @@
         $mychart_scheduling_query_system
         && $appointment_request_query
         && $appointment_request_forms
-        && $online_appointments_query
+        && $online_scheduling_query
         && (
             // Location-specific check
             (
