@@ -20,7 +20,11 @@
   },
   "devDependencies": {},
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "resolutions": {
+    "glob-parent": "^5.1.2"
   },
   "repository": {
     "type": "git",
