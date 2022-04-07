@@ -3,6 +3,9 @@
  *  Get ACF fields to use for meta data
  *  Add description from provider short description or full description * 
  */
+
+$page_slug = $post->post_name;
+
 $degrees = get_field('physician_degree',$post->ID);
 $degree_list = '';
 $i = 1;

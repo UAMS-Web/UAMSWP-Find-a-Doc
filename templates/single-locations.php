@@ -11,6 +11,7 @@ if (empty($excerpt)){
     }
 }
 $page_title = get_the_title( );
+$page_slug = $post->post_name;
 
 
 // Parent Location 
@@ -1695,7 +1696,7 @@ while ( have_posts() ) : the_post(); ?>
 		$resource_heading_related_name = $page_title; // To what is it related?
 		$resource_more_suppress = false; // Force div.more to not display
         $resource_more_key = '_resource_locations';
-        $resource_more_value = $post->post_name;
+        $resource_more_value = $page_slug;
 		if( $show_related_resource_section ) {
 			include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
 		}
