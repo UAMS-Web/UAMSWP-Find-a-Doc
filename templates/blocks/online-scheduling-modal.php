@@ -36,7 +36,7 @@ if( $show_mychart_scheduling_section ) {
     $mychart_scheduling_intro = ( isset($mychart_scheduling_intro_override) && !empty($mychart_scheduling_intro_override) ) ? $mychart_scheduling_intro_override : $mychart_scheduling_intro;
     $i = 0;
     // Loop through repeater rows.
-    if ( $mychart_scheduling_options || $mychart_scheduling_visit_type) {
+    if ( $mychart_scheduling_options || $mychart_scheduling_visit_type ) {
         $options = $mychart_scheduling_options ?: $mychart_scheduling_visit_type;
         foreach( $options as $option ) {
             // Load sub field value.
@@ -81,7 +81,7 @@ if( $show_mychart_scheduling_section ) {
             <?php }
             $i++;
         } // end foreach
-    } // endif $mychart_scheduling_options
+    } // endif ( $mychart_scheduling_options || $mychart_scheduling_visit_type )
     ?>
     <!-- <link href="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
 
