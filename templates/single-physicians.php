@@ -382,23 +382,6 @@ while ( have_posts() ) : the_post();
 	$mychart_scheduling_visit_type = get_field('physician_scheduling_vt');
     include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-check.php' );
 
-	// Check if Appointment Request link should be displayed
-	// Check for valid forms
-	$appointment_request_form_valid = false;
-	if ( $mychart_scheduling_query_system && $appointment_request_query && $appointment_request_forms ) {
-		foreach( $appointment_request_forms as $form ) {
-			$form_object = get_term_by( 'id', $form, 'appointment_request');
-			if ( $form_object ) {
-				$appointment_request_form_valid = true;
-				$break;
-			}
-		}
-	}
-	if ( $appointment_request_form_valid ) {
-		$show_appointment_request_section = true;
-	} else {
-		$show_appointment_request_section = false;
-	}
 
 	// Check if appointment scheduling information should be displayed in the top section
 	if ( $show_mychart_scheduling_section || $show_appointment_request_section ) {
