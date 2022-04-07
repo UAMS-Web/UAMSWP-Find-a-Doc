@@ -57,8 +57,6 @@ $resident = get_field('physician_resident',$post->ID);
 $resident_title_name = 'Resident Physician';
 $phys_title = get_field('physician_title',$post->ID);
 $phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
-$phys_title_name_attr = str_replace('"', '\'', $phys_title_name);
-$phys_title_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($phys_title_name_attr, null, 'utf-8')));
 $vowels = array('a','e','i','o','u'); // Define a list of variables for use in determining which indefinite article to use (a vs. an)
 if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
     $phys_title_indef_article = 'an'; // If the clinical title starts with a vowel, use "an"
@@ -120,23 +118,10 @@ if( $locations && $location_valid ) {
                 $primary_appointment_title_attr = str_replace('"', '\'', $primary_appointment_title);
                 $primary_appointment_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($primary_appointment_title_attr, null, 'utf-8')));
                 $primary_appointment_url = get_the_permalink( $location );
-                $primary_appointment_city = get_field('location_city', $location);
-                $primary_appointment_city_attr = str_replace('"', '\'', $primary_appointment_city);
-                $primary_appointment_city_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($primary_appointment_city_attr, null, 'utf-8')));
                 $l++;
             }
         }
     } // endforeach
-}
-// Set Areas of Expertise Variables
-$expertises =  get_field('physician_expertise',$post->ID);
-if ( $expertises ) {
-    foreach ( $expertises as $expertise ) {
-        if ( get_post_status ( $expertise ) == 'publish' ) {
-            $expertise_primary_name = get_the_title($expertise);
-            break;
-        }
-    }
 }
 
 // Hide Sections
@@ -165,13 +150,11 @@ if (empty($excerpt)){
     if ($bio){
         $excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 155, '...');
     } else {
-        $fallback_desc = $medium_name_attr . ' is ' . ($phys_title ? $phys_title_indef_article . ' ' . strtolower($phys_title_name) : 'a health care provider' ) . ($primary_appointment_title_attr ? ' at ' . $primary_appointment_title_attr : '') .  ' employed by UAMS Health.';
+        $fallback_desc = $medium_name_attr . ' is ' . ($phys_title ? $phys_title_indef_article . ' ' . strtolower($phys_title_name) : 'a health care provider' ) . ($primary_appointment_title ? ' at ' . $primary_appointment_title : '') .  ' employed by UAMS Health.';
         $excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 155, '...');
     }
 }
 $schema_description = $excerpt;  // Used for Schema Data. Should ALWAYS have a value
-
-// Override theme's method of defining the meta description
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
@@ -179,45 +162,14 @@ function sp_titles_desc($html) {
 }
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
-// Override theme's method of defining the page title
-function uamswp_fad_title($html) { 
-    global $full_name_attr;
-    global $phys_title_name_attr;
-    global $primary_appointment_city_attr;
-    global $expertise_primary_name;
-
-    $meta_title_chars_max = 60; // The recommended length for meta titles is 50-60 characters. Sets the max to 60.
-    $meta_title_separator = ' | '; // Characters separating components of the meta title
-
-    // Base meta title ("{Full display name} | UAMS Health")
-    $meta_title_base = $full_name_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
-    $meta_title_base_chars = strlen( $meta_title_base ); // Count the characters in the meta title
-
-    // Base meta title ("{Full display name} | {Clinical title} | UAMS Health")
-    $meta_title_enhanced = $full_name_attr . $meta_title_separator . $phys_title_name_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
-    $meta_title_enhanced_chars = strlen( $meta_title_enhanced ); // Count the characters in the meta title
-
-    // Enhanced meta title level 1 ("{Full display name} | {Clinical title} | {City of primary location} | UAMS Health")
-    $meta_title_enhanced_x2 = $full_name_attr . $meta_title_separator . $phys_title_name_attr . $meta_title_separator . $primary_appointment_city_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
-    $meta_title_enhanced_x2_chars = strlen( $meta_title_enhanced_x2 ); // Count the characters in the meta title
-
-    // Enhanced meta title level 2 ("{Full display name} | {Clinical title} | {Primary area of expertise} | {City of primary location} | UAMS Health")
-    $meta_title_enhanced_x3 = $full_name_attr . $meta_title_separator . $phys_title_name_attr . $meta_title_separator . $expertise_primary_name . $meta_title_separator . $primary_appointment_city_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
-    $meta_title_enhanced_x3_chars = strlen( $meta_title_enhanced_x3 ); // Count the characters in the meta title
-
-    if ( $expertise_primary_name && ( $meta_title_enhanced_x3_chars <= $meta_title_chars_max ) ) {
-        $html = $meta_title_enhanced_x3;
-    } elseif ( $primary_appointment_city_attr && ( $meta_title_enhanced_x2_chars <= $meta_title_chars_max ) ) {
-        $html = $meta_title_enhanced_x2;
-    } elseif ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
-        $html = $meta_title_enhanced;
-    } else {
-        $html = $meta_title_base;
-    }
-    return $html;
+// Set meta title
+function sp_titles_title($html) { 
+    global $full_name;
+	//you can add here all your conditions as if is_page(), is_category() etc.. 
+	$html = $full_name . ' | ' . get_bloginfo( "name" );
+	return $html;
 }
-// add_filter('seopress_titles_title', 'uamswp_fad_title', 20, 2);
-add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+add_filter('seopress_titles_title', 'sp_titles_title', 20, 2);
 
 function be_remove_title_from_single_crumb( $crumb, $args ) { // Because BE is the man
     global $full_name;
@@ -273,6 +225,7 @@ while ( have_posts() ) : the_post();
     $conditions_cpt = get_field('physician_conditions_cpt');
     $treatments = get_field('physician_treatments');
     $treatments_cpt = get_field('physician_treatments_cpt');
+    $expertises =  get_field('physician_expertise');
     $second_opinion = get_field('physician_second_opinion');
     $patients = get_field('physician_patient_types');
     $refer_req = get_field('physician_referral_required');
@@ -647,8 +600,9 @@ while ( have_posts() ) : the_post();
                         ?>
                         <dt>Area<?php echo( count($expertises) > 1 ? 's' : '' );?> of Expertise</dt>
                         <?php foreach( $expertises as $expertise ) {
+                            $id = $expertise; 
                             if ( get_post_status ( $expertise ) == 'publish' && $expertise !== 0 ) {
-                                echo '<dd><a href="' . get_permalink($expertise) . '" target="_self" data-sectiontitle="Overview" data-categorytitle="View Area of Expertise">' . get_the_title($expertise) . '</a></dd>';
+                                echo '<dd><a href="' . get_permalink($id) . '" target="_self" data-sectiontitle="Overview" data-categorytitle="View Area of Expertise">' . get_the_title($id) . '</a></dd>';
                             }
                         } ?>
                         <?php }
@@ -1147,8 +1101,10 @@ while ( have_posts() ) : the_post();
             // Conditions CPT
             // we will use the first term to load ACF data from
             if( $show_conditions_section ) {
-                $condition_context = 'single-provider';
-                $condition_heading_related_name = $short_name; // To what is it related?
+                $condition_heading_related_resource = false;
+                $condition_heading_related_treatment = false;
+                $condition_heading_treated = true;
+                $condition_disclaimer = true;
 
                 include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
                 // $condition_schema .= ',"medicalSpecialty": [';
@@ -1170,8 +1126,10 @@ while ( have_posts() ) : the_post();
 
             // Treatments CPT
             if( $show_treatments_section ) {
-                $treatment_context = 'single-provider';
-                $treatment_heading_related_name = $short_name; // To what is it related?
+                $treatment_heading_related_resource = false;
+                $treatment_heading_related_condition = false;
+                $treatment_heading_performed = true;
+                $treatment_disclaimer = true;
                 include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
                 // $treatment_schema .= ',"medicalSpecialty": [';
                 $i = 0;
@@ -1200,7 +1158,7 @@ while ( have_posts() ) : the_post();
                                 <div class="card-list card-list-expertise">
                                     <?php foreach( $expertises as $expertise ) {
                                         $id = $expertise;
-                                        if ( get_post_status ( $expertise ) == 'publish' && $expertise !== 0 ) {
+                                        if ( get_post_status ( $expertise ) == 'publish' ) {
                                             include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
                                         }
                                     } ?>
@@ -1337,36 +1295,6 @@ while ( have_posts() ) : the_post();
                                 </div>
                             </div>
                         </div>
-                        <script>
-                            /* Custom HTML for the paging controls for the comments list */
-                            window.DS_OPT = {
-                                buildCommentsLoadMoreHTML: function(data, ctx){
-                                    // a variable to hold the HTML markup
-                                    var x;
-                                    // make sure we have data and it is valid
-                                    if(data && data.valid){
-                                        // grab the profile data
-                                        var review = data.reviewMeta;
-                                        if(review){
-                                            // setup the variables that the template will need	
-                                            var templateData = {
-                                                moreUrl:    review.moreUrl
-                                            }; 
-                                            // build the HTML markup using {{var-name}} for the template variables
-                                            var template = [
-                                                '<div class="ds-comments-more ds-comments-more-placeholder">',
-                                                    '<a href="#" class="ds-comments-more-link" data-more-comments-url="{{moreUrl}}">View More</a>',
-                                                    '<span class="ds-comments-more-loading" style="display:none;">Loading...</span>',
-                                                '</div>'
-                                            ].join('');
-                                            // apply the variables to the template
-                                            x = ctx.tmpl(template, templateData);
-                                        }
-                                    }      
-                                    return x;
-                                }
-                            };
-                        </script>
                         <script src="https://transparency.nrchealth.com/widget/v2/uams/npi/<?php echo $npi; ?>/lotw.js" async></script>                           
                         <?php // endif; ?>
                     </div>

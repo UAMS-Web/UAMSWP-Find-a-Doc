@@ -57,7 +57,7 @@ get_header();
                         <button title="Toggle Filter Tray" class="filter-toggle"><span class="sr-only">Toggle Filter Tray</span><span class="fas fa-filter"></span></button>
                     </div>
 					<div class="col sort-select">
-                        <?php echo facetwp_display( 'facet', 'resources_sort' ); ?>
+						<?php echo facetwp_display( 'sort' ); ?>
 					</div>
                 </div>
                 <?php echo facetwp_display( 'template', 'clinical_resources' ); ?>
