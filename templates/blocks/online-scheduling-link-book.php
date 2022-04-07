@@ -5,9 +5,18 @@
      * 
      *  Required vars:
      * 
-     *  Optional vars:
+     *  Optional vars from single location template:
      *      $mychart_scheduling_options
+     * 
+     *  Optional vars from single provider template:
+     *      $mychart_scheduling_visit_type
      */
+
+// Check optional vars from single location template
+$mychart_scheduling_options = isset($mychart_scheduling_options) ? $mychart_scheduling_options : '';
+
+// Check optional vars from single provider template
+$mychart_scheduling_visit_type = isset($mychart_scheduling_visit_type) ? $mychart_scheduling_visit_type : '';
 ?>
 <div class="btn-container">
     <div class="inner-container">
@@ -17,10 +26,11 @@
                 <?php 
                 $i = 0;
                 // Loop through repeater rows.
-                if ( $mychart_scheduling_options ) {
-                    foreach( $mychart_scheduling_options as $option ) {
+                if ( $mychart_scheduling_options || $mychart_scheduling_visit_type) {
+                    $options = $mychart_scheduling_options ?: $mychart_scheduling_visit_type;
+                    foreach( $options as $option ) {
                         // Load sub field value.
-                        $visit_type = $option['location_scheduling_vt'];
+                        $visit_type = $option['location_scheduling_vt'] ?: $option;
                         $visit_type_object = get_term_by( 'id', $visit_type, 'mychart_visit_type');
 
                         // Do something...
@@ -31,7 +41,7 @@
                         <?php }
                         $i++;
                     } // end foreach
-                } // endif $mychart_scheduling_options ?>
+                } // endif ( $mychart_scheduling_options || $mychart_scheduling_visit_type) ?>
             </div>
         </div>
     </div>
