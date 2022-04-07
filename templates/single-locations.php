@@ -955,6 +955,9 @@ while ( have_posts() ) : the_post(); ?>
 										echo '<h2 class="h4">' . $appointment_request_heading_standalone . '</h2>';
 										echo '<p>' . $appointment_request_intro_standalone . '</p>';
 									}
+
+									$appointment_request_utm_medium_val = 'single-location';
+									$appointment_request_utm_content_val = $page_slug;
 									include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-request.php' );
 								}
 								// End link to specialized care appointment request ?>
