@@ -60,11 +60,14 @@
 		$show_mychart_scheduling_section = false;
 	}
 
+    // Get system setting for whether Appointment Request Forms are enabled
+    $appointment_request_query_system = get_field('appointment_request_query_system', 'option');
+
     // Check if link(s) to appointment request form(s) should be displayed
     // $mychart_scheduling_query_system && $appointment_request_query && $appointment_request_forms
     $appointment_request_form_valid = false;    
 	if (
-        $mychart_scheduling_query_system
+        $appointment_request_query_system
         && $appointment_request_query
         && $appointment_request_forms
         && $online_scheduling_query
