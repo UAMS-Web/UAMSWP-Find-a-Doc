@@ -387,14 +387,6 @@ while ( have_posts() ) : the_post();
     $mychart_scheduling_visit_type = $online_scheduling_group['physician_scheduling_mychart_book_vt'];
     include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-check.php' );
 
-
-	// Check if appointment scheduling information should be displayed in the top section
-	if ( $show_mychart_scheduling_section || $show_appointment_request_section ) {
-		$show_online_scheduling_section = true;
-	} else {
-		$show_online_scheduling_section = false;
-	}
-
     // Set logic for displaying jump links and sections
     $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
     $jump_link_count = 0;

@@ -97,4 +97,11 @@
 	} else {
 		$show_appointment_request_section = false;
 	}
+
+	// Check if online scheduling information overall should be displayed
+	if ( $show_mychart_scheduling_section || $show_appointment_request_section ) {
+		$show_online_scheduling_section = true;
+	} else {
+		$show_online_scheduling_section = false;
+	}
 ?>
