@@ -1675,7 +1675,7 @@
         "field_physician_scheduling_mychart_query_system": {
             "key": "field_physician_scheduling_mychart_query_system",
             "name": "physician_scheduling_mychart_query_system",
-            "type": "true_false",
+            "type": "acfe_hidden",
             "label": "MyChart scheduling allowed in system?",
             "instructions": "",
             "required": 0,
@@ -1685,16 +1685,15 @@
                 "class": "",
                 "id": ""
             },
-            "message": "",
+            "acfe_permissions": "",
             "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
+            "acfe_settings": "",
+            "acfe_validate": ""
         },
         "field_physician_scheduling_request_query_system": {
             "key": "field_physician_scheduling_request_query_system",
             "name": "physician_scheduling_request_query_system",
-            "type": "true_false",
+            "type": "acfe_hidden",
             "label": "Appointment request forms allowed in system?",
             "instructions": "",
             "required": 0,
@@ -1704,11 +1703,10 @@
                 "class": "",
                 "id": ""
             },
-            "message": "",
+            "acfe_permissions": "",
             "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
+            "acfe_settings": "",
+            "acfe_validate": ""
         },
         "field_physician_scheduling_group": {
             "key": "field_physician_scheduling_group",

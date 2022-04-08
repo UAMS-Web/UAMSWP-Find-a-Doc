@@ -897,7 +897,7 @@ add_filter('acf/prepare_field/key=field_physician_scheduling_tab', 'uamswp_onlin
 function uamswp_mychart_scheduling_query($field) {
     // Set to field name for option
     if ( get_field('mychart_scheduling_query_system', 'option') ){
-		$field['value'] = true;
+		$field['value'] = 1;
     }
 	return $field;
 }
@@ -909,7 +909,7 @@ add_filter('acf/prepare_field/key=field_physician_scheduling_mychart_query_syste
 function uamswp_appointment_request_query($field) {
     // Set to field name for option
     if ( get_field('appointment_request_query_system', 'option') ) {
-		$field['value'] = true;
+		$field['value'] = 1;
     }
 	return $field;
 }
