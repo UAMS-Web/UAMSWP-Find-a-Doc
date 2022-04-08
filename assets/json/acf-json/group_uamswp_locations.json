@@ -3520,38 +3520,6 @@
                     "esc_html": 0
                 },
                 {
-                    "key": "field_location_scheduling_mychart_book_intro",
-                    "name": "location_scheduling_mychart_book_intro",
-                    "type": "textarea",
-                    "label": "General MyChart Open Scheduling Widget Introduction for Appointment Booking (Optional Override)",
-                    "instructions": "This paragraph introduces each MyChart open scheduling widget. If you do not define a value here, it will display the system default. <br />The paragraph should provide brief general information about MyChart open scheduling. There is a 221 character limit.",
-                    "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_location_scheduling_mychart_query",
-                                "operator": "==",
-                                "value": "1"
-                            },
-                            {
-                                "field": "field_location_scheduling_mychart_type",
-                                "operator": "==",
-                                "value": "book"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.",
-                    "maxlength": 221,
-                    "rows": 3,
-                    "new_lines": ""
-                },
-                {
                     "key": "field_location_scheduling_mychart_book_options",
                     "name": "location_scheduling_mychart_book_options",
                     "type": "repeater",
@@ -3697,38 +3665,6 @@
                     "message": "<h3>Visit Pre-registration<\/h3>",
                     "new_lines": "",
                     "esc_html": 0
-                },
-                {
-                    "key": "field_location_scheduling_mychart_preregister_intro",
-                    "name": "location_scheduling_mychart_preregister_intro",
-                    "type": "textarea",
-                    "label": "General MyChart Open Scheduling Widget Introduction for Visit Pre-registration (Optional Override)",
-                    "instructions": "This paragraph introduces each MyChart open scheduling widget. If you do not define a value here, it will display the system default. <br />The paragraph should provide brief general information about MyChart open scheduling. There is a 221 character limit.",
-                    "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_location_scheduling_mychart_query",
-                                "operator": "==",
-                                "value": "1"
-                            },
-                            {
-                                "field": "field_location_scheduling_mychart_type",
-                                "operator": "==",
-                                "value": "preregister"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.",
-                    "maxlength": 221,
-                    "rows": 3,
-                    "new_lines": ""
                 },
                 {
                     "key": "field_location_scheduling_mychart_preregister_options",
