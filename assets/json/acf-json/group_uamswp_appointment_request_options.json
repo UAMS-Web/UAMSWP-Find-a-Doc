@@ -22,6 +22,60 @@
             "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        {
+            "key": "field_appointment_request_heading_system",
+            "label": "Heading for Visit Pre-Registration",
+            "name": "appointment_request_heading_system",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_appointment_request_query_system",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Immediate Care",
+            "placeholder": "Immediate Care",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_appointment_request_descr_system",
+            "name": "appointment_request_descr_system",
+            "type": "textarea",
+            "label": "Description for Visit Pre-registration",
+            "instructions": "This paragraph introduces the dropdown for selecting a visit type when pre-registering for a visit. <br />The paragraph should briefly describe what the user can do.",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_appointment_request_query_system",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Spend less time waiting and get home faster by choosing an available time.",
+            "placeholder": "Spend less time waiting and get home faster by choosing an available time.",
+            "maxlength": "",
+            "rows": 2,
+            "new_lines": ""
         }
     ],
     "location": [
