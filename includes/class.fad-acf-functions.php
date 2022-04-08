@@ -905,6 +905,17 @@ function uamswp_mychart_scheduling_query($field) {
 add_filter('acf/prepare_field/key=field_location_scheduling_mychart_query_system', 'uamswp_mychart_scheduling_query', 20);
 add_filter('acf/prepare_field/key=field_physician_scheduling_mychart_query_system', 'uamswp_mychart_scheduling_query', 20);
 
+// Set placeholder values of MyChart Open Scheduling intro inputs from system input for Appointment Booking
+function uamswp_mychart_intro_placeholder($field) {
+	$uamswp_mychart_intro_placeholder_val = get_field('mychart_scheduling_book_intro', 'option');
+    if ( $uamswp_mychart_intro_placeholder_val ){
+		$field['placeholder'] = $uamswp_mychart_intro_placeholder_val;
+    }
+	return $field;
+}
+// Make sure to use correct field key for tab
+add_filter('acf/prepare_field/key=field_mychart_visit_type_intro', 'uamswp_mychart_intro_placeholder', 20);
+
 // Conditional Logic to check if Find-a-Doc Settings are set to allow Appointment Request Forms
 function uamswp_appointment_request_query($field) {
     // Set to field name for option
