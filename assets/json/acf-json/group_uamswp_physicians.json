@@ -1672,6 +1672,44 @@
             "placement": "top",
             "endpoint": 0
         },
+        "field_physician_scheduling_mychart_query_system": {
+            "key": "field_physician_scheduling_mychart_query_system",
+            "name": "physician_scheduling_mychart_query_system",
+            "type": "true_false",
+            "label": "MyChart scheduling allowed in system?",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        "field_physician_scheduling_request_query_system": {
+            "key": "field_physician_scheduling_request_query_system",
+            "name": "physician_scheduling_request_query_system",
+            "type": "true_false",
+            "label": "Appointment request forms allowed in system?",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
         "field_physician_scheduling_group": {
             "key": "field_physician_scheduling_group",
             "label": "",
@@ -1690,7 +1728,15 @@
                     "type": "tab",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_physician_scheduling_mychart_query_system",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -1894,7 +1940,15 @@
                     "type": "tab",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_physician_scheduling_request_query_system",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",

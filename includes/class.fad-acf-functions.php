@@ -892,3 +892,27 @@ function uamswp_online_scheduling_query($field) {
 // Make sure to use correct field key for tab
 add_filter('acf/prepare_field/key=field_location_scheduling_tab', 'uamswp_online_scheduling_query', 20);
 add_filter('acf/prepare_field/key=field_physician_scheduling_tab', 'uamswp_online_scheduling_query', 20);
+
+// Conditional Logic to check if Find-a-Doc Settings are set to allow MyChart Open Scheduling
+function uamswp_mychart_scheduling_query($field) {
+    // Set to field name for option
+    if ( get_field('mychart_scheduling_query_system', 'option') ){
+		$field['value'] = true;
+    }
+	return $field;
+}
+// Make sure to use correct field key for tab
+add_filter('acf/prepare_field/key=field_location_scheduling_mychart_query_system', 'uamswp_mychart_scheduling_query', 20);
+add_filter('acf/prepare_field/key=field_physician_scheduling_mychart_query_system', 'uamswp_mychart_scheduling_query', 20);
+
+// Conditional Logic to check if Find-a-Doc Settings are set to allow Appointment Request Forms
+function uamswp_appointment_request_query($field) {
+    // Set to field name for option
+    if ( get_field('appointment_request_query_system', 'option') ) {
+		$field['value'] = true;
+    }
+	return $field;
+}
+// Make sure to use correct field key for tab
+add_filter('acf/prepare_field/key=field_location_scheduling_request_query_system', 'uamswp_appointment_request_query', 20);
+add_filter('acf/prepare_field/key=field_physician_scheduling_request_query_system', 'uamswp_appointment_request_query', 20);
