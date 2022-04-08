@@ -66,7 +66,7 @@
         },
         "field_mychart_visit_type_intro": {
             "key": "field_mychart_visit_type_intro",
-            "label": "Specific Open Scheduling Widget Introduction (Optional Override)",
+            "label": "Open Scheduling Widget Introduction — Specific to This Visit Type (Optional Override)",
             "name": "mychart_visit_type_intro",
             "type": "textarea",
             "instructions": "You can define a value here to replace the system default introduction (defined in Find-a-Doc Settings) if that general introduction does not adequately introduce this specific widget. <br>If used, this paragraph should provide general information about MyChart open scheduling and a brief overview of anything necessary for users to know about this visit type's scheduling widget. <br>There is a 221 character limit.",
