@@ -925,14 +925,15 @@ while ( have_posts() ) : the_post(); ?>
 							</div>
 							<?php // End Hours Information ?>
 							<?php // Begin Appointment Information
-							if ( $show_online_scheduling_section ) {
-								$appointments_heading = 'Appointments';
-							?>
+							if ( $show_online_scheduling_section ) { ?>
 							<div class="col-lg">
 								<?php // Begin MyChart Scheduling Links Section
-								if ( $show_mychart_scheduling_section ) { ?>
-									<h2 class="h4"><?php echo $appointments_heading; ?></h2>
-									<p>Find a provider at this location to book an appointment online.</p>
+								if ( $show_mychart_scheduling_section ) {
+									$mychart_scheduling_book_heading = get_field('mychart_scheduling_book_heading_system', 'option') ?: 'Appointments';
+									$mychart_scheduling_book_descr = get_field('mychart_scheduling_book_descr_system', 'option') ?: 'Find a provider at this location to book an appointment online.';
+									?>
+									<h2 class="h4"><?php echo $mychart_scheduling_book_heading; ?></h2>
+									<p><?php echo $mychart_scheduling_book_descr; ?></p>
 									<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book.php' ); ?>
 								<?php } // endif $show_mychart_scheduling_section
 								// End MyChart Scheduling Links Section
