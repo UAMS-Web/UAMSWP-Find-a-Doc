@@ -24,11 +24,11 @@
             "ui_off_text": ""
         },
         {
-            "key": "field_appointment_request_heading_system",
-            "label": "Heading for Visit Pre-Registration",
-            "name": "appointment_request_heading_system",
+            "key": "field_appointment_request_heading_standlone_system",
+            "label": "Standalone Heading for Visit Pre-Registration",
+            "name": "appointment_request_heading_standlone_system",
             "type": "text",
-            "instructions": "",
+            "instructions": "This heading text will be used when appointment request forms section is the only appointment option displayed.",
             "required": 1,
             "conditional_logic": [
                 [
@@ -44,18 +44,18 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "Immediate Care",
-            "placeholder": "Immediate Care",
+            "default_value": "Appointments",
+            "placeholder": "Appointments",
             "prepend": "",
             "append": "",
             "maxlength": ""
         },
         {
-            "key": "field_appointment_request_descr_system",
-            "name": "appointment_request_descr_system",
+            "key": "field_appointment_request_descr_standlone_system",
+            "name": "appointment_request_descr_standlone_system",
             "type": "textarea",
-            "label": "Description for Visit Pre-registration",
-            "instructions": "This paragraph introduces the dropdown for selecting a visit type when pre-registering for a visit. <br />The paragraph should briefly describe what the user can do.",
+            "label": "Standalone Description for Visit Pre-registration",
+            "instructions": "This description text will be used when appointment request forms section is the only appointment option displayed. <br />This paragraph introduces the dropdown for selecting a visit type when pre-registering for a visit. <br />The paragraph should briefly describe what the user can do.",
             "required": 1,
             "conditional_logic": [
                 [
@@ -71,8 +71,62 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "Spend less time waiting and get home faster by choosing an available time.",
-            "placeholder": "Spend less time waiting and get home faster by choosing an available time.",
+            "default_value": "Appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.",
+            "placeholder": "Appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.",
+            "maxlength": "",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_appointment_request_heading_nested_system",
+            "label": "Nested Heading for Visit Pre-Registration",
+            "name": "appointment_request_heading_nested_system",
+            "type": "text",
+            "instructions": "This heading text will be used when MyChart Open Scheduling section is also displayed.",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_appointment_request_query_system",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Specialized Care",
+            "placeholder": "Specialized Care",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_appointment_request_descr_nested_system",
+            "name": "appointment_request_descr_nested_system",
+            "type": "textarea",
+            "label": "Nested Description for Visit Pre-registration",
+            "instructions": "This description text will be used when MyChart Open Scheduling section is also displayed. <br />This paragraph introduces the dropdown for selecting a visit type when pre-registering for a visit. <br />The paragraph should briefly describe what the user can do.",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_appointment_request_query_system",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Some appointments at this location involve specialized care and cannot be scheduled online. For those, submit a request for an appointment.",
+            "placeholder": "Some appointments at this location involve specialized care and cannot be scheduled online. For those, submit a request for an appointment.",
             "maxlength": "",
             "rows": 2,
             "new_lines": ""
