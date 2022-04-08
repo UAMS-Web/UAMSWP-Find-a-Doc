@@ -1,0 +1,49 @@
+
+{
+    "key": "group_appointment_request_options",
+    "title": "Appointment Request Forms",
+    "fields": [
+        {
+            "key": "field_appointment_request_query_system",
+            "label": "Allow Linking to Appointment Request Forms?",
+            "name": "appointment_request_query_system",
+            "type": "true_false",
+            "instructions": "Grant the ability at the page level to display a link or dropdown to one or more online appointment request forms.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_permissions": "",
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "uamswp-fad-mychart"
+            }
+        ]
+    ],
+    "menu_order": 10,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "left",
+    "instruction_placement": "field",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "acfe_display_title": "",
+    "acfe_autosync": "",
+    "acfe_permissions": "",
+    "acfe_note": "",
+    "acfe_meta": ""
+}
