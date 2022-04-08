@@ -1684,7 +1684,7 @@
             "acfe_group_modal": 0,
             "sub_fields": [
                 {
-                    "key": "field_physician_scheduling_mychart",
+                    "key": "field_physician_scheduling_mychart_tab",
                     "label": "MyChart Open Scheduling",
                     "name": "",
                     "type": "tab",
@@ -1888,7 +1888,7 @@
                     "multiple": 1
                 },
                 {
-                    "key": "field_physician_scheduling_request",
+                    "key": "field_physician_scheduling_request_tab",
                     "label": "Appointment Request Forms",
                     "name": "",
                     "type": "tab",

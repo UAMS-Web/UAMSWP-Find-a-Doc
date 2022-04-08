@@ -3378,7 +3378,7 @@
             "acfe_group_modal": 0,
             "sub_fields": [
                 {
-                    "key": "field_location_scheduling_mychart",
+                    "key": "field_location_scheduling_mychart_tab",
                     "label": "MyChart Open Scheduling",
                     "name": "",
                     "type": "tab",
@@ -3804,7 +3804,7 @@
                     ]
                 },
                 {
-                    "key": "field_location_scheduling_request",
+                    "key": "field_location_scheduling_request_tab",
                     "label": "Appointment Request Forms",
                     "name": "",
                     "type": "tab",
