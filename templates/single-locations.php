@@ -314,7 +314,7 @@ while ( have_posts() ) : the_post(); ?>
 	$location_ac_query = get_field('location_ac_query');
 	$online_scheduling_query = get_field('location_appointments_query');
     $mychart_scheduling_options = $online_scheduling_group['location_scheduling_mychart_book_options'];
-	// $mychart_scheduling_options_rows = have_rows($mychart_scheduling_options);
+    $mychart_scheduling_preregister_options = $online_scheduling_group['location_scheduling_mychart_preregister_options'];
 	// $mychart_scheduling_visit_type = '';
 	include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-check.php' );
 
@@ -956,7 +956,17 @@ while ( have_posts() ) : the_post(); ?>
 									$appointment_request_utm_content_val = $parent_slug ? $parent_slug . '_' . $page_slug : $page_slug;
 									include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-request.php' );
 								}
-								// End link to specialized care appointment request ?>
+								// End link to specialized care appointment request
+								
+								// Begin Visit Pre-registration section
+								
+								$mychart_scheduling_preregister_heading = get_field('mychart_scheduling_preregister_heading_system', 'option') ?: 'Immediate Care';
+								$mychart_scheduling_preregister_descr = get_field('mychart_scheduling_preregister_descr_system', 'option') ?: 'Spend less time waiting and get home faster by choosing an available time.';
+								?>
+								<h2 class="h4"><?php echo $mychart_scheduling_preregister_heading; ?></h2>
+								<p><?php echo $mychart_scheduling_preregister_descr; ?></p>
+								<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-preregister.php' ); ?>
+								<?php // End Visit Pre-registration section ?>
 							</div>
 							<?php } ?>
 						</div>
