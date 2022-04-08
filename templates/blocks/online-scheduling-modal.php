@@ -32,7 +32,7 @@ if( $show_mychart_scheduling_section ) {
     $mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
     $mychart_scheduling_linksource = ( isset($mychart_scheduling_linksource) && !empty($mychart_scheduling_linksource) ) ? $mychart_scheduling_linksource : 'uamshealth.com';
 
-    $mychart_scheduling_intro = get_field('mychart_scheduling_book_intro', 'option'); // Default value for appointment section intro
+    $mychart_scheduling_intro = get_field('mychart_scheduling_book_intro_system', 'option'); // Default value for appointment section intro
     $mychart_scheduling_intro = ( isset($mychart_scheduling_intro_override) && !empty($mychart_scheduling_intro_override) ) ? $mychart_scheduling_intro_override : $mychart_scheduling_intro;
     $i = 0;
     // Loop through repeater rows.

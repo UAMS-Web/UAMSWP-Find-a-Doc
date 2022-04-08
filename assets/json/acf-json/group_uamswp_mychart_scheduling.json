@@ -159,8 +159,8 @@
             "new_lines": ""
         },
         {
-            "key": "field_mychart_scheduling_book_intro",
-            "name": "mychart_scheduling_book_intro",
+            "key": "field_mychart_scheduling_book_intro_system",
+            "name": "mychart_scheduling_book_intro_system",
             "type": "textarea",
             "label": "Introduction for MyChart Open Scheduling Widget Used For Appointment Booking",
             "instructions": "This paragraph introduces each MyChart open scheduling widget used for booking an appointment. <br />The paragraph should provide brief general information about MyChart open scheduling. There is a 221 character limit.",
