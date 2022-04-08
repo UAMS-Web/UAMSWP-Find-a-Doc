@@ -940,10 +940,10 @@ while ( have_posts() ) : the_post(); ?>
 
 								// Begin link to specialized care appointment request
 								if ( $show_appointment_request_section ) {
-									$appointment_request_heading_standalone = get_field('appointment_request_heading_standalone_system', 'option');
-									$appointment_request_intro_standalone = get_field('appointment_request_descr_standalone_system', 'option');
-									$appointment_request_heading_nested = get_field('appointment_request_heading_nested_system', 'option');
-									$appointment_request_intro_nested = get_field('appointment_request_descr_nested_system', 'option');
+									$appointment_request_heading_standalone = get_field('appointment_request_heading_standalone_system', 'option') ?: 'Appointments';
+									$appointment_request_intro_standalone = get_field('appointment_request_descr_standalone_system', 'option') ?: 'Appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.';
+									$appointment_request_heading_nested = get_field('appointment_request_heading_nested_system', 'option') ?: 'Specialized Care';
+									$appointment_request_intro_nested = get_field('appointment_request_descr_nested_system', 'option') ?: 'Some appointments at this location involve specialized care and cannot be scheduled online. For those, submit a request for an appointment.';
 									if ( $show_mychart_scheduling_section ) {
 										echo '<h3 class="h5">' . $appointment_request_heading_nested . '</h3>';
 										echo '<p>' . $appointment_request_intro_nested . '</p>';
