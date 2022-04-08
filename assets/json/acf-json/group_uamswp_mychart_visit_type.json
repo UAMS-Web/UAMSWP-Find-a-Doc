@@ -69,7 +69,7 @@
             "label": "Specific Open Scheduling Widget Introduction (Optional Override)",
             "name": "mychart_visit_type_intro",
             "type": "textarea",
-            "instructions": "You can define a value here to replace the main section introduction (defined by <em>General MyChart Open Scheduling Widget Introduction</em>) if that general introduction does not adequately introduce this specific widget. <br>If used, this paragraph should provide general information about MyChart open scheduling and a brief overview of anything necessary for users to know about this specific scheduling widget. <br>There is a 221 character limit.",
+            "instructions": "You can define a value here to replace the system default introduction (defined in Find-a-Doc Settings) if that general introduction does not adequately introduce this specific widget. <br>If used, this paragraph should provide general information about MyChart open scheduling and a brief overview of anything necessary for users to know about this visit type's scheduling widget. <br>There is a 221 character limit.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -89,7 +89,7 @@
             "label": "Open Scheduling Widget Link Text",
             "name": "mychart_visit_type_link_text",
             "type": "text",
-            "instructions": "You can define a value here to replace the main section introduction (defined by <em>General MyChart Open Scheduling Widget Introduction</em>) if that general introduction does not adequately introduce this specific widget. <br>If used, this paragraph should provide general information about MyChart open scheduling and a brief overview of anything necessary for users to know about this specific scheduling widget. <br>There is a 221 character limit.",
+            "instructions": "Use a very short phrase, visit type name or treatment name that makes the purpose of this specific scheduling widget clear to the user.            ",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
