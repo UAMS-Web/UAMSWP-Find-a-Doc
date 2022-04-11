@@ -6,13 +6,17 @@
      *  Required vars:
      *      $show_mychart_scheduling_section
      * 
-     *  Optional vars from single location template:
+     *  Required vars from single location template:
      *      $mychart_scheduling_options
+     * 
+     *  Required vars from single provider template:
+     *      $mychart_scheduling_visit_type
+     * 
+     *  Optional vars from single location template:
      *      $mychart_scheduling_intro_override
      *      $mychart_scheduling_dep
      * 
      *  Optional vars from single provider template:
-     *      $mychart_scheduling_visit_type
      *      $mychart_scheduling_ser
      */
 

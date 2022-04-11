@@ -5,10 +5,10 @@
      * 
      *  Required vars:
      * 
-     *  Optional vars from single location template:
+     *  Required vars from single location template:
      *      $mychart_scheduling_preregister_options
      * 
-     *  Optional vars from single provider template:
+     *  Required vars from single provider template:
      *      $mychart_scheduling_visit_type
      */
 
