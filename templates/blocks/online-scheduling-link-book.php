@@ -3,12 +3,10 @@
      *  Template Name: Online Scheduling, MyChart Open Scheduling Widget Modal Toggles
      *  Designed for UAMS Find-a-Doc
      * 
-     *  Required vars:
-     * 
-     *  Optional vars from single location template:
+     *  Required vars from single location template:
      *      $mychart_scheduling_options
      * 
-     *  Optional vars from single provider template:
+     *  Required vars from single provider template:
      *      $mychart_scheduling_visit_type
      */
 
