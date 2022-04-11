@@ -606,7 +606,7 @@ while ( have_posts() ) : the_post(); ?>
 					<?php // Begin Row for Address and Contact Information ?>
 					<div class="text-subsection">
 						<div class="row">
-							<div class="col-lg">
+							<div class="col-12 col-lg-6">
 								<h2 class="h5">Address</h2>
 								<p><?php echo $location_address_1; ?><br/>
 								<?php echo ( $location_address_2 ? $location_address_2 . '<br/>' : ( $location_address_2_deprecated ? $location_address_2_deprecated . '<br/>' : '')); ?>
@@ -634,7 +634,7 @@ while ( have_posts() ) : the_post(); ?>
 								</ul>
 
 							</div>
-							<div class="col-lg">
+							<div class="col-12 col-lg-6">
 								<h2 class="h5">Phone Numbers</h2>
 								<?php
 									// Phone values
@@ -650,7 +650,7 @@ while ( have_posts() ) : the_post(); ?>
 					<div class="text-subsection">
 						<div class="row">
 							<?php // Begin Hours Information ?>
-							<div class="<?php echo $show_online_scheduling_section ? 'col-lg' : 'col'; ?>">
+							<div class="col-12 <?php echo $show_online_scheduling_section ? 'col-lg-6' : ''; ?>">
 								<?php // Hours values
 								$hoursvary = $location_hours_group['location_hours_variable'];
 								$hoursvary_info = $location_hours_group['location_hours_variable_info'];
@@ -926,7 +926,7 @@ while ( have_posts() ) : the_post(); ?>
 							<?php // End Hours Information ?>
 							<?php // Begin Appointment Information
 							if ( $show_online_scheduling_section ) { ?>
-							<div class="col-lg">
+							<div class="col-12 col-lg-6">
 								<?php // Begin MyChart Scheduling Links Section
 								if ( $show_mychart_scheduling_section ) {
 									$mychart_scheduling_book_heading = get_field('mychart_scheduling_book_heading_system', 'option') ?: 'Appointments';

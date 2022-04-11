@@ -506,7 +506,7 @@ while ( have_posts() ) : the_post();
                             <div class="row">
                                 <?php // Begin MyChart Scheduling Links Section
                                 if ($show_mychart_scheduling_section) { ?>
-                                    <div class="col-lg">
+                                    <div class="col-12 col-lg-6">
                                         <h2 class="h5"><?php echo $appointments_heading; ?></h2>
                                         <p>Book an appointment with this provider online.</p>
                                         <div class="btn-container">
@@ -528,7 +528,7 @@ while ( have_posts() ) : the_post();
                                     $appointment_request_intro_standalone = 'Appointments for specialized care with this provider cannot be scheduled online. However, you can submit a request for an appointment.';
                                     $appointment_request_button_text = 'Request an Appointment';
                                     ?>
-                                    <div class="col-lg">
+                                    <div class="col-12 col-lg-6">
                                         <?php
                                         if ( $show_mychart_scheduling_section ) {
                                             echo '<h3 class="h5">' . $appointment_request_heading . '</h3>';
@@ -555,7 +555,7 @@ while ( have_posts() ) : the_post();
                     // End Appointment Information ?>
                     <div class="text-subsection">
 						<div class="row">
-							<div class="col-lg">
+							<div class="col-12 col-lg-6">
                                 <?php 
                                     $l = 1;
                                     if( $locations && $location_valid ): ?>
@@ -656,7 +656,7 @@ while ( have_posts() ) : the_post();
                                     </div>
                                 <?php endif; ?> 
                             </div>
-							<div class="col-lg">
+							<div class="col-12 col-lg-6">
                                 <h2 class="h5">Overview</h2>
                                 <dl data-sectiontitle="Overview">
                                 <?php // Display area(s) of expertise
