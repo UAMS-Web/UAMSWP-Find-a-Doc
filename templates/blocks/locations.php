@@ -125,7 +125,7 @@ if($filter_type || $filter_region || $filter_aoe || $filter_ids) {
                         <h2 class="module-title"><span class="title"><?php echo $heading; ?></span></h2>
                         <?php echo $content_block ? '<div class="module-description"><p>' . $content_block . '</p></div>' : ''; ?>
                         <div class="card-list-container location-card-list-container">
-                            <div class="card-list">
+                            <div class="card-list card-list-locations">
                             <?php while ( $location_query->have_posts() ) : $location_query->the_post();
                                 $id = get_the_ID(); 
                                 include( UAMS_FAD_PATH . '/templates/loops/location-card.php' ); 

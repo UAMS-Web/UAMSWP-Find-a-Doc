@@ -107,7 +107,7 @@
 		$location_content .= '<div class="col-12">';
 		$location_content .= '<h2 class="module-title"><span class="title">Locations Where Providers Treat ' . single_cat_title( '', false ) . '</span></h2>';
 		$location_content .= '<div class="card-list-container location-card-list-container">';
-		$location_content .= '<div class="card-list">';
+		$location_content .= '<div class="card-list card-list-locations">';
 		ob_start();
 		ob_clean();
 		while ( $location_query->have_posts() ) : $location_query->the_post();
