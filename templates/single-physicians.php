@@ -540,8 +540,12 @@ while ( have_posts() ) : the_post();
 
                                         $appointment_request_utm_medium_val = 'single-provider';
                                         $appointment_request_utm_content_val = $page_slug; // page slug
-									    include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-request.php' );
                                         ?>
+                                        <div class="btn-container">
+                                            <div class="inner-container">
+                                                <?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-request.php' ); ?>
+                                            </div>
+                                        </div>
                                     </div>
                                 <?php } // endif $show_appointment_request_section
                                 // End link to specialized care appointment request ?>

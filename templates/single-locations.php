@@ -958,8 +958,13 @@ while ( have_posts() ) : the_post(); ?>
 
 									$appointment_request_utm_medium_val = 'single-location';
 									$appointment_request_utm_content_val = $parent_slug ? $parent_slug . '_' . $page_slug : $page_slug;
-									include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-request.php' );
-								}
+									?>
+									<div class="btn-container">
+										<div class="inner-container">
+											<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-request.php' ); ?>
+										</div>
+									</div>
+								<?php }
 								// End link to specialized care appointment request
 								
 								// Begin Visit Pre-registration section
