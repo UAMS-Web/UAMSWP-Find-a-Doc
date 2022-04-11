@@ -1,3 +1,12 @@
+// Enable SASS Built-In Modules
+@use 'sass:math'; // The sass:math module provides functions that operate on numbers.
+// @use 'sass:string'; // The sass:string module makes it easy to combine, search, or split apart strings.
+// @use 'sass:color'; // The sass:color module generates new colors based on existing ones, making it easy to build color themes.
+// @use 'sass:list'; // The sass:list module lets you access and modify values in lists.
+// @use 'sass:map'; // The sass:map module makes it possible to look up the value associated with a key in a map, and much more.
+// @use 'sass:selector'; // The sass:selector module provides access to Sass’s powerful selector engine.
+// @use 'sass:meta'; // The sass:meta module exposes the details of Sass’s inner workings.
+
 // Bootstrap Core Variable Override
 @import "../../../../themes/uams-2020/assets/scss/supporting/variables-bootstrap-core-override";
 
