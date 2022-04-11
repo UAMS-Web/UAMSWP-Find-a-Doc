@@ -1249,7 +1249,7 @@ while ( have_posts() ) : the_post();
                     <div class="col-12">
                         <h2 class="module-title"><span class="title">Locations Where <?php echo $short_name; ?> Practices</span></h2>
                         <div class="card-list-container location-card-list-container">
-                            <div class="card-list">
+                            <div class="card-list card-list-locations">
                             <?php $l = 1;
                                 $location_schema = ',
     "address": [';
