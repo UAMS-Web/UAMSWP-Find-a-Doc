@@ -509,7 +509,11 @@ while ( have_posts() ) : the_post();
                                     <div class="col-lg">
                                         <h2 class="h5"><?php echo $appointments_heading; ?></h2>
                                         <p>Book an appointment with this provider online.</p>
-									    <?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book.php' ); ?>
+                                        <div class="btn-container">
+                                            <div class="inner-container">
+                                                <?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book.php' ); ?>
+                                            </div>
+                                        </div>
                                     </div>
                                 <?php } // endif $show_mychart_scheduling_section
                                 // End MyChart Scheduling Links Section

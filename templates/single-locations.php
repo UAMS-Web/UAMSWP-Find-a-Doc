@@ -934,7 +934,11 @@ while ( have_posts() ) : the_post(); ?>
 									?>
 									<h2 class="h4"><?php echo $mychart_scheduling_book_heading; ?></h2>
 									<p><?php echo $mychart_scheduling_book_descr; ?></p>
-									<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book.php' ); ?>
+									<div class="btn-container">
+										<div class="inner-container">
+											<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book.php' ); ?>
+										</div>
+									</div>
 								<?php } // endif $show_mychart_scheduling_section
 								// End MyChart Scheduling Links Section
 
