@@ -15,6 +15,8 @@ $mychart_scheduling_options = isset($mychart_scheduling_options) ? $mychart_sche
 
 // Check optional vars from single provider template
 $mychart_scheduling_visit_type = isset($mychart_scheduling_visit_type) ? $mychart_scheduling_visit_type : '';
+
+if ( $mychart_scheduling_options || $mychart_scheduling_visit_type ) {
 ?>
 <div class="dropdown">
     <button class="btn btn-primary dropdown-toggle" type="button" id="mychart_scheduling_dropdown" data-toggle="dropdown" aria-expanded="false">Book an Appointment</button>
@@ -40,3 +42,4 @@ $mychart_scheduling_visit_type = isset($mychart_scheduling_visit_type) ? $mychar
         } // endif ( $mychart_scheduling_options || $mychart_scheduling_visit_type) ?>
     </div>
 </div>
+<?php } // endif ?>
