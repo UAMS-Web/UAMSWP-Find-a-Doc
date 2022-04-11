@@ -631,7 +631,7 @@ while ( have_posts() ) : the_post(); ?>
 									<?php if( $location_web_name && $location_url ){ ?>
 										<li><a href="<?php echo $location_url['url']; ?>" target="_blank" data-categorytitle="External Link"><span class="link-text"><?php echo $location_web_name; ?></span><span class="far fa-external-link-alt link-icon"></span></span></a></li>
 									<?php } // endif ( $location_web_name && $location_url ) ?>
-									</ul>
+								</ul>
 
 							</div>
 							<div class="col-lg">
