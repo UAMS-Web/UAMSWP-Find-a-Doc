@@ -7,12 +7,18 @@
             border-top: $hr-border-width solid $hr-border-color;
             padding-top: $uams-module-padding-mobile;
         }
+
+        [class^="col-"]:nth-child(n+2) {
+            @include media-breakpoint-down(md) {
+                margin-top: $uams-module-padding-mobile;
+            }
+        }
     }
 }
 
 .doctor-item,
 .location-item,
-.location-card-list-container {
+.card-list-locations {
     dl {
         line-height: $nav-line-height;
 
