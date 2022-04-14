@@ -995,7 +995,7 @@ while ( have_posts() ) : the_post();
                             <?php endif; ?>
                             <?php
                                 if( have_rows('physician_education') ): ?>
-                                    <h3 class="h4">Education</h3>
+                                    <h3 class="h4">Education and Training</h3>
                                     <dl>
                                     <?php while( have_rows('physician_education') ): the_row();
                                         $school_name = get_term( get_sub_field('school'), 'school');
