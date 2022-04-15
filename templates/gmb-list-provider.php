@@ -518,8 +518,10 @@ function display_provider_image() {
                                         echo '<td data-gmb-column="Opening date" class="no-break"></td>';
 
                                     // Logo photo
-                                    // Intentionally left blank
-                                        echo '<td data-gmb-column="Logo photo" class="no-break"></td>';
+                                    // Get largest favicon image from UAMS 2020 theme
+                                        echo '<td data-gmb-column="Logo photo" class="no-break">';
+                                        echo get_stylesheet_directory_uri() . '/assets/favicon/favicon-310x310.png';
+                                        echo '</td>';
 
                                     // Cover photo
                                     // Intentionally left blank, for now
