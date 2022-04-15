@@ -231,6 +231,9 @@ function display_provider_image() {
                         } // endforeach
                     }
 
+                    // Create the image variables
+                    $provider_gmb_logo_photo = get_stylesheet_directory_uri() . '/assets/favicon/favicon-310x310.png'; // Get largest favicon image from UAMS 2020 theme
+
                     // Create the table
                     if ( $locations && $location_valid && !$resident && !$provider_gmb_exclude ) {
 
@@ -518,9 +521,8 @@ function display_provider_image() {
                                         echo '<td data-gmb-column="Opening date" class="no-break"></td>';
 
                                     // Logo photo
-                                    // Get largest favicon image from UAMS 2020 theme
                                         echo '<td data-gmb-column="Logo photo" class="no-break">';
-                                        echo get_stylesheet_directory_uri() . '/assets/favicon/favicon-310x310.png';
+                                        echo $provider_gmb_logo_photo ?: '';
                                         echo '</td>';
 
                                     // Cover photo
