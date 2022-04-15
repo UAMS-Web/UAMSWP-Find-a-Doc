@@ -233,6 +233,7 @@ function display_provider_image() {
 
                     // Create the image variables
                     $provider_gmb_logo_photo = get_stylesheet_directory_uri() . '/assets/favicon/favicon-310x310.png'; // Get largest favicon image from UAMS 2020 theme
+                    $provider_gmb_cover_photo = wp_get_attachment_image_url(get_field( 'physician_image_wide', $post_id ), 'full');
 
                     // Create the table
                     if ( $locations && $location_valid && !$resident && !$provider_gmb_exclude ) {
@@ -526,9 +527,8 @@ function display_provider_image() {
                                         echo '</td>';
 
                                     // Cover photo
-                                    // Intentionally left blank, for now
                                         echo '<td data-gmb-column="Cover photo" class="no-break">';
-                                        //echo $featured_img_url;
+                                        echo $provider_gmb_cover_photo ?: '';
                                         echo '</td>';
 
                                     // Other photos
