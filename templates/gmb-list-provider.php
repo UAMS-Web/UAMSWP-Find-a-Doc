@@ -479,7 +479,7 @@ function display_provider_image() {
 
                                     // Business name
                                         if ( $gmb_show_store_code ) {
-                                            echo '<td data-gmb-column="Business name" class="no-break">UAMS - ' . $full_name . '</td>';
+                                            echo '<td data-gmb-column="Business name" class="no-break">UAMS Health - ' . $full_name . '</td>';
                                         }
 
                                     // Address line 1
