@@ -5,7 +5,7 @@
  * 
  */
 function uamswp_add_gmb_export_page() {
-    add_submenu_page( 'fad-settings', 'UAMSWP GMB Export', 'GMB Export', 'manage_options', 'uamswp-gmb-export', 'uamswp_fad_gmb_export_page', '', 90 );
+    add_submenu_page( 'fad-settings', 'UAMSWP CSV Export', 'CSV Export', 'manage_options', 'uamswp-gmb-export', 'uamswp_fad_gmb_export_page', '', 90 );
 }
 add_action( 'admin_menu', 'uamswp_add_gmb_export_page', 105 );
 
