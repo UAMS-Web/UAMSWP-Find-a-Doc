@@ -11,13 +11,21 @@ add_action( 'admin_menu', 'uamswp_add_gmb_export_page', 105 );
 
 function uamswp_fad_gmb_export_page() {
     ?>
-    <h2><?php echo $GLOBALS['title'] ?></h2>
-    <a class="button button-primary" href="<?php echo admin_url( 'admin.php?page=uamswp-gmb-export' ) ?>&action=download_csv&_wpnonce=<?php echo wp_create_nonce( 'download_csv' )?>" class="page-title-action"><?php _e('Export to CSV','uamswp-find-a-doc');?></a>
+    <h1><?php echo $GLOBALS['title'] ?></h1>
+    <p>These will take a little time to generate, please be patient.</p>
+    <h2>Doximity List</h2>
+    <p><a class="button button-primary" href="<?php echo admin_url( 'admin.php?page=uamswp-gmb-export' ) ?>&action=download_doximity_csv&_wpnonce=<?php echo wp_create_nonce( 'download_csv' )?>" class="page-title-action"><?php _e('Export to CSV','uamswp-find-a-doc');?></a></p>
+    <h2>GMB Provider List</h2>
+    <p><a class="button button-primary" href="<?php echo admin_url( 'admin.php?page=uamswp-gmb-export' ) ?>&action=download_gmb_provider_csv&_wpnonce=<?php echo wp_create_nonce( 'download_csv' )?>" class="page-title-action"><?php _e('Export to CSV','uamswp-find-a-doc');?></a></p>
+    <h2>GMB Location List</h2>
+    <p><a class="button button-primary" href="<?php echo admin_url( 'admin.php?page=uamswp-gmb-export' ) ?>&action=download_gmb_location_csv&_wpnonce=<?php echo wp_create_nonce( 'download_csv' )?>" class="page-title-action"><?php _e('Export to CSV','uamswp-find-a-doc');?></a></p>
+    <h2>MyChart Provider List</h2>
+    <p><a class="button button-primary" href="<?php echo admin_url( 'admin.php?page=uamswp-gmb-export' ) ?>&action=download_mychart_csv&_wpnonce=<?php echo wp_create_nonce( 'download_csv' )?>" class="page-title-action"><?php _e('Export to CSV','uamswp-find-a-doc');?></a></p>
     <?php
 }
 
-// Add action hook only if action=download_csv
-if ( isset($_GET['action'] ) && $_GET['action'] == 'download_csv' )  {
+// Add action hook only if action=download_gmb_provider_csv
+if ( isset($_GET['action'] ) && $_GET['action'] == 'download_gmb_provider_csv' )  {
 	// Handle CSV Export
 	add_action( 'admin_init', 'gmb_csv_export' );
 }
@@ -94,13 +102,13 @@ function gmb_csv_export() {
         $table_head[38]   =  'From the business: Identifies as Black-owned (is_black_owned)';
         $table_head[39]   =  'From the business: Identifies as veteran-led (is_owned_by_veterans)';
         $table_head[40]   =  'From the business: Identifies as women-led (is_owned_by_women)';
-        $table_head[41]   =  'Health &amp; safety: Appointment required (requires_appointments)';
-        $table_head[42]   =  'Health &amp; safety: Mask required (requires_masks_customers)';
-        $table_head[43]   =  'Health &amp; safety: Safety dividers at checkout (has_plexiglass_at_checkout)';
-        $table_head[44]   =  'Health &amp; safety: Staff get temperature checks (requires_temperature_check_staff)';
-        $table_head[45]   =  'Health &amp; safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)';
-        $table_head[46]   =  'Health &amp; safety: Staff wear masks (requires_masks_staff)';
-        $table_head[47]   =  'Health &amp; safety: Temperature check required (requires_temperature_check_customers)';
+        $table_head[41]   =  'Health & safety: Appointment required (requires_appointments)';
+        $table_head[42]   =  'Health & safety: Mask required (requires_masks_customers)';
+        $table_head[43]   =  'Health & safety: Safety dividers at checkout (has_plexiglass_at_checkout)';
+        $table_head[44]   =  'Health & safety: Staff get temperature checks (requires_temperature_check_staff)';
+        $table_head[45]   =  'Health & safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)';
+        $table_head[46]   =  'Health & safety: Staff wear masks (requires_masks_staff)';
+        $table_head[47]   =  'Health & safety: Temperature check required (requires_temperature_check_customers)';
         $table_head[48]   =  'Offerings: Passport photos (has_onsite_passport_photos)';
         $table_head[49]   =  'Payments: Cash-only (requires_cash_only)';
         $table_head[50]   =  'Payments: Checks (pay_check)';
@@ -225,7 +233,7 @@ function gmb_csv_export() {
                             $row[0] = $store_code;
 
                         // Business name
-                            $row[1] = 'UAMS - ' . $full_name;
+                            $row[1] = 'UAMS - ' . html_entity_decode($full_name);
 
                         // Address line 1
 
@@ -350,19 +358,19 @@ function gmb_csv_export() {
                                 }
 
                             // Address line 1
-                                $row[2] = $location_address_1 ? $location_address_1 : '';
+                                $row[2] = $location_address_1 ? html_entity_decode($location_address_1) : '';
 
                             // Address line 2
-                                $row[3] = ( $location_address_2 && !empty($location_address_2) ) ? $location_address_2 : '';
+                                $row[3] = ( $location_address_2 && !empty($location_address_2) ) ? html_entity_decode($location_address_2) : '';
     
                             // Address line 3
-                                $row[4] = ( $location_address_3 && !empty($location_address_3) ) ? $location_address_3 : '';
+                                $row[4] = ( $location_address_3 && !empty($location_address_3) ) ? html_entity_decode($location_address_3) : '';
     
                             // Address line 4
-                                $row[5] = ( $location_address_4 && !empty($location_address_4) ) ? $location_address_4 : '';
+                                $row[5] = ( $location_address_4 && !empty($location_address_4) ) ? html_entity_decode($location_address_4) : '';
     
                             // Address line 5
-                                $row[6] = ( $location_address_5 && !empty($location_address_5) ) ? $location_address_5 : '';
+                                $row[6] = ( $location_address_5 && !empty($location_address_5) ) ? html_entity_decode($location_address_5) : '';
 
                             // Sub-locality
                             // Intentionally left blank
@@ -457,7 +465,7 @@ function gmb_csv_export() {
                                         $excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 747, '...');
                                     }
                                 }
-                                $row[27] = $excerpt;
+                                $row[27] = html_entity_decode($excerpt);
 
                             // Opening date
                             // Intentionally left blank
