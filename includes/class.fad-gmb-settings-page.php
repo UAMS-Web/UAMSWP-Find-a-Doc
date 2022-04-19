@@ -5,9 +5,9 @@
  * 
  */
 function uamswp_add_gmb_export_page() {
-    add_menu_page( 'UAMSWP GMB Export', 'GMB Export', 'manage_options', 'uamswp-gmb-export', 'uamswp_fad_gmb_export_page', '', 90 );
+    add_submenu_page( 'fad-settings', 'UAMSWP GMB Export', 'GMB Export', 'manage_options', 'uamswp-gmb-export', 'uamswp_fad_gmb_export_page', '', 90 );
 }
-add_action( 'admin_menu', 'uamswp_add_gmb_export_page' );
+add_action( 'admin_menu', 'uamswp_add_gmb_export_page', 105 );
 
 function uamswp_fad_gmb_export_page() {
     ?>
@@ -42,10 +42,10 @@ function gmb_csv_export() {
     $args = array(
         "post_type" => "provider",
         "post_status" => "publish",
-        "posts_per_page" => "50", // -1 => Set for all
+        "posts_per_page" => "-1", // -1 => Set for all
         "orderby" => "title",
         "order" => "ASC",
-        'paged' => get_query_var( 'paged' ),
+        // 'paged' => get_query_var( 'paged' ),
     );
 
     global $wp_query;
