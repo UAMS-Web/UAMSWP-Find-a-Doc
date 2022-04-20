@@ -704,7 +704,7 @@ function gmb_provider_csv_export() {
                                 $row[15] = '';
 
                             // Website
-                                $row[16] = 'https://uamshealth.com/provider/' . $profile_slug . '/?utm_source=google&amp;utm_medium=gmb&amp;utm_campaign=clinical&amp;utm_term=provider&amp;utm_content=profile&amp;utm_specs=' . $store_code;
+                                $row[16] = 'https://uamshealth.com/provider/' . $profile_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=profile&utm_specs=' . $store_code;
 
                             // Primary category
                                 $row[17] = $provider_gmb_cat_primary_name;
@@ -947,13 +947,13 @@ function gmb_provider_csv_export() {
                                 $row[60] = '';
 
                             // Place page URLs: COVID-19 info link (url_covid_19_info_page)
-                                $row[61] = 'https://uamshealth.com/coronavirus/?utm_source=google&amp;utm_medium=gmb&amp;utm_campaign=clinical&amp;utm_term=provider&amp;utm_content=covid-19-info-link&amp;utm_specs=' . $store_code;
+                                $row[61] = 'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=covid-19-info-link&utm_specs=' . $store_code;
 
                             // Place page URLs: Menu link (url_menu)
                                 $row[62] = '[NOT APPLICABLE]';
 
                             // Place page URLs: Virtual care link (url_facility_telemedicine_page)
-                                $row[63] = $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=virtual-care-link&amp;utm_specs=' . $store_code . '#telemedicine-info' : '';
+                                $row[63] = $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=virtual-care-link&utm_specs=' . $store_code . '#telemedicine-info' : '';
 
                             // Planning: LGBTQ friendly (welcomes_lgbtq)
                                 $row[64] = '';
@@ -1319,7 +1319,7 @@ function gmb_location_csv_export() {
                     $row[15] =  '';
 
                 // Website
-                    $row[16] =  'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=profile&amp;utm_specs=' . $store_code;
+                    $row[16] =  'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=profile&utm_specs=' . $store_code;
 
                 // Primary category
                     $row[17] =  $location_gmb_cat_primary_name;
@@ -1604,13 +1604,13 @@ function gmb_location_csv_export() {
                     $row[60] =  '';
 
                 // Place page URLs: COVID-19 info link (url_covid_19_info_page)
-                    $row[61] =  'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=covid-19-info-link&amp;utm_specs=' . $store_code;
+                    $row[61] =  'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=covid-19-info-link&utm_specs=' . $store_code;
 
                 // Place page URLs: Menu link (url_menu)
                     $row[62] = '[NOT APPLICABLE]';
 
                 // Place page URLs: Virtual care link (url_facility_telemedicine_page)
-                    $row[63] =  $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=virtual-care-link&amp;utm_specs=' . $store_code . '#telemedicine-info' : '';
+                    $row[63] =  $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=virtual-care-link&utm_specs=' . $store_code . '#telemedicine-info' : '';
 
                 // Planning: LGBTQ friendly (welcomes_lgbtq)
                     $row[64] = '';
