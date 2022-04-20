@@ -217,9 +217,8 @@ function doximity_csv_export() {
 
                 // Office Address 1 field
                 
-                    // Get primary appointment location name
+                    // Get primary appointment location information
                     $l = 1;
-                    $primary_appointment_title = '';
                     $primary_appointment_address_1 = '';
                     $primary_appointment_address_2 = '';
                     $primary_appointment_city = '';
@@ -231,31 +230,48 @@ function doximity_csv_export() {
                         foreach( $locations as $location ) {
                             if ( 2 > $l ){
                                 if ( get_post_status ( $location ) == 'publish' ) {
-                                    $primary_appointment_title = get_the_title( $location );
-                                    $primary_appointment_address_1 = get_field( 'location_address_1', $location );
-                                    $primary_appointment_building = get_field('location_building', $location );
+                                    $primary_appointment_address_1 = get_field( 'location_address_1', $location ); // Get the street address
+                                    
+                                    // Construct the value for Address 2
+                                    $primary_appointment_building = get_field('location_building', $location ); // Get building taxonomy input
                                     if ($primary_appointment_building) {
-                                        $building = get_term($primary_appointment_building, "building");
-                                        $building_slug = $building->slug;
-                                        $building_name = $building->name;
+                                        $building = get_term($primary_appointment_building, "building"); // Get building object
+                                        $building_slug = $building->slug; // Get the building slug
+                                        $building_name = $building->name; // Get the building name
                                     }
-                                    $primary_appointment_floor = get_field_object('location_building_floor', $location );
-                                        $primary_appointment_floor_value = $primary_appointment_floor['value'];
-                                        $primary_appointment_floor_label = $primary_appointment_floor['choices'][ $primary_appointment_floor_value ];
-                                    $primary_appointment_suite = get_field('location_suite', $location );
-                                    $primary_appointment_address_2 =
-                                        ( ( $primary_appointment_building && $building_slug != '_none' ) ? $building_name . ( ( ($primary_appointment_floor && $primary_appointment_floor_value) || $primary_appointment_suite ) ? "\n" : '' ) : '' )
-                                        . ( $primary_appointment_floor && !empty($primary_appointment_floor_value) && $primary_appointment_floor_value != "0" ? $primary_appointment_floor_label . ( ( $primary_appointment_suite ) ? "\n" : '' ) : '' )
-                                        . ( $primary_appointment_suite ? $primary_appointment_suite : '' );
-                                    $primary_appointment_address_2_deprecated = get_field('location_address_2', $location );
-                                    if (!$primary_appointment_address_2) {
-                                        $primary_appointment_address_2 = $primary_appointment_address_2_deprecated;
+                                    $primary_appointment_floor_object = get_field_object('location_building_floor', $location ); // Get floor object from input
+                                        $primary_appointment_floor_value = $primary_appointment_floor_object['value']; // Get the floor selection value
+                                        $primary_appointment_floor_label = $primary_appointment_floor_value != "0" ? $primary_appointment_floor_object['choices'][ $primary_appointment_floor_value ] : ''; // If the floor value is not 0, get the floor selection label
+                                    $primary_appointment_suite = get_field('location_suite', $location ); // Get the suite input
+                                    $primary_appointment_address_2_arr = Array(); // Create empty array for constructing Address 2 value
+                                    if ( $primary_appointment_building && $building_slug != '_none' && isset($building_name) && !empty($building_name) ) {
+                                        // If the building input has a value
+                                        // and if the chosen building isn't 'None'
+                                        // and if the building's name exists...
+                                        $primary_appointment_address_2_arr[] .= $building_name; // Add the building name to the Address 2 list
                                     }
-                                    $primary_appointment_city = get_field( 'location_city', $location );
-                                    $primary_appointment_state = get_field( 'location_state', $location );
-                                    $primary_appointment_zip = get_field( 'location_zip', $location );
-                                    $primary_appointment_phone = get_field( 'location_phone', $location );
-                                    $primary_appointment_fax = get_field( 'location_fax', $location );
+                                    if ( $primary_appointment_floor_value != "0" && isset($primary_appointment_floor_label) & !empty($primary_appointment_floor_label) ) {
+                                        // If the building floor isn't set to 'Single-Story Building'
+                                        // and if the floor's label exists...
+                                        $primary_appointment_address_2_arr[] .= $primary_appointment_floor_label; // Add the building floor to the Address 2 list
+                                    }
+                                    if ( isset($primary_appointment_suite) & !empty($primary_appointment_suite) ) {
+                                        // If the suite exists...
+                                        $primary_appointment_address_2_arr[] .= $primary_appointment_suite; // Add the suite to the Address 2 list
+                                    }
+                                    $primary_appointment_address_2 = implode(', ', $primary_appointment_address_2_arr); // Create a comma-separated list from the array
+                                    $primary_appointment_address_2_deprecated = get_field('location_address_2', $location ); // Get the deprecated Address 2 input
+                                    if ( !$primary_appointment_address_2 ) {
+                                        // If the non-deprecated Address 2 value doesn't exist...
+                                        $primary_appointment_address_2 = $primary_appointment_address_2_deprecated; // Set the Address 2 value using the deprecated input value
+                                    }
+
+                                    // Get remaining address values
+                                    $primary_appointment_city = get_field( 'location_city', $location ); // Get the city
+                                    $primary_appointment_state = get_field( 'location_state', $location ); // Get the state
+                                    $primary_appointment_zip = get_field( 'location_zip', $location ); // Get the ZIP code
+                                    $primary_appointment_phone = get_field( 'location_phone', $location ); // Get the general clinic phone number
+                                    $primary_appointment_fax = get_field( 'location_fax', $location ); // Get the clinic fax number
                                     $l++;
                                 }
                             }
