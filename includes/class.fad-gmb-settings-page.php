@@ -535,7 +535,7 @@ function gmb_provider_csv_export() {
                             $row[0] = $store_code;
 
                         // Business name
-                            $row[1] = 'UAMS - ' . html_entity_decode($full_name);
+                            $row[1] = 'UAMS Health - ' . html_entity_decode($full_name);
 
                         // Address line 1
 
