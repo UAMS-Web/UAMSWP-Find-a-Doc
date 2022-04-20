@@ -754,14 +754,20 @@ function gmb_provider_csv_export() {
 
                             // From the business
                                 $excerpt = '';
-                                $bio = get_field('physician_clinical_bio',$post_id);
-                                $bio_short = get_field('physician_short_clinical_bio',$post_id);
+                                $bio = get_field('physician_clinical_bio',$post_id); // Get the clinical bio
+                                $bio = wp_strip_all_tags($bio); // Strip all HTML tags
+                                $bio = str_replace(array("\n", "\r"), ' ', $bio); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
+                                $bio = mb_strimwidth($bio, 0, 747, '...'); // Truncate the string
+                                $bio_short = get_field('physician_short_clinical_bio',$post_id); // Strip all HTML tags
+                                $bio_short = wp_strip_all_tags($bio_short); // Get the short clinical bio
+                                $bio_short = str_replace(array("\n", "\r"), ' ', $bio_short); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
+                                $bio_short = mb_strimwidth($bio_short, 0, 747, '...'); // Truncate the string
 
                                 if (empty($excerpt)){
                                     if ($bio_short){
-                                        $excerpt = mb_strimwidth(wp_strip_all_tags($bio_short), 0, 747, '...');
+                                        $excerpt = $bio_short;
                                     } elseif ($bio) {
-                                        $excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 747, '...');
+                                        $excerpt = $bio;
                                     } else {
                                         $fallback_desc = $medium_name . ' is ' . ($phys_title ? $phys_title_indef_article . ' ' . strtolower($phys_title_name) : 'a health care provider' ) . ($location_title ? ' at ' . $location_title : '') .  ' employed by UAMS Health.';
                                         $excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 747, '...');
@@ -1369,14 +1375,20 @@ function gmb_location_csv_export() {
 
                 // From the business
                     $excerpt = '';
-                    $descr = get_field('location_about',$location_post_id);
-                    $descr_short = get_field('location_short_desc',$location_post_id);
+                    $descr = get_field('location_about',$location_post_id); // Get the description
+                    $descr = wp_strip_all_tags($descr); // Strip all HTML tags
+                    $descr = str_replace(array("\n", "\r"), ' ', $descr); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
+                    $descr = mb_strimwidth($descr, 0, 747, '...'); // Truncate the string
+                    $descr_short = get_field('location_short_desc',$location_post_id); // Strip all HTML tags
+                    $descr_short = wp_strip_all_tags($descr_short); // Get the short description
+                    $descr_short = str_replace(array("\n", "\r"), ' ', $descr_short); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
+                    $descr_short = mb_strimwidth($descr_short, 0, 747, '...'); // Truncate the string
 
                     if (empty($excerpt)){
                         if ($descr_short){
-                            $excerpt = mb_strimwidth(wp_strip_all_tags($descr_short), 0, 747, '...');
+                            $excerpt = $descr_short;
                         } elseif ($descr) {
-                            $excerpt = mb_strimwidth(wp_strip_all_tags($descr), 0, 747, '...');
+                            $excerpt = $descr;
                         } else {
                             $excerpt = '';
                         }
