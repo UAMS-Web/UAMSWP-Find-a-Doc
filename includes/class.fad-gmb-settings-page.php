@@ -5,7 +5,7 @@
  * 
  */
 function uamswp_add_gmb_export_page() {
-    add_submenu_page( 'fad-settings', 'UAMSWP GMB Export', 'GMB Export', 'manage_options', 'uamswp-gmb-export', 'uamswp_fad_gmb_export_page', '', 90 );
+    add_submenu_page( 'fad-settings', 'UAMSWP CSV Export', 'CSV Export', 'manage_options', 'uamswp-gmb-export', 'uamswp_fad_gmb_export_page', '', 90 );
 }
 add_action( 'admin_menu', 'uamswp_add_gmb_export_page', 105 );
 
@@ -13,14 +13,24 @@ function uamswp_fad_gmb_export_page() {
     ?>
     <h1><?php echo $GLOBALS['title'] ?></h1>
     <p>These will take a little time to generate, please be patient.</p>
-    <h2>Doximity List</h2>
-    <p><a class="button button-primary" href="<?php echo admin_url( 'admin.php?page=uamswp-gmb-export' ) ?>&action=download_doximity_csv&_wpnonce=<?php echo wp_create_nonce( 'download_csv' )?>" class="page-title-action"><?php _e('Export to CSV','uamswp-find-a-doc');?></a></p>
-    <h2>GMB Provider List</h2>
-    <p><a class="button button-primary" href="<?php echo admin_url( 'admin.php?page=uamswp-gmb-export' ) ?>&action=download_gmb_provider_csv&_wpnonce=<?php echo wp_create_nonce( 'download_csv' )?>" class="page-title-action"><?php _e('Export to CSV','uamswp-find-a-doc');?></a></p>
-    <h2>GMB Location List</h2>
-    <p><a class="button button-primary" href="<?php echo admin_url( 'admin.php?page=uamswp-gmb-export' ) ?>&action=download_gmb_location_csv&_wpnonce=<?php echo wp_create_nonce( 'download_csv' )?>" class="page-title-action"><?php _e('Export to CSV','uamswp-find-a-doc');?></a></p>
-    <h2>MyChart Provider List</h2>
-    <p><a class="button button-primary" href="<?php echo admin_url( 'admin.php?page=uamswp-gmb-export' ) ?>&action=download_mychart_csv&_wpnonce=<?php echo wp_create_nonce( 'download_csv' )?>" class="page-title-action"><?php _e('Export to CSV','uamswp-find-a-doc');?></a></p>
+    <h2 id="csv-header-doximity">U.S. News Doctor Finder Profiles and Doximity Profiles</h2>
+    <p>Generate a spreadsheet for updating U.S. News Doctor Finder Profiles and Doximity Profiles.</p>
+    <p>Email the spreadsheet to <a href="mailto:hospitals@doximity.com">hospitals@doximity.com</a> to have the profiles updated.</p>
+    <p><a aria-describedby="csv-header-doximity" class="button button-primary" href="<?php echo admin_url( 'admin.php?page=uamswp-gmb-export' ) ?>&action=download_doximity_csv&_wpnonce=<?php echo wp_create_nonce( 'download_csv' )?>" class="page-title-action"><?php _e('Export to CSV','uamswp-find-a-doc');?></a></p>
+    <h2 id="csv-header-gmb-providers">Google My Business Profiles &mdash; UAMS Clinical Providers</h2>
+    <p>Generate a spreadsheet for importing published providers as business profiles in Google My Business, both to create new business profiles and to update existing business profiles. A unique business profile will be created for each provider at each of their practice locations.</p>
+    <p>Each URL in the spreadsheet is automatically tagged using a UTM structure crafted to indicate that the web traffic came from a particular link within the specific provider's business profile for a specific practice location.</p>
+    <p>For help with bulk upload spreadsheets for Business Profiles, visit <a href="https://support.google.com/business/topic/4596653" title="Google Business Profile Help, Add 10 or more businesses" target="_blank">https://support.google.com/business/topic/4596653</a>.</p>
+    <p><a aria-describedby="csv-header-gmb-providers" class="button button-primary" href="<?php echo admin_url( 'admin.php?page=uamswp-gmb-export' ) ?>&action=download_gmb_provider_csv&_wpnonce=<?php echo wp_create_nonce( 'download_csv' )?>" class="page-title-action"><?php _e('Export to CSV','uamswp-find-a-doc');?></a></p>
+    <h2 id="csv-header-gmb-locations">Google My Business Profiles &mdash; UAMS Clinical Locations</h2>
+    <p>Generate a spreadsheet for importing published locations as business profiles in Google My Business, both to create new business profiles and to update existing business profiles. A unique business profile will be created for each location, whether it is a top-level location or a child location.</p>
+    <p>Each URL in the spreadsheet is automatically tagged using a UTM structure crafted to indicate that the web traffic came from a particular link within the specific location's business profile.</p>
+    <p>For help with bulk upload spreadsheets for Business Profiles, visit <a href="https://support.google.com/business/topic/4596653" title="Google Business Profile Help, Add 10 or more businesses" target="_blank">https://support.google.com/business/topic/4596653</a>.</p>
+    <p><a aria-describedby="csv-header-gmb-locations" class="button button-primary" href="<?php echo admin_url( 'admin.php?page=uamswp-gmb-export' ) ?>&action=download_gmb_location_csv&_wpnonce=<?php echo wp_create_nonce( 'download_csv' )?>" class="page-title-action"><?php _e('Export to CSV','uamswp-find-a-doc');?></a></p>
+    <h2 id="csv-header-mychart">MyChart Provider List</h2>
+    <p>Generate a spreadsheet for the MyChart team to use when associating provider profile URLs with the relevant providers in Epic/MyChart, so that users can click through to the provider's profile from within MyChart.</p>
+    <p>Each URL is automatically tagged using a UTM structure crafted to indicate that the web traffic came from the specific provider's record within MyChart without passing through any protected health information (PHI).</p>
+    <p><a aria-describedby="csv-header-mychart" class="button button-primary" href="<?php echo admin_url( 'admin.php?page=uamswp-gmb-export' ) ?>&action=download_mychart_csv&_wpnonce=<?php echo wp_create_nonce( 'download_csv' )?>" class="page-title-action"><?php _e('Export to CSV','uamswp-find-a-doc');?></a></p>
     <?php
 }
 
@@ -49,6 +59,20 @@ if ( isset($_GET['action'] ) && $_GET['action'] == 'download_mychart_csv' )  {
 }
 
 function doximity_csv_export() {
+    // Check for current user privileges 
+    if( !current_user_can( 'manage_options' ) ){ return false; }
+
+    // Check if we are in WP-Admin
+    if( !is_admin() ){ return false; }
+
+    // Nonce Check
+    $nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
+    if ( ! wp_verify_nonce( $nonce, 'download_doximity_csv' ) ) {
+        die( 'Security check error' );
+    }
+    
+    ob_start();
+
     // Custom WP_Query args
     $args = array(
         "post_type" => "provider",
@@ -970,6 +994,20 @@ function gmb_provider_csv_export() {
 }
 
 function gmb_location_csv_export() {
+    // Check for current user privileges 
+    if( !current_user_can( 'manage_options' ) ){ return false; }
+
+    // Check if we are in WP-Admin
+    if( !is_admin() ){ return false; }
+
+    // Nonce Check
+    $nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
+    if ( ! wp_verify_nonce( $nonce, 'download_gmb_location_csv' ) ) {
+        die( 'Security check error' );
+    }
+    
+    ob_start();
+
     // Custom WP_Query args
     $args = array(
         "post_type" => "location",
@@ -1612,6 +1650,20 @@ function gmb_location_csv_export() {
 }
 
 function mychart_csv_export() {
+    // Check for current user privileges 
+    if( !current_user_can( 'manage_options' ) ){ return false; }
+
+    // Check if we are in WP-Admin
+    if( !is_admin() ){ return false; }
+
+    // Nonce Check
+    $nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
+    if ( ! wp_verify_nonce( $nonce, 'download_mychart_csv' ) ) {
+        die( 'Security check error' );
+    }
+    
+    ob_start();
+
     // Custom WP_Query args
     $args = array(
         "post_type" => "provider",
