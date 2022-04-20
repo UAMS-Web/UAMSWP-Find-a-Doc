@@ -59,6 +59,20 @@ if ( isset($_GET['action'] ) && $_GET['action'] == 'download_mychart_csv' )  {
 }
 
 function doximity_csv_export() {
+    // Check for current user privileges 
+    if( !current_user_can( 'manage_options' ) ){ return false; }
+
+    // Check if we are in WP-Admin
+    if( !is_admin() ){ return false; }
+
+    // Nonce Check
+    $nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
+    if ( ! wp_verify_nonce( $nonce, 'download_doximity_csv' ) ) {
+        die( 'Security check error' );
+    }
+    
+    ob_start();
+
     // Custom WP_Query args
     $args = array(
         "post_type" => "provider",
@@ -980,6 +994,20 @@ function gmb_provider_csv_export() {
 }
 
 function gmb_location_csv_export() {
+    // Check for current user privileges 
+    if( !current_user_can( 'manage_options' ) ){ return false; }
+
+    // Check if we are in WP-Admin
+    if( !is_admin() ){ return false; }
+
+    // Nonce Check
+    $nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
+    if ( ! wp_verify_nonce( $nonce, 'download_gmb_location_csv' ) ) {
+        die( 'Security check error' );
+    }
+    
+    ob_start();
+
     // Custom WP_Query args
     $args = array(
         "post_type" => "location",
@@ -1622,6 +1650,20 @@ function gmb_location_csv_export() {
 }
 
 function mychart_csv_export() {
+    // Check for current user privileges 
+    if( !current_user_can( 'manage_options' ) ){ return false; }
+
+    // Check if we are in WP-Admin
+    if( !is_admin() ){ return false; }
+
+    // Nonce Check
+    $nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
+    if ( ! wp_verify_nonce( $nonce, 'download_mychart_csv' ) ) {
+        die( 'Security check error' );
+    }
+    
+    ob_start();
+
     // Custom WP_Query args
     $args = array(
         "post_type" => "provider",
