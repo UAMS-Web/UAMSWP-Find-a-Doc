@@ -294,9 +294,9 @@ function doximity_csv_export() {
 
     ob_end_clean ();
     $filename = 'Doximity_List_' . time() . '.csv';
-    $delimiter=";";
+    $delimiter=",";
     $fh = @fopen( 'php://output', 'w' );
-    fprintf( $fh, chr(0xEF) . chr(0xBB) . chr(0xBF) );
+    fputs( $fh, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ) );
     header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
     header( 'Content-Description: File Transfer' );
     header( 'Content-type: text/csv' ); // tells browser to download
@@ -324,7 +324,7 @@ function gmb_provider_csv_export() {
 
     // Nonce Check
     $nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
-    if ( ! wp_verify_nonce( $nonce, 'download_csv' ) ) {
+    if ( ! wp_verify_nonce( $nonce, 'download_gmb_provider_csv' ) ) {
         die( 'Security check error' );
     }
     
@@ -974,9 +974,9 @@ function gmb_provider_csv_export() {
     endif;
     ob_end_clean ();
     $filename = 'GMB_Providers_' . time() . '.csv';
-    $delimiter=";";
+    $delimiter=",";
     $fh = @fopen( 'php://output', 'w' );
-    fprintf( $fh, chr(0xEF) . chr(0xBB) . chr(0xBF) );
+    fputs( $fh, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ) );
     header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
     header( 'Content-Description: File Transfer' );
     header( 'Content-type: text/csv' ); // tells browser to download
@@ -1630,9 +1630,9 @@ function gmb_location_csv_export() {
 
     ob_end_clean ();
     $filename = 'GMB_Locations_' . time() . '.csv';
-    $delimiter=";";
+    $delimiter=",";
     $fh = @fopen( 'php://output', 'w' );
-    fprintf( $fh, chr(0xEF) . chr(0xBB) . chr(0xBF) );
+    fputs( $fh, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ) );
     header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
     header( 'Content-Description: File Transfer' );
     header( 'Content-type: text/csv' ); // tells browser to download
@@ -1720,9 +1720,9 @@ function mychart_csv_export() {
 
     ob_end_clean ();
     $filename = 'MyChart_List_' . time() . '.csv';
-    $delimiter=";";
+    $delimiter=",";
     $fh = @fopen( 'php://output', 'w' );
-    fprintf( $fh, chr(0xEF) . chr(0xBB) . chr(0xBF) );
+    fputs( $fh, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ) );
     header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
     header( 'Content-Description: File Transfer' );
     header( 'Content-type: text/csv' ); // tells browser to download
