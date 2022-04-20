@@ -15,6 +15,7 @@ function uamswp_fad_gmb_export_page() {
     <p>These will take a little time to generate, please be patient.</p>
     <h2 id="csv-header-doximity">U.S. News Doctor Finder Profiles and Doximity Profiles</h2>
     <p>Generate a spreadsheet for updating U.S. News Doctor Finder Profiles and Doximity Profiles.</p>
+    <p><a href="https://app.box.com/s/sufb1jpvhzcw1stzez0ch0t7i88teovi" title="Doximity Template" target="_blank" download>Download the Doximity Template</a></p>
     <p>Email the spreadsheet to <a href="mailto:hospitals@doximity.com">hospitals@doximity.com</a> to have the profiles updated.</p>
     <p><a aria-describedby="csv-header-doximity" class="button button-primary" href="<?php echo admin_url( 'admin.php?page=uamswp-gmb-export' ) ?>&action=download_doximity_csv&_wpnonce=<?php echo wp_create_nonce( 'download_doximity_csv' )?>" class="page-title-action"><?php _e('Export to CSV','uamswp-find-a-doc');?></a></p>
     <h2 id="csv-header-gmb-providers">Google My Business Profiles &mdash; UAMS Clinical Providers</h2>
@@ -86,21 +87,21 @@ function doximity_csv_export() {
 
     if ( $query->have_posts() ) : 
         $table_head = array();
-        $table_head[0] = "Required \nNPI Number";
-        $table_head[1] = "Basic Information \nFirst Name";
-        $table_head[2] = "Basic Information \nLast Name";
-        $table_head[3] = "Basic Information \nCredentials (MD or DO)";
-        $table_head[4] = "Basic Information \nEmail Address";
-        $table_head[5] = "Address and Phone \nFacility Name";
-        $table_head[6] = "Address and Phone \nOffice Address 1";
-        $table_head[7] = "Address and Phone \nOffice Address 2";
-        $table_head[8] = "Address and Phone \nOffice City";
-        $table_head[9] = "Address and Phone \nOffice State";
-        $table_head[10] = "Address and Phone \nOffice Zip";
-        $table_head[11] = "Address and Phone \nPhone";
-        $table_head[12] = "Address and Phone \nFax";
-        $table_head[13] = "(Suggested) Expertise \nSpecialty";
-        $table_head[14] = "(Suggested) Expertise \nSub-Specialty";
+        $table_head[0] = "NPI Number";
+        $table_head[1] = "First Name";
+        $table_head[2] = "Last Name";
+        $table_head[3] = "Credentials (MD or DO)";
+        $table_head[4] = "Email Address";
+        $table_head[5] = "Facility Name";
+        $table_head[6] = "Office Address 1";
+        $table_head[7] = "Office Address 2";
+        $table_head[8] = "Office City";
+        $table_head[9] = "Office State";
+        $table_head[10] = "Office Zip";
+        $table_head[11] = "Phone";
+        $table_head[12] = "Fax";
+        $table_head[13] = "Specialty";
+        $table_head[14] = "Sub-Specialty";
 
         $table_body = array();
         $row = array();
