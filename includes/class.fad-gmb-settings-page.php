@@ -203,8 +203,10 @@ function doximity_csv_export() {
                     $i = 1;
                     if ( $affiliations ) {
                         foreach( $affiliations as $affiliation ):
-                            $affiliation_name = get_term( $affiliation, 'affiliation');
-                            $affiliation_list .= $affiliation_name->name;
+                            $affiliation_object = get_term( $affiliation, 'affiliation');
+                            $affiliation_aha_name = get_field('affiliation_name', $affiliation_object) ?: $affiliation_object->name;
+                            $affiliation_aha_id = get_field('affiliation_id', $affiliation_object);
+                            $affiliation_list .= $affiliation_aha_name . ( $affiliation_aha_id ? ' (AHA ID: ' . $affiliation_aha_id . ')' : '');
                             if( count($affiliations) > $i ) {
                                 $affiliation_list .= ', ';
                             }
