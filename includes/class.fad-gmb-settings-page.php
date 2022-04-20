@@ -15,6 +15,7 @@ function uamswp_fad_gmb_export_page() {
     <p>These will take a little time to generate, please be patient.</p>
     <h2 id="csv-header-doximity">U.S. News Doctor Finder Profiles and Doximity Profiles</h2>
     <p>Generate a spreadsheet for updating U.S. News Doctor Finder Profiles and Doximity Profiles.</p>
+    <p><a href="https://app.box.com/s/sufb1jpvhzcw1stzez0ch0t7i88teovi" title="Doximity Template" target="_blank" download>Download the Doximity Template</a></p>
     <p>Email the spreadsheet to <a href="mailto:hospitals@doximity.com">hospitals@doximity.com</a> to have the profiles updated.</p>
     <p><a aria-describedby="csv-header-doximity" class="button button-primary" href="<?php echo admin_url( 'admin.php?page=uamswp-gmb-export' ) ?>&action=download_doximity_csv&_wpnonce=<?php echo wp_create_nonce( 'download_doximity_csv' )?>" class="page-title-action"><?php _e('Export to CSV','uamswp-find-a-doc');?></a></p>
     <h2 id="csv-header-gmb-providers">Google My Business Profiles &mdash; UAMS Clinical Providers</h2>
