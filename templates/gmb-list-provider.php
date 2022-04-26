@@ -478,7 +478,7 @@ function display_provider_image() {
                                         }
 
                                     // Business name
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_business_name ) {
                                             echo '<td data-gmb-column="Business name" class="no-break">UAMS Health - ' . $full_name . '</td>';
                                         }
 
@@ -604,35 +604,35 @@ function display_provider_image() {
                                                 $location_longitude = $location_map['lng'];
                                             }
 
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_address_line_1 ) {
                                             echo '<td data-gmb-column="Address line 1" class="no-break">';
                                             echo $location_address_1 ? $location_address_1 : '';
                                             echo '</td>';
                                         }
 
                                     // Address line 2
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_address_line_2 ) {
                                             echo '<td data-gmb-column="Address line 2" class="no-break">';
                                             echo ( $location_address_2 && !empty($location_address_2) ) ? $location_address_2 : '';
                                             echo '</td>';
                                         }
             
                                     // Address line 3
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_address_line_3 ) {
                                             echo '<td data-gmb-column="Address line 3" class="no-break">';
                                             echo ( $location_address_3 && !empty($location_address_3) ) ? $location_address_3 : '';
                                             echo '</td>';
                                         }
             
                                     // Address line 4
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_address_line_4 ) {
                                             echo '<td data-gmb-column="Address line 4" class="no-break">';
                                             echo ( $location_address_4 && !empty($location_address_4) ) ? $location_address_4 : '';
                                             echo '</td>';
                                         }
             
                                     // Address line 5
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_address_line_5 ) {
                                             echo '<td data-gmb-column="Address line 5" class="no-break">';
                                             echo ( $location_address_5 && !empty($location_address_5) ) ? $location_address_5 : '';
                                             echo '</td>';
@@ -640,52 +640,52 @@ function display_provider_image() {
 
                                     // Sub-locality
                                     // Intentionally left blank
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_sub_locality ) {
                                             echo '<td data-gmb-column="Sub-locality" class="no-break"></td>';
                                         }
 
                                     // Locality
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_locality ) {
                                             echo '<td data-gmb-column="Locality" class="no-break">';
                                             echo $location_city ? $location_city : '';
                                             echo '</td>';
                                         }
 
                                     // Administrative area
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_administrative_area ) {
                                             echo '<td data-gmb-column="Administrative area" class="no-break">';
                                             echo $location_state ? $location_state : '';
                                             echo '</td>';
                                         }
 
                                     // Country / Region
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_country_region ) {
                                             echo '<td data-gmb-column="Country / Region" class="no-break">US</td>';
                                         }
 
                                     // Postal code
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_postal_code ) {
                                             echo '<td data-gmb-column="Postal code" class="no-break">';
                                             echo $location_zip ? $location_zip : '';
                                             echo '</td>';
                                         }
 
                                     // Latitude
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_latitude ) {
                                             echo '<td data-gmb-column="Latitude" class="no-break">';
                                             echo $location_latitude ? $location_latitude : '';
                                             echo '</td>';
                                         }
 
                                     // Longitude
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_longitude ) {
                                             echo '<td data-gmb-column="Longitude" class="no-break">';
                                             echo $location_longitude ? $location_longitude : '';
                                             echo '</td>';
                                         }
 
                                     // Primary phone
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_primary_phone ) {
                                             echo '<td data-gmb-column="Primary phone" class="no-break">';
                                             echo $location_phone ? $location_phone : '';
                                             echo '</td>';
@@ -693,26 +693,26 @@ function display_provider_image() {
 
                                     // Additional phones
                                     // Intentionally left blank
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_additional_phones ) {
                                             echo '<td data-gmb-column="Additional phones" class="no-break"></td>';
                                         }
 
                                     // Website
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_website ) {
                                             echo '<td data-gmb-column="Website" class="no-break">';
                                             echo 'https://uamshealth.com/provider/' . $profile_slug . '/?utm_source=google&amp;utm_medium=gmb&amp;utm_campaign=clinical&amp;utm_term=provider&amp;utm_content=profile&amp;utm_specs=' . $store_code;
                                             echo '</td>';
                                         }
 
                                     // Primary category
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_primary_category ) {
                                             echo '<td data-gmb-column="Primary category" class="no-break">';
                                             echo $provider_gmb_cat_primary_name;
                                             echo '</td>';
                                         }
             
                                     // Additional categories
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_additional_categories ) {
                                             echo '<td data-gmb-column="Additional categories" class="no-break">';
                                             echo $provider_gmb_cat_additional_names;
                                             echo '</td>';
@@ -721,56 +721,56 @@ function display_provider_image() {
                                     // Sunday hours
                                     // Intentionally left blank for now
                                     // Format = 08:00-16:30
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_sunday_hours ) {
                                             echo '<td data-gmb-column="Sunday hours" class="no-break"></td>';
                                         }
 
                                     // Monday hours
                                     // Intentionally left blank for now
                                     // Format = 08:00-16:30
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_monday_hours ) {
                                             echo '<td data-gmb-column="Monday hours" class="no-break"></td>';
                                         }
 
                                     // Tuesday hours
                                     // Intentionally left blank for now
                                     // Format = 08:00-16:30
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_tuesday_hours ) {
                                             echo '<td data-gmb-column="Tuesday hours" class="no-break"></td>';
                                         }
 
                                     // Wednesday hours
                                     // Intentionally left blank for now
                                     // Format = 08:00-16:30
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_wednesday_hours ) {
                                             echo '<td data-gmb-column="Wednesday hours" class="no-break"></td>';
                                         }
 
                                     // Thursday hours
                                     // Intentionally left blank for now
                                     // Format = 08:00-16:30
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_thursday_hours ) {
                                             echo '<td data-gmb-column="Thursday hours" class="no-break"></td>';
                                         }
 
                                     // Friday hours
                                     // Intentionally left blank for now
                                     // Format = 08:00-16:30
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_friday_hours ) {
                                             echo '<td data-gmb-column="Friday hours" class="no-break"></td>';
                                         }
 
                                     // Saturday hours
                                     // Intentionally left blank for now
                                     // Format = 08:00-16:30
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_saturday_hours ) {
                                             echo '<td data-gmb-column="Saturday hours" class="no-break"></td>';
                                         }
 
                                     // Special hours
                                     // Intentionally left blank for now
                                     // Format = 2021-12-31: 05:00-23:00, 2022-01-01: x
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_special_hours ) {
                                             echo '<td data-gmb-column="Special hours" class="no-break"></td>';
                                         }
 
@@ -789,7 +789,7 @@ function display_provider_image() {
                                                 $excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 747, '...');
                                             }
                                         }
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_from_the_business ) {
                                             echo '<td data-gmb-column="From the business"><span style="display: block; width: 19.6875em"></span>';
                                             echo $excerpt;
                                             echo '</td>';
@@ -797,19 +797,19 @@ function display_provider_image() {
 
                                     // Opening date
                                     // Intentionally left blank
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_opening_date ) {
                                             echo '<td data-gmb-column="Opening date" class="no-break"></td>';
                                         }
 
                                     // Logo photo
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_logo_photo ) {
                                             echo '<td data-gmb-column="Logo photo" class="no-break">';
                                             echo $provider_gmb_logo_photo ?: '';
                                             echo '</td>';
                                         }
 
                                     // Cover photo
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_cover_photo ) {
                                             echo '<td data-gmb-column="Cover photo" class="no-break">';
                                             echo $provider_gmb_cover_photo ?: '';
                                             echo '</td>';
@@ -817,7 +817,7 @@ function display_provider_image() {
 
                                     // Other photos
                                     // Intentionally left blank
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_other_photos ) {
                                             echo '<td data-gmb-column="Other photos" class="no-break"></td>';
                                         }
 
@@ -826,7 +826,7 @@ function display_provider_image() {
                                         $service_line = get_field('physician_service_line',$post_id);
                                         $service_line_name = $service_line ? get_term( $service_line, 'service_line' )->name : '';
     
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_labels ) {
                                             echo '<td data-gmb-column="Labels" class="no-break">';
                                             echo $service_line_name;
                                             echo '</td>';
@@ -834,12 +834,12 @@ function display_provider_image() {
 
                                     // AdWords location extensions phone
                                     // Intentionally left blank
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_adwords_location_extensions_phone ) {
                                             echo '<td data-gmb-column="AdWords location extensions phone" class="no-break"></td>';
                                         }
 
                                     // Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_has_wheelchair_accessible_elevator ) {
                                             echo '<td data-gmb-column="Accessibility: Wheelchair accessible elevat  or (has_wheelchair_accessible_elevator)" class="no-break">';
                                             if (!empty($location_gmb_wheelchair_elevator)) {
                                                 echo $location_gmb_wheelchair_elevator;
@@ -850,7 +850,7 @@ function display_provider_image() {
                                         }
 
                                     // Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_has_wheelchair_accessible_entrance ) {
                                             echo '<td data-gmb-column="Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)" class="no-break">';
                                             if (!empty($location_gmb_wheelchair_entrance)) {
                                                 echo $location_gmb_wheelchair_entrance;
@@ -861,7 +861,7 @@ function display_provider_image() {
                                         }
 
                                     // Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_has_wheelchair_accessible_restroom ) {
                                             echo '<td data-gmb-column="Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)" class="no-break">';
                                             if (!empty($location_gmb_wheelchair_restroom)) {
                                                 echo $location_gmb_wheelchair_restroom;
@@ -872,7 +872,7 @@ function display_provider_image() {
                                         }
 
                                     // Amenities: Restroom (has_restroom)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_has_restroom ) {
                                             echo '<td data-gmb-column="Amenities: Restroom (has_restroom)" class="no-break">';
                                             if (!empty($location_gmb_restroom)) {
                                                 echo $location_gmb_restroom;
@@ -884,24 +884,24 @@ function display_provider_image() {
                                     
                                     // From the business: Identifies as Black-owned (is_black_owned)
                                     // Intentionally left blank
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_is_black_owned ) {
                                             echo '<td data-gmb-column="From the business: Identifies as Black-owned (is_black_owned)" class="no-break"></td>';
                                         }
 
                                     // From the business: Identifies as veteran-led (is_owned_by_veterans)
                                     // Intentionally left blank
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_is_owned_by_veterans ) {
                                             echo '<td data-gmb-column="From the business: Identifies as veteran-led (is_owned_by_veterans)" class="no-break"></td>';
                                         }
 
                                     // From the business: Identifies as women-led (is_owned_by_women)
                                     // Intentionally left blank
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_is_owned_by_women ) {
                                             echo '<td data-gmb-column="From the business: Identifies as women-led (is_owned_by_women)" class="no-break"></td>';
                                         }
 
                                     // Health &amp; safety: Appointment required (requires_appointments)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_requires_appointments ) {
                                             echo '<td data-gmb-column="Health &amp; safety: Appointment required (requires_appointments)" class="no-break">';
                                             if ( $covid19 ) {
                                                 if (!empty($location_gmb_appointments)) {
@@ -916,7 +916,7 @@ function display_provider_image() {
                                         }
 
                                     // Health &amp; safety: Mask required (requires_masks_customers)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_requires_masks_customers ) {
                                             echo '<td data-gmb-column="Health &amp; safety: Mask required (requires_masks_customers)" class="no-break">';
                                             if ( $covid19 ) {
                                                 if (!empty($location_gmb_masks_customers)) {
@@ -931,12 +931,12 @@ function display_provider_image() {
                                         }
 
                                     // Health &amp; safety: Safety dividers at checkout (has_plexiglass_at_checkout)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_has_plexiglass_at_checkout ) {
                                             echo '<td data-gmb-column="Health &amp; safety: Safety dividers at checkout (has_plexiglass_at_checkout)" class="no-break">[NOT APPLICABLE]</td>';
                                         }
 
                                     // Health &amp; safety: Staff get temperature checks (requires_temperature_check_staff)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_requires_temperature_check_staff ) {
                                             echo '<td data-gmb-column="Health &amp; safety: Staff get temperature checks (requires_temperature_check_staff)" class="no-break">';
                                             if ( $covid19 ) {
                                                 if (!empty($location_gmb_temp_staff)) {
@@ -951,7 +951,7 @@ function display_provider_image() {
                                         }
 
                                     // Health &amp; safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_is_sanitizing_between_customers ) {
                                             echo '<td data-gmb-column="Health &amp; safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)" class="no-break">';
                                             if ( $covid19 ) {
                                                 if (!empty($location_gmb_sanitizing)) {
@@ -966,7 +966,7 @@ function display_provider_image() {
                                         }
 
                                     // Health &amp; safety: Staff wear masks (requires_masks_staff)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_requires_masks_staff ) {
                                             echo '<td data-gmb-column="Health &amp; safety: Staff wear masks (requires_masks_staff)" class="no-break">';
                                             if ( $covid19 ) {
                                                 if (!empty($location_gmb_masks_staff)) {
@@ -981,7 +981,7 @@ function display_provider_image() {
                                         }
 
                                     // Health &amp; safety: Temperature check required (requires_temperature_check_customers)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_requires_temperature_check_customers ) {
                                             echo '<td data-gmb-column="Health &amp; safety: Temperature check required (requires_temperature_check_customers)" class="no-break">';
                                             if ( $covid19 ) {
                                                 if (!empty($location_gmb_temp_customers)) {
@@ -996,139 +996,139 @@ function display_provider_image() {
                                         }
 
                                     // Offerings: Passport photos (has_onsite_passport_photos)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_has_onsite_passport_photos ) {
                                             echo '<td data-gmb-column="Offerings: Passport photos (has_onsite_passport_photos)" class="no-break">[NOT APPLICABLE]</td>';
                                         }
 
                                     // Payments: Cash-only (requires_cash_only)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_requires_cash_only ) {
                                             echo '<td data-gmb-column="Payments: Cash-only (requires_cash_only)" class="no-break">[NOT APPLICABLE]</td>';
                                         }
 
                                     // Payments: Checks (pay_check)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_pay_check ) {
                                             echo '<td data-gmb-column="Payments: Checks (pay_check)" class="no-break">[NOT APPLICABLE]</td>';
                                         }
 
                                     // Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_pay_credit_card_types_accepted__american_express ) {
                                             echo '<td data-gmb-column="Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)" class="no-break">[NOT APPLICABLE]</td>';
                                         }
 
                                     // Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_pay_credit_card_types_accepted__china_union_pay ) {
                                             echo '<td data-gmb-column="Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)" class="no-break">[NOT APPLICABLE]</td>';
                                         }
 
                                     // Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_pay_credit_card_types_accepted__diners_club ) {
                                             echo '<td data-gmb-column="Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)" class="no-break">[NOT APPLICABLE]</td>';
                                         }
 
                                     // Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_storgmb_show_pay_credit_card_types_accepted__discovere_code ) {
                                             echo '<td data-gmb-column="Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)" class="no-break">[NOT APPLICABLE]</td>';
                                         }
 
                                     // Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_pay_credit_card_types_accepted__jcb ) {
                                             echo '<td data-gmb-column="Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)" class="no-break">[NOT APPLICABLE]</td>';
                                         }
 
                                     // Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_pay_credit_card_types_accepted__mastercard ) {
                                             echo '<td data-gmb-column="Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)" class="no-break">[NOT APPLICABLE]</td>';
                                         }
 
                                     // Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_pay_credit_card_types_accepted__visa ) {
                                             echo '<td data-gmb-column="Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)" class="no-break">[NOT APPLICABLE]</td>';
                                         }
 
                                     // Payments: Debit cards (pay_debit_card)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_pay_debit_card ) {
                                             echo '<td data-gmb-column="Payments: Debit cards (pay_debit_card)" class="no-break">[NOT APPLICABLE]</td>';
                                         }
 
                                     // Payments: NFC mobile payments (pay_mobile_nfc)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_pay_mobile_nfc ) {
                                             echo '<td data-gmb-column="Payments: NFC mobile payments (pay_mobile_nfc)" class="no-break">[NOT APPLICABLE]</td>';
                                         }
 
                                     // Place page URLs: Appointment links (url_appointment)
                                     // Intentionally left blank
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_url_appointment ) {
                                             echo '<td data-gmb-column="Place page URLs: Appointment links (url_appointment)" class="no-break"></td>';
                                         }
 
                                     // Place page URLs: COVID-19 info link (url_covid_19_info_page)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_url_covid_19_info_page ) {
                                             echo '<td data-gmb-column="Place page URLs: COVID-19 info link (url_covid_19_info_page)" class="no-break">';
                                             echo 'https://uamshealth.com/coronavirus/?utm_source=google&amp;utm_medium=gmb&amp;utm_campaign=clinical&amp;utm_term=provider&amp;utm_content=covid-19-info-link&amp;utm_specs=' . $store_code;
                                             echo '</td>';
                                         }
 
                                     // Place page URLs: Menu link (url_menu)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_url_menu ) {
                                             echo '<td data-gmb-column="Place page URLs: Menu link (url_menu)" class="no-break">[NOT APPLICABLE]</td>';
                                         }
 
                                     // Place page URLs: Virtual care link (url_facility_telemedicine_page)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_url_facility_telemedicine_page ) {
                                             echo '<td data-gmb-column="Place page URLs: Virtual care link (url_facility_telemedicine_page)" class="no-break">';
                                             echo $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=virtual-care-link&amp;utm_specs=' . $store_code . '#telemedicine-info' : '';
                                             echo '</td>';
                                         }
 
                                     // Planning: LGBTQ friendly (welcomes_lgbtq)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_welcomes_lgbtq ) {
                                             echo '<td data-gmb-column="Planning: LGBTQ friendly (welcomes_lgbtq)" class="no-break">';
                                             echo '';
                                             echo '</td>';
                                         }
 
                                     // Planning: Transgender safespace (is_transgender_safespace)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_is_transgender_safespace ) {
                                             echo '<td data-gmb-column="Planning: Transgender safespace (is_transgender_safespace)" class="no-break">';
                                             echo '';
                                             echo '</td>';
                                         }
 
                                     // Service options: Curbside pickup (has_curbside_pickup)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_has_curbside_pickup ) {
                                             echo '<td data-gmb-column="Service options: Curbside pickup (has_curbside_pickup)" class="no-break">[NOT APPLICABLE]</td>';
                                         }
 
                                     // Service options: Delivery (has_delivery)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_has_delivery ) {
                                             echo '<td data-gmb-column="Service options: Delivery (has_delivery)" class="no-break">[NOT APPLICABLE]</td>';
                                         }
 
                                     // Service options: Drive-through (has_drive_through)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_has_drive_through ) {
                                             echo '<td data-gmb-column="Service options: Drive-through (has_drive_through)" class="no-break">[NOT APPLICABLE]</td>';
                                         }
 
                                     // Service options: In-store pickup (has_in_store_pickup)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_has_in_store_pickup ) {
                                             echo '<td data-gmb-column="Service options: In-store pickup (has_in_store_pickup)" class="no-break">[NOT APPLICABLE]</td>';
                                         }
 
                                     // Service options: In-store shopping (has_in_store_shopping)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_has_in_store_shopping ) {
                                             echo '<td data-gmb-column="Service options: In-store shopping (has_in_store_shopping)" class="no-break">[NOT APPLICABLE]</td>';
                                         }
 
                                     // Service options: Online care (has_video_visits)
                                     // Value based on the relevant location profile
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_has_video_visits ) {
                                             echo '<td data-gmb-column="Service options: Online care (has_video_visits)" class="no-break">';
                                             echo $location_telemed_query ? 'Yes' : '';
                                             echo '</td>';
                                         }
 
                                     // Service options: Same-day delivery (has_delivery_same_day)
-                                        if ( $gmb_show_store_code ) {
+                                        if ( $gmb_show_has_delivery_same_day ) {
                                             echo '<td data-gmb-column="Service options: Same-day delivery (has_delivery_same_day)" class="no-break">[NOT APPLICABLE]</td>';
                                         }
 
