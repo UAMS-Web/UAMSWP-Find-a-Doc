@@ -1727,7 +1727,7 @@ function mychart_csv_export() {
 
     if ( $query->have_posts() ) :
         $table_head = array();
-        $table_head[0] = 'Provider ID';
+        $table_head[0] = 'SER ID';
         $table_head[1] = 'Provider Name';
         $table_head[2] = 'Provider Profile URL';
 
@@ -1737,8 +1737,8 @@ function mychart_csv_export() {
             $post_id = get_the_ID();
 
             // Create the Name variables
-            $pid = get_field('physician_pid',$post_id);
-            $pid = ( $pid == 0 ) ? '' : $pid;
+            $ser_id = get_field('physician_pid',$post_id);
+            $ser_id = ( $ser_id == 0 ) ? '' : $ser_id;
             $sort_name = get_the_title($post_id);
             $profile_url = get_the_permalink($post_id);
 
@@ -1753,7 +1753,7 @@ function mychart_csv_export() {
                 // Start table row
 
                 // PID
-                    $row[0] = $pid;
+                    $row[0] = $ser_id;
 
                 // Provider Name
                     $row[1] = html_entity_decode($sort_name);
