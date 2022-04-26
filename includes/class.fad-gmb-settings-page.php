@@ -248,16 +248,16 @@ function doximity_csv_export() {
                                         // If the building input has a value
                                         // and if the chosen building isn't 'None'
                                         // and if the building's name exists...
-                                        $primary_appointment_address_2_arr[] .= $building_name; // Add the building name to the Address 2 list
+                                        $primary_appointment_address_2_arr[] = $building_name; // Add the building name to the Address 2 list
                                     }
                                     if ( $primary_appointment_floor_value != "0" && isset($primary_appointment_floor_label) & !empty($primary_appointment_floor_label) ) {
                                         // If the building floor isn't set to 'Single-Story Building'
                                         // and if the floor's label exists...
-                                        $primary_appointment_address_2_arr[] .= $primary_appointment_floor_label; // Add the building floor to the Address 2 list
+                                        $primary_appointment_address_2_arr[] = $primary_appointment_floor_label; // Add the building floor to the Address 2 list
                                     }
                                     if ( isset($primary_appointment_suite) & !empty($primary_appointment_suite) ) {
                                         // If the suite exists...
-                                        $primary_appointment_address_2_arr[] .= $primary_appointment_suite; // Add the suite to the Address 2 list
+                                        $primary_appointment_address_2_arr[] = $primary_appointment_suite; // Add the suite to the Address 2 list
                                     }
                                     $primary_appointment_address_2 = implode(', ', $primary_appointment_address_2_arr); // Create a comma-separated list from the array
                                     $primary_appointment_address_2_deprecated = get_field('location_address_2', $location ); // Get the deprecated Address 2 input
