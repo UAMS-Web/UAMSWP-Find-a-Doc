@@ -1759,7 +1759,7 @@ function mychart_csv_export() {
                     $row[1] = html_entity_decode($sort_name);
 
                 // Provider Profile URL
-                    $row[2] = $profile_url . '?utm_source=mychart&utm_medium=link&utm_campaign=clinical_service&utm_term=provider&utm_content=' . $profile_slug;
+                    $row[2] = $profile_url . '?utm_source=mychart&utm_medium=link&utm_campaign=clinical_service&utm_term=provider&utm_content=' . $profile_slug . '&utm_specs=' . $ser_id;
 
             } // endif !$resident
 
