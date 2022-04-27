@@ -248,16 +248,16 @@ function doximity_csv_export() {
                                         // If the building input has a value
                                         // and if the chosen building isn't 'None'
                                         // and if the building's name exists...
-                                        $primary_appointment_address_2_arr[] .= $building_name; // Add the building name to the Address 2 list
+                                        $primary_appointment_address_2_arr[] = $building_name; // Add the building name to the Address 2 list
                                     }
                                     if ( $primary_appointment_floor_value != "0" && isset($primary_appointment_floor_label) & !empty($primary_appointment_floor_label) ) {
                                         // If the building floor isn't set to 'Single-Story Building'
                                         // and if the floor's label exists...
-                                        $primary_appointment_address_2_arr[] .= $primary_appointment_floor_label; // Add the building floor to the Address 2 list
+                                        $primary_appointment_address_2_arr[] = $primary_appointment_floor_label; // Add the building floor to the Address 2 list
                                     }
                                     if ( isset($primary_appointment_suite) & !empty($primary_appointment_suite) ) {
                                         // If the suite exists...
-                                        $primary_appointment_address_2_arr[] .= $primary_appointment_suite; // Add the suite to the Address 2 list
+                                        $primary_appointment_address_2_arr[] = $primary_appointment_suite; // Add the suite to the Address 2 list
                                     }
                                     $primary_appointment_address_2 = implode(', ', $primary_appointment_address_2_arr); // Create a comma-separated list from the array
                                     $primary_appointment_address_2_deprecated = get_field('location_address_2', $location ); // Get the deprecated Address 2 input
@@ -780,13 +780,17 @@ function gmb_provider_csv_export() {
                                 $row[28] = '';
 
                             // Logo photo
-                            // Intentionally left blank
-                                $row[29] = '';
+                                $provider_gmb_logo_photo = UAMS_FAD_ROOT_URL . 'assets/img/uams-health-1024x1024.png';
+                                $row[29] = $provider_gmb_logo_photo;
 
                             // Cover photo
-                            // Intentionally left blank, for now
-                                //echo $featured_img_url;
-                                $row[30] = '';
+                                $provider_image_wide = get_field( 'physician_image_wide', $post_id );
+                                if ( function_exists( 'fly_add_image_size' ) && !empty($provider_image_wide) ) {
+                                    $provider_gmb_cover_photo = image_sizer($provider_image_wide, 2120, 1192, 'center', 'center'); // Google My Business cover photo minimum size: 480x270; maximum size: 2120x1192
+                                } else {
+                                    $provider_gmb_cover_photo = wp_get_attachment_image_url($provider_image_wide, 'large');
+                                }
+                                $row[30] = $provider_gmb_cover_photo ?: '';
 
                             // Other photos
                             // Intentionally left blank
@@ -1400,63 +1404,79 @@ function gmb_location_csv_export() {
                     $row[28] =  '';
 
                 // Logo photo
-                // Intentionally left blank
-                    $row[29] =  '';
+                    $location_gmb_logo_photo = UAMS_FAD_ROOT_URL . 'assets/img/uams-health-1024x1024.png';
+                    $row[29] = $location_gmb_logo_photo;
 
                 // Cover photo
                 
                     // Image values
-                    $featured_image = get_post_thumbnail_id($location_post_id);
-                    $featured_img_url = get_the_post_thumbnail_url($location_post_id,'full');
-                    $override_parent_photo = get_field('location_image_override_parent',$location_child_id);
-                    $override_parent_photo_featured = get_field('location_image_override_parent_featured',$location_child_id);
-                    $override_parent_photo_wayfinding = get_field('location_image_override_parent_wayfinding',$location_child_id);
-                    $override_parent_photo_gallery = get_field('location_image_override_parent_gallery',$location_child_id);
-                    // if ($override_parent_photo && $location_parent_location) { // If child location & override is true
+                    $featured_image = get_post_thumbnail_id($location_post_id); // Get the ID of location's featured image
+                    $featured_img_url = get_the_post_thumbnail_url($location_post_id,'full'); // Get the URL of location's featured image
+                    $override_parent_photo = get_field('location_image_override_parent',$location_child_id); // Get toggle value of "Override Parent Images?"
+                    $override_parent_photo_featured = get_field('location_image_override_parent_featured',$location_child_id); // Get toggle value of "Override Parent Featured Image?"
+                    $override_parent_photo_wayfinding = get_field('location_image_override_parent_wayfinding',$location_child_id); // Get toggle value of "Override Parent Wayfinding Photo?"
+                    $override_parent_photo_gallery = get_field('location_image_override_parent_gallery',$location_child_id); // Get toggle value of "Override Parent Photo Gallery?"
+                    // Set image for featured image
+                    if ($override_parent_photo && $location_parent_location && $override_parent_photo_featured) { // If child location & override is true
+                        $featured_image = get_post_thumbnail_id($location_child_id);
+                    } else { // Use parent/standard image
+                        $featured_image = get_post_thumbnail_id($location_post_id);
+                    }
+                    // Set image for wayfinding image
                     if ($override_parent_photo && $location_parent_location && $override_parent_photo_wayfinding) {
                         $wayfinding_photo = get_field('location_wayfinding_photo',$location_child_id);
-                    } else { // Use parent/standard images
+                    } else { // Use parent/standard image
                         $wayfinding_photo = get_field('location_wayfinding_photo',$location_post_id);
                     }
+                    // Set image(s) for gallery image(s)
                     if ($override_parent_photo && $location_parent_location && $override_parent_photo_gallery) {
                         $photo_gallery = get_field('location_photo_gallery',$location_child_id);
-                    } else { // Use parent/standard images
+                    } else { // Use parent/standard image(s)
                         $photo_gallery = get_field('location_photo_gallery',$location_post_id);
                     }
 
-                    $location_images = array();
+                    $location_images = array(); // Create empty array for location images
                     if ($featured_image && !empty($featured_image)) {
-                        $location_images[] = $featured_image;
+                        // If featured image exists...
+                        $location_images[] = $featured_image; // add it to the array for location images
                     }
                     if ($wayfinding_photo && !empty($wayfinding_photo)) {
-                        $location_images[] = $wayfinding_photo;
+                        // If featured image exists...
+                        $location_images[] = $wayfinding_photo; // add it to the array for location images
                     }
                     if ($photo_gallery && !empty($photo_gallery)) {
+                        // If image gallery values exist...
                         foreach( $photo_gallery as $photo_gallery_image ) {
-                            $location_images[] = $photo_gallery_image;
+                            $location_images[] = $photo_gallery_image; // add them to the array for location images
                         }
                     }
-                    $location_images = array_unique($location_images);
-                    $location_images_count = count($location_images);
-
-                // Cover photo
-                // Intentionally left blank, for now
-                    // $row[30] =  wp_get_attachment_image_url($location_images[0], 'full');
-                    $row[30] = ''; 
+                    $location_images = array_unique($location_images); // Remove duplicate values from the array for location images
+                    $location_images_count = count($location_images); // Count how many images are in the array for location images
+                    if ( $location_images_count > 0 ) {
+                        $p = 1;
+                        $location_gmb_other_photos = '';
+                        foreach( $location_images as $location_images_item ) {
+                            if ( $p == 1 ) {
+                                if ( function_exists( 'fly_add_image_size' ) ) {
+                                    $location_gmb_cover_photo = image_sizer($location_images_item, 2120, 1192, 'center', 'center'); // Google My Business cover photo minimum size: 480x270; maximum size: 2120x1192
+                                } else {
+                                    $location_gmb_cover_photo =  wp_get_attachment_image_url($location_images_item, 'large');
+                                }
+                            } else {
+                                if ( function_exists( 'fly_add_image_size' ) ) {
+                                    $location_gmb_other_photos .= image_sizer($location_images_item, 2120, 1192, 'center', 'center'); // Google My Business cover photo minimum size: 480x270; maximum size: 2120x1192
+                                } else {
+                                    $location_gmb_other_photos .=  wp_get_attachment_image_url($location_images_item, 'large');
+                                }
+                                $location_gmb_other_photos .=  $p < $location_images_count ? ',' : '';
+                            }
+                            $p++;
+                        } // endforeach
+                    }
+                    $row[30] = $location_gmb_cover_photo ?: '';
 
                 // Other photos
-                    // if ( $location_images_count > 1 ) {
-                    //     $p = 1;
-                    //     $otherphotos = '';
-                    //     foreach( $location_images as $location_images_item ) {
-                    //         $otherphotos =  wp_get_attachment_image_url($location_images[$p], 'full');
-                    //         $otherphotos .=  $p < $location_images_count ? ',' : '';
-                    //         $p++;
-                    //     } // endforeach
-                    // }
-                    // Intentionally left blank
-                    // $row[31] = $otherphotos;
-                    $row[31] = '';
+                    $row[31] = $location_gmb_other_photos ?: '';
 
                 // Labels
                     $region = get_term( get_field('location_region',$location_post_id), 'region' )->name;
@@ -1707,9 +1727,10 @@ function mychart_csv_export() {
 
     if ( $query->have_posts() ) :
         $table_head = array();
-        $table_head[0] = 'Provider ID';
+        $table_head[0] = 'SER ID';
         $table_head[1] = 'Provider Name';
         $table_head[2] = 'Provider Profile URL';
+        $table_head[3] = 'Provider Photo URL';
 
         $table_body = array();
         $row = array();
@@ -1717,13 +1738,21 @@ function mychart_csv_export() {
             $post_id = get_the_ID();
 
             // Create the Name variables
-            $pid = get_field('physician_pid',$post_id);
-            $pid = ( $pid == 0 ) ? '' : $pid;
+            $ser_id = get_field('physician_pid',$post_id);
+            $ser_id = ( $ser_id == 0 ) ? '' : $ser_id;
             $sort_name = get_the_title($post_id);
             $profile_url = get_the_permalink($post_id);
 
             // Get slug
             $profile_slug = get_post_field( 'post_name', $post_id );
+
+            // Get featured image
+            // Epic restricts images to a maximum of 1000px per side.
+            // One image is used in all placements, with no server-side crop happening.
+            // Most placements are background images inside a circular container no larger than 122x122.
+            // The details window for a provider displays the full image, restricted only by the max-width of the window and Epic's 1000px maximum on image size.
+            // Defining hot spots within the media library, placing them between the provider's front teeth, yields the best result.
+            $provider_mychart_photo = wp_get_attachment_image_url(get_post_thumbnail_id($post_id), 'thumbnail'); // 150x150
             
             $resident = get_field('physician_resident',$post_id);
             
@@ -1733,13 +1762,16 @@ function mychart_csv_export() {
                 // Start table row
 
                 // PID
-                    $row[0] = $pid;
+                    $row[0] = $ser_id;
 
                 // Provider Name
                     $row[1] = html_entity_decode($sort_name);
 
                 // Provider Profile URL
-                    $row[2] = $profile_url . '?utm_source=mychart&utm_medium=link&utm_campaign=clinical_service&utm_term=provider&utm_content=' . $profile_slug;
+                    $row[2] = $profile_url . '?utm_source=mychart&utm_medium=link&utm_campaign=clinical_service&utm_term=provider&utm_content=' . $profile_slug . '&utm_specs=' . $ser_id;
+
+                // Provider Photo URL
+                    $row[3] = $provider_mychart_photo ?: '';
 
             } // endif !$resident
 
