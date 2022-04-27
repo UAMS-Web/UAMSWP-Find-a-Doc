@@ -1730,6 +1730,7 @@ function mychart_csv_export() {
         $table_head[0] = 'SER ID';
         $table_head[1] = 'Provider Name';
         $table_head[2] = 'Provider Profile URL';
+        $table_head[3] = 'Provider Photo URL';
 
         $table_body = array();
         $row = array();
@@ -1744,6 +1745,14 @@ function mychart_csv_export() {
 
             // Get slug
             $profile_slug = get_post_field( 'post_name', $post_id );
+
+            // Get featured image
+            // Epic restricts images to a maximum of 1000px per side.
+            // One image is used in all placements, with no server-side crop happening.
+            // Most placements are background images inside a circular container no larger than 122x122.
+            // The details window for a provider displays the full image, restricted only by the max-width of the window and Epic's 1000px maximum on image size.
+            // Defining hot spots within the media library, placing them between the provider's front teeth, yields the best result.
+            $provider_mychart_photo = wp_get_attachment_image_url(get_post_thumbnail_id($post_id), 'thumbnail'); // 150x150
             
             $resident = get_field('physician_resident',$post_id);
             
@@ -1760,6 +1769,9 @@ function mychart_csv_export() {
 
                 // Provider Profile URL
                     $row[2] = $profile_url . '?utm_source=mychart&utm_medium=link&utm_campaign=clinical_service&utm_term=provider&utm_content=' . $profile_slug . '&utm_specs=' . $ser_id;
+
+                // Provider Photo URL
+                    $row[3] = $provider_mychart_photo ?: '';
 
             } // endif !$resident
 
