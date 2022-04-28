@@ -141,3 +141,20 @@ add_action( 'template_redirect', function() {
         exit;
     }
 });
+
+add_filter('template_include', 'uamswp_search_set_template');
+function uamswp_search_set_template( $template ){
+
+    /* 
+     * Optional: Have a plug-in option to disable template handling
+     * if( get_option('wpse72544_disable_template_handling') )
+     *     return $template;
+     */
+
+    if(is_search() ){
+        //WordPress couldn't find an 'event' template. Use plug-in instead:
+        $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/search.php';
+    }
+
+    return $template;
+}
