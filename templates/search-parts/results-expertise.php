@@ -7,7 +7,13 @@
  * @since        1.0.0
  * @license      GPL-2.0+
 **/
-$post_id = $post->ID;
+$post_id = $data['post_id'];
+$blog_id = $data['blog_id'];
+
+if ($blog_id !== get_current_blog_id()) {
+    switch_to_blog( $blog_id );
+}
+$post = get_post( $post_id );
 $post_type = $post->post_type;
 $post_type_name = get_post_type_object($post_type)->labels->singular_name;
 $post_title = $post->post_title;
@@ -21,6 +27,7 @@ if ( has_excerpt( $post_id ) ) {
 } ?>
 <article class="post-summary type-<?php echo $post_type; ?> <?php echo $post_type; ?>-<?php echo $post_id; ?> entry">
     <h3 class="h4"><a href="'<?php echo $post_link; ?>"><?php echo $post_title; ?></a></h3>
+    <!-- <p><?php echo 'Post ID: ' .$post->ID . ' Blog ID: ' . $blog_id; ?></p> -->
     <div class="row">
         <div class="col-2">
         <?php if ( has_post_thumbnail($post_id) ) { ?>
