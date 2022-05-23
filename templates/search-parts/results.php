@@ -19,6 +19,7 @@ $post_title = get_the_title( $post_id );
 $post_link = get_permalink($post_id);
 $post_type = $post->post_type;
 $post_type_name = get_post_type_object($post_type)->labels->singular_name;
+$post_thumb = '';
 if(has_post_thumbnail( $post_id )) {
     $post_thumb = get_the_post_thumbnail( $post_id );
 }
@@ -29,7 +30,7 @@ if ( has_excerpt( $post_id ) ) {
     $excerpt = wp_trim_excerpt( "", $post_id );
 }
 ?>
-<article class="post-summary type-post entry entry">
+<article class="post-summary type-post entry">
 <h3 class="h4"><a href="<?php echo $post_link; ?>"><?php echo $post_title; ?></a></h3>
 <div class="row">
     <div class="col-2">
