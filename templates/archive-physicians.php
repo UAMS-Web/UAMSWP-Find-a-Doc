@@ -50,8 +50,9 @@ get_header();
 				</button>
 				<fieldset>
 					<legend class="sr-only">Filter by...</legend>
-					<h3 class="h6">Search Providers</h3>
-					<?php  echo do_shortcode( '[wpdreams_ajaxsearchpro id=1]' ); ?>
+					<!-- <h3 class="h6">Search Providers</h3> -->
+					<?php  //echo do_shortcode( '[wpdreams_ajaxsearchpro id=1]' ); ?>
+					<div class="fwp-filter"><?php  echo facetwp_display( 'facet', 'search_providers' ); ?></div>
 					<div class="fwp-filter"><?php  echo facetwp_display( 'facet', 'alpha' ); ?></div>
 					<?php  echo do_shortcode( '		<div class="fwp-filter">[facetwp facet="primary_care"]</div>
 													<div class="fwp-filter">[facetwp facet="physician_areas_of_expertise"]</div>
