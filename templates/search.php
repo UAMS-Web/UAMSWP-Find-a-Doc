@@ -28,14 +28,21 @@ add_action( 'genesis_after_loop', 'uamswp_search_page_after_entry', 10 );
  * @return void
  */
 function uamswp_do_searchwp_loop() {
-    // global $post;
-    $search_query = get_search_query();
-    $searchwp_query = new \SearchWP\Query( $search_query, [
-        'engine' => 'default', // The Engine name.
-    ] );
-    $search_results = $searchwp_query->get_results();
+    global $post;
+
+    $args = [
+       's'  => get_search_query(),
+       'engine' => 'default', // The Engine name.
+    ];
+
+    if ( ! empty( $args['s'] ) ) {
+        $swp_query = new SWP_Query( $args );
+    } else {
+        $swp_query = new WP_Query( $args );
+    }
 
     $current_blog_id = get_current_blog_id();
+    // Open Layout
     echo '<div class="uams-module bg-auto">';
     echo '<div class="container-fluid">';
     echo '<div class="search-content row">';
@@ -47,83 +54,37 @@ function uamswp_do_searchwp_loop() {
         echo uamswp_search_post_type_links();
     }
     echo '</div>';
-    if ( ! empty( $search_query ) && ! empty( $search_results ) ) :
-        foreach ( $search_results as $search_result ) :
+
+    // SWP_Query
+    if ( $swp_query->have_posts() ) :
+        while ( $swp_query->have_posts() ) : 
+            $swp_query->the_post();
             // Track whether we switched sites for this result.
             $switched_site = false;
+            
 
             // Do we need to switch to the proper site for this result?
-            if ( $current_blog_id !== $search_result->site ) {
-                switch_to_blog( $search_result->site );
+            if ( $current_blog_id !== $post->site ) {
+                switch_to_blog( $post->site );
                 $switched_site = true;
+                $post = get_post( $post->id );
+            } else {
+                $post = get_post( $post->id );
             }
 
-            $post = get_post( $search_result->id );
-            setup_postdata( $post );
-            $post_id = $search_result->id;
-
-            //echo  UAMS_FAD_PATH . 'templates/search-parts/results';
-
-            uamswp_get_template_part( 'results', $post->post_type, ['post_id' => $post_id, 'blog_id' => $search_result->site], UAMS_FAD_PATH . 'templates/search-parts', STYLESHEETPATH . 'templates/parts' );
+            uamswp_get_template_part( 'results', $post->post_type, ['post_id' => $post->id, 'blog_id' => $post->site], UAMS_FAD_PATH . 'templates/search-parts', STYLESHEETPATH . 'templates/parts' );
 
             if ( $switched_site ) {
                 restore_current_blog();
             }
-        endforeach;
+        endwhile;
         wp_reset_postdata();
 
     else :
         echo "<p>Sorry, no content matched your criteria.</p>";
     endif;
 
-
-    // if ( have_posts() ) {
-    //     while ( have_posts() ) {
-    //         the_post();
-    //         // Search Results may be formatted as SearchWP results
-    //         // because we're searching cross-site on the main site.
-    //         if ( 1 === $current_blog_id ) {
-    //             if ( $current_blog_id !== $post->site ) {
-    //                 switch_to_blog( $post->site );
-    //                 $post = get_post( $post->id );
-    //                 // get_template_part( 'search-parts/'.$post->post_type );
-    //                 if (file_exists(UAMS_FAD_PATH . '/templates/search-parts/'.$post->post_type.'.php')){
-    //                     include( UAMS_FAD_PATH . '/templates/search-parts/'.$post->post_type.'.php' );
-    //                 } else {
-    //                     include( UAMS_FAD_PATH . '/templates/search-parts/index.php' );
-    //                 }
-    //                 // echo '<h3 class="h4">'. get_post_type_object($post->post_type)->labels->singular_name .': <a href="' . get_permalink($post->ID) . '">'. $post->post_title .'</a></h3>';
-    //                 // echo '<p>'. get_permalink($post->ID) .'</p>';
-    //                 // echo '<p>'. ($post->post_excerpt ? $post->post_excerpt : $post->post_content_filtered) .'</p>';
-    //                 restore_current_blog();
-    //             } else {
-    //                 $post = get_post( $post->id );
-    //                 // get_template_part( 'search-parts/'.$post->post_type );
-    //                 if (file_exists(UAMS_FAD_PATH . '/templates/search-parts/'.$post->post_type.'.php')){
-    //                     include( UAMS_FAD_PATH . '/templates/search-parts/'.$post->post_type.'.php' );
-    //                 } else {
-    //                     include( UAMS_FAD_PATH . '/templates/search-parts/index.php' );
-    //                 }
-    //                 // echo '<h3 class="h4">'. get_post_type_object($post->post_type)->labels->singular_name .': <a href="' . get_permalink($post->ID) . '">'. $post->post_title .'</a></h3>';
-    //                 // echo '<p>'. get_permalink($post->ID) .'</p>';
-    //                 // echo '<p>'. ($post->post_excerpt ? $post->post_excerpt : $post->post_content_filtered) .'</p>';
-    //             }
-    //         } else {
-    //             // get_template_part( 'search-parts/'.$post->post_type );
-    //             if (file_exists(UAMS_FAD_PATH . '/templates/search-parts/'.$post->post_type.'.php')){
-    //                 include( UAMS_FAD_PATH . '/templates/search-parts/'.$post->post_type.'.php' );
-    //             } else {
-    //                 include( UAMS_FAD_PATH . '/templates/search-parts/index.php' );
-    //             }
-    //             // echo '<h3 class="h4"><a href="' . get_permalink() . '">'. get_the_title() .'</a></h3>';
-    //             // echo '<p>'. get_permalink() .'</p>';
-    //             // echo '<p>'. ($post->post_excerpt ? $post->post_excerpt : $post->post_content_filtered) .'</p>';
-    //         }
-    //     }
-    // } else {
-    //     // get_template_part( 'template-parts/content/content-none' );
-    //     echo "<p>Sorry, no content matched your criteria.</p>";
-    // }
+    // Close Layout
     echo '</div>'; // .inner-container
     echo '</div>'; // .col-12
     echo '</div>'; // .search-content
