@@ -66,11 +66,11 @@ function uamswp_taxonomy_archive_page_template ($templates) {
     $templates['archive-taxonomy-conditions.php'] = 'Conditions Archive';
     $templates['archive-taxonomy-treatments.php'] = 'Treatments Archive';
     $templates['provider-image.php'] = 'Provider Image';
-    $templates['doximity-list.php'] = 'Doximity List';
-    $templates['gmb-list-provider.php'] = 'GMB Provider List';
-    $templates['gmb-list-location.php'] = 'GMB Location List';
-    $templates['mychart-list-provider.php'] = 'MyChart Provider List';
-    return $templates;
+    // $templates['doximity-list.php'] = 'Doximity List';
+    // $templates['gmb-list-provider.php'] = 'GMB Provider List';
+    // $templates['gmb-list-location.php'] = 'GMB Location List';
+    // $templates['mychart-list-provider.php'] = 'MyChart Provider List';
+    // return $templates;
     }
 add_filter ('theme_page_templates', 'uamswp_taxonomy_archive_page_template');
 
@@ -83,14 +83,14 @@ function uamswp_redirect_page_template ($template) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/archive-taxonomy-treatments.php';
     if ('provider-image.php' == basename ($page_template ))
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/provider-image.php';
-    if ('doximity-list.php' == basename ($page_template ))
-        $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/doximity-list.php';
-    if ('gmb-list-provider.php' == basename ($page_template ))
-        $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/gmb-list-provider.php';
-    if ('gmb-list-location.php' == basename ($page_template ))
-        $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/gmb-list-location.php';
-    if ('mychart-list-provider.php' == basename ($page_template ))
-        $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/mychart-list-provider.php';
+    // if ('doximity-list.php' == basename ($page_template ))
+    //     $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/doximity-list.php';
+    // if ('gmb-list-provider.php' == basename ($page_template ))
+    //     $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/gmb-list-provider.php';
+    // if ('gmb-list-location.php' == basename ($page_template ))
+    //     $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/gmb-list-location.php';
+    // if ('mychart-list-provider.php' == basename ($page_template ))
+    //     $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/mychart-list-provider.php';
     return $template;
     }
 add_filter ('page_template', 'uamswp_redirect_page_template');
@@ -141,3 +141,20 @@ add_action( 'template_redirect', function() {
         exit;
     }
 });
+
+add_filter('template_include', 'uamswp_search_set_template');
+function uamswp_search_set_template( $template ){
+
+    /* 
+     * Optional: Have a plug-in option to disable template handling
+     * if( get_option('wpse72544_disable_template_handling') )
+     *     return $template;
+     */
+
+    if(is_search() ){
+        //WordPress couldn't find an 'event' template. Use plug-in instead:
+        $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/search.php';
+    }
+
+    return $template;
+}
