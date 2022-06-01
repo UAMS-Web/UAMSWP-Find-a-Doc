@@ -995,7 +995,7 @@ while ( have_posts() ) : the_post();
                             <?php endif; ?>
                             <?php
                                 if( have_rows('physician_education') ): ?>
-                                    <h3 class="h4">Education</h3>
+                                    <h3 class="h4">Education and Training</h3>
                                     <dl>
                                     <?php while( have_rows('physician_education') ): the_row();
                                         $school_name = get_term( get_sub_field('school'), 'school');
@@ -1295,6 +1295,36 @@ while ( have_posts() ) : the_post();
                                 </div>
                             </div>
                         </div>
+                        <script>
+                            /* Custom HTML for the paging controls for the comments list */
+                            window.DS_OPT = {
+                                buildCommentsLoadMoreHTML: function(data, ctx){
+                                    // a variable to hold the HTML markup
+                                    var x;
+                                    // make sure we have data and it is valid
+                                    if(data && data.valid){
+                                        // grab the profile data
+                                        var review = data.reviewMeta;
+                                        if(review){
+                                            // setup the variables that the template will need	
+                                            var templateData = {
+                                                moreUrl:    review.moreUrl
+                                            }; 
+                                            // build the HTML markup using {{var-name}} for the template variables
+                                            var template = [
+                                                '<div class="ds-comments-more ds-comments-more-placeholder">',
+                                                    '<a href="#" class="ds-comments-more-link" data-more-comments-url="{{moreUrl}}">View More</a>',
+                                                    '<span class="ds-comments-more-loading" style="display:none;">Loading...</span>',
+                                                '</div>'
+                                            ].join('');
+                                            // apply the variables to the template
+                                            x = ctx.tmpl(template, templateData);
+                                        }
+                                    }      
+                                    return x;
+                                }
+                            };
+                        </script>
                         <script src="https://transparency.nrchealth.com/widget/v2/uams/npi/<?php echo $npi; ?>/lotw.js" async></script>                           
                         <?php // endif; ?>
                     </div>
