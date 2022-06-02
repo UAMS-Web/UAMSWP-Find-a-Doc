@@ -1273,7 +1273,7 @@ function gmb_location_csv_export() {
             $location_gmb_prefix = get_field( 'location_gmb_prefix', $location_post_id );
 
             // Create the table
-            if ( !$location_gmb_exclude ) {
+            if ( true !== $location_gmb_exclude ) {
 
                 // Start table row
 
