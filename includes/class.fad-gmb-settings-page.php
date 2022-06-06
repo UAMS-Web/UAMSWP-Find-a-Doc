@@ -464,7 +464,7 @@ function gmb_provider_csv_export() {
             } 
             
             // Check for valid locations
-            $locations = get_field('physician_locations',$post_id);
+            $locations = get_field('physician_locations', $post_id);
             $location_valid = false;
             if ( $locations ) {
                 foreach( $locations as $location ) {
@@ -524,6 +524,7 @@ function gmb_provider_csv_export() {
             // Create the table
             if ( $locations && $location_valid && !$resident && !$provider_gmb_exclude ) {
                 $row = array();
+                
                 // Create row for each valid location
                 foreach( $locations as $location ) {
                     if ( get_post_status ( $location ) == 'publish' ) {
@@ -532,7 +533,7 @@ function gmb_provider_csv_export() {
                             $location_slug = get_post_field( 'post_name', $location );
                             $store_code = $profile_slug . '_' . $location_slug;
 
-                            $row[0] = $store_code;
+                            $row[0] = $store_code; // . '-' . implode(",",$locations) . '-' . $location;
 
                         // Business name
                             $row[1] = 'UAMS Health - ' . html_entity_decode($full_name);
@@ -623,35 +624,35 @@ function gmb_provider_csv_export() {
                                 $location_address_4 = array_key_exists(2, $location_addresses) ? $location_addresses[2] : '';
                                 $location_address_5 = array_key_exists(3, $location_addresses) ? $location_addresses[3] : '';
                             
-                            $location_city = get_field( 'location_city', $location_post_id );
-                            $location_state = get_field( 'location_state', $location_post_id );
-                            $location_zip = get_field( 'location_zip', $location_post_id );
-                            $location_phone = get_field( 'location_phone', $location_child_id );
-                            $location_fax = get_field( 'location_fax', $location_child_id );
-                            $location_hours_group = get_field('location_hours_group', $location_child_id );
-                            $location_telemed_query = $location_hours_group['location_telemed_query'];
-                            
-                            $location_gmb_wheelchair_elevator = get_field( 'has_wheelchair_accessible_elevator', $location_post_id );
-                            $location_gmb_wheelchair_elevator = ( $location_gmb_wheelchair_elevator == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_elevator;
-                            $location_gmb_wheelchair_entrance = get_field( 'has_wheelchair_accessible_entrance', $location_post_id );
-                            $location_gmb_wheelchair_entrance = ( $location_gmb_wheelchair_entrance == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_entrance;
-                            $location_gmb_wheelchair_restroom = get_field( 'has_wheelchair_accessible_restroom', $location_post_id );
-                            $location_gmb_wheelchair_restroom = ( $location_gmb_wheelchair_restroom == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_restroom;
-                            $location_gmb_restroom = get_field( 'has_restroom', $location_post_id );
-                            $location_gmb_restroom = ( $location_gmb_restroom == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_restroom;
-                            $location_gmb_appointments = get_field( 'requires_appointments', $location_post_id );
-                            $location_gmb_appointments = ( $location_gmb_appointments == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_appointments;
-                            $location_gmb_temp_customers = get_field( 'requires_temperature_check_customers', $location_post_id );
-                            $location_gmb_temp_customers = ( $location_gmb_temp_customers == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_temp_customers;
-                            $location_gmb_masks_customers = get_field( 'requires_masks_customers', $location_post_id );
-                            $location_gmb_masks_customers = ( $location_gmb_masks_customers == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_masks_customers;
-                            $location_gmb_temp_staff = get_field( 'requires_temperature_check_staff', $location_post_id );
-                            $location_gmb_temp_staff = ( $location_gmb_temp_staff == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_temp_staff;
-                            $location_gmb_masks_staff = get_field( 'requires_masks_staff', $location_post_id );
-                            $location_gmb_masks_staff = ( $location_gmb_masks_staff == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_masks_staff;
-                            $location_gmb_sanitizing = get_field( 'is_sanitizing_between_customers', $location_post_id );
-                            $location_gmb_sanitizing = ( $location_gmb_sanitizing == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_sanitizing;
-                            $location_map = get_field( 'location_map', $location_post_id );
+	                            $location_city = get_field( 'location_city', $location_post_id );
+	                            $location_state = get_field( 'location_state', $location_post_id );
+	                            $location_zip = get_field( 'location_zip', $location_post_id );
+	                            $location_phone = get_field( 'location_phone', $location_child_id );
+	                            $location_fax = get_field( 'location_fax', $location_child_id );
+	                            $location_hours_group = get_field('location_hours_group', $location_child_id );
+	                            $location_telemed_query = $location_hours_group['location_telemed_query'];
+	                            
+	                            $location_gmb_wheelchair_elevator = get_field( 'has_wheelchair_accessible_elevator', $location_post_id );
+	                            $location_gmb_wheelchair_elevator = ( $location_gmb_wheelchair_elevator == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_elevator;
+	                            $location_gmb_wheelchair_entrance = get_field( 'has_wheelchair_accessible_entrance', $location_post_id );
+	                            $location_gmb_wheelchair_entrance = ( $location_gmb_wheelchair_entrance == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_entrance;
+	                            $location_gmb_wheelchair_restroom = get_field( 'has_wheelchair_accessible_restroom', $location_post_id );
+	                            $location_gmb_wheelchair_restroom = ( $location_gmb_wheelchair_restroom == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_restroom;
+	                            $location_gmb_restroom = get_field( 'has_restroom', $location_post_id );
+	                            $location_gmb_restroom = ( $location_gmb_restroom == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_restroom;
+	                            $location_gmb_appointments = get_field( 'requires_appointments', $location_post_id );
+	                            $location_gmb_appointments = ( $location_gmb_appointments == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_appointments;
+	                            $location_gmb_temp_customers = get_field( 'requires_temperature_check_customers', $location_post_id );
+	                            $location_gmb_temp_customers = ( $location_gmb_temp_customers == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_temp_customers;
+	                            $location_gmb_masks_customers = get_field( 'requires_masks_customers', $location_post_id );
+	                            $location_gmb_masks_customers = ( $location_gmb_masks_customers == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_masks_customers;
+	                            $location_gmb_temp_staff = get_field( 'requires_temperature_check_staff', $location_post_id );
+	                            $location_gmb_temp_staff = ( $location_gmb_temp_staff == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_temp_staff;
+	                            $location_gmb_masks_staff = get_field( 'requires_masks_staff', $location_post_id );
+	                            $location_gmb_masks_staff = ( $location_gmb_masks_staff == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_masks_staff;
+	                            $location_gmb_sanitizing = get_field( 'is_sanitizing_between_customers', $location_post_id );
+	                            $location_gmb_sanitizing = ( $location_gmb_sanitizing == 'Not Applicable' ) ? '[NOT APPLICABLE]' : $location_gmb_sanitizing;
+	                            $location_map = get_field( 'location_map', $location_post_id );
                                 $location_latitude = '';
                                 $location_longitude = '';
                                 if ( $location_map ) {
@@ -994,10 +995,13 @@ function gmb_provider_csv_export() {
                                 $row[72] = '[NOT APPLICABLE]';
 
                         $l++;
+                    } else {
+	                    continue;
                     }
+                    $table_body[] = $row;
                 } // endforeach
             }
-            $table_body[] = $row;       
+//             $table_body[] = $row;       
         endwhile;
     endif;
     ob_end_clean ();
@@ -1273,7 +1277,7 @@ function gmb_location_csv_export() {
             $location_gmb_prefix = get_field( 'location_gmb_prefix', $location_post_id );
 
             // Create the table
-            if ( !$location_gmb_exclude ) {
+            if ( true !== $location_gmb_exclude ) {
 
                 // Start table row
 
@@ -1673,7 +1677,8 @@ function gmb_location_csv_export() {
                     $row[72] = '[NOT APPLICABLE]';
                 
             } // endif
-            $table_body[] = $row;     
+            $table_body[] = $row; 
+               
         endwhile;
             
     endif;
