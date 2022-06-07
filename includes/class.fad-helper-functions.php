@@ -13,45 +13,6 @@ if ( !function_exists('apStyleDate') ) {
 	
 	}
 }
-
-if ( !function_exists('apStyleTime') ) {
-	function apStyleTime($time, $capnoon = true){
-
-    $time = strtotime($time);
-
-		// Format am and pm to AP Style abbreviations.
-    if ( date( 'a', $time ) == 'am' ) {
-      $meridian = 'a.m.';
-    } elseif ( date( 'a', $time ) == 'pm' ) {
-      $meridian = 'p.m.';
-    }
-
-    // Reformat 12:00 and 00:00 to noon and midnight.
-    if ( date( 'H:i', $time ) == '00:00' ) {
-      if ( true == $capnoon ) {
-        $aptime = 'Midnight';
-      } else {
-        $aptime = 'midnight';
-      }
-    } elseif ( date( 'H:i', $time ) == '12:00' ) {
-      if ( true == $capnoon ) {
-        $aptime = 'Noon';
-      } else {
-        $aptime = 'noon';
-      }
-
-      // Eliminate trailing zeroes from times at the top of the hour and set final output.
-    } elseif ( date( 'i', $time ) == '00' ) {
-      $aptime = date( 'g', $time ) . ' ' . $meridian;
-    } else {
-      $aptime = date( 'g:i', $time ) . ' ' . $meridian;
-    }
-
-    return $aptime;
-
-	}
-}
-
 /**
  * Format a date as AP style
  * This was modified from http://www.rockmycar.net/ap-style-dates-and-times-plugin/
@@ -206,6 +167,44 @@ if ( !function_exists('isDate') ) {
         }
     }
   }
+}
+
+if ( !function_exists('apStyleTime') ) {
+	function apStyleTime($time, $capnoon = true){
+
+    $time = strtotime($time);
+
+		// Format am and pm to AP Style abbreviations.
+    if ( date( 'a', $time ) == 'am' ) {
+      $meridian = 'a.m.';
+    } elseif ( date( 'a', $time ) == 'pm' ) {
+      $meridian = 'p.m.';
+    }
+
+    // Reformat 12:00 and 00:00 to noon and midnight.
+    if ( date( 'H:i', $time ) == '00:00' ) {
+      if ( true == $capnoon ) {
+        $aptime = 'Midnight';
+      } else {
+        $aptime = 'midnight';
+      }
+    } elseif ( date( 'H:i', $time ) == '12:00' ) {
+      if ( true == $capnoon ) {
+        $aptime = 'Noon';
+      } else {
+        $aptime = 'noon';
+      }
+
+      // Eliminate trailing zeroes from times at the top of the hour and set final output.
+    } elseif ( date( 'i', $time ) == '00' ) {
+      $aptime = date( 'g', $time ) . ' ' . $meridian;
+    } else {
+      $aptime = date( 'g:i', $time ) . ' ' . $meridian;
+    }
+
+    return $aptime;
+
+	}
 }
 
 // Partition / Split Col function
