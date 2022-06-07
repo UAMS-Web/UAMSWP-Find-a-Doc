@@ -373,24 +373,22 @@ function uamswp_resource_video() {
     }
 }
 function uamswp_resource_conditions_cpt() {
+    global $page_title;
     global $show_conditions_section;
     global $conditions_cpt_query;
-    $condition_heading_related_resource = true;
-    $condition_heading_related_treatment = false;
-    $condition_heading_treated = false;
-    $condition_disclaimer = false;
+    $condition_context = 'single-resource';
+    $condition_heading_related_name = $page_title; // To what is it related?
 
     if( $show_conditions_section ) {
         include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
     }
 }
 function uamswp_resource_treatments_cpt() {
+    global $page_title;
     global $show_treatments_section;
     global $treatments_cpt_query;
-    $treatment_heading_related_resource = true;
-    $treatment_heading_related_condition = false;
-    $treatment_heading_performed = false;
-    $treatment_disclaimer = false;
+    $treatment_context = 'single-resource';
+    $treatment_heading_related_name = $page_title; // To what is it related?
 
     if( $show_treatments_section ) {
         include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );

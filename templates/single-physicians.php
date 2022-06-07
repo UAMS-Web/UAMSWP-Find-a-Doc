@@ -995,7 +995,7 @@ while ( have_posts() ) : the_post();
                             <?php endif; ?>
                             <?php
                                 if( have_rows('physician_education') ): ?>
-                                    <h3 class="h4">Education</h3>
+                                    <h3 class="h4">Education and Training</h3>
                                     <dl>
                                     <?php while( have_rows('physician_education') ): the_row();
                                         $school_name = get_term( get_sub_field('school'), 'school');
@@ -1101,10 +1101,8 @@ while ( have_posts() ) : the_post();
             // Conditions CPT
             // we will use the first term to load ACF data from
             if( $show_conditions_section ) {
-                $condition_heading_related_resource = false;
-                $condition_heading_related_treatment = false;
-                $condition_heading_treated = true;
-                $condition_disclaimer = true;
+                $condition_context = 'single-provider';
+                $condition_heading_related_name = $short_name; // To what is it related?
 
                 include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
                 // $condition_schema .= ',"medicalSpecialty": [';
@@ -1126,10 +1124,8 @@ while ( have_posts() ) : the_post();
 
             // Treatments CPT
             if( $show_treatments_section ) {
-                $treatment_heading_related_resource = false;
-                $treatment_heading_related_condition = false;
-                $treatment_heading_performed = true;
-                $treatment_disclaimer = true;
+                $treatment_context = 'single-provider';
+                $treatment_heading_related_name = $short_name; // To what is it related?
                 include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
                 // $treatment_schema .= ',"medicalSpecialty": [';
                 $i = 0;
