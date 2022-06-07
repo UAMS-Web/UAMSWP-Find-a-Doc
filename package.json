@@ -16,7 +16,7 @@
     "gulp-sass": "^5.1.0",
     "postcss": "^8.4.12",
     "postcss-discard-comments": "^5.1.1",
-    "sass": "^1.50.0"
+    "sass": "~1.26.11"
   },
   "devDependencies": {},
   "scripts": {
