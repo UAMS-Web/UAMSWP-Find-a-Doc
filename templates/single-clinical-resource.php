@@ -8,32 +8,17 @@
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title();
-$page_title_attr = str_replace('"', '\'', $page_title);
-$page_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($page_title_attr, null, 'utf-8')));
 $resource_archive_title_system = get_field('clinical_resource_archive_headline', 'option');
 $resource_archive_title = $resource_archive_title_system ? $resource_archive_title_system : 'Clinical Resource';
-$resource_archive_title_attr = str_replace('"', '\'', $resource_archive_title);
-$resource_archive_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($resource_archive_title_attr, null, 'utf-8')));
 
 // Override theme's method of defining the page title
 function uamswp_fad_title($html) { 
-    global $page_title_attr;
-    global $resource_archive_title_attr;
-    //you can add here all your conditions as if is_page(), is_category() etc.. 
-    $meta_title_chars_max = 60;
-    $meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
-    $meta_title_base_chars = strlen( $meta_title_base );
-    $meta_title_enhanced_addition = ' | ' . $resource_archive_title_attr;
-    $meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
-    $meta_title_enhanced_chars = strlen( $meta_title_enhanced );
-    if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
-        $html = $meta_title_enhanced;
-    } else {
-        $html = $meta_title_base;
-    }
-    return $html;
+    global $page_title;
+	//you can add here all your conditions as if is_page(), is_category() etc.. 
+	$html = $page_title . ' | ' . get_bloginfo( "name" );
+	return $html;
 }
-add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 $syndicated = get_field('clinical_resource_syndicated');
 $syndication_url = get_field('clinical_resource_syndication_url');

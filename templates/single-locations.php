@@ -11,8 +11,6 @@ if (empty($excerpt)){
     }
 }
 $page_title = get_the_title( );
-$page_title_attr = str_replace('"', '\'', $page_title);
-$page_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($page_title_attr, null, 'utf-8')));
 
 
 // Parent Location 
@@ -249,7 +247,6 @@ $args = (array(
 ));
 $resource_query = new WP_Query( $args );
 
-// Override theme's method of defining the meta description
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
@@ -258,25 +255,12 @@ function sp_titles_desc($html) {
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
 // Override theme's method of defining the page title
-$location_city = get_field('location_city', $post_id);
 function uamswp_fad_title($html) { 
-    global $page_title_attr;
-	global $location_city;
-    //you can add here all your conditions as if is_page(), is_category() etc.. 
-    $meta_title_chars_max = 60;
-    $meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
-    $meta_title_base_chars = strlen( $meta_title_base );
-    $meta_title_enhanced_addition = ' | ' . $location_city;
-    $meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
-    $meta_title_enhanced_chars = strlen( $meta_title_enhanced );
-    if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
-        $html = $meta_title_enhanced;
-    } else {
-        $html = $meta_title_base;
-    }
-    return $html;
+	//you can add here all your conditions as if is_page(), is_category() etc.. 
+	$html = get_the_title() . ' | ' . get_bloginfo( "name" );
+	return $html;
 }
-add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 get_header();
 
