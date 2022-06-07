@@ -32,7 +32,7 @@
   background-position: 0 0;
   content: "";
   display: block;
-  padding-top: 19.007793195210034%;
+  padding-top: 19.0077931952%;
 }
 
 .rating .star-ratings-sprite .star-ratings-sprite-percentage,
@@ -1250,7 +1250,7 @@
 }
 
 #providers.overflow:not(.expanded) .card-list-container {
-  max-height: 36.36088rem;
+  max-height: 36.360875rem;
   overflow: hidden;
 }
 
@@ -1259,7 +1259,7 @@
   background-repeat: repeat-x;
   display: flex;
   justify-content: center;
-  margin-top: -4.08713rem;
+  margin-top: -4.087125rem;
   padding-top: 1.0625rem;
   position: relative;
   z-index: 1;
@@ -1520,11 +1520,11 @@ html.poppedOut {
   }
 
   #providers.overflow:not(.expanded) .card-list-container {
-    max-height: 37.36438rem;
+    max-height: 37.364375rem;
   }
 
   #providers.overflow:not(.expanded) .ajax-filter-load-more {
-    margin-top: -5.09063rem;
+    margin-top: -5.090625rem;
     padding-top: 2.0625rem;
   }
 
