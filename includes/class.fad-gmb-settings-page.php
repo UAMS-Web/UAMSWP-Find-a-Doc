@@ -370,72 +370,72 @@ function gmb_provider_csv_export() {
         $table_head[4]    =  'Address line 3';
         $table_head[5]    =  'Address line 4';
         $table_head[6]    =  'Address line 5';
-        $table_head[7]    =  'Sub-locality';
-        $table_head[8]    =  'Locality';
-        $table_head[9]    =  'Administrative area';
-        $table_head[10]   =  'Country / Region';
-        $table_head[11]   =  'Postal code';
-        $table_head[12]   =  'Latitude';
-        $table_head[13]   =  'Longitude';
-        $table_head[14]   =  'Primary phone';
-        $table_head[15]   =  'Additional phones';
-        $table_head[16]   =  'Website';
-        $table_head[17]   =  'Primary category';
-        $table_head[18]   =  'Additional categories';
-        $table_head[19]   =  'Sunday hours';
-        $table_head[20]   =  'Monday hours';
-        $table_head[21]   =  'Tuesday hours';
-        $table_head[22]   =  'Wednesday hours';
-        $table_head[23]   =  'Thursday hours';
-        $table_head[24]   =  'Friday hours';
-        $table_head[25]   =  'Saturday hours';
-        $table_head[26]   =  'Special hours';
-        $table_head[27]   =  'From the business';
-        $table_head[28]   =  'Opening date';
-        $table_head[29]   =  'Logo photo';
-        $table_head[30]   =  'Cover photo';
-        $table_head[31]   =  'Other photos';
-        $table_head[32]   =  'Labels';
-        $table_head[33]   =  'AdWords location extensions phone';
-        $table_head[34]   =  'Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)';
-        $table_head[35]   =  'Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)';
-        $table_head[36]   =  'Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)';
-        $table_head[37]   =  'Amenities: Restroom (has_restroom)';
-        $table_head[38]   =  'From the business: Identifies as Black-owned (is_black_owned)';
-        $table_head[39]   =  'From the business: Identifies as veteran-led (is_owned_by_veterans)';
-        $table_head[40]   =  'From the business: Identifies as women-led (is_owned_by_women)';
-        $table_head[41]   =  'Health & safety: Appointment required (requires_appointments)';
-        $table_head[42]   =  'Health & safety: Mask required (requires_masks_customers)';
-        $table_head[43]   =  'Health & safety: Safety dividers at checkout (has_plexiglass_at_checkout)';
-        $table_head[44]   =  'Health & safety: Staff get temperature checks (requires_temperature_check_staff)';
-        $table_head[45]   =  'Health & safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)';
-        $table_head[46]   =  'Health & safety: Staff wear masks (requires_masks_staff)';
-        $table_head[47]   =  'Health & safety: Temperature check required (requires_temperature_check_customers)';
-        $table_head[48]   =  'Offerings: Passport photos (has_onsite_passport_photos)';
-        $table_head[49]   =  'Payments: Cash-only (requires_cash_only)';
-        $table_head[50]   =  'Payments: Checks (pay_check)';
-        $table_head[51]   =  'Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)';
-        $table_head[52]   =  'Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)';
-        $table_head[53]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)';
-        $table_head[54]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)';
-        $table_head[55]   =  'Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)';
-        $table_head[56]   =  'Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)';
-        $table_head[57]   =  'Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)';
-        $table_head[58]   =  'Payments: Debit cards (pay_debit_card)';
-        $table_head[59]   =  'Payments: NFC mobile payments (pay_mobile_nfc)';
-        $table_head[60]   =  'Place page URLs: Appointment links (url_appointment)';
-        $table_head[61]   =  'Place page URLs: COVID-19 info link (url_covid_19_info_page)';
-        $table_head[62]   =  'Place page URLs: Menu link (url_menu)';
-        $table_head[63]   =  'Place page URLs: Virtual care link (url_facility_telemedicine_page)';
-        $table_head[64]   =  'Planning: LGBTQ friendly (welcomes_lgbtq)';
-        $table_head[65]   =  'Planning: Transgender safespace (is_transgender_safespace)';
-        $table_head[66]   =  'Service options: Curbside pickup (has_curbside_pickup)';
-        $table_head[67]   =  'Service options: Delivery (has_delivery)';
-        $table_head[68]   =  'Service options: Drive-through (has_drive_through)';
-        $table_head[69]   =  'Service options: In-store pickup (has_in_store_pickup)';
-        $table_head[70]   =  'Service options: In-store shopping (has_in_store_shopping)';
-        $table_head[71]   =  'Service options: Online care (has_video_visits)';
-        $table_head[72]   =  'Service options: Same-day delivery (has_delivery_same_day)';
+        // $table_head[7]    =  'Sub-locality'; // Intentionally left blank
+        $table_head[7]    =  'Locality';
+        $table_head[8]    =  'Administrative area';
+        $table_head[9]   =  'Country / Region';
+        $table_head[10]   =  'Postal code';
+        $table_head[11]   =  'Latitude';
+        $table_head[12]   =  'Longitude';
+        $table_head[13]   =  'Primary phone';
+        // $table_head[15]   =  'Additional phones'; // Intentionally left blank
+        $table_head[14]   =  'Website';
+        $table_head[15]   =  'Primary category';
+        $table_head[16]   =  'Additional categories';
+        // $table_head[19]   =  'Sunday hours'; // Intentionally left blank
+        // $table_head[20]   =  'Monday hours'; // Intentionally left blank
+        // $table_head[21]   =  'Tuesday hours'; // Intentionally left blank
+        // $table_head[22]   =  'Wednesday hours'; // Intentionally left blank
+        // $table_head[23]   =  'Thursday hours'; // Intentionally left blank
+        // $table_head[24]   =  'Friday hours'; // Intentionally left blank
+        // $table_head[25]   =  'Saturday hours'; // Intentionally left blank
+        // $table_head[26]   =  'Special hours'; // Intentionally left blank
+        $table_head[17]   =  'From the business';
+        // $table_head[28]   =  'Opening date'; // Intentionally left blank
+        $table_head[18]   =  'Logo photo';
+        $table_head[19]   =  'Cover photo';
+        // $table_head[31]   =  'Other photos'; // Intentionally left blank
+        $table_head[20]   =  'Labels';
+        // $table_head[33]   =  'AdWords location extensions phone';
+        $table_head[21]   =  'Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)';
+        $table_head[22]   =  'Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)';
+        $table_head[23]   =  'Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)';
+        $table_head[24]   =  'Amenities: Restroom (has_restroom)';
+        // $table_head[38]   =  'From the business: Identifies as Black-owned (is_black_owned)';
+        // $table_head[39]   =  'From the business: Identifies as veteran-led (is_owned_by_veterans)';
+        // $table_head[40]   =  'From the business: Identifies as women-led (is_owned_by_women)';
+        $table_head[25]   =  'Health & safety: Appointment required (requires_appointments)';
+        $table_head[26]   =  'Health & safety: Mask required (requires_masks_customers)';
+        // $table_head[43]   =  'Health & safety: Safety dividers at checkout (has_plexiglass_at_checkout)';
+        $table_head[27]   =  'Health & safety: Staff get temperature checks (requires_temperature_check_staff)';
+        $table_head[28]   =  'Health & safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)';
+        $table_head[29]   =  'Health & safety: Staff wear masks (requires_masks_staff)';
+        $table_head[30]   =  'Health & safety: Temperature check required (requires_temperature_check_customers)';
+        $table_head[31]   =  'Offerings: Passport photos (has_onsite_passport_photos)';
+        $table_head[32]   =  'Payments: Cash-only (requires_cash_only)';
+        $table_head[33]   =  'Payments: Checks (pay_check)';
+        $table_head[34]   =  'Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)';
+        $table_head[35]   =  'Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)';
+        $table_head[36]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)';
+        $table_head[37]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)';
+        $table_head[38]   =  'Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)';
+        $table_head[39]   =  'Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)';
+        $table_head[40]   =  'Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)';
+        $table_head[41]   =  'Payments: Debit cards (pay_debit_card)';
+        $table_head[42]   =  'Payments: NFC mobile payments (pay_mobile_nfc)';
+        // $table_head[60]   =  'Place page URLs: Appointment links (url_appointment)';
+        $table_head[43]   =  'Place page URLs: COVID-19 info link (url_covid_19_info_page)';
+        $table_head[44]   =  'Place page URLs: Menu link (url_menu)';
+        $table_head[45]   =  'Place page URLs: Virtual care link (url_facility_telemedicine_page)';
+        // $table_head[64]   =  'Planning: LGBTQ friendly (welcomes_lgbtq)';
+        // $table_head[65]   =  'Planning: Transgender safespace (is_transgender_safespace)';
+        $table_head[46]   =  'Service options: Curbside pickup (has_curbside_pickup)';
+        $table_head[47]   =  'Service options: Delivery (has_delivery)';
+        $table_head[48]   =  'Service options: Drive-through (has_drive_through)';
+        $table_head[49]   =  'Service options: In-store pickup (has_in_store_pickup)';
+        $table_head[50]   =  'Service options: In-store shopping (has_in_store_shopping)';
+        $table_head[51]   =  'Service options: Online care (has_video_visits)';
+        $table_head[52]   =  'Service options: Same-day delivery (has_delivery_same_day)';
 
         $table_body = array();
         while( $wp_query->have_posts() ) : $wp_query->the_post();
@@ -677,81 +677,81 @@ function gmb_provider_csv_export() {
 
                             // Sub-locality
                             // Intentionally left blank
-                                $row[7] = '';
+                                // $row[7] = '';
 
                             // Locality
-                                $row[8] = $location_city ? $location_city : '';
+                                $row[7] = $location_city ? $location_city : '';
 
                             // Administrative area
-                                $row[9] = $location_state ? $location_state : '';
+                                $row[8] = $location_state ? $location_state : '';
 
                             // Country / Region
-                                $row[10] = 'US';
+                                $row[9] = 'US';
 
                             // Postal code
-                                $row[11] = $location_zip ? $location_zip : '';
+                                $row[10] = $location_zip ? $location_zip : '';
 
                             // Latitude
-                                $row[12] = $location_latitude ? $location_latitude : '';
+                                $row[11] = $location_latitude ? $location_latitude : '';
 
                             // Longitude
-                                $row[13] = $location_longitude ? $location_longitude : '';
+                                $row[12] = $location_longitude ? $location_longitude : '';
 
                             // Primary phone
-                                $row[14] = $location_phone ? $location_phone : '';
+                                $row[13] = $location_phone ? $location_phone : '';
 
                             // Additional phones
                             // Intentionally left blank
-                                $row[15] = '';
+                                // $row[15] = '';
 
                             // Website
-                                $row[16] = 'https://uamshealth.com/provider/' . $profile_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=profile&utm_specs=' . $store_code;
+                                $row[14] = 'https://uamshealth.com/provider/' . $profile_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=profile&utm_specs=' . $store_code;
 
                             // Primary category
-                                $row[17] = $provider_gmb_cat_primary_name;
+                                $row[15] = $provider_gmb_cat_primary_name;
     
                             // Additional categories
-                                $row[18] = $provider_gmb_cat_additional_names;
+                                $row[16] = $provider_gmb_cat_additional_names;
 
                             // Sunday hours
                             // Intentionally left blank for now
                             // Format = 08:00-16:30
-                                $row[19] = '';
+                                // $row[19] = '';
 
                             // Monday hours
                             // Intentionally left blank for now
                             // Format = 08:00-16:30
-                                $row[20] = '';
+                                // $row[20] = '';
 
                             // Tuesday hours
                             // Intentionally left blank for now
                             // Format = 08:00-16:30
-                                $row[21] = '';
+                                // $row[21] = '';
 
                             // Wednesday hours
                             // Intentionally left blank for now
                             // Format = 08:00-16:30
-                                $row[22] = '';
+                                // $row[22] = '';
 
                             // Thursday hours
                             // Intentionally left blank for now
                             // Format = 08:00-16:30
-                                $row[23] = '';
+                                // $row[23] = '';
 
                             // Friday hours
                             // Intentionally left blank for now
                             // Format = 08:00-16:30
-                                $row[24] = '';
+                                // $row[24] = '';
 
                             // Saturday hours
                             // Intentionally left blank for now
                             // Format = 08:00-16:30
-                                $row[25] = '';
+                                // $row[25] = '';
 
                             // Special hours
                             // Intentionally left blank for now
                             // Format = 2021-12-31: 05:00-23:00, 2022-01-01: x
-                                $row[26] = '';
+                                // $row[26] = '';
 
                             // From the business
                                 $excerpt = '';
@@ -774,15 +774,15 @@ function gmb_provider_csv_export() {
                                         $excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 747, '...');
                                     }
                                 }
-                                $row[27] = html_entity_decode($excerpt);
+                                $row[17] = html_entity_decode($excerpt);
 
                             // Opening date
                             // Intentionally left blank
-                                $row[28] = '';
+                                // $row[28] = '';
 
                             // Logo photo
                                 $provider_gmb_logo_photo = UAMS_FAD_ROOT_URL . 'assets/img/uams-health-1024x1024.png';
-                                $row[29] = $provider_gmb_logo_photo;
+                                $row[18] = $provider_gmb_logo_photo;
 
                             // Cover photo
                                 $provider_image_wide = get_field( 'physician_image_wide', $post_id );
@@ -791,208 +791,208 @@ function gmb_provider_csv_export() {
                                 } else {
                                     $provider_gmb_cover_photo = wp_get_attachment_image_url($provider_image_wide, 'large');
                                 }
-                                $row[30] = $provider_gmb_cover_photo ?: '';
+                                $row[19] = $provider_gmb_cover_photo ?: '';
 
                             // Other photos
                             // Intentionally left blank
-                                $row[31] = '';
+                                // $row[31] = '';
 
                             // Labels
                                 $service_line = '';
                                 $service_line = get_field('physician_service_line',$post_id);
                                 $service_line_name = $service_line ? get_term( $service_line, 'service_line' )->name : '';
 
-                                $row[32] = $service_line_name;
+                                $row[20] = $service_line_name;
 
                             // AdWords location extensions phone
                             // Intentionally left blank
-                                $row[33] = '';
+                                // $row[33] = '';
 
                             // Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)
                                 if (!empty($location_gmb_wheelchair_elevator)) {
-                                    $row[34] = $location_gmb_wheelchair_elevator;
+                                    $row[21] = $location_gmb_wheelchair_elevator;
                                 } else {
-                                    $row[34] = 'Yes';
+                                    $row[21] = 'Yes';
                                 }
 
                             // Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)
                                 if (!empty($location_gmb_wheelchair_entrance)) {
-                                    $row[35] = $location_gmb_wheelchair_entrance;
+                                    $row[22] = $location_gmb_wheelchair_entrance;
                                 } else {
-                                    $row[35] = 'Yes';
+                                    $row[22] = 'Yes';
                                 }
 
                             // Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)
                                 if (!empty($location_gmb_wheelchair_restroom)) {
-                                    $row[36] = $location_gmb_wheelchair_restroom;
+                                    $row[23] = $location_gmb_wheelchair_restroom;
                                 } else {
-                                    $row[36] = 'Yes';
+                                    $row[23] = 'Yes';
                                 }
 
                             // Amenities: Restroom (has_restroom)
                                 if (!empty($location_gmb_restroom)) {
-                                    $row[37] = $location_gmb_restroom;
+                                    $row[24] = $location_gmb_restroom;
                                 } else {
-                                    $row[37] = 'Yes';
+                                    $row[24] = 'Yes';
                                 }
                             
                             // From the business: Identifies as Black-owned (is_black_owned)
                             // Intentionally left blank
-                                $row[38] = '';
+                                // $row[38] = '';
 
                             // From the business: Identifies as veteran-led (is_owned_by_veterans)
                             // Intentionally left blank
-                                $row[39] = '';
+                                // $row[39] = '';
 
                             // From the business: Identifies as women-led (is_owned_by_women)
                             // Intentionally left blank
-                                $row[40] = '';
+                                // $row[40] = '';
 
                             // Health &amp; safety: Appointment required (requires_appointments)
                                 if ( $covid19 ) {
                                     if (!empty($location_gmb_appointments)) {
-                                        $row[41] =  $location_gmb_appointments;
+                                        $row[25] =  $location_gmb_appointments;
                                     } else {
-                                        $row[41] =  '';
+                                        $row[25] =  '';
                                     }
                                 } else {
-                                    $row[41] =  '';
+                                    $row[25] =  '';
                                 }
 
                             // Health &amp; safety: Mask required (requires_masks_customers)
                                 if ( $covid19 ) {
                                     if (!empty($location_gmb_masks_customers)) {
-                                        $row[42] =  $location_gmb_masks_customers;
+                                        $row[26] =  $location_gmb_masks_customers;
                                     } else {
-                                        $row[42] =  'Yes';
+                                        $row[26] =  'Yes';
                                     }
                                 } else {
-                                    $row[42] = 'No';
+                                    $row[26] = 'No';
                                 }
 
                             // Health &amp; safety: Safety dividers at checkout (has_plexiglass_at_checkout)
-                                $row[43] = '';
+                                // $row[43] = '';
 
                             // Health &amp; safety: Staff get temperature checks (requires_temperature_check_staff)
                                 if ( $covid19 ) {
                                     if (!empty($location_gmb_temp_staff)) {
-                                        $row[44] = $location_gmb_temp_staff;
+                                        $row[27] = $location_gmb_temp_staff;
                                     } else {
-                                        $row[44] = 'Yes';
+                                        $row[27] = 'Yes';
                                     }
                                 } else {
-                                    $row[44] = 'No';
+                                    $row[27] = 'No';
                                 }
 
                             // Health &amp; safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)
                                 if ( $covid19 ) {
                                     if (!empty($location_gmb_sanitizing)) {
-                                        $row[45] = $location_gmb_sanitizing;
+                                        $row[28] = $location_gmb_sanitizing;
                                     } else {
-                                        $row[45] = 'Yes';
+                                        $row[28] = 'Yes';
                                     }
                                 } else {
-                                    $row[45] = 'No';
+                                    $row[28] = 'No';
                                 }
 
                             // Health &amp; safety: Staff wear masks (requires_masks_staff)
                                 if ( $covid19 ) {
                                     if (!empty($location_gmb_masks_staff)) {
-                                        $row[46] = $location_gmb_masks_staff;
+                                        $row[29] = $location_gmb_masks_staff;
                                     } else {
-                                        $row[46] = 'Yes';
+                                        $row[29] = 'Yes';
                                     }
                                 } else {
-                                    $row[46] = 'No';
+                                    $row[29] = 'No';
                                 }
 
                             // Health &amp; safety: Temperature check required (requires_temperature_check_customers)
                                 if ( $covid19 ) {
                                     if (!empty($location_gmb_temp_customers)) {
-                                        $row[47] = $location_gmb_temp_customers;
+                                        $row[30] = $location_gmb_temp_customers;
                                     } else {
-                                        $row[47] = 'Yes';
+                                        $row[30] = 'Yes';
                                     }
                                 } else {
-                                    $row[47] = 'No';
+                                    $row[30] = 'No';
                                 }
 
                             // Offerings: Passport photos (has_onsite_passport_photos)
-                                $row[48] = '[NOT APPLICABLE]';
+                                $row[31] = '[NOT APPLICABLE]';
 
                             // Payments: Cash-only (requires_cash_only)
-                                $row[49] = '[NOT APPLICABLE]';
+                                $row[32] = '[NOT APPLICABLE]';
 
                             // Payments: Checks (pay_check)
-                                $row[50] = '[NOT APPLICABLE]';
+                                $row[33] = '[NOT APPLICABLE]';
 
                             // Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)
-                                $row[51] = '[NOT APPLICABLE]';
+                                $row[34] = '[NOT APPLICABLE]';
 
                             // Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)
-                                $row[52] = '[NOT APPLICABLE]';
+                                $row[35] = '[NOT APPLICABLE]';
 
                             // Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)
-                                $row[53] = '[NOT APPLICABLE]';
+                                $row[36] = '[NOT APPLICABLE]';
 
                             // Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)
-                                $row[54] = '[NOT APPLICABLE]';
+                                $row[37] = '[NOT APPLICABLE]';
 
                             // Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)
-                                $row[55] = '[NOT APPLICABLE]';
+                                $row[38] = '[NOT APPLICABLE]';
 
                             // Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)
-                                $row[56] = '[NOT APPLICABLE]';
+                                $row[39] = '[NOT APPLICABLE]';
 
                             // Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)
-                                $row[57] = '[NOT APPLICABLE]';
+                                $row[40] = '[NOT APPLICABLE]';
 
                             // Payments: Debit cards (pay_debit_card)
-                                $row[58] = '[NOT APPLICABLE]';
+                                $row[41] = '[NOT APPLICABLE]';
 
                             // Payments: NFC mobile payments (pay_mobile_nfc)
-                                $row[59] = '[NOT APPLICABLE]';
+                                $row[42] = '[NOT APPLICABLE]';
 
                             // Place page URLs: Appointment links (url_appointment)
                             // Intentionally left blank
-                                $row[60] = '';
+                                // $row[60] = '';
 
                             // Place page URLs: COVID-19 info link (url_covid_19_info_page)
-                                $row[61] = 'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=covid-19-info-link&utm_specs=' . $store_code;
+                                $row[43] = 'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=covid-19-info-link&utm_specs=' . $store_code;
 
                             // Place page URLs: Menu link (url_menu)
-                                $row[62] = '[NOT APPLICABLE]';
+                                $row[44] = '[NOT APPLICABLE]';
 
                             // Place page URLs: Virtual care link (url_facility_telemedicine_page)
-                                $row[63] = $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=virtual-care-link&utm_specs=' . $store_code . '#telemedicine-info' : '';
+                                $row[45] = $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=virtual-care-link&utm_specs=' . $store_code . '#telemedicine-info' : '';
 
                             // Planning: LGBTQ friendly (welcomes_lgbtq)
-                                $row[64] = '';
+                                // $row[64] = '';
 
                             // Planning: Transgender safespace (is_transgender_safespace)
-                                $row[65] = '';
+                                // $row[65] = '';
 
                             // Service options: Curbside pickup (has_curbside_pickup)
-                                $row[66] = '[NOT APPLICABLE]';
+                                $row[46] = '[NOT APPLICABLE]';
 
                             // Service options: Delivery (has_delivery)
-                                $row[67] = '[NOT APPLICABLE]';
+                                $row[47] = '[NOT APPLICABLE]';
 
                             // Service options: Drive-through (has_drive_through)
-                                $row[68] = '[NOT APPLICABLE]';
+                                $row[48] = '[NOT APPLICABLE]';
 
                             // Service options: In-store pickup (has_in_store_pickup)
-                                $row[69] = '[NOT APPLICABLE]';
+                                $row[49] = '[NOT APPLICABLE]';
 
                             // Service options: In-store shopping (has_in_store_shopping)
-                                $row[70] = '[NOT APPLICABLE]';
+                                $row[50] = '[NOT APPLICABLE]';
 
                             // Service options: Online care (has_video_visits)
                             // Value based on the relevant location profile
-                                $row[71] = $location_telemed_query ? 'Yes' : '';
+                                $row[51] = $location_telemed_query ? 'Yes' : '';
 
                             // Service options: Same-day delivery (has_delivery_same_day)
-                                $row[72] = '[NOT APPLICABLE]';
+                                $row[52] = '[NOT APPLICABLE]';
 
                         $l++;
                     } else {
@@ -1060,72 +1060,72 @@ function gmb_location_csv_export() {
         $table_head[4]    =  'Address line 3';
         $table_head[5]    =  'Address line 4';
         $table_head[6]    =  'Address line 5';
-        $table_head[7]    =  'Sub-locality';
-        $table_head[8]    =  'Locality';
-        $table_head[9]    =  'Administrative area';
-        $table_head[10]   =  'Country / Region';
-        $table_head[11]   =  'Postal code';
-        $table_head[12]   =  'Latitude';
-        $table_head[13]   =  'Longitude';
-        $table_head[14]   =  'Primary phone';
-        $table_head[15]   =  'Additional phones';
-        $table_head[16]   =  'Website';
-        $table_head[17]   =  'Primary category';
-        $table_head[18]   =  'Additional categories';
-        $table_head[19]   =  'Sunday hours';
-        $table_head[20]   =  'Monday hours';
-        $table_head[21]   =  'Tuesday hours';
-        $table_head[22]   =  'Wednesday hours';
-        $table_head[23]   =  'Thursday hours';
-        $table_head[24]   =  'Friday hours';
-        $table_head[25]   =  'Saturday hours';
-        $table_head[26]   =  'Special hours';
-        $table_head[27]   =  'From the business';
-        $table_head[28]   =  'Opening date';
-        $table_head[29]   =  'Logo photo';
-        $table_head[30]   =  'Cover photo';
-        $table_head[31]   =  'Other photos';
-        $table_head[32]   =  'Labels';
-        $table_head[33]   =  'AdWords location extensions phone';
-        $table_head[34]   =  'Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)';
-        $table_head[35]   =  'Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)';
-        $table_head[36]   =  'Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)';
-        $table_head[37]   =  'Amenities: Restroom (has_restroom)';
-        $table_head[38]   =  'From the business: Identifies as Black-owned (is_black_owned)';
-        $table_head[39]   =  'From the business: Identifies as veteran-led (is_owned_by_veterans)';
-        $table_head[40]   =  'From the business: Identifies as women-led (is_owned_by_women)';
-        $table_head[41]   =  'Health & safety: Appointment required (requires_appointments)';
-        $table_head[42]   =  'Health & safety: Mask required (requires_masks_customers)';
-        $table_head[43]   =  'Health & safety: Safety dividers at checkout (has_plexiglass_at_checkout)';
-        $table_head[44]   =  'Health & safety: Staff get temperature checks (requires_temperature_check_staff)';
-        $table_head[45]   =  'Health & safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)';
-        $table_head[46]   =  'Health & safety: Staff wear masks (requires_masks_staff)';
-        $table_head[47]   =  'Health & safety: Temperature check required (requires_temperature_check_customers)';
-        $table_head[48]   =  'Offerings: Passport photos (has_onsite_passport_photos)';
-        $table_head[49]   =  'Payments: Cash-only (requires_cash_only)';
-        $table_head[50]   =  'Payments: Checks (pay_check)';
-        $table_head[51]   =  'Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)';
-        $table_head[52]   =  'Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)';
-        $table_head[53]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)';
-        $table_head[54]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)';
-        $table_head[55]   =  'Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)';
-        $table_head[56]   =  'Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)';
-        $table_head[57]   =  'Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)';
-        $table_head[58]   =  'Payments: Debit cards (pay_debit_card)';
-        $table_head[59]   =  'Payments: NFC mobile payments (pay_mobile_nfc)';
-        $table_head[60]   =  'Place page URLs: Appointment links (url_appointment)';
-        $table_head[61]   =  'Place page URLs: COVID-19 info link (url_covid_19_info_page)';
-        $table_head[62]   =  'Place page URLs: Menu link (url_menu)';
-        $table_head[63]   =  'Place page URLs: Virtual care link (url_facility_telemedicine_page)';
-        $table_head[64]   =  'Planning: LGBTQ friendly (welcomes_lgbtq)';
-        $table_head[65]   =  'Planning: Transgender safespace (is_transgender_safespace)';
-        $table_head[66]   =  'Service options: Curbside pickup (has_curbside_pickup)';
-        $table_head[67]   =  'Service options: Delivery (has_delivery)';
-        $table_head[68]   =  'Service options: Drive-through (has_drive_through)';
-        $table_head[69]   =  'Service options: In-store pickup (has_in_store_pickup)';
-        $table_head[70]   =  'Service options: In-store shopping (has_in_store_shopping)';
-        $table_head[71]   =  'Service options: Online care (has_video_visits)';
-        $table_head[72]   =  'Service options: Same-day delivery (has_delivery_same_day)';
+        // $table_head[7]    =  'Sub-locality'; // Intentionally left blank
+        $table_head[7]    =  'Locality';
+        $table_head[8]    =  'Administrative area';
+        $table_head[9]   =  'Country / Region';
+        $table_head[10]   =  'Postal code';
+        $table_head[11]   =  'Latitude';
+        $table_head[12]   =  'Longitude';
+        $table_head[13]   =  'Primary phone';
+        // $table_head[15]   =  'Additional phones'; // Intentionally left blank
+        $table_head[14]   =  'Website';
+        $table_head[15]   =  'Primary category';
+        $table_head[16]   =  'Additional categories';
+        // $table_head[19]   =  'Sunday hours'; // Intentionally left blank
+        // $table_head[20]   =  'Monday hours'; // Intentionally left blank
+        // $table_head[21]   =  'Tuesday hours'; // Intentionally left blank
+        // $table_head[22]   =  'Wednesday hours'; // Intentionally left blank
+        // $table_head[23]   =  'Thursday hours'; // Intentionally left blank
+        // $table_head[24]   =  'Friday hours'; // Intentionally left blank
+        // $table_head[25]   =  'Saturday hours'; // Intentionally left blank
+        // $table_head[26]   =  'Special hours'; // Intentionally left blank
+        $table_head[17]   =  'From the business';
+        // $table_head[28]   =  'Opening date'; // Intentionally left blank
+        $table_head[18]   =  'Logo photo';
+        $table_head[19]   =  'Cover photo';
+        $table_head[20]   =  'Other photos';
+        $table_head[21]   =  'Labels';
+        // $table_head[33]   =  'AdWords location extensions phone'; // Intentionally left blank
+        $table_head[22]   =  'Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)';
+        $table_head[23]   =  'Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)';
+        $table_head[24]   =  'Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)';
+        $table_head[25]   =  'Amenities: Restroom (has_restroom)';
+        // $table_head[38]   =  'From the business: Identifies as Black-owned (is_black_owned)'; // Intentionally left blank
+        // $table_head[39]   =  'From the business: Identifies as veteran-led (is_owned_by_veterans)'; // Intentionally left blank
+        // $table_head[40]   =  'From the business: Identifies as women-led (is_owned_by_women)'; // Intentionally left blank
+        $table_head[26]   =  'Health & safety: Appointment required (requires_appointments)';
+        $table_head[27]   =  'Health & safety: Mask required (requires_masks_customers)';
+        $table_head[28]   =  'Health & safety: Safety dividers at checkout (has_plexiglass_at_checkout)';
+        $table_head[29]   =  'Health & safety: Staff get temperature checks (requires_temperature_check_staff)';
+        $table_head[30]   =  'Health & safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)';
+        $table_head[31]   =  'Health & safety: Staff wear masks (requires_masks_staff)';
+        $table_head[32]   =  'Health & safety: Temperature check required (requires_temperature_check_customers)';
+        $table_head[33]   =  'Offerings: Passport photos (has_onsite_passport_photos)';
+        $table_head[34]   =  'Payments: Cash-only (requires_cash_only)';
+        $table_head[35]   =  'Payments: Checks (pay_check)';
+        $table_head[36]   =  'Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)';
+        $table_head[37]   =  'Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)';
+        $table_head[38]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)';
+        $table_head[39]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)';
+        $table_head[40]   =  'Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)';
+        $table_head[41]   =  'Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)';
+        $table_head[42]   =  'Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)';
+        $table_head[43]   =  'Payments: Debit cards (pay_debit_card)';
+        $table_head[44]   =  'Payments: NFC mobile payments (pay_mobile_nfc)';
+        // $table_head[60]   =  'Place page URLs: Appointment links (url_appointment)'; // Intentionally left blank
+        $table_head[45]   =  'Place page URLs: COVID-19 info link (url_covid_19_info_page)';
+        $table_head[46]   =  'Place page URLs: Menu link (url_menu)';
+        $table_head[47]   =  'Place page URLs: Virtual care link (url_facility_telemedicine_page)';
+        // $table_head[64]   =  'Planning: LGBTQ friendly (welcomes_lgbtq)'; // Intentionally left blank
+        // $table_head[65]   =  'Planning: Transgender safespace (is_transgender_safespace)'; // Intentionally left blank
+        $table_head[48]   =  'Service options: Curbside pickup (has_curbside_pickup)';
+        $table_head[49]   =  'Service options: Delivery (has_delivery)';
+        $table_head[50]   =  'Service options: Drive-through (has_drive_through)';
+        $table_head[51]   =  'Service options: In-store pickup (has_in_store_pickup)';
+        $table_head[52]   =  'Service options: In-store shopping (has_in_store_shopping)';
+        $table_head[53]   =  'Service options: Online care (has_video_visits)';
+        $table_head[54]   =  'Service options: Same-day delivery (has_delivery_same_day)';
 
         $table_body = array();
         while( $query->have_posts() ) : $query->the_post();
@@ -1305,81 +1305,81 @@ function gmb_location_csv_export() {
 
                 // Sub-locality
                 // Intentionally left blank
-                    $row[7] =  '';
+                    // $row[7] =  '';
 
                 // Locality
-                    $row[8] =  $location_city ? $location_city : '';
+                    $row[7] =  $location_city ? $location_city : '';
 
                 // Administrative area
-                    $row[9] =  $location_state ? $location_state : '';
+                    $row[8] =  $location_state ? $location_state : '';
 
                 // Country / Region
-                    $row[10] = 'US';
+                    $row[9] = 'US';
 
                 // Postal code
-                    $row[11] =  $location_zip ? $location_zip : '';
+                    $row[10] =  $location_zip ? $location_zip : '';
 
                 // Latitude
-                    $row[12] =  $location_latitude ? $location_latitude : '';
+                    $row[11] =  $location_latitude ? $location_latitude : '';
 
                 // Longitude
-                    $row[13] =  $location_longitude ? $location_longitude : '';
+                    $row[12] =  $location_longitude ? $location_longitude : '';
 
                 // Primary phone
-                    $row[14] =  $location_phone ? $location_phone : '';
+                    $row[13] =  $location_phone ? $location_phone : '';
 
                 // Additional phones
                 // Intentionally left blank
-                    $row[15] =  '';
+                    // $row[15] =  '';
 
                 // Website
-                    $row[16] =  'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=profile&utm_specs=' . $store_code;
+                    $row[14] =  'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=profile&utm_specs=' . $store_code;
 
                 // Primary category
-                    $row[17] =  $location_gmb_cat_primary_name;
+                    $row[15] =  $location_gmb_cat_primary_name;
 
                 // Additional categories
-                    $row[18] =  $location_gmb_cat_additional_names;
+                    $row[16] =  $location_gmb_cat_additional_names;
 
                 // Sunday hours
                 // Intentionally left blank for now
                 // Format = 08:00-16:30
-                    $row[19] =  '';
+                    // $row[19] =  '';
 
                 // Monday hours
                 // Intentionally left blank for now
                 // Format = 08:00-16:30
-                    $row[20] =  '';
+                    // $row[20] =  '';
 
                 // Tuesday hours
                 // Intentionally left blank for now
                 // Format = 08:00-16:30
-                    $row[21] =  '';
+                    // $row[21] =  '';
 
                 // Wednesday hours
                 // Intentionally left blank for now
                 // Format = 08:00-16:30
-                    $row[22] =  '';
+                    // $row[22] =  '';
 
                 // Thursday hours
                 // Intentionally left blank for now
                 // Format = 08:00-16:30
-                    $row[23] =  '';
+                    // $row[23] =  '';
 
                 // Friday hours
                 // Intentionally left blank for now
                 // Format = 08:00-16:30
-                    $row[24] =  '';
+                    // $row[24] =  '';
 
                 // Saturday hours
                 // Intentionally left blank for now
                 // Format = 08:00-16:30
-                    $row[25] =  '';
+                    // $row[25] =  '';
 
                 // Special hours
                 // Intentionally left blank for now
                 // Format = 2021-12-31: 05:00-23:00, 2022-01-01: x
-                    $row[26] =  '';
+                    // $row[26] =  '';
 
                 // From the business
                     $excerpt = '';
@@ -1401,15 +1401,15 @@ function gmb_location_csv_export() {
                             $excerpt = '';
                         }
                     }
-                    $row[27] =  html_entity_decode($excerpt);
+                    $row[17] =  html_entity_decode($excerpt);
 
                 // Opening date
                 // Intentionally left blank
-                    $row[28] =  '';
+                    // $row[28] =  '';
 
                 // Logo photo
                     $location_gmb_logo_photo = UAMS_FAD_ROOT_URL . 'assets/img/uams-health-1024x1024.png';
-                    $row[29] = $location_gmb_logo_photo;
+                    $row[18] = $location_gmb_logo_photo;
 
                 // Cover photo
                 
@@ -1477,204 +1477,204 @@ function gmb_location_csv_export() {
                             $p++;
                         } // endforeach
                     }
-                    $row[30] = $location_gmb_cover_photo ?: '';
+                    $row[19] = $location_gmb_cover_photo ?: '';
 
                 // Other photos
-                    $row[31] = $location_gmb_other_photos ?: '';
+                    $row[20] = $location_gmb_other_photos ?: '';
 
                 // Labels
                     $region = get_term( get_field('location_region',$location_post_id), 'region' )->name;
-                    $row[32] =  $region ? $region : '';
+                    $row[21] =  $region ? $region : '';
 
                 // AdWords location extensions phone
                 // Intentionally left blank
-                    $row[33] =  '';
+                    // $row[33] =  '';
 
                 // Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)
                     if (!empty($location_gmb_wheelchair_elevator)) {
-                        $row[34] =  $location_gmb_wheelchair_elevator;
+                        $row[22] =  $location_gmb_wheelchair_elevator;
                     } else {
-                        $row[34] =  'Yes';
+                        $row[22] =  'Yes';
                     }
 
                 // Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)
                     if (!empty($location_gmb_wheelchair_entrance)) {
-                        $row[35] =  $location_gmb_wheelchair_entrance;
+                        $row[23] =  $location_gmb_wheelchair_entrance;
                     } else {
-                        $row[35] =  'Yes';
+                        $row[23] =  'Yes';
                     }
 
                 // Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)
                     if (!empty($location_gmb_wheelchair_restroom)) {
-                        $row[36] =  $location_gmb_wheelchair_restroom;
+                        $row[24] =  $location_gmb_wheelchair_restroom;
                     } else {
-                        $row[36] =  'Yes';
+                        $row[24] =  'Yes';
                     }
 
                 // Amenities: Restroom (has_restroom)
                     if (!empty($location_gmb_restroom)) {
-                        $row[37] =  $location_gmb_restroom;
+                        $row[25] =  $location_gmb_restroom;
                     } else {
-                        $row[37] =  'Yes';
+                        $row[25] =  'Yes';
                     }
 
                 // From the business: Identifies as Black-owned (is_black_owned)
                 // Intentionally left blank
-                    $row[38] =  '';
+                    // $row[38] =  '';
 
                 // From the business: Identifies as veteran-led (is_owned_by_veterans)
                 // Intentionally left blank
-                    $row[39] =  '';
+                    // $row[39] =  '';
 
                 // From the business: Identifies as women-led (is_owned_by_women)
                 // Intentionally left blank
-                    $row[40] =  '';
+                    // $row[40] =  '';
 
                 // Health &amp; safety: Appointment required (requires_appointments)
                     if ( $covid19 ) {
                         if (!empty($location_gmb_appointments)) {
-                            $row[41] =  $location_gmb_appointments;
+                            $row[26] =  $location_gmb_appointments;
                         } else {
-                            $row[41] =  '';
+                            $row[26] =  '';
                         }
                     } else {
-                        $row[41] =  '';
+                        $row[26] =  '';
                     }
 
                 // Health &amp; safety: Mask required (requires_masks_customers)
                     if ( $covid19 ) {
                         if (!empty($location_gmb_masks_customers)) {
-                            $row[42] =  $location_gmb_masks_customers;
+                            $row[27] =  $location_gmb_masks_customers;
                         } else {
-                            $row[42] =  'Yes';
+                            $row[27] =  'Yes';
                         }
                     } else {
-                        $row[42] =  'No';
+                        $row[27] =  'No';
                     }
 
                 // Health &amp; safety: Safety dividers at checkout (has_plexiglass_at_checkout)
-                    $row[43] =  '[NOT APPLICABLE]';
+                    $row[28] =  '[NOT APPLICABLE]';
 
                 // Health &amp; safety: Staff get temperature checks (requires_temperature_check_staff)
                     if ( $covid19 ) {
                         if (!empty($location_gmb_temp_staff)) {
-                            $row[44] =  $location_gmb_temp_staff;
+                            $row[29] =  $location_gmb_temp_staff;
                         } else {
-                            $row[44] =  'Yes';
+                            $row[29] =  'Yes';
                         }
                     } else {
-                        $row[44] =  'No';
+                        $row[29] =  'No';
                     }
 
                 // Health &amp; safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)
                     if ( $covid19 ) {
                         if (!empty($location_gmb_sanitizing)) {
-                            $row[45] =  $location_gmb_sanitizing;
+                            $row[30] =  $location_gmb_sanitizing;
                         } else {
-                            $row[45] =  'Yes';
+                            $row[30] =  'Yes';
                         }
                     } else {
-                        $row[45] =  'No';
+                        $row[30] =  'No';
                     }
 
                 // Health &amp; safety: Staff wear masks (requires_masks_staff)
                     if ( $covid19 ) {
                         if (!empty($location_gmb_masks_staff)) {
-                            $row[46] =  $location_gmb_masks_staff;
+                            $row[31] =  $location_gmb_masks_staff;
                         } else {
-                            $row[46] =  'Yes';
+                            $row[31] =  'Yes';
                         }
                     } else {
-                        $row[46] =  'No';
+                        $row[31] =  'No';
                     }
 
                 // Health &amp; safety: Temperature check required (requires_temperature_check_customers)
                     if ( $covid19 ) {
                         if (!empty($location_gmb_temp_customers)) {
-                            $row[47] =  $location_gmb_temp_customers;
+                            $row[32] =  $location_gmb_temp_customers;
                         } else {
-                            $row[47] =  'Yes';
+                            $row[32] =  'Yes';
                         }
                     } else {
-                        $row[47] =  'No';
+                        $row[32] =  'No';
                     }
 
                 // Offerings: Passport photos (has_onsite_passport_photos)
-                    $row[48] = '[NOT APPLICABLE]';
+                    $row[33] = '[NOT APPLICABLE]';
 
                 // Payments: Cash-only (requires_cash_only)
-                    $row[49] = '[NOT APPLICABLE]';
+                    $row[34] = '[NOT APPLICABLE]';
 
                 // Payments: Checks (pay_check)
-                    $row[50] = '[NOT APPLICABLE]';
+                    $row[35] = '[NOT APPLICABLE]';
 
                 // Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)
-                    $row[51] = '[NOT APPLICABLE]';
+                    $row[36] = '[NOT APPLICABLE]';
 
                 // Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)
-                    $row[52] = '[NOT APPLICABLE]';
+                    $row[37] = '[NOT APPLICABLE]';
 
                 // Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)
-                    $row[53] = '[NOT APPLICABLE]';
+                    $row[38] = '[NOT APPLICABLE]';
 
                 // Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)
-                    $row[54] = '[NOT APPLICABLE]';
+                    $row[39] = '[NOT APPLICABLE]';
 
                 // Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)
-                    $row[55] = '[NOT APPLICABLE]';
+                    $row[40] = '[NOT APPLICABLE]';
 
                 // Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)
-                    $row[56] = '[NOT APPLICABLE]';
+                    $row[41] = '[NOT APPLICABLE]';
 
                 // Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)
-                    $row[57] = '[NOT APPLICABLE]';
+                    $row[42] = '[NOT APPLICABLE]';
 
                 // Payments: Debit cards (pay_debit_card)
-                    $row[58] = '[NOT APPLICABLE]';
+                    $row[43] = '[NOT APPLICABLE]';
 
                 // Payments: NFC mobile payments (pay_mobile_nfc)
-                    $row[59] = '[NOT APPLICABLE]';
+                    $row[44] = '[NOT APPLICABLE]';
 
                 // Place page URLs: Appointment links (url_appointment)
                 // Intentionally left blank
-                    $row[60] =  '';
+                    // $row[60] =  '';
 
                 // Place page URLs: COVID-19 info link (url_covid_19_info_page)
-                    $row[61] =  'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=covid-19-info-link&utm_specs=' . $store_code;
+                    $row[45] =  'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=covid-19-info-link&utm_specs=' . $store_code;
 
                 // Place page URLs: Menu link (url_menu)
-                    $row[62] = '[NOT APPLICABLE]';
+                    $row[46] = '[NOT APPLICABLE]';
 
                 // Place page URLs: Virtual care link (url_facility_telemedicine_page)
-                    $row[63] =  $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=virtual-care-link&utm_specs=' . $store_code . '#telemedicine-info' : '';
+                    $row[47] =  $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=virtual-care-link&utm_specs=' . $store_code . '#telemedicine-info' : '';
 
                 // Planning: LGBTQ friendly (welcomes_lgbtq)
-                    $row[64] = '';
+                    // $row[64] = '';
 
                 // Planning: Transgender safespace (is_transgender_safespace)
-                    $row[65] = '';
+                    // $row[65] = '';
 
                 // Service options: Curbside pickup (has_curbside_pickup)
-                    $row[66] = '[NOT APPLICABLE]';
+                    $row[48] = '[NOT APPLICABLE]';
 
                 // Service options: Delivery (has_delivery)
-                    $row[67] = '[NOT APPLICABLE]';
+                    $row[49] = '[NOT APPLICABLE]';
 
                 // Service options: Drive-through (has_drive_through)
-                    $row[68] = '[NOT APPLICABLE]';
+                    $row[50] = '[NOT APPLICABLE]';
 
                 // Service options: In-store pickup (has_in_store_pickup)
-                    $row[69] = '[NOT APPLICABLE]';
+                    $row[51] = '[NOT APPLICABLE]';
 
                 // Service options: In-store shopping (has_in_store_shopping)
-                    $row[70] = '[NOT APPLICABLE]';
+                    $row[52] = '[NOT APPLICABLE]';
 
                 // Service options: Online care (has_video_visits)
                 // Value based on the relevant location profile
-                    $row[71] = $location_telemed_query ? 'Yes' : '';
+                    $row[53] = $location_telemed_query ? 'Yes' : '';
 
                 // Service options: Same-day delivery (has_delivery_same_day)
-                    $row[72] = '[NOT APPLICABLE]';
+                    $row[54] = '[NOT APPLICABLE]';
                 
             } // endif
             $table_body[] = $row; 
