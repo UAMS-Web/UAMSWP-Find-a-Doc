@@ -772,7 +772,7 @@ while ( have_posts() ) : the_post(); ?>
 														"closes": "00:00"
 														';
 													} else {
-														$modified_text .= ( ( $modified_time['location_modified_hours_open'] && '00:00:00' != $modified_time['location_modified_hours_open'] )  ? '' . apStyleTime( $modified_time['location_modified_hours_open'] ) . ' &ndash; ' . apStyleTime( $modified_time['location_modified_hours_close'] ) . '' : '' );
+														$modified_text .= ( ( $modified_time['location_modified_hours_open'] && '00:00:00' != $modified_time['location_modified_hours_open'] )  ? '' . ap_time_span( strtotime($modified_time['location_modified_hours_open']), strtotime($modified_time['location_modified_hours_close']) ). '' : '' );
 														$modified_hours_schema .= '"opens": "' . date('H:i', strtotime($modified_time['location_modified_hours_open'])) . '"';
 														$modified_hours_schema .= ',
 														"closes": "' . date('H:i', strtotime($modified_time['location_modified_hours_close'])) . '"
@@ -846,7 +846,7 @@ while ( have_posts() ) : the_post(); ?>
 											if ( $hour['closed'] ) {
 												$hours_text .= 'Closed ';
 											} else {
-												$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] )  ? '' . apStyleTime( $hour['open'] ) . ' &ndash; ' . apStyleTime( $hour['close'] ) . '' : '' );
+												$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] )  ? '' . ap_time_span( strtotime($hour['open']), strtotime($hour['close']) ) . '' : '' );
 												$hours_schema .= ' ' . date('H:i', strtotime($hour['open'])) . '-' . date('H:i', strtotime($hour['close']));
 											}
 											if ( $hour['comment'] ) {
@@ -906,7 +906,7 @@ while ( have_posts() ) : the_post(); ?>
 										if ( $row['closed'] ) {
 											echo $row['closed'] ? 'Closed</dd>': '';
 										} else {
-											echo ( ( $hour['open'] && '00:00:00' != $row['open'] )  ? '' . apStyleTime( $row['open'] ) . ' &ndash; ' . apStyleTime( $row['close'] ) . ' ' : '' );
+											echo ( ( $hour['open'] && '00:00:00' != $row['open'] )  ? '' . ap_time_span( strtotime($row['open']), strtotime($row['close']) ) . ' ' : '' );
 										}
 									}	
 								endforeach;
@@ -1493,7 +1493,7 @@ while ( have_posts() ) : the_post(); ?>
 														if ( $telemed_modified_time['location_telemed_modified_hours_closed'] ) {
 															$telemed_modified_text .= 'Closed ';
 														} else {
-															$telemed_modified_text .= ( ( $telemed_modified_time['location_telemed_modified_hours_open'] && '00:00:00' != $telemed_modified_time['location_telemed_modified_hours_open'] )  ? '' . apStyleTime( $telemed_modified_time['location_telemed_modified_hours_open'] ) . ' &ndash; ' . apStyleTime( $telemed_modified_time['location_telemed_modified_hours_close'] ) . '' : '' );
+															$telemed_modified_text .= ( ( $telemed_modified_time['location_telemed_modified_hours_open'] && '00:00:00' != $telemed_modified_time['location_telemed_modified_hours_open'] )  ? '' . ap_time_span( strtotime($telemed_modified_time['location_telemed_modified_hours_open']), strtotime($telemed_modified_time['location_telemed_modified_hours_close']) ) . '' : '' );
 														}
 														if ( $telemed_modified_time['location_telemed_modified_hours_comment'] ) {
 															$telemed_modified_text .= ' <br /><span class="subtitle">' .$telemed_modified_time['location_telemed_modified_hours_comment'] . '</span>';
@@ -1538,7 +1538,7 @@ while ( have_posts() ) : the_post(); ?>
 														if ( $telemed_hour['closed'] ) {
 															$telemed_hours_text .= 'Closed ';
 														} else {
-															$telemed_hours_text .= ( ( $telemed_hour['open'] && '00:00:00' != $telemed_hour['open'] )  ? '' . apStyleTime( $telemed_hour['open'] ) . ' &ndash; ' . apStyleTime( $telemed_hour['close'] ) . '' : '' );
+															$telemed_hours_text .= ( ( $telemed_hour['open'] && '00:00:00' != $telemed_hour['open'] )  ? '' . ap_time_span( strtotime($telemed_hour['open']), strtotime($telemed_hour['close']) ) . '' : '' );
 														}
 														if ( $telemed_hour['comment'] ) {
 															$telemed_hours_text .= ' <br /><span class="subtitle">' .$telemed_hour['comment'] . '</span>';
