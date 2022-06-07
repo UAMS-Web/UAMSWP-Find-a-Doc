@@ -15,7 +15,7 @@ if ( !function_exists('apStyleDate') ) {
 }
 /**
  * Format a date as AP style
- * This was modified from http://www.rockmycar.net/ap-style-dates-and-times-plugin/
+ * This was modified from https://gist.github.com/tryonegg/d2e07e1d8f4ff8f1219ca639583f97ee
  *
  * @param int     $date The date as a datetime.
  * @param boolean $today Should Today be inserted if it is today?
