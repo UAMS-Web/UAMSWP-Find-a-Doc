@@ -193,16 +193,18 @@ if ( !function_exists('ap_time_span') ) {
   }
 }
 
-function isDate($value) {
-  if (!$value) {
-      return false;
-  } else {
-      $date = date_parse($value);
-      if($date['error_count'] == 0 && $date['warning_count'] == 0){
-          return checkdate($date['month'], $date['day'], $date['year']);
-      } else {
-          return false;
-      }
+if ( !function_exists('isDate') ) {
+  function isDate($value) {
+    if (!$value) {
+        return false;
+    } else {
+        $date = date_parse($value);
+        if($date['error_count'] == 0 && $date['warning_count'] == 0){
+            return checkdate($date['month'], $date['day'], $date['year']);
+        } else {
+            return false;
+        }
+    }
   }
 }
 
