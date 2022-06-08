@@ -54,7 +54,7 @@
     $more_button_text = 'View the Full List';
 
     if ( $resource_layout == 'card') { ?>
-        <section class="uams-module stacked-image-text bg-auto alignfull" id="related-resources" aria-labelledby="related-resources-title">
+        <section class="uams-module stacked-image-text bg-auto" id="related-resources" aria-labelledby="related-resources-title">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">

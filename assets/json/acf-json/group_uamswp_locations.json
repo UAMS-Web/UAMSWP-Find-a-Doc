@@ -1413,7 +1413,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "",
                 "class": "hide-acf-border",
                 "id": ""
             },
@@ -1431,6 +1431,25 @@
             "acfe_update": "",
             "multiple": 0
         },
+        "field_location_prepend_the": {
+            "key": "field_location_prepend_the",
+            "name": "location_prepend_the",
+            "type": "true_false",
+            "label": "Automatically prepend location name with \"the\" in phrases?",
+            "instructions": "Setting this to \"Yes\" will add the word \"the\" before the location name in headings such as \"About [Location Name]\".",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-acf-border",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
         "field_location_hidden": {
             "key": "field_location_hidden",
             "name": "location_hidden",
@@ -1440,7 +1459,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "",
                 "class": "hide-acf-border",
                 "id": ""
             },
