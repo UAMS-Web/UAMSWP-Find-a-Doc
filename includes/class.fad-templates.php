@@ -70,7 +70,7 @@ function uamswp_taxonomy_archive_page_template ($templates) {
     // $templates['gmb-list-provider.php'] = 'GMB Provider List';
     // $templates['gmb-list-location.php'] = 'GMB Location List';
     // $templates['mychart-list-provider.php'] = 'MyChart Provider List';
-    // return $templates;
+    return $templates;
     }
 add_filter ('theme_page_templates', 'uamswp_taxonomy_archive_page_template');
 
