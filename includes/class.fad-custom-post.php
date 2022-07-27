@@ -2154,6 +2154,13 @@ function add_theme_caps() {
 	$role->add_cap( 'edit_others_clinical-resources');
 	$role->add_cap( 'publish_clinical-resources');
 	$role->add_cap( 'read_private_clinical-resources');
+	$role->add_cap( 'edit_clinical_resource');
+	$role->add_cap( 'read_clinical_resource');
+	$role->add_cap( 'delete_clinical_resource');
+	$role->add_cap( 'edit_clinical_resources');
+	$role->add_cap( 'edit_others_clinical_resources');
+	$role->add_cap( 'publish_clinical_resources');
+	$role->add_cap( 'read_private_clinical_resources');
 }
 add_action( 'admin_init', 'add_theme_caps');
 
