@@ -171,7 +171,7 @@
 				<?php if( $video ) { ?>
 					<?php if(function_exists('lyte_preparse')) {
 							echo '<div class="alignwide">';
-							echo lyte_parse( str_replace( 'https', 'httpv', $video ) ); 
+							echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $video ) ); 
 							echo '</div>';
 						} else {
 							echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
