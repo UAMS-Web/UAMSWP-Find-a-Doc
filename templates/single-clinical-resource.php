@@ -359,7 +359,7 @@ function uamswp_resource_video() {
         echo '<h2 class="sr-only">Video Player</h2>';
         if( function_exists('lyte_preparse') && $video_source == 'youtube' ) {
             echo '<div class="alignwide">';
-            echo lyte_parse( str_replace( 'https', 'httpv', $video ) ); 
+            echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $video ) ); 
             echo '</div>';
         } else {
             echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
