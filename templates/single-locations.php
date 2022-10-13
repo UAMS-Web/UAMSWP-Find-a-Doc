@@ -11,8 +11,6 @@ if (empty($excerpt)){
     }
 }
 $page_title = get_the_title( );
-$page_title_attr = str_replace('"', '\'', $page_title);
-$page_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($page_title_attr, null, 'utf-8')));
 
 
 // Parent Location 
@@ -249,7 +247,6 @@ $args = (array(
 ));
 $resource_query = new WP_Query( $args );
 
-// Override theme's method of defining the meta description
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
@@ -258,25 +255,12 @@ function sp_titles_desc($html) {
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
 // Override theme's method of defining the page title
-$location_city = get_field('location_city', $post_id);
 function uamswp_fad_title($html) { 
-    global $page_title_attr;
-	global $location_city;
-    //you can add here all your conditions as if is_page(), is_category() etc.. 
-    $meta_title_chars_max = 60;
-    $meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
-    $meta_title_base_chars = strlen( $meta_title_base );
-    $meta_title_enhanced_addition = ' | ' . $location_city;
-    $meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
-    $meta_title_enhanced_chars = strlen( $meta_title_enhanced );
-    if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
-        $html = $meta_title_enhanced;
-    } else {
-        $html = $meta_title_base;
-    }
-    return $html;
+	//you can add here all your conditions as if is_page(), is_category() etc.. 
+	$html = get_the_title() . ' | ' . get_bloginfo( "name" );
+	return $html;
 }
-add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 get_header();
 
@@ -793,7 +777,7 @@ while ( have_posts() ) : the_post(); ?>
 														"closes": "00:00"
 														';
 													} else {
-														$modified_text .= ( ( $modified_time['location_modified_hours_open'] && '00:00:00' != $modified_time['location_modified_hours_open'] )  ? '' . apStyleDate( $modified_time['location_modified_hours_open'] ) . ' &ndash; ' . apStyleDate( $modified_time['location_modified_hours_close'] ) . '' : '' );
+														$modified_text .= ( ( $modified_time['location_modified_hours_open'] && '00:00:00' != $modified_time['location_modified_hours_open'] )  ? '' . ap_time_span( strtotime($modified_time['location_modified_hours_open']), strtotime($modified_time['location_modified_hours_close']) ). '' : '' );
 														$modified_hours_schema .= '"opens": "' . date('H:i', strtotime($modified_time['location_modified_hours_open'])) . '"';
 														$modified_hours_schema .= ',
 														"closes": "' . date('H:i', strtotime($modified_time['location_modified_hours_close'])) . '"
@@ -867,7 +851,7 @@ while ( have_posts() ) : the_post(); ?>
 											if ( $hour['closed'] ) {
 												$hours_text .= 'Closed ';
 											} else {
-												$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] )  ? '' . apStyleDate( $hour['open'] ) . ' &ndash; ' . apStyleDate( $hour['close'] ) . '' : '' );
+												$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] )  ? '' . ap_time_span( strtotime($hour['open']), strtotime($hour['close']) ) . '' : '' );
 												$hours_schema .= ' ' . date('H:i', strtotime($hour['open'])) . '-' . date('H:i', strtotime($hour['close']));
 											}
 											if ( $hour['comment'] ) {
@@ -927,7 +911,7 @@ while ( have_posts() ) : the_post(); ?>
 										if ( $row['closed'] ) {
 											echo $row['closed'] ? 'Closed</dd>': '';
 										} else {
-											echo ( ( $hour['open'] && '00:00:00' != $row['open'] )  ? '' . apStyleDate( $row['open'] ) . ' &ndash; ' . apStyleDate( $row['close'] ) . ' ' : '' );
+											echo ( ( $hour['open'] && '00:00:00' != $row['open'] )  ? '' . ap_time_span( strtotime($row['open']), strtotime($row['close']) ) . ' ' : '' );
 										}
 									}	
 								endforeach;
@@ -1170,7 +1154,7 @@ while ( have_posts() ) : the_post(); ?>
 							<?php if($location_youtube_link) { ?>
 								<?php if(function_exists('lyte_preparse')) {
                                     echo '<div class="alignwide">';
-                                    echo lyte_parse( str_replace( 'https', 'httpv', $location_youtube_link ) ); 
+                                    echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $location_youtube_link ) ); 
                                     echo '</div>';
                                 } else {
                                     echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
@@ -1514,7 +1498,7 @@ while ( have_posts() ) : the_post(); ?>
 														if ( $telemed_modified_time['location_telemed_modified_hours_closed'] ) {
 															$telemed_modified_text .= 'Closed ';
 														} else {
-															$telemed_modified_text .= ( ( $telemed_modified_time['location_telemed_modified_hours_open'] && '00:00:00' != $telemed_modified_time['location_telemed_modified_hours_open'] )  ? '' . apStyleDate( $telemed_modified_time['location_telemed_modified_hours_open'] ) . ' &ndash; ' . apStyleDate( $telemed_modified_time['location_telemed_modified_hours_close'] ) . '' : '' );
+															$telemed_modified_text .= ( ( $telemed_modified_time['location_telemed_modified_hours_open'] && '00:00:00' != $telemed_modified_time['location_telemed_modified_hours_open'] )  ? '' . ap_time_span( strtotime($telemed_modified_time['location_telemed_modified_hours_open']), strtotime($telemed_modified_time['location_telemed_modified_hours_close']) ) . '' : '' );
 														}
 														if ( $telemed_modified_time['location_telemed_modified_hours_comment'] ) {
 															$telemed_modified_text .= ' <br /><span class="subtitle">' .$telemed_modified_time['location_telemed_modified_hours_comment'] . '</span>';
@@ -1559,7 +1543,7 @@ while ( have_posts() ) : the_post(); ?>
 														if ( $telemed_hour['closed'] ) {
 															$telemed_hours_text .= 'Closed ';
 														} else {
-															$telemed_hours_text .= ( ( $telemed_hour['open'] && '00:00:00' != $telemed_hour['open'] )  ? '' . apStyleDate( $telemed_hour['open'] ) . ' &ndash; ' . apStyleDate( $telemed_hour['close'] ) . '' : '' );
+															$telemed_hours_text .= ( ( $telemed_hour['open'] && '00:00:00' != $telemed_hour['open'] )  ? '' . ap_time_span( strtotime($telemed_hour['open']), strtotime($telemed_hour['close']) ) . '' : '' );
 														}
 														if ( $telemed_hour['comment'] ) {
 															$telemed_hours_text .= ' <br /><span class="subtitle">' .$telemed_hour['comment'] . '</span>';

@@ -279,6 +279,8 @@ add_filter( 'facetwp_preload_url_vars', function( $url_vars ) {
 
 // FacetWP Sort
 add_filter( 'facetwp_sort_options', function( $options, $params ) {
+    unset( $options['date_desc'] );
+    unset( $options['date_asc'] );
 	if ( is_post_type_archive( 'provider' ) || is_singular( 'provider' ) ) {
 		$params = array(
 		    'template_name' => 'physicians',
@@ -303,8 +305,8 @@ add_filter( 'facetwp_sort_options', function( $options, $params ) {
                 ]
             ]
         ];
-        unset( $options['date_desc'] );
-        unset( $options['date_asc'] );
+        // unset( $options['date_desc'] );
+        // unset( $options['date_asc'] );
 	} elseif ( is_post_type_archive( 'location' ) || is_singular( 'location' ) ) {
 	 	$params = array(
 		    'template_name' => 'locations',
@@ -329,8 +331,8 @@ add_filter( 'facetwp_sort_options', function( $options, $params ) {
                 ]
             ]
         ];
-        unset( $options['date_desc'] );
-        unset( $options['date_asc'] );
+        // unset( $options['date_desc'] );
+        // unset( $options['date_asc'] );
 	} elseif ( is_post_type_archive( 'clinical-resource' ) || is_singular( 'clinical-resource' ) ) {
         $params = array(
            'template_name' => 'clinical-resources',
@@ -385,8 +387,6 @@ add_filter( 'facetwp_sort_options', function( $options, $params ) {
         ];
    }
     //);
-    // unset( $options['date_desc'] );
-    // unset( $options['date_asc'] );
     return $options;
 }, 10, 2 );
 
