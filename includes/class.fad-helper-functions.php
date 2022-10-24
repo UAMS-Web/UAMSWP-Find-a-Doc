@@ -370,3 +370,28 @@ function get_taxonomy_archive_link( $taxonomy ) {
     $post_ids = $wpdb->get_col( $SQL );
     return $post_ids;
  }
+
+ add_filter( 'rest_provider_query', 'filter_providers_by_npi', 999, 2 );
+function filter_providers_by_npi( $args, $request ) {
+	if ( ! isset( $request['npi'] )  ) {
+		return $args;
+	}
+	
+	$source_value = sanitize_text_field( $request['npi'] );
+	$source_meta_query = array(
+		'key' => 'physician_npi',
+		'value' => $source_value,
+    'compare' => '=',
+    'type' => 'NUMERIC'
+	);
+	
+	if ( isset( $args['meta_query'] ) ) {
+		$args['meta_query']['relation'] = 'AND';
+		$args['meta_query'][] = $source_meta_query;
+	} else {
+		$args['meta_query'] = array();
+		$args['meta_query'][] = $source_meta_query;
+	}
+	
+	return $args;
+}
