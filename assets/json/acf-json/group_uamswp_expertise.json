@@ -24,6 +24,25 @@
     "acfe_note": "",
     "acfe_meta": "",
     "fields": {
+        "field_expertise_type": {
+            "key": "field_expertise_type",
+            "name": "expertise_type",
+            "label": "Content Type",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui_on_text": "Expertise",
+            "ui_off_text": "Content",
+            "ui": 1
+        },
         "field_expertise_alternate_names": {
             "key": "field_expertise_alternate_names",
             "label": "Alternate Names",
@@ -31,9 +50,17 @@
             "type": "repeater",
             "instructions": "Insert additional names \/ phrases",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_expertise_type",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -91,7 +118,15 @@
             "label": "Short Description (excerpt)",
             "instructions": "Limit of 160 characters. Preferred length is at least 110 characters.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_expertise_type",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -110,7 +145,15 @@
             "type": "repeater",
             "instructions": "Define up to two CTA Bar blocks",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_expertise_type",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -410,7 +453,15 @@
             "label": "Conditions",
             "instructions": "The conditions will display in alphabetical order.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_expertise_type",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -438,7 +489,15 @@
             "label": "Treatments & Procedures",
             "instructions": "The treatments and procedures will display in alphabetical order.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_expertise_type",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -473,6 +532,13 @@
                         "operator": "==",
                         "value": "0"
                     }
+                ],
+                [
+                    {
+                        "field": "field_expertise_type",
+                        "operator": "==",
+                        "value": "1"
+                    }
                 ]
             ],
             "wrapper": {
@@ -499,7 +565,15 @@
             "label": "Providers",
             "instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_expertise_type",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -530,7 +604,15 @@
             "label": "Locations",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_expertise_type",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -561,7 +643,15 @@
             "label": "Associated Areas of Expertise",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_expertise_type",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -586,7 +676,15 @@
             "label": "Clinical Resources",
             "instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_expertise_type",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -617,7 +715,15 @@
             "label": "UAMS Health Talk Podcast Topic Name",
             "instructions": "Topic name as listed in the dropdown",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_expertise_type",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
