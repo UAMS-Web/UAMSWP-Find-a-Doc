@@ -75,6 +75,8 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
         global $parent_title;
         global $parent_title_attr;
         global $parent_url;
+        global $expertise_has_parent;
+        global $content_type;
         echo '<h1 class="entry-title" itemprop="headline">';
         echo '<span class="supertitle">'. $expertise_single_name . '</span><span class="sr-only">:</span> ';
         echo $page_title;
@@ -87,15 +89,15 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 add_filter( 'genesis_entry_content', 'uamswp_expertise_keywords', 8 );
 add_action( 'genesis_entry_content', 'uamswp_expertise_youtube', 12 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_cta', 6 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_jump_links', 8 );
+// add_action( 'genesis_after_entry', 'uamswp_expertise_jump_links', 8 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_podcast', 10 );
 add_action( 'genesis_after_entry', 'uamswp_list_child_expertise', 12 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_resource', 14 );
+// add_action( 'genesis_after_entry', 'uamswp_expertise_resource', 14 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_conditions_cpt', 16 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_treatments_cpt', 18 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 20 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 22 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 24 );
+// add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 20 );
+// add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 22 );
+// add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 24 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_appointment', 26 );
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 
@@ -112,144 +114,13 @@ if ($podcast_name) {
     $show_podcast_section = false;
 }
 
-// Clinical Resources
-$resources =  get_field('expertise_clinical_resources');
-$resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
-$resource_more = false;
-$args = (array(
-    'post_type' => "clinical-resource",
-    'order' => 'DESC',
-    'orderby' => 'post_date',
-    'posts_per_page' => $resource_postsPerPage,
-    'post_status' => 'publish',
-    'post__in'	=> $resources
-));
-$resource_query = new WP_Query( $args );
+$content_type = get_field('expertise_type'); // True is expertise, false is content
 
-// Check if Clinical Resources section should be displayed
-if( $resources && $resource_query->have_posts() ) {
-    $show_related_resource_section = true;
-    $jump_link_count++;
-} else {
-    $show_related_resource_section = false;
+if ( "0" == $content_type ) {
+    $page_id = $parent_id;
 }
 
-// Check if Child Areas of Expertise section should be displayed
-if (
-    !( get_post_meta( $page_id, 'hide_sub_areas_of_expertise', true) ) 
-    && ( 0 != count( get_pages( array( 'child_of' => $page_id, 'post_type' => 'expertise' ) ) ) ) 
-) {
-    $show_child_aoe_section = true;
-    $jump_link_count++;
-} else {
-    $show_child_aoe_section = false; // If it's suppressed or none available, set to false
-}
-
-// Check if Conditions section should be displayed
-// load all 'conditions' terms for the post
-$conditions_cpt = get_field('expertise_conditions_cpt');
-// Conditions CPT
-$args = (array(
-    'post_type' => "condition",
-    'post_status' => 'publish',
-    'orderby' => 'title',
-    'order' => 'ASC',
-    'posts_per_page' => -1,
-    'post__in' => $conditions_cpt
-));
-$conditions_cpt_query = new WP_Query( $args );
-if( $conditions_cpt && $conditions_cpt_query->posts ) {
-    $show_conditions_section = true;
-    $jump_link_count++;
-} else {
-    $show_conditions_section = false;
-}
-
-// Check if Treatments and Procedures section should be displayed
-$treatments_cpt = get_field('expertise_treatments_cpt');
-// Treatments CPT
-$args = (array(
-    'post_type' => "treatment",
-    'post_status' => 'publish',
-    'orderby' => 'title',
-    'order' => 'ASC',
-    'posts_per_page' => -1,
-    'post__in' => $treatments_cpt
-));
-$treatments_cpt_query = new WP_Query( $args );
-if( $treatments_cpt && $treatments_cpt_query->posts ) {
-    $show_treatments_section = true;
-    $jump_link_count++;
-} else {
-    $show_treatments_section = false;
-}
-
-// Check if Providers section should be displayed
-$physicians = get_field( "physician_expertise" );
-if($physicians) {
-    $args = array(
-        "post_type" => "provider",
-        "post_status" => "publish",
-        "posts_per_page" => -1,
-        "orderby" => "title",
-        "order" => "ASC",
-        "fields" => "ids",
-        // 'no_found_rows' => true, // counts posts, remove if pagination required
-        'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
-        'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
-        "post__in" => $physicians
-    );
-    $physicians_query = New WP_Query( $args );
-    if($physicians_query && $physicians_query->have_posts()) {
-        $show_providers_section = true;
-        $jump_link_count++;
-        $provider_ids = $physicians_query->posts;
-    } else {
-        $show_providers_section = false;
-    }
-}
-
-// Check if Locations section should be displayed
-$locations = get_field('location_expertise');
-if($locations) {
-    $args = (array(
-        'post_type' => "location",
-		"post_status" => "publish",
-		'order' => 'ASC',
-		'orderby' => 'title',
-		'posts_per_page' => -1,
-		'fields' => 'ids',
-		'no_found_rows' => true, // counts posts, remove if pagination required
-		'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
-		'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
-		'post__in'	=> $locations
-    ));
-    $location_query = new WP_Query( $args );
-    if( $locations && $location_query->have_posts() ) {
-        $show_locations_section = true;
-        $jump_link_count++;
-    } else {
-        $show_locations_section = false;
-    }
-}
-
-// Check if Locations section should be displayed
-$expertises =  get_field('expertise_associated');
-$args = (array(
-    'post_type' => "expertise",
-    'order' => 'ASC',
-    'orderby' => 'title',
-    'posts_per_page' => -1,
-    'post_status' => 'publish',
-    'post__in'	=> $expertises
-));
-$expertise_query = new WP_Query( $args );
-if( $expertises && $expertise_query->have_posts() ) {
-    $show_related_aoe_section = true;
-    $jump_link_count++;
-} else {
-    $show_related_aoe_section = false;
-}
+include_once('single-expertise-content.php');
 
 // Check if Make an Appointment section should be displayed
 // It should always be displayed.
@@ -261,6 +132,35 @@ if ( $jump_link_count >= $jump_link_count_min ) {
     $show_jump_links_section = true;
 } else {
     $show_jump_links_section = false;
+}
+
+remove_action( 'genesis_after_header', 'genesis_do_nav' );
+add_action( 'genesis_after_header', 'custom_expertise_nav_menu', 5 );
+function custom_expertise_nav_menu() {
+    global $show_providers_section;
+    global $show_locations_section;
+    global $show_related_aoe_section;
+    global $show_related_resource_section;
+    global $parent_expertise;
+    global $post;
+    global $page_title;
+    global $page_id;
+    global $content_type;
+
+    if ($parent_expertise && "0" == $content_type) {
+        $page_id = $parent_expertise->ID;
+    }
+
+    include( UAMS_FAD_PATH . '/templates/single-expertise-nav.php');
+}
+
+remove_action( 'genesis_header', 'uamswp_site_image', 5 );
+add_action( 'genesis_header', 'uamswp_expertise_header', 5 );
+function uamswp_expertise_header() {
+    global $page_id;
+    global $expertise_has_parent;
+    global $content_type;
+    include( UAMS_FAD_PATH . '/templates/single-expertise-header.php');
 }
 
 function uamswp_expertise_cta() {
@@ -480,7 +380,7 @@ function uamswp_expertise_conditions_cpt() {
     $condition_heading_related_name = $page_title; // To what is it related?
 
     if( $show_conditions_section ) {
-        include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
+        include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop-list.php' );
     }
 }
 function uamswp_expertise_treatments_cpt() {
@@ -491,7 +391,7 @@ function uamswp_expertise_treatments_cpt() {
     $treatment_heading_related_name = $page_title; // To what is it related?
 
     if( $show_treatments_section ) {
-        include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
+        include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop-list.php' );
     }
 }
 function uamswp_expertise_locations() {
@@ -691,10 +591,15 @@ function uamswp_list_child_expertise() {
             'orderby' => 'title',
             'posts_per_page' => -1, // We do not want to limit the post count
             'meta_query' => array(
-                "relation" => "OR",
+                "relation" => "AND",
                 array(
                     "key" => "hide_from_sub_menu",
                     "value" => "1",
+                    "compare" => "!=",
+                ),
+                array(
+                    "key" => "expertise_type",
+                    "value" => "0",
                     "compare" => "!=",
                 ),
             ),
