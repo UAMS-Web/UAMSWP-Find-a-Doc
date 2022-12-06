@@ -22,7 +22,7 @@ function uamswp_force_template( $template )
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/archive-expertise.php';
 	}
 	
-	if( is_singular( 'expertise' ) ) {
+	if( is_singular( 'expertise' ) && !get_query_var('fpage') ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-expertise.php';
     }
     
@@ -57,6 +57,22 @@ function uamswp_force_template( $template )
     if( is_post_type_archive( 'clinical-resource' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/archive-clinical-resource.php';
 	}
+
+    if( is_singular( 'expertise' ) && get_query_var('fpage') == 'providers' ) {
+        $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-expertise-providers.php';
+    }
+
+    if( is_singular( 'expertise' ) && get_query_var('fpage') == 'locations' ) {
+        $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-expertise-locations.php';
+    }
+
+    if( is_singular( 'expertise' ) && get_query_var('fpage') == 'resources' ) {
+        $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-expertise-resources.php';
+    }
+
+    if( is_singular( 'expertise' ) && get_query_var('fpage') == 'related' ) {
+        $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-expertise-related.php';
+    }
 	
     return $template;
 }
