@@ -405,37 +405,37 @@ function gmb_provider_csv_export() {
         // $table_head[39]   =  'From the business: Identifies as veteran-led (is_owned_by_veterans)';
         // $table_head[40]   =  'From the business: Identifies as women-led (is_owned_by_women)';
         $table_head[25]   =  'Planning: Appointment required (requires_appointments)';
-        $table_head[26]   =  'Health & safety: Mask required (requires_masks_customers)';
+        // $table_head[26]   =  'Health & safety: Mask required (requires_masks_customers)';
         // $table_head[43]   =  'Health & safety: Safety dividers at checkout (has_plexiglass_at_checkout)';
-        $table_head[27]   =  'Health & safety: Staff get temperature checks (requires_temperature_check_staff)';
-        $table_head[28]   =  'Health & safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)';
-        $table_head[29]   =  'Health & safety: Staff wear masks (requires_masks_staff)';
-        $table_head[30]   =  'Health & safety: Temperature check required (requires_temperature_check_customers)';
-        $table_head[31]   =  'Offerings: Passport photos (has_onsite_passport_photos)';
-        $table_head[32]   =  'Payments: Cash-only (requires_cash_only)';
-        $table_head[33]   =  'Payments: Checks (pay_check)';
-        $table_head[34]   =  'Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)';
-        $table_head[35]   =  'Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)';
-        $table_head[36]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)';
-        $table_head[37]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)';
-        $table_head[38]   =  'Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)';
-        $table_head[39]   =  'Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)';
-        $table_head[40]   =  'Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)';
-        $table_head[41]   =  'Payments: Debit cards (pay_debit_card)';
-        $table_head[42]   =  'Payments: NFC mobile payments (pay_mobile_nfc)';
+        $table_head[26]   =  'Health & safety: Staff get temperature checks (requires_temperature_check_staff)';
+        $table_head[27]   =  'Health & safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)';
+        $table_head[28]   =  'Health & safety: Staff wear masks (requires_masks_staff)';
+        $table_head[29]   =  'Health & safety: Temperature check required (requires_temperature_check_customers)';
+        $table_head[30]   =  'Offerings: Passport photos (has_onsite_passport_photos)';
+        $table_head[31]   =  'Payments: Cash-only (requires_cash_only)';
+        $table_head[32]   =  'Payments: Checks (pay_check)';
+        $table_head[33]   =  'Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)';
+        $table_head[34]   =  'Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)';
+        $table_head[35]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)';
+        $table_head[36]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)';
+        $table_head[37]   =  'Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)';
+        $table_head[38]   =  'Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)';
+        $table_head[39]   =  'Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)';
+        $table_head[40]   =  'Payments: Debit cards (pay_debit_card)';
+        $table_head[41]   =  'Payments: NFC mobile payments (pay_mobile_nfc)';
         // $table_head[60]   =  'Place page URLs: Appointment links (url_appointment)';
-        $table_head[43]   =  'Place page URLs: COVID-19 info link (url_covid_19_info_page)';
-        $table_head[44]   =  'Place page URLs: Menu link (url_menu)';
-        $table_head[45]   =  'Place page URLs: Virtual care link (url_facility_telemedicine_page)';
+        $table_head[42]   =  'Place page URLs: COVID-19 info link (url_covid_19_info_page)';
+        $table_head[43]   =  'Place page URLs: Menu link (url_menu)';
+        $table_head[44]   =  'Place page URLs: Virtual care link (url_facility_telemedicine_page)';
         // $table_head[64]   =  'Planning: LGBTQ friendly (welcomes_lgbtq)';
         // $table_head[65]   =  'Planning: Transgender safespace (is_transgender_safespace)';
-        $table_head[46]   =  'Service options: Curbside pickup (has_curbside_pickup)';
-        $table_head[47]   =  'Service options: Delivery (has_delivery)';
-        $table_head[48]   =  'Service options: Drive-through (has_drive_through)';
-        $table_head[49]   =  'Service options: In-store pickup (has_in_store_pickup)';
-        $table_head[50]   =  'Service options: In-store shopping (has_in_store_shopping)';
-        $table_head[51]   =  'Service options: Online care (has_video_visits)';
-        $table_head[52]   =  'Service options: Same-day delivery (has_delivery_same_day)';
+        $table_head[45]   =  'Service options: Curbside pickup (has_curbside_pickup)';
+        $table_head[46]   =  'Service options: Delivery (has_delivery)';
+        $table_head[47]   =  'Service options: Drive-through (has_drive_through)';
+        $table_head[48]   =  'Service options: In-store pickup (has_in_store_pickup)';
+        $table_head[49]   =  'Service options: In-store shopping (has_in_store_shopping)';
+        $table_head[50]   =  'Service options: Online care (has_video_visits)';
+        $table_head[51]   =  'Service options: Same-day delivery (has_delivery_same_day)';
 
         $table_body = array();
         while( $wp_query->have_posts() ) : $wp_query->the_post();
@@ -860,15 +860,15 @@ function gmb_provider_csv_export() {
                                 }
 
                             // Health &amp; safety: Mask required (requires_masks_customers)
-                                if ( $covid19 ) {
-                                    if (!empty($location_gmb_masks_customers)) {
-                                        $row[26] =  $location_gmb_masks_customers;
-                                    } else {
-                                        $row[26] =  'Yes';
-                                    }
-                                } else {
-                                    $row[26] = 'No';
-                                }
+                                // if ( $covid19 ) {
+                                //     if (!empty($location_gmb_masks_customers)) {
+                                //         $row[26] =  $location_gmb_masks_customers;
+                                //     } else {
+                                //         $row[26] =  'Yes';
+                                //     }
+                                // } else {
+                                //     $row[26] = 'No';
+                                // }
 
                             // Health &amp; safety: Safety dividers at checkout (has_plexiglass_at_checkout)
                                 // $row[43] = '';
@@ -1095,37 +1095,37 @@ function gmb_location_csv_export() {
         // $table_head[39]   =  'From the business: Identifies as veteran-led (is_owned_by_veterans)'; // Intentionally left blank
         // $table_head[40]   =  'From the business: Identifies as women-led (is_owned_by_women)'; // Intentionally left blank
         $table_head[26]   =  'Planning: Appointment required (requires_appointments)';
-        $table_head[27]   =  'Health & safety: Mask required (requires_masks_customers)';
-        $table_head[28]   =  'Health & safety: Safety dividers at checkout (has_plexiglass_at_checkout)';
-        $table_head[29]   =  'Health & safety: Staff get temperature checks (requires_temperature_check_staff)';
-        $table_head[30]   =  'Health & safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)';
-        $table_head[31]   =  'Health & safety: Staff wear masks (requires_masks_staff)';
-        $table_head[32]   =  'Health & safety: Temperature check required (requires_temperature_check_customers)';
-        $table_head[33]   =  'Offerings: Passport photos (has_onsite_passport_photos)';
-        $table_head[34]   =  'Payments: Cash-only (requires_cash_only)';
-        $table_head[35]   =  'Payments: Checks (pay_check)';
-        $table_head[36]   =  'Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)';
-        $table_head[37]   =  'Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)';
-        $table_head[38]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)';
-        $table_head[39]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)';
-        $table_head[40]   =  'Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)';
-        $table_head[41]   =  'Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)';
-        $table_head[42]   =  'Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)';
-        $table_head[43]   =  'Payments: Debit cards (pay_debit_card)';
-        $table_head[44]   =  'Payments: NFC mobile payments (pay_mobile_nfc)';
+        // $table_head[27]   =  'Health & safety: Mask required (requires_masks_customers)';
+        $table_head[27]   =  'Health & safety: Safety dividers at checkout (has_plexiglass_at_checkout)';
+        $table_head[28]   =  'Health & safety: Staff get temperature checks (requires_temperature_check_staff)';
+        $table_head[29]   =  'Health & safety: Staff required to disinfect surfaces between visits (is_sanitizing_between_customers)';
+        $table_head[30]   =  'Health & safety: Staff wear masks (requires_masks_staff)';
+        $table_head[31]   =  'Health & safety: Temperature check required (requires_temperature_check_customers)';
+        $table_head[32]   =  'Offerings: Passport photos (has_onsite_passport_photos)';
+        $table_head[33]   =  'Payments: Cash-only (requires_cash_only)';
+        $table_head[34]   =  'Payments: Checks (pay_check)';
+        $table_head[35]   =  'Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)';
+        $table_head[36]   =  'Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)';
+        $table_head[37]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)';
+        $table_head[38]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)';
+        $table_head[39]   =  'Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)';
+        $table_head[40]   =  'Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)';
+        $table_head[41]   =  'Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)';
+        $table_head[42]   =  'Payments: Debit cards (pay_debit_card)';
+        $table_head[43]   =  'Payments: NFC mobile payments (pay_mobile_nfc)';
         // $table_head[60]   =  'Place page URLs: Appointment links (url_appointment)'; // Intentionally left blank
-        $table_head[45]   =  'Place page URLs: COVID-19 info link (url_covid_19_info_page)';
-        $table_head[46]   =  'Place page URLs: Menu link (url_menu)';
-        $table_head[47]   =  'Place page URLs: Virtual care link (url_facility_telemedicine_page)';
+        $table_head[44]   =  'Place page URLs: COVID-19 info link (url_covid_19_info_page)';
+        $table_head[45]   =  'Place page URLs: Menu link (url_menu)';
+        $table_head[46]   =  'Place page URLs: Virtual care link (url_facility_telemedicine_page)';
         // $table_head[64]   =  'Planning: LGBTQ friendly (welcomes_lgbtq)'; // Intentionally left blank
         // $table_head[65]   =  'Planning: Transgender safespace (is_transgender_safespace)'; // Intentionally left blank
-        $table_head[48]   =  'Service options: Curbside pickup (has_curbside_pickup)';
-        $table_head[49]   =  'Service options: Delivery (has_delivery)';
-        $table_head[50]   =  'Service options: Drive-through (has_drive_through)';
-        $table_head[51]   =  'Service options: In-store pickup (has_in_store_pickup)';
-        $table_head[52]   =  'Service options: In-store shopping (has_in_store_shopping)';
-        $table_head[53]   =  'Service options: Online care (has_video_visits)';
-        $table_head[54]   =  'Service options: Same-day delivery (has_delivery_same_day)';
+        $table_head[47]   =  'Service options: Curbside pickup (has_curbside_pickup)';
+        $table_head[48]   =  'Service options: Delivery (has_delivery)';
+        $table_head[49]   =  'Service options: Drive-through (has_drive_through)';
+        $table_head[50]   =  'Service options: In-store pickup (has_in_store_pickup)';
+        $table_head[51]   =  'Service options: In-store shopping (has_in_store_shopping)';
+        $table_head[52]   =  'Service options: Online care (has_video_visits)';
+        $table_head[53]   =  'Service options: Same-day delivery (has_delivery_same_day)';
 
         $table_body = array();
         while( $query->have_posts() ) : $query->the_post();
@@ -1542,15 +1542,15 @@ function gmb_location_csv_export() {
                     }
 
                 // Health &amp; safety: Mask required (requires_masks_customers)
-                    if ( $covid19 ) {
-                        if (!empty($location_gmb_masks_customers)) {
-                            $row[27] =  $location_gmb_masks_customers;
-                        } else {
-                            $row[27] =  'Yes';
-                        }
-                    } else {
-                        $row[27] =  'No';
-                    }
+                    // if ( $covid19 ) {
+                    //     if (!empty($location_gmb_masks_customers)) {
+                    //         $row[27] =  $location_gmb_masks_customers;
+                    //     } else {
+                    //         $row[27] =  'Yes';
+                    //     }
+                    // } else {
+                    //     $row[27] =  'No';
+                    // }
 
                 // Health &amp; safety: Safety dividers at checkout (has_plexiglass_at_checkout)
                     $row[28] =  '[NOT APPLICABLE]';
