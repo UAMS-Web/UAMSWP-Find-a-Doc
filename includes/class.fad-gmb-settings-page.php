@@ -404,7 +404,7 @@ function gmb_provider_csv_export() {
         // $table_head[38]   =  'From the business: Identifies as Black-owned (is_black_owned)';
         // $table_head[39]   =  'From the business: Identifies as veteran-led (is_owned_by_veterans)';
         // $table_head[40]   =  'From the business: Identifies as women-led (is_owned_by_women)';
-        $table_head[25]   =  'Health & safety: Appointment required (requires_appointments)';
+        $table_head[25]   =  'Planning: Appointment required (requires_appointments)';
         $table_head[26]   =  'Health & safety: Mask required (requires_masks_customers)';
         // $table_head[43]   =  'Health & safety: Safety dividers at checkout (has_plexiglass_at_checkout)';
         $table_head[27]   =  'Health & safety: Staff get temperature checks (requires_temperature_check_staff)';
@@ -1094,7 +1094,7 @@ function gmb_location_csv_export() {
         // $table_head[38]   =  'From the business: Identifies as Black-owned (is_black_owned)'; // Intentionally left blank
         // $table_head[39]   =  'From the business: Identifies as veteran-led (is_owned_by_veterans)'; // Intentionally left blank
         // $table_head[40]   =  'From the business: Identifies as women-led (is_owned_by_women)'; // Intentionally left blank
-        $table_head[26]   =  'Health & safety: Appointment required (requires_appointments)';
+        $table_head[26]   =  'Planning: Appointment required (requires_appointments)';
         $table_head[27]   =  'Health & safety: Mask required (requires_masks_customers)';
         $table_head[28]   =  'Health & safety: Safety dividers at checkout (has_plexiglass_at_checkout)';
         $table_head[29]   =  'Health & safety: Staff get temperature checks (requires_temperature_check_staff)';
