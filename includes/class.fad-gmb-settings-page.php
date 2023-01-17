@@ -848,7 +848,7 @@ function gmb_provider_csv_export() {
                             // Intentionally left blank
                                 // $row[40] = '';
 
-                            // Health &amp; safety: Appointment required (requires_appointments)
+                            // Planning: Appointment required (requires_appointments)
                                 if ( $covid19 ) {
                                     if (!empty($location_gmb_appointments)) {
                                         $row[25] =  $location_gmb_appointments;
@@ -1530,7 +1530,7 @@ function gmb_location_csv_export() {
                 // Intentionally left blank
                     // $row[40] =  '';
 
-                // Health &amp; safety: Appointment required (requires_appointments)
+                // Planning: Appointment required (requires_appointments)
                     if ( $covid19 ) {
                         if (!empty($location_gmb_appointments)) {
                             $row[26] =  $location_gmb_appointments;
