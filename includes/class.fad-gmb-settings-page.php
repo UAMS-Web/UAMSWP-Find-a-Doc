@@ -562,7 +562,7 @@ function gmb_provider_csv_export() {
         // $table_head[]   =  'Offerings: Oil change (has_oil_change)';
         // $table_head[]   =  'Offerings: Organic dishes (serves_organic)';
         // $table_head[]   =  'Offerings: Organic products (sells_organic_products)';
-        $table_head[30]   =  'Offerings: Passport photos (has_onsite_passport_photos)';
+        // $table_head[]   =  'Offerings: Passport photos (has_onsite_passport_photos)';
         // $table_head[]   =  'Offerings: Prepared foods (sells_food_prepared)';
         // $table_head[]   =  'Offerings: Repair services (has_service_repair)';
         // $table_head[]   =  'Offerings: Salad bar (has_salad_bar)';
@@ -576,21 +576,21 @@ function gmb_provider_csv_export() {
         // $table_head[]   =  'Offerings: Wine (serves_wine)';
         // $table_head[]   =  'Offerings: Women's clothing (sells_clothing_for_women)';
         // $table_head[]   =  'Offerings: Women's shoes (sells_shoes_for_women)';
-        $table_head[31]   =  'Payments: Cash-only (requires_cash_only)';
-        $table_head[32]   =  'Payments: Checks (pay_check)';
+        // $table_head[]   =  'Payments: Cash-only (requires_cash_only)';
+        // $table_head[]   =  'Payments: Checks (pay_check)';
         // $table_head[]   =  'Payments: Cheque Apetiz (accepts_cheque_apetiz_meal_voucher)';
         // $table_head[]   =  'Payments: Credit cards (pay_credit_card)';
-        $table_head[33]   =  'Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)';
-        $table_head[34]   =  'Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)';
-        $table_head[35]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)';
-        $table_head[36]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)';
-        $table_head[37]   =  'Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)';
-        $table_head[38]   =  'Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)';
-        $table_head[39]   =  'Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)';
-        $table_head[40]   =  'Payments: Debit cards (pay_debit_card)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)';
+        // $table_head[]   =  'Payments: Debit cards (pay_debit_card)';
         // $table_head[]   =  'Payments: Google Pay (pay_mobile_tez)';
         // $table_head[]   =  'Payments: Meal coupons (accepts_meal_coupons)';
-        $table_head[41]   =  'Payments: NFC mobile payments (pay_mobile_nfc)';
+        // $table_head[]   =  'Payments: NFC mobile payments (pay_mobile_nfc)';
         // $table_head[]   =  'Payments: Ticket Restaurant (accepts_ticket_restaurant_meal_voucher)';
         // $table_head[]   =  'Payments: VR (accepts_vr_meal_voucher)';
         // $table_head[]   =  'Planning: Accepts new patients (accepts_new_patients)';
@@ -614,13 +614,13 @@ function gmb_provider_csv_export() {
         // $table_head[]   =  'Recycling: Plastic bags (has_recycling_plastic_bags)';
         // $table_head[]   =  'Recycling: Plastic bottles (has_recycling_plastic_bottles)';
         // $table_head[]   =  'Recycling: Plastic foam (has_recycling_plastic_foam)';
-        $table_head[45]   =  'Service options: Curbside pickup (has_curbside_pickup)';
-        $table_head[46]   =  'Service options: Delivery (has_delivery)';
+        // $table_head[]   =  'Service options: Curbside pickup (has_curbside_pickup)';
+        // $table_head[]   =  'Service options: Delivery (has_delivery)';
         // $table_head[]   =  'Service options: Dine-in (serves_dine_in)';
-        $table_head[47]   =  'Service options: Drive-through (has_drive_through)';
+        // $table_head[]   =  'Service options: Drive-through (has_drive_through)';
         // $table_head[]   =  'Service options: Grocery pickup (has_grocery_pickup)';
-        $table_head[48]   =  'Service options: In-store pickup (has_in_store_pickup)';
-        $table_head[49]   =  'Service options: In-store shopping (has_in_store_shopping)';
+        // $table_head[]   =  'Service options: In-store pickup (has_in_store_pickup)';
+        // $table_head[]   =  'Service options: In-store shopping (has_in_store_shopping)';
         $table_head[50]   =  'Service options: Has online care (has_video_visits)';
         // $table_head[]   =  'Service options: Language assistance (languages_spoken): American Sign Language (american_sign_language_used)';
         // $table_head[]   =  'Service options: Language assistance (languages_spoken): Arabic (arabic_spoken)';
@@ -645,12 +645,12 @@ function gmb_provider_csv_export() {
         // $table_head[]   =  'Service options: Onsite services (has_onsite_services)';
         // $table_head[]   =  'Service options: Outdoor seating (has_seating_outdoors)';
         // $table_head[]   =  'Service options: Outdoor services (has_outdoor_services)';
-        $table_head[51]   =  'Service options: Same-day delivery (has_delivery_same_day)';
+        // $table_head[]   =  'Service options: Same-day delivery (has_delivery_same_day)';
         // $table_head[]   =  'Service options: Takeout (has_takeout)';
         // $table_head[]   =  'Place page URLs: Appointment links (url_appointment)';
         $table_head[42]   =  'Place page URLs: COVID-19 info link (url_covid_19_info_page)';
         // $table_head[]   =  'Place page URLs: Inventory search URL (url_inventory_search)';
-        $table_head[43]   =  'Place page URLs: Menu link (url_menu)';
+        // $table_head[]   =  'Place page URLs: Menu link (url_menu)';
         // $table_head[]   =  'Place page URLs: Order ahead links (url_order_ahead)';
         // $table_head[]   =  'Place page URLs: Reservations links (url_reservations)';
         $table_head[44]   =  'Place page URLs: Virtual care link (url_facility_telemedicine_page)';
@@ -1056,42 +1056,6 @@ function gmb_provider_csv_export() {
                                     $row[24] = 'Yes';
                                 }
 
-                            // Offerings: Passport photos (has_onsite_passport_photos)
-                                $row[30] = '[NOT APPLICABLE]';
-
-                            // Payments: Cash-only (requires_cash_only)
-                                $row[31] = '[NOT APPLICABLE]';
-
-                            // Payments: Checks (pay_check)
-                                $row[32] = '[NOT APPLICABLE]';
-
-                            // Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)
-                                $row[33] = '[NOT APPLICABLE]';
-
-                            // Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)
-                                $row[34] = '[NOT APPLICABLE]';
-
-                            // Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)
-                                $row[35] = '[NOT APPLICABLE]';
-
-                            // Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)
-                                $row[36] = '[NOT APPLICABLE]';
-
-                            // Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)
-                                $row[37] = '[NOT APPLICABLE]';
-
-                            // Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)
-                                $row[38] = '[NOT APPLICABLE]';
-
-                            // Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)
-                                $row[39] = '[NOT APPLICABLE]';
-
-                            // Payments: Debit cards (pay_debit_card)
-                                $row[40] = '[NOT APPLICABLE]';
-
-                            // Payments: NFC mobile payments (pay_mobile_nfc)
-                                $row[41] = '[NOT APPLICABLE]';
-
                             // Planning: Appointment required (requires_appointments)
                                 if ( $covid19 ) {
                                     if (!empty($location_gmb_appointments)) {
@@ -1103,33 +1067,12 @@ function gmb_provider_csv_export() {
                                     $row[25] =  '';
                                 }
 
-                            // Service options: Curbside pickup (has_curbside_pickup)
-                                $row[45] = '[NOT APPLICABLE]';
-
-                            // Service options: Delivery (has_delivery)
-                                $row[46] = '[NOT APPLICABLE]';
-
-                            // Service options: Drive-through (has_drive_through)
-                                $row[47] = '[NOT APPLICABLE]';
-
-                            // Service options: In-store pickup (has_in_store_pickup)
-                                $row[48] = '[NOT APPLICABLE]';
-
-                            // Service options: In-store shopping (has_in_store_shopping)
-                                $row[49] = '[NOT APPLICABLE]';
-
                             // Service options: Has online care (has_video_visits)
                             // Value based on the relevant location profile
                                 $row[50] = $location_telemed_query ? 'Yes' : '';
 
-                            // Service options: Same-day delivery (has_delivery_same_day)
-                                $row[51] = '[NOT APPLICABLE]';
-
                             // Place page URLs: COVID-19 info link (url_covid_19_info_page)
                                 $row[42] = 'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=covid-19-info-link&utm_specs=' . $store_code;
-
-                            // Place page URLs: Menu link (url_menu)
-                                $row[43] = '[NOT APPLICABLE]';
 
                             // Place page URLs: Virtual care link (url_facility_telemedicine_page)
                                 $row[44] = $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=virtual-care-link&utm_specs=' . $store_code . '#telemedicine-info' : '';
@@ -1392,7 +1335,7 @@ function gmb_location_csv_export() {
         // $table_head[]   =  'Offerings: Oil change (has_oil_change)';
         // $table_head[]   =  'Offerings: Organic dishes (serves_organic)';
         // $table_head[]   =  'Offerings: Organic products (sells_organic_products)';
-        $table_head[32]   =  'Offerings: Passport photos (has_onsite_passport_photos)';
+        // $table_head[]   =  'Offerings: Passport photos (has_onsite_passport_photos)';
         // $table_head[]   =  'Offerings: Prepared foods (sells_food_prepared)';
         // $table_head[]   =  'Offerings: Repair services (has_service_repair)';
         // $table_head[]   =  'Offerings: Salad bar (has_salad_bar)';
@@ -1406,21 +1349,21 @@ function gmb_location_csv_export() {
         // $table_head[]   =  'Offerings: Wine (serves_wine)';
         // $table_head[]   =  'Offerings: Women's clothing (sells_clothing_for_women)';
         // $table_head[]   =  'Offerings: Women's shoes (sells_shoes_for_women)';
-        $table_head[33]   =  'Payments: Cash-only (requires_cash_only)';
-        $table_head[34]   =  'Payments: Checks (pay_check)';
+        // $table_head[]   =  'Payments: Cash-only (requires_cash_only)';
+        // $table_head[]   =  'Payments: Checks (pay_check)';
         // $table_head[]   =  'Payments: Cheque Apetiz (accepts_cheque_apetiz_meal_voucher)';
         // $table_head[]   =  'Payments: Credit cards (pay_credit_card)';
-        $table_head[35]   =  'Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)';
-        $table_head[36]   =  'Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)';
-        $table_head[37]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)';
-        $table_head[38]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)';
-        $table_head[39]   =  'Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)';
-        $table_head[40]   =  'Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)';
-        $table_head[41]   =  'Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)';
-        $table_head[42]   =  'Payments: Debit cards (pay_debit_card)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)';
+        // $table_head[]   =  'Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)';
+        // $table_head[]   =  'Payments: Debit cards (pay_debit_card)';
         // $table_head[]   =  'Payments: Google Pay (pay_mobile_tez)';
         // $table_head[]   =  'Payments: Meal coupons (accepts_meal_coupons)';
-        $table_head[43]   =  'Payments: NFC mobile payments (pay_mobile_nfc)';
+        // $table_head[]   =  'Payments: NFC mobile payments (pay_mobile_nfc)';
         // $table_head[]   =  'Payments: Ticket Restaurant (accepts_ticket_restaurant_meal_voucher)';
         // $table_head[]   =  'Payments: VR (accepts_vr_meal_voucher)';
         // $table_head[]   =  'Planning: Accepts new patients (accepts_new_patients)';
@@ -1444,13 +1387,13 @@ function gmb_location_csv_export() {
         // $table_head[]   =  'Recycling: Plastic bags (has_recycling_plastic_bags)';
         // $table_head[]   =  'Recycling: Plastic bottles (has_recycling_plastic_bottles)';
         // $table_head[]   =  'Recycling: Plastic foam (has_recycling_plastic_foam)';
-        $table_head[47]   =  'Service options: Curbside pickup (has_curbside_pickup)';
-        $table_head[48]   =  'Service options: Delivery (has_delivery)';
+        // $table_head[]   =  'Service options: Curbside pickup (has_curbside_pickup)';
+        // $table_head[]   =  'Service options: Delivery (has_delivery)';
         // $table_head[]   =  'Service options: Dine-in (serves_dine_in)';
-        $table_head[49]   =  'Service options: Drive-through (has_drive_through)';
+        // $table_head[]   =  'Service options: Drive-through (has_drive_through)';
         // $table_head[]   =  'Service options: Grocery pickup (has_grocery_pickup)';
-        $table_head[50]   =  'Service options: In-store pickup (has_in_store_pickup)';
-        $table_head[51]   =  'Service options: In-store shopping (has_in_store_shopping)';
+        // $table_head[]   =  'Service options: In-store pickup (has_in_store_pickup)';
+        // $table_head[]   =  'Service options: In-store shopping (has_in_store_shopping)';
         $table_head[52]   =  'Service options: Has online care (has_video_visits)';
         // $table_head[]   =  'Service options: Language assistance (languages_spoken): American Sign Language (american_sign_language_used)';
         // $table_head[]   =  'Service options: Language assistance (languages_spoken): Arabic (arabic_spoken)';
@@ -1475,12 +1418,12 @@ function gmb_location_csv_export() {
         // $table_head[]   =  'Service options: Onsite services (has_onsite_services)';
         // $table_head[]   =  'Service options: Outdoor seating (has_seating_outdoors)';
         // $table_head[]   =  'Service options: Outdoor services (has_outdoor_services)';
-        $table_head[53]   =  'Service options: Same-day delivery (has_delivery_same_day)';
+        // $table_head[]   =  'Service options: Same-day delivery (has_delivery_same_day)';
         // $table_head[]   =  'Service options: Takeout (has_takeout)';
         // $table_head[]   =  'Place page URLs: Appointment links (url_appointment)';
         $table_head[44]   =  'Place page URLs: COVID-19 info link (url_covid_19_info_page)';
         // $table_head[]   =  'Place page URLs: Inventory search URL (url_inventory_search)';
-        $table_head[45]   =  'Place page URLs: Menu link (url_menu)';
+        // $table_head[]   =  'Place page URLs: Menu link (url_menu)';
         // $table_head[]   =  'Place page URLs: Order ahead links (url_order_ahead)';
         // $table_head[]   =  'Place page URLs: Reservations links (url_reservations)';
         $table_head[46]   =  'Place page URLs: Virtual care link (url_facility_telemedicine_page)';
@@ -1878,42 +1821,6 @@ function gmb_location_csv_export() {
                         $row[25] =  'Yes';
                     }
 
-                // Offerings: Passport photos (has_onsite_passport_photos)
-                    $row[32] = '[NOT APPLICABLE]';
-
-                // Payments: Cash-only (requires_cash_only)
-                    $row[33] = '[NOT APPLICABLE]';
-
-                // Payments: Checks (pay_check)
-                    $row[34] = '[NOT APPLICABLE]';
-
-                // Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)
-                    $row[35] = '[NOT APPLICABLE]';
-
-                // Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)
-                    $row[36] = '[NOT APPLICABLE]';
-
-                // Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)
-                    $row[37] = '[NOT APPLICABLE]';
-
-                // Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)
-                    $row[38] = '[NOT APPLICABLE]';
-
-                // Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)
-                    $row[39] = '[NOT APPLICABLE]';
-
-                // Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)
-                    $row[40] = '[NOT APPLICABLE]';
-
-                // Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)
-                    $row[41] = '[NOT APPLICABLE]';
-
-                // Payments: Debit cards (pay_debit_card)
-                    $row[42] = '[NOT APPLICABLE]';
-
-                // Payments: NFC mobile payments (pay_mobile_nfc)
-                    $row[43] = '[NOT APPLICABLE]';
-
                 // Planning: Appointment required (requires_appointments)
                     if ( $covid19 ) {
                         if (!empty($location_gmb_appointments)) {
@@ -1925,33 +1832,12 @@ function gmb_location_csv_export() {
                         $row[26] =  '';
                     }
 
-                 // Service options: Curbside pickup (has_curbside_pickup)
-                    $row[47] = '[NOT APPLICABLE]';
-
-                // Service options: Delivery (has_delivery)
-                    $row[48] = '[NOT APPLICABLE]';
-
-                // Service options: Drive-through (has_drive_through)
-                    $row[49] = '[NOT APPLICABLE]';
-
-                // Service options: In-store pickup (has_in_store_pickup)
-                    $row[50] = '[NOT APPLICABLE]';
-
-                // Service options: In-store shopping (has_in_store_shopping)
-                    $row[51] = '[NOT APPLICABLE]';
-
                 // Service options: Has online care (has_video_visits)
                 // Value based on the relevant location profile
                     $row[52] = $location_telemed_query ? 'Yes' : '';
 
-                // Service options: Same-day delivery (has_delivery_same_day)
-                    $row[53] = '[NOT APPLICABLE]';
-
                 // Place page URLs: COVID-19 info link (url_covid_19_info_page)
                     $row[44] =  'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=covid-19-info-link&utm_specs=' . $store_code;
-
-                // Place page URLs: Menu link (url_menu)
-                    $row[45] = '[NOT APPLICABLE]';
 
                 // Place page URLs: Virtual care link (url_facility_telemedicine_page)
                     $row[46] =  $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=virtual-care-link&utm_specs=' . $store_code . '#telemedicine-info' : '';
