@@ -450,6 +450,8 @@ function gmb_provider_csv_export() {
         // $table_head[]   =  'Amenities: Swimming pool (swimming_pool_offerings): Outdoor (outdoor_pool)';
         // $table_head[]   =  'Amenities: Swings (has_playground_swings)';
         // $table_head[]   =  'Crowd: Family-friendly (welcomes_families)';
+        // $table_head[]   =  'Crowd: LGBTQ+ friendly (welcomes_lgbtq)';
+        // $table_head[]   =  'Crowd: Transgender safespace (is_transgender_safespace)';
         // $table_head[]   =  'Deities Represented: Brahma (has_deity_brahma_represented)';
         // $table_head[]   =  'Deities Represented: Durga (has_deity_durga_represented)';
         // $table_head[]   =  'Deities Represented: Hanuman (has_deity_hanuman_represented)';
@@ -560,7 +562,6 @@ function gmb_provider_csv_export() {
         // $table_head[]   =  'Offerings: Oil change (has_oil_change)';
         // $table_head[]   =  'Offerings: Organic dishes (serves_organic)';
         // $table_head[]   =  'Offerings: Organic products (sells_organic_products)';
-        $table_head[25]   =  'Planning: Appointment required (requires_appointments)';
         $table_head[30]   =  'Offerings: Passport photos (has_onsite_passport_photos)';
         // $table_head[]   =  'Offerings: Prepared foods (sells_food_prepared)';
         // $table_head[]   =  'Offerings: Repair services (has_service_repair)';
@@ -594,6 +595,7 @@ function gmb_provider_csv_export() {
         // $table_head[]   =  'Payments: VR (accepts_vr_meal_voucher)';
         // $table_head[]   =  'Planning: Accepts new patients (accepts_new_patients)';
         // $table_head[]   =  'Planning: Accepts reservations (accepts_reservations)';
+        $table_head[25]   =  'Planning: Appointment required (requires_appointments)';
         // $table_head[]   =  'Planning: Appointment required for Covid Test (is_appointment_required_covid_19_testing)';
         // $table_head[]   =  'Planning: Eligibility requirement (requires_eligibility_verification)';
         // $table_head[]   =  'Planning: Membership required (requires_membership)';
@@ -612,15 +614,6 @@ function gmb_provider_csv_export() {
         // $table_head[]   =  'Recycling: Plastic bags (has_recycling_plastic_bags)';
         // $table_head[]   =  'Recycling: Plastic bottles (has_recycling_plastic_bottles)';
         // $table_head[]   =  'Recycling: Plastic foam (has_recycling_plastic_foam)';
-        // $table_head[]   =  'Place page URLs: Appointment links (url_appointment)';
-        $table_head[42]   =  'Place page URLs: COVID-19 info link (url_covid_19_info_page)';
-        // $table_head[]   =  'Place page URLs: Inventory search URL (url_inventory_search)';
-        $table_head[43]   =  'Place page URLs: Menu link (url_menu)';
-        // $table_head[]   =  'Place page URLs: Order ahead links (url_order_ahead)';
-        // $table_head[]   =  'Place page URLs: Reservations links (url_reservations)';
-        $table_head[44]   =  'Place page URLs: Virtual care link (url_facility_telemedicine_page)';
-        // $table_head[]   =  'Crowd: LGBTQ+ friendly (welcomes_lgbtq)';
-        // $table_head[]   =  'Crowd: Transgender safespace (is_transgender_safespace)';
         $table_head[45]   =  'Service options: Curbside pickup (has_curbside_pickup)';
         $table_head[46]   =  'Service options: Delivery (has_delivery)';
         // $table_head[]   =  'Service options: Dine-in (serves_dine_in)';
@@ -654,6 +647,13 @@ function gmb_provider_csv_export() {
         // $table_head[]   =  'Service options: Outdoor services (has_outdoor_services)';
         $table_head[51]   =  'Service options: Same-day delivery (has_delivery_same_day)';
         // $table_head[]   =  'Service options: Takeout (has_takeout)';
+        // $table_head[]   =  'Place page URLs: Appointment links (url_appointment)';
+        $table_head[42]   =  'Place page URLs: COVID-19 info link (url_covid_19_info_page)';
+        // $table_head[]   =  'Place page URLs: Inventory search URL (url_inventory_search)';
+        $table_head[43]   =  'Place page URLs: Menu link (url_menu)';
+        // $table_head[]   =  'Place page URLs: Order ahead links (url_order_ahead)';
+        // $table_head[]   =  'Place page URLs: Reservations links (url_reservations)';
+        $table_head[44]   =  'Place page URLs: Virtual care link (url_facility_telemedicine_page)';
         // $table_head[]   =  'Amenities: In-room kitchens (kitchen_in_room)';
         // $table_head[]   =  'Amenities: Wi-Fi (wi_fi)';
 
@@ -1056,17 +1056,6 @@ function gmb_provider_csv_export() {
                                     $row[24] = 'Yes';
                                 }
 
-                            // Planning: Appointment required (requires_appointments)
-                                if ( $covid19 ) {
-                                    if (!empty($location_gmb_appointments)) {
-                                        $row[25] =  $location_gmb_appointments;
-                                    } else {
-                                        $row[25] =  '';
-                                    }
-                                } else {
-                                    $row[25] =  '';
-                                }
-
                             // Offerings: Passport photos (has_onsite_passport_photos)
                                 $row[30] = '[NOT APPLICABLE]';
 
@@ -1103,14 +1092,16 @@ function gmb_provider_csv_export() {
                             // Payments: NFC mobile payments (pay_mobile_nfc)
                                 $row[41] = '[NOT APPLICABLE]';
 
-                            // Place page URLs: COVID-19 info link (url_covid_19_info_page)
-                                $row[42] = 'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=covid-19-info-link&utm_specs=' . $store_code;
-
-                            // Place page URLs: Menu link (url_menu)
-                                $row[43] = '[NOT APPLICABLE]';
-
-                            // Place page URLs: Virtual care link (url_facility_telemedicine_page)
-                                $row[44] = $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=virtual-care-link&utm_specs=' . $store_code . '#telemedicine-info' : '';
+                            // Planning: Appointment required (requires_appointments)
+                                if ( $covid19 ) {
+                                    if (!empty($location_gmb_appointments)) {
+                                        $row[25] =  $location_gmb_appointments;
+                                    } else {
+                                        $row[25] =  '';
+                                    }
+                                } else {
+                                    $row[25] =  '';
+                                }
 
                             // Service options: Curbside pickup (has_curbside_pickup)
                                 $row[45] = '[NOT APPLICABLE]';
@@ -1133,6 +1124,15 @@ function gmb_provider_csv_export() {
 
                             // Service options: Same-day delivery (has_delivery_same_day)
                                 $row[51] = '[NOT APPLICABLE]';
+
+                            // Place page URLs: COVID-19 info link (url_covid_19_info_page)
+                                $row[42] = 'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=covid-19-info-link&utm_specs=' . $store_code;
+
+                            // Place page URLs: Menu link (url_menu)
+                                $row[43] = '[NOT APPLICABLE]';
+
+                            // Place page URLs: Virtual care link (url_facility_telemedicine_page)
+                                $row[44] = $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=provider&utm_content=virtual-care-link&utm_specs=' . $store_code . '#telemedicine-info' : '';
 
                         $l++;
                     } else {
@@ -1280,6 +1280,8 @@ function gmb_location_csv_export() {
         // $table_head[]   =  'Amenities: Swimming pool (swimming_pool_offerings): Outdoor (outdoor_pool)';
         // $table_head[]   =  'Amenities: Swings (has_playground_swings)';
         // $table_head[]   =  'Crowd: Family-friendly (welcomes_families)';
+        // $table_head[]   =  'Crowd: LGBTQ+ friendly (welcomes_lgbtq)';
+        // $table_head[]   =  'Crowd: Transgender safespace (is_transgender_safespace)';
         // $table_head[]   =  'Deities Represented: Brahma (has_deity_brahma_represented)';
         // $table_head[]   =  'Deities Represented: Durga (has_deity_durga_represented)';
         // $table_head[]   =  'Deities Represented: Hanuman (has_deity_hanuman_represented)';
@@ -1390,7 +1392,6 @@ function gmb_location_csv_export() {
         // $table_head[]   =  'Offerings: Oil change (has_oil_change)';
         // $table_head[]   =  'Offerings: Organic dishes (serves_organic)';
         // $table_head[]   =  'Offerings: Organic products (sells_organic_products)';
-        $table_head[26]   =  'Planning: Appointment required (requires_appointments)';
         $table_head[32]   =  'Offerings: Passport photos (has_onsite_passport_photos)';
         // $table_head[]   =  'Offerings: Prepared foods (sells_food_prepared)';
         // $table_head[]   =  'Offerings: Repair services (has_service_repair)';
@@ -1424,6 +1425,7 @@ function gmb_location_csv_export() {
         // $table_head[]   =  'Payments: VR (accepts_vr_meal_voucher)';
         // $table_head[]   =  'Planning: Accepts new patients (accepts_new_patients)';
         // $table_head[]   =  'Planning: Accepts reservations (accepts_reservations)';
+        $table_head[26]   =  'Planning: Appointment required (requires_appointments)';
         // $table_head[]   =  'Planning: Appointment required for Covid Test (is_appointment_required_covid_19_testing)';
         // $table_head[]   =  'Planning: Eligibility requirement (requires_eligibility_verification)';
         // $table_head[]   =  'Planning: Membership required (requires_membership)';
@@ -1442,15 +1444,6 @@ function gmb_location_csv_export() {
         // $table_head[]   =  'Recycling: Plastic bags (has_recycling_plastic_bags)';
         // $table_head[]   =  'Recycling: Plastic bottles (has_recycling_plastic_bottles)';
         // $table_head[]   =  'Recycling: Plastic foam (has_recycling_plastic_foam)';
-        // $table_head[60]   =  'Place page URLs: Appointment links (url_appointment)'; // Intentionally left blank
-        $table_head[44]   =  'Place page URLs: COVID-19 info link (url_covid_19_info_page)';
-        // $table_head[]   =  'Place page URLs: Inventory search URL (url_inventory_search)';
-        $table_head[45]   =  'Place page URLs: Menu link (url_menu)';
-        // $table_head[]   =  'Place page URLs: Order ahead links (url_order_ahead)';
-        // $table_head[]   =  'Place page URLs: Reservations links (url_reservations)';
-        $table_head[46]   =  'Place page URLs: Virtual care link (url_facility_telemedicine_page)';
-        // $table_head[]   =  'Crowd: LGBTQ+ friendly (welcomes_lgbtq)'; // Intentionally left blank
-        // $table_head[]   =  'Crowd: Transgender safespace (is_transgender_safespace)'; // Intentionally left blank
         $table_head[47]   =  'Service options: Curbside pickup (has_curbside_pickup)';
         $table_head[48]   =  'Service options: Delivery (has_delivery)';
         // $table_head[]   =  'Service options: Dine-in (serves_dine_in)';
@@ -1484,6 +1477,13 @@ function gmb_location_csv_export() {
         // $table_head[]   =  'Service options: Outdoor services (has_outdoor_services)';
         $table_head[53]   =  'Service options: Same-day delivery (has_delivery_same_day)';
         // $table_head[]   =  'Service options: Takeout (has_takeout)';
+        // $table_head[]   =  'Place page URLs: Appointment links (url_appointment)';
+        $table_head[44]   =  'Place page URLs: COVID-19 info link (url_covid_19_info_page)';
+        // $table_head[]   =  'Place page URLs: Inventory search URL (url_inventory_search)';
+        $table_head[45]   =  'Place page URLs: Menu link (url_menu)';
+        // $table_head[]   =  'Place page URLs: Order ahead links (url_order_ahead)';
+        // $table_head[]   =  'Place page URLs: Reservations links (url_reservations)';
+        $table_head[46]   =  'Place page URLs: Virtual care link (url_facility_telemedicine_page)';
         // $table_head[]   =  'Amenities: In-room kitchens (kitchen_in_room)';
         // $table_head[]   =  'Amenities: Wi-Fi (wi_fi)';
 
@@ -1878,17 +1878,6 @@ function gmb_location_csv_export() {
                         $row[25] =  'Yes';
                     }
 
-                // Planning: Appointment required (requires_appointments)
-                    if ( $covid19 ) {
-                        if (!empty($location_gmb_appointments)) {
-                            $row[26] =  $location_gmb_appointments;
-                        } else {
-                            $row[26] =  '';
-                        }
-                    } else {
-                        $row[26] =  '';
-                    }
-
                 // Offerings: Passport photos (has_onsite_passport_photos)
                     $row[32] = '[NOT APPLICABLE]';
 
@@ -1925,18 +1914,16 @@ function gmb_location_csv_export() {
                 // Payments: NFC mobile payments (pay_mobile_nfc)
                     $row[43] = '[NOT APPLICABLE]';
 
-                // Place page URLs: Appointment links (url_appointment)
-                // Intentionally left blank
-                    // $row[60] =  '';
-
-                // Place page URLs: COVID-19 info link (url_covid_19_info_page)
-                    $row[44] =  'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=covid-19-info-link&utm_specs=' . $store_code;
-
-                // Place page URLs: Menu link (url_menu)
-                    $row[45] = '[NOT APPLICABLE]';
-
-                // Place page URLs: Virtual care link (url_facility_telemedicine_page)
-                    $row[46] =  $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=virtual-care-link&utm_specs=' . $store_code . '#telemedicine-info' : '';
+                // Planning: Appointment required (requires_appointments)
+                    if ( $covid19 ) {
+                        if (!empty($location_gmb_appointments)) {
+                            $row[26] =  $location_gmb_appointments;
+                        } else {
+                            $row[26] =  '';
+                        }
+                    } else {
+                        $row[26] =  '';
+                    }
 
                  // Service options: Curbside pickup (has_curbside_pickup)
                     $row[47] = '[NOT APPLICABLE]';
@@ -1959,6 +1946,15 @@ function gmb_location_csv_export() {
 
                 // Service options: Same-day delivery (has_delivery_same_day)
                     $row[53] = '[NOT APPLICABLE]';
+
+                // Place page URLs: COVID-19 info link (url_covid_19_info_page)
+                    $row[44] =  'https://uamshealth.com/coronavirus/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=covid-19-info-link&utm_specs=' . $store_code;
+
+                // Place page URLs: Menu link (url_menu)
+                    $row[45] = '[NOT APPLICABLE]';
+
+                // Place page URLs: Virtual care link (url_facility_telemedicine_page)
+                    $row[46] =  $location_telemed_query ? 'https://uamshealth.com/location/' . $location_slug . '/?utm_source=google&utm_medium=gmb&utm_campaign=clinical&utm_term=location&utm_content=virtual-care-link&utm_specs=' . $store_code . '#telemedicine-info' : '';
                 
             } // endif
             $table_body[] = $row; 
