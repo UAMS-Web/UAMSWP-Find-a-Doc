@@ -560,7 +560,7 @@
             "name": "physician_title",
             "type": "taxonomy",
             "label": "Clinical Job Title",
-            "instructions": "The provider's clinical title should be defined according to the primary taxonomy code currently defined by the provider on their National Provider Identifier record in the National Plan and Provider Enumeration System. <br />The provider's NPI record can be found at <a href='https://npiregistry.cms.hhs.gov/search' target='_blank'>https://npiregistry.cms.hhs.gov/search</a>. The taxonomy code(s) will be found at the bottom of the provider's record. The primary taxonomy code will be indicated with a \"Yes\" in the \"Primary Taxonomy\" column. <br /> If the primary taxonomy does not reflect the provider's current classification or specialization, contact UAMS Provider Enrollment at <a href='mailto:enrollment@uams.edu'>enrollment@uams.edu</a>. <br />Copy the 10-character code for the primary taxonomy from the \"Selected Taxonomy\" column. Switch back to this provider profile editor. Click this input to open the dropdown. Click the text input area at the top of the dropdown. Paste the primary taxonomy code into that input. Select the clinical title that is returned. <br />If no clinical title is returned using the primary taxonomy code, it may be that the primary taxonomy is not valid for our purposes (e.g., it is the taxonomy for a student or for a hospital). Contact UAMS Web Services for guidance. <br /><a href='https://communications.uams.edu/web/kb/provider-titles/#clinical-title' target='_blank' title='UAMS Web Services Knowledge Base, Provider Titles, Clinical Title'>Find more information about the Clinical Title.</a>",
+            "instructions": "The provider's clinical title should be defined according to the primary taxonomy code currently defined by the provider on their National Provider Identifier record in the National Plan and Provider Enumeration System.</p><p class='description' style='margin-top: 0.5em;'>The provider's NPI record can be found at <a href='https://npiregistry.cms.hhs.gov/search' target='_blank'>https://npiregistry.cms.hhs.gov/search</a>. The taxonomy code(s) will be found at the bottom of the provider's record. The primary taxonomy code will be indicated with a \"Yes\" in the \"Primary Taxonomy\" column.</p><p class='description' style='margin-top: 0.5em;'>If the primary taxonomy does not reflect the provider's current classification or specialization, contact UAMS Provider Enrollment at <a href='mailto:enrollment@uams.edu'>enrollment@uams.edu</a>.</p><p class='description' style='margin-top: 0.5em;'>Copy the 10-character code for the primary taxonomy from the \"Selected Taxonomy\" column. Switch back to this provider profile editor. Click this input to open the dropdown. Click the text input area at the top of the dropdown. Paste the primary taxonomy code into that input. Select the clinical title that is returned.</p><p class='description' style='margin-top: 0.5em;'>If no clinical title is returned using the primary taxonomy code, it may be that the primary taxonomy is not valid for our purposes (e.g., it is the taxonomy for a student or for a hospital). Contact UAMS Web Services for guidance. </p><p class='description' style='margin-top: 0.5em;'><a href='https://communications.uams.edu/web/kb/provider-titles/#clinical-title' target='_blank' title='UAMS Web Services Knowledge Base, Provider Titles, Clinical Title'>Find more information about the Clinical Title.</a>",
             "required": 1,
             "conditional_logic": [
                 [
@@ -705,7 +705,7 @@
             "name": "physician_npi",
             "type": "number",
             "label": "National Provider Identifier (NPI)",
-            "instructions": "This value may be found in the provider's UAMS Health Epic SER record. It would be in the \"Related Group 9300\" item. Look for \"Provider NPI\" in the column for \"9300 - MPI ID TYPE\" and copy the value from that row under the \"9301 - MPI ID\" column. <br />It may also be found in the <a href='http://echo.uams.edu/echonet/payerportal/DrListing.asp' target='_blank'>UAMS Provider Enrollment Participation Portal</a>, which is only accessible on the UAMS network or by connecting to the UAMS virtual private network. <br />It may also be found by searching for the provider in the <a href='https://npiregistry.cms.hhs.gov/search' target='_blank'>NPPES NPI Registry</a>.",
+            "instructions": "This value may be found in the provider's UAMS Health Epic SER record. It would be in the \"Related Group 9300\" item. Look for \"Provider NPI\" in the column for \"9300 - MPI ID TYPE\" and copy the value from that row under the \"9301 - MPI ID\" column.</p><p class='description' style='margin-top: 0.5em;'>It may also be found in the <a href='http://echo.uams.edu/echonet/payerportal/DrListing.asp' target='_blank'>UAMS Provider Enrollment Participation Portal</a>, which is only accessible on the UAMS network or by connecting to the UAMS virtual private network.</p><p class='description' style='margin-top: 0.5em;'>It may also be found by searching for the provider in the <a href='https://npiregistry.cms.hhs.gov/search' target='_blank'>NPPES NPI Registry</a>.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -768,7 +768,7 @@
             "name": "physician_languages",
             "type": "taxonomy",
             "label": "Language(s)",
-            "instructions": "This is displayed on the provider's profile if any languages are included other than English. This also enables users to filter the main list of providers by each language. <br />Be sure to also include English (presuming that is applicable for this provider). Select multiple languages if necessary. <br />The display order of the selected languages on the provider's profile is based on the order of the selected languages here. You may click and drag to rearrange the selected languages in this input.",
+            "instructions": "This is displayed on the provider's profile if any languages are included other than English. This also enables users to filter the main list of providers by each language.</p><p class='description' style='margin-top: 0.5em;'>Be sure to also include English (presuming that is applicable for this provider). Select multiple languages if necessary.</p><p class='description' style='margin-top: 0.5em;'>The display order of the selected languages on the provider's profile is based on the order of the selected languages here. You may click and drag to rearrange the selected languages in this input.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -796,7 +796,7 @@
             "name": "physician_clinical_bio",
             "type": "wysiwyg",
             "label": "Patient-focused Clinical Biography",
-            "instructions": "While this field is not required, it is heavily encouraged. <br />It should be written with the patient in mind (e.g., What can the provider do for the patient? Why should the patient choose to make an appointment with this provider or with UAMS Health in general?). <br />Write this from the third-person point of view. Use complete sentences. Use only paragraphs (no headings or lists). Do not use any line breaks, text formatting, images or links. <br />Move any academic and training background to the \"Academic Biography\" field, which is under the \"Academic Profile\" tab.",
+            "instructions": "While this field is not required, it is heavily encouraged.</p><p class='description' style='margin-top: 0.5em;'>It should be written with the patient in mind (e.g., What can the provider do for the patient? Why should the patient choose to make an appointment with this provider or with UAMS Health in general?).</p><p class='description' style='margin-top: 0.5em;'>Write this from the third-person point of view. Use complete sentences. Use only paragraphs (no headings or lists). Do not use any line breaks, text formatting, images or links.</p><p class='description' style='margin-top: 0.5em;'>Move any academic and training background to the \"Academic Biography\" field, which is under the \"Academic Profile\" tab.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -815,7 +815,7 @@
             "name": "physician_short_clinical_bio",
             "type": "textarea",
             "label": "Short Patient-focused Clinical Biography",
-            "instructions": "This is displayed on the main provider list at <a href='http://uamshealth.com/provider/' target='_blank'>http://uamshealth.com/provider/</a> and it is displayed in search results on external search engines (e.g., Google). <br /> Follow the instructions used for the longer Patient-focused Clinical Biography field but using a single paragraph with a limit of 160 characters. The preferred length is at least 110 characters.",
+            "instructions": "This is displayed on the main provider list at <a href='http://uamshealth.com/provider/' target='_blank'>http://uamshealth.com/provider/</a> and it is displayed in search results on external search engines (e.g., Google).</p><p class='description' style='margin-top: 0.5em;'>Follow the instructions used for the longer Patient-focused Clinical Biography field but using a single paragraph with a limit of 160 characters. The preferred length is at least 110 characters.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -2574,7 +2574,7 @@
             "label": "Google My Business Category",
             "name": "physician_gmb_cat",
             "type": "taxonomy",
-            "instructions": "Select up to ten categories. Rearrange them so that the first item is the primary category. \"Doctor\" is a good standard choice, if you cannot find a better option.<br />For reference, you can <a href='https://communications.uams.edu/web/kb/google-my-business-categories/' target='_blank'>view a list of available categories.</a>",
+            "instructions": "Select up to ten categories. Rearrange them so that the first item is the primary category. \"Doctor\" is a good standard choice, if you cannot find a better option.</p><p class='description' style='margin-top: 0.5em;'>For reference, you can <a href='https://communications.uams.edu/web/kb/google-my-business-categories/' target='_blank'>view a list of available categories.</a>",
             "required": "1",
             "conditional_logic": [
                 [
