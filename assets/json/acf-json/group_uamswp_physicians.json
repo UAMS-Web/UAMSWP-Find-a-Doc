@@ -380,7 +380,7 @@
             "name": "physician_eligible_appointments",
             "type": "button_group",
             "label": "Does the Provider See Patients Via Appointments?",
-            "instructions": "",
+            "instructions": "Does the provider see patients via appointments <strong>and</strong> are those patients appointed to the <em>provider</em> rather than to a <em>resource</em>?",
             "required": 1,
             "conditional_logic": [
                 [
