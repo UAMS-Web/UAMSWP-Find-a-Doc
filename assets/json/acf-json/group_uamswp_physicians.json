@@ -169,7 +169,7 @@
             "name": "physician_prefix",
             "type": "select",
             "label": "Prefix",
-            "instructions": "Example: Dr.",
+            "instructions": "Only select \"Dr.\" if the provider has any of the following degrees: M.D., D.D.S., D.O., DPM or O.D.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
