@@ -858,7 +858,7 @@
             "name": "physician_clinical_focus",
             "type": "wysiwyg",
             "label": "Clinical Focus",
-            "instructions": "This should not be an outline of their services (that is covered by Conditions Treated and Treatments &amp; Procedures). It is meant to be a quick glimpse of the provider's main focus.</p><p class='description' style='margin-top: 0.5em;'>If it's a list, use a single-level bulleted list. If it is full sentences, then use a paragraph.</p><p class='description' style='margin-top: 0.5em;'>Keep it brief. Try to limit it to less than 344 characters.",
+            "instructions": "This is displayed alongside the content from the Patient-focused Clinical Biography. It allows you to include a quick glimpse of the provider's main clinical focus in case the content in the Patient-focused Clinical Biography is so long that users may not read the whole thing. This should not be an outline of their services (that is covered by Conditions Treated and Treatments &amp; Procedures).</p><p class='description' style='margin-top: 0.5em;'>If you are including the information as a list, use a single-level bulleted list. If you are not including the information as a list, use full sentences in a single paragraph of less than 344 characters.</p><p class='description' style='margin-top: 0.5em;'>Do not simply repeat the content of the Patient-focused Clinical Biography.",
             "required": 0,
             "conditional_logic": [
                 [
