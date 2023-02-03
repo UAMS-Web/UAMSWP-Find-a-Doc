@@ -592,8 +592,8 @@
             "key": "field_physician_service_line",
             "name": "physician_service_line",
             "type": "taxonomy",
-            "label": "Service Line",
-            "instructions": "",
+            "label": "UAMS Health Service Line",
+            "instructions": "If the provider does not belong to a UAMS Health service line, select the relevant option that begins with \"None.\"",
             "required": 1,
             "conditional_logic": [
                 [
