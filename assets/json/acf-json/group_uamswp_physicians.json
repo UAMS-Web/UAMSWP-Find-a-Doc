@@ -723,8 +723,8 @@
             "key": "field_physician_pid",
             "name": "physician_pid",
             "type": "number",
-            "label": "Provider ID",
-            "instructions": "This value can be found in Epic under \"9300-MPI ID TYPE.\"",
+            "label": "UAMS Health Epic SER ID",
+            "instructions": "This value can be found in the provider's UAMS Health Epic SER record under \".1 - ID.\"",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
