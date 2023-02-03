@@ -2155,7 +2155,7 @@
             "name": "physician_education",
             "type": "repeater",
             "label": "Education and Training",
-            "instructions": "Education Type and Organization are required if you add a row.",
+            "instructions": "Arrange the rows in reverse chronological order, with the most recent item at the top and the oldest item at the bottom.</p><p class='description' style='margin-top: 0.5em;'>\"Education Type\" and \"Organization\" are both required if you add a row.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -2224,7 +2224,7 @@
                     "label": "Description",
                     "name": "description",
                     "type": "text",
-                    "instructions": "Describe the education or training. List things like specific degrees (non-abbreviated) and/or areas of focus or specialization.",
+                    "instructions": "Include information like the specific degrees (non-abbreviated) and/or areas of focus or specialization (e.g., Bachelor of Science in Biology).</p><p class='description' style='margin-top: 0.5em;'>Do not repeat the name of the Education or Training Type (e.g., Fellowship). Do not include \"Doctor of Medicine\" as the description for the \"Medical School\" Education or Training Type",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
