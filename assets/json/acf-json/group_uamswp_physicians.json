@@ -743,7 +743,7 @@
             "name": "physician_patient_types",
             "type": "taxonomy",
             "label": "Patient Type(s)",
-            "instructions": "",
+            "instructions": "This is displayed on the provider's profile. This also enables users to filter the main list of providers by each patient type.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
