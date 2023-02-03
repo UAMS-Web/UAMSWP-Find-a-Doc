@@ -768,7 +768,7 @@
             "name": "physician_languages",
             "type": "taxonomy",
             "label": "Language(s)",
-            "instructions": "Select multiple if necessary. These items will be displayed in the order they are entered. You may click and drag to rearrange.",
+            "instructions": "This is displayed on the provider's profile if any languages are included other than English. This also enables users to filter the main list of providers by each language. <br />Be sure to also include English (presuming that is applicable for this provider). Select multiple languages if necessary. <br />The display order of the selected languages on the provider's profile is based on the order of the selected languages here. You may click and drag to rearrange the selected languages in this input.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
