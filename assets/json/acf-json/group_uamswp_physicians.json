@@ -833,8 +833,8 @@
             "key": "field_physician_youtube_link",
             "name": "physician_youtube_link",
             "type": "url",
-            "label": "YouTube Link",
-            "instructions": "Select a video that supports the Clinical Bio. Include the full URL, including https:\/\/.",
+            "label": "Featured Video",
+            "instructions": "Select a video from the UAMS YouTube or Vimeo accounts that features this provider and that supports the Patient-focused Clinical Biography. Include the full URL, including https:\/\/.",
             "required": 0,
             "conditional_logic": [
                 [
