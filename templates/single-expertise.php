@@ -598,9 +598,16 @@ function uamswp_list_child_expertise() {
                     "compare" => "!=",
                 ),
                 array(
-                    "key" => "expertise_type",
-                    "value" => "0",
-                    "compare" => "!=",
+                    'relation' => 'OR',
+                    array(
+                        "key" => "expertise_type",
+                        "value" => "0",
+                        "compare" => "!=",
+                    ),
+                    array(
+                        "key" => "expertise_type",
+                        "compare" => "NOT EXISTS",
+                    ),
                 ),
             ),
         );
@@ -651,80 +658,6 @@ function uamswp_expertise_appointment() {
                 </div>
             </div>
         </section>
-    <?php }
-}
-function uamswp_expertise_jump_links() {
-    global $page_title;
-    global $jump_link_count_min;
-    global $jump_link_count;
-    global $show_appointment_section;
-    global $show_podcast_section;
-    global $show_child_aoe_section;
-    global $show_related_resource_section;
-    global $show_conditions_section;
-    global $show_treatments_section;
-    global $show_providers_section;
-    global $show_locations_section;
-    global $show_related_aoe_section;
-    global $show_jump_links_section;
-    
-    // Begin Jump Links Section
-    if ( $show_jump_links_section ) { ?>
-        <nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
-            <h2>Contents</h2>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#jump-link-nav" aria-controls="jump-link-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse inner-container" id="jump-link-nav">
-                <ul class="nav navbar-nav">
-                    <?php if ( $show_podcast_section ) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#podcast" title="Jump to the section of this page about UAMS Health Talk Podcast">Podcast</a>
-                        </li>
-                    <?php } ?>
-                    <?php if ($show_child_aoe_section) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#sub-expertise" title="Jump to the section of this page about Areas Within Cancer Care">Areas Within <?php echo $page_title; ?></a>
-                        </li>
-                    <?php } ?>
-                    <?php if ( $show_related_resource_section ) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#related-resources" title="Jump to the section of this page about Resources">Resources</a>
-                        </li>
-                    <?php } ?>
-                    <?php if ( $show_conditions_section ) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#conditions" title="Jump to the section of this page about Conditions Treated">Conditions</a>
-                        </li>
-                    <?php } ?>
-                    <?php if ( $show_treatments_section ) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#treatments" title="Jump to the section of this page about Medical Treatments and Procedures Performed">Treatments &amp; Procedures</a>
-                        </li>
-                    <?php } ?>
-                    <?php if ( $show_providers_section ) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#providers" title="Jump to the section of this page about Providers">Providers</a>
-                        </li>
-                    <?php } ?>
-                    <?php if ($show_locations_section) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#locations" title="Jump to the section of this page about Locations">Locations</a>
-                        </li>
-                    <?php } ?>
-                    <?php if ( $show_related_aoe_section ) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#related-expertise" title="Jump to the section of this page about Related Areas of Expertise">Related Areas</a>
-                        </li>
-                    <?php } ?>
-                    <?php if ( $show_appointment_section ) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#appointment-info" title="Jump to the section of this page about making an appointment">Make an Appointment</a>
-                        </li>
-                    <?php } ?>
-                </ul>
-            </div>
-        </nav>
     <?php }
 }
 genesis();

@@ -25,8 +25,8 @@ if( $resources && $resource_query->have_posts() ) {
 // Check if Child Areas of Expertise section should be displayed
 if (
     !( get_post_meta( $page_id, 'hide_sub_areas_of_expertise', true) ) 
-    && !( "0" == $content_type )
-    && ( 0 != count( get_pages( array( 'child_of' => $page_id, 'post_type' => 'expertise' ) ) ) ) 
+    && ( "0" !== $content_type )
+    && ( 0 !== count( get_pages( array( 'child_of' => $page_id, 'post_type' => 'expertise' ) ) ) ) 
 ) {
     $show_child_aoe_section = true;
     $jump_link_count++;
