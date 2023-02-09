@@ -5,6 +5,8 @@
  *
  */
 
+require_once( 'modules/class-wp-bootstrap-pagewalker.php' );
+
 $args = array(
     'theme_location' => 'primary',
     'container'      => '',
@@ -46,6 +48,13 @@ if ($child_pages) {
             $childnav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-'. $child_page->ID .' nav-item active"><a title="'. $child_page->post_title .'" href="'. get_permalink( $child_page->ID ) .'" class="nav-link"><span itemprop="name">'. $child_page->post_title .'</span></a></li>';            
         }
     }
+    $args = array(
+        'child_of' => $page_id,
+        'title_li' => '',
+        'echo'     => false,
+        'walker'   => new WP_Bootstrap_Pagewalker(), // !important! create Bootstrap style navigation
+        // 'exclude' => implode(',',$excluded_pages),
+    );
     if ($children) {
         $pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $page_id .'-children menu-item-has-children nav-item dropdown"><a href="'. get_permalink( $page_id ) .'#sub-expertise-title" title="Areas Within '. get_the_title( $page_id ) .'" class="nav-link"><span itemprop="name">Specialties</span></a></li>';
     }
