@@ -14,6 +14,7 @@
     $expertise_title = get_the_title($id);
     $expertise_title_attr = $expertise_title;
     $expertise_title_attr = str_replace('"', '\'', $expertise_title_attr); // Replace double quotes with single quote
+    $expertise_title_attr = str_replace('&#8217;', '\'', $expertise_title_attr); // Replace right single quote with single quote
     $expertise_title_attr = htmlentities($expertise_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
     $expertise_title_attr = str_replace('&nbsp;', ' ', $expertise_title_attr); // Convert non-breaking space with normal space
     $expertise_title_attr = html_entity_decode($expertise_title_attr); // Convert HTML entities to their corresponding characters
@@ -35,6 +36,7 @@
         $parent_title = $parent_expertise->post_title;
         $parent_title_attr = $parent_title;
         $parent_title_attr = str_replace('"', '\'', $parent_title_attr); // Replace double quotes with single quote
+        $parent_title_attr = str_replace('&#8217;', '\'', $parent_title_attr); // Replace right single quote with single quote
         $parent_title_attr = htmlentities($parent_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
         $parent_title_attr = str_replace('&nbsp;', ' ', $parent_title_attr); // Convert non-breaking space with normal space
         $parent_title_attr = html_entity_decode($parent_title_attr); // Convert HTML entities to their corresponding characters

@@ -43,6 +43,7 @@ if ($parent_expertise) {
     $parent_title = $parent_expertise->post_title;
     $parent_title_attr = $parent_title;
     $parent_title_attr = str_replace('"', '\'', $parent_title_attr); // Replace double quotes with single quote
+    $parent_title_attr = str_replace('&#8217;', '\'', $parent_title_attr); // Replace right single quote with single quote
     $parent_title_attr = htmlentities($parent_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
     $parent_title_attr = str_replace('&nbsp;', ' ', $parent_title_attr); // Convert non-breaking space with normal space
     $parent_title_attr = html_entity_decode($parent_title_attr); // Convert HTML entities to their corresponding characters

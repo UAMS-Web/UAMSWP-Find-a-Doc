@@ -38,6 +38,7 @@
         $parent_title = $parent_location->post_title;
         $parent_title_attr = $parent_title;
         $parent_title_attr = str_replace('"', '\'', $parent_title_attr); // Replace double quotes with single quote
+        $parent_title_attr = str_replace('&#8217;', '\'', $parent_title_attr); // Replace right single quote with single quote
         $parent_title_attr = htmlentities($parent_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
         $parent_title_attr = str_replace('&nbsp;', ' ', $parent_title_attr); // Convert non-breaking space with normal space
         $parent_title_attr = html_entity_decode($parent_title_attr); // Convert HTML entities to their corresponding characters
@@ -203,6 +204,7 @@
             }
             $alert_label_attr = $alert_label;
             $alert_label_attr = str_replace('"', '\'', $alert_label_attr); // Replace double quotes with single quote
+            $alert_label_attr = str_replace('&#8217;', '\'', $alert_label_attr); // Replace right single quote with single quote
             $alert_label_attr = htmlentities($alert_label_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
             $alert_label_attr = str_replace('&nbsp;', ' ', $alert_label_attr); // Convert non-breaking space with normal space
             $alert_label_attr = html_entity_decode($alert_label_attr); // Convert HTML entities to their corresponding characters

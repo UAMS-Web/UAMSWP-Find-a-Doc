@@ -131,6 +131,7 @@ if( $locations && $location_valid ) {
                 $primary_appointment_title = get_the_title( $location );
                 $primary_appointment_title_attr = $primary_appointment_title;
                 $primary_appointment_title_attr = str_replace('"', '\'', $primary_appointment_title_attr); // Replace double quotes with single quote
+                $primary_appointment_title_attr = str_replace('&#8217;', '\'', $primary_appointment_title_attr); // Replace right single quote with single quote
                 $primary_appointment_title_attr = htmlentities($primary_appointment_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
                 $primary_appointment_title_attr = str_replace('&nbsp;', ' ', $primary_appointment_title_attr); // Convert non-breaking space with normal space
                 $primary_appointment_title_attr = html_entity_decode($primary_appointment_title_attr); // Convert HTML entities to their corresponding characters
@@ -138,6 +139,7 @@ if( $locations && $location_valid ) {
                 $primary_appointment_city = get_field('location_city', $location);
                 $primary_appointment_city_attr = $primary_appointment_city;
                 $primary_appointment_city_attr = str_replace('"', '\'', $primary_appointment_city_attr); // Replace double quotes with single quote
+                $primary_appointment_city_attr = str_replace('&#8217;', '\'', $primary_appointment_city_attr); // Replace right single quote with single quote
                 $primary_appointment_city_attr = htmlentities($primary_appointment_city_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
                 $primary_appointment_city_attr = str_replace('&nbsp;', ' ', $primary_appointment_city_attr); // Convert non-breaking space with normal space
                 $primary_appointment_city_attr = html_entity_decode($primary_appointment_city_attr); // Convert HTML entities to their corresponding characters

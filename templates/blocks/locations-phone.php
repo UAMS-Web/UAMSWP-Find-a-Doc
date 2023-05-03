@@ -27,6 +27,7 @@ if ( $phone_output == 'associated_locations' ) {
     $location_title = get_the_title($phone_output_id);
     $location_title_attr = $location_title;
     $location_title_attr = str_replace('"', '\'', $location_title_attr); // Replace double quotes with single quote
+    $location_title_attr = str_replace('&#8217;', '\'', $location_title_attr); // Replace right single quote with single quote
     $location_title_attr = htmlentities($location_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
     $location_title_attr = str_replace('&nbsp;', ' ', $location_title_attr); // Convert non-breaking space with normal space
     $location_title_attr = html_entity_decode($location_title_attr); // Convert HTML entities to their corresponding characters
@@ -179,6 +180,7 @@ if ( $phone_output == 'location_profile' ) { ?>
                 $title = get_sub_field('location_appointments_text');
                 $title_attr = $title;
                 $title_attr = str_replace('"', '\'', $title_attr); // Replace double quotes with single quote
+                $title_attr = str_replace('&#8217;', '\'', $title_attr); // Replace right single quote with single quote
                 $title_attr = htmlentities($title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
                 $title_attr = str_replace('&nbsp;', ' ', $title_attr); // Convert non-breaking space with normal space
                 $title_attr = html_entity_decode($title_attr); // Convert HTML entities to their corresponding characters
