@@ -13,6 +13,7 @@ if (empty($excerpt)){
 $page_title = get_the_title( );
 $page_title_attr = $page_title;
 $page_title_attr = str_replace('"', '\'', $page_title_attr); // Replace double quotes with single quote
+$page_title_attr = str_replace('&#8217;', '\'', $page_title_attr); // Replace right single quote with single quote
 $page_title_attr = htmlentities($page_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
 $page_title_attr = str_replace('&nbsp;', ' ', $page_title_attr); // Convert non-breaking space with normal space
 $page_title_attr = html_entity_decode($page_title_attr); // Convert HTML entities to their corresponding characters
