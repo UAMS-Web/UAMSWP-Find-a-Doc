@@ -25,8 +25,12 @@ $location_phone_data_categorytitle = 'Telephone Number';
 $location_phone_data_itemtitle = '';
 if ( $phone_output == 'associated_locations' ) {
     $location_title = get_the_title($phone_output_id);
-    $location_title_attr = str_replace('"', '\'', $location_title);
-    $location_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($location_title_attr, null, 'utf-8')));
+    $location_title_attr = $location_title;
+    $location_title_attr = str_replace('"', '\'', $location_title_attr); // Replace double quotes with single quote
+    $location_title_attr = str_replace('&#8217;', '\'', $location_title_attr); // Replace right single quote with single quote
+    $location_title_attr = htmlentities($location_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+    $location_title_attr = str_replace('&nbsp;', ' ', $location_title_attr); // Convert non-breaking space with normal space
+    $location_title_attr = html_entity_decode($location_title_attr); // Convert HTML entities to their corresponding characters
     $location_phone_data_itemtitle = $location_title_attr;
 }
 
@@ -174,8 +178,12 @@ if ( $phone_output == 'location_profile' ) { ?>
             $phone_numbers = $location_phone_numbers;
             while( have_rows('field_location_phone_numbers') ): the_row(); 
                 $title = get_sub_field('location_appointments_text');
-                $title_attr = str_replace('"', '\'', $title);
-                $title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($title_attr, null, 'utf-8')));
+                $title_attr = $title;
+                $title_attr = str_replace('"', '\'', $title_attr); // Replace double quotes with single quote
+                $title_attr = str_replace('&#8217;', '\'', $title_attr); // Replace right single quote with single quote
+                $title_attr = htmlentities($title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+                $title_attr = str_replace('&nbsp;', ' ', $title_attr); // Convert non-breaking space with normal space
+                $title_attr = html_entity_decode($title_attr); // Convert HTML entities to their corresponding characters
                 $phone = get_sub_field('location_appointments_phone');
                 $phone_format_dash = format_phone_dash( $phone );
                 $text = get_sub_field('location_appointments_additional_text');
