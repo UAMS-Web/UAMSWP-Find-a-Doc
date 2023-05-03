@@ -8,12 +8,18 @@
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title();
-$page_title_attr = str_replace('"', '\'', $page_title);
-$page_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($page_title_attr, null, 'utf-8')));
+$page_title_attr = $page_title;
+$page_title_attr = str_replace('"', '\'', $page_title_attr); // Replace double quotes with single quote
+$page_title_attr = htmlentities($page_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+$page_title_attr = str_replace('&nbsp;', ' ', $page_title_attr); // Convert non-breaking space with normal space
+$page_title_attr = html_entity_decode($page_title_attr); // Convert HTML entities to their corresponding characters
 $resource_archive_title_system = get_field('clinical_resource_archive_headline', 'option');
 $resource_archive_title = $resource_archive_title_system ? $resource_archive_title_system : 'Clinical Resource';
-$resource_archive_title_attr = str_replace('"', '\'', $resource_archive_title);
-$resource_archive_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($resource_archive_title_attr, null, 'utf-8')));
+$resource_archive_title_attr = $resource_archive_title;
+$resource_archive_title_attr = str_replace('"', '\'', $resource_archive_title_attr); // Replace double quotes with single quote
+$resource_archive_title_attr = htmlentities($resource_archive_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+$resource_archive_title_attr = str_replace('&nbsp;', ' ', $resource_archive_title_attr); // Convert non-breaking space with normal space
+$resource_archive_title_attr = html_entity_decode($resource_archive_title_attr); // Convert HTML entities to their corresponding characters
 
 // Override theme's method of defining the page title
 function uamswp_fad_title($html) { 
