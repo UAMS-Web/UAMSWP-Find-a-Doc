@@ -347,6 +347,1839 @@ function gmb_provider_csv_export() {
     }
     
     ob_start();
+
+    // Google My Business Attributes
+
+        // Store code
+        $gmb__store_code = array();
+        $gmb__store_code[name] = "Store code";
+        
+        // Business name
+        $gmb__business_name = array();
+        $gmb__business_name[name] = "Business name";
+        
+        // Address line 1
+        $gmb__address_line_1 = array();
+        $gmb__address_line_1[name] = "Address line 1";
+        
+        // Address line 2
+        $gmb__address_line_2 = array();
+        $gmb__address_line_2[name] = "Address line 2";
+        
+        // Address line 3
+        $gmb__address_line_3 = array();
+        $gmb__address_line_3[name] = "Address line 3";
+        
+        // Address line 4
+        $gmb__address_line_4 = array();
+        $gmb__address_line_4[name] = "Address line 4";
+        
+        // Address line 5
+        $gmb__address_line_5 = array();
+        $gmb__address_line_5[name] = "Address line 5";
+        
+        // Sub-locality
+        $gmb__sub_locality = array();
+        $gmb__sub_locality[name] = "Sub-locality";
+        
+        // Locality
+        $gmb__locality = array();
+        $gmb__locality[name] = "Locality";
+        
+        // Administrative area
+        $gmb__administrative_area = array();
+        $gmb__administrative_area[name] = "Administrative area";
+        
+        // Country / Region
+        $gmb__country_region = array();
+        $gmb__country_region[name] = "Country / Region";
+        
+        // Postal code
+        $gmb__postal_code = array();
+        $gmb__postal_code[name] = "Postal code";
+        
+        // Latitude
+        $gmb__latitude = array();
+        $gmb__latitude[name] = "Latitude";
+        
+        // Longitude
+        $gmb__longitude = array();
+        $gmb__longitude[name] = "Longitude";
+        
+        // Primary phone
+        $gmb__primary_phone = array();
+        $gmb__primary_phone[name] = "Primary phone";
+        
+        // Additional phones
+        $gmb__additional_phones = array();
+        $gmb__additional_phones[name] = "Additional phones";
+        
+        // Website
+        $gmb__website = array();
+        $gmb__website[name] = "Website";
+        
+        // Primary category
+        $gmb__primary_category = array();
+        $gmb__primary_category[name] = "Primary category";
+        
+        // Additional categories
+        $gmb__additional_categories = array();
+        $gmb__additional_categories[name] = "Additional categories";
+        
+        // Sunday hours
+        $gmb__sunday_hours = array();
+        $gmb__sunday_hours[name] = "Sunday hours";
+        
+        // Monday hours
+        $gmb__monday_hours = array();
+        $gmb__monday_hours[name] = "Monday hours";
+        
+        // Tuesday hours
+        $gmb__tuesday_hours = array();
+        $gmb__tuesday_hours[name] = "Tuesday hours";
+        
+        // Wednesday hours
+        $gmb__wednesday_hours = array();
+        $gmb__wednesday_hours[name] = "Wednesday hours";
+        
+        // Thursday hours
+        $gmb__thursday_hours = array();
+        $gmb__thursday_hours[name] = "Thursday hours";
+        
+        // Friday hours
+        $gmb__friday_hours = array();
+        $gmb__friday_hours[name] = "Friday hours";
+        
+        // Saturday hours
+        $gmb__saturday_hours = array();
+        $gmb__saturday_hours[name] = "Saturday hours";
+        
+        // Special hours
+        $gmb__special_hours = array();
+        $gmb__special_hours[name] = "Special hours";
+        
+        // From the business
+        $gmb__from_the_business = array();
+        $gmb__from_the_business[name] = "From the business";
+        
+        // Opening date
+        $gmb__opening_date = array();
+        $gmb__opening_date[name] = "Opening date";
+        
+        // Logo photo
+        $gmb__logo_photo = array();
+        $gmb__logo_photo[name] = "Logo photo";
+        
+        // Cover photo
+        $gmb__cover_photo = array();
+        $gmb__cover_photo[name] = "Cover photo";
+        
+        // Other photos
+        $gmb__other_photos = array();
+        $gmb__other_photos[name] = "Other photos";
+        
+        // Labels
+        $gmb__labels = array();
+        $gmb__labels[name] = "Labels";
+        
+        // AdWords location extensions phone
+        $gmb__adwords_location_extensions_phone = array();
+        $gmb__adwords_location_extensions_phone[name] = "AdWords location extensions phone";
+
+        // Accessibility: Assisted listening devices (has_assisted_listening_devices)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_assisted_listening_devices = array();
+        $gmb__has_assisted_listening_devices[name] = "Accessibility: Assisted listening devices (has_assisted_listening_devices)";
+        
+        // Accessibility: Assistive hearing loop (has_hearing_loop)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_hearing_loop = array();
+        $gmb__has_hearing_loop[name] = "Accessibility: Assistive hearing loop (has_hearing_loop)";
+        
+        // Accessibility: Passenger loading area (has_passenger_loading_area)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_passenger_loading_area = array();
+        $gmb__has_passenger_loading_area[name] = "Accessibility: Passenger loading area (has_passenger_loading_area)";
+        
+        // Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_wheelchair_accessible_elevator = array();
+        $gmb__has_wheelchair_accessible_elevator[name] = "Accessibility: Wheelchair accessible elevator (has_wheelchair_accessible_elevator)";
+        
+        // Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_wheelchair_accessible_entrance = array();
+        $gmb__has_wheelchair_accessible_entrance[name] = "Accessibility: Wheelchair accessible entrance (has_wheelchair_accessible_entrance)";
+        
+        // Accessibility: Wheelchair accessible parking lot (has_wheelchair_accessible_parking)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_wheelchair_accessible_parking = array();
+        $gmb__has_wheelchair_accessible_parking[name] = "Accessibility: Wheelchair accessible parking lot (has_wheelchair_accessible_parking)";
+        
+        // Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_wheelchair_accessible_restroom = array();
+        $gmb__has_wheelchair_accessible_restroom[name] = "Accessibility: Wheelchair accessible restroom (has_wheelchair_accessible_restroom)";
+        
+        // Accessibility: Wheelchair accessible seating (has_wheelchair_accessible_seating)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_wheelchair_accessible_seating = array();
+        $gmb__has_wheelchair_accessible_seating[name] = "Accessibility: Wheelchair accessible seating (has_wheelchair_accessible_seating)";
+        
+        // Accessibility: Wheelchair rental (wheelchair_rental_offerings): Motorized (motorized_wheelchairs)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__wheelchair_rental_offerings__motorized_wheelchairs = array();
+        $gmb__wheelchair_rental_offerings__motorized_wheelchairs[name] = "Accessibility: Wheelchair rental (wheelchair_rental_offerings): Motorized (motorized_wheelchairs)";
+        
+        // Accessibility: Wheelchair rental (wheelchair_rental_offerings): Non-motorized (non_motorized_wheelchairs)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__wheelchair_rental_offerings__non_motorized_wheelchairs = array();
+        $gmb__wheelchair_rental_offerings__non_motorized_wheelchairs[name] = "Accessibility: Wheelchair rental (wheelchair_rental_offerings): Non-motorized (non_motorized_wheelchairs)";
+        
+        // Activities: Accepting food donations (accepts_non_monetary_donations)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__accepts_non_monetary_donations = array();
+        $gmb__accepts_non_monetary_donations[name] = "Activities: Accepting food donations (accepts_non_monetary_donations)";
+        
+        // Activities: Accepting monetary donations (accepts_monetary_donations)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__accepts_monetary_donations = array();
+        $gmb__accepts_monetary_donations[name] = "Activities: Accepting monetary donations (accepts_monetary_donations)";
+        
+        // Activities: Accepting new volunteers (accepts_new_volunteers)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__accepts_new_volunteers = array();
+        $gmb__accepts_new_volunteers[name] = "Activities: Accepting new volunteers (accepts_new_volunteers)";
+        
+        // Activities: Bicycle rental (has_bicycles_for_rent)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_bicycles_for_rent = array();
+        $gmb__has_bicycles_for_rent[name] = "Activities: Bicycle rental (has_bicycles_for_rent)";
+        
+        // Activities: Hiking (has_hiking)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_hiking = array();
+        $gmb__has_hiking[name] = "Activities: Hiking (has_hiking)";
+        
+        // Amenities: Air conditioning (has_air_conditioning)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_air_conditioning = array();
+        $gmb__has_air_conditioning[name] = "Amenities: Air conditioning (has_air_conditioning)";
+        
+        // Amenities: Airport shuttle (has_airport_shuttle)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_airport_shuttle = array();
+        $gmb__has_airport_shuttle[name] = "Amenities: Airport shuttle (has_airport_shuttle)";
+        
+        // Amenities: All-inclusive (has_all_inclusive)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_all_inclusive = array();
+        $gmb__has_all_inclusive[name] = "Amenities: All-inclusive (has_all_inclusive)";
+        
+        // Amenities: Baggage storage (has_baggage_storage)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_baggage_storage = array();
+        $gmb__has_baggage_storage[name] = "Amenities: Baggage storage (has_baggage_storage)";
+        
+        // Amenities: Bar onsite (has_bar_onsite)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_bar_onsite = array();
+        $gmb__has_bar_onsite[name] = "Amenities: Bar onsite (has_bar_onsite)";
+        
+        // Amenities: Beach access (has_beach_access)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_beach_access = array();
+        $gmb__has_beach_access[name] = "Amenities: Beach access (has_beach_access)";
+        
+        // Amenities: Business center (has_business_center)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_business_center = array();
+        $gmb__has_business_center[name] = "Amenities: Business center (has_business_center)";
+        
+        // Amenities: Cellular service (has_cellular_service)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_cellular_service = array();
+        $gmb__has_cellular_service[name] = "Amenities: Cellular service (has_cellular_service)";
+        
+        // Amenities: Child care (has_child_care)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_child_care = array();
+        $gmb__has_child_care[name] = "Amenities: Child care (has_child_care)";
+        
+        // Amenities: Concierge (has_concierge)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_concierge = array();
+        $gmb__has_concierge[name] = "Amenities: Concierge (has_concierge)";
+        
+        // Amenities: Convenience store (has_onsite_convenience_store)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_onsite_convenience_store = array();
+        $gmb__has_onsite_convenience_store[name] = "Amenities: Convenience store (has_onsite_convenience_store)";
+        
+        // Amenities: Currency exchange (has_currency_exchange)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_currency_exchange = array();
+        $gmb__has_currency_exchange[name] = "Amenities: Currency exchange (has_currency_exchange)";
+        
+        // Amenities: Dogs allowed (welcomes_dogs)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__welcomes_dogs = array();
+        $gmb__welcomes_dogs[name] = "Amenities: Dogs allowed (welcomes_dogs)";
+        
+        // Amenities: Fitness center (has_fitness_center)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_fitness_center = array();
+        $gmb__has_fitness_center[name] = "Amenities: Fitness center (has_fitness_center)";
+        
+        // Amenities: Free breakfast (has_free_breakfast)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_free_breakfast = array();
+        $gmb__has_free_breakfast[name] = "Amenities: Free breakfast (has_free_breakfast)";
+        
+        // Amenities: Gender-neutral restroom (has_restroom_unisex)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_restroom_unisex = array();
+        $gmb__has_restroom_unisex[name] = "Amenities: Gender-neutral restroom (has_restroom_unisex)";
+        
+        // Amenities: Golf course (has_golf_course)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_golf_course = array();
+        $gmb__has_golf_course[name] = "Amenities: Golf course (has_golf_course)";
+        
+        // Amenities: Good for kids (welcomes_children)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__welcomes_children = array();
+        $gmb__welcomes_children[name] = "Amenities: Good for kids (welcomes_children)";
+        
+        // Amenities: High chairs (has_high_chairs)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_high_chairs = array();
+        $gmb__has_high_chairs[name] = "Amenities: High chairs (has_high_chairs)";
+        
+        // Amenities: Hot tub (has_hot_tub)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_hot_tub = array();
+        $gmb__has_hot_tub[name] = "Amenities: Hot tub (has_hot_tub)";
+        
+        // Amenities: Laundry service (has_laundry_service)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_laundry_service = array();
+        $gmb__has_laundry_service[name] = "Amenities: Laundry service (has_laundry_service)";
+        
+        // Amenities: Mechanic (has_mechanic)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_mechanic = array();
+        $gmb__has_mechanic[name] = "Amenities: Mechanic (has_mechanic)";
+        
+        // Amenities: Parking (parking_offerings): Free (free_parking)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__parking_offerings__free_parking = array();
+        $gmb__parking_offerings__free_parking[name] = "Amenities: Parking (parking_offerings): Free (free_parking)";
+        
+        // Amenities: Parking (parking_offerings): Paid (paid_parking)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__parking_offerings__paid_parking = array();
+        $gmb__parking_offerings__paid_parking[name] = "Amenities: Parking (parking_offerings): Paid (paid_parking)";
+        
+        // Amenities: Pets welcome (welcomes_pets)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__welcomes_pets = array();
+        $gmb__welcomes_pets[name] = "Amenities: Pets welcome (welcomes_pets)";
+        
+        // Amenities: Picnic tables (has_picnic_tables)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_picnic_tables = array();
+        $gmb__has_picnic_tables[name] = "Amenities: Picnic tables (has_picnic_tables)";
+        
+        // Amenities: Public restroom (has_restroom_public)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_restroom_public = array();
+        $gmb__has_restroom_public[name] = "Amenities: Public restroom (has_restroom_public)";
+        
+        // Amenities: Restaurant (has_restaurant)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_restaurant = array();
+        $gmb__has_restaurant[name] = "Amenities: Restaurant (has_restaurant)";
+        
+        // Amenities: Restroom (has_restroom)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_restroom = array();
+        $gmb__has_restroom[name] = "Amenities: Restroom (has_restroom)";
+        
+        // Amenities: Room service (has_room_service)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_room_service = array();
+        $gmb__has_room_service[name] = "Amenities: Room service (has_room_service)";
+        
+        // Amenities: Sauna (has_sauna)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_sauna = array();
+        $gmb__has_sauna[name] = "Amenities: Sauna (has_sauna)";
+        
+        // Amenities: Slides (has_playground_slides)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_playground_slides = array();
+        $gmb__has_playground_slides[name] = "Amenities: Slides (has_playground_slides)";
+        
+        // Amenities: Smoke-free place (is_smoke_free_property)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb_is_smoke_free_property = array();
+        $gmb_is_smoke_free_property[name] = "Amenities: Smoke-free place (is_smoke_free_property)";
+        $gmb_is_smoke_free_property[column] = $gmb_i;
+        $gmb_i++;
+        
+        // Amenities: Spa (has_spa)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_spa = array();
+        $gmb__has_spa[name] = "Amenities: Spa (has_spa)";
+        
+        // Amenities: Stadium seating (has_stadium_seating)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_stadium_seating = array();
+        $gmb__has_stadium_seating[name] = "Amenities: Stadium seating (has_stadium_seating)";
+        
+        // Amenities: Swimming pool (has_swimming_pool)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_swimming_pool = array();
+        $gmb__has_swimming_pool[name] = "Amenities: Swimming pool (has_swimming_pool)";
+        
+        // Amenities: Swimming pool (swimming_pool_offerings): Indoor (indoor_pool)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__swimming_pool_offerings__indoor_pool = array();
+        $gmb__swimming_pool_offerings__indoor_pool[name] = "Amenities: Swimming pool (swimming_pool_offerings): Indoor (indoor_pool)";
+        
+        // Amenities: Swimming pool (swimming_pool_offerings): Outdoor (outdoor_pool)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__swimming_pool_offerings__outdoor_pool = array();
+        $gmb__swimming_pool_offerings__outdoor_pool[name] = "Amenities: Swimming pool (swimming_pool_offerings): Outdoor (outdoor_pool)";
+        
+        // Amenities: Swings (has_playground_swings)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_playground_swings = array();
+        $gmb__has_playground_swings[name] = "Amenities: Swings (has_playground_swings)";
+        
+        // Amenities: Volleyball court (has_volleyball_court)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_volleyball_court = array();
+        $gmb__has_volleyball_court[name] = "Amenities: Volleyball court (has_volleyball_court)";
+        
+        // Crowd: Family-friendly (welcomes_families)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__welcomes_families = array();
+        $gmb__welcomes_families[name] = "Crowd: Family-friendly (welcomes_families)";
+        
+        // Crowd: LGBTQ+ friendly (welcomes_lgbtq)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__welcomes_lgbtq = array();
+        $gmb__welcomes_lgbtq[name] = "Crowd: LGBTQ+ friendly (welcomes_lgbtq)";
+        
+        // Crowd: Transgender safespace (is_transgender_safespace)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb_is_transgender_safespace = array();
+        $gmb_is_transgender_safespace[name] = "Crowd: Transgender safespace (is_transgender_safespace)";
+        $gmb_is_transgender_safespace[column] = $gmb_i;
+        $gmb_i++;
+        
+        // Deities Represented: Brahma (has_deity_brahma_represented)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_deity_brahma_represented = array();
+        $gmb__has_deity_brahma_represented[name] = "Deities Represented: Brahma (has_deity_brahma_represented)";
+        
+        // Deities Represented: Durga (has_deity_durga_represented)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_deity_durga_represented = array();
+        $gmb__has_deity_durga_represented[name] = "Deities Represented: Durga (has_deity_durga_represented)";
+        
+        // Deities Represented: Hanuman (has_deity_hanuman_represented)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_deity_hanuman_represented = array();
+        $gmb__has_deity_hanuman_represented[name] = "Deities Represented: Hanuman (has_deity_hanuman_represented)";
+        
+        // Deities Represented: Krishna (has_deity_krishna_represented)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_deity_krishna_represented = array();
+        $gmb__has_deity_krishna_represented[name] = "Deities Represented: Krishna (has_deity_krishna_represented)";
+        
+        // Deities Represented: Lakshmi (has_deity_lakshmi_represented)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_deity_lakshmi_represented = array();
+        $gmb__has_deity_lakshmi_represented[name] = "Deities Represented: Lakshmi (has_deity_lakshmi_represented)";
+        
+        // Deities Represented: Mahavira (has_deity_mahavira_represented)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_deity_mahavira_represented = array();
+        $gmb__has_deity_mahavira_represented[name] = "Deities Represented: Mahavira (has_deity_mahavira_represented)";
+        
+        // Deities Represented: Neminatha (has_deity_neminatha_represented)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_deity_neminatha_represented = array();
+        $gmb__has_deity_neminatha_represented[name] = "Deities Represented: Neminatha (has_deity_neminatha_represented)";
+        
+        // Deities Represented: Parshvanatha (has_deity_parshvanatha_represented)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_deity_parshvanatha_represented = array();
+        $gmb__has_deity_parshvanatha_represented[name] = "Deities Represented: Parshvanatha (has_deity_parshvanatha_represented)";
+        
+        // Deities Represented: Rama (has_deity_rama_represented)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_deity_rama_represented = array();
+        $gmb__has_deity_rama_represented[name] = "Deities Represented: Rama (has_deity_rama_represented)";
+        
+        // Deities Represented: Rishabhanatha (has_deity_rishabhanatha_represented)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_deity_rishabhanatha_represented = array();
+        $gmb__has_deity_rishabhanatha_represented[name] = "Deities Represented: Rishabhanatha (has_deity_rishabhanatha_represented)";
+        
+        // Deities Represented: Sai Baba (has_deity_sai_baba_represented)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_deity_sai_baba_represented = array();
+        $gmb__has_deity_sai_baba_represented[name] = "Deities Represented: Sai Baba (has_deity_sai_baba_represented)";
+        
+        // Deities Represented: Shiva (has_deity_shiva_represented)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_deity_shiva_represented = array();
+        $gmb__has_deity_shiva_represented[name] = "Deities Represented: Shiva (has_deity_shiva_represented)";
+        
+        // Deities Represented: Vishnu (has_deity_vishnu_represented)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_deity_vishnu_represented = array();
+        $gmb__has_deity_vishnu_represented[name] = "Deities Represented: Vishnu (has_deity_vishnu_represented)";
+        
+        // Dining options: Breakfast (serves_breakfast)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_breakfast = array();
+        $gmb__serves_breakfast[name] = "Dining options: Breakfast (serves_breakfast)";
+        
+        // Dining options: Brunch (serves_brunch)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_brunch = array();
+        $gmb__serves_brunch[name] = "Dining options: Brunch (serves_brunch)";
+        
+        // Dining options: Catering (has_catering)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_catering = array();
+        $gmb__has_catering[name] = "Dining options: Catering (has_catering)";
+        
+        // Dining options: Counter service (has_counter_service)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_counter_service = array();
+        $gmb__has_counter_service[name] = "Dining options: Counter service (has_counter_service)";
+        
+        // Dining options: Dessert (serves_dessert)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_dessert = array();
+        $gmb__serves_dessert[name] = "Dining options: Dessert (serves_dessert)";
+        
+        // Dining options: Dinner (serves_dinner)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_dinner = array();
+        $gmb__serves_dinner[name] = "Dining options: Dinner (serves_dinner)";
+        
+        // Dining options: Lunch (serves_lunch)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_lunch = array();
+        $gmb__serves_lunch[name] = "Dining options: Lunch (serves_lunch)";
+        
+        // Dining options: Outside food allowed (allows_outside_food)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__allows_outside_food = array();
+        $gmb__allows_outside_food[name] = "Dining options: Outside food allowed (allows_outside_food)";
+        
+        // Dining options: Pay ahead (has_order_and_pay_ahead)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_order_and_pay_ahead = array();
+        $gmb__has_order_and_pay_ahead[name] = "Dining options: Pay ahead (has_order_and_pay_ahead)";
+        
+        // Dining options: Seating (has_seating)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_seating = array();
+        $gmb__has_seating[name] = "Dining options: Seating (has_seating)";
+        
+        // Emergency help: Accepts donations (accepts_donations_during_crisis)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__accepts_donations_during_crisis = array();
+        $gmb__accepts_donations_during_crisis[name] = "Emergency help: Accepts donations (accepts_donations_during_crisis)";
+        
+        // Emergency help: Employs refugees (offers_employment_during_crisis)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_employment_during_crisis = array();
+        $gmb__offers_employment_during_crisis[name] = "Emergency help: Employs refugees (offers_employment_during_crisis)";
+        
+        // Emergency help: Needs volunteers (needs_volunteers_during_crisis)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__needs_volunteers_during_crisis = array();
+        $gmb__needs_volunteers_during_crisis[name] = "Emergency help: Needs volunteers (needs_volunteers_during_crisis)";
+        
+        // Emergency help: Offers accommodation for refugees (offers_refuge_during_crisis)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_refuge_during_crisis = array();
+        $gmb__offers_refuge_during_crisis[name] = "Emergency help: Offers accommodation for refugees (offers_refuge_during_crisis)";
+        
+        // Emergency help: Offers free legal help (offers_free_legal_help_during_crisis)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_free_legal_help_during_crisis = array();
+        $gmb__offers_free_legal_help_during_crisis[name] = "Emergency help: Offers free legal help (offers_free_legal_help_during_crisis)";
+        
+        // Emergency help: Offers free products or services (offers_free_products_services_during_crisis)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_free_products_services_during_crisis = array();
+        $gmb__offers_free_products_services_during_crisis[name] = "Emergency help: Offers free products or services (offers_free_products_services_during_crisis)";
+        
+        // Emergency help: Offers transportation of goods or people (offers_transportation_during_crisis)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_transportation_during_crisis = array();
+        $gmb__offers_transportation_during_crisis[name] = "Emergency help: Offers transportation of goods or people (offers_transportation_during_crisis)";
+        
+        // Exams: CAT (offers_cat_exam_prep)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_cat_exam_prep = array();
+        $gmb__offers_cat_exam_prep[name] = "Exams: CAT (offers_cat_exam_prep)";
+        
+        // Exams: CBSE Board (offers_cbse_board_exam_prep)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_cbse_board_exam_prep = array();
+        $gmb__offers_cbse_board_exam_prep[name] = "Exams: CBSE Board (offers_cbse_board_exam_prep)";
+        
+        // Exams: CTET (offers_ctet_exam_prep)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_ctet_exam_prep = array();
+        $gmb__offers_ctet_exam_prep[name] = "Exams: CTET (offers_ctet_exam_prep)";
+        
+        // Exams: Civil Services (offers_civil_services_exam_prep)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_civil_services_exam_prep = array();
+        $gmb__offers_civil_services_exam_prep[name] = "Exams: Civil Services (offers_civil_services_exam_prep)";
+        
+        // Exams: GATE (offers_gate_exam_prep)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_gate_exam_prep = array();
+        $gmb__offers_gate_exam_prep[name] = "Exams: GATE (offers_gate_exam_prep)";
+        
+        // Exams: IBPS Clerk (offers_ibps_clerk_exam_prep)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_ibps_clerk_exam_prep = array();
+        $gmb__offers_ibps_clerk_exam_prep[name] = "Exams: IBPS Clerk (offers_ibps_clerk_exam_prep)";
+        
+        // Exams: IBPS RBB (offers_ibps_rrb_exam_prep)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_ibps_rrb_exam_prep = array();
+        $gmb__offers_ibps_rrb_exam_prep[name] = "Exams: IBPS RBB (offers_ibps_rrb_exam_prep)";
+        
+        // Exams: ICSE Board (offers_icse_board_exam_prep)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_icse_board_exam_prep = array();
+        $gmb__offers_icse_board_exam_prep[name] = "Exams: ICSE Board (offers_icse_board_exam_prep)";
+        
+        // Exams: JEE (offers_jee_exam_prep)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_jee_exam_prep = array();
+        $gmb__offers_jee_exam_prep[name] = "Exams: JEE (offers_jee_exam_prep)";
+        
+        // Exams: JNVST (offers_jnvst_exam_prep)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_jnvst_exam_prep = array();
+        $gmb__offers_jnvst_exam_prep[name] = "Exams: JNVST (offers_jnvst_exam_prep)";
+        
+        // Exams: LIC AAO (offers_lic_aao_exam_prep)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_lic_aao_exam_prep = array();
+        $gmb__offers_lic_aao_exam_prep[name] = "Exams: LIC AAO (offers_lic_aao_exam_prep)";
+        
+        // Exams: NEET (offers_neet_exam_prep)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_neet_exam_prep = array();
+        $gmb__offers_neet_exam_prep[name] = "Exams: NEET (offers_neet_exam_prep)";
+        
+        // Exams: SBI Clerk (offers_sbi_clerk_exam_prep)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_sbi_clerk_exam_prep = array();
+        $gmb__offers_sbi_clerk_exam_prep[name] = "Exams: SBI Clerk (offers_sbi_clerk_exam_prep)";
+        
+        // Exams: SSC CGL (offers_ssc_cgl_exam_prep)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_ssc_cgl_exam_prep = array();
+        $gmb__offers_ssc_cgl_exam_prep[name] = "Exams: SSC CGL (offers_ssc_cgl_exam_prep)";
+        
+        // Exams: SSC Government (offers_ssc_government_exam_prep)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_ssc_government_exam_prep = array();
+        $gmb__offers_ssc_government_exam_prep[name] = "Exams: SSC Government (offers_ssc_government_exam_prep)";
+        
+        // Exams: UGC Net (offers_ugc_net_exam_prep)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_ugc_net_exam_prep = array();
+        $gmb__offers_ugc_net_exam_prep[name] = "Exams: UGC Net (offers_ugc_net_exam_prep)";
+        
+        // Exams: UPSC Government (offers_upsc_government_exam_prep)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_upsc_government_exam_prep = array();
+        $gmb__offers_upsc_government_exam_prep[name] = "Exams: UPSC Government (offers_upsc_government_exam_prep)";
+        
+        // From the business: Identifies as Asian-owned (is_owned_by_asian)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb_is_owned_by_asian = array();
+        $gmb_is_owned_by_asian[name] = "From the business: Identifies as Asian-owned (is_owned_by_asian)";
+        $gmb_is_owned_by_asian[column] = $gmb_i;
+        $gmb_i++;
+        
+        // From the business: Identifies as Black-owned (is_black_owned)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb_is_black_owned = array();
+        $gmb_is_black_owned[name] = "From the business: Identifies as Black-owned (is_black_owned)";
+        $gmb_is_black_owned[column] = $gmb_i;
+        $gmb_i++;
+        
+        // From the business: Identifies as LGBTQ+ owned (is_owned_by_lgbtq)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb_is_owned_by_lgbtq = array();
+        $gmb_is_owned_by_lgbtq[name] = "From the business: Identifies as LGBTQ+ owned (is_owned_by_lgbtq)";
+        $gmb_is_owned_by_lgbtq[column] = $gmb_i;
+        $gmb_i++;
+        
+        // From the business: Identifies as Latino-owned (is_owned_by_latinx)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb_is_owned_by_latinx = array();
+        $gmb_is_owned_by_latinx[name] = "From the business: Identifies as Latino-owned (is_owned_by_latinx)";
+        $gmb_is_owned_by_latinx[column] = $gmb_i;
+        $gmb_i++;
+        
+        // From the business: Identifies as veteran-owned (is_owned_by_veterans)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb_is_owned_by_veterans = array();
+        $gmb_is_owned_by_veterans[name] = "From the business: Identifies as veteran-owned (is_owned_by_veterans)";
+        $gmb_is_owned_by_veterans[column] = $gmb_i;
+        $gmb_i++;
+        
+        // From the business: Identifies as women-owned (is_owned_by_women)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb_is_owned_by_women = array();
+        $gmb_is_owned_by_women[name] = "From the business: Identifies as women-owned (is_owned_by_women)";
+        $gmb_is_owned_by_women[column] = $gmb_i;
+        $gmb_i++;
+        
+        // Getting here: 24-hour transit available (has_transit_24_hours)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_transit_24_hours = array();
+        $gmb__has_transit_24_hours[name] = "Getting here: 24-hour transit available (has_transit_24_hours)";
+        
+        // Highlights: 3D movies (has_movies_3D)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_movies_3D = array();
+        $gmb__has_movies_3D[name] = "Highlights: 3D movies (has_movies_3D)";
+        
+        // Highlights: Active military discounts (has_discounts_for_active_military)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_discounts_for_active_military = array();
+        $gmb__has_discounts_for_active_military[name] = "Highlights: Active military discounts (has_discounts_for_active_military)";
+        
+        // Highlights: All you can drink (has_all_you_can_drink)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_all_you_can_drink = array();
+        $gmb__has_all_you_can_drink[name] = "Highlights: All you can drink (has_all_you_can_drink)";
+        
+        // Highlights: Bar games (has_bar_games)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_bar_games = array();
+        $gmb__has_bar_games[name] = "Highlights: Bar games (has_bar_games)";
+        
+        // Highlights: COVID-19 testing center (is_covid_19_bool_1)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb_is_covid_19_bool_1 = array();
+        $gmb_is_covid_19_bool_1[name] = "Highlights: COVID-19 testing center (is_covid_19_bool_1)";
+        $gmb_is_covid_19_bool_1[column] = $gmb_i;
+        $gmb_i++;
+        
+        // Highlights: Cabaret (has_cabaret)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_cabaret = array();
+        $gmb__has_cabaret[name] = "Highlights: Cabaret (has_cabaret)";
+        
+        // Highlights: Fireplace (has_fireplace)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_fireplace = array();
+        $gmb__has_fireplace[name] = "Highlights: Fireplace (has_fireplace)";
+        
+        // Highlights: Karaoke (has_karaoke_nights)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_karaoke_nights = array();
+        $gmb__has_karaoke_nights[name] = "Highlights: Karaoke (has_karaoke_nights)";
+        
+        // Highlights: Live music (has_live_music)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_live_music = array();
+        $gmb__has_live_music[name] = "Highlights: Live music (has_live_music)";
+        
+        // Highlights: Live performances (has_live_performances)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_live_performances = array();
+        $gmb__has_live_performances[name] = "Highlights: Live performances (has_live_performances)";
+        
+        // Highlights: Play area (has_area_play)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_area_play = array();
+        $gmb__has_area_play[name] = "Highlights: Play area (has_area_play)";
+        
+        // Highlights: Rooftop seating (has_seating_rooftop)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_seating_rooftop = array();
+        $gmb__has_seating_rooftop[name] = "Highlights: Rooftop seating (has_seating_rooftop)";
+        
+        // Highlights: Serves local specialty (local_specialty)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__local_specialty = array();
+        $gmb__local_specialty[name] = "Highlights: Serves local specialty (local_specialty)";
+        
+        // Highlights: Sports (suitable_for_watching_sports)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__suitable_for_watching_sports = array();
+        $gmb__suitable_for_watching_sports[name] = "Highlights: Sports (suitable_for_watching_sports)";
+        
+        // Highlights: Trivia night (has_trivia_night)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_trivia_night = array();
+        $gmb__has_trivia_night[name] = "Highlights: Trivia night (has_trivia_night)";
+        
+        // Lodging options: Family rooms (has_family_rooms)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_family_rooms = array();
+        $gmb__has_family_rooms[name] = "Lodging options: Family rooms (has_family_rooms)";
+        
+        // Offerings: Affiliated with CBSE  (affiliated_with_cbse_board)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__affiliated_with_cbse_board = array();
+        $gmb__affiliated_with_cbse_board[name] = "Offerings: Affiliated with CBSE  (affiliated_with_cbse_board)";
+        
+        // Offerings: Affiliated with CISCE  (affiliated_with_cisce_board)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__affiliated_with_cisce_board = array();
+        $gmb__affiliated_with_cisce_board[name] = "Offerings: Affiliated with CISCE  (affiliated_with_cisce_board)";
+        
+        // Offerings: Alcohol (serves_alcohol)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_alcohol = array();
+        $gmb__serves_alcohol[name] = "Offerings: Alcohol (serves_alcohol)";
+        
+        // Offerings: All you can eat (has_all_you_can_eat_always)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_all_you_can_eat_always = array();
+        $gmb__has_all_you_can_eat_always[name] = "Offerings: All you can eat (has_all_you_can_eat_always)";
+        
+        // Offerings: Assembly service (has_service_assembly)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_service_assembly = array();
+        $gmb__has_service_assembly[name] = "Offerings: Assembly service (has_service_assembly)";
+        
+        // Offerings: Beer (serves_beer)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_beer = array();
+        $gmb__serves_beer[name] = "Offerings: Beer (serves_beer)";
+        
+        // Offerings: Bike storage (has_secure_bicycle_storage)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_secure_bicycle_storage = array();
+        $gmb__has_secure_bicycle_storage[name] = "Offerings: Bike storage (has_secure_bicycle_storage)";
+        
+        // Offerings: Braille menu (has_braille_menu)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_braille_menu = array();
+        $gmb__has_braille_menu[name] = "Offerings: Braille menu (has_braille_menu)";
+        
+        // Offerings: Buys used goods (buys_goods_used)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__buys_goods_used = array();
+        $gmb__buys_goods_used[name] = "Offerings: Buys used goods (buys_goods_used)";
+        
+        // Offerings: CNG (offers_compressed_natural_gas)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_compressed_natural_gas = array();
+        $gmb__offers_compressed_natural_gas[name] = "Offerings: CNG (offers_compressed_natural_gas)";
+        
+        // Offerings: Car rental (has_car_rental)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_car_rental = array();
+        $gmb__has_car_rental[name] = "Offerings: Car rental (has_car_rental)";
+        
+        // Offerings: Car wash (has_car_wash)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_car_wash = array();
+        $gmb__has_car_wash[name] = "Offerings: Car wash (has_car_wash)";
+        
+        // Offerings: Card enrollment  (offers_aadhaar_adult_enrollment)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_aadhaar_adult_enrollment = array();
+        $gmb__offers_aadhaar_adult_enrollment[name] = "Offerings: Card enrollment  (offers_aadhaar_adult_enrollment)";
+        
+        // Offerings: Card enrollment for children 5 and younger (offers_aadhaar_children_enrollment)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_aadhaar_children_enrollment = array();
+        $gmb__offers_aadhaar_children_enrollment[name] = "Offerings: Card enrollment for children 5 and younger (offers_aadhaar_children_enrollment)";
+        
+        // Offerings: Cash advance (has_cash_advance)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_cash_advance = array();
+        $gmb__has_cash_advance[name] = "Offerings: Cash advance (has_cash_advance)";
+        
+        // Offerings: Check cashing (has_check_cashing)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_check_cashing = array();
+        $gmb__has_check_cashing[name] = "Offerings: Check cashing (has_check_cashing)";
+        
+        // Offerings: Cocktails (serves_cocktails)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_cocktails = array();
+        $gmb__serves_cocktails[name] = "Offerings: Cocktails (serves_cocktails)";
+        
+        // Offerings: Coffee (serves_coffee)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_coffee = array();
+        $gmb__serves_coffee[name] = "Offerings: Coffee (serves_coffee)";
+        
+        // Offerings: Comfort food (serves_comfort_food)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_comfort_food = array();
+        $gmb__serves_comfort_food[name] = "Offerings: Comfort food (serves_comfort_food)";
+        
+        // Offerings: Dancing (has_dancing)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_dancing = array();
+        $gmb__has_dancing[name] = "Offerings: Dancing (has_dancing)";
+        
+        // Offerings: Demographic information updates (offers_aadhaar_demographic_info_updating)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_aadhaar_demographic_info_updating = array();
+        $gmb__offers_aadhaar_demographic_info_updating[name] = "Offerings: Demographic information updates (offers_aadhaar_demographic_info_updating)";
+        
+        // Offerings: Diesel gas (sells_gas_diesel)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__sells_gas_diesel = array();
+        $gmb__sells_gas_diesel[name] = "Offerings: Diesel gas (sells_gas_diesel)";
+        
+        // Offerings: Drive-through (has_drive_through_covid_19_testing)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_drive_through_covid_19_testing = array();
+        $gmb__has_drive_through_covid_19_testing[name] = "Offerings: Drive-through (has_drive_through_covid_19_testing)";
+        
+        // Offerings: Ethanol-free gas (sells_gas_ethanol_free)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__sells_gas_ethanol_free = array();
+        $gmb__sells_gas_ethanol_free[name] = "Offerings: Ethanol-free gas (sells_gas_ethanol_free)";
+        
+        // Offerings: Food (serves_food)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_food = array();
+        $gmb__serves_food[name] = "Offerings: Food (serves_food)";
+        
+        // Offerings: Food at bar (serves_food_at_bar)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_food_at_bar = array();
+        $gmb__serves_food_at_bar[name] = "Offerings: Food at bar (serves_food_at_bar)";
+        
+        // Offerings: Free air (has_free_air)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_free_air = array();
+        $gmb__has_free_air[name] = "Offerings: Free air (has_free_air)";
+        
+        // Offerings: Free water refills (has_free_water_refills)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_free_water_refills = array();
+        $gmb__has_free_water_refills[name] = "Offerings: Free water refills (has_free_water_refills)";
+        
+        // Offerings: Full service gas (has_full_service_gas)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_full_service_gas = array();
+        $gmb__has_full_service_gas[name] = "Offerings: Full service gas (has_full_service_gas)";
+        
+        // Offerings: Grilling (allows_grilling)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__allows_grilling = array();
+        $gmb__allows_grilling[name] = "Offerings: Grilling (allows_grilling)";
+        
+        // Offerings: Halal food (serves_halal_food)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_halal_food = array();
+        $gmb__serves_halal_food[name] = "Offerings: Halal food (serves_halal_food)";
+        
+        // Offerings: Happy hour drinks (serves_happy_hour_drinks)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_happy_hour_drinks = array();
+        $gmb__serves_happy_hour_drinks[name] = "Offerings: Happy hour drinks (serves_happy_hour_drinks)";
+        
+        // Offerings: Happy hour food (serves_happy_hour_food)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_happy_hour_food = array();
+        $gmb__serves_happy_hour_food[name] = "Offerings: Happy hour food (serves_happy_hour_food)";
+        
+        // Offerings: Hard liquor (serves_liquor)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_liquor = array();
+        $gmb__serves_liquor[name] = "Offerings: Hard liquor (serves_liquor)";
+        
+        // Offerings: Kids' menu (has_childrens_menu)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_childrens_menu = array();
+        $gmb__has_childrens_menu[name] = "Offerings: Kids' menu (has_childrens_menu)";
+        
+        // Offerings: Kids' shoes (sells_shoes_for_children)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__sells_shoes_for_children = array();
+        $gmb__sells_shoes_for_children[name] = "Offerings: Kids' shoes (sells_shoes_for_children)";
+        
+        // Offerings: Kids' tours (has_tours_for_children)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_tours_for_children = array();
+        $gmb__has_tours_for_children[name] = "Offerings: Kids' tours (has_tours_for_children)";
+        
+        // Offerings: Kids' toys (sells_toys_for_children)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__sells_toys_for_children = array();
+        $gmb__sells_toys_for_children[name] = "Offerings: Kids' toys (sells_toys_for_children)";
+        
+        // Offerings: LPG (offers_liquefied_petroleum_gas)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_liquefied_petroleum_gas = array();
+        $gmb__offers_liquefied_petroleum_gas[name] = "Offerings: LPG (offers_liquefied_petroleum_gas)";
+        
+        // Offerings: Late-night food (serves_late_night_food)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_late_night_food = array();
+        $gmb__serves_late_night_food[name] = "Offerings: Late-night food (serves_late_night_food)";
+        
+        // Offerings: Matinees (has_matinees)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_matinees = array();
+        $gmb__has_matinees[name] = "Offerings: Matinees (has_matinees)";
+        
+        // Offerings: Men's clothing (sells_clothing_for_men)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__sells_clothing_for_men = array();
+        $gmb__sells_clothing_for_men[name] = "Offerings: Men's clothing (sells_clothing_for_men)";
+        
+        // Offerings: Men's shoes (sells_shoes_for_men)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__sells_shoes_for_men = array();
+        $gmb__sells_shoes_for_men[name] = "Offerings: Men's shoes (sells_shoes_for_men)";
+        
+        // Offerings: Mobile number updates (offers_aadhaar_mobile_number_updating)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_aadhaar_mobile_number_updating = array();
+        $gmb__offers_aadhaar_mobile_number_updating[name] = "Offerings: Mobile number updates (offers_aadhaar_mobile_number_updating)";
+        
+        // Offerings: Oil change (has_oil_change)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_oil_change = array();
+        $gmb__has_oil_change[name] = "Offerings: Oil change (has_oil_change)";
+        
+        // Offerings: Organic dishes (serves_organic)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_organic = array();
+        $gmb__serves_organic[name] = "Offerings: Organic dishes (serves_organic)";
+        
+        // Offerings: Organic products (sells_organic_products)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__sells_organic_products = array();
+        $gmb__sells_organic_products[name] = "Offerings: Organic products (sells_organic_products)";
+        
+        // Offerings: PUC Certification (offers_pollution_under_control_certification)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_pollution_under_control_certification = array();
+        $gmb__offers_pollution_under_control_certification[name] = "Offerings: PUC Certification (offers_pollution_under_control_certification)";
+        
+        // Offerings: Passport photos (has_onsite_passport_photos)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_onsite_passport_photos = array();
+        $gmb__has_onsite_passport_photos[name] = "Offerings: Passport photos (has_onsite_passport_photos)";
+        
+        // Offerings: Pertamax fuel (offers_pertamax_fuel)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_pertamax_fuel = array();
+        $gmb__offers_pertamax_fuel[name] = "Offerings: Pertamax fuel (offers_pertamax_fuel)";
+        
+        // Offerings: Pertamina Dex fuel (offers_pertamina_dex_fuel)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_pertamina_dex_fuel = array();
+        $gmb__offers_pertamina_dex_fuel[name] = "Offerings: Pertamina Dex fuel (offers_pertamina_dex_fuel)";
+        
+        // Offerings: Post Office Savings Accounts (offers_postal_savings_account)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_postal_savings_account = array();
+        $gmb__offers_postal_savings_account[name] = "Offerings: Post Office Savings Accounts (offers_postal_savings_account)";
+        
+        // Offerings: Prepared foods (sells_food_prepared)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__sells_food_prepared = array();
+        $gmb__sells_food_prepared[name] = "Offerings: Prepared foods (sells_food_prepared)";
+        
+        // Offerings: Repair services (has_service_repair)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_service_repair = array();
+        $gmb__has_service_repair[name] = "Offerings: Repair services (has_service_repair)";
+        
+        // Offerings: Salad bar (has_salad_bar)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_salad_bar = array();
+        $gmb__has_salad_bar[name] = "Offerings: Salad bar (has_salad_bar)";
+        
+        // Offerings: Service guarantee (has_service_guarantee)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_service_guarantee = array();
+        $gmb__has_service_guarantee[name] = "Offerings: Service guarantee (has_service_guarantee)";
+        
+        // Offerings: Sing-along screenings (has_sing_alongs)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_sing_alongs = array();
+        $gmb__has_sing_alongs[name] = "Offerings: Sing-along screenings (has_sing_alongs)";
+        
+        // Offerings: Small plates (serves_small_plates)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_small_plates = array();
+        $gmb__serves_small_plates[name] = "Offerings: Small plates (serves_small_plates)";
+        
+        // Offerings: Tent camping (allows_camping_tent)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__allows_camping_tent = array();
+        $gmb__allows_camping_tent[name] = "Offerings: Tent camping (allows_camping_tent)";
+        
+        // Offerings: Used goods (sells_goods_used)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__sells_goods_used = array();
+        $gmb__sells_goods_used[name] = "Offerings: Used goods (sells_goods_used)";
+        
+        // Offerings: Vegan options (serves_vegan)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_vegan = array();
+        $gmb__serves_vegan[name] = "Offerings: Vegan options (serves_vegan)";
+        
+        // Offerings: Vegetarian options (serves_vegetarian)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_vegetarian = array();
+        $gmb__serves_vegetarian[name] = "Offerings: Vegetarian options (serves_vegetarian)";
+        
+        // Offerings: Wine (serves_wine)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_wine = array();
+        $gmb__serves_wine[name] = "Offerings: Wine (serves_wine)";
+        
+        // Offerings: Women's clothing (sells_clothing_for_women)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__sells_clothing_for_women = array();
+        $gmb__sells_clothing_for_women[name] = "Offerings: Women's clothing (sells_clothing_for_women)";
+        
+        // Offerings: Women's shoes (sells_shoes_for_women)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__sells_shoes_for_women = array();
+        $gmb__sells_shoes_for_women[name] = "Offerings: Women's shoes (sells_shoes_for_women)";
+        
+        // Payments: Alelo (accepts_alelo_meal_voucher)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__accepts_alelo_meal_voucher = array();
+        $gmb__accepts_alelo_meal_voucher[name] = "Payments: Alelo (accepts_alelo_meal_voucher)";
+        
+        // Payments: Bimpli (accepts_cheque_apetiz_meal_voucher)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__accepts_cheque_apetiz_meal_voucher = array();
+        $gmb__accepts_cheque_apetiz_meal_voucher[name] = "Payments: Bimpli (accepts_cheque_apetiz_meal_voucher)";
+        
+        // Payments: Cash-only (requires_cash_only)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__requires_cash_only = array();
+        $gmb__requires_cash_only[name] = "Payments: Cash-only (requires_cash_only)";
+        
+        // Payments: Checks (pay_check)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__pay_check = array();
+        $gmb__pay_check[name] = "Payments: Checks (pay_check)";
+        
+        // Payments: Cheque Dejeuner (accepts_cheque_dejeuner_meal_voucher)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__accepts_cheque_dejeuner_meal_voucher = array();
+        $gmb__accepts_cheque_dejeuner_meal_voucher[name] = "Payments: Cheque Dejeuner (accepts_cheque_dejeuner_meal_voucher)";
+        
+        // Payments: Credit cards (pay_credit_card)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__pay_credit_card = array();
+        $gmb__pay_credit_card[name] = "Payments: Credit cards (pay_credit_card)";
+        
+        // Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__pay_credit_card_types_accepted__american_express = array();
+        $gmb__pay_credit_card_types_accepted__american_express[name] = "Payments: Credit cards (pay_credit_card_types_accepted): American Express (american_express)";
+        
+        // Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__pay_credit_card_types_accepted__china_union_pay = array();
+        $gmb__pay_credit_card_types_accepted__china_union_pay[name] = "Payments: Credit cards (pay_credit_card_types_accepted): China Union Pay (china_union_pay)";
+        
+        // Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__pay_credit_card_types_accepted__diners_club = array();
+        $gmb__pay_credit_card_types_accepted__diners_club[name] = "Payments: Credit cards (pay_credit_card_types_accepted): Diners Club (diners_club)";
+        
+        // Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__pay_credit_card_types_accepted__discover = array();
+        $gmb__pay_credit_card_types_accepted__discover[name] = "Payments: Credit cards (pay_credit_card_types_accepted): Discover (discover)";
+        
+        // Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__pay_credit_card_types_accepted__jcb = array();
+        $gmb__pay_credit_card_types_accepted__jcb[name] = "Payments: Credit cards (pay_credit_card_types_accepted): JCB (jcb)";
+        
+        // Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__pay_credit_card_types_accepted__mastercard = array();
+        $gmb__pay_credit_card_types_accepted__mastercard[name] = "Payments: Credit cards (pay_credit_card_types_accepted): MasterCard (mastercard)";
+        
+        // Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__pay_credit_card_types_accepted__visa = array();
+        $gmb__pay_credit_card_types_accepted__visa[name] = "Payments: Credit cards (pay_credit_card_types_accepted): VISA (visa)";
+        
+        // Payments: Debit cards (pay_debit_card)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__pay_debit_card = array();
+        $gmb__pay_debit_card[name] = "Payments: Debit cards (pay_debit_card)";
+        
+        // Payments: Google Pay (pay_mobile_tez)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__pay_mobile_tez = array();
+        $gmb__pay_mobile_tez[name] = "Payments: Google Pay (pay_mobile_tez)";
+        
+        // Payments: Meal coupons (accepts_meal_coupons)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__accepts_meal_coupons = array();
+        $gmb__accepts_meal_coupons[name] = "Payments: Meal coupons (accepts_meal_coupons)";
+        
+        // Payments: NFC mobile payments (pay_mobile_nfc)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__pay_mobile_nfc = array();
+        $gmb__pay_mobile_nfc[name] = "Payments: NFC mobile payments (pay_mobile_nfc)";
+        
+        // Payments: Sodexo (accepts_sodexo_meal_voucher)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__accepts_sodexo_meal_voucher = array();
+        $gmb__accepts_sodexo_meal_voucher[name] = "Payments: Sodexo (accepts_sodexo_meal_voucher)";
+        
+        // Payments: Ticket Restaurant (accepts_ticket_restaurant_meal_voucher)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__accepts_ticket_restaurant_meal_voucher = array();
+        $gmb__accepts_ticket_restaurant_meal_voucher[name] = "Payments: Ticket Restaurant (accepts_ticket_restaurant_meal_voucher)";
+        
+        // Payments: VR (accepts_vr_meal_voucher)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__accepts_vr_meal_voucher = array();
+        $gmb__accepts_vr_meal_voucher[name] = "Payments: VR (accepts_vr_meal_voucher)";
+        
+        // Planning: Accepts new patients (accepts_new_patients)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__accepts_new_patients = array();
+        $gmb__accepts_new_patients[name] = "Planning: Accepts new patients (accepts_new_patients)";
+        
+        // Planning: Accepts reservations (accepts_reservations)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__accepts_reservations = array();
+        $gmb__accepts_reservations[name] = "Planning: Accepts reservations (accepts_reservations)";
+        
+        // Planning: Appointment required (requires_appointments)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__requires_appointments = array();
+        $gmb__requires_appointments[name] = "Planning: Appointment required (requires_appointments)";
+        
+        // Planning: Appointment required for Covid Test (is_appointment_required_covid_19_testing)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb_is_appointment_required_covid_19_testing = array();
+        $gmb_is_appointment_required_covid_19_testing[name] = "Planning: Appointment required for Covid Test (is_appointment_required_covid_19_testing)";
+        $gmb_is_appointment_required_covid_19_testing[column] = $gmb_i;
+        $gmb_i++;
+        
+        // Planning: Eligibility requirement (requires_eligibility_verification)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__requires_eligibility_verification = array();
+        $gmb__requires_eligibility_verification[name] = "Planning: Eligibility requirement (requires_eligibility_verification)";
+        
+        // Planning: Membership required (requires_membership)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__requires_membership = array();
+        $gmb__requires_membership[name] = "Planning: Membership required (requires_membership)";
+        
+        // Planning: Referral required (is_prescription_required_covid_19_testing)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb_is_prescription_required_covid_19_testing = array();
+        $gmb_is_prescription_required_covid_19_testing[name] = "Planning: Referral required (is_prescription_required_covid_19_testing)";
+        $gmb_is_prescription_required_covid_19_testing[column] = $gmb_i;
+        $gmb_i++;
+        
+        // Planning: Reservations required (requires_reservations)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__requires_reservations = array();
+        $gmb__requires_reservations[name] = "Planning: Reservations required (requires_reservations)";
+        
+        // Planning: Tests limited to certain patients (has_covid_19_testing_patient_restrictions)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_covid_19_testing_patient_restrictions = array();
+        $gmb__has_covid_19_testing_patient_restrictions[name] = "Planning: Tests limited to certain patients (has_covid_19_testing_patient_restrictions)";
+        
+        // Popular for: Good for working on laptop (suitable_for_working_on_laptop)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__suitable_for_working_on_laptop = array();
+        $gmb__suitable_for_working_on_laptop[name] = "Popular for: Good for working on laptop (suitable_for_working_on_laptop)";
+        
+        // Recycling: Batteries (has_recycling_batteries)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_recycling_batteries = array();
+        $gmb__has_recycling_batteries[name] = "Recycling: Batteries (has_recycling_batteries)";
+        
+        // Recycling: Clothing (has_recycling_clothing)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_recycling_clothing = array();
+        $gmb__has_recycling_clothing[name] = "Recycling: Clothing (has_recycling_clothing)";
+        
+        // Recycling: Electronics (has_recycling_electronics)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_recycling_electronics = array();
+        $gmb__has_recycling_electronics[name] = "Recycling: Electronics (has_recycling_electronics)";
+        
+        // Recycling: Glass bottles (has_recycling_glass_bottles)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_recycling_glass_bottles = array();
+        $gmb__has_recycling_glass_bottles[name] = "Recycling: Glass bottles (has_recycling_glass_bottles)";
+        
+        // Recycling: Hazardous household materials (has_recycling_household_hazardous_waste)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_recycling_household_hazardous_waste = array();
+        $gmb__has_recycling_household_hazardous_waste[name] = "Recycling: Hazardous household materials (has_recycling_household_hazardous_waste)";
+        
+        // Recycling: Ink cartridges (has_recycling_ink_cartridges)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_recycling_ink_cartridges = array();
+        $gmb__has_recycling_ink_cartridges[name] = "Recycling: Ink cartridges (has_recycling_ink_cartridges)";
+        
+        // Recycling: Light bulbs (has_recycling_light_bulbs)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_recycling_light_bulbs = array();
+        $gmb__has_recycling_light_bulbs[name] = "Recycling: Light bulbs (has_recycling_light_bulbs)";
+        
+        // Recycling: Metal cans (has_recycling_metal_cans)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_recycling_metal_cans = array();
+        $gmb__has_recycling_metal_cans[name] = "Recycling: Metal cans (has_recycling_metal_cans)";
+        
+        // Recycling: Plastic bags (has_recycling_plastic_bags)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_recycling_plastic_bags = array();
+        $gmb__has_recycling_plastic_bags[name] = "Recycling: Plastic bags (has_recycling_plastic_bags)";
+        
+        // Recycling: Plastic bottles (has_recycling_plastic_bottles)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_recycling_plastic_bottles = array();
+        $gmb__has_recycling_plastic_bottles[name] = "Recycling: Plastic bottles (has_recycling_plastic_bottles)";
+        
+        // Recycling: Plastic foam (has_recycling_plastic_foam)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_recycling_plastic_foam = array();
+        $gmb__has_recycling_plastic_foam[name] = "Recycling: Plastic foam (has_recycling_plastic_foam)";
+        
+        // Service options: Curbside pickup (has_curbside_pickup)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_curbside_pickup = array();
+        $gmb__has_curbside_pickup[name] = "Service options: Curbside pickup (has_curbside_pickup)";
+        
+        // Service options: Delivery (has_delivery)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_delivery = array();
+        $gmb__has_delivery[name] = "Service options: Delivery (has_delivery)";
+        
+        // Service options: Dine-in (serves_dine_in)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__serves_dine_in = array();
+        $gmb__serves_dine_in[name] = "Service options: Dine-in (serves_dine_in)";
+        
+        // Service options: Drive-through (has_drive_through)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_drive_through = array();
+        $gmb__has_drive_through[name] = "Service options: Drive-through (has_drive_through)";
+        
+        // Service options: Grocery pickup (has_grocery_pickup)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_grocery_pickup = array();
+        $gmb__has_grocery_pickup[name] = "Service options: Grocery pickup (has_grocery_pickup)";
+        
+        // Service options: Has online care (has_video_visits)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_video_visits = array();
+        $gmb__has_video_visits[name] = "Service options: Has online care (has_video_visits)";
+        
+        // Service options: In-store pickup (has_in_store_pickup)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_in_store_pickup = array();
+        $gmb__has_in_store_pickup[name] = "Service options: In-store pickup (has_in_store_pickup)";
+        
+        // Service options: In-store shopping (has_in_store_shopping)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_in_store_shopping = array();
+        $gmb__has_in_store_shopping[name] = "Service options: In-store shopping (has_in_store_shopping)";
+        
+        // Service options: Language assistance (languages_spoken): American Sign Language (american_sign_language_used)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__languages_spoken__american_sign_language_used = array();
+        $gmb__languages_spoken__american_sign_language_used[name] = "Service options: Language assistance (languages_spoken): American Sign Language (american_sign_language_used)";
+        
+        // Service options: Language assistance (languages_spoken): Arabic (arabic_spoken)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__languages_spoken__arabic_spoken = array();
+        $gmb__languages_spoken__arabic_spoken[name] = "Service options: Language assistance (languages_spoken): Arabic (arabic_spoken)";
+        
+        // Service options: Language assistance (languages_spoken): Cantonese (cantonese_spoken)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__languages_spoken__cantonese_spoken = array();
+        $gmb__languages_spoken__cantonese_spoken[name] = "Service options: Language assistance (languages_spoken): Cantonese (cantonese_spoken)";
+        
+        // Service options: Language assistance (languages_spoken): English (english_spoken)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__languages_spoken__english_spoken = array();
+        $gmb__languages_spoken__english_spoken[name] = "Service options: Language assistance (languages_spoken): English (english_spoken)";
+        
+        // Service options: Language assistance (languages_spoken): Filipino (filipino_spoken)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__languages_spoken__filipino_spoken = array();
+        $gmb__languages_spoken__filipino_spoken[name] = "Service options: Language assistance (languages_spoken): Filipino (filipino_spoken)";
+        
+        // Service options: Language assistance (languages_spoken): French (french_spoken)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__languages_spoken__french_spoken = array();
+        $gmb__languages_spoken__french_spoken[name] = "Service options: Language assistance (languages_spoken): French (french_spoken)";
+        
+        // Service options: Language assistance (languages_spoken): German (german_spoken)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__languages_spoken__german_spoken = array();
+        $gmb__languages_spoken__german_spoken[name] = "Service options: Language assistance (languages_spoken): German (german_spoken)";
+        
+        // Service options: Language assistance (languages_spoken): Haitian Creole (haitian_creole_spoken)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__languages_spoken__haitian_creole_spoken = array();
+        $gmb__languages_spoken__haitian_creole_spoken[name] = "Service options: Language assistance (languages_spoken): Haitian Creole (haitian_creole_spoken)";
+        
+        // Service options: Language assistance (languages_spoken): Hindi (hindi_spoken)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__languages_spoken__hindi_spoken = array();
+        $gmb__languages_spoken__hindi_spoken[name] = "Service options: Language assistance (languages_spoken): Hindi (hindi_spoken)";
+        
+        // Service options: Language assistance (languages_spoken): Italian (italian_spoken)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__languages_spoken__italian_spoken = array();
+        $gmb__languages_spoken__italian_spoken[name] = "Service options: Language assistance (languages_spoken): Italian (italian_spoken)";
+        
+        // Service options: Language assistance (languages_spoken): Korean (korean_spoken)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__languages_spoken__korean_spoken = array();
+        $gmb__languages_spoken__korean_spoken[name] = "Service options: Language assistance (languages_spoken): Korean (korean_spoken)";
+        
+        // Service options: Language assistance (languages_spoken): Mandarin (mandarin_spoken)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__languages_spoken__mandarin_spoken = array();
+        $gmb__languages_spoken__mandarin_spoken[name] = "Service options: Language assistance (languages_spoken): Mandarin (mandarin_spoken)";
+        
+        // Service options: Language assistance (languages_spoken): Polish (polish_spoken)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__languages_spoken__polish_spoken = array();
+        $gmb__languages_spoken__polish_spoken[name] = "Service options: Language assistance (languages_spoken): Polish (polish_spoken)";
+        
+        // Service options: Language assistance (languages_spoken): Portuguese (portuguese_spoken)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__languages_spoken__portuguese_spoken = array();
+        $gmb__languages_spoken__portuguese_spoken[name] = "Service options: Language assistance (languages_spoken): Portuguese (portuguese_spoken)";
+        
+        // Service options: Language assistance (languages_spoken): Romanian (romanian_spoken)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__languages_spoken__romanian_spoken = array();
+        $gmb__languages_spoken__romanian_spoken[name] = "Service options: Language assistance (languages_spoken): Romanian (romanian_spoken)";
+        
+        // Service options: Language assistance (languages_spoken): Russian (russian_spoken)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__languages_spoken__russian_spoken = array();
+        $gmb__languages_spoken__russian_spoken[name] = "Service options: Language assistance (languages_spoken): Russian (russian_spoken)";
+        
+        // Service options: Language assistance (languages_spoken): Spanish (spanish_spoken)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__languages_spoken__spanish_spoken = array();
+        $gmb__languages_spoken__spanish_spoken[name] = "Service options: Language assistance (languages_spoken): Spanish (spanish_spoken)";
+        
+        // Service options: Language assistance (languages_spoken): Ukrainian (ukrainian_spoken)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__languages_spoken__ukrainian_spoken = array();
+        $gmb__languages_spoken__ukrainian_spoken[name] = "Service options: Language assistance (languages_spoken): Ukrainian (ukrainian_spoken)";
+        
+        // Service options: Language assistance (languages_spoken): Vietnamese (vietnamese_spoken)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__languages_spoken__vietnamese_spoken = array();
+        $gmb__languages_spoken__vietnamese_spoken[name] = "Service options: Language assistance (languages_spoken): Vietnamese (vietnamese_spoken)";
+        
+        // Service options: Meal service (has_meal_service)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_meal_service = array();
+        $gmb__has_meal_service[name] = "Service options: Meal service (has_meal_service)";
+        
+        // Service options: No-contact delivery (has_no_contact_delivery)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_no_contact_delivery = array();
+        $gmb__has_no_contact_delivery[name] = "Service options: No-contact delivery (has_no_contact_delivery)";
+        
+        // Service options: Online appointments (offers_online_appointments)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_online_appointments = array();
+        $gmb__offers_online_appointments[name] = "Service options: Online appointments (offers_online_appointments)";
+        
+        // Service options: Online classes (offers_online_classes)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_online_classes = array();
+        $gmb__offers_online_classes[name] = "Service options: Online classes (offers_online_classes)";
+        
+        // Service options: Online estimates (offers_online_estimates)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__offers_online_estimates = array();
+        $gmb__offers_online_estimates[name] = "Service options: Online estimates (offers_online_estimates)";
+        
+        // Service options: Onsite services (has_onsite_services)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_onsite_services = array();
+        $gmb__has_onsite_services[name] = "Service options: Onsite services (has_onsite_services)";
+        
+        // Service options: Outdoor seating (has_seating_outdoors)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_seating_outdoors = array();
+        $gmb__has_seating_outdoors[name] = "Service options: Outdoor seating (has_seating_outdoors)";
+        
+        // Service options: Outdoor services (has_outdoor_services)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_outdoor_services = array();
+        $gmb__has_outdoor_services[name] = "Service options: Outdoor services (has_outdoor_services)";
+        
+        // Service options: Same-day delivery (has_delivery_same_day)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_delivery_same_day = array();
+        $gmb__has_delivery_same_day[name] = "Service options: Same-day delivery (has_delivery_same_day)";
+        
+        // Service options: Takeout (has_takeout)
+        // Attribute type = Yes/no
+        // Acceptable values = Yes, No
+        $gmb__has_takeout = array();
+        $gmb__has_takeout[name] = "Service options: Takeout (has_takeout)";
+        
+        // Place page URLs: Appointment links (url_appointment)
+        // Attribute type = URL
+        $gmb__url_appointment = array();
+        $gmb__url_appointment[name] = "Place page URLs: Appointment links (url_appointment)";
+        
+        // Place page URLs: COVID-19 info link (url_covid_19_info_page)
+        // Attribute type = URL
+        $gmb__url_covid_19_info_page = array();
+        $gmb__url_covid_19_info_page[name] = "Place page URLs: COVID-19 info link (url_covid_19_info_page)";
+        
+        // Place page URLs: Inventory search URL (url_inventory_search)
+        // Attribute type = URL
+        $gmb__url_inventory_search = array();
+        $gmb__url_inventory_search[name] = "Place page URLs: Inventory search URL (url_inventory_search)";
+        
+        // Place page URLs: Menu link (url_menu)
+        // Attribute type = URL
+        $gmb__url_menu = array();
+        $gmb__url_menu[name] = "Place page URLs: Menu link (url_menu)";
+        
+        // Place page URLs: Order ahead links (url_order_ahead)
+        // Attribute type = URL
+        $gmb__url_order_ahead = array();
+        $gmb__url_order_ahead[name] = "Place page URLs: Order ahead links (url_order_ahead)";
+        
+        // Place page URLs: Reservations links (url_reservations)
+        // Attribute type = URL
+        $gmb__url_reservations = array();
+        $gmb__url_reservations[name] = "Place page URLs: Reservations links (url_reservations)";
+        
+        // Place page URLs: Virtual care link (url_facility_telemedicine_page)
+        // Attribute type = URL
+        $gmb__url_facility_telemedicine_page = array();
+        $gmb__url_facility_telemedicine_page[name] = "Place page URLs: Virtual care link (url_facility_telemedicine_page)";
+        
+        // Amenities: In-room kitchens (kitchen_in_room)
+        // Attribute type = Selection
+        // Acceptable values = All rooms (kitchens_in_all_rooms), Some rooms (kitchens_in_some_rooms)
+        $gmb__kitchen_in_room = array();
+        $gmb__kitchen_in_room[name] = "Amenities: In-room kitchens (kitchen_in_room)";
+        
+        // Amenities: Wi-Fi (wi_fi)
+        // Attribute type = Selection
+        // Acceptable values = Free (free_wi_fi), Paid (paid_wi_fi)
+        $gmb__wi_fi = array();
+        $gmb__wi_fi[name] = "Amenities: Wi-Fi (wi_fi)";
     
     // Custom WP_Query args
     $args = array(
