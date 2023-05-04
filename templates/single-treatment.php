@@ -19,14 +19,44 @@
 	}
 	add_action('wp_head','uamswp_keyword_hook_header');
 
+	$page_title = get_the_title();
+	$page_title_attr = $page_title;
+	$page_title_attr = str_replace('"', '\'', $page_title_attr); // Replace double quotes with single quote
+	$page_title_attr = str_replace('&#8217;', '\'', $page_title_attr); // Replace right single quote with single quote
+	$page_title_attr = htmlentities($page_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+	$page_title_attr = str_replace('&nbsp;', ' ', $page_title_attr); // Convert non-breaking space with normal space
+	$page_title_attr = html_entity_decode($page_title_attr); // Convert HTML entities to their corresponding characters
+	$treatment_archive_title = get_field('treatments_archive_headline', 'option') ?: 'Treatments &amp; Procedures';
+	$treatment_archive_title_attr = $treatment_archive_title;
+	$treatment_archive_title_attr = str_replace('"', '\'', $treatment_archive_title_attr); // Replace double quotes with single quote
+	$treatment_archive_title_attr = str_replace('&#8217;', '\'', $treatment_archive_title_attr); // Replace right single quote with single quote
+	$treatment_archive_title_attr = htmlentities($treatment_archive_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+	$treatment_archive_title_attr = str_replace('&nbsp;', ' ', $treatment_archive_title_attr); // Convert non-breaking space with normal space
+	$treatment_archive_title_attr = html_entity_decode($treatment_archive_title_attr); // Convert HTML entities to their corresponding characters
+	$treatment_title = get_field('treatments_single_name', 'option') ?: 'Treatment/Procedure';
+	$treatment_title_attr = $treatment_title;
+	$treatment_title_attr = str_replace('"', '\'', $treatment_title_attr); // Replace double quotes with single quote
+	$treatment_title_attr = str_replace('&#8217;', '\'', $treatment_title_attr); // Replace right single quote with single quote
+	$treatment_title_attr = htmlentities($treatment_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+	$treatment_title_attr = str_replace('&nbsp;', ' ', $treatment_title_attr); // Convert non-breaking space with normal space
+	$treatment_title_attr = html_entity_decode($treatment_title_attr); // Convert HTML entities to their corresponding characters
+	$treatment_text = get_field('treatments_archive_intro_text', 'option');
+
 	// Override theme's method of defining the page title
 	function uamswp_fad_title($html) { 
-		// global $treatment_title;
+		global $page_title_attr;
+		global $treatment_title_attr;
 		//you can add here all your conditions as if is_page(), is_category() etc.. 
-		if ( strlen(get_the_title()) < 21 ) {
-			$html = get_the_title() . ' | Treatments & Procedures | ' . get_bloginfo( "name" );
+		$meta_title_chars_max = 60;
+		$meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
+		$meta_title_base_chars = strlen( $meta_title_base );
+		$meta_title_enhanced_addition = ' | ' . $treatment_title_attr;
+		$meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
+		$meta_title_enhanced_chars = strlen( $meta_title_enhanced );
+		if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
+			$html = $meta_title_enhanced;
 		} else {
-			$html = get_the_title() . ' | ' . get_bloginfo( "name" );
+			$html = $meta_title_base;
 		}
 		return $html;
 	}
@@ -58,8 +88,6 @@
 	
 	get_header();
 
-	$page_title = get_the_title( );
-
 	$clinical_trials = get_field('treatment_procedure_clinical_trials');
 	$video = get_field('treatment_procedure_youtube_link');
 	$conditions_cpt = get_field('treatment_conditions');
@@ -69,10 +97,6 @@
 	$medline_type = get_field('medline_code_type');
 	$medline_code = get_field('medline_code_id');
 	$embed_code = get_field('treatment_procedure_embed_codes');
-
-	$treatment_archive_title = get_field('treatments_archive_headline', 'option') ?: 'Treatments &amp; Procedures';
-	$treatment_title = get_field('treatments_single_name', 'option') ?: 'Treatment/Procedure';
-	$treatment_text = get_field('treatments_archive_intro_text', 'option');
 	
     $podcast_name = get_field('treatment_procedure_podcast_name');
 
@@ -578,8 +602,12 @@
 									$condition_id = get_the_ID();
 									$condition_permalink = get_permalink( $condition_id );
 									$condition_title = get_the_title();
-									$condition_title_attr = str_replace('"', '\'', $condition_title);
-									$condition_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($condition_title_attr, null, 'utf-8')));
+									$condition_title_attr = $condition_title;
+									$condition_title_attr = str_replace('"', '\'', $condition_title_attr); // Replace double quotes with single quote
+									$condition_title_attr = str_replace('&#8217;', '\'', $condition_title_attr); // Replace right single quote with single quote
+									$condition_title_attr = htmlentities($condition_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+									$condition_title_attr = str_replace('&nbsp;', ' ', $condition_title_attr); // Convert non-breaking space with normal space
+									$condition_title_attr = html_entity_decode($condition_title_attr); // Convert HTML entities to their corresponding characters
 								?>
 									<li>
 										<a href="<?php echo $condition_permalink; ?>" aria-label="Go to Condition page for <?php echo $condition_title_attr; ?>" class="btn btn-outline-primary"><?php echo $condition_title; ?></a>
