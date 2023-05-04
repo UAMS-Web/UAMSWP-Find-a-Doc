@@ -645,7 +645,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-							<h2 class="module-title"><span class="title">Providers Performing <?php echo $page_title; ?></span></h2>
+							<h2 class="module-title"><span class="title">Providers Performing or Prescribing <?php echo $page_title; ?></span></h2>
 							<p class="note">Note that every provider listed below may not perform or prescribe <?php echo $page_title; ?> for all conditions related to it. Review each provider for availability.</p>   
 							<?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'"]' ); ?>
 							<div class="card-list-container">
