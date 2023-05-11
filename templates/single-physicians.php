@@ -1321,7 +1321,7 @@ while ( have_posts() ) : the_post();
                                 }
                             };
                         </script>
-                        <script src="https://transparency.nrchealth.com/widget/v2/uams/npi/<?php echo $npi; ?>/lotw.js" async></script>                           
+                        <script src="https://transparency.nrchealth.com/widget/v3/uams/npi/<?php echo $npi; ?>/lotw.js" async></script>                           
                         <?php // endif; ?>
                     </div>
                 </div>
