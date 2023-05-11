@@ -558,7 +558,7 @@
                             <div class="content-width mt-8" id="radiomd-embedded-filtered-tag"></div>
                         </div>
                         <div class="col-12 more">
-                            <p class="lead">Find other great episodes on other topics and from other UAMS providers.</p>
+                            <p class="lead">Find other great episodes on other topics and from other UAMS Health providers.</p>
                             <div class="cta-container">
                                 <a href="/podcast/" class="btn btn-primary" aria-label="Listen to more episodes of the UAMS Health Talk podcast">Listen to More Episodes</a>
                             </div>
@@ -595,7 +595,7 @@
 					<div class="row">
 						<div class="col-xs-12">
 							<h2 class="module-title"><span class="title">Conditions Related to <?php echo $page_title; ?></span></h2>
-							<p class="note">UAMS providers care for a broad range of conditions, some of which may not be listed below.</p>
+							<p class="note">UAMS Health providers care for a broad range of conditions, some of which may not be listed below.</p>
 							<div class="list-container list-container-rows">
 								<ul class="list">
 								<?php while ($conditions_query_cpt->have_posts()) : $conditions_query_cpt->the_post(); 
@@ -673,7 +673,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-							<h2 class="module-title"><span class="title">Providers Performing <?php echo $page_title; ?></span></h2>
+							<h2 class="module-title"><span class="title">Providers Performing or Prescribing <?php echo $page_title; ?></span></h2>
 							<p class="note">Note that every provider listed below may not perform or prescribe <?php echo $page_title; ?> for all conditions related to it. Review each provider for availability.</p>   
 							<?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'"]' ); ?>
 							<div class="card-list-container">
