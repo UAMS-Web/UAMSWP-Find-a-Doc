@@ -569,7 +569,7 @@
                             <div class="content-width mt-8" id="radiomd-embedded-filtered-tag"></div>
                         </div>
                         <div class="col-12 more">
-                            <p class="lead">Find other great episodes on other topics and from other UAMS providers.</p>
+                            <p class="lead">Find other great episodes on other topics and from other UAMS Health providers.</p>
                             <div class="cta-container">
                                 <a href="/podcast/" class="btn btn-primary" aria-label="Listen to more episodes of the UAMS Health Talk podcast">Listen to More Episodes</a>
                             </div>
@@ -608,7 +608,7 @@
 					<div class="row">
 						<div class="col-xs-12">
 							<h2 class="module-title"><span class="title">Treatments and Procedures Related to <?php echo $page_title; ?></span></h2>
-							<p class="note">UAMS providers perform and prescribe a broad range of treatments and procedures, some of which may not be listed below.</p>
+							<p class="note">UAMS Health providers perform and prescribe a broad range of treatments and procedures, some of which may not be listed below.</p>
 							<div class="list-container list-container-rows">
 								<ul class="list">
 								<?php while ($treatments_query_cpt->have_posts()) : $treatments_query_cpt->the_post(); 
@@ -682,7 +682,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-							<h2 class="module-title"><span class="title">Providers Treating <?php echo $page_title; ?></span></h2>
+							<h2 class="module-title"><span class="title">Providers Diagnosing or Treating <?php echo $page_title; ?></span></h2>
 							<p class="note">Note that every provider listed below may not perform or prescribe all treatments or procedures related to <?php echo $page_title; ?>. Review each provider for availability.</p>
 							<?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'"]' ); ?>
 							<div class="card-list-container">
