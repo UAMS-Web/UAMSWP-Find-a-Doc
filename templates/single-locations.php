@@ -23,9 +23,11 @@ $parent_location = ''; // Eliminate PHP errors
 $parent_location_prepend_the = ''; // Eliminate PHP errors
 $parent_title_prepend = ''; // Eliminate PHP errors
 $parent_title_phrase = ''; // Eliminate PHP errors
+
 if ($location_has_parent && $location_parent_id) { 
 	$parent_location = get_post( $location_parent_id );
 }
+
 // Get Post ID for Address & Image fields
 if ($parent_location) {
 	$post_id = $parent_location->ID;
@@ -37,7 +39,6 @@ if ($parent_location) {
 } else {
 	$post_id = get_the_ID();
 }
-
 
 // Image values
 $override_parent_photo = get_field('location_image_override_parent');
