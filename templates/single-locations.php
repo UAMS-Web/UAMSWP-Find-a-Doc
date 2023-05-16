@@ -20,6 +20,9 @@ $location_parent_id = get_field('location_parent_id');
 $parent_title = ''; // Eliminate PHP errors
 $parent_url = ''; // Eliminate PHP errors
 $parent_location = ''; // Eliminate PHP errors
+$parent_location_prepend_the = ''; // Eliminate PHP errors
+$parent_title_prepend = ''; // Eliminate PHP errors
+$parent_title_phrase = ''; // Eliminate PHP errors
 if ($location_has_parent && $location_parent_id) { 
 	$parent_location = get_post( $location_parent_id );
 }
@@ -28,6 +31,9 @@ if ($parent_location) {
 	$post_id = $parent_location->ID;
 	$parent_title = $parent_location->post_title;
 	$parent_url = get_permalink( $post_id );
+	$parent_location_prepend_the = get_field('location_prepend_the', $post_id);
+	$parent_title_prepend = $parent_location_prepend_the ? 'the ' : '';
+	$parent_title_phrase = $parent_title_prepend . $parent_title;
 } else {
 	$post_id = get_the_ID();
 }
@@ -596,7 +602,7 @@ while ( have_posts() ) : the_post(); ?>
 				<div class="content-width">
 					<h1 class="page-title"><?php echo $page_title; ?>
 					<?php if ($parent_location) { ?>
-					<span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
+					<span class="subtitle"><span class="sr-only">(</span>Part of <?php echo $parent_title_prepend; ?><a href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
 					<?php } // endif ?>
 					</h1>
 					<?php if ($location_closing_display) { ?>
