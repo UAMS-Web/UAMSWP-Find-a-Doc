@@ -22,15 +22,15 @@
     // Parent Location 
     $location_has_parent = get_field('location_parent', $id);
     $location_parent_id = get_field('location_parent_id', $id);
-    $parent_location = '';
-    $parent_id = '';
-    $parent_title = '';
-    $parent_url = '';
+    $parent_location = ''; // Eliminate PHP errors
+    $parent_id = ''; // Eliminate PHP errors
+    $parent_title = ''; // Eliminate PHP errors
+    $parent_url = ''; // Eliminate PHP errors
     $parent_location_prepend_the = ''; // Eliminate PHP errors
     $parent_title_prepend = ''; // Eliminate PHP errors
     $parent_title_phrase = ''; // Eliminate PHP errors
-    $override_parent_photo = '';
-    $override_parent_photo_featured = '';
+    $override_parent_photo = ''; // Eliminate PHP errors
+    $override_parent_photo_featured = ''; // Eliminate PHP errors
 
     if ($location_has_parent && $location_parent_id) { 
         $parent_location = get_post( $location_parent_id );
