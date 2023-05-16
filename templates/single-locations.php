@@ -304,8 +304,8 @@ while ( have_posts() ) : the_post(); ?>
 	$location_url = get_field('location_url');
 
 	// Check if the word "the" should be prepended to the location name
-	$location_portal = get_field('location_prepend_the');
-	$page_title_prepend = $location_portal ? 'the ' : '';
+	$location_prepend_the = get_field('location_prepend_the');
+	$page_title_prepend = $location_prepend_the ? 'the ' : '';
 	$page_title_phrase = $page_title_prepend . $page_title;
 
     // Set logic for displaying jump links and sections
