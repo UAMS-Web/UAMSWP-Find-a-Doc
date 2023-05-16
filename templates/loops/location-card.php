@@ -26,6 +26,9 @@
     $parent_id = '';
     $parent_title = '';
     $parent_url = '';
+    $parent_location_prepend_the = ''; // Eliminate PHP errors
+    $parent_title_prepend = ''; // Eliminate PHP errors
+    $parent_title_phrase = ''; // Eliminate PHP errors
     $override_parent_photo = '';
     $override_parent_photo_featured = '';
 
@@ -41,6 +44,9 @@
         $parent_url = get_permalink( $parent_id );
         $featured_image = get_the_post_thumbnail($parent_id, 'aspect-16-9-small', [ 'class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr , 'loading' => 'lazy' ]);
         $address_id = $parent_id;
+        $parent_location_prepend_the = get_field('location_prepend_the', $parent_id);
+        $parent_title_prepend = $parent_location_prepend_the ? 'the ' : '';
+        $parent_title_phrase = $parent_title_prepend . $parent_title;
 
         $override_parent_photo = get_field('location_image_override_parent', $id);
         $override_parent_photo_featured = get_field('location_image_override_parent_featured', $id);
@@ -105,7 +111,7 @@
         <h3 class="card-title h5">
             <span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self" data-categorytitle="Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $location_title; ?></a></span>
             <?php if ( $parent_location && !$child_location_list ) { ?>
-                <span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
+                <span class="subtitle"><span class="sr-only">(</span>Part of <?php echo $parent_title_prepend; ?><a href="<?php echo $parent_url; ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
             <?php } // endif ?>
             <?php  if ( isset($l) && 1 == $l ) { ?>
                 <span class="subtitle"><span class="sr-only">, </span>Primary Location</span>
