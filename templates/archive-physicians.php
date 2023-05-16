@@ -41,7 +41,7 @@ get_header();
 ?>
 <div class="content-sidebar-wrap">
 	<main class="container-fluid doctor-list" id="genesis-content">
-		<h1 class="sr-only" itemprop="headline">UAMS Providers</h1>
+		<h1 class="sr-only" itemprop="headline">UAMS Health Providers</h1>
 		<div class="row">
 			<div class="col-12 col-sm filter-col collapse">
 				<h2 class="h3">Filters</h2>
