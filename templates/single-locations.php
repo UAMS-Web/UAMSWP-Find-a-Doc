@@ -764,12 +764,19 @@ while ( have_posts() ) : the_post(); ?>
 						</div>
 					</div>
 					<?php // End div.text-subsection for Address and Contact Information ?>
-					<?php // Begin div.text-subsection for Hours and Appointment Information ?>
+					<?php // Begin div.text-subsection for Hours, After Hours and Appointment Information ?>
 					<div class="text-subsection">
 						<div class="row">
-							<?php // Begin Hours Information ?>
+							<?php
+							
+							// Begin Hours and After Hours Information
+							
+							?>
 							<div class="col-12 <?php echo $show_online_scheduling_section ? 'col-lg-6' : ''; ?>">
-								<?php // Hours values
+								<?php
+								
+								// Begin Hours Information
+
 								$hoursvary = $location_hours_group['location_hours_variable'];
 								$hoursvary_info = $location_hours_group['location_hours_variable_info'];
 								$hours247 = $location_hours_group['location_24_7'];
@@ -1031,7 +1038,11 @@ while ( have_posts() ) : the_post(); ?>
 									} // endif
 								} // endif ( if $hoursvary )
 
-								// After Hours Information
+								// End Hours Information
+
+
+								// Begin After Hours Information
+
 								if ( !$location_hours_group['location_24_7'] ) { // If the location is not open 24/7 ?>
 									<h3 class="h5">After Hours</h3>
 									<?php if ( $location_hours_group['location_after_hours'] ) { // If after hours information is set at the location-level ?>
@@ -1039,13 +1050,25 @@ while ( have_posts() ) : the_post(); ?>
 									<?php } else { ?>
 										<?php echo $afterhours_system; // Use the system-level after hours information ?>
 									<?php }
-								} // endif ?>
+								} // endif ( !$location_hours_group['location_24_7'] )
+								
+								// End After Hours Information
+
+								?>
 							</div>
-							<?php // End Hours Information ?>
-							<?php // Begin Appointment Information
+							<?php
+							
+							// End Hours and After Hours Information
+							
+
+							// Begin Appointment Information
+
 							if ( $show_online_scheduling_section ) { ?>
 							<div class="col-12 col-lg-6">
-								<?php // Begin MyChart Scheduling Links Section
+								<?php
+								
+								// Begin MyChart Scheduling Links Section
+								
 								if ( $show_mychart_scheduling_section ) {
 									$mychart_scheduling_book_heading = get_field('mychart_scheduling_book_heading_system', 'option') ?: 'Appointments';
 									$mychart_scheduling_book_descr = get_field('mychart_scheduling_book_descr_system', 'option') ?: 'Find a provider at this location to book an appointment online.';
@@ -1058,9 +1081,12 @@ while ( have_posts() ) : the_post(); ?>
 										</div>
 									</div>
 								<?php } // endif $show_mychart_scheduling_section
+
 								// End MyChart Scheduling Links Section
 
+
 								// Begin link to specialized care appointment request
+
 								if ( $show_appointment_request_section ) {
 									$appointment_request_heading_standalone = get_field('appointment_request_heading_standalone_system', 'option') ?: 'Appointments';
 									$appointment_request_intro_standalone = get_field('appointment_request_descr_standalone_system', 'option') ?: 'Appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.';
@@ -1083,8 +1109,10 @@ while ( have_posts() ) : the_post(); ?>
 										</div>
 									</div>
 								<?php }
+
 								// End link to specialized care appointment request
 								
+
 								// Begin Visit Pre-registration section
 								
 								$mychart_scheduling_preregister_heading = get_field('mychart_scheduling_preregister_heading_system', 'option') ?: 'Immediate Care';
@@ -1093,12 +1121,20 @@ while ( have_posts() ) : the_post(); ?>
 								<h2 class="h4"><?php echo $mychart_scheduling_preregister_heading; ?></h2>
 								<p><?php echo $mychart_scheduling_preregister_descr; ?></p>
 								<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-preregister.php' ); ?>
-								<?php // End Visit Pre-registration section ?>
+								<?php
+								
+								// End Visit Pre-registration section
+								
+								?>
 							</div>
 							<?php } ?>
 						</div>
 					</div>
-					<?php // End div.text-subsection for Hours and Appointment Information ?>
+					<?php
+					
+					// End div.text-subsection for Hours, After Hours and Appointment Information
+					
+					?>
 				</div>
 			</div>
 			<?php if ( $location_images_count ) { ?>
