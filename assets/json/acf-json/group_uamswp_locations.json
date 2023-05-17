@@ -515,25 +515,6 @@
             "placement": "top",
             "endpoint": 0
         },
-        "field_location_dep": {
-            "key": "field_location_dep",
-            "name": "location_dep",
-            "type": "text",
-            "label": "Department / DEP ID(s) from Epic",
-            "instructions": "ID for one or more Epic departments associated with this location. These will be used when generating things like open scheduling widgets. <br />Separate multiple values with a comma (\",\"). <br />The department(s) included here should correspond to this physical location. <br />Check the External Name field of each department record in Epic to ensure it is patient-friendly and matches up with how this location is named since it will be visible to users in the open scheduling widget.",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
         "field_location_ac_query": {
             "key": "field_location_ac_query",
             "name": "location_ac_query",
@@ -552,6 +533,33 @@
             "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        "field_location_dep": {
+            "key": "field_location_dep",
+            "name": "location_dep",
+            "type": "text",
+            "label": "Department / DEP ID(s) from UAMS Health Epic",
+            "instructions": "ID for one or more Epic departments associated with this location. These will be used when generating things like open scheduling widgets. <br />Separate multiple values with a comma (\",\"). <br />The department(s) included here should correspond to this physical location. <br />Check the External Name field of each department record in Epic to ensure it is patient-friendly and matches up with how this location is named since it will be visible to users in the open scheduling widget.",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_location_ac_query",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         },
         "field_location_appointments_query": {
             "key": "field_location_appointments_query",
