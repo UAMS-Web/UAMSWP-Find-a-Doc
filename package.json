@@ -16,11 +16,15 @@
     "gulp-sass": "^5.1.0",
     "postcss": "^8.4.12",
     "postcss-discard-comments": "^5.1.1",
-    "sass": "^1.49.11"
+    "sass": "~1.26.11"
   },
   "devDependencies": {},
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "resolutions": {
+    "glob-parent": "^5.1.2"
   },
   "repository": {
     "type": "git",

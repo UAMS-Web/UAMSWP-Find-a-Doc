@@ -45,14 +45,23 @@ $middle_name = get_field('physician_middle_name',$post->ID);
 $last_name = get_field('physician_last_name',$post->ID);
 $pedigree = get_field('physician_pedigree',$post->ID);
 $full_name = $first_name . ' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '') .  ( $degree_list ? ', ' . $degree_list : '' );
-$full_name_attr = str_replace('"', '\'', $full_name);
-$full_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($full_name_attr, null, 'utf-8')));
+$full_name_attr = $full_name;
+$full_name_attr = str_replace('"', '\'', $full_name_attr); // Replace double quotes with single quote
+$full_name_attr = htmlentities($full_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+$full_name_attr = str_replace('&nbsp;', ' ', $full_name_attr); // Convert non-breaking space with normal space
+$full_name_attr = html_entity_decode($full_name_attr); // Convert HTML entities to their corresponding characters
 $medium_name = ($prefix ? $prefix .' ' : '') . $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name;
-$medium_name_attr = str_replace('"', '\'', $medium_name);
-$medium_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($medium_name_attr, null, 'utf-8')));
+$medium_name_attr = $medium_name;
+$medium_name_attr = str_replace('"', '\'', $medium_name_attr); // Replace double quotes with single quote
+$medium_name_attr = htmlentities($medium_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+$medium_name_attr = str_replace('&nbsp;', ' ', $medium_name_attr); // Convert non-breaking space with normal space
+$medium_name_attr = html_entity_decode($medium_name_attr); // Convert HTML entities to their corresponding characters
 $short_name = $prefix ? $prefix .'&nbsp;' .$last_name : $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '');
-$short_name_attr = str_replace('"', '\'', $short_name);
-$short_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($short_name_attr, null, 'utf-8')));
+$short_name_attr = $short_name;
+$short_name_attr = str_replace('"', '\'', $short_name_attr); // Replace double quotes with single quote
+$short_name_attr = htmlentities($short_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+$short_name_attr = str_replace('&nbsp;', ' ', $short_name_attr); // Convert non-breaking space with normal space
+$short_name_attr = html_entity_decode($short_name_attr); // Convert HTML entities to their corresponding characters
 $sort_name = $last_name . ', ' . $first_name . ' ' . $middle_name;
 $sort_name_param_value = sanitize_title_with_dashes($sort_name);
 $excerpt = get_field('physician_short_clinical_bio',$post->ID);
@@ -60,6 +69,11 @@ $resident = get_field('physician_resident',$post->ID);
 $resident_title_name = 'Resident Physician';
 $phys_title = get_field('physician_title',$post->ID);
 $phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
+$phys_title_name_attr = $phys_title_name;
+$phys_title_name_attr = str_replace('"', '\'', $phys_title_name_attr); // Replace double quotes with single quote
+$phys_title_name_attr = htmlentities($phys_title_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+$phys_title_name_attr = str_replace('&nbsp;', ' ', $phys_title_name_attr); // Convert non-breaking space with normal space
+$phys_title_name_attr = html_entity_decode($phys_title_name_attr); // Convert HTML entities to their corresponding characters
 $vowels = array('a','e','i','o','u'); // Define a list of variables for use in determining which indefinite article to use (a vs. an)
 if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
     $phys_title_indef_article = 'an'; // If the clinical title starts with a vowel, use "an"
@@ -118,13 +132,35 @@ if( $locations && $location_valid ) {
         if ( 2 > $l ){
             if ( get_post_status ( $location ) == 'publish' ) {
                 $primary_appointment_title = get_the_title( $location );
-                $primary_appointment_title_attr = str_replace('"', '\'', $primary_appointment_title);
-                $primary_appointment_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($primary_appointment_title_attr, null, 'utf-8')));
+                $primary_appointment_title_attr = $primary_appointment_title;
+                $primary_appointment_title_attr = str_replace('"', '\'', $primary_appointment_title_attr); // Replace double quotes with single quote
+                $primary_appointment_title_attr = str_replace('&#8217;', '\'', $primary_appointment_title_attr); // Replace right single quote with single quote
+                $primary_appointment_title_attr = htmlentities($primary_appointment_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+                $primary_appointment_title_attr = str_replace('&nbsp;', ' ', $primary_appointment_title_attr); // Convert non-breaking space with normal space
+                $primary_appointment_title_attr = html_entity_decode($primary_appointment_title_attr); // Convert HTML entities to their corresponding characters
                 $primary_appointment_url = get_the_permalink( $location );
+                $primary_appointment_city = get_field('location_city', $location);
+                $primary_appointment_city_attr = $primary_appointment_city;
+                $primary_appointment_city_attr = str_replace('"', '\'', $primary_appointment_city_attr); // Replace double quotes with single quote
+                $primary_appointment_city_attr = str_replace('&#8217;', '\'', $primary_appointment_city_attr); // Replace right single quote with single quote
+                $primary_appointment_city_attr = htmlentities($primary_appointment_city_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+                $primary_appointment_city_attr = str_replace('&nbsp;', ' ', $primary_appointment_city_attr); // Convert non-breaking space with normal space
+                $primary_appointment_city_attr = html_entity_decode($primary_appointment_city_attr); // Convert HTML entities to their corresponding characters
+
                 $l++;
             }
         }
     } // endforeach
+}
+// Set Areas of Expertise Variables
+$expertises =  get_field('physician_expertise',$post->ID);
+if ( $expertises ) {
+    foreach ( $expertises as $expertise ) {
+        if ( get_post_status ( $expertise ) == 'publish' ) {
+            $expertise_primary_name = get_the_title($expertise);
+            break;
+        }
+    }
 }
 
 // Hide Sections
@@ -153,11 +189,13 @@ if (empty($excerpt)){
     if ($bio){
         $excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 155, '...');
     } else {
-        $fallback_desc = $medium_name_attr . ' is ' . ($phys_title ? $phys_title_indef_article . ' ' . strtolower($phys_title_name) : 'a health care provider' ) . ($primary_appointment_title ? ' at ' . $primary_appointment_title : '') .  ' employed by UAMS Health.';
+        $fallback_desc = $medium_name_attr . ' is ' . ($phys_title ? $phys_title_indef_article . ' ' . strtolower($phys_title_name) : 'a health care provider' ) . ($primary_appointment_title_attr ? ' at ' . $primary_appointment_title_attr : '') .  ' employed by UAMS Health.';
         $excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 155, '...');
     }
 }
 $schema_description = $excerpt;  // Used for Schema Data. Should ALWAYS have a value
+
+// Override theme's method of defining the meta description
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
@@ -165,14 +203,45 @@ function sp_titles_desc($html) {
 }
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
-// Set meta title
-function sp_titles_title($html) { 
-    global $full_name;
-	//you can add here all your conditions as if is_page(), is_category() etc.. 
-	$html = $full_name . ' | ' . get_bloginfo( "name" );
-	return $html;
+// Override theme's method of defining the page title
+function uamswp_fad_title($html) { 
+    global $full_name_attr;
+    global $phys_title_name_attr;
+    global $primary_appointment_city_attr;
+    global $expertise_primary_name;
+
+    $meta_title_chars_max = 60; // The recommended length for meta titles is 50-60 characters. Sets the max to 60.
+    $meta_title_separator = ' | '; // Characters separating components of the meta title
+
+    // Base meta title ("{Full display name} | UAMS Health")
+    $meta_title_base = $full_name_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
+    $meta_title_base_chars = strlen( $meta_title_base ); // Count the characters in the meta title
+
+    // Base meta title ("{Full display name} | {Clinical title} | UAMS Health")
+    $meta_title_enhanced = $full_name_attr . $meta_title_separator . $phys_title_name_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
+    $meta_title_enhanced_chars = strlen( $meta_title_enhanced ); // Count the characters in the meta title
+
+    // Enhanced meta title level 1 ("{Full display name} | {Clinical title} | {City of primary location} | UAMS Health")
+    $meta_title_enhanced_x2 = $full_name_attr . $meta_title_separator . $phys_title_name_attr . $meta_title_separator . $primary_appointment_city_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
+    $meta_title_enhanced_x2_chars = strlen( $meta_title_enhanced_x2 ); // Count the characters in the meta title
+
+    // Enhanced meta title level 2 ("{Full display name} | {Clinical title} | {Primary area of expertise} | {City of primary location} | UAMS Health")
+    $meta_title_enhanced_x3 = $full_name_attr . $meta_title_separator . $phys_title_name_attr . $meta_title_separator . $expertise_primary_name . $meta_title_separator . $primary_appointment_city_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
+    $meta_title_enhanced_x3_chars = strlen( $meta_title_enhanced_x3 ); // Count the characters in the meta title
+
+    if ( $expertise_primary_name && ( $meta_title_enhanced_x3_chars <= $meta_title_chars_max ) ) {
+        $html = $meta_title_enhanced_x3;
+    } elseif ( $primary_appointment_city_attr && ( $meta_title_enhanced_x2_chars <= $meta_title_chars_max ) ) {
+        $html = $meta_title_enhanced_x2;
+    } elseif ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
+        $html = $meta_title_enhanced;
+    } else {
+        $html = $meta_title_base;
+    }
+    return $html;
 }
-add_filter('seopress_titles_title', 'sp_titles_title', 20, 2);
+// add_filter('seopress_titles_title', 'uamswp_fad_title', 20, 2);
+add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 function be_remove_title_from_single_crumb( $crumb, $args ) { // Because BE is the man
     global $full_name;
@@ -769,6 +838,227 @@ while ( have_posts() ) : the_post();
                     </div>
                     
                 </div>
+                <?php // Begin code from master branch for reconciling into feature branch ?>
+                <div class="col-12 col-xs p-4 py-xs-0 px-xs-4 px-sm-8 order-2 text">
+                    <h1 class="page-title">
+                        <span class="name"><?php echo $full_name; ?></span>
+                        <?php 
+                        
+                        if ($phys_title_name && !empty($phys_title_name)) { ?>
+                            <span class="subtitle"><?php echo ($phys_title_name ? $phys_title_name : ''); ?></span>
+                        <?php } ?>
+                    </h1>
+                    <?php 
+                        $l = 1;
+                        if( $locations && $location_valid ): ?>
+                        <div data-sectiontitle="Primary Location">
+                            <?php if ($eligible_appt) { ?>
+                                <h2 class="h3">Primary Appointment Location</h2>
+                            <?php } else { ?>
+                                <h2 class="h3">Primary Location</h2>
+                            <?php } // endif ?>
+                            <?php foreach( $locations as $location ):
+                                    if ( 2 > $l ){
+	                                    if ( get_post_status ( $location ) == 'publish' ) {
+
+                                            // Reset variables
+                                            $address_id = $location;
+                                        
+                                            // Parent Location 
+                                            $location_has_parent = get_field('location_parent', $location);
+                                            $location_parent_id = get_field('location_parent_id', $location);
+                                            $parent_location = '';
+                                            $parent_id = '';
+                                            $parent_title = '';
+                                            $parent_url = '';
+                                        
+                                            if ($location_has_parent && $location_parent_id) { 
+                                                $parent_location = get_post( $location_parent_id );
+                                            }
+                                            // Get Post ID for Address & Image fields
+                                            if ($parent_location) {
+                                                $parent_id = $parent_location->ID;
+                                                $parent_title = $parent_location->post_title;
+                                                $parent_url = get_permalink( $parent_id );
+                                                $address_id = $parent_id;
+                                            }
+                                            
+                                            $location_address_1 = get_field('location_address_1', $address_id );
+                                            $location_building = get_field('location_building', $address_id );
+                                            if ($location_building) {
+                                                $building = get_term($location_building, "building");
+                                                $building_slug = $building->slug;
+                                                $building_name = $building->name;
+                                            }
+                                            $location_floor = get_field_object('location_building_floor', $address_id );
+                                                $location_floor_value = '';
+                                                $location_floor_label = '';
+                                                if ( $location_floor && is_object($location_floor) ) {
+                                                    $location_floor_value = $location_floor['value'];
+                                                    $location_floor_label = $location_floor['choices'][ $location_floor_value ];
+                                                }
+                                            $location_suite = get_field('location_suite', $address_id );
+                                            $location_address_2 =
+                                                ( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? '<br />' : '' ) : '' )
+                                                . ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ', ' : '' ) : '' )
+                                                . ( $location_suite ? $location_suite : '' );
+                                            $location_address_2_schema =
+                                                ( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? ' ' : '' ) : '' )
+                                                . ( $location_floor && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ' ' : '' ) : '' )
+                                                . ( $location_suite ? $location_suite : '' );
+
+                                            $location_address_2_deprecated = get_field('location_address_2', $address_id );
+                                            if (!$location_address_2) {
+                                                $location_address_2 = $location_address_2_deprecated;
+                                                $location_address_2_schema = $location_address_2_deprecated;
+                                            }
+
+                                            $location_city = get_field('location_city', $address_id);
+                                            $location_state = get_field('location_state', $address_id);
+                                            $location_zip = get_field('location_zip', $address_id);
+
+                                    ?>
+                                <p><strong><?php echo $primary_appointment_title; ?></strong><br />
+                                <?php if ( $parent_location ) { ?>
+                                    (Part of <a href="<?php echo $parent_url; ?>" data-categorytitle="Parent Name"><?php echo $parent_title; ?></a>)<br />
+                                <?php } // endif ?>
+                                <?php echo $location_address_1; ?><br/>
+                                <?php echo $location_address_2 ? $location_address_2 . '<br/>' : ''; ?>
+                                <?php echo $location_city . ', ' . $location_state . ' ' . $location_zip; ?>
+                                <?php $map = get_field( 'location_map', $address_id ); ?>
+                                <!-- <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a> -->
+                                </p>
+                                <?php
+                                    // Phone values
+                                    $phone_output_id = $location;
+                                    $phone_output = 'associated_locations';
+                                    include( UAMS_FAD_PATH . '/templates/blocks/locations-phone.php' );
+                                 ?>
+                                <div class="btn-container">
+                                    <a class="btn btn-primary" href="<?php echo get_the_permalink( $location ); ?>" data-itemtitle="<?php echo $primary_appointment_title_attr; ?>" data-categorytitle="View Location">
+                                        View Location
+                                    </a>
+                                    <?php if (1 < $location_count) { ?>
+                                        <a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of locations for this provider" data-categorytitle="View All Locations">
+                                            View All Locations
+                                        </a>
+                                    <?php } ?>
+                                </div>
+                                <?php $l++;
+	                                }
+                                } ?>
+                            <?php endforeach;
+								// wp_reset_postdata(); ?>
+                        </div>
+						<?php endif; ?> 
+                    <h2 class="h3">Overview</h2>
+                    <dl data-sectiontitle="Overview">
+                    <?php // Display area(s) of expertise
+                    $expertise_valid = false;
+                    if ($expertises && !empty($expertises) && !$hide_medical_ontology) { 
+                        foreach( $expertises as $expertise ) {
+                            if ( get_post_status ( $expertise ) == 'publish' ) {
+                               $expertise_valid = true;
+                               $break;
+                            }
+                        }
+                        if ( $expertise_valid ) {
+                        ?>
+                        <dt>Area<?php echo( count($expertises) > 1 ? 's' : '' );?> of Expertise</dt>
+                        <?php foreach( $expertises as $expertise ) {
+                            if ( get_post_status ( $expertise ) == 'publish' && $expertise !== 0 ) {
+                                echo '<dd><a href="' . get_permalink($expertise) . '" target="_self" data-sectiontitle="Overview" data-categorytitle="View Area of Expertise">' . get_the_title($expertise) . '</a></dd>';
+                            }
+                        } ?>
+                        <?php }
+                    } ?>
+                    <?php // Display if they accept new patients
+                    if ( $eligible_appt ) { ?>
+                        <dt>Accepting New Patients</dt>
+                        <?php 
+                        if ($accept_new) {
+                            // Display if they require referrals for new patients
+                            if ( $refer_req ) { ?>
+                                <dd>Yes (Referral Required)</dd>
+                            <?php } else { ?>
+                                <dd>Yes</dd>
+                            <?php }
+                        } else { ?>
+                            <dd>No</dd>
+                        <?php } // endif
+                    } // endif ?>
+                    <?php  // Display if they will provide second opinions    
+                    if ($second_opinion) { ?>
+                        <dt>Provides Second Opinion</dt>
+                        <dd>Yes</dd>
+                    <?php } ?>
+                    <?php // Display all patient types
+                        if( $patients ) { 
+                        ?>
+                            <dt>Patient Type<?php echo( count($patients) > 1 ? 's' : '' );?></dt>
+                            <?php foreach( $patients as $patient ): ?>
+                                <?php $patient_name = get_term( $patient, 'patient_type');
+                                    echo '<dd>' . $patient_name->name . '</dd>';
+                                ?>
+                            <?php endforeach; ?>
+                    <?php } // endif ?>
+                    <?php // Display all languages
+                        if( $languages && $language_list == 'English') { 
+                        ?>
+                        <dt class="sr-only">Language</dt>
+                        <?php echo '<dd class="sr-only">' . $language_list . '</dd>';?>
+                    <?php } else { ?>
+                        <dt>Language<?php echo( $language_count > 1 ? 's' : '' );?></dt>
+                        <?php echo '<dd>' . $language_list . '</dd>';?>
+                    <?php } //endif ?>
+                    </dl>
+                    <?php
+                        echo '<div class="rating" aria-label="Patient Rating">';
+                        if ( $rating_valid ){
+                            $avg_rating = $rating_data->profile->averageRatingStr;
+                            $avg_rating_dec = $rating_data->profile->averageRating;
+                            $review_count = $rating_data->profile->reviewcount;
+                            $comment_count = $rating_data->profile->bodycount;
+                            echo '<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: '. $avg_rating_dec/5 * 100 .'%;"></div></div>';
+                            echo '<div class="ratings-score">'. $avg_rating .'<span class="sr-only"> out of 5</span></div>';
+                            echo '<div class="w-100"></div>';
+                            echo '<a href="#ratings" aria-label="Jump to Patient Ratings and Reviews" data-sectiontitle="Overview">';
+                            echo '<div class="ratings-count-lg" aria-hidden="true">'. $review_count .' Patient Satisfaction Ratings</div>';
+                            echo '<div class="ratings-comments-lg" aria-hidden="true">'.  $comment_count .' comments</div>';
+                            echo '</a>';
+                        } else { ?>
+                            <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this provider" data-sectiontitle="Overview"><span aria-hidden="true">Why not?</span></a></em></p> 
+                        <?php
+                        }
+                        echo '</div>';
+                    ?>
+                    <?php if( !$rating_valid ) { ?>
+                        <div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-modal="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="WhyNotTitle">Why are there no ratings?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>There is no publicly available rating for this medical professional for one of three reasons:</p>
+                                        <ul>
+                                            <li>He or she does not see patients</li>
+                                            <li>He or she sees patients but has not yet received the minimum number of Patient Satisfaction Reviews. To be eligible for display, we require a minimum of 30 surveys. This ensures that the rating is statistically reliable and a true reflection of patient satisfaction.</li>
+                                            <li>He or she is a resident physician.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
+                <?php // End code from master branch for reconciling into feature branch ?>
                 <?php 
                 $docphoto = '/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg';
                 if ( has_post_thumbnail() ) { ?>
@@ -904,7 +1194,7 @@ while ( have_posts() ) : the_post();
                             if($video) { ?>
                                 <?php if(function_exists('lyte_preparse')) {
                                     echo '<div class="alignwide">';
-                                    echo lyte_parse( str_replace('https', 'httpv', $video ) ); 
+                                    echo lyte_parse( str_replace(['https:', 'http:'], 'httpv:', $video ) ); 
                                     echo '</div>';
                                 } else {
                                     echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
@@ -974,7 +1264,7 @@ while ( have_posts() ) : the_post();
                             <div class="content-width mt-8" id="radiomd-embedded-filtered-doctor"></div>
                         </div>
                         <div class="col-12 more">
-                            <p class="lead">Find other great episodes on other topics and from other UAMS providers.</p>
+                            <p class="lead">Find other great episodes on other topics and from other UAMS Health providers.</p>
                             <div class="cta-container">
                                 <a href="/podcast/" class="btn btn-primary" aria-label="Listen to more episodes of the UAMS Health Talk podcast">Listen to More Episodes</a>
                             </div>
@@ -1071,7 +1361,7 @@ while ( have_posts() ) : the_post();
                             <?php endif; ?>
                             <?php
                                 if( have_rows('physician_education') ): ?>
-                                    <h3 class="h4">Education</h3>
+                                    <h3 class="h4">Education and Training</h3>
                                     <dl>
                                     <?php while( have_rows('physician_education') ): the_row();
                                         $school_name = get_term( get_sub_field('school'), 'school');
@@ -1181,6 +1471,8 @@ while ( have_posts() ) : the_post();
                 $condition_heading_related_treatment = false;
                 $condition_heading_treated = true;
                 $condition_disclaimer = true;
+                $condition_context = 'single-provider';
+                $condition_heading_related_name = $short_name; // To what is it related?
 
                 include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
                 // $condition_schema .= ',"medicalSpecialty": [';
@@ -1206,6 +1498,8 @@ while ( have_posts() ) : the_post();
                 $treatment_heading_related_condition = false;
                 $treatment_heading_performed = true;
                 $treatment_disclaimer = true;
+                $treatment_context = 'single-provider';
+                $treatment_heading_related_name = $short_name; // To what is it related?
                 include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
                 // $treatment_schema .= ',"medicalSpecialty": [';
                 $i = 0;
@@ -1234,7 +1528,7 @@ while ( have_posts() ) : the_post();
                                 <div class="card-list card-list-expertise">
                                     <?php foreach( $expertises as $expertise ) {
                                         $id = $expertise;
-                                        if ( get_post_status ( $expertise ) == 'publish' ) {
+                                        if ( get_post_status ( $expertise ) == 'publish' && $expertise !== 0 ) {
                                             include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
                                         }
                                     } ?>
@@ -1371,6 +1665,36 @@ while ( have_posts() ) : the_post();
                                 </div>
                             </div>
                         </div>
+                        <script>
+                            /* Custom HTML for the paging controls for the comments list */
+                            window.DS_OPT = {
+                                buildCommentsLoadMoreHTML: function(data, ctx){
+                                    // a variable to hold the HTML markup
+                                    var x;
+                                    // make sure we have data and it is valid
+                                    if(data && data.valid){
+                                        // grab the profile data
+                                        var review = data.reviewMeta;
+                                        if(review){
+                                            // setup the variables that the template will need	
+                                            var templateData = {
+                                                moreUrl:    review.moreUrl
+                                            }; 
+                                            // build the HTML markup using {{var-name}} for the template variables
+                                            var template = [
+                                                '<div class="ds-comments-more ds-comments-more-placeholder">',
+                                                    '<a href="#" class="ds-comments-more-link" data-more-comments-url="{{moreUrl}}">View More</a>',
+                                                    '<span class="ds-comments-more-loading" style="display:none;">Loading...</span>',
+                                                '</div>'
+                                            ].join('');
+                                            // apply the variables to the template
+                                            x = ctx.tmpl(template, templateData);
+                                        }
+                                    }      
+                                    return x;
+                                }
+                            };
+                        </script>
                         <script src="https://transparency.nrchealth.com/widget/v2/uams/npi/<?php echo $npi; ?>/lotw.js" async></script>                           
                         <?php // endif; ?>
                     </div>
