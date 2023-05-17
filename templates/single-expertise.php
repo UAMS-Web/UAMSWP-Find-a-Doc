@@ -650,7 +650,7 @@ function uamswp_expertise_podcast() {
                     <div class="content-width mt-8" id="radiomd-embedded-filtered-tag"></div>
                 </div>
                 <div class="col-12 more">
-                    <p class="lead">Find other great episodes on other topics and from other UAMS providers.</p>
+                    <p class="lead">Find other great episodes on other topics and from other UAMS Health providers.</p>
                     <div class="cta-container">
                         <a href="/podcast/" class="btn btn-primary" aria-label="Listen to more episodes of the UAMS Health Talk podcast">Listen to More Episodes</a>
                     </div>
