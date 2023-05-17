@@ -313,6 +313,16 @@ function location_save_post( $post_id ) {
 		$_POST['acf']['field_location_featured_image'] = $wayfinding_image;
 	}
 
+	$has_parent = $_POST['acf']['field_location_parent'];
+	$location_parent = $_POST['acf']['field_location_parent_id'];
+
+	if ($has_parent && !empty($location_parent)) {
+		$region = array();
+		$region[] = get_field( 'location_region', $location_parent);
+	
+		$_POST['acf']['field_location_region'] = $region;
+	}
+
 }
 // Fires after saving data to post - change post data 
 add_action('acf/save_post', 'location_save_post_after', 20);

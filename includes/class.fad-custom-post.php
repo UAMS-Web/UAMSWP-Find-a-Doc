@@ -2258,6 +2258,13 @@ function add_theme_caps() {
 	$role->add_cap( 'edit_others_clinical-resources');
 	$role->add_cap( 'publish_clinical-resources');
 	$role->add_cap( 'read_private_clinical-resources');
+	$role->add_cap( 'edit_clinical_resource');
+	$role->add_cap( 'read_clinical_resource');
+	$role->add_cap( 'delete_clinical_resource');
+	$role->add_cap( 'edit_clinical_resources');
+	$role->add_cap( 'edit_others_clinical_resources');
+	$role->add_cap( 'publish_clinical_resources');
+	$role->add_cap( 'read_private_clinical_resources');
 }
 add_action( 'admin_init', 'add_theme_caps');
 
@@ -2356,11 +2363,17 @@ function rest_api_provider_meta() {
 		)
 	);
 	register_rest_field('treatment', 'treatment_meta', array(
-		'get_callback' => 'get_treatment_meta',
-		'update_callback' => null,
-		'schema' => null,
-	)
-);
+			'get_callback' => 'get_treatment_meta',
+			'update_callback' => null,
+			'schema' => null,
+		)
+	);
+	register_rest_field('clinical-resource', 'resource_meta', array(
+			'get_callback' => 'get_resource_meta',
+			'update_callback' => null,
+			'schema' => null,
+		)
+	);
 }
 function get_provider_meta($object) {
     $postId = $object['id'];
@@ -2712,10 +2725,26 @@ function get_location_meta($object) {
 	}	
 	//$data['location_photo'] = get_the_post_thumbnail($postId, 'aspect-16-9-small', ['class' => 'card-img-top']);
 	$map = get_field('location_map', $postId );
+	$location_floor = get_field_object('location_building_floor', $postId );
+		$location_floor_value = '';
+		$location_floor_label = '';
+		if ( $location_floor ) {
+			$location_floor_value = $location_floor['value'];
+			$location_floor_label = $location_floor['choices'][ $location_floor_value ];
+		}
 	$data['location_lat'] = $map['lat'];
 	$data['location_lng'] = $map['lng'];
 	$data['location_address_1'] = get_field('location_address_1', $postId );
 	$data['location_address_2'] = ( get_field('location_address_2', $postId ) ? get_field('location_address_2', $postId ) . '<br/>' : '');
+	$location_building = get_field('location_building', $postId );
+	if ($location_building) {
+		$building = get_term($location_building, "building");
+		$building_slug = $building->slug;
+		$building_name = $building->name;
+	}
+	$data['location_building'] = $building_name;
+	$data['location_building_floor'] = $location_floor_label;
+	$data['location_suite'] = get_field('location_suite', $postId );
 	$data['location_city'] = get_field('location_city', $postId );
 	$data['location_state'] = get_field('location_state', $postId );
 	$data['location_zip'] = get_field('location_zip', $postId );
@@ -2731,6 +2760,7 @@ function get_location_meta($object) {
 			$data['location_types'] .= $type_name->name;
 		endforeach;
 	endif;
+	$data['location_direction'] = get_field('location_direction', $postId);
 	$location_phone = get_field('location_phone', $postId );
 	$location_phone_link = '<a href="tel:' . format_phone_dash( $location_phone ) . '" class="icon-phone">' . format_phone_us( $location_phone ) . '</a>';
 	$location_clinic_phone_query = get_field('location_clinic_phone_query', $postId ); // separate number for (new) appointments?
@@ -3394,6 +3424,220 @@ function get_treatment_meta($object) {
 
 	return $data;
 
+}
+// Clinical Resources API
+function get_resource_meta($object) {
+	$postId = $object['id'];
+	$resource_image = get_the_post_thumbnail_url( $postId, 'large' );
+	$resource_type = get_field('clinical_resource_type', $postId);
+	$resource_type_value = $resource_type['value'];
+	$resource_type_label = $resource_type['label'];
+	// Conditions
+	$conditions_cpt = get_field('clinical_resource_conditions', $postId);
+	if($conditions_cpt) {
+		$args = (array(
+			'post_type' => "condition",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $conditions_cpt
+		));
+		$conditions_cpt_query = new WP_Query( $args );
+	}
+	// Treatments
+	$treatments_cpt = get_field('clinical_resource_treatments', $postId);
+	if($treatments_cpt) {
+		$args = (array(
+			'post_type' => "treatment",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $treatments_cpt
+		));
+		$treatments_cpt_query = new WP_Query( $args );
+	}
+	// Physicians
+	$providers = get_field( 'clinical_resource_providers', $postId );
+	if($providers) {
+		$args = array(
+			"post_type" => "provider",
+			"post_status" => "publish",
+			"posts_per_page" => -1,
+			"orderby" => "title",
+			"order" => "ASC",
+			"post__in" => $providers
+		);
+		$provider_query = New WP_Query( $args );
+	}
+	// Locations
+	$locations = get_field('clinical_resource_locations', $postId);
+	if($locations) {
+		$args = (array(
+			'post_type' => "location",
+			'order' => 'ASC',
+			'orderby' => 'title',
+			'posts_per_page' => -1,
+			'post_status' => 'publish',
+			'post__in'	=> $locations
+		));
+		$location_query = new WP_Query( $args );
+	}
+	// Expertise
+	$expertises =  get_field('clinical_resource_aoe', $postId);
+	if($expertises) {
+		$args = (array(
+			'post_type' => "expertise",
+			'order' => 'ASC',
+			'orderby' => 'title',
+			'posts_per_page' => -1,
+			'post_status' => 'publish',
+			'post__in'	=> $expertises
+		));
+		$expertise_query = new WP_Query( $args );
+	}
+	// Related Resources
+	$resources =  get_field('clinical_resource_related', $postId);
+	if($resources) {
+		$args = (array(
+			'post_type' => "clinical-resource",
+			'order' => 'DESC',
+			'orderby' => 'post_date',
+			'posts_per_page' => -1,
+			'post_status' => 'publish',
+			'post__in'	=> $resources
+		));
+		$resource_query = new WP_Query( $args );
+	}
+
+	$text = get_field('clinical_resource_text', $postId);
+	$nci_query = get_field('clinical_resource_text_nci_query', $postId);
+    $nci_embed = get_field('clinical_resource_nci_embed', $postId);
+
+	$infographic = get_field('clinical_resource_infographic', $postId);
+    $infographic_descr = get_field('clinical_resource_infographic_descr', $postId);
+    $infographic_transcript = get_field('clinical_resource_infographic_transcript', $postId);
+
+	$document_descr = get_field('clinical_resource_document_descr', $postId);
+    $document = get_field('clinical_resource_document', $postId);
+
+	$video = get_field('clinical_resource_video', $postId);
+    $video_descr = get_field('clinical_resource_video_descr', $postId);
+    $video_transcript = get_field('clinical_resource_video_transcript', $postId);
+
+	$data['clinical_resource_title'] = get_the_title( $postId );
+	$data['clinical_resource_link'] = get_permalink($postId );
+	$data['clinical_resource_excerpt'] = get_field( 'clinical_resource_excerpt', $postId);
+	$data['clinical_resource_image'] = $resource_image;
+	$data['clinical_resource_type'] = $resource_type_label;
+	$data['clinical_resource_text'] = $text;
+	$data['clinical_resource_text_nci_query'] = $nci_query;
+	$data['clinical_resource_nci_embed'] = $nci_embed;
+	$data['clinical_resource_infographic'] = $infographic;
+	$data['clinical_resource_infographic_descr'] = $infographic_descr;
+	$data['clinical_resource_infographic_transcript'] = $infographic_transcript;
+	$data['clinical_resource_video'] = $video;
+	$data['clinical_resource_video_descr'] = $video_descr;
+	$data['clinical_resource_video_transcript'] = $video_transcript;
+	// $data['clinical_resource_document'] = $document;
+	$data['clinical_resource_document_descr'] = $document_descr;
+	$i = 0;
+	while( have_rows($document) ): the_row();
+		$document_title = get_sub_field('document_title');
+		$document_file = get_sub_field('document_file');
+		$document_url = $document_file['url'];
+		$data['clinical_resource_document'][$i]['title'] = $document_title;
+		$data['clinical_resource_document'][$i]['url'] = $document_title;
+		$i++;
+	endwhile;
+	if( $resources && $resource_query->posts ):
+		foreach( $resource_query->posts as $resource ):
+			$data['clinical_resource_associated'][$resource->ID]['link'] = get_permalink( $resource->ID );
+			$data['clinical_resource_associated'][$resource->ID]['title'] = $resource->post_title;
+			$data['clinical_resource_associated'][$resource->ID]['slug'] = $resource->post_name;
+		endforeach;
+	endif;
+	$condition_list = '';
+	$i = 1;
+	if( $conditions_cpt && $conditions_cpt_query->posts ):
+		foreach( $conditions_cpt_query->posts as $condition ):
+			$data['clinical_resource_conditions'][$condition->ID]['link'] = get_permalink( $condition->ID );
+			$data['clinical_resource_conditions'][$condition->ID]['title'] = $condition->post_title;
+			$data['clinical_resource_conditions'][$condition->ID]['slug'] = $condition->post_name;
+			$condition_list .= $condition->post_title;
+			if( count($conditions_cpt) > $i ) {
+				$condition_list .= ', ';
+			}
+			$i++;
+		endforeach;
+	endif;
+	$data['clinical_resource_conditions_list'] = $condition_list;
+	$treatment_list = '';
+	$i = 1;
+	if( $treatments_cpt && $treatments_cpt_query->posts ):
+		foreach( $treatments_cpt_query->posts as $treatment ):
+			$data['clinical_resource_treatments'][$treatment->ID]['link'] = get_permalink( $treatment->ID );
+			$data['clinical_resource_treatments'][$treatment->ID]['title'] = $treatment->post_title;
+			$data['clinical_resource_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
+			$treatment_list .= $treatment->post_title;
+			if( count($treatments_cpt) > $i ) {
+				$treatment_list .= ', ';
+			}
+			$i++;
+		endforeach;
+	endif;
+	$data['clinical_resource_treatments_list'] = $treatment_list;
+	$provider_list = '';
+	$i = 1;
+	if( $providers && $provider_query->posts ):
+
+		foreach( $provider_query->posts as $provider ):
+			$data['clinical_resource_provider'][$provider->ID]['link'] = get_permalink( $provider->ID );
+			$data['clinical_resource_provider'][$provider->ID]['title'] = get_field('physician_full_name', $provider->ID);
+			$data['clinical_resource_provider'][$provider->ID]['slug'] = $provider->post_name;
+			$provider_list .= get_field('physician_full_name', $provider->ID);
+			if( count($providers) > $i ) {
+				$provider_list .= ' | ';
+			}
+			$i++;
+		endforeach;
+	endif;
+	$data['clinical_resource_provider_list'] = $provider_list;
+	$location_list = '';
+	$i = 1;
+	if( $locations && $location_query->posts ):
+
+		foreach( $location_query->posts as $location ):
+			$data['clinical_resource_location'][$location->ID]['link'] = get_permalink( $location->ID );
+			$data['clinical_resource_location'][$location->ID]['title'] = $location->post_title;
+			$data['clinical_resource_location'][$location->ID]['slug'] = $location->post_name;
+			$location_list .= $location->post_title;
+			if( count($locations) > $i ) {
+				$location_list .= ', ';
+			}
+			$i++;
+		endforeach;
+	endif;
+	$data['clinical_resource_location_list'] = $location_list;
+	$expertise_list = '';
+	$i = 1;
+	if( $expertises && $expertise_query->posts ):
+
+		foreach( $expertise_query->posts as $expertise ):
+			$data['clinical_resource_expertise'][$expertise->ID]['link'] = get_permalink( $expertise->ID );
+			$data['clinical_resource_expertise'][$expertise->ID]['title'] = $expertise->post_title;
+			$data['clinical_resource_expertise'][$expertise->ID]['slug'] = $expertise->post_name;
+			$expertise_list .= $expertise->post_title;
+			if( count($expertises) > $i ) {
+				$expertise_list .= ', ';
+			}
+			$i++;
+		endforeach;
+	endif;
+	$data['clinical_resource_expertise_list'] = $expertise_list;
+
+	return $data;
 }
 
 // Add REST API query var filters

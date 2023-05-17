@@ -255,6 +255,7 @@ $args = (array(
 ));
 $resource_query = new WP_Query( $args );
 
+// Override theme's method of defining the meta description
 function sp_titles_desc($html) {
     global $excerpt;
 	$html = $excerpt; 
@@ -479,8 +480,12 @@ while ( have_posts() ) : the_post(); ?>
 			$portal = get_term($location_portal, "portal");
 			$portal_slug = $portal->slug;
 			$portal_name = $portal->name;
-			$portal_name_attr = str_replace('"', '\'', $portal_name);
-			$portal_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($portal_name_attr, null, 'utf-8')));
+			$portal_name_attr = $portal_name;
+			$portal_name_attr = str_replace('"', '\'', $portal_name_attr); // Replace double quotes with single quote
+			$portal_name_attr = str_replace('&#8217;', '\'', $portal_name_attr); // Replace right single quote with single quote
+			$portal_name_attr = htmlentities($portal_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+			$portal_name_attr = str_replace('&nbsp;', ' ', $portal_name_attr); // Convert non-breaking space with normal space
+			$portal_name_attr = html_entity_decode($portal_name_attr); // Convert HTML entities to their corresponding characters
 			$portal_content = get_field('portal_content', $portal);
 			$portal_link = get_field('portal_url', $portal);
 			if ($portal_link) {

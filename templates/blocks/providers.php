@@ -44,8 +44,12 @@ if ( $more ) {
         $more_button_target = $more_button_url['target'];
     if ( empty($more_button_description) )
         $more_button_description = get_field('block_fad_providers_more_button_description');
-        $more_button_description_attr = str_replace('"', '\'', $more_button_description);
-        $more_button_description_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($more_button_description_attr, null, 'utf-8')));
+        $more_button_description_attr = $more_button_description;
+        $more_button_description_attr = str_replace('"', '\'', $more_button_description_attr); // Replace double quotes with single quote
+        $more_button_description_attr = str_replace('&#8217;', '\'', $more_button_description_attr); // Replace right single quote with single quote
+        $more_button_description_attr = htmlentities($more_button_description_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+        $more_button_description_attr = str_replace('&nbsp;', ' ', $more_button_description_attr); // Convert non-breaking space with normal space
+        $more_button_description_attr = html_entity_decode($more_button_description_attr); // Convert HTML entities to their corresponding characters
     if ( empty($more_button_color) && ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) ) {
         $more_button_color = 'primary';
     } else {

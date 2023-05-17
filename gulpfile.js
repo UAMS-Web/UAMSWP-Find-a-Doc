@@ -38,7 +38,7 @@ function style() {
         .pipe(notify({ message: 'Styles task complete' }));
 }
     
-    /**
+/**
  * Compile Sass files
  */
 // gulp.task('compile:sass', ['lint:sass'], () =>

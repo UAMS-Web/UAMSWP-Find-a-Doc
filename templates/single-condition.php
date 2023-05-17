@@ -18,14 +18,44 @@
 	}
 	add_action('wp_head','uamswp_keyword_hook_header');
 
+	$page_title = get_the_title();
+	$page_title_attr = $page_title;
+	$page_title_attr = str_replace('"', '\'', $page_title_attr); // Replace double quotes with single quote
+	$page_title_attr = str_replace('&#8217;', '\'', $page_title_attr); // Replace right single quote with single quote
+	$page_title_attr = htmlentities($page_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+	$page_title_attr = str_replace('&nbsp;', ' ', $page_title_attr); // Convert non-breaking space with normal space
+	$page_title_attr = html_entity_decode($page_title_attr); // Convert HTML entities to their corresponding characters
+	$condition_archive_title = get_field('conditions_archive_headline', 'option') ?: 'Conditions';
+	$condition_archive_title_attr = $condition_archive_title;
+	$condition_archive_title_attr = str_replace('"', '\'', $condition_archive_title_attr); // Replace double quotes with single quote
+	$condition_archive_title_attr = str_replace('&#8217;', '\'', $condition_archive_title_attr); // Replace right single quote with single quote
+	$condition_archive_title_attr = htmlentities($condition_archive_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+	$condition_archive_title_attr = str_replace('&nbsp;', ' ', $condition_archive_title_attr); // Convert non-breaking space with normal space
+	$condition_archive_title_attr = html_entity_decode($condition_archive_title_attr); // Convert HTML entities to their corresponding characters
+	$condition_title = get_field('conditions_single_name', 'option') ?: 'Condition';
+	$condition_title_attr = $condition_title;
+	$condition_title_attr = str_replace('"', '\'', $condition_title_attr); // Replace double quotes with single quote
+	$condition_title_attr = str_replace('&#8217;', '\'', $condition_title_attr); // Replace right single quote with single quote
+	$condition_title_attr = htmlentities($condition_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+	$condition_title_attr = str_replace('&nbsp;', ' ', $condition_title_attr); // Convert non-breaking space with normal space
+	$condition_title_attr = html_entity_decode($condition_title_attr); // Convert HTML entities to their corresponding characters
+	$condition_text = get_field('conditions_archive_intro_text', 'option');
+
 	// Override theme's method of defining the page title
 	function uamswp_fad_title($html) { 
-		// global $condition_title;
+		global $page_title_attr;
+		global $condition_title_attr;
 		//you can add here all your conditions as if is_page(), is_category() etc.. 
-		if ( strlen(get_the_title()) < 34 ) {
-			$html = get_the_title() . ' | Conditions | ' . get_bloginfo( "name" );
+		$meta_title_chars_max = 60;
+		$meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
+		$meta_title_base_chars = strlen( $meta_title_base );
+		$meta_title_enhanced_addition = ' | ' . $condition_title_attr;
+		$meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
+		$meta_title_enhanced_chars = strlen( $meta_title_enhanced );
+		if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
+			$html = $meta_title_enhanced;
 		} else {
-			$html = get_the_title() . ' | ' . get_bloginfo( "name" );
+			$html = $meta_title_base;
 		}
 		return $html;
 	}
@@ -77,11 +107,6 @@
 		$syndication = false;
 	}
 
-	$condition_archive_title = get_field('conditions_archive_headline', 'option') ?: 'Conditions';
-	$condition_title = get_field('conditions_single_name', 'option') ?: 'Condition';
-	$condition_text = get_field('conditions_archive_intro_text', 'option');
-
-	$page_title = get_the_title( );
 	
 	$podcast_name = get_field('condition_podcast_name');
 	
@@ -544,7 +569,7 @@
                             <div class="content-width mt-8" id="radiomd-embedded-filtered-tag"></div>
                         </div>
                         <div class="col-12 more">
-                            <p class="lead">Find other great episodes on other topics and from other UAMS providers.</p>
+                            <p class="lead">Find other great episodes on other topics and from other UAMS Health providers.</p>
                             <div class="cta-container">
                                 <a href="/podcast/" class="btn btn-primary" aria-label="Listen to more episodes of the UAMS Health Talk podcast">Listen to More Episodes</a>
                             </div>
@@ -583,7 +608,7 @@
 					<div class="row">
 						<div class="col-xs-12">
 							<h2 class="module-title"><span class="title">Treatments and Procedures Related to <?php echo $page_title; ?></span></h2>
-							<p class="note">UAMS providers perform and prescribe a broad range of treatments and procedures, some of which may not be listed below.</p>
+							<p class="note">UAMS Health providers perform and prescribe a broad range of treatments and procedures, some of which may not be listed below.</p>
 							<div class="list-container list-container-rows">
 								<ul class="list">
 								<?php while ($treatments_query_cpt->have_posts()) : $treatments_query_cpt->the_post(); 
@@ -657,7 +682,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-							<h2 class="module-title"><span class="title">Providers Treating <?php echo $page_title; ?></span></h2>
+							<h2 class="module-title"><span class="title">Providers Diagnosing or Treating <?php echo $page_title; ?></span></h2>
 							<p class="note">Note that every provider listed below may not perform or prescribe all treatments or procedures related to <?php echo $page_title; ?>. Review each provider for availability.</p>
 							<?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'"]' ); ?>
 							<div class="card-list-container">

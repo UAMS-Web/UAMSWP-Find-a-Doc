@@ -297,7 +297,6 @@ while ( have_posts() ) : the_post();
     $conditions_cpt = get_field('physician_conditions_cpt');
     $treatments = get_field('physician_treatments');
     $treatments_cpt = get_field('physician_treatments_cpt');
-    $expertises =  get_field('physician_expertise');
     $second_opinion = get_field('physician_second_opinion');
     $patients = get_field('physician_patient_types');
     $referral_required = get_field('physician_referral_required');
