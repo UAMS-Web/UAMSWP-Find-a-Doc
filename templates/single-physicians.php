@@ -559,15 +559,23 @@ while ( have_posts() ) : the_post();
         <section class="container-fluid doctor-info bg-white">
             <div class="row">
                 <div class="col-12 col-xs text">
+                    <?php
+                    
+                    // Begin Page Title
+                    
+                    ?>
                     <h1 class="page-title">
                         <span class="name"><?php echo $full_name; ?></span>
-                        <?php 
-                        
-                        if ($phys_title_name && !empty($phys_title_name)) { ?>
+                        <?php if ($phys_title_name && !empty($phys_title_name)) { ?>
                             <span class="subtitle"><?php echo ($phys_title_name ? $phys_title_name : ''); ?></span>
                         <?php } ?>
                     </h1>
-                    <?php // Begin Appointment Information
+                    <?php
+
+                    // End Page Title
+                    
+                    // Begin Appointment Information
+                    
                     if ( $show_online_scheduling_section ) {
                         $appointments_heading = 'Appointments'; ?>
                         <div class="text-subsection">
@@ -585,11 +593,11 @@ while ( have_posts() ) : the_post();
                                     </div>
                                 <?php } // endif $show_mychart_scheduling_section
                                 // End MyChart Scheduling Links Section
-
+                                
                                 // Begin link to specialized care appointment request
                                 if ($show_appointment_request_section) {
                                     $appointment_request_form_count = count($appointment_request_forms);
-
+                                    
                                     $appointment_request_heading = 'Specialized Care Appointments';
                                     $appointment_request_heading_standalone = $appointments_heading;
                                     $appointment_request_intro = 'Some appointments for specialized care with this provider cannot be scheduled online. For those, submit a request for an appointment.';
@@ -605,7 +613,7 @@ while ( have_posts() ) : the_post();
                                             echo '<h2 class="h4">' . $appointment_request_heading_standalone . '</h2>';
                                             echo '<p>' . $appointment_request_intro_standalone . '</p>';
                                         }
-
+                                        
                                         $appointment_request_utm_medium_val = 'single-provider';
                                         $appointment_request_utm_content_val = $page_slug; // page slug
                                         ?>
@@ -618,24 +626,34 @@ while ( have_posts() ) : the_post();
                                 <?php } // endif $show_appointment_request_section
                                 // End link to specialized care appointment request ?>
                             </div><?php // end div.row ?>
-                        </div><?php // end div.text-subsection ?>
+                        </div><?php // End div.text-subsection for Appointment Information ?>
                     <?php } // endif $show_online_scheduling_section
-                    // End Appointment Information ?>
+                    
+                    // End Appointment Information
+                    
+                    // Begin Primary Location and Overview
+                    
+                    ?>
                     <div class="text-subsection">
-						<div class="row">
-							<div class="col-12 col-lg-6">
-                                <?php 
-                                    $l = 1;
-                                    if( $locations && $location_valid ): ?>
+                        <div class="row">
+                            <?php
+                            
+                            // Begin Primary Location
+                            
+                            ?>
+                            <div class="col-12 col-lg-6">
+                                <?php
+                                $l = 1;
+                                if ( $locations && $location_valid ) { ?>
                                     <div data-sectiontitle="Primary Location">
-                                        <h2 class="h5">Primary Location</h2>
+                                        <h2 class="h5">Primary <?php $eligible_appointments ? 'Appointment ' : '' ?>Location</h2>
                                         <?php foreach( $locations as $location ):
                                                 if ( 2 > $l ){
                                                     if ( get_post_status ( $location ) == 'publish' ) {
-
+                                                        
                                                         // Reset variables
                                                         $address_id = $location;
-                                                    
+                                                        
                                                         // Parent Location 
                                                         $location_has_parent = get_field('location_parent', $location);
                                                         $location_parent_id = get_field('location_parent_id', $location);
@@ -643,7 +661,7 @@ while ( have_posts() ) : the_post();
                                                         $parent_id = '';
                                                         $parent_title = '';
                                                         $parent_url = '';
-                                                    
+                                                        
                                                         if ($location_has_parent && $location_parent_id) { 
                                                             $parent_location = get_post( $location_parent_id );
                                                         }
@@ -678,17 +696,17 @@ while ( have_posts() ) : the_post();
                                                             ( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? ' ' : '' ) : '' )
                                                             . ( $location_floor && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ' ' : '' ) : '' )
                                                             . ( $location_suite ? $location_suite : '' );
-
+                                                        
                                                         $location_address_2_deprecated = get_field('location_address_2', $address_id );
                                                         if (!$location_address_2) {
                                                             $location_address_2 = $location_address_2_deprecated;
                                                             $location_address_2_schema = $location_address_2_deprecated;
                                                         }
-
+                                                        
                                                         $location_city = get_field('location_city', $address_id);
                                                         $location_state = get_field('location_state', $address_id);
                                                         $location_zip = get_field('location_zip', $address_id);
-
+                                                        
                                                 ?>
                                             <p><strong><?php echo $primary_appointment_title; ?></strong><br />
                                             <?php if ( $parent_location ) { ?>
@@ -722,9 +740,16 @@ while ( have_posts() ) : the_post();
                                         <?php endforeach;
                                             // wp_reset_postdata(); ?>
                                     </div>
-                                <?php endif; ?> 
+                                <?php } // endif ( $locations && $location_valid ) ?> 
                             </div>
-							<div class="col-12 col-lg-6">
+                            <?php
+                            
+                            // End Primary Location
+                            
+                            // Begin Overview
+                            
+                            ?>
+                            <div class="col-12 col-lg-6">
                                 <h2 class="h5">Overview</h2>
                                 <dl data-sectiontitle="Overview">
                                 <?php // Display area(s) of expertise
@@ -732,17 +757,16 @@ while ( have_posts() ) : the_post();
                                 if ($expertises && !empty($expertises) && !$hide_medical_ontology) { 
                                     foreach( $expertises as $expertise ) {
                                         if ( get_post_status ( $expertise ) == 'publish' ) {
-                                        $expertise_valid = true;
-                                        $break;
+                                            $expertise_valid = true;
+                                            $break;
                                         }
                                     }
                                     if ( $expertise_valid ) {
                                     ?>
                                     <dt>Area<?php echo( count($expertises) > 1 ? 's' : '' );?> of Expertise</dt>
                                     <?php foreach( $expertises as $expertise ) {
-                                        $id = $expertise; 
                                         if ( get_post_status ( $expertise ) == 'publish' && $expertise !== 0 ) {
-                                            echo '<dd><a href="' . get_permalink($id) . '" target="_self" data-sectiontitle="Overview" data-categorytitle="View Area of Expertise">' . get_the_title($id) . '</a></dd>';
+                                            echo '<dd><a href="' . get_permalink($expertise) . '" target="_self" data-sectiontitle="Overview" data-categorytitle="View Area of Expertise">' . get_the_title($expertise) . '</a></dd>';
                                         }
                                     } ?>
                                     <?php }
@@ -833,231 +857,19 @@ while ( have_posts() ) : the_post();
                                     </div>
                                 <?php } ?>
                             </div>
+                            <?php
+                            
+                            // End Overview
+                            
+                            ?>
                         </div>
                     </div>
-                    
-                </div>
-                <?php // Begin code from master branch for reconciling into feature branch ?>
-                <div class="col-12 col-xs p-4 py-xs-0 px-xs-4 px-sm-8 order-2 text">
-                    <h1 class="page-title">
-                        <span class="name"><?php echo $full_name; ?></span>
-                        <?php 
-                        
-                        if ($phys_title_name && !empty($phys_title_name)) { ?>
-                            <span class="subtitle"><?php echo ($phys_title_name ? $phys_title_name : ''); ?></span>
-                        <?php } ?>
-                    </h1>
-                    <?php 
-                        $l = 1;
-                        if( $locations && $location_valid ): ?>
-                        <div data-sectiontitle="Primary Location">
-                            <?php if ($eligible_appt) { ?>
-                                <h2 class="h3">Primary Appointment Location</h2>
-                            <?php } else { ?>
-                                <h2 class="h3">Primary Location</h2>
-                            <?php } // endif ?>
-                            <?php foreach( $locations as $location ):
-                                    if ( 2 > $l ){
-	                                    if ( get_post_status ( $location ) == 'publish' ) {
-
-                                            // Reset variables
-                                            $address_id = $location;
-                                        
-                                            // Parent Location 
-                                            $location_has_parent = get_field('location_parent', $location);
-                                            $location_parent_id = get_field('location_parent_id', $location);
-                                            $parent_location = '';
-                                            $parent_id = '';
-                                            $parent_title = '';
-                                            $parent_url = '';
-                                        
-                                            if ($location_has_parent && $location_parent_id) { 
-                                                $parent_location = get_post( $location_parent_id );
-                                            }
-                                            // Get Post ID for Address & Image fields
-                                            if ($parent_location) {
-                                                $parent_id = $parent_location->ID;
-                                                $parent_title = $parent_location->post_title;
-                                                $parent_url = get_permalink( $parent_id );
-                                                $address_id = $parent_id;
-                                            }
-                                            
-                                            $location_address_1 = get_field('location_address_1', $address_id );
-                                            $location_building = get_field('location_building', $address_id );
-                                            if ($location_building) {
-                                                $building = get_term($location_building, "building");
-                                                $building_slug = $building->slug;
-                                                $building_name = $building->name;
-                                            }
-                                            $location_floor = get_field_object('location_building_floor', $address_id );
-                                                $location_floor_value = '';
-                                                $location_floor_label = '';
-                                                if ( $location_floor && is_object($location_floor) ) {
-                                                    $location_floor_value = $location_floor['value'];
-                                                    $location_floor_label = $location_floor['choices'][ $location_floor_value ];
-                                                }
-                                            $location_suite = get_field('location_suite', $address_id );
-                                            $location_address_2 =
-                                                ( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? '<br />' : '' ) : '' )
-                                                . ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ', ' : '' ) : '' )
-                                                . ( $location_suite ? $location_suite : '' );
-                                            $location_address_2_schema =
-                                                ( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? ' ' : '' ) : '' )
-                                                . ( $location_floor && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ' ' : '' ) : '' )
-                                                . ( $location_suite ? $location_suite : '' );
-
-                                            $location_address_2_deprecated = get_field('location_address_2', $address_id );
-                                            if (!$location_address_2) {
-                                                $location_address_2 = $location_address_2_deprecated;
-                                                $location_address_2_schema = $location_address_2_deprecated;
-                                            }
-
-                                            $location_city = get_field('location_city', $address_id);
-                                            $location_state = get_field('location_state', $address_id);
-                                            $location_zip = get_field('location_zip', $address_id);
-
-                                    ?>
-                                <p><strong><?php echo $primary_appointment_title; ?></strong><br />
-                                <?php if ( $parent_location ) { ?>
-                                    (Part of <a href="<?php echo $parent_url; ?>" data-categorytitle="Parent Name"><?php echo $parent_title; ?></a>)<br />
-                                <?php } // endif ?>
-                                <?php echo $location_address_1; ?><br/>
-                                <?php echo $location_address_2 ? $location_address_2 . '<br/>' : ''; ?>
-                                <?php echo $location_city . ', ' . $location_state . ' ' . $location_zip; ?>
-                                <?php $map = get_field( 'location_map', $address_id ); ?>
-                                <!-- <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a> -->
-                                </p>
-                                <?php
-                                    // Phone values
-                                    $phone_output_id = $location;
-                                    $phone_output = 'associated_locations';
-                                    include( UAMS_FAD_PATH . '/templates/blocks/locations-phone.php' );
-                                 ?>
-                                <div class="btn-container">
-                                    <a class="btn btn-primary" href="<?php echo get_the_permalink( $location ); ?>" data-itemtitle="<?php echo $primary_appointment_title_attr; ?>" data-categorytitle="View Location">
-                                        View Location
-                                    </a>
-                                    <?php if (1 < $location_count) { ?>
-                                        <a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of locations for this provider" data-categorytitle="View All Locations">
-                                            View All Locations
-                                        </a>
-                                    <?php } ?>
-                                </div>
-                                <?php $l++;
-	                                }
-                                } ?>
-                            <?php endforeach;
-								// wp_reset_postdata(); ?>
-                        </div>
-						<?php endif; ?> 
-                    <h2 class="h3">Overview</h2>
-                    <dl data-sectiontitle="Overview">
-                    <?php // Display area(s) of expertise
-                    $expertise_valid = false;
-                    if ($expertises && !empty($expertises) && !$hide_medical_ontology) { 
-                        foreach( $expertises as $expertise ) {
-                            if ( get_post_status ( $expertise ) == 'publish' ) {
-                               $expertise_valid = true;
-                               $break;
-                            }
-                        }
-                        if ( $expertise_valid ) {
-                        ?>
-                        <dt>Area<?php echo( count($expertises) > 1 ? 's' : '' );?> of Expertise</dt>
-                        <?php foreach( $expertises as $expertise ) {
-                            if ( get_post_status ( $expertise ) == 'publish' && $expertise !== 0 ) {
-                                echo '<dd><a href="' . get_permalink($expertise) . '" target="_self" data-sectiontitle="Overview" data-categorytitle="View Area of Expertise">' . get_the_title($expertise) . '</a></dd>';
-                            }
-                        } ?>
-                        <?php }
-                    } ?>
-                    <?php // Display if they accept new patients
-                    if ( $eligible_appt ) { ?>
-                        <dt>Accepting New Patients</dt>
-                        <?php 
-                        if ($accept_new) {
-                            // Display if they require referrals for new patients
-                            if ( $refer_req ) { ?>
-                                <dd>Yes (Referral Required)</dd>
-                            <?php } else { ?>
-                                <dd>Yes</dd>
-                            <?php }
-                        } else { ?>
-                            <dd>No</dd>
-                        <?php } // endif
-                    } // endif ?>
-                    <?php  // Display if they will provide second opinions    
-                    if ($second_opinion) { ?>
-                        <dt>Provides Second Opinion</dt>
-                        <dd>Yes</dd>
-                    <?php } ?>
-                    <?php // Display all patient types
-                        if( $patients ) { 
-                        ?>
-                            <dt>Patient Type<?php echo( count($patients) > 1 ? 's' : '' );?></dt>
-                            <?php foreach( $patients as $patient ): ?>
-                                <?php $patient_name = get_term( $patient, 'patient_type');
-                                    echo '<dd>' . $patient_name->name . '</dd>';
-                                ?>
-                            <?php endforeach; ?>
-                    <?php } // endif ?>
-                    <?php // Display all languages
-                        if( $languages && $language_list == 'English') { 
-                        ?>
-                        <dt class="sr-only">Language</dt>
-                        <?php echo '<dd class="sr-only">' . $language_list . '</dd>';?>
-                    <?php } else { ?>
-                        <dt>Language<?php echo( $language_count > 1 ? 's' : '' );?></dt>
-                        <?php echo '<dd>' . $language_list . '</dd>';?>
-                    <?php } //endif ?>
-                    </dl>
                     <?php
-                        echo '<div class="rating" aria-label="Patient Rating">';
-                        if ( $rating_valid ){
-                            $avg_rating = $rating_data->profile->averageRatingStr;
-                            $avg_rating_dec = $rating_data->profile->averageRating;
-                            $review_count = $rating_data->profile->reviewcount;
-                            $comment_count = $rating_data->profile->bodycount;
-                            echo '<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: '. $avg_rating_dec/5 * 100 .'%;"></div></div>';
-                            echo '<div class="ratings-score">'. $avg_rating .'<span class="sr-only"> out of 5</span></div>';
-                            echo '<div class="w-100"></div>';
-                            echo '<a href="#ratings" aria-label="Jump to Patient Ratings and Reviews" data-sectiontitle="Overview">';
-                            echo '<div class="ratings-count-lg" aria-hidden="true">'. $review_count .' Patient Satisfaction Ratings</div>';
-                            echo '<div class="ratings-comments-lg" aria-hidden="true">'.  $comment_count .' comments</div>';
-                            echo '</a>';
-                        } else { ?>
-                            <p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this provider" data-sectiontitle="Overview"><span aria-hidden="true">Why not?</span></a></em></p> 
-                        <?php
-                        }
-                        echo '</div>';
+                    
+                    // End Primary Location and Overview
+                    
                     ?>
-                    <?php if( !$rating_valid ) { ?>
-                        <div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-modal="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="WhyNotTitle">Why are there no ratings?</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>There is no publicly available rating for this medical professional for one of three reasons:</p>
-                                        <ul>
-                                            <li>He or she does not see patients</li>
-                                            <li>He or she sees patients but has not yet received the minimum number of Patient Satisfaction Reviews. To be eligible for display, we require a minimum of 30 surveys. This ensures that the rating is statistically reliable and a true reflection of patient satisfaction.</li>
-                                            <li>He or she is a resident physician.</li>
-                                        </ul>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
                 </div>
-                <?php // End code from master branch for reconciling into feature branch ?>
                 <?php 
                 $docphoto = '/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg';
                 if ( has_post_thumbnail() ) { ?>
