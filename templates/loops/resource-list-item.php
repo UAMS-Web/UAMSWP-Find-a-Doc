@@ -8,8 +8,12 @@
      */
 
     $resource_title = get_the_title($id);
-    $resource_title_attr = str_replace('"', '\'', $resource_title);
-    $resource_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($resource_title_attr, null, 'utf-8')));
+    $resource_title_attr = $resource_title;
+    $resource_title_attr = str_replace('"', '\'', $resource_title_attr); // Replace double quotes with single quote
+    $resource_title_attr = str_replace('&#8217;', '\'', $resource_title_attr); // Replace right single quote with single quote
+    $resource_title_attr = htmlentities($resource_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+    $resource_title_attr = str_replace('&nbsp;', ' ', $resource_title_attr); // Convert non-breaking space with normal space
+    $resource_title_attr = html_entity_decode($resource_title_attr); // Convert HTML entities to their corresponding characters
 
     $resource_label = 'View Clinical Resource page for ' . $resource_title_attr;
 
