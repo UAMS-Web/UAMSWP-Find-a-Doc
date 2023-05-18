@@ -21,7 +21,7 @@
 *				'preregister'
 *			)
 *		$scheduling_mychart_book_options // MyChart open scheduling widget options for Appointment Booking
-*		$scheduling_mychart_preregister_options // MyChart open scheduling widget options for Visit Pre-registration
+*		$scheduling_mychart_preregister_options // MyChart open scheduling widget options for Visit Pre-Registration
 * 
 *	Optional vars from single location template:
 *		$location_ac_query // Check if location is an Arkansas Children's location
@@ -61,8 +61,8 @@ if (
 				)
 				||
 				(
-					in_array('preregister', $scheduling_mychart_type) // MyChart open scheduling type is set to Visit Pre-registration
-					&& $scheduling_mychart_preregister_options // MyChart open scheduling widget options for Visit Pre-registration is not empty
+					in_array('preregister', $scheduling_mychart_type) // MyChart open scheduling type is set to Visit Pre-Registration
+					&& $scheduling_mychart_preregister_options // MyChart open scheduling widget options for Visit Pre-Registration is not empty
 				)
 			)
 		)
@@ -94,8 +94,8 @@ if (
 // Check if visit pre-registration section should be displayed
 if (
 	$scheduling_mychart_query
-	&& in_array('preregister', $scheduling_mychart_type) // MyChart open scheduling is set to Visit Pre-registration
-	&& $scheduling_mychart_preregister_options // MyChart open scheduling widget options for Visit Pre-registration is not empty
+	&& in_array('preregister', $scheduling_mychart_type) // MyChart open scheduling is set to Visit Pre-Registration
+	&& $scheduling_mychart_preregister_options // MyChart open scheduling widget options for Visit Pre-Registration is not empty
 ) {
 	$show_scheduling_mychart_preregister_section = true;
 } else {

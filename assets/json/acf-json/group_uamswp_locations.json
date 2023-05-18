@@ -3507,7 +3507,7 @@
                     },
                     "choices": {
                         "book": "Appointment Booking",
-                        "preregister": "Visit Pre-registration"
+                        "preregister": "Visit Pre-Registration"
                     },
                     "allow_custom": 0,
                     "default_value": [],
@@ -3689,7 +3689,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "message": "<h3>Visit Pre-registration<\/h3>",
+                    "message": "<h3>Visit Pre-Registration<\/h3>",
                     "new_lines": "",
                     "esc_html": 0
                 },
@@ -3697,7 +3697,7 @@
                     "key": "field_location_scheduling_mychart_preregister_options",
                     "name": "location_scheduling_mychart_preregister_options",
                     "type": "repeater",
-                    "label": "MyChart Open Scheduling Widget Option(s) for Visit Pre-registration",
+                    "label": "MyChart Open Scheduling Widget Option(s) for Visit Pre-Registration",
                     "instructions": "Define the information for each specific open scheduling widget. One or more must be defined.",
                     "required": 1,
                     "conditional_logic": [

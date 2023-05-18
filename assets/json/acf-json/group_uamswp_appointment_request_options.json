@@ -54,7 +54,7 @@
             "key": "field_appointment_request_descr_standlone_system",
             "name": "appointment_request_descr_standlone_system",
             "type": "textarea",
-            "label": "Standalone Description for Visit Pre-registration",
+            "label": "Standalone Description for Visit Pre-Registration",
             "instructions": "This description text will be used when appointment request forms section is the only appointment option displayed. <br />This paragraph introduces the dropdown for selecting a visit type when pre-registering for a visit. <br />The paragraph should briefly describe what the user can do.",
             "required": 1,
             "conditional_logic": [
@@ -108,7 +108,7 @@
             "key": "field_appointment_request_descr_nested_system",
             "name": "appointment_request_descr_nested_system",
             "type": "textarea",
-            "label": "Nested Description for Visit Pre-registration",
+            "label": "Nested Description for Visit Pre-Registration",
             "instructions": "This description text will be used when MyChart Open Scheduling section is also displayed. <br />This paragraph introduces the dropdown for selecting a visit type when pre-registering for a visit. <br />The paragraph should briefly describe what the user can do.",
             "required": 1,
             "conditional_logic": [

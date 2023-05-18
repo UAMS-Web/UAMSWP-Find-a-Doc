@@ -399,7 +399,7 @@ while ( have_posts() ) : the_post(); ?>
 	$scheduling_request_query = $scheduling_group['location_scheduling_request_query']; // Enable Linking to Appointment Request Forms?
 	$scheduling_request_forms = $scheduling_group['location_scheduling_request_form']; // Appointment Request Form(s)
 	$scheduling_mychart_book_options = $scheduling_group['location_scheduling_mychart_book_options']; // MyChart Open Scheduling Widget Option(s) for Appointment Booking
-	$scheduling_mychart_preregister_options = $scheduling_group['location_scheduling_mychart_preregister_options']; // MyChart Open Scheduling Widget Option(s) for Visit Pre-registration
+	$scheduling_mychart_preregister_options = $scheduling_group['location_scheduling_mychart_preregister_options']; // MyChart Open Scheduling Widget Option(s) for Visit Pre-Registration
 	// $mychart_scheduling_visit_type = '';
 	include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-check.php' ); // Reusable code for online scheduling section display logic
 
@@ -1094,7 +1094,7 @@ while ( have_posts() ) : the_post(); ?>
 									// End link to specialized care appointment request
 									
 
-									// Begin Visit Pre-registration section
+									// Begin Visit Pre-Registration section
 
 									if ( $show_scheduling_mychart_preregister_section ) { // $show_scheduling_mychart_preregister_section is defined in /templates/blocks/online-scheduling-check.php
 										$mychart_scheduling_preregister_heading = get_field('mychart_scheduling_preregister_heading_system', 'option') ?: 'Immediate Care';
@@ -1105,7 +1105,7 @@ while ( have_posts() ) : the_post(); ?>
 										<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-preregister.php' );
 									} // endif ( $show_scheduling_mychart_preregister_section )
 									
-									// End Visit Pre-registration section
+									// End Visit Pre-Registration section
 									
 									?>
 								</div>

@@ -216,7 +216,7 @@
             "key": "field_mychart_scheduling_preregister_descr_system",
             "name": "mychart_scheduling_preregister_descr_system",
             "type": "textarea",
-            "label": "Description for Visit Pre-registration",
+            "label": "Description for Visit Pre-Registration",
             "instructions": "This paragraph introduces the dropdown for selecting a visit type when pre-registering for a visit. <br />The paragraph should briefly describe what the user can do.",
             "required": 1,
             "conditional_logic": [
@@ -243,7 +243,7 @@
             "key": "field_mychart_scheduling_preregister_intro_system",
             "name": "mychart_scheduling_preregister_intro_system",
             "type": "textarea",
-            "label": "Introduction for MyChart Open Scheduling Widget Used For Visit Pre-registration",
+            "label": "Introduction for MyChart Open Scheduling Widget Used For Visit Pre-Registration",
             "instructions": "This paragraph introduces each MyChart open scheduling widget used for pre-registering for a visit. <br />The paragraph should provide brief general information about MyChart open scheduling. There is a 221 character limit.",
             "required": 1,
             "conditional_logic": [
