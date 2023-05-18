@@ -31,7 +31,7 @@ if ( $scheduling_mychart_book_options ) {
 }
 
 // Get the system setting for the button text
-$scheduling_mychart_book_btn_text = get_field('mychart_scheduling_book_btn_text_system', 'option') ?: 'Book an Appointment';
+$scheduling_mychart_book_button_text = get_field('mychart_scheduling_book_btn_text_system', 'option') ?: 'Book an Appointment';
 
 // Set the dropdown query variable
 if (
@@ -52,7 +52,7 @@ if (
 ) {
 	if ( $scheduling_mychart_book_dropdown ) { // If dropdown should be displayed ?>
 		<div class="dropdown">
-			<button class="btn btn-primary dropdown-toggle" type="button" id="mychart_scheduling_dropdown" data-toggle="dropdown" aria-expanded="false"><?php echo $scheduling_mychart_book_btn_text; ?></button>
+			<button class="btn btn-primary dropdown-toggle" type="button" id="mychart_scheduling_dropdown" data-toggle="dropdown" aria-expanded="false"><?php echo $scheduling_mychart_book_button_text; ?></button>
 			<div class="dropdown-menu" aria-labelledby="mychart_scheduling_dropdown">
 				<?php 
 
@@ -100,7 +100,7 @@ if (
 
 				// Create the modal link
 				?>
-				<a class="btn btn-primary" href="#" data-toggle="modal" data-target="#mychart-scheduling_<?php echo $i; ?>"><?php echo $scheduling_mychart_book_btn_text; ?></a>
+				<a class="btn btn-primary" href="#" data-toggle="modal" data-target="#mychart-scheduling_<?php echo $i; ?>"><?php echo $scheduling_mychart_book_button_text; ?></a>
 			<?php } // endif ( $visit_type_object )
 			$i++;
 		} // end foreach ( $options as $option )
