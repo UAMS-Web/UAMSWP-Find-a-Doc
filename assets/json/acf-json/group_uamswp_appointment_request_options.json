@@ -82,7 +82,7 @@
             "label": "Nested Heading for Visit Pre-Registration",
             "name": "appointment_request_heading_nested_system",
             "type": "text",
-            "instructions": "This heading text will be used when MyChart Open Scheduling section is also displayed.",
+            "instructions": "This heading text will be used when UAMS Health MyChart Open Scheduling section is also displayed.",
             "required": 1,
             "conditional_logic": [
                 [

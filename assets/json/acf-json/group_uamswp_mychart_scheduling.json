@@ -5,10 +5,10 @@
     "fields": [
         {
             "key": "field_mychart_scheduling_query_system",
-            "label": "Allow optional MyChart scheduling?",
+            "label": "Allow optional UAMS Health MyChart open scheduling?",
             "name": "mychart_scheduling_query_system",
             "type": "true_false",
-            "instructions": "Grant the ability at the page level to enable MyChart scheduling.",
+            "instructions": "Grant the ability at the page level to enable MyChart open scheduling.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
