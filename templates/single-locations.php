@@ -390,15 +390,15 @@ while ( have_posts() ) : the_post(); ?>
 	$location_url = get_field('location_url');
 
 	// Check if online scheduling sections should be displayed
-    $scheduling_template = 'single-location';
-    $scheduling_group = get_field('location_scheduling_group'); // ACF field containing the inputs relevant to MyChart open scheduling and appointment request forms
-    $scheduling_mychart_query = $scheduling_group['location_scheduling_mychart_query']; // UAMS Health MyChart scheduling allowed in system?
+	$scheduling_template = 'single-location';
+	$scheduling_group = get_field('location_scheduling_group'); // ACF field containing the inputs relevant to MyChart open scheduling and appointment request forms
+	$scheduling_mychart_query = $scheduling_group['location_scheduling_mychart_query']; // UAMS Health MyChart scheduling allowed in system?
 	$scheduling_mychart_type = $scheduling_group['location_scheduling_mychart_type']; // Which Type(s) of MyChart Open Scheduling?
-    $scheduling_request_query = $scheduling_group['location_scheduling_request_query']; // Enable Linking to Appointment Request Forms?
-    $scheduling_request_forms = $scheduling_group['location_scheduling_request_form']; // Appointment Request Form(s)
+	$scheduling_request_query = $scheduling_group['location_scheduling_request_query']; // Enable Linking to Appointment Request Forms?
+	$scheduling_request_forms = $scheduling_group['location_scheduling_request_form']; // Appointment Request Form(s)
 	$scheduling_query = $location_appointments_query; // Can a patient schedule an appointment for services rendered at this location?
-    $scheduling_mychart_book_options = $scheduling_group['location_scheduling_mychart_book_options']; // MyChart Open Scheduling Widget Option(s) for Appointment Booking
-    $scheduling_mychart_preregister_options = $scheduling_group['location_scheduling_mychart_preregister_options']; // MyChart Open Scheduling Widget Option(s) for Visit Pre-registration
+	$scheduling_mychart_book_options = $scheduling_group['location_scheduling_mychart_book_options']; // MyChart Open Scheduling Widget Option(s) for Appointment Booking
+	$scheduling_mychart_preregister_options = $scheduling_group['location_scheduling_mychart_preregister_options']; // MyChart Open Scheduling Widget Option(s) for Visit Pre-registration
 	// $mychart_scheduling_visit_type = '';
 	include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-check.php' ); // Reusable code for online scheduling section display logic
 
