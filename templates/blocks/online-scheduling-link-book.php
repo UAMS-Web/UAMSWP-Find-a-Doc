@@ -39,22 +39,20 @@ if (
 		<?php 
 		$i = 0;
 		// Loop through repeater rows.
-		if ( $scheduling_mychart_book_options || $scheduling_mychart_book_visit_type) {
-			$options = $scheduling_mychart_book_options ?: $scheduling_mychart_book_visit_type;
-			foreach( $options as $option ) {
-				// Load sub field value.
-				$visit_type = $option['location_scheduling_vt'] ?: $option;
-				$visit_type_object = get_term_by( 'id', $visit_type, 'mychart_visit_type');
-				
-				// Do something...
-				if ( $visit_type_object ) {
-					$visit_type_link_text = get_field('mychart_visit_type_link_text', $visit_type_object);
-					?>
-					<a class="dropdown-item" href="#" data-toggle="modal" data-target="#mychart-scheduling_<?php echo $i; ?>"><?php echo $visit_type_link_text; ?></a>
-				<?php }
-				$i++;
-			} // end foreach
-		} // endif ( $scheduling_mychart_book_options || $scheduling_mychart_book_visit_type) ?>
+		$options = $scheduling_mychart_book_options ?: $scheduling_mychart_book_visit_type;
+		foreach( $options as $option ) {
+			// Load sub field value.
+			$visit_type = $option['location_scheduling_vt'] ?: $option;
+			$visit_type_object = get_term_by( 'id', $visit_type, 'mychart_visit_type');
+			
+			// Do something...
+			if ( $visit_type_object ) {
+				$visit_type_link_text = get_field('mychart_visit_type_link_text', $visit_type_object);
+				?>
+				<a class="dropdown-item" href="#" data-toggle="modal" data-target="#mychart-scheduling_<?php echo $i; ?>"><?php echo $visit_type_link_text; ?></a>
+			<?php }
+			$i++;
+		} // end foreach ?>
 	</div>
 </div>
 <?php } // endif ?>
