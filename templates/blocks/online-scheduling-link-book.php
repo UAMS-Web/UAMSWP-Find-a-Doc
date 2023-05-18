@@ -4,10 +4,10 @@
  * Designed for UAMS Find-a-Doc
  * 
  * Required vars from single location template:
- * 		$scheduling_mychart_book_options
+ * 		$scheduling_mychart_book_options // MyChart Open Scheduling Widget Option(s) for Appointment Booking
  * 
  * Required vars from single provider template:
- * 		$mychart_scheduling_visit_type
+ * 		$mychart_scheduling_visit_type // Visit Type(s) from UAMS Health Epic for Appointment Booking
  */
 
 // Check optional vars from single location template
@@ -16,7 +16,11 @@ $scheduling_mychart_book_options = isset($scheduling_mychart_book_options) ? $sc
 // Check optional vars from single provider template
 $mychart_scheduling_visit_type = isset($mychart_scheduling_visit_type) ? $mychart_scheduling_visit_type : '';
 
-if ( $scheduling_mychart_book_options || $mychart_scheduling_visit_type ) {
+if (
+	$scheduling_mychart_book_options // MyChart open scheduling widget options for Appointment Booking is not empty
+	||
+	$mychart_scheduling_visit_type // At least one Visit Type has been selected
+) {
 ?>
 <div class="dropdown">
 	<button class="btn btn-primary dropdown-toggle" type="button" id="mychart_scheduling_dropdown" data-toggle="dropdown" aria-expanded="false">Book an Appointment</button>
