@@ -50,8 +50,18 @@
             // Location-specific check
             (
                 $scheduling_template == 'single-location'
-                && !$location_ac_query
-                && ( $scheduling_mychart_book_options || $scheduling_mychart_preregister_options )
+                && !$location_ac_query // Location is not an Arkansas Children's location
+                && (
+                    (
+                        in_array('book', $scheduling_mychart_type) // MyChart open scheduling is set to Appointment Booking
+                        && $scheduling_mychart_book_options // MyChart open scheduling widget options for Appointment Booking is not empty
+                    )
+                    ||
+                    (
+                        in_array('preregister', $scheduling_mychart_type) // MyChart open scheduling is set to Visit Pre-registration
+                        && $scheduling_mychart_preregister_options // MyChart open scheduling widget options for Visit Pre-registration is not empty
+                    )
+                )
             )
             ||
             // Provider-specific check
