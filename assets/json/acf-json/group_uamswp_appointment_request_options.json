@@ -25,7 +25,7 @@
         },
         {
             "key": "field_appointment_request_heading_standlone_system",
-            "label": "Standalone Heading for Visit Pre-Registration",
+            "label": "Standalone Heading for Appointment Request Forms",
             "name": "appointment_request_heading_standlone_system",
             "type": "text",
             "instructions": "This heading text will be used when appointment request forms section is the only appointment option displayed.",
@@ -54,7 +54,7 @@
             "key": "field_appointment_request_descr_standlone_system",
             "name": "appointment_request_descr_standlone_system",
             "type": "textarea",
-            "label": "Standalone Description for Visit Pre-Registration",
+            "label": "Standalone Description for Appointment Request Forms",
             "instructions": "This description text will be used when appointment request forms section is the only appointment option displayed. <br />This paragraph introduces the dropdown for selecting a visit type when pre-registering for a visit. <br />The paragraph should briefly describe what the user can do.",
             "required": 1,
             "conditional_logic": [
@@ -79,7 +79,7 @@
         },
         {
             "key": "field_appointment_request_heading_nested_system",
-            "label": "Nested Heading for Visit Pre-Registration",
+            "label": "Nested Heading for Appointment Request Forms",
             "name": "appointment_request_heading_nested_system",
             "type": "text",
             "instructions": "This heading text will be used when UAMS Health MyChart Open Scheduling section is also displayed.",
