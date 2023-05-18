@@ -3517,6 +3517,37 @@
                     "save_custom": 0
                 },
                 {
+                    "key": "field_location_scheduling_mychart_type_dropdown",
+                    "name": "location_scheduling_mychart_type_dropdown",
+                    "type": "true_false",
+                    "label": "Display the Single Visit Type in a Dropdown?",
+                    "instructions": "If only one visit type is selected, should the name of the visit type still be displayed in a dropdown? If not, then clicking the \"Book an Appointment\" button will take users straight to the scheduling information for the selected visit type without the name of the visit type being displayed first.",
+                    "required": 0,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_location_scheduling_mychart_type",
+								"operator": "!=empty"
+							},
+							{
+								"field": "field_location_scheduling_mychart_type",
+								"operator": "<",
+								"value": 2
+							}
+						]
+					],
+					"wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 1,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
                     "key": "field_location_scheduling_mychart_book_message",
                     "label": "",
                     "name": "",
