@@ -1,8 +1,8 @@
 <?php 
 /*
-*	Get ACF fields to use for meta data
-*	Add description from provider short description or full description * 
-*/
+ * Get ACF fields to use for meta data
+ * Add description from provider short description or full description * 
+ */
 
 $page_slug = $post->post_name;
 
