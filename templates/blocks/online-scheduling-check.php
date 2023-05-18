@@ -4,10 +4,10 @@
      *  Designed for UAMS Find-a-Doc
      * 
      *  Required vars:
-     *      $scheduling_query
-     *      $scheduling_mychart_query
-     *      $scheduling_request_query
-     *      $scheduling_request_forms
+     *      $scheduling_query // Can a patient schedule an appointment for services rendered at this location?
+     *      $scheduling_mychart_query // Enable UAMS Health MyChart Open Scheduling for This Location?
+     *      $scheduling_request_query // Enable Linking to Appointment Request Forms?
+     *      $scheduling_request_forms // Appointment Request Form(s)
      *      $scheduling_template
      *          (
      *              'single-location'
@@ -41,9 +41,9 @@
 
     // Check if MyChart Open Scheduling section should be displayed
     if (
-        $scheduling_mychart_query_system
-        && $scheduling_mychart_query
-        && $scheduling_query
+        $scheduling_mychart_query_system // MyChart open scheduling is allowed at the system level
+        && $scheduling_mychart_query // MyChart open scheduling is allowed at the location level
+        && $scheduling_query // Patients can schedule an appointment for services rendered at this location
         && (
             // Location-specific check
             (
