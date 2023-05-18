@@ -449,6 +449,7 @@ while ( have_posts() ) : the_post();
 	$scheduling_mychart_type = $scheduling_group['physician_scheduling_mychart_type']; // Which Type(s) of MyChart Open Scheduling?
 	$scheduling_request_query = $scheduling_group['physician_scheduling_request_query']; // Enable Linking to Appointment Request Forms?
 	$scheduling_request_forms = $scheduling_group['physician_scheduling_request_form']; // Appointment Request Form(s)
+	$scheduling_request_form_dropdown = $scheduling_group['physician_scheduling_request_form_dropdown']; // Display the Single Appointment Request Form in a Dropdown?
 	// $location_ac_query = '';
 	// $location_appointments_query = '';
 	// $scheduling_mychart_book_options = '';

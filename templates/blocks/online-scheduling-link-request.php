@@ -5,6 +5,7 @@
  * 	
  * 	Required vars:
  * 		$scheduling_request_forms // Appointment Request Form(s)
+ * 		$scheduling_request_form_dropdown // Display the Single Appointment Request Form in a Dropdown?
  * 		$scheduling_request_btn_style // Define whether the appointment request button is solid or outline
  * 		$scheduling_request_utm_medium_val
  * 			(
@@ -31,8 +32,18 @@
  * 			)
  */
 
+// Count the number of selected appointment request forms
 $scheduling_request_form_count = count($scheduling_request_forms);
-$scheduling_request_button_text = 'Request an Appointment';
+
+// Get the system setting for the button text
+$scheduling_request_button_text = get_field('appointment_request_btn_text_system', 'option') ?: 'Request an Appointment';
+
+// Set the dropdown query variable
+if ( $scheduling_request_form_count > 1) { // If there is more than one visit type selected
+	$scheduling_request_form_dropdown = true;
+} else {
+	$scheduling_request_form_dropdown = isset($scheduling_request_form_dropdown) ? $scheduling_request_form_dropdown : true;
+}
 
 // Create query string for UTM tracking
 $scheduling_request_utm_arr = []; // Create empty array for use in UTM construction
@@ -66,33 +77,49 @@ if ( $scheduling_request_utm_arr_count > 0 ) { // If there are elements in the U
 }
 
 // Create the dropdown/link element
-if ( $scheduling_request_form_count > 1 ) { ?>
-	<div class="dropdown">
-		<button class="btn <?php echo $scheduling_request_btn_style; ?>-primary dropdown-toggle" type="button" id="appt_request_form_dropdown" data-toggle="dropdown" aria-expanded="false"><?php echo $scheduling_request_button_text; ?></button>
-		<div class="dropdown-menu" aria-labelledby="appt_request_form_dropdown">
-			<?php foreach( $scheduling_request_forms as $form ) {
-				$form_object = get_term_by( 'id', $form, 'appointment_request');
-				if ( $form_object ) {
-					$form_object_name = $form_object->name;
-					$form_object_name_attr = str_replace('"', '\'', $form_object_name);
-					$form_object_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($form_object_name_attr, null, 'utf-8')));
-					$form_url = get_field('appointment_request_url', $form_object) . $scheduling_request_query_string;
-					?>
-					<a class="dropdown-item" href="<?php echo $form_url; ?>" target="_blank"><?php echo $form_object_name; ?></a>
-				<?php }
-			} ?>
+if ( $scheduling_request_forms ) { // If at least form has been selected
+	if ( $scheduling_request_form_dropdown ) { // If dropdown should be displayed ?>
+		<div class="dropdown">
+			<button class="btn <?php echo $scheduling_request_btn_style; ?>-primary dropdown-toggle" type="button" id="appt_request_form_dropdown" data-toggle="dropdown" aria-expanded="false"><?php echo $scheduling_request_button_text; ?></button>
+			<div class="dropdown-menu" aria-labelledby="appt_request_form_dropdown">
+				<?php
+
+				// Begin looping through the forms
+				
+				foreach ( $scheduling_request_forms as $form ) {
+					$form_object = get_term_by( 'id', $form, 'appointment_request'); // Get appointment request taxonomy object based on the selected ID
+					if ( $form_object ) { // If the object exists...
+						$form_object_name = $form_object->name;
+						$form_object_name_attr = str_replace('"', '\'', $form_object_name);
+						$form_object_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($form_object_name_attr, null, 'utf-8')));
+						$form_url = get_field('appointment_request_url', $form_object) . $scheduling_request_query_string;
+						?>
+						<a class="dropdown-item" href="<?php echo $form_url; ?>" target="_blank"><?php echo $form_object_name; ?></a>
+					<?php } // endif ( $form_object )
+				}
+
+				// End looping through the forms
+				
+				?>
+			</div>
 		</div>
-	</div>
-<?php } else {
-	foreach( $scheduling_request_forms as $form ) {
-		$form_object = get_term_by( 'id', $form, 'appointment_request');
-		if ( $form_object ) {
-			$form_object_name = $form_object->name;
-			$form_object_name_attr = str_replace('"', '\'', $form_object_name);
-			$form_object_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($form_object_name_attr, null, 'utf-8')));
-			$form_url = get_field('appointment_request_url', $form_object) . $scheduling_request_query_string;
-			?>
-			<a class="btn <?php echo $scheduling_request_btn_style; ?>-primary" href="<?php echo $form_url; ?>" target="_blank" aria-label="<?php echo $scheduling_request_button_text . ', ' . $form_object_name_attr; ?>"><?php echo $scheduling_request_button_text; ?></a>
-		<?php }
-	}
-} ?>
+	<?php } else { // Otherwise, no dropdown should be displayed
+		
+		// Begin looping through the forms
+		
+		foreach ( $scheduling_request_forms as $form ) {
+			$form_object = get_term_by( 'id', $form, 'appointment_request'); // Get appointment request taxonomy object based on the selected ID
+			if ( $form_object ) { // If the object exists...
+				$form_object_name = $form_object->name;
+				$form_object_name_attr = str_replace('"', '\'', $form_object_name);
+				$form_object_name_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($form_object_name_attr, null, 'utf-8')));
+				$form_url = get_field('appointment_request_url', $form_object) . $scheduling_request_query_string;
+				?>
+				<a class="btn <?php echo $scheduling_request_btn_style; ?>-primary" href="<?php echo $form_url; ?>" target="_blank" aria-label="<?php echo $scheduling_request_button_text . ', ' . $form_object_name_attr; ?>"><?php echo $scheduling_request_button_text; ?></a>
+			<?php } // endif ( $form_object )
+		}
+
+		// End looping through the forms
+		
+	} // endif ( $scheduling_request_form_dropdown ) else
+} // endif ( $scheduling_request_forms ) ?>

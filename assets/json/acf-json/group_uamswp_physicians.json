@@ -2025,6 +2025,37 @@
                         "acfe_bidirectional_enabled": "0"
                     },
                     "multiple": 1
+                },
+                {
+                    "key": "field_physician_scheduling_request_form_dropdown",
+                    "name": "physician_scheduling_request_form_dropdown",
+                    "type": "true_false",
+                    "label": "Display the Single Appointment Request Form in a Dropdown?",
+                    "instructions": "If only one form is selected, should the name of the form still be displayed in a dropdown? If not, then clicking the \"Request an Appointment\" button will take users straight to the form without the name of the form being displayed first.",
+                    "required": 0,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_physician_scheduling_request_form",
+								"operator": "!=empty"
+							},
+							{
+								"field": "field_physician_scheduling_request_form",
+								"operator": "<",
+								"value": 2
+							}
+						]
+					],
+					"wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 1,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
                 }
             ]
         },
