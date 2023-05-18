@@ -6,9 +6,9 @@
 $excerpt = get_field('location_short_desc');
 $about_loc = get_field('location_about');
 if (empty($excerpt)){
-    if ($about_loc){
-        $excerpt = mb_strimwidth(wp_strip_all_tags($about_loc), 0, 155, '...');
-    }
+	if ($about_loc){
+		$excerpt = mb_strimwidth(wp_strip_all_tags($about_loc), 0, 155, '...');
+	}
 }
 
 // Page Title Variables
@@ -379,7 +379,7 @@ while ( have_posts() ) : the_post(); ?>
 
 	$location_address_2_deprecated = get_field('location_address_2', $post_id );
 	if (!$location_address_2) {
-        $location_address_2 = $location_address_2_deprecated;
+		$location_address_2 = $location_address_2_deprecated;
 		$location_address_2_schema = $location_address_2_deprecated;
 	}
 
@@ -407,12 +407,12 @@ while ( have_posts() ) : the_post(); ?>
 	$page_title_prepend = $location_portal ? 'the ' : '';
 	$page_title_phrase = $page_title_prepend . $page_title;
 
-    // Set logic for displaying jump links and sections
-    $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
-    $jump_link_count = 0;
+	// Set logic for displaying jump links and sections
+	$jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
+	$jump_link_count = 0;
 
-        // Check if Location Alert section should be displayed
-        if (
+		// Check if Location Alert section should be displayed
+		if (
 			(
 				($location_closing && !$location_closing_date_past) // If location closing is toggled, but closing start date is future
 				||
@@ -423,21 +423,21 @@ while ( have_posts() ) : the_post(); ?>
 			&& 
 			($location_alert_title || $location_alert_text) // If location title or description has value
 		 ) {
-            $show_location_alert_section = true;
-            $jump_link_count++;
-        } else {
-            $show_location_alert_section = false;
-        }
+			$show_location_alert_section = true;
+			$jump_link_count++;
+		} else {
+			$show_location_alert_section = false;
+		}
 
-        // Check if Closing Information section should be displayed
-        if ( $location_closing_display && !empty($location_closing_info) ) {
-            $show_closing_section = true;
-            $jump_link_count++;
-        } else {
-            $show_closing_section = false;
-        }
+		// Check if Closing Information section should be displayed
+		if ( $location_closing_display && !empty($location_closing_info) ) {
+			$show_closing_section = true;
+			$jump_link_count++;
+		} else {
+			$show_closing_section = false;
+		}
 
-        // Check if About section should be displayed
+		// Check if About section should be displayed
 		$location_about = get_field('location_about');
 		$location_affiliation = get_field('location_affiliation');
 		$location_youtube_link = get_field('location_youtube_link');
@@ -447,8 +447,8 @@ while ( have_posts() ) : the_post(); ?>
 		$about_section_label = 'Jump to the section of this page with the location description';
 		
 		if ( $location_about || $location_affiliation || $prescription ) {
-            $show_about_section = true;
-            $jump_link_count++;
+			$show_about_section = true;
+			$jump_link_count++;
 			if ( $location_about || $location_youtube_link || ( !$location_about && $location_affiliation && $prescription ) ) {
 				$about_section_title = 'About ' . $page_title_phrase;
 				$about_section_title_short = 'About';
@@ -465,43 +465,43 @@ while ( have_posts() ) : the_post(); ?>
 				$about_section_title_short = $about_section_title;
 				$about_section_label = 'Jump to the section of this page about ' . $about_section_title;
 			}
-        } else {
-            $show_about_section = false;
-        }
+		} else {
+			$show_about_section = false;
+		}
 
-        // Check if Parking and Directions section should be displayed
+		// Check if Parking and Directions section should be displayed
 		$location_parking = get_field('location_parking', $post_id);
 		$location_direction = get_field('location_direction', $post_id);
 		$parking_map = get_field('location_parking_map', $post_id);
 		
 		if ( $location_parking || $location_direction || $parking_map ) {
-            $show_parking_section = true;
-            $jump_link_count++;
-        } else {
-            $show_parking_section = false;
-        }
+			$show_parking_section = true;
+			$jump_link_count++;
+		} else {
+			$show_parking_section = false;
+		}
 
-        // Check if Appointment Information section should be displayed
+		// Check if Appointment Information section should be displayed
 		$location_appointment = get_field('location_appointment');
 		$location_appointment_bring = get_field('location_appointment_bring');
 		$location_appointment_expect = get_field('location_appointment_expect');
 
 		if ( $location_appointment || $location_appointment_bring || $location_appointment_expect ) {
-            $show_appointment_section = true;
-            $jump_link_count++;
-        } else {
-            $show_appointment_section = false;
-        }
+			$show_appointment_section = true;
+			$jump_link_count++;
+		} else {
+			$show_appointment_section = false;
+		}
 		
-        // Check if Telemedicine Information section should be displayed
+		// Check if Telemedicine Information section should be displayed
 		if ( $telemed_query ) {
-            $show_telemed_section = true;
-            $jump_link_count++;
-        } else {
-            $show_telemed_section = false;
-        }
+			$show_telemed_section = true;
+			$jump_link_count++;
+		} else {
+			$show_telemed_section = false;
+		}
 
-        // Check if Portal Information section should be displayed
+		// Check if Portal Information section should be displayed
 		$location_portal = get_field('location_portal');
 		
 		if ( $location_portal ) {
@@ -522,13 +522,13 @@ while ( have_posts() ) : the_post(); ?>
 			}
 		}
 		if ($portal && $portal_slug !== "_none") {
-            $show_portal_section = true;
-            $jump_link_count++;
-        } else {
-            $show_portal_section = false;
-        }
+			$show_portal_section = true;
+			$jump_link_count++;
+		} else {
+			$show_portal_section = false;
+		}
 
-        // Check if Providers section should be displayed
+		// Check if Providers section should be displayed
 		$physicians = get_field( 'physician_locations' );
 		if ( $physicians ) {
 			$args = array(
@@ -546,13 +546,13 @@ while ( have_posts() ) : the_post(); ?>
 			$show_providers_section = true;
 			$jump_link_count++;
 			$provider_ids = $physicians_query->posts;
-        	wp_reset_postdata();
+			wp_reset_postdata();
 		} else {
 			$show_providers_section = false;
 		}
 
 
-        // Check if Conditions section should be displayed
+		// Check if Conditions section should be displayed
 		// load all 'conditions' terms for the post
 		$title_append = ' at ' . $page_title_phrase;
 		$conditions_cpt = get_field('location_conditions_cpt');
@@ -570,13 +570,13 @@ while ( have_posts() ) : the_post(); ?>
 		// $condition_schema = '';
 		// we will use the first term to load ACF data from
 		if( $conditions_cpt && $conditions_cpt_query->posts && !$hide_medical_ontology ) {
-            $show_conditions_section = true;
-            $jump_link_count++;
-        } else {
-            $show_conditions_section = false;
-        }
+			$show_conditions_section = true;
+			$jump_link_count++;
+		} else {
+			$show_conditions_section = false;
+		}
 
-        // Check if Treatments section should be displayed
+		// Check if Treatments section should be displayed
 		$treatments_cpt = get_field('location_treatments_cpt');
 		$treatment_schema = '';
 		// Treatments CPT
@@ -590,13 +590,13 @@ while ( have_posts() ) : the_post(); ?>
 		));
 		$treatments_cpt_query = new WP_Query( $args );
 		if( $treatments_cpt && $treatments_cpt_query->posts && !$hide_medical_ontology ) {
-            $show_treatments_section = true;
-            $jump_link_count++;
-        } else {
-            $show_treatments_section = false;
-        }
+			$show_treatments_section = true;
+			$jump_link_count++;
+		} else {
+			$show_treatments_section = false;
+		}
 
-        // Check if Areas of Expertise section should be displayed
+		// Check if Areas of Expertise section should be displayed
 		$expertises =  get_field('location_expertise');
 		$args = (array(
 			'post_type' => "expertise",
@@ -608,13 +608,13 @@ while ( have_posts() ) : the_post(); ?>
 		));
 		$expertise_query = new WP_Query( $args );
 		if( $expertises && $expertise_query->have_posts() && !$hide_medical_ontology ) {
-            $show_aoe_section = true;
-            $jump_link_count++;
-        } else {
-            $show_aoe_section = false;
-        }
+			$show_aoe_section = true;
+			$jump_link_count++;
+		} else {
+			$show_aoe_section = false;
+		}
 
-        // Check if Child Locations section should be displayed
+		// Check if Child Locations section should be displayed
 		$current_id = get_the_ID();
 		if ( ( 0 != count( get_pages( array( 'child_of' => $current_id, 'post_type' => 'location' ) ) ) ) ) { // If none available, set to false
 			$args =  array(
@@ -634,11 +634,11 @@ while ( have_posts() ) : the_post(); ?>
 			$children = New WP_Query ( $args );
 		}
 		if ( isset($children) && $children->have_posts() ) {
-            $show_child_locations_section = true;
-            $jump_link_count++;
-        } else {
-            $show_child_locations_section = false;
-        }
+			$show_child_locations_section = true;
+			$jump_link_count++;
+		} else {
+			$show_child_locations_section = false;
+		}
 		
 		// Check if Clinical Resources section should be displayed
 		if( $resources && $resource_query->have_posts() ) {
@@ -648,12 +648,12 @@ while ( have_posts() ) : the_post(); ?>
 			$show_related_resource_section = false;
 		}
 
-        // Check if Jump Links section should be displayed
-        if ( $jump_link_count >= $jump_link_count_min ) {
-            $show_jump_links_section = true;
-        } else {
-            $show_jump_links_section = false;
-        }
+		// Check if Jump Links section should be displayed
+		if ( $jump_link_count >= $jump_link_count_min ) {
+			$show_jump_links_section = true;
+		} else {
+			$show_jump_links_section = false;
+		}
 ?>
 <div class="content-sidebar-wrap">
 <main class="location-item" id="genesis-content">
@@ -1338,14 +1338,14 @@ while ( have_posts() ) : the_post(); ?>
 							<?php echo $location_about ? $location_about : ''; ?>
 							<?php if($location_youtube_link) { ?>
 								<?php if(function_exists('lyte_preparse')) {
-                                    echo '<div class="alignwide">';
-                                    echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $location_youtube_link ) ); 
-                                    echo '</div>';
-                                } else {
-                                    echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
-                                    echo wp_oembed_get( $location_youtube_link ); 
-                                    echo '</div>';
-                                } ?>
+									echo '<div class="alignwide">';
+									echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $location_youtube_link ) ); 
+									echo '</div>';
+								} else {
+									echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
+									echo wp_oembed_get( $location_youtube_link ); 
+									echo '</div>';
+								} ?>
 							<?php }
 							if ( $location_affiliation) { 
 								if ( $location_about || $prescription ) { 
@@ -1808,19 +1808,19 @@ while ( have_posts() ) : the_post(); ?>
 						<div class="card-list-container">
 							<div class="card-list card-list-doctors">
 								<?php 
-                                    if($provider_count > 0){
-                                        $title_list = array();
-                                        while ($physicians_query->have_posts()) : $physicians_query->the_post();
-                                            $id = get_the_ID();
-                                            include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
-                                            $title_list[] = get_field('physician_title', $id);
-                                        endwhile;
-                                        echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
+									if($provider_count > 0){
+										$title_list = array();
+										while ($physicians_query->have_posts()) : $physicians_query->the_post();
+											$id = get_the_ID();
+											include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+											$title_list[] = get_field('physician_title', $id);
+										endwhile;
+										echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
 									} else {
 										echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
 									}
-                                    wp_reset_postdata();
-                                ?>
+									wp_reset_postdata();
+								?>
 							</div>
 						</div>
 						<div class="ajax-filter-load-more">
@@ -1896,7 +1896,7 @@ while ( have_posts() ) : the_post(); ?>
 					</div>
 				</div>
 			</div>
-        </section>
+		</section>
 	<?php } // endif
 	// End Areas of Expertise Section
 	
@@ -1932,8 +1932,8 @@ while ( have_posts() ) : the_post(); ?>
 		$resource_heading_related_post = true; // "Resources Related to __"
 		$resource_heading_related_name = $page_title_phrase; // To what is it related?
 		$resource_more_suppress = false; // Force div.more to not display
-        $resource_more_key = '_resource_locations';
-        $resource_more_value = $page_slug;
+		$resource_more_key = '_resource_locations';
+		$resource_more_value = $page_slug;
 		if( $show_related_resource_section ) {
 			include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
 		}
