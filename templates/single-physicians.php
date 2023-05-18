@@ -446,6 +446,7 @@ while ( have_posts() ) : the_post();
     $scheduling_query = $eligible_appointments && $accepting_patients && !$referral_required; // Can a patient schedule an appointment for services rendered by this provider?
     $scheduling_group = get_field('physician_scheduling_group'); // ACF field containing the inputs relevant to MyChart open scheduling and appointment request forms
     $scheduling_mychart_query = $scheduling_group['physician_scheduling_mychart_query']; // Enable MyChart Open Scheduling for This Provider?
+    $scheduling_mychart_type = $scheduling_group['physician_scheduling_mychart_type']; // Which Type(s) of MyChart Open Scheduling?
     $scheduling_request_query = $scheduling_group['physician_scheduling_request_query']; // Enable Linking to Appointment Request Forms?
     $scheduling_request_forms = $scheduling_group['physician_scheduling_request_form']; // Appointment Request Form(s)
     // $location_ac_query = '';
