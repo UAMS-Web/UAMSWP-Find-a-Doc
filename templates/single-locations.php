@@ -392,7 +392,7 @@ while ( have_posts() ) : the_post(); ?>
 	// Check if online scheduling sections should be displayed
 	$scheduling_template = 'single-location';
 	$scheduling_group = get_field('location_scheduling_group'); // ACF field containing the inputs relevant to MyChart open scheduling and appointment request forms
-	$scheduling_mychart_query = $scheduling_group['location_scheduling_mychart_query']; // UAMS Health MyChart scheduling allowed in system?
+	$scheduling_mychart_query = $scheduling_group['location_scheduling_mychart_query']; // Enable UAMS Health MyChart Open Scheduling for This Location?
 	$scheduling_mychart_type = $scheduling_group['location_scheduling_mychart_type']; // Which Type(s) of MyChart Open Scheduling?
 	$scheduling_request_query = $scheduling_group['location_scheduling_request_query']; // Enable Linking to Appointment Request Forms?
 	$scheduling_request_forms = $scheduling_group['location_scheduling_request_form']; // Appointment Request Form(s)
