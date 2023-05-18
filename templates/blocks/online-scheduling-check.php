@@ -15,16 +15,16 @@
      *          )
      * 
      *  Required vars from single location template:
-     *      $scheduling_mychart_type
+     *      $scheduling_mychart_type // MyChart open scheduling type
      *          (
      *              'book'
      *              'preregister'
      *          )
-     *      $scheduling_mychart_book_options
-     *      $scheduling_mychart_preregister_options
+     *      $scheduling_mychart_book_options // MyChart open scheduling widget options for Appointment Booking
+     *      $scheduling_mychart_preregister_options // MyChart open scheduling widget options for Visit Pre-registration
      * 
      *  Optional vars from single location template:
-     *      $location_ac_query
+     *      $location_ac_query // Check if location is an Arkansas Children's location
      * 
      *  Optional vars from single provider template:
      *      $mychart_scheduling_visit_type
@@ -51,12 +51,12 @@
                 && !$location_ac_query // Location is not an Arkansas Children's location
                 && (
                     (
-                        in_array('book', $scheduling_mychart_type) // MyChart open scheduling is set to Appointment Booking
+                        in_array('book', $scheduling_mychart_type) // MyChart open scheduling type is set to Appointment Booking
                         && $scheduling_mychart_book_options // MyChart open scheduling widget options for Appointment Booking is not empty
                     )
                     ||
                     (
-                        in_array('preregister', $scheduling_mychart_type) // MyChart open scheduling is set to Visit Pre-registration
+                        in_array('preregister', $scheduling_mychart_type) // MyChart open scheduling type is set to Visit Pre-registration
                         && $scheduling_mychart_preregister_options // MyChart open scheduling widget options for Visit Pre-registration is not empty
                     )
                 )
