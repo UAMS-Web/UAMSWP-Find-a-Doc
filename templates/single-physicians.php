@@ -453,7 +453,7 @@ while ( have_posts() ) : the_post();
 	// $location_appointments_query = '';
 	// $scheduling_mychart_book_options = '';
 	// $scheduling_mychart_book_options_rows = '';
-	$mychart_scheduling_visit_type = $scheduling_group['physician_scheduling_mychart_book_vt'];
+	$mychart_scheduling_visit_type = $scheduling_group['physician_scheduling_mychart_book_vt']; // Visit Type(s) from UAMS Health Epic for Appointment Booking
 	include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-check.php' );
 
 	// Set logic for displaying jump links and sections
