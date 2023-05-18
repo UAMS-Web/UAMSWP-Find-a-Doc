@@ -130,6 +130,33 @@
             "maxlength": "",
             "rows": 2,
             "new_lines": ""
+        },
+        {
+            "key": "field_appointment_request_btn_text_system",
+            "name": "appointment_request_btn_text_system",
+            "label": "Button Text for Appointment Request Forms",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_mychart_scheduling_query_system",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Request an Appointment",
+            "placeholder": "Request an Appointment",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         }
     ],
     "location": [

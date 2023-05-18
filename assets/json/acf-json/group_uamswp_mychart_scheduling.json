@@ -159,6 +159,33 @@
             "new_lines": ""
         },
         {
+            "key": "field_mychart_scheduling_book_btn_text_system",
+            "name": "mychart_scheduling_book_btn_text_system",
+            "label": "Button Text for Appointment Booking",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_mychart_scheduling_query_system",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Book an Appointment",
+            "placeholder": "Book an Appointment",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_mychart_scheduling_book_intro_system",
             "name": "mychart_scheduling_book_intro_system",
             "type": "textarea",
@@ -238,6 +265,33 @@
             "maxlength": "",
             "rows": 2,
             "new_lines": ""
+        },
+        {
+            "key": "field_mychart_scheduling_book_btn_text_system",
+            "name": "mychart_scheduling_preregister_btn_text_system",
+            "label": "Button Text for Visit Pre-Registration",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_mychart_scheduling_query_system",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Pre-Register",
+            "placeholder": "Pre-Register",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         },
         {
             "key": "field_mychart_scheduling_preregister_intro_system",
