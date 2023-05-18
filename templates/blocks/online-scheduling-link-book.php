@@ -10,12 +10,6 @@
  * 		$mychart_scheduling_visit_type // Visit Type(s) from UAMS Health Epic for Appointment Booking
  */
 
-// Check optional vars from single location template
-$scheduling_mychart_book_options = isset($scheduling_mychart_book_options) ? $scheduling_mychart_book_options : '';
-
-// Check optional vars from single provider template
-$mychart_scheduling_visit_type = isset($mychart_scheduling_visit_type) ? $mychart_scheduling_visit_type : '';
-
 if (
 	$scheduling_mychart_book_options // MyChart open scheduling widget options for Appointment Booking is not empty
 	||
