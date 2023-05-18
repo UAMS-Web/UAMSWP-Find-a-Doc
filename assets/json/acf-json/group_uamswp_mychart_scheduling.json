@@ -267,7 +267,7 @@
             "new_lines": ""
         },
         {
-            "key": "field_mychart_scheduling_book_btn_text_system",
+            "key": "field_mychart_scheduling_preregister_btn_text_system",
             "name": "mychart_scheduling_preregister_btn_text_system",
             "label": "Button Text for Visit Pre-Registration",
             "type": "text",
