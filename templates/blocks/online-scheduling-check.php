@@ -105,14 +105,20 @@
     // Get system setting for whether Appointment Request Forms are enabled
     $scheduling_request_query_system = get_field('appointment_request_query_system', 'option');
 
+    // Query multiple settings to make a single determination on whether Appointment Request Forms are enabled for this location or provider
+    $scheduling_request_query = (
+        $scheduling_request_query_system // Appointment Request Forms are allowed at the system level
+        && $scheduling_request_query // Appointment Request Forms are allowed at the location / provider level
+        && $scheduling_query // Patients can schedule an appointment for services rendered at this location or with this provider
+        && $scheduling_request_forms // At least one appointment request form has been selected
+        ) ? TRUE : FALSE;
+
+
     // Check if link(s) to appointment request form(s) should be displayed
     // $scheduling_mychart_query_system && $scheduling_request_query && $scheduling_request_forms
     $appointment_request_form_valid = false;    
 	if (
-        $scheduling_request_query_system
-        && $scheduling_request_query
-        && $scheduling_request_forms
-        && $scheduling_query
+        $scheduling_request_query
         && (
             // Location-specific check
             (
