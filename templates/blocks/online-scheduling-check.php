@@ -85,7 +85,7 @@
 		$show_scheduling_mychart_book_section = false;
     }
 
-	// Check if visit preregistration section should be displayed
+	// Check if visit pre-registration section should be displayed
     if (
         in_array('preregister', $scheduling_mychart_type) // MyChart open scheduling is set to Visit Pre-registration
         && $scheduling_mychart_preregister_options // MyChart open scheduling widget options for Visit Pre-registration is not empty
