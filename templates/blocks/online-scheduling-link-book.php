@@ -16,7 +16,7 @@
  * 		$scheduling_mychart_type_dropdown // Display the Single Visit Type in a Dropdown?
  * 
  * Required vars from single provider template:
- * 		$mychart_scheduling_visit_type // Visit Type(s) from UAMS Health Epic for Appointment Booking
+ * 		$scheduling_mychart_book_visit_type // Visit Type(s) from UAMS Health Epic for Appointment Booking
  * 	
  */
 
@@ -30,7 +30,7 @@ if ( $scheduling_template == 'single-provider' ) {
 if (
 	$scheduling_mychart_book_options // MyChart open scheduling widget options for Appointment Booking is not empty
 	||
-	$mychart_scheduling_visit_type // At least one Visit Type has been selected
+	$scheduling_mychart_book_visit_type // At least one Visit Type has been selected
 ) {
 ?>
 <div class="dropdown">
@@ -39,8 +39,8 @@ if (
 		<?php 
 		$i = 0;
 		// Loop through repeater rows.
-		if ( $scheduling_mychart_book_options || $mychart_scheduling_visit_type) {
-			$options = $scheduling_mychart_book_options ?: $mychart_scheduling_visit_type;
+		if ( $scheduling_mychart_book_options || $scheduling_mychart_book_visit_type) {
+			$options = $scheduling_mychart_book_options ?: $scheduling_mychart_book_visit_type;
 			foreach( $options as $option ) {
 				// Load sub field value.
 				$visit_type = $option['location_scheduling_vt'] ?: $option;
@@ -54,7 +54,7 @@ if (
 				<?php }
 				$i++;
 			} // end foreach
-		} // endif ( $scheduling_mychart_book_options || $mychart_scheduling_visit_type) ?>
+		} // endif ( $scheduling_mychart_book_options || $scheduling_mychart_book_visit_type) ?>
 	</div>
 </div>
 <?php } // endif ?>

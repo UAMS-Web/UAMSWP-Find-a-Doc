@@ -401,7 +401,7 @@ while ( have_posts() ) : the_post(); ?>
 	$scheduling_request_forms = $scheduling_group['location_scheduling_request_form']; // Appointment Request Form(s)
 	$scheduling_mychart_book_options = $scheduling_group['location_scheduling_mychart_book_options']; // MyChart Open Scheduling Widget Option(s) for Appointment Booking
 	$scheduling_mychart_preregister_options = $scheduling_group['location_scheduling_mychart_preregister_options']; // MyChart Open Scheduling Widget Option(s) for Visit Pre-Registration
-	// $mychart_scheduling_visit_type = '';
+	// $scheduling_mychart_book_visit_type = '';
 	include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-check.php' ); // Reusable code for online scheduling section display logic
 
 	// Check if the word "the" should be prepended to the location name

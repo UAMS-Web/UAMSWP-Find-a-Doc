@@ -10,7 +10,7 @@
      *      $scheduling_mychart_book_options
      * 
      *  Required vars from single provider template:
-     *      $mychart_scheduling_visit_type
+     *      $scheduling_mychart_book_visit_type
      * 
      *  Optional vars from single location template:
      *      $mychart_scheduling_intro_override
@@ -26,7 +26,7 @@ $mychart_scheduling_intro_override = isset($mychart_scheduling_intro_override) ?
 $mychart_scheduling_dep = isset($mychart_scheduling_dep) ? $mychart_scheduling_dep : '';
 
 // Check optional vars from single provider template
-$mychart_scheduling_visit_type = isset($mychart_scheduling_visit_type) ? $mychart_scheduling_visit_type : '';
+$scheduling_mychart_book_visit_type = isset($scheduling_mychart_book_visit_type) ? $scheduling_mychart_book_visit_type : '';
 $mychart_scheduling_ser = isset($mychart_scheduling_ser) ? $mychart_scheduling_ser : '';
 
 if( $show_scheduling_mychart_section ) {
@@ -40,8 +40,8 @@ if( $show_scheduling_mychart_section ) {
     $mychart_scheduling_intro = ( isset($mychart_scheduling_intro_override) && !empty($mychart_scheduling_intro_override) ) ? $mychart_scheduling_intro_override : $mychart_scheduling_intro;
     $i = 0;
     // Loop through repeater rows.
-    if ( $scheduling_mychart_book_options || $mychart_scheduling_visit_type ) {
-        $options = $scheduling_mychart_book_options ?: $mychart_scheduling_visit_type;
+    if ( $scheduling_mychart_book_options || $scheduling_mychart_book_visit_type ) {
+        $options = $scheduling_mychart_book_options ?: $scheduling_mychart_book_visit_type;
         foreach( $options as $option ) {
             // Load sub field value.
             $visit_type = $option['location_scheduling_vt'] ?: $option;
@@ -56,7 +56,7 @@ if( $show_scheduling_mychart_section ) {
                 $visit_type_intro = get_field('mychart_visit_type_intro', $visit_type_object);
                 $mychart_scheduling_intro = ( isset($visit_type_intro) && !empty($visit_type_intro) ) ? $visit_type_intro : $mychart_scheduling_intro;
                 // $visit_type_link_text = get_field('mychart_visit_type_link_text', $visit_type_object);
-                $mychart_scheduling_visit_type_id = get_field('mychart_visit_type_id', $visit_type_object);
+                $scheduling_mychart_book_visit_type_id = get_field('mychart_visit_type_id', $visit_type_object);
                 $mychart_scheduling_dep = ( isset($mychart_scheduling_dep_override) && !empty($mychart_scheduling_dep_override) ) ? $mychart_scheduling_dep_override : $mychart_scheduling_dep;
                 $visit_type_fallback = get_field('mychart_visit_type_fallback', $visit_type_object);
                 $mychart_scheduling_fallback = ( isset($mychart_scheduling_fallback_override) && !empty($mychart_scheduling_fallback_override) ) ? $mychart_scheduling_fallback_override : $visit_type_fallback;
@@ -75,7 +75,7 @@ if( $show_scheduling_mychart_section ) {
                                     echo '<p>' . $mychart_scheduling_intro . '</p>';
                                 } ?>
                                 <div id="scheduleContainer">
-                                    <iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $mychart_scheduling_ser; ?>&dept=<?php echo $mychart_scheduling_dep; ?>&vt=<?php echo $mychart_scheduling_visit_type_id; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
+                                    <iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $mychart_scheduling_ser; ?>&dept=<?php echo $mychart_scheduling_dep; ?>&vt=<?php echo $scheduling_mychart_book_visit_type_id; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
                                 </div>
                                 <?php echo $mychart_scheduling_fallback; ?>
                             </div>
@@ -85,7 +85,7 @@ if( $show_scheduling_mychart_section ) {
             <?php }
             $i++;
         } // end foreach
-    } // endif ( $scheduling_mychart_book_options || $mychart_scheduling_visit_type )
+    } // endif ( $scheduling_mychart_book_options || $scheduling_mychart_book_visit_type )
     ?>
     <!-- <link href="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
 

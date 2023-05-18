@@ -27,14 +27,14 @@
 *		$location_ac_query // Check if location is an Arkansas Children's location
 * 
 *	Optional vars from single provider template:
-*		$mychart_scheduling_visit_type
+*		$scheduling_mychart_book_visit_type
 */
 
 // Check optional vars from single location template
 $location_ac_query = isset($location_ac_query) ? $location_ac_query : '';
 
 // Check optional vars from single provider template
-$mychart_scheduling_visit_type = isset($mychart_scheduling_visit_type) ? $mychart_scheduling_visit_type : '';
+$scheduling_mychart_book_visit_type = isset($scheduling_mychart_book_visit_type) ? $scheduling_mychart_book_visit_type : '';
 
 // Get system setting for whether MyChart Open Scheduling is enabled
 $scheduling_mychart_query_system = get_field('mychart_scheduling_query_system', 'option');
@@ -70,8 +70,8 @@ if (
 		// Provider-specific check
 		(
 			$scheduling_template == 'single-provider'
-			&& isset($mychart_scheduling_visit_type)
-			&& !empty($mychart_scheduling_visit_type)
+			&& isset($scheduling_mychart_book_visit_type)
+			&& !empty($scheduling_mychart_book_visit_type)
 		)
 	)
 ) {

@@ -9,14 +9,14 @@
      *      $scheduling_mychart_preregister_options
      * 
      *  Required vars from single provider template:
-     *      $mychart_scheduling_visit_type
+     *      $scheduling_mychart_book_visit_type
      */
 
 // Check optional vars from single location template
 $scheduling_mychart_preregister_options = isset($scheduling_mychart_preregister_options) ? $scheduling_mychart_preregister_options : '';
 
 // Check optional vars from single provider template
-$mychart_scheduling_visit_type = isset($mychart_scheduling_visit_type) ? $mychart_scheduling_visit_type : '';
+$scheduling_mychart_book_visit_type = isset($scheduling_mychart_book_visit_type) ? $scheduling_mychart_book_visit_type : '';
 ?>
 <div class="btn-container">
     <div class="inner-container">
@@ -26,8 +26,8 @@ $mychart_scheduling_visit_type = isset($mychart_scheduling_visit_type) ? $mychar
                 <?php 
                 $i = 0;
                 // Loop through repeater rows.
-                if ( $scheduling_mychart_preregister_options || $mychart_scheduling_visit_type) {
-                    $options = $scheduling_mychart_preregister_options ?: $mychart_scheduling_visit_type;
+                if ( $scheduling_mychart_preregister_options || $scheduling_mychart_book_visit_type) {
+                    $options = $scheduling_mychart_preregister_options ?: $scheduling_mychart_book_visit_type;
                     foreach( $options as $option ) {
                         // Load sub field value.
                         $visit_type = $option['location_scheduling_vt'] ?: $option;
@@ -41,7 +41,7 @@ $mychart_scheduling_visit_type = isset($mychart_scheduling_visit_type) ? $mychar
                         <?php }
                         $i++;
                     } // end foreach
-                } // endif ( $scheduling_mychart_preregister_options || $mychart_scheduling_visit_type) ?>
+                } // endif ( $scheduling_mychart_preregister_options || $scheduling_mychart_book_visit_type) ?>
             </div>
         </div>
     </div>
