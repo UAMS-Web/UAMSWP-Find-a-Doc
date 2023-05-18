@@ -55,11 +55,12 @@ if (
 			<button class="btn btn-primary dropdown-toggle" type="button" id="mychart_scheduling_dropdown" data-toggle="dropdown" aria-expanded="false"><?php echo $scheduling_mychart_book_button_text; ?></button>
 			<div class="dropdown-menu" aria-labelledby="mychart_scheduling_dropdown">
 				<?php 
-
-				// Loop through visit type repeater rows
-
+				
 				$i = 0;
 				$options = $scheduling_mychart_book_options ?: $scheduling_mychart_book_visit_type;
+				
+				// Begin looping through the visit types
+
 				foreach ( $options as $option ) {
 					// Load sub field value.
 					$visit_type = $option['location_scheduling_vt'] ?: $option; // Get ID of location's visit type. Otherwise, get ID of provider's visit type.
@@ -75,19 +76,20 @@ if (
 						<a class="dropdown-item" href="#" data-toggle="modal" data-target="#mychart-scheduling_<?php echo $i; ?>"><?php echo $visit_type_link_text; ?></a>
 					<?php } // endif ( $visit_type_object )
 					$i++;
-				} // end foreach ( $options as $option )
+				}
 
-				// End looping through visit type repeater rows
+				// End looping through the visit types
 				
 				?>
 			</div>
 		</div>
 	<?php } else { // Otherwise, no dropdown should be displayed
 		
-		// Loop through visit type repeater rows
-
 		$i = 0;
 		$options = $scheduling_mychart_book_options ?: $scheduling_mychart_book_visit_type;
+		
+		// Begin looping through the visit types
+		
 		foreach ( $options as $option ) {
 			// Load sub field value.
 			$visit_type = $option['location_scheduling_vt'] ?: $option; // Get ID of location's visit type. Otherwise, get ID of provider's visit type.
@@ -103,9 +105,9 @@ if (
 				<a class="btn btn-primary" href="#" data-toggle="modal" data-target="#mychart-scheduling_<?php echo $i; ?>"><?php echo $scheduling_mychart_book_button_text; ?></a>
 			<?php } // endif ( $visit_type_object )
 			$i++;
-		} // end foreach ( $options as $option )
+		}
 
-		// End looping through visit type repeater rows
+		// End looping through the visit types
 
 	} // endif ( $scheduling_mychart_book_dropdown ) else
 } // endif ( $scheduling_mychart_book_options || $scheduling_mychart_book_visit_type) ?>
