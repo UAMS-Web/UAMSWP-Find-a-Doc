@@ -32,8 +32,6 @@
 
     // Check optional vars from single location template
     $location_ac_query = isset($location_ac_query) ? $location_ac_query : '';
-    $scheduling_mychart_book_options = isset($scheduling_mychart_book_options) ? $scheduling_mychart_book_options : '';
-    $scheduling_mychart_preregister_options = isset($scheduling_mychart_preregister_options) ? $scheduling_mychart_preregister_options : '';
 
     // Check optional vars from single provider template
     $mychart_scheduling_visit_type = isset($mychart_scheduling_visit_type) ? $mychart_scheduling_visit_type : '';
