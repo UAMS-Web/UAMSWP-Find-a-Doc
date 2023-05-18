@@ -39,11 +39,16 @@
     // Get system setting for whether MyChart Open Scheduling is enabled
     $scheduling_mychart_query_system = get_field('mychart_scheduling_query_system', 'option');
 
-    // Check if MyChart Open Scheduling section should be displayed
-    if (
+    // Query multiple settings to make a single determination on whether MyChart open scheduling is enabled for this location
+    $scheduling_mychart_query = (
         $scheduling_mychart_query_system // MyChart open scheduling is allowed at the system level
         && $scheduling_mychart_query // MyChart open scheduling is allowed at the location level
         && $scheduling_query // Patients can schedule an appointment for services rendered at this location
+        ) ? TRUE : FALSE;
+
+    // Check if MyChart Open Scheduling section should be displayed
+    if (
+        $scheduling_mychart_query
         && (
             // Location-specific check
             (
@@ -77,7 +82,8 @@
 
 	// Check if appointment booking section should be displayed
     if (
-        in_array('book', $scheduling_mychart_type) // MyChart open scheduling is set to Appointment Booking
+        $scheduling_mychart_query
+        && in_array('book', $scheduling_mychart_type) // MyChart open scheduling is set to Appointment Booking
         && $scheduling_mychart_book_options // MyChart open scheduling widget options for Appointment Booking is not empty
     ) {
 		$show_scheduling_mychart_book_section = true;
@@ -87,7 +93,8 @@
 
 	// Check if visit pre-registration section should be displayed
     if (
-        in_array('preregister', $scheduling_mychart_type) // MyChart open scheduling is set to Visit Pre-registration
+        $scheduling_mychart_query
+        && in_array('preregister', $scheduling_mychart_type) // MyChart open scheduling is set to Visit Pre-registration
         && $scheduling_mychart_preregister_options // MyChart open scheduling widget options for Visit Pre-registration is not empty
     ) {
 		$show_scheduling_mychart_preregister_section = true;
