@@ -141,7 +141,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_mychart_scheduling_query_system",
+                        "field": "field_appointment_request_query_system",
                         "operator": "==",
                         "value": "1"
                     }
