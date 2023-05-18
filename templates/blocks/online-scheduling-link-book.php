@@ -3,12 +3,29 @@
  * Template Name: Online Scheduling, MyChart Open Scheduling Widget Modal Toggles
  * Designed for UAMS Find-a-Doc
  * 
+ * Required vars
+ * 		$scheduling_mychart_type // Which Type(s) of MyChart Open Scheduling?
+ * 		$scheduling_template
+ * 			(
+ * 				'single-location'
+ * 				'single-provider'
+ * 			)
+ * 
  * Required vars from single location template:
  * 		$scheduling_mychart_book_options // MyChart Open Scheduling Widget Option(s) for Appointment Booking
+ * 		$scheduling_mychart_type_dropdown // Display the Single Visit Type in a Dropdown?
  * 
  * Required vars from single provider template:
  * 		$mychart_scheduling_visit_type // Visit Type(s) from UAMS Health Epic for Appointment Booking
+ * 	
  */
+
+// Set the variable that does not exist in the single provider template
+if ( $scheduling_template == 'single-provider' ) {
+	$scheduling_mychart_type_dropdown = true;
+} else {
+	$scheduling_mychart_type_dropdown = isset($scheduling_mychart_type_dropdown) ? $scheduling_mychart_type_dropdown : true;
+}
 
 if (
 	$scheduling_mychart_book_options // MyChart open scheduling widget options for Appointment Booking is not empty
