@@ -1,8 +1,9 @@
 <?php 
 /*
- *  Get ACF fields to use for meta data
- *  Add description from location short description or full description * 
- */
+*	Get ACF fields to use for meta data
+*	Add description from location short description or full description * 
+*/
+
 $excerpt = get_field('location_short_desc');
 $about_loc = get_field('location_about');
 if (empty($excerpt)){
@@ -246,7 +247,7 @@ if (empty($excerpt)){
 	$prescription = ''; // Eliminate PHP errors
 
 	if ($prescription_query) {
-		$prescription_info_type =  get_field('location_prescription_type'); // Which preset or custom text?
+		$prescription_info_type = get_field('location_prescription_type'); // Which preset or custom text?
 		if ( $prescription_info_type == 'clinic' ) {
 			$prescription = $prescription_clinic_sys; // Text from location (a.k.a. local)
 		} elseif ( $prescription_info_type == 'pharm' ) {
@@ -294,7 +295,7 @@ if (empty($excerpt)){
 
 // Clinical Resources Variables
 
-	$resources =  get_field('location_clinical_resources');
+	$resources = get_field('location_clinical_resources');
 	$resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
 	$resource_more = false;
 	$args = (array(
@@ -597,7 +598,7 @@ while ( have_posts() ) : the_post(); ?>
 		}
 
 		// Check if Areas of Expertise section should be displayed
-		$expertises =  get_field('location_expertise');
+		$expertises = get_field('location_expertise');
 		$args = (array(
 			'post_type' => "expertise",
 			'order' => 'ASC',
@@ -617,7 +618,7 @@ while ( have_posts() ) : the_post(); ?>
 		// Check if Child Locations section should be displayed
 		$current_id = get_the_ID();
 		if ( ( 0 != count( get_pages( array( 'child_of' => $current_id, 'post_type' => 'location' ) ) ) ) ) { // If none available, set to false
-			$args =  array(
+			$args = array(
 				"post_type" => "location",
 				"post_status" => "publish",
 				"post_parent" => $current_id,
@@ -865,7 +866,7 @@ while ( have_posts() ) : the_post(); ?>
 																	"closes": "00:00"
 																	';
 																} else {
-																	$modified_text .= ( ( $modified_time['location_modified_hours_open'] && '00:00:00' != $modified_time['location_modified_hours_open'] )  ? '' . ap_time_span( strtotime($modified_time['location_modified_hours_open']), strtotime($modified_time['location_modified_hours_close']) ). '' : '' );
+																	$modified_text .= ( ( $modified_time['location_modified_hours_open'] && '00:00:00' != $modified_time['location_modified_hours_open'] ) ? '' . ap_time_span( strtotime($modified_time['location_modified_hours_open']), strtotime($modified_time['location_modified_hours_close']) ). '' : '' );
 																	$modified_hours_schema .= '"opens": "' . date('H:i', strtotime($modified_time['location_modified_hours_open'])) . '"';
 																	$modified_hours_schema .= ',
 																	"closes": "' . date('H:i', strtotime($modified_time['location_modified_hours_close'])) . '"
@@ -939,7 +940,7 @@ while ( have_posts() ) : the_post(); ?>
 														if ( $hour['closed'] ) {
 															$hours_text .= 'Closed ';
 														} else {
-															$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] )  ? '' . ap_time_span( strtotime($hour['open']), strtotime($hour['close']) ) . '' : '' );
+															$hours_text .= ( ( $hour['open'] && '00:00:00' != $hour['open'] ) ? '' . ap_time_span( strtotime($hour['open']), strtotime($hour['close']) ) . '' : '' );
 															$hours_schema .= ' ' . date('H:i', strtotime($hour['open'])) . '-' . date('H:i', strtotime($hour['close']));
 														}
 														if ( $hour['comment'] ) {
@@ -999,7 +1000,7 @@ while ( have_posts() ) : the_post(); ?>
 													if ( $row['closed'] ) {
 														echo $row['closed'] ? 'Closed</dd>': '';
 													} else {
-														echo ( ( $hour['open'] && '00:00:00' != $row['open'] )  ? '' . ap_time_span( strtotime($row['open']), strtotime($row['close']) ) . ' ' : '' );
+														echo ( ( $hour['open'] && '00:00:00' != $row['open'] ) ? '' . ap_time_span( strtotime($row['open']), strtotime($row['close']) ) . ' ' : '' );
 													}
 												}	
 											endforeach;
@@ -1135,7 +1136,7 @@ while ( have_posts() ) : the_post(); ?>
 								<source srcset="<?php echo image_sizer($location_images[0], 576, 324, 'center', 'center'); ?>"
 									media="(min-width: 1px)">
 								<img src="<?php echo image_sizer($location_images[0], 630, 473, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images[0], '_wp_attachment_image_alt', true ); ?>" class="single-image" />
-							<?php } else {  ?>
+							<?php } else { ?>
 								<img src="<?php echo wp_get_attachment_image_url($location_images[0], 'large'); ?>" class="single-image">
 							<?php } //endif ?>
 						</picture>
@@ -1159,7 +1160,7 @@ while ( have_posts() ) : the_post(); ?>
 												<source srcset="<?php echo image_sizer($location_images_item, 576, 324, 'center', 'center'); ?>"
 													media="(min-width: 1px)">
 												<img src="<?php echo image_sizer($location_images_item, 630, 473, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images_item, '_wp_attachment_image_alt', true ); ?>" />
-											<?php } else {  ?>
+											<?php } else { ?>
 												<img src="<?php echo wp_get_attachment_image_url($location_images_item, 'large'); ?>">
 											<?php } //endif ?>
 										</picture>
@@ -1181,7 +1182,7 @@ while ( have_posts() ) : the_post(); ?>
 									<li data-target="#location-info-carousel" data-slide-to="<?php echo $i; ?>" <?php echo (0 == $i ? 'class="active"' : ''); ?>>
 										<?php if ( function_exists( 'fly_add_image_size' )) { ?>
 											<img src="<?php echo image_sizer($location_images[$i], 60, 45, 'center', 'center'); ?>" alt="<?php echo get_post_meta( $location_images[$i], '_wp_attachment_image_alt', true ); ?>" />
-										<?php } else {  ?>
+										<?php } else { ?>
 											<img src="<?php echo wp_get_attachment_image_url($location_images[$i], 'small'); ?>" alt="<?php echo get_post_meta( $location_images[$i], '_wp_attachment_image_alt', true ); ?>">
 										<?php } //endif ?>
 									</li>
@@ -1372,7 +1373,7 @@ while ( have_posts() ) : the_post(); ?>
 		<section class="uams-module bg-auto" id="parking-info">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-xs-12<?php echo $parking_map ? ' col-md-6' : ''  ?>">
+					<div class="col-xs-12<?php echo $parking_map ? ' col-md-6' : '' ?>">
 						<?php if ($parking_map) { ?>
 							<div class="module-body">
 							<h2><?php echo ( $location_parking ? 'Parking Information' : 'Directions From the Parking Area'); // Display parking heading if parking has value. Otherwise, display directions heading. ?></h2>
@@ -1392,7 +1393,7 @@ while ( have_posts() ) : the_post(); ?>
 						<div class="col-xs-12 col-md-6 parking-map-container">
 							<div class="embed-responsive embed-responsive-16by9" id="map"></div>
 							<script type='text/javascript'>
-								/*-- Function to create encode SVG  --*/
+								/*-- Function to create encode SVG --*/
 								/* colors needd to be hex code without # */
 								// createSVGIcon("9d2235", "222", "whitetext", "1");
 								var createSVGIcon = function(fillColor,strokeColor,labelClass,labelText) {
@@ -1683,7 +1684,7 @@ while ( have_posts() ) : the_post(); ?>
 														if ( $telemed_modified_time['location_telemed_modified_hours_closed'] ) {
 															$telemed_modified_text .= 'Closed ';
 														} else {
-															$telemed_modified_text .= ( ( $telemed_modified_time['location_telemed_modified_hours_open'] && '00:00:00' != $telemed_modified_time['location_telemed_modified_hours_open'] )  ? '' . ap_time_span( strtotime($telemed_modified_time['location_telemed_modified_hours_open']), strtotime($telemed_modified_time['location_telemed_modified_hours_close']) ) . '' : '' );
+															$telemed_modified_text .= ( ( $telemed_modified_time['location_telemed_modified_hours_open'] && '00:00:00' != $telemed_modified_time['location_telemed_modified_hours_open'] ) ? '' . ap_time_span( strtotime($telemed_modified_time['location_telemed_modified_hours_open']), strtotime($telemed_modified_time['location_telemed_modified_hours_close']) ) . '' : '' );
 														}
 														if ( $telemed_modified_time['location_telemed_modified_hours_comment'] ) {
 															$telemed_modified_text .= ' <br /><span class="subtitle">' .$telemed_modified_time['location_telemed_modified_hours_comment'] . '</span>';
@@ -1728,7 +1729,7 @@ while ( have_posts() ) : the_post(); ?>
 														if ( $telemed_hour['closed'] ) {
 															$telemed_hours_text .= 'Closed ';
 														} else {
-															$telemed_hours_text .= ( ( $telemed_hour['open'] && '00:00:00' != $telemed_hour['open'] )  ? '' . ap_time_span( strtotime($telemed_hour['open']), strtotime($telemed_hour['close']) ) . '' : '' );
+															$telemed_hours_text .= ( ( $telemed_hour['open'] && '00:00:00' != $telemed_hour['open'] ) ? '' . ap_time_span( strtotime($telemed_hour['open']), strtotime($telemed_hour['close']) ) . '' : '' );
 														}
 														if ( $telemed_hour['comment'] ) {
 															$telemed_hours_text .= ' <br /><span class="subtitle">' .$telemed_hour['comment'] . '</span>';
