@@ -334,10 +334,10 @@
                 <?php
                 if ( $show_online_scheduling_link_book ) {
                     $mychart_scheduling_visit_type = ''; // WIP — Check the provider profile to get this value
-                    $mychart_scheduling_options = ''; // WIP — Check the location profile to get this value
+                    $scheduling_mychart_book_options = ''; // WIP — Check the location profile to get this value
                     include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book.php' );
                 } elseif ( $show_online_scheduling_link_request ) {
-                    $appointment_request_forms = ''; // WIP — Check the location profile to get this value
+                    $scheduling_request_forms = ''; // WIP — Check the location profile to get this value
                     include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-request.php' );
                 }
                 ?>

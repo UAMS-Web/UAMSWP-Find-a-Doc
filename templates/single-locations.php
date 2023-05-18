@@ -50,6 +50,17 @@ if (empty($excerpt)){
 // End Parent Location Variables
 
 
+// Location Details Variables
+
+	// Check if this is an Arkansas Children's location
+	$location_ac_query = get_field('location_ac_query');
+
+	// Check if a patient can schedule an appointment for services rendered at this location
+	$location_appointments_query = get_field('location_appointments_query');
+
+// End Location Details Variables
+
+
 // Image Variables
 
 	$override_parent_photo = get_field('location_image_override_parent');
@@ -379,15 +390,15 @@ while ( have_posts() ) : the_post(); ?>
 	$location_url = get_field('location_url');
 
 	// Check if online scheduling sections should be displayed
-    $online_scheduling_template = 'single-location';
-    $online_scheduling_group = get_field('location_scheduling_group');
-    $mychart_scheduling_query = $online_scheduling_group['location_scheduling_mychart_query'];
-    $appointment_request_query = $online_scheduling_group['location_scheduling_request_query'];
-    $appointment_request_forms = $online_scheduling_group['location_scheduling_request_form'];
-	$location_ac_query = get_field('location_ac_query');
-	$online_scheduling_query = get_field('location_appointments_query');
-    $mychart_scheduling_options = $online_scheduling_group['location_scheduling_mychart_book_options'];
-    $mychart_scheduling_preregister_options = $online_scheduling_group['location_scheduling_mychart_preregister_options'];
+    $scheduling_template = 'single-location';
+    $scheduling_group = get_field('location_scheduling_group');
+    $scheduling_mychart_query = $scheduling_group['location_scheduling_mychart_query'];
+	$scheduling_mychart_type = $scheduling_group['location_scheduling_mychart_type'];
+    $scheduling_request_query = $scheduling_group['location_scheduling_request_query'];
+    $scheduling_request_forms = $scheduling_group['location_scheduling_request_form'];
+	$scheduling_query = $location_appointments_query;
+    $scheduling_mychart_book_options = $scheduling_group['location_scheduling_mychart_book_options'];
+    $scheduling_mychart_preregister_options = $scheduling_group['location_scheduling_mychart_preregister_options'];
 	// $mychart_scheduling_visit_type = '';
 	include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-check.php' );
 
@@ -481,43 +492,7 @@ while ( have_posts() ) : the_post(); ?>
         } else {
             $show_appointment_section = false;
         }
-
-        // Check if Appointment Scheduling section should be displayed
-		$mychart_scheduling_query_system = get_field('mychart_scheduling_query_system', 'option');
-		$location_scheduling_query = get_field('location_scheduling_query');
-		$location_scheduling_options = get_field('location_scheduling_options');
-
-			// Set main appointment scheduling section title
-			$location_scheduling_title_default = 'Schedule an Appointment Online'; // Default value for appointment section title
-			$location_scheduling_title_general = get_field('location_scheduling_title_general'); // Get input for general appointment section title
-			$location_scheduling_title = ( isset($location_scheduling_title_general) && !empty($location_scheduling_title_general) ) ? $location_scheduling_title_general : $location_scheduling_title_default; // Set main title from general title input. If general title value is empty, set to default value.
-
-			// Set main appointment scheduling section intro
-			$location_scheduling_intro_default = 'Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.'; // Default value for appointment section intro
-			$location_scheduling_intro_general = get_field('location_scheduling_intro_general'); // Get input for general appointment section intro
-			$location_scheduling_intro = ( isset($location_scheduling_intro_general) && !empty($location_scheduling_intro_general) ) ? $location_scheduling_intro_general : $location_scheduling_intro_default; // Set main intro from general intro input. If general intro value is empty, set to default value.
-			
-			// Change main appointment scheduling section title and intro if only one scheduling widget
-			if ($location_scheduling_query && (count((array)$location_scheduling_options) < 2)) {
-				$row = $location_scheduling_options[0];
-				$location_scheduling_item_title_main = $row['location_scheduling_title']; // Get input for specific appointment section standalone title
-				$location_scheduling_title = ( isset($location_scheduling_item_title_main) && !empty($location_scheduling_item_title_main) ) ? $location_scheduling_item_title_main : $location_scheduling_title; // If input for specific appointment section title exists, use that. Otherwise, keep original value.
-				$location_scheduling_item_intro_main = $row['location_scheduling_intro']; // Get input for specific appointment section standalone intro
-				$location_scheduling_intro = ( isset($location_scheduling_item_intro_main) && !empty($location_scheduling_item_intro_main) ) ? $location_scheduling_item_intro_main : $location_scheduling_intro; // If input for specific appointment section intro exists, use that. Otherwise, keep original value.
-			}
-			
-			
-		$mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
-		$mychart_scheduling_instance = get_field('mychart_scheduling_instance', 'option');
-		$mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
-		$mychart_scheduling_linksource = ( isset($mychart_scheduling_linksource) && !empty($mychart_scheduling_linksource) ) ? $mychart_scheduling_linksource : 'uamshealth.com';
-
-		if ( $mychart_scheduling_query_system && $location_scheduling_query ) {
-            $show_mychart_scheduling_section = true;
-        } else {
-            $show_mychart_scheduling_section = false;
-        }
-
+		
         // Check if Telemedicine Information section should be displayed
 		if ( $telemed_query ) {
             $show_telemed_section = true;
@@ -772,7 +747,7 @@ while ( have_posts() ) : the_post(); ?>
 							// Begin Hours and After Hours Information
 							
 							?>
-							<div class="col-12 <?php echo $show_online_scheduling_section ? 'col-lg-6' : ''; ?>">
+							<div class="col-12 <?php echo $show_scheduling_section ? 'col-lg-6' : ''; ?>">
 								<?php
 								
 								// Begin Hours Information
@@ -1063,71 +1038,77 @@ while ( have_posts() ) : the_post(); ?>
 
 							// Begin Appointment Information
 
-							if ( $show_online_scheduling_section ) { ?>
-							<div class="col-12 col-lg-6">
-								<?php
-								
-								// Begin MyChart Scheduling Links Section
-								
-								if ( $show_mychart_scheduling_section ) {
-									$mychart_scheduling_book_heading = get_field('mychart_scheduling_book_heading_system', 'option') ?: 'Appointments';
-									$mychart_scheduling_book_descr = get_field('mychart_scheduling_book_descr_system', 'option') ?: 'Find a provider at this location to book an appointment online.';
-									?>
-									<h2 class="h4"><?php echo $mychart_scheduling_book_heading; ?></h2>
-									<p><?php echo $mychart_scheduling_book_descr; ?></p>
-									<div class="btn-container">
-										<div class="inner-container">
-											<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book.php' ); ?>
+							if ( $show_scheduling_section ) { ?>
+								<div class="col-12 col-lg-6">
+									<?php
+									
+									// Begin MyChart Scheduling Links Section
+
+									if ( $show_scheduling_mychart_book_section ) { // $show_scheduling_mychart_section is defined in /templates/blocks/online-scheduling-check.php
+
+										// Get heading value from from Find-a-Doc Settings input labeled "Heading for Appointment Booking" or use a fallback value
+										$scheduling_mychart_book_heading = get_field('mychart_scheduling_book_heading_system', 'option') ?: 'Appointments';
+
+										// Get description value from from Find-a-Doc Settings input labeled "Description for Appointment Booking" or use a fallback value
+										$scheduling_mychart_book_descr = get_field('mychart_scheduling_book_descr_system', 'option') ?: 'Find a provider at this location to book an appointment online.';
+
+										?>
+										<h2 class="h4"><?php echo $scheduling_mychart_book_heading; ?></h2>
+										<p><?php echo $scheduling_mychart_book_descr; ?></p>
+										<div class="btn-container">
+											<div class="inner-container">
+												<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book.php' ); ?>
+											</div>
 										</div>
-									</div>
-								<?php } // endif $show_mychart_scheduling_section
+									<?php } // endif $show_scheduling_mychart_section
 
-								// End MyChart Scheduling Links Section
+									// End MyChart Scheduling Links Section
 
 
-								// Begin link to specialized care appointment request
+									// Begin link to specialized care appointment request
 
-								if ( $show_appointment_request_section ) {
-									$appointment_request_heading_standalone = get_field('appointment_request_heading_standalone_system', 'option') ?: 'Appointments';
-									$appointment_request_intro_standalone = get_field('appointment_request_descr_standalone_system', 'option') ?: 'Appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.';
-									$appointment_request_heading_nested = get_field('appointment_request_heading_nested_system', 'option') ?: 'Specialized Care';
-									$appointment_request_intro_nested = get_field('appointment_request_descr_nested_system', 'option') ?: 'Some appointments at this location involve specialized care and cannot be scheduled online. For those, submit a request for an appointment.';
-									if ( $show_mychart_scheduling_section ) {
-										echo '<h3 class="h5">' . $appointment_request_heading_nested . '</h3>';
-										echo '<p>' . $appointment_request_intro_nested . '</p>';
-									} else {
-										echo '<h2 class="h4">' . $appointment_request_heading_standalone . '</h2>';
-										echo '<p>' . $appointment_request_intro_standalone . '</p>';
-									}
+									if ( $show_scheduling_request_section ) {
+										$appointment_request_heading_standalone = get_field('appointment_request_heading_standalone_system', 'option') ?: 'Appointments';
+										$appointment_request_intro_standalone = get_field('appointment_request_descr_standalone_system', 'option') ?: 'Appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.';
+										$appointment_request_heading_nested = get_field('appointment_request_heading_nested_system', 'option') ?: 'Specialized Care';
+										$appointment_request_intro_nested = get_field('appointment_request_descr_nested_system', 'option') ?: 'Some appointments at this location involve specialized care and cannot be scheduled online. For those, submit a request for an appointment.';
+										if ( $show_scheduling_mychart_section ) {
+											echo '<h3 class="h5">' . $appointment_request_heading_nested . '</h3>';
+											echo '<p>' . $appointment_request_intro_nested . '</p>';
+										} else {
+											echo '<h2 class="h4">' . $appointment_request_heading_standalone . '</h2>';
+											echo '<p>' . $appointment_request_intro_standalone . '</p>';
+										}
 
-									$appointment_request_utm_medium_val = 'single-location';
-									$appointment_request_utm_content_val = $parent_slug ? $parent_slug . '_' . $page_slug : $page_slug;
-									?>
-									<div class="btn-container">
-										<div class="inner-container">
-											<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-request.php' ); ?>
+										$appointment_request_utm_medium_val = 'single-location';
+										$appointment_request_utm_content_val = $parent_slug ? $parent_slug . '_' . $page_slug : $page_slug;
+										?>
+										<div class="btn-container">
+											<div class="inner-container">
+												<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-request.php' ); ?>
+											</div>
 										</div>
-									</div>
-								<?php }
+									<?php }
 
-								// End link to specialized care appointment request
-								
+									// End link to specialized care appointment request
+									
 
-								// Begin Visit Pre-registration section
-								
-								$mychart_scheduling_preregister_heading = get_field('mychart_scheduling_preregister_heading_system', 'option') ?: 'Immediate Care';
-								$mychart_scheduling_preregister_descr = get_field('mychart_scheduling_preregister_descr_system', 'option') ?: 'Spend less time waiting and get home faster by choosing an available time.';
-								?>
-								<h2 class="h4"><?php echo $mychart_scheduling_preregister_heading; ?></h2>
-								<p><?php echo $mychart_scheduling_preregister_descr; ?></p>
-								<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-preregister.php' ); ?>
-								<?php
-								
-								// End Visit Pre-registration section
-								
-								?>
-							</div>
-							<?php } ?>
+									// Begin Visit Pre-registration section
+
+									if ( $show_scheduling_mychart_preregister_section ) { // $show_scheduling_mychart_preregister_section is defined in /templates/blocks/online-scheduling-check.php
+										$mychart_scheduling_preregister_heading = get_field('mychart_scheduling_preregister_heading_system', 'option') ?: 'Immediate Care';
+										$mychart_scheduling_preregister_descr = get_field('mychart_scheduling_preregister_descr_system', 'option') ?: 'Spend less time waiting and get home faster by choosing an available time.';
+										?>
+										<h2 class="h4"><?php echo $mychart_scheduling_preregister_heading; ?></h2>
+										<p><?php echo $mychart_scheduling_preregister_descr; ?></p>
+										<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-preregister.php' );
+									} // endif ( $show_scheduling_mychart_preregister_section )
+									
+									// End Visit Pre-registration section
+									
+									?>
+								</div>
+							<?php } // endif ( $show_scheduling_section ) ?>
 						</div>
 					</div>
 					<?php
@@ -1262,7 +1243,7 @@ while ( have_posts() ) : the_post(); ?>
 							<a class="nav-link" href="#appointment-info" title="Jump to the section of this page about Appointment Information">Appointment Information</a>
 						</li>
 					<?php } ?>
-					<?php if ( $show_mychart_scheduling_section ) { ?>
+					<?php if ( $show_scheduling_mychart_section ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#scheduling" title="Jump to the section of this page about scheduling an appointment in MyChart"><?php echo $location_scheduling_title; ?></a>
 						</li>
@@ -1530,7 +1511,7 @@ while ( have_posts() ) : the_post(); ?>
 	// End Appointment Information Section
 
 	// Begin MyChart Scheduling Section
-	if ( $show_mychart_scheduling_section ) { ?>
+	if ( $show_scheduling_mychart_section ) { ?>
 		<section class="uams-module mychart-scheduling-module bg-auto" id="scheduling">
 			<div class="container-fluid">
 				<div class="row">

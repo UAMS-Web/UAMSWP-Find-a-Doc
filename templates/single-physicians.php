@@ -442,17 +442,17 @@ while ( have_posts() ) : the_post();
     $resource_query = new WP_Query( $args );
 
 	// Check if online scheduling sections should be displayed
-    $online_scheduling_template = 'single-provider';
-	$online_scheduling_query = $eligible_appointments && $accepting_patients && !$referral_required;
-    $online_scheduling_group = get_field('physician_scheduling_group');
-    $mychart_scheduling_query = $online_scheduling_group['physician_scheduling_mychart_query'];
-    $appointment_request_query = $online_scheduling_group['physician_scheduling_request_query'];
-    $appointment_request_forms = $online_scheduling_group['physician_scheduling_request_form'];
+    $scheduling_template = 'single-provider';
+	$scheduling_query = $eligible_appointments && $accepting_patients && !$referral_required;
+    $scheduling_group = get_field('physician_scheduling_group');
+    $scheduling_mychart_query = $scheduling_group['physician_scheduling_mychart_query'];
+    $scheduling_request_query = $scheduling_group['physician_scheduling_request_query'];
+    $scheduling_request_forms = $scheduling_group['physician_scheduling_request_form'];
 	// $location_ac_query = '';
 	// $location_appointments_query = '';
-	// $mychart_scheduling_options = '';
-	// $mychart_scheduling_options_rows = '';
-    $mychart_scheduling_visit_type = $online_scheduling_group['physician_scheduling_mychart_book_vt'];
+	// $scheduling_mychart_book_options = '';
+	// $scheduling_mychart_book_options_rows = '';
+    $mychart_scheduling_visit_type = $scheduling_group['physician_scheduling_mychart_book_vt'];
     include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-check.php' );
 
     // Set logic for displaying jump links and sections
@@ -576,12 +576,12 @@ while ( have_posts() ) : the_post();
                     
                     // Begin Appointment Information
                     
-                    if ( $show_online_scheduling_section ) {
+                    if ( $show_scheduling_section ) {
                         $appointments_heading = 'Appointments'; ?>
                         <div class="text-subsection">
                             <div class="row">
                                 <?php // Begin MyChart Scheduling Links Section
-                                if ($show_mychart_scheduling_section) { ?>
+                                if ($show_scheduling_mychart_section) { ?>
                                     <div class="col-12 col-lg-6">
                                         <h2 class="h5"><?php echo $appointments_heading; ?></h2>
                                         <p>Book an appointment with this provider online.</p>
@@ -591,12 +591,12 @@ while ( have_posts() ) : the_post();
                                             </div>
                                         </div>
                                     </div>
-                                <?php } // endif $show_mychart_scheduling_section
+                                <?php } // endif $show_scheduling_mychart_section
                                 // End MyChart Scheduling Links Section
                                 
                                 // Begin link to specialized care appointment request
-                                if ($show_appointment_request_section) {
-                                    $appointment_request_form_count = count($appointment_request_forms);
+                                if ($show_scheduling_request_section) {
+                                    $appointment_request_form_count = count($scheduling_request_forms);
                                     
                                     $appointment_request_heading = 'Specialized Care Appointments';
                                     $appointment_request_heading_standalone = $appointments_heading;
@@ -606,7 +606,7 @@ while ( have_posts() ) : the_post();
                                     ?>
                                     <div class="col-12 col-lg-6">
                                         <?php
-                                        if ( $show_mychart_scheduling_section ) {
+                                        if ( $show_scheduling_mychart_section ) {
                                             echo '<h3 class="h5">' . $appointment_request_heading . '</h3>';
                                             echo '<p>' . $appointment_request_intro . '</p>';
                                         } else {
@@ -623,11 +623,11 @@ while ( have_posts() ) : the_post();
                                             </div>
                                         </div>
                                     </div>
-                                <?php } // endif $show_appointment_request_section
+                                <?php } // endif $show_scheduling_request_section
                                 // End link to specialized care appointment request ?>
                             </div><?php // end div.row ?>
                         </div><?php // End div.text-subsection for Appointment Information ?>
-                    <?php } // endif $show_online_scheduling_section
+                    <?php } // endif $show_scheduling_section
                     
                     // End Appointment Information
                     

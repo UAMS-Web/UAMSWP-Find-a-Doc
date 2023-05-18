@@ -4,10 +4,10 @@
      *  Designed for UAMS Find-a-Doc
      * 
      *  Required vars:
-     *      $show_mychart_scheduling_section
+     *      $show_scheduling_mychart_section
      * 
      *  Required vars from single location template:
-     *      $mychart_scheduling_options
+     *      $scheduling_mychart_book_options
      * 
      *  Required vars from single provider template:
      *      $mychart_scheduling_visit_type
@@ -21,7 +21,7 @@
      */
 
 // Check optional vars from single location template
-$mychart_scheduling_options = isset($mychart_scheduling_options) ? $mychart_scheduling_options : '';
+$scheduling_mychart_book_options = isset($scheduling_mychart_book_options) ? $scheduling_mychart_book_options : '';
 $mychart_scheduling_intro_override = isset($mychart_scheduling_intro_override) ? $mychart_scheduling_intro_override : '';
 $mychart_scheduling_dep = isset($mychart_scheduling_dep) ? $mychart_scheduling_dep : '';
 
@@ -29,7 +29,7 @@ $mychart_scheduling_dep = isset($mychart_scheduling_dep) ? $mychart_scheduling_d
 $mychart_scheduling_visit_type = isset($mychart_scheduling_visit_type) ? $mychart_scheduling_visit_type : '';
 $mychart_scheduling_ser = isset($mychart_scheduling_ser) ? $mychart_scheduling_ser : '';
 
-if( $show_mychart_scheduling_section ) {
+if( $show_scheduling_mychart_section ) {
     // Get system settings for constructing common parts of MyChart Open Scheduling iframe src value
     $mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
     $mychart_scheduling_instance = get_field('mychart_scheduling_instance', 'option');
@@ -40,8 +40,8 @@ if( $show_mychart_scheduling_section ) {
     $mychart_scheduling_intro = ( isset($mychart_scheduling_intro_override) && !empty($mychart_scheduling_intro_override) ) ? $mychart_scheduling_intro_override : $mychart_scheduling_intro;
     $i = 0;
     // Loop through repeater rows.
-    if ( $mychart_scheduling_options || $mychart_scheduling_visit_type ) {
-        $options = $mychart_scheduling_options ?: $mychart_scheduling_visit_type;
+    if ( $scheduling_mychart_book_options || $mychart_scheduling_visit_type ) {
+        $options = $scheduling_mychart_book_options ?: $mychart_scheduling_visit_type;
         foreach( $options as $option ) {
             // Load sub field value.
             $visit_type = $option['location_scheduling_vt'] ?: $option;
@@ -85,7 +85,7 @@ if( $show_mychart_scheduling_section ) {
             <?php }
             $i++;
         } // end foreach
-    } // endif ( $mychart_scheduling_options || $mychart_scheduling_visit_type )
+    } // endif ( $scheduling_mychart_book_options || $mychart_scheduling_visit_type )
     ?>
     <!-- <link href="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
 
@@ -108,5 +108,5 @@ if( $show_mychart_scheduling_section ) {
             'toggleBtnCollapseHelpText': 'Exit fullscreen',
         });
     </script>
-<?php } // endif $show_mychart_scheduling_section
+<?php } // endif $show_scheduling_mychart_section
 ?>
