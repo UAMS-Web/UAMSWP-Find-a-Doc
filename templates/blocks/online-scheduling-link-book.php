@@ -30,6 +30,9 @@ if ( $scheduling_mychart_book_options ) {
 	$scheduling_mychart_book_count = count( $scheduling_mychart_book_visit_type );
 }
 
+// Get the system setting for the button text
+$scheduling_mychart_book_btn_text = get_field('mychart_scheduling_book_btn_text_system', 'option') ?: 'Book an Appointment';
+
 // Set the dropdown query variable
 if (
 	$scheduling_template == 'single-provider' // If it is on the single provider template
@@ -42,7 +45,6 @@ if (
 }
 
 // Create the dropdown/link element
-$scheduling_mychart_book_btn_text = get_field('mychart_scheduling_book_btn_text_system', 'option') ?: 'Book an Appointment';
 if (
 	$scheduling_mychart_book_options // Single Location: MyChart open scheduling widget options for Appointment Booking is not empty
 	||
