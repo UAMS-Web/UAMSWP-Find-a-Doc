@@ -1,35 +1,35 @@
 <?php
 /**
-*	Template Name: Online Scheduling, Links to Appointment Request Forms
-*	Designed for UAMS Find-a-Doc
-*	
-*	Required vars:
-*		$scheduling_request_forms
-*		$scheduling_request_btn_style // Define whether the appointment request button is solid or outline
-*		$appointment_request_utm_medium_val
-*			(
-*				Expected values:
-*					single-provider
-*					archive-provider
-*					single-location
-*					archive-location
-*					single-expertise
-*					archive-expertise
-*					single-condition
-*					archive-condition
-*					single-treatment
-*					archive-treatment
-*					single-clinical-resource
-*					archive-clinical-resource
-*			)
-*		$appointment_request_utm_content_val
-*			(
-*				Expected values:
-*					Slug of provider whose card or profile the link was on (e.g., leonard-h-mccoy)
-*					Slug of location whose card or profile the link was on (e.g., that-place)
-*						If child location, prepend slug of parent and underscore (e.g., parent-place_child-place)
-*			)
-*/
+ * 	Template Name: Online Scheduling, Links to Appointment Request Forms
+ * 	Designed for UAMS Find-a-Doc
+ * 	
+ * 	Required vars:
+ * 		$scheduling_request_forms
+ * 		$scheduling_request_btn_style // Define whether the appointment request button is solid or outline
+ * 		$appointment_request_utm_medium_val
+ * 			(
+ * 				Expected values:
+ * 					single-provider
+ * 					archive-provider
+ * 					single-location
+ * 					archive-location
+ * 					single-expertise
+ * 					archive-expertise
+ * 					single-condition
+ * 					archive-condition
+ * 					single-treatment
+ * 					archive-treatment
+ * 					single-clinical-resource
+ * 					archive-clinical-resource
+ * 			)
+ * 		$appointment_request_utm_content_val
+ * 			(
+ * 				Expected values:
+ * 					Slug of provider whose card or profile the link was on (e.g., leonard-h-mccoy)
+ * 					Slug of location whose card or profile the link was on (e.g., that-place)
+ * 						If child location, prepend slug of parent and underscore (e.g., parent-place_child-place)
+ * 			)
+ */
 
 $appointment_request_form_count = count($scheduling_request_forms);
 $appointment_request_button_text = 'Request an Appointment';
