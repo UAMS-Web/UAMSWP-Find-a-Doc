@@ -597,26 +597,26 @@ while ( have_posts() ) : the_post();
 								
 								// Begin link to specialized care appointment request
 								if ($show_scheduling_request_section) {
-									$appointment_request_form_count = count($scheduling_request_forms);
+									$scheduling_request_form_count = count($scheduling_request_forms);
 									
-									$appointment_request_heading = 'Specialized Care Appointments';
-									$appointment_request_heading_standalone = $appointments_heading;
-									$appointment_request_intro = 'Some appointments for specialized care with this provider cannot be scheduled online. For those, submit a request for an appointment.';
-									$appointment_request_intro_standalone = 'Appointments for specialized care with this provider cannot be scheduled online. However, you can submit a request for an appointment.';
-									$appointment_request_button_text = 'Request an Appointment';
+									$scheduling_request_heading = 'Specialized Care Appointments';
+									$scheduling_request_heading_standalone = $appointments_heading;
+									$scheduling_request_intro = 'Some appointments for specialized care with this provider cannot be scheduled online. For those, submit a request for an appointment.';
+									$scheduling_request_intro_standalone = 'Appointments for specialized care with this provider cannot be scheduled online. However, you can submit a request for an appointment.';
+									$scheduling_request_button_text = 'Request an Appointment';
 									?>
 									<div class="col-12 col-lg-6">
 										<?php
 										if ( $show_scheduling_mychart_section ) {
-											echo '<h3 class="h5">' . $appointment_request_heading . '</h3>';
-											echo '<p>' . $appointment_request_intro . '</p>';
+											echo '<h3 class="h5">' . $scheduling_request_heading . '</h3>';
+											echo '<p>' . $scheduling_request_intro . '</p>';
 										} else {
-											echo '<h2 class="h4">' . $appointment_request_heading_standalone . '</h2>';
-											echo '<p>' . $appointment_request_intro_standalone . '</p>';
+											echo '<h2 class="h4">' . $scheduling_request_heading_standalone . '</h2>';
+											echo '<p>' . $scheduling_request_intro_standalone . '</p>';
 										}
 										
-										$appointment_request_utm_medium_val = 'single-provider';
-										$appointment_request_utm_content_val = $page_slug; // page slug
+										$scheduling_request_utm_medium_val = 'single-provider';
+										$scheduling_request_utm_content_val = $page_slug; // page slug
 										?>
 										<div class="btn-container">
 											<div class="inner-container">

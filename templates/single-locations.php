@@ -1070,20 +1070,20 @@ while ( have_posts() ) : the_post(); ?>
 									// Begin link to specialized care appointment request
 
 									if ( $show_scheduling_request_section ) {
-										$appointment_request_heading_standalone = get_field('appointment_request_heading_standalone_system', 'option') ?: 'Appointments';
-										$appointment_request_intro_standalone = get_field('appointment_request_descr_standalone_system', 'option') ?: 'Appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.';
-										$appointment_request_heading_nested = get_field('appointment_request_heading_nested_system', 'option') ?: 'Specialized Care';
-										$appointment_request_intro_nested = get_field('appointment_request_descr_nested_system', 'option') ?: 'Some appointments at this location involve specialized care and cannot be scheduled online. For those, submit a request for an appointment.';
+										$scheduling_request_heading_standalone = get_field('appointment_request_heading_standalone_system', 'option') ?: 'Appointments';
+										$scheduling_request_intro_standalone = get_field('appointment_request_descr_standalone_system', 'option') ?: 'Appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.';
+										$scheduling_request_heading_nested = get_field('appointment_request_heading_nested_system', 'option') ?: 'Specialized Care';
+										$scheduling_request_intro_nested = get_field('appointment_request_descr_nested_system', 'option') ?: 'Some appointments at this location involve specialized care and cannot be scheduled online. For those, submit a request for an appointment.';
 										if ( $show_scheduling_mychart_section ) {
-											echo '<h3 class="h5">' . $appointment_request_heading_nested . '</h3>';
-											echo '<p>' . $appointment_request_intro_nested . '</p>';
+											echo '<h3 class="h5">' . $scheduling_request_heading_nested . '</h3>';
+											echo '<p>' . $scheduling_request_intro_nested . '</p>';
 										} else {
-											echo '<h2 class="h4">' . $appointment_request_heading_standalone . '</h2>';
-											echo '<p>' . $appointment_request_intro_standalone . '</p>';
+											echo '<h2 class="h4">' . $scheduling_request_heading_standalone . '</h2>';
+											echo '<p>' . $scheduling_request_intro_standalone . '</p>';
 										}
 
-										$appointment_request_utm_medium_val = 'single-location';
-										$appointment_request_utm_content_val = $parent_slug ? $parent_slug . '_' . $page_slug : $page_slug;
+										$scheduling_request_utm_medium_val = 'single-location';
+										$scheduling_request_utm_content_val = $parent_slug ? $parent_slug . '_' . $page_slug : $page_slug;
 										?>
 										<div class="btn-container">
 											<div class="inner-container">

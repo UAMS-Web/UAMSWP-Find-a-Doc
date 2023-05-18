@@ -116,7 +116,7 @@ $scheduling_request_query = (
 
 // Check if link(s) to appointment request form(s) should be displayed
 // $scheduling_mychart_query_system && $scheduling_request_query && $scheduling_request_forms
-$appointment_request_form_valid = false;
+$scheduling_request_form_valid = false;
 if (
 	$scheduling_request_query
 	&& (
@@ -135,12 +135,12 @@ if (
 	foreach( $scheduling_request_forms as $form ) {
 		$form_object = get_term_by( 'id', $form, 'appointment_request');
 		if ( $form_object ) {
-			$appointment_request_form_valid = true;
+			$scheduling_request_form_valid = true;
 			$break;
 		}
 	}
 }
-if ( $appointment_request_form_valid ) {
+if ( $scheduling_request_form_valid ) {
 	$show_scheduling_request_section = true;
 } else {
 	$show_scheduling_request_section = false;
