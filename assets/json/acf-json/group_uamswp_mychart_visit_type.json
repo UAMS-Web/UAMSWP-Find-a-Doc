@@ -28,7 +28,7 @@
     "fields": {
         "field_mychart_visit_type_id": {
             "key": "field_mychart_visit_type_id",
-            "label": "Visit Type \/ PRC ID from Epic",
+            "label": "Visit Type \/ PRC ID from UAMS Health Epic",
             "name": "mychart_visit_type_id",
             "type": "text",
             "instructions": "A single visit type available for scheduling in this specific widget. <br>Check the External Name field of the visit type record in Epic to ensure it is patient-friendly since it will be visible to users in the open scheduling widget.",
