@@ -152,10 +152,4 @@ if ( $show_scheduling_mychart_section || $show_scheduling_request_section ) {
 } else {
 	$show_scheduling_section = false;
 }
-
-echo '<p>Display online scheduling information overall ($show_scheduling_section) = ' . ($show_scheduling_section?'TRUE':"FALSE") . '</p>';
-echo '<p>Display MyChart Open Scheduling section ($show_scheduling_mychart_section) = ' . ($show_scheduling_mychart_section?'TRUE':"FALSE") . '</p>';
-echo '<p>Display appointment booking section (show_scheduling_mychart_book_section) = ' . ($show_scheduling_mychart_book_section?'TRUE':"FALSE") . '</p>';
-echo '<p>Display link(s) to appointment request form(s) ($show_scheduling_request_section) = ' . ($show_scheduling_request_section?'TRUE':"FALSE") . '</p>';
-echo '<p>Display visit pre-registration section ($show_scheduling_mychart_preregister_section) = ' . ($show_scheduling_mychart_preregister_section?'TRUE':"FALSE") . '</p>';
 ?>
