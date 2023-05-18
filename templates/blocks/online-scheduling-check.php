@@ -78,14 +78,20 @@
 	}
 
 	// Check if appointment booking section should be displayed
-    if ( in_array('book', $scheduling_mychart_type) && $scheduling_mychart_book_options ) {
+    if (
+        in_array('book', $scheduling_mychart_type) // MyChart open scheduling is set to Appointment Booking
+        && $scheduling_mychart_book_options // MyChart open scheduling widget options for Appointment Booking is not empty
+    ) {
 		$show_scheduling_mychart_book_section = true;
     } else {
 		$show_scheduling_mychart_book_section = false;
     }
 
 	// Check if visit preregistration section should be displayed
-    if ( in_array('preregister', $scheduling_mychart_type) && $scheduling_mychart_preregister_options ) {
+    if (
+        in_array('preregister', $scheduling_mychart_type) // MyChart open scheduling is set to Visit Pre-registration
+        && $scheduling_mychart_preregister_options // MyChart open scheduling widget options for Visit Pre-registration is not empty
+    ) {
 		$show_scheduling_mychart_preregister_section = true;
     } else {
 		$show_scheduling_mychart_preregister_section = false;
