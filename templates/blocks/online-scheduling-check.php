@@ -39,11 +39,11 @@
     // Get system setting for whether MyChart Open Scheduling is enabled
     $scheduling_mychart_query_system = get_field('mychart_scheduling_query_system', 'option');
 
-    // Query multiple settings to make a single determination on whether MyChart open scheduling is enabled for this location
+    // Query multiple settings to make a single determination on whether MyChart open scheduling is enabled for this location or provider
     $scheduling_mychart_query = (
         $scheduling_mychart_query_system // MyChart open scheduling is allowed at the system level
-        && $scheduling_mychart_query // MyChart open scheduling is allowed at the location level
-        && $scheduling_query // Patients can schedule an appointment for services rendered at this location
+        && $scheduling_mychart_query // MyChart open scheduling is allowed at the location / provider level
+        && $scheduling_query // Patients can schedule an appointment for services rendered at this location or with this provider
         ) ? TRUE : FALSE;
 
     // Check if MyChart Open Scheduling section should be displayed
