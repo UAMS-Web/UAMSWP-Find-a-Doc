@@ -13,7 +13,7 @@
  * 
  * Required vars from single location template:
  * 		$scheduling_mychart_book_options // MyChart Open Scheduling Widget Option(s) for Appointment Booking
- * 		$scheduling_mychart_type_dropdown // Display the Single Visit Type in a Dropdown?
+ * 		$scheduling_mychart_book_dropdown // Display the Single Appointment Booking Visit Type in a Dropdown?
  * 
  * Required vars from single provider template:
  * 		$scheduling_mychart_book_visit_type // Visit Type(s) from UAMS Health Epic for Appointment Booking
@@ -22,9 +22,9 @@
 
 // Set the variable that does not exist in the single provider template
 if ( $scheduling_template == 'single-provider' ) {
-	$scheduling_mychart_type_dropdown = true;
+	$scheduling_mychart_book_dropdown = true;
 } else {
-	$scheduling_mychart_type_dropdown = isset($scheduling_mychart_type_dropdown) ? $scheduling_mychart_type_dropdown : true;
+	$scheduling_mychart_book_dropdown = isset($scheduling_mychart_book_dropdown) ? $scheduling_mychart_book_dropdown : true;
 }
 
 if (
