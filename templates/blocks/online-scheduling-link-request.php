@@ -4,7 +4,7 @@
  * 	Designed for UAMS Find-a-Doc
  * 	
  * 	Required vars:
- * 		$scheduling_request_forms
+ * 		$scheduling_request_forms // Appointment Request Form(s)
  * 		$scheduling_request_btn_style // Define whether the appointment request button is solid or outline
  * 		$appointment_request_utm_medium_val
  * 			(
@@ -65,7 +65,7 @@ if ( $appointment_request_utm_arr_count > 0 ) { // If there are elements in the 
 	}
 }
 
-// Create the dropdown/link
+// Create the dropdown/link element
 if ( $appointment_request_form_count > 1 ) { ?>
 	<div class="dropdown">
 		<button class="btn <?php echo $scheduling_request_btn_style; ?>-primary dropdown-toggle" type="button" id="appt_request_form_dropdown" data-toggle="dropdown" aria-expanded="false"><?php echo $appointment_request_button_text; ?></button>

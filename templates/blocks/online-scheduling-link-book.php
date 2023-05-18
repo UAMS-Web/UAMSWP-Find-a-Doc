@@ -41,7 +41,7 @@ if (
 	$scheduling_mychart_book_dropdown = isset($scheduling_mychart_book_dropdown) ? $scheduling_mychart_book_dropdown : true;
 }
 
-// Create the dropdown element
+// Create the dropdown/link element
 $scheduling_mychart_book_btn_text = get_field('mychart_scheduling_book_btn_text_system', 'option') ?: 'Book an Appointment';
 if (
 	$scheduling_mychart_book_options // Single Location: MyChart open scheduling widget options for Appointment Booking is not empty
