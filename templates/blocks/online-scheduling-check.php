@@ -146,6 +146,15 @@ if ( $appointment_request_form_valid ) {
 	$show_scheduling_request_section = false;
 }
 
+// Define whether the appointment request button is solid or outline
+if ( $show_scheduling_mychart_section && $show_scheduling_request_section ) {
+	// If both booking and request are displayed, use the outline style
+	$scheduling_request_btn_style = 'btn-outline';
+} else {
+	// Otherwise use the solid style
+	$scheduling_request_btn_style = 'btn';
+}
+
 // Check if online scheduling information overall should be displayed
 if ( $show_scheduling_mychart_section || $show_scheduling_request_section ) {
 	$show_scheduling_section = true;
