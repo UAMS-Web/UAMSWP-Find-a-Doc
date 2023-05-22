@@ -111,7 +111,15 @@
             "type": "group",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_mychart_scheduling_query_system",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -129,15 +137,7 @@
                     "type": "text",
                     "instructions": "This text will be used in a heading when the appointment booking section is the only appointment option displayed.",
                     "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_mychart_scheduling_query_system",
-                                "operator": "==",
-                                "value": "1"
-                            }
-                        ]
-                    ],
+                    "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -156,15 +156,7 @@
                     "label": "Standalone Description for Appointment Booking",
                     "instructions": "This paragraph introduces the dropdown for selecting a visit type when booking an appointment. <br />The paragraph should briefly describe what the user can do.",
                     "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_mychart_scheduling_query_system",
-                                "operator": "==",
-                                "value": "1"
-                            }
-                        ]
-                    ],
+                    "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -183,15 +175,7 @@
                     "type": "text",
                     "instructions": "If defined, this text will be used in a subheading when other appointment options are also displayed.",
                     "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_mychart_scheduling_query_system",
-                                "operator": "==",
-                                "value": "1"
-                            }
-                        ]
-                    ],
+                    "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -210,15 +194,7 @@
                     "label": "Nested Description for Appointment Booking",
                     "instructions": "This description text will be used when other appointment options are also displayed. <br />This paragraph introduces the dropdown for selecting a visit type when booking an appointment. <br />The paragraph should briefly describe what the user can do.",
                     "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_mychart_scheduling_query_system",
-                                "operator": "==",
-                                "value": "1"
-                            }
-                        ]
-                    ],
+                    "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -237,15 +213,7 @@
                     "type": "text",
                     "instructions": "",
                     "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_mychart_scheduling_query_system",
-                                "operator": "==",
-                                "value": "1"
-                            }
-                        ]
-                    ],
+                    "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -264,15 +232,7 @@
                     "label": "Introduction for MyChart Open Scheduling Widget Used For Appointment Booking",
                     "instructions": "This paragraph introduces each MyChart open scheduling widget used for booking an appointment. <br />The paragraph should provide brief general information about MyChart open scheduling. There is a 221 character limit.",
                     "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_mychart_scheduling_query_system",
-                                "operator": "==",
-                                "value": "1"
-                            }
-                        ]
-                    ],
+                    "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -293,7 +253,15 @@
             "type": "group",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_mychart_scheduling_query_system",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -311,15 +279,7 @@
                     "type": "text",
                     "instructions": "This text will be used in a heading when the visit pre-registration section is the only appointment option displayed.",
                     "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_mychart_scheduling_query_system",
-                                "operator": "==",
-                                "value": "1"
-                            }
-                        ]
-                    ],
+                    "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -338,15 +298,7 @@
                     "label": "Standalone Description for Visit Pre-Registration",
                     "instructions": "This text will be used in a description when the visit pre-registration section is the only appointment option displayed. <br />This paragraph introduces the dropdown for selecting a visit type when pre-registering for a visit. <br />The paragraph should briefly describe what the user can do.",
                     "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_mychart_scheduling_query_system",
-                                "operator": "==",
-                                "value": "1"
-                            }
-                        ]
-                    ],
+                    "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -365,15 +317,7 @@
                     "type": "text",
                     "instructions": "This text will be used in a subheading when other appointment options are also displayed.",
                     "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_mychart_scheduling_query_system",
-                                "operator": "==",
-                                "value": "1"
-                            }
-                        ]
-                    ],
+                    "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -392,15 +336,7 @@
                     "label": "Nested Description for Visit Pre-Registration",
                     "instructions": "This text will be used in a description when other appointment options are also displayed. <br />This paragraph introduces the dropdown for selecting a visit type when pre-registering for a visit. <br />The paragraph should briefly describe what the user can do.",
                     "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_mychart_scheduling_query_system",
-                                "operator": "==",
-                                "value": "1"
-                            }
-                        ]
-                    ],
+                    "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -419,15 +355,7 @@
                     "type": "text",
                     "instructions": "",
                     "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_mychart_scheduling_query_system",
-                                "operator": "==",
-                                "value": "1"
-                            }
-                        ]
-                    ],
+                    "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -446,15 +374,7 @@
                     "label": "Introduction for MyChart Open Scheduling Widget Used For Visit Pre-Registration",
                     "instructions": "This paragraph introduces each MyChart open scheduling widget used for pre-registering for a visit. <br />The paragraph should provide brief general information about MyChart open scheduling. There is a 221 character limit.",
                     "required": 1,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_mychart_scheduling_query_system",
-                                "operator": "==",
-                                "value": "1"
-                            }
-                        ]
-                    ],
+                    "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
                         "class": "",
