@@ -109,8 +109,8 @@
             "name": "appointment_request_descr_nested_system",
             "type": "textarea",
             "label": "Nested Description for Appointment Request Forms",
-            "instructions": "This description text will be used when MyChart Open Scheduling section is also displayed. <br />This paragraph introduces the dropdown for selecting an appointment request form. <br />The paragraph should briefly describe what the user can do.",
             "required": 1,
+            "instructions": "This description text will be used when other appointment options are also displayed. <br />This paragraph introduces the dropdown for selecting an appointment request form. <br />The paragraph should briefly describe what the user can do.",
             "conditional_logic": [
                 [
                     {
