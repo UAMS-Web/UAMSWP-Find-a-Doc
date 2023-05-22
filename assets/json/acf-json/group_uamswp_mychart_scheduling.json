@@ -177,7 +177,7 @@
                     "name": "mychart_scheduling_book_heading_nested_system",
                     "label": "Nested Heading for Appointment Booking",
                     "type": "text",
-                    "instructions": "If defined, this text will be used in a subheading when other appointment options are also displayed.",
+                    "instructions": "If defined, this text will be used in a subheading when other appointment options are also displayed. If not defined, no subheading will be added.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -196,16 +196,16 @@
                     "name": "mychart_scheduling_book_descr_nested_system",
                     "type": "textarea",
                     "label": "Nested Description for Appointment Booking",
-                    "instructions": "This description text will be used when other appointment options are also displayed. <br />This paragraph introduces the dropdown for selecting a visit type when booking an appointment. <br />The paragraph should briefly describe what the user can do.",
-                    "required": 1,
+                    "instructions": "If defined, this description text will be used when other appointment options are also displayed. If not defined, the value for Standalone Description for Appointment Booking will be used. <br />This paragraph introduces the dropdown for selecting a visit type when booking an appointment. <br />The paragraph should briefly describe what the user can do.",
+                    "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "Find a provider at this location to book an appointment online.",
-                    "placeholder": "Find a provider at this location to book an appointment online.",
+                    "default_value": "",
+                    "placeholder": "",
                     "maxlength": "",
                     "rows": 2,
                     "new_lines": ""
