@@ -24,9 +24,9 @@
             "ui_off_text": ""
         },
         {
-            "key": "field_appointment_request_heading_standlone_system",
+            "key": "field_appointment_request_heading_standalone_system",
             "label": "Standalone Heading for Appointment Request Forms",
-            "name": "appointment_request_heading_standlone_system",
+            "name": "appointment_request_heading_standalone_system",
             "type": "text",
             "instructions": "This heading text will be used when appointment request forms section is the only appointment option displayed.",
             "required": 1,
@@ -51,8 +51,8 @@
             "maxlength": ""
         },
         {
-            "key": "field_appointment_request_descr_standlone_system",
-            "name": "appointment_request_descr_standlone_system",
+            "key": "field_appointment_request_descr_standalone_system",
+            "name": "appointment_request_descr_standalone_system",
             "type": "textarea",
             "label": "Standalone Description for Appointment Request Forms",
             "instructions": "This description text will be used when appointment request forms section is the only appointment option displayed. <br />This paragraph introduces the dropdown for selecting an appointment request form. <br />The paragraph should briefly describe what the user can do.",
