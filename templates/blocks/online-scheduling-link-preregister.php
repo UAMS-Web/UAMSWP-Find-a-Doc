@@ -21,7 +21,7 @@ $scheduling_mychart_book_visit_type = isset($scheduling_mychart_book_visit_type)
 <div class="btn-container">
     <div class="inner-container">
         <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="mychart_scheduling_dropdown" data-toggle="dropdown" aria-expanded="false">Pre-register</button>
+            <button class="btn btn-primary dropdown-toggle" type="button" id="mychart_scheduling_dropdown" data-toggle="dropdown" aria-expanded="false">Pre-Register</button>
             <div class="dropdown-menu" aria-labelledby="mychart_scheduling_dropdown">
                 <?php 
                 $i = 0;
