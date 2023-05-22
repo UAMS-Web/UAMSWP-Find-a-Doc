@@ -1,9 +1,9 @@
 <?php
 /**
- * Template Name: Online Scheduling, MyChart Open Scheduling Widget Modal Toggles
- * Designed for UAMS Find-a-Doc
+ * 	Template Name: Online Scheduling, MyChart Open Scheduling Widget Modal Toggles
+ * 	Designed for UAMS Find-a-Doc
  * 
- * Required vars
+ * 	Required vars
  * 		$scheduling_mychart_book_group // ACF field containing the inputs relevant to MyChart open scheduling widget configuration
  * 		$scheduling_mychart_type // Which Type(s) of MyChart Open Scheduling?
  * 		$scheduling_template
@@ -12,11 +12,11 @@
  * 				'single-provider'
  * 			)
  * 
- * Required vars from single location template:
+ * 	Required vars from single location template:
  * 		$scheduling_mychart_book_options // MyChart Open Scheduling Widget Option(s) for Appointment Booking
  * 		$scheduling_mychart_book_dropdown // Display the Single Appointment Booking Visit Type in a Dropdown?
  * 
- * Required vars from single provider template:
+ * 	Required vars from single provider template:
  * 		$scheduling_mychart_book_visit_type // Visit Type(s) from UAMS Health Epic for Appointment Booking
  * 	
  */
