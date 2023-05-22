@@ -1126,10 +1126,10 @@ function schedule_ajax_filter_callback() {
 	$schedules = get_field('location_scheduling_options', $pid);
 	$row = $schedules[$schedule_key];
     $scheduling_mychart_widget_configuration_group = get_field('mychart_scheduling_widget_configuration_group', 'option'); // ACF field containing the inputs relevant to MyChart open scheduling widget configuration
-	$mychart_scheduling_domain = $scheduling_mychart_widget_configuration_group['mychart_scheduling_domain'];
-	$mychart_scheduling_instance = $scheduling_mychart_widget_configuration_group['mychart_scheduling_instance'];
-	$mychart_scheduling_linksource = $scheduling_mychart_widget_configuration_group['mychart_scheduling_linksource'];
-	$mychart_scheduling_linksource = ( isset($mychart_scheduling_linksource) && !empty($mychart_scheduling_linksource) ) ? $mychart_scheduling_linksource : 'uamshealth.com';
+	$scheduling_mychart_domain = $scheduling_mychart_widget_configuration_group['mychart_scheduling_domain'];
+	$scheduling_mychart_instance = $scheduling_mychart_widget_configuration_group['mychart_scheduling_instance'];
+	$scheduling_mychart_linksource = $scheduling_mychart_widget_configuration_group['mychart_scheduling_linksource'];
+	$scheduling_mychart_linksource = ( isset($scheduling_mychart_linksource) && !empty($scheduling_mychart_linksource) ) ? $scheduling_mychart_linksource : 'uamshealth.com';
 	$location_scheduling_options = get_field('location_scheduling_options', $pid);
 
 	$location_scheduling_ser = $row['location_scheduling_ser'];
@@ -1147,18 +1147,18 @@ function schedule_ajax_filter_callback() {
 		</p>
 	<?php } ?>
 	<div id="scheduleContainer">
-		<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
+		<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $scheduling_mychart_domain; ?>/<?php echo $scheduling_mychart_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $scheduling_mychart_linksource; ?>"></iframe>
 	</div>
 
-	<!-- <link href="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
+	<!-- <link href="https://<?php echo $scheduling_mychart_domain; ?>/<?php echo $scheduling_mychart_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
 
-	<script src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidgetController.js" type="text/javascript"></script>
+	<script src="https://<?php echo $scheduling_mychart_domain; ?>/<?php echo $scheduling_mychart_instance; ?>/Content/EmbeddedWidgetController.js" type="text/javascript"></script>
 
 	<script type="text/javascript">
 	var EWC = new EmbeddedWidgetController({
 
 		// Replace with the hostname of your Open Scheduling site
-		'hostname':'https://<?php echo $mychart_scheduling_domain; ?>',
+		'hostname':'https://<?php echo $scheduling_mychart_domain; ?>',
 
 		// Must equal media query in EpicWP.css + any left/right margin of the host page. Should also change in EmbeddedWidget.css
 		'matchMediaString':'(max-width: 991.98px)',

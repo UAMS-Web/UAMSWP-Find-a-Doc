@@ -1100,11 +1100,11 @@ while ( have_posts() ) : the_post(); ?>
 									// Begin Visit Pre-Registration section
 
 									if ( $show_scheduling_mychart_preregister_section ) { // $show_scheduling_mychart_preregister_section is defined in /templates/blocks/online-scheduling-check.php
-										$mychart_scheduling_preregister_heading = get_field('mychart_scheduling_preregister_heading_system', 'option') ?: 'Immediate Care';
-										$mychart_scheduling_preregister_descr = get_field('mychart_scheduling_preregister_descr_system', 'option') ?: 'Spend less time waiting and get home faster by choosing an available time.';
+										$scheduling_mychart_preregister_heading = get_field('mychart_scheduling_preregister_heading_system', 'option') ?: 'Immediate Care';
+										$scheduling_mychart_preregister_descr = get_field('mychart_scheduling_preregister_descr_system', 'option') ?: 'Spend less time waiting and get home faster by choosing an available time.';
 										?>
-										<h2 class="h4"><?php echo $mychart_scheduling_preregister_heading; ?></h2>
-										<p><?php echo $mychart_scheduling_preregister_descr; ?></p>
+										<h2 class="h4"><?php echo $scheduling_mychart_preregister_heading; ?></h2>
+										<p><?php echo $scheduling_mychart_preregister_descr; ?></p>
 										<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-preregister.php' );
 									} // endif ( $show_scheduling_mychart_preregister_section )
 									
@@ -1551,18 +1551,18 @@ while ( have_posts() ) : the_post(); ?>
 								$location_scheduling_fallback = $row['location_scheduling_fallback'];
 							?>
 								<div id="scheduleContainer">
-									<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $mychart_scheduling_linksource; ?>"></iframe>
+									<iframe id="openSchedulingFrame" class="widgetframe" scrolling="no" src="https://<?php echo $scheduling_mychart_domain; ?>/<?php echo $scheduling_mychart_instance; ?>/SignupAndSchedule/EmbeddedSchedule?id=<?php echo $location_scheduling_ser; ?>&dept=<?php echo $location_scheduling_dep; ?>&vt=<?php echo $location_scheduling_vt; ?>&linksource=<?php echo $scheduling_mychart_linksource; ?>"></iframe>
 								</div>
 
-								<!-- <link href="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
+								<!-- <link href="https://<?php echo $scheduling_mychart_domain; ?>/<?php echo $scheduling_mychart_instance; ?>/Content/EmbeddedWidget.css" rel="stylesheet" type="text/css"> -->
 
-								<script src="https://<?php echo $mychart_scheduling_domain; ?>/<?php echo $mychart_scheduling_instance; ?>/Content/EmbeddedWidgetController.js" type="text/javascript"></script>
+								<script src="https://<?php echo $scheduling_mychart_domain; ?>/<?php echo $scheduling_mychart_instance; ?>/Content/EmbeddedWidgetController.js" type="text/javascript"></script>
 
 								<script type="text/javascript">
 								var EWC = new EmbeddedWidgetController({
 
 									// Replace with the hostname of your Open Scheduling site
-									'hostname':'https://<?php echo $mychart_scheduling_domain; ?>',
+									'hostname':'https://<?php echo $scheduling_mychart_domain; ?>',
 
 									// Must equal media query in EpicWP.css + any left/right margin of the host page. Should also change in EmbeddedWidget.css
 									'matchMediaString':'(max-width: 991.98px)',
@@ -1996,8 +1996,8 @@ while ( have_posts() ) : the_post(); ?>
 </main>
 <?php
 // Create MyChart Open Scheduling Modals
-$mychart_scheduling_intro_override = get_field('location_scheduling_intro_general'); // Override at the location profile level
-$mychart_scheduling_dep = get_field('location_dep_general');
+$scheduling_mychart_intro_override = get_field('location_scheduling_intro_general'); // Override at the location profile level
+$scheduling_mychart_dep = get_field('location_dep_general');
 include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-modal.php' );
 ?>
 </div>

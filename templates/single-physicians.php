@@ -1578,7 +1578,7 @@ while ( have_posts() ) : the_post();
 	</main>
 	<?php
 	// Create MyChart Open Scheduling Modals
-	$mychart_scheduling_ser = get_field('physician_pid');
+	$scheduling_mychart_ser = get_field('physician_pid');
 	include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-modal.php' );
 	?>
 </div>
