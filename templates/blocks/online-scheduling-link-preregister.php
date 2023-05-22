@@ -12,11 +12,6 @@
  * 		$scheduling_mychart_book_visit_type
  */
 
-// Check optional vars from single location template
-$scheduling_mychart_preregister_options = isset($scheduling_mychart_preregister_options) ? $scheduling_mychart_preregister_options : '';
-
-// Check optional vars from single provider template
-$scheduling_mychart_book_visit_type = isset($scheduling_mychart_book_visit_type) ? $scheduling_mychart_book_visit_type : '';
 ?>
 <div class="btn-container">
 	<div class="inner-container">
