@@ -4,7 +4,7 @@
  * 	Designed for UAMS Find-a-Doc
  * 
  * 	Required vars
- * 		$scheduling_mychart_book_group // ACF field containing the inputs relevant to MyChart open scheduling widget configuration
+ * 		$scheduling_mychart_book_group // ACF field containing the inputs relevant to Appointment Booking
  * 		$scheduling_mychart_type // Which Type(s) of MyChart Open Scheduling?
  * 		$scheduling_template
  * 			(
