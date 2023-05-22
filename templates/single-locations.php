@@ -1116,7 +1116,7 @@ while ( have_posts() ) : the_post(); ?>
 									// Begin Visit Pre-Registration section
 
 									if ( $show_scheduling_mychart_preregister_section ) { // $show_scheduling_mychart_preregister_section is defined in /templates/blocks/online-scheduling-check.php
-										$scheduling_mychart_preregister_group_sys = get_field('mychart_scheduling_book_group', 'option'); // ACF field containing the inputs relevant to Visit Pre-Registration
+										$scheduling_mychart_preregister_group_sys = get_field('mychart_scheduling_preregister_group', 'option'); // ACF field containing the inputs relevant to Visit Pre-Registration
 										$scheduling_mychart_preregister_heading_standalone = $scheduling_mychart_preregister_group_sys['mychart_scheduling_preregister_heading_system'] ?: 'Immediate Care';
 										$scheduling_mychart_preregister_descr_standalone = $scheduling_mychart_preregister_group_sys['mychart_scheduling_preregister_descr_system'] ?: 'Spend less time waiting and get home faster by choosing an available time.';
 										?>
