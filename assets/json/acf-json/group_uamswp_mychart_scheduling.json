@@ -24,12 +24,12 @@
             "ui_off_text": ""
         },
         {
-            "key": "field_mychart_scheduling_domain",
-            "label": "Domain",
-            "name": "mychart_scheduling_domain",
-            "type": "text",
-            "instructions": "Example: \"scheduling.uamshealth.com\" in https://scheduling.uamshealth.com/MyChart/",
-            "required": 1,
+            "key": "field_mychart_scheduling_widget_configuration_group",
+            "label": "Open Scheduling Widget Configuration",
+            "name": "mychart_scheduling_widget_configuration_group",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
             "conditional_logic": [
                 [
                     {
@@ -44,65 +44,69 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "scheduling.uamshealth.com",
-            "placeholder": "scheduling.uamshealth.com",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "field_mychart_scheduling_instance",
-            "label": "Instance",
-            "name": "mychart_scheduling_instance",
-            "type": "text",
-            "instructions": "Example: \"MyChart\" in https://scheduling.uamshealth.com/MyChart/",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_mychart_scheduling_query_system",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "MyChart",
-            "placeholder": "MyChart",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "field_mychart_scheduling_linksource",
-            "label": "Link Source",
-            "name": "mychart_scheduling_linksource",
-            "type": "text",
-            "instructions": "Defaults to \"uamshealth.com\"",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_mychart_scheduling_query_system",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "uamshealth.com",
-            "placeholder": "uamshealth.com",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "acfe_permissions": "",
+            "layout": "block",
+            "acfe_seamless_style": 1,
+            "acfe_group_modal": 0,
+            "sub_fields": [
+                {
+                    "key": "field_mychart_scheduling_domain",
+                    "label": "Domain",
+                    "name": "mychart_scheduling_domain",
+                    "type": "text",
+                    "instructions": "Example: \"scheduling.uamshealth.com\" in https://scheduling.uamshealth.com/MyChart/",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "scheduling.uamshealth.com",
+                    "placeholder": "scheduling.uamshealth.com",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_mychart_scheduling_instance",
+                    "label": "Instance",
+                    "name": "mychart_scheduling_instance",
+                    "type": "text",
+                    "instructions": "Example: \"MyChart\" in https://scheduling.uamshealth.com/MyChart/",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "MyChart",
+                    "placeholder": "MyChart",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_mychart_scheduling_linksource",
+                    "label": "Link Source",
+                    "name": "mychart_scheduling_linksource",
+                    "type": "text",
+                    "instructions": "Defaults to \"uamshealth.com\"",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "uamshealth.com",
+                    "placeholder": "uamshealth.com",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
         },
         {
             "key": "field_mychart_scheduling_book_group",
