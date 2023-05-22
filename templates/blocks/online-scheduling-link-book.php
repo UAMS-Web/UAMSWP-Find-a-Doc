@@ -4,6 +4,7 @@
  * Designed for UAMS Find-a-Doc
  * 
  * Required vars
+ * 		$scheduling_mychart_book_group // ACF field containing the inputs relevant to MyChart open scheduling widget configuration
  * 		$scheduling_mychart_type // Which Type(s) of MyChart Open Scheduling?
  * 		$scheduling_template
  * 			(
@@ -31,7 +32,7 @@ if ( $scheduling_mychart_book_options ) {
 }
 
 // Get the system setting for the button text
-$scheduling_mychart_book_button_text = get_field('mychart_scheduling_book_btn_text_system', 'option') ?: 'Book an Appointment';
+$scheduling_mychart_book_button_text = $scheduling_mychart_book_group['mychart_scheduling_book_btn_text_system'] ?: 'Book an Appointment';
 
 // Set the dropdown query variable
 if (
