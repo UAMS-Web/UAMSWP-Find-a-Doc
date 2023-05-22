@@ -1050,10 +1050,11 @@ while ( have_posts() ) : the_post(); ?>
 									if ( $show_scheduling_mychart_book_section ) { // $show_scheduling_mychart_section is defined in /templates/blocks/online-scheduling-check.php
 
 										// Get heading value from from Find-a-Doc Settings input labeled "Heading for Appointment Booking" or use a fallback value
-										$scheduling_mychart_book_heading = get_field('mychart_scheduling_book_heading_system', 'option') ?: 'Appointments';
+										$scheduling_mychart_book_group = get_field('mychart_scheduling_book_group', 'option'); // ACF field containing the inputs relevant to MyChart open scheduling widget configuration
+										$scheduling_mychart_book_heading = $scheduling_mychart_book_group['mychart_scheduling_book_heading_system'] ?: 'Appointments';
 
 										// Get description value from from Find-a-Doc Settings input labeled "Description for Appointment Booking" or use a fallback value
-										$scheduling_mychart_book_descr = get_field('mychart_scheduling_book_descr_system', 'option') ?: 'Find a provider at this location to book an appointment online.';
+										$scheduling_mychart_book_descr = $scheduling_mychart_book_group['mychart_scheduling_book_descr_system'] ?: 'Find a provider at this location to book an appointment online.';
 
 										?>
 										<h2 class="h4"><?php echo $scheduling_mychart_book_heading; ?></h2>

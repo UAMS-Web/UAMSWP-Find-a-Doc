@@ -31,12 +31,14 @@ $mychart_scheduling_ser = isset($mychart_scheduling_ser) ? $mychart_scheduling_s
 
 if( $show_scheduling_mychart_section ) {
     // Get system settings for constructing common parts of MyChart Open Scheduling iframe src value
-    $mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
-    $mychart_scheduling_instance = get_field('mychart_scheduling_instance', 'option');
-    $mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
+    $scheduling_mychart_widget_configuration_group = get_field('mychart_scheduling_widget_configuration_group', 'option'); // ACF field containing the inputs relevant to MyChart open scheduling widget configuration
+    $mychart_scheduling_domain = $scheduling_mychart_widget_configuration_group['mychart_scheduling_domain'];
+    $mychart_scheduling_instance = $scheduling_mychart_widget_configuration_group['mychart_scheduling_instance'];
+    $mychart_scheduling_linksource = $scheduling_mychart_widget_configuration_group['mychart_scheduling_linksource'];
     $mychart_scheduling_linksource = ( isset($mychart_scheduling_linksource) && !empty($mychart_scheduling_linksource) ) ? $mychart_scheduling_linksource : 'uamshealth.com';
 
-    $mychart_scheduling_intro = get_field('mychart_scheduling_book_intro_system', 'option'); // Default value for appointment section intro
+    $scheduling_mychart_book_group = get_field('mychart_scheduling_book_group', 'option'); // ACF field containing the inputs relevant to MyChart open scheduling widget configuration
+    $mychart_scheduling_intro = $scheduling_mychart_book_group['mychart_scheduling_book_intro_system']; // Default value for appointment section intro
     $mychart_scheduling_intro = ( isset($mychart_scheduling_intro_override) && !empty($mychart_scheduling_intro_override) ) ? $mychart_scheduling_intro_override : $mychart_scheduling_intro;
     $i = 0;
     // Loop through repeater rows.

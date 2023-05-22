@@ -1125,9 +1125,10 @@ function schedule_ajax_filter_callback() {
 
 	$schedules = get_field('location_scheduling_options', $pid);
 	$row = $schedules[$schedule_key];
-	$mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
-	$mychart_scheduling_instance = get_field('mychart_scheduling_instance', 'option');
-	$mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
+    $scheduling_mychart_widget_configuration_group = get_field('mychart_scheduling_widget_configuration_group', 'option'); // ACF field containing the inputs relevant to MyChart open scheduling widget configuration
+	$mychart_scheduling_domain = $scheduling_mychart_widget_configuration_group['mychart_scheduling_domain'];
+	$mychart_scheduling_instance = $scheduling_mychart_widget_configuration_group['mychart_scheduling_instance'];
+	$mychart_scheduling_linksource = $scheduling_mychart_widget_configuration_group['mychart_scheduling_linksource'];
 	$mychart_scheduling_linksource = ( isset($mychart_scheduling_linksource) && !empty($mychart_scheduling_linksource) ) ? $mychart_scheduling_linksource : 'uamshealth.com';
 	$location_scheduling_options = get_field('location_scheduling_options', $pid);
 

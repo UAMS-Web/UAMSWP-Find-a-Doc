@@ -917,7 +917,8 @@ add_filter('acf/prepare_field/key=field_physician_scheduling_mychart_query_syste
 
 // Set placeholder values of MyChart Open Scheduling intro inputs from system input for Appointment Booking
 function uamswp_mychart_intro_placeholder($field) {
-	$uamswp_mychart_intro_placeholder_val = get_field('mychart_scheduling_book_intro_system', 'option');
+	$uamswp_scheduling_mychart_book_group = get_field('mychart_scheduling_book_group', 'option'); // ACF field containing the inputs relevant to MyChart open scheduling widget configuration
+	$uamswp_mychart_intro_placeholder_val = $uamswp_scheduling_mychart_book_group['mychart_scheduling_book_intro_system'];
     if ( $uamswp_mychart_intro_placeholder_val ){
 		$field['placeholder'] = $uamswp_mychart_intro_placeholder_val;
     }
