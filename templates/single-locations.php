@@ -396,12 +396,13 @@ while ( have_posts() ) : the_post(); ?>
 	$scheduling_group = get_field('location_scheduling_group'); // ACF field containing the inputs relevant to MyChart open scheduling and appointment request forms
 	$scheduling_mychart_query = $scheduling_group['location_scheduling_mychart_query']; // Enable UAMS Health MyChart Open Scheduling for This Location?
 	$scheduling_mychart_type = $scheduling_group['location_scheduling_mychart_type']; // Which Type(s) of MyChart Open Scheduling?
+	$scheduling_mychart_book_options = $scheduling_group['location_scheduling_mychart_book_options']; // MyChart Open Scheduling Widget Option(s) for Appointment Booking
 	$scheduling_mychart_book_dropdown = $scheduling_group['location_scheduling_mychart_book_dropdown']; // Display the Single Appointment Booking Visit Type in a Dropdown?
+	$scheduling_mychart_preregister_options = $scheduling_group['location_scheduling_mychart_preregister_options']; // MyChart Open Scheduling Widget Option(s) for Visit Pre-Registration
+	$scheduling_mychart_preregister_dropdown = $scheduling_group['location_scheduling_mychart_preregister_dropdown']; // Display the Single Visit Pre-Registration Visit Type in a Dropdown?
 	$scheduling_request_query = $scheduling_group['location_scheduling_request_query']; // Enable Linking to Appointment Request Forms?
 	$scheduling_request_forms = $scheduling_group['location_scheduling_request_form']; // Appointment Request Form(s)
 	$scheduling_request_form_dropdown = $scheduling_group['location_scheduling_request_form_dropdown']; // Display the Single Appointment Request Form in a Dropdown?
-	$scheduling_mychart_book_options = $scheduling_group['location_scheduling_mychart_book_options']; // MyChart Open Scheduling Widget Option(s) for Appointment Booking
-	$scheduling_mychart_preregister_options = $scheduling_group['location_scheduling_mychart_preregister_options']; // MyChart Open Scheduling Widget Option(s) for Visit Pre-Registration
 	// $scheduling_mychart_book_visit_type = '';
 	include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-check.php' ); // Reusable code for online scheduling section display logic
 
@@ -1059,11 +1060,11 @@ while ( have_posts() ) : the_post(); ?>
 											<h2 class="h4"><?php echo $scheduling_heading_system; ?></h2>
 										<?php }
 										// Get heading value from from Find-a-Doc Settings input group labeled "Appointment Booking"
-										$scheduling_mychart_book_group = get_field('mychart_scheduling_book_group', 'option'); // ACF field containing the inputs relevant to Appointment Booking
-										$scheduling_mychart_book_heading_standalone = $scheduling_mychart_book_group['mychart_scheduling_book_heading_system'] ?: 'Appointments'; // Standalone Heading for Appointment Booking
-										$scheduling_mychart_book_descr = $scheduling_mychart_book_group['mychart_scheduling_book_descr_system'] ?: 'Find a provider at this location to book an appointment online.'; // Standalone Description for Appointment Booking
-										$scheduling_mychart_book_heading_nested = $scheduling_mychart_book_group['mychart_scheduling_book_heading_nested_system'] ?: ''; // Nested Heading for Appointment Booking (Optional)
-										$scheduling_mychart_book_descr_nested = $scheduling_mychart_book_group['mychart_scheduling_book_descr_nested_system'] ?: $scheduling_mychart_book_descr; // Nested Description for Appointment Booking (Optional)
+										$scheduling_mychart_book_group_sys = get_field('mychart_scheduling_book_group', 'option'); // ACF field containing the inputs relevant to Appointment Booking
+										$scheduling_mychart_book_heading_standalone = $scheduling_mychart_book_group_sys['mychart_scheduling_book_heading_system'] ?: 'Appointments'; // Standalone Heading for Appointment Booking
+										$scheduling_mychart_book_descr = $scheduling_mychart_book_group_sys['mychart_scheduling_book_descr_system'] ?: 'Find a provider at this location to book an appointment online.'; // Standalone Description for Appointment Booking
+										$scheduling_mychart_book_heading_nested = $scheduling_mychart_book_group_sys['mychart_scheduling_book_heading_nested_system'] ?: ''; // Nested Heading for Appointment Booking (Optional)
+										$scheduling_mychart_book_descr_nested = $scheduling_mychart_book_group_sys['mychart_scheduling_book_descr_nested_system'] ?: $scheduling_mychart_book_descr; // Nested Description for Appointment Booking (Optional)
 
 										if ( $scheduling_appointments_count == 1 ) { // If this is the only appointments section ?>
 											<h2 class="h4"><?php echo $scheduling_mychart_book_heading_standalone; ?></h2>
@@ -1115,13 +1116,18 @@ while ( have_posts() ) : the_post(); ?>
 									// Begin Visit Pre-Registration section
 
 									if ( $show_scheduling_mychart_preregister_section ) { // $show_scheduling_mychart_preregister_section is defined in /templates/blocks/online-scheduling-check.php
-										$scheduling_mychart_preregister_heading = get_field('mychart_scheduling_preregister_heading_system', 'option') ?: 'Immediate Care';
-										$scheduling_mychart_preregister_descr = get_field('mychart_scheduling_preregister_descr_system', 'option') ?: 'Spend less time waiting and get home faster by choosing an available time.';
+										$scheduling_mychart_preregister_group_sys = get_field('mychart_scheduling_book_group', 'option'); // ACF field containing the inputs relevant to Visit Pre-Registration
+										$scheduling_mychart_preregister_heading_standalone = $scheduling_mychart_preregister_group_sys['mychart_scheduling_preregister_heading_system'] ?: 'Immediate Care';
+										$scheduling_mychart_preregister_descr_standalone = $scheduling_mychart_preregister_group_sys['mychart_scheduling_preregister_descr_system'] ?: 'Spend less time waiting and get home faster by choosing an available time.';
 										?>
-										<h2 class="h4"><?php echo $scheduling_mychart_preregister_heading; ?></h2>
-										<p><?php echo $scheduling_mychart_preregister_descr; ?></p>
-										<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-preregister.php' );
-									} // endif ( $show_scheduling_mychart_preregister_section )
+										<h2 class="h4"><?php echo $scheduling_mychart_preregister_heading_standalone; ?></h2>
+										<p><?php echo $scheduling_mychart_preregister_descr_standalone; ?></p>
+										<div class="btn-container">
+											<div class="inner-container">
+												<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-preregister.php' ); ?>
+											</div>
+										</div>
+									<?php } // endif ( $show_scheduling_mychart_preregister_section )
 									
 									// End Visit Pre-Registration section
 									
