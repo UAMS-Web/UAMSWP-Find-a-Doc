@@ -37,7 +37,7 @@ if( $show_scheduling_mychart_section ) {
     $scheduling_mychart_linksource = $scheduling_mychart_widget_configuration_group['mychart_scheduling_linksource'];
     $scheduling_mychart_linksource = ( isset($scheduling_mychart_linksource) && !empty($scheduling_mychart_linksource) ) ? $scheduling_mychart_linksource : 'uamshealth.com';
 
-    $scheduling_mychart_book_group = get_field('mychart_scheduling_book_group', 'option'); // ACF field containing the inputs relevant to MyChart open scheduling widget configuration
+    $scheduling_mychart_book_group = get_field('mychart_scheduling_book_group', 'option'); // ACF field containing the inputs relevant to Appointment Booking
     $scheduling_mychart_intro = $scheduling_mychart_book_group['mychart_scheduling_book_intro_system']; // Default value for appointment section intro
     $scheduling_mychart_intro = ( isset($scheduling_mychart_intro_override) && !empty($scheduling_mychart_intro_override) ) ? $scheduling_mychart_intro_override : $scheduling_mychart_intro;
     $i = 0;
