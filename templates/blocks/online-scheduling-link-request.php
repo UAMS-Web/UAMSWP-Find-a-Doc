@@ -23,10 +23,11 @@
 if ( $show_scheduling_request_section ) {
 	
 	// Get values from from Find-a-Doc Settings for Appointment Request Forms
-	$scheduling_request_heading_standalone = get_field('appointment_request_heading_standalone_system', 'option') ?: 'Appointments';
-	$scheduling_request_intro_standalone = get_field('appointment_request_descr_standalone_system', 'option') ?: 'Appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.';
-	$scheduling_request_heading_nested = get_field('appointment_request_heading_nested_system', 'option') ?: 'Specialized Care';
-	$scheduling_request_intro_nested = get_field('appointment_request_descr_nested_system', 'option') ?: 'Some appointments at this location involve specialized care and cannot be scheduled online. For those, submit a request for an appointment.';
+	$scheduling_request_group_sys = get_field('appointment_request_group', 'option'); // ACF field containing the inputs relevant to Appointment Requests
+	$scheduling_request_heading_standalone = $scheduling_request_group_sys['appointment_request_location_heading_standalone_system'] ?: 'Appointments';
+	$scheduling_request_intro_standalone = $scheduling_request_group_sys['appointment_request_location_descr_standalone_system'] ?: 'Appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.';
+	$scheduling_request_heading_nested = $scheduling_request_group_sys['appointment_request_location_heading_nested_system'] ?: 'Specialized Care';
+	$scheduling_request_intro_nested = $scheduling_request_group_sys['appointment_request_location_descr_nested_system'] ?: 'Some appointments at this location involve specialized care and cannot be scheduled online. For those, submit a request for an appointment.';
 
 	// Begin Content
 	if ( $scheduling_appointments_count > 1 ) {

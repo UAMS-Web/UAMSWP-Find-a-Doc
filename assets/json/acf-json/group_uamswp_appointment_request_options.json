@@ -24,120 +24,12 @@
             "ui_off_text": ""
         },
         {
-            "key": "field_appointment_request_heading_standalone_system",
-            "label": "Standalone Heading for Appointment Request Forms",
-            "name": "appointment_request_heading_standalone_system",
-            "type": "text",
-            "instructions": "This heading text will be used when appointment request forms section is the only appointment option displayed.",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_appointment_request_query_system",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "Appointments",
-            "placeholder": "Appointments",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "field_appointment_request_descr_standalone_system",
-            "name": "appointment_request_descr_standalone_system",
-            "type": "textarea",
-            "label": "Standalone Description for Appointment Request Forms",
-            "instructions": "This description text will be used when appointment request forms section is the only appointment option displayed. <br />This paragraph introduces the dropdown for selecting an appointment request form. <br />The paragraph should briefly describe what the user can do.",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_appointment_request_query_system",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "Appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.",
-            "placeholder": "Appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.",
-            "maxlength": "",
-            "rows": 2,
-            "new_lines": ""
-        },
-        {
-            "key": "field_appointment_request_heading_nested_system",
-            "label": "Nested Heading for Appointment Request Forms",
-            "name": "appointment_request_heading_nested_system",
-            "type": "text",
-            "instructions": "This heading text will be used when UAMS Health MyChart Open Scheduling section is also displayed.",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_appointment_request_query_system",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "Specialized Care",
-            "placeholder": "Specialized Care",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "field_appointment_request_descr_nested_system",
-            "name": "appointment_request_descr_nested_system",
-            "type": "textarea",
-            "label": "Nested Description for Appointment Request Forms",
-            "required": 1,
-            "instructions": "This description text will be used when other appointment options are also displayed. <br />This paragraph introduces the dropdown for selecting an appointment request form. <br />The paragraph should briefly describe what the user can do.",
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_appointment_request_query_system",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "Some appointments at this location involve specialized care and cannot be scheduled online. For those, submit a request for an appointment.",
-            "placeholder": "Some appointments at this location involve specialized care and cannot be scheduled online. For those, submit a request for an appointment.",
-            "maxlength": "",
-            "rows": 2,
-            "new_lines": ""
-        },
-        {
-            "key": "field_appointment_request_btn_text_system",
-            "name": "appointment_request_btn_text_system",
-            "label": "Button Text for Appointment Request Forms",
-            "type": "text",
+            "key": "field_appointment_request_group",
+            "label": "Text Elements",
+            "name": "appointment_request_group",
+            "type": "group",
             "instructions": "",
-            "required": 1,
+            "required": 0,
             "conditional_logic": [
                 [
                     {
@@ -152,12 +44,232 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "Request an Appointment",
-            "placeholder": "Request an Appointment",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        }
+            "acfe_permissions": "",
+            "layout": "block",
+            "acfe_seamless_style": 1,
+            "acfe_group_modal": 0,
+            "sub_fields": [
+				{
+					"key": "appointment_request_general_tab",
+					"name": "",
+					"type": "tab",
+					"label": "General",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"placement": "top",
+					"endpoint": 0
+				},
+				{
+					"key": "field_appointment_request_btn_text_system",
+					"name": "appointment_request_btn_text_system",
+					"label": "Button Text for Appointment Request Forms",
+					"type": "text",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "Request an Appointment",
+					"placeholder": "Request an Appointment",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "appointment_request_location_tab",
+					"name": "",
+					"type": "tab",
+					"label": "Location Profiles",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"placement": "top",
+					"endpoint": 0
+				},
+				{
+					"key": "field_appointment_request_location_heading_standalone_system",
+					"label": "Standalone Heading for Appointment Request Forms on Location Profiles",
+					"name": "appointment_request_location_heading_standalone_system",
+					"type": "text",
+					"instructions": "This heading text will be used when appointment request forms section is the only appointment option displayed.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "Appointments",
+					"placeholder": "Appointments",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_appointment_request_location_descr_standalone_system",
+					"name": "appointment_request_location_descr_standalone_system",
+					"type": "textarea",
+					"label": "Standalone Description for Appointment Request Forms on Location Profiles",
+					"instructions": "This description text will be used when appointment request forms section is the only appointment option displayed. <br />This paragraph introduces the dropdown for selecting an appointment request form. <br />The paragraph should briefly describe what the user can do.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "Appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.",
+					"placeholder": "Appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.",
+					"maxlength": "",
+					"rows": 2,
+					"new_lines": ""
+				},
+				{
+					"key": "field_appointment_request_location_heading_nested_system",
+					"label": "Nested Heading for Appointment Request Forms on Location Profiles",
+					"name": "appointment_request_location_heading_nested_system",
+					"type": "text",
+					"instructions": "This heading text will be used when UAMS Health MyChart Open Scheduling section is also displayed.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "Specialized Care",
+					"placeholder": "Specialized Care",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_appointment_request_location_descr_nested_system",
+					"name": "appointment_request_location_descr_nested_system",
+					"type": "textarea",
+					"label": "Nested Description for Appointment Request Forms on Location Profiles",
+					"required": 1,
+					"instructions": "This description text will be used when other appointment options are also displayed. <br />This paragraph introduces the dropdown for selecting an appointment request form. <br />The paragraph should briefly describe what the user can do.",
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "Some appointments at this location involve specialized care and cannot be scheduled online. For those, submit a request for an appointment.",
+					"placeholder": "Some appointments at this location involve specialized care and cannot be scheduled online. For those, submit a request for an appointment.",
+					"maxlength": "",
+					"rows": 2,
+					"new_lines": ""
+				},
+				{
+					"key": "appointment_request_provider_tab",
+					"name": "",
+					"type": "tab",
+					"label": "Provider Profiles",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"placement": "top",
+					"endpoint": 0
+				},
+				{
+					"key": "field_appointment_request_provider_heading_standalone_system",
+					"label": "Standalone Heading for Appointment Request Forms on Provider Profiles",
+					"name": "appointment_request_provider_heading_standalone_system",
+					"type": "text",
+					"instructions": "This heading text will be used when appointment request forms section is the only appointment option displayed.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "Appointments",
+					"placeholder": "Appointments",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_appointment_request_provider_descr_standalone_system",
+					"name": "appointment_request_provider_descr_standalone_system",
+					"type": "textarea",
+					"label": "Standalone Description for Appointment Request Forms on Provider Profiles",
+					"instructions": "This description text will be used when appointment request forms section is the only appointment option displayed. <br />This paragraph introduces the dropdown for selecting an appointment request form. <br />The paragraph should briefly describe what the user can do.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "Appointments for specialized care with this provider cannot be scheduled online. For those, submit a request for an appointment.",
+					"placeholder": "Appointments for specialized care with this provider cannot be scheduled online. For those, submit a request for an appointment.",
+					"maxlength": "",
+					"rows": 2,
+					"new_lines": ""
+				},
+				{
+					"key": "field_appointment_request_provider_heading_nested_system",
+					"label": "Nested Heading for Appointment Request Forms on Provider Profiles",
+					"name": "appointment_request_provider_heading_nested_system",
+					"type": "text",
+					"instructions": "This heading text will be used when UAMS Health MyChart Open Scheduling section is also displayed.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "Specialized Care",
+					"placeholder": "Specialized Care",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_appointment_request_provider_descr_nested_system",
+					"name": "appointment_request_provider_descr_nested_system",
+					"type": "textarea",
+					"label": "Nested Description for Appointment Request Forms on Provider Profiles",
+					"required": 1,
+					"instructions": "This description text will be used when other appointment options are also displayed. <br />This paragraph introduces the dropdown for selecting an appointment request form. <br />The paragraph should briefly describe what the user can do.",
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "Some appointments with this provider involve specialized care and cannot be scheduled online. For those, submit a request for an appointment.",
+					"placeholder": "Some appointments with this provider involve specialized care and cannot be scheduled online. For those, submit a request for an appointment.",
+					"maxlength": "",
+					"rows": 2,
+					"new_lines": ""
+				}
+			]
+		}
     ],
     "location": [
         [

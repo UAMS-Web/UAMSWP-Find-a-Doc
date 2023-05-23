@@ -23,10 +23,10 @@
 
 	// Get values from from Find-a-Doc Settings input group labeled "Appointment Booking"
 	$scheduling_mychart_book_group_sys = get_field('mychart_scheduling_book_group', 'option'); // ACF field containing the inputs relevant to Appointment Booking
-	$scheduling_mychart_book_heading_standalone = $scheduling_mychart_book_group_sys['mychart_scheduling_book_heading_system'] ?: 'Appointments'; // Standalone Heading for Appointment Booking
-	$scheduling_mychart_book_descr = $scheduling_mychart_book_group_sys['mychart_scheduling_book_descr_system'] ?: 'Find a provider at this location to book an appointment online.'; // Standalone Description for Appointment Booking
-	$scheduling_mychart_book_heading_nested = $scheduling_mychart_book_group_sys['mychart_scheduling_book_heading_nested_system'] ?: ''; // Nested Heading for Appointment Booking (Optional)
-	$scheduling_mychart_book_descr_nested = $scheduling_mychart_book_group_sys['mychart_scheduling_book_descr_nested_system'] ?: $scheduling_mychart_book_descr; // Nested Description for Appointment Booking (Optional)
+	$scheduling_mychart_book_heading_standalone = $scheduling_mychart_book_group_sys['mychart_scheduling_book_location_heading_system'] ?: 'Appointments'; // Standalone Heading for Appointment Booking
+	$scheduling_mychart_book_descr = $scheduling_mychart_book_group_sys['mychart_scheduling_book_location_descr_system'] ?: 'Find a provider at this location to book an appointment online.'; // Standalone Description for Appointment Booking
+	$scheduling_mychart_book_heading_nested = $scheduling_mychart_book_group_sys['mychart_scheduling_book_location_heading_nested_system'] ?: ''; // Nested Heading for Appointment Booking (Optional)
+	$scheduling_mychart_book_descr_nested = $scheduling_mychart_book_group_sys['mychart_scheduling_book_location_descr_nested_system'] ?: $scheduling_mychart_book_descr; // Nested Description for Appointment Booking (Optional)
 
 	// Begin content
 	if ( $scheduling_appointments_count == 1 ) { // If this is the only appointments section ?>

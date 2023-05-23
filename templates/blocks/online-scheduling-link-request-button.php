@@ -7,6 +7,7 @@
  * 		$page_slug
  * 		$scheduling_request_forms // Appointment Request Form(s)
  * 		$scheduling_request_btn_style // Define whether the appointment request button is solid or outline
+ * 		$scheduling_request_group_sys // ACF field containing the inputs relevant to Appointment Requests
  *		$scheduling_template
  *			(
  *				'single-location'
@@ -22,7 +23,7 @@
 $scheduling_request_form_count = count($scheduling_request_forms);
 
 // Get the system setting for the button text
-$scheduling_request_button_text = get_field('appointment_request_btn_text_system', 'option') ?: 'Request an Appointment';
+$scheduling_request_button_text = $scheduling_request_group_sys['appointment_request_btn_text_system'] ?: 'Request an Appointment';
 
 // Determine whether to display Appointment Request visit types in a dropdown
 if ( $scheduling_template == 'single-location' && $scheduling_request_form_count == 1 ) { // If it is on the single location template and there is only one visit type
