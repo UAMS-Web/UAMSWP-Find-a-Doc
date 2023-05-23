@@ -11,26 +11,17 @@
  * 				'single-location'
  * 				'single-provider'
  * 			)
+ * 		$scheduling_mychart_book_options // MyChart Open Scheduling Widget Option(s) for Appointment Booking
  * 
  * 	Required vars from single location template:
  * 		$scheduling_group // ACF field containing the inputs relevant to MyChart open scheduling and appointment request forms
- * 		$scheduling_mychart_book_options // MyChart Open Scheduling Widget Option(s) for Appointment Booking
  * 		$scheduling_mychart_book_dropdown // Display the Single Appointment Booking Visit Type in a Dropdown?
- * 
- * 	Required vars from single provider template:
- * 		$scheduling_mychart_book_visit_type // Visit Type(s) from UAMS Health Epic for Appointment Booking
  * 	
  */
 
 // Count visit types
 $scheduling_mychart_book_options = isset($scheduling_mychart_book_options) ? $scheduling_mychart_book_options : '';
-$scheduling_mychart_book_visit_type = isset($scheduling_mychart_book_visit_type) ? $scheduling_mychart_book_visit_type : '';
-$scheduling_mychart_book_count = '';
-if ( $scheduling_mychart_book_options ) {
-	$scheduling_mychart_book_count = count( $scheduling_mychart_book_options );
-} elseif ( $scheduling_mychart_book_visit_type ) {
-	$scheduling_mychart_book_count = count( $scheduling_mychart_book_visit_type );
-}
+$scheduling_mychart_book_count = count( $scheduling_mychart_book_options );
 
 // Get the system setting for the button text
 $scheduling_mychart_book_button_text = $scheduling_mychart_book_group_sys['mychart_scheduling_book_btn_text_system'] ?: 'Book an Appointment';
@@ -43,11 +34,7 @@ if ( $scheduling_template == 'single-location' && $scheduling_mychart_book_count
 }
 
 // Create the dropdown/link element
-if (
-	$scheduling_mychart_book_options // Single Location: MyChart open scheduling widget options for Appointment Booking is not empty
-	||
-	$scheduling_mychart_book_visit_type // Single Provider: At least one Appointment Booking Visit Type has been selected
-) {
+if ( $scheduling_mychart_book_options ) { // At least one Appointment Booking Visit Type has been selected
 	if ( $scheduling_mychart_book_dropdown ) { // If dropdown should be displayed ?>
 		<div class="dropdown">
 			<button class="btn btn-primary dropdown-toggle" type="button" id="mychart_scheduling_dropdown" data-toggle="dropdown" aria-expanded="false"><?php echo $scheduling_mychart_book_button_text; ?></button>
@@ -55,7 +42,7 @@ if (
 				<?php 
 				
 				$i = 0;
-				$options = $scheduling_mychart_book_options ?: $scheduling_mychart_book_visit_type;
+				$options = $scheduling_mychart_book_options;
 				
 				// Begin looping through the visit types
 
@@ -84,7 +71,7 @@ if (
 	<?php } else { // Otherwise, no dropdown should be displayed
 		
 		$i = 0;
-		$options = $scheduling_mychart_book_options ?: $scheduling_mychart_book_visit_type;
+		$options = $scheduling_mychart_book_options;
 		
 		// Begin looping through the visit types
 		
@@ -108,4 +95,4 @@ if (
 		// End looping through the visit types
 
 	} // endif ( $scheduling_mychart_book_dropdown ) else
-} // endif ( $scheduling_mychart_book_options || $scheduling_mychart_book_visit_type) ?>
+} // endif ( $scheduling_mychart_book_options ) ?>

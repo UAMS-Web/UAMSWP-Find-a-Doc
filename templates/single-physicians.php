@@ -452,9 +452,8 @@ while ( have_posts() ) : the_post();
 	$scheduling_request_form_dropdown = $scheduling_group['physician_scheduling_request_form_dropdown']; // Display the Single Appointment Request Form in a Dropdown?
 	// $location_ac_query = '';
 	// $location_appointments_query = '';
-	// $scheduling_mychart_book_options = '';
+	$scheduling_mychart_book_options = $scheduling_group['physician_scheduling_mychart_book_vt']; // Visit Type(s) from UAMS Health Epic for Appointment Booking
 	// $scheduling_mychart_book_options_rows = '';
-	$scheduling_mychart_book_visit_type = $scheduling_group['physician_scheduling_mychart_book_vt']; // Visit Type(s) from UAMS Health Epic for Appointment Booking
 	include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-check.php' );
 
 	// Set logic for displaying jump links and sections

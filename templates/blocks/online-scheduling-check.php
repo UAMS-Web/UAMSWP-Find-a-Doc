@@ -13,6 +13,7 @@
 *		$scheduling_mychart_query // Enable UAMS Health MyChart Open Scheduling for This Location?
 *		$scheduling_request_query // Enable Linking to Appointment Request Forms?
 *		$scheduling_request_forms // Appointment Request Form(s)
+*		$scheduling_mychart_book_options // MyChart open scheduling widget options for Appointment Booking
 * 
 *	Required vars from single location template:
 *		$scheduling_mychart_type // MyChart open scheduling type
@@ -20,21 +21,17 @@
 *				'book'
 *				'preregister'
 *			)
-*		$scheduling_mychart_book_options // MyChart open scheduling widget options for Appointment Booking
 *		$scheduling_mychart_preregister_options // MyChart open scheduling widget options for Visit Pre-Registration
 * 
 *	Optional vars from single location template:
 *		$location_ac_query // Check if location is an Arkansas Children's location
-* 
-*	Optional vars from single provider template:
-*		$scheduling_mychart_book_visit_type
 */
 
 // Check optional vars from single location template
 $location_ac_query = isset($location_ac_query) ? $location_ac_query : '';
 
 // Check optional vars from single provider template
-$scheduling_mychart_book_visit_type = isset($scheduling_mychart_book_visit_type) ? $scheduling_mychart_book_visit_type : '';
+$scheduling_mychart_book_options = isset($scheduling_mychart_book_options) ? $scheduling_mychart_book_options : '';
 
 // Get system setting for whether MyChart Open Scheduling is enabled
 $scheduling_mychart_query_system = get_field('mychart_scheduling_query_system', 'option');
@@ -70,8 +67,8 @@ if (
 		// Provider-specific check
 		(
 			$scheduling_template == 'single-provider'
-			&& isset($scheduling_mychart_book_visit_type)
-			&& !empty($scheduling_mychart_book_visit_type)
+			&& isset($scheduling_mychart_book_options)
+			&& !empty($scheduling_mychart_book_options)
 		)
 	)
 ) {

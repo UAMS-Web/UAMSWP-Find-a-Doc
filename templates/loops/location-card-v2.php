@@ -333,8 +333,7 @@
                 <a href="<?php echo get_permalink($id); ?>" class="btn btn-outline-primary" aria-label="View location page for <?php echo $location_title_attr; ?>" data-categorytitle="View Location" data-itemtitle="<?php echo $location_title_attr; ?>">View Location</a>
                 <?php
                 if ( $show_online_scheduling_link_book ) {
-                    $scheduling_mychart_book_visit_type = ''; // WIP — Check the provider profile to get this value
-                    $scheduling_mychart_book_options = ''; // WIP — Check the location profile to get this value
+                    $scheduling_mychart_book_options = ''; // WIP — Check the location and provider profiles to get this value
                     include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book-button.php' );
                 } elseif ( $show_online_scheduling_link_request ) {
                     $scheduling_request_forms = ''; // WIP — Check the location profile to get this value

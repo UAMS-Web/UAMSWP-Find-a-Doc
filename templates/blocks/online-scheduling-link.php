@@ -19,14 +19,13 @@
  * 				'single-provider'
  * 			)
  * 		$page_slug
+ * 		$scheduling_mychart_book_options // MyChart Open Scheduling Widget Option(s) for Appointment Booking
  * 	
  * 	Required vars from single location template:
  * 		$parent_slug
- * 		$scheduling_mychart_book_options // MyChart Open Scheduling Widget Option(s) for Appointment Booking
  * 		$scheduling_mychart_preregister_options // MyChart Open Scheduling Widget Option(s) for Visit Pre-Registration
  * 	
  * 	Required vars from single provider template:
- * 		$scheduling_mychart_book_visit_type // Visit Type(s) from UAMS Health Epic for Appointment Booking
  * 		$scheduling_mychart_preregister_visit_type
  */
 
@@ -34,7 +33,6 @@
 $parent_slug = isset($parent_slug) ? $parent_slug : '';
 $scheduling_mychart_book_options = isset($scheduling_mychart_book_options) ? $scheduling_mychart_book_options : '';
 $scheduling_mychart_preregister_options = isset($scheduling_mychart_preregister_options) ? $scheduling_mychart_preregister_options : '';
-$scheduling_mychart_book_visit_type = isset($scheduling_mychart_book_visit_type) ? $scheduling_mychart_book_visit_type : '';
 $scheduling_mychart_preregister_visit_type = isset($scheduling_mychart_preregister_visit_type) ? $scheduling_mychart_preregister_visit_type : '';
 
 
