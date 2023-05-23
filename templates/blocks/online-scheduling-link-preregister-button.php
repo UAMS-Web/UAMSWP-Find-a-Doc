@@ -12,8 +12,8 @@
  * 			)
  * 	
  * 	Required vars from single location template:
+ * 		$scheduling_group // ACF field containing the inputs relevant to MyChart open scheduling and appointment request forms
  * 		$scheduling_mychart_preregister_options // MyChart Open Scheduling Widget Option(s) for Visit Pre-Registration
- * 		$scheduling_mychart_preregister_dropdown // Display the Single Visit Pre-Registration Visit Type in a Dropdown?
  * 	
  * 	Required vars from single provider template:
  * 		$scheduling_mychart_preregister_visit_type
@@ -32,15 +32,11 @@ if ( $scheduling_mychart_preregister_options ) {
 // Get the system setting for the button text
 $scheduling_mychart_preregister_button_text = $scheduling_mychart_preregister_group_sys['mychart_scheduling_preregister_btn_text_system'] ?: 'Pre-Register';
 
-// Set the dropdown query variable
-if (
-	$scheduling_template == 'single-provider' // If it is on the single provider template
-	||
-	$scheduling_mychart_preregister_count > 1 // If there is more than one visit type selected
-) {
-	$scheduling_mychart_preregister_dropdown = true;
+// Determine whether to display Visit Pre-Registration visit types in a dropdown
+if ( $scheduling_template == 'single-location' && $scheduling_mychart_preregister_count == 1 ) { // If it is on the single location template and there is only one visit type
+	$scheduling_mychart_preregister_dropdown = $scheduling_group['location_scheduling_mychart_preregister_dropdown']; // Get the value from the location profile input
 } else {
-	$scheduling_mychart_preregister_dropdown = isset($scheduling_mychart_preregister_dropdown) ? $scheduling_mychart_preregister_dropdown : true;
+	$scheduling_mychart_preregister_dropdown = true;
 }
 
 // Create the dropdown/link element

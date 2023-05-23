@@ -6,7 +6,6 @@
  * 	Required vars:
  * 		$page_slug
  * 		$scheduling_request_forms // Appointment Request Form(s)
- * 		$scheduling_request_form_dropdown // Display the Single Appointment Request Form in a Dropdown?
  * 		$scheduling_request_btn_style // Define whether the appointment request button is solid or outline
  *		$scheduling_template
  *			(
@@ -16,6 +15,7 @@
  * 	
  * 	Required vars from single location template:
  * 		$parent_slug
+ * 		$scheduling_group // ACF field containing the inputs relevant to MyChart open scheduling and appointment request forms
  */
 
 // Count the number of selected appointment request forms
@@ -24,11 +24,11 @@ $scheduling_request_form_count = count($scheduling_request_forms);
 // Get the system setting for the button text
 $scheduling_request_button_text = get_field('appointment_request_btn_text_system', 'option') ?: 'Request an Appointment';
 
-// Set the dropdown query variable
-if ( $scheduling_request_form_count > 1) { // If there is more than one visit type selected
-	$scheduling_request_form_dropdown = true;
+// Determine whether to display Appointment Request visit types in a dropdown
+if ( $scheduling_template == 'single-location' && $scheduling_request_form_count == 1 ) { // If it is on the single location template and there is only one visit type
+	$scheduling_request_form_dropdown = $scheduling_group['location_scheduling_mychart_book_dropdown']; // Get the value from the location profile input
 } else {
-	$scheduling_request_form_dropdown = isset($scheduling_request_form_dropdown) ? $scheduling_request_form_dropdown : true;
+	$scheduling_request_form_dropdown = true;
 }
 
 // Create query string for UTM tracking

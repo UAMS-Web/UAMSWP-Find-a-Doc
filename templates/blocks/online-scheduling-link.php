@@ -4,9 +4,15 @@
  * 	Designed for UAMS Find-a-Doc
  * 	
  * 	Required vars:
- * 		$show_scheduling_mychart_book_section
- * 		$show_scheduling_request_section
+ * 		$scheduling_group // ACF field containing the inputs relevant to MyChart open scheduling and appointment request forms
+ * 		$show_scheduling_mychart_book_section // Check if appointment booking section should be displayed
+ * 		$scheduling_mychart_book_group_sys // ACF field containing the inputs relevant to Appointment Booking
+ * 		$scheduling_mychart_type // Which Type(s) of MyChart Open Scheduling?
+ * 		$show_scheduling_request_section // Check if link(s) to appointment request form(s) should be displayed
+ * 		$scheduling_request_forms // Appointment Request Form(s)
+ * 		$scheduling_request_btn_style // Define whether the appointment request button is solid or outline
  * 		$show_scheduling_mychart_preregister_section
+ * 		$scheduling_mychart_preregister_group_sys // ACF field containing the inputs relevant to Visit Pre-Registration
  * 		$scheduling_template
  * 			(
  * 				'single-location'
@@ -16,19 +22,20 @@
  * 	
  * 	Required vars from single location template:
  * 		$parent_slug
+ * 		$scheduling_mychart_book_options // MyChart Open Scheduling Widget Option(s) for Appointment Booking
+ * 		$scheduling_mychart_preregister_options // MyChart Open Scheduling Widget Option(s) for Visit Pre-Registration
  * 	
  * 	Required vars from single provider template:
- * 		
- * 	
- * 	Optional vars from single location template:
- * 		
- * 	
- * 	Optional vars from single provider template:
- * 	
+ * 		$scheduling_mychart_book_visit_type // Visit Type(s) from UAMS Health Epic for Appointment Booking
+ * 		$scheduling_mychart_preregister_visit_type
  */
 
 // Check variables
 $parent_slug = isset($parent_slug) ? $parent_slug : '';
+$scheduling_mychart_book_options = isset($scheduling_mychart_book_options) ? $scheduling_mychart_book_options : '';
+$scheduling_mychart_preregister_options = isset($scheduling_mychart_preregister_options) ? $scheduling_mychart_preregister_options : '';
+$scheduling_mychart_book_visit_type = isset($scheduling_mychart_book_visit_type) ? $scheduling_mychart_book_visit_type : '';
+$scheduling_mychart_preregister_visit_type = isset($scheduling_mychart_preregister_visit_type) ? $scheduling_mychart_preregister_visit_type : '';
 
 
 // Begin Appointments Section

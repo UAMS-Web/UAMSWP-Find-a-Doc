@@ -13,6 +13,7 @@
  * 			)
  * 
  * 	Required vars from single location template:
+ * 		$scheduling_group // ACF field containing the inputs relevant to MyChart open scheduling and appointment request forms
  * 		$scheduling_mychart_book_options // MyChart Open Scheduling Widget Option(s) for Appointment Booking
  * 		$scheduling_mychart_book_dropdown // Display the Single Appointment Booking Visit Type in a Dropdown?
  * 
@@ -34,15 +35,11 @@ if ( $scheduling_mychart_book_options ) {
 // Get the system setting for the button text
 $scheduling_mychart_book_button_text = $scheduling_mychart_book_group_sys['mychart_scheduling_book_btn_text_system'] ?: 'Book an Appointment';
 
-// Set the dropdown query variable
-if (
-	$scheduling_template == 'single-provider' // If it is on the single provider template
-	||
-	$scheduling_mychart_book_count > 1 // If there is more than one visit type selected
-) {
-	$scheduling_mychart_book_dropdown = true;
+// Determine whether to display Appointment Booking visit types in a dropdown
+if ( $scheduling_template == 'single-location' && $scheduling_mychart_book_count == 1 ) { // If it is on the single location template and there is only one visit type
+	$scheduling_mychart_book_dropdown = $scheduling_group['location_scheduling_mychart_book_dropdown']; // Get the value from the location profile input
 } else {
-	$scheduling_mychart_book_dropdown = isset($scheduling_mychart_book_dropdown) ? $scheduling_mychart_book_dropdown : true;
+	$scheduling_mychart_book_dropdown = true;
 }
 
 // Create the dropdown/link element

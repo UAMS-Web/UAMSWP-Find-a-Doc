@@ -397,13 +397,9 @@ while ( have_posts() ) : the_post(); ?>
 	$scheduling_mychart_query = $scheduling_group['location_scheduling_mychart_query']; // Enable UAMS Health MyChart Open Scheduling for This Location?
 	$scheduling_mychart_type = $scheduling_group['location_scheduling_mychart_type']; // Which Type(s) of MyChart Open Scheduling?
 	$scheduling_mychart_book_options = $scheduling_group['location_scheduling_mychart_book_options']; // MyChart Open Scheduling Widget Option(s) for Appointment Booking
-	$scheduling_mychart_book_dropdown = $scheduling_group['location_scheduling_mychart_book_dropdown']; // Display the Single Appointment Booking Visit Type in a Dropdown?
 	$scheduling_mychart_preregister_options = $scheduling_group['location_scheduling_mychart_preregister_options']; // MyChart Open Scheduling Widget Option(s) for Visit Pre-Registration
-	$scheduling_mychart_preregister_dropdown = $scheduling_group['location_scheduling_mychart_preregister_dropdown']; // Display the Single Visit Pre-Registration Visit Type in a Dropdown?
 	$scheduling_request_query = $scheduling_group['location_scheduling_request_query']; // Enable Linking to Appointment Request Forms?
 	$scheduling_request_forms = $scheduling_group['location_scheduling_request_form']; // Appointment Request Form(s)
-	$scheduling_request_form_dropdown = $scheduling_group['location_scheduling_request_form_dropdown']; // Display the Single Appointment Request Form in a Dropdown?
-	// $scheduling_mychart_book_visit_type = '';
 	include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-check.php' ); // Reusable code for online scheduling section display logic
 
 	// Check if the word "the" should be prepended to the location name

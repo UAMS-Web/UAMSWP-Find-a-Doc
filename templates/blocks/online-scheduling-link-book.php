@@ -15,8 +15,8 @@
  * 			)
  * 
  * 	Required vars from single location template:
+ * 		$scheduling_group // ACF field containing the inputs relevant to MyChart open scheduling and appointment request forms
  * 		$scheduling_mychart_book_options // MyChart Open Scheduling Widget Option(s) for Appointment Booking
- * 		$scheduling_mychart_book_dropdown // Display the Single Appointment Booking Visit Type in a Dropdown?
  * 
  * 	Required vars from single provider template:
  * 		$scheduling_mychart_book_visit_type // Visit Type(s) from UAMS Health Epic for Appointment Booking

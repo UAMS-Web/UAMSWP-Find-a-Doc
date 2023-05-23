@@ -13,11 +13,11 @@
  *			)
  * 		$page_slug
  * 		$scheduling_request_forms // Appointment Request Form(s)
- * 		$scheduling_request_form_dropdown // Display the Single Appointment Request Form in a Dropdown?
  * 		$scheduling_request_btn_style // Define whether the appointment request button is solid or outline
  * 	
  * 	Required vars from single location template:
  * 		$parent_slug
+ * 		$scheduling_group // ACF field containing the inputs relevant to MyChart open scheduling and appointment request forms
  */
 
 if ( $show_scheduling_request_section ) {

@@ -14,7 +14,6 @@
  * 	
  * 	Required vars from single location template:
  * 		$scheduling_mychart_preregister_options // MyChart Open Scheduling Widget Option(s) for Visit Pre-Registration
- * 		$scheduling_mychart_preregister_dropdown // Display the Single Visit Pre-Registration Visit Type in a Dropdown?
  * 	
  * 	Required vars from single provider template:
  * 		$scheduling_mychart_preregister_visit_type
