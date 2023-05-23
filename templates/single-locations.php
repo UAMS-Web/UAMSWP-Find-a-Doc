@@ -1,8 +1,8 @@
 <?php 
 /*
-*	Get ACF fields to use for meta data
-*	Add description from location short description or full description * 
-*/
+ * 	Get ACF fields to use for meta data
+ * 	Add description from location short description or full description * 
+ */
 
 $excerpt = get_field('location_short_desc');
 $about_loc = get_field('location_about');
