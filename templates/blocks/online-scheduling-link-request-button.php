@@ -4,33 +4,22 @@
  * 	Designed for UAMS Find-a-Doc
  * 	
  * 	Required vars:
+ * 		$page_slug
  * 		$scheduling_request_forms // Appointment Request Form(s)
  * 		$scheduling_request_form_dropdown // Display the Single Appointment Request Form in a Dropdown?
  * 		$scheduling_request_btn_style // Define whether the appointment request button is solid or outline
- * 		$scheduling_request_utm_medium_val
- * 			(
- * 				Expected values:
- * 					single-provider
- * 					archive-provider
- * 					single-location
- * 					archive-location
- * 					single-expertise
- * 					archive-expertise
- * 					single-condition
- * 					archive-condition
- * 					single-treatment
- * 					archive-treatment
- * 					single-clinical-resource
- * 					archive-clinical-resource
- * 			)
- * 		$scheduling_request_utm_content_val
- * 			(
- * 				Expected values:
- * 					Slug of provider whose card or profile the link was on (e.g., leonard-h-mccoy)
- * 					Slug of location whose card or profile the link was on (e.g., that-place)
- * 						If child location, prepend slug of parent and underscore (e.g., parent-place_child-place)
- * 			)
+ *		$scheduling_template
+ *			(
+ *				'single-location'
+ *				'single-provider'
+ *			)
+ * 	
+ * 	Required vars from single location template:
+ * 		$parent_slug
  */
+
+// Check variables
+$parent_slug = isset($parent_slug) ? $parent_slug : '';
 
 // Count the number of selected appointment request forms
 $scheduling_request_form_count = count($scheduling_request_forms);
@@ -48,20 +37,20 @@ if ( $scheduling_request_form_count > 1) { // If there is more than one visit ty
 // Create query string for UTM tracking
 $scheduling_request_utm_arr = []; // Create empty array for use in UTM construction
 $scheduling_request_utm_source_val = 'uamshealth_organic'; // Set value for utm_source URL parameter
-if ($scheduling_request_utm_source_val) { // If value exists for URL parameter
-	$scheduling_request_utm_arr[] = 'utm_source=' . $scheduling_request_utm_source_val; // Add URL parameter to UTM construction array
+if ($scheduling_request_utm_source_val) { // If value exists for utm_source URL parameter
+	$scheduling_request_utm_arr[] = 'utm_source=' . $scheduling_request_utm_source_val; // Add utm_source URL parameter to UTM construction array
 }
-$scheduling_request_utm_medium_val = isset($scheduling_request_utm_medium_val) ? $scheduling_request_utm_medium_val : ''; // Verify value exists for utm_medium URL parameter
-if ($scheduling_request_utm_medium_val) { // If value exists for URL parameter
-	$scheduling_request_utm_arr[] = 'utm_medium=' . $scheduling_request_utm_medium_val; // Add URL parameter to UTM construction array
+$scheduling_request_utm_medium_val = $scheduling_template; // Set value for utm_medium URL parameter
+if ($scheduling_request_utm_medium_val) { // If value exists for utm_medium URL parameter
+	$scheduling_request_utm_arr[] = 'utm_medium=' . $scheduling_request_utm_medium_val; // Add utm_medium URL parameter to UTM construction array
 }
 $scheduling_request_utm_campaign_val = 'clinical_service_request-appointment'; // Set value for utm_campaign URL parameter
-if ($scheduling_request_utm_campaign_val) { // If value exists for URL parameter
-	$scheduling_request_utm_arr[] = 'utm_campaign=' . $scheduling_request_utm_campaign_val; // Add URL parameter to UTM construction array
+if ($scheduling_request_utm_campaign_val) { // If value exists for utm_campaign URL parameter
+	$scheduling_request_utm_arr[] = 'utm_campaign=' . $scheduling_request_utm_campaign_val; // Add utm_campaign URL parameter to UTM construction array
 }
-$scheduling_request_utm_content_val = isset($scheduling_request_utm_content_val) ? $scheduling_request_utm_content_val : ''; // Verify value exists for utm_content URL parameter
-if ($scheduling_request_utm_content_val) { // If value exists for URL parameter
-	$scheduling_request_utm_arr[] = 'utm_content=' . $scheduling_request_utm_content_val; // Add URL parameter to UTM construction array
+$scheduling_request_utm_content_val = $parent_slug ? $parent_slug . '_' . $page_slug : $page_slug; // Set value for utm_content URL parameter
+if ($scheduling_request_utm_content_val) { // If value exists for utm_content URL parameter
+	$scheduling_request_utm_arr[] = 'utm_content=' . $scheduling_request_utm_content_val; // Add utm_content URL parameter to UTM construction array
 }
 $scheduling_request_utm_arr_count = count($scheduling_request_utm_arr); // Count elements in UTM construction array
 $scheduling_request_query_string = ''; // Create empty variable for query string construction
