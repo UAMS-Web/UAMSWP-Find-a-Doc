@@ -589,7 +589,7 @@ while ( have_posts() ) : the_post();
 										<p>Book an appointment with this provider online.</p>
 										<div class="btn-container">
 											<div class="inner-container">
-												<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book.php' ); ?>
+												<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book-button.php' ); ?>
 											</div>
 										</div>
 									</div>
@@ -621,7 +621,7 @@ while ( have_posts() ) : the_post();
 										?>
 										<div class="btn-container">
 											<div class="inner-container">
-												<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-request.php' ); ?>
+												<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-request-button.php' ); ?>
 											</div>
 										</div>
 									</div>

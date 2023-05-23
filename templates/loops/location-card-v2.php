@@ -335,10 +335,10 @@
                 if ( $show_online_scheduling_link_book ) {
                     $scheduling_mychart_book_visit_type = ''; // WIP — Check the provider profile to get this value
                     $scheduling_mychart_book_options = ''; // WIP — Check the location profile to get this value
-                    include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book.php' );
+                    include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book-button.php' );
                 } elseif ( $show_online_scheduling_link_request ) {
                     $scheduling_request_forms = ''; // WIP — Check the location profile to get this value
-                    include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-request.php' );
+                    include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-request-button.php' );
                 }
                 ?>
             </div>

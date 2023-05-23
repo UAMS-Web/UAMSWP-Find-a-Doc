@@ -66,7 +66,7 @@ if ( $show_scheduling_mychart_book_section ) { // $show_scheduling_mychart_secti
 	<?php } // endif ( $scheduling_count == 1 ) ?>
 	<div class="btn-container">
 		<div class="inner-container">
-			<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book.php' ); ?>
+			<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book-button.php' ); ?>
 		</div>
 	</div>
 <?php } // endif $show_scheduling_mychart_section
@@ -94,7 +94,7 @@ if ( $show_scheduling_request_section ) {
 	?>
 	<div class="btn-container">
 		<div class="inner-container">
-			<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-request.php' ); ?>
+			<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-request-button.php' ); ?>
 		</div>
 	</div>
 <?php }
@@ -115,7 +115,7 @@ if ( $show_scheduling_mychart_preregister_section ) { // $show_scheduling_mychar
 	<p><?php echo $scheduling_mychart_preregister_descr_standalone; ?></p>
 	<div class="btn-container">
 		<div class="inner-container">
-			<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-preregister.php' ); ?>
+			<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-preregister-button.php' ); ?>
 		</div>
 	</div>
 <?php } // endif ( $show_scheduling_mychart_preregister_section )
