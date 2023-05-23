@@ -4,15 +4,15 @@
 *	Designed for UAMS Find-a-Doc
 *	
 *	Required vars:
-*		$scheduling_query // Can a patient schedule an appointment for services rendered at this location?
-*		$scheduling_mychart_query // Enable UAMS Health MyChart Open Scheduling for This Location?
-*		$scheduling_request_query // Enable Linking to Appointment Request Forms?
-*		$scheduling_request_forms // Appointment Request Form(s)
 *		$scheduling_template
 *			(
 *				'single-location'
 *				'single-provider'
 *			)
+*		$scheduling_query // Can a patient schedule an appointment for services rendered at this location?
+*		$scheduling_mychart_query // Enable UAMS Health MyChart Open Scheduling for This Location?
+*		$scheduling_request_query // Enable Linking to Appointment Request Forms?
+*		$scheduling_request_forms // Appointment Request Form(s)
 * 
 *	Required vars from single location template:
 *		$scheduling_mychart_type // MyChart open scheduling type
