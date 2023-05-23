@@ -576,55 +576,10 @@ while ( have_posts() ) : the_post();
 					
 					// Begin Appointment Information
 					
-					if ( $show_scheduling_section ) {
-						$appointments_heading = 'Appointments'; ?>
+					if ( $show_scheduling_section ) { ?>
 						<div class="text-subsection">
 							<div class="row">
-								<?php // Begin MyChart Scheduling Links Section
-								if ($show_scheduling_mychart_section) { ?>
-									<div class="col-12 col-lg-6">
-										<h2 class="h5"><?php echo $appointments_heading; ?></h2>
-										<p>Book an appointment with this provider online.</p>
-										<div class="btn-container">
-											<div class="inner-container">
-												<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book-button.php' ); ?>
-											</div>
-										</div>
-									</div>
-								<?php } // endif $show_scheduling_mychart_section
-								// End MyChart Scheduling Links Section
-								
-								// Begin link to specialized care appointment request
-								if ($show_scheduling_request_section) {
-									$scheduling_request_form_count = count($scheduling_request_forms);
-									
-									$scheduling_request_heading = 'Specialized Care Appointments';
-									$scheduling_request_heading_standalone = $appointments_heading;
-									$scheduling_request_intro = 'Some appointments for specialized care with this provider cannot be scheduled online. For those, submit a request for an appointment.';
-									$scheduling_request_intro_standalone = 'Appointments for specialized care with this provider cannot be scheduled online. However, you can submit a request for an appointment.';
-									$scheduling_request_button_text = 'Request an Appointment';
-									?>
-									<div class="col-12 col-lg-6">
-										<?php
-										if ( $show_scheduling_mychart_section ) {
-											echo '<h3 class="h5">' . $scheduling_request_heading . '</h3>';
-											echo '<p>' . $scheduling_request_intro . '</p>';
-										} else {
-											echo '<h2 class="h4">' . $scheduling_request_heading_standalone . '</h2>';
-											echo '<p>' . $scheduling_request_intro_standalone . '</p>';
-										}
-										
-										$scheduling_request_utm_medium_val = 'single-provider';
-										$scheduling_request_utm_content_val = $page_slug; // page slug
-										?>
-										<div class="btn-container">
-											<div class="inner-container">
-												<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-request-button.php' ); ?>
-											</div>
-										</div>
-									</div>
-								<?php } // endif $show_scheduling_request_section
-								// End link to specialized care appointment request ?>
+								<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link.php' ); ?>
 							</div><?php // end div.row ?>
 						</div><?php // End div.text-subsection for Appointment Information ?>
 					<?php } // endif $show_scheduling_section
