@@ -447,13 +447,12 @@ while ( have_posts() ) : the_post();
 	$scheduling_group = get_field('physician_scheduling_group'); // ACF field containing the inputs relevant to MyChart open scheduling and appointment request forms
 	$scheduling_mychart_query = $scheduling_group['physician_scheduling_mychart_query']; // Enable MyChart Open Scheduling for This Provider?
 	$scheduling_mychart_type = $scheduling_group['physician_scheduling_mychart_type']; // Which Type(s) of MyChart Open Scheduling?
+	$scheduling_mychart_book_options = $scheduling_group['physician_scheduling_mychart_book_vt']; // MyChart Open Scheduling Widget Option(s) for Appointment Booking
+	// $scheduling_mychart_preregister_options = ''; // MyChart Open Scheduling Widget Option(s) for Visit Pre-Registration
 	$scheduling_request_query = $scheduling_group['physician_scheduling_request_query']; // Enable Linking to Appointment Request Forms?
 	$scheduling_request_forms = $scheduling_group['physician_scheduling_request_form']; // Appointment Request Form(s)
-	$scheduling_request_form_dropdown = $scheduling_group['physician_scheduling_request_form_dropdown']; // Display the Single Appointment Request Form in a Dropdown?
 	// $location_ac_query = '';
 	// $location_appointments_query = '';
-	$scheduling_mychart_book_options = $scheduling_group['physician_scheduling_mychart_book_vt']; // Visit Type(s) from UAMS Health Epic for Appointment Booking
-	// $scheduling_mychart_book_options_rows = '';
 	include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-check.php' );
 
 	// Set logic for displaying jump links and sections
