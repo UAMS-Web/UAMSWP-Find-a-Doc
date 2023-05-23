@@ -31,6 +31,7 @@
 	$scheduling_mychart_book_heading_nested = $scheduling_mychart_book_group_sys['mychart_scheduling_book_heading_nested_system'] ?: ''; // Nested Heading for Appointment Booking (Optional)
 	$scheduling_mychart_book_descr_nested = $scheduling_mychart_book_group_sys['mychart_scheduling_book_descr_nested_system'] ?: $scheduling_mychart_book_descr; // Nested Description for Appointment Booking (Optional)
 
+	// Begin content
 	if ( $scheduling_appointments_count == 1 ) { // If this is the only appointments section ?>
 		<h2 class="h4"><?php echo $scheduling_mychart_book_heading_standalone; ?></h2>
 		<p><?php echo $scheduling_mychart_book_descr; ?></p>
@@ -45,4 +46,6 @@
 			<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book-button.php' ); ?>
 		</div>
 	</div>
-<?php } // endif $show_scheduling_mychart_section ?>
+<?php } // endif $show_scheduling_mychart_section
+
+?>
