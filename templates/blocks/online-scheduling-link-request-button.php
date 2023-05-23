@@ -1,6 +1,6 @@
 <?php
 /**
- * 	Template Name: Online Scheduling, Links to Appointment Request Forms
+ * 	Template Name: Online Scheduling Information, Appointment Request, Button
  * 	Designed for UAMS Find-a-Doc
  * 	
  * 	Required vars:

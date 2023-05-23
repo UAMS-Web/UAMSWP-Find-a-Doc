@@ -1,6 +1,6 @@
 <?php
 /**
- * 	Template Name: Online Scheduling, MyChart Open Scheduling Widget Modal Toggles
+ * 	Template Name: Online Scheduling Information, Appointment Booking, Button
  * 	Designed for UAMS Find-a-Doc
  * 
  * 	Required vars
