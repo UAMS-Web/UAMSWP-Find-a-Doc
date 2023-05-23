@@ -126,7 +126,7 @@ if ( $scheduling_template == 'single-location' ) {
 			$scheduling_request_heading = 'Specialized Care Appointments';
 			$scheduling_request_heading_standalone = $appointments_heading;
 			$scheduling_request_intro = 'Some appointments for specialized care with this provider cannot be scheduled online. For those, submit a request for an appointment.';
-			$scheduling_request_intro_standalone = 'Appointments for specialized care with this provider cannot be scheduled online. However, you can submit a request for an appointment.';
+			$scheduling_request_descr_standalone = 'Appointments for specialized care with this provider cannot be scheduled online. However, you can submit a request for an appointment.';
 			$scheduling_request_button_text = 'Request an Appointment';
 			?>
 			<div class="col-12 col-lg-6">
@@ -136,7 +136,7 @@ if ( $scheduling_template == 'single-location' ) {
 					echo '<p>' . $scheduling_request_intro . '</p>';
 				} else {
 					echo '<h2 class="h4">' . $scheduling_request_heading_standalone . '</h2>';
-					echo '<p>' . $scheduling_request_intro_standalone . '</p>';
+					echo '<p>' . $scheduling_request_descr_standalone . '</p>';
 				}
 				
 				$scheduling_request_utm_medium_val = 'single-provider';

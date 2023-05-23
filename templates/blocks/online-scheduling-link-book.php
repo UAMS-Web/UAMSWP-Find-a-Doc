@@ -23,18 +23,29 @@
 
 	// Get values from from Find-a-Doc Settings input group labeled "Appointment Booking"
 	$scheduling_mychart_book_group_sys = get_field('mychart_scheduling_book_group', 'option'); // ACF field containing the inputs relevant to Appointment Booking
-	$scheduling_mychart_book_heading_standalone = $scheduling_mychart_book_group_sys['mychart_scheduling_book_location_heading_system'] ?: 'Appointments'; // Standalone Heading for Appointment Booking
-	$scheduling_mychart_book_descr = $scheduling_mychart_book_group_sys['mychart_scheduling_book_location_descr_system'] ?: 'Find a provider at this location to book an appointment online.'; // Standalone Description for Appointment Booking
-	$scheduling_mychart_book_heading_nested = $scheduling_mychart_book_group_sys['mychart_scheduling_book_location_heading_nested_system'] ?: ''; // Nested Heading for Appointment Booking (Optional)
-	$scheduling_mychart_book_descr_nested = $scheduling_mychart_book_group_sys['mychart_scheduling_book_location_descr_nested_system'] ?: $scheduling_mychart_book_descr; // Nested Description for Appointment Booking (Optional)
+	if ( $scheduling_template == 'single-location' ) {
+		$scheduling_mychart_book_heading_standalone = $scheduling_mychart_book_group_sys['mychart_scheduling_book_location_heading_standalone_system'];
+		$scheduling_mychart_book_descr_standalone = $scheduling_mychart_book_group_sys['mychart_scheduling_book_location_descr_standalone_system'];
+		$scheduling_mychart_book_heading_nested = $scheduling_mychart_book_group_sys['mychart_scheduling_book_location_heading_nested_system'];
+		$scheduling_mychart_book_descr_nested = $scheduling_mychart_book_group_sys['mychart_scheduling_book_location_descr_nested_system'] ?: $scheduling_mychart_book_descr_standalone;
+	} elseif ( $scheduling_template == 'single-provider' ) {
+		$scheduling_mychart_book_heading_standalone = $scheduling_mychart_book_group_sys['mychart_scheduling_book_provider_heading_standalone_system'];
+		$scheduling_mychart_book_descr_standalone = $scheduling_mychart_book_group_sys['mychart_scheduling_book_provider_descr_standalone_system'];
+		$scheduling_mychart_book_heading_nested = $scheduling_mychart_book_group_sys['mychart_scheduling_book_provider_heading_nested_system'];
+		$scheduling_mychart_book_descr_nested = $scheduling_mychart_book_group_sys['mychart_scheduling_book_provider_descr_nested_system'] ?: $scheduling_mychart_book_descr_standalone;
+	}
+	$scheduling_mychart_book_heading_standalone = isset($scheduling_mychart_book_heading_standalone) ? $scheduling_mychart_book_heading_standalone : 'Appointments Care';
+	$scheduling_mychart_book_descr_standalone = isset($scheduling_mychart_book_descr_standalone) ? $scheduling_mychart_book_descr_standalone : 'Book an appointment online';
+	$scheduling_mychart_book_heading_nested = isset($scheduling_mychart_book_heading_nested) ? $scheduling_mychart_book_heading_nested : '';
+	$scheduling_mychart_book_descr_nested = isset($scheduling_mychart_book_descr_nested) ? $scheduling_mychart_book_descr_nested : $scheduling_mychart_book_descr_standalone;
 
 	// Begin content
 	if ( $scheduling_appointments_count == 1 ) { // If this is the only appointments section ?>
 		<h2 class="h4"><?php echo $scheduling_mychart_book_heading_standalone; ?></h2>
-		<p><?php echo $scheduling_mychart_book_descr; ?></p>
+		<p><?php echo $scheduling_mychart_book_descr_standalone; ?></p>
 	<?php } else { // Otherwise (this is one of multiple appointments sections)
 		if ( $scheduling_mychart_book_heading_nested ) { // If Nested Heading for Appointment Booking has a value ?>
-			<h3 class="h5"><?php echo $scheduling_mychart_book_heading_nested; ?></h2>
+			<h3 class="h5"><?php echo $scheduling_mychart_book_heading_nested; ?>123</h2>
 		<?php } // endif ( $scheduling_mychart_book_heading_nested ) ?>
 		<p><?php echo $scheduling_mychart_book_descr_nested; ?></p>
 	<?php } // endif ( $scheduling_count == 1 ) ?>

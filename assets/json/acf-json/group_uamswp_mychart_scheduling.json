@@ -186,8 +186,8 @@
 					"endpoint": 0
 				},
                 {
-                    "key": "field_mychart_scheduling_book_location_heading_system",
-                    "name": "mychart_scheduling_book_location_heading_system",
+                    "key": "field_mychart_scheduling_book_location_heading_standalone_system",
+                    "name": "mychart_scheduling_book_location_heading_standalone_system",
                     "label": "Standalone Heading for Appointment Booking on Location Profiles",
                     "type": "text",
                     "instructions": "This text will be used in a heading when the appointment booking section is the only appointment option displayed.",
@@ -205,8 +205,8 @@
                     "maxlength": ""
                 },
                 {
-                    "key": "field_mychart_scheduling_book_location_descr_system",
-                    "name": "mychart_scheduling_book_location_descr_system",
+                    "key": "field_mychart_scheduling_book_location_descr_standalone_system",
+                    "name": "mychart_scheduling_book_location_descr_standalone_system",
                     "type": "textarea",
                     "label": "Standalone Description for Appointment Booking on Location Profiles",
                     "instructions": "This paragraph introduces the dropdown for selecting a visit type when booking an appointment. <br />The paragraph should briefly describe what the user can do.",
@@ -297,8 +297,8 @@
 					"endpoint": 0
 				},
                 {
-                    "key": "field_mychart_scheduling_book_provider_heading_system",
-                    "name": "mychart_scheduling_book_provider_heading_system",
+                    "key": "field_mychart_scheduling_book_provider_heading_standalone_system",
+                    "name": "mychart_scheduling_book_provider_heading_standalone_system",
                     "label": "Standalone Heading for Appointment Booking on Provider Profiles",
                     "type": "text",
                     "instructions": "This text will be used in a heading when the appointment booking section is the only appointment option displayed.",
@@ -316,8 +316,8 @@
                     "maxlength": ""
                 },
                 {
-                    "key": "field_mychart_scheduling_book_provider_descr_system",
-                    "name": "mychart_scheduling_book_provider_descr_system",
+                    "key": "field_mychart_scheduling_book_provider_descr_standalone_system",
+                    "name": "mychart_scheduling_book_provider_descr_standalone_system",
                     "type": "textarea",
                     "label": "Standalone Description for Appointment Booking on Provider Profiles",
                     "instructions": "This paragraph introduces the dropdown for selecting a visit type when booking an appointment. <br />The paragraph should briefly describe what the user can do.",
@@ -471,8 +471,8 @@
 					"endpoint": 0
 				},
                 {
-                    "key": "field_mychart_scheduling_preregister_location_heading_system",
-                    "name": "mychart_scheduling_preregister_location_heading_system",
+                    "key": "field_mychart_scheduling_preregister_location_heading_standalone_system",
+                    "name": "mychart_scheduling_preregister_location_heading_standalone_system",
                     "label": "Standalone Heading for Visit Pre-Registration on Location Profiles",
                     "type": "text",
                     "instructions": "This text will be used in a heading when the visit pre-registration section is the only appointment option displayed.",
@@ -490,8 +490,8 @@
                     "maxlength": ""
                 },
                 {
-                    "key": "field_mychart_scheduling_preregister_location_descr_system",
-                    "name": "mychart_scheduling_preregister_location_descr_system",
+                    "key": "field_mychart_scheduling_preregister_location_descr_standalone_system",
+                    "name": "mychart_scheduling_preregister_location_descr_standalone_system",
                     "type": "textarea",
                     "label": "Standalone Description for Visit Pre-Registration on Location Profiles",
                     "instructions": "This text will be used in a description when the visit pre-registration section is the only appointment option displayed. <br />This paragraph introduces the dropdown for selecting a visit type when pre-registering for a visit. <br />The paragraph should briefly describe what the user can do.",
@@ -582,8 +582,8 @@
 					"endpoint": 0
 				},
                 {
-                    "key": "field_mychart_scheduling_preregister_provider_heading_system",
-                    "name": "mychart_scheduling_preregister_provider_heading_system",
+                    "key": "field_mychart_scheduling_preregister_provider_heading_standalone_system",
+                    "name": "mychart_scheduling_preregister_provider_heading_standalone_system",
                     "label": "Standalone Heading for Visit Pre-Registration on Provider Profiles",
                     "type": "text",
                     "instructions": "This text will be used in a heading when the visit pre-registration section is the only appointment option displayed.",
@@ -601,8 +601,8 @@
                     "maxlength": ""
                 },
                 {
-                    "key": "field_mychart_scheduling_preregister_provider_descr_system",
-                    "name": "mychart_scheduling_preregister_provider_descr_system",
+                    "key": "field_mychart_scheduling_preregister_provider_descr_standalone_system",
+                    "name": "mychart_scheduling_preregister_provider_descr_standalone_system",
                     "type": "textarea",
                     "label": "Standalone Description for Visit Pre-Registration on Provider Profiles",
                     "instructions": "This text will be used in a description when the visit pre-registration section is the only appointment option displayed. <br />This paragraph introduces the dropdown for selecting a visit type when pre-registering for a visit. <br />The paragraph should briefly describe what the user can do.",

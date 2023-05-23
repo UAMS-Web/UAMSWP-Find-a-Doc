@@ -21,21 +21,32 @@
  */
 
 if ( $show_scheduling_request_section ) {
-	
+
 	// Get values from from Find-a-Doc Settings for Appointment Request Forms
 	$scheduling_request_group_sys = get_field('appointment_request_group', 'option'); // ACF field containing the inputs relevant to Appointment Requests
-	$scheduling_request_heading_standalone = $scheduling_request_group_sys['appointment_request_location_heading_standalone_system'] ?: 'Appointments';
-	$scheduling_request_intro_standalone = $scheduling_request_group_sys['appointment_request_location_descr_standalone_system'] ?: 'Appointments for specialized care at this location cannot be scheduled online. For those, submit a request for an appointment.';
-	$scheduling_request_heading_nested = $scheduling_request_group_sys['appointment_request_location_heading_nested_system'] ?: 'Specialized Care';
-	$scheduling_request_intro_nested = $scheduling_request_group_sys['appointment_request_location_descr_nested_system'] ?: 'Some appointments at this location involve specialized care and cannot be scheduled online. For those, submit a request for an appointment.';
+	if ( $scheduling_template == 'single-location' ) {
+		$scheduling_request_heading_standalone = $scheduling_request_group_sys['appointment_request_location_heading_standalone_system'];
+		$scheduling_request_descr_standalone = $scheduling_request_group_sys['appointment_request_location_descr_standalone_system'];
+		$scheduling_request_heading_nested = $scheduling_request_group_sys['appointment_request_location_heading_nested_system'];
+		$scheduling_request_descr_nested = $scheduling_request_group_sys['appointment_request_location_descr_nested_system'];
+	} elseif ( $scheduling_template == 'single-provider' ) {
+		$scheduling_request_heading_standalone = $scheduling_request_group_sys['appointment_request_provider_heading_standalone_system'];
+		$scheduling_request_descr_standalone = $scheduling_request_group_sys['appointment_request_provider_descr_standalone_system'];
+		$scheduling_request_heading_nested = $scheduling_request_group_sys['appointment_request_provider_heading_nested_system'];
+		$scheduling_request_descr_nested = $scheduling_request_group_sys['appointment_request_provider_descr_nested_system'];
+	}
+	$scheduling_request_heading_standalone = isset($scheduling_request_heading_standalone) ? $scheduling_request_heading_standalone : 'Appointments';
+	$scheduling_request_descr_standalone = isset($scheduling_request_descr_standalone) ? $scheduling_request_descr_standalone : 'Appointments for specialized care cannot be scheduled online. For those, submit a request for an appointment.';
+	$scheduling_request_heading_nested = isset($scheduling_request_heading_nested) ? $scheduling_request_heading_nested : 'Specialized Care';
+	$scheduling_request_descr_nested = isset($scheduling_request_descr_nested) ? $scheduling_request_descr_nested : 'Some appointments involve specialized care and cannot be scheduled online. For those, submit a request for an appointment.';
 
 	// Begin Content
 	if ( $scheduling_appointments_count > 1 ) {
 		echo '<h3 class="h5">' . $scheduling_request_heading_nested . '</h3>';
-		echo '<p>' . $scheduling_request_intro_nested . '</p>';
+		echo '<p>' . $scheduling_request_descr_nested . '</p>';
 	} else {
 		echo '<h2 class="h4">' . $scheduling_request_heading_standalone . '</h2>';
-		echo '<p>' . $scheduling_request_intro_standalone . '</p>';
+		echo '<p>' . $scheduling_request_descr_standalone . '</p>';
 	}
 
 	?>
