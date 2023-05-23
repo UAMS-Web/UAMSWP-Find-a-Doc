@@ -38,7 +38,7 @@ $scheduling_appointments_count = $show_scheduling_mychart_book_section + $show_s
 
 $scheduling_heading_system = get_field('scheduling_heading_system', 'option'); // Heading for Online Scheduling Section
 
-if ( $scheduling_appointments_count > 1 ) { // If there are multiple Appointment subsiections 
+if ( $scheduling_appointments_count > 1 ) { // If there are multiple Appointment subsections 
 	// Display the general Appointments heading ?>
 	<h2 class="h4"><?php echo $scheduling_heading_system; ?></h2>
 <?php }
