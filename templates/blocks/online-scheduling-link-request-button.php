@@ -18,9 +18,6 @@
  * 		$parent_slug
  */
 
-// Check variables
-$parent_slug = isset($parent_slug) ? $parent_slug : '';
-
 // Count the number of selected appointment request forms
 $scheduling_request_form_count = count($scheduling_request_forms);
 
