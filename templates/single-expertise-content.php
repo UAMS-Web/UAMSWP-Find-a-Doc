@@ -123,7 +123,7 @@ if($locations) {
     }
 }
 
-// Check if Locations section should be displayed
+// Check if Related Areas of Expertise section should be displayed
 $expertises =  get_field('expertise_associated', $page_id);
 $args = (array(
     'post_type' => "expertise",

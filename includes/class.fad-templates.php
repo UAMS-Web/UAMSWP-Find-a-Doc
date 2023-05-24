@@ -2,74 +2,92 @@
 // force use of templates from plugin folder
 function uamswp_force_template( $template )
 {	
+    // Provider Archive
     if( is_post_type_archive( 'provider' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__)))  .'/templates/archive-physicians.php';
 	}
 	
+    // Single Provider
 	if( is_singular( 'provider' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-physicians.php';
     }
     
+    // Location Archive
     if( is_post_type_archive( 'location' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/archive-locations.php';
 	}
 	
+    // Single Location
 	if( is_singular( 'location' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-locations.php';
     }
     
+    // Area of Expertise Archive
     if( is_post_type_archive( 'expertise' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/archive-expertise.php';
 	}
 	
+    // Single Area of Expertise (not a fake subpage)
 	if( is_singular( 'expertise' ) && !get_query_var('fpage') ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-expertise.php';
     }
     
+    // Single Condition (taxonomy)
     if( is_tax( 'condition' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/taxonomy-condition.php';
     }
 
+    // Single Condition (custom post type)
     if( is_singular( 'condition' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-condition.php';
     }
 
+    // Condition Archive
     if( is_post_type_archive( 'condition' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/archive-condition.php';
 	}
     
+    // Single Treatment and Procedure (taxonomy)
     if( is_tax( 'treatment' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/taxonomy-treatment_procedure.php';
     }
 
+    // Single Treatment and Procedure (custom post type)
     if( is_singular( 'treatment' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-treatment.php';
     }
 
+    // Treatment and Procedure Archive
     if( is_post_type_archive( 'treatment' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/archive-treatments.php';
 	}
 
+    // Single Clinical Resource
     if( is_singular( 'clinical-resource' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-clinical-resource.php';
     }
 
+    // Clinical Resource Archive
     if( is_post_type_archive( 'clinical-resource' ) ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/archive-clinical-resource.php';
 	}
 
+    // Single Area of Expertise fake subpage for Providers
     if( is_singular( 'expertise' ) && get_query_var('fpage') == 'providers' ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-expertise-providers.php';
     }
 
+    // Single Area of Expertise fake subpage for Locations
     if( is_singular( 'expertise' ) && get_query_var('fpage') == 'locations' ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-expertise-locations.php';
     }
 
+    // Single Area of Expertise fake subpage for Clinical Resources
     if( is_singular( 'expertise' ) && get_query_var('fpage') == 'resources' ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-expertise-resources.php';
     }
 
+    // Single Area of Expertise fake subpage for Related Areas of Expertise
     if( is_singular( 'expertise' ) && get_query_var('fpage') == 'related' ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-expertise-related.php';
     }
