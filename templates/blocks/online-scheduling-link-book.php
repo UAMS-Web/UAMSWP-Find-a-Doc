@@ -22,15 +22,17 @@
  if ( $show_scheduling_mychart_book_section ) { // $show_scheduling_mychart_section is defined in /templates/blocks/online-scheduling-check.php
 
 	// Begin content
-	if ( $scheduling_appointments_count == 1 ) { // If this is the only appointments section ?>
-		<h2 class="h4"><?php echo $scheduling_mychart_book_heading_standalone; ?></h2>
-		<p><?php echo $scheduling_mychart_book_descr_standalone; ?></p>
-	<?php } else { // Otherwise (this is one of multiple appointments sections)
+	if ( $scheduling_appointments_count > 1 ) { // Otherwise (this is one of multiple appointments sections)
 		if ( $scheduling_mychart_book_heading_nested ) { // If Nested Heading for Appointment Booking has a value ?>
-			<h3 class="h5"><?php echo $scheduling_mychart_book_heading_nested; ?>123</h2>
+			<h3 class="<?php echo $scheduling_mychart_book_heading_class; ?>"><?php echo $scheduling_mychart_book_heading_nested; ?></h2>
+		<?php } else { ?>
+			<h2 class="<?php echo $scheduling_general_heading_class; ?>"><?php echo $scheduling_heading_system; ?></h2>
 		<?php } // endif ( $scheduling_mychart_book_heading_nested ) ?>
 		<p><?php echo $scheduling_mychart_book_descr_nested; ?></p>
-	<?php } // endif ( $scheduling_count == 1 ) ?>
+	<?php } else { // If this is the only appointments section ?>
+		<h2 class="<?php echo $scheduling_mychart_book_heading_class; ?>"><?php echo $scheduling_mychart_book_heading_standalone; ?></h2>
+		<p><?php echo $scheduling_mychart_book_descr_standalone; ?></p>
+	<?php } // endif ( $scheduling_appointments_count > 1 ) ?>
 	<div class="btn-container">
 		<div class="inner-container">
 			<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book-button.php' ); ?>

@@ -103,6 +103,20 @@ $scheduling_request_heading_nested = isset($scheduling_request_heading_nested) ?
 $scheduling_request_descr_nested = isset($scheduling_request_descr_nested) ? $scheduling_request_descr_nested : 'Some appointments involve specialized care and cannot be scheduled online. For those, submit a request for an appointment.';
 
 
+// Determine heading class levels
+// General heading
+$scheduling_general_heading_class_rank = $info_section_heading_class_rank;
+$scheduling_general_heading_class = 'h' . $scheduling_general_heading_class_rank;
+// Appointment Booking subsection
+$scheduling_mychart_book_heading_class_rank = ( $scheduling_appointments_count > 1 && $scheduling_mychart_book_heading_nested ) ? $info_section_heading_class_rank + 1 : $info_section_heading_class_rank;
+$scheduling_mychart_book_heading_class = 'h' . $scheduling_mychart_book_heading_class_rank;
+// Appointment Booking subsection
+$scheduling_request_heading_class_rank = ( $scheduling_appointments_count > 1 && ( $scheduling_mychart_book_heading_nested || $scheduling_template == 'single-location' ) ) ? $info_section_heading_class_rank + 1 : $info_section_heading_class_rank;
+$scheduling_request_heading_class = 'h' . $scheduling_request_heading_class_rank;
+// Visit Pre-Registration subsection
+$scheduling_mychart_preregister_heading_class_rank = $info_section_heading_class_rank;
+$scheduling_mychart_preregister_heading_class = 'h' . $scheduling_mychart_preregister_heading_class_rank;
+
 // Begin Appointments Section
 
 $scheduling_heading_system = get_field('scheduling_heading_system', 'option'); // Heading for Online Scheduling Section
@@ -112,9 +126,11 @@ if ( $scheduling_template == 'single-location' ) {
 	// Begin Location Profile Appointment Information Content
 	
 	if ( $scheduling_appointments_count > 1 ) { // If there are multiple Appointment subsections 
-		// Display the general Appointments heading ?>
-		<h2 class="h4"><?php echo $scheduling_heading_system; ?></h2>
-	<?php }
+		// Display the general Appointments heading
+		if ( $scheduling_mychart_book_heading_nested ) { ?>
+			<h2 class="<?php echo $scheduling_general_heading_class; ?>"><?php echo $scheduling_heading_system; ?></h2>
+		<?php }
+	}
 
 	// Begin Appointment Booking Subsection
 
@@ -144,87 +160,29 @@ if ( $scheduling_template == 'single-location' ) {
 	
 	// Begin Provider Profile Appointment Information Content
 
-	// Begin Appointment Booking Subsection
-
-	?>
-	<div class="col-12 col-lg-6">
-		<?php
-			if ( $scheduling_appointments_count > 1 ) { // If there are multiple Appointment subsections 
-				// Display the general Appointments heading ?>
-				<h2 class="h5"><?php echo $scheduling_heading_system; ?></h2>
-			<?php }
-			include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book.php' );
-		?>
-	</div>
-	<?php
-
-		// Original structure
-		if ( true == false ) { 
-			$appointments_heading = 'Appointments';
-			?>
-			<div class="col-12 col-lg-6">
-				<h2 class="h5"><?php echo $appointments_heading; ?></h2>
-				<p>Book an appointment with this provider online.</p>
-				<div class="btn-container">
-					<div class="inner-container">
-						<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book-button.php' ); ?>
-					</div>
-				</div>
-			</div>
-		<?php }
-
-	// End Appointment Booking Subsection
-
-
-	// Begin Appointment Request Subsection
-
-	?>
-	<div class="col-12 col-lg-6">
-		<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-request.php' ); ?>
-	</div>
-	<?php
-
-		// Original structure
-		if ( true == false ) {
-			$scheduling_request_form_count = count($scheduling_request_forms);
-			
-			$scheduling_request_heading = 'Specialized Care Appointments';
-			$scheduling_request_heading_standalone = $appointments_heading;
-			$scheduling_request_intro = 'Some appointments for specialized care with this provider cannot be scheduled online. For those, submit a request for an appointment.';
-			$scheduling_request_descr_standalone = 'Appointments for specialized care with this provider cannot be scheduled online. However, you can submit a request for an appointment.';
-			$scheduling_request_button_text = 'Request an Appointment';
-			?>
-			<div class="col-12 col-lg-6">
-				<?php
-				if ( $show_scheduling_mychart_section ) {
-					echo '<h3 class="h5">' . $scheduling_request_heading . '</h3>';
-					echo '<p>' . $scheduling_request_intro . '</p>';
-				} else {
-					echo '<h2 class="h4">' . $scheduling_request_heading_standalone . '</h2>';
-					echo '<p>' . $scheduling_request_descr_standalone . '</p>';
-				}
-				
-				$scheduling_request_utm_medium_val = 'single-provider';
-				$scheduling_request_utm_content_val = $page_slug; // page slug
-				?>
-				<div class="btn-container">
-					<div class="inner-container">
-						<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-request-button.php' ); ?>
-					</div>
-				</div>
-			</div>
-		<?php }
-
-	// End Appointment Request Subsection
-
-	// End Appointments Section
-
-
-	// Begin Visit Pre-Registration Section
-
-		// include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-preregister.php' );
-
-	// End Visit Pre-Registration Section
+	if ( $scheduling_appointments_count > 1) { ?>
+		<?php if ( $scheduling_mychart_book_heading_nested ) { ?>
+			<div class="col-12">
+				<h2 class="<?php echo $scheduling_general_heading_class; ?>"><?php echo $scheduling_heading_system; ?></h2>
+				<div class="row">
+		<?php } ?>
+		<div class="col-12 col-lg-6">
+			<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book.php' ); ?>
+		</div>
+		<div class="col-12 col-lg-6">
+			<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-request.php' ); ?>
+		</div>
+		<?php if ( $scheduling_mychart_book_heading_nested ) { ?>
+				</div><?php // end div.row ?>
+			</div><?php // end div.col-12 ?>
+		<?php } ?>
+	<?php } else { ?>
+		<div class="col-12 col-lg-6">
+			<h2 class="<?php echo $scheduling_general_heading_class; ?>"><?php echo $scheduling_heading_system; ?></h2>
+			<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-book.php' ); ?>
+			<?php include( UAMS_FAD_PATH . '/templates/blocks/online-scheduling-link-request.php' ); ?>
+		</div>
+	<?php }
 
 	// End Provider Profile Appointment Information Content
 

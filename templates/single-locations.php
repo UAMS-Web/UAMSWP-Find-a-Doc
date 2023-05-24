@@ -51,6 +51,19 @@ if (empty($excerpt)){
 // End Parent Location Variables
 
 
+// Location Info Section Variables
+	
+	// Top-level heading rank and class
+	$info_section_heading_class_rank = 4;
+	$info_section_heading_class = 'h' . $info_section_heading_class_rank;
+	
+	// Second-level heading rank and class
+	$info_section_heading_class_2_rank = $info_section_heading_class_rank + 1;
+	$info_section_heading_class_2 = 'h' . $info_section_heading_class_2_rank;
+	
+// End Location Info Section Variables
+
+
 // Location Details Variables
 
 	// Check if this is an Arkansas Children's location
@@ -700,7 +713,7 @@ while ( have_posts() ) : the_post(); ?>
 					<div class="text-subsection">
 						<div class="row">
 							<div class="col-12 col-lg-6">
-								<h2 class="h5">Address</h2>
+								<h2 class="<?php echo $info_section_heading_class; ?>">Address</h2>
 								<p><?php echo $location_address_1; ?><br/>
 								<?php echo ( $location_address_2 ? $location_address_2 . '<br/>' : ( $location_address_2_deprecated ? $location_address_2_deprecated . '<br/>' : '')); ?>
 								<?php echo $location_city; ?>, <?php echo $location_state; ?> <?php echo $location_zip; ?></p>
@@ -728,7 +741,7 @@ while ( have_posts() ) : the_post(); ?>
 
 							</div>
 							<div class="col-12 col-lg-6">
-								<h2 class="h5">Phone Numbers</h2>
+								<h2 class="<?php echo $info_section_heading_class; ?>">Phone Numbers</h2>
 								<?php
 									// Phone values
 									$phone_output_id = $id;
@@ -767,7 +780,7 @@ while ( have_posts() ) : the_post(); ?>
 								$active_end = '';
 
 								if ( $hoursvary ) {
-									echo '<h2 class="h4">Hours Vary</h2>';
+									echo '<h2 class="' . $info_section_heading_class . '">Hours Vary</h2>';
 									echo $hoursvary_info;
 								} else {
 									if ($modified) : 
@@ -793,7 +806,7 @@ while ( have_posts() ) : the_post(); ?>
 												foreach ($modified_hours as $modified_hour) {
 						
 													$modified_title = $modified_hour['location_modified_hours_title'];
-													$modified_text .= $modified_title ? '<h3 class="h5">'.$modified_title.'</h3>' : '';
+													$modified_text .= $modified_title ? '<h3 class="' . $info_section_heading_class_2 . '">'.$modified_title.'</h3>' : '';
 													$modified_info = $modified_hour['location_modified_hours_information'];
 													$modified_text .= $modified_info ? $modified_info : '';
 													$modified_times = $modified_hour['location_modified_hours_times'];
@@ -889,7 +902,7 @@ while ( have_posts() ) : the_post(); ?>
 											}
 										}
 									
-										echo $modified_text ? '<h2 class="h4">Modified Hours</h2>' . $modified_text: '';
+										echo $modified_text ? '<h2 class="' . $info_section_heading_class . '">Modified Hours</h2>' . $modified_text: '';
 										
 									endif; // End Modified Hours
 									if ('' != $modified_hours_schema) {
@@ -905,7 +918,7 @@ while ( have_posts() ) : the_post(); ?>
 										$hours = $location_hours_group['location_hours'];
 										$hours_schema = '';
 										if ( $hours247 || $hours[0]['day'] ) : ?>
-										<h2 class="h4"><?php echo $modified_text ? 'Typical ' : ''; ?>Hours</h2>
+										<h2 class="<?php echo $info_section_heading_class; ?>"><?php echo $modified_text ? 'Typical ' : ''; ?>Hours</h2>
 										<?php
 											if ($hours247):
 												echo '<strong>Open 24/7</strong>';
@@ -1019,7 +1032,7 @@ while ( have_posts() ) : the_post(); ?>
 								// Begin After Hours Information
 
 								if ( !$location_hours_group['location_24_7'] ) { // If the location is not open 24/7 ?>
-									<h3 class="h5">After Hours</h3>
+									<h3 class="<?php echo $info_section_heading_class_2; ?>">After Hours</h3>
 									<?php if ( $location_hours_group['location_after_hours'] ) { // If after hours information is set at the location-level ?>
 										<?php echo $location_hours_group['location_after_hours']; // Use the location-level after hours information ?>
 									<?php } else { ?>

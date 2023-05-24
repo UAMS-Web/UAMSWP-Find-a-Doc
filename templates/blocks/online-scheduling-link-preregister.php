@@ -22,7 +22,7 @@
  if ( $show_scheduling_mychart_preregister_section ) {
 	// Begin Content
 	?>
-	<h2 class="h4"><?php echo $scheduling_mychart_preregister_heading_standalone; ?></h2>
+	<h2 class="<?php echo $scheduling_mychart_preregister_heading_class; ?>"><?php echo $scheduling_mychart_preregister_heading_standalone; ?></h2>
 	<p><?php echo $scheduling_mychart_preregister_descr_standalone; ?></p>
 	<div class="btn-container">
 		<div class="inner-container">

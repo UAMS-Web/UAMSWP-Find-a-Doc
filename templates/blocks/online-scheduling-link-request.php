@@ -24,10 +24,10 @@ if ( $show_scheduling_request_section ) {
 
 	// Begin Content
 	if ( $scheduling_appointments_count > 1 ) {
-		echo '<h3 class="h5">' . $scheduling_request_heading_nested . '</h3>';
+		echo '<h3 class="' . $scheduling_request_heading_class . '">' . $scheduling_request_heading_nested . '</h3>';
 		echo '<p>' . $scheduling_request_descr_nested . '</p>';
 	} else {
-		echo '<h2 class="h4">' . $scheduling_request_heading_standalone . '</h2>';
+		echo '<h2 class=' . $scheduling_request_heading_class . '>' . $scheduling_request_heading_standalone . '</h2>';
 		echo '<p>' . $scheduling_request_descr_standalone . '</p>';
 	}
 

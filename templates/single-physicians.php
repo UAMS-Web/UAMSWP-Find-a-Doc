@@ -6,6 +6,19 @@
 
 $page_slug = $post->post_name;
 
+
+// Provider Info Section Variables
+	
+	// Top-level heading rank and class
+	$info_section_heading_class_rank = 4;
+	$info_section_heading_class = 'h' . $info_section_heading_class_rank;
+	
+	// Second-level heading rank and class
+	$info_section_heading_class_2_rank = $info_section_heading_class_rank + 1;
+	$info_section_heading_class_2 = 'h' . $info_section_heading_class_2_rank;
+	
+// End Provider Info Section Variables
+
 $degrees = get_field('physician_degree',$post->ID);
 $degree_list = '';
 $i = 1;
@@ -601,7 +614,7 @@ while ( have_posts() ) : the_post();
 								$l = 1;
 								if ( $locations && $location_valid ) { ?>
 									<div data-sectiontitle="Primary Location">
-										<h2 class="h5">Primary <?php $eligible_appointments ? 'Appointment ' : '' ?>Location</h2>
+										<h2 class="<?php echo $info_section_heading_class; ?>">Primary <?php $eligible_appointments ? 'Appointment ' : '' ?>Location</h2>
 										<?php foreach( $locations as $location ):
 												if ( 2 > $l ){
 													if ( get_post_status ( $location ) == 'publish' ) {
@@ -705,7 +718,7 @@ while ( have_posts() ) : the_post();
 							
 							?>
 							<div class="col-12 col-lg-6">
-								<h2 class="h5">Overview</h2>
+								<h2 class="<?php echo $info_section_heading_class; ?>">Overview</h2>
 								<dl data-sectiontitle="Overview">
 								<?php // Display area(s) of expertise
 								$expertise_valid = false;
