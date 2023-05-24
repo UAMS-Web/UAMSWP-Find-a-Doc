@@ -36,9 +36,74 @@ $scheduling_mychart_preregister_options = isset($scheduling_mychart_preregister_
 $scheduling_mychart_preregister_visit_type = isset($scheduling_mychart_preregister_visit_type) ? $scheduling_mychart_preregister_visit_type : '';
 
 
-// Begin Appointments Section
+// Count number of appointment subsections
+$scheduling_appointments_count = $show_scheduling_mychart_book_section + $show_scheduling_request_section;
 
-$scheduling_appointments_count = $show_scheduling_mychart_book_section + $show_scheduling_request_section; // Count number of appointment subsections
+
+// Get values from from Find-a-Doc Settings input group labeled "Appointment Booking"
+if ( $show_scheduling_mychart_book_section ) {
+	$scheduling_mychart_book_group_sys = get_field('mychart_scheduling_book_group', 'option'); // ACF field containing the inputs relevant to Appointment Booking
+	if ( $scheduling_template == 'single-location' ) {
+		$scheduling_mychart_book_heading_standalone = $scheduling_mychart_book_group_sys['mychart_scheduling_book_location_heading_standalone_system'];
+		$scheduling_mychart_book_descr_standalone = $scheduling_mychart_book_group_sys['mychart_scheduling_book_location_descr_standalone_system'];
+		$scheduling_mychart_book_heading_nested = $scheduling_mychart_book_group_sys['mychart_scheduling_book_location_heading_nested_system'];
+		$scheduling_mychart_book_descr_nested = $scheduling_mychart_book_group_sys['mychart_scheduling_book_location_descr_nested_system'] ?: $scheduling_mychart_book_descr_standalone;
+	} elseif ( $scheduling_template == 'single-provider' ) {
+		$scheduling_mychart_book_heading_standalone = $scheduling_mychart_book_group_sys['mychart_scheduling_book_provider_heading_standalone_system'];
+		$scheduling_mychart_book_descr_standalone = $scheduling_mychart_book_group_sys['mychart_scheduling_book_provider_descr_standalone_system'];
+		$scheduling_mychart_book_heading_nested = $scheduling_mychart_book_group_sys['mychart_scheduling_book_provider_heading_nested_system'];
+		$scheduling_mychart_book_descr_nested = $scheduling_mychart_book_group_sys['mychart_scheduling_book_provider_descr_nested_system'] ?: $scheduling_mychart_book_descr_standalone;
+	}
+}
+$scheduling_mychart_book_heading_standalone = isset($scheduling_mychart_book_heading_standalone) ? $scheduling_mychart_book_heading_standalone : 'Appointments Care';
+$scheduling_mychart_book_descr_standalone = isset($scheduling_mychart_book_descr_standalone) ? $scheduling_mychart_book_descr_standalone : 'Book an appointment online';
+$scheduling_mychart_book_heading_nested = isset($scheduling_mychart_book_heading_nested) ? $scheduling_mychart_book_heading_nested : '';
+$scheduling_mychart_book_descr_nested = isset($scheduling_mychart_book_descr_nested) ? $scheduling_mychart_book_descr_nested : $scheduling_mychart_book_descr_standalone;
+
+
+// Get values from from Find-a-Doc Settings input group labeled "Visit Pre-Registration"
+if ( $show_scheduling_mychart_book_section ) {
+	$scheduling_mychart_preregister_group_sys = get_field('mychart_scheduling_preregister_group', 'option'); // ACF field containing the inputs relevant to Visit Pre-Registration
+	if ( $scheduling_template == 'single-location' ) {
+		$scheduling_mychart_preregister_heading_standalone = $scheduling_mychart_preregister_group_sys['mychart_scheduling_preregister_location_heading_standalone_system'];
+		$scheduling_mychart_preregister_descr_standalone = $scheduling_mychart_preregister_group_sys['mychart_scheduling_preregister_location_descr_standalone_system'];
+		$scheduling_mychart_preregister_heading_nested = $scheduling_mychart_preregister_group_sys['mychart_scheduling_preregister_location_heading_nested_system'];
+		$scheduling_mychart_preregister_descr_nested = $scheduling_mychart_preregister_group_sys['mychart_scheduling_preregister_location_descr_nested_system'];
+	} elseif ( $scheduling_template == 'single-provider' ) {
+		$scheduling_mychart_preregister_heading_standalone = $scheduling_mychart_preregister_group_sys['mychart_scheduling_preregister_provider_heading_standalone_system'];
+		$scheduling_mychart_preregister_descr_standalone = $scheduling_mychart_preregister_group_sys['mychart_scheduling_preregister_provider_descr_standalone_system'];
+		$scheduling_mychart_preregister_heading_nested = $scheduling_mychart_preregister_group_sys['mychart_scheduling_preregister_provider_heading_nested_system'];
+		$scheduling_mychart_preregister_descr_nested = $scheduling_mychart_preregister_group_sys['mychart_scheduling_preregister_provider_descr_nested_system'];
+	}
+}
+$scheduling_mychart_preregister_heading_standalone = isset($scheduling_mychart_preregister_heading_standalone) ? $scheduling_mychart_preregister_heading_standalone : 'Immediate Care';
+$scheduling_mychart_preregister_descr_standalone = isset($scheduling_mychart_preregister_descr_standalone) ? $scheduling_mychart_preregister_descr_standalone : 'Spend less time waiting and get home faster by choosing an available time.';
+$scheduling_mychart_preregister_heading_nested = isset($scheduling_mychart_preregister_heading_nested) ? $scheduling_mychart_preregister_heading_nested : $scheduling_mychart_preregister_heading_standalone;
+$scheduling_mychart_preregister_descr_nested = isset($scheduling_mychart_preregister_descr_nested) ? $scheduling_mychart_preregister_descr_nested : $scheduling_mychart_preregister_descr_standalone;
+
+
+// Get values from from Find-a-Doc Settings for Appointment Request Forms
+if ( $show_scheduling_request_section ) {
+	$scheduling_request_group_sys = get_field('appointment_request_group', 'option'); // ACF field containing the inputs relevant to Appointment Requests
+	if ( $scheduling_template == 'single-location' ) {
+		$scheduling_request_heading_standalone = $scheduling_request_group_sys['appointment_request_location_heading_standalone_system'];
+		$scheduling_request_descr_standalone = $scheduling_request_group_sys['appointment_request_location_descr_standalone_system'];
+		$scheduling_request_heading_nested = $scheduling_request_group_sys['appointment_request_location_heading_nested_system'];
+		$scheduling_request_descr_nested = $scheduling_request_group_sys['appointment_request_location_descr_nested_system'];
+	} elseif ( $scheduling_template == 'single-provider' ) {
+		$scheduling_request_heading_standalone = $scheduling_request_group_sys['appointment_request_provider_heading_standalone_system'];
+		$scheduling_request_descr_standalone = $scheduling_request_group_sys['appointment_request_provider_descr_standalone_system'];
+		$scheduling_request_heading_nested = $scheduling_request_group_sys['appointment_request_provider_heading_nested_system'];
+		$scheduling_request_descr_nested = $scheduling_request_group_sys['appointment_request_provider_descr_nested_system'];
+	}
+}
+$scheduling_request_heading_standalone = isset($scheduling_request_heading_standalone) ? $scheduling_request_heading_standalone : 'Appointments';
+$scheduling_request_descr_standalone = isset($scheduling_request_descr_standalone) ? $scheduling_request_descr_standalone : 'Appointments for specialized care cannot be scheduled online. For those, submit a request for an appointment.';
+$scheduling_request_heading_nested = isset($scheduling_request_heading_nested) ? $scheduling_request_heading_nested : 'Specialized Care';
+$scheduling_request_descr_nested = isset($scheduling_request_descr_nested) ? $scheduling_request_descr_nested : 'Some appointments involve specialized care and cannot be scheduled online. For those, submit a request for an appointment.';
+
+
+// Begin Appointments Section
 
 $scheduling_heading_system = get_field('scheduling_heading_system', 'option'); // Heading for Online Scheduling Section
 
