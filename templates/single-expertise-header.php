@@ -7,7 +7,7 @@
 ?>
 <!-- /* Begin Title / Logo */  -->
 <div class="global-title">
-    <a href="<?php echo network_site_url(); ?>" class="navbar-brand <?php if ( !$expertise_has_parent && !$content_type && !get_query_var('fpage') ) { echo 'no-subbrand'; } ?>">
+    <a href="<?php echo network_site_url(); ?>" class="navbar-brand <?php if ( !$content_type && !get_query_var('fpage') ) { echo 'no-subbrand'; } ?>">
         <picture>
             <source srcset="<?php echo get_stylesheet_directory_uri(); ?>/assets/svg/uams-logo_health_horizontal_dark.svg" media="(min-width: 576px)">
             <source srcset="<?php echo get_stylesheet_directory_uri(); ?>/assets/svg/uams-logo_health_vertical_dark.svg" media="(min-width: 1px)">
@@ -15,7 +15,7 @@
         </picture>
         <span class="sr-only">UAMS Health</span>
     </a>
-    <?php if ( $expertise_has_parent || $content_type || get_query_var('fpage') ) { 
+    <?php if ( $content_type || get_query_var('fpage') ) { 
         ?>
     <div class="navbar-subbrand">
         <!-- <a class="parent" href="/expertise/">Areas of Expertise</a><span class="sr-only">: </span> -->
