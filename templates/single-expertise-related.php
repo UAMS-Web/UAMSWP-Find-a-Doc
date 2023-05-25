@@ -149,6 +149,8 @@ add_action( 'genesis_header', 'uamswp_expertise_header', 5 );
 function uamswp_expertise_header() {
     global $page_id;
     global $expertise_has_parent;
+	global $parent_title;
+    global $parent_url;
     global $content_type;
     include( UAMS_FAD_PATH . '/templates/single-expertise-header.php');
 }

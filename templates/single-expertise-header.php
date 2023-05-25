@@ -18,7 +18,11 @@
     <?php if ( $content_type || get_query_var('fpage') ) { 
         ?>
     <div class="navbar-subbrand">
-        <!-- <a class="parent" href="/expertise/">Areas of Expertise</a><span class="sr-only">: </span> -->
+		<?php
+		// If the current Area of Expertise ontology item has a parent, display the name of that parent
+		if ( $expertise_has_parent ) { ?>
+			<a class="parent" href="<?php echo $parent_url; ?>"><?php echo $parent_title; ?></a><span class="sr-only">: </span>
+		<?php } // endif ( $expertise_has_parent ) ?>
         <a class="title" href="<?php echo get_permalink( $page_id ); ?>"><?php echo get_the_title( $page_id ); ?></a>
     </div>
     <?php } ?>
