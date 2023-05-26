@@ -15,7 +15,7 @@ $expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 
 $expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
 
 // Area of Expertise Content Type
-$content_type = get_field('expertise_type'); // True is ontology type, false is content type
+$ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
 
 // Get site header values for ontology subsections
 uamswp_fad_ontology_header();
@@ -63,7 +63,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
         global $parent_title_attr;
         global $parent_url;
         global $has_ancestors_ontology;
-        global $content_type;
+        global $ontology_type;
 
         echo '<h1 class="entry-title" itemprop="headline">';
         echo '<span class="supertitle">'. $expertise_single_name . '</span><span class="sr-only">:</span> ';
@@ -128,9 +128,9 @@ function custom_expertise_nav_menu() {
     global $post;
     global $page_title;
     global $page_id;
-    global $content_type;
+    global $ontology_type;
 
-    if ($parent_expertise && "0" == $content_type) {
+    if ($parent_expertise && "0" == $ontology_type) {
         $page_id = $parent_expertise->ID;
     }
 

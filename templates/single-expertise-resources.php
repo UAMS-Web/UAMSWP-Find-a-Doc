@@ -15,7 +15,7 @@ $expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 
 $expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
 
 // Area of Expertise Content Type
-$content_type = get_field('expertise_type'); // True is ontology type, false is content type
+$ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
 
 // Get site header values for ontology subsections
 uamswp_fad_ontology_header();

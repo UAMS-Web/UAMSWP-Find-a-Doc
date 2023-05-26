@@ -1197,7 +1197,7 @@ function uamswp_fad_ontology_header() {
 	global $page_id;
 	global $page_title;
 	global $page_url;
-	global $content_type;
+	global $ontology_type;
 
 	// Send variables out from inside the function
 	global $navbar_subbrand_title;
@@ -1260,7 +1260,7 @@ function uamswp_fad_ontology_header() {
 		}
 
 	// Set the values of the navbar-subbrand elements
-	if ( $content_type ) {
+	if ( $ontology_type ) {
 		// If the page has the ontology type...
 		// Set the navbar-subbrand title element using the page's values 
 		$navbar_subbrand_title = $page_title;
