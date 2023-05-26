@@ -19,26 +19,11 @@ function uamswp_keyword_hook_header() {
 add_action('wp_head','uamswp_keyword_hook_header');
 
 $page_title = get_the_title();
-$page_title_attr = $page_title;
-$page_title_attr = str_replace('"', '\'', $page_title_attr); // Replace double quotes with single quote
-$page_title_attr = str_replace('&#8217;', '\'', $page_title_attr); // Replace right single quote with single quote
-$page_title_attr = htmlentities($page_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-$page_title_attr = str_replace('&nbsp;', ' ', $page_title_attr); // Convert non-breaking space with normal space
-$page_title_attr = html_entity_decode($page_title_attr); // Convert HTML entities to their corresponding characters
+$page_title_attr = uamswp_attr_conversion($page_title);
 $condition_archive_title = get_field('conditions_archive_headline', 'option') ?: 'Conditions';
-$condition_archive_title_attr = $condition_archive_title;
-$condition_archive_title_attr = str_replace('"', '\'', $condition_archive_title_attr); // Replace double quotes with single quote
-$condition_archive_title_attr = str_replace('&#8217;', '\'', $condition_archive_title_attr); // Replace right single quote with single quote
-$condition_archive_title_attr = htmlentities($condition_archive_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-$condition_archive_title_attr = str_replace('&nbsp;', ' ', $condition_archive_title_attr); // Convert non-breaking space with normal space
-$condition_archive_title_attr = html_entity_decode($condition_archive_title_attr); // Convert HTML entities to their corresponding characters
+$condition_archive_title_attr = uamswp_attr_conversion($condition_archive_title);
 $condition_title = get_field('conditions_single_name', 'option') ?: 'Condition';
-$condition_title_attr = $condition_title;
-$condition_title_attr = str_replace('"', '\'', $condition_title_attr); // Replace double quotes with single quote
-$condition_title_attr = str_replace('&#8217;', '\'', $condition_title_attr); // Replace right single quote with single quote
-$condition_title_attr = htmlentities($condition_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-$condition_title_attr = str_replace('&nbsp;', ' ', $condition_title_attr); // Convert non-breaking space with normal space
-$condition_title_attr = html_entity_decode($condition_title_attr); // Convert HTML entities to their corresponding characters
+$condition_title_attr = uamswp_attr_conversion($condition_title);
 $condition_text = get_field('conditions_archive_intro_text', 'option');
 
 // Override theme's method of defining the page title
@@ -585,6 +570,7 @@ $jump_link_count = 0;
 			$resource_heading_related_pre = false; // "Related Resources"
 			$resource_heading_related_post = true; // "Resources Related to __"
 			$resource_heading_related_name = $page_title; // To what is it related?
+			$resource_heading_related_name_attr = $page_title_attr;
 			$resource_more_suppress = false; // Force div.more to not display
 			$resource_more_key = '_resource_conditions';
 			$resource_more_value = $post->post_name;
@@ -615,8 +601,7 @@ $jump_link_count = 0;
 									$treatment_id = get_the_ID();
 									$treatment_permalink = get_permalink( $treatment_id );
 									$treatment_title = get_the_title();
-									$treatment_title_attr = str_replace('"', '\'', $treatment_title);
-									$treatment_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($treatment_title_attr, null, 'utf-8')));
+									$treatment_title_attr = uamswp_attr_conversion($treatment_title);
 								?>
 									<li>
 										<a href="<?php echo $treatment_permalink; ?>" aria-label="Go to Treatment page for <?php echo $treatment_title_attr; ?>" class="btn btn-outline-primary"><?php echo $treatment_title; ?></a>
