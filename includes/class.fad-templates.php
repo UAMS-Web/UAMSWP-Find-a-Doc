@@ -72,22 +72,22 @@ function uamswp_force_template( $template )
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/archive-clinical-resource.php';
 	}
 
-    // Single Area of Expertise fake subpage for Providers
+    // Fake Area of Expertise Providers Subpage
     if( is_singular( 'expertise' ) && get_query_var('fpage') == 'providers' ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-expertise-providers.php';
     }
 
-    // Single Area of Expertise fake subpage for Locations
+    // Fake Area of Expertise Locations Subpage
     if( is_singular( 'expertise' ) && get_query_var('fpage') == 'locations' ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-expertise-locations.php';
     }
 
-    // Single Area of Expertise fake subpage for Clinical Resources
+    // Fake Area of Expertise Clinical Resources Subpage
     if( is_singular( 'expertise' ) && get_query_var('fpage') == 'resources' ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-expertise-resources.php';
     }
 
-    // Single Area of Expertise fake subpage for Related Areas of Expertise
+    // Fake Area of Expertise Related Areas of Expertise Subpage
     if( is_singular( 'expertise' ) && get_query_var('fpage') == 'related' ) {
         $template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-expertise-related.php';
     }

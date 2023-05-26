@@ -1,8 +1,7 @@
 <?php
 /*
  *
- *  Template Name: Services
- *  Designed for services single
+ *  Template Name: Fake Area of Expertise Clinical Resources Subpage
  *
  */
 // Set general variables

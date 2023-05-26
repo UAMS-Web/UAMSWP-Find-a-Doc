@@ -1,8 +1,7 @@
 <?php
 /*
  *
- *  Template Name: Services
- *  Designed for services single
+ *  Template Name: Single Area of Expertise
  *
  */
 // Set general variables
