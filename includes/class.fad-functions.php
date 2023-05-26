@@ -1186,3 +1186,14 @@ function uamswp_fad_disable_scripts() {
 }
 
 add_action('wp_enqueue_scripts', 'uamswp_fad_disable_scripts', 100);
+
+// Convert text string to HTML attribute-friendly text string
+function uamswp_attr_conversion($input)
+{
+	$input_attr = $input;
+	$input_attr = str_replace('"', '\'', $input_attr); // Replace double quotes with single quote
+	$input_attr = htmlentities($input_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+	$input_attr = str_replace('&nbsp;', ' ', $input_attr); // Convert non-breaking space with normal space
+	$input_attr = html_entity_decode($input_attr); // Convert HTML entities to their corresponding characters
+	return $input_attr;
+}
