@@ -5,8 +5,12 @@
 
 // Set general variables
 $page_id = get_the_ID();
-$page_title = get_the_title();
+$page_title = get_the_title(); // Title of Area of Expertise
 $page_title_attr = uamswp_attr_conversion($page_title);
+$fpage_name = 'Clinical Resources'; // Fake subpage name
+$fpage_name_attr = uamswp_attr_conversion($fpage_name);
+$fpage_title = $fpage_name . ' Related to ' . $page_title; // Fake subpage page title
+$fpage_title_attr = uamswp_attr_conversion($fpage_title);
 $expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
 $expertise_archive_title_attr = uamswp_attr_conversion($expertise_archive_title);
 $expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
@@ -69,25 +73,8 @@ function uamswp_add_entry_class( $attributes ) {
 add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 // Modify Entry Title
-
-	remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
-	add_action( 'genesis_entry_header', 'uamswp_expertise_post_title' );
-
-	function uamswp_expertise_post_title() {
-		global $page_title;
-		global $expertise_single_name;
-		global $parent_expertise;
-		global $parent_title;
-		global $parent_title_attr;
-		global $parent_url;
-		echo '<h1 class="entry-title" itemprop="headline">';
-		echo '<span class="supertitle">'. $expertise_single_name . '</span><span class="sr-only">:</span> ';
-		echo $page_title;
-		if ( $parent_expertise ) {
-			echo '<span class="subtitle"><span class="sr-only">(</span>Part of <a href="' . $parent_url . '" aria-label="Go to Area of Expertise page for ' . $parent_title_attr . '" data-categorytitle="Parent Name">' . $parent_title . '</a><span class="sr-only">)</span></span>';
-		} // endif
-		echo '</h1>';
-	}
+remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+add_action( 'genesis_entry_header', 'uamswp_fad_fpage_post_title' );
 
 add_action( 'genesis_after_entry', 'uamswp_expertise_resource', 14 );
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );

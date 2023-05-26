@@ -1193,3 +1193,11 @@ function uamswp_attr_conversion($input)
 	$input_attr = uamswp_attr_conversion($input);
 	return $input_attr;
 }
+
+// Construct page title for fake subpages
+function uamswp_fad_fpage_post_title() {
+	global $fpage_title;
+	echo '<h1 class="entry-title" itemprop="headline">';
+	echo $fpage_title;
+	echo '</h1>';
+}
