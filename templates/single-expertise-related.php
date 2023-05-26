@@ -41,7 +41,7 @@ add_filter('seopress_titles_title', 'uamswp_fad_fpage_title', 15, 2);
 
 // Override theme's method of defining the breadcrumbs
 function uamswp_breadcrumbs_expertise($crumbs) {
-	$crumbs[] = array('Related Expertise', '');
+	$crumbs[] = array('Related Areas of Expertise', '');
 	return $crumbs;
 }
 add_filter('seopress_pro_breadcrumbs_crumbs', 'uamswp_breadcrumbs_expertise');
