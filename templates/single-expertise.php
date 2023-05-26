@@ -32,7 +32,7 @@ if ($parent_expertise) {
 	$parent_url = get_permalink( $parent_id );
 }
 
-// Override theme's method of defining the page title
+// Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
 	global $page_title_attr;
 	global $expertise_single_name_attr;

@@ -177,7 +177,7 @@ function sp_titles_desc($html) {
 }
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
-// Override theme's method of defining the page title
+// Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
 	global $full_name_attr;
 	global $phys_title_name_attr;

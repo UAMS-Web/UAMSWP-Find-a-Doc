@@ -14,7 +14,7 @@ $resource_archive_title_system = get_field('clinical_resource_archive_headline',
 $resource_archive_title = $resource_archive_title_system ? $resource_archive_title_system : 'Clinical Resource';
 $resource_archive_title_attr = uamswp_attr_conversion($resource_archive_title);
 
-// Override theme's method of defining the page title
+// Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
 	global $page_title_attr;
 	global $resource_archive_title_attr;

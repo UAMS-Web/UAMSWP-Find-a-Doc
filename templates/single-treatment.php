@@ -27,7 +27,7 @@ $treatment_title = get_field('treatments_single_name', 'option') ?: 'Treatment/P
 $treatment_title_attr = uamswp_attr_conversion($treatment_title);
 $treatment_text = get_field('treatments_archive_intro_text', 'option');
 
-// Override theme's method of defining the page title
+// Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
 	global $page_title_attr;
 	global $treatment_title_attr;
