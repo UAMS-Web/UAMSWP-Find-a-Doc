@@ -1,65 +1,66 @@
 .single-clinical-resource {
-    ul.attachments {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        font-size: $lead-font-size;
+	ul.attachments {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		font-size: $lead-font-size;
 
-        .attachment-link {
-            svg {
-                color: $body-color-lightest;
+		.attachment-link {
+			svg {
+				color: $body-color-lightest;
 
-                &.fa-file-pdf {
-                    color: $color-adobe;
-                }
+				&.fa-file-pdf {
+					color: $color-adobe;
+				}
 
-                &.fa-file-word {
-                    color: $color-ms-word;
-                }
+				&.fa-file-word {
+					color: $color-ms-word;
+				}
 
-                &.fa-file-powerpoint {
-                    color: $color-ms-powerpoint;
-                }
+				&.fa-file-powerpoint {
+					color: $color-ms-powerpoint;
+				}
 
-                &.fa-file-excel {
-                    color: $color-ms-excel;
-                }
-            }
+				&.fa-file-excel {
+					color: $color-ms-excel;
+				}
+			}
 
-            @include hover-focus() {
-                svg {
-                    color: darken($body-color-lightest, $emphasized-link-hover-darken-percentage);
-                    
-                    &.fa-file-pdf {
-                        color: darken($color-adobe, $emphasized-link-hover-darken-percentage);
-                    }
-    
-                    &.fa-file-word {
-                        color: darken($color-ms-word, $emphasized-link-hover-darken-percentage);
-                    }
-    
-                    &.fa-file-powerpoint {
-                        color: darken($color-ms-powerpoint, $emphasized-link-hover-darken-percentage);
-                    }
-    
-                    &.fa-file-excel {
-                        color: darken($color-ms-excel, $emphasized-link-hover-darken-percentage);
-                    }
-                }
-            }
-        }
+			@include hover-focus() {
+				svg {
+					color: darken($body-color-lightest, $emphasized-link-hover-darken-percentage);
 
-        .attachment-label:not(:first-child) {
-            margin-left: 0.25em;
-        }
-    }
-    div.syndicate {
-        h1 {
-            //@include pagetitle();
-            display: none;
-        }
-        &:not(:first-child) {
-            @include cite();
-        }
-    }
+					&.fa-file-pdf {
+						color: darken($color-adobe, $emphasized-link-hover-darken-percentage);
+					}
+
+					&.fa-file-word {
+						color: darken($color-ms-word, $emphasized-link-hover-darken-percentage);
+					}
+
+					&.fa-file-powerpoint {
+						color: darken($color-ms-powerpoint, $emphasized-link-hover-darken-percentage);
+					}
+
+					&.fa-file-excel {
+						color: darken($color-ms-excel, $emphasized-link-hover-darken-percentage);
+					}
+				}
+			}
+		}
+
+		.attachment-label:not(:first-child) {
+			margin-left: 0.25em;
+		}
+	}
+	div.syndicate {
+		h1 {
+			//@include pagetitle();
+			display: none;
+		}
+
+		&:not(:first-child) {
+			@include cite();
+		}
+	}
 }

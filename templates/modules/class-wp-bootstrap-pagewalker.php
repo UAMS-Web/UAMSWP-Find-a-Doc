@@ -79,7 +79,7 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 			} elseif ( $page->ID == get_option('page_for_posts') ) {
 				$css_class[] = 'current-page-parent';
 			}
-			
+
 			/**
 			* Filter the list of CSS classes to include with each page item in the list.
 			*
@@ -97,14 +97,14 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 			if ( in_array( 'current-page-item', $css_class, true ) || in_array( 'current-page-parent', $css_class, true ) ) {
 				$css_class[] = ' active';
 			}
-			
+
 			$css_class = implode( ' ', apply_filters( 'page_css_class', $css_class, $page, $depth, $args, $current_page ) );
-			
+
 			$css_class = $css_class ? ' class="' . esc_attr( $css_class ) . '"' : '';
-			
+
 			$id = apply_filters( 'nav_menu_item_id', 'page-item-' . $page->ID, $page, $args );
 			$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
-			
+
 			$output .= $indent . '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement"' . $id . $css_class . '>';
 			$atts = array();
 
@@ -128,7 +128,7 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 			// $atts['rel']    = ! empty( $page->xfn )		? $page->xfn	: '';
 			// If item has_children add atts to a.
 			$atts['href'] 	= ! empty( get_permalink($page->ID) ) ? get_permalink($page->ID) : '#';
-			
+
 			if(preg_match('/dropdown/', $css_class) != FALSE){
 				// $atts['href']   		= '#';
 				$atts['data-toggle']	= 'dropdown';
@@ -140,7 +140,7 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 				// if we are in a dropdown then the the class .dropdown-item
 				// should be used instead of .nav-link.
 				if ( $depth > 0 ) {
-					$atts['class']	= 'dropdown-item';					
+					$atts['class']	= 'dropdown-item';
 				} else {
 					$atts['class']	= 'nav-link';
 				}
@@ -178,7 +178,7 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 			// 	$time = $page->post_modified;
 			// 	else
 			// 	$time = $page->post_date;
-				
+
 			// 	$output .= " " . mysql2date($date_format, $time);
 
 			// }

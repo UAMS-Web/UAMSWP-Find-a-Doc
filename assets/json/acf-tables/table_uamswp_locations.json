@@ -1,439 +1,439 @@
 {
-    "name": "uamswp_locations",
-    "relationship": {
-        "type": "post",
-        "post_type": "location"
-    },
-    "primary_key": [
-        "id"
-    ],
-    "keys": [
-        {
-            "name": "post_id",
-            "columns": [
-                "post_id"
-            ],
-            "unique": true
-        }
-    ],
-    "columns": [
-        {
-            "name": "id",
-            "format": "%d",
-            "null": false,
-            "auto_increment": true,
-            "unsigned": true
-        },
-        {
-            "name": "post_id",
-            "format": "%d"
-        },
-        {
-            "name": "location_address_1",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_address_1"
-            }
-        },
-        {
-            "name": "location_address_2",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_address_2"
-            }
-        },
-        {
-            "name": "location_building",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_building"
-            }
-        },
-        {
-            "name": "location_building_floor",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_building_floor"
-            }
-        },
-        {
-            "name": "location_suite",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_suite"
-            }
-        },
-        {
-            "name": "location_city",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_city"
-            }
-        },
-        {
-            "name": "location_state",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_state"
-            }
-        },
-        {
-            "name": "location_zip",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_zip"
-            }
-        },
-        {
-            "name": "location_region",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_region"
-            }
-        },
-        {
-            "name": "location_parking",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_parking"
-            }
-        },
-        {
-            "name": "location_direction",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_direction"
-            }
-        },
-        {
-            "name": "location_about",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_about"
-            }
-        },
-        {
-            "name": "location_youtube_link",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_youtube_link"
-            }
-        },
-        {
-            "name": "location_short_desc",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_short_desc"
-            }
-        },
-        {
-            "name": "location_affiliation",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_affiliation"
-            }
-        },
-        {
-            "name": "location_clinic_phone_query",
-            "format": "%d",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_clinic_phone_query"
-            }
-        },
-        {
-            "name": "location_phone",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_phone"
-            }
-        },
-        {
-            "name": "location_appointment_phone_query",
-            "format": "%d",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_appointment_phone_query"
-            }
-        },
-        {
-            "name": "location_new_appointments_phone",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_new_appointments_phone"
-            }
-        },
-        {
-            "name": "location_return_appointments_phone",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_return_appointments_phone"
-            }
-        },
-        {
-            "name": "location_phone_numbers",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_phone_numbers"
-            }
-        },
-        {
-            "name": "location_appointment",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_appointment"
-            }
-        },
-        {
-            "name": "location_appointment_bring",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_appointment_bring"
-            }
-        },
-        {
-            "name": "location_portal",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_portal"
-            }
-        },
-        {
-            "name": "location_web_name",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_web_name"
-            }
-        },
-        {
-            "name": "location_url",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_url"
-            }
-        },
-        {
-            "name": "location_abbreviation",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_abbreviation"
-            }
-        },
-        {
-            "name": "location_description",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_description"
-            }
-        },
-        {
-            "name": "location_email",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_email"
-            }
-        },
-        {
-            "name": "location_wayfinding_photo",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_wayfinding_photo"
-            }
-        },
-        {
-            "name": "location_photo_gallery",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_photo_gallery"
-            }
-        },
-        {
-            "name": "location_24_7",
-            "format": "%d",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_24_7"
-                
-            }
-        },
-        {
-            "name": "location_hours_group",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_hours_group"
-            }
-        },
-        {
-            "name": "location_hours",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_hours"
-            }
-        },
-        {
-            "name": "location_after_hours",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_after_hours"
-            }
-        },
-        {
-            "name": "location_holiday_hours",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_holiday_hours"
-            }
-        },
-        {
-            "name": "location_conditions",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_conditions"
-            }
-        },
-        {
-            "name": "location_treatments",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_treatments"
-            }
-        },
-        {
-            "name": "location_expertise",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_expertise"
-            }
-        },
-        {
-            "name": "location_medical_specialties",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_medical_specialties"
-            }
-        },
-        {
-            "name": "location_medical_terms",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_medical_terms"
-            }
-        },
-        {
-            "name": "location_clinic",
-            "format": "%d",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_clinic"
-            }
-        },
-        {
-            "name": "location_facility",
-            "format": "%d",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_facility"
-            }
-        },
-        {
-            "name": "physician_locations",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_locations"
-            }
-        },
-        {
-            "name": "location_gmb_exclude",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_gmb_exclude"
-            }
-        },
-        {
-            "name": "location_gmb_prefix",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_gmb_prefix"
-            }
-        },
-        {
-            "name": "location_gmb_cat",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "location_gmb_cat"
-            }
-        },
-        {
-            "name": "has_wheelchair_accessible_elevator",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "has_wheelchair_accessible_elevator"
-            }
-        },
-        {
-            "name": "has_wheelchair_accessible_entrance",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "has_wheelchair_accessible_entrance"
-            }
-        },
-        {
-            "name": "has_wheelchair_accessible_restroom",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "has_wheelchair_accessible_restroom"
-            }
-        },
-        {
-            "name": "has_restroom",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "has_restroom"
-            }
-        },
-        {
-            "name": "requires_appointments",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "requires_appointments"
-            }
-        },
-        {
-            "name": "requires_temperature_check_customers",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "requires_temperature_check_customers"
-            }
-        },
-        {
-            "name": "requires_masks_customers",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "requires_masks_customers"
-            }
-        },
-        {
-            "name": "requires_temperature_check_staff",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "requires_temperature_check_staff"
-            }
-        },
-        {
-            "name": "requires_masks_staff",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "requires_masks_staff"
-            }
-        },
-        {
-            "name": "is_sanitizing_between_customers",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "is_sanitizing_between_customers"
-            }
-        }
-    ],
-    "hash": "c89b987d38635e87c06696a8e97e40dd",
-    "modified": 1566591623
+	"name": "uamswp_locations",
+	"relationship": {
+		"type": "post",
+		"post_type": "location"
+	},
+	"primary_key": [
+		"id"
+	],
+	"keys": [
+		{
+			"name": "post_id",
+			"columns": [
+				"post_id"
+			],
+			"unique": true
+		}
+	],
+	"columns": [
+		{
+			"name": "id",
+			"format": "%d",
+			"null": false,
+			"auto_increment": true,
+			"unsigned": true
+		},
+		{
+			"name": "post_id",
+			"format": "%d"
+		},
+		{
+			"name": "location_address_1",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_address_1"
+			}
+		},
+		{
+			"name": "location_address_2",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_address_2"
+			}
+		},
+		{
+			"name": "location_building",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_building"
+			}
+		},
+		{
+			"name": "location_building_floor",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_building_floor"
+			}
+		},
+		{
+			"name": "location_suite",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_suite"
+			}
+		},
+		{
+			"name": "location_city",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_city"
+			}
+		},
+		{
+			"name": "location_state",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_state"
+			}
+		},
+		{
+			"name": "location_zip",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_zip"
+			}
+		},
+		{
+			"name": "location_region",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_region"
+			}
+		},
+		{
+			"name": "location_parking",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_parking"
+			}
+		},
+		{
+			"name": "location_direction",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_direction"
+			}
+		},
+		{
+			"name": "location_about",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_about"
+			}
+		},
+		{
+			"name": "location_youtube_link",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_youtube_link"
+			}
+		},
+		{
+			"name": "location_short_desc",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_short_desc"
+			}
+		},
+		{
+			"name": "location_affiliation",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_affiliation"
+			}
+		},
+		{
+			"name": "location_clinic_phone_query",
+			"format": "%d",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_clinic_phone_query"
+			}
+		},
+		{
+			"name": "location_phone",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_phone"
+			}
+		},
+		{
+			"name": "location_appointment_phone_query",
+			"format": "%d",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_appointment_phone_query"
+			}
+		},
+		{
+			"name": "location_new_appointments_phone",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_new_appointments_phone"
+			}
+		},
+		{
+			"name": "location_return_appointments_phone",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_return_appointments_phone"
+			}
+		},
+		{
+			"name": "location_phone_numbers",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_phone_numbers"
+			}
+		},
+		{
+			"name": "location_appointment",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_appointment"
+			}
+		},
+		{
+			"name": "location_appointment_bring",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_appointment_bring"
+			}
+		},
+		{
+			"name": "location_portal",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_portal"
+			}
+		},
+		{
+			"name": "location_web_name",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_web_name"
+			}
+		},
+		{
+			"name": "location_url",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_url"
+			}
+		},
+		{
+			"name": "location_abbreviation",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_abbreviation"
+			}
+		},
+		{
+			"name": "location_description",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_description"
+			}
+		},
+		{
+			"name": "location_email",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_email"
+			}
+		},
+		{
+			"name": "location_wayfinding_photo",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_wayfinding_photo"
+			}
+		},
+		{
+			"name": "location_photo_gallery",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_photo_gallery"
+			}
+		},
+		{
+			"name": "location_24_7",
+			"format": "%d",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_24_7"
+				
+			}
+		},
+		{
+			"name": "location_hours_group",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_hours_group"
+			}
+		},
+		{
+			"name": "location_hours",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_hours"
+			}
+		},
+		{
+			"name": "location_after_hours",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_after_hours"
+			}
+		},
+		{
+			"name": "location_holiday_hours",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_holiday_hours"
+			}
+		},
+		{
+			"name": "location_conditions",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_conditions"
+			}
+		},
+		{
+			"name": "location_treatments",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_treatments"
+			}
+		},
+		{
+			"name": "location_expertise",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_expertise"
+			}
+		},
+		{
+			"name": "location_medical_specialties",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_medical_specialties"
+			}
+		},
+		{
+			"name": "location_medical_terms",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_medical_terms"
+			}
+		},
+		{
+			"name": "location_clinic",
+			"format": "%d",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_clinic"
+			}
+		},
+		{
+			"name": "location_facility",
+			"format": "%d",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_facility"
+			}
+		},
+		{
+			"name": "physician_locations",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_locations"
+			}
+		},
+		{
+			"name": "location_gmb_exclude",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_gmb_exclude"
+			}
+		},
+		{
+			"name": "location_gmb_prefix",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_gmb_prefix"
+			}
+		},
+		{
+			"name": "location_gmb_cat",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "location_gmb_cat"
+			}
+		},
+		{
+			"name": "has_wheelchair_accessible_elevator",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "has_wheelchair_accessible_elevator"
+			}
+		},
+		{
+			"name": "has_wheelchair_accessible_entrance",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "has_wheelchair_accessible_entrance"
+			}
+		},
+		{
+			"name": "has_wheelchair_accessible_restroom",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "has_wheelchair_accessible_restroom"
+			}
+		},
+		{
+			"name": "has_restroom",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "has_restroom"
+			}
+		},
+		{
+			"name": "requires_appointments",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "requires_appointments"
+			}
+		},
+		{
+			"name": "requires_temperature_check_customers",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "requires_temperature_check_customers"
+			}
+		},
+		{
+			"name": "requires_masks_customers",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "requires_masks_customers"
+			}
+		},
+		{
+			"name": "requires_temperature_check_staff",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "requires_temperature_check_staff"
+			}
+		},
+		{
+			"name": "requires_masks_staff",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "requires_masks_staff"
+			}
+		},
+		{
+			"name": "is_sanitizing_between_customers",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "is_sanitizing_between_customers"
+			}
+		}
+	],
+	"hash": "c89b987d38635e87c06696a8e97e40dd",
+	"modified": 1566591623
 }

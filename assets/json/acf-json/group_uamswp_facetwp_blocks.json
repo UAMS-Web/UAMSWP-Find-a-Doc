@@ -1,271 +1,271 @@
 {
-    "key": "group_facetwp_blocks",
-    "title": "FacetWP Block",
-    "fields": [
-        {
-            "key": "field_facetwp_block_heading",
-            "label": "Heading",
-            "name": "facetwp_block_heading",
-            "type": "text",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "field_facetwp_block_hide_heading",
-            "label": "Hide Heading",
-            "name": "facetwp_block_hide_heading",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "Hide",
-            "ui_off_text": "Show"
-        },
-        {
-            "key": "field_facetwp_block_pre_template_facets",
-            "label": "Pre template facets",
-            "name": "facetwp_block_pre_template_facets",
-            "type": "repeater",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "acfe_repeater_stylised_button": 0,
-            "collapsed": "field_pre_facet_name",
-            "min": 0,
-            "max": 0,
-            "layout": "table",
-            "button_label": "",
-            "sub_fields": [
-                {
-                    "key": "field_pre_facet_name",
-                    "label": "Facet Name",
-                    "name": "facet_name",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "acfe_permissions": "",
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_pre_facet_alignment",
-                    "label": "Alignment",
-                    "name": "alignment",
-                    "type": "button_group",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "acfe_permissions": "",
-                    "choices": {
-                        "left": "Left",
-                        "center": "Center",
-                        "right": "Right"
-                    },
-                    "allow_null": 0,
-                    "default_value": "",
-                    "layout": "horizontal",
-                    "return_format": "value"
-                }
-            ]
-        },
-        {
-            "key": "field_facetwp_block_facet_template",
-            "label": "Facet Template",
-            "name": "facetwp_block_facet_template",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "field_facetwp_block_post_template_facets",
-            "label": "Post template facets",
-            "name": "facetwp_block_post_template_facets",
-            "type": "repeater",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "acfe_repeater_stylised_button": 0,
-            "collapsed": "",
-            "min": 0,
-            "max": 0,
-            "layout": "table",
-            "button_label": "",
-            "sub_fields": [
-                {
-                    "key": "field_post_facet_name",
-                    "label": "Facet Name",
-                    "name": "facet_name",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "acfe_permissions": "",
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_post_facet_alignment",
-                    "label": "Alignment",
-                    "name": "alignment",
-                    "type": "button_group",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "acfe_permissions": "",
-                    "choices": {
-                        "left": "Left",
-                        "center": "Center",
-                        "right": "Right"
-                    },
-                    "allow_null": 0,
-                    "default_value": "",
-                    "layout": "horizontal",
-                    "return_format": "value"
-                }
-            ]
-        },
-        {
-            "key": "field_facetwp_block_include_pager",
-            "label": "Inlude Pager",
-            "name": "facetwp_block_include_pager",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "Include",
-            "ui_off_text": "None"
-        },
-        {
-            "key": "field_facetwp_block_background_color",
-            "label": "Background Color",
-            "name": "facetwp_block_background_color",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "choices": {
-                "bg-white": "White",
-                "bg-gray": "Gray"
-            },
-            "default_value": [
-                "bg-white"
-            ],
-            "allow_null": 0,
-            "multiple": 0,
-            "ui": 0,
-            "return_format": "value",
-            "ajax": 0,
-            "placeholder": ""
-        }
-    ],
-    "location": [
-        [
-            {
-                "param": "block",
-                "operator": "==",
-                "value": "acf\/uamswp-fad-facetwp-blocks"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "left",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": true,
-    "description": "",
-    "acfe_display_title": "",
-    "acfe_autosync": [
-        "json"
-    ],
-    "acfe_permissions": "",
-    "acfe_form": 0
+	"key": "group_facetwp_blocks",
+	"title": "FacetWP Block",
+	"fields": [
+		{
+			"key": "field_facetwp_block_heading",
+			"label": "Heading",
+			"name": "facetwp_block_heading",
+			"type": "text",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_facetwp_block_hide_heading",
+			"label": "Hide Heading",
+			"name": "facetwp_block_hide_heading",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "Hide",
+			"ui_off_text": "Show"
+		},
+		{
+			"key": "field_facetwp_block_pre_template_facets",
+			"label": "Pre template facets",
+			"name": "facetwp_block_pre_template_facets",
+			"type": "repeater",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"acfe_repeater_stylised_button": 0,
+			"collapsed": "field_pre_facet_name",
+			"min": 0,
+			"max": 0,
+			"layout": "table",
+			"button_label": "",
+			"sub_fields": [
+				{
+					"key": "field_pre_facet_name",
+					"label": "Facet Name",
+					"name": "facet_name",
+					"type": "text",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_pre_facet_alignment",
+					"label": "Alignment",
+					"name": "alignment",
+					"type": "button_group",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"choices": {
+						"left": "Left",
+						"center": "Center",
+						"right": "Right"
+					},
+					"allow_null": 0,
+					"default_value": "",
+					"layout": "horizontal",
+					"return_format": "value"
+				}
+			]
+		},
+		{
+			"key": "field_facetwp_block_facet_template",
+			"label": "Facet Template",
+			"name": "facetwp_block_facet_template",
+			"type": "text",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_facetwp_block_post_template_facets",
+			"label": "Post template facets",
+			"name": "facetwp_block_post_template_facets",
+			"type": "repeater",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"acfe_repeater_stylised_button": 0,
+			"collapsed": "",
+			"min": 0,
+			"max": 0,
+			"layout": "table",
+			"button_label": "",
+			"sub_fields": [
+				{
+					"key": "field_post_facet_name",
+					"label": "Facet Name",
+					"name": "facet_name",
+					"type": "text",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_post_facet_alignment",
+					"label": "Alignment",
+					"name": "alignment",
+					"type": "button_group",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"choices": {
+						"left": "Left",
+						"center": "Center",
+						"right": "Right"
+					},
+					"allow_null": 0,
+					"default_value": "",
+					"layout": "horizontal",
+					"return_format": "value"
+				}
+			]
+		},
+		{
+			"key": "field_facetwp_block_include_pager",
+			"label": "Inlude Pager",
+			"name": "facetwp_block_include_pager",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "Include",
+			"ui_off_text": "None"
+		},
+		{
+			"key": "field_facetwp_block_background_color",
+			"label": "Background Color",
+			"name": "facetwp_block_background_color",
+			"type": "select",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"bg-white": "White",
+				"bg-gray": "Gray"
+			},
+			"default_value": [
+				"bg-white"
+			],
+			"allow_null": 0,
+			"multiple": 0,
+			"ui": 0,
+			"return_format": "value",
+			"ajax": 0,
+			"placeholder": ""
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "block",
+				"operator": "==",
+				"value": "acf\/uamswp-fad-facetwp-blocks"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "left",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": [
+		"json"
+	],
+	"acfe_permissions": "",
+	"acfe_form": 0
 }

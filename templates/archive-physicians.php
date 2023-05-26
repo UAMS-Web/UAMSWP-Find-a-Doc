@@ -10,11 +10,11 @@ function uamswp_fad_title($html) {
 
 // Region Cookie
 if ( isset($_COOKIE['wp_filter_region']) && !isset($_GET['_provider_region']) ) {
-    $region = $_COOKIE['wp_filter_region'];
+	$region = $_COOKIE['wp_filter_region'];
 	$url = $_SERVER["REQUEST_URI"];
-    $url .= (parse_url($url, PHP_URL_QUERY) ? '&' : '?').'_provider_region='. $region;
-    header("Location: ". $url);
-    exit();
+	$url .= (parse_url($url, PHP_URL_QUERY) ? '&' : '?').'_provider_region='. $region;
+	header("Location: ". $url);
+	exit();
 }
 get_header();
 
@@ -32,7 +32,7 @@ get_header();
 			return apply_filters('the_excerpt', $text);
 		}
 	function wpdocs_custom_excerpt_length( $length ) {
-	    return 35; // 35 words
+		return 35; // 35 words
 	}
 	add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );
 
@@ -51,9 +51,9 @@ get_header();
 				<fieldset>
 					<legend class="sr-only">Filter by...</legend>
 					<h3 class="h6">Search Providers</h3>
-					<?php  echo do_shortcode( '[wpdreams_ajaxsearchpro id=1]' ); ?>
-					<div class="fwp-filter"><?php  echo facetwp_display( 'facet', 'alpha' ); ?></div>
-					<?php  echo do_shortcode( '		<div class="fwp-filter">[facetwp facet="primary_care"]</div>
+					<?php echo do_shortcode( '[wpdreams_ajaxsearchpro id=1]' ); ?>
+					<div class="fwp-filter"><?php echo facetwp_display( 'facet', 'alpha' ); ?></div>
+					<?php echo do_shortcode( '		<div class="fwp-filter">[facetwp facet="primary_care"]</div>
 													<div class="fwp-filter">[facetwp facet="physician_areas_of_expertise"]</div>
 													<div class="fwp-filter">[facetwp facet="conditions"]</div>
 													<div class="fwp-filter">[facetwp facet="treatments_procedures"]</div>
@@ -73,10 +73,10 @@ get_header();
 					If you think you are experiencing a medical emergency, call 911 immediately.
 				</div>
 				<div class="row list-col-header">
-                    <div class="col result-status">
-                        <span class="result-count"><?php echo facetwp_display( 'counts' ); ?> Providers</span>
-                        <?php echo facetwp_display( 'selections' ); ?>
-                    </div>
+					<div class="col result-status">
+						<span class="result-count"><?php echo facetwp_display( 'counts' ); ?> Providers</span>
+						<?php echo facetwp_display( 'selections' ); ?>
+					</div>
 					<div class="col filter-toggle-container">
 						<!-- When button is active, add "active" class. -->
 						<button title="Toggle Filter Tray" class="filter-toggle"><span class="sr-only">Toggle Filter Tray</span><span class="fas fa-filter"></span></button>
@@ -127,5 +127,4 @@ get_header();
 		</div>
 	</main>
 </div>
-
 <?php get_footer(); ?>

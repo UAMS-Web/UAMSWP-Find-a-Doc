@@ -1,90 +1,90 @@
 {
-    "key": "group_facetwp_cards",
-    "title": "FacetWP Cards",
-    "location": [
-        [
-            {
-                "param": "block",
-                "operator": "==",
-                "value": "acf\/uamswp-fad-facetwp-cards"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "left",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": true,
-    "description": "",
-    "fields": [
-        {
-            "key": "field_facetwp_heading",
-            "label": "Heading",
-            "name": "facetwp_heading",
-            "type": "text",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "field_facetwp_template_name",
-            "label": "Template Name",
-            "name": "facetwp_template_name",
-            "type": "text",
-            "instructions": "FacetWP Shortcode Template i.e. location_cards",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "field_facetwp_background_color",
-            "label": "Background Color",
-            "name": "facetwp_background_color",
-            "type": "select",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "bg-white": "White",
-                "bg-gray": "Gray"
-            },
-            "default_value": [
-                "bg-white"
-            ],
-            "acfe_permissions": "",
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        }
-    ]
+	"key": "group_facetwp_cards",
+	"title": "FacetWP Cards",
+	"location": [
+		[
+			{
+				"param": "block",
+				"operator": "==",
+				"value": "acf\/uamswp-fad-facetwp-cards"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "left",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"fields": [
+		{
+			"key": "field_facetwp_heading",
+			"label": "Heading",
+			"name": "facetwp_heading",
+			"type": "text",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_facetwp_template_name",
+			"label": "Template Name",
+			"name": "facetwp_template_name",
+			"type": "text",
+			"instructions": "FacetWP Shortcode Template i.e. location_cards",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_facetwp_background_color",
+			"label": "Background Color",
+			"name": "facetwp_background_color",
+			"type": "select",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"bg-white": "White",
+				"bg-gray": "Gray"
+			},
+			"default_value": [
+				"bg-white"
+			],
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		}
+	]
 }

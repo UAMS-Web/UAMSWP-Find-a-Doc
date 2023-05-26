@@ -19,9 +19,9 @@ class FacetWP_Facet_Alpha_Addon extends FacetWP_Facet
         $selected_values = (array) $params['selected_values'];
 
         // if ( '' !== $selected_values ) {
-        //     // "Any" selected value = false
-        //     $any_selected = ' selected';
-        //     $any_aria_value = 'true';
+        // 	// "Any" selected value = false
+        // 	$any_selected = ' selected';
+        // 	$any_aria_value = 'true';
         // } else {
         // "Any" selected value = true
         $any_selected = ' selected';

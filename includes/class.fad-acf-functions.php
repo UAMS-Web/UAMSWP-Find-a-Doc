@@ -27,76 +27,69 @@ add_filter( 'acfcdt/settings/store_acf_values_in_core_meta', '__return_false' );
 add_filter('acf/settings/load_json', 'uamswp_fad_json_load_point');
 
 function uamswp_fad_json_load_point( $paths ) {
-    
-    // remove original path (optional)
-    // unset($paths[0]);
-    
-    
-    // append path
-    $paths[] = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) . '/assets/json/acf-json';
-    
-    
-    // return
-    return $paths;
-    
+	// remove original path (optional)
+	// unset($paths[0]);
+
+	// append path
+	$paths[] = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) . '/assets/json/acf-json';
+
+	// return
+	return $paths;
 }
 
 add_filter('acf/prepare_field/key=field_physician_portal', 'set_default_portal', 20, 3);
 add_filter('acf/prepare_field/key=field_location_portal', 'set_default_portal', 20, 3);
 function set_default_portal( $field ) {
-    // Only if no value set
-    if( empty( $field['value'] ) ){
-        $term = get_term_by('slug', 'uams-mychart', 'portal');
-        $id = $term->term_id;
-        $default = array($id);
-        // Set field to default value
-        $field[ 'value' ] = $default ;
-    }
-    return $field;
+	// Only if no value set
+	if( empty( $field['value'] ) ){
+		$term = get_term_by('slug', 'uams-mychart', 'portal');
+		$id = $term->term_id;
+		$default = array($id);
+		// Set field to default value
+		$field[ 'value' ] = $default ;
+	}
+	return $field;
 }
 add_filter('acf/load_value/key=field_physician_languages', 'set_default_language', 20, 3);
 function set_default_language($value, $post_id, $field) {
-    // Only add default content for new posts
-    if ( $value !== null ) {
-        return $value;
-    }
-    
-    $term = get_term_by('slug', 'english', 'language');
+	// Only add default content for new posts
+	if ( $value !== null ) {
+		return $value;
+	}
+
+	$term = get_term_by('slug', 'english', 'language');
 	$id = $term->term_id;
-    $value = array($id);
-  	return $value;
+	$value = array($id);
+	return $value;
 }
 
 add_filter('acf/load_value/key=field_location_region', 'set_default_region', 20, 3);
 function set_default_region($value, $post_id, $field) {
-    // Only add default content for empty fields
-    if ( $value !== null ) {
-        return $value;
-    }
-    
-    $term = get_term_by('slug', 'central', 'region');
+	// Only add default content for empty fields
+	if ( $value !== null ) {
+		return $value;
+	}
+
+	$term = get_term_by('slug', 'central', 'region');
 	$id = $term->term_id;
-    $value = array($id);
-  	return $value;
+	$value = array($id);
+	return $value;
 }
 
 // Order for Portal - None slug set to "_none"
 add_filter('acf/fields/taxonomy/wp_list_categories/key=field_location_portal', 'my_taxonomy_query', 10, 2);
 add_filter('acf/fields/taxonomy/wp_list_categories/key=field_physician_portal', 'my_taxonomy_query', 10, 2);
 function my_taxonomy_query( $args, $field ) {
-    
-    // modify args
-    $args['orderby'] = 'slug';
-    $args['order'] = 'ASC';
-    
-    
-    // return
-    return $args;
-    
+	// modify args
+	$args['orderby'] = 'slug';
+	$args['order'] = 'ASC';
+
+	// return
+	return $args;
 }
 
 // Fires before saving data to post - only updates ACF data
-add_action('acf/save_post', 'physician_save_post', 5); 
+add_action('acf/save_post', 'physician_save_post', 5);
 function physician_save_post( $post_id ) {
 	$post_type = get_post_type($post_id);
 
@@ -124,7 +117,7 @@ function physician_save_post( $post_id ) {
 			endforeach;
 		}
 
-	$full_name = $first_name .' ' .( $middle_name ? $middle_name . ' ' : '') . $last_name . ( $pedigree ? '&nbsp;' . $pedigree : '') .  ( $degree_list ? ', ' . $degree_list : '' );
+	$full_name = $first_name .' ' .( $middle_name ? $middle_name . ' ' : '') . $last_name . ( $pedigree ? '&nbsp;' . $pedigree : '') . ( $degree_list ? ', ' . $degree_list : '' );
 
 	$_POST['acf']['field_physician_full_name'] = $full_name;
 
@@ -132,7 +125,6 @@ function physician_save_post( $post_id ) {
 	$conditions = $_POST['acf']['field_physician_conditions_cpt'];
 	$treatments = $_POST['acf']['field_physician_treatments_cpt'];
 
-	
 	if ( $expertises ) {
 		$i = 1;
 		foreach( $expertises as $expertise ):
@@ -181,7 +173,7 @@ function physician_save_post( $post_id ) {
 			$region[] = get_field( 'location_region', $location);
 			$portal[] = get_field( 'location_portal', $location);
 			// break loop after first iteration = primary location
-			// break; 
+			// break;
 		endforeach;
 	}
 
@@ -190,7 +182,7 @@ function physician_save_post( $post_id ) {
 
 }
 
-add_action('acf/save_post', 'resources_save_post', 6); 
+add_action('acf/save_post', 'resources_save_post', 6);
 function resources_save_post( $post_id ) {
 	$post_type = get_post_type($post_id);
 
@@ -206,7 +198,6 @@ function resources_save_post( $post_id ) {
 	$treatments = $_POST['acf']['field_clinical_resource_treatments'];
 	$resources = $_POST['acf']['field_clinical_resource_related'];
 
-	
 	if ( $providers ) {
 		$i = 1;
 		foreach( $providers as $provider ):
@@ -285,13 +276,13 @@ function resources_save_post( $post_id ) {
 
 add_action( 'acf/save_post', 'update_facetwp_index');
 function update_facetwp_index( $post_id ) {
-    if ( function_exists( 'FWP' ) ) {
-        FWP()->indexer->index( $post_id );
-    }
+	if ( function_exists( 'FWP' ) ) {
+		FWP()->indexer->index( $post_id );
+	}
 }
 
 // Fires before saving data to post - only updates ACF data
-add_action('acf/save_post', 'location_save_post', 7); 
+add_action('acf/save_post', 'location_save_post', 7);
 function location_save_post( $post_id ) {
 	$post_type = get_post_type($post_id);
 
@@ -319,7 +310,7 @@ function location_save_post( $post_id ) {
 	if ($has_parent && !empty($location_parent)) {
 		$region = array();
 		$region[] = get_field( 'location_region', $location_parent);
-	
+
 		$_POST['acf']['field_location_region'] = $region;
 	}
 
@@ -334,7 +325,7 @@ function location_save_post_after( $post_id ) {
 	$post = get_post($post_id);
 	$location_has_parent = get_field('location_parent');
 	$location_parent_id = get_field('location_parent_id');
-	
+
 	// If location has parent & parent id set, set parent id
 	if ($location_has_parent && $location_parent_id) {
 		$post->post_parent = $location_parent_id;
@@ -458,48 +449,44 @@ function bidirectional_acf_update( $field_name, $field_key, $value, $post_id ){
 			update_field($field_key, $value2old, $post_id2old);
 		}
 	}
-
 }
 
 add_action('acf/save_post', 'custom_excerpt_acf', 50);
 function custom_excerpt_acf() {
 
-    global $post;
+	global $post;
 
-    $post_id        = ( $post->ID ); // Current post ID
-    $post_type      = get_post_type( $post_id ); // Get Post Type
+	$post_id = ( $post->ID ); // Current post ID
+	$post_type = get_post_type( $post_id ); // Get Post Type
 
-    if ( 'expertise' == $post_type || 'provider' == $post_type || 'location' == $post_type || 'clinical-resource' == $post_type  ) {
+	if ( 'expertise' == $post_type || 'provider' == $post_type || 'location' == $post_type || 'clinical-resource' == $post_type ) {
 
-        if ('expertise' == $post_type ) {
-            $post_excerpt   = get_field( 'post_excerpt', $post_id ); // ACF field
-        } elseif ( 'provider' == $post_type ) {
-            $post_excerpt   = get_field( 'physician_short_clinical_bio', $post_id ); // ACF field
-        } elseif ( 'location' == $post_type ) {
-            $post_excerpt   = get_field( 'location_short_desc', $post_id ); // ACF field
-        } elseif ( 'clinical-resource' == $post_type ){
-			$post_excerpt   = get_field( 'clinical_resource_excerpt', $post_id );
+		if ('expertise' == $post_type ) {
+			$post_excerpt = get_field( 'post_excerpt', $post_id ); // ACF field
+		} elseif ( 'provider' == $post_type ) {
+			$post_excerpt = get_field( 'physician_short_clinical_bio', $post_id ); // ACF field
+		} elseif ( 'location' == $post_type ) {
+			$post_excerpt = get_field( 'location_short_desc', $post_id ); // ACF field
+		} elseif ( 'clinical-resource' == $post_type ){
+			$post_excerpt = get_field( 'clinical_resource_excerpt', $post_id );
 		}
 
-        if ( ( !empty( $post_id ) ) AND ( $post_excerpt ) ) {
+		if ( ( !empty( $post_id ) ) AND ( $post_excerpt ) ) {
 
-            $post_array     = array(
+			$post_array = array(
 
-                'ID'            => $post_id,
-                'post_excerpt'	=> $post_excerpt
+				'ID' => $post_id,
+				'post_excerpt' => $post_excerpt
 
-            );
+			);
 
-            remove_action('save_post', 'custom_excerpt_acf', 50); // Unhook this function so it doesn't loop infinitely
+			remove_action('save_post', 'custom_excerpt_acf', 50); // Unhook this function so it doesn't loop infinitely
 
-            wp_update_post( $post_array );
+			wp_update_post( $post_array );
 
-            add_action( 'save_post', 'custom_excerpt_acf', 50); // Re-hook this function
-
-        }
-    
-    }
-
+			add_action( 'save_post', 'custom_excerpt_acf', 50); // Re-hook this function
+		}
+	}
 }
 
 // Custom Blocks
@@ -552,41 +539,41 @@ if( function_exists('acf_register_block_type') ):
 			'multiple' => true,
 		),
 	));
-	
+
 endif;
 
 
 /**
  * FacetWP Cards Block Callback Function.
  *
- * @param   array $block The block settings and attributes.
- * @param   string $content The block inner HTML (empty).
- * @param   bool $is_preview True during AJAX preview.
- * @param   (int|string) $post_id The post ID this block is saved to.
+ * @param	array $block The block settings and attributes.
+ * @param	string $content The block inner HTML (empty).
+ * @param	bool $is_preview True during AJAX preview.
+ * @param 	(int|string) $post_id The post ID this block is saved to.
  */
 function fad_facetwp_cards_callback( $block, $content = '', $is_preview = false, $post_id = 0 ) {
 
-    // Create id attribute allowing for custom "anchor" value.
-    $id = 'facetwp-cards-' . $block['id'];
-    if( !empty($block['anchor']) ) {
-        $id = $block['anchor'];
-    }
+	// Create id attribute allowing for custom "anchor" value.
+	$id = 'facetwp-cards-' . $block['id'];
+	if( !empty($block['anchor']) ) {
+		$id = $block['anchor'];
+	}
 
-    // Create class attribute allowing for custom "className" and "align" values.
-    $className = 'facetwp-cards';
-    if( !empty($block['className']) ) {
-        $className .= ' ' . $block['className'];
-    }
-    if( !empty($block['align']) ) {
-        $className .= ' align' . $block['align'];
-    }
+	// Create class attribute allowing for custom "className" and "align" values.
+	$className = 'facetwp-cards';
+	if( !empty($block['className']) ) {
+		$className .= ' ' . $block['className'];
+	}
+	if( !empty($block['align']) ) {
+		$className .= ' align' . $block['align'];
+	}
 
-    // Load values and assing defaults.
-    $heading = get_field('facetwp_heading') ?: 'Cards List';
-    $template = get_field('facetwp_template_name');
-    $background_color = get_field('facetwp_background_color') ?: 'bg-white';
+	// Load values and assing defaults.
+	$heading = get_field('facetwp_heading') ?: 'Cards List';
+	$template = get_field('facetwp_template_name');
+	$background_color = get_field('facetwp_background_color') ?: 'bg-white';
 
-    ?>
+	?>
 	<section class="uams-module container-fluid p-8 p-sm-10 <?php echo $className; ?> <?php echo $background_color; ?>">
 		<div class="row">
 			<div class="col-12">
@@ -597,44 +584,44 @@ function fad_facetwp_cards_callback( $block, $content = '', $is_preview = false,
 			</div>
 		</div>
 	</section>
-    <?php
+	<?php
 }
 
 /**
  * FacetWP Cards Block Callback Function.
  *
- * @param   array $block The block settings and attributes.
- * @param   string $content The block inner HTML (empty).
- * @param   bool $is_preview True during AJAX preview.
- * @param   (int|string) $post_id The post ID this block is saved to.
+ * @param	array $block The block settings and attributes.
+ * @param	string $content The block inner HTML (empty).
+ * @param	bool $is_preview True during AJAX preview.
+ * @param	(int|string) $post_id The post ID this block is saved to.
  */
 function fad_facetwp_blocks_callback( $block, $content = '', $is_preview = false, $post_id = 0 ) {
 
-    // Create id attribute allowing for custom "anchor" value.
-    $id = 'facetwp-block-' . $block['id'];
-    if( !empty($block['anchor']) ) {
-        $id = $block['anchor'];
-    }
+	// Create id attribute allowing for custom "anchor" value.
+	$id = 'facetwp-block-' . $block['id'];
+	if( !empty($block['anchor']) ) {
+		$id = $block['anchor'];
+	}
 
-    // Create class attribute allowing for custom "className" and "align" values.
-    $className = 'facetwp-blocks';
-    if( !empty($block['className']) ) {
-        $className .= ' ' . $block['className'];
-    }
-    if( !empty($block['align']) ) {
-        $className .= ' align' . $block['align'];
-    }
+	// Create class attribute allowing for custom "className" and "align" values.
+	$className = 'facetwp-blocks';
+	if( !empty($block['className']) ) {
+		$className .= ' ' . $block['className'];
+	}
+	if( !empty($block['align']) ) {
+		$className .= ' align' . $block['align'];
+	}
 
-    // Load values and assing defaults.
+	// Load values and assing defaults.
 	$heading = get_field('facetwp_block_heading') ?: 'Cards List';
 	$hideheading = get_field('facetwp_block_hide_heading');
 	$prefacets = get_field('facetwp_block_pre_template_facets');
 	$template = get_field('facetwp_block_facet_template');
 	$postfacets = get_field('facetwp_block_post_template_facets');
 	$pager = get_field('facetwp_block_include_pager');
-    $background_color = get_field('facetwp_block_background_color') ?: 'bg-white';
+	$background_color = get_field('facetwp_block_background_color') ?: 'bg-white';
 
-    ?>
+	?>
 	<section class="uams-module <?php echo $className; ?> <?php echo $background_color; ?>">
 		<div class="container-fluid">
 			<div class="row">
@@ -646,7 +633,7 @@ function fad_facetwp_blocks_callback( $block, $content = '', $is_preview = false
 							foreach ($prefacets as $prefacet) {
 								echo '<div class="text-'. $prefacet['alignment'] .'">'. facetwp_display( 'facet', $prefacet['facet_name'] ) .'</div>';
 							}
-						} 
+						}
 						?>
 						<?php echo facetwp_display( 'template', $template ); ?>
 						<?php 
@@ -654,7 +641,7 @@ function fad_facetwp_blocks_callback( $block, $content = '', $is_preview = false
 							foreach ($postfacets as $postfacet) {
 								echo '<div class="text-'. $postfacet['alignment'] .'">'. facetwp_display( 'facet', $postfacet['facet_name'] ) .'</div>';
 							}
-						} 
+						}
 						echo ($pager ? facetwp_display( 'pager' ) : '');
 						?>
 					</div>
@@ -662,7 +649,7 @@ function fad_facetwp_blocks_callback( $block, $content = '', $is_preview = false
 			</div>
 		</div>
 	</section>
-    <?php
+	<?php
 }
 add_action('acf/render_field/name=location_current_alert', 'location_current_alert_message');
 function location_current_alert_message(){
@@ -675,7 +662,7 @@ function location_current_alert_message(){
 	if (!empty($alert_title) && !empty($alert_body)) {
 
 		$alert_txt = '<blockquote class="notice notice-warning">';
-		$alert_txt .=  '<h3 class="notice-title">'. $alert_title .'</h3>';
+		$alert_txt .= '<h3 class="notice-title">'. $alert_title .'</h3>';
 		$alert_txt .= $alert_body;
 		$alert_txt .= '<hr />';
 		$alert_txt .= '<p><strong>Alert color:</strong> '. ucfirst(str_replace( 'alert-', '', $alert_color)) .'</p>';
@@ -685,8 +672,8 @@ function location_current_alert_message(){
 
 	} else {
 		echo 'None active';
-	}  
-    
+	}
+
 }
 add_action('acf/render_field/name=location_current_prescription_clinic', 'location_current_prescription_clinic_message');
 function location_current_prescription_clinic_message(){
@@ -704,8 +691,8 @@ function location_current_prescription_clinic_message(){
 
 	} else {
 		echo 'None active';
-	}  
-    
+	}
+
 }
 add_action('acf/render_field/name=location_current_prescription_pharm', 'location_current_prescription_pharm_message');
 function location_current_prescription_pharm_message(){
@@ -723,48 +710,48 @@ function location_current_prescription_pharm_message(){
 
 	} else {
 		echo 'None active';
-	}  
-    
+	}
+
 }
 
 add_filter('acf/fields/post_object/query/key=field_location_parent_id', 'limit_post_top_level', 10, 3);
 
 function limit_post_top_level( $args, $field, $post ) {
 
-    $args['post_parent'] = 0;
-    // $args['sort_order'] = 'ASC';
-    // $args['orderby'] = 'title';
-    // $args['order'] = 'ASC';
-    $args['post_status'] = 'publish';
+	$args['post_parent'] = 0;
+	// $args['sort_order'] = 'ASC';
+	// $args['orderby'] = 'title';
+	// $args['order'] = 'ASC';
+	$args['post_status'] = 'publish';
 
-    return $args;
+	return $args;
 }
 
 /*
 		ACF Image Field Image Aspect Ratio Validation
 		Adds a field setting to ACF Image fields and validates images
 		to ensure that they meet image aspect ratio requirement
-		
+
 		This also serves as an example of how to add multiple settings
 		to a single row when adding settings to an ACF field type
-		
+
 		side note: after implementing this code clear your browser cache
 		to ensure the needed JS and WP media window is refreshed
-		
+
 		What is "Margin"?
-		
+
 		Let's say that you set an aspect ratio of 1:1 with a margin of 10%
 		If the width of the image is 100 pixels, this means that the
 		height of the image can be from 90 pixels to 110 pixels
 		100 +/- 10% (10px)
-		
+
 		If the aspect ration is set to 4:3 and the margin at 1%
 		if the width of the uploaded image is 800 pixels
 		then the height can be 594 to 606 pixels
 		600 +/- 1% (6px)
-		
+
 	*/
-	
+
 	// add new settings for aspect ratio to image field
 	add_filter('acf/render_field_settings/type=image', 'acf_image_aspect_ratio_settings', 20);
 	function acf_image_aspect_ratio_settings($field) {
@@ -785,7 +772,7 @@ function limit_post_top_level( $args, $field, $post ) {
 			'prepend' => __('Width'),
 		);
 		acf_render_field_setting($field, $args);
-		
+
 		$args = array(
 			'name' => 'ratio_height',
 			'type' => 'number',
@@ -796,7 +783,7 @@ function limit_post_top_level( $args, $field, $post ) {
 			'step' => 1,
 			'prepend' => __('Height'),
 			// this how we append a setting to the previous one
-			'wrapper'		=> array(
+			'wrapper' => array(
 				'data-append' => 'ratio_width',
 				'width' => '',
 				'class' => '',
@@ -804,7 +791,7 @@ function limit_post_top_level( $args, $field, $post ) {
 			)
 		);
 		acf_render_field_setting($field, $args);
-		
+
 		$args = array(
 			'name' => 'ratio_margin',
 			'type' => 'number',
@@ -813,8 +800,8 @@ function limit_post_top_level( $args, $field, $post ) {
 			'min' => 0,
 			'step' => .5,
 			'prepend' => __('&plusmn;'),
-			'append'		=> __('%'),
-			'wrapper'		=> array(
+			'append' => __('%'),
+			'wrapper' => array(
 				'data-append' => 'ratio_width',
 				'width' => '',
 				'class' => '',
@@ -823,13 +810,13 @@ function limit_post_top_level( $args, $field, $post ) {
 		);
 		acf_render_field_setting($field, $args);
 	} // end function acf_image_aspect_ratio_settings	
-	
+
 	// add filter to validate images to ratio
 	add_filter('acf/validate_attachment/type=image', 'acf_image_aspect_ratio_validate', 10, 5);
 	function acf_image_aspect_ratio_validate($errors, $file, $attachment, $field, $content) {
 		// check to make sure everything has a value
 		if (empty($field['ratio_width']) || empty($field['ratio_height']) ||
-		    empty($file['width']) || empty($file['height'])) {
+			empty($file['width']) || empty($file['height'])) {
 			// values we need are not set or otherwise empty
 			// bail early
 			return $errors;
@@ -859,7 +846,7 @@ function limit_post_top_level( $args, $field, $post ) {
 		if ($height < $min || $height > $max) {
 			// does not meet the requirement, generate an error
 			$errors['aspect_ratio'] = __('Image does not meet Aspect Ratio Requirements of ').
-			                          $ratio_width.__(':').$ratio_height.__(' (±').($margin*100).__('%)');
+			$ratio_width.__(':').$ratio_height.__(' (±').($margin*100).__('%)');
 		}
 		// return the errors
 		return $errors;
@@ -880,21 +867,21 @@ add_filter('acf/fields/relationship/query/key=field_expertise_associated', 'rela
 // 2. Add the $field and $post arguments.
 function relationship_exclude_id ( $args, $field, $post_id ) {
 
-    //3. $post argument passed in from the query hook is the $post_id.
-    $args['post__not_in'] = array( $post_id );
-    
-    return $args;
+	//3. $post argument passed in from the query hook is the $post_id.
+	$args['post__not_in'] = array( $post_id );
+
+	return $args;
 }
 
 // Conditional Logic to check if Find-a-Doc Settings are set to allow MyChart Scheduling
 function uamswp_mychart_scheduling_query($field) {
-    // Set to field name for option
-    if(get_field('mychart_scheduling_query_system', 'option')){
+	// Set to field name for option
+	if(get_field('mychart_scheduling_query_system', 'option')){
 		return $field;
-    }
-    else{
-        return;
-    }
+	}
+	else{
+		return;
+	}
 }
 // Make sure to use correct field key for tab
 add_filter('acf/prepare_field/key=field_location_scheduling_tab', 'uamswp_mychart_scheduling_query', 20);
