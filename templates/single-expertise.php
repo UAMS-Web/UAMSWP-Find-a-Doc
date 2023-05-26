@@ -155,10 +155,14 @@ function custom_expertise_nav_menu() {
 	global $show_locations_section;
 	global $show_related_aoe_section;
 	global $show_related_resource_section;
-	global $parent_expertise;
+	global $child_pages;
+	global $show_child_aoe_section;
+	global $show_child_content_nav;
+	global $childnav;
 	global $post;
 	global $page_title;
 	global $page_id;
+	global $parent_expertise;
 	global $content_type;
 
 	if ($parent_expertise && "0" == $content_type) {
