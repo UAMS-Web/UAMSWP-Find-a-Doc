@@ -158,13 +158,11 @@ add_action( 'template_redirect', 'provider_image_rewrite_templates' );
 
 add_filter( 'body_class', 'uamswp_fad_body_class' );
 function uamswp_fad_body_class( $classes ) {
-
 	if ( is_tax( 'condition' ) || is_tax( 'treatment' ) ) {
 		$classes[] = 'page-template-default';
 	}
 
 	return $classes;
-
 }
 // Custom redirect to archive page for providers & locations
 add_action( 'template_redirect', function() {

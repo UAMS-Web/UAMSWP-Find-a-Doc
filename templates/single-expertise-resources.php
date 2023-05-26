@@ -1,8 +1,6 @@
 <?php
 /*
- *
  * Template Name: Fake Area of Expertise Clinical Resources Subpage
- *
  */
 
 // Set general variables
@@ -287,7 +285,6 @@ function uamswp_expertise_physicians() {
 			);
 			$physicians_query = New WP_Query( $args );
 		}
-
 		$provider_count = count($physicians_query->posts);
 		?>
 		<section class="uams-module bg-auto" id="providers">
@@ -434,7 +431,6 @@ function uamswp_expertise_locations() {
 			$location_query = New WP_Query( $args );
 		}
 
-
 		?>
 		<section class="uams-module location-list bg-auto" id="locations">
 			<div class="container-fluid">
@@ -507,7 +503,6 @@ function uamswp_expertise_header_metadata() {
 			$keyword_text .= str_replace(",", "", $keyword['text']);
 			$i++;
 		}
-
 		echo '<meta name="keywords" content="'. $keyword_text .'" />';
 	endif;
 }
@@ -570,7 +565,6 @@ function uamswp_list_child_expertise() {
 	global $page_id;
 	global $page_title;
 	global $show_child_aoe_section;
-
 	if ( $show_child_aoe_section ) { // If it's suppressed or none available, set to false
 		$args = array(
 			"post_type" => "expertise",
@@ -621,7 +615,6 @@ function uamswp_list_child_expertise() {
 }
 function uamswp_expertise_appointment() {
 	global $show_appointment_section;
-
 	if ( $show_appointment_section ) {
 		if ( get_field('location_expertise') ) {
 			$appointment_location_url = '#locations';

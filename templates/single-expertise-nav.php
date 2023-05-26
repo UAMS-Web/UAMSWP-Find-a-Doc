@@ -1,8 +1,6 @@
 <?php
 /*
- *
  * Expertise Nav
- *
  */
 
 require_once( 'modules/class-wp-bootstrap-pagewalker.php' );

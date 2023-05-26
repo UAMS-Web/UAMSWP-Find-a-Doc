@@ -1,9 +1,9 @@
 <?php 
 /* 
- * Creates fake subpages for a Area of Expertise custom post type
+ * 	Creates fake subpages for a Area of Expertise custom post type
  * 
- * Based on: https://web.archive.org/web/20120724003555/https://www.placementedge.com/blog/create-post-sub-pages/
- * Based on: https://web.archive.org/web/20120304064323/https://betterwp.net/98-wordpress-create-fake-pages/
+ * 	Based on: https://web.archive.org/web/20120724003555/https://www.placementedge.com/blog/create-post-sub-pages/
+ * 	Based on: https://web.archive.org/web/20120304064323/https://betterwp.net/98-wordpress-create-fake-pages/
  * 
 */
 
@@ -20,13 +20,11 @@ function fsp_insertrules($rules)
 		'resources' => 'Clinical Resources',
 		'related' => 'Related Areas of Expertise'
 	);
-
 	// Loop through each of the fake subpages
 	foreach ($my_fake_pages as $slug => $title) {
 		// Add a rewrite rule that transforms a URL structure to a set of query vars
 		add_rewrite_rule('expertise/([^/]+)/' . $slug . '/?$', 'index.php?expertise=$matches[1]&fpage=' . $slug, 'top');
 	}
-
 }
 add_action( 'init', 'fsp_insertrules' );
 
