@@ -1190,3 +1190,106 @@ function uamswp_fad_disable_scripts() {
 }
 
 add_action('wp_enqueue_scripts', 'uamswp_fad_disable_scripts', 100);
+
+// Get site header values for ontology subsections
+function uamswp_fad_ontology_header() {
+	// Bring in variables from outside the function
+	global $page_id;
+	global $page_title;
+	global $page_url;
+	global $content_type;
+
+	// Send variables out from inside the function
+	global $navbar_subbrand_title;
+	global $navbar_subbrand_title_url;
+	global $navbar_subbrand_parent;
+	global $navbar_subbrand_parent_url;
+
+	// Ancestors
+	$ancestors = get_post_ancestors($page_id); // Get all ancestors
+
+	// Get only the ancestors with the ontology type
+	$ancestors_ontology = array();
+	if ( $ancestors ) {
+		foreach( $ancestors as $ancestor ) {
+			$ancestor_content_type = get_field('expertise_type', $ancestor); // True is ontology type, false is content type
+			if ( $ancestor_content_type ) {
+				$ancestors_ontology[] = $ancestor;
+			}
+		}
+	}
+
+	// Count the ancestors with ontology type
+	$ancestors_ontology_count = count($ancestors_ontology);
+	$has_ancestors_ontology = $ancestors_ontology_count ? true : false;
+
+	// Get the farthest ancestor with ontology type
+	$ancestors_ontology_farthest = end($ancestors_ontology);
+
+		// Get the values for farthest ancestor
+		$ancestors_ontology_farthest_obj = '';
+		$ancestors_ontology_farthest_title = '';
+		$ancestors_ontology_farthest_title_attr = '';
+		$ancestors_ontology_farthest_url = '';
+		if ( $has_ancestors_ontology && $ancestors_ontology_farthest ) {
+			$ancestors_ontology_farthest_obj = get_post( $ancestors_ontology_farthest );
+		}
+		if ( $ancestors_ontology_farthest_obj ) {
+			$ancestors_ontology_farthest_title = $ancestors_ontology_farthest_obj->post_title;
+			$ancestors_ontology_farthest_title_attr = str_replace('"', '\'', $ancestors_ontology_farthest_title);
+			$ancestors_ontology_farthest_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($ancestors_ontology_farthest_title_attr, null, 'utf-8')));
+			$ancestors_ontology_farthest_url = get_permalink( $ancestors_ontology_farthest );
+		}
+
+	// Get the closest ancestor with the ontology type
+	$ancestors_ontology_closest = reset($ancestors_ontology);
+
+		// Get the values for closest ancestor
+		$ancestors_ontology_closest_obj = '';
+		$ancestors_ontology_closest_title = '';
+		$ancestors_ontology_closest_title_attr = '';
+		$ancestors_ontology_closest_url = '';
+		if ( $has_ancestors_ontology && $ancestors_ontology_closest ) {
+			$ancestors_ontology_closest_obj = get_post( $ancestors_ontology_closest );
+		}
+		if ( $ancestors_ontology_closest_obj ) {
+			$ancestors_ontology_closest_title = $ancestors_ontology_closest_obj->post_title;
+			$ancestors_ontology_closest_title_attr = str_replace('"', '\'', $ancestors_ontology_closest_title);
+			$ancestors_ontology_closest_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($ancestors_ontology_closest_title_attr, null, 'utf-8')));
+			$ancestors_ontology_closest_url = get_permalink( $ancestors_ontology_closest );
+		}
+
+	// Set the values of the navbar-subbrand elements
+	if ( $content_type ) {
+		// If the page has the ontology type...
+		// Set the navbar-subbrand title element using the page's values 
+		$navbar_subbrand_title = $page_title;
+		$navbar_subbrand_title_url = $page_url;
+		if ( $ancestors_ontology_farthest ) {
+			// If a farthest ancestor with the ontology type exists
+			// Set the navbar-subbrand parent element using the that ancestor's values 
+			$navbar_subbrand_parent = $ancestors_ontology_farthest_title;
+			$navbar_subbrand_parent_url = $ancestors_ontology_farthest_url;
+		} else {
+			// Otherwise, do not define the navbar-subbrand parent element
+			$navbar_subbrand_parent = '';
+			$navbar_subbrand_parent_url = '';
+		}
+	} else {
+		// If the page  does not have the ontology type...
+		// Set the navbar-subbrand title element using the values of the closest ancestor with the ontology type
+		$navbar_subbrand_title = $ancestors_ontology_closest_title;
+		$navbar_subbrand_title_url = $ancestors_ontology_closest_url;
+		if ( $ancestors_ontology_farthest && ( $ancestors_ontology_closest !== $ancestors_ontology_farthest ) ) {
+			// If a farthest ancestor with the ontology type exists...
+			// And if closest and farthest ancestors with the ontology type are not the same...
+			// Set the navbar-subbrand parent element using the values of the farthest ancestor with the ontology type
+			$navbar_subbrand_parent = $ancestors_ontology_farthest_title;
+			$navbar_subbrand_parent_url = $ancestors_ontology_farthest_url;
+		} else {
+			// Otherwise, do not define the navbar-subbrand parent element
+			$navbar_subbrand_parent = '';
+			$navbar_subbrand_parent_url = '';
+		}
+	}
+}
