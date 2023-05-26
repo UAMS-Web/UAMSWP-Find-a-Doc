@@ -17,6 +17,7 @@ function fsp_insertrules($rules)
 	$my_fake_pages = array(
 		'providers' => 'Providers',
 		'locations' => 'Locations',
+		'specialties' => 'Specialties',
 		'resources' => 'Clinical Resources',
 		'related' => 'Related Areas of Expertise'
 	);
