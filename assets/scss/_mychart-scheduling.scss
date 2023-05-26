@@ -1,40 +1,40 @@
 .mychart-scheduling-module {
-    .module-body {
-        width: 700px; // extend width to accommodate embedded open scheduling widget's width
-    }
+	.module-body {
+		width: 700px; // extend width to accommodate embedded open scheduling widget's width
+	}
 
-    .mychart-scheduling-select {
-        display: flex;
-        justify-content: center;
+	.mychart-scheduling-select {
+		display: flex;
+		justify-content: center;
 
-        .form-group {
-            &:last-child {
-                margin-bottom: 0;
-            }
+		.form-group {
+			&:last-child {
+				margin-bottom: 0;
+			}
 
-            label {
-                display: block;
-                font-weight: $font-weight-bold;
-                text-align: center;
-            }
-            select, select option {
-                font-size: $lead-font-size;
-                font-weight: $font-weight-base;
-            }
-        }
-    }
+			label {
+				display: block;
+				font-weight: $font-weight-bold;
+				text-align: center;
+			}
+			select, select option {
+				font-size: $lead-font-size;
+				font-weight: $font-weight-base;
+			}
+		}
+	}
 
-    .mychart-scheduling {
-        &:not(:empty) {
-            margin-top: $uams-module-padding-mobile;
+	.mychart-scheduling {
+		&:not(:empty) {
+			margin-top: $uams-module-padding-mobile;
 
-            @include media-breakpoint-up(sm) {
-                margin-top: $uams-module-padding;
-            }
-        }
+			@include media-breakpoint-up(sm) {
+				margin-top: $uams-module-padding;
+			}
+		}
 
-        .more p {
-            @include line-length-em(max);
-        }
-    }
+		.more p {
+			@include line-length-em(max);
+		}
+	}
 }

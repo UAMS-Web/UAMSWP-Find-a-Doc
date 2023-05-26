@@ -1,751 +1,751 @@
 {
-    "key": "group_clinical_resources",
-    "title": "Resources",
-    "fields": [
-        {
-            "key": "field_clinical_resource_excerpt",
-            "label": "Excerpt",
-            "name": "clinical_resource_excerpt",
-            "type": "textarea",
-            "instructions": "What is the resource about? <br />Limit of 160 characters. Preferred length is at least 110 characters.",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "75",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "maxlength": 160,
-            "rows": 4,
-            "new_lines": "",
-            "acfe_textarea_code": 0
-        },
-        {
-            "key": "field_clinical_resource_featured_image",
-            "label": "Featured Image",
-            "name": "_thumbnail_id",
-            "type": "image",
-            "instructions": "This image will be used for social sharing and displaying across UAMS web content. It is restricted to a 16:9 aspect ratio and has a minimum dimension of 1200x675.",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "75",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "id",
-            "preview_size": "medium",
-            "library": "all",
-            "min_width": 1200,
-            "min_height": 675,
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
+	"key": "group_clinical_resources",
+	"title": "Resources",
+	"fields": [
+		{
+			"key": "field_clinical_resource_excerpt",
+			"label": "Excerpt",
+			"name": "clinical_resource_excerpt",
+			"type": "textarea",
+			"instructions": "What is the resource about? <br />Limit of 160 characters. Preferred length is at least 110 characters.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "75",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 160,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_clinical_resource_featured_image",
+			"label": "Featured Image",
+			"name": "_thumbnail_id",
+			"type": "image",
+			"instructions": "This image will be used for social sharing and displaying across UAMS web content. It is restricted to a 16:9 aspect ratio and has a minimum dimension of 1200x675.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "75",
+				"class": "",
+				"id": ""
+			},
+			"return_format": "id",
+			"preview_size": "medium",
+			"library": "all",
+			"min_width": 1200,
+			"min_height": 675,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "",
 			"ratio_width": 16,
 			"ratio_height": 9,
 			"ratio_margin": 20,
-            "acfe_thumbnail": 0,
-            "acfe_validate": "",
-            "acfe_update": ""
-        },
-        {
-            "key": "field_clinical_resource_image_square",
-            "label": "Square Image",
-            "name": "clinical_resource_image_square",
-            "type": "image",
-            "instructions": "The featured image will switch between a 16:9 aspect ratio and a 1:1 aspect ratio on the Clinical Resource Archive. If the automatically-cropped square version of the image, which takes the centermost portion, is not ideal, you may upload a square version cropped specifically for this purpose. It should just be an alternate crop of the same source image. It is restricted to a 1:1 aspect ratio and has a minimum dimension of 675x675.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "75",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "id",
-            "preview_size": "medium",
-            "library": "all",
-            "min_width": 675,
-            "min_height": 675,
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
+			"acfe_thumbnail": 0,
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_clinical_resource_image_square",
+			"label": "Square Image",
+			"name": "clinical_resource_image_square",
+			"type": "image",
+			"instructions": "The featured image will switch between a 16:9 aspect ratio and a 1:1 aspect ratio on the Clinical Resource Archive. If the automatically-cropped square version of the image, which takes the centermost portion, is not ideal, you may upload a square version cropped specifically for this purpose. It should just be an alternate crop of the same source image. It is restricted to a 1:1 aspect ratio and has a minimum dimension of 675x675.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "75",
+				"class": "",
+				"id": ""
+			},
+			"return_format": "id",
+			"preview_size": "medium",
+			"library": "all",
+			"min_width": 675,
+			"min_height": 675,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "",
 			"ratio_width": 1,
 			"ratio_height": 1,
 			"ratio_margin": 0,
-            "acfe_thumbnail": 0,
-            "acfe_validate": "",
-            "acfe_update": ""
-        },
-        {
-            "key": "field_clinical_resource_asp_filter",
-            "name": "clinical_resource_asp_filter",
-            "type": "acfe_hidden",
-            "label": "Ajax Search Filter",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": ""
-        },
-        {
-            "key": "field_clinical_resource_type",
-            "label": "Resource Type",
-            "name": "clinical_resource_type",
-            "type": "select",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "text": "Article",
-                "infographic": "Infographic",
-                "video": "Video",
-                "doc": "Document"
-            },
-            "default_value": false,
-            "allow_null": 0,
-            "multiple": 0,
-            "ui": 1,
-            "ajax": 0,
-            "return_format": "array",
-            "allow_custom": 0,
-            "search_placeholder": "Select one",
-            "placeholder": ""
-        },
-        {
-            "key": "field_clinical_resource_text_nci_query",
-            "label": "Is this this National Cancer Institute (NCI) syndicated content?",
-            "name": "clinical_resource_text_nci_query",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_clinical_resource_type",
-                        "operator": "==",
-                        "value": "text"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_clinical_resource_text",
-            "label": "Article Content",
-            "name": "clinical_resource_text",
-            "type": "wysiwyg",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_clinical_resource_type",
-                        "operator": "==",
-                        "value": "text"
-                    },
-                    {
-                        "field": "field_clinical_resource_text_nci_query",
-                        "operator": "==",
-                        "value": "0"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 1
-        },
-        {
-            "key": "field_clinical_resource_nci_embed",
-            "name": "clinical_resource_nci_embed",
-            "type": "textarea",
-            "label": "National Cancer Institute (NCI) Syndication Embed / Syndication Code",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_clinical_resource_type",
-                        "operator": "==",
-                        "value": "text"
-                    },
-                    {
-                        "field": "field_clinical_resource_text_nci_query",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": 6,
-            "new_lines": ""
-        },
-        {
-            "key": "field_clinical_resource_infographic",
-            "label": "Infographic",
-            "name": "clinical_resource_infographic",
-            "type": "image",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_clinical_resource_type",
-                        "operator": "==",
-                        "value": "infographic"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "uploader": "wp",
-            "acfe_thumbnail": 0,
-            "return_format": "id",
-            "preview_size": "medium",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
-            "ratio_width": 0,
-            "ratio_height": 0,
-            "ratio_margin": 0
-        },
-        {
-            "key": "field_clinical_resource_infographic_descr",
-            "label": "Infographic Introduction \/ Description",
-            "name": "clinical_resource_infographic_descr",
-            "type": "wysiwyg",
-            "instructions": "Describe the purpose of the infographic and entice users to look at it.",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_clinical_resource_type",
-                        "operator": "==",
-                        "value": "infographic"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "basic",
-            "media_upload": 0,
-            "delay": 1
-        },
-        {
-            "key": "field_clinical_resource_infographic_transcript",
-            "label": "Transcript",
-            "name": "clinical_resource_infographic_transcript",
-            "type": "wysiwyg",
-            "instructions": "Full-text version of the infographic so that we ensure the content of the infographic is accessible to all, including people with disabilities who cannot see images",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_clinical_resource_type",
-                        "operator": "==",
-                        "value": "infographic"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "basic",
-            "media_upload": 0,
-            "delay": 1
-        },
-        {
-            "key": "field_clinical_resource_video",
-            "label": "Youtube or Vimeo Video",
-            "name": "clinical_resource_video",
-            "type": "url",
-            "instructions": "Enter YouTube or Vimeo URL, including https:\/\/",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_clinical_resource_type",
-                        "operator": "==",
-                        "value": "video"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": ""
-        },
-        {
-            "key": "field_clinical_resource_video_descr",
-            "label": "Video Introduction \/ Description",
-            "name": "clinical_resource_video_descr",
-            "type": "wysiwyg",
-            "instructions": "Describe the purpose of the video and entice users to watch it.",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_clinical_resource_type",
-                        "operator": "==",
-                        "value": "video"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 0,
-            "delay": 1
-        },
-        {
-            "key": "field_clinical_resource_video_transcript",
-            "label": "Transcript",
-            "name": "clinical_resource_video_transcript",
-            "type": "wysiwyg",
-            "instructions": "Full-text version of the video so that we ensure the content of the video is accessible to all, including people with disabilities who cannot hear audio or see video",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_clinical_resource_type",
-                        "operator": "==",
-                        "value": "video"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "basic",
-            "media_upload": 0,
-            "delay": 1
-        },
-        {
-            "key": "field_clinical_resource_document_descr",
-            "label": "Document Introduction \/ Description",
-            "name": "clinical_resource_document_descr",
-            "type": "wysiwyg",
-            "instructions": "Summarize the key points and critical information from the attached document(s).",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_clinical_resource_type",
-                        "operator": "==",
-                        "value": "doc"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 0,
-            "delay": 1
-        },
-        {
-            "key": "field_clinical_resource_document",
-            "label": "Document(s)",
-            "name": "clinical_resource_document",
-            "type": "repeater",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_clinical_resource_type",
-                        "operator": "==",
-                        "value": "doc"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_repeater_stylised_button": 0,
-            "collapsed": "field_document_title",
-            "min": 0,
-            "max": 0,
-            "layout": "table",
-            "button_label": "Add Document",
-            "sub_fields": [
-                {
-                    "key": "field_document_title",
-                    "label": "Title",
-                    "name": "document_title",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "60",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_document_file",
-                    "label": "File",
-                    "name": "document_file",
-                    "type": "file",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "40",
-                        "class": "",
-                        "id": ""
-                    },
-                    "uploader": "wp",
-                    "return_format": "array",
-                    "library": "all",
-                    "min_size": "",
-                    "max_size": "",
-                    "mime_types": "pdf"
-                }
-            ]
-        },
-        {
-            "key": "field_clinical_resource_relationships",
-            "label": "Relationships",
-            "name": "",
-            "type": "message",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "new_lines": "",
-            "esc_html": 0
-        },
-        {
-            "key": "field_clinical_resource_providers",
-            "label": "Provider(s)",
-            "name": "clinical_resource_providers",
-            "type": "relationship",
-            "instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "provider"
-            ],
-            "taxonomy": "",
-            "filters": [
-                "search"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_physician_clinical_resources"
-            }
-        },
-        {
-            "key": "field_clinical_resource_locations",
-            "label": "Location(s)",
-            "name": "clinical_resource_locations",
-            "type": "relationship",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "location"
-            ],
-            "taxonomy": "",
-            "filters": [
-                "search"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_location_clinical_resources"
-            }
-        },
-        {
-            "key": "field_clinical_resource_aoe",
-            "label": "Areas of Expertise",
-            "name": "clinical_resource_aoe",
-            "type": "relationship",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "expertise"
-            ],
-            "taxonomy": "",
-            "filters": [
-                "search"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_expertise_clinical_resources"
-            }
-        },
-        {
-            "key": "field_clinical_resource_conditions",
-            "label": "Condition(s)",
-            "name": "clinical_resource_conditions",
-            "type": "relationship",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "condition"
-            ],
-            "taxonomy": "",
-            "filters": [
-                "search"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_condition_clinical_resources"
-            }
-        },
-        {
-            "key": "field_clinical_resource_treatments",
-            "label": "Treatment(s) & Procedure(s)",
-            "name": "clinical_resource_treatments",
-            "type": "relationship",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "treatment"
-            ],
-            "taxonomy": "",
-            "filters": [
-                "search"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": "field_treatment_procedure_clinical_resources"
-            }
-        },
-        {
-            "key": "field_clinical_resource_related",
-            "label": "Related Clinical Resources",
-            "name": "clinical_resource_related",
-            "type": "relationship",
-            "instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "clinical-resource"
-            ],
-            "taxonomy": "",
-            "filters": [
-                "search"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "id",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "1",
-                "acfe_bidirectional_related": [
-                    "field_clinical_resource_related"
-                ]
-            }
-        },
-        {
-            "key": "field_clinical_resource_syndicated",
-            "label": "Is this syndicated from another source?",
-            "name": "clinical_resource_syndicated",
-            "type": "radio",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "1": "Yes",
-                "0": "No"
-            },
-            "allow_null": 1,
-            "other_choice": 0,
-            "default_value": "",
-            "layout": "horizontal",
-            "return_format": "value",
-            "save_other_choice": 0
-        },
-        {
-            "key": "field_clinical_resource_syndication_url",
-            "label": "Syndication Source URL",
-            "name": "clinical_resource_syndication_url",
-            "type": "url",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_clinical_resource_syndicated",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": ""
-        }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "clinical-resource"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "acf_after_title",
-    "style": "default",
-    "label_placement": "left",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": true,
-    "description": "",
-    "acfe_display_title": "",
-    "acfe_autosync": [
-        "json"
-    ],
-    "acfe_form": 0,
-    "acfe_meta": "",
-    "acfe_note": ""
+			"acfe_thumbnail": 0,
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_clinical_resource_asp_filter",
+			"name": "clinical_resource_asp_filter",
+			"type": "acfe_hidden",
+			"label": "Ajax Search Filter",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": ""
+		},
+		{
+			"key": "field_clinical_resource_type",
+			"label": "Resource Type",
+			"name": "clinical_resource_type",
+			"type": "select",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"text": "Article",
+				"infographic": "Infographic",
+				"video": "Video",
+				"doc": "Document"
+			},
+			"default_value": false,
+			"allow_null": 0,
+			"multiple": 0,
+			"ui": 1,
+			"ajax": 0,
+			"return_format": "array",
+			"allow_custom": 0,
+			"search_placeholder": "Select one",
+			"placeholder": ""
+		},
+		{
+			"key": "field_clinical_resource_text_nci_query",
+			"label": "Is this this National Cancer Institute (NCI) syndicated content?",
+			"name": "clinical_resource_text_nci_query",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "==",
+						"value": "text"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		{
+			"key": "field_clinical_resource_text",
+			"label": "Article Content",
+			"name": "clinical_resource_text",
+			"type": "wysiwyg",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "==",
+						"value": "text"
+					},
+					{
+						"field": "field_clinical_resource_text_nci_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 1,
+			"delay": 1
+		},
+		{
+			"key": "field_clinical_resource_nci_embed",
+			"name": "clinical_resource_nci_embed",
+			"type": "textarea",
+			"label": "National Cancer Institute (NCI) Syndication Embed / Syndication Code",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "==",
+						"value": "text"
+					},
+					{
+						"field": "field_clinical_resource_text_nci_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": "",
+			"rows": 6,
+			"new_lines": ""
+		},
+		{
+			"key": "field_clinical_resource_infographic",
+			"label": "Infographic",
+			"name": "clinical_resource_infographic",
+			"type": "image",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "==",
+						"value": "infographic"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"uploader": "wp",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"library": "all",
+			"min_width": "",
+			"min_height": "",
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "",
+			"ratio_width": 0,
+			"ratio_height": 0,
+			"ratio_margin": 0
+		},
+		{
+			"key": "field_clinical_resource_infographic_descr",
+			"label": "Infographic Introduction \/ Description",
+			"name": "clinical_resource_infographic_descr",
+			"type": "wysiwyg",
+			"instructions": "Describe the purpose of the infographic and entice users to look at it.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "==",
+						"value": "infographic"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "basic",
+			"media_upload": 0,
+			"delay": 1
+		},
+		{
+			"key": "field_clinical_resource_infographic_transcript",
+			"label": "Transcript",
+			"name": "clinical_resource_infographic_transcript",
+			"type": "wysiwyg",
+			"instructions": "Full-text version of the infographic so that we ensure the content of the infographic is accessible to all, including people with disabilities who cannot see images",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "==",
+						"value": "infographic"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "basic",
+			"media_upload": 0,
+			"delay": 1
+		},
+		{
+			"key": "field_clinical_resource_video",
+			"label": "Youtube or Vimeo Video",
+			"name": "clinical_resource_video",
+			"type": "url",
+			"instructions": "Enter YouTube or Vimeo URL, including https:\/\/",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "==",
+						"value": "video"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		{
+			"key": "field_clinical_resource_video_descr",
+			"label": "Video Introduction \/ Description",
+			"name": "clinical_resource_video_descr",
+			"type": "wysiwyg",
+			"instructions": "Describe the purpose of the video and entice users to watch it.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "==",
+						"value": "video"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 0,
+			"delay": 1
+		},
+		{
+			"key": "field_clinical_resource_video_transcript",
+			"label": "Transcript",
+			"name": "clinical_resource_video_transcript",
+			"type": "wysiwyg",
+			"instructions": "Full-text version of the video so that we ensure the content of the video is accessible to all, including people with disabilities who cannot hear audio or see video",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "==",
+						"value": "video"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "basic",
+			"media_upload": 0,
+			"delay": 1
+		},
+		{
+			"key": "field_clinical_resource_document_descr",
+			"label": "Document Introduction \/ Description",
+			"name": "clinical_resource_document_descr",
+			"type": "wysiwyg",
+			"instructions": "Summarize the key points and critical information from the attached document(s).",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "==",
+						"value": "doc"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 0,
+			"delay": 1
+		},
+		{
+			"key": "field_clinical_resource_document",
+			"label": "Document(s)",
+			"name": "clinical_resource_document",
+			"type": "repeater",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_type",
+						"operator": "==",
+						"value": "doc"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_repeater_stylised_button": 0,
+			"collapsed": "field_document_title",
+			"min": 0,
+			"max": 0,
+			"layout": "table",
+			"button_label": "Add Document",
+			"sub_fields": [
+				{
+					"key": "field_document_title",
+					"label": "Title",
+					"name": "document_title",
+					"type": "text",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "60",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_document_file",
+					"label": "File",
+					"name": "document_file",
+					"type": "file",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "40",
+						"class": "",
+						"id": ""
+					},
+					"uploader": "wp",
+					"return_format": "array",
+					"library": "all",
+					"min_size": "",
+					"max_size": "",
+					"mime_types": "pdf"
+				}
+			]
+		},
+		{
+			"key": "field_clinical_resource_relationships",
+			"label": "Relationships",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		{
+			"key": "field_clinical_resource_providers",
+			"label": "Provider(s)",
+			"name": "clinical_resource_providers",
+			"type": "relationship",
+			"instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"provider"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_physician_clinical_resources"
+			}
+		},
+		{
+			"key": "field_clinical_resource_locations",
+			"label": "Location(s)",
+			"name": "clinical_resource_locations",
+			"type": "relationship",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"location"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_location_clinical_resources"
+			}
+		},
+		{
+			"key": "field_clinical_resource_aoe",
+			"label": "Areas of Expertise",
+			"name": "clinical_resource_aoe",
+			"type": "relationship",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"expertise"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_expertise_clinical_resources"
+			}
+		},
+		{
+			"key": "field_clinical_resource_conditions",
+			"label": "Condition(s)",
+			"name": "clinical_resource_conditions",
+			"type": "relationship",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"condition"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_condition_clinical_resources"
+			}
+		},
+		{
+			"key": "field_clinical_resource_treatments",
+			"label": "Treatment(s) & Procedure(s)",
+			"name": "clinical_resource_treatments",
+			"type": "relationship",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"treatment"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_treatment_procedure_clinical_resources"
+			}
+		},
+		{
+			"key": "field_clinical_resource_related",
+			"label": "Related Clinical Resources",
+			"name": "clinical_resource_related",
+			"type": "relationship",
+			"instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"clinical-resource"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": [
+					"field_clinical_resource_related"
+				]
+			}
+		},
+		{
+			"key": "field_clinical_resource_syndicated",
+			"label": "Is this syndicated from another source?",
+			"name": "clinical_resource_syndicated",
+			"type": "radio",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"1": "Yes",
+				"0": "No"
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		{
+			"key": "field_clinical_resource_syndication_url",
+			"label": "Syndication Source URL",
+			"name": "clinical_resource_syndication_url",
+			"type": "url",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_syndicated",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "post_type",
+				"operator": "==",
+				"value": "clinical-resource"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "acf_after_title",
+	"style": "default",
+	"label_placement": "left",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": [
+		"json"
+	],
+	"acfe_form": 0,
+	"acfe_meta": "",
+	"acfe_note": ""
 }

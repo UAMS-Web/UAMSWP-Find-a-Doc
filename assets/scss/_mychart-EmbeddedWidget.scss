@@ -38,6 +38,7 @@ html.viewportmax *:not(.keepshown) {
 	width: 100%;
 	-webkit-overflow-scrolling: touch;
 }
+
 /* Fullscreen for list of available time slots */
 html.poppedOut, body.poppedOut {
 	position: fixed; /* prevent scrolling behind the widget */
@@ -72,11 +73,12 @@ html.poppedOut, body.poppedOut {
 
 /* Mobile-optimized widget styling when the host page itself is narrow enough */
 $mychart-mobile-max: $breakpoint-sm-max; // formerly 747px
+
 @media only screen and (max-width:$mychart-mobile-max) { /* Width above = media query in EpicWP.css + any left/right margin of the host page
-	
+
 	/* Widget styling when it shouldn't be fullscreen yet */
-	#scheduleContainer {
-	}
+	// #scheduleContainer {
+	// }
 
 	#openSchedulingFrame {
 		width: 100%;
@@ -85,8 +87,9 @@ $mychart-mobile-max: $breakpoint-sm-max; // formerly 747px
 		padding-top: 1px;
 	}
 
-		#openSchedulingFrame[data-oswstep="0"] {
-		}
+		// #openSchedulingFrame[data-oswstep="0"] {
+		// }
+
 			/* needed by native Android browser to properly process the rules that follow */
 			#openSchedulingFrame[data-oswstep="0"] + #toggleBtn {
 				-webkit-perspective: 1000;

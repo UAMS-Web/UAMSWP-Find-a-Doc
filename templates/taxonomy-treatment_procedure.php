@@ -1,141 +1,141 @@
 <?php
-	$term = get_queried_object();
+$term = get_queried_object();
 
-	// ACF Fields - get_fields
-	$keywords = get_field('treatment_procedure_alternate', $term);
-	$clinical_trials = get_field('treatment_procedure_clinical_trials', $term);
-	$content = get_field( 'treatment_procedure_content', $term );
-	$excerpt = get_field( 'treatment_procedure_short_desc', $term );
-	$excerpt_user = true;
-	$video = get_field('treatment_procedure_youtube_link', $term);
-	$conditions = get_field('treatment_procedure_conditions', $term);
-	$expertise = get_field('treatment_procedure_expertise', $term);
-	$locations = get_field('treatment_procedure_locations', $term);
-	$physicians = get_field('treatment_procedure_physicians', $term);
-	$medline_type = get_field('medline_code_type', $term);
-	$medline_code = get_field('medline_code_id', $term);
-	$embed_code = get_field('treatment_procedure_embed_codes', $term); // Embed / Syndication Code
-	if (
-		( $medline_type && 'none' != $medline_type && $medline_code && !empty($medline_code) ) // if the medline plus syndication option is filled in
-		|| ( $embed_code && !empty($embed_code) ) // or if the syndication embed field has a value
-	) {
-		$syndication = true;
-	}
-	else {
-		$syndication = false;
-	}
+// ACF Fields - get_fields
+$keywords = get_field('treatment_procedure_alternate', $term);
+$clinical_trials = get_field('treatment_procedure_clinical_trials', $term);
+$content = get_field( 'treatment_procedure_content', $term );
+$excerpt = get_field( 'treatment_procedure_short_desc', $term );
+$excerpt_user = true;
+$video = get_field('treatment_procedure_youtube_link', $term);
+$conditions = get_field('treatment_procedure_conditions', $term);
+$expertise = get_field('treatment_procedure_expertise', $term);
+$locations = get_field('treatment_procedure_locations', $term);
+$physicians = get_field('treatment_procedure_physicians', $term);
+$medline_type = get_field('medline_code_type', $term);
+$medline_code = get_field('medline_code_id', $term);
+$embed_code = get_field('treatment_procedure_embed_codes', $term); // Embed / Syndication Code
+if (
+	( $medline_type && 'none' != $medline_type && $medline_code && !empty($medline_code) ) // if the medline plus syndication option is filled in
+	|| ( $embed_code && !empty($embed_code) ) // or if the syndication embed field has a value
+) {
+	$syndication = true;
+}
+else {
+	$syndication = false;
+}
 
-	function uamswp_keyword_hook_header() {
-		$keyword_text = '';
-		if( $keywords ): 
-			$i = 1;
-			foreach( $keywords as $keyword ) { 
-				if ( 1 < $i ) {
-					$keyword_text .= ', ';
-				}
-				$keyword_text .= str_replace(",", "", $keyword['text']);
-				$i++;
+function uamswp_keyword_hook_header() {
+	$keyword_text = '';
+	if( $keywords ): 
+		$i = 1;
+		foreach( $keywords as $keyword ) { 
+			if ( 1 < $i ) {
+				$keyword_text .= ', ';
 			}
-			echo '<meta name="keywords" content="'. $keyword_text .'" />';
-		endif;
-	}
-	add_action('wp_head','uamswp_keyword_hook_header');
-
-	// Override theme's method of defining the page title
-	function uamswp_fad_title($html) { 
-		// global $treatment_title;
-		//you can add here all your conditions as if is_page(), is_category() etc.. 
-		if ( strlen(single_cat_title( '', false )) < 21 ) {
-			$html = single_cat_title( '', false ) . ' | Treatments & Procedures | ' . get_bloginfo( "name" );
-		} else {
-			$html = single_cat_title( '', false ) . ' | ' . get_bloginfo( "name" );
+			$keyword_text .= str_replace(",", "", $keyword['text']);
+			$i++;
 		}
-		return $html;
-	}
-	add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+		echo '<meta name="keywords" content="'. $keyword_text .'" />';
+	endif;
+}
+add_action('wp_head','uamswp_keyword_hook_header');
 
-	if (empty($excerpt)){
-		$excerpt_user = false;
-		if ($content){
-			$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
+// Override theme's method of defining the page title
+function uamswp_fad_title($html) { 
+	// global $treatment_title;
+	//you can add here all your conditions as if is_page(), is_category() etc.. 
+	if ( strlen(single_cat_title( '', false )) < 21 ) {
+		$html = single_cat_title( '', false ) . ' | Treatments & Procedures | ' . get_bloginfo( "name" );
+	} else {
+		$html = single_cat_title( '', false ) . ' | ' . get_bloginfo( "name" );
+	}
+	return $html;
+}
+add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+
+if (empty($excerpt)){
+	$excerpt_user = false;
+	if ($content){
+		$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
+	}
+}
+// Use SeoPress hook for meta description
+function sp_titles_desc($html) {
+	global $excerpt;
+	$html = $excerpt;
+	return $html;
+}
+add_filter('seopress_titles_desc', 'sp_titles_desc');
+
+get_header();
+
+$treatment_title = get_field('treatments_archive_headline', 'option');
+$treatment_text = get_field('treatments_archive_intro_text', 'option');
+
+// Hard coded breadcrumbs
+$tax = get_term_by("slug", get_query_var("term"), get_query_var("taxonomy") );
+
+// Locations Content
+$location_content = '';
+$args = (array(
+	'post_type' => "location",
+	"post_status" => "publish",
+	'order' => 'ASC',
+	'orderby' => 'title',
+	'posts_per_page' => -1,
+	'post__in'	=> $locations
+));
+$location_query = new WP_Query( $args );
+
+// Check for valid locations
+$location_valid = false;
+if ( $locations && $location_query->have_posts() ) {
+	foreach( $locations as $location ) {
+		if ( get_post_status ( $location ) == 'publish' ) {
+			$location_valid = true;
+			$break;
 		}
 	}
-	// Use SeoPress hook for meta description
-	function sp_titles_desc($html) {
-		global $excerpt;
-		$html = $excerpt; 
-		return $html;
-	}
-	add_filter('seopress_titles_desc', 'sp_titles_desc');
-	
-	get_header();
+}
 
-	$treatment_title = get_field('treatments_archive_headline', 'option');
-	$treatment_text = get_field('treatments_archive_intro_text', 'option');
+if ( $location_valid ) {
+	$location_content .= '<section class="uams-module bg-auto" id="locations">';
+	$location_content .= '<div class="container-fluid">';
+	$location_content .= '<div class="row">';
+	$location_content .= '<div class="col-12">';
+	$location_content .= '<h2 class="module-title"><span class="title">Locations Providing ' . single_cat_title( '', false ) . '</span></h2>';
+	$location_content .= '<div class="card-list-container location-card-list-container">';
+	$location_content .= '<div class="card-list">';
+	ob_start();
+	ob_clean();
+	while ( $location_query->have_posts() ) : $location_query->the_post();
+		$id = get_the_ID();
+		include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+	endwhile;
+	$location_content .= ob_get_clean();
+	$location_content .= '</div>';
+	$location_content .= '</div>';
+	$location_content .= '</div>';
+	$location_content .= '</div>';
+	$location_content .= '</div>';
+	$location_content .= '</section>';
+}
 
-	// Hard coded breadcrumbs
-	$tax = get_term_by("slug", get_query_var("term"), get_query_var("taxonomy") );
+// Classes for indicating presence of content
+$treatment_field_classes = '';
+if ($keywords && !empty($keywords)) { $treatment_field_classes .= ' has-keywords'; } // Alternate names
+if ($clinical_trials && !empty($clinical_trials)) { $treatment_field_classes .= ' has-clinical-trials'; } // Display clinical trials block
+if ($content && !empty($content)) { $treatment_field_classes .= ' has-content'; } // Body content
+if ($syndication) { $treatment_field_classes .= ' has-syndication'; } // Syndication content
+if ($excerpt && $excerpt_user == true ) { $treatment_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
+if ($video && !empty($video)) { $treatment_field_classes .= ' has-video'; } // Video embed
+if ($conditions && !empty($conditions)) { $treatment_field_classes .= ' has-condition'; } // Treatments
+if ($expertise && !empty($expertise)) { $treatment_field_classes .= ' has-expertise'; } // Areas of Expertise
+if ($locations && $location_valid) { $treatment_field_classes .= ' has-location'; } // Locations
+if ($physicians && !empty($physicians)) { $treatment_field_classes .= ' has-provider'; } // Providers
 
-	// Locations Content
-	$location_content = '';
-	$args = (array(
-		'post_type' => "location",
-		"post_status" => "publish",
-		'order' => 'ASC',
-		'orderby' => 'title',
-		'posts_per_page' => -1,
-		'post__in'	=> $locations
-	));
-	$location_query = new WP_Query( $args );
-
-	// Check for valid locations
-	$location_valid = false;
-	if ( $locations && $location_query->have_posts() ) {
-		foreach( $locations as $location ) {
-			if ( get_post_status ( $location ) == 'publish' ) {
-				$location_valid = true;
-				$break;
-			}
-		}
-	}
-
-	if ( $location_valid ) {
-		$location_content .= '<section class="uams-module bg-auto" id="locations">';
-		$location_content .= '<div class="container-fluid">';
-		$location_content .= '<div class="row">';
-		$location_content .= '<div class="col-12">';
-		$location_content .= '<h2 class="module-title"><span class="title">Locations Providing ' . single_cat_title( '', false ) . '</span></h2>';
-		$location_content .= '<div class="card-list-container location-card-list-container">';
-		$location_content .= '<div class="card-list">';
-		ob_start();
-		ob_clean();
-		while ( $location_query->have_posts() ) : $location_query->the_post();
-			$id = get_the_ID();
-			include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
-		endwhile;
-		$location_content .= ob_get_clean();
-		$location_content .= '</div>';
-		$location_content .= '</div>';
-		$location_content .= '</div>';
-		$location_content .= '</div>';
-		$location_content .= '</div>';
-		$location_content .= '</section>';
-	}
-
-	// Classes for indicating presence of content
-    $treatment_field_classes = '';	
-	if ($keywords && !empty($keywords)) { $treatment_field_classes .= ' has-keywords'; } // Alternate names
-    if ($clinical_trials && !empty($clinical_trials)) { $treatment_field_classes .= ' has-clinical-trials'; } // Display clinical trials block
-    if ($content && !empty($content)) { $treatment_field_classes .= ' has-content'; } // Body content
-    if ($syndication) { $treatment_field_classes .= ' has-syndication'; } // Syndication content
-    if ($excerpt && $excerpt_user == true ) { $treatment_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
-    if ($video && !empty($video)) { $treatment_field_classes .= ' has-video'; } // Video embed
-    if ($conditions && !empty($conditions)) { $treatment_field_classes .= ' has-condition'; } // Treatments
-    if ($expertise && !empty($expertise)) { $treatment_field_classes .= ' has-expertise'; } // Areas of Expertise
-    if ($locations && $location_valid) { $treatment_field_classes .= ' has-location'; } // Locations
-    if ($physicians && !empty($physicians)) { $treatment_field_classes .= ' has-provider'; } // Providers
-	
- ?>
+?>
 <div class="content-sidebar-wrap">
 	<main id="genesis-content" class="treatment-item<?php echo $treatment_field_classes; ?>">
 		<section class="archive-description bg-white">
@@ -171,11 +171,11 @@
 				<?php if( $video ) { ?>
 					<?php if(function_exists('lyte_preparse')) {
 							echo '<div class="alignwide">';
-							echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $video ) ); 
+							echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $video ) );
 							echo '</div>';
 						} else {
 							echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
-							echo wp_oembed_get( $video ); 
+							echo wp_oembed_get( $video );
 							echo '</div>';
 						} ?>
 				<?php } ?>
@@ -203,9 +203,9 @@
 				'term_taxonomy_id' => $conditions
 			));
 			$conditions_query = new WP_Term_Query( $args );
-			
+
 			if ( $conditions && !empty($conditions_query->terms) ) {
-				
+
 		?>
 			<section class="uams-module conditions-treatments bg-auto">
 				<div class="container-fluid">
@@ -277,12 +277,12 @@
 			</section>
 		<?php
 		} // $physicians_query loop
-		
+
 		// Location Section
 		if (!empty($location_content)) {
-			echo $location_content; 
+			echo $location_content;
 		}
-		
+
 		// Expertise Section
 		$args = (array(
 			'post_type' => "expertise",
@@ -306,7 +306,7 @@
 								while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
 									$id = get_the_ID();
 									include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-								endwhile; 
+								endwhile;
 								wp_reset_postdata();
 							?>
 							</div>
@@ -321,5 +321,4 @@
 		?>
 	</main>
 </div>
-
 <?php get_footer(); ?>

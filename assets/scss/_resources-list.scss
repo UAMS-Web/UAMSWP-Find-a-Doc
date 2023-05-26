@@ -1,26 +1,26 @@
 .resource-list .list-col .item {
-    dl {
+	dl {
+		dt {
+			float: left;
+			clear: left;
+			margin: 0;
+			padding: 0;
 
-        dt {
-            float: left;
-            clear: left;
-            margin: 0;
-            padding: 0;
+			&:after {
+				content: ': ';
+				white-space: pre;
+			}
+		}
 
-            &:after {
-                content: ': ';
-                white-space: pre;
-            }
-        }
-        dd {
-            margin: 0;
-            padding: 0;
+		dd {
+			margin: 0;
+			padding: 0;
 
-            &:not(:last-child):after {
-                content: '';
-                display: block;
-                margin-bottom: 0.5em;
-            }
-        }
-    }
+			&:not(:last-child):after {
+				content: '';
+				display: block;
+				margin-bottom: 0.5em;
+			}
+		}
+	}
 }
