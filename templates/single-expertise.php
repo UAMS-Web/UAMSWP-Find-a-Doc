@@ -6,23 +6,11 @@
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title();
-$page_title_attr = $page_title;
-$page_title_attr = str_replace('"', '\'', $page_title_attr); // Replace double quotes with single quote
-$page_title_attr = htmlentities($page_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-$page_title_attr = str_replace('&nbsp;', ' ', $page_title_attr); // Convert non-breaking space with normal space
-$page_title_attr = html_entity_decode($page_title_attr); // Convert HTML entities to their corresponding characters
+$page_title_attr = uamswp_attr_conversion($page_title);
 $expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
-$expertise_archive_title_attr = $expertise_archive_title;
-$expertise_archive_title_attr = str_replace('"', '\'', $expertise_archive_title_attr); // Replace double quotes with single quote
-$expertise_archive_title_attr = htmlentities($expertise_archive_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-$expertise_archive_title_attr = str_replace('&nbsp;', ' ', $expertise_archive_title_attr); // Convert non-breaking space with normal space
-$expertise_archive_title_attr = html_entity_decode($expertise_archive_title_attr); // Convert HTML entities to their corresponding characters
+$expertise_archive_title_attr = uamswp_attr_conversion($expertise_archive_title);
 $expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
-$expertise_single_name_attr = $expertise_single_name;
-$expertise_single_name_attr = str_replace('"', '\'', $expertise_single_name_attr); // Replace double quotes with single quote
-$expertise_single_name_attr = htmlentities($expertise_single_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-$expertise_single_name_attr = str_replace('&nbsp;', ' ', $expertise_single_name_attr); // Convert non-breaking space with normal space
-$expertise_single_name_attr = html_entity_decode($expertise_single_name_attr); // Convert HTML entities to their corresponding characters
+$expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
 
 // Parent Area of Expertise 
 $expertise_parent_id = wp_get_post_parent_id($page_id);
@@ -30,6 +18,7 @@ $expertise_has_parent = $expertise_parent_id ? true : false;
 $parent_expertise = '';
 $parent_id = '';
 $parent_title = '';
+$parent_title_attr = '';
 $parent_url = '';
 
 if ($expertise_has_parent && $expertise_parent_id) { 
@@ -39,13 +28,7 @@ if ($expertise_has_parent && $expertise_parent_id) {
 if ($parent_expertise) {
 	$parent_id = $parent_expertise->ID;
 	$parent_title = $parent_expertise->post_title;
-	$parent_title_attr = $parent_title;
-	$parent_title_attr = str_replace('"', '\'', $parent_title_attr); // Replace double quotes with single quote
-	$parent_title_attr = str_replace('&#8217;', '\'', $parent_title_attr); // Replace right single quote with single quote
-	$parent_title_attr = htmlentities($parent_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-	$parent_title_attr = str_replace('&nbsp;', ' ', $parent_title_attr); // Convert non-breaking space with normal space
-	$parent_title_attr = html_entity_decode($parent_title_attr); // Convert HTML entities to their corresponding characters
-
+	$parent_title_attr = uamswp_attr_conversion($parent_title);
 	$parent_url = get_permalink( $parent_id );
 }
 
@@ -134,6 +117,7 @@ $jump_link_count = 0;
 
 // Check if Podcast section should be displayed
 $podcast_name = get_field('expertise_podcast_name');
+$podcast_name_attr = uamswp_attr_conversion($podcast_name);
 if ($podcast_name) {
 	$show_podcast_section = true;
 	$jump_link_count++;
@@ -404,6 +388,7 @@ function uamswp_expertise_conditions_cpt() {
 	global $conditions_cpt_query;
 	$condition_context = 'single-expertise';
 	$condition_heading_related_name = $page_title; // To what is it related?
+	$condition_heading_related_name_attr = $page_title_attr;
 
 	if( $show_conditions_section ) {
 		include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop-list.php' );
@@ -415,6 +400,7 @@ function uamswp_expertise_treatments_cpt() {
 	global $treatments_cpt_query;
 	$treatment_context = 'single-expertise';
 	$treatment_heading_related_name = $page_title; // To what is it related?
+	$treatment_heading_related_name_attr = $page_title_attr;
 
 	if( $show_treatments_section ) {
 		include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop-list.php' );
@@ -594,6 +580,7 @@ function uamswp_expertise_resource() {
 	$resource_heading_related_pre = true; // "Related Resources"
 	$resource_heading_related_post = false; // "Resources Related to __"
 	$resource_heading_related_name = $page_title; // To what is it related?
+	$resource_heading_related_name_attr = $page_title_attr;
 	$resource_more_suppress = false; // Force div.more to not display
 	$resource_more_key = '_resource_aoe';
 	$resource_more_value = $post->post_name;

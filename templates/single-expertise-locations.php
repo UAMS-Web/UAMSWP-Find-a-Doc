@@ -6,10 +6,11 @@
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title();
-$page_title_attr = str_replace('"', '\'', $page_title);
-$page_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($page_title_attr, null, 'utf-8')));
+$page_title_attr = uamswp_attr_conversion($page_title);
 $expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
+$expertise_archive_title_attr = uamswp_attr_conversion($expertise_archive_title);
 $expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
+$expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
 
 // Parent Area of Expertise 
 $expertise_parent_id = wp_get_post_parent_id($page_id);
@@ -17,6 +18,7 @@ $expertise_has_parent = $expertise_parent_id ? true : false;
 $parent_expertise = '';
 $parent_id = '';
 $parent_title = '';
+$parent_title_attr = '';
 $parent_url = '';
 
 if ($expertise_has_parent && $expertise_parent_id) { 
@@ -26,8 +28,7 @@ if ($expertise_has_parent && $expertise_parent_id) {
 if ($parent_expertise) {
 	$parent_id = $parent_expertise->ID;
 	$parent_title = $parent_expertise->post_title;
-	$parent_title_attr = str_replace('"', '\'', $parent_title);
-	$parent_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($parent_title_attr, null, 'utf-8')));
+	$parent_title_attr = uamswp_attr_conversion($parent_title);
 	$parent_url = get_permalink( $parent_id );
 }
 
@@ -101,6 +102,7 @@ $jump_link_count = 0;
 
 // Check if Podcast section should be displayed
 $podcast_name = get_field('expertise_podcast_name');
+$podcast_name_attr = uamswp_attr_conversion($podcast_name);
 if ($podcast_name) {
 	$show_podcast_section = true;
 	$jump_link_count++;

@@ -12,12 +12,7 @@ if (empty($excerpt)){
 	}
 }
 $page_title = get_the_title( );
-$page_title_attr = $page_title;
-$page_title_attr = str_replace('"', '\'', $page_title_attr); // Replace double quotes with single quote
-$page_title_attr = str_replace('&#8217;', '\'', $page_title_attr); // Replace right single quote with single quote
-$page_title_attr = htmlentities($page_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-$page_title_attr = str_replace('&nbsp;', ' ', $page_title_attr); // Convert non-breaking space with normal space
-$page_title_attr = html_entity_decode($page_title_attr); // Convert HTML entities to their corresponding characters
+$page_title_attr = uamswp_attr_conversion($page_title);
 
 
 // Parent Location 
@@ -466,12 +461,7 @@ while ( have_posts() ) : the_post(); ?>
 			$portal = get_term($location_portal, "portal");
 			$portal_slug = $portal->slug;
 			$portal_name = $portal->name;
-			$portal_name_attr = $portal_name;
-			$portal_name_attr = str_replace('"', '\'', $portal_name_attr); // Replace double quotes with single quote
-			$portal_name_attr = str_replace('&#8217;', '\'', $portal_name_attr); // Replace right single quote with single quote
-			$portal_name_attr = htmlentities($portal_name_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-			$portal_name_attr = str_replace('&nbsp;', ' ', $portal_name_attr); // Convert non-breaking space with normal space
-			$portal_name_attr = html_entity_decode($portal_name_attr); // Convert HTML entities to their corresponding characters
+			$portal_name_attr = uamswp_attr_conversion($portal_name);
 			$portal_content = get_field('portal_content', $portal);
 			$portal_link = get_field('portal_url', $portal);
 			if ($portal_link) {

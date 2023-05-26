@@ -9,18 +9,10 @@
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title();
-$page_title_attr = $page_title;
-$page_title_attr = str_replace('"', '\'', $page_title_attr); // Replace double quotes with single quote
-$page_title_attr = htmlentities($page_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-$page_title_attr = str_replace('&nbsp;', ' ', $page_title_attr); // Convert non-breaking space with normal space
-$page_title_attr = html_entity_decode($page_title_attr); // Convert HTML entities to their corresponding characters
+$page_title_attr = uamswp_attr_conversion($page_title);
 $resource_archive_title_system = get_field('clinical_resource_archive_headline', 'option');
 $resource_archive_title = $resource_archive_title_system ? $resource_archive_title_system : 'Clinical Resource';
-$resource_archive_title_attr = $resource_archive_title;
-$resource_archive_title_attr = str_replace('"', '\'', $resource_archive_title_attr); // Replace double quotes with single quote
-$resource_archive_title_attr = htmlentities($resource_archive_title_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
-$resource_archive_title_attr = str_replace('&nbsp;', ' ', $resource_archive_title_attr); // Convert non-breaking space with normal space
-$resource_archive_title_attr = html_entity_decode($resource_archive_title_attr); // Convert HTML entities to their corresponding characters
+$resource_archive_title_attr = uamswp_attr_conversion($resource_archive_title);
 
 // Override theme's method of defining the page title
 function uamswp_fad_title($html) { 
@@ -400,6 +392,7 @@ function uamswp_resource_conditions_cpt() {
 	global $conditions_cpt_query;
 	$condition_context = 'single-resource';
 	$condition_heading_related_name = $page_title; // To what is it related?
+	$condition_heading_related_name_attr = $page_title_attr;
 
 	if( $show_conditions_section ) {
 		include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
@@ -411,6 +404,7 @@ function uamswp_resource_treatments_cpt() {
 	global $treatments_cpt_query;
 	$treatment_context = 'single-resource';
 	$treatment_heading_related_name = $page_title; // To what is it related?
+	$treatment_heading_related_name_attr = $page_title_attr;
 
 	if( $show_treatments_section ) {
 		include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
@@ -450,6 +444,7 @@ function uamswp_resource_associated() {
 	$resource_heading_related_pre = true; // "Related Resources"
 	$resource_heading_related_post = false; // "Resources Related to __"
 	$resource_heading_related_name = $page_title; // To what is it related?
+	$resource_heading_related_name_attr = $page_title_attr;
 	$resource_more_suppress = false; // Force div.more to not display
 	$resource_more_key = '';
 	$resource_more_value = '';
