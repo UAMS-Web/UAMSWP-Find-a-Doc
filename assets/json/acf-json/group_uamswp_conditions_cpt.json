@@ -624,7 +624,7 @@
         },
         {
             "key": "field_condition_physicians",
-            "label": "Providers treating this condition",
+            "label": "Providers diagnosing or treating this condition",
             "name": "condition_physicians",
             "type": "relationship",
             "instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
