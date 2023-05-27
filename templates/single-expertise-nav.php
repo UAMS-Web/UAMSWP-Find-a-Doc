@@ -26,6 +26,9 @@ if ($show_providers_section) {
 if ($show_locations_section) {
 	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $page_id .'-locations nav-item"><a title="Locations for '. get_the_title( $page_id ) .'" href="'. get_permalink( $page_id ) .'locations/" class="nav-link"><span itemprop="name">Locations</span></a></li>';
 }
+if ($show_child_aoe_section) {
+	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $page_id .'-children nav-item"><a title="Areas within '. get_the_title( $page_id ) .'" href="'. get_permalink( $page_id ) .'specialties/" class="nav-link"><span itemprop="name">Specialties</span></a></li>';
+}
 if ($show_related_aoe_section) {
 	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $page_id .'-related nav-item"><a title="Related Expertise for '. get_the_title( $page_id ) .'" href="'. get_permalink( $page_id ) .'related/" class="nav-link"><span itemprop="name">Related</span></a></li>';
 }
