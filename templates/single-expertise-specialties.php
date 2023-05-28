@@ -71,8 +71,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
 add_action( 'genesis_entry_header', 'uamswp_fad_fpage_post_title' );
 
-// add_action( 'genesis_after_entry', 'uamswp_list_child_expertise', 12 );
-add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 24 );
+add_action( 'genesis_after_entry', 'uamswp_list_child_expertise', 12 );
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 
 // Remove content
