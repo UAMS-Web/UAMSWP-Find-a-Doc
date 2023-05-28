@@ -1,6 +1,6 @@
 <?php
 /*
- * Template Name: Fake Area of Expertise Related Areas of Expertise Subpage
+ * Template Name: Fake Area of Expertise Specialties Subpage
  */
 
 // Set general variables
@@ -114,6 +114,8 @@ if ( $jump_link_count >= $jump_link_count_min ) {
 
 // Remove the primary navigation set by the theme
 remove_action( 'genesis_after_header', 'genesis_do_nav' );
+remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
+
 // Add ontology subsection navigation
 add_action( 'genesis_after_header', 'custom_expertise_nav_menu', 5 );
 function custom_expertise_nav_menu() {
@@ -121,6 +123,10 @@ function custom_expertise_nav_menu() {
 	global $show_locations_section;
 	global $show_related_aoe_section;
 	global $show_related_resource_section;
+	global $child_pages;
+	global $show_child_aoe_section;
+	global $show_child_content_nav;
+	global $childnav;
 	global $post;
 	global $page_title;
 	global $page_id;
