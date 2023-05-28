@@ -1299,6 +1299,7 @@ function uamswp_fad_ontology_header() {
 			$navbar_subbrand_parent_url = '';
 		}
 	}
+}
 
 // Construct page title for fake subpages
 function uamswp_fad_fpage_post_title() {
