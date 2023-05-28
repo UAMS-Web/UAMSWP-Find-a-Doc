@@ -1,194 +1,194 @@
 {
-    "key": "group_fad_taxonomy",
-    "title": "Taxonomy Options",
-    "fields": [
-        {
-            "key": "field_conditions_tab",
-            "label": "Conditions",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
-            "key": "field_conditions_archive_headline",
-            "label": "Archive Headline",
-            "name": "conditions_archive_headline",
-            "type": "text",
-            "instructions": "Your child theme uses accessible headings. If you leave this blank, the default accessible heading will be used.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "default_value": "",
-            "placeholder": "Conditions",
-            "prepend": "",
-            "append": "",
-            "maxlength": "",
-            "acfe_validate": "",
-            "acfe_update": ""
-        },
-        {
-            "key": "field_conditions_single_name",
-            "label": "Single Item Name",
-            "name": "conditions_single_name",
-            "type": "text",
-            "instructions": "If you leave this blank, the default name for a single item will be used.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "default_value": "",
-            "placeholder": "Condition",
-            "prepend": "",
-            "append": "",
-            "maxlength": "",
-            "acfe_validate": "",
-            "acfe_update": ""
-        },
-        {
-            "key": "field_conditions_archive_intro_text",
-            "label": "Archive Intro Text",
-            "name": "conditions_archive_intro_text",
-            "type": "wysiwyg",
-            "instructions": "Leave empty if you do not want to display any intro text.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0,
-            "acfe_validate": "",
-            "acfe_update": ""
-        },
-        {
-            "key": "field_treatments_tab",
-            "label": "Treatments & Procedures",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
-            "key": "field_treatments_archive_headline",
-            "label": "Archive Headline",
-            "name": "treatments_archive_headline",
-            "type": "text",
-            "instructions": "Your child theme uses accessible headings. If you leave this blank, the default accessible heading will be used.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "default_value": "",
-            "placeholder": "Treatments & Procedures",
-            "prepend": "",
-            "append": "",
-            "maxlength": "",
-            "acfe_validate": "",
-            "acfe_update": ""
-        },
-        {
-            "key": "field_treatments_single_name",
-            "label": "Single Item Name",
-            "name": "treatments_single_name",
-            "type": "text",
-            "instructions": "If you leave this blank, the default name for a single item will be used.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "default_value": "",
-            "placeholder": "Treatment\/Procedure",
-            "prepend": "",
-            "append": "",
-            "maxlength": "",
-            "acfe_validate": "",
-            "acfe_update": ""
-        },
-        {
-            "key": "field_treatments_archive_intro_text",
-            "label": "Archive Intro Text",
-            "name": "treatments_archive_intro_text",
-            "type": "wysiwyg",
-            "instructions": "Leave empty if you do not want to display any intro text.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_permissions": "",
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0,
-            "acfe_validate": "",
-            "acfe_update": ""
-        }
-    ],
-    "location": [
-        [
-            {
-                "param": "options_page",
-                "operator": "==",
-                "value": "uamswp-fad-tax"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "left",
-    "instruction_placement": "field",
-    "hide_on_screen": "",
-    "active": true,
-    "description": "",
-    "acfe_display_title": "",
-    "acfe_autosync": "",
-    "acfe_permissions": "",
-    "acfe_note": "",
-    "acfe_meta": ""
+	"key": "group_fad_taxonomy",
+	"title": "Taxonomy Options",
+	"fields": [
+		{
+			"key": "field_conditions_tab",
+			"label": "Conditions",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"placement": "top",
+			"endpoint": 0
+		},
+		{
+			"key": "field_conditions_archive_headline",
+			"label": "Archive Headline",
+			"name": "conditions_archive_headline",
+			"type": "text",
+			"instructions": "Your child theme uses accessible headings. If you leave this blank, the default accessible heading will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Conditions",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_conditions_single_name",
+			"label": "Single Item Name",
+			"name": "conditions_single_name",
+			"type": "text",
+			"instructions": "If you leave this blank, the default name for a single item will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Condition",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_conditions_archive_intro_text",
+			"label": "Archive Intro Text",
+			"name": "conditions_archive_intro_text",
+			"type": "wysiwyg",
+			"instructions": "Leave empty if you do not want to display any intro text.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 1,
+			"delay": 0,
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_treatments_tab",
+			"label": "Treatments & Procedures",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"placement": "top",
+			"endpoint": 0
+		},
+		{
+			"key": "field_treatments_archive_headline",
+			"label": "Archive Headline",
+			"name": "treatments_archive_headline",
+			"type": "text",
+			"instructions": "Your child theme uses accessible headings. If you leave this blank, the default accessible heading will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Treatments & Procedures",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_treatments_single_name",
+			"label": "Single Item Name",
+			"name": "treatments_single_name",
+			"type": "text",
+			"instructions": "If you leave this blank, the default name for a single item will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Treatment\/Procedure",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_treatments_archive_intro_text",
+			"label": "Archive Intro Text",
+			"name": "treatments_archive_intro_text",
+			"type": "wysiwyg",
+			"instructions": "Leave empty if you do not want to display any intro text.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 1,
+			"delay": 0,
+			"acfe_validate": "",
+			"acfe_update": ""
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "uamswp-fad-tax"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "left",
+	"instruction_placement": "field",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": ""
 }

@@ -1,9 +1,9 @@
 <?php
-	/**
-	 *  Template Name: Full Screen
-	 */
+/**
+ * Template Name: Full Screen
+ */
 
-    // $image = (isset($wp->query_vars['provider'])) ? ' highlight="' . $wp->query_vars['marker'] . '"' : '';
+// $image = (isset($wp->query_vars['provider'])) ? ' highlight="' . $wp->query_vars['marker'] . '"' : '';
 
 // Remove the primary navigation
 remove_action( 'genesis_after_header', 'genesis_do_nav' );

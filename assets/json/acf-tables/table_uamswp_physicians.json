@@ -1,414 +1,414 @@
 {
-    "name": "uamswp_physicians",
-    "relationship": {
-        "type": "post",
-        "post_type": "provider"
-    },
-    "primary_key": [
-        "id"
-    ],
-    "keys": [
-        {
-            "name": "post_id",
-            "columns": [
-                "post_id"
-            ],
-            "unique": true
-        }
-    ],
-    "columns": [
-        {
-            "name": "id",
-            "format": "%d",
-            "null": false,
-            "auto_increment": true,
-            "unsigned": true
-        },
-        {
-            "name": "post_id",
-            "format": "%d"
-        },
-        {
-            "name": "physician_first_name",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_first_name"
-            }
-        },
-        {
-            "name": "physician_middle_name",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_middle_name"
-            }
-        },
-        {
-            "name": "physician_last_name",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_last_name"
-            }
-        },
-        {
-            "name": "physician_pedigree",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_pedigree"
-            }
-        },
-        {
-            "name": "physician_degree",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_degree"
-            }
-        },
-        {
-            "name": "physician_prefix",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_prefix"
-            }
-        },
-        {
-            "name": "physician_gender",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_gender"
-            }
-        },
-        {
-            "name": "physician_searchable",
-            "format": "%d",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_searchable"
-            }
-        },
-        {
-            "name": "physician_full_name",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_full_name"
-            }
-        },
-        {
-            "name": "physician_title",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_clinical_title"
-            }
-        },
-        {
-            "name": "physician_service_line",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_service_line"
-            }
-        },
-        {
-            "name": "physician_clinical_bio",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_clinical_bio"
-            }
-        },
-        {
-            "name": "physician_short_clinical_bio",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_short_clinical_bio"
-            }
-        },
-        {
-            "name": "physician_youtube_link",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_youtube_link"
-            }
-        },
-        {
-            "name": "physician_languages",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_languages"
-            }
-        },
-        {
-            "name": "physician_locations",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_locations"
-            }
-        },
-        {
-            "name": "physician_region",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_region"
-            }
-        },
-        {
-            "name": "physician_affiliation",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_affiliation"
-            }
-        },
-        {
-            "name": "physician_portal",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_portal"
-            }
-        },
-        {
-            "name": "physician_patient_types",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_patient_types"
-            }
-        },
-        {
-            "name": "physician_appointment_link",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_appointment_link"
-            }
-        },
-        {
-            "name": "physician_eligible_appointments",
-            "format": "%d",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_eligible_appointments"
-            }
-        },
-        {
-            "name": "physician_primary_care",
-            "format": "%d",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_primary_care"
-            }
-        },
-        {
-            "name": "physician_referral_required",
-            "format": "%d",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_referral_required"
-            }
-        },
-        {
-            "name": "physician_accepting_patients",
-            "format": "%d",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_accepting_patients"
-            }
-        },
-        {
-            "name": "physician_second_opinion",
-            "format": "%d",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_second_opinion"
-            }
-        },
-        {
-            "name": "physician_expertise",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_expertise"
-            }
-        },
-        {
-            "name": "physician_medical_specialties",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_medical_specialties"
-            }
-        },
-        {
-            "name": "physician_conditions",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_conditions"
-            }
-        },
-        {
-            "name": "physician_treatments",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_treatments"
-            }
-        },
-        {
-            "name": "physician_medical_terms",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_medical_terms"
-            }
-        },
-        {
-            "name": "physician_pid",
-            "format": "%d",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_pid"
-            }
-        },
-        {
-            "name": "physician_npi",
-            "format": "%d",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_npi"
-            }
-        },
-        {
-            "name": "physician_academic_title",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_academic_title"
-            }
-        },
-        {
-            "name": "physician_academic_appointment",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_academic_appointment"
-            }
-        },
-        {
-            "name": "physician_academic_college",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_academic_college"
-            }
-        },
-        {
-            "name": "physician_academic_position",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_academic_position"
-            }
-        },
-        {
-            "name": "physician_academic_bio",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_academic_bio"
-            }
-        },
-        {
-            "name": "physician_academic_short_bio",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_academic_short_bio"
-            }
-        },
-        {
-            "name": "physician_academic_office",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_academic_office"
-            }
-        },
-        {
-            "name": "physician_academic_map",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_academic_map"
-            }
-        },
-        {
-            "name": "physician_contact_information",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_contact_information"
-            }
-        },
-        {
-            "name": "physician_education",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_education"
-            }
-        },
-        {
-            "name": "physician_boards",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_boards"
-            }
-        },
-        {
-            "name": "physician_associations",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_associations"
-            }
-        },
-        {
-            "name": "physician_research_profiles_link",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_research_profiles_link"
-            }
-        },
-        {
-            "name": "physician_pubmed_author_id",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_pubmed_author_id"
-            }
-        },
-        {
-            "name": "physician_author_number",
-            "format": "%d",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_author_number"
-            }
-        },
-        {
-            "name": "physician_select_publications",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_select_publications"
-            }
-        },
-        {
-            "name": "physician_researcher_bio",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_researcher_bio"
-            }
-        },
-        {
-            "name": "physician_research_interests",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_research_interests"
-            }
-        },
-        {
-            "name": "physician_awards",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_awards"
-            }
-        },
-        {
-            "name": "physician_additional_info",
-            "map": {
-                "type": "acf_field_name",
-                "identifier": "physician_additional_info"
-            }
-        }
-    ],
-    "hash": "c89b987d38635e87c06696a8e97e40dd",
-    "modified": 1566591623
+	"name": "uamswp_physicians",
+	"relationship": {
+		"type": "post",
+		"post_type": "provider"
+	},
+	"primary_key": [
+		"id"
+	],
+	"keys": [
+		{
+			"name": "post_id",
+			"columns": [
+				"post_id"
+			],
+			"unique": true
+		}
+	],
+	"columns": [
+		{
+			"name": "id",
+			"format": "%d",
+			"null": false,
+			"auto_increment": true,
+			"unsigned": true
+		},
+		{
+			"name": "post_id",
+			"format": "%d"
+		},
+		{
+			"name": "physician_first_name",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_first_name"
+			}
+		},
+		{
+			"name": "physician_middle_name",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_middle_name"
+			}
+		},
+		{
+			"name": "physician_last_name",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_last_name"
+			}
+		},
+		{
+			"name": "physician_pedigree",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_pedigree"
+			}
+		},
+		{
+			"name": "physician_degree",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_degree"
+			}
+		},
+		{
+			"name": "physician_prefix",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_prefix"
+			}
+		},
+		{
+			"name": "physician_gender",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_gender"
+			}
+		},
+		{
+			"name": "physician_searchable",
+			"format": "%d",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_searchable"
+			}
+		},
+		{
+			"name": "physician_full_name",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_full_name"
+			}
+		},
+		{
+			"name": "physician_title",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_clinical_title"
+			}
+		},
+		{
+			"name": "physician_service_line",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_service_line"
+			}
+		},
+		{
+			"name": "physician_clinical_bio",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_clinical_bio"
+			}
+		},
+		{
+			"name": "physician_short_clinical_bio",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_short_clinical_bio"
+			}
+		},
+		{
+			"name": "physician_youtube_link",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_youtube_link"
+			}
+		},
+		{
+			"name": "physician_languages",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_languages"
+			}
+		},
+		{
+			"name": "physician_locations",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_locations"
+			}
+		},
+		{
+			"name": "physician_region",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_region"
+			}
+		},
+		{
+			"name": "physician_affiliation",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_affiliation"
+			}
+		},
+		{
+			"name": "physician_portal",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_portal"
+			}
+		},
+		{
+			"name": "physician_patient_types",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_patient_types"
+			}
+		},
+		{
+			"name": "physician_appointment_link",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_appointment_link"
+			}
+		},
+		{
+			"name": "physician_eligible_appointments",
+			"format": "%d",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_eligible_appointments"
+			}
+		},
+		{
+			"name": "physician_primary_care",
+			"format": "%d",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_primary_care"
+			}
+		},
+		{
+			"name": "physician_referral_required",
+			"format": "%d",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_referral_required"
+			}
+		},
+		{
+			"name": "physician_accepting_patients",
+			"format": "%d",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_accepting_patients"
+			}
+		},
+		{
+			"name": "physician_second_opinion",
+			"format": "%d",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_second_opinion"
+			}
+		},
+		{
+			"name": "physician_expertise",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_expertise"
+			}
+		},
+		{
+			"name": "physician_medical_specialties",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_medical_specialties"
+			}
+		},
+		{
+			"name": "physician_conditions",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_conditions"
+			}
+		},
+		{
+			"name": "physician_treatments",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_treatments"
+			}
+		},
+		{
+			"name": "physician_medical_terms",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_medical_terms"
+			}
+		},
+		{
+			"name": "physician_pid",
+			"format": "%d",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_pid"
+			}
+		},
+		{
+			"name": "physician_npi",
+			"format": "%d",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_npi"
+			}
+		},
+		{
+			"name": "physician_academic_title",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_academic_title"
+			}
+		},
+		{
+			"name": "physician_academic_appointment",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_academic_appointment"
+			}
+		},
+		{
+			"name": "physician_academic_college",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_academic_college"
+			}
+		},
+		{
+			"name": "physician_academic_position",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_academic_position"
+			}
+		},
+		{
+			"name": "physician_academic_bio",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_academic_bio"
+			}
+		},
+		{
+			"name": "physician_academic_short_bio",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_academic_short_bio"
+			}
+		},
+		{
+			"name": "physician_academic_office",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_academic_office"
+			}
+		},
+		{
+			"name": "physician_academic_map",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_academic_map"
+			}
+		},
+		{
+			"name": "physician_contact_information",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_contact_information"
+			}
+		},
+		{
+			"name": "physician_education",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_education"
+			}
+		},
+		{
+			"name": "physician_boards",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_boards"
+			}
+		},
+		{
+			"name": "physician_associations",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_associations"
+			}
+		},
+		{
+			"name": "physician_research_profiles_link",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_research_profiles_link"
+			}
+		},
+		{
+			"name": "physician_pubmed_author_id",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_pubmed_author_id"
+			}
+		},
+		{
+			"name": "physician_author_number",
+			"format": "%d",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_author_number"
+			}
+		},
+		{
+			"name": "physician_select_publications",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_select_publications"
+			}
+		},
+		{
+			"name": "physician_researcher_bio",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_researcher_bio"
+			}
+		},
+		{
+			"name": "physician_research_interests",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_research_interests"
+			}
+		},
+		{
+			"name": "physician_awards",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_awards"
+			}
+		},
+		{
+			"name": "physician_additional_info",
+			"map": {
+				"type": "acf_field_name",
+				"identifier": "physician_additional_info"
+			}
+		}
+	],
+	"hash": "c89b987d38635e87c06696a8e97e40dd",
+	"modified": 1566591623
 }

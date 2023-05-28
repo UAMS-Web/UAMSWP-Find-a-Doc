@@ -1,10 +1,10 @@
 <?php
-	/**
-	 *  Template Name: MyChart Provider List
-	 */
+/**
+ * Template Name: MyChart Provider List
+ */
 
 // Remove the primary navigation
-remove_action( 'genesis_after_header', 'genesis_do_nav' ); 
+remove_action( 'genesis_after_header', 'genesis_do_nav' );
 
 // Remove header
 remove_action( 'genesis_header', 'genesis_do_header' );
@@ -55,73 +55,73 @@ add_filter ( 'wp_nav_menu', '__return_false' );
 remove_action( 'genesis_loop', 'genesis_do_loop' );
 add_action( 'genesis_loop', 'display_provider_image' );
 function display_provider_image() {
-    // Custom WP_Query args
-    $args = array(
-        "post_type" => "provider",
-        "post_status" => "publish",
-        "posts_per_page" => "-1", // Set for all
-        "orderby" => "title",
-        "order" => "ASC",
-    );
+	// Custom WP_Query args
+	$args = array(
+		"post_type" => "provider",
+		"post_status" => "publish",
+		"posts_per_page" => "-1", // Set for all
+		"orderby" => "title",
+		"order" => "ASC",
+	);
 
-    $query = new WP_Query( $args );
+	$query = new WP_Query( $args );
 
-    if ( $query->have_posts() ) : ?>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th class="no-break">Provider ID</th>
-                        <th class="no-break">Provider Name</th>
-                        <th class="no-break">Provider Profile URL</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php 
-                while( $query->have_posts() ) : $query->the_post();
-                    $post_id = get_the_ID();
+	if ( $query->have_posts() ) : ?>
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th class="no-break">Provider ID</th>
+						<th class="no-break">Provider Name</th>
+						<th class="no-break">Provider Profile URL</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php 
+				while( $query->have_posts() ) : $query->the_post();
+					$post_id = get_the_ID();
 
-                    // Create the Name variables
-                    $pid = get_field('physician_pid',$post_id);
-                    $pid = ( $pid == 0 ) ? '' : $pid;
-                    $sort_name = get_the_title($post_id);
-                    $profile_url = get_the_permalink($post_id);
+					// Create the Name variables
+					$pid = get_field('physician_pid',$post_id);
+					$pid = ( $pid == 0 ) ? '' : $pid;
+					$sort_name = get_the_title($post_id);
+					$profile_url = get_the_permalink($post_id);
 
-                    // Get slug
-                    $profile_slug = get_post_field( 'post_name', $post_id );
-                    
-                    $resident = get_field('physician_resident',$post_id);
-                    
-                    // Create the table
-                    if ( !$resident ) {
+					// Get slug
+					$profile_slug = get_post_field( 'post_name', $post_id );
 
-                        // Start table row
-                        echo '<tr>';
+					$resident = get_field('physician_resident',$post_id);
 
-                        // PID
-                            echo '<td class="no-break">' . $pid . '</td>';
+					// Create the table
+					if ( !$resident ) {
 
-                        // Provider Name
-                            echo '<td class="no-break">' . $sort_name . '</td>';
+						// Start table row
+						echo '<tr>';
 
-                        // Provider Profile URL
-                            echo '<td class="no-break">' . $profile_url . '?utm_source=mychart&utm_medium=link&utm_campaign=clinical_service&utm_term=provider&utm_content=' . $profile_slug . '</td>';
+						// PID
+							echo '<td class="no-break">' . $pid . '</td>';
 
-                        echo '</tr>';
+						// Provider Name
+							echo '<td class="no-break">' . $sort_name . '</td>';
 
-                        $l++;
+						// Provider Profile URL
+							echo '<td class="no-break">' . $profile_url . '?utm_source=mychart&utm_medium=link&utm_campaign=clinical_service&utm_term=provider&utm_content=' . $profile_slug . '</td>';
 
-                    } // endif !$resident
-                        
-                endwhile;
-                ?>
-                </tbody>
-            </table>
-        </div>
-    <?php
-        else :
-        echo 'No providers found';
-    endif;
+						echo '</tr>';
+
+						$l++;
+
+					} // endif !$resident
+
+				endwhile;
+				?>
+				</tbody>
+			</table>
+		</div>
+	<?php
+		else :
+		echo 'No providers found';
+	endif;
 
 }
 
