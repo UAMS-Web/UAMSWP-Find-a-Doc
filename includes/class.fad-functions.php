@@ -1299,4 +1299,20 @@ function uamswp_fad_ontology_header() {
 			$navbar_subbrand_parent_url = '';
 		}
 	}
+
+// Construct page title for fake subpages
+function uamswp_fad_fpage_post_title() {
+	global $fpage_title;
+	echo '<h1 class="entry-title" itemprop="headline">';
+	echo $fpage_title;
+	echo '</h1>';
+}
+
+// Construct meta title for fake subpages
+function uamswp_fad_fpage_title($html) { 
+	global $page_title;
+	global $fpage_name;
+	//you can add here all your conditions as if is_page(), is_category() etc.. 
+	$html = $fpage_name . ' | ' . $page_title . ' | ' . get_bloginfo( "name" );
+	return $html;
 }

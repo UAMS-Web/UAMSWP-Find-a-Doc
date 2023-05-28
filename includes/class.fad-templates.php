@@ -82,6 +82,11 @@ function uamswp_force_template( $template )
 		$template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-expertise-locations.php';
 	}
 
+	// Fake Area of Expertise Specialties Subpage
+	if( is_singular( 'expertise' ) && get_query_var('fpage') == 'specialties' ) {
+		$template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-expertise-specialties.php';
+	}
+
 	// Fake Area of Expertise Clinical Resources Subpage
 	if( is_singular( 'expertise' ) && get_query_var('fpage') == 'resources' ) {
 		$template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-expertise-resources.php';

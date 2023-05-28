@@ -40,7 +40,7 @@ if (isset($_GET['alpha'])) {
 	$alpha = $_GET['alpha'];
 }
 
-// Override theme's method of defining the page title
+// Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
 	global $condition_title;
 	//you can add here all your conditions as if is_page(), is_category() etc.. 

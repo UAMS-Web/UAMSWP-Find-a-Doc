@@ -1,34 +1,47 @@
 <?php
 /*
- * Template Name: Fake Area of Expertise Locations Subpage
+ * Template Name: Fake Area of Expertise Specialties Subpage
  */
 
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title(); // Title of Area of Expertise
 $page_title_attr = uamswp_attr_conversion($page_title);
-$fpage_name = 'Locations'; // Fake subpage name
+$fpage_name = 'Specialties'; // Fake subpage title
 $fpage_name_attr = uamswp_attr_conversion($fpage_name);
-$fpage_title = $page_title . ' ' . $fpage_name; // Fake subpage page title
+$fpage_title = $fpage_name . ' in ' . $page_title; // Fake subpage page title
 $fpage_title_attr = uamswp_attr_conversion($fpage_title);
-$page_url = get_permalink();
 $expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
 $expertise_archive_title_attr = uamswp_attr_conversion($expertise_archive_title);
 $expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
 $expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
 
-// Area of Expertise Content Type
-$ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
+// Parent Area of Expertise 
+$expertise_parent_id = wp_get_post_parent_id($page_id);
+$expertise_has_parent = $expertise_parent_id ? true : false;
+$parent_expertise = '';
+$parent_id = '';
+$parent_title = '';
+$parent_title_attr = '';
+$parent_url = '';
 
-// Get site header values for ontology subsections
-uamswp_fad_ontology_header();
+if ($expertise_has_parent && $expertise_parent_id) { 
+	$parent_expertise = get_post( $expertise_parent_id );
+}
+// Get attributes of parent Area of Expertise
+if ($parent_expertise) {
+	$parent_id = $parent_expertise->ID;
+	$parent_title = $parent_expertise->post_title;
+	$parent_title_attr = uamswp_attr_conversion($parent_title);
+	$parent_url = get_permalink( $parent_id );
+}
 
 // Override theme's method of defining the meta page title
 add_filter('seopress_titles_title', 'uamswp_fad_fpage_title', 15, 2);
 
 // Override theme's method of defining the breadcrumbs
 function uamswp_breadcrumbs_expertise($crumbs) {
-	$crumbs[] = array('Locations', '');
+	$crumbs[] = array('Specialties', '');
 	return $crumbs;
 }
 add_filter('seopress_pro_breadcrumbs_crumbs', 'uamswp_breadcrumbs_expertise');
@@ -58,8 +71,8 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
 add_action( 'genesis_entry_header', 'uamswp_fad_fpage_post_title' );
 
-add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 22 );
-
+// add_action( 'genesis_after_entry', 'uamswp_list_child_expertise', 12 );
+add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 24 );
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 
 // Remove content
@@ -79,6 +92,12 @@ if ($podcast_name) {
 	$show_podcast_section = false;
 }
 
+$content_type = get_field('expertise_type'); // True is expertise, false is content
+
+if ( "0" == $content_type ) {
+	$page_id = $parent_id;
+}
+
 include_once('single-expertise-content.php');
 
 // Check if Make an Appointment section should be displayed
@@ -96,6 +115,7 @@ if ( $jump_link_count >= $jump_link_count_min ) {
 // Remove the primary navigation set by the theme
 remove_action( 'genesis_after_header', 'genesis_do_nav' );
 remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
+
 // Add ontology subsection navigation
 add_action( 'genesis_after_header', 'custom_expertise_nav_menu', 5 );
 function custom_expertise_nav_menu() {
@@ -117,11 +137,9 @@ function custom_expertise_nav_menu() {
 remove_action( 'genesis_header', 'uamswp_site_image', 5 );
 add_action( 'genesis_header', 'uamswp_expertise_header', 5 );
 function uamswp_expertise_header() {
-	global $navbar_subbrand_title;
-	global $navbar_subbrand_title_url;
-	global $navbar_subbrand_parent;
-	global $navbar_subbrand_parent_url;
-
+	global $page_id;
+	global $expertise_has_parent;
+	global $content_type;
 	include( UAMS_FAD_PATH . '/templates/single-expertise-header.php');
 }
 
@@ -208,6 +226,155 @@ function uamswp_expertise_cta() {
 		}
 	endif;
 }
+
+function uamswp_expertise_physicians() {
+	global $show_providers_section;
+	//global $postsCountClass;
+	global $physicians_query;
+	//global $postsPerPage;
+	global $physicians;
+	global $provider_ids;
+
+
+	if($show_providers_section) {
+
+		// Get available regions - All available, since no titles set on initial load
+		$region_IDs = array();
+		while ($physicians_query->have_posts()) : $physicians_query->the_post();
+			$id = get_the_ID();
+			$region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
+		endwhile;
+		$region_IDs = array_unique($region_IDs);
+		$region_list = array();
+		foreach ($region_IDs as $region_ID){
+			$region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
+		}
+
+		// if cookie is set, run modified physician query
+		if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {		
+
+			$provider_region = '';
+			if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+				$provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
+			}
+
+			$tax_query = array();
+			if(!empty($provider_region)) {
+				$tax_query[] = array(
+					'taxonomy' => 'region',
+					'field' => 'slug',
+					'terms' => $provider_region
+				);
+			}
+			$args = array(
+				"post_type" => "provider",
+				"post_status" => "publish",
+				"posts_per_page" => -1,
+				"orderby" => "title",
+				"order" => "ASC",
+				"fields" => "ids",
+				"post__in" => $physicians,
+				'tax_query' => $tax_query
+			);
+			$physicians_query = New WP_Query( $args );
+		}
+		$provider_count = count($physicians_query->posts);
+		?>
+		<section class="uams-module bg-auto" id="providers">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<h2 class="module-title"><span class="title">Providers</span></h2>
+						<?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'"]' ); ?>
+						<div class="card-list-container">
+							<div class="card-list card-list-doctors">
+								<?php 
+									if($provider_count > 0){
+										$title_list = array();
+										while ($physicians_query->have_posts()) : $physicians_query->the_post();
+											$id = get_the_ID();
+											include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+											$title_list[] = get_field('physician_title', $id);
+										endwhile;
+										echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'," data-regions="'. implode(',', $region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
+									} else {
+										echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
+									}
+									wp_reset_postdata();
+								?>
+							</div>
+						</div>
+						<!-- <div class="more" style="<?php //echo ($postsPerPage < $provider_count) ? '' : 'display:none;' ; ?>">
+							<button class="loadmore btn btn-primary <?php //echo $provider_count; ?>" data-ppp="<?php //echo $postsPerPage; ?>" aria-label="Load more providers">Load More</button>
+						</div> -->
+						<div class="ajax-filter-load-more">
+							<button class="btn btn-lg btn-primary" aria-label="Load all providers">Load All</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php if ( isset($_GET['_filter_region']) ) { ?>
+				<script type="text/javascript">
+					// Set cookie to expire at end of session
+					document.cookie = "wp_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; path=/; domain="+window.location.hostname;
+				</script>
+			<?php } ?>
+		</section>
+	<?php }
+}
+function uamswp_expertise_youtube() {
+	$video = get_field('expertise_youtube_link');
+	if( $video ) { ?>
+		<?php if(function_exists('lyte_preparse')) {
+			echo '<div class="alignwide">';
+			echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $video ) );
+			echo '</div>';
+		} else {
+			echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
+			echo wp_oembed_get( $video );
+			echo '</div>';
+		} ?>
+	<?php }
+}
+function uamswp_expertise_keywords() {
+	$keywords = get_field('expertise_alternate_names');
+	$keyword_text = '';
+	if( $keywords ): 
+		$i = 1;
+		foreach( $keywords as $keyword ) { 
+			if ( 1 < $i ) {
+				$keyword_text .= '; ';
+			}
+			$keyword_text .= $keyword['text'];
+			$i++;
+		}
+		echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';
+	endif;
+}
+function uamswp_expertise_conditions_cpt() {
+	global $page_title;
+	global $show_conditions_section;
+	global $conditions_cpt_query;
+	$condition_context = 'single-expertise';
+	$condition_heading_related_name = $page_title; // To what is it related?
+	$condition_heading_related_name_attr = $page_title_attr;
+
+	if( $show_conditions_section ) {
+		include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
+	}
+}
+function uamswp_expertise_treatments_cpt() {
+	global $page_title;
+	global $show_treatments_section;
+	global $treatments_cpt_query;
+	$treatment_context = 'single-expertise';
+	$treatment_heading_related_name = $page_title; // To what is it related?
+	$treatment_heading_related_name_attr = $page_title_attr;
+
+	if( $show_treatments_section ) {
+		include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
+	}
+}
 function uamswp_expertise_locations() {
 	global $show_locations_section;
 	global $location_query;
@@ -287,6 +454,38 @@ function uamswp_expertise_locations() {
 	<?php 
 	} // endif
 }
+function uamswp_expertise_associated() {
+	global $show_related_aoe_section;
+	global $expertise_query;
+
+	if( $show_related_aoe_section ) { ?>
+		<section class="uams-module link-list link-list-layout-split bg-auto" id="related-expertise" aria-labelledby="related-expertise-title">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12 col-md-6 heading">
+						<div class="text-container">
+							<h2 class="module-title" id="related-expertise-title"><span class="title">Related Areas of Expertise</span></h2>
+						</div>
+					</div>
+					<div class="col-12 col-md-6 list">
+						<ul>
+						<?php
+						while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
+							echo '<li class="item"><div class="text-container"><h3 class="h5"><a href="'.get_permalink().'" aria-label="Go to Area of Expertise page for ' . get_the_title() . '">';
+							echo get_the_title();
+							echo '</a></h3>';
+							echo ( has_excerpt() ? '<p>' . wp_trim_words( get_the_excerpt(), 30, '&nbsp;&hellip;' ) . '</p>' : '' );
+							echo '</div></li>';
+						endwhile;
+						wp_reset_postdata(); ?>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+	<?php 
+	} // endif
+}
 function uamswp_expertise_header_metadata() { 
 	$keywords = get_field('expertise_alternate_names');
 	if( $keywords ): 
@@ -301,6 +500,62 @@ function uamswp_expertise_header_metadata() {
 		}
 		echo '<meta name="keywords" content="'. $keyword_text .'" />';
 	endif;
+}
+function uamswp_expertise_podcast() {
+	global $page_title;
+	global $show_podcast_section;
+	global $podcast_name;
+
+	if ( $show_podcast_section ) {
+		echo '<section class="uams-module podcast-list bg-auto" id="podcast">
+		<script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
+		</script>
+		<script type="text/javascript">
+			radiomd_embedded_filtered_tag("uams","radiomd-embedded-filtered-tag",303,"' . $podcast_name . '");
+		</script>
+		<style type="text/css">
+			#radiomd-embedded-filtered-tag iframe {
+			width: 100%;
+			border: none;
+		}
+		</style>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<h2 class="module-title"><span class="title">UAMS Health Talk Podcast</span></h2>
+					<div class="module-body text-center">
+						<p class="lead">In the UAMS Health Talk podcast, experts from UAMS talk about a variety of health topics, providing tips and guidelines to help people lead healthier lives. Listen to the episode(s) featuring the topic of '. $page_title . '.</p>
+					</div>
+					<div class="content-width mt-8" id="radiomd-embedded-filtered-tag"></div>
+				</div>
+				<div class="col-12 more">
+					<p class="lead">Find other great episodes on other topics and from other UAMS providers.</p>
+					<div class="cta-container">
+						<a href="/podcast/" class="btn btn-primary" aria-label="Listen to more episodes of the UAMS Health Talk podcast">Listen to More Episodes</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>';
+	}
+}
+function uamswp_expertise_resource() {
+	global $post;
+	global $page_title;
+	global $show_related_resource_section;
+	global $resources;
+	global $resource_query;
+	global $resource_postsPerPage;
+	$resource_heading_related_pre = true; // "Related Resources"
+	$resource_heading_related_post = false; // "Resources Related to __"
+	$resource_heading_related_name = $page_title; // To what is it related?
+	$resource_heading_related_name_attr = $page_title_attr;
+	$resource_more_suppress = false; // Force div.more to not display
+	$resource_more_key = '_resource_aoe';
+	$resource_more_value = $post->post_name;
+	if( $show_related_resource_section ) {
+		include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
+	}
 }
 function uamswp_list_child_expertise() {
 	global $page_id;
@@ -353,5 +608,27 @@ function uamswp_list_child_expertise() {
 		<?php
 		}
 	}
+}
+function uamswp_expertise_appointment() {
+	global $show_appointment_section;
+	if ( $show_appointment_section ) {
+		if ( get_field('location_expertise') ) {
+			$appointment_location_url = '#locations';
+			//$appointment_location_label = 'Go to the list of relevant locations';
+		} else {
+			$appointment_location_url = '/location/';
+			//$appointment_location_label = 'View a list of UAMS Health locations';
+		} ?>
+		<section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-12">
+						<h2>Make an Appointment</h2>
+						<p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>" data-itemtitle="Contact a clinic directly">contacting a clinic directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	<?php }
 }
 genesis();

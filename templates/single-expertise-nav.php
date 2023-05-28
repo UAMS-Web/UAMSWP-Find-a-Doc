@@ -17,14 +17,15 @@ $nav = wp_nav_menu( $args );
 
 $pagenav = '';
 
-$child_pages = get_pages( array('child_of' => $page_id, 'post_type' => 'expertise' ) );
-
 // $pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-'. $page_id .' nav-item active"><a title="'. get_the_title( $page_id ) .'" href="'. get_permalink( $page_id ) .'" class="nav-link"><span itemprop="name">'. get_the_title( $page_id ) .'</span></a></li>';
 if ($show_providers_section) {
 	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $page_id .'-providers nav-item"><a title="Providers for '. get_the_title( $page_id ) .'" href="'. get_permalink( $page_id ) .'providers/" class="nav-link"><span itemprop="name">Providers</span></a></li>';
 }
 if ($show_locations_section) {
 	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $page_id .'-locations nav-item"><a title="Locations for '. get_the_title( $page_id ) .'" href="'. get_permalink( $page_id ) .'locations/" class="nav-link"><span itemprop="name">Locations</span></a></li>';
+}
+if ($show_child_aoe_section) {
+	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $page_id .'-children nav-item"><a title="Areas within '. get_the_title( $page_id ) .'" href="'. get_permalink( $page_id ) .'specialties/" class="nav-link"><span itemprop="name">Specialties</span></a></li>';
 }
 if ($show_related_aoe_section) {
 	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $page_id .'-related nav-item"><a title="Related Expertise for '. get_the_title( $page_id ) .'" href="'. get_permalink( $page_id ) .'related/" class="nav-link"><span itemprop="name">Related</span></a></li>';
@@ -33,19 +34,6 @@ if ($show_related_resource_section) {
 	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $page_id .'-resources nav-item"><a title="Clinical Resources for '. get_the_title( $page_id ) .'" href="'. get_permalink( $page_id ) .'resources/" class="nav-link"><span itemprop="name">Clinical Resources</span></a></li>';
 }
 if ($child_pages) {
-	$childnav = '';
-	$children = false;
-	foreach ( $child_pages as $child_page ) {
-		$hide = get_post_meta($child_page->ID, 'page_hide_from_menu');
-		$type = get_field('expertise_type', $child_page->ID);
-		if ( isset($hide[0]) && '1' == $hide[0] ) {		
-			//* Do nothing if there is nothing to show
-		} elseif( !isset($type) || '1' == $type ) {
-			$children = true;
-		} else {
-			$childnav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-'. $child_page->ID .' nav-item active"><a title="'. $child_page->post_title .'" href="'. get_permalink( $child_page->ID ) .'" class="nav-link"><span itemprop="name">'. $child_page->post_title .'</span></a></li>';
-		}
-	}
 	$args = array(
 		'child_of' => $page_id,
 		'title_li' => '',
@@ -53,12 +41,9 @@ if ($child_pages) {
 		'walker' => new WP_Bootstrap_Pagewalker(), // !important! create Bootstrap style navigation
 		// 'exclude' => implode(',',$excluded_pages),
 	);
-	if ($children) {
-		$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $page_id .'-children menu-item-has-children nav-item dropdown"><a href="'. get_permalink( $page_id ) .'#sub-expertise-title" title="Areas Within '. get_the_title( $page_id ) .'" class="nav-link"><span itemprop="name">Specialties</span></a></li>';
-	}
-	if (!empty($childnav)) {
-		$pagenav .= $childnav;
-	}
+}
+if ($show_child_content_nav) {
+	$pagenav .= $childnav;
 }
 // $pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item nav-item"><span itemprop="name">'. explode($child_pages, ',') .'</span></li>';
 

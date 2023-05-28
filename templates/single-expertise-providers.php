@@ -5,8 +5,12 @@
 
 // Set general variables
 $page_id = get_the_ID();
-$page_title = get_the_title();
+$page_title = get_the_title(); // Title of Area of Expertise
 $page_title_attr = uamswp_attr_conversion($page_title);
+$fpage_name = 'Providers'; // Fake subpage name
+$fpage_name_attr = uamswp_attr_conversion($fpage_name);
+$fpage_title = $page_title . ' ' . $fpage_name; // Fake subpage page title
+$fpage_title_attr = uamswp_attr_conversion($fpage_title);
 $page_url = get_permalink();
 $expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
 $expertise_archive_title_attr = uamswp_attr_conversion($expertise_archive_title);
@@ -19,14 +23,10 @@ $ontology_type = get_field('expertise_type'); // True is ontology type, false is
 // Get site header values for ontology subsections
 uamswp_fad_ontology_header();
 
-// Override theme's method of defining the page title
-function uamswp_fad_title($html) { 
-	global $page_title;
-	//you can add here all your conditions as if is_page(), is_category() etc.. 
-	$html = $page_title . ' | ' . get_bloginfo( "name" );
-	return $html;
-}
-// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+// Override theme's method of defining the meta page title
+add_filter('seopress_titles_title', 'uamswp_fad_fpage_title', 15, 2);
+
+// Override theme's method of defining the breadcrumbs
 function uamswp_breadcrumbs_expertise($crumbs) {
 	$crumbs[] = array('Providers', '');
 	return $crumbs;
@@ -55,25 +55,8 @@ function uamswp_add_entry_class( $attributes ) {
 add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 // Modify Entry Title
-
-	remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
-	add_action( 'genesis_entry_header', 'uamswp_expertise_post_title' );
-
-	function uamswp_expertise_post_title() {
-		global $page_title;
-		global $expertise_single_name;
-		global $parent_expertise;
-		global $parent_title;
-		global $parent_title_attr;
-		global $parent_url;
-		echo '<h1 class="entry-title" itemprop="headline">';
-		echo '<span class="supertitle">'. $expertise_single_name . '</span><span class="sr-only">:</span> ';
-		echo $page_title;
-		if ( $parent_expertise ) {
-			echo '<span class="subtitle"><span class="sr-only">(</span>Part of <a href="' . $parent_url . '" aria-label="Go to Area of Expertise page for ' . $parent_title_attr . '" data-categorytitle="Parent Name">' . $parent_title . '</a><span class="sr-only">)</span></span>';
-		} // endif
-		echo '</h1>';
-	}
+remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+add_action( 'genesis_entry_header', 'uamswp_fad_fpage_post_title' );
 
 add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 20 );
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
@@ -250,13 +233,20 @@ if ( $jump_link_count >= $jump_link_count_min ) {
 	$show_jump_links_section = false;
 }
 
+// Remove the primary navigation set by the theme
 remove_action( 'genesis_after_header', 'genesis_do_nav' );
+remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
+// Add ontology subsection navigation
 add_action( 'genesis_after_header', 'custom_expertise_nav_menu', 5 );
 function custom_expertise_nav_menu() {
 	global $show_providers_section;
 	global $show_locations_section;
 	global $show_related_aoe_section;
 	global $show_related_resource_section;
+	global $child_pages;
+	global $show_child_aoe_section;
+	global $show_child_content_nav;
+	global $childnav;
 	global $post;
 	global $page_title;
 	global $page_id;
