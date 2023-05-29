@@ -17,25 +17,25 @@ $nav = wp_nav_menu( $args );
 
 $pagenav = '';
 
-// $pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-'. $page_id .' nav-item active"><a title="'. get_the_title( $page_id ) .'" href="'. get_permalink( $page_id ) .'" class="nav-link"><span itemprop="name">'. get_the_title( $page_id ) .'</span></a></li>';
+// $pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-'. $site_nav_id .' nav-item active"><a title="'. get_the_title( $site_nav_id ) .'" href="'. get_permalink( $site_nav_id ) .'" class="nav-link"><span itemprop="name">'. get_the_title( $site_nav_id ) .'</span></a></li>';
 if ($show_providers_section) {
-	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $page_id .'-providers nav-item"><a title="Providers for '. get_the_title( $page_id ) .'" href="'. get_permalink( $page_id ) .'providers/" class="nav-link"><span itemprop="name">Providers</span></a></li>';
+	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $site_nav_id .'-providers nav-item"><a title="Providers for '. get_the_title( $site_nav_id ) .'" href="'. get_permalink( $site_nav_id ) .'providers/" class="nav-link"><span itemprop="name">Providers</span></a></li>';
 }
 if ($show_locations_section) {
-	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $page_id .'-locations nav-item"><a title="Locations for '. get_the_title( $page_id ) .'" href="'. get_permalink( $page_id ) .'locations/" class="nav-link"><span itemprop="name">Locations</span></a></li>';
+	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $site_nav_id .'-locations nav-item"><a title="Locations for '. get_the_title( $site_nav_id ) .'" href="'. get_permalink( $site_nav_id ) .'locations/" class="nav-link"><span itemprop="name">Locations</span></a></li>';
 }
 if ($show_child_aoe_section) {
-	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $page_id .'-children nav-item"><a title="Areas within '. get_the_title( $page_id ) .'" href="'. get_permalink( $page_id ) .'specialties/" class="nav-link"><span itemprop="name">Specialties</span></a></li>';
+	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $site_nav_id .'-children nav-item"><a title="Areas within '. get_the_title( $site_nav_id ) .'" href="'. get_permalink( $site_nav_id ) .'specialties/" class="nav-link"><span itemprop="name">Specialties</span></a></li>';
 }
 if ($show_related_aoe_section) {
-	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $page_id .'-related nav-item"><a title="Related Expertise for '. get_the_title( $page_id ) .'" href="'. get_permalink( $page_id ) .'related/" class="nav-link"><span itemprop="name">Related</span></a></li>';
+	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $site_nav_id .'-related nav-item"><a title="Related Expertise for '. get_the_title( $site_nav_id ) .'" href="'. get_permalink( $site_nav_id ) .'related/" class="nav-link"><span itemprop="name">Related</span></a></li>';
 }
 if ($show_related_resource_section) {
-	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $page_id .'-resources nav-item"><a title="Clinical Resources for '. get_the_title( $page_id ) .'" href="'. get_permalink( $page_id ) .'resources/" class="nav-link"><span itemprop="name">Clinical Resources</span></a></li>';
+	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $site_nav_id .'-resources nav-item"><a title="Clinical Resources for '. get_the_title( $site_nav_id ) .'" href="'. get_permalink( $site_nav_id ) .'resources/" class="nav-link"><span itemprop="name">Clinical Resources</span></a></li>';
 }
 if ($child_pages) {
 	$args = array(
-		'child_of' => $page_id,
+		'child_of' => $site_nav_id,
 		'title_li' => '',
 		'echo' => false,
 		'walker' => new WP_Bootstrap_Pagewalker(), // !important! create Bootstrap style navigation
