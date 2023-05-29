@@ -64,15 +64,6 @@ add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 // Remove content
 remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 
-// Check if Podcast section should be displayed
-$podcast_name = get_field('expertise_podcast_name');
-$podcast_name_attr = uamswp_attr_conversion($podcast_name);
-if ($podcast_name) {
-	$show_podcast_section = true;
-} else {
-	$show_podcast_section = false;
-}
-
 // Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
 
 	// Query for whether associated providers content section should be displayed on ontology pages/subsections
@@ -467,44 +458,6 @@ function uamswp_expertise_header_metadata() {
 		}
 		echo '<meta name="keywords" content="'. $keyword_text .'" />';
 	endif;
-}
-function uamswp_expertise_podcast() {
-	global $page_title;
-	global $show_podcast_section;
-	global $podcast_name;
-
-	if ( $show_podcast_section ) {
-		echo '<section class="uams-module podcast-list bg-auto" id="podcast">
-		<script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
-		</script>
-		<script type="text/javascript">
-			radiomd_embedded_filtered_tag("uams","radiomd-embedded-filtered-tag",303,"' . $podcast_name . '");
-		</script>
-		<style type="text/css">
-			#radiomd-embedded-filtered-tag iframe {
-			width: 100%;
-			border: none;
-		}
-		</style>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-12">
-					<h2 class="module-title"><span class="title">UAMS Health Talk Podcast</span></h2>
-					<div class="module-body text-center">
-						<p class="lead">In the UAMS Health Talk podcast, experts from UAMS talk about a variety of health topics, providing tips and guidelines to help people lead healthier lives. Listen to the episode(s) featuring the topic of '. $page_title . '.</p>
-					</div>
-					<div class="content-width mt-8" id="radiomd-embedded-filtered-tag"></div>
-				</div>
-				<div class="col-12 more">
-					<p class="lead">Find other great episodes on other topics and from other UAMS providers.</p>
-					<div class="cta-container">
-						<a href="/podcast/" class="btn btn-primary" aria-label="Listen to more episodes of the UAMS Health Talk podcast">Listen to More Episodes</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>';
-	}
 }
 function uamswp_expertise_resource() {
 	global $post;

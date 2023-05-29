@@ -65,15 +65,6 @@ add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 // Remove content
 remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 
-// Check if Podcast section should be displayed
-$podcast_name = get_field('expertise_podcast_name');
-$podcast_name_attr = uamswp_attr_conversion($podcast_name);
-if ($podcast_name) {
-	$show_podcast_section = true;
-} else {
-	$show_podcast_section = false;
-}
-
 // Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
 
 	// Query for whether associated providers content section should be displayed on ontology pages/subsections
