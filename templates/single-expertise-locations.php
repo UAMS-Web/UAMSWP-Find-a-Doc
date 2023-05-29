@@ -119,7 +119,7 @@ remove_action( 'genesis_after_header', 'genesis_do_nav' );
 remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
 
 // Add ontology subsection primary navigation
-add_action( 'genesis_after_header', 'custom_expertise_nav_menu', 5 );
+add_action( 'genesis_after_header', 'uamswp_fad_ontology_nav_menu', 5 );
 
 remove_action( 'genesis_header', 'uamswp_site_image', 5 );
 add_action( 'genesis_header', 'uamswp_expertise_header', 5 );

@@ -1527,7 +1527,7 @@ function uamswp_fad_fpage_title($html) {
 	}
 
 // Construct ontology subsection primary navigation
-function custom_expertise_nav_menu() {
+function uamswp_fad_ontology_nav_menu() {
 	global $site_nav_id;
 	global $show_providers_section;
 	global $show_locations_section;
