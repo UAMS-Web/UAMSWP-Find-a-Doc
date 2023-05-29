@@ -1320,3 +1320,208 @@ function uamswp_fad_fpage_title($html) {
 	$html = $fpage_name . ' | ' . $page_title . ' | ' . get_bloginfo( "name" );
 	return $html;
 }
+
+// Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
+
+	// Query for whether associated providers content section should be displayed on ontology pages/subsections
+	function uamswp_fad_ontology_providers_query() {
+		global $physicians;
+		global $site_nav_id;
+		global $physicians_query;
+		global $ontology_type;
+		global $show_providers_section;
+		global $provider_ids;
+
+		$physicians = get_field( "physician_expertise", $site_nav_id );
+		if($physicians) {
+			$args = array(
+				"post_type" => "provider",
+				"post_status" => "publish",
+				"posts_per_page" => -1,
+				"orderby" => "title",
+				"order" => "ASC",
+				"fields" => "ids",
+				// 'no_found_rows' => true, // counts posts, remove if pagination required
+				'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
+				'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
+				"post__in" => $physicians
+			);
+			$physicians_query = New WP_Query( $args );
+			if( ( $physicians_query && $physicians_query->have_posts()) && ( "1" == $ontology_type || !isset( $ontology_type ) ) ) {
+				$show_providers_section = true;
+				$provider_ids = $physicians_query->posts;
+			} else {
+				wp_redirect( get_the_permalink($site_nav_id), 301 );
+				$show_providers_section = false;
+			}
+		}
+	}
+
+	// Query for whether associated locations content section should be displayed on ontology pages/subsections
+	function uamswp_fad_ontology_locations_query() {
+		global $locations;
+		global $site_nav_id;
+		global $location_query;
+		global $ontology_type;
+		global $show_locations_section;
+
+		$locations = get_field('location_expertise', $site_nav_id);
+		if($locations) {
+			$args = (array(
+				'post_type' => "location",
+				"post_status" => "publish",
+				'order' => 'ASC',
+				'orderby' => 'title',
+				'posts_per_page' => -1,
+				'fields' => 'ids',
+				'no_found_rows' => true, // counts posts, remove if pagination required
+				'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
+				'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
+				'post__in'	=> $locations
+			));
+			$location_query = new WP_Query( $args );
+			if( ( $locations && $location_query->have_posts() ) && ( "1" == $ontology_type || !isset( $ontology_type ) ) ) {
+				$show_locations_section = true;
+			} else {
+				$show_locations_section = false;
+			}
+		}
+	}
+
+	// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
+	function uamswp_fad_ontology_descendants_query() {
+		global $child_pages;
+		global $site_nav_id;
+		global $childnav;
+		global $children;
+		global $show_child_aoe_section;
+		global $show_child_content_nav;
+
+		$child_pages = get_pages( array('child_of' => $site_nav_id, 'post_type' => 'expertise' ) );
+		if ($child_pages) {
+			$childnav = '';
+			$children = false;
+			foreach ( $child_pages as $child_page ) {
+				$hide = get_post_meta($child_page->ID, 'page_hide_from_menu');
+				$type = get_field('expertise_type', $child_page->ID);
+				if ( isset($hide[0]) && '1' == $hide[0] ) {
+					//* Do nothing if there is nothing to show
+				} elseif( !isset($type) || '1' == $type ) {
+					$children = true;
+				} else {
+					$childnav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-'. $child_page->ID .' nav-item active"><a title="'. $child_page->post_title .'" href="'. get_permalink( $child_page->ID ) .'" class="nav-link"><span itemprop="name">'. $child_page->post_title .'</span></a></li>';			
+				}
+			}
+			$show_child_aoe_section = $children ? true : false;
+			$show_child_content_nav = !empty($childnav) ? true : false;
+		}
+	}
+
+	// Query for whether related ontology items (of the same post type) content section should be displayed on ontology pages/subsections
+	function uamswp_fad_ontology_related_query() {
+		global $expertises;
+		global $site_nav_id;
+		global $expertise_query;
+		global $ontology_type;
+		global $show_related_aoe_section;
+
+		$expertises = get_field('expertise_associated', $site_nav_id);
+		$args = (array(
+			'post_type' => "expertise",
+			'order' => 'ASC',
+			'orderby' => 'title',
+			'posts_per_page' => -1,
+			'post_status' => 'publish',
+			'post__in'	=> $expertises
+		));
+		$expertise_query = new WP_Query( $args );
+		if( ( $expertises && $expertise_query->have_posts() ) && ( "1" == $ontology_type || !isset( $ontology_type ) ) ) {
+			$show_related_aoe_section = true;
+		} else {
+			$show_related_aoe_section = false;
+		}
+	}
+
+	// Query for whether associated clinical resources content section should be displayed on ontology pages/subsections
+	function uamswp_fad_ontology_resources_query() {
+		global $site_nav_id;
+		global $resources;
+		global $resource_postsPerPage;
+		global $resource_more;
+		global $resource_query;
+		global $ontology_type;
+		global $show_related_resource_section;
+
+		$resources = get_field('expertise_clinical_resources', $site_nav_id);
+		$resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
+		$resource_more = false;
+		$args = (array(
+			'post_type' => "clinical-resource",
+			'order' => 'DESC',
+			'orderby' => 'post_date',
+			'posts_per_page' => $resource_postsPerPage,
+			'post_status' => 'publish',
+			'post__in'	=> $resources
+		));
+		$resource_query = new WP_Query( $args );
+		
+		// Check if Clinical Resources section should be displayed
+		if( ( $resources && $resource_query->have_posts() ) && ( "1" == $ontology_type || !isset($ontology_type) ) ) {
+			$show_related_resource_section = true;
+		} else {
+			$show_related_resource_section = false;
+		}
+	}
+
+	// Query for whether associated conditions content section should be displayed on ontology pages/subsections
+	function uamswp_fad_ontology_conditions_query() {
+		global $conditions_cpt;
+		global $site_nav_id;
+		global $conditions_cpt_query;
+		global $ontology_type;
+		global $show_conditions_section;
+
+		// load all 'conditions' terms for the post
+		$conditions_cpt = get_field('expertise_conditions_cpt', $site_nav_id);
+		// Conditions CPT
+		$args = (array(
+			'post_type' => "condition",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $conditions_cpt
+		));
+		$conditions_cpt_query = new WP_Query( $args );
+		if( ( $conditions_cpt && $conditions_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
+			$show_conditions_section = true;
+		} else {
+			$show_conditions_section = false;
+		}
+	}
+
+	// Query for whether associated treatments content section should be displayed on ontology pages/subsections
+	function uamswp_fad_ontology_treatments_query() {
+		global $treatments_cpt;
+		global $site_nav_id;
+		global $treatments_cpt_query;
+		global $ontology_type;
+		global $show_treatments_section;
+		
+		$treatments_cpt = get_field('expertise_treatments_cpt', $site_nav_id);
+		// Treatments CPT
+		$args = (array(
+			'post_type' => "treatment",
+			'post_status' => 'publish',
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'posts_per_page' => -1,
+			'post__in' => $treatments_cpt
+		));
+		$treatments_cpt_query = new WP_Query( $args );
+		if( ( $treatments_cpt && $treatments_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
+			$show_treatments_section = true;
+		} else {
+			$show_treatments_section = false;
+		}
+	}

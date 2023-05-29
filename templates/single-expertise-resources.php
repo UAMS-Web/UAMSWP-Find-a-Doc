@@ -20,7 +20,7 @@ $expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
 // Area of Expertise Content Type
 $ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
 
-// Get site header values for ontology subsections
+// Get site header and site nav values for ontology subsections
 uamswp_fad_ontology_header();
 
 // Override theme's method of defining the meta page title
@@ -78,7 +78,28 @@ if ($podcast_name) {
 	$show_podcast_section = false;
 }
 
-include_once('single-expertise-content.php');
+// Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
+
+	// Query for whether associated providers content section should be displayed on ontology pages/subsections
+	uamswp_fad_ontology_providers_query();
+
+	// Query for whether associated locations content section should be displayed on ontology pages/subsections
+	uamswp_fad_ontology_locations_query();
+
+	// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
+	uamswp_fad_ontology_descendants_query();
+
+	// Query for whether related ontology items (of the same post type) content section should be displayed on ontology pages/subsections
+	uamswp_fad_ontology_related_query();
+
+	// Query for whether associated clinical resources content section should be displayed on ontology pages/subsections
+	uamswp_fad_ontology_resources_query();
+
+	// Query for whether associated conditions content section should be displayed on ontology pages/subsections
+	uamswp_fad_ontology_conditions_query();
+
+	// Query for whether associated treatments content section should be displayed on ontology pages/subsections
+	uamswp_fad_ontology_treatments_query();
 
 // Check if Make an Appointment section should be displayed
 // It should always be displayed.

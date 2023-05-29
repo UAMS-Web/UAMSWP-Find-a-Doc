@@ -113,7 +113,28 @@ if ($podcast_name) {
 	$show_podcast_section = false;
 }
 
-include_once('single-expertise-content.php');
+// Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
+
+	// Query for whether associated providers content section should be displayed on ontology pages/subsections
+	uamswp_fad_ontology_providers_query();
+
+	// Query for whether associated locations content section should be displayed on ontology pages/subsections
+	uamswp_fad_ontology_locations_query();
+
+	// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
+	uamswp_fad_ontology_descendants_query();
+
+	// Query for whether related ontology items (of the same post type) content section should be displayed on ontology pages/subsections
+	uamswp_fad_ontology_related_query();
+
+	// Query for whether associated clinical resources content section should be displayed on ontology pages/subsections
+	uamswp_fad_ontology_resources_query();
+
+	// Query for whether associated conditions content section should be displayed on ontology pages/subsections
+	uamswp_fad_ontology_conditions_query();
+
+	// Query for whether associated treatments content section should be displayed on ontology pages/subsections
+	uamswp_fad_ontology_treatments_query();
 
 // Check if Make an Appointment section should be displayed
 // It should always be displayed.
