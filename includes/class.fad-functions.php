@@ -1347,7 +1347,7 @@ function uamswp_fad_fpage_title($html) {
 				"post__in" => $physicians
 			);
 			$physicians_query = New WP_Query( $args );
-			if( ( $physicians_query && $physicians_query->have_posts()) && ( "1" == $ontology_type || !isset( $ontology_type ) ) ) {
+			if( ( $physicians_query && $physicians_query->have_posts()) ) {
 				$show_providers_section = true;
 				$provider_ids = $physicians_query->posts;
 			} else {
@@ -1380,7 +1380,7 @@ function uamswp_fad_fpage_title($html) {
 				'post__in'	=> $locations
 			));
 			$location_query = new WP_Query( $args );
-			if( ( $locations && $location_query->have_posts() ) && ( "1" == $ontology_type || !isset( $ontology_type ) ) ) {
+			if( ( $locations && $location_query->have_posts() ) ) {
 				$show_locations_section = true;
 			} else {
 				$show_locations_section = false;
@@ -1435,7 +1435,7 @@ function uamswp_fad_fpage_title($html) {
 			'post__in'	=> $expertises
 		));
 		$expertise_query = new WP_Query( $args );
-		if( ( $expertises && $expertise_query->have_posts() ) && ( "1" == $ontology_type || !isset( $ontology_type ) ) ) {
+		if( ( $expertises && $expertise_query->have_posts() ) ) {
 			$show_related_aoe_section = true;
 		} else {
 			$show_related_aoe_section = false;
@@ -1466,7 +1466,7 @@ function uamswp_fad_fpage_title($html) {
 		$resource_query = new WP_Query( $args );
 		
 		// Check if Clinical Resources section should be displayed
-		if( ( $resources && $resource_query->have_posts() ) && ( "1" == $ontology_type || !isset($ontology_type) ) ) {
+		if( ( $resources && $resource_query->have_posts() ) ) {
 			$show_related_resource_section = true;
 		} else {
 			$show_related_resource_section = false;
