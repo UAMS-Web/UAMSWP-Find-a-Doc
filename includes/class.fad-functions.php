@@ -1525,3 +1525,18 @@ function uamswp_fad_fpage_title($html) {
 			$show_treatments_section = false;
 		}
 	}
+
+// Construct ontology subsection primary navigation
+function custom_expertise_nav_menu() {
+	global $site_nav_id;
+	global $show_providers_section;
+	global $show_locations_section;
+	global $show_child_aoe_section;
+	global $show_related_aoe_section;
+	global $show_related_resource_section;
+	global $child_pages;
+	global $show_child_content_nav;
+	global $childnav;
+
+	include( UAMS_FAD_PATH . '/templates/single-expertise-nav.php');
+}
