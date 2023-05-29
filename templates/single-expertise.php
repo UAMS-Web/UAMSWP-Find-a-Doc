@@ -17,7 +17,7 @@ $expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
 $ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
 
 // Get site header and site nav values for ontology subsections
-uamswp_fad_ontology_header();
+uamswp_fad_ontology_site_values();
 
 // Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
@@ -156,7 +156,7 @@ remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
 add_action( 'genesis_after_header', 'uamswp_fad_ontology_nav_menu', 5 );
 
 remove_action( 'genesis_header', 'uamswp_site_image', 5 );
-add_action( 'genesis_header', 'uamswp_expertise_header', 5 );
+add_action( 'genesis_header', 'uamswp_fad_ontology_header', 5 );
 
 function uamswp_expertise_cta() {
 	$cta_repeater = get_field('expertise_cta');

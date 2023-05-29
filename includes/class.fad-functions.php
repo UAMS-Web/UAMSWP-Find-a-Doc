@@ -1199,7 +1199,7 @@ function uamswp_attr_conversion($input)
 }
 
 // Get site header and site nav values for ontology subsections
-function uamswp_fad_ontology_header() {
+function uamswp_fad_ontology_site_values() {
 	// Bring in variables from outside the function
 	global $page_id;
 	global $page_title;
@@ -1542,7 +1542,7 @@ function uamswp_fad_ontology_nav_menu() {
 }
 
 // Construct ontology subsection site header
-function uamswp_expertise_header() {
+function uamswp_fad_ontology_header() {
 	global $navbar_subbrand_title;
 	global $navbar_subbrand_title_url;
 	global $navbar_subbrand_parent;
