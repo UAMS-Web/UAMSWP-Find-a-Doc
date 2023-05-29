@@ -11,30 +11,17 @@ $fpage_name = 'Specialties'; // Fake subpage title
 $fpage_name_attr = uamswp_attr_conversion($fpage_name);
 $fpage_title = $fpage_name . ' in ' . $page_title; // Fake subpage page title
 $fpage_title_attr = uamswp_attr_conversion($fpage_title);
+$page_url = get_permalink();
 $expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
 $expertise_archive_title_attr = uamswp_attr_conversion($expertise_archive_title);
 $expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
 $expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
 
-// Parent Area of Expertise 
-$expertise_parent_id = wp_get_post_parent_id($page_id);
-$expertise_has_parent = $expertise_parent_id ? true : false;
-$parent_expertise = '';
-$parent_id = '';
-$parent_title = '';
-$parent_title_attr = '';
-$parent_url = '';
+// Area of Expertise Content Type
+$ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
 
-if ($expertise_has_parent && $expertise_parent_id) { 
-	$parent_expertise = get_post( $expertise_parent_id );
-}
-// Get attributes of parent Area of Expertise
-if ($parent_expertise) {
-	$parent_id = $parent_expertise->ID;
-	$parent_title = $parent_expertise->post_title;
-	$parent_title_attr = uamswp_attr_conversion($parent_title);
-	$parent_url = get_permalink( $parent_id );
-}
+// Get site header and site nav values for ontology subsections
+uamswp_fad_ontology_header();
 
 // Override theme's method of defining the meta page title
 add_filter('seopress_titles_title', 'uamswp_fad_fpage_title', 15, 2);
@@ -89,12 +76,6 @@ if ($podcast_name) {
 	$jump_link_count++;
 } else {
 	$show_podcast_section = false;
-}
-
-$content_type = get_field('expertise_type'); // True is expertise, false is content
-
-if ( "0" == $content_type ) {
-	$page_id = $parent_id;
 }
 
 // Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
