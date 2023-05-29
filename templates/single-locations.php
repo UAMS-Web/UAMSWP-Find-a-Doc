@@ -257,7 +257,7 @@ function sp_titles_desc($html) {
 }
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
-// Override theme's method of defining the page title
+// Override theme's method of defining the meta page title
 $location_city = get_field('location_city', $post_id); // Get the location's city
 function uamswp_fad_title($html) { 
 	global $page_title_attr;

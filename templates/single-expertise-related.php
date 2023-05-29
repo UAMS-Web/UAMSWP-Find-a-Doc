@@ -5,44 +5,30 @@
 
 // Set general variables
 $page_id = get_the_ID();
-$page_title = get_the_title();
+$page_title = get_the_title(); // Title of Area of Expertise
 $page_title_attr = uamswp_attr_conversion($page_title);
+$fpage_name = 'Related Areas of Expertise'; // Fake subpage title
+$fpage_name_attr = uamswp_attr_conversion($fpage_name);
+$fpage_title = 'Areas of Expertise Related to ' . $page_title; // Fake subpage page title
+$fpage_title_attr = uamswp_attr_conversion($fpage_title);
+$page_url = get_permalink();
 $expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
 $expertise_archive_title_attr = uamswp_attr_conversion($expertise_archive_title);
 $expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
 $expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
 
-// Parent Area of Expertise 
-$expertise_parent_id = wp_get_post_parent_id($page_id);
-$expertise_has_parent = $expertise_parent_id ? true : false;
-$parent_expertise = '';
-$parent_id = '';
-$parent_title = '';
-$parent_title_attr = '';
-$parent_url = '';
+// Area of Expertise Content Type
+$ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
 
-if ($expertise_has_parent && $expertise_parent_id) { 
-	$parent_expertise = get_post( $expertise_parent_id );
-}
-// Get attributes of parent Area of Expertise
-if ($parent_expertise) {
-	$parent_id = $parent_expertise->ID;
-	$parent_title = $parent_expertise->post_title;
-	$parent_title_attr = uamswp_attr_conversion($parent_title);
-	$parent_url = get_permalink( $parent_id );
-}
+// Get site header values for ontology subsections
+uamswp_fad_ontology_header();
 
-// Override theme's method of defining the page title
-function uamswp_fad_title($html) { 
-	global $page_title;
-	//you can add here all your conditions as if is_page(), is_category() etc.. 
-	$html = $page_title . ' | ' . get_bloginfo( "name" );
-	return $html;
-}
-// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+// Override theme's method of defining the meta page title
+add_filter('seopress_titles_title', 'uamswp_fad_fpage_title', 15, 2);
 
+// Override theme's method of defining the breadcrumbs
 function uamswp_breadcrumbs_expertise($crumbs) {
-	$crumbs[] = array('Related Expertise', '');
+	$crumbs[] = array('Related Areas of Expertise', '');
 	return $crumbs;
 }
 add_filter('seopress_pro_breadcrumbs_crumbs', 'uamswp_breadcrumbs_expertise');
@@ -69,25 +55,8 @@ function uamswp_add_entry_class( $attributes ) {
 add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 // Modify Entry Title
-
-	remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
-	add_action( 'genesis_entry_header', 'uamswp_expertise_post_title' );
-
-	function uamswp_expertise_post_title() {
-		global $page_title;
-		global $expertise_single_name;
-		global $parent_expertise;
-		global $parent_title;
-		global $parent_title_attr;
-		global $parent_url;
-		echo '<h1 class="entry-title" itemprop="headline">';
-		echo '<span class="supertitle">'. $expertise_single_name . '</span><span class="sr-only">:</span> ';
-		echo $page_title;
-		if ( $parent_expertise ) {
-			echo '<span class="subtitle"><span class="sr-only">(</span>Part of <a href="' . $parent_url . '" aria-label="Go to Area of Expertise page for ' . $parent_title_attr . '" data-categorytitle="Parent Name">' . $parent_title . '</a><span class="sr-only">)</span></span>';
-		} // endif
-		echo '</h1>';
-	}
+remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+add_action( 'genesis_entry_header', 'uamswp_fad_fpage_post_title' );
 
 // add_action( 'genesis_after_entry', 'uamswp_list_child_expertise', 12 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 24 );
@@ -108,12 +77,6 @@ if ($podcast_name) {
 	$jump_link_count++;
 } else {
 	$show_podcast_section = false;
-}
-
-$content_type = get_field('expertise_type'); // True is expertise, false is content
-
-if ( "0" == $content_type ) {
-	$page_id = $parent_id;
 }
 
 include_once('single-expertise-content.php');
@@ -154,9 +117,11 @@ function custom_expertise_nav_menu() {
 remove_action( 'genesis_header', 'uamswp_site_image', 5 );
 add_action( 'genesis_header', 'uamswp_expertise_header', 5 );
 function uamswp_expertise_header() {
-	global $page_id;
-	global $expertise_has_parent;
-	global $content_type;
+	global $navbar_subbrand_title;
+	global $navbar_subbrand_title_url;
+	global $navbar_subbrand_parent;
+	global $navbar_subbrand_parent_url;
+
 	include( UAMS_FAD_PATH . '/templates/single-expertise-header.php');
 }
 

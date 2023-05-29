@@ -7,32 +7,19 @@
 $page_id = get_the_ID();
 $page_title = get_the_title();
 $page_title_attr = uamswp_attr_conversion($page_title);
+$page_url = get_permalink();
 $expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
 $expertise_archive_title_attr = uamswp_attr_conversion($expertise_archive_title);
 $expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
 $expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
 
-// Parent Area of Expertise 
-$expertise_parent_id = wp_get_post_parent_id($page_id);
-$expertise_has_parent = $expertise_parent_id ? true : false;
-$parent_expertise = '';
-$parent_id = '';
-$parent_title = '';
-$parent_title_attr = '';
-$parent_url = '';
+// Area of Expertise Content Type
+$ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
 
-if ($expertise_has_parent && $expertise_parent_id) { 
-	$parent_expertise = get_post( $expertise_parent_id );
-}
-// Get attributes of parent Area of Expertise
-if ($parent_expertise) {
-	$parent_id = $parent_expertise->ID;
-	$parent_title = $parent_expertise->post_title;
-	$parent_title_attr = uamswp_attr_conversion($parent_title);
-	$parent_url = get_permalink( $parent_id );
-}
+// Get site header values for ontology subsections
+uamswp_fad_ontology_header();
 
-// Override theme's method of defining the page title
+// Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
 	global $page_title_attr;
 	global $expertise_single_name_attr;
@@ -85,13 +72,14 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 		global $parent_title;
 		global $parent_title_attr;
 		global $parent_url;
-		global $expertise_has_parent;
-		global $content_type;
+		global $has_ancestors_ontology;
+		global $ontology_type;
+
 		echo '<h1 class="entry-title" itemprop="headline">';
 		echo '<span class="supertitle">'. $expertise_single_name . '</span><span class="sr-only">:</span> ';
 		echo $page_title;
 		if ( $parent_expertise ) {
-			echo '<span class="subtitle"><span class="sr-only">(</span>Part of <a href="' . $parent_url . '" aria-label="Go to Area of Expertise page for ' . $parent_title_attr . '" data-categorytitle="Parent Name">' . $parent_title . '</a><span class="sr-only">)</span></span>';
+		   echo '<span class="subtitle"><span class="sr-only">(</span>Part of <a href="' . $parent_url . '" aria-label="Go to Area of Expertise page for ' . $parent_title_attr . '" data-categorytitle="Parent Name">' . $parent_title . '</a><span class="sr-only">)</span></span>';
 		} // endif
 		echo '</h1>';
 	}
@@ -125,12 +113,6 @@ if ($podcast_name) {
 	$show_podcast_section = false;
 }
 
-$content_type = get_field('expertise_type'); // True is expertise, false is content
-
-if ( "0" == $content_type ) {
-	$page_id = $parent_id;
-}
-
 include_once('single-expertise-content.php');
 
 // Check if Make an Appointment section should be displayed
@@ -162,10 +144,9 @@ function custom_expertise_nav_menu() {
 	global $post;
 	global $page_title;
 	global $page_id;
-	global $parent_expertise;
-	global $content_type;
+	global $ontology_type;
 
-	if ($parent_expertise && "0" == $content_type) {
+	if ($parent_expertise && "0" == $ontology_type) {
 		$page_id = $parent_expertise->ID;
 	}
 
@@ -175,9 +156,11 @@ function custom_expertise_nav_menu() {
 remove_action( 'genesis_header', 'uamswp_site_image', 5 );
 add_action( 'genesis_header', 'uamswp_expertise_header', 5 );
 function uamswp_expertise_header() {
-	global $page_id;
-	global $expertise_has_parent;
-	global $content_type;
+	global $navbar_subbrand_title;
+	global $navbar_subbrand_title_url;
+	global $navbar_subbrand_parent;
+	global $navbar_subbrand_parent_url;
+
 	include( UAMS_FAD_PATH . '/templates/single-expertise-header.php');
 }
 

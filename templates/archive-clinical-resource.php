@@ -5,7 +5,7 @@
  * 
  */
 
-// Override theme's method of defining the page title
+// Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$html = 'Clinical Resources | ' . get_bloginfo( "name" );

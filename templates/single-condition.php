@@ -26,7 +26,7 @@ $condition_title = get_field('conditions_single_name', 'option') ?: 'Condition';
 $condition_title_attr = uamswp_attr_conversion($condition_title);
 $condition_text = get_field('conditions_archive_intro_text', 'option');
 
-// Override theme's method of defining the page title
+// Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
 	global $page_title_attr;
 	global $condition_title_attr;

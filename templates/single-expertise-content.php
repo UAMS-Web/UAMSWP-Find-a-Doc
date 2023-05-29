@@ -14,8 +14,8 @@ $args = (array(
 ));
 $resource_query = new WP_Query( $args );
 
-// Check if fake subpage for Clinical Resources should be displayed
-if( ( $resources && $resource_query->have_posts() ) && ( "1" == $content_type || !isset($content_type) ) ) {
+// Check if Clinical Resources section should be displayed
+if( ( $resources && $resource_query->have_posts() ) && ( "1" == $ontology_type || !isset($ontology_type) ) ) {
 	$show_related_resource_section = true;
 	$jump_link_count++;
 } else {
@@ -55,7 +55,7 @@ $args = (array(
 	'post__in' => $conditions_cpt
 ));
 $conditions_cpt_query = new WP_Query( $args );
-if( ( $conditions_cpt && $conditions_cpt_query->posts ) && ("1" == $content_type || !isset($content_type) ) ) {
+if( ( $conditions_cpt && $conditions_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
 	$show_conditions_section = true;
 	$jump_link_count++;
 } else {
@@ -74,7 +74,7 @@ $args = (array(
 	'post__in' => $treatments_cpt
 ));
 $treatments_cpt_query = new WP_Query( $args );
-if( ( $treatments_cpt && $treatments_cpt_query->posts ) && ("1" == $content_type || !isset($content_type) ) ) {
+if( ( $treatments_cpt && $treatments_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
 	$show_treatments_section = true;
 	$jump_link_count++;
 } else {
@@ -97,7 +97,7 @@ if($physicians) {
 		"post__in" => $physicians
 	);
 	$physicians_query = New WP_Query( $args );
-	if( ( $physicians_query && $physicians_query->have_posts()) && ( "1" == $content_type || !isset( $content_type ) ) ) {
+	if( ( $physicians_query && $physicians_query->have_posts()) && ( "1" == $ontology_type || !isset( $ontology_type ) ) ) {
 		$show_providers_section = true;
 		$jump_link_count++;
 		$provider_ids = $physicians_query->posts;
@@ -122,7 +122,7 @@ if($locations) {
 		'post__in'	=> $locations
 	));
 	$location_query = new WP_Query( $args );
-	if( ( $locations && $location_query->have_posts() ) && ( "1" == $content_type || !isset( $content_type ) ) ) {
+	if( ( $locations && $location_query->have_posts() ) && ( "1" == $ontology_type || !isset( $ontology_type ) ) ) {
 		$show_locations_section = true;
 		$jump_link_count++;
 	} else {
@@ -141,7 +141,7 @@ $args = (array(
 	'post__in'	=> $expertises
 ));
 $expertise_query = new WP_Query( $args );
-if( ( $expertises && $expertise_query->have_posts() ) && ( "1" == $content_type || !isset( $content_type ) ) ) {
+if( ( $expertises && $expertise_query->have_posts() ) && ( "1" == $ontology_type || !isset( $ontology_type ) ) ) {
 	$show_related_aoe_section = true;
 	$jump_link_count++;
 } else {

@@ -6,7 +6,7 @@
 ?>
 <!-- /* Begin Title / Logo */ -->
 <div class="global-title">
-	<a href="<?php echo network_site_url(); ?>" class="navbar-brand <?php if ( !$expertise_has_parent && !$content_type && !get_query_var('fpage') ) { echo 'no-subbrand'; } ?>">
+	<a href="<?php echo network_site_url(); ?>" class="navbar-brand <?php if ( !$navbar_subbrand_title ) { echo 'no-subbrand'; } ?>">
 		<picture>
 			<source srcset="<?php echo get_stylesheet_directory_uri(); ?>/assets/svg/uams-logo_health_horizontal_dark.svg" media="(min-width: 576px)">
 			<source srcset="<?php echo get_stylesheet_directory_uri(); ?>/assets/svg/uams-logo_health_vertical_dark.svg" media="(min-width: 1px)">
@@ -14,13 +14,14 @@
 		</picture>
 		<span class="sr-only">UAMS Health</span>
 	</a>
-	<?php if ( $expertise_has_parent || $content_type || get_query_var('fpage') ) { 
-		?>
 	<div class="navbar-subbrand">
-		<!-- <a class="parent" href="/expertise/">Areas of Expertise</a><span class="sr-only">: </span> -->
-		<a class="title" href="<?php echo get_permalink( $page_id ); ?>"><?php echo get_the_title( $page_id ); ?></a>
+		<?php
+		// If the current item has a top-level ancestor with the ontology type, display the that ancestor
+		if ( $navbar_subbrand_parent ) { ?>
+			<a class="parent" href="<?php echo $navbar_subbrand_parent_url; ?>"><?php echo $navbar_subbrand_parent; ?></a><span class="sr-only">: </span>
+		<?php } // endif ( $navbar_subbrand_parent ) ?>
+		<a class="title" href="<?php echo $navbar_subbrand_title_url; ?>"><?php echo $navbar_subbrand_title; ?></a>
 	</div>
-	<?php } ?>
 </div>
 <!-- /* End Title / Logo */ -->
 
