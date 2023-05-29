@@ -88,12 +88,8 @@ add_filter( 'genesis_entry_content', 'uamswp_expertise_keywords', 8 );
 add_action( 'genesis_entry_content', 'uamswp_expertise_youtube', 12 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_cta', 6 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_podcast', 10 );
-// add_action( 'genesis_after_entry', 'uamswp_expertise_resource', 14 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_conditions_cpt', 16 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_treatments_cpt', 18 );
-// add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 20 );
-// add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 22 );
-// add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 24 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_appointment', 26 );
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 
