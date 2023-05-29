@@ -1550,3 +1550,21 @@ function uamswp_fad_ontology_header() {
 
 	include( UAMS_FAD_PATH . '/templates/single-expertise-header.php');
 }
+
+// Construct ontology subsection meta keywords element
+function uamswp_expertise_header_metadata() { 
+	global $keywords;
+
+	if( $keywords ): 
+		$i = 1;
+		$keyword_text = '';
+		foreach( $keywords as $keyword ) { 
+			if ( 1 < $i ) {
+				$keyword_text .= ', ';
+			}
+			$keyword_text .= str_replace(",", "", $keyword['text']);
+			$i++;
+		}
+		echo '<meta name="keywords" content="'. $keyword_text .'" />';
+	endif;
+}
