@@ -16,7 +16,7 @@ $expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
 // Area of Expertise Content Type
 $ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
 
-// Get site header values for ontology subsections
+// Get site header and site nav values for ontology subsections
 uamswp_fad_ontology_header();
 
 // Override theme's method of defining the meta page title
