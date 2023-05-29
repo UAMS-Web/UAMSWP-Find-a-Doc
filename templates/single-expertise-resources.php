@@ -196,21 +196,6 @@ function uamswp_expertise_physicians() {
 		</section>
 	<?php }
 }
-function uamswp_expertise_keywords() {
-	$keywords = get_field('expertise_alternate_names');
-	$keyword_text = '';
-	if( $keywords ): 
-		$i = 1;
-		foreach( $keywords as $keyword ) { 
-			if ( 1 < $i ) {
-				$keyword_text .= '; ';
-			}
-			$keyword_text .= $keyword['text'];
-			$i++;
-		}
-		echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';
-	endif;
-}
 function uamswp_expertise_conditions_cpt() {
 	global $page_title;
 	global $show_conditions_section;
