@@ -1351,7 +1351,7 @@ function uamswp_fad_fpage_title($html) {
 				$show_providers_section = true;
 				$provider_ids = $physicians_query->posts;
 			} else {
-				wp_redirect( get_the_permalink($site_nav_id), 301 );
+				// wp_redirect( get_the_permalink($site_nav_id), 301 );
 				$show_providers_section = false;
 			}
 		}
