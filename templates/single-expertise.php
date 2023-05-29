@@ -87,7 +87,6 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 add_filter( 'genesis_entry_content', 'uamswp_expertise_keywords', 8 );
 add_action( 'genesis_entry_content', 'uamswp_expertise_youtube', 12 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_cta', 6 );
-// add_action( 'genesis_after_entry', 'uamswp_expertise_jump_links', 8 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_podcast', 10 );
 add_action( 'genesis_after_entry', 'uamswp_list_child_expertise', 12 );
 // add_action( 'genesis_after_entry', 'uamswp_expertise_resource', 14 );
@@ -99,16 +98,11 @@ add_action( 'genesis_after_entry', 'uamswp_expertise_treatments_cpt', 18 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_appointment', 26 );
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 
-// Set logic for displaying jump links and sections
-$jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
-$jump_link_count = 0;
-
 // Check if Podcast section should be displayed
 $podcast_name = get_field('expertise_podcast_name');
 $podcast_name_attr = uamswp_attr_conversion($podcast_name);
 if ($podcast_name) {
 	$show_podcast_section = true;
-	$jump_link_count++;
 } else {
 	$show_podcast_section = false;
 }
@@ -139,14 +133,6 @@ if ($podcast_name) {
 // Check if Make an Appointment section should be displayed
 // It should always be displayed.
 $show_appointment_section = true;
-$jump_link_count++;
-
-// Check if Jump Links section should be displayed
-if ( $jump_link_count >= $jump_link_count_min ) {
-	$show_jump_links_section = true;
-} else {
-	$show_jump_links_section = false;
-}
 
 // Remove the primary navigation set by the theme
 remove_action( 'genesis_after_header', 'genesis_do_nav' );

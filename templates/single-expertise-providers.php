@@ -64,16 +64,11 @@ add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 // Remove content
 remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 
-// Set logic for displaying jump links and sections
-$jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
-$jump_link_count = 0;
-
 // Check if Podcast section should be displayed
 $podcast_name = get_field('expertise_podcast_name');
 $podcast_name_attr = uamswp_attr_conversion($podcast_name);
 if ($podcast_name) {
 	$show_podcast_section = true;
-	$jump_link_count++;
 } else {
 	$show_podcast_section = false;
 }
@@ -93,7 +88,6 @@ if ($podcast_name) {
 	// 	&& ( 0 != count( get_pages( array( 'child_of' => $page_id, 'post_type' => 'expertise' ) ) ) ) 
 	// ) {
 	// 	$show_child_aoe_section = true;
-	// 	$jump_link_count++;
 	// } else {
 	// 	$show_child_aoe_section = false; // If it's suppressed or none available, set to false
 	// }
@@ -113,14 +107,6 @@ if ($podcast_name) {
 // Check if Make an Appointment section should be displayed
 // It should always be displayed.
 $show_appointment_section = true;
-$jump_link_count++;
-
-// Check if Jump Links section should be displayed
-if ( $jump_link_count >= $jump_link_count_min ) {
-	$show_jump_links_section = true;
-} else {
-	$show_jump_links_section = false;
-}
 
 // Remove the primary navigation set by the theme
 remove_action( 'genesis_after_header', 'genesis_do_nav' );
