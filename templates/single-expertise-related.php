@@ -197,18 +197,6 @@ function uamswp_expertise_physicians() {
 		</section>
 	<?php }
 }
-function uamswp_expertise_conditions_cpt() {
-	global $page_title;
-	global $show_conditions_section;
-	global $conditions_cpt_query;
-	$condition_context = 'single-expertise';
-	$condition_heading_related_name = $page_title; // To what is it related?
-	$condition_heading_related_name_attr = $page_title_attr;
-
-	if( $show_conditions_section ) {
-		include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
-	}
-}
 function uamswp_expertise_treatments_cpt() {
 	global $page_title;
 	global $show_treatments_section;
