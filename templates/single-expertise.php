@@ -91,7 +91,24 @@ add_action( 'genesis_after_entry', 'uamswp_expertise_podcast', 10 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_conditions_cpt', 16 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_treatments_cpt', 18 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_appointment', 26 );
+
+// Add meta keywords
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
+function uamswp_expertise_header_metadata() { 
+	$keywords = get_field('expertise_alternate_names');
+	if( $keywords ): 
+		$i = 1;
+		$keyword_text = '';
+		foreach( $keywords as $keyword ) { 
+			if ( 1 < $i ) {
+				$keyword_text .= ', ';
+			}
+			$keyword_text .= str_replace(",", "", $keyword['text']);
+			$i++;
+		}
+		echo '<meta name="keywords" content="'. $keyword_text .'" />';
+	endif;
+}
 
 // Check if Podcast section should be displayed
 $podcast_name = get_field('expertise_podcast_name');
@@ -481,21 +498,6 @@ function uamswp_expertise_associated() {
 		</section>
 	<?php 
 	} // endif
-}
-function uamswp_expertise_header_metadata() { 
-	$keywords = get_field('expertise_alternate_names');
-	if( $keywords ): 
-		$i = 1;
-		$keyword_text = '';
-		foreach( $keywords as $keyword ) { 
-			if ( 1 < $i ) {
-				$keyword_text .= ', ';
-			}
-			$keyword_text .= str_replace(",", "", $keyword['text']);
-			$i++;
-		}
-		echo '<meta name="keywords" content="'. $keyword_text .'" />';
-	endif;
 }
 function uamswp_expertise_podcast() {
 	global $page_title;
