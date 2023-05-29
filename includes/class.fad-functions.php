@@ -1540,3 +1540,13 @@ function uamswp_fad_ontology_nav_menu() {
 
 	include( UAMS_FAD_PATH . '/templates/single-expertise-nav.php');
 }
+
+// Construct ontology subsection site header
+function uamswp_expertise_header() {
+	global $navbar_subbrand_title;
+	global $navbar_subbrand_title_url;
+	global $navbar_subbrand_parent;
+	global $navbar_subbrand_parent_url;
+
+	include( UAMS_FAD_PATH . '/templates/single-expertise-header.php');
+}

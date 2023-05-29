@@ -157,14 +157,6 @@ add_action( 'genesis_after_header', 'uamswp_fad_ontology_nav_menu', 5 );
 
 remove_action( 'genesis_header', 'uamswp_site_image', 5 );
 add_action( 'genesis_header', 'uamswp_expertise_header', 5 );
-function uamswp_expertise_header() {
-	global $navbar_subbrand_title;
-	global $navbar_subbrand_title_url;
-	global $navbar_subbrand_parent;
-	global $navbar_subbrand_parent_url;
-
-	include( UAMS_FAD_PATH . '/templates/single-expertise-header.php');
-}
 
 function uamswp_expertise_cta() {
 	$cta_repeater = get_field('expertise_cta');
