@@ -88,7 +88,6 @@ add_filter( 'genesis_entry_content', 'uamswp_expertise_keywords', 8 );
 add_action( 'genesis_entry_content', 'uamswp_expertise_youtube', 12 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_cta', 6 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_podcast', 10 );
-add_action( 'genesis_after_entry', 'uamswp_list_child_expertise', 12 );
 // add_action( 'genesis_after_entry', 'uamswp_expertise_resource', 14 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_conditions_cpt', 16 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_treatments_cpt', 18 );
@@ -556,65 +555,6 @@ function uamswp_expertise_resource() {
 	$resource_more_value = $post->post_name;
 	if( $show_related_resource_section ) {
 		include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
-	}
-}
-function uamswp_list_child_expertise() {
-	global $page_id;
-	global $page_title;
-	global $show_child_aoe_section;
-	if ( $show_child_aoe_section ) { // If it's suppressed or none available, set to false
-		$args = array(
-			"post_type" => "expertise",
-			"post_status" => "publish",
-			"post_parent" => $page_id,
-			'order' => 'ASC',
-			'orderby' => 'title',
-			'posts_per_page' => -1, // We do not want to limit the post count
-			'meta_query' => array(
-				"relation" => "AND",
-				array(
-					"key" => "hide_from_sub_menu",
-					"value" => "1",
-					"compare" => "!=",
-				),
-				array(
-					'relation' => 'OR',
-					array(
-						"key" => "expertise_type",
-						"value" => "0",
-						"compare" => "!=",
-					),
-					array(
-						"key" => "expertise_type",
-						"compare" => "NOT EXISTS",
-					),
-				),
-			),
-		);
-		$pages = New WP_Query ( $args );
-		if ( $pages->have_posts() ) { ?>
-			<section class="uams-module expertise-list bg-auto" id="sub-expertise" aria-labelledby="sub-expertise-title" >
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-12">
-							<h2 class="module-title" id="sub-expertise-title"><span class="title">Areas Within <?php echo $page_title; ?></span></h2>
-							<div class="card-list-container">
-								<div class="card-list card-list-expertise">
-							<?php
-								while ( $pages->have_posts() ) : $pages->the_post();
-									$id = get_the_ID();
-									$child_expertise_list = true; // Indicate that this is a list of child Areas of Expertise within this Area of Expertise
-									include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-								endwhile;
-								wp_reset_postdata(); ?>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-		<?php
-		}
 	}
 }
 function uamswp_expertise_appointment() {
