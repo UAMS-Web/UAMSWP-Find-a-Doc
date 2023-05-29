@@ -1198,7 +1198,7 @@ function uamswp_attr_conversion($input)
 	return $input_attr;
 }
 
-// Get site header values for ontology subsections
+// Get site header and site nav values for ontology subsections
 function uamswp_fad_ontology_header() {
 	// Bring in variables from outside the function
 	global $page_id;
@@ -1207,6 +1207,7 @@ function uamswp_fad_ontology_header() {
 	global $ontology_type;
 
 	// Send variables out from inside the function
+	global $site_nav_id;
 	global $navbar_subbrand_title;
 	global $navbar_subbrand_title_url;
 	global $navbar_subbrand_parent;
@@ -1268,6 +1269,7 @@ function uamswp_fad_ontology_header() {
 	if ( $ontology_type ) {
 		// If the page has the ontology type...
 		// Set the navbar-subbrand title element using the page's values 
+		$site_nav_id = $page_id;
 		$navbar_subbrand_title = $page_title;
 		$navbar_subbrand_title_attr = uamswp_attr_conversion($navbar_subbrand_title);
 		$navbar_subbrand_title_url = $page_url;
@@ -1284,6 +1286,7 @@ function uamswp_fad_ontology_header() {
 	} else {
 		// If the page  does not have the ontology type...
 		// Set the navbar-subbrand title element using the values of the closest ancestor with the ontology type
+		$site_nav_id = $ancestors_ontology_closest;
 		$navbar_subbrand_title = $ancestors_ontology_closest_title;
 		$navbar_subbrand_title_attr = uamswp_attr_conversion($navbar_subbrand_title);
 		$navbar_subbrand_title_url = $ancestors_ontology_closest_url;
