@@ -1615,7 +1615,7 @@ function uamswp_add_entry_class( $attributes ) {
 }
 
 // Construct UAMS Health Talk podcast section
-function uamswp_expertise_podcast() {
+function uamswp_fad_podcast() {
 	global $page_title;
 	global $podcast_name;
 

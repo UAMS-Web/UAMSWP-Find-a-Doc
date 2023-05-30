@@ -248,7 +248,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	}
 
 	// Construct UAMS Health Talk podcast section
-	add_action( 'genesis_after_entry', 'uamswp_expertise_podcast', 10 );
+	add_action( 'genesis_after_entry', 'uamswp_fad_podcast', 10 );
 	// Check if podcast section should be displayed
 	$podcast_name = get_field('expertise_podcast_name');
 
