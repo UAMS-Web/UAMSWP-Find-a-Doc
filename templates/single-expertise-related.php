@@ -78,7 +78,7 @@ function uams_default_page_body_class( $classes ) {
 }
 
 // Add fake subpage to breadcrumbs
-add_filter('seopress_pro_breadcrumbs_crumbs', 'uamswp_breadcrumbs_expertise');
+add_filter('seopress_pro_breadcrumbs_crumbs', 'uamswp_fad_fpage_breadcrumbs');
 
 // Add extra class to entry
 add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
