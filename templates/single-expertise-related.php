@@ -55,11 +55,11 @@ function uams_default_page_body_class( $classes ) {
 }
 
 // Override theme's method of defining the breadcrumbs
+add_filter('seopress_pro_breadcrumbs_crumbs', 'uamswp_breadcrumbs_expertise');
 function uamswp_breadcrumbs_expertise($crumbs) {
 	$crumbs[] = array('Related Areas of Expertise', '');
 	return $crumbs;
 }
-add_filter('seopress_pro_breadcrumbs_crumbs', 'uamswp_breadcrumbs_expertise');
 
 // Remove the post info (byline) from the entry header and the entry footer
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
