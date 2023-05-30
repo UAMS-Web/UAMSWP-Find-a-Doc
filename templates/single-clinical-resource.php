@@ -48,6 +48,7 @@ add_filter('seopress_titles_canonical','uamswp_fad_canonical');
 
 // Add page template class to body element's classes
 add_filter( 'body_class', 'uams_default_page_body_class' );
+$template_type = 'default';
 
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php

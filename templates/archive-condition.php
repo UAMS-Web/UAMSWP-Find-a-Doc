@@ -7,6 +7,7 @@
 
 // Add page template class to body element's classes
 add_filter( 'body_class', 'uams_default_page_body_class' );
+$template_type = 'default';
 
 add_filter( 'posts_where', 'title_filter', 10, 2 );
 function title_filter( $where, $query ){

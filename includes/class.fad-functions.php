@@ -1604,7 +1604,9 @@ function uamswp_fad_fpage_breadcrumbs($crumbs) {
 
 // Add page template class to body element's classes
 function uams_default_page_body_class( $classes ) {
-	$classes[] = 'page-template-default';
+	global $template_type; // Expected values: 'default', 'page_landing' or 'marketing'
+
+	$classes[] = 'page-template-' . $template_type;
 	return $classes;
 }
 

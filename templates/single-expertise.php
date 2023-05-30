@@ -85,6 +85,7 @@ $keywords = get_field('expertise_alternate_names');
 
 // Add page template class to body element's classes
 add_filter( 'body_class', 'uams_default_page_body_class' );
+$template_type = 'default';
 
 // Add bg-white class to article.entry element
 add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
