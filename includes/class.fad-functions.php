@@ -1614,10 +1614,10 @@ function uamswp_add_entry_class( $attributes ) {
 	return $attributes;
 }
 
-// Construct UAMS Health Talk podcast section
-function uamswp_fad_podcast() {
-	global $page_title;
+// Check if UAMS Health Talk podcast section should be displayed
+function uamswp_fad_podcast_query() {
 	global $podcast_name;
+	global $show_podcast_section;
 
 	// Check if podcast section should be displayed
 	if ($podcast_name) {
@@ -1625,39 +1625,53 @@ function uamswp_fad_podcast() {
 	} else {
 		$show_podcast_section = false;
 	}
+}
+
+// Construct UAMS Health Talk podcast section
+function uamswp_fad_podcast() {
+	global $podcast_name;
+	global $podcast_subject;
+	global $show_podcast_section;
+	global $podcast_filter; // Expected values: 'tag' or 'doctor'
 
 	if ( $show_podcast_section ) {
-		$podcast_name_attr = uamswp_attr_conversion($podcast_name);
+		if ( $podcast_filter == 'tag' ) {
+			$podcast_filter_id = '303';
+		} elseif ( $podcast_filter == 'doctor' ) {
+			$podcast_filter_id = '303,1837';
+		} else {
+			$podcast_filter_id = '';
+		}
 		?>
-		<section class="uams-module podcast-list bg-auto" id="podcast">
-			<script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
-			</script>
-			<script type="text/javascript">
-				radiomd_embedded_filtered_tag("uams","radiomd-embedded-filtered-tag",303,"<?php echo $podcast_name; ?>");
-			</script>
-			<style type="text/css">
-				#radiomd-embedded-filtered-tag iframe {
-				width: 100%;
-				border: none;
-			}
-			</style>
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title"><span class="title">UAMS Health Talk Podcast</span></h2>
-						<div class="module-body text-center">
-							<p class="lead">In the UAMS Health Talk podcast, experts from UAMS talk about a variety of health topics, providing tips and guidelines to help people lead healthier lives. Listen to the episode(s) featuring the topic of <?php echo $page_title; ?>.</p>
+			<section class="uams-module podcast-list bg-auto" id="podcast">
+				<script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
+				</script>
+				<script type="text/javascript">
+					radiomd_embedded_filtered_<?php echo $podcast_filter; ?>("uams","radiomd-embedded-filtered-<?php echo $podcast_filter; ?>",<?php echo $podcast_filter_id; ?>,"<?php echo $podcast_name; ?>");
+				</script>
+				<style type="text/css">
+					#radiomd-embedded-filtered-<?php echo $podcast_filter; ?> iframe {
+						width: 100%;
+						border: none;
+					}
+				</style>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<h2 class="module-title"><span class="title">UAMS Health Talk Podcast</span></h2>
+							<div class="module-body text-center">
+								<p class="lead">In the UAMS Health Talk podcast, experts from UAMS talk about a variety of health topics, providing tips and guidelines to help people lead healthier lives. Listen to the episode(s) featuring <?php echo ( $podcast_filter == 'tag' ) ? 'the topic of ' : ''; ?><?php echo $podcast_subject; ?>.</p>
+							</div>
+							<div class="content-width mt-8" id="radiomd-embedded-filtered-<?php echo $podcast_filter; ?>"></div>
 						</div>
-						<div class="content-width mt-8" id="radiomd-embedded-filtered-tag"></div>
-					</div>
-					<div class="col-12 more">
-						<p class="lead">Find other great episodes on other topics and from other UAMS Health providers.</p>
-						<div class="cta-container">
-							<a href="/podcast/" class="btn btn-primary" aria-label="Listen to more episodes of the UAMS Health Talk podcast">Listen to More Episodes</a>
+						<div class="col-12 more">
+							<p class="lead">Find other great episodes on other topics and from other UAMS Health providers.</p>
+							<div class="cta-container">
+								<a href="/podcast/" class="btn btn-primary" aria-label="Listen to more episodes of the UAMS Health Talk podcast">Listen to More Episodes</a>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</section>
+			</section>
 	<?php } // endif ( $show_podcast_section )
 }

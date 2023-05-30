@@ -443,11 +443,11 @@ while ( have_posts() ) : the_post();
 		}
 
 		// Check if Podcast section should be displayed
-		if ( $podcast_name ) {
-			$show_podcast_section = true;
+		$podcast_filter = 'doctor';
+		$podcast_subject = $short_name;
+		uamswp_fad_podcast_query();
+		if ( $show_podcast_section ) {
 			$jump_link_count++;
-		} else {
-			$show_podcast_section = false;
 		}
 
 		// Check if Clinical Resources section should be displayed
@@ -916,42 +916,10 @@ while ( have_posts() ) : the_post();
 					</div>
 				</div>
 			</section>
-		<?php } // endif ?>
-		<?php
-			// UAMS Health Talk Podcast
-			if ($podcast_name) {
-		?>
-			<section class="uams-module podcast-list bg-auto" id="podcast">
-				<script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
-				</script>
-				<script type="text/javascript">
-					radiomd_embedded_filtered_doctor("uams","radiomd-embedded-filtered-doctor",303,1837,"<?php echo $podcast_name; ?>"); </script>
-				<style type="text/css">
-					#radiomd-embedded-filtered-doctor iframe {
-						width: 100%;
-						border: none;
-					}
-				</style>
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-12">
-							<h2 class="module-title"><span class="title">UAMS Health Talk Podcast</span></h2>
-							<div class="module-body text-center">
-								<p class="lead">In the UAMS Health Talk podcast, experts from UAMS talk about a variety of health topics, providing tips and guidelines to help people lead healthier lives. Listen to the episode(s) featuring <?php echo $short_name; ?>.</p>
-							</div>
-							<div class="content-width mt-8" id="radiomd-embedded-filtered-doctor"></div>
-						</div>
-						<div class="col-12 more">
-							<p class="lead">Find other great episodes on other topics and from other UAMS Health providers.</p>
-							<div class="cta-container">
-								<a href="/podcast/" class="btn btn-primary" aria-label="Listen to more episodes of the UAMS Health Talk podcast">Listen to More Episodes</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-		<?php }
-		// End UAMS Health Talk Podcast
+		<?php } // endif
+		
+		// Construct UAMS Health Talk podcast section
+		uamswp_fad_podcast();
 
 		// Begin Clinical Resources Section
 		$resource_heading_related_pre = false; // "Related Resources"
