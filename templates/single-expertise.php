@@ -74,15 +74,6 @@ function uamswp_add_entry_class( $attributes ) {
 	return $attributes;
 }
 
-// Remove the post info (byline) from the entry header and the entry footer
-remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
-remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
-
-// Remove the entry meta (tags) from the entry footer, including markup
-remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_open', 5 );
-remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
-remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
-
 // Modify Entry Title
 
 	// Remove Genesis-standard post title
@@ -108,6 +99,15 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		} // endif
 		echo '</h1>';
 	}
+
+// Remove the post info (byline) from the entry header and the entry footer
+remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
+remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
+
+// Remove the entry meta (tags) from the entry footer, including markup
+remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_open', 5 );
+remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
+remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
 
 // Construct page content
 add_filter( 'genesis_entry_content', 'uamswp_expertise_keywords', 8 );

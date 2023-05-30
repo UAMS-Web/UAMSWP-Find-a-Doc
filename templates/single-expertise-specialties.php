@@ -68,6 +68,14 @@ function uamswp_add_entry_class( $attributes ) {
 	return $attributes;
 }
 
+// Modify Entry Title
+
+	// Remove Genesis-standard post title
+	remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+
+	// Add post title for ontology subsection fake subpages
+	add_action( 'genesis_entry_header', 'uamswp_fad_fpage_post_title' );
+
 // Remove the post info (byline) from the entry header and the entry footer
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
@@ -76,14 +84,6 @@ remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from u
 remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_open', 5 );
 remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
 remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
-
-// Modify Entry Title
-
-	// Remove Genesis-standard post title
-	remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
-
-	// Add post title for ontology subsection fake subpages
-	add_action( 'genesis_entry_header', 'uamswp_fad_fpage_post_title' );
 
 // Construct page content
 add_action( 'genesis_after_entry', 'uamswp_list_child_expertise', 12 );
