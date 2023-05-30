@@ -33,31 +33,38 @@ function uamswp_breadcrumbs_expertise($crumbs) {
 }
 add_filter('seopress_pro_breadcrumbs_crumbs', 'uamswp_breadcrumbs_expertise');
 
+// Remove the post info (byline) from the entry header and the entry footer
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
-// Removes entry meta from entry footer incl. markup.
+
+// Remove the entry meta (tags) from the entry footer, including markup
 remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_open', 5 );
 remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
 remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
 
+// Add page template class to body element's classes
+add_filter( 'body_class', 'uams_default_page_body_class' );
 function uams_default_page_body_class( $classes ) {
-
 	$classes[] = 'page-template-default';
 	return $classes;
 }
-add_filter( 'body_class', 'uams_default_page_body_class' );
 
 // Add extra class to entry
+add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 function uamswp_add_entry_class( $attributes ) {
 	$attributes['class'] = $attributes['class']. ' bg-white';
 	return $attributes;
 }
-add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 // Modify Entry Title
-remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
-add_action( 'genesis_entry_header', 'uamswp_fad_fpage_post_title' );
 
+	// Remove Genesis-standard post title
+	remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+
+	// Add post title for ontology subsection fake subpages
+	add_action( 'genesis_entry_header', 'uamswp_fad_fpage_post_title' );
+
+// Construct page content
 add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 20 );
 
 // Add meta keywords
@@ -77,14 +84,6 @@ remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 
 	// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
 	uamswp_fad_ontology_descendants_query();
-	// if (
-	// 	!( get_post_meta( $page_id, 'hide_sub_areas_of_expertise', true) ) 
-	// 	&& ( 0 != count( get_pages( array( 'child_of' => $page_id, 'post_type' => 'expertise' ) ) ) ) 
-	// ) {
-	// 	$show_child_aoe_section = true;
-	// } else {
-	// 	$show_child_aoe_section = false; // If it's suppressed or none available, set to false
-	// }
 
 	// Query for whether related ontology items (of the same post type) content section should be displayed on ontology pages/subsections
 	uamswp_fad_ontology_related_query();
@@ -99,18 +98,24 @@ remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 	uamswp_fad_ontology_treatments_query();
 
 // Check if Make an Appointment section should be displayed
-// It should always be displayed.
-$show_appointment_section = true;
+$show_appointment_section = true; // It should always be displayed.
 
-// Remove the primary navigation set by the theme
-remove_action( 'genesis_after_header', 'genesis_do_nav' );
-remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
+// Modify primary navigation
 
-// Add ontology subsection primary navigation
-add_action( 'genesis_after_header', 'uamswp_fad_ontology_nav_menu', 5 );
+	// Remove the primary navigation set by the theme
+	remove_action( 'genesis_after_header', 'genesis_do_nav' );
+	remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
 
-remove_action( 'genesis_header', 'uamswp_site_image', 5 );
-add_action( 'genesis_header', 'uamswp_fad_ontology_header', 5 );
+	// Add ontology subsection primary navigation
+	add_action( 'genesis_after_header', 'uamswp_fad_ontology_nav_menu', 5 );
+
+// Modify site header
+
+	// Remove the site header set by the theme
+	remove_action( 'genesis_header', 'uamswp_site_image', 5 );
+
+	// Add ontology subsection site header
+	add_action( 'genesis_header', 'uamswp_fad_ontology_header', 5 );
 
 function uamswp_expertise_physicians() {
 	global $show_providers_section;
@@ -119,7 +124,6 @@ function uamswp_expertise_physicians() {
 	//global $postsPerPage;
 	global $physicians;
 	global $provider_ids;
-
 
 	if($show_providers_section) {
 
