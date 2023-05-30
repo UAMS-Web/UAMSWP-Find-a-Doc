@@ -47,6 +47,13 @@ $keywords = get_field('expertise_alternate_names');
 	// Add ontology subsection primary navigation
 	add_action( 'genesis_after_header', 'uamswp_fad_ontology_nav_menu', 5 );
 
+// Add page template class to body element's classes
+add_filter( 'body_class', 'uams_default_page_body_class' );
+function uams_default_page_body_class( $classes ) {
+	$classes[] = 'page-template-default';
+	return $classes;
+}
+
 // Override theme's method of defining the breadcrumbs
 function uamswp_breadcrumbs_expertise($crumbs) {
 	$crumbs[] = array('Specialties', '');
@@ -62,13 +69,6 @@ remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from u
 remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_open', 5 );
 remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
 remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
-
-// Add page template class to body element's classes
-add_filter( 'body_class', 'uams_default_page_body_class' );
-function uams_default_page_body_class( $classes ) {
-	$classes[] = 'page-template-default';
-	return $classes;
-}
 
 // Add extra class to entry
 add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
