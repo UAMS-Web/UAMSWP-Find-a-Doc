@@ -112,7 +112,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	}
 
 	// Display appointment information
-	add_action( 'genesis_after_entry', 'uamswp_expertise_appointment', 26 );
+	add_action( 'genesis_after_entry', 'uamswp_fad_ontology_appointment', 26 );
 	// Check if Make an Appointment section should be displayed
 	$show_appointment_section = true; // It should always be displayed.
 

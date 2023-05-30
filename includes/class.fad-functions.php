@@ -1570,9 +1570,9 @@ function uamswp_expertise_header_metadata() {
 }
 
 // Construct ontology subsection appointment information section
-function uamswp_expertise_appointment() {
+function uamswp_fad_ontology_appointment() {
 	global $show_appointment_section;
-	
+
 	if ( $show_appointment_section ) {
 		if ( get_field('location_expertise') ) {
 			$appointment_location_url = '#locations';
