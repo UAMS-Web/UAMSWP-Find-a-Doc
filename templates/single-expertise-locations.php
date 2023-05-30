@@ -26,6 +26,10 @@ uamswp_fad_ontology_site_values();
 // Override theme's method of defining the meta page title
 add_filter('seopress_titles_title', 'uamswp_fad_fpage_title', 15, 2);
 
+// Add meta keywords
+add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
+$keywords = get_field('expertise_alternate_names');
+
 // Override theme's method of defining the breadcrumbs
 function uamswp_breadcrumbs_expertise($crumbs) {
 	$crumbs[] = array('Locations', '');
@@ -66,10 +70,6 @@ function uamswp_add_entry_class( $attributes ) {
 
 // Construct page content
 add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 22 );
-
-// Add meta keywords
-add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
-$keywords = get_field('expertise_alternate_names');
 
 // Remove content
 remove_action( 'genesis_entry_content', 'genesis_do_post_content' );

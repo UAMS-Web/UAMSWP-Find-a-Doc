@@ -39,6 +39,10 @@ function uamswp_fad_title($html) {
 	return $html;
 }
 
+// Add meta keywords
+add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
+$keywords = get_field('expertise_alternate_names');
+
 // Remove the post info (byline) from the entry header and the entry footer
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
@@ -96,10 +100,6 @@ add_action( 'genesis_after_entry', 'uamswp_expertise_podcast', 10 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_conditions_cpt', 16 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_treatments_cpt', 18 );
 add_action( 'genesis_after_entry', 'uamswp_expertise_appointment', 26 );
-
-// Add meta keywords
-add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
-$keywords = get_field('expertise_alternate_names');
 
 // Check if Podcast section should be displayed
 $podcast_name = get_field('expertise_podcast_name');
