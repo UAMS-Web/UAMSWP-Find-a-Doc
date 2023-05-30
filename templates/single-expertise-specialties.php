@@ -77,12 +77,8 @@ function uams_default_page_body_class( $classes ) {
 	return $classes;
 }
 
-// Override theme's method of defining the breadcrumbs
+// Add fake subpage to breadcrumbs
 add_filter('seopress_pro_breadcrumbs_crumbs', 'uamswp_breadcrumbs_expertise');
-function uamswp_breadcrumbs_expertise($crumbs) {
-	$crumbs[] = array('Specialties', '');
-	return $crumbs;
-}
 
 // Add extra class to entry
 add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );

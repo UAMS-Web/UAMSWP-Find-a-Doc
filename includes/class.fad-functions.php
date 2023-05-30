@@ -1593,3 +1593,11 @@ function uamswp_fad_ontology_appointment() {
 		</section>
 	<?php }
 }
+
+// Add fake subpages to breadcrumbs
+function uamswp_breadcrumbs_expertise($crumbs) {
+	global $fpage_name;
+
+	$crumbs[] = array($fpage_name, '');
+	return $crumbs;
+}
