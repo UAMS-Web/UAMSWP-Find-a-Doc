@@ -6,7 +6,7 @@
  */
 
 // Add page template class to body element's classes
-add_filter( 'body_class', 'uams_default_page_body_class' );
+add_filter( 'body_class', 'uamswp_page_body_class' );
 $template_type = 'default';
 
 add_filter( 'terms_clauses', 'uamswp_terms_clauses', 10, 3 );

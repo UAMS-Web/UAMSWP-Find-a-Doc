@@ -71,7 +71,7 @@ $keywords = get_field('expertise_alternate_names');
 	add_action( 'genesis_after_header', 'uamswp_fad_ontology_nav_menu', 5 );
 
 // Add page template class to body element's classes
-add_filter( 'body_class', 'uams_default_page_body_class' );
+add_filter( 'body_class', 'uamswp_page_body_class' );
 $template_type = 'default';
 
 // Add fake subpage to breadcrumbs

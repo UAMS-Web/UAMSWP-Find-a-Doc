@@ -65,7 +65,7 @@ function sp_titles_desc($html) {
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
 // Add page template class to body element's classes
-add_filter( 'body_class', 'uams_default_page_body_class' );
+add_filter( 'body_class', 'uamswp_page_body_class' );
 $template_type = 'default';
 
 get_header();
