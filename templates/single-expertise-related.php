@@ -86,10 +86,71 @@ remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
 remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
 
 // Construct page content
-add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 24 );
 
-// Remove content
-remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
+	// Remove content
+	remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
+
+	// Display ontology page content
+	add_action( 'genesis_after_entry', 'uamswp_expertise_associated', 24 );
+	function uamswp_expertise_associated() {
+		global $show_related_aoe_section;
+		global $expertise_query;
+	
+		if( $show_related_aoe_section ) { ?>
+			<section class="uams-module link-list link-list-layout-split bg-auto" id="related-expertise" aria-labelledby="related-expertise-title">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12 col-md-6 heading">
+							<div class="text-container">
+								<h2 class="module-title" id="related-expertise-title"><span class="title">Related Areas of Expertise</span></h2>
+							</div>
+						</div>
+						<div class="col-12 col-md-6 list">
+							<ul>
+							<?php
+							while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
+								echo '<li class="item"><div class="text-container"><h3 class="h5"><a href="'.get_permalink().'" aria-label="Go to Area of Expertise page for ' . get_the_title() . '">';
+								echo get_the_title();
+								echo '</a></h3>';
+								echo ( has_excerpt() ? '<p>' . wp_trim_words( get_the_excerpt(), 30, '&nbsp;&hellip;' ) . '</p>' : '' );
+								echo '</div></li>';
+							endwhile;
+							wp_reset_postdata(); ?>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+		<?php 
+		} // endif
+	}
+
+	// Display appointment information
+	add_action( 'genesis_after_entry', 'uamswp_expertise_appointment', 26 );
+	// Check if Make an Appointment section should be displayed
+	$show_appointment_section = true; // It should always be displayed.
+	function uamswp_expertise_appointment() {
+		global $show_appointment_section;
+		if ( $show_appointment_section ) {
+			if ( get_field('location_expertise') ) {
+				$appointment_location_url = '#locations';
+				//$appointment_location_label = 'Go to the list of relevant locations';
+			} else {
+				$appointment_location_url = '/location/';
+				//$appointment_location_label = 'View a list of UAMS Health locations';
+			} ?>
+			<section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12">
+							<h2>Make an Appointment</h2>
+							<p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>" data-itemtitle="Contact a clinic directly">contacting a clinic directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+		<?php }
+	}
 
 // Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
 
@@ -114,61 +175,4 @@ remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 	// Query for whether associated treatments content section should be displayed on ontology pages/subsections
 	uamswp_fad_ontology_treatments_query();
 
-// Check if Make an Appointment section should be displayed
-$show_appointment_section = true; // It should always be displayed.
-
-function uamswp_expertise_associated() {
-	global $show_related_aoe_section;
-	global $expertise_query;
-
-	if( $show_related_aoe_section ) { ?>
-		<section class="uams-module link-list link-list-layout-split bg-auto" id="related-expertise" aria-labelledby="related-expertise-title">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12 col-md-6 heading">
-						<div class="text-container">
-							<h2 class="module-title" id="related-expertise-title"><span class="title">Related Areas of Expertise</span></h2>
-						</div>
-					</div>
-					<div class="col-12 col-md-6 list">
-						<ul>
-						<?php
-						while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
-							echo '<li class="item"><div class="text-container"><h3 class="h5"><a href="'.get_permalink().'" aria-label="Go to Area of Expertise page for ' . get_the_title() . '">';
-							echo get_the_title();
-							echo '</a></h3>';
-							echo ( has_excerpt() ? '<p>' . wp_trim_words( get_the_excerpt(), 30, '&nbsp;&hellip;' ) . '</p>' : '' );
-							echo '</div></li>';
-						endwhile;
-						wp_reset_postdata(); ?>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php 
-	} // endif
-}
-function uamswp_expertise_appointment() {
-	global $show_appointment_section;
-	if ( $show_appointment_section ) {
-		if ( get_field('location_expertise') ) {
-			$appointment_location_url = '#locations';
-			//$appointment_location_label = 'Go to the list of relevant locations';
-		} else {
-			$appointment_location_url = '/location/';
-			//$appointment_location_label = 'View a list of UAMS Health locations';
-		} ?>
-		<section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-12">
-						<h2>Make an Appointment</h2>
-						<p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>" data-itemtitle="Contact a clinic directly">contacting a clinic directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php }
-}
 genesis();

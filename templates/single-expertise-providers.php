@@ -86,10 +86,133 @@ remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
 remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
 
 // Construct page content
-add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 20 );
 
-// Remove content
-remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
+	// Remove content
+	remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
+
+	// Display ontology page content
+	add_action( 'genesis_after_entry', 'uamswp_expertise_physicians', 20 );
+	function uamswp_expertise_physicians() {
+		global $show_providers_section;
+		//global $postsCountClass;
+		global $physicians_query;
+		//global $postsPerPage;
+		global $physicians;
+		global $provider_ids;
+	
+		if($show_providers_section) {
+	
+			// Get available regions - All available, since no titles set on initial load
+			$region_IDs = array();
+			while ($physicians_query->have_posts()) : $physicians_query->the_post();
+				$id = get_the_ID();
+				$region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
+			endwhile;
+			$region_IDs = array_unique($region_IDs);
+			$region_list = array();
+			foreach ($region_IDs as $region_ID){
+				$region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
+			}
+	
+			// if cookie is set, run modified physician query
+			if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {		
+	
+				$provider_region = '';
+				if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+					$provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
+				}
+	
+				$tax_query = array();
+				if(!empty($provider_region)) {
+					$tax_query[] = array(
+						'taxonomy' => 'region',
+						'field' => 'slug',
+						'terms' => $provider_region
+					);
+				}
+				$args = array(
+					"post_type" => "provider",
+					"post_status" => "publish",
+					"posts_per_page" => -1,
+					"orderby" => "title",
+					"order" => "ASC",
+					"fields" => "ids",
+					"post__in" => $physicians,
+					'tax_query' => $tax_query
+				);
+				$physicians_query = New WP_Query( $args );
+			}
+			$provider_count = count($physicians_query->posts);
+			?>
+			<section class="uams-module bg-auto" id="providers">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<h2 class="module-title"><span class="title">Providers</span></h2>
+							<?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'"]' ); ?>
+							<div class="card-list-container">
+								<div class="card-list card-list-doctors">
+									<?php 
+										if($provider_count > 0){
+											$title_list = array();
+											while ($physicians_query->have_posts()) : $physicians_query->the_post();
+												$id = get_the_ID();
+												include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+												$title_list[] = get_field('physician_title', $id);
+											endwhile;
+											echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'," data-regions="'. implode(',', $region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
+										} else {
+											echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
+										}
+										wp_reset_postdata();
+									?>
+								</div>
+							</div>
+							<!-- <div class="more" style="<?php //echo ($postsPerPage < $provider_count) ? '' : 'display:none;' ; ?>">
+								<button class="loadmore btn btn-primary <?php //echo $provider_count; ?>" data-ppp="<?php //echo $postsPerPage; ?>" aria-label="Load more providers">Load More</button>
+							</div> -->
+							<div class="ajax-filter-load-more">
+								<button class="btn btn-lg btn-primary" aria-label="Load all providers">Load All</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<?php if ( isset($_GET['_filter_region']) ) { ?>
+					<script type="text/javascript">
+						// Set cookie to expire at end of session
+						document.cookie = "wp_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; path=/; domain="+window.location.hostname;
+					</script>
+				<?php } ?>
+			</section>
+		<?php }
+	}
+
+	// Display appointment information
+	add_action( 'genesis_after_entry', 'uamswp_expertise_appointment', 26 );
+	// Check if Make an Appointment section should be displayed
+	$show_appointment_section = true; // It should always be displayed.
+	function uamswp_expertise_appointment() {
+		global $show_appointment_section;
+		if ( $show_appointment_section ) {
+			if ( get_field('location_expertise') ) {
+				$appointment_location_url = '#locations';
+				//$appointment_location_label = 'Go to the list of relevant locations';
+			} else {
+				$appointment_location_url = '/location/';
+				//$appointment_location_label = 'View a list of UAMS Health locations';
+			} ?>
+			<section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12">
+							<h2>Make an Appointment</h2>
+							<p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>" data-itemtitle="Contact a clinic directly">contacting a clinic directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+		<?php }
+	}
 
 // Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
 
@@ -114,101 +237,4 @@ remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 	// Query for whether associated treatments content section should be displayed on ontology pages/subsections
 	uamswp_fad_ontology_treatments_query();
 
-// Check if Make an Appointment section should be displayed
-$show_appointment_section = true; // It should always be displayed.
-
-function uamswp_expertise_physicians() {
-	global $show_providers_section;
-	//global $postsCountClass;
-	global $physicians_query;
-	//global $postsPerPage;
-	global $physicians;
-	global $provider_ids;
-
-	if($show_providers_section) {
-
-		// Get available regions - All available, since no titles set on initial load
-		$region_IDs = array();
-		while ($physicians_query->have_posts()) : $physicians_query->the_post();
-			$id = get_the_ID();
-			$region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
-		endwhile;
-		$region_IDs = array_unique($region_IDs);
-		$region_list = array();
-		foreach ($region_IDs as $region_ID){
-			$region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
-		}
-
-		// if cookie is set, run modified physician query
-		if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {		
-
-			$provider_region = '';
-			if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
-				$provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
-			}
-
-			$tax_query = array();
-			if(!empty($provider_region)) {
-				$tax_query[] = array(
-					'taxonomy' => 'region',
-					'field' => 'slug',
-					'terms' => $provider_region
-				);
-			}
-			$args = array(
-				"post_type" => "provider",
-				"post_status" => "publish",
-				"posts_per_page" => -1,
-				"orderby" => "title",
-				"order" => "ASC",
-				"fields" => "ids",
-				"post__in" => $physicians,
-				'tax_query' => $tax_query
-			);
-			$physicians_query = New WP_Query( $args );
-		}
-		$provider_count = count($physicians_query->posts);
-		?>
-		<section class="uams-module bg-auto" id="providers">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title"><span class="title">Providers</span></h2>
-						<?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'"]' ); ?>
-						<div class="card-list-container">
-							<div class="card-list card-list-doctors">
-								<?php 
-									if($provider_count > 0){
-										$title_list = array();
-										while ($physicians_query->have_posts()) : $physicians_query->the_post();
-											$id = get_the_ID();
-											include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
-											$title_list[] = get_field('physician_title', $id);
-										endwhile;
-										echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'," data-regions="'. implode(',', $region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
-									} else {
-										echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
-									}
-									wp_reset_postdata();
-								?>
-							</div>
-						</div>
-						<!-- <div class="more" style="<?php //echo ($postsPerPage < $provider_count) ? '' : 'display:none;' ; ?>">
-							<button class="loadmore btn btn-primary <?php //echo $provider_count; ?>" data-ppp="<?php //echo $postsPerPage; ?>" aria-label="Load more providers">Load More</button>
-						</div> -->
-						<div class="ajax-filter-load-more">
-							<button class="btn btn-lg btn-primary" aria-label="Load all providers">Load All</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<?php if ( isset($_GET['_filter_region']) ) { ?>
-				<script type="text/javascript">
-					// Set cookie to expire at end of session
-					document.cookie = "wp_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; path=/; domain="+window.location.hostname;
-				</script>
-			<?php } ?>
-		</section>
-	<?php }
-}
 genesis();

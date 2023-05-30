@@ -86,10 +86,91 @@ remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
 remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
 
 // Construct page content
-add_action( 'genesis_after_entry', 'uamswp_list_child_expertise', 12 );
 
-// Remove content
-remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
+	// Remove content
+	remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
+
+	// Display ontology page content
+	add_action( 'genesis_after_entry', 'uamswp_list_child_expertise', 12 );
+	function uamswp_list_child_expertise() {
+		global $page_id;
+		global $page_title;
+		global $show_child_aoe_section;
+		if ( $show_child_aoe_section ) { // If it's suppressed or none available, set to false
+			$args = array(
+				"post_type" => "expertise",
+				"post_status" => "publish",
+				"post_parent" => $page_id,
+				'order' => 'ASC',
+				'orderby' => 'title',
+				'posts_per_page' => -1, // We do not want to limit the post count
+				'meta_query' => array(
+					"relation" => "AND",
+					array(
+						"key" => "hide_from_sub_menu",
+						"value" => "1",
+						"compare" => "!=",
+					),
+					array(
+						"key" => "expertise_type",
+						"value" => "0",
+						"compare" => "!=",
+					),
+				),
+			);
+			$pages = New WP_Query ( $args );
+			if ( $pages->have_posts() ) { ?>
+				<section class="uams-module expertise-list bg-auto" id="sub-expertise" aria-labelledby="sub-expertise-title" >
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-12">
+								<h2 class="module-title" id="sub-expertise-title"><span class="title">Areas Within <?php echo $page_title; ?></span></h2>
+								<div class="card-list-container">
+									<div class="card-list card-list-expertise">
+								<?php
+									while ( $pages->have_posts() ) : $pages->the_post();
+										$id = get_the_ID();
+										$child_expertise_list = true; // Indicate that this is a list of child Areas of Expertise within this Area of Expertise
+										include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+									endwhile;
+									wp_reset_postdata(); ?>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			<?php
+			}
+		}
+	}
+
+	// Display appointment information
+	add_action( 'genesis_after_entry', 'uamswp_expertise_appointment', 26 );
+	// Check if Make an Appointment section should be displayed
+	$show_appointment_section = true; // It should always be displayed.
+	function uamswp_expertise_appointment() {
+		global $show_appointment_section;
+		if ( $show_appointment_section ) {
+			if ( get_field('location_expertise') ) {
+				$appointment_location_url = '#locations';
+				//$appointment_location_label = 'Go to the list of relevant locations';
+			} else {
+				$appointment_location_url = '/location/';
+				//$appointment_location_label = 'View a list of UAMS Health locations';
+			} ?>
+			<section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12">
+							<h2>Make an Appointment</h2>
+							<p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>" data-itemtitle="Contact a clinic directly">contacting a clinic directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+		<?php }
+	}
 
 // Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
 
@@ -114,81 +195,4 @@ remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 	// Query for whether associated treatments content section should be displayed on ontology pages/subsections
 	uamswp_fad_ontology_treatments_query();
 
-// Check if Make an Appointment section should be displayed
-$show_appointment_section = true; // It should always be displayed.
-
-function uamswp_list_child_expertise() {
-	global $page_id;
-	global $page_title;
-	global $show_child_aoe_section;
-	if ( $show_child_aoe_section ) { // If it's suppressed or none available, set to false
-		$args = array(
-			"post_type" => "expertise",
-			"post_status" => "publish",
-			"post_parent" => $page_id,
-			'order' => 'ASC',
-			'orderby' => 'title',
-			'posts_per_page' => -1, // We do not want to limit the post count
-			'meta_query' => array(
-				"relation" => "AND",
-				array(
-					"key" => "hide_from_sub_menu",
-					"value" => "1",
-					"compare" => "!=",
-				),
-				array(
-					"key" => "expertise_type",
-					"value" => "0",
-					"compare" => "!=",
-				),
-			),
-		);
-		$pages = New WP_Query ( $args );
-		if ( $pages->have_posts() ) { ?>
-			<section class="uams-module expertise-list bg-auto" id="sub-expertise" aria-labelledby="sub-expertise-title" >
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-12">
-							<h2 class="module-title" id="sub-expertise-title"><span class="title">Areas Within <?php echo $page_title; ?></span></h2>
-							<div class="card-list-container">
-								<div class="card-list card-list-expertise">
-							<?php
-								while ( $pages->have_posts() ) : $pages->the_post();
-									$id = get_the_ID();
-									$child_expertise_list = true; // Indicate that this is a list of child Areas of Expertise within this Area of Expertise
-									include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-								endwhile;
-								wp_reset_postdata(); ?>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-		<?php
-		}
-	}
-}
-function uamswp_expertise_appointment() {
-	global $show_appointment_section;
-	if ( $show_appointment_section ) {
-		if ( get_field('location_expertise') ) {
-			$appointment_location_url = '#locations';
-			//$appointment_location_label = 'Go to the list of relevant locations';
-		} else {
-			$appointment_location_url = '/location/';
-			//$appointment_location_label = 'View a list of UAMS Health locations';
-		} ?>
-		<section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-12">
-						<h2>Make an Appointment</h2>
-						<p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>" data-itemtitle="Contact a clinic directly">contacting a clinic directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php }
-}
 genesis();

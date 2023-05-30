@@ -86,10 +86,118 @@ remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
 remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
 
 // Construct page content
-add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 22 );
 
-// Remove content
-remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
+	// Remove content
+	remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
+
+	// Display ontology page content
+	add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 22 );
+	function uamswp_expertise_locations() {
+		global $show_locations_section;
+		global $location_query;
+		global $locations;
+	
+		if ( $show_locations_section ) { 
+			$location_ids = $location_query->posts;
+	
+			$location_region_IDs = array();
+			foreach($location_ids as $location_id) {
+				$location_region_IDs[] = get_field('location_region', $location_id);
+			}
+			// endwhile;
+			$location_region_IDs = array_unique($location_region_IDs);
+			$location_region_list = array();
+			foreach ($location_region_IDs as $location_region_ID){
+				$location_region_list[] = get_term_by( 'ID', $location_region_ID, 'region' )->slug;
+			}
+	
+			// if cookie is set, run modified physician query
+			if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {		
+	
+				$location_region = '';
+				if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+					$location_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
+				}
+	
+				$tax_query = array();
+				if(!empty($location_region)) {
+					$tax_query[] = array(
+						'taxonomy' => 'region',
+						'field' => 'slug',
+						'terms' => $location_region
+					);
+				}
+				$args = array(
+					'post_type' => "location",
+					'post_status' => 'publish',
+					'order' => 'ASC',
+					'orderby' => 'title',
+					'posts_per_page' => -1,
+					'fields' => 'ids',
+					'no_found_rows' => true, // counts posts, remove if pagination required
+					'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
+					'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
+					'post__in'	=> $locations,
+					'tax_query' => $tax_query
+				);
+				$location_query = New WP_Query( $args );
+			}
+	
+			?>
+			<section class="uams-module location-list bg-auto" id="locations">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<h2 class="module-title"><span class="title">Locations</span></h2>
+							<?php echo do_shortcode( '[uamswp_location_ajax_filter locations="'. implode(",", $location_ids) .'"]' ); ?>
+							<div class="card-list-container location-card-list-container">
+								<div class="card-list card-list-locations">
+								<?php
+								if ($location_query->have_posts()){
+									while ( $location_query->have_posts() ) : $location_query->the_post();
+										$id = get_the_ID();
+										include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+									endwhile;
+									echo '<data id="location_ids" data-postids="'. implode(',', $location_query->posts) .'," data-regions="'. implode(',', $location_region_list) .',"></data>';
+								} else {
+									echo '<span class="no-results">Sorry, there are no locations matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
+								}
+								wp_reset_postdata();?>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		<?php 
+		} // endif
+	}
+
+	// Display appointment information
+	add_action( 'genesis_after_entry', 'uamswp_expertise_appointment', 26 );
+	// Check if Make an Appointment section should be displayed
+	$show_appointment_section = true; // It should always be displayed.
+	function uamswp_expertise_appointment() {
+		global $show_appointment_section;
+		if ( $show_appointment_section ) {
+			if ( get_field('location_expertise') ) {
+				$appointment_location_url = '#locations';
+				//$appointment_location_label = 'Go to the list of relevant locations';
+			} else {
+				$appointment_location_url = '/location/';
+				//$appointment_location_label = 'View a list of UAMS Health locations';
+			} ?>
+			<section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12">
+							<h2>Make an Appointment</h2>
+							<p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>" data-itemtitle="Contact a clinic directly">contacting a clinic directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+		<?php }
+	}
 
 // Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
 
@@ -114,86 +222,4 @@ remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 	// Query for whether associated treatments content section should be displayed on ontology pages/subsections
 	uamswp_fad_ontology_treatments_query();
 
-// Check if Make an Appointment section should be displayed
-$show_appointment_section = true; // It should always be displayed.
-
-function uamswp_expertise_locations() {
-	global $show_locations_section;
-	global $location_query;
-	global $locations;
-
-	if ( $show_locations_section ) { 
-		$location_ids = $location_query->posts;
-
-		$location_region_IDs = array();
-		foreach($location_ids as $location_id) {
-			$location_region_IDs[] = get_field('location_region', $location_id);
-		}
-		// endwhile;
-		$location_region_IDs = array_unique($location_region_IDs);
-		$location_region_list = array();
-		foreach ($location_region_IDs as $location_region_ID){
-			$location_region_list[] = get_term_by( 'ID', $location_region_ID, 'region' )->slug;
-		}
-
-		// if cookie is set, run modified physician query
-		if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {		
-
-			$location_region = '';
-			if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
-				$location_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
-			}
-
-			$tax_query = array();
-			if(!empty($location_region)) {
-				$tax_query[] = array(
-					'taxonomy' => 'region',
-					'field' => 'slug',
-					'terms' => $location_region
-				);
-			}
-			$args = array(
-				'post_type' => "location",
-				'post_status' => 'publish',
-				'order' => 'ASC',
-				'orderby' => 'title',
-				'posts_per_page' => -1,
-				'fields' => 'ids',
-				'no_found_rows' => true, // counts posts, remove if pagination required
-				'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
-				'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
-				'post__in'	=> $locations,
-				'tax_query' => $tax_query
-			);
-			$location_query = New WP_Query( $args );
-		}
-
-		?>
-		<section class="uams-module location-list bg-auto" id="locations">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title"><span class="title">Locations</span></h2>
-						<?php echo do_shortcode( '[uamswp_location_ajax_filter locations="'. implode(",", $location_ids) .'"]' ); ?>
-						<div class="card-list-container location-card-list-container">
-							<div class="card-list card-list-locations">
-							<?php
-							if ($location_query->have_posts()){
-								while ( $location_query->have_posts() ) : $location_query->the_post();
-									$id = get_the_ID();
-									include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
-								endwhile;
-								echo '<data id="location_ids" data-postids="'. implode(',', $location_query->posts) .'," data-regions="'. implode(',', $location_region_list) .',"></data>';
-							} else {
-								echo '<span class="no-results">Sorry, there are no locations matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
-							}
-							wp_reset_postdata();?>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php 
-	} // endif
-}
 genesis();

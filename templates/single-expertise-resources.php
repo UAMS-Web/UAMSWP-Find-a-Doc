@@ -86,10 +86,57 @@ remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
 remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
 
 // Construct page content
-add_action( 'genesis_after_entry', 'uamswp_expertise_resource', 14 );
 
-// Remove content
-remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
+	// Remove content
+	remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
+
+	// Display ontology page content
+	add_action( 'genesis_after_entry', 'uamswp_expertise_resource', 14 );
+	function uamswp_expertise_resource() {
+		global $post;
+		global $page_title;
+		global $show_related_resource_section;
+		global $resources;
+		global $resource_query;
+		global $resource_postsPerPage;
+		$resource_heading_related_pre = true; // "Related Resources"
+		$resource_heading_related_post = false; // "Resources Related to __"
+		$resource_heading_related_name = $page_title; // To what is it related?
+		$resource_heading_related_name_attr = $page_title_attr;
+		$resource_more_suppress = false; // Force div.more to not display
+		$resource_more_key = '_resource_aoe';
+		$resource_more_value = $post->post_name;
+		if( $show_related_resource_section ) {
+			include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
+		}
+	}
+
+	// Display appointment information
+	add_action( 'genesis_after_entry', 'uamswp_expertise_appointment', 26 );
+	// Check if Make an Appointment section should be displayed
+	$show_appointment_section = true; // It should always be displayed.
+	function uamswp_expertise_appointment() {
+		global $show_appointment_section;
+		if ( $show_appointment_section ) {
+			if ( get_field('location_expertise') ) {
+				$appointment_location_url = '#locations';
+				//$appointment_location_label = 'Go to the list of relevant locations';
+			} else {
+				$appointment_location_url = '/location/';
+				//$appointment_location_label = 'View a list of UAMS Health locations';
+			} ?>
+			<section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12">
+							<h2>Make an Appointment</h2>
+							<p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>" data-itemtitle="Contact a clinic directly">contacting a clinic directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+		<?php }
+	}
 
 // Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
 
@@ -114,47 +161,4 @@ remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 	// Query for whether associated treatments content section should be displayed on ontology pages/subsections
 	uamswp_fad_ontology_treatments_query();
 
-// Check if Make an Appointment section should be displayed
-$show_appointment_section = true; // It should always be displayed.
-
-function uamswp_expertise_resource() {
-	global $post;
-	global $page_title;
-	global $show_related_resource_section;
-	global $resources;
-	global $resource_query;
-	global $resource_postsPerPage;
-	$resource_heading_related_pre = true; // "Related Resources"
-	$resource_heading_related_post = false; // "Resources Related to __"
-	$resource_heading_related_name = $page_title; // To what is it related?
-	$resource_heading_related_name_attr = $page_title_attr;
-	$resource_more_suppress = false; // Force div.more to not display
-	$resource_more_key = '_resource_aoe';
-	$resource_more_value = $post->post_name;
-	if( $show_related_resource_section ) {
-		include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
-	}
-}
-function uamswp_expertise_appointment() {
-	global $show_appointment_section;
-	if ( $show_appointment_section ) {
-		if ( get_field('location_expertise') ) {
-			$appointment_location_url = '#locations';
-			//$appointment_location_label = 'Go to the list of relevant locations';
-		} else {
-			$appointment_location_url = '/location/';
-			//$appointment_location_label = 'View a list of UAMS Health locations';
-		} ?>
-		<section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-12">
-						<h2>Make an Appointment</h2>
-						<p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>" data-itemtitle="Contact a clinic directly">contacting a clinic directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php }
-}
 genesis();
