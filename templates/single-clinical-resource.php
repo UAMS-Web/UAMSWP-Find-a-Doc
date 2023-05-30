@@ -56,11 +56,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_open', 5 );
 remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
 remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
 
-// Add extra class to entry
-function uamswp_add_entry_class( $attributes ) {
-	$attributes['class'] = $attributes['class']. ' bg-white';
-	return $attributes;
-}
+// Add bg-white class to article.entry element
 add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 // Modify Entry Title

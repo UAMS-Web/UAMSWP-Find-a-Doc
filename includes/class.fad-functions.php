@@ -1607,3 +1607,9 @@ function uams_default_page_body_class( $classes ) {
 	$classes[] = 'page-template-default';
 	return $classes;
 }
+
+// Add bg-white class to article.entry element
+function uamswp_add_entry_class( $attributes ) {
+	$attributes['class'] = $attributes['class']. ' bg-white';
+	return $attributes;
+}

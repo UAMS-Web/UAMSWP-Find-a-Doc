@@ -76,12 +76,8 @@ add_filter( 'body_class', 'uams_default_page_body_class' );
 // Add fake subpage to breadcrumbs
 add_filter('seopress_pro_breadcrumbs_crumbs', 'uamswp_fad_fpage_breadcrumbs');
 
-// Add extra class to entry
+// Add bg-white class to article.entry element
 add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
-function uamswp_add_entry_class( $attributes ) {
-	$attributes['class'] = $attributes['class']. ' bg-white';
-	return $attributes;
-}
 
 // Modify Entry Title
 
