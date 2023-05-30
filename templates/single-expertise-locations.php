@@ -72,7 +72,7 @@ $keywords = get_field('expertise_alternate_names');
 
 // Add page template class to body element's classes
 add_filter( 'body_class', 'uamswp_page_body_class' );
-$template_type = 'default';
+$template_type = 'page_landing';
 
 // Add fake subpage to breadcrumbs
 add_filter('seopress_pro_breadcrumbs_crumbs', 'uamswp_fad_fpage_breadcrumbs');
@@ -112,7 +112,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 
 	// Display ontology page content
-	add_action( 'genesis_after_entry', 'uamswp_expertise_locations', 22 );
+	add_action( 'genesis_entry_content', 'uamswp_expertise_locations', 22 );
 	function uamswp_expertise_locations() {
 		global $show_locations_section;
 		global $location_query;
@@ -194,7 +194,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	}
 
 	// Display appointment information
-	add_action( 'genesis_after_entry', 'uamswp_fad_ontology_appointment', 26 );
+	add_action( 'genesis_entry_content', 'uamswp_fad_ontology_appointment', 26 );
 	// Check if Make an Appointment section should be displayed
 	$show_appointment_section = true; // It should always be displayed.
 

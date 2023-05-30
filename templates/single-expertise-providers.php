@@ -72,7 +72,7 @@ $keywords = get_field('expertise_alternate_names');
 
 // Add page template class to body element's classes
 add_filter( 'body_class', 'uamswp_page_body_class' );
-$template_type = 'default';
+$template_type = 'page_landing';
 
 // Add fake subpage to breadcrumbs
 add_filter('seopress_pro_breadcrumbs_crumbs', 'uamswp_fad_fpage_breadcrumbs');
