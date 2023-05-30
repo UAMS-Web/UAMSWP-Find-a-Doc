@@ -1601,3 +1601,9 @@ function uamswp_fad_fpage_breadcrumbs($crumbs) {
 	$crumbs[] = array($fpage_name, '');
 	return $crumbs;
 }
+
+// Add page template class to body element's classes
+function uams_default_page_body_class( $classes ) {
+	$classes[] = 'page-template-default';
+	return $classes;
+}

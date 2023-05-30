@@ -63,11 +63,7 @@ function sp_titles_desc($html) {
 }
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
-function uams_default_page_body_class( $classes ) {
-
-	$classes[] = 'page-template-default';
-	return $classes;
-}
+// Add page template class to body element's classes
 add_filter( 'body_class', 'uams_default_page_body_class' );
 
 	get_header();

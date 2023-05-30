@@ -45,19 +45,16 @@ function uamswp_fad_canonical($html) {
 	return $html;
 }
 add_filter('seopress_titles_canonical','uamswp_fad_canonical');
+
+// Add page template class to body element's classes
+add_filter( 'body_class', 'uams_default_page_body_class' );
+
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
 // Removes entry meta from entry footer incl. markup.
 remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_open', 5 );
 remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
 remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
-
-function uams_default_page_body_class( $classes ) {
-
-	$classes[] = 'page-template-default';
-	return $classes;
-}
-add_filter( 'body_class', 'uams_default_page_body_class' );
 
 // Add extra class to entry
 function uamswp_add_entry_class( $attributes ) {
