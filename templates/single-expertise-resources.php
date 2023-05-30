@@ -61,6 +61,13 @@ function uamswp_breadcrumbs_expertise($crumbs) {
 	return $crumbs;
 }
 
+// Add extra class to entry
+add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
+function uamswp_add_entry_class( $attributes ) {
+	$attributes['class'] = $attributes['class']. ' bg-white';
+	return $attributes;
+}
+
 // Remove the post info (byline) from the entry header and the entry footer
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
@@ -69,13 +76,6 @@ remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from u
 remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_open', 5 );
 remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
 remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
-
-// Add extra class to entry
-add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
-function uamswp_add_entry_class( $attributes ) {
-	$attributes['class'] = $attributes['class']. ' bg-white';
-	return $attributes;
-}
 
 // Modify Entry Title
 
