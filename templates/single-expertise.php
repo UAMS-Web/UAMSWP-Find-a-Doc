@@ -92,29 +92,20 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 // Modify Entry Title
 
-	// Remove Genesis-standard post title
+	// Remove Genesis-standard post title and markup
+	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
 	remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
 
-	// Add post title for ontology subsection main page
-	add_action( 'genesis_entry_header', 'uamswp_expertise_post_title' );
-	function uamswp_expertise_post_title() {
-		global $page_title;
-		global $expertise_single_name;
-		global $parent_expertise;
-		global $parent_title;
-		global $parent_title_attr;
-		global $parent_url;
-		global $has_ancestors_ontology;
-		global $ontology_type;
-
-		echo '<h1 class="entry-title" itemprop="headline">';
-		echo '<span class="supertitle">'. $expertise_single_name . '</span><span class="sr-only">:</span> ';
-		echo $page_title;
-		if ( $parent_expertise ) {
-		   echo '<span class="subtitle"><span class="sr-only">(</span>Part of <a href="' . $parent_url . '" aria-label="Go to Area of Expertise page for ' . $parent_title_attr . '" data-categorytitle="Parent Name">' . $parent_title . '</a><span class="sr-only">)</span></span>';
-		} // endif
-		echo '</h1>';
-	}
+	// Construct non-standard post title
+	add_action( 'genesis_before_content', 'uamswp_fad_post_title' );
+	$entry_header_style = $ontology_type ? 'landingpage' : 'graphic'; // Entry header style
+	$entry_title_text = $page_title; // Regular title
+	$entry_title_text_supertitle = ''; // Optional supertitle, placed above the regular title
+	$entry_title_text_subtitle = ''; // Optional subtitle, placed below the regular title
+	$entry_title_text_body = ''; // Optional lead paragraph, placed below the entry title
+	$entry_title_image_desktop = ''; // Desktop breakpoint image ID
+	$entry_title_image_mobile = ''; // Optional mobile breakpoint image ID
 
 // Remove the post info (byline) from the entry header and the entry footer
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );

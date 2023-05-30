@@ -82,11 +82,20 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 // Modify Entry Title
 
-	// Remove Genesis-standard post title
+	// Remove Genesis-standard post title and markup
+	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
 	remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
 
-	// Add post title for ontology subsection fake subpages
-	add_action( 'genesis_entry_header', 'uamswp_fad_fpage_post_title' );
+	// Construct non-standard post title
+	add_action( 'genesis_before_content', 'uamswp_fad_post_title' );
+	$entry_header_style = 'graphic'; // Entry header style
+	$entry_title_text = $fpage_title; // Regular title
+	$entry_title_text_supertitle = ''; // Optional supertitle
+	$entry_title_text_subtitle = ''; // Optional subtitle
+	$entry_title_text_body = ''; // Optional lead paragraph
+	$entry_title_image_desktop = ''; // Desktop breakpoint image ID
+	$entry_title_image_mobile = ''; // Optional mobile breakpoint image ID
 
 // Remove the post info (byline) from the entry header and the entry footer
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
