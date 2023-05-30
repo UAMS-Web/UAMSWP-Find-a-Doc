@@ -51,6 +51,15 @@ $keywords = get_field('expertise_alternate_names');
 	// Add ontology subsection site header
 	add_action( 'genesis_header', 'uamswp_fad_ontology_header', 5 );
 
+// Modify primary navigation
+
+	// Remove the primary navigation set by the theme
+	remove_action( 'genesis_after_header', 'genesis_do_nav' );
+	remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
+
+	// Add ontology subsection primary navigation
+	add_action( 'genesis_after_header', 'uamswp_fad_ontology_nav_menu', 5 );
+
 // Remove the post info (byline) from the entry header and the entry footer
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
@@ -143,15 +152,6 @@ if ($podcast_name) {
 
 // Check if Make an Appointment section should be displayed
 $show_appointment_section = true; // It should always be displayed.
-
-// Modify primary navigation
-
-	// Remove the primary navigation set by the theme
-	remove_action( 'genesis_after_header', 'genesis_do_nav' );
-	remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
-
-	// Add ontology subsection primary navigation
-	add_action( 'genesis_after_header', 'uamswp_fad_ontology_nav_menu', 5 );
 
 function uamswp_expertise_cta() {
 	$cta_repeater = get_field('expertise_cta');

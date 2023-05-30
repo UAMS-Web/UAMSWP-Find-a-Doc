@@ -38,6 +38,15 @@ $keywords = get_field('expertise_alternate_names');
 	// Add ontology subsection site header
 	add_action( 'genesis_header', 'uamswp_fad_ontology_header', 5 );
 
+// Modify primary navigation
+
+	// Remove the primary navigation set by the theme
+	remove_action( 'genesis_after_header', 'genesis_do_nav' );
+	remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
+
+	// Add ontology subsection primary navigation
+	add_action( 'genesis_after_header', 'uamswp_fad_ontology_nav_menu', 5 );
+
 // Override theme's method of defining the breadcrumbs
 function uamswp_breadcrumbs_expertise($crumbs) {
 	$crumbs[] = array('Providers', '');
@@ -107,15 +116,6 @@ remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 
 // Check if Make an Appointment section should be displayed
 $show_appointment_section = true; // It should always be displayed.
-
-// Modify primary navigation
-
-	// Remove the primary navigation set by the theme
-	remove_action( 'genesis_after_header', 'genesis_do_nav' );
-	remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
-
-	// Add ontology subsection primary navigation
-	add_action( 'genesis_after_header', 'uamswp_fad_ontology_nav_menu', 5 );
 
 function uamswp_expertise_physicians() {
 	global $show_providers_section;
