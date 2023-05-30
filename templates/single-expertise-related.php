@@ -23,6 +23,29 @@ $ontology_type = get_field('expertise_type'); // True is ontology type, false is
 // Get site header and site nav values for ontology subsections
 uamswp_fad_ontology_site_values();
 
+// Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
+
+	// Query for whether associated providers content section should be displayed on ontology pages/subsections
+	uamswp_fad_ontology_providers_query();
+
+	// Query for whether associated locations content section should be displayed on ontology pages/subsections
+	uamswp_fad_ontology_locations_query();
+
+	// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
+	uamswp_fad_ontology_descendants_query();
+
+	// Query for whether related ontology items (of the same post type) content section should be displayed on ontology pages/subsections
+	uamswp_fad_ontology_related_query();
+
+	// Query for whether associated clinical resources content section should be displayed on ontology pages/subsections
+	uamswp_fad_ontology_resources_query();
+
+	// Query for whether associated conditions content section should be displayed on ontology pages/subsections
+	uamswp_fad_ontology_conditions_query();
+
+	// Query for whether associated treatments content section should be displayed on ontology pages/subsections
+	uamswp_fad_ontology_treatments_query();
+
 // Override theme's method of defining the meta page title
 add_filter('seopress_titles_title', 'uamswp_fad_fpage_title', 15, 2);
 
@@ -129,28 +152,5 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	add_action( 'genesis_after_entry', 'uamswp_fad_ontology_appointment', 26 );
 	// Check if Make an Appointment section should be displayed
 	$show_appointment_section = true; // It should always be displayed.
-
-// Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
-
-	// Query for whether associated providers content section should be displayed on ontology pages/subsections
-	uamswp_fad_ontology_providers_query();
-
-	// Query for whether associated locations content section should be displayed on ontology pages/subsections
-	uamswp_fad_ontology_locations_query();
-
-	// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
-	uamswp_fad_ontology_descendants_query();
-
-	// Query for whether related ontology items (of the same post type) content section should be displayed on ontology pages/subsections
-	uamswp_fad_ontology_related_query();
-
-	// Query for whether associated clinical resources content section should be displayed on ontology pages/subsections
-	uamswp_fad_ontology_resources_query();
-
-	// Query for whether associated conditions content section should be displayed on ontology pages/subsections
-	uamswp_fad_ontology_conditions_query();
-
-	// Query for whether associated treatments content section should be displayed on ontology pages/subsections
-	uamswp_fad_ontology_treatments_query();
 
 genesis();
