@@ -30,6 +30,14 @@ add_filter('seopress_titles_title', 'uamswp_fad_fpage_title', 15, 2);
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 $keywords = get_field('expertise_alternate_names');
 
+// Modify site header
+
+	// Remove the site header set by the theme
+	remove_action( 'genesis_header', 'uamswp_site_image', 5 );
+
+	// Add ontology subsection site header
+	add_action( 'genesis_header', 'uamswp_fad_ontology_header', 5 );
+
 // Override theme's method of defining the breadcrumbs
 function uamswp_breadcrumbs_expertise($crumbs) {
 	$crumbs[] = array('Specialties', '');
@@ -108,14 +116,6 @@ $show_appointment_section = true; // It should always be displayed.
 
 	// Add ontology subsection primary navigation
 	add_action( 'genesis_after_header', 'uamswp_fad_ontology_nav_menu', 5 );
-
-// Modify site header
-
-	// Remove the site header set by the theme
-	remove_action( 'genesis_header', 'uamswp_site_image', 5 );
-
-	// Add ontology subsection site header
-	add_action( 'genesis_header', 'uamswp_fad_ontology_header', 5 );
 
 function uamswp_list_child_expertise() {
 	global $page_id;

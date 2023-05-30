@@ -43,6 +43,14 @@ function uamswp_fad_title($html) {
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 $keywords = get_field('expertise_alternate_names');
 
+// Modify site header
+
+	// Remove the site header set by the theme
+	remove_action( 'genesis_header', 'uamswp_site_image', 5 );
+
+	// Add ontology subsection site header
+	add_action( 'genesis_header', 'uamswp_fad_ontology_header', 5 );
+
 // Remove the post info (byline) from the entry header and the entry footer
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
@@ -144,14 +152,6 @@ $show_appointment_section = true; // It should always be displayed.
 
 	// Add ontology subsection primary navigation
 	add_action( 'genesis_after_header', 'uamswp_fad_ontology_nav_menu', 5 );
-
-// Modify site header
-
-	// Remove the site header set by the theme
-	remove_action( 'genesis_header', 'uamswp_site_image', 5 );
-
-	// Add ontology subsection site header
-	add_action( 'genesis_header', 'uamswp_fad_ontology_header', 5 );
 
 function uamswp_expertise_cta() {
 	$cta_repeater = get_field('expertise_cta');
