@@ -28,7 +28,7 @@ $resource_button_text_arr = array(
 	'video' => 'Watch the Video',
 	'doc' => 'Read the Document'
 );
-$resource_button_text = 'View the Clinical Resource'; // Set fallback button text
+$resource_button_text = 'View the ' . $clinical_resource_single_name; // Set fallback button text
 if ( isset($resource_type) && isset($resource_button_text_arr[$resource_type_value]) ) {
 	// IF resource type is set...
 	// AND IF the resource type value is in $resource_button_text_arr...
@@ -69,7 +69,7 @@ if ( !empty($resource_providers) ) {
 		} // endif
 	} // endforeach;
 	$resource_provider = '';
-	$resource_provider_label = $resource_provider_count > 1 ? 'Providers' : 'Provider';
+	$resource_provider_label = $resource_provider_count > 1 ? $provider_plural_name : $provider_single_name;
 }
 
 
@@ -92,7 +92,7 @@ if( !empty($resource_locations) ) {
 		} // endif
 	} // endforeach;
 	$resource_location = '';
-	$resource_location_label = $resource_location_count > 1 ? 'Locations' : 'Location';
+	$resource_location_label = $resource_location_count > 1 ? $location_plural_name : $location_single_name;
 }
 
 // Check for valid conditions
@@ -114,7 +114,7 @@ if ( !empty($resource_conditions) ) {
 		} // endif
 	} // endforeach;
 	$resource_condition = '';
-	$resource_condition_label = $resource_condition_count > 1 ? 'Conditions' : 'Condition';
+	$resource_condition_label = $resource_condition_count > 1 ? $conditions_plural_name : $conditions_single_name;
 }
 
 // Check for valid treatments
@@ -136,7 +136,7 @@ if ( !empty($resource_treatments) ) {
 		} // endif
 	} // endforeach;
 	$resource_treatment = '';
-	$resource_treatment_label = $resource_treatment_count > 1 ? 'Treatments/Procedures' : 'Treatment/Procedure';
+	$resource_treatment_label = $resource_treatment_count > 1 ? $treatments_plural_name : $treatments_single_name;
 }
 
 // Check for valid areas of expertise
@@ -158,7 +158,7 @@ if ( !empty($resource_expertises) ) {
 		} // endif
 	} // endforeach;
 	$resource_expertise = '';
-	$resource_expertise_label = $resource_expertise_count > 1 ? 'Areas of Expertise' : 'Area of Expertise';
+	$resource_expertise_label = $resource_expertise_count > 1 ? $expertise_plural_name : $expertise_single_name;
 }
 
 if ( $resource_page == 'archive' ) { ?>

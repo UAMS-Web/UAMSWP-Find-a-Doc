@@ -3,6 +3,26 @@
  * Template Name: Fake Area of Expertise Specialties Subpage
  */
 
+// Get system settings for ontology item labels
+
+	// Get system settings for provider labels
+	uamswp_fad_labels_provider();
+
+	// Get system settings for location labels
+	uamswp_fad_labels_location();
+
+	// Get system settings for area of expertise labels
+	uamswp_fad_labels_expertise();
+
+	// Get system settings for clinical resource labels
+	uamswp_fad_labels_clinical_resource();
+
+	// Get system settings for condition labels
+	uamswp_fad_labels_conditions();
+
+	// Get system settings for treatment labels
+	uamswp_fad_labels_treatments();
+
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title(); // Title of Area of Expertise
@@ -12,10 +32,6 @@ $fpage_name_attr = uamswp_attr_conversion($fpage_name);
 $fpage_title = $fpage_name . ' in ' . $page_title; // Fake subpage page title
 $fpage_title_attr = uamswp_attr_conversion($fpage_title);
 $page_url = get_permalink();
-$expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
-$expertise_archive_title_attr = uamswp_attr_conversion($expertise_archive_title);
-$expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
-$expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
 
 // Area of Expertise Content Type
 $ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
@@ -117,6 +133,35 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		global $page_id;
 		global $page_title;
 		global $show_child_aoe_section;
+		
+		global $provider_single_name;
+		global $provider_single_name_attr;
+		global $provider_plural_name;
+		global $provider_plural_name_attr;
+		global $location_single_name;
+		global $location_single_name_attr;
+		global $location_plural_name;
+		global $location_plural_name_attr;
+		global $expertise_single_name;
+		global $expertise_single_name_attr;
+		global $expertise_plural_name;
+		global $expertise_plural_name_attr;
+		global $expertise_archive_headline;
+		global $expertise_archive_headline_attr;
+		global $expertise_archive_intro_text;
+		global $clinical_resource_single_name;
+		global $clinical_resource_single_name_attr;
+		global $clinical_resource_plural_name;
+		global $clinical_resource_plural_name_attr;
+		global $conditions_single_name;
+		global $conditions_single_name_attr;
+		global $conditions_plural_name;
+		global $conditions_plural_name_attr;
+		global $treatments_single_name;
+		global $treatments_single_name_attr;
+		global $treatments_plural_name;
+		global $treatments_plural_name_attr;
+
 		if ( $show_child_aoe_section ) { // If it's suppressed or none available, set to false
 			$args = array(
 				"post_type" => "expertise",
@@ -145,7 +190,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-12">
-								<h2 class="module-title" id="sub-expertise-title"><span class="title">Areas Within <?php echo $page_title; ?></span></h2>
+								<h2 class="module-title" id="sub-expertise-title"><span class="title"><?php echo $expertise_plural_name; ?> Within <?php echo $page_title; ?></span></h2>
 								<div class="card-list-container">
 									<div class="card-list card-list-expertise">
 								<?php

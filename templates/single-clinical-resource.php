@@ -1,28 +1,45 @@
 <?php
 /*
- *
- * Template Name: Clinical Resources
- * Designed for clinical resources single
- *
+ * Template Name: Single Clinical Resource
  */
 
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title();
 $page_title_attr = uamswp_attr_conversion($page_title);
-$resource_archive_title_system = get_field('clinical_resource_archive_headline', 'option');
-$resource_archive_title = $resource_archive_title_system ? $resource_archive_title_system : 'Clinical Resource';
-$resource_archive_title_attr = uamswp_attr_conversion($resource_archive_title);
+
+// Get system settings for ontology item labels
+
+	// Get system settings for provider labels
+	uamswp_fad_labels_provider();
+
+	// Get system settings for location labels
+	uamswp_fad_labels_location();
+
+	// Get system settings for area of expertise labels
+	uamswp_fad_labels_expertise();
+
+	// Get system settings for clinical resource labels
+	uamswp_fad_labels_clinical_resource();
+
+	// Get system settings for condition labels
+	uamswp_fad_labels_conditions();
+
+	// Get system settings for treatment labels
+	uamswp_fad_labels_treatments();
+
+// Get system settings for clinical resource archive page text
+uamswp_fad_archive_clinical_resource();
 
 // Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
 	global $page_title_attr;
-	global $resource_archive_title_attr;
+	global $clinical_resource_archive_headline_attr;
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$meta_title_chars_max = 60;
 	$meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
 	$meta_title_base_chars = strlen( $meta_title_base );
-	$meta_title_enhanced_addition = ' | ' . $resource_archive_title_attr;
+	$meta_title_enhanced_addition = ' | ' . $clinical_resource_archive_headline_attr;
 	$meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
 	$meta_title_enhanced_chars = strlen( $meta_title_enhanced );
 	if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
@@ -66,9 +83,9 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 	add_action( 'genesis_entry_header', 'uamswp_resource_post_title' );
 
 	function uamswp_resource_post_title() {
-		global $resource_archive_title;
+		global $clinical_resource_archive_headline;
 		echo '<h1 class="entry-title" itemprop="headline">';
-		echo '<span class="supertitle">'. $resource_archive_title . '</span><span class="sr-only">:</span> ';
+		echo '<span class="supertitle">'. $clinical_resource_archive_headline . '</span><span class="sr-only">: </span>';
 		echo get_the_title();
 		echo '</h1>';
 	}
@@ -322,7 +339,7 @@ function uamswp_resource_physicians() {
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title"><span class="title">Related Providers</span></h2>
+						<h2 class="module-title"><span class="title">Related <?php echo $provider_plural_name; ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list card-list-doctors">
 								<?php 
@@ -336,11 +353,11 @@ function uamswp_resource_physicians() {
 						</div>
 						<!-- <?php if ($postsPerPage !== -1) { ?>
 						<div class="more">
-							<button class="loadmore btn btn-primary" data-posttype="post" data-postids="<?php echo(implode(',', $physicians)); ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physicians_query->found_posts; ?>" aria-label="Load more providers">Load More</button>
+							<button class="loadmore btn btn-primary" data-posttype="post" data-postids="<?php //echo(implode(',', $physicians)); ?>" data-ppp="<?php //echo $postsPerPage; ?>" data-postcount="<?php //echo $physicians_query->found_posts; ?>" aria-label="Load more <?php //echo strtolower($provider_plural_name_attr); ?>">Load More</button>
 						</div>
 						<?php } ?> -->
 						<div class="ajax-filter-load-more">
-							<button class="btn btn-lg btn-primary" aria-label="Load all providers">Load All</button>
+							<button class="btn btn-lg btn-primary" aria-label="Load all <?php echo strtolower($provider_plural_name_attr); ?>">Load All</button>
 						</div>
 					</div>
 				</div>
@@ -384,6 +401,9 @@ function uamswp_resource_conditions_cpt() {
 	global $page_title;
 	global $show_conditions_section;
 	global $conditions_cpt_query;
+	global $conditions_plural_name;
+	global $provider_plural_name;
+	
 	$condition_context = 'single-resource';
 	$condition_heading_related_name = $page_title; // To what is it related?
 	$condition_heading_related_name_attr = $page_title_attr;
@@ -396,6 +416,10 @@ function uamswp_resource_treatments_cpt() {
 	global $page_title;
 	global $show_treatments_section;
 	global $treatments_cpt_query;
+	global $treatments_single_name_attr;
+	global $treatments_plural_name;
+	global $provider_plural_name;
+
 	$treatment_context = 'single-resource';
 	$treatment_heading_related_name = $page_title; // To what is it related?
 	$treatment_heading_related_name_attr = $page_title_attr;
@@ -408,12 +432,40 @@ function uamswp_resource_locations() {
 	global $show_locations_section;
 	global $location_query;
 
+	global $provider_single_name;
+	global $provider_single_name_attr;
+	global $provider_plural_name;
+	global $provider_plural_name_attr;
+	global $location_single_name;
+	global $location_single_name_attr;
+	global $location_plural_name;
+	global $location_plural_name_attr;
+	global $expertise_single_name;
+	global $expertise_single_name_attr;
+	global $expertise_plural_name;
+	global $expertise_plural_name_attr;
+	global $expertise_archive_headline;
+	global $expertise_archive_headline_attr;
+	global $expertise_archive_intro_text;
+	global $clinical_resource_single_name;
+	global $clinical_resource_single_name_attr;
+	global $clinical_resource_plural_name;
+	global $clinical_resource_plural_name_attr;
+	global $conditions_single_name;
+	global $conditions_single_name_attr;
+	global $conditions_plural_name;
+	global $conditions_plural_name_attr;
+	global $treatments_single_name;
+	global $treatments_single_name_attr;
+	global $treatments_plural_name;
+	global $treatments_plural_name_attr;
+
 	if ( $show_locations_section ) { ?>
 		<section class="uams-module location-list bg-auto" id="locations">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title"><span class="title">Related Locations</span></h2>
+						<h2 class="module-title"><span class="title">Related <?php echo $location_plural_name; ?></span></h2>
 						<div class="card-list-container location-card-list-container">
 							<div class="card-list">
 							<?php while ( $location_query->have_posts() ) : $location_query->the_post();
@@ -435,6 +487,35 @@ function uamswp_resource_associated() {
 	global $resources;
 	global $resource_query;
 	global $resource_postsPerPage;
+	
+	global $provider_single_name;
+	global $provider_single_name_attr;
+	global $provider_plural_name;
+	global $provider_plural_name_attr;
+	global $location_single_name;
+	global $location_single_name_attr;
+	global $location_plural_name;
+	global $location_plural_name_attr;
+	global $expertise_single_name;
+	global $expertise_single_name_attr;
+	global $expertise_plural_name;
+	global $expertise_plural_name_attr;
+	global $expertise_archive_headline;
+	global $expertise_archive_headline_attr;
+	global $expertise_archive_intro_text;
+	global $clinical_resource_single_name;
+	global $clinical_resource_single_name_attr;
+	global $clinical_resource_plural_name;
+	global $clinical_resource_plural_name_attr;
+	global $conditions_single_name;
+	global $conditions_single_name_attr;
+	global $conditions_plural_name;
+	global $conditions_plural_name_attr;
+	global $treatments_single_name;
+	global $treatments_single_name_attr;
+	global $treatments_plural_name;
+	global $treatments_plural_name_attr;
+	
 	$resource_heading_related_pre = true; // "Related Resources"
 	$resource_heading_related_post = false; // "Resources Related to __"
 	$resource_heading_related_name = $page_title; // To what is it related?
@@ -450,12 +531,40 @@ function uamswp_resource_expertise() {
 	global $show_aoe_section;
 	global $expertise_query;
 
+	global $provider_single_name;
+	global $provider_single_name_attr;
+	global $provider_plural_name;
+	global $provider_plural_name_attr;
+	global $location_single_name;
+	global $location_single_name_attr;
+	global $location_plural_name;
+	global $location_plural_name_attr;
+	global $expertise_single_name;
+	global $expertise_single_name_attr;
+	global $expertise_plural_name;
+	global $expertise_plural_name_attr;
+	global $expertise_archive_headline;
+	global $expertise_archive_headline_attr;
+	global $expertise_archive_intro_text;
+	global $clinical_resource_single_name;
+	global $clinical_resource_single_name_attr;
+	global $clinical_resource_plural_name;
+	global $clinical_resource_plural_name_attr;
+	global $conditions_single_name;
+	global $conditions_single_name_attr;
+	global $conditions_plural_name;
+	global $conditions_plural_name_attr;
+	global $treatments_single_name;
+	global $treatments_single_name_attr;
+	global $treatments_plural_name;
+	global $treatments_plural_name_attr;
+
 	if( $show_aoe_section ) { ?>
 		<section class="uams-module expertise-list bg-auto" id="expertise" aria-labelledby="areas-of-expertise-title">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title" id="areas-of-expertise-title"><span class="title">Related Areas of Expertise</span></h2>
+						<h2 class="module-title" id="areas-of-expertise-title"><span class="title">Related <?php echo $expertise_plural_name; ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list card-list-expertise">
 							<?php 
@@ -495,32 +604,32 @@ function uamswp_resource_jump_links() {
 				<ul class="nav navbar-nav">
 					<?php if ( $show_related_resource_section ) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#related-resources" title="Jump to the section of this page about Related Resources">Resources</a>
+							<a class="nav-link" href="#related-resources" title="Jump to the section of this page about related <?php echo $clinical_resource_plural_name_attr; ?>">Related <?php echo $clinical_resource_plural_name; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ( $show_conditions_section ) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#conditions" title="Jump to the section of this page about Related Conditions">Conditions</a>
+							<a class="nav-link" href="#conditions" title="Jump to the section of this page about related <?php echo $conditions_plural_name_attr; ?>"><?php echo $conditions_plural_name; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ( $show_treatments_section ) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#treatments" title="Jump to the section of this page about Medical Treatments and Procedures Performed">Treatments &amp; Procedures</a>
+							<a class="nav-link" href="#treatments" title="Jump to the section of this page about related <?php echo $treatments_plural_name_attr; ?>"><?php echo $treatments_plural_name; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ( $show_providers_section ) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#providers" title="Jump to the section of this page about Providers">Providers</a>
+							<a class="nav-link" href="#providers" title="Jump to the section of this page about related <?php echo $provider_plural_name_attr; ?>"><?php echo $provider_plural_name; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ($show_locations_section) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#locations" title="Jump to the section of this page about Locations">Locations</a>
+							<a class="nav-link" href="#locations" title="Jump to the section of this page about related <?php echo $location_plural_name_attr; ?>"><?php echo $location_plural_name; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ($show_aoe_section) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#expertise" title="Jump to the section of this page about Related Areas of Expertise">Areas of Expertise</a>
+							<a class="nav-link" href="#expertise" title="Jump to the section of this page about related <?php echo $expertise_plural_name_attr; ?>"><?php echo $expertise_plural_name; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ( $show_appointment_section ) { ?>
@@ -545,7 +654,7 @@ function uamswp_resource_appointment() {
 				<div class="row">
 					<div class="col-xs-12">
 						<h2>Make an Appointment</h2>
-						<p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>" data-itemtitle="Contact a clinic directly">contacting a clinic directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
+						<p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>" data-itemtitle="Contact a <?php echo strtolower($location_single_name_attr); ?> directly">contacting a <?php echo strtolower($location_single_name); ?> directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
 					</div>
 				</div>
 			</div>

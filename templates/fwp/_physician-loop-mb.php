@@ -56,7 +56,7 @@ $full_name = rwmb_meta('physician_first_name') .' ' .(rwmb_meta('physician_middl
 								<div class="ds-title">Patient Rating</div>
 								<div><span class="ds-stars ds-stars0"></span></div>
 								<div class="small bold">No Patient Satisfaction Reviews</div>
-								<div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?" aria-label="Learn why ratings are not available for this provider"><span aria-hidden="true">Why not?</span></a></div>
+								<div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?" aria-label="Learn why ratings are not available for this <?php echo strtolower($provider_single_name_attr); ?>"><span aria-hidden="true">Why not?</span></a></div>
 								</div>
 							<?php
 							}
@@ -66,7 +66,7 @@ $full_name = rwmb_meta('physician_first_name') .' ' .(rwmb_meta('physician_middl
 						<div class="ds-title">Patient Rating</div>
 						<div><span class="ds-stars ds-stars0"></span></div>
 						<div class="small bold">No Patient Satisfaction Reviews</div>
-						<div><a href="#why_not_modal" aria-label="Learn why ratings are not available for this provider" data-lity><span aria-hidden="true">Why not?</span></a></div>
+						<div><a href="#why_not_modal" aria-label="Learn why ratings are not available for this <?php echo strtolower($provider_single_name_attr); ?>" data-lity><span aria-hidden="true">Why not?</span></a></div>
 						</div>
 					<?php }
 				?>
@@ -114,7 +114,7 @@ $full_name = rwmb_meta('physician_first_name') .' ' .(rwmb_meta('physician_middl
 
 						?>
 						<?php if( $locations ): ?>
-						<h3 data-fontsize="16" data-lineheight="24"><i class="fa fa-medkit"></i> Clinic(s)</h3>
+						<h3 data-fontsize="16" data-lineheight="24"><i class="fa fa-medkit"></i> <?php echo $location_single_name; ?>(s)</h3>
 							<ul>
 							<?php while ( $locations->have_posts() ) : $locations->the_post(); ?>
 								<li>

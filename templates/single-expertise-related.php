@@ -3,19 +3,35 @@
  * Template Name: Fake Area of Expertise Related Areas of Expertise Subpage
  */
 
+// Get system settings for ontology item labels
+
+	// Get system settings for provider labels
+	uamswp_fad_labels_provider();
+
+	// Get system settings for location labels
+	uamswp_fad_labels_location();
+
+	// Get system settings for area of expertise labels
+	uamswp_fad_labels_expertise();
+
+	// Get system settings for clinical resource labels
+	uamswp_fad_labels_clinical_resource();
+
+	// Get system settings for condition labels
+	uamswp_fad_labels_conditions();
+
+	// Get system settings for treatment labels
+	uamswp_fad_labels_treatments();
+
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title(); // Title of Area of Expertise
 $page_title_attr = uamswp_attr_conversion($page_title);
-$fpage_name = 'Related Areas of Expertise'; // Fake subpage title
+$fpage_name = 'Related ' . $expertise_plural_name; // Fake subpage title
 $fpage_name_attr = uamswp_attr_conversion($fpage_name);
-$fpage_title = 'Areas of Expertise Related to ' . $page_title; // Fake subpage page title
+$fpage_title = $expertise_plural_name . ' Related to ' . $page_title; // Fake subpage page title
 $fpage_title_attr = uamswp_attr_conversion($fpage_title);
 $page_url = get_permalink();
-$expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
-$expertise_archive_title_attr = uamswp_attr_conversion($expertise_archive_title);
-$expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
-$expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
 
 // Area of Expertise Content Type
 $ontology_type = get_field('expertise_type'); // True is ontology type, false is content type

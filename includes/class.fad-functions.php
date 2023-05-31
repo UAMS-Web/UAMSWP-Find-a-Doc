@@ -1008,6 +1008,34 @@ add_action('wp_ajax_nopriv_location_ajax_filter', 'location_ajax_filter_callback
 add_action('wp_ajax_location_ajax_filter', 'location_ajax_filter_callback');
 
 function location_ajax_filter_callback() {
+	global $provider_single_name;
+	global $provider_single_name_attr;
+	global $provider_plural_name;
+	global $provider_plural_name_attr;
+	global $location_single_name;
+	global $location_single_name_attr;
+	global $location_plural_name;
+	global $location_plural_name_attr;
+	global $expertise_single_name;
+	global $expertise_single_name_attr;
+	global $expertise_plural_name;
+	global $expertise_plural_name_attr;
+	global $expertise_archive_headline;
+	global $expertise_archive_headline_attr;
+	global $expertise_archive_intro_text;
+	global $clinical_resource_single_name;
+	global $clinical_resource_single_name_attr;
+	global $clinical_resource_plural_name;
+	global $clinical_resource_plural_name_attr;
+	global $conditions_single_name;
+	global $conditions_single_name_attr;
+	global $conditions_plural_name;
+	global $conditions_plural_name_attr;
+	global $treatments_single_name;
+	global $treatments_single_name_attr;
+	global $treatments_plural_name;
+	global $treatments_plural_name_attr;
+
 	$tax_query = array();
 
 	// Get data variables
@@ -1596,6 +1624,14 @@ function uamswp_fad_ontology_nav_menu() {
 	global $child_pages;
 	global $show_child_content_nav;
 	global $childnav;
+	global $provider_plural_name;
+	global $provider_plural_name_attr;
+	global $location_plural_name;
+	global $location_plural_name_attr;
+	global $expertise_plural_name;
+	global $expertise_plural_name_attr;
+	global $clinical_resource_plural_name;
+	global $clinical_resource_plural_name_attr;
 
 	include( UAMS_FAD_PATH . '/templates/single-expertise-nav.php');
 }
@@ -1632,6 +1668,34 @@ function uamswp_expertise_header_metadata() {
 function uamswp_fad_ontology_appointment() {
 	global $show_appointment_section;
 
+	global $provider_single_name;
+	global $provider_single_name_attr;
+	global $provider_plural_name;
+	global $provider_plural_name_attr;
+	global $location_single_name;
+	global $location_single_name_attr;
+	global $location_plural_name;
+	global $location_plural_name_attr;
+	global $expertise_single_name;
+	global $expertise_single_name_attr;
+	global $expertise_plural_name;
+	global $expertise_plural_name_attr;
+	global $expertise_archive_headline;
+	global $expertise_archive_headline_attr;
+	global $expertise_archive_intro_text;
+	global $clinical_resource_single_name;
+	global $clinical_resource_single_name_attr;
+	global $clinical_resource_plural_name;
+	global $clinical_resource_plural_name_attr;
+	global $conditions_single_name;
+	global $conditions_single_name_attr;
+	global $conditions_plural_name;
+	global $conditions_plural_name_attr;
+	global $treatments_single_name;
+	global $treatments_single_name_attr;
+	global $treatments_plural_name;
+	global $treatments_plural_name_attr;
+
 	if ( $show_appointment_section ) {
 		if ( get_field('location_expertise') ) {
 			$appointment_location_url = '#locations';
@@ -1645,7 +1709,7 @@ function uamswp_fad_ontology_appointment() {
 				<div class="row">
 					<div class="col-xs-12">
 						<h2>Make an Appointment</h2>
-						<p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>" data-itemtitle="Contact a clinic directly">contacting a clinic directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
+						<p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>" data-itemtitle="Contact a clinic directly">contacting a <?php echo strtolower($location_single_name); ?> directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
 					</div>
 				</div>
 			</div>
@@ -1695,6 +1759,34 @@ function uamswp_fad_podcast() {
 	global $show_podcast_section;
 	global $podcast_filter; // Expected values: 'tag' or 'doctor'
 
+	global $provider_single_name;
+	global $provider_single_name_attr;
+	global $provider_plural_name;
+	global $provider_plural_name_attr;
+	global $location_single_name;
+	global $location_single_name_attr;
+	global $location_plural_name;
+	global $location_plural_name_attr;
+	global $expertise_single_name;
+	global $expertise_single_name_attr;
+	global $expertise_plural_name;
+	global $expertise_plural_name_attr;
+	global $expertise_archive_headline;
+	global $expertise_archive_headline_attr;
+	global $expertise_archive_intro_text;
+	global $clinical_resource_single_name;
+	global $clinical_resource_single_name_attr;
+	global $clinical_resource_plural_name;
+	global $clinical_resource_plural_name_attr;
+	global $conditions_single_name;
+	global $conditions_single_name_attr;
+	global $conditions_plural_name;
+	global $conditions_plural_name_attr;
+	global $treatments_single_name;
+	global $treatments_single_name_attr;
+	global $treatments_plural_name;
+	global $treatments_plural_name_attr;
+
 	if ( $show_podcast_section ) {
 		if ( $podcast_filter == 'tag' ) {
 			$podcast_filter_id = '303';
@@ -1726,7 +1818,7 @@ function uamswp_fad_podcast() {
 							<div class="content-width mt-8" id="radiomd-embedded-filtered-<?php echo $podcast_filter; ?>"></div>
 						</div>
 						<div class="col-12 more">
-							<p class="lead">Find other great episodes on other topics and from other UAMS Health providers.</p>
+							<p class="lead">Find other great episodes on other topics and from other UAMS Health <?php echo strtolower($provider_plural_name); ?>.</p>
 							<div class="cta-container">
 								<a href="/podcast/" class="btn btn-primary" aria-label="Listen to more episodes of the UAMS Health Talk podcast">Listen to More Episodes</a>
 							</div>
@@ -1737,7 +1829,7 @@ function uamswp_fad_podcast() {
 	<?php } // endif ( $show_podcast_section )
 }
 
-// Get system settings for other ontology item labels
+// Get system settings for other ontology item labels and archive page text
 
 	// Get system settings for provider labels
 	function uamswp_fad_labels_provider() {

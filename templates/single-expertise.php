@@ -3,15 +3,31 @@
  * Template Name: Single Area of Expertise
  */
 
+// Get system settings for ontology item labels
+
+	// Get system settings for provider labels
+	uamswp_fad_labels_provider();
+
+	// Get system settings for location labels
+	uamswp_fad_labels_location();
+
+	// Get system settings for area of expertise labels
+	uamswp_fad_labels_expertise();
+
+	// Get system settings for clinical resource labels
+	uamswp_fad_labels_clinical_resource();
+
+	// Get system settings for condition labels
+	uamswp_fad_labels_conditions();
+
+	// Get system settings for treatment labels
+	uamswp_fad_labels_treatments();
+
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title();
 $page_title_attr = uamswp_attr_conversion($page_title);
 $page_url = get_permalink();
-$expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
-$expertise_archive_title_attr = uamswp_attr_conversion($expertise_archive_title);
-$expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
-$expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
 
 // Area of Expertise Content Type
 $ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
@@ -253,6 +269,35 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		global $page_title;
 		global $show_conditions_section;
 		global $conditions_cpt_query;
+		
+		global $provider_single_name;
+		global $provider_single_name_attr;
+		global $provider_plural_name;
+		global $provider_plural_name_attr;
+		global $location_single_name;
+		global $location_single_name_attr;
+		global $location_plural_name;
+		global $location_plural_name_attr;
+		global $expertise_single_name;
+		global $expertise_single_name_attr;
+		global $expertise_plural_name;
+		global $expertise_plural_name_attr;
+		global $expertise_archive_headline;
+		global $expertise_archive_headline_attr;
+		global $expertise_archive_intro_text;
+		global $clinical_resource_single_name;
+		global $clinical_resource_single_name_attr;
+		global $clinical_resource_plural_name;
+		global $clinical_resource_plural_name_attr;
+		global $conditions_single_name;
+		global $conditions_single_name_attr;
+		global $conditions_plural_name;
+		global $conditions_plural_name_attr;
+		global $treatments_single_name;
+		global $treatments_single_name_attr;
+		global $treatments_plural_name;
+		global $treatments_plural_name_attr;
+
 		$condition_context = 'single-expertise';
 		$condition_heading_related_name = $page_title; // To what is it related?
 		$condition_heading_related_name_attr = $page_title_attr;
@@ -268,6 +313,9 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		global $page_title;
 		global $show_treatments_section;
 		global $treatments_cpt_query;
+		global $treatments_plural_name;
+		global $provider_plural_name;
+
 		$treatment_context = 'single-expertise';
 		$treatment_heading_related_name = $page_title; // To what is it related?
 		$treatment_heading_related_name_attr = $page_title_attr;

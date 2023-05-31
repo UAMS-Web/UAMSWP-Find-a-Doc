@@ -13,9 +13,9 @@
  * 	$condition_disclaimer = 'true', 'false'
  */
 
-$condition_heading = 'Conditions';
+$condition_heading = $conditions_plural_name;
 $condition_disclaimer = false;
-$condition_disclaimer_text = 'UAMS Health providers care for a broad range of conditions, some of which may not be listed below.';
+$condition_disclaimer_text = 'UAMS Health ' . strtolower($provider_plural_name) . ' care for a broad range of ' . strtolower($conditions_plural_name) . ', some of which may not be listed below.';
 
 if ( $condition_context == 'single-provider' ) {
 
@@ -58,7 +58,7 @@ if ( $condition_context == 'single-provider' ) {
 					<ul class="list">
 					<?php foreach( $conditions_cpt_query->posts as $condition ): ?>
 						<li>
-							<a href="<?php echo get_the_permalink( $condition->ID ); ?>" aria-label="Go to Condition page for <?php echo $condition->post_title; ?>" class="btn btn-outline-primary">
+							<a href="<?php echo get_the_permalink( $condition->ID ); ?>" aria-label="Go to <?php echo $conditions_single_name_attr; ?> page for <?php echo $condition->post_title; ?>" class="btn btn-outline-primary">
 								<?php 
 									echo $condition->post_title;
 								?>

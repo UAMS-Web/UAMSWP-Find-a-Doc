@@ -1,8 +1,30 @@
 <?php 
 /*
+ * Template Name: Single Location
+ * 
  * Get ACF fields to use for meta data
  * Add description from location short description or full description
  */
+
+// Get system settings for ontology item labels
+
+	// Get system settings for provider labels
+	uamswp_fad_labels_provider();
+
+	// Get system settings for location labels
+	uamswp_fad_labels_location();
+
+	// Get system settings for area of expertise labels
+	uamswp_fad_labels_expertise();
+
+	// Get system settings for clinical resource labels
+	uamswp_fad_labels_clinical_resource();
+
+	// Get system settings for condition labels
+	uamswp_fad_labels_conditions();
+
+	// Get system settings for treatment labels
+	uamswp_fad_labels_treatments();
 
 $excerpt = get_field('location_short_desc');
 $about_loc = get_field('location_about');
@@ -361,7 +383,7 @@ while ( have_posts() ) : the_post(); ?>
 		$about_section_title = '';
 		$about_section_title_short = '';
 		$about_section_submenu = false;
-		$about_section_label = 'Jump to the section of this page with the location description';
+		$about_section_label = 'Jump to the section of this page with the ' . strtolower($location_single_name) . ' description';
 
 		if ( $location_about || $location_affiliation || $prescription ) {
 			$show_about_section = true;
@@ -421,7 +443,7 @@ while ( have_posts() ) : the_post(); ?>
 			$location_scheduling_title = ( isset($location_scheduling_title_general) && !empty($location_scheduling_title_general) ) ? $location_scheduling_title_general : $location_scheduling_title_default; // Set main title from general title input. If general title value is empty, set to default value.
 
 			// Set main appointment scheduling section intro
-			$location_scheduling_intro_default = 'Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.'; // Default value for appointment section intro
+			$location_scheduling_intro_default = 'Use your UAMS Health MyChart account to schedule an appointment at this ' . strtolower($location_single_name) . '. If you are not a MyChart user, you can continue as a guest.'; // Default value for appointment section intro
 			$location_scheduling_intro_general = get_field('location_scheduling_intro_general'); // Get input for general appointment section intro
 			$location_scheduling_intro = ( isset($location_scheduling_intro_general) && !empty($location_scheduling_intro_general) ) ? $location_scheduling_intro_general : $location_scheduling_intro_default; // Set main intro from general intro input. If general intro value is empty, set to default value.
 
@@ -618,9 +640,9 @@ while ( have_posts() ) : the_post(); ?>
 						<div class="alert alert-warning" role="alert">
 							<p>
 							<?php if ($location_closing_date_past) { ?>
-								This location is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed.
+								This <?php echo strtolower($location_single_name); ?> is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed.
 							<?php } else { ?>
-								This location will be closing <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>.
+								This <?php echo strtolower($location_single_name); ?> will be closing <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>.
 							<?php } // endif
 							if (
 								$location_closing_length == 'temporary' 
@@ -636,11 +658,11 @@ while ( have_posts() ) : the_post(); ?>
 								It will remain closed until further notice.
 							<?php } // endif
 							if (!empty($location_closing_info)) { ?>
-								<a href="#closing-info" class="alert-link no-break" aria-label="Learn more information about the closure of this location">Learn more</a>.
+								<a href="#closing-info" class="alert-link no-break" aria-label="Learn more information about the closure of this <?php echo strtolower($location_single_name_attr); ?>">Learn more</a>.
 							<?php } // endif ?>
 							</p>
 							<?php if ($location_closing_telemed) { ?>
-								<p>Telemedicine will still be available. <a href="#telemedicine-info" class="alert-link no-break" aria-label="Learn more information about telemedicine at this location">Learn more</a>.</p>
+								<p>Telemedicine will still be available. <a href="#telemedicine-info" class="alert-link no-break" aria-label="Learn more information about telemedicine at this <?php echo strtolower($location_single_name_attr); ?>">Learn more</a>.</p>
 							<?php } ?>
 						</div>
 					<?php } // endif ?>
@@ -1036,7 +1058,7 @@ while ( have_posts() ) : the_post(); ?>
 				<ul class="nav navbar-nav">
 					<?php if ( $show_location_alert_section ) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#location-alert" title="Jump to the section of this page with the alert regarding this location"><?php echo $location_alert_title ? $location_alert_title : 'Alert'; ?></a>
+							<a class="nav-link" href="#location-alert" title="Jump to the section of this page with the alert regarding this <?php echo strtolower($location_single_name_attr); ?>"><?php echo $location_alert_title ? $location_alert_title : 'Alert'; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ( $show_closing_section ) { ?>
@@ -1090,32 +1112,32 @@ while ( have_posts() ) : the_post(); ?>
 					<?php } ?>
 					<?php if ( $show_providers_section ) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#providers" title="Jump to the section of this page about Providers">Providers</a>
+							<a class="nav-link" href="#providers" title="Jump to the section of this page about <?php echo $provider_plural_name_attr; ?>"><?php echo $provider_plural_name; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ( $show_conditions_section ) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#conditions" title="Jump to the section of this page about Conditions">Conditions</a>
+							<a class="nav-link" href="#conditions" title="Jump to the section of this page about <?php echo $conditions_plural_name_attr; ?>"><?php echo $conditions_plural_name; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ( $show_treatments_section ) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#treatments" title="Jump to the section of this page about Treatments and Procedures">Treatments &amp; Procedures</a>
+							<a class="nav-link" href="#treatments" title="Jump to the section of this page about <?php echo strtolower($treatments_plural_name_attr); ?>"><?php echo strtolower($treatments_plural_name); ?></a>
 						</li>
 					<?php } ?>
 					<?php if ( $show_aoe_section ) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#expertise" title="Jump to the section of this page about Areas of Expertise">Areas of Expertise</a>
+							<a class="nav-link" href="#expertise" title="Jump to the section of this page about <?php echo $expertise_plural_name_attr; ?>"><?php echo $expertise_plural_name; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ( $show_child_locations_section ) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#sub-clinics" title="Jump to the section of this page about additional clinics within this location">Clinics Within This Location</a>
+							<a class="nav-link" href="#sub-clinics" title="Jump to the section of this page about additional clinics within this <?php echo strtolower($location_single_name_attr); ?>">Clinics Within This <?php echo strtolower($location_single_name); ?></a>
 						</li>
 					<?php } ?>
 					<?php if ( $show_related_resource_section ) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#related-resources" title="Jump to the section of this page about Resources">Resources</a>
+							<a class="nav-link" href="#related-resources" title="Jump to the section of this page about <?php echo $clinical_resource_plural_name_attr; ?>"><?php echo $clinical_resource_plural_name; ?></a>
 						</li>
 					<?php } ?>
 				</ul>
@@ -1426,9 +1448,9 @@ while ( have_posts() ) : the_post(); ?>
 							<div class="module-body">
 								<p class="text-center"><strong>
 									<?php if ($location_closing_date_past) { ?>
-										Telemedicine is not available while this location is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed.
+										Telemedicine is not available while this <?php echo strtolower($location_single_name); ?> is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed.
 									<?php } else { ?>
-										Telemedicine will not be available after this location closes <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>.
+										Telemedicine will not be available after this <?php echo strtolower($location_single_name); ?> closes <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>.
 									<?php } // endif ?>
 								</strong></p>
 							</div>
@@ -1633,7 +1655,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title"><span class="title">Providers at <?php echo $page_title_phrase; ?></span></h2>
+						<h2 class="module-title"><span class="title"><?php echo $provider_plural_name; ?> at <?php echo $page_title_phrase; ?></span></h2>
 						<?php echo do_shortcode( '[uamswp_provider_title_ajax_filter providers="'. implode(",", $provider_ids) .'"]' ); ?>
 						<div class="card-list-container">
 							<div class="card-list card-list-doctors">
@@ -1647,14 +1669,14 @@ while ( have_posts() ) : the_post(); ?>
 										endwhile;
 										echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
 									} else {
-										echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
+										echo '<span class="no-results">Sorry, there are no ' . strtolower($provider_plural_name) . ' matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
 									}
 									wp_reset_postdata();
 								?>
 							</div>
 						</div>
 						<div class="ajax-filter-load-more">
-							<button class="btn btn-lg btn-primary" aria-label="Load all providers">Load All</button>
+							<button class="btn btn-lg btn-primary" aria-label="Load all <?php echo strtolower($provider_plural_name_attr); ?>">Load All</button>
 						</div>
 					</div>
 				</div>
@@ -1704,7 +1726,7 @@ while ( have_posts() ) : the_post(); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title"><span class="title">Areas of Expertise Represented at <?php echo $page_title_phrase; ?></span></h2>
+						<h2 class="module-title"><span class="title"><?php echo $expertise_plural_name; ?> Represented at <?php echo $page_title_phrase; ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list card-list-expertise">
 							<?php 

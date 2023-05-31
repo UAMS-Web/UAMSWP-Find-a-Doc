@@ -1,4 +1,8 @@
 <?php
+/*
+ * Template Name: Single Condition
+ */
+
 $term = get_queried_object();
 
 // ACF Fields - get_fields
@@ -42,14 +46,47 @@ function uamswp_keyword_hook_header() {
 }
 add_action('wp_head','uamswp_keyword_hook_header');
 
+$page_title = single_cat_title( '', false );
+$page_title_attr = uamswp_attr_conversion($page_title);
+
+// Get system settings for ontology item labels
+
+	// Get system settings for provider labels
+	uamswp_fad_labels_provider();
+
+	// Get system settings for location labels
+	uamswp_fad_labels_location();
+
+	// Get system settings for area of expertise labels
+	uamswp_fad_labels_expertise();
+
+	// Get system settings for clinical resource labels
+	uamswp_fad_labels_clinical_resource();
+
+	// Get system settings for condition labels
+	uamswp_fad_labels_conditions();
+
+	// Get system settings for treatment labels
+	uamswp_fad_labels_treatments();
+
+// Get system settings for condition archive page text
+uamswp_fad_archive_conditions();
+
 // Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
-	// global $condition_title;
+	global $page_title_attr;
+	global $conditions_single_name_attr;
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
-	if ( strlen(single_cat_title( '', false )) < 34 ) {
-		$html = single_cat_title( '', false ) . ' | Conditions | ' . get_bloginfo( "name" );
+	$meta_title_chars_max = 60;
+	$meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
+	$meta_title_base_chars = strlen( $meta_title_base );
+	$meta_title_enhanced_addition = ' | ' . $conditions_single_name_attr;
+	$meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
+	$meta_title_enhanced_chars = strlen( $meta_title_enhanced );
+	if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
+		$html = $meta_title_enhanced;
 	} else {
-		$html = single_cat_title( '', false ) . ' | ' . get_bloginfo( "name" );
+		$html = $meta_title_base;
 	}
 	return $html;
 }
@@ -69,10 +106,7 @@ function sp_titles_desc($html) {
 }
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
-	get_header();
-
-$condition_title = get_field('conditions_archive_headline', 'option');
-$condition_text = get_field('conditions_archive_intro_text', 'option');
+get_header();
 
 // Hard coded breadcrumbs
 $tax = get_term_by("slug", get_query_var("term"), get_query_var("taxonomy") );
@@ -105,7 +139,8 @@ if ( $location_valid ) {
 	$location_content .= '<div class="container-fluid">';
 	$location_content .= '<div class="row">';
 	$location_content .= '<div class="col-12">';
-	$location_content .= '<h2 class="module-title"><span class="title">Locations Where Providers Treat ' . single_cat_title( '', false ) . '</span></h2>';
+	$location_content .= '<h2 class="module-title"><span class="title">' . $location_plural_name . ' Where Providers Treat ' . $page_title . '</span></h2>';
+	$location_content .= '<p class="note">Note that the treatment of ' . $page_title . ' may not be <em>performed</em> at every ' . strtolower($location_single_name) . ' listed below. The list may include ' . strtolower($location_plural_name) . ' where the treatment plan is developed during and after a patient visit.</p>';
 	$location_content .= '<div class="card-list-container location-card-list-container">';
 	$location_content .= '<div class="card-list">';
 	ob_start();
@@ -141,7 +176,7 @@ if ($physicians && !empty($physicians)) { $condition_field_classes .= ' has-prov
 	<main id="genesis-content" class="condition-item<?php echo $condition_field_classes; ?>">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
-				<h1 class="entry-title" itemprop="headline"><?php echo ( $condition_title ? $condition_title : 'Condition' ); ?>: <?php echo single_cat_title( '', false ); ?></h1>
+				<h1 class="entry-title" itemprop="headline"><?php echo $conditions_archive_headline; ?><span class="sr-only">: </span><?php echo $page_title; ?></h1>
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
 				<?php 
@@ -189,7 +224,7 @@ if ($physicians && !empty($physicians)) { $condition_field_classes .= ' has-prov
 				<div class="row">
 					<div class="col-xs-12">
 						<h2>Clinical Trials</h2>
-						<p><a href="https://uams.trialstoday.org/" aria-label="Search UAMS Clinical Trials">Search our clinical trials</a> for those related to <?php echo single_cat_title( '', false ); ?>.</p>
+						<p><a href="https://uams.trialstoday.org/" aria-label="Search UAMS Clinical Trials">Search our clinical trials</a> for those related to <?php echo $page_title; ?>.</p>
 					</div>
 				</div>
 			</div>
@@ -211,12 +246,13 @@ if ($physicians && !empty($physicians)) { $condition_field_classes .= ' has-prov
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<h2 class="module-title"><span class="title">Treatments and Procedures Related to <?php echo single_cat_title( '', false ); ?></span></h2>
+						<h2 class="module-title"><span class="title"><?php echo $treatments_plural_name; ?> Related to <?php echo $page_title; ?></span></h2>
+						<p class="note">UAMS Health <?php echo strtolower($provider_plural_name); ?> perform and prescribe a broad range of <?php echo strtolower($treatments_plural_name); ?>, some of which may not be listed below.</p>
 						<div class="list-container list-container-rows">
 							<ul class="list">
 							<?php foreach( $treatments_query->get_terms() as $treatment ): ?>
 								<li>
-									<a href="<?php echo get_term_link( $treatment->term_id ); ?>" aria-label="Go to Treatment page for <?php echo $treatment->name; ?>" class="btn btn-outline-primary"><?php echo $treatment->name; ?></a>
+									<a href="<?php echo get_term_link( $treatment->term_id ); ?>" aria-label="Go to <?php echo $treatments_single_name_attr; ?> page for <?php echo $treatment->name; ?>" class="btn btn-outline-primary"><?php echo $treatment->name; ?></a>
 								</li>
 							<?php endforeach; ?>
 							</ul>
@@ -251,8 +287,8 @@ if ($physicians && !empty($physicians)) { $condition_field_classes .= ' has-prov
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col-12">
-									<h2 class="module-title"><span class="title">Providers Diagnosing or Treating <?php echo single_cat_title( '', false ); ?></span></h2>
-									<p class="note">Note that every provider listed below may not perform or prescribe all treatments or procedures related to <?php echo single_cat_title( '', false ); ?>. Review each provider for availability.</p>
+									<h2 class="module-title"><span class="title"><?php echo $provider_plural_name; ?> Diagnosing or Treating <?php echo $page_title; ?></span></h2>
+									<p class="note">Note that every <?php echo strtolower($provider_single_name); ?> listed below may not perform or prescribe all <?php echo strtolower($provider_plural_name); ?> related to <?php echo $page_title; ?>. Review each <?php echo strtolower($provider_single_name); ?> for availability.</p>
 									<div class="card-list-container">
 										<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
 											<?php
@@ -266,7 +302,7 @@ if ($physicians && !empty($physicians)) { $condition_field_classes .= ' has-prov
 									</div>
 									<?php if ($postsPerPage !== -1) { ?>
 									<div class="more">
-										<button class="loadmore btn btn-primary" data-type="taxonomy" data-tax="condition" data-slug="<?php echo $term->slug; ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physiciansCount; ?>" aria-label="Load more providers">Load More</button>
+										<button class="loadmore btn btn-primary" data-type="taxonomy" data-tax="condition" data-slug="<?php echo $term->slug; ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physiciansCount; ?>" aria-label="Load more <?php echo strtolower($provider_plural_name_attr); ?>">Load More</button>
 									</div>
 									<?php } ?>
 								</div>
@@ -298,7 +334,7 @@ if ($physicians && !empty($physicians)) { $condition_field_classes .= ' has-prov
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-							<h2 class="module-title"><span class="title">Areas of Expertise for <?php echo single_cat_title( '', false ); ?></span></h2>
+							<h2 class="module-title"><span class="title"><?php echo $expertise_plural_name; ?> for <?php echo $page_title; ?></span></h2>
 							<div class="card-list-container">
 								<div class="card-list card-list-expertise">
 								<?php 

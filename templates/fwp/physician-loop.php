@@ -81,12 +81,12 @@ $physician_service_line = get_field('physician_service_line');
 									echo '<div class="ratings-count">'. $data->profile->reviewcount .' Ratings</div>';
 									echo '</div>';
 								} else { ?>
-								<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" data-categorytitle="Ratings Modal" data-itemtitle="<?php echo $full_name_attr; ?>" aria-label="Learn why ratings are not available for this provider"><span aria-hidden="true">Why not?</span></a></em></p>
+								<p class="small"><em>Patient ratings are not available for this <?php echo strtolower($provider_single_name); ?>. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" data-categorytitle="Ratings Modal" data-itemtitle="<?php echo $full_name_attr; ?>" aria-label="Learn why ratings are not available for this <?php echo strtolower($provider_single_name_attr); ?>"><span aria-hidden="true">Why not?</span></a></em></p>
 								<?php
 								}
 							}
 						} else { ?>
-							<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" data-categorytitle="Ratings Modal" data-itemtitle="<?php echo $full_name_attr; ?>" aria-label="Learn why ratings are not available for this provider"><span aria-hidden="true">Why not?</span></a></em></p>
+							<p class="small"><em>Patient ratings are not available for this <?php echo strtolower($provider_single_name); ?>. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" data-categorytitle="Ratings Modal" data-itemtitle="<?php echo $full_name_attr; ?>" aria-label="Learn why ratings are not available for this <?php echo strtolower($provider_single_name_attr); ?>"><span aria-hidden="true">Why not?</span></a></em></p>
 						<?php
 						}
 						?>
@@ -106,7 +106,7 @@ $physician_service_line = get_field('physician_service_line');
 					}
 					if( $locations && $location_valid ) { ?>
 						<div class="col-12 secondary">
-							<h4 class="h5">Locations</h4>
+							<h4 class="h5"><?php echo $location_plural_name; ?></h4>
 								<ul>
 									<?php foreach( $locations as $location):
 										if ( get_post_status ( $location ) == 'publish' ) {
@@ -173,7 +173,7 @@ $physician_service_line = get_field('physician_service_line');
 								<div class="ds-title">Patient Rating</div>
 								<div><span class="ds-stars ds-stars0"></span></div>
 								<div class="small bold">No Patient Satisfaction Reviews</div>
-								<div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?" aria-label="Learn why ratings are not available for this provider"><span aria-hidden="true">Why not?</span></a></div>
+								<div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?" aria-label="Learn why ratings are not available for this <?php //echo strtolower($provider_single_name_attr); ?>"><span aria-hidden="true">Why not?</span></a></div>
 								</div>
 							<?php
 							}
@@ -183,7 +183,7 @@ $physician_service_line = get_field('physician_service_line');
 						<div class="ds-title">Patient Rating</div>
 						<div><span class="ds-stars ds-stars0"></span></div>
 						<div class="small bold">No Patient Satisfaction Reviews</div>
-						<div><a data-toggle="modal" data-target="#why_not_modal" aria-label="Learn why ratings are not available for this provider"><span aria-hidden="true">Why not?</span></a></div>
+						<div><a data-toggle="modal" data-target="#why_not_modal" aria-label="Learn why ratings are not available for this <?php //echo strtolower($provider_single_name_attr); ?>"><span aria-hidden="true">Why not?</span></a></div>
 						</div>
 					<?php }
 			*/	?>
@@ -225,7 +225,7 @@ $physician_service_line = get_field('physician_service_line');
 
 						?>
 						<?php if( $locations ): ?>
-						<h3 data-fontsize="16" data-lineheight="24"><i class="fa fa-medkit"></i> Clinic(s)</h3>
+						<h3 data-fontsize="16" data-lineheight="24"><i class="fa fa-medkit"></i> <?php //echo $location_single_name; ?>(s)</h3>
 							<ul>
 							<?php foreach( $locations as $location): ?>
 								<li>
@@ -248,5 +248,5 @@ $physician_service_line = get_field('physician_service_line');
 	<link rel="stylesheet" type="text/css" href="https://www.docscores.com/resources/css/docscores-lotw.v1330-2018121714.css" />
 
 <?php else : ?>
-<p><?php _e( 'Sorry, no providers matched your criteria.' ); ?></p>
+<p><?php _e( 'Sorry, no ' . strtolower($provider_plural_name) . ' matched your criteria.' ); ?></p>
 <?php endif; ?>

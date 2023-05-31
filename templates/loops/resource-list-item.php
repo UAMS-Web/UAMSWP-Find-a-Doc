@@ -11,7 +11,7 @@
 $resource_title = get_the_title($id);
 $resource_title_attr = uamswp_attr_conversion($resource_title);
 
-$resource_label = 'View Clinical Resource page for ' . $resource_title_attr;
+$resource_label = 'View ' . $clinical_resource_single_name . ' page for ' . $resource_title_attr;
 
 $resource_type = get_field('clinical_resource_type', $id);
 $resource_type_value = $resource_type['value'];

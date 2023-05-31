@@ -13,9 +13,9 @@
  * 	$condition_disclaimer = 'true', 'false'
  */
 
-	$condition_heading = 'Conditions';
+	$condition_heading = $conditions_plural_name;
 	$condition_disclaimer = false;
-	$condition_disclaimer_text = 'UAMS Health providers care for a broad range of conditions, some of which may not be listed below.';
+	$condition_disclaimer_text = 'UAMS Health ' . strtolower($provider_plural_name) . ' care for a broad range of ' . strtolower($conditions_plural_name) . ', some of which may not be listed below.';
 
 	if ( $condition_context == 'single-provider' ) {
 

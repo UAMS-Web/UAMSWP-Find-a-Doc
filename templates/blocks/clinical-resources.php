@@ -17,7 +17,7 @@
  * List layout intended to either display all items or display a set number with no link to more.
  */
 
-$resource_heading = 'Resources';
+$resource_heading = $clinical_resource_plural_name;
 if ( $resource_heading_related_pre ) {
 	$resource_heading = 'Related ' . $resource_heading;
 }
@@ -45,9 +45,9 @@ $resource_more = ( $resource_layout == 'card' && $resource_count > $resource_pos
 if ( $resource_more_suppress ) {
 	$resource_more = false;
 }
-$more_text = 'Want to find more resources related to ' . $resource_heading_related_name . '?';
+$more_text = 'Want to find more ' . strtolower($clinical_resource_plural_name) . ' related to ' . $resource_heading_related_name . '?';
 $more_button_url = '/clinical-resource/?' . $resource_more_key . '=' . $resource_more_value;
-$more_button_description = 'View the full list of clinical resources related to ' . $resource_heading_related_name;
+$more_button_description = 'View the full list of ' . strtolower($clinical_resource_plural_name) . ' related to ' . $resource_heading_related_name;
 $more_button_description_attr = uamswp_attr_conversion($more_button_description);
 $more_button_target = '_blank';
 $more_button_text = 'View the Full List';

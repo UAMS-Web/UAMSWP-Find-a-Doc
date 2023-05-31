@@ -1,10 +1,30 @@
 <?php 
 /*
+ * Template Name: Single Provider
  * 
  * Get ACF fields to use for meta data
  * Add description from provider short description or full description
- * 
  */
+
+// Get system settings for ontology item labels
+
+	// Get system settings for provider labels
+	uamswp_fad_labels_provider();
+
+	// Get system settings for location labels
+	uamswp_fad_labels_location();
+
+	// Get system settings for area of expertise labels
+	uamswp_fad_labels_expertise();
+
+	// Get system settings for clinical resource labels
+	uamswp_fad_labels_clinical_resource();
+
+	// Get system settings for condition labels
+	uamswp_fad_labels_conditions();
+
+	// Get system settings for treatment labels
+	uamswp_fad_labels_treatments();
 
 $degrees = get_field('physician_degree',$post->ID);
 $degree_list = '';
@@ -532,9 +552,9 @@ while ( have_posts() ) : the_post();
 						if( $locations && $location_valid ): ?>
 						<div data-sectiontitle="Primary Location">
 							<?php if ($eligible_appt) { ?>
-								<h2 class="h3">Primary Appointment Location</h2>
+								<h2 class="h3">Primary Appointment <?php echo $location_single_name; ?></h2>
 							<?php } else { ?>
-								<h2 class="h3">Primary Location</h2>
+								<h2 class="h3">Primary <?php echo $location_single_name; ?></h2>
 							<?php } // endif ?>
 							<?php foreach( $locations as $location ):
 									if ( 2 > $l ){
@@ -614,12 +634,12 @@ while ( have_posts() ) : the_post();
 									include( UAMS_FAD_PATH . '/templates/blocks/locations-phone.php' );
 								 ?>
 								<div class="btn-container">
-									<a class="btn btn-primary" href="<?php echo get_the_permalink( $location ); ?>" data-itemtitle="<?php echo $primary_appointment_title_attr; ?>" data-categorytitle="View Location">
-										View Location
+									<a class="btn btn-primary" href="<?php echo get_the_permalink( $location ); ?>" data-itemtitle="<?php echo $primary_appointment_title_attr; ?>" data-categorytitle="View <?php echo $location_single_name_attr; ?>">
+										View <?php echo $location_single_name; ?>
 									</a>
 									<?php if (1 < $location_count) { ?>
-										<a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of locations for this provider" data-categorytitle="View All Locations">
-											View All Locations
+										<a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of <?php echo strtolower($location_plural_name_attr); ?> for this <?php echo strtolower($provider_single_name_attr); ?>" data-categorytitle="View All <?php echo $location_plural_name_attr; ?>">
+											View All <?php echo $location_plural_name; ?>
 										</a>
 									<?php } ?>
 								</div>
@@ -646,7 +666,7 @@ while ( have_posts() ) : the_post();
 						<dt>Area<?php echo( count($expertises) > 1 ? 's' : '' );?> of Expertise</dt>
 						<?php foreach( $expertises as $expertise ) {
 							if ( get_post_status ( $expertise ) == 'publish' && $expertise !== 0 ) {
-								echo '<dd><a href="' . get_permalink($expertise) . '" target="_self" data-sectiontitle="Overview" data-categorytitle="View Area of Expertise">' . get_the_title($expertise) . '</a></dd>';
+								echo '<dd><a href="' . get_permalink($expertise) . '" target="_self" data-sectiontitle="Overview" data-categorytitle="View ' . $expertise_single_name_attr . '">' . get_the_title($expertise) . '</a></dd>';
 							}
 						} ?>
 						<?php }
@@ -706,7 +726,7 @@ while ( have_posts() ) : the_post();
 							echo '<div class="ratings-comments-lg" aria-hidden="true">'. $comment_count .' comments</div>';
 							echo '</a>';
 						} else { ?>
-							<p class="small"><em>Patient ratings are not available for this provider. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this provider" data-sectiontitle="Overview"><span aria-hidden="true">Why not?</span></a></em></p> 
+							<p class="small"><em>Patient ratings are not available for this <?php echo strtolower($provider_single_name); ?>. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this <?php echo strtolower($provider_single_name_attr); ?>" data-sectiontitle="Overview"><span aria-hidden="true">Why not?</span></a></em></p> 
 						<?php
 						}
 						echo '</div>';
@@ -790,7 +810,7 @@ while ( have_posts() ) : the_post();
 						<?php } ?>
 						<?php if ( $show_related_resource_section ) { ?>
 							<li class="nav-item">
-								<a class="nav-link" href="#related-resources" title="Jump to the section of this page about Resources">Resources</a>
+								<a class="nav-link" href="#related-resources" title="Jump to the section of this page about <?php echo $clinical_resource_plural_name_attr; ?>"><?php echo $clinical_resource_plural_name; ?></a>
 							</li>
 						<?php } ?>
 						<?php if ($show_academic_section) { ?>
@@ -805,22 +825,22 @@ while ( have_posts() ) : the_post();
 						<?php } ?>
 						<?php if ( $show_conditions_section ) { ?>
 							<li class="nav-item">
-								<a class="nav-link" href="#conditions">Conditions</a>
+								<a class="nav-link" href="#conditions"><?php echo $conditions_plural_name; ?></a>
 							</li>
 						<?php } ?>
 						<?php if ( $show_treatments_section ) { ?>
 							<li class="nav-item">
-								<a class="nav-link" href="#treatments">Treatments &amp; Procedures</a>
+								<a class="nav-link" href="#treatments"><?php echo $treatments_plural_name; ?></a>
 							</li>
 						<?php } ?>
 						<?php if ( $show_aoe_section ) { ?>
 							<li class="nav-item">
-								<a class="nav-link" href="#expertise">Areas of Expertise</a>
+								<a class="nav-link" href="#expertise"><?php echo $expertise_plural_name; ?></a>
 							</li>
 						<?php } ?>
 						<?php if ($show_locations_section) { ?>
 							<li class="nav-item">
-								<a class="nav-link" href="#locations">Locations</a>
+								<a class="nav-link" href="#locations"><?php echo $location_plural_name; ?></a>
 							</li>
 						<?php } ?>
 						<?php if ($show_ratings_section) { ?>
@@ -1161,7 +1181,7 @@ while ( have_posts() ) : the_post();
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-							<h2 class="module-title"><span class="title"><?php echo $short_name_possessive; ?> Areas of Expertise</span></h2>
+							<h2 class="module-title"><span class="title"><?php echo $short_name_possessive; ?> <?php echo $expertise_plural_name; ?></span></h2>
 							<div class="card-list-container">
 								<div class="card-list card-list-expertise">
 									<?php foreach( $expertises as $expertise ) {
@@ -1183,7 +1203,7 @@ while ( have_posts() ) : the_post();
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title"><span class="title">Locations Where <?php echo $short_name; ?> Practices</span></h2>
+						<h2 class="module-title"><span class="title"><?php echo $location_plural_name; ?> Where <?php echo $short_name; ?> Practices</span></h2>
 						<div class="card-list-container location-card-list-container">
 							<div class="card-list">
 							<?php $l = 1;

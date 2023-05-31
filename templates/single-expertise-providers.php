@@ -3,19 +3,35 @@
  * Template Name: Fake Area of Expertise Providers Subpage
  */
 
+// Get system settings for ontology item labels
+
+	// Get system settings for provider labels
+	uamswp_fad_labels_provider();
+
+	// Get system settings for location labels
+	uamswp_fad_labels_location();
+
+	// Get system settings for area of expertise labels
+	uamswp_fad_labels_expertise();
+
+	// Get system settings for clinical resource labels
+	uamswp_fad_labels_clinical_resource();
+
+	// Get system settings for condition labels
+	uamswp_fad_labels_conditions();
+
+	// Get system settings for treatment labels
+	uamswp_fad_labels_treatments();
+
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title(); // Title of Area of Expertise
 $page_title_attr = uamswp_attr_conversion($page_title);
-$fpage_name = 'Providers'; // Fake subpage name
+$fpage_name = $provider_plural_name; // Fake subpage name
 $fpage_name_attr = uamswp_attr_conversion($fpage_name);
-$fpage_title = $page_title . ' ' . $fpage_name; // Fake subpage page title
+$fpage_title = $page_title . ' ' . $provider_plural_name; // Fake subpage page title
 $fpage_title_attr = uamswp_attr_conversion($fpage_title);
 $page_url = get_permalink();
-$expertise_archive_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
-$expertise_archive_title_attr = uamswp_attr_conversion($expertise_archive_title);
-$expertise_single_name = get_field('expertise_archive_headline', 'option') ?: 'Area of Expertise';
-$expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
 
 // Area of Expertise Content Type
 $ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
@@ -169,7 +185,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-							<h2 class="module-title"><span class="title">Providers</span></h2>
+							<h2 class="module-title"><span class="title"><?php echo $provider_plural_name; ?></span></h2>
 							<?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'"]' ); ?>
 							<div class="card-list-container">
 								<div class="card-list card-list-doctors">
@@ -183,17 +199,17 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 											endwhile;
 											echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'," data-regions="'. implode(',', $region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
 										} else {
-											echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
+											echo '<span class="no-results">Sorry, there are no ' . strtolower($provider_plural_name) . ' matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
 										}
 										wp_reset_postdata();
 									?>
 								</div>
 							</div>
 							<!-- <div class="more" style="<?php //echo ($postsPerPage < $provider_count) ? '' : 'display:none;' ; ?>">
-								<button class="loadmore btn btn-primary <?php //echo $provider_count; ?>" data-ppp="<?php //echo $postsPerPage; ?>" aria-label="Load more providers">Load More</button>
+								<button class="loadmore btn btn-primary <?php //echo $provider_count; ?>" data-ppp="<?php //echo $postsPerPage; ?>" aria-label="Load more <?php //echo strtolower($provider_plural_name_attr); ?>">Load More</button>
 							</div> -->
 							<div class="ajax-filter-load-more">
-								<button class="btn btn-lg btn-primary" aria-label="Load all providers">Load All</button>
+								<button class="btn btn-lg btn-primary" aria-label="Load all <?php echo strtolower($provider_plural_name_attr); ?>">Load All</button>
 							</div>
 						</div>
 					</div>

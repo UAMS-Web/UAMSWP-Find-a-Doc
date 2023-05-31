@@ -4,5 +4,5 @@ $id =get_the_ID();
 include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
 
 endwhile; else : ?>
-	<p><?php _e( 'Sorry, no locations matched your criteria.' ); ?></p>
+	<p><?php _e( 'Sorry, no ' . strtolower($location_plural_name) . ' matched your criteria.' ); ?></p>
 <?php endif; ?>

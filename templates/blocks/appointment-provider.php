@@ -44,12 +44,12 @@ if (1 == $location_count) {
 	$appointment_location_data = 'Contact the Clinic Directly | Direct Link | ' . $primary_appointment_title;
 } else {
 	$appointment_location_url = '#locations';
-	$appointment_location_title = 'Jump to list of locations for this provider';
+	$appointment_location_title = 'Jump to list of ' . $location_plural_name_attr . ' for this ' . strtolower($provider_single_name_attr);
 	$appointment_location_data = 'Contact the Clinic Directly | Anchor Link';
 }
 $appointment_reference_referral = 'Appointments for new patients are by referral only.';
 $appointment_reference_portal = '<a href="' . $portal_url . '" target="_blank" data-categorytitle="Make an Appointment | Block ' . $appointment_block_instance . '" data-typetitle="Request an Appointment Online | ' . $portal_name_attr . '">requesting an appointment online</a> through ' . $portal_name;
-$appointment_reference_direct = 'by <a href="' . $appointment_location_url . '" data-categorytitle="Make an Appointment | Block ' . $appointment_block_instance . '" data-typetitle="' . $appointment_location_data . '">contacting the clinic&nbsp;directly</a>';
+$appointment_reference_direct = 'by <a href="' . $appointment_location_url . '" data-categorytitle="Make an Appointment | Block ' . $appointment_block_instance . '" data-typetitle="' . $appointment_location_data . '">contacting the ' . strtolower($location_single_name) . '&nbsp;directly</a>';
 $appointment_reference_main = 'by calling ' . $appointment_phone_name . ' at <a href="tel:' . $appointment_phone_tel . '" class="no-break" data-categorytitle="Make an Appointment | Block ' . $appointment_block_instance . '" data-typetitle="Main Appointment Line | ' . $appointment_phone_name_attr . '">' . $appointment_phone_text . '</a>';
 
 ?>
@@ -101,7 +101,7 @@ $appointment_reference_main = 'by calling ' . $appointment_phone_name . ' at <a 
 						<?php echo $appointment_reference_direct; ?>.
 					<?php } ?></p>
 				<?php } elseif ($location_valid && !$refer_req && !$accept_new && $show_portal) { ?>
-					<p>This provider is not currently accepting new patients.</p>
+					<p>This <?php echo strtolower($provider_single_name); ?> is not currently accepting new patients.</p>
 					<p>Existing patients can make an appointment by <?php if ( $appointment_show_main_line_sys ) { ?>
 						<?php echo $appointment_reference_portal; ?>, <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.</p>
 					<?php } else { ?>
@@ -113,10 +113,10 @@ $appointment_reference_main = 'by calling ' . $appointment_phone_name . ' at <a 
 					// in this scenario. There would otherwise be no manner to make an 
 					// appointment with this provider.
 				?>
-					<p>This provider is not currently accepting new patients.</p>
+					<p>This <?php echo strtolower($provider_single_name); ?> is not currently accepting new patients.</p>
 					<p>Existing patients can make an appointment <?php echo $appointment_reference_main; ?>.</p>
 				<?php } else { // if ($location_valid && !$refer_req && !$accept_new && !$show_portal) ?>
-					<p>This provider is not currently accepting new patients.</p>
+					<p>This <?php echo strtolower($provider_single_name); ?> is not currently accepting new patients.</p>
 					<p>Existing patients can make an appointment <?php if ( $appointment_show_main_line_sys ) { ?>
 						<?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
 					<?php } else { ?>

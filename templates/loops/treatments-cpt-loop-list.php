@@ -13,9 +13,9 @@
  * 	$treatment_disclaimer = 'true', 'false'
  */
 
-$treatment_heading = 'Medical Treatments and Procedures';
+$treatment_heading = $treatments_plural_name;
 $treatment_disclaimer = false;
-$treatment_disclaimer_text = 'UAMS Health providers perform and prescribe a broad range of treatments and procedures, some of which may not be listed below.';
+$treatment_disclaimer_text = 'UAMS Health ' . strtolower($provider_plural_name) . ' perform and prescribe a broad range of ' . strtolower($treatments_plural_name) . ', some of which may not be listed below.';
 
 if ( $treatment_context == 'single-provider' ) {
 	$treatment_heading = $treatment_heading . ' Performed or Prescribed by ' . $treatment_heading_related_name;

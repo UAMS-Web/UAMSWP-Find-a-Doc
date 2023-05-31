@@ -5,9 +5,9 @@ if ( have_posts() ) {
 	<table class="table table-striped bg-white">
 		<thead>
 			<tr>
-				<th scope="col">Location Name</th>
-				<th scope="col">Location Phone Number</th>
-				<th scope="col">Location Appointment Phone Number</th>
+				<th scope="col"><?php echo $location_single_name; ?> Name</th>
+				<th scope="col"><?php echo $location_single_name; ?> Phone Number</th>
+				<th scope="col"><?php echo $location_single_name; ?> Appointment Phone Number</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -51,5 +51,5 @@ if ( have_posts() ) {
 		</tbody>
 	</table>
 <?php } else { ?>
-	<p><?php _e( 'Sorry, no locations matched your criteria.' ); ?></p>
+	<p><?php _e( 'Sorry, no ' . strtolower($location_plural_name) . ' matched your criteria.' ); ?></p>
 <?php } //endif ?>

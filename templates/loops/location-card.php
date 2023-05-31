@@ -107,7 +107,7 @@ $location_zip = get_field('location_zip', $address_id);
 				<span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
 			<?php } // endif ?>
 			<?php if ( isset($l) && 1 == $l ) { ?>
-				<span class="subtitle"><span class="sr-only">, </span>Primary Location</span>
+				<span class="subtitle"><span class="sr-only">, </span>Primary <?php echo $location_single_name; ?></span>
 			<?php } ?>
 		</h3>
 		<?php 
@@ -202,15 +202,15 @@ $location_zip = get_field('location_zip', $address_id);
 			<div class="alert alert-warning" role="alert">
 				<?php if ($location_closing_display) {
 					if ($location_closing_date_past) { ?>
-						This location is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed.
+						This <?php echo strtolower($location_single_name); ?> is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed.
 					<?php } else { ?>
-						This location will be closing <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>.
+						This <?php echo strtolower($location_single_name); ?> will be closing <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>.
 					<?php } // endif
 				} elseif ($location_modified_hours_display) {
 					if ($location_modified_hours_date_past) { ?>
-						This location's hours have been temporarily modified.
+						This <?php echo strtolower($location_single_name); ?>'s hours have been temporarily modified.
 					<?php } else { ?>
-						This location's hours will be temporarily modified beginning on <?php echo $location_modified_hours_start; ?>.
+						This <?php echo strtolower($location_single_name); ?>'s hours will be temporarily modified beginning on <?php echo $location_modified_hours_start; ?>.
 					<?php } // endif
 				} // endif ?>
 				<p><a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $alert_label_attr; ?>" class="alert-link" data-categorytitle="Alert" data-itemtitle="<?php echo $location_title_attr; ?>">Learn more</a></p>
@@ -230,7 +230,7 @@ $location_zip = get_field('location_zip', $address_id);
 	</div><!-- .card-body -->
 	<div class="btn-container">
 		<div class="inner-container">
-			<a href="<?php echo get_permalink($id); ?>" class="btn btn-primary" aria-label="View location page for <?php echo $location_title_attr; ?>" data-categorytitle="View Location" data-itemtitle="<?php echo $location_title_attr; ?>">View Location</a>
+			<a href="<?php echo get_permalink($id); ?>" class="btn btn-primary" aria-label="View <?php echo strtolower($location_single_name_attr); ?> page for <?php echo $location_title_attr; ?>" data-categorytitle="View Location" data-itemtitle="<?php echo $location_title_attr; ?>">View <?php echo $location_single_name; ?></a>
 			<?php if ($map) { ?>
 			<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get Directions to <?php echo $location_title; ?>" data-categorytitle="Get Directions" data-itemtitle="<?php echo $location_title_attr; ?>">Get Directions</a>
 			<?php } ?>

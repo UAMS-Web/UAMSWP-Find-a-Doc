@@ -1,4 +1,8 @@
 <?php
+/*
+ * Template Name: Single Treatment
+ */
+
 // ACF Fields - get_fields
 $keywords = get_field('treatment_procedure_alternate');
 
@@ -22,16 +26,28 @@ add_action('wp_head','uamswp_keyword_hook_header');
 $page_title = get_the_title();
 $page_title_attr = uamswp_attr_conversion($page_title);
 
-// Get system settings for Treatments Labels
-$treatments_single_name = get_field('treatments_single_name', 'option') ?: 'Treatment/Procedure';
-$treatments_single_name_attr = uamswp_attr_conversion($treatments_single_name);
-$treatments_plural_name = get_field('treatments_plural_name', 'option') ?: 'Treatments and Procedures';
-$treatments_plural_name_attr = uamswp_attr_conversion($treatments_plural_name);
+// Get system settings for ontology item labels
 
-// Get system settings for Treatments Archive Page
-$treatments_archive_headline = get_field('treatments_archive_headline', 'option') ?: 'Treatments and Procedures';
-$treatments_archive_headline_attr = uamswp_attr_conversion($treatments_archive_headline);
-$treatments_archive_intro_text = get_field('treatments_archive_intro_text', 'option');
+	// Get system settings for provider labels
+	uamswp_fad_labels_provider();
+
+	// Get system settings for location labels
+	uamswp_fad_labels_location();
+
+	// Get system settings for area of expertise labels
+	uamswp_fad_labels_expertise();
+
+	// Get system settings for clinical resource labels
+	uamswp_fad_labels_clinical_resource();
+
+	// Get system settings for condition labels
+	uamswp_fad_labels_conditions();
+
+	// Get system settings for treatment labels
+	uamswp_fad_labels_treatments();
+
+// Get system settings for condition archive page text
+uamswp_fad_archive_treatments();
 
 // Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
@@ -187,8 +203,8 @@ if ( $location_valid ) {
 	$location_content .= '<div class="container-fluid">';
 	$location_content .= '<div class="row">';
 	$location_content .= '<div class="col-12">';
-	$location_content .= '<h2 class="module-title"><span class="title">Locations Providing ' . $page_title . '</span></h2>';
-	$location_content .= '<p class="note">Note that ' . $page_title . ' may not be <em>performed</em> at every location listed below. The list may include locations where the treatment plan is developed during and after a patient visit.</p>';
+	$location_content .= '<h2 class="module-title"><span class="title">' . $location_plural_name . ' Providing ' . $page_title . '</span></h2>';
+	$location_content .= '<p class="note">Note that ' . $page_title . ' may not be <em>performed</em> at every ' . strtolower($location_single_name) . ' listed below. The list may include ' . strtolower($location_plural_name) . ' where the treatment plan is developed during and after a patient visit.</p>';
 	$location_content .= do_shortcode( '[uamswp_location_ajax_filter locations="'. implode(",", $location_ids) .'"]' );
 	$location_content .= '<div class="card-list-container location-card-list-container">';
 	$location_content .= '<div class="card-list card-list-locations">';
@@ -343,7 +359,7 @@ $jump_link_count = 0;
 	<main id="genesis-content" class="treatment-item<?php echo $treatment_field_classes; ?>">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
-				<h1 class="entry-title"><span class="supertitle"><?php echo $treatments_single_name; ?></span><span class="sr-only">:</span> <?php echo $page_title; ?></h1>
+				<h1 class="entry-title"><span class="supertitle"><?php echo $treatments_single_name; ?></span><span class="sr-only">: </span><?php echo $page_title; ?></h1>
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
 				<?php
@@ -484,7 +500,7 @@ $jump_link_count = 0;
 						<?php } ?>
 						<?php if ( $show_related_resource_section ) { ?>
 							<li class="nav-item">
-								<a class="nav-link" href="#related-resources" title="Jump to the section of this page about Resources">Resources</a>
+								<a class="nav-link" href="#related-resources" title="Jump to the section of this page about <?php echo $clinical_resource_plural_name_attr; ?>"><?php echo $clinical_resource_plural_name; ?></a>
 							</li>
 						<?php } ?>
 						<?php if ( $show_clinical_trials_section ) { ?>
@@ -494,22 +510,22 @@ $jump_link_count = 0;
 						<?php } ?>
 						<?php if ( $show_conditions_section ) { ?>
 							<li class="nav-item">
-								<a class="nav-link" href="#conditions" title="Jump to the section of this page about Conditions">Conditions</a>
+								<a class="nav-link" href="#conditions" title="Jump to the section of this page about <?php echo $conditions_plural_name_attr; ?>"><?php echo $conditions_plural_name; ?></a>
 							</li>
 						<?php } ?>
 						<?php if ( $show_providers_section ) { ?>
 							<li class="nav-item">
-								<a class="nav-link" href="#providers" title="Jump to the section of this page about Providers">Providers</a>
+								<a class="nav-link" href="#providers" title="Jump to the section of this page about <?php echo $provider_plural_name_attr; ?>"><?php echo $provider_plural_name; ?></a>
 							</li>
 						<?php } ?>
 						<?php if ($show_locations_section) { ?>
 							<li class="nav-item">
-								<a class="nav-link" href="#locations" title="Jump to the section of this page about Locations">Locations</a>
+								<a class="nav-link" href="#locations" title="Jump to the section of this page about <?php echo $location_plural_name_attr; ?>"><?php echo $location_plural_name; ?></a>
 							</li>
 						<?php } ?>
 						<?php if ( $show_aoe_section ) { ?>
 							<li class="nav-item">
-								<a class="nav-link" href="#expertise" title="Jump to the section of this page about Areas of Expertise">Areas of Expertise</a>
+								<a class="nav-link" href="#expertise" title="Jump to the section of this page about <?php echo $expertise_plural_name_attr; ?>"><?php echo $expertise_plural_name; ?></a>
 							</li>
 						<?php } ?>
 						<?php if ( $show_appointment_section ) { ?>
@@ -552,8 +568,8 @@ $jump_link_count = 0;
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-xs-12">
-							<h2 class="module-title"><span class="title">Conditions Related to <?php echo $page_title; ?></span></h2>
-							<p class="note">UAMS Health providers care for a broad range of conditions, some of which may not be listed below.</p>
+							<h2 class="module-title"><span class="title"><?php echo $clinical_resource_plural_name; ?> Related to <?php echo $page_title; ?></span></h2>
+							<p class="note">UAMS Health <?php echo strtolower($provider_plural_name); ?> care for a broad range of <?php echo strtolower($clinical_resource_plural_name); ?>, some of which may not be listed below.</p>
 							<div class="list-container list-container-rows">
 								<ul class="list">
 								<?php while ($conditions_query_cpt->have_posts()) : $conditions_query_cpt->the_post();
@@ -563,7 +579,7 @@ $jump_link_count = 0;
 									$condition_title_attr = uamswp_attr_conversion($condition_title);
 									?>
 									<li>
-										<a href="<?php echo $condition_permalink; ?>" aria-label="Go to Condition page for <?php echo $condition_title_attr; ?>" class="btn btn-outline-primary"><?php echo $condition_title; ?></a>
+										<a href="<?php echo $condition_permalink; ?>" aria-label="Go to <?php echo $provider_single_name_attr; ?> page for <?php echo $condition_title_attr; ?>" class="btn btn-outline-primary"><?php echo $condition_title; ?></a>
 									</li>
 								<?php
 									endwhile;
@@ -628,8 +644,8 @@ $jump_link_count = 0;
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-							<h2 class="module-title"><span class="title">Providers Performing or Prescribing <?php echo $page_title; ?></span></h2>
-							<p class="note">Note that every provider listed below may not perform or prescribe <?php echo $page_title; ?> for all conditions related to it. Review each provider for availability.</p> 
+							<h2 class="module-title"><span class="title"><?php echo $provider_plural_name; ?> Performing or Prescribing <?php echo $page_title; ?></span></h2>
+							<p class="note">Note that every <?php echo strtolower($provider_single_name); ?> listed below may not perform or prescribe <?php echo $page_title; ?> for all <?php echo strtolower($conditions_plural_name); ?> related to it. Review each <?php echo strtolower($provider_single_name); ?> for availability.</p>
 							<?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'"]' ); ?>
 							<div class="card-list-container">
 								<div class="card-list card-list-doctors">
@@ -643,17 +659,17 @@ $jump_link_count = 0;
 											endwhile;
 											echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'," data-regions="'. implode(',', $region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
 										} else {
-											echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
+											echo '<span class="no-results">Sorry, there are no ' . strtolower($provider_plural_name) . ' matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
 										}
 										wp_reset_postdata();
 									?>
 								</div>
 							</div>
 							<!-- <div class="more" style="<?php //echo ($postsPerPage < $provider_count) ? '' : 'display:none;' ; ?>">
-								<button class="loadmore btn btn-primary" data-ppp="<?php //echo $postsPerPage; ?>" aria-label="Load more providers">Load More</button>
+								<button class="loadmore btn btn-primary" data-ppp="<?php //echo $postsPerPage; ?>" aria-label="Load more <?php //echo strtolower($provider_plural_name_attr); ?>">Load More</button>
 							</div> -->
 							<div class="ajax-filter-load-more">
-								<button class="btn btn-lg btn-primary" aria-label="Load all providers">Load All</button>
+								<button class="btn btn-lg btn-primary" aria-label="Load all <?php echo strtolower($provider_plural_name_attr); ?>">Load All</button>
 							</div>
 						</div>
 					</div>
@@ -681,7 +697,7 @@ $jump_link_count = 0;
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title"><span class="title">Areas of Expertise for <?php echo $page_title; ?></span></h2>
+						<h2 class="module-title"><span class="title"><?php echo $expertise_plural_name; ?> for <?php echo $page_title; ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list card-list-expertise">
 							<?php 

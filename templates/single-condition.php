@@ -1,4 +1,8 @@
 <?php
+/*
+ * Template Name: Single Condition
+ */
+
 $keywords = get_field('condition_alternate');
 
 function uamswp_keyword_hook_header() {
@@ -20,21 +24,39 @@ add_action('wp_head','uamswp_keyword_hook_header');
 
 $page_title = get_the_title();
 $page_title_attr = uamswp_attr_conversion($page_title);
-$condition_archive_title = get_field('conditions_archive_headline', 'option') ?: 'Conditions';
-$condition_archive_title_attr = uamswp_attr_conversion($condition_archive_title);
-$condition_title = get_field('conditions_single_name', 'option') ?: 'Condition';
-$condition_title_attr = uamswp_attr_conversion($condition_title);
-$condition_text = get_field('conditions_archive_intro_text', 'option');
+
+// Get system settings for ontology item labels
+
+	// Get system settings for provider labels
+	uamswp_fad_labels_provider();
+
+	// Get system settings for location labels
+	uamswp_fad_labels_location();
+
+	// Get system settings for area of expertise labels
+	uamswp_fad_labels_expertise();
+
+	// Get system settings for clinical resource labels
+	uamswp_fad_labels_clinical_resource();
+
+	// Get system settings for condition labels
+	uamswp_fad_labels_conditions();
+
+	// Get system settings for treatment labels
+	uamswp_fad_labels_treatments();
+
+// Get system settings for condition archive page text
+uamswp_fad_archive_conditions();
 
 // Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
 	global $page_title_attr;
-	global $condition_title_attr;
+	global $conditions_single_name_attr;
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$meta_title_chars_max = 60;
 	$meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
 	$meta_title_base_chars = strlen( $meta_title_base );
-	$meta_title_enhanced_addition = ' | ' . $condition_title_attr;
+	$meta_title_enhanced_addition = ' | ' . $conditions_single_name_attr;
 	$meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
 	$meta_title_enhanced_chars = strlen( $meta_title_enhanced );
 	if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
@@ -187,8 +209,8 @@ if ( $location_valid ) {
 	$location_content .= '<div class="container-fluid">';
 	$location_content .= '<div class="row">';
 	$location_content .= '<div class="col-12">';
-	$location_content .= '<h2 class="module-title"><span class="title">Locations Where Providers Treat ' . $page_title . '</span></h2>';
-	$location_content .= '<p class="note">Note that the treatment of ' . $page_title . ' may not be <em>performed</em> at every location listed below. The list may include locations where the treatment plan is developed during and after a patient visit.</p>';
+	$location_content .= '<h2 class="module-title"><span class="title">' . $location_plural_name . ' Where ' . $provider_plural_name . ' Treat ' . $page_title . '</span></h2>';
+	$location_content .= '<p class="note">Note that the treatment of ' . $page_title . ' may not be <em>performed</em> at every ' . strtolower($location_single_name) . ' listed below. The list may include ' . strtolower($location_plural_name) . ' where the treatment plan is developed during and after a patient visit.</p>';
 	$location_content .= do_shortcode( '[uamswp_location_ajax_filter locations="'. implode(",", $location_ids) .'"]' );
 	$location_content .= '<div class="card-list-container location-card-list-container">';
 	$location_content .= '<div class="card-list card-list-locations">';
@@ -201,7 +223,7 @@ if ( $location_valid ) {
 		endwhile;
 		echo '<data id="location_ids" data-postids="'. implode(',', $location_query->posts) .'," data-regions="'. implode(',', $location_region_list) .',"></data>';
 	} else {
-		echo '<span class="no-results">Sorry, there are no locations matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
+		echo '<span class="no-results">Sorry, there are no ' . strtolower($location_plural_name) . ' matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
 	}
 	wp_reset_postdata();
 	$location_content .= ob_get_clean();
@@ -346,7 +368,7 @@ $jump_link_count = 0;
 	<main id="genesis-content" class="condition-item<?php echo $condition_field_classes; ?>">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
-				<h1 class="entry-title" itemprop="headline"><span class="supertitle"><?php echo $condition_title; ?></span><span class="sr-only">:</span> <?php echo $page_title; ?></h1>
+				<h1 class="entry-title" itemprop="headline"><span class="supertitle"><?php echo $conditions_single_name; ?></span><span class="sr-only">: </span><?php echo $page_title; ?></h1>
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
 				<?php 
@@ -486,7 +508,7 @@ $jump_link_count = 0;
 						<?php } ?>
 						<?php if ( $show_related_resource_section ) { ?>
 							<li class="nav-item">
-								<a class="nav-link" href="#related-resources" title="Jump to the section of this page about Resources">Resources</a>
+								<a class="nav-link" href="#related-resources" title="Jump to the section of this page about <?php echo $clinical_resource_plural_name_attr; ?>"><?php echo $clinical_resource_plural_name; ?></a>
 							</li>
 						<?php } ?>
 						<?php if ( $show_clinical_trials_section ) { ?>
@@ -496,22 +518,22 @@ $jump_link_count = 0;
 						<?php } ?>
 						<?php if ( $show_treatments_section ) { ?>
 							<li class="nav-item">
-								<a class="nav-link" href="#treatments" title="Jump to the section of this page about Treatments and Procedures">Treatments &amp; Procedures</a>
+								<a class="nav-link" href="#treatments" title="Jump to the section of this page about <?php echo $treatments_plural_name_attr; ?>"><?php echo $treatments_plural_name; ?></a>
 							</li>
 						<?php } ?>
 						<?php if ( $show_providers_section ) { ?>
 							<li class="nav-item">
-								<a class="nav-link" href="#providers" title="Jump to the section of this page about Providers">Providers</a>
+								<a class="nav-link" href="#providers" title="Jump to the section of this page about <?php echo $provider_plural_name_attr; ?>"><?php echo $provider_plural_name; ?></a>
 							</li>
 						<?php } ?>
 						<?php if ( $show_locations_section ) { ?>
 							<li class="nav-item">
-								<a class="nav-link" href="#locations" title="Jump to the section of this page about Locations">Locations</a>
+								<a class="nav-link" href="#locations" title="Jump to the section of this page about <?php echo $location_plural_name_attr; ?>"><?php echo $location_plural_name; ?></a>
 							</li>
 						<?php } ?>
 						<?php if ( $show_aoe_section ) { ?>
 							<li class="nav-item">
-								<a class="nav-link" href="#expertise" title="Jump to the section of this page about Areas of Expertise">Areas of Expertise</a>
+								<a class="nav-link" href="#expertise" title="Jump to the section of this page about <?php echo $expertise_plural_name_attr; ?>"><?php echo $expertise_plural_name; ?></a>
 							</li>
 						<?php } ?>
 						<?php if ( $show_appointment_section ) { ?>
@@ -556,8 +578,8 @@ $jump_link_count = 0;
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-xs-12">
-							<h2 class="module-title"><span class="title">Treatments and Procedures Related to <?php echo $page_title; ?></span></h2>
-							<p class="note">UAMS Health providers perform and prescribe a broad range of treatments and procedures, some of which may not be listed below.</p>
+							<h2 class="module-title"><span class="title"><?php echo $treatments_plural_name; ?> Related to <?php echo $page_title; ?></span></h2>
+							<p class="note">UAMS Health <?php echo strtolower($provider_plural_name); ?> perform and prescribe a broad range of <?php echo strtolower($treatments_plural_name); ?>, some of which may not be listed below.</p>
 							<div class="list-container list-container-rows">
 								<ul class="list">
 								<?php while ($treatments_query_cpt->have_posts()) : $treatments_query_cpt->the_post();
@@ -567,7 +589,7 @@ $jump_link_count = 0;
 									$treatment_title_attr = uamswp_attr_conversion($treatment_title);
 								?>
 									<li>
-										<a href="<?php echo $treatment_permalink; ?>" aria-label="Go to Treatment page for <?php echo $treatment_title_attr; ?>" class="btn btn-outline-primary"><?php echo $treatment_title; ?></a>
+										<a href="<?php echo $treatment_permalink; ?>" aria-label="Go to <?php echo $treatments_single_name_attr; ?> page for <?php echo $treatment_title_attr; ?>" class="btn btn-outline-primary"><?php echo $treatment_title; ?></a>
 									</li>
 								<?php endwhile;
 										wp_reset_postdata(); ?>
@@ -630,8 +652,8 @@ $jump_link_count = 0;
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-							<h2 class="module-title"><span class="title">Providers Diagnosing or Treating <?php echo $page_title; ?></span></h2>
-							<p class="note">Note that every provider listed below may not perform or prescribe all treatments or procedures related to <?php echo $page_title; ?>. Review each provider for availability.</p>
+							<h2 class="module-title"><span class="title"><?php echo $provider_plural_name; ?> Diagnosing or Treating <?php echo $page_title; ?></span></h2>
+							<p class="note">Note that every <?php echo strtolower($provider_single_name); ?> listed below may not perform or prescribe all <?php echo strtolower($treatments_plural_name); ?> related to <?php echo $page_title; ?>. Review each <?php echo strtolower($provider_single_name); ?> for availability.</p>
 							<?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'"]' ); ?>
 							<div class="card-list-container">
 								<div class="card-list card-list-doctors">
@@ -645,17 +667,17 @@ $jump_link_count = 0;
 											endwhile;
 											echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'," data-regions="'. implode(',', $region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
 										} else {
-											echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
+											echo '<span class="no-results">Sorry, there are no ' . strtolower($provider_plural_name) . ' matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
 										}
 										wp_reset_postdata();
 									?>
 								</div>
 							</div>
 							<!-- <div class="more" style="<?php //echo ($postsPerPage < $provider_count) ? '' : 'display:none;' ; ?>">
-								<button class="loadmore btn btn-primary" data-ppp="<?php //echo $postsPerPage; ?>" aria-label="Load more providers">Load More</button>
+								<button class="loadmore btn btn-primary" data-ppp="<?php //echo $postsPerPage; ?>" aria-label="Load more <?php //echo strtolower($provider_plural_name_attr); ?>">Load More</button>
 							</div> -->
 							<div class="ajax-filter-load-more">
-								<button class="btn btn-lg btn-primary" aria-label="Load all providers">Load All</button>
+								<button class="btn btn-lg btn-primary" aria-label="Load all <?php echo strtolower($provider_plural_name_attr); ?>">Load All</button>
 							</div>
 						</div>
 					</div>
@@ -682,7 +704,7 @@ $jump_link_count = 0;
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-							<h2 class="module-title"><span class="title">Areas of Expertise for <?php echo $page_title; ?></span></h2>
+							<h2 class="module-title"><span class="title"><?php echo $expertise_plural_name; ?> for <?php echo $page_title; ?></span></h2>
 							<div class="card-list-container">
 								<div class="card-list card-list-expertise">
 								<?php 

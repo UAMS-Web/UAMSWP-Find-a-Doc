@@ -12,9 +12,9 @@
  * 	$treatment_disclaimer = 'true', 'false'
  */
 
-$treatment_heading = 'Medical Treatments and Procedures';
+$treatment_heading = $treatments_plural_name;
 $treatment_disclaimer = false;
-$treatment_disclaimer_text = 'UAMS Health providers perform and prescribe a broad range of treatments and procedures, some of which may not be listed below.';
+$treatment_disclaimer_text = 'UAMS Health ' . strtolower($provider_plural_name) . ' perform and prescribe a broad range of ' . strtolower($treatments_plural_name) . ', some of which may not be listed below.';
 
 if ( $treatment_context == 'single-provider' ) {
 	$treatment_heading = $treatment_heading . ' Performed or Prescribed by ' . $treatment_heading_related_name;
@@ -46,7 +46,7 @@ if ( $treatment_context == 'single-provider' ) {
 					<ul class="list">
 					<?php foreach( $treatments_cpt_query->posts as $treatment ): ?>
 						<li>
-							<a href="<?php echo get_the_permalink( $treatment->ID ); ?>" aria-label="Go to Treatment page for <?php echo $treatment->post_title; ?>" class="btn btn-outline-primary"><?php echo $treatment->post_title; ?></a>
+							<a href="<?php echo get_the_permalink( $treatment->ID ); ?>" aria-label="Go to <?php echo $treatments_single_name_attr; ?> page for <?php echo $treatment->post_title; ?>" class="btn btn-outline-primary"><?php echo $treatment->post_title; ?></a>
 						</li>
 					<?php endforeach; ?>
 					</ul>

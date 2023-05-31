@@ -35,7 +35,7 @@ if ($parent_expertise) {
 	$parent_url = get_permalink( $parent_id );
 }
 
-$expertise_label = 'View Area of Expertise page for' . $expertise_title_attr;
+$expertise_label = 'View ' . $expertise_single_name_attr . ' page for' . $expertise_title_attr;
 
 $expertise_excerpt = get_the_excerpt($id) ? get_the_excerpt($id) : wp_strip_all_tags( get_the_content($id) );
 $expertise_excerpt_len = strlen($expertise_excerpt);
@@ -60,14 +60,14 @@ if ( $expertise_excerpt_len > 160 ) {
 		<h3 class="card-title h5">
 			<span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self" aria-label="<?php echo $expertise_label; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $expertise_title_attr; ?>"><?php echo $expertise_title; ?></a></span>
 			<?php if ( $parent_expertise && !$child_expertise_list ) { ?>
-				<span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>" aria-label="Go to Area of Expertise page for <?php echo $parent_title_attr; ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $expertise_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
+				<span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>" aria-label="Go to <?php echo $expertise_single_name_attr; ?> page for <?php echo $parent_title_attr; ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $expertise_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
 			<?php } // endif ?>
 		</h3>
 		<p class="card-text"><?php echo $expertise_excerpt; ?></p>
 	</div><!-- .card-body -->
 	<div class="btn-container">
 		<div class="inner-container">
-			<a href="<?php echo get_permalink($id); ?>" class="btn btn-primary" aria-label="<?php echo $expertise_label; ?>" data-categorytitle="View Area of Expertise" data-itemtitle="<?php echo $expertise_title_attr; ?>">View Area of Expertise</a>
+			<a href="<?php echo get_permalink($id); ?>" class="btn btn-primary" aria-label="<?php echo $expertise_label; ?>" data-categorytitle="View <?php echo $expertise_single_name_attr; ?>" data-itemtitle="<?php echo $expertise_title_attr; ?>">View <?php echo $expertise_single_name; ?></a>
 		</div>
 	</div>
 </div><!-- .card --> 
