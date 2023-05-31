@@ -1,13 +1,14 @@
+
 {
-	"key": "group_clinical_resource_archive_page",
-	"title": "Clinical Resources Archive Page",
+	"key": "group_conditions_treatments_labels",
+	"title": "Combined Conditions and Treatments Labels",
 	"fields": [
 		{
-			"key": "field_clinical_resource_archive_headline",
-			"label": "Archive Headline",
-			"name": "clinical_resource_archive_headline",
+			"key": "field_conditions_treatments_single_name",
+			"label": "Single Item Name",
+			"name": "conditions_treatments_single_name",
 			"type": "text",
-			"instructions": "Your theme uses accessible headings. If you leave this blank, the default accessible heading will be used.",
+			"instructions": "If you leave this blank, the default single item name will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -17,7 +18,7 @@
 			},
 			"acfe_permissions": "",
 			"default_value": "",
-			"placeholder": "",
+			"placeholder": "Condition\/Treatment",
 			"prepend": "",
 			"append": "",
 			"maxlength": "",
@@ -25,11 +26,11 @@
 			"acfe_update": ""
 		},
 		{
-			"key": "field_clinical_resource_archive_intro_text",
-			"label": "Archive Intro Text",
-			"name": "clinical_resource_archive_intro_text",
-			"type": "wysiwyg",
-			"instructions": "Leave empty if you do not want to display any intro text.",
+			"key": "field_conditions_treatments_plural_name",
+			"label": "Plural Item Name",
+			"name": "conditions_treatments_plural_name",
+			"type": "text",
+			"instructions": "If you leave this blank, the default plural item name will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -39,10 +40,10 @@
 			},
 			"acfe_permissions": "",
 			"default_value": "",
-			"tabs": "all",
-			"toolbar": "full",
-			"media_upload": 1,
-			"delay": 0,
+			"placeholder": "Conditions and Treatments",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
 			"acfe_validate": "",
 			"acfe_update": ""
 		}
@@ -52,11 +53,11 @@
 			{
 				"param": "options_page",
 				"operator": "==",
-				"value": "uamswp-fad-resources"
+				"value": "uamswp-fad-tax"
 			}
 		]
 	],
-	"menu_order": 20,
+	"menu_order": 10,
 	"position": "normal",
 	"style": "default",
 	"label_placement": "left",
