@@ -1736,3 +1736,156 @@ function uamswp_fad_podcast() {
 			</section>
 	<?php } // endif ( $show_podcast_section )
 }
+
+// Get system settings for other ontology item labels
+
+	// Get system settings for provider labels
+	function uamswp_fad_labels_provider() {
+		global $provider_single_name;
+		global $provider_single_name_attr;
+		global $provider_plural_name;
+		global $provider_plural_name_attr;
+
+		$provider_single_name = get_field('provider_single_name', 'option') ?: 'Provider';
+		$provider_single_name_attr = uamswp_attr_conversion($provider_single_name);
+		$provider_plural_name = get_field('provider_plural_name', 'option') ?: 'Providers';
+		$provider_plural_name_attr = uamswp_attr_conversion($provider_plural_name);
+	}
+
+	// Get system settings for provider archive page text
+	function uamswp_fad_archive_provider() {
+		global $provider_archive_headline;
+		global $provider_archive_headline_attr;
+
+		$provider_archive_headline = get_field('provider_archive_headline', 'option') ?: 'UAMS Health Providers';
+		$provider_archive_headline_attr = uamswp_attr_conversion($provider_archive_headline);
+	}
+
+	// Get system settings for location labels
+	function uamswp_fad_labels_location() {
+		global $location_single_name;
+		global $location_single_name_attr;
+		global $location_plural_name;
+		global $location_plural_name_attr;
+
+		$location_single_name = get_field('location_single_name', 'option') ?: 'Location';
+		$location_single_name_attr = uamswp_attr_conversion($location_single_name);
+		$location_plural_name = get_field('location_plural_name', 'option') ?: 'Locations';
+		$location_plural_name_attr = uamswp_attr_conversion($location_plural_name);
+	}
+
+	// Get system settings for location archive page text
+	function uamswp_fad_archive_location() {
+		global $location_archive_headline;
+		global $location_archive_headline_attr;
+
+		$location_archive_headline = get_field('location_archive_headline', 'option') ?: 'Locations';
+		$location_archive_headline_attr = uamswp_attr_conversion($location_archive_headline);
+	}
+
+	// Get system settings for area of expertise labels
+	function uamswp_fad_labels_expertise() {
+		global $expertise_single_name;
+		global $expertise_single_name_attr;
+		global $expertise_plural_name;
+		global $expertise_plural_name_attr;
+
+		$expertise_single_name = get_field('expertise_single_name', 'option') ?: 'Area of Expertise';
+		$expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
+		$expertise_plural_name = get_field('expertise_plural_name', 'option') ?: 'Areas of Expertise';
+		$expertise_plural_name_attr = uamswp_attr_conversion($expertise_plural_name);
+	}
+
+	// Get system settings for area of expertise archive page text
+	function uamswp_fad_archive_expertise() {
+		global $expertise_archive_headline;
+		global $expertise_archive_headline_attr;
+		global $expertise_archive_intro_text;
+
+		$expertise_archive_headline = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
+		$expertise_archive_headline_attr = uamswp_attr_conversion($expertise_archive_headline);
+		$expertise_archive_intro_text = get_field('expertise_archive_intro_text', 'option');
+	}
+
+	// Get system settings for clinical resource labels
+	function uamswp_fad_labels_clinical_resource() {
+		global $clinical_resource_single_name;
+		global $clinical_resource_single_name_attr;
+		global $clinical_resource_plural_name;
+		global $clinical_resource_plural_name_attr;
+
+		$clinical_resource_single_name = get_field('clinical_resource_single_name', 'option') ?: 'Clinical Resource';
+		$clinical_resource_single_name_attr = uamswp_attr_conversion($clinical_resource_single_name);
+		$clinical_resource_plural_name = get_field('clinical_resource_plural_name', 'option') ?: 'Clinical Resources';
+		$clinical_resource_plural_name_attr = uamswp_attr_conversion($clinical_resource_plural_name);
+	}
+
+	// Get system settings for clinical resource archive page text
+	function uamswp_fad_archive_clinical_resource() {
+		global $clinical_resource_archive_headline;
+		global $clinical_resource_archive_headline_attr;
+
+		$clinical_resource_archive_headline = get_field('clinical_resource_archive_headline', 'option') ?: 'Clinical Resources';
+		$clinical_resource_archive_headline_attr = uamswp_attr_conversion($clinical_resource_archive_headline);
+	}
+
+	// Get system settings for combined conditions and treatments labels
+	function uamswp_fad_labels_conditions_treatments() {
+		global $conditions_treatments_single_name;
+		global $conditions_treatments_single_name_attr;
+		global $conditions_treatments_plural_name;
+		global $conditions_treatments_plural_name_attr;
+
+		$conditions_treatments_single_name = get_field('conditions_treatments_single_name', 'option') ?: 'Condition';
+		$conditions_treatments_single_name_attr = uamswp_attr_conversion($conditions_treatments_single_name);
+		$conditions_treatments_plural_name = get_field('conditions_treatments_plural_name', 'option') ?: 'conditions_treatments';
+		$conditions_treatments_plural_name_attr = uamswp_attr_conversion($conditions_treatments_plural_name);
+	}
+
+	// Get system settings for condition labels
+	function uamswp_fad_labels_conditions() {
+		global $conditions_single_name;
+		global $conditions_single_name_attr;
+		global $conditions_plural_name;
+		global $conditions_plural_name_attr;
+
+		$conditions_single_name = get_field('conditions_single_name', 'option') ?: 'Condition';
+		$conditions_single_name_attr = uamswp_attr_conversion($conditions_single_name);
+		$conditions_plural_name = get_field('conditions_plural_name', 'option') ?: 'Conditions';
+		$conditions_plural_name_attr = uamswp_attr_conversion($conditions_plural_name);
+	}
+
+	// Get system settings for condition archive page text
+	function uamswp_fad_archive_conditions() {
+		global $conditions_archive_headline;
+		global $conditions_archive_headline_attr;
+		global $conditions_archive_intro_text;
+
+		$conditions_archive_headline = get_field('conditions_archive_headline', 'option') ?: 'Conditions';
+		$conditions_archive_headline_attr = uamswp_attr_conversion($conditions_archive_headline);
+		$conditions_archive_intro_text = get_field('conditions_archive_intro_text', 'option');
+	}
+
+	// Get system settings for treatment labels
+	function uamswp_fad_labels_treatments() {
+		global $treatments_single_name;
+		global $treatments_single_name_attr;
+		global $treatments_plural_name;
+		global $treatments_plural_name_attr;
+
+		$treatments_single_name = get_field('treatments_single_name', 'option') ?: 'Treatment/Procedure';
+		$treatments_single_name_attr = uamswp_attr_conversion($treatments_single_name);
+		$treatments_plural_name = get_field('treatments_plural_name', 'option') ?: 'Treatments and Procedures';
+		$treatments_plural_name_attr = uamswp_attr_conversion($treatments_plural_name);
+	}
+
+	// Get system settings for treatment archive page text
+	function uamswp_fad_archive_treatments() {
+		global $treatments_archive_headline;
+		global $treatments_archive_headline_attr;
+		global $treatments_archive_intro_text;
+
+		$treatments_archive_headline = get_field('treatments_archive_headline', 'option') ?: 'Treatments and Procedures';
+		$treatments_archive_headline_attr = uamswp_attr_conversion($treatments_archive_headline);
+		$treatments_archive_intro_text = get_field('treatments_archive_intro_text', 'option');
+	}

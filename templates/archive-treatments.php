@@ -29,15 +29,10 @@ function title_filter( $where, $query ){
 }
 
 // Get system settings for Treatments Labels
-// $treatments_single_name = get_field('treatments_single_name', 'option') ?: 'Treatment/Procedure';
-// $treatments_single_name_attr = uamswp_attr_conversion($treatments_single_name);
-$treatments_plural_name = get_field('treatments_plural_name', 'option') ?: 'Treatments and Procedures';
-$treatments_plural_name_attr = uamswp_attr_conversion($treatments_plural_name);
+uamswp_fad_labels_treatments();
 
 // Get system settings for Treatments Archive Page
-$treatments_archive_headline = get_field('treatments_archive_headline', 'option') ?: 'Treatments and Procedures';
-// $treatments_archive_headline_attr = uamswp_attr_conversion($treatments_archive_headline);
-$treatments_archive_intro_text = get_field('treatments_archive_intro_text', 'option');
+uamswp_fad_archive_treatments();
 $treatments_archive_link = get_post_type_archive_link( get_query_var('post_type') );
 
 $alpha = '';

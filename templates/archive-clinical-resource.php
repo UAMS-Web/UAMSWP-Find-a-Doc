@@ -3,15 +3,11 @@
  * Template Name: Clinical Resources Archive
  */
 
-// Get system settings for Clinical Resources Labels
-// $clinical_resource_single_name = get_field('clinical_resource_single_name', 'option') ?: 'Clinical Resource';
-// $clinical_resource_single_name_attr = uamswp_attr_conversion($clinical_resource_single_name);
-$clinical_resource_plural_name = get_field('clinical_resource_plural_name', 'option') ?: 'Clinical Resources';
-$clinical_resource_plural_name_attr = uamswp_attr_conversion($clinical_resource_plural_name);
+// Get system settings for clinical resource labels
+uamswp_fad_labels_clinical_resource();
 
-// Get system settings for Clinical Resources Archive Page
-$clinical_resource_archive_headline = get_field('clinical_resource_archive_headline', 'option') ?: 'Clinical Resources';
-// $clinical_resource_archive_headline_attr = uamswp_attr_conversion($clinical_resource_archive_headline);
+// Get system settings for clinical resource archive page text
+uamswp_fad_archive_clinical_resource();
 // $clinical_resource_archive_link = get_post_type_archive_link( get_query_var('post_type') );
 
 // Override theme's method of defining the meta page title

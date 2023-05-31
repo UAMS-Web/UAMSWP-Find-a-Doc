@@ -3,15 +3,11 @@
  * Template Name: Locations Archive
  */
 
-// Get system settings for Location Labels
-// $location_single_name = get_field('location_single_name', 'option') ?: 'Location';
-// $location_single_name_attr = uamswp_attr_conversion($location_single_name);
-$location_plural_name = get_field('location_plural_name', 'option') ?: 'Locations';
-$location_plural_name_attr = uamswp_attr_conversion($location_plural_name);
+// Get system settings for location labels
+uamswp_fad_labels_location();
 
-// Get system settings for Locations Archive Page
-$location_archive_headline = get_field('location_archive_headline', 'option') ?: 'Locations';
-// $location_archive_headline_attr = uamswp_attr_conversion($location_archive_headline);
+// Get system settings for location archive page text
+uamswp_fad_archive_location();
 // $location_archive_link = get_post_type_archive_link( get_query_var('post_type') );
 
 // Override theme's method of defining the meta page title

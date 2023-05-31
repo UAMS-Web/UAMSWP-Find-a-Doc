@@ -4,15 +4,10 @@
  */
 
 // Get system settings for Areas of Expertise Labels
-// $expertise_single_name = get_field('expertise_single_name', 'option') ?: 'Area of Expertise';
-// $expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
-$expertise_plural_name = get_field('expertise_plural_name', 'option') ?: 'Areas of Expertise';
-$expertise_plural_name_attr = uamswp_attr_conversion($expertise_plural_name);
+uamswp_fad_labels_expertise();
 
 // Get system settings for Areas of Expertise Archive Page
-$expertise_archive_headline = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
-// $expertise_archive_headline_attr = uamswp_attr_conversion($expertise_archive_headline);
-$expertise_archive_intro_text = get_field('expertise_archive_intro_text', 'option');
+uamswp_fad_archive_expertise();
 // $expertise_archive_link = get_post_type_archive_link( get_query_var('post_type') );
 
 // Override theme's method of defining the meta page title

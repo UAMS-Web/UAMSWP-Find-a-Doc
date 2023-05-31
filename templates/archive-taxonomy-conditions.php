@@ -25,16 +25,11 @@ function uamswp_terms_clauses( $clauses, $taxonomies, $args ){
 
 }
 
-// Get system settings for Conditions Labels
-// $conditions_single_name = get_field('conditions_single_name', 'option') ?: 'Condition';
-// $conditions_single_name_attr = uamswp_attr_conversion($conditions_single_name);
-$conditions_plural_name = get_field('conditions_plural_name', 'option') ?: 'Conditions';
-$conditions_plural_name_attr = uamswp_attr_conversion($conditions_plural_name);
+// Get system settings for condition labels
+uamswp_fad_labels_conditions();
 
-// Get system settings for Conditions Archive Page
-$conditions_archive_headline = get_field('conditions_archive_headline', 'option') ?: 'Conditions';
-// $conditions_archive_headline_attr = uamswp_attr_conversion($conditions_archive_headline);
-$conditions_archive_intro_text = get_field('conditions_archive_intro_text', 'option');
+// Get system settings for condition archive page text
+uamswp_fad_archive_conditions();
 $conditions_archive_link = get_post_type_archive_link( get_query_var('post_type') );
 
 // Override theme's method of defining the meta page title

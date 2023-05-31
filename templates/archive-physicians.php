@@ -3,15 +3,11 @@
  * Template Name: Providers Archive
  */
 
-// Get system settings for Provider Labels
-// $provider_single_name = get_field('provider_single_name', 'option') ?: 'Provider';
-// $provider_single_name_attr = uamswp_attr_conversion($provider_single_name);
-$provider_plural_name = get_field('provider_plural_name', 'option') ?: 'Providers';
-$provider_plural_name_attr = uamswp_attr_conversion($provider_plural_name);
+// Get system settings for provider labels
+uamswp_fad_labels_provider();
 
 // Get system settings for Providers Archive Page
-$provider_archive_headline = get_field('provider_archive_headline', 'option') ?: 'UAMS Health Providers';
-// $provider_archive_headline_attr = uamswp_attr_conversion($provider_archive_headline);
+uamswp_fad_archive_provider();
 // $provider_archive_link = get_post_type_archive_link( get_query_var('post_type') );
 
 // Override theme's method of defining the meta page title
