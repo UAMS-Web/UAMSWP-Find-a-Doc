@@ -1,12 +1,28 @@
 <?php
+/*
+ * Template Name: Locations Archive
+ */
+
+// Get system settings for Location Labels
+// $location_single_name = get_field('location_single_name', 'option') ?: 'Location';
+// $location_single_name_attr = uamswp_attr_conversion($location_single_name);
+$location_plural_name = get_field('location_plural_name', 'option') ?: 'Locations';
+$location_plural_name_attr = uamswp_attr_conversion($location_plural_name);
+
+// Get system settings for Locations Archive Page
+$location_archive_headline = get_field('location_archive_headline', 'option') ?: 'Locations';
+// $location_archive_headline_attr = uamswp_attr_conversion($location_archive_headline);
+// $location_archive_link = get_post_type_archive_link( get_query_var('post_type') );
 
 // Override theme's method of defining the meta page title
 function uamswp_fad_title($html) {
+	global $location_plural_name_attr;
+
 	//you can add here all your conditions as if is_page(), is_category() etc..
-	$html = 'Locations | ' . get_bloginfo( "name" );
+	$html = $location_plural_name_attr . ' | ' . get_bloginfo( "name" );
 	return $html;
 }
-// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 if ( isset( $_COOKIE['wp_filter_region']) && !isset($_GET['_location_region'])) {
 	$region = $_COOKIE['wp_filter_region'];
@@ -17,19 +33,19 @@ if ( isset( $_COOKIE['wp_filter_region']) && !isset($_GET['_location_region'])) 
 }
 get_header();
 
-	add_filter( 'facetwp_template_use_archive', '__return_true' );
+add_filter( 'facetwp_template_use_archive', '__return_true' );
 
 ?>
 
 <div class="content-sidebar-wrap">
 	<main class="container-fluid location-list" id="genesis-content">
-		<h1 class="sr-only" itemprop="headline">Locations</h1>
+		<h1 class="sr-only" itemprop="headline"><?php echo $location_archive_headline; ?></h1>
 		<div class="row">
 			<div class="col-12 col-sm filter-col collapse">
 				<button type="button" class="close" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h2 class="h4">Search Locations</h2>
+				<h2 class="h4">Search <?php echo $location_plural_name; ?></h2>
 				<?php echo do_shortcode( '[wpdreams_ajaxsearchpro id=2]' ); ?>
 				<h2 class="h4">Filters</h2>
 				<fieldset>
@@ -41,13 +57,13 @@ get_header();
 				</fieldset>
 			</div>
 			<div class="col-12 col-sm list-col">
-				<h2 class="sr-only">List of Locations</h2>
+				<h2 class="sr-only">List of <?php echo $location_plural_name; ?></h2>
 				<div class="alert alert-danger text-center" role="alert">
 					If you think you are experiencing a medical emergency, call 911 immediately.
 				</div>
 				<div class="row list-col-header">
 					<div class="col result-status">
-						<span class="result-count"><?php echo facetwp_display( 'counts' ); ?> Locations</span>
+						<span class="result-count"><?php echo facetwp_display( 'counts' ); ?> <?php echo $location_plural_name; ?></span>
 						<?php echo facetwp_display( 'selections' ); ?>
 					</div>
 					<div class="col filter-toggle-container">

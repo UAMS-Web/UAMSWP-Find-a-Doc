@@ -1,19 +1,33 @@
 <?php
+/*
+ * Template Name: Areas of Expertise Archive
+ */
+
+// Get system settings for Areas of Expertise Labels
+// $expertise_single_name = get_field('expertise_single_name', 'option') ?: 'Area of Expertise';
+// $expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
+$expertise_plural_name = get_field('expertise_plural_name', 'option') ?: 'Areas of Expertise';
+$expertise_plural_name_attr = uamswp_attr_conversion($expertise_plural_name);
+
+// Get system settings for Areas of Expertise Archive Page
+$expertise_archive_headline = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
+// $expertise_archive_headline_attr = uamswp_attr_conversion($expertise_archive_headline);
+$expertise_archive_intro_text = get_field('expertise_archive_intro_text', 'option');
+// $expertise_archive_link = get_post_type_archive_link( get_query_var('post_type') );
 
 // Override theme's method of defining the meta page title
-function uamswp_fad_title($html) { 
+function uamswp_fad_title($html) {
+	global $expertise_plural_name_attr;
+
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
-	$html = 'Areas of Expertise | ' . get_bloginfo( "name" );
+	$html = $expertise_plural_name_attr . ' | ' . get_bloginfo( "name" );
 	return $html;
 }
-// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 get_header();
 
 add_filter( 'facetwp_template_use_archive', '__return_true' );
-
-$expertise_title = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
-$expertise_text = get_field('expertise_archive_intro_text', 'option');
 
 ?>
 
@@ -21,15 +35,15 @@ $expertise_text = get_field('expertise_archive_intro_text', 'option');
 	<main id="genesis-content">
 		<section class="archive-description">
 			<header class="entry-header">
-				<h1 class="entry-title" itemprop="headline"><?php echo $expertise_title; ?></h1>
+				<h1 class="entry-title" itemprop="headline"><?php echo $expertise_archive_headline; ?></h1>
 			</header>
-			<?php echo ($expertise_text ? '<div class="entry-content clearfix" itemprop="text">' . $expertise_text . '</div>' : '' ); ?>
+			<?php echo ($expertise_archive_intro_text ? '<div class="entry-content clearfix" itemprop="text">' . $expertise_archive_intro_text . '</div>' : '' ); ?>
 		</section>
 		<section class="uams-module" id="expertise">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<h2 class="module-title sr-only">List of Areas of Expertise</h2>
+						<h2 class="module-title sr-only">List of <?php echo $expertise_plural_name; ?></h2>
 						<div class="card-list-container">
 							<div class="card-list card-list-expertise">
 								<?php echo facetwp_display( 'template', 'expertise' ); ?>

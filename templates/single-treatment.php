@@ -21,21 +21,28 @@ add_action('wp_head','uamswp_keyword_hook_header');
 
 $page_title = get_the_title();
 $page_title_attr = uamswp_attr_conversion($page_title);
-$treatment_archive_title = get_field('treatments_archive_headline', 'option') ?: 'Treatments &amp; Procedures';
-$treatment_archive_title_attr = uamswp_attr_conversion($treatment_archive_title);
-$treatment_title = get_field('treatments_single_name', 'option') ?: 'Treatment/Procedure';
-$treatment_title_attr = uamswp_attr_conversion($treatment_title);
-$treatment_text = get_field('treatments_archive_intro_text', 'option');
+
+// Get system settings for Treatments Labels
+$treatments_single_name = get_field('treatments_single_name', 'option') ?: 'Treatment/Procedure';
+$treatments_single_name_attr = uamswp_attr_conversion($treatments_single_name);
+$treatments_plural_name = get_field('treatments_plural_name', 'option') ?: 'Treatments and Procedures';
+$treatments_plural_name_attr = uamswp_attr_conversion($treatments_plural_name);
+
+// Get system settings for Treatments Archive Page
+$treatments_archive_headline = get_field('treatments_archive_headline', 'option') ?: 'Treatments and Procedures';
+$treatments_archive_headline_attr = uamswp_attr_conversion($treatments_archive_headline);
+$treatments_archive_intro_text = get_field('treatments_archive_intro_text', 'option');
 
 // Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
 	global $page_title_attr;
-	global $treatment_title_attr;
+	global $treatments_single_name_attr;
+
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$meta_title_chars_max = 60;
 	$meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
 	$meta_title_base_chars = strlen( $meta_title_base );
-	$meta_title_enhanced_addition = ' | ' . $treatment_title_attr;
+	$meta_title_enhanced_addition = ' | ' . $treatments_single_name_attr;
 	$meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
 	$meta_title_enhanced_chars = strlen( $meta_title_enhanced );
 	if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
@@ -336,7 +343,7 @@ $jump_link_count = 0;
 	<main id="genesis-content" class="treatment-item<?php echo $treatment_field_classes; ?>">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
-				<h1 class="entry-title"><span class="supertitle"><?php echo $treatment_title; ?></span><span class="sr-only">:</span> <?php echo $page_title; ?></h1>
+				<h1 class="entry-title"><span class="supertitle"><?php echo $treatments_single_name; ?></span><span class="sr-only">:</span> <?php echo $page_title; ?></h1>
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
 				<?php

@@ -1,12 +1,28 @@
 <?php
+/*
+ * Template Name: Providers Archive
+ */
+
+// Get system settings for Provider Labels
+// $provider_single_name = get_field('provider_single_name', 'option') ?: 'Provider';
+// $provider_single_name_attr = uamswp_attr_conversion($provider_single_name);
+$provider_plural_name = get_field('provider_plural_name', 'option') ?: 'Providers';
+$provider_plural_name_attr = uamswp_attr_conversion($provider_plural_name);
+
+// Get system settings for Providers Archive Page
+$provider_archive_headline = get_field('provider_archive_headline', 'option') ?: 'UAMS Health Providers';
+// $provider_archive_headline_attr = uamswp_attr_conversion($provider_archive_headline);
+// $provider_archive_link = get_post_type_archive_link( get_query_var('post_type') );
 
 // Override theme's method of defining the meta page title
-function uamswp_fad_title($html) { 
+function uamswp_fad_title($html) {
+	global $provider_plural_name_attr;
+
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
-	$html = 'Providers | ' . get_bloginfo( "name" );
+	$html = $provider_plural_name_attr . ' | ' . get_bloginfo( "name" );
 	return $html;
 }
-// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 // Region Cookie
 if ( isset($_COOKIE['wp_filter_region']) && !isset($_GET['_provider_region']) ) {
@@ -18,30 +34,31 @@ if ( isset($_COOKIE['wp_filter_region']) && !isset($_GET['_provider_region']) ) 
 }
 get_header();
 
-	function custom_field_excerpt($title) {
-			global $post;
-			$text = get_field($title);
-			if ( '' != $text ) {
-				$text = strip_shortcodes( $text );
-				$text = apply_filters('the_content', $text);
-				$text = str_replace(']]>', ']]>', $text);
-				$excerpt_length = 35; // 35 words
-				$excerpt_more = apply_filters('excerpt_more', ' ' . '[...]');
-				$text = wp_trim_words( $text, $excerpt_length, $excerpt_more );
-			}
-			return apply_filters('the_excerpt', $text);
-		}
-	function wpdocs_custom_excerpt_length( $length ) {
-		return 35; // 35 words
-	}
-	add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );
+function custom_field_excerpt($title) {
+	global $post;
 
-	add_filter( 'facetwp_template_use_archive', '__return_true' );
+	$text = get_field($title);
+	if ( '' != $text ) {
+		$text = strip_shortcodes( $text );
+		$text = apply_filters('the_content', $text);
+		$text = str_replace(']]>', ']]>', $text);
+		$excerpt_length = 35; // 35 words
+		$excerpt_more = apply_filters('excerpt_more', ' ' . '[...]');
+		$text = wp_trim_words( $text, $excerpt_length, $excerpt_more );
+	}
+	return apply_filters('the_excerpt', $text);
+}
+function wpdocs_custom_excerpt_length( $length ) {
+	return 35; // 35 words
+}
+add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );
+
+add_filter( 'facetwp_template_use_archive', '__return_true' );
 
 ?>
 <div class="content-sidebar-wrap">
 	<main class="container-fluid doctor-list" id="genesis-content">
-		<h1 class="sr-only" itemprop="headline">UAMS Health Providers</h1>
+		<h1 class="sr-only" itemprop="headline"><?php echo $provider_archive_headline; ?></h1>
 		<div class="row">
 			<div class="col-12 col-sm filter-col collapse">
 				<h2 class="h3">Filters</h2>
@@ -50,7 +67,7 @@ get_header();
 				</button>
 				<fieldset>
 					<legend class="sr-only">Filter by...</legend>
-					<h3 class="h6">Search Providers</h3>
+					<h3 class="h6">Search <?php echo $provider_plural_name; ?></h3>
 					<?php echo do_shortcode( '[wpdreams_ajaxsearchpro id=1]' ); ?>
 					<div class="fwp-filter"><?php echo facetwp_display( 'facet', 'alpha' ); ?></div>
 					<?php echo do_shortcode( '		<div class="fwp-filter">[facetwp facet="primary_care"]</div>
@@ -68,13 +85,13 @@ get_header();
 				</fieldset>
 			</div>
 			<div class="col-12 col-sm list-col">
-				<h2 class="sr-only">List of Providers</h2>
+				<h2 class="sr-only">List of <?php echo $provider_plural_name; ?></h2>
 				<div class="alert alert-danger text-center" role="alert">
 					If you think you are experiencing a medical emergency, call 911 immediately.
 				</div>
 				<div class="row list-col-header">
 					<div class="col result-status">
-						<span class="result-count"><?php echo facetwp_display( 'counts' ); ?> Providers</span>
+						<span class="result-count"><?php echo facetwp_display( 'counts' ); ?> <?php echo $provider_plural_name; ?></span>
 						<?php echo facetwp_display( 'selections' ); ?>
 					</div>
 					<div class="col filter-toggle-container">

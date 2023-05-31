@@ -2,6 +2,8 @@
 $term = get_queried_object();
 
 // ACF Fields - get_fields
+$page_title = single_cat_title( '', false );
+$page_title_attr = uamswp_attr_conversion($page_title);
 $keywords = get_field('treatment_procedure_alternate', $term);
 $clinical_trials = get_field('treatment_procedure_clinical_trials', $term);
 $content = get_field( 'treatment_procedure_content', $term );
@@ -15,6 +17,18 @@ $physicians = get_field('treatment_procedure_physicians', $term);
 $medline_type = get_field('medline_code_type', $term);
 $medline_code = get_field('medline_code_id', $term);
 $embed_code = get_field('treatment_procedure_embed_codes', $term); // Embed / Syndication Code
+
+// Get system settings for Treatments Labels
+$treatments_single_name = get_field('treatments_single_name', 'option') ?: 'Treatment/Procedure';
+$treatments_single_name_attr = uamswp_attr_conversion($treatments_single_name);
+$treatments_plural_name = get_field('treatments_plural_name', 'option') ?: 'Treatments and Procedures';
+$treatments_plural_name_attr = uamswp_attr_conversion($treatments_plural_name);
+
+// Get system settings for Treatments Archive Page
+$treatments_archive_headline = get_field('treatments_archive_headline', 'option') ?: 'Treatments and Procedures';
+$treatments_archive_headline_attr = uamswp_attr_conversion($treatments_archive_headline);
+$treatments_archive_intro_text = get_field('treatments_archive_intro_text', 'option');
+
 if (
 	( $medline_type && 'none' != $medline_type && $medline_code && !empty($medline_code) ) // if the medline plus syndication option is filled in
 	|| ( $embed_code && !empty($embed_code) ) // or if the syndication embed field has a value
@@ -43,16 +57,26 @@ add_action('wp_head','uamswp_keyword_hook_header');
 
 // Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
-	// global $treatment_title;
+	global $page_title_attr;
+	global $treatments_single_name_attr;
+
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
-	if ( strlen(single_cat_title( '', false )) < 21 ) {
-		$html = single_cat_title( '', false ) . ' | Treatments & Procedures | ' . get_bloginfo( "name" );
+	$meta_title_chars_max = 60;
+	$meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
+	$meta_title_base_chars = strlen( $meta_title_base );
+	$meta_title_enhanced_addition = ' | ' . $treatments_single_name_attr;
+	$meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
+	$meta_title_enhanced_chars = strlen( $meta_title_enhanced );
+	if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
+		$html = $meta_title_enhanced;
 	} else {
-		$html = single_cat_title( '', false ) . ' | ' . get_bloginfo( "name" );
+		$html = $meta_title_base;
 	}
 	return $html;
 }
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+
+
 
 if (empty($excerpt)){
 	$excerpt_user = false;
@@ -69,9 +93,6 @@ function sp_titles_desc($html) {
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
 get_header();
-
-$treatment_title = get_field('treatments_archive_headline', 'option');
-$treatment_text = get_field('treatments_archive_intro_text', 'option');
 
 // Hard coded breadcrumbs
 $tax = get_term_by("slug", get_query_var("term"), get_query_var("taxonomy") );
@@ -140,7 +161,7 @@ if ($physicians && !empty($physicians)) { $treatment_field_classes .= ' has-prov
 	<main id="genesis-content" class="treatment-item<?php echo $treatment_field_classes; ?>">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
-				<h1 class="entry-title"><?php echo ( $treatment_title ? $treatment_title : 'Treatment & Procedure' ); ?>: <?php echo single_cat_title( '', false ); ?></h1>
+				<h1 class="entry-title"><?php echo $treatments_archive_headline; ?>: <?php echo single_cat_title( '', false ); ?></h1>
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
 				<?php
