@@ -30,7 +30,7 @@ function title_filter( $where, $query ){
 
 }
 
-$treatment_title = get_field('treatments_archive_headline', 'option') ?: 'Treatments &amp; Procedures';
+$treatment_title = get_field('treatments_archive_headline', 'option') ?: 'Treatments and Procedures';
 $treatment_text = get_field('treatments_archive_intro_text', 'option');
 $treatment_link = get_post_type_archive_link( get_query_var('post_type') );
 

@@ -1,11 +1,12 @@
+
 {
-	"key": "group_clinical_resource_archive_page",
-	"title": "Clinical Resources Archive Page",
+	"key": "group_location_archive_page",
+	"title": "Locations Archive Page",
 	"fields": [
 		{
-			"key": "field_clinical_resource_archive_headline",
+			"key": "field_location_archive_headline",
 			"label": "Archive Headline",
-			"name": "clinical_resource_archive_headline",
+			"name": "location_archive_headline",
 			"type": "text",
 			"instructions": "Your theme uses accessible headings. If you leave this blank, the default accessible heading will be used.",
 			"required": 0,
@@ -17,7 +18,7 @@
 			},
 			"acfe_permissions": "",
 			"default_value": "",
-			"placeholder": "Clinical Resources",
+			"placeholder": "Locations",
 			"prepend": "",
 			"append": "",
 			"maxlength": "",
@@ -25,9 +26,9 @@
 			"acfe_update": ""
 		},
 		{
-			"key": "field_clinical_resource_archive_intro_text",
+			"key": "field_location_archive_intro_text",
 			"label": "Archive Intro Text",
-			"name": "clinical_resource_archive_intro_text",
+			"name": "location_archive_intro_text",
 			"type": "wysiwyg",
 			"instructions": "Leave empty if you do not want to display any intro text.",
 			"required": 0,
@@ -52,7 +53,7 @@
 			{
 				"param": "options_page",
 				"operator": "==",
-				"value": "uamswp-fad-resources"
+				"value": "uamswp-fad-locations"
 			}
 		]
 	],
