@@ -4,6 +4,7 @@
  * Designed for UAMS Find-a-Doc
  * 
  * Required vars:
+ * 	$clinical_resource_plural_name // System setting for Clinical Resources Plural Item Name
  * 	$resources
  * 	$resource_query
  * 	$resource_postsPerPage
