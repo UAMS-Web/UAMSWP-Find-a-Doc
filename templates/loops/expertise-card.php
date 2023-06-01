@@ -5,7 +5,10 @@
  * 
  * Must be used inside a loop
  * 
- * Required var: $id
+ * Required vars:
+ * 	$expertise_single_name // System setting for Areas of Expertise single item name
+ * 	$expertise_single_name_attr // Attribute value friendly version of system setting for Areas of Expertise single item name
+ * 	$id
  */
 
 // $child_expertise_list indicates whether this is a list of child Areas of Expertise within this Area of Expertise

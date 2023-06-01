@@ -5,7 +5,10 @@
  * 
  * Must be used inside a loop
  * 
- * Required var: $id
+ * Required vars:
+ * 	$location_single_name // System setting for Locations Plural Item Name
+ * 	$location_single_name_attr // Attribute value friendly version of system setting for Locations single item name
+ * 	$id
  */
 
 // Reset variables

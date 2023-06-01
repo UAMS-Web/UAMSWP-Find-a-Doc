@@ -4,7 +4,12 @@
  * Designed for UAMS Find-a-Doc
  * 
  * Must be used inside a loop
- * Required var: $treatments
+ * 
+ * Required vars:
+ * 	$provider_plural_name // System setting for Providers plural item name
+ * 	$treatments_single_name_attr // Attribute value friendly version of system setting for Treatments single item name
+ * 	$treatments_plural_name // System setting for Treatments plural item name
+ * 	$treatments
  */
 ?>
 <section class="uams-module conditions-treatments bg-auto" id="treatments">

@@ -1,8 +1,10 @@
 <?php
 /*
- *
  * UAMS Find-a-Doc Locations Block
  * 
+ * Required vars:
+ * 	$location_single_name // System setting for Locations Plural Item Name
+ * 	$location_single_name_attr // Attribute value friendly version of system setting for Locations single item name
  */
 
 // Create id attribute allowing for custom "anchor" value.

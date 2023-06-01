@@ -1,4 +1,10 @@
 <?php 
+/**
+ * Required vars:
+ * 	$location_single_name // System setting for Locations single item name
+ * 	$location_plural_name // System setting for Locations plural item name
+ */
+
 if ( have_posts() ) { 
 	// Generate a table
 	?>

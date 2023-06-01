@@ -1,6 +1,16 @@
 <?php
 /*
- * Expertise Nav
+ * Template Name: Primary Navigation for Area of Expertise Subsection
+ * 
+ * Required vars:
+ * 	$provider_plural_name // System setting for Providers plural item name
+ * 	$provider_plural_name_attr // Attribute value friendly version of system setting for Providers plural item name
+ * 	$location_plural_name // System setting for Locations plural item name
+ * 	$location_plural_name_attr // Attribute value friendly version of system setting for Locations plural item name
+ * 	$expertise_plural_name // System setting for Areas of Expertise plural item name
+ * 	$expertise_plural_name_attr // Attribute value friendly version of system setting for Areas of Expertise plural item name
+ * 	$clinical_resource_plural_name // System setting for Clinical Resources plural item name
+ * 	$clinical_resource_plural_name_attr // Attribute value friendly version of system setting for Clinical Resources plural item name
  */
 
 require_once( 'modules/class-wp-bootstrap-pagewalker.php' );

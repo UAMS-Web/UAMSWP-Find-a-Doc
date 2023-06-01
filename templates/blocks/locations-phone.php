@@ -4,6 +4,7 @@
  * Designed for UAMS Find-a-Doc
  * 
  * Required vars:
+ * 	$location_single_name // System setting for Locations Plural Item Name
  * 	$phone_output_id (ID of location)
  * 	$phone_output
  * 		(

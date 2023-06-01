@@ -1,4 +1,10 @@
-<?php $i = 0; ?>
+<?php
+/**
+ * Required vars:
+ * 	$provider_plural_name // System setting for Providers plural item name
+ */
+
+$i = 0; ?>
 	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 	<?php $class = ($i%2 == 0)? 'whiteBackground': 'grayBackground'; ?>
 	<div class="<?php echo $class; ?> archive-box">

@@ -2,6 +2,12 @@
 /**
  * Template Name: Appointments loop / text block on provider profiles
  * Designed for UAMS Find-a-Doc
+ * 
+ * Required vars:
+ * 	$provider_single_name // System setting for Providers single item name
+ * 	$provider_single_name_attr // Attribute value friendly version of system setting for Providers single item name
+ * 	$location_single_name // System setting for Locations single item name
+ * 	$location_plural_name_attr // Attribute value friendly version of system setting for Locations plural item name
  */
 
 $appointment_show_main_line_sys = get_field('provider_mainline', 'option');

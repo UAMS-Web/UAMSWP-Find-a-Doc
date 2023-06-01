@@ -2,6 +2,9 @@
 /**
  * Template Name: Appointments loop / text block
  * Designed for UAMS Find-a-Doc
+ * 
+ * Required vars:
+ * 	$location_single_name // System setting for Locations single item name
  */
 
 if ( $locations && $location_valid ) {

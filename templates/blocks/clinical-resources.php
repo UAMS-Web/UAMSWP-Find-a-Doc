@@ -4,7 +4,18 @@
  * Designed for UAMS Find-a-Doc
  * 
  * Required vars:
+ * 	$provider_single_name // System setting for Providers single item name
+ * 	$provider_plural_name // System setting for Providers plural item name
+ * 	$location_single_name // System setting for Locations single item name
+ * 	$location_plural_name // System setting for Locations plural item name
+ * 	$expertise_single_name // System setting for Areas of Expertise single item name
+ * 	$expertise_plural_name // System setting for Areas of Expertise plural item name
+ * 	$clinical_resource_single_name // System setting for Clinical Resources single item name
  * 	$clinical_resource_plural_name // System setting for Clinical Resources Plural Item Name
+ * 	$conditions_single_name // System setting for Conditions single item name
+ * 	$conditions_plural_name // System setting for Conditions plural item name
+ * 	$treatments_single_name // System setting for Treatments single item name
+ * 	$treatments_plural_name // System setting for Treatments plural item name
  * 	$resources
  * 	$resource_query
  * 	$resource_postsPerPage
@@ -14,6 +25,9 @@
  * 	$resource_heading_related_pre
  * 	$resource_heading_related_post
  * 	$resource_heading_related_name
+ * 
+ * Optional var:
+ * 	$resource_page = 'single' or 'archive' (default to 'single')
  * 
  * List layout intended to either display all items or display a set number with no link to more.
  */

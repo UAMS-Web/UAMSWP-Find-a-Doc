@@ -5,7 +5,11 @@
  * 
  * Must be used inside a loop
  * 
- * Required var: $conditions
+ * Required vars:
+ * 	$provider_plural_name // System setting for Providers plural item name
+ * 	$conditions_single_name_attr // Attribute value friendly version of system setting for Conditions single item name
+ * 	$conditions_plural_name // System setting for Conditions plural item name
+ * 	$conditions
  */
 ?>
 <section class="uams-module conditions-treatments bg-auto" id="conditions">

@@ -5,7 +5,9 @@
  * 
  * Must be used inside a loop
  * 
- * Required var: $id
+ * Required vars:
+ * 	$clinical_resource_single_name // System setting for Clinical Resources single item name
+ * 	$id
  */
 
 $resource_title = get_the_title($id);

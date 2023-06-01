@@ -2,6 +2,12 @@
 /**
  * Template Name: Physician Loop
  * Designed for physicians
+ * 
+ * Required vars:
+ * 	$provider_single_name // System setting for Providers single item name
+ * 	$provider_single_name_attr // Attribute value friendly version of system setting for Providers single item name
+ * 	$provider_plural_name // System setting for Providers plural item name
+ * 	$location_plural_name // System setting for Locations plural item name
  */
 if ( have_posts() ) : while ( have_posts() ) : the_post();
 $degrees = get_field('physician_degree');

@@ -1,6 +1,12 @@
 <?php
 /*
- * Expertise Header
+ * Template Name: Site Header for Area of Expertise Subsection
+ * 
+ * Required vars:
+ * 	$navbar_subbrand_title
+ * 	$navbar_subbrand_parent
+ * 	$navbar_subbrand_parent_url
+ * 	$navbar_subbrand_title_url
  */
 
 ?>

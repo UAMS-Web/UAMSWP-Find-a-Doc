@@ -5,7 +5,9 @@
  * 
  * Must be used inside a loop
  * 
- * Required var:
+ * Required vars:
+ * 	$provider_plural_name // System setting for Providers plural item name
+ * 	$conditions_plural_name // System setting for Conditions plural item name
  * 	$conditions
  * 	$conditions_cpt_query
  * 	$condition_context = 'single-provider', 'single-location', 'single-condition', 'single-treatment', 'single-expertise', 'single-resource'
