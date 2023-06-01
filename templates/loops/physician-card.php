@@ -5,7 +5,8 @@
  * 
  * Must be used inside a loop
  * 
- * Required var: $id
+ * Required vars:
+ * 	$id
  */
 
 $degrees = get_field('physician_degree', $id);

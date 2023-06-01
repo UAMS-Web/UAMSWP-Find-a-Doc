@@ -1,8 +1,6 @@
 <?php
 /*
- *
  * UAMS Find-a-Doc Providers Block
- * 
  */
 
 // Create id attribute allowing for custom "anchor" value.
