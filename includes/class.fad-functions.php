@@ -1707,34 +1707,7 @@ function uamswp_fad_podcast() {
 	global $podcast_subject;
 	global $show_podcast_section;
 	global $podcast_filter; // Expected values: 'tag' or 'doctor'
-
-	global $provider_single_name;
-	global $provider_single_name_attr;
 	global $provider_plural_name;
-	global $provider_plural_name_attr;
-	global $location_single_name;
-	global $location_single_name_attr;
-	global $location_plural_name;
-	global $location_plural_name_attr;
-	global $expertise_single_name;
-	global $expertise_single_name_attr;
-	global $expertise_plural_name;
-	global $expertise_plural_name_attr;
-	global $expertise_archive_headline;
-	global $expertise_archive_headline_attr;
-	global $expertise_archive_intro_text;
-	global $clinical_resource_single_name;
-	global $clinical_resource_single_name_attr;
-	global $clinical_resource_plural_name;
-	global $clinical_resource_plural_name_attr;
-	global $conditions_single_name;
-	global $conditions_single_name_attr;
-	global $conditions_plural_name;
-	global $conditions_plural_name_attr;
-	global $treatments_single_name;
-	global $treatments_single_name_attr;
-	global $treatments_plural_name;
-	global $treatments_plural_name_attr;
 
 	if ( $show_podcast_section ) {
 		if ( $podcast_filter == 'tag' ) {
