@@ -6,5 +6,5 @@ $resource_page = 'archive';
 include( UAMS_FAD_PATH . '/templates/loops/resource-card.php' );
 
 endwhile; else : ?>
-	<p><?php _e( 'Sorry, no resources matched your criteria.' ); ?></p>
+	<p><?php _e( 'Sorry, no ' . strtolower($clinical_resource_plural_name) . ' matched your criteria.' ); ?></p>
 <?php endif; ?>

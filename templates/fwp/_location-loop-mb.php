@@ -24,5 +24,5 @@
 	<?php $i++; ?>
 	<?php endwhile; else : ?>
 	<?php ?>
-		<p><?php _e( 'Sorry, no physicians matched your criteria.' ); ?></p>
+		<p><?php _e( 'Sorry, no ' . strtolower($provider_plural_name) . ' matched your criteria.' ); ?></p>
 	<?php endif; ?>
