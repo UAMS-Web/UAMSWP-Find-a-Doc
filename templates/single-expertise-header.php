@@ -9,8 +9,8 @@
  * 	$navbar_subbrand_title_url
  */
 
+// Begin Title / Logo
 ?>
-<!-- /* Begin Title / Logo */ -->
 <div class="global-title">
 	<a href="<?php echo network_site_url(); ?>" class="navbar-brand <?php if ( !$navbar_subbrand_title ) { echo 'no-subbrand'; } ?>">
 		<picture>
@@ -29,13 +29,17 @@
 		<a class="title" href="<?php echo $navbar_subbrand_title_url; ?>"><?php echo $navbar_subbrand_title; ?></a>
 	</div>
 </div>
-<!-- /* End Title / Logo */ -->
+<?php
+// End Title / Logo
 
-<!-- /* Begin Right Navbar */ -->
+// Begin Right Navbar
+?>
 <nav class="header-nav" aria-label="Resource Navigation">
 	<div class="collapse navbar-collapse" id="nav-secondary">
 		<ul class="nav">
-			<!-- Options - uamshealth -->
+			<?php
+			// Options - uamshealth
+			?>
 			<li class="nav-item">
 				<a class="nav-link" href="https://www.uams.edu/">UAMS.edu</a>
 			</li>
@@ -45,7 +49,9 @@
 			<li class="nav-item">
 				<a class="nav-link" href="http://giving.uams.edu/">Giving</a>
 			</li>
-			<!-- End right nav -->
+			<?php
+			// End right nav
+			?>
 		</ul>
 	</div>
 	<ul class="nav resource-nav" id="nav-resource">
@@ -60,7 +66,6 @@
 			</button>
 		</li>
 	</ul>
-
 	<style>
 		.emergency-link svg {
 			display: inline-block;
@@ -89,5 +94,4 @@
 			vertical-align: -.0667em;
 		}
 	</style>
-
 </nav>
