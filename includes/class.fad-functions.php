@@ -1008,33 +1008,9 @@ add_action('wp_ajax_nopriv_location_ajax_filter', 'location_ajax_filter_callback
 add_action('wp_ajax_location_ajax_filter', 'location_ajax_filter_callback');
 
 function location_ajax_filter_callback() {
-	global $provider_single_name;
-	global $provider_single_name_attr;
-	global $provider_plural_name;
-	global $provider_plural_name_attr;
 	global $location_single_name;
 	global $location_single_name_attr;
 	global $location_plural_name;
-	global $location_plural_name_attr;
-	global $expertise_single_name;
-	global $expertise_single_name_attr;
-	global $expertise_plural_name;
-	global $expertise_plural_name_attr;
-	global $expertise_archive_headline;
-	global $expertise_archive_headline_attr;
-	global $expertise_archive_intro_text;
-	global $clinical_resource_single_name;
-	global $clinical_resource_single_name_attr;
-	global $clinical_resource_plural_name;
-	global $clinical_resource_plural_name_attr;
-	global $conditions_single_name;
-	global $conditions_single_name_attr;
-	global $conditions_plural_name;
-	global $conditions_plural_name_attr;
-	global $treatments_single_name;
-	global $treatments_single_name_attr;
-	global $treatments_plural_name;
-	global $treatments_plural_name_attr;
 
 	$tax_query = array();
 
