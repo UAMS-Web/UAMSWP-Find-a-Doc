@@ -27,11 +27,13 @@
 $page_id = get_the_ID();
 $page_title = get_the_title(); // Title of Area of Expertise
 $page_title_attr = uamswp_attr_conversion($page_title);
+$page_url = get_permalink();
 $fpage_name = 'Related ' . $expertise_plural_name; // Fake subpage title
 $fpage_name_attr = uamswp_attr_conversion($fpage_name);
 $fpage_title = $expertise_plural_name . ' Related to ' . $page_title; // Fake subpage page title
 $fpage_title_attr = uamswp_attr_conversion($fpage_title);
-$page_url = get_permalink();
+$current_fpage = get_query_var('fpage'); // Fake subpage slug
+$fpage_url = !empty($current_fpage) ? $page_url . user_trailingslashit($current_fpage) : $page_url; // Fake subpage URL
 
 // Area of Expertise Content Type
 $ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
