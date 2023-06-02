@@ -132,6 +132,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	function uamswp_expertise_resource() {
 		global $post;
 		global $page_title;
+		global $page_title_attr;
 		global $show_related_resource_section;
 		global $resources;
 		global $resource_query;

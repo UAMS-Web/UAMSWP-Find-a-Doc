@@ -297,6 +297,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		global $treatments_single_name_attr;
 		global $treatments_plural_name;
 		global $treatments_plural_name_attr;
+		global $page_title_attr;
 
 		$condition_context = 'single-expertise';
 		$condition_heading_related_name = $page_title; // To what is it related?
@@ -315,6 +316,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		global $treatments_cpt_query;
 		global $treatments_plural_name;
 		global $provider_plural_name;
+		global $page_title_attr;
 
 		$treatment_context = 'single-expertise';
 		$treatment_heading_related_name = $page_title; // To what is it related?

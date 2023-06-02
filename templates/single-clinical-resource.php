@@ -399,6 +399,7 @@ function uamswp_resource_video() {
 }
 function uamswp_resource_conditions_cpt() {
 	global $page_title;
+	global $page_title_attr;
 	global $show_conditions_section;
 	global $conditions_cpt_query;
 	global $conditions_plural_name;
@@ -414,6 +415,7 @@ function uamswp_resource_conditions_cpt() {
 }
 function uamswp_resource_treatments_cpt() {
 	global $page_title;
+	global $page_title_attr;
 	global $show_treatments_section;
 	global $treatments_cpt_query;
 	global $treatments_single_name_attr;
@@ -483,6 +485,7 @@ function uamswp_resource_locations() {
 }
 function uamswp_resource_associated() {
 	global $page_title;
+	global $page_title_attr;
 	global $show_related_resource_section;
 	global $resources;
 	global $resource_query;
