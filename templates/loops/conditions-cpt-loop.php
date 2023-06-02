@@ -9,11 +9,9 @@
  * 	$provider_plural_name // System setting for Providers plural item name
  * 	$conditions_single_name_attr // Attribute value friendly version of system setting for Conditions single item name
  * 	$conditions_plural_name // System setting for Conditions plural item name
- * 	$conditions
  * 	$conditions_cpt_query
  * 	$condition_context = 'single-provider', 'single-location', 'single-condition', 'single-treatment', 'single-expertise', 'single-resource'
  * 	$condition_heading_related_name
- * 	$condition_disclaimer = 'true', 'false'
  */
 
 $condition_heading = $conditions_plural_name;
