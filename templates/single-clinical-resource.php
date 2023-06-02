@@ -53,6 +53,7 @@ function uamswp_fad_title($html) {
 }
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
+// Modify SEOPress's standard canonical URL settings
 $syndicated = get_field('clinical_resource_syndicated');
 $syndication_url = get_field('clinical_resource_syndication_url');
 function uamswp_fad_canonical($html) {
@@ -61,8 +62,9 @@ function uamswp_fad_canonical($html) {
 	global $syndication_url; // Defined on the template
 
 	if ( $syndicated && !empty($syndication_url) ) {
-	$html = '<link rel="canonical" href="'.htmlspecialchars(urldecode($syndication_url)).'" />';
+		$html = '<link rel="canonical" href="' . htmlspecialchars(urldecode($syndication_url)) . '" />';
 	}
+
 	return $html;
 }
 add_filter('seopress_titles_canonical','uamswp_fad_canonical');
