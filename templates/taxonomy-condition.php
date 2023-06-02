@@ -30,7 +30,9 @@ else {
 }
 
 function uamswp_keyword_hook_header() {
-	global $keywords;
+	// Bring in variables from outside of the function
+	global $keywords; // Defined on the template
+
 	$keyword_text = '';
 	if( $keywords ): 
 		$i = 1;
@@ -74,8 +76,10 @@ uamswp_fad_archive_conditions();
 
 // Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
-	global $page_title_attr;
-	global $conditions_single_name_attr;
+	// Bring in variables from outside of the function
+	global $page_title_attr; // Defined on the template
+	global $conditions_single_name_attr; // Defined in uamswp_fad_labels_conditions()
+
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$meta_title_chars_max = 60;
 	$meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
@@ -100,7 +104,9 @@ if (empty($excerpt)){
 }
 // Use SeoPress hook for meta description
 function sp_titles_desc($html) {
-	global $excerpt;
+	// Bring in variables from outside of the function
+	global $excerpt; // Defined on the template
+
 	$html = $excerpt;
 	return $html;
 }
@@ -262,7 +268,7 @@ if ($physicians && !empty($physicians)) { $condition_field_classes .= ' has-prov
 			</div>
 		</section>
 		<?php } // endif ?>
-		<?php // Check if any doctors are connected	
+		<?php // Check if any doctors are connected
 			if ($physicians) {
 				$physiciansCount = count($physicians);
 				$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12)
@@ -350,7 +356,7 @@ if ($physicians && !empty($physicians)) { $condition_field_classes .= ' has-prov
 					</div>
 				</div>
 			</section>
-			<?php endif; ?>	
+			<?php endif; ?>
 		<?php
 			include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
 		?>

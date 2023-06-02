@@ -1472,8 +1472,10 @@ if( function_exists('acf_add_local_field_group') ):
 
 add_action( 'rwmb_enqueue_scripts', function ()
 {
-	global $pagenow;
-	global $post_type;
+	// Bring in variables from outside of the function
+	global $pagenow; // WordPress-specific global variable
+	global $post_type; // WordPress-specific global variable
+
 	if (( 'post.php' == $pagenow	) && ('physicians' == $post_type)) {
 		wp_enqueue_script( 'pubmed-update', get_stylesheet_directory_uri() . '/assets/js/mb-pubmed.js', [ 'jquery' ] );
 	}
@@ -1503,7 +1505,9 @@ function physician_save_post( $post_id ) {
 	// Get the ID of the post
 	// $pid = get_the_ID();
 
-	// global $wpdb;
+	// // Bring in variables from outside of the function
+	// global $wpdb; // WordPress-specific global variable
+
 	// $table_name = $wpdb->prefix."uams_physicians";
 
 	// // Check if the ID exists in the custom table
@@ -1551,7 +1555,9 @@ add_action('acf/save_post', 'physician_update_post_excerpt', 20);
 // 	// Get the post ID
 // 	$pid = get_the_ID();
 
-// 	global $wpdb;
+// 	// Bring in variables from outside of the function
+// 	global $wpdb; // WordPress-specific global variable
+
 // 	$table_name = $wpdb->prefix."postmeta";
 
 // 	$ID = $wpdb->get_var("SELECT meta_id FROM $table_name WHERE meta_key='physician_full_name_meta' AND post_id= '$pid'");

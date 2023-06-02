@@ -12,7 +12,8 @@ uamswp_fad_archive_clinical_resource();
 
 // Override theme's method of defining the meta page title
 function uamswp_fad_title($html) {
-	global $clinical_resource_plural_name_attr;
+	// Bring in variables from outside of the function
+	global $clinical_resource_plural_name_attr; // Defined in uamswp_fad_labels_clinical_resource()
 
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$html = $clinical_resource_plural_name_attr . ' | ' . get_bloginfo( "name" );

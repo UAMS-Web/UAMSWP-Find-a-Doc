@@ -1117,7 +1117,9 @@ add_action('rwmb_locations_after_save_post', function( $post_id )
 	// Get the post ID
 	$pid = get_the_ID();
 
-	global $wpdb;
+	// Bring in variables from outside of the function
+	global $wpdb; // WordPress-specific global variable
+
 	$wpdb->update($wpdb->prefix."posts", array(
 				'post_excerpt' => $short_bio,
 			),

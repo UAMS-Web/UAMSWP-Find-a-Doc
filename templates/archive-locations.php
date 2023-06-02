@@ -12,7 +12,8 @@ uamswp_fad_archive_location();
 
 // Override theme's method of defining the meta page title
 function uamswp_fad_title($html) {
-	global $location_plural_name_attr;
+	// Bring in variables from outside of the function
+	global $location_plural_name_attr; // Defined in uamswp_fad_labels_location()
 
 	//you can add here all your conditions as if is_page(), is_category() etc..
 	$html = $location_plural_name_attr . ' | ' . get_bloginfo( "name" );

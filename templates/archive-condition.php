@@ -12,7 +12,9 @@ $template_type = 'default';
 add_filter( 'posts_where', 'title_filter', 10, 2 );
 function title_filter( $where, $query ){
 	// Search for posts with the first letter
-	global $wpdb;
+
+	// Bring in variables from outside of the function
+	global $wpdb; // WordPress-specific global variable
 
 	$starts_with = esc_sql( $query->get( 'starts_with' ) );
 
@@ -43,7 +45,8 @@ if (isset($_GET['alpha'])) {
 
 // Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
-	global $conditions_plural_name_attr;
+	// Bring in variables from outside of the function
+	global $conditions_plural_name_attr; // Defined in uamswp_fad_labels_conditions()
 
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$html = $conditions_plural_name_attr . ' | ' . get_bloginfo( "name" );

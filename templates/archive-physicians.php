@@ -12,7 +12,8 @@ uamswp_fad_archive_provider();
 
 // Override theme's method of defining the meta page title
 function uamswp_fad_title($html) {
-	global $provider_plural_name_attr;
+	// Bring in variables from outside of the function
+	global $provider_plural_name_attr; // Defined in uamswp_fad_labels_provider()
 
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$html = $provider_plural_name_attr . ' | ' . get_bloginfo( "name" );
@@ -31,7 +32,8 @@ if ( isset($_COOKIE['wp_filter_region']) && !isset($_GET['_provider_region']) ) 
 get_header();
 
 function custom_field_excerpt($title) {
-	global $post;
+	// Bring in variables from outside of the function
+	global $post; // WordPress-specific global variable
 
 	$text = get_field($title);
 	if ( '' != $text ) {

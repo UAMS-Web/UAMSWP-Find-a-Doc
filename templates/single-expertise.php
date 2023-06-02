@@ -61,8 +61,10 @@ uamswp_fad_ontology_site_values();
 // Override theme's method of defining the meta page title
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 function uamswp_fad_title($html) { 
-	global $page_title_attr;
-	global $expertise_single_name_attr;
+	// Bring in variables from outside of the function
+	global $page_title_attr; // Defined on the template
+	global $expertise_single_name_attr; // Defined in uamswp_fad_labels_expertise()
+
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$meta_title_chars_max = 60;
 	$meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
@@ -179,7 +181,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 				$cta_heading = $cta['cta_bar_heading'];
 				$cta_body = $cta['cta_bar_body'];
 				$cta_action_type = $cta['cta_bar_action_type'];
-	
+
 				$cta_button_text = '';
 				$cta_button_url = '';
 				$cta_button_target = '';
@@ -192,7 +194,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 					}
 					$cta_button_desc = $cta['cta_bar_button_description'];
 				}
-	
+
 				$cta_phone_prepend = '';
 				$cta_phone = '';
 				$cta_phone_link = '';
@@ -201,14 +203,14 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 					$cta_phone = $cta['cta_bar_phone'];
 					$cta_phone_link = '<a href="tel:' . format_phone_dash( $cta_phone ) . '">' . format_phone_us( $cta_phone ) . '</a>';
 				}
-	
+
 				$cta_layout = 'cta-bar-centered';
 				$cta_size = 'normal';
 				$cta_use_image = false;
 				$cta_image = '';
 				$cta_background_color = 'bg-auto';
 				$cta_btn_color = 'primary';
-	
+
 				$cta_className = '';
 				$cta_className .= ' ' . $cta_layout;
 				$cta_className .= ' ' . $cta_background_color;
@@ -221,7 +223,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 				if ( $cta_action_type == 'none' ) {
 					$cta_className .= ' no-link';
 				}
-	
+
 				echo '<section class="uams-module cta-bar' . $cta_className . '" id="cta-bar-' . $i . '" aria-label="' . $cta_heading . '">
 					<div class="container-fluid">
 						<div class="row">
@@ -266,43 +268,18 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	// Display conditions
 	add_action( 'genesis_after_entry', 'uamswp_expertise_conditions_cpt', 16 );
 	function uamswp_expertise_conditions_cpt() {
-		global $page_title;
-		global $show_conditions_section;
-		global $conditions_cpt_query;
-		
-		global $provider_single_name;
-		global $provider_single_name_attr;
-		global $provider_plural_name;
-		global $provider_plural_name_attr;
-		global $location_single_name;
-		global $location_single_name_attr;
-		global $location_plural_name;
-		global $location_plural_name_attr;
-		global $expertise_single_name;
-		global $expertise_single_name_attr;
-		global $expertise_plural_name;
-		global $expertise_plural_name_attr;
-		global $expertise_archive_headline;
-		global $expertise_archive_headline_attr;
-		global $expertise_archive_intro_text;
-		global $clinical_resource_single_name;
-		global $clinical_resource_single_name_attr;
-		global $clinical_resource_plural_name;
-		global $clinical_resource_plural_name_attr;
-		global $conditions_single_name;
-		global $conditions_single_name_attr;
-		global $conditions_plural_name;
-		global $conditions_plural_name_attr;
-		global $treatments_single_name;
-		global $treatments_single_name_attr;
-		global $treatments_plural_name;
-		global $treatments_plural_name_attr;
-		global $page_title_attr;
+		// Bring in variables from outside of the function
+		global $page_title; // Defined on the template
+		global $page_title_attr; // Defined on the template
+		global $show_conditions_section; // Defined in uamswp_fad_ontology_conditions_query()
+		global $conditions_cpt_query; // Defined in uamswp_fad_ontology_conditions_query()
+		global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
+		global $conditions_plural_name; // Defined in uamswp_fad_labels_conditions()
 
 		$condition_context = 'single-expertise';
 		$condition_heading_related_name = $page_title; // To what is it related?
 		$condition_heading_related_name_attr = $page_title_attr;
-	
+
 		if( $show_conditions_section ) {
 			include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop-list.php' );
 		}
@@ -311,17 +288,18 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	// Display treatments
 	add_action( 'genesis_after_entry', 'uamswp_expertise_treatments_cpt', 18 );
 	function uamswp_expertise_treatments_cpt() {
-		global $page_title;
-		global $show_treatments_section;
-		global $treatments_cpt_query;
-		global $treatments_plural_name;
-		global $provider_plural_name;
-		global $page_title_attr;
+		// Bring in variables from outside of the function
+		global $page_title; // Defined on the template
+		global $page_title_attr; // Defined on the template
+		global $show_treatments_section; // Defined in uamswp_fad_ontology_treatments_query()
+		global $treatments_cpt_query; // Defined in uamswp_fad_ontology_treatments_query()
+		global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
+		global $treatments_plural_name; // Defined in uamswp_fad_labels_treatments()
 
 		$treatment_context = 'single-expertise';
 		$treatment_heading_related_name = $page_title; // To what is it related?
 		$treatment_heading_related_name_attr = $page_title_attr;
-	
+
 		if( $show_treatments_section ) {
 			include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop-list.php' );
 		}

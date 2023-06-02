@@ -269,7 +269,8 @@ if ( !function_exists('partition') ) {
  * @param array	$args	Arguments used to generate the breadcrumbs. Documented in Genesis_Breadcrumbs::get_output().
  */
 // function uamswp_cpt_breadcrumb( $crumb, $args ) {
-// 	global $wp_query;
+// 	// Bring in variables from outside of the function
+// 	global $wp_query; // WordPress-specific global variable
 
 // 	if ( !is_singular( 'expertise' ) ) {
 // 	return $crumb;
@@ -336,8 +337,8 @@ function uamswp_fad_taxonomy_breadcrumbs_crumbs($crumbs) {
 
 // Query custom table values
 function uamswp_custom_table_query($table_name, $field_name, $query_values) {
-	// Declare the global wpdb variable
-	global $wpdb;
+	// Bring in variables from outside of the function
+	global $wpdb; // WordPress-specific global variable
 
 	$custom_table = $wpdb->prefix.$table_name;
 

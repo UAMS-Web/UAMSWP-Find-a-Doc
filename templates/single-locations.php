@@ -273,7 +273,9 @@ $resource_query = new WP_Query( $args );
 
 // Override theme's method of defining the meta description
 function sp_titles_desc($html) {
-	global $excerpt;
+	// Bring in variables from outside of the function
+	global $excerpt; // Defined on the template
+
 	$html = $excerpt;
 	return $html;
 }
@@ -281,14 +283,17 @@ add_filter('seopress_titles_desc', 'sp_titles_desc');
 
 // Override theme's method of defining the meta page title
 $location_city = get_field('location_city', $post_id); // Get the location's city
+$location_city_attr = uamswp_attr_conversion($location_city);
 function uamswp_fad_title($html) { 
-	global $page_title_attr;
-	global $location_city;
+	// Bring in variables from outside of the function
+	global $page_title_attr; // Defined on the template
+	global $location_city_attr; // Defined on the template
+
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$meta_title_chars_max = 60; // Set the maximum number of characters to be used in the <title /> value.
 	$meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" ); // Define the base <title /> value: "[location name] | [site name]"
 	$meta_title_base_chars = strlen( $meta_title_base ); // Count the number of characters in the base <title /> value
-	$meta_title_enhanced_addition = ' | ' . $location_city; // Define a string with the location's city that may be injected into the <title /> value
+	$meta_title_enhanced_addition = ' | ' . $location_city_attr; // Define a string with the location's city that may be injected into the <title /> value
 	$meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" ); // Define the enhanced <title /> value: "[location name] | [city] | [site name]"
 	$meta_title_enhanced_chars = strlen( $meta_title_enhanced ); // Count the number of characters in the enhanced <title /> value
 	if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) { // If the enhanced <title /> value is less than or equal to the maximum number of characters to be used in the <title /> value...
@@ -925,7 +930,7 @@ while ( have_posts() ) : the_post(); ?>
 
 								$order = array();
 								// populate order
-								foreach( $holidayhours as $i => $row ) {	
+								foreach( $holidayhours as $i => $row ) {
 									$order[ $i ] = $row['date'];
 								}
 

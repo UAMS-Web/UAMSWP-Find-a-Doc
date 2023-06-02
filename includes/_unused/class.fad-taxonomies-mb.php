@@ -6,7 +6,7 @@
 
 //register_activation_hook( __FILE__, 'prefix_create_table' );
 
-global $wpdb;
+global $wpdb; // WordPress-specific global variable
 add_filter( 'rwmb_meta_boxes', 'uams_taxonomies_register_meta_boxes' );
 
 function uams_taxonomies_register_meta_boxes( $meta_boxes ) {

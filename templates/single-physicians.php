@@ -152,6 +152,7 @@ if ( $expertises ) {
 	foreach ( $expertises as $expertise ) {
 		if ( get_post_status ( $expertise ) == 'publish' ) {
 			$expertise_primary_name = get_the_title($expertise);
+			$expertise_primary_name_attr = uamswp_attr_conversion($expertise_primary_name);
 			break;
 		}
 	}
@@ -191,7 +192,9 @@ $schema_description = $excerpt; // Used for Schema Data. Should ALWAYS have a va
 
 // Override theme's method of defining the meta description
 function sp_titles_desc($html) {
-	global $excerpt;
+	// Bring in variables from outside of the function
+	global $excerpt; // Defined on the template
+
 	$html = $excerpt;
 	return $html;
 }
@@ -199,10 +202,11 @@ add_filter('seopress_titles_desc', 'sp_titles_desc');
 
 // Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
-	global $full_name_attr;
-	global $phys_title_name_attr;
-	global $primary_appointment_city_attr;
-	global $expertise_primary_name;
+	// Bring in variables from outside of the function
+	global $full_name_attr; // Defined on the template
+	global $phys_title_name_attr; // Defined on the template
+	global $primary_appointment_city_attr; // Defined on the template
+	global $expertise_primary_name_attr; // Defined on the template
 
 	$meta_title_chars_max = 60; // The recommended length for meta titles is 50-60 characters. Sets the max to 60.
 	$meta_title_separator = ' | '; // Characters separating components of the meta title
@@ -238,14 +242,18 @@ function uamswp_fad_title($html) {
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 function be_remove_title_from_single_crumb( $crumb, $args ) { // Because BE is the man
-	global $full_name;
+	// Bring in variables from outside of the function
+	global $full_name; // Defined on the template
+
 	return substr( $crumb, 0, strrpos( $crumb, $args['sep'] ) ) . $args['sep'] . $full_name;
 }
 add_filter( 'genesis_single_crumb', 'be_remove_title_from_single_crumb', 10, 2 );
 
 // SEOPress Breadcrumbs Fix
 function sp_change_title_from_provider_crumb( $crumbs ) { // SEOPress
-	global $full_name;
+	// Bring in variables from outside of the function
+	global $full_name; // Defined on the template
+
 	$crumb = array_pop($crumbs);
 	$provider_name = array($full_name, get_permalink());
 	array_push($crumbs, $provider_name);
@@ -686,7 +694,7 @@ while ( have_posts() ) : the_post();
 							<dd>No</dd>
 						<?php } // endif
 					} // endif ?>
-					<?php // Display if they will provide second opinions	
+					<?php // Display if they will provide second opinions
 					if ($second_opinion) { ?>
 						<dt>Provides Second Opinion</dt>
 						<dd>Yes</dd>
@@ -937,7 +945,7 @@ while ( have_posts() ) : the_post();
 				</div>
 			</section>
 		<?php } // endif
-		
+
 		// Construct UAMS Health Talk podcast section
 		uamswp_fad_podcast();
 
@@ -1334,7 +1342,7 @@ while ( have_posts() ) : the_post();
 										// grab the profile data
 										var review = data.reviewMeta;
 										if(review){
-											// setup the variables that the template will need	
+											// setup the variables that the template will need
 											var templateData = {
 												moreUrl:	review.moreUrl
 											};

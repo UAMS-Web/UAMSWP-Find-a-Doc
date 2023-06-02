@@ -73,8 +73,9 @@ add_action('wp_head','uamswp_keyword_hook_header');
 
 // Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
-	global $page_title_attr;
-	global $treatments_single_name_attr;
+	// Bring in variables from outside of the function
+	global $page_title_attr; // Defined on the template
+	global $treatments_single_name_attr; // Defined in uamswp_fad_labels_treatments()
 
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$meta_title_chars_max = 60;
@@ -102,7 +103,9 @@ if (empty($excerpt)){
 }
 // Use SeoPress hook for meta description
 function sp_titles_desc($html) {
-	global $excerpt;
+	// Bring in variables from outside of the function
+	global $excerpt; // Defined on the template
+
 	$html = $excerpt;
 	return $html;
 }
@@ -265,7 +268,7 @@ if ($physicians && !empty($physicians)) { $treatment_field_classes .= ' has-prov
 				</div>
 			</section>
 		<?php } // endif ?>
-		<?php // Check if any doctors are connected	
+		<?php // Check if any doctors are connected
 		$physiciansCount = 0;
 		if ($physicians) {
 			$physiciansCount = count($physicians);
@@ -354,7 +357,7 @@ if ($physicians && !empty($physicians)) { $treatment_field_classes .= ' has-prov
 				</div>
 			</div>
 		</section>
-		<?php endif; ?>	
+		<?php endif; ?>
 		<?php
 		include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
 		?>

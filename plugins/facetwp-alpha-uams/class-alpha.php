@@ -12,7 +12,8 @@ class FacetWP_Facet_Alpha_Addon extends FacetWP_Facet
      * Generate the facet HTML
      */
     function render( $params ) {
-        global $wpdb;
+		// Bring in variables from outside of the function
+		global $wpdb; // WordPress-specific global variable
 
         $output = '';
         $facet = $params['facet'];
@@ -115,7 +116,8 @@ class FacetWP_Facet_Alpha_Addon extends FacetWP_Facet
      * Filter the query based on selected values
      */
     function filter_posts( $params ) {
-        global $wpdb;
+		// Bring in variables from outside of the function
+		global $wpdb; // WordPress-specific global variable
 
         $facet = $params['facet'];
         $selected_values = $params['selected_values'];

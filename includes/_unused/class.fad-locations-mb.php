@@ -6,13 +6,14 @@
 
 //register_activation_hook( __FILE__, 'prefix_create_table' );
 
-global $wpdb;
+global $wpdb; // WordPress-specific global variable
 //$table_name = $wpdb->prefix.'uams_locations';
 if($wpdb->get_var("SHOW TABLES LIKE '{$wpdb->prefix}uams_locations'") != "{$wpdb->prefix}uams_locations") {
 	add_action( 'init', 'location_create_table' );
 	function location_create_table() {
 
-			global $wpdb;
+			// Bring in variables from outside of the function
+			global $wpdb; // WordPress-specific global variable
 
 			if ( ! class_exists( 'MB_Custom_Table_API' ) ) {
 					return;
@@ -60,7 +61,8 @@ if($wpdb->get_var("SHOW TABLES LIKE '{$wpdb->prefix}uams_locations'") != "{$wpdb
 // 	add_action( 'init', 'location_create_table' );
 // 	function location_create_table() {
 
-// 			global $wpdb;
+// 			// Bring in variables from outside of the function
+// 			global $wpdb; // WordPress-specific global variable
 
 // 			if ( ! class_exists( 'MB_Custom_Table_API' ) ) {
 // 					return;
@@ -105,7 +107,8 @@ add_filter( 'rwmb_meta_boxes', 'uams_locations_register_meta_boxes' );
 
 function uams_locations_register_meta_boxes( $meta_boxes ) {
 
-		global $wpdb;
+		// Bring in variables from outside of the function
+		global $wpdb; // WordPress-specific global variable
 
 		$location_excerpt = '';
 		// Get the current post content and set as the default value for the wysiwyg field.
@@ -810,7 +813,9 @@ add_action('rwmb_locations_after_save_post', function( $post_id )
 	// Get the post ID
 	$pid = get_the_ID();
 
-	global $wpdb;
+	// Bring in variables from outside of the function
+	global $wpdb; // WordPress-specific global variable
+
 	$wpdb->update($wpdb->prefix."posts", array(
 				'post_excerpt' => $short_bio,
 			),

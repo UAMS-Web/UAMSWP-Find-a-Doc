@@ -130,15 +130,16 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	// Display ontology page content
 	add_action( 'genesis_entry_content', 'uamswp_expertise_physicians' );
 	function uamswp_expertise_physicians() {
-		global $show_providers_section;
+		// Bring in variables from outside of the function
+		global $show_providers_section; // Defined in uamswp_fad_ontology_providers_query()
 		//global $postsCountClass;
-		global $physicians_query;
+		global $physicians_query; // Defined in uamswp_fad_ontology_providers_query()
 		//global $postsPerPage;
-		global $physicians;
-		global $provider_ids;
-	
+		global $physicians; // Defined in uamswp_fad_ontology_providers_query()
+		global $provider_ids; // Defined in uamswp_fad_ontology_providers_query()
+
 		if($show_providers_section) {
-	
+
 			// Get available regions - All available, since no titles set on initial load
 			$region_IDs = array();
 			while ($physicians_query->have_posts()) : $physicians_query->the_post();
@@ -150,15 +151,15 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 			foreach ($region_IDs as $region_ID){
 				$region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
 			}
-	
+
 			// if cookie is set, run modified physician query
-			if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {		
-	
+			if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+
 				$provider_region = '';
 				if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
 					$provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
 				}
-	
+
 				$tax_query = array();
 				if(!empty($provider_region)) {
 					$tax_query[] = array(

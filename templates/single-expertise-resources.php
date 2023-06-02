@@ -130,15 +130,27 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	// Display ontology page content
 	add_action( 'genesis_entry_content', 'uamswp_expertise_resource', 14 );
 	function uamswp_expertise_resource() {
-		global $post;
-		global $page_title;
-		global $page_title_attr;
-		global $show_related_resource_section;
-		global $resources;
-		global $resource_query;
-		global $resource_postsPerPage;
-		global $clinical_resource_plural_name;
-		
+		// Bring in variables from outside of the function
+		global $post; // WordPress-specific global variable
+		global $page_title; // Defined on the template
+		global $page_title_attr; // Defined on the template
+		global $show_related_resource_section; // Defined in uamswp_fad_ontology_resources_query()
+		global $resources; // Defined in uamswp_fad_ontology_resources_query()
+		global $resource_query; // Defined in uamswp_fad_ontology_resources_query()
+		global $resource_postsPerPage; // Defined in uamswp_fad_ontology_resources_query()
+		global $provider_single_name; // Defined in uamswp_fad_labels_provider()
+		global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
+		global $location_single_name; // Defined in uamswp_fad_labels_location()
+		global $location_plural_name; // Defined in uamswp_fad_labels_location()
+		global $expertise_single_name; // Defined in uamswp_fad_labels_expertise()
+		global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
+		global $clinical_resource_single_name; // Defined in uamswp_fad_labels_clinical_resource()
+		global $clinical_resource_plural_name; // Defined in uamswp_fad_labels_clinical_resource()
+		global $conditions_single_name; // Defined in uamswp_fad_labels_conditions()
+		global $conditions_plural_name; // Defined in uamswp_fad_labels_conditions()
+		global $treatments_single_name; // Defined in uamswp_fad_labels_treatments()
+		global $treatments_plural_name; // Defined in uamswp_fad_labels_treatments()
+
 		$resource_heading_related_pre = true; // "Related Resources"
 		$resource_heading_related_post = false; // "Resources Related to __"
 		$resource_heading_related_name = $page_title; // To what is it related?

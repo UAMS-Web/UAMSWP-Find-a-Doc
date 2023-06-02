@@ -6,14 +6,15 @@
 
 //register_activation_hook( __FILE__, 'prefix_create_table' );
 
-global $wpdb;
+global $wpdb; // WordPress-specific global variable
 
 $table_name = $wpdb->prefix.'uams_physicians';
 if($wpdb->get_var("SHOW TABLES LIKE '{$wpdb->prefix}uams_physicians'") != "{$wpdb->prefix}uams_physicians") {
 	add_action( 'init', 'physicians_create_table' );
 	function physicians_create_table() {
 
-		global $wpdb;
+		// Bring in variables from outside of the function
+		global $wpdb; // WordPress-specific global variable
 
 		if ( ! class_exists( 'MB_Custom_Table_API' ) ) {
 				return;
@@ -75,7 +76,8 @@ add_filter( 'rwmb_meta_boxes', 'uams_physicians_register_meta_boxes' );
 
 function uams_physicians_register_meta_boxes( $meta_boxes ) {
 
-	global $wpdb;
+	// Bring in variables from outside of the function
+	global $wpdb; // WordPress-specific global variable
 
 	$meta_boxes[] = array (
 		'id' => 'physicians',
@@ -885,8 +887,10 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
 
 add_action( 'rwmb_enqueue_scripts', function ()
 {
-	global $pagenow;
-	global $post_type;
+	// Bring in variables from outside of the function
+	global $pagenow; // WordPress-specific global variable
+	global $post_type; // WordPress-specific global variable
+
 	if (( 'post.php' == $pagenow	) && ('physicians' == $post_type)) {
 		wp_enqueue_script( 'pubmed-update', get_stylesheet_directory_uri() . '/assets/js/mb-pubmed.js', [ 'jquery' ] );
 	}
@@ -906,7 +910,9 @@ add_action('rwmb_physicians_before_save_post', function( $post_id )
 	// Get the ID of the post
 	$pid = get_the_ID();
 
-	global $wpdb;
+	// Bring in variables from outside of the function
+	global $wpdb; // WordPress-specific global variable
+
 	$table_name = $wpdb->prefix."uams_physicians";
 
 	// Check if the ID exists in the custom table
@@ -937,7 +943,9 @@ add_action('rwmb_physicians_after_save_post', function( $post_id )
 	// Get the post ID
 	$pid = get_the_ID();
 
-	global $wpdb;
+	// Bring in variables from outside of the function
+	global $wpdb; // WordPress-specific global variable
+
 	$table_name = $wpdb->prefix."postmeta";
 
 	$ID = $wpdb->get_var("SELECT meta_id FROM $table_name WHERE meta_key='physician_full_name_meta' AND post_id= '$pid'");

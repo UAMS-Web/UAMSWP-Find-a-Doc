@@ -6,7 +6,9 @@
 $keywords = get_field('condition_alternate');
 
 function uamswp_keyword_hook_header() {
-	global $keywords;
+	// Bring in variables from outside of the function
+	global $keywords; // Defined on the template
+
 	$keyword_text = '';
 	if( $keywords ): 
 		$i = 1;
@@ -50,8 +52,10 @@ uamswp_fad_archive_conditions();
 
 // Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
-	global $page_title_attr;
-	global $conditions_single_name_attr;
+	// Bring in variables from outside of the function
+	global $page_title_attr; // Defined on the template
+	global $conditions_single_name_attr; // Defined in uamswp_fad_labels_conditions()
+
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$meta_title_chars_max = 60;
 	$meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
@@ -79,7 +83,9 @@ if (empty($excerpt)){
 }
 // Use SeoPress hook for meta description
 function sp_titles_desc($html) {
-	global $excerpt;
+	// Bring in variables from outside of the function
+	global $excerpt; // Defined on the template
+
 	$html = $excerpt;
 	return $html;
 }
@@ -174,7 +180,7 @@ if ( $location_valid ) {
 	}
 
 	// if cookie is set, run modified physician query
-	if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {		
+	if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
 
 		$location_region = '';
 		if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
@@ -296,7 +302,7 @@ $jump_link_count = 0;
 		$show_treatments_section = false;
 	}
 
-	// Check if Providers section should be displayed	
+	// Check if Providers section should be displayed
 	if ($physicians) {
 		$args = (array(
 			'post_type' => "provider",
@@ -618,7 +624,7 @@ $jump_link_count = 0;
 			}
 
 			// if cookie is set, run modified physician query
-			if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {		
+			if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
 
 				$provider_region = '';
 				if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {

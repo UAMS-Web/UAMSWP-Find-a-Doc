@@ -10,7 +10,9 @@ $template_type = 'default';
 add_filter( 'terms_clauses', 'uamswp_terms_clauses', 10, 3 );
 function uamswp_terms_clauses( $clauses, $taxonomies, $args ){
 	// Search for terms with the first letter
-	global $wpdb;
+
+	// Bring in variables from outside of the function
+	global $wpdb; // WordPress-specific global variable
 
 	if( !isset( $args['__first_letter'] ) ){
 		return $clauses;
@@ -34,7 +36,8 @@ $conditions_archive_link = get_post_type_archive_link( get_query_var('post_type'
 
 // Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
-	global $conditions_plural_name_attr;
+	// Bring in variables from outside of the function
+	global $conditions_plural_name_attr; // Defined in uamswp_fad_labels_conditions()
 
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$html = $conditions_plural_name_attr . ' | ' . get_bloginfo( "name" );

@@ -10,7 +10,9 @@ $template_type = 'default';
 add_filter( 'terms_clauses', 'uamswp_terms_clauses', 10, 3 );
 function uamswp_terms_clauses( $clauses, $taxonomies, $args ){
 	// Search for terms with the first letter
-	global $wpdb;
+
+	// Bring in variables from outside of the function
+	global $wpdb; // WordPress-specific global variable
 
 	if( !isset( $args['__first_letter'] ) ){
 		return $clauses;
@@ -34,10 +36,11 @@ uamswp_fad_archive_treatments();
 
 // Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
-	global $treatments_plural_name;
+	// Bring in variables from outside of the function
+	global $treatments_plural_name_attr; // Defined in uamswp_fad_labels_treatments()
 
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
-	$html = $treatments_plural_name . ' | ' . get_bloginfo( "name" );
+	$html = $treatments_plural_name_attr . ' | ' . get_bloginfo( "name" );
 	return $html;
 }
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);

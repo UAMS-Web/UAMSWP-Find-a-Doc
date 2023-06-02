@@ -42,7 +42,9 @@ remove_filter('wp_head', 'rel_canonical');
 add_filter('wp_head', 'fsp_rel_canonical');
 function fsp_rel_canonical()
 {
-	global $current_fp, $wp_the_query;
+	// Bring in variables from outside of the function
+	global $current_fp;
+	global $wp_the_query; // WordPress-specific global variable
 
 	if (!is_singular())
 		return;

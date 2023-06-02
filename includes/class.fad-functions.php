@@ -1008,9 +1008,9 @@ add_action('wp_ajax_nopriv_location_ajax_filter', 'location_ajax_filter_callback
 add_action('wp_ajax_location_ajax_filter', 'location_ajax_filter_callback');
 
 function location_ajax_filter_callback() {
-	global $location_single_name;
-	global $location_single_name_attr;
-	global $location_plural_name;
+	global $location_single_name; // Typically defined in uamswp_fad_labels_location()
+	global $location_single_name_attr; // Typically defined in uamswp_fad_labels_location()
+	global $location_plural_name; // Typically defined in uamswp_fad_labels_location()
 
 	$tax_query = array();
 
@@ -1098,7 +1098,7 @@ function uamswp_add_trench(){
 		if ( isset($_GET['_filter_region']) ) {
 			$trenchQS = $_GET['_filter_region'];
 		}
-		if ((isset($trench) && $trench) || $trenchQS){	
+		if ((isset($trench) && $trench) || $trenchQS){
 			$region = $trench->slug ? $trench->slug : htmlspecialchars($trenchQS);
 			?>
 			<script type="text/javascript">
@@ -1204,13 +1204,13 @@ function uamswp_attr_conversion($input)
 
 // Get site header and site nav values for ontology subsections
 function uamswp_fad_ontology_site_values() {
-	// Bring in variables from outside the function
-	global $page_id;
-	global $page_title;
-	global $page_url;
-	global $ontology_type;
+	// Bring in variables from outside of the function
+	global $page_id; // Typically defined on the template
+	global $page_title; // Typically defined on the template
+	global $page_url; // Typically defined on the template
+	global $ontology_type; // Typically defined on the template
 
-	// Send variables out from inside the function
+	// Make variables available outside of the function
 	global $site_nav_id;
 	global $navbar_subbrand_title;
 	global $navbar_subbrand_title_attr;
@@ -1364,23 +1364,26 @@ function uamswp_fad_post_title() {
 		// The minimum dimensions for Graphic style are 992x806
 		// $entry_title_image_mobile = '';
 
-	global $entry_header_style;
-	global $entry_title_text;
-	global $entry_title_text_supertitle;
-	global $entry_title_text_subtitle;
-	global $entry_title_text_body;
-	global $entry_title_image_desktop;
-	global $entry_title_image_mobile;
+	// Bring in variables from outside of the function
+	global $entry_header_style; // Typically defined on the template
+	global $entry_title_text; // Typically defined on the template
+	global $entry_title_text_supertitle; // Typically defined on the template
+	global $entry_title_text_subtitle; // Typically defined on the template
+	global $entry_title_text_body; // Typically defined on the template
+	global $entry_title_image_desktop; // Typically defined on the template
+	global $entry_title_image_mobile; // Typically defined on the template
 
 	include( UAMS_FAD_PATH . '/templates/entry-title-' . $entry_header_style . '.php');
 }
 
 // Construct meta title for fake subpages
 function uamswp_fad_fpage_title($html) { 
-	global $page_title;
-	global $fpage_name;
+	// Bring in variables from outside of the function
+	global $page_title_attr; // Typically defined on the template
+	global $fpage_name_attr; // Typically defined on the template
+
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
-	$html = $fpage_name . ' | ' . $page_title . ' | ' . get_bloginfo( "name" );
+	$html = $fpage_name_attr . ' | ' . $page_title_attr . ' | ' . get_bloginfo( "name" );
 	return $html;
 }
 
@@ -1388,10 +1391,13 @@ function uamswp_fad_fpage_title($html) {
 
 	// Query for whether associated providers content section should be displayed on ontology pages/subsections
 	function uamswp_fad_ontology_providers_query() {
+		// Get variables from outside of the function
+		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
+		global $ontology_type; // Typically defined on the template
+
+		// Make variables available outside of the function
 		global $physicians;
-		global $site_nav_id;
 		global $physicians_query;
-		global $ontology_type;
 		global $show_providers_section;
 		global $provider_ids;
 
@@ -1422,10 +1428,13 @@ function uamswp_fad_fpage_title($html) {
 
 	// Query for whether associated locations content section should be displayed on ontology pages/subsections
 	function uamswp_fad_ontology_locations_query() {
+		// Bring in variables from outside of the function
+		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
+		global $ontology_type; // Typically defined on the template
+
+		// Make variables available outside of the function
 		global $locations;
-		global $site_nav_id;
 		global $location_query;
-		global $ontology_type;
 		global $show_locations_section;
 
 		$locations = get_field('location_expertise', $site_nav_id);
@@ -1453,8 +1462,11 @@ function uamswp_fad_fpage_title($html) {
 
 	// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
 	function uamswp_fad_ontology_descendants_query() {
+		// Bring in variables from outside of the function
+		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
+
+		// Make variables available outside of the function
 		global $child_pages;
-		global $site_nav_id;
 		global $childnav;
 		global $children;
 		global $show_child_aoe_section;
@@ -1472,7 +1484,7 @@ function uamswp_fad_fpage_title($html) {
 				} elseif( !isset($type) || '1' == $type ) {
 					$children = true;
 				} else {
-					$childnav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-'. $child_page->ID .' nav-item active"><a title="'. $child_page->post_title .'" href="'. get_permalink( $child_page->ID ) .'" class="nav-link"><span itemprop="name">'. $child_page->post_title .'</span></a></li>';			
+					$childnav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-'. $child_page->ID .' nav-item active"><a title="'. $child_page->post_title .'" href="'. get_permalink( $child_page->ID ) .'" class="nav-link"><span itemprop="name">'. $child_page->post_title .'</span></a></li>';
 				}
 			}
 			$show_child_aoe_section = $children ? true : false;
@@ -1482,10 +1494,13 @@ function uamswp_fad_fpage_title($html) {
 
 	// Query for whether related ontology items (of the same post type) content section should be displayed on ontology pages/subsections
 	function uamswp_fad_ontology_related_query() {
+		// Bring in variables from outside of the function
+		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
+		global $ontology_type; // Typically defined on the template
+
+		// Make variables available outside of the function
 		global $expertises;
-		global $site_nav_id;
 		global $expertise_query;
-		global $ontology_type;
 		global $show_related_aoe_section;
 
 		$expertises = get_field('expertise_associated', $site_nav_id);
@@ -1507,12 +1522,15 @@ function uamswp_fad_fpage_title($html) {
 
 	// Query for whether associated clinical resources content section should be displayed on ontology pages/subsections
 	function uamswp_fad_ontology_resources_query() {
-		global $site_nav_id;
+		// Bring in variables from outside of the function
+		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
+		global $ontology_type; // Typically defined on the template
+
+		// Make variables available outside of the function
 		global $resources;
 		global $resource_postsPerPage;
 		global $resource_more;
 		global $resource_query;
-		global $ontology_type;
 		global $show_related_resource_section;
 
 		$resources = get_field('expertise_clinical_resources', $site_nav_id);
@@ -1527,7 +1545,7 @@ function uamswp_fad_fpage_title($html) {
 			'post__in'	=> $resources
 		));
 		$resource_query = new WP_Query( $args );
-		
+
 		// Check if Clinical Resources section should be displayed
 		if( ( $resources && $resource_query->have_posts() ) ) {
 			$show_related_resource_section = true;
@@ -1538,10 +1556,13 @@ function uamswp_fad_fpage_title($html) {
 
 	// Query for whether associated conditions content section should be displayed on ontology pages/subsections
 	function uamswp_fad_ontology_conditions_query() {
+		// Bring in variables from outside of the function
+		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
+		global $ontology_type; // Typically defined on the template
+
+		// Make variables available outside of the function
 		global $conditions_cpt;
-		global $site_nav_id;
 		global $conditions_cpt_query;
-		global $ontology_type;
 		global $show_conditions_section;
 
 		// load all 'conditions' terms for the post
@@ -1565,12 +1586,15 @@ function uamswp_fad_fpage_title($html) {
 
 	// Query for whether associated treatments content section should be displayed on ontology pages/subsections
 	function uamswp_fad_ontology_treatments_query() {
+		// Bring in variables from outside of the function
+		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
+		global $ontology_type; // Typically defined on the template
+
+		// Make variables available outside of the function
 		global $treatments_cpt;
-		global $site_nav_id;
 		global $treatments_cpt_query;
-		global $ontology_type;
 		global $show_treatments_section;
-		
+
 		$treatments_cpt = get_field('expertise_treatments_cpt', $site_nav_id);
 		// Treatments CPT
 		$args = (array(
@@ -1591,40 +1615,43 @@ function uamswp_fad_fpage_title($html) {
 
 // Construct ontology subsection primary navigation
 function uamswp_fad_ontology_nav_menu() {
-	global $site_nav_id;
-	global $show_providers_section;
-	global $show_locations_section;
-	global $show_child_aoe_section;
-	global $show_related_aoe_section;
-	global $show_related_resource_section;
-	global $child_pages;
-	global $show_child_content_nav;
-	global $childnav;
-	global $provider_plural_name;
-	global $provider_plural_name_attr;
-	global $location_plural_name;
-	global $location_plural_name_attr;
-	global $expertise_plural_name;
-	global $expertise_plural_name_attr;
-	global $clinical_resource_plural_name;
-	global $clinical_resource_plural_name_attr;
+	// Bring in variables from outside of the function
+	global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
+	global $show_providers_section; // Typically defined in uamswp_fad_ontology_providers_query()
+	global $show_locations_section; // Typically defined in uamswp_fad_ontology_locations_query()
+	global $show_related_aoe_section; // Typically defined in uamswp_fad_ontology_related_query()
+	global $show_related_resource_section; // Typically defined in uamswp_fad_ontology_resources_query()
+	global $show_child_aoe_section; // Typically defined in uamswp_fad_ontology_descendants_query()
+	global $child_pages; // Typically defined in uamswp_fad_ontology_descendants_query()
+	global $show_child_content_nav; // Typically defined in uamswp_fad_ontology_descendants_query()
+	global $childnav; // Typically defined in uamswp_fad_ontology_descendants_query()
+	global $provider_plural_name; // Typically defined in uamswp_fad_labels_provider()
+	global $provider_plural_name_attr; // Typically defined in uamswp_fad_labels_provider()
+	global $location_plural_name; // Typically defined in uamswp_fad_labels_location()
+	global $location_plural_name_attr; // Typically defined in uamswp_fad_labels_location()
+	global $expertise_plural_name; // Typically defined in uamswp_fad_labels_expertise()
+	global $expertise_plural_name_attr; // Typically defined in uamswp_fad_labels_expertise()
+	global $clinical_resource_plural_name; // Typically defined in uamswp_fad_labels_clinical_resource()
+	global $clinical_resource_plural_name_attr; // Typically defined in uamswp_fad_labels_clinical_resource()
 
 	include( UAMS_FAD_PATH . '/templates/single-expertise-nav.php');
 }
 
 // Construct ontology subsection site header
 function uamswp_fad_ontology_header() {
-	global $navbar_subbrand_title;
-	global $navbar_subbrand_title_url;
-	global $navbar_subbrand_parent;
-	global $navbar_subbrand_parent_url;
+	// Bring in variables from outside of the function
+	global $navbar_subbrand_title; // Typically defined in uamswp_fad_ontology_site_values()
+	global $navbar_subbrand_title_url; // Typically defined in uamswp_fad_ontology_site_values()
+	global $navbar_subbrand_parent; // Typically defined in uamswp_fad_ontology_site_values()
+	global $navbar_subbrand_parent_url; // Typically defined in uamswp_fad_ontology_site_values()
 
 	include( UAMS_FAD_PATH . '/templates/single-expertise-header.php');
 }
 
 // Construct ontology subsection meta keywords element
 function uamswp_expertise_header_metadata() { 
-	global $keywords;
+	// Bring in variables from outside of the function
+	global $keywords; // Typically defined on the template
 
 	if( $keywords ): 
 		$i = 1;
@@ -1642,8 +1669,9 @@ function uamswp_expertise_header_metadata() {
 
 // Construct ontology subsection appointment information section
 function uamswp_fad_ontology_appointment() {
-	global $show_appointment_section;
-	global $location_single_name;
+	// Bring in variables from outside of the function
+	global $location_single_name; // Typically defined in uamswp_fad_labels_location()
+	global $show_appointment_section; // Typically defined on the template
 
 	if ( $show_appointment_section ) {
 		if ( get_field('location_expertise') ) {
@@ -1668,7 +1696,8 @@ function uamswp_fad_ontology_appointment() {
 
 // Add fake subpages to breadcrumbs
 function uamswp_fad_fpage_breadcrumbs($crumbs) {
-	global $fpage_name;
+	// Bring in variables from outside of the function
+	global $fpage_name; // Typically defined on the template
 
 	$crumbs[] = array($fpage_name, '');
 	return $crumbs;
@@ -1676,7 +1705,8 @@ function uamswp_fad_fpage_breadcrumbs($crumbs) {
 
 // Add page template class to body element's classes
 function uamswp_page_body_class( $classes ) {
-	global $template_type; // Expected values: 'default', 'page_landing' or 'marketing'
+	// Bring in variables from outside of the function
+	global $template_type; // Typically defined on the template // Expected values: 'default', 'page_landing' or 'marketing'
 
 	$classes[] = 'page-template-' . $template_type;
 	return $classes;
@@ -1690,7 +1720,10 @@ function uamswp_add_entry_class( $attributes ) {
 
 // Check if UAMS Health Talk podcast section should be displayed
 function uamswp_fad_podcast_query() {
-	global $podcast_name;
+	// Bring in variables from outside of the function
+	global $podcast_name; // Typically defined on the template
+
+	// Make variables available outside of the function
 	global $show_podcast_section;
 
 	// Check if podcast section should be displayed
@@ -1703,11 +1736,12 @@ function uamswp_fad_podcast_query() {
 
 // Construct UAMS Health Talk podcast section
 function uamswp_fad_podcast() {
-	global $podcast_name;
-	global $podcast_subject;
-	global $show_podcast_section;
-	global $podcast_filter; // Expected values: 'tag' or 'doctor'
-	global $provider_plural_name;
+	// Bring in variables from outside of the function
+	global $podcast_name; // Typically defined on the template
+	global $podcast_subject; // Typically defined on the template
+	global $show_podcast_section; // Typically defined in uamswp_fad_podcast_query()
+	global $podcast_filter; // Typically defined on the template // Expected values: 'tag' or 'doctor'
+	global $provider_plural_name; // Typically defined in uamswp_fad_labels_provider()
 
 	if ( $show_podcast_section ) {
 		if ( $podcast_filter == 'tag' ) {
@@ -1755,6 +1789,7 @@ function uamswp_fad_podcast() {
 
 	// Get system settings for provider labels
 	function uamswp_fad_labels_provider() {
+		// Make variables available outside of the function
 		global $provider_single_name;
 		global $provider_single_name_attr;
 		global $provider_plural_name;
@@ -1768,6 +1803,7 @@ function uamswp_fad_podcast() {
 
 	// Get system settings for provider archive page text
 	function uamswp_fad_archive_provider() {
+		// Make variables available outside of the function
 		global $provider_archive_headline;
 		global $provider_archive_headline_attr;
 
@@ -1777,6 +1813,7 @@ function uamswp_fad_podcast() {
 
 	// Get system settings for location labels
 	function uamswp_fad_labels_location() {
+		// Make variables available outside of the function
 		global $location_single_name;
 		global $location_single_name_attr;
 		global $location_plural_name;
@@ -1790,6 +1827,7 @@ function uamswp_fad_podcast() {
 
 	// Get system settings for location archive page text
 	function uamswp_fad_archive_location() {
+		// Make variables available outside of the function
 		global $location_archive_headline;
 		global $location_archive_headline_attr;
 
@@ -1799,6 +1837,7 @@ function uamswp_fad_podcast() {
 
 	// Get system settings for area of expertise labels
 	function uamswp_fad_labels_expertise() {
+		// Make variables available outside of the function
 		global $expertise_single_name;
 		global $expertise_single_name_attr;
 		global $expertise_plural_name;
@@ -1812,6 +1851,7 @@ function uamswp_fad_podcast() {
 
 	// Get system settings for area of expertise archive page text
 	function uamswp_fad_archive_expertise() {
+		// Make variables available outside of the function
 		global $expertise_archive_headline;
 		global $expertise_archive_headline_attr;
 		global $expertise_archive_intro_text;
@@ -1823,6 +1863,7 @@ function uamswp_fad_podcast() {
 
 	// Get system settings for clinical resource labels
 	function uamswp_fad_labels_clinical_resource() {
+		// Make variables available outside of the function
 		global $clinical_resource_single_name;
 		global $clinical_resource_single_name_attr;
 		global $clinical_resource_plural_name;
@@ -1836,6 +1877,7 @@ function uamswp_fad_podcast() {
 
 	// Get system settings for clinical resource archive page text
 	function uamswp_fad_archive_clinical_resource() {
+		// Make variables available outside of the function
 		global $clinical_resource_archive_headline;
 		global $clinical_resource_archive_headline_attr;
 
@@ -1845,6 +1887,7 @@ function uamswp_fad_podcast() {
 
 	// Get system settings for combined conditions and treatments labels
 	function uamswp_fad_labels_conditions_treatments() {
+		// Make variables available outside of the function
 		global $conditions_treatments_single_name;
 		global $conditions_treatments_single_name_attr;
 		global $conditions_treatments_plural_name;
@@ -1858,6 +1901,7 @@ function uamswp_fad_podcast() {
 
 	// Get system settings for condition labels
 	function uamswp_fad_labels_conditions() {
+		// Make variables available outside of the function
 		global $conditions_single_name;
 		global $conditions_single_name_attr;
 		global $conditions_plural_name;
@@ -1871,6 +1915,7 @@ function uamswp_fad_podcast() {
 
 	// Get system settings for condition archive page text
 	function uamswp_fad_archive_conditions() {
+		// Make variables available outside of the function
 		global $conditions_archive_headline;
 		global $conditions_archive_headline_attr;
 		global $conditions_archive_intro_text;
@@ -1882,6 +1927,7 @@ function uamswp_fad_podcast() {
 
 	// Get system settings for treatment labels
 	function uamswp_fad_labels_treatments() {
+		// Make variables available outside of the function
 		global $treatments_single_name;
 		global $treatments_single_name_attr;
 		global $treatments_plural_name;
@@ -1895,6 +1941,7 @@ function uamswp_fad_podcast() {
 
 	// Get system settings for treatment archive page text
 	function uamswp_fad_archive_treatments() {
+		// Make variables available outside of the function
 		global $treatments_archive_headline;
 		global $treatments_archive_headline_attr;
 		global $treatments_archive_intro_text;

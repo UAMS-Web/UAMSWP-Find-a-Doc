@@ -2,7 +2,9 @@
 get_header();
 
 function custom_field_excerpt($title) {
-	global $post;
+	// Bring in variables from outside of the function
+	global $post; // WordPress-specific global variable
+
 	$text = get_field($title);
 	if ( '' != $text ) {
 		$text = strip_shortcodes( $text );

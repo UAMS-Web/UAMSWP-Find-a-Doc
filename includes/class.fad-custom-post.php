@@ -2722,7 +2722,7 @@ function get_location_meta($object) {
 	// if ($holidayhours):
 	// 	$order = array();
 	// 	// populate order
-	// 	foreach( $holidayhours as $i => $row ) {	
+	// 	foreach( $holidayhours as $i => $row ) {
 	// 		$order[ $i ] = $row['date'];
 	// 	}
 	// 	// multisort

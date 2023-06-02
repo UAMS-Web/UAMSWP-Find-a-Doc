@@ -130,23 +130,26 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	// Display ontology page content
 	add_action( 'genesis_entry_content', 'uamswp_expertise_associated', 24 );
 	function uamswp_expertise_associated() {
-		global $show_related_aoe_section;
-		global $expertise_query;
-	
+		// Bring in variables from outside of the function
+		global $show_related_aoe_section; // Defined in uamswp_fad_ontology_related_query()
+		global $expertise_query; // Defined in uamswp_fad_ontology_related_query()
+		global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
+		global $expertise_plural_name_attr; // Defined in uamswp_fad_labels_expertise()
+
 		if( $show_related_aoe_section ) { ?>
 			<section class="uams-module link-list link-list-layout-split bg-auto" id="related-expertise" aria-labelledby="related-expertise-title">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12 col-md-6 heading">
 							<div class="text-container">
-								<h2 class="module-title" id="related-expertise-title"><span class="title">Related Areas of Expertise</span></h2>
+								<h2 class="module-title" id="related-expertise-title"><span class="title">Related <?php echo $expertise_plural_name; ?></span></h2>
 							</div>
 						</div>
 						<div class="col-12 col-md-6 list">
 							<ul>
 							<?php
 							while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
-								echo '<li class="item"><div class="text-container"><h3 class="h5"><a href="'.get_permalink().'" aria-label="Go to Area of Expertise page for ' . get_the_title() . '">';
+								echo '<li class="item"><div class="text-container"><h3 class="h5"><a href="'.get_permalink().'" aria-label="Go to ' . $expertise_plural_name_attr . ' page for ' . get_the_title() . '">';
 								echo get_the_title();
 								echo '</a></h3>';
 								echo ( has_excerpt() ? '<p>' . wp_trim_words( get_the_excerpt(), 30, '&nbsp;&hellip;' ) . '</p>' : '' );

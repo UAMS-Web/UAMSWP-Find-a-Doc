@@ -127,7 +127,7 @@
 					}
 
 					echo $entry_title_text;
-					
+
 					if ( $entry_title_text_subtitle ) {
 						?><span class="subtitle" style="color: inherit; text-transform: none;"><?php echo $entry_title_text_subtitle; ?></span><?php 
 					}

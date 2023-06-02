@@ -130,37 +130,13 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	// Display ontology page content
 	add_action( 'genesis_entry_content', 'uamswp_list_child_expertise', 12 );
 	function uamswp_list_child_expertise() {
-		global $page_id;
-		global $page_title;
-		global $show_child_aoe_section;
-		
-		global $provider_single_name;
-		global $provider_single_name_attr;
-		global $provider_plural_name;
-		global $provider_plural_name_attr;
-		global $location_single_name;
-		global $location_single_name_attr;
-		global $location_plural_name;
-		global $location_plural_name_attr;
-		global $expertise_single_name;
-		global $expertise_single_name_attr;
-		global $expertise_plural_name;
-		global $expertise_plural_name_attr;
-		global $expertise_archive_headline;
-		global $expertise_archive_headline_attr;
-		global $expertise_archive_intro_text;
-		global $clinical_resource_single_name;
-		global $clinical_resource_single_name_attr;
-		global $clinical_resource_plural_name;
-		global $clinical_resource_plural_name_attr;
-		global $conditions_single_name;
-		global $conditions_single_name_attr;
-		global $conditions_plural_name;
-		global $conditions_plural_name_attr;
-		global $treatments_single_name;
-		global $treatments_single_name_attr;
-		global $treatments_plural_name;
-		global $treatments_plural_name_attr;
+		// Bring in variables from outside of the function
+		global $page_id; // Defined on the template
+		global $page_title; // Defined on the template
+		global $show_child_aoe_section; // Defined in uamswp_fad_ontology_descendants_query()
+		global $expertise_single_name; // Defined in uamswp_fad_labels_expertise()
+		global $expertise_single_name_attr; // Defined in uamswp_fad_labels_expertise()
+		global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
 
 		if ( $show_child_aoe_section ) { // If it's suppressed or none available, set to false
 			$args = array(

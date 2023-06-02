@@ -355,7 +355,9 @@ function gmb_provider_csv_export() {
 		// 'paged' => get_query_var( 'paged' ),
 	);
 
-	global $wp_query;
+	// Bring in variables from outside of the function
+	global $wp_query; // WordPress-specific global variable
+
 	$wp_query = new WP_Query( $args );
 
 	if ( $wp_query->have_posts() ) :

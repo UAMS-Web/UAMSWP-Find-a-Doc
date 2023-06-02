@@ -453,8 +453,8 @@ function bidirectional_acf_update( $field_name, $field_key, $value, $post_id ){
 
 add_action('acf/save_post', 'custom_excerpt_acf', 50);
 function custom_excerpt_acf() {
-
-	global $post;
+	// Bring in variables from outside of the function
+	global $post; // WordPress-specific global variable
 
 	$post_id = ( $post->ID ); // Current post ID
 	$post_type = get_post_type( $post_id ); // Get Post Type
@@ -809,7 +809,7 @@ function limit_post_top_level( $args, $field, $post ) {
 			)
 		);
 		acf_render_field_setting($field, $args);
-	} // end function acf_image_aspect_ratio_settings	
+	} // end function acf_image_aspect_ratio_settings
 
 	// add filter to validate images to ratio
 	add_filter('acf/validate_attachment/type=image', 'acf_image_aspect_ratio_validate', 10, 5);

@@ -6,12 +6,13 @@
 
 //register_activation_hook( __FILE__, 'prefix_create_table' );
 
-global $wpdb;
+global $wpdb; // WordPress-specific global variable
 add_filter( 'rwmb_meta_boxes', 'uams_services_register_meta_boxes' );
 
 function uams_services_register_meta_boxes( $meta_boxes ) {
 
-	global $wpdb;
+	// Bring in variables from outside of the function
+	global $wpdb; // WordPress-specific global variable
 
 	$service_excerpt = '';
 	$post_id = filter_input( INPUT_GET, 'post', FILTER_SANITIZE_NUMBER_INT );

@@ -33,8 +33,10 @@ uamswp_fad_archive_clinical_resource();
 
 // Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
-	global $page_title_attr;
-	global $clinical_resource_archive_headline_attr;
+	// Bring in variables from outside of the function
+	global $page_title_attr; // Defined on the template
+	global $clinical_resource_archive_headline_attr; // Defined in uamswp_fad_archive_clinical_resource()
+
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$meta_title_chars_max = 60;
 	$meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
@@ -54,8 +56,10 @@ add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 $syndicated = get_field('clinical_resource_syndicated');
 $syndication_url = get_field('clinical_resource_syndication_url');
 function uamswp_fad_canonical($html) {
-	global $syndicated;
-	global $syndication_url;
+	// Bring in variables from outside of the function
+	global $syndicated; // Defined on the template
+	global $syndication_url; // Defined on the template
+
 	if ( $syndicated && !empty($syndication_url) ) {
 	$html = '<link rel="canonical" href="'.htmlspecialchars(urldecode($syndication_url)).'" />';
 	}
@@ -83,7 +87,9 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 	add_action( 'genesis_entry_header', 'uamswp_resource_post_title' );
 
 	function uamswp_resource_post_title() {
-		global $clinical_resource_archive_headline;
+		// Bring in variables from outside of the function
+		global $clinical_resource_archive_headline; // Defined in uamswp_fad_archive_clinical_resource()
+
 		echo '<h1 class="entry-title" itemprop="headline">';
 		echo '<span class="supertitle">'. $clinical_resource_archive_headline . '</span><span class="sr-only">: </span>';
 		echo get_the_title();
@@ -250,7 +256,9 @@ if ( $jump_link_count >= $jump_link_count_min ) {
 	$show_jump_links_section = false;
 }
 function uamswp_resource_text() {
-	global $resource_type_value;
+	// Bring in variables from outside of the function
+	global $resource_type_value; // Defined on the template
+
 	$text = get_field('clinical_resource_text');
 	$nci_query = get_field('clinical_resource_text_nci_query');
 	$nci_embed = get_field('clinical_resource_nci_embed');
@@ -262,7 +270,9 @@ function uamswp_resource_text() {
 	}
 }
 function uamswp_resource_infographic() {
-	global $resource_type_value;
+	// Bring in variables from outside of the function
+	global $resource_type_value; // Defined on the template
+
 	$infographic = get_field('clinical_resource_infographic');
 	$infographic_descr = get_field('clinical_resource_infographic_descr');
 	$infographic_transcript = get_field('clinical_resource_infographic_transcript');
@@ -286,7 +296,9 @@ function uamswp_resource_infographic() {
 	}
 }
 function uamswp_resource_document() {
-	global $resource_type_value;
+	// Bring in variables from outside of the function
+	global $resource_type_value; // Defined on the template
+
 	$document_descr = get_field('clinical_resource_document_descr');
 	$document = get_field('clinical_resource_document');
 
@@ -327,11 +339,12 @@ function uamswp_resource_document() {
 	endif;
 }
 function uamswp_resource_physicians() {
-	global $show_providers_section;
-	global $postsCountClass;
-	global $physicians_query;
-	global $postsPerPage;
-	global $physicians;
+	// Bring in variables from outside of the function
+	global $show_providers_section; // Defined on the template
+	global $postsCountClass; // Defined on the template
+	global $physicians_query; // Defined on the template
+	global $postsPerPage; // Defined on the template
+	global $physicians; // Defined on the template
 
 	if($show_providers_section) { 
 		?>
@@ -366,7 +379,9 @@ function uamswp_resource_physicians() {
 	<?php }
 }
 function uamswp_resource_video() {
-	global $resource_type_value;
+	// Bring in variables from outside of the function
+	global $resource_type_value; // Defined on the template
+
 	$video = get_field('clinical_resource_video');
 	$video_descr = get_field('clinical_resource_video_descr');
 	$video_transcript = get_field('clinical_resource_video_transcript');
@@ -398,13 +413,15 @@ function uamswp_resource_video() {
 	}
 }
 function uamswp_resource_conditions_cpt() {
-	global $page_title;
-	global $page_title_attr;
-	global $show_conditions_section;
-	global $conditions_cpt_query;
-	global $conditions_plural_name;
-	global $provider_plural_name;
-	
+	// Bring in variables from outside of the function
+	global $page_title; // Defined on the template
+	global $page_title_attr; // Defined on the template
+	global $show_conditions_section; // Defined on the template
+	global $conditions_cpt_query; // Defined on the template
+	global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
+	global $conditions_single_name_attr; // Defined in uamswp_fad_labels_conditions()
+	global $conditions_plural_name; // Defined in uamswp_fad_labels_conditions()
+
 	$condition_context = 'single-resource';
 	$condition_heading_related_name = $page_title; // To what is it related?
 	$condition_heading_related_name_attr = $page_title_attr;
@@ -414,13 +431,14 @@ function uamswp_resource_conditions_cpt() {
 	}
 }
 function uamswp_resource_treatments_cpt() {
-	global $page_title;
-	global $page_title_attr;
-	global $show_treatments_section;
-	global $treatments_cpt_query;
-	global $treatments_single_name_attr;
-	global $treatments_plural_name;
-	global $provider_plural_name;
+	// Bring in variables from outside of the function
+	global $page_title; // Defined on the template
+	global $page_title_attr; // Defined on the template
+	global $show_treatments_section; // Defined on the template
+	global $treatments_cpt_query; // Defined on the template
+	global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
+	global $treatments_single_name; // Defined in uamswp_fad_labels_treatments()
+	global $treatments_plural_name; // Defined in uamswp_fad_labels_treatments()
 
 	$treatment_context = 'single-resource';
 	$treatment_heading_related_name = $page_title; // To what is it related?
@@ -431,36 +449,12 @@ function uamswp_resource_treatments_cpt() {
 	}
 }
 function uamswp_resource_locations() {
-	global $show_locations_section;
-	global $location_query;
-
-	global $provider_single_name;
-	global $provider_single_name_attr;
-	global $provider_plural_name;
-	global $provider_plural_name_attr;
-	global $location_single_name;
-	global $location_single_name_attr;
-	global $location_plural_name;
-	global $location_plural_name_attr;
-	global $expertise_single_name;
-	global $expertise_single_name_attr;
-	global $expertise_plural_name;
-	global $expertise_plural_name_attr;
-	global $expertise_archive_headline;
-	global $expertise_archive_headline_attr;
-	global $expertise_archive_intro_text;
-	global $clinical_resource_single_name;
-	global $clinical_resource_single_name_attr;
-	global $clinical_resource_plural_name;
-	global $clinical_resource_plural_name_attr;
-	global $conditions_single_name;
-	global $conditions_single_name_attr;
-	global $conditions_plural_name;
-	global $conditions_plural_name_attr;
-	global $treatments_single_name;
-	global $treatments_single_name_attr;
-	global $treatments_plural_name;
-	global $treatments_plural_name_attr;
+	// Bring in variables from outside of the function
+	global $show_locations_section; // Defined on the template
+	global $location_query; // Defined on the template
+	global $location_single_name; // Defined in uamswp_fad_labels_location()
+	global $location_single_name_attr; // Defined in uamswp_fad_labels_location()
+	global $location_plural_name; // Defined in uamswp_fad_labels_location()
 
 	if ( $show_locations_section ) { ?>
 		<section class="uams-module location-list bg-auto" id="locations">
@@ -484,14 +478,26 @@ function uamswp_resource_locations() {
 	} // endif
 }
 function uamswp_resource_associated() {
-	global $page_title;
-	global $page_title_attr;
-	global $show_related_resource_section;
-	global $resources;
-	global $resource_query;
-	global $resource_postsPerPage;
-	global $clinical_resource_plural_name;
-	
+	// Bring in variables from outside of the function
+	global $page_title; // Defined on the template
+	global $page_title_attr; // Defined on the template
+	global $show_related_resource_section; // Defined on the template
+	global $resources; // Defined on the template
+	global $resource_query; // Defined on the template
+	global $resource_postsPerPage; // Defined on the template
+	global $provider_single_name; // Defined in uamswp_fad_labels_provider()
+	global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
+	global $location_single_name; // Defined in uamswp_fad_labels_location()
+	global $location_plural_name; // Defined in uamswp_fad_labels_location()
+	global $expertise_single_name; // Defined in uamswp_fad_labels_expertise()
+	global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
+	global $clinical_resource_single_name; // Defined in uamswp_fad_labels_clinical_resource()
+	global $clinical_resource_plural_name; // Defined in uamswp_fad_labels_clinical_resource()
+	global $conditions_single_name; // Defined in uamswp_fad_labels_conditions()
+	global $conditions_plural_name; // Defined in uamswp_fad_labels_conditions()
+	global $treatments_single_name; // Defined in uamswp_fad_labels_treatments()
+	global $treatments_plural_name; // Defined in uamswp_fad_labels_treatments()
+
 	$resource_heading_related_pre = true; // "Related Resources"
 	$resource_heading_related_post = false; // "Resources Related to __"
 	$resource_heading_related_name = $page_title; // To what is it related?
@@ -504,36 +510,12 @@ function uamswp_resource_associated() {
 	}
 }
 function uamswp_resource_expertise() {
-	global $show_aoe_section;
-	global $expertise_query;
-
-	global $provider_single_name;
-	global $provider_single_name_attr;
-	global $provider_plural_name;
-	global $provider_plural_name_attr;
-	global $location_single_name;
-	global $location_single_name_attr;
-	global $location_plural_name;
-	global $location_plural_name_attr;
-	global $expertise_single_name;
-	global $expertise_single_name_attr;
-	global $expertise_plural_name;
-	global $expertise_plural_name_attr;
-	global $expertise_archive_headline;
-	global $expertise_archive_headline_attr;
-	global $expertise_archive_intro_text;
-	global $clinical_resource_single_name;
-	global $clinical_resource_single_name_attr;
-	global $clinical_resource_plural_name;
-	global $clinical_resource_plural_name_attr;
-	global $conditions_single_name;
-	global $conditions_single_name_attr;
-	global $conditions_plural_name;
-	global $conditions_plural_name_attr;
-	global $treatments_single_name;
-	global $treatments_single_name_attr;
-	global $treatments_plural_name;
-	global $treatments_plural_name_attr;
+	// Bring in variables from outside of the function
+	global $show_aoe_section; // Defined on the template
+	global $expertise_query; // Defined on the template
+	global $expertise_single_name; // Defined in uamswp_fad_labels_expertise()
+	global $expertise_single_name_attr; // Defined in uamswp_fad_labels_expertise()
+	global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
 
 	if( $show_aoe_section ) { ?>
 		<section class="uams-module expertise-list bg-auto" id="expertise" aria-labelledby="areas-of-expertise-title">
@@ -559,15 +541,16 @@ function uamswp_resource_expertise() {
 	} // endif
 }
 function uamswp_resource_jump_links() {
-	global $page_title;
-	global $show_related_resource_section;
-	global $show_conditions_section;
-	global $show_treatments_section;
-	global $show_providers_section;
-	global $show_locations_section;
-	global $show_aoe_section;
-	global $show_jump_links_section;
-	global $show_appointment_section;
+	// Bring in variables from outside of the function
+	global $page_title; // Defined on the template
+	global $show_related_resource_section; // Defined on the template
+	global $show_conditions_section; // Defined on the template
+	global $show_treatments_section; // Defined on the template
+	global $show_providers_section; // Defined on the template
+	global $show_locations_section; // Defined on the template
+	global $show_aoe_section; // Defined on the template
+	global $show_jump_links_section; // Defined on the template
+	global $show_appointment_section; // Defined on the template
 
 	// Begin Jump Links Section
 	if ( $show_jump_links_section ) { ?>
@@ -619,7 +602,8 @@ function uamswp_resource_jump_links() {
 	<?php }
 }
 function uamswp_resource_appointment() {
-	global $show_appointment_section;
+	// Bring in variables from outside of the function
+	global $show_appointment_section; // Defined on the template
 
 	if ( $show_appointment_section ) {
 		$appointment_location_url = '/location/';

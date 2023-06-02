@@ -130,41 +130,18 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	// Display ontology page content
 	add_action( 'genesis_entry_content', 'uamswp_expertise_locations', 22 );
 	function uamswp_expertise_locations() {
-		global $show_locations_section;
-		global $location_query;
-		global $locations;
-		
-		global $provider_single_name;
-		global $provider_single_name_attr;
-		global $provider_plural_name;
-		global $provider_plural_name_attr;
-		global $location_single_name;
-		global $location_single_name_attr;
-		global $location_plural_name;
-		global $location_plural_name_attr;
-		global $expertise_single_name;
-		global $expertise_single_name_attr;
-		global $expertise_plural_name;
-		global $expertise_plural_name_attr;
-		global $expertise_archive_headline;
-		global $expertise_archive_headline_attr;
-		global $expertise_archive_intro_text;
-		global $clinical_resource_single_name;
-		global $clinical_resource_single_name_attr;
-		global $clinical_resource_plural_name;
-		global $clinical_resource_plural_name_attr;
-		global $conditions_single_name;
-		global $conditions_single_name_attr;
-		global $conditions_plural_name;
-		global $conditions_plural_name_attr;
-		global $treatments_single_name;
-		global $treatments_single_name_attr;
-		global $treatments_plural_name;
-		global $treatments_plural_name_attr;
-	
+		// Bring in variables from outside of the function
+		global $show_locations_section; // Defined in uamswp_fad_ontology_locations_query()
+		global $location_query; // Defined in uamswp_fad_ontology_locations_query()
+		global $locations; // Defined in uamswp_fad_ontology_locations_query()
+		global $location_single_name; // Defined in uamswp_fad_labels_location()
+		global $location_single_name_attr; // Defined in uamswp_fad_labels_location()
+		global $location_plural_name; // Defined in uamswp_fad_labels_location()
+
+		// Do something
 		if ( $show_locations_section ) { 
 			$location_ids = $location_query->posts;
-	
+
 			$location_region_IDs = array();
 			foreach($location_ids as $location_id) {
 				$location_region_IDs[] = get_field('location_region', $location_id);
@@ -175,15 +152,15 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 			foreach ($location_region_IDs as $location_region_ID){
 				$location_region_list[] = get_term_by( 'ID', $location_region_ID, 'region' )->slug;
 			}
-	
+
 			// if cookie is set, run modified physician query
-			if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {		
-	
+			if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
+
 				$location_region = '';
 				if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
 					$location_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
 				}
-	
+
 				$tax_query = array();
 				if(!empty($location_region)) {
 					$tax_query[] = array(
@@ -207,7 +184,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 				);
 				$location_query = New WP_Query( $args );
 			}
-	
+
 			?>
 			<section class="uams-module location-list bg-auto" id="locations">
 				<div class="container-fluid">

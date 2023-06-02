@@ -171,7 +171,9 @@ function uamswp_fad_body_class( $classes ) {
 }
 // Custom redirect to archive page for providers & locations
 add_action( 'template_redirect', function() {
-	global $wp_query;
+	// Bring in variables from outside of the function
+	global $wp_query; // WordPress-specific global variable
+
 	if ( ('provider' == $wp_query->get('post_type') || 'location' == $wp_query->get('post_type')) && is_404( ) ) {
 		$redirectLink = get_post_type_archive_link( $wp_query->get('post_type') );
 		wp_redirect( $redirectLink, 301 );
