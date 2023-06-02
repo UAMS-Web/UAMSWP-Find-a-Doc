@@ -37,28 +37,25 @@ function fsp_insertqv($vars)
 }
 add_filter('query_vars', 'fsp_insertqv');
 
-// Replace WordPress's default canonical handling function
-remove_filter('wp_head', 'rel_canonical');
-add_filter('wp_head', 'fsp_rel_canonical');
-function fsp_rel_canonical()
-{
+// Modify SEOPress's standard canonical URL settings
+add_filter('seopress_titles_canonical','uamswp_fad_ontology_canonical');
+function uamswp_fad_ontology_canonical($html) {
 	// Bring in variables from outside of the function
-	global $current_fp;
+	global $page_id; // Defined on the template
+	global $current_fpage; // Defined on the template
 	global $wp_the_query; // WordPress-specific global variable
-
-	if (!is_singular())
-		return;
-
-	if (!$id = $wp_the_query->get_queried_object_id())
-		return;
-
-	$link = trailingslashit(get_permalink($id));
-
+	
 	// Make sure permalinks for fake subpages are canonical
-	if (!empty($current_fp))
-		$link .= user_trailingslashit($current_fp);
-
-	echo '<link rel="canonical" href="'.$link.'" />';
+	if (
+		!empty($current_fpage) // Is a fake subpage
+		&&
+		is_singular() // Is an existing single post of any post type
+		&&
+		$page_id = $wp_the_query->get_queried_object_id()
+	) {
+		$html = '<link rel="canonical" href="' . trailingslashit(get_permalink($page_id)) . user_trailingslashit($current_fpage) . '" />';
+	}
+	return $html;
 }
 
 // Do not forget to flush your permalinks.
