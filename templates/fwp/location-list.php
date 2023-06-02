@@ -1,9 +1,11 @@
 <?php 
 /**
- * Required vars:
- * 	$location_single_name // System setting for Locations single item name
- * 	$location_plural_name // System setting for Locations plural item name
+ * Template Name: Locations List Loop for FacetWP "Location List" Template
+ * Template Slug: location_list
  */
+
+// Get system settings for location labels
+uamswp_fad_labels_location();
 
 if ( have_posts() ) { 
 	// Generate a table
