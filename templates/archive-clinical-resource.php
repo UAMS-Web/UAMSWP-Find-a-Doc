@@ -3,8 +3,23 @@
  * Template Name: Clinical Resources Archive
  */
 
+// Get system settings for provider labels
+uamswp_fad_labels_provider();
+
+// Get system settings for location labels
+uamswp_fad_labels_location();
+
+// Get system settings for area of expertise labels
+uamswp_fad_labels_expertise();
+
 // Get system settings for clinical resource labels
 uamswp_fad_labels_clinical_resource();
+
+// Get system settings for condition labels
+uamswp_fad_labels_conditions();
+
+// Get system settings for treatment labels
+uamswp_fad_labels_treatments();
 
 // Get system settings for clinical resource archive page text
 uamswp_fad_archive_clinical_resource();
