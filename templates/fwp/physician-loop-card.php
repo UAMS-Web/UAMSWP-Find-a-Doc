@@ -1,6 +1,7 @@
 <?php
 /**
- * Template Name: Physician Loop - Card layout
+ * Template Name: Provider Cards Loop for FacetWP "Physician Cards" and "Physician Search Cards" Templates
+ * Template Slugs: physician_cards, physician_search_cards
  * Designed for physicians
  */
 
