@@ -1,14 +1,16 @@
 <?php
 /**
- * Template Name: Physician Loop
+ * Template Name: Providers Archive Page Loop for FacetWP "Physician" Template
+ * Template Slug: physician
  * Designed for physicians
- * 
- * Required vars:
- * 	$provider_single_name // System setting for Providers single item name
- * 	$provider_single_name_attr // Attribute value friendly version of system setting for Providers single item name
- * 	$provider_plural_name // System setting for Providers plural item name
- * 	$location_plural_name // System setting for Locations plural item name
  */
+
+// Bring in variables from outside of the function
+global $provider_single_name; // Defined in uamswp_fad_labels_provider()
+global $provider_single_name_attr; // Defined in uamswp_fad_labels_provider()
+global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
+global $provider_plural_name_attr; // Defined in uamswp_fad_labels_provider()
+ 
 if ( have_posts() ) : while ( have_posts() ) : the_post();
 $degrees = get_field('physician_degree');
 $degree_list = '';

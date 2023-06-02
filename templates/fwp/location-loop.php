@@ -1,10 +1,13 @@
 <?php 
 /**
- * Required vars:
- * 	$location_single_name // System setting for Locations Plural Item Name
- * 	$location_single_name_attr // Attribute value friendly version of system setting for Locations single item name
- * 	$location_plural_name // System setting for Locations plural item name
+ * Template Name: Locations Archive Page Loop for FacetWP "Locations" Template
+ * Template Slug: locations
  */
+
+// Bring in variables from outside of the function
+global $location_single_name; // Defined in uamswp_fad_labels_location()
+global $location_single_name_attr; // Defined in uamswp_fad_labels_location()
+global $location_plural_name; // Defined in uamswp_fad_labels_location()
 
 if ( have_posts() ) : while ( have_posts() ) : the_post();
 

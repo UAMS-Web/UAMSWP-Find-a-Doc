@@ -1,24 +1,28 @@
 <?php 
 /**
- * Required var:
- * 	$provider_single_name // System setting for Providers single item name
- * 	$provider_plural_name // System setting for Providers plural item name
- * 	$location_single_name // System setting for Locations single item name
- * 	$location_plural_name // System setting for Locations plural item name
- * 	$expertise_single_name // System setting for Areas of Expertise single item name
- * 	$expertise_plural_name // System setting for Areas of Expertise plural item name
- * 	$clinical_resource_single_name // System setting for Clinical Resources single item name
- * 	$clinical_resource_plural_name // System setting for Clinical Resources plural item name
- * 	$conditions_single_name // System setting for Conditions single item name
- * 	$conditions_plural_name // System setting for Conditions plural item name
- * 	$treatments_single_name // System setting for Treatments single item name
- * 	$treatments_plural_name // System setting for Treatments plural item name
+ * Template Name: Clinical Resources Archive Page Loop for FacetWP "Clinical Resources" Template
+ * Template Slug: clinical_resources
  */
+
+// Bring in variables from outside of the function
+global $provider_single_name; // Defined in uamswp_fad_labels_provider()
+global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
+global $location_single_name; // Defined in uamswp_fad_labels_location()
+global $location_plural_name; // Defined in uamswp_fad_labels_location()
+global $expertise_single_name; // Defined in uamswp_fad_labels_expertise()
+global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
+global $clinical_resource_single_name; // Defined in uamswp_fad_labels_clinical_resource()
+global $clinical_resource_plural_name; // Defined in uamswp_fad_labels_clinical_resource()
+global $conditions_single_name; // Defined in uamswp_fad_labels_conditions()
+global $conditions_plural_name; // Defined in uamswp_fad_labels_conditions()
+global $treatments_single_name; // Defined in uamswp_fad_labels_treatments()
+global $treatments_plural_name; // Defined in uamswp_fad_labels_treatments()
 
 if ( have_posts() ) : while ( have_posts() ) : the_post();
 
 $id = get_the_ID();
 $resource_page = 'archive';
+
 include( UAMS_FAD_PATH . '/templates/loops/resource-card.php' );
 
 endwhile; else : ?>
