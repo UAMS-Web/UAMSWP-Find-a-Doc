@@ -1,0 +1,84 @@
+
+{
+	"key": "group_appointment_refer_phone",
+	"title": "Referral Phone Number Information",
+	"fields": [
+		{
+			"key": "field_appointment_refer_phone_number",
+			"label": "General Referral Phone Number",
+			"name": "appointment_refer_phone_number",
+			"type": "maskfield",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "(501) 686-6080",
+			"input_mask": "(999) 999-9999 [x 99999]"
+		},
+		{
+			"key": "field_appointment_refer_phone_label",
+			"label": "General Referral Phone Label",
+			"name": "appointment_refer_phone_label",
+			"type": "text",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_appointment_refer_phone_info",
+			"label": "General Description of How Physicians Can Call to Refer a Patient",
+			"name": "appointment_refer_phone_info",
+			"type": "textarea",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": "",
+			"rows": "",
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "uamswp-fad-appointment"
+			}
+		]
+	],
+	"menu_order": 30,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": ""
+}

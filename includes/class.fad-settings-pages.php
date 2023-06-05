@@ -51,6 +51,14 @@ if( function_exists('acf_add_options_page') ) {
 	));
 
 	acf_add_options_sub_page(array(
+		'page_title' => 'Appointment and Referral Information',
+		'menu_title' => 'Appointment and Referral Information',
+		'menu_slug' => 'uamswp-fad-appointment',
+		'parent_slug' => 'fad-settings',
+		'redirect' => false
+	));
+
+	acf_add_options_sub_page(array(
 		'page_title' => 'MyChart Open Scheduling Options',
 		'menu_title' => 'MyChart Open Scheduling',
 		'menu_slug' => 'uamswp-fad-mychart',

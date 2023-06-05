@@ -1,0 +1,84 @@
+
+{
+	"key": "group_appointment_refer_web",
+	"title": "Referral Fax Number Information",
+	"fields": [
+		{
+			"key": "field_appointment_refer_web_url",
+			"label": "General Online Patient Referral Webpage URL",
+			"name": "appointment_refer_web_url",
+			"type": "url",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		{
+			"key": "field_appointment_refer_web_label",
+			"label": "General Online Patient Referral Webpage Label",
+			"name": "appointment_refer_web_label",
+			"type": "text",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_appointment_refer_web_info",
+			"label": "General Description of How Physicians Can Refer a Patient Online",
+			"name": "appointment_refer_web_info",
+			"type": "textarea",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": "",
+			"rows": "",
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "uamswp-fad-appointment"
+			}
+		]
+	],
+	"menu_order": 40,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": ""
+}

@@ -1,0 +1,242 @@
+
+{
+	"key": "group_appointment_patients_phone",
+	"title": "Appointment Phone Number Information for Patients",
+	"fields": [
+		{
+			"key": "field_appointment_patients_phone_tab_new",
+			"label": "New Patients Only",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_appointment_patients_phone_number_new",
+			"label": "General Appointment Phone Number for New Patients Only",
+			"name": "appointment_patients_phone_number_new",
+			"type": "maskfield",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "(501) 686-8000",
+			"input_mask": "(999) 999-9999 [x 99999]"
+		},
+		{
+			"key": "field_appointment_patients_phone_label_new",
+			"label": "General Appointment Phone Label for New Patients Only",
+			"name": "appointment_patients_phone_label_new",
+			"type": "text",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_appointment_patients_phone_info_new",
+			"label": "General Description of How New Patients Can Call to Make an Appointment",
+			"name": "appointment_patients_phone_info_new",
+			"type": "textarea",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": "",
+			"rows": "",
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_appointment_patients_phone_tab_existing",
+			"label": "Existing Patients Only",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_appointment_patients_phone_number_existing",
+			"label": "General Appointment Phone Number for Existing Patients Only",
+			"name": "appointment_patients_phone_number_existing",
+			"type": "maskfield",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "(501) 686-8000",
+			"input_mask": "(999) 999-9999 [x 99999]"
+		},
+		{
+			"key": "field_appointment_patients_phone_label_existing",
+			"label": "General Appointment Phone Label for Existing Patients Only",
+			"name": "appointment_patients_phone_label_existing",
+			"type": "text",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_appointment_patients_phone_info_existing",
+			"label": "General Description of How Existing Patients Can Call to Make an Appointment",
+			"name": "appointment_patients_phone_info_existing",
+			"type": "textarea",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": "",
+			"rows": "",
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_appointment_patients_phone_tab_both",
+			"label": "Both New and Existing Patients",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_appointment_patients_phone_number_both",
+			"label": "General Appointment Phone Number for Both New and Existing Patients",
+			"name": "appointment_patients_phone_number_both",
+			"type": "maskfield",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "(501) 686-8000",
+			"input_mask": "(999) 999-9999 [x 99999]"
+		},
+		{
+			"key": "field_appointment_patients_phone_label_both",
+			"label": "General Appointment Phone Label for Both New and Existing Patients",
+			"name": "appointment_patients_phone_label_both",
+			"type": "text",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_appointment_patients_phone_info_both",
+			"label": "General Description of How Both New and Existing Patients Can Call to Make an Appointment",
+			"name": "appointment_patients_phone_info_both",
+			"type": "textarea",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": "",
+			"rows": "",
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "uamswp-fad-appointment"
+			}
+		]
+	],
+	"menu_order": 10,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": ""
+}

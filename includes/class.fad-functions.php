@@ -2069,3 +2069,107 @@ function uamswp_fad_podcast() {
 		$treatments_archive_headline_attr = uamswp_attr_conversion($treatments_archive_headline);
 		$treatments_archive_intro_text = get_field('treatments_archive_intro_text', 'option');
 	}
+
+// Get system settings for general patient appointment information
+function uamswp_fad_appointment_patients() {
+	// Make variables available outside of the function
+	global $appointment_patients_phone_number_new;
+	global $appointment_patients_phone_label_new;
+	global $appointment_patients_phone_label_new_attr;
+	global $appointment_patients_phone_info_new;
+	global $appointment_patients_phone_number_existing;
+	global $appointment_patients_phone_label_existing;
+	global $appointment_patients_phone_label_existing_attr;
+	global $appointment_patients_phone_info_existing;
+	global $appointment_patients_phone_number_both;
+	global $appointment_patients_phone_label_both;
+	global $appointment_patients_phone_label_both_attr;
+	global $appointment_patients_phone_info_both;
+	global $appointment_patients_web_url_new;
+	global $appointment_patients_web_label_new;
+	global $appointment_patients_web_label_new_attr;
+	global $appointment_patients_web_info_new;
+	global $appointment_patients_web_url_existing;
+	global $appointment_patients_web_label_existing;
+	global $appointment_patients_web_label_existing_attr;
+	global $appointment_patients_web_info_existing;
+	global $appointment_patients_web_url_both;
+	global $appointment_patients_web_label_both;
+	global $appointment_patients_web_label_both_attr;
+	global $appointment_patients_web_info_both;
+
+	// Phone Number Information
+
+		// New Patients Only
+		$appointment_patients_phone_number_new = get_field('appointment_patients_phone_number_new', 'option') ?: '';
+		$appointment_patients_phone_label_new = get_field('appointment_patients_phone_label_new', 'option') ?: '';
+		$appointment_patients_phone_label_new_attr = uamswp_attr_conversion($appointment_patients_phone_label_new);
+		$appointment_patients_phone_info_new = get_field('appointment_patients_phone_info_new', 'option') ?: '';
+
+		// Existing Patients Only
+		$appointment_patients_phone_number_existing = get_field('appointment_patients_phone_number_existing', 'option') ?: '';
+		$appointment_patients_phone_label_existing = get_field('appointment_patients_phone_label_existing', 'option') ?: '';
+		$appointment_patients_phone_label_existing_attr = uamswp_attr_conversion($appointment_patients_phone_label_existing);
+		$appointment_patients_phone_info_existing = get_field('appointment_patients_phone_info_existing', 'option') ?: '';
+
+		// Both New and Existing Patients
+		$appointment_patients_phone_number_both = get_field('appointment_patients_phone_number_both', 'option') ?: '';
+		$appointment_patients_phone_label_both = get_field('appointment_patients_phone_label_both', 'option') ?: '';
+		$appointment_patients_phone_label_both_attr = uamswp_attr_conversion($appointment_patients_phone_label_both);
+		$appointment_patients_phone_info_both = get_field('appointment_patients_phone_info_both', 'option') ?: '';
+
+	// Webpage Information
+
+		// New Patients Only
+		$appointment_patients_web_url_new = get_field('appointment_patients_web_url_new', 'option') ?: '';
+		$appointment_patients_web_label_new = get_field('appointment_patients_web_label_new', 'option') ?: '';
+		$appointment_patients_web_label_new_attr = uamswp_attr_conversion($appointment_patients_web_label_new);
+		$appointment_patients_web_info_new = get_field('appointment_patients_web_info_new', 'option') ?: '';
+
+		// Existing Patients Only
+		$appointment_patients_web_url_existing = get_field('appointment_patients_web_url_existing', 'option') ?: '';
+		$appointment_patients_web_label_existing = get_field('appointment_patients_web_label_existing', 'option') ?: '';
+		$appointment_patients_web_label_existing_attr = uamswp_attr_conversion($appointment_patients_web_label_existing);
+		$appointment_patients_web_info_existing = get_field('appointment_patients_web_info_existing', 'option') ?: '';
+
+		// Both New and Existing Patients
+		$appointment_patients_web_url_both = get_field('appointment_patients_web_url_both', 'option') ?: '';
+		$appointment_patients_web_label_both = get_field('appointment_patients_web_label_both', 'option') ?: '';
+		$appointment_patients_web_label_both_attr = uamswp_attr_conversion($appointment_patients_web_label_both);
+		$appointment_patients_web_info_both = get_field('appointment_patients_web_info_both', 'option') ?: '';
+}
+
+// Get system settings for general patient referral information
+function uamswp_fad_appointment_refer() {
+	// Make variables available outside of the function
+	global $appointment_refer_phone_number;
+	global $appointment_refer_phone_label;
+	global $appointment_refer_phone_label_attr;
+	global $appointment_refer_phone_info;
+	global $appointment_refer_fax_number;
+	global $appointment_refer_fax_label;
+	global $appointment_refer_fax_label_attr;
+	global $appointment_refer_fax_info;
+	global $appointment_refer_web_url;
+	global $appointment_refer_web_label;
+	global $appointment_refer_web_label_attr;
+	global $appointment_refer_web_info;
+
+	// Phone Number Information
+	$appointment_refer_phone_number = get_field('appointment_refer_phone_number', 'option') ?: '';
+	$appointment_refer_phone_label = get_field('appointment_refer_phone_label', 'option') ?: '';
+	$appointment_refer_phone_label_attr = uamswp_attr_conversion($appointment_refer_phone_label);
+	$appointment_refer_phone_info = get_field('appointment_refer_phone_info', 'option') ?: '';
+
+	// Fax Information
+	$appointment_refer_fax_number = get_field('appointment_refer_fax_number', 'option') ?: '';
+	$appointment_refer_fax_label = get_field('appointment_refer_fax_label', 'option') ?: '';
+	$appointment_refer_fax_label_attr = uamswp_attr_conversion($appointment_refer_fax_label);
+	$appointment_refer_fax_info = get_field('appointment_refer_fax_info', 'option') ?: '';
+
+	// Webpage Information
+	$appointment_refer_web_url = get_field('appointment_refer_web_url', 'option') ?: '';
+	$appointment_refer_web_label = get_field('appointment_refer_web_label', 'option') ?: '';
+	$appointment_refer_web_label_attr = uamswp_attr_conversion($appointment_refer_web_label);
+	$appointment_refer_web_info = get_field('appointment_refer_web_info', 'option') ?: '';
+}
