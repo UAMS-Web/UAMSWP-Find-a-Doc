@@ -342,6 +342,8 @@ function uamswp_resource_document() {
 }
 function uamswp_resource_physicians() {
 	// Bring in variables from outside of the function
+	global $provider_plural_name; // Defined in uamswp_fad_labels_location()
+	global $provider_plural_name_attr; // Defined in uamswp_fad_labels_location()
 	global $show_providers_section; // Defined on the template
 	global $postsCountClass; // Defined on the template
 	global $physicians_query; // Defined on the template
@@ -544,6 +546,18 @@ function uamswp_resource_expertise() {
 }
 function uamswp_resource_jump_links() {
 	// Bring in variables from outside of the function
+	global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
+	global $provider_plural_name_attr; // Defined in uamswp_fad_labels_provider()
+	global $location_plural_name; // Defined in uamswp_fad_labels_location()
+	global $location_plural_name_attr; // Defined in uamswp_fad_labels_location()
+	global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
+	global $expertise_plural_name_attr; // Defined in uamswp_fad_labels_expertise()
+	global $clinical_resource_plural_name; // Defined in uamswp_fad_labels_clinical_resource()
+	global $clinical_resource_plural_name_attr; // Defined in uamswp_fad_labels_clinical_resource()
+	global $conditions_plural_name; // Defined in uamswp_fad_labels_conditions()
+	global $conditions_plural_name_attr; // Defined in uamswp_fad_labels_conditions()
+	global $treatments_plural_name; // Defined in uamswp_fad_labels_treatments()
+	global $treatments_plural_name_attr; // Defined in uamswp_fad_labels_treatments()
 	global $page_title; // Defined on the template
 	global $show_related_resource_section; // Defined on the template
 	global $show_conditions_section; // Defined on the template
@@ -605,6 +619,8 @@ function uamswp_resource_jump_links() {
 }
 function uamswp_resource_appointment() {
 	// Bring in variables from outside of the function
+	global $location_single_name; // Defined in uamswp_fad_labels_location()
+	global $location_single_name_attr; // Defined in uamswp_fad_labels_location()
 	global $show_appointment_section; // Defined on the template
 
 	if ( $show_appointment_section ) {
