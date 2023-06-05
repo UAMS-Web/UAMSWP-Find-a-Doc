@@ -750,11 +750,11 @@ while ( have_posts() ) : the_post();
 										</button>
 									</div>
 									<div class="modal-body">
-										<p>There is no publicly available rating for this <?php echo $provider_single_name; ?> for one of three reasons:</p>
+										<p>There is no publicly available rating for this <?php echo strtolower($provider_single_name); ?> for one of three reasons:</p>
 										<ul>
-											<li>The <?php echo $provider_single_name; ?> does not see patients</li>
-											<li>The <?php echo $provider_single_name; ?> sees patients but has not yet received the minimum number of Patient Satisfaction Reviews. To be eligible for display, we require a minimum of 30 surveys. This ensures that the rating is statistically reliable and a true reflection of patient satisfaction.</li>
-											<li>The <?php echo $provider_single_name; ?> is a resident physician.</li>
+											<li>The <?php echo strtolower($provider_single_name); ?> does not see patients</li>
+											<li>The <?php echo strtolower($provider_single_name); ?> sees patients but has not yet received the minimum number of Patient Satisfaction Reviews. To be eligible for display, we require a minimum of 30 surveys. This ensures that the rating is statistically reliable and a true reflection of patient satisfaction.</li>
+											<li>The <?php echo strtolower($provider_single_name); ?> is a resident physician.</li>
 										</ul>
 									</div>
 									<div class="modal-footer">
