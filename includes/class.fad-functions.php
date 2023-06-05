@@ -1794,11 +1794,19 @@ function uamswp_fad_podcast() {
 		global $provider_single_name_attr;
 		global $provider_plural_name;
 		global $provider_plural_name_attr;
+		global $facet_labels;
 
 		$provider_single_name = get_field('provider_single_name', 'option') ?: 'Provider';
 		$provider_single_name_attr = uamswp_attr_conversion($provider_single_name);
 		$provider_plural_name = get_field('provider_plural_name', 'option') ?: 'Providers';
 		$provider_plural_name_attr = uamswp_attr_conversion($provider_plural_name);
+
+		// Create array for pairing FacetWP name with label if none exists
+		$facet_labels = isset($facet_labels) ?: array();
+
+		// Add item to FacetWP labels array for Providers facet on Clinical Resources archive/list
+		$facet_labels['resource_provider'] = $provider_plural_name;
+		$facet_labels['resource_provider_attr'] = $provider_plural_name_attr;
 	}
 
 	// Get system settings for provider archive page text
@@ -1818,11 +1826,25 @@ function uamswp_fad_podcast() {
 		global $location_single_name_attr;
 		global $location_plural_name;
 		global $location_plural_name_attr;
+		global $facet_labels;
 
 		$location_single_name = get_field('location_single_name', 'option') ?: 'Location';
 		$location_single_name_attr = uamswp_attr_conversion($location_single_name);
 		$location_plural_name = get_field('location_plural_name', 'option') ?: 'Locations';
 		$location_plural_name_attr = uamswp_attr_conversion($location_plural_name);
+
+		// Create array for pairing FacetWP name with label if none exists
+		if ( !isset($facet_labels) ) {
+			$facet_labels = [];
+		}
+
+		// Add item to FacetWP labels array for Locations facet on Providers archive/list
+		$facet_labels['locations'] = $location_plural_name;
+		$facet_labels['locations_attr'] = $location_plural_name_attr;
+
+		// Add item to FacetWP labels array for Locations facet on Clinical Resources archive/list
+		$facet_labels['resource_locations'] = $location_plural_name;
+		$facet_labels['resource_locations_attr'] = $location_plural_name_attr;
 	}
 
 	// Get system settings for location archive page text
@@ -1842,11 +1864,29 @@ function uamswp_fad_podcast() {
 		global $expertise_single_name_attr;
 		global $expertise_plural_name;
 		global $expertise_plural_name_attr;
+		global $facet_labels;
 
 		$expertise_single_name = get_field('expertise_single_name', 'option') ?: 'Area of Expertise';
 		$expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
 		$expertise_plural_name = get_field('expertise_plural_name', 'option') ?: 'Areas of Expertise';
 		$expertise_plural_name_attr = uamswp_attr_conversion($expertise_plural_name);
+
+		// Create array for pairing FacetWP name with label if none exists
+		if ( !isset($facet_labels) ) {
+			$facet_labels = [];
+		}
+
+		// Add item to FacetWP labels array for Areas of Expertise facet on Providers archive/list
+		$facet_labels['physician_areas_of_expertise'] = $expertise_plural_name;
+		$facet_labels['physician_areas_of_expertise_attr'] = $expertise_plural_name_attr;
+
+		// Add item to FacetWP labels array for Areas of Expertise facet on Locations archive/list
+		$facet_labels['location_aoe'] = $expertise_plural_name;
+		$facet_labels['location_aoe_attr'] = $expertise_plural_name_attr;
+
+		// Add item to FacetWP labels array for Areas of Expertise facet on Clinical Resources archive/list
+		$facet_labels['resource_aoe'] = $expertise_plural_name;
+		$facet_labels['resource_aoe_attr'] = $expertise_plural_name_attr;
 	}
 
 	// Get system settings for area of expertise archive page text
@@ -1906,11 +1946,25 @@ function uamswp_fad_podcast() {
 		global $conditions_single_name_attr;
 		global $conditions_plural_name;
 		global $conditions_plural_name_attr;
+		global $facet_labels;
 
 		$conditions_single_name = get_field('conditions_single_name', 'option') ?: 'Condition';
 		$conditions_single_name_attr = uamswp_attr_conversion($conditions_single_name);
 		$conditions_plural_name = get_field('conditions_plural_name', 'option') ?: 'Conditions';
 		$conditions_plural_name_attr = uamswp_attr_conversion($conditions_plural_name);
+
+		// Create array for pairing FacetWP name with label if none exists
+		if ( !isset($facet_labels) ) {
+			$facet_labels = [];
+		}
+
+		// Add item to FacetWP labels array for Conditions facet on Providers archive/list
+		$facet_labels['conditions'] = $conditions_plural_name;
+		$facet_labels['conditions_attr'] = $conditions_plural_name_attr;
+
+		// Add item to FacetWP labels array for Conditions facet on Clinical Resources archive/list
+		$facet_labels['resource_conditions'] = $conditions_plural_name;
+		$facet_labels['resource_conditions_attr'] = $conditions_plural_name_attr;
 	}
 
 	// Get system settings for condition archive page text
@@ -1932,11 +1986,25 @@ function uamswp_fad_podcast() {
 		global $treatments_single_name_attr;
 		global $treatments_plural_name;
 		global $treatments_plural_name_attr;
+		global $facet_labels;
 
 		$treatments_single_name = get_field('treatments_single_name', 'option') ?: 'Treatment/Procedure';
 		$treatments_single_name_attr = uamswp_attr_conversion($treatments_single_name);
 		$treatments_plural_name = get_field('treatments_plural_name', 'option') ?: 'Treatments and Procedures';
 		$treatments_plural_name_attr = uamswp_attr_conversion($treatments_plural_name);
+
+		// Create array for pairing FacetWP name with label if none exists
+		if ( !isset($facet_labels) ) {
+			$facet_labels = [];
+		}
+
+		// Add item to FacetWP labels array for Treatments facet on Providers archive/list
+		$facet_labels['treatments_procedures'] = $treatments_plural_name;
+		$facet_labels['treatments_procedures_attr'] = $treatments_plural_name_attr;
+
+		// Add item to FacetWP labels array for Treatments facet on Clinical Resources archive/list
+		$facet_labels['resource_treatments'] = $treatments_plural_name;
+		$facet_labels['resource_treatments_attr'] = $treatments_plural_name_attr;
 	}
 
 	// Get system settings for treatment archive page text
