@@ -88,7 +88,7 @@ function fwp_facet_scripts() {
 				});
 			})(jQuery);
 		</script>
-<?php }
+<?php } // if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) || is_post_type_archive( 'clinical-resource' ) )
 
 	if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) ) {
 	$taxonomy_slug = isset(get_queried_object()->slug) ? get_queried_object()->slug : '';
@@ -280,8 +280,8 @@ function fwp_facet_scripts() {
 })(jQuery);
 </script>
 <?php
-	}
-}
+	} // endif ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) ) elseif ( is_post_type_archive( 'clinical-resource' ) )
+} // end function fwp_facet_scripts()
 add_action( 'wp_footer', 'fwp_facet_scripts', 100 );
 
 // fix facets for 'all'
