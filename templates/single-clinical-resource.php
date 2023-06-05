@@ -90,10 +90,10 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 	function uamswp_resource_post_title() {
 		// Bring in variables from outside of the function
-		global $clinical_resource_archive_headline; // Defined in uamswp_fad_archive_clinical_resource()
+		global $clinical_resource_single_name; // Defined in uamswp_fad_labels_clinical_resource()
 
 		echo '<h1 class="entry-title" itemprop="headline">';
-		echo '<span class="supertitle">'. $clinical_resource_archive_headline . '</span><span class="sr-only">: </span>';
+		echo '<span class="supertitle">'. $clinical_resource_single_name . '</span><span class="sr-only">: </span>';
 		echo get_the_title();
 		echo '</h1>';
 	}
