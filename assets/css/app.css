@@ -82,6 +82,26 @@
   margin-top: .5em;
 }
 
+.post-type-archive-condition .archive-intro,
+.post-type-archive-expertise .archive-intro,
+.post-type-archive-treatment .archive-intro {
+  margin-bottom: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  text-align: center;
+  width: 35em;
+}
+
+.post-type-archive-condition .archive-intro :last-child,
+.post-type-archive-condition .archive-intro:last-child,
+.post-type-archive-expertise .archive-intro :last-child,
+.post-type-archive-expertise .archive-intro:last-child,
+.post-type-archive-treatment .archive-intro :last-child,
+.post-type-archive-treatment .archive-intro:last-child {
+  margin-bottom: 0;
+}
+
 .doctor-list .filter-col,
 .doctor-list .list-col,
 .location-list .filter-col,
@@ -213,6 +233,21 @@
 .resource-list .filter-col fieldset .filter-group,
 .resource-list .filter-col fieldset .fwp-filter {
   margin: 2rem 0;
+}
+
+.doctor-list .filter-col fieldset .filter-group[style="display: none;"]+.filter-group,
+.doctor-list .filter-col fieldset .filter-group[style="display: none;"]+.fwp-filter,
+.doctor-list .filter-col fieldset .fwp-filter[style="display: none;"]+.filter-group,
+.doctor-list .filter-col fieldset .fwp-filter[style="display: none;"]+.fwp-filter,
+.location-list .filter-col fieldset .filter-group[style="display: none;"]+.filter-group,
+.location-list .filter-col fieldset .filter-group[style="display: none;"]+.fwp-filter,
+.location-list .filter-col fieldset .fwp-filter[style="display: none;"]+.filter-group,
+.location-list .filter-col fieldset .fwp-filter[style="display: none;"]+.fwp-filter,
+.resource-list .filter-col fieldset .filter-group[style="display: none;"]+.filter-group,
+.resource-list .filter-col fieldset .filter-group[style="display: none;"]+.fwp-filter,
+.resource-list .filter-col fieldset .fwp-filter[style="display: none;"]+.filter-group,
+.resource-list .filter-col fieldset .fwp-filter[style="display: none;"]+.fwp-filter {
+  margin-top: 0;
 }
 
 .doctor-list .filter-col fieldset .filter-group .facetwp-facet,
@@ -1478,6 +1513,14 @@ html.poppedOut {
 }
 
 @media (min-width:768px) {
+  .post-type-archive-condition .archive-intro,
+  .post-type-archive-expertise .archive-intro,
+  .post-type-archive-treatment .archive-intro {
+    font-size: 1.40625rem;
+    font-weight: 300;
+    margin-bottom: 3rem;
+  }
+
   .doctor-list .filter-col,
   .location-list .filter-col,
   .resource-list .filter-col {
