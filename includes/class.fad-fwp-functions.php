@@ -48,6 +48,8 @@ add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
 
 // FacetWP scripts
 function fwp_facet_scripts() {
+	global $facet_labels; // Defined in uamswp_fad_labels_*()
+	
 	$classes = get_body_class();
 
 	if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) || is_post_type_archive( 'clinical-resource' ) ) { ?>
@@ -55,8 +57,20 @@ function fwp_facet_scripts() {
 			(function($) {
 				document.addEventListener('facetwp-loaded', function() {
 					$('.facetwp-facet').each(function() {
+						// Create JSON object/array with the $facet_labels PHP array
+						var facet_labels = <?php echo json_encode($facet_labels); ?>;
+
+						// Get facet name/slug
 						var facet_name = $(this).attr('data-name');
-						var facet_label = FWP.settings.labels[facet_name];
+
+						// Get facet label
+						if ( facet_name in facet_labels ) {
+							var facet_label = facet_labels[facet_name];
+						} else {
+							// var facet_label = FWP.settings.labels[facet_name];
+							var facet_label = FWP.settings.labels[facet_name];
+						}
+
 						if ($('.facet-label[data-for="' + facet_name + '"]').length < 1) {
 							$(this).before('<h3 class="facet-label h6" id="facet_' + facet_name + '" data-for="' + facet_name + '">' + facet_label + '</h3>');
 						}
@@ -244,8 +258,20 @@ function fwp_facet_scripts() {
 (function($) {
 	document.addEventListener('facetwp-loaded', function() {
 		$('.facetwp-facet').each(function() {
+			// Create JSON object/array with the $facet_labels PHP array
+			var facet_labels = <?php echo json_encode($facet_labels); ?>;
+
+			// Get facet name/slug
 			var facet_name = $(this).attr('data-name');
-			var facet_label = FWP.settings.labels[facet_name];
+
+			// Get facet label
+			if ( facet_name in facet_labels ) {
+				var facet_label = facet_labels[facet_name];
+			} else {
+				// var facet_label = FWP.settings.labels[facet_name];
+				var facet_label = FWP.settings.labels[facet_name];
+			}
+
 			if ($('.facet-label[data-for="' + facet_name + '"]').length < 1) {
 				$(this).before('<h3 class="facet-label h6" id="facet_' + facet_name + '" data-for="' + facet_name + '">' + facet_label + '</h3>');
 			}
