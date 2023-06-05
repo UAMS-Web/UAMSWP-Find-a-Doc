@@ -117,6 +117,13 @@
 			.fwp-filter {
 				margin: ($spacer * 2) 0;
 
+				&[style="display: none;"] {
+					+ .filter-group,
+					+ .fwp-filter {
+						margin-top: 0;
+					}
+				}
+
 				.facetwp-facet {
 					margin: 0;
 
