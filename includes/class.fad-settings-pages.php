@@ -51,8 +51,8 @@ if( function_exists('acf_add_options_page') ) {
 	));
 
 	acf_add_options_sub_page(array(
-		'page_title' => 'MyChart Scheduling Options',
-		'menu_title' => 'MyChart Scheduling',
+		'page_title' => 'MyChart Open Scheduling Options',
+		'menu_title' => 'MyChart Open Scheduling',
 		'menu_slug' => 'uamswp-fad-mychart',
 		'parent_slug' => 'fad-settings',
 		'redirect' => false
