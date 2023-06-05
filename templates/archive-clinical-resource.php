@@ -15,6 +15,9 @@ uamswp_fad_labels_expertise();
 // Get system settings for clinical resource labels
 uamswp_fad_labels_clinical_resource();
 
+// Get system settings for clinical resource facet labels
+uamswp_fad_labels_clinical_resource_facet();
+
 // Get system settings for condition labels
 uamswp_fad_labels_conditions();
 
@@ -55,6 +58,7 @@ add_filter( 'facetwp_template_use_archive', '__return_true' );
 				<h2 class="h4">Filters</h2>
 				<fieldset>
 					<legend class="sr-only">Filter by...</legend>
+					<?php // When adding facets, make sure relevant uamswp_fad_labels_*() function is also added to template ?>
 					<div class="fwp-filter"><?php echo facetwp_display( 'facet', 'resource_provider' ); ?></div>
 					<div class="fwp-filter"><?php echo facetwp_display( 'facet', 'resource_locations' ); ?></div>
 					<div class="fwp-filter"><?php echo facetwp_display( 'facet', 'resource_type' ); ?></div>

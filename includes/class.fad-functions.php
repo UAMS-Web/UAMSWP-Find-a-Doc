@@ -1925,6 +1925,25 @@ function uamswp_fad_podcast() {
 		$clinical_resource_archive_headline_attr = uamswp_attr_conversion($clinical_resource_archive_headline);
 	}
 
+	// Get system settings for clinical resource facet labels
+	function uamswp_fad_labels_clinical_resource_facet() {
+		// Make variables available outside of the function
+		global $clinical_resource_type_single_name;
+		global $clinical_resource_type_single_name_attr;
+		global $clinical_resource_type_plural_name;
+		global $clinical_resource_type_plural_name_attr;
+		global $facet_labels;
+
+		$clinical_resource_type_single_name = get_field('clinical_resource_type_single_name', 'option') ?: 'Resource Type';
+		$clinical_resource_type_single_name_attr = uamswp_attr_conversion($clinical_resource_type_single_name);
+		$clinical_resource_type_plural_name = get_field('clinical_resource_type_plural_name', 'option') ?: 'Resource Types';
+		$clinical_resource_type_plural_name_attr = uamswp_attr_conversion($clinical_resource_type_plural_name);
+
+		// Add item to FacetWP labels array for Areas of Expertise facet on Providers archive/list
+		$facet_labels['resource_type'] = $clinical_resource_type_plural_name;
+		$facet_labels['resource_type_attr'] = $clinical_resource_type_plural_name_attr;
+	}
+
 	// Get system settings for combined conditions and treatments labels
 	function uamswp_fad_labels_conditions_treatments() {
 		// Make variables available outside of the function
