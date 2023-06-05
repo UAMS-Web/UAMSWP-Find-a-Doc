@@ -1127,7 +1127,7 @@ while ( have_posts() ) : the_post(); ?>
 					<?php } ?>
 					<?php if ( $show_treatments_section ) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#treatments" title="Jump to the section of this page about <?php echo strtolower($treatments_plural_name_attr); ?>"><?php echo strtolower($treatments_plural_name); ?></a>
+							<a class="nav-link" href="#treatments" title="Jump to the section of this page about <?php echo strtolower($treatments_plural_name_attr); ?>"><?php echo $treatments_plural_name; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ( $show_aoe_section ) { ?>
@@ -1137,7 +1137,7 @@ while ( have_posts() ) : the_post(); ?>
 					<?php } ?>
 					<?php if ( $show_child_locations_section ) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#sub-clinics" title="Jump to the section of this page about additional clinics within this <?php echo strtolower($location_single_name_attr); ?>">Clinics Within This <?php echo strtolower($location_single_name); ?></a>
+							<a class="nav-link" href="#sub-clinics" title="Jump to the section of this page about additional clinics within this <?php echo strtolower($location_single_name_attr); ?>">Clinics Within This <?php echo $location_single_name; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ( $show_related_resource_section ) { ?>
