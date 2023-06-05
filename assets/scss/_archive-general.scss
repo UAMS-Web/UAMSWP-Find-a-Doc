@@ -1,0 +1,7 @@
+.post-type-archive-expertise,
+.post-type-archive-condition,
+.post-type-archive-treatment {
+	.archive-intro {
+		@include intro-note($lead-font-size, $lead-font-weight);
+	}
+}

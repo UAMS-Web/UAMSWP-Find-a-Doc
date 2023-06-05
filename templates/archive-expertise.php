@@ -33,7 +33,7 @@ add_filter( 'facetwp_template_use_archive', '__return_true' );
 			<header class="entry-header">
 				<h1 class="entry-title" itemprop="headline"><?php echo $expertise_archive_headline; ?></h1>
 			</header>
-			<?php echo ($expertise_archive_intro_text ? '<div class="entry-content clearfix" itemprop="text">' . $expertise_archive_intro_text . '</div>' : '' ); ?>
+			<?php echo ($expertise_archive_intro_text ? '<div class="entry-content clearfix" itemprop="text"><div class="archive-intro">' . $expertise_archive_intro_text . '</div></div>' : '' ); ?>
 		</section>
 		<section class="uams-module" id="expertise">
 			<div class="container-fluid">

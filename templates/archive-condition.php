@@ -62,7 +62,7 @@ get_header();
 			<header class="entry-header">
 				<h1 class="entry-title" itemprop="headline"><?php echo $conditions_archive_headline; ?></h1>
 			</header>
-			<?php echo ($conditions_archive_intro_text ? '<div class="entry-content clearfix" itemprop="text">' . $conditions_archive_intro_text . '</div>' : '' ); ?>
+			<?php echo ($conditions_archive_intro_text ? '<div class="entry-content clearfix" itemprop="text"><div class="archive-intro">' . $conditions_archive_intro_text . '</div></div>' : '' ); ?>
 		</section>
 		<section class="uams-module conditions-treatments">
 			<div class="container-fluid">
