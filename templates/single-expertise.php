@@ -31,6 +31,7 @@ $page_url = get_permalink();
 
 // Area of Expertise Content Type
 $ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
+$ontology_type = isset($ontology_type) ? $ontology_type : 1; // Check if 'expertise_type' is not null, and if so, set value to true
 
 // Get site header and site nav values for ontology subsections
 uamswp_fad_ontology_site_values();

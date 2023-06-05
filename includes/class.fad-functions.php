@@ -1227,6 +1227,7 @@ function uamswp_fad_ontology_site_values() {
 	if ( $ancestors ) {
 		foreach( $ancestors as $ancestor ) {
 			$ancestor_content_type = get_field('expertise_type', $ancestor); // True is ontology type, false is content type
+			$ancestor_content_type = isset($ancestor_content_type) ? $ancestor_content_type : 1; // Check if 'expertise_type' is not null, and if so, set value to true
 			if ( $ancestor_content_type ) {
 				$ancestors_ontology[] = $ancestor;
 			}
@@ -1479,6 +1480,7 @@ function uamswp_fad_fpage_title($html) {
 			foreach ( $child_pages as $child_page ) {
 				$hide = get_post_meta($child_page->ID, 'page_hide_from_menu');
 				$type = get_field('expertise_type', $child_page->ID);
+				$type = isset($type) ? $type : 1; // Check if 'expertise_type' is not null, and if so, set value to true
 				if ( isset($hide[0]) && '1' == $hide[0] ) {
 					//* Do nothing if there is nothing to show
 				} elseif( !isset($type) || '1' == $type ) {

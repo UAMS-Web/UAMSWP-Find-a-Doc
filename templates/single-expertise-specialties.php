@@ -37,6 +37,7 @@ $fpage_url = !empty($current_fpage) ? $page_url . user_trailingslashit($current_
 
 // Area of Expertise Content Type
 $ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
+$ontology_type = isset($ontology_type) ? $ontology_type : 1; // Check if 'expertise_type' is not null, and if so, set value to true
 
 // Get site header and site nav values for ontology subsections
 uamswp_fad_ontology_site_values();
@@ -156,9 +157,16 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 						"compare" => "!=",
 					),
 					array(
-						"key" => "expertise_type",
-						"value" => "0",
-						"compare" => "!=",
+						"relation" => "OR",
+						array(
+							"key" => "expertise_type",
+							"value" => "0",
+							"compare" => "!=",
+						),
+						array(
+							"key" => "expertise_type",
+							"compare" => "NOT EXISTS" // If the item has not been updated since 'expertise_type' was added
+						),
 					),
 				),
 			);
