@@ -3,11 +3,22 @@
  * Template Name: Providers Archive
  */
 
-// Get system settings for provider labels
-uamswp_fad_labels_provider();
+// Get system settings for ontology item labels
 
-// Get system settings for location labels
-uamswp_fad_labels_location();
+	// Get system settings for provider labels
+	uamswp_fad_labels_provider();
+
+	// Get system settings for location labels
+	uamswp_fad_labels_location();
+
+	// Get system settings for area of expertise labels
+	uamswp_fad_labels_expertise();
+
+	// Get system settings for condition labels
+	uamswp_fad_labels_conditions();
+
+	// Get system settings for treatment labels
+	uamswp_fad_labels_treatments();
 
 // Get system settings for Providers Archive Page
 uamswp_fad_archive_provider();
@@ -71,7 +82,8 @@ add_filter( 'facetwp_template_use_archive', '__return_true' );
 					<h3 class="h6">Search <?php echo $provider_plural_name; ?></h3>
 					<?php echo do_shortcode( '[wpdreams_ajaxsearchpro id=1]' ); ?>
 					<div class="fwp-filter"><?php echo facetwp_display( 'facet', 'alpha' ); ?></div>
-					<?php echo do_shortcode( '		<div class="fwp-filter">[facetwp facet="primary_care"]</div>
+					<?php // When adding facets, make sure relevant uamswp_fad_labels_*() function is also added to template
+					echo do_shortcode( '		<div class="fwp-filter">[facetwp facet="primary_care"]</div>
 													<div class="fwp-filter">[facetwp facet="physician_areas_of_expertise"]</div>
 													<div class="fwp-filter">[facetwp facet="conditions"]</div>
 													<div class="fwp-filter">[facetwp facet="treatments_procedures"]</div>

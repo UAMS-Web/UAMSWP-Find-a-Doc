@@ -3,8 +3,16 @@
  * Template Name: Locations Archive
  */
 
-// Get system settings for location labels
-uamswp_fad_labels_location();
+// Get system settings for ontology item labels
+
+	// Get system settings for provider labels
+	uamswp_fad_labels_provider();
+
+	// Get system settings for location labels
+	uamswp_fad_labels_location();
+
+	// Get system settings for area of expertise labels
+	uamswp_fad_labels_expertise();
 
 // Get system settings for location archive page text
 uamswp_fad_archive_location();
@@ -47,6 +55,7 @@ add_filter( 'facetwp_template_use_archive', '__return_true' );
 				<h2 class="h4">Filters</h2>
 				<fieldset>
 					<legend class="sr-only">Filter by...</legend>
+					<?php // When adding facets, make sure relevant uamswp_fad_labels_*() function is also added to template ?>
 					<div class="fwp-filter"><?php echo facetwp_display( 'facet', 'location_type' ); ?></div>
 					<div class="fwp-filter"><?php echo facetwp_display( 'facet', 'location_aoe' ); ?></div>
 					<div class="fwp-filter"><?php echo facetwp_display( 'facet', 'location_region' ); ?></div>
