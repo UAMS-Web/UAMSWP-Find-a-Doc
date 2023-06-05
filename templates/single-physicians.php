@@ -671,7 +671,7 @@ while ( have_posts() ) : the_post();
 						}
 						if ( $expertise_valid ) {
 						?>
-						<dt>Area<?php echo( count($expertises) > 1 ? 's' : '' );?> of Expertise</dt>
+						<dt><?php echo( count($expertises) > 1 ? $expertise_plural_name : $expertise_single_name );?></dt>
 						<?php foreach( $expertises as $expertise ) {
 							if ( get_post_status ( $expertise ) == 'publish' && $expertise !== 0 ) {
 								echo '<dd><a href="' . get_permalink($expertise) . '" target="_self" data-sectiontitle="Overview" data-categorytitle="View ' . $expertise_single_name_attr . '">' . get_the_title($expertise) . '</a></dd>';
