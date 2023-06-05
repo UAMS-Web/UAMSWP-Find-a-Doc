@@ -10,6 +10,7 @@ global $provider_single_name; // Defined in uamswp_fad_labels_provider()
 global $provider_single_name_attr; // Defined in uamswp_fad_labels_provider()
 global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
 global $provider_plural_name_attr; // Defined in uamswp_fad_labels_provider()
+global $location_plural_name; // Defined in uamswp_fad_labels_location()
  
 if ( have_posts() ) : while ( have_posts() ) : the_post();
 $degrees = get_field('physician_degree');

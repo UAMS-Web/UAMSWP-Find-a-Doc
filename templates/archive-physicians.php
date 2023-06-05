@@ -6,6 +6,9 @@
 // Get system settings for provider labels
 uamswp_fad_labels_provider();
 
+// Get system settings for location labels
+uamswp_fad_labels_location();
+
 // Get system settings for Providers Archive Page
 uamswp_fad_archive_provider();
 // $provider_archive_link = get_post_type_archive_link( get_query_var('post_type') );
