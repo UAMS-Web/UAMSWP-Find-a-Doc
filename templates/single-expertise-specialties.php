@@ -14,6 +14,9 @@
 	// Get system settings for area of expertise labels
 	uamswp_fad_labels_expertise();
 
+	// Get system settings for area of expertise descendant item labels
+	uamswp_fad_labels_expertise_descendant();
+
 	// Get system settings for clinical resource labels
 	uamswp_fad_labels_clinical_resource();
 
@@ -28,7 +31,7 @@ $page_id = get_the_ID();
 $page_title = get_the_title(); // Title of Area of Expertise
 $page_title_attr = uamswp_attr_conversion($page_title);
 $page_url = get_permalink();
-$fpage_name = 'Specialties'; // Fake subpage title
+$fpage_name = $expertise_descendant_plural_name; // Fake subpage title
 $fpage_name_attr = uamswp_attr_conversion($fpage_name);
 $fpage_title = $fpage_name . ' in ' . $page_title; // Fake subpage page title
 $fpage_title_attr = uamswp_attr_conversion($fpage_title);
@@ -140,6 +143,10 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		global $expertise_single_name; // Defined in uamswp_fad_labels_expertise()
 		global $expertise_single_name_attr; // Defined in uamswp_fad_labels_expertise()
 		global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
+		global $expertise_descendant_single_name; // Defined in uamswp_fad_labels_expertise_descendant()
+		global $expertise_descendant_single_name_attr; // Defined in uamswp_fad_labels_expertise_descendant()
+		global $expertise_descendant_plural_name; // Defined in uamswp_fad_labels_expertise_descendant()
+		global $expertise_descendant_plural_name_attr; // Defined in uamswp_fad_labels_expertise_descendant()
 
 		if ( $show_child_aoe_section ) { // If it's suppressed or none available, set to false
 			$args = array(
@@ -176,7 +183,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-12">
-								<h2 class="module-title" id="sub-expertise-title"><span class="title"><?php echo $expertise_plural_name; ?> Within <?php echo $page_title; ?></span></h2>
+								<h2 class="module-title" id="sub-expertise-title"><span class="title"><?php echo $expertise_descendant_plural_name; ?> Within <?php echo $page_title; ?></span></h2>
 								<div class="card-list-container">
 									<div class="card-list card-list-expertise">
 								<?php

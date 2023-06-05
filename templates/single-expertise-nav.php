@@ -9,6 +9,8 @@
  * 	$location_plural_name_attr // Attribute value friendly version of system setting for Locations plural item name
  * 	$expertise_plural_name // System setting for Areas of Expertise plural item name
  * 	$expertise_plural_name_attr // Attribute value friendly version of system setting for Areas of Expertise plural item name
+ * 	$expertise_descendant_plural_name; // System setting for Areas of Expertise plural descendant item name
+ * 	$expertise_descendant_plural_name_attr; // Attribute value friendly version of system setting for Areas of Expertise plural descendant item name
  * 	$clinical_resource_plural_name // System setting for Clinical Resources plural item name
  * 	$clinical_resource_plural_name_attr // Attribute value friendly version of system setting for Clinical Resources plural item name
  */
@@ -35,7 +37,7 @@ if ($show_locations_section) {
 	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $site_nav_id .'-locations nav-item"><a title="' . $location_plural_name_attr . ' for '. get_the_title( $site_nav_id ) .'" href="'. get_permalink( $site_nav_id ) .'locations/" class="nav-link"><span itemprop="name">' . $location_plural_name . '</span></a></li>';
 }
 if ($show_child_aoe_section) {
-	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $site_nav_id .'-children nav-item"><a title="Specialties Within '. get_the_title( $site_nav_id ) .'" href="'. get_permalink( $site_nav_id ) .'specialties/" class="nav-link"><span itemprop="name">Specialties</span></a></li>';
+	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $site_nav_id .'-children nav-item"><a title="' . $expertise_descendant_plural_name_attr . ' Within '. get_the_title( $site_nav_id ) .'" href="'. get_permalink( $site_nav_id ) .'specialties/" class="nav-link"><span itemprop="name">' . $expertise_descendant_plural_name . '</span></a></li>';
 }
 if ($show_related_aoe_section) {
 	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $site_nav_id .'-related nav-item"><a title="' . $expertise_plural_name_attr . ' Related to '. get_the_title( $site_nav_id ) .'" href="'. get_permalink( $site_nav_id ) .'related/" class="nav-link"><span itemprop="name">Related ' . $expertise_plural_name . '</span></a></li>';

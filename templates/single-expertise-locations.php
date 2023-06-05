@@ -14,6 +14,9 @@
 	// Get system settings for area of expertise labels
 	uamswp_fad_labels_expertise();
 
+	// Get system settings for area of expertise descendant item labels
+	uamswp_fad_labels_expertise_descendant();
+
 	// Get system settings for clinical resource labels
 	uamswp_fad_labels_clinical_resource();
 

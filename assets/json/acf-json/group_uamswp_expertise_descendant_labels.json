@@ -1,14 +1,14 @@
 
 {
-	"key": "group_expertise_archive_page",
-	"title": "Areas of Expertise Archive Page",
+	"key": "group_expertise_descendant_labels",
+	"title": "Areas of Expertise Descendant Item Labels",
 	"fields": [
 		{
-			"key": "field_expertise_archive_headline",
-			"label": "Archive Headline",
-			"name": "expertise_archive_headline",
+			"key": "field_expertise_descendant_single_name",
+			"label": "Single Descendant Item Name",
+			"name": "expertise_descendant_single_name",
 			"type": "text",
-			"instructions": "Your theme uses accessible headings. If you leave this blank, the default accessible heading will be used.",
+			"instructions": "If you leave this blank, the default single item name will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -18,7 +18,7 @@
 			},
 			"acfe_permissions": "",
 			"default_value": "",
-			"placeholder": "Areas of Expertise",
+			"placeholder": "Specialty",
 			"prepend": "",
 			"append": "",
 			"maxlength": "",
@@ -26,11 +26,11 @@
 			"acfe_update": ""
 		},
 		{
-			"key": "field_expertise_archive_intro_text",
-			"label": "Archive Intro Text",
-			"name": "expertise_archive_intro_text",
-			"type": "wysiwyg",
-			"instructions": "Leave empty if you do not want to display any intro text.",
+			"key": "field_expertise_descendant_plural_name",
+			"label": "Plural Descendant Item Name",
+			"name": "expertise_descendant_plural_name",
+			"type": "text",
+			"instructions": "If you leave this blank, the default plural item name will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -40,10 +40,10 @@
 			},
 			"acfe_permissions": "",
 			"default_value": "",
-			"tabs": "all",
-			"toolbar": "full",
-			"media_upload": 1,
-			"delay": 0,
+			"placeholder": "Specialties",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
 			"acfe_validate": "",
 			"acfe_update": ""
 		}
@@ -57,7 +57,7 @@
 			}
 		]
 	],
-	"menu_order": 30,
+	"menu_order": 20,
 	"position": "normal",
 	"style": "default",
 	"label_placement": "left",

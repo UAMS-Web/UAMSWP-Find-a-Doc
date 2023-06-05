@@ -1633,6 +1633,8 @@ function uamswp_fad_ontology_nav_menu() {
 	global $location_plural_name_attr; // Typically defined in uamswp_fad_labels_location()
 	global $expertise_plural_name; // Typically defined in uamswp_fad_labels_expertise()
 	global $expertise_plural_name_attr; // Typically defined in uamswp_fad_labels_expertise()
+	global $expertise_descendant_plural_name; // Defined in uamswp_fad_labels_expertise_descendant()
+	global $expertise_descendant_plural_name_attr; // Defined in uamswp_fad_labels_expertise_descendant()
 	global $clinical_resource_plural_name; // Typically defined in uamswp_fad_labels_clinical_resource()
 	global $clinical_resource_plural_name_attr; // Typically defined in uamswp_fad_labels_clinical_resource()
 
@@ -1889,6 +1891,20 @@ function uamswp_fad_podcast() {
 		// Add item to FacetWP labels array for Areas of Expertise facet on Clinical Resources archive/list
 		$facet_labels['resource_aoe'] = $expertise_plural_name;
 		$facet_labels['resource_aoe_attr'] = $expertise_plural_name_attr;
+	}
+
+	// Get system settings for area of expertise descendant item labels
+	function uamswp_fad_labels_expertise_descendant() {
+		// Make variables available outside of the function
+		global $expertise_descendant_single_name;
+		global $expertise_descendant_single_name_attr;
+		global $expertise_descendant_plural_name;
+		global $expertise_descendant_plural_name_attr;
+
+		$expertise_descendant_single_name = get_field('expertise_descendant_single_name', 'option') ?: 'Specialty';
+		$expertise_descendant_single_name_attr = uamswp_attr_conversion($expertise_descendant_single_name);
+		$expertise_descendant_plural_name = get_field('expertise_descendant_plural_name', 'option') ?: 'Specialties';
+		$expertise_descendant_plural_name_attr = uamswp_attr_conversion($expertise_descendant_plural_name);
 	}
 
 	// Get system settings for area of expertise archive page text
