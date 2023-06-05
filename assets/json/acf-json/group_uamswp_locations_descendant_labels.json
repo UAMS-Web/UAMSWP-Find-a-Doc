@@ -1,14 +1,14 @@
 
 {
-	"key": "group_location_prescription",
-	"title": "General Prescription Information for Clinical Locations",
+	"key": "group_location_descendant_labels",
+	"title": "Location Descendant Item Labels",
 	"fields": [
 		{
-			"key": "field_location_prescription_clinic_system",
-			"label": "Call Clinic for Prescription",
-			"name": "location_prescription_clinic_system",
-			"type": "wysiwyg",
-			"instructions": "",
+			"key": "field_location_descendant_single_name",
+			"label": "Single Item Name",
+			"name": "location_descendant_single_name",
+			"type": "text",
+			"instructions": "If you leave this blank, the default single item name will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -18,19 +18,19 @@
 			},
 			"acfe_permissions": "",
 			"default_value": "",
-			"tabs": "all",
-			"toolbar": "basic",
-			"media_upload": 0,
-			"delay": 0,
+			"placeholder": "Additional Location",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
 			"acfe_validate": "",
 			"acfe_update": ""
 		},
 		{
-			"key": "field_location_prescription_pharm_system",
-			"label": "Call Pharmacy for Prescription",
-			"name": "location_prescription_pharm_system",
-			"type": "wysiwyg",
-			"instructions": "",
+			"key": "field_location_descendant_plural_name",
+			"label": "Plural Item Name",
+			"name": "location_descendant_plural_name",
+			"type": "text",
+			"instructions": "If you leave this blank, the default plural item name will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -40,10 +40,10 @@
 			},
 			"acfe_permissions": "",
 			"default_value": "",
-			"tabs": "all",
-			"toolbar": "basic",
-			"media_upload": 0,
-			"delay": 0,
+			"placeholder": "Additional Locations",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
 			"acfe_validate": "",
 			"acfe_update": ""
 		}
@@ -57,7 +57,7 @@
 			}
 		]
 	],
-	"menu_order": 40,
+	"menu_order": 20,
 	"position": "normal",
 	"style": "default",
 	"label_placement": "left",
