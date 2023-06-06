@@ -1874,8 +1874,8 @@ function uamswp_fad_podcast() {
 		global $location_descendant_single_name_attr;
 		global $location_descendant_plural_name;
 		global $location_descendant_plural_name_attr;
-		global $placeholder_location_single_name;
-		global $placeholder_location_plural_name;
+		global $placeholder_location_descendant_single_name;
+		global $placeholder_location_descendant_plural_name;
 
 		$location_descendant_single_name = get_field('location_descendant_single_name', 'option') ?: 'Additional Location';
 		$location_descendant_single_name_attr = uamswp_attr_conversion($location_descendant_single_name);
@@ -1883,8 +1883,8 @@ function uamswp_fad_podcast() {
 		$location_descendant_plural_name_attr = uamswp_attr_conversion($location_descendant_plural_name);
 
 		// Define string used to find and replace with values from Find-a-Doc Settings
-		$placeholder_location_single_name = '[Descendant Location]';
-		$placeholder_location_plural_name = '[Descendant Locations]';
+		$placeholder_location_descendant_single_name = '[Descendant Location]';
+		$placeholder_location_descendant_plural_name = '[Descendant Locations]';
 	}
 
 	// Get system settings for location archive page text
@@ -1946,8 +1946,8 @@ function uamswp_fad_podcast() {
 		global $expertise_descendant_single_name_attr;
 		global $expertise_descendant_plural_name;
 		global $expertise_descendant_plural_name_attr;
-		global $placeholder_expertise_single_name;
-		global $placeholder_expertise_plural_name;
+		global $placeholder_expertise_descendant_single_name;
+		global $placeholder_expertise_descendant_plural_name;
 
 		$expertise_descendant_single_name = get_field('expertise_descendant_single_name', 'option') ?: 'Specialty';
 		$expertise_descendant_single_name_attr = uamswp_attr_conversion($expertise_descendant_single_name);
@@ -1955,8 +1955,8 @@ function uamswp_fad_podcast() {
 		$expertise_descendant_plural_name_attr = uamswp_attr_conversion($expertise_descendant_plural_name);
 
 		// Define string used to find and replace with values from Find-a-Doc Settings
-		$placeholder_expertise_single_name = '[Descendant Area of Expertise]';
-		$placeholder_expertise_plural_name = '[Descendant Areas of Expertise]';
+		$placeholder_expertise_descendant_single_name = '[Descendant Area of Expertise]';
+		$placeholder_expertise_descendant_plural_name = '[Descendant Areas of Expertise]';
 	}
 
 	// Get system settings for area of expertise archive page text
