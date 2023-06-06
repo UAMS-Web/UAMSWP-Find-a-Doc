@@ -200,9 +200,9 @@
 			"acfe_update": ""
 		},
 		{
-			"key": "field_expertise_fpage_intro_expertise",
+			"key": "field_expertise_fpage_intro_expertise_related",
 			"label": "Intro Text of Fake Subpage for Related Areas of Expertise Items in Area of Expertise Subsection",
-			"name": "expertise_fpage_intro_expertise",
+			"name": "expertise_fpage_intro_expertise_related",
 			"type": "textarea",
 			"instructions": "If you leave this blank, the default intro text structure will be used.",
 			"required": 0,
