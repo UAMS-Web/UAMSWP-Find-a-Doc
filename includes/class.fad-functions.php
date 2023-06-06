@@ -2002,9 +2002,13 @@ function uamswp_fad_podcast() {
 		// Make variables available outside of the function
 		global $clinical_resource_archive_headline;
 		global $clinical_resource_archive_headline_attr;
+		global $placeholder_clinical_resource_archive_headline;
 
 		$clinical_resource_archive_headline = get_field('clinical_resource_archive_headline', 'option') ?: 'Clinical Resources';
 		$clinical_resource_archive_headline_attr = uamswp_attr_conversion($clinical_resource_archive_headline);
+
+		// Define string used to find and replace with values from Find-a-Doc Settings
+		$placeholder_clinical_resource_archive_headline = '[Clinical Resource Archive Title]';
 	}
 
 	// Get system settings for clinical resource facet labels
