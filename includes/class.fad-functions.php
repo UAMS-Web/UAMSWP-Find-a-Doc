@@ -1798,12 +1798,18 @@ function uamswp_fad_podcast() {
 		global $provider_single_name_attr;
 		global $provider_plural_name;
 		global $provider_plural_name_attr;
+		global $placeholder_provider_single_name;
+		global $placeholder_provider_plural_name;
 		global $facet_labels;
 
 		$provider_single_name = get_field('provider_single_name', 'option') ?: 'Provider';
 		$provider_single_name_attr = uamswp_attr_conversion($provider_single_name);
 		$provider_plural_name = get_field('provider_plural_name', 'option') ?: 'Providers';
 		$provider_plural_name_attr = uamswp_attr_conversion($provider_plural_name);
+
+		// Define string used to find and replace with values from Find-a-Doc Settings
+		$placeholder_provider_single_name = '[Provider]';
+		$placeholder_provider_plural_name = '[Providers]';
 
 		// Create array for pairing FacetWP name with label if none exists
 		$facet_labels = isset($facet_labels) ?: array();
@@ -1818,6 +1824,10 @@ function uamswp_fad_podcast() {
 		// Make variables available outside of the function
 		global $provider_archive_headline;
 		global $provider_archive_headline_attr;
+		global $placeholder_provider_archive_headline;
+
+		// Define string used to find and replace with values from Find-a-Doc Settings
+		$placeholder_provider_archive_headline = '[Provider Archive Title]';
 
 		$provider_archive_headline = get_field('provider_archive_headline', 'option') ?: 'UAMS Health Providers';
 		$provider_archive_headline_attr = uamswp_attr_conversion($provider_archive_headline);
@@ -1830,12 +1840,18 @@ function uamswp_fad_podcast() {
 		global $location_single_name_attr;
 		global $location_plural_name;
 		global $location_plural_name_attr;
+		global $placeholder_location_single_name;
+		global $placeholder_location_plural_name;
 		global $facet_labels;
 
 		$location_single_name = get_field('location_single_name', 'option') ?: 'Location';
 		$location_single_name_attr = uamswp_attr_conversion($location_single_name);
 		$location_plural_name = get_field('location_plural_name', 'option') ?: 'Locations';
 		$location_plural_name_attr = uamswp_attr_conversion($location_plural_name);
+
+		// Define string used to find and replace with values from Find-a-Doc Settings
+		$placeholder_location_single_name = '[Location]';
+		$placeholder_location_plural_name = '[Locations]';
 
 		// Create array for pairing FacetWP name with label if none exists
 		if ( !isset($facet_labels) ) {
@@ -1858,11 +1874,17 @@ function uamswp_fad_podcast() {
 		global $location_descendant_single_name_attr;
 		global $location_descendant_plural_name;
 		global $location_descendant_plural_name_attr;
+		global $placeholder_location_single_name;
+		global $placeholder_location_plural_name;
 
 		$location_descendant_single_name = get_field('location_descendant_single_name', 'option') ?: 'Additional Location';
 		$location_descendant_single_name_attr = uamswp_attr_conversion($location_descendant_single_name);
 		$location_descendant_plural_name = get_field('location_descendant_plural_name', 'option') ?: 'Additional Locations';
 		$location_descendant_plural_name_attr = uamswp_attr_conversion($location_descendant_plural_name);
+
+		// Define string used to find and replace with values from Find-a-Doc Settings
+		$placeholder_location_single_name = '[Descendant Location]';
+		$placeholder_location_plural_name = '[Descendant Locations]';
 	}
 
 	// Get system settings for location archive page text
@@ -1870,9 +1892,13 @@ function uamswp_fad_podcast() {
 		// Make variables available outside of the function
 		global $location_archive_headline;
 		global $location_archive_headline_attr;
+		global $placeholder_location_archive_headline;
 
 		$location_archive_headline = get_field('location_archive_headline', 'option') ?: 'Locations';
 		$location_archive_headline_attr = uamswp_attr_conversion($location_archive_headline);
+
+		// Define string used to find and replace with values from Find-a-Doc Settings
+		$placeholder_location_archive_headline = '[Location Archive Title]';
 	}
 
 	// Get system settings for area of expertise labels
@@ -1882,12 +1908,18 @@ function uamswp_fad_podcast() {
 		global $expertise_single_name_attr;
 		global $expertise_plural_name;
 		global $expertise_plural_name_attr;
+		global $placeholder_expertise_single_name;
+		global $placeholder_expertise_plural_name;
 		global $facet_labels;
 
 		$expertise_single_name = get_field('expertise_single_name', 'option') ?: 'Area of Expertise';
 		$expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
 		$expertise_plural_name = get_field('expertise_plural_name', 'option') ?: 'Areas of Expertise';
 		$expertise_plural_name_attr = uamswp_attr_conversion($expertise_plural_name);
+
+		// Define string used to find and replace with values from Find-a-Doc Settings
+		$placeholder_expertise_single_name = '[Area of Expertise]';
+		$placeholder_expertise_plural_name = '[Areas of Expertise]';
 
 		// Create array for pairing FacetWP name with label if none exists
 		if ( !isset($facet_labels) ) {
@@ -1914,11 +1946,17 @@ function uamswp_fad_podcast() {
 		global $expertise_descendant_single_name_attr;
 		global $expertise_descendant_plural_name;
 		global $expertise_descendant_plural_name_attr;
+		global $placeholder_expertise_single_name;
+		global $placeholder_expertise_plural_name;
 
 		$expertise_descendant_single_name = get_field('expertise_descendant_single_name', 'option') ?: 'Specialty';
 		$expertise_descendant_single_name_attr = uamswp_attr_conversion($expertise_descendant_single_name);
 		$expertise_descendant_plural_name = get_field('expertise_descendant_plural_name', 'option') ?: 'Specialties';
 		$expertise_descendant_plural_name_attr = uamswp_attr_conversion($expertise_descendant_plural_name);
+
+		// Define string used to find and replace with values from Find-a-Doc Settings
+		$placeholder_expertise_single_name = '[Descendant Area of Expertise]';
+		$placeholder_expertise_plural_name = '[Descendant Areas of Expertise]';
 	}
 
 	// Get system settings for area of expertise archive page text
@@ -1927,10 +1965,16 @@ function uamswp_fad_podcast() {
 		global $expertise_archive_headline;
 		global $expertise_archive_headline_attr;
 		global $expertise_archive_intro_text;
+		global $placeholder_expertise_archive_headline;
+		global $placeholder_expertise_archive_intro_text;
 
 		$expertise_archive_headline = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
 		$expertise_archive_headline_attr = uamswp_attr_conversion($expertise_archive_headline);
 		$expertise_archive_intro_text = get_field('expertise_archive_intro_text', 'option');
+
+		// Define string used to find and replace with values from Find-a-Doc Settings
+		$placeholder_expertise_archive_headline = '[Area of Expertise Archive Title]';
+		$placeholder_expertise_archive_intro_text = '[Area of Expertise Archive Intro Text]';
 	}
 
 	// Get system settings for clinical resource labels
@@ -1940,11 +1984,17 @@ function uamswp_fad_podcast() {
 		global $clinical_resource_single_name_attr;
 		global $clinical_resource_plural_name;
 		global $clinical_resource_plural_name_attr;
+		global $placeholder_clinical_resource_single_name;
+		global $placeholder_clinical_resource_plural_name;
 
 		$clinical_resource_single_name = get_field('clinical_resource_single_name', 'option') ?: 'Clinical Resource';
 		$clinical_resource_single_name_attr = uamswp_attr_conversion($clinical_resource_single_name);
 		$clinical_resource_plural_name = get_field('clinical_resource_plural_name', 'option') ?: 'Clinical Resources';
 		$clinical_resource_plural_name_attr = uamswp_attr_conversion($clinical_resource_plural_name);
+
+		// Define string used to find and replace with values from Find-a-Doc Settings
+		$placeholder_clinical_resource_single_name = '[Clinical Resource]';
+		$placeholder_clinical_resource_plural_name = '[Clinical Resources]';
 	}
 
 	// Get system settings for clinical resource archive page text
@@ -1964,12 +2014,18 @@ function uamswp_fad_podcast() {
 		global $clinical_resource_type_single_name_attr;
 		global $clinical_resource_type_plural_name;
 		global $clinical_resource_type_plural_name_attr;
+		global $placeholder_clinical_resource_type_single_name;
+		global $placeholder_clinical_resource_type_plural_name;
 		global $facet_labels;
 
 		$clinical_resource_type_single_name = get_field('clinical_resource_type_single_name', 'option') ?: 'Resource Type';
 		$clinical_resource_type_single_name_attr = uamswp_attr_conversion($clinical_resource_type_single_name);
 		$clinical_resource_type_plural_name = get_field('clinical_resource_type_plural_name', 'option') ?: 'Resource Types';
 		$clinical_resource_type_plural_name_attr = uamswp_attr_conversion($clinical_resource_type_plural_name);
+
+		// Define string used to find and replace with values from Find-a-Doc Settings
+		$placeholder_clinical_resource_type_single_name = '[Resource Type]';
+		$placeholder_clinical_resource_type_plural_name = '[Resource Types]';
 
 		// Add item to FacetWP labels array for Areas of Expertise facet on Providers archive/list
 		$facet_labels['resource_type'] = $clinical_resource_type_plural_name;
@@ -1983,11 +2039,17 @@ function uamswp_fad_podcast() {
 		global $conditions_treatments_single_name_attr;
 		global $conditions_treatments_plural_name;
 		global $conditions_treatments_plural_name_attr;
+		global $placeholder_conditions_treatments_single_name;
+		global $placeholder_conditions_treatments_plural_name;
 
-		$conditions_treatments_single_name = get_field('conditions_treatments_single_name', 'option') ?: 'Condition';
+		$conditions_treatments_single_name = get_field('conditions_treatments_single_name', 'option') ?: 'Condition or Treatment';
 		$conditions_treatments_single_name_attr = uamswp_attr_conversion($conditions_treatments_single_name);
-		$conditions_treatments_plural_name = get_field('conditions_treatments_plural_name', 'option') ?: 'conditions_treatments';
+		$conditions_treatments_plural_name = get_field('conditions_treatments_plural_name', 'option') ?: 'Conditions and Treatments';
 		$conditions_treatments_plural_name_attr = uamswp_attr_conversion($conditions_treatments_plural_name);
+
+		// Define string used to find and replace with values from Find-a-Doc Settings
+		$placeholder_conditions_treatments_single_name = '[Condition or Treatment]';
+		$placeholder_conditions_treatments_plural_name = '[Conditions and Treatments]';
 	}
 
 	// Get system settings for condition labels
@@ -1997,12 +2059,18 @@ function uamswp_fad_podcast() {
 		global $conditions_single_name_attr;
 		global $conditions_plural_name;
 		global $conditions_plural_name_attr;
+		global $placeholder_conditions_single_name;
+		global $placeholder_conditions_plural_name;
 		global $facet_labels;
 
 		$conditions_single_name = get_field('conditions_single_name', 'option') ?: 'Condition';
 		$conditions_single_name_attr = uamswp_attr_conversion($conditions_single_name);
 		$conditions_plural_name = get_field('conditions_plural_name', 'option') ?: 'Conditions';
 		$conditions_plural_name_attr = uamswp_attr_conversion($conditions_plural_name);
+
+		// Define string used to find and replace with values from Find-a-Doc Settings
+		$placeholder_conditions_single_name = '[Condition]';
+		$placeholder_conditions_plural_name = '[Conditions]';
 
 		// Create array for pairing FacetWP name with label if none exists
 		if ( !isset($facet_labels) ) {
@@ -2024,10 +2092,16 @@ function uamswp_fad_podcast() {
 		global $conditions_archive_headline;
 		global $conditions_archive_headline_attr;
 		global $conditions_archive_intro_text;
+		global $placeholder_conditions_archive_headline;
+		global $placeholder_conditions_archive_intro_text;
 
 		$conditions_archive_headline = get_field('conditions_archive_headline', 'option') ?: 'Conditions';
 		$conditions_archive_headline_attr = uamswp_attr_conversion($conditions_archive_headline);
 		$conditions_archive_intro_text = get_field('conditions_archive_intro_text', 'option');
+
+		// Define string used to find and replace with values from Find-a-Doc Settings
+		$placeholder_conditions_archive_headline = '[Condition Archive Title]';
+		$placeholder_conditions_archive_intro_text = '[Condition Archive Intro Text]';
 	}
 
 	// Get system settings for treatment labels
@@ -2037,12 +2111,18 @@ function uamswp_fad_podcast() {
 		global $treatments_single_name_attr;
 		global $treatments_plural_name;
 		global $treatments_plural_name_attr;
+		global $placeholder_treatments_single_name;
+		global $placeholder_treatments_plural_name;
 		global $facet_labels;
 
 		$treatments_single_name = get_field('treatments_single_name', 'option') ?: 'Treatment/Procedure';
 		$treatments_single_name_attr = uamswp_attr_conversion($treatments_single_name);
 		$treatments_plural_name = get_field('treatments_plural_name', 'option') ?: 'Treatments and Procedures';
 		$treatments_plural_name_attr = uamswp_attr_conversion($treatments_plural_name);
+
+		// Define string used to find and replace with values from Find-a-Doc Settings
+		$placeholder_treatments_single_name = '[Treatment]';
+		$placeholder_treatments_plural_name = '[Treatments]';
 
 		// Create array for pairing FacetWP name with label if none exists
 		if ( !isset($facet_labels) ) {
@@ -2064,10 +2144,16 @@ function uamswp_fad_podcast() {
 		global $treatments_archive_headline;
 		global $treatments_archive_headline_attr;
 		global $treatments_archive_intro_text;
+		global $placeholder_treatments_archive_headline;
+		global $placeholder_treatments_archive_intro_text;
 
 		$treatments_archive_headline = get_field('treatments_archive_headline', 'option') ?: 'Treatments and Procedures';
 		$treatments_archive_headline_attr = uamswp_attr_conversion($treatments_archive_headline);
 		$treatments_archive_intro_text = get_field('treatments_archive_intro_text', 'option');
+
+		// Define string used to find and replace with values from Find-a-Doc Settings
+		$placeholder_treatments_archive_headline = '[Treatment Archive Title]';
+		$placeholder_treatments_archive_intro_text = '[Treatment Archive Intro Text]';
 	}
 
 // Get system settings for general patient appointment information
