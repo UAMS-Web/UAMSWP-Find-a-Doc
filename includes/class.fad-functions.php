@@ -1800,6 +1800,9 @@ function uamswp_fad_podcast() {
 		global $provider_plural_name_attr;
 		global $placeholder_provider_single_name;
 		global $placeholder_provider_plural_name;
+		global $placeholder_provider_short_name;
+		global $placeholder_provider_short_name_possessive;
+
 		global $facet_labels;
 
 		$provider_single_name = get_field('provider_single_name', 'option') ?: 'Provider';
@@ -1810,6 +1813,9 @@ function uamswp_fad_podcast() {
 		// Define string used to find and replace with values from Find-a-Doc Settings
 		$placeholder_provider_single_name = '[Provider]';
 		$placeholder_provider_plural_name = '[Providers]';
+		$placeholder_provider_short_name = '[Provider Short Name]';
+		$placeholder_provider_short_name_possessive = '[Provider Short Name\'s]';
+
 
 		// Create array for pairing FacetWP name with label if none exists
 		$facet_labels = isset($facet_labels) ?: array();
@@ -1842,6 +1848,8 @@ function uamswp_fad_podcast() {
 		global $location_plural_name_attr;
 		global $placeholder_location_single_name;
 		global $placeholder_location_plural_name;
+		global $placeholder_location_page_title;
+		global $placeholder_location_page_title_phrase;
 		global $facet_labels;
 
 		$location_single_name = get_field('location_single_name', 'option') ?: 'Location';
@@ -1852,6 +1860,8 @@ function uamswp_fad_podcast() {
 		// Define string used to find and replace with values from Find-a-Doc Settings
 		$placeholder_location_single_name = '[Location]';
 		$placeholder_location_plural_name = '[Locations]';
+		$placeholder_location_page_title = '[Location Title]';
+		$placeholder_location_page_title_phrase = '[the Location Title]';
 
 		// Create array for pairing FacetWP name with label if none exists
 		if ( !isset($facet_labels) ) {
@@ -1910,6 +1920,7 @@ function uamswp_fad_podcast() {
 		global $expertise_plural_name_attr;
 		global $placeholder_expertise_single_name;
 		global $placeholder_expertise_plural_name;
+		global $placeholder_expertise_page_title;
 		global $facet_labels;
 
 		$expertise_single_name = get_field('expertise_single_name', 'option') ?: 'Area of Expertise';
@@ -1920,6 +1931,7 @@ function uamswp_fad_podcast() {
 		// Define string used to find and replace with values from Find-a-Doc Settings
 		$placeholder_expertise_single_name = '[Area of Expertise]';
 		$placeholder_expertise_plural_name = '[Areas of Expertise]';
+		$placeholder_expertise_page_title = '[Area of Expertise Title]';
 
 		// Create array for pairing FacetWP name with label if none exists
 		if ( !isset($facet_labels) ) {
@@ -2158,6 +2170,340 @@ function uamswp_fad_podcast() {
 		// Define string used to find and replace with values from Find-a-Doc Settings
 		$placeholder_treatments_archive_headline = '[Treatment Archive Title]';
 		$placeholder_treatments_archive_intro_text = '[Treatment Archive Intro Text]';
+	}
+
+// System settings for fake subpage text elements
+
+	// Create substitutions for use in fake subpage text elements
+	function uamswp_fad_fpage_text_replace($string) {
+		// Bring in variables from outside of the function
+
+			// Typically defined on the template: single location, single area of expertise
+			global $page_title;
+
+			// Typically defined on the template: single location
+			global $page_title_phrase;
+
+			// Typically defined on the template: single provider
+			global $short_name;
+			global $short_name_possessive;
+
+			// Defined in uamswp_fad_labels_provider()
+			global $placeholder_provider_single_name;
+			global $provider_single_name;
+			global $placeholder_provider_plural_name;
+			global $provider_plural_name;
+			global $placeholder_provider_short_name;
+			global $placeholder_provider_short_name_possessive;
+
+			// Defined in uamswp_fad_archive_provider()
+			global $placeholder_provider_archive_headline;
+			global $provider_archive_headline;
+
+			// Defined in uamswp_fad_labels_location()
+			global $placeholder_location_single_name;
+			global $location_single_name;
+			global $placeholder_location_plural_name;
+			global $location_plural_name;
+			global $placeholder_location_page_title;
+			global $placeholder_location_page_title_phrase;
+
+			// Defined in uamswp_fad_labels_location_descendant()
+			global $placeholder_location_descendant_single_name;
+			global $location_descendant_single_name;
+			global $placeholder_location_descendant_plural_name;
+			global $location_descendant_plural_name;
+
+			// Defined in uamswp_fad_archive_location()
+			global $placeholder_location_archive_headline;
+			global $location_archive_headline;
+
+			// Defined in uamswp_fad_labels_expertise()
+			global $placeholder_expertise_single_name;
+			global $expertise_single_name;
+			global $placeholder_expertise_plural_name;
+			global $expertise_plural_name;
+			global $placeholder_expertise_page_title;
+
+			// Defined in uamswp_fad_labels_expertise_descendant()
+			global $placeholder_expertise_descendant_single_name;
+			global $expertise_descendant_single_name;
+			global $placeholder_expertise_descendant_plural_name;
+			global $expertise_descendant_plural_name;
+
+			// Defined in uamswp_fad_archive_expertise()
+			global $placeholder_expertise_archive_headline;
+			global $expertise_archive_headline;
+			global $placeholder_expertise_archive_intro_text;
+			global $expertise_archive_intro_text;
+
+			// Defined in uamswp_fad_labels_clinical_resource()
+			global $placeholder_clinical_resource_single_name;
+			global $clinical_resource_single_name;
+			global $placeholder_clinical_resource_plural_name;
+			global $clinical_resource_plural_name;
+
+			// Defined in uamswp_fad_archive_clinical_resource()
+			global $placeholder_clinical_resource_archive_headline;
+			global $clinical_resource_archive_headline;
+
+			// Defined in uamswp_fad_labels_clinical_resource_facet()
+			global $placeholder_clinical_resource_type_single_name;
+			global $clinical_resource_type_single_name;
+			global $placeholder_clinical_resource_type_plural_name;
+			global $clinical_resource_type_plural_name;
+
+			// Defined in uamswp_fad_labels_conditions_treatments()
+			global $placeholder_conditions_treatments_single_name;
+			global $conditions_treatments_single_name;
+			global $placeholder_conditions_treatments_plural_name;
+			global $conditions_treatments_plural_name;
+
+			// Defined in uamswp_fad_labels_conditions()
+			global $placeholder_conditions_single_name;
+			global $conditions_single_name;
+			global $placeholder_conditions_plural_name;
+			global $conditions_plural_name;
+
+			// Defined in uamswp_fad_archive_conditions()
+			global $placeholder_conditions_archive_headline;
+			global $conditions_archive_headline;
+			global $placeholder_conditions_archive_intro_text;
+			global $conditions_archive_intro_text;
+
+			// Defined in uamswp_fad_labels_treatments()
+			global $placeholder_treatments_single_name;
+			global $treatments_single_name;
+			global $placeholder_treatments_plural_name;
+			global $treatments_plural_name;
+
+			// Defined in uamswp_fad_archive_treatments()
+			global $placeholder_treatments_archive_headline;
+			global $treatments_archive_headline;
+			global $placeholder_treatments_archive_intro_text;
+			global $treatments_archive_intro_text;
+
+		// Check variables
+		$page_title = ( isset($page_title) && !empty($page_title) ) ? $page_title : '';
+		$page_title_phrase = ( isset($page_title_phrase) && !empty($page_title_phrase) ) ? $page_title_phrase : '';
+		$short_name = ( isset($short_name) && !empty($short_name) ) ? $short_name : '';
+		$short_name_possessive = ( isset($short_name_possessive) && !empty($short_name_possessive) ) ? $short_name_possessive : '';
+
+		// Make variables available outside of the function
+		// global $fpage_text_replace;
+
+		// Create array for defining text substitutions
+		// Key = old
+		// Value = new
+		$fpage_text_replace = array();
+
+			// System settings for ontology item labels
+
+				// System settings for provider labels
+				$fpage_text_replacements[$placeholder_provider_single_name] = $provider_single_name;
+				$fpage_text_replacements[$placeholder_provider_plural_name] = $provider_plural_name;
+
+				// System settings for provider archive page text
+				$fpage_text_replacements[$placeholder_provider_archive_headline] = $provider_archive_headline;
+
+				// System settings for location labels
+				$fpage_text_replacements[$placeholder_location_single_name] = $location_single_name;
+				$fpage_text_replacements[$placeholder_location_plural_name] = $location_plural_name;
+
+				// System settings for location descendant item labels
+				$fpage_text_replacements[$placeholder_location_single_name] = $location_single_name;
+				$fpage_text_replacements[$placeholder_location_plural_name] = $location_plural_name;
+
+				// System settings for location archive page text
+				$fpage_text_replacements[$placeholder_location_archive_headline] = $location_archive_headline;
+
+				// System settings for area of expertise labels
+				$fpage_text_replacements[$placeholder_expertise_single_name] = $expertise_single_name;
+				$fpage_text_replacements[$placeholder_expertise_plural_name] = $expertise_plural_name;
+
+				// System settings for area of expertise descendant item labels
+				$fpage_text_replacements[$placeholder_expertise_descendant_single_name] = $expertise_descendant_single_name;
+				$fpage_text_replacements[$placeholder_expertise_descendant_plural_name] = $expertise_descendant_plural_name;
+
+				// System settings for area of expertise archive page text
+				$fpage_text_replacements[$placeholder_expertise_archive_headline] = $expertise_archive_headline;
+				$fpage_text_replacements[$placeholder_expertise_archive_intro_text] = $expertise_archive_intro_text;
+
+				// System settings for clinical resource labels
+				$fpage_text_replacements[$placeholder_clinical_resource_single_name] = $clinical_resource_single_name;
+				$fpage_text_replacements[$placeholder_clinical_resource_plural_name] = $clinical_resource_plural_name;
+
+				// System settings for clinical resource archive page text
+				$fpage_text_replacements[$placeholder_clinical_resource_archive_headline] = $clinical_resource_archive_headline;
+
+				// System settings for clinical resource facet labels
+				$fpage_text_replacements[$placeholder_clinical_resource_type_single_name] = $clinical_resource_type_single_name;
+				$fpage_text_replacements[$placeholder_clinical_resource_type_plural_name] = $clinical_resource_type_plural_name;
+
+				// System settings for combined conditions and treatments labels
+				$fpage_text_replacements[$placeholder_conditions_treatments_single_name] = $conditions_treatments_single_name;
+				$fpage_text_replacements[$placeholder_conditions_treatments_plural_name] = $conditions_treatments_plural_name;
+
+				// System settings for condition labels
+				$fpage_text_replacements[$placeholder_conditions_single_name] = $conditions_single_name;
+				$fpage_text_replacements[$placeholder_conditions_plural_name] = $conditions_plural_name;
+
+				// System settings for condition archive page text
+				$fpage_text_replacements[$placeholder_conditions_archive_headline] = $conditions_archive_headline;
+				$fpage_text_replacements[$placeholder_conditions_archive_intro_text] = $conditions_archive_intro_text;
+
+				// System settings for treatment labels
+				$fpage_text_replacements[$placeholder_treatments_single_name] = $treatments_single_name;
+				$fpage_text_replacements[$placeholder_treatments_plural_name] = $treatments_plural_name;
+
+				// System settings for location labels
+				$fpage_text_replacements[$placeholder_treatments_archive_headline] = $treatments_archive_headline;
+				$fpage_text_replacements[$placeholder_treatments_archive_intro_text] = $treatments_archive_intro_text;
+
+			// Ontology item titles
+
+				// Provider titles
+				if ( $short_name ) {
+					$fpage_text_replacements[$placeholder_provider_short_name] = $short_name;
+				}
+				if ( $short_name_possessive ) {
+					$fpage_text_replacements[$placeholder_provider_short_name_possessive] = $short_name_possessive;
+				}
+
+				// Location titles
+				if ( $page_title ) {
+					$fpage_text_replacements[$placeholder_location_page_title] = $page_title;
+				}
+				if ( $page_title_phrase ) {
+					$fpage_text_replacements[$placeholder_location_page_title_phrase] = $page_title_phrase;
+				}
+
+				// Area of expertise titles
+				if ( $page_title ) {
+					$fpage_text_replacements[$placeholder_expertise_page_title] = $page_title;
+				}
+
+		return str_replace(array_keys($fpage_text_replacements), $fpage_text_replacements, $string); 
+	}
+
+	// Get system settings for fake subpage text elements on Provider subsection
+	function uamswp_fad_fpage_text_provider() {
+		// Make variables available outside of the function
+		global $location_fpage_title_provider;
+		global $location_fpage_intro_provider;
+		global $expertise_fpage_title_provider;
+		global $expertise_fpage_intro_provider;
+		global $clinical_resource_fpage_title_provider;
+		global $clinical_resource_fpage_intro_provider;
+		global $conditions_fpage_title_provider;
+		global $conditions_fpage_intro_provider;
+		global $treatments_fpage_title_provider;
+		global $treatments_fpage_intro_provider;
+		global $placeholder_short_name;
+		global $placeholder_short_name_possessive;
+
+		// Locations
+		$location_fpage_title_provider = get_field('location_fpage_title_provider', 'option') ?: '[Locations] Where [Provider Short Name] Practices'; // Title of Fake Subpage for Locations in Provider Subsection
+		$location_fpage_intro_provider = get_field('location_fpage_intro_provider', 'option') ?: ''; // Intro Text of Fake Subpage for Locations in Provider Subsection
+
+		// Areas of Expertise
+		$expertise_fpage_title_provider = get_field('expertise_fpage_title_provider', 'option') ?: '[Provider Short Name\'s] [Areas of Expertise]'; // Title of Fake Subpage for Areas of Expertise in Provider Subsection
+		$expertise_fpage_intro_provider = get_field('expertise_fpage_intro_provider', 'option') ?: ''; // Intro Text of Fake Subpage for Areas of Expertise in Provider Subsection
+
+		// Clinical Resources
+		$clinical_resource_fpage_title_provider = get_field('clinical_resource_fpage_title_provider', 'option') ?: '[Clinical Resources] Related to [Provider Short Name]'; // Title of Fake Subpage for Clinical Resources in Provider Subsection
+		$clinical_resource_fpage_intro_provider = get_field('clinical_resource_fpage_intro_provider', 'option') ?: ''; // Intro Text of Fake Subpage for Clinical Resources in Provider Subsection
+
+		// Conditions
+		$conditions_fpage_title_provider = get_field('conditions_fpage_title_provider', 'option') ?: '[Conditions] Diagnosed or Treated by [Provider Short Name]'; // Title of Fake Subpage for Conditions in Provider Subsection
+		$conditions_fpage_intro_provider = get_field('conditions_fpage_intro_provider', 'option') ?: ''; // Intro Text of Fake Subpage for Conditions in Provider Subsection
+
+		// Treatments
+		$treatments_fpage_title_provider = get_field('treatments_fpage_title_provider', 'option') ?: '[Treatments] Performed or Prescribed by [Provider Short Name]'; // Title of Fake Subpage for Treatments in Provider Subsection
+		$treatments_fpage_intro_provider = get_field('treatments_fpage_intro_provider', 'option') ?: ''; // Intro Text of Fake Subpage for Treatments in Provider Subsection
+	}
+
+	// Get system settings for fake subpage text elements on Location subsection
+	function uamswp_fad_fpage_text_location() {
+		// Make variables available outside of the function
+		global $provider_fpage_title_location;
+		global $provider_fpage_intro_location;
+		global $expertise_fpage_title_location;
+		global $expertise_fpage_intro_location;
+		global $clinical_resource_fpage_title_location;
+		global $clinical_resource_fpage_intro_location;
+		global $conditions_fpage_title_location;
+		global $conditions_fpage_intro_location;
+		global $xxxxx;
+		global $treatments_fpage_intro_location;
+
+
+		// Providers
+		$provider_fpage_title_location = get_field('provider_fpage_title_location', 'option') ?: '[Providers] at [Location Title]'; // Title of Fake Subpage for Providers in Locations Subsection
+		$provider_fpage_intro_location = get_field('provider_fpage_intro_location', 'option') ?: ''; // Intro Text of Fake Subpage for Providers in Location Subsection
+
+		// Areas of Expertise
+		$expertise_fpage_title_location = get_field('expertise_fpage_title_location', 'option') ?: '[Areas of Expertise] Represented at [the Location Title]'; // Title of Fake Subpage for Areas of Expertise in Location Subsection
+		$expertise_fpage_intro_location = get_field('expertise_fpage_intro_location', 'option') ?: ''; // Intro Text of Fake Subpage for Areas of Expertise in Location Subsection
+
+		// Clinical Resources
+		$clinical_resource_fpage_title_location = get_field('clinical_resource_fpage_title_location', 'option') ?: '[Clinical Resources] Related to [the Location Title]'; // Title of Fake Subpage for Clinical Resources in Location Subsection
+		$clinical_resource_fpage_intro_location = get_field('clinical_resource_fpage_intro_location', 'option') ?: ''; // Intro Text of Fake Subpage for Clinical Resources in Location Subsection
+
+		// Conditions
+		$conditions_fpage_title_location = get_field('conditions_fpage_title_location', 'option') ?: '[Conditions] Diagnosed or Treated at [the Location Title]'; // Title of Fake Subpage for Conditions in Location Subsection
+		$conditions_fpage_intro_location = get_field('conditions_fpage_intro_location', 'option') ?: ''; // Intro Text of Fake Subpage for Conditions in Location Subsection
+
+		// Treatments
+		$treatments_fpage_title_location = get_field('treatments_fpage_title_location', 'option') ?: '[Treatments] Performed or Prescribed at [the Location Title]'; // Title of Fake Subpage for Treatments in Location Subsection
+		$treatments_fpage_intro_location = get_field('treatments_fpage_intro_location', 'option') ?: ''; // Intro Text of Fake Subpage for Treatments in Location Subsection
+	}
+
+	// Get system settings for fake subpage text elements on Area of Expertise subsection
+	function uamswp_fad_fpage_text_expertise() {
+		// Make variables available outside of the function
+		global $provider_fpage_title_expertise;
+		global $provider_fpage_intro_expertise;
+		global $location_fpage_title_expertise;
+		global $location_fpage_intro_expertise;
+		global $expertise_descendant_fpage_title_expertise;
+		global $expertise_descendant_fpage_intro_expertise;
+		global $expertise_related_fpage_title_expertise;
+		global $expertise_related_fpage_intro_expertise;
+		global $clinical_resource_fpage_title_expertise;
+		global $clinical_resource_fpage_intro_expertise;
+		global $conditions_fpage_title_expertise;
+		global $conditions_fpage_intro_expertise;
+		global $treatments_fpage_title_expertise;
+		global $treatments_fpage_intro_expertise;
+
+		// Providers
+		$provider_fpage_title_expertise = get_field('provider_fpage_title_expertise', 'option') ?: '[Area of Expertise Title] [Providers]'; // Title of Fake Subpage for Providers in Area of Expertise Subsection
+		$provider_fpage_intro_expertise = get_field('provider_fpage_intro_expertise', 'option') ?: ''; // Intro Text of Fake Subpage for Providers in Area of Expertise Subsection
+
+		// Locations
+		$location_fpage_title_expertise = get_field('location_fpage_title_expertise', 'option') ?: '[Area of Expertise Title] [Locations]'; // Title of Fake Subpage for Locations in Area of Expertise Subsection
+		$location_fpage_intro_expertise = get_field('location_fpage_intro_expertise', 'option') ?: ''; // Intro Text of Fake Subpage for Locations in Area of Expertise Subsection
+
+		// Descendant Areas of Expertise
+		$expertise_descendant_fpage_title_expertise = get_field('expertise_descendant_fpage_title_expertise', 'option') ?: '[Descendant Areas of Expertise] Within [Area of Expertise Title]'; // Title of Fake Subpage for Descendant Areas of Expertise Items in Area of Expertise Subsection
+		$expertise_descendant_fpage_intro_expertise = get_field('expertise_descendant_fpage_intro_expertise', 'option') ?: ''; // Intro Text of Fake Subpage for Descendant Areas of Expertise Items in Area of Expertise Subsection
+
+		// Related Areas of Expertise
+		$expertise_related_fpage_title_expertise = get_field('expertise_related_fpage_title_expertise', 'option') ?: '[Areas of Expertise] Related to [Area of Expertise Title]'; // Title of Fake Subpage for Locations in Area of Expertise Subsection
+		$expertise_related_fpage_intro_expertise = get_field('expertise_related_fpage_intro_expertise', 'option') ?: ''; // Intro Text of Fake Subpage for Related Areas of Expertise Items in Area of Expertise Subsection
+
+		// Clinical Resources
+		$clinical_resource_fpage_title_expertise = get_field('clinical_resource_fpage_title_expertise', 'option') ?: '[Clinical Resources] Related to [Area of Expertise Title]'; // Title of Fake Subpage for Clinical Resources in Area of Expertise Subsection
+		$clinical_resource_fpage_intro_expertise = get_field('clinical_resource_fpage_intro_expertise', 'option') ?: ''; // Intro Text of Fake Subpage for Clinical Resources in Area of Expertise Subsection
+
+		// Conditions
+		$conditions_fpage_title_expertise = get_field('conditions_fpage_title_expertise', 'option') ?: '[Conditions] Related to [Area of Expertise Title]'; // Title of Fake Subpage for Conditions in Area of Expertise Subsection
+		$conditions_fpage_intro_expertise = get_field('conditions_fpage_intro_expertise', 'option') ?: ''; // Intro Text of Fake Subpage for Conditions in Area of Expertise Subsection
+
+		// Treatments
+		$treatments_fpage_title_expertise = get_field('treatments_fpage_title_expertise', 'option') ?: '[Treatments] Related to [Area of Expertise Title]'; // Title of Fake Subpage for Treatments in Area of Expertise Subsection
+		$treatments_fpage_intro_expertise = get_field('treatments_fpage_intro_expertise', 'option') ?: ''; // Intro Text of Fake Subpage for Treatments in Area of Expertise Subsection
 	}
 
 // Get system settings for general patient appointment information

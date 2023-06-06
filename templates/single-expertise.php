@@ -26,6 +26,9 @@
 	// Get system settings for treatment labels
 	uamswp_fad_labels_treatments();
 
+// Get system settings for fake subpage text elements on Area of Expertise subsection
+uamswp_fad_fpage_text_expertise();
+
 // Set general variables
 $page_id = get_the_ID();
 $page_title = get_the_title();
@@ -271,6 +274,8 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 
 	// Display conditions
 	add_action( 'genesis_after_entry', 'uamswp_expertise_conditions_cpt', 16 );
+	$condition_heading = $conditions_fpage_title_expertise; // Conditions section title pre-substitution
+	$condition_heading = uamswp_fad_fpage_text_replace($condition_heading); // Conditions section title post-substitution
 	function uamswp_expertise_conditions_cpt() {
 		// Bring in variables from outside of the function
 		global $page_title; // Defined on the template
@@ -279,6 +284,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		global $conditions_cpt_query; // Defined in uamswp_fad_ontology_conditions_query()
 		global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
 		global $conditions_plural_name; // Defined in uamswp_fad_labels_conditions()
+		global $condition_heading; // Defined on the template
 
 		$condition_context = 'single-expertise';
 		$condition_heading_related_name = $page_title; // To what is it related?
@@ -291,6 +297,8 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 
 	// Display treatments
 	add_action( 'genesis_after_entry', 'uamswp_expertise_treatments_cpt', 18 );
+	$treatment_heading = $treatments_fpage_title_expertise; // Treatments section title pre-substitution
+	$treatment_heading = uamswp_fad_fpage_text_replace($treatment_heading); // Treatments section title post-substitution
 	function uamswp_expertise_treatments_cpt() {
 		// Bring in variables from outside of the function
 		global $page_title; // Defined on the template
@@ -299,6 +307,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		global $treatments_cpt_query; // Defined in uamswp_fad_ontology_treatments_query()
 		global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
 		global $treatments_plural_name; // Defined in uamswp_fad_labels_treatments()
+		global $treatment_heading; // Defined on the template
 
 		$treatment_context = 'single-expertise';
 		$treatment_heading_related_name = $page_title; // To what is it related?
