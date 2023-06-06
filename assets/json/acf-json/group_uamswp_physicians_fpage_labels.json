@@ -4,64 +4,6 @@
 	"title": "Fake Subpage for Providers in an Ontology Subsection",
 	"fields": [
 		{
-			"key": "field_provider_fpage_tab_expertise",
-			"label": "Area of Expertise Subsection",
-			"name": "",
-			"type": "tab",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"placement": "left",
-			"endpoint": 0
-		},
-		{
-			"key": "field_provider_fpage_title_expertise",
-			"label": "Title of Fake Subpage for Providers in Area of Expertise Subsection",
-			"name": "provider_fpage_title_expertise",
-			"type": "text",
-			"instructions": "If you leave this blank, the default title structure will be used.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"default_value": "",
-			"placeholder": "[Area of Expertise Title] [Providers]",
-			"prepend": "",
-			"append": "",
-			"maxlength": "",
-			"acfe_validate": "",
-			"acfe_update": ""
-		},
-		{
-			"key": "field_provider_fpage_intro_expertise",
-			"label": "Intro Text of Fake Subpage for Providers in Area of Expertise Subsection",
-			"name": "provider_fpage_intro_expertise",
-			"type": "textarea",
-			"instructions": "If you leave this blank, the default intro text structure will be used.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "",
-			"maxlength": 449,
-			"rows": "",
-			"new_lines": "",
-			"acfe_textarea_code": 0
-		},
-		{
 			"key": "field_provider_fpage_tab_location",
 			"label": "Location Subsection",
 			"name": "",
@@ -103,6 +45,64 @@
 			"key": "field_provider_fpage_intro_location",
 			"label": "Intro Text of Fake Subpage for Providers in Location Subsection",
 			"name": "provider_fpage_intro_location",
+			"type": "textarea",
+			"instructions": "If you leave this blank, the default intro text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 449,
+			"rows": "",
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_provider_fpage_tab_expertise",
+			"label": "Area of Expertise Subsection",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_provider_fpage_title_expertise",
+			"label": "Title of Fake Subpage for Providers in Area of Expertise Subsection",
+			"name": "provider_fpage_title_expertise",
+			"type": "text",
+			"instructions": "If you leave this blank, the default title structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "[Area of Expertise Title] [Providers]",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_provider_fpage_intro_expertise",
+			"label": "Intro Text of Fake Subpage for Providers in Area of Expertise Subsection",
+			"name": "provider_fpage_intro_expertise",
 			"type": "textarea",
 			"instructions": "If you leave this blank, the default intro text structure will be used.",
 			"required": 0,
