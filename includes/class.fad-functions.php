@@ -1633,8 +1633,8 @@ function uamswp_fad_ontology_nav_menu() {
 	global $location_plural_name_attr; // Typically defined in uamswp_fad_labels_location()
 	global $expertise_plural_name; // Typically defined in uamswp_fad_labels_expertise()
 	global $expertise_plural_name_attr; // Typically defined in uamswp_fad_labels_expertise()
-	global $expertise_descendant_plural_name; // Defined in uamswp_fad_labels_expertise_descendant()
-	global $expertise_descendant_plural_name_attr; // Defined in uamswp_fad_labels_expertise_descendant()
+	global $expertise_descendant_plural_name; // Typically defined in uamswp_fad_labels_expertise_descendant()
+	global $expertise_descendant_plural_name_attr; // Typically defined in uamswp_fad_labels_expertise_descendant()
 	global $clinical_resource_plural_name; // Typically defined in uamswp_fad_labels_clinical_resource()
 	global $clinical_resource_plural_name_attr; // Typically defined in uamswp_fad_labels_clinical_resource()
 
@@ -2176,6 +2176,8 @@ function uamswp_fad_podcast() {
 
 	// Create substitutions for use in fake subpage text elements
 	function uamswp_fad_fpage_text_replace($string) {
+		// Be sure to only call this function AFTER the following external global variables have been defined on the page
+
 		// Bring in variables from outside of the function
 
 			// Typically defined on the template: single location, single area of expertise
