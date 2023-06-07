@@ -3,8 +3,44 @@
  * Template Name: Single Condition
  */
 
-$keywords = get_field('condition_alternate');
+// Get system settings for ontology item labels
 
+	// Get system settings for provider labels
+	uamswp_fad_labels_provider();
+
+	// Get system settings for location labels
+	uamswp_fad_labels_location();
+
+	// Get system settings for location descendant item labels
+	// uamswp_fad_labels_location_descendant();
+
+	// Get system settings for area of expertise labels
+	uamswp_fad_labels_expertise();
+
+	// Get system settings for clinical resource labels
+	uamswp_fad_labels_clinical_resource();
+
+	// Get system settings for area of expertise descendant item labels
+	// uamswp_fad_labels_expertise_descendant();
+
+	// Get system settings for condition labels
+	uamswp_fad_labels_conditions();
+
+	// Get system settings for treatment labels
+	uamswp_fad_labels_treatments();
+
+// Get system settings for condition archive page text
+// uamswp_fad_archive_conditions();
+
+// Get the page title for the condition
+$page_title = get_the_title();
+$page_title_attr = uamswp_attr_conversion($page_title);
+
+// Get system settings for jump links (a.k.a. anchor links)
+uamswp_fad_labels_jump_links();
+
+// Construct the meta keywords element
+$keywords = get_field('condition_alternate');
 function uamswp_keyword_hook_header() {
 	// Bring in variables from outside of the function
 	global $keywords; // Defined on the template
@@ -23,35 +59,6 @@ function uamswp_keyword_hook_header() {
 	endif;
 }
 add_action('wp_head','uamswp_keyword_hook_header');
-
-$page_title = get_the_title();
-$page_title_attr = uamswp_attr_conversion($page_title);
-
-// Get system settings for ontology item labels
-
-	// Get system settings for provider labels
-	uamswp_fad_labels_provider();
-
-	// Get system settings for location labels
-	uamswp_fad_labels_location();
-
-	// Get system settings for area of expertise labels
-	uamswp_fad_labels_expertise();
-
-	// Get system settings for clinical resource labels
-	uamswp_fad_labels_clinical_resource();
-
-	// Get system settings for condition labels
-	uamswp_fad_labels_conditions();
-
-	// Get system settings for treatment labels
-	uamswp_fad_labels_treatments();
-
-// Get system settings for condition archive page text
-uamswp_fad_archive_conditions();
-
-// Get system settings for jump links (a.k.a. anchor links)
-uamswp_fad_labels_jump_links();
 
 // Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 

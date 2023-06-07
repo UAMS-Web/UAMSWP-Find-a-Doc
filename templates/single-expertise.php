@@ -11,6 +11,9 @@
 	// Get system settings for location labels
 	uamswp_fad_labels_location();
 
+	// Get system settings for location descendant item labels
+	// uamswp_fad_labels_location_descendant();
+
 	// Get system settings for area of expertise labels
 	uamswp_fad_labels_expertise();
 
@@ -26,14 +29,25 @@
 	// Get system settings for treatment labels
 	uamswp_fad_labels_treatments();
 
+// Get system settings for area of expertise archive page text
+// uamswp_fad_archive_expertise();
+
+// Get the page ID
+$page_id = get_the_ID();
+
+// Get the page title for the area of expertise
+$page_title = get_the_title();
+$page_title_attr = uamswp_attr_conversion($page_title);
+
+// Get the page URL
+$page_url = get_permalink();
+
 // Get system settings for fake subpage text elements on Area of Expertise subsection
 uamswp_fad_fpage_text_expertise();
 
-// Set general variables
-$page_id = get_the_ID();
-$page_title = get_the_title();
-$page_title_attr = uamswp_attr_conversion($page_title);
-$page_url = get_permalink();
+// Get system settings for jump links (a.k.a. anchor links)
+// uamswp_fad_labels_jump_links();
+
 
 // Area of Expertise Content Type
 $ontology_type = get_field('expertise_type'); // True is ontology type, false is content type

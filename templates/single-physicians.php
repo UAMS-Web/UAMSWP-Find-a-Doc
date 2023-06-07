@@ -14,8 +14,14 @@
 	// Get system settings for location labels
 	uamswp_fad_labels_location();
 
+	// Get system settings for location descendant item labels
+	// uamswp_fad_labels_location_descendant();
+
 	// Get system settings for area of expertise labels
 	uamswp_fad_labels_expertise();
+
+	// Get system settings for area of expertise descendant item labels
+	// uamswp_fad_labels_expertise_descendant();
 
 	// Get system settings for clinical resource labels
 	uamswp_fad_labels_clinical_resource();
@@ -26,61 +32,94 @@
 	// Get system settings for treatment labels
 	uamswp_fad_labels_treatments();
 
+// Get system settings for provider archive page text
+// uamswp_fad_archive_provider();
+
+// Construct name values for the provider
+
+	// Construct a list of the provider's degrees (e.g., "M.D., Ph.D.")
+	$degrees = get_field('physician_degree',$post->ID);
+	$degree_list = '';
+	$i = 1;
+	if ( $degrees ) {
+		foreach( $degrees as $degree ):
+			$degree_name = get_term( $degree, 'degree');
+			$degree_list .= $degree_name->name;
+			if( count($degrees) > $i ) {
+				$degree_list .= ", ";
+			}
+			$i++;
+		endforeach;
+	}
+
+	// Construct a list of the provider's languages (e.g., "English, Spanish")
+	$languages = get_field('physician_languages',$post->ID);
+	$language_count = 0;
+	if ($languages) {
+		$language_count = count($languages);
+	}
+	$language_list = '';
+	$i = 1;
+	if ( $languages ) {
+		foreach( $languages as $language ):
+			$language_name = get_term_by( 'id', $language, 'language');
+			if( is_object($language_name) ) {
+				$language_list .= $language_name->name;
+				if( $language_count > $i ) {
+					$language_list .= ", ";
+				}
+			}
+			$i++;
+		endforeach;
+	}
+
+	// Get the provider's prefix (e.g., "Dr.")
+	$prefix = get_field('physician_prefix',$post->ID);
+
+	// Get the elements of the provider's name
+	$first_name = get_field('physician_first_name',$post->ID); // Get the provider's first name
+	$middle_name = get_field('physician_middle_name',$post->ID); // Get the provider's middle name
+	$last_name = get_field('physician_last_name',$post->ID); // Get the provider's last name
+	$pedigree = get_field('physician_pedigree',$post->ID); // Get the provider's generational suffix (e.g., "Jr.")
+
+	// Construct the variants of the provider's name
+
+	// Full name (e.g., "Leonard H. McCoy, M.D.")
+	$full_name = $first_name . ' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '') . ( $degree_list ? ', ' . $degree_list : '' );
+	$full_name_attr = uamswp_attr_conversion($full_name);
+
+	// Medium name (e.g., "Dr. Leonard H. McCoy")
+	$medium_name = ($prefix ? $prefix .' ' : '') . $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name;
+	$medium_name_attr = uamswp_attr_conversion($medium_name);
+
+	// Short name (e.g., "Dr. McCoy")
+	$short_name = $prefix ? $prefix .'&nbsp;' .$last_name : $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '');
+	$short_name_attr = uamswp_attr_conversion($short_name);
+
+	// Short name possessive (e.g., "Dr. McCoy's")
+	if ( substr($short_name, -1) == 's' ) { // If the provider's name ends in "s"...
+		$short_name_possessive = $short_name . '\''; // Use an apostrophe with no "s" when indicating the possessive form
+	} else {
+		$short_name_possessive = $short_name . '\'s'; // Use an apostrophe with an "s" when indicating the possessive form
+	}
+
+	// Sort name (e.g., "McCoy, Leonard H.")
+	$sort_name = $last_name . ', ' . $first_name . ' ' . $middle_name;
+
+	// Sort name parameter (e.g., "mccoy-leonard-h")
+	$sort_name_param_value = sanitize_title_with_dashes($sort_name);
+
 // Get system settings for fake subpage or section text elements on Provider subsection or profile
 uamswp_fad_fpage_text_provider();
 
 // Get system settings for jump links (a.k.a. anchor links)
 uamswp_fad_labels_jump_links();
-	
-$degrees = get_field('physician_degree',$post->ID);
-$degree_list = '';
-$i = 1;
-if ( $degrees ) {
-	foreach( $degrees as $degree ):
-		$degree_name = get_term( $degree, 'degree');
-		$degree_list .= $degree_name->name;
-		if( count($degrees) > $i ) {
-			$degree_list .= ", ";
-		}
-		$i++;
-	endforeach;
-}
-$languages = get_field('physician_languages',$post->ID);
-$language_count = 0;
-if ($languages) {
-	$language_count = count($languages);
-}
-$language_list = '';
-$i = 1;
-if ( $languages ) {
-	foreach( $languages as $language ):
-		$language_name = get_term_by( 'id', $language, 'language');
-		if( is_object($language_name) ) {
-			$language_list .= $language_name->name;
-			if( $language_count > $i ) {
-				$language_list .= ", ";
-			}
-		}
-		$i++;
-	endforeach;
-}
 
-$prefix = get_field('physician_prefix',$post->ID);
-$first_name = get_field('physician_first_name',$post->ID);
-$middle_name = get_field('physician_middle_name',$post->ID);
-$last_name = get_field('physician_last_name',$post->ID);
-$pedigree = get_field('physician_pedigree',$post->ID);
-$full_name = $first_name . ' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '') . ( $degree_list ? ', ' . $degree_list : '' );
-$full_name_attr = uamswp_attr_conversion($full_name);
-$medium_name = ($prefix ? $prefix .' ' : '') . $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name;
-$medium_name_attr = uamswp_attr_conversion($medium_name);
-$short_name = $prefix ? $prefix .'&nbsp;' .$last_name : $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '');
-$short_name_attr = uamswp_attr_conversion($short_name);
-$sort_name = $last_name . ', ' . $first_name . ' ' . $middle_name;
-$sort_name_param_value = sanitize_title_with_dashes($sort_name);
-$excerpt = get_field('physician_short_clinical_bio',$post->ID);
+// Get resident values
 $resident = get_field('physician_resident',$post->ID);
 $resident_title_name = 'Resident Physician';
+
+// Get clinical title values
 $phys_title = get_field('physician_title',$post->ID);
 $phys_title_name = $resident ? $resident_title_name : get_term( $phys_title, 'clinical_title' )->name;
 $phys_title_name_attr = uamswp_attr_conversion($phys_title_name);
@@ -108,63 +147,53 @@ if ( !empty($phys_title_indef_article_exceptions) ) {
 		}
 	}
 }
-if ( substr($short_name, -1) == 's' ) { // If the provider's name ends in "s"...
-	$short_name_possessive = $short_name . '\''; // Use an apostrophe with no "s" when indicating the possessive form
-} else {
-	$short_name_possessive = $short_name . '\'s'; // Use an apostrophe with an "s" when indicating the possessive form
-}
-$bio = get_field('physician_clinical_bio',$post->ID);
-$eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$post->ID);
-// Check for valid locations
-$locations = get_field('physician_locations',$post->ID);
-$location_valid = false;
-if ( !empty($locations) ) {
-	foreach( $locations as $location ) {
-		if ( get_post_status ( $location ) == 'publish' ) {
-			$location_valid = true;
-			$break;
-		}
-	}
-}
-// Get number of valid locations
-$location_count = 0;
-if( $locations && $location_valid ) {
-	foreach( $locations as $location ) {
-		if ( get_post_status ( $location ) == 'publish' ) {
-			$location_count++;
-		}
-	} // endforeach
-}
-// Get primary appointment location name
-$l = 1;
-if( $locations && $location_valid ) {
-	foreach( $locations as $location ) {
-		if ( 2 > $l ){
-			if ( get_post_status ( $location ) == 'publish' ) {
-				$primary_appointment_title = get_the_title( $location );
-				$primary_appointment_title_attr = uamswp_attr_conversion($primary_appointment_title);
-				$primary_appointment_url = get_the_permalink( $location );
-				$primary_appointment_city = get_field('location_city', $location);
-				$primary_appointment_city_attr = uamswp_attr_conversion($primary_appointment_city);
 
-				$l++;
+// Check if the provider sees patients via appointments
+$eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$post->ID);
+
+// Get the provider's location values
+$locations = get_field('physician_locations',$post->ID);
+
+	// Check for valid (published) locations
+	$location_valid = false;
+	if ( !empty($locations) ) {
+		foreach( $locations as $location ) {
+			if ( get_post_status ( $location ) == 'publish' ) {
+				$location_valid = true;
+				$break;
 			}
 		}
-	} // endforeach
-}
-// Set Areas of Expertise Variables
-$expertises = get_field('physician_expertise',$post->ID);
-if ( $expertises ) {
-	foreach ( $expertises as $expertise ) {
-		if ( get_post_status ( $expertise ) == 'publish' ) {
-			$expertise_primary_name = get_the_title($expertise);
-			$expertise_primary_name_attr = uamswp_attr_conversion($expertise_primary_name);
-			break;
-		}
 	}
-}
 
-// Hide Sections
+	// Count the number of valid locations
+	$location_count = 0;
+	if( $locations && $location_valid ) {
+		foreach( $locations as $location ) {
+			if ( get_post_status ( $location ) == 'publish' ) {
+				$location_count++;
+			}
+		} // endforeach
+	}
+
+	// Get the name of the provider's primary location
+	$l = 1;
+	if( $locations && $location_valid ) {
+		foreach( $locations as $location ) {
+			if ( 2 > $l ){
+				if ( get_post_status ( $location ) == 'publish' ) {
+					$primary_appointment_title = get_the_title( $location );
+					$primary_appointment_title_attr = uamswp_attr_conversion($primary_appointment_title);
+					$primary_appointment_url = get_the_permalink( $location );
+					$primary_appointment_city = get_field('location_city', $location);
+					$primary_appointment_city_attr = uamswp_attr_conversion($primary_appointment_city);
+
+					$l++;
+				}
+			}
+		} // endforeach
+	}
+
+// Conditionally suppress sections based on Find-a-Doc Settings configuration
 $hide_medical_ontology = false;
 $provider_region = get_field('physician_region',$post->ID);
 $provider_service_line = get_field('physician_service_line',$post->ID);
@@ -185,67 +214,91 @@ if( have_rows('remove_ontology_criteria', 'option') ):
 	endwhile;
 endif;
 
-// Set meta description
-if (empty($excerpt)){
-	if ($bio){
-		$excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 155, '...');
-	} else {
-		$fallback_desc = $medium_name_attr . ' is ' . ($phys_title ? $phys_title_indef_article . ' ' . strtolower($phys_title_name) : 'a health care provider' ) . ($primary_appointment_title_attr ? ' at ' . $primary_appointment_title_attr : '') . ' employed by UAMS Health.';
-		$excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 155, '...');
+// Set the schema description and the meta description
+
+	// Get excerpt
+	$excerpt = get_field('physician_short_clinical_bio',$post->ID);
+
+	// Get clinical bio
+	$bio = get_field('physician_clinical_bio',$post->ID);
+
+	// Create excerpt if none exists
+	if ( empty( $excerpt ) ) {
+		if ( $bio ) {
+			$excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 155, '...');
+		} else {
+			$fallback_desc = $medium_name_attr . ' is ' . ($phys_title ? $phys_title_indef_article . ' ' . strtolower($phys_title_name) : 'a health care provider' ) . ($primary_appointment_title_attr ? ' at ' . $primary_appointment_title_attr : '') . ' employed by UAMS Health.';
+			$excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 155, '...');
+		}
 	}
-}
-$schema_description = $excerpt; // Used for Schema Data. Should ALWAYS have a value
 
-// Override theme's method of defining the meta description
-function sp_titles_desc($html) {
-	// Bring in variables from outside of the function
-	global $excerpt; // Defined on the template
+	// Set schema description
+	$schema_description = $excerpt; // Used for Schema Data. Should ALWAYS have a value
 
-	$html = $excerpt;
-	return $html;
-}
-add_filter('seopress_titles_desc', 'sp_titles_desc');
+	// Override theme's method of defining the meta description
+	function sp_titles_desc($html) {
+		// Bring in variables from outside of the function
+		global $excerpt; // Defined on the template
 
-// Override theme's method of defining the meta page title
-function uamswp_fad_title($html) { 
-	// Bring in variables from outside of the function
-	global $full_name_attr; // Defined on the template
-	global $phys_title_name_attr; // Defined on the template
-	global $primary_appointment_city_attr; // Defined on the template
-	global $expertise_primary_name_attr; // Defined on the template
-
-	$meta_title_chars_max = 60; // The recommended length for meta titles is 50-60 characters. Sets the max to 60.
-	$meta_title_separator = ' | '; // Characters separating components of the meta title
-
-	// Base meta title ("{Full display name} | UAMS Health")
-	$meta_title_base = $full_name_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
-	$meta_title_base_chars = strlen( $meta_title_base ); // Count the characters in the meta title
-
-	// Base meta title ("{Full display name} | {Clinical title} | UAMS Health")
-	$meta_title_enhanced = $full_name_attr . $meta_title_separator . $phys_title_name_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
-	$meta_title_enhanced_chars = strlen( $meta_title_enhanced ); // Count the characters in the meta title
-
-	// Enhanced meta title level 1 ("{Full display name} | {Clinical title} | {City of primary location} | UAMS Health")
-	$meta_title_enhanced_x2 = $full_name_attr . $meta_title_separator . $phys_title_name_attr . $meta_title_separator . $primary_appointment_city_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
-	$meta_title_enhanced_x2_chars = strlen( $meta_title_enhanced_x2 ); // Count the characters in the meta title
-
-	// Enhanced meta title level 2 ("{Full display name} | {Clinical title} | {Primary area of expertise} | {City of primary location} | UAMS Health")
-	$meta_title_enhanced_x3 = $full_name_attr . $meta_title_separator . $phys_title_name_attr . $meta_title_separator . $expertise_primary_name . $meta_title_separator . $primary_appointment_city_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
-	$meta_title_enhanced_x3_chars = strlen( $meta_title_enhanced_x3 ); // Count the characters in the meta title
-
-	if ( $expertise_primary_name && ( $meta_title_enhanced_x3_chars <= $meta_title_chars_max ) ) {
-		$html = $meta_title_enhanced_x3;
-	} elseif ( $primary_appointment_city_attr && ( $meta_title_enhanced_x2_chars <= $meta_title_chars_max ) ) {
-		$html = $meta_title_enhanced_x2;
-	} elseif ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
-		$html = $meta_title_enhanced;
-	} else {
-		$html = $meta_title_base;
+		$html = $excerpt;
+		return $html;
 	}
-	return $html;
-}
-// add_filter('seopress_titles_title', 'uamswp_fad_title', 20, 2);
-add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+	add_filter('seopress_titles_desc', 'sp_titles_desc');
+
+// Set the meta title
+
+	// Get primary area of expertise
+	$expertises = get_field('physician_expertise',$post->ID);
+	if ( $expertises ) {
+		foreach ( $expertises as $expertise ) {
+			if ( get_post_status ( $expertise ) == 'publish' ) {
+				$expertise_primary_name = get_the_title($expertise);
+				$expertise_primary_name_attr = uamswp_attr_conversion($expertise_primary_name);
+				break;
+			}
+		}
+	}
+
+	// Override theme's method of defining the meta page title
+	function uamswp_fad_title($html) { 
+		// Bring in variables from outside of the function
+		global $full_name_attr; // Defined on the template
+		global $phys_title_name_attr; // Defined on the template
+		global $primary_appointment_city_attr; // Defined on the template
+		global $expertise_primary_name_attr; // Defined on the template
+
+		$meta_title_chars_max = 60; // The recommended length for meta titles is 50-60 characters. Sets the max to 60.
+		$meta_title_separator = ' | '; // Characters separating components of the meta title
+
+		// Base meta title ("{Full display name} | UAMS Health")
+		$meta_title_base = $full_name_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
+		$meta_title_base_chars = strlen( $meta_title_base ); // Count the characters in the meta title
+
+		// Base meta title ("{Full display name} | {Clinical title} | UAMS Health")
+		$meta_title_enhanced = $full_name_attr . $meta_title_separator . $phys_title_name_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
+		$meta_title_enhanced_chars = strlen( $meta_title_enhanced ); // Count the characters in the meta title
+
+		// Enhanced meta title level 1 ("{Full display name} | {Clinical title} | {City of primary location} | UAMS Health")
+		$meta_title_enhanced_x2 = $full_name_attr . $meta_title_separator . $phys_title_name_attr . $meta_title_separator . $primary_appointment_city_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
+		$meta_title_enhanced_x2_chars = strlen( $meta_title_enhanced_x2 ); // Count the characters in the meta title
+
+		// Enhanced meta title level 2 ("{Full display name} | {Clinical title} | {Primary area of expertise} | {City of primary location} | UAMS Health")
+		$meta_title_enhanced_x3 = $full_name_attr . $meta_title_separator . $phys_title_name_attr . $meta_title_separator . $expertise_primary_name . $meta_title_separator . $primary_appointment_city_attr . $meta_title_separator . get_bloginfo( "name" ); // Construct the meta title
+		$meta_title_enhanced_x3_chars = strlen( $meta_title_enhanced_x3 ); // Count the characters in the meta title
+
+		if ( $expertise_primary_name && ( $meta_title_enhanced_x3_chars <= $meta_title_chars_max ) ) {
+			$html = $meta_title_enhanced_x3;
+		} elseif ( $primary_appointment_city_attr && ( $meta_title_enhanced_x2_chars <= $meta_title_chars_max ) ) {
+			$html = $meta_title_enhanced_x2;
+		} elseif ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
+			$html = $meta_title_enhanced;
+		} else {
+			$html = $meta_title_base;
+		}
+		return $html;
+	}
+	// add_filter('seopress_titles_title', 'uamswp_fad_title', 20, 2);
+	add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 function be_remove_title_from_single_crumb( $crumb, $args ) { // Because BE is the man
 	// Bring in variables from outside of the function

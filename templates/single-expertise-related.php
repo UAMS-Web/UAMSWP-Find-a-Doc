@@ -26,14 +26,20 @@
 	// Get system settings for treatment labels
 	uamswp_fad_labels_treatments();
 
+// Get the page ID for the 'parent' area of expertise
+$page_id = get_the_ID();
+
+// Get the page title for the 'parent' area of expertise
+$page_title = get_the_title(); // Title of the area of expertise
+$page_title_attr = uamswp_attr_conversion($page_title);
+
+// Get the page URL for the 'parent' area of expertise
+$page_url = get_permalink();
+
 // Get system settings for fake subpage text elements on Area of Expertise subsection
 uamswp_fad_fpage_text_expertise();
 
-// Set general variables
-$page_id = get_the_ID();
-$page_title = get_the_title(); // Title of Area of Expertise
-$page_title_attr = uamswp_attr_conversion($page_title);
-$page_url = get_permalink();
+// Set general variables for fake subpage
 $fpage_name = 'Related ' . $expertise_plural_name; // Name of ontology item type represented by this fake subpage
 $fpage_name_attr = uamswp_attr_conversion($fpage_name);
 $fpage_title = $expertise_related_fpage_title_expertise; // Fake subpage page title

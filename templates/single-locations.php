@@ -20,6 +20,9 @@
 	// Get system settings for area of expertise labels
 	uamswp_fad_labels_expertise();
 
+	// Get system settings for area of expertise descendant item labels
+	// uamswp_fad_labels_expertise_descendant();
+
 	// Get system settings for clinical resource labels
 	uamswp_fad_labels_clinical_resource();
 
@@ -28,6 +31,14 @@
 
 	// Get system settings for treatment labels
 	uamswp_fad_labels_treatments();
+
+// Get system settings for location archive page text
+// uamswp_fad_archive_location();
+
+// Get the page title for the location
+$page_title = get_the_title(); // Title of the location
+$page_title_attr = uamswp_attr_conversion($page_title);
+$page_title_phrase = ( get_field('location_prepend_the') ? 'the ' : '' ) . $page_title; // Conditionally prepend "the" to the page title for use in phrases
 
 // Get system settings for fake subpage or section text elements on Location subsection or profile
 uamswp_fad_fpage_text_location();
@@ -42,9 +53,6 @@ if (empty($excerpt)){
 		$excerpt = mb_strimwidth(wp_strip_all_tags($about_loc), 0, 155, '...');
 	}
 }
-$page_title = get_the_title( );
-$page_title_attr = uamswp_attr_conversion($page_title);
-
 
 // Parent Location 
 
@@ -354,11 +362,6 @@ while ( have_posts() ) : the_post(); ?>
 	$location_zip = get_field('location_zip', $post_id);
 	$location_web_name = get_field('location_web_name');
 	$location_url = get_field('location_url');
-
-	// Check if the word "the" should be prepended to the location name
-	$location_portal = get_field('location_prepend_the');
-	$page_title_prepend = $location_portal ? 'the ' : '';
-	$page_title_phrase = $page_title_prepend . $page_title;
 
 	// Set logic for displaying jump links and sections
 	$jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?

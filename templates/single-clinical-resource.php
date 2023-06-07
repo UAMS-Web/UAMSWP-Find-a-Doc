@@ -3,11 +3,6 @@
  * Template Name: Single Clinical Resource
  */
 
-// Set general variables
-$page_id = get_the_ID();
-$page_title = get_the_title();
-$page_title_attr = uamswp_attr_conversion($page_title);
-
 // Get system settings for ontology item labels
 
 	// Get system settings for provider labels
@@ -16,8 +11,14 @@ $page_title_attr = uamswp_attr_conversion($page_title);
 	// Get system settings for location labels
 	uamswp_fad_labels_location();
 
+	// Get system settings for location descendant item labels
+	// uamswp_fad_labels_location_descendant();
+
 	// Get system settings for area of expertise labels
 	uamswp_fad_labels_expertise();
+
+	// Get system settings for area of expertise descendant item labels
+	// uamswp_fad_labels_expertise_descendant();
 
 	// Get system settings for clinical resource labels
 	uamswp_fad_labels_clinical_resource();
@@ -28,11 +29,19 @@ $page_title_attr = uamswp_attr_conversion($page_title);
 	// Get system settings for treatment labels
 	uamswp_fad_labels_treatments();
 
+// Get system settings for clinical resource archive page text
+// uamswp_fad_archive_clinical_resource();
+
+// Set general variables
+$page_id = get_the_ID();
+$page_title = get_the_title();
+$page_title_attr = uamswp_attr_conversion($page_title);
+
 // Get system settings for text elements on Clinical Resource profile
 uamswp_fad_fpage_text_clinical_resource();
 
-// Get system settings for clinical resource archive page text
-uamswp_fad_archive_clinical_resource();
+// Get system settings for jump links (a.k.a. anchor links)
+// uamswp_fad_labels_jump_links();
 
 // Get system settings for jump links (a.k.a. anchor links)
 uamswp_fad_labels_jump_links();
@@ -41,13 +50,13 @@ uamswp_fad_labels_jump_links();
 function uamswp_fad_title($html) { 
 	// Bring in variables from outside of the function
 	global $page_title_attr; // Defined on the template
-	global $clinical_resource_archive_headline_attr; // Defined in uamswp_fad_archive_clinical_resource()
+	global $clinical_resource_plural_name_attr; // Defined in uamswp_fad_labels_clinical_resource()
 
 	//you can add here all your conditions as if is_page(), is_category() etc.. 
 	$meta_title_chars_max = 60;
 	$meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
 	$meta_title_base_chars = strlen( $meta_title_base );
-	$meta_title_enhanced_addition = ' | ' . $clinical_resource_archive_headline_attr;
+	$meta_title_enhanced_addition = ' | ' . $clinical_resource_plural_name_attr;
 	$meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
 	$meta_title_enhanced_chars = strlen( $meta_title_enhanced );
 	if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
