@@ -2497,7 +2497,7 @@ function uamswp_fad_podcast() {
 		global $clinical_resource_fpage_intro_location;
 		global $conditions_fpage_title_location;
 		global $conditions_fpage_intro_location;
-		global $xxxxx;
+		global $treatments_fpage_title_location;
 		global $treatments_fpage_intro_location;
 
 
