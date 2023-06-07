@@ -2647,6 +2647,16 @@ function uamswp_fad_podcast() {
 			$treatments_fpage_intro_clinical_resource = $treatments_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($treatments_fpage_intro_clinical_resource) : ''; // Substitute placeholder text for relevant system settings value
 	}
 
+// Override theme's method of defining the meta description on fake subpages
+function uamswp_fad_fpage_desc($html) {
+	// Bring in variables from outside of the function
+	global $fpage_intro_attr; // Defined on the template
+
+	$html = $fpage_intro_attr;
+	
+	return $html;
+}
+
 // Get system settings for general patient appointment information
 function uamswp_fad_appointment_patients() {
 	// Make variables available outside of the function

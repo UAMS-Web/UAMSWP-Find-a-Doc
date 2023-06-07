@@ -47,6 +47,7 @@ $fpage_title_attr = uamswp_attr_conversion($fpage_title);
 $current_fpage = get_query_var('fpage'); // Fake subpage slug
 $fpage_url = !empty($current_fpage) ? $page_url . user_trailingslashit($current_fpage) : $page_url; // Fake subpage URL
 $fpage_intro = $clinical_resource_fpage_intro_expertise; // Fake subpage intro text
+$fpage_intro_attr = uamswp_attr_conversion($fpage_intro); // Attribute-friendly version of fake subpage intro text
 
 // Area of Expertise Content Type
 $ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
@@ -80,6 +81,9 @@ uamswp_fad_ontology_site_values();
 
 // Override theme's method of defining the meta page title
 add_filter('seopress_titles_title', 'uamswp_fad_fpage_title', 15, 2);
+
+// Override theme's method of defining the meta description
+add_filter('seopress_titles_desc', 'uamswp_fad_fpage_desc');
 
 // Add meta keywords
 add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
