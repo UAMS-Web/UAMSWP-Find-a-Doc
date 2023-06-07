@@ -50,6 +50,9 @@ $page_title_attr = uamswp_attr_conversion($page_title);
 // Get system settings for condition archive page text
 uamswp_fad_archive_conditions();
 
+// Get system settings for jump links (a.k.a. anchor links)
+uamswp_fad_labels_jump_links();
+
 // Override theme's method of defining the meta page title
 function uamswp_fad_title($html) { 
 	// Bring in variables from outside of the function
@@ -501,7 +504,7 @@ $jump_link_count = 0;
 			// Begin Jump Links Section
 		if ( $show_jump_links_section ) { ?>
 			<nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
-				<h2>Contents</h2>
+				<h2><?php echo $fad_jump_links_title; ?></h2>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#jump-link-nav" aria-controls="jump-link-nav" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>

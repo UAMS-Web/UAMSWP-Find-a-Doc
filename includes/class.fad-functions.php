@@ -2637,3 +2637,12 @@ function uamswp_fad_appointment_refer() {
 	$appointment_refer_web_label_attr = uamswp_attr_conversion($appointment_refer_web_label);
 	$appointment_refer_web_info = get_field('appointment_refer_web_info', 'option') ?: '';
 }
+
+// Get system settings for jump links (a.k.a. anchor links)
+function uamswp_fad_labels_jump_links() {
+	// Make variables available outside of the function
+	global $fad_jump_links_title;
+
+	// Jump Links Section Title
+	$fad_jump_links_title = get_field('fad_jump_links_title', 'option') ?: 'Content';
+}

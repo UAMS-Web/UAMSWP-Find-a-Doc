@@ -81,7 +81,7 @@ if( function_exists('acf_add_local_field_group') ):
 
 	acf_add_local_field_group(array(
 		'key' => 'group_uams_fad_settings',
-		'title' => 'Theme Settings',
+		'title' => 'General Settings',
 		'fields' => array(
 			array(
 				'key' => 'field_fad_google_key',
@@ -92,7 +92,7 @@ if( function_exists('acf_add_local_field_group') ):
 				'required' => 1,
 				'conditional_logic' => 0,
 				'wrapper' => array(
-					'width' => '50',
+					'width' => '',
 					'class' => '',
 					'id' => '',
 				),
@@ -102,6 +102,25 @@ if( function_exists('acf_add_local_field_group') ):
 				'append' => '',
 				'maxlength' => '',
 			),
+			array(
+				'key' => 'field_fad_jump_links_title',
+				'label' => 'Jump Links Title',
+				'name' => 'fad_jump_links_title',
+				'type' => 'text',
+				'instructions' => 'When a page has a list of jump links (a.k.a. anchor links), this title defines the text used in the list\'s heading. If you leave this blank, the default title will be used.',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => 'Content',
+				'prepend' => '',
+				'append' => '',
+				'maxlength' => '',
+			)
 		),
 		'location' => array(
 			array(
@@ -114,8 +133,8 @@ if( function_exists('acf_add_local_field_group') ):
 		),
 		'menu_order' => 5,
 		'position' => 'normal',
-		'style' => 'seamless',
-		'label_placement' => 'left',
+		'style' => 'default',
+		'label_placement' => 'top',
 		'instruction_placement' => 'label',
 		'active' => true,
 	));
