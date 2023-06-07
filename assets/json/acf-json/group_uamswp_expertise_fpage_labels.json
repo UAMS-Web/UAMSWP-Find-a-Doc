@@ -62,6 +62,48 @@
 			"acfe_textarea_code": 0
 		},
 		{
+			"key": "field_expertise_descendant_fpage_title_general",
+			"label": "General Title of Fake Subpage or Section for Descendant Areas of Expertise",
+			"name": "expertise_descendant_fpage_title_general",
+			"type": "text",
+			"instructions": "If you leave this blank, the default title structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., title of fake subpage for descendant areas of expertise in areas of expertise subsection).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "[Descendant Areas of Expertise]",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_expertise_descendant_fpage_intro_general",
+			"label": "General Intro Text of Fake Subpage or Section for Descendant Areas of Expertise",
+			"name": "expertise_descendant_fpage_intro_general",
+			"type": "textarea",
+			"instructions": "If you leave this blank, the default intro text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., intro text of fake subpage for descendant areas of expertise in areas of expertise subsection).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 449,
+			"rows": "",
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
 			"key": "field_expertise_fpage_tab_provider",
 			"label": "Provider Subsection",
 			"name": "",

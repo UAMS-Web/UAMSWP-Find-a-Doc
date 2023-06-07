@@ -2572,7 +2572,7 @@ function uamswp_fad_podcast() {
 		// Related Areas of Expertise
 		$expertise_related_fpage_title_expertise = get_field('expertise_related_fpage_title_expertise', 'option') ?: '[Areas of Expertise] Related to [Area of Expertise Title]'; // Title of Fake Subpage for Locations in Area of Expertise Subsection
 			$expertise_related_fpage_title_expertise = $expertise_related_fpage_title_expertise ? uamswp_fad_fpage_text_replace($expertise_related_fpage_title_expertise) : ''; // Substitute placeholder text for relevant system settings value
-		$expertise_related_fpage_intro_expertise = get_field('expertise_related_fpage_intro_expertise', 'option') ?: ( get_field('expertise_related_fpage_intro_general', 'option') ?: '' ); // Intro Text of Fake Subpage for Related Areas of Expertise Items in Area of Expertise Subsection
+		$expertise_related_fpage_intro_expertise = get_field('expertise_related_fpage_intro_expertise', 'option') ?: ( get_field('expertise_fpage_intro_general', 'option') ?: '' ); // Intro Text of Fake Subpage for Related Areas of Expertise Items in Area of Expertise Subsection
 			$expertise_related_fpage_intro_expertise = $expertise_related_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($expertise_related_fpage_intro_expertise) : ''; // Substitute placeholder text for relevant system settings value
 
 		// Clinical Resources
