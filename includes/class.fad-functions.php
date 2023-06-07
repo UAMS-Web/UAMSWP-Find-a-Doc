@@ -2386,6 +2386,47 @@ function uamswp_fad_podcast() {
 		return str_replace(array_keys($fpage_text_replacements), $fpage_text_replacements, $string); 
 	}
 
+	// Get system settings for general values of ontology text elements on a fake subpage or section
+	function uamswp_fad_fpage_text_general() {
+		// Make variables available outside of the function
+		global $provider_fpage_title_general;
+		global $provider_fpage_intro_general;
+		global $location_fpage_title_general;
+		global $location_fpage_intro_general;
+		global $expertise_fpage_title_general;
+		global $expertise_fpage_intro_general;
+		global $clinical_resource_fpage_title_general;
+		global $clinical_resource_fpage_intro_general;
+		global $conditions_fpage_title_general;
+		global $conditions_fpage_intro_general;
+		global $treatments_fpage_title_general;
+		global $treatments_fpage_intro_general;
+
+		// Providers
+		$provider_fpage_title_general = get_field('location_fpage_title_provider', 'option') ?: 'Related [Providers]'; // General Title of Fake Subpage or Section for Providers
+		$provider_fpage_intro_general = get_field('provider_fpage_intro_general', 'option') ?: ''; // General Intro Text of Fake Subpage or Section for Providers
+
+		// Locations
+		$location_fpage_title_general = get_field('location_fpage_title_general', 'option') ?: 'Related [Locations]'; // General Title of Fake Subpage or Section for Locations
+		$location_fpage_intro_general = get_field('location_fpage_intro_provider', 'option') ?: ''; // General Intro Text of Fake Subpage or Section for Locations
+
+		// Areas of Expertise
+		$expertise_fpage_title_general = get_field('expertise_fpage_title_general', 'option') ?: 'Related [Areas of Expertise]'; // General Title of Fake Subpage or Section for Areas of Expertise
+		$expertise_fpage_intro_general = get_field('expertise_fpage_intro_general', 'option') ?: ''; // General Intro Text of Fake Subpage or Section for Areas of Expertise
+
+		// Clinical Resources
+		$clinical_resource_fpage_title_general = get_field('clinical_resource_fpage_title_general', 'option') ?: 'Related [Clinical Resources]'; // General Title of Fake Subpage or Section for Clinical Resources
+		$clinical_resource_fpage_intro_general = get_field('clinical_resource_fpage_intro_general', 'option') ?: ''; // General Intro Text of Fake Subpage or Section for Clinical Resources
+
+		// Conditions
+		$conditions_fpage_title_general = get_field('conditions_fpage_title_general', 'option') ?: 'Related [Conditions]'; // General Title of Fake Subpage or Section for Conditions
+		$conditions_fpage_intro_general = get_field('conditions_fpage_intro_general', 'option') ?: ''; // General Intro Text of Fake Subpage or Section for Conditions
+
+		// Treatments
+		$treatments_fpage_title_general = get_field('treatments_fpage_title_general', 'option') ?: 'Related [Treatments]'; // General Title of Fake Subpage or Section for Treatments
+		$treatments_fpage_intro_general = get_field('treatments_fpage_intro_general', 'option') ?: ''; // General Intro Text of Fake Subpage or Section for Treatments
+	}
+
 	// Get system settings for fake subpage text elements on Provider subsection
 	function uamswp_fad_fpage_text_provider() {
 		// Make variables available outside of the function
@@ -2510,27 +2551,27 @@ function uamswp_fad_podcast() {
 	function uamswp_fad_fpage_text_clinical_resource() {
 
 		// Providers
-		$provider_fpage_title_clinical_resource = get_field('provider_fpage_title_clinical_resource', 'option') ?: 'Related [Providers]'; // Title of Section for Providers on Clinical Resource Profile
+		$provider_fpage_title_clinical_resource = get_field('provider_fpage_title_clinical_resource', 'option') ?: ( get_field('provider_fpage_title_general', 'option') ?: 'Related [Providers]' ); // Title of Section for Providers on Clinical Resource Profile
 		$provider_fpage_intro_clinical_resource = get_field('provider_fpage_intro_clinical_resource', 'option') ?: ''; // Intro Text of Section for Providers on Clinical Resource Profile
 
 		// Locations
-		$location_fpage_title_clinical_resource = get_field('location_fpage_title_clinical_resource', 'option') ?: 'Related [Locations]'; // Title of Section for Locations on Clinical Resource Profile
+		$location_fpage_title_clinical_resource = get_field('location_fpage_title_clinical_resource', 'option') ?: ( get_field('location_fpage_title_general', 'option') ?: 'Related [Locations]' ); // Title of Section for Locations on Clinical Resource Profile
 		$location_fpage_intro_clinical_resource = get_field('location_fpage_intro_clinical_resource', 'option') ?: ''; // Intro Text of Section for Locations on Clinical Resource Profile
 
 		// Areas of Expertise
-		$expertise_fpage_title_clinical_resource = get_field('expertise_fpage_title_clinical_resource', 'option') ?: 'Related [Areas of Expertise]'; // Title of Section for Descendant Areas of Expertise Items on Clinical Resource Profile
+		$expertise_fpage_title_clinical_resource = get_field('expertise_fpage_title_clinical_resource', 'option') ?: ( get_field('expertise_fpage_title_general', 'option') ?: 'Related [Areas of Expertise]' ); // Title of Section for Descendant Areas of Expertise Items on Clinical Resource Profile
 		$expertise_fpage_intro_clinical_resource = get_field('expertise_fpage_intro_clinical_resource', 'option') ?: ''; // Intro Text of Section for Areas of Expertise Items on Clinical Resource Profile
 
 		// Clinical Resources
-		$clinical_resource_fpage_title_clinical_resource = get_field('clinical_resource_fpage_title_clinical_resource', 'option') ?: 'Related [Clinical Resources]'; // Title of Section for Clinical Resources on Clinical Resource Profile
+		$clinical_resource_fpage_title_clinical_resource = get_field('clinical_resource_fpage_title_clinical_resource', 'option') ?: ( get_field('clinical_resource_fpage_title_general', 'option') ?: 'Related [Clinical Resources]' ); // Title of Section for Clinical Resources on Clinical Resource Profile
 		$clinical_resource_fpage_intro_clinical_resource = get_field('clinical_resource_fpage_intro_clinical_resource', 'option') ?: ''; // Intro Text of Section for Clinical Resources on Clinical Resource Profile
 
 		// Conditions
-		$conditions_fpage_title_clinical_resource = get_field('conditions_fpage_title_clinical_resource', 'option') ?: 'Related [Conditions]'; // Title of Section for Conditions on Clinical Resource Profile
+		$conditions_fpage_title_clinical_resource = get_field('conditions_fpage_title_clinical_resource', 'option') ?: ( get_field('conditions_fpage_title_general', 'option') ?: 'Related [Conditions]' ); // Title of Section for Conditions on Clinical Resource Profile
 		$conditions_fpage_intro_clinical_resource = get_field('conditions_fpage_intro_clinical_resource', 'option') ?: ''; // Intro Text of Section for Conditions on Clinical Resource Profile
 
 		// Treatments
-		$treatments_fpage_title_clinical_resource = get_field('treatments_fpage_title_clinical_resource', 'option') ?: 'Related [Treatments]'; // Title of Section for Treatments on Clinical Resource Profile
+		$treatments_fpage_title_clinical_resource = get_field('treatments_fpage_title_clinical_resource', 'option') ?: ( get_field('treatments_fpage_title_general', 'option') ?: 'Related [Treatments]' ); // Title of Section for Treatments on Clinical Resource Profile
 		$treatments_fpage_intro_clinical_resource = get_field('treatments_fpage_intro_clinical_resource', 'option') ?: ''; // Intro Text of Section for Treatments on Clinical Resource Profile
 	}
 
