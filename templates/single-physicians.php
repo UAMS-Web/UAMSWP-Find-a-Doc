@@ -26,9 +26,12 @@
 	// Get system settings for treatment labels
 	uamswp_fad_labels_treatments();
 
+// Get system settings for fake subpage or section text elements on Provider subsection or profile
+uamswp_fad_fpage_text_provider();
+
 // Get system settings for jump links (a.k.a. anchor links)
 uamswp_fad_labels_jump_links();
-
+	
 $degrees = get_field('physician_degree',$post->ID);
 $degree_list = '';
 $i = 1;
@@ -953,9 +956,12 @@ while ( have_posts() ) : the_post();
 		uamswp_fad_podcast();
 
 		// Begin Clinical Resources Section
-		$resource_heading_related_pre = false; // "Related Resources"
-		$resource_heading_related_post = true; // "Resources Related to __"
+		global $clinical_resource_fpage_title_provider; // Defined in uamswp_fad_fpage_text_provider()
+		global $clinical_resource_fpage_intro_provider; // Defined in uamswp_fad_fpage_text_provider()
+
+		$resource_heading = $clinical_resource_fpage_title_provider;
 		$resource_heading_related_name = $short_name; // To what is it related?
+		$resource_intro = $clinical_resource_fpage_intro_provider;
 		$resource_more_suppress = false; // Force div.more to not display
 		$resource_more_key = '_resource_provider';
 		$resource_more_value = $sort_name_param_value;

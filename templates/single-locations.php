@@ -29,6 +29,9 @@
 	// Get system settings for treatment labels
 	uamswp_fad_labels_treatments();
 
+// Get system settings for fake subpage or section text elements on Location subsection or profile
+uamswp_fad_fpage_text_location();
+
 // Get system settings for jump links (a.k.a. anchor links)
 uamswp_fad_labels_jump_links();
 
@@ -1783,9 +1786,12 @@ while ( have_posts() ) : the_post(); ?>
 
 	// Begin Clinical Resources Section
 	if ( $show_related_resource_section ) {
-		$resource_heading_related_pre = false; // "Related Resources"
-		$resource_heading_related_post = true; // "Resources Related to __"
+		global $clinical_resource_fpage_title_location; // Defined in uamswp_fad_fpage_text_location()
+		global $clinical_resource_fpage_intro_location; // Defined in uamswp_fad_fpage_text_location()
+
+		$resource_heading = $clinical_resource_fpage_title_location;
 		$resource_heading_related_name = $page_title_phrase; // To what is it related?
+		$resource_intro = $clinical_resource_fpage_intro_location;
 		$resource_more_suppress = false; // Force div.more to not display
 		$resource_more_key = '_resource_locations';
 		$resource_more_value = $post->post_name;

@@ -159,11 +159,13 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		global $conditions_plural_name; // Defined in uamswp_fad_labels_conditions()
 		global $treatments_single_name; // Defined in uamswp_fad_labels_treatments()
 		global $treatments_plural_name; // Defined in uamswp_fad_labels_treatments()
+		global $clinical_resource_fpage_title_expertise; // Defined in uamswp_fad_fpage_text_expertise()
+		global $clinical_resource_fpage_intro_expertise; // Defined in uamswp_fad_fpage_text_expertise()
 
-		$resource_heading_related_pre = true; // "Related Resources"
-		$resource_heading_related_post = false; // "Resources Related to __"
+		$resource_heading = $clinical_resource_fpage_title_expertise;
 		$resource_heading_related_name = $page_title; // To what is it related?
 		$resource_heading_related_name_attr = $page_title_attr;
+		$resource_intro = $clinical_resource_fpage_intro_expertise;
 		$resource_more_suppress = false; // Force div.more to not display
 		$resource_more_key = '_resource_aoe';
 		$resource_more_value = $post->post_name;

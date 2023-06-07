@@ -22,23 +22,26 @@
  * 	$resource_more_suppress
  * 	$resource_more_key
  * 	$resource_more_value
- * 	$resource_heading_related_pre
- * 	$resource_heading_related_post
- * 	$resource_heading_related_name
  * 
  * Optional var:
  * 	$resource_page = 'single' or 'archive' (default to 'single')
+ * 	$resource_heading
+ * 	$resource_heading_related_name // To what is it related?
+ * 	$resource_intro
  * 
  * List layout intended to either display all items or display a set number with no link to more.
  */
 
-$resource_heading = $clinical_resource_plural_name;
-if ( $resource_heading_related_pre ) {
-	$resource_heading = 'Related ' . $resource_heading;
+// Check optional variables
+$resource_heading_related_name = ( isset($resource_heading_related_name) || !empty($resource_heading_related_name) ) ? $resource_heading_related_name : '';
+if ( !isset($resource_heading) || empty($resource_heading) ) {
+	if ( $resource_heading_related_name ) {
+		$resource_heading = $clinical_resource_plural_name . ' Related to ' . $resource_heading_related_name;
+	} else {
+		$resource_heading = 'Related ' . $clinical_resource_plural_name;
+	}
 }
-if ( $resource_heading_related_post ) {
-	$resource_heading = $resource_heading . ' Related to ' . $resource_heading_related_name;
-}
+$resource_intro = ( isset($resource_intro) || !empty($resource_intro) ) ? $resource_intro : '';
 
 // Count valid resources
 //$resource_count = count($resources);
@@ -60,9 +63,9 @@ $resource_more = ( $resource_layout == 'card' && $resource_count > $resource_pos
 if ( $resource_more_suppress ) {
 	$resource_more = false;
 }
-$more_text = 'Want to find more ' . strtolower($clinical_resource_plural_name) . ' related to ' . $resource_heading_related_name . '?';
+$more_text = 'Want to find more ' . strtolower($resource_heading) . ( $resource_heading_related_name ? ' related to ' . $resource_heading_related_name : '') . '?';
 $more_button_url = '/clinical-resource/?' . $resource_more_key . '=' . $resource_more_value;
-$more_button_description = 'View the full list of ' . strtolower($clinical_resource_plural_name) . ' related to ' . $resource_heading_related_name;
+$more_button_description = 'View the full list of ' . strtolower($clinical_resource_plural_name) . ( $resource_heading_related_name ? ' related to ' . $resource_heading_related_name : '');
 $more_button_description_attr = uamswp_attr_conversion($more_button_description);
 $more_button_target = '_blank';
 $more_button_text = 'View the Full List';
@@ -73,6 +76,7 @@ if ( $resource_layout == 'card') { ?>
 			<div class="row">
 				<div class="col-12">
 					<h2 class="module-title" id="related-resources-title"><span class="title"><?php echo $resource_heading; ?></span></h2>
+					<?php echo $resource_intro ? '<p class="note">' . $resource_intro . '</p>' : ''; ?>
 				</div>
 				<div class="col-12">
 					<div class="card-list card-list-left">

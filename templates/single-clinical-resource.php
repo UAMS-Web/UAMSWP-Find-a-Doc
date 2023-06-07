@@ -28,6 +28,9 @@ $page_title_attr = uamswp_attr_conversion($page_title);
 	// Get system settings for treatment labels
 	uamswp_fad_labels_treatments();
 
+// Get system settings for text elements on Clinical Resource profile
+uamswp_fad_fpage_text_clinical_resource();
+
 // Get system settings for clinical resource archive page text
 uamswp_fad_archive_clinical_resource();
 
@@ -345,6 +348,8 @@ function uamswp_resource_document() {
 }
 function uamswp_resource_physicians() {
 	// Bring in variables from outside of the function
+	global $provider_fpage_title_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
+	global $provider_fpage_intro_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
 	global $provider_plural_name; // Defined in uamswp_fad_labels_location()
 	global $provider_plural_name_attr; // Defined in uamswp_fad_labels_location()
 	global $show_providers_section; // Defined on the template
@@ -359,7 +364,8 @@ function uamswp_resource_physicians() {
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title"><span class="title">Related <?php echo $provider_plural_name; ?></span></h2>
+						<h2 class="module-title"><span class="title"><?php echo $provider_fpage_title_clinical_resource; ?></span></h2>
+						<?php echo $provider_fpage_intro_clinical_resource ? '<p class="note">' . $provider_fpage_intro_clinical_resource . '</p>' : ''; ?>
 						<div class="card-list-container">
 							<div class="card-list card-list-doctors">
 								<?php 
@@ -457,6 +463,8 @@ function uamswp_resource_treatments_cpt() {
 }
 function uamswp_resource_locations() {
 	// Bring in variables from outside of the function
+	global $location_fpage_title_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
+	global $location_fpage_intro_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
 	global $show_locations_section; // Defined on the template
 	global $location_query; // Defined on the template
 	global $location_single_name; // Defined in uamswp_fad_labels_location()
@@ -468,7 +476,8 @@ function uamswp_resource_locations() {
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title"><span class="title">Related <?php echo $location_plural_name; ?></span></h2>
+						<h2 class="module-title"><span class="title"><?php echo $location_fpage_title_clinical_resource; ?></span></h2>
+						<?php echo $location_fpage_intro_clinical_resource ? '<p class="note">' . $location_fpage_intro_clinical_resource . '</p>' : ''; ?>
 						<div class="card-list-container location-card-list-container">
 							<div class="card-list">
 							<?php while ( $location_query->have_posts() ) : $location_query->the_post();
@@ -504,11 +513,13 @@ function uamswp_resource_associated() {
 	global $conditions_plural_name; // Defined in uamswp_fad_labels_conditions()
 	global $treatments_single_name; // Defined in uamswp_fad_labels_treatments()
 	global $treatments_plural_name; // Defined in uamswp_fad_labels_treatments()
+	global $clinical_resource_fpage_title_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
+	global $clinical_resource_fpage_intro_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
 
-	$resource_heading_related_pre = true; // "Related Resources"
-	$resource_heading_related_post = false; // "Resources Related to __"
-	$resource_heading_related_name = $page_title; // To what is it related?
+	$resource_heading = $clinical_resource_fpage_title_clinical_resource;
+	$resource_heading_related_name = $page_title; // To what is it related? Leave empty to 
 	$resource_heading_related_name_attr = $page_title_attr;
+	$resource_intro = $clinical_resource_fpage_intro_clinical_resource;
 	$resource_more_suppress = false; // Force div.more to not display
 	$resource_more_key = '';
 	$resource_more_value = '';
@@ -518,6 +529,8 @@ function uamswp_resource_associated() {
 }
 function uamswp_resource_expertise() {
 	// Bring in variables from outside of the function
+	global $expertise_fpage_title_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
+	global $expertise_fpage_intro_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
 	global $show_aoe_section; // Defined on the template
 	global $expertise_query; // Defined on the template
 	global $expertise_single_name; // Defined in uamswp_fad_labels_expertise()
@@ -529,7 +542,8 @@ function uamswp_resource_expertise() {
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title" id="areas-of-expertise-title"><span class="title">Related <?php echo $expertise_plural_name; ?></span></h2>
+						<h2 class="module-title" id="areas-of-expertise-title"><span class="title"><?php echo $expertise_fpage_title_clinical_resource; ?></span></h2>
+						<?php echo $expertise_fpage_intro_clinical_resource ? '<p class="note">' . $expertise_fpage_intro_clinical_resource . '</p>' : ''; ?>
 						<div class="card-list-container">
 							<div class="card-list card-list-expertise">
 							<?php 
