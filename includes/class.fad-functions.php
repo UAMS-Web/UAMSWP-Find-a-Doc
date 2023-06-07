@@ -2506,6 +2506,34 @@ function uamswp_fad_podcast() {
 		$treatments_fpage_intro_expertise = get_field('treatments_fpage_intro_expertise', 'option') ?: ''; // Intro Text of Fake Subpage for Treatments in Area of Expertise Subsection
 	}
 
+	// Get system settings for text elements on Clinical Resource profile
+	function uamswp_fad_fpage_text_clinical_resource() {
+
+		// Providers
+		$provider_fpage_title_clinical_resource = get_field('provider_fpage_title_clinical_resource', 'option') ?: 'Related [Providers]'; // Title of Section for Providers on Clinical Resource Profile
+		$provider_fpage_intro_clinical_resource = get_field('provider_fpage_intro_clinical_resource', 'option') ?: ''; // Intro Text of Section for Providers on Clinical Resource Profile
+
+		// Locations
+		$location_fpage_title_clinical_resource = get_field('location_fpage_title_clinical_resource', 'option') ?: 'Related [Locations]'; // Title of Section for Locations on Clinical Resource Profile
+		$location_fpage_intro_clinical_resource = get_field('location_fpage_intro_clinical_resource', 'option') ?: ''; // Intro Text of Section for Locations on Clinical Resource Profile
+
+		// Areas of Expertise
+		$expertise_fpage_title_clinical_resource = get_field('expertise_fpage_title_clinical_resource', 'option') ?: 'Related [Areas of Expertise]'; // Title of Section for Descendant Areas of Expertise Items on Clinical Resource Profile
+		$expertise_fpage_intro_clinical_resource = get_field('expertise_fpage_intro_clinical_resource', 'option') ?: ''; // Intro Text of Section for Areas of Expertise Items on Clinical Resource Profile
+
+		// Clinical Resources
+		$clinical_resource_fpage_title_clinical_resource = get_field('clinical_resource_fpage_title_clinical_resource', 'option') ?: 'Related [Clinical Resources]'; // Title of Section for Clinical Resources on Clinical Resource Profile
+		$clinical_resource_fpage_intro_clinical_resource = get_field('clinical_resource_fpage_intro_clinical_resource', 'option') ?: ''; // Intro Text of Section for Clinical Resources on Clinical Resource Profile
+
+		// Conditions
+		$conditions_fpage_title_clinical_resource = get_field('conditions_fpage_title_clinical_resource', 'option') ?: 'Related [Conditions]'; // Title of Section for Conditions on Clinical Resource Profile
+		$conditions_fpage_intro_clinical_resource = get_field('conditions_fpage_intro_clinical_resource', 'option') ?: ''; // Intro Text of Section for Conditions on Clinical Resource Profile
+
+		// Treatments
+		$treatments_fpage_title_clinical_resource = get_field('treatments_fpage_title_clinical_resource', 'option') ?: 'Related [Treatments]'; // Title of Section for Treatments on Clinical Resource Profile
+		$treatments_fpage_intro_clinical_resource = get_field('treatments_fpage_intro_clinical_resource', 'option') ?: ''; // Intro Text of Section for Treatments on Clinical Resource Profile
+	}
+
 // Get system settings for general patient appointment information
 function uamswp_fad_appointment_patients() {
 	// Make variables available outside of the function

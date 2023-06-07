@@ -1,7 +1,7 @@
 
 {
 	"key": "group_clinical_resource_fpage_labels",
-	"title": "Fake Subpage for Clinical Resources in an Ontology Subsection",
+	"title": "Fake Subpage or Section for Clinical Resources in an Ontology Subsection or Single Profile",
 	"fields": [
 		{
 			"key": "field_clinical_resource_fpage_tab_provider",
@@ -161,6 +161,64 @@
 			"key": "field_clinical_resource_fpage_intro_expertise",
 			"label": "Intro Text of Fake Subpage for Clinical Resources in Area of Expertise Subsection",
 			"name": "clinical_resource_fpage_intro_expertise",
+			"type": "textarea",
+			"instructions": "If you leave this blank, the default intro text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 449,
+			"rows": "",
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_clinical_resource_fpage_tab_clinical_resource",
+			"label": "Clinical Resource Profile",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_clinical_resource_fpage_title_clinical_resource",
+			"label": "Title of Section for Related Clinical Resources on Clinical Resource Profile",
+			"name": "clinical_resource_fpage_title_clinical_resource",
+			"type": "text",
+			"instructions": "If you leave this blank, the default title structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Related [Clinical Resources]",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_clinical_resource_fpage_intro_clinical_resource",
+			"label": "Intro Text of Section for Related Clinical Resources on Clinical Resource Profile",
+			"name": "clinical_resource_fpage_intro_clinical_resource",
 			"type": "textarea",
 			"instructions": "If you leave this blank, the default intro text structure will be used.",
 			"required": 0,
