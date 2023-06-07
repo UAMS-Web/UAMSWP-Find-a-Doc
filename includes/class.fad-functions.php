@@ -2595,6 +2595,19 @@ function uamswp_fad_podcast() {
 
 	// Get system settings for text elements for related ontology sections on Clinical Resource profile
 	function uamswp_fad_fpage_text_clinical_resource() {
+		// Make variables available outside of the function
+		global $provider_fpage_title_clinical_resource;
+		global $provider_fpage_intro_clinical_resource;
+		global $location_fpage_title_clinical_resource;
+		global $location_fpage_intro_clinical_resource;
+		global $expertise_fpage_title_clinical_resource;
+		global $expertise_fpage_intro_clinical_resource;
+		global $clinical_resource_fpage_title_clinical_resource;
+		global $clinical_resource_fpage_intro_clinical_resource;
+		global $conditions_fpage_title_clinical_resource;
+		global $conditions_fpage_intro_clinical_resource;
+		global $treatments_fpage_title_clinical_resource;
+		global $treatments_fpage_intro_clinical_resource;
 
 		// Providers
 		$provider_fpage_title_clinical_resource = get_field('provider_fpage_title_clinical_resource', 'option') ?: ( get_field('provider_fpage_title_general', 'option') ?: 'Related [Providers]' ); // Title of Section for Providers on Clinical Resource Profile
