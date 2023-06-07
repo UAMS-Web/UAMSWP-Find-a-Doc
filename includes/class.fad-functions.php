@@ -2502,7 +2502,6 @@ function uamswp_fad_podcast() {
 		global $treatments_fpage_title_location;
 		global $treatments_fpage_intro_location;
 
-
 		// Providers
 		$provider_fpage_title_location = get_field('provider_fpage_title_location', 'option') ?: '[Providers] at [Location Title]'; // Title of Fake Subpage for Providers in Locations Subsection
 			$provider_fpage_title_location = $provider_fpage_title_location ? uamswp_fad_fpage_text_replace($provider_fpage_title_location) : ''; // Substitute placeholder text for relevant system settings value
