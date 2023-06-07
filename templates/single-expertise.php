@@ -274,8 +274,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 
 	// Display conditions
 	add_action( 'genesis_after_entry', 'uamswp_expertise_conditions_cpt', 16 );
-	$condition_heading = $conditions_fpage_title_expertise; // Conditions section title pre-substitution
-	$condition_heading = uamswp_fad_fpage_text_replace($condition_heading); // Conditions section title post-substitution
+	$condition_heading = $conditions_fpage_title_expertise; // Conditions section title
 	function uamswp_expertise_conditions_cpt() {
 		// Bring in variables from outside of the function
 		global $page_title; // Defined on the template
@@ -297,8 +296,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 
 	// Display treatments
 	add_action( 'genesis_after_entry', 'uamswp_expertise_treatments_cpt', 18 );
-	$treatment_heading = $treatments_fpage_title_expertise; // Treatments section title pre-substitution
-	$treatment_heading = uamswp_fad_fpage_text_replace($treatment_heading); // Treatments section title post-substitution
+	$treatment_heading = $treatments_fpage_title_expertise; // Treatments section title
 	function uamswp_expertise_treatments_cpt() {
 		// Bring in variables from outside of the function
 		global $page_title; // Defined on the template

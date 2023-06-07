@@ -2404,27 +2404,39 @@ function uamswp_fad_podcast() {
 
 		// Providers
 		$provider_fpage_title_general = get_field('location_fpage_title_provider', 'option') ?: 'Related [Providers]'; // General Title of Fake Subpage or Section for Providers
+			$provider_fpage_title_general = uamswp_fad_fpage_text_replace($provider_fpage_title_general); // Substitute placeholder text for relevant system settings value
 		$provider_fpage_intro_general = get_field('provider_fpage_intro_general', 'option') ?: ''; // General Intro Text of Fake Subpage or Section for Providers
+			$provider_fpage_intro_general = uamswp_fad_fpage_text_replace($provider_fpage_intro_general); // Substitute placeholder text for relevant system settings value
 
 		// Locations
 		$location_fpage_title_general = get_field('location_fpage_title_general', 'option') ?: 'Related [Locations]'; // General Title of Fake Subpage or Section for Locations
+			$location_fpage_title_general = uamswp_fad_fpage_text_replace($location_fpage_title_general); // Substitute placeholder text for relevant system settings value
 		$location_fpage_intro_general = get_field('location_fpage_intro_provider', 'option') ?: ''; // General Intro Text of Fake Subpage or Section for Locations
+			$location_fpage_intro_general = uamswp_fad_fpage_text_replace($location_fpage_intro_general); // Substitute placeholder text for relevant system settings value
 
 		// Areas of Expertise
 		$expertise_fpage_title_general = get_field('expertise_fpage_title_general', 'option') ?: 'Related [Areas of Expertise]'; // General Title of Fake Subpage or Section for Areas of Expertise
+			$expertise_fpage_title_general = uamswp_fad_fpage_text_replace($expertise_fpage_title_general); // Substitute placeholder text for relevant system settings value
 		$expertise_fpage_intro_general = get_field('expertise_fpage_intro_general', 'option') ?: ''; // General Intro Text of Fake Subpage or Section for Areas of Expertise
+			$expertise_fpage_intro_general = uamswp_fad_fpage_text_replace($expertise_fpage_intro_general); // Substitute placeholder text for relevant system settings value
 
 		// Clinical Resources
 		$clinical_resource_fpage_title_general = get_field('clinical_resource_fpage_title_general', 'option') ?: 'Related [Clinical Resources]'; // General Title of Fake Subpage or Section for Clinical Resources
+			$clinical_resource_fpage_title_general = uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_general); // Substitute placeholder text for relevant system settings value
 		$clinical_resource_fpage_intro_general = get_field('clinical_resource_fpage_intro_general', 'option') ?: ''; // General Intro Text of Fake Subpage or Section for Clinical Resources
+			$clinical_resource_fpage_intro_general = uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_general); // Substitute placeholder text for relevant system settings value
 
 		// Conditions
 		$conditions_fpage_title_general = get_field('conditions_fpage_title_general', 'option') ?: 'Related [Conditions]'; // General Title of Fake Subpage or Section for Conditions
+			$conditions_fpage_title_general = uamswp_fad_fpage_text_replace($conditions_fpage_title_general); // Substitute placeholder text for relevant system settings value
 		$conditions_fpage_intro_general = get_field('conditions_fpage_intro_general', 'option') ?: ''; // General Intro Text of Fake Subpage or Section for Conditions
+			$conditions_fpage_intro_general = uamswp_fad_fpage_text_replace($conditions_fpage_intro_general); // Substitute placeholder text for relevant system settings value
 
 		// Treatments
 		$treatments_fpage_title_general = get_field('treatments_fpage_title_general', 'option') ?: 'Related [Treatments]'; // General Title of Fake Subpage or Section for Treatments
+			$treatments_fpage_title_general = uamswp_fad_fpage_text_replace($treatments_fpage_title_general); // Substitute placeholder text for relevant system settings value
 		$treatments_fpage_intro_general = get_field('treatments_fpage_intro_general', 'option') ?: ''; // General Intro Text of Fake Subpage or Section for Treatments
+			$treatments_fpage_intro_general = uamswp_fad_fpage_text_replace($treatments_fpage_intro_general); // Substitute placeholder text for relevant system settings value
 	}
 
 	// Get system settings for fake subpage text elements on Provider subsection
@@ -2445,23 +2457,33 @@ function uamswp_fad_podcast() {
 
 		// Locations
 		$location_fpage_title_provider = get_field('location_fpage_title_provider', 'option') ?: '[Locations] Where [Provider Short Name] Practices'; // Title of Fake Subpage for Locations in Provider Subsection
+			$location_fpage_title_provider = uamswp_fad_fpage_text_replace($location_fpage_title_provider); // Substitute placeholder text for relevant system settings value
 		$location_fpage_intro_provider = get_field('location_fpage_intro_provider', 'option') ?: ''; // Intro Text of Fake Subpage for Locations in Provider Subsection
+			$location_fpage_intro_provider = uamswp_fad_fpage_text_replace($location_fpage_intro_provider); // Substitute placeholder text for relevant system settings value
 
 		// Areas of Expertise
 		$expertise_fpage_title_provider = get_field('expertise_fpage_title_provider', 'option') ?: '[Provider Short Name\'s] [Areas of Expertise]'; // Title of Fake Subpage for Areas of Expertise in Provider Subsection
+			$expertise_fpage_title_provider = uamswp_fad_fpage_text_replace($expertise_fpage_title_provider); // Substitute placeholder text for relevant system settings value
 		$expertise_fpage_intro_provider = get_field('expertise_fpage_intro_provider', 'option') ?: ''; // Intro Text of Fake Subpage for Areas of Expertise in Provider Subsection
+			$expertise_fpage_intro_provider = uamswp_fad_fpage_text_replace($expertise_fpage_intro_provider); // Substitute placeholder text for relevant system settings value
 
 		// Clinical Resources
 		$clinical_resource_fpage_title_provider = get_field('clinical_resource_fpage_title_provider', 'option') ?: '[Clinical Resources] Related to [Provider Short Name]'; // Title of Fake Subpage for Clinical Resources in Provider Subsection
+			$clinical_resource_fpage_title_provider = uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_provider); // Substitute placeholder text for relevant system settings value
 		$clinical_resource_fpage_intro_provider = get_field('clinical_resource_fpage_intro_provider', 'option') ?: ''; // Intro Text of Fake Subpage for Clinical Resources in Provider Subsection
+			$clinical_resource_fpage_intro_provider = uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_provider); // Substitute placeholder text for relevant system settings value
 
 		// Conditions
 		$conditions_fpage_title_provider = get_field('conditions_fpage_title_provider', 'option') ?: '[Conditions] Diagnosed or Treated by [Provider Short Name]'; // Title of Fake Subpage for Conditions in Provider Subsection
+			$conditions_fpage_title_provider = uamswp_fad_fpage_text_replace($conditions_fpage_title_provider); // Substitute placeholder text for relevant system settings value
 		$conditions_fpage_intro_provider = get_field('conditions_fpage_intro_provider', 'option') ?: ''; // Intro Text of Fake Subpage for Conditions in Provider Subsection
+			$conditions_fpage_intro_provider = uamswp_fad_fpage_text_replace($conditions_fpage_intro_provider); // Substitute placeholder text for relevant system settings value
 
 		// Treatments
 		$treatments_fpage_title_provider = get_field('treatments_fpage_title_provider', 'option') ?: '[Treatments] Performed or Prescribed by [Provider Short Name]'; // Title of Fake Subpage for Treatments in Provider Subsection
+			$treatments_fpage_title_provider = uamswp_fad_fpage_text_replace($treatments_fpage_title_provider); // Substitute placeholder text for relevant system settings value
 		$treatments_fpage_intro_provider = get_field('treatments_fpage_intro_provider', 'option') ?: ''; // Intro Text of Fake Subpage for Treatments in Provider Subsection
+			$treatments_fpage_intro_provider = uamswp_fad_fpage_text_replace($treatments_fpage_intro_provider); // Substitute placeholder text for relevant system settings value
 	}
 
 	// Get system settings for fake subpage text elements on Location subsection
@@ -2481,23 +2503,33 @@ function uamswp_fad_podcast() {
 
 		// Providers
 		$provider_fpage_title_location = get_field('provider_fpage_title_location', 'option') ?: '[Providers] at [Location Title]'; // Title of Fake Subpage for Providers in Locations Subsection
+			$provider_fpage_title_location = uamswp_fad_fpage_text_replace($provider_fpage_title_location); // Substitute placeholder text for relevant system settings value
 		$provider_fpage_intro_location = get_field('provider_fpage_intro_location', 'option') ?: ''; // Intro Text of Fake Subpage for Providers in Location Subsection
+			$provider_fpage_intro_location = uamswp_fad_fpage_text_replace($provider_fpage_intro_location); // Substitute placeholder text for relevant system settings value
 
 		// Areas of Expertise
 		$expertise_fpage_title_location = get_field('expertise_fpage_title_location', 'option') ?: '[Areas of Expertise] Represented at [the Location Title]'; // Title of Fake Subpage for Areas of Expertise in Location Subsection
+			$expertise_fpage_title_location = uamswp_fad_fpage_text_replace($expertise_fpage_title_location); // Substitute placeholder text for relevant system settings value
 		$expertise_fpage_intro_location = get_field('expertise_fpage_intro_location', 'option') ?: ''; // Intro Text of Fake Subpage for Areas of Expertise in Location Subsection
+			$expertise_fpage_intro_location = uamswp_fad_fpage_text_replace($expertise_fpage_intro_location); // Substitute placeholder text for relevant system settings value
 
 		// Clinical Resources
 		$clinical_resource_fpage_title_location = get_field('clinical_resource_fpage_title_location', 'option') ?: '[Clinical Resources] Related to [the Location Title]'; // Title of Fake Subpage for Clinical Resources in Location Subsection
+			$clinical_resource_fpage_title_location = uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_location); // Substitute placeholder text for relevant system settings value
 		$clinical_resource_fpage_intro_location = get_field('clinical_resource_fpage_intro_location', 'option') ?: ''; // Intro Text of Fake Subpage for Clinical Resources in Location Subsection
+			$clinical_resource_fpage_intro_location = uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_location); // Substitute placeholder text for relevant system settings value
 
 		// Conditions
 		$conditions_fpage_title_location = get_field('conditions_fpage_title_location', 'option') ?: '[Conditions] Diagnosed or Treated at [the Location Title]'; // Title of Fake Subpage for Conditions in Location Subsection
+			$conditions_fpage_title_location = uamswp_fad_fpage_text_replace($conditions_fpage_title_location); // Substitute placeholder text for relevant system settings value
 		$conditions_fpage_intro_location = get_field('conditions_fpage_intro_location', 'option') ?: ''; // Intro Text of Fake Subpage for Conditions in Location Subsection
+			$conditions_fpage_intro_location = uamswp_fad_fpage_text_replace($conditions_fpage_intro_location); // Substitute placeholder text for relevant system settings value
 
 		// Treatments
 		$treatments_fpage_title_location = get_field('treatments_fpage_title_location', 'option') ?: '[Treatments] Performed or Prescribed at [the Location Title]'; // Title of Fake Subpage for Treatments in Location Subsection
+			$treatments_fpage_title_location = uamswp_fad_fpage_text_replace($treatments_fpage_title_location); // Substitute placeholder text for relevant system settings value
 		$treatments_fpage_intro_location = get_field('treatments_fpage_intro_location', 'option') ?: ''; // Intro Text of Fake Subpage for Treatments in Location Subsection
+			$treatments_fpage_intro_location = uamswp_fad_fpage_text_replace($treatments_fpage_intro_location); // Substitute placeholder text for relevant system settings value
 	}
 
 	// Get system settings for fake subpage text elements on Area of Expertise subsection
@@ -2520,31 +2552,45 @@ function uamswp_fad_podcast() {
 
 		// Providers
 		$provider_fpage_title_expertise = get_field('provider_fpage_title_expertise', 'option') ?: '[Area of Expertise Title] [Providers]'; // Title of Fake Subpage for Providers in Area of Expertise Subsection
+			$provider_fpage_title_expertise = uamswp_fad_fpage_text_replace($provider_fpage_title_expertise); // Substitute placeholder text for relevant system settings value
 		$provider_fpage_intro_expertise = get_field('provider_fpage_intro_expertise', 'option') ?: ''; // Intro Text of Fake Subpage for Providers in Area of Expertise Subsection
+			$provider_fpage_intro_expertise = uamswp_fad_fpage_text_replace($provider_fpage_intro_expertise); // Substitute placeholder text for relevant system settings value
 
 		// Locations
 		$location_fpage_title_expertise = get_field('location_fpage_title_expertise', 'option') ?: '[Area of Expertise Title] [Locations]'; // Title of Fake Subpage for Locations in Area of Expertise Subsection
+			$location_fpage_title_expertise = uamswp_fad_fpage_text_replace($location_fpage_title_expertise); // Substitute placeholder text for relevant system settings value
 		$location_fpage_intro_expertise = get_field('location_fpage_intro_expertise', 'option') ?: ''; // Intro Text of Fake Subpage for Locations in Area of Expertise Subsection
+			$location_fpage_intro_expertise = uamswp_fad_fpage_text_replace($location_fpage_intro_expertise); // Substitute placeholder text for relevant system settings value
 
 		// Descendant Areas of Expertise
 		$expertise_descendant_fpage_title_expertise = get_field('expertise_descendant_fpage_title_expertise', 'option') ?: '[Descendant Areas of Expertise] Within [Area of Expertise Title]'; // Title of Fake Subpage for Descendant Areas of Expertise Items in Area of Expertise Subsection
+			$expertise_descendant_fpage_title_expertise = uamswp_fad_fpage_text_replace($expertise_descendant_fpage_title_expertise); // Substitute placeholder text for relevant system settings value
 		$expertise_descendant_fpage_intro_expertise = get_field('expertise_descendant_fpage_intro_expertise', 'option') ?: ''; // Intro Text of Fake Subpage for Descendant Areas of Expertise Items in Area of Expertise Subsection
+			$expertise_descendant_fpage_intro_expertise = uamswp_fad_fpage_text_replace($expertise_descendant_fpage_intro_expertise); // Substitute placeholder text for relevant system settings value
 
 		// Related Areas of Expertise
 		$expertise_related_fpage_title_expertise = get_field('expertise_related_fpage_title_expertise', 'option') ?: '[Areas of Expertise] Related to [Area of Expertise Title]'; // Title of Fake Subpage for Locations in Area of Expertise Subsection
+			$expertise_related_fpage_title_expertise = uamswp_fad_fpage_text_replace($expertise_related_fpage_title_expertise); // Substitute placeholder text for relevant system settings value
 		$expertise_related_fpage_intro_expertise = get_field('expertise_related_fpage_intro_expertise', 'option') ?: ''; // Intro Text of Fake Subpage for Related Areas of Expertise Items in Area of Expertise Subsection
+			$expertise_related_fpage_intro_expertise = uamswp_fad_fpage_text_replace($expertise_related_fpage_intro_expertise); // Substitute placeholder text for relevant system settings value
 
 		// Clinical Resources
 		$clinical_resource_fpage_title_expertise = get_field('clinical_resource_fpage_title_expertise', 'option') ?: '[Clinical Resources] Related to [Area of Expertise Title]'; // Title of Fake Subpage for Clinical Resources in Area of Expertise Subsection
+			$clinical_resource_fpage_title_expertise = uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_expertise); // Substitute placeholder text for relevant system settings value
 		$clinical_resource_fpage_intro_expertise = get_field('clinical_resource_fpage_intro_expertise', 'option') ?: ''; // Intro Text of Fake Subpage for Clinical Resources in Area of Expertise Subsection
+			$clinical_resource_fpage_intro_expertise = uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_expertise); // Substitute placeholder text for relevant system settings value
 
 		// Conditions
 		$conditions_fpage_title_expertise = get_field('conditions_fpage_title_expertise', 'option') ?: '[Conditions] Related to [Area of Expertise Title]'; // Title of Fake Subpage for Conditions in Area of Expertise Subsection
+			$conditions_fpage_title_expertise = uamswp_fad_fpage_text_replace($conditions_fpage_title_expertise); // Substitute placeholder text for relevant system settings value
 		$conditions_fpage_intro_expertise = get_field('conditions_fpage_intro_expertise', 'option') ?: ''; // Intro Text of Fake Subpage for Conditions in Area of Expertise Subsection
+			$conditions_fpage_intro_expertise = uamswp_fad_fpage_text_replace($conditions_fpage_intro_expertise); // Substitute placeholder text for relevant system settings value
 
 		// Treatments
 		$treatments_fpage_title_expertise = get_field('treatments_fpage_title_expertise', 'option') ?: '[Treatments] Related to [Area of Expertise Title]'; // Title of Fake Subpage for Treatments in Area of Expertise Subsection
+			$treatments_fpage_title_expertise = uamswp_fad_fpage_text_replace($treatments_fpage_title_expertise); // Substitute placeholder text for relevant system settings value
 		$treatments_fpage_intro_expertise = get_field('treatments_fpage_intro_expertise', 'option') ?: ''; // Intro Text of Fake Subpage for Treatments in Area of Expertise Subsection
+			$treatments_fpage_intro_expertise = uamswp_fad_fpage_text_replace($treatments_fpage_intro_expertise); // Substitute placeholder text for relevant system settings value
 	}
 
 	// Get system settings for text elements on Clinical Resource profile
@@ -2552,27 +2598,39 @@ function uamswp_fad_podcast() {
 
 		// Providers
 		$provider_fpage_title_clinical_resource = get_field('provider_fpage_title_clinical_resource', 'option') ?: ( get_field('provider_fpage_title_general', 'option') ?: 'Related [Providers]' ); // Title of Section for Providers on Clinical Resource Profile
+			$provider_fpage_title_clinical_resource = uamswp_fad_fpage_text_replace($provider_fpage_title_clinical_resource); // Substitute placeholder text for relevant system settings value
 		$provider_fpage_intro_clinical_resource = get_field('provider_fpage_intro_clinical_resource', 'option') ?: ''; // Intro Text of Section for Providers on Clinical Resource Profile
+			$provider_fpage_intro_clinical_resource = uamswp_fad_fpage_text_replace($provider_fpage_intro_clinical_resource); // Substitute placeholder text for relevant system settings value
 
 		// Locations
 		$location_fpage_title_clinical_resource = get_field('location_fpage_title_clinical_resource', 'option') ?: ( get_field('location_fpage_title_general', 'option') ?: 'Related [Locations]' ); // Title of Section for Locations on Clinical Resource Profile
+			$location_fpage_title_clinical_resource = uamswp_fad_fpage_text_replace($location_fpage_title_clinical_resource); // Substitute placeholder text for relevant system settings value
 		$location_fpage_intro_clinical_resource = get_field('location_fpage_intro_clinical_resource', 'option') ?: ''; // Intro Text of Section for Locations on Clinical Resource Profile
+			$location_fpage_intro_clinical_resource = uamswp_fad_fpage_text_replace($location_fpage_intro_clinical_resource); // Substitute placeholder text for relevant system settings value
 
 		// Areas of Expertise
 		$expertise_fpage_title_clinical_resource = get_field('expertise_fpage_title_clinical_resource', 'option') ?: ( get_field('expertise_fpage_title_general', 'option') ?: 'Related [Areas of Expertise]' ); // Title of Section for Descendant Areas of Expertise Items on Clinical Resource Profile
+			$expertise_fpage_title_clinical_resource = uamswp_fad_fpage_text_replace($expertise_fpage_title_clinical_resource); // Substitute placeholder text for relevant system settings value
 		$expertise_fpage_intro_clinical_resource = get_field('expertise_fpage_intro_clinical_resource', 'option') ?: ''; // Intro Text of Section for Areas of Expertise Items on Clinical Resource Profile
+			$expertise_fpage_intro_clinical_resource = uamswp_fad_fpage_text_replace($expertise_fpage_intro_clinical_resource); // Substitute placeholder text for relevant system settings value
 
 		// Clinical Resources
 		$clinical_resource_fpage_title_clinical_resource = get_field('clinical_resource_fpage_title_clinical_resource', 'option') ?: ( get_field('clinical_resource_fpage_title_general', 'option') ?: 'Related [Clinical Resources]' ); // Title of Section for Clinical Resources on Clinical Resource Profile
+			$clinical_resource_fpage_title_clinical_resource = uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_clinical_resource); // Substitute placeholder text for relevant system settings value
 		$clinical_resource_fpage_intro_clinical_resource = get_field('clinical_resource_fpage_intro_clinical_resource', 'option') ?: ''; // Intro Text of Section for Clinical Resources on Clinical Resource Profile
+			$clinical_resource_fpage_intro_clinical_resource = uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_clinical_resource); // Substitute placeholder text for relevant system settings value
 
 		// Conditions
 		$conditions_fpage_title_clinical_resource = get_field('conditions_fpage_title_clinical_resource', 'option') ?: ( get_field('conditions_fpage_title_general', 'option') ?: 'Related [Conditions]' ); // Title of Section for Conditions on Clinical Resource Profile
+			$conditions_fpage_title_clinical_resource = uamswp_fad_fpage_text_replace($conditions_fpage_title_clinical_resource); // Substitute placeholder text for relevant system settings value
 		$conditions_fpage_intro_clinical_resource = get_field('conditions_fpage_intro_clinical_resource', 'option') ?: ''; // Intro Text of Section for Conditions on Clinical Resource Profile
+			$conditions_fpage_intro_clinical_resource = uamswp_fad_fpage_text_replace($conditions_fpage_intro_clinical_resource); // Substitute placeholder text for relevant system settings value
 
 		// Treatments
 		$treatments_fpage_title_clinical_resource = get_field('treatments_fpage_title_clinical_resource', 'option') ?: ( get_field('treatments_fpage_title_general', 'option') ?: 'Related [Treatments]' ); // Title of Section for Treatments on Clinical Resource Profile
+			$treatments_fpage_title_clinical_resource = uamswp_fad_fpage_text_replace($treatments_fpage_title_clinical_resource); // Substitute placeholder text for relevant system settings value
 		$treatments_fpage_intro_clinical_resource = get_field('treatments_fpage_intro_clinical_resource', 'option') ?: ''; // Intro Text of Section for Treatments on Clinical Resource Profile
+			$treatments_fpage_intro_clinical_resource = uamswp_fad_fpage_text_replace($treatments_fpage_intro_clinical_resource); // Substitute placeholder text for relevant system settings value
 	}
 
 // Get system settings for general patient appointment information
