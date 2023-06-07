@@ -2593,7 +2593,7 @@ function uamswp_fad_podcast() {
 			$treatments_fpage_intro_expertise = uamswp_fad_fpage_text_replace($treatments_fpage_intro_expertise); // Substitute placeholder text for relevant system settings value
 	}
 
-	// Get system settings for text elements on Clinical Resource profile
+	// Get system settings for text elements for related ontology sections on Clinical Resource profile
 	function uamswp_fad_fpage_text_clinical_resource() {
 
 		// Providers
