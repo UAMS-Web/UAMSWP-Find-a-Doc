@@ -56,8 +56,8 @@
 			},
 			"default_value": "",
 			"placeholder": "",
-			"maxlength": 449,
-			"rows": "",
+			"maxlength": 117,
+			"rows": 4,
 			"new_lines": "",
 			"acfe_textarea_code": 0
 		},
@@ -114,8 +114,8 @@
 			},
 			"default_value": "",
 			"placeholder": "",
-			"maxlength": 449,
-			"rows": "",
+			"maxlength": 117,
+			"rows": 4,
 			"new_lines": "",
 			"acfe_textarea_code": 0
 		},
@@ -172,8 +172,8 @@
 			},
 			"default_value": "",
 			"placeholder": "",
-			"maxlength": 449,
-			"rows": "",
+			"maxlength": 117,
+			"rows": 4,
 			"new_lines": "",
 			"acfe_textarea_code": 0
 		},
@@ -230,8 +230,8 @@
 			},
 			"default_value": "",
 			"placeholder": "",
-			"maxlength": 449,
-			"rows": "",
+			"maxlength": 117,
+			"rows": 4,
 			"new_lines": "",
 			"acfe_textarea_code": 0
 		}
