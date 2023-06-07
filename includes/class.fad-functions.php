@@ -2385,7 +2385,7 @@ function uamswp_fad_podcast() {
 					$fpage_text_replacements[$placeholder_expertise_page_title] = $page_title;
 				}
 
-		return str_replace(array_keys($fpage_text_replacements), $fpage_text_replacements, $string); 
+		return str_replace(array_keys($fpage_text_replacements), array_values($fpage_text_replacements), $string); 
 	}
 
 	// Get system settings for general values of ontology text elements on a fake subpage or section
