@@ -46,6 +46,7 @@ $fpage_title = $location_fpage_title_expertise; // Fake subpage page title
 $fpage_title_attr = uamswp_attr_conversion($fpage_title);
 $current_fpage = get_query_var('fpage'); // Fake subpage slug
 $fpage_url = !empty($current_fpage) ? $page_url . user_trailingslashit($current_fpage) : $page_url; // Fake subpage URL
+$fpage_intro = $location_fpage_intro_expertise; // Fake subpage intro text
 
 // Area of Expertise Content Type
 $ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
@@ -124,7 +125,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 	$entry_title_text = $fpage_title; // Regular title
 	$entry_title_text_supertitle = ''; // Optional supertitle
 	$entry_title_text_subtitle = ''; // Optional subtitle
-	$entry_title_text_body = ''; // Optional lead paragraph
+	$entry_title_text_body = $fpage_intro; // Optional lead paragraph
 	$entry_title_image_desktop = ''; // Desktop breakpoint image ID
 	$entry_title_image_mobile = ''; // Optional mobile breakpoint image ID
 
