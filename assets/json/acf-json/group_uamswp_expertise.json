@@ -86,78 +86,6 @@
 			"rows": 3,
 			"new_lines": ""
 		},
-		"field_expertise_conditions_cpt": {
-			"key": "field_expertise_conditions_cpt",
-			"name": "expertise_conditions_cpt",
-			"type": "post_object",
-			"label": "Conditions",
-			"instructions": "The conditions will display in alphabetical order.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_expertise_type",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"condition"
-			],
-			"taxonomy": "",
-			"allow_null": 1,
-			"multiple": 1,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_condition_expertise"
-			},
-			"acfe_validate": "",
-			"acfe_update": "",
-			"ui": 1
-		},
-		"field_expertise_treatments_cpt": {
-			"key": "field_expertise_treatments_cpt",
-			"name": "expertise_treatments_cpt",
-			"type": "post_object",
-			"label": "Treatments & Procedures",
-			"instructions": "The treatments and procedures will display in alphabetical order.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_expertise_type",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"treatment"
-			],
-			"taxonomy": "",
-			"allow_null": 1,
-			"multiple": 1,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_treatment_procedure_expertise"
-			},
-			"acfe_validate": "",
-			"acfe_update": "",
-			"ui": 1
-		},
 		"field_medical_terms": {
 			"key": "field_expertise_medical_terms",
 			"name": "expertise_medical_terms",
@@ -571,6 +499,42 @@
 			"placement": "left",
 			"endpoint": 0
 		},
+		"field_expertise_conditions_cpt": {
+			"key": "field_expertise_conditions_cpt",
+			"name": "expertise_conditions_cpt",
+			"type": "post_object",
+			"label": "Conditions",
+			"instructions": "The conditions will display in alphabetical order.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"condition"
+			],
+			"taxonomy": "",
+			"allow_null": 1,
+			"multiple": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_condition_expertise"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
+		},
 		"field_expertise_tab_treatments": {
 			"key": "field_expertise_tab_treatments",
 			"label": "Related Treatments",
@@ -586,6 +550,42 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_expertise_treatments_cpt": {
+			"key": "field_expertise_treatments_cpt",
+			"name": "expertise_treatments_cpt",
+			"type": "post_object",
+			"label": "Treatments & Procedures",
+			"instructions": "The treatments and procedures will display in alphabetical order.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"treatment"
+			],
+			"taxonomy": "",
+			"allow_null": 1,
+			"multiple": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_treatment_procedure_expertise"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"ui": 1
 		},
 		"field_expertise_tab_deprecated": {
 			"key": "field_expertise_tab_deprecated",
