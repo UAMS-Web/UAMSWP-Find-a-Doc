@@ -29,23 +29,7 @@ else {
 	$syndication = false;
 }
 
-function uamswp_keyword_hook_header() {
-	// Bring in variables from outside of the function
-	global $keywords; // Defined on the template
-
-	$keyword_text = '';
-	if( $keywords ): 
-		$i = 1;
-		foreach( $keywords as $keyword ) { 
-			if ( 1 < $i ) {
-				$keyword_text .= ', ';
-			}
-			$keyword_text .= str_replace(",", "", $keyword['text']);
-			$i++;
-		}
-		echo '<meta name="keywords" content="'. $keyword_text .'" />';
-	endif;
-}
+// Construct the meta keywords element
 add_action('wp_head','uamswp_keyword_hook_header');
 
 $page_title = single_cat_title( '', false );

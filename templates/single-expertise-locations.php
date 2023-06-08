@@ -86,8 +86,8 @@ add_filter('seopress_titles_title', 'uamswp_fad_fpage_title', 15, 2);
 add_filter('seopress_titles_desc', 'uamswp_fad_fpage_desc');
 
 // Add meta keywords
-add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
 $keywords = get_field('expertise_alternate_names');
+add_action('wp_head','uamswp_keyword_hook_header');
 
 // Modify site header
 

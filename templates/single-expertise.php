@@ -101,9 +101,9 @@ function uamswp_fad_title($html) {
 	return $html;
 }
 
-// Add meta keywords
-add_action( 'wp_head', 'uamswp_expertise_header_metadata' );
+// Construct the meta keywords element
 $keywords = get_field('expertise_alternate_names');
+add_action('wp_head','uamswp_keyword_hook_header');
 
 // Modify site header
 

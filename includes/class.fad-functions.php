@@ -1652,8 +1652,8 @@ function uamswp_fad_ontology_header() {
 	include( UAMS_FAD_PATH . '/templates/single-expertise-header.php');
 }
 
-// Construct ontology subsection meta keywords element
-function uamswp_expertise_header_metadata() { 
+// Construct the meta keywords element
+function uamswp_keyword_hook_header() { 
 	// Bring in variables from outside of the function
 	global $keywords; // Typically defined on the template
 

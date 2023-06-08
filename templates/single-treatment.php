@@ -41,23 +41,6 @@ uamswp_fad_labels_jump_links();
 
 // Construct the meta keywords element
 $keywords = get_field('treatment_procedure_alternate');
-function uamswp_keyword_hook_header() {
-	// Bring in variables from outside of the function
-	global $keywords; // Defined on the template
-
-	$keyword_text = '';
-	if( $keywords ): 
-		$i = 1;
-		foreach( $keywords as $keyword ) { 
-			if ( 1 < $i ) {
-				$keyword_text .= ', ';
-			}
-			$keyword_text .= str_replace(",", "", $keyword['text']);
-			$i++;
-		}
-		echo '<meta name="keywords" content="'. $keyword_text .'" />';
-	endif;
-}
 add_action('wp_head','uamswp_keyword_hook_header');
 
 // Override theme's method of defining the meta page title
