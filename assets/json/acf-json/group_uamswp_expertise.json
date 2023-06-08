@@ -602,7 +602,7 @@
 			"name": "location_expertise",
 			"type": "relationship",
 			"label": "Locations",
-			"instructions": "",
+			"instructions": "The locations will display in alphabetical order.",
 			"required": 0,
 			"conditional_logic": [
 				[
@@ -641,7 +641,7 @@
 			"name": "expertise_associated",
 			"type": "relationship",
 			"label": "Associated Areas of Expertise",
-			"instructions": "",
+			"instructions": "The related areas of expertise will display in alphabetical order.",
 			"required": 0,
 			"conditional_logic": [
 				[
