@@ -4,10 +4,10 @@
 	"fields": [
 		{
 			"key": "field_condition_alternate",
-			"label": "Alternate names",
+			"label": "Alternate Names for This Condition",
 			"name": "condition_alternate",
 			"type": "repeater",
-			"instructions": "Insert additional names \/ phrases",
+			"instructions": "Insert any other names, phrases or acronyms that this condition may be known by. Separate each alternate name into its own item.</p><p class='description' style='margin-top: 0.5em;'>These alternate names will be used to help this page appear in search results for those terms.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
