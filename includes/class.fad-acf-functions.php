@@ -877,6 +877,22 @@ function limit_post_top_level( $args, $field, $post ) {
 		return $args;
 	}
 
+	// Exclude descendants of the current page/post from ACF Relationship field results
+	// Filter documentation: https://www.advancedcustomfields.com/resources/acf-fields-relationship-query/
+	// 1. Add the key=[NAME_OF_RELATIONSHIP_FIELD].
+	add_filter('acf/fields/relationship/query/key=field_expertise_associated', 'uamswp_fad_relationship_exclude_descendants', 10, 3);
+	// 2. Add the $field and $post arguments.
+	function uamswp_fad_relationship_exclude_descendants( $args, $field, $post_id ) {
+		// $args (array): The query args. See WP_Query for available args.
+		// $field (array): The field array containing all settings.
+		// $post_id (int|string): The current post ID being edited.
+
+		//3. $post argument passed in from the query hook is the $post_id.
+		$args['post_parent__not_in'] = array( $post_id ); // (array) – use post ids. Specify posts whose parent is not in an array.
+
+		return $args;
+	}
+
 // Conditional Logic to check if Find-a-Doc Settings are set to allow MyChart Scheduling
 function uamswp_mychart_scheduling_query($field) {
 	// Set to field name for option
