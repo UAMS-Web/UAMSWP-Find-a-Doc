@@ -281,8 +281,8 @@ function uams_physicians_register_meta_boxes( $meta_boxes ) {
 			array (
 				'id' => 'physician_youtube_link',
 				'type' => 'url',
-				'name' => 'Youtube Link',
-				'label_description' => 'Full URL, including https://',
+				'name' => 'Featured Video',
+				'label_description' => 'Select a video from the UAMS YouTube or Vimeo accounts that features this provider and that supports the Patient-focused Clinical Biography. Include the full URL, including https://',
 				'columns' => 6,
 				'tab' => 'tab_clin_profile',
 			),

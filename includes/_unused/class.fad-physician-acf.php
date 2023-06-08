@@ -329,10 +329,10 @@ if( function_exists('acf_add_local_field_group') ):
 			),
 			array(
 				'key' => 'field_physician_youtube_link',
-				'label' => 'Youtube Link',
+				'label' => 'Featured Video',
 				'name' => 'physician_youtube_link',
 				'type' => 'url',
-				'instructions' => 'Full URL, including https://',
+				'instructions' => 'Select a video from the UAMS YouTube or Vimeo accounts that features this provider and that supports the Patient-focused Clinical Biography. Include the full URL, including https://',
 				'required' => 0,
 				'conditional_logic' => 0,
 				'wrapper' => array(

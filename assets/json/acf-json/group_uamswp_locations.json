@@ -1034,8 +1034,8 @@
 			"key": "field_location_youtube_link",
 			"name": "location_youtube_link",
 			"type": "url",
-			"label": "Youtube Link",
-			"instructions": "Full URL, including https:\/\/",
+			"label": "Featured Video",
+			"instructions": "Select a video from the UAMS YouTube or Vimeo accounts that features this location and that supports the content of this page. Include the full URL, including https:\/\/",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
