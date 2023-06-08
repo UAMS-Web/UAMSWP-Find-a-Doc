@@ -59,58 +59,6 @@
 			"ui_off_text": "Content",
 			"ui": 1
 		},
-		"field_expertise_alternate_names": {
-			"key": "field_expertise_alternate_names",
-			"label": "Alternate Names",
-			"name": "expertise_alternate_names",
-			"type": "repeater",
-			"instructions": "Insert additional names \/ phrases",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_expertise_type",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"collapsed": "field_alternate_text",
-			"min": 0,
-			"max": 10,
-			"layout": "table",
-			"button_label": "Add Keyword",
-			"sub_fields": [
-				{
-					"key": "field_alternate_text",
-					"label": "Alternate name \/ text",
-					"name": "text",
-					"type": "text",
-					"instructions": "",
-					"required": 0,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"acfe_permissions": "",
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": "",
-					"acfe_validate": "",
-					"acfe_update": ""
-				}
-			]
-		},
 		"field_expertise_youtube_link": {
 			"key": "field_expertise_youtube_link",
 			"name": "expertise_youtube_link",
@@ -782,6 +730,58 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_expertise_alternate_names": {
+			"key": "field_expertise_alternate_names",
+			"label": "Alternate Names",
+			"name": "expertise_alternate_names",
+			"type": "repeater",
+			"instructions": "Insert additional names \/ phrases",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"collapsed": "field_alternate_text",
+			"min": 0,
+			"max": 10,
+			"layout": "table",
+			"button_label": "Add Keyword",
+			"sub_fields": [
+				{
+					"key": "field_alternate_text",
+					"label": "Alternate name \/ text",
+					"name": "text",
+					"type": "text",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": "",
+					"acfe_validate": "",
+					"acfe_update": ""
+				}
+			]
 		},
 		"field_expertise_tab_podcast": {
 			"key": "field_expertise_tab_podcast",
