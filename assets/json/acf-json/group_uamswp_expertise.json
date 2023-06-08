@@ -24,6 +24,22 @@
 	"acfe_note": "",
 	"acfe_meta": "",
 	"fields": {
+		"field_expertise_tab_general": {
+			"key": "field_expertise_tab_general",
+			"label": "General Information",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
 		"field_expertise_type": {
 			"key": "field_expertise_type",
 			"name": "expertise_type",
@@ -734,6 +750,174 @@
 			"prepend": "",
 			"append": "",
 			"maxlength": ""
+		},
+		"field_expertise_tab_header": {
+			"key": "field_expertise_tab_header",
+			"label": "Page Header Details",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_tab_details": {
+			"key": "field_expertise_tab_details",
+			"label": "Area of Expertise Details",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_tab_podcast": {
+			"key": "field_expertise_tab_podcast",
+			"label": "UAMS Health Talk Podcast",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_tab_providers": {
+			"key": "field_expertise_tab_providers",
+			"label": "Related Providers",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_tab_locations": {
+			"key": "field_expertise_tab_locations",
+			"label": "Related Locations",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_tab_expertise": {
+			"key": "field_expertise_tab_expertise",
+			"label": "Related Areas of Expertise",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_tab_clinical_resources": {
+			"key": "field_expertise_tab_clinical_resources",
+			"label": "Related Clinical Resources",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_tab_conditions": {
+			"key": "field_expertise_tab_conditions",
+			"label": "Related Conditions",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_tab_treatments": {
+			"key": "field_expertise_tab_treatments",
+			"label": "Related Treatments",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_tab_deprecated": {
+			"key": "field_expertise_tab_deprecated",
+			"label": "Deprecated Fields",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_tab_deprecated",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
 		}
 	},
 	"modified": false
