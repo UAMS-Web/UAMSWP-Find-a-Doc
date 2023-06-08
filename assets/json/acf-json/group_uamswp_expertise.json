@@ -86,33 +86,6 @@
 			"rows": 3,
 			"new_lines": ""
 		},
-		"field_physician_podcast_name": {
-			"key": "field_expertise_podcast_name",
-			"name": "expertise_podcast_name",
-			"type": "text",
-			"label": "UAMS Health Talk Podcast Topic Name",
-			"instructions": "Topic name as listed in the dropdown",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_expertise_type",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "",
-			"prepend": "",
-			"append": "",
-			"maxlength": ""
-		},
 		"field_expertise_tab_header": {
 			"key": "field_expertise_tab_header",
 			"label": "Page Header Details",
@@ -228,6 +201,33 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_physician_podcast_name": {
+			"key": "field_expertise_podcast_name",
+			"name": "expertise_podcast_name",
+			"type": "text",
+			"label": "UAMS Health Talk Podcast Topic Name",
+			"instructions": "Topic name as listed in the dropdown",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
 		},
 		"field_expertise_tab_providers": {
 			"key": "field_expertise_tab_providers",
