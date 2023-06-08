@@ -177,7 +177,7 @@ if ($physicians && !empty($physicians)) { $condition_field_classes .= ' has-prov
 							if ( 1 < $i ) {
 								$keyword_text .= '; ';
 							}
-							$keyword_text .= $keyword['text'];
+							$keyword_text .= $keyword['alternate_text'];
 							$i++;
 						}
 						echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';

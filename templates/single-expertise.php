@@ -168,7 +168,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 				if ( 1 < $i ) {
 					$keyword_text .= '; ';
 				}
-				$keyword_text .= $keyword['text'];
+				$keyword_text .= $keyword['alternate_text'];
 				$i++;
 			}
 			echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';
