@@ -86,39 +86,6 @@
 			"rows": 3,
 			"new_lines": ""
 		},
-		"field_expertise_associated": {
-			"key": "field_expertise_associated",
-			"name": "expertise_associated",
-			"type": "relationship",
-			"label": "Related Areas of Expertise",
-			"instructions": "The related areas of expertise will display in alphabetical order.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_expertise_type",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"expertise"
-			],
-			"taxonomy": [],
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id"
-		},
 		"field_expertise_clinical_resources": {
 			"key": "field_expertise_clinical_resources",
 			"name": "expertise_clinical_resources",
@@ -426,6 +393,39 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_expertise_associated": {
+			"key": "field_expertise_associated",
+			"name": "expertise_associated",
+			"type": "relationship",
+			"label": "Related Areas of Expertise",
+			"instructions": "The related areas of expertise will display in alphabetical order.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"expertise"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id"
 		},
 		"field_expertise_tab_clinical_resources": {
 			"key": "field_expertise_tab_clinical_resources",
