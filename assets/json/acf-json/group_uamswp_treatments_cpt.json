@@ -19,8 +19,8 @@
 			"collapsed": "field_treatment_procedure_alternate_text",
 			"min": 0,
 			"max": 10,
-			"layout": "table",
-			"button_label": "Add Keyword",
+			"layout": "block",
+			"button_label": "Add Alternate Name",
 			"sub_fields": [
 				{
 					"key": "field_treatment_procedure_alternate_text",
