@@ -865,7 +865,7 @@ function limit_post_top_level( $args, $field, $post ) {
 
 	// Exclude current post/page from ACF Relationship field results
 	// Filter documentation: https://www.advancedcustomfields.com/resources/acf-fields-relationship-query/
-	// 1. Add the key=[NAME_OF_RELATIONSHIP_FIELD].
+	// 1. Add a filter for each specific relationship field with key=[NAME_OF_RELATIONSHIP_FIELD].
 	add_filter('acf/fields/relationship/query/key=field_clinical_resource_related', 'relationship_exclude_id', 10, 3);
 	add_filter('acf/fields/relationship/query/key=field_expertise_associated', 'relationship_exclude_id', 10, 3);
 	// 2. Add the $field and $post arguments.
@@ -875,11 +875,12 @@ function limit_post_top_level( $args, $field, $post ) {
 		$args['post__not_in'] = array( $post_id );
 
 		return $args;
+
 	}
 
 	// Exclude descendants of the current page/post from ACF Relationship field results
 	// Filter documentation: https://www.advancedcustomfields.com/resources/acf-fields-relationship-query/
-	// 1. Add the key=[NAME_OF_RELATIONSHIP_FIELD].
+	// 1. Add a filter for each specific relationship field with key=[NAME_OF_RELATIONSHIP_FIELD].
 	add_filter('acf/fields/relationship/query/key=field_expertise_associated', 'uamswp_fad_relationship_exclude_descendants', 10, 3);
 	// 2. Add the $field and $post arguments.
 	function uamswp_fad_relationship_exclude_descendants( $args, $field, $post_id ) {
@@ -891,9 +892,10 @@ function limit_post_top_level( $args, $field, $post ) {
 		$args['post_parent__not_in'] = array( $post_id ); // (array) – use post ids. Specify posts whose parent is not in an array.
 
 		return $args;
+
 	}
 
-	// Only include pages/posts where Ontolgy Type TRUE (or NOT EXISTS) in ACF Relationship field results
+	// Only include pages/posts where the Content Type is Ontology Item (or the Content Type is not defined) in ACF Relationship field results
 	// Filter documentation: https://www.advancedcustomfields.com/resources/acf-fields-relationship-query/
 	// 1. Add a filter for each specific relationship field with key=[NAME_OF_RELATIONSHIP_FIELD].
 	add_filter('acf/fields/relationship/query/key=field_expertise_associated', 'uamswp_fad_relationship_ontology_type', 10, 3);
