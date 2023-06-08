@@ -640,7 +640,7 @@
 			"key": "field_expertise_associated",
 			"name": "expertise_associated",
 			"type": "relationship",
-			"label": "Associated Areas of Expertise",
+			"label": "Related Areas of Expertise",
 			"instructions": "The related areas of expertise will display in alphabetical order.",
 			"required": 0,
 			"conditional_logic": [
