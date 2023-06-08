@@ -59,22 +59,6 @@
 			"ui_off_text": "Content",
 			"ui": 1
 		},
-		"field_expertise_youtube_link": {
-			"key": "field_expertise_youtube_link",
-			"name": "expertise_youtube_link",
-			"type": "url",
-			"label": "Featured Youtube video",
-			"instructions": "Full URL, including https:\/\/",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": ""
-		},
 		"field_expertise_short_desc": {
 			"key": "field_expertise_short_desc",
 			"name": "post_excerpt",
@@ -782,6 +766,22 @@
 					"acfe_update": ""
 				}
 			]
+		},
+		"field_expertise_youtube_link": {
+			"key": "field_expertise_youtube_link",
+			"name": "expertise_youtube_link",
+			"type": "url",
+			"label": "Featured Youtube video",
+			"instructions": "Full URL, including https:\/\/",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
 		},
 		"field_expertise_tab_podcast": {
 			"key": "field_expertise_tab_podcast",
