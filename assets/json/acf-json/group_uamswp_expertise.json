@@ -86,45 +86,6 @@
 			"rows": 3,
 			"new_lines": ""
 		},
-		"field_expertise_locations": {
-			"key": "field_expertise_locations",
-			"name": "location_expertise",
-			"type": "relationship",
-			"label": "Locations",
-			"instructions": "The locations will display in alphabetical order.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_expertise_type",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"location"
-			],
-			"taxonomy": [],
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_location_expertise"
-			},
-			"acfe_validate": "",
-			"acfe_update": ""
-		},
 		"field_expertise_associated": {
 			"key": "field_expertise_associated",
 			"name": "expertise_associated",
@@ -410,6 +371,45 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_expertise_locations": {
+			"key": "field_expertise_locations",
+			"name": "location_expertise",
+			"type": "relationship",
+			"label": "Locations",
+			"instructions": "The locations will display in alphabetical order.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"location"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_location_expertise"
+			},
+			"acfe_validate": "",
+			"acfe_update": ""
 		},
 		"field_expertise_tab_expertise": {
 			"key": "field_expertise_tab_expertise",
