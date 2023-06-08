@@ -893,6 +893,60 @@ function limit_post_top_level( $args, $field, $post ) {
 		return $args;
 	}
 
+	// Only include pages/posts where Ontolgy Type TRUE (or NOT EXISTS) in ACF Relationship field results
+	// Filter documentation: https://www.advancedcustomfields.com/resources/acf-fields-relationship-query/
+	// 1. Add a filter for each specific relationship field with key=[NAME_OF_RELATIONSHIP_FIELD].
+	add_filter('acf/fields/relationship/query/key=field_expertise_associated', 'uamswp_fad_relationship_ontology_type', 10, 3);
+	// 2. Add the $field and $post arguments.
+	function uamswp_fad_relationship_ontology_type( $args, $field, $post_id ) {
+		// $args (array): The query args. See WP_Query for available args.
+		// $field (array): The field array containing all settings.
+		// $post_id (int|string): The current post ID being edited.
+
+		// 3. Add name of each field that defines the content type of the page/post as either an Ontology Item or a Simple Content Item
+		$relationship_ontology_type = array(
+			"expertise_type"
+		);
+
+		// If the $relationship_ontology_type array has a value...
+		if ( $relationship_ontology_type ) {
+
+			// Create the array to be used in $args['meta_query']
+			$relationship_ontology_type_meta = array( "relation" => "OR" );
+
+			// For each value in the $relationship_ontology_type array...
+			foreach( $relationship_ontology_type as $field_name ) {
+
+				// Add field parameters to the $relationship_ontology_type array
+				array_push(
+					$relationship_ontology_type_meta, 
+
+					// The content type of the page/post is not defined as a Simple Content Item
+					// (0 means Simple Content Item)
+					array(
+						"key" => $field_name,
+						"value" => "0",
+						"compare" => "!=",
+					),
+
+					// The content type of the page/post has not been defined
+					// (the page/post has not been updated since the ontology type input was added)
+					array(
+						"key" => $field_name,
+						"compare" => "NOT EXISTS"
+					)
+				);
+			} // endforeach
+
+			// 4. $post argument passed in from the query hook is the $post_id.
+			$args['meta_query'] = $relationship_ontology_type_meta; // (array) – Custom field parameters
+
+		}
+
+		return $args;
+
+	}
+
 // Conditional Logic to check if Find-a-Doc Settings are set to allow MyChart Scheduling
 function uamswp_mychart_scheduling_query($field) {
 	// Set to field name for option
