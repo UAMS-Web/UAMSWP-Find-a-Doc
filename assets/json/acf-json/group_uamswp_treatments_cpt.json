@@ -16,16 +16,16 @@
 				"id": ""
 			},
 			"acfe_permissions": "",
-			"collapsed": "field_alternate_text",
+			"collapsed": "field_treatment_procedure_alternate_text",
 			"min": 0,
 			"max": 10,
 			"layout": "table",
 			"button_label": "Add Keyword",
 			"sub_fields": [
 				{
-					"key": "field_alternate_text",
-					"label": "Alternate name \/ text",
-					"name": "text",
+					"key": "field_treatment_procedure_alternate_text",
+					"label": "Alternate Name",
+					"name": "treatment_procedure_alternate_text",
 					"type": "text",
 					"instructions": "",
 					"required": 0,
@@ -33,6 +33,28 @@
 					"wrapper": {
 						"width": "",
 						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": "",
+					"acfe_validate": "",
+					"acfe_update": ""
+				},
+				{
+					"key": "field_alternate_text",
+					"label": "Alternate Name [Deprecated]",
+					"name": "text",
+					"type": "hidden",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "0",
+						"class": "hide-acf-field",
 						"id": ""
 					},
 					"acfe_permissions": "",
