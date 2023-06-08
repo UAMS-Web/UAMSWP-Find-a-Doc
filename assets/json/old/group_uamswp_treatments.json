@@ -25,7 +25,7 @@
 				{
 					"key": "field_treatment_procedure_alternate_text",
 					"label": "Alternate Name",
-					"name": "treatment_procedure_alternate_text",
+					"name": "alternate_text",
 					"type": "text",
 					"instructions": "",
 					"required": 0,

@@ -149,7 +149,7 @@
 				{
 					"key": "field_expertise_alternate_text",
 					"label": "Alternate Name",
-					"name": "expertise_alternate_text",
+					"name": "alternate_text",
 					"type": "text",
 					"instructions": "",
 					"required": 0,
