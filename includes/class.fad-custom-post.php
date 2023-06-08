@@ -2187,19 +2187,25 @@ add_action( 'admin_menu' , 'remove_provider_meta' );
 add_action('admin_head', 'acf_hide_title');
 
 function acf_hide_title() {
-	echo '<style>
-	.acf-field.hide-acf-title {
-	border: none;
-	padding: 6px 12px;
-	}
-	.acf-field.hide-acf-border,
-	.acf-field[data-width]+.acf-field[data-width].hide-acf-border {
-	border-color: transparent;
-	}
-	.hide-acf-title .acf-label {
-		display: none;
-	}
-	.acf-field.pbn { padding-bottom:0; }
+	echo 
+	'<style>
+		.acf-field.hide-acf-field {
+			display: none;
+		}
+		.acf-field.hide-acf-title {
+			border: none;
+			padding: 6px 12px;
+		}
+		.acf-field.hide-acf-border,
+		.acf-field[data-width]+.acf-field[data-width].hide-acf-border {
+			border-color: transparent;
+		}
+		.hide-acf-title .acf-label {
+			display: none;
+		}
+		.acf-field.pbn {
+			padding-bottom:0;
+		}
 	</style>';
 }
 
