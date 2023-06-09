@@ -55,7 +55,7 @@
 				"id": ""
 			},
 			"default_value": "",
-			"placeholder": "",
+			"placeholder": "UAMS Health [providers] care for a broad range of [conditions], some of which may not be listed below.",
 			"maxlength": 117,
 			"rows": 4,
 			"new_lines": "",

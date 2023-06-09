@@ -55,7 +55,7 @@
 				"id": ""
 			},
 			"default_value": "",
-			"placeholder": "",
+			"placeholder": "UAMS Health [providers] perform and prescribe a broad range of [treatments], some of which may not be listed below.",
 			"maxlength": 117,
 			"rows": 4,
 			"new_lines": "",

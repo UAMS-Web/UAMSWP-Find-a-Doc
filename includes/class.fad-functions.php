@@ -2451,13 +2451,13 @@ function uamswp_fad_podcast() {
 		// Conditions
 		$conditions_fpage_title_general = get_field('conditions_fpage_title_general', 'option') ?: 'Related [Conditions]'; // General Title of Fake Subpage or Section for Conditions
 			$conditions_fpage_title_general = uamswp_fad_fpage_text_replace($conditions_fpage_title_general); // Substitute placeholder text for relevant system settings value
-		$conditions_fpage_intro_general = get_field('conditions_fpage_intro_general', 'option') ?: ''; // General Intro Text of Fake Subpage or Section for Conditions
+		$conditions_fpage_intro_general = get_field('conditions_fpage_intro_general', 'option') ?: 'UAMS Health [providers] care for a broad range of [conditions], some of which may not be listed below.'; // General Intro Text of Fake Subpage or Section for Conditions
 			$conditions_fpage_intro_general = uamswp_fad_fpage_text_replace($conditions_fpage_intro_general); // Substitute placeholder text for relevant system settings value
 
 		// Treatments
 		$treatments_fpage_title_general = get_field('treatments_fpage_title_general', 'option') ?: 'Related [Treatments]'; // General Title of Fake Subpage or Section for Treatments
 			$treatments_fpage_title_general = uamswp_fad_fpage_text_replace($treatments_fpage_title_general); // Substitute placeholder text for relevant system settings value
-		$treatments_fpage_intro_general = get_field('treatments_fpage_intro_general', 'option') ?: ''; // General Intro Text of Fake Subpage or Section for Treatments
+		$treatments_fpage_intro_general = get_field('treatments_fpage_intro_general', 'option') ?: 'UAMS Health [providers] perform and prescribe a broad range of [treatments], some of which may not be listed below.'; // General Intro Text of Fake Subpage or Section for Treatments
 			$treatments_fpage_intro_general = uamswp_fad_fpage_text_replace($treatments_fpage_intro_general); // Substitute placeholder text for relevant system settings value
 	}
 
