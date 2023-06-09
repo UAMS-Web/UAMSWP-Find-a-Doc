@@ -537,8 +537,8 @@
 			"key": "field_expertise_treatments_cpt",
 			"name": "expertise_treatments_cpt",
 			"type": "post_object",
-			"label": "Treatments & Procedures",
-			"instructions": "The treatments and procedures will display in alphabetical order.",
+			"label": "Related Treatments and Procedures",
+			"instructions": "Include all treatments and procedures that are related to this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>These treatments and procedures will be displayed in a block on the main page for this area of expertise, arranged in the alphabetical order.",
 			"required": 0,
 			"conditional_logic": [
 				[
