@@ -66,15 +66,7 @@
 			"label": "Short Description",
 			"instructions": "This will be the description included for this page when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
 			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_expertise_type",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -109,7 +101,15 @@
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -125,15 +125,7 @@
 			"type": "repeater",
 			"instructions": "Insert any other names, phrases or acronyms that this area of expertise may be known by. Separate each alternate name into its own item.</p><p class='description' style='margin-top: 0.5em;'>These alternate names will be used to help this page appear in search results for those terms.",
 			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_expertise_type",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -215,7 +207,15 @@
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -231,15 +231,7 @@
 			"label": "UAMS Health Talk Podcast Topic Name",
 			"instructions": "Include a single topic name as listed in the \"Topics\" dropdown of the embedded player on <a href=\"https://uamshealth.com/podcast/\" title=\"UAMS Health Talk Podcast\" target=\"_blank\">https://uamshealth.com/podcast/</a>.",
 			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_expertise_type",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -258,7 +250,15 @@
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -274,15 +274,7 @@
 			"label": "Related Providers",
 			"instructions": "Include all providers who have this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>The providers will be displayed on a subpage, arranged in alphabetical order by their last name.",
 			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_expertise_type",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -313,7 +305,15 @@
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -329,15 +329,7 @@
 			"label": "Related Locations",
 			"instructions": "Include all locations where this area of expertise is represented.</p><p class='description' style='margin-top: 0.5em;'>The locations will be displayed on a subpage, arranged in alphabetical order.",
 			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_expertise_type",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -368,7 +360,15 @@
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -384,15 +384,7 @@
 			"label": "Related Areas of Expertise",
 			"instructions": "Include all areas of expertise that are related to this area of expertise. An example of a related area of expertise would be one that is also represented in treatment plans associated with this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>Areas of expertise that are nested under this area of expertise are excluded from this list.</p><p class='description' style='margin-top: 0.5em;'>The related areas of expertise will be displayed on a subpage, arranged in alphabetical order.",
 			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_expertise_type",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -417,7 +409,15 @@
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -433,15 +433,7 @@
 			"label": "Related Clinical Resources",
 			"instructions": "Include all clinical resources that are related to this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>These clinical resources will be displayed on a subpage, arranged in the order in which they were published, with the most recently published resources being listed first.",
 			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_expertise_type",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -472,7 +464,15 @@
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -488,15 +488,7 @@
 			"type": "relationship",
 			"instructions": "Include all conditions that are related to this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>These conditions will be displayed in a block on the main page for this area of expertise, arranged in the alphabetical order.",
 			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_expertise_type",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -529,7 +521,15 @@
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -545,15 +545,7 @@
 			"label": "Related Treatments and Procedures",
 			"instructions": "Include all treatments and procedures that are related to this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>These treatments and procedures will be displayed in a block on the main page for this area of expertise, arranged in the alphabetical order.",
 			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_expertise_type",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
