@@ -2303,29 +2303,39 @@ function uamswp_fad_podcast() {
 
 				// System settings for provider labels
 				$fpage_text_replacements[$placeholder_provider_single_name] = $provider_single_name;
+				$fpage_text_replacements[str_to_lower($placeholder_provider_single_name)] = str_to_lower($provider_single_name);
 				$fpage_text_replacements[$placeholder_provider_plural_name] = $provider_plural_name;
+				$fpage_text_replacements[str_to_lower($placeholder_provider_plural_name)] = str_to_lower($provider_plural_name);
 
 				// System settings for provider archive page text
 				$fpage_text_replacements[$placeholder_provider_archive_headline] = $provider_archive_headline;
 
 				// System settings for location labels
 				$fpage_text_replacements[$placeholder_location_single_name] = $location_single_name;
+				$fpage_text_replacements[str_to_lower($placeholder_location_single_name)] = str_to_lower($location_single_name);
 				$fpage_text_replacements[$placeholder_location_plural_name] = $location_plural_name;
+				$fpage_text_replacements[str_to_lower($placeholder_location_plural_name)] = str_to_lower($location_plural_name);
 
 				// System settings for location descendant item labels
 				$fpage_text_replacements[$placeholder_location_descendant_single_name] = $location_descendant_single_name;
+				$fpage_text_replacements[str_to_lower($placeholder_location_descendant_single_name)] = str_to_lower($location_descendant_single_name);
 				$fpage_text_replacements[$placeholder_location_descendant_plural_name] = $location_descendant_plural_name;
+				$fpage_text_replacements[str_to_lower($placeholder_location_descendant_plural_name)] = str_to_lower($location_descendant_plural_name);
 
 				// System settings for location archive page text
 				$fpage_text_replacements[$placeholder_location_archive_headline] = $location_archive_headline;
 
 				// System settings for area of expertise labels
 				$fpage_text_replacements[$placeholder_expertise_single_name] = $expertise_single_name;
+				$fpage_text_replacements[str_to_lower($placeholder_expertise_single_name)] = str_to_lower($expertise_single_name);
 				$fpage_text_replacements[$placeholder_expertise_plural_name] = $expertise_plural_name;
+				$fpage_text_replacements[str_to_lower($placeholder_expertise_plural_name)] = str_to_lower($expertise_plural_name);
 
 				// System settings for area of expertise descendant item labels
 				$fpage_text_replacements[$placeholder_expertise_descendant_single_name] = $expertise_descendant_single_name;
+				$fpage_text_replacements[str_to_lower($placeholder_expertise_descendant_single_name)] = str_to_lower($expertise_descendant_single_name);
 				$fpage_text_replacements[$placeholder_expertise_descendant_plural_name] = $expertise_descendant_plural_name;
+				$fpage_text_replacements[str_to_lower($placeholder_expertise_descendant_plural_name)] = str_to_lower($expertise_descendant_plural_name);
 
 				// System settings for area of expertise archive page text
 				$fpage_text_replacements[$placeholder_expertise_archive_headline] = $expertise_archive_headline;
@@ -2333,22 +2343,30 @@ function uamswp_fad_podcast() {
 
 				// System settings for clinical resource labels
 				$fpage_text_replacements[$placeholder_clinical_resource_single_name] = $clinical_resource_single_name;
+				$fpage_text_replacements[str_to_lower($placeholder_clinical_resource_single_name)] = str_to_lower($clinical_resource_single_name);
 				$fpage_text_replacements[$placeholder_clinical_resource_plural_name] = $clinical_resource_plural_name;
+				$fpage_text_replacements[str_to_lower($placeholder_clinical_resource_plural_name)] = str_to_lower($clinical_resource_plural_name);
 
 				// System settings for clinical resource archive page text
 				$fpage_text_replacements[$placeholder_clinical_resource_archive_headline] = $clinical_resource_archive_headline;
 
 				// System settings for clinical resource facet labels
 				$fpage_text_replacements[$placeholder_clinical_resource_type_single_name] = $clinical_resource_type_single_name;
+				$fpage_text_replacements[str_to_lower($placeholder_clinical_resource_type_single_name)] = str_to_lower($clinical_resource_type_single_name);
 				$fpage_text_replacements[$placeholder_clinical_resource_type_plural_name] = $clinical_resource_type_plural_name;
+				$fpage_text_replacements[str_to_lower($placeholder_clinical_resource_type_plural_name)] = str_to_lower($clinical_resource_type_plural_name);
 
 				// System settings for combined conditions and treatments labels
 				$fpage_text_replacements[$placeholder_conditions_treatments_single_name] = $conditions_treatments_single_name;
+				$fpage_text_replacements[str_to_lower($placeholder_conditions_treatments_single_name)] = str_to_lower($conditions_treatments_single_name);
 				$fpage_text_replacements[$placeholder_conditions_treatments_plural_name] = $conditions_treatments_plural_name;
+				$fpage_text_replacements[str_to_lower($placeholder_conditions_treatments_plural_name)] = str_to_lower($conditions_treatments_plural_name);
 
 				// System settings for condition labels
 				$fpage_text_replacements[$placeholder_conditions_single_name] = $conditions_single_name;
+				$fpage_text_replacements[str_to_lower($placeholder_conditions_single_name)] = str_to_lower($conditions_single_name);
 				$fpage_text_replacements[$placeholder_conditions_plural_name] = $conditions_plural_name;
+				$fpage_text_replacements[str_to_lower($placeholder_conditions_plural_name)] = str_to_lower($conditions_plural_name);
 
 				// System settings for condition archive page text
 				$fpage_text_replacements[$placeholder_conditions_archive_headline] = $conditions_archive_headline;
@@ -2356,7 +2374,9 @@ function uamswp_fad_podcast() {
 
 				// System settings for treatment labels
 				$fpage_text_replacements[$placeholder_treatments_single_name] = $treatments_single_name;
+				$fpage_text_replacements[str_to_lower($placeholder_treatments_single_name)] = str_to_lower($treatments_single_name);
 				$fpage_text_replacements[$placeholder_treatments_plural_name] = $treatments_plural_name;
+				$fpage_text_replacements[str_to_lower($placeholder_treatments_plural_name)] = str_to_lower($treatments_plural_name);
 
 				// System settings for location labels
 				$fpage_text_replacements[$placeholder_treatments_archive_headline] = $treatments_archive_headline;
