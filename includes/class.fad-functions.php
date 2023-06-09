@@ -2313,8 +2313,8 @@ function uamswp_fad_podcast() {
 				$fpage_text_replacements[$placeholder_location_plural_name] = $location_plural_name;
 
 				// System settings for location descendant item labels
-				$fpage_text_replacements[$placeholder_location_single_name] = $location_single_name;
-				$fpage_text_replacements[$placeholder_location_plural_name] = $location_plural_name;
+				$fpage_text_replacements[$placeholder_location_descendant_single_name] = $location_descendant_single_name;
+				$fpage_text_replacements[$placeholder_location_descendant_plural_name] = $location_descendant_plural_name;
 
 				// System settings for location archive page text
 				$fpage_text_replacements[$placeholder_location_archive_headline] = $location_archive_headline;
