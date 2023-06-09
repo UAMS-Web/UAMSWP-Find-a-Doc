@@ -382,7 +382,7 @@
 			"name": "expertise_associated",
 			"type": "relationship",
 			"label": "Related Areas of Expertise",
-			"instructions": "The related areas of expertise will display in alphabetical order.",
+			"instructions": "Include all areas of expertise that are related to this area of expertise. An example of a related area of expertise would be one that is also represented in treatment plans associated with this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>Areas of expertise that are nested under this area of expertise are excluded from this list.</p><p class='description' style='margin-top: 0.5em;'>The related areas of expertise will be displayed on a subpage, arranged in alphabetical order.",
 			"required": 0,
 			"conditional_logic": [
 				[
