@@ -430,8 +430,8 @@
 			"key": "field_expertise_clinical_resources",
 			"name": "expertise_clinical_resources",
 			"type": "relationship",
-			"label": "Clinical Resources",
-			"instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
+			"label": "Related Clinical Resources",
+			"instructions": "Include all clinical resources that are related to this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>These clinical resources will be displayed on a subpage, arranged in the order in which they were published, with the most recently published resources being listed first.",
 			"required": 0,
 			"conditional_logic": [
 				[
