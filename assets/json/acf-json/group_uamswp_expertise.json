@@ -326,8 +326,8 @@
 			"key": "field_expertise_locations",
 			"name": "location_expertise",
 			"type": "relationship",
-			"label": "Locations",
-			"instructions": "The locations will display in alphabetical order.",
+			"label": "Related Locations",
+			"instructions": "Include all locations where this area of expertise is represented.</p><p class='description' style='margin-top: 0.5em;'>The locations will be displayed on a subpage, arranged in alphabetical order.",
 			"required": 0,
 			"conditional_logic": [
 				[
