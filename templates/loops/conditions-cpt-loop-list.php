@@ -10,6 +10,7 @@
  * 	$conditions_plural_name // System setting for Conditions plural item name
  * 	$conditions_cpt_query
  * 	$condition_context = 'single-provider', 'single-location', 'single-condition', 'single-treatment', 'single-expertise', 'single-resource'
+ * 	$condition_intro // Intro text
  * 
  * Optional vars:
  * 	$condition_heading
@@ -39,17 +40,17 @@ if ( !isset($condition_heading) || empty($condition_heading) ) {
 
 // Condition disclaimer
 if (
-	$condition_context == 'single-provider'
-	||
-	$condition_context == 'single-location'
-	||
-	$condition_context == 'single-expertise'
-	||
-	$condition_context == 'single-condition'
+	empty($condition_intro)
+	&&
+	(
+		$condition_context == 'single-provider'
+		||
+		$condition_context == 'single-location'
+		||
+		$condition_context == 'single-condition'
+	)
 ) {
-	$condition_disclaimer = 'UAMS Health ' . strtolower($provider_plural_name) . ' care for a broad range of ' . strtolower($conditions_plural_name) . ', some of which may not be listed below.';
-} else {
-	$condition_disclaimer = '';
+	$condition_intro = 'UAMS Health ' . strtolower($provider_plural_name) . ' care for a broad range of ' . strtolower($conditions_plural_name) . ', some of which may not be listed below.';
 }
 ?>
 <section class="uams-module conditions-treatments bg-auto" id="conditions">
@@ -57,8 +58,8 @@ if (
 		<div class="row">
 			<div class="col-xs-12">
 				<h2 class="module-title"><span class="title"><?php echo $condition_heading; ?></span></h2>
-				<?php if ( $condition_disclaimer ) { ?>
-					<p class="note"><?php echo $condition_disclaimer; ?></p>
+				<?php if ( $condition_intro ) { ?>
+					<p class="note"><?php echo $condition_intro; ?></p>
 				<?php } ?>
 				<div class="">
 					<ul class="list" style="column-count:3; list-style:none;">

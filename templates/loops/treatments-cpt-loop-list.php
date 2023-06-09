@@ -10,6 +10,7 @@
  * 	$treatments_plural_name // System setting for Treatments plural item name
  * 	$treatments_cpt_query
  * 	$treatment_context = 'single-provider', 'single-location', 'single-condition', 'single-treatment', 'single-expertise', 'single-resource'
+ * 	$treatment_intro // Intro text
  * 
  * Optional vars:
  * 	$treatment_heading
@@ -39,26 +40,26 @@ if ( !isset($treatment_heading) || empty($treatment_heading) ) {
 
 // Treatment disclaimer
 if (
-	$condition_context == 'single-provider'
-	||
-	$condition_context == 'single-location'
-	||
-	$condition_context == 'single-expertise'
-	||
-	$condition_context == 'single-treatment'
-) {
-	$treatment_disclaimer = 'UAMS Health ' . strtolower($provider_plural_name) . ' perform and prescribe a broad range of ' . strtolower($treatments_plural_name) . ', some of which may not be listed below.';
-} else {
-	$treatment_disclaimer = '';
-}
+	empty($treatment_intro)
+	&&
+	(
+		$treatment_context == 'single-provider'
+		||
+		$treatment_context == 'single-location'
+		||
+		$treatment_context == 'single-condition'
+		||
+		$treatment_context == 'single-treatment'
+	)
+)
 ?>
 <section class="uams-module conditions-treatments bg-auto" id="treatments">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12">
 				<h2 class="module-title"><span class="title"><?php echo $treatment_heading; ?></span></h2>
-				<?php if ( $treatment_disclaimer ) { ?>
-					<p class="note"><?php echo $treatment_disclaimer; ?></p>
+				<?php if ( $treatment_intro ) { ?>
+					<p class="note"><?php echo $treatment_intro; ?></p>
 				<?php } ?>
 				<div class="">
 					<ul class="list" style="column-count:3; list-style:none;">
