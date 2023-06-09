@@ -541,7 +541,7 @@
 		"field_expertise_treatments_cpt": {
 			"key": "field_expertise_treatments_cpt",
 			"name": "expertise_treatments_cpt",
-			"type": "post_object",
+			"type": "relationship",
 			"label": "Related Treatments and Procedures",
 			"instructions": "Include all treatments and procedures that are related to this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>These treatments and procedures will be displayed in a block on the main page for this area of expertise, arranged in the alphabetical order.",
 			"required": 0,
@@ -559,12 +559,17 @@
 				"class": "",
 				"id": ""
 			},
+			"acfe_permissions": "",
 			"post_type": [
 				"treatment"
 			],
 			"taxonomy": "",
-			"allow_null": 1,
-			"multiple": 1,
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
 			"return_format": "id",
 			"acfe_bidirectional": {
 				"acfe_bidirectional_enabled": "1",
