@@ -485,8 +485,8 @@
 			"key": "field_expertise_conditions_cpt",
 			"name": "expertise_conditions_cpt",
 			"type": "post_object",
-			"label": "Conditions",
-			"instructions": "The conditions will display in alphabetical order.",
+			"label": "Related Conditions",
+			"instructions": "Include all conditions that are related to this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>These conditions will be displayed in a block on the main page for this area of expertise, arranged in the alphabetical order.",
 			"required": 0,
 			"conditional_logic": [
 				[
