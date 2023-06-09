@@ -483,9 +483,9 @@
 		},
 		"field_expertise_conditions_cpt": {
 			"key": "field_expertise_conditions_cpt",
-			"name": "expertise_conditions_cpt",
-			"type": "post_object",
 			"label": "Related Conditions",
+			"name": "expertise_conditions_cpt",
+			"type": "relationship",
 			"instructions": "Include all conditions that are related to this area of expertise.</p><p class='description' style='margin-top: 0.5em;'>These conditions will be displayed in a block on the main page for this area of expertise, arranged in the alphabetical order.",
 			"required": 0,
 			"conditional_logic": [
@@ -502,12 +502,17 @@
 				"class": "",
 				"id": ""
 			},
+			"acfe_permissions": "",
 			"post_type": [
 				"condition"
 			],
 			"taxonomy": "",
-			"allow_null": 1,
-			"multiple": 1,
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
 			"return_format": "id",
 			"acfe_bidirectional": {
 				"acfe_bidirectional_enabled": "1",
