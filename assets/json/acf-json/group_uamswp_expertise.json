@@ -224,7 +224,7 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_physician_podcast_name": {
+		"field_expertise_podcast_name": {
 			"key": "field_expertise_podcast_name",
 			"name": "expertise_podcast_name",
 			"type": "text",
