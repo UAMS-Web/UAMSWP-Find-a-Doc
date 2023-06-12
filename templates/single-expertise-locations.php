@@ -36,6 +36,10 @@ $page_title_attr = uamswp_attr_conversion($page_title);
 // Get the page URL for the 'parent' area of expertise
 $page_url = get_permalink();
 
+// Area of Expertise Content Type
+$ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
+$ontology_type = isset($ontology_type) ? $ontology_type : 1; // Check if 'expertise_type' is not null, and if so, set value to true
+
 // Get system settings for fake subpage text elements on Area of Expertise subsection
 uamswp_fad_fpage_text_expertise();
 
@@ -48,10 +52,6 @@ $current_fpage = get_query_var('fpage'); // Fake subpage slug
 $fpage_url = !empty($current_fpage) ? $page_url . user_trailingslashit($current_fpage) : $page_url; // Fake subpage URL
 $fpage_intro = $location_fpage_intro_expertise; // Fake subpage intro text
 $fpage_intro_attr = uamswp_attr_conversion($fpage_intro); // Attribute-friendly version of fake subpage intro text
-
-// Area of Expertise Content Type
-$ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
-$ontology_type = isset($ontology_type) ? $ontology_type : 1; // Check if 'expertise_type' is not null, and if so, set value to true
 
 // Get site header and site nav values for ontology subsections
 uamswp_fad_ontology_site_values();
