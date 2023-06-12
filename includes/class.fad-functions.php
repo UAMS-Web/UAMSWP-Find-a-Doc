@@ -2638,241 +2638,405 @@ function uamswp_fad_podcast() {
 
 			// Providers
 
-				// Get the system settings specific to Providers text elements in an Area of Expertise subsection
-				$provider_fpage_title_expertise = get_field('provider_fpage_title_expertise', 'option'); // Title
-				$provider_fpage_intro_expertise = get_field('provider_fpage_intro_expertise', 'option'); // Intro text
+				// Page-level settings specific to an individual Area of Expertise
 
-				// If the Providers title variable is not set or is empty, set a hardcoded value specific to this placement
-				if ( !isset($provider_fpage_title_expertise) || empty($provider_fpage_title_expertise) ) {
-					$provider_fpage_title_expertise = '[Area of Expertise Title] [Providers]';
-				}
+					// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Providers in that Area of Expertise's subsection
+					// $provider_fpage_title_expertise = get_field('expertise_providers_fpage_title'); // Title
+					$provider_fpage_intro_expertise = get_field('expertise_providers_fpage_intro'); // Intro text
 
-				// If the Providers intro text variable is not set or is empty, set a hardcoded value specific to this placement
-				// if ( !isset($provider_fpage_intro_expertise) || empty($provider_fpage_intro_expertise) ) {
-				// 	$provider_fpage_intro_expertise = '';
-				// }
+				// Find-a-Doc Settings general to all Area of Expertise subsections
+
+					// If the Providers title variable is not set or is empty...
+					// get the field value from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
+					if ( !isset($provider_fpage_title_expertise) || empty($provider_fpage_title_expertise) ) {
+						$provider_fpage_title_expertise = get_field('provider_fpage_title_expertise', 'option'); // Title
+					}
+
+					// If the Providers intro text variable is not set or is empty...
+					// get the field value from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
+					if ( !isset($provider_fpage_intro_expertise) || empty($provider_fpage_intro_expertise) ) {
+						$provider_fpage_intro_expertise = get_field('provider_fpage_intro_expertise', 'option'); // Intro text
+					}
+
+				// Hardcoded fallbacks specific to Area of Expertise subsections
+
+					// If the Providers title text variable still is not set or is empty...
+					// set a hardcoded value for that ontology text element general to all Area of Expertise subsections
+					if ( !isset($provider_fpage_title_expertise) || empty($provider_fpage_title_expertise) ) {
+						$provider_fpage_title_expertise = '[Area of Expertise Title] [Providers]';
+					}
+
+					// // If the Providers intro text variable still is not set or is empty...
+					// // set a hardcoded value for that ontology text element general to all Area of Expertise subsections
+					// if ( !isset($provider_fpage_intro_expertise) || empty($provider_fpage_intro_expertise) ) {
+					// 	$provider_fpage_intro_expertise = '';
+					// }
 
 				// Conditionally substitute any placeholder text for relevant system settings value
 				$provider_fpage_title_expertise = ( isset($provider_fpage_title_expertise) && !empty($provider_fpage_title_expertise) ) ? uamswp_fad_fpage_text_replace($provider_fpage_title_expertise) : $provider_fpage_title_expertise; // Title
 				$provider_fpage_intro_expertise = ( isset($provider_fpage_intro_expertise) && !empty($provider_fpage_intro_expertise) ) ? uamswp_fad_fpage_text_replace($provider_fpage_intro_expertise) : $provider_fpage_intro_expertise; // Intro text
 
-				// If the Providers title variable is not set or is empty, set the fallback value by getting the system settings for general placement
-				if ( !isset($provider_fpage_title_expertise) || empty($provider_fpage_title_expertise) ) {
-					uamswp_fad_provider_fpage_text_general();
-					global $provider_fpage_title_general;
-					$provider_fpage_title_expertise = $provider_fpage_title_general;
-				}
+				// Find-a-Doc Settings for general placements
 
-				// If the Providers intro text variable is not set or is empty, set the fallback value by getting the system settings for general placement
-				if ( !isset($provider_fpage_intro_expertise) || empty($provider_fpage_intro_expertise) ) {
-					uamswp_fad_provider_fpage_text_general();
-					global $provider_fpage_intro_general;
-					$provider_fpage_intro_expertise = $provider_fpage_intro_general;
-				}
+					// If the Providers title variable is not set or is empty...
+					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
+					if ( !isset($provider_fpage_title_expertise) || empty($provider_fpage_title_expertise) ) {
+						uamswp_fad_provider_fpage_text_general();
+						global $provider_fpage_title_general;
+						$provider_fpage_title_expertise = $provider_fpage_title_general;
+					}
+
+					// If the Providers intro text variable is not set or is empty...
+					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
+					if ( !isset($provider_fpage_intro_expertise) || empty($provider_fpage_intro_expertise) ) {
+						uamswp_fad_provider_fpage_text_general();
+						global $provider_fpage_intro_general;
+						$provider_fpage_intro_expertise = $provider_fpage_intro_general;
+					}
 
 			// Locations
 
-				// Get the system settings specific to Locations text elements in an Area of Expertise subsection
-				$location_fpage_title_expertise = get_field('location_fpage_title_expertise', 'option'); // Title
-				$location_fpage_intro_expertise = get_field('location_fpage_intro_expertise', 'option'); // Intro text
+				// Page-level settings specific to an individual Area of Expertise
 
-				// If the Locations title variable is not set or is empty, set a hardcoded value specific to this placement
-				if ( !isset($location_fpage_title_expertise) || empty($location_fpage_title_expertise) ) {
-					$location_fpage_title_expertise = '[Area of Expertise Title] [Locations]';
-				}
+					// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Locations in that Area of Expertise's subsection
+					// $location_fpage_title_expertise = get_field('expertise_locations_fpage_title'); // Title
+					$location_fpage_intro_expertise = get_field('expertise_locations_fpage_intro'); // Intro text
 
-				// If the Locations intro text variable is not set or is empty, set a hardcoded value specific to this placement
-				// if ( !isset($location_fpage_intro_expertise) || empty($location_fpage_intro_expertise) ) {
-				// 	$location_fpage_intro_expertise = '';
-				// }
+				// Find-a-Doc Settings general to all Area of Expertise subsections
+
+					// If the Locations title variable is not set or is empty...
+					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
+					if ( !isset($location_fpage_title_expertise) || empty($location_fpage_title_expertise) ) {
+						$location_fpage_title_expertise = get_field('location_fpage_title_expertise', 'option'); // Title
+					}
+
+					// If the Locations intro text variable is not set or is empty...
+					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
+					if ( !isset($location_fpage_intro_expertise) || empty($location_fpage_intro_expertise) ) {
+						$location_fpage_intro_expertise = get_field('location_fpage_intro_expertise', 'option'); // Intro text
+					}
+
+				// Hardcoded fallbacks specific to Area of Expertise subsections
+
+					// If the Locations title variable is not set or is empty...
+					// set a hardcoded value for that ontology text element general to all Area of Expertise subsections
+					if ( !isset($location_fpage_title_expertise) || empty($location_fpage_title_expertise) ) {
+						$location_fpage_title_expertise = '[Area of Expertise Title] [Locations]';
+					}
+
+					// // If the Locations intro text variable is not set or is empty...
+					// // set a hardcoded value for that ontology text element general to all Area of Expertise subsections
+					// if ( !isset($location_fpage_intro_expertise) || empty($location_fpage_intro_expertise) ) {
+					// 	$location_fpage_intro_expertise = '';
+					// }
 
 				// Conditionally substitute any placeholder text for relevant system settings value
 				$location_fpage_title_expertise = ( isset($location_fpage_title_expertise) && !empty($location_fpage_title_expertise) ) ? uamswp_fad_fpage_text_replace($location_fpage_title_expertise) : $location_fpage_title_expertise; // Title
 				$location_fpage_intro_expertise = ( isset($location_fpage_intro_expertise) && !empty($location_fpage_intro_expertise) ) ? uamswp_fad_fpage_text_replace($location_fpage_intro_expertise) : $location_fpage_intro_expertise; // Intro text
 
-				// If the Locations title variable is not set or is empty, set the fallback value by getting the system settings for general placement
-				if ( !isset($location_fpage_title_expertise) || empty($location_fpage_title_expertise) ) {
-					uamswp_fad_location_fpage_text_general();
-					global $location_fpage_title_general;
-					$location_fpage_title_expertise = $location_fpage_title_general;
-				}
+				// Find-a-Doc Settings for general placements
 
-				// If the Locations intro text variable is not set or is empty, set the fallback value by getting the system settings for general placement
-				if ( !isset($location_fpage_intro_expertise) || empty($location_fpage_intro_expertise) ) {
-					uamswp_fad_location_fpage_text_general();
-					global $location_fpage_intro_general;
-					$location_fpage_intro_expertise = $location_fpage_intro_general;
-				}
+					// If the Locations title variable is not set or is empty...
+					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
+					if ( !isset($location_fpage_title_expertise) || empty($location_fpage_title_expertise) ) {
+						uamswp_fad_location_fpage_text_general();
+						global $location_fpage_title_general;
+						$location_fpage_title_expertise = $location_fpage_title_general;
+					}
+
+					// If the Locations intro text variable is not set or is empty...
+					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
+					if ( !isset($location_fpage_intro_expertise) || empty($location_fpage_intro_expertise) ) {
+						uamswp_fad_location_fpage_text_general();
+						global $location_fpage_intro_general;
+						$location_fpage_intro_expertise = $location_fpage_intro_general;
+					}
 
 			// Descendant Areas of Expertise
 
-				// Get the system settings specific to Descendant Areas of Expertise text elements in an Area of Expertise subsection
-				$expertise_descendant_fpage_title_expertise = get_field('expertise_descendant_fpage_title_expertise', 'option'); // Title
-				$expertise_descendant_fpage_intro_expertise = get_field('expertise_descendant_fpage_intro_expertise', 'option'); // Intro text
+				// Page-level settings specific to an individual Area of Expertise
 
-				// If the Descendant Areas of Expertise title variable is not set or is empty, set a hardcoded value specific to this placement
-				if ( !isset($expertise_descendant_fpage_title_expertise) || empty($expertise_descendant_fpage_title_expertise) ) {
-					$expertise_descendant_fpage_title_expertise = '[Descendant Areas of Expertise] Within [Area of Expertise Title]';
-				}
+					// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Descendant Areas of Expertise in that Area of Expertise's subsection
+					// $expertise_descendant_fpage_title_expertise = get_field('expertise_descendant_fpage_title'); // Title
+					$expertise_descendant_fpage_intro_expertise = get_field('expertise_descendant_fpage_intro'); // Intro text
 
-				// If the Descendant Areas of Expertise intro text variable is not set or is empty, set a hardcoded value specific to this placement
-				// if ( !isset($expertise_descendant_fpage_intro_expertise) || empty($expertise_descendant_fpage_intro_expertise) ) {
-				// 	$expertise_descendant_fpage_intro_expertise = '';
-				// }
+				// Find-a-Doc Settings general to all Area of Expertise subsections
+
+					// If the Descendant Areas of Expertise title variable is not set or is empty...
+					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
+					if ( !isset($expertise_descendant_fpage_title_expertise) || empty($expertise_descendant_fpage_title_expertise) ) {
+						$expertise_descendant_fpage_title_expertise = get_field('expertise_descendant_fpage_title_expertise', 'option'); // Title
+					}
+
+					// If the Descendant Areas of Expertise intro text variable is not set or is empty...
+					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
+					if ( !isset($expertise_descendant_fpage_intro_expertise) || empty($expertise_descendant_fpage_intro_expertise) ) {
+						$expertise_descendant_fpage_intro_expertise = get_field('expertise_descendant_fpage_intro_expertise', 'option'); // Intro text
+					}
+
+				// Hardcoded fallbacks specific to Area of Expertise subsections
+
+					// If the Descendant Areas of Expertise title variable is not set or is empty...
+					// set a hardcoded value for that ontology text element general to all Area of Expertise subsections
+					if ( !isset($expertise_descendant_fpage_title_expertise) || empty($expertise_descendant_fpage_title_expertise) ) {
+						$expertise_descendant_fpage_title_expertise = '[Descendant Areas of Expertise] Within [Area of Expertise Title]';
+					}
+
+					// // If the Descendant Areas of Expertise intro text variable is not set or is empty...
+					// // set a hardcoded value for that ontology text element general to all Area of Expertise subsections
+					// if ( !isset($expertise_descendant_fpage_intro_expertise) || empty($expertise_descendant_fpage_intro_expertise) ) {
+					// 	$expertise_descendant_fpage_intro_expertise = '';
+					// }
 
 				// Conditionally substitute any placeholder text for relevant system settings value
 				$expertise_descendant_fpage_title_expertise = ( isset($expertise_descendant_fpage_title_expertise) && !empty($expertise_descendant_fpage_title_expertise) ) ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_title_expertise) : $expertise_descendant_fpage_title_expertise; // Title
 				$expertise_descendant_fpage_intro_expertise = ( isset($expertise_descendant_fpage_intro_expertise) && !empty($expertise_descendant_fpage_intro_expertise) ) ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_intro_expertise) : $expertise_descendant_fpage_intro_expertise; // Intro text
 
-				// If the Descendant Areas of Expertise title variable is not set or is empty, set the fallback value by getting the system settings for general placement
-				if ( !isset($expertise_descendant_fpage_title_expertise) || empty($expertise_descendant_fpage_title_expertise) ) {
-					uamswp_fad_expertise_fpage_text_general();
-					global $expertise_fpage_title_general;
-					$expertise_descendant_fpage_title_expertise = $expertise_fpage_title_general;
-				}
+				// Find-a-Doc Settings for general placements
 
-				// If the Descendant Areas of Expertise intro text variable is not set or is empty, set the fallback value by getting the system settings for general placement
-				if ( !isset($expertise_descendant_fpage_intro_expertise) || empty($expertise_descendant_fpage_intro_expertise) ) {
-					uamswp_fad_expertise_fpage_text_general();
-					global $expertise_fpage_intro_general;
-					$expertise_descendant_fpage_intro_expertise = $expertise_fpage_intro_general;
-				}
+					// If the Descendant Areas of Expertise title variable is not set or is empty...
+					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
+					if ( !isset($expertise_descendant_fpage_title_expertise) || empty($expertise_descendant_fpage_title_expertise) ) {
+						uamswp_fad_expertise_fpage_text_general();
+						global $expertise_fpage_title_general;
+						$expertise_descendant_fpage_title_expertise = $expertise_fpage_title_general;
+					}
+
+					// If the Descendant Areas of Expertise intro text variable is not set or is empty...
+					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
+					if ( !isset($expertise_descendant_fpage_intro_expertise) || empty($expertise_descendant_fpage_intro_expertise) ) {
+						uamswp_fad_expertise_fpage_text_general();
+						global $expertise_fpage_intro_general;
+						$expertise_descendant_fpage_intro_expertise = $expertise_fpage_intro_general;
+					}
 
 			// Related Areas of Expertise
 
-				// Get the system settings specific to Related Areas of Expertise text elements in an Area of Expertise subsection
-				$expertise_fpage_title_expertise = get_field('expertise_fpage_title_expertise', 'option'); // Title
-				$expertise_fpage_intro_expertise = get_field('expertise_fpage_intro_expertise', 'option'); // Intro text
+				// Page-level settings specific to an individual Area of Expertise
 
-				// If the Related Areas of Expertise title variable is not set or is empty, set a hardcoded value specific to this placement
-				if ( !isset($expertise_fpage_title_expertise) || empty($expertise_fpage_title_expertise) ) {
-					$expertise_fpage_title_expertise = '[Areas of Expertise] Related to [Area of Expertise Title]';
-				}
+					// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Related Areas of Expertise in that Area of Expertise's subsection
+					// $expertise_fpage_title_expertise = get_field('expertise_associated_fpage_title'); // Title
+					$expertise_fpage_intro_expertise = get_field('expertise_associated_fpage_intro'); // Intro text
 
-				// If the Related Areas of Expertise intro text variable is not set or is empty, set a hardcoded value specific to this placement
-				// if ( !isset($expertise_fpage_intro_expertise) || empty($expertise_fpage_intro_expertise) ) {
-				// 	$expertise_fpage_intro_expertise = '';
-				// }
+				// Find-a-Doc Settings general to all Area of Expertise subsections
+
+					// If the Related Areas of Expertise title variable is not set or is empty...
+					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
+					if ( !isset($expertise_fpage_title_expertise) || empty($expertise_fpage_title_expertise) ) {
+						$expertise_fpage_title_expertise = get_field('expertise_fpage_title_expertise', 'option'); // Title
+					}
+
+					// If the Related Areas of Expertise intro text variable is not set or is empty...
+					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
+					if ( !isset($expertise_fpage_intro_expertise) || empty($expertise_fpage_intro_expertise) ) {
+						$expertise_fpage_intro_expertise = get_field('expertise_fpage_intro_expertise', 'option'); // Intro text
+					}
+
+				// Hardcoded fallbacks specific to Area of Expertise subsections
+
+					// If the Related Areas of Expertise title variable is not set or is empty...
+					// set a hardcoded value for that ontology text element general to all Area of Expertise subsections
+					if ( !isset($expertise_fpage_title_expertise) || empty($expertise_fpage_title_expertise) ) {
+						$expertise_fpage_title_expertise = '[Areas of Expertise] Related to [Area of Expertise Title]';
+					}
+
+					// // If the Related Areas of Expertise intro text variable is not set or is empty...
+					// // set a hardcoded value for that ontology text element general to all Area of Expertise subsections
+					// if ( !isset($expertise_fpage_intro_expertise) || empty($expertise_fpage_intro_expertise) ) {
+					// 	$expertise_fpage_intro_expertise = '';
+					// }
 
 				// Conditionally substitute any placeholder text for relevant system settings value
 				$expertise_fpage_title_expertise = ( isset($expertise_fpage_title_expertise) && !empty($expertise_fpage_title_expertise) ) ? uamswp_fad_fpage_text_replace($expertise_fpage_title_expertise) : $expertise_fpage_title_expertise; // Title
 				$expertise_fpage_intro_expertise = ( isset($expertise_fpage_intro_expertise) && !empty($expertise_fpage_intro_expertise) ) ? uamswp_fad_fpage_text_replace($expertise_fpage_intro_expertise) : $expertise_fpage_intro_expertise; // Intro text
 
-				// If the Related Areas of Expertise title variable is not set or is empty, set the fallback value by getting the system settings for general placement
-				if ( !isset($expertise_fpage_title_expertise) || empty($expertise_fpage_title_expertise) ) {
-					uamswp_fad_expertise_fpage_text_general();
-					global $expertise_fpage_title_general;
-					$expertise_fpage_title_expertise = $expertise_fpage_title_general;
-				}
+				// Find-a-Doc Settings for general placements
 
-				// If the Related Areas of Expertise intro text variable is not set or is empty, set the fallback value by getting the system settings for general placement
-				if ( !isset($expertise_fpage_intro_expertise) || empty($expertise_fpage_intro_expertise) ) {
-					uamswp_fad_expertise_fpage_text_general();
-					global $expertise_fpage_intro_general;
-					$expertise_fpage_intro_expertise = $expertise_fpage_intro_general;
-				}
+					// If the Related Areas of Expertise title variable is not set or is empty, set the fallback value by getting the system settings for general placement
+					if ( !isset($expertise_fpage_title_expertise) || empty($expertise_fpage_title_expertise) ) {
+						uamswp_fad_expertise_fpage_text_general();
+						global $expertise_fpage_title_general;
+						$expertise_fpage_title_expertise = $expertise_fpage_title_general;
+					}
+
+					// If the Related Areas of Expertise intro text variable is not set or is empty, set the fallback value by getting the system settings for general placement
+					if ( !isset($expertise_fpage_intro_expertise) || empty($expertise_fpage_intro_expertise) ) {
+						uamswp_fad_expertise_fpage_text_general();
+						global $expertise_fpage_intro_general;
+						$expertise_fpage_intro_expertise = $expertise_fpage_intro_general;
+					}
 
 			// Clinical Resources
 
-				// Get the system settings specific to Clinical Resources text elements in an Area of Expertise subsection
-				$clinical_resource_fpage_title_expertise = get_field('clinical_resource_fpage_title_expertise', 'option'); // Title
-				$clinical_resource_fpage_intro_expertise = get_field('clinical_resource_fpage_intro_expertise', 'option'); // Intro text
+				// Page-level settings specific to an individual Area of Expertise
 
-				// If the Clinical Resources title variable is not set or is empty, set a hardcoded value specific to this placement
-				// if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
-				// 	$clinical_resource_fpage_title_expertise = '';
-				// }
+					// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Clinical Resources in that Area of Expertise's subsection
+					// $clinical_resource_fpage_title_expertise = get_field('expertise_clinical_resources_fpage_title'); // Title
+					$clinical_resource_fpage_intro_expertise = get_field('expertise_clinical_resources_fpage_intro'); // Intro text
 
-				// If the Clinical Resources intro text variable is not set or is empty, set a hardcoded value specific to this placement
-				// if ( !isset($clinical_resource_fpage_intro_expertise) || empty($clinical_resource_fpage_intro_expertise) ) {
-				// 	$clinical_resource_fpage_intro_expertise = '';
-				// }
+				// Find-a-Doc Settings general to all Area of Expertise subsections
+
+					// If the Clinical Resources title variable is not set or is empty...
+					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
+					if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
+						$clinical_resource_fpage_title_expertise = get_field('clinical_resource_fpage_title_expertise', 'option'); // Title
+					}
+
+					// If the Clinical Resources intro text variable is not set or is empty...
+					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
+					if ( !isset($clinical_resource_fpage_intro_expertise) || empty($clinical_resource_fpage_intro_expertise) ) {
+						$clinical_resource_fpage_intro_expertise = get_field('clinical_resource_fpage_intro_expertise', 'option'); // Intro text
+					}
+
+				// Hardcoded fallbacks specific to Area of Expertise subsections
+
+					// // If the Clinical Resources title variable is not set or is empty...
+					// // set a hardcoded value for that ontology text element general to all Area of Expertise subsections
+					// if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
+					// 	$clinical_resource_fpage_title_expertise = '';
+					// }
+
+					// // If the Clinical Resources intro text variable is not set or is empty...
+					// // set a hardcoded value for that ontology text element general to all Area of Expertise subsections
+					// if ( !isset($clinical_resource_fpage_intro_expertise) || empty($clinical_resource_fpage_intro_expertise) ) {
+					// 	$clinical_resource_fpage_intro_expertise = '';
+					// }
 
 				// Conditionally substitute any placeholder text for relevant system settings value
 				$clinical_resource_fpage_title_expertise = ( isset($clinical_resource_fpage_title_expertise) && !empty($clinical_resource_fpage_title_expertise) ) ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_expertise) : $clinical_resource_fpage_title_expertise; // Title
 				$clinical_resource_fpage_intro_expertise = ( isset($clinical_resource_fpage_intro_expertise) && !empty($clinical_resource_fpage_intro_expertise) ) ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_expertise) : $clinical_resource_fpage_intro_expertise; // Intro text
 
-				// If the Clinical Resources title variable is not set or is empty, set the fallback value by getting the system settings for general placement
-				if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
-					uamswp_fad_clinical_resource_fpage_text_general();
-					global $clinical_resource_fpage_title_general;
-					$clinical_resource_fpage_title_expertise = $clinical_resource_fpage_title_general;
-				}
+				// Find-a-Doc Settings for general placements
 
-				// If the Clinical Resources intro text variable is not set or is empty, set the fallback value by getting the system settings for general placement
-				if ( !isset($clinical_resource_fpage_intro_expertise) || empty($clinical_resource_fpage_intro_expertise) ) {
-					uamswp_fad_clinical_resource_fpage_text_general();
-					global $clinical_resource_fpage_intro_general;
-					$clinical_resource_fpage_intro_expertise = $clinical_resource_fpage_intro_general;
-				}
+					// If the Clinical Resources title variable is not set or is empty, set the fallback value by getting the system settings for general placement
+					if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
+						uamswp_fad_clinical_resource_fpage_text_general();
+						global $clinical_resource_fpage_title_general;
+						$clinical_resource_fpage_title_expertise = $clinical_resource_fpage_title_general;
+					}
+
+					// If the Clinical Resources intro text variable is not set or is empty, set the fallback value by getting the system settings for general placement
+					if ( !isset($clinical_resource_fpage_intro_expertise) || empty($clinical_resource_fpage_intro_expertise) ) {
+						uamswp_fad_clinical_resource_fpage_text_general();
+						global $clinical_resource_fpage_intro_general;
+						$clinical_resource_fpage_intro_expertise = $clinical_resource_fpage_intro_general;
+					}
 
 			// Conditions
 
-				// Get the system settings specific to Conditions text elements in an Area of Expertise subsection
-				$conditions_fpage_title_expertise = get_field('conditions_fpage_title_expertise', 'option'); // Title
-				$conditions_fpage_intro_expertise = get_field('conditions_fpage_intro_expertise', 'option'); // Intro text
+				// Page-level settings specific to an individual Area of Expertise
 
-				// If the Conditions title variable is not set or is empty, set a hardcoded value specific to this placement
-				// if ( !isset($conditions_fpage_title_expertise) || empty($conditions_fpage_title_expertise) ) {
-				// 	$conditions_fpage_title_expertise = '';
-				// }
+					// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Conditions in that Area of Expertise's subsection
+					// $conditions_fpage_title_expertise = get_field('expertise_conditions_fpage_title'); // Title
+					$conditions_fpage_intro_expertise = get_field('expertise_conditions_fpage_intro'); // Intro text
 
-				// If the Conditions intro text variable is not set or is empty, set a hardcoded value specific to this placement
-				// if ( !isset($conditions_fpage_intro_expertise) || empty($conditions_fpage_intro_expertise) ) {
-				// 	$conditions_fpage_intro_expertise = '';
-				// }
+				// Find-a-Doc Settings general to all Area of Expertise subsections
+
+					// If the Related Conditions title variable is not set or is empty...
+					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
+					if ( !isset($conditions_fpage_title_expertise) || empty($conditions_fpage_title_expertise) ) {
+						$conditions_fpage_title_expertise = get_field('conditions_fpage_title_expertise', 'option'); // Title
+					}
+
+					// If the Related Conditions intro text variable is not set or is empty...
+					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
+					if ( !isset($conditions_fpage_intro_expertise) || empty($conditions_fpage_intro_expertise) ) {
+						$conditions_fpage_intro_expertise = get_field('conditions_fpage_intro_expertise', 'option'); // Intro text
+					}
+
+				// Hardcoded fallbacks specific to Area of Expertise subsections
+
+					// // If the Conditions title variable is not set or is empty...
+					// // set a hardcoded value for that ontology text element general to all Area of Expertise subsections
+					// if ( !isset($conditions_fpage_title_expertise) || empty($conditions_fpage_title_expertise) ) {
+					// 	$conditions_fpage_title_expertise = '';
+					// }
+
+					// // If the Conditions intro text variable is not set or is empty...
+					// // set a hardcoded value for that ontology text element general to all Area of Expertise subsections
+					// if ( !isset($conditions_fpage_intro_expertise) || empty($conditions_fpage_intro_expertise) ) {
+					// 	$conditions_fpage_intro_expertise = '';
+					// }
 
 				// Conditionally substitute any placeholder text for relevant system settings value
 				$conditions_fpage_title_expertise = ( isset($conditions_fpage_title_expertise) && !empty($conditions_fpage_title_expertise) ) ? uamswp_fad_fpage_text_replace($conditions_fpage_title_expertise) : $conditions_fpage_title_expertise; // Title
 				$conditions_fpage_intro_expertise = ( isset($conditions_fpage_intro_expertise) && !empty($conditions_fpage_intro_expertise) ) ? uamswp_fad_fpage_text_replace($conditions_fpage_intro_expertise) : $conditions_fpage_intro_expertise; // Intro text
 
-				// If the Conditions title variable is not set or is empty, set the fallback value by getting the system settings for general placement
-				if ( !isset($conditions_fpage_title_expertise) || empty($conditions_fpage_title_expertise) ) {
-					uamswp_fad_conditions_fpage_text_general();
-					global $conditions_fpage_title_general;
-					$conditions_fpage_title_expertise = $conditions_fpage_title_general;
-				}
+				// Find-a-Doc Settings for general placements
 
-				// If the Conditions intro text variable is not set or is empty, set the fallback value by getting the system settings for general placement
-				if ( !isset($conditions_fpage_intro_expertise) || empty($conditions_fpage_intro_expertise) ) {
-					uamswp_fad_conditions_fpage_text_general();
-					global $conditions_fpage_intro_general;
-					$conditions_fpage_intro_expertise = $conditions_fpage_intro_general;
-				}
+					// If the Conditions title variable is not set or is empty...
+					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
+					if ( !isset($conditions_fpage_title_expertise) || empty($conditions_fpage_title_expertise) ) {
+						uamswp_fad_conditions_fpage_text_general();
+						global $conditions_fpage_title_general;
+						$conditions_fpage_title_expertise = $conditions_fpage_title_general;
+					}
+
+					// If the Conditions intro text variable is not set or is empty...
+					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
+					if ( !isset($conditions_fpage_intro_expertise) || empty($conditions_fpage_intro_expertise) ) {
+						uamswp_fad_conditions_fpage_text_general();
+						global $conditions_fpage_intro_general;
+						$conditions_fpage_intro_expertise = $conditions_fpage_intro_general;
+					}
 
 			// Treatments
 
-				// Get the system settings specific to Treatments text elements in an Area of Expertise subsection
-				$treatments_fpage_title_expertise = get_field('treatments_fpage_title_expertise', 'option'); // Title
-				$treatments_fpage_intro_expertise = get_field('treatments_fpage_intro_expertise', 'option'); // Intro text
+				// Page-level settings specific to an individual Area of Expertise
 
-				// If the Treatments title variable is not set or is empty, set a hardcoded value specific to this placement
-				// if ( !isset($treatments_fpage_title_expertise) || empty($treatments_fpage_title_expertise) ) {
-				// 	$treatments_fpage_title_expertise = '';
-				// }
+					// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Treatments in that Area of Expertise's subsection
+					// $provider_fpage_title_expertise = get_field('expertise_treatments_fpage_title'); // Title
+					$treatments_fpage_intro_expertise = get_field('expertise_treatments_fpage_intro'); // Intro text
 
-				// If the Treatments intro text variable is not set or is empty, set a hardcoded value specific to this placement
-				// if ( !isset($treatments_fpage_intro_expertise) || empty($treatments_fpage_intro_expertise) ) {
-				// 	$treatments_fpage_intro_expertise = '';
-				// }
+				// Find-a-Doc Settings general to all Area of Expertise subsections
+
+					// If the Treatments title variable is not set or is empty...
+					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
+					if ( !isset($treatments_fpage_title_expertise) || empty($treatments_fpage_title_expertise) ) {
+						$treatments_fpage_title_expertise = get_field('treatments_fpage_title_expertise', 'option'); // Title
+					}
+
+					// If the Treatments intro text variable is not set or is empty...
+					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
+					if ( !isset($treatments_fpage_intro_expertise) || empty($treatments_fpage_intro_expertise) ) {
+						$treatments_fpage_intro_expertise = get_field('treatments_fpage_intro_expertise', 'option'); // Intro text
+					}
+
+				// Hardcoded fallbacks specific to Area of Expertise subsections
+
+					// // If the Treatments title variable is not set or is empty...
+					// // set a hardcoded value for that ontology text element general to all Area of Expertise subsections
+					// if ( !isset($treatments_fpage_title_expertise) || empty($treatments_fpage_title_expertise) ) {
+					// 	$treatments_fpage_title_expertise = '';
+					// }
+
+					// // If the Treatments intro text variable is not set or is empty...
+					// // set a hardcoded value for that ontology text element general to all Area of Expertise subsections
+					// if ( !isset($treatments_fpage_intro_expertise) || empty($treatments_fpage_intro_expertise) ) {
+					// 	$treatments_fpage_intro_expertise = '';
+					// }
 
 				// Conditionally substitute any placeholder text for relevant system settings value
 				$treatments_fpage_title_expertise = ( isset($treatments_fpage_title_expertise) && !empty($treatments_fpage_title_expertise) ) ? uamswp_fad_fpage_text_replace($treatments_fpage_title_expertise) : $treatments_fpage_title_expertise; // Title
 				$treatments_fpage_intro_expertise = ( isset($treatments_fpage_intro_expertise) && !empty($treatments_fpage_intro_expertise) ) ? uamswp_fad_fpage_text_replace($treatments_fpage_intro_expertise) : $treatments_fpage_intro_expertise; // Intro text
 
-				// If the Treatments title variable is not set or is empty, set the fallback value by getting the system settings for general placement
-				if ( !isset($treatments_fpage_title_expertise) || empty($treatments_fpage_title_expertise) ) {
-					uamswp_fad_treatments_fpage_text_general();
-					global $treatments_fpage_title_general;
-					$treatments_fpage_title_expertise = $treatments_fpage_title_general;
-				}
+				// Find-a-Doc Settings for general placements
 
-				// If the Treatments intro text variable is not set or is empty, set the fallback value by getting the system settings for general placement
-				if ( !isset($treatments_fpage_intro_expertise) || empty($treatments_fpage_intro_expertise) ) {
-					uamswp_fad_treatments_fpage_text_general();
-					global $treatments_fpage_intro_general;
-					$treatments_fpage_intro_expertise = $treatments_fpage_intro_general;
-				}
+					// If the Treatments title variable is not set or is empty...
+					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
+					if ( !isset($treatments_fpage_title_expertise) || empty($treatments_fpage_title_expertise) ) {
+						uamswp_fad_treatments_fpage_text_general();
+						global $treatments_fpage_title_general;
+						$treatments_fpage_title_expertise = $treatments_fpage_title_general;
+					}
+
+					// If the Treatments intro text variable is not set or is empty...
+					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
+					if ( !isset($treatments_fpage_intro_expertise) || empty($treatments_fpage_intro_expertise) ) {
+						uamswp_fad_treatments_fpage_text_general();
+						global $treatments_fpage_intro_general;
+						$treatments_fpage_intro_expertise = $treatments_fpage_intro_general;
+					}
 		}
 
 		// Get field values for text elements for related ontology sections on Clinical Resource profile
