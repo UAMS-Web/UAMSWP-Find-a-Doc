@@ -42,11 +42,11 @@ uamswp_fad_fpage_text_expertise();
 // Set general variables for fake subpage
 $fpage_name = 'Related ' . $expertise_plural_name; // Name of ontology item type represented by this fake subpage
 $fpage_name_attr = uamswp_attr_conversion($fpage_name);
-$fpage_title = $expertise_related_fpage_title_expertise; // Fake subpage page title
+$fpage_title = $expertise_fpage_title_expertise; // Fake subpage page title
 $fpage_title_attr = uamswp_attr_conversion($fpage_title);
 $current_fpage = get_query_var('fpage'); // Fake subpage slug
 $fpage_url = !empty($current_fpage) ? $page_url . user_trailingslashit($current_fpage) : $page_url; // Fake subpage URL
-$fpage_intro = $expertise_related_fpage_intro_expertise; // Fake subpage intro text
+$fpage_intro = $expertise_fpage_intro_expertise; // Fake subpage intro text
 $fpage_intro_attr = uamswp_attr_conversion($fpage_intro); // Attribute-friendly version of fake subpage intro text
 
 // Area of Expertise Content Type

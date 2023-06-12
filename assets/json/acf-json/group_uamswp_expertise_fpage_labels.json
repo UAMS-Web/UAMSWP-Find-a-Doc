@@ -278,9 +278,9 @@
 			"acfe_textarea_code": 0
 		},
 		{
-			"key": "field_expertise_related_fpage_title_expertise",
+			"key": "field_expertise_fpage_title_expertise",
 			"label": "Title of Fake Subpage for Related Areas of Expertise Items in Area of Expertise Subsection",
-			"name": "expertise_related_fpage_title_expertise",
+			"name": "expertise_fpage_title_expertise",
 			"type": "text",
 			"instructions": "If you leave this blank, the default title structure will be used.",
 			"required": 0,
@@ -300,9 +300,9 @@
 			"acfe_update": ""
 		},
 		{
-			"key": "field_expertise_related_fpage_intro_expertise",
+			"key": "field_expertise_fpage_intro_expertise",
 			"label": "Intro Text of Fake Subpage for Related Areas of Expertise Items in Area of Expertise Subsection",
-			"name": "expertise_related_fpage_intro_expertise",
+			"name": "expertise_fpage_intro_expertise",
 			"type": "textarea",
 			"instructions": "If you leave this blank, the default intro text structure will be used.",
 			"required": 0,
