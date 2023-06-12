@@ -101,6 +101,10 @@ function uamswp_fad_title($html) {
 	return $html;
 }
 
+// Override theme's method of defining the meta description
+$excerpt = $expertise_short_desc;
+add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
+
 // Construct the meta keywords element
 $keywords = get_field('expertise_alternate_names');
 add_action('wp_head','uamswp_keyword_hook_header');

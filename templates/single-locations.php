@@ -289,14 +289,7 @@ $args = (array(
 $resource_query = new WP_Query( $args );
 
 // Override theme's method of defining the meta description
-function sp_titles_desc($html) {
-	// Bring in variables from outside of the function
-	global $excerpt; // Defined on the template
-
-	$html = $excerpt;
-	return $html;
-}
-add_filter('seopress_titles_desc', 'sp_titles_desc');
+add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
 
 // Override theme's method of defining the meta page title
 $location_city = get_field('location_city', $post_id); // Get the location's city

@@ -83,7 +83,8 @@ uamswp_fad_ontology_site_values();
 add_filter('seopress_titles_title', 'uamswp_fad_fpage_title', 15, 2);
 
 // Override theme's method of defining the meta description
-add_filter('seopress_titles_desc', 'uamswp_fad_fpage_desc');
+$excerpt = $locations_fpage_short_desc_expertise;
+add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
 
 // Add meta keywords
 $keywords = get_field('expertise_alternate_names');

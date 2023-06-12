@@ -74,15 +74,8 @@ if (empty($excerpt)){
 		$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
 	}
 }
-// Use SeoPress hook for meta description
-function sp_titles_desc($html) {
-	// Bring in variables from outside of the function
-	global $excerpt; // Defined on the template
-
-	$html = $excerpt;
-	return $html;
-}
-add_filter('seopress_titles_desc', 'sp_titles_desc');
+// Override theme's method of defining the meta description
+add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
 
 // Add page template class to body element's classes
 add_filter( 'body_class', 'uamswp_page_body_class' );
