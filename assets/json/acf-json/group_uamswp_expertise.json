@@ -121,6 +121,144 @@
 			"placement": "left",
 			"endpoint": 0
 		},
+		"field_expertise_page_title_options": {
+			"key": "field_expertise_page_title_options",
+			"label": "Page Header Style",
+			"name": "expertise_page_title_options",
+			"type": "button_group",
+			"instructions": "This selector is only visible to users with the following roles: Super Admin, Administrator, Editor.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "!=",
+						"value": 1
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": [
+				"super_admin",
+				"administrator",
+				"editor"
+			],
+			"choices": {
+				"graphic": "<i class='dashicons dashicons-format-image'></i> Graphic",
+				"landingpage": "<i class='dashicons dashicons-format-image'></i> Marketing Landing Page",
+				"hero": "<i class='dashicons dashicons-slides'></i> Hero"
+			},
+			"allow_null": 0,
+			"default_value": "graphic",
+			"layout": "horizontal",
+			"return_format": "value",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		"field_expertise_page_title_graphic": {
+			"key": "field_expertise_page_title_graphic",
+			"label": "Graphic Header Style Options",
+			"name": "expertise_page_title_graphic",
+			"type": "clone",
+			"instructions": "Reach out to UAMS Web Services to discuss whether this page would benefit from a different page header style.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_page_title_options",
+						"operator": "==",
+						"value": "graphic"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_fad_page_header_graphic"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 1,
+			"acfe_settings": ""
+		},
+		"field_expertise_page_title_landingpage": {
+			"key": "field_expertise_page_title_landingpage",
+			"label": "Marketing Landing Page Header Style Options",
+			"name": "expertise_page_title_landingpage",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "==",
+						"value": 1
+					}
+				],
+				[
+					{
+						"field": "field_expertise_page_title_options",
+						"operator": "==",
+						"value": "landingpage"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_fad_page_header_landingpage"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 1,
+			"acfe_settings": ""
+		},
+		"field_expertise_page_title_hero": {
+			"key": "field_expertise_page_title_hero",
+			"label": "Hero Header Style Options",
+			"name": "expertise_page_title_hero",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_page_title_options",
+						"operator": "==",
+						"value": "hero"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "remove-acf-border remove-acf-padding",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_fad_hero_repeater"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 1,
+			"acfe_settings": ""
+		},
 		"field_expertise_tab_details": {
 			"key": "field_expertise_tab_details",
 			"label": "Area of Expertise Details",

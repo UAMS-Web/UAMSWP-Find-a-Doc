@@ -2620,7 +2620,16 @@ function uamswp_fad_podcast() {
 
 		// Get field values for fake subpage text elements on Area of Expertise subsection
 		function uamswp_fad_fpage_text_expertise() {
+			// Bring in variables from outside of the function
+			global $page_title;
+			global $ontology_type;
+
 			// Make variables available outside of the function
+			global $expertise_page_title_options;
+			global $expertise_page_title;
+			global $expertise_page_intro;
+			global $expertise_page_image;
+			global $expertise_page_image_mobile;
 			global $expertise_short_desc;
 			global $provider_fpage_title_expertise;
 			global $provider_fpage_intro_expertise;
@@ -2645,8 +2654,38 @@ function uamswp_fad_podcast() {
 			// Overview
 
 				// Get the field values from the current Area of Expertise text elements on the homepage of that Area of Expertise's subsection
-				$expertise_page_title = ''; // Title
-				$expertise_page_intro = ''; // Intro text
+
+					// Get the page header style
+					if ( $ontology_type ) {
+						$expertise_page_title_options = 'landingpage'; // Page Header Style
+					} else {
+						$expertise_page_title_options = get_field('expertise_page_title_options'); // Page Header Style
+					}
+
+					// Get the page header text element values
+					$expertise_page_header_graphic = ''; // Graphic Header Style Options
+					$expertise_page_header_landingpage = ''; // Marketing Landing Page Header Style Options
+					$expertise_page_header_hero = ''; // Hero Header Style Options
+					if ( $expertise_page_title_options == 'graphic' ) {
+						$expertise_page_header_graphic = get_field('expertise_page_title_graphic')['page_header_graphic']; // Graphic Header Style Options
+						$expertise_page_title = $page_title; // Title
+						$expertise_page_intro = $expertise_page_header_graphic['page_header_graphic_intro']; // Intro text
+						$expertise_page_image = $expertise_page_header_graphic['page_header_graphic_image']; // Background image (mobile)
+					} elseif ( $expertise_page_title_options == 'landingpage' ) {
+						$expertise_page_header_landingpage = get_field('expertise_page_title_landingpage')['page_header_landingpage']; // Marketing Landing Page Header Style Options
+						$expertise_page_title = $expertise_page_header_landingpage['page_header_landingpage_title']; // Title
+						$expertise_page_title = ( isset($expertise_page_title) && !empty($expertise_page_title) ) ? $expertise_page_title : $page_title; // Set standard page title as fallback
+						$expertise_page_intro = $expertise_page_header_landingpage['page_header_landingpage_intro']; // Background image
+						$expertise_page_image = $expertise_page_header_landingpage['page_header_landingpage_image']; // Background image (mobile)
+						$expertise_page_image_mobile = $expertise_page_header_landingpage['page_header_landingpage_image_mobile']; // Intro text
+					} elseif ( $expertise_page_title_options == 'hero' ) {
+						$expertise_page_header_hero = get_field('expertise_page_title_hero')['page_header_hero']; // Hero Header Style Options
+						$expertise_page_title = $page_title; // Title
+						$expertise_page_intro = ''; // Intro text
+					} else {
+						$expertise_page_title = $page_title; // Title
+						$expertise_page_intro = ''; // Intro text
+					}
 
 				// Get value for meta description
 				$expertise_short_desc_query = get_field('expertise_short_desc_query'); // If true, use intro text. If false, use specific short description.

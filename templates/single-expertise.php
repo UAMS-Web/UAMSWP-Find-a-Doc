@@ -42,16 +42,15 @@ $page_title_attr = uamswp_attr_conversion($page_title);
 // Get the page URL
 $page_url = get_permalink();
 
+// Area of Expertise Content Type
+$ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
+$ontology_type = isset($ontology_type) ? $ontology_type : 1; // Check if 'expertise_type' is not null, and if so, set value to true
+
 // Get system settings for fake subpage text elements on Area of Expertise subsection
 uamswp_fad_fpage_text_expertise();
 
 // Get system settings for jump links (a.k.a. anchor links)
 // uamswp_fad_labels_jump_links();
-
-
-// Area of Expertise Content Type
-$ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
-$ontology_type = isset($ontology_type) ? $ontology_type : 1; // Check if 'expertise_type' is not null, and if so, set value to true
 
 // Get site header and site nav values for ontology subsections
 uamswp_fad_ontology_site_values();
@@ -142,13 +141,13 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 	// Construct non-standard post title
 	add_action( 'genesis_before_content', 'uamswp_fad_post_title' );
-	$entry_header_style = $ontology_type ? 'landingpage' : 'graphic'; // Entry header style
-	$entry_title_text = $page_title; // Regular title
+	$entry_header_style = $expertise_page_title_options; // Entry header style
+	$entry_title_text = $expertise_page_title; // Regular title
 	$entry_title_text_supertitle = ''; // Optional supertitle, placed above the regular title
 	$entry_title_text_subtitle = ''; // Optional subtitle, placed below the regular title
-	$entry_title_text_body = ''; // Optional lead paragraph, placed below the entry title
-	$entry_title_image_desktop = ''; // Desktop breakpoint image ID
-	$entry_title_image_mobile = ''; // Optional mobile breakpoint image ID
+	$entry_title_text_body = $expertise_page_intro; // Optional lead paragraph, placed below the entry title
+	$entry_title_image_desktop = $expertise_page_image; // Desktop breakpoint image ID
+	$entry_title_image_mobile = $expertise_page_image_mobile; // Optional mobile breakpoint image ID
 
 // Remove the post info (byline) from the entry header and the entry footer
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
