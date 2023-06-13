@@ -90,191 +90,197 @@ function my_taxonomy_query( $args, $field ) {
 	return $args;
 }
 
-// Fires before saving data to post - only updates ACF data
-add_action('acf/save_post', 'physician_save_post', 5);
-function physician_save_post( $post_id ) {
-	$post_type = get_post_type($post_id);
+// Update post data / ACF data for provider profile
 
-	// Bail early if no data sent.
-	if( empty($_POST['acf']) || ($post_type != 'provider')) {
-		return;
-	}
+	// Fire before saving data to post (by using a priority less than 10)
+	// only updates ACF data
+	add_action('acf/save_post', 'physician_save_post', 5);
+	function physician_save_post( $post_id ) {
+		$post_type = get_post_type($post_id);
 
-	// Create full name to store in 'physician_full_name' field
-	$first_name = $_POST['acf']['field_physician_first_name'];
-	$middle_name = $_POST['acf']['field_physician_middle_name'];
-	$last_name = $_POST['acf']['field_physician_last_name'];
-	$pedigree = $_POST['acf']['field_physician_pedigree'];
-	$degrees = $_POST['acf']['field_physician_degree'];
+		// Bail early if no data sent.
+		if( empty($_POST['acf']) || ($post_type != 'provider')) {
+			return;
+		}
 
-	$i = 1;
-		if ( $degrees ) {
-			foreach( $degrees as $degree ):
-				$degree_name = get_term( $degree, 'degree');
-				$degree_list .= $degree_name->name;
-				if( count($degrees) > $i ) {
-					$degree_list .= ", ";
+		// Create full name to store in 'physician_full_name' field
+		$first_name = $_POST['acf']['field_physician_first_name'];
+		$middle_name = $_POST['acf']['field_physician_middle_name'];
+		$last_name = $_POST['acf']['field_physician_last_name'];
+		$pedigree = $_POST['acf']['field_physician_pedigree'];
+		$degrees = $_POST['acf']['field_physician_degree'];
+
+		$i = 1;
+			if ( $degrees ) {
+				foreach( $degrees as $degree ):
+					$degree_name = get_term( $degree, 'degree');
+					$degree_list .= $degree_name->name;
+					if( count($degrees) > $i ) {
+						$degree_list .= ", ";
+					}
+					$i++;
+				endforeach;
+			}
+
+		$full_name = $first_name .' ' .( $middle_name ? $middle_name . ' ' : '') . $last_name . ( $pedigree ? '&nbsp;' . $pedigree : '') . ( $degree_list ? ', ' . $degree_list : '' );
+
+		$_POST['acf']['field_physician_full_name'] = $full_name;
+
+		$expertises = $_POST['acf']['field_physician_expertise'];
+		$conditions = $_POST['acf']['field_physician_conditions_cpt'];
+		$treatments = $_POST['acf']['field_physician_treatments_cpt'];
+
+		if ( $expertises ) {
+			$i = 1;
+			foreach( $expertises as $expertise ):
+				$expertise_name = get_the_title( $expertise );
+				$expertise_list .= $expertise_name;
+				if( count($expertises) > $i ) {
+					$expertise_list .= ", ";
 				}
 				$i++;
 			endforeach;
 		}
 
-	$full_name = $first_name .' ' .( $middle_name ? $middle_name . ' ' : '') . $last_name . ( $pedigree ? '&nbsp;' . $pedigree : '') . ( $degree_list ? ', ' . $degree_list : '' );
+		if ( $conditions ) {
+			$i = 1;
+			foreach( $conditions as $condition ):
+				$condition_name = get_the_title( $condition );
+				$condition_list .= $condition_name;
+				if( count($conditions) > $i ) {
+					$condition_list .= ", ";
+				}
+				$i++;
+			endforeach;
+		}
 
-	$_POST['acf']['field_physician_full_name'] = $full_name;
+		if ( $treatments ) {
+			$i = 1;
+			foreach( $treatments as $treatment ):
+				$treatment_name = get_the_title( $treatment );
+				$treatment_list .= $treatment_name;
+				if( count($treatments) > $i ) {
+					$treatment_list .= ", ";
+				}
+				$i++;
+			endforeach;
+		}
 
-	$expertises = $_POST['acf']['field_physician_expertise'];
-	$conditions = $_POST['acf']['field_physician_conditions_cpt'];
-	$treatments = $_POST['acf']['field_physician_treatments_cpt'];
+		$filter_list = $expertise_list . ', ' . $condition_list . ', ' . $treatment_list;
+		$_POST['acf']['field_physician_asp_filter'] = $filter_list;
 
-	if ( $expertises ) {
-		$i = 1;
-		foreach( $expertises as $expertise ):
-			$expertise_name = get_the_title( $expertise );
-			$expertise_list .= $expertise_name;
-			if( count($expertises) > $i ) {
-				$expertise_list .= ", ";
-			}
-			$i++;
-		endforeach;
+		// Add region
+		$locations = $_POST['acf']['field_physician_locations'];
+		if ( $locations ) {
+			$region = array();
+			$portal = array();
+			foreach( $locations as $location ):
+				$region[] = get_field( 'location_region', $location);
+				$portal[] = get_field( 'location_portal', $location);
+				// break loop after first iteration = primary location
+				// break;
+			endforeach;
+		}
+
+		$_POST['acf']['field_physician_region'] = $region;
+		$_POST['acf']['field_physician_portal'] = $portal[0]; // Use first portal only
+
 	}
 
-	if ( $conditions ) {
-		$i = 1;
-		foreach( $conditions as $condition ):
-			$condition_name = get_the_title( $condition );
-			$condition_list .= $condition_name;
-			if( count($conditions) > $i ) {
-				$condition_list .= ", ";
-			}
-			$i++;
-		endforeach;
+// Update post data / ACF data for clinical resources profile
+
+	// Fire before saving data to post (by using a priority less than 10)
+	add_action('acf/save_post', 'resources_save_post', 6);
+	function resources_save_post( $post_id ) {
+		$post_type = get_post_type($post_id);
+
+		// Bail early if no data sent.
+		if( empty($_POST['acf']) || ($post_type != 'clinical-resource')) {
+			return;
+		}
+
+		$providers = $_POST['acf']['field_clinical_resource_providers'];
+		$locations = $_POST['acf']['field_clinical_resource_locations'];
+		$expertises = $_POST['acf']['field_clinical_resource_aoe'];
+		$conditions = $_POST['acf']['field_clinical_resource_conditions'];
+		$treatments = $_POST['acf']['field_clinical_resource_treatments'];
+		$resources = $_POST['acf']['field_clinical_resource_related'];
+
+		if ( $providers ) {
+			$i = 1;
+			foreach( $providers as $provider ):
+				$provider_name = get_the_title( $provider );
+				$provider_list .= $provider_name;
+				if( count($providers) > $i ) {
+					$provider_list .= ", ";
+				}
+				$i++;
+			endforeach;
+		}
+
+		if ( $locations ) {
+			$i = 1;
+			foreach( $locations as $location ):
+				$location_name = get_the_title( $location );
+				$location_list .= $location_name;
+				if( count($locations) > $i ) {
+					$location_list .= ", ";
+				}
+				$i++;
+			endforeach;
+		}
+
+		if ( $expertises ) {
+			$i = 1;
+			foreach( $expertises as $expertise ):
+				$expertise_name = get_the_title( $expertise );
+				$expertise_list .= $expertise_name;
+				if( count($expertises) > $i ) {
+					$expertise_list .= ", ";
+				}
+				$i++;
+			endforeach;
+		}
+
+		if ( $conditions ) {
+			$i = 1;
+			foreach( $conditions as $condition ):
+				$condition_name = get_the_title( $condition );
+				$condition_list .= $condition_name;
+				if( count($conditions) > $i ) {
+					$condition_list .= ", ";
+				}
+				$i++;
+			endforeach;
+		}
+
+		if ( $treatments ) {
+			$i = 1;
+			foreach( $treatments as $treatment ):
+				$treatment_name = get_the_title( $treatment );
+				$treatment_list .= $treatment_name;
+				if( count($treatments) > $i ) {
+					$treatment_list .= ", ";
+				}
+				$i++;
+			endforeach;
+		}
+
+		if ( $resources ) {
+			$i = 1;
+			foreach( $resources as $resource ):
+				$resource_name = get_the_title( $resource );
+				$resource_list .= $resource_name;
+				if( count($resources) > $i ) {
+					$resource_list .= ", ";
+				}
+				$i++;
+			endforeach;
+		}
+
+		$filter_list = $provider_list . ', ' . $location_list . ', ' . $expertise_list . ', ' . $condition_list . ', ' . $treatment_list . ', ' . $resource_list;
+		$_POST['acf']['field_clinical_resource_asp_filter'] = $filter_list;
 	}
-
-	if ( $treatments ) {
-		$i = 1;
-		foreach( $treatments as $treatment ):
-			$treatment_name = get_the_title( $treatment );
-			$treatment_list .= $treatment_name;
-			if( count($treatments) > $i ) {
-				$treatment_list .= ", ";
-			}
-			$i++;
-		endforeach;
-	}
-
-	$filter_list = $expertise_list . ', ' . $condition_list . ', ' . $treatment_list;
-	$_POST['acf']['field_physician_asp_filter'] = $filter_list;
-
-	// Add region
-	$locations = $_POST['acf']['field_physician_locations'];
-	if ( $locations ) {
-		$region = array();
-		$portal = array();
-		foreach( $locations as $location ):
-			$region[] = get_field( 'location_region', $location);
-			$portal[] = get_field( 'location_portal', $location);
-			// break loop after first iteration = primary location
-			// break;
-		endforeach;
-	}
-
-	$_POST['acf']['field_physician_region'] = $region;
-	$_POST['acf']['field_physician_portal'] = $portal[0]; // Use first portal only
-
-}
-
-add_action('acf/save_post', 'resources_save_post', 6);
-function resources_save_post( $post_id ) {
-	$post_type = get_post_type($post_id);
-
-	// Bail early if no data sent.
-	if( empty($_POST['acf']) || ($post_type != 'clinical-resource')) {
-		return;
-	}
-
-	$providers = $_POST['acf']['field_clinical_resource_providers'];
-	$locations = $_POST['acf']['field_clinical_resource_locations'];
-	$expertises = $_POST['acf']['field_clinical_resource_aoe'];
-	$conditions = $_POST['acf']['field_clinical_resource_conditions'];
-	$treatments = $_POST['acf']['field_clinical_resource_treatments'];
-	$resources = $_POST['acf']['field_clinical_resource_related'];
-
-	if ( $providers ) {
-		$i = 1;
-		foreach( $providers as $provider ):
-			$provider_name = get_the_title( $provider );
-			$provider_list .= $provider_name;
-			if( count($providers) > $i ) {
-				$provider_list .= ", ";
-			}
-			$i++;
-		endforeach;
-	}
-
-	if ( $locations ) {
-		$i = 1;
-		foreach( $locations as $location ):
-			$location_name = get_the_title( $location );
-			$location_list .= $location_name;
-			if( count($locations) > $i ) {
-				$location_list .= ", ";
-			}
-			$i++;
-		endforeach;
-	}
-
-	if ( $expertises ) {
-		$i = 1;
-		foreach( $expertises as $expertise ):
-			$expertise_name = get_the_title( $expertise );
-			$expertise_list .= $expertise_name;
-			if( count($expertises) > $i ) {
-				$expertise_list .= ", ";
-			}
-			$i++;
-		endforeach;
-	}
-
-	if ( $conditions ) {
-		$i = 1;
-		foreach( $conditions as $condition ):
-			$condition_name = get_the_title( $condition );
-			$condition_list .= $condition_name;
-			if( count($conditions) > $i ) {
-				$condition_list .= ", ";
-			}
-			$i++;
-		endforeach;
-	}
-
-	if ( $treatments ) {
-		$i = 1;
-		foreach( $treatments as $treatment ):
-			$treatment_name = get_the_title( $treatment );
-			$treatment_list .= $treatment_name;
-			if( count($treatments) > $i ) {
-				$treatment_list .= ", ";
-			}
-			$i++;
-		endforeach;
-	}
-
-	if ( $resources ) {
-		$i = 1;
-		foreach( $resources as $resource ):
-			$resource_name = get_the_title( $resource );
-			$resource_list .= $resource_name;
-			if( count($resources) > $i ) {
-				$resource_list .= ", ";
-			}
-			$i++;
-		endforeach;
-	}
-
-	$filter_list = $provider_list . ', ' . $location_list . ', ' . $expertise_list . ', ' . $condition_list . ', ' . $treatment_list . ', ' . $resource_list;
-	$_POST['acf']['field_clinical_resource_asp_filter'] = $filter_list;
-}
 
 add_action( 'acf/save_post', 'update_facetwp_index');
 function update_facetwp_index( $post_id ) {
@@ -283,64 +289,70 @@ function update_facetwp_index( $post_id ) {
 	}
 }
 
-// Fires before saving data to post - only updates ACF data
-add_action('acf/save_post', 'location_save_post', 7);
-function location_save_post( $post_id ) {
-	$post_type = get_post_type($post_id);
+// Update post data / ACF data for location profile
 
-	// Bail early if no data sent or not location post type
-	if( empty($_POST['acf']) || ($post_type != 'location') ) {
-		return;
+	// Fire before saving data to post (by using a priority less than 10)
+	// Only updates ACF data
+	add_action('acf/save_post', 'location_save_post', 7);
+	function location_save_post( $post_id ) {
+		$post_type = get_post_type($post_id);
+
+		// Bail early if no data sent or not location post type
+		if( empty($_POST['acf']) || ($post_type != 'location') ) {
+			return;
+		}
+
+		// Create full name to store in 'physician_full_name' field
+		$featured_image = $_POST['acf']['field_location_featured_image'];
+		$wayfinding_image = $_POST['acf']['field_location_wayfinding_photo'];
+
+		// If featured image is set & wayfinding is empty, set wayfinding image to featured image
+		if ($featured_image && empty($wayfinding_image)) {
+			$_POST['acf']['field_location_wayfinding_photo'] = $featured_image;
+		}
+		// If wayfinding image is set & featured image is empty, set featured image to wayfinding image
+		if (empty($featured_image) && $wayfinding_image) {
+			$_POST['acf']['field_location_featured_image'] = $wayfinding_image;
+		}
+
+		$has_parent = $_POST['acf']['field_location_parent'];
+		$location_parent = $_POST['acf']['field_location_parent_id'];
+
+		if ($has_parent && !empty($location_parent)) {
+			$region = array();
+			$region[] = get_field( 'location_region', $location_parent);
+
+			$_POST['acf']['field_location_region'] = $region;
+		}
+
 	}
 
-	// Create full name to store in 'physician_full_name' field
-	$featured_image = $_POST['acf']['field_location_featured_image'];
-	$wayfinding_image = $_POST['acf']['field_location_wayfinding_photo'];
+	// Fire after saving data to post
+	// Change post data 
+	add_action('acf/save_post', 'location_save_post_after', 20);
+	function location_save_post_after( $post_id ) {
+		$post_type = get_post_type($post_id);
+		if ($post_type != 'location') {
+			return;
+		}
+		$post = get_post($post_id);
+		$location_has_parent = get_field('location_parent');
+		$location_parent_id = get_field('location_parent_id');
 
-	// If featured image is set & wayfinding is empty, set wayfinding image to featured image
-	if ($featured_image && empty($wayfinding_image)) {
-		$_POST['acf']['field_location_wayfinding_photo'] = $featured_image;
+		// If location has parent & parent id set, set parent id
+		if ($location_has_parent && $location_parent_id) {
+			$post->post_parent = $location_parent_id;
+		} else { // clear the parent data
+			$post->post_parent = 0;
+		}
+		// remove this filter to prevent infinite loop
+		remove_filter('acf/save_post', 'save_location_parent');
+		wp_update_post($post);
+
 	}
-	// If wayfinding image is set & featured image is empty, set featured image to wayfinding image
-	if (empty($featured_image) && $wayfinding_image) {
-		$_POST['acf']['field_location_featured_image'] = $wayfinding_image;
-	}
 
-	$has_parent = $_POST['acf']['field_location_parent'];
-	$location_parent = $_POST['acf']['field_location_parent_id'];
-
-	if ($has_parent && !empty($location_parent)) {
-		$region = array();
-		$region[] = get_field( 'location_region', $location_parent);
-
-		$_POST['acf']['field_location_region'] = $region;
-	}
-
-}
-
-// Fires after saving data to post - change post data 
-add_action('acf/save_post', 'location_save_post_after', 20);
-function location_save_post_after( $post_id ) {
-	$post_type = get_post_type($post_id);
-	if ($post_type != 'location') {
-		return;
-	}
-	$post = get_post($post_id);
-	$location_has_parent = get_field('location_parent');
-	$location_parent_id = get_field('location_parent_id');
-
-	// If location has parent & parent id set, set parent id
-	if ($location_has_parent && $location_parent_id) {
-		$post->post_parent = $location_parent_id;
-	} else { // clear the parent data
-		$post->post_parent = 0;
-	}
-	// remove this filter to prevent infinite loop
-	remove_filter('acf/save_post', 'save_location_parent');
-	wp_update_post($post);
-
-}
-
+// Bidirectionally update ACF data
+// Fire before saving data to post (by using a priority less than 10)
 add_action('acf/save_post', 'uamswp_sync_acf_save_post', 5);
 function uamswp_sync_acf_save_post( $post_id ) {
 	// Setup the variables
@@ -455,6 +467,7 @@ function bidirectional_acf_update( $field_name, $field_key, $value, $post_id ){
 }
 
 // Set the post excerpt from ACF fields
+// Fire after saving data to post
 add_action('acf/save_post', 'custom_excerpt_acf', 50);
 function custom_excerpt_acf( $post_id ) {
 
