@@ -105,6 +105,38 @@
 			"rows": 4,
 			"new_lines": ""
 		},
+		"field_expertise_featured_image": {
+			"key": "field_expertise_featured_image",
+			"label": "Featured Image for This Page",
+			"name": "_thumbnail_id",
+			"type": "image",
+			"instructions": "Recommended dimensions: 1600x900 or larger. Minimum dimensions: 1200x675. The image will be automatically cropped to a 16:9 aspect ratio.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1200,
+			"min_height": 675,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
+		},
 		"field_expertise_tab_header": {
 			"key": "field_expertise_tab_header",
 			"label": "Page Header Details",
