@@ -136,7 +136,15 @@
 			"type": "true_false",
 			"instructions": "Decide which text to use as the short description. The short description is what is included for this area of expertise page when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>The Intro Text is defined in under the Page Header Details tab.</p><p class='description' style='margin-top: 0.5em;'>Whichever text that is used should be written in a way that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>If the intro text is not written in that way, the short description should be defined separately.",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_page_title_options",
+						"operator": "!=",
+						"value": "hero"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -161,6 +169,13 @@
 						"field": "field_expertise_short_desc_query",
 						"operator": "==",
 						"value": "0"
+					}
+				],
+				[
+					{
+						"field": "field_expertise_page_title_options",
+						"operator": "==",
+						"value": "hero"
 					}
 				]
 			],
