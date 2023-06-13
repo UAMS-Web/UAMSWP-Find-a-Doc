@@ -2657,26 +2657,53 @@ function uamswp_fad_podcast() {
 
 					// Get the page header style
 					if ( $ontology_type ) {
+
+						// If the page is an ontology item, set the page header style as the Marketing Landing Page Header Style 
 						$expertise_page_title_options = 'landingpage'; // Page Header Style
+
 					} else {
-						$expertise_page_title_options = get_field('expertise_page_title_options'); // Page Header Style
+
+						// Otherwise, get the page header style selector value
+						$expertise_page_title_options = get_field('expertise_page_title_options');
+
 					}
 
-					// Get the page header text element values
+					// Create the variables used for setting the page header text element values
 					$expertise_page_header_graphic = ''; // Graphic Header Style Options
 					$expertise_page_header_landingpage = ''; // Marketing Landing Page Header Style Options
 					$expertise_page_header_hero = ''; // Hero Header Style Options
+
+					// Set the page header text element values
 					if ( $expertise_page_title_options == 'graphic' ) {
-						$expertise_page_header_graphic = get_field('expertise_page_title_graphic')['page_header_graphic']; // Graphic Header Style Options
-						$expertise_page_title = $page_title; // Title
+
+						// Get Graphic Header Style Options
+						$expertise_page_header_graphic = get_field('expertise_page_title_graphic')['page_header_graphic'];
+
+						// Set the standard page title as the title value
+						$expertise_page_title = $page_title;
+
+						// Get the intro text value
 						$expertise_page_intro = $expertise_page_header_graphic['page_header_graphic_intro']; // Intro text
+
+						// Get the background image value
 						$expertise_page_image = $expertise_page_header_graphic['page_header_graphic_image']; // Background image (mobile)
+
 					} elseif ( $expertise_page_title_options == 'landingpage' ) {
-						$expertise_page_header_landingpage = get_field('expertise_page_title_landingpage')['page_header_landingpage']; // Marketing Landing Page Header Style Options
-						$expertise_page_title = $expertise_page_header_landingpage['page_header_landingpage_title']; // Title
-						$expertise_page_title = ( isset($expertise_page_title) && !empty($expertise_page_title) ) ? $expertise_page_title : $page_title; // Set standard page title as fallback
-						$expertise_page_intro = $expertise_page_header_landingpage['page_header_landingpage_intro']; // Intro text
-						$expertise_page_image = $expertise_page_header_landingpage['page_header_landingpage_image']; // Background image
+
+						// Get Marketing Landing Page Header Style Options
+						$expertise_page_header_landingpage = get_field('expertise_page_title_landingpage')['page_header_landingpage'];
+
+						// Get the title value
+						$expertise_page_title = $expertise_page_header_landingpage['page_header_landingpage_title']; 
+
+						// If the title is not set or is empty, use the standard page title as the fallback value
+						$expertise_page_title = ( isset($expertise_page_title) && !empty($expertise_page_title) ) ? $expertise_page_title : $page_title;
+
+						// Get the intro text value
+						$expertise_page_intro = $expertise_page_header_landingpage['page_header_landingpage_intro'];
+
+						// Get the background image values
+						$expertise_page_image = $expertise_page_header_landingpage['page_header_landingpage_image']; // Background image (desktop)
 						$expertise_page_image_mobile = $expertise_page_header_landingpage['page_header_landingpage_image_mobile']; // Background image (mobile)
 
 						// If the ontology item's desktop background image is not set or is empty, use the featured image as the fallback value
@@ -2686,23 +2713,50 @@ function uamswp_fad_podcast() {
 						}
 						
 					} elseif ( $expertise_page_title_options == 'hero' ) {
+
+						// Get Hero Header Style Options
 						$expertise_page_header_hero = get_field('expertise_page_title_hero')['page_header_hero']; // Hero Header Style Options
-						$expertise_page_title = $page_title; // Title
-						$expertise_page_intro = ''; // Intro text
+
+						// Set the standard page title as the title value
+						$expertise_page_title = $page_title;
+
+						// Set the intro text value
+						$expertise_page_intro = '';
+
 					} else {
-						$expertise_page_title = $page_title; // Title
-						$expertise_page_intro = ''; // Intro text
+
+						// Set the standard page title as the title value
+						$expertise_page_title = $page_title;
+
+						// Set the intro text value
+						$expertise_page_intro = '';
+
 					}
 
-				// Get value for meta description
+				// Set the short description / meta description value
+
+				// Check whether to use this area of expertise's intro text as the short description for main page
 				$expertise_short_desc_query = get_field('expertise_short_desc_query'); // If true, use intro text. If false, use specific short description.
-				$expertise_short_desc_query = isset($expertise_short_desc_query) ? $expertise_short_desc_query : true; // Define a value if the item has not been updated since 'expertise_short_desc_query' was added
+
+					// Define a value if the item has not been updated since 'expertise_short_desc_query' was added
+					$expertise_short_desc_query = isset($expertise_short_desc_query) ? $expertise_short_desc_query : true; // Define a value if the item has not been updated since 'expertise_short_desc_query' was added
+
 				if ( $expertise_short_desc_query ) {
+
+					// If the query is true, use the intro text to set the short description
 					$expertise_short_desc = $expertise_page_intro;
+
 				} else {
+
+					// Otherwise, get the short description input value
 					$expertise_short_desc = get_field('expertise_short_desc');
-					$expertise_short_desc = ( isset($expertise_short_desc) && !empty($expertise_short_desc) ) ? uamswp_fad_fpage_text_replace($expertise_short_desc) : $expertise_short_desc; // Substitute placeholder text for relevant system settings value
-					$expertise_short_desc = ( isset($expertise_short_desc) && !empty($expertise_short_desc) ) ? $expertise_short_desc : $expertise_page_intro; // If there is no value, use intro text as a fallback value
+
+					// Substitute placeholder text for the relevant system settings value
+					$expertise_short_desc = ( isset($expertise_short_desc) && !empty($expertise_short_desc) ) ? uamswp_fad_fpage_text_replace($expertise_short_desc) : $expertise_short_desc;
+
+					// If the short description is not set or is empty, use the intro text as a fallback value
+					$expertise_short_desc = ( isset($expertise_short_desc) && !empty($expertise_short_desc) ) ? $expertise_short_desc : $expertise_page_intro;
+
 				}
 
 			// Providers
