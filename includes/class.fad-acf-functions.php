@@ -187,7 +187,88 @@ function my_taxonomy_query( $args, $field ) {
 
 	}
 
-// Update post data / ACF data for clinical resources profile
+// Update post data / ACF data for area of expertise profile
+
+	// Fire before saving data to post (by using a priority less than 10)
+	// Only updates ACF data
+	add_action('acf/save_post', 'expertise_save_post_before', 5);
+	function expertise_save_post_before( $post_id ) {
+		$post_type = get_post_type($post_id);
+
+		// Bail early if no data sent or not location post type
+		if( empty($_POST['acf']) || ($post_type != 'expertise') ) {
+			return;
+		}
+
+		// Dynamically populate a hidden field with the value from the field chosen to use for the post excerpt
+
+			// Get all contenders for the post excerpt
+			$type = $_POST['acf']['field_expertise_type']; // What Type of Content Is This Page?
+			$short_desc_query = $_POST['acf']['field_expertise_short_desc_query'];
+			$short_desc = $_POST['acf']['field_expertise_short_desc'];
+			$page_title_options = $type ? 'landingpage' : $_POST['acf']['field_expertise_page_title_options'];
+			$page_header_graphic_intro = $_POST['acf']['field_expertise_page_title_graphic']['field_fad_page_header_graphic']['field_page_header_graphic_intro'];
+			$page_header_landingpage_intro = $_POST['acf']['field_expertise_page_title_landingpage']['field_page_header_landingpage']['field_page_header_landingpage_intro'];
+
+			// Set the excerpt variable value
+			if ( !$short_desc_query ) {
+				$selected_post_excerpt = $short_desc;
+			} elseif ( $page_title_options == 'graphic' ) {
+				$selected_post_excerpt = $page_header_graphic_intro;
+			} elseif ( $page_title_options == 'landingpage' ) {
+				$selected_post_excerpt = $page_header_landingpage_intro;
+			} else {
+				$selected_post_excerpt = '';
+			}
+
+			// Set the value of the hidden field
+			$_POST['acf']['field_expertise_selected_post_excerpt'] = $selected_post_excerpt;
+
+		// Set the featured image / post thumbnail
+
+		remove_action('save_post', 'custom_excerpt_acf', 50); // Unhook this function so it doesn't loop infinitely
+		wp_update_post( $post_array ); // Update the post with new post data
+		add_action( 'save_post', 'custom_excerpt_acf', 50); // Re-hook this function
+	}
+
+	// Fire after saving data to post
+	// Only updates ACF data
+	add_action('acf/save_post', 'expertise_save_post_after', 50);
+	function expertise_save_post_after( $post_id ) {
+
+		// Get the post type of the current page/post
+		$post_type = get_post_type( $post_id );
+
+		// Bail early if no data sent or not location post type
+		if( empty($_POST['acf']) || ($post_type != 'expertise') ) {
+			return;
+		}
+	
+		// Set the featured image value
+		if (
+			!empty($post_id) // If the post ID is not empty ...
+		) {
+			// Get field name relevant to the current post type
+			$post_thumbnail = get_field('_thumbnail_id', $post_id );
+		} else {
+			$post_thumbnail = '';
+		}
+	
+		// Update the post with the new thumbnail value
+		if (
+			!empty($post_id) // If the post ID is not empty ...
+			&&
+			$post_thumbnail // and if the post thumbnail value exists ...
+		) {
+			$post_array = array( $post_id, $post_thumbnail );
+			remove_action('save_post', 'expertise_save_post_after', 50); // Unhook this function so it doesn't loop infinitely
+			set_post_thumbnail( $post_array ); // Update the post with new post data
+			add_action( 'save_post', 'expertise_save_post_after', 50); // Re-hook this function
+		}
+
+	}
+
+// Update post data / ACF data for clinical resource profile
 
 	// Fire before saving data to post (by using a priority less than 10)
 	add_action('acf/save_post', 'resources_save_post', 6);
@@ -473,7 +554,7 @@ function custom_excerpt_acf( $post_id ) {
 
 	// 1. Add post types (key) and corresponding field names (value) to be used to set the excerpt
 	$excerpt_field_name = array(
-		"expertise" => "post_excerpt",
+		"expertise" => "expertise_selected_post_excerpt",
 		"provider" => "physician_short_clinical_bio",
 		"location" => "location_short_desc",
 		"clinical-resource" => "clinical_resource_excerpt",
