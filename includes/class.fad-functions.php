@@ -2735,29 +2735,29 @@ function uamswp_fad_podcast() {
 
 				// Set the short description / meta description value
 
-				// Check whether to use this area of expertise's intro text as the short description for main page
-				$expertise_short_desc_query = get_field('expertise_short_desc_query'); // If true, use intro text. If false, use specific short description.
+					// Check whether to use this area of expertise's intro text as the short description for main page
+					$expertise_short_desc_query = get_field('expertise_short_desc_query'); // If true, use intro text. If false, use specific short description.
 
-					// Define a value if the item has not been updated since 'expertise_short_desc_query' was added
-					$expertise_short_desc_query = isset($expertise_short_desc_query) ? $expertise_short_desc_query : true; // Define a value if the item has not been updated since 'expertise_short_desc_query' was added
+						// Define a value if the item has not been updated since 'expertise_short_desc_query' was added
+						$expertise_short_desc_query = isset($expertise_short_desc_query) ? $expertise_short_desc_query : true; // Define a value if the item has not been updated since 'expertise_short_desc_query' was added
 
-				if ( $expertise_short_desc_query ) {
+					if ( $expertise_short_desc_query ) {
 
-					// If the query is true, use the intro text to set the short description
-					$expertise_short_desc = $expertise_page_intro;
+						// If the query is true, use the intro text to set the short description
+						$expertise_short_desc = $expertise_page_intro;
 
-				} else {
+					} else {
 
-					// Otherwise, get the short description input value
-					$expertise_short_desc = get_field('expertise_short_desc');
+						// Otherwise, get the short description input value
+						$expertise_short_desc = get_field('expertise_short_desc');
 
-					// Substitute placeholder text for the relevant system settings value
-					$expertise_short_desc = ( isset($expertise_short_desc) && !empty($expertise_short_desc) ) ? uamswp_fad_fpage_text_replace($expertise_short_desc) : $expertise_short_desc;
+						// Substitute placeholder text for the relevant system settings value
+						$expertise_short_desc = ( isset($expertise_short_desc) && !empty($expertise_short_desc) ) ? uamswp_fad_fpage_text_replace($expertise_short_desc) : $expertise_short_desc;
 
-					// If the short description is not set or is empty, use the intro text as a fallback value
-					$expertise_short_desc = ( isset($expertise_short_desc) && !empty($expertise_short_desc) ) ? $expertise_short_desc : $expertise_page_intro;
+						// If the short description is not set or is empty, use the intro text as a fallback value
+						$expertise_short_desc = ( isset($expertise_short_desc) && !empty($expertise_short_desc) ) ? $expertise_short_desc : $expertise_page_intro;
 
-				}
+					}
 
 			// Providers
 
