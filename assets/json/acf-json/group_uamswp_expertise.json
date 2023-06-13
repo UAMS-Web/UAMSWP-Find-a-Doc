@@ -223,7 +223,7 @@
 			"name": "_thumbnail_id",
 			"type": "image",
 			"instructions": "Recommended dimensions: 1600x900 or larger. Minimum dimensions: 1200x675. The image will be automatically cropped to a 16:9 aspect ratio.",
-			"required": 0,
+			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
