@@ -2675,9 +2675,9 @@ function uamswp_fad_podcast() {
 						$expertise_page_header_landingpage = get_field('expertise_page_title_landingpage')['page_header_landingpage']; // Marketing Landing Page Header Style Options
 						$expertise_page_title = $expertise_page_header_landingpage['page_header_landingpage_title']; // Title
 						$expertise_page_title = ( isset($expertise_page_title) && !empty($expertise_page_title) ) ? $expertise_page_title : $page_title; // Set standard page title as fallback
-						$expertise_page_intro = $expertise_page_header_landingpage['page_header_landingpage_intro']; // Background image
-						$expertise_page_image = $expertise_page_header_landingpage['page_header_landingpage_image']; // Background image (mobile)
-						$expertise_page_image_mobile = $expertise_page_header_landingpage['page_header_landingpage_image_mobile']; // Intro text
+						$expertise_page_intro = $expertise_page_header_landingpage['page_header_landingpage_intro']; // Intro text
+						$expertise_page_image = $expertise_page_header_landingpage['page_header_landingpage_image']; // Background image
+						$expertise_page_image_mobile = $expertise_page_header_landingpage['page_header_landingpage_image_mobile']; // Background image (mobile)
 					} elseif ( $expertise_page_title_options == 'hero' ) {
 						$expertise_page_header_hero = get_field('expertise_page_title_hero')['page_header_hero']; // Hero Header Style Options
 						$expertise_page_title = $page_title; // Title
