@@ -43,6 +43,9 @@ $ontology_type = isset($ontology_type) ? $ontology_type : 1; // Check if 'expert
 // Get system settings for fake subpage text elements on Area of Expertise subsection
 uamswp_fad_fpage_text_expertise();
 
+// Get the featured image / post thumbnail
+$page_image = $expertise_descendant_fpage_featured_image_expertise;
+
 // Set general variables for fake subpage
 $fpage_name = $expertise_descendant_plural_name; // Name of ontology item type represented by this fake subpage
 $fpage_name_attr = uamswp_attr_conversion($fpage_name);
@@ -86,9 +89,12 @@ add_filter('seopress_titles_title', 'uamswp_fad_fpage_title', 15, 2);
 $excerpt = $expertise_descendant_fpage_short_desc_expertise;
 add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
 
-// Add meta keywords
+// Construct the meta keywords element
 $keywords = get_field('expertise_alternate_names');
 add_action('wp_head','uamswp_keyword_hook_header');
+
+// Set the Open Graph thumbnail
+add_filter('seopress_social_og_thumb', 'uamswp_social_og_thumb');
 
 // Modify site header
 

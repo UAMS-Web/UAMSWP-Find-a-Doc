@@ -2631,21 +2631,27 @@ function uamswp_fad_podcast() {
 			global $expertise_page_image;
 			global $expertise_page_image_mobile;
 			global $expertise_short_desc;
+			global $expertise_featured_image;
 			global $provider_fpage_title_expertise;
 			global $provider_fpage_intro_expertise;
 			global $providers_fpage_short_desc_expertise;
+			global $provider_fpage_featured_image_expertise;
 			global $location_fpage_title_expertise;
 			global $location_fpage_intro_expertise;
 			global $locations_fpage_short_desc_expertise;
+			global $location_fpage_featured_image_expertise;
 			global $expertise_descendant_fpage_title_expertise;
 			global $expertise_descendant_fpage_intro_expertise;
 			global $expertise_descendant_fpage_short_desc_expertise;
+			global $expertise_descendant_fpage_featured_image_expertise;
 			global $expertise_fpage_title_expertise;
 			global $expertise_fpage_intro_expertise;
 			global $expertise_fpage_short_desc_expertise;
+			global $expertise_fpage_featured_image_expertise;
 			global $clinical_resource_fpage_title_expertise;
 			global $clinical_resource_fpage_intro_expertise;
 			global $clinical_resources_fpage_short_desc_expertise;
+			global $clinical_resource_fpage_featured_image_expertise;
 			global $conditions_fpage_title_expertise;
 			global $conditions_fpage_intro_expertise;
 			global $treatments_fpage_title_expertise;
@@ -2759,6 +2765,17 @@ function uamswp_fad_podcast() {
 
 					}
 
+				// Get the featured image value
+				$expertise_featured_image = get_field('_thumbnail_id');
+				if ( $expertise_featured_image && function_exists( 'fly_add_image_size' ) ) {
+					$expertise_featured_image = image_sizer($expertise_featured_image, 1600, 900, 'center', 'center');
+				} elseif ( $expertise_featured_image ) {
+					$expertise_featured_image = wp_get_attachment_url( $entry_title_image_desktop, 'aspect-16-9' );
+				} else {
+					$expertise_featured_image = '';
+				}
+
+
 			// Providers
 
 				// Page-level settings specific to an individual Area of Expertise
@@ -2826,6 +2843,16 @@ function uamswp_fad_podcast() {
 					$providers_fpage_short_desc_expertise = get_field('expertise_providers_fpage_short_desc');
 					$providers_fpage_short_desc_expertise = ( isset($providers_fpage_short_desc_expertise) && !empty($providers_fpage_short_desc_expertise) ) ? uamswp_fad_fpage_text_replace($providers_fpage_short_desc_expertise) : $providers_fpage_short_desc_expertise; // Substitute placeholder text for relevant system settings value
 					$providers_fpage_short_desc_expertise = ( isset($providers_fpage_short_desc_expertise) && !empty($providers_fpage_short_desc_expertise) ) ? $providers_fpage_short_desc_expertise : $provider_fpage_intro_expertise; // If there is no value, use intro text as a fallback value
+				}
+
+				// Get the featured image value
+				$provider_fpage_featured_image_expertise = get_field('expertise_providers_fpage_featured_image');
+				if ( $provider_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
+					$provider_fpage_featured_image_expertise = image_sizer($provider_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
+				} elseif ( $provider_fpage_featured_image_expertise ) {
+					$provider_fpage_featured_image_expertise = wp_get_attachment_url( $entry_title_image_desktop, 'aspect-16-9' );
+				} else {
+					$provider_fpage_featured_image_expertise = $expertise_featured_image;
 				}
 
 			// Locations
@@ -2897,6 +2924,16 @@ function uamswp_fad_podcast() {
 					$locations_fpage_short_desc_expertise = ( isset($locations_fpage_short_desc_expertise) && !empty($locations_fpage_short_desc_expertise) ) ? $locations_fpage_short_desc_expertise : $location_fpage_intro_expertise; // If there is no value, use intro text as a fallback value
 				}
 
+				// Get the featured image value
+				$location_fpage_featured_image_expertise = get_field('expertise_locations_fpage_featured_image');
+				if ( $location_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
+					$location_fpage_featured_image_expertise = image_sizer($location_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
+				} elseif ( $location_fpage_featured_image_expertise ) {
+					$location_fpage_featured_image_expertise = wp_get_attachment_url( $entry_title_image_desktop, 'aspect-16-9' );
+				} else {
+					$location_fpage_featured_image_expertise = $expertise_featured_image;
+				}
+
 			// Descendant Areas of Expertise
 
 				// Page-level settings specific to an individual Area of Expertise
@@ -2966,6 +3003,16 @@ function uamswp_fad_podcast() {
 					$expertise_descendant_fpage_short_desc_expertise = ( isset($expertise_descendant_fpage_short_desc_expertise) && !empty($expertise_descendant_fpage_short_desc_expertise) ) ? $expertise_descendant_fpage_short_desc_expertise : $expertise_descendant_fpage_intro_expertise; // If there is no value, use intro text as a fallback value
 				}
 
+				// Get the featured image value
+				$expertise_descendant_fpage_featured_image_expertise = get_field('expertise_descendant_fpage_featured_image');
+				if ( $expertise_descendant_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
+					$expertise_descendant_fpage_featured_image_expertise = image_sizer($expertise_descendant_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
+				} elseif ( $expertise_descendant_fpage_featured_image_expertise ) {
+					$expertise_descendant_fpage_featured_image_expertise = wp_get_attachment_url( $entry_title_image_desktop, 'aspect-16-9' );
+				} else {
+					$expertise_descendant_fpage_featured_image_expertise = $expertise_featured_image;
+				}
+
 			// Related Areas of Expertise
 
 				// Page-level settings specific to an individual Area of Expertise
@@ -3033,6 +3080,16 @@ function uamswp_fad_podcast() {
 					$expertise_fpage_short_desc_expertise = ( isset($expertise_fpage_short_desc_expertise) && !empty($expertise_fpage_short_desc_expertise) ) ? $expertise_fpage_short_desc_expertise : $expertise_fpage_intro_expertise; // If there is no value, use intro text as a fallback value
 				}
 
+				// Get the featured image value
+				$expertise_fpage_featured_image_expertise = get_field('expertise_associated_fpage_featured_image');
+				if ( $expertise_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
+					$expertise_fpage_featured_image_expertise = image_sizer($expertise_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
+				} elseif ( $expertise_fpage_featured_image_expertise ) {
+					$expertise_fpage_featured_image_expertise = wp_get_attachment_url( $entry_title_image_desktop, 'aspect-16-9' );
+				} else {
+					$expertise_fpage_featured_image_expertise = $expertise_featured_image;
+				}
+
 			// Clinical Resources
 
 				// Page-level settings specific to an individual Area of Expertise
@@ -3098,6 +3155,16 @@ function uamswp_fad_podcast() {
 					$clinical_resources_fpage_short_desc_expertise = get_field('expertise_clinical_resources_fpage_short_desc');
 					$clinical_resources_fpage_short_desc_expertise = ( isset($clinical_resources_fpage_short_desc_expertise) && !empty($clinical_resources_fpage_short_desc_expertise) ) ? uamswp_fad_fpage_text_replace($clinical_resources_fpage_short_desc_expertise) : $clinical_resources_fpage_short_desc_expertise; // Substitute placeholder text for relevant system settings value
 					$clinical_resources_fpage_short_desc_expertise = ( isset($clinical_resources_fpage_short_desc_expertise) && !empty($clinical_resources_fpage_short_desc_expertise) ) ? $clinical_resources_fpage_short_desc_expertise : $clinical_resource_fpage_intro_expertise; // If there is no value, use intro text as a fallback value
+				}
+
+				// Get the featured image value
+				$clinical_resource_fpage_featured_image_expertise = get_field('expertise_clinical_resources_fpage_featured_image');
+				if ( $clinical_resource_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
+					$clinical_resource_fpage_featured_image_expertise = image_sizer($clinical_resource_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
+				} elseif ( $clinical_resource_fpage_featured_image_expertise ) {
+					$clinical_resource_fpage_featured_image_expertise = wp_get_attachment_url( $entry_title_image_desktop, 'aspect-16-9' );
+				} else {
+					$clinical_resource_fpage_featured_image_expertise = $expertise_featured_image;
 				}
 
 			// Conditions
@@ -3391,4 +3458,15 @@ function uamswp_fad_labels_jump_links() {
 
 	// Jump Links Section Title
 	$fad_jump_links_title = get_field('fad_jump_links_title', 'option') ?: 'Content';
+}
+
+// Set the meta images
+
+//Open Graph thumbnail
+function uamswp_sp_social_og_thumb($html) { 
+	global $page_image; // image ID
+
+	//you can add here all your conditions like if is_page(), is_category() etc.. 
+	$html = '<meta property="og:image" content="' . $page_image . '" />'; 
+	return $html;
 }
