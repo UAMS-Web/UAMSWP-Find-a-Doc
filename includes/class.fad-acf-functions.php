@@ -451,6 +451,7 @@ function bidirectional_acf_update( $field_name, $field_key, $value, $post_id ){
 	}
 }
 
+// Set the post excerpt from ACF fields
 add_action('acf/save_post', 'custom_excerpt_acf', 50);
 function custom_excerpt_acf() {
 	// Bring in variables from outside of the function
@@ -489,9 +490,10 @@ function custom_excerpt_acf() {
 	}
 }
 
-// Custom Blocks
+// Register Custom Blocks
 if( function_exists('acf_register_block_type') ):
 
+	// Register "FacetWP Cards" block
 	acf_register_block_type(array(
 		'name' => 'uamswp_fad_facetwp_cards',
 		'title' => 'FacetWP Cards',
@@ -516,6 +518,8 @@ if( function_exists('acf_register_block_type') ):
 			'multiple' => true,
 		),
 	));
+
+	// Register "FacetWP Block" block
 	acf_register_block_type(array(
 		'name' => 'uamswp_fad_facetwp_blocks',
 		'title' => 'FacetWP Block',
@@ -541,7 +545,6 @@ if( function_exists('acf_register_block_type') ):
 	));
 
 endif;
-
 
 /**
  * FacetWP Cards Block Callback Function.
@@ -651,13 +654,14 @@ function fad_facetwp_blocks_callback( $block, $content = '', $is_preview = false
 	</section>
 	<?php
 }
+
+// Populate ACFE dynamic message field in location editor with current alert text defined in Find-a-Doc Settings
 add_action('acf/render_field/name=location_current_alert', 'location_current_alert_message');
 function location_current_alert_message(){
 
 	$alert_title = get_field('location_alert_heading_system', 'option');
 	$alert_body = get_field('location_alert_body_system', 'option');
 	$alert_color = get_field('location_alert_color_system', 'option');
-
 
 	if (!empty($alert_title) && !empty($alert_body)) {
 
@@ -675,6 +679,8 @@ function location_current_alert_message(){
 	}
 
 }
+
+// Populate "Current prescription information instructing patients to call the clinic" ACFE dynamic message field in location editor with current value(s) defined in Find-a-Doc Settings
 add_action('acf/render_field/name=location_current_prescription_clinic', 'location_current_prescription_clinic_message');
 function location_current_prescription_clinic_message(){
 
@@ -694,6 +700,8 @@ function location_current_prescription_clinic_message(){
 	}
 
 }
+
+// Populate "Current prescription information instructing patients to call their pharmacy" ACFE dynamic message field in location editor with current value(s) defined in Find-a-Doc Settings
 add_action('acf/render_field/name=location_current_prescription_pharm', 'location_current_prescription_pharm_message');
 function location_current_prescription_pharm_message(){
 
@@ -714,8 +722,8 @@ function location_current_prescription_pharm_message(){
 
 }
 
+// Limit ACF field results to top-level pages/posts that are published
 add_filter('acf/fields/post_object/query/key=field_location_parent_id', 'limit_post_top_level', 10, 3);
-
 function limit_post_top_level( $args, $field, $post ) {
 
 	$args['post_parent'] = 0;
@@ -727,32 +735,32 @@ function limit_post_top_level( $args, $field, $post ) {
 	return $args;
 }
 
+// ACF Image Field Image Aspect Ratio Validation
 /*
-		ACF Image Field Image Aspect Ratio Validation
-		Adds a field setting to ACF Image fields and validates images
-		to ensure that they meet image aspect ratio requirement
+	Adds a field setting to ACF Image fields and validates images
+	to ensure that they meet image aspect ratio requirement
 
-		This also serves as an example of how to add multiple settings
-		to a single row when adding settings to an ACF field type
+	This also serves as an example of how to add multiple settings
+	to a single row when adding settings to an ACF field type
 
-		side note: after implementing this code clear your browser cache
-		to ensure the needed JS and WP media window is refreshed
+	side note: after implementing this code clear your browser cache
+	to ensure the needed JS and WP media window is refreshed
 
-		What is "Margin"?
+	What is "Margin"?
 
-		Let's say that you set an aspect ratio of 1:1 with a margin of 10%
-		If the width of the image is 100 pixels, this means that the
-		height of the image can be from 90 pixels to 110 pixels
-		100 +/- 10% (10px)
+	Let's say that you set an aspect ratio of 1:1 with a margin of 10%
+	If the width of the image is 100 pixels, this means that the
+	height of the image can be from 90 pixels to 110 pixels
+	100 +/- 10% (10px)
 
-		If the aspect ration is set to 4:3 and the margin at 1%
-		if the width of the uploaded image is 800 pixels
-		then the height can be 594 to 606 pixels
-		600 +/- 1% (6px)
+	If the aspect ration is set to 4:3 and the margin at 1%
+	if the width of the uploaded image is 800 pixels
+	then the height can be 594 to 606 pixels
+	600 +/- 1% (6px)
 
-	*/
+*/
 
-	// add new settings for aspect ratio to image field
+	// Add new settings for aspect ratio to image field
 	add_filter('acf/render_field_settings/type=image', 'acf_image_aspect_ratio_settings', 20);
 	function acf_image_aspect_ratio_settings($field) {
 		// the technique used for adding multiple fields to a
@@ -811,7 +819,7 @@ function limit_post_top_level( $args, $field, $post ) {
 		acf_render_field_setting($field, $args);
 	} // end function acf_image_aspect_ratio_settings
 
-	// add filter to validate images to ratio
+	// Add filter to validate images to ratio
 	add_filter('acf/validate_attachment/type=image', 'acf_image_aspect_ratio_validate', 10, 5);
 	function acf_image_aspect_ratio_validate($errors, $file, $attachment, $field, $content) {
 		// check to make sure everything has a value
@@ -852,12 +860,12 @@ function limit_post_top_level( $args, $field, $post ) {
 		return $errors;
 	} // end function acf_image_aspect_ratio_validate
 
-	function pubmed_information_format_value( $value, $post_id, $field ) {
-
-		// Render shortcodes in all textarea values.
-		return html_entity_decode( $value );
-	}
-	add_filter('acf/format_value/key=field_physician_select_publications_pubmed', 'pubmed_information_format_value', 10, 3);
+// Render shortcode(s) in provider editor's Pubmed Information (HTML) field
+function pubmed_information_format_value( $value, $post_id, $field ) {
+	// Render shortcodes in all textarea values.
+	return html_entity_decode( $value ); // Convert HTML entities to their corresponding characters
+}
+add_filter('acf/format_value/key=field_physician_select_publications_pubmed', 'pubmed_information_format_value', 10, 3);
 
 
 // Modify ACF Relationship fields
