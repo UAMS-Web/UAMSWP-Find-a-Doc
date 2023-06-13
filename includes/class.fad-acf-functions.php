@@ -453,40 +453,46 @@ function bidirectional_acf_update( $field_name, $field_key, $value, $post_id ){
 
 // Set the post excerpt from ACF fields
 add_action('acf/save_post', 'custom_excerpt_acf', 50);
-function custom_excerpt_acf() {
-	// Bring in variables from outside of the function
-	global $post; // WordPress-specific global variable
+function custom_excerpt_acf( $post_id ) {
 
-	$post_id = ( $post->ID ); // Current post ID
-	$post_type = get_post_type( $post_id ); // Get Post Type
+	// 1. Add post types (key) and corresponding field names (value) to be used to set the excerpt
+	$excerpt_field_name = array(
+		"expertise" => "post_excerpt",
+		"provider" => "physician_short_clinical_bio",
+		"location" => "location_short_desc",
+		"clinical-resource" => "clinical_resource_excerpt",
+	);
 
-	if ( 'expertise' == $post_type || 'provider' == $post_type || 'location' == $post_type || 'clinical-resource' == $post_type ) {
+	// Get the post type of the current page/post
+	$post_type = get_post_type( $post_id ); 
 
-		if ('expertise' == $post_type ) {
-			$post_excerpt = get_field( 'post_excerpt', $post_id ); // ACF field
-		} elseif ( 'provider' == $post_type ) {
-			$post_excerpt = get_field( 'physician_short_clinical_bio', $post_id ); // ACF field
-		} elseif ( 'location' == $post_type ) {
-			$post_excerpt = get_field( 'location_short_desc', $post_id ); // ACF field
-		} elseif ( 'clinical-resource' == $post_type ){
-			$post_excerpt = get_field( 'clinical_resource_excerpt', $post_id );
-		}
+	// Set the post excerpt value
+	if (
+		!empty($post_id) // If the post ID is not empty ...
+		&&
+		$excerpt_field_name // and if the $excerpt_field_name array has a value ...
+		&&
+		array_key_exists($post_type, $excerpt_field_name)//  and if a key for the current post type exists in the array...
+	) {
+		// Get field name relevant to the current post type
+		$post_excerpt = get_field( $excerpt_field_name[$post_type], $post_id );
+	} else {
+		$post_excerpt = '';
+	}
 
-		if ( ( !empty( $post_id ) ) AND ( $post_excerpt ) ) {
-
-			$post_array = array(
-
-				'ID' => $post_id,
-				'post_excerpt' => $post_excerpt
-
-			);
-
-			remove_action('save_post', 'custom_excerpt_acf', 50); // Unhook this function so it doesn't loop infinitely
-
-			wp_update_post( $post_array );
-
-			add_action( 'save_post', 'custom_excerpt_acf', 50); // Re-hook this function
-		}
+	// Update the post with the new excerpt value
+	if (
+		!empty($post_id) // If the post ID is not empty ...
+		&&
+		$post_excerpt // and if the post excerpt value exists ...
+	) {
+		$post_array = array(
+			'ID' => $post_id,
+			'post_excerpt' => $post_excerpt
+		);
+		remove_action('save_post', 'custom_excerpt_acf', 50); // Unhook this function so it doesn't loop infinitely
+		wp_update_post( $post_array ); // Update the post with new post data
+		add_action( 'save_post', 'custom_excerpt_acf', 50); // Re-hook this function
 	}
 }
 
@@ -971,3 +977,41 @@ function uamswp_mychart_scheduling_query($field) {
 }
 // Make sure to use correct field key for tab
 add_filter('acf/prepare_field/key=field_location_scheduling_tab', 'uamswp_mychart_scheduling_query', 20);
+
+// Get all of the descendant/child post IDs for a parent post ID.
+// 
+// @param  int $parent_post_id The parent post ID.
+// @return array
+// 
+// Based on: https://gist.github.com/petenelson/9a2831ed33ce786db5a081da9902c19a
+function uamswp_get_all_descendants( $parent_post_id ) {
+
+	$post = get_post( $parent_post_id );
+	if ( ! is_a( $post, '\WP_Post' ) ) {
+		return false;
+	}
+
+	$child_post_ids = [];
+
+	// Get children for this parent.
+	$children = get_children(
+		[
+			'post_parent' => $parent_post_id,
+			'post_type'   => get_post_type( $parent_post_id ),
+		]
+	);
+
+	foreach ( $children as $child_post ) {
+
+		$child_post_ids[] = $child_post->ID;
+
+		// Recurse back into this.
+		$child_ids = get_all_descendants( $child_post->ID );
+
+		if ( ! empty( $child_ids ) ) {
+			$child_post_ids = array_merge( $child_post_ids, $child_ids );
+		}
+	}
+
+	return $child_post_ids;
+}
