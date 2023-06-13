@@ -2,6 +2,7 @@
 /*
  * Advanced Custom Fields Functions
  */
+
 // ACF Custom Tables
 /*
  * Changes the ACF Custom Database Tables JSON directory.
@@ -9,6 +10,7 @@
  * you need to put this in a plugin or in your wp-config.php file.
  */
 define( 'ACFCDT_JSON_DIR', WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) . '/assets/json/acf-tables' );
+
 /*
  * Disables storing of meta data values in core meta tables where a custom 
  * database table has been defined for fields. Any fields that aren't mapped
@@ -25,7 +27,6 @@ add_filter( 'acfcdt/settings/store_acf_values_in_core_meta', '__return_false' );
 // add_filter( 'acfcdt/settings/store_acf_keys_in_core_meta', '__return_false' );
 
 add_filter('acf/settings/load_json', 'uamswp_fad_json_load_point');
-
 function uamswp_fad_json_load_point( $paths ) {
 	// remove original path (optional)
 	// unset($paths[0]);
@@ -50,6 +51,7 @@ function set_default_portal( $field ) {
 	}
 	return $field;
 }
+
 add_filter('acf/load_value/key=field_physician_languages', 'set_default_language', 20, 3);
 function set_default_language($value, $post_id, $field) {
 	// Only add default content for new posts
@@ -315,6 +317,7 @@ function location_save_post( $post_id ) {
 	}
 
 }
+
 // Fires after saving data to post - change post data 
 add_action('acf/save_post', 'location_save_post_after', 20);
 function location_save_post_after( $post_id ) {
@@ -551,7 +554,6 @@ if( function_exists('acf_register_block_type') ):
 	));
 
 endif;
-
 /**
  * FacetWP Cards Block Callback Function.
  *
@@ -595,7 +597,6 @@ function fad_facetwp_cards_callback( $block, $content = '', $is_preview = false,
 	</section>
 	<?php
 }
-
 /**
  * FacetWP Cards Block Callback Function.
  *
