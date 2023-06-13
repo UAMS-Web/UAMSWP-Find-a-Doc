@@ -2678,6 +2678,13 @@ function uamswp_fad_podcast() {
 						$expertise_page_intro = $expertise_page_header_landingpage['page_header_landingpage_intro']; // Intro text
 						$expertise_page_image = $expertise_page_header_landingpage['page_header_landingpage_image']; // Background image
 						$expertise_page_image_mobile = $expertise_page_header_landingpage['page_header_landingpage_image_mobile']; // Background image (mobile)
+
+						// If the ontology item's desktop background image is not set or is empty, use the featured image as the fallback value
+						if ( ( !isset($expertise_page_image) || empty($expertise_page_image) ) && $ontology_type ) {
+							$expertise_page_image = get_post_thumbnail_id($page_id); // Background image (desktop)
+							$expertise_page_image_mobile = ''; // Background image (mobile)
+						}
+						
 					} elseif ( $expertise_page_title_options == 'hero' ) {
 						$expertise_page_header_hero = get_field('expertise_page_title_hero')['page_header_hero']; // Hero Header Style Options
 						$expertise_page_title = $page_title; // Title
