@@ -2610,6 +2610,7 @@ function uamswp_fad_podcast() {
 		// Get field values for fake subpage text elements on Area of Expertise subsection
 		function uamswp_fad_fpage_text_expertise() {
 			// Bring in variables from outside of the function
+			global $page_id;
 			global $page_title;
 			global $ontology_type;
 
@@ -2621,26 +2622,32 @@ function uamswp_fad_podcast() {
 			global $expertise_page_image_mobile;
 			global $expertise_short_desc;
 			global $expertise_featured_image;
+			global $expertise_featured_image_id;
 			global $provider_fpage_title_expertise;
 			global $provider_fpage_intro_expertise;
 			global $providers_fpage_short_desc_expertise;
 			global $provider_fpage_featured_image_expertise;
+			global $provider_fpage_featured_image_expertise_id;
 			global $location_fpage_title_expertise;
 			global $location_fpage_intro_expertise;
 			global $locations_fpage_short_desc_expertise;
 			global $location_fpage_featured_image_expertise;
+			global $location_fpage_featured_image_expertise_id;
 			global $expertise_descendant_fpage_title_expertise;
 			global $expertise_descendant_fpage_intro_expertise;
 			global $expertise_descendant_fpage_short_desc_expertise;
 			global $expertise_descendant_fpage_featured_image_expertise;
+			global $expertise_descendant_fpage_featured_image_expertise_id;
 			global $expertise_fpage_title_expertise;
 			global $expertise_fpage_intro_expertise;
 			global $expertise_fpage_short_desc_expertise;
 			global $expertise_fpage_featured_image_expertise;
+			global $expertise_fpage_featured_image_expertise_id;
 			global $clinical_resource_fpage_title_expertise;
 			global $clinical_resource_fpage_intro_expertise;
 			global $clinical_resources_fpage_short_desc_expertise;
 			global $clinical_resource_fpage_featured_image_expertise;
+			global $clinical_resource_fpage_featured_image_expertise_id;
 			global $conditions_fpage_title_expertise;
 			global $conditions_fpage_intro_expertise;
 			global $treatments_fpage_title_expertise;
@@ -2755,15 +2762,14 @@ function uamswp_fad_podcast() {
 					}
 
 				// Get the featured image value
-				$expertise_featured_image = get_field('_thumbnail_id');
+				$expertise_featured_image_id = get_field('_thumbnail_id');
 				if ( $expertise_featured_image && function_exists( 'fly_add_image_size' ) ) {
-					$expertise_featured_image = image_sizer($expertise_featured_image, 1600, 900, 'center', 'center');
+					$expertise_featured_image = image_sizer($expertise_featured_image_id, 1600, 900, 'center', 'center');
 				} elseif ( $expertise_featured_image ) {
-					$expertise_featured_image = wp_get_attachment_url( $entry_title_image_desktop, 'aspect-16-9' );
+					$expertise_featured_image = wp_get_attachment_url( $expertise_featured_image_id, 'aspect-16-9' );
 				} else {
 					$expertise_featured_image = '';
 				}
-
 
 			// Providers
 
@@ -2835,11 +2841,11 @@ function uamswp_fad_podcast() {
 				}
 
 				// Get the featured image value
-				$provider_fpage_featured_image_expertise = get_field('expertise_providers_fpage_featured_image');
+				$provider_fpage_featured_image_expertise_id = get_field('expertise_providers_fpage_featured_image');
 				if ( $provider_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
-					$provider_fpage_featured_image_expertise = image_sizer($provider_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
+					$provider_fpage_featured_image_expertise = image_sizer($provider_fpage_featured_image_expertise_id, 1600, 900, 'center', 'center');
 				} elseif ( $provider_fpage_featured_image_expertise ) {
-					$provider_fpage_featured_image_expertise = wp_get_attachment_url( $entry_title_image_desktop, 'aspect-16-9' );
+					$provider_fpage_featured_image_expertise = wp_get_attachment_url( $provider_fpage_featured_image_expertise_id, 'aspect-16-9' );
 				} else {
 					$provider_fpage_featured_image_expertise = $expertise_featured_image;
 				}
@@ -2914,11 +2920,11 @@ function uamswp_fad_podcast() {
 				}
 
 				// Get the featured image value
-				$location_fpage_featured_image_expertise = get_field('expertise_locations_fpage_featured_image');
+				$location_fpage_featured_image_expertise_id = get_field('expertise_locations_fpage_featured_image');
 				if ( $location_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
-					$location_fpage_featured_image_expertise = image_sizer($location_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
+					$location_fpage_featured_image_expertise = image_sizer($location_fpage_featured_image_expertise_id, 1600, 900, 'center', 'center');
 				} elseif ( $location_fpage_featured_image_expertise ) {
-					$location_fpage_featured_image_expertise = wp_get_attachment_url( $entry_title_image_desktop, 'aspect-16-9' );
+					$location_fpage_featured_image_expertise = wp_get_attachment_url( $location_fpage_featured_image_expertise_id, 'aspect-16-9' );
 				} else {
 					$location_fpage_featured_image_expertise = $expertise_featured_image;
 				}
@@ -2993,11 +2999,11 @@ function uamswp_fad_podcast() {
 				}
 
 				// Get the featured image value
-				$expertise_descendant_fpage_featured_image_expertise = get_field('expertise_descendant_fpage_featured_image');
+				$expertise_descendant_fpage_featured_image_expertise_id = get_field('expertise_descendant_fpage_featured_image');
 				if ( $expertise_descendant_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
-					$expertise_descendant_fpage_featured_image_expertise = image_sizer($expertise_descendant_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
+					$expertise_descendant_fpage_featured_image_expertise = image_sizer($expertise_descendant_fpage_featured_image_expertise_id, 1600, 900, 'center', 'center');
 				} elseif ( $expertise_descendant_fpage_featured_image_expertise ) {
-					$expertise_descendant_fpage_featured_image_expertise = wp_get_attachment_url( $entry_title_image_desktop, 'aspect-16-9' );
+					$expertise_descendant_fpage_featured_image_expertise = wp_get_attachment_url( $expertise_descendant_fpage_featured_image_expertise_id, 'aspect-16-9' );
 				} else {
 					$expertise_descendant_fpage_featured_image_expertise = $expertise_featured_image;
 				}
@@ -3070,11 +3076,11 @@ function uamswp_fad_podcast() {
 				}
 
 				// Get the featured image value
-				$expertise_fpage_featured_image_expertise = get_field('expertise_associated_fpage_featured_image');
+				$expertise_fpage_featured_image_expertise_id = get_field('expertise_associated_fpage_featured_image');
 				if ( $expertise_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
-					$expertise_fpage_featured_image_expertise = image_sizer($expertise_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
+					$expertise_fpage_featured_image_expertise = image_sizer($expertise_fpage_featured_image_expertise_id, 1600, 900, 'center', 'center');
 				} elseif ( $expertise_fpage_featured_image_expertise ) {
-					$expertise_fpage_featured_image_expertise = wp_get_attachment_url( $entry_title_image_desktop, 'aspect-16-9' );
+					$expertise_fpage_featured_image_expertise = wp_get_attachment_url( $expertise_fpage_featured_image_expertise_id, 'aspect-16-9' );
 				} else {
 					$expertise_fpage_featured_image_expertise = $expertise_featured_image;
 				}
@@ -3147,11 +3153,11 @@ function uamswp_fad_podcast() {
 				}
 
 				// Get the featured image value
-				$clinical_resource_fpage_featured_image_expertise = get_field('expertise_clinical_resources_fpage_featured_image');
+				$clinical_resource_fpage_featured_image_expertise_id = get_field('expertise_clinical_resources_fpage_featured_image');
 				if ( $clinical_resource_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
-					$clinical_resource_fpage_featured_image_expertise = image_sizer($clinical_resource_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
+					$clinical_resource_fpage_featured_image_expertise = image_sizer($clinical_resource_fpage_featured_image_expertise_id, 1600, 900, 'center', 'center');
 				} elseif ( $clinical_resource_fpage_featured_image_expertise ) {
-					$clinical_resource_fpage_featured_image_expertise = wp_get_attachment_url( $entry_title_image_desktop, 'aspect-16-9' );
+					$clinical_resource_fpage_featured_image_expertise = wp_get_attachment_url( $clinical_resource_fpage_featured_image_expertise_id, 'aspect-16-9' );
 				} else {
 					$clinical_resource_fpage_featured_image_expertise = $expertise_featured_image;
 				}
@@ -3447,4 +3453,62 @@ function uamswp_fad_labels_jump_links() {
 
 	// Jump Links Section Title
 	$fad_jump_links_title = get_field('fad_jump_links_title', 'option') ?: 'Content';
+}
+
+// Crop and resize images for Open Graph and Twitter
+function uamswp_meta_image_resize() {
+	// Bring in variables from outside of the function
+	global $page_image_id;
+
+	// Make variables available outside of the function
+	global $meta_og_image;
+	global $meta_og_image_width;
+	global $meta_og_image_height;
+	global $meta_twitter_image;
+	global $page_image_twitter_width;
+	global $page_image_twitter_height;
+
+	// Create multidimensional associative array for defining width and height for each social meta image
+	$image_size = array();
+
+	// Open Graph / Facebook
+	// Timeline photo and post
+	// Aspect ratio: 1.91:1
+	// Minimum dimensions: 600 x 315 pixels
+	// Recommended minimum dimensions: 1200 x 630 pixels
+	// Maximum file size: 8 MB
+	// https://developers.facebook.com/docs/sharing/webmasters/images/
+	$image_size['opengraph'] = array( 'width' => 1600, 'height' => 838 );
+
+	// Twitter
+	// Summary Card with Large Image
+	// Aspect ratio: Supports 2:1 (most articles reference 1.91:1)
+	// Minimum dimensions: 300 x 157 pixels
+	// Maximum dimensions: 4096 x 4096 pixels
+	// Maximum file size: 5 MB
+	// https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image
+	$image_size['twitter'] = array( 'width' => 1600, 'height' => 838 );
+
+	if ( $page_image_id && function_exists( 'fly_add_image_size' ) ) {
+		$meta_og_image = image_sizer($page_image_id, $image_size['opengraph']['width'], $image_size['opengraph']['height'], 'center', 'center');
+		$meta_og_image_width = $image_size['opengraph']['width'];
+		$meta_og_image_height = $image_size['opengraph']['height'];
+		$meta_twitter_image = image_sizer($page_image_id, $image_size['twitter']['width'], $image_size['twitter']['height'], 'center', 'center');
+		$page_image_twitter_width = $image_size['twitter']['width'];
+		$page_image_twitter_height = $image_size['twitter']['height'];
+	} elseif ( $page_image_id ) {
+		$meta_og_image = wp_get_attachment_url( $page_image_id, 'aspect-16-9' );
+		$meta_og_image_width = image_get_intermediate_size( $page_image_id, 'aspect-16-9' )['width'];
+		$meta_og_image_height = image_get_intermediate_size( $page_image_id, 'aspect-16-9' )['height'];
+		$meta_twitter_image = $meta_og_image;
+		$page_image_twitter_width = $meta_og_image_width;
+		$page_image_twitter_height = $meta_og_image_height;
+	} else {
+		$meta_og_image = '';
+		$meta_og_image_width = '';
+		$meta_og_image_height = '';
+		$meta_twitter_image = '';
+		$page_image_twitter_width = '';
+		$page_image_twitter_height = '';
+	}
 }

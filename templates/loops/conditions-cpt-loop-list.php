@@ -38,8 +38,6 @@ if ( !isset($condition_heading) || empty($condition_heading) ) {
 	}
 }
 
-echo '<p>$condition_intro = ' . $condition_intro . '</p>';
-
 // Condition disclaimer
 if (
 	empty($condition_intro)

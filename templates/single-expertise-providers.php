@@ -44,7 +44,8 @@ $ontology_type = isset($ontology_type) ? $ontology_type : 1; // Check if 'expert
 uamswp_fad_fpage_text_expertise();
 
 // Get the featured image / post thumbnail
-$page_image = $provider_fpage_featured_image_expertise;
+$page_image_id = $provider_fpage_featured_image_expertise_id; // Image ID
+uamswp_meta_image_resize();
 
 // Set general variables for fake subpage
 $fpage_name = $provider_plural_name; // Name of ontology item type represented by this fake subpage
@@ -97,8 +98,13 @@ add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
 $keywords = get_field('expertise_alternate_names');
 add_action('wp_head','uamswp_keyword_hook_header');
 
-// Set the Open Graph thumbnail
-// add_filter('seopress_social_og_thumb', 'uamswp_social_og_thumb');
+// Override the theme's method of defining the social meta tags
+
+	// Open Graph meta tags
+	add_filter('seopress_social_og_thumb', 'uamswp_sp_social_og_thumb'); // Filter Open Graph thumbnail (og:image)
+
+	// Twitter Card meta tags
+	add_filter('seopress_social_twitter_card_thumb', 'uamswp_sp_social_twitter_card_thumb'); // Filter Twitter Card thumbnail (twitter:image:src)
 
 // Modify site header
 
