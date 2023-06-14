@@ -36,8 +36,15 @@ $page_title_attr = uamswp_attr_conversion($page_title);
 // Get the page URL for the 'parent' area of expertise
 $page_url = get_permalink();
 
+// Area of Expertise Content Type
+$ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
+$ontology_type = isset($ontology_type) ? $ontology_type : 1; // Check if 'expertise_type' is not null, and if so, set value to true
+
 // Get system settings for fake subpage text elements on Area of Expertise subsection
 uamswp_fad_fpage_text_expertise();
+
+// Get the featured image / post thumbnail
+$page_image = $location_fpage_featured_image_expertise;
 
 // Set general variables for fake subpage
 $fpage_name = $location_plural_name; // Name of ontology item type represented by this fake subpage
@@ -48,10 +55,6 @@ $current_fpage = get_query_var('fpage'); // Fake subpage slug
 $fpage_url = !empty($current_fpage) ? $page_url . user_trailingslashit($current_fpage) : $page_url; // Fake subpage URL
 $fpage_intro = $location_fpage_intro_expertise; // Fake subpage intro text
 $fpage_intro_attr = uamswp_attr_conversion($fpage_intro); // Attribute-friendly version of fake subpage intro text
-
-// Area of Expertise Content Type
-$ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
-$ontology_type = isset($ontology_type) ? $ontology_type : 1; // Check if 'expertise_type' is not null, and if so, set value to true
 
 // Get site header and site nav values for ontology subsections
 uamswp_fad_ontology_site_values();
@@ -83,11 +86,15 @@ uamswp_fad_ontology_site_values();
 add_filter('seopress_titles_title', 'uamswp_fad_fpage_title', 15, 2);
 
 // Override theme's method of defining the meta description
-add_filter('seopress_titles_desc', 'uamswp_fad_fpage_desc');
+$excerpt = $locations_fpage_short_desc_expertise;
+add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
 
-// Add meta keywords
+// Construct the meta keywords element
 $keywords = get_field('expertise_alternate_names');
 add_action('wp_head','uamswp_keyword_hook_header');
+
+// Set the meta thumbnails
+add_filter('seopress_social_og_thumb', 'uamswp_social_og_thumb');
 
 // Modify site header
 

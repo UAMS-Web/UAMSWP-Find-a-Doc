@@ -62,7 +62,7 @@ if (
 				<h2 class="module-title"><span class="title"><?php echo $condition_heading; ?></span></h2>
 				<?php if ( $condition_intro ) { ?>
 					<p class="note"><?php echo $condition_intro; ?></p>
-				<?php } else { echo 'die';} ?>
+				<?php } ?>
 				<div class="">
 					<ul class="list" style="column-count:3; list-style:none;">
 					<?php foreach( $conditions_cpt_query->posts as $condition ): ?>

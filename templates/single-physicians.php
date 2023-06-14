@@ -236,14 +236,7 @@ endif;
 	$schema_description = $excerpt; // Used for Schema Data. Should ALWAYS have a value
 
 	// Override theme's method of defining the meta description
-	function sp_titles_desc($html) {
-		// Bring in variables from outside of the function
-		global $excerpt; // Defined on the template
-
-		$html = $excerpt;
-		return $html;
-	}
-	add_filter('seopress_titles_desc', 'sp_titles_desc');
+	add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
 
 // Set the meta title
 

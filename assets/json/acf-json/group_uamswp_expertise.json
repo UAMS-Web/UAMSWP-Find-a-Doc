@@ -43,7 +43,7 @@
 		"field_expertise_type": {
 			"key": "field_expertise_type",
 			"name": "expertise_type",
-			"label": "Content Type",
+			"label": "What Type of Content Is This Page?",
 			"type": "true_false",
 			"instructions": "",
 			"required": 0,
@@ -59,14 +59,126 @@
 			"ui_off_text": "Content",
 			"ui": 1
 		},
+		"field_expertise_parent_query": {
+			"key": "field_expertise_parent_query",
+			"name": "expertise_parent_query",
+			"type": "true_false",
+			"label": "Does This Page Have a Parent?",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "!=",
+						"value": 0
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		"field_expertise_parent_id": {
+			"key": "field_expertise_parent_id",
+			"name": "expertise_parent_id",
+			"type": "relationship",
+			"label": "Parent Page",
+			"instructions": "Pages with the Expertise content type can only have other pages with the Expertise content type as a parent.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "==",
+						"value": 0
+					}
+				],
+				[
+					{
+						"field": "field_expertise_parent_query",
+						"operator": "==",
+						"value": 1
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"expertise"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "1",
+			"max": "1",
+			"return_format": "id",
+			"acfe_bidirectional": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		"field_expertise_short_desc_query": {
+			"key": "field_expertise_short_desc_query",
+			"name": "expertise_short_desc_query",
+			"label": "Use This Page's Intro Text As the Short Description for This Page?",
+			"type": "true_false",
+			"instructions": "Decide which text to use as the short description. The short description is what is included for this area of expertise page when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>The Intro Text is defined in under the Page Header Details tab. Choosing the \"Hero\" header style will force the Short Description to be used.</p><p class='description' style='margin-top: 0.5em;'>Whichever text that is used should be written in a way that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>If the intro text is not written in that way, the short description should be defined separately.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_page_title_options",
+						"operator": "!=",
+						"value": "hero"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui_on_text": "Yes",
+			"ui_off_text": "No",
+			"ui": 1
+		},
 		"field_expertise_short_desc": {
 			"key": "field_expertise_short_desc",
 			"name": "post_excerpt",
 			"type": "textarea",
-			"label": "Short Description",
+			"label": "Short Description for This Page",
 			"instructions": "This will be the description included for this page when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
-			"required": 0,
-			"conditional_logic": 0,
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_short_desc_query",
+						"operator": "==",
+						"value": "0"
+					}
+				],
+				[
+					{
+						"field": "field_expertise_page_title_options",
+						"operator": "==",
+						"value": "hero"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -77,6 +189,65 @@
 			"maxlength": 160,
 			"rows": 4,
 			"new_lines": ""
+		},
+		"field_expertise_selected_post_excerpt": {
+			"key": "field_expertise_selected_post_excerpt",
+			"name": "expertise_selected_post_excerpt",
+			"type": "text",
+			"label": "Selected Post Excerpt",
+			"instructions": "Dynamically populated by an 'acf/save_post' action",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_tab_general",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_expertise_featured_image": {
+			"key": "field_expertise_featured_image",
+			"label": "Featured Image for This Page",
+			"name": "_thumbnail_id",
+			"type": "image",
+			"instructions": "Recommended dimensions: 1600x900 or larger. Minimum dimensions: 1200x675.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1200,
+			"min_height": 675,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
 		},
 		"field_expertise_tab_header": {
 			"key": "field_expertise_tab_header",
@@ -93,6 +264,144 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_expertise_page_title_options": {
+			"key": "field_expertise_page_title_options",
+			"label": "Page Header Style",
+			"name": "expertise_page_title_options",
+			"type": "button_group",
+			"instructions": "This selector is only visible to users with the following roles: Super Admin, Administrator, Editor.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "!=",
+						"value": 1
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": [
+				"super_admin",
+				"administrator",
+				"editor"
+			],
+			"choices": {
+				"graphic": "<i class='dashicons dashicons-format-image'></i> Graphic",
+				"landingpage": "<i class='dashicons dashicons-format-image'></i> Marketing Landing Page",
+				"hero": "<i class='dashicons dashicons-slides'></i> Hero"
+			},
+			"allow_null": 0,
+			"default_value": "graphic",
+			"layout": "horizontal",
+			"return_format": "value",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		"field_expertise_page_title_graphic": {
+			"key": "field_expertise_page_title_graphic",
+			"label": "Graphic Header Style Options",
+			"name": "expertise_page_title_graphic",
+			"type": "clone",
+			"instructions": "Reach out to UAMS Web Services to discuss whether this page would benefit from a different page header style.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_page_title_options",
+						"operator": "==",
+						"value": "graphic"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_fad_page_header_graphic"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 1,
+			"acfe_settings": ""
+		},
+		"field_expertise_page_title_landingpage": {
+			"key": "field_expertise_page_title_landingpage",
+			"label": "Marketing Landing Page Header Style Options",
+			"name": "expertise_page_title_landingpage",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "==",
+						"value": 1
+					}
+				],
+				[
+					{
+						"field": "field_expertise_page_title_options",
+						"operator": "==",
+						"value": "landingpage"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_fad_page_header_landingpage"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 1,
+			"acfe_settings": ""
+		},
+		"field_expertise_page_title_hero": {
+			"key": "field_expertise_page_title_hero",
+			"label": "Hero Header Style Options",
+			"name": "expertise_page_title_hero",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_page_title_options",
+						"operator": "==",
+						"value": "hero"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "remove-acf-border remove-acf-padding",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_fad_hero_repeater"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 1,
+			"acfe_settings": ""
 		},
 		"field_expertise_tab_details": {
 			"key": "field_expertise_tab_details",
@@ -364,6 +673,38 @@
 			"rows": 4,
 			"new_lines": ""
 		},
+		"field_expertise_providers_fpage_featured_image": {
+			"key": "field_expertise_providers_fpage_featured_image",
+			"label": "Featured Image for Related Providers Subpage",
+			"name": "expertise_providers_fpage_featured_image",
+			"type": "image",
+			"instructions": "Recommended dimensions: 1600x900 or larger. Minimum dimensions: 1200x675.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1200,
+			"min_height": 675,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
+		},
 		"field_expertise_tab_locations": {
 			"key": "field_expertise_tab_locations",
 			"label": "Related Locations",
@@ -485,6 +826,160 @@
 			"rows": 4,
 			"new_lines": ""
 		},
+		"field_expertise_locations_fpage_featured_image": {
+			"key": "field_expertise_locations_fpage_featured_image",
+			"label": "Featured Image for Related Locations Subpage",
+			"name": "expertise_locations_fpage_featured_image",
+			"type": "image",
+			"instructions": "Recommended dimensions: 1600x900 or larger. Minimum dimensions: 1200x675.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1200,
+			"min_height": 675,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
+		},
+		"field_expertise_tab_expertise_descendant": {
+			"key": "field_expertise_tab_expertise_descendant",
+			"label": "Descendant Areas of Expertise",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_type",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_expertise_descendant_fpage_intro": {
+			"key": "field_expertise_descendant_fpage_intro",
+			"label": "Override Intro Text for Descendant Areas of Expertise Subpage",
+			"name": "expertise_descendant_fpage_intro",
+			"type": "textarea",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all subpages of this type under any area of expertise. If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display on the descendant areas of expertise subpage in a pararaph underneath the page title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		"field_expertise_descendant_fpage_short_desc_query": {
+			"key": "field_expertise_descendant_fpage_short_desc_query",
+			"name": "expertise_descendant_fpage_short_desc_query",
+			"label": "Use Intro Text as the Short Description for Descendant Areas of Expertise Subpage?",
+			"type": "true_false",
+			"instructions": "Decide which text to use as the short description. The short description is what is included for the descendant areas of expertise subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Whichever text that is used should be written in a way that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>If the intro text is not written in that way, the short description should be defined separately.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui_on_text": "Yes",
+			"ui_off_text": "No",
+			"ui": 1
+		},
+		"field_expertise_descendant_fpage_short_desc": {
+			"key": "field_expertise_descendant_fpage_short_desc",
+			"name": "expertise_descendant_fpage_short_desc",
+			"type": "textarea",
+			"label": "Short Description for Descendant Areas of Expertise Subpage",
+			"instructions": "This will be the description included for the descendant areas of expertise subpage when it appears in search results and in lists on our site.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_expertise_descendant_fpage_short_desc_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 160,
+			"rows": 4,
+			"new_lines": ""
+		},
+		"field_expertise_descendant_fpage_featured_image": {
+			"key": "field_expertise_descendant_fpage_featured_image",
+			"label": "Featured Image for Descendant Areas of Expertise Subpage",
+			"name": "expertise_descendant_fpage_featured_image",
+			"type": "image",
+			"instructions": "Recommended dimensions: 1600x900 or larger. Minimum dimensions: 1200x675.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1200,
+			"min_height": 675,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
+		},
 		"field_expertise_tab_expertise": {
 			"key": "field_expertise_tab_expertise",
 			"label": "Related Areas of Expertise",
@@ -599,6 +1094,38 @@
 			"maxlength": 160,
 			"rows": 4,
 			"new_lines": ""
+		},
+		"field_expertise_associated_fpage_featured_image": {
+			"key": "field_expertise_associated_fpage_featured_image",
+			"label": "Featured Image for Related Areas of Expertise Subpage",
+			"name": "expertise_associated_fpage_featured_image",
+			"type": "image",
+			"instructions": "Recommended dimensions: 1600x900 or larger. Minimum dimensions: 1200x675.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1200,
+			"min_height": 675,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
 		},
 		"field_expertise_tab_clinical_resources": {
 			"key": "field_expertise_tab_clinical_resources",
@@ -720,6 +1247,38 @@
 			"maxlength": 160,
 			"rows": 4,
 			"new_lines": ""
+		},
+		"field_expertise_clinical_resources_fpage_featured_image": {
+			"key": "field_expertise_clinical_resources_fpage_featured_image",
+			"label": "Featured Image for Related Clinical Resources Subpage",
+			"name": "expertise_clinical_resources_fpage_featured_image",
+			"type": "image",
+			"instructions": "Recommended dimensions: 1600x900 or larger. Minimum dimensions: 1200x675.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"uploader": "",
+			"acfe_thumbnail": 0,
+			"return_format": "id",
+			"preview_size": "medium",
+			"min_width": 1200,
+			"min_height": 675,
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "jpg",
+			"ratio_width": 16,
+			"ratio_height": 9,
+			"ratio_margin": 19,
+			"acfe_settings": "",
+			"acfe_validate": "",
+			"library": "all"
 		},
 		"field_expertise_tab_conditions": {
 			"key": "field_expertise_tab_conditions",
