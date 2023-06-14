@@ -35,14 +35,8 @@ uamswp_fad_archive_treatments();
 // $treatments_archive_link = get_post_type_archive_link( get_query_var('post_type') );
 
 // Override theme's method of defining the meta page title
-function uamswp_fad_title($html) { 
-	// Bring in variables from outside of the function
-	global $treatments_plural_name_attr; // Defined in uamswp_fad_labels_treatments()
-
-	//you can add here all your conditions as if is_page(), is_category() etc.. 
-	$html = $treatments_plural_name_attr . ' | ' . get_bloginfo( "name" );
-	return $html;
-}
+$meta_title_base_addition = $treatments_plural_name_attr; // Word or phrase to use to form base meta title
+uamswp_fad_title_vars(); // Defines universal variables related to the setting the meta title
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 get_header(); ?>

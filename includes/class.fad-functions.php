@@ -1377,17 +1377,6 @@ function uamswp_fad_post_title() {
 	include( UAMS_FAD_PATH . '/templates/entry-title-' . $entry_header_style . '.php');
 }
 
-// Construct meta title for fake subpages
-function uamswp_fad_fpage_title($html) { 
-	// Bring in variables from outside of the function
-	global $page_title_attr; // Typically defined on the template
-	global $fpage_name_attr; // Typically defined on the template
-
-	//you can add here all your conditions as if is_page(), is_category() etc.. 
-	$html = $fpage_name_attr . ' | ' . $page_title_attr . ' | ' . get_bloginfo( "name" );
-	return $html;
-}
-
 // Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
 
 	// Query for whether associated providers content section should be displayed on ontology pages/subsections

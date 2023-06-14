@@ -44,25 +44,8 @@ $keywords = get_field('treatment_procedure_alternate');
 add_action('wp_head','uamswp_keyword_hook_header');
 
 // Override theme's method of defining the meta page title
-function uamswp_fad_title($html) { 
-	// Bring in variables from outside of the function
-	global $page_title_attr; // Defined on the template
-	global $treatments_single_name_attr; // Defined in uamswp_fad_labels_treatments()
-
-	//you can add here all your conditions as if is_page(), is_category() etc.. 
-	$meta_title_chars_max = 60;
-	$meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
-	$meta_title_base_chars = strlen( $meta_title_base );
-	$meta_title_enhanced_addition = ' | ' . $treatments_single_name_attr;
-	$meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
-	$meta_title_enhanced_chars = strlen( $meta_title_enhanced );
-	if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
-		$html = $meta_title_enhanced;
-	} else {
-		$html = $meta_title_base;
-	}
-	return $html;
-}
+$meta_title_enhanced_addition = $treatments_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title
+uamswp_fad_title_vars(); // Defines universal variables related to the setting the meta title
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 $excerpt = get_the_excerpt(); //get_field( 'treatment_procedure_short_desc' );

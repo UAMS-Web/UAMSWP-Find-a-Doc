@@ -83,7 +83,11 @@ uamswp_fad_ontology_site_values();
 	uamswp_fad_ontology_treatments_query();
 
 // Override theme's method of defining the meta page title
-add_filter('seopress_titles_title', 'uamswp_fad_fpage_title', 15, 2);
+$meta_title_base_addition = $fpage_name_attr; // Word or phrase to use to form base meta title
+$meta_title_enhanced_addition = $page_title_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
+$meta_title_base_order = array( $meta_title_base_addition, $meta_title_enhanced_addition ); // Override default base meta title structure to force inclusion of $meta_title_enhanced_addition
+uamswp_fad_title_vars(); // Defines universal variables related to the setting the meta title
+add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 // Override theme's method of defining the meta description
 $excerpt = $locations_fpage_short_desc_expertise;
@@ -94,7 +98,7 @@ $keywords = get_field('expertise_alternate_names');
 add_action('wp_head','uamswp_keyword_hook_header');
 
 // Set the meta thumbnails
-add_filter('seopress_social_og_thumb', 'uamswp_social_og_thumb');
+// add_filter('seopress_social_og_thumb', 'uamswp_social_og_thumb');
 
 // Modify site header
 

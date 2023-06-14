@@ -46,26 +46,18 @@ uamswp_fad_fpage_text_clinical_resource();
 // Get system settings for jump links (a.k.a. anchor links)
 uamswp_fad_labels_jump_links();
 
-// Override theme's method of defining the meta page title
-function uamswp_fad_title($html) { 
-	// Bring in variables from outside of the function
-	global $page_title_attr; // Defined on the template
-	global $clinical_resource_plural_name_attr; // Defined in uamswp_fad_labels_clinical_resource()
+// Get resource type
+$resource_type = get_field('clinical_resource_type');
+$resource_type_value = $resource_type['value'];
+$resource_type_label = $resource_type['label'];
+$resource_type_label_attr = uamswp_attr_conversion($resource_type_label);
 
-	//you can add here all your conditions as if is_page(), is_category() etc.. 
-	$meta_title_chars_max = 60;
-	$meta_title_base = $page_title_attr . ' | ' . get_bloginfo( "name" );
-	$meta_title_base_chars = strlen( $meta_title_base );
-	$meta_title_enhanced_addition = ' | ' . $clinical_resource_plural_name_attr;
-	$meta_title_enhanced = $page_title_attr . $meta_title_enhanced_addition . ' | ' . get_bloginfo( "name" );
-	$meta_title_enhanced_chars = strlen( $meta_title_enhanced );
-	if ( $meta_title_enhanced_chars <= $meta_title_chars_max ) {
-		$html = $meta_title_enhanced;
-	} else {
-		$html = $meta_title_base;
-	}
-	return $html;
-}
+// Override theme's method of defining the meta page title
+$meta_title_base_addition = $page_title_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
+$meta_title_enhanced_addition = $clinical_resource_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
+$meta_title_enhanced_x2_addition = $resource_type_label_attr; // Second word or phrase to inject into base meta title to form enhanced meta title level 2
+$meta_title_enhanced_x2_order = array( $meta_title_base_addition, $meta_title_enhanced_x2_addition, $meta_title_enhanced_addition ); // Optional pre-defined array for name order of enhanced meta title level 2 // Expects three values but will accommodate any number
+uamswp_fad_title_vars(); // Defines universal variables related to the setting the meta title
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 // Modify SEOPress's standard canonical URL settings
@@ -130,10 +122,6 @@ add_action( 'genesis_after_entry', 'uamswp_resource_appointment', 22 );
 // Set logic for displaying jump links and sections
 $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
 $jump_link_count = 0;
-
-$resource_type = get_field('clinical_resource_type');
-$resource_type_value = $resource_type['value'];
-$resource_type_label = $resource_type['label'];
 
 // Check if Conditions section should be displayed
 // load all 'conditions' terms for the post
