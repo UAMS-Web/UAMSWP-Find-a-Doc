@@ -3448,14 +3448,3 @@ function uamswp_fad_labels_jump_links() {
 	// Jump Links Section Title
 	$fad_jump_links_title = get_field('fad_jump_links_title', 'option') ?: 'Content';
 }
-
-// Set the meta images
-
-//Open Graph thumbnail
-function uamswp_sp_social_og_thumb($html) { 
-	global $page_image; // image ID
-
-	//you can add here all your conditions like if is_page(), is_category() etc.. 
-	$html = '<meta property="og:image" content="' . $page_image . '" />'; 
-	return $html;
-}

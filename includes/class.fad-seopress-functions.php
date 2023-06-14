@@ -3,7 +3,7 @@
  * SEOPress Functions
  */
 
-// Override theme's method of defining the meta page title
+// Override the theme's method of defining the meta title
 
 	// Variable definition function
 	// Call before setting $meta_title on template
@@ -163,13 +163,268 @@
 		}
 	}
 
-	// Filter hook function for 'seopress_titles_title'
+	// Filter meta title
+	// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 	function uamswp_fad_title($html) {
 		// Bring in variables from outside of the function
 		global $meta_title; // Defined in uamswp_fad_labels_clinical_resource()
 
-		//you can add here all your conditions as if is_page(), is_category() etc.. 
+		// Do stuff
 		$html = $meta_title;
+
+		return $html;
+	}
+
+// Override the theme's method of defining the Open Graph type
+
+	// Filter Open Graph type
+	// Filter hook function for 'seopress_social_og_type'
+	// add_filter('seopress_social_og_type','uamswp_sp_social_og_type');
+	function uamswp_sp_social_og_type($html) {
+		// Bring in variables from outside of the function
+
+		// Do stuff
+		// default: <meta property="og:type" content="website" />
+
+		return $html;
+	}
+
+// Override the theme's method of defining the title used in Oembed
+
+	// Filter title used in Oembed
+	// Filter hook function for 'seopress_oembed_title'
+	// add_filter('seopress_oembed_title','uamswp_sp_oembed_title');
+	function uamswp_sp_oembed_title($title) {
+		// Bring in variables from outside of the function
+
+		// Do stuff
+		// default title: Custom Open Graph Title set from SEOPress metabox, else post title
+		// $title = "My custom title for LinkedIn";
+
+		return $title;
+	}
+
+// Override the theme's method of defining the post thumbnail size used in Oembed
+
+	// Filter post thumbnail size used in Oembed
+	// Filter hook function for 'seopress_oembed_thumbnail_size'
+	// add_filter('seopress_oembed_thumbnail_size','uamswp_sp_oembed_thumbnail_size');
+	function uamswp_sp_oembed_thumbnail_size($size) {
+		// Bring in variables from outside of the function
+
+		// Do stuff
+		// default size: full
+		// $size = "large";
+
+		return $size;
+	}
+
+// Override the theme's method of defining the post thumbnail in Oembed
+
+	// Filter post thumbnail in Oembed
+	// Filter hook function for 'seopress_oembed_thumbnail'
+	// add_filter('seopress_oembed_thumbnail','uamswp_sp_oembed_thumbnail');
+	function uamswp_sp_oembed_thumbnail($thumbnail) {
+		// Bring in variables from outside of the function
+
+		// Do stuff
+		// $thumbnail = ['url' => 'https://example.com/my-post-thumbnail-url', 'width' => '1920', 'height' => '1080'];
+
+		return $thumbnail;
+	}
+
+// Override the theme's method of defining the OG updated time meta
+
+	// Filter OG updated time meta
+	// Filter hook function for 'seopress_titles_og_updated_time'
+	// add_filter('seopress_titles_og_updated_time', 'uamswp_sp_titles_og_updated_time');
+	function uamswp_sp_titles_og_updated_time($html) { 
+		// Bring in variables from outside of the function
+
+		// Do stuff
+		// $html = '<meta property="og:updated_time" content="2019-05-06T19:18:27+00:00" />';
+
+		return $html;
+	}
+
+// Override the theme's method of defining the Open Graph Author / Publisher
+
+	// Filter Open Graph Author / Publisher
+	// Filter hook function for 'seopress_social_og_author'
+	// add_filter('seopress_social_og_author', 'uamswp_sp_social_og_author');
+	function uamswp_sp_social_og_author($html) { 
+		// Bring in variables from outside of the function
+
+		// Do stuff
+		// $html = '<meta property="article:author" content="https://www.facebook.com/seopresspro/" />'; 
+		// $html .= '<meta property="article:publisher" content="https://www.facebook.com/seopresspro/" />'; 
+
+		return $html;
+	}
+
+// Override the theme's method of defining the Twitter Card summary
+
+	// Filter Twitter Card summary
+	// Filter hook function for 'seopress_social_twitter_card_summary'
+	// add_filter('seopress_social_twitter_card_summary', 'uamswp_sp_social_twitter_card_summary');
+	function uamswp_sp_social_twitter_card_summary($html) { 
+		// Bring in variables from outside of the function
+
+		// Do stuff
+		// $html = '<meta name="twitter:card" content="summary_large_image">'; 
+
+		return $html;
+	}
+
+// Override the theme's method of defining the Twitter Card site
+
+	// Filter Twitter Card site
+	// Filter hook function for 'seopress_social_twitter_card_site'
+	// add_filter('seopress_social_twitter_card_site', 'uamswp_sp_social_twitter_card_site');
+	function uamswp_sp_social_twitter_card_site($html) { 
+		// Bring in variables from outside of the function
+
+		// Do stuff
+		// $html = '<meta name="twitter:site" content="@wp_seopress" />'; 
+
+		return $html;
+	}
+
+// Override the theme's method of defining the Twitter Card creator
+
+	// Filter Twitter Card creator
+	// Filter hook function for 'seopress_social_twitter_card_creator'
+	// add_filter('seopress_social_twitter_card_creator', 'uamswp_sp_social_twitter_card_creator');
+	function uamswp_sp_social_twitter_card_creator($html) { 
+		// Bring in variables from outside of the function
+
+		// Do stuff
+		// $html = '<meta name="twitter:creator" content="@wp_seopress" />'; 
+
+		return $html;
+	}
+
+// Override the theme's method of defining the locale Open Graph
+
+	// Filter locale Open Graph
+	// Filter hook function for 'seopress_social_og_locale'
+	// add_filter('seopress_social_og_locale', 'uamswp_sp_social_og_locale');
+	function uamswp_sp_social_og_locale($html) { 
+		// Bring in variables from outside of the function
+
+		// Do stuff
+		// $html = '<meta property="og:locale" content="en_US" />';
+
+		return $html;
+	}
+
+// Override the theme's method of defining the Twitter Card title
+
+	// Filter Twitter Card title
+	// Filter hook function for 'seopress_social_twitter_card_title'
+	// add_filter('seopress_social_twitter_card_title', 'uamswp_sp_social_twitter_card_title');
+	function uamswp_sp_social_twitter_card_title($html) { 
+		// Bring in variables from outside of the function
+
+		// Do stuff
+		// $html = '<meta name="twitter:title" content="my awesome title" />'; 
+
+		return $html;
+	}
+
+// Override the theme's method of defining the Twitter Card thumbnail
+
+	// Filter Twitter Card thumbnail
+	// Filter hook function for 'seopress_social_twitter_card_thumb'
+	// add_filter('seopress_social_twitter_card_thumb', 'uamswp_sp_social_twitter_card_thumb');
+	function uamswp_sp_social_twitter_card_thumb($html) { 
+		// Bring in variables from outside of the function
+
+		// Do stuff
+		// $html = '<meta name="twitter:image:src" content="https://www.seopress.org/wp-content/uploads/2016/12/cropped-ico-logo-seopress-256x256.png" />'; 
+
+		return $html;
+	}
+
+// Override the theme's method of defining the Twitter Card description
+
+	// Filter Twitter Card description
+	// Filter hook function for 'seopress_social_twitter_card_desc'
+	// add_filter('seopress_social_twitter_card_desc', 'uamswp_sp_social_twitter_card_desc');
+	function uamswp_sp_social_twitter_card_desc($html) { 
+		// Bring in variables from outside of the function
+
+		// Do stuff
+		// $html = '<meta name="twitter:description" content="my awesome description" />'; 
+
+		return $html;
+	}
+
+// Override the theme's method of defining the Open Graph URL
+
+	// Filter Open Graph URL
+	// Filter hook function for 'seopress_social_og_url'
+	// add_filter('seopress_social_og_url', 'uamswp_sp_social_og_url');
+	function uamswp_sp_social_og_url($html) {
+		// Do stuff
+		// $html = '<meta property="og:url" content="https://www.seopress.org/support/hooks/filter-canonical-url/" />'; 
+
+		return $html;
+	}
+
+// Override the theme's method of defining the Open Graph title
+
+	// Filter Open Graph title
+	// Filter hook function for 'seopress_social_og_title'
+	// add_filter('seopress_social_og_title', 'uamswp_sp_social_og_title');
+	function uamswp_sp_social_og_title($html) { 
+		// Bring in variables from outside of the function
+
+		// Do stuff
+		// $html = '<meta property="og:title" content="my amazing og:title" />'; 
+
+		return $html;
+	}
+
+// Override the theme's method of defining the Open Graph thumbnail
+
+	// Filter Open Graph thumbnail
+	// Filter hook function for 'seopress_social_og_thumb'
+	// add_filter('seopress_social_og_thumb', 'uamswp_sp_social_og_thumb');
+	function uamswp_sp_social_og_thumb($html) { 
+		// Bring in variables from outside of the function
+		global $page_image; // image ID
+
+		// you can add here all your conditions like if is_page(), is_category() etc.. 
+		$html = '<meta property="og:image" content="' . $page_image . '" />'; 
+
+		return $html;
+	}
+
+// Override the theme's method of defining the Open Graph sitename
+
+	// Filter Open Graph sitename
+	// Filter hook function for 'seopress_social_og_site_name'
+	// add_filter('seopress_social_og_site_name', 'uamswp_sp_social_og_site_name');
+	function uamswp_sp_social_og_site_name($html) { 
+		// Bring in variables from outside of the function
+
+		// Do stuff
+		// $html = '<meta property="og:site_name" content="SEOPress" />'; 
+
+		return $html;
+	}
+
+// Override the theme's method of defining the Open Graph description
+
+	// Filter Open Graph description
+	// Filter hook function for 'seopress_social_og_desc'
+	// add_filter('seopress_social_og_desc', 'uamswp_sp_social_og_desc');
+	function uamswp_sp_social_og_desc($html) { 
+		// Bring in variables from outside of the function
+
+		// you can add here all your conditions like if is_page(), is_category() etc.. 
+		// $html = '<meta property="og:description" content="my amazing og:description" />'; 
 
 		return $html;
 	}
