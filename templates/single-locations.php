@@ -39,6 +39,7 @@
 $page_title = get_the_title(); // Title of the location
 $page_title_attr = uamswp_attr_conversion($page_title);
 $page_title_phrase = ( get_field('location_prepend_the') ? 'the ' : '' ) . $page_title; // Conditionally prepend "the" to the page title for use in phrases
+$page_title_phrase_attr = uamswp_attr_conversion($page_title_phrase);
 
 // Get system settings for fake subpage or section text elements on Location subsection or profile
 uamswp_fad_fpage_text_location();
@@ -59,6 +60,7 @@ if (empty($excerpt)){
 $location_has_parent = get_field('location_parent');
 $location_parent_id = get_field('location_parent_id');
 $parent_title = ''; // Eliminate PHP errors
+$parent_title_attr = ''; // Eliminate PHP errors
 $parent_url = ''; // Eliminate PHP errors
 $parent_location = ''; // Eliminate PHP errors
 if ($location_has_parent && $location_parent_id) { 
@@ -68,6 +70,7 @@ if ($location_has_parent && $location_parent_id) {
 if ($parent_location) {
 	$post_id = $parent_location->ID;
 	$parent_title = $parent_location->post_title;
+	$parent_title_attr = uamswp_attr_conversion($parent_title);
 	$parent_url = get_permalink( $post_id );
 } else {
 	$post_id = get_the_ID();

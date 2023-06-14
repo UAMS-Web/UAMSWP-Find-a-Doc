@@ -87,6 +87,8 @@
 	// Full name (e.g., "Leonard H. McCoy, M.D.")
 	$full_name = $first_name . ' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '') . ( $degree_list ? ', ' . $degree_list : '' );
 	$full_name_attr = uamswp_attr_conversion($full_name);
+	$page_title = $full_name;
+	$page_title_attr = $full_name_attr;
 
 	// Medium name (e.g., "Dr. Leonard H. McCoy")
 	$medium_name = ($prefix ? $prefix .' ' : '') . $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name;
