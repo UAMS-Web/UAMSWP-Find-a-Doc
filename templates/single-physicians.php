@@ -78,8 +78,10 @@
 
 	// Get the elements of the provider's name
 	$first_name = get_field('physician_first_name',$post->ID); // Get the provider's first name
+	$first_name_attr = uamswp_attr_conversion($first_name);
 	$middle_name = get_field('physician_middle_name',$post->ID); // Get the provider's middle name
 	$last_name = get_field('physician_last_name',$post->ID); // Get the provider's last name
+	$last_name_attr = uamswp_attr_conversion($last_name);
 	$pedigree = get_field('physician_pedigree',$post->ID); // Get the provider's generational suffix (e.g., "Jr.")
 
 	// Construct the variants of the provider's name
@@ -110,6 +112,10 @@
 
 	// Sort name parameter (e.g., "mccoy-leonard-h")
 	$sort_name_param_value = sanitize_title_with_dashes($sort_name);
+
+// Get the provider's gender
+$gender = get_field('physician_gender',$post->ID);
+$gender_attr = uamswp_attr_conversion($gender);
 
 // Get system settings for fake subpage or section text elements on Provider subsection or profile
 uamswp_fad_fpage_text_provider();
@@ -262,6 +268,13 @@ endif;
 	uamswp_fad_title_vars(); // Defines universal variables related to the setting the meta title
 	// add_filter('seopress_titles_title', 'uamswp_fad_title', 20, 2);
 	add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+
+// Override the theme's method of defining the social meta tags
+$meta_og_type = 'profile';
+$meta_profile_first_name = $first_name_attr; // string // A name normally given to an individual by a parent or self-chosen.
+$meta_profile_last_name = $last_name_attr; // string // A name inherited from a family or marriage and by which the individual is commonly known.
+$meta_profile_gender = strtolower($gender_attr); // enum(male, female) // Their gender.
+$meta_profile_gender = ( $meta_profile_gender == 'male' || $meta_profile_gender == 'female' ) ? $meta_profile_gender : ''; // Check against enum(male, female)
 
 function be_remove_title_from_single_crumb( $crumb, $args ) { // Because BE is the man
 	// Bring in variables from outside of the function
