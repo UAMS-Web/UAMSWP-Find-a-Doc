@@ -105,18 +105,45 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 		echo '</h1>';
 	}
 
-add_action( 'genesis_entry_content', 'uamswp_resource_text', 8 );
-add_action( 'genesis_entry_content', 'uamswp_resource_infographic', 10 );
-add_action( 'genesis_entry_content', 'uamswp_resource_video', 12 );
-add_action( 'genesis_entry_content', 'uamswp_resource_document', 14 );
-add_action( 'genesis_after_entry', 'uamswp_resource_jump_links', 8 );
-add_action( 'genesis_after_entry', 'uamswp_resource_associated', 10 );
-add_action( 'genesis_after_entry', 'uamswp_resource_conditions_cpt', 12 );
-add_action( 'genesis_after_entry', 'uamswp_resource_treatments_cpt', 14 );
-add_action( 'genesis_after_entry', 'uamswp_resource_physicians', 16 );
-add_action( 'genesis_after_entry', 'uamswp_resource_locations', 18 );
-add_action( 'genesis_after_entry', 'uamswp_resource_expertise', 20 );
-add_action( 'genesis_after_entry', 'uamswp_resource_appointment', 22 );
+// Construct page content
+
+	// Construct main clinical resource content section
+
+		// Resource type: article
+		add_action( 'genesis_entry_content', 'uamswp_resource_text', 8 );
+
+		// Resource type: infographic
+		add_action( 'genesis_entry_content', 'uamswp_resource_infographic', 10 );
+
+		// Resource type: video
+		add_action( 'genesis_entry_content', 'uamswp_resource_video', 12 );
+
+		// Resource type: document
+		add_action( 'genesis_entry_content', 'uamswp_resource_document', 14 );
+
+	// Construct jump links section
+	add_action( 'genesis_after_entry', 'uamswp_resource_jump_links', 8 );
+
+	// Construct related clinical resources section
+	add_action( 'genesis_after_entry', 'uamswp_resource_associated', 10 );
+
+	// Construct conditions section
+	add_action( 'genesis_after_entry', 'uamswp_resource_conditions_cpt', 12 );
+
+	// Construct treatments section
+	add_action( 'genesis_after_entry', 'uamswp_resource_treatments_cpt', 14 );
+
+	// Construct providers section
+	add_action( 'genesis_after_entry', 'uamswp_resource_physicians', 16 );
+
+	// Construct locations section
+	add_action( 'genesis_after_entry', 'uamswp_resource_locations', 18 );
+
+	// Construct areas of expertise section
+	add_action( 'genesis_after_entry', 'uamswp_resource_expertise', 20 );
+
+	// Construct appointment information section
+	add_action( 'genesis_after_entry', 'uamswp_resource_appointment', 22 );
 
 
 // Set logic for displaying jump links and sections
