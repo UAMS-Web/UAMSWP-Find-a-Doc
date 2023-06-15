@@ -169,6 +169,8 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	function uamswp_expertise_physicians() {
 		// Bring in variables from outside of the function
 		global $show_providers_section; // Defined in uamswp_fad_ontology_providers_query()
+		global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
+		global $provider_plural_name_attr; // Defined in uamswp_fad_labels_provider()
 		//global $postsCountClass;
 		global $physicians_query; // Defined in uamswp_fad_ontology_providers_query()
 		//global $postsPerPage;
