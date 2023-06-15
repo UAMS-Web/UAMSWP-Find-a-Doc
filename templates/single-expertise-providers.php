@@ -221,7 +221,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 			}
 			$provider_count = count($physicians_query->posts);
 			?>
-			<section class="uams-module bg-auto" id="providers">
+			<section class="uams-module bg-auto restrict-overflow" id="providers">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">

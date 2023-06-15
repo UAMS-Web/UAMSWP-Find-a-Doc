@@ -14,9 +14,9 @@ jQuery(function($) {
         $('#providers.hideContent .card-list-container').css("max-height", $providerHideContentHeight);
         // Add / remove overflow class based on math
         if ($providerCardListHeight > $providerCardHeight) {
-            $("#providers").addClass("overflow");
+            $("#providers.restrict-overflow").addClass("overflow");
         } else {
-            $("#providers").removeClass("overflow");
+            $("#providers.restrict-overflow").removeClass("overflow");
         }
     }
     

@@ -613,7 +613,7 @@ $jump_link_count = 0;
 
 			$provider_count = count($physicians_query->posts);
 			?>
-			<section class="uams-module bg-auto" id="providers">
+			<section class="uams-module bg-auto restrict-overflow" id="providers">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
