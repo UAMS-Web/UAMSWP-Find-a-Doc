@@ -1652,8 +1652,11 @@ while ( have_posts() ) : the_post(); ?>
 	if( $show_providers_section ) { 
 
 		$provider_count = count($physicians_query->posts);
+
+		// Query for whether to collapse the provider list and add a button to load all
+		$provider_collapse_list = true;
 		?>
-		<section class="uams-module bg-auto restrict-overflow" id="providers">
+		<section class="uams-module bg-auto<?php echo $provider_collapse_list ? ' collapse-list' : ''; ?>" id="providers">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
@@ -1677,9 +1680,12 @@ while ( have_posts() ) : the_post(); ?>
 								?>
 							</div>
 						</div>
-						<div class="ajax-filter-load-more">
-							<button class="btn btn-lg btn-primary" aria-label="Load all <?php echo strtolower($provider_plural_name_attr); ?>">Load All</button>
-						</div>
+						<?php
+						if ( $provider_collapse_list ) { ?>
+							<div class="ajax-filter-load-more">
+								<button class="btn btn-lg btn-primary" aria-label="Load all <?php echo strtolower($provider_plural_name_attr); ?>">Load All</button>
+							</div>
+						<?php } // endif ( $provider_collapse_list ) ?>
 					</div>
 				</div>
 			</div>

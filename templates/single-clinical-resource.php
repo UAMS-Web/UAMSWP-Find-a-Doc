@@ -134,6 +134,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 	add_action( 'genesis_after_entry', 'uamswp_resource_treatments_cpt', 14 );
 
 	// Construct providers section
+	$provider_collapse_list = true;
 	add_action( 'genesis_after_entry', 'uamswp_resource_physicians', 16 );
 
 	// Construct locations section
@@ -381,10 +382,11 @@ function uamswp_resource_physicians() {
 	global $physicians_query; // Defined on the template
 	global $postsPerPage; // Defined on the template
 	global $physicians; // Defined on the template
+	global $provider_collapse_list; // Defined on the template
 
 	if($show_providers_section) { 
 		?>
-		<section class="uams-module bg-auto restrict-overflow" id="providers">
+		<section class="uams-module bg-auto<?php echo $provider_collapse_list ? ' collapse-list' : ''; ?>" id="providers">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
@@ -401,14 +403,12 @@ function uamswp_resource_physicians() {
 								?>
 							</div>
 						</div>
-						<!-- <?php if ($postsPerPage !== -1) { ?>
-						<div class="more">
-							<button class="loadmore btn btn-primary" data-posttype="post" data-postids="<?php //echo(implode(',', $physicians)); ?>" data-ppp="<?php //echo $postsPerPage; ?>" data-postcount="<?php //echo $physicians_query->found_posts; ?>" aria-label="Load more <?php //echo strtolower($provider_plural_name_attr); ?>">Load More</button>
-						</div>
-						<?php } ?> -->
-						<div class="ajax-filter-load-more">
-							<button class="btn btn-lg btn-primary" aria-label="Load all <?php echo strtolower($provider_plural_name_attr); ?>">Load All</button>
-						</div>
+						<?php
+						if ( $provider_collapse_list ) { ?>
+							<div class="ajax-filter-load-more">
+								<button class="btn btn-lg btn-primary" aria-label="Load all <?php echo strtolower($provider_plural_name_attr); ?>">Load All</button>
+							</div>
+						<?php } // endif ( $provider_collapse_list ) ?>
 					</div>
 				</div>
 			</div>

@@ -166,16 +166,27 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 
 	// Display ontology page content
 	add_action( 'genesis_entry_content', 'uamswp_expertise_physicians' );
+	// Query for whether to collapse the provider list and add a button to load all
+	$provider_collapse_list = false;
+	// Action hook function
 	function uamswp_expertise_physicians() {
 		// Bring in variables from outside of the function
-		global $show_providers_section; // Defined in uamswp_fad_ontology_providers_query()
-		global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
-		global $provider_plural_name_attr; // Defined in uamswp_fad_labels_provider()
+
+			// Defined on the template
+			global $provider_collapse_list;
+
+			// Defined in uamswp_fad_labels_provider()
+			global $provider_plural_name;
+			global $provider_plural_name_attr;
+
+			// Defined in uamswp_fad_ontology_providers_query()
+			global $show_providers_section;
+			global $physicians_query;
+			global $physicians;
+			global $provider_ids;
+
 		//global $postsCountClass;
-		global $physicians_query; // Defined in uamswp_fad_ontology_providers_query()
 		//global $postsPerPage;
-		global $physicians; // Defined in uamswp_fad_ontology_providers_query()
-		global $provider_ids; // Defined in uamswp_fad_ontology_providers_query()
 
 		if($show_providers_section) {
 
@@ -221,7 +232,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 			}
 			$provider_count = count($physicians_query->posts);
 			?>
-			<section class="uams-module bg-auto restrict-overflow" id="providers">
+			<section class="uams-module bg-auto<?php echo $provider_collapse_list ? ' collapse-list' : ''; ?>" id="providers">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
@@ -245,12 +256,12 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 									?>
 								</div>
 							</div>
-							<!-- <div class="more" style="<?php //echo ($postsPerPage < $provider_count) ? '' : 'display:none;' ; ?>">
-								<button class="loadmore btn btn-primary <?php //echo $provider_count; ?>" data-ppp="<?php //echo $postsPerPage; ?>" aria-label="Load more <?php //echo strtolower($provider_plural_name_attr); ?>">Load More</button>
-							</div> -->
-							<div class="ajax-filter-load-more">
-								<button class="btn btn-lg btn-primary" aria-label="Load all <?php echo strtolower($provider_plural_name_attr); ?>">Load All</button>
-							</div>
+							<?php
+							if ( $provider_collapse_list ) { ?>
+								<div class="ajax-filter-load-more">
+									<button class="btn btn-lg btn-primary" aria-label="Load all <?php echo strtolower($provider_plural_name_attr); ?>">Load All</button>
+								</div>
+							<?php } // endif ( $provider_collapse_list ) ?>
 						</div>
 					</div>
 				</div>
