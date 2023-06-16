@@ -32,8 +32,10 @@
 // Get system settings for clinical resource archive page text
 // uamswp_fad_archive_clinical_resource();
 
-// Set general variables
+// Get the page ID
 $page_id = get_the_ID();
+
+// Get the page title for the clinical resource
 $page_title = get_the_title();
 $page_title_attr = uamswp_attr_conversion($page_title);
 
@@ -139,7 +141,9 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 	add_action( 'genesis_after_entry', 'uamswp_fad_section_providers', 16 );
 
 	// Construct locations section
-	add_action( 'genesis_after_entry', 'uamswp_resource_locations', 18 );
+	$location_section_title = $location_fpage_title_clinical_resource; // Text to use for the section title
+	$location_section_intro = $location_fpage_intro_clinical_resource; // Text to use for the section intro text
+	add_action( 'genesis_after_entry', 'uamswp_fad_section_locations', 18 );
 
 	// Construct areas of expertise section
 	add_action( 'genesis_after_entry', 'uamswp_resource_expertise', 20 );
@@ -211,33 +215,17 @@ if($physicians) {
 	);
 	$physicians_query = New WP_Query( $args );
 	if($physicians_query && $physicians_query->have_posts()) {
-		$show_providers_section = true;
+		$provider_section_show = true;
 		$jump_link_count++;
 		$provider_ids = $physicians_query->posts;
 	} else {
-		$show_providers_section = false;
+		$provider_section_show = false;
 	}
 }
 
-// Check if Locations section should be displayed
+// Query for whether associated locations content section should be displayed on a page
 $locations = get_field('clinical_resource_locations');
-if($locations) {
-	$args = (array(
-		'post_type' => "location",
-		'order' => 'ASC',
-		'orderby' => 'title',
-		'posts_per_page' => -1,
-		'post_status' => 'publish',
-		'post__in'	=> $locations
-	));
-	$location_query = new WP_Query( $args );
-	if( $locations && $location_query->have_posts() ) {
-		$show_locations_section = true;
-		$jump_link_count++;
-	} else {
-		$show_locations_section = false;
-	}
-}
+uamswp_fad_location_query();
 
 // Check if Expertise section should be displayed
 $expertises = get_field('clinical_resource_aoe');
@@ -444,38 +432,6 @@ function uamswp_resource_treatments_cpt() {
 		include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
 	}
 }
-function uamswp_resource_locations() {
-	// Bring in variables from outside of the function
-	global $location_fpage_title_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
-	global $location_fpage_intro_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
-	global $show_locations_section; // Defined on the template
-	global $location_query; // Defined on the template
-	global $location_single_name; // Defined in uamswp_fad_labels_location()
-	global $location_single_name_attr; // Defined in uamswp_fad_labels_location()
-	global $location_plural_name; // Defined in uamswp_fad_labels_location()
-
-	if ( $show_locations_section ) { ?>
-		<section class="uams-module location-list bg-auto" id="locations">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title"><span class="title"><?php echo $location_fpage_title_clinical_resource; ?></span></h2>
-						<?php echo $location_fpage_intro_clinical_resource ? '<p class="note">' . $location_fpage_intro_clinical_resource . '</p>' : ''; ?>
-						<div class="card-list-container location-card-list-container">
-							<div class="card-list">
-							<?php while ( $location_query->have_posts() ) : $location_query->the_post();
-								$id = get_the_ID();
-								include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
-							endwhile;
-							wp_reset_postdata();?>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php 
-	} // endif
-}
 function uamswp_resource_associated() {
 	// Bring in variables from outside of the function
 	global $page_title; // Defined on the template
@@ -563,8 +519,8 @@ function uamswp_resource_jump_links() {
 	global $show_related_resource_section; // Defined on the template
 	global $show_conditions_section; // Defined on the template
 	global $show_treatments_section; // Defined on the template
-	global $show_providers_section; // Defined on the template
-	global $show_locations_section; // Defined on the template
+	global $provider_section_show; // Defined on the template
+	global $location_section_show; // Defined on the template
 	global $show_aoe_section; // Defined on the template
 	global $show_jump_links_section; // Defined on the template
 	global $show_appointment_section; // Defined on the template
@@ -593,12 +549,12 @@ function uamswp_resource_jump_links() {
 							<a class="nav-link" href="#treatments" title="Jump to the section of this page about related <?php echo $treatments_plural_name_attr; ?>"><?php echo $treatments_plural_name; ?></a>
 						</li>
 					<?php } ?>
-					<?php if ( $show_providers_section ) { ?>
+					<?php if ( $provider_section_show ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#providers" title="Jump to the section of this page about related <?php echo $provider_plural_name_attr; ?>"><?php echo $provider_plural_name; ?></a>
 						</li>
 					<?php } ?>
-					<?php if ($show_locations_section) { ?>
+					<?php if ($location_section_show) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#locations" title="Jump to the section of this page about related <?php echo $location_plural_name_attr; ?>"><?php echo $location_plural_name; ?></a>
 						</li>

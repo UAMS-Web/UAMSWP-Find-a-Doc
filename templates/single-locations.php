@@ -35,6 +35,9 @@
 // Get system settings for location archive page text
 // uamswp_fad_archive_location();
 
+// Get the page ID
+$page_id = get_the_ID();
+
 // Get the page title for the location
 $page_title = get_the_title(); // Title of the location
 $page_title_attr = uamswp_attr_conversion($page_title);
@@ -515,12 +518,12 @@ while ( have_posts() ) : the_post(); ?>
 			$physicians_query = New WP_Query( $args );
 		}
 		if ( isset($physicians_query) && $physicians_query->have_posts() ) {
-			$show_providers_section = true;
+			$provider_section_show = true;
 			$jump_link_count++;
 			$provider_ids = $physicians_query->posts;
 			wp_reset_postdata();
 		} else {
-			$show_providers_section = false;
+			$provider_section_show = false;
 		}
 
 
@@ -1112,7 +1115,7 @@ while ( have_posts() ) : the_post(); ?>
 							<a class="nav-link" href="#portal-info" title="Jump to the section of this page about the Patient Portal">Patient Portal</a>
 						</li>
 					<?php } ?>
-					<?php if ( $show_providers_section ) { ?>
+					<?php if ( $provider_section_show ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#providers" title="Jump to the section of this page about <?php echo $provider_plural_name_attr; ?>"><?php echo $provider_plural_name; ?></a>
 						</li>

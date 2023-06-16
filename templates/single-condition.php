@@ -32,6 +32,9 @@
 // Get system settings for condition archive page text
 // uamswp_fad_archive_conditions();
 
+// Get the page ID
+$page_id = get_the_ID();
+
 // Get the page title for the condition
 $page_title = get_the_title();
 $page_title_attr = uamswp_attr_conversion($page_title);
@@ -105,110 +108,8 @@ $args = (array(
 ));
 $resource_query = new WP_Query( $args );
 
-// Locations Content
-$location_content = '';
-$args = (array(
-	'post_type' => "location",
-	"post_status" => "publish",
-	'order' => 'ASC',
-	'orderby' => 'title',
-	'posts_per_page' => -1,
-	'fields' => 'ids',
-	'no_found_rows' => true, // counts posts, remove if pagination required
-	'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
-	'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
-	'post__in'	=> $locations
-));
-$location_query = new WP_Query( $args );
-
-// Check for valid locations
-$location_valid = false;
-if ( $locations && $location_query->have_posts() ) {
-	foreach( $locations as $location ) {
-		if ( get_post_status ( $location ) == 'publish' ) {
-			$location_valid = true;
-			$break;
-		}
-	}
-}
-
-if ( $location_valid ) {
-	$location_ids = $location_query->posts;
-
-	$location_region_IDs = array();
-	// while ($location_query->have_posts()) : $location_query->the_post();
-	foreach($location_ids as $location_id) {
-		// $id = get_the_ID();
-		$location_region_IDs[] = get_field('location_region', $location_id);
-	}
-	// endwhile;
-	$location_region_IDs = array_unique($location_region_IDs);
-	$location_region_list = array();
-	foreach ($location_region_IDs as $location_region_ID){
-		$location_region_list[] = get_term_by( 'ID', $location_region_ID, 'region' )->slug;
-	}
-
-	// if cookie is set, run modified physician query
-	if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
-
-		$location_region = '';
-		if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
-			$location_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
-		}
-
-		$tax_query = array();
-		if(!empty($location_region)) {
-			$tax_query[] = array(
-				'taxonomy' => 'region',
-				'field' => 'slug',
-				'terms' => $location_region
-			);
-		}
-		$args = array(
-			'post_type' => "location",
-			'post_status' => 'publish',
-			'order' => 'ASC',
-			'orderby' => 'title',
-			'posts_per_page' => -1,
-			'fields' => 'ids',
-			'no_found_rows' => true, // counts posts, remove if pagination required
-			'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
-			'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
-			'post__in'	=> $locations,
-			'tax_query' => $tax_query
-		);
-		$location_query = New WP_Query( $args );
-	}
-
-	$location_content .= '<section class="uams-module bg-auto" id="locations">';
-	$location_content .= '<div class="container-fluid">';
-	$location_content .= '<div class="row">';
-	$location_content .= '<div class="col-12">';
-	$location_content .= '<h2 class="module-title"><span class="title">' . $location_plural_name . ' Where ' . $provider_plural_name . ' Treat ' . $page_title . '</span></h2>';
-	$location_content .= '<p class="note">Note that the treatment of ' . $page_title . ' may not be <em>performed</em> at every ' . strtolower($location_single_name) . ' listed below. The list may include ' . strtolower($location_plural_name) . ' where the treatment plan is developed during and after a patient visit.</p>';
-	$location_content .= do_shortcode( '[uamswp_location_ajax_filter locations="'. implode(",", $location_ids) .'"]' );
-	$location_content .= '<div class="card-list-container location-card-list-container">';
-	$location_content .= '<div class="card-list card-list-locations">';
-	ob_start();
-	ob_clean();
-	if ($location_query->have_posts()){
-		while ( $location_query->have_posts() ) : $location_query->the_post();
-			$id = get_the_ID();
-			include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
-		endwhile;
-		echo '<data id="location_ids" data-postids="'. implode(',', $location_query->posts) .'," data-regions="'. implode(',', $location_region_list) .',"></data>';
-	} else {
-		echo '<span class="no-results">Sorry, there are no ' . strtolower($location_plural_name) . ' matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
-	}
-	wp_reset_postdata();
-	$location_content .= ob_get_clean();
-	$location_content .= '</div>';
-	$location_content .= '</div>';
-	$location_content .= '</div>';
-	$location_content .= '</div>';
-	$location_content .= '</div>';
-	$location_content .= '</section>';
-}
+// Query for whether associated locations content section should be displayed on a page
+uamswp_fad_location_query();
 
 // Classes for indicating presence of content
 $condition_field_classes = '';
@@ -289,12 +190,12 @@ $jump_link_count = 0;
 	}
 
 	if( $physicians && $physicians_query->have_posts() ) {
-		$show_providers_section = true;
+		$provider_section_show = true;
 		$jump_link_count++;
 		$provider_ids = $physicians_query->posts;
 		wp_reset_postdata();
 	} else {
-		$show_providers_section = false;
+		$provider_section_show = false;
 	}
 
 	// Check if Areas of Expertise section should be displayed
@@ -316,14 +217,6 @@ $jump_link_count = 0;
 		$jump_link_count++;
 	} else {
 		$show_aoe_section = false;
-	}
-
-	// Check if Locations section should be displayed
-	if ( !empty($location_content) ) {
-		$show_locations_section = true;
-		$jump_link_count++;
-	} else {
-		$show_locations_section = false;
 	}
 
 	// Check if Make an Appointment section should be displayed
@@ -496,12 +389,12 @@ $jump_link_count = 0;
 								<a class="nav-link" href="#treatments" title="Jump to the section of this page about <?php echo $treatments_plural_name_attr; ?>"><?php echo $treatments_plural_name; ?></a>
 							</li>
 						<?php } ?>
-						<?php if ( $show_providers_section ) { ?>
+						<?php if ( $provider_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#providers" title="Jump to the section of this page about <?php echo $provider_plural_name_attr; ?>"><?php echo $provider_plural_name; ?></a>
 							</li>
 						<?php } ?>
-						<?php if ( $show_locations_section ) { ?>
+						<?php if ( $location_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#locations" title="Jump to the section of this page about <?php echo $location_plural_name_attr; ?>"><?php echo $location_plural_name; ?></a>
 							</li>
@@ -584,9 +477,9 @@ $jump_link_count = 0;
 		// End Providers Section
 
 		// Begin Location Section
-		if ( $show_locations_section ) {
-			echo $location_content;
-		}
+		$location_section_title = $location_plural_name . ' Where ' . $provider_plural_name . ' Treat ' . $page_title; // Text to use for the section title
+		$location_section_intro = 'Note that the treatment of ' . $page_title . ' may not be <em>performed</em> at every ' . strtolower($location_single_name) . ' listed below. The list may include ' . strtolower($location_plural_name) . ' where the treatment plan is developed during and after a patient visit.'; // Text to use for the section intro text
+		uamswp_fad_section_locations();
 		// End Location Section
 
 		// Begin Areas of Expertise Section

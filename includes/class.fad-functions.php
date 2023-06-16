@@ -732,15 +732,15 @@ function provider_ajax_filter_callback() {
 
 
 
-	$region_IDs = array();
+	$provider_region_IDs = array();
 	while ($region_prov_ids->have_posts()) : $region_prov_ids->the_post();
 		$id = get_the_ID();
-		$region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
+		$provider_region_IDs = array_merge($provider_region_IDs, get_field('physician_region', $id));
 	endwhile;
-	$region_IDs = array_unique($region_IDs);
-	$region_list = array();
-	foreach ($region_IDs as $region_ID){
-		$region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
+	$provider_region_IDs = array_unique($provider_region_IDs);
+	$provider_region_list = array();
+	foreach ($provider_region_IDs as $provider_region_ID){
+		$provider_region_list[] = get_term_by( 'ID', $provider_region_ID, 'region' )->slug;
 	}
 
 	// Build query for titles, based on regions
@@ -810,7 +810,7 @@ function provider_ajax_filter_callback() {
 			include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
 			// $z++;
 		endwhile;
-		echo '<data id="provider_ids" data-postids="'. implode(',', $provider_ids) .'," data-regions="'. implode(',', $region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
+		echo '<data id="provider_ids" data-postids="'. implode(',', $provider_ids) .'," data-regions="'. implode(',', $provider_region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
 		// var_dump($tax_query_title);
 		// var_dump($tax_query_region);
 		// var_dump($tax_query);
@@ -1042,15 +1042,15 @@ function location_ajax_filter_callback() {
 	);
 	$region_loc_ids = new WP_Query( $args );
 
-	$region_IDs = array();
+	$location_region_IDs = array();
 	while ($region_loc_ids->have_posts()) : $region_loc_ids->the_post();
 		$id = get_the_ID();
-		$region_IDs[] = get_field('location_region', $id);
+		$location_region_IDs[] = get_field('location_region', $id);
 	endwhile;
-	$region_IDs = array_unique($region_IDs);
-	$region_list = array();
-	foreach ($region_IDs as $region_ID){
-		$region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
+	$location_region_IDs = array_unique($location_region_IDs);
+	$location_region_list = array();
+	foreach ($location_region_IDs as $location_region_ID){
+		$location_region_list[] = get_term_by( 'ID', $location_region_ID, 'region' )->slug;
 	}
 
 	// Build query for titles, based on regions
@@ -1084,7 +1084,7 @@ function location_ajax_filter_callback() {
 			$id = get_the_ID();
 			include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
 		endwhile;
-		echo '<data id="location_ids" data-postids="'. implode(',', $location_ids) .'," data-regions="'. implode(',', $region_list) .',"></data>';
+		echo '<data id="location_ids" data-postids="'. implode(',', $location_ids) .'," data-regions="'. implode(',', $location_region_list) .',"></data>';
 	} else {
 		echo '<span class="no-results">Sorry, there are no locations matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
 	}
@@ -1218,6 +1218,7 @@ function uamswp_fad_ontology_site_values() {
 	global $navbar_subbrand_parent;
 	global $navbar_subbrand_parent_attr;
 	global $navbar_subbrand_parent_url;
+	global $locations;
 
 	// Ancestors
 	$ancestors = get_post_ancestors($page_id); // Get all ancestors
@@ -1310,6 +1311,7 @@ function uamswp_fad_ontology_site_values() {
 			$navbar_subbrand_parent_url = '';
 		}
 	}
+	$locations = get_field( 'location_expertise', $site_nav_id );
 }
 
 // Construct non-standard entry title
@@ -1388,7 +1390,7 @@ function uamswp_fad_post_title() {
 		// Make variables available outside of the function
 		global $physicians;
 		global $physicians_query;
-		global $show_providers_section;
+		global $provider_section_show;
 		global $provider_ids;
 
 		$physicians = get_field( "physician_expertise", $site_nav_id );
@@ -1407,29 +1409,35 @@ function uamswp_fad_post_title() {
 			);
 			$physicians_query = New WP_Query( $args );
 			if( ( $physicians_query && $physicians_query->have_posts()) ) {
-				$show_providers_section = true;
+				$provider_section_show = true;
 				$provider_ids = $physicians_query->posts;
 			} else {
 				// wp_redirect( get_the_permalink($site_nav_id), 301 );
-				$show_providers_section = false;
+				$provider_section_show = false;
 			}
 		}
 	}
 
-	// Query for whether associated locations content section should be displayed on ontology pages/subsections
-	function uamswp_fad_ontology_locations_query() {
+	// Query for whether associated locations content section should be displayed on a page
+	function uamswp_fad_location_query() {
 		// Bring in variables from outside of the function
-		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
-		global $ontology_type; // Typically defined on the template
+
+			// Typically defined on the template
+			global $jump_link_count;
+
+			// Typically defined on the template or in a function such as uamswp_fad_ontology_site_values()
+			global $locations; // Value of the related locations input
 
 		// Make variables available outside of the function
-		global $locations;
 		global $location_query;
-		global $show_locations_section;
+		global $location_section_show;
+		global $location_ids;
+		global $location_valid;
 
-		$locations = get_field('location_expertise', $site_nav_id);
-		if($locations) {
-			$args = (array(
+		$location_valid = false;
+
+		if ( $locations) {
+			$args = array(
 				'post_type' => "location",
 				"post_status" => "publish",
 				'order' => 'ASC',
@@ -1440,12 +1448,24 @@ function uamswp_fad_post_title() {
 				'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
 				'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
 				'post__in'	=> $locations
-			));
+			);
 			$location_query = new WP_Query( $args );
 			if( ( $locations && $location_query->have_posts() ) ) {
-				$show_locations_section = true;
+				$location_section_show = true;
+				$location_ids = $location_query->posts;
+				$jump_link_count = $jump_link_count + 1;
 			} else {
-				$show_locations_section = false;
+				$location_section_show = false;
+			}
+
+			// Check for valid locations
+			if ( $locations && $location_query->have_posts() ) {
+				foreach( $locations as $location ) {
+					if ( get_post_status ( $location ) == 'publish' ) {
+						$location_valid = true;
+						$break;
+					}
+				}
 			}
 		}
 	}
@@ -1495,14 +1515,14 @@ function uamswp_fad_post_title() {
 		global $show_related_aoe_section;
 
 		$expertises = get_field('expertise_associated', $site_nav_id);
-		$args = (array(
+		$args = array(
 			'post_type' => "expertise",
 			'order' => 'ASC',
 			'orderby' => 'title',
 			'posts_per_page' => -1,
 			'post_status' => 'publish',
 			'post__in'	=> $expertises
-		));
+		);
 		$expertise_query = new WP_Query( $args );
 		if( ( $expertises && $expertise_query->have_posts() ) ) {
 			$show_related_aoe_section = true;
@@ -1527,14 +1547,14 @@ function uamswp_fad_post_title() {
 		$resources = get_field('expertise_clinical_resources', $site_nav_id);
 		$resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
 		$resource_more = false;
-		$args = (array(
+		$args = array(
 			'post_type' => "clinical-resource",
 			'order' => 'DESC',
 			'orderby' => 'post_date',
 			'posts_per_page' => $resource_postsPerPage,
 			'post_status' => 'publish',
 			'post__in'	=> $resources
-		));
+		);
 		$resource_query = new WP_Query( $args );
 
 		// Check if Clinical Resources section should be displayed
@@ -1559,14 +1579,14 @@ function uamswp_fad_post_title() {
 		// load all 'conditions' terms for the post
 		$conditions_cpt = get_field('expertise_conditions_cpt', $site_nav_id);
 		// Conditions CPT
-		$args = (array(
+		$args = array(
 			'post_type' => "condition",
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
 			'posts_per_page' => -1,
 			'post__in' => $conditions_cpt
-		));
+		);
 		$conditions_cpt_query = new WP_Query( $args );
 		if( ( $conditions_cpt && $conditions_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
 			$show_conditions_section = true;
@@ -1588,14 +1608,14 @@ function uamswp_fad_post_title() {
 
 		$treatments_cpt = get_field('expertise_treatments_cpt', $site_nav_id);
 		// Treatments CPT
-		$args = (array(
+		$args = array(
 			'post_type' => "treatment",
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
 			'posts_per_page' => -1,
 			'post__in' => $treatments_cpt
-		));
+		);
 		$treatments_cpt_query = new WP_Query( $args );
 		if( ( $treatments_cpt && $treatments_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
 			$show_treatments_section = true;
@@ -1608,8 +1628,8 @@ function uamswp_fad_post_title() {
 function uamswp_fad_ontology_nav_menu() {
 	// Bring in variables from outside of the function
 	global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
-	global $show_providers_section; // Typically defined in uamswp_fad_ontology_providers_query()
-	global $show_locations_section; // Typically defined in uamswp_fad_ontology_locations_query()
+	global $provider_section_show; // Typically defined in uamswp_fad_ontology_providers_query()
+	global $location_section_show; // Typically defined in uamswp_fad_location_query()
 	global $show_related_aoe_section; // Typically defined in uamswp_fad_ontology_related_query()
 	global $show_related_resource_section; // Typically defined in uamswp_fad_ontology_resources_query()
 	global $show_child_aoe_section; // Typically defined in uamswp_fad_ontology_descendants_query()
@@ -3555,6 +3575,7 @@ function uamswp_fad_section_providers() {
 		global $provider_section_intro; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for providers section intro text in a general placement)
 		global $provider_section_filter; // Query whether to add filter(s) // bool (default: true)
 		global $provider_section_filter_region; // Query whether to add region filter // bool (default: true)
+		global $provider_section_filter_title; // Query whether to add title filter // bool (default: true)
 		global $provider_section_collapse_list; // Query whether to collapse the list of providers in the providers section // bool (default: true)
 
 		// Defined in uamswp_fad_labels_provider()
@@ -3566,61 +3587,98 @@ function uamswp_fad_section_providers() {
 		global $provider_fpage_intro_general; // string
 
 		// Defined on the template or in a function such as uamswp_fad_ontology_providers_query()
-		global $show_providers_section; // bool
-		global $physicians_query; // bool
+		global $provider_section_show; // bool
+		global $physicians_query; // array
 		global $physicians; // array
 		global $provider_ids; // array
 
-	if ( $show_providers_section ) {
+	// Do something
+	if ( $provider_section_show ) {
 
 		// Check/define variables
-		$provider_section_show_header = isset($provider_section_show_header) ? $provider_section_show_header : true;
-		if ( !isset($provider_section_title) ) {
-			// Set the section title using the system settings for the section title in a general placement
-			if ( !isset($provider_fpage_title_general) ) {
-				uamswp_fad_provider_fpage_text_general();
-				global $provider_fpage_title_general;
+
+			$provider_section_show_header = isset($provider_section_show_header) ? $provider_section_show_header : true;
+			if ( !isset($provider_section_title) ) {
+				// Set the section title using the system settings for the section title in a general placement
+				if ( !isset($provider_fpage_title_general) ) {
+					uamswp_fad_provider_fpage_text_general();
+					global $provider_fpage_title_general;
+				}
+				$provider_section_title = $provider_fpage_title_general;
 			}
-			$provider_section_title = $provider_fpage_title_general;
-		}
-		if ( !isset($provider_section_intro) ) {
-			// Set the section title using the system settings for the section title in a general placement
-			if ( !isset($provider_fpage_intro_general) ) {
-				uamswp_fad_provider_fpage_text_general();
-				global $provider_fpage_intro_general;
+			if ( !isset($provider_section_intro) ) {
+				// Set the section title using the system settings for the section title in a general placement
+				if ( !isset($provider_fpage_intro_general) ) {
+					uamswp_fad_provider_fpage_text_general();
+					global $provider_fpage_intro_general;
+				}
+				$provider_section_intro = $provider_fpage_intro_general;
 			}
-			$provider_section_intro = $provider_fpage_intro_general;
-		}
-		$provider_section_filter = isset($provider_section_filter) ? $provider_section_filter : true;
-		$provider_section_filter_region = isset($provider_section_filter_region) ? $provider_section_filter_region : $provider_section_filter;
-		$provider_section_collapse_list = isset($provider_section_collapse_list) ? $provider_section_collapse_list : true;
+			$provider_section_filter = isset($provider_section_filter) ? $provider_section_filter : true;
+			if ( $provider_section_filter ) {
+				$provider_section_filter_region = isset($provider_section_filter_region) ? $provider_section_filter_region : true;
+				$provider_section_filter_title = isset($provider_section_filter_title) ? $provider_section_filter_title : true;	
+			} else {
+				$provider_section_filter_region = false;
+				$provider_section_filter_title = false;	
+			}
+			$provider_section_filter = ( $provider_section_filter && ( $provider_section_filter_region || $provider_section_filter_title ) ) ? $provider_section_filter : false; // Set as false if neither of the filter types is true
+			$provider_section_collapse_list = isset($provider_section_collapse_list) ? $provider_section_collapse_list : true;
 
 		// Filter details
 		if ( $provider_section_filter ) {
 
 			// Set the AJAX filter shortcode name
-			$provider_section_filter_ajax = 'uamswp_provider_title_ajax_filter';
 
-			// Filtering the list by region
+				if (
+					$provider_section_filter_region // Filter by region
+					&&
+					$provider_section_filter_title // Filter by title
+				) {
+
+					$provider_section_filter_ajax = 'uamswp_provider_ajax_filter';
+
+				} elseif (
+					$provider_section_filter_title // Filter by title
+				) {
+
+					$provider_section_filter_ajax = 'uamswp_provider_title_ajax_filter';
+
+				} elseif (
+					$provider_section_filter_region // Filter by region
+				) {
+
+					$provider_section_filter_ajax = '';
+
+				} else {
+					$provider_section_filter_ajax = '';
+				}
+
+				$provider_section_filter = $provider_section_filter_ajax ? $provider_section_filter : false; // If no AJAX filter shortcode name, then set disable filtering
+
+			// Region filter details
 			if ( $provider_section_filter_region ) {
-				// Set the AJAX filter shortcode name
-				$provider_section_filter_ajax = 'uamswp_provider_ajax_filter';
 	
 				// Get all available regions (all available, since no titles set on initial load)
 		
-					// Get the list of region IDs
-					$region_IDs = array();
+					// Get the list of region IDs from the providers
+					$provider_region_IDs = array();
 					while ( $physicians_query->have_posts() ) {
 						$physicians_query->the_post();
 						$id = get_the_ID();
-						$region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
+						$provider_region_return = get_field('physician_region', $id);
+						if ( is_array( $provider_region_IDs ) ) {
+							$provider_region_IDs = array_merge($provider_region_IDs, $provider_region_return);
+						} else {
+							$provider_region_IDs[] = $provider_region_return;
+						}
 					} // endwhile
-					$region_IDs = array_unique($region_IDs); // Remove duplicate values from an array
+					$provider_region_IDs = array_unique($provider_region_IDs); // Remove duplicate values from an array
 		
-					// Get the list of region slugs
-					$region_list = array();
-					foreach ( $region_IDs as $region_ID ) {
-						$region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
+					// Get the list of region slugs from the region IDs
+					$provider_region_list = array();
+					foreach ( $provider_region_IDs as $provider_region_ID ) {
+						$provider_region_list[] = get_term_by( 'ID', $provider_region_ID, 'region' )->slug;
 					}
 		
 				// If region cookie is set, run a modified query for providers
@@ -3644,13 +3702,13 @@ function uamswp_fad_section_providers() {
 		
 					// Construct the query arguments
 					$args = array(
-						"post_type" => "provider",
-						"post_status" => "publish",
-						"posts_per_page" => -1,
-						"orderby" => "title",
-						"order" => "ASC",
-						"fields" => "ids",
-						"post__in" => $physicians,
+						'post_type' => 'provider',
+						'post_status' => 'publish',
+						'posts_per_page' => -1,
+						'orderby' => 'title',
+						'order' => 'ASC',
+						'fields' => 'ids',
+						'post__in' => $physicians,
 						'tax_query' => $tax_query
 					);
 		
@@ -3659,11 +3717,14 @@ function uamswp_fad_section_providers() {
 
 					// Get a new list of provider IDs
 					$provider_ids = $physicians_query->posts;
-				}
+
+				} // endif isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])
+
 			} // endif ( $provider_section_filter_region )
 
 			// Count the number of providers in the query
 			$provider_count = count($physicians_query->posts);
+
 		} // endif ( $provider_section_filter )
 
 		?>
@@ -3681,26 +3742,24 @@ function uamswp_fad_section_providers() {
 						<div class="card-list-container">
 							<div class="card-list card-list-doctors">
 								<?php
-									if ( $provider_section_filter ) {
-										if ( $provider_count > 0 ) {
-											$title_list = array();
-											while ($physicians_query->have_posts()) {
-												$physicians_query->the_post();
-												$id = get_the_ID();
-												include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
-												$title_list[] = get_field('physician_title', $id);
-											} // endwhile
-											echo '<data id="provider_ids" data-postids="' . implode(',', $physicians_query->posts) . ',"' . ( $provider_section_filter_region ? ' data-regions="' . implode(',', $region_list) . ',"' : '' ) . ' data-titles="' . implode(',', array_unique($title_list)) . ',"></data>';
-										} else {
-											echo '<span class="no-results">Sorry, there are no ' . strtolower($provider_plural_name) . ' matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
-										} // endif ( $provider_count > 0 )
-									} else {
-										while ($physicians_query->have_posts()) {
+									if ( $provider_count > 0 ) {
+										$title_list = $provider_section_filter_title ? array() : '';
+										while ( $physicians_query->have_posts() ) {
 											$physicians_query->the_post();
 											$id = get_the_ID();
 											include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+											if ( $provider_section_filter_title ) {
+												$title_list[] = get_field('physician_title', $id);
+											}
 										} // endwhile
-									} // endif ( $provider_section_filter )
+										if ( $provider_section_filter ) {
+											echo '<data id="provider_ids" data-postids="' . implode(',', $physicians_query->posts) . ',"' . ( $provider_section_filter_region ? ' data-regions="' . implode(',', $provider_region_list) . ',"' : '' ) . ( $provider_section_filter_title ? ' data-titles="' . implode(',', array_unique($title_list)) . ',"' : '' ) . '></data>';
+										}
+									} else {
+										if ( $provider_section_filter ) {
+											echo '<span class="no-results">Sorry, there are no ' . strtolower($provider_plural_name) . ' matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
+										}
+									} // endif ( $provider_count > 0 )
 									wp_reset_postdata();
 								?>
 							</div>
@@ -3722,5 +3781,257 @@ function uamswp_fad_section_providers() {
 			<?php } ?>
 		</section>
 	<?php
-	} // endif ( $show_providers_section )
+	} // endif ( $provider_section_show )
 }
+
+// Construct locations section for display on a page
+function uamswp_fad_section_locations() {
+	// Bring in variables from outside of the function
+
+		// Optional variables defined on the template
+		global $location_section_show_header; // Query whether to display the section header // bool (default: true)
+		global $location_section_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for locations section title in a general placement)
+		global $location_section_intro; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for locations section intro text in a general placement)
+		global $location_section_filter; // Query whether to add filter(s) // bool (default: true)
+		global $location_section_filter_region; // Query whether to add region filter // bool (default: true)
+		global $location_section_filter_title; // Query whether to add title filter // bool (default: false)
+		global $location_section_collapse_list; // Query whether to collapse the list of locations in the locations section // bool (default: false)
+		global $location_section_schema_query; // Query for whether to add locations to schema // bool (default: false)
+
+		// Defined in uamswp_fad_labels_location()
+		global $location_single_name; // string
+		global $location_single_name_attr; // string
+		global $location_plural_name; // string
+		global $location_plural_name_attr; // string
+
+		// Defined in uamswp_fad_provider_fpage_text_general()
+		global $location_fpage_title_general; // string
+		global $location_fpage_intro_general; // string
+
+		// Defined on the template or in a function such as uamswp_fad_location_query()
+		global $location_section_show; // bool
+		global $location_query; // array
+		global $locations; // array
+		global $location_ids; // array
+
+	// Do something
+	if ( $location_section_show ) {
+
+		// Check/define variables
+
+			$location_section_show_header = isset($location_section_show_header) ? $location_section_show_header : true;
+			if ( !isset($location_section_title) ) {
+				// Set the section title using the system settings for the section title in a general placement
+				if ( !isset($location_fpage_title_general) ) {
+					uamswp_fad_location_fpage_text_general();
+					global $location_fpage_title_general;
+				}
+				$location_section_title = $location_fpage_title_general;
+			}
+			if ( !isset($location_section_intro) ) {
+				// Set the section title using the system settings for the section title in a general placement
+				if ( !isset($location_fpage_intro_general) ) {
+					uamswp_fad_location_fpage_text_general();
+					global $location_fpage_intro_general;
+				}
+				$location_section_intro = $location_fpage_intro_general;
+			}
+			$location_section_filter = isset($location_section_filter) ? $location_section_filter : true;
+			if ( $location_section_filter ) {
+				$location_section_filter_region = isset($location_section_filter_region) ? $location_section_filter_region : true;
+				$location_section_filter_title = isset($location_section_filter_title) ? $location_section_filter_title : false;	
+			} else {
+				$location_section_filter_region = false;
+				$location_section_filter_title = false;	
+			}
+			$location_section_filter = ( $location_section_filter && ( $location_section_filter_region || $location_section_filter_title ) ) ? $location_section_filter : false; // Set as false if neither of the filter types is true
+			$location_section_collapse_list = isset($location_section_collapse_list) ? $location_section_collapse_list : false;
+			$location_section_schema_query = isset($location_section_schema_query) ? $location_section_schema_query : false;
+
+		// Filter details
+		if ( $location_section_filter ) {
+
+			// Set the AJAX filter shortcode name
+
+				if (
+					$location_section_filter_region // Filter by region
+					&&
+					$location_section_filter_title // Filter by title
+				) {
+	
+					$location_section_filter_ajax = '';
+					$location_section_filter = false;
+	
+				} elseif (
+					$location_section_filter_region // Filter by region
+					&&
+					!$location_section_filter_title // Do not filter by title
+				) {
+	
+					$location_section_filter_ajax = 'uamswp_location_ajax_filter';
+	
+				} else {
+					$location_section_filter_ajax = '';
+					$location_section_filter = false;
+				}
+
+				$location_section_filter = $location_section_filter_ajax ? $location_section_filter : false; // If no AJAX filter shortcode name, then set disable filtering
+
+			// Region filter details
+			if ( $location_section_filter_region ) {
+
+				// Get all available regions (all available, since no titles set on initial load)
+
+					// Get the list of region IDs from the locations
+					$location_region_IDs = array();
+					while ( $location_query->have_posts() ) {
+						$location_query->the_post();
+						$id = get_the_ID();
+						$location_region_return = get_field('location_region', $id);
+						if ( is_array( $location_region_return ) ) {
+							$location_region_IDs = array_merge($location_region_IDs, $location_region_return);
+						} else {
+							$location_region_IDs[] = $location_region_return;
+						}
+					} // endwhile
+					$location_region_IDs = array_unique($location_region_IDs); // Remove duplicate values from an array
+	
+					// Get the list of region slugs from the region IDs
+					$location_region_list = array();
+					foreach ( $location_region_IDs as $location_region_ID ) {
+						$location_region_list[] = get_term_by( 'ID', $location_region_ID, 'region' )->slug;
+					}
+	
+				// If region cookie is set, run a modified query for locations
+				if (
+					isset($_COOKIE['wp_filter_region'])
+					||
+					isset($_GET['_filter_region'])
+				) {
+
+					$location_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
+
+					// Construct the tax_query array
+					$tax_query = array();
+					if ( !empty($location_region) ) {
+						$tax_query[] = array(
+							'taxonomy' => 'region',
+							'field' => 'slug',
+							'terms' => $location_region
+						);
+					}
+	
+					// Construct the query arguments
+					$args = array(
+						'post_type' => 'location',
+						'post_status' => 'publish',
+						'posts_per_page' => -1,
+						'orderby' => 'title',
+						'order' => 'ASC',
+						'fields' => 'ids',
+						'no_found_rows' => true, // counts posts, remove if pagination required
+						'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
+						'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
+						'post__in' => $locations,
+						'tax_query' => $tax_query
+					);
+	
+					// The Query
+					$location_query = New WP_Query( $args );
+
+					// Get a new list of location IDs
+					$location_ids = $location_query->posts;
+
+				} // endif isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])
+
+			} // endif ( $location_section_filter_region )
+			
+			// Count the number of locations in the query
+			$location_count = count($location_query->posts);
+
+		} // endif ( $location_section_filter )
+
+		?>
+		<section class="uams-module location-list bg-auto<?php echo $location_section_collapse_list ? ' collapse-list' : ''; ?>" id="locations">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<h2 class="module-title<?php echo !$location_section_show_header ? ' sr-only' : ''; ?>"><span class="title"><?php echo $location_section_title; ?></span></h2>
+						<?php if ( $location_section_intro ) { ?>
+							<p class="note<?php echo !$location_section_show_header ? ' sr-only' : ''; ?>"><?php echo $location_section_intro; ?></p>
+						<?php } // endif ( $location_section_intro )
+						if ( $location_section_filter ) {
+							echo do_shortcode( '[' . $location_section_filter_ajax . ' locations="'. implode(",", $location_ids) .'"]' );
+						} // endif ( $location_section_filter ) ?>
+						<div class="card-list-container location-card-list-container">
+							<div class="card-list card-list-locations">
+								<?php
+									if ( $location_section_schema_query ) {
+										$l = 1;
+										$location_schema = ',
+	"address": [';
+									}
+
+									if ( $location_count > 0 ) {
+										$title_list = $location_section_filter_title ? array() : '';
+										while ( $location_query->have_posts() ) {
+											$location_query->the_post();
+											$id = get_the_ID();
+											include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+											if ( $location_section_filter_title ) {
+												$title_list[] = get_field('location_title', $id);
+											}
+											// Schema data
+											if ( $location_section_schema_query ) {
+												if ($l > 1){
+													$location_schema .= ',';
+												}
+												$location_schema .= '
+	{
+		"@type": "PostalAddress",
+		"streetAddress": "'. $location_address_1 . ' '. $location_address_2_schema .'",
+		"addressLocality": "'. $location_city .'",
+		"addressRegion": "'. $location_state .'",
+		"postalCode": "'. $location_zip .'",
+		"telephone": "'. format_phone_dash( $location_phone ) .'"
+	}
+	';
+												$l++;
+											}
+										} // endwhile
+										if ( $location_section_filter ) {
+											echo '<data id="location_ids" data-postids="' . implode(',', $location_query->posts) . ',"' . ( $location_section_filter_region ? ' data-regions="' . implode(',', $location_region_list) . ',"' : '' ) . ( $location_section_filter_title ? ' data-titles="' . implode(',', array_unique($title_list)) . ',"' : '' ) . '></data>';
+										}
+									} else {
+										if ( $location_section_filter ) {
+											echo '<span class="no-results">Sorry, there are no ' . strtolower($location_plural_name) . ' matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
+										}
+									} // endif ( $location_count > 0 )
+									wp_reset_postdata();
+
+									if ( $location_section_schema_query ) {
+										$location_schema .= ']
+	';
+									}
+								?>
+							</div>
+							<?php
+							if ( $location_section_collapse_list ) { ?>
+								<div class="ajax-filter-load-more">
+									<button class="btn btn-lg btn-primary" aria-label="Load all <?php echo strtolower($location_plural_name_attr); ?>">Load All</button>
+								</div>
+							<?php } // endif ( $location_section_collapse_list ) ?>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php if ( $location_section_filter_region && isset($_GET['_filter_region']) ) { ?>
+				<script type="text/javascript">
+					// Set cookie to expire at end of session
+					document.cookie = "wp_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; path=/; domain="+window.location.hostname;
+				</script>
+			<?php } ?>
+		</section>
+	<?php 
+	} // endif ( $location_section_show )
+} // end function uamswp_fad_section_locations()

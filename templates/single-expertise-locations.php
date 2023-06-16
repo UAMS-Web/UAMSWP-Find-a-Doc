@@ -66,7 +66,7 @@ uamswp_fad_ontology_site_values();
 	uamswp_fad_ontology_providers_query();
 
 	// Query for whether associated locations content section should be displayed on ontology pages/subsections
-	uamswp_fad_ontology_locations_query();
+	uamswp_fad_location_query();
 
 	// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
 	uamswp_fad_ontology_descendants_query();
@@ -165,91 +165,11 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 
 	// Display ontology page content
-	add_action( 'genesis_entry_content', 'uamswp_expertise_locations', 22 );
-	function uamswp_expertise_locations() {
-		// Bring in variables from outside of the function
-		global $show_locations_section; // Defined in uamswp_fad_ontology_locations_query()
-		global $location_query; // Defined in uamswp_fad_ontology_locations_query()
-		global $locations; // Defined in uamswp_fad_ontology_locations_query()
-		global $location_single_name; // Defined in uamswp_fad_labels_location()
-		global $location_single_name_attr; // Defined in uamswp_fad_labels_location()
-		global $location_plural_name; // Defined in uamswp_fad_labels_location()
-
-		// Do something
-		if ( $show_locations_section ) { 
-			$location_ids = $location_query->posts;
-
-			$location_region_IDs = array();
-			foreach($location_ids as $location_id) {
-				$location_region_IDs[] = get_field('location_region', $location_id);
-			}
-			// endwhile;
-			$location_region_IDs = array_unique($location_region_IDs);
-			$location_region_list = array();
-			foreach ($location_region_IDs as $location_region_ID){
-				$location_region_list[] = get_term_by( 'ID', $location_region_ID, 'region' )->slug;
-			}
-
-			// if cookie is set, run modified physician query
-			if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
-
-				$location_region = '';
-				if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
-					$location_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
-				}
-
-				$tax_query = array();
-				if(!empty($location_region)) {
-					$tax_query[] = array(
-						'taxonomy' => 'region',
-						'field' => 'slug',
-						'terms' => $location_region
-					);
-				}
-				$args = array(
-					'post_type' => "location",
-					'post_status' => 'publish',
-					'order' => 'ASC',
-					'orderby' => 'title',
-					'posts_per_page' => -1,
-					'fields' => 'ids',
-					'no_found_rows' => true, // counts posts, remove if pagination required
-					'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
-					'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
-					'post__in'	=> $locations,
-					'tax_query' => $tax_query
-				);
-				$location_query = New WP_Query( $args );
-			}
-
-			?>
-			<section class="uams-module location-list bg-auto" id="locations">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-12">
-							<h2 class="module-title"><span class="title"><?php echo $location_plural_name; ?></span></h2>
-							<?php echo do_shortcode( '[uamswp_location_ajax_filter locations="'. implode(",", $location_ids) .'"]' ); ?>
-							<div class="card-list-container location-card-list-container">
-								<div class="card-list card-list-locations">
-								<?php
-								if ($location_query->have_posts()){
-									while ( $location_query->have_posts() ) : $location_query->the_post();
-										$id = get_the_ID();
-										include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
-									endwhile;
-									echo '<data id="location_ids" data-postids="'. implode(',', $location_query->posts) .'," data-regions="'. implode(',', $location_region_list) .',"></data>';
-								} else {
-									echo '<span class="no-results">Sorry, there are no ' . strtolower($location_plural_name) . ' matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
-								}
-								wp_reset_postdata();?>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-		<?php 
-		} // endif
-	}
+	$location_section_show_header = false; // Query whether to display the section header
+	$location_section_title = 'List of ' . $location_plural_name; // Text to use for the section title
+	$location_section_intro = ''; // Text to use for the section intro text
+	$location_section_collapse_list = false; // Query whether to collapse the list of locations in the providers section
+	add_action( 'genesis_entry_content', 'uamswp_fad_section_locations', 22 );
 
 	// Display appointment information
 	add_action( 'genesis_entry_content', 'uamswp_fad_ontology_appointment', 26 );

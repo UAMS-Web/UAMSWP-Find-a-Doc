@@ -35,6 +35,9 @@
 // Get system settings for provider archive page text
 // uamswp_fad_archive_provider();
 
+// Get the page ID
+$page_id = get_the_ID();
+
 // Construct name values for the provider
 
 	// Construct a list of the provider's degrees (e.g., "M.D., Ph.D.")
@@ -159,19 +162,9 @@ if ( !empty($phys_title_indef_article_exceptions) ) {
 // Check if the provider sees patients via appointments
 $eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$post->ID);
 
-// Get the provider's location values
-$locations = get_field('physician_locations',$post->ID);
-
-	// Check for valid (published) locations
-	$location_valid = false;
-	if ( !empty($locations) ) {
-		foreach( $locations as $location ) {
-			if ( get_post_status ( $location ) == 'publish' ) {
-				$location_valid = true;
-				$break;
-			}
-		}
-	}
+// Query for whether associated locations content section should be displayed on a page
+$locations = get_field('physician_locations',$post->ID); // Get the provider's location values
+uamswp_fad_location_query();
 
 	// Count the number of valid locations
 	$location_count = 0;
@@ -553,14 +546,6 @@ while ( have_posts() ) : the_post();
 			$show_aoe_section = false;
 		}
 
-		// Check if Locations section should be displayed
-		if ( $locations && $location_valid ) {
-			$show_locations_section = true;
-			$jump_link_count++;
-		} else {
-			$show_locations_section = false;
-		}
-
 		// Check if Ratings section should be displayed
 		if ( $rating_valid ) {
 			$show_ratings_section = true;
@@ -881,7 +866,7 @@ while ( have_posts() ) : the_post();
 								<a class="nav-link" href="#expertise"><?php echo $expertise_plural_name; ?></a>
 							</li>
 						<?php } ?>
-						<?php if ($show_locations_section) { ?>
+						<?php if ($location_section_show) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#locations"><?php echo $location_plural_name; ?></a>
 							</li>
@@ -1244,52 +1229,15 @@ while ( have_posts() ) : the_post();
 			</section>
 		<?php } // endif ?>
 		<?php 
-		if( $show_locations_section && !empty($locations) ): ?>
-		<section class="uams-module location-list bg-auto" id="locations">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title"><span class="title"><?php echo $location_plural_name; ?> Where <?php echo $short_name; ?> Practices</span></h2>
-						<div class="card-list-container location-card-list-container">
-							<div class="card-list">
-							<?php $l = 1;
-								$location_schema = ',
-	"address": [';
-							?>
-							<?php foreach( $locations as $location ): 
-								if ( get_post_status ( $location ) == 'publish' ) { 
 
-									$id = $location;
-									include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
-										// Schema data
-										if ($l > 1){
-											$location_schema .= ',';
-										}
-										$location_schema .= '
-										{
-										"@type": "PostalAddress",
-										"streetAddress": "'. $location_address_1 . ' '. $location_address_2_schema .'",
-										"addressLocality": "'. $location_city .'",
-										"addressRegion": "'. $location_state .'",
-										"postalCode": "'. $location_zip .'",
-										"telephone": "'. format_phone_dash( $location_phone ) .'"
-										}
-										';
-									?>
+			// Begin Location Section
+			$location_section_title = $location_plural_name . ' Where ' . $short_name . ' Practices'; // Text to use for the section title
+			$location_section_intro = ''; // Text to use for the section intro text
+			$location_section_schema_query = true; // Query for whether to add locations to schema
+			uamswp_fad_section_locations();
+			// End Location Section
 
-									<?php $l++; ?>
-								<?php } ?>
-							<?php endforeach;
-								$location_schema .= ']
-								';
-							?>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<?php endif; ?> 
+		?>
 		<?php if ( $show_ratings_section ) : ?>
 		<section class="uams-module ratings-and-reviews bg-auto" id="ratings">
 			<div class="container-fluid">
@@ -1459,7 +1407,7 @@ while ( have_posts() ) : the_post();
 				|| $show_conditions_section
 				|| $show_treatments_section
 				|| $show_aoe_section
-				|| $show_locations_section
+				|| $location_section_show
 				|| $show_ratings_section
 			)
 		) {
