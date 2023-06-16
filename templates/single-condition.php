@@ -578,8 +578,8 @@ $jump_link_count = 0;
 		// End Treatments and Procedures Section
 
 		// Begin Providers Section
-		$provider_section_title = $provider_plural_name . ' Diagnosing or Treating ' . $page_title;
-		$provider_section_intro = 'Note that every ' . strtolower($provider_single_name) . ' listed below may not perform or prescribe all ' . strtolower($treatments_plural_name) . ' related to ' . $page_title . '. Review each ' . strtolower($provider_single_name) . ' for&nbsp;availability.';
+		$provider_section_title = $provider_plural_name . ' Diagnosing or Treating ' . $page_title; // Text to use for the section title
+		$provider_section_intro = 'Note that every ' . strtolower($provider_single_name) . ' listed below may not perform or prescribe all ' . strtolower($treatments_plural_name) . ' related to ' . $page_title . '. Review each ' . strtolower($provider_single_name) . ' for&nbsp;availability.'; // Text to use for the section intro text
 		uamswp_fad_section_providers();
 		// End Providers Section
 

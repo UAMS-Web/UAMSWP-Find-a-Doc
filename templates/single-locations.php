@@ -1649,8 +1649,8 @@ while ( have_posts() ) : the_post(); ?>
 	// End Portal Section
 
 	// Begin Providers Section
-	$provider_section_title = $provider_fpage_title_location;
-	$provider_section_intro = $provider_fpage_intro_location;
+	$provider_section_title = $provider_fpage_title_location; // Text to use for the section title
+	$provider_section_intro = $provider_fpage_intro_location; // Text to use for the section intro text
 	$provider_section_filter_region = false; // Query whether to add region filter
 	uamswp_fad_section_providers();
 	// End Providers Section
