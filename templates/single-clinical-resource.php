@@ -134,8 +134,9 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 	add_action( 'genesis_after_entry', 'uamswp_resource_treatments_cpt', 14 );
 
 	// Construct providers section
-	$provider_collapse_list = true;
-	add_action( 'genesis_after_entry', 'uamswp_resource_physicians', 16 );
+	$provider_section_title = $provider_fpage_title_clinical_resource;
+	$provider_section_intro = $provider_fpage_intro_clinical_resource;
+	add_action( 'genesis_after_entry', 'uamswp_fad_section_providers', 16 );
 
 	// Construct locations section
 	add_action( 'genesis_after_entry', 'uamswp_resource_locations', 18 );
@@ -205,12 +206,14 @@ if($physicians) {
 		"posts_per_page" => $postsPerPage,
 		"orderby" => "title",
 		"order" => "ASC",
+		"fields" => "ids",
 		"post__in" => $physicians
 	);
 	$physicians_query = New WP_Query( $args );
 	if($physicians_query && $physicians_query->have_posts()) {
 		$show_providers_section = true;
 		$jump_link_count++;
+		$provider_ids = $physicians_query->posts;
 	} else {
 		$show_providers_section = false;
 	}
@@ -370,50 +373,6 @@ function uamswp_resource_document() {
 		<?php endwhile;
 		echo '</ul>';
 	endif;
-}
-function uamswp_resource_physicians() {
-	// Bring in variables from outside of the function
-	global $provider_fpage_title_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
-	global $provider_fpage_intro_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
-	global $provider_plural_name; // Defined in uamswp_fad_labels_location()
-	global $provider_plural_name_attr; // Defined in uamswp_fad_labels_location()
-	global $show_providers_section; // Defined on the template
-	global $postsCountClass; // Defined on the template
-	global $physicians_query; // Defined on the template
-	global $postsPerPage; // Defined on the template
-	global $physicians; // Defined on the template
-	global $provider_collapse_list; // Defined on the template
-
-	if($show_providers_section) { 
-		?>
-		<section class="uams-module bg-auto<?php echo $provider_collapse_list ? ' collapse-list' : ''; ?>" id="providers">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title"><span class="title"><?php echo $provider_fpage_title_clinical_resource; ?></span></h2>
-						<?php echo $provider_fpage_intro_clinical_resource ? '<p class="note">' . $provider_fpage_intro_clinical_resource . '</p>' : ''; ?>
-						<div class="card-list-container">
-							<div class="card-list card-list-doctors">
-								<?php 
-									while ($physicians_query->have_posts()) : $physicians_query->the_post();
-										$id = get_the_ID();
-										include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
-									endwhile;
-									wp_reset_postdata();
-								?>
-							</div>
-						</div>
-						<?php
-						if ( $provider_collapse_list ) { ?>
-							<div class="ajax-filter-load-more">
-								<button class="btn btn-lg btn-primary" aria-label="Load all <?php echo strtolower($provider_plural_name_attr); ?>">Load All</button>
-							</div>
-						<?php } // endif ( $provider_collapse_list ) ?>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php }
 }
 function uamswp_resource_video() {
 	// Bring in variables from outside of the function

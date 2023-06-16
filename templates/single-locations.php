@@ -1649,48 +1649,10 @@ while ( have_posts() ) : the_post(); ?>
 	// End Portal Section
 
 	// Begin Providers Section
-	if( $show_providers_section ) { 
-
-		$provider_count = count($physicians_query->posts);
-
-		// Query for whether to collapse the provider list and add a button to load all
-		$provider_collapse_list = true;
-		?>
-		<section class="uams-module bg-auto<?php echo $provider_collapse_list ? ' collapse-list' : ''; ?>" id="providers">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title"><span class="title"><?php echo $provider_plural_name; ?> at <?php echo $page_title_phrase; ?></span></h2>
-						<?php echo do_shortcode( '[uamswp_provider_title_ajax_filter providers="'. implode(",", $provider_ids) .'"]' ); ?>
-						<div class="card-list-container">
-							<div class="card-list card-list-doctors">
-								<?php 
-									if($provider_count > 0){
-										$title_list = array();
-										while ($physicians_query->have_posts()) : $physicians_query->the_post();
-											$id = get_the_ID();
-											include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
-											$title_list[] = get_field('physician_title', $id);
-										endwhile;
-										echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
-									} else {
-										echo '<span class="no-results">Sorry, there are no ' . strtolower($provider_plural_name) . ' matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
-									}
-									wp_reset_postdata();
-								?>
-							</div>
-						</div>
-						<?php
-						if ( $provider_collapse_list ) { ?>
-							<div class="ajax-filter-load-more">
-								<button class="btn btn-lg btn-primary" aria-label="Load all <?php echo strtolower($provider_plural_name_attr); ?>">Load All</button>
-							</div>
-						<?php } // endif ( $provider_collapse_list ) ?>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php } // endif
+	$provider_section_title = $provider_fpage_title_location;
+	$provider_section_intro = $provider_fpage_intro_location;
+	$provider_section_filter_region = false; // Query whether to add region filter
+	uamswp_fad_section_providers();
 	// End Providers Section
 
 	// Begin Conditions Section

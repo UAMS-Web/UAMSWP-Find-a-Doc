@@ -578,96 +578,9 @@ $jump_link_count = 0;
 		// End Treatments and Procedures Section
 
 		// Begin Providers Section
-		if( $show_providers_section ) { 
-
-			// Get available regions - All available, since no titles set on initial load
-			$region_IDs = array();
-			while ($physicians_query->have_posts()) : $physicians_query->the_post();
-				$id = get_the_ID();
-				$region_IDs = array_merge($region_IDs, get_field('physician_region', $id));
-			endwhile;
-			$region_IDs = array_unique($region_IDs);
-			$region_list = array();
-			foreach ($region_IDs as $region_ID){
-				$region_list[] = get_term_by( 'ID', $region_ID, 'region' )->slug;
-			}
-
-			// if cookie is set, run modified physician query
-			if ( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
-
-				$provider_region = '';
-				if( isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region']) ) {
-					$provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
-				}
-
-				$tax_query = array();
-				if(!empty($provider_region)) {
-					$tax_query[] = array(
-						'taxonomy' => 'region',
-						'field' => 'slug',
-						'terms' => $provider_region
-					);
-				}
-				$args = array(
-					"post_type" => "provider",
-					"post_status" => "publish",
-					"posts_per_page" => -1,
-					"orderby" => "title",
-					"order" => "ASC",
-					"fields" => "ids",
-					"post__in" => $physicians,
-					'tax_query' => $tax_query
-				);
-				$physicians_query = New WP_Query( $args );
-			}
-
-			$provider_count = count($physicians_query->posts);
-
-			// Query for whether to collapse the provider list and add a button to load all
-			$provider_collapse_list = true;
-			?>
-			<section class="uams-module bg-auto<?php echo $provider_collapse_list ? ' collapse-list' : ''; ?>" id="providers">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-12">
-							<h2 class="module-title"><span class="title"><?php echo $provider_plural_name; ?> Diagnosing or Treating <?php echo $page_title; ?></span></h2>
-							<p class="note">Note that every <?php echo strtolower($provider_single_name); ?> listed below may not perform or prescribe all <?php echo strtolower($treatments_plural_name); ?> related to <?php echo $page_title; ?>. Review each <?php echo strtolower($provider_single_name); ?> for availability.</p>
-							<?php echo do_shortcode( '[uamswp_provider_ajax_filter providers="'. implode(",", $provider_ids) .'"]' ); ?>
-							<div class="card-list-container">
-								<div class="card-list card-list-doctors">
-									<?php 
-										if($provider_count > 0){
-											$title_list = array();
-											while ($physicians_query->have_posts()) : $physicians_query->the_post();
-												$id = get_the_ID();
-												include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
-												$title_list[] = get_field('physician_title', $id);
-											endwhile;
-											echo '<data id="provider_ids" data-postids="'. implode(',', $physicians_query->posts) .'," data-regions="'. implode(',', $region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
-										} else {
-											echo '<span class="no-results">Sorry, there are no ' . strtolower($provider_plural_name) . ' matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
-										}
-										wp_reset_postdata();
-									?>
-								</div>
-							</div>
-							<?php
-							if ( $provider_collapse_list ) { ?>
-								<div class="ajax-filter-load-more">
-									<button class="btn btn-lg btn-primary" aria-label="Load all <?php echo strtolower($provider_plural_name_attr); ?>">Load All</button>
-								</div>
-							<?php } // endif ( $provider_collapse_list ) ?>
-						</div>
-					</div>
-				</div>
-			<?php if ( isset($_GET['_filter_region']) ) { ?>
-				<script type="text/javascript">
-					// Set cookie to expire at end of session
-					document.cookie = "wp_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; path=/; domain="+window.location.hostname;
-				</script>
-			<?php } ?>
-		</section>
-		<?php } // $physicians_query loop
+		$provider_section_title = $provider_plural_name . ' Diagnosing or Treating ' . $page_title;
+		$provider_section_intro = 'Note that every ' . strtolower($provider_single_name) . ' listed below may not perform or prescribe all ' . strtolower($treatments_plural_name) . ' related to ' . $page_title . '. Review each ' . strtolower($provider_single_name) . ' for&nbsp;availability.';
+		uamswp_fad_section_providers();
 		// End Providers Section
 
 		// Begin Location Section
