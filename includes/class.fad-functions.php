@@ -3550,8 +3550,9 @@ function uamswp_fad_section_providers() {
 	// Bring in variables from outside of the function
 
 		// Optional variables defined on the template
-		global $provider_section_title; // string (default: Find-a-Doc Settings value for providers section title in a general placement)
-		global $provider_section_intro; // string (default: Find-a-Doc Settings value for providers section intro text in a general placement)
+		global $provider_section_show_header; // Query whether to display the section header // bool (default: true)
+		global $provider_section_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for providers section title in a general placement)
+		global $provider_section_intro; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for providers section intro text in a general placement)
 		global $provider_section_filter; // Query whether to add filter(s) // bool (default: true)
 		global $provider_section_filter_region; // Query whether to add region filter // bool (default: true)
 		global $provider_section_collapse_list; // Query whether to collapse the list of providers in the providers section // bool (default: true)
@@ -3567,12 +3568,13 @@ function uamswp_fad_section_providers() {
 		// Defined on the template or in a function such as uamswp_fad_ontology_providers_query()
 		global $show_providers_section; // bool
 		global $physicians_query; // bool
-		global $physicians;
-		global $provider_ids;
+		global $physicians; // array
+		global $provider_ids; // array
 
 	if ( $show_providers_section ) {
 
 		// Check/define variables
+		$provider_section_show_header = isset($provider_section_show_header) ? $provider_section_show_header : true;
 		if ( !isset($provider_section_title) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($provider_fpage_title_general) ) {
@@ -3669,9 +3671,9 @@ function uamswp_fad_section_providers() {
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title"><span class="title"><?php echo $provider_section_title; ?></span></h2>
+						<h2 class="module-title<?php echo !$provider_section_show_header ? ' sr-only' : ''; ?>"><span class="title"><?php echo $provider_section_title; ?></span></h2>
 						<?php if ( $provider_section_intro ) { ?>
-							<p class="note"><?php echo $provider_section_intro; ?></p>
+							<p class="note<?php echo !$provider_section_show_header ? ' sr-only' : ''; ?>"><?php echo $provider_section_intro; ?></p>
 						<?php } // endif ( $provider_section_intro )
 						if ( $provider_section_filter ) {
 							echo do_shortcode( '[' . $provider_section_filter_ajax . ' providers="'. implode(",", $provider_ids) .'"]' );
