@@ -167,8 +167,8 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	// Display ontology page content
 	$provider_section_title = 'List of ' . $provider_plural_name;
 	$provider_section_intro = '';
-	$provider_section_filter = false; // Query whether to add filter(s)
 	$provider_section_show_header = false; // Query whether to display the section header
+	$provider_section_filter = true; // Query whether to add filter(s)
 	$provider_section_collapse_list = false; // Query whether to collapse the list of providers in the providers section
 	add_action( 'genesis_entry_content', 'uamswp_fad_section_providers' );
 
