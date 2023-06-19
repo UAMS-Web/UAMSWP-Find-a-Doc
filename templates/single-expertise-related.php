@@ -83,7 +83,7 @@ uamswp_fad_ontology_site_values();
 	uamswp_fad_condition_query();
 
 	// Query for whether associated treatments content section should be displayed on ontology pages/subsections
-	uamswp_fad_ontology_treatments_query();
+	uamswp_fad_treatment_query();
 
 // Override theme's method of defining the meta page title
 $meta_title_base_addition = $fpage_name_attr; // Word or phrase to use to form base meta title

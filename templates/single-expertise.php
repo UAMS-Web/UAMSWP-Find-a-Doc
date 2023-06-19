@@ -80,7 +80,7 @@ uamswp_fad_ontology_site_values();
 	uamswp_fad_condition_query();
 
 	// Query for whether associated treatments content section should be displayed on ontology pages/subsections
-	uamswp_fad_ontology_treatments_query();
+	uamswp_fad_treatment_query();
 
 // Override theme's method of defining the meta page title
 $meta_title_enhanced_addition = $expertise_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
@@ -316,8 +316,8 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		// Bring in variables from outside of the function
 		global $page_title; // Defined on the template
 		global $page_title_attr; // Defined on the template
-		global $treatments_section_show; // Defined in uamswp_fad_ontology_treatments_query()
-		global $treatments_cpt_query; // Defined in uamswp_fad_ontology_treatments_query()
+		global $treatments_section_show; // Defined in uamswp_fad_treatment_query()
+		global $treatments_cpt_query; // Defined in uamswp_fad_treatment_query()
 		global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
 		global $treatments_plural_name; // Defined in uamswp_fad_labels_treatments()
 		global $treatment_heading; // Defined on the template

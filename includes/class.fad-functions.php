@@ -1596,7 +1596,7 @@ function uamswp_fad_post_title() {
 	}
 
 	// Query for whether associated treatments content section should be displayed on ontology pages/subsections
-	function uamswp_fad_ontology_treatments_query() {
+	function uamswp_fad_treatment_query() {
 		// Bring in variables from outside of the function
 		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
 		global $ontology_type; // Typically defined on the template
