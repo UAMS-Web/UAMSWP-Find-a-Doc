@@ -245,9 +245,9 @@ if ($physicians && !empty($physicians)) { $condition_field_classes .= ' has-prov
 					'posts_per_page' => $postsPerPage,
 					'post__in'	=> $physicians
 				));
-				$physicians_query = new WP_Query( $args );
+				$provider_query = new WP_Query( $args );
 
-				if( $physicians && $physicians_query->have_posts() ) {
+				if( $physicians && $provider_query->have_posts() ) {
 				?>
 					<section class="uams-module bg-auto" id="doctors">
 						<div class="container-fluid">
@@ -258,7 +258,7 @@ if ($physicians && !empty($physicians)) { $condition_field_classes .= ' has-prov
 									<div class="card-list-container">
 										<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
 											<?php
-												while ($physicians_query->have_posts()) : $physicians_query->the_post();
+												while ($provider_query->have_posts()) : $provider_query->the_post();
 													$id = get_the_ID();
 													include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
 												endwhile;
@@ -276,7 +276,7 @@ if ($physicians && !empty($physicians)) { $condition_field_classes .= ' has-prov
 						</div>
 					</section>
 				<?php
-				} // $physicians_query loop
+				} // $provider_query loop
 			}
 
 			// Location Section

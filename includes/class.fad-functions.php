@@ -1389,7 +1389,7 @@ function uamswp_fad_post_title() {
 
 		// Make variables available outside of the function
 		global $physicians;
-		global $physicians_query;
+		global $provider_query;
 		global $provider_section_show;
 		global $provider_ids;
 
@@ -1407,10 +1407,10 @@ function uamswp_fad_post_title() {
 				'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
 				"post__in" => $physicians
 			);
-			$physicians_query = New WP_Query( $args );
-			if( ( $physicians_query && $physicians_query->have_posts()) ) {
+			$provider_query = New WP_Query( $args );
+			if( ( $provider_query && $provider_query->have_posts()) ) {
 				$provider_section_show = true;
-				$provider_ids = $physicians_query->posts;
+				$provider_ids = $provider_query->posts;
 			} else {
 				// wp_redirect( get_the_permalink($site_nav_id), 301 );
 				$provider_section_show = false;
@@ -3588,7 +3588,7 @@ function uamswp_fad_section_providers() {
 
 		// Defined on the template or in a function such as uamswp_fad_ontology_providers_query()
 		global $provider_section_show; // bool
-		global $physicians_query; // array
+		global $provider_query; // array
 		global $physicians; // array
 		global $provider_ids; // array
 
@@ -3663,8 +3663,8 @@ function uamswp_fad_section_providers() {
 		
 					// Get the list of region IDs from the providers
 					$provider_region_IDs = array();
-					while ( $physicians_query->have_posts() ) {
-						$physicians_query->the_post();
+					while ( $provider_query->have_posts() ) {
+						$provider_query->the_post();
 						$id = get_the_ID();
 						$provider_region_return = get_field('physician_region', $id);
 						if ( is_array( $provider_region_IDs ) ) {
@@ -3713,17 +3713,17 @@ function uamswp_fad_section_providers() {
 					);
 		
 					// The Query
-					$physicians_query = New WP_Query( $args );
+					$provider_query = New WP_Query( $args );
 
 					// Get a new list of provider IDs
-					$provider_ids = $physicians_query->posts;
+					$provider_ids = $provider_query->posts;
 
 				} // endif isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])
 
 			} // endif ( $provider_section_filter_region )
 
 			// Count the number of providers in the query
-			$provider_count = count($physicians_query->posts);
+			$provider_count = count($provider_query->posts);
 
 		} // endif ( $provider_section_filter )
 
@@ -3744,8 +3744,8 @@ function uamswp_fad_section_providers() {
 								<?php
 									if ( $provider_count > 0 ) {
 										$title_list = $provider_section_filter_title ? array() : '';
-										while ( $physicians_query->have_posts() ) {
-											$physicians_query->the_post();
+										while ( $provider_query->have_posts() ) {
+											$provider_query->the_post();
 											$id = get_the_ID();
 											include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
 											if ( $provider_section_filter_title ) {
@@ -3753,7 +3753,7 @@ function uamswp_fad_section_providers() {
 											}
 										} // endwhile
 										if ( $provider_section_filter ) {
-											echo '<data id="provider_ids" data-postids="' . implode(',', $physicians_query->posts) . ',"' . ( $provider_section_filter_region ? ' data-regions="' . implode(',', $provider_region_list) . ',"' : '' ) . ( $provider_section_filter_title ? ' data-titles="' . implode(',', array_unique($title_list)) . ',"' : '' ) . '></data>';
+											echo '<data id="provider_ids" data-postids="' . implode(',', $provider_query->posts) . ',"' . ( $provider_section_filter_region ? ' data-regions="' . implode(',', $provider_region_list) . ',"' : '' ) . ( $provider_section_filter_title ? ' data-titles="' . implode(',', array_unique($title_list)) . ',"' : '' ) . '></data>';
 										}
 									} else {
 										if ( $provider_section_filter ) {

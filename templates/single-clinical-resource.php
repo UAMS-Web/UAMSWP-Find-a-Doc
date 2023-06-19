@@ -213,11 +213,11 @@ if($physicians) {
 		"fields" => "ids",
 		"post__in" => $physicians
 	);
-	$physicians_query = New WP_Query( $args );
-	if($physicians_query && $physicians_query->have_posts()) {
+	$provider_query = New WP_Query( $args );
+	if($provider_query && $provider_query->have_posts()) {
 		$provider_section_show = true;
 		$jump_link_count++;
-		$provider_ids = $physicians_query->posts;
+		$provider_ids = $provider_query->posts;
 	} else {
 		$provider_section_show = false;
 	}

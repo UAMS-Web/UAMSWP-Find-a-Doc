@@ -177,12 +177,12 @@ $jump_link_count = 0;
 			'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
 			'post__in'	=> $physicians
 		));
-		$physicians_query = new WP_Query( $args );
+		$provider_query = new WP_Query( $args );
 	}
-	if( $physicians && $physicians_query->have_posts() ) {
+	if( $physicians && $provider_query->have_posts() ) {
 		$provider_section_show = true;
 		$jump_link_count++;
-		$provider_ids = $physicians_query->posts;
+		$provider_ids = $provider_query->posts;
 		wp_reset_postdata();
 	} else {
 		$provider_section_show = false;

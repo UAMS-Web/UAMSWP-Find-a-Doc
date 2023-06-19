@@ -515,12 +515,12 @@ while ( have_posts() ) : the_post(); ?>
 				"fields" => "ids",
 				"post__in" => $physicians
 			);
-			$physicians_query = New WP_Query( $args );
+			$provider_query = New WP_Query( $args );
 		}
-		if ( isset($physicians_query) && $physicians_query->have_posts() ) {
+		if ( isset($provider_query) && $provider_query->have_posts() ) {
 			$provider_section_show = true;
 			$jump_link_count++;
-			$provider_ids = $physicians_query->posts;
+			$provider_ids = $provider_query->posts;
 			wp_reset_postdata();
 		} else {
 			$provider_section_show = false;
