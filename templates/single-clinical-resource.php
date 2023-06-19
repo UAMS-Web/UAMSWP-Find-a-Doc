@@ -261,11 +261,11 @@ $clinical_resource_query = new WP_Query( $args );
 
 // Check if Clinical Resources section should be displayed
 if( $clinical_resources && $clinical_resource_query->have_posts() ) {
-	$clinical_resource_show_section = true;
+	$clinical_resource_section_show = true;
 	$resource_count = count($clinical_resources);
 	$jump_link_count++;
 } else {
-	$clinical_resource_show_section = false;
+	$clinical_resource_section_show = false;
 }
 
 // Check if Make an Appointment section should be displayed
@@ -436,7 +436,7 @@ function uamswp_resource_associated() {
 	// Bring in variables from outside of the function
 	global $page_title; // Defined on the template
 	global $page_title_attr; // Defined on the template
-	global $clinical_resource_show_section; // Defined on the template
+	global $clinical_resource_section_show; // Defined on the template
 	global $clinical_resources; // Defined on the template
 	global $clinical_resource_query; // Defined on the template
 	global $resource_postsPerPage; // Defined on the template
@@ -462,7 +462,7 @@ function uamswp_resource_associated() {
 	$resource_more_suppress = false; // Force div.more to not display
 	$resource_more_key = '';
 	$resource_more_value = '';
-	if( $clinical_resource_show_section ) {
+	if( $clinical_resource_section_show ) {
 		include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
 	}
 }
@@ -516,7 +516,7 @@ function uamswp_resource_jump_links() {
 	global $treatments_plural_name_attr; // Defined in uamswp_fad_labels_treatment()
 	global $fad_jump_links_title; // Defined in uamswp_fad_labels_jump_links()
 	global $page_title; // Defined on the template
-	global $clinical_resource_show_section; // Defined on the template
+	global $clinical_resource_section_show; // Defined on the template
 	global $condition_section_show; // Defined on the template
 	global $treatments_section_show; // Defined on the template
 	global $provider_section_show; // Defined on the template
@@ -534,7 +534,7 @@ function uamswp_resource_jump_links() {
 			</button>
 			<div class="collapse navbar-collapse inner-container" id="jump-link-nav">
 				<ul class="nav navbar-nav">
-					<?php if ( $clinical_resource_show_section ) { ?>
+					<?php if ( $clinical_resource_section_show ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#related-resources" title="Jump to the section of this page about related <?php echo $clinical_resource_plural_name_attr; ?>">Related <?php echo $clinical_resource_plural_name; ?></a>
 						</li>

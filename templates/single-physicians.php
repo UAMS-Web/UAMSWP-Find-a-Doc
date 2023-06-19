@@ -508,10 +508,10 @@ while ( have_posts() ) : the_post();
 
 		// Check if Clinical Resources section should be displayed
 		if( $clinical_resources && $clinical_resource_query->have_posts() ) {
-			$clinical_resource_show_section = true;
+			$clinical_resource_section_show = true;
 			$jump_link_count++;
 		} else {
-			$clinical_resource_show_section = false;
+			$clinical_resource_section_show = false;
 		}
 
 		// Check if Research section should be displayed
@@ -836,7 +836,7 @@ while ( have_posts() ) : the_post();
 								<a class="nav-link" href="#podcast">Podcast</a>
 							</li>
 						<?php } ?>
-						<?php if ( $clinical_resource_show_section ) { ?>
+						<?php if ( $clinical_resource_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#related-resources" title="Jump to the section of this page about <?php echo $clinical_resource_plural_name_attr; ?>"><?php echo $clinical_resource_plural_name; ?></a>
 							</li>
@@ -979,7 +979,7 @@ while ( have_posts() ) : the_post();
 		$resource_more_suppress = false; // Force div.more to not display
 		$resource_more_key = '_resource_provider';
 		$resource_more_value = $sort_name_param_value;
-		if( $clinical_resource_show_section ) {
+		if( $clinical_resource_section_show ) {
 			include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
 		}
 		// End Clinical Resources Section

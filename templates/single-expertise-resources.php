@@ -171,7 +171,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		global $post; // WordPress-specific global variable
 		global $page_title; // Defined on the template
 		global $page_title_attr; // Defined on the template
-		global $clinical_resource_show_section; // Defined in uamswp_fad_clinical_resource_query()
+		global $clinical_resource_section_show; // Defined in uamswp_fad_clinical_resource_query()
 		global $clinical_resources; // Defined in uamswp_fad_clinical_resource_query()
 		global $clinical_resource_query; // Defined in uamswp_fad_clinical_resource_query()
 		global $resource_postsPerPage; // Defined in uamswp_fad_clinical_resource_query()
@@ -197,7 +197,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		$resource_more_suppress = false; // Force div.more to not display
 		$resource_more_key = '_resource_aoe';
 		$resource_more_value = $post->post_name;
-		if( $clinical_resource_show_section ) {
+		if( $clinical_resource_section_show ) {
 			include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
 		}
 	}
