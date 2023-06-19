@@ -391,7 +391,7 @@ while ( have_posts() ) : the_post(); ?>
 		$about_section_label = 'Jump to the section of this page with the ' . strtolower($location_single_name) . ' description';
 
 		if ( $location_about || $location_affiliation || $prescription ) {
-			$show_about_section = true;
+			$about_section_show = true;
 			$jump_link_count++;
 			if ( $location_about || $location_youtube_link || ( !$location_about && $location_affiliation && $prescription ) ) {
 				$about_section_title = 'About ' . $page_title_phrase;
@@ -410,7 +410,7 @@ while ( have_posts() ) : the_post(); ?>
 				$about_section_label = 'Jump to the section of this page about ' . $about_section_title;
 			}
 		} else {
-			$show_about_section = false;
+			$about_section_show = false;
 		}
 
 		// Check if Parking and Directions section should be displayed
@@ -1071,7 +1071,7 @@ while ( have_posts() ) : the_post(); ?>
 							<a class="nav-link" href="#closing-info" title="Jump to the section of this page with the closing information">Closing Information</a>
 						</li>
 					<?php } ?>
-					<?php if ( $show_about_section ) { ?>
+					<?php if ( $about_section_show ) { ?>
 						<li class="nav-item<?php echo $about_section_submenu ? ' dropdown' : '' ?>">
 							<a class="nav-link" href="#description" title="<?php echo $about_section_label; ?>"><?php echo $about_section_title_short; ?></a>
 							<?php if ( $about_section_submenu ) { ?>
@@ -1184,7 +1184,7 @@ while ( have_posts() ) : the_post(); ?>
 	// End Closing Information Section
 
 	// Begin About Section
-	if ( $show_about_section ) {
+	if ( $about_section_show ) {
 	?>
 		<section class="uams-module bg-auto" id="description">
 			<div class="container-fluid">
