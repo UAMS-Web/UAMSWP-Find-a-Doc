@@ -286,8 +286,8 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 
 	// Display conditions
 	add_action( 'genesis_after_entry', 'uamswp_expertise_conditions_cpt', 16 );
-	$condition_heading = $conditions_fpage_title_expertise; // Conditions section title // Defined in uamswp_fad_fpage_text_expertise()
-	$condition_intro = $conditions_fpage_intro_expertise; // Conditions section intro text // Defined in uamswp_fad_fpage_text_expertise()
+	$condition_heading = $condition_fpage_title_expertise; // Conditions section title // Defined in uamswp_fad_fpage_text_expertise()
+	$condition_intro = $condition_fpage_intro_expertise; // Conditions section intro text // Defined in uamswp_fad_fpage_text_expertise()
 	function uamswp_expertise_conditions_cpt() {
 		// Bring in variables from outside of the function
 		global $page_title; // Defined on the template
