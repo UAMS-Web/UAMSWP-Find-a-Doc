@@ -72,7 +72,6 @@ get_header();
 $clinical_trials = get_field('treatment_procedure_clinical_trials');
 $video = get_field('treatment_procedure_youtube_link');
 $conditions_cpt = get_field('treatment_conditions');
-$expertise = get_field('treatment_procedure_expertise');
 $providers = get_field('treatment_procedure_physicians');
 $medline_type = get_field('medline_code_type');
 $medline_code = get_field('medline_code_id');
@@ -103,6 +102,10 @@ $clinical_resource_query = new WP_Query( $args );
 $locations = get_field('treatment_procedure_locations');
 uamswp_fad_location_query();
 
+// Query for whether related areas of expertise content section should be displayed on a page
+$expertises = get_field('treatment_procedure_expertise');
+uamswp_fad_expertise_related_query();
+
 // Classes for indicating presence of content
 $treatment_field_classes = '';
 if ($keywords && array_filter($keywords)) { $treatment_field_classes .= ' has-keywords'; } // Alternate names
@@ -111,7 +114,7 @@ if ($content && !empty($content)) { $treatment_field_classes .= ' has-content'; 
 if ($excerpt && $excerpt_user == true ) { $treatment_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
 if ($video && !empty($video)) { $treatment_field_classes .= ' has-video'; } // Video embed
 if ($conditions_cpt && array_filter($conditions_cpt)) { $treatment_field_classes .= ' has-condition'; } // Treatments
-if ($expertise && array_filter($expertise)) { $treatment_field_classes .= ' has-expertise'; } // Areas of Expertise
+if ($expertise_section_show) { $treatment_field_classes .= ' has-expertise'; } // Areas of Expertise
 if ($location_section_show) { $treatment_field_classes .= ' has-location'; } // Locations
 if ($providers && array_filter($providers)) { $treatment_field_classes .= ' has-provider'; } // Providers
 
@@ -186,27 +189,6 @@ $jump_link_count = 0;
 		wp_reset_postdata();
 	} else {
 		$provider_section_show = false;
-	}
-
-	// Check if Areas of Expertise section should be displayed
-	$args = (array(
-		'post_type' => "expertise",
-		"post_status" => "publish",
-		'order' => 'ASC',
-		'orderby' => 'title',
-		'posts_per_page' => -1,
-		'no_found_rows' => true, // counts posts, remove if pagination required
-		'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
-		'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
-		'post__in'	=> $expertise
-	));
-	$expertise_query = new WP_Query( $args );
-
-	if ( $expertise && $expertise_query->have_posts() ) {
-		$expertise_section_show = true;
-		$jump_link_count++;
-	} else {
-		$expertise_section_show = false;
 	}
 
 	// Check if Make an Appointment section should be displayed
@@ -473,28 +455,9 @@ $jump_link_count = 0;
 		// End Locations Section
 
 		// Begin Areas of Expertise Section
-		if ( $expertise_section_show ) { ?>
-		<section class="uams-module bg-auto" id="expertise">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title"><span class="title"><?php echo $expertise_plural_name; ?> for <?php echo $page_title; ?></span></h2>
-						<div class="card-list-container">
-							<div class="card-list card-list-expertise">
-							<?php 
-								while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
-									$id = get_the_ID();
-									include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-								endwhile;
-								wp_reset_postdata();
-							?>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<?php } // endif
+		$expertise_section_title = $expertise_plural_name . ' Related to ' . $page_title;
+		$expertise_section_intro = '';
+		uamswp_fad_section_expertise();
 		// End Areas of Expertise Section
 
 		// Begin Appointment Information Section
