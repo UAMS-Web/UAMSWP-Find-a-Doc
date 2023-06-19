@@ -50,7 +50,7 @@ $page_title_attr = uamswp_attr_conversion($page_title);
 	uamswp_fad_labels_clinical_resource();
 
 	// Get system settings for condition labels
-	uamswp_fad_labels_conditions();
+	uamswp_fad_labels_condition();
 
 	// Get system settings for treatment labels
 	uamswp_fad_labels_treatments();

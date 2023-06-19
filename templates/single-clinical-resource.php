@@ -24,7 +24,7 @@
 	uamswp_fad_labels_clinical_resource();
 
 	// Get system settings for condition labels
-	uamswp_fad_labels_conditions();
+	uamswp_fad_labels_condition();
 
 	// Get system settings for treatment labels
 	uamswp_fad_labels_treatments();
@@ -403,8 +403,8 @@ function uamswp_resource_conditions_cpt() {
 	global $condition_section_show; // Defined on the template
 	global $conditions_cpt_query; // Defined on the template
 	global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
-	global $conditions_single_name_attr; // Defined in uamswp_fad_labels_conditions()
-	global $conditions_plural_name; // Defined in uamswp_fad_labels_conditions()
+	global $conditions_single_name_attr; // Defined in uamswp_fad_labels_condition()
+	global $conditions_plural_name; // Defined in uamswp_fad_labels_condition()
 
 	$condition_context = 'single-resource';
 	$condition_heading_related_name = $page_title; // To what is it related?
@@ -448,8 +448,8 @@ function uamswp_resource_associated() {
 	global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
 	global $clinical_resource_single_name; // Defined in uamswp_fad_labels_clinical_resource()
 	global $clinical_resource_plural_name; // Defined in uamswp_fad_labels_clinical_resource()
-	global $conditions_single_name; // Defined in uamswp_fad_labels_conditions()
-	global $conditions_plural_name; // Defined in uamswp_fad_labels_conditions()
+	global $conditions_single_name; // Defined in uamswp_fad_labels_condition()
+	global $conditions_plural_name; // Defined in uamswp_fad_labels_condition()
 	global $treatments_single_name; // Defined in uamswp_fad_labels_treatments()
 	global $treatments_plural_name; // Defined in uamswp_fad_labels_treatments()
 	global $clinical_resource_fpage_title_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
@@ -510,8 +510,8 @@ function uamswp_resource_jump_links() {
 	global $expertise_plural_name_attr; // Defined in uamswp_fad_labels_expertise()
 	global $clinical_resource_plural_name; // Defined in uamswp_fad_labels_clinical_resource()
 	global $clinical_resource_plural_name_attr; // Defined in uamswp_fad_labels_clinical_resource()
-	global $conditions_plural_name; // Defined in uamswp_fad_labels_conditions()
-	global $conditions_plural_name_attr; // Defined in uamswp_fad_labels_conditions()
+	global $conditions_plural_name; // Defined in uamswp_fad_labels_condition()
+	global $conditions_plural_name_attr; // Defined in uamswp_fad_labels_condition()
 	global $treatments_plural_name; // Defined in uamswp_fad_labels_treatments()
 	global $treatments_plural_name_attr; // Defined in uamswp_fad_labels_treatments()
 	global $fad_jump_links_title; // Defined in uamswp_fad_labels_jump_links()

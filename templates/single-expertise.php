@@ -24,7 +24,7 @@
 	uamswp_fad_labels_clinical_resource();
 
 	// Get system settings for condition labels
-	uamswp_fad_labels_conditions();
+	uamswp_fad_labels_condition();
 
 	// Get system settings for treatment labels
 	uamswp_fad_labels_treatments();
@@ -295,7 +295,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		global $condition_section_show; // Defined in uamswp_fad_condition_query()
 		global $conditions_cpt_query; // Defined in uamswp_fad_condition_query()
 		global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
-		global $conditions_plural_name; // Defined in uamswp_fad_labels_conditions()
+		global $conditions_plural_name; // Defined in uamswp_fad_labels_condition()
 		global $condition_heading; // Defined on the template
 		global $condition_intro; // Defined on the template
 

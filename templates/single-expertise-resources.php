@@ -21,7 +21,7 @@
 	uamswp_fad_labels_clinical_resource();
 
 	// Get system settings for condition labels
-	uamswp_fad_labels_conditions();
+	uamswp_fad_labels_condition();
 
 	// Get system settings for treatment labels
 	uamswp_fad_labels_treatments();
@@ -183,8 +183,8 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
 		global $clinical_resource_single_name; // Defined in uamswp_fad_labels_clinical_resource()
 		global $clinical_resource_plural_name; // Defined in uamswp_fad_labels_clinical_resource()
-		global $conditions_single_name; // Defined in uamswp_fad_labels_conditions()
-		global $conditions_plural_name; // Defined in uamswp_fad_labels_conditions()
+		global $conditions_single_name; // Defined in uamswp_fad_labels_condition()
+		global $conditions_plural_name; // Defined in uamswp_fad_labels_condition()
 		global $treatments_single_name; // Defined in uamswp_fad_labels_treatments()
 		global $treatments_plural_name; // Defined in uamswp_fad_labels_treatments()
 		global $clinical_resource_fpage_title_expertise; // Defined in uamswp_fad_fpage_text_expertise()

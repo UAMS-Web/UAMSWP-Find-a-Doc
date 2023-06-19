@@ -15,7 +15,7 @@
 	uamswp_fad_labels_expertise();
 
 	// Get system settings for condition labels
-	uamswp_fad_labels_conditions();
+	uamswp_fad_labels_condition();
 
 	// Get system settings for treatment labels
 	uamswp_fad_labels_treatments();

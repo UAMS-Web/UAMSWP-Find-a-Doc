@@ -2078,7 +2078,7 @@ function uamswp_fad_podcast() {
 	}
 
 	// Get system settings for condition labels
-	function uamswp_fad_labels_conditions() {
+	function uamswp_fad_labels_condition() {
 		// Make variables available outside of the function
 		global $conditions_single_name;
 		global $conditions_single_name_attr;
@@ -2270,7 +2270,7 @@ function uamswp_fad_podcast() {
 			global $placeholder_conditions_treatments_plural_name;
 			global $conditions_treatments_plural_name;
 
-			// Defined in uamswp_fad_labels_conditions()
+			// Defined in uamswp_fad_labels_condition()
 			global $placeholder_conditions_single_name;
 			global $conditions_single_name;
 			global $placeholder_conditions_plural_name;

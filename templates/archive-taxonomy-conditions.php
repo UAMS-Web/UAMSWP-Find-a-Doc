@@ -28,7 +28,7 @@ function uamswp_terms_clauses( $clauses, $taxonomies, $args ){
 }
 
 // Get system settings for condition labels
-uamswp_fad_labels_conditions();
+uamswp_fad_labels_condition();
 
 // Get system settings for condition archive page text
 uamswp_fad_archive_conditions();

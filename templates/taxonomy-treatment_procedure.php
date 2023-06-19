@@ -37,7 +37,7 @@ $embed_code = get_field('treatment_procedure_embed_codes', $term); // Embed / Sy
 	uamswp_fad_labels_clinical_resource();
 
 	// Get system settings for condition labels
-	uamswp_fad_labels_conditions();
+	uamswp_fad_labels_condition();
 
 	// Get system settings for treatment labels
 	uamswp_fad_labels_treatments();
