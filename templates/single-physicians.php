@@ -985,9 +985,9 @@ while ( have_posts() ) : the_post();
 		// End Clinical Resources Section
 
 		// Begin Academic Bio Section
-		$physician_academic_split = false;
+		$provider_academic_split = false;
 			if ( $academic_bio && ( $academic_appointment || $academic_admin_title || $education || $boards ) ) {
-				$physician_academic_split = true;
+				$provider_academic_split = true;
 			}
 
 			if( $academic_section_show ): ?>
@@ -996,7 +996,7 @@ while ( have_posts() ) : the_post();
 				<div class="row">
 					<div class="col-xs-12">
 						<h2 class="module-title"><span class="title"><?php echo $short_name_possessive; ?> Academic Background</span></h2>
-						<?php if ( $physician_academic_split ) {
+						<?php if ( $provider_academic_split ) {
 							// If there is a bio AND at least one of the other academic things, visually split the layout ?>
 							<div class="row content-split-lg">
 							<div class="col-xs-12 col-lg-7">
@@ -1008,7 +1008,7 @@ while ( have_posts() ) : the_post();
 							<h3 class="sr-only">Academic Biography</h3>
 							<?php echo $academic_bio; ?>
 						<?php } // endif?>
-						<?php if ( $physician_academic_split ) { ?>
+						<?php if ( $provider_academic_split ) { ?>
 							</div>
 							</div>
 							<div class="col-xs-12 col-lg-5">
@@ -1091,7 +1091,7 @@ while ( have_posts() ) : the_post();
 							<?php endforeach; ?>
 							</ul>
 							<?php endif; ?>
-						<?php if ( $physician_academic_split ) { ?>
+						<?php if ( $provider_academic_split ) { ?>
 							</div>
 							</div>
 							</div>
