@@ -1379,9 +1379,9 @@ function uamswp_fad_post_title() {
 	include( UAMS_FAD_PATH . '/templates/entry-title-' . $entry_header_style . '.php');
 }
 
-// Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
+// Queries for whether each of the related ontology content sections should be displayed on ontology pages/subsections
 
-	// Query for whether associated providers content section should be displayed on ontology pages/subsections
+	// Query for whether related providers content section should be displayed on ontology pages/subsections
 	function uamswp_fad_provider_query() {
 		// Get variables from outside of the function
 		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
@@ -1418,7 +1418,7 @@ function uamswp_fad_post_title() {
 		}
 	}
 
-	// Query for whether associated locations content section should be displayed on a page
+	// Query for whether related locations content section should be displayed on a page
 	function uamswp_fad_location_query() {
 		// Bring in variables from outside of the function
 
@@ -1470,7 +1470,7 @@ function uamswp_fad_post_title() {
 		}
 	}
 
-	// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
+	// Query for whether descendant areas of expertise content section should be displayed on ontology pages/subsections
 	function uamswp_fad_expertise_descendant_query() {
 		// Bring in variables from outside of the function
 		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
@@ -1503,7 +1503,7 @@ function uamswp_fad_post_title() {
 		}
 	}
 
-	// Query for whether related ontology items (of the same post type) content section should be displayed on ontology pages/subsections
+	// Query for whether related areas of expertise content section should be displayed on ontology pages/subsections
 	function uamswp_fad_expertise_related_query() {
 		// Bring in variables from outside of the function
 		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
@@ -1531,7 +1531,7 @@ function uamswp_fad_post_title() {
 		}
 	}
 
-	// Query for whether associated clinical resources content section should be displayed on ontology pages/subsections
+	// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
 	function uamswp_fad_clinical_resource_query() {
 		// Bring in variables from outside of the function
 		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
@@ -1565,7 +1565,7 @@ function uamswp_fad_post_title() {
 		}
 	}
 
-	// Query for whether associated conditions content section should be displayed on ontology pages/subsections
+	// Query for whether related conditions content section should be displayed on ontology pages/subsections
 	function uamswp_fad_condition_query() {
 		// Bring in variables from outside of the function
 		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
@@ -1595,7 +1595,7 @@ function uamswp_fad_post_title() {
 		}
 	}
 
-	// Query for whether associated treatments content section should be displayed on ontology pages/subsections
+	// Query for whether related treatments content section should be displayed on ontology pages/subsections
 	function uamswp_fad_treatment_query() {
 		// Bring in variables from outside of the function
 		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
