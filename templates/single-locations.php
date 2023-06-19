@@ -617,10 +617,10 @@ while ( have_posts() ) : the_post(); ?>
 
 		// Check if Clinical Resources section should be displayed
 		if( $resources && $resource_query->have_posts() ) {
-			$show_related_resource_section = true;
+			$clinical_resource_show_section = true;
 			$jump_link_count++;
 		} else {
-			$show_related_resource_section = false;
+			$clinical_resource_show_section = false;
 		}
 
 		// Check if Jump Links section should be displayed
@@ -1140,7 +1140,7 @@ while ( have_posts() ) : the_post(); ?>
 							<a class="nav-link" href="#sub-clinics" title="Jump to the section of this page about <?php echo strtolower($location_descendant_plural_name_attr); ?> within this <?php echo strtolower($location_single_name_attr); ?>"><?php echo $location_descendant_plural_name; ?> Within This <?php echo $location_single_name; ?></a>
 						</li>
 					<?php } ?>
-					<?php if ( $show_related_resource_section ) { ?>
+					<?php if ( $clinical_resource_show_section ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#related-resources" title="Jump to the section of this page about <?php echo $clinical_resource_plural_name_attr; ?>"><?php echo $clinical_resource_plural_name; ?></a>
 						</li>
@@ -1744,7 +1744,7 @@ while ( have_posts() ) : the_post(); ?>
 	// End Child Locations Section
 
 	// Begin Clinical Resources Section
-	if ( $show_related_resource_section ) {
+	if ( $clinical_resource_show_section ) {
 		global $clinical_resource_fpage_title_location; // Defined in uamswp_fad_fpage_text_location()
 		global $clinical_resource_fpage_intro_location; // Defined in uamswp_fad_fpage_text_location()
 
@@ -1754,7 +1754,7 @@ while ( have_posts() ) : the_post(); ?>
 		$resource_more_suppress = false; // Force div.more to not display
 		$resource_more_key = '_resource_locations';
 		$resource_more_value = $post->post_name;
-		if( $show_related_resource_section ) {
+		if( $clinical_resource_show_section ) {
 			include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
 		}
 	}
