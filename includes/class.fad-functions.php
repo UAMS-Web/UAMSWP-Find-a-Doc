@@ -3858,7 +3858,7 @@ function uamswp_fad_section_location() {
 		global $location_plural_name; // string
 		global $location_plural_name_attr; // string
 
-		// Defined in uamswp_fad_provider_fpage_text_general()
+		// Defined in uamswp_fad_location_fpage_text_general()
 		global $location_fpage_title_general; // string
 		global $location_fpage_intro_general; // string
 
