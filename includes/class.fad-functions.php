@@ -1480,7 +1480,7 @@ function uamswp_fad_post_title() {
 		global $childnav;
 		global $children;
 		global $expertise_descendant_section_show;
-		global $show_child_content_nav;
+		global $child_content_nav_show;
 
 		$child_pages = get_pages( array('child_of' => $site_nav_id, 'post_type' => 'expertise' ) );
 		if ($child_pages) {
@@ -1499,7 +1499,7 @@ function uamswp_fad_post_title() {
 				}
 			}
 			$expertise_descendant_section_show = $children ? true : false;
-			$show_child_content_nav = !empty($childnav) ? true : false;
+			$child_content_nav_show = !empty($childnav) ? true : false;
 		}
 	}
 
@@ -1634,7 +1634,7 @@ function uamswp_fad_ontology_nav_menu() {
 	global $clinical_resource_show_section; // Typically defined in uamswp_fad_ontology_resources_query()
 	global $expertise_descendant_section_show; // Typically defined in uamswp_fad_ontology_descendants_query()
 	global $child_pages; // Typically defined in uamswp_fad_ontology_descendants_query()
-	global $show_child_content_nav; // Typically defined in uamswp_fad_ontology_descendants_query()
+	global $child_content_nav_show; // Typically defined in uamswp_fad_ontology_descendants_query()
 	global $childnav; // Typically defined in uamswp_fad_ontology_descendants_query()
 	global $provider_plural_name; // Typically defined in uamswp_fad_labels_provider()
 	global $provider_plural_name_attr; // Typically defined in uamswp_fad_labels_provider()

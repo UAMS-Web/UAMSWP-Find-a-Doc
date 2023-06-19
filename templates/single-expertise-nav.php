@@ -54,7 +54,7 @@ if ($child_pages) {
 		// 'exclude' => implode(',',$excluded_pages),
 	);
 }
-if ($show_child_content_nav) {
+if ($child_content_nav_show) {
 	$pagenav .= $childnav;
 }
 // $pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item nav-item"><span itemprop="name">'. explode($child_pages, ',') .'</span></li>';
