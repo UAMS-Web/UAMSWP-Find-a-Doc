@@ -2496,7 +2496,7 @@ function uamswp_fad_podcast() {
 		}
 
 		// Get system settings for general values of ontology text elements on a fake subpage or section for Conditions
-		function uamswp_fad_conditions_fpage_text_general() {
+		function uamswp_fad_condition_fpage_text_general() {
 			// Make variables available outside of the function
 			global $conditions_fpage_title_general;
 			global $conditions_fpage_intro_general;
@@ -3227,7 +3227,7 @@ function uamswp_fad_podcast() {
 					// If the Conditions title variable is not set or is empty...
 					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
 					if ( !isset($conditions_fpage_title_expertise) || empty($conditions_fpage_title_expertise) ) {
-						uamswp_fad_conditions_fpage_text_general();
+						uamswp_fad_condition_fpage_text_general();
 						global $conditions_fpage_title_general;
 						$conditions_fpage_title_expertise = $conditions_fpage_title_general;
 					}
@@ -3235,7 +3235,7 @@ function uamswp_fad_podcast() {
 					// If the Conditions intro text variable is not set or is empty...
 					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
 					if ( !isset($conditions_fpage_intro_expertise) || empty($conditions_fpage_intro_expertise) ) {
-						uamswp_fad_conditions_fpage_text_general();
+						uamswp_fad_condition_fpage_text_general();
 						global $conditions_fpage_intro_general;
 						$conditions_fpage_intro_expertise = $conditions_fpage_intro_general;
 					}
