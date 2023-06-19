@@ -166,23 +166,19 @@ $eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$po
 $locations = get_field('physician_locations',$post->ID); // Get the provider's location values
 uamswp_fad_location_query();
 
-	// Get the name of the provider's primary location
-	$l = 1;
-	if( $locations && $location_valid ) {
-		foreach( $locations as $location ) {
-			if ( 2 > $l ){
-				if ( get_post_status ( $location ) == 'publish' ) {
-					$primary_appointment_title = get_the_title( $location );
-					$primary_appointment_title_attr = uamswp_attr_conversion($primary_appointment_title);
-					$primary_appointment_url = get_the_permalink( $location );
-					$primary_appointment_city = get_field('location_city', $location);
-					$primary_appointment_city_attr = uamswp_attr_conversion($primary_appointment_city);
-
-					$l++;
-				}
-			}
-		} // endforeach
+// Get the name of the provider's primary location
+if( $location_section_show ) {
+	foreach ( $locations as $location ) {
+		if ( get_post_status ( $location ) == 'publish' ) {
+			$primary_appointment_title = get_the_title( $location );
+			$primary_appointment_title_attr = uamswp_attr_conversion($primary_appointment_title);
+			$primary_appointment_url = get_the_permalink( $location );
+			$primary_appointment_city = get_field('location_city', $location);
+			$primary_appointment_city_attr = uamswp_attr_conversion($primary_appointment_city);
+			break;
+		}
 	}
+}
 
 // Conditionally suppress sections based on Find-a-Doc Settings configuration
 $region = get_field('physician_region',$post->ID);
