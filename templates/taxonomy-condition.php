@@ -15,7 +15,7 @@ $video = get_field('condition_youtube_link', $term);
 $treatments = get_field('condition_treatments', $term);
 $expertise = get_field('condition_expertise', $term);
 $locations = get_field('condition_locations', $term);
-$physicians = get_field('condition_physicians', $term);
+$providers = get_field('condition_physicians', $term);
 $medline_type = get_field('medline_code_type', $term);
 $medline_code = get_field('medline_code_id', $term);
 $embed_code = get_field('condition_embed_codes', $term); // Embed / Syndication Code
@@ -135,7 +135,7 @@ if ($video && !empty($video)) { $condition_field_classes .= ' has-video'; } // V
 if ($treatments && !empty($treatments)) { $condition_field_classes .= ' has-treatment'; } // Treatments
 if ($expertise && !empty($expertise)) { $condition_field_classes .= ' has-expertise'; } // Areas of Expertise
 if ($locations && $location_valid) { $condition_field_classes .= ' has-location'; } // Locations
-if ($physicians && !empty($physicians)) { $condition_field_classes .= ' has-provider'; } // Providers
+if ($providers && !empty($providers)) { $condition_field_classes .= ' has-provider'; } // Providers
 
 ?>
 <div class="content-sidebar-wrap">
@@ -229,12 +229,12 @@ if ($physicians && !empty($physicians)) { $condition_field_classes .= ' has-prov
 		</section>
 		<?php } // endif ?>
 		<?php // Check if any doctors are connected
-			if ($physicians) {
-				$physiciansCount = count($physicians);
+			if ($providers) {
+				$physiciansCount = count($providers);
 				$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12)
 				$postsCutoff = 18; // Set cutoff value
 				$postsCountClass = $postsPerPage;
-				if($physiciansCount <= $postsCutoff ) {
+				if($provider_count <= $postsCutoff ) {
 						$postsPerPage = -1;
 					}
 				$args = (array(
@@ -243,11 +243,11 @@ if ($physicians && !empty($physicians)) { $condition_field_classes .= ' has-prov
 					'order' => 'ASC',
 					'orderby' => 'title',
 					'posts_per_page' => $postsPerPage,
-					'post__in'	=> $physicians
+					'post__in'	=> $providers
 				));
 				$provider_query = new WP_Query( $args );
 
-				if( $physicians && $provider_query->have_posts() ) {
+				if( $providers && $provider_query->have_posts() ) {
 				?>
 					<section class="uams-module bg-auto" id="doctors">
 						<div class="container-fluid">

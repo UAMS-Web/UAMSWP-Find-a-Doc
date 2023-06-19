@@ -74,7 +74,7 @@ $video = get_field('treatment_procedure_youtube_link');
 $conditions_cpt = get_field('treatment_conditions');
 $expertise = get_field('treatment_procedure_expertise');
 $locations = get_field('treatment_procedure_locations');
-$physicians = get_field('treatment_procedure_physicians');
+$providers = get_field('treatment_procedure_physicians');
 $medline_type = get_field('medline_code_type');
 $medline_code = get_field('medline_code_id');
 $embed_code = get_field('treatment_procedure_embed_codes');
@@ -113,7 +113,7 @@ if ($video && !empty($video)) { $treatment_field_classes .= ' has-video'; } // V
 if ($conditions_cpt && array_filter($conditions_cpt)) { $treatment_field_classes .= ' has-condition'; } // Treatments
 if ($expertise && array_filter($expertise)) { $treatment_field_classes .= ' has-expertise'; } // Areas of Expertise
 if ($locations && $location_valid) { $treatment_field_classes .= ' has-location'; } // Locations
-if ($physicians && array_filter($physicians)) { $treatment_field_classes .= ' has-provider'; } // Providers
+if ($providers && array_filter($providers)) { $treatment_field_classes .= ' has-provider'; } // Providers
 
 // Set logic for displaying jump links and sections
 $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
@@ -164,7 +164,7 @@ $jump_link_count = 0;
 	}
 
 	// Check if Providers section should be displayed
-	if ( $physicians ) {
+	if ( $providers ) {
 		$args = (array(
 			'post_type' => "provider",
 			"post_status" => "publish",
@@ -175,11 +175,11 @@ $jump_link_count = 0;
 			// 'no_found_rows' => true, // counts posts, remove if pagination required
 			'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
 			'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
-			'post__in'	=> $physicians
+			'post__in'	=> $providers
 		));
 		$provider_query = new WP_Query( $args );
 	}
-	if( $physicians && $provider_query->have_posts() ) {
+	if( $providers && $provider_query->have_posts() ) {
 		$provider_section_show = true;
 		$jump_link_count++;
 		$provider_ids = $provider_query->posts;

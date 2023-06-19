@@ -504,8 +504,8 @@ while ( have_posts() ) : the_post(); ?>
 		}
 
 		// Check if Providers section should be displayed
-		$physicians = get_field( 'physician_locations' );
-		if ( $physicians ) {
+		$providers = get_field( 'physician_locations' );
+		if ( $providers ) {
 			$args = array(
 				"post_type" => "provider",
 				"post_status" => "publish",
@@ -513,7 +513,7 @@ while ( have_posts() ) : the_post(); ?>
 				"orderby" => "title",
 				"order" => "ASC",
 				"fields" => "ids",
-				"post__in" => $physicians
+				"post__in" => $providers
 			);
 			$provider_query = New WP_Query( $args );
 		}

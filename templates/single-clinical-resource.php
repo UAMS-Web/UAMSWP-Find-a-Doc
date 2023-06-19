@@ -196,12 +196,12 @@ if( $treatments_cpt && $treatments_cpt_query->posts ) {
 }
 
 // Check if Providers section should be displayed
-$physicians = get_field( "clinical_resource_providers" );
-if($physicians) {
+$providers = get_field( "clinical_resource_providers" );
+if($providers) {
 	$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12). If you change the value, update the instruction text in the editor's JSON file.
 	$postsCutoff = 18; // Set cutoff value. If you change the value, update the instruction text in the editor's JSON file.
 	$postsCountClass = $postsPerPage;
-	if(count($physicians) <= $postsCutoff ) {
+	if(count($providers) <= $postsCutoff ) {
 		$postsPerPage = -1;
 	}
 	$args = array(
@@ -211,7 +211,7 @@ if($physicians) {
 		"orderby" => "title",
 		"order" => "ASC",
 		"fields" => "ids",
-		"post__in" => $physicians
+		"post__in" => $providers
 	);
 	$provider_query = New WP_Query( $args );
 	if($provider_query && $provider_query->have_posts()) {

@@ -1389,12 +1389,13 @@ function uamswp_fad_post_title() {
 
 		// Make variables available outside of the function
 		global $physicians;
+		global $providers;
 		global $provider_query;
 		global $provider_section_show;
 		global $provider_ids;
 
-		$physicians = get_field( "physician_expertise", $site_nav_id );
-		if($physicians) {
+		$providers = get_field( "physician_expertise", $site_nav_id );
+		if($providers) {
 			$args = array(
 				"post_type" => "provider",
 				"post_status" => "publish",
@@ -1405,7 +1406,7 @@ function uamswp_fad_post_title() {
 				// 'no_found_rows' => true, // counts posts, remove if pagination required
 				'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
 				'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
-				"post__in" => $physicians
+				"post__in" => $providers
 			);
 			$provider_query = New WP_Query( $args );
 			if( ( $provider_query && $provider_query->have_posts()) ) {
@@ -3589,7 +3590,7 @@ function uamswp_fad_section_provider() {
 		// Defined on the template or in a function such as uamswp_fad_provider_query()
 		global $provider_section_show; // bool
 		global $provider_query; // array
-		global $physicians; // array
+		global $providers; // array
 		global $provider_ids; // array
 
 	// Do something
@@ -3708,7 +3709,7 @@ function uamswp_fad_section_provider() {
 						'orderby' => 'title',
 						'order' => 'ASC',
 						'fields' => 'ids',
-						'post__in' => $physicians,
+						'post__in' => $providers,
 						'tax_query' => $tax_query
 					);
 		
