@@ -1729,7 +1729,7 @@ while ( have_posts() ) : the_post(); ?>
 								<?php
 									while ( $children->have_posts() ) : $children->the_post();
 										$id = get_the_ID();
-										$child_location_list = true; // Indicate that this is a list of child locations within this location
+										$location_descendant_list = true; // Indicate that this is a list of child locations within this location
 										include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
 									endwhile;
 									wp_reset_postdata();

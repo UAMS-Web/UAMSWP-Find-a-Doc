@@ -15,9 +15,9 @@
 $featured_image = '';
 $address_id = $id;
 
-// $child_location_list indicates whether this is a list of child locations within this location
-// Check if $child_location_list is set. Otherwise create the variable and set its value to false.
-$child_location_list = isset($child_location_list) ? $child_location_list : false;
+// $location_descendant_list indicates whether this is a list of child locations within this location
+// Check if $location_descendant_list is set. Otherwise create the variable and set its value to false.
+$location_descendant_list = isset($location_descendant_list) ? $location_descendant_list : false;
 
 $location_title = get_the_title($id);
 $location_title_attr = uamswp_attr_conversion($location_title);
@@ -106,7 +106,7 @@ $location_zip = get_field('location_zip', $address_id);
 	<div class="card-body">
 		<h3 class="card-title h5">
 			<span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self" data-categorytitle="Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $location_title; ?></a></span>
-			<?php if ( $parent_location && !$child_location_list ) { ?>
+			<?php if ( $parent_location && !$location_descendant_list ) { ?>
 				<span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
 			<?php } // endif ?>
 			<?php if ( isset($l) && 1 == $l ) { ?>
