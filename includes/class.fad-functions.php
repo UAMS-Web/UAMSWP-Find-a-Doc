@@ -1512,7 +1512,7 @@ function uamswp_fad_post_title() {
 		// Make variables available outside of the function
 		global $expertises;
 		global $expertise_query;
-		global $show_related_aoe_section;
+		global $expertise_related_section_show;
 
 		$expertises = get_field('expertise_associated', $site_nav_id);
 		$args = array(
@@ -1525,9 +1525,9 @@ function uamswp_fad_post_title() {
 		);
 		$expertise_query = new WP_Query( $args );
 		if( ( $expertises && $expertise_query->have_posts() ) ) {
-			$show_related_aoe_section = true;
+			$expertise_related_section_show = true;
 		} else {
-			$show_related_aoe_section = false;
+			$expertise_related_section_show = false;
 		}
 	}
 
@@ -1630,7 +1630,7 @@ function uamswp_fad_ontology_nav_menu() {
 	global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
 	global $provider_section_show; // Typically defined in uamswp_fad_ontology_providers_query()
 	global $location_section_show; // Typically defined in uamswp_fad_location_query()
-	global $show_related_aoe_section; // Typically defined in uamswp_fad_ontology_related_query()
+	global $expertise_related_section_show; // Typically defined in uamswp_fad_ontology_related_query()
 	global $clinical_resource_show_section; // Typically defined in uamswp_fad_ontology_resources_query()
 	global $expertise_descendant_section_show; // Typically defined in uamswp_fad_ontology_descendants_query()
 	global $child_pages; // Typically defined in uamswp_fad_ontology_descendants_query()
