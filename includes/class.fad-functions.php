@@ -1382,7 +1382,7 @@ function uamswp_fad_post_title() {
 // Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
 
 	// Query for whether associated providers content section should be displayed on ontology pages/subsections
-	function uamswp_fad_ontology_providers_query() {
+	function uamswp_fad_ontology_provider_query() {
 		// Get variables from outside of the function
 		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
 		global $ontology_type; // Typically defined on the template
@@ -1628,7 +1628,7 @@ function uamswp_fad_post_title() {
 function uamswp_fad_ontology_nav_menu() {
 	// Bring in variables from outside of the function
 	global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
-	global $provider_section_show; // Typically defined in uamswp_fad_ontology_providers_query()
+	global $provider_section_show; // Typically defined in uamswp_fad_ontology_provider_query()
 	global $location_section_show; // Typically defined in uamswp_fad_location_query()
 	global $expertise_related_section_show; // Typically defined in uamswp_fad_ontology_related_query()
 	global $clinical_resource_show_section; // Typically defined in uamswp_fad_ontology_resources_query()
@@ -3586,7 +3586,7 @@ function uamswp_fad_section_provider() {
 		global $provider_fpage_title_general; // string
 		global $provider_fpage_intro_general; // string
 
-		// Defined on the template or in a function such as uamswp_fad_ontology_providers_query()
+		// Defined on the template or in a function such as uamswp_fad_ontology_provider_query()
 		global $provider_section_show; // bool
 		global $provider_query; // array
 		global $physicians; // array

@@ -63,7 +63,7 @@ uamswp_fad_ontology_site_values();
 // Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
 
 	// Query for whether associated providers content section should be displayed on ontology pages/subsections
-	uamswp_fad_ontology_providers_query();
+	uamswp_fad_ontology_provider_query();
 
 	// Query for whether associated locations content section should be displayed on ontology pages/subsections
 	$location_query_id = $site_nav_id;
