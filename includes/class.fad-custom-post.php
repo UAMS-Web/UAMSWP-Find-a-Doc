@@ -3398,15 +3398,15 @@ function get_resource_meta($object) {
 		$expertise_query = new WP_Query( $args );
 	}
 	// Related Resources
-	$resources = get_field('clinical_resource_related', $postId);
-	if($resources) {
+	$clinical_resources = get_field('clinical_resource_related', $postId);
+	if($clinical_resources) {
 		$args = (array(
 			'post_type' => "clinical-resource",
 			'order' => 'DESC',
 			'orderby' => 'post_date',
 			'posts_per_page' => -1,
 			'post_status' => 'publish',
-			'post__in' => $resources
+			'post__in' => $clinical_resources
 		));
 		$resource_query = new WP_Query( $args );
 	}
@@ -3451,7 +3451,7 @@ function get_resource_meta($object) {
 		$data['clinical_resource_document'][$i]['url'] = $document_title;
 		$i++;
 	endwhile;
-	if( $resources && $resource_query->posts ):
+	if( $clinical_resources && $resource_query->posts ):
 		foreach( $resource_query->posts as $resource ):
 			$data['clinical_resource_associated'][$resource->ID]['link'] = get_permalink( $resource->ID );
 			$data['clinical_resource_associated'][$resource->ID]['title'] = $resource->post_title;

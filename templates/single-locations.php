@@ -281,7 +281,7 @@ if( have_rows('remove_ontology_criteria', 'option') ):
 endif;
 
 // Clinical Resources
-$resources = get_field('location_clinical_resources');
+$clinical_resources = get_field('location_clinical_resources');
 $resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
 $resource_more = false;
 $args = (array(
@@ -290,7 +290,7 @@ $args = (array(
 	'orderby' => 'post_date',
 	'posts_per_page' => $resource_postsPerPage,
 	'post_status' => 'publish',
-	'post__in'	=> $resources
+	'post__in'	=> $clinical_resources
 ));
 $resource_query = new WP_Query( $args );
 
@@ -616,7 +616,7 @@ while ( have_posts() ) : the_post(); ?>
 		}
 
 		// Check if Clinical Resources section should be displayed
-		if( $resources && $resource_query->have_posts() ) {
+		if( $clinical_resources && $resource_query->have_posts() ) {
 			$clinical_resource_show_section = true;
 			$jump_link_count++;
 		} else {

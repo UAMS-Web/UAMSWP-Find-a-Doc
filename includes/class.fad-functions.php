@@ -1538,13 +1538,13 @@ function uamswp_fad_post_title() {
 		global $ontology_type; // Typically defined on the template
 
 		// Make variables available outside of the function
-		global $resources;
+		global $clinical_resources;
 		global $resource_postsPerPage;
 		global $resource_more;
 		global $resource_query;
 		global $clinical_resource_show_section;
 
-		$resources = get_field('expertise_clinical_resources', $site_nav_id);
+		$clinical_resources = get_field('expertise_clinical_resources', $site_nav_id);
 		$resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
 		$resource_more = false;
 		$args = array(
@@ -1553,12 +1553,12 @@ function uamswp_fad_post_title() {
 			'orderby' => 'post_date',
 			'posts_per_page' => $resource_postsPerPage,
 			'post_status' => 'publish',
-			'post__in'	=> $resources
+			'post__in'	=> $clinical_resources
 		);
 		$resource_query = new WP_Query( $args );
 
 		// Check if Clinical Resources section should be displayed
-		if( ( $resources && $resource_query->have_posts() ) ) {
+		if( ( $clinical_resources && $resource_query->have_posts() ) ) {
 			$clinical_resource_show_section = true;
 		} else {
 			$clinical_resource_show_section = false;

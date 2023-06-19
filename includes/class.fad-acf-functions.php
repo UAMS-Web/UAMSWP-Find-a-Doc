@@ -285,7 +285,7 @@ function my_taxonomy_query( $args, $field ) {
 		$expertises = $_POST['acf']['field_clinical_resource_aoe'];
 		$conditions = $_POST['acf']['field_clinical_resource_conditions'];
 		$treatments = $_POST['acf']['field_clinical_resource_treatments'];
-		$resources = $_POST['acf']['field_clinical_resource_related'];
+		$clinical_resources = $_POST['acf']['field_clinical_resource_related'];
 
 		if ( $providers ) {
 			$i = 1;
@@ -347,12 +347,12 @@ function my_taxonomy_query( $args, $field ) {
 			endforeach;
 		}
 
-		if ( $resources ) {
+		if ( $clinical_resources ) {
 			$i = 1;
-			foreach( $resources as $resource ):
+			foreach( $clinical_resources as $resource ):
 				$resource_name = get_the_title( $resource );
 				$resource_list .= $resource_name;
-				if( count($resources) > $i ) {
+				if( count($clinical_resources) > $i ) {
 					$resource_list .= ", ";
 				}
 				$i++;
