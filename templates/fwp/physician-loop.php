@@ -28,10 +28,10 @@ if ($degrees){
 }
 $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '') . ( $degree_list ? ', ' . $degree_list : '' );
 $full_name_attr = uamswp_attr_conversion($full_name);
-$physician_resident = get_field('physician_resident');
+$provider_resident = get_field('physician_resident');
 $provider_resident_name = 'Resident Physician';
 $physician_title = get_field('physician_title');
-$physician_title_name = $physician_resident ? $provider_resident_name : get_term( $physician_title, 'clinical_title' )->name;
+$physician_title_name = $provider_resident ? $provider_resident_name : get_term( $physician_title, 'clinical_title' )->name;
 $physician_service_line = get_field('physician_service_line');
 ?>
 <div class="col item-container">

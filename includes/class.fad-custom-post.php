@@ -2291,10 +2291,10 @@ function get_provider_meta($object) {
 		endforeach;
 	}
 	$full_name = get_field('physician_first_name', $postId) .' ' .(get_field('physician_middle_name', $postId) ? get_field('physician_middle_name', $postId) . ' ' : '') . get_field('physician_last_name', $postId) . (get_field('physician_pedigree', $postId) ? '&nbsp;' . get_field('physician_pedigree', $postId ) : '') . ( $degree_list ? ', ' . $degree_list : '' );
-	$physician_resident = get_field('physician_resident', $postId);
+	$provider_resident = get_field('physician_resident', $postId);
 	$provider_resident_name = 'Resident Physician';
 	$physician_title = get_field('physician_title', $postId);
-	$physician_title_name = $physician_resident ? $provider_resident_name : get_term( $physician_title, 'clinical_title' )->name;
+	$physician_title_name = $provider_resident ? $provider_resident_name : get_term( $physician_title, 'clinical_title' )->name;
 	$physician_service_line = get_field('physician_service_line', $postId);
 	$resident_profile_group = get_field('physician_resident_profile_group',$postId);
 	$resident_academic_department = $resident_profile_group['physician_resident_academic_department'];
@@ -2349,7 +2349,7 @@ function get_provider_meta($object) {
 		endforeach;
 	}
 	$data['physician_languages'] = $language_list;
-	$data['physician_eligible_appointments'] = $physician_resident ? 0 : get_field('physician_eligible_appointments',$postId);
+	$data['physician_eligible_appointments'] = $provider_resident ? 0 : get_field('physician_eligible_appointments',$postId);
 	$data['physician_thumbnail'] = image_sizer(get_post_thumbnail_id($postId), 253, 337, 'center', 'center');
 	$data['physician_photo'] = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center');
 	$data['physician_referral_required'] = get_field('physician_referral_required', $postId);
@@ -2393,7 +2393,7 @@ function get_provider_meta($object) {
 			$i++;
 		}
 	}
-	$data['physician_residency_program'] = $physician_resident ? $resident_academic_department_name .', '. $resident_academic_name : '';
+	$data['physician_residency_program'] = $provider_resident ? $resident_academic_department_name .', '. $resident_academic_name : '';
 	$boards = get_field('physician_boards',$postId);
 	$data['physician_boards'] ='';
 	if( ! empty( $boards ) ):
