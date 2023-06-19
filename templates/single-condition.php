@@ -30,7 +30,7 @@
 	uamswp_fad_labels_treatments();
 
 // Get system settings for condition archive page text
-// uamswp_fad_archive_conditions();
+// uamswp_fad_archive_condition();
 
 // Get the page ID
 $page_id = get_the_ID();

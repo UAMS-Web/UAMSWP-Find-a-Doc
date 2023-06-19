@@ -2112,7 +2112,7 @@ function uamswp_fad_podcast() {
 	}
 
 	// Get system settings for condition archive page text
-	function uamswp_fad_archive_conditions() {
+	function uamswp_fad_archive_condition() {
 		// Make variables available outside of the function
 		global $conditions_archive_headline;
 		global $conditions_archive_headline_attr;
@@ -2276,7 +2276,7 @@ function uamswp_fad_podcast() {
 			global $placeholder_conditions_plural_name;
 			global $conditions_plural_name;
 
-			// Defined in uamswp_fad_archive_conditions()
+			// Defined in uamswp_fad_archive_condition()
 			global $placeholder_conditions_archive_headline;
 			global $conditions_archive_headline;
 			global $placeholder_conditions_archive_intro_text;
