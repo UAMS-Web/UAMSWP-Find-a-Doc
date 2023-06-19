@@ -162,7 +162,7 @@ if ( !empty($phys_title_indef_article_exceptions) ) {
 // Check if the provider sees patients via appointments
 $eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$post->ID);
 
-// Query for whether associated locations content section should be displayed on a page
+// Query for whether related locations content section should be displayed on a page
 $locations = get_field('physician_locations',$post->ID); // Get the provider's location values
 uamswp_fad_location_query();
 
@@ -395,7 +395,7 @@ while ( have_posts() ) : the_post();
 
 	// Set Conditions variables
 	$args = (array(
-		'post_type' => "condition",
+		'post_type' => 'condition',
 		'post_status' => 'publish',
 		'orderby' => 'title',
 		'order' => 'ASC',
@@ -407,7 +407,7 @@ while ( have_posts() ) : the_post();
 
 	// Set Treatments variables
 	$args = (array(
-		'post_type' => "treatment",
+		'post_type' => 'treatment',
 		'post_status' => 'publish',
 		'orderby' => 'title',
 		'order' => 'ASC',
@@ -446,7 +446,7 @@ while ( have_posts() ) : the_post();
 	$resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
 	$resource_more = false;
 	$args = (array(
-		'post_type' => "clinical-resource",
+		'post_type' => 'clinical-resource',
 		'order' => 'DESC',
 		'orderby' => 'post_date',
 		'posts_per_page' => $resource_postsPerPage,

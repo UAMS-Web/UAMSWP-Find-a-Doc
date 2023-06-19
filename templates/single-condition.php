@@ -94,7 +94,7 @@ else {
 
 $cta_repeater = get_field('condition_cta');
 
-// Clinical Resources
+// Query for whether related clinical resources content section should be displayed on a page
 $clinical_resources = get_field('condition_clinical_resources');
 $resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
 $resource_more = false;
