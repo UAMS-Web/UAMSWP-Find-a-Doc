@@ -571,23 +571,9 @@ while ( have_posts() ) : the_post(); ?>
 			$treatments_section_show = false;
 		}
 
-		// Check if Areas of Expertise section should be displayed
+		// Query for whether related areas of expertise content section should be displayed on a page
 		$expertises = get_field('location_expertise');
-		$args = (array(
-			'post_type' => "expertise",
-			'order' => 'ASC',
-			'orderby' => 'title',
-			'posts_per_page' => -1,
-			'post_status' => 'publish',
-			'post__in'	=> $expertises
-		));
-		$expertise_query = new WP_Query( $args );
-		if( $expertises && $expertise_query->have_posts() && !$hide_medical_ontology ) {
-			$expertise_section_show = true;
-			$jump_link_count++;
-		} else {
-			$expertise_section_show = false;
-		}
+		uamswp_fad_expertise_related_query();
 
 		// Check if Child Locations section should be displayed
 		$current_id = get_the_ID();
@@ -1694,27 +1680,9 @@ while ( have_posts() ) : the_post(); ?>
 	// End Treatments and Procedures Section
 
 	// Begin Areas of Expertise Section
-	if( $expertise_section_show ) { ?>
-		<section class="uams-module expertise-list bg-auto" id="expertise">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title"><span class="title"><?php echo $expertise_plural_name; ?> Represented at <?php echo $page_title_phrase; ?></span></h2>
-						<div class="card-list-container">
-							<div class="card-list card-list-expertise">
-							<?php 
-							while ($expertise_query->have_posts()) : $expertise_query->the_post();
-								$id = get_the_ID();
-								include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-							endwhile;
-							wp_reset_postdata();
-							?>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php } // endif
+	$expertise_section_title = $expertise_fpage_title_location;
+	$expertise_section_intro = $expertise_fpage_intro_location;
+	uamswp_fad_section_expertise();
 	// End Areas of Expertise Section
 
 	// Begin Child Locations Section
