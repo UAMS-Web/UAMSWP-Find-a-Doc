@@ -80,8 +80,8 @@ $tax = get_term_by("slug", get_query_var("term"), get_query_var("taxonomy") );
 // Locations Content
 $location_content = '';
 $args = (array(
-	'post_type' => "location",
-	"post_status" => "publish",
+	'post_type' => 'location',
+	'post_status' => 'publish',
 	'order' => 'ASC',
 	'orderby' => 'title',
 	'posts_per_page' => -1,
@@ -198,7 +198,7 @@ if ($providers && !empty($providers)) { $treatment_field_classes .= ' has-provid
 		<?php endif; ?>
 		<?php 
 			$args = (array(
-				'taxonomy' => "condition",
+				'taxonomy' => 'condition',
 				'order' => 'ASC',
 				'orderby' => 'name',
 				'hide_empty' => false,
@@ -241,8 +241,8 @@ if ($providers && !empty($providers)) { $treatment_field_classes .= ' has-provid
 				$postsPerPage = -1;
 			}
 		$args = (array(
-			'post_type' => "provider",
-			"post_status" => "publish",
+			'post_type' => 'provider',
+			'post_status' => 'publish',
 			'order' => 'ASC',
 			'orderby' => 'title',
 			'posts_per_page' => $postsPerPage,
@@ -288,8 +288,8 @@ if ($providers && !empty($providers)) { $treatment_field_classes .= ' has-provid
 
 		// Expertise Section
 		$args = (array(
-			'post_type' => "expertise",
-			"post_status" => "publish",
+			'post_type' => 'expertise',
+			'post_status' => 'publish',
 			'order' => 'ASC',
 			'orderby' => 'title',
 			'posts_per_page' => -1,

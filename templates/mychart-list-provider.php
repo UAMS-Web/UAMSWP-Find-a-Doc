@@ -57,11 +57,11 @@ add_action( 'genesis_loop', 'display_provider_image' );
 function display_provider_image() {
 	// Custom WP_Query args
 	$args = array(
-		"post_type" => "provider",
-		"post_status" => "publish",
-		"posts_per_page" => "-1", // Set for all
-		"orderby" => "title",
-		"order" => "ASC",
+		'post_type' => 'provider',
+		'post_status' => 'publish',
+		'posts_per_page' => '-1', // Set for all
+		'orderby' => 'title',
+		'order' => 'ASC',
 	);
 
 	$query = new WP_Query( $args );

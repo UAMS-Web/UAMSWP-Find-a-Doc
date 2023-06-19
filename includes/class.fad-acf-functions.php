@@ -554,10 +554,10 @@ function custom_excerpt_acf( $post_id ) {
 
 	// 1. Add post types (key) and corresponding field names (value) to be used to set the excerpt
 	$excerpt_field_name = array(
-		"expertise" => "expertise_selected_post_excerpt",
-		"provider" => "physician_short_clinical_bio",
-		"location" => "location_short_desc",
-		"clinical-resource" => "clinical_resource_excerpt",
+		'expertise' => 'expertise_selected_post_excerpt',
+		'provider' => 'physician_short_clinical_bio',
+		'location' => 'location_short_desc',
+		'clinical-resource' => 'clinical_resource_excerpt',
 	);
 
 	// Get the post type of the current page/post
@@ -1025,7 +1025,7 @@ add_filter('acf/format_value/key=field_physician_select_publications_pubmed', 'p
 		if ( $relationship_ontology_type ) {
 
 			// Create the array to be used in $args['meta_query']
-			$relationship_ontology_type_meta = array( "relation" => "OR" );
+			$relationship_ontology_type_meta = array( 'relation' => 'OR' );
 
 			// For each value in the $relationship_ontology_type array...
 			foreach( $relationship_ontology_type as $field_name ) {
@@ -1037,16 +1037,16 @@ add_filter('acf/format_value/key=field_physician_select_publications_pubmed', 'p
 					// The content type of the page/post is not defined as a Simple Content Item
 					// (0 means Simple Content Item)
 					array(
-						"key" => $field_name,
-						"value" => "0",
-						"compare" => "!=",
+						'key' => $field_name,
+						'value' => '0',
+						'compare' => '!=',
 					),
 
 					// The content type of the page/post has not been defined
 					// (the page/post has not been updated since the ontology type input was added)
 					array(
-						"key" => $field_name,
-						"compare" => "NOT EXISTS"
+						'key' => $field_name,
+						'compare' => 'NOT EXISTS'
 					)
 				);
 			} // endforeach

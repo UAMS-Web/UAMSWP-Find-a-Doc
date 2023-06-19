@@ -89,7 +89,7 @@ $clinical_resources = get_field('treatment_procedure_clinical_resources');
 $resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
 $resource_more = false;
 $args = (array(
-	'post_type' => "clinical-resource",
+	'post_type' => 'clinical-resource',
 	'order' => 'DESC',
 	'orderby' => 'post_date',
 	'posts_per_page' => $resource_postsPerPage,
@@ -147,8 +147,8 @@ $jump_link_count = 0;
 
 	// Check if Conditions section should be displayed
 	$args = (array(
-		'post_type' => "condition",
-		"post_status" => "publish",
+		'post_type' => 'condition',
+		'post_status' => 'publish',
 		'order' => 'ASC',
 		'orderby' => 'title',
 		'posts_per_page' => -1,
@@ -169,8 +169,8 @@ $jump_link_count = 0;
 	// Check if Providers section should be displayed
 	if ( $providers ) {
 		$args = (array(
-			'post_type' => "provider",
-			"post_status" => "publish",
+			'post_type' => 'provider',
+			'post_status' => 'publish',
 			'order' => 'ASC',
 			'orderby' => 'title',
 			'posts_per_page' => -1,

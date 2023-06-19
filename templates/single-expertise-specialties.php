@@ -183,29 +183,29 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 
 		if ( $expertise_descendant_section_show ) { // If it's suppressed or none available, set to false
 			$args = array(
-				"post_type" => "expertise",
-				"post_status" => "publish",
-				"post_parent" => $page_id,
+				'post_type' => 'expertise',
+				'post_status' => 'publish',
+				'post_parent' => $page_id,
 				'order' => 'ASC',
 				'orderby' => 'title',
 				'posts_per_page' => -1, // We do not want to limit the post count
 				'meta_query' => array(
-					"relation" => "AND",
+					'relation' => 'AND',
 					array(
-						"key" => "hide_from_sub_menu",
-						"value" => "1",
-						"compare" => "!=",
+						'key' => 'hide_from_sub_menu',
+						'value' => '1',
+						'compare' => '!=',
 					),
 					array(
-						"relation" => "OR",
+						'relation' => 'OR',
 						array(
-							"key" => "expertise_type",
-							"value" => "0",
-							"compare" => "!=",
+							'key' => 'expertise_type',
+							'value' => '0',
+							'compare' => '!=',
 						),
 						array(
-							"key" => "expertise_type",
-							"compare" => "NOT EXISTS" // If the item has not been updated since 'expertise_type' was added
+							'key' => 'expertise_type',
+							'compare' => 'NOT EXISTS' // If the item has not been updated since 'expertise_type' was added
 						),
 					),
 				),

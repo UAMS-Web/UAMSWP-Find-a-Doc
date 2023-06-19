@@ -264,7 +264,7 @@ $clinical_resources = get_field('location_clinical_resources');
 $resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
 $resource_more = false;
 $args = (array(
-	'post_type' => "clinical-resource",
+	'post_type' => 'clinical-resource',
 	'order' => 'DESC',
 	'orderby' => 'post_date',
 	'posts_per_page' => $resource_postsPerPage,
@@ -486,13 +486,13 @@ while ( have_posts() ) : the_post(); ?>
 		$providers = get_field( 'physician_locations' );
 		if ( $providers ) {
 			$args = array(
-				"post_type" => "provider",
-				"post_status" => "publish",
+				'post_type' => 'provider',
+				'post_status' => 'publish',
 				"posts_per_page" => -1,
-				"orderby" => "title",
-				"order" => "ASC",
-				"fields" => "ids",
-				"post__in" => $providers
+				'orderby' => 'title',
+				'order' => 'ASC',
+				'fields' => 'ids',
+				'post__in' => $providers
 			);
 			$provider_query = New WP_Query( $args );
 		}
@@ -513,7 +513,7 @@ while ( have_posts() ) : the_post(); ?>
 		$condition_schema = '';
 		// Conditions CPT
 		$args = (array(
-			'post_type' => "condition",
+			'post_type' => 'condition',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
@@ -535,7 +535,7 @@ while ( have_posts() ) : the_post(); ?>
 		$treatment_schema = '';
 		// Treatments CPT
 		$args = (array(
-			'post_type' => "treatment",
+			'post_type' => 'treatment',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
@@ -558,9 +558,9 @@ while ( have_posts() ) : the_post(); ?>
 		$current_id = get_the_ID();
 		if ( ( 0 != count( get_pages( array( 'child_of' => $current_id, 'post_type' => 'location' ) ) ) ) ) { // If none available, set to false
 			$args = array(
-				"post_type" => "location",
-				"post_status" => "publish",
-				"post_parent" => $current_id,
+				'post_type' => 'location',
+				'post_status' => 'publish',
+				'post_parent' => $current_id,
 				'order' => 'ASC',
 				'orderby' => 'title',
 				'meta_query' => array(

@@ -75,32 +75,32 @@ function doximity_csv_export() {
 
 	// Custom WP_Query args
 	$args = array(
-		"post_type" => "provider",
-		"post_status" => "publish",
-		"posts_per_page" => "-1", // Set for all
-		"orderby" => "title",
-		"order" => "ASC",
+		'post_type' => 'provider',
+		'post_status' => 'publish',
+		'posts_per_page' => '-1', // Set for all
+		'orderby' => 'title',
+		'order' => 'ASC',
 	);
 
 	$query = new WP_Query( $args );
 
 	if ( $query->have_posts() ) : 
 		$table_head = array();
-		$table_head[0] = "NPI Number";
-		$table_head[1] = "First Name";
-		$table_head[2] = "Last Name";
-		$table_head[3] = "Credentials (MD or DO)";
-		$table_head[4] = "Email Address";
-		$table_head[5] = "Facility Name";
-		$table_head[6] = "Office Address 1";
-		$table_head[7] = "Office Address 2";
-		$table_head[8] = "Office City";
-		$table_head[9] = "Office State";
-		$table_head[10] = "Office Zip";
-		$table_head[11] = "Phone";
-		$table_head[12] = "Fax";
-		$table_head[13] = "Specialty";
-		$table_head[14] = "Sub-Specialty";
+		$table_head[0] = 'NPI Number';
+		$table_head[1] = 'First Name';
+		$table_head[2] = 'Last Name';
+		$table_head[3] = 'Credentials (MD or DO)';
+		$table_head[4] = 'Email Address';
+		$table_head[5] = 'Facility Name';
+		$table_head[6] = 'Office Address 1';
+		$table_head[7] = 'Office Address 2';
+		$table_head[8] = 'Office City';
+		$table_head[9] = 'Office State';
+		$table_head[10] = 'Office Zip';
+		$table_head[11] = 'Phone';
+		$table_head[12] = 'Fax';
+		$table_head[13] = 'Specialty';
+		$table_head[14] = 'Sub-Specialty';
 
 		$table_body = array();
 		$row = array();
@@ -347,11 +347,11 @@ function gmb_provider_csv_export() {
 
 	// Custom WP_Query args
 	$args = array(
-		"post_type" => "provider",
-		"post_status" => "publish",
-		"posts_per_page" => "-1", // -1 => Set for all
-		"orderby" => "title",
-		"order" => "ASC",
+		'post_type' => 'provider',
+		'post_status' => 'publish',
+		'posts_per_page' => '-1', // -1 => Set for all
+		'orderby' => 'title',
+		'order' => 'ASC',
 		// 'paged' => get_query_var( 'paged' ),
 	);
 
@@ -676,7 +676,7 @@ function gmb_provider_csv_export() {
 					$degree_name = get_term( $degree, 'degree');
 					$degree_list .= $degree_name->name;
 					if( count($degrees) > $d ) {
-						$degree_list .= ", ";
+						$degree_list .= ', ';
 					}
 					$d++;
 				endforeach;
@@ -728,7 +728,7 @@ function gmb_provider_csv_export() {
 			$c = 1;
 			if( $provider_gmb_cats ) {
 				foreach( $provider_gmb_cats as $provider_gmb_cat ) {
-					$provider_gmb_cat_term = get_term($provider_gmb_cat, "gmb_cat_provider");
+					$provider_gmb_cat_term = get_term($provider_gmb_cat, 'gmb_cat_provider');
 					if ( 2 > $c ){
 						$provider_gmb_cat_primary_name = esc_html( $provider_gmb_cat_term->name );
 					} elseif ( 2 == $c ) {
@@ -1124,11 +1124,11 @@ function gmb_location_csv_export() {
 
 	// Custom WP_Query args
 	$args = array(
-		"post_type" => "location",
-		"post_status" => "publish",
-		"posts_per_page" => "-1", // Set for all
-		"orderby" => "title",
-		"order" => "ASC",
+		'post_type' => 'location',
+		'post_status' => 'publish',
+		'posts_per_page' => '-1', // Set for all
+		'orderby' => 'title',
+		'order' => 'ASC',
 	);
 
 	$query = new WP_Query( $args );
@@ -1462,7 +1462,7 @@ function gmb_location_csv_export() {
 			$location_address_1 = get_field( 'location_address_1', $location_post_id );
 			$location_building = get_field('location_building', $location_post_id );
 			if ($location_building) {
-				$building = get_term($location_building, "building");
+				$building = get_term($location_building, 'building');
 				$building_slug = $building->slug;
 				$building_name = $building->name;
 			}
@@ -1486,7 +1486,7 @@ function gmb_location_csv_export() {
 				if ( $location_building && $building_slug != '_none' ) {
 					array_push($location_addresses, $building_name);
 				}
-				if ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ) {
+				if ( $location_floor && !empty($location_floor_value) && $location_floor_value != '0' ) {
 					array_push($location_addresses, $location_floor_label);
 				}
 				if ( $location_suite && !empty($location_suite) ) {
@@ -1536,7 +1536,7 @@ function gmb_location_csv_export() {
 			$c = 1;
 			if( $location_gmb_cats ) {
 				foreach( $location_gmb_cats as $location_gmb_cat ) {
-					$location_gmb_cat_term = get_term($location_gmb_cat, "gmb_cat_location");
+					$location_gmb_cat_term = get_term($location_gmb_cat, 'gmb_cat_location');
 					if ( 2 > $c ){
 						$location_gmb_cat_primary_name = esc_html( $location_gmb_cat_term->name );
 					} elseif ( 2 == $c ) {
@@ -1687,7 +1687,7 @@ function gmb_location_csv_export() {
 					$excerpt = '';
 					$descr = get_field('location_about',$location_post_id); // Get the description
 					$descr = wp_strip_all_tags($descr); // Strip all HTML tags
-					$descr = str_replace(array("\n", "\r"), ' ', $descr); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
+					$descr = str_replace(array('\n', '\r'), ' ', $descr); // The double quotes around the carriage-return and newline codes are important. Using single quotes won't yield the proper result.
 					$descr = mb_strimwidth($descr, 0, 747, '...'); // Truncate the string
 					$descr_short = get_field('location_short_desc',$location_post_id); // Strip all HTML tags
 					$descr_short = wp_strip_all_tags($descr_short); // Get the short description
@@ -1885,11 +1885,11 @@ function mychart_csv_export() {
 
 	// Custom WP_Query args
 	$args = array(
-		"post_type" => "provider",
-		"post_status" => "publish",
-		"posts_per_page" => "-1", // Set for all
-		"orderby" => "title",
-		"order" => "ASC",
+		'post_type' => 'provider',
+		'post_status' => 'publish',
+		'posts_per_page' => '-1', // Set for all
+		'orderby' => 'title',
+		'order' => 'ASC',
 	);
 
 	$query = new WP_Query( $args );

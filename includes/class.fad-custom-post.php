@@ -26,20 +26,20 @@ function providers() {
 		'filter_items_list' => 'Filter Providers list',
 	);
 	$capabilities = array(
-		'edit_post' => "edit_physician",
-		'read_post' => "read_physician",
-		'delete_post' => "delete_physician",
-		'edit_posts' => "edit_physicians",
-		'edit_others_posts' => "edit_others_physicians",
-		'publish_posts' => "publish_physicians",
-		'read_private_posts' => "read_private_physicians",
-		'read' => "read",
-		'delete_posts' => "delete_physicians",
-		'delete_private_posts' => "delete_private_physicians",
-		'delete_published_posts' => "delete_published_physicians",
-		'delete_others_posts' => "delete_others_physicians",
-		'edit_private_posts' => "edit_private_physicians",
-		'edit_published_posts' => "edit_published_physicians",
+		'edit_post' => 'edit_physician',
+		'read_post' => 'read_physician',
+		'delete_post' => 'delete_physician',
+		'edit_posts' => 'edit_physicians',
+		'edit_others_posts' => 'edit_others_physicians',
+		'publish_posts' => 'publish_physicians',
+		'read_private_posts' => 'read_private_physicians',
+		'read' => 'read',
+		'delete_posts' => 'delete_physicians',
+		'delete_private_posts' => 'delete_private_physicians',
+		'delete_published_posts' => 'delete_published_physicians',
+		'delete_others_posts' => 'delete_others_physicians',
+		'edit_private_posts' => 'edit_private_physicians',
+		'edit_published_posts' => 'edit_published_physicians',
 	);
 	$args = array(
 		'label' => 'Provider',
@@ -98,20 +98,20 @@ function locations() {
 		'filter_items_list' => 'Filter Locations list',
 	);
 	$capabilities = array(
-		'edit_post' => "edit_location",
-		'read_post' => "read_location",
-		'delete_post' => "delete_location",
-		'edit_posts' => "edit_locations",
-		'edit_others_posts' => "edit_others_locations",
-		'publish_posts' => "publish_locations",
-		'read_private_posts' => "read_private_locations",
-		'read' => "read",
-		'delete_posts' => "delete_locations",
-		'delete_private_posts' => "delete_private_locations",
-		'delete_published_posts' => "delete_published_locations",
-		'delete_others_posts' => "delete_others_locations",
-		'edit_private_posts' => "edit_private_locations",
-		'edit_published_posts' => "edit_published_locations",
+		'edit_post' => 'edit_location',
+		'read_post' => 'read_location',
+		'delete_post' => 'delete_location',
+		'edit_posts' => 'edit_locations',
+		'edit_others_posts' => 'edit_others_locations',
+		'publish_posts' => 'publish_locations',
+		'read_private_posts' => 'read_private_locations',
+		'read' => 'read',
+		'delete_posts' => 'delete_locations',
+		'delete_private_posts' => 'delete_private_locations',
+		'delete_published_posts' => 'delete_published_locations',
+		'delete_others_posts' => 'delete_others_locations',
+		'edit_private_posts' => 'edit_private_locations',
+		'edit_published_posts' => 'edit_published_locations',
 	);
 	$args = array(
 		'label' => 'Location',
@@ -242,20 +242,20 @@ if ( ! function_exists('conditions_cpt') ) {
 			'filter_items_list' => 'Filter Conditions list',
 		);
 		$capabilities = array(
-			'edit_post' => "edit_condition",
-			'read_post' => "read_condition",
-			'delete_post' => "delete_condition",
-			'edit_posts' => "edit_conditions",
-			'edit_others_posts' => "edit_others_conditions",
-			'publish_posts' => "publish_conditions",
-			'read_private_posts' => "read_private_conditions",
-			'read' => "read",
-			'delete_posts' => "delete_conditions",
-			'delete_private_posts' => "delete_private_conditions",
-			'delete_published_posts' => "delete_published_conditions",
-			'delete_others_posts' => "delete_others_conditions",
-			'edit_private_posts' => "edit_private_conditions",
-			'edit_published_posts' => "edit_published_conditions",
+			'edit_post' => 'edit_condition',
+			'read_post' => 'read_condition',
+			'delete_post' => 'delete_condition',
+			'edit_posts' => 'edit_conditions',
+			'edit_others_posts' => 'edit_others_conditions',
+			'publish_posts' => 'publish_conditions',
+			'read_private_posts' => 'read_private_conditions',
+			'read' => 'read',
+			'delete_posts' => 'delete_conditions',
+			'delete_private_posts' => 'delete_private_conditions',
+			'delete_published_posts' => 'delete_published_conditions',
+			'delete_others_posts' => 'delete_others_conditions',
+			'edit_private_posts' => 'edit_private_conditions',
+			'edit_published_posts' => 'edit_published_conditions',
 		);
 		$args = array(
 			'label' => 'Conditions',
@@ -314,20 +314,20 @@ if ( ! function_exists('treatments_cpt') ) {
 			'filter_items_list' => 'Filter Treatments & Procedures list',
 		);
 		$capabilities = array(
-			'edit_post' => "edit_treatment",
-			'read_post' => "read_treatment",
-			'delete_post' => "delete_treatment",
-			'edit_posts' => "edit_treatments",
-			'edit_others_posts' => "edit_others_treatments",
-			'publish_posts' => "publish_treatments",
-			'read_private_posts' => "read_private_treatments",
-			'read' => "read",
-			'delete_posts' => "delete_treatments",
-			'delete_private_posts' => "delete_private_treatments",
-			'delete_published_posts' => "delete_published_treatments",
-			'delete_others_posts' => "delete_others_treatments",
-			'edit_private_posts' => "edit_private_treatments",
-			'edit_published_posts' => "edit_published_treatments",
+			'edit_post' => 'edit_treatment',
+			'read_post' => 'read_treatment',
+			'delete_post' => 'delete_treatment',
+			'edit_posts' => 'edit_treatments',
+			'edit_others_posts' => 'edit_others_treatments',
+			'publish_posts' => 'publish_treatments',
+			'read_private_posts' => 'read_private_treatments',
+			'read' => 'read',
+			'delete_posts' => 'delete_treatments',
+			'delete_private_posts' => 'delete_private_treatments',
+			'delete_published_posts' => 'delete_published_treatments',
+			'delete_others_posts' => 'delete_others_treatments',
+			'edit_private_posts' => 'edit_private_treatments',
+			'edit_published_posts' => 'edit_published_treatments',
 		);
 		$args = array(
 			'label' => 'Treatments & Procedures',
@@ -386,20 +386,20 @@ if ( ! function_exists('clinical_resources_cpt') ) {
 			'filter_items_list' => 'Filter Resources list',
 		);
 		$capabilities = array(
-			'edit_post' => "edit_clinical_resource",
-			'read_post' => "read_clinical_resource",
-			'delete_post' => "delete_clinical_resource",
-			'edit_posts' => "edit_clinical_resources",
-			'edit_others_posts' => "edit_others_clinical_resources",
-			'publish_posts' => "publish_clinical_resources",
-			'read_private_posts' => "read_private_clinical_resources",
-			'read' => "read",
-			'delete_posts' => "delete_clinical_resources",
-			'delete_private_posts' => "delete_private_clinical_resources",
-			'delete_published_posts' => "delete_published_clinical_resources",
-			'delete_others_posts' => "delete_others_clinical_resources",
-			'edit_private_posts' => "edit_private_clinical_resources",
-			'edit_published_posts' => "edit_published_clinical_resources",
+			'edit_post' => 'edit_clinical_resource',
+			'read_post' => 'read_clinical_resource',
+			'delete_post' => 'delete_clinical_resource',
+			'edit_posts' => 'edit_clinical_resources',
+			'edit_others_posts' => 'edit_others_clinical_resources',
+			'publish_posts' => 'publish_clinical_resources',
+			'read_private_posts' => 'read_private_clinical_resources',
+			'read' => 'read',
+			'delete_posts' => 'delete_clinical_resources',
+			'delete_private_posts' => 'delete_private_clinical_resources',
+			'delete_published_posts' => 'delete_published_clinical_resources',
+			'delete_others_posts' => 'delete_others_clinical_resources',
+			'edit_private_posts' => 'edit_private_clinical_resources',
+			'edit_published_posts' => 'edit_published_clinical_resources',
 		);
 		$args = array(
 			'label' => 'Resources',
@@ -2463,7 +2463,7 @@ function get_provider_meta($object) {
 	$i = 1;
 	if( $conditions_cpt ) {
 		$args = (array(
-			'post_type' => "condition",
+			'post_type' => 'condition',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
@@ -2493,7 +2493,7 @@ function get_provider_meta($object) {
 	$i = 1;
 	if( $treatments_cpt ) {
 		$args = (array(
-			'post_type' => "treatment",
+			'post_type' => 'treatment',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
@@ -2522,7 +2522,7 @@ function get_provider_meta($object) {
 	$i = 1;
 	if( $expertises ) {
 		$args = (array(
-			'post_type' => "expertise",
+			'post_type' => 'expertise',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
@@ -2820,7 +2820,7 @@ function get_location_meta($object) {
 	$i = 1;
 	if( $providers ) {
 		$args = (array(
-			'post_type' => "provider",
+			'post_type' => 'provider',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
@@ -2848,7 +2848,7 @@ function get_location_meta($object) {
 	$i = 1;
 	if( $expertises ) {
 		$args = (array(
-			'post_type' => "expertise",
+			'post_type' => 'expertise',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
@@ -2876,7 +2876,7 @@ function get_location_meta($object) {
 	$i = 1;
 	if( $conditions_cpt ) {
 		$args = (array(
-			'post_type' => "condition",
+			'post_type' => 'condition',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
@@ -2906,7 +2906,7 @@ function get_location_meta($object) {
 	$i = 1;
 	if( $treatments_cpt ) {
 		$args = (array(
-			'post_type' => "treatment",
+			'post_type' => 'treatment',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
@@ -2962,7 +2962,7 @@ function get_expertise_meta($object) {
 	$i = 1;
 	if( $conditions_cpt ) {
 		$args = (array(
-			'post_type' => "condition",
+			'post_type' => 'condition',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
@@ -2992,7 +2992,7 @@ function get_expertise_meta($object) {
 	$i = 1;
 	if( $treatments_cpt ) {
 		$args = (array(
-			'post_type' => "treatment",
+			'post_type' => 'treatment',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
@@ -3021,7 +3021,7 @@ function get_expertise_meta($object) {
 	$i = 1;
 	if( $providers ) {
 		$args = (array(
-			'post_type' => "provider",
+			'post_type' => 'provider',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
@@ -3050,7 +3050,7 @@ function get_expertise_meta($object) {
 	$i = 1;
 	if( $locations ) {
 		$args = (array(
-			'post_type' => "location",
+			'post_type' => 'location',
 			'order' => 'ASC',
 			'orderby' => 'title',
 			'posts_per_page' => -1,
@@ -3087,7 +3087,7 @@ function get_condition_meta($object) {
 	$i = 1;
 	if( $expertises ) {
 		$args = (array(
-			'post_type' => "expertise",
+			'post_type' => 'expertise',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
@@ -3116,7 +3116,7 @@ function get_condition_meta($object) {
 	$i = 1;
 	if( $treatments_cpt ) {
 		$args = (array(
-			'post_type' => "treatment",
+			'post_type' => 'treatment',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
@@ -3145,7 +3145,7 @@ function get_condition_meta($object) {
 	$i = 1;
 	if( $providers ) {
 		$args = (array(
-			'post_type' => "provider",
+			'post_type' => 'provider',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
@@ -3174,7 +3174,7 @@ function get_condition_meta($object) {
 	$i = 1;
 	if( $locations ) {
 		$args = (array(
-			'post_type' => "location",
+			'post_type' => 'location',
 			'order' => 'ASC',
 			'orderby' => 'title',
 			'posts_per_page' => -1,
@@ -3211,7 +3211,7 @@ function get_treatment_meta($object) {
 	$i = 1;
 	if( $expertises ) {
 		$args = (array(
-			'post_type' => "expertise",
+			'post_type' => 'expertise',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
@@ -3240,7 +3240,7 @@ function get_treatment_meta($object) {
 	$i = 1;
 	if( $conditions_cpt ) {
 		$args = (array(
-			'post_type' => "condition",
+			'post_type' => 'condition',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
@@ -3269,7 +3269,7 @@ function get_treatment_meta($object) {
 	$i = 1;
 	if( $providers ) {
 		$args = (array(
-			'post_type' => "provider",
+			'post_type' => 'provider',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
@@ -3298,7 +3298,7 @@ function get_treatment_meta($object) {
 	$i = 1;
 	if( $locations ) {
 		$args = (array(
-			'post_type' => "location",
+			'post_type' => 'location',
 			'order' => 'ASC',
 			'orderby' => 'title',
 			'posts_per_page' => -1,
@@ -3336,7 +3336,7 @@ function get_resource_meta($object) {
 	$conditions_cpt = get_field('clinical_resource_conditions', $postId);
 	if($conditions_cpt) {
 		$args = (array(
-			'post_type' => "condition",
+			'post_type' => 'condition',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
@@ -3349,7 +3349,7 @@ function get_resource_meta($object) {
 	$treatments_cpt = get_field('clinical_resource_treatments', $postId);
 	if($treatments_cpt) {
 		$args = (array(
-			'post_type' => "treatment",
+			'post_type' => 'treatment',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
@@ -3362,12 +3362,12 @@ function get_resource_meta($object) {
 	$providers = get_field( 'clinical_resource_providers', $postId );
 	if($providers) {
 		$args = array(
-			"post_type" => "provider",
-			"post_status" => "publish",
+			'post_type' => 'provider',
+			'post_status' => 'publish',
 			"posts_per_page" => -1,
-			"orderby" => "title",
-			"order" => "ASC",
-			"post__in" => $providers
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'post__in' => $providers
 		);
 		$provider_query = New WP_Query( $args );
 	}
@@ -3375,7 +3375,7 @@ function get_resource_meta($object) {
 	$locations = get_field('clinical_resource_locations', $postId);
 	if($locations) {
 		$args = (array(
-			'post_type' => "location",
+			'post_type' => 'location',
 			'order' => 'ASC',
 			'orderby' => 'title',
 			'posts_per_page' => -1,
@@ -3388,7 +3388,7 @@ function get_resource_meta($object) {
 	$expertises = get_field('clinical_resource_aoe', $postId);
 	if($expertises) {
 		$args = (array(
-			'post_type' => "expertise",
+			'post_type' => 'expertise',
 			'order' => 'ASC',
 			'orderby' => 'title',
 			'posts_per_page' => -1,
@@ -3401,7 +3401,7 @@ function get_resource_meta($object) {
 	$clinical_resources = get_field('clinical_resource_related', $postId);
 	if($clinical_resources) {
 		$args = (array(
-			'post_type' => "clinical-resource",
+			'post_type' => 'clinical-resource',
 			'order' => 'DESC',
 			'orderby' => 'post_date',
 			'posts_per_page' => -1,

@@ -94,7 +94,7 @@ if($filter_id || $filter_region || $filter_location || $filter_aoe) {
 	if ($filter_region || $filter_location || $filter_aoe) {
 		// Build Query to get Ids from filters
 		$args = (array(
-			'post_type' => "provider",
+			'post_type' => 'provider',
 			'order' => 'ASC',
 			'orderby' => 'title',
 			'posts_per_page' => -1,
@@ -108,7 +108,7 @@ if($filter_id || $filter_region || $filter_location || $filter_aoe) {
 	}
 	// Build Main Query from Post Ids (Filtered IDs + Specific IDs)
 	$args = (array(
-		'post_type' => "provider",
+		'post_type' => 'provider',
 		'order' => 'ASC',
 		'orderby' => 'title',
 		'posts_per_page' => -1,

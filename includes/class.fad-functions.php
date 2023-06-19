@@ -365,28 +365,27 @@ function uamswp_load_by_ajax_callback(){
 			// 'suppress_filters' => true,
 			'post_type' => 'provider',
 			'post_status' => 'publish',
-			"orderby" => "title",
-			"order" => "ASC",
+			'orderby' => 'title',
+			'order' => 'ASC',
 			'posts_per_page' => -1,
 			'post__in' => $ids_array,
-
 		);
 	// } else { // Taxonomy
 	// 	$tax = (isset($_POST["tax"])) ? $_POST["tax"] : '';
 	// 	$slug = (isset($_POST["slug"])) ? $_POST["slug"] : '';
 	// 	$args = array(
-	// 		"post_type" => "provider",
-	// 		"post_status" => "publish",
-	// 		"posts_per_page" => $ppp,
-	// 		"orderby" => "title",
-	// 		"order" => "ASC",
+	// 		'post_type' => 'provider',
+	// 		'post_status' => 'publish',
+	// 		'posts_per_page' => $ppp,
+	// 		'orderby' => 'title',
+	// 		'order' => 'ASC',
 	// 		'paged'	=> $page,
-	// 		"tax_query" => array(
+	// 		'tax_query' => array(
 	// 			array(
-	// 			"taxonomy" => $tax,
-	// 			"field" => "slug",
-	// 			"terms" => $slug,
-	// 			"operator" => "IN"
+	// 			'taxonomy' => $tax,
+	// 			'field' => 'slug',
+	// 			'terms' => $slug,
+	// 			'operator' => 'IN'
 	// 			)
 	// 		)
 	// 	);
@@ -1414,16 +1413,16 @@ function uamswp_fad_post_title() {
 
 		if($providers) {
 			$args = array(
-				"post_type" => "provider",
-				"post_status" => "publish",
-				"posts_per_page" => -1,
-				"orderby" => "title",
-				"order" => "ASC",
-				"fields" => "ids",
+				'post_type' => 'provider',
+				'post_status' => 'publish',
+				'posts_per_page' => -1,
+				'orderby' => 'title',
+				'order' => 'ASC',
+				'fields' => 'ids',
 				// 'no_found_rows' => true, // counts posts, remove if pagination required
 				'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
 				'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
-				"post__in" => $providers
+				'post__in' => $providers
 			);
 			$provider_query = New WP_Query( $args );
 			if( ( $provider_query && $provider_query->have_posts() ) ) {
@@ -1459,8 +1458,8 @@ function uamswp_fad_post_title() {
 
 		if ( $locations) {
 			$args = array(
-				'post_type' => "location",
-				"post_status" => "publish",
+				'post_type' => 'location',
+				'post_status' => 'publish',
 				'order' => 'ASC',
 				'orderby' => 'title',
 				'posts_per_page' => -1,
@@ -1468,7 +1467,7 @@ function uamswp_fad_post_title() {
 				'no_found_rows' => true, // counts posts, remove if pagination required
 				'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
 				'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
-				'post__in'	=> $locations
+				'post__in' => $locations
 			);
 			$location_query = new WP_Query( $args );
 			if( ( $locations && $location_query->have_posts() ) ) {
@@ -1547,7 +1546,7 @@ function uamswp_fad_post_title() {
 		global $expertise_primary_name_attr; // string
 
 		$args = array(
-			'post_type' => "expertise",
+			'post_type' => 'expertise',
 			'order' => 'ASC',
 			'orderby' => 'title',
 			'posts_per_page' => -1,
@@ -1592,7 +1591,7 @@ function uamswp_fad_post_title() {
 		$resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
 		$resource_more = false;
 		$args = array(
-			'post_type' => "clinical-resource",
+			'post_type' => 'clinical-resource',
 			'order' => 'DESC',
 			'orderby' => 'post_date',
 			'posts_per_page' => $resource_postsPerPage,
@@ -1631,7 +1630,7 @@ function uamswp_fad_post_title() {
 
 		// Conditions CPT
 		$args = array(
-			'post_type' => "condition",
+			'post_type' => 'condition',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',
@@ -1668,7 +1667,7 @@ function uamswp_fad_post_title() {
 
 		// Treatments CPT
 		$args = array(
-			'post_type' => "treatment",
+			'post_type' => 'treatment',
 			'post_status' => 'publish',
 			'orderby' => 'title',
 			'order' => 'ASC',

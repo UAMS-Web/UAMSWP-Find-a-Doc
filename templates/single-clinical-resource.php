@@ -96,13 +96,13 @@ if($providers) {
 		$postsPerPage = -1;
 	}
 	$args = array(
-		"post_type" => "provider",
-		"post_status" => "publish",
-		"posts_per_page" => $postsPerPage,
-		"orderby" => "title",
-		"order" => "ASC",
-		"fields" => "ids",
-		"post__in" => $providers
+		'post_type' => 'provider',
+		'post_status' => 'publish',
+		'posts_per_page' => $postsPerPage,
+		'orderby' => 'title',
+		'order' => 'ASC',
+		'fields' => 'ids',
+		'post__in' => $providers
 	);
 	$provider_query = New WP_Query( $args );
 	if($provider_query && $provider_query->have_posts()) {
@@ -127,7 +127,7 @@ uamswp_fad_expertise_related_query();
 $conditions_cpt = get_field('clinical_resource_conditions');
 // Conditions CPT
 $args = (array(
-	'post_type' => "condition",
+	'post_type' => 'condition',
 	'post_status' => 'publish',
 	'orderby' => 'title',
 	'order' => 'ASC',
@@ -146,7 +146,7 @@ if( $conditions_cpt && $conditions_cpt_query->posts ) {
 $treatments_cpt = get_field('clinical_resource_treatments');
 // Treatments CPT
 $args = (array(
-	'post_type' => "treatment",
+	'post_type' => 'treatment',
 	'post_status' => 'publish',
 	'orderby' => 'title',
 	'order' => 'ASC',
@@ -166,7 +166,7 @@ $clinical_resources = get_field('clinical_resource_related');
 $resource_postsPerPage = -1; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
 $resource_more = false;
 $args = (array(
-	'post_type' => "clinical-resource",
+	'post_type' => 'clinical-resource',
 	'order' => 'DESC',
 	'orderby' => 'post_date',
 	'posts_per_page' => $resource_postsPerPage,

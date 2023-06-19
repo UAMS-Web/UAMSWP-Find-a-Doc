@@ -92,7 +92,7 @@ if($filter_type || $filter_region || $filter_aoe || $filter_ids) {
 	if ($filter_type || $filter_region || $filter_aoe) {
 		// Build Query to get Ids from filters
 		$args = (array(
-			'post_type' => "location",
+			'post_type' => 'location',
 			'order' => 'ASC',
 			'orderby' => 'title',
 			'posts_per_page' => -1,
@@ -109,7 +109,7 @@ if($filter_type || $filter_region || $filter_aoe || $filter_ids) {
 
 	// Build Main Query from Post Ids (Filtered IDs + Specific IDs)
 	$args = (array(
-		'post_type' => "location",
+		'post_type' => 'location',
 		'order' => 'ASC',
 		'orderby' => 'title',
 		'posts_per_page' => -1,
