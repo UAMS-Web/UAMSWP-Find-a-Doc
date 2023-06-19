@@ -1410,6 +1410,7 @@ function uamswp_fad_post_title() {
 		global $provider_query;
 		global $provider_section_show;
 		global $provider_ids;
+		global $provider_count; // integer
 
 		if($providers) {
 			$args = array(
@@ -1428,6 +1429,7 @@ function uamswp_fad_post_title() {
 			if( ( $provider_query && $provider_query->have_posts()) ) {
 				$provider_section_show = true;
 				$provider_ids = $provider_query->posts;
+				$provider_count = count($provider_query->posts);
 				$jump_link_count = $jump_link_count + 1;
 			} else {
 				// wp_redirect( get_the_permalink($site_nav_id), 301 );
@@ -1450,6 +1452,7 @@ function uamswp_fad_post_title() {
 		global $location_query;
 		global $location_section_show;
 		global $location_ids;
+		global $location_count; // integer
 		global $location_valid;
 
 		$location_valid = false;
@@ -1471,6 +1474,7 @@ function uamswp_fad_post_title() {
 			if( ( $locations && $location_query->have_posts() ) ) {
 				$location_section_show = true;
 				$location_ids = $location_query->posts;
+				$location_count = count($location_query->posts);
 				$jump_link_count = $jump_link_count + 1;
 			} else {
 				$location_section_show = false;
@@ -1538,6 +1542,7 @@ function uamswp_fad_post_title() {
 		global $expertise_query;
 		global $expertise_related_section_show;
 		global $expertise_ids;
+		global $expertise_count; // integer
 
 		$args = array(
 			'post_type' => "expertise",
@@ -1551,6 +1556,7 @@ function uamswp_fad_post_title() {
 		if( ( $expertises && $expertise_query->have_posts() ) ) {
 			$expertise_related_section_show = true;
 			$expertise_ids = $expertise_query->posts;
+			$expertise_count = count($expertise_query->posts);
 			$jump_link_count = $jump_link_count + 1;
 		} else {
 			$expertise_related_section_show = false;
@@ -1590,6 +1596,7 @@ function uamswp_fad_post_title() {
 		if( ( $clinical_resources && $clinical_resource_query->have_posts() ) ) {
 			$clinical_resource_section_show = true;
 			$clinical_resource_ids = $clinical_resource_query->posts;
+			$clinical_resource_count = count($clinical_resource_query->posts);
 			$jump_link_count = $jump_link_count + 1;
 		} else {
 			$clinical_resource_section_show = false;
@@ -1611,6 +1618,7 @@ function uamswp_fad_post_title() {
 		global $conditions_cpt_query;
 		global $condition_section_show;
 		global $condition_ids;
+		global $condition_count; // integer
 
 		// Conditions CPT
 		$args = array(
@@ -1625,6 +1633,7 @@ function uamswp_fad_post_title() {
 		if( ( $conditions_cpt && $conditions_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
 			$condition_section_show = true;
 			$condition_ids = $conditions_cpt_query->posts;
+			$condition_count = count($conditions_cpt_query->posts);
 			$jump_link_count = $jump_link_count + 1;
 		} else {
 			$condition_section_show = false;
@@ -1646,6 +1655,7 @@ function uamswp_fad_post_title() {
 		global $treatments_cpt_query;
 		global $treatments_section_show;
 		global $treatment_ids;
+		global $treatment_count; // integer
 
 		// Treatments CPT
 		$args = array(
@@ -1660,6 +1670,7 @@ function uamswp_fad_post_title() {
 		if( ( $treatments_cpt && $treatments_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
 			$treatments_section_show = true;
 			$treatment_ids = $treatments_cpt_query->posts;
+			$treatment_count = count($treatments_cpt_query->posts);
 			$jump_link_count = $jump_link_count + 1;
 		} else {
 			$treatments_section_show = false;
@@ -3633,6 +3644,7 @@ function uamswp_fad_section_provider() {
 		global $provider_query; // array
 		global $providers; // array
 		global $provider_ids; // array
+		global $provider_count; // integer
 
 	// Do something
 	if ( $provider_section_show ) {
@@ -3855,6 +3867,7 @@ function uamswp_fad_section_location() {
 		global $location_query; // array
 		global $locations; // array
 		global $location_ids; // array
+		global $location_count; // integer
 
 	// Do something
 	if ( $location_section_show ) {
