@@ -1471,7 +1471,7 @@ function uamswp_fad_post_title() {
 	}
 
 	// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
-	function uamswp_fad_ontology_descendant_query() {
+	function uamswp_fad_expertise_descendant_query() {
 		// Bring in variables from outside of the function
 		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
 
@@ -1632,10 +1632,10 @@ function uamswp_fad_ontology_nav_menu() {
 	global $location_section_show; // Typically defined in uamswp_fad_location_query()
 	global $expertise_related_section_show; // Typically defined in uamswp_fad_expertise_related_query()
 	global $clinical_resource_show_section; // Typically defined in uamswp_fad_clinical_resource_query()
-	global $expertise_descendant_section_show; // Typically defined in uamswp_fad_ontology_descendant_query()
-	global $child_pages; // Typically defined in uamswp_fad_ontology_descendant_query()
-	global $child_content_nav_show; // Typically defined in uamswp_fad_ontology_descendant_query()
-	global $childnav; // Typically defined in uamswp_fad_ontology_descendant_query()
+	global $expertise_descendant_section_show; // Typically defined in uamswp_fad_expertise_descendant_query()
+	global $child_pages; // Typically defined in uamswp_fad_expertise_descendant_query()
+	global $child_content_nav_show; // Typically defined in uamswp_fad_expertise_descendant_query()
+	global $childnav; // Typically defined in uamswp_fad_expertise_descendant_query()
 	global $provider_plural_name; // Typically defined in uamswp_fad_labels_provider()
 	global $provider_plural_name_attr; // Typically defined in uamswp_fad_labels_provider()
 	global $location_plural_name; // Typically defined in uamswp_fad_labels_location()
