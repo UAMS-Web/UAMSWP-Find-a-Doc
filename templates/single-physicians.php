@@ -516,10 +516,10 @@ while ( have_posts() ) : the_post();
 
 		// Check if Research section should be displayed
 		if ( !empty($research_bio) || !empty($research_interests) || !empty ( $publications ) || $pubmed_author_id || $research_profiles_link ) {
-			$show_research_section = true;
+			$research_section_show = true;
 			$jump_link_count++;
 		} else {
-			$show_research_section = false;
+			$research_section_show = false;
 		}
 
 		// Check if Conditions section should be displayed
@@ -846,7 +846,7 @@ while ( have_posts() ) : the_post();
 								<a class="nav-link" href="#academic-info">Academic Background</a>
 							</li>
 						<?php } ?>
-						<?php if ($show_research_section) { ?>
+						<?php if ($research_section_show) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#research-info">Research</a>
 							</li>
@@ -1106,7 +1106,7 @@ while ( have_posts() ) : the_post();
 		// End Academic Bio Section
 
 		// Begin Research Bio Section
-		if( $show_research_section ): ?>
+		if( $research_section_show ): ?>
 		<section class="uams-module research-info bg-auto" id="research-info">
 			<div class="container-fluid">
 				<div class="row">
@@ -1403,7 +1403,7 @@ while ( have_posts() ) : the_post();
 				$clinical_bio_section_show
 				|| $academic_section_show
 				|| $podcast_section_show
-				|| $show_research_section
+				|| $research_section_show
 				|| $show_conditions_section
 				|| $show_treatments_section
 				|| $show_aoe_section
