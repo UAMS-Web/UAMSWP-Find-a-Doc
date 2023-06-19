@@ -143,7 +143,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 	// Construct locations section
 	$location_section_title = $location_fpage_title_clinical_resource; // Text to use for the section title
 	$location_section_intro = $location_fpage_intro_clinical_resource; // Text to use for the section intro text
-	add_action( 'genesis_after_entry', 'uamswp_fad_section_locations', 18 );
+	add_action( 'genesis_after_entry', 'uamswp_fad_section_location', 18 );
 
 	// Construct areas of expertise section
 	add_action( 'genesis_after_entry', 'uamswp_resource_expertise', 20 );

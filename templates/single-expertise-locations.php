@@ -169,7 +169,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	$location_section_title = 'List of ' . $location_plural_name; // Text to use for the section title
 	$location_section_intro = ''; // Text to use for the section intro text
 	$location_section_collapse_list = false; // Query whether to collapse the list of locations in the providers section
-	add_action( 'genesis_entry_content', 'uamswp_fad_section_locations', 22 );
+	add_action( 'genesis_entry_content', 'uamswp_fad_section_location', 22 );
 
 	// Display appointment information
 	add_action( 'genesis_entry_content', 'uamswp_fad_ontology_appointment', 26 );

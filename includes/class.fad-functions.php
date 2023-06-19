@@ -3785,7 +3785,7 @@ function uamswp_fad_section_providers() {
 }
 
 // Construct locations section for display on a page
-function uamswp_fad_section_locations() {
+function uamswp_fad_section_location() {
 	// Bring in variables from outside of the function
 
 		// Optional variables defined on the template
@@ -4034,4 +4034,4 @@ function uamswp_fad_section_locations() {
 		</section>
 	<?php 
 	} // endif ( $location_section_show )
-} // end function uamswp_fad_section_locations()
+} // end function uamswp_fad_section_location()

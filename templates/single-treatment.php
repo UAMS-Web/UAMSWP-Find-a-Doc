@@ -469,7 +469,7 @@ $jump_link_count = 0;
 		// Begin Locations Section
 		$location_section_title = $location_plural_name . ' Providing ' . $page_title; // Text to use for the section title
 		$location_section_intro = 'Note that ' . $page_title . ' may not be <em>performed</em> at every ' . strtolower($location_single_name) . ' listed below. The list may include ' . strtolower($location_plural_name) . ' where the treatment plan is developed during and after a patient visit.'; // Text to use for the section intro text
-		uamswp_fad_section_locations();
+		uamswp_fad_section_location();
 		// End Locations Section
 
 		// Begin Areas of Expertise Section
