@@ -336,7 +336,7 @@ while ( have_posts() ) : the_post();
 	// $provider_youtube_link = get_field('physician_youtube_link');
 	$provider_clinical_admin_title = get_field('physician_clinical_admin_title');
 	$provider_clinical_focus = get_field('physician_clinical_focus');
-	$physician_awards = get_field('physician_awards');
+	$provider_awards = get_field('physician_awards');
 	$physician_additional_info = get_field('physician_additional_info');
 	$associations = get_field( 'physician_associations' );
 	$publications = get_field('physician_select_publications');
