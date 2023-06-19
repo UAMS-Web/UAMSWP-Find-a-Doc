@@ -1218,7 +1218,13 @@ function uamswp_fad_ontology_site_values() {
 	global $navbar_subbrand_parent;
 	global $navbar_subbrand_parent_attr;
 	global $navbar_subbrand_parent_url;
+	global $providers;
 	global $locations;
+	global $expertises;
+	global $child_pages;
+	global $clinical_resources;
+	global $conditions_cpt;
+	global $treatments_cpt;
 
 	// Ancestors
 	$ancestors = get_post_ancestors($page_id); // Get all ancestors
@@ -1311,7 +1317,15 @@ function uamswp_fad_ontology_site_values() {
 			$navbar_subbrand_parent_url = '';
 		}
 	}
+
+	// Get related ontology items
+	$providers = get_field( "physician_expertise", $site_nav_id );
 	$locations = get_field( 'location_expertise', $site_nav_id );
+	$expertises = get_field('expertise_associated', $site_nav_id);
+	$child_pages = get_pages( array('child_of' => $site_nav_id, 'post_type' => 'expertise' ) );
+	$clinical_resources = get_field('expertise_clinical_resources', $site_nav_id);
+	$conditions_cpt = get_field('expertise_conditions_cpt', $site_nav_id);
+	$treatments_cpt = get_field('expertise_treatments_cpt', $site_nav_id);
 }
 
 // Construct non-standard entry title
@@ -1383,18 +1397,20 @@ function uamswp_fad_post_title() {
 
 	// Query for whether related providers content section should be displayed on ontology pages/subsections
 	function uamswp_fad_provider_query() {
-		// Get variables from outside of the function
-		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
-		global $ontology_type; // Typically defined on the template
+		// Bring in variables from outside of the function
+
+			// Typically defined on the template
+			global $jump_link_count;
+
+			// Typically defined on the template or in a function such as uamswp_fad_ontology_site_values()
+			global $providers; // Value of the related providers input
+			// global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
 
 		// Make variables available outside of the function
-		global $physicians;
-		global $providers;
 		global $provider_query;
 		global $provider_section_show;
 		global $provider_ids;
 
-		$providers = get_field( "physician_expertise", $site_nav_id );
 		if($providers) {
 			$args = array(
 				"post_type" => "provider",
@@ -1412,6 +1428,7 @@ function uamswp_fad_post_title() {
 			if( ( $provider_query && $provider_query->have_posts()) ) {
 				$provider_section_show = true;
 				$provider_ids = $provider_query->posts;
+				$jump_link_count = $jump_link_count + 1;
 			} else {
 				// wp_redirect( get_the_permalink($site_nav_id), 301 );
 				$provider_section_show = false;
@@ -1474,16 +1491,19 @@ function uamswp_fad_post_title() {
 	// Query for whether descendant areas of expertise content section should be displayed on ontology pages/subsections
 	function uamswp_fad_expertise_descendant_query() {
 		// Bring in variables from outside of the function
-		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
+
+			// Typically defined on the template
+			global $jump_link_count;
+
+			// Typically defined on the template or in a function such as uamswp_fad_ontology_site_values()
+			global $child_pages;
 
 		// Make variables available outside of the function
-		global $child_pages;
 		global $childnav;
 		global $children;
 		global $expertise_descendant_section_show;
 		global $child_content_nav_show;
 
-		$child_pages = get_pages( array('child_of' => $site_nav_id, 'post_type' => 'expertise' ) );
 		if ($child_pages) {
 			$childnav = '';
 			$children = false;
@@ -1507,15 +1527,18 @@ function uamswp_fad_post_title() {
 	// Query for whether related areas of expertise content section should be displayed on ontology pages/subsections
 	function uamswp_fad_expertise_related_query() {
 		// Bring in variables from outside of the function
-		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
-		global $ontology_type; // Typically defined on the template
+
+			// Typically defined on the template
+			global $jump_link_count;
+
+			// Typically defined on the template or in a function such as uamswp_fad_ontology_site_values()
+			global $expertises;
 
 		// Make variables available outside of the function
-		global $expertises;
 		global $expertise_query;
 		global $expertise_related_section_show;
+		global $expertise_ids;
 
-		$expertises = get_field('expertise_associated', $site_nav_id);
 		$args = array(
 			'post_type' => "expertise",
 			'order' => 'ASC',
@@ -1527,6 +1550,8 @@ function uamswp_fad_post_title() {
 		$expertise_query = new WP_Query( $args );
 		if( ( $expertises && $expertise_query->have_posts() ) ) {
 			$expertise_related_section_show = true;
+			$expertise_ids = $expertise_query->posts;
+			$jump_link_count = $jump_link_count + 1;
 		} else {
 			$expertise_related_section_show = false;
 		}
@@ -1535,17 +1560,20 @@ function uamswp_fad_post_title() {
 	// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
 	function uamswp_fad_clinical_resource_query() {
 		// Bring in variables from outside of the function
-		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
-		global $ontology_type; // Typically defined on the template
+
+			// Typically defined on the template
+			global $jump_link_count;
+
+			// Typically defined on the template or in a function such as uamswp_fad_ontology_site_values()
+			global $clinical_resources; // Value of the related locations input
 
 		// Make variables available outside of the function
-		global $clinical_resources;
-		global $resource_postsPerPage;
-		global $resource_more;
 		global $clinical_resource_query;
 		global $clinical_resource_section_show;
+		global $clinical_resource_ids;
+		global $resource_postsPerPage;
+		global $resource_more;
 
-		$clinical_resources = get_field('expertise_clinical_resources', $site_nav_id);
 		$resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
 		$resource_more = false;
 		$args = array(
@@ -1561,6 +1589,8 @@ function uamswp_fad_post_title() {
 		// Check if Clinical Resources section should be displayed
 		if( ( $clinical_resources && $clinical_resource_query->have_posts() ) ) {
 			$clinical_resource_section_show = true;
+			$clinical_resource_ids = $clinical_resource_query->posts;
+			$jump_link_count = $jump_link_count + 1;
 		} else {
 			$clinical_resource_section_show = false;
 		}
@@ -1569,16 +1599,19 @@ function uamswp_fad_post_title() {
 	// Query for whether related conditions content section should be displayed on ontology pages/subsections
 	function uamswp_fad_condition_query() {
 		// Bring in variables from outside of the function
-		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
-		global $ontology_type; // Typically defined on the template
+
+			// Typically defined on the template
+			global $jump_link_count;
+			global $ontology_type;
+
+			// Typically defined on the template or in a function such as uamswp_fad_ontology_site_values()
+			global $conditions_cpt;
 
 		// Make variables available outside of the function
-		global $conditions_cpt;
 		global $conditions_cpt_query;
 		global $condition_section_show;
+		global $condition_ids;
 
-		// load all 'conditions' terms for the post
-		$conditions_cpt = get_field('expertise_conditions_cpt', $site_nav_id);
 		// Conditions CPT
 		$args = array(
 			'post_type' => "condition",
@@ -1591,6 +1624,8 @@ function uamswp_fad_post_title() {
 		$conditions_cpt_query = new WP_Query( $args );
 		if( ( $conditions_cpt && $conditions_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
 			$condition_section_show = true;
+			$condition_ids = $conditions_cpt_query->posts;
+			$jump_link_count = $jump_link_count + 1;
 		} else {
 			$condition_section_show = false;
 		}
@@ -1599,15 +1634,19 @@ function uamswp_fad_post_title() {
 	// Query for whether related treatments content section should be displayed on ontology pages/subsections
 	function uamswp_fad_treatment_query() {
 		// Bring in variables from outside of the function
-		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
-		global $ontology_type; // Typically defined on the template
+
+			// Typically defined on the template
+			global $jump_link_count;
+			global $ontology_type; // Typically defined on the template
+
+			// Typically defined on the template or in a function such as uamswp_fad_ontology_site_values()
+			global $treatments_cpt;
 
 		// Make variables available outside of the function
-		global $treatments_cpt;
 		global $treatments_cpt_query;
 		global $treatments_section_show;
+		global $treatment_ids;
 
-		$treatments_cpt = get_field('expertise_treatments_cpt', $site_nav_id);
 		// Treatments CPT
 		$args = array(
 			'post_type' => "treatment",
@@ -1620,6 +1659,8 @@ function uamswp_fad_post_title() {
 		$treatments_cpt_query = new WP_Query( $args );
 		if( ( $treatments_cpt && $treatments_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
 			$treatments_section_show = true;
+			$treatment_ids = $treatments_cpt_query->posts;
+			$jump_link_count = $jump_link_count + 1;
 		} else {
 			$treatments_section_show = false;
 		}
@@ -4035,4 +4076,4 @@ function uamswp_fad_section_location() {
 		</section>
 	<?php 
 	} // endif ( $location_section_show )
-} // end function uamswp_fad_section_location()
+} // end function uamswp_fad_section_location()()
