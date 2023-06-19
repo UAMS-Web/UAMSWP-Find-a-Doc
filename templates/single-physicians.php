@@ -887,13 +887,13 @@ while ( have_posts() ) : the_post();
 		} ?>
 
 		<?php 
-			$physician_clinical_split = false;
+			$provider_clinical_split = false;
 			if (
 				( $clinical_bio_section_show ) // column A stuff
 				&& ( $provider_clinical_focus ) // column B stuff
 				// && ( $provider_clinical_admin_title || $provider_clinical_focus ) // Alternate column B stuff if we decide to display clinical admin title
 				) {
-				$physician_clinical_split = true; // If there is stuff for column A and column B, split the section into two columns
+				$provider_clinical_split = true; // If there is stuff for column A and column B, split the section into two columns
 			}
 
 			// Display section for Clinical Bio, Clinical Video, Clinical Administrative Title(s), Clinical Focus ... only if there is a bio or video.
@@ -905,7 +905,7 @@ while ( have_posts() ) : the_post();
 							<h2 class="module-title"><span class="title">About <?php echo $short_name; ?></span></h2>
 
 
-							<?php if ( $physician_clinical_split ) {
+							<?php if ( $provider_clinical_split ) {
 								// If there is a bio or video AND at least one of the other clinical things, visually split the layout ?>
 								<div class="row content-split-lg">
 								<div class="col-xs-12 col-lg-7">
@@ -928,7 +928,7 @@ while ( have_posts() ) : the_post();
 									echo '</div>';
 								} ?>
 							<?php } // endif
-							if ( $physician_clinical_split ) { ?>
+							if ( $provider_clinical_split ) { ?>
 								</div>
 								</div>
 								<div class="col-xs-12 col-lg-5">
@@ -953,7 +953,7 @@ while ( have_posts() ) : the_post();
 								<h3 class="h4">Clinical Focus</h3>
 								<?php echo $provider_clinical_focus; ?>
 							<?php } // endif
-							if ( $physician_clinical_split ) { ?>
+							if ( $provider_clinical_split ) { ?>
 								</div>
 								</div>
 								</div>
