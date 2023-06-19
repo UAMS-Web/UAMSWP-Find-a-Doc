@@ -82,6 +82,118 @@ add_filter('seopress_titles_canonical','uamswp_fad_canonical');
 add_filter( 'body_class', 'uamswp_page_body_class' );
 $template_type = 'default';
 
+// Set logic for displaying jump links and sections
+$jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
+$jump_link_count = 0;
+
+// Query for whether related providers content section should be displayed on a page
+$providers = get_field( "clinical_resource_providers" );
+if($providers) {
+	$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12). If you change the value, update the instruction text in the editor's JSON file.
+	$postsCutoff = 18; // Set cutoff value. If you change the value, update the instruction text in the editor's JSON file.
+	$postsCountClass = $postsPerPage;
+	if(count($providers) <= $postsCutoff ) {
+		$postsPerPage = -1;
+	}
+	$args = array(
+		"post_type" => "provider",
+		"post_status" => "publish",
+		"posts_per_page" => $postsPerPage,
+		"orderby" => "title",
+		"order" => "ASC",
+		"fields" => "ids",
+		"post__in" => $providers
+	);
+	$provider_query = New WP_Query( $args );
+	if($provider_query && $provider_query->have_posts()) {
+		$provider_section_show = true;
+		$jump_link_count++;
+		$provider_ids = $provider_query->posts;
+	} else {
+		$provider_section_show = false;
+	}
+}
+
+// Query for whether related locations content section should be displayed on a page
+$locations = get_field('clinical_resource_locations');
+uamswp_fad_location_query();
+
+// Query for whether related areas of expertise content section should be displayed on a page
+$expertises = get_field('clinical_resource_aoe');
+uamswp_fad_expertise_related_query();
+
+// Query for whether related conditions content section should be displayed on a page
+// load all 'conditions' terms for the post
+$conditions_cpt = get_field('clinical_resource_conditions');
+// Conditions CPT
+$args = (array(
+	'post_type' => "condition",
+	'post_status' => 'publish',
+	'orderby' => 'title',
+	'order' => 'ASC',
+	'posts_per_page' => -1,
+	'post__in' => $conditions_cpt
+));
+$conditions_cpt_query = new WP_Query( $args );
+if( $conditions_cpt && $conditions_cpt_query->posts ) {
+	$condition_section_show = true;
+	$jump_link_count++;
+} else {
+	$condition_section_show = false;
+}
+
+// Query for whether related treatments content section should be displayed on a page
+$treatments_cpt = get_field('clinical_resource_treatments');
+// Treatments CPT
+$args = (array(
+	'post_type' => "treatment",
+	'post_status' => 'publish',
+	'orderby' => 'title',
+	'order' => 'ASC',
+	'posts_per_page' => -1,
+	'post__in' => $treatments_cpt
+));
+$treatments_cpt_query = new WP_Query( $args );
+if( $treatments_cpt && $treatments_cpt_query->posts ) {
+	$treatments_section_show = true;
+	$jump_link_count++;
+} else {
+	$treatments_section_show = false;
+}
+
+// Query for whether related clinical resources content section should be displayed on a page
+$clinical_resources = get_field('clinical_resource_related');
+$resource_postsPerPage = -1; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
+$resource_more = false;
+$args = (array(
+	'post_type' => "clinical-resource",
+	'order' => 'DESC',
+	'orderby' => 'post_date',
+	'posts_per_page' => $resource_postsPerPage,
+	'post_status' => 'publish',
+	'post__in'	=> $clinical_resources
+));
+$clinical_resource_query = new WP_Query( $args );
+if( $clinical_resources && $clinical_resource_query->have_posts() ) {
+	$clinical_resource_section_show = true;
+	$resource_count = count($clinical_resources);
+	$jump_link_count++;
+} else {
+	$clinical_resource_section_show = false;
+}
+
+// Query for whether appointment information section should be displayed on a page
+// It should always be displayed.
+$appointment_section_show = true;
+$jump_link_count++;
+
+// Query for whether jump links section should be displayed on a page
+if ( $jump_link_count >= $jump_link_count_min ) {
+	$jump_links_section_show = true;
+} else {
+	$jump_links_section_show = false;
+}
+
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
 // Removes entry meta from entry footer incl. markup.
@@ -146,139 +258,13 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 	add_action( 'genesis_after_entry', 'uamswp_fad_section_location', 18 );
 
 	// Construct areas of expertise section
-	add_action( 'genesis_after_entry', 'uamswp_resource_expertise', 20 );
+	$expertise_section_title = $expertise_fpage_title_clinical_resource; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of expertise section title in a general placement)
+	$expertise_section_intro = $expertise_fpage_intro_clinical_resource; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of expertise section intro text in a general placement)
+	add_action( 'genesis_after_entry', 'uamswp_fad_section_expertise', 20 );
 
 	// Construct appointment information section
 	add_action( 'genesis_after_entry', 'uamswp_resource_appointment', 22 );
 
-
-// Set logic for displaying jump links and sections
-$jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
-$jump_link_count = 0;
-
-// Check if Conditions section should be displayed
-// load all 'conditions' terms for the post
-$conditions_cpt = get_field('clinical_resource_conditions');
-// Conditions CPT
-$args = (array(
-	'post_type' => "condition",
-	'post_status' => 'publish',
-	'orderby' => 'title',
-	'order' => 'ASC',
-	'posts_per_page' => -1,
-	'post__in' => $conditions_cpt
-));
-$conditions_cpt_query = new WP_Query( $args );
-if( $conditions_cpt && $conditions_cpt_query->posts ) {
-	$condition_section_show = true;
-	$jump_link_count++;
-} else {
-	$condition_section_show = false;
-}
-
-// Check if Treatments and Procedures section should be displayed
-$treatments_cpt = get_field('clinical_resource_treatments');
-// Treatments CPT
-$args = (array(
-	'post_type' => "treatment",
-	'post_status' => 'publish',
-	'orderby' => 'title',
-	'order' => 'ASC',
-	'posts_per_page' => -1,
-	'post__in' => $treatments_cpt
-));
-$treatments_cpt_query = new WP_Query( $args );
-if( $treatments_cpt && $treatments_cpt_query->posts ) {
-	$treatments_section_show = true;
-	$jump_link_count++;
-} else {
-	$treatments_section_show = false;
-}
-
-// Check if Providers section should be displayed
-$providers = get_field( "clinical_resource_providers" );
-if($providers) {
-	$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12). If you change the value, update the instruction text in the editor's JSON file.
-	$postsCutoff = 18; // Set cutoff value. If you change the value, update the instruction text in the editor's JSON file.
-	$postsCountClass = $postsPerPage;
-	if(count($providers) <= $postsCutoff ) {
-		$postsPerPage = -1;
-	}
-	$args = array(
-		"post_type" => "provider",
-		"post_status" => "publish",
-		"posts_per_page" => $postsPerPage,
-		"orderby" => "title",
-		"order" => "ASC",
-		"fields" => "ids",
-		"post__in" => $providers
-	);
-	$provider_query = New WP_Query( $args );
-	if($provider_query && $provider_query->have_posts()) {
-		$provider_section_show = true;
-		$jump_link_count++;
-		$provider_ids = $provider_query->posts;
-	} else {
-		$provider_section_show = false;
-	}
-}
-
-// Query for whether associated locations content section should be displayed on a page
-$locations = get_field('clinical_resource_locations');
-uamswp_fad_location_query();
-
-// Check if Expertise section should be displayed
-$expertises = get_field('clinical_resource_aoe');
-$args = (array(
-	'post_type' => "expertise",
-	'order' => 'ASC',
-	'orderby' => 'title',
-	'posts_per_page' => -1,
-	'post_status' => 'publish',
-	'post__in'	=> $expertises
-));
-$expertise_query = new WP_Query( $args );
-if( $expertises && $expertise_query->have_posts() ) {
-	$expertise_section_show = true;
-	$jump_link_count++;
-} else {
-	$expertise_section_show = false;
-}
-
-// Clinical Resources
-$clinical_resources = get_field('clinical_resource_related');
-$resource_postsPerPage = -1; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
-$resource_more = false;
-$args = (array(
-	'post_type' => "clinical-resource",
-	'order' => 'DESC',
-	'orderby' => 'post_date',
-	'posts_per_page' => $resource_postsPerPage,
-	'post_status' => 'publish',
-	'post__in'	=> $clinical_resources
-));
-$clinical_resource_query = new WP_Query( $args );
-
-// Check if Clinical Resources section should be displayed
-if( $clinical_resources && $clinical_resource_query->have_posts() ) {
-	$clinical_resource_section_show = true;
-	$resource_count = count($clinical_resources);
-	$jump_link_count++;
-} else {
-	$clinical_resource_section_show = false;
-}
-
-// Check if Make an Appointment section should be displayed
-// It should always be displayed.
-$appointment_section_show = true;
-$jump_link_count++;
-
-// Check if Jump Links section should be displayed
-if ( $jump_link_count >= $jump_link_count_min ) {
-	$jump_links_section_show = true;
-} else {
-	$jump_links_section_show = false;
-}
 function uamswp_resource_text() {
 	// Bring in variables from outside of the function
 	global $resource_type_value; // Defined on the template
@@ -465,40 +451,6 @@ function uamswp_resource_associated() {
 	if( $clinical_resource_section_show ) {
 		include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
 	}
-}
-function uamswp_resource_expertise() {
-	// Bring in variables from outside of the function
-	global $expertise_fpage_title_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
-	global $expertise_fpage_intro_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
-	global $expertise_section_show; // Defined on the template
-	global $expertise_query; // Defined on the template
-	global $expertise_single_name; // Defined in uamswp_fad_labels_expertise()
-	global $expertise_single_name_attr; // Defined in uamswp_fad_labels_expertise()
-	global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
-
-	if( $expertise_section_show ) { ?>
-		<section class="uams-module expertise-list bg-auto" id="expertise" aria-labelledby="areas-of-expertise-title">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title" id="areas-of-expertise-title"><span class="title"><?php echo $expertise_fpage_title_clinical_resource; ?></span></h2>
-						<?php echo $expertise_fpage_intro_clinical_resource ? '<p class="note">' . $expertise_fpage_intro_clinical_resource . '</p>' : ''; ?>
-						<div class="card-list-container">
-							<div class="card-list card-list-expertise">
-							<?php 
-							while ($expertise_query->have_posts()) : $expertise_query->the_post();
-								$id = get_the_ID();
-								include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-							endwhile;
-							wp_reset_postdata();
-							?>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php 
-	} // endif
 }
 function uamswp_resource_jump_links() {
 	// Bring in variables from outside of the function
