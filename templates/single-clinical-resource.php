@@ -189,10 +189,10 @@ $args = (array(
 ));
 $treatments_cpt_query = new WP_Query( $args );
 if( $treatments_cpt && $treatments_cpt_query->posts ) {
-	$show_treatments_section = true;
+	$treatments_section_show = true;
 	$jump_link_count++;
 } else {
-	$show_treatments_section = false;
+	$treatments_section_show = false;
 }
 
 // Check if Providers section should be displayed
@@ -418,7 +418,7 @@ function uamswp_resource_treatments_cpt() {
 	// Bring in variables from outside of the function
 	global $page_title; // Defined on the template
 	global $page_title_attr; // Defined on the template
-	global $show_treatments_section; // Defined on the template
+	global $treatments_section_show; // Defined on the template
 	global $treatments_cpt_query; // Defined on the template
 	global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
 	global $treatments_single_name; // Defined in uamswp_fad_labels_treatments()
@@ -428,7 +428,7 @@ function uamswp_resource_treatments_cpt() {
 	$treatment_heading_related_name = $page_title; // To what is it related?
 	$treatment_heading_related_name_attr = $page_title_attr;
 
-	if( $show_treatments_section ) {
+	if( $treatments_section_show ) {
 		include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
 	}
 }
@@ -518,7 +518,7 @@ function uamswp_resource_jump_links() {
 	global $page_title; // Defined on the template
 	global $clinical_resource_show_section; // Defined on the template
 	global $condition_section_show; // Defined on the template
-	global $show_treatments_section; // Defined on the template
+	global $treatments_section_show; // Defined on the template
 	global $provider_section_show; // Defined on the template
 	global $location_section_show; // Defined on the template
 	global $show_aoe_section; // Defined on the template
@@ -544,7 +544,7 @@ function uamswp_resource_jump_links() {
 							<a class="nav-link" href="#conditions" title="Jump to the section of this page about related <?php echo $conditions_plural_name_attr; ?>"><?php echo $conditions_plural_name; ?></a>
 						</li>
 					<?php } ?>
-					<?php if ( $show_treatments_section ) { ?>
+					<?php if ( $treatments_section_show ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#treatments" title="Jump to the section of this page about related <?php echo $treatments_plural_name_attr; ?>"><?php echo $treatments_plural_name; ?></a>
 						</li>

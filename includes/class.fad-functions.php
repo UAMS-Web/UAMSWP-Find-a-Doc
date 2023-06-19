@@ -1604,7 +1604,7 @@ function uamswp_fad_post_title() {
 		// Make variables available outside of the function
 		global $treatments_cpt;
 		global $treatments_cpt_query;
-		global $show_treatments_section;
+		global $treatments_section_show;
 
 		$treatments_cpt = get_field('expertise_treatments_cpt', $site_nav_id);
 		// Treatments CPT
@@ -1618,9 +1618,9 @@ function uamswp_fad_post_title() {
 		);
 		$treatments_cpt_query = new WP_Query( $args );
 		if( ( $treatments_cpt && $treatments_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
-			$show_treatments_section = true;
+			$treatments_section_show = true;
 		} else {
-			$show_treatments_section = false;
+			$treatments_section_show = false;
 		}
 	}
 

@@ -532,10 +532,10 @@ while ( have_posts() ) : the_post();
 
 		// Check if Treatments section should be displayed
 		if ( $treatments_cpt && $treatments_cpt_query->posts && !$hide_medical_ontology ) {
-			$show_treatments_section = true;
+			$treatments_section_show = true;
 			$jump_link_count++;
 		} else {
-			$show_treatments_section = false;
+			$treatments_section_show = false;
 		}
 
 		// Check if Areas of Expertise section should be displayed
@@ -856,7 +856,7 @@ while ( have_posts() ) : the_post();
 								<a class="nav-link" href="#conditions"><?php echo $conditions_plural_name; ?></a>
 							</li>
 						<?php } ?>
-						<?php if ( $show_treatments_section ) { ?>
+						<?php if ( $treatments_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#treatments"><?php echo $treatments_plural_name; ?></a>
 							</li>
@@ -1186,7 +1186,7 @@ while ( have_posts() ) : the_post();
 			} // endif;
 
 			// Treatments CPT
-			if( $show_treatments_section ) {
+			if( $treatments_section_show ) {
 				$treatment_context = 'single-provider';
 				$treatment_heading_related_name = $short_name; // To what is it related?
 				include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
@@ -1405,7 +1405,7 @@ while ( have_posts() ) : the_post();
 				|| $podcast_section_show
 				|| $research_section_show
 				|| $condition_section_show
-				|| $show_treatments_section
+				|| $treatments_section_show
 				|| $show_aoe_section
 				|| $location_section_show
 				|| $show_ratings_section

@@ -166,10 +166,10 @@ $jump_link_count = 0;
 	));
 	$treatments_query_cpt = new WP_Query( $args );
 	if ( $treatments_cpt && !empty($treatments_query_cpt->posts) ) {
-		$show_treatments_section = true;
+		$treatments_section_show = true;
 		$jump_link_count++;
 	} else {
-		$show_treatments_section = false;
+		$treatments_section_show = false;
 	}
 
 	// Check if Providers section should be displayed
@@ -384,7 +384,7 @@ $jump_link_count = 0;
 								<a class="nav-link" href="#clinical-trials" title="Jump to the section of this page about Clinical Trials">Clinical Trials</a>
 							</li>
 						<?php } ?>
-						<?php if ( $show_treatments_section ) { ?>
+						<?php if ( $treatments_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#treatments" title="Jump to the section of this page about <?php echo $treatments_plural_name_attr; ?>"><?php echo $treatments_plural_name; ?></a>
 							</li>
@@ -441,7 +441,7 @@ $jump_link_count = 0;
 		// End Clinical Trials Section
 
 		// Begin Treatments and Procedures Section
-		if ( $show_treatments_section ) { ?>
+		if ( $treatments_section_show ) { ?>
 			<section class="uams-module conditions-treatments bg-auto" id="treatments">
 				<div class="container-fluid">
 					<div class="row">
