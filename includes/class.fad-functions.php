@@ -4195,3 +4195,33 @@ function uamswp_fad_section_expertise() {
 	} // endif ( $expertise_section_show )
 } // end function uamswp_fad_section_expertise()
 
+// Conditionally suppress ontology sections based on Find-a-Doc Settings configuration
+function uamswp_fad_ontology_hide() {
+	// Bring in variables from outside of the function
+
+		// Defined on the template
+		global $region;
+		global $service_line;
+
+	// Make variables available outside of the function
+	global $hide_medical_ontology;
+
+	$hide_medical_ontology = false;
+	if ( have_rows('remove_ontology_criteria', 'option') ) {
+		while ( have_rows('remove_ontology_criteria', 'option') ) {
+			the_row();
+			$remove_region = get_sub_field('remove_regions', 'option');
+			$remove_service_line = get_sub_field('remove_service_lines', 'option');
+			if ( (!empty($remove_region) && in_array(implode('',$region), $remove_region)) && empty($remove_service_line) ) { 
+				$hide_medical_ontology = true;
+				break;
+			} elseif ( empty($remove_region) && (!empty($remove_service_line) && in_array($service_line, $remove_service_line) ) ) {
+				$hide_medical_ontology = true;
+				break;
+			} elseif( (!empty($remove_region) && in_array(implode('',$region), $remove_region)) && (!empty($remove_service_line) && in_array($service_line, $remove_service_line) ) ) {
+				$hide_medical_ontology = true;
+				break;
+			}
+		} // endwhile ( have_rows('remove_ontology_criteria', 'option') )
+	} // endif ( have_rows('remove_ontology_criteria', 'option') )
+}
