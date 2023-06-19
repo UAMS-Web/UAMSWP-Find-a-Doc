@@ -275,9 +275,9 @@ $jump_link_count++;
 
 // Check if Jump Links section should be displayed
 if ( $jump_link_count >= $jump_link_count_min ) {
-	$show_jump_links_section = true;
+	$jump_links_section_show = true;
 } else {
-	$show_jump_links_section = false;
+	$jump_links_section_show = false;
 }
 function uamswp_resource_text() {
 	// Bring in variables from outside of the function
@@ -522,11 +522,11 @@ function uamswp_resource_jump_links() {
 	global $provider_section_show; // Defined on the template
 	global $location_section_show; // Defined on the template
 	global $expertise_section_show; // Defined on the template
-	global $show_jump_links_section; // Defined on the template
+	global $jump_links_section_show; // Defined on the template
 	global $appointment_section_show; // Defined on the template
 
 	// Begin Jump Links Section
-	if ( $show_jump_links_section ) { ?>
+	if ( $jump_links_section_show ) { ?>
 		<nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
 			<h2><?php echo $fad_jump_links_title; ?></h2>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#jump-link-nav" aria-controls="jump-link-nav" aria-expanded="false" aria-label="Toggle navigation">

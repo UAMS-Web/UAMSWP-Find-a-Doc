@@ -226,9 +226,9 @@ $jump_link_count = 0;
 
 	// Check if Jump Links section should be displayed
 	if ( $jump_link_count >= $jump_link_count_min ) {
-		$show_jump_links_section = true;
+		$jump_links_section_show = true;
 	} else {
-		$show_jump_links_section = false;
+		$jump_links_section_show = false;
 	}
 
 ?>
@@ -361,7 +361,7 @@ $jump_link_count = 0;
 			// End CTA Bar(s)
 
 			// Begin Jump Links Section
-		if ( $show_jump_links_section ) { ?>
+		if ( $jump_links_section_show ) { ?>
 			<nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
 				<h2><?php echo $fad_jump_links_title; ?></h2>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#jump-link-nav" aria-controls="jump-link-nav" aria-expanded="false" aria-label="Toggle navigation">
