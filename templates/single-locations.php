@@ -475,10 +475,10 @@ while ( have_posts() ) : the_post(); ?>
 
 		// Check if Telemedicine Information section should be displayed
 		if ( $telemed_query ) {
-			$show_telemed_section = true;
+			$telemedicine_section_show = true;
 			$jump_link_count++;
 		} else {
-			$show_telemed_section = false;
+			$telemedicine_section_show = false;
 		}
 
 		// Check if Portal Information section should be displayed
@@ -1105,7 +1105,7 @@ while ( have_posts() ) : the_post(); ?>
 							<a class="nav-link" href="#scheduling" title="Jump to the section of this page about scheduling an appointment in MyChart"><?php echo $location_scheduling_title; ?></a>
 						</li>
 					<?php } ?>
-					<?php if ( $show_telemed_section ) { ?>
+					<?php if ( $telemedicine_section_show ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#telemedicine-info" title="Jump to the section of this page about Telemedicine Information">Telemedicine</a>
 						</li>
@@ -1443,7 +1443,7 @@ while ( have_posts() ) : the_post(); ?>
 	// End MyChart Scheduling Section
 
 	// Begin Telemedicine Information Section
-	if ( $show_telemed_section ) { ?>
+	if ( $telemedicine_section_show ) { ?>
 		<section class="uams-module bg-auto" aria-label="Telemedicine Information" id="telemedicine-info">
 			<div class="container-fluid">
 				<div class="row">
