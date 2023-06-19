@@ -28,7 +28,7 @@ function uamswp_terms_clauses( $clauses, $taxonomies, $args ){
 }
 
 // Get system settings for Treatments Labels
-uamswp_fad_labels_treatments();
+uamswp_fad_labels_treatment();
 
 // Get system settings for Treatments Archive Page
 uamswp_fad_archive_treatments();

@@ -22,7 +22,7 @@ uamswp_fad_labels_clinical_resource_facet();
 uamswp_fad_labels_condition();
 
 // Get system settings for treatment labels
-uamswp_fad_labels_treatments();
+uamswp_fad_labels_treatment();
 
 // Get system settings for clinical resource archive page text
 uamswp_fad_archive_clinical_resource();

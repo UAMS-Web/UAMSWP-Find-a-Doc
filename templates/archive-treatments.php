@@ -31,7 +31,7 @@ function title_filter( $where, $query ){
 }
 
 // Get system settings for Treatments Labels
-uamswp_fad_labels_treatments();
+uamswp_fad_labels_treatment();
 
 // Get system settings for Treatments Archive Page
 uamswp_fad_archive_treatments();

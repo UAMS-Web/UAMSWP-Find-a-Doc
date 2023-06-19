@@ -27,7 +27,7 @@
 	uamswp_fad_labels_condition();
 
 	// Get system settings for treatment labels
-	uamswp_fad_labels_treatments();
+	uamswp_fad_labels_treatment();
 
 // Get system settings for area of expertise archive page text
 // uamswp_fad_archive_expertise();
@@ -319,7 +319,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		global $treatments_section_show; // Defined in uamswp_fad_treatment_query()
 		global $treatments_cpt_query; // Defined in uamswp_fad_treatment_query()
 		global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
-		global $treatments_plural_name; // Defined in uamswp_fad_labels_treatments()
+		global $treatments_plural_name; // Defined in uamswp_fad_labels_treatment()
 		global $treatment_heading; // Defined on the template
 		global $treatment_intro; // Defined on the template
 

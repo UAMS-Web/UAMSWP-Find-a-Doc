@@ -27,7 +27,7 @@
 	uamswp_fad_labels_condition();
 
 	// Get system settings for treatment labels
-	uamswp_fad_labels_treatments();
+	uamswp_fad_labels_treatment();
 
 // Get system settings for condition archive page text
 // uamswp_fad_archive_condition();

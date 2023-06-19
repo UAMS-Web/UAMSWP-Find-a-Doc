@@ -24,7 +24,7 @@
 	uamswp_fad_labels_condition();
 
 	// Get system settings for treatment labels
-	uamswp_fad_labels_treatments();
+	uamswp_fad_labels_treatment();
 
 // Get the page ID for the 'parent' area of expertise
 $page_id = get_the_ID();

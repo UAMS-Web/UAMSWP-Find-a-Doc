@@ -27,7 +27,7 @@
 	uamswp_fad_labels_condition();
 
 	// Get system settings for treatment labels
-	uamswp_fad_labels_treatments();
+	uamswp_fad_labels_treatment();
 
 // Get system settings for clinical resource archive page text
 // uamswp_fad_archive_clinical_resource();
@@ -421,8 +421,8 @@ function uamswp_resource_treatments_cpt() {
 	global $treatments_section_show; // Defined on the template
 	global $treatments_cpt_query; // Defined on the template
 	global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
-	global $treatments_single_name; // Defined in uamswp_fad_labels_treatments()
-	global $treatments_plural_name; // Defined in uamswp_fad_labels_treatments()
+	global $treatments_single_name; // Defined in uamswp_fad_labels_treatment()
+	global $treatments_plural_name; // Defined in uamswp_fad_labels_treatment()
 
 	$treatment_context = 'single-resource';
 	$treatment_heading_related_name = $page_title; // To what is it related?
@@ -450,8 +450,8 @@ function uamswp_resource_associated() {
 	global $clinical_resource_plural_name; // Defined in uamswp_fad_labels_clinical_resource()
 	global $conditions_single_name; // Defined in uamswp_fad_labels_condition()
 	global $conditions_plural_name; // Defined in uamswp_fad_labels_condition()
-	global $treatments_single_name; // Defined in uamswp_fad_labels_treatments()
-	global $treatments_plural_name; // Defined in uamswp_fad_labels_treatments()
+	global $treatments_single_name; // Defined in uamswp_fad_labels_treatment()
+	global $treatments_plural_name; // Defined in uamswp_fad_labels_treatment()
 	global $clinical_resource_fpage_title_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
 	global $clinical_resource_fpage_intro_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
 
@@ -512,8 +512,8 @@ function uamswp_resource_jump_links() {
 	global $clinical_resource_plural_name_attr; // Defined in uamswp_fad_labels_clinical_resource()
 	global $conditions_plural_name; // Defined in uamswp_fad_labels_condition()
 	global $conditions_plural_name_attr; // Defined in uamswp_fad_labels_condition()
-	global $treatments_plural_name; // Defined in uamswp_fad_labels_treatments()
-	global $treatments_plural_name_attr; // Defined in uamswp_fad_labels_treatments()
+	global $treatments_plural_name; // Defined in uamswp_fad_labels_treatment()
+	global $treatments_plural_name_attr; // Defined in uamswp_fad_labels_treatment()
 	global $fad_jump_links_title; // Defined in uamswp_fad_labels_jump_links()
 	global $page_title; // Defined on the template
 	global $clinical_resource_show_section; // Defined on the template

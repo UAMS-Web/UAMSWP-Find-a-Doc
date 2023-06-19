@@ -2130,7 +2130,7 @@ function uamswp_fad_podcast() {
 	}
 
 	// Get system settings for treatment labels
-	function uamswp_fad_labels_treatments() {
+	function uamswp_fad_labels_treatment() {
 		// Make variables available outside of the function
 		global $treatments_single_name;
 		global $treatments_single_name_attr;
@@ -2282,7 +2282,7 @@ function uamswp_fad_podcast() {
 			global $placeholder_conditions_archive_intro_text;
 			global $conditions_archive_intro_text;
 
-			// Defined in uamswp_fad_labels_treatments()
+			// Defined in uamswp_fad_labels_treatment()
 			global $placeholder_treatments_single_name;
 			global $treatments_single_name;
 			global $placeholder_treatments_plural_name;

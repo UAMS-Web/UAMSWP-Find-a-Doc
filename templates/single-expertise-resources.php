@@ -24,7 +24,7 @@
 	uamswp_fad_labels_condition();
 
 	// Get system settings for treatment labels
-	uamswp_fad_labels_treatments();
+	uamswp_fad_labels_treatment();
 
 // Get the page ID for the 'parent' area of expertise
 $page_id = get_the_ID();
@@ -185,8 +185,8 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		global $clinical_resource_plural_name; // Defined in uamswp_fad_labels_clinical_resource()
 		global $conditions_single_name; // Defined in uamswp_fad_labels_condition()
 		global $conditions_plural_name; // Defined in uamswp_fad_labels_condition()
-		global $treatments_single_name; // Defined in uamswp_fad_labels_treatments()
-		global $treatments_plural_name; // Defined in uamswp_fad_labels_treatments()
+		global $treatments_single_name; // Defined in uamswp_fad_labels_treatment()
+		global $treatments_plural_name; // Defined in uamswp_fad_labels_treatment()
 		global $clinical_resource_fpage_title_expertise; // Defined in uamswp_fad_fpage_text_expertise()
 		global $clinical_resource_fpage_intro_expertise; // Defined in uamswp_fad_fpage_text_expertise()
 
