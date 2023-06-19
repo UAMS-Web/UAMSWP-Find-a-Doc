@@ -1162,12 +1162,12 @@ while ( have_posts() ) : the_post();
 		uamswp_fad_section_expertise();
 		// End Areas of Expertise Section
 
-			// Begin Location Section
-			$location_section_title = $location_plural_name . ' Where ' . $short_name . ' Practices'; // Text to use for the section title
-			$location_section_intro = ''; // Text to use for the section intro text
-			$location_section_schema_query = true; // Query for whether to add locations to schema
-			uamswp_fad_section_location();
-			// End Location Section
+		// Begin Location Section
+		$location_section_title = $location_plural_name . ' Where ' . $short_name . ' Practices'; // Text to use for the section title
+		$location_section_intro = ''; // Text to use for the section intro text
+		$location_section_schema_query = true; // Query for whether to add locations to schema
+		uamswp_fad_section_location();
+		// End Location Section
 
 		?>
 		<?php if ( $ratings_section_show ) : ?>
