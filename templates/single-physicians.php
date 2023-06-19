@@ -515,7 +515,7 @@ while ( have_posts() ) : the_post();
 		}
 
 		// Check if Research section should be displayed
-		if ( !empty($research_bio) || !empty($esearch_interests) || !empty ( $publications ) || $pubmed_author_id || $research_profiles_link ) {
+		if ( !empty($research_bio) || !empty($research_interests) || !empty ( $publications ) || $pubmed_author_id || $research_profiles_link ) {
 			$show_research_section = true;
 			$jump_link_count++;
 		} else {
