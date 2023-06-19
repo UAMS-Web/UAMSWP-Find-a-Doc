@@ -212,6 +212,15 @@ uamswp_fad_ontology_hide();
 // Query for whether related areas of expertise content section should be displayed on a page
 $expertises = get_field('physician_expertise',$post->ID);
 uamswp_fad_expertise_query();
+if ( $expertise_section_show ) {
+	foreach ( $expertises as $expertise ) {
+		if ( get_post_status ( $expertise ) == 'publish' ) {
+			$expertise_primary_name = get_the_title($expertise);
+			$expertise_primary_name_attr = uamswp_attr_conversion($expertise_primary_name);
+			break;
+		}
+	}
+}
 
 // Override theme's method of defining the meta page title
 $meta_title_enhanced_addition = $phys_title_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title

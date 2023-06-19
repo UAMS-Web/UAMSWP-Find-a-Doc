@@ -1542,8 +1542,6 @@ function uamswp_fad_post_title() {
 		global $expertise_section_show;
 		global $expertise_ids;
 		global $expertise_count; // integer
-		global $expertise_primary_name; // string
-		global $expertise_primary_name_attr; // string
 
 		$args = array(
 			'post_type' => 'expertise',
@@ -1559,13 +1557,6 @@ function uamswp_fad_post_title() {
 			$expertise_ids = $expertise_query->posts;
 			$expertise_count = count($expertise_query->posts);
 			$jump_link_count = $jump_link_count + 1;
-			foreach ( $expertises as $expertise ) {
-				if ( get_post_status ( $expertise ) == 'publish' ) {
-					$expertise_primary_name = get_the_title($expertise);
-					$expertise_primary_name_attr = uamswp_attr_conversion($expertise_primary_name);
-					break;
-				}
-			}
 		} else {
 			$expertise_section_show = false;
 		}
