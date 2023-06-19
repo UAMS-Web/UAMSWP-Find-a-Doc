@@ -72,7 +72,7 @@ uamswp_fad_ontology_site_values();
 	uamswp_fad_ontology_descendant_query();
 
 	// Query for whether related ontology items (of the same post type) content section should be displayed on ontology pages/subsections
-	uamswp_fad_ontology_related_query();
+	uamswp_fad_expertise_related_query();
 
 	// Query for whether associated clinical resources content section should be displayed on ontology pages/subsections
 	uamswp_fad_ontology_resources_query();

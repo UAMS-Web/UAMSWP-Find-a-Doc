@@ -74,7 +74,7 @@ uamswp_fad_ontology_site_values();
 	uamswp_fad_ontology_descendant_query();
 
 	// Query for whether related ontology items (of the same post type) content section should be displayed on ontology pages/subsections
-	uamswp_fad_ontology_related_query();
+	uamswp_fad_expertise_related_query();
 
 	// Query for whether associated clinical resources content section should be displayed on ontology pages/subsections
 	uamswp_fad_ontology_resources_query();
@@ -170,8 +170,8 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	add_action( 'genesis_entry_content', 'uamswp_expertise_associated', 24 );
 	function uamswp_expertise_associated() {
 		// Bring in variables from outside of the function
-		global $expertise_related_section_show; // Defined in uamswp_fad_ontology_related_query()
-		global $expertise_query; // Defined in uamswp_fad_ontology_related_query()
+		global $expertise_related_section_show; // Defined in uamswp_fad_expertise_related_query()
+		global $expertise_query; // Defined in uamswp_fad_expertise_related_query()
 		global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
 		global $expertise_plural_name_attr; // Defined in uamswp_fad_labels_expertise()
 
