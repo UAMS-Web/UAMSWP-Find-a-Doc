@@ -213,10 +213,10 @@ $jump_link_count = 0;
 	$expertise_query = new WP_Query( $args );
 
 	if ( $expertise && $expertise_query->have_posts() ) {
-		$show_aoe_section = true;
+		$expertise_section_show = true;
 		$jump_link_count++;
 	} else {
-		$show_aoe_section = false;
+		$expertise_section_show = false;
 	}
 
 	// Check if Make an Appointment section should be displayed
@@ -399,7 +399,7 @@ $jump_link_count = 0;
 								<a class="nav-link" href="#locations" title="Jump to the section of this page about <?php echo $location_plural_name_attr; ?>"><?php echo $location_plural_name; ?></a>
 							</li>
 						<?php } ?>
-						<?php if ( $show_aoe_section ) { ?>
+						<?php if ( $expertise_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#expertise" title="Jump to the section of this page about <?php echo $expertise_plural_name_attr; ?>"><?php echo $expertise_plural_name; ?></a>
 							</li>
@@ -483,7 +483,7 @@ $jump_link_count = 0;
 		// End Location Section
 
 		// Begin Areas of Expertise Section
-		if ( $show_aoe_section ) { ?>
+		if ( $expertise_section_show ) { ?>
 			<section class="uams-module bg-auto" id="expertise">
 				<div class="container-fluid">
 					<div class="row">

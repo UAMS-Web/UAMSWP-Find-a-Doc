@@ -540,10 +540,10 @@ while ( have_posts() ) : the_post();
 
 		// Check if Areas of Expertise section should be displayed
 		if ( $expertise_valid && !$hide_medical_ontology ) {
-			$show_aoe_section = true;
+			$expertise_section_show = true;
 			$jump_link_count++;
 		} else {
-			$show_aoe_section = false;
+			$expertise_section_show = false;
 		}
 
 		// Check if Ratings section should be displayed
@@ -861,7 +861,7 @@ while ( have_posts() ) : the_post();
 								<a class="nav-link" href="#treatments"><?php echo $treatments_plural_name; ?></a>
 							</li>
 						<?php } ?>
-						<?php if ( $show_aoe_section ) { ?>
+						<?php if ( $expertise_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#expertise"><?php echo $expertise_plural_name; ?></a>
 							</li>
@@ -1207,7 +1207,7 @@ while ( have_posts() ) : the_post();
 				// $treatment_schema .= ']';
 			} // endif
 
-		if ( $show_aoe_section && !empty($expertises) ) { ?>
+		if ( $expertise_section_show && !empty($expertises) ) { ?>
 			<section class="uams-module expertise-list bg-auto" id="expertise">
 				<div class="container-fluid">
 					<div class="row">
@@ -1406,7 +1406,7 @@ while ( have_posts() ) : the_post();
 				|| $research_section_show
 				|| $condition_section_show
 				|| $treatments_section_show
-				|| $show_aoe_section
+				|| $expertise_section_show
 				|| $location_section_show
 				|| $show_ratings_section
 			)

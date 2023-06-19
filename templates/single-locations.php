@@ -583,10 +583,10 @@ while ( have_posts() ) : the_post(); ?>
 		));
 		$expertise_query = new WP_Query( $args );
 		if( $expertises && $expertise_query->have_posts() && !$hide_medical_ontology ) {
-			$show_aoe_section = true;
+			$expertise_section_show = true;
 			$jump_link_count++;
 		} else {
-			$show_aoe_section = false;
+			$expertise_section_show = false;
 		}
 
 		// Check if Child Locations section should be displayed
@@ -1130,7 +1130,7 @@ while ( have_posts() ) : the_post(); ?>
 							<a class="nav-link" href="#treatments" title="Jump to the section of this page about <?php echo strtolower($treatments_plural_name_attr); ?>"><?php echo $treatments_plural_name; ?></a>
 						</li>
 					<?php } ?>
-					<?php if ( $show_aoe_section ) { ?>
+					<?php if ( $expertise_section_show ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#expertise" title="Jump to the section of this page about <?php echo $expertise_plural_name_attr; ?>"><?php echo $expertise_plural_name; ?></a>
 						</li>
@@ -1694,7 +1694,7 @@ while ( have_posts() ) : the_post(); ?>
 	// End Treatments and Procedures Section
 
 	// Begin Areas of Expertise Section
-	if( $show_aoe_section ) { ?>
+	if( $expertise_section_show ) { ?>
 		<section class="uams-module expertise-list bg-auto" id="expertise">
 			<div class="container-fluid">
 				<div class="row">

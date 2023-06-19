@@ -239,10 +239,10 @@ $args = (array(
 ));
 $expertise_query = new WP_Query( $args );
 if( $expertises && $expertise_query->have_posts() ) {
-	$show_aoe_section = true;
+	$expertise_section_show = true;
 	$jump_link_count++;
 } else {
-	$show_aoe_section = false;
+	$expertise_section_show = false;
 }
 
 // Clinical Resources
@@ -470,13 +470,13 @@ function uamswp_resource_expertise() {
 	// Bring in variables from outside of the function
 	global $expertise_fpage_title_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
 	global $expertise_fpage_intro_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
-	global $show_aoe_section; // Defined on the template
+	global $expertise_section_show; // Defined on the template
 	global $expertise_query; // Defined on the template
 	global $expertise_single_name; // Defined in uamswp_fad_labels_expertise()
 	global $expertise_single_name_attr; // Defined in uamswp_fad_labels_expertise()
 	global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
 
-	if( $show_aoe_section ) { ?>
+	if( $expertise_section_show ) { ?>
 		<section class="uams-module expertise-list bg-auto" id="expertise" aria-labelledby="areas-of-expertise-title">
 			<div class="container-fluid">
 				<div class="row">
@@ -521,7 +521,7 @@ function uamswp_resource_jump_links() {
 	global $treatments_section_show; // Defined on the template
 	global $provider_section_show; // Defined on the template
 	global $location_section_show; // Defined on the template
-	global $show_aoe_section; // Defined on the template
+	global $expertise_section_show; // Defined on the template
 	global $show_jump_links_section; // Defined on the template
 	global $appointment_section_show; // Defined on the template
 
@@ -559,7 +559,7 @@ function uamswp_resource_jump_links() {
 							<a class="nav-link" href="#locations" title="Jump to the section of this page about related <?php echo $location_plural_name_attr; ?>"><?php echo $location_plural_name; ?></a>
 						</li>
 					<?php } ?>
-					<?php if ($show_aoe_section) { ?>
+					<?php if ($expertise_section_show) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#expertise" title="Jump to the section of this page about related <?php echo $expertise_plural_name_attr; ?>"><?php echo $expertise_plural_name; ?></a>
 						</li>
