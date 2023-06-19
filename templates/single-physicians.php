@@ -548,10 +548,10 @@ while ( have_posts() ) : the_post();
 
 		// Check if Ratings section should be displayed
 		if ( $rating_valid ) {
-			$show_ratings_section = true;
+			$ratings_section_show = true;
 			$jump_link_count++;
 		} else {
-			$show_ratings_section = false;
+			$ratings_section_show = false;
 		}
 
 		// Check if Jump Links section should be displayed
@@ -871,7 +871,7 @@ while ( have_posts() ) : the_post();
 								<a class="nav-link" href="#locations"><?php echo $location_plural_name; ?></a>
 							</li>
 						<?php } ?>
-						<?php if ($show_ratings_section) { ?>
+						<?php if ($ratings_section_show) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#ratings">Ratings &amp; Reviews</a>
 							</li>
@@ -1238,7 +1238,7 @@ while ( have_posts() ) : the_post();
 			// End Location Section
 
 		?>
-		<?php if ( $show_ratings_section ) : ?>
+		<?php if ( $ratings_section_show ) : ?>
 		<section class="uams-module ratings-and-reviews bg-auto" id="ratings">
 			<div class="container-fluid">
 				<div class="row">
@@ -1408,7 +1408,7 @@ while ( have_posts() ) : the_post();
 				|| $treatments_section_show
 				|| $expertise_section_show
 				|| $location_section_show
-				|| $show_ratings_section
+				|| $ratings_section_show
 			)
 		) {
 			$appointment_block_instance = 2;
