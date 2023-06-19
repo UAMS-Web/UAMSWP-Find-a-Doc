@@ -468,9 +468,9 @@ while ( have_posts() ) : the_post(); ?>
 		$mychart_scheduling_linksource = ( isset($mychart_scheduling_linksource) && !empty($mychart_scheduling_linksource) ) ? $mychart_scheduling_linksource : 'uamshealth.com';
 
 		if ( $mychart_scheduling_query_system && $location_scheduling_query ) {
-			$show_mychart_scheduling_section = true;
+			$mychart_scheduling_section_show = true;
 		} else {
-			$show_mychart_scheduling_section = false;
+			$mychart_scheduling_section_show = false;
 		}
 
 		// Check if Telemedicine Information section should be displayed
@@ -1100,7 +1100,7 @@ while ( have_posts() ) : the_post(); ?>
 							<a class="nav-link" href="#appointment-info" title="Jump to the section of this page about Appointment Information">Appointment Information</a>
 						</li>
 					<?php } ?>
-					<?php if ( $show_mychart_scheduling_section ) { ?>
+					<?php if ( $mychart_scheduling_section_show ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#scheduling" title="Jump to the section of this page about scheduling an appointment in MyChart"><?php echo $location_scheduling_title; ?></a>
 						</li>
@@ -1368,7 +1368,7 @@ while ( have_posts() ) : the_post(); ?>
 	// End Appointment Information Section
 
 	// Begin MyChart Scheduling Section
-	if ( $show_mychart_scheduling_section ) { ?>
+	if ( $mychart_scheduling_section_show ) { ?>
 		<section class="uams-module mychart-scheduling-module bg-auto" id="scheduling">
 			<div class="container-fluid">
 				<div class="row">
