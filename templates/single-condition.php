@@ -147,9 +147,9 @@ $jump_link_count = 0;
 
 	// Check if Clinical Trials section should be displayed
 	if ( !empty($clinical_trials) ) {
-		$show_clinical_trials_section = true;
+		$clinical_trials_section_show = true;
 	} else {
-		$show_clinical_trials_section = false;
+		$clinical_trials_section_show = false;
 	}
 
 	// Check if Treatments section should be displayed
@@ -379,7 +379,7 @@ $jump_link_count = 0;
 								<a class="nav-link" href="#related-resources" title="Jump to the section of this page about <?php echo $clinical_resource_plural_name_attr; ?>"><?php echo $clinical_resource_plural_name; ?></a>
 							</li>
 						<?php } ?>
-						<?php if ( $show_clinical_trials_section ) { ?>
+						<?php if ( $clinical_trials_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#clinical-trials" title="Jump to the section of this page about Clinical Trials">Clinical Trials</a>
 							</li>
@@ -434,7 +434,7 @@ $jump_link_count = 0;
 		// End Clinical Resources Section
 
 		// Begin Clinical Trials Section
-		if ( $show_clinical_trials_section ) {
+		if ( $clinical_trials_section_show ) {
 			$clinical_trial_title = $page_title;
 			include( UAMS_FAD_PATH . '/templates/blocks/clinical-trials.php' );
 		} // endif
