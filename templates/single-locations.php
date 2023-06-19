@@ -292,7 +292,7 @@ $args = (array(
 	'post_status' => 'publish',
 	'post__in'	=> $clinical_resources
 ));
-$resource_query = new WP_Query( $args );
+$clinical_resource_query = new WP_Query( $args );
 
 // Override theme's method of defining the meta description
 add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
@@ -616,7 +616,7 @@ while ( have_posts() ) : the_post(); ?>
 		}
 
 		// Check if Clinical Resources section should be displayed
-		if( $clinical_resources && $resource_query->have_posts() ) {
+		if( $clinical_resources && $clinical_resource_query->have_posts() ) {
 			$clinical_resource_show_section = true;
 			$jump_link_count++;
 		} else {

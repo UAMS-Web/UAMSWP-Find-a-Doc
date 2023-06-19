@@ -257,10 +257,10 @@ $args = (array(
 	'post_status' => 'publish',
 	'post__in'	=> $clinical_resources
 ));
-$resource_query = new WP_Query( $args );
+$clinical_resource_query = new WP_Query( $args );
 
 // Check if Clinical Resources section should be displayed
-if( $clinical_resources && $resource_query->have_posts() ) {
+if( $clinical_resources && $clinical_resource_query->have_posts() ) {
 	$clinical_resource_show_section = true;
 	$resource_count = count($clinical_resources);
 	$jump_link_count++;
@@ -438,7 +438,7 @@ function uamswp_resource_associated() {
 	global $page_title_attr; // Defined on the template
 	global $clinical_resource_show_section; // Defined on the template
 	global $clinical_resources; // Defined on the template
-	global $resource_query; // Defined on the template
+	global $clinical_resource_query; // Defined on the template
 	global $resource_postsPerPage; // Defined on the template
 	global $provider_single_name; // Defined in uamswp_fad_labels_provider()
 	global $provider_plural_name; // Defined in uamswp_fad_labels_provider()

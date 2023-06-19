@@ -469,7 +469,7 @@ while ( have_posts() ) : the_post();
 		'post_status' => 'publish',
 		'post__in'	=> $clinical_resources
 	));
-	$resource_query = new WP_Query( $args );
+	$clinical_resource_query = new WP_Query( $args );
 
 	// Set logic for displaying jump links and sections
 	$jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
@@ -507,7 +507,7 @@ while ( have_posts() ) : the_post();
 		}
 
 		// Check if Clinical Resources section should be displayed
-		if( $clinical_resources && $resource_query->have_posts() ) {
+		if( $clinical_resources && $clinical_resource_query->have_posts() ) {
 			$clinical_resource_show_section = true;
 			$jump_link_count++;
 		} else {

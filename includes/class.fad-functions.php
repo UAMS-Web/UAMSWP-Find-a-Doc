@@ -1541,7 +1541,7 @@ function uamswp_fad_post_title() {
 		global $clinical_resources;
 		global $resource_postsPerPage;
 		global $resource_more;
-		global $resource_query;
+		global $clinical_resource_query;
 		global $clinical_resource_show_section;
 
 		$clinical_resources = get_field('expertise_clinical_resources', $site_nav_id);
@@ -1555,10 +1555,10 @@ function uamswp_fad_post_title() {
 			'post_status' => 'publish',
 			'post__in'	=> $clinical_resources
 		);
-		$resource_query = new WP_Query( $args );
+		$clinical_resource_query = new WP_Query( $args );
 
 		// Check if Clinical Resources section should be displayed
-		if( ( $clinical_resources && $resource_query->have_posts() ) ) {
+		if( ( $clinical_resources && $clinical_resource_query->have_posts() ) ) {
 			$clinical_resource_show_section = true;
 		} else {
 			$clinical_resource_show_section = false;

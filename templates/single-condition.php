@@ -106,7 +106,7 @@ $args = (array(
 	'post_status' => 'publish',
 	'post__in'	=> $clinical_resources
 ));
-$resource_query = new WP_Query( $args );
+$clinical_resource_query = new WP_Query( $args );
 
 // Query for whether associated locations content section should be displayed on a page
 uamswp_fad_location_query();
@@ -138,7 +138,7 @@ $jump_link_count = 0;
 	}
 
 	// Check if Clinical Resources section should be displayed
-	if( $clinical_resources && $resource_query->have_posts() ) {
+	if( $clinical_resources && $clinical_resource_query->have_posts() ) {
 		$clinical_resource_show_section = true;
 		$jump_link_count++;
 	} else {

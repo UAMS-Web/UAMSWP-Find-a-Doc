@@ -17,7 +17,7 @@
  * 	$treatments_single_name // System setting for Treatments single item name
  * 	$treatments_plural_name // System setting for Treatments plural item name
  * 	$clinical_resources
- * 	$resource_query
+ * 	$clinical_resource_query
  * 	$resource_postsPerPage
  * 	$resource_more_suppress
  * 	$resource_more_key
@@ -46,7 +46,7 @@ $resource_intro = ( isset($resource_intro) || !empty($resource_intro) ) ? $resou
 // Count valid resources
 //$resource_count = count($clinical_resources);
 $resource_count = 0;
-if ( $clinical_resources && $resource_query->have_posts() ) {
+if ( $clinical_resources && $clinical_resource_query->have_posts() ) {
 	foreach( $clinical_resources as $resource ) {
 		if ( get_post_status ( $resource ) == 'publish' ) {
 			$resource_count++;
@@ -81,7 +81,7 @@ if ( $resource_layout == 'card') { ?>
 				<div class="col-12">
 					<div class="card-list card-list-left">
 						<?php 
-						while ($resource_query->have_posts()) : $resource_query->the_post();
+						while ($clinical_resource_query->have_posts()) : $clinical_resource_query->the_post();
 							$id = get_the_ID();
 							include( UAMS_FAD_PATH . '/templates/loops/resource-card.php' );
 						endwhile;
@@ -112,7 +112,7 @@ if ( $resource_layout == 'card') { ?>
 				<div class="col-12 col-md-6 list">
 					<ul>
 						<?php
-						while ($resource_query->have_posts()) : $resource_query->the_post();
+						while ($clinical_resource_query->have_posts()) : $clinical_resource_query->the_post();
 							$id = get_the_ID();
 							include( UAMS_FAD_PATH . '/templates/loops/resource-list-item.php' );
 						endwhile;

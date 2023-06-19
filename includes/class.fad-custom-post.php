@@ -3408,7 +3408,7 @@ function get_resource_meta($object) {
 			'post_status' => 'publish',
 			'post__in' => $clinical_resources
 		));
-		$resource_query = new WP_Query( $args );
+		$clinical_resource_query = new WP_Query( $args );
 	}
 
 	$text = get_field('clinical_resource_text', $postId);
@@ -3451,8 +3451,8 @@ function get_resource_meta($object) {
 		$data['clinical_resource_document'][$i]['url'] = $document_title;
 		$i++;
 	endwhile;
-	if( $clinical_resources && $resource_query->posts ):
-		foreach( $resource_query->posts as $resource ):
+	if( $clinical_resources && $clinical_resource_query->posts ):
+		foreach( $clinical_resource_query->posts as $resource ):
 			$data['clinical_resource_associated'][$resource->ID]['link'] = get_permalink( $resource->ID );
 			$data['clinical_resource_associated'][$resource->ID]['title'] = $resource->post_title;
 			$data['clinical_resource_associated'][$resource->ID]['slug'] = $resource->post_name;
