@@ -367,10 +367,10 @@ while ( have_posts() ) : the_post(); ?>
 			&& 
 			($location_alert_title || $location_alert_text) // If location title or description has value
 		 ) {
-			$show_location_alert_section = true;
+			$location_alert_section_show = true;
 			$jump_link_count++;
 		} else {
-			$show_location_alert_section = false;
+			$location_alert_section_show = false;
 		}
 
 		// Check if Closing Information section should be displayed
@@ -1061,7 +1061,7 @@ while ( have_posts() ) : the_post(); ?>
 			</button>
 			<div class="collapse navbar-collapse inner-container" id="jump-link-nav">
 				<ul class="nav navbar-nav">
-					<?php if ( $show_location_alert_section ) { ?>
+					<?php if ( $location_alert_section_show ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#location-alert" title="Jump to the section of this page with the alert regarding this <?php echo strtolower($location_single_name_attr); ?>"><?php echo $location_alert_title ? $location_alert_title : 'Alert'; ?></a>
 						</li>
@@ -1152,7 +1152,7 @@ while ( have_posts() ) : the_post(); ?>
 	// End Jump Links Section
 
 	// Begin Location Alert Section
-	if ( $show_location_alert_section ) { ?>
+	if ( $location_alert_section_show ) { ?>
 	<section class="uams-module location-alert location-<?php echo $location_alert_color ? $location_alert_color : 'alert-warning'; ?>" id="location-alert">
 		<div class="container-fluid">
 			<div class="row">
