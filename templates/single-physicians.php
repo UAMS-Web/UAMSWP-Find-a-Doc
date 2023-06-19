@@ -492,10 +492,10 @@ while ( have_posts() ) : the_post();
 
 		// Check if Academic Background section should be displayed
 		if ( $resident || $academic_bio || $academic_appointment || $academic_admin_title || $education || $boards ) {
-			$show_academic_section = true;
+			$academic_section_show = true;
 			$jump_link_count++;
 		} else {
-			$show_academic_section = false;
+			$academic_section_show = false;
 		}
 
 		// Check if Podcast section should be displayed
@@ -841,7 +841,7 @@ while ( have_posts() ) : the_post();
 								<a class="nav-link" href="#related-resources" title="Jump to the section of this page about <?php echo $clinical_resource_plural_name_attr; ?>"><?php echo $clinical_resource_plural_name; ?></a>
 							</li>
 						<?php } ?>
-						<?php if ($show_academic_section) { ?>
+						<?php if ($academic_section_show) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#academic-info">Academic Background</a>
 							</li>
@@ -990,7 +990,7 @@ while ( have_posts() ) : the_post();
 				$physician_academic_split = true;
 			}
 
-			if( $show_academic_section ): ?>
+			if( $academic_section_show ): ?>
 		<section class="uams-module academic-info bg-auto" id="academic-info">
 			<div class="container-fluid">
 				<div class="row">
@@ -1401,7 +1401,7 @@ while ( have_posts() ) : the_post();
 			$appointment_section_show && 
 			( 
 				$clinical_bio_section_show
-				|| $show_academic_section
+				|| $academic_section_show
 				|| $show_podcast_section
 				|| $show_research_section
 				|| $show_conditions_section
