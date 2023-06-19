@@ -73,7 +73,6 @@ $clinical_trials = get_field('treatment_procedure_clinical_trials');
 $video = get_field('treatment_procedure_youtube_link');
 $conditions_cpt = get_field('treatment_conditions');
 $expertise = get_field('treatment_procedure_expertise');
-$locations = get_field('treatment_procedure_locations');
 $providers = get_field('treatment_procedure_physicians');
 $medline_type = get_field('medline_code_type');
 $medline_code = get_field('medline_code_id');
@@ -86,7 +85,7 @@ $podcast_name = get_field('treatment_procedure_podcast_name');
 
 $cta_repeater = get_field('treatment_procedure_cta');
 
-// Clinical Resources
+// Query for whether related clinical resources content section should be displayed on a page
 $clinical_resources = get_field('treatment_procedure_clinical_resources');
 $resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
 $resource_more = false;
@@ -100,7 +99,8 @@ $args = (array(
 ));
 $clinical_resource_query = new WP_Query( $args );
 
-// Query for whether associated locations content section should be displayed on a page
+// Query for whether related locations content section should be displayed on a page
+$locations = get_field('treatment_procedure_locations');
 uamswp_fad_location_query();
 
 // Classes for indicating presence of content
@@ -112,7 +112,7 @@ if ($excerpt && $excerpt_user == true ) { $treatment_field_classes .= ' has-exce
 if ($video && !empty($video)) { $treatment_field_classes .= ' has-video'; } // Video embed
 if ($conditions_cpt && array_filter($conditions_cpt)) { $treatment_field_classes .= ' has-condition'; } // Treatments
 if ($expertise && array_filter($expertise)) { $treatment_field_classes .= ' has-expertise'; } // Areas of Expertise
-if ($locations && $location_valid) { $treatment_field_classes .= ' has-location'; } // Locations
+if ($location_section_show) { $treatment_field_classes .= ' has-location'; } // Locations
 if ($providers && array_filter($providers)) { $treatment_field_classes .= ' has-provider'; } // Providers
 
 // Set logic for displaying jump links and sections

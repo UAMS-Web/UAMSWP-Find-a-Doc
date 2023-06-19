@@ -74,7 +74,6 @@ $clinical_trials = get_field('condition_clinical_trials');
 $video = get_field('condition_youtube_link');
 $treatments_cpt = get_field('condition_treatments');
 $expertise = get_field('condition_expertise');
-$locations = get_field('condition_locations');
 $providers = get_field('condition_physicians');
 $medline_type = get_field('medline_code_type');
 $medline_code = get_field('medline_code_id');
@@ -108,7 +107,8 @@ $args = (array(
 ));
 $clinical_resource_query = new WP_Query( $args );
 
-// Query for whether associated locations content section should be displayed on a page
+// Query for whether related locations content section should be displayed on a page
+$locations = get_field('condition_locations');
 uamswp_fad_location_query();
 
 // Classes for indicating presence of content
@@ -121,7 +121,7 @@ if ($syndication ) { $condition_field_classes .= ' has-syndication'; } // Conten
 if ($video && !empty($video)) { $condition_field_classes .= ' has-video'; } // Video embed
 if ($treatments_cpt && array_filter($treatments_cpt)) { $condition_field_classes .= ' has-treatment'; } // Treatments
 if ($expertise && array_filter($expertise)) { $condition_field_classes .= ' has-expertise'; } // Areas of Expertise
-if ($locations && $location_valid) { $condition_field_classes .= ' has-location'; } // Locations
+if ($location_section_show) { $condition_field_classes .= ' has-location'; } // Locations
 if ($providers && array_filter($providers)) { $condition_field_classes .= ' has-provider'; } // Providers
 
 // Set logic for displaying jump links and sections
