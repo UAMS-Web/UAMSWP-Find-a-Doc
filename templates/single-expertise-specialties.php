@@ -172,7 +172,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		// Bring in variables from outside of the function
 		global $page_id; // Defined on the template
 		global $page_title; // Defined on the template
-		global $show_child_aoe_section; // Defined in uamswp_fad_ontology_descendants_query()
+		global $expertise_descendant_section_show; // Defined in uamswp_fad_ontology_descendants_query()
 		global $expertise_single_name; // Defined in uamswp_fad_labels_expertise()
 		global $expertise_single_name_attr; // Defined in uamswp_fad_labels_expertise()
 		global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
@@ -181,7 +181,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		global $expertise_descendant_plural_name; // Defined in uamswp_fad_labels_expertise_descendant()
 		global $expertise_descendant_plural_name_attr; // Defined in uamswp_fad_labels_expertise_descendant()
 
-		if ( $show_child_aoe_section ) { // If it's suppressed or none available, set to false
+		if ( $expertise_descendant_section_show ) { // If it's suppressed or none available, set to false
 			$args = array(
 				"post_type" => "expertise",
 				"post_status" => "publish",

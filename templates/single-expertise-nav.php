@@ -36,7 +36,7 @@ if ($provider_section_show) {
 if ($location_section_show) {
 	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $site_nav_id .'-locations nav-item"><a title="' . $location_plural_name_attr . ' for '. get_the_title( $site_nav_id ) .'" href="'. get_permalink( $site_nav_id ) .'locations/" class="nav-link"><span itemprop="name">' . $location_plural_name . '</span></a></li>';
 }
-if ($show_child_aoe_section) {
+if ($expertise_descendant_section_show) {
 	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $site_nav_id .'-children nav-item"><a title="' . $expertise_descendant_plural_name_attr . ' Within '. get_the_title( $site_nav_id ) .'" href="'. get_permalink( $site_nav_id ) .'specialties/" class="nav-link"><span itemprop="name">' . $expertise_descendant_plural_name . '</span></a></li>';
 }
 if ($show_related_aoe_section) {
