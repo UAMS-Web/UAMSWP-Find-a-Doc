@@ -68,7 +68,7 @@ uamswp_fad_ontology_site_values();
 	uamswp_fad_location_query();
 
 	// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
-	uamswp_fad_ontology_descendants_query();
+	uamswp_fad_ontology_descendant_query();
 
 	// Query for whether related ontology items (of the same post type) content section should be displayed on ontology pages/subsections
 	uamswp_fad_ontology_related_query();
