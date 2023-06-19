@@ -16,8 +16,8 @@ $appointment_phone_name = 'the UAMS&nbsp;Health appointment line'; // default (U
 $appointment_phone = '5016868000'; // default (UAMS)
 $portal_section_show = false;
 // Portal
-if ( $physician_portal ) {
-	$portal = get_term($physician_portal, "portal");
+if ( $provider_portal ) {
+	$portal = get_term($provider_portal, "portal");
 	$portal_slug = $portal->slug;
 	$portal_name = $portal->name;
 	$portal_name_attr = uamswp_attr_conversion($portal_name);

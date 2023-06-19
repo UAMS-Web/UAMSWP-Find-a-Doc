@@ -331,7 +331,7 @@ while ( have_posts() ) : the_post();
 	$patients = get_field('physician_patient_types');
 	$refer_req = get_field('physician_referral_required');
 	$accept_new = get_field('physician_accepting_patients');
-	$physician_portal = get_field('physician_portal');
+	$provider_portal = get_field('physician_portal');
 	$physician_clinical_bio = get_field('physician_clinical_bio');
 	// $physician_youtube_link = get_field('physician_youtube_link');
 	$physician_clinical_admin_title = get_field('physician_clinical_admin_title');

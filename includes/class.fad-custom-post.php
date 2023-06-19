@@ -2353,8 +2353,8 @@ function get_provider_meta($object) {
 	$data['physician_thumbnail'] = image_sizer(get_post_thumbnail_id($postId), 253, 337, 'center', 'center');
 	$data['physician_photo'] = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center');
 	$data['physician_referral_required'] = get_field('physician_referral_required', $postId);
-	$physician_portal = get_field('physician_portal', $postId);
-	$portal = get_term($physician_portal, "portal");
+	$provider_portal = get_field('physician_portal', $postId);
+	$portal = get_term($provider_portal, "portal");
 	$data['physician_portal']['name'] = $portal->name;
 	$data['physician_portal']['content'] = get_field('portal_content', $portal);
 	$data['physician_portal']['url'] = get_field('portal_url', $portal);
