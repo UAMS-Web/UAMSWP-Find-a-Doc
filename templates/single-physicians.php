@@ -195,25 +195,9 @@ uamswp_fad_location_query();
 	}
 
 // Conditionally suppress sections based on Find-a-Doc Settings configuration
-$hide_medical_ontology = false;
-$provider_region = get_field('physician_region',$post->ID);
-$provider_service_line = get_field('physician_service_line',$post->ID);
-if( have_rows('remove_ontology_criteria', 'option') ):
-	while( have_rows('remove_ontology_criteria', 'option') ): the_row();
-		$remove_region = get_sub_field('remove_regions', 'option');
-		$remove_service_line = get_sub_field('remove_service_lines', 'option');
-		if ( (!empty($remove_region) && in_array(implode('',$provider_region), $remove_region)) && empty($remove_service_line) ) { 
-			$hide_medical_ontology = true;
-			break;
-		} elseif ( empty($remove_region) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
-			$hide_medical_ontology = true;
-			break;
-		} elseif( (!empty($remove_region) && in_array(implode('',$provider_region), $remove_region)) && (!empty($remove_service_line) && in_array($provider_service_line, $remove_service_line) ) ) {
-			$hide_medical_ontology = true;
-			break;
-		}
-	endwhile;
-endif;
+$region = get_field('physician_region',$post->ID);
+$service_line = get_field('physician_service_line',$post->ID);
+uamswp_fad_ontology_hide();
 
 // Set the schema description and the meta description
 
