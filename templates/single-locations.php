@@ -609,10 +609,10 @@ while ( have_posts() ) : the_post(); ?>
 			$children = New WP_Query ( $args );
 		}
 		if ( isset($children) && $children->have_posts() ) {
-			$show_child_locations_section = true;
+			$location_descendant_section_show = true;
 			$jump_link_count++;
 		} else {
-			$show_child_locations_section = false;
+			$location_descendant_section_show = false;
 		}
 
 		// Check if Clinical Resources section should be displayed
@@ -1135,7 +1135,7 @@ while ( have_posts() ) : the_post(); ?>
 							<a class="nav-link" href="#expertise" title="Jump to the section of this page about <?php echo $expertise_plural_name_attr; ?>"><?php echo $expertise_plural_name; ?></a>
 						</li>
 					<?php } ?>
-					<?php if ( $show_child_locations_section ) { ?>
+					<?php if ( $location_descendant_section_show ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#sub-clinics" title="Jump to the section of this page about <?php echo strtolower($location_descendant_plural_name_attr); ?> within this <?php echo strtolower($location_single_name_attr); ?>"><?php echo $location_descendant_plural_name; ?> Within This <?php echo $location_single_name; ?></a>
 						</li>
@@ -1718,7 +1718,7 @@ while ( have_posts() ) : the_post(); ?>
 	// End Areas of Expertise Section
 
 	// Begin Child Locations Section
-	if ( $show_child_locations_section ) { ?>
+	if ( $location_descendant_section_show ) { ?>
 		<section class="uams-module location-list bg-auto" id="sub-clinics" aria-labelledby="sub-location-title" >
 			<div class="container-fluid">
 				<div class="row">
