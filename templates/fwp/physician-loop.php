@@ -32,7 +32,7 @@ $provider_resident = get_field('physician_resident');
 $provider_resident_name = 'Resident Physician';
 $provider_title = get_field('physician_title');
 $provider_title_name = $provider_resident ? $provider_resident_name : get_term( $provider_title, 'clinical_title' )->name;
-$physician_service_line = get_field('physician_service_line');
+$provider_service_line = get_field('physician_service_line');
 ?>
 <div class="col item-container">
 	<div class="item">
@@ -141,11 +141,11 @@ $physician_service_line = get_field('physician_service_line');
 <!--
 			<a href="<?php echo get_permalink($post->ID); ?>"><h2 class="margin-top-none margin-bottom-none" itemprop="name"><?php echo $full_name; ?></h2></a>
 			<?php
-				if(! empty( get_field('physician_clinical_title') ) || ! empty( $physician_service_line ) ){
+				if(! empty( get_field('physician_clinical_title') ) || ! empty( $provider_service_line ) ){
 					echo '<h4>';
 					echo (get_field('physician_clinical_title') ? get_field('physician_clinical_title')->name : '');
-					echo ((! empty( get_field('physician_clinical_title') )) && (! empty( $physician_service_line ) ) ? ', ' : '' );
-					echo ($physician_service_line ? get_term( $physician_service_line, 'service_line' )->name : '');
+					echo ((! empty( get_field('physician_clinical_title') )) && (! empty( $provider_service_line ) ) ? ', ' : '' );
+					echo ($provider_service_line ? get_term( $provider_service_line, 'service_line' )->name : '');
 					echo '</h4>';
 				}
 			?>

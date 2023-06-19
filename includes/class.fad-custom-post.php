@@ -2295,7 +2295,7 @@ function get_provider_meta($object) {
 	$provider_resident_name = 'Resident Physician';
 	$provider_title = get_field('physician_title', $postId);
 	$provider_title_name = $provider_resident ? $provider_resident_name : get_term( $provider_title, 'clinical_title' )->name;
-	$physician_service_line = get_field('physician_service_line', $postId);
+	$provider_service_line = get_field('physician_service_line', $postId);
 	$resident_profile_group = get_field('physician_resident_profile_group',$postId);
 	$resident_academic_department = $resident_profile_group['physician_resident_academic_department'];
 	$resident_academic_department_name = get_term( $resident_academic_department, 'academic_department' )->name;
@@ -2307,7 +2307,7 @@ function get_provider_meta($object) {
 	$data['physician_full_name'] = $full_name;
 	//Physician Data
 	$data['physician_title'] = $provider_title_name; //(get_field('physician_title', $postId) ? get_term( get_field('physician_title', $postId), 'clinical_title' )->name : '');
-	$data['physician_service_line'] = $physician_service_line ? get_term( $physician_service_line, 'service_line' )->name : '';
+	$data['physician_service_line'] = $provider_service_line ? get_term( $provider_service_line, 'service_line' )->name : '';
 	$data['physician_clinical_bio'] = get_field( 'physician_clinical_bio', $postId );
 	$data['physician_short_clinical_bio'] = get_field('physician_short_clinical_bio', $postId) ? get_field( 'physician_short_clinical_bio', $postId) : wp_trim_words( get_field( 'physician_clinical_bio', $postId ), 30, ' &hellip;' );
 	$data['physician_gender'] = get_field( 'physician_gender', $postId );

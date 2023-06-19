@@ -31,7 +31,7 @@ $provider_resident = get_field('physician_resident', $id);
 $provider_resident_name = 'Resident Physician';
 $provider_title = get_field('physician_title', $id);
 $provider_title_name = $provider_resident ? $provider_resident_name : get_term( $provider_title, 'clinical_title' )->name;
-$physician_service_line = get_field('physician_service_line', $id);
+$provider_service_line = get_field('physician_service_line', $id);
 
 ?>
 <div class="card">
@@ -51,7 +51,7 @@ $physician_service_line = get_field('physician_service_line', $id);
 			<h3 class="card-title h6">
 				<span class="name"><?php echo $full_name; ?></span>
 				<?php 
-				if(! empty( $provider_title_name ) || ! empty( $physician_service_line ) ){
+				if(! empty( $provider_title_name ) || ! empty( $provider_service_line ) ){
 					echo '<span class="subtitle">';
 					echo ($provider_title_name ? $provider_title_name : '');
 					echo '</span>';
