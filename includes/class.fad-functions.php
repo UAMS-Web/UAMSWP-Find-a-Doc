@@ -2515,7 +2515,7 @@ function uamswp_fad_podcast() {
 		}
 
 		// Get system settings for general values of ontology text elements on a fake subpage or section for Treatments
-		function uamswp_fad_treatments_fpage_text_general() {
+		function uamswp_fad_treatment_fpage_text_general() {
 			// Make variables available outside of the function
 			global $treatments_fpage_title_general;
 			global $treatments_fpage_intro_general;
@@ -3285,7 +3285,7 @@ function uamswp_fad_podcast() {
 					// If the Treatments title variable is not set or is empty...
 					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
 					if ( !isset($treatments_fpage_title_expertise) || empty($treatments_fpage_title_expertise) ) {
-						uamswp_fad_treatments_fpage_text_general();
+						uamswp_fad_treatment_fpage_text_general();
 						global $treatments_fpage_title_general;
 						$treatments_fpage_title_expertise = $treatments_fpage_title_general;
 					}
@@ -3293,7 +3293,7 @@ function uamswp_fad_podcast() {
 					// If the Treatments intro text variable is not set or is empty...
 					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
 					if ( !isset($treatments_fpage_intro_expertise) || empty($treatments_fpage_intro_expertise) ) {
-						uamswp_fad_treatments_fpage_text_general();
+						uamswp_fad_treatment_fpage_text_general();
 						global $treatments_fpage_intro_general;
 						$treatments_fpage_intro_expertise = $treatments_fpage_intro_general;
 					}
