@@ -497,10 +497,10 @@ while ( have_posts() ) : the_post(); ?>
 			}
 		}
 		if ($portal && $portal_slug !== "_none") {
-			$show_portal_section = true;
+			$portal_section_show = true;
 			$jump_link_count++;
 		} else {
-			$show_portal_section = false;
+			$portal_section_show = false;
 		}
 
 		// Check if Providers section should be displayed
@@ -1110,7 +1110,7 @@ while ( have_posts() ) : the_post(); ?>
 							<a class="nav-link" href="#telemedicine-info" title="Jump to the section of this page about Telemedicine Information">Telemedicine</a>
 						</li>
 					<?php } ?>
-					<?php if ( $show_portal_section ) { ?>
+					<?php if ( $portal_section_show ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#portal-info" title="Jump to the section of this page about the Patient Portal">Patient Portal</a>
 						</li>
@@ -1620,7 +1620,7 @@ while ( have_posts() ) : the_post(); ?>
 	// End Telemedicine Information Section
 
 	// Begin Portal Section
-	if ( $show_portal_section ) { ?>
+	if ( $portal_section_show ) { ?>
 		<section class="uams-module cta-bar cta-bar-weighted bg-blue" aria-label="Patient Portal" id="portal-info">
 			<div class="container-fluid">
 				<div class="row">
