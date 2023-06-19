@@ -524,10 +524,10 @@ while ( have_posts() ) : the_post();
 
 		// Check if Conditions section should be displayed
 		if ( $conditions_cpt && $conditions_cpt_query->posts && !$hide_medical_ontology ) {
-			$show_conditions_section = true;
+			$condition_section_show = true;
 			$jump_link_count++;
 		} else {
-			$show_conditions_section = false;
+			$condition_section_show = false;
 		}
 
 		// Check if Treatments section should be displayed
@@ -851,7 +851,7 @@ while ( have_posts() ) : the_post();
 								<a class="nav-link" href="#research-info">Research</a>
 							</li>
 						<?php } ?>
-						<?php if ( $show_conditions_section ) { ?>
+						<?php if ( $condition_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#conditions"><?php echo $conditions_plural_name; ?></a>
 							</li>
@@ -1163,7 +1163,7 @@ while ( have_posts() ) : the_post();
 
 			// Conditions CPT
 			// we will use the first term to load ACF data from
-			if( $show_conditions_section ) {
+			if( $condition_section_show ) {
 				$condition_context = 'single-provider';
 				$condition_heading_related_name = $short_name; // To what is it related?
 
@@ -1404,7 +1404,7 @@ while ( have_posts() ) : the_post();
 				|| $academic_section_show
 				|| $podcast_section_show
 				|| $research_section_show
-				|| $show_conditions_section
+				|| $condition_section_show
 				|| $show_treatments_section
 				|| $show_aoe_section
 				|| $location_section_show

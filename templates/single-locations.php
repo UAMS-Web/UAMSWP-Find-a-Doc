@@ -545,10 +545,10 @@ while ( have_posts() ) : the_post(); ?>
 		// $condition_schema = '';
 		// we will use the first term to load ACF data from
 		if( $conditions_cpt && $conditions_cpt_query->posts && !$hide_medical_ontology ) {
-			$show_conditions_section = true;
+			$condition_section_show = true;
 			$jump_link_count++;
 		} else {
-			$show_conditions_section = false;
+			$condition_section_show = false;
 		}
 
 		// Check if Treatments section should be displayed
@@ -1120,7 +1120,7 @@ while ( have_posts() ) : the_post(); ?>
 							<a class="nav-link" href="#providers" title="Jump to the section of this page about <?php echo $provider_plural_name_attr; ?>"><?php echo $provider_plural_name; ?></a>
 						</li>
 					<?php } ?>
-					<?php if ( $show_conditions_section ) { ?>
+					<?php if ( $condition_section_show ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#conditions" title="Jump to the section of this page about <?php echo $conditions_plural_name_attr; ?>"><?php echo $conditions_plural_name; ?></a>
 						</li>
@@ -1659,7 +1659,7 @@ while ( have_posts() ) : the_post(); ?>
 	// End Providers Section
 
 	// Begin Conditions Section
-	if( $show_conditions_section ) {
+	if( $condition_section_show ) {
 		$condition_context = 'single-location';
 		$condition_heading_related_name = $page_title_phrase; // To what is it related?
 

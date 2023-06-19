@@ -157,10 +157,10 @@ $jump_link_count = 0;
 	$conditions_query_cpt = new WP_Query( $args );
 
 	if ( $conditions_cpt && !empty($conditions_query_cpt->have_posts()) ) {
-		$show_conditions_section = true;
+		$condition_section_show = true;
 		$jump_link_count++;
 	} else {
-		$show_conditions_section = false;
+		$condition_section_show = false;
 	}
 
 	// Check if Providers section should be displayed
@@ -374,7 +374,7 @@ $jump_link_count = 0;
 								<a class="nav-link" href="#clinical-trials" title="Jump to the section of this page about Clinical Trials">Clinical Trials</a>
 							</li>
 						<?php } ?>
-						<?php if ( $show_conditions_section ) { ?>
+						<?php if ( $condition_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#conditions" title="Jump to the section of this page about <?php echo $conditions_plural_name_attr; ?>"><?php echo $conditions_plural_name; ?></a>
 							</li>
@@ -429,7 +429,7 @@ $jump_link_count = 0;
 		// End Clinical Trials Section
 
 		// Begin Conditions Section
-		if ( $show_conditions_section ) { ?>
+		if ( $condition_section_show ) { ?>
 			<section class="uams-module conditions-treatments bg-auto" id="conditions">
 				<div class="container-fluid">
 					<div class="row">

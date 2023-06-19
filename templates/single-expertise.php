@@ -292,7 +292,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		// Bring in variables from outside of the function
 		global $page_title; // Defined on the template
 		global $page_title_attr; // Defined on the template
-		global $show_conditions_section; // Defined in uamswp_fad_ontology_conditions_query()
+		global $condition_section_show; // Defined in uamswp_fad_ontology_conditions_query()
 		global $conditions_cpt_query; // Defined in uamswp_fad_ontology_conditions_query()
 		global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
 		global $conditions_plural_name; // Defined in uamswp_fad_labels_conditions()
@@ -303,7 +303,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		$condition_heading_related_name = $page_title; // To what is it related?
 		$condition_heading_related_name_attr = $page_title_attr;
 
-		if( $show_conditions_section ) {
+		if( $condition_section_show ) {
 			include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop-list.php' );
 		}
 	}

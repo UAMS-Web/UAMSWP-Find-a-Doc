@@ -170,10 +170,10 @@ $args = (array(
 ));
 $conditions_cpt_query = new WP_Query( $args );
 if( $conditions_cpt && $conditions_cpt_query->posts ) {
-	$show_conditions_section = true;
+	$condition_section_show = true;
 	$jump_link_count++;
 } else {
-	$show_conditions_section = false;
+	$condition_section_show = false;
 }
 
 // Check if Treatments and Procedures section should be displayed
@@ -400,7 +400,7 @@ function uamswp_resource_conditions_cpt() {
 	// Bring in variables from outside of the function
 	global $page_title; // Defined on the template
 	global $page_title_attr; // Defined on the template
-	global $show_conditions_section; // Defined on the template
+	global $condition_section_show; // Defined on the template
 	global $conditions_cpt_query; // Defined on the template
 	global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
 	global $conditions_single_name_attr; // Defined in uamswp_fad_labels_conditions()
@@ -410,7 +410,7 @@ function uamswp_resource_conditions_cpt() {
 	$condition_heading_related_name = $page_title; // To what is it related?
 	$condition_heading_related_name_attr = $page_title_attr;
 
-	if( $show_conditions_section ) {
+	if( $condition_section_show ) {
 		include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
 	}
 }
@@ -517,7 +517,7 @@ function uamswp_resource_jump_links() {
 	global $fad_jump_links_title; // Defined in uamswp_fad_labels_jump_links()
 	global $page_title; // Defined on the template
 	global $clinical_resource_show_section; // Defined on the template
-	global $show_conditions_section; // Defined on the template
+	global $condition_section_show; // Defined on the template
 	global $show_treatments_section; // Defined on the template
 	global $provider_section_show; // Defined on the template
 	global $location_section_show; // Defined on the template
@@ -539,7 +539,7 @@ function uamswp_resource_jump_links() {
 							<a class="nav-link" href="#related-resources" title="Jump to the section of this page about related <?php echo $clinical_resource_plural_name_attr; ?>">Related <?php echo $clinical_resource_plural_name; ?></a>
 						</li>
 					<?php } ?>
-					<?php if ( $show_conditions_section ) { ?>
+					<?php if ( $condition_section_show ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#conditions" title="Jump to the section of this page about related <?php echo $conditions_plural_name_attr; ?>"><?php echo $conditions_plural_name; ?></a>
 						</li>

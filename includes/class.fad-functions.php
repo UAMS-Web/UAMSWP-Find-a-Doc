@@ -1574,7 +1574,7 @@ function uamswp_fad_post_title() {
 		// Make variables available outside of the function
 		global $conditions_cpt;
 		global $conditions_cpt_query;
-		global $show_conditions_section;
+		global $condition_section_show;
 
 		// load all 'conditions' terms for the post
 		$conditions_cpt = get_field('expertise_conditions_cpt', $site_nav_id);
@@ -1589,9 +1589,9 @@ function uamswp_fad_post_title() {
 		);
 		$conditions_cpt_query = new WP_Query( $args );
 		if( ( $conditions_cpt && $conditions_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
-			$show_conditions_section = true;
+			$condition_section_show = true;
 		} else {
-			$show_conditions_section = false;
+			$condition_section_show = false;
 		}
 	}
 
