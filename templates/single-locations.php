@@ -554,31 +554,15 @@ while ( have_posts() ) : the_post(); ?>
 		$expertises = get_field('location_expertise');
 		uamswp_fad_expertise_query();
 
-		// Check if Child Locations section should be displayed
+		// Query for whether related descendant locations content section should be displayed on a page
 		$current_id = get_the_ID();
-		if ( ( 0 != count( get_pages( array( 'child_of' => $current_id, 'post_type' => 'location' ) ) ) ) ) { // If none available, set to false
-			$args = array(
-				'post_type' => 'location',
-				'post_status' => 'publish',
-				'post_parent' => $current_id,
-				'order' => 'ASC',
-				'orderby' => 'title',
-				'meta_query' => array(
-					array(
-						'key' => 'location_hidden',
-						'value' => '1',
-						'compare' => '!=',
-					)
-				),
-			);
-			$children = New WP_Query ( $args );
-		}
-		if ( isset($children) && $children->have_posts() ) {
-			$location_descendant_section_show = true;
-			$jump_link_count++;
-		} else {
-			$location_descendant_section_show = false;
-		}
+		$location_descendants = get_pages(
+			array(
+				'child_of' => $current_id,
+				'post_type' => 'location'
+			)
+		);
+		uamswp_fad_location_descendant_query();
 
 		// Check if Clinical Resources section should be displayed
 		if( $clinical_resources && $clinical_resource_query->have_posts() ) {
@@ -1674,11 +1658,12 @@ while ( have_posts() ) : the_post(); ?>
 						<div class="card-list-container">
 							<div class="card-list">
 								<?php
-									while ( $children->have_posts() ) : $children->the_post();
+									while ( $location_descendant_query->have_posts() ) {
+										$location_descendant_query->the_post();
 										$id = get_the_ID();
 										$location_descendant_list = true; // Indicate that this is a list of child locations within this location
 										include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
-									endwhile;
+									} // endwhile
 									wp_reset_postdata();
 								?>
 							</div>

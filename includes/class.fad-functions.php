@@ -1491,6 +1491,65 @@ function uamswp_fad_post_title() {
 		}
 	}
 
+	// Query for whether descendant locations content section should be displayed on a page
+	function uamswp_fad_location_descendant_query() {
+		// Bring in variables from outside of the function
+
+			// Typically defined on the template
+			global $current_id;
+			global $jump_link_count;
+
+			// Typically defined on the template or in a function such as uamswp_fad_ontology_site_values()
+			global $location_descendants; // Value of the related locations input
+
+		// Make variables available outside of the function
+		global $location_descendant_query;
+		global $location_descendant_section_show;
+		global $location_descendant_ids;
+		global $location_descendant_count; // integer
+		global $location_descendant_valid;
+
+		$location_descendant_valid = false;
+
+		if ( 0 != count($location_descendants) ) {
+			$args = array(
+				'post_type' => 'location',
+				'post_status' => 'publish',
+				'post_parent' => $current_id,
+				'order' => 'ASC',
+				'orderby' => 'title',
+				'posts_per_page' => -1,
+				'fields' => 'ids',
+				'meta_query' => array(
+					array(
+						'key' => 'location_hidden',
+						'value' => '1',
+						'compare' => '!=',
+					)
+				),
+			);
+			$location_descendant_query = new WP_Query( $args );
+			if( ( $location_descendants && $location_descendant_query->have_posts() ) ) {
+				$location_descendant_section_show = true;
+				$location_descendant_ids = $location_descendant_query->posts;
+				$location_descendant_count = count($location_descendant_query->posts);
+				$jump_link_count = $jump_link_count + 1;
+			} else {
+				$location_descendant_section_show = false;
+			}
+
+			// Check for valid descendant locations
+			if ( $location_descendants && $location_descendant_query->have_posts() ) {
+				foreach( $location_descendants as $location_descendant ) {
+					if ( get_post_status ( $location_descendant ) == 'publish' ) {
+						$location_descendant_valid = true;
+						$break;
+					}
+				}
+			}
+		}
+	}
+
 	// Query for whether descendant areas of expertise content section should be displayed on ontology pages/subsections
 	function uamswp_fad_expertise_descendant_query() {
 		// Bring in variables from outside of the function
