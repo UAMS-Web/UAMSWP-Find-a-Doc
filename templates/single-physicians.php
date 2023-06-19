@@ -166,16 +166,6 @@ $eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$po
 $locations = get_field('physician_locations',$post->ID); // Get the provider's location values
 uamswp_fad_location_query();
 
-	// Count the number of valid locations
-	$location_count = 0;
-	if( $locations && $location_valid ) {
-		foreach( $locations as $location ) {
-			if ( get_post_status ( $location ) == 'publish' ) {
-				$location_count++;
-			}
-		} // endforeach
-	}
-
 	// Get the name of the provider's primary location
 	$l = 1;
 	if( $locations && $location_valid ) {
