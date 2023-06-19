@@ -310,8 +310,8 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 
 	// Display treatments
 	add_action( 'genesis_after_entry', 'uamswp_expertise_treatments_cpt', 18 );
-	$treatment_heading = $treatments_fpage_title_expertise; // Treatments section title // Defined in uamswp_fad_fpage_text_expertise()
-	$treatment_intro = $treatments_fpage_intro_expertise; // Treatments section intro text // Defined in uamswp_fad_fpage_text_expertise()
+	$treatment_heading = $treatment_fpage_title_expertise; // Treatments section title // Defined in uamswp_fad_fpage_text_expertise()
+	$treatment_intro = $treatment_fpage_intro_expertise; // Treatments section intro text // Defined in uamswp_fad_fpage_text_expertise()
 	function uamswp_expertise_treatments_cpt() {
 		// Bring in variables from outside of the function
 		global $page_title; // Defined on the template
