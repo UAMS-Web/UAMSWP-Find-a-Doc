@@ -502,7 +502,7 @@ while ( have_posts() ) : the_post();
 		$podcast_filter = 'doctor';
 		$podcast_subject = $short_name;
 		uamswp_fad_podcast_query();
-		if ( $show_podcast_section ) {
+		if ( $podcast_section_show ) {
 			$jump_link_count++;
 		}
 
@@ -831,7 +831,7 @@ while ( have_posts() ) : the_post();
 								<a class="nav-link" href="#clinical-info">About</a>
 							</li>
 						<?php } ?>
-						<?php if ( $show_podcast_section ) { ?>
+						<?php if ( $podcast_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#podcast">Podcast</a>
 							</li>
@@ -1402,7 +1402,7 @@ while ( have_posts() ) : the_post();
 			( 
 				$clinical_bio_section_show
 				|| $academic_section_show
-				|| $show_podcast_section
+				|| $podcast_section_show
 				|| $show_research_section
 				|| $show_conditions_section
 				|| $show_treatments_section

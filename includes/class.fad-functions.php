@@ -1737,13 +1737,13 @@ function uamswp_fad_podcast_query() {
 	global $podcast_name; // Typically defined on the template
 
 	// Make variables available outside of the function
-	global $show_podcast_section;
+	global $podcast_section_show;
 
 	// Check if podcast section should be displayed
 	if ($podcast_name) {
-		$show_podcast_section = true;
+		$podcast_section_show = true;
 	} else {
-		$show_podcast_section = false;
+		$podcast_section_show = false;
 	}
 }
 
@@ -1752,11 +1752,11 @@ function uamswp_fad_podcast() {
 	// Bring in variables from outside of the function
 	global $podcast_name; // Typically defined on the template
 	global $podcast_subject; // Typically defined on the template
-	global $show_podcast_section; // Typically defined in uamswp_fad_podcast_query()
+	global $podcast_section_show; // Typically defined in uamswp_fad_podcast_query()
 	global $podcast_filter; // Typically defined on the template // Expected values: 'tag' or 'doctor'
 	global $provider_plural_name; // Typically defined in uamswp_fad_labels_provider()
 
-	if ( $show_podcast_section ) {
+	if ( $podcast_section_show ) {
 		if ( $podcast_filter == 'tag' ) {
 			$podcast_filter_id = '303';
 		} elseif ( $podcast_filter == 'doctor' ) {
@@ -1795,7 +1795,7 @@ function uamswp_fad_podcast() {
 					</div>
 				</div>
 			</section>
-	<?php } // endif ( $show_podcast_section )
+	<?php } // endif ( $podcast_section_show )
 }
 
 // Get system settings for other ontology item labels and archive page text

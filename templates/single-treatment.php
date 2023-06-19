@@ -123,7 +123,7 @@ $jump_link_count = 0;
 	$podcast_filter = 'tag';
 	$podcast_subject = $page_title;
 	uamswp_fad_podcast_query();
-	if ( $show_podcast_section ) {
+	if ( $podcast_section_show ) {
 		$jump_link_count++;
 	}
 
@@ -359,7 +359,7 @@ $jump_link_count = 0;
 				</button>
 				<div class="collapse navbar-collapse inner-container" id="jump-link-nav">
 					<ul class="nav navbar-nav">
-						<?php if ( $show_podcast_section ) { ?>
+						<?php if ( $podcast_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#podcast" title="Jump to the section of this page about UAMS Health Talk Podcast">Podcast</a>
 							</li>
