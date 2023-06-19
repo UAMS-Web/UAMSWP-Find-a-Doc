@@ -167,42 +167,11 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 
 	// Display ontology page content
-	add_action( 'genesis_entry_content', 'uamswp_expertise_associated', 24 );
-	function uamswp_expertise_associated() {
-		// Bring in variables from outside of the function
-		global $expertise_section_show; // Defined in uamswp_fad_expertise_related_query()
-		global $expertise_query; // Defined in uamswp_fad_expertise_related_query()
-		global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
-		global $expertise_plural_name_attr; // Defined in uamswp_fad_labels_expertise()
-
-		if( $expertise_section_show ) { ?>
-			<section class="uams-module link-list link-list-layout-split bg-auto" id="related-expertise" aria-labelledby="related-expertise-title">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-12 col-md-6 heading">
-							<div class="text-container">
-								<h2 class="module-title" id="related-expertise-title"><span class="title">Related <?php echo $expertise_plural_name; ?></span></h2>
-							</div>
-						</div>
-						<div class="col-12 col-md-6 list">
-							<ul>
-							<?php
-							while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
-								echo '<li class="item"><div class="text-container"><h3 class="h5"><a href="'.get_permalink().'" aria-label="Go to ' . $expertise_plural_name_attr . ' page for ' . get_the_title() . '">';
-								echo get_the_title();
-								echo '</a></h3>';
-								echo ( has_excerpt() ? '<p>' . wp_trim_words( get_the_excerpt(), 30, '&nbsp;&hellip;' ) . '</p>' : '' );
-								echo '</div></li>';
-							endwhile;
-							wp_reset_postdata(); ?>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</section>
-		<?php 
-		} // endif
-	}
+	$expertise_section_id = 'related-expertise';
+	$expertise_section_show_header = false;
+	$expertise_section_title = 'List of Related ' . $expertise_plural_name;
+	$expertise_section_intro = '';
+	add_action( 'genesis_entry_content', 'uamswp_fad_section_expertise', 24 );
 
 	// Display appointment information
 	add_action( 'genesis_entry_content', 'uamswp_fad_ontology_appointment', 26 );
