@@ -181,8 +181,8 @@ if( $location_section_show ) {
 }
 
 // Conditionally suppress sections based on Find-a-Doc Settings configuration
-$region = get_field('physician_region',$post->ID);
-$service_line = get_field('physician_service_line',$post->ID);
+$regions = get_field('physician_region',$post->ID);
+$service_lines = get_field('physician_service_line',$post->ID);
 uamswp_fad_ontology_hide();
 
 // Set the schema description and the meta description

@@ -255,8 +255,8 @@ if ($prescription_query) {
 }
 
 // Conditionally suppress sections based on Find-a-Doc Settings configuration
-$region = get_field('location_region',$post->ID);
-$service_line = get_field('location_service_line',$post->ID);
+$regions = get_field('location_region',$post->ID);
+$service_lines = get_field('location_service_line',$post->ID);
 uamswp_fad_ontology_hide();
 
 // Clinical Resources

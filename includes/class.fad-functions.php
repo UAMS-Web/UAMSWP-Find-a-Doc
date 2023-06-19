@@ -4190,28 +4190,71 @@ function uamswp_fad_ontology_hide() {
 	// Bring in variables from outside of the function
 
 		// Defined on the template
-		global $region;
-		global $service_line;
+		global $regions;
+		global $service_lines;
 
 	// Make variables available outside of the function
 	global $hide_medical_ontology;
 
+	// If variables are strings, convert them to arrays
+	$regions = is_array($regions) ? $regions : array( $regions );
+	$service_lines = is_array($service_lines) ? $service_lines : array( $service_lines );
+
 	$hide_medical_ontology = false;
 	if ( have_rows('remove_ontology_criteria', 'option') ) {
-		while ( have_rows('remove_ontology_criteria', 'option') ) {
+		while( have_rows('remove_ontology_criteria', 'option') ) {
 			the_row();
 			$remove_region = get_sub_field('remove_regions', 'option');
 			$remove_service_line = get_sub_field('remove_service_lines', 'option');
-			if ( (!empty($remove_region) && in_array(implode('',$region), $remove_region)) && empty($remove_service_line) ) { 
+
+			if (
+				(
+					!empty($remove_region)
+					&&
+					empty( array_diff( $regions, $remove_region ) )
+				)
+				&&
+				empty($remove_service_line)
+			) { 
+				// If the remove region array is not empty
+				// and if all the item's regions are in the remove region array
+				// and if the remove service line array is empty
 				$hide_medical_ontology = true;
 				break;
-			} elseif ( empty($remove_region) && (!empty($remove_service_line) && in_array($service_line, $remove_service_line) ) ) {
+			} elseif (
+				// If the remove region array is empty
+				// and if the remove service line array is not empty
+				// and if all the item's service lines are in the remove service line array
+				empty($remove_region)
+				&&
+				(
+					!empty($remove_service_line)
+					&&
+					empty( array_diff( $service_lines, $remove_service_line ) )
+				)
+			) {
 				$hide_medical_ontology = true;
 				break;
-			} elseif( (!empty($remove_region) && in_array(implode('',$region), $remove_region)) && (!empty($remove_service_line) && in_array($service_line, $remove_service_line) ) ) {
+			} elseif(
+				// If the remove region array is not empty
+				// and if all the item's regions are in the remove region array
+				// and if the remove service line array is not empty
+				// and if all the item's service lines are in the remove service line array
+				(
+					!empty($remove_region)
+					&&
+					empty( array_diff( $regions, $remove_region ) )
+				)
+				&&
+				(
+					!empty($remove_service_line)
+					&&
+					empty( array_diff( $service_lines, $remove_service_line ) )
+				)
+			) {
 				$hide_medical_ontology = true;
 				break;
 			}
-		} // endwhile ( have_rows('remove_ontology_criteria', 'option') )
-	} // endif ( have_rows('remove_ontology_criteria', 'option') )
+		} // endwhile
+	} // endif
 }
