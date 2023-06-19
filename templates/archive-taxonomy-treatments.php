@@ -31,7 +31,7 @@ function uamswp_terms_clauses( $clauses, $taxonomies, $args ){
 uamswp_fad_labels_treatment();
 
 // Get system settings for Treatments Archive Page
-uamswp_fad_archive_treatments();
+uamswp_fad_archive_treatment();
 // $treatments_archive_link = get_post_type_archive_link( get_query_var('post_type') );
 
 // Override theme's method of defining the meta page title

@@ -2164,7 +2164,7 @@ function uamswp_fad_podcast() {
 	}
 
 	// Get system settings for treatment archive page text
-	function uamswp_fad_archive_treatments() {
+	function uamswp_fad_archive_treatment() {
 		// Make variables available outside of the function
 		global $treatments_archive_headline;
 		global $treatments_archive_headline_attr;
@@ -2288,7 +2288,7 @@ function uamswp_fad_podcast() {
 			global $placeholder_treatments_plural_name;
 			global $treatments_plural_name;
 
-			// Defined in uamswp_fad_archive_treatments()
+			// Defined in uamswp_fad_archive_treatment()
 			global $placeholder_treatments_archive_headline;
 			global $treatments_archive_headline;
 			global $placeholder_treatments_archive_intro_text;

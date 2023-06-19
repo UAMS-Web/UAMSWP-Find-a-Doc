@@ -43,7 +43,7 @@ $embed_code = get_field('treatment_procedure_embed_codes', $term); // Embed / Sy
 	uamswp_fad_labels_treatment();
 
 // Get system settings for condition archive page text
-uamswp_fad_archive_treatments();
+uamswp_fad_archive_treatment();
 
 if (
 	( $medline_type && 'none' != $medline_type && $medline_code && !empty($medline_code) ) // if the medline plus syndication option is filled in
