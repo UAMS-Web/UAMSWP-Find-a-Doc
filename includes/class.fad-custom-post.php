@@ -2293,8 +2293,8 @@ function get_provider_meta($object) {
 	$full_name = get_field('physician_first_name', $postId) .' ' .(get_field('physician_middle_name', $postId) ? get_field('physician_middle_name', $postId) . ' ' : '') . get_field('physician_last_name', $postId) . (get_field('physician_pedigree', $postId) ? '&nbsp;' . get_field('physician_pedigree', $postId ) : '') . ( $degree_list ? ', ' . $degree_list : '' );
 	$provider_resident = get_field('physician_resident', $postId);
 	$provider_resident_name = 'Resident Physician';
-	$physician_title = get_field('physician_title', $postId);
-	$provider_title_name = $provider_resident ? $provider_resident_name : get_term( $physician_title, 'clinical_title' )->name;
+	$provider_title = get_field('physician_title', $postId);
+	$provider_title_name = $provider_resident ? $provider_resident_name : get_term( $provider_title, 'clinical_title' )->name;
 	$physician_service_line = get_field('physician_service_line', $postId);
 	$resident_profile_group = get_field('physician_resident_profile_group',$postId);
 	$resident_academic_department = $resident_profile_group['physician_resident_academic_department'];

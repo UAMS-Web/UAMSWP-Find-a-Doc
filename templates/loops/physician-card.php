@@ -29,8 +29,8 @@ $full_name = get_field('physician_first_name', $id) .' ' .(get_field('physician_
 $full_name_attr = uamswp_attr_conversion($full_name);
 $provider_resident = get_field('physician_resident', $id);
 $provider_resident_name = 'Resident Physician';
-$physician_title = get_field('physician_title', $id);
-$provider_title_name = $provider_resident ? $provider_resident_name : get_term( $physician_title, 'clinical_title' )->name;
+$provider_title = get_field('physician_title', $id);
+$provider_title_name = $provider_resident ? $provider_resident_name : get_term( $provider_title, 'clinical_title' )->name;
 $physician_service_line = get_field('physician_service_line', $id);
 
 ?>
