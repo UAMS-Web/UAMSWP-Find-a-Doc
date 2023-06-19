@@ -230,14 +230,14 @@ if ($providers && !empty($providers)) { $treatment_field_classes .= ' has-provid
 			</section>
 		<?php } // endif ?>
 		<?php // Check if any doctors are connected
-		$physiciansCount = 0;
+		$provider_count = 0;
 		if ($providers) {
-			$physiciansCount = count($providers);
+			$provider_count = count($providers);
 		}
 		$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12)
 		$postsCutoff = 18; // Set cutoff value
 		$postsCountClass = $postsPerPage;
-		if($physiciansCount <= $postsCutoff ) {
+		if($provider_count <= $postsCutoff ) {
 				$postsPerPage = -1;
 			}
 		$args = (array(
@@ -271,7 +271,7 @@ if ($providers && !empty($providers)) { $treatment_field_classes .= ' has-provid
 							</div>
 							<?php if ($postsPerPage !== -1) { ?>
 							<div class="more">
-								<button class="loadmore btn btn-primary" data-type="taxonomy" data-tax="treatment_procedure" data-slug="<?php echo $term->slug; ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $physiciansCount; ?>" aria-label="Load more <?php echo strtolower($provider_plural_name_attr); ?>">Load More</button>
+								<button class="loadmore btn btn-primary" data-type="taxonomy" data-tax="treatment_procedure" data-slug="<?php echo $term->slug; ?>" data-ppp="<?php echo $postsPerPage; ?>" data-postcount="<?php echo $provider_count; ?>" aria-label="Load more <?php echo strtolower($provider_plural_name_attr); ?>">Load More</button>
 							</div>
 							<?php } ?>
 						</div>
