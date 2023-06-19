@@ -120,7 +120,7 @@ uamswp_fad_location_query();
 
 // Query for whether related areas of expertise content section should be displayed on a page
 $expertises = get_field('clinical_resource_aoe');
-uamswp_fad_expertise_related_query();
+uamswp_fad_expertise_query();
 
 // Query for whether related conditions content section should be displayed on a page
 // load all 'conditions' terms for the post

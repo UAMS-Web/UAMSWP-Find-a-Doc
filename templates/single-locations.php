@@ -552,7 +552,7 @@ while ( have_posts() ) : the_post(); ?>
 
 		// Query for whether related areas of expertise content section should be displayed on a page
 		$expertises = get_field('location_expertise');
-		uamswp_fad_expertise_related_query();
+		uamswp_fad_expertise_query();
 
 		// Check if Child Locations section should be displayed
 		$current_id = get_the_ID();

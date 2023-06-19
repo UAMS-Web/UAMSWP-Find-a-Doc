@@ -112,7 +112,7 @@ uamswp_fad_location_query();
 
 // Query for whether related areas of expertise content section should be displayed on a page
 $expertises = get_field('condition_expertise');
-uamswp_fad_expertise_related_query();
+uamswp_fad_expertise_query();
 
 // Classes for indicating presence of content
 $condition_field_classes = '';

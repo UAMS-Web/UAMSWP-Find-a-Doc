@@ -1528,7 +1528,7 @@ function uamswp_fad_post_title() {
 	}
 
 	// Query for whether related areas of expertise content section should be displayed on ontology pages/subsections
-	function uamswp_fad_expertise_related_query() {
+	function uamswp_fad_expertise_query() {
 		// Bring in variables from outside of the function
 
 			// Typically defined on the template
@@ -1691,7 +1691,7 @@ function uamswp_fad_ontology_nav_menu() {
 	global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
 	global $provider_section_show; // Typically defined in uamswp_fad_provider_query()
 	global $location_section_show; // Typically defined in uamswp_fad_location_query()
-	global $expertise_section_show; // Typically defined in uamswp_fad_expertise_related_query()
+	global $expertise_section_show; // Typically defined in uamswp_fad_expertise_query()
 	global $clinical_resource_section_show; // Typically defined in uamswp_fad_clinical_resource_query()
 	global $expertise_descendant_section_show; // Typically defined in uamswp_fad_expertise_descendant_query()
 	global $child_pages; // Typically defined in uamswp_fad_expertise_descendant_query()
@@ -4121,7 +4121,7 @@ function uamswp_fad_section_expertise() {
 		global $expertise_fpage_title_general; // string
 		global $expertise_fpage_intro_general; // string
 
-		// Defined on the template or in a function such as uamswp_fad_expertise_related_query()
+		// Defined on the template or in a function such as uamswp_fad_expertise_query()
 		global $expertise_section_show; // bool
 		global $expertise_query; // array
 		global $expertises; // array
