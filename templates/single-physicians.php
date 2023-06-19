@@ -332,7 +332,7 @@ while ( have_posts() ) : the_post();
 	$refer_req = get_field('physician_referral_required');
 	$accept_new = get_field('physician_accepting_patients');
 	$provider_portal = get_field('physician_portal');
-	$physician_clinical_bio = get_field('physician_clinical_bio');
+	$provider_clinical_bio = get_field('physician_clinical_bio');
 	// $physician_youtube_link = get_field('physician_youtube_link');
 	$physician_clinical_admin_title = get_field('physician_clinical_admin_title');
 	$physician_clinical_focus = get_field('physician_clinical_focus');
@@ -484,7 +484,7 @@ while ( have_posts() ) : the_post();
 		}
 
 		// Check if Clinical Bio section should be displayed
-		if ( $physician_clinical_bio || !empty ($video) ) {
+		if ( $provider_clinical_bio || !empty ($video) ) {
 			$clinical_bio_section_show = true;
 		} else {
 			$clinical_bio_section_show = false;
@@ -913,9 +913,9 @@ while ( have_posts() ) : the_post();
 							<?php } else { ?>
 								<div class="module-body">
 							<?php } // endif
-							if ( $physician_clinical_bio ) { ?>
+							if ( $provider_clinical_bio ) { ?>
 								<h3 class="sr-only">Clinical Biography</h3>
-								<?php echo $physician_clinical_bio; ?>
+								<?php echo $provider_clinical_bio; ?>
 							<?php } // endif
 							if($video) { ?>
 								<?php if(function_exists('lyte_preparse')) {
