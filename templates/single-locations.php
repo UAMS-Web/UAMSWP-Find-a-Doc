@@ -129,31 +129,31 @@ if ( function_exists( 'fly_add_image_size' ) && !empty($schema_image) ) {
 
 // Set telemedicine values
 // Original Set
-// $telemed_query = get_field('field_location_telemed_query'); // Is there telemedicine?
-// $telemed_patients = get_field('field_location_telemed_patients'); // New patients, existing or both?
-// $telemed_hours247 = get_field('field_location_telemed_24_7'); // typically 24/7?
-// $telemed_hours = get_field('location_telemed_hours'); // telemedicine hours repeater
-// $telemed_modified = get_field('field_location_telemed_modified_hours_query'); // Are there modified hours for telemedicine?
-// $telemed_modified_reason = get_field('field_location_telemed_modified_hours_reason'); // Why are there modified hours for telemedicine?
-// $telemed_modified_start = get_field('field_location_telemed_modified_hours_start_date'); // When do the modified telemedicine hours start?
-// $telemed_modified_end = get_field('field_location_telemed_modified_hours_end'); // Do we know when the modified telemedicine hours end?
-// $telemed_modified_end_date = get_field('field_location_telemed_modified_hours_end_date'); // When do the modified telemedicine hours end?
-// $telemed_modified_hours = get_field('field_location_telemed_modified_hours_group'); // modified telemedicine hours repeater
+// $telemedicine_query = get_field('field_location_telemed_query'); // Is there telemedicine?
+// $telemedicine_patients = get_field('field_location_telemed_patients'); // New patients, existing or both?
+// $telemedicine_hours247 = get_field('field_location_telemed_24_7'); // typically 24/7?
+// $telemedicine_hours = get_field('location_telemed_hours'); // telemedicine hours repeater
+// $telemedicine_modified = get_field('field_location_telemed_modified_hours_query'); // Are there modified hours for telemedicine?
+// $telemedicine_modified_reason = get_field('field_location_telemed_modified_hours_reason'); // Why are there modified hours for telemedicine?
+// $telemedicine_modified_start = get_field('field_location_telemed_modified_hours_start_date'); // When do the modified telemedicine hours start?
+// $telemedicine_modified_end = get_field('field_location_telemed_modified_hours_end'); // Do we know when the modified telemedicine hours end?
+// $telemedicine_modified_end_date = get_field('field_location_telemed_modified_hours_end_date'); // When do the modified telemedicine hours end?
+// $telemedicine_modified_hours = get_field('field_location_telemed_modified_hours_group'); // modified telemedicine hours repeater
 // Hours Grouping
 $location_hours_group = get_field('location_hours_group');
 
-$telemed_query = $location_hours_group['location_telemed_query']; // Is there telemedicine?
-$telemed_patients = $location_hours_group['location_telemed_patients']; // New patients, existing or both?
-$telemed_hours247 = $location_hours_group['location_telemed_24_7']; // typically 24/7?
-$telemed_hours = $location_hours_group['location_telemed_hours']; // telemedicine hours repeater
-$telemed_modified = $location_hours_group['location_telemed_modified_hours_query']; // Are there modified hours for telemedicine?
-$telemed_modified_reason = $location_hours_group['location_telemed_modified_hours_reason']; // Why are there modified hours for telemedicine?
-$telemed_modified_start = $location_hours_group['location_telemed_modified_hours_start_date']; // When do the modified telemedicine hours start?
-$telemed_modified_end = $location_hours_group['location_telemed_modified_hours_end']; // Do we know when the modified telemedicine hours end?
-$telemed_modified_end_date = $location_hours_group['location_telemed_modified_hours_end_date']; // When do the modified telemedicine hours end?
-$telemed_modified_hours247 = $location_hours_group['location_telemed_modified_hours_24_7'];
-// $telemed_modified_hours = $location_hours_group['location_telemed_modified_hours_group']; // modified telemedicine hours repeater
-$telemed_info = get_field('location_telemed_descr_system', 'option'); // System-wide information about telemedicine at locations
+$telemedicine_query = $location_hours_group['location_telemed_query']; // Is there telemedicine?
+$telemedicine_patients = $location_hours_group['location_telemed_patients']; // New patients, existing or both?
+$telemedicine_hours247 = $location_hours_group['location_telemed_24_7']; // typically 24/7?
+$telemedicine_hours = $location_hours_group['location_telemed_hours']; // telemedicine hours repeater
+$telemedicine_modified = $location_hours_group['location_telemed_modified_hours_query']; // Are there modified hours for telemedicine?
+$telemedicine_modified_reason = $location_hours_group['location_telemed_modified_hours_reason']; // Why are there modified hours for telemedicine?
+$telemedicine_modified_start = $location_hours_group['location_telemed_modified_hours_start_date']; // When do the modified telemedicine hours start?
+$telemedicine_modified_end = $location_hours_group['location_telemed_modified_hours_end']; // Do we know when the modified telemedicine hours end?
+$telemedicine_modified_end_date = $location_hours_group['location_telemed_modified_hours_end_date']; // When do the modified telemedicine hours end?
+$telemedicine_modified_hours247 = $location_hours_group['location_telemed_modified_hours_24_7'];
+// $telemedicine_modified_hours = $location_hours_group['location_telemed_modified_hours_group']; // modified telemedicine hours repeater
+$telemedicine_info = get_field('location_telemed_descr_system', 'option'); // System-wide information about telemedicine at locations
 
 $afterhours_system = get_field('location_afterhours_descr_system', 'option'); // System-wide information about telemedicine at locations
 $afterhours_system = ( isset($afterhours_system) && !empty($afterhours_system) ) ? $afterhours_system : '<p>If you are in need of urgent or emergency care, call 911 or go to your nearest emergency department at your local hospital.</p>'; // System-wide information about telemedicine at locations
@@ -474,7 +474,7 @@ while ( have_posts() ) : the_post(); ?>
 		}
 
 		// Check if Telemedicine Information section should be displayed
-		if ( $telemed_query ) {
+		if ( $telemedicine_query ) {
 			$telemedicine_section_show = true;
 			$jump_link_count++;
 		} else {
@@ -1463,14 +1463,14 @@ while ( have_posts() ) : the_post(); ?>
 							<div class="row content-split-lg">
 								<div class="col-xs-12 col-lg-7">
 									<div class="content-width">
-										<?php echo $telemed_info ? $telemed_info : '' ?>
+										<?php echo $telemedicine_info ? $telemedicine_info : '' ?>
 										<p>
 											<?php // Declare which patients can use the service.
-											if ($telemed_patients == 'all') { ?>
+											if ($telemedicine_patients == 'all') { ?>
 												This service is available to both new and existing patients.
-											<?php } elseif ($telemed_patients == 'new') { ?>
+											<?php } elseif ($telemedicine_patients == 'new') { ?>
 												This service is available to new patients only.
-											<?php } elseif ($telemed_patients == 'existing') { ?>
+											<?php } elseif ($telemedicine_patients == 'existing') { ?>
 												This service is available to existing patients only.
 											<?php } // endif
 
@@ -1481,11 +1481,11 @@ while ( have_posts() ) : the_post(); ?>
 												<?php } elseif ($location_clinic_phone_query && !$location_appointment_phone_query) { // If there is only one appointment number ?>
 													Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.
 												<?php } else { // If there are two appointment numbers (one for new, one for existing)
-													if ($telemed_patients == 'all') { ?>
+													if ($telemedicine_patients == 'all') { ?>
 														New patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment, while existing patients should call <?php echo $location_return_appointments_phone_link; ?>.
-													<?php } elseif ($telemed_patients == 'new') { ?>
+													<?php } elseif ($telemedicine_patients == 'new') { ?>
 														Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.
-													<?php } elseif ($telemed_patients == 'existing') { ?>
+													<?php } elseif ($telemedicine_patients == 'existing') { ?>
 														Patients should call <?php echo $location_return_appointments_phone_link; ?> to schedule a telemedicine appointment.
 													<?php }
 												} // endif ?>
@@ -1495,111 +1495,111 @@ while ( have_posts() ) : the_post(); ?>
 								<div class="col-xs-12 col-lg-5">
 									<div class="content-width">
 									<?php
-									$telemed_modified_text = '';
-									$telemed_active_start = '';
-									$telemed_active_end = '';
-									if ($telemed_modified) : 
+									$telemedicine_modified_text = '';
+									$telemedicine_active_start = '';
+									$telemedicine_active_end = '';
+									if ($telemedicine_modified) : 
 									?>
 									<?php 
 
-										$telemed_modified_day = ''; // Previous Day
-										$telemed_modified_comment = ''; // Comment on previous day
+										$telemedicine_modified_day = ''; // Previous Day
+										$telemedicine_modified_comment = ''; // Comment on previous day
 										$i = 1;
 
-										$telemed_today = strtotime("today");
-										$telemed_today_30 = strtotime("+30 days");
+										$telemedicine_today = strtotime("today");
+										$telemedicine_today_30 = strtotime("+30 days");
 
-										if( strtotime($telemed_modified_start) <= $telemed_today_30 && ( strtotime($telemed_modified_end_date) >= $telemed_today || !$telemed_modified_end ) ){
-											$telemed_modified_text .= $telemed_modified_reason;
-											$telemed_modified_text .= '<p class="small font-italic">These modified hours start on ' . $telemed_modified_start . ', ';
-											$telemed_modified_text .= $telemed_modified_end && $telemed_modified_end_date ? 'and are scheduled to end after ' . $telemed_modified_end_date . '.' : 'and will remain in effect until further notice.';
-											$telemed_modified_text .= '</p>';
+										if( strtotime($telemedicine_modified_start) <= $telemedicine_today_30 && ( strtotime($telemedicine_modified_end_date) >= $telemedicine_today || !$telemedicine_modified_end ) ){
+											$telemedicine_modified_text .= $telemedicine_modified_reason;
+											$telemedicine_modified_text .= '<p class="small font-italic">These modified hours start on ' . $telemedicine_modified_start . ', ';
+											$telemedicine_modified_text .= $telemedicine_modified_end && $telemedicine_modified_end_date ? 'and are scheduled to end after ' . $telemedicine_modified_end_date . '.' : 'and will remain in effect until further notice.';
+											$telemedicine_modified_text .= '</p>';
 
-											if ($telemed_modified_hours247):
-												$telemed_modified_text .= '<strong>Open 24/7</strong>';
+											if ($telemedicine_modified_hours247):
+												$telemedicine_modified_text .= '<strong>Open 24/7</strong>';
 											else :
-												$telemed_modified_times = $location_hours_group['location_telemed_modified_hours_times'];
-												if ($telemed_active_start > strtotime($telemed_modified_start) || '' == $telemed_active_start) {
-													$telemed_active_start = strtotime($telemed_modified_start);
+												$telemedicine_modified_times = $location_hours_group['location_telemed_modified_hours_times'];
+												if ($telemedicine_active_start > strtotime($telemedicine_modified_start) || '' == $telemedicine_active_start) {
+													$telemedicine_active_start = strtotime($telemedicine_modified_start);
 												}
-												if ( $telemed_active_end <= strtotime($telemed_modified_end_date) || !$telemed_modified_end ) {
-													if (!$telemed_modified_end) {
-														$telemed_active_end = 'TBD';
+												if ( $telemedicine_active_end <= strtotime($telemedicine_modified_end_date) || !$telemedicine_modified_end ) {
+													if (!$telemedicine_modified_end) {
+														$telemedicine_active_end = 'TBD';
 													} else {
-														$telemed_active_end = strtotime($telemed_modified_end_date);
+														$telemedicine_active_end = strtotime($telemedicine_modified_end_date);
 													}
 												}
 
-												if (is_array($telemed_modified_times) || is_object($telemed_modified_times)) {
-													$telemed_modified_text .= '<dl class="hours">';
-													foreach ( $telemed_modified_times as $telemed_modified_time ) {
+												if (is_array($telemedicine_modified_times) || is_object($telemedicine_modified_times)) {
+													$telemedicine_modified_text .= '<dl class="hours">';
+													foreach ( $telemedicine_modified_times as $telemedicine_modified_time ) {
 
-														$telemed_modified_text .= $telemed_modified_day !== $telemed_modified_time['location_telemed_modified_hours_day'] ? '<dt>'. $telemed_modified_time['location_telemed_modified_hours_day'] .'</dt> ' : '';
-														$telemed_modified_text .= '<dd>';
+														$telemedicine_modified_text .= $telemedicine_modified_day !== $telemedicine_modified_time['location_telemed_modified_hours_day'] ? '<dt>'. $telemedicine_modified_time['location_telemed_modified_hours_day'] .'</dt> ' : '';
+														$telemedicine_modified_text .= '<dd>';
 
-														if ( $telemed_modified_time['location_telemed_modified_hours_closed'] ) {
-															$telemed_modified_text .= 'Closed ';
+														if ( $telemedicine_modified_time['location_telemed_modified_hours_closed'] ) {
+															$telemedicine_modified_text .= 'Closed ';
 														} else {
-															$telemed_modified_text .= ( ( $telemed_modified_time['location_telemed_modified_hours_open'] && '00:00:00' != $telemed_modified_time['location_telemed_modified_hours_open'] ) ? '' . ap_time_span( strtotime($telemed_modified_time['location_telemed_modified_hours_open']), strtotime($telemed_modified_time['location_telemed_modified_hours_close']) ) . '' : '' );
+															$telemedicine_modified_text .= ( ( $telemedicine_modified_time['location_telemed_modified_hours_open'] && '00:00:00' != $telemedicine_modified_time['location_telemed_modified_hours_open'] ) ? '' . ap_time_span( strtotime($telemedicine_modified_time['location_telemed_modified_hours_open']), strtotime($telemedicine_modified_time['location_telemed_modified_hours_close']) ) . '' : '' );
 														}
-														if ( $telemed_modified_time['location_telemed_modified_hours_comment'] ) {
-															$telemed_modified_text .= ' <br /><span class="subtitle">' .$telemed_modified_time['location_telemed_modified_hours_comment'] . '</span>';
-															$telemed_modified_comment = $telemed_modified_time['location_telemed_modified_hours_comment'];
+														if ( $telemedicine_modified_time['location_telemed_modified_hours_comment'] ) {
+															$telemedicine_modified_text .= ' <br /><span class="subtitle">' .$telemedicine_modified_time['location_telemed_modified_hours_comment'] . '</span>';
+															$telemedicine_modified_comment = $telemedicine_modified_time['location_telemed_modified_hours_comment'];
 														} else {
-															$telemed_modified_comment = '';
+															$telemedicine_modified_comment = '';
 														}
-														$telemed_modified_text .= '</dd>';
-														$telemed_modified_day = $telemed_modified_time['location_telemed_modified_hours_day']; // Reset the day
+														$telemedicine_modified_text .= '</dd>';
+														$telemedicine_modified_day = $telemedicine_modified_time['location_telemed_modified_hours_day']; // Reset the day
 														$i++;
 
 													} // endforeach
-													$telemed_modified_text .= '</dl>';
+													$telemedicine_modified_text .= '</dl>';
 
 												} // End if (array)
 											endif;
 										}
 
-										echo $telemed_modified_text ? '<h3>Modified Hours</h3>' . $telemed_modified_text: '';
+										echo $telemedicine_modified_text ? '<h3>Modified Hours</h3>' . $telemedicine_modified_text: '';
 
 									endif; // End Modified Hours
-									if (($telemed_active_start != '' && $telemed_active_start <= $telemed_today) && ( strtotime($telemed_active_end) > $telemed_today || $telemed_active_end == 'TBD' ) ) {
+									if (($telemedicine_active_start != '' && $telemedicine_active_start <= $telemedicine_today) && ( strtotime($telemedicine_active_end) > $telemedicine_today || $telemedicine_active_end == 'TBD' ) ) {
 										// Do Nothing;
 										// Future Option
 									} else {
-										if ( $telemed_hours247 || $telemed_hours[0]['day'] ) : ?>
-										<h3><?php echo $telemed_modified_text ? 'Typical ' : ''; ?>Hours</h3>
+										if ( $telemedicine_hours247 || $telemedicine_hours[0]['day'] ) : ?>
+										<h3><?php echo $telemedicine_modified_text ? 'Typical ' : ''; ?>Hours</h3>
 										<?php
-											if ($telemed_hours247):
+											if ($telemedicine_hours247):
 												echo '<strong>Open 24/7</strong>';
 											else :
 												echo '<dl class="hours">';
-												if( $telemed_hours ) {
-													$telemed_hours_text = '';
-													$telemed_day = ''; // Previous Day
-													$telemed_comment = ''; // Comment on previous day
+												if( $telemedicine_hours ) {
+													$telemedicine_hours_text = '';
+													$telemedicine_day = ''; // Previous Day
+													$telemedicine_comment = ''; // Comment on previous day
 													$i = 1;
-													foreach ($telemed_hours as $telemed_hour) :
-														$telemed_hours_text .= $telemed_day !== $telemed_hour['day'] ? '<dt>'. $telemed_hour['day'] .'</dt> ' : '';
-														$telemed_hours_text .= '<dd>';
+													foreach ($telemedicine_hours as $telemedicine_hour) :
+														$telemedicine_hours_text .= $telemedicine_day !== $telemedicine_hour['day'] ? '<dt>'. $telemedicine_hour['day'] .'</dt> ' : '';
+														$telemedicine_hours_text .= '<dd>';
 
-														if ( $telemed_hour['closed'] ) {
-															$telemed_hours_text .= 'Closed ';
+														if ( $telemedicine_hour['closed'] ) {
+															$telemedicine_hours_text .= 'Closed ';
 														} else {
-															$telemed_hours_text .= ( ( $telemed_hour['open'] && '00:00:00' != $telemed_hour['open'] ) ? '' . ap_time_span( strtotime($telemed_hour['open']), strtotime($telemed_hour['close']) ) . '' : '' );
+															$telemedicine_hours_text .= ( ( $telemedicine_hour['open'] && '00:00:00' != $telemedicine_hour['open'] ) ? '' . ap_time_span( strtotime($telemedicine_hour['open']), strtotime($telemedicine_hour['close']) ) . '' : '' );
 														}
-														if ( $telemed_hour['comment'] ) {
-															$telemed_hours_text .= ' <br /><span class="subtitle">' .$telemed_hour['comment'] . '</span>';
-															$telemed_comment = $telemed_hour['comment'];
+														if ( $telemedicine_hour['comment'] ) {
+															$telemedicine_hours_text .= ' <br /><span class="subtitle">' .$telemedicine_hour['comment'] . '</span>';
+															$telemedicine_comment = $telemedicine_hour['comment'];
 														} else {
-															$telemed_comment = '';
+															$telemedicine_comment = '';
 														}
-														$telemed_hours_text .= '</dd>';
-														$telemed_day = $telemed_hour['day']; // Reset the day
-														if (!$telemed_hour['closed']) {
+														$telemedicine_hours_text .= '</dd>';
+														$telemedicine_day = $telemedicine_hour['day']; // Reset the day
+														if (!$telemedicine_hour['closed']) {
 														$i++;
 														}
 													endforeach;
-													echo $telemed_hours_text;
+													echo $telemedicine_hours_text;
 												} else {
 													echo '<dt>No information</dt>';
 												}

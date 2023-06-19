@@ -152,17 +152,17 @@ $location_zip = get_field('location_zip', $address_id);
 		$today = strtotime("today");
 		$today_30 = strtotime("+30 days");
 
-		$telemed_modified = $location_hours_group['location_telemed_modified_hours_query']; // Are there modified hours for telemedicine?
-		$telemed_modified_start = $location_hours_group['location_telemed_modified_hours_start_date']; // When do the modified telemedicine hours start?
-		$telemed_modified_end = $location_hours_group['location_telemed_modified_hours_end']; // Do we know when the modified telemedicine hours end?
-		$telemed_modified_end_date = $location_hours_group['location_telemed_modified_hours_end_date']; // When do the modified telemedicine hours end?
+		$telemedicine_modified = $location_hours_group['location_telemed_modified_hours_query']; // Are there modified hours for telemedicine?
+		$telemedicine_modified_start = $location_hours_group['location_telemed_modified_hours_start_date']; // When do the modified telemedicine hours start?
+		$telemedicine_modified_end = $location_hours_group['location_telemed_modified_hours_end']; // Do we know when the modified telemedicine hours end?
+		$telemedicine_modified_end_date = $location_hours_group['location_telemed_modified_hours_end_date']; // When do the modified telemedicine hours end?
 
-		$telemed_today = $today;
-		$telemed_today_30 = $today_30;
+		$telemedicine_today = $today;
+		$telemedicine_today_30 = $today_30;
 
 		if ( 
 			( $modified && strtotime($modified_start) <= $today_30 && ( strtotime($modified_end_date) >= $today || !$modified_end ) ) ||
-			( $telemed_modified && strtotime($telemed_modified_start) <= $telemed_today_30 && ( strtotime($telemed_modified_end_date) >= $telemed_today || !$telemed_modified_end ) )
+			( $telemedicine_modified && strtotime($telemedicine_modified_start) <= $telemedicine_today_30 && ( strtotime($telemedicine_modified_end_date) >= $telemedicine_today || !$telemedicine_modified_end ) )
 		) {
 			$location_modified_hours_display = true;
 		} else {
@@ -172,16 +172,16 @@ $location_zip = get_field('location_zip', $address_id);
 		//// Set start of modified hours based on the earliest of the two (clinic and telemedicine)
 
 		if ($location_modified_hours_display) {
-			if ( ($modified && $modified_start) && ($telemed_modified && $telemed_modified_start) ) {
-				if ( strtotime($modified_start) <= strtotime($telemed_modified_start) ) {
+			if ( ($modified && $modified_start) && ($telemedicine_modified && $telemedicine_modified_start) ) {
+				if ( strtotime($modified_start) <= strtotime($telemedicine_modified_start) ) {
 					$location_modified_hours_start = $modified_start;
 				} else {
-					$location_modified_hours_start = $telemed_modified_start;
+					$location_modified_hours_start = $telemedicine_modified_start;
 				}
 			} elseif ($modified_start) {
 				$location_modified_hours_start = $modified_start;
-			} elseif ($telemed_modified_start) {
-				$location_modified_hours_start = $telemed_modified_start;
+			} elseif ($telemedicine_modified_start) {
+				$location_modified_hours_start = $telemedicine_modified_start;
 			}
 
 			if ( strtotime($location_modified_hours_start) <= $today ) {
