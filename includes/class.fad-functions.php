@@ -2058,7 +2058,7 @@ function uamswp_fad_podcast() {
 	}
 
 	// Get system settings for combined conditions and treatments labels
-	function uamswp_fad_labels_conditions_treatments() {
+	function uamswp_fad_labels_condition_treatment() {
 		// Make variables available outside of the function
 		global $conditions_treatments_single_name;
 		global $conditions_treatments_single_name_attr;
@@ -2264,7 +2264,7 @@ function uamswp_fad_podcast() {
 			global $placeholder_clinical_resource_type_plural_name;
 			global $clinical_resource_type_plural_name;
 
-			// Defined in uamswp_fad_labels_conditions_treatments()
+			// Defined in uamswp_fad_labels_condition_treatment()
 			global $placeholder_conditions_treatments_single_name;
 			global $conditions_treatments_single_name;
 			global $placeholder_conditions_treatments_plural_name;
