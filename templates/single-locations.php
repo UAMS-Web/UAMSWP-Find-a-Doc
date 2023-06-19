@@ -254,31 +254,10 @@ if ($prescription_query) {
 	}
 }
 
-// Hide Sections
-global $hide_medical_ontology;
-$hide_medical_ontology = false;
-$location_region = get_field('location_region',$post->ID);
-$location_service_lines = get_field('location_service_line',$post->ID);
-if( have_rows('remove_ontology_criteria', 'option') ):
-	while( have_rows('remove_ontology_criteria', 'option') ): the_row();
-		$remove_region = get_sub_field('remove_regions', 'option');
-		$remove_service_line = get_sub_field('remove_service_lines', 'option');
-		if ( !empty($location_service_lines) ) {
-			foreach ($location_service_lines as $location_service_line) {
-				if ( (!empty($remove_region) && in_array($location_region, $remove_region)) && empty($remove_service_line) ) { 
-					$hide_medical_ontology = true;
-					break 2;
-				} elseif ( empty($remove_region) && (!empty($remove_service_line) && in_array($location_service_line, $remove_service_line) ) ) {
-					$hide_medical_ontology = true;
-					break 2;
-				} elseif( (!empty($remove_region) && in_array($location_region, $remove_region)) && (!empty($remove_service_line) && in_array($location_service_line, $remove_service_line) ) ) {
-					$hide_medical_ontology = true;
-					break 2;
-				}
-			}
-		}
-	endwhile;
-endif;
+// Conditionally suppress sections based on Find-a-Doc Settings configuration
+$region = get_field('location_region',$post->ID);
+$service_line = get_field('location_service_line',$post->ID);
+uamswp_fad_ontology_hide();
 
 // Clinical Resources
 $clinical_resources = get_field('location_clinical_resources');
