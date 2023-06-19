@@ -337,7 +337,7 @@ while ( have_posts() ) : the_post();
 	$provider_clinical_admin_title = get_field('physician_clinical_admin_title');
 	$provider_clinical_focus = get_field('physician_clinical_focus');
 	$provider_awards = get_field('physician_awards');
-	$physician_additional_info = get_field('physician_additional_info');
+	$provider_additional_info = get_field('physician_additional_info');
 	$associations = get_field( 'physician_associations' );
 	$publications = get_field('physician_select_publications');
 	$pubmed_author_id = get_field('physician_pubmed_author_id');
