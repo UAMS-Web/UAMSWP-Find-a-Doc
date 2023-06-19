@@ -419,10 +419,10 @@ while ( have_posts() ) : the_post(); ?>
 		$parking_map = get_field('location_parking_map', $post_id);
 
 		if ( $location_parking || $location_direction || $parking_map ) {
-			$show_parking_section = true;
+			$parking_section_show = true;
 			$jump_link_count++;
 		} else {
-			$show_parking_section = false;
+			$parking_section_show = false;
 		}
 
 		// Check if Appointment Information section should be displayed
@@ -678,9 +678,9 @@ while ( have_posts() ) : the_post(); ?>
 						<div class="btn-container">
 							<div class="inner-container">
 								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title_phrase; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>
-								<?php if ($show_parking_section) { ?>
+								<?php if ($parking_section_show) { ?>
 									<a class="btn btn-outline-primary" href="#parking-info" aria-label="Parking instructions for <?php echo $page_title_phrase; ?>" data-typetitle="Parking instructions for the clinic">Parking Instructions</a>
-								<?php } // endif $show_parking_section ?>
+								<?php } // endif $parking_section_show ?>
 
 							</div>
 						</div>
@@ -1090,7 +1090,7 @@ while ( have_posts() ) : the_post(); ?>
 							<?php }?>
 						</li>
 					<?php } ?>
-					<?php if ( $show_parking_section ) { ?>
+					<?php if ( $parking_section_show ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#parking-info" title="Jump to the section of this page about Parking Information">Parking Information</a>
 						</li>
@@ -1225,7 +1225,7 @@ while ( have_posts() ) : the_post(); ?>
 	// End About Section
 
 	// Begin Parking and Directions Section
-	if ( $show_parking_section ) { ?>
+	if ( $parking_section_show ) { ?>
 		<section class="uams-module bg-auto" id="parking-info">
 			<div class="container-fluid">
 				<div class="row">
