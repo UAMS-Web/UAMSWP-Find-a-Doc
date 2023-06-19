@@ -532,7 +532,7 @@ while ( have_posts() ) : the_post();
 					</h1>
 					<?php 
 						$l = 1;
-						if( $locations && $location_valid ): ?>
+						if ( $locations && $location_valid ) { ?>
 						<div data-sectiontitle="Primary Location">
 							<?php if ($eligible_appt) { ?>
 								<h2 class="h3">Primary Appointment <?php echo $location_single_name; ?></h2>
@@ -632,7 +632,7 @@ while ( have_posts() ) : the_post();
 							<?php endforeach;
 								// wp_reset_postdata(); ?>
 						</div>
-						<?php endif; ?> 
+						<?php } // endif ( $locations && $location_valid ) ?> 
 					<h2 class="h3">Overview</h2>
 					<dl data-sectiontitle="Overview">
 					<?php
@@ -885,7 +885,7 @@ while ( have_posts() ) : the_post();
 							<?php } // endif ?>
 							<?php // Section for displaying clinical admin title
 							if (true == false) { // Remove this if statement if we decide to display clinical admin title later.
-								if( have_rows('physician_clinical_admin_title') ): ?>
+								if ( have_rows('physician_clinical_admin_title') ) { ?>
 									<h3 class="h4">Administrative Roles</h3>
 									<dl>
 									<?php while( have_rows('physician_clinical_admin_title') ): the_row();
@@ -896,7 +896,7 @@ while ( have_posts() ) : the_post();
 										<dd><?php echo $clinical_admin_title_tax->name; ?></dd>
 									<?php endwhile; ?>
 									</dl>
-								<?php endif;
+								<?php } // endif ( have_rows('physician_clinical_admin_title') )
 							} // endif ?>
 							<?php if($provider_clinical_focus) { ?>
 								<h3 class="h4">Clinical Focus</h3>
@@ -928,18 +928,18 @@ while ( have_posts() ) : the_post();
 		$resource_more_suppress = false; // Force div.more to not display
 		$resource_more_key = '_resource_provider';
 		$resource_more_value = $sort_name_param_value;
-		if( $clinical_resource_section_show ) {
+		if ( $clinical_resource_section_show ) {
 			include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
 		}
 		// End Clinical Resources Section
 
 		// Begin Academic Bio Section
 		$provider_academic_split = false;
-			if ( $academic_bio && ( $academic_appointment || $academic_admin_title || $education || $boards ) ) {
-				$provider_academic_split = true;
-			}
+		if ( $academic_bio && ( $academic_appointment || $academic_admin_title || $education || $boards ) ) {
+			$provider_academic_split = true;
+		}
 
-			if( $academic_section_show ): ?>
+		if ( $academic_section_show ) { ?>
 		<section class="uams-module academic-info bg-auto" id="academic-info">
 			<div class="container-fluid">
 				<div class="row">
@@ -962,100 +962,91 @@ while ( have_posts() ) : the_post();
 							</div>
 							<div class="col-xs-12 col-lg-5">
 							<div class="content-width">
-						<?php } // endif ?>
-							<?php
-								if( have_rows('physician_academic_admin_title') ): ?>
-									<h3 class="h4">Administrative Roles</h3>
-									<dl>
-									<?php while( have_rows('physician_academic_admin_title') ): the_row(); ?>
-									<?php 
-										$department = get_term( get_sub_field('department'), 'academic_department' );
-										$academic_admin_title_tax = get_term( get_sub_field('academic_admin_title_tax'), 'academic_admin_title' );
-									?>
-										<dt><?php echo $department->name; ?></dt>
-										<dd><?php echo $academic_admin_title_tax->name; ?></dd>
-									<?php endwhile; ?>
-									</dl>
-							<?php endif; ?>
-							<?php
-								// $academic_appointments = get_field('physician_academic_appointment');
-								if( have_rows('physician_academic_appointment') ): ?>
-									<h3 class="h4">Faculty Appointments</h3>
-									<dl>
-									<?php while( have_rows('physician_academic_appointment') ): the_row(); ?>
-									<?php 
-										$department = get_term( get_sub_field('department'), 'academic_department' );
-										$academic_title_tax = get_term( get_sub_field('academic_title_tax'), 'academic_title' );
-										if ($academic_title_tax->name) {
-											$academic_title = $academic_title_tax->name;
-										} else {
-											$academic_title = get_sub_field('academic_title');
-										}
-									?>
-										<dt><?php echo $department->name; ?></dt>
-										<dd><?php echo $academic_title; ?></dd>
-									<?php endwhile; ?>
-									</dl>
-							<?php endif; ?>
-							<?php
-								if( $resident ): ?>
-									<h3 class="h4">Residency Program</h3>
-									<dl>
-										<dt><?php echo $resident_academic_department_name; ?></dt>
-										<dd><?php echo $resident_academic_name; ?></dd>
-									</dl>
-							<?php endif; ?>
-							<?php
-								if( have_rows('physician_education') ): ?>
-									<h3 class="h4">Education and Training</h3>
-									<dl>
-									<?php while( have_rows('physician_education') ): the_row();
-										$school_name = get_term( get_sub_field('school'), 'school');
-										$education_type = get_term( get_sub_field('education_type'), 'educationtype');
-									?>
-										<dt><?php echo $education_type->name; ?></dt>
-										<dd><?php echo $school_name->name; ?><?php echo (get_sub_field('description') ? '<br /><span class="subtitle">' . get_sub_field('description') .'</span>' : ''); ?></dd>
-									<?php endwhile; ?>
-									</dl>
-							<?php endif;
-
-								if( ! empty( $boards ) ): ?>
+						<?php } // endif ( $provider_academic_split )]
+						if( have_rows('physician_academic_admin_title') ) { ?>
+							<h3 class="h4">Administrative Roles</h3>
+							<dl>
+							<?php while ( have_rows('physician_academic_admin_title') ) {
+								the_row();
+								$department = get_term( get_sub_field('department'), 'academic_department' );
+								$academic_admin_title_tax = get_term( get_sub_field('academic_admin_title_tax'), 'academic_admin_title' );
+							?>
+								<dt><?php echo $department->name; ?></dt>
+								<dd><?php echo $academic_admin_title_tax->name; ?></dd>
+							<?php } // endwhile ( have_rows('physician_academic_admin_title') ) ?>
+							</dl>
+						<?php } // endif( have_rows('physician_academic_admin_title') )
+						// $academic_appointments = get_field('physician_academic_appointment');
+						if ( have_rows('physician_academic_appointment') ) { ?>
+							<h3 class="h4">Faculty Appointments</h3>
+							<dl>
+							<?php while ( have_rows('physician_academic_appointment') ) {
+								the_row();
+								$department = get_term( get_sub_field('department'), 'academic_department' );
+								$academic_title_tax = get_term( get_sub_field('academic_title_tax'), 'academic_title' );
+								if ($academic_title_tax->name) {
+									$academic_title = $academic_title_tax->name;
+								} else {
+									$academic_title = get_sub_field('academic_title');
+								} ?>
+								<dt><?php echo $department->name; ?></dt>
+								<dd><?php echo $academic_title; ?></dd>
+							<?php } // endwhile ( have_rows('physician_academic_appointment') ) ?>
+							</dl>
+						<?php } // endif ( have_rows('physician_academic_appointment') )
+						if ( $resident ) { ?>
+							<h3 class="h4">Residency Program</h3>
+							<dl>
+								<dt><?php echo $resident_academic_department_name; ?></dt>
+								<dd><?php echo $resident_academic_name; ?></dd>
+							</dl>
+						<?php } // endif ( $resident )
+						if ( have_rows('physician_education') ) { ?>
+							<h3 class="h4">Education and Training</h3>
+							<dl>
+							<?php while ( have_rows('physician_education') ) {
+								the_row();
+								$school_name = get_term( get_sub_field('school'), 'school');
+								$education_type = get_term( get_sub_field('education_type'), 'educationtype'); ?>
+								<dt><?php echo $education_type->name; ?></dt>
+								<dd><?php echo $school_name->name; ?><?php echo (get_sub_field('description') ? '<br /><span class="subtitle">' . get_sub_field('description') .'</span>' : ''); ?></dd>
+							<?php } // endwhile ( have_rows('physician_education') ) ?>
+							</dl>
+						<?php } // endif ( have_rows('physician_education') )
+						if ( !empty( $boards ) ) { ?>
 							<h3 class="h4">Professional Certifications</h3>
 							<ul>
-							<?php foreach ( $boards as $board ) :
+							<?php foreach ( $boards as $board ) {
 								$board_name = get_term( $board, 'board'); ?>
 								<li><?php echo $board_name->name; ?></li>
-								<?php // }; ?>
-							<?php endforeach; ?>
+							<?php } // endforeach ( $boards as $board ) ?>
 							</ul>
-							<?php endif;
-
-								if( ! empty( $associations ) ): ?>
+						<?php } // end( !empty( $boards ) )
+						if ( !empty( $associations ) ) { ?>
 							<h3 class="h4">Associations</h3>
 							<ul>
-							<?php foreach ( $associations as $association ) :
+							<?php foreach ( $associations as $association ) {
 								$association_name = get_term( $association, 'association'); ?>
 								<li><?php echo $association_name->name; ?></li>
-								<?php // }; ?>
-							<?php endforeach; ?>
+							<?php } // endforeach; ?>
 							</ul>
-							<?php endif; ?>
-						<?php if ( $provider_academic_split ) { ?>
+						<?php } // endif ( !empty( $associations ) )
+						if ( $provider_academic_split ) { ?>
 							</div>
 							</div>
 							</div>
 						<?php } else { ?>
 							</div>
-						<?php } // endif ?>
+						<?php } // endif ( $provider_academic_split ) ?>
 					</div>
 				</div>
 			</div>
 		</section>
-		<?php endif;
+		<?php } // endif ( $academic_section_show )
 		// End Academic Bio Section
 
 		// Begin Research Bio Section
-		if( $research_section_show ): ?>
+		if ( $research_section_show ) { ?>
 		<section class="uams-module research-info bg-auto" id="research-info">
 			<div class="container-fluid">
 				<div class="row">
@@ -1104,7 +1095,7 @@ while ( have_posts() ) : the_post();
 				</div>
 			</div>
 		</section>
-		<?php endif;
+		<?php } // endif if ( $research_section_show )
 		// End Research Bio Section
 
 		// Begin Conditions Section
@@ -1135,7 +1126,7 @@ while ( have_posts() ) : the_post();
 			} // endif;
 
 			// Treatments CPT
-			if( $treatments_section_show ) {
+			if ( $treatments_section_show ) {
 				$treatment_context = 'single-provider';
 				$treatment_heading_related_name = $short_name; // To what is it related?
 				include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
@@ -1154,7 +1145,7 @@ while ( have_posts() ) : the_post();
 					$i++;
 				} // endforeach
 				// $treatment_schema .= ']';
-			} // endif
+			} // endif ( $treatments_section_show )
 
 		// Begin Areas of Expertise Section
 		$expertise_section_title = $expertise_fpage_title_provider;
@@ -1170,7 +1161,7 @@ while ( have_posts() ) : the_post();
 		// End Location Section
 
 		?>
-		<?php if ( $ratings_section_show ) : ?>
+		<?php if ( $ratings_section_show ) { ?>
 		<section class="uams-module ratings-and-reviews bg-auto" id="ratings">
 			<div class="container-fluid">
 				<div class="row">
@@ -1285,7 +1276,7 @@ while ( have_posts() ) : the_post();
 				</div>
 			</div>
 		</section>
-		<?php endif; ?>
+		<?php } // endif ( $ratings_section_show ) ?>
 		<!-- <section class="uams-module news-list bg-auto" id="news">
 			<div class="container-fluid"
 				<div class="row">
