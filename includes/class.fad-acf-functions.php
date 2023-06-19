@@ -550,7 +550,12 @@ function bidirectional_acf_update( $field_name, $field_key, $value, $post_id ){
 // Set the post excerpt from ACF fields
 // Fire after saving data to post
 add_action('acf/save_post', 'custom_excerpt_acf', 50);
-function custom_excerpt_acf( $post_id ) {
+function custom_excerpt_acf() {
+	// Bring in variables from outside of the function
+	global $post; // WordPress-specific global variable
+
+	$post_id = ( $post->ID ); // Current post ID
+	$post_type = get_post_type( $post_id ); // Get the post type of the current page/post
 
 	// 1. Add post types (key) and corresponding field names (value) to be used to set the excerpt
 	$excerpt_field_name = array(
