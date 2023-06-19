@@ -375,10 +375,10 @@ while ( have_posts() ) : the_post(); ?>
 
 		// Check if Closing Information section should be displayed
 		if ( $location_closing_display && !empty($location_closing_info) ) {
-			$show_closing_section = true;
+			$closing_section_show = true;
 			$jump_link_count++;
 		} else {
-			$show_closing_section = false;
+			$closing_section_show = false;
 		}
 
 		// Check if About section should be displayed
@@ -1066,7 +1066,7 @@ while ( have_posts() ) : the_post(); ?>
 							<a class="nav-link" href="#location-alert" title="Jump to the section of this page with the alert regarding this <?php echo strtolower($location_single_name_attr); ?>"><?php echo $location_alert_title ? $location_alert_title : 'Alert'; ?></a>
 						</li>
 					<?php } ?>
-					<?php if ( $show_closing_section ) { ?>
+					<?php if ( $closing_section_show ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#closing-info" title="Jump to the section of this page with the closing information">Closing Information</a>
 						</li>
@@ -1167,7 +1167,7 @@ while ( have_posts() ) : the_post(); ?>
 	// End Location Alert Section
 
 	// Beginning Closing Information Section
-	if ( $show_closing_section ) { ?>
+	if ( $closing_section_show ) { ?>
 		<section class="uams-module location-alert location-alert-warning" id="closing-info">
 			<div class="container-fluid">
 				<div class="row">
