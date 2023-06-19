@@ -1684,9 +1684,9 @@ function uamswp_keyword_hook_header() {
 function uamswp_fad_ontology_appointment() {
 	// Bring in variables from outside of the function
 	global $location_single_name; // Typically defined in uamswp_fad_labels_location()
-	global $show_appointment_section; // Typically defined on the template
+	global $appointment_section_show; // Typically defined on the template
 
-	if ( $show_appointment_section ) {
+	if ( $appointment_section_show ) {
 		if ( get_field('location_expertise') ) {
 			$appointment_location_url = '#locations';
 			//$appointment_location_label = 'Go to the list of relevant locations';

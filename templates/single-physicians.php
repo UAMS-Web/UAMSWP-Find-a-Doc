@@ -477,10 +477,10 @@ while ( have_posts() ) : the_post();
 
 		// Check if Make an Appointment section should be displayed
 		if ( $eligible_appt ) {
-			$show_appointment_section = true;
+			$appointment_section_show = true;
 			$jump_link_count++;
 		} else {
-			$show_appointment_section = false;
+			$appointment_section_show = false;
 		}
 
 		// Check if Clinical Bio section should be displayed
@@ -821,7 +821,7 @@ while ( have_posts() ) : the_post();
 				</button>
 				<div class="collapse navbar-collapse inner-container" id="jump-link-nav">
 					<ul class="nav navbar-nav">
-						<?php if ( $show_appointment_section ) { ?>
+						<?php if ( $appointment_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#appointment-info-1">Make an Appointment</a>
 							</li>
@@ -881,7 +881,7 @@ while ( have_posts() ) : the_post();
 			</nav>
 		<?php } // endif
 		// End Jump Links Section ?>
-		<?php if ( $show_appointment_section ) {
+		<?php if ( $appointment_section_show ) {
 			$appointment_block_instance = 1;
 			include( UAMS_FAD_PATH . '/templates/blocks/appointment-provider.php' );
 		} ?>
@@ -1398,7 +1398,7 @@ while ( have_posts() ) : the_post();
 			</div>
 		</section> -->
 		<?php if (
-			$show_appointment_section && 
+			$appointment_section_show && 
 			( 
 				$clinical_bio_section_show
 				|| $show_academic_section

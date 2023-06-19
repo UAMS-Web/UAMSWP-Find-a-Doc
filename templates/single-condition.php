@@ -221,7 +221,7 @@ $jump_link_count = 0;
 
 	// Check if Make an Appointment section should be displayed
 	// It should always be displayed.
-	$show_appointment_section = true;
+	$appointment_section_show = true;
 	$jump_link_count++;
 
 	// Check if Jump Links section should be displayed
@@ -404,7 +404,7 @@ $jump_link_count = 0;
 								<a class="nav-link" href="#expertise" title="Jump to the section of this page about <?php echo $expertise_plural_name_attr; ?>"><?php echo $expertise_plural_name; ?></a>
 							</li>
 						<?php } ?>
-						<?php if ( $show_appointment_section ) { ?>
+						<?php if ( $appointment_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#appointment-info" title="Jump to the section of this page about making an appointment">Make an Appointment</a>
 							</li>
@@ -508,7 +508,7 @@ $jump_link_count = 0;
 		// End Areas of Expertise Section
 
 		// Begin Appointment Information Section
-		if ( $show_appointment_section ) {
+		if ( $appointment_section_show ) {
 			include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
 		}
 		// End Appointment Information Section

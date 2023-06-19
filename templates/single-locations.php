@@ -431,10 +431,10 @@ while ( have_posts() ) : the_post(); ?>
 		$location_appointment_expect = get_field('location_appointment_expect');
 
 		if ( $location_appointment || $location_appointment_bring || $location_appointment_expect ) {
-			$show_appointment_section = true;
+			$appointment_section_show = true;
 			$jump_link_count++;
 		} else {
-			$show_appointment_section = false;
+			$appointment_section_show = false;
 		}
 
 		// Check if Appointment Scheduling section should be displayed
@@ -1095,7 +1095,7 @@ while ( have_posts() ) : the_post(); ?>
 							<a class="nav-link" href="#parking-info" title="Jump to the section of this page about Parking Information">Parking Information</a>
 						</li>
 					<?php } ?>
-					<?php if ( $show_appointment_section ) { ?>
+					<?php if ( $appointment_section_show ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#appointment-info" title="Jump to the section of this page about Appointment Information">Appointment Information</a>
 						</li>
@@ -1318,7 +1318,7 @@ while ( have_posts() ) : the_post(); ?>
 	// End Parking and Directions Section
 
 	// Begin Appointment Information Section
-	if ( $show_appointment_section ) {
+	if ( $appointment_section_show ) {
 		$location_appointment_heading = 'Appointment Information';
 		$location_appointment_bring_heading = 'What to Bring to Your Appointment';
 		$location_appointment_expect_heading = 'What to Expect at Your Appointment';
