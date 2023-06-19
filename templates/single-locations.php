@@ -1250,7 +1250,7 @@ while ( have_posts() ) : the_post(); ?>
 							<div class="embed-responsive embed-responsive-16by9" id="map"></div>
 							<script type='text/javascript'>
 								/*-- Function to create encode SVG --*/
-								/* colors needd to be hex code without # */
+								/* colors need to be hex code without # */
 								// createSVGIcon("9d2235", "222", "whitetext", "1");
 								var createSVGIcon = function(fillColor,strokeColor,labelClass,labelText) {
 									var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 27.77" aria-labelledby="pinTitle" role="img"><title id="mapTitle">Basic Map Pin</title><path d="M9.5,26.26l.57-.65c.29-.4,7.93-9.54,7.93-15.67A8.75,8.75,0,0,0,9.5,1,8.75,8.75,0,0,0,1,9.94c0,6,7.54,15.27,7.93,15.67l.57.65Z" fill="#'+ fillColor +'" stroke="#'+ strokeColor +'" stroke-miterlimit="10" stroke-width="1"/></svg>';
