@@ -1532,7 +1532,7 @@ function uamswp_fad_post_title() {
 	}
 
 	// Query for whether associated clinical resources content section should be displayed on ontology pages/subsections
-	function uamswp_fad_ontology_resources_query() {
+	function uamswp_fad_clinical_resource_query() {
 		// Bring in variables from outside of the function
 		global $site_nav_id; // Typically defined in uamswp_fad_ontology_site_values()
 		global $ontology_type; // Typically defined on the template
@@ -1631,7 +1631,7 @@ function uamswp_fad_ontology_nav_menu() {
 	global $provider_section_show; // Typically defined in uamswp_fad_ontology_provider_query()
 	global $location_section_show; // Typically defined in uamswp_fad_location_query()
 	global $expertise_related_section_show; // Typically defined in uamswp_fad_expertise_related_query()
-	global $clinical_resource_show_section; // Typically defined in uamswp_fad_ontology_resources_query()
+	global $clinical_resource_show_section; // Typically defined in uamswp_fad_clinical_resource_query()
 	global $expertise_descendant_section_show; // Typically defined in uamswp_fad_ontology_descendant_query()
 	global $child_pages; // Typically defined in uamswp_fad_ontology_descendant_query()
 	global $child_content_nav_show; // Typically defined in uamswp_fad_ontology_descendant_query()

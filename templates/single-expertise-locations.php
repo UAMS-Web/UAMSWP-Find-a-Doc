@@ -75,7 +75,7 @@ uamswp_fad_ontology_site_values();
 	uamswp_fad_expertise_related_query();
 
 	// Query for whether associated clinical resources content section should be displayed on ontology pages/subsections
-	uamswp_fad_ontology_resources_query();
+	uamswp_fad_clinical_resource_query();
 
 	// Query for whether associated conditions content section should be displayed on ontology pages/subsections
 	uamswp_fad_ontology_conditions_query();

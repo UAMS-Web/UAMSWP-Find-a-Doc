@@ -75,7 +75,7 @@ uamswp_fad_ontology_site_values();
 	uamswp_fad_expertise_related_query();
 
 	// Query for whether associated clinical resources content section should be displayed on ontology pages/subsections
-	uamswp_fad_ontology_resources_query();
+	uamswp_fad_clinical_resource_query();
 
 	// Query for whether associated conditions content section should be displayed on ontology pages/subsections
 	uamswp_fad_ontology_conditions_query();
@@ -171,10 +171,10 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		global $post; // WordPress-specific global variable
 		global $page_title; // Defined on the template
 		global $page_title_attr; // Defined on the template
-		global $clinical_resource_show_section; // Defined in uamswp_fad_ontology_resources_query()
-		global $resources; // Defined in uamswp_fad_ontology_resources_query()
-		global $resource_query; // Defined in uamswp_fad_ontology_resources_query()
-		global $resource_postsPerPage; // Defined in uamswp_fad_ontology_resources_query()
+		global $clinical_resource_show_section; // Defined in uamswp_fad_clinical_resource_query()
+		global $resources; // Defined in uamswp_fad_clinical_resource_query()
+		global $resource_query; // Defined in uamswp_fad_clinical_resource_query()
+		global $resource_postsPerPage; // Defined in uamswp_fad_clinical_resource_query()
 		global $provider_single_name; // Defined in uamswp_fad_labels_provider()
 		global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
 		global $location_single_name; // Defined in uamswp_fad_labels_location()
