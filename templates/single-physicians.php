@@ -223,28 +223,18 @@ uamswp_fad_ontology_hide();
 	// Override theme's method of defining the meta description
 	add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
 
-// Set the meta title
+// Query for whether related areas of expertise content section should be displayed on a page
+$expertises = get_field('physician_expertise',$post->ID);
+uamswp_fad_expertise_related_query();
 
-	// Get primary area of expertise
-	$expertises = get_field('physician_expertise',$post->ID);
-	if ( $expertises ) {
-		foreach ( $expertises as $expertise ) {
-			if ( get_post_status ( $expertise ) == 'publish' ) {
-				$expertise_primary_name = get_the_title($expertise);
-				$expertise_primary_name_attr = uamswp_attr_conversion($expertise_primary_name);
-				break;
-			}
-		}
-	}
-
-	// Override theme's method of defining the meta page title
-	$meta_title_enhanced_addition = $phys_title_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title
-	$meta_title_enhanced_x2_addition = $primary_appointment_city_attr; // Second word or phrase to inject into base meta title to form enhanced meta title
-	$meta_title_enhanced_x3_addition = $expertise_primary_name; // Third word or phrase to inject into base meta title to form enhanced meta title
-	$meta_title_enhanced_x3_order = array( $page_title_attr, $meta_title_enhanced_addition, $meta_title_enhanced_x3_addition, $meta_title_enhanced_x2_addition ); // Optional pre-defined array for name order of enhanced meta title level 3 // Expects four values
-	uamswp_fad_title_vars(); // Defines universal variables related to the setting the meta title
-	// add_filter('seopress_titles_title', 'uamswp_fad_title', 20, 2);
-	add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+// Override theme's method of defining the meta page title
+$meta_title_enhanced_addition = $phys_title_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title
+$meta_title_enhanced_x2_addition = $primary_appointment_city_attr; // Second word or phrase to inject into base meta title to form enhanced meta title
+$meta_title_enhanced_x3_addition = $expertise_primary_name_attr; // Third word or phrase to inject into base meta title to form enhanced meta title
+$meta_title_enhanced_x3_order = array( $page_title_attr, $meta_title_enhanced_addition, $meta_title_enhanced_x3_addition, $meta_title_enhanced_x2_addition ); // Optional pre-defined array for name order of enhanced meta title level 3 // Expects four values
+uamswp_fad_title_vars(); // Defines universal variables related to the setting the meta title
+// add_filter('seopress_titles_title', 'uamswp_fad_title', 20, 2);
+add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 // Override the theme's method of defining the social meta tags
 $meta_og_type = 'profile';
@@ -359,7 +349,7 @@ while ( have_posts() ) : the_post();
 	if ($treatments_cpt && !empty($treatments_cpt)) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
 	if ($locations && $location_valid) { $provider_field_classes = $provider_field_classes . ' has-location'; }
 	if ($affiliation && !empty($affiliation)) { $provider_field_classes = $provider_field_classes . ' has-affiliation'; }
-	if ($expertises && !empty($expertises)) { $provider_field_classes = $provider_field_classes . ' has-expertise'; }
+	if ($expertise_section_show) { $provider_field_classes = $provider_field_classes . ' has-expertise'; }
 	if ($hidden && !empty($hidden)) { $provider_field_classes = $provider_field_classes . ' has-hidden'; }
 	// Add one instance of a class (' has-academic-appt') if there is a physician_academic_appointment row with a value in either/both of the fields.
 	// Add one instance of a class (' has-empty-academic-title') if there is an empty academic title field in any of the physician_academic_appointment rows.
@@ -416,17 +406,6 @@ while ( have_posts() ) : the_post();
 	));
 	$treatments_cpt_query = new WP_Query( $args );
 	$treatment_schema = '';
-
-	// Set Areas of Expertise Variables
-	$expertise_valid = false;
-	if ( $expertises ) {
-		foreach ( $expertises as $expertise ) {
-			if ( get_post_status ( $expertise ) == 'publish' ) {
-				$expertise_valid = true;
-				break;
-			}
-		}
-	}
 
 	// Set Ratings variables
 	$rating_request = '';
@@ -520,14 +499,6 @@ while ( have_posts() ) : the_post();
 			$jump_link_count++;
 		} else {
 			$treatments_section_show = false;
-		}
-
-		// Check if Areas of Expertise section should be displayed
-		if ( $expertise_valid && !$hide_medical_ontology ) {
-			$expertise_section_show = true;
-			$jump_link_count++;
-		} else {
-			$expertise_section_show = false;
 		}
 
 		// Check if Ratings section should be displayed
@@ -664,26 +635,20 @@ while ( have_posts() ) : the_post();
 						<?php endif; ?> 
 					<h2 class="h3">Overview</h2>
 					<dl data-sectiontitle="Overview">
-					<?php // Display area(s) of expertise
-					$expertise_valid = false;
-					if ($expertises && !empty($expertises) && !$hide_medical_ontology) { 
-						foreach( $expertises as $expertise ) {
-							if ( get_post_status ( $expertise ) == 'publish' ) {
-								$expertise_valid = true;
-								$break;
-							}
-						}
-						if ( $expertise_valid ) {
-						?>
-						<dt><?php echo( count($expertises) > 1 ? $expertise_plural_name : $expertise_single_name );?></dt>
-						<?php foreach( $expertises as $expertise ) {
+					<?php
+					
+					// Display area(s) of expertise
+						if ( $expertise_section_show && !$hide_medical_ontology ) {
+							?>
+						<dt><?php echo ( count($expertises) > 1 ? $expertise_plural_name : $expertise_single_name ); ?></dt>
+						<?php foreach ( $expertises as $expertise ) {
 							if ( get_post_status ( $expertise ) == 'publish' && $expertise !== 0 ) {
 								echo '<dd><a href="' . get_permalink($expertise) . '" target="_self" data-sectiontitle="Overview" data-categorytitle="View ' . $expertise_single_name_attr . '">' . get_the_title($expertise) . '</a></dd>';
 							}
 						} ?>
-						<?php }
-					} ?>
-					<?php // Display if they accept new patients
+						<?php } // if ( $expertise_section_show && !$hide_medical_ontology )
+					
+					// Display if they accept new patients
 					if ( $eligible_appt ) { ?>
 						<dt>Accepting New Patients</dt>
 						<?php 
@@ -1191,28 +1156,11 @@ while ( have_posts() ) : the_post();
 				// $treatment_schema .= ']';
 			} // endif
 
-		if ( $expertise_section_show && !empty($expertises) ) { ?>
-			<section class="uams-module expertise-list bg-auto" id="expertise">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-12">
-							<h2 class="module-title"><span class="title"><?php echo $short_name_possessive; ?> <?php echo $expertise_plural_name; ?></span></h2>
-							<div class="card-list-container">
-								<div class="card-list card-list-expertise">
-									<?php foreach( $expertises as $expertise ) {
-										$id = $expertise;
-										if ( get_post_status ( $expertise ) == 'publish' && $expertise !== 0 ) {
-											include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-										}
-									} ?>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-		<?php } // endif ?>
-		<?php 
+		// Begin Areas of Expertise Section
+		$expertise_section_title = $expertise_fpage_title_provider;
+		$expertise_section_intro = $expertise_fpage_intro_provider;
+		uamswp_fad_section_expertise();
+		// End Areas of Expertise Section
 
 			// Begin Location Section
 			$location_section_title = $location_plural_name . ' Where ' . $short_name . ' Practices'; // Text to use for the section title
