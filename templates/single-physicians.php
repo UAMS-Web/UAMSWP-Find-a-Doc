@@ -335,7 +335,7 @@ while ( have_posts() ) : the_post();
 	$provider_clinical_bio = get_field('physician_clinical_bio');
 	// $provider_youtube_link = get_field('physician_youtube_link');
 	$provider_clinical_admin_title = get_field('physician_clinical_admin_title');
-	$physician_clinical_focus = get_field('physician_clinical_focus');
+	$provider_clinical_focus = get_field('physician_clinical_focus');
 	$physician_awards = get_field('physician_awards');
 	$physician_additional_info = get_field('physician_additional_info');
 	$associations = get_field( 'physician_associations' );
@@ -890,8 +890,8 @@ while ( have_posts() ) : the_post();
 			$physician_clinical_split = false;
 			if (
 				( $clinical_bio_section_show ) // column A stuff
-				&& ( $physician_clinical_focus ) // column B stuff
-				// && ( $provider_clinical_admin_title || $physician_clinical_focus ) // Alternate column B stuff if we decide to display clinical admin title
+				&& ( $provider_clinical_focus ) // column B stuff
+				// && ( $provider_clinical_admin_title || $provider_clinical_focus ) // Alternate column B stuff if we decide to display clinical admin title
 				) {
 				$physician_clinical_split = true; // If there is stuff for column A and column B, split the section into two columns
 			}
@@ -949,9 +949,9 @@ while ( have_posts() ) : the_post();
 									</dl>
 								<?php endif;
 							} // endif ?>
-							<?php if($physician_clinical_focus) { ?>
+							<?php if($provider_clinical_focus) { ?>
 								<h3 class="h4">Clinical Focus</h3>
-								<?php echo $physician_clinical_focus; ?>
+								<?php echo $provider_clinical_focus; ?>
 							<?php } // endif
 							if ( $physician_clinical_split ) { ?>
 								</div>
