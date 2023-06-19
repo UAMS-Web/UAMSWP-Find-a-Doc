@@ -170,7 +170,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	$provider_section_intro = ''; // Text to use for the section intro text
 	$provider_section_filter = true; // Query whether to add filter(s)
 	$provider_section_collapse_list = false; // Query whether to collapse the list of providers in the providers section
-	add_action( 'genesis_entry_content', 'uamswp_fad_section_providers' );
+	add_action( 'genesis_entry_content', 'uamswp_fad_section_provider' );
 
 	// Display appointment information
 	add_action( 'genesis_entry_content', 'uamswp_fad_ontology_appointment' );

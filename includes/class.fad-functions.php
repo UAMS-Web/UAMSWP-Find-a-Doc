@@ -3566,7 +3566,7 @@ function uamswp_meta_image_resize() {
 }
 
 // Construct providers section for display on a page
-function uamswp_fad_section_providers() {
+function uamswp_fad_section_provider() {
 	// Bring in variables from outside of the function
 
 		// Optional variables defined on the template
