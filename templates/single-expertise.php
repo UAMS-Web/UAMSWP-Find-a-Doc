@@ -77,7 +77,7 @@ uamswp_fad_ontology_site_values();
 	uamswp_fad_clinical_resource_query();
 
 	// Query for whether associated conditions content section should be displayed on ontology pages/subsections
-	uamswp_fad_ontology_conditions_query();
+	uamswp_fad_condition_query();
 
 	// Query for whether associated treatments content section should be displayed on ontology pages/subsections
 	uamswp_fad_ontology_treatments_query();
@@ -292,8 +292,8 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		// Bring in variables from outside of the function
 		global $page_title; // Defined on the template
 		global $page_title_attr; // Defined on the template
-		global $condition_section_show; // Defined in uamswp_fad_ontology_conditions_query()
-		global $conditions_cpt_query; // Defined in uamswp_fad_ontology_conditions_query()
+		global $condition_section_show; // Defined in uamswp_fad_condition_query()
+		global $conditions_cpt_query; // Defined in uamswp_fad_condition_query()
 		global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
 		global $conditions_plural_name; // Defined in uamswp_fad_labels_conditions()
 		global $condition_heading; // Defined on the template
