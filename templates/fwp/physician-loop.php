@@ -31,7 +31,7 @@ $full_name_attr = uamswp_attr_conversion($full_name);
 $provider_resident = get_field('physician_resident');
 $provider_resident_name = 'Resident Physician';
 $physician_title = get_field('physician_title');
-$physician_title_name = $provider_resident ? $provider_resident_name : get_term( $physician_title, 'clinical_title' )->name;
+$provider_title_name = $provider_resident ? $provider_resident_name : get_term( $physician_title, 'clinical_title' )->name;
 $physician_service_line = get_field('physician_service_line');
 ?>
 <div class="col item-container">
@@ -68,8 +68,8 @@ $physician_service_line = get_field('physician_service_line');
 					<div class="col-12 primary">
 					<h3 class="h4">
 						<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $full_name_attr; ?>"><span class="name"><?php echo $full_name; ?></span></a>
-						<?php if ( $physician_title_name ) { ?>
-						<span class="subtitle"><?php echo $physician_title_name; ?></span>
+						<?php if ( $provider_title_name ) { ?>
+						<span class="subtitle"><?php echo $provider_title_name; ?></span>
 						<?php } // endif ?>
 					</h3>
 					<?php

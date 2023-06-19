@@ -30,7 +30,7 @@ $full_name_attr = uamswp_attr_conversion($full_name);
 $provider_resident = get_field('physician_resident', $id);
 $provider_resident_name = 'Resident Physician';
 $physician_title = get_field('physician_title', $id);
-$physician_title_name = $provider_resident ? $provider_resident_name : get_term( $physician_title, 'clinical_title' )->name;
+$provider_title_name = $provider_resident ? $provider_resident_name : get_term( $physician_title, 'clinical_title' )->name;
 $physician_service_line = get_field('physician_service_line', $id);
 
 ?>
@@ -51,9 +51,9 @@ $physician_service_line = get_field('physician_service_line', $id);
 			<h3 class="card-title h6">
 				<span class="name"><?php echo $full_name; ?></span>
 				<?php 
-				if(! empty( $physician_title_name ) || ! empty( $physician_service_line ) ){
+				if(! empty( $provider_title_name ) || ! empty( $physician_service_line ) ){
 					echo '<span class="subtitle">';
-					echo ($physician_title_name ? $physician_title_name : '');
+					echo ($provider_title_name ? $provider_title_name : '');
 					echo '</span>';
 				}
 				?>
