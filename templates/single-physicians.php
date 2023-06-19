@@ -333,7 +333,7 @@ while ( have_posts() ) : the_post();
 	$accept_new = get_field('physician_accepting_patients');
 	$provider_portal = get_field('physician_portal');
 	$provider_clinical_bio = get_field('physician_clinical_bio');
-	// $physician_youtube_link = get_field('physician_youtube_link');
+	// $provider_youtube_link = get_field('physician_youtube_link');
 	$physician_clinical_admin_title = get_field('physician_clinical_admin_title');
 	$physician_clinical_focus = get_field('physician_clinical_focus');
 	$physician_awards = get_field('physician_awards');
