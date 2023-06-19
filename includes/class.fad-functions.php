@@ -1426,7 +1426,7 @@ function uamswp_fad_post_title() {
 				"post__in" => $providers
 			);
 			$provider_query = New WP_Query( $args );
-			if( ( $provider_query && $provider_query->have_posts()) ) {
+			if( ( $provider_query && $provider_query->have_posts() ) ) {
 				$provider_section_show = true;
 				$provider_ids = $provider_query->posts;
 				$provider_count = count($provider_query->posts);
@@ -1553,7 +1553,7 @@ function uamswp_fad_post_title() {
 			'post__in'	=> $expertises
 		);
 		$expertise_query = new WP_Query( $args );
-		if( ( $expertises && $expertise_query->have_posts() ) ) {
+		if ( ( $expertises && $expertise_query->have_posts() ) ) {
 			$expertise_section_show = true;
 			$expertise_ids = $expertise_query->posts;
 			$expertise_count = count($expertise_query->posts);
