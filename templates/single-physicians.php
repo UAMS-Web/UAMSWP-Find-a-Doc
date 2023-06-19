@@ -485,9 +485,9 @@ while ( have_posts() ) : the_post();
 
 		// Check if Clinical Bio section should be displayed
 		if ( $physician_clinical_bio || !empty ($video) ) {
-			$show_clinical_bio_section = true;
+			$clinical_bio_section_show = true;
 		} else {
-			$show_clinical_bio_section = false;
+			$clinical_bio_section_show = false;
 		}
 
 		// Check if Academic Background section should be displayed
@@ -826,7 +826,7 @@ while ( have_posts() ) : the_post();
 								<a class="nav-link" href="#appointment-info-1">Make an Appointment</a>
 							</li>
 						<?php } ?>
-						<?php if ( $show_clinical_bio_section ) { ?>
+						<?php if ( $clinical_bio_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#clinical-info">About</a>
 							</li>
@@ -889,7 +889,7 @@ while ( have_posts() ) : the_post();
 		<?php 
 			$physician_clinical_split = false;
 			if (
-				( $show_clinical_bio_section ) // column A stuff
+				( $clinical_bio_section_show ) // column A stuff
 				&& ( $physician_clinical_focus ) // column B stuff
 				// && ( $physician_clinical_admin_title || $physician_clinical_focus ) // Alternate column B stuff if we decide to display clinical admin title
 				) {
@@ -897,7 +897,7 @@ while ( have_posts() ) : the_post();
 			}
 
 			// Display section for Clinical Bio, Clinical Video, Clinical Administrative Title(s), Clinical Focus ... only if there is a bio or video.
-			if ( $show_clinical_bio_section ) { ?>
+			if ( $clinical_bio_section_show ) { ?>
 			<section class="uams-module clinical-info bg-auto" id="clinical-info">
 				<div class="container-fluid">
 					<div class="row">
@@ -1400,7 +1400,7 @@ while ( have_posts() ) : the_post();
 		<?php if (
 			$show_appointment_section && 
 			( 
-				$show_clinical_bio_section
+				$clinical_bio_section_show
 				|| $show_academic_section
 				|| $show_podcast_section
 				|| $show_research_section
