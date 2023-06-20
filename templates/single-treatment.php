@@ -106,6 +106,10 @@ uamswp_fad_location_query();
 $expertises = get_field('treatment_procedure_expertise');
 uamswp_fad_expertise_query();
 
+// Query for whether related conditions content section should be displayed on ontology pages/subsections
+$conditions_cpt = get_field('treatment_conditions');
+uamswp_fad_condition_query();
+
 // Classes for indicating presence of content
 $treatment_field_classes = '';
 if ($keywords && array_filter($keywords)) { $treatment_field_classes .= ' has-keywords'; } // Alternate names
@@ -113,7 +117,7 @@ if ($clinical_trials && !empty($clinical_trials)) { $treatment_field_classes .= 
 if ($content && !empty($content)) { $treatment_field_classes .= ' has-content'; } // Body content
 if ($excerpt && $excerpt_user == true ) { $treatment_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
 if ($video && !empty($video)) { $treatment_field_classes .= ' has-video'; } // Video embed
-if ($conditions_cpt && array_filter($conditions_cpt)) { $treatment_field_classes .= ' has-condition'; } // Treatments
+if ($condition_section_show) { $treatment_field_classes .= ' has-condition'; } // Treatments
 if ($expertise_section_show) { $treatment_field_classes .= ' has-expertise'; } // Areas of Expertise
 if ($location_section_show) { $treatment_field_classes .= ' has-location'; } // Locations
 if ($providers && array_filter($providers)) { $treatment_field_classes .= ' has-provider'; } // Providers
@@ -143,27 +147,6 @@ $jump_link_count = 0;
 		$clinical_trials_section_show = true;
 	} else {
 		$clinical_trials_section_show = false;
-	}
-
-	// Check if Conditions section should be displayed
-	$args = (array(
-		'post_type' => 'condition',
-		'post_status' => 'publish',
-		'order' => 'ASC',
-		'orderby' => 'title',
-		'posts_per_page' => -1,
-		'no_found_rows' => true, // counts posts, remove if pagination required
-		'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
-		'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
-		'post__in'	=> $conditions_cpt
-	));
-	$conditions_query_cpt = new WP_Query( $args );
-
-	if ( $conditions_cpt && !empty($conditions_query_cpt->have_posts()) ) {
-		$condition_section_show = true;
-		$jump_link_count++;
-	} else {
-		$condition_section_show = false;
 	}
 
 	// Check if Providers section should be displayed
@@ -411,36 +394,10 @@ $jump_link_count = 0;
 		// End Clinical Trials Section
 
 		// Begin Conditions Section
-		if ( $condition_section_show ) { ?>
-			<section class="uams-module conditions-treatments bg-auto" id="conditions">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-xs-12">
-							<h2 class="module-title"><span class="title"><?php echo $clinical_resource_plural_name; ?> Related to <?php echo $page_title; ?></span></h2>
-							<p class="note">UAMS Health <?php echo strtolower($provider_plural_name); ?> care for a broad range of <?php echo strtolower($clinical_resource_plural_name); ?>, some of which may not be listed below.</p>
-							<div class="list-container list-container-rows">
-								<ul class="list">
-								<?php while ($conditions_query_cpt->have_posts()) : $conditions_query_cpt->the_post();
-									$condition_id = get_the_ID();
-									$condition_permalink = get_permalink( $condition_id );
-									$condition_title = get_the_title();
-									$condition_title_attr = uamswp_attr_conversion($condition_title);
-									?>
-									<li>
-										<a href="<?php echo $condition_permalink; ?>" aria-label="Go to <?php echo $provider_single_name_attr; ?> page for <?php echo $condition_title_attr; ?>" class="btn btn-outline-primary"><?php echo $condition_title; ?></a>
-									</li>
-								<?php
-									endwhile;
-									wp_reset_postdata();
-								?>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-		<?php } // endif
-		// End Conditions Section
+		$condition_section_title = $conditions_plural_name . ' Related to ' . $page_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for condition section title in a general placement)
+		$condition_section_intro = $condition_fpage_intro_general; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
+		uamswp_fad_section_condition();
+		// End Conditions Section	
 
 		// Begin Providers Section
 		$provider_section_title = $provider_plural_name . ' Performing or Prescribing ' . $page_title;// Text to use for the section title
