@@ -473,9 +473,9 @@ while ( have_posts() ) : the_post();
 								<h2 class="h3">Primary Appointment <?php echo $location_single_name; ?></h2>
 							<?php } else { ?>
 								<h2 class="h3">Primary <?php echo $location_single_name; ?></h2>
-							<?php } // endif ?>
-							<?php foreach( $locations as $location ):
-									if ( 2 > $l ){
+							<?php } // endif
+							foreach ( $locations as $location ) {
+									if ( 2 > $l ) {
 										if ( get_post_status ( $location ) == 'publish' ) {
 
 											// Reset variables
@@ -491,14 +491,14 @@ while ( have_posts() ) : the_post();
 
 											if ($location_has_parent && $location_parent_id) { 
 												$parent_location = get_post( $location_parent_id );
-											}
+											} // endif ($location_has_parent && $location_parent_id)
 											// Get Post ID for Address & Image fields
 											if ($parent_location) {
 												$parent_id = $parent_location->ID;
 												$parent_title = $parent_location->post_title;
 												$parent_url = get_permalink( $parent_id );
 												$address_id = $parent_id;
-											}
+											} // endif ($parent_location)
 
 											$location_address_1 = get_field('location_address_1', $address_id );
 											$location_building = get_field('location_building', $address_id );
@@ -506,14 +506,14 @@ while ( have_posts() ) : the_post();
 												$building = get_term($location_building, "building");
 												$building_slug = $building->slug;
 												$building_name = $building->name;
-											}
+											} //endif ($location_building)
 											$location_floor = get_field_object('location_building_floor', $address_id );
 												$location_floor_value = '';
 												$location_floor_label = '';
 												if ( $location_floor && is_object($location_floor) ) {
 													$location_floor_value = $location_floor['value'];
 													$location_floor_label = $location_floor['choices'][ $location_floor_value ];
-												}
+												} // endif ( $location_floor && is_object($location_floor) )
 											$location_suite = get_field('location_suite', $address_id );
 											$location_address_2 =
 												( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? '<br />' : '' ) : '' )
@@ -528,7 +528,7 @@ while ( have_posts() ) : the_post();
 											if (!$location_address_2) {
 												$location_address_2 = $location_address_2_deprecated;
 												$location_address_2_schema = $location_address_2_deprecated;
-											}
+											} // endif (!$location_address_2)
 
 											$location_city = get_field('location_city', $address_id);
 											$location_state = get_field('location_state', $address_id);
@@ -538,11 +538,11 @@ while ( have_posts() ) : the_post();
 								<p><strong><?php echo $primary_appointment_title; ?></strong><br />
 								<?php if ( $parent_location ) { ?>
 									(Part of <a href="<?php echo $parent_url; ?>" data-categorytitle="Parent Name"><?php echo $parent_title; ?></a>)<br />
-								<?php } // endif ?>
-								<?php echo $location_address_1; ?><br/>
-								<?php echo $location_address_2 ? $location_address_2 . '<br/>' : ''; ?>
-								<?php echo $location_city . ', ' . $location_state . ' ' . $location_zip; ?>
-								<?php $map = get_field( 'location_map', $address_id ); ?>
+								<?php } // endif ( $parent_location )
+								echo $location_address_1; ?><br/>
+								<?php echo $location_address_2 ? $location_address_2 . '<br/>' : '';
+								echo $location_city . ', ' . $location_state . ' ' . $location_zip;
+								$map = get_field( 'location_map', $address_id ); ?>
 								<!-- <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a> -->
 								</p>
 								<?php
@@ -550,7 +550,7 @@ while ( have_posts() ) : the_post();
 									$phone_output_id = $location;
 									$phone_output = 'associated_locations';
 									include( UAMS_FAD_PATH . '/templates/blocks/locations-phone.php' );
-								 ?>
+								?>
 								<div class="btn-container">
 									<a class="btn btn-primary" href="<?php echo get_the_permalink( $location ); ?>" data-itemtitle="<?php echo $primary_appointment_title_attr; ?>" data-categorytitle="View <?php echo $location_single_name_attr; ?>">
 										View <?php echo $location_single_name; ?>
@@ -559,13 +559,14 @@ while ( have_posts() ) : the_post();
 										<a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of <?php echo strtolower($location_plural_name_attr); ?> for this <?php echo strtolower($provider_single_name_attr); ?>" data-categorytitle="View All <?php echo $location_plural_name_attr; ?>">
 											View All <?php echo $location_plural_name; ?>
 										</a>
-									<?php } ?>
+									<?php } // endif (1 < $location_count) ?>
 								</div>
-								<?php $l++;
-									}
-								} ?>
-							<?php endforeach;
-								// wp_reset_postdata(); ?>
+								<?php
+								$l++;
+									} // endif ( get_post_status ( $location ) == 'publish' )
+								} // if ( 2 > $l )
+							}// endforeach ( $locations as $location )
+							// wp_reset_postdata(); ?>
 						</div>
 						<?php } // endif ( $locations && $location_valid ) ?> 
 					<h2 class="h3">Overview</h2>
