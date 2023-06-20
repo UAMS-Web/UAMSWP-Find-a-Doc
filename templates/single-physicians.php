@@ -327,7 +327,7 @@ while ( have_posts() ) : the_post();
 	// Query for whether related treatments content section should be displayed on ontology pages/subsections
 	$treatments = get_field('physician_treatments');
 	$treatments_cpt = get_field('physician_treatments_cpt');
-	uamswp_fad_treatment_query()
+	uamswp_fad_treatment_query();
 
 	// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
 	$clinical_resources = get_field('physician_clinical_resources');
