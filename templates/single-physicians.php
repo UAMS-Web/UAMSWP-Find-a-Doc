@@ -1282,51 +1282,9 @@ while ( have_posts() ) : the_post();
 					</div>
 				</div>
 			</section>
-		<?php } // endif ( $ratings_section_show ) ?>
-		<!-- <section class="uams-module news-list bg-auto" id="news">
-			<div class="container-fluid"
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title"><span class="title">Latest News for {Name}</span></h2>
-						<div class="card-list-container">
-							<div class="card-list">
-								<div class="card">
-									<img srcset="https://picsum.photos/434/244?image=1066" src="https://picsum.photos/434/244?image=1066" class="card-img-top" alt="Image description or Story title">
-									<div class="card-body">
-										<h3 class="card-title">
-											<span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
-										</h3>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.&nbsp;...</p>
-										<a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Story title">Read Full Story</a>
-									</div>
-								</div>
-								<div class="card">
-									<img srcset="https://picsum.photos/434/244?image=348" src="https://picsum.photos/434/244?image=348" class="card-img-top" alt="Image description or Story title">
-									<div class="card-body">
-										<h3 class="card-title">
-											<span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
-										</h3>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.&nbsp;...</p>
-										<a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Story title">Read Full Story</a>
-									</div>
-								</div>
-								<div class="card">
-									<img srcset="https://picsum.photos/434/244?image=823" src="https://picsum.photos/434/244?image=823" class="card-img-top" alt="Image description or Story title">
-									<div class="card-body">
-										<h3 class="card-title">
-											<span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
-										</h3>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.&nbsp;...</p>
-										<a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Story title">Read Full Story</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section> -->
 		<?php
+		} // endif ( $ratings_section_show )
+		
 		if (
 			$appointment_section_show && 
 			( 
