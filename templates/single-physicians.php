@@ -428,36 +428,12 @@ while ( have_posts() ) : the_post();
 			$academic_section_show = false;
 		}
 
-		// Check if Clinical Resources section should be displayed
-		if( $clinical_resources && $clinical_resource_query->have_posts() ) {
-			$clinical_resource_section_show = true;
-			$jump_link_count++;
-		} else {
-			$clinical_resource_section_show = false;
-		}
-
 		// Check if Research section should be displayed
 		if ( !empty($research_bio) || !empty($research_interests) || !empty ( $publications ) || $pubmed_author_id || $research_profiles_link ) {
 			$research_section_show = true;
 			$jump_link_count++;
 		} else {
 			$research_section_show = false;
-		}
-
-		// Check if Conditions section should be displayed
-		if ( $conditions_cpt && $conditions_cpt_query->posts && !$hide_medical_ontology ) {
-			$condition_section_show = true;
-			$jump_link_count++;
-		} else {
-			$condition_section_show = false;
-		}
-
-		// Check if Treatments section should be displayed
-		if ( $treatments_cpt && $treatments_cpt_query->posts && !$hide_medical_ontology ) {
-			$treatments_section_show = true;
-			$jump_link_count++;
-		} else {
-			$treatments_section_show = false;
 		}
 
 		// Check if Ratings section should be displayed
