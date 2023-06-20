@@ -2743,34 +2743,164 @@ function uamswp_fad_podcast() {
 			global $placeholder_short_name_possessive;
 
 			// Locations
-			$location_fpage_title_provider = get_field('location_fpage_title_provider', 'option') ?: '[Locations] Where [Provider Short Name] Practices'; // Title of Fake Subpage for Locations in Provider Subsection
-				$location_fpage_title_provider = $location_fpage_title_provider ? uamswp_fad_fpage_text_replace($location_fpage_title_provider) : ''; // Substitute placeholder text for relevant system settings value
-			$location_fpage_intro_provider = get_field('location_fpage_intro_provider', 'option') ?: ( get_field('location_fpage_intro_general', 'option') ?: '' ); // Intro Text of Fake Subpage for Locations in Provider Subsection
-				$location_fpage_intro_provider = $location_fpage_intro_provider ? uamswp_fad_fpage_text_replace($location_fpage_intro_provider) : ''; // Substitute placeholder text for relevant system settings value
+			$location_fpage_title_provider = get_field('location_fpage_title_provider', 'option'); // Title of Fake Subpage for Locations in Provider Subsection
+			$location_fpage_intro_provider = get_field('location_fpage_intro_provider', 'option'); // Intro Text of Fake Subpage for Locations in Provider Subsection
+
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($location_fpage_title_provider) || empty($location_fpage_title_provider) ) {
+					$location_fpage_title_provider = '[Locations] Where [Provider Short Name] Practices'; // Title
+				}
+				if ( !isset($location_fpage_intro_provider) || empty($location_fpage_intro_provider) ) {
+					$location_fpage_intro_provider = ''; // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
+				if ( !isset($location_fpage_title_provider) || empty($location_fpage_title_provider) ) {
+					if ( !isset($location_fpage_title_general) || empty($location_fpage_title_general) ) {
+						uamswp_fad_location_fpage_text_general();
+						global $location_fpage_title_general;
+					}
+					$location_fpage_title_provider = $location_fpage_title_general; // Title
+				}
+				if ( !isset($location_fpage_intro_provider) || empty($location_fpage_intro_provider) ) {
+					if ( !isset($location_fpage_intro_general) || empty($location_fpage_intro_general) ) {
+						uamswp_fad_location_fpage_text_general();
+						global $location_fpage_intro_general;
+					}
+					$location_fpage_intro_provider = $location_fpage_intro_general; // Intro text
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$location_fpage_title_provider = $location_fpage_title_provider ? uamswp_fad_fpage_text_replace($location_fpage_title_provider) : ''; // Title
+				$location_fpage_intro_provider = $location_fpage_intro_provider ? uamswp_fad_fpage_text_replace($location_fpage_intro_provider) : ''; // Intro text
 
 			// Areas of Expertise
-			$expertise_fpage_title_provider = get_field('expertise_fpage_title_provider', 'option') ?: '[Provider Short Name\'s] [Areas of Expertise]'; // Title of Fake Subpage for Areas of Expertise in Provider Subsection
-				$expertise_fpage_title_provider = $expertise_fpage_title_provider ? uamswp_fad_fpage_text_replace($expertise_fpage_title_provider) : ''; // Substitute placeholder text for relevant system settings value
-			$expertise_fpage_intro_provider = get_field('expertise_fpage_intro_provider', 'option') ?: ( get_field('expertise_fpage_intro_general', 'option') ?: '' ); // Intro Text of Fake Subpage for Areas of Expertise in Provider Subsection
-				$expertise_fpage_intro_provider = $expertise_fpage_intro_provider ? uamswp_fad_fpage_text_replace($expertise_fpage_intro_provider) : ''; // Substitute placeholder text for relevant system settings value
+			$expertise_fpage_title_provider = get_field('expertise_fpage_title_provider', 'option'); // Title of Fake Subpage for Areas of Expertise in Provider Subsection
+			$expertise_fpage_intro_provider = get_field('expertise_fpage_intro_provider', 'option'); // Intro Text of Fake Subpage for Areas of Expertise in Provider Subsection
+
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($expertise_fpage_title_provider) || empty($expertise_fpage_title_provider) ) {
+					$expertise_fpage_title_provider = '[Provider Short Name\'s] [Areas of Expertise]'; // Title
+				}
+				if ( !isset($expertise_fpage_intro_provider) || empty($expertise_fpage_intro_provider) ) {
+					$expertise_fpage_intro_provider = ''; // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
+				if ( !isset($expertise_fpage_title_provider) || empty($expertise_fpage_title_provider) ) {
+					if ( !isset($expertise_fpage_title_general) || empty($expertise_fpage_title_general) ) {
+						uamswp_fad_expertise_fpage_text_general();
+						global $expertise_fpage_title_general;
+					}
+					$expertise_fpage_title_provider = $expertise_fpage_title_general; // Title
+				}
+				if ( !isset($expertise_fpage_intro_provider) || empty($expertise_fpage_intro_provider) ) {
+					if ( !isset($expertise_fpage_intro_general) || empty($expertise_fpage_intro_general) ) {
+						uamswp_fad_expertise_fpage_text_general();
+						global $expertise_fpage_intro_general;
+					}
+					$expertise_fpage_intro_provider = $expertise_fpage_intro_general; // Intro text
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$expertise_fpage_title_provider = $expertise_fpage_title_provider ? uamswp_fad_fpage_text_replace($expertise_fpage_title_provider) : ''; // Title
+				$expertise_fpage_intro_provider = $expertise_fpage_intro_provider ? uamswp_fad_fpage_text_replace($expertise_fpage_intro_provider) : ''; // Intro text
 
 			// Clinical Resources
-			$clinical_resource_fpage_title_provider = get_field('clinical_resource_fpage_title_provider', 'option') ?: '[Clinical Resources] Related to [Provider Short Name]'; // Title of Fake Subpage for Clinical Resources in Provider Subsection
-				$clinical_resource_fpage_title_provider = $clinical_resource_fpage_title_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_provider) : ''; // Substitute placeholder text for relevant system settings value
-			$clinical_resource_fpage_intro_provider = get_field('clinical_resource_fpage_intro_provider', 'option') ?: ( get_field('clinical_resource_fpage_intro_general', 'option') ?: '' ); // Intro Text of Fake Subpage for Clinical Resources in Provider Subsection
-				$clinical_resource_fpage_intro_provider = $clinical_resource_fpage_intro_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_provider) : ''; // Substitute placeholder text for relevant system settings value
+			$clinical_resource_fpage_title_provider = get_field('clinical_resource_fpage_title_provider', 'option'); // Title of Fake Subpage for Clinical Resources in Provider Subsection
+			$clinical_resource_fpage_intro_provider = get_field('clinical_resource_fpage_intro_provider', 'option'); // Intro Text of Fake Subpage for Clinical Resources in Provider Subsection
+
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($clinical_resource_fpage_title_provider) || empty($clinical_resource_fpage_title_provider) ) {
+					$clinical_resource_fpage_title_provider = '[Clinical Resources] Related to [Provider Short Name]'; // Title
+				}
+				if ( !isset($clinical_resource_fpage_intro_provider) || empty($clinical_resource_fpage_intro_provider) ) {
+					$clinical_resource_fpage_intro_provider = ''; // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
+				if ( !isset($clinical_resource_fpage_title_provider) || empty($clinical_resource_fpage_title_provider) ) {
+					if ( !isset($clinical_resource_fpage_title_general) || empty($clinical_resource_fpage_title_general) ) {
+						uamswp_fad_clinical_resource_fpage_text_general();
+						global $clinical_resource_fpage_title_general;
+					}
+					$clinical_resource_fpage_title_provider = $clinical_resource_fpage_title_general; // Title
+				}
+				if ( !isset($clinical_resource_fpage_intro_provider) || empty($clinical_resource_fpage_intro_provider) ) {
+					if ( !isset($clinical_resource_fpage_intro_general) || empty($clinical_resource_fpage_intro_general) ) {
+						uamswp_fad_clinical_resource_fpage_text_general();
+						global $clinical_resource_fpage_intro_general;
+					}
+					$clinical_resource_fpage_intro_provider = $clinical_resource_fpage_intro_general; // Intro text
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$clinical_resource_fpage_title_provider = $clinical_resource_fpage_title_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_provider) : ''; // Title
+				$clinical_resource_fpage_intro_provider = $clinical_resource_fpage_intro_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_provider) : ''; // Intro text
 
 			// Conditions
-			$condition_fpage_title_provider = get_field('conditions_fpage_title_provider', 'option') ?: '[Conditions] Diagnosed or Treated by [Provider Short Name]'; // Title of Fake Subpage for Conditions in Provider Subsection
-				$condition_fpage_title_provider = $condition_fpage_title_provider ? uamswp_fad_fpage_text_replace($condition_fpage_title_provider) : ''; // Substitute placeholder text for relevant system settings value
-			$condition_fpage_intro_provider = get_field('conditions_fpage_intro_provider', 'option') ?: ( get_field('conditions_fpage_intro_general', 'option') ?: '' ); // Intro Text of Fake Subpage for Conditions in Provider Subsection
-				$condition_fpage_intro_provider = $condition_fpage_intro_provider ? uamswp_fad_fpage_text_replace($condition_fpage_intro_provider) : ''; // Substitute placeholder text for relevant system settings value
+			$condition_fpage_title_provider = get_field('conditions_fpage_title_provider', 'option'); // Title of Fake Subpage or Section for Conditions in Provider Subsection
+			$condition_fpage_intro_provider = get_field('conditions_fpage_intro_provider', 'option'); // Intro Text of Fake Subpage or Section for Conditions in Provider Subsection
+
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($condition_fpage_title_provider) || empty($condition_fpage_title_provider) ) {
+					$condition_fpage_title_provider = '[Conditions] Diagnosed or Treated by [Provider Short Name]'; // Title
+				}
+				if ( !isset($condition_fpage_intro_provider) || empty($condition_fpage_intro_provider) ) {
+					$condition_fpage_intro_provider = ''; // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
+				if ( !isset($condition_fpage_title_provider) || empty($condition_fpage_title_provider) ) {
+					if ( !isset($condition_fpage_title_general) || empty($condition_fpage_title_general) ) {
+						uamswp_fad_condition_fpage_text_general();
+						global $condition_fpage_title_general;
+					}
+					$condition_fpage_title_provider = $condition_fpage_title_general; // Title
+				}
+				if ( !isset($condition_fpage_intro_provider) || empty($condition_fpage_intro_provider) ) {
+					if ( !isset($condition_fpage_intro_general) || empty($condition_fpage_intro_general) ) {
+						uamswp_fad_condition_fpage_text_general();
+						global $condition_fpage_intro_general;
+					}
+					$condition_fpage_intro_provider = $condition_fpage_intro_general; // Intro text
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$condition_fpage_title_provider = $condition_fpage_title_provider ? uamswp_fad_fpage_text_replace($condition_fpage_title_provider) : ''; // Title
+				$condition_fpage_intro_provider = $condition_fpage_intro_provider ? uamswp_fad_fpage_text_replace($condition_fpage_intro_provider) : ''; // Intro text
 
 			// Treatments
-			$treatment_fpage_title_provider = get_field('treatments_fpage_title_provider', 'option') ?: '[Treatments] Performed or Prescribed by [Provider Short Name]'; // Title of Fake Subpage for Treatments in Provider Subsection
-				$treatment_fpage_title_provider = $treatment_fpage_title_provider ? uamswp_fad_fpage_text_replace($treatment_fpage_title_provider) : ''; // Substitute placeholder text for relevant system settings value
-			$treatment_fpage_intro_provider = get_field('treatments_fpage_intro_provider', 'option') ?: ( get_field('treatments_fpage_intro_general', 'option') ?: '' ); // Intro Text of Fake Subpage for Treatments in Provider Subsection
-				$treatment_fpage_intro_provider = $treatment_fpage_intro_provider ? uamswp_fad_fpage_text_replace($treatment_fpage_intro_provider) : ''; // Substitute placeholder text for relevant system settings value
+			$treatment_fpage_title_provider = get_field('treatments_fpage_title_provider', 'option'); // Title of Fake Subpage or Section for Treatments in Provider Subsection
+			$treatment_fpage_intro_provider = get_field('treatments_fpage_intro_provider', 'option'); // Intro Text of Fake Subpage or Section for Treatments in Provider Subsection
+
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($treatment_fpage_title_provider) || empty($treatment_fpage_title_provider) ) {
+					$treatment_fpage_title_provider = '[Treatments] Performed or Prescribed by [Provider Short Name]'; // Title
+				}
+				if ( !isset($treatment_fpage_intro_provider) || empty($treatment_fpage_intro_provider) ) {
+					$treatment_fpage_intro_provider = ''; // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
+				if ( !isset($treatment_fpage_title_provider) || empty($treatment_fpage_title_provider) ) {
+					if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
+						uamswp_fad_treatment_fpage_text_general();
+						global $treatment_fpage_title_general;
+					}
+					$treatment_fpage_title_provider = $treatment_fpage_title_general; // Title
+				}
+				if ( !isset($treatment_fpage_intro_provider) || empty($treatment_fpage_intro_provider) ) {
+					if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
+						uamswp_fad_treatment_fpage_text_general();
+						global $treatment_fpage_intro_general;
+					}
+					$treatment_fpage_intro_provider = $treatment_fpage_intro_general; // Intro text
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$treatment_fpage_title_provider = $treatment_fpage_title_provider ? uamswp_fad_fpage_text_replace($treatment_fpage_title_provider) : ''; // Title
+				$treatment_fpage_intro_provider = $treatment_fpage_intro_provider ? uamswp_fad_fpage_text_replace($treatment_fpage_intro_provider) : ''; // Intro text
 		}
 
 		// Get field values for fake subpage text elements on Location subsection
@@ -2788,34 +2918,164 @@ function uamswp_fad_podcast() {
 			global $treatment_fpage_intro_location;
 
 			// Providers
-			$provider_fpage_title_location = get_field('provider_fpage_title_location', 'option') ?: '[Providers] at [Location Title]'; // Title of Fake Subpage for Providers in Locations Subsection
-				$provider_fpage_title_location = $provider_fpage_title_location ? uamswp_fad_fpage_text_replace($provider_fpage_title_location) : ''; // Substitute placeholder text for relevant system settings value
-			$provider_fpage_intro_location = get_field('provider_fpage_intro_location', 'option') ?: ( get_field('provider_fpage_intro_general', 'option') ?: '' ); // Intro Text of Fake Subpage for Providers in Location Subsection
-				$provider_fpage_intro_location = $provider_fpage_intro_location ? uamswp_fad_fpage_text_replace($provider_fpage_intro_location) : ''; // Substitute placeholder text for relevant system settings value
+			$provider_fpage_title_location = get_field('provider_fpage_title_location', 'option'); // Title of Fake Subpage for Providers in Locations Subsection
+			$provider_fpage_intro_location = get_field('provider_fpage_intro_location', 'option'); // Intro Text of Fake Subpage for Providers in Location Subsection
+
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($provider_fpage_title_location) || empty($provider_fpage_title_location) ) {
+					$provider_fpage_title_location = '[Providers] at [Location Title]'; // Title
+				}
+				if ( !isset($provider_fpage_intro_location) || empty($provider_fpage_intro_location) ) {
+					$provider_fpage_intro_location = ''; // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
+				if ( !isset($provider_fpage_title_location) || empty($provider_fpage_title_location) ) {
+					if ( !isset($provider_fpage_title_general) || empty($provider_fpage_title_general) ) {
+						uamswp_fad_provider_fpage_text_general();
+						global $provider_fpage_title_general;
+					}
+					$provider_fpage_title_location = $provider_fpage_title_general; // Title
+				}
+				if ( !isset($provider_fpage_intro_location) || empty($provider_fpage_intro_location) ) {
+					if ( !isset($provider_fpage_intro_general) || empty($provider_fpage_intro_general) ) {
+						uamswp_fad_provider_fpage_text_general();
+						global $provider_fpage_intro_general;
+					}
+					$provider_fpage_intro_location = $provider_fpage_intro_general; // Intro text
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$provider_fpage_title_location = $provider_fpage_title_location ? uamswp_fad_fpage_text_replace($provider_fpage_title_location) : ''; // Title
+				$provider_fpage_intro_location = $provider_fpage_intro_location ? uamswp_fad_fpage_text_replace($provider_fpage_intro_location) : ''; // Intro text
 
 			// Areas of Expertise
-			$expertise_fpage_title_location = get_field('expertise_fpage_title_location', 'option') ?: '[Areas of Expertise] Represented at [the Location Title]'; // Title of Fake Subpage for Areas of Expertise in Location Subsection
-				$expertise_fpage_title_location = $expertise_fpage_title_location ? uamswp_fad_fpage_text_replace($expertise_fpage_title_location) : ''; // Substitute placeholder text for relevant system settings value
-			$expertise_fpage_intro_location = get_field('expertise_fpage_intro_location', 'option') ?: ( get_field('expertise_fpage_intro_general', 'option') ?: '' ); // Intro Text of Fake Subpage for Areas of Expertise in Location Subsection
-				$expertise_fpage_intro_location = $expertise_fpage_intro_location ? uamswp_fad_fpage_text_replace($expertise_fpage_intro_location) : ''; // Substitute placeholder text for relevant system settings value
+			$expertise_fpage_title_location = get_field('expertise_fpage_title_location', 'option'); // Title of Fake Subpage for Areas of Expertise in Location Subsection
+			$expertise_fpage_intro_location = get_field('expertise_fpage_intro_location', 'option'); // Intro Text of Fake Subpage for Areas of Expertise in Location Subsection
+
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($expertise_fpage_title_location) || empty($expertise_fpage_title_location) ) {
+					$expertise_fpage_title_location = '[Areas of Expertise] Represented at [the Location Title]'; // Title
+				}
+				if ( !isset($expertise_fpage_intro_location) || empty($expertise_fpage_intro_location) ) {
+					$expertise_fpage_intro_location = ''; // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
+				if ( !isset($expertise_fpage_title_location) || empty($expertise_fpage_title_location) ) {
+					if ( !isset($expertise_fpage_title_general) || empty($expertise_fpage_title_general) ) {
+						uamswp_fad_expertise_fpage_text_general();
+						global $expertise_fpage_title_general;
+					}
+					$expertise_fpage_title_location = $expertise_fpage_title_general; // Title
+				}
+				if ( !isset($expertise_fpage_intro_location) || empty($expertise_fpage_intro_location) ) {
+					if ( !isset($expertise_fpage_intro_general) || empty($expertise_fpage_intro_general) ) {
+						uamswp_fad_expertise_fpage_text_general();
+						global $expertise_fpage_intro_general;
+					}
+					$expertise_fpage_intro_location = $expertise_fpage_intro_general; // Intro text
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$expertise_fpage_title_location = $expertise_fpage_title_location ? uamswp_fad_fpage_text_replace($expertise_fpage_title_location) : ''; // Title
+				$expertise_fpage_intro_location = $expertise_fpage_intro_location ? uamswp_fad_fpage_text_replace($expertise_fpage_intro_location) : ''; // Intro text
 
 			// Clinical Resources
-			$clinical_resource_fpage_title_location = get_field('clinical_resource_fpage_title_location', 'option') ?: '[Clinical Resources] Related to [the Location Title]'; // Title of Fake Subpage for Clinical Resources in Location Subsection
-				$clinical_resource_fpage_title_location = $clinical_resource_fpage_title_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_location) : ''; // Substitute placeholder text for relevant system settings value
-			$clinical_resource_fpage_intro_location = get_field('clinical_resource_fpage_intro_location', 'option') ?: ( get_field('clinical_resource_fpage_intro_general', 'option') ?: '' ); // Intro Text of Fake Subpage for Clinical Resources in Location Subsection
-				$clinical_resource_fpage_intro_location = $clinical_resource_fpage_intro_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_location) : ''; // Substitute placeholder text for relevant system settings value
+			$clinical_resource_fpage_title_location = get_field('clinical_resource_fpage_title_location', 'option'); // Title of Fake Subpage for Clinical Resources in Location Subsection
+			$clinical_resource_fpage_intro_location = get_field('clinical_resource_fpage_intro_location', 'option'); // Intro Text of Fake Subpage for Clinical Resources in Location Subsection
+
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($clinical_resource_fpage_title_location) || empty($clinical_resource_fpage_title_location) ) {
+					$clinical_resource_fpage_title_location = '[Clinical Resources] Related to [the Location Title]'; // Title
+				}
+				if ( !isset($clinical_resource_fpage_intro_location) || empty($clinical_resource_fpage_intro_location) ) {
+					$clinical_resource_fpage_intro_location = ''; // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
+				if ( !isset($clinical_resource_fpage_title_location) || empty($clinical_resource_fpage_title_location) ) {
+					if ( !isset($clinical_resource_fpage_title_general) || empty($clinical_resource_fpage_title_general) ) {
+						uamswp_fad_clinical_resource_fpage_text_general();
+						global $clinical_resource_fpage_title_general;
+					}
+					$clinical_resource_fpage_title_location = $clinical_resource_fpage_title_general; // Title
+				}
+				if ( !isset($clinical_resource_fpage_intro_location) || empty($clinical_resource_fpage_intro_location) ) {
+					if ( !isset($clinical_resource_fpage_intro_general) || empty($clinical_resource_fpage_intro_general) ) {
+						uamswp_fad_clinical_resource_fpage_text_general();
+						global $clinical_resource_fpage_intro_general;
+					}
+					$clinical_resource_fpage_intro_location = $clinical_resource_fpage_intro_general; // Intro text
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$clinical_resource_fpage_title_location = $clinical_resource_fpage_title_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_location) : ''; // Title
+				$clinical_resource_fpage_intro_location = $clinical_resource_fpage_intro_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_location) : ''; // Intro text
 
 			// Conditions
-			$condition_fpage_title_location = get_field('conditions_fpage_title_location', 'option') ?: '[Conditions] Diagnosed or Treated at [the Location Title]'; // Title of Fake Subpage for Conditions in Location Subsection
-				$condition_fpage_title_location = $condition_fpage_title_location ? uamswp_fad_fpage_text_replace($condition_fpage_title_location) : ''; // Substitute placeholder text for relevant system settings value
-			$condition_fpage_intro_location = get_field('conditions_fpage_intro_location', 'option') ?: ( get_field('conditions_fpage_intro_general', 'option') ?: '' ); // Intro Text of Fake Subpage for Conditions in Location Subsection
-				$condition_fpage_intro_location = $condition_fpage_intro_location ? uamswp_fad_fpage_text_replace($condition_fpage_intro_location) : ''; // Substitute placeholder text for relevant system settings value
+			$condition_fpage_title_location = get_field('conditions_fpage_title_location', 'option'); // Title of Fake Subpage for Conditions in Location Subsection
+			$condition_fpage_intro_location = get_field('conditions_fpage_intro_location', 'option'); // Intro Text of Fake Subpage for Conditions in Location Subsection
+
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($condition_fpage_title_location) || empty($condition_fpage_title_location) ) {
+					$condition_fpage_title_location = '[Conditions] Diagnosed or Treated at [the Location Title]'; // Title
+				}
+				if ( !isset($condition_fpage_intro_location) || empty($condition_fpage_intro_location) ) {
+					$condition_fpage_intro_location = ''; // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
+				if ( !isset($condition_fpage_title_location) || empty($condition_fpage_title_location) ) {
+					if ( !isset($condition_fpage_title_general) || empty($condition_fpage_title_general) ) {
+						uamswp_fad_condition_fpage_text_general();
+						global $condition_fpage_title_general;
+					}
+					$condition_fpage_title_location = $condition_fpage_title_general; // Title
+				}
+				if ( !isset($condition_fpage_intro_location) || empty($condition_fpage_intro_location) ) {
+					if ( !isset($condition_fpage_intro_general) || empty($condition_fpage_intro_general) ) {
+						uamswp_fad_condition_fpage_text_general();
+						global $condition_fpage_intro_general;
+					}
+					$condition_fpage_intro_location = $condition_fpage_intro_general; // Intro text
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$condition_fpage_title_location = $condition_fpage_title_location ? uamswp_fad_fpage_text_replace($condition_fpage_title_location) : ''; // Title
+				$condition_fpage_intro_location = $condition_fpage_intro_location ? uamswp_fad_fpage_text_replace($condition_fpage_intro_location) : ''; // Intro text
 
 			// Treatments
-			$treatment_fpage_title_location = get_field('treatments_fpage_title_location', 'option') ?: '[Treatments] Performed or Prescribed at [the Location Title]'; // Title of Fake Subpage for Treatments in Location Subsection
-				$treatment_fpage_title_location = $treatment_fpage_title_location ? uamswp_fad_fpage_text_replace($treatment_fpage_title_location) : ''; // Substitute placeholder text for relevant system settings value
-			$treatment_fpage_intro_location = get_field('treatments_fpage_intro_location', 'option') ?: ( get_field('treatments_fpage_intro_general', 'option') ?: '' ); // Intro Text of Fake Subpage for Treatments in Location Subsection
-				$treatment_fpage_intro_location = $treatment_fpage_intro_location ? uamswp_fad_fpage_text_replace($treatment_fpage_intro_location) : ''; // Substitute placeholder text for relevant system settings value
+			$treatment_fpage_title_location = get_field('treatments_fpage_title_location', 'option'); // Title of Fake Subpage for Treatments in Location Subsection
+			$treatment_fpage_intro_location = get_field('treatments_fpage_intro_location', 'option'); // Intro Text of Fake Subpage for Treatments in Location Subsection
+
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($treatment_fpage_title_location) || empty($treatment_fpage_title_location) ) {
+					$treatment_fpage_title_location = '[Treatments] Performed or Prescribed at [the Location Title]'; // Title
+				}
+				if ( !isset($treatment_fpage_intro_location) || empty($treatment_fpage_intro_location) ) {
+					$treatment_fpage_intro_location = ''; // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
+				if ( !isset($treatment_fpage_title_location) || empty($treatment_fpage_title_location) ) {
+					if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
+						uamswp_fad_treatment_fpage_text_general();
+						global $treatment_fpage_title_general;
+					}
+					$treatment_fpage_title_location = $treatment_fpage_title_general; // Title
+				}
+				if ( !isset($treatment_fpage_intro_location) || empty($treatment_fpage_intro_location) ) {
+					if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
+						uamswp_fad_treatment_fpage_text_general();
+						global $treatment_fpage_intro_general;
+					}
+					$treatment_fpage_intro_location = $treatment_fpage_intro_general; // Intro text
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$treatment_fpage_title_location = $treatment_fpage_title_location ? uamswp_fad_fpage_text_replace($treatment_fpage_title_location) : ''; // Title
+				$treatment_fpage_intro_location = $treatment_fpage_intro_location ? uamswp_fad_fpage_text_replace($treatment_fpage_intro_location) : ''; // Intro text
 		}
 
 		// Get field values for fake subpage text elements on Area of Expertise subsection
@@ -2984,61 +3244,45 @@ function uamswp_fad_podcast() {
 
 			// Providers
 
-				// Page-level settings specific to an individual Area of Expertise
-
-					// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Providers in that Area of Expertise's subsection
-					// $provider_fpage_title_expertise = get_field('expertise_providers_fpage_title'); // Title
-					$provider_fpage_intro_expertise = get_field('expertise_providers_fpage_intro'); // Intro text
-
-				// Find-a-Doc Settings general to all Area of Expertise subsections
-
-					// If the Providers title variable is not set or is empty...
-					// get the field value from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
+				// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Providers in that Area of Expertise's subsection
+				// $provider_fpage_title_expertise = get_field('expertise_providers_fpage_title'); // Title
+				$provider_fpage_intro_expertise = get_field('expertise_providers_fpage_intro'); // Intro text
+	
+					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for a provider subpage/section in an area of expertise subsection
 					if ( !isset($provider_fpage_title_expertise) || empty($provider_fpage_title_expertise) ) {
 						$provider_fpage_title_expertise = get_field('provider_fpage_title_expertise', 'option'); // Title
 					}
-
-					// If the Providers intro text variable is not set or is empty...
-					// get the field value from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
 					if ( !isset($provider_fpage_intro_expertise) || empty($provider_fpage_intro_expertise) ) {
 						$provider_fpage_intro_expertise = get_field('provider_fpage_intro_expertise', 'option'); // Intro text
 					}
 
-				// Hardcoded fallbacks specific to Area of Expertise subsections
-
-					// If the Providers title text variable still is not set or is empty...
-					// set a hardcoded value for that ontology text element general to all Area of Expertise subsections
+					// If the variable is not set or is empty, set it using the hardcoded values
 					if ( !isset($provider_fpage_title_expertise) || empty($provider_fpage_title_expertise) ) {
-						$provider_fpage_title_expertise = '[Area of Expertise Title] [Providers]';
+						$provider_fpage_title_expertise = '[Area of Expertise Title] [Providers]'; // Title
 					}
-
-					// // If the Providers intro text variable still is not set or is empty...
-					// // set a hardcoded value for that ontology text element general to all Area of Expertise subsections
-					// if ( !isset($provider_fpage_intro_expertise) || empty($provider_fpage_intro_expertise) ) {
-					// 	$provider_fpage_intro_expertise = '';
-					// }
-
-				// Conditionally substitute any placeholder text for relevant system settings value
-				$provider_fpage_title_expertise = ( isset($provider_fpage_title_expertise) && !empty($provider_fpage_title_expertise) ) ? uamswp_fad_fpage_text_replace($provider_fpage_title_expertise) : $provider_fpage_title_expertise; // Title
-				$provider_fpage_intro_expertise = ( isset($provider_fpage_intro_expertise) && !empty($provider_fpage_intro_expertise) ) ? uamswp_fad_fpage_text_replace($provider_fpage_intro_expertise) : $provider_fpage_intro_expertise; // Intro text
-
-				// Find-a-Doc Settings for general placements
-
-					// If the Providers title variable is not set or is empty...
-					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
-					if ( !isset($provider_fpage_title_expertise) || empty($provider_fpage_title_expertise) ) {
-						uamswp_fad_provider_fpage_text_general();
-						global $provider_fpage_title_general;
-						$provider_fpage_title_expertise = $provider_fpage_title_general;
-					}
-
-					// If the Providers intro text variable is not set or is empty...
-					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
 					if ( !isset($provider_fpage_intro_expertise) || empty($provider_fpage_intro_expertise) ) {
-						uamswp_fad_provider_fpage_text_general();
-						global $provider_fpage_intro_general;
-						$provider_fpage_intro_expertise = $provider_fpage_intro_general;
+						$provider_fpage_intro_expertise = ''; // Intro text
 					}
+	
+					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement of a provider subpage/section
+					if ( !isset($provider_fpage_title_expertise) || empty($provider_fpage_title_expertise) ) {
+						if ( !isset($provider_fpage_title_general) || empty($provider_fpage_title_general) ) {
+							uamswp_fad_provider_fpage_text_general();
+							global $provider_fpage_title_general;
+						}
+						$provider_fpage_title_expertise = $provider_fpage_title_general; // Title
+					}
+					if ( !isset($provider_fpage_intro_expertise) || empty($provider_fpage_intro_expertise) ) {
+						if ( !isset($provider_fpage_intro_general) || empty($provider_fpage_intro_general) ) {
+							uamswp_fad_provider_fpage_text_general();
+							global $provider_fpage_intro_general;
+						}
+						$provider_fpage_intro_expertise = $provider_fpage_intro_general; // Intro text
+					}
+		
+					// Substitute placeholder text for relevant system settings value
+					$provider_fpage_title_expertise = $provider_fpage_title_expertise ? uamswp_fad_fpage_text_replace($provider_fpage_title_expertise) : ''; // Title
+					$provider_fpage_intro_expertise = $provider_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($provider_fpage_intro_expertise) : ''; // Intro text
 
 				// Get value for meta description
 				$providers_fpage_short_desc_query_expertise = get_field('expertise_providers_fpage_short_desc_query'); // If true, use intro text. If false, use specific short description.
@@ -3063,61 +3307,45 @@ function uamswp_fad_podcast() {
 
 			// Locations
 
-				// Page-level settings specific to an individual Area of Expertise
-
-					// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Locations in that Area of Expertise's subsection
-					// $location_fpage_title_expertise = get_field('expertise_locations_fpage_title'); // Title
-					$location_fpage_intro_expertise = get_field('expertise_locations_fpage_intro'); // Intro text
-
-				// Find-a-Doc Settings general to all Area of Expertise subsections
-
-					// If the Locations title variable is not set or is empty...
-					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
+				// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Locations in that Area of Expertise's subsection
+				// $location_fpage_title_expertise = get_field('expertise_locations_fpage_title'); // Title
+				$location_fpage_intro_expertise = get_field('expertise_locations_fpage_intro'); // Intro text
+	
+					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for a location subpage/section in an area of expertise subsection
 					if ( !isset($location_fpage_title_expertise) || empty($location_fpage_title_expertise) ) {
 						$location_fpage_title_expertise = get_field('location_fpage_title_expertise', 'option'); // Title
 					}
-
-					// If the Locations intro text variable is not set or is empty...
-					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
 					if ( !isset($location_fpage_intro_expertise) || empty($location_fpage_intro_expertise) ) {
 						$location_fpage_intro_expertise = get_field('location_fpage_intro_expertise', 'option'); // Intro text
 					}
 
-				// Hardcoded fallbacks specific to Area of Expertise subsections
-
-					// If the Locations title variable is not set or is empty...
-					// set a hardcoded value for that ontology text element general to all Area of Expertise subsections
+					// If the variable is not set or is empty, set it using the hardcoded values
 					if ( !isset($location_fpage_title_expertise) || empty($location_fpage_title_expertise) ) {
-						$location_fpage_title_expertise = '[Area of Expertise Title] [Locations]';
+						$location_fpage_title_expertise = '[Area of Expertise Title] [Locations]'; // Title
 					}
-
-					// // If the Locations intro text variable is not set or is empty...
-					// // set a hardcoded value for that ontology text element general to all Area of Expertise subsections
-					// if ( !isset($location_fpage_intro_expertise) || empty($location_fpage_intro_expertise) ) {
-					// 	$location_fpage_intro_expertise = '';
-					// }
-
-				// Conditionally substitute any placeholder text for relevant system settings value
-				$location_fpage_title_expertise = ( isset($location_fpage_title_expertise) && !empty($location_fpage_title_expertise) ) ? uamswp_fad_fpage_text_replace($location_fpage_title_expertise) : $location_fpage_title_expertise; // Title
-				$location_fpage_intro_expertise = ( isset($location_fpage_intro_expertise) && !empty($location_fpage_intro_expertise) ) ? uamswp_fad_fpage_text_replace($location_fpage_intro_expertise) : $location_fpage_intro_expertise; // Intro text
-
-				// Find-a-Doc Settings for general placements
-
-					// If the Locations title variable is not set or is empty...
-					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
-					if ( !isset($location_fpage_title_expertise) || empty($location_fpage_title_expertise) ) {
-						uamswp_fad_location_fpage_text_general();
-						global $location_fpage_title_general;
-						$location_fpage_title_expertise = $location_fpage_title_general;
-					}
-
-					// If the Locations intro text variable is not set or is empty...
-					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
 					if ( !isset($location_fpage_intro_expertise) || empty($location_fpage_intro_expertise) ) {
-						uamswp_fad_location_fpage_text_general();
-						global $location_fpage_intro_general;
-						$location_fpage_intro_expertise = $location_fpage_intro_general;
+						$location_fpage_intro_expertise = ''; // Intro text
 					}
+
+					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement of a location subpage/section
+					if ( !isset($location_fpage_title_expertise) || empty($location_fpage_title_expertise) ) {
+						if ( !isset($provider_fpage_title_general) || empty($provider_fpage_title_general) ) {
+							uamswp_fad_provider_fpage_text_general();
+							global $provider_fpage_title_general;
+						}
+						$location_fpage_title_expertise = $provider_fpage_title_general; // Title
+					}
+					if ( !isset($location_fpage_intro_expertise) || empty($location_fpage_intro_expertise) ) {
+						if ( !isset($provider_fpage_intro_general) || empty($provider_fpage_intro_general) ) {
+							uamswp_fad_provider_fpage_text_general();
+							global $provider_fpage_intro_general;
+						}
+						$location_fpage_intro_expertise = $provider_fpage_intro_general; // Intro text
+					}
+		
+					// Substitute placeholder text for relevant system settings value
+					$location_fpage_title_expertise = $location_fpage_title_expertise ? uamswp_fad_fpage_text_replace($location_fpage_title_expertise) : ''; // Title
+					$location_fpage_intro_expertise = $location_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($location_fpage_intro_expertise) : ''; // Intro text
 
 				// Get value for meta description
 				$locations_fpage_short_desc_query_expertise = get_field('expertise_locations_fpage_short_desc_query'); // If true, use intro text. If false, use specific short description.
@@ -3142,61 +3370,45 @@ function uamswp_fad_podcast() {
 
 			// Descendant Areas of Expertise
 
-				// Page-level settings specific to an individual Area of Expertise
-
-					// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Descendant Areas of Expertise in that Area of Expertise's subsection
-					// $expertise_descendant_fpage_title_expertise = get_field('expertise_descendant_fpage_title'); // Title
-					$expertise_descendant_fpage_intro_expertise = get_field('expertise_descendant_fpage_intro'); // Intro text
-
-				// Find-a-Doc Settings general to all Area of Expertise subsections
-
-					// If the Descendant Areas of Expertise title variable is not set or is empty...
-					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
+				// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Descendant Areas of Expertise in that Area of Expertise's subsection
+				// $expertise_descendant_fpage_title_expertise = get_field('expertise_descendant_fpage_title'); // Title
+				$expertise_descendant_fpage_intro_expertise = get_field('expertise_descendant_fpage_intro'); // Intro text
+	
+					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for a descendant areas of expertise subpage/section in an area of expertise subsection
 					if ( !isset($expertise_descendant_fpage_title_expertise) || empty($expertise_descendant_fpage_title_expertise) ) {
 						$expertise_descendant_fpage_title_expertise = get_field('expertise_descendant_fpage_title_expertise', 'option'); // Title
 					}
-
-					// If the Descendant Areas of Expertise intro text variable is not set or is empty...
-					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
 					if ( !isset($expertise_descendant_fpage_intro_expertise) || empty($expertise_descendant_fpage_intro_expertise) ) {
 						$expertise_descendant_fpage_intro_expertise = get_field('expertise_descendant_fpage_intro_expertise', 'option'); // Intro text
 					}
 
-				// Hardcoded fallbacks specific to Area of Expertise subsections
-
-					// If the Descendant Areas of Expertise title variable is not set or is empty...
-					// set a hardcoded value for that ontology text element general to all Area of Expertise subsections
+					// If the variable is not set or is empty, set it using the hardcoded values
 					if ( !isset($expertise_descendant_fpage_title_expertise) || empty($expertise_descendant_fpage_title_expertise) ) {
-						$expertise_descendant_fpage_title_expertise = '[Descendant Areas of Expertise] Within [Area of Expertise Title]';
+						$expertise_descendant_fpage_title_expertise = '[Descendant Areas of Expertise] Within [Area of Expertise Title]'; // Title
 					}
-
-					// // If the Descendant Areas of Expertise intro text variable is not set or is empty...
-					// // set a hardcoded value for that ontology text element general to all Area of Expertise subsections
-					// if ( !isset($expertise_descendant_fpage_intro_expertise) || empty($expertise_descendant_fpage_intro_expertise) ) {
-					// 	$expertise_descendant_fpage_intro_expertise = '';
-					// }
-
-				// Conditionally substitute any placeholder text for relevant system settings value
-				$expertise_descendant_fpage_title_expertise = ( isset($expertise_descendant_fpage_title_expertise) && !empty($expertise_descendant_fpage_title_expertise) ) ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_title_expertise) : $expertise_descendant_fpage_title_expertise; // Title
-				$expertise_descendant_fpage_intro_expertise = ( isset($expertise_descendant_fpage_intro_expertise) && !empty($expertise_descendant_fpage_intro_expertise) ) ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_intro_expertise) : $expertise_descendant_fpage_intro_expertise; // Intro text
-
-				// Find-a-Doc Settings for general placements
-
-					// If the Descendant Areas of Expertise title variable is not set or is empty...
-					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
-					if ( !isset($expertise_descendant_fpage_title_expertise) || empty($expertise_descendant_fpage_title_expertise) ) {
-						uamswp_fad_expertise_fpage_text_general();
-						global $expertise_fpage_title_general;
-						$expertise_descendant_fpage_title_expertise = $expertise_fpage_title_general;
-					}
-
-					// If the Descendant Areas of Expertise intro text variable is not set or is empty...
-					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
 					if ( !isset($expertise_descendant_fpage_intro_expertise) || empty($expertise_descendant_fpage_intro_expertise) ) {
-						uamswp_fad_expertise_fpage_text_general();
-						global $expertise_fpage_intro_general;
-						$expertise_descendant_fpage_intro_expertise = $expertise_fpage_intro_general;
+						$expertise_descendant_fpage_intro_expertise = ''; // Intro text
 					}
+
+					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement of a descendant areas of expertise subpage/section
+					if ( !isset($expertise_descendant_fpage_title_expertise) || empty($expertise_descendant_fpage_title_expertise) ) {
+						if ( !isset($expertise_fpage_title_general) || empty($expertise_fpage_title_general) ) {
+							uamswp_fad_expertise_fpage_text_general();
+							global $expertise_fpage_title_general;
+						}
+						$expertise_descendant_fpage_title_expertise = $expertise_fpage_title_general; // Title
+					}
+					if ( !isset($expertise_descendant_fpage_intro_expertise) || empty($expertise_descendant_fpage_intro_expertise) ) {
+						if ( !isset($expertise_fpage_intro_general) || empty($expertise_fpage_intro_general) ) {
+							uamswp_fad_expertise_fpage_text_general();
+							global $expertise_fpage_intro_general;
+						}
+						$expertise_descendant_fpage_intro_expertise = $expertise_fpage_intro_general; // Intro text
+					}
+		
+					// Substitute placeholder text for relevant system settings value
+					$expertise_descendant_fpage_title_expertise = $expertise_descendant_fpage_title_expertise ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_title_expertise) : ''; // Title
+					$expertise_descendant_fpage_intro_expertise = $expertise_descendant_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_intro_expertise) : ''; // Intro text
 
 				// Get value for meta description
 				$expertise_descendant_fpage_short_desc_query_expertise = get_field('expertise_descendant_fpage_short_desc_query'); // If true, use intro text. If false, use specific short description.
@@ -3221,59 +3433,45 @@ function uamswp_fad_podcast() {
 
 			// Related Areas of Expertise
 
-				// Page-level settings specific to an individual Area of Expertise
-
-					// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Related Areas of Expertise in that Area of Expertise's subsection
-					// $expertise_fpage_title_expertise = get_field('expertise_associated_fpage_title'); // Title
-					$expertise_fpage_intro_expertise = get_field('expertise_associated_fpage_intro'); // Intro text
-
-				// Find-a-Doc Settings general to all Area of Expertise subsections
-
-					// If the Related Areas of Expertise title variable is not set or is empty...
-					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
+				// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Related Areas of Expertise in that Area of Expertise's subsection
+				// $expertise_fpage_title_expertise = get_field('expertise_associated_fpage_title'); // Title
+				$expertise_fpage_intro_expertise = get_field('expertise_associated_fpage_intro'); // Intro text
+	
+					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for a related areas of expertise subpage/section in an area of expertise subsection
 					if ( !isset($expertise_fpage_title_expertise) || empty($expertise_fpage_title_expertise) ) {
 						$expertise_fpage_title_expertise = get_field('expertise_fpage_title_expertise', 'option'); // Title
 					}
-
-					// If the Related Areas of Expertise intro text variable is not set or is empty...
-					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
 					if ( !isset($expertise_fpage_intro_expertise) || empty($expertise_fpage_intro_expertise) ) {
 						$expertise_fpage_intro_expertise = get_field('expertise_fpage_intro_expertise', 'option'); // Intro text
 					}
 
-				// Hardcoded fallbacks specific to Area of Expertise subsections
-
-					// If the Related Areas of Expertise title variable is not set or is empty...
-					// set a hardcoded value for that ontology text element general to all Area of Expertise subsections
+					// If the variable is not set or is empty, set it using the hardcoded values
 					if ( !isset($expertise_fpage_title_expertise) || empty($expertise_fpage_title_expertise) ) {
-						$expertise_fpage_title_expertise = '[Areas of Expertise] Related to [Area of Expertise Title]';
+						$expertise_fpage_title_expertise = '[Areas of Expertise] Related to [Area of Expertise Title]'; // Title
 					}
-
-					// // If the Related Areas of Expertise intro text variable is not set or is empty...
-					// // set a hardcoded value for that ontology text element general to all Area of Expertise subsections
-					// if ( !isset($expertise_fpage_intro_expertise) || empty($expertise_fpage_intro_expertise) ) {
-					// 	$expertise_fpage_intro_expertise = '';
-					// }
-
-				// Conditionally substitute any placeholder text for relevant system settings value
-				$expertise_fpage_title_expertise = ( isset($expertise_fpage_title_expertise) && !empty($expertise_fpage_title_expertise) ) ? uamswp_fad_fpage_text_replace($expertise_fpage_title_expertise) : $expertise_fpage_title_expertise; // Title
-				$expertise_fpage_intro_expertise = ( isset($expertise_fpage_intro_expertise) && !empty($expertise_fpage_intro_expertise) ) ? uamswp_fad_fpage_text_replace($expertise_fpage_intro_expertise) : $expertise_fpage_intro_expertise; // Intro text
-
-				// Find-a-Doc Settings for general placements
-
-					// If the Related Areas of Expertise title variable is not set or is empty, set the fallback value by getting the system settings for general placement
-					if ( !isset($expertise_fpage_title_expertise) || empty($expertise_fpage_title_expertise) ) {
-						uamswp_fad_expertise_fpage_text_general();
-						global $expertise_fpage_title_general;
-						$expertise_fpage_title_expertise = $expertise_fpage_title_general;
-					}
-
-					// If the Related Areas of Expertise intro text variable is not set or is empty, set the fallback value by getting the system settings for general placement
 					if ( !isset($expertise_fpage_intro_expertise) || empty($expertise_fpage_intro_expertise) ) {
-						uamswp_fad_expertise_fpage_text_general();
-						global $expertise_fpage_intro_general;
-						$expertise_fpage_intro_expertise = $expertise_fpage_intro_general;
+						$expertise_fpage_intro_expertise = ''; // Intro text
 					}
+
+					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement of a related areas of expertise subpage/section
+					if ( !isset($expertise_fpage_title_expertise) || empty($expertise_fpage_title_expertise) ) {
+						if ( !isset($expertise_fpage_title_general) || empty($expertise_fpage_title_general) ) {
+							uamswp_fad_expertise_fpage_text_general();
+							global $expertise_fpage_title_general;
+						}
+						$expertise_fpage_title_expertise = $expertise_fpage_title_general; // Title
+					}
+					if ( !isset($expertise_fpage_intro_expertise) || empty($expertise_fpage_intro_expertise) ) {
+						if ( !isset($expertise_fpage_intro_general) || empty($expertise_fpage_intro_general) ) {
+							uamswp_fad_expertise_fpage_text_general();
+							global $expertise_fpage_intro_general;
+						}
+						$expertise_fpage_intro_expertise = $expertise_fpage_intro_general; // Intro text
+					}
+		
+					// Substitute placeholder text for relevant system settings value
+					$expertise_fpage_title_expertise = $expertise_fpage_title_expertise ? uamswp_fad_fpage_text_replace($expertise_fpage_title_expertise) : ''; // Title
+					$expertise_fpage_intro_expertise = $expertise_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($expertise_fpage_intro_expertise) : ''; // Intro text
 
 				// Get value for meta description
 				$expertise_fpage_short_desc_query_expertise = get_field('expertise_associated_fpage_short_desc_query'); // If true, use intro text. If false, use specific short description.
@@ -3298,59 +3496,45 @@ function uamswp_fad_podcast() {
 
 			// Clinical Resources
 
-				// Page-level settings specific to an individual Area of Expertise
-
-					// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Clinical Resources in that Area of Expertise's subsection
-					// $clinical_resource_fpage_title_expertise = get_field('expertise_clinical_resources_fpage_title'); // Title
-					$clinical_resource_fpage_intro_expertise = get_field('expertise_clinical_resources_fpage_intro'); // Intro text
-
-				// Find-a-Doc Settings general to all Area of Expertise subsections
-
-					// If the Clinical Resources title variable is not set or is empty...
-					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
+				// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Clinical Resources in that Area of Expertise's subsection
+				// $clinical_resource_fpage_title_expertise = get_field('expertise_clinical_resources_fpage_title'); // Title
+				$clinical_resource_fpage_intro_expertise = get_field('expertise_clinical_resources_fpage_intro'); // Intro text
+	
+					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for a related areas of expertise subpage/section in an area of expertise subsection
 					if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
 						$clinical_resource_fpage_title_expertise = get_field('clinical_resource_fpage_title_expertise', 'option'); // Title
 					}
-
-					// If the Clinical Resources intro text variable is not set or is empty...
-					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
 					if ( !isset($clinical_resource_fpage_intro_expertise) || empty($clinical_resource_fpage_intro_expertise) ) {
 						$clinical_resource_fpage_intro_expertise = get_field('clinical_resource_fpage_intro_expertise', 'option'); // Intro text
 					}
 
-				// Hardcoded fallbacks specific to Area of Expertise subsections
-
-					// // If the Clinical Resources title variable is not set or is empty...
-					// // set a hardcoded value for that ontology text element general to all Area of Expertise subsections
-					// if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
-					// 	$clinical_resource_fpage_title_expertise = '';
-					// }
-
-					// // If the Clinical Resources intro text variable is not set or is empty...
-					// // set a hardcoded value for that ontology text element general to all Area of Expertise subsections
-					// if ( !isset($clinical_resource_fpage_intro_expertise) || empty($clinical_resource_fpage_intro_expertise) ) {
-					// 	$clinical_resource_fpage_intro_expertise = '';
-					// }
-
-				// Conditionally substitute any placeholder text for relevant system settings value
-				$clinical_resource_fpage_title_expertise = ( isset($clinical_resource_fpage_title_expertise) && !empty($clinical_resource_fpage_title_expertise) ) ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_expertise) : $clinical_resource_fpage_title_expertise; // Title
-				$clinical_resource_fpage_intro_expertise = ( isset($clinical_resource_fpage_intro_expertise) && !empty($clinical_resource_fpage_intro_expertise) ) ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_expertise) : $clinical_resource_fpage_intro_expertise; // Intro text
-
-				// Find-a-Doc Settings for general placements
-
-					// If the Clinical Resources title variable is not set or is empty, set the fallback value by getting the system settings for general placement
+					// If the variable is not set or is empty, set it using the hardcoded values
 					if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
-						uamswp_fad_clinical_resource_fpage_text_general();
-						global $clinical_resource_fpage_title_general;
-						$clinical_resource_fpage_title_expertise = $clinical_resource_fpage_title_general;
+						$clinical_resource_fpage_title_expertise = ''; // Title
+					}
+					if ( !isset($clinical_resource_fpage_intro_expertise) || empty($clinical_resource_fpage_intro_expertise) ) {
+						$clinical_resource_fpage_intro_expertise = ''; // Intro text
 					}
 
-					// If the Clinical Resources intro text variable is not set or is empty, set the fallback value by getting the system settings for general placement
-					if ( !isset($clinical_resource_fpage_intro_expertise) || empty($clinical_resource_fpage_intro_expertise) ) {
-						uamswp_fad_clinical_resource_fpage_text_general();
-						global $clinical_resource_fpage_intro_general;
-						$clinical_resource_fpage_intro_expertise = $clinical_resource_fpage_intro_general;
+					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement of a related areas of expertise subpage/section
+					if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
+						if ( !isset($clinical_resource_fpage_title_general) || empty($clinical_resource_fpage_title_general) ) {
+							uamswp_fad_clinical_resource_fpage_text_general();
+							global $clinical_resource_fpage_title_general;
+						}
+						$clinical_resource_fpage_title_expertise = $clinical_resource_fpage_title_general; // Title
 					}
+					if ( !isset($clinical_resource_fpage_intro_expertise) || empty($clinical_resource_fpage_intro_expertise) ) {
+						if ( !isset($clinical_resource_fpage_intro_general) || empty($clinical_resource_fpage_intro_general) ) {
+							uamswp_fad_clinical_resource_fpage_text_general();
+							global $clinical_resource_fpage_intro_general;
+						}
+						$clinical_resource_fpage_intro_expertise = $clinical_resource_fpage_intro_general; // Intro text
+					}
+		
+					// Substitute placeholder text for relevant system settings value
+					$clinical_resource_fpage_title_expertise = $clinical_resource_fpage_title_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_expertise) : ''; // Title
+					$clinical_resource_fpage_intro_expertise = $clinical_resource_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_expertise) : ''; // Intro text
 
 				// Get value for meta description
 				$clinical_resources_fpage_short_desc_query_expertise = get_field('expertise_clinical_resources_fpage_short_desc_query'); // If true, use intro text. If false, use specific short description.
@@ -3375,119 +3559,87 @@ function uamswp_fad_podcast() {
 
 			// Conditions
 
-				// Page-level settings specific to an individual Area of Expertise
-
-					// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Conditions in that Area of Expertise's subsection
-					// $condition_fpage_title_expertise = get_field('expertise_conditions_fpage_title'); // Title
-					$condition_fpage_intro_expertise = get_field('expertise_conditions_fpage_intro'); // Intro text
-
-				// Find-a-Doc Settings general to all Area of Expertise subsections
-
-					// If the Related Conditions title variable is not set or is empty...
-					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
+				// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Conditions in that Area of Expertise's subsection
+				// $condition_fpage_title_expertise = get_field('expertise_conditions_fpage_title'); // Title
+				$condition_fpage_intro_expertise = get_field('expertise_conditions_fpage_intro'); // Intro text
+	
+					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for a conditions subpage/section in an area of expertise subsection
 					if ( !isset($condition_fpage_title_expertise) || empty($condition_fpage_title_expertise) ) {
 						$condition_fpage_title_expertise = get_field('conditions_fpage_title_expertise', 'option'); // Title
 					}
-
-					// If the Related Conditions intro text variable is not set or is empty...
-					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
 					if ( !isset($condition_fpage_intro_expertise) || empty($condition_fpage_intro_expertise) ) {
 						$condition_fpage_intro_expertise = get_field('conditions_fpage_intro_expertise', 'option'); // Intro text
 					}
 
-				// Hardcoded fallbacks specific to Area of Expertise subsections
-
-					// // If the Conditions title variable is not set or is empty...
-					// // set a hardcoded value for that ontology text element general to all Area of Expertise subsections
-					// if ( !isset($condition_fpage_title_expertise) || empty($condition_fpage_title_expertise) ) {
-					// 	$condition_fpage_title_expertise = '';
-					// }
-
-					// // If the Conditions intro text variable is not set or is empty...
-					// // set a hardcoded value for that ontology text element general to all Area of Expertise subsections
-					// if ( !isset($condition_fpage_intro_expertise) || empty($condition_fpage_intro_expertise) ) {
-					// 	$condition_fpage_intro_expertise = '';
-					// }
-
-				// Conditionally substitute any placeholder text for relevant system settings value
-				$condition_fpage_title_expertise = ( isset($condition_fpage_title_expertise) && !empty($condition_fpage_title_expertise) ) ? uamswp_fad_fpage_text_replace($condition_fpage_title_expertise) : $condition_fpage_title_expertise; // Title
-				$condition_fpage_intro_expertise = ( isset($condition_fpage_intro_expertise) && !empty($condition_fpage_intro_expertise) ) ? uamswp_fad_fpage_text_replace($condition_fpage_intro_expertise) : $condition_fpage_intro_expertise; // Intro text
-
-				// Find-a-Doc Settings for general placements
-
-					// If the Conditions title variable is not set or is empty...
-					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
+					// If the variable is not set or is empty, set it using the hardcoded values
 					if ( !isset($condition_fpage_title_expertise) || empty($condition_fpage_title_expertise) ) {
-						uamswp_fad_condition_fpage_text_general();
-						global $condition_fpage_title_general;
-						$condition_fpage_title_expertise = $condition_fpage_title_general;
+						$condition_fpage_title_expertise = '[Conditions] Related to [Area of Expertise Title]'; // Title
+					}
+					if ( !isset($condition_fpage_intro_expertise) || empty($condition_fpage_intro_expertise) ) {
+						$condition_fpage_intro_expertise = ''; // Intro text
 					}
 
-					// If the Conditions intro text variable is not set or is empty...
-					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
-					if ( !isset($condition_fpage_intro_expertise) || empty($condition_fpage_intro_expertise) ) {
-						uamswp_fad_condition_fpage_text_general();
-						global $condition_fpage_intro_general;
-						$condition_fpage_intro_expertise = $condition_fpage_intro_general;
+					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement of a conditions subpage/section
+					if ( !isset($condition_fpage_title_expertise) || empty($condition_fpage_title_expertise) ) {
+						if ( !isset($condition_fpage_title_general) || empty($condition_fpage_title_general) ) {
+							uamswp_fad_condition_fpage_text_general();
+							global $condition_fpage_title_general;
+						}
+						$condition_fpage_title_expertise = $condition_fpage_title_general; // Title
 					}
+					if ( !isset($condition_fpage_intro_expertise) || empty($condition_fpage_intro_expertise) ) {
+						if ( !isset($condition_fpage_intro_general) || empty($condition_fpage_intro_general) ) {
+							uamswp_fad_condition_fpage_text_general();
+							global $condition_fpage_intro_general;
+						}
+						$condition_fpage_intro_expertise = $condition_fpage_intro_general; // Intro text
+					}
+		
+					// Substitute placeholder text for relevant system settings value
+					$condition_fpage_title_expertise = $condition_fpage_title_expertise ? uamswp_fad_fpage_text_replace($condition_fpage_title_expertise) : ''; // Title
+					$condition_fpage_intro_expertise = $condition_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($condition_fpage_intro_expertise) : ''; // Intro text
 
 			// Treatments
 
-				// Page-level settings specific to an individual Area of Expertise
-
-					// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Treatments in that Area of Expertise's subsection
-					// $provider_fpage_title_expertise = get_field('expertise_treatments_fpage_title'); // Title
-					$treatment_fpage_intro_expertise = get_field('expertise_treatments_fpage_intro'); // Intro text
-
-				// Find-a-Doc Settings general to all Area of Expertise subsections
-
-					// If the Treatments title variable is not set or is empty...
-					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
+				// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Treatments in that Area of Expertise's subsection
+				// $provider_fpage_title_expertise = get_field('expertise_treatments_fpage_title'); // Title
+				$treatment_fpage_intro_expertise = get_field('expertise_treatments_fpage_intro'); // Intro text
+	
+					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for a treatments subpage/section in an area of expertise subsection
 					if ( !isset($treatment_fpage_title_expertise) || empty($treatment_fpage_title_expertise) ) {
 						$treatment_fpage_title_expertise = get_field('treatments_fpage_title_expertise', 'option'); // Title
 					}
-
-					// If the Treatments intro text variable is not set or is empty...
-					// get the field values from Find-a-Doc Settings for that ontology text element general to all Area of Expertise subsections
 					if ( !isset($treatment_fpage_intro_expertise) || empty($treatment_fpage_intro_expertise) ) {
 						$treatment_fpage_intro_expertise = get_field('treatments_fpage_intro_expertise', 'option'); // Intro text
 					}
 
-				// Hardcoded fallbacks specific to Area of Expertise subsections
-
-					// // If the Treatments title variable is not set or is empty...
-					// // set a hardcoded value for that ontology text element general to all Area of Expertise subsections
-					// if ( !isset($treatment_fpage_title_expertise) || empty($treatment_fpage_title_expertise) ) {
-					// 	$treatment_fpage_title_expertise = '';
-					// }
-
-					// // If the Treatments intro text variable is not set or is empty...
-					// // set a hardcoded value for that ontology text element general to all Area of Expertise subsections
-					// if ( !isset($treatment_fpage_intro_expertise) || empty($treatment_fpage_intro_expertise) ) {
-					// 	$treatment_fpage_intro_expertise = '';
-					// }
-
-				// Conditionally substitute any placeholder text for relevant system settings value
-				$treatment_fpage_title_expertise = ( isset($treatment_fpage_title_expertise) && !empty($treatment_fpage_title_expertise) ) ? uamswp_fad_fpage_text_replace($treatment_fpage_title_expertise) : $treatment_fpage_title_expertise; // Title
-				$treatment_fpage_intro_expertise = ( isset($treatment_fpage_intro_expertise) && !empty($treatment_fpage_intro_expertise) ) ? uamswp_fad_fpage_text_replace($treatment_fpage_intro_expertise) : $treatment_fpage_intro_expertise; // Intro text
-
-				// Find-a-Doc Settings for general placements
-
-					// If the Treatments title variable is not set or is empty...
-					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
+					// If the variable is not set or is empty, set it using the hardcoded values
 					if ( !isset($treatment_fpage_title_expertise) || empty($treatment_fpage_title_expertise) ) {
-						uamswp_fad_treatment_fpage_text_general();
-						global $treatment_fpage_title_general;
-						$treatment_fpage_title_expertise = $treatment_fpage_title_general;
+						$treatment_fpage_title_expertise = '[Treatments] Related to [Area of Expertise Title]'; // Title
+					}
+					if ( !isset($treatment_fpage_intro_expertise) || empty($treatment_fpage_intro_expertise) ) {
+						$treatment_fpage_intro_expertise = ''; // Intro text
 					}
 
-					// If the Treatments intro text variable is not set or is empty...
-					// get the field value from Find-a-Doc Settings for that ontology text element in general placements
-					if ( !isset($treatment_fpage_intro_expertise) || empty($treatment_fpage_intro_expertise) ) {
-						uamswp_fad_treatment_fpage_text_general();
-						global $treatment_fpage_intro_general;
-						$treatment_fpage_intro_expertise = $treatment_fpage_intro_general;
+					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement of a treatments subpage/section
+					if ( !isset($treatment_fpage_title_expertise) || empty($treatment_fpage_title_expertise) ) {
+						if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
+							uamswp_fad_treatment_fpage_text_general();
+							global $treatment_fpage_title_general;
+						}
+						$treatment_fpage_title_expertise = $treatment_fpage_title_general; // Title
 					}
+					if ( !isset($treatment_fpage_intro_expertise) || empty($treatment_fpage_intro_expertise) ) {
+						if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
+							uamswp_fad_treatment_fpage_text_general();
+							global $treatment_fpage_intro_general;
+						}
+						$treatment_fpage_intro_expertise = $treatment_fpage_intro_general; // Intro text
+					}
+		
+					// Substitute placeholder text for relevant system settings value
+					$treatment_fpage_title_expertise = $treatment_fpage_title_expertise ? uamswp_fad_fpage_text_replace($treatment_fpage_title_expertise) : ''; // Title
+					$treatment_fpage_intro_expertise = $treatment_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($treatment_fpage_intro_expertise) : ''; // Intro text
 		}
 
 		// Get field values for text elements for related ontology sections on Clinical Resource profile
@@ -3507,16 +3659,68 @@ function uamswp_fad_podcast() {
 			global $treatment_fpage_intro_clinical_resource;
 
 			// Providers
-			$provider_fpage_title_clinical_resource = get_field('provider_fpage_title_clinical_resource', 'option') ?: ( get_field('provider_fpage_title_general', 'option') ?: 'Related [Providers]' ); // Title of Section for Providers on Clinical Resource Profile
-				$provider_fpage_title_clinical_resource = $provider_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($provider_fpage_title_clinical_resource) : ''; // Substitute placeholder text for relevant system settings value
-			$provider_fpage_intro_clinical_resource = get_field('provider_fpage_intro_clinical_resource', 'option') ?: ( get_field('provider_fpage_intro_general', 'option') ?: '' ); // Intro Text of Section for Providers on Clinical Resource Profile
-				$provider_fpage_intro_clinical_resource = $provider_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($provider_fpage_intro_clinical_resource) : ''; // Substitute placeholder text for relevant system settings value
+			$provider_fpage_title_clinical_resource = get_field('provider_fpage_title_clinical_resource', 'option'); // Title of Section for Providers on Clinical Resource Profile
+			$provider_fpage_intro_clinical_resource = get_field('provider_fpage_intro_clinical_resource', 'option'); // Intro Text of Section for Providers on Clinical Resource Profile
+
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($provider_fpage_title_clinical_resource) || empty($provider_fpage_title_clinical_resource) ) {
+					$provider_fpage_title_clinical_resource = ''; // Title
+				}
+				if ( !isset($provider_fpage_intro_clinical_resource) || empty($provider_fpage_intro_clinical_resource) ) {
+					$provider_fpage_intro_clinical_resource = ''; // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
+				if ( !isset($provider_fpage_title_clinical_resource) || empty($provider_fpage_title_clinical_resource) ) {
+					if ( !isset($provider_fpage_title_general) || empty($provider_fpage_title_general) ) {
+						uamswp_fad_provider_fpage_text_general();
+						global $provider_fpage_title_general;
+					}
+					$provider_fpage_title_clinical_resource = $provider_fpage_title_general; // Title
+				}
+				if ( !isset($provider_fpage_intro_clinical_resource) || empty($provider_fpage_intro_clinical_resource) ) {
+					if ( !isset($provider_fpage_intro_general) || empty($provider_fpage_intro_general) ) {
+						uamswp_fad_provider_fpage_text_general();
+						global $provider_fpage_intro_general;
+					}
+					$provider_fpage_intro_clinical_resource = $provider_fpage_intro_general; // Intro text
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$provider_fpage_title_clinical_resource = $provider_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($provider_fpage_title_clinical_resource) : ''; // Title
+				$provider_fpage_intro_clinical_resource = $provider_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($provider_fpage_intro_clinical_resource) : ''; // Intro text
 
 			// Locations
-			$location_fpage_title_clinical_resource = get_field('location_fpage_title_clinical_resource', 'option') ?: ( get_field('location_fpage_title_general', 'option') ?: 'Related [Locations]' ); // Title of Section for Locations on Clinical Resource Profile
-				$location_fpage_title_clinical_resource = $location_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($location_fpage_title_clinical_resource) : ''; // Substitute placeholder text for relevant system settings value
-			$location_fpage_intro_clinical_resource = get_field('location_fpage_intro_clinical_resource', 'option') ?: ( get_field('location_fpage_intro_general', 'option') ?: '' ); // Intro Text of Section for Locations on Clinical Resource Profile
-				$location_fpage_intro_clinical_resource = $location_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($location_fpage_intro_clinical_resource) : ''; // Substitute placeholder text for relevant system settings value
+			$location_fpage_title_clinical_resource = get_field('location_fpage_title_clinical_resource', 'option'); // Title of Section for Locations on Clinical Resource Profile
+			$location_fpage_intro_clinical_resource = get_field('location_fpage_intro_clinical_resource', 'option'); // Intro Text of Section for Locations on Clinical Resource Profile
+
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($location_fpage_title_clinical_resource) || empty($location_fpage_title_clinical_resource) ) {
+					$location_fpage_title_clinical_resource = ''; // Title
+				}
+				if ( !isset($location_fpage_intro_clinical_resource) || empty($location_fpage_intro_clinical_resource) ) {
+					$location_fpage_intro_clinical_resource = ''; // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
+				if ( !isset($location_fpage_title_clinical_resource) || empty($location_fpage_title_clinical_resource) ) {
+					if ( !isset($location_fpage_title_general) || empty($location_fpage_title_general) ) {
+						uamswp_fad_location_fpage_text_general();
+						global $location_fpage_title_general;
+					}
+					$location_fpage_title_clinical_resource = $location_fpage_title_general; // Title
+				}
+				if ( !isset($location_fpage_intro_clinical_resource) || empty($location_fpage_intro_clinical_resource) ) {
+					if ( !isset($location_fpage_intro_general) || empty($location_fpage_intro_general) ) {
+						uamswp_fad_location_fpage_text_general();
+						global $location_fpage_intro_general;
+					}
+					$location_fpage_intro_clinical_resource = $location_fpage_intro_general; // Intro text
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$location_fpage_title_clinical_resource = $location_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($location_fpage_title_clinical_resource) : ''; // Title
+				$location_fpage_intro_clinical_resource = $location_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($location_fpage_intro_clinical_resource) : ''; // Intro text
 
 			// Areas of Expertise
 			$expertise_fpage_title_clinical_resource = get_field('expertise_fpage_title_clinical_resource', 'option') ?: ( get_field('expertise_fpage_title_general', 'option') ?: 'Related [Areas of Expertise]' ); // Title of Section for Descendant Areas of Expertise Items on Clinical Resource Profile
@@ -3524,11 +3728,67 @@ function uamswp_fad_podcast() {
 			$expertise_fpage_intro_clinical_resource = get_field('expertise_fpage_intro_clinical_resource', 'option') ?: ( get_field('expertise_fpage_intro_general', 'option') ?: '' ); // Intro Text of Section for Areas of Expertise Items on Clinical Resource Profile
 				$expertise_fpage_intro_clinical_resource = $expertise_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($expertise_fpage_intro_clinical_resource) : ''; // Substitute placeholder text for relevant system settings value
 
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($expertise_fpage_title_clinical_resource) || empty($expertise_fpage_title_clinical_resource) ) {
+					$expertise_fpage_title_clinical_resource = ''; // Title
+				}
+				if ( !isset($expertise_fpage_intro_clinical_resource) || empty($expertise_fpage_intro_clinical_resource) ) {
+					$expertise_fpage_intro_clinical_resource = ''; // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
+				if ( !isset($expertise_fpage_title_clinical_resource) || empty($expertise_fpage_title_clinical_resource) ) {
+					if ( !isset($expertise_fpage_title_general) || empty($expertise_fpage_title_general) ) {
+						uamswp_fad_expertise_fpage_text_general();
+						global $expertise_fpage_title_general;
+					}
+					$expertise_fpage_title_clinical_resource = $expertise_fpage_title_general; // Title
+				}
+				if ( !isset($expertise_fpage_intro_clinical_resource) || empty($expertise_fpage_intro_clinical_resource) ) {
+					if ( !isset($expertise_fpage_intro_general) || empty($expertise_fpage_intro_general) ) {
+						uamswp_fad_expertise_fpage_text_general();
+						global $expertise_fpage_intro_general;
+					}
+					$expertise_fpage_intro_clinical_resource = $expertise_fpage_intro_general; // Intro text
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$expertise_fpage_title_clinical_resource = $expertise_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($expertise_fpage_title_clinical_resource) : ''; // Title
+				$expertise_fpage_intro_clinical_resource = $expertise_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($expertise_fpage_intro_clinical_resource) : ''; // Intro text
+
 			// Clinical Resources
 			$clinical_resource_fpage_title_clinical_resource = get_field('clinical_resource_fpage_title_clinical_resource', 'option') ?: ( get_field('clinical_resource_fpage_title_general', 'option') ?: 'Related [Clinical Resources]' ); // Title of Section for Clinical Resources on Clinical Resource Profile
 				$clinical_resource_fpage_title_clinical_resource = $clinical_resource_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_clinical_resource) : ''; // Substitute placeholder text for relevant system settings value
 			$clinical_resource_fpage_intro_clinical_resource = get_field('clinical_resource_fpage_intro_clinical_resource', 'option') ?: ( get_field('clinical_resource_fpage_intro_general', 'option') ?: '' ); // Intro Text of Section for Clinical Resources on Clinical Resource Profile
 				$clinical_resource_fpage_intro_clinical_resource = $clinical_resource_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_clinical_resource) : ''; // Substitute placeholder text for relevant system settings value
+
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($clinical_resource_fpage_title_clinical_resource) || empty($clinical_resource_fpage_title_clinical_resource) ) {
+					$clinical_resource_fpage_title_clinical_resource = ''; // Title
+				}
+				if ( !isset($clinical_resource_fpage_intro_clinical_resource) || empty($clinical_resource_fpage_intro_clinical_resource) ) {
+					$clinical_resource_fpage_intro_clinical_resource = ''; // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
+				if ( !isset($clinical_resource_fpage_title_clinical_resource) || empty($clinical_resource_fpage_title_clinical_resource) ) {
+					if ( !isset($clinical_resource_fpage_title_general) || empty($clinical_resource_fpage_title_general) ) {
+						uamswp_fad_clinical_resource_fpage_text_general();
+						global $clinical_resource_fpage_title_general;
+					}
+					$clinical_resource_fpage_title_clinical_resource = $clinical_resource_fpage_title_general; // Title
+				}
+				if ( !isset($clinical_resource_fpage_intro_clinical_resource) || empty($clinical_resource_fpage_intro_clinical_resource) ) {
+					if ( !isset($clinical_resource_fpage_intro_general) || empty($clinical_resource_fpage_intro_general) ) {
+						uamswp_fad_clinical_resource_fpage_text_general();
+						global $clinical_resource_fpage_intro_general;
+					}
+					$clinical_resource_fpage_intro_clinical_resource = $clinical_resource_fpage_intro_general; // Intro text
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$clinical_resource_fpage_title_clinical_resource = $clinical_resource_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_clinical_resource) : ''; // Title
+				$clinical_resource_fpage_intro_clinical_resource = $clinical_resource_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_clinical_resource) : ''; // Intro text
 
 			// Conditions
 			$condition_fpage_title_clinical_resource = get_field('conditions_fpage_title_clinical_resource', 'option') ?: ( get_field('conditions_fpage_title_general', 'option') ?: 'Related [Conditions]' ); // Title of Section for Conditions on Clinical Resource Profile
@@ -3536,11 +3796,67 @@ function uamswp_fad_podcast() {
 			$condition_fpage_intro_clinical_resource = get_field('conditions_fpage_intro_clinical_resource', 'option') ?: ( get_field('conditions_fpage_intro_general', 'option') ?: '' ); // Intro Text of Section for Conditions on Clinical Resource Profile
 				$condition_fpage_intro_clinical_resource = $condition_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($condition_fpage_intro_clinical_resource) : ''; // Substitute placeholder text for relevant system settings value
 
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($condition_fpage_title_clinical_resource) || empty($condition_fpage_title_clinical_resource) ) {
+					$condition_fpage_title_clinical_resource = ''; // Title
+				}
+				if ( !isset($condition_fpage_intro_clinical_resource) || empty($condition_fpage_intro_clinical_resource) ) {
+					$condition_fpage_intro_clinical_resource = ''; // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
+				if ( !isset($condition_fpage_title_clinical_resource) || empty($condition_fpage_title_clinical_resource) ) {
+					if ( !isset($condition_fpage_title_general) || empty($condition_fpage_title_general) ) {
+						uamswp_fad_condition_fpage_text_general();
+						global $condition_fpage_title_general;
+					}
+					$condition_fpage_title_clinical_resource = $condition_fpage_title_general; // Title
+				}
+				if ( !isset($condition_fpage_intro_clinical_resource) || empty($condition_fpage_intro_clinical_resource) ) {
+					if ( !isset($condition_fpage_intro_general) || empty($condition_fpage_intro_general) ) {
+						uamswp_fad_condition_fpage_text_general();
+						global $condition_fpage_intro_general;
+					}
+					$condition_fpage_intro_clinical_resource = $condition_fpage_intro_general; // Intro text
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$condition_fpage_title_clinical_resource = $condition_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($condition_fpage_title_clinical_resource) : ''; // Title
+				$condition_fpage_intro_clinical_resource = $condition_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($condition_fpage_intro_clinical_resource) : ''; // Intro text
+
 			// Treatments
 			$treatment_fpage_title_clinical_resource = get_field('treatments_fpage_title_clinical_resource', 'option') ?: ( get_field('treatments_fpage_title_general', 'option') ?: 'Related [Treatments]' ); // Title of Section for Treatments on Clinical Resource Profile
 				$treatment_fpage_title_clinical_resource = $treatment_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($treatment_fpage_title_clinical_resource) : ''; // Substitute placeholder text for relevant system settings value
 			$treatment_fpage_intro_clinical_resource = get_field('treatments_fpage_intro_clinical_resource', 'option') ?: ( get_field('treatments_fpage_intro_general', 'option') ?: '' ); // Intro Text of Section for Treatments on Clinical Resource Profile
 				$treatment_fpage_intro_clinical_resource = $treatment_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($treatment_fpage_intro_clinical_resource) : ''; // Substitute placeholder text for relevant system settings value
+
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($treatment_fpage_title_clinical_resource) || empty($treatment_fpage_title_clinical_resource) ) {
+					$treatment_fpage_title_clinical_resource = ''; // Title
+				}
+				if ( !isset($treatment_fpage_intro_clinical_resource) || empty($treatment_fpage_intro_clinical_resource) ) {
+					$treatment_fpage_intro_clinical_resource = ''; // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
+				if ( !isset($treatment_fpage_title_clinical_resource) || empty($treatment_fpage_title_clinical_resource) ) {
+					if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
+						uamswp_fad_treatment_fpage_text_general();
+						global $treatment_fpage_title_general;
+					}
+					$treatment_fpage_title_clinical_resource = $treatment_fpage_title_general; // Title
+				}
+				if ( !isset($treatment_fpage_intro_clinical_resource) || empty($treatment_fpage_intro_clinical_resource) ) {
+					if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
+						uamswp_fad_treatment_fpage_text_general();
+						global $treatment_fpage_intro_general;
+					}
+					$treatment_fpage_intro_clinical_resource = $treatment_fpage_intro_general; // Intro text
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$treatment_fpage_title_clinical_resource = $treatment_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($treatment_fpage_title_clinical_resource) : ''; // Title
+				$treatment_fpage_intro_clinical_resource = $treatment_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($treatment_fpage_intro_clinical_resource) : ''; // Intro text
 		}
 
 // Filter the allowed block types for all editor types
