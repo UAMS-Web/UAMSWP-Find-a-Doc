@@ -505,29 +505,10 @@ while ( have_posts() ) : the_post(); ?>
 			$provider_section_show = false;
 		}
 
-
-		// Check if Conditions section should be displayed
-		// load all 'conditions' terms for the post
+		// Query for whether related conditions content section should be displayed on ontology pages/subsections
+		// $conditions = get_field('location_conditions');
 		$conditions_cpt = get_field('location_conditions_cpt');
-		$condition_schema = '';
-		// Conditions CPT
-		$args = (array(
-			'post_type' => 'condition',
-			'post_status' => 'publish',
-			'orderby' => 'title',
-			'order' => 'ASC',
-			'posts_per_page' => -1,
-			'post__in' => $conditions_cpt
-		));
-		$conditions_cpt_query = new WP_Query( $args );
-		// $condition_schema = '';
-		// we will use the first term to load ACF data from
-		if( $conditions_cpt && $conditions_cpt_query->posts && !$hide_medical_ontology ) {
-			$condition_section_show = true;
-			$jump_link_count++;
-		} else {
-			$condition_section_show = false;
-		}
+		uamswp_fad_condition_query();
 
 		// Check if Treatments section should be displayed
 		$treatments_cpt = get_field('location_treatments_cpt');
@@ -1607,21 +1588,9 @@ while ( have_posts() ) : the_post(); ?>
 	// End Providers Section
 
 	// Begin Conditions Section
-	if( $condition_section_show ) {
-		$condition_context = 'single-location';
-		$condition_heading_related_name = $page_title_phrase; // To what is it related?
-
-		include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
-		$condition_schema .= '"medicalSpecialty": [';
-		foreach( $conditions_cpt_query->posts as $condition ) {
-			$condition_schema .= '{
-			"@type": "MedicalSpecialty",
-			"name": "'. $condition->post_title .'",
-			"url":"'. get_the_permalink( $condition->ID ) .'"
-			},';
-		} // endforeach
-		$condition_schema .= '"" ],';
-	} // endif
+	$condition_section_title = $condition_fpage_title_location; // Text to use for the section title // string (default: Find-a-Doc Settings value for condition section title in a general placement)
+	$condition_section_intro = $condition_fpage_intro_location; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
+	uamswp_fad_section_condition();
 	// End Conditions Section
 
 	// Begin Treatments and Procedures Section
