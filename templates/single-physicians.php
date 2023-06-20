@@ -347,9 +347,9 @@ while ( have_posts() ) : the_post();
 	if ($bio && !empty($bio)) { $provider_field_classes = $provider_field_classes . ' has-clinical-bio'; }
 	if ($bio_short && !empty($bio_short)) { $provider_field_classes = $provider_field_classes . ' has-short-clinical-bio'; }
 	if ($video && !empty($video)) { $provider_field_classes = $provider_field_classes . ' has-video'; }
-	if ($locations && $location_valid) { $provider_field_classes = $provider_field_classes . ' has-location'; }
 	if ($condition_section_show) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
 	if ($treatments_section_show) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
+	if ($location_section_show) { $provider_field_classes = $provider_field_classes . ' has-location'; }
 	if ($clinical_resource_section_show) { $provider_field_classes = $provider_field_classes . ' has-clinical-resource'; }
 	if ($affiliation && !empty($affiliation)) { $provider_field_classes = $provider_field_classes . ' has-affiliation'; }
 	if ($expertise_section_show) { $provider_field_classes = $provider_field_classes . ' has-expertise'; }
