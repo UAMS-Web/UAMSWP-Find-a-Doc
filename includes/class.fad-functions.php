@@ -1716,6 +1716,7 @@ function uamswp_fad_post_title() {
 		global $treatments_section_show;
 		global $treatment_ids;
 		global $treatment_count; // integer
+		global $treatment_schema; // string
 
 		// Treatments CPT
 		$args = array(
@@ -1735,6 +1736,7 @@ function uamswp_fad_post_title() {
 		} else {
 			$treatments_section_show = false;
 		}
+		$treatment_schema = '';
 	}
 
 // Construct ontology subsection primary navigation
