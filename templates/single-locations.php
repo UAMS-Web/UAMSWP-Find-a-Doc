@@ -510,25 +510,9 @@ while ( have_posts() ) : the_post(); ?>
 		$conditions_cpt = get_field('location_conditions_cpt');
 		uamswp_fad_condition_query();
 
-		// Check if Treatments section should be displayed
+		// Query for whether related treatments content section should be displayed on ontology pages/subsections
 		$treatments_cpt = get_field('location_treatments_cpt');
-		$treatment_schema = '';
-		// Treatments CPT
-		$args = (array(
-			'post_type' => 'treatment',
-			'post_status' => 'publish',
-			'orderby' => 'title',
-			'order' => 'ASC',
-			'posts_per_page' => -1,
-			'post__in' => $treatments_cpt
-		));
-		$treatments_cpt_query = new WP_Query( $args );
-		if( $treatments_cpt && $treatments_cpt_query->posts && !$hide_medical_ontology ) {
-			$treatment_section_show = true;
-			$jump_link_count++;
-		} else {
-			$treatment_section_show = false;
-		}
+		uamswp_fad_treatment_query();
 
 		// Query for whether related areas of expertise content section should be displayed on a page
 		$expertises = get_field('location_expertise');
@@ -1593,22 +1577,11 @@ while ( have_posts() ) : the_post(); ?>
 	uamswp_fad_section_condition();
 	// End Conditions Section
 
-	// Begin Treatments and Procedures Section
-	if( $treatment_section_show ) {
-		$treatment_context = 'single-location';
-		$treatment_heading_related_name = $page_title_phrase; // To what is it related?
-		include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
-		$treatment_schema .= '"medicalSpecialty": [';
-		foreach( $treatments_cpt_query->posts as $treatment ) {
-			$treatment_schema .= '{
-			"@type": "MedicalSpecialty",
-			"name": "'. $treatment->post_title .'",
-			"url":"'. get_the_permalink( $treatment->ID ) .'"
-			},';
-		} // endforeach
-		$treatment_schema .= '"" ],';
-	} // endif 
-	// End Treatments and Procedures Section
+	// Begin Treatments Section
+	$treatment_section_title = $treatment_fpage_title_location; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
+	$treatment_section_intro = $treatment_fpage_intro_location; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
+	uamswp_fad_section_treatment();
+	// End Treatments Section
 
 	// Begin Areas of Expertise Section
 	$expertise_section_title = $expertise_fpage_title_location;
