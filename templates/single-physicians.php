@@ -405,51 +405,51 @@ while ( have_posts() ) : the_post();
 	}
 	if ($rating_valid) { $provider_field_classes = $provider_field_classes . ' has-ratings'; }
 
-		// Check if Make an Appointment section should be displayed
-		if ( $eligible_appt ) {
-			$appointment_section_show = true;
-			$jump_link_count++;
-		} else {
-			$appointment_section_show = false;
-		}
+	// Check if Make an Appointment section should be displayed
+	if ( $eligible_appt ) {
+		$appointment_section_show = true;
+		$jump_link_count++;
+	} else {
+		$appointment_section_show = false;
+	}
 
-		// Check if Clinical Bio section should be displayed
-		if ( $provider_clinical_bio || !empty ($video) ) {
-			$clinical_bio_section_show = true;
-		} else {
-			$clinical_bio_section_show = false;
-		}
+	// Check if Clinical Bio section should be displayed
+	if ( $provider_clinical_bio || !empty ($video) ) {
+		$clinical_bio_section_show = true;
+	} else {
+		$clinical_bio_section_show = false;
+	}
 
-		// Check if Academic Background section should be displayed
-		if ( $resident || $academic_bio || $academic_appointment || $academic_admin_title || $education || $boards ) {
-			$academic_section_show = true;
-			$jump_link_count++;
-		} else {
-			$academic_section_show = false;
-		}
+	// Check if Academic Background section should be displayed
+	if ( $resident || $academic_bio || $academic_appointment || $academic_admin_title || $education || $boards ) {
+		$academic_section_show = true;
+		$jump_link_count++;
+	} else {
+		$academic_section_show = false;
+	}
 
-		// Check if Research section should be displayed
-		if ( !empty($research_bio) || !empty($research_interests) || !empty ( $publications ) || $pubmed_author_id || $research_profiles_link ) {
-			$research_section_show = true;
-			$jump_link_count++;
-		} else {
-			$research_section_show = false;
-		}
+	// Check if Research section should be displayed
+	if ( !empty($research_bio) || !empty($research_interests) || !empty ( $publications ) || $pubmed_author_id || $research_profiles_link ) {
+		$research_section_show = true;
+		$jump_link_count++;
+	} else {
+		$research_section_show = false;
+	}
 
-		// Check if Ratings section should be displayed
-		if ( $rating_valid ) {
-			$ratings_section_show = true;
-			$jump_link_count++;
-		} else {
-			$ratings_section_show = false;
-		}
+	// Check if Ratings section should be displayed
+	if ( $rating_valid ) {
+		$ratings_section_show = true;
+		$jump_link_count++;
+	} else {
+		$ratings_section_show = false;
+	}
 
-		// Check if Jump Links section should be displayed
-		if ( $jump_link_count >= $jump_link_count_min ) {
-			$jump_links_section_show = true;
-		} else {
-			$jump_links_section_show = false;
-		}
+	// Check if Jump Links section should be displayed
+	if ( $jump_link_count >= $jump_link_count_min ) {
+		$jump_links_section_show = true;
+	} else {
+		$jump_links_section_show = false;
+	}
 ?>
 
 <div class="content-sidebar-wrap">
