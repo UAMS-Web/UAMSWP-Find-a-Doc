@@ -285,28 +285,9 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	uamswp_fad_podcast_query();
 
 	// Display conditions
-	add_action( 'genesis_after_entry', 'uamswp_expertise_conditions_cpt', 16 );
-	$condition_heading = $condition_fpage_title_expertise; // Conditions section title // Defined in uamswp_fad_fpage_text_expertise()
-	$condition_intro = $condition_fpage_intro_expertise; // Conditions section intro text // Defined in uamswp_fad_fpage_text_expertise()
-	function uamswp_expertise_conditions_cpt() {
-		// Bring in variables from outside of the function
-		global $page_title; // Defined on the template
-		global $page_title_attr; // Defined on the template
-		global $condition_section_show; // Defined in uamswp_fad_condition_query()
-		global $conditions_cpt_query; // Defined in uamswp_fad_condition_query()
-		global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
-		global $conditions_plural_name; // Defined in uamswp_fad_labels_condition()
-		global $condition_heading; // Defined on the template
-		global $condition_intro; // Defined on the template
-
-		$condition_context = 'single-expertise';
-		$condition_heading_related_name = $page_title; // To what is it related?
-		$condition_heading_related_name_attr = $page_title_attr;
-
-		if( $condition_section_show ) {
-			include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop-list.php' );
-		}
-	}
+	$condition_section_title = $condition_fpage_title_expertise; // Text to use for the section title // string (default: Find-a-Doc Settings value for condition section title in a general placement)
+	$condition_section_intro = $condition_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
+	add_action( 'genesis_after_entry', 'uamswp_fad_section_condition', 16 );
 
 	// Display treatments
 	add_action( 'genesis_after_entry', 'uamswp_expertise_treatments_cpt', 18 );
