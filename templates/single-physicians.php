@@ -1104,32 +1104,10 @@ while ( have_posts() ) : the_post();
 		// End Research Bio Section
 
 		// Begin Conditions Section
-		// load all 'conditions' terms for the post
-
-		// Conditions CPT
-		// we will use the first term to load ACF data from
-		if ( $condition_section_show ) {
-			$condition_context = 'single-provider';
-			$condition_heading_related_name = $short_name; // To what is it related?
-
-			include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
-			// $condition_schema .= ',"medicalSpecialty": [';
-			$i = 0;
-			foreach( $conditions_cpt_query->posts as $condition ) {
-				if ($i > 0) {
-					$condition_schema .= ',
-';
-				}
-				$condition_schema .= '
-		{
-			"@type": "MedicalSpecialty",
-			"name": "'. $condition->post_title .'",
-			"url":"'. get_the_permalink( $condition->ID ) .'"
-		}';
-				$i++;
-			} // endforeach;
-			// $condition_schema .= '"" ]';
-		} // endif ( $condition_section_show )
+		$condition_section_title = $condition_fpage_title_provider; // Text to use for the section title // string (default: Find-a-Doc Settings value for condition section title in a general placement)
+		$condition_section_intro = $condition_fpage_intro_provider; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
+		uamswp_fad_section_condition();
+		// End Conditions Section
 
 		// Treatments CPT
 		if ( $treatment_section_show ) {
