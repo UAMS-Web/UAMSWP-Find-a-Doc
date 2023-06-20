@@ -326,6 +326,10 @@ while ( have_posts() ) : the_post();
 	$treatments_cpt = get_field('physician_treatments_cpt');
 	uamswp_fad_treatment_query()
 
+	// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
+	$clinical_resources = get_field('physician_clinical_resources');
+	uamswp_fad_clinical_resource_query();
+
 	// Classes for indicating presence of content
 	$provider_field_classes = '';
 	if ($degrees && !empty($degrees)) { $provider_field_classes = $provider_field_classes . ' has-degrees'; }
@@ -346,6 +350,7 @@ while ( have_posts() ) : the_post();
 	if ($locations && $location_valid) { $provider_field_classes = $provider_field_classes . ' has-location'; }
 	if ($condition_section_show) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
 	if ($treatments_section_show) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
+	if ($clinical_resource_section_show) { $provider_field_classes = $provider_field_classes . ' has-clinical-resource'; }
 	if ($affiliation && !empty($affiliation)) { $provider_field_classes = $provider_field_classes . ' has-affiliation'; }
 	if ($expertise_section_show) { $provider_field_classes = $provider_field_classes . ' has-expertise'; }
 	if ($hidden && !empty($hidden)) { $provider_field_classes = $provider_field_classes . ' has-hidden'; }
@@ -391,20 +396,6 @@ while ( have_posts() ) : the_post();
 		}
 	}
 	if ($rating_valid) { $provider_field_classes = $provider_field_classes . ' has-ratings'; }
-
-	// Clinical Resources
-	$clinical_resources = get_field('physician_clinical_resources');
-	$resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
-	$resource_more = false;
-	$args = (array(
-		'post_type' => 'clinical-resource',
-		'order' => 'DESC',
-		'orderby' => 'post_date',
-		'posts_per_page' => $resource_postsPerPage,
-		'post_status' => 'publish',
-		'post__in'	=> $clinical_resources
-	));
-	$clinical_resource_query = new WP_Query( $args );
 
 	// Set logic for displaying jump links and sections
 	$jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
