@@ -1677,6 +1677,7 @@ function uamswp_fad_post_title() {
 		global $condition_section_show;
 		global $condition_ids;
 		global $condition_count; // integer
+		global $condition_schema; // string
 
 		// Conditions CPT
 		$args = array(
@@ -1696,6 +1697,7 @@ function uamswp_fad_post_title() {
 		} else {
 			$condition_section_show = false;
 		}
+		$condition_schema = '';
 	}
 
 	// Query for whether related treatments content section should be displayed on ontology pages/subsections

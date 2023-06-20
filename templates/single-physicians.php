@@ -292,8 +292,6 @@ while ( have_posts() ) : the_post();
 	$research_profile = get_field('physician_research_profiles_link');
 	$additional_info = get_field('physician_additional_info');
 	$boards = get_field( 'physician_boards' );
-	$conditions = get_field('physician_conditions');
-	$conditions_cpt = get_field('physician_conditions_cpt');
 	$treatments = get_field('physician_treatments');
 	$treatments_cpt = get_field('physician_treatments_cpt');
 	$second_opinion = get_field('physician_second_opinion');
@@ -320,6 +318,10 @@ while ( have_posts() ) : the_post();
 	$research_profiles_link = get_field('physician_research_profiles_link');
 	$podcast_name = get_field('physician_podcast_name');
 
+	// Query for whether related conditions content section should be displayed on ontology pages/subsections
+	$conditions = get_field('physician_conditions');
+	$conditions_cpt = get_field('physician_conditions_cpt');
+	uamswp_fad_condition_query();
 
 	// Classes for indicating presence of content
 	$provider_field_classes = '';
@@ -338,11 +340,10 @@ while ( have_posts() ) : the_post();
 	if ($bio && !empty($bio)) { $provider_field_classes = $provider_field_classes . ' has-clinical-bio'; }
 	if ($bio_short && !empty($bio_short)) { $provider_field_classes = $provider_field_classes . ' has-short-clinical-bio'; }
 	if ($video && !empty($video)) { $provider_field_classes = $provider_field_classes . ' has-video'; }
-	// if ($conditions && !empty($conditions)) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
-	if ($conditions_cpt && !empty($conditions_cpt)) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
 	// if ($treatments && !empty($treatments)) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
 	if ($treatments_cpt && !empty($treatments_cpt)) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
 	if ($locations && $location_valid) { $provider_field_classes = $provider_field_classes . ' has-location'; }
+	if ($condition_section_show) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
 	if ($affiliation && !empty($affiliation)) { $provider_field_classes = $provider_field_classes . ' has-affiliation'; }
 	if ($expertise_section_show) { $provider_field_classes = $provider_field_classes . ' has-expertise'; }
 	if ($hidden && !empty($hidden)) { $provider_field_classes = $provider_field_classes . ' has-hidden'; }
@@ -375,18 +376,6 @@ while ( have_posts() ) : the_post();
 	// Add one instance of a class (' has-empty-selected-pub-info') if there is an empty title field in any of the physician_awards rows.
 	if ($additional_info && !empty($additional_info)) { $provider_field_classes = $provider_field_classes . ' has-additional-info'; }
 	if ($resident && !empty($resident)) { $provider_field_classes = $provider_field_classes . ' is-resident'; }
-
-	// Set Conditions variables
-	$args = (array(
-		'post_type' => 'condition',
-		'post_status' => 'publish',
-		'orderby' => 'title',
-		'order' => 'ASC',
-		'posts_per_page' => -1,
-		'post__in' => $conditions_cpt
-	));
-	$conditions_cpt_query = new WP_Query( $args );
-	$condition_schema = '';
 
 	// Set Treatments variables
 	$args = (array(
