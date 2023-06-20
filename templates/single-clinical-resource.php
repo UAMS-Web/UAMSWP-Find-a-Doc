@@ -126,24 +126,9 @@ uamswp_fad_expertise_query();
 $conditions_cpt = get_field('clinical_resource_conditions');
 uamswp_fad_condition_query();
 
-// Query for whether related treatments content section should be displayed on a page
+// Query for whether related treatments content section should be displayed on ontology pages/subsections
 $treatments_cpt = get_field('clinical_resource_treatments');
-// Treatments CPT
-$args = (array(
-	'post_type' => 'treatment',
-	'post_status' => 'publish',
-	'orderby' => 'title',
-	'order' => 'ASC',
-	'posts_per_page' => -1,
-	'post__in' => $treatments_cpt
-));
-$treatments_cpt_query = new WP_Query( $args );
-if( $treatments_cpt && $treatments_cpt_query->posts ) {
-	$treatment_section_show = true;
-	$jump_link_count++;
-} else {
-	$treatment_section_show = false;
-}
+uamswp_fad_treatment_query();
 
 // Query for whether related clinical resources content section should be displayed on a page
 $clinical_resources = get_field('clinical_resource_related');
@@ -231,7 +216,9 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 	add_action( 'genesis_after_entry', 'uamswp_fad_section_condition', 12 );
 
 	// Construct treatments section
-	add_action( 'genesis_after_entry', 'uamswp_resource_treatments_cpt', 14 );
+	$treatment_section_title = $treatment_fpage_title_clinical_resource; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
+	$treatment_section_intro = $treatment_fpage_intro_clinical_resource; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
+	add_action( 'genesis_after_entry', 'uamswp_fad_section_treatment', 14 );
 
 	// Construct providers section
 	$provider_section_title = $provider_fpage_title_clinical_resource; // Text to use for the section title
@@ -366,24 +353,6 @@ function uamswp_resource_video() {
 			echo '<h2>Transcript</h2>';
 			echo $video_transcript;
 		}
-	}
-}
-function uamswp_resource_treatments_cpt() {
-	// Bring in variables from outside of the function
-	global $page_title; // Defined on the template
-	global $page_title_attr; // Defined on the template
-	global $treatment_section_show; // Defined on the template
-	global $treatments_cpt_query; // Defined on the template
-	global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
-	global $treatment_single_name; // Defined in uamswp_fad_labels_treatment()
-	global $treatment_plural_name; // Defined in uamswp_fad_labels_treatment()
-
-	$treatment_context = 'single-resource';
-	$treatment_heading_related_name = $page_title; // To what is it related?
-	$treatment_heading_related_name_attr = $page_title_attr;
-
-	if( $treatment_section_show ) {
-		include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
 	}
 }
 function uamswp_resource_associated() {
