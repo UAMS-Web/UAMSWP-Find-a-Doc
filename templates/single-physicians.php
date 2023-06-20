@@ -1100,7 +1100,7 @@ while ( have_posts() ) : the_post();
 				</div>
 			</section>
 		<?php
-		} // endif if ( $research_section_show )
+		} // endif ( $research_section_show )
 		// End Research Bio Section
 
 		// Begin Conditions Section
