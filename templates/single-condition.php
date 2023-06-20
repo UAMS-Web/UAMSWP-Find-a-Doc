@@ -72,7 +72,6 @@ $template_type = 'default';
 // ACF Fields - get_fields
 $clinical_trials = get_field('condition_clinical_trials');
 $video = get_field('condition_youtube_link');
-$treatments_cpt = get_field('condition_treatments');
 $providers = get_field('condition_physicians');
 $medline_type = get_field('medline_code_type');
 $medline_code = get_field('medline_code_id');
@@ -114,6 +113,10 @@ uamswp_fad_location_query();
 $expertises = get_field('condition_expertise');
 uamswp_fad_expertise_query();
 
+// Query for whether related treatments content section should be displayed on ontology pages/subsections
+$treatments_cpt = get_field('condition_treatments');
+uamswp_fad_treatment_query();
+
 // Classes for indicating presence of content
 $condition_field_classes = '';
 if ($keywords && array_filter($keywords)) { $condition_field_classes .= ' has-keywords'; } // Alternate names
@@ -122,7 +125,7 @@ if ($content && !empty($content)) { $condition_field_classes .= ' has-content'; 
 if ($excerpt && $excerpt_user == true ) { $condition_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
 if ($syndication ) { $condition_field_classes .= ' has-syndication'; } // Content Syndication
 if ($video && !empty($video)) { $condition_field_classes .= ' has-video'; } // Video embed
-if ($treatments_cpt && array_filter($treatments_cpt)) { $condition_field_classes .= ' has-treatment'; } // Treatments
+if ($treatment_section_show) { $condition_field_classes .= ' has-treatment'; } // Treatments
 if ($expertise_section_show) { $condition_field_classes .= ' has-expertise'; } // Areas of Expertise
 if ($location_section_show) { $condition_field_classes .= ' has-location'; } // Locations
 if ($providers && array_filter($providers)) { $condition_field_classes .= ' has-provider'; } // Providers
@@ -153,26 +156,6 @@ $jump_link_count = 0;
 		$clinical_trials_section_show = true;
 	} else {
 		$clinical_trials_section_show = false;
-	}
-
-	// Check if Treatments section should be displayed
-	$args = (array(
-		'post_type' => 'treatment',
-		'post_status' => 'publish',
-		'order' => 'ASC',
-		'orderby' => 'title',
-		'posts_per_page' => -1,
-		'no_found_rows' => true, // counts posts, remove if pagination required
-		'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
-		'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
-		'post__in' => $treatments_cpt
-	));
-	$treatments_query_cpt = new WP_Query( $args );
-	if ( $treatments_cpt && !empty($treatments_query_cpt->posts) ) {
-		$treatment_section_show = true;
-		$jump_link_count++;
-	} else {
-		$treatment_section_show = false;
 	}
 
 	// Check if Providers section should be displayed
@@ -422,35 +405,11 @@ $jump_link_count = 0;
 		} // endif
 		// End Clinical Trials Section
 
-		// Begin Treatments and Procedures Section
-		if ( $treatment_section_show ) { ?>
-			<section class="uams-module conditions-treatments bg-auto" id="treatments">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-xs-12">
-							<h2 class="module-title"><span class="title"><?php echo $treatment_plural_name; ?> Related to <?php echo $page_title; ?></span></h2>
-							<p class="note">UAMS Health <?php echo strtolower($provider_plural_name); ?> perform and prescribe a broad range of <?php echo strtolower($treatment_plural_name); ?>, some of which may not be listed below.</p>
-							<div class="list-container list-container-rows">
-								<ul class="list">
-								<?php while ($treatments_query_cpt->have_posts()) : $treatments_query_cpt->the_post();
-									$treatment_id = get_the_ID();
-									$treatment_permalink = get_permalink( $treatment_id );
-									$treatment_title = get_the_title();
-									$treatment_title_attr = uamswp_attr_conversion($treatment_title);
-								?>
-									<li>
-										<a href="<?php echo $treatment_permalink; ?>" aria-label="Go to <?php echo $treatment_single_name_attr; ?> page for <?php echo $treatment_title_attr; ?>" class="btn btn-outline-primary"><?php echo $treatment_title; ?></a>
-									</li>
-								<?php endwhile;
-										wp_reset_postdata(); ?>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-		<?php } // endif
-		// End Treatments and Procedures Section
+		// Begin Treatments Section
+		$treatment_section_title = $treatment_plural_name . ' Related to ' . $page_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
+		$treatment_section_intro = $treatment_fpage_intro_general; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
+		uamswp_fad_section_treatment();
+		// End Treatments Section
 
 		// Begin Providers Section
 		$provider_section_title = $provider_plural_name . ' Diagnosing or Treating ' . $page_title; // Text to use for the section title
