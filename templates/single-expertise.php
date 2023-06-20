@@ -290,28 +290,9 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	add_action( 'genesis_after_entry', 'uamswp_fad_section_condition', 16 );
 
 	// Display treatments
-	add_action( 'genesis_after_entry', 'uamswp_expertise_treatments_cpt', 18 );
-	$treatment_heading = $treatment_fpage_title_expertise; // Treatments section title // Defined in uamswp_fad_fpage_text_expertise()
-	$treatment_intro = $treatment_fpage_intro_expertise; // Treatments section intro text // Defined in uamswp_fad_fpage_text_expertise()
-	function uamswp_expertise_treatments_cpt() {
-		// Bring in variables from outside of the function
-		global $page_title; // Defined on the template
-		global $page_title_attr; // Defined on the template
-		global $treatment_section_show; // Defined in uamswp_fad_treatment_query()
-		global $treatments_cpt_query; // Defined in uamswp_fad_treatment_query()
-		global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
-		global $treatments_plural_name; // Defined in uamswp_fad_labels_treatment()
-		global $treatment_heading; // Defined on the template
-		global $treatment_intro; // Defined on the template
-
-		$treatment_context = 'single-expertise';
-		$treatment_heading_related_name = $page_title; // To what is it related?
-		$treatment_heading_related_name_attr = $page_title_attr;
-
-		if( $treatment_section_show ) {
-			include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop-list.php' );
-		}
-	}
+	$treatment_section_title = $treatment_fpage_title_expertise; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
+	$treatment_section_intro = $treatment_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
+	add_action( 'genesis_after_entry', 'uamswp_fad_section_treatment', 18 );
 
 	// Display appointment information
 	add_action( 'genesis_after_entry', 'uamswp_fad_ontology_appointment', 26 );
