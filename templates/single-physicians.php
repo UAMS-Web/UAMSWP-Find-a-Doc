@@ -463,170 +463,185 @@ while ( have_posts() ) : the_post();
 
 						if ($phys_title_name && !empty($phys_title_name)) { ?>
 							<span class="subtitle"><?php echo ($phys_title_name ? $phys_title_name : ''); ?></span>
-						<?php } ?>
+						<?php
+						} ?>
 					</h1>
 					<?php 
-						$l = 1;
-						if ( $locations && $location_valid ) { ?>
+					$l = 1;
+					if ( $locations && $location_valid ) { ?>
 						<div data-sectiontitle="Primary Location">
-							<?php if ($eligible_appt) { ?>
+							<?php
+							if ($eligible_appt) { ?>
 								<h2 class="h3">Primary Appointment <?php echo $location_single_name; ?></h2>
-							<?php } else { ?>
+							<?php
+							} else { ?>
 								<h2 class="h3">Primary <?php echo $location_single_name; ?></h2>
-							<?php } // endif
+							<?php
+							} // endif
 							foreach ( $locations as $location ) {
-									if ( 2 > $l ) {
-										if ( get_post_status ( $location ) == 'publish' ) {
+								if ( 2 > $l ) {
+									if ( get_post_status ( $location ) == 'publish' ) {
 
-											// Reset variables
-											$address_id = $location;
+										// Reset variables
+										$address_id = $location;
 
-											// Parent Location 
-											$location_has_parent = get_field('location_parent', $location);
-											$location_parent_id = get_field('location_parent_id', $location);
-											$parent_location = '';
-											$parent_id = '';
-											$parent_title = '';
-											$parent_url = '';
+										// Parent Location 
+										$location_has_parent = get_field('location_parent', $location);
+										$location_parent_id = get_field('location_parent_id', $location);
+										$parent_location = '';
+										$parent_id = '';
+										$parent_title = '';
+										$parent_url = '';
 
-											if ($location_has_parent && $location_parent_id) { 
-												$parent_location = get_post( $location_parent_id );
-											} // endif ($location_has_parent && $location_parent_id)
-											// Get Post ID for Address & Image fields
-											if ($parent_location) {
-												$parent_id = $parent_location->ID;
-												$parent_title = $parent_location->post_title;
-												$parent_url = get_permalink( $parent_id );
-												$address_id = $parent_id;
-											} // endif ($parent_location)
+										if ($location_has_parent && $location_parent_id) { 
+											$parent_location = get_post( $location_parent_id );
+										} // endif ($location_has_parent && $location_parent_id)
+										// Get Post ID for Address & Image fields
+										if ($parent_location) {
+											$parent_id = $parent_location->ID;
+											$parent_title = $parent_location->post_title;
+											$parent_url = get_permalink( $parent_id );
+											$address_id = $parent_id;
+										} // endif ($parent_location)
 
-											$location_address_1 = get_field('location_address_1', $address_id );
-											$location_building = get_field('location_building', $address_id );
-											if ($location_building) {
-												$building = get_term($location_building, "building");
-												$building_slug = $building->slug;
-												$building_name = $building->name;
-											} //endif ($location_building)
-											$location_floor = get_field_object('location_building_floor', $address_id );
-												$location_floor_value = '';
-												$location_floor_label = '';
-												if ( $location_floor && is_object($location_floor) ) {
-													$location_floor_value = $location_floor['value'];
-													$location_floor_label = $location_floor['choices'][ $location_floor_value ];
-												} // endif ( $location_floor && is_object($location_floor) )
-											$location_suite = get_field('location_suite', $address_id );
-											$location_address_2 =
-												( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? '<br />' : '' ) : '' )
-												. ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ', ' : '' ) : '' )
-												. ( $location_suite ? $location_suite : '' );
-											$location_address_2_schema =
-												( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? ' ' : '' ) : '' )
-												. ( $location_floor && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ' ' : '' ) : '' )
-												. ( $location_suite ? $location_suite : '' );
+										$location_address_1 = get_field('location_address_1', $address_id );
+										$location_building = get_field('location_building', $address_id );
+										if ($location_building) {
+											$building = get_term($location_building, "building");
+											$building_slug = $building->slug;
+											$building_name = $building->name;
+										} //endif ($location_building)
+										$location_floor = get_field_object('location_building_floor', $address_id );
+											$location_floor_value = '';
+											$location_floor_label = '';
+											if ( $location_floor && is_object($location_floor) ) {
+												$location_floor_value = $location_floor['value'];
+												$location_floor_label = $location_floor['choices'][ $location_floor_value ];
+											} // endif ( $location_floor && is_object($location_floor) )
+										$location_suite = get_field('location_suite', $address_id );
+										$location_address_2 =
+											( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? '<br />' : '' ) : '' )
+											. ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ', ' : '' ) : '' )
+											. ( $location_suite ? $location_suite : '' );
+										$location_address_2_schema =
+											( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? ' ' : '' ) : '' )
+											. ( $location_floor && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ' ' : '' ) : '' )
+											. ( $location_suite ? $location_suite : '' );
 
-											$location_address_2_deprecated = get_field('location_address_2', $address_id );
-											if (!$location_address_2) {
-												$location_address_2 = $location_address_2_deprecated;
-												$location_address_2_schema = $location_address_2_deprecated;
-											} // endif (!$location_address_2)
+										$location_address_2_deprecated = get_field('location_address_2', $address_id );
+										if (!$location_address_2) {
+											$location_address_2 = $location_address_2_deprecated;
+											$location_address_2_schema = $location_address_2_deprecated;
+										} // endif (!$location_address_2)
 
-											$location_city = get_field('location_city', $address_id);
-											$location_state = get_field('location_state', $address_id);
-											$location_zip = get_field('location_zip', $address_id);
+										$location_city = get_field('location_city', $address_id);
+										$location_state = get_field('location_state', $address_id);
+										$location_zip = get_field('location_zip', $address_id);
 
-									?>
-								<p><strong><?php echo $primary_appointment_title; ?></strong><br />
-								<?php if ( $parent_location ) { ?>
-									(Part of <a href="<?php echo $parent_url; ?>" data-categorytitle="Parent Name"><?php echo $parent_title; ?></a>)<br />
-								<?php } // endif ( $parent_location )
-								echo $location_address_1; ?><br/>
-								<?php echo $location_address_2 ? $location_address_2 . '<br/>' : '';
-								echo $location_city . ', ' . $location_state . ' ' . $location_zip;
-								$map = get_field( 'location_map', $address_id ); ?>
-								<!-- <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a> -->
-								</p>
-								<?php
-									// Phone values
-									$phone_output_id = $location;
-									$phone_output = 'associated_locations';
-									include( UAMS_FAD_PATH . '/templates/blocks/locations-phone.php' );
-								?>
-								<div class="btn-container">
-									<a class="btn btn-primary" href="<?php echo get_the_permalink( $location ); ?>" data-itemtitle="<?php echo $primary_appointment_title_attr; ?>" data-categorytitle="View <?php echo $location_single_name_attr; ?>">
-										View <?php echo $location_single_name; ?>
-									</a>
-									<?php if (1 < $location_count) { ?>
-										<a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of <?php echo strtolower($location_plural_name_attr); ?> for this <?php echo strtolower($provider_single_name_attr); ?>" data-categorytitle="View All <?php echo $location_plural_name_attr; ?>">
-											View All <?php echo $location_plural_name; ?>
-										</a>
-									<?php } // endif (1 < $location_count) ?>
-								</div>
-								<?php
-								$l++;
+										?>
+										<p><strong><?php echo $primary_appointment_title; ?></strong><br />
+										<?php
+										if ( $parent_location ) { ?>
+											(Part of <a href="<?php echo $parent_url; ?>" data-categorytitle="Parent Name"><?php echo $parent_title; ?></a>)<br />
+										<?php
+										} // endif ( $parent_location )
+										echo $location_address_1; ?><br/>
+										<?php echo $location_address_2 ? $location_address_2 . '<br/>' : '';
+										echo $location_city . ', ' . $location_state . ' ' . $location_zip;
+										$map = get_field( 'location_map', $address_id ); ?>
+										<!-- <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a> -->
+										</p>
+										<?php
+										// Phone values
+										$phone_output_id = $location;
+										$phone_output = 'associated_locations';
+										include( UAMS_FAD_PATH . '/templates/blocks/locations-phone.php' );
+										?>
+										<div class="btn-container">
+											<a class="btn btn-primary" href="<?php echo get_the_permalink( $location ); ?>" data-itemtitle="<?php echo $primary_appointment_title_attr; ?>" data-categorytitle="View <?php echo $location_single_name_attr; ?>">
+												View <?php echo $location_single_name; ?>
+											</a>
+											<?php if (1 < $location_count) { ?>
+												<a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of <?php echo strtolower($location_plural_name_attr); ?> for this <?php echo strtolower($provider_single_name_attr); ?>" data-categorytitle="View All <?php echo $location_plural_name_attr; ?>">
+													View All <?php echo $location_plural_name; ?>
+												</a>
+											<?php
+											} // endif (1 < $location_count) ?>
+										</div>
+										<?php
+										$l++;
 									} // endif ( get_post_status ( $location ) == 'publish' )
 								} // if ( 2 > $l )
-							}// endforeach ( $locations as $location )
+							} // endforeach ( $locations as $location )
 							// wp_reset_postdata(); ?>
 						</div>
-						<?php } // endif ( $locations && $location_valid ) ?> 
+					<?php
+					} // endif ( $locations && $location_valid ) ?> 
 					<h2 class="h3">Overview</h2>
 					<dl data-sectiontitle="Overview">
-					<?php
+						<?php
+						
+						// Display area(s) of expertise
+						if ( $expertise_section_show && !$hide_medical_ontology ) { ?>
+							<dt><?php echo ( count($expertises) > 1 ? $expertise_plural_name : $expertise_single_name ); ?></dt>
+							<?php
+							foreach ( $expertises as $expertise ) {
+								if ( get_post_status ( $expertise ) == 'publish' && $expertise !== 0 ) {
+									echo '<dd><a href="' . get_permalink($expertise) . '" target="_self" data-sectiontitle="Overview" data-categorytitle="View ' . $expertise_single_name_attr . '">' . get_the_title($expertise) . '</a></dd>';
+								} // endif ( get_post_status ( $expertise ) == 'publish' && $expertise !== 0 )
+							} // endforeach( $expertises as $expertise )
+						} // if ( $expertise_section_show && !$hide_medical_ontology )
 					
-					// Display area(s) of expertise
-						if ( $expertise_section_show && !$hide_medical_ontology ) {
-							?>
-						<dt><?php echo ( count($expertises) > 1 ? $expertise_plural_name : $expertise_single_name ); ?></dt>
-						<?php foreach ( $expertises as $expertise ) {
-							if ( get_post_status ( $expertise ) == 'publish' && $expertise !== 0 ) {
-								echo '<dd><a href="' . get_permalink($expertise) . '" target="_self" data-sectiontitle="Overview" data-categorytitle="View ' . $expertise_single_name_attr . '">' . get_the_title($expertise) . '</a></dd>';
-							}
-						} ?>
-						<?php } // if ( $expertise_section_show && !$hide_medical_ontology )
-					
-					// Display if they accept new patients
-					if ( $eligible_appt ) { ?>
-						<dt>Accepting New Patients</dt>
-						<?php 
-						if ($accept_new) {
-							// Display if they require referrals for new patients
-							if ( $refer_req ) { ?>
-								<dd>Yes (Referral Required)</dd>
-							<?php } else { ?>
-								<dd>Yes</dd>
-							<?php }
-						} else { ?>
-							<dd>No</dd>
-						<?php } // endif
-					} // endif ?>
-					<?php // Display if they will provide second opinions
-					if ($second_opinion) { ?>
-						<dt>Provides Second Opinion</dt>
-						<dd>Yes</dd>
-					<?php } ?>
-					<?php // Display all patient types
-						if( $patients ) { 
-						?>
+						// Display if they accept new patients
+						if ( $eligible_appt ) { ?>
+							<dt>Accepting New Patients</dt>
+							<?php 
+							if ( $accept_new ) {
+								// Display if they require referrals for new patients
+								if ( $refer_req ) { ?>
+									<dd>Yes (Referral Required)</dd>
+								<?php
+								} else { ?>
+									<dd>Yes</dd>
+								<?php 
+								}
+							} else { ?>
+								<dd>No</dd>
+							<?php
+							} // endif
+						} // endif
+
+						// Display if they will provide second opinions
+						if ( $second_opinion ) { ?>
+							<dt>Provides Second Opinion</dt>
+							<dd>Yes</dd>
+						<?php
+						}
+
+						// Display all patient types
+						if ( $patients ) { ?>
 							<dt>Patient Type<?php echo( count($patients) > 1 ? 's' : '' );?></dt>
-							<?php foreach( $patients as $patient ): ?>
-								<?php $patient_name = get_term( $patient, 'patient_type');
-									echo '<dd>' . $patient_name->name . '</dd>';
-								?>
-							<?php endforeach; ?>
-					<?php } // endif ?>
-					<?php // Display all languages
-						if( $languages && $language_list == 'English') { 
-						?>
-						<dt class="sr-only">Language</dt>
-						<?php echo '<dd class="sr-only">' . $language_list . '</dd>';?>
-					<?php } else { ?>
-						<dt>Language<?php echo( $language_count > 1 ? 's' : '' );?></dt>
-						<?php echo '<dd>' . $language_list . '</dd>';?>
-					<?php } //endif ?>
+							<?php
+							foreach( $patients as $patient ) {
+								$patient_name = get_term( $patient, 'patient_type');
+								echo '<dd>' . $patient_name->name . '</dd>';
+								
+							} // endforeach
+						} // endif ( $patients )
+
+						// Display all languages
+						if( $languages && $language_list == 'English') {  ?>
+							<dt class="sr-only">Language</dt>
+							<?php echo '<dd class="sr-only">' . $language_list . '</dd>';
+						} else { ?>
+							<dt>Language<?php echo( $language_count > 1 ? 's' : '' );?></dt>
+							<?php echo '<dd>' . $language_list . '</dd>';?>
+						<?php
+						} //endif ?>
 					</dl>
-					<?php
-						echo '<div class="rating" aria-label="Patient Rating">';
-						if ( $rating_valid ){
+					<div class="rating" aria-label="Patient Rating">
+						<?php
+						if ( $rating_valid ) {
 							$avg_rating = $rating_data->profile->averageRatingStr;
 							$avg_rating_dec = $rating_data->profile->averageRating;
 							$review_count = $rating_data->profile->reviewcount;
@@ -641,10 +656,10 @@ while ( have_posts() ) : the_post();
 						} else { ?>
 							<p class="small"><em>Patient ratings are not available for this <?php echo strtolower($provider_single_name); ?>. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this <?php echo strtolower($provider_single_name_attr); ?>" data-sectiontitle="Overview"><span aria-hidden="true">Why not?</span></a></em></p> 
 						<?php
-						}
-						echo '</div>';
-					?>
-					<?php if( !$rating_valid ) { ?>
+						} // endif ( $rating_valid ) else ?>
+					</div>
+					<?php
+					if ( !$rating_valid ) { ?>
 						<div id="why_not_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="why_not_modal" aria-modal="true">
 							<div class="modal-dialog modal-dialog-centered" role="document">
 								<div class="modal-content">
@@ -668,36 +683,41 @@ while ( have_posts() ) : the_post();
 								</div>
 							</div>
 						</div>
-					<?php } ?>
+					<?php
+					} // endif ( !$rating_valid ) ?>
 				</div>
 				<?php 
 				$docphoto = '/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg';
 				if ( has_post_thumbnail() ) { ?>
-				<div class="col-12 col-xs px-0 px-xs-4 px-sm-8 order-1 image">
-					<picture>
-					<?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 389, 519, 'center', 'center'); ?>"
-							media="(min-width: 1200px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 306, 408, 'center', 'center'); ?>"
-							media="(min-width: 992px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 182, 243, 'center', 'center'); ?>"
-							media="(min-width: 768px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 86, 115, 'center', 'center'); ?>"
-							media="(min-width: 576px)">
-						<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 380, 507, 'center', 'center'); ?>"
-							media="(min-width: 1px)">
-						<img src="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center'); ?>" alt="<?php echo $full_name_attr; ?>" />
-						<?php $docphoto = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center');
-							 } else {
+					<div class="col-12 col-xs px-0 px-xs-4 px-sm-8 order-1 image">
+						<picture>
+							<?php
+							if ( function_exists( 'fly_add_image_size' ) ) { ?>
+								<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 389, 519, 'center', 'center'); ?>"
+									media="(min-width: 1200px)">
+								<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 306, 408, 'center', 'center'); ?>"
+									media="(min-width: 992px)">
+								<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 182, 243, 'center', 'center'); ?>"
+									media="(min-width: 768px)">
+								<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 86, 115, 'center', 'center'); ?>"
+									media="(min-width: 576px)">
+								<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 380, 507, 'center', 'center'); ?>"
+									media="(min-width: 1px)">
+								<img src="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center'); ?>" alt="<?php echo $full_name_attr; ?>" />
+								<?php
+								$docphoto = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center');
+							} else {
 								the_post_thumbnail( 'large', array( 'itemprop' => 'image' ) );
 								$docphoto = get_the_post_thumbnail( 'large');
-							 } //endif ?>
-					</picture>
-				</div>
-				<?php } //endif ?>
+							} // endif ( function_exists( 'fly_add_image_size' ) ) else ?>
+						</picture>
+					</div>
+				<?php
+				} // endif ( has_post_thumbnail() ) ?>
 			</div>
 		</section>
-		<?php // Begin Jump Links Section
+		<?php
+		// Begin Jump Links Section
 		if ( $jump_links_section_show ) { ?>
 			<nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
 				<h2><?php echo $fad_jump_links_title; ?></h2>
@@ -706,104 +726,122 @@ while ( have_posts() ) : the_post();
 				</button>
 				<div class="collapse navbar-collapse inner-container" id="jump-link-nav">
 					<ul class="nav navbar-nav">
-						<?php if ( $appointment_section_show ) { ?>
+						<?php
+						if ( $appointment_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#appointment-info-1">Make an Appointment</a>
 							</li>
-						<?php } ?>
-						<?php if ( $clinical_bio_section_show ) { ?>
+						<?php
+						} // endif
+						if ( $clinical_bio_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#clinical-info">About</a>
 							</li>
-						<?php } ?>
-						<?php if ( $podcast_section_show ) { ?>
+						<?php
+						} // endif 
+						if ( $podcast_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#podcast">Podcast</a>
 							</li>
-						<?php } ?>
-						<?php if ( $clinical_resource_section_show ) { ?>
+						<?php
+						} // endif 
+						if ( $clinical_resource_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#related-resources" title="Jump to the section of this page about <?php echo $clinical_resource_plural_name_attr; ?>"><?php echo $clinical_resource_plural_name; ?></a>
 							</li>
-						<?php } ?>
-						<?php if ($academic_section_show) { ?>
+						<?php
+						} // endif 
+						if ($academic_section_show) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#academic-info">Academic Background</a>
 							</li>
-						<?php } ?>
-						<?php if ($research_section_show) { ?>
+						<?php
+						} // endif 
+						if ($research_section_show) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#research-info">Research</a>
 							</li>
-						<?php } ?>
-						<?php if ( $condition_section_show ) { ?>
+						<?php
+						} // endif 
+						if ( $condition_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#conditions"><?php echo $conditions_plural_name; ?></a>
 							</li>
-						<?php } ?>
-						<?php if ( $treatments_section_show ) { ?>
+						<?php
+						} // endif 
+						if ( $treatments_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#treatments"><?php echo $treatments_plural_name; ?></a>
 							</li>
-						<?php } ?>
-						<?php if ( $expertise_section_show ) { ?>
+						<?php
+						} // endif 
+						if ( $expertise_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#expertise"><?php echo $expertise_plural_name; ?></a>
 							</li>
-						<?php } ?>
-						<?php if ($location_section_show) { ?>
+						<?php
+						} // endif 
+						if ( $location_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#locations"><?php echo $location_plural_name; ?></a>
 							</li>
-						<?php } ?>
-						<?php if ($ratings_section_show) { ?>
+						<?php
+						} // endif 
+						if ( $ratings_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#ratings">Ratings &amp; Reviews</a>
 							</li>
-						<?php } ?>
+						<?php
+						} // endif ?>
 					</ul>
 				</div>
 			</nav>
-		<?php } // endif
-		// End Jump Links Section ?>
-		<?php if ( $appointment_section_show ) {
+		<?php
+		} // endif
+		// End Jump Links Section
+
+		if ( $appointment_section_show ) {
 			$appointment_block_instance = 1;
 			include( UAMS_FAD_PATH . '/templates/blocks/appointment-provider.php' );
-		} ?>
+		}
+		
+		$provider_clinical_split = false;
+		if (
+			( $clinical_bio_section_show ) // column A stuff
+			&&
+			( $provider_clinical_focus ) // column B stuff
+			// &&
+			// ( $provider_clinical_admin_title || $provider_clinical_focus ) // Alternate column B stuff if we decide to display clinical admin title
+		) {
+			$provider_clinical_split = true; // If there is stuff for column A and column B, split the section into two columns
+		}
 
-		<?php 
-			$provider_clinical_split = false;
-			if (
-				( $clinical_bio_section_show ) // column A stuff
-				&& ( $provider_clinical_focus ) // column B stuff
-				// && ( $provider_clinical_admin_title || $provider_clinical_focus ) // Alternate column B stuff if we decide to display clinical admin title
-				) {
-				$provider_clinical_split = true; // If there is stuff for column A and column B, split the section into two columns
-			}
-
-			// Display section for Clinical Bio, Clinical Video, Clinical Administrative Title(s), Clinical Focus ... only if there is a bio or video.
-			if ( $clinical_bio_section_show ) { ?>
+		// Display section for Clinical Bio, Clinical Video, Clinical Administrative Title(s), Clinical Focus ... only if there is a bio or video.
+		if ( $clinical_bio_section_show ) { ?>
 			<section class="uams-module clinical-info bg-auto" id="clinical-info">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-xs-12">
 							<h2 class="module-title"><span class="title">About <?php echo $short_name; ?></span></h2>
-
-
 							<?php if ( $provider_clinical_split ) {
 								// If there is a bio or video AND at least one of the other clinical things, visually split the layout ?>
 								<div class="row content-split-lg">
-								<div class="col-xs-12 col-lg-7">
-								<div class="content-width">
-							<?php } else { ?>
+									<div class="col-xs-12 col-lg-7">
+										<div class="content-width">
+							<?php
+							} else { ?>
 								<div class="module-body">
-							<?php } // endif
+							<?php
+							} // endif
+
 							if ( $provider_clinical_bio ) { ?>
 								<h3 class="sr-only">Clinical Biography</h3>
 								<?php echo $provider_clinical_bio; ?>
-							<?php } // endif
-							if($video) { ?>
-								<?php if(function_exists('lyte_preparse')) {
+							<?php
+							} // endif
+
+							if ( $video ) {
+								if ( function_exists('lyte_preparse') ) {
 									echo '<div class="alignwide">';
 									echo lyte_parse( str_replace(['https:', 'http:'], 'httpv:', $video ) );
 									echo '</div>';
@@ -811,45 +849,55 @@ while ( have_posts() ) : the_post();
 									echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
 									echo wp_oembed_get( $video );
 									echo '</div>';
-								} ?>
-							<?php } // endif
+								} // endif
+							} // endif
+
 							if ( $provider_clinical_split ) { ?>
-								</div>
-								</div>
-								<div class="col-xs-12 col-lg-5">
-								<div class="content-width">
-							<?php } // endif ?>
-							<?php // Section for displaying clinical admin title
+										</div>
+									</div>
+									<div class="col-xs-12 col-lg-5">
+										<div class="content-width">
+							<?php
+							} // endif
+							// Section for displaying clinical admin title
 							if (true == false) { // Remove this if statement if we decide to display clinical admin title later.
 								if ( have_rows('physician_clinical_admin_title') ) { ?>
 									<h3 class="h4">Administrative Roles</h3>
 									<dl>
-									<?php while( have_rows('physician_clinical_admin_title') ): the_row();
-										$department = get_term( get_sub_field('physician_clinical_admin_area'), 'service_line' );
-										$clinical_admin_title_tax = get_term( get_sub_field('clinical_admin_title_tax'), 'clinical_admin_title' );
-									?>
-										<dt><?php echo $department->name; ?></dt>
-										<dd><?php echo $clinical_admin_title_tax->name; ?></dd>
-									<?php endwhile; ?>
+										<?php while( have_rows('physician_clinical_admin_title') ) {
+											the_row();
+											$department = get_term( get_sub_field('physician_clinical_admin_area'), 'service_line' );
+											$clinical_admin_title_tax = get_term( get_sub_field('clinical_admin_title_tax'), 'clinical_admin_title' );
+											?>
+											<dt><?php echo $department->name; ?></dt>
+											<dd><?php echo $clinical_admin_title_tax->name; ?></dd>
+										<?php
+										} // endwhile ?>
 									</dl>
-								<?php } // endif ( have_rows('physician_clinical_admin_title') )
-							} // endif ?>
-							<?php if($provider_clinical_focus) { ?>
+								<?php
+								} // endif ( have_rows('physician_clinical_admin_title') )
+							} // endif
+
+							if ( $provider_clinical_focus ) { ?>
 								<h3 class="h4">Clinical Focus</h3>
-								<?php echo $provider_clinical_focus; ?>
-							<?php } // endif
+								<?php echo $provider_clinical_focus;
+							} // endif
+
 							if ( $provider_clinical_split ) { ?>
+										</div>
+									</div>
 								</div>
+							<?php
+							} else { ?>
 								</div>
-								</div>
-							<?php } else { ?>
-								</div>
-							<?php } // endif ?>
+							<?php
+							} // endif ?>
 						</div>
 					</div>
 				</div>
 			</section>
-		<?php } // endif
+		<?php 
+		} // endif ( $clinical_bio_section_show )
 
 		// Construct UAMS Health Talk podcast section
 		$podcast_filter = 'doctor';
@@ -878,212 +926,233 @@ while ( have_posts() ) : the_post();
 		}
 
 		if ( $academic_section_show ) { ?>
-		<section class="uams-module academic-info bg-auto" id="academic-info">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-12">
-						<h2 class="module-title"><span class="title"><?php echo $short_name_possessive; ?> Academic Background</span></h2>
-						<?php if ( $provider_academic_split ) {
-							// If there is a bio AND at least one of the other academic things, visually split the layout ?>
-							<div class="row content-split-lg">
-							<div class="col-xs-12 col-lg-7">
-							<div class="content-width">
-						<?php } else { ?>
-							<div class="module-body">
-						<?php } // endif
-						if ( $academic_bio ) { ?>
-							<h3 class="sr-only">Academic Biography</h3>
-							<?php echo $academic_bio; ?>
-						<?php } // endif?>
-						<?php if ( $provider_academic_split ) { ?>
-							</div>
-							</div>
-							<div class="col-xs-12 col-lg-5">
-							<div class="content-width">
-						<?php } // endif ( $provider_academic_split )]
-						if( have_rows('physician_academic_admin_title') ) { ?>
-							<h3 class="h4">Administrative Roles</h3>
-							<dl>
-							<?php while ( have_rows('physician_academic_admin_title') ) {
-								the_row();
-								$department = get_term( get_sub_field('department'), 'academic_department' );
-								$academic_admin_title_tax = get_term( get_sub_field('academic_admin_title_tax'), 'academic_admin_title' );
-							?>
-								<dt><?php echo $department->name; ?></dt>
-								<dd><?php echo $academic_admin_title_tax->name; ?></dd>
-							<?php } // endwhile ( have_rows('physician_academic_admin_title') ) ?>
-							</dl>
-						<?php } // endif( have_rows('physician_academic_admin_title') )
-						// $academic_appointments = get_field('physician_academic_appointment');
-						if ( have_rows('physician_academic_appointment') ) { ?>
-							<h3 class="h4">Faculty Appointments</h3>
-							<dl>
-							<?php while ( have_rows('physician_academic_appointment') ) {
-								the_row();
-								$department = get_term( get_sub_field('department'), 'academic_department' );
-								$academic_title_tax = get_term( get_sub_field('academic_title_tax'), 'academic_title' );
-								if ($academic_title_tax->name) {
-									$academic_title = $academic_title_tax->name;
-								} else {
-									$academic_title = get_sub_field('academic_title');
-								} ?>
-								<dt><?php echo $department->name; ?></dt>
-								<dd><?php echo $academic_title; ?></dd>
-							<?php } // endwhile ( have_rows('physician_academic_appointment') ) ?>
-							</dl>
-						<?php } // endif ( have_rows('physician_academic_appointment') )
-						if ( $resident ) { ?>
-							<h3 class="h4">Residency Program</h3>
-							<dl>
-								<dt><?php echo $resident_academic_department_name; ?></dt>
-								<dd><?php echo $resident_academic_name; ?></dd>
-							</dl>
-						<?php } // endif ( $resident )
-						if ( have_rows('physician_education') ) { ?>
-							<h3 class="h4">Education and Training</h3>
-							<dl>
-							<?php while ( have_rows('physician_education') ) {
-								the_row();
-								$school_name = get_term( get_sub_field('school'), 'school');
-								$education_type = get_term( get_sub_field('education_type'), 'educationtype'); ?>
-								<dt><?php echo $education_type->name; ?></dt>
-								<dd><?php echo $school_name->name; ?><?php echo (get_sub_field('description') ? '<br /><span class="subtitle">' . get_sub_field('description') .'</span>' : ''); ?></dd>
-							<?php } // endwhile ( have_rows('physician_education') ) ?>
-							</dl>
-						<?php } // endif ( have_rows('physician_education') )
-						if ( !empty( $boards ) ) { ?>
-							<h3 class="h4">Professional Certifications</h3>
-							<ul>
-							<?php foreach ( $boards as $board ) {
-								$board_name = get_term( $board, 'board'); ?>
-								<li><?php echo $board_name->name; ?></li>
-							<?php } // endforeach ( $boards as $board ) ?>
-							</ul>
-						<?php } // end( !empty( $boards ) )
-						if ( !empty( $associations ) ) { ?>
-							<h3 class="h4">Associations</h3>
-							<ul>
-							<?php foreach ( $associations as $association ) {
-								$association_name = get_term( $association, 'association'); ?>
-								<li><?php echo $association_name->name; ?></li>
-							<?php } // endforeach; ?>
-							</ul>
-						<?php } // endif ( !empty( $associations ) )
-						if ( $provider_academic_split ) { ?>
-							</div>
-							</div>
-							</div>
-						<?php } else { ?>
-							</div>
-						<?php } // endif ( $provider_academic_split ) ?>
+			<section class="uams-module academic-info bg-auto" id="academic-info">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12">
+							<h2 class="module-title"><span class="title"><?php echo $short_name_possessive; ?> Academic Background</span></h2>
+							<?php if ( $provider_academic_split ) {
+								// If there is a bio AND at least one of the other academic things, visually split the layout ?>
+								<div class="row content-split-lg">
+								<div class="col-xs-12 col-lg-7">
+								<div class="content-width">
+							<?php
+							} else { ?>
+								<div class="module-body">
+							<?php
+							} // endif
+							if ( $academic_bio ) { ?>
+								<h3 class="sr-only">Academic Biography</h3>
+								<?php echo $academic_bio; ?>
+							<?php
+							} // endif
+							if ( $provider_academic_split ) { ?>
+								</div>
+								</div>
+								<div class="col-xs-12 col-lg-5">
+								<div class="content-width">
+							<?php
+							} // endif ( $provider_academic_split )]
+							if( have_rows('physician_academic_admin_title') ) { ?>
+								<h3 class="h4">Administrative Roles</h3>
+								<dl>
+								<?php while ( have_rows('physician_academic_admin_title') ) {
+									the_row();
+									$department = get_term( get_sub_field('department'), 'academic_department' );
+									$academic_admin_title_tax = get_term( get_sub_field('academic_admin_title_tax'), 'academic_admin_title' );
+								?>
+									<dt><?php echo $department->name; ?></dt>
+									<dd><?php echo $academic_admin_title_tax->name; ?></dd>
+								<?php
+								} // endwhile ( have_rows('physician_academic_admin_title') ) ?>
+								</dl>
+							<?php
+							} // endif( have_rows('physician_academic_admin_title') )
+							// $academic_appointments = get_field('physician_academic_appointment');
+							if ( have_rows('physician_academic_appointment') ) { ?>
+								<h3 class="h4">Faculty Appointments</h3>
+								<dl>
+								<?php while ( have_rows('physician_academic_appointment') ) {
+									the_row();
+									$department = get_term( get_sub_field('department'), 'academic_department' );
+									$academic_title_tax = get_term( get_sub_field('academic_title_tax'), 'academic_title' );
+									if ($academic_title_tax->name) {
+										$academic_title = $academic_title_tax->name;
+									} else {
+										$academic_title = get_sub_field('academic_title');
+									} ?>
+									<dt><?php echo $department->name; ?></dt>
+									<dd><?php echo $academic_title; ?></dd>
+								<?php
+								} // endwhile ( have_rows('physician_academic_appointment') ) ?>
+								</dl>
+							<?php
+							} // endif ( have_rows('physician_academic_appointment') )
+							if ( $resident ) { ?>
+								<h3 class="h4">Residency Program</h3>
+								<dl>
+									<dt><?php echo $resident_academic_department_name; ?></dt>
+									<dd><?php echo $resident_academic_name; ?></dd>
+								</dl>
+							<?php
+							} // endif ( $resident )
+							if ( have_rows('physician_education') ) { ?>
+								<h3 class="h4">Education and Training</h3>
+								<dl>
+								<?php while ( have_rows('physician_education') ) {
+									the_row();
+									$school_name = get_term( get_sub_field('school'), 'school');
+									$education_type = get_term( get_sub_field('education_type'), 'educationtype'); ?>
+									<dt><?php echo $education_type->name; ?></dt>
+									<dd><?php echo $school_name->name; ?><?php echo (get_sub_field('description') ? '<br /><span class="subtitle">' . get_sub_field('description') .'</span>' : ''); ?></dd>
+								<?php
+								} // endwhile ( have_rows('physician_education') ) ?>
+								</dl>
+							<?php
+							} // endif ( have_rows('physician_education') )
+							if ( !empty( $boards ) ) { ?>
+								<h3 class="h4">Professional Certifications</h3>
+								<ul>
+									<?php foreach ( $boards as $board ) {
+										$board_name = get_term( $board, 'board'); ?>
+										<li><?php echo $board_name->name; ?></li>
+									<?php
+									} // endforeach ( $boards as $board ) ?>
+								</ul>
+							<?php
+							} // end( !empty( $boards ) )
+							if ( !empty( $associations ) ) { ?>
+								<h3 class="h4">Associations</h3>
+								<ul>
+									<?php foreach ( $associations as $association ) {
+										$association_name = get_term( $association, 'association'); ?>
+										<li><?php echo $association_name->name; ?></li>
+									<?php
+									} // endforeach; ?>
+								</ul>
+							<?php
+							} // endif ( !empty( $associations ) )
+							if ( $provider_academic_split ) { ?>
+								</div>
+								</div>
+								</div>
+							<?php
+							} else { ?>
+								</div>
+							<?php
+							} // endif ( $provider_academic_split ) ?>
+						</div>
 					</div>
 				</div>
-			</div>
-		</section>
-		<?php } // endif ( $academic_section_show )
+			</section>
+		<?php
+		} // endif ( $academic_section_show )
 		// End Academic Bio Section
 
 		// Begin Research Bio Section
 		if ( $research_section_show ) { ?>
-		<section class="uams-module research-info bg-auto" id="research-info">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-12">
-						<h2 class="module-title"><span class="title"><?php echo $short_name_possessive; ?> Research</span></h2>
-						<div class="module-body">
-							<?php
-								if($research_bio)
-								{
+			<section class="uams-module research-info bg-auto" id="research-info">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12">
+							<h2 class="module-title"><span class="title"><?php echo $short_name_possessive; ?> Research</span></h2>
+							<div class="module-body">
+								<?php
+								if ($research_bio) {
 									echo $research_bio;
 								}
-							?>
-							<?php
-								if($research_interests)
-								{ ?>
-								<h3>Research Interests</h3>
-							<?php
-									echo $research_interests;
+								
+								if ( $research_interests ) { ?>
+									<h3>Research Interests</h3>
+									<?php echo $research_interests;
 								}
-							?>
-							<?php
-								if( !empty ( $publications ) ): ?>
-							<h3>Selected Publications</h3>
-							<ul>
-							<?php foreach( $publications as $publication ): ?>
-								<li><?php echo $publication['pubmed_information']; ?></li>
-							<?php endforeach; ?>
-							</ul>
-							<?php endif; ?>
-							<?php if( $pubmed_author_id ): ?>
+								
+								if ( !empty ( $publications ) ) { ?>
+									<h3>Selected Publications</h3>
+									<ul>
+										<?php
+										foreach( $publications as $publication ) { ?>
+											<li><?php echo $publication['pubmed_information']; ?></li>
+										<?php
+										} // endforeach ?>
+									</ul>
 								<?php
+								} // endif
+								
+								if( $pubmed_author_id ) {
 									$pubmedid = trim($pubmed_author_id);
 									$pubmedcount = ($pubmed_author_number ? $pubmed_author_number : '3');
-								?>
-								<h3>Latest Publications</h3>
-								<p>Publications listed below are automatically derived from MEDLINE/PubMed and other sources, which might result in incorrect or missing publications.</p>
-								<?php echo do_shortcode( '[pubmed terms="' . urlencode($pubmedid) .'%5BAuthor%5D" count="' . $pubmedcount .'"]' ); ?>
-							<?php endif; ?>
-							<?php if( $research_profiles_link ): ?>
-								<h3>UAMS Research Profile</h3>
-								<p>Each UAMS faculty member has a research profile page that includes biographical and contact information, a list of their most recent grant activity and a list of their PubMed publications.</p>
-								<p><a class="btn btn-outline-primary" href="<?php echo $research_profiles_link; ?>" data-categorytitle="View Research Profile">View <?php echo $short_name_possessive; ?> research profile</a></p>
-							<?php endif; ?>
+									?>
+									<h3>Latest Publications</h3>
+									<p>Publications listed below are automatically derived from MEDLINE/PubMed and other sources, which might result in incorrect or missing publications.</p>
+									<?php echo do_shortcode( '[pubmed terms="' . urlencode($pubmedid) .'%5BAuthor%5D" count="' . $pubmedcount .'"]' );
+								} // endif
+								
+								if( $research_profiles_link ) { ?>
+									<h3>UAMS Research Profile</h3>
+									<p>Each UAMS faculty member has a research profile page that includes biographical and contact information, a list of their most recent grant activity and a list of their PubMed publications.</p>
+									<p><a class="btn btn-outline-primary" href="<?php echo $research_profiles_link; ?>" data-categorytitle="View Research Profile">View <?php echo $short_name_possessive; ?> research profile</a></p>
+								<?php
+								} // endif ?>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</section>
-		<?php } // endif if ( $research_section_show )
+			</section>
+		<?php
+		} // endif if ( $research_section_show )
 		// End Research Bio Section
 
 		// Begin Conditions Section
 		// load all 'conditions' terms for the post
 
-			// Conditions CPT
-			// we will use the first term to load ACF data from
-			if( $condition_section_show ) {
-				$condition_context = 'single-provider';
-				$condition_heading_related_name = $short_name; // To what is it related?
+		// Conditions CPT
+		// we will use the first term to load ACF data from
+		if ( $condition_section_show ) {
+			$condition_context = 'single-provider';
+			$condition_heading_related_name = $short_name; // To what is it related?
 
-				include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
-				// $condition_schema .= ',"medicalSpecialty": [';
-				$i = 0;
-				foreach( $conditions_cpt_query->posts as $condition ) {
-					if ($i > 0) {
-						$condition_schema .= ',
-			';
-					}
-					$condition_schema .= '{
-		"@type": "MedicalSpecialty",
-		"name": "'. $condition->post_title .'",
-		"url":"'. get_the_permalink( $condition->ID ) .'"
+			include( UAMS_FAD_PATH . '/templates/loops/conditions-cpt-loop.php' );
+			// $condition_schema .= ',"medicalSpecialty": [';
+			$i = 0;
+			foreach( $conditions_cpt_query->posts as $condition ) {
+				if ($i > 0) {
+					$condition_schema .= ',
+';
+				}
+				$condition_schema .= '
+		{
+			"@type": "MedicalSpecialty",
+			"name": "'. $condition->post_title .'",
+			"url":"'. get_the_permalink( $condition->ID ) .'"
 		}';
-					$i++;
-				} // endforeach;
-				// $condition_schema .= '"" ]';
-			} // endif;
+				$i++;
+			} // endforeach;
+			// $condition_schema .= '"" ]';
+		} // endif ( $condition_section_show )
 
-			// Treatments CPT
-			if ( $treatments_section_show ) {
-				$treatment_context = 'single-provider';
-				$treatment_heading_related_name = $short_name; // To what is it related?
-				include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
-				// $treatment_schema .= ',"medicalSpecialty": [';
-				$i = 0;
-				foreach( $treatments_cpt_query->posts as $treatment ) {
-					if ($i > 0 || $condition_schema) {
-						$treatment_schema .= ',
-			';
-					}
-					$treatment_schema .= '{
-		"@type": "MedicalSpecialty",
-		"name": "'. $treatment->post_title .'",
-		"url":"'. get_the_permalink( $treatment->ID ) .'"
+		// Treatments CPT
+		if ( $treatments_section_show ) {
+			$treatment_context = 'single-provider';
+			$treatment_heading_related_name = $short_name; // To what is it related?
+			include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
+			// $treatment_schema .= ',"medicalSpecialty": [';
+			$i = 0;
+			foreach( $treatments_cpt_query->posts as $treatment ) {
+				if ($i > 0 || $condition_schema) {
+					$treatment_schema .= ',
+';
+				}
+				$treatment_schema .= '
+		{
+			"@type": "MedicalSpecialty",
+			"name": "'. $treatment->post_title .'",
+			"url":"'. get_the_permalink( $treatment->ID ) .'"
 		}';
-					$i++;
-				} // endforeach
-				// $treatment_schema .= ']';
-			} // endif ( $treatments_section_show )
+				$i++;
+			} // endforeach
+			// $treatment_schema .= ']';
+		} // endif ( $treatments_section_show )
 
 		// Begin Areas of Expertise Section
 		$expertise_section_title = $expertise_fpage_title_provider;
@@ -1098,122 +1167,121 @@ while ( have_posts() ) : the_post();
 		uamswp_fad_section_location();
 		// End Location Section
 
-		?>
-		<?php if ( $ratings_section_show ) { ?>
-		<section class="uams-module ratings-and-reviews bg-auto" id="ratings">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title"><span class="title">Patient Ratings &amp; Reviews</span></h2>
-						<div class="card overall-ratings text-center">
-							<div class="card-body">
-								<h3 class="sr-only">Average Ratings</h3>
-								<dl>
-									<?php
-									$questionRatings = $rating_data->profile->questionRatings;
-									foreach( $questionRatings as $questionRating ): 
-										if ($questionRating->questionCount > 0){ ?>
-									<dt><?php echo $questionRating->question; ?></dt>
-									<dd>
-										<div class="rating" aria-label="Patient Rating">
-											<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($questionRating->averageRatingStr)/5 * 100; ?>%;"></div></div>
-											<div class="ratings-score-lg"><?php echo $questionRating->averageRatingStr; ?><span class="sr-only"> out of 5</span></div>
+		if ( $ratings_section_show ) { ?>
+			<section class="uams-module ratings-and-reviews bg-auto" id="ratings">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<h2 class="module-title"><span class="title">Patient Ratings &amp; Reviews</span></h2>
+							<div class="card overall-ratings text-center">
+								<div class="card-body">
+									<h3 class="sr-only">Average Ratings</h3>
+									<dl>
+										<?php
+										$questionRatings = $rating_data->profile->questionRatings;
+										foreach( $questionRatings as $questionRating ): 
+											if ($questionRating->questionCount > 0){ ?>
+										<dt><?php echo $questionRating->question; ?></dt>
+										<dd>
+											<div class="rating" aria-label="Patient Rating">
+												<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($questionRating->averageRatingStr)/5 * 100; ?>%;"></div></div>
+												<div class="ratings-score-lg"><?php echo $questionRating->averageRatingStr; ?><span class="sr-only"> out of 5</span></div>
+											</div>
+										</dd>
+										<?php }
+										endforeach; ?>
+									</dl>
+								</div>
+								<div class="card-footer bg-transparent text-muted small">
+									<p class="h5">Overall: <?php echo $rating_data->profile->averageRatingStr; ?> out of 5</p>
+									<p>(<?php echo $rating_data->profile->reviewBodyCountStr; ?>)</p>
+								</div>
+							</div>
+							<?php 
+							$reviews = $rating_data->reviews;
+							// if ( $reviews ) : ?>
+							<?php //print_r($rating_data); ?>
+							<h3 class="sr-only">Individual Reviews</h3>
+							<div class="card-list-container">
+								<div class="card-list">
+									<?php foreach( $reviews as $review ): ?>
+									<div class="card">
+										<div class="card-header bg-transparent">
+											<div class="rating rating-center" aria-label="Average Rating">
+												<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($review->rating)/5 * 100; ?>%;"></div></div>
+												<div class="ratings-score-lg" itemprop="ratingValue"><?php echo $review->rating; ?><span class="sr-only"> out of 5</span></div>
+											</div>
 										</div>
-									</dd>
-									<?php }
-									endforeach; ?>
-								</dl>
-							</div>
-							<div class="card-footer bg-transparent text-muted small">
-								<p class="h5">Overall: <?php echo $rating_data->profile->averageRatingStr; ?> out of 5</p>
-								<p>(<?php echo $rating_data->profile->reviewBodyCountStr; ?>)</p>
-							</div>
-						</div>
-						<?php 
-						$reviews = $rating_data->reviews;
-						// if ( $reviews ) : ?>
-						<?php //print_r($rating_data); ?>
-						<h3 class="sr-only">Individual Reviews</h3>
-						<div class="card-list-container">
-							<div class="card-list">
-								<?php foreach( $reviews as $review ): ?>
-								<div class="card">
-									<div class="card-header bg-transparent">
-										<div class="rating rating-center" aria-label="Average Rating">
-											<div class="star-ratings-sprite"><div class="star-ratings-sprite-percentage" style="width: <?php echo floatval($review->rating)/5 * 100; ?>%;"></div></div>
-											<div class="ratings-score-lg" itemprop="ratingValue"><?php echo $review->rating; ?><span class="sr-only"> out of 5</span></div>
+										<div class="card-body">
+											<h4 class="sr-only">Comment</h4>
+											<p class="card-text"><?php echo $review->bodyForDisplay; ?></p>
+										</div>
+										<div class="card-footer bg-transparent text-muted small">
+											<h4 class="sr-only">Date</h4>
+											<?php echo $review->formattedReviewDate; ?>
 										</div>
 									</div>
-									<div class="card-body">
-										<h4 class="sr-only">Comment</h4>
-										<p class="card-text"><?php echo $review->bodyForDisplay; ?></p>
-									</div>
-									<div class="card-footer bg-transparent text-muted small">
-										<h4 class="sr-only">Date</h4>
-										<?php echo $review->formattedReviewDate; ?>
-									</div>
-								</div>
-								<?php endforeach; ?>
-							</div>
-						</div>
-						<div class="view-more text-center mt-8 mt-sm-10">
-							<button class="btn btn-secondary" data-toggle="modal" data-target="#MoreReviews" aria-label="View more individual reviews">View More</button>
-						</div>
-						<!-- Modal -->
-						<div class="modal fade" id="MoreReviews" tabindex="-1" role="dialog" aria-labelledby="more-reviews-title" aria-modal="true">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="more-reviews-title">More Reviews</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									<div class="ds-comments" data-ds-pagesize="10"></div>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								</div>
+									<?php endforeach; ?>
 								</div>
 							</div>
-						</div>
-						<script>
-							/* Custom HTML for the paging controls for the comments list */
-							window.DS_OPT = {
-								buildCommentsLoadMoreHTML: function(data, ctx){
-									// a variable to hold the HTML markup
-									var x;
-									// make sure we have data and it is valid
-									if(data && data.valid){
-										// grab the profile data
-										var review = data.reviewMeta;
-										if(review){
-											// setup the variables that the template will need
-											var templateData = {
-												moreUrl:	review.moreUrl
-											};
-											// build the HTML markup using {{var-name}} for the template variables
-											var template = [
-												'<div class="ds-comments-more ds-comments-more-placeholder">',
-													'<a href="#" class="ds-comments-more-link" data-more-comments-url="{{moreUrl}}">View More</a>',
-													'<span class="ds-comments-more-loading" style="display:none;">Loading...</span>',
-												'</div>'
-											].join('');
-											// apply the variables to the template
-											x = ctx.tmpl(template, templateData);
+							<div class="view-more text-center mt-8 mt-sm-10">
+								<button class="btn btn-secondary" data-toggle="modal" data-target="#MoreReviews" aria-label="View more individual reviews">View More</button>
+							</div>
+							<!-- Modal -->
+							<div class="modal fade" id="MoreReviews" tabindex="-1" role="dialog" aria-labelledby="more-reviews-title" aria-modal="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="more-reviews-title">More Reviews</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<div class="ds-comments" data-ds-pagesize="10"></div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									</div>
+									</div>
+								</div>
+							</div>
+							<script>
+								/* Custom HTML for the paging controls for the comments list */
+								window.DS_OPT = {
+									buildCommentsLoadMoreHTML: function(data, ctx){
+										// a variable to hold the HTML markup
+										var x;
+										// make sure we have data and it is valid
+										if(data && data.valid){
+											// grab the profile data
+											var review = data.reviewMeta;
+											if(review){
+												// setup the variables that the template will need
+												var templateData = {
+													moreUrl:	review.moreUrl
+												};
+												// build the HTML markup using {{var-name}} for the template variables
+												var template = [
+													'<div class="ds-comments-more ds-comments-more-placeholder">',
+														'<a href="#" class="ds-comments-more-link" data-more-comments-url="{{moreUrl}}">View More</a>',
+														'<span class="ds-comments-more-loading" style="display:none;">Loading...</span>',
+													'</div>'
+												].join('');
+												// apply the variables to the template
+												x = ctx.tmpl(template, templateData);
+											}
 										}
+										return x;
 									}
-									return x;
-								}
-							};
-						</script>
-						<script src="https://transparency.nrchealth.com/widget/v3/uams/npi/<?php echo $npi; ?>/lotw.js" async></script>
-						<?php // endif; ?>
+								};
+							</script>
+							<script src="https://transparency.nrchealth.com/widget/v3/uams/npi/<?php echo $npi; ?>/lotw.js" async></script>
+							<?php // endif; ?>
+						</div>
 					</div>
 				</div>
-			</div>
-		</section>
+			</section>
 		<?php } // endif ( $ratings_section_show ) ?>
 		<!-- <section class="uams-module news-list bg-auto" id="news">
 			<div class="container-fluid"
@@ -1258,7 +1326,8 @@ while ( have_posts() ) : the_post();
 				</div>
 			</div>
 		</section> -->
-		<?php if (
+		<?php
+		if (
 			$appointment_section_show && 
 			( 
 				$clinical_bio_section_show
@@ -1277,39 +1346,35 @@ while ( have_posts() ) : the_post();
 		} ?>
 	</main>
 </div>
-
-<?php // Schema Data ?>
+<?php
+// Schema Data ?>
 <script type='application/ld+json'>
 {
-  "@context": "http://www.schema.org",
-  "@type": "Physician",
-  "name": "<?php echo $full_name_attr; ?>",
-  "url": "<?php echo get_permalink(); ?>",
-  "logo": "<?php echo get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png'; ?>",
-  "image": "<?php echo $docphoto; ?>",
-  "description": "<?php echo $schema_description; ?>"
-  <?php 
-		if ($condition_schema || $treatment_schema) {
-			echo ',';
-			echo '"medicalSpecialty": [';
-			echo $condition_schema;
-			echo $treatment_schema;
-			echo ']';
-		}
-	echo $location_schema; ?>
-  <?php if ( $rating_valid ){ ?>
-,
-  "aggregateRating": {
-	"@type": "AggregateRating",
-	"ratingValue": "<?php echo $avg_rating; ?>",
-	"ratingCount": "<?php echo $review_count; ?>"
-	<?php echo ($comment_count  && '0' != $comment_count) ? ',
-"reviewCount": "'. $comment_count . '"' : ''; ?>
-   }
-  <?php } ?>
+	"@context": "http://www.schema.org",
+	"@type": "Physician",
+	"name": "<?php echo $full_name_attr; ?>",
+	"url": "<?php echo get_permalink(); ?>",
+	"logo": "<?php echo get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png'; ?>",
+	"image": "<?php echo $docphoto; ?>",
+	"description": "<?php echo $schema_description; ?>"<?php 
+	if ($condition_schema || $treatment_schema) { ?>,
+	"medicalSpecialty": [<?php echo $condition_schema; ?><?php echo $treatment_schema; ?>
+
+	]
+	<?php }
+	echo $location_schema;
+	if ( $rating_valid ) { ?>,
+	"aggregateRating": {
+		"@type": "AggregateRating",
+		"ratingValue": "<?php echo $avg_rating; ?>",
+		"ratingCount": "<?php echo $review_count; ?>"<?php
+		echo ($comment_count  && '0' != $comment_count) ? ',
+		"reviewCount": "'. $comment_count . '"' : ''; ?>
+	}<?php
+	} // endif ( $rating_valid ) ?>
 }
- </script>
+</script>
+<?php
+endwhile; // end of the loop.
 
-<?php endwhile; // end of the loop. ?>
-
-<?php get_footer(); ?>
+get_footer(); ?>
