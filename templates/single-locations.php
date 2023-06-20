@@ -508,7 +508,6 @@ while ( have_posts() ) : the_post(); ?>
 
 		// Check if Conditions section should be displayed
 		// load all 'conditions' terms for the post
-		$title_append = ' at ' . $page_title_phrase;
 		$conditions_cpt = get_field('location_conditions_cpt');
 		$condition_schema = '';
 		// Conditions CPT

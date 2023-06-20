@@ -376,8 +376,6 @@ while ( have_posts() ) : the_post();
 	if ($additional_info && !empty($additional_info)) { $provider_field_classes = $provider_field_classes . ' has-additional-info'; }
 	if ($resident && !empty($resident)) { $provider_field_classes = $provider_field_classes . ' is-resident'; }
 
-	$title_append = ' by ' . $short_name;
-
 	// Set Conditions variables
 	$args = (array(
 		'post_type' => 'condition',

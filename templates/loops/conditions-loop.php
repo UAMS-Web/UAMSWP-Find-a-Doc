@@ -16,7 +16,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12">
-				<h2 class="module-title"><span class="title"><?php echo $conditions_plural_name; ?> Treated<?php //echo $title_append; ?></span></h2>
+				<h2 class="module-title"><span class="title"><?php echo $conditions_plural_name; ?> Treated</span></h2>
 				<p class="note">UAMS Health <?php echo strtolower($provider_plural_name); ?> care for a broad range of <?php echo strtolower($conditions_plural_name); ?>, some of which may not be listed below.</p>
 				<div class="list-container list-container-rows">
 					<ul class="list">
