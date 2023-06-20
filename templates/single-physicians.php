@@ -126,6 +126,10 @@ uamswp_fad_fpage_text_provider();
 // Get system settings for jump links (a.k.a. anchor links)
 uamswp_fad_labels_jump_links();
 
+// Set logic for displaying jump links and sections
+$jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
+$jump_link_count = 0;
+
 // Get resident values
 $resident = get_field('physician_resident',$post->ID);
 $resident_title_name = 'Resident Physician';
@@ -400,10 +404,6 @@ while ( have_posts() ) : the_post();
 		}
 	}
 	if ($rating_valid) { $provider_field_classes = $provider_field_classes . ' has-ratings'; }
-
-	// Set logic for displaying jump links and sections
-	$jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
-	$jump_link_count = 0;
 
 		// Check if Make an Appointment section should be displayed
 		if ( $eligible_appt ) {
