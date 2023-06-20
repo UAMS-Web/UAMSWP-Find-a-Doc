@@ -314,7 +314,6 @@ while ( have_posts() ) : the_post();
 	$research_bio = get_field('physician_research_bio');
 	$research_interests = get_field('physician_research_interests');
 	$research_profiles_link = get_field('physician_research_profiles_link');
-	$podcast_name = get_field('physician_podcast_name');
 
 	// Query for whether related conditions content section should be displayed on ontology pages/subsections
 	$conditions = get_field('physician_conditions');
@@ -329,6 +328,10 @@ while ( have_posts() ) : the_post();
 	// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
 	$clinical_resources = get_field('physician_clinical_resources');
 	uamswp_fad_clinical_resource_query();
+
+	// Query for whether UAMS Health Talk podcast section should be displayed on ontology pages/subsections
+	$podcast_name = get_field('physician_podcast_name');
+	uamswp_fad_podcast_query();
 
 	// Classes for indicating presence of content
 	$provider_field_classes = '';
@@ -383,6 +386,7 @@ while ( have_posts() ) : the_post();
 	// Add one instance of a class (' has-empty-selected-pub-info') if there is an empty title field in any of the physician_awards rows.
 	if ($additional_info && !empty($additional_info)) { $provider_field_classes = $provider_field_classes . ' has-additional-info'; }
 	if ($resident && !empty($resident)) { $provider_field_classes = $provider_field_classes . ' is-resident'; }
+	if ($podcast_section_show) { $provider_field_classes = $provider_field_classes . ' has-podcast'; }
 
 	// Set Ratings variables
 	$rating_request = '';
@@ -422,14 +426,6 @@ while ( have_posts() ) : the_post();
 			$jump_link_count++;
 		} else {
 			$academic_section_show = false;
-		}
-
-		// Check if Podcast section should be displayed
-		$podcast_filter = 'doctor';
-		$podcast_subject = $short_name;
-		uamswp_fad_podcast_query();
-		if ( $podcast_section_show ) {
-			$jump_link_count++;
 		}
 
 		// Check if Clinical Resources section should be displayed
@@ -879,6 +875,8 @@ while ( have_posts() ) : the_post();
 		<?php } // endif
 
 		// Construct UAMS Health Talk podcast section
+		$podcast_filter = 'doctor';
+		$podcast_subject = $short_name;
 		uamswp_fad_podcast();
 
 		// Begin Clinical Resources Section

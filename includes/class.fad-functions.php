@@ -1846,17 +1846,19 @@ function uamswp_add_entry_class( $attributes ) {
 	return $attributes;
 }
 
-// Check if UAMS Health Talk podcast section should be displayed
+// Query for whether UAMS Health Talk podcast section should be displayed on ontology pages/subsections
 function uamswp_fad_podcast_query() {
 	// Bring in variables from outside of the function
 	global $podcast_name; // Typically defined on the template
+	global $jump_link_count; // Typically defined on the template
 
 	// Make variables available outside of the function
 	global $podcast_section_show;
 
 	// Check if podcast section should be displayed
-	if ($podcast_name) {
+	if ( $podcast_name ) {
 		$podcast_section_show = true;
+		$jump_link_count = $jump_link_count + 1;
 	} else {
 		$podcast_section_show = false;
 	}
