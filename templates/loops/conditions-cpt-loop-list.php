@@ -7,7 +7,7 @@
  * 
  * Required vars:
  * 	$provider_plural_name // System setting for Providers plural item name
- * 	$conditions_plural_name // System setting for Conditions plural item name
+ * 	$condition_plural_name // System setting for Conditions plural item name
  * 	$conditions_cpt_query
  * 	$condition_context = 'single-provider', 'single-location', 'single-condition', 'single-treatment', 'single-expertise', 'single-resource'
  * 	$condition_intro // Intro text
@@ -20,11 +20,11 @@
 // Condition heading: Set it if it does not already exist
 if ( !isset($condition_heading) || empty($condition_heading) ) {
 	if ( $condition_context == 'single-provider' ) {
-		$condition_heading = $condition_heading_related_name ? $conditions_plural_name . ' Diagnosed or Treated by ' . $condition_heading_related_name : $conditions_plural_name;
+		$condition_heading = $condition_heading_related_name ? $condition_plural_name . ' Diagnosed or Treated by ' . $condition_heading_related_name : $condition_plural_name;
 	} elseif ( $condition_context == 'single-location' ) {
-		$condition_heading = $condition_heading_related_name ? $conditions_plural_name . ' Diagnosed or Treated at ' . $condition_heading_related_name : $conditions_plural_name;
+		$condition_heading = $condition_heading_related_name ? $condition_plural_name . ' Diagnosed or Treated at ' . $condition_heading_related_name : $condition_plural_name;
 	} elseif ( $condition_context == 'single-condition' ) {
-		$condition_heading = $condition_heading_related_name ? $conditions_plural_name . ' Related to ' . $condition_heading_related_name : $conditions_plural_name;
+		$condition_heading = $condition_heading_related_name ? $condition_plural_name . ' Related to ' . $condition_heading_related_name : $condition_plural_name;
 	} elseif (
 		$condition_context == 'single-treatment'
 		||
@@ -32,9 +32,9 @@ if ( !isset($condition_heading) || empty($condition_heading) ) {
 		||
 		$condition_context == 'single-resource'
 	) {
-		$condition_heading = 'Related ' . $conditions_plural_name;
+		$condition_heading = 'Related ' . $condition_plural_name;
 	} else {
-		$condition_heading = $conditions_plural_name;
+		$condition_heading = $condition_plural_name;
 	}
 }
 
@@ -50,7 +50,7 @@ if (
 		$condition_context == 'single-condition'
 	)
 ) {
-	$condition_intro = 'UAMS Health ' . strtolower($provider_plural_name) . ' care for a broad range of ' . strtolower($conditions_plural_name) . ', some of which may not be listed below.';
+	$condition_intro = 'UAMS Health ' . strtolower($provider_plural_name) . ' care for a broad range of ' . strtolower($condition_plural_name) . ', some of which may not be listed below.';
 }
 ?>
 <section class="uams-module conditions-treatments bg-auto" id="conditions">

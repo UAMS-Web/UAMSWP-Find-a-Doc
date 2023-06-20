@@ -389,8 +389,8 @@ function uamswp_resource_conditions_cpt() {
 	global $condition_section_show; // Defined on the template
 	global $conditions_cpt_query; // Defined on the template
 	global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
-	global $conditions_single_name_attr; // Defined in uamswp_fad_labels_condition()
-	global $conditions_plural_name; // Defined in uamswp_fad_labels_condition()
+	global $condition_single_name_attr; // Defined in uamswp_fad_labels_condition()
+	global $condition_plural_name; // Defined in uamswp_fad_labels_condition()
 
 	$condition_context = 'single-resource';
 	$condition_heading_related_name = $page_title; // To what is it related?
@@ -407,8 +407,8 @@ function uamswp_resource_treatments_cpt() {
 	global $treatment_section_show; // Defined on the template
 	global $treatments_cpt_query; // Defined on the template
 	global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
-	global $treatments_single_name; // Defined in uamswp_fad_labels_treatment()
-	global $treatments_plural_name; // Defined in uamswp_fad_labels_treatment()
+	global $treatment_single_name; // Defined in uamswp_fad_labels_treatment()
+	global $treatment_plural_name; // Defined in uamswp_fad_labels_treatment()
 
 	$treatment_context = 'single-resource';
 	$treatment_heading_related_name = $page_title; // To what is it related?
@@ -434,10 +434,10 @@ function uamswp_resource_associated() {
 	global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
 	global $clinical_resource_single_name; // Defined in uamswp_fad_labels_clinical_resource()
 	global $clinical_resource_plural_name; // Defined in uamswp_fad_labels_clinical_resource()
-	global $conditions_single_name; // Defined in uamswp_fad_labels_condition()
-	global $conditions_plural_name; // Defined in uamswp_fad_labels_condition()
-	global $treatments_single_name; // Defined in uamswp_fad_labels_treatment()
-	global $treatments_plural_name; // Defined in uamswp_fad_labels_treatment()
+	global $condition_single_name; // Defined in uamswp_fad_labels_condition()
+	global $condition_plural_name; // Defined in uamswp_fad_labels_condition()
+	global $treatment_single_name; // Defined in uamswp_fad_labels_treatment()
+	global $treatment_plural_name; // Defined in uamswp_fad_labels_treatment()
 	global $clinical_resource_fpage_title_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
 	global $clinical_resource_fpage_intro_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
 
@@ -462,10 +462,10 @@ function uamswp_resource_jump_links() {
 	global $expertise_plural_name_attr; // Defined in uamswp_fad_labels_expertise()
 	global $clinical_resource_plural_name; // Defined in uamswp_fad_labels_clinical_resource()
 	global $clinical_resource_plural_name_attr; // Defined in uamswp_fad_labels_clinical_resource()
-	global $conditions_plural_name; // Defined in uamswp_fad_labels_condition()
-	global $conditions_plural_name_attr; // Defined in uamswp_fad_labels_condition()
-	global $treatments_plural_name; // Defined in uamswp_fad_labels_treatment()
-	global $treatments_plural_name_attr; // Defined in uamswp_fad_labels_treatment()
+	global $condition_plural_name; // Defined in uamswp_fad_labels_condition()
+	global $condition_plural_name_attr; // Defined in uamswp_fad_labels_condition()
+	global $treatment_plural_name; // Defined in uamswp_fad_labels_treatment()
+	global $treatment_plural_name_attr; // Defined in uamswp_fad_labels_treatment()
 	global $fad_jump_links_title; // Defined in uamswp_fad_labels_jump_links()
 	global $page_title; // Defined on the template
 	global $clinical_resource_section_show; // Defined on the template
@@ -493,12 +493,12 @@ function uamswp_resource_jump_links() {
 					<?php } ?>
 					<?php if ( $condition_section_show ) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#conditions" title="Jump to the section of this page about related <?php echo $conditions_plural_name_attr; ?>"><?php echo $conditions_plural_name; ?></a>
+							<a class="nav-link" href="#conditions" title="Jump to the section of this page about related <?php echo $condition_plural_name_attr; ?>"><?php echo $condition_plural_name; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ( $treatment_section_show ) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#treatments" title="Jump to the section of this page about related <?php echo $treatments_plural_name_attr; ?>"><?php echo $treatments_plural_name; ?></a>
+							<a class="nav-link" href="#treatments" title="Jump to the section of this page about related <?php echo $treatment_plural_name_attr; ?>"><?php echo $treatment_plural_name; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ( $provider_section_show ) { ?>

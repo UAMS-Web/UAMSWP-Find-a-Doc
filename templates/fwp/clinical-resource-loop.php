@@ -13,10 +13,10 @@ global $expertise_single_name; // Defined in uamswp_fad_labels_expertise()
 global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
 global $clinical_resource_single_name; // Defined in uamswp_fad_labels_clinical_resource()
 global $clinical_resource_plural_name; // Defined in uamswp_fad_labels_clinical_resource()
-global $conditions_single_name; // Defined in uamswp_fad_labels_condition()
-global $conditions_plural_name; // Defined in uamswp_fad_labels_condition()
-global $treatments_single_name; // Defined in uamswp_fad_labels_treatment()
-global $treatments_plural_name; // Defined in uamswp_fad_labels_treatment()
+global $condition_single_name; // Defined in uamswp_fad_labels_condition()
+global $condition_plural_name; // Defined in uamswp_fad_labels_condition()
+global $treatment_single_name; // Defined in uamswp_fad_labels_treatment()
+global $treatment_plural_name; // Defined in uamswp_fad_labels_treatment()
 
 if ( have_posts() ) : while ( have_posts() ) : the_post();
 

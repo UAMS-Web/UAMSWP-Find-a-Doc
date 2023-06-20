@@ -32,10 +32,10 @@ uamswp_fad_labels_treatment();
 
 // Get system settings for Treatments Archive Page
 uamswp_fad_archive_treatment();
-// $treatments_archive_link = get_post_type_archive_link( get_query_var('post_type') );
+// $treatment_archive_link = get_post_type_archive_link( get_query_var('post_type') );
 
 // Override theme's method of defining the meta page title
-$meta_title_base_addition = $treatments_plural_name_attr; // Word or phrase to use to form base meta title
+$meta_title_base_addition = $treatment_plural_name_attr; // Word or phrase to use to form base meta title
 uamswp_fad_title_vars(); // Defines universal variables related to the setting the meta title
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
@@ -45,15 +45,15 @@ get_header(); ?>
 	<main id="genesis-content">
 		<article class="entry">
 			<header class="entry-header">
-				<h1 class="entry-title" itemprop="headline"><?php echo $treatments_archive_headline; ?></h1>
+				<h1 class="entry-title" itemprop="headline"><?php echo $treatment_archive_headline; ?></h1>
 			</header>
-			<?php echo ($treatments_archive_intro_text ? '<div class="entry-content clearfix" itemprop="text">' . $treatments_archive_intro_text . '</div>' : '' ); ?>
+			<?php echo ($treatment_archive_intro_text ? '<div class="entry-content clearfix" itemprop="text">' . $treatment_archive_intro_text . '</div>' : '' ); ?>
 		</article>
 		<section class="uams-module conditions-treatments">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<h2 class="module-title sr-only">List of <?php echo $treatments_plural_name; ?></h2>
+						<h2 class="module-title sr-only">List of <?php echo $treatment_plural_name; ?></h2>
 							<?php
 							// if show all is set
 							$taxonomy = 'treatment';
@@ -97,85 +97,85 @@ get_header(); ?>
 										<a class="az-filter-label" href="<?php echo get_permalink(); ?>" <?php echo ($_GET['alpha']) ? 'aria-selected="false"' : 'aria-selected="true"'; ?> aria-label="Remove any filter"><span aria-hidden="true">All</span></a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=0" <?php echo ('0' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with a number"><span aria-hidden="true">#</span></a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=0" <?php echo ('0' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with a number"><span aria-hidden="true">#</span></a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=a" <?php echo ('a' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter A">A</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=a" <?php echo ('a' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter A">A</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=b" <?php echo ('b' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter B">B</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=b" <?php echo ('b' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter B">B</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=c" <?php echo ('c' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter C">C</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=c" <?php echo ('c' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter C">C</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=d" <?php echo ('d' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter D">D</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=d" <?php echo ('d' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter D">D</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=e" <?php echo ('e' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter E">E</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=e" <?php echo ('e' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter E">E</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=f" <?php echo ('f' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter F">F</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=f" <?php echo ('f' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter F">F</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=g" <?php echo ('g' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter G">G</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=g" <?php echo ('g' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter G">G</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=h" <?php echo ('h' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter H">H</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=h" <?php echo ('h' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter H">H</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=i" <?php echo ('i' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter I">I</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=i" <?php echo ('i' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter I">I</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=j" <?php echo ('j' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter J">J</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=j" <?php echo ('j' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter J">J</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=k" <?php echo ('k' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter K">K</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=k" <?php echo ('k' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter K">K</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=l" <?php echo ('l' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter L">L</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=l" <?php echo ('l' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter L">L</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=m" <?php echo ('m' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter M">M</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=m" <?php echo ('m' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter M">M</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=n" <?php echo ('n' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter N">N</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=n" <?php echo ('n' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter N">N</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=o" <?php echo ('o' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter O">O</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=o" <?php echo ('o' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter O">O</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=p" <?php echo ('p' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter P">P</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=p" <?php echo ('p' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter P">P</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=q" <?php echo ('q' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter Q">Q</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=q" <?php echo ('q' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter Q">Q</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=r" <?php echo ('r' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter R">R</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=r" <?php echo ('r' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter R">R</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=s" <?php echo ('s' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter S">S</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=s" <?php echo ('s' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter S">S</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=t" <?php echo ('t' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter T">T</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=t" <?php echo ('t' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter T">T</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=u" <?php echo ('u' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter U">U</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=u" <?php echo ('u' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter U">U</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=v" <?php echo ('v' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter V">V</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=v" <?php echo ('v' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter V">V</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=w" <?php echo ('w' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter W">W</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=w" <?php echo ('w' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter W">W</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=x" <?php echo ('x' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter X">X</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=x" <?php echo ('x' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter X">X</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=y" <?php echo ('y' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter Y">Y</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=y" <?php echo ('y' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter Y">Y</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=z" <?php echo ('z' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatments_plural_name_attr); ?> that begin with the letter Z">Z</a>
+										<a class="az-filter-label" href="<?php echo get_permalink(); ?>?alpha=z" <?php echo ('z' == $_GET['alpha']) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($treatment_plural_name_attr); ?> that begin with the letter Z">Z</a>
 									</div>
 								</div>
 							</div>
@@ -194,7 +194,7 @@ get_header(); ?>
 
 							} else {
 
-								echo '<p class="text-center content-width">No <?php echo strtolower($treatments_plural_name); ?> meet your criteria.</p>';
+								echo '<p class="text-center content-width">No <?php echo strtolower($treatment_plural_name); ?> meet your criteria.</p>';
 
 							}
 

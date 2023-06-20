@@ -47,7 +47,7 @@ $keywords = get_field('condition_alternate');
 add_action('wp_head','uamswp_keyword_hook_header');
 
 // Override theme's method of defining the meta page title
-$meta_title_enhanced_addition = $conditions_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
+$meta_title_enhanced_addition = $condition_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
 uamswp_fad_title_vars(); // Defines universal variables related to the setting the meta title
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
@@ -218,7 +218,7 @@ $jump_link_count = 0;
 	<main id="genesis-content" class="condition-item<?php echo $condition_field_classes; ?>">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
-				<h1 class="entry-title" itemprop="headline"><span class="supertitle"><?php echo $conditions_single_name; ?></span><span class="sr-only">: </span><?php echo $page_title; ?></h1>
+				<h1 class="entry-title" itemprop="headline"><span class="supertitle"><?php echo $condition_single_name; ?></span><span class="sr-only">: </span><?php echo $page_title; ?></h1>
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
 				<?php 
@@ -368,7 +368,7 @@ $jump_link_count = 0;
 						<?php } ?>
 						<?php if ( $treatment_section_show ) { ?>
 							<li class="nav-item">
-								<a class="nav-link" href="#treatments" title="Jump to the section of this page about <?php echo $treatments_plural_name_attr; ?>"><?php echo $treatments_plural_name; ?></a>
+								<a class="nav-link" href="#treatments" title="Jump to the section of this page about <?php echo $treatment_plural_name_attr; ?>"><?php echo $treatment_plural_name; ?></a>
 							</li>
 						<?php } ?>
 						<?php if ( $provider_section_show ) { ?>
@@ -428,8 +428,8 @@ $jump_link_count = 0;
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-xs-12">
-							<h2 class="module-title"><span class="title"><?php echo $treatments_plural_name; ?> Related to <?php echo $page_title; ?></span></h2>
-							<p class="note">UAMS Health <?php echo strtolower($provider_plural_name); ?> perform and prescribe a broad range of <?php echo strtolower($treatments_plural_name); ?>, some of which may not be listed below.</p>
+							<h2 class="module-title"><span class="title"><?php echo $treatment_plural_name; ?> Related to <?php echo $page_title; ?></span></h2>
+							<p class="note">UAMS Health <?php echo strtolower($provider_plural_name); ?> perform and prescribe a broad range of <?php echo strtolower($treatment_plural_name); ?>, some of which may not be listed below.</p>
 							<div class="list-container list-container-rows">
 								<ul class="list">
 								<?php while ($treatments_query_cpt->have_posts()) : $treatments_query_cpt->the_post();
@@ -439,7 +439,7 @@ $jump_link_count = 0;
 									$treatment_title_attr = uamswp_attr_conversion($treatment_title);
 								?>
 									<li>
-										<a href="<?php echo $treatment_permalink; ?>" aria-label="Go to <?php echo $treatments_single_name_attr; ?> page for <?php echo $treatment_title_attr; ?>" class="btn btn-outline-primary"><?php echo $treatment_title; ?></a>
+										<a href="<?php echo $treatment_permalink; ?>" aria-label="Go to <?php echo $treatment_single_name_attr; ?> page for <?php echo $treatment_title_attr; ?>" class="btn btn-outline-primary"><?php echo $treatment_title; ?></a>
 									</li>
 								<?php endwhile;
 										wp_reset_postdata(); ?>
@@ -454,7 +454,7 @@ $jump_link_count = 0;
 
 		// Begin Providers Section
 		$provider_section_title = $provider_plural_name . ' Diagnosing or Treating ' . $page_title; // Text to use for the section title
-		$provider_section_intro = 'Note that every ' . strtolower($provider_single_name) . ' listed below may not perform or prescribe all ' . strtolower($treatments_plural_name) . ' related to ' . $page_title . '. Review each ' . strtolower($provider_single_name) . ' for&nbsp;availability.'; // Text to use for the section intro text
+		$provider_section_intro = 'Note that every ' . strtolower($provider_single_name) . ' listed below may not perform or prescribe all ' . strtolower($treatment_plural_name) . ' related to ' . $page_title . '. Review each ' . strtolower($provider_single_name) . ' for&nbsp;availability.'; // Text to use for the section intro text
 		uamswp_fad_section_provider();
 		// End Providers Section
 

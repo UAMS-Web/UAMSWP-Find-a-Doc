@@ -7,16 +7,16 @@
  * 
  * Required var:
  * 	$provider_plural_name // System setting for Providers plural item name
- * 	$treatments_single_name_attr // Attribute value friendly version of system setting for Treatments single item name
- * 	$treatments_plural_name // System setting for Treatments plural item name
+ * 	$treatment_single_name_attr // Attribute value friendly version of system setting for Treatments single item name
+ * 	$treatment_plural_name // System setting for Treatments plural item name
  * 	$treatments_cpt_query
  * 	$treatment_context = 'single-provider', 'single-location', 'single-condition', 'single-treatment', 'single-expertise', 'single-resource'
  * 	$treatment_heading_related_name
  */
 
-$treatment_heading = $treatments_plural_name;
+$treatment_heading = $treatment_plural_name;
 $treatment_disclaimer = false;
-$treatment_disclaimer_text = 'UAMS Health ' . strtolower($provider_plural_name) . ' perform and prescribe a broad range of ' . strtolower($treatments_plural_name) . ', some of which may not be listed below.';
+$treatment_disclaimer_text = 'UAMS Health ' . strtolower($provider_plural_name) . ' perform and prescribe a broad range of ' . strtolower($treatment_plural_name) . ', some of which may not be listed below.';
 
 if ( $treatment_context == 'single-provider' ) {
 	$treatment_heading = $treatment_heading . ' Performed or Prescribed by ' . $treatment_heading_related_name;
@@ -48,7 +48,7 @@ if ( $treatment_context == 'single-provider' ) {
 					<ul class="list">
 					<?php foreach( $treatments_cpt_query->posts as $treatment ): ?>
 						<li>
-							<a href="<?php echo get_the_permalink( $treatment->ID ); ?>" aria-label="Go to <?php echo $treatments_single_name_attr; ?> page for <?php echo $treatment->post_title; ?>" class="btn btn-outline-primary"><?php echo $treatment->post_title; ?></a>
+							<a href="<?php echo get_the_permalink( $treatment->ID ); ?>" aria-label="Go to <?php echo $treatment_single_name_attr; ?> page for <?php echo $treatment->post_title; ?>" class="btn btn-outline-primary"><?php echo $treatment->post_title; ?></a>
 						</li>
 					<?php endforeach; ?>
 					</ul>

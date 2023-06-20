@@ -1035,12 +1035,12 @@ while ( have_posts() ) : the_post(); ?>
 					<?php } ?>
 					<?php if ( $condition_section_show ) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#conditions" title="Jump to the section of this page about <?php echo $conditions_plural_name_attr; ?>"><?php echo $conditions_plural_name; ?></a>
+							<a class="nav-link" href="#conditions" title="Jump to the section of this page about <?php echo $condition_plural_name_attr; ?>"><?php echo $condition_plural_name; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ( $treatment_section_show ) { ?>
 						<li class="nav-item">
-							<a class="nav-link" href="#treatments" title="Jump to the section of this page about <?php echo strtolower($treatments_plural_name_attr); ?>"><?php echo $treatments_plural_name; ?></a>
+							<a class="nav-link" href="#treatments" title="Jump to the section of this page about <?php echo strtolower($treatment_plural_name_attr); ?>"><?php echo $treatment_plural_name; ?></a>
 						</li>
 					<?php } ?>
 					<?php if ( $expertise_section_show ) { ?>

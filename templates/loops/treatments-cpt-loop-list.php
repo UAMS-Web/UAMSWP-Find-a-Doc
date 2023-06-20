@@ -7,7 +7,7 @@
  * 
  * Required vars:
  * 	$provider_plural_name // System setting for Providers plural item name
- * 	$treatments_plural_name // System setting for Treatments plural item name
+ * 	$treatment_plural_name // System setting for Treatments plural item name
  * 	$treatments_cpt_query
  * 	$treatment_context = 'single-provider', 'single-location', 'single-condition', 'single-treatment', 'single-expertise', 'single-resource'
  * 	$treatment_intro // Intro text
@@ -20,11 +20,11 @@
 // Treatment heading: Set it if it does not already exist
 if ( !isset($treatment_heading) || empty($treatment_heading) ) {
 	if ( $treatment_context == 'single-provider' ) {
-		$treatment_heading = $treatment_heading_related_name ? $treatments_plural_name . ' Performed or Prescribed by ' . $treatment_heading_related_name : $treatments_plural_name;
+		$treatment_heading = $treatment_heading_related_name ? $treatment_plural_name . ' Performed or Prescribed by ' . $treatment_heading_related_name : $treatment_plural_name;
 	} elseif ( $treatment_context == 'single-location' ) {
-		$treatment_heading = $treatment_heading_related_name ? $treatments_plural_name . ' Performed or Prescribed at ' . $treatment_heading_related_name : $treatments_plural_name;
+		$treatment_heading = $treatment_heading_related_name ? $treatment_plural_name . ' Performed or Prescribed at ' . $treatment_heading_related_name : $treatment_plural_name;
 	} elseif ( $treatment_context == 'single-condition' ) {
-		$treatment_heading = $treatment_heading_related_name ? $treatments_plural_name . ' Related to ' . $treatment_heading_related_name : $treatments_plural_name;
+		$treatment_heading = $treatment_heading_related_name ? $treatment_plural_name . ' Related to ' . $treatment_heading_related_name : $treatment_plural_name;
 	} elseif (
 		$treatment_context == 'single-treatment'
 		||
@@ -32,9 +32,9 @@ if ( !isset($treatment_heading) || empty($treatment_heading) ) {
 		||
 		$treatment_context == 'single-resource'
 	) {
-		$treatment_heading = 'Related ' . $treatments_plural_name;
+		$treatment_heading = 'Related ' . $treatment_plural_name;
 	} else {
-		$treatment_heading = $treatments_plural_name;
+		$treatment_heading = $treatment_plural_name;
 	}
 }
 

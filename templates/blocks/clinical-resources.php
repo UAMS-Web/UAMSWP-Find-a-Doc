@@ -12,10 +12,10 @@
  * 	$expertise_plural_name // System setting for Areas of Expertise plural item name
  * 	$clinical_resource_single_name // System setting for Clinical Resources single item name
  * 	$clinical_resource_plural_name // System setting for Clinical Resources Plural Item Name
- * 	$conditions_single_name // System setting for Conditions single item name
- * 	$conditions_plural_name // System setting for Conditions plural item name
- * 	$treatments_single_name // System setting for Treatments single item name
- * 	$treatments_plural_name // System setting for Treatments plural item name
+ * 	$condition_single_name // System setting for Conditions single item name
+ * 	$condition_plural_name // System setting for Conditions plural item name
+ * 	$treatment_single_name // System setting for Treatments single item name
+ * 	$treatment_plural_name // System setting for Treatments plural item name
  * 	$clinical_resources
  * 	$clinical_resource_query
  * 	$resource_postsPerPage

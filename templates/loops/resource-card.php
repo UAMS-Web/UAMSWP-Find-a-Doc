@@ -13,10 +13,10 @@
  * 	$expertise_single_name // System setting for Areas of Expertise single item name
  * 	$expertise_plural_name // System setting for Areas of Expertise plural item name
  * 	$clinical_resource_single_name // System setting for Clinical Resources single item name
- * 	$conditions_single_name // System setting for Conditions single item name
- * 	$conditions_plural_name // System setting for Conditions plural item name
- * 	$treatments_single_name // System setting for Treatments single item name
- * 	$treatments_plural_name // System setting for Treatments plural item name
+ * 	$condition_single_name // System setting for Conditions single item name
+ * 	$condition_plural_name // System setting for Conditions plural item name
+ * 	$treatment_single_name // System setting for Treatments single item name
+ * 	$treatment_plural_name // System setting for Treatments plural item name
  * 	$id
  * 
  * Optional var:
@@ -125,7 +125,7 @@ if ( !empty($resource_conditions) ) {
 		} // endif
 	} // endforeach;
 	$resource_condition = '';
-	$resource_condition_label = $resource_condition_count > 1 ? $conditions_plural_name : $conditions_single_name;
+	$resource_condition_label = $resource_condition_count > 1 ? $condition_plural_name : $condition_single_name;
 }
 
 // Check for valid treatments
@@ -147,7 +147,7 @@ if ( !empty($resource_treatments) ) {
 		} // endif
 	} // endforeach;
 	$resource_treatment = '';
-	$resource_treatment_label = $resource_treatment_count > 1 ? $treatments_plural_name : $treatments_single_name;
+	$resource_treatment_label = $resource_treatment_count > 1 ? $treatment_plural_name : $treatment_single_name;
 }
 
 // Check for valid areas of expertise

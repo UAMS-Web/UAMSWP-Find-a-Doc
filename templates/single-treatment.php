@@ -47,7 +47,7 @@ $keywords = get_field('treatment_procedure_alternate');
 add_action('wp_head','uamswp_keyword_hook_header');
 
 // Override theme's method of defining the meta page title
-$meta_title_enhanced_addition = $treatments_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title
+$meta_title_enhanced_addition = $treatment_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title
 uamswp_fad_title_vars(); // Defines universal variables related to the setting the meta title
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
@@ -190,7 +190,7 @@ $jump_link_count = 0;
 	<main id="genesis-content" class="treatment-item<?php echo $treatment_field_classes; ?>">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
-				<h1 class="entry-title"><span class="supertitle"><?php echo $treatments_single_name; ?></span><span class="sr-only">: </span><?php echo $page_title; ?></h1>
+				<h1 class="entry-title"><span class="supertitle"><?php echo $treatment_single_name; ?></span><span class="sr-only">: </span><?php echo $page_title; ?></h1>
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
 				<?php
@@ -341,7 +341,7 @@ $jump_link_count = 0;
 						<?php } ?>
 						<?php if ( $condition_section_show ) { ?>
 							<li class="nav-item">
-								<a class="nav-link" href="#conditions" title="Jump to the section of this page about <?php echo $conditions_plural_name_attr; ?>"><?php echo $conditions_plural_name; ?></a>
+								<a class="nav-link" href="#conditions" title="Jump to the section of this page about <?php echo $condition_plural_name_attr; ?>"><?php echo $condition_plural_name; ?></a>
 							</li>
 						<?php } ?>
 						<?php if ( $provider_section_show ) { ?>
@@ -394,14 +394,14 @@ $jump_link_count = 0;
 		// End Clinical Trials Section
 
 		// Begin Conditions Section
-		$condition_section_title = $conditions_plural_name . ' Related to ' . $page_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for condition section title in a general placement)
+		$condition_section_title = $condition_plural_name . ' Related to ' . $page_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for condition section title in a general placement)
 		$condition_section_intro = $condition_fpage_intro_general; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
 		uamswp_fad_section_condition();
 		// End Conditions Section	
 
 		// Begin Providers Section
 		$provider_section_title = $provider_plural_name . ' Performing or Prescribing ' . $page_title;// Text to use for the section title
-		$provider_section_intro = 'Note that every ' . strtolower($provider_single_name) . ' listed below may not perform or prescribe ' . $page_title . ' for all ' . strtolower($conditions_plural_name) . ' related to it. Review each ' . strtolower($provider_single_name) . ' for&nbsp;availability.'; // Text to use for the section intro text
+		$provider_section_intro = 'Note that every ' . strtolower($provider_single_name) . ' listed below may not perform or prescribe ' . $page_title . ' for all ' . strtolower($condition_plural_name) . ' related to it. Review each ' . strtolower($provider_single_name) . ' for&nbsp;availability.'; // Text to use for the section intro text
 		uamswp_fad_section_provider();
 		// End Providers Section
 

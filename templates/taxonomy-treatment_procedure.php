@@ -59,7 +59,7 @@ else {
 add_action('wp_head','uamswp_keyword_hook_header');
 
 // Override theme's method of defining the meta page title
-$meta_title_enhanced_addition = $treatments_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title
+$meta_title_enhanced_addition = $treatment_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title
 uamswp_fad_title_vars(); // Defines universal variables related to the setting the meta title
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
@@ -142,7 +142,7 @@ if ($providers && !empty($providers)) { $treatment_field_classes .= ' has-provid
 	<main id="genesis-content" class="treatment-item<?php echo $treatment_field_classes; ?>">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
-				<h1 class="entry-title"><span class="supertitle"><?php echo $treatments_single_name; ?></span><span class="sr-only">: </span><?php echo $page_title; ?></h1>
+				<h1 class="entry-title"><span class="supertitle"><?php echo $treatment_single_name; ?></span><span class="sr-only">: </span><?php echo $page_title; ?></h1>
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
 				<?php
@@ -257,7 +257,7 @@ if ($providers && !empty($providers)) { $treatment_field_classes .= ' has-provid
 					<div class="row">
 						<div class="col-12">
 							<h2 class="module-title"><span class="title"><?php echo $provider_plural_name; ?> Performing or Prescribing <?php echo $page_title; ?></span></h2>
-							<p class="note">Note that every <?php echo strtolower($provider_single_name); ?> listed below may not perform or prescribe <?php echo $page_title; ?> for all <?php echo strtolower($conditions_plural_name); ?> related to it. Review each <?php echo strtolower($provider_single_name); ?> for availability.</p>
+							<p class="note">Note that every <?php echo strtolower($provider_single_name); ?> listed below may not perform or prescribe <?php echo $page_title; ?> for all <?php echo strtolower($condition_plural_name); ?> related to it. Review each <?php echo strtolower($provider_single_name); ?> for availability.</p>
 							<div class="card-list-container">
 								<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
 									<?php

@@ -2251,42 +2251,42 @@ function uamswp_fad_podcast() {
 	// Get system settings for combined conditions and treatments labels
 	function uamswp_fad_labels_condition_treatment() {
 		// Make variables available outside of the function
-		global $conditions_treatments_single_name;
-		global $conditions_treatments_single_name_attr;
-		global $conditions_treatments_plural_name;
-		global $conditions_treatments_plural_name_attr;
-		global $placeholder_conditions_treatments_single_name;
-		global $placeholder_conditions_treatments_plural_name;
+		global $condition_treatment_single_name;
+		global $condition_treatment_single_name_attr;
+		global $condition_treatment_plural_name;
+		global $condition_treatment_plural_name_attr;
+		global $placeholder_condition_treatment_single_name;
+		global $placeholder_condition_treatment_plural_name;
 
-		$conditions_treatments_single_name = get_field('conditions_treatments_single_name', 'option') ?: 'Condition or Treatment';
-		$conditions_treatments_single_name_attr = uamswp_attr_conversion($conditions_treatments_single_name);
-		$conditions_treatments_plural_name = get_field('conditions_treatments_plural_name', 'option') ?: 'Conditions and Treatments';
-		$conditions_treatments_plural_name_attr = uamswp_attr_conversion($conditions_treatments_plural_name);
+		$condition_treatment_single_name = get_field('conditions_treatments_single_name', 'option') ?: 'Condition or Treatment';
+		$condition_treatment_single_name_attr = uamswp_attr_conversion($condition_treatment_single_name);
+		$condition_treatment_plural_name = get_field('conditions_treatments_plural_name', 'option') ?: 'Conditions and Treatments';
+		$condition_treatment_plural_name_attr = uamswp_attr_conversion($condition_treatment_plural_name);
 
 		// Define string used to find and replace with values from Find-a-Doc Settings
-		$placeholder_conditions_treatments_single_name = '[Condition or Treatment]';
-		$placeholder_conditions_treatments_plural_name = '[Conditions and Treatments]';
+		$placeholder_condition_treatment_single_name = '[Condition or Treatment]';
+		$placeholder_condition_treatment_plural_name = '[Conditions and Treatments]';
 	}
 
 	// Get system settings for condition labels
 	function uamswp_fad_labels_condition() {
 		// Make variables available outside of the function
-		global $conditions_single_name;
-		global $conditions_single_name_attr;
-		global $conditions_plural_name;
-		global $conditions_plural_name_attr;
-		global $placeholder_conditions_single_name;
-		global $placeholder_conditions_plural_name;
+		global $condition_single_name;
+		global $condition_single_name_attr;
+		global $condition_plural_name;
+		global $condition_plural_name_attr;
+		global $placeholder_condition_single_name;
+		global $placeholder_condition_plural_name;
 		global $facet_labels;
 
-		$conditions_single_name = get_field('conditions_single_name', 'option') ?: 'Condition';
-		$conditions_single_name_attr = uamswp_attr_conversion($conditions_single_name);
-		$conditions_plural_name = get_field('conditions_plural_name', 'option') ?: 'Conditions';
-		$conditions_plural_name_attr = uamswp_attr_conversion($conditions_plural_name);
+		$condition_single_name = get_field('conditions_single_name', 'option') ?: 'Condition';
+		$condition_single_name_attr = uamswp_attr_conversion($condition_single_name);
+		$condition_plural_name = get_field('conditions_plural_name', 'option') ?: 'Conditions';
+		$condition_plural_name_attr = uamswp_attr_conversion($condition_plural_name);
 
 		// Define string used to find and replace with values from Find-a-Doc Settings
-		$placeholder_conditions_single_name = '[Condition]';
-		$placeholder_conditions_plural_name = '[Conditions]';
+		$placeholder_condition_single_name = '[Condition]';
+		$placeholder_condition_plural_name = '[Conditions]';
 
 		// Create array for pairing FacetWP name with label if none exists
 		if ( !isset($facet_labels) ) {
@@ -2294,51 +2294,51 @@ function uamswp_fad_podcast() {
 		}
 
 		// Add item to FacetWP labels array for Conditions facet on Providers archive/list
-		$facet_labels['conditions'] = $conditions_plural_name;
-		$facet_labels['conditions_attr'] = $conditions_plural_name_attr;
+		$facet_labels['conditions'] = $condition_plural_name;
+		$facet_labels['conditions_attr'] = $condition_plural_name_attr;
 
 		// Add item to FacetWP labels array for Conditions facet on Clinical Resources archive/list
-		$facet_labels['resource_conditions'] = $conditions_plural_name;
-		$facet_labels['resource_conditions_attr'] = $conditions_plural_name_attr;
+		$facet_labels['resource_conditions'] = $condition_plural_name;
+		$facet_labels['resource_conditions_attr'] = $condition_plural_name_attr;
 	}
 
 	// Get system settings for condition archive page text
 	function uamswp_fad_archive_condition() {
 		// Make variables available outside of the function
-		global $conditions_archive_headline;
-		global $conditions_archive_headline_attr;
-		global $conditions_archive_intro_text;
-		global $placeholder_conditions_archive_headline;
-		global $placeholder_conditions_archive_intro_text;
+		global $condition_archive_headline;
+		global $condition_archive_headline_attr;
+		global $condition_archive_intro_text;
+		global $placeholder_condition_archive_headline;
+		global $placeholder_condition_archive_intro_text;
 
-		$conditions_archive_headline = get_field('conditions_archive_headline', 'option') ?: 'Conditions';
-		$conditions_archive_headline_attr = uamswp_attr_conversion($conditions_archive_headline);
-		$conditions_archive_intro_text = get_field('conditions_archive_intro_text', 'option');
+		$condition_archive_headline = get_field('conditions_archive_headline', 'option') ?: 'Conditions';
+		$condition_archive_headline_attr = uamswp_attr_conversion($condition_archive_headline);
+		$condition_archive_intro_text = get_field('conditions_archive_intro_text', 'option');
 
 		// Define string used to find and replace with values from Find-a-Doc Settings
-		$placeholder_conditions_archive_headline = '[Condition Archive Title]';
-		$placeholder_conditions_archive_intro_text = '[Condition Archive Intro Text]';
+		$placeholder_condition_archive_headline = '[Condition Archive Title]';
+		$placeholder_condition_archive_intro_text = '[Condition Archive Intro Text]';
 	}
 
 	// Get system settings for treatment labels
 	function uamswp_fad_labels_treatment() {
 		// Make variables available outside of the function
-		global $treatments_single_name;
-		global $treatments_single_name_attr;
-		global $treatments_plural_name;
-		global $treatments_plural_name_attr;
-		global $placeholder_treatments_single_name;
-		global $placeholder_treatments_plural_name;
+		global $treatment_single_name;
+		global $treatment_single_name_attr;
+		global $treatment_plural_name;
+		global $treatment_plural_name_attr;
+		global $placeholder_treatment_single_name;
+		global $placeholder_treatment_plural_name;
 		global $facet_labels;
 
-		$treatments_single_name = get_field('treatments_single_name', 'option') ?: 'Treatment/Procedure';
-		$treatments_single_name_attr = uamswp_attr_conversion($treatments_single_name);
-		$treatments_plural_name = get_field('treatments_plural_name', 'option') ?: 'Treatments and Procedures';
-		$treatments_plural_name_attr = uamswp_attr_conversion($treatments_plural_name);
+		$treatment_single_name = get_field('treatments_single_name', 'option') ?: 'Treatment/Procedure';
+		$treatment_single_name_attr = uamswp_attr_conversion($treatment_single_name);
+		$treatment_plural_name = get_field('treatments_plural_name', 'option') ?: 'Treatments and Procedures';
+		$treatment_plural_name_attr = uamswp_attr_conversion($treatment_plural_name);
 
 		// Define string used to find and replace with values from Find-a-Doc Settings
-		$placeholder_treatments_single_name = '[Treatment]';
-		$placeholder_treatments_plural_name = '[Treatments]';
+		$placeholder_treatment_single_name = '[Treatment]';
+		$placeholder_treatment_plural_name = '[Treatments]';
 
 		// Create array for pairing FacetWP name with label if none exists
 		if ( !isset($facet_labels) ) {
@@ -2346,30 +2346,30 @@ function uamswp_fad_podcast() {
 		}
 
 		// Add item to FacetWP labels array for Treatments facet on Providers archive/list
-		$facet_labels['treatments_procedures'] = $treatments_plural_name;
-		$facet_labels['treatments_procedures_attr'] = $treatments_plural_name_attr;
+		$facet_labels['treatments_procedures'] = $treatment_plural_name;
+		$facet_labels['treatments_procedures_attr'] = $treatment_plural_name_attr;
 
 		// Add item to FacetWP labels array for Treatments facet on Clinical Resources archive/list
-		$facet_labels['resource_treatments'] = $treatments_plural_name;
-		$facet_labels['resource_treatments_attr'] = $treatments_plural_name_attr;
+		$facet_labels['resource_treatments'] = $treatment_plural_name;
+		$facet_labels['resource_treatments_attr'] = $treatment_plural_name_attr;
 	}
 
 	// Get system settings for treatment archive page text
 	function uamswp_fad_archive_treatment() {
 		// Make variables available outside of the function
-		global $treatments_archive_headline;
-		global $treatments_archive_headline_attr;
-		global $treatments_archive_intro_text;
-		global $placeholder_treatments_archive_headline;
-		global $placeholder_treatments_archive_intro_text;
+		global $treatment_archive_headline;
+		global $treatment_archive_headline_attr;
+		global $treatment_archive_intro_text;
+		global $placeholder_treatment_archive_headline;
+		global $placeholder_treatment_archive_intro_text;
 
-		$treatments_archive_headline = get_field('treatments_archive_headline', 'option') ?: 'Treatments and Procedures';
-		$treatments_archive_headline_attr = uamswp_attr_conversion($treatments_archive_headline);
-		$treatments_archive_intro_text = get_field('treatments_archive_intro_text', 'option');
+		$treatment_archive_headline = get_field('treatments_archive_headline', 'option') ?: 'Treatments and Procedures';
+		$treatment_archive_headline_attr = uamswp_attr_conversion($treatment_archive_headline);
+		$treatment_archive_intro_text = get_field('treatments_archive_intro_text', 'option');
 
 		// Define string used to find and replace with values from Find-a-Doc Settings
-		$placeholder_treatments_archive_headline = '[Treatment Archive Title]';
-		$placeholder_treatments_archive_intro_text = '[Treatment Archive Intro Text]';
+		$placeholder_treatment_archive_headline = '[Treatment Archive Title]';
+		$placeholder_treatment_archive_intro_text = '[Treatment Archive Intro Text]';
 	}
 
 // Define variables for ontology text elements on fake subpages and single profiles
@@ -2456,34 +2456,34 @@ function uamswp_fad_podcast() {
 			global $clinical_resource_type_plural_name;
 
 			// Defined in uamswp_fad_labels_condition_treatment()
-			global $placeholder_conditions_treatments_single_name;
-			global $conditions_treatments_single_name;
-			global $placeholder_conditions_treatments_plural_name;
-			global $conditions_treatments_plural_name;
+			global $placeholder_condition_treatment_single_name;
+			global $condition_treatment_single_name;
+			global $placeholder_condition_treatment_plural_name;
+			global $condition_treatment_plural_name;
 
 			// Defined in uamswp_fad_labels_condition()
-			global $placeholder_conditions_single_name;
-			global $conditions_single_name;
-			global $placeholder_conditions_plural_name;
-			global $conditions_plural_name;
+			global $placeholder_condition_single_name;
+			global $condition_single_name;
+			global $placeholder_condition_plural_name;
+			global $condition_plural_name;
 
 			// Defined in uamswp_fad_archive_condition()
-			global $placeholder_conditions_archive_headline;
-			global $conditions_archive_headline;
-			global $placeholder_conditions_archive_intro_text;
-			global $conditions_archive_intro_text;
+			global $placeholder_condition_archive_headline;
+			global $condition_archive_headline;
+			global $placeholder_condition_archive_intro_text;
+			global $condition_archive_intro_text;
 
 			// Defined in uamswp_fad_labels_treatment()
-			global $placeholder_treatments_single_name;
-			global $treatments_single_name;
-			global $placeholder_treatments_plural_name;
-			global $treatments_plural_name;
+			global $placeholder_treatment_single_name;
+			global $treatment_single_name;
+			global $placeholder_treatment_plural_name;
+			global $treatment_plural_name;
 
 			// Defined in uamswp_fad_archive_treatment()
-			global $placeholder_treatments_archive_headline;
-			global $treatments_archive_headline;
-			global $placeholder_treatments_archive_intro_text;
-			global $treatments_archive_intro_text;
+			global $placeholder_treatment_archive_headline;
+			global $treatment_archive_headline;
+			global $placeholder_treatment_archive_intro_text;
+			global $treatment_archive_intro_text;
 
 		// Check variables
 		$page_title = ( isset($page_title) && !empty($page_title) ) ? $page_title : '';
@@ -2557,30 +2557,30 @@ function uamswp_fad_podcast() {
 				$fpage_text_replacements[strtolower($placeholder_clinical_resource_type_plural_name)] = strtolower($clinical_resource_type_plural_name);
 
 				// System settings for combined conditions and treatments labels
-				$fpage_text_replacements[$placeholder_conditions_treatments_single_name] = $conditions_treatments_single_name;
-				$fpage_text_replacements[strtolower($placeholder_conditions_treatments_single_name)] = strtolower($conditions_treatments_single_name);
-				$fpage_text_replacements[$placeholder_conditions_treatments_plural_name] = $conditions_treatments_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_conditions_treatments_plural_name)] = strtolower($conditions_treatments_plural_name);
+				$fpage_text_replacements[$placeholder_condition_treatment_single_name] = $condition_treatment_single_name;
+				$fpage_text_replacements[strtolower($placeholder_condition_treatment_single_name)] = strtolower($condition_treatment_single_name);
+				$fpage_text_replacements[$placeholder_condition_treatment_plural_name] = $condition_treatment_plural_name;
+				$fpage_text_replacements[strtolower($placeholder_condition_treatment_plural_name)] = strtolower($condition_treatment_plural_name);
 
 				// System settings for condition labels
-				$fpage_text_replacements[$placeholder_conditions_single_name] = $conditions_single_name;
-				$fpage_text_replacements[strtolower($placeholder_conditions_single_name)] = strtolower($conditions_single_name);
-				$fpage_text_replacements[$placeholder_conditions_plural_name] = $conditions_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_conditions_plural_name)] = strtolower($conditions_plural_name);
+				$fpage_text_replacements[$placeholder_condition_single_name] = $condition_single_name;
+				$fpage_text_replacements[strtolower($placeholder_condition_single_name)] = strtolower($condition_single_name);
+				$fpage_text_replacements[$placeholder_condition_plural_name] = $condition_plural_name;
+				$fpage_text_replacements[strtolower($placeholder_condition_plural_name)] = strtolower($condition_plural_name);
 
 				// System settings for condition archive page text
-				$fpage_text_replacements[$placeholder_conditions_archive_headline] = $conditions_archive_headline;
-				$fpage_text_replacements[$placeholder_conditions_archive_intro_text] = $conditions_archive_intro_text;
+				$fpage_text_replacements[$placeholder_condition_archive_headline] = $condition_archive_headline;
+				$fpage_text_replacements[$placeholder_condition_archive_intro_text] = $condition_archive_intro_text;
 
 				// System settings for treatment labels
-				$fpage_text_replacements[$placeholder_treatments_single_name] = $treatments_single_name;
-				$fpage_text_replacements[strtolower($placeholder_treatments_single_name)] = strtolower($treatments_single_name);
-				$fpage_text_replacements[$placeholder_treatments_plural_name] = $treatments_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_treatments_plural_name)] = strtolower($treatments_plural_name);
+				$fpage_text_replacements[$placeholder_treatment_single_name] = $treatment_single_name;
+				$fpage_text_replacements[strtolower($placeholder_treatment_single_name)] = strtolower($treatment_single_name);
+				$fpage_text_replacements[$placeholder_treatment_plural_name] = $treatment_plural_name;
+				$fpage_text_replacements[strtolower($placeholder_treatment_plural_name)] = strtolower($treatment_plural_name);
 
 				// System settings for location labels
-				$fpage_text_replacements[$placeholder_treatments_archive_headline] = $treatments_archive_headline;
-				$fpage_text_replacements[$placeholder_treatments_archive_intro_text] = $treatments_archive_intro_text;
+				$fpage_text_replacements[$placeholder_treatment_archive_headline] = $treatment_archive_headline;
+				$fpage_text_replacements[$placeholder_treatment_archive_intro_text] = $treatment_archive_intro_text;
 
 			// Ontology item titles
 
@@ -4719,7 +4719,7 @@ function uamswp_fad_section_condition() {
 										$condition_title = get_the_title($id);
 										$condition_title_attr = uamswp_attr_conversion($condition_title);
 										$condition_url = get_the_permalink($id);
-										$condition_aria_label = 'Go to ' . $conditions_single_name_attr . ' page for ' . $condition_title_attr;
+										$condition_aria_label = 'Go to ' . $condition_single_name_attr . ' page for ' . $condition_title_attr;
 										if ($i > 0) {
 											$condition_schema .= ',
 ';
@@ -4831,7 +4831,7 @@ function uamswp_fad_section_treatment() {
 										$treatment_title = get_the_title($id);
 										$treatment_title_attr = uamswp_attr_conversion($treatment_title);
 										$treatment_url = get_the_permalink($id);
-										$treatment_aria_label = 'Go to ' . $treatments_single_name_attr . ' page for ' . $treatment_title_attr;
+										$treatment_aria_label = 'Go to ' . $treatment_single_name_attr . ' page for ' . $treatment_title_attr;
 										if ($i > 0) {
 											$treatment_schema .= ',
 ';

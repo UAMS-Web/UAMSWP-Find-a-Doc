@@ -36,7 +36,7 @@ uamswp_fad_labels_condition();
 
 // Get system settings for condition archive page text
 uamswp_fad_archive_condition();
-$conditions_archive_link = get_post_type_archive_link( get_query_var('post_type') );
+$condition_archive_link = get_post_type_archive_link( get_query_var('post_type') );
 
 $alpha = '';
 if (isset($_GET['alpha'])) {
@@ -44,7 +44,7 @@ if (isset($_GET['alpha'])) {
 }
 
 // Override theme's method of defining the meta page title
-$meta_title_base_addition = $conditions_plural_name_attr; // Word or phrase to use to form base meta title
+$meta_title_base_addition = $condition_plural_name_attr; // Word or phrase to use to form base meta title
 uamswp_fad_title_vars(); // Defines universal variables related to the setting the meta title
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
@@ -54,15 +54,15 @@ get_header();
 	<main id="genesis-content">
 		<section class="archive-description">
 			<header class="entry-header">
-				<h1 class="entry-title" itemprop="headline"><?php echo $conditions_archive_headline; ?></h1>
+				<h1 class="entry-title" itemprop="headline"><?php echo $condition_archive_headline; ?></h1>
 			</header>
-			<?php echo ($conditions_archive_intro_text ? '<div class="entry-content clearfix" itemprop="text"><div class="archive-intro">' . $conditions_archive_intro_text . '</div></div>' : '' ); ?>
+			<?php echo ($condition_archive_intro_text ? '<div class="entry-content clearfix" itemprop="text"><div class="archive-intro">' . $condition_archive_intro_text . '</div></div>' : '' ); ?>
 		</section>
 		<section class="uams-module conditions-treatments">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<h2 class="module-title sr-only">List of <?php echo $conditions_plural_name; ?></h2>
+						<h2 class="module-title sr-only">List of <?php echo $condition_plural_name; ?></h2>
 							<?php
 							// if show all is set
 							$post_type = 'condition';
@@ -104,88 +104,88 @@ get_header();
 										After that, if user checks any other checkbox input, remove "checked" attribute from "Any"/"All" checkbox input.
 									-->
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>" <?php echo ('' != $alpha) ? 'aria-selected="false"' : 'aria-selected="true"'; ?> aria-label="Remove any filter"><span aria-hidden="true">All</span></a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>" <?php echo ('' != $alpha) ? 'aria-selected="false"' : 'aria-selected="true"'; ?> aria-label="Remove any filter"><span aria-hidden="true">All</span></a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=0" <?php echo ('0' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with a number"><span aria-hidden="true">#</span></a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=0" <?php echo ('0' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with a number"><span aria-hidden="true">#</span></a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=a" <?php echo ('a' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter A">A</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=a" <?php echo ('a' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter A">A</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=b" <?php echo ('b' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter B">B</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=b" <?php echo ('b' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter B">B</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=c" <?php echo ('c' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter C">C</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=c" <?php echo ('c' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter C">C</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=d" <?php echo ('d' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter D">D</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=d" <?php echo ('d' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter D">D</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=e" <?php echo ('e' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter E">E</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=e" <?php echo ('e' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter E">E</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=f" <?php echo ('f' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter F">F</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=f" <?php echo ('f' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter F">F</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=g" <?php echo ('g' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter G">G</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=g" <?php echo ('g' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter G">G</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=h" <?php echo ('h' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter H">H</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=h" <?php echo ('h' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter H">H</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=i" <?php echo ('i' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter I">I</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=i" <?php echo ('i' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter I">I</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=j" <?php echo ('j' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter J">J</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=j" <?php echo ('j' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter J">J</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=k" <?php echo ('k' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter K">K</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=k" <?php echo ('k' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter K">K</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=l" <?php echo ('l' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter L">L</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=l" <?php echo ('l' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter L">L</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=m" <?php echo ('m' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter M">M</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=m" <?php echo ('m' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter M">M</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=n" <?php echo ('n' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter N">N</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=n" <?php echo ('n' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter N">N</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=o" <?php echo ('o' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter O">O</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=o" <?php echo ('o' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter O">O</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=p" <?php echo ('p' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter P">P</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=p" <?php echo ('p' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter P">P</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=q" <?php echo ('q' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter Q">Q</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=q" <?php echo ('q' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter Q">Q</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=r" <?php echo ('r' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter R">R</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=r" <?php echo ('r' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter R">R</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=s" <?php echo ('s' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter S">S</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=s" <?php echo ('s' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter S">S</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=t" <?php echo ('t' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter T">T</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=t" <?php echo ('t' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter T">T</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=u" <?php echo ('u' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter U">U</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=u" <?php echo ('u' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter U">U</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=v" <?php echo ('v' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter V">V</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=v" <?php echo ('v' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter V">V</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=w" <?php echo ('w' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter W">W</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=w" <?php echo ('w' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter W">W</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=x" <?php echo ('x' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter X">X</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=x" <?php echo ('x' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter X">X</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=y" <?php echo ('y' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter Y">Y</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=y" <?php echo ('y' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter Y">Y</a>
 									</div>
 									<div class="custom-control">
-										<a class="az-filter-label" href="<?php echo $conditions_archive_link; ?>?alpha=z" <?php echo ('z' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($conditions_plural_name_attr); ?> that begin with the letter Z">Z</a>
+										<a class="az-filter-label" href="<?php echo $condition_archive_link; ?>?alpha=z" <?php echo ('z' == $alpha) ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the <?php echo strtolower($condition_plural_name_attr); ?> that begin with the letter Z">Z</a>
 									</div>
 								</div>
 							</div>
@@ -206,7 +206,7 @@ get_header();
 
 							} else {
 
-								echo '<p class="text-center content-width">No <?php echo strtolower($conditions_plural_name); ?> meet your criteria.</p>';
+								echo '<p class="text-center content-width">No <?php echo strtolower($condition_plural_name); ?> meet your criteria.</p>';
 
 							}
 
@@ -249,30 +249,30 @@ get_header();
 										<ul class="pagination">
 										<?php
 										$alpha_url = isset($alpha) ? '?alpha='. $alpha : '';
-										if($paged > 2 && $paged > $range+1 && $showitems < $pages) echo '<li class="page-item"><a class="page-link" aria-label="First" href="'.$conditions_archive_link.'page/1/'. $alpha_url .'"><span aria-hidden="true">&laquo;</span></a></li>';
-										if($paged > 1 && $showitems < $pages) echo '<li class="page-item"><a class="page-link" aria-label="Previous" href="'.$conditions_archive_link.'page/'.($paged - 1).'/'. $alpha_url .'"><span aria-hidden="true">&lsaquo;</span></a></li>';
+										if($paged > 2 && $paged > $range+1 && $showitems < $pages) echo '<li class="page-item"><a class="page-link" aria-label="First" href="'.$condition_archive_link.'page/1/'. $alpha_url .'"><span aria-hidden="true">&laquo;</span></a></li>';
+										if($paged > 1 && $showitems < $pages) echo '<li class="page-item"><a class="page-link" aria-label="Previous" href="'.$condition_archive_link.'page/'.($paged - 1).'/'. $alpha_url .'"><span aria-hidden="true">&lsaquo;</span></a></li>';
 
 										for ($pagecount=1; $pagecount <= $pages; $pagecount++):
 											if (1 != $pages && ( !($pagecount >= $paged+$range+1 || $pagecount <= $paged-$range-1) || $pages <= $showitems ) ) {
-												echo ($paged == $pagecount) ? '<li class="page-item current"><a class="page-link">'.$pagecount.'</a></li>':'<li class="page-item"><a class="page-link" href="'.$conditions_archive_link.'page/'.$pagecount.'/'. $alpha_url .'" class="inactive" >'.$pagecount.'</a></li>';
+												echo ($paged == $pagecount) ? '<li class="page-item current"><a class="page-link">'.$pagecount.'</a></li>':'<li class="page-item"><a class="page-link" href="'.$condition_archive_link.'page/'.$pagecount.'/'. $alpha_url .'" class="inactive" >'.$pagecount.'</a></li>';
 											}
 										endfor;
 
-										if ($paged < $pages && $showitems < $pages) echo '<li class="page-item"><a class="page-link" aria-label="Next" href="'.$conditions_archive_link.'page/'.($paged+1).'/'. $alpha_url .'"><span aria-hidden="true">&rsaquo;</span></a></li>';
-										if ($paged < $pages-1 && $paged+$range-1 < $pages && $showitems < $pages) echo '<li class="page-item"><a class="page-link" aria-label="Last" href="'.$conditions_archive_link.'page/'.$pages.'/'. $alpha_url .'"><span aria-hidden="true">&raquo;</span></a></li>';
+										if ($paged < $pages && $showitems < $pages) echo '<li class="page-item"><a class="page-link" aria-label="Next" href="'.$condition_archive_link.'page/'.($paged+1).'/'. $alpha_url .'"><span aria-hidden="true">&rsaquo;</span></a></li>';
+										if ($paged < $pages-1 && $paged+$range-1 < $pages && $showitems < $pages) echo '<li class="page-item"><a class="page-link" aria-label="Last" href="'.$condition_archive_link.'page/'.$pages.'/'. $alpha_url .'"><span aria-hidden="true">&raquo;</span></a></li>';
 										?>
 										</ul>
 									</nav>
 								</div>
 									<?php
 									// link to show all
-									echo '<div class="show-all"><p><a href="'.$conditions_archive_link.'?showall=true">Show all items</a></p></div>';
+									echo '<div class="show-all"><p><a href="'.$condition_archive_link.'?showall=true">Show all items</a></p></div>';
 								endif;
 
 							else:
 							// showall is set, show link to get back to paged mode
 
-							echo '<div class="show-paged"><p><a href="'.$conditions_archive_link.'">Show paged</a></p></div>';
+							echo '<div class="show-paged"><p><a href="'.$condition_archive_link.'">Show paged</a></p></div>';
 
 							endif;
 							?>

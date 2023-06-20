@@ -765,13 +765,13 @@ while ( have_posts() ) : the_post();
 						} // endif 
 						if ( $condition_section_show ) { ?>
 							<li class="nav-item">
-								<a class="nav-link" href="#conditions"><?php echo $conditions_plural_name; ?></a>
+								<a class="nav-link" href="#conditions"><?php echo $condition_plural_name; ?></a>
 							</li>
 						<?php
 						} // endif 
 						if ( $treatment_section_show ) { ?>
 							<li class="nav-item">
-								<a class="nav-link" href="#treatments"><?php echo $treatments_plural_name; ?></a>
+								<a class="nav-link" href="#treatments"><?php echo $treatment_plural_name; ?></a>
 							</li>
 						<?php
 						} // endif 

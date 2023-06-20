@@ -7,16 +7,16 @@
  * 
  * Required var:
  * 	$provider_plural_name // System setting for Providers plural item name
- * 	$conditions_single_name_attr // Attribute value friendly version of system setting for Conditions single item name
- * 	$conditions_plural_name // System setting for Conditions plural item name
+ * 	$condition_single_name_attr // Attribute value friendly version of system setting for Conditions single item name
+ * 	$condition_plural_name // System setting for Conditions plural item name
  * 	$conditions_cpt_query
  * 	$condition_context = 'single-provider', 'single-location', 'single-condition', 'single-treatment', 'single-expertise', 'single-resource'
  * 	$condition_heading_related_name
  */
 
-$condition_heading = $conditions_plural_name;
+$condition_heading = $condition_plural_name;
 $condition_disclaimer = false;
-$condition_disclaimer_text = 'UAMS Health ' . strtolower($provider_plural_name) . ' care for a broad range of ' . strtolower($conditions_plural_name) . ', some of which may not be listed below.';
+$condition_disclaimer_text = 'UAMS Health ' . strtolower($provider_plural_name) . ' care for a broad range of ' . strtolower($condition_plural_name) . ', some of which may not be listed below.';
 
 if ( $condition_context == 'single-provider' ) {
 
@@ -59,7 +59,7 @@ if ( $condition_context == 'single-provider' ) {
 					<ul class="list">
 					<?php foreach( $conditions_cpt_query->posts as $condition ): ?>
 						<li>
-							<a href="<?php echo get_the_permalink( $condition->ID ); ?>" aria-label="Go to <?php echo $conditions_single_name_attr; ?> page for <?php echo $condition->post_title; ?>" class="btn btn-outline-primary">
+							<a href="<?php echo get_the_permalink( $condition->ID ); ?>" aria-label="Go to <?php echo $condition_single_name_attr; ?> page for <?php echo $condition->post_title; ?>" class="btn btn-outline-primary">
 								<?php 
 									echo $condition->post_title;
 								?>

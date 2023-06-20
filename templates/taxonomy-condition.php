@@ -59,7 +59,7 @@ $page_title_attr = uamswp_attr_conversion($page_title);
 uamswp_fad_archive_condition();
 
 // Override theme's method of defining the meta page title
-$meta_title_enhanced_addition = $conditions_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title
+$meta_title_enhanced_addition = $condition_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title
 uamswp_fad_title_vars(); // Defines universal variables related to the setting the meta title
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
@@ -142,7 +142,7 @@ if ($providers && !empty($providers)) { $condition_field_classes .= ' has-provid
 	<main id="genesis-content" class="condition-item<?php echo $condition_field_classes; ?>">
 		<section class="archive-description bg-white">
 			<header class="entry-header">
-				<h1 class="entry-title" itemprop="headline"><?php echo $conditions_archive_headline; ?><span class="sr-only">: </span><?php echo $page_title; ?></h1>
+				<h1 class="entry-title" itemprop="headline"><?php echo $condition_archive_headline; ?><span class="sr-only">: </span><?php echo $page_title; ?></h1>
 			</header>
 			<div class="entry-content clearfix" itemprop="text">
 				<?php 
@@ -212,13 +212,13 @@ if ($providers && !empty($providers)) { $condition_field_classes .= ' has-provid
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<h2 class="module-title"><span class="title"><?php echo $treatments_plural_name; ?> Related to <?php echo $page_title; ?></span></h2>
-						<p class="note">UAMS Health <?php echo strtolower($provider_plural_name); ?> perform and prescribe a broad range of <?php echo strtolower($treatments_plural_name); ?>, some of which may not be listed below.</p>
+						<h2 class="module-title"><span class="title"><?php echo $treatment_plural_name; ?> Related to <?php echo $page_title; ?></span></h2>
+						<p class="note">UAMS Health <?php echo strtolower($provider_plural_name); ?> perform and prescribe a broad range of <?php echo strtolower($treatment_plural_name); ?>, some of which may not be listed below.</p>
 						<div class="list-container list-container-rows">
 							<ul class="list">
 							<?php foreach( $treatments_query->get_terms() as $treatment ): ?>
 								<li>
-									<a href="<?php echo get_term_link( $treatment->term_id ); ?>" aria-label="Go to <?php echo $treatments_single_name_attr; ?> page for <?php echo $treatment->name; ?>" class="btn btn-outline-primary"><?php echo $treatment->name; ?></a>
+									<a href="<?php echo get_term_link( $treatment->term_id ); ?>" aria-label="Go to <?php echo $treatment_single_name_attr; ?> page for <?php echo $treatment->name; ?>" class="btn btn-outline-primary"><?php echo $treatment->name; ?></a>
 								</li>
 							<?php endforeach; ?>
 							</ul>
