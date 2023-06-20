@@ -316,7 +316,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		// Bring in variables from outside of the function
 		global $page_title; // Defined on the template
 		global $page_title_attr; // Defined on the template
-		global $treatments_section_show; // Defined in uamswp_fad_treatment_query()
+		global $treatment_section_show; // Defined in uamswp_fad_treatment_query()
 		global $treatments_cpt_query; // Defined in uamswp_fad_treatment_query()
 		global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
 		global $treatments_plural_name; // Defined in uamswp_fad_labels_treatment()
@@ -327,7 +327,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		$treatment_heading_related_name = $page_title; // To what is it related?
 		$treatment_heading_related_name_attr = $page_title_attr;
 
-		if( $treatments_section_show ) {
+		if( $treatment_section_show ) {
 			include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop-list.php' );
 		}
 	}

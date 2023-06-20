@@ -543,10 +543,10 @@ while ( have_posts() ) : the_post(); ?>
 		));
 		$treatments_cpt_query = new WP_Query( $args );
 		if( $treatments_cpt && $treatments_cpt_query->posts && !$hide_medical_ontology ) {
-			$treatments_section_show = true;
+			$treatment_section_show = true;
 			$jump_link_count++;
 		} else {
-			$treatments_section_show = false;
+			$treatment_section_show = false;
 		}
 
 		// Query for whether related areas of expertise content section should be displayed on a page
@@ -1073,7 +1073,7 @@ while ( have_posts() ) : the_post(); ?>
 							<a class="nav-link" href="#conditions" title="Jump to the section of this page about <?php echo $conditions_plural_name_attr; ?>"><?php echo $conditions_plural_name; ?></a>
 						</li>
 					<?php } ?>
-					<?php if ( $treatments_section_show ) { ?>
+					<?php if ( $treatment_section_show ) { ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#treatments" title="Jump to the section of this page about <?php echo strtolower($treatments_plural_name_attr); ?>"><?php echo $treatments_plural_name; ?></a>
 						</li>
@@ -1625,7 +1625,7 @@ while ( have_posts() ) : the_post(); ?>
 	// End Conditions Section
 
 	// Begin Treatments and Procedures Section
-	if( $treatments_section_show ) {
+	if( $treatment_section_show ) {
 		$treatment_context = 'single-location';
 		$treatment_heading_related_name = $page_title_phrase; // To what is it related?
 		include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );

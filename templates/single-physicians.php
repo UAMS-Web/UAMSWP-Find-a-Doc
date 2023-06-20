@@ -355,7 +355,7 @@ while ( have_posts() ) : the_post();
 	if ($bio_short && !empty($bio_short)) { $provider_field_classes = $provider_field_classes . ' has-short-clinical-bio'; }
 	if ($video && !empty($video)) { $provider_field_classes = $provider_field_classes . ' has-video'; }
 	if ($condition_section_show) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
-	if ($treatments_section_show) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
+	if ($treatment_section_show) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
 	if ($location_section_show) { $provider_field_classes = $provider_field_classes . ' has-location'; }
 	if ($clinical_resource_section_show) { $provider_field_classes = $provider_field_classes . ' has-clinical-resource'; }
 	if ($affiliation && !empty($affiliation)) { $provider_field_classes = $provider_field_classes . ' has-affiliation'; }
@@ -769,7 +769,7 @@ while ( have_posts() ) : the_post();
 							</li>
 						<?php
 						} // endif 
-						if ( $treatments_section_show ) { ?>
+						if ( $treatment_section_show ) { ?>
 							<li class="nav-item">
 								<a class="nav-link" href="#treatments"><?php echo $treatments_plural_name; ?></a>
 							</li>
@@ -1132,7 +1132,7 @@ while ( have_posts() ) : the_post();
 		} // endif ( $condition_section_show )
 
 		// Treatments CPT
-		if ( $treatments_section_show ) {
+		if ( $treatment_section_show ) {
 			$treatment_context = 'single-provider';
 			$treatment_heading_related_name = $short_name; // To what is it related?
 			include( UAMS_FAD_PATH . '/templates/loops/treatments-cpt-loop.php' );
@@ -1152,7 +1152,7 @@ while ( have_posts() ) : the_post();
 				$i++;
 			} // endforeach
 			// $treatment_schema .= ']';
-		} // endif ( $treatments_section_show )
+		} // endif ( $treatment_section_show )
 
 		// Begin Areas of Expertise Section
 		$expertise_section_title = $expertise_fpage_title_provider;
@@ -1293,7 +1293,7 @@ while ( have_posts() ) : the_post();
 				|| $podcast_section_show
 				|| $research_section_show
 				|| $condition_section_show
-				|| $treatments_section_show
+				|| $treatment_section_show
 				|| $expertise_section_show
 				|| $location_section_show
 				|| $ratings_section_show

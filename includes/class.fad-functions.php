@@ -1787,7 +1787,7 @@ function uamswp_fad_post_title() {
 
 		// Make variables available outside of the function
 		global $treatments_cpt_query;
-		global $treatments_section_show;
+		global $treatment_section_show;
 		global $treatment_ids;
 		global $treatment_count; // integer
 		global $treatment_schema; // string
@@ -1803,12 +1803,12 @@ function uamswp_fad_post_title() {
 		);
 		$treatments_cpt_query = new WP_Query( $args );
 		if( ( $treatments_cpt && $treatments_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
-			$treatments_section_show = true;
+			$treatment_section_show = true;
 			$treatment_ids = $treatments_cpt_query->posts;
 			$treatment_count = count($treatments_cpt_query->posts);
 			$jump_link_count = $jump_link_count + 1;
 		} else {
-			$treatments_section_show = false;
+			$treatment_section_show = false;
 		}
 		$treatment_schema = '';
 	}
