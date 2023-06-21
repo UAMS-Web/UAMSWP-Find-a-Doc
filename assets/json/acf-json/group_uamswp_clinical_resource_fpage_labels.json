@@ -24,7 +24,7 @@
 			"label": "General Title of Fake Subpage or Section for Clinical Resources",
 			"name": "clinical_resource_fpage_title_general",
 			"type": "text",
-			"instructions": "If you leave this blank, the default title structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., title of fake subpage for clinical resources in areas of expertise subsection).",
+			"instructions": "If you leave this blank, the default title structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., title of Fake Subpage or Section for clinical resources in areas of expertise subsection).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -46,7 +46,7 @@
 			"label": "General Intro Text of Fake Subpage or Section for Clinical Resources",
 			"name": "clinical_resource_fpage_intro_general",
 			"type": "textarea",
-			"instructions": "If you leave this blank, the default intro text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., intro text of fake subpage for clinical resources in areas of expertise subsection).",
+			"instructions": "If you leave this blank, the default intro text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., intro text of Fake Subpage or Section for clinical resources in areas of expertise subsection).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -60,6 +60,66 @@
 			"rows": 4,
 			"new_lines": "",
 			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_clinical_resource_fpage_more_text_general",
+			"label": "General \"More\" Intro Text of Fake Subpage or Section for Clinical Resources",
+			"name": "clinical_resource_fpage_more_text_general",
+			"type": "text",
+			"instructions": "If you leave this blank, the default \"more\" text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of section for clinical resources in provider profile).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Want to find more [clinical resources]?",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_clinical_resource_fpage_more_link_text_general",
+			"label": "General \"More\" Link Text of Fake Subpage or Section for Clinical Resources",
+			"name": "clinical_resource_fpage_more_link_text_general",
+			"type": "text",
+			"instructions": "If you leave this blank, the default link text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of section for clinical resources in provider profile).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "View the Full List",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_clinical_resource_fpage_more_link_descr_general",
+			"label": "General \"More\" Button Description of Fake Subpage or Section for Clinical Resources",
+			"name": "clinical_resource_fpage_more_link_descr_general",
+			"type": "text",
+			"instructions": "If you leave this blank, the default link description structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of section for clinical resources in provider profile).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "View the full list of [clinical resources]",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
 		},
 		{
 			"key": "field_clinical_resource_fpage_tab_provider",
@@ -79,7 +139,7 @@
 		},
 		{
 			"key": "field_clinical_resource_fpage_title_provider",
-			"label": "Title of Fake Subpage for Clinical Resources in Provider Subsection",
+			"label": "Title of Fake Subpage or Section for Clinical Resources in a Provider Subsection or Profile",
 			"name": "clinical_resource_fpage_title_provider",
 			"type": "text",
 			"instructions": "If you leave this blank, the default title structure will be used.",
@@ -101,7 +161,7 @@
 		},
 		{
 			"key": "field_clinical_resource_fpage_intro_provider",
-			"label": "Intro Text of Fake Subpage for Clinical Resources in Provider Subsection",
+			"label": "Intro Text of Fake Subpage or Section for Clinical Resources in a Provider Subsection or Profile",
 			"name": "clinical_resource_fpage_intro_provider",
 			"type": "textarea",
 			"instructions": "If you leave this blank, the default intro text structure will be used.",
@@ -118,6 +178,66 @@
 			"rows": 4,
 			"new_lines": "",
 			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_clinical_resource_fpage_more_text_provider",
+			"label": "\"More\" Intro Text of Fake Subpage or Section for Clinical Resources in a Provider Subsection or Profile",
+			"name": "clinical_resource_fpage_more_text_provider",
+			"type": "text",
+			"instructions": "If you leave this blank, the default \"more\" text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of section for clinical resources in provider profile).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Want to find more [clinical resources] related to [Provider Short Name]?",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_clinical_resource_fpage_more_link_text_provider",
+			"label": "\"More\" Link Text of Fake Subpage or Section for Clinical Resources in a Provider Subsection or Profile",
+			"name": "clinical_resource_fpage_more_link_text_provider",
+			"type": "text",
+			"instructions": "If you leave this blank, the default link text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of section for clinical resources in provider profile).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "View the Full List",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_clinical_resource_fpage_more_link_descr_provider",
+			"label": "\"More\" Button Description of Fake Subpage or Section for Clinical Resources in a Provider Subsection or Profile",
+			"name": "clinical_resource_fpage_more_link_descr_provider",
+			"type": "text",
+			"instructions": "If you leave this blank, the default link description structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of section for clinical resources in provider profile).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "View the full list of [clinical resources] related to [Provider Short Name]",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
 		},
 		{
 			"key": "field_clinical_resource_fpage_tab_location",
@@ -137,7 +257,7 @@
 		},
 		{
 			"key": "field_clinical_resource_fpage_title_location",
-			"label": "Title of Fake Subpage for Clinical Resources in Location Subsection",
+			"label": "Title of Fake Subpage or Section for Clinical Resources in a Location Subsection or Profile",
 			"name": "clinical_resource_fpage_title_location",
 			"type": "text",
 			"instructions": "If you leave this blank, the default title structure will be used.",
@@ -159,7 +279,7 @@
 		},
 		{
 			"key": "field_clinical_resource_fpage_intro_location",
-			"label": "Intro Text of Fake Subpage for Clinical Resources in Location Subsection",
+			"label": "Intro Text of Fake Subpage or Section for Clinical Resources in a Location Subsection or Profile",
 			"name": "clinical_resource_fpage_intro_location",
 			"type": "textarea",
 			"instructions": "If you leave this blank, the default intro text structure will be used.",
@@ -176,6 +296,66 @@
 			"rows": 4,
 			"new_lines": "",
 			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_clinical_resource_fpage_more_text_location",
+			"label": "\"More\" Intro Text of Fake Subpage or Section for Clinical Resources in a Location Subsection or Profile",
+			"name": "clinical_resource_fpage_more_text_location",
+			"type": "text",
+			"instructions": "If you leave this blank, the default \"more\" text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of section for clinical resources in provider profile).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Want to find more [clinical resources] related to [the Location Title]?",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_clinical_resource_fpage_more_link_text_location",
+			"label": "\"More\" Link Text of Fake Subpage or Section for Clinical Resources in a Location Subsection or Profile",
+			"name": "clinical_resource_fpage_more_link_text_location",
+			"type": "text",
+			"instructions": "If you leave this blank, the default link text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of section for clinical resources in provider profile).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "View the Full List",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_clinical_resource_fpage_more_link_descr_location",
+			"label": "\"More\" Button Description of Fake Subpage or Section for Clinical Resources in a Location Subsection or Profile",
+			"name": "clinical_resource_fpage_more_link_descr_location",
+			"type": "text",
+			"instructions": "If you leave this blank, the default link description structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of section for clinical resources in provider profile).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "View the full list of [clinical resources] related to [the Location Title]",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
 		},
 		{
 			"key": "field_clinical_resource_fpage_tab_expertise",
@@ -195,7 +375,7 @@
 		},
 		{
 			"key": "field_clinical_resource_fpage_title_expertise",
-			"label": "Title of Fake Subpage for Clinical Resources in Area of Expertise Subsection",
+			"label": "Title of Fake Subpage or Section for Clinical Resources in an Area of Expertise Subsection or Profile",
 			"name": "clinical_resource_fpage_title_expertise",
 			"type": "text",
 			"instructions": "If you leave this blank, the default title structure will be used.",
@@ -217,7 +397,7 @@
 		},
 		{
 			"key": "field_clinical_resource_fpage_intro_expertise",
-			"label": "Intro Text of Fake Subpage for Clinical Resources in Area of Expertise Subsection",
+			"label": "Intro Text of Fake Subpage or Section for Clinical Resources in an Area of Expertise Subsection or Profile",
 			"name": "clinical_resource_fpage_intro_expertise",
 			"type": "textarea",
 			"instructions": "If you leave this blank, the default intro text structure will be used.",
@@ -234,6 +414,66 @@
 			"rows": 4,
 			"new_lines": "",
 			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_clinical_resource_fpage_more_text_expertise",
+			"label": "\"More\" Intro Text of Fake Subpage or Section for Clinical Resources in an Area of Expertise Subsection or Profile",
+			"name": "clinical_resource_fpage_more_text_expertise",
+			"type": "text",
+			"instructions": "If you leave this blank, the default \"more\" text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of section for clinical resources in provider profile).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Want to find more [clinical resources] related to [Area of Expertise Title]?",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_clinical_resource_fpage_more_link_text_expertise",
+			"label": "\"More\" Link Text of Fake Subpage or Section for Clinical Resources in an Area of Expertise Subsection or Profile",
+			"name": "clinical_resource_fpage_more_link_text_expertise",
+			"type": "text",
+			"instructions": "If you leave this blank, the default link text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of section for clinical resources in provider profile).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "View the Full List",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_clinical_resource_fpage_more_link_descr_expertise",
+			"label": "\"More\" Button Description of Fake Subpage or Section for Clinical Resources in an Area of Expertise Subsection or Profile",
+			"name": "clinical_resource_fpage_more_link_descr_expertise",
+			"type": "text",
+			"instructions": "If you leave this blank, the default link description structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of section for clinical resources in provider profile).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "View the full list of [clinical resources] related to [Area of Expertise Title]",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
 		},
 		{
 			"key": "field_clinical_resource_fpage_tab_clinical_resource",
@@ -253,7 +493,7 @@
 		},
 		{
 			"key": "field_clinical_resource_fpage_title_clinical_resource",
-			"label": "Title of Section for Related Clinical Resources on Clinical Resource Profile",
+			"label": "Title of Fake Subpage or Section for Related Clinical Resources in a Clinical Resources Subsection or Profile",
 			"name": "clinical_resource_fpage_title_clinical_resource",
 			"type": "text",
 			"instructions": "If you leave this blank, the default title structure will be used.",
@@ -275,7 +515,7 @@
 		},
 		{
 			"key": "field_clinical_resource_fpage_intro_clinical_resource",
-			"label": "Intro Text of Section for Related Clinical Resources on Clinical Resource Profile",
+			"label": "Intro Text of Fake Subpage or Section for Related Clinical Resources in a Clinical Resources Subsection or Profile",
 			"name": "clinical_resource_fpage_intro_clinical_resource",
 			"type": "textarea",
 			"instructions": "If you leave this blank, the default intro text structure will be used.",
@@ -292,6 +532,66 @@
 			"rows": 4,
 			"new_lines": "",
 			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_clinical_resource_fpage_more_text_clinical_resource",
+			"label": "\"More\" Intro Text of Fake Subpage or Section for Related Clinical Resources in a Clinical Resources Subsection or Profile",
+			"name": "clinical_resource_fpage_more_text_clinical_resource",
+			"type": "text",
+			"instructions": "If you leave this blank, the default \"more\" text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of section for clinical resources in provider profile).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Want to find more related [clinical resources]?",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_clinical_resource_fpage_more_link_text_clinical_resource",
+			"label": "\"More\" Link Text of Fake Subpage or Section for Related Clinical Resources in a Clinical Resources Subsection or Profile",
+			"name": "clinical_resource_fpage_more_link_text_clinical_resource",
+			"type": "text",
+			"instructions": "If you leave this blank, the default link text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of section for clinical resources in provider profile).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "View the Full List",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_clinical_resource_fpage_more_link_descr_clinical_resource",
+			"label": "\"More\" Button Description of Fake Subpage or Section for Related Clinical Resources in a Clinical Resources Subsection or Profile",
+			"name": "clinical_resource_fpage_more_link_descr_clinical_resource",
+			"type": "text",
+			"instructions": "If you leave this blank, the default link description structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of section for clinical resources in provider profile).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "View the full list of related [clinical resources]",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
 		}
 	],
 	"location": [

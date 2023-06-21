@@ -2783,18 +2783,41 @@ function uamswp_fad_podcast() {
 			// Make variables available outside of the function
 			global $clinical_resource_fpage_title_general;
 			global $clinical_resource_fpage_intro_general;
+			global $clinical_resource_fpage_more_text_general;
+			global $clinical_resource_fpage_more_link_text_general;
+			global $clinical_resource_fpage_more_link_descr_general;
 
 			// Get the system settings for the text elements in a general placement
 			$clinical_resource_fpage_title_general = get_field('clinical_resource_fpage_title_general', 'option'); // Title
 			$clinical_resource_fpage_intro_general = get_field('clinical_resource_fpage_intro_general', 'option'); // Intro text
+			$clinical_resource_fpage_more_text_general = get_field('clinical_resource_fpage_more_text_general', 'option'); // "More" Intro Text of Fake Subpage or Section for Related Clinical Resources
+			$clinical_resource_fpage_more_link_text_general = get_field('clinical_resource_fpage_more_link_text_general', 'option'); // "More" Link Text of Fake Subpage or Section for Related Clinical Resources
+			$clinical_resource_fpage_more_link_descr_general = get_field('clinical_resource_fpage_more_link_descr_general', 'option'); // "More" Link Description of Fake Subpage or Section for Related Clinical Resources
 
-			// If the variable is not set or is empty, set a hardcoded fallback value
-			$clinical_resource_fpage_title_general = ( isset($clinical_resource_fpage_title_general) && !empty($clinical_resource_fpage_title_general) ) ? $clinical_resource_fpage_title_general : 'Related [Clinical Resources]'; // Title
-			$clinical_resource_fpage_intro_general = ( isset($clinical_resource_fpage_intro_general) && !empty($clinical_resource_fpage_intro_general) ) ? $clinical_resource_fpage_intro_general : ''; // Intro text
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($clinical_resource_fpage_title_general) || empty($clinical_resource_fpage_title_general) ) {
+					$clinical_resource_fpage_title_general = 'Related [Clinical Resources]'; // Title
+				}
+				if ( !isset($clinical_resource_fpage_intro_general) || empty($clinical_resource_fpage_intro_general) ) {
+					$clinical_resource_fpage_intro_general = ''; // Intro text
+				}
+				if ( !isset($clinical_resource_fpage_more_text_general) || empty($clinical_resource_fpage_more_text_general) ) {
+					$clinical_resource_fpage_more_text_general = 'Want to find more related [clinical resources]?'; // "More" intro text
+				}
+				if ( !isset($clinical_resource_fpage_more_link_text_general) || empty($clinical_resource_fpage_more_link_text_general) ) {
+					$clinical_resource_fpage_more_link_text_general = ''; // "More" link text
+				}
+				if ( !isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general) ) {
+					$clinical_resource_fpage_more_link_descr_general = 'View the full list of related [clinical resources]'; // "More" link description
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$clinical_resource_fpage_title_general = $clinical_resource_fpage_title_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_general) : ''; // Title
+				$clinical_resource_fpage_intro_general = $clinical_resource_fpage_intro_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_general) : ''; // Intro text
+				$clinical_resource_fpage_more_text_general = $clinical_resource_fpage_more_text_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_text_general) : ''; // Intro text
+				$clinical_resource_fpage_more_link_text_general = $clinical_resource_fpage_more_link_text_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_text_general) : ''; // Intro text
+				$clinical_resource_fpage_more_link_descr_general = $clinical_resource_fpage_more_link_descr_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_descr_general) : ''; // Intro text
 
-			// Substitute placeholder text for relevant system settings value
-			$clinical_resource_fpage_title_general = uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_general); // Title
-			$clinical_resource_fpage_intro_general = uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_general); // Intro text
 		}
 
 		// Get system settings for general values of ontology text elements on a fake subpage or section for Conditions
@@ -2846,6 +2869,9 @@ function uamswp_fad_podcast() {
 			global $expertise_fpage_intro_provider;
 			global $clinical_resource_fpage_title_provider;
 			global $clinical_resource_fpage_intro_provider;
+			global $clinical_resource_fpage_more_text_provider;
+			global $clinical_resource_fpage_more_link_text_provider;
+			global $clinical_resource_fpage_more_link_descr_provider;
 			global $condition_fpage_title_provider;
 			global $condition_fpage_intro_provider;
 			global $treatment_fpage_title_provider;
@@ -2918,15 +2944,27 @@ function uamswp_fad_podcast() {
 				$expertise_fpage_intro_provider = $expertise_fpage_intro_provider ? uamswp_fad_fpage_text_replace($expertise_fpage_intro_provider) : ''; // Intro text
 
 			// Clinical Resources
-			$clinical_resource_fpage_title_provider = get_field('clinical_resource_fpage_title_provider', 'option'); // Title of Fake Subpage for Clinical Resources in Provider Subsection
-			$clinical_resource_fpage_intro_provider = get_field('clinical_resource_fpage_intro_provider', 'option'); // Intro Text of Fake Subpage for Clinical Resources in Provider Subsection
+			$clinical_resource_fpage_title_provider = get_field('clinical_resource_fpage_title_provider', 'option'); // Title of Section for Clinical Resources on Clinical Resource Profile
+			$clinical_resource_fpage_intro_provider = get_field('clinical_resource_fpage_intro_provider', 'option'); // Intro Text of Section for Clinical Resources on Clinical Resource Profile
+			$clinical_resource_fpage_more_text_provider = get_field('clinical_resource_fpage_more_text_provider', 'option'); // "More" Intro Text of Fake Subpage or Section for Related Clinical Resources in a Clinical Resources Subsection or Profile
+			$clinical_resource_fpage_more_link_text_provider = get_field('clinical_resource_fpage_more_link_text_provider', 'option'); // "More" Link Text of Fake Subpage or Section for Related Clinical Resources in a Clinical Resources Subsection or Profile
+			$clinical_resource_fpage_more_link_descr_provider = get_field('clinical_resource_fpage_more_link_descr_provider', 'option'); // "More" Link Description of Fake Subpage or Section for Related Clinical Resources in a Clinical Resources Subsection or Profile
 
 				// If the variable is not set or is empty, set it using the hardcoded values
 				if ( !isset($clinical_resource_fpage_title_provider) || empty($clinical_resource_fpage_title_provider) ) {
-					$clinical_resource_fpage_title_provider = '[Clinical Resources] Related to [Provider Short Name]'; // Title
+					$clinical_resource_fpage_title_provider = ''; // Title
 				}
 				if ( !isset($clinical_resource_fpage_intro_provider) || empty($clinical_resource_fpage_intro_provider) ) {
 					$clinical_resource_fpage_intro_provider = ''; // Intro text
+				}
+				if ( !isset($clinical_resource_fpage_more_text_provider) || empty($clinical_resource_fpage_more_text_provider) ) {
+					$clinical_resource_fpage_more_text_provider = 'Want to find more [clinical resources] related to [Provider Short Name]?'; // "More" intro text
+				}
+				if ( !isset($clinical_resource_fpage_more_link_text_provider) || empty($clinical_resource_fpage_more_link_text_provider) ) {
+					$clinical_resource_fpage_more_link_text_provider = ''; // "More" link text
+				}
+				if ( !isset($clinical_resource_fpage_more_link_descr_provider) || empty($clinical_resource_fpage_more_link_descr_provider) ) {
+					$clinical_resource_fpage_more_link_descr_provider = 'View the full list of [clinical resources] related to [Provider Short Name]'; // "More" link description
 				}
 
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
@@ -2944,10 +2982,34 @@ function uamswp_fad_podcast() {
 					}
 					$clinical_resource_fpage_intro_provider = $clinical_resource_fpage_intro_general; // Intro text
 				}
+				if ( !isset($clinical_resource_fpage_more_text_provider) || empty($clinical_resource_fpage_more_text_provider) ) {
+					if ( !isset($clinical_resource_fpage_more_text_general) || empty($clinical_resource_fpage_more_text_general) ) {
+						uamswp_fad_clinical_resource_fpage_text_general();
+						global $clinical_resource_fpage_more_text_general;
+					}
+					$clinical_resource_fpage_more_text_provider = $clinical_resource_fpage_intro_general; // "More" intro text
+				}
+				if ( !isset($clinical_resource_fpage_more_link_text_provider) || empty($clinical_resource_fpage_more_link_text_provider) ) {
+					if ( !isset($clinical_resource_fpage_more_link_text_general) || empty($clinical_resource_fpage_more_link_text_general) ) {
+						uamswp_fad_clinical_resource_fpage_text_general();
+						global $clinical_resource_fpage_more_link_text_general;
+					}
+					$clinical_resource_fpage_more_link_text_provider = $clinical_resource_fpage_intro_general; // "More" link text
+				}
+				if ( !isset($clinical_resource_fpage_more_link_descr_provider) || empty($clinical_resource_fpage_more_link_descr_provider) ) {
+					if ( !isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general) ) {
+						uamswp_fad_clinical_resource_fpage_text_general();
+						global $clinical_resource_fpage_more_link_descr_general;
+					}
+					$clinical_resource_fpage_more_link_descr_provider = $clinical_resource_fpage_intro_general; // "More" link description
+				}
 	
 				// Substitute placeholder text for relevant system settings value
 				$clinical_resource_fpage_title_provider = $clinical_resource_fpage_title_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_provider) : ''; // Title
 				$clinical_resource_fpage_intro_provider = $clinical_resource_fpage_intro_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_provider) : ''; // Intro text
+				$clinical_resource_fpage_more_text_provider = $clinical_resource_fpage_more_text_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_text_provider) : ''; // Intro text
+				$clinical_resource_fpage_more_link_text_provider = $clinical_resource_fpage_more_link_text_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_text_provider) : ''; // Intro text
+				$clinical_resource_fpage_more_link_descr_provider = $clinical_resource_fpage_more_link_descr_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_descr_provider) : ''; // Intro text
 
 			// Conditions
 			$condition_fpage_title_provider = get_field('conditions_fpage_title_provider', 'option'); // Title of Fake Subpage or Section for Conditions in Provider Subsection
@@ -3025,6 +3087,9 @@ function uamswp_fad_podcast() {
 			global $expertise_fpage_intro_location;
 			global $clinical_resource_fpage_title_location;
 			global $clinical_resource_fpage_intro_location;
+			global $clinical_resource_fpage_more_text_location;
+			global $clinical_resource_fpage_more_link_text_location;
+			global $clinical_resource_fpage_more_link_descr_location;
 			global $condition_fpage_title_location;
 			global $condition_fpage_intro_location;
 			global $treatment_fpage_title_location;
@@ -3127,15 +3192,27 @@ function uamswp_fad_podcast() {
 				$expertise_fpage_intro_location = $expertise_fpage_intro_location ? uamswp_fad_fpage_text_replace($expertise_fpage_intro_location) : ''; // Intro text
 
 			// Clinical Resources
-			$clinical_resource_fpage_title_location = get_field('clinical_resource_fpage_title_location', 'option'); // Title of Fake Subpage for Clinical Resources in Location Subsection
-			$clinical_resource_fpage_intro_location = get_field('clinical_resource_fpage_intro_location', 'option'); // Intro Text of Fake Subpage for Clinical Resources in Location Subsection
+			$clinical_resource_fpage_title_location = get_field('clinical_resource_fpage_title_location', 'option'); // Title of Section for Clinical Resources on Clinical Resource Profile
+			$clinical_resource_fpage_intro_location = get_field('clinical_resource_fpage_intro_location', 'option'); // Intro Text of Section for Clinical Resources on Clinical Resource Profile
+			$clinical_resource_fpage_more_text_location = get_field('clinical_resource_fpage_more_text_location', 'option'); // "More" Intro Text of Fake Subpage or Section for Related Clinical Resources in a Clinical Resources Subsection or Profile
+			$clinical_resource_fpage_more_link_text_location = get_field('clinical_resource_fpage_more_link_text_location', 'option'); // "More" Link Text of Fake Subpage or Section for Related Clinical Resources in a Clinical Resources Subsection or Profile
+			$clinical_resource_fpage_more_link_descr_location = get_field('clinical_resource_fpage_more_link_descr_location', 'option'); // "More" Link Description of Fake Subpage or Section for Related Clinical Resources in a Clinical Resources Subsection or Profile
 
 				// If the variable is not set or is empty, set it using the hardcoded values
 				if ( !isset($clinical_resource_fpage_title_location) || empty($clinical_resource_fpage_title_location) ) {
-					$clinical_resource_fpage_title_location = '[Clinical Resources] Related to [the Location Title]'; // Title
+					$clinical_resource_fpage_title_location = ''; // Title
 				}
 				if ( !isset($clinical_resource_fpage_intro_location) || empty($clinical_resource_fpage_intro_location) ) {
 					$clinical_resource_fpage_intro_location = ''; // Intro text
+				}
+				if ( !isset($clinical_resource_fpage_more_text_location) || empty($clinical_resource_fpage_more_text_location) ) {
+					$clinical_resource_fpage_more_text_location = 'Want to find more [clinical resources] related to [the Location Title]?'; // "More" intro text
+				}
+				if ( !isset($clinical_resource_fpage_more_link_text_location) || empty($clinical_resource_fpage_more_link_text_location) ) {
+					$clinical_resource_fpage_more_link_text_location = ''; // "More" link text
+				}
+				if ( !isset($clinical_resource_fpage_more_link_descr_location) || empty($clinical_resource_fpage_more_link_descr_location) ) {
+					$clinical_resource_fpage_more_link_descr_location = 'View the full list of [clinical resources] related to [the Location Title]'; // "More" link description
 				}
 
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
@@ -3153,10 +3230,34 @@ function uamswp_fad_podcast() {
 					}
 					$clinical_resource_fpage_intro_location = $clinical_resource_fpage_intro_general; // Intro text
 				}
+				if ( !isset($clinical_resource_fpage_more_text_location) || empty($clinical_resource_fpage_more_text_location) ) {
+					if ( !isset($clinical_resource_fpage_more_text_general) || empty($clinical_resource_fpage_more_text_general) ) {
+						uamswp_fad_clinical_resource_fpage_text_general();
+						global $clinical_resource_fpage_more_text_general;
+					}
+					$clinical_resource_fpage_more_text_location = $clinical_resource_fpage_intro_general; // "More" intro text
+				}
+				if ( !isset($clinical_resource_fpage_more_link_text_location) || empty($clinical_resource_fpage_more_link_text_location) ) {
+					if ( !isset($clinical_resource_fpage_more_link_text_general) || empty($clinical_resource_fpage_more_link_text_general) ) {
+						uamswp_fad_clinical_resource_fpage_text_general();
+						global $clinical_resource_fpage_more_link_text_general;
+					}
+					$clinical_resource_fpage_more_link_text_location = $clinical_resource_fpage_intro_general; // "More" link text
+				}
+				if ( !isset($clinical_resource_fpage_more_link_descr_location) || empty($clinical_resource_fpage_more_link_descr_location) ) {
+					if ( !isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general) ) {
+						uamswp_fad_clinical_resource_fpage_text_general();
+						global $clinical_resource_fpage_more_link_descr_general;
+					}
+					$clinical_resource_fpage_more_link_descr_location = $clinical_resource_fpage_intro_general; // "More" link description
+				}
 	
 				// Substitute placeholder text for relevant system settings value
 				$clinical_resource_fpage_title_location = $clinical_resource_fpage_title_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_location) : ''; // Title
 				$clinical_resource_fpage_intro_location = $clinical_resource_fpage_intro_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_location) : ''; // Intro text
+				$clinical_resource_fpage_more_text_location = $clinical_resource_fpage_more_text_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_text_location) : ''; // Intro text
+				$clinical_resource_fpage_more_link_text_location = $clinical_resource_fpage_more_link_text_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_text_location) : ''; // Intro text
+				$clinical_resource_fpage_more_link_descr_location = $clinical_resource_fpage_more_link_descr_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_descr_location) : ''; // Intro text
 
 			// Conditions
 			$condition_fpage_title_location = get_field('conditions_fpage_title_location', 'option'); // Title of Fake Subpage for Conditions in Location Subsection
@@ -3261,6 +3362,9 @@ function uamswp_fad_podcast() {
 			global $expertise_fpage_featured_image_expertise_id;
 			global $clinical_resource_fpage_title_expertise;
 			global $clinical_resource_fpage_intro_expertise;
+			global $clinical_resource_fpage_more_text_expertise;
+			global $clinical_resource_fpage_more_link_text_expertise;
+			global $clinical_resource_fpage_more_link_descr_expertise;
 			global $clinical_resources_fpage_short_desc_expertise;
 			global $clinical_resource_fpage_featured_image_expertise;
 			global $clinical_resource_fpage_featured_image_expertise_id;
@@ -3652,7 +3756,10 @@ function uamswp_fad_podcast() {
 					if ( !isset($clinical_resource_fpage_intro_expertise) || empty($clinical_resource_fpage_intro_expertise) ) {
 						$clinical_resource_fpage_intro_expertise = get_field('clinical_resource_fpage_intro_expertise', 'option'); // Intro text
 					}
-
+					$clinical_resource_fpage_more_text_expertise = get_field('clinical_resource_fpage_more_text_expertise', 'option'); // "More" Intro Text of Fake Subpage or Section for Related Clinical Resources in a Clinical Resources Subsection or Profile
+					$clinical_resource_fpage_more_link_text_expertise = get_field('clinical_resource_fpage_more_link_text_expertise', 'option'); // "More" Link Text of Fake Subpage or Section for Related Clinical Resources in a Clinical Resources Subsection or Profile
+					$clinical_resource_fpage_more_link_descr_expertise = get_field('clinical_resource_fpage_more_link_descr_expertise', 'option'); // "More" Link Description of Fake Subpage or Section for Related Clinical Resources in a Clinical Resources Subsection or Profile
+	
 					// If the variable is not set or is empty, set it using the hardcoded values
 					if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
 						$clinical_resource_fpage_title_expertise = ''; // Title
@@ -3660,8 +3767,17 @@ function uamswp_fad_podcast() {
 					if ( !isset($clinical_resource_fpage_intro_expertise) || empty($clinical_resource_fpage_intro_expertise) ) {
 						$clinical_resource_fpage_intro_expertise = ''; // Intro text
 					}
+					if ( !isset($clinical_resource_fpage_more_text_expertise) || empty($clinical_resource_fpage_more_text_expertise) ) {
+						$clinical_resource_fpage_more_text_expertise = 'Want to find more [clinical resources] related to [Area of Expertise Title]?'; // "More" intro text
+					}
+					if ( !isset($clinical_resource_fpage_more_link_text_expertise) || empty($clinical_resource_fpage_more_link_text_expertise) ) {
+						$clinical_resource_fpage_more_link_text_expertise = ''; // "More" link text
+					}
+					if ( !isset($clinical_resource_fpage_more_link_descr_expertise) || empty($clinical_resource_fpage_more_link_descr_expertise) ) {
+						$clinical_resource_fpage_more_link_descr_expertise = 'View the full list of [clinical resources] related to [Area of Expertise Title]'; // "More" link description
+					}
 
-					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement of a related areas of expertise subpage/section
+					// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 					if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
 						if ( !isset($clinical_resource_fpage_title_general) || empty($clinical_resource_fpage_title_general) ) {
 							uamswp_fad_clinical_resource_fpage_text_general();
@@ -3676,10 +3792,34 @@ function uamswp_fad_podcast() {
 						}
 						$clinical_resource_fpage_intro_expertise = $clinical_resource_fpage_intro_general; // Intro text
 					}
+					if ( !isset($clinical_resource_fpage_more_text_expertise) || empty($clinical_resource_fpage_more_text_expertise) ) {
+						if ( !isset($clinical_resource_fpage_more_text_general) || empty($clinical_resource_fpage_more_text_general) ) {
+							uamswp_fad_clinical_resource_fpage_text_general();
+							global $clinical_resource_fpage_more_text_general;
+						}
+						$clinical_resource_fpage_more_text_expertise = $clinical_resource_fpage_intro_general; // "More" intro text
+					}
+					if ( !isset($clinical_resource_fpage_more_link_text_expertise) || empty($clinical_resource_fpage_more_link_text_expertise) ) {
+						if ( !isset($clinical_resource_fpage_more_link_text_general) || empty($clinical_resource_fpage_more_link_text_general) ) {
+							uamswp_fad_clinical_resource_fpage_text_general();
+							global $clinical_resource_fpage_more_link_text_general;
+						}
+						$clinical_resource_fpage_more_link_text_expertise = $clinical_resource_fpage_intro_general; // "More" link text
+					}
+					if ( !isset($clinical_resource_fpage_more_link_descr_expertise) || empty($clinical_resource_fpage_more_link_descr_expertise) ) {
+						if ( !isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general) ) {
+							uamswp_fad_clinical_resource_fpage_text_general();
+							global $clinical_resource_fpage_more_link_descr_general;
+						}
+						$clinical_resource_fpage_more_link_descr_expertise = $clinical_resource_fpage_intro_general; // "More" link description
+					}
 		
 					// Substitute placeholder text for relevant system settings value
 					$clinical_resource_fpage_title_expertise = $clinical_resource_fpage_title_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_expertise) : ''; // Title
 					$clinical_resource_fpage_intro_expertise = $clinical_resource_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_expertise) : ''; // Intro text
+					$clinical_resource_fpage_more_text_expertise = $clinical_resource_fpage_more_text_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_text_expertise) : ''; // Intro text
+					$clinical_resource_fpage_more_link_text_expertise = $clinical_resource_fpage_more_link_text_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_text_expertise) : ''; // Intro text
+					$clinical_resource_fpage_more_link_descr_expertise = $clinical_resource_fpage_more_link_descr_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_descr_expertise) : ''; // Intro text
 
 				// Get value for meta description
 				$clinical_resources_fpage_short_desc_query_expertise = get_field('expertise_clinical_resources_fpage_short_desc_query'); // If true, use intro text. If false, use specific short description.
@@ -3798,6 +3938,9 @@ function uamswp_fad_podcast() {
 			global $expertise_fpage_intro_clinical_resource;
 			global $clinical_resource_fpage_title_clinical_resource;
 			global $clinical_resource_fpage_intro_clinical_resource;
+			global $clinical_resource_fpage_more_text_clinical_resource;
+			global $clinical_resource_fpage_more_link_text_clinical_resource;
+			global $clinical_resource_fpage_more_link_descr_clinical_resource;
 			global $condition_fpage_title_clinical_resource;
 			global $condition_fpage_intro_clinical_resource;
 			global $treatment_fpage_title_clinical_resource;
@@ -3868,10 +4011,8 @@ function uamswp_fad_podcast() {
 				$location_fpage_intro_clinical_resource = $location_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($location_fpage_intro_clinical_resource) : ''; // Intro text
 
 			// Areas of Expertise
-			$expertise_fpage_title_clinical_resource = get_field('expertise_fpage_title_clinical_resource', 'option') ?: ( get_field('expertise_fpage_title_general', 'option') ?: 'Related [Areas of Expertise]' ); // Title of Section for Descendant Areas of Expertise Items on Clinical Resource Profile
-				$expertise_fpage_title_clinical_resource = $expertise_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($expertise_fpage_title_clinical_resource) : ''; // Substitute placeholder text for relevant system settings value
-			$expertise_fpage_intro_clinical_resource = get_field('expertise_fpage_intro_clinical_resource', 'option') ?: ( get_field('expertise_fpage_intro_general', 'option') ?: '' ); // Intro Text of Section for Areas of Expertise Items on Clinical Resource Profile
-				$expertise_fpage_intro_clinical_resource = $expertise_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($expertise_fpage_intro_clinical_resource) : ''; // Substitute placeholder text for relevant system settings value
+			$expertise_fpage_title_clinical_resource = get_field('expertise_fpage_title_clinical_resource', 'option'); // Title of Section for Descendant Areas of Expertise Items on Clinical Resource Profile
+			$expertise_fpage_intro_clinical_resource = get_field('expertise_fpage_intro_clinical_resource', 'option'); // Intro Text of Section for Areas of Expertise Items on Clinical Resource Profile
 
 				// If the variable is not set or is empty, set it using the hardcoded values
 				if ( !isset($expertise_fpage_title_clinical_resource) || empty($expertise_fpage_title_clinical_resource) ) {
@@ -3902,10 +4043,11 @@ function uamswp_fad_podcast() {
 				$expertise_fpage_intro_clinical_resource = $expertise_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($expertise_fpage_intro_clinical_resource) : ''; // Intro text
 
 			// Clinical Resources
-			$clinical_resource_fpage_title_clinical_resource = get_field('clinical_resource_fpage_title_clinical_resource', 'option') ?: ( get_field('clinical_resource_fpage_title_general', 'option') ?: 'Related [Clinical Resources]' ); // Title of Section for Clinical Resources on Clinical Resource Profile
-				$clinical_resource_fpage_title_clinical_resource = $clinical_resource_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_clinical_resource) : ''; // Substitute placeholder text for relevant system settings value
-			$clinical_resource_fpage_intro_clinical_resource = get_field('clinical_resource_fpage_intro_clinical_resource', 'option') ?: ( get_field('clinical_resource_fpage_intro_general', 'option') ?: '' ); // Intro Text of Section for Clinical Resources on Clinical Resource Profile
-				$clinical_resource_fpage_intro_clinical_resource = $clinical_resource_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_clinical_resource) : ''; // Substitute placeholder text for relevant system settings value
+			$clinical_resource_fpage_title_clinical_resource = get_field('clinical_resource_fpage_title_clinical_resource', 'option'); // Title of Section for Clinical Resources on Clinical Resource Profile
+			$clinical_resource_fpage_intro_clinical_resource = get_field('clinical_resource_fpage_intro_clinical_resource', 'option'); // Intro Text of Section for Clinical Resources on Clinical Resource Profile
+			$clinical_resource_fpage_more_text_clinical_resource = get_field('clinical_resource_fpage_more_text_clinical_resource', 'option'); // "More" Intro Text of Fake Subpage or Section for Related Clinical Resources in a Clinical Resources Subsection or Profile
+			$clinical_resource_fpage_more_link_text_clinical_resource = get_field('clinical_resource_fpage_more_link_text_clinical_resource', 'option'); // "More" Link Text of Fake Subpage or Section for Related Clinical Resources in a Clinical Resources Subsection or Profile
+			$clinical_resource_fpage_more_link_descr_clinical_resource = get_field('clinical_resource_fpage_more_link_descr_clinical_resource', 'option'); // "More" Link Description of Fake Subpage or Section for Related Clinical Resources in a Clinical Resources Subsection or Profile
 
 				// If the variable is not set or is empty, set it using the hardcoded values
 				if ( !isset($clinical_resource_fpage_title_clinical_resource) || empty($clinical_resource_fpage_title_clinical_resource) ) {
@@ -3913,6 +4055,15 @@ function uamswp_fad_podcast() {
 				}
 				if ( !isset($clinical_resource_fpage_intro_clinical_resource) || empty($clinical_resource_fpage_intro_clinical_resource) ) {
 					$clinical_resource_fpage_intro_clinical_resource = ''; // Intro text
+				}
+				if ( !isset($clinical_resource_fpage_more_text_clinical_resource) || empty($clinical_resource_fpage_more_text_clinical_resource) ) {
+					$clinical_resource_fpage_more_text_clinical_resource = ''; // "More" intro text
+				}
+				if ( !isset($clinical_resource_fpage_more_link_text_clinical_resource) || empty($clinical_resource_fpage_more_link_text_clinical_resource) ) {
+					$clinical_resource_fpage_more_link_text_clinical_resource = ''; // "More" link text
+				}
+				if ( !isset($clinical_resource_fpage_more_link_descr_clinical_resource) || empty($clinical_resource_fpage_more_link_descr_clinical_resource) ) {
+					$clinical_resource_fpage_more_link_descr_clinical_resource = ''; // "More" link description
 				}
 
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
@@ -3930,16 +4081,38 @@ function uamswp_fad_podcast() {
 					}
 					$clinical_resource_fpage_intro_clinical_resource = $clinical_resource_fpage_intro_general; // Intro text
 				}
+				if ( !isset($clinical_resource_fpage_more_text_clinical_resource) || empty($clinical_resource_fpage_more_text_clinical_resource) ) {
+					if ( !isset($clinical_resource_fpage_more_text_general) || empty($clinical_resource_fpage_more_text_general) ) {
+						uamswp_fad_clinical_resource_fpage_text_general();
+						global $clinical_resource_fpage_more_text_general;
+					}
+					$clinical_resource_fpage_more_text_clinical_resource = $clinical_resource_fpage_intro_general; // "More" intro text
+				}
+				if ( !isset($clinical_resource_fpage_more_link_text_clinical_resource) || empty($clinical_resource_fpage_more_link_text_clinical_resource) ) {
+					if ( !isset($clinical_resource_fpage_more_link_text_general) || empty($clinical_resource_fpage_more_link_text_general) ) {
+						uamswp_fad_clinical_resource_fpage_text_general();
+						global $clinical_resource_fpage_more_link_text_general;
+					}
+					$clinical_resource_fpage_more_link_text_clinical_resource = $clinical_resource_fpage_intro_general; // "More" link text
+				}
+				if ( !isset($clinical_resource_fpage_more_link_descr_clinical_resource) || empty($clinical_resource_fpage_more_link_descr_clinical_resource) ) {
+					if ( !isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general) ) {
+						uamswp_fad_clinical_resource_fpage_text_general();
+						global $clinical_resource_fpage_more_link_descr_general;
+					}
+					$clinical_resource_fpage_more_link_descr_clinical_resource = $clinical_resource_fpage_intro_general; // "More" link description
+				}
 	
 				// Substitute placeholder text for relevant system settings value
 				$clinical_resource_fpage_title_clinical_resource = $clinical_resource_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_clinical_resource) : ''; // Title
 				$clinical_resource_fpage_intro_clinical_resource = $clinical_resource_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_clinical_resource) : ''; // Intro text
+				$clinical_resource_fpage_more_text_clinical_resource = $clinical_resource_fpage_more_text_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_text_clinical_resource) : ''; // Intro text
+				$clinical_resource_fpage_more_link_text_clinical_resource = $clinical_resource_fpage_more_link_text_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_text_clinical_resource) : ''; // Intro text
+				$clinical_resource_fpage_more_link_descr_clinical_resource = $clinical_resource_fpage_more_link_descr_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_descr_clinical_resource) : ''; // Intro text
 
 			// Conditions
-			$condition_fpage_title_clinical_resource = get_field('conditions_fpage_title_clinical_resource', 'option') ?: ( get_field('conditions_fpage_title_general', 'option') ?: 'Related [Conditions]' ); // Title of Section for Conditions on Clinical Resource Profile
-				$condition_fpage_title_clinical_resource = $condition_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($condition_fpage_title_clinical_resource) : ''; // Substitute placeholder text for relevant system settings value
-			$condition_fpage_intro_clinical_resource = get_field('conditions_fpage_intro_clinical_resource', 'option') ?: ( get_field('conditions_fpage_intro_general', 'option') ?: '' ); // Intro Text of Section for Conditions on Clinical Resource Profile
-				$condition_fpage_intro_clinical_resource = $condition_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($condition_fpage_intro_clinical_resource) : ''; // Substitute placeholder text for relevant system settings value
+			$condition_fpage_title_clinical_resource = get_field('conditions_fpage_title_clinical_resource', 'option'); // Title of Section for Conditions on Clinical Resource Profile
+			$condition_fpage_intro_clinical_resource = get_field('conditions_fpage_intro_clinical_resource', 'option'); // Intro Text of Section for Conditions on Clinical Resource Profile
 
 				// If the variable is not set or is empty, set it using the hardcoded values
 				if ( !isset($condition_fpage_title_clinical_resource) || empty($condition_fpage_title_clinical_resource) ) {
@@ -3970,10 +4143,8 @@ function uamswp_fad_podcast() {
 				$condition_fpage_intro_clinical_resource = $condition_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($condition_fpage_intro_clinical_resource) : ''; // Intro text
 
 			// Treatments
-			$treatment_fpage_title_clinical_resource = get_field('treatments_fpage_title_clinical_resource', 'option') ?: ( get_field('treatments_fpage_title_general', 'option') ?: 'Related [Treatments]' ); // Title of Section for Treatments on Clinical Resource Profile
-				$treatment_fpage_title_clinical_resource = $treatment_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($treatment_fpage_title_clinical_resource) : ''; // Substitute placeholder text for relevant system settings value
-			$treatment_fpage_intro_clinical_resource = get_field('treatments_fpage_intro_clinical_resource', 'option') ?: ( get_field('treatments_fpage_intro_general', 'option') ?: '' ); // Intro Text of Section for Treatments on Clinical Resource Profile
-				$treatment_fpage_intro_clinical_resource = $treatment_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($treatment_fpage_intro_clinical_resource) : ''; // Substitute placeholder text for relevant system settings value
+			$treatment_fpage_title_clinical_resource = get_field('treatments_fpage_title_clinical_resource', 'option'); // Title of Section for Treatments on Clinical Resource Profile
+			$treatment_fpage_intro_clinical_resource = get_field('treatments_fpage_intro_clinical_resource', 'option'); // Intro Text of Section for Treatments on Clinical Resource Profile
 
 				// If the variable is not set or is empty, set it using the hardcoded values
 				if ( !isset($treatment_fpage_title_clinical_resource) || empty($treatment_fpage_title_clinical_resource) ) {
