@@ -506,7 +506,7 @@
 			},
 			"acfe_permissions": "",
 			"default_value": "",
-			"placeholder": "Related [Clinical Resources]",
+			"placeholder": "",
 			"prepend": "",
 			"append": "",
 			"maxlength": "",
@@ -548,7 +548,7 @@
 			},
 			"acfe_permissions": "",
 			"default_value": "",
-			"placeholder": "Want to find more related [clinical resources]?",
+			"placeholder": "",
 			"maxlength": "",
 			"acfe_validate": "",
 			"acfe_update": ""
@@ -568,7 +568,7 @@
 			},
 			"acfe_permissions": "",
 			"default_value": "",
-			"placeholder": "View the Full List",
+			"placeholder": "",
 			"maxlength": "",
 			"acfe_validate": "",
 			"acfe_update": ""
@@ -588,7 +588,7 @@
 			},
 			"acfe_permissions": "",
 			"default_value": "",
-			"placeholder": "View the full list of related [clinical resources]",
+			"placeholder": "",
 			"maxlength": "",
 			"acfe_validate": "",
 			"acfe_update": ""

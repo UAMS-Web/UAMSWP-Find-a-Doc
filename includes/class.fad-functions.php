@@ -2953,7 +2953,7 @@ function uamswp_fad_podcast() {
 
 				// If the variable is not set or is empty, set it using the hardcoded values
 				if ( !isset($clinical_resource_fpage_title_provider) || empty($clinical_resource_fpage_title_provider) ) {
-					$clinical_resource_fpage_title_provider = ''; // Title
+					$clinical_resource_fpage_title_provider = '[Clinical Resources] Related to [Provider Short Name]'; // Title
 				}
 				if ( !isset($clinical_resource_fpage_intro_provider) || empty($clinical_resource_fpage_intro_provider) ) {
 					$clinical_resource_fpage_intro_provider = ''; // Intro text
@@ -2962,7 +2962,7 @@ function uamswp_fad_podcast() {
 					$clinical_resource_fpage_more_text_provider = 'Want to find more [clinical resources] related to [Provider Short Name]?'; // "More" intro text
 				}
 				if ( !isset($clinical_resource_fpage_more_link_text_provider) || empty($clinical_resource_fpage_more_link_text_provider) ) {
-					$clinical_resource_fpage_more_link_text_provider = ''; // "More" link text
+					$clinical_resource_fpage_more_link_text_provider = 'View the Full List'; // "More" link text
 				}
 				if ( !isset($clinical_resource_fpage_more_link_descr_provider) || empty($clinical_resource_fpage_more_link_descr_provider) ) {
 					$clinical_resource_fpage_more_link_descr_provider = 'View the full list of [clinical resources] related to [Provider Short Name]'; // "More" link description
@@ -3201,7 +3201,7 @@ function uamswp_fad_podcast() {
 
 				// If the variable is not set or is empty, set it using the hardcoded values
 				if ( !isset($clinical_resource_fpage_title_location) || empty($clinical_resource_fpage_title_location) ) {
-					$clinical_resource_fpage_title_location = ''; // Title
+					$clinical_resource_fpage_title_location = '[Clinical Resources] Related to [the Location Title]'; // Title
 				}
 				if ( !isset($clinical_resource_fpage_intro_location) || empty($clinical_resource_fpage_intro_location) ) {
 					$clinical_resource_fpage_intro_location = ''; // Intro text
@@ -3210,7 +3210,7 @@ function uamswp_fad_podcast() {
 					$clinical_resource_fpage_more_text_location = 'Want to find more [clinical resources] related to [the Location Title]?'; // "More" intro text
 				}
 				if ( !isset($clinical_resource_fpage_more_link_text_location) || empty($clinical_resource_fpage_more_link_text_location) ) {
-					$clinical_resource_fpage_more_link_text_location = ''; // "More" link text
+					$clinical_resource_fpage_more_link_text_location = 'View the Full List'; // "More" link text
 				}
 				if ( !isset($clinical_resource_fpage_more_link_descr_location) || empty($clinical_resource_fpage_more_link_descr_location) ) {
 					$clinical_resource_fpage_more_link_descr_location = 'View the full list of [clinical resources] related to [the Location Title]'; // "More" link description
@@ -3763,7 +3763,7 @@ function uamswp_fad_podcast() {
 	
 					// If the variable is not set or is empty, set it using the hardcoded values
 					if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
-						$clinical_resource_fpage_title_expertise = ''; // Title
+						$clinical_resource_fpage_title_expertise = '[Clinical Resources] Related to [Area of Expertise Title]'; // Title
 					}
 					if ( !isset($clinical_resource_fpage_intro_expertise) || empty($clinical_resource_fpage_intro_expertise) ) {
 						$clinical_resource_fpage_intro_expertise = ''; // Intro text
@@ -3772,7 +3772,7 @@ function uamswp_fad_podcast() {
 						$clinical_resource_fpage_more_text_expertise = 'Want to find more [clinical resources] related to [Area of Expertise Title]?'; // "More" intro text
 					}
 					if ( !isset($clinical_resource_fpage_more_link_text_expertise) || empty($clinical_resource_fpage_more_link_text_expertise) ) {
-						$clinical_resource_fpage_more_link_text_expertise = ''; // "More" link text
+						$clinical_resource_fpage_more_link_text_expertise = 'View the Full List'; // "More" link text
 					}
 					if ( !isset($clinical_resource_fpage_more_link_descr_expertise) || empty($clinical_resource_fpage_more_link_descr_expertise) ) {
 						$clinical_resource_fpage_more_link_descr_expertise = 'View the full list of [clinical resources] related to [Area of Expertise Title]'; // "More" link description
