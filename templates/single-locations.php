@@ -508,6 +508,11 @@ while ( have_posts() ) : the_post(); ?>
 			)
 		);
 		uamswp_fad_location_descendant_query();
+		$location_query = $location_descendant_query;
+		$location_section_show = $location_descendant_section_show;
+		$location_ids = $location_descendant_ids;
+		$location_count = $location_descendant_count;
+		$location_valid = $location_descendant_valid;
 
 		// Check if Clinical Resources section should be displayed
 		if( $clinical_resources && $clinical_resource_query->have_posts() ) {
@@ -1570,32 +1575,13 @@ while ( have_posts() ) : the_post(); ?>
 	uamswp_fad_section_expertise();
 	// End Areas of Expertise Section
 
-	// Begin Child Locations Section
-	if ( $location_descendant_section_show ) { ?>
-		<section class="uams-module location-list bg-auto" id="sub-clinics" aria-labelledby="sub-location-title" >
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title" id="sub-location-title"><span class="title"><?php echo $location_descendant_plural_name; ?> Within <?php echo $page_title_phrase; ?></span></h2>
-						<div class="card-list-container">
-							<div class="card-list">
-								<?php
-									while ( $location_descendant_query->have_posts() ) {
-										$location_descendant_query->the_post();
-										$id = get_the_ID();
-										$location_descendant_list = true; // Indicate that this is a list of child locations within this location
-										include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
-									} // endwhile
-									wp_reset_postdata();
-								?>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php } // endif
-	// End Child Locations Section
+	// Begin Descendant Locations Section
+	$location_section_title = $location_descendant_fpage_title_location; // Text to use for the section title // string (default: Find-a-Doc Settings value for locations section title in a general placement)
+	$location_section_intro = $location_descendant_fpage_intro_location; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for locations section intro text in a general placement)
+	$location_section_filter = false; // Query whether to add filter(s) // bool (default: true)
+	$location_descendant_list = true; // Query whether this is a list of child locations within a location // bool (default: false)
+	uamswp_fad_section_location();
+	// End Descendant Locations Section
 
 	// Begin Clinical Resources Section
 	if ( $clinical_resource_section_show ) {
