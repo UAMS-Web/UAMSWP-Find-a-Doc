@@ -20,8 +20,8 @@
  * 	$clinical_resource_query
  * 	$resource_postsPerPage
  * 	$resource_more_suppress
- * 	$resource_more_key
- * 	$resource_more_value
+ * 	$clinical_resource_section_more_link_key
+ * 	$clinical_resource_section_more_link_value
  * 
  * Optional var:
  * 	$resource_page = 'single' or 'archive' (default to 'single')
@@ -59,15 +59,15 @@ if ( $resource_count > 4 && $resource_postsPerPage == -1 ) {
 } else {
 	$resource_layout = 'card';
 }
-$resource_more = ( $resource_layout == 'card' && $resource_count > $resource_postsPerPage && ( $resource_more_key && !empty($resource_more_key) && $resource_more_value && !empty($resource_more_value) ) ) ? true : false;
+$resource_more = ( $resource_layout == 'card' && $resource_count > $resource_postsPerPage && ( $clinical_resource_section_more_link_key && !empty($clinical_resource_section_more_link_key) && $clinical_resource_section_more_link_value && !empty($clinical_resource_section_more_link_value) ) ) ? true : false;
 if ( $resource_more_suppress ) {
 	$resource_more = false;
 }
 $more_text = 'Want to find more ' . strtolower($clinical_resource_plural_name) . ( $resource_heading_related_name ? ' related to ' . $resource_heading_related_name : '') . '?';
-$more_button_url = '/clinical-resource/?' . $resource_more_key . '=' . $resource_more_value;
+$clinical_resource_section_more_link_url = '/clinical-resource/?' . $clinical_resource_section_more_link_key . '=' . $clinical_resource_section_more_link_value;
 $more_button_description = 'View the full list of ' . strtolower($clinical_resource_plural_name) . ( $resource_heading_related_name ? ' related to ' . $resource_heading_related_name : '');
 $more_button_description_attr = uamswp_attr_conversion($more_button_description);
-$more_button_target = '_blank';
+$clinical_resource_section_more_link_target = '_blank';
 $more_button_text = 'View the Full List';
 
 if ( $resource_layout == 'card') { ?>
@@ -94,7 +94,7 @@ if ( $resource_layout == 'card') { ?>
 					<div class="col-12 more">
 						<p class="lead"><?php echo $more_text; ?></p>
 						<div class="cta-container">
-							<a href="<?php echo $more_button_url; ?>" class="btn btn-outline-primary" aria-label="<?php echo $more_button_description_attr; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
+							<a href="<?php echo $clinical_resource_section_more_link_url; ?>" class="btn btn-outline-primary" aria-label="<?php echo $more_button_description_attr; ?>"<?php $clinical_resource_section_more_link_target ? ' target="'. $clinical_resource_section_more_link_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
 						</div>
 					</div>
 				<?php } ?>

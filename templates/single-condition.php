@@ -390,8 +390,8 @@ $jump_link_count = 0;
 			$resource_heading_related_name = $page_title; // To what is it related?
 			$resource_heading_related_name_attr = $page_title_attr;
 			$resource_more_suppress = false; // Force div.more to not display
-			$resource_more_key = '_resource_conditions';
-			$resource_more_value = $post->post_name;
+			$clinical_resource_section_more_link_key = '_resource_conditions';
+			$clinical_resource_section_more_link_value = $post->post_name;
 			if( $clinical_resource_section_show ) {
 				include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
 			}

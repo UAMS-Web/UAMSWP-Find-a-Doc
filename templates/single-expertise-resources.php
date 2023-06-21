@@ -195,8 +195,8 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		$resource_heading_related_name_attr = $page_title_attr;
 		$resource_intro = $clinical_resource_fpage_intro_expertise;
 		$resource_more_suppress = false; // Force div.more to not display
-		$resource_more_key = '_resource_aoe';
-		$resource_more_value = $post->post_name;
+		$clinical_resource_section_more_link_key = '_resource_aoe';
+		$clinical_resource_section_more_link_value = $post->post_name;
 		if( $clinical_resource_section_show ) {
 			include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
 		}

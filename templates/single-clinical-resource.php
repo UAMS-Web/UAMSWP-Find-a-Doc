@@ -383,8 +383,8 @@ function uamswp_resource_associated() {
 	$resource_heading_related_name_attr = $page_title_attr;
 	$resource_intro = $clinical_resource_fpage_intro_clinical_resource;
 	$resource_more_suppress = false; // Force div.more to not display
-	$resource_more_key = '';
-	$resource_more_value = '';
+	$clinical_resource_section_more_link_key = '';
+	$clinical_resource_section_more_link_value = '';
 	if( $clinical_resource_section_show ) {
 		include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
 	}

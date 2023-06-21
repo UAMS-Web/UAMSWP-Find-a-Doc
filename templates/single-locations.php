@@ -1592,8 +1592,8 @@ while ( have_posts() ) : the_post(); ?>
 		$resource_heading_related_name = $page_title_phrase; // To what is it related?
 		$resource_intro = $clinical_resource_fpage_intro_location;
 		$resource_more_suppress = false; // Force div.more to not display
-		$resource_more_key = '_resource_locations';
-		$resource_more_value = $post->post_name;
+		$clinical_resource_section_more_link_key = '_resource_locations';
+		$clinical_resource_section_more_link_value = $post->post_name;
 		if( $clinical_resource_section_show ) {
 			include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
 		}
