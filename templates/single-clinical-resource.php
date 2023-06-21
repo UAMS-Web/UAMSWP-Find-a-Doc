@@ -101,6 +101,11 @@ uamswp_fad_location_query();
 $expertises = get_field('clinical_resource_aoe');
 uamswp_fad_expertise_query();
 
+// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
+$clinical_resources = get_field('clinical_resource_related');
+$clinical_resource_postsPerPage = -1; // Maximum number of clinical resources displayed in the section (-1, 4, 6, 8, 10, 12) // int (default: 4)
+uamswp_fad_clinical_resource_query();
+
 // Query for whether related conditions content section should be displayed on ontology pages/subsections
 $conditions_cpt = get_field('clinical_resource_conditions');
 uamswp_fad_condition_query();
@@ -108,11 +113,6 @@ uamswp_fad_condition_query();
 // Query for whether related treatments content section should be displayed on ontology pages/subsections
 $treatments_cpt = get_field('clinical_resource_treatments');
 uamswp_fad_treatment_query();
-
-// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
-$clinical_resources = get_field('clinical_resource_related');
-$clinical_resource_postsPerPage = -1; // Maximum number of clinical resources displayed in the section (-1, 4, 6, 8, 10, 12) // int (default: 4)
-uamswp_fad_clinical_resource_query();
 
 // Query for whether appointment information section should be displayed on a page
 // It should always be displayed.

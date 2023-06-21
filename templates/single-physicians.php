@@ -184,6 +184,33 @@ if( $location_section_show ) {
 	}
 }
 
+// Query for whether related areas of expertise content section should be displayed on a page
+$expertises = get_field('physician_expertise',$post->ID);
+uamswp_fad_expertise_query();
+if ( $expertise_section_show ) {
+	foreach ( $expertises as $expertise ) {
+		if ( get_post_status ( $expertise ) == 'publish' ) {
+			$expertise_primary_name = get_the_title($expertise);
+			$expertise_primary_name_attr = uamswp_attr_conversion($expertise_primary_name);
+			break;
+		}
+	}
+}
+
+// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
+$clinical_resources = get_field('physician_clinical_resources');
+uamswp_fad_clinical_resource_query();
+
+// Query for whether related conditions content section should be displayed on ontology pages/subsections
+$conditions = get_field('physician_conditions');
+$conditions_cpt = get_field('physician_conditions_cpt');
+uamswp_fad_condition_query();
+
+// Query for whether related treatments content section should be displayed on ontology pages/subsections
+$treatments = get_field('physician_treatments');
+$treatments_cpt = get_field('physician_treatments_cpt');
+uamswp_fad_treatment_query();
+
 // Conditionally suppress sections based on Find-a-Doc Settings configuration
 $regions = get_field('physician_region',$post->ID);
 $service_lines = get_field('physician_service_line',$post->ID);
@@ -212,19 +239,6 @@ uamswp_fad_ontology_hide();
 
 	// Override theme's method of defining the meta description
 	add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
-
-// Query for whether related areas of expertise content section should be displayed on a page
-$expertises = get_field('physician_expertise',$post->ID);
-uamswp_fad_expertise_query();
-if ( $expertise_section_show ) {
-	foreach ( $expertises as $expertise ) {
-		if ( get_post_status ( $expertise ) == 'publish' ) {
-			$expertise_primary_name = get_the_title($expertise);
-			$expertise_primary_name_attr = uamswp_attr_conversion($expertise_primary_name);
-			break;
-		}
-	}
-}
 
 // Override theme's method of defining the meta page title
 $meta_title_enhanced_addition = $phys_title_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title
@@ -318,20 +332,6 @@ while ( have_posts() ) : the_post();
 	$research_bio = get_field('physician_research_bio');
 	$research_interests = get_field('physician_research_interests');
 	$research_profiles_link = get_field('physician_research_profiles_link');
-
-	// Query for whether related conditions content section should be displayed on ontology pages/subsections
-	$conditions = get_field('physician_conditions');
-	$conditions_cpt = get_field('physician_conditions_cpt');
-	uamswp_fad_condition_query();
-
-	// Query for whether related treatments content section should be displayed on ontology pages/subsections
-	$treatments = get_field('physician_treatments');
-	$treatments_cpt = get_field('physician_treatments_cpt');
-	uamswp_fad_treatment_query();
-
-	// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
-	$clinical_resources = get_field('physician_clinical_resources');
-	uamswp_fad_clinical_resource_query();
 
 	// Query for whether UAMS Health Talk podcast section should be displayed on ontology pages/subsections
 	$podcast_name = get_field('physician_podcast_name');

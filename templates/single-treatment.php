@@ -90,10 +90,6 @@ $cta_repeater = get_field('treatment_procedure_cta');
 $providers = get_field('treatment_procedure_physicians');
 uamswp_fad_provider_query();
 
-// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
-$clinical_resources = get_field('treatment_procedure_clinical_resources');
-uamswp_fad_clinical_resource_query();
-
 // Query for whether related locations content section should be displayed on a page
 $locations = get_field('treatment_procedure_locations');
 uamswp_fad_location_query();
@@ -101,6 +97,10 @@ uamswp_fad_location_query();
 // Query for whether related areas of expertise content section should be displayed on a page
 $expertises = get_field('treatment_procedure_expertise');
 uamswp_fad_expertise_query();
+
+// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
+$clinical_resources = get_field('treatment_procedure_clinical_resources');
+uamswp_fad_clinical_resource_query();
 
 // Query for whether related conditions content section should be displayed on ontology pages/subsections
 $conditions_cpt = get_field('treatment_conditions');

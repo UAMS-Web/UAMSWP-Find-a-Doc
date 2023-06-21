@@ -262,10 +262,6 @@ $regions = get_field('location_region',$post->ID);
 $service_lines = get_field('location_service_line',$post->ID);
 uamswp_fad_ontology_hide();
 
-// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
-$clinical_resources = get_field('location_clinical_resources');
-uamswp_fad_clinical_resource_query();
-
 // Override theme's method of defining the meta description
 add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
 
@@ -479,19 +475,6 @@ while ( have_posts() ) : the_post(); ?>
 		$providers = get_field('physician_locations');
 		uamswp_fad_provider_query();
 
-		// Query for whether related conditions content section should be displayed on ontology pages/subsections
-		// $conditions = get_field('location_conditions');
-		$conditions_cpt = get_field('location_conditions_cpt');
-		uamswp_fad_condition_query();
-
-		// Query for whether related treatments content section should be displayed on ontology pages/subsections
-		$treatments_cpt = get_field('location_treatments_cpt');
-		uamswp_fad_treatment_query();
-
-		// Query for whether related areas of expertise content section should be displayed on a page
-		$expertises = get_field('location_expertise');
-		uamswp_fad_expertise_query();
-
 		// Query for whether related descendant locations content section should be displayed on a page
 		$current_id = get_the_ID();
 		$location_descendants = get_pages(
@@ -506,6 +489,23 @@ while ( have_posts() ) : the_post(); ?>
 		$location_ids = $location_descendant_ids;
 		$location_count = $location_descendant_count;
 		$location_valid = $location_descendant_valid;
+
+		// Query for whether related areas of expertise content section should be displayed on a page
+		$expertises = get_field('location_expertise');
+		uamswp_fad_expertise_query();
+
+		// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
+		$clinical_resources = get_field('location_clinical_resources');
+		uamswp_fad_clinical_resource_query();
+
+		// Query for whether related conditions content section should be displayed on ontology pages/subsections
+		// $conditions = get_field('location_conditions');
+		$conditions_cpt = get_field('location_conditions_cpt');
+		uamswp_fad_condition_query();
+
+		// Query for whether related treatments content section should be displayed on ontology pages/subsections
+		$treatments_cpt = get_field('location_treatments_cpt');
+		uamswp_fad_treatment_query();
 
 		// Check if Jump Links section should be displayed
 		if ( $jump_link_count >= $jump_link_count_min ) {
