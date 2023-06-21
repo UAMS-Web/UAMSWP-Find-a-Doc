@@ -2805,7 +2805,7 @@ function uamswp_fad_podcast() {
 					$clinical_resource_fpage_more_text_general = 'Want to find more related [clinical resources]?'; // "More" intro text
 				}
 				if ( !isset($clinical_resource_fpage_more_link_text_general) || empty($clinical_resource_fpage_more_link_text_general) ) {
-					$clinical_resource_fpage_more_link_text_general = ''; // "More" link text
+					$clinical_resource_fpage_more_link_text_general = 'View the Full List'; // "More" link text
 				}
 				if ( !isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general) ) {
 					$clinical_resource_fpage_more_link_descr_general = 'View the full list of related [clinical resources]'; // "More" link description
@@ -2987,21 +2987,21 @@ function uamswp_fad_podcast() {
 						uamswp_fad_clinical_resource_fpage_text_general();
 						global $clinical_resource_fpage_more_text_general;
 					}
-					$clinical_resource_fpage_more_text_provider = $clinical_resource_fpage_intro_general; // "More" intro text
+					$clinical_resource_fpage_more_text_provider = $clinical_resource_fpage_more_text_general; // "More" intro text
 				}
 				if ( !isset($clinical_resource_fpage_more_link_text_provider) || empty($clinical_resource_fpage_more_link_text_provider) ) {
 					if ( !isset($clinical_resource_fpage_more_link_text_general) || empty($clinical_resource_fpage_more_link_text_general) ) {
 						uamswp_fad_clinical_resource_fpage_text_general();
 						global $clinical_resource_fpage_more_link_text_general;
 					}
-					$clinical_resource_fpage_more_link_text_provider = $clinical_resource_fpage_intro_general; // "More" link text
+					$clinical_resource_fpage_more_link_text_provider = $clinical_resource_fpage_more_link_text_general; // "More" link text
 				}
 				if ( !isset($clinical_resource_fpage_more_link_descr_provider) || empty($clinical_resource_fpage_more_link_descr_provider) ) {
 					if ( !isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general) ) {
 						uamswp_fad_clinical_resource_fpage_text_general();
 						global $clinical_resource_fpage_more_link_descr_general;
 					}
-					$clinical_resource_fpage_more_link_descr_provider = $clinical_resource_fpage_intro_general; // "More" link description
+					$clinical_resource_fpage_more_link_descr_provider = $clinical_resource_fpage_more_link_descr_general; // "More" link description
 				}
 	
 				// Substitute placeholder text for relevant system settings value
@@ -3235,21 +3235,21 @@ function uamswp_fad_podcast() {
 						uamswp_fad_clinical_resource_fpage_text_general();
 						global $clinical_resource_fpage_more_text_general;
 					}
-					$clinical_resource_fpage_more_text_location = $clinical_resource_fpage_intro_general; // "More" intro text
+					$clinical_resource_fpage_more_text_location = $clinical_resource_fpage_more_text_general; // "More" intro text
 				}
 				if ( !isset($clinical_resource_fpage_more_link_text_location) || empty($clinical_resource_fpage_more_link_text_location) ) {
 					if ( !isset($clinical_resource_fpage_more_link_text_general) || empty($clinical_resource_fpage_more_link_text_general) ) {
 						uamswp_fad_clinical_resource_fpage_text_general();
 						global $clinical_resource_fpage_more_link_text_general;
 					}
-					$clinical_resource_fpage_more_link_text_location = $clinical_resource_fpage_intro_general; // "More" link text
+					$clinical_resource_fpage_more_link_text_location = $clinical_resource_fpage_more_link_text_general; // "More" link text
 				}
 				if ( !isset($clinical_resource_fpage_more_link_descr_location) || empty($clinical_resource_fpage_more_link_descr_location) ) {
 					if ( !isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general) ) {
 						uamswp_fad_clinical_resource_fpage_text_general();
 						global $clinical_resource_fpage_more_link_descr_general;
 					}
-					$clinical_resource_fpage_more_link_descr_location = $clinical_resource_fpage_intro_general; // "More" link description
+					$clinical_resource_fpage_more_link_descr_location = $clinical_resource_fpage_more_link_descr_general; // "More" link description
 				}
 	
 				// Substitute placeholder text for relevant system settings value
@@ -3797,21 +3797,21 @@ function uamswp_fad_podcast() {
 							uamswp_fad_clinical_resource_fpage_text_general();
 							global $clinical_resource_fpage_more_text_general;
 						}
-						$clinical_resource_fpage_more_text_expertise = $clinical_resource_fpage_intro_general; // "More" intro text
+						$clinical_resource_fpage_more_text_expertise = $clinical_resource_fpage_more_text_general; // "More" intro text
 					}
 					if ( !isset($clinical_resource_fpage_more_link_text_expertise) || empty($clinical_resource_fpage_more_link_text_expertise) ) {
 						if ( !isset($clinical_resource_fpage_more_link_text_general) || empty($clinical_resource_fpage_more_link_text_general) ) {
 							uamswp_fad_clinical_resource_fpage_text_general();
 							global $clinical_resource_fpage_more_link_text_general;
 						}
-						$clinical_resource_fpage_more_link_text_expertise = $clinical_resource_fpage_intro_general; // "More" link text
+						$clinical_resource_fpage_more_link_text_expertise = $clinical_resource_fpage_more_link_text_general; // "More" link text
 					}
 					if ( !isset($clinical_resource_fpage_more_link_descr_expertise) || empty($clinical_resource_fpage_more_link_descr_expertise) ) {
 						if ( !isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general) ) {
 							uamswp_fad_clinical_resource_fpage_text_general();
 							global $clinical_resource_fpage_more_link_descr_general;
 						}
-						$clinical_resource_fpage_more_link_descr_expertise = $clinical_resource_fpage_intro_general; // "More" link description
+						$clinical_resource_fpage_more_link_descr_expertise = $clinical_resource_fpage_more_link_descr_general; // "More" link description
 					}
 		
 					// Substitute placeholder text for relevant system settings value
@@ -4086,21 +4086,21 @@ function uamswp_fad_podcast() {
 						uamswp_fad_clinical_resource_fpage_text_general();
 						global $clinical_resource_fpage_more_text_general;
 					}
-					$clinical_resource_fpage_more_text_clinical_resource = $clinical_resource_fpage_intro_general; // "More" intro text
+					$clinical_resource_fpage_more_text_clinical_resource = $clinical_resource_fpage_more_text_general; // "More" intro text
 				}
 				if ( !isset($clinical_resource_fpage_more_link_text_clinical_resource) || empty($clinical_resource_fpage_more_link_text_clinical_resource) ) {
 					if ( !isset($clinical_resource_fpage_more_link_text_general) || empty($clinical_resource_fpage_more_link_text_general) ) {
 						uamswp_fad_clinical_resource_fpage_text_general();
 						global $clinical_resource_fpage_more_link_text_general;
 					}
-					$clinical_resource_fpage_more_link_text_clinical_resource = $clinical_resource_fpage_intro_general; // "More" link text
+					$clinical_resource_fpage_more_link_text_clinical_resource = $clinical_resource_fpage_more_link_text_general; // "More" link text
 				}
 				if ( !isset($clinical_resource_fpage_more_link_descr_clinical_resource) || empty($clinical_resource_fpage_more_link_descr_clinical_resource) ) {
 					if ( !isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general) ) {
 						uamswp_fad_clinical_resource_fpage_text_general();
 						global $clinical_resource_fpage_more_link_descr_general;
 					}
-					$clinical_resource_fpage_more_link_descr_clinical_resource = $clinical_resource_fpage_intro_general; // "More" link description
+					$clinical_resource_fpage_more_link_descr_clinical_resource = $clinical_resource_fpage_more_link_descr_general; // "More" link description
 				}
 	
 				// Substitute placeholder text for relevant system settings value
