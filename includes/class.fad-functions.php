@@ -4375,6 +4375,7 @@ function uamswp_fad_section_location() {
 		global $location_section_filter_title; // Query whether to add title filter // bool (default: false)
 		global $location_section_collapse_list; // Query whether to collapse the list of locations in the locations section // bool (default: false)
 		global $location_section_schema_query; // Query for whether to add locations to schema // bool (default: false)
+		global $location_descendant_list; // Query for whether this is a list of child locations within a location // bool (default: false)
 
 		// Defined in uamswp_fad_labels_location()
 		global $location_single_name; // string
@@ -4426,6 +4427,7 @@ function uamswp_fad_section_location() {
 			$location_section_filter = ( $location_section_filter && ( $location_section_filter_region || $location_section_filter_title ) ) ? $location_section_filter : false; // Set as false if neither of the filter types is true
 			$location_section_collapse_list = isset($location_section_collapse_list) ? $location_section_collapse_list : false;
 			$location_section_schema_query = isset($location_section_schema_query) ? $location_section_schema_query : false;
+			$location_descendant_list = isset($location_descendant_list) ? $location_descendant_list : false;
 
 		// Filter details
 		if ( $location_section_filter ) {
