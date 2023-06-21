@@ -20,24 +20,27 @@ $expertise_descendant_list = isset($expertise_descendant_list) ? $expertise_desc
 $expertise_title = get_the_title($id);
 $expertise_title_attr = uamswp_attr_conversion($expertise_title);
 
-// Parent Area of Expertise 
-$expertise_parent_id = wp_get_post_parent_id($id);
-$expertise_has_parent = $expertise_parent_id ? true : false;
-$parent_expertise = '';
-$parent_id = '';
-$parent_title = '';
-$parent_title_attr = '';
-$parent_url = '';
+if ( !$expertise_descendant_list ) {
+	// Parent Area of Expertise
+	$expertise_parent_id = wp_get_post_parent_id($id);
+	$expertise_has_parent = $expertise_parent_id ? true : false;
+	$parent_expertise = '';
+	$parent_id = '';
+	$parent_title = '';
+	$parent_title_attr = '';
+	$parent_url = '';
 
-if ($expertise_has_parent && $expertise_parent_id) { 
-	$parent_expertise = get_post( $expertise_parent_id );
-}
-// Get attributes of parent Area of Expertise
-if ($parent_expertise) {
-	$parent_id = $parent_expertise->ID;
-	$parent_title = $parent_expertise->post_title;
-	$parent_title_attr = uamswp_attr_conversion($parent_title);
-	$parent_url = get_permalink( $parent_id );
+	if ( $expertise_has_parent && $expertise_parent_id ) {
+		$parent_expertise = get_post($expertise_parent_id);
+	}
+
+	// Get attributes of parent Area of Expertise
+	if ( $parent_expertise ) {
+		$parent_id = $parent_expertise->ID;
+		$parent_title = $parent_expertise->post_title;
+		$parent_title_attr = uamswp_attr_conversion($parent_title);
+		$parent_url = get_permalink($parent_id);
+	}
 }
 
 $expertise_label = 'View ' . $expertise_single_name_attr . ' page for' . $expertise_title_attr;
