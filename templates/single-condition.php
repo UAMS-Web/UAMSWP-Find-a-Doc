@@ -75,7 +75,6 @@ $template_type = 'default';
 // ACF Fields - get_fields
 $clinical_trials = get_field('condition_clinical_trials');
 $video = get_field('condition_youtube_link');
-$providers = get_field('condition_physicians');
 $medline_type = get_field('medline_code_type');
 $medline_code = get_field('medline_code_id');
 $embed_code = get_field('condition_embed_codes');
@@ -93,6 +92,10 @@ else {
 // $tax = get_term_by("slug", get_query_var("term"), get_query_var("taxonomy") );
 
 $cta_repeater = get_field('condition_cta');
+
+// Query for whether related providers content section should be displayed on ontology pages/subsections
+$providers = get_field('condition_physicians');
+uamswp_fad_provider_query();
 
 // Query for whether related clinical resources content section should be displayed on ontology pages/subsections
 $clinical_resources = get_field('condition_clinical_resources');
@@ -141,32 +144,6 @@ $jump_link_count = 0;
 		$clinical_trials_section_show = true;
 	} else {
 		$clinical_trials_section_show = false;
-	}
-
-	// Check if Providers section should be displayed
-	if ($providers) {
-		$args = (array(
-			'post_type' => 'provider',
-			'post_status' => 'publish',
-			'order' => 'ASC',
-			'orderby' => 'title',
-			'posts_per_page' => -1,
-			'fields' => 'ids',
-			// 'no_found_rows' => true, // counts posts, remove if pagination required
-			'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
-			'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
-			'post__in'	=> $providers
-		));
-		$provider_query = new WP_Query( $args );
-	}
-
-	if( $providers && $provider_query->have_posts() ) {
-		$provider_section_show = true;
-		$jump_link_count++;
-		$provider_ids = $provider_query->posts;
-		wp_reset_postdata();
-	} else {
-		$provider_section_show = false;
 	}
 
 	// Check if Make an Appointment section should be displayed
