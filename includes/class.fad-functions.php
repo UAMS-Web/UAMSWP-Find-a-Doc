@@ -2634,18 +2634,36 @@ function uamswp_fad_podcast() {
 			// Make variables available outside of the function
 			global $location_fpage_title_general;
 			global $location_fpage_intro_general;
+			global $location_descendant_fpage_title_general;
+			global $location_descendant_fpage_intro_general;
 
-			// Get the system settings for the text elements in a general placement
-			$location_fpage_title_general = get_field('location_fpage_title_general', 'option'); // Title
-			$location_fpage_intro_general = get_field('location_fpage_intro_general', 'option'); // Intro text
+			// Locations
 
-			// If the variable is not set or is empty, set a hardcoded fallback value
-			$location_fpage_title_general = ( isset($location_fpage_title_general) && !empty($location_fpage_title_general) ) ? $location_fpage_title_general : 'Related [Locations]'; // Title
-			$location_fpage_intro_general = ( isset($location_fpage_intro_general) && !empty($location_fpage_intro_general) ) ? $location_fpage_intro_general : ''; // Intro text
+				// Get the system settings for the text elements in a general placement
+				$location_fpage_title_general = get_field('location_fpage_title_general', 'option'); // Title
+				$location_fpage_intro_general = get_field('location_fpage_intro_general', 'option'); // Intro text
 
-			// Substitute placeholder text for relevant system settings value
-			$location_fpage_title_general = uamswp_fad_fpage_text_replace($location_fpage_title_general); // Title
-			$location_fpage_intro_general = uamswp_fad_fpage_text_replace($location_fpage_intro_general); // Intro text
+				// If the variable is not set or is empty, set a hardcoded fallback value
+				$location_fpage_title_general = ( isset($location_fpage_title_general) && !empty($location_fpage_title_general) ) ? $location_fpage_title_general : 'Related [Locations]'; // Title
+				$location_fpage_intro_general = ( isset($location_fpage_intro_general) && !empty($location_fpage_intro_general) ) ? $location_fpage_intro_general : ''; // Intro text
+
+				// Substitute placeholder text for relevant system settings value
+				$location_fpage_title_general = uamswp_fad_fpage_text_replace($location_fpage_title_general); // Title
+				$location_fpage_intro_general = uamswp_fad_fpage_text_replace($location_fpage_intro_general); // Intro text
+
+			// Descendant Locations
+
+				// Get the system settings for the text elements in a general placement
+				$location_descendant_fpage_title_general = get_field('location_descendant_fpage_title_general', 'option'); // Title
+				$location_descendant_fpage_intro_general = get_field('location_descendant_fpage_intro_general', 'option'); // Intro text
+
+				// If the variable is not set or is empty, set a hardcoded fallback value
+				$location_descendant_fpage_title_general = ( isset($location_descendant_fpage_title_general) && !empty($location_descendant_fpage_title_general) ) ? $location_descendant_fpage_title_general : 'Related [Descendant Locations]'; // Title
+				$location_descendant_fpage_intro_general = ( isset($location_descendant_fpage_intro_general) && !empty($location_descendant_fpage_intro_general) ) ? $location_descendant_fpage_intro_general : ''; // Intro text
+
+				// Substitute placeholder text for relevant system settings value
+				$location_descendant_fpage_title_general = uamswp_fad_fpage_text_replace($location_descendant_fpage_title_general); // Title
+				$location_descendant_fpage_intro_general = uamswp_fad_fpage_text_replace($location_descendant_fpage_intro_general); // Intro text
 		}
 
 		// Get system settings for general values of ontology text elements on a fake subpage or section for Areas of Expertise
@@ -2926,6 +2944,8 @@ function uamswp_fad_podcast() {
 			// Make variables available outside of the function
 			global $provider_fpage_title_location;
 			global $provider_fpage_intro_location;
+			global $location_descendant_fpage_title_location;
+			global $location_descendant_fpage_intro_location;
 			global $expertise_fpage_title_location;
 			global $expertise_fpage_intro_location;
 			global $clinical_resource_fpage_title_location;
@@ -2966,6 +2986,38 @@ function uamswp_fad_podcast() {
 				// Substitute placeholder text for relevant system settings value
 				$provider_fpage_title_location = $provider_fpage_title_location ? uamswp_fad_fpage_text_replace($provider_fpage_title_location) : ''; // Title
 				$provider_fpage_intro_location = $provider_fpage_intro_location ? uamswp_fad_fpage_text_replace($provider_fpage_intro_location) : ''; // Intro text
+
+			// Descendant Locations
+			$location_descendant_fpage_title_location = get_field('location_descendant_fpage_title_location', 'option'); // Title of Fake Subpage for Descendant Locations in Locations Subsection
+			$location_descendant_fpage_intro_location = get_field('location_descendant_fpage_intro_location', 'option'); // Intro Text of Fake Subpage for Descendant Locations in Location Subsection
+
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($location_descendant_fpage_title_location) || empty($location_descendant_fpage_title_location) ) {
+					$location_descendant_fpage_title_location = '[Descendant Locations] Within [the Location Title]'; // Title
+				}
+				if ( !isset($location_descendant_fpage_intro_location) || empty($location_descendant_fpage_intro_location) ) {
+					$location_descendant_fpage_intro_location = ''; // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
+				if ( !isset($location_descendant_fpage_title_location) || empty($location_descendant_fpage_title_location) ) {
+					if ( !isset($location_descendant_fpage_title_general) || empty($location_descendant_fpage_title_general) ) {
+						uamswp_fad_location_fpage_text_general();
+						global $location_descendant_fpage_title_general;
+					}
+					$location_descendant_fpage_title_location = $location_descendant_fpage_title_general; // Title
+				}
+				if ( !isset($location_descendant_fpage_intro_location) || empty($location_descendant_fpage_intro_location) ) {
+					if ( !isset($location_descendant_fpage_intro_general) || empty($location_descendant_fpage_intro_general) ) {
+						uamswp_fad_location_fpage_text_general();
+						global $location_descendant_fpage_intro_general;
+					}
+					$location_descendant_fpage_intro_location = $location_descendant_fpage_intro_general; // Intro text
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$location_descendant_fpage_title_location = $location_descendant_fpage_title_location ? uamswp_fad_fpage_text_replace($location_descendant_fpage_title_location) : ''; // Title
+				$location_descendant_fpage_intro_location = $location_descendant_fpage_intro_location ? uamswp_fad_fpage_text_replace($location_descendant_fpage_intro_location) : ''; // Intro text
 
 			// Areas of Expertise
 			$expertise_fpage_title_location = get_field('expertise_fpage_title_location', 'option'); // Title of Fake Subpage for Areas of Expertise in Location Subsection
