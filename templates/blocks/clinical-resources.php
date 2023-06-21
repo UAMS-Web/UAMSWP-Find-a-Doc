@@ -81,10 +81,11 @@ if ( $resource_layout == 'card') { ?>
 				<div class="col-12">
 					<div class="card-list card-list-left">
 						<?php 
-						while ($clinical_resource_query->have_posts()) : $clinical_resource_query->the_post();
+						while ($clinical_resource_query->have_posts()) {
+							$clinical_resource_query->the_post();
 							$id = get_the_ID();
 							include( UAMS_FAD_PATH . '/templates/loops/resource-card.php' );
-						endwhile;
+						} // endwhile
 						wp_reset_postdata();
 						?>
 					</div>
