@@ -18,7 +18,7 @@
  * 	$treatment_plural_name // System setting for Treatments plural item name
  * 	$clinical_resources
  * 	$clinical_resource_query
- * 	$resource_postsPerPage
+ * 	$clinical_resource_postsPerPage
  * 	$resource_more_suppress
  * 	$clinical_resource_section_more_link_key
  * 	$clinical_resource_section_more_link_value
@@ -54,12 +54,12 @@ if ( $clinical_resources && $clinical_resource_query->have_posts() ) {
 	}
 }
 
-if ( $resource_count > 4 && $resource_postsPerPage == -1 ) {
+if ( $resource_count > 4 && $clinical_resource_postsPerPage == -1 ) {
 	$resource_layout = 'list';
 } else {
 	$resource_layout = 'card';
 }
-$resource_more = ( $resource_layout == 'card' && $resource_count > $resource_postsPerPage && ( $clinical_resource_section_more_link_key && !empty($clinical_resource_section_more_link_key) && $clinical_resource_section_more_link_value && !empty($clinical_resource_section_more_link_value) ) ) ? true : false;
+$resource_more = ( $resource_layout == 'card' && $resource_count > $clinical_resource_postsPerPage && ( $clinical_resource_section_more_link_key && !empty($clinical_resource_section_more_link_key) && $clinical_resource_section_more_link_value && !empty($clinical_resource_section_more_link_value) ) ) ? true : false;
 if ( $resource_more_suppress ) {
 	$resource_more = false;
 }

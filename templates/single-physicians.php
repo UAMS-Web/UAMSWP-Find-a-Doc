@@ -905,18 +905,14 @@ while ( have_posts() ) : the_post();
 		uamswp_fad_podcast();
 
 		// Begin Clinical Resources Section
-		global $clinical_resource_fpage_title_provider; // Defined in uamswp_fad_fpage_text_provider()
-		global $clinical_resource_fpage_intro_provider; // Defined in uamswp_fad_fpage_text_provider()
-
-		$resource_heading = $clinical_resource_fpage_title_provider;
-		$resource_heading_related_name = $short_name; // To what is it related?
-		$resource_intro = $clinical_resource_fpage_intro_provider;
-		$resource_more_suppress = false; // Force div.more to not display
 		$clinical_resource_section_more_link_key = '_resource_provider';
 		$clinical_resource_section_more_link_value = $sort_name_param_value;
-		if ( $clinical_resource_section_show ) {
-			include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
-		}
+		$clinical_resource_section_title = $clinical_resource_fpage_title_provider; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of clinical_resource section title in a general placement)
+		$clinical_resource_section_intro = $clinical_resource_fpage_intro_provider; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of clinical_resource section intro text in a general placement)
+		$clinical_resource_section_more_text = $clinical_resource_fpage_more_text_provider;
+		$clinical_resource_section_more_link_text = $clinical_resource_fpage_more_link_text_provider;
+		$clinical_resource_section_more_link_descr = $clinical_resource_fpage_more_link_descr_provider;
+		uamswp_fad_section_clinical_resource();
 		// End Clinical Resources Section
 
 		// Begin Academic Bio Section

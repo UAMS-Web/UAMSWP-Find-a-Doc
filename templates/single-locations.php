@@ -44,6 +44,9 @@ $page_title_attr = uamswp_attr_conversion($page_title);
 $page_title_phrase = ( get_field('location_prepend_the') ? 'the ' : '' ) . $page_title; // Conditionally prepend "the" to the page title for use in phrases
 $page_title_phrase_attr = uamswp_attr_conversion($page_title_phrase);
 
+// Get the page slug for the location
+$page_slug = $post->post_name;
+
 // Get system settings for fake subpage or section text elements on Location subsection or profile
 uamswp_fad_fpage_text_location();
 
@@ -259,19 +262,9 @@ $regions = get_field('location_region',$post->ID);
 $service_lines = get_field('location_service_line',$post->ID);
 uamswp_fad_ontology_hide();
 
-// Clinical Resources
+// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
 $clinical_resources = get_field('location_clinical_resources');
-$resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
-$resource_more = false;
-$args = (array(
-	'post_type' => 'clinical-resource',
-	'order' => 'DESC',
-	'orderby' => 'post_date',
-	'posts_per_page' => $resource_postsPerPage,
-	'post_status' => 'publish',
-	'post__in'	=> $clinical_resources
-));
-$clinical_resource_query = new WP_Query( $args );
+uamswp_fad_clinical_resource_query();
 
 // Override theme's method of defining the meta description
 add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
@@ -513,14 +506,6 @@ while ( have_posts() ) : the_post(); ?>
 		$location_ids = $location_descendant_ids;
 		$location_count = $location_descendant_count;
 		$location_valid = $location_descendant_valid;
-
-		// Check if Clinical Resources section should be displayed
-		if( $clinical_resources && $clinical_resource_query->have_posts() ) {
-			$clinical_resource_section_show = true;
-			$jump_link_count++;
-		} else {
-			$clinical_resource_section_show = false;
-		}
 
 		// Check if Jump Links section should be displayed
 		if ( $jump_link_count >= $jump_link_count_min ) {
@@ -1584,20 +1569,14 @@ while ( have_posts() ) : the_post(); ?>
 	// End Descendant Locations Section
 
 	// Begin Clinical Resources Section
-	if ( $clinical_resource_section_show ) {
-		global $clinical_resource_fpage_title_location; // Defined in uamswp_fad_fpage_text_location()
-		global $clinical_resource_fpage_intro_location; // Defined in uamswp_fad_fpage_text_location()
-
-		$resource_heading = $clinical_resource_fpage_title_location;
-		$resource_heading_related_name = $page_title_phrase; // To what is it related?
-		$resource_intro = $clinical_resource_fpage_intro_location;
-		$resource_more_suppress = false; // Force div.more to not display
-		$clinical_resource_section_more_link_key = '_resource_locations';
-		$clinical_resource_section_more_link_value = $post->post_name;
-		if( $clinical_resource_section_show ) {
-			include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
-		}
-	}
+	$clinical_resource_section_more_link_key = '_resource_locations';
+	$clinical_resource_section_more_link_value = $page_slug;
+	$clinical_resource_section_title = $clinical_resource_fpage_title_location; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of clinical_resource section title in a general placement)
+	$clinical_resource_section_intro = $clinical_resource_fpage_intro_location; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of clinical_resource section intro text in a general placement)
+	$clinical_resource_section_more_text = $clinical_resource_fpage_more_text_location;
+	$clinical_resource_section_more_link_text = $clinical_resource_fpage_more_link_text_location;
+	$clinical_resource_section_more_link_descr = $clinical_resource_fpage_more_link_descr_location;
+	uamswp_fad_section_clinical_resource();
 	// End Clinical Resources Section
 
 	// Begin News Section

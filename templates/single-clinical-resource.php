@@ -39,6 +39,9 @@ $page_id = get_the_ID();
 $page_title = get_the_title();
 $page_title_attr = uamswp_attr_conversion($page_title);
 
+// Get the page slug for the clinical resource
+$page_slug = $post->post_name;
+
 // Get system settings for text elements on Clinical Resource profile
 uamswp_fad_fpage_text_clinical_resource();
 
@@ -130,26 +133,10 @@ uamswp_fad_condition_query();
 $treatments_cpt = get_field('clinical_resource_treatments');
 uamswp_fad_treatment_query();
 
-// Query for whether related clinical resources content section should be displayed on a page
+// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
 $clinical_resources = get_field('clinical_resource_related');
-$resource_postsPerPage = -1; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
-$resource_more = false;
-$args = (array(
-	'post_type' => 'clinical-resource',
-	'order' => 'DESC',
-	'orderby' => 'post_date',
-	'posts_per_page' => $resource_postsPerPage,
-	'post_status' => 'publish',
-	'post__in'	=> $clinical_resources
-));
-$clinical_resource_query = new WP_Query( $args );
-if( $clinical_resources && $clinical_resource_query->have_posts() ) {
-	$clinical_resource_section_show = true;
-	$resource_count = count($clinical_resources);
-	$jump_link_count++;
-} else {
-	$clinical_resource_section_show = false;
-}
+$clinical_resource_postsPerPage = -1; // Maximum number of clinical resources displayed in the section (-1, 4, 6, 8, 10, 12) // int (default: 4)
+uamswp_fad_clinical_resource_query();
 
 // Query for whether appointment information section should be displayed on a page
 // It should always be displayed.
@@ -208,7 +195,12 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 	add_action( 'genesis_after_entry', 'uamswp_resource_jump_links', 8 );
 
 	// Construct related clinical resources section
-	add_action( 'genesis_after_entry', 'uamswp_resource_associated', 10 );
+	$clinical_resource_section_more_link_key = '';
+	$clinical_resource_section_more_link_value = '';
+	$clinical_resource_section_title = $clinical_resource_fpage_title_clinical_resource; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of clinical_resource section title in a general placement)
+	$clinical_resource_section_intro = $clinical_resource_fpage_intro_clinical_resource; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of clinical_resource section intro text in a general placement)
+	$clinical_resource_section_more_show = false;
+	add_action( 'genesis_after_entry', 'uamswp_fad_section_clinical_resource', 10 );
 
 	// Construct conditions section
 	$condition_section_title = $condition_fpage_title_clinical_resource; // Text to use for the section title // string (default: Find-a-Doc Settings value for condition section title in a general placement)
@@ -353,40 +345,6 @@ function uamswp_resource_video() {
 			echo '<h2>Transcript</h2>';
 			echo $video_transcript;
 		}
-	}
-}
-function uamswp_resource_associated() {
-	// Bring in variables from outside of the function
-	global $page_title; // Defined on the template
-	global $page_title_attr; // Defined on the template
-	global $clinical_resource_section_show; // Defined on the template
-	global $clinical_resources; // Defined on the template
-	global $clinical_resource_query; // Defined on the template
-	global $resource_postsPerPage; // Defined on the template
-	global $provider_single_name; // Defined in uamswp_fad_labels_provider()
-	global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
-	global $location_single_name; // Defined in uamswp_fad_labels_location()
-	global $location_plural_name; // Defined in uamswp_fad_labels_location()
-	global $expertise_single_name; // Defined in uamswp_fad_labels_expertise()
-	global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
-	global $clinical_resource_single_name; // Defined in uamswp_fad_labels_clinical_resource()
-	global $clinical_resource_plural_name; // Defined in uamswp_fad_labels_clinical_resource()
-	global $condition_single_name; // Defined in uamswp_fad_labels_condition()
-	global $condition_plural_name; // Defined in uamswp_fad_labels_condition()
-	global $treatment_single_name; // Defined in uamswp_fad_labels_treatment()
-	global $treatment_plural_name; // Defined in uamswp_fad_labels_treatment()
-	global $clinical_resource_fpage_title_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
-	global $clinical_resource_fpage_intro_clinical_resource; // Defined in uamswp_fad_fpage_text_clinical_resource()
-
-	$resource_heading = $clinical_resource_fpage_title_clinical_resource;
-	$resource_heading_related_name = $page_title; // To what is it related? Leave empty to 
-	$resource_heading_related_name_attr = $page_title_attr;
-	$resource_intro = $clinical_resource_fpage_intro_clinical_resource;
-	$resource_more_suppress = false; // Force div.more to not display
-	$clinical_resource_section_more_link_key = '';
-	$clinical_resource_section_more_link_value = '';
-	if( $clinical_resource_section_show ) {
-		include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
 	}
 }
 function uamswp_resource_jump_links() {

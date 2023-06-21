@@ -1776,6 +1776,7 @@ function uamswp_fad_post_title() {
 
 			// Typically defined on the template
 			global $jump_link_count;
+			global $clinical_resource_postsPerPage; // Maximum number of clinical resources displayed in the section (-1, 4, 6, 8, 10, 12) // int (default: 4)
 
 			// Typically defined on the template or in a function such as uamswp_fad_ontology_site_values()
 			global $clinical_resources; // Value of the related locations input
@@ -1785,16 +1786,15 @@ function uamswp_fad_post_title() {
 		global $clinical_resource_section_show;
 		global $clinical_resource_ids;
 		global $clinical_resource_count;
-		global $resource_postsPerPage;
-		global $resource_more;
 
-		$resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
-		$resource_more = false;
+		// Check/define variables
+		$clinical_resource_postsPerPage = ( isset($clinical_resource_postsPerPage) && !empty($clinical_resource_postsPerPage) ) ? $clinical_resource_postsPerPage : 4;
+
 		$args = array(
 			'post_type' => 'clinical-resource',
 			'order' => 'DESC',
 			'orderby' => 'post_date',
-			'posts_per_page' => $resource_postsPerPage,
+			'posts_per_page' => $clinical_resource_postsPerPage,
 			'post_status' => 'publish',
 			'post__in'	=> $clinical_resources
 		);

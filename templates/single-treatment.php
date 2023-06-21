@@ -39,6 +39,9 @@ $page_id = get_the_ID();
 $page_title = get_the_title();
 $page_title_attr = uamswp_attr_conversion($page_title);
 
+// Get the page slug for the treatment
+$page_slug = $post->post_name;
+
 // Get system settings for jump links (a.k.a. anchor links)
 uamswp_fad_labels_jump_links();
 
@@ -84,19 +87,9 @@ $podcast_name = get_field('treatment_procedure_podcast_name');
 
 $cta_repeater = get_field('treatment_procedure_cta');
 
-// Query for whether related clinical resources content section should be displayed on a page
+// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
 $clinical_resources = get_field('treatment_procedure_clinical_resources');
-$resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
-$resource_more = false;
-$args = (array(
-	'post_type' => 'clinical-resource',
-	'order' => 'DESC',
-	'orderby' => 'post_date',
-	'posts_per_page' => $resource_postsPerPage,
-	'post_status' => 'publish',
-	'post__in'	=> $clinical_resources
-));
-$clinical_resource_query = new WP_Query( $args );
+uamswp_fad_clinical_resource_query();
 
 // Query for whether related locations content section should be displayed on a page
 $locations = get_field('treatment_procedure_locations');
@@ -132,14 +125,6 @@ $jump_link_count = 0;
 	uamswp_fad_podcast_query();
 	if ( $podcast_section_show ) {
 		$jump_link_count++;
-	}
-
-	// Check if Clinical Resources section should be displayed
-	if( $clinical_resources && $clinical_resource_query->have_posts() ) {
-		$clinical_resource_section_show = true;
-		$jump_link_count++;
-	} else {
-		$clinical_resource_section_show = false;
 	}
 
 	// Check if Clinical Trials section should be displayed
@@ -374,16 +359,14 @@ $jump_link_count = 0;
 		uamswp_fad_podcast();
 
 		// Begin Clinical Resources Section
-		$resource_heading_related_pre = false; // "Related Resources"
-		$resource_heading_related_post = true; // "Resources Related to __"
-		$resource_heading_related_name = $page_title; // To what is it related?
-		$resource_heading_related_name_attr = $page_title_attr;
-		$resource_more_suppress = false; // Force div.more to not display
 		$clinical_resource_section_more_link_key = '_resource_treatments';
-		$clinical_resource_section_more_link_value = $post->post_name;
-		if( $clinical_resource_section_show ) {
-			include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
-		}
+		$clinical_resource_section_more_link_value = $page_slug;
+		$clinical_resource_section_title = $clinical_resource_plural_name . ' Related to ' . $page_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of clinical_resource section title in a general placement)
+		$clinical_resource_section_intro = $clinical_resource_fpage_intro_general; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of clinical_resource section intro text in a general placement)
+		$clinical_resource_section_more_text = 'Want to find more related ' . strtolower($clinical_resource_plural_name) . ' related to ' . $page_title . '?';
+		$clinical_resource_section_more_link_text = $clinical_resource_fpage_more_link_text_general;
+		$clinical_resource_section_more_link_descr = 'View the full list of ' . strtolower($clinical_resource_plural_name) . ' related to ' . $page_title;
+		uamswp_fad_section_clinical_resource();
 		// End Clinical Resources Section
 
 		// Begin Clinical Trials Section

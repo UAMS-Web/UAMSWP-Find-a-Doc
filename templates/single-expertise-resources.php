@@ -33,6 +33,9 @@ $page_id = get_the_ID();
 $page_title = get_the_title(); // Title of the area of expertise
 $page_title_attr = uamswp_attr_conversion($page_title);
 
+// Get the page slug for the 'parent' area of expertise
+$page_slug = $post->post_name;
+
 // Get the page URL for the 'parent' area of expertise
 $page_url = get_permalink();
 
@@ -75,6 +78,7 @@ uamswp_fad_ontology_site_values();
 	uamswp_fad_expertise_query();
 
 	// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
+	$clinical_resource_postsPerPage = -1; // Maximum number of clinical resources displayed in the section (-1, 4, 6, 8, 10, 12) // int (default: 4)
 	uamswp_fad_clinical_resource_query();
 
 	// Query for whether related conditions content section should be displayed on ontology pages/subsections
@@ -165,42 +169,13 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 
 	// Display ontology page content
-	add_action( 'genesis_entry_content', 'uamswp_expertise_resource', 14 );
-	function uamswp_expertise_resource() {
-		// Bring in variables from outside of the function
-		global $post; // WordPress-specific global variable
-		global $page_title; // Defined on the template
-		global $page_title_attr; // Defined on the template
-		global $clinical_resource_section_show; // Defined in uamswp_fad_clinical_resource_query()
-		global $clinical_resources; // Defined in uamswp_fad_clinical_resource_query()
-		global $clinical_resource_query; // Defined in uamswp_fad_clinical_resource_query()
-		global $resource_postsPerPage; // Defined in uamswp_fad_clinical_resource_query()
-		global $provider_single_name; // Defined in uamswp_fad_labels_provider()
-		global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
-		global $location_single_name; // Defined in uamswp_fad_labels_location()
-		global $location_plural_name; // Defined in uamswp_fad_labels_location()
-		global $expertise_single_name; // Defined in uamswp_fad_labels_expertise()
-		global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
-		global $clinical_resource_single_name; // Defined in uamswp_fad_labels_clinical_resource()
-		global $clinical_resource_plural_name; // Defined in uamswp_fad_labels_clinical_resource()
-		global $condition_single_name; // Defined in uamswp_fad_labels_condition()
-		global $condition_plural_name; // Defined in uamswp_fad_labels_condition()
-		global $treatment_single_name; // Defined in uamswp_fad_labels_treatment()
-		global $treatment_plural_name; // Defined in uamswp_fad_labels_treatment()
-		global $clinical_resource_fpage_title_expertise; // Defined in uamswp_fad_fpage_text_expertise()
-		global $clinical_resource_fpage_intro_expertise; // Defined in uamswp_fad_fpage_text_expertise()
-
-		$resource_heading = $clinical_resource_fpage_title_expertise;
-		$resource_heading_related_name = $page_title; // To what is it related?
-		$resource_heading_related_name_attr = $page_title_attr;
-		$resource_intro = $clinical_resource_fpage_intro_expertise;
-		$resource_more_suppress = false; // Force div.more to not display
-		$clinical_resource_section_more_link_key = '_resource_aoe';
-		$clinical_resource_section_more_link_value = $post->post_name;
-		if( $clinical_resource_section_show ) {
-			include( UAMS_FAD_PATH . '/templates/blocks/clinical-resources.php' );
-		}
-	}
+	$clinical_resource_section_more_link_key = '_resource_aoe';
+	$clinical_resource_section_more_link_value = $page_slug;
+	$clinical_resource_section_show_header = false; // Query whether to display the section header // bool (default: true)
+	$clinical_resource_section_title = 'List of ' . $clinical_resource_plural_name; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of clinical_resource section title in a general placement)
+	$clinical_resource_section_intro = ''; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of clinical_resource section intro text in a general placement)
+	$clinical_resource_section_more_show = false; // Query whether to show the section that links to more items // bool (default: true)
+	add_action( 'genesis_entry_content', 'uamswp_fad_section_clinical_resource', 14 );
 
 	// Display appointment information
 	add_action( 'genesis_entry_content', 'uamswp_fad_ontology_appointment', 26 );
