@@ -1467,6 +1467,9 @@ function uamswp_fad_post_title() {
 	global $entry_title_image_desktop; // Typically defined on the template
 	global $entry_title_image_mobile; // Typically defined on the template
 
+	// Check/define variables
+	$entry_header_style = ( isset($entry_header_style) && !empty($entry_header_style) ) ? $entry_header_style : 'graphic';
+
 	include( UAMS_FAD_PATH . '/templates/entry-title-' . $entry_header_style . '.php');
 }
 
