@@ -482,28 +482,9 @@ while ( have_posts() ) : the_post(); ?>
 			$portal_section_show = false;
 		}
 
-		// Check if Providers section should be displayed
-		$providers = get_field( 'physician_locations' );
-		if ( $providers ) {
-			$args = array(
-				'post_type' => 'provider',
-				'post_status' => 'publish',
-				"posts_per_page" => -1,
-				'orderby' => 'title',
-				'order' => 'ASC',
-				'fields' => 'ids',
-				'post__in' => $providers
-			);
-			$provider_query = New WP_Query( $args );
-		}
-		if ( isset($provider_query) && $provider_query->have_posts() ) {
-			$provider_section_show = true;
-			$jump_link_count++;
-			$provider_ids = $provider_query->posts;
-			wp_reset_postdata();
-		} else {
-			$provider_section_show = false;
-		}
+		// Query for whether related providers content section should be displayed on ontology pages/subsections
+		$providers = get_field('physician_locations');
+		uamswp_fad_provider_query();
 
 		// Query for whether related conditions content section should be displayed on ontology pages/subsections
 		// $conditions = get_field('location_conditions');
