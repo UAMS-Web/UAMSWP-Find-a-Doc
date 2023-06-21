@@ -9,14 +9,16 @@
  * 	$location_single_name // System setting for Locations Plural Item Name
  * 	$location_single_name_attr // Attribute value friendly version of system setting for Locations single item name
  * 	$id
+ * 
+ * Optional vars:
+ * 	$location_descendant_list // Query for whether this is a list of child locations within a location // bool (default: false)
  */
 
 // Reset variables
 $featured_image = '';
 $address_id = $id;
 
-// $location_descendant_list indicates whether this is a list of child locations within this location
-// Check if $location_descendant_list is set. Otherwise create the variable and set its value to false.
+// Check/define variables
 $location_descendant_list = isset($location_descendant_list) ? $location_descendant_list : false;
 
 $location_title = get_the_title($id);
