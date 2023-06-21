@@ -1395,7 +1395,11 @@ function uamswp_fad_ontology_site_values() {
 	$providers = get_field( "physician_expertise", $site_nav_id );
 	$locations = get_field( 'location_expertise', $site_nav_id );
 	$expertises = get_field('expertise_associated', $site_nav_id);
-	$child_pages = get_pages( array('child_of' => $site_nav_id, 'post_type' => 'expertise' ) );
+	$child_pages = get_pages(
+		array(
+			'child_of'     => $site_nav_id, // int (default: 0)
+			'post_type'    => 'expertise', // string (default: 'page')
+		));
 	$clinical_resources = get_field('expertise_clinical_resources', $site_nav_id);
 	$conditions_cpt = get_field('expertise_conditions_cpt', $site_nav_id);
 	$treatments_cpt = get_field('expertise_treatments_cpt', $site_nav_id);
