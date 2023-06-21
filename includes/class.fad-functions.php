@@ -2010,7 +2010,7 @@ function uamswp_fad_podcast() {
 		$provider_plural_name = get_field('provider_plural_name', 'option') ?: 'Providers';
 		$provider_plural_name_attr = uamswp_attr_conversion($provider_plural_name);
 
-		// Define string used to find and replace with values from Find-a-Doc Settings
+		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
 		$placeholder_provider_single_name = '[Provider]';
 		$placeholder_provider_plural_name = '[Providers]';
 		$placeholder_provider_short_name = '[Provider Short Name]';
@@ -2032,7 +2032,7 @@ function uamswp_fad_podcast() {
 		global $provider_archive_headline_attr;
 		global $placeholder_provider_archive_headline;
 
-		// Define string used to find and replace with values from Find-a-Doc Settings
+		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
 		$placeholder_provider_archive_headline = '[Provider Archive Title]';
 
 		$provider_archive_headline = get_field('provider_archive_headline', 'option') ?: 'UAMS Health Providers';
@@ -2057,7 +2057,7 @@ function uamswp_fad_podcast() {
 		$location_plural_name = get_field('location_plural_name', 'option') ?: 'Locations';
 		$location_plural_name_attr = uamswp_attr_conversion($location_plural_name);
 
-		// Define string used to find and replace with values from Find-a-Doc Settings
+		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
 		$placeholder_location_single_name = '[Location]';
 		$placeholder_location_plural_name = '[Locations]';
 		$placeholder_location_page_title = '[Location Title]';
@@ -2092,7 +2092,7 @@ function uamswp_fad_podcast() {
 		$location_descendant_plural_name = get_field('location_descendant_plural_name', 'option') ?: 'Additional Locations';
 		$location_descendant_plural_name_attr = uamswp_attr_conversion($location_descendant_plural_name);
 
-		// Define string used to find and replace with values from Find-a-Doc Settings
+		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
 		$placeholder_location_descendant_single_name = '[Descendant Location]';
 		$placeholder_location_descendant_plural_name = '[Descendant Locations]';
 	}
@@ -2107,7 +2107,7 @@ function uamswp_fad_podcast() {
 		$location_archive_headline = get_field('location_archive_headline', 'option') ?: 'Locations';
 		$location_archive_headline_attr = uamswp_attr_conversion($location_archive_headline);
 
-		// Define string used to find and replace with values from Find-a-Doc Settings
+		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
 		$placeholder_location_archive_headline = '[Location Archive Title]';
 	}
 
@@ -2128,7 +2128,7 @@ function uamswp_fad_podcast() {
 		$expertise_plural_name = get_field('expertise_plural_name', 'option') ?: 'Areas of Expertise';
 		$expertise_plural_name_attr = uamswp_attr_conversion($expertise_plural_name);
 
-		// Define string used to find and replace with values from Find-a-Doc Settings
+		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
 		$placeholder_expertise_single_name = '[Area of Expertise]';
 		$placeholder_expertise_plural_name = '[Areas of Expertise]';
 		$placeholder_expertise_page_title = '[Area of Expertise Title]';
@@ -2166,7 +2166,7 @@ function uamswp_fad_podcast() {
 		$expertise_descendant_plural_name = get_field('expertise_descendant_plural_name', 'option') ?: 'Specialties';
 		$expertise_descendant_plural_name_attr = uamswp_attr_conversion($expertise_descendant_plural_name);
 
-		// Define string used to find and replace with values from Find-a-Doc Settings
+		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
 		$placeholder_expertise_descendant_single_name = '[Descendant Area of Expertise]';
 		$placeholder_expertise_descendant_plural_name = '[Descendant Areas of Expertise]';
 	}
@@ -2184,7 +2184,7 @@ function uamswp_fad_podcast() {
 		$expertise_archive_headline_attr = uamswp_attr_conversion($expertise_archive_headline);
 		$expertise_archive_intro_text = get_field('expertise_archive_intro_text', 'option');
 
-		// Define string used to find and replace with values from Find-a-Doc Settings
+		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
 		$placeholder_expertise_archive_headline = '[Area of Expertise Archive Title]';
 		$placeholder_expertise_archive_intro_text = '[Area of Expertise Archive Intro Text]';
 	}
@@ -2204,7 +2204,7 @@ function uamswp_fad_podcast() {
 		$clinical_resource_plural_name = get_field('clinical_resource_plural_name', 'option') ?: 'Clinical Resources';
 		$clinical_resource_plural_name_attr = uamswp_attr_conversion($clinical_resource_plural_name);
 
-		// Define string used to find and replace with values from Find-a-Doc Settings
+		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
 		$placeholder_clinical_resource_single_name = '[Clinical Resource]';
 		$placeholder_clinical_resource_plural_name = '[Clinical Resources]';
 	}
@@ -2219,7 +2219,7 @@ function uamswp_fad_podcast() {
 		$clinical_resource_archive_headline = get_field('clinical_resource_archive_headline', 'option') ?: 'Clinical Resources';
 		$clinical_resource_archive_headline_attr = uamswp_attr_conversion($clinical_resource_archive_headline);
 
-		// Define string used to find and replace with values from Find-a-Doc Settings
+		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
 		$placeholder_clinical_resource_archive_headline = '[Clinical Resource Archive Title]';
 	}
 
@@ -2239,7 +2239,7 @@ function uamswp_fad_podcast() {
 		$clinical_resource_type_plural_name = get_field('clinical_resource_type_plural_name', 'option') ?: 'Resource Types';
 		$clinical_resource_type_plural_name_attr = uamswp_attr_conversion($clinical_resource_type_plural_name);
 
-		// Define string used to find and replace with values from Find-a-Doc Settings
+		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
 		$placeholder_clinical_resource_type_single_name = '[Resource Type]';
 		$placeholder_clinical_resource_type_plural_name = '[Resource Types]';
 
@@ -2263,7 +2263,7 @@ function uamswp_fad_podcast() {
 		$condition_treatment_plural_name = get_field('conditions_treatments_plural_name', 'option') ?: 'Conditions and Treatments';
 		$condition_treatment_plural_name_attr = uamswp_attr_conversion($condition_treatment_plural_name);
 
-		// Define string used to find and replace with values from Find-a-Doc Settings
+		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
 		$placeholder_condition_treatment_single_name = '[Condition or Treatment]';
 		$placeholder_condition_treatment_plural_name = '[Conditions and Treatments]';
 	}
@@ -2284,7 +2284,7 @@ function uamswp_fad_podcast() {
 		$condition_plural_name = get_field('conditions_plural_name', 'option') ?: 'Conditions';
 		$condition_plural_name_attr = uamswp_attr_conversion($condition_plural_name);
 
-		// Define string used to find and replace with values from Find-a-Doc Settings
+		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
 		$placeholder_condition_single_name = '[Condition]';
 		$placeholder_condition_plural_name = '[Conditions]';
 
@@ -2315,7 +2315,7 @@ function uamswp_fad_podcast() {
 		$condition_archive_headline_attr = uamswp_attr_conversion($condition_archive_headline);
 		$condition_archive_intro_text = get_field('conditions_archive_intro_text', 'option');
 
-		// Define string used to find and replace with values from Find-a-Doc Settings
+		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
 		$placeholder_condition_archive_headline = '[Condition Archive Title]';
 		$placeholder_condition_archive_intro_text = '[Condition Archive Intro Text]';
 	}
@@ -2336,7 +2336,7 @@ function uamswp_fad_podcast() {
 		$treatment_plural_name = get_field('treatments_plural_name', 'option') ?: 'Treatments and Procedures';
 		$treatment_plural_name_attr = uamswp_attr_conversion($treatment_plural_name);
 
-		// Define string used to find and replace with values from Find-a-Doc Settings
+		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
 		$placeholder_treatment_single_name = '[Treatment]';
 		$placeholder_treatment_plural_name = '[Treatments]';
 
@@ -2367,7 +2367,7 @@ function uamswp_fad_podcast() {
 		$treatment_archive_headline_attr = uamswp_attr_conversion($treatment_archive_headline);
 		$treatment_archive_intro_text = get_field('treatments_archive_intro_text', 'option');
 
-		// Define string used to find and replace with values from Find-a-Doc Settings
+		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
 		$placeholder_treatment_archive_headline = '[Treatment Archive Title]';
 		$placeholder_treatment_archive_intro_text = '[Treatment Archive Intro Text]';
 	}
