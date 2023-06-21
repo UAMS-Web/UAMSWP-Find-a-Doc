@@ -89,33 +89,9 @@ $template_type = 'default';
 $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
 $jump_link_count = 0;
 
-// Query for whether related providers content section should be displayed on a page
+// Query for whether related providers content section should be displayed on ontology pages/subsections
 $providers = get_field( "clinical_resource_providers" );
-if($providers) {
-	$postsPerPage = 12; // Set this value to preferred value (4, 6, 8, 10, 12). If you change the value, update the instruction text in the editor's JSON file.
-	$postsCutoff = 18; // Set cutoff value. If you change the value, update the instruction text in the editor's JSON file.
-	$postsCountClass = $postsPerPage;
-	if(count($providers) <= $postsCutoff ) {
-		$postsPerPage = -1;
-	}
-	$args = array(
-		'post_type' => 'provider',
-		'post_status' => 'publish',
-		'posts_per_page' => $postsPerPage,
-		'orderby' => 'title',
-		'order' => 'ASC',
-		'fields' => 'ids',
-		'post__in' => $providers
-	);
-	$provider_query = New WP_Query( $args );
-	if($provider_query && $provider_query->have_posts()) {
-		$provider_section_show = true;
-		$jump_link_count++;
-		$provider_ids = $provider_query->posts;
-	} else {
-		$provider_section_show = false;
-	}
-}
+uamswp_fad_provider_query();
 
 // Query for whether related locations content section should be displayed on a page
 $locations = get_field('clinical_resource_locations');
