@@ -191,11 +191,13 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 	// Construct providers section
 	$provider_section_title = $provider_fpage_title_clinical_resource; // Text to use for the section title
 	$provider_section_intro = $provider_fpage_intro_clinical_resource; // Text to use for the section intro text
+	$provider_section_filter = false; // Query for whether to add filter(s) // bool (default: true)
 	add_action( 'genesis_after_entry', 'uamswp_fad_section_provider', 16 );
 
 	// Construct locations section
 	$location_section_title = $location_fpage_title_clinical_resource; // Text to use for the section title
 	$location_section_intro = $location_fpage_intro_clinical_resource; // Text to use for the section intro text
+	$location_section_filter = false; // Query for whether to add filter(s) // bool (default: true)
 	add_action( 'genesis_after_entry', 'uamswp_fad_section_location', 18 );
 
 	// Construct areas of expertise section
