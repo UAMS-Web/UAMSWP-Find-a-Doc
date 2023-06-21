@@ -3,6 +3,7 @@
  * Template Name: Primary Navigation for Area of Expertise Subsection
  * 
  * Required vars:
+ * 	$site_nav_id
  * 	$provider_plural_name // System setting for Providers plural item name
  * 	$provider_plural_name_attr // Attribute value friendly version of system setting for Providers plural item name
  * 	$location_plural_name // System setting for Locations plural item name
@@ -13,6 +14,10 @@
  * 	$expertise_descendant_plural_name_attr; // Attribute value friendly version of system setting for Areas of Expertise plural descendant item name
  * 	$clinical_resource_plural_name // System setting for Clinical Resources plural item name
  * 	$clinical_resource_plural_name_attr // Attribute value friendly version of system setting for Clinical Resources plural item name
+ * 
+ * Optional vars:
+ * 	$expertise_descendants
+ * 	$expertise_content_nav
  */
 
 require_once( 'modules/class-wp-bootstrap-pagewalker.php' );
@@ -45,7 +50,7 @@ if ($expertise_section_show) {
 if ($clinical_resource_section_show) {
 	$pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-'. $site_nav_id .'-resources nav-item"><a title="' . $clinical_resource_plural_name_attr . ' for '. get_the_title( $site_nav_id ) .'" href="'. get_permalink( $site_nav_id ) .'resources/" class="nav-link"><span itemprop="name">' . $clinical_resource_plural_name . '</span></a></li>';
 }
-if ($child_pages) {
+if ($expertise_descendants) {
 	$args = array(
 		'child_of' => $site_nav_id,
 		'title_li' => '',
@@ -54,10 +59,10 @@ if ($child_pages) {
 		// 'exclude' => implode(',',$excluded_pages),
 	);
 }
-if ($child_content_nav_show) {
-	$pagenav .= $childnav;
+if ($expertise_content_nav_show) {
+	$pagenav .= $expertise_content_nav;
 }
-// $pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item nav-item"><span itemprop="name">'. explode($child_pages, ',') .'</span></li>';
+// $pagenav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item nav-item"><span itemprop="name">'. explode($expertise_descendants, ',') .'</span></li>';
 
 // Add the appropriate navbar coding
 $wrapper_open = '<nav class="site-nav navbar navbar-expand-sm">';

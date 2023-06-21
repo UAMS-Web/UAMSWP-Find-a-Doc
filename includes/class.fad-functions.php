@@ -1294,7 +1294,7 @@ function uamswp_fad_ontology_site_values() {
 	global $providers;
 	global $locations;
 	global $expertises;
-	global $child_pages;
+	global $expertise_descendants;
 	global $clinical_resources;
 	global $conditions_cpt;
 	global $treatments_cpt;
@@ -1395,7 +1395,7 @@ function uamswp_fad_ontology_site_values() {
 	$providers = get_field( "physician_expertise", $site_nav_id );
 	$locations = get_field( 'location_expertise', $site_nav_id );
 	$expertises = get_field('expertise_associated', $site_nav_id);
-	$child_pages = get_pages(
+	$expertise_descendants = get_pages(
 		array(
 			'child_of'     => $site_nav_id, // int (default: 0)
 			'post_type'    => 'expertise', // string (default: 'page')
@@ -1633,34 +1633,102 @@ function uamswp_fad_post_title() {
 		// Bring in variables from outside of the function
 
 			// Typically defined on the template
+			global $page_id;
 			global $jump_link_count;
 
 			// Typically defined on the template or in a function such as uamswp_fad_ontology_site_values()
-			global $child_pages;
+			global $expertise_descendants;
 
 		// Make variables available outside of the function
-		global $childnav;
-		global $children;
+		global $expertise_descendant_query;
 		global $expertise_descendant_section_show;
-		global $child_content_nav_show;
+		global $expertise_descendant_ids;
+		global $expertise_descendant_count;
+		global $expertise_content_query;
+		global $expertise_content_nav_show;
+		global $expertise_content_ids;
+		global $expertise_content_count;
+		global $expertise_content_nav;
 
-		if ($child_pages) {
-			$childnav = '';
-			$children = false;
-			foreach ( $child_pages as $child_page ) {
-				$hide = get_post_meta($child_page->ID, 'page_hide_from_menu');
-				$type = get_field('expertise_type', $child_page->ID);
-				$type = isset($type) ? $type : 1; // Check if 'expertise_type' is not null, and if so, set value to true
-				if ( isset($hide[0]) && '1' == $hide[0] ) {
-					//* Do nothing if there is nothing to show
-				} elseif( !isset($type) || '1' == $type ) {
-					$children = true;
-				} else {
-					$childnav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-'. $child_page->ID .' nav-item active"><a title="'. $child_page->post_title .'" href="'. get_permalink( $child_page->ID ) .'" class="nav-link"><span itemprop="name">'. $child_page->post_title .'</span></a></li>';
-				}
+		if ( 0 != count($expertise_descendants) ) {
+			
+			$expertise_descendant_args = array(
+				'post_type' => 'expertise',
+				'post_status' => 'publish',
+				'post_parent' => $page_id,
+				'order' => 'ASC',
+				'orderby' => 'title',
+				'posts_per_page' => -1, // We do not want to limit the post count
+				'meta_query' => array(
+					'relation' => 'AND',
+					array(
+						'key' => 'hide_from_sub_menu',
+						'value' => '1',
+						'compare' => '!=',
+					),
+					array(
+						'relation' => 'OR',
+						array(
+							'key' => 'expertise_type',
+							'value' => '0',
+							'compare' => '!=',
+						),
+						array(
+							'key' => 'expertise_type',
+							'compare' => 'NOT EXISTS' // If the item has not been updated since 'expertise_type' was added
+						),
+					),
+				),
+			);
+			$expertise_descendant_query = new WP_Query( $expertise_descendant_args );
+			if( ( $expertise_descendants && $expertise_descendant_query->have_posts() ) ) {
+				$expertise_descendant_section_show = true;
+				$expertise_descendant_ids = $expertise_descendant_query->posts;
+				$expertise_descendant_count = count($expertise_descendant_query->posts);
+				$jump_link_count = $jump_link_count + 1;
+			} else {
+				$expertise_descendant_section_show = false;
 			}
-			$expertise_descendant_section_show = $children ? true : false;
-			$child_content_nav_show = !empty($childnav) ? true : false;
+			
+			$expertise_content_args = array(
+				'post_type' => 'expertise',
+				'post_status' => 'publish',
+				'post_parent' => $page_id,
+				'order' => 'ASC',
+				'orderby' => 'title',
+				'posts_per_page' => -1, // We do not want to limit the post count
+				'meta_query' => array(
+					'relation' => 'AND',
+					array(
+						'key' => 'hide_from_sub_menu',
+						'value' => '1',
+						'compare' => '!=',
+					),
+					array(
+						'key' => 'expertise_type',
+						'value' => '0',
+						'compare' => '=',
+					),
+				),
+			);
+			$expertise_content_query = new WP_Query( $expertise_content_args );
+			$expertise_content_nav = '';
+			if( ( $expertise_descendants && $expertise_content_query->have_posts() ) ) {
+				$expertise_content_nav_show = true;
+				$expertise_content_ids = $expertise_content_query->posts;
+				$expertise_content_count = count($expertise_content_query->posts);
+				while ( $expertise_content_query->have_posts() ) {
+					$expertise_content_query->the_post();
+					$id = get_the_ID();
+					$title = get_the_title();
+					$title_attr = uamswp_attr_conversion($title);
+					$url = get_permalink();
+					$expertise_content_nav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-'. $id .' nav-item active"><a title="'. $title_attr .'" href="'. $url .'" class="nav-link"><span itemprop="name">'. $title .'</span></a></li>';
+				} // endwhile
+				wp_reset_postdata();
+			} else {
+				$expertise_content_nav_show = false;
+			}
 		}
 	}
 
@@ -1826,9 +1894,9 @@ function uamswp_fad_ontology_nav_menu() {
 	global $expertise_section_show; // Typically defined in uamswp_fad_expertise_query()
 	global $clinical_resource_section_show; // Typically defined in uamswp_fad_clinical_resource_query()
 	global $expertise_descendant_section_show; // Typically defined in uamswp_fad_expertise_descendant_query()
-	global $child_pages; // Typically defined in uamswp_fad_expertise_descendant_query()
-	global $child_content_nav_show; // Typically defined in uamswp_fad_expertise_descendant_query()
-	global $childnav; // Typically defined in uamswp_fad_expertise_descendant_query()
+	global $expertise_descendants; // Typically defined in uamswp_fad_expertise_descendant_query()
+	global $expertise_content_nav_show; // Typically defined in uamswp_fad_expertise_descendant_query()
+	global $expertise_content_nav; // Typically defined in uamswp_fad_expertise_descendant_query()
 	global $provider_plural_name; // Typically defined in uamswp_fad_labels_provider()
 	global $provider_plural_name_attr; // Typically defined in uamswp_fad_labels_provider()
 	global $location_plural_name; // Typically defined in uamswp_fad_labels_location()
@@ -4632,6 +4700,7 @@ function uamswp_fad_section_expertise() {
 		global $expertise_section_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of expertise section title in a general placement)
 		global $expertise_section_intro; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of expertise section intro text in a general placement)
 		global $expertise_section_collapse_list; // Query whether to collapse the list of locations in the locations section // bool (default: false)
+		global $expertise_descendant_list; // Query for whether this is a list of child areas of expertise within an area of expertise // bool (default: false)
 
 		// Defined in uamswp_fad_labels_expertise()
 		global $expertise_single_name; // string
@@ -4643,15 +4712,26 @@ function uamswp_fad_section_expertise() {
 		global $expertise_fpage_title_general; // string
 		global $expertise_fpage_intro_general; // string
 
+		// Defined on the template or in a function such as uamswp_fad_ontology_hide()
+		global $hide_medical_ontology;
+
 		// Defined on the template or in a function such as uamswp_fad_expertise_query()
 		global $expertise_section_show; // bool
 		global $expertise_query; // array
-		global $expertises; // array
-		global $expertise_ids; // array
 		global $expertise_count; // integer
 
-		// Defined on the template or in a function such as uamswp_fad_ontology_hide()
-		global $hide_medical_ontology;
+		// Defined on the template or in a function such as uamswp_fad_expertise_descendant_query()
+		global $expertise_descendant_section_show; // bool
+		global $expertise_descendant_query; // array
+		global $expertise_descendant_count; // integer
+
+		// Check/define variables
+		$expertise_descendant_list = isset($expertise_descendant_list) ? $expertise_descendant_list : false;
+		if ( $expertise_descendant_list ) {
+			$expertise_section_show = $expertise_descendant_section_show; // bool
+			$expertise_query = $expertise_descendant_query; // array
+			$expertise_count = $expertise_descendant_count; // integer
+		}
 
 	// Do something
 	if ( $expertise_section_show && !$hide_medical_ontology ) {

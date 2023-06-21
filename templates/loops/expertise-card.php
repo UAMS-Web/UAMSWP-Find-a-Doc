@@ -9,11 +9,13 @@
  * 	$expertise_single_name // System setting for Areas of Expertise single item name
  * 	$expertise_single_name_attr // Attribute value friendly version of system setting for Areas of Expertise single item name
  * 	$id
+ * 
+ * Optional vars:
+ * 	$expertise_descendant_list // Query for whether this is a list of child areas of expertise within an area of expertise // bool (default: false)
  */
 
-// $child_expertise_list indicates whether this is a list of child Areas of Expertise within this Area of Expertise
-// Check if $child_expertise_list is set. Otherwise create the variable and set its value to false.
-$child_expertise_list = isset($child_expertise_list) ? $child_expertise_list : false;
+// Check/define variables
+$expertise_descendant_list = isset($expertise_descendant_list) ? $expertise_descendant_list : false;
 
 $expertise_title = get_the_title($id);
 $expertise_title_attr = uamswp_attr_conversion($expertise_title);
@@ -62,7 +64,7 @@ if ( $expertise_excerpt_len > 160 ) {
 	<div class="card-body">
 		<h3 class="card-title h5">
 			<span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self" aria-label="<?php echo $expertise_label; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $expertise_title_attr; ?>"><?php echo $expertise_title; ?></a></span>
-			<?php if ( $parent_expertise && !$child_expertise_list ) { ?>
+			<?php if ( $parent_expertise && !$expertise_descendant_list ) { ?>
 				<span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>" aria-label="Go to <?php echo $expertise_single_name_attr; ?> page for <?php echo $parent_title_attr; ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $expertise_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
 			<?php } // endif ?>
 		</h3>

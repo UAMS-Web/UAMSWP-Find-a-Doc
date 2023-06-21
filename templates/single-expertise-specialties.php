@@ -167,75 +167,12 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 
 	// Display ontology page content
-	add_action( 'genesis_entry_content', 'uamswp_list_child_expertise', 12 );
-	function uamswp_list_child_expertise() {
-		// Bring in variables from outside of the function
-		global $page_id; // Defined on the template
-		global $page_title; // Defined on the template
-		global $expertise_descendant_section_show; // Defined in uamswp_fad_expertise_descendant_query()
-		global $expertise_single_name; // Defined in uamswp_fad_labels_expertise()
-		global $expertise_single_name_attr; // Defined in uamswp_fad_labels_expertise()
-		global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
-		global $expertise_descendant_single_name; // Defined in uamswp_fad_labels_expertise_descendant()
-		global $expertise_descendant_single_name_attr; // Defined in uamswp_fad_labels_expertise_descendant()
-		global $expertise_descendant_plural_name; // Defined in uamswp_fad_labels_expertise_descendant()
-		global $expertise_descendant_plural_name_attr; // Defined in uamswp_fad_labels_expertise_descendant()
-
-		if ( $expertise_descendant_section_show ) { // If it's suppressed or none available, set to false
-			$args = array(
-				'post_type' => 'expertise',
-				'post_status' => 'publish',
-				'post_parent' => $page_id,
-				'order' => 'ASC',
-				'orderby' => 'title',
-				'posts_per_page' => -1, // We do not want to limit the post count
-				'meta_query' => array(
-					'relation' => 'AND',
-					array(
-						'key' => 'hide_from_sub_menu',
-						'value' => '1',
-						'compare' => '!=',
-					),
-					array(
-						'relation' => 'OR',
-						array(
-							'key' => 'expertise_type',
-							'value' => '0',
-							'compare' => '!=',
-						),
-						array(
-							'key' => 'expertise_type',
-							'compare' => 'NOT EXISTS' // If the item has not been updated since 'expertise_type' was added
-						),
-					),
-				),
-			);
-			$pages = New WP_Query ( $args );
-			if ( $pages->have_posts() ) { ?>
-				<section class="uams-module expertise-list bg-auto" id="sub-expertise" aria-labelledby="sub-expertise-title" >
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-12">
-								<h2 class="module-title" id="sub-expertise-title"><span class="title"><?php echo $expertise_descendant_plural_name; ?> Within <?php echo $page_title; ?></span></h2>
-								<div class="card-list-container">
-									<div class="card-list card-list-expertise">
-								<?php
-									while ( $pages->have_posts() ) : $pages->the_post();
-										$id = get_the_ID();
-										$child_expertise_list = true; // Indicate that this is a list of child Areas of Expertise within this Area of Expertise
-										include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-									endwhile;
-									wp_reset_postdata(); ?>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-			<?php
-			}
-		}
-	}
+	$expertise_descendant_list = true;
+	$expertise_section_id = 'sub-expertise'; // Section ID // string (default: expertise)
+	$expertise_section_show_header = false; // Query whether to display the section header // bool (default: true)
+	$expertise_section_title = 'List of ' . $expertise_descendant_plural_name; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of expertise section title in a general placement)
+	$expertise_section_intro = ''; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of expertise section intro text in a general placement)
+	add_action( 'genesis_entry_content', 'uamswp_fad_section_expertise', 12 );
 
 	// Display appointment information
 	add_action( 'genesis_entry_content', 'uamswp_fad_ontology_appointment', 26 );
