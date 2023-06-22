@@ -1551,7 +1551,7 @@ while ( have_posts() ) : the_post(); ?>
 	// Begin Treatments Section
 	$treatment_section_title = $treatment_fpage_title_location; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
 	$treatment_section_intro = $treatment_fpage_intro_location; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
-	uamswp_fad_section_treatment();
+	include( UAMS_FAD_PATH . '/templates/parts/section-list-treatment.php' );
 	// End Treatments Section
 
 	// Begin Areas of Expertise Section

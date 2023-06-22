@@ -366,7 +366,7 @@ $jump_link_count = 0;
 		// Begin Treatments Section
 		$treatment_section_title = $treatment_plural_name . ' Related to ' . $page_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
 		$treatment_section_intro = $treatment_fpage_intro_general; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
-		uamswp_fad_section_treatment();
+		include( UAMS_FAD_PATH . '/templates/parts/section-list-treatment.php' );
 		// End Treatments Section
 
 		// Begin Providers Section
