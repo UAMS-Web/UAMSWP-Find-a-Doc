@@ -3366,7 +3366,7 @@ function uamswp_fad_podcast() {
 			global $clinical_resource_fpage_more_text_expertise;
 			global $clinical_resource_fpage_more_link_text_expertise;
 			global $clinical_resource_fpage_more_link_descr_expertise;
-			global $clinical_resources_fpage_short_desc_expertise;
+			global $clinical_resource_fpage_short_desc_expertise;
 			global $clinical_resource_fpage_featured_image_expertise;
 			global $clinical_resource_fpage_featured_image_expertise_id;
 			global $condition_fpage_title_expertise;
@@ -3826,11 +3826,11 @@ function uamswp_fad_podcast() {
 				$clinical_resources_fpage_short_desc_query_expertise = get_field('expertise_clinical_resources_fpage_short_desc_query'); // If true, use intro text. If false, use specific short description.
 				$clinical_resources_fpage_short_desc_query_expertise = isset($clinical_resources_fpage_short_desc_query_expertise) ? $clinical_resources_fpage_short_desc_query_expertise : true; // Define a value if the item has not been updated since 'expertise_clinical_resources_fpage_short_desc_query' was added
 				if ( $clinical_resources_fpage_short_desc_query_expertise ) {
-					$clinical_resources_fpage_short_desc_expertise = $clinical_resource_fpage_intro_expertise;
+					$clinical_resource_fpage_short_desc_expertise = $clinical_resource_fpage_intro_expertise;
 				} else {
-					$clinical_resources_fpage_short_desc_expertise = get_field('expertise_clinical_resources_fpage_short_desc');
-					$clinical_resources_fpage_short_desc_expertise = ( isset($clinical_resources_fpage_short_desc_expertise) && !empty($clinical_resources_fpage_short_desc_expertise) ) ? uamswp_fad_fpage_text_replace($clinical_resources_fpage_short_desc_expertise) : $clinical_resources_fpage_short_desc_expertise; // Substitute placeholder text for relevant system settings value
-					$clinical_resources_fpage_short_desc_expertise = ( isset($clinical_resources_fpage_short_desc_expertise) && !empty($clinical_resources_fpage_short_desc_expertise) ) ? $clinical_resources_fpage_short_desc_expertise : $clinical_resource_fpage_intro_expertise; // If there is no value, use intro text as a fallback value
+					$clinical_resource_fpage_short_desc_expertise = get_field('expertise_clinical_resources_fpage_short_desc');
+					$clinical_resource_fpage_short_desc_expertise = ( isset($clinical_resource_fpage_short_desc_expertise) && !empty($clinical_resource_fpage_short_desc_expertise) ) ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_short_desc_expertise) : $clinical_resource_fpage_short_desc_expertise; // Substitute placeholder text for relevant system settings value
+					$clinical_resource_fpage_short_desc_expertise = ( isset($clinical_resource_fpage_short_desc_expertise) && !empty($clinical_resource_fpage_short_desc_expertise) ) ? $clinical_resource_fpage_short_desc_expertise : $clinical_resource_fpage_intro_expertise; // If there is no value, use intro text as a fallback value
 				}
 
 				// Get the featured image value
