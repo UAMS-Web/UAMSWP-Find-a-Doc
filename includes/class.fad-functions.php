@@ -1492,7 +1492,7 @@ function uamswp_fad_post_title() {
 		global $provider_ids;
 		global $provider_count; // integer
 
-		if($providers) {
+		if ( $providers ) {
 			$args = array(
 				'post__in' => $providers,
 				'post_type' => 'provider',
@@ -1537,7 +1537,7 @@ function uamswp_fad_post_title() {
 
 		$location_valid = false;
 
-		if ( $locations) {
+		if ( $locations ) {
 			$args = array(
 				'post__in' => $locations,
 				'post_type' => 'location',
@@ -1654,7 +1654,7 @@ function uamswp_fad_post_title() {
 		global $expertise_content_count;
 		global $expertise_content_nav;
 
-		if ( 0 != count($expertise_descendants) ) {
+		if ( $expertise_descendants ) {
 			
 			$expertise_descendant_args = array(
 				'post_parent' => $site_nav_id,
