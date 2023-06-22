@@ -91,7 +91,7 @@ uamswp_fad_title_vars(); // Defines universal variables related to the setting t
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 // Override theme's method of defining the meta description
-$excerpt = $locations_fpage_short_desc_expertise;
+$excerpt = $location_fpage_short_desc_expertise;
 add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
 
 // Construct the meta keywords element

@@ -3343,12 +3343,12 @@ function uamswp_fad_podcast() {
 			global $expertise_featured_image_id;
 			global $provider_fpage_title_expertise;
 			global $provider_fpage_intro_expertise;
-			global $providers_fpage_short_desc_expertise;
+			global $provider_fpage_short_desc_expertise;
 			global $provider_fpage_featured_image_expertise;
 			global $provider_fpage_featured_image_expertise_id;
 			global $location_fpage_title_expertise;
 			global $location_fpage_intro_expertise;
-			global $locations_fpage_short_desc_expertise;
+			global $location_fpage_short_desc_expertise;
 			global $location_fpage_featured_image_expertise;
 			global $location_fpage_featured_image_expertise_id;
 			global $expertise_descendant_fpage_title_expertise;
@@ -3535,14 +3535,14 @@ function uamswp_fad_podcast() {
 					$provider_fpage_intro_expertise = $provider_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($provider_fpage_intro_expertise) : ''; // Intro text
 
 				// Get value for meta description
-				$providers_fpage_short_desc_query_expertise = get_field('expertise_providers_fpage_short_desc_query'); // If true, use intro text. If false, use specific short description.
-				$providers_fpage_short_desc_query_expertise = isset($providers_fpage_short_desc_query_expertise) ? $providers_fpage_short_desc_query_expertise : true; // Define a value if the item has not been updated since 'expertise_providers_fpage_short_desc_query' was added
-				if ( $providers_fpage_short_desc_query_expertise ) {
-					$providers_fpage_short_desc_expertise = $provider_fpage_intro_expertise;
+				$provider_fpage_short_desc_query_expertise = get_field('expertise_providers_fpage_short_desc_query'); // If true, use intro text. If false, use specific short description.
+				$provider_fpage_short_desc_query_expertise = isset($provider_fpage_short_desc_query_expertise) ? $provider_fpage_short_desc_query_expertise : true; // Define a value if the item has not been updated since 'expertise_providers_fpage_short_desc_query' was added
+				if ( $provider_fpage_short_desc_query_expertise ) {
+					$provider_fpage_short_desc_expertise = $provider_fpage_intro_expertise;
 				} else {
-					$providers_fpage_short_desc_expertise = get_field('expertise_providers_fpage_short_desc');
-					$providers_fpage_short_desc_expertise = ( isset($providers_fpage_short_desc_expertise) && !empty($providers_fpage_short_desc_expertise) ) ? uamswp_fad_fpage_text_replace($providers_fpage_short_desc_expertise) : $providers_fpage_short_desc_expertise; // Substitute placeholder text for relevant system settings value
-					$providers_fpage_short_desc_expertise = ( isset($providers_fpage_short_desc_expertise) && !empty($providers_fpage_short_desc_expertise) ) ? $providers_fpage_short_desc_expertise : $provider_fpage_intro_expertise; // If there is no value, use intro text as a fallback value
+					$provider_fpage_short_desc_expertise = get_field('expertise_providers_fpage_short_desc');
+					$provider_fpage_short_desc_expertise = ( isset($provider_fpage_short_desc_expertise) && !empty($provider_fpage_short_desc_expertise) ) ? uamswp_fad_fpage_text_replace($provider_fpage_short_desc_expertise) : $provider_fpage_short_desc_expertise; // Substitute placeholder text for relevant system settings value
+					$provider_fpage_short_desc_expertise = ( isset($provider_fpage_short_desc_expertise) && !empty($provider_fpage_short_desc_expertise) ) ? $provider_fpage_short_desc_expertise : $provider_fpage_intro_expertise; // If there is no value, use intro text as a fallback value
 				}
 
 				// Get the featured image value
@@ -3598,14 +3598,14 @@ function uamswp_fad_podcast() {
 					$location_fpage_intro_expertise = $location_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($location_fpage_intro_expertise) : ''; // Intro text
 
 				// Get value for meta description
-				$locations_fpage_short_desc_query_expertise = get_field('expertise_locations_fpage_short_desc_query'); // If true, use intro text. If false, use specific short description.
-				$locations_fpage_short_desc_query_expertise = isset($locations_fpage_short_desc_query_expertise) ? $locations_fpage_short_desc_query_expertise : true; // Define a value if the item has not been updated since 'expertise_locations_fpage_short_desc_query' was added
-				if ( $locations_fpage_short_desc_query_expertise ) {
-					$locations_fpage_short_desc_expertise = $location_fpage_intro_expertise;
+				$location_fpage_short_desc_query_expertise = get_field('expertise_locations_fpage_short_desc_query'); // If true, use intro text. If false, use specific short description.
+				$location_fpage_short_desc_query_expertise = isset($location_fpage_short_desc_query_expertise) ? $location_fpage_short_desc_query_expertise : true; // Define a value if the item has not been updated since 'expertise_locations_fpage_short_desc_query' was added
+				if ( $location_fpage_short_desc_query_expertise ) {
+					$location_fpage_short_desc_expertise = $location_fpage_intro_expertise;
 				} else {
-					$locations_fpage_short_desc_expertise = get_field('expertise_locations_fpage_short_desc');
-					$locations_fpage_short_desc_expertise = ( isset($locations_fpage_short_desc_expertise) && !empty($locations_fpage_short_desc_expertise) ) ? uamswp_fad_fpage_text_replace($locations_fpage_short_desc_expertise) : $locations_fpage_short_desc_expertise; // Substitute placeholder text for relevant system settings value
-					$locations_fpage_short_desc_expertise = ( isset($locations_fpage_short_desc_expertise) && !empty($locations_fpage_short_desc_expertise) ) ? $locations_fpage_short_desc_expertise : $location_fpage_intro_expertise; // If there is no value, use intro text as a fallback value
+					$location_fpage_short_desc_expertise = get_field('expertise_locations_fpage_short_desc');
+					$location_fpage_short_desc_expertise = ( isset($location_fpage_short_desc_expertise) && !empty($location_fpage_short_desc_expertise) ) ? uamswp_fad_fpage_text_replace($location_fpage_short_desc_expertise) : $location_fpage_short_desc_expertise; // Substitute placeholder text for relevant system settings value
+					$location_fpage_short_desc_expertise = ( isset($location_fpage_short_desc_expertise) && !empty($location_fpage_short_desc_expertise) ) ? $location_fpage_short_desc_expertise : $location_fpage_intro_expertise; // If there is no value, use intro text as a fallback value
 				}
 
 				// Get the featured image value
