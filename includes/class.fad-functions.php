@@ -4719,3 +4719,76 @@ function uamswp_fad_section_condition_treatment() {
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-condition-treatment.php' );
 
 } // end function uamswp_fad_section_treatment()
+
+// Define a schema block
+function uamswp_schema_construct($schema_construct_arr) {
+
+	/* 
+	 * Before the while loop...
+	 * 
+	 * 	Define '$i = 0;'
+	 * 
+	 * 
+	 * Within the while loop...
+	 * 
+	 * 	Define $schema_construct_arr as an associative array.
+	 * 		* Key = Item Property
+	 * 		* Value = Value
+	 * 
+	 * 		Example:
+	 * 			$schema_construct_arr = array();
+	 * 			$schema_construct_arr['@type'] = 'MedicalSpecialty';
+	 * 			$schema_construct_arr['name'] = $condition_title_attr;
+	 * 			$schema_construct_arr['url'] = $condition_url;
+	 * 
+	 * 	Define $chr_tab_base_count with an integer indicating how many tabs this schema 
+	 * 	block will be starting out at in the larger JSON-LD block.
+	 * 
+	 * 		Example:
+	 * 			$chr_tab_base_count = 2;
+	 * 
+	 * 	Define the relevant schema variable using this function.
+	 * 
+	 * 		Example:
+	 * 			$condition_schema .= uamswp_schema_construct($schema_construct_arr);
+	 * 
+	 * 
+	 * At the end of the while loop...
+	 * 
+	 * 	Define '$i++;'.
+	 */
+
+	// Bring in variables from outside of the function
+	global $chr_tab_base_count; // Define number of tabs at start of schema block being created here // int
+
+	// Check/define variables
+	$chr_tab_base_count = isset($chr_tab_base_count) ? $chr_tab_base_count : 0;
+	$chr_newline = PHP_EOL;
+	$chr_tab = chr(9);
+	$chr_tab_base = str_repeat( $chr_tab, $chr_tab_base_count );
+
+	// Create the return variable
+	$schema_construct = '';
+
+	// If this is not the first iteration, add a comma
+	if ($i > 0) {
+		$schema_construct .= ',';
+	}
+
+	// Count the number of attribute-value pairs
+	$schema_construct_arr_count = count($schema_construct_arr);
+
+	// Loop through the attribute-value pairs
+	$p = 0;
+	if ( $schema_construct_arr_count > 0 ) {
+		$schema_construct .= $chr_newline . $chr_tab_base . '{';
+		foreach( $schema_construct_arr as $property => $value) {
+			$schema_construct .= $chr_newline . $chr_tab_base . $chr_tab . '"' . $property . '": "' . $value . '"';
+			$p++;
+			$schema_construct .= $p < $schema_construct_arr_count ? ',' : '';
+		}
+		$schema_construct .= $chr_newline . $chr_tab_base . '}';
+	}
+
+	return $schema_construct;
+}

@@ -86,16 +86,25 @@ if ( $condition_section_show && !$hide_medical_ontology ) {
 									$id = get_the_ID();
 									$condition_title = get_the_title($id);
 									$condition_title_attr = uamswp_attr_conversion($condition_title);
-									if ($i > 0) {
-										$condition_schema .= ',
-';
+									if ( $condition_treatment_section_link_item ) {
+										$condition_url = get_the_permalink($id);
+										$condition_aria_label = 'Go to ' . $condition_single_name_attr . ' page for ' . $condition_title_attr;
 									}
-									$condition_schema .= '
-		{
-			"@type": "MedicalSpecialty",
-			"name": "' . $condition_title_attr . '",
-			"url":"'. $condition_url .'"
-		}';
+
+									// Define the attribute-value pairs
+									$schema_construct_arr = array();
+									$schema_construct_arr['@type'] = 'MedicalSpecialty';
+									$schema_construct_arr['name'] = $condition_title_attr;
+									if ( $condition_treatment_section_link_item ) {
+										$schema_construct_arr['url'] = $condition_url;
+									}
+
+									// Define number of tabs at start of schema block being created here
+									$chr_tab_base_count = 2;
+
+									// Construct the schema
+									$condition_schema .= uamswp_schema_construct($schema_construct_arr);
+
 									$i++;
 									?>
 									<li>
