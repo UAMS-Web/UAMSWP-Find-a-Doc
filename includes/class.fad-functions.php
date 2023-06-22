@@ -1862,7 +1862,7 @@ function uamswp_fad_post_title() {
 			global $treatments_cpt;
 
 		// Make variables available outside of the function
-		global $treatments_cpt_query;
+		global $treatment_cpt_query;
 		global $treatment_section_show;
 		global $treatment_ids;
 		global $treatment_count; // integer
@@ -1877,11 +1877,11 @@ function uamswp_fad_post_title() {
 			'posts_per_page' => -1,
 			'post__in' => $treatments_cpt
 		);
-		$treatments_cpt_query = new WP_Query( $args );
-		if( ( $treatments_cpt && $treatments_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
+		$treatment_cpt_query = new WP_Query( $args );
+		if( ( $treatments_cpt && $treatment_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
 			$treatment_section_show = true;
-			$treatment_ids = $treatments_cpt_query->posts;
-			$treatment_count = count($treatments_cpt_query->posts);
+			$treatment_ids = $treatment_cpt_query->posts;
+			$treatment_count = count($treatment_cpt_query->posts);
 			$jump_link_count = $jump_link_count + 1;
 		} else {
 			$treatment_section_show = false;
@@ -5243,7 +5243,7 @@ function uamswp_fad_section_treatment() {
 
 		// Defined on the template or in a function such as uamswp_fad_treatment_query()
 		global $treatment_section_show; // bool
-		global $treatments_cpt_query; // array
+		global $treatment_cpt_query; // array
 		global $treatments_cpt; // array
 		global $treatment_ids; // array
 		global $treatment_count; // integer
@@ -5293,8 +5293,8 @@ function uamswp_fad_section_treatment() {
 								<?php
 								if ( $treatment_count > 0 ) {
 									$i = 0;
-									while ( $treatments_cpt_query->have_posts() ) {
-										$treatments_cpt_query->the_post();
+									while ( $treatment_cpt_query->have_posts() ) {
+										$treatment_cpt_query->the_post();
 										$id = get_the_ID();
 										$treatment_title = get_the_title($id);
 										$treatment_title_attr = uamswp_attr_conversion($treatment_title);

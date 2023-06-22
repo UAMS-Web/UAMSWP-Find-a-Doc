@@ -2500,10 +2500,10 @@ function get_provider_meta($object) {
 			'posts_per_page' => -1,
 			'post__in' => $treatments_cpt
 		));
-		$treatments_cpt_query = new WP_Query( $args );
-		if( $treatments_cpt && $treatments_cpt_query->posts ):
+		$treatment_cpt_query = new WP_Query( $args );
+		if( $treatments_cpt && $treatment_cpt_query->posts ):
 
-			foreach( $treatments_cpt_query->posts as $treatment ):
+			foreach( $treatment_cpt_query->posts as $treatment ):
 				$data['physician_treatments'][$treatment->ID]['link'] = get_permalink( $treatment->ID );
 				$data['physician_treatments'][$treatment->ID]['title'] = $treatment->post_title;
 				$data['physician_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
@@ -2913,10 +2913,10 @@ function get_location_meta($object) {
 			'posts_per_page' => -1,
 			'post__in' => $treatments_cpt
 		));
-		$treatments_cpt_query = new WP_Query( $args );
-		if( $treatments_cpt && $treatments_cpt_query->posts ):
+		$treatment_cpt_query = new WP_Query( $args );
+		if( $treatments_cpt && $treatment_cpt_query->posts ):
 
-			foreach( $treatments_cpt_query->posts as $treatment ):
+			foreach( $treatment_cpt_query->posts as $treatment ):
 				$data['location_treatments'][$treatment->ID]['link'] = get_permalink( $treatment->ID );
 				$data['location_treatments'][$treatment->ID]['title'] = $treatment->post_title;
 				$data['location_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
@@ -2999,10 +2999,10 @@ function get_expertise_meta($object) {
 			'posts_per_page' => -1,
 			'post__in' => $treatments_cpt
 		));
-		$treatments_cpt_query = new WP_Query( $args );
-		if( $treatments_cpt && $treatments_cpt_query->posts ):
+		$treatment_cpt_query = new WP_Query( $args );
+		if( $treatments_cpt && $treatment_cpt_query->posts ):
 
-			foreach( $treatments_cpt_query->posts as $treatment ):
+			foreach( $treatment_cpt_query->posts as $treatment ):
 				$data['expertise_treatments'][$treatment->ID]['link'] = get_permalink( $treatment->ID );
 				$data['expertise_treatments'][$treatment->ID]['title'] = $treatment->post_title;
 				$data['expertise_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
@@ -3123,10 +3123,10 @@ function get_condition_meta($object) {
 			'posts_per_page' => -1,
 			'post__in' => $treatments_cpt
 		));
-		$treatments_cpt_query = new WP_Query( $args );
-		if( $treatments_cpt && $treatments_cpt_query->posts ):
+		$treatment_cpt_query = new WP_Query( $args );
+		if( $treatments_cpt && $treatment_cpt_query->posts ):
 
-			foreach( $treatments_cpt_query->posts as $treatment ):
+			foreach( $treatment_cpt_query->posts as $treatment ):
 				$data['condition_treatments'][$treatment->ID]['link'] = get_permalink( $treatment->ID );
 				$data['condition_treatments'][$treatment->ID]['title'] = $treatment->post_title;
 				$data['condition_treatments'][$treatment->ID]['slug'] = $treatment->post_name;
@@ -3356,7 +3356,7 @@ function get_resource_meta($object) {
 			'posts_per_page' => -1,
 			'post__in' => $treatments_cpt
 		));
-		$treatments_cpt_query = new WP_Query( $args );
+		$treatment_cpt_query = new WP_Query( $args );
 	}
 	// Physicians
 	$providers = get_field( 'clinical_resource_providers', $postId );
@@ -3475,8 +3475,8 @@ function get_resource_meta($object) {
 	$data['clinical_resource_conditions_list'] = $condition_list;
 	$treatment_list = '';
 	$i = 1;
-	if( $treatments_cpt && $treatments_cpt_query->posts ):
-		foreach( $treatments_cpt_query->posts as $treatment ):
+	if( $treatments_cpt && $treatment_cpt_query->posts ):
+		foreach( $treatment_cpt_query->posts as $treatment ):
 			$data['clinical_resource_treatments'][$treatment->ID]['link'] = get_permalink( $treatment->ID );
 			$data['clinical_resource_treatments'][$treatment->ID]['title'] = $treatment->post_title;
 			$data['clinical_resource_treatments'][$treatment->ID]['slug'] = $treatment->post_name;

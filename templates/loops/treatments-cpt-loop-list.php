@@ -8,7 +8,7 @@
  * Required vars:
  * 	$provider_plural_name // System setting for Providers plural item name
  * 	$treatment_plural_name // System setting for Treatments plural item name
- * 	$treatments_cpt_query
+ * 	$treatment_cpt_query
  * 	$treatment_context = 'single-provider', 'single-location', 'single-condition', 'single-treatment', 'single-expertise', 'single-resource'
  * 	$treatment_intro // Intro text
  * 
@@ -63,7 +63,7 @@ if (
 				<?php } ?>
 				<div class="">
 					<ul class="list" style="column-count:3; list-style:none;">
-					<?php foreach( $treatments_cpt_query->posts as $treatment ): ?>
+					<?php foreach( $treatment_cpt_query->posts as $treatment ): ?>
 						<li>
 							<?php echo $treatment->post_title; ?>
 						</li>
