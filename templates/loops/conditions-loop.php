@@ -20,7 +20,7 @@
 				<p class="note">UAMS Health <?php echo strtolower($provider_plural_name); ?> care for a broad range of <?php echo strtolower($condition_plural_name); ?>, some of which may not be listed below.</p>
 				<div class="list-container list-container-rows">
 					<ul class="list">
-					<?php foreach( $conditions_query->get_terms() as $condition ): ?>
+					<?php foreach( $condition_query->get_terms() as $condition ): ?>
 						<li>
 							<a href="<?php echo get_term_link( $condition->term_id ); ?>" aria-label="Go to <?php echo $condition_single_name_attr; ?> page for <?php echo $condition->name; ?>" class="btn btn-outline-primary">
 								<?php 
