@@ -4475,8 +4475,8 @@ function uamswp_fad_section_expertise() {
 	// Bring in variables from outside of the function
 
 		// Optional variables defined on the template
-		global $expertise_section_class; // Section class // string (default: expertise-list)
-		global $expertise_section_id; // Section ID // string (default: expertise)
+		global $expertise_section_class; // Section class // string (default: 'expertise-list')
+		global $expertise_section_id; // Section ID // string (default: 'expertise')
 		global $expertise_section_show_header; // Query whether to display the section header // bool (default: true)
 		global $expertise_section_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of expertise section title in a general placement)
 		global $expertise_section_intro; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of expertise section intro text in a general placement)
@@ -4504,7 +4504,7 @@ function uamswp_fad_section_expertise() {
 		global $expertise_descendant_count; // int
 
 		// Defined on the template or in a function such as uamswp_fad_ontology_hide()
-		global $hide_medical_ontology;
+		global $hide_medical_ontology; // bool
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-expertise.php' );
 
