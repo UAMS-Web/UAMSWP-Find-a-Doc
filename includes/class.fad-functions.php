@@ -3823,9 +3823,9 @@ function uamswp_fad_podcast() {
 					$clinical_resource_fpage_more_link_descr_expertise = $clinical_resource_fpage_more_link_descr_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_descr_expertise) : ''; // "More" link description
 
 				// Get value for meta description
-				$clinical_resources_fpage_short_desc_query_expertise = get_field('expertise_clinical_resources_fpage_short_desc_query'); // If true, use intro text. If false, use specific short description.
-				$clinical_resources_fpage_short_desc_query_expertise = isset($clinical_resources_fpage_short_desc_query_expertise) ? $clinical_resources_fpage_short_desc_query_expertise : true; // Define a value if the item has not been updated since 'expertise_clinical_resources_fpage_short_desc_query' was added
-				if ( $clinical_resources_fpage_short_desc_query_expertise ) {
+				$clinical_resource_fpage_short_desc_query_expertise = get_field('expertise_clinical_resources_fpage_short_desc_query'); // If true, use intro text. If false, use specific short description.
+				$clinical_resource_fpage_short_desc_query_expertise = isset($clinical_resource_fpage_short_desc_query_expertise) ? $clinical_resource_fpage_short_desc_query_expertise : true; // Define a value if the item has not been updated since 'expertise_clinical_resources_fpage_short_desc_query' was added
+				if ( $clinical_resource_fpage_short_desc_query_expertise ) {
 					$clinical_resource_fpage_short_desc_expertise = $clinical_resource_fpage_intro_expertise;
 				} else {
 					$clinical_resource_fpage_short_desc_expertise = get_field('expertise_clinical_resources_fpage_short_desc');
