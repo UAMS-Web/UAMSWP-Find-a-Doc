@@ -1121,7 +1121,7 @@ while ( have_posts() ) : the_post();
 		$location_section_title = $location_fpage_title_provider; // Text to use for the section title
 		$location_section_intro = $location_fpage_intro_provider; // Text to use for the section intro text
 		$location_section_schema_query = true; // Query for whether to add locations to schema
-		uamswp_fad_section_location();
+		include( UAMS_FAD_PATH . '/templates/parts/section-list-location.php' );
 		// End Location Section
 
 		if ( $ratings_section_show ) { ?>

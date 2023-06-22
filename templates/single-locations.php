@@ -1565,7 +1565,7 @@ while ( have_posts() ) : the_post(); ?>
 	$location_section_intro = $location_descendant_fpage_intro_location; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for locations section intro text in a general placement)
 	$location_section_filter = false; // Query whether to add filter(s) // bool (default: true)
 	$location_descendant_list = true; // Query whether this is a list of child locations within a location // bool (default: false)
-	uamswp_fad_section_location();
+	include( UAMS_FAD_PATH . '/templates/parts/section-list-location.php' );
 	// End Descendant Locations Section
 
 	// Begin Clinical Resources Section
