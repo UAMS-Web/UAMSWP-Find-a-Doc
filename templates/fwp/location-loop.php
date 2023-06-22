@@ -1,7 +1,11 @@
 <?php 
 /**
- * Template Name: Locations Archive Page Loop for FacetWP "Locations" Template
- * Template Slug: locations
+ * Template Name: Locations Archive Page Loop for FacetWP Listings
+ * 
+ * FacetWP Listing Name and Slug:
+ * 	Locations					('locations')
+ * 	Condition - Locations		('condition_locations')
+ * 	Baptist Health Cancer Care	('baptist_health_cancer_care')
  */
 
 // Bring in variables from outside of the function

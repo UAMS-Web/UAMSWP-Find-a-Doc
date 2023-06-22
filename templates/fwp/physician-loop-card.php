@@ -1,7 +1,15 @@
 <?php
 /**
- * Template Name: Provider Cards Loop for FacetWP "Physician Cards" and "Physician Search Cards" Templates
- * Template Slugs: physician_cards, physician_search_cards
+ * Template Name: Provider Cards Loop for FacetWP Listings
+ * 
+ * FacetWP Listing Name and Slug:
+ * 	Physician Cards					('physician_cards')
+ * 	Physician Search Cards			('physician_search_cards')
+ * 	Condition - Physicians			('condition_physicians')
+ * 	Physician by Location			('physician_by_location')
+ * 	Treatment - Physicians			('treatment_physicians')
+ * 	Physicians by Area of Expertise	('physicians_by_expertise')
+ * 
  * Designed for physicians
  */
 

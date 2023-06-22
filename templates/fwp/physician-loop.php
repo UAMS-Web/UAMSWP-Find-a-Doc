@@ -1,7 +1,10 @@
 <?php
 /**
- * Template Name: Providers Archive Page Loop for FacetWP "Physician" Template
- * Template Slug: physician
+ * Template Name: Providers Archive Page Loop for FacetWP Listing
+ * 
+ * FacetWP Listing Name and Slug:
+ * 	Physician	('physician')
+ * 
  * Designed for physicians
  */
 

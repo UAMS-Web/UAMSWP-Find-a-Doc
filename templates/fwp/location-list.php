@@ -1,7 +1,9 @@
 <?php 
 /**
- * Template Name: Locations List Loop for FacetWP "Location List" Template
- * Template Slug: location_list
+ * Template Name: Locations List Loop for FacetWP Listing
+ * 
+ * FacetWP Listing Name and Slug:
+ * 	Location List	('location_list')
  */
 
 // Get system settings for location labels

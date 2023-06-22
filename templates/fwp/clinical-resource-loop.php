@@ -1,7 +1,9 @@
 <?php 
 /**
- * Template Name: Clinical Resources Archive Page Loop for FacetWP "Clinical Resources" Template
- * Template Slug: clinical_resources
+ * Template Name: Clinical Resources Archive Page Loop for FacetWP Listing
+ * 
+ * FacetWP Listing Name and Slug:
+ * 	Clinical Resources	('clinical_resources')
  */
 
 // Bring in variables from outside of the function

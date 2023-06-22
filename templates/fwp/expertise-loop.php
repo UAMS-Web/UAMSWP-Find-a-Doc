@@ -1,7 +1,9 @@
 <?php
 /**
- * Template Name: Areas of Expertise Archive Page Loop for FacetWP "Areas of Expertise" Template
- * Template Slug: expertise
+ * Template Name: Areas of Expertise Archive Page Loop for FacetWP Listing
+ * 
+ * FacetWP Listing Name and Slug:
+ * 	Areas of Expertise	('expertise')
  */
 
 // Bring in variables from outside of the function
