@@ -204,8 +204,8 @@ if ($providers && !empty($providers)) { $condition_field_classes .= ' has-provid
 				'hide_empty' => false,
 				'term_taxonomy_id' => $treatments
 			));
-			$treatments_query = new WP_Term_Query( $args );
-			if ( $treatments && !empty($treatments_query->terms) ) {
+			$treatment_query = new WP_Term_Query( $args );
+			if ( $treatments && !empty($treatment_query->terms) ) {
 
 		?>
 		<section class="uams-module conditions-treatments bg-auto">
@@ -216,7 +216,7 @@ if ($providers && !empty($providers)) { $condition_field_classes .= ' has-provid
 						<p class="note">UAMS Health <?php echo strtolower($provider_plural_name); ?> perform and prescribe a broad range of <?php echo strtolower($treatment_plural_name); ?>, some of which may not be listed below.</p>
 						<div class="list-container list-container-rows">
 							<ul class="list">
-							<?php foreach( $treatments_query->get_terms() as $treatment ): ?>
+							<?php foreach( $treatment_query->get_terms() as $treatment ): ?>
 								<li>
 									<a href="<?php echo get_term_link( $treatment->term_id ); ?>" aria-label="Go to <?php echo $treatment_single_name_attr; ?> page for <?php echo $treatment->name; ?>" class="btn btn-outline-primary"><?php echo $treatment->name; ?></a>
 								</li>
