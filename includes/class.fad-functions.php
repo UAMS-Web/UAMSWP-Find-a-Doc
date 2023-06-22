@@ -4647,14 +4647,18 @@ function uamswp_fad_section_clinical_resource() {
 	} // endif ( $clinical_resource_section_show )
 } // end function uamswp_fad_section_clinical_resource()
 
-// Construct conditions section for display on a page
+// Construct Condition List Section
+//     The template part included in this function can stand on its own. If the 
+//     relevant page template is not built using hooks/functions, the include() 
+//     is all that is necessary.
 function uamswp_fad_section_condition() {
+
 	// Bring in variables from outside of the function
 
 		// Optional variables defined on the template
-		global $condition_section_class; // Section class // string (default: conditions-treatments)
-		global $condition_section_id; // Section ID // string (default: conditions)
-		global $condition_section_show_header; // Query whether to display the section header // bool (default: true)
+		global $condition_section_class; // Section class // string (default: 'conditions-treatments')
+		global $condition_section_id; // Section ID // string (default: 'conditions')
+		global $condition_section_show_header; // Query for whether to display the section header // bool (default: true)
 		global $condition_section_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of condition section title in a general placement)
 		global $condition_section_intro; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of condition section intro text in a general placement)
 
@@ -4670,93 +4674,19 @@ function uamswp_fad_section_condition() {
 
 		// Defined on the template or in a function such as uamswp_fad_condition_query()
 		global $condition_section_show; // bool
-		global $condition_cpt_query; // array
-		global $conditions_cpt; // array
-		global $condition_ids; // array
-		global $condition_count; // integer
+		global $condition_cpt_query; // WP_Post[]
+		global $conditions_cpt; // int[]
+		global $condition_ids; // int[]
+		global $condition_count; // int
 
 		// Defined on the template or in a function such as uamswp_fad_ontology_hide()
-		global $hide_medical_ontology;
+		global $hide_medical_ontology; // bool
 
 	// Make variables available outside of the function
 	global $condition_schema; // string
 
-	// Do something
-	if ( $condition_section_show && !$hide_medical_ontology ) {
+	include( UAMS_FAD_PATH . '/templates/parts/section-list-condition.php' );
 
-		// Check/define variables
-
-			$condition_section_class = isset($condition_section_class) ? $condition_section_class : 'conditions-treatments';
-			$condition_section_id = isset($condition_section_id) ? $condition_section_id : 'conditions';
-			$condition_section_show_header = isset($condition_section_show_header) ? $condition_section_show_header : true;
-			if ( !isset($condition_section_title) ) {
-				// Set the section title using the system settings for the section title in a general placement
-				if ( !isset($condition_fpage_title_general) ) {
-					uamswp_fad_condition_fpage_text_general();
-					global $condition_fpage_title_general;
-				}
-				$condition_section_title = $condition_fpage_title_general;
-			}
-			if ( !isset($condition_section_intro) ) {
-				// Set the section title using the system settings for the section title in a general placement
-				if ( !isset($condition_fpage_intro_general) ) {
-					uamswp_fad_condition_fpage_text_general();
-					global $condition_fpage_intro_general;
-				}
-				$condition_section_intro = $condition_fpage_intro_general;
-			}
-
-		?>
-		<section class="uams-module<?php echo $condition_section_class ? ' ' . $condition_section_class : ''; ?> bg-auto<?php echo $condition_section_collapse_list ? ' collapse-list' : ''; ?>"<?php echo $condition_section_id ? ' id="' . $condition_section_id . '" aria-labelledby="' . $condition_section_id . '-title"' : ''; ?>>
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title<?php echo !$condition_section_show_header ? ' sr-only' : ''; ?>"<?php echo $condition_section_id ? ' id="' . $condition_section_id . '-title"' : ''; ?>><span class="title"><?php echo $condition_section_title; ?></span></h2>
-						<?php if ( $condition_section_intro ) { ?>
-							<p class="note<?php echo !$condition_section_show_header ? ' sr-only' : ''; ?>"><?php echo $condition_section_intro; ?></p>
-						<?php } // endif ( $condition_section_intro ) ?>
-						<div class="list-container list-container-rows">
-							<ul class="list">
-								<?php
-								if ( $condition_count > 0 ) {
-									$i = 0;
-									while ( $condition_cpt_query->have_posts() ) {
-										$condition_cpt_query->the_post();
-										$id = get_the_ID();
-										$condition_title = get_the_title($id);
-										$condition_title_attr = uamswp_attr_conversion($condition_title);
-										$condition_url = get_the_permalink($id);
-										$condition_aria_label = 'Go to ' . $condition_single_name_attr . ' page for ' . $condition_title_attr;
-										if ($i > 0) {
-											$condition_schema .= ',
-';
-										}
-										$condition_schema .= '
-		{
-			"@type": "MedicalSpecialty",
-			"name": "' . $condition_title_attr . '",
-			"url":"'. $condition_url .'"
-		}';
-										$i++;
-										?>
-										<li>
-											<a href="<?php echo $condition_url; ?>" aria-label="<?php echo $condition_aria_label; ?>" class="btn btn-outline-primary">
-												<?php echo $condition_title; ?>
-											</a>
-										</li>
-									<?php
-									} // endwhile
-								} // endif ( $condition_count > 0 )
-								wp_reset_postdata();
-								?>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php 
-	} // endif ( $condition_section_show )
 } // end function uamswp_fad_section_condition()
 
 // Construct Treatment List Section
