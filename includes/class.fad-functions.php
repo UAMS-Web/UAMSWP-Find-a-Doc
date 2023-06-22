@@ -4466,8 +4466,12 @@ function uamswp_fad_section_location() {
 
 } // end function uamswp_fad_section_location()
 
-// Construct areas of expertise section for display on a page
+// Construct Area of Expertise List Section
+//     The template part included in this function can stand on its own. If the 
+//     relevant page template is not built using hooks/functions, the include() 
+//     is all that is necessary.
 function uamswp_fad_section_expertise() {
+
 	// Bring in variables from outside of the function
 
 		// Optional variables defined on the template
@@ -4476,7 +4480,7 @@ function uamswp_fad_section_expertise() {
 		global $expertise_section_show_header; // Query whether to display the section header // bool (default: true)
 		global $expertise_section_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of expertise section title in a general placement)
 		global $expertise_section_intro; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of expertise section intro text in a general placement)
-		global $expertise_section_collapse_list; // Query whether to collapse the list of locations in the locations section // bool (default: false)
+		global $expertise_section_collapse_list; // Query for whether to collapse the list of locations in the locations section // bool (default: false)
 		global $expertise_descendant_list; // Query for whether this is a list of child areas of expertise within an area of expertise // bool (default: false)
 
 		// Defined in uamswp_fad_labels_expertise()
@@ -4489,88 +4493,21 @@ function uamswp_fad_section_expertise() {
 		global $expertise_fpage_title_general; // string
 		global $expertise_fpage_intro_general; // string
 
-		// Defined on the template or in a function such as uamswp_fad_ontology_hide()
-		global $hide_medical_ontology;
-
 		// Defined on the template or in a function such as uamswp_fad_expertise_query()
 		global $expertise_section_show; // bool
-		global $expertise_query; // array
-		global $expertise_count; // integer
+		global $expertise_query; // WP_Post[]
+		global $expertise_count; // int
 
 		// Defined on the template or in a function such as uamswp_fad_expertise_descendant_query()
 		global $expertise_descendant_section_show; // bool
-		global $expertise_descendant_query; // array
-		global $expertise_descendant_count; // integer
+		global $expertise_descendant_query; // WP_Post[]
+		global $expertise_descendant_count; // int
 
-		// Check/define variables
-		$expertise_descendant_list = isset($expertise_descendant_list) ? $expertise_descendant_list : false;
-		if ( $expertise_descendant_list ) {
-			$expertise_section_show = $expertise_descendant_section_show; // bool
-			$expertise_query = $expertise_descendant_query; // array
-			$expertise_count = $expertise_descendant_count; // integer
-		}
+		// Defined on the template or in a function such as uamswp_fad_ontology_hide()
+		global $hide_medical_ontology;
 
-	// Do something
-	if ( $expertise_section_show && !$hide_medical_ontology ) {
+	include( UAMS_FAD_PATH . '/templates/parts/section-list-expertise.php' );
 
-		// Check/define variables
-
-			$expertise_section_class = isset($expertise_section_class) ? $expertise_section_class : 'expertise-list';
-			$expertise_section_id = isset($expertise_section_id) ? $expertise_section_id : 'expertise';
-			$expertise_section_show_header = isset($expertise_section_show_header) ? $expertise_section_show_header : true;
-			if ( !isset($expertise_section_title) ) {
-				// Set the section title using the system settings for the section title in a general placement
-				if ( !isset($expertise_fpage_title_general) ) {
-					uamswp_fad_expertise_fpage_text_general();
-					global $expertise_fpage_title_general;
-				}
-				$expertise_section_title = $expertise_fpage_title_general;
-			}
-			if ( !isset($expertise_section_intro) ) {
-				// Set the section title using the system settings for the section title in a general placement
-				if ( !isset($expertise_fpage_intro_general) ) {
-					uamswp_fad_expertise_fpage_text_general();
-					global $expertise_fpage_intro_general;
-				}
-				$expertise_section_intro = $expertise_fpage_intro_general;
-			}
-			$expertise_section_collapse_list = isset($expertise_section_collapse_list) ? $expertise_section_collapse_list : false;
-
-		?>
-		<section class="uams-module<?php echo $expertise_section_class ? ' ' . $expertise_section_class : ''; ?> bg-auto<?php echo $expertise_section_collapse_list ? ' collapse-list' : ''; ?>"<?php echo $expertise_section_id ? ' id="' . $expertise_section_id . '" aria-labelledby="' . $expertise_section_id . '-title"' : ''; ?>>
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title<?php echo !$expertise_section_show_header ? ' sr-only' : ''; ?>"<?php echo $expertise_section_id ? ' id="' . $expertise_section_id . '-title"' : ''; ?>><span class="title"><?php echo $expertise_section_title; ?></span></h2>
-						<?php if ( $expertise_section_intro ) { ?>
-							<p class="note<?php echo !$expertise_section_show_header ? ' sr-only' : ''; ?>"><?php echo $expertise_section_intro; ?></p>
-						<?php } // endif ( $expertise_section_intro ) ?>
-						<div class="card-list-container">
-							<div class="card-list card-list-expertise">
-								<?php
-									if ( $expertise_count > 0 ) {
-										while ( $expertise_query->have_posts() ) {
-											$expertise_query->the_post();
-											$id = get_the_ID();
-											include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
-										} // endwhile
-									} // endif ( $expertise_count > 0 )
-									wp_reset_postdata();
-								?>
-							</div>
-							<?php
-							if ( $expertise_section_collapse_list ) { ?>
-								<div class="ajax-filter-load-more">
-									<button class="btn btn-lg btn-primary" aria-label="Load all <?php echo strtolower($expertise_plural_name_attr); ?>">Load All</button>
-								</div>
-							<?php } // endif ( $expertise_section_collapse_list ) ?>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php 
-	} // endif ( $expertise_section_show )
 } // end function uamswp_fad_section_expertise()
 
 // Construct clinical resources section for display on a page

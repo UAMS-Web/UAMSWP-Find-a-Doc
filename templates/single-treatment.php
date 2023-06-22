@@ -375,7 +375,7 @@ $jump_link_count = 0;
 		// Begin Areas of Expertise Section
 		$expertise_section_title = $expertise_plural_name . ' Related to ' . $page_title;
 		$expertise_section_intro = '';
-		uamswp_fad_section_expertise();
+		include( UAMS_FAD_PATH . '/templates/parts/section-list-expertise.php' );
 		// End Areas of Expertise Section
 
 		// Begin Appointment Information Section

@@ -1114,7 +1114,7 @@ while ( have_posts() ) : the_post();
 		// Begin Areas of Expertise Section
 		$expertise_section_title = $expertise_fpage_title_provider;
 		$expertise_section_intro = $expertise_fpage_intro_provider;
-		uamswp_fad_section_expertise();
+		include( UAMS_FAD_PATH . '/templates/parts/section-list-expertise.php' );
 		// End Areas of Expertise Section
 
 		// Begin Location Section
