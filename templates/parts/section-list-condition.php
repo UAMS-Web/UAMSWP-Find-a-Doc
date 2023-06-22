@@ -33,6 +33,7 @@
  * 		$condition_section_show_header // Query for whether to display the section header // bool (default: true)
  * 		$condition_section_title // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of condition section title in a general placement)
  * 		$condition_section_intro // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of condition section intro text in a general placement)
+ * 		$condition_section_link_item // Query for whether to link the list items // bool (default: false)
  * 
  * Return:
  * 	$condition_schema; // string
@@ -63,6 +64,7 @@ if ( $condition_section_show && !$hide_medical_ontology ) {
 			}
 			$condition_section_intro = $condition_fpage_intro_general;
 		}
+		$condition_section_link_item = isset($condition_section_link_item) ? $condition_section_link_item : false;
 
 	?>
 	<section class="uams-module<?php echo $condition_section_class ? ' ' . $condition_section_class : ''; ?> bg-auto<?php echo $condition_section_collapse_list ? ' collapse-list' : ''; ?>"<?php echo $condition_section_id ? ' id="' . $condition_section_id . '" aria-labelledby="' . $condition_section_id . '-title"' : ''; ?>>
@@ -78,13 +80,12 @@ if ( $condition_section_show && !$hide_medical_ontology ) {
 							<?php
 							if ( $condition_count > 0 ) {
 								$i = 0;
+
 								while ( $condition_cpt_query->have_posts() ) {
 									$condition_cpt_query->the_post();
 									$id = get_the_ID();
 									$condition_title = get_the_title($id);
 									$condition_title_attr = uamswp_attr_conversion($condition_title);
-									$condition_url = get_the_permalink($id);
-									$condition_aria_label = 'Go to ' . $condition_single_name_attr . ' page for ' . $condition_title_attr;
 									if ($i > 0) {
 										$condition_schema .= ',
 ';
@@ -98,9 +99,16 @@ if ( $condition_section_show && !$hide_medical_ontology ) {
 									$i++;
 									?>
 									<li>
-										<a href="<?php echo $condition_url; ?>" aria-label="<?php echo $condition_aria_label; ?>" class="btn btn-outline-primary">
-											<?php echo $condition_title; ?>
-										</a>
+										<?php
+										if ( $condition_treatment_section_link_item ) { ?>
+											<a href="<?php echo $condition_url; ?>" aria-label="<?php echo $condition_aria_label; ?>" class="btn btn-outline-primary">
+												<?php echo $condition_title; ?>
+											</a>
+										<?php
+										} else {
+											echo $condition_title;
+										} // endif
+										?>
 									</li>
 								<?php
 								} // endwhile

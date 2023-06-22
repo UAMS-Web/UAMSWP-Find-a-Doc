@@ -60,6 +60,7 @@
  * 		$condition_treatment_section_show_header // Query for whether to display the section header // bool (default: true)
  * 		$condition_treatment_section_title // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of condition section title in a general placement)
  * 		$condition_treatment_section_intro // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
+ * 		$condition_treatment_section_link_item // Query for whether to link the list items // bool (default: false)
  * 		$treatment_section_class // Section class // string (default: 'treatments')
  * 		$treatment_section_id // Section ID // string (default: 'treatments')
  * 		$treatment_section_show_header // Query for whether to display the section header // bool (default: true)
@@ -98,6 +99,7 @@ if ( $condition_treatment_section_show && !$hide_medical_ontology ) {
 				}
 				$condition_treatment_section_intro = $condition_treatment_fpage_intro_general;
 			}
+			$condition_treatment_section_link_item = isset($condition_treatment_section_link_item) ? $condition_treatment_section_link_item : false;
 
 		// Conditions
 

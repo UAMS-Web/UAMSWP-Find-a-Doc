@@ -4567,6 +4567,7 @@ function uamswp_fad_section_condition() {
 		global $condition_section_show_header; // Query for whether to display the section header // bool (default: true)
 		global $condition_section_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of condition section title in a general placement)
 		global $condition_section_intro; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of condition section intro text in a general placement)
+		global $condition_section_link_item; // Query for whether to link the list items // bool (default: false)
 
 		// Defined in uamswp_fad_labels_condition()
 		global $condition_single_name; // string
@@ -4609,6 +4610,7 @@ function uamswp_fad_section_treatment() {
 		global $treatment_section_show_header; // Query whether to display the section header // bool (default: true)
 		global $treatment_section_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of treatment section title in a general placement)
 		global $treatment_section_intro; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of treatment section intro text in a general placement)
+		global $treatment_section_link_item; // Query for whether to link the list items // bool (default: false)
 
 		// Defined in uamswp_fad_labels_treatment()
 		global $treatment_single_name; // string
@@ -4656,6 +4658,7 @@ function uamswp_fad_section_condition_treatment() {
 		global $condition_treatment_section_show_header; // Query for whether to display the section header // bool (default: true)
 		global $condition_treatment_section_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of condition section title in a general placement)
 		global $condition_treatment_section_intro; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
+		global $condition_treatment_section_link_item; // Query for whether to link the list items // bool (default: false)
 		global $treatment_section_class; // Section class // string (default: 'treatments')
 		global $treatment_section_id; // Section ID // string (default: 'treatments')
 		global $treatment_section_show_header; // Query for whether to display the section header // bool (default: true)
