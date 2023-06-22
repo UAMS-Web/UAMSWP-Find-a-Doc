@@ -1494,16 +1494,16 @@ function uamswp_fad_post_title() {
 
 		if($providers) {
 			$args = array(
+				'post__in' => $providers,
 				'post_type' => 'provider',
 				'post_status' => 'publish',
 				'posts_per_page' => -1,
-				'orderby' => 'title',
 				'order' => 'ASC',
-				'fields' => 'ids',
+				'orderby' => 'title',
 				// 'no_found_rows' => true, // counts posts, remove if pagination required
 				'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
 				'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
-				'post__in' => $providers
+				'fields' => 'ids',
 			);
 			$provider_query = New WP_Query( $args );
 			if( ( $provider_query && $provider_query->have_posts() ) ) {
@@ -1539,16 +1539,16 @@ function uamswp_fad_post_title() {
 
 		if ( $locations) {
 			$args = array(
+				'post__in' => $locations,
 				'post_type' => 'location',
 				'post_status' => 'publish',
+				'posts_per_page' => -1,
 				'order' => 'ASC',
 				'orderby' => 'title',
-				'posts_per_page' => -1,
-				'fields' => 'ids',
 				'no_found_rows' => true, // counts posts, remove if pagination required
 				'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
 				'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
-				'post__in' => $locations
+				'fields' => 'ids',
 			);
 			$location_query = new WP_Query( $args );
 			if( ( $locations && $location_query->have_posts() ) ) {
@@ -1657,12 +1657,12 @@ function uamswp_fad_post_title() {
 		if ( 0 != count($expertise_descendants) ) {
 			
 			$expertise_descendant_args = array(
+				'post_parent' => $site_nav_id,
 				'post_type' => 'expertise',
 				'post_status' => 'publish',
-				'post_parent' => $site_nav_id,
+				'posts_per_page' => -1, // We do not want to limit the post count
 				'order' => 'ASC',
 				'orderby' => 'title',
-				'posts_per_page' => -1, // We do not want to limit the post count
 				'meta_query' => array(
 					'relation' => 'AND',
 					array(
@@ -1695,12 +1695,12 @@ function uamswp_fad_post_title() {
 			}
 			
 			$expertise_content_args = array(
+				'post_parent' => $site_nav_id,
 				'post_type' => 'expertise',
 				'post_status' => 'publish',
-				'post_parent' => $site_nav_id,
+				'posts_per_page' => -1, // We do not want to limit the post count
 				'order' => 'ASC',
 				'orderby' => 'title',
-				'posts_per_page' => -1, // We do not want to limit the post count
 				'meta_query' => array(
 					'relation' => 'AND',
 					array(
@@ -1753,12 +1753,12 @@ function uamswp_fad_post_title() {
 		global $expertise_count; // integer
 
 		$args = array(
+			'post__in'	=> $expertises,
 			'post_type' => 'expertise',
+			'post_status' => 'publish',
+			'posts_per_page' => -1,
 			'order' => 'ASC',
 			'orderby' => 'title',
-			'posts_per_page' => -1,
-			'post_status' => 'publish',
-			'post__in'	=> $expertises
 		);
 		$expertise_query = new WP_Query( $args );
 		if ( ( $expertises && $expertise_query->have_posts() ) ) {
@@ -1792,12 +1792,12 @@ function uamswp_fad_post_title() {
 		$clinical_resource_postsPerPage = ( isset($clinical_resource_postsPerPage) && !empty($clinical_resource_postsPerPage) ) ? $clinical_resource_postsPerPage : 4;
 
 		$args = array(
+			'post__in' => $clinical_resources,
 			'post_type' => 'clinical-resource',
+			'post_status' => 'publish',
+			'posts_per_page' => $clinical_resource_postsPerPage,
 			'order' => 'DESC',
 			'orderby' => 'post_date',
-			'posts_per_page' => $clinical_resource_postsPerPage,
-			'post_status' => 'publish',
-			'post__in'	=> $clinical_resources
 		);
 		$clinical_resource_query = new WP_Query( $args );
 
