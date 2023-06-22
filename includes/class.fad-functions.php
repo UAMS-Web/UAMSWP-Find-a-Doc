@@ -1641,6 +1641,7 @@ function uamswp_fad_post_title() {
 
 			// Typically defined on the template or in a function such as uamswp_fad_ontology_site_values()
 			global $expertise_descendants;
+			global $site_nav_id;
 
 		// Make variables available outside of the function
 		global $expertise_descendant_query;
@@ -1658,7 +1659,7 @@ function uamswp_fad_post_title() {
 			$expertise_descendant_args = array(
 				'post_type' => 'expertise',
 				'post_status' => 'publish',
-				'post_parent' => $page_id,
+				'post_parent' => $site_nav_id,
 				'order' => 'ASC',
 				'orderby' => 'title',
 				'posts_per_page' => -1, // We do not want to limit the post count
@@ -1696,7 +1697,7 @@ function uamswp_fad_post_title() {
 			$expertise_content_args = array(
 				'post_type' => 'expertise',
 				'post_status' => 'publish',
-				'post_parent' => $page_id,
+				'post_parent' => $site_nav_id,
 				'order' => 'ASC',
 				'orderby' => 'title',
 				'posts_per_page' => -1, // We do not want to limit the post count
