@@ -1,7 +1,11 @@
 <?php
 /**
  * Template Name: Appointments loop / text block
- * Designed for UAMS Find-a-Doc
+ * 
+ * Description: A template part that displays an appointment information section 
+ * on pages other than provider profiles.
+ * 
+ * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
  * 	$location_single_name // System setting for Locations single item name

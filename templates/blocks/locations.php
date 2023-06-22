@@ -1,6 +1,13 @@
 <?php
 /*
- * UAMS Find-a-Doc Locations Block
+ * Template Name: UAMS Health Find-a-Doc Locations ACF Block
+ * 
+ * Description: A template part that displays a list of locations as part of an 
+ * Advanced Custom Fields block.
+ * 
+ * The Query is built using the inputs from the ACF block.
+ * 
+ * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
  * 	$location_single_name // System setting for Locations Plural Item Name

@@ -1,7 +1,10 @@
 <?php
 /**
  * Template Name: Clinical Trials loop / text block
- * Designed for UAMS Find-a-Doc
+ * 
+ * Description: A template part that displays a general clincal trials information.
+ * 
+ * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
  * 	$clinical_trial_title

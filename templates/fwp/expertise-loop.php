@@ -2,6 +2,11 @@
 /**
  * Template Name: Areas of Expertise Archive Page Loop for FacetWP Listing
  * 
+ * Description: A template part that builds a while loop to display a list of 
+ * area of expertise cards.
+ * 
+ * Designed for UAMS Health Find-a-Doc
+ * 
  * FacetWP Listing Name and Slug:
  * 	Areas of Expertise	('expertise')
  */

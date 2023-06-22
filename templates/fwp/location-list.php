@@ -2,6 +2,11 @@
 /**
  * Template Name: Locations List Loop for FacetWP Listing
  * 
+ * Description: A template part that displays a table of locations and their 
+ * contact information using a while loop.
+ * 
+ * Designed for UAMS Health Find-a-Doc
+ * 
  * FacetWP Listing Name and Slug:
  * 	Location List	('location_list')
  */

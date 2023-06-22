@@ -2,6 +2,11 @@
 /**
  * Template Name: Locations Archive Page Loop for FacetWP Listings
  * 
+ * Description: A template part that builds a while loop to display a list of 
+ * location cards on a location archive page.
+ * 
+ * Designed for UAMS Health Find-a-Doc
+ * 
  * FacetWP Listing Name and Slug:
  * 	Locations					('locations')
  * 	Condition - Locations		('condition_locations')

@@ -1,9 +1,17 @@
 <?php 
 /**
  * Template Name: Conditions Loop
- * Designed for UAMS Find-a-Doc
+ * 
+ * Description: A template part that displays a section with a list of conditions 
+ * associated with the current page using a foreach loop.
+ * 
+ * This template part uses the condition taxonomy rather than the custom post type.
+ * 
+ * This template part lists the conditions with links.
  * 
  * Must be used inside a loop
+ * 
+ * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
  * 	$provider_plural_name // System setting for Providers plural item name

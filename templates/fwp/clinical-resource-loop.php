@@ -2,6 +2,11 @@
 /**
  * Template Name: Clinical Resources Archive Page Loop for FacetWP Listing
  * 
+ * Description: A template part that builds a while loop to display a list of 
+ * clinical resource cards.
+ * 
+ * Designed for UAMS Health Find-a-Doc
+ * 
  * FacetWP Listing Name and Slug:
  * 	Clinical Resources	('clinical_resources')
  */

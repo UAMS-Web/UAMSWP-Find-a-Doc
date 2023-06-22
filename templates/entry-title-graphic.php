@@ -1,6 +1,19 @@
 <?php
 /*
- * Entry Title in the Graphic Style
+ * Template Name: Entry Title in the Graphic Style
+ * 
+ * Description: A template part that displays a page header using the Graphic style.
+ * 
+ * The page header displays a page title.
+ * 
+ * Optional elements include the following:
+ * 	* A supertitle prepended to the page title
+ * 	* A subtitle appended to the page title
+ * 	* A lead paragraph placed after the page title
+ * 	* A background image
+ * 
+ * The template part expects the "Fly Dynamic Image Resizer" plugin by Junaid 
+ * Bhura to be installed.
  */
 
 ?>

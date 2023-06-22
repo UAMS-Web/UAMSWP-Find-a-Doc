@@ -1,9 +1,13 @@
 <?php 
 /**
- * Template Name: Clinical Resource Loop - Card layout
- * Designed for UAMS Find-a-Doc
+ * Template Name: Clinical Resource Loop - List Item layout
+ * 
+ * Description: A template part that displays a clinical resource list item to be 
+ * included in a list of clinical resources associated with the current page.
  * 
  * Must be used inside a loop
+ * 
+ * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
  * 	$clinical_resource_single_name // System setting for Clinical Resources single item name

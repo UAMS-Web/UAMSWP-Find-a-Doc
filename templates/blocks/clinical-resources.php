@@ -1,7 +1,18 @@
 <?php
 /**
  * Template Name: Clinical Resources loop / text block
- * Designed for UAMS Find-a-Doc
+ * 
+ * Description: A template part that displays a list of clinical resource items 
+ * associated with the current page.
+ * 
+ * Two layouts are available: card layout and vertical text list layout.
+ * 
+ * If the list is limited to the four most recently published items, a card layout 
+ * will be used (i.e., UAMS Stacked Image & Text Block). If there is no limit on 
+ * the number of items to be displayed, a vertical text list layout will be  used 
+ * (i.e., UAMS Link List Block).
+ * 
+ * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
  * 	$provider_single_name // System setting for Providers single item name
@@ -28,8 +39,6 @@
  * 	$resource_heading
  * 	$resource_heading_related_name // To what is it related?
  * 	$resource_intro
- * 
- * List layout intended to either display all items or display a set number with no link to more.
  */
 
 // Check optional variables

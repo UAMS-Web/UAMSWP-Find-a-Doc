@@ -1,6 +1,18 @@
 <?php
 /*
- * Entry Title in the Marketing Landing Page Style
+ * Template Name: Entry Title in the Marketing Landing Page Style
+ * 
+ * Description: A template part that displays a page header using the Marketing 
+ * Landing Page style.
+ * 
+ * The page header displays a page title.
+ * 
+ * Optional elements include the following:
+ * 	* A lead paragraph placed after the page title
+ * 	* A background image
+ * 
+ * The template part expects the "Fly Dynamic Image Resizer" plugin by Junaid 
+ * Bhura to be installed.
  */
 
 // Check if mobile image exists

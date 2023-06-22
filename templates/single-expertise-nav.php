@@ -2,6 +2,14 @@
 /*
  * Template Name: Primary Navigation for Area of Expertise Subsection
  * 
+ * Description: A template part that displays the primary navigation specific to 
+ * an area of expertise subsection — a group of pages with its own primary 
+ * navigation.
+ * 
+ * This template part replicates the primary navigation used in the UAMS 2020 
+ * theme, placing a list of fixed link items at the beginning of the list followed 
+ * by a hierarchical list of descendants with a certain meta value.
+ * 
  * Required vars:
  * 	$site_nav_id
  * 	$provider_plural_name // System setting for Providers plural item name

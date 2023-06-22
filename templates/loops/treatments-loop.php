@@ -1,7 +1,13 @@
 <?php 
 /**
  * Template Name: Treatments Loop
- * Designed for UAMS Find-a-Doc
+ * 
+ * Description: A template part that displays a section with a list of treatments 
+ * associated with the current page using a foreach loop.
+ * 
+ * This template part uses the treatment taxonomy rather than the custom post type.
+ * 
+ * This template part lists the treatments with links.
  * 
  * Must be used inside a loop
  * 

@@ -2,6 +2,12 @@
 /*
  * Template Name: Site Header for Area of Expertise Subsection
  * 
+ * Description: A template part that displays the site header specific to an area 
+ * of expertise subsection — a group of pages with its own primary navigation.
+ * 
+ * The template part replicates the site header used in the UAMS 2020 theme, 
+ * replacing the navbar-subbrand title and parent with information specific to the current area of expertise and its most distant ancestor area of expertise.
+ * 
  * Required vars:
  * 	$navbar_subbrand_title
  * 	$navbar_subbrand_parent

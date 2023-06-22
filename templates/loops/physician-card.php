@@ -1,9 +1,13 @@
 <?php 
 /**
  * Template Name: Provider Loop - Card layout
- * Designed for UAMS Find-a-Doc
+ * 
+ * Description: A template part that displays a provider card to be included in a 
+ * list of providers associated with the current page.
  * 
  * Must be used inside a loop
+ * 
+ * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
  * 	$id

@@ -1,8 +1,6 @@
 <?php
 /* 
- * 
  * Template Name: Conditions Archive
- * 
  */
 
 // Add page template class to body element's classes

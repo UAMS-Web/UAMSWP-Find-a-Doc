@@ -1,6 +1,13 @@
 <?php
 /*
- * UAMS Find-a-Doc Providers Block
+ * Template Name: UAMS Health Find-a-Doc Providers ACF Block
+ * 
+ * Description: A template part that displays a list of providers as part of an 
+ * Advanced Custom Fields block.
+ * 
+ * The Query is built using the inputs from the ACF block.
+ * 
+ * Designed for UAMS Health Find-a-Doc
  */
 
 // Create id attribute allowing for custom "anchor" value.

@@ -1,9 +1,13 @@
 <?php 
 /**
  * Template Name: Location Loop - Card layout
- * Designed for UAMS Find-a-Doc
+ * 
+ * Description: A template part that displays a location card to be included in a 
+ * list of locations associated with the current page.
  * 
  * Must be used inside a loop
+ * 
+ * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
  * 	$location_single_name // System setting for Locations Plural Item Name
