@@ -353,7 +353,7 @@ $jump_link_count = 0;
 		$clinical_resource_section_more_text = 'Want to find more related ' . strtolower($clinical_resource_plural_name) . ' related to ' . $page_title . '?';
 		$clinical_resource_section_more_link_text = $clinical_resource_fpage_more_link_text_general;
 		$clinical_resource_section_more_link_descr = 'View the full list of ' . strtolower($clinical_resource_plural_name) . ' related to ' . $page_title;
-		uamswp_fad_section_clinical_resource();
+		include( UAMS_FAD_PATH . '/templates/parts/section-list-clinical-resource.php' );
 		// End Clinical Resources Section
 
 		// Begin Clinical Trials Section
