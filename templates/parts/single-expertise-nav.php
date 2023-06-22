@@ -28,7 +28,7 @@
  * 	$expertise_content_nav
  */
 
-require_once( 'modules/class-wp-bootstrap-pagewalker.php' );
+require_once( UAMS_FAD_PATH . '/templates/modules/class-wp-bootstrap-pagewalker.php' );
 
 $args = array(
 	'theme_location' => 'primary',

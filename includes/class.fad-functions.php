@@ -1470,7 +1470,7 @@ function uamswp_fad_post_title() {
 	// Check/define variables
 	$entry_header_style = ( isset($entry_header_style) && !empty($entry_header_style) ) ? $entry_header_style : 'graphic';
 
-	include( UAMS_FAD_PATH . '/templates/entry-title-' . $entry_header_style . '.php');
+	include( UAMS_FAD_PATH . '/templates/parts/entry-title-' . $entry_header_style . '.php');
 }
 
 // Queries for whether each of the related ontology content sections should be displayed on ontology pages/subsections
@@ -1912,7 +1912,7 @@ function uamswp_fad_ontology_nav_menu() {
 	global $clinical_resource_plural_name; // Typically defined in uamswp_fad_labels_clinical_resource()
 	global $clinical_resource_plural_name_attr; // Typically defined in uamswp_fad_labels_clinical_resource()
 
-	include( UAMS_FAD_PATH . '/templates/single-expertise-nav.php');
+	include( UAMS_FAD_PATH . '/templates/parts/single-expertise-nav.php');
 }
 
 // Construct ontology subsection site header
@@ -1923,7 +1923,7 @@ function uamswp_fad_ontology_header() {
 	global $navbar_subbrand_parent; // Typically defined in uamswp_fad_ontology_site_values()
 	global $navbar_subbrand_parent_url; // Typically defined in uamswp_fad_ontology_site_values()
 
-	include( UAMS_FAD_PATH . '/templates/single-expertise-header.php');
+	include( UAMS_FAD_PATH . '/templates/parts/single-expertise-header.php');
 }
 
 // Construct the meta keywords element
