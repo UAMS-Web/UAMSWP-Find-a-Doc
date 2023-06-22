@@ -363,7 +363,7 @@ $jump_link_count = 0;
 		// Begin Providers Section
 		$provider_section_title = $provider_plural_name . ' Performing or Prescribing ' . $page_title;// Text to use for the section title
 		$provider_section_intro = 'Note that every ' . strtolower($provider_single_name) . ' listed below may not perform or prescribe ' . $page_title . ' for all ' . strtolower($condition_plural_name) . ' related to it. Review each ' . strtolower($provider_single_name) . ' for&nbsp;availability.'; // Text to use for the section intro text
-		uamswp_fad_section_provider();
+		include( UAMS_FAD_PATH . '/templates/parts/section-list-provider.php' );
 		// End Providers Section
 
 		// Begin Locations Section
