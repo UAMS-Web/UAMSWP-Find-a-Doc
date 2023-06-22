@@ -9,7 +9,7 @@
  * 	$provider_plural_name // System setting for Providers plural item name
  * 	$condition_single_name_attr // Attribute value friendly version of system setting for Conditions single item name
  * 	$condition_plural_name // System setting for Conditions plural item name
- * 	$conditions_cpt_query
+ * 	$condition_cpt_query
  * 	$condition_context = 'single-provider', 'single-location', 'single-condition', 'single-treatment', 'single-expertise', 'single-resource'
  * 	$condition_heading_related_name
  */
@@ -57,7 +57,7 @@ if ( $condition_context == 'single-provider' ) {
 				<?php } ?>
 				<div class="list-container list-container-rows">
 					<ul class="list">
-					<?php foreach( $conditions_cpt_query->posts as $condition ): ?>
+					<?php foreach( $condition_cpt_query->posts as $condition ): ?>
 						<li>
 							<a href="<?php echo get_the_permalink( $condition->ID ); ?>" aria-label="Go to <?php echo $condition_single_name_attr; ?> page for <?php echo $condition->post_title; ?>" class="btn btn-outline-primary">
 								<?php 

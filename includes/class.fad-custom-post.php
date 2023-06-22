@@ -2470,11 +2470,11 @@ function get_provider_meta($object) {
 			'posts_per_page' => -1,
 			'post__in' => $conditions_cpt
 		));
-		$conditions_cpt_query = new WP_Query( $args );
+		$condition_cpt_query = new WP_Query( $args );
 
-		if( $conditions_cpt && $conditions_cpt_query->posts ):
+		if( $conditions_cpt && $condition_cpt_query->posts ):
 
-			foreach( $conditions_cpt_query->posts as $condition ):
+			foreach( $condition_cpt_query->posts as $condition ):
 				$data['physician_conditions'][$condition->ID]['link'] = get_permalink( $condition->ID );
 				$data['physician_conditions'][$condition->ID]['title'] = $condition->post_title;
 				$data['physician_conditions'][$condition->ID]['slug'] = $condition->post_name;
@@ -2883,11 +2883,11 @@ function get_location_meta($object) {
 			'posts_per_page' => -1,
 			'post__in' => $conditions_cpt
 		));
-		$conditions_cpt_query = new WP_Query( $args );
+		$condition_cpt_query = new WP_Query( $args );
 
-		if( $conditions_cpt && $conditions_cpt_query->posts ):
+		if( $conditions_cpt && $condition_cpt_query->posts ):
 
-			foreach( $conditions_cpt_query->posts as $condition ):
+			foreach( $condition_cpt_query->posts as $condition ):
 				$data['location_conditions'][$condition->ID]['link'] = get_permalink( $condition->ID );
 				$data['location_conditions'][$condition->ID]['title'] = $condition->post_title;
 				$data['location_conditions'][$condition->ID]['slug'] = $condition->post_name;
@@ -2969,11 +2969,11 @@ function get_expertise_meta($object) {
 			'posts_per_page' => -1,
 			'post__in' => $conditions_cpt
 		));
-		$conditions_cpt_query = new WP_Query( $args );
+		$condition_cpt_query = new WP_Query( $args );
 
-		if( $conditions_cpt && $conditions_cpt_query->posts ):
+		if( $conditions_cpt && $condition_cpt_query->posts ):
 
-			foreach( $conditions_cpt_query->posts as $condition ):
+			foreach( $condition_cpt_query->posts as $condition ):
 				$data['expertise_conditions'][$condition->ID]['link'] = get_permalink( $condition->ID );
 				$data['expertise_conditions'][$condition->ID]['title'] = $condition->post_title;
 				$data['expertise_conditions'][$condition->ID]['slug'] = $condition->post_name;
@@ -3247,10 +3247,10 @@ function get_treatment_meta($object) {
 			'posts_per_page' => -1,
 			'post__in' => $conditions_cpt
 		));
-		$conditions_cpt_query = new WP_Query( $args );
-		if( $conditions_cpt && $conditions_cpt_query->posts ):
+		$condition_cpt_query = new WP_Query( $args );
+		if( $conditions_cpt && $condition_cpt_query->posts ):
 
-			foreach( $conditions_cpt_query->posts as $condition ):
+			foreach( $condition_cpt_query->posts as $condition ):
 				$data['treatment_conditions'][$condition->ID]['link'] = get_permalink( $condition->ID );
 				$data['treatment_conditions'][$condition->ID]['title'] = $condition->post_title;
 				$data['treatment_conditions'][$condition->ID]['slug'] = $condition->post_name;
@@ -3343,7 +3343,7 @@ function get_resource_meta($object) {
 			'posts_per_page' => -1,
 			'post__in' => $conditions_cpt
 		));
-		$conditions_cpt_query = new WP_Query( $args );
+		$condition_cpt_query = new WP_Query( $args );
 	}
 	// Treatments
 	$treatments_cpt = get_field('clinical_resource_treatments', $postId);
@@ -3460,8 +3460,8 @@ function get_resource_meta($object) {
 	endif;
 	$condition_list = '';
 	$i = 1;
-	if( $conditions_cpt && $conditions_cpt_query->posts ):
-		foreach( $conditions_cpt_query->posts as $condition ):
+	if( $conditions_cpt && $condition_cpt_query->posts ):
+		foreach( $condition_cpt_query->posts as $condition ):
 			$data['clinical_resource_conditions'][$condition->ID]['link'] = get_permalink( $condition->ID );
 			$data['clinical_resource_conditions'][$condition->ID]['title'] = $condition->post_title;
 			$data['clinical_resource_conditions'][$condition->ID]['slug'] = $condition->post_name;

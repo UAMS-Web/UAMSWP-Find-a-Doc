@@ -8,7 +8,7 @@
  * Required vars:
  * 	$provider_plural_name // System setting for Providers plural item name
  * 	$condition_plural_name // System setting for Conditions plural item name
- * 	$conditions_cpt_query
+ * 	$condition_cpt_query
  * 	$condition_context = 'single-provider', 'single-location', 'single-condition', 'single-treatment', 'single-expertise', 'single-resource'
  * 	$condition_intro // Intro text
  * 
@@ -63,7 +63,7 @@ if (
 				<?php } ?>
 				<div class="">
 					<ul class="list" style="column-count:3; list-style:none;">
-					<?php foreach( $conditions_cpt_query->posts as $condition ): ?>
+					<?php foreach( $condition_cpt_query->posts as $condition ): ?>
 						<li>
 							<?php 
 								echo $condition->post_title;

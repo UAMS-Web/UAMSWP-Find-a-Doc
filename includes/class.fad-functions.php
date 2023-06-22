@@ -1823,7 +1823,7 @@ function uamswp_fad_post_title() {
 			global $conditions_cpt;
 
 		// Make variables available outside of the function
-		global $conditions_cpt_query;
+		global $condition_cpt_query;
 		global $condition_section_show;
 		global $condition_ids;
 		global $condition_count; // integer
@@ -1838,11 +1838,11 @@ function uamswp_fad_post_title() {
 			'posts_per_page' => -1,
 			'post__in' => $conditions_cpt
 		);
-		$conditions_cpt_query = new WP_Query( $args );
-		if( ( $conditions_cpt && $conditions_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
+		$condition_cpt_query = new WP_Query( $args );
+		if( ( $conditions_cpt && $condition_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
 			$condition_section_show = true;
-			$condition_ids = $conditions_cpt_query->posts;
-			$condition_count = count($conditions_cpt_query->posts);
+			$condition_ids = $condition_cpt_query->posts;
+			$condition_count = count($condition_cpt_query->posts);
 			$jump_link_count = $jump_link_count + 1;
 		} else {
 			$condition_section_show = false;
@@ -5131,7 +5131,7 @@ function uamswp_fad_section_condition() {
 
 		// Defined on the template or in a function such as uamswp_fad_condition_query()
 		global $condition_section_show; // bool
-		global $conditions_cpt_query; // array
+		global $condition_cpt_query; // array
 		global $conditions_cpt; // array
 		global $condition_ids; // array
 		global $condition_count; // integer
@@ -5181,8 +5181,8 @@ function uamswp_fad_section_condition() {
 								<?php
 								if ( $condition_count > 0 ) {
 									$i = 0;
-									while ( $conditions_cpt_query->have_posts() ) {
-										$conditions_cpt_query->the_post();
+									while ( $condition_cpt_query->have_posts() ) {
+										$condition_cpt_query->the_post();
 										$id = get_the_ID();
 										$condition_title = get_the_title($id);
 										$condition_title_attr = uamswp_attr_conversion($condition_title);
