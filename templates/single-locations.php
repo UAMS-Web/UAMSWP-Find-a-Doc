@@ -570,17 +570,28 @@ while ( have_posts() ) : the_post(); ?>
 						</div>
 						<?php if( $location_web_name && $location_url ){ ?>
 							<p><a class="btn btn-secondary" href="<?php echo $location_url['url']; ?>" target="_blank" data-categorytitle="External Link"><?php echo $location_web_name; ?> <span class="far fa-external-link-alt"></span></span></a></p>
-					<?php }
-						// Schema data
-						$location_schema = '"address": {
-						"@type": "PostalAddress",
-						"streetAddress": "'. $location_address_1 . ' '. $location_address_2_schema .'",
-						"addressLocality": "'. $location_city .'",
-						"addressRegion": "'. $location_state .'",
-						"postalCode": "'. $location_zip .'"
-						},
-						';
-						$phone_schema = '';
+					<?php
+					}
+
+					// Address Schema Data
+
+						// Count items for schema
+						$schema_construct_item_count = 1;
+
+						// Define the top-level schema attribute label
+						$schema_construct_attr = 'address';
+
+						// Define the schema data attribute-value pairs
+						$schema_construct_arr = array();
+						$schema_construct_arr['@type'] = 'PostalAddress';
+						$schema_construct_arr['streetAddress'] = $location_address_1 . ' '. $location_address_2_schema;
+						$schema_construct_arr['addressLocality'] = $location_city;
+						$schema_construct_arr['addressRegion'] = $location_state;
+						$schema_construct_arr['postalCode'] = $location_zip;
+
+						// Construct the schema data
+						$location_schema = uamswp_schema_construct($schema_construct_arr);
+
 					?>
 					<h2>Contact Information</h2>
 					<?php 
@@ -588,6 +599,14 @@ while ( have_posts() ) : the_post(); ?>
 					$phone_output_id = $id;
 					$phone_output = 'location_profile';
 					include( UAMS_FAD_PATH . '/templates/blocks/locations-phone.php' );
+
+					// Phone Number Schema Data
+					
+						// Count items for schema
+						$schema_construct_item_count = count($schema_construct_arr);
+					
+						// Construct the phone number schema data
+						$phone_schema = uamswp_schema_construct($schema_construct_arr);
 
 					// Hours values
 					$hoursvary = $location_hours_group['location_hours_variable'];
@@ -935,8 +954,9 @@ while ( have_posts() ) : the_post(); ?>
 			<?php } //endif ?>
 		</div>
 	</section>
-
-	<?php // Begin Jump Links Section
+	<?php
+	
+	// Begin Jump Links Section
 	if ( $jump_links_section_show ) { ?>
 		<nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
 			<h2><?php echo $fad_jump_links_title; ?></h2>
@@ -1634,18 +1654,42 @@ while ( have_posts() ) : the_post(); ?>
 <?php // Schema Data ?>
 <script type='application/ld+json'>
 {
-  "@context": "http://www.schema.org",
-  "@type": "MedicalClinic",
-  "name": "<?php echo $page_title; ?>",
-  "url": "<?php echo get_permalink(); ?>",
-  "image": "<?php echo $locationphoto; ?>",
-  <?php echo $condition_schema; ?>
-  <?php echo $treatment_schema; ?>
-  <?php echo $location_schema; ?>
-  <?php echo $modified_hours_schema; ?>
-  <?php echo $hoursvary ? '' : $hours_schema; ?>
-  <?php echo $phone_schema; ?>
-  "logo": "<?php echo get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png'; ?>"
+	"@context": "http://www.schema.org",
+	"@type": "MedicalClinic"<?php
+
+	if ($page_title) { ?>,
+	"name": "<?php echo $page_title; ?>"<?php
+	} // endif ( $page_title )
+	
+	?>,
+	"url": "<?php echo get_permalink(); ?>"<?php
+
+	if ($locationphoto) { ?>,
+	"image": "<?php echo $locationphoto; ?>"<?php
+	} // endif ( $locationphoto )
+
+	if ($condition_treatment_schema) { ?>,
+	<?php echo $condition_treatment_schema;
+	} // endif ( $condition_treatment_schema )
+
+	if ($location_schema) { ?>,
+	<?php echo $location_schema;
+	} // endif ( $location_schema )
+
+	if ($modified_hours_schema) { ?>,
+	<?php echo $modified_hours_schema;
+	} // endif ( $modified_hours_schema )
+
+	if ( !$hoursvary && $hours_schema ) { ?>,
+	<?php echo $hours_schema;
+	} // endif ( !$hoursvary && $hours_schema )
+	
+	if ( $phone_schema ) { ?>,
+	<?php echo $phone_schema;
+	} // endif ( $phone_schema )
+	
+	?>,
+	"logo": "<?php echo get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png'; ?>"
 }
 </script>
 

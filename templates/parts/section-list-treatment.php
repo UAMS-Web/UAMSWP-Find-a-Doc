@@ -80,26 +80,54 @@ if ( $treatment_section_show && !$hide_medical_ontology ) {
 					<div class="list-container list-container-rows">
 						<ul class="list">
 							<?php
+
+							// Set the iteration variable for schema
+							// Reuse iteration from conditions list if it comes before this one
+							global $condition_treatment_schema_i;
+							$condition_treatment_schema_i = isset($condition_treatment_schema_i) ? $condition_treatment_schema_i : 0;
+							$i = $condition_treatment_schema_i;
+
+							// Count conditions and treatments for schema
+							// Reuse count from conditions list if it comes before this one
+							global $condition_treatment_schema_count;
+							if ( !isset($condition_treatment_schema_count) ) {
+								global $condition_section_show;
+								global $condition_count;
+								$condition_treatment_schema_count = ( $condition_section_show ? $condition_count : 0 ) + ( $treatment_section_show ? $treatment_count : 0 );
+								$schema_construct_item_count = $condition_treatment_schema_count;
+							}
+
+							// Define the top-level schema attribute label
+							global $condition_treatment_schema_attr;
+							$condition_treatment_schema_attr = isset($condition_treatment_schema_attr) ? $condition_treatment_schema_attr : 'medicalSpecialty';
+							$schema_construct_attr = $condition_treatment_schema_attr;
+
 							if ( $treatment_count > 0 ) {
-								$i = 0;
+
 								while ( $treatment_cpt_query->have_posts() ) {
 									$treatment_cpt_query->the_post();
 									$id = get_the_ID();
 									$treatment_title = get_the_title($id);
 									$treatment_title_attr = uamswp_attr_conversion($treatment_title);
-									$treatment_url = get_the_permalink($id);
-									$treatment_aria_label = 'Go to ' . $treatment_single_name_attr . ' page for ' . $treatment_title_attr;
-									if ($i > 0) {
-										$treatment_schema .= ',
-';
+									if ( $condition_treatment_section_link_item ) {
+										$treatment_url = get_the_permalink($id);
+										$treatment_aria_label = 'Go to ' . $treatment_single_name_attr . ' page for ' . $treatment_title_attr;
 									}
-									$treatment_schema .= '
-		{
-			"@type": "MedicalSpecialty",
-			"name": "' . $treatment_title_attr . '",
-			"url":"'. $treatment_url .'"
-		}';
-									$i++;
+
+									// Define the attribute-value pairs
+									$schema_construct_arr = array();
+									$schema_construct_arr['@type'] = 'MedicalSpecialty';
+									$schema_construct_arr['name'] = $treatment_title_attr;
+									if ( $condition_treatment_section_link_item ) {
+										$schema_construct_arr['url'] = $treatment_url;
+									}
+
+									// Define number of tabs at start of schema block being created here
+									$chr_tab_base_count = 2;
+
+									// Construct the schema
+									$condition_treatment_schema .= uamswp_schema_construct($schema_construct_arr);
+
 									?>
 									<li>
 										<?php
@@ -113,10 +141,18 @@ if ( $treatment_section_show && !$hide_medical_ontology ) {
 										} // endif ( $condition_treatment_section_link_item )
 										?>
 									</li>
-								<?php
-								} // endwhile
+									<?php
+
+									$i++;
+
+								} // endwhile ( $treatment_cpt_query->have_posts() )
+
 							} // endif ( $treatment_count > 0 )
+
+							$condition_treatment_schema_i = $i; // Make iteration available to conditions list if it comes later
+
 							wp_reset_postdata();
+
 							?>
 						</ul>
 					</div>

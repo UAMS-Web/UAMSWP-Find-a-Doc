@@ -80,8 +80,29 @@ if ( $condition_section_show && !$hide_medical_ontology ) {
 					<div class="list-container list-container-rows">
 						<ul class="list">
 							<?php
+
+							// Set the iteration variable for schema
+							// Reuse iteration from treatments list if it comes before this one
+							global $condition_treatment_schema_i;
+							$condition_treatment_schema_i = isset($condition_treatment_schema_i) ? $condition_treatment_schema_i : 0;
+							$i = $condition_treatment_schema_i;
+
+							// Count conditions and treatments for schema
+							// Reuse count from treatments list if it comes before this one
+							global $condition_treatment_schema_count;
+							if ( !isset($condition_treatment_schema_count) ) {
+								global $treatment_section_show;
+								global $treatment_count;
+								$condition_treatment_schema_count = ( $condition_section_show ? $condition_count : 0 ) + ( $treatment_section_show ? $treatment_count : 0 );
+								$schema_construct_item_count = $condition_treatment_schema_count;
+							}
+
+							// Define the top-level schema attribute label
+							global $condition_treatment_schema_attr;
+							$condition_treatment_schema_attr = isset($condition_treatment_schema_attr) ? $condition_treatment_schema_attr : 'medicalSpecialty';
+							$schema_construct_attr = $condition_treatment_schema_attr;
+
 							if ( $condition_count > 0 ) {
-								$i = 0;
 
 								while ( $condition_cpt_query->have_posts() ) {
 									$condition_cpt_query->the_post();
@@ -93,7 +114,7 @@ if ( $condition_section_show && !$hide_medical_ontology ) {
 										$condition_aria_label = 'Go to ' . $condition_single_name_attr . ' page for ' . $condition_title_attr;
 									}
 
-									// Define the attribute-value pairs
+									// Define the schema data attribute-value pairs
 									$schema_construct_arr = array();
 									$schema_construct_arr['@type'] = 'MedicalSpecialty';
 									$schema_construct_arr['name'] = $condition_title_attr;
@@ -101,13 +122,12 @@ if ( $condition_section_show && !$hide_medical_ontology ) {
 										$schema_construct_arr['url'] = $condition_url;
 									}
 
-									// Define number of tabs at start of schema block being created here
+									// Define number of tabs at start of schema data block being created here
 									$chr_tab_base_count = 2;
 
-									// Construct the schema
-									$condition_schema .= uamswp_schema_construct($schema_construct_arr);
+									// Construct the schema data
+									$condition_treatment_schema .= uamswp_schema_construct($schema_construct_arr);
 
-									$i++;
 									?>
 									<li>
 										<?php
@@ -121,10 +141,18 @@ if ( $condition_section_show && !$hide_medical_ontology ) {
 										} // endif ( $condition_treatment_section_link_item )
 										?>
 									</li>
-								<?php
-								} // endwhile
+									<?php
+
+									$i++;
+
+								} // endwhile ( $condition_cpt_query->have_posts() )
+
 							} // endif ( $condition_count > 0 )
+
+							$condition_treatment_schema_i = $i; // Make iteration available to conditions list if it comes later
+
 							wp_reset_postdata();
+
 							?>
 						</ul>
 					</div>

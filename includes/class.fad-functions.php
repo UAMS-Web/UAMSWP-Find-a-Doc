@@ -1848,7 +1848,7 @@ function uamswp_fad_post_title() {
 		} else {
 			$condition_section_show = false;
 		}
-		$condition_schema = '';
+		$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
 	}
 
 	// Query for whether related treatments content section should be displayed on ontology pages/subsections
@@ -1887,7 +1887,7 @@ function uamswp_fad_post_title() {
 		} else {
 			$treatment_section_show = false;
 		}
-		$treatment_schema = '';
+		$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
 	}
 
 // Construct ontology subsection primary navigation
@@ -4741,16 +4741,13 @@ function uamswp_schema_construct($schema_construct_arr) {
 	 * 			$schema_construct_arr['name'] = $condition_title_attr;
 	 * 			$schema_construct_arr['url'] = $condition_url;
 	 * 
-	 * 	Define $chr_tab_base_count with an integer indicating how many tabs this schema 
-	 * 	block will be starting out at in the larger JSON-LD block.
-	 * 
-	 * 		Example:
-	 * 			$chr_tab_base_count = 2;
-	 * 
 	 * 	Define the relevant schema variable using this function.
 	 * 
 	 * 		Example:
-	 * 			$condition_schema .= uamswp_schema_construct($schema_construct_arr);
+	 * 			$condition_treatment_schema .= uamswp_schema_construct($schema_construct_arr);
+	 * 
+	 * 		Example:
+	 * 			$phone_schema = uamswp_schema_construct($schema_construct_arr);
 	 * 
 	 * 
 	 * At the end of the while loop...
@@ -4759,36 +4756,115 @@ function uamswp_schema_construct($schema_construct_arr) {
 	 */
 
 	// Bring in variables from outside of the function
-	global $chr_tab_base_count; // Define number of tabs at start of schema block being created here // int
+	global $i;
+	global $schema_construct_item_count; // Count the number of items (curly bracket groups) // int
+	global $schema_construct_attr; // Define the top-level schema attribute label // string
 
 	// Check/define variables
-	$chr_tab_base_count = isset($chr_tab_base_count) ? $chr_tab_base_count : 0;
+	$i = isset($i) ? $i : 0;
 	$chr_newline = PHP_EOL;
 	$chr_tab = chr(9);
-	$chr_tab_base = str_repeat( $chr_tab, $chr_tab_base_count );
+	$schema_construct_square = ( $schema_construct_item_count > 1 ) ? true : false;
+	$schema_construct_arr_list = array_is_list($schema_construct_arr);
+	if ( $schema_construct_square ) {
+		$chr_tab_base_count = 2;
+		$chr_tab_base = str_repeat( $chr_tab, $chr_tab_base_count );
+	} else {
+		$chr_tab_base_count = 1;
+		$chr_tab_base = str_repeat( $chr_tab, $chr_tab_base_count );
+	}
+	$schema_construct_square_open = '[';
+	$schema_construct_square_close = ']';
+	$schema_construct_curly_open = '{';
+	$schema_construct_curly_close = $chr_newline . str_repeat( $chr_tab, ( $chr_tab_base_count - 1 ) ) . '}';
 
 	// Create the return variable
-	$schema_construct = '';
+	if ( $i > 0 ) {
 
-	// If this is not the first iteration, add a comma
-	if ($i > 0) {
+		// If this is not the first iteration...
+		
+		// Add a comma
 		$schema_construct .= ',';
+
+	} elseif ( $schema_construct_square ) {
+
+		// If this is the first iteration...
+		// and if the schema should be nested in a pair of square brackets...
+
+		// Start the construct with the relevant characters
+		$schema_construct = '"' . $schema_construct_attr . '": ' . $schema_construct_square_open;
+
+	} else {
+
+		// If this is the first iteration...
+
+		// Start an empty construct
+		$schema_construct = '"' . $schema_construct_attr . '": ';
+
 	}
 
 	// Count the number of attribute-value pairs
-	$schema_construct_arr_count = count($schema_construct_arr);
+	$schema_construct_attr_count = count($schema_construct_arr);
 
 	// Loop through the attribute-value pairs
 	$p = 0;
-	if ( $schema_construct_arr_count > 0 ) {
-		$schema_construct .= $chr_newline . $chr_tab_base . '{';
-		foreach( $schema_construct_arr as $property => $value) {
-			$schema_construct .= $chr_newline . $chr_tab_base . $chr_tab . '"' . $property . '": "' . $value . '"';
-			$p++;
-			$schema_construct .= $p < $schema_construct_arr_count ? ',' : '';
+	if ( $schema_construct_attr_count > 0 ) {
+
+		$schema_construct .= ( $i > 0 || $schema_construct_square ) ? $chr_newline : '';
+
+		if ( $schema_construct_arr_list ) {
+
+			// If array is a list (its keys consist of consecutive numbers from 0) ...
+
+			foreach( $schema_construct_arr as $value) {
+				$schema_construct .= ( $p > 0 ) ? $chr_newline : '';
+				$schema_construct .= $chr_tab_base . '"' . $value . '"';
+				$p++;
+				$schema_construct .= $p < $schema_construct_attr_count ? ',' : '';
+			}
+			$schema_construct .= $chr_newline . str_repeat( $chr_tab, ( $chr_tab_base_count - 1 ) ) . $schema_construct_square_close;
+
+		} else {
+
+			// If array is not a list (i.e., an associative array)...
+
+			$schema_construct .= $chr_tab_base . '{';
+			foreach( $schema_construct_arr as $property => $value) {
+				$schema_construct .= $chr_newline . $chr_tab_base . $chr_tab . '"' . $property . '": "' . $value . '"';
+				$p++;
+				$schema_construct .= $p < $schema_construct_attr_count ? ',' : '';
+			}
+			$schema_construct .= $chr_newline . $chr_tab_base . '}';
+			if (
+				$schema_construct_square
+				&&
+				( $i + 1 ) == $schema_construct_item_count
+				) {
+				$schema_construct .= $chr_newline . str_repeat( $chr_tab, ( $chr_tab_base_count - 1 ) ) . $schema_construct_square_close;
+			}
+		
 		}
-		$schema_construct .= $chr_newline . $chr_tab_base . '}';
+
 	}
 
 	return $schema_construct;
+}
+
+// Create array_is_list function that is available in PHP 8
+if ( !function_exists('array_is_list') ) {
+	function array_is_list(array $array): bool {
+		if (empty($array)) {
+			return true;
+		}
+	
+		$current_key = 0;
+		foreach ($array as $key => $noop) {
+			if ($key !== $current_key) {
+				return false;
+			}
+			++$current_key;
+		}
+	
+		return true;
+	}
 }

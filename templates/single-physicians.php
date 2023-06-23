@@ -1266,18 +1266,33 @@ while ( have_posts() ) : the_post();
 <script type='application/ld+json'>
 {
 	"@context": "http://www.schema.org",
-	"@type": "Physician",
-	"name": "<?php echo $full_name_attr; ?>",
-	"url": "<?php echo get_permalink(); ?>",
-	"logo": "<?php echo get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png'; ?>",
-	"image": "<?php echo $docphoto; ?>",
-	"description": "<?php echo $schema_description; ?>"<?php 
-	if ($condition_schema || $treatment_schema) { ?>,
-	"medicalSpecialty": [<?php echo $condition_schema; ?><?php echo $treatment_schema; ?>
+	"@type": "Physician"<?php
 
-	]
-	<?php }
-	echo $location_schema;
+	if ($full_name_attr) { ?>,
+	"name": "<?php echo $full_name_attr; ?>"<?php
+	} // endif ( $full_name_attr )
+	
+	?>,
+	"url": "<?php echo get_permalink(); ?>",
+	"logo": "<?php echo get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png'; ?>"<?php
+
+	if ($docphoto) { ?>,
+	"image": "<?php echo $docphoto; ?>"<?php
+	} // endif ( $docphoto )
+
+	if ($schema_description) { ?>,
+	"description": "<?php echo $schema_description; ?>"<?php
+	} // endif ( $schema_description )
+	
+	if ($condition_treatment_schema) { ?>,
+	<?php echo $condition_treatment_schema;
+	
+	} // endif ( $condition_treatment_schema )
+
+	if ($schema_description) { ?>,
+	<?php echo $location_schema;
+	} // endif ( $schema_description )
+
 	if ( $rating_valid ) { ?>,
 	"aggregateRating": {
 		"@type": "AggregateRating",
@@ -1286,7 +1301,10 @@ while ( have_posts() ) : the_post();
 		echo ($comment_count  && '0' != $comment_count) ? ',
 		"reviewCount": "'. $comment_count . '"' : ''; ?>
 	}<?php
-	} // endif ( $rating_valid ) ?>
+	} // endif ( $rating_valid )
+	
+	?>
+
 }
 </script>
 <?php

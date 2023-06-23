@@ -196,10 +196,12 @@ if ( $location_section_show ) {
 					<div class="card-list-container location-card-list-container">
 						<div class="card-list card-list-locations">
 							<?php
+
 								if ( $location_section_schema_query ) {
-									$l = 1;
-									$location_schema = ',
-	"address": [';
+
+									// Set the iteration variable for schema
+									$i = 0;
+
 								}
 
 								if ( $location_count > 0 ) {
@@ -211,22 +213,32 @@ if ( $location_section_show ) {
 										if ( $location_section_filter_title ) {
 											$title_list[] = get_field('location_title', $id);
 										}
+
 										// Schema data
 										if ( $location_section_schema_query ) {
-											if ($l > 1){
-												$location_schema .= ',';
-											}
-											$location_schema .= '
-	{
-		"@type": "PostalAddress",
-		"streetAddress": "'. $location_address_1 . ' '. $location_address_2_schema .'",
-		"addressLocality": "'. $location_city .'",
-		"addressRegion": "'. $location_state .'",
-		"postalCode": "'. $location_zip .'",
-		"telephone": "'. format_phone_dash( $location_phone ) .'"
-	}
-	';
-											$l++;
+		
+											// Count locations for schema
+											$schema_construct_item_count = $location_count;
+				
+											// Define the top-level schema attribute label
+											$schema_construct_attr = 'address';
+
+											// Define the schema data attribute-value pairs
+											$schema_address_arr = array();
+											$schema_address_arr['@type'] = 'PostalAddress';
+											$schema_address_arr['streetAddress'] = $location_address_1 . ( $location_address_2_schema ? ' ' . $location_address_2_schema : '' );
+											$schema_address_arr['addressLocality'] = $location_city;
+											$schema_address_arr['addressRegion'] = $location_state;
+											$schema_address_arr['postalCode'] = $location_zip;
+											$schema_address_arr['telephone'] = format_phone_dash( $location_phone );
+		
+											// Define number of tabs at start of schema data block being created here
+											$chr_tab_base_count = 2;
+		
+											// Construct the schema data
+											$location_schema .= uamswp_schema_construct($schema_address_arr);
+
+											$i++;
 										}
 									} // endwhile
 									if ( $location_section_filter ) {
@@ -239,10 +251,6 @@ if ( $location_section_show ) {
 								} // endif ( $location_count > 0 )
 								wp_reset_postdata();
 
-								if ( $location_section_schema_query ) {
-									$location_schema .= ']
-	';
-								}
 							?>
 						</div>
 						<?php
