@@ -14,6 +14,25 @@
 		.list {
 			@include list-unstyled; // equivalent of @extend .list-unstyled
 			margin: 0 auto;
+
+			.item {
+				display: inline-block;
+				font-family: $input-btn-font-family;
+				font-size: $input-btn-font-size;
+				font-weight: $btn-font-weight;
+				line-height: $input-btn-line-height;
+				
+				word-wrap: break-word;
+				background-color: $card-bg;
+				background-clip: border-box;
+				border: $card-border-width solid $card-border-color;
+				@include border-radius($card-border-radius); 
+				
+				padding: $card-spacer-x;
+				// padding: $input-btn-padding-y $input-btn-padding-x;
+				color: $card-color;
+			  
+			}
 		}
 
 		&.list-container-columns {

@@ -25,6 +25,8 @@
  * 		$conditions_cpt // int[]
  * 		$condition_ids // int[]
  * 		$condition_count // int
+ * 	// Vars defined in uamswp_fad_ontology_hide()
+ * 		$hide_medical_ontology // bool
  * 
  * Optional vars:
  * 	// Vars defined on the template
@@ -64,7 +66,7 @@ if ( $condition_section_show && !$hide_medical_ontology ) {
 			}
 			$condition_section_intro = $condition_fpage_intro_general;
 		}
-		$condition_section_link_item = isset($condition_section_link_item) ? $condition_section_link_item : false;
+		$condition_treatment_section_link_item = isset($condition_treatment_section_link_item) ? $condition_treatment_section_link_item : false;
 
 	?>
 	<section class="uams-module<?php echo $condition_section_class ? ' ' . $condition_section_class : ''; ?> bg-auto<?php echo $condition_section_collapse_list ? ' collapse-list' : ''; ?>"<?php echo $condition_section_id ? ' id="' . $condition_section_id . '" aria-labelledby="' . $condition_section_id . '-title"' : ''; ?>>
@@ -115,8 +117,8 @@ if ( $condition_section_show && !$hide_medical_ontology ) {
 											</a>
 										<?php
 										} else {
-											echo $condition_title;
-										} // endif
+											echo '<span class="item">' . $condition_title . '</span>';
+										} // endif ( $condition_treatment_section_link_item )
 										?>
 									</li>
 								<?php

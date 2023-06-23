@@ -789,6 +789,19 @@
   padding-left: 0;
 }
 
+.conditions-treatments .list-container .list .item {
+  word-wrap: break-word;
+  background-clip: border-box;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+  display: inline-block;
+  font-size: 1.125rem;
+  font-weight: 300;
+  line-height: 1.5;
+  padding: 1.25rem;
+}
+
 .conditions-treatments .list-container.list-container-columns .list {
   text-align: left;
 }

@@ -35,7 +35,7 @@
  * 		$treatment_section_show_header // Query for whether to display the section header // bool (default: true)
  * 		$treatment_section_title // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of treatment section title in a general placement)
  * 		$treatment_section_intro // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of treatment section intro text in a general placement)
- * 		$treatment_section_link_item // Query for whether to link the list items // bool (default: false)
+ * 		$condition_treatment_section_link_item // Query for whether to link the list items // bool (default: false)
  * 
  * Return:
  * 	var $treatment_schema // string
@@ -66,7 +66,7 @@ if ( $treatment_section_show && !$hide_medical_ontology ) {
 			}
 			$treatment_section_intro = $treatment_fpage_intro_general;
 		}
-		$treatment_section_link_item = isset($treatment_section_link_item) ? $treatment_section_link_item : false;
+		$condition_treatment_section_link_item = isset($condition_treatment_section_link_item) ? $condition_treatment_section_link_item : false;
 
 	?>
 	<section class="uams-module<?php echo $treatment_section_class ? ' ' . $treatment_section_class : ''; ?> bg-auto<?php echo $treatment_section_collapse_list ? ' collapse-list' : ''; ?>"<?php echo $treatment_section_id ? ' id="' . $treatment_section_id . '" aria-labelledby="' . $treatment_section_id . '-title"' : ''; ?>>
@@ -102,9 +102,16 @@ if ( $treatment_section_show && !$hide_medical_ontology ) {
 									$i++;
 									?>
 									<li>
-										<a href="<?php echo $treatment_url; ?>" aria-label="<?php echo $treatment_aria_label; ?>" class="btn btn-outline-primary">
-											<?php echo $treatment_title; ?>
-										</a>
+										<?php
+										if ( $condition_treatment_section_link_item ) { ?>
+											<a href="<?php echo $treatment_url; ?>" aria-label="<?php echo $treatment_aria_label; ?>" class="btn btn-outline-primary">
+												<?php echo $treatment_title; ?>
+											</a>
+										<?php
+										} else {
+											echo '<span class="item">' . $treatment_title . '</span>';
+										} // endif ( $condition_treatment_section_link_item )
+										?>
 									</li>
 								<?php
 								} // endwhile
