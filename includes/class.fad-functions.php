@@ -4828,7 +4828,12 @@ function uamswp_schema_construct($schema_construct_arr) {
 
 			// If array is not a list (i.e., an associative array)...
 
-			$schema_construct .= $chr_tab_base . '{';
+			if ( $schema_construct_item_count > 1 ) {
+				$schema_construct .= $chr_tab_base . $schema_construct_curly_open;
+			} else {
+				$schema_construct .= $schema_construct_curly_open;
+			}
+
 			foreach( $schema_construct_arr as $property => $value) {
 				$schema_construct .= $chr_newline . $chr_tab_base . $chr_tab . '"' . $property . '": "' . $value . '"';
 				$p++;
