@@ -3986,7 +3986,7 @@ function uamswp_fad_podcast() {
 			// Treatments
 
 				// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Treatments in that Area of Expertise's subsection
-				// $provider_fpage_title_expertise = get_field('expertise_treatments_fpage_title'); // Title
+				// $treatment_fpage_title_expertise = get_field('expertise_treatments_fpage_title'); // Title
 				$treatment_fpage_intro_expertise = get_field('expertise_treatments_fpage_intro'); // Intro text
 	
 					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for a treatments subpage/section in an area of expertise subsection
