@@ -125,6 +125,7 @@ if ( $condition_section_show && !$hide_medical_ontology ) {
 									}
 
 									// Construct the MedicalSpecialty schema data
+									global $condition_treatment_schema;
 									$condition_treatment_schema .= uamswp_schema_construct($schema_construct_arr);
 
 									?>
