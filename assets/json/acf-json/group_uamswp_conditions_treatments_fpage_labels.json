@@ -1,0 +1,319 @@
+
+{
+	"key": "group_condition_treatment_fpage_labels",
+	"title": "Fake Subpage or Section for Conditions and Treatments Combined in an Ontology Subsection or Single Profile",
+	"fields": [
+		{
+			"key": "field_condition_treatment_fpage_tab_general",
+			"label": "General Placement",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_condition_treatment_fpage_title_general",
+			"label": "General Title of Fake Subpage or Section for Conditions and Treatments Combined",
+			"name": "condition_treatment_fpage_title_general",
+			"type": "text",
+			"instructions": "If you leave this blank, the default title structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., title of section for conditions and treatments combined in areas of expertise subsection).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Related [Conditions and Treatments]",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_condition_treatment_fpage_intro_general",
+			"label": "General Intro Text of Fake Subpage or Section for Conditions and Treatments Combined",
+			"name": "condition_treatment_fpage_intro_general",
+			"type": "textarea",
+			"instructions": "If you leave this blank, the default intro text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., intro text of section for conditions and treatments combined in areas of expertise subsection).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "UAMS Health [providers] perform and prescribe a broad range of [treatments] for a broad range of [conditions], some of which may not be listed below.",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_condition_treatment_fpage_tab_provider",
+			"label": "Provider Subsection",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_condition_treatment_fpage_title_provider",
+			"label": "Title of Fake Subpage for Conditions and Treatments Combined in Provider Subsection",
+			"name": "condition_treatment_fpage_title_provider",
+			"type": "text",
+			"instructions": "If you leave this blank, the default title structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "[Conditions and Treatments] Related to [Provider Short Name]",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_condition_treatment_fpage_intro_provider",
+			"label": "Intro Text of Fake Subpage for Conditions and Treatments Combined in Provider Subsection",
+			"name": "condition_treatment_fpage_intro_provider",
+			"type": "textarea",
+			"instructions": "If you leave this blank, the default intro text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_condition_treatment_fpage_tab_location",
+			"label": "Location Subsection",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_condition_treatment_fpage_title_location",
+			"label": "Title of Fake Subpage for Conditions and Treatments Combined in Location Subsection",
+			"name": "condition_treatment_fpage_title_location",
+			"type": "text",
+			"instructions": "If you leave this blank, the default title structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "[Conditions and Treatments] Related to [the Location Title]",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_condition_treatment_fpage_intro_location",
+			"label": "Intro Text of Fake Subpage for Conditions and Treatments Combined in Location Subsection",
+			"name": "condition_treatment_fpage_intro_location",
+			"type": "textarea",
+			"instructions": "If you leave this blank, the default intro text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_condition_treatment_fpage_tab_expertise",
+			"label": "Area of Expertise Subsection",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_condition_treatment_fpage_title_expertise",
+			"label": "Title of Fake Subpage for Conditions and Treatments Combined in Area of Expertise Subsection",
+			"name": "condition_treatment_fpage_title_expertise",
+			"type": "text",
+			"instructions": "If you leave this blank, the default title structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "[Conditions and Treatments] Related to [Area of Expertise Title]",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_condition_treatment_fpage_intro_expertise",
+			"label": "Intro Text of Fake Subpage for Conditions and Treatments Combined in Area of Expertise Subsection",
+			"name": "condition_treatment_fpage_intro_expertise",
+			"type": "textarea",
+			"instructions": "If you leave this blank, the default intro text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_condition_treatment_fpage_tab_clinical_resource",
+			"label": "Clinical Resource Profile",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_condition_treatment_fpage_title_clinical_resource",
+			"label": "Title of Section for Conditions and Treatments Combined on Clinical Resource Profile",
+			"name": "condition_treatment_fpage_title_clinical_resource",
+			"type": "text",
+			"instructions": "If you leave this blank, the default title structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_condition_treatment_fpage_intro_clinical_resource",
+			"label": "Intro Text of Section for Conditions and Treatments Combined on Clinical Resource Profile",
+			"name": "condition_treatment_fpage_intro_clinical_resource",
+			"type": "textarea",
+			"instructions": "If you leave this blank, the default intro text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "uamswp-fad-tax"
+			}
+		]
+	],
+	"menu_order": 20,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": ""
+}
