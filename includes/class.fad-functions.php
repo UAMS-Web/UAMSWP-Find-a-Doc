@@ -4776,7 +4776,7 @@ function uamswp_schema_construct($schema_construct_arr) {
 	$schema_construct_square_open = '[';
 	$schema_construct_square_close = ']';
 	$schema_construct_curly_open = '{';
-	$schema_construct_curly_close = $chr_newline . str_repeat( $chr_tab, ( $chr_tab_base_count - 1 ) ) . '}';
+	$schema_construct_curly_close = '}';
 
 	// Create the return variable
 	if ( $i > 0 ) {
@@ -4834,7 +4834,7 @@ function uamswp_schema_construct($schema_construct_arr) {
 				$p++;
 				$schema_construct .= $p < $schema_construct_attr_count ? ',' : '';
 			}
-			$schema_construct .= $chr_newline . $chr_tab_base . '}';
+			$schema_construct .= $chr_newline . $chr_tab_base . $schema_construct_curly_close;
 			if (
 				$schema_construct_square
 				&&
