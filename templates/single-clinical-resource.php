@@ -181,15 +181,24 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 	$clinical_resource_section_more_show = false;
 	add_action( 'genesis_after_entry', 'uamswp_fad_section_clinical_resource', 10 );
 
-	// Construct conditions section
-	$condition_section_title = $condition_fpage_title_clinical_resource; // Text to use for the section title // string (default: Find-a-Doc Settings value for condition section title in a general placement)
-	$condition_section_intro = $condition_fpage_intro_clinical_resource; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
-	add_action( 'genesis_after_entry', 'uamswp_fad_section_condition', 12 );
+	// Construct Combined Conditions and Treatments Section
+	$condition_treatment_section_title = $condition_treatment_fpage_title_expertise; // Text to use for the section title // string (default: Find-a-Doc Settings value for combined condition/treatment section title in a general placement)
+	$condition_treatment_section_intro = $condition_treatment_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for combined condition/treatment section intro text in a general placement)
+	$condition_section_title = $condition_fpage_title_expertise; // Text to use for the section title // string (default: Find-a-Doc Settings value for condition section title in a general placement)
+	$condition_section_intro = $condition_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
+	$treatment_section_title = $treatment_fpage_title_expertise; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
+	$treatment_section_intro = $treatment_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
+	add_action( 'genesis_after_entry', 'uamswp_fad_section_condition_treatment', 12 );
 
-	// Construct treatments section
-	$treatment_section_title = $treatment_fpage_title_clinical_resource; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
-	$treatment_section_intro = $treatment_fpage_intro_clinical_resource; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
-	add_action( 'genesis_after_entry', 'uamswp_fad_section_treatment', 14 );
+	// // Construct conditions section
+	// $condition_section_title = $condition_fpage_title_clinical_resource; // Text to use for the section title // string (default: Find-a-Doc Settings value for condition section title in a general placement)
+	// $condition_section_intro = $condition_fpage_intro_clinical_resource; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
+	// add_action( 'genesis_after_entry', 'uamswp_fad_section_condition', 12 );
+
+	// // Construct treatments section
+	// $treatment_section_title = $treatment_fpage_title_clinical_resource; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
+	// $treatment_section_intro = $treatment_fpage_intro_clinical_resource; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
+	// add_action( 'genesis_after_entry', 'uamswp_fad_section_treatment', 14 );
 
 	// Construct providers section
 	$provider_section_title = $provider_fpage_title_clinical_resource; // Text to use for the section title
