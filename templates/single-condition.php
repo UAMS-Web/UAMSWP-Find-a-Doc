@@ -23,6 +23,9 @@
 	// Get system settings for area of expertise descendant item labels
 	// uamswp_fad_labels_expertise_descendant();
 
+	// Get system settings for combined condition and treatment labels
+	uamswp_fad_labels_condition_treatment();
+
 	// Get system settings for condition labels
 	uamswp_fad_labels_condition();
 

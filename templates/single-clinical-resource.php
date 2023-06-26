@@ -23,6 +23,9 @@
 	// Get system settings for clinical resource labels
 	uamswp_fad_labels_clinical_resource();
 
+	// Get system settings for combined condition and treatment labels
+	uamswp_fad_labels_condition_treatment();
+
 	// Get system settings for condition labels
 	uamswp_fad_labels_condition();
 
