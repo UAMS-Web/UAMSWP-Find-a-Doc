@@ -4835,7 +4835,14 @@ function uamswp_schema_construct($schema_construct_arr) {
 			}
 
 			foreach( $schema_construct_arr as $property => $value) {
-				$schema_construct .= $chr_newline . $chr_tab_base . $chr_tab . '"' . $property . '": "' . $value . '"';
+				if ( is_array($value) ) {
+					$schema_construct .= $chr_newline . $chr_tab_base . $chr_tab . '"' . $property . '": ' . $schema_construct_square_open . 
+						$chr_newline . $chr_tab_base . str_repeat( $chr_tab, 2 ) . '"' . 
+						implode('",' . $chr_newline . $chr_tab_base . str_repeat( $chr_tab, 2 ) . '"', $value) . '"' . 
+						$chr_newline . $chr_tab_base . $chr_tab . $schema_construct_square_close . '';
+				} else {
+					$schema_construct .= $chr_newline . $chr_tab_base . $chr_tab . '"' . $property . '": "' . $value . '"';
+				}
 				$p++;
 				$schema_construct .= $p < $schema_construct_attr_count ? ',' : '';
 			}
