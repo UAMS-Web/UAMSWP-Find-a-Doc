@@ -2866,6 +2866,25 @@ function uamswp_fad_podcast() {
 			$treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($treatment_fpage_intro_general); // Intro text
 		}
 
+		// Get system settings for general values of ontology text elements on a fake subpage or section for Conditions and Treatments combined
+		function uamswp_fad_condition_treatment_fpage_text_general() {
+			// Make variables available outside of the function
+			global $condition_treatment_fpage_title_general;
+			global $condition_treatment_fpage_intro_general;
+
+			// Get the system settings for the text elements in a general placement
+			$condition_treatment_fpage_title_general = get_field('condition_treatment_fpage_title_general', 'option'); // Title
+			$condition_treatment_fpage_intro_general = get_field('condition_treatment_fpage_intro_general', 'option'); // Intro text
+
+			// If the variable is not set or is empty, set a hardcoded fallback value
+			$condition_treatment_fpage_title_general = ( isset($condition_treatment_fpage_title_general) && !empty($condition_treatment_fpage_title_general) ) ? $condition_treatment_fpage_title_general : 'Related [Conditions and Treatments]'; // Title
+			$condition_treatment_fpage_intro_general = ( isset($condition_treatment_fpage_intro_general) && !empty($condition_treatment_fpage_intro_general) ) ? $condition_treatment_fpage_intro_general : 'UAMS Health [providers] perform and prescribe a broad range of [treatments] for a broad range of [conditions], some of which may not be listed below.'; // Intro text
+
+			// Substitute placeholder text for relevant system settings value
+			$condition_treatment_fpage_title_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_general); // Title
+			$condition_treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_general); // Intro text
+		}
+
 	// Get field values from Find-a-Doc Settings and from ontology items for ontology text elements in specific subsections and single profiles
 
 		// Get field values for fake subpage text elements on Provider subsection
@@ -2884,6 +2903,8 @@ function uamswp_fad_podcast() {
 			global $condition_fpage_intro_provider;
 			global $treatment_fpage_title_provider;
 			global $treatment_fpage_intro_provider;
+			global $condition_treatment_fpage_title_provider;
+			global $condition_treatment_fpage_intro_provider;
 			global $placeholder_short_name;
 			global $placeholder_short_name_possessive;
 
@@ -3082,6 +3103,39 @@ function uamswp_fad_podcast() {
 				// Substitute placeholder text for relevant system settings value
 				$treatment_fpage_title_provider = $treatment_fpage_title_provider ? uamswp_fad_fpage_text_replace($treatment_fpage_title_provider) : ''; // Title
 				$treatment_fpage_intro_provider = $treatment_fpage_intro_provider ? uamswp_fad_fpage_text_replace($treatment_fpage_intro_provider) : ''; // Intro text
+
+
+			// Combined Conditions and Treatments
+			$condition_treatment_fpage_title_provider = get_field('condition_treatment_fpage_title_provider', 'option'); // Title of Fake Subpage for Conditions and Treatments Combined in Location Subsection
+			$condition_treatment_fpage_intro_provider = get_field('condition_treatment_fpage_intro_provider', 'option'); // Intro Text of Fake Subpage for Conditions and Treatments Combined in Location Subsection
+
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($condition_treatment_fpage_title_provider) || empty($condition_treatment_fpage_title_provider) ) {
+					$condition_treatment_fpage_title_provider = '[Conditions and Treatments] Related to [Provider Short Name]'; // Title
+				}
+				if ( !isset($condition_treatment_fpage_intro_provider) || empty($condition_treatment_fpage_intro_provider) ) {
+					$condition_treatment_fpage_intro_provider = ''; // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
+				if ( !isset($condition_treatment_fpage_title_provider) || empty($condition_treatment_fpage_title_provider) ) {
+					if ( !isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general) ) {
+						uamswp_fad_condition_treatment_fpage_text_general();
+						global $condition_treatment_fpage_title_general;
+					}
+					$condition_treatment_fpage_title_provider = $condition_treatment_fpage_title_general; // Title
+				}
+				if ( !isset($condition_treatment_fpage_intro_provider) || empty($condition_treatment_fpage_intro_provider) ) {
+					if ( !isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general) ) {
+						uamswp_fad_condition_treatment_fpage_text_general();
+						global $condition_treatment_fpage_intro_general;
+					}
+					$condition_treatment_fpage_intro_provider = $condition_treatment_fpage_intro_general; // Intro text
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$condition_treatment_fpage_title_provider = $condition_treatment_fpage_title_provider ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_provider) : ''; // Title
+				$condition_treatment_fpage_intro_provider = $condition_treatment_fpage_intro_provider ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_provider) : ''; // Intro text
 		}
 
 		// Get field values for fake subpage text elements on Location subsection
@@ -3102,6 +3156,8 @@ function uamswp_fad_podcast() {
 			global $condition_fpage_intro_location;
 			global $treatment_fpage_title_location;
 			global $treatment_fpage_intro_location;
+			global $condition_treatment_fpage_title_location;
+			global $condition_treatment_fpage_intro_location;
 
 			// Providers
 			$provider_fpage_title_location = get_field('provider_fpage_title_location', 'option'); // Title of Fake Subpage for Providers in Locations Subsection
@@ -3330,6 +3386,39 @@ function uamswp_fad_podcast() {
 				// Substitute placeholder text for relevant system settings value
 				$treatment_fpage_title_location = $treatment_fpage_title_location ? uamswp_fad_fpage_text_replace($treatment_fpage_title_location) : ''; // Title
 				$treatment_fpage_intro_location = $treatment_fpage_intro_location ? uamswp_fad_fpage_text_replace($treatment_fpage_intro_location) : ''; // Intro text
+
+
+			// Combined Conditions and Treatments
+			$condition_treatment_fpage_title_location = get_field('condition_treatment_fpage_title_location', 'option'); // Title of Fake Subpage for Conditions and Treatments Combined in Location Subsection
+			$condition_treatment_fpage_intro_location = get_field('condition_treatment_fpage_intro_location', 'option'); // Intro Text of Fake Subpage for Conditions and Treatments Combined in Location Subsection
+
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($condition_treatment_fpage_title_location) || empty($condition_treatment_fpage_title_location) ) {
+					$condition_treatment_fpage_title_location = '[Conditions and Treatments] Related to [the Location Title]'; // Title
+				}
+				if ( !isset($condition_treatment_fpage_intro_location) || empty($condition_treatment_fpage_intro_location) ) {
+					$condition_treatment_fpage_intro_location = ''; // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
+				if ( !isset($condition_treatment_fpage_title_location) || empty($condition_treatment_fpage_title_location) ) {
+					if ( !isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general) ) {
+						uamswp_fad_condition_treatment_fpage_text_general();
+						global $condition_treatment_fpage_title_general;
+					}
+					$condition_treatment_fpage_title_location = $condition_treatment_fpage_title_general; // Title
+				}
+				if ( !isset($condition_treatment_fpage_intro_location) || empty($condition_treatment_fpage_intro_location) ) {
+					if ( !isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general) ) {
+						uamswp_fad_condition_treatment_fpage_text_general();
+						global $condition_treatment_fpage_intro_general;
+					}
+					$condition_treatment_fpage_intro_location = $condition_treatment_fpage_intro_general; // Intro text
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$condition_treatment_fpage_title_location = $condition_treatment_fpage_title_location ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_location) : ''; // Title
+				$condition_treatment_fpage_intro_location = $condition_treatment_fpage_intro_location ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_location) : ''; // Intro text
 		}
 
 		// Get field values for fake subpage text elements on Area of Expertise subsection
@@ -3380,6 +3469,8 @@ function uamswp_fad_podcast() {
 			global $condition_fpage_intro_expertise;
 			global $treatment_fpage_title_expertise;
 			global $treatment_fpage_intro_expertise;
+			global $condition_treatment_fpage_title_expertise;
+			global $condition_treatment_fpage_intro_expertise;
 
 			// Overview
 
@@ -3933,6 +4024,48 @@ function uamswp_fad_podcast() {
 					// Substitute placeholder text for relevant system settings value
 					$treatment_fpage_title_expertise = $treatment_fpage_title_expertise ? uamswp_fad_fpage_text_replace($treatment_fpage_title_expertise) : ''; // Title
 					$treatment_fpage_intro_expertise = $treatment_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($treatment_fpage_intro_expertise) : ''; // Intro text
+
+			// Combined Conditions and Treatments
+
+				// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Treatments in that Area of Expertise's subsection
+				// $condition_treatment_fpage_title_expertise = get_field('expertise_condition_treatment_fpage_title'); // Title
+				$condition_treatment_fpage_intro_expertise = get_field('expertise_condition_treatment_fpage_intro'); // Intro text
+	
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for a combined conditions and treatments subpage/section in an area of expertise subsection
+				if ( !isset($condition_treatment_fpage_title_expertise) || empty($condition_treatment_fpage_title_expertise) ) {
+					$condition_treatment_fpage_title_expertise = get_field('condition_treatment_fpage_title_expertise', 'option'); // Title
+				}
+				if ( !isset($condition_treatment_fpage_intro_expertise) || empty($condition_treatment_fpage_intro_expertise) ) {
+					$condition_treatment_fpage_intro_expertise = get_field('condition_treatment_fpage_intro_expertise', 'option'); // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($condition_treatment_fpage_title_expertise) || empty($condition_treatment_fpage_title_expertise) ) {
+					$condition_treatment_fpage_title_expertise = '[Conditions and Treatments] Related to [Area of Expertise Title]'; // Title
+				}
+				if ( !isset($condition_treatment_fpage_intro_expertise) || empty($condition_treatment_fpage_intro_expertise) ) {
+					$condition_treatment_fpage_intro_expertise = ''; // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement of a combined conditions and treatments subpage/section
+				if ( !isset($condition_treatment_fpage_title_expertise) || empty($condition_treatment_fpage_title_expertise) ) {
+					if ( !isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general) ) {
+						uamswp_fad_condition_treatment_fpage_text_general();
+						global $condition_treatment_fpage_title_general;
+					}
+					$condition_treatment_fpage_title_expertise = $condition_treatment_fpage_title_general; // Title
+				}
+				if ( !isset($condition_treatment_fpage_intro_expertise) || empty($condition_treatment_fpage_intro_expertise) ) {
+					if ( !isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general) ) {
+						uamswp_fad_condition_treatment_fpage_text_general();
+						global $condition_treatment_fpage_intro_general;
+					}
+					$condition_treatment_fpage_intro_expertise = $condition_treatment_fpage_intro_general; // Intro text
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$condition_treatment_fpage_title_expertise = $condition_treatment_fpage_title_expertise ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_expertise) : ''; // Title
+				$condition_treatment_fpage_intro_expertise = $condition_treatment_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_expertise) : ''; // Intro text
 		}
 
 		// Get field values for text elements for related ontology sections on Clinical Resource profile
@@ -3953,6 +4086,8 @@ function uamswp_fad_podcast() {
 			global $condition_fpage_intro_clinical_resource;
 			global $treatment_fpage_title_clinical_resource;
 			global $treatment_fpage_intro_clinical_resource;
+			global $condition_treatment_fpage_title_clinical_resource;
+			global $condition_treatment_fpage_intro_clinical_resource;
 
 			// Providers
 			$provider_fpage_title_clinical_resource = get_field('provider_fpage_title_clinical_resource', 'option'); // Title of Section for Providers on Clinical Resource Profile
@@ -4181,6 +4316,38 @@ function uamswp_fad_podcast() {
 				// Substitute placeholder text for relevant system settings value
 				$treatment_fpage_title_clinical_resource = $treatment_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($treatment_fpage_title_clinical_resource) : ''; // Title
 				$treatment_fpage_intro_clinical_resource = $treatment_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($treatment_fpage_intro_clinical_resource) : ''; // Intro text
+
+			// Combined Conditions and Treatments
+			$condition_treatment_fpage_title_clinical_resource = get_field('condition_treatment_fpage_title_clinical_resource', 'option'); // Title of Section for Conditions and Treatments Combined on Clinical Resource Profile
+			$condition_treatment_fpage_intro_clinical_resource = get_field('condition_treatment_fpage_intro_clinical_resource', 'option'); // Intro Text of Section for Conditions and Treatments Combined on Clinical Resource Profile
+
+				// If the variable is not set or is empty, set it using the hardcoded values
+				if ( !isset($condition_treatment_fpage_title_clinical_resource) || empty($condition_treatment_fpage_title_clinical_resource) ) {
+					$condition_treatment_fpage_title_clinical_resource = ''; // Title
+				}
+				if ( !isset($condition_treatment_fpage_intro_clinical_resource) || empty($condition_treatment_fpage_intro_clinical_resource) ) {
+					$condition_treatment_fpage_intro_clinical_resource = ''; // Intro text
+				}
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
+				if ( !isset($condition_treatment_fpage_title_clinical_resource) || empty($condition_treatment_fpage_title_clinical_resource) ) {
+					if ( !isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general) ) {
+						uamswp_fad_treatment_fpage_text_general();
+						global $condition_treatment_fpage_title_general;
+					}
+					$condition_treatment_fpage_title_clinical_resource = $condition_treatment_fpage_title_general; // Title
+				}
+				if ( !isset($condition_treatment_fpage_intro_clinical_resource) || empty($condition_treatment_fpage_intro_clinical_resource) ) {
+					if ( !isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general) ) {
+						uamswp_fad_treatment_fpage_text_general();
+						global $condition_treatment_fpage_intro_general;
+					}
+					$condition_treatment_fpage_intro_clinical_resource = $condition_treatment_fpage_intro_general; // Intro text
+				}
+	
+				// Substitute placeholder text for relevant system settings value
+				$condition_treatment_fpage_title_clinical_resource = $condition_treatment_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_clinical_resource) : ''; // Title
+				$condition_treatment_fpage_intro_clinical_resource = $condition_treatment_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_clinical_resource) : ''; // Intro text
 		}
 
 // Filter the allowed block types for all editor types
