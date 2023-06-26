@@ -4763,7 +4763,9 @@ function uamswp_fad_section_condition() {
 		global $hide_medical_ontology; // bool
 
 	// Make variables available outside of the function
-	global $condition_schema; // string
+	global $condition_treatment_schema; // string
+	global $condition_treatment_schema_i; // int
+	global $condition_treatment_schema_count; // int
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-condition.php' );
 
@@ -4806,7 +4808,9 @@ function uamswp_fad_section_treatment() {
 		global $hide_medical_ontology; // bool
 
 	// Make variables available outside of the function
-	global $treatment_schema; // string
+	global $condition_treatment_schema; // string
+	global $condition_treatment_schema_i; // int
+	global $condition_treatment_schema_count; // int
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-treatment.php' );
 
