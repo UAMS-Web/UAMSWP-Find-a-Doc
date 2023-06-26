@@ -169,13 +169,47 @@ function uamswp_fad_body_class( $classes ) {
 
 	return $classes;
 }
-// Custom redirect to archive page for providers & locations
+
+// Custom redirects for Find-a-Doc pages (404s, deactivated, etc.)
 add_action( 'template_redirect', function() {
 	// Bring in variables from outside of the function
 	global $wp_query; // WordPress-specific global variable
 
+	// Redirect single provider 404 and single location 404 to relevant archive
 	if ( ('provider' == $wp_query->get('post_type') || 'location' == $wp_query->get('post_type')) && is_404( ) ) {
 		$redirectLink = get_post_type_archive_link( $wp_query->get('post_type') );
+		wp_redirect( $redirectLink, 301 );
+		exit;
+	}
+
+	// Redirect single condition, single treatment, condition archive and treatment archive to homepage
+	if (
+		'condition' == $wp_query->get('post_type')
+		||
+		'treatment' == $wp_query->get('post_type')
+		||
+		is_post_type_archive( 'condition' )
+		||
+		is_post_type_archive( 'treatment' )
+		) {
+		$redirectLink = get_home_url();
+		$redirectLink_utm = array();
+		$redirectLink_utm['utm_source'] = get_permalink();
+			$redirectLink_utm['utm_source'] = preg_replace( array( '/http(s)?:\/\/(www\.)?/i', '/\/(\?.+)?$/i' ), '', $redirectLink_utm['utm_source'] ); // Remove http://, https://, trailing slash and query string
+		$redirectLink_utm['utm_medium'] = 'redirects';
+		$redirectLink_utm['utm_campaign'] = 'redirects_404';
+		$redirectLink_utm['utm_term'] = $redirectLink;
+			$redirectLink_utm['utm_term'] = preg_replace( array( '/http(s)?:\/\/(www\.)?/i', '/\/(\?.+)?$/i' ), '', $redirectLink_utm['utm_term'] ); // Remove http://, https://, trailing slash and query string
+		if ( is_single() ) {
+			$redirectLink_utm['utm_content'] = 'single-';
+			$redirectLink_utm['utm_specs'] .= $wp_query->get('name');
+		} elseif ( is_archive() ) {
+			$redirectLink_utm['utm_content'] = 'archive-';
+		} else {
+			$redirectLink_utm['utm_content'] = '';
+		}
+		$redirectLink_utm['utm_content'] .= $wp_query->get('post_type');
+		$redirectLink .= $redirectLink_utm ? '?' . http_build_query($redirectLink_utm) : ''; // Generate URL-encoded query string from the array
 		wp_redirect( $redirectLink, 301 );
 		exit;
 	}
