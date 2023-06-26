@@ -32,35 +32,35 @@ function uamswp_force_template( $template )
 		$template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-expertise.php';
 	}
 
-	// Single Condition (taxonomy)
-	if( is_tax( 'condition' ) ) {
-		$template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/taxonomy-condition.php';
-	}
+	// // Single Condition (taxonomy)
+	// if( is_tax( 'condition' ) ) {
+	// 	$template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/taxonomy-condition.php';
+	// }
 
-	// Single Condition (custom post type)
-	if( is_singular( 'condition' ) ) {
-		$template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-condition.php';
-	}
+	// // Single Condition (custom post type)
+	// if( is_singular( 'condition' ) ) {
+	// 	$template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-condition.php';
+	// }
 
-	// Condition Archive
-	if( is_post_type_archive( 'condition' ) ) {
-		$template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/archive-condition.php';
-	}
+	// // Condition Archive
+	// if( is_post_type_archive( 'condition' ) ) {
+	// 	$template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/archive-condition.php';
+	// }
 
-	// Single Treatment and Procedure (taxonomy)
-	if( is_tax( 'treatment' ) ) {
-		$template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/taxonomy-treatment_procedure.php';
-	}
+	// // Single Treatment and Procedure (taxonomy)
+	// if( is_tax( 'treatment' ) ) {
+	// 	$template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/taxonomy-treatment_procedure.php';
+	// }
 
-	// Single Treatment and Procedure (custom post type)
-	if( is_singular( 'treatment' ) ) {
-		$template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-treatment.php';
-	}
+	// // Single Treatment and Procedure (custom post type)
+	// if( is_singular( 'treatment' ) ) {
+	// 	$template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/single-treatment.php';
+	// }
 
-	// Treatment and Procedure Archive
-	if( is_post_type_archive( 'treatment' ) ) {
-		$template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/archive-treatments.php';
-	}
+	// // Treatment and Procedure Archive
+	// if( is_post_type_archive( 'treatment' ) ) {
+	// 	$template = WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) .'/templates/archive-treatments.php';
+	// }
 
 	// Single Clinical Resource
 	if( is_singular( 'clinical-resource' ) ) {
