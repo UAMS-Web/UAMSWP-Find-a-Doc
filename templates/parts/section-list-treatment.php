@@ -38,7 +38,9 @@
  * 		$condition_treatment_section_link_item // Query for whether to link the list items // bool (default: false)
  * 
  * Return:
- * 	var $treatment_schema // string
+ * 	var $condition_treatment_schema; // string
+ * 	var $condition_treatment_schema_i // int
+ * 	var $condition_treatment_schema_count // int
  * 	html <section />
  */
 
@@ -81,13 +83,13 @@ if ( $treatment_section_show && !$hide_medical_ontology ) {
 						<ul class="list">
 							<?php
 
-							// Set the iteration variable for schema
+							// Set the iteration variable for MedicalSpecialty schema data
 							// Reuse iteration from conditions list if it comes before this one
 							global $condition_treatment_schema_i;
 							$condition_treatment_schema_i = isset($condition_treatment_schema_i) ? $condition_treatment_schema_i : 0;
 							$i = $condition_treatment_schema_i;
 
-							// Count conditions and treatments for schema
+							// Count conditions and treatments for MedicalSpecialty schema data
 							// Reuse count from conditions list if it comes before this one
 							global $condition_treatment_schema_count;
 							if ( !isset($condition_treatment_schema_count) ) {
@@ -97,7 +99,7 @@ if ( $treatment_section_show && !$hide_medical_ontology ) {
 								$schema_construct_item_count = $condition_treatment_schema_count;
 							}
 
-							// Define the top-level schema attribute label
+							// Define the top-level MedicalSpecialty schema data attribute label
 							global $condition_treatment_schema_attr;
 							$condition_treatment_schema_attr = isset($condition_treatment_schema_attr) ? $condition_treatment_schema_attr : 'medicalSpecialty';
 							$schema_construct_attr = $condition_treatment_schema_attr;
@@ -114,7 +116,7 @@ if ( $treatment_section_show && !$hide_medical_ontology ) {
 										$treatment_aria_label = 'Go to ' . $treatment_single_name_attr . ' page for ' . $treatment_title_attr;
 									}
 
-									// Define the attribute-value pairs
+									// Define the MedicalSpecialty schema data attribute-value pairs
 									$schema_construct_arr = array();
 									$schema_construct_arr['@type'] = 'MedicalSpecialty';
 									$schema_construct_arr['name'] = $treatment_title_attr;
@@ -122,10 +124,7 @@ if ( $treatment_section_show && !$hide_medical_ontology ) {
 										$schema_construct_arr['url'] = $treatment_url;
 									}
 
-									// Define number of tabs at start of schema block being created here
-									$chr_tab_base_count = 2;
-
-									// Construct the schema
+									// Construct the MedicalSpecialty schema data
 									$condition_treatment_schema .= uamswp_schema_construct($schema_construct_arr);
 
 									?>
@@ -149,7 +148,7 @@ if ( $treatment_section_show && !$hide_medical_ontology ) {
 
 							} // endif ( $treatment_count > 0 )
 
-							$condition_treatment_schema_i = $i; // Make iteration available to conditions list if it comes later
+							$condition_treatment_schema_i = $i; // Make iteration available to conditions list MedicalSpecialty schema data if it comes later
 
 							wp_reset_postdata();
 
