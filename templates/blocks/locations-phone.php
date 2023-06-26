@@ -305,5 +305,4 @@ if ( $phone_output == 'associated_locations' ) { ?>
 		</dl>
 	<?php } // endif $location_phone ?>
 <?php } // endif $phone_output == 'associated_locations'
-
 ?>
