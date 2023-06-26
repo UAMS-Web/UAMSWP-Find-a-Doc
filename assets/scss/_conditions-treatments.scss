@@ -28,8 +28,9 @@
 				border: $card-border-width solid $card-border-color;
 				@include border-radius($card-border-radius); 
 				
-				padding: $card-spacer-x;
-				// padding: $input-btn-padding-y $input-btn-padding-x;
+				// padding: $card-spacer-x;
+				// padding: $card-spacer-x / 2;
+				padding: $input-btn-padding-y $input-btn-padding-x;
 				color: $card-color;
 			  
 			}
