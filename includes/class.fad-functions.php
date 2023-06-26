@@ -2341,9 +2341,9 @@ function uamswp_fad_podcast() {
 		global $placeholder_condition_treatment_single_name;
 		global $placeholder_condition_treatment_plural_name;
 
-		$condition_treatment_single_name = get_field('conditions_treatments_single_name', 'option') ?: 'Condition or Treatment';
+		$condition_treatment_single_name = get_field('condition_treatment_single_name', 'option') ?: 'Condition or Treatment';
 		$condition_treatment_single_name_attr = uamswp_attr_conversion($condition_treatment_single_name);
-		$condition_treatment_plural_name = get_field('conditions_treatments_plural_name', 'option') ?: 'Conditions and Treatments';
+		$condition_treatment_plural_name = get_field('condition_treatment_plural_name', 'option') ?: 'Conditions and Treatments';
 		$condition_treatment_plural_name_attr = uamswp_attr_conversion($condition_treatment_plural_name);
 
 		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
