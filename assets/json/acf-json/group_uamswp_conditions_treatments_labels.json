@@ -1,12 +1,12 @@
 
 {
-	"key": "group_conditions_treatments_labels",
+	"key": "group_condition_treatment_labels",
 	"title": "Combined Conditions and Treatments Labels",
 	"fields": [
 		{
-			"key": "field_conditions_treatments_single_name",
+			"key": "field_condition_treatment_single_name",
 			"label": "Single Item Name",
-			"name": "conditions_treatments_single_name",
+			"name": "condition_treatment_single_name",
 			"type": "text",
 			"instructions": "If you leave this blank, the default single item name will be used.",
 			"required": 0,
@@ -26,9 +26,9 @@
 			"acfe_update": ""
 		},
 		{
-			"key": "field_conditions_treatments_plural_name",
+			"key": "field_condition_treatment_plural_name",
 			"label": "Plural Item Name",
-			"name": "conditions_treatments_plural_name",
+			"name": "condition_treatment_plural_name",
 			"type": "text",
 			"instructions": "If you leave this blank, the default plural item name will be used.",
 			"required": 0,
