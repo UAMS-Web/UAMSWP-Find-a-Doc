@@ -59,6 +59,26 @@
  * 	html <section />
  */
 
+// Check/define variables
+$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
+$hide_medical_ontology = isset($hide_medical_ontology) ? $hide_medical_ontology : false;
+$condition_section_link_item = isset($condition_section_link_item) ? $condition_section_link_item : false;
+if (
+	$condition_treatment_section_show
+	&&
+	$condition_section_link_item
+	&&
+	$hide_medical_ontology
+	) {
+	// If the combined conditions and treatments section should be shown...
+	// and if the condition items should be linked...
+	// and if certain ontology items should be hidden on this page...
+
+	// Set the combined conditions and treatments section to not be shown on this page
+	$condition_treatment_section_show = false;
+
+}
+
 // Do something
 if ( $condition_treatment_section_show && !$hide_medical_ontology ) {
 
