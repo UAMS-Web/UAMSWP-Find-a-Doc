@@ -799,7 +799,7 @@
   font-size: 1.125rem;
   font-weight: 300;
   line-height: 1.5;
-  padding: 1.25rem;
+  padding: .375rem .75rem;
 }
 
 .conditions-treatments .list-container.list-container-columns .list {
@@ -1798,6 +1798,12 @@ html.poppedOut {
 @media (min-width:3516px) {
   .card-list.card-list-doctors-count-12 {
     width: 3420px;
+  }
+}
+
+@media (max-width:991.98px) {
+  .conditions-treatments .list-container+.list-container {
+    padding-top: 2rem;
   }
 }
 
