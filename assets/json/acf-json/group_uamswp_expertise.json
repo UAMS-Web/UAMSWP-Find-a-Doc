@@ -1280,9 +1280,9 @@
 			"acfe_validate": "",
 			"library": "all"
 		},
-		"field_expertise_tab_conditions": {
-			"key": "field_expertise_tab_conditions",
-			"label": "Related Conditions",
+		"field_expertise_tab_condition_treatment": {
+			"key": "field_expertise_tab_condition_treatment",
+			"label": "Related Conditions and Treatments",
 			"name": "",
 			"type": "tab",
 			"instructions": "",
@@ -1303,6 +1303,26 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_expertise_condition_treatment_fpage_intro": {
+			"key": "field_expertise_condition_treatment_fpage_intro",
+			"label": "Override Intro Text for Combined Related Conditions and Treatments Block",
+			"name": "expertise_condition_treatment_fpage_intro",
+			"type": "textarea",
+			"instructions": "The default intro text is defined in Find-a-Doc Settings, written to be generic for all blocks of this type on any area of expertise page(s). If you leave this field blank, the text from Find-a-Doc Settings will be used. If you add text here, that text will be used instead.</p><p class='description' style='margin-top: 0.5em;'>This will display in a related conditions and treatments block on the main page for this area of expertise in a pararaph underneath the block title.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 117 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
 		},
 		"field_expertise_conditions_cpt": {
 			"key": "field_expertise_conditions_cpt",
@@ -1356,30 +1376,6 @@
 			"rows": 4,
 			"new_lines": "",
 			"acfe_textarea_code": 0
-		},
-		"field_expertise_tab_treatments": {
-			"key": "field_expertise_tab_treatments",
-			"label": "Related Treatments and Procedures",
-			"name": "",
-			"type": "tab",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_expertise_type",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"placement": "left",
-			"endpoint": 0
 		},
 		"field_expertise_treatments_cpt": {
 			"key": "field_expertise_treatments_cpt",
