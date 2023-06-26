@@ -1825,9 +1825,10 @@ function uamswp_fad_post_title() {
 
 		// Make variables available outside of the function
 		global $condition_cpt_query;
-		global $condition_section_show;
+		global $condition_section_show; // bool
+		global $condition_treatment_section_show; // bool
 		global $condition_ids;
-		global $condition_count; // integer
+		global $condition_count; // int
 		global $condition_schema; // string
 
 		// Conditions CPT
@@ -1842,11 +1843,13 @@ function uamswp_fad_post_title() {
 		$condition_cpt_query = new WP_Query( $args );
 		if( ( $conditions_cpt && $condition_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
 			$condition_section_show = true;
+			$condition_treatment_section_show = true;
 			$condition_ids = $condition_cpt_query->posts;
 			$condition_count = count($condition_cpt_query->posts);
 			$jump_link_count = $jump_link_count + 1;
 		} else {
 			$condition_section_show = false;
+			$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 		}
 		$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
 	}
@@ -1864,9 +1867,10 @@ function uamswp_fad_post_title() {
 
 		// Make variables available outside of the function
 		global $treatment_cpt_query;
-		global $treatment_section_show;
+		global $treatment_section_show; // bool
+		global $condition_treatment_section_show; // bool
 		global $treatment_ids;
-		global $treatment_count; // integer
+		global $treatment_count; // int
 		global $treatment_schema; // string
 
 		// Treatments CPT
@@ -1881,11 +1885,13 @@ function uamswp_fad_post_title() {
 		$treatment_cpt_query = new WP_Query( $args );
 		if( ( $treatments_cpt && $treatment_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
 			$treatment_section_show = true;
+			$condition_treatment_section_show = true;
 			$treatment_ids = $treatment_cpt_query->posts;
 			$treatment_count = count($treatment_cpt_query->posts);
 			$jump_link_count = $jump_link_count + 1;
 		} else {
 			$treatment_section_show = false;
+			$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 		}
 		$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
 	}
