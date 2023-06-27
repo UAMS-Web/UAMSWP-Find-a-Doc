@@ -18,6 +18,25 @@
 			"placement": "left",
 			"endpoint": 0
 		},
+		"field_condition_searchable": {
+			"key": "field_condition_searchable",
+			"name": "condition_searchable",
+			"type": "true_false",
+			"label": "Make this condition searchable?",
+			"instructions": "Should this condition be used to help return results for associated items like providers, locations, etc.?",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 1,
+			"ui": 1,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
 		"field_condition_alternate": {
 			"key": "field_condition_alternate",
 			"label": "Alternate Names for This Condition",
