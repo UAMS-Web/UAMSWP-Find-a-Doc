@@ -4351,6 +4351,324 @@ function uamswp_fad_podcast() {
 				$condition_treatment_fpage_intro_clinical_resource = $condition_treatment_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_clinical_resource) : ''; // Intro text
 		}
 
+	// Get field values from Find-a-Doc Settings for ontology image elements in general placements of fake subpages or sections
+
+		// Get system settings for general values of ontology image elements of fake subpage or section for Providers
+		function uamswp_fad_provider_fpage_image_general() {
+
+			// Make variables available outside of the function
+			global $provider_fpage_image_general;
+
+			// Get the system settings for the text elements in a general placement
+			$provider_fpage_image_general = get_field('provider_fpage_featured_image_general', 'option'); // Featured image
+
+			// If the variable is not set or is empty, set a hardcoded fallback value
+			$provider_fpage_image_general = ( isset($provider_fpage_image_general) && !empty($provider_fpage_image_general) ) ? $provider_fpage_image_general : ''; // Featured image
+
+		}
+
+		// Get system settings for general values of ontology image elements of fake subpage or section for Locations
+		function uamswp_fad_location_fpage_image_general() {
+
+			// Make variables available outside of the function
+			global $location_fpage_image_general;
+			global $location_descendant_fpage_image_general;
+
+			// Locations
+
+				// Get the system settings for the text elements in a general placement
+				$location_fpage_image_general = get_field('location_fpage_featured_image_general', 'option'); // Featured image
+
+				// If the variable is not set or is empty, set a hardcoded fallback value
+				$location_fpage_image_general = ( isset($location_fpage_image_general) && !empty($location_fpage_image_general) ) ? $location_fpage_image_general : ''; // Featured image
+
+			// Descendant Locations
+
+				// Get the system settings for the text elements in a general placement
+				$location_descendant_fpage_image_general = get_field('location_descendant_fpage_featured_image_general', 'option'); // Featured image
+
+				// If the variable is not set or is empty, set a hardcoded fallback value
+				$location_descendant_fpage_image_general = ( isset($location_descendant_fpage_image_general) && !empty($location_descendant_fpage_image_general) ) ? $location_descendant_fpage_image_general : ''; // Featured image
+
+		}
+
+		// Get system settings for general values of ontology image elements of fake subpage or section for Areas of Expertise
+		function uamswp_fad_expertise_fpage_image_general() {
+
+			// Make variables available outside of the function
+			global $expertise_fpage_image_general;
+			global $expertise_descendant_fpage_image_general;
+
+			// Areas of Expertise
+
+				// Get the system settings for the text elements in a general placement
+				$expertise_fpage_image_general = get_field('expertise_fpage_featured_image_general', 'option'); // Featured image
+
+				// If the variable is not set or is empty, set a hardcoded fallback value
+				$expertise_fpage_image_general = ( isset($expertise_fpage_image_general) && !empty($expertise_fpage_image_general) ) ? $expertise_fpage_image_general : ''; // Featured image
+
+			// Descendant Areas of Expertise
+
+				// Get the system settings for the text elements in a general placement
+				$expertise_descendant_fpage_image_general = get_field('expertise_descendant_fpage_featured_image_general', 'option'); // Featured image
+
+				// If the variable is not set or is empty, set a hardcoded fallback value
+				$expertise_descendant_fpage_image_general = ( isset($expertise_descendant_fpage_image_general) && !empty($expertise_descendant_fpage_image_general) ) ? $expertise_descendant_fpage_image_general : ''; // Featured image
+
+		}
+
+		// Get system settings for general values of ontology image elements of fake subpage or section for Providers
+		function uamswp_fad_clinical_resource_fpage_image_general() {
+
+			// Make variables available outside of the function
+			global $clinical_resource_fpage_image_general;
+
+			// Get the system settings for the text elements in a general placement
+			$clinical_resource_fpage_image_general = get_field('clinical_resource_fpage_featured_image_general', 'option'); // Featured image
+
+			// If the variable is not set or is empty, set a hardcoded fallback value
+			$clinical_resource_fpage_image_general = ( isset($clinical_resource_fpage_image_general) && !empty($clinical_resource_fpage_image_general) ) ? $clinical_resource_fpage_image_general : ''; // Featured image
+
+		}
+
+	// Get field values from Find-a-Doc Settings and from ontology items for ontology image elements in specific subsections and profiles
+
+		// Get field values for image elements of fake subpage or section on Provider subsection or profile
+		function uamswp_fad_fpage_image_provider() {
+
+			// Make variables available outside of the function
+			global $location_fpage_image_provider;
+			global $expertise_fpage_image_provider;
+			global $clinical_resource_fpage_image_provider;
+
+			// Locations
+			$location_fpage_image_provider = get_field('location_fpage_featured_image_provider', 'option'); // Featured image of fake subpage or section for Locations in Provider subsection or profile
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
+				if ( !isset($location_fpage_image_provider) || empty($location_fpage_image_provider) ) {
+					if ( !isset($location_fpage_image_general) || empty($location_fpage_image_general) ) {
+						uamswp_fad_location_fpage_image_general();
+						global $location_fpage_image_general;
+					}
+					$location_fpage_image_provider = $location_fpage_image_general; // Featured image
+				}
+
+			// Areas of Expertise
+			$expertise_fpage_image_provider = get_field('expertise_fpage_featured_image_provider', 'option'); // Featured image of fake subpage or section for Areas of Expertise in Provider subsection or profile
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
+				if ( !isset($expertise_fpage_image_provider) || empty($expertise_fpage_image_provider) ) {
+					if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
+						uamswp_fad_expertise_fpage_image_general();
+						global $expertise_fpage_image_general;
+					}
+					$expertise_fpage_image_provider = $expertise_fpage_image_general; // Featured image
+				}
+	
+			// Clinical Resources
+			$clinical_resource_fpage_image_provider = get_field('clinical_resource_fpage_featured_image_provider', 'option'); // Featured image of fake subpage or section for Clinical Resources in Provider subsection or profile
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
+				if ( !isset($clinical_resource_fpage_image_provider) || empty($clinical_resource_fpage_image_provider) ) {
+					if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
+						uamswp_fad_clinical_resource_fpage_image_general();
+						global $clinical_resource_fpage_image_general;
+					}
+					$clinical_resource_fpage_image_provider = $clinical_resource_fpage_image_general; // Featured image
+				}
+	
+		}
+
+		// Get field values for image elements of fake subpage or section on Location subsection or profile
+		function uamswp_fad_fpage_image_location() {
+
+			// Make variables available outside of the function
+			global $provider_fpage_image_location;
+			global $location_descendant_fpage_image_location;
+			global $expertise_fpage_image_location;
+			global $clinical_resource_fpage_image_location;
+
+			// Providers
+			$provider_fpage_image_location = get_field('provider_fpage_featured_image_location', 'option'); // Featured image of fake subpage or section for Providers in Location subsection or profile
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
+				if ( !isset($provider_fpage_image_location) || empty($provider_fpage_image_location) ) {
+					if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
+						uamswp_fad_provider_fpage_image_general();
+						global $provider_fpage_image_general;
+					}
+					$provider_fpage_image_location = $provider_fpage_image_general; // Featured image
+				}
+
+			// Descendant Locations
+			$location_descendant_fpage_image_location = get_field('location_descendant_fpage_featured_image_location', 'option'); // Featured image of fake subpage or section for Desecndant Locations in Location subsection or profile
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
+				if ( !isset($location_descendant_fpage_image_location) || empty($location_descendant_fpage_image_location) ) {
+					if ( !isset($location_descendant_fpage_image_general) || empty($location_descendant_fpage_image_general) ) {
+						uamswp_fad_location_fpage_image_general();
+						global $location_descendant_fpage_image_general;
+					}
+					$location_descendant_fpage_image_location = $location_descendant_fpage_image_general; // Featured image
+				}
+
+			// Areas of Expertise
+			$expertise_fpage_image_location = get_field('expertise_fpage_featured_image_location', 'option'); // Featured image of fake subpage or section for Areas of Expertise in Location subsection or profile
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
+				if ( !isset($expertise_fpage_image_location) || empty($expertise_fpage_image_location) ) {
+					if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
+						uamswp_fad_expertise_fpage_image_general();
+						global $expertise_fpage_image_general;
+					}
+					$expertise_fpage_image_location = $expertise_fpage_image_general; // Featured image
+				}
+	
+			// Clinical Resources
+			$clinical_resource_fpage_image_location = get_field('clinical_resource_fpage_featured_image_location', 'option'); // Featured image of fake subpage or section for Clinical Resources in Location subsection or profile
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
+				if ( !isset($clinical_resource_fpage_image_location) || empty($clinical_resource_fpage_image_location) ) {
+					if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
+						uamswp_fad_clinical_resource_fpage_image_general();
+						global $clinical_resource_fpage_image_general;
+					}
+					$clinical_resource_fpage_image_location = $clinical_resource_fpage_image_general; // Featured image
+				}
+	
+		}
+
+		// Get field values for image elements of fake subpage or section on Area of Expertise subsection or profile
+		function uamswp_fad_fpage_image_expertise() {
+
+			// Make variables available outside of the function
+			global $provider_fpage_image_expertise;
+			global $location_fpage_image_expertise;
+			global $expertise_fpage_image_expertise;
+			global $expertise_descendant_fpage_image_expertise;
+			global $clinical_resource_fpage_image_expertise;
+
+			// Providers
+			$provider_fpage_image_expertise = get_field('provider_fpage_featured_image_expertise', 'option'); // Featured image of fake subpage or section for Providers in Area of Expertise subsection
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
+				if ( !isset($provider_fpage_image_expertise) || empty($provider_fpage_image_expertise) ) {
+					if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
+						uamswp_fad_provider_fpage_image_general();
+						global $provider_fpage_image_general;
+					}
+					$provider_fpage_image_expertise = $provider_fpage_image_general; // Featured image
+				}
+
+			// Locations
+			$location_fpage_image_expertise = get_field('location_fpage_featured_image_expertise', 'option'); // Featured image of fake subpage or section for Locations in Area of Expertise subsection
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
+				if ( !isset($location_fpage_image_expertise) || empty($location_fpage_image_expertise) ) {
+					if ( !isset($location_descendant_fpage_image_general) || empty($location_descendant_fpage_image_general) ) {
+						uamswp_fad_expertise_fpage_image_general();
+						global $location_descendant_fpage_image_general;
+					}
+					$location_fpage_image_expertise = $location_descendant_fpage_image_general; // Featured image
+				}
+
+			// Related Areas of Expertise
+			$expertise_fpage_image_expertise = get_field('expertise_fpage_featured_image_expertise', 'option'); // Featured image of fake subpage or section for Related Areas of Expertise in Area of Expertise subsection
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
+				if ( !isset($expertise_fpage_image_expertise) || empty($expertise_fpage_image_expertise) ) {
+					if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
+						uamswp_fad_expertise_fpage_image_general();
+						global $expertise_fpage_image_general;
+					}
+					$expertise_fpage_image_expertise = $expertise_fpage_image_general; // Featured image
+				}
+
+			// Descendant Areas of Expertise
+			$expertise_descendant_fpage_image_expertise = get_field('expertise_descendant_fpage_featured_image_expertise', 'option'); // Featured image of fake subpage or section for Descendant Areas of Expertise in Area of Expertise subsection
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
+				if ( !isset($expertise_descendant_fpage_image_expertise) || empty($expertise_descendant_fpage_image_expertise) ) {
+					if ( !isset($expertise_descendant_fpage_image_general) || empty($expertise_descendant_fpage_image_general) ) {
+						uamswp_fad_expertise_fpage_image_general();
+						global $expertise_descendant_fpage_image_general;
+					}
+					$expertise_descendant_fpage_image_expertise = $expertise_descendant_fpage_image_general; // Featured image
+				}
+	
+			// Clinical Resources
+			$clinical_resource_fpage_image_expertise = get_field('clinical_resource_fpage_featured_image_expertise', 'option'); // Featured image of fake subpage or section for Clinical Resources in Area of Expertise subsection
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
+				if ( !isset($clinical_resource_fpage_image_expertise) || empty($clinical_resource_fpage_image_expertise) ) {
+					if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
+						uamswp_fad_clinical_resource_fpage_image_general();
+						global $clinical_resource_fpage_image_general;
+					}
+					$clinical_resource_fpage_image_expertise = $clinical_resource_fpage_image_general; // Featured image
+				}
+	
+		}
+
+		// Get field values for image elements of fake subpage or section on Clinical Resources subsection or profile
+		function uamswp_fad_fpage_image_clinical_resource() {
+
+			// Make variables available outside of the function
+			global $provider_fpage_image_clinical_resource;
+			global $location_fpage_image_clinical_resource;
+			global $expertise_fpage_image_clinical_resource;
+			global $clinical_resource_fpage_image_clinical_resource;
+
+			// Providers
+			$provider_fpage_image_clinical_resource = get_field('provider_fpage_featured_image_clinical_resource', 'option'); // Featured image of fake subpage or section for Providers in Clinical Resources subsection or profile
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
+				if ( !isset($provider_fpage_image_clinical_resource) || empty($provider_fpage_image_clinical_resource) ) {
+					if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
+						uamswp_fad_provider_fpage_image_general();
+						global $provider_fpage_image_general;
+					}
+					$provider_fpage_image_clinical_resource = $provider_fpage_image_general; // Featured image
+				}
+
+			// Locations
+			$location_fpage_image_clinical_resource = get_field('location_fpage_featured_image_clinical_resource', 'option'); // Featured image of fake subpage or section for Locations in Clinical Resources subsection or profile
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
+				if ( !isset($location_fpage_image_clinical_resource) || empty($location_fpage_image_clinical_resource) ) {
+					if ( !isset($location_fpage_image_general) || empty($location_fpage_image_general) ) {
+						uamswp_fad_location_fpage_image_general();
+						global $location_fpage_image_general;
+					}
+					$location_fpage_image_clinical_resource = $location_fpage_image_general; // Featured image
+				}
+
+			// Areas of Expertise
+			$expertise_fpage_image_clinical_resource = get_field('expertise_fpage_featured_image_clinical_resource', 'option'); // Featured image of fake subpage or section for Areas of Expertise in Clinical Resources subsection or profile
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
+				if ( !isset($expertise_fpage_image_clinical_resource) || empty($expertise_fpage_image_clinical_resource) ) {
+					if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
+						uamswp_fad_expertise_fpage_image_general();
+						global $expertise_fpage_image_general;
+					}
+					$expertise_fpage_image_clinical_resource = $expertise_fpage_image_general; // Featured image
+				}
+	
+			// Related Clinical Resources
+			$clinical_resource_fpage_image_clinical_resource = get_field('clinical_resource_fpage_featured_image_clinical_resource', 'option'); // Featured image of fake subpage or section for Related Clinical Resources on Clinical Resources subsection or profile
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
+				if ( !isset($clinical_resource_fpage_image_clinical_resource) || empty($clinical_resource_fpage_image_clinical_resource) ) {
+					if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
+						uamswp_fad_clinical_resource_fpage_image_general();
+						global $clinical_resource_fpage_image_general;
+					}
+					$clinical_resource_fpage_image_clinical_resource = $clinical_resource_fpage_image_general; // Featured image
+				}
+	
+		}
+
 // Filter the allowed block types for all editor types
 function uamswp_fad_allowed_block_types ( $block_editor_context, $editor_context ) {
 	// Define the list of blocks associated with landing pages
