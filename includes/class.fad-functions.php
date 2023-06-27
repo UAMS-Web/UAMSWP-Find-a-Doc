@@ -2888,7 +2888,7 @@ function uamswp_fad_podcast() {
 
 	// Get field values from Find-a-Doc Settings and from ontology items for ontology text elements in specific subsections and single profiles
 
-		// Get field values for fake subpage text elements on Provider subsection
+		// Get field values for fake subpage text elements on Provider subsection or profile
 		function uamswp_fad_fpage_text_provider() {
 			// Make variables available outside of the function
 			global $location_fpage_title_provider;
@@ -3139,7 +3139,7 @@ function uamswp_fad_podcast() {
 				$condition_treatment_fpage_intro_provider = $condition_treatment_fpage_intro_provider ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_provider) : ''; // Intro text
 		}
 
-		// Get field values for fake subpage text elements on Location subsection
+		// Get field values for fake subpage text elements on Location subsection or profile
 		function uamswp_fad_fpage_text_location() {
 			// Make variables available outside of the function
 			global $provider_fpage_title_location;
@@ -3422,7 +3422,7 @@ function uamswp_fad_podcast() {
 				$condition_treatment_fpage_intro_location = $condition_treatment_fpage_intro_location ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_location) : ''; // Intro text
 		}
 
-		// Get field values for fake subpage text elements on Area of Expertise subsection
+		// Get field values for fake subpage text elements on Area of Expertise subsection or profile
 		function uamswp_fad_fpage_text_expertise() {
 			// Bring in variables from outside of the function
 			global $page_id;
@@ -4069,7 +4069,7 @@ function uamswp_fad_podcast() {
 				$condition_treatment_fpage_intro_expertise = $condition_treatment_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_expertise) : ''; // Intro text
 		}
 
-		// Get field values for text elements for related ontology sections on Clinical Resource profile
+		// Get field values for text elements for related ontology sections on Clinical Resource subsection or profile
 		function uamswp_fad_fpage_text_clinical_resource() {
 			// Make variables available outside of the function
 			global $provider_fpage_title_clinical_resource;
