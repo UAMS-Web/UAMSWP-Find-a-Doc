@@ -1,8 +1,8 @@
 {
 	"key": "group_treatments_cpt",
 	"title": "Treatments Item Configuration",
-	"fields": [
-		{
+	"fields": {
+		"field_treatment_procedure_alternate": {
 			"key": "field_treatment_procedure_alternate",
 			"label": "Alternate Names for This Treatment or Procedure",
 			"name": "treatment_procedure_alternate",
@@ -68,7 +68,7 @@
 				}
 			]
 		},
-		{
+		"field_treatment_procedure_content": {
 			"key": "field_treatment_procedure_content",
 			"label": "Content",
 			"name": "treatment_procedure_content",
@@ -90,7 +90,7 @@
 			"acfe_validate": "",
 			"acfe_update": ""
 		},
-		{
+		"field_medline_code_type": {
 			"key": "field_medline_code_type",
 			"label": "Code Type for Medline Plus",
 			"name": "medline_code_type",
@@ -118,7 +118,7 @@
 			"acfe_validate": "",
 			"acfe_form": true
 		},
-		{
+		"field_medline_code_id": {
 			"key": "field_medline_code_id",
 			"label": "Medline Code ID #",
 			"name": "medline_code_id",
@@ -146,7 +146,7 @@
 			"append": "",
 			"maxlength": ""
 		},
-		{
+		"field_medline_view_data": {
 			"key": "field_medline_view_data",
 			"label": "Medline Data Verification",
 			"name": "",
@@ -172,7 +172,7 @@
 			"new_lines": "",
 			"esc_html": 0
 		},
-		{
+		"field_treatment_procedure_embed_codes": {
 			"key": "field_treatment_procedure_embed_codes",
 			"name": "treatment_procedure_embed_codes",
 			"type": "textarea",
@@ -191,7 +191,7 @@
 			"rows": 4,
 			"new_lines": ""
 		},
-		{
+		"field_treatment_procedure_youtube_link": {
 			"key": "field_treatment_procedure_youtube_link",
 			"name": "treatment_procedure_youtube_link",
 			"type": "url",
@@ -207,7 +207,7 @@
 			"default_value": "",
 			"placeholder": ""
 		},
-		{
+		"field_treatment_procedure_short_desc": {
 			"key": "field_treatment_procedure_short_desc",
 			"name": "treatment_procedure_short_desc",
 			"type": "textarea",
@@ -226,7 +226,7 @@
 			"rows": 2,
 			"new_lines": ""
 		},
-		{
+		"field_treatment_procedure_cta": {
 			"key": "field_treatment_procedure_cta",
 			"label": "Call-to-Action (CTA) Bar(s)",
 			"name": "treatment_procedure_cta",
@@ -526,7 +526,7 @@
 				}
 			]
 		},
-		{
+		"field_treatment_procedure_clinical_trials": {
 			"key": "field_treatment_procedure_clinical_trials",
 			"name": "treatment_procedure_clinical_trials",
 			"type": "true_false",
@@ -545,7 +545,7 @@
 			"ui_on_text": "",
 			"ui_off_text": ""
 		},
-		{
+		"field_treatment_conditions": {
 			"key": "field_treatment_conditions",
 			"label": "Conditions",
 			"name": "treatment_conditions",
@@ -578,7 +578,7 @@
 			"acfe_update": "",
 			"ui": 1
 		},
-		{
+		"field_treatment_procedure_expertise": {
 			"key": "field_treatment_procedure_expertise",
 			"label": "Related Areas of Expertise",
 			"name": "treatment_procedure_expertise",
@@ -611,7 +611,7 @@
 			"acfe_update": "",
 			"ui": 1
 		},
-		{
+		"field_treatment_procedure_locations": {
 			"key": "field_treatment_procedure_locations",
 			"label": "Locations for this Treatment or Procedure",
 			"name": "treatment_procedure_locations",
@@ -644,7 +644,7 @@
 			"acfe_update": "",
 			"ui": 1
 		},
-		{
+		"field_treatment_procedure_physicians": {
 			"key": "field_treatment_procedure_physicians",
 			"label": "Providers performing or prescribing this treatment or procedure",
 			"name": "treatment_procedure_physicians",
@@ -677,7 +677,7 @@
 			"acfe_update": "",
 			"ui": 1
 		},
-		{
+		"field_treatment_procedure_clinical_resources": {
 			"key": "field_treatment_procedure_clinical_resources",
 			"label": "Clinical Resources",
 			"name": "treatment_procedure_clinical_resources",
@@ -710,7 +710,7 @@
 			"acfe_update": "",
 			"ui": 1
 		},
-		{
+		"field_treatment_procedure_podcast_name": {
 			"key": "field_treatment_procedure_podcast_name",
 			"name": "treatment_procedure_podcast_name",
 			"type": "text",
@@ -729,7 +729,7 @@
 			"append": "",
 			"maxlength": ""
 		}
-	],
+	},
 	"location": [
 		[
 			{
