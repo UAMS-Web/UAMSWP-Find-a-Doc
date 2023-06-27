@@ -1,6 +1,6 @@
 {
 	"key": "group_treatments_cpt",
-	"title": "Treatments",
+	"title": "Treatments Item Configuration",
 	"fields": [
 		{
 			"key": "field_treatment_procedure_alternate",
