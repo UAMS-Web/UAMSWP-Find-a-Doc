@@ -5,7 +5,7 @@
 	"fields": [
 		{
 			"key": "field_provider_archive_headline",
-			"label": "Archive Headline",
+			"label": "Title of Provider Archive",
 			"name": "provider_archive_headline",
 			"type": "text",
 			"instructions": "Your theme uses accessible headings. If you leave this blank, the default accessible heading will be used.",
