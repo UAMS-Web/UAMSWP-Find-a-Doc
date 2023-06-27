@@ -2,6 +2,22 @@
 	"key": "group_treatments_cpt",
 	"title": "Treatments Item Configuration",
 	"fields": {
+		"field_treatment_tab_general": {
+			"key": "field_treatment_tab_general",
+			"label": "General Information",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
 		"field_treatment_procedure_alternate": {
 			"key": "field_treatment_procedure_alternate",
 			"label": "Alternate Names for This Treatment or Procedure",
@@ -545,6 +561,22 @@
 			"ui_on_text": "",
 			"ui_off_text": ""
 		},
+		"field_treatment_procedure_tab_conditions": {
+			"key": "field_treatment_procedure_tab_conditions",
+			"label": "Related Conditions",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
 		"field_treatment_conditions": {
 			"key": "field_treatment_conditions",
 			"label": "Conditions",
@@ -577,6 +609,22 @@
 			"acfe_validate": "",
 			"acfe_update": "",
 			"ui": 1
+		},
+		"field_treatment_procedure_tab_expertise": {
+			"key": "field_treatment_procedure_tab_expertise",
+			"label": "Related Areas of Expertise",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
 		},
 		"field_treatment_procedure_expertise": {
 			"key": "field_treatment_procedure_expertise",
@@ -611,6 +659,22 @@
 			"acfe_update": "",
 			"ui": 1
 		},
+		"field_treatment_procedure_tab_locations": {
+			"key": "field_treatment_procedure_tab_locations",
+			"label": "Related Locations",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
 		"field_treatment_procedure_locations": {
 			"key": "field_treatment_procedure_locations",
 			"label": "Locations for this Treatment or Procedure",
@@ -643,6 +707,22 @@
 			"acfe_validate": "",
 			"acfe_update": "",
 			"ui": 1
+		},
+		"field_treatment_procedure_tab_providers": {
+			"key": "field_treatment_procedure_tab_providers",
+			"label": "Related Providers",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
 		},
 		"field_treatment_procedure_physicians": {
 			"key": "field_treatment_procedure_physicians",
@@ -677,6 +757,22 @@
 			"acfe_update": "",
 			"ui": 1
 		},
+		"field_treatment_procedure_tab_clinical_resources": {
+			"key": "field_treatment_procedure_tab_clinical_resources",
+			"label": "Related Clinical Resources",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
 		"field_treatment_procedure_clinical_resources": {
 			"key": "field_treatment_procedure_clinical_resources",
 			"label": "Clinical Resources",
@@ -709,6 +805,30 @@
 			"acfe_validate": "",
 			"acfe_update": "",
 			"ui": 1
+		},
+		"field_treatment_procedure_tab_deprecated": {
+			"key": "field_treatment_procedure_tab_deprecated",
+			"label": "Deprecated Fields",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_treatment_procedure_tab_deprecated",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
 		},
 		"field_treatment_procedure_podcast_name": {
 			"key": "field_treatment_procedure_podcast_name",

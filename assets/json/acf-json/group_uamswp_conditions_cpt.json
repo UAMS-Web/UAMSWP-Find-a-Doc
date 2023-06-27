@@ -2,6 +2,22 @@
 	"key": "group_conditions_cpt",
 	"title": "Conditions Item Configuration",
 	"fields": {
+		"field_condition_tab_general": {
+			"key": "field_condition_tab_general",
+			"label": "General Information",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
 		"field_condition_alternate": {
 			"key": "field_condition_alternate",
 			"label": "Alternate Names for This Condition",
@@ -545,6 +561,22 @@
 			"ui_on_text": "",
 			"ui_off_text": ""
 		},
+		"field_condition_tab_treatments": {
+			"key": "field_condition_tab_treatments",
+			"label": "Related Treatments",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
 		"field_condition_treatments": {
 			"key": "field_condition_treatments",
 			"label": "Treatments",
@@ -577,6 +609,22 @@
 			"acfe_validate": "",
 			"acfe_update": "",
 			"ui": 1
+		},
+		"field_condition_tab_expertise": {
+			"key": "field_condition_tab_expertise",
+			"label": "Related Areas of Expertise",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
 		},
 		"field_condition_expertise": {
 			"key": "field_condition_expertise",
@@ -611,6 +659,22 @@
 			"acfe_update": "",
 			"ui": 1
 		},
+		"field_condition_tab_locations": {
+			"key": "field_condition_tab_locations",
+			"label": "Related Locations",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
 		"field_condition_locations": {
 			"key": "field_condition_locations",
 			"label": "Locations treating this condition",
@@ -643,6 +707,22 @@
 			"acfe_validate": "",
 			"acfe_update": "",
 			"ui": 1
+		},
+		"field_condition_tab_providers": {
+			"key": "field_condition_tab_providers",
+			"label": "Related Providers",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
 		},
 		"field_condition_physicians": {
 			"key": "field_condition_physicians",
@@ -677,6 +757,22 @@
 			"acfe_update": "",
 			"ui": 1
 		},
+		"field_condition_tab_clinical_resources": {
+			"key": "field_condition_tab_clinical_resources",
+			"label": "Related Clinical Resources",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
 		"field_condition_clinical_resources": {
 			"key": "field_condition_clinical_resources",
 			"label": "Clinical Resources",
@@ -709,6 +805,30 @@
 			"acfe_validate": "",
 			"acfe_update": "",
 			"ui": 1
+		},
+		"field_condition_tab_deprecated": {
+			"key": "field_condition_tab_deprecated",
+			"label": "Deprecated Fields",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_condition_tab_deprecated",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
 		},
 		"field_condition_podcast_name": {
 			"key": "field_condition_podcast_name",
