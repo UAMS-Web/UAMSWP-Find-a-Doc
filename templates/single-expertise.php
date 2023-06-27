@@ -52,8 +52,11 @@ $ontology_type = isset($ontology_type) ? $ontology_type : 1; // Check if 'expert
 // Get system settings for fake subpage text elements on Area of Expertise subsection
 uamswp_fad_fpage_text_expertise();
 
+// Get system settings for image elements of fake subpage or section on Area of Expertise subsection or profile
+uamswp_fad_fpage_image_expertise();
+
 // Get the featured image / post thumbnail
-$page_image_id = $expertise_featured_image_id; // Image ID
+$page_image_id = $expertise_featured_image; // Image ID
 uamswp_meta_image_resize();
 
 // Get system settings for jump links (a.k.a. anchor links)

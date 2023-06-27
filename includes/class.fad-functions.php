@@ -3436,36 +3436,24 @@ function uamswp_fad_podcast() {
 			global $expertise_page_image;
 			global $expertise_page_image_mobile;
 			global $expertise_short_desc;
-			global $expertise_featured_image;
-			global $expertise_featured_image_id;
 			global $provider_fpage_title_expertise;
 			global $provider_fpage_intro_expertise;
 			global $provider_fpage_short_desc_expertise;
-			global $provider_fpage_featured_image_expertise;
-			global $provider_fpage_featured_image_expertise_id;
 			global $location_fpage_title_expertise;
 			global $location_fpage_intro_expertise;
 			global $location_fpage_short_desc_expertise;
-			global $location_fpage_featured_image_expertise;
-			global $location_fpage_featured_image_expertise_id;
 			global $expertise_descendant_fpage_title_expertise;
 			global $expertise_descendant_fpage_intro_expertise;
 			global $expertise_descendant_fpage_short_desc_expertise;
-			global $expertise_descendant_fpage_featured_image_expertise;
-			global $expertise_descendant_fpage_featured_image_expertise_id;
 			global $expertise_fpage_title_expertise;
 			global $expertise_fpage_intro_expertise;
 			global $expertise_fpage_short_desc_expertise;
-			global $expertise_fpage_featured_image_expertise;
-			global $expertise_fpage_featured_image_expertise_id;
 			global $clinical_resource_fpage_title_expertise;
 			global $clinical_resource_fpage_intro_expertise;
 			global $clinical_resource_fpage_more_text_expertise;
 			global $clinical_resource_fpage_more_link_text_expertise;
 			global $clinical_resource_fpage_more_link_descr_expertise;
 			global $clinical_resource_fpage_short_desc_expertise;
-			global $clinical_resource_fpage_featured_image_expertise;
-			global $clinical_resource_fpage_featured_image_expertise_id;
 			global $condition_fpage_title_expertise;
 			global $condition_fpage_intro_expertise;
 			global $treatment_fpage_title_expertise;
@@ -3581,16 +3569,6 @@ function uamswp_fad_podcast() {
 
 					}
 
-				// Get the featured image value
-				$expertise_featured_image_id = get_field('_thumbnail_id');
-				if ( $expertise_featured_image && function_exists( 'fly_add_image_size' ) ) {
-					$expertise_featured_image = image_sizer($expertise_featured_image_id, 1600, 900, 'center', 'center');
-				} elseif ( $expertise_featured_image ) {
-					$expertise_featured_image = wp_get_attachment_url( $expertise_featured_image_id, 'aspect-16-9' );
-				} else {
-					$expertise_featured_image = '';
-				}
-
 			// Providers
 
 				// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Providers in that Area of Expertise's subsection
@@ -3642,16 +3620,6 @@ function uamswp_fad_podcast() {
 					$provider_fpage_short_desc_expertise = get_field('expertise_providers_fpage_short_desc');
 					$provider_fpage_short_desc_expertise = ( isset($provider_fpage_short_desc_expertise) && !empty($provider_fpage_short_desc_expertise) ) ? uamswp_fad_fpage_text_replace($provider_fpage_short_desc_expertise) : $provider_fpage_short_desc_expertise; // Substitute placeholder text for relevant system settings value
 					$provider_fpage_short_desc_expertise = ( isset($provider_fpage_short_desc_expertise) && !empty($provider_fpage_short_desc_expertise) ) ? $provider_fpage_short_desc_expertise : $provider_fpage_intro_expertise; // If there is no value, use intro text as a fallback value
-				}
-
-				// Get the featured image value
-				$provider_fpage_featured_image_expertise_id = get_field('expertise_providers_fpage_featured_image');
-				if ( $provider_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
-					$provider_fpage_featured_image_expertise = image_sizer($provider_fpage_featured_image_expertise_id, 1600, 900, 'center', 'center');
-				} elseif ( $provider_fpage_featured_image_expertise ) {
-					$provider_fpage_featured_image_expertise = wp_get_attachment_url( $provider_fpage_featured_image_expertise_id, 'aspect-16-9' );
-				} else {
-					$provider_fpage_featured_image_expertise = $expertise_featured_image;
 				}
 
 			// Locations
@@ -3707,16 +3675,6 @@ function uamswp_fad_podcast() {
 					$location_fpage_short_desc_expertise = ( isset($location_fpage_short_desc_expertise) && !empty($location_fpage_short_desc_expertise) ) ? $location_fpage_short_desc_expertise : $location_fpage_intro_expertise; // If there is no value, use intro text as a fallback value
 				}
 
-				// Get the featured image value
-				$location_fpage_featured_image_expertise_id = get_field('expertise_locations_fpage_featured_image');
-				if ( $location_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
-					$location_fpage_featured_image_expertise = image_sizer($location_fpage_featured_image_expertise_id, 1600, 900, 'center', 'center');
-				} elseif ( $location_fpage_featured_image_expertise ) {
-					$location_fpage_featured_image_expertise = wp_get_attachment_url( $location_fpage_featured_image_expertise_id, 'aspect-16-9' );
-				} else {
-					$location_fpage_featured_image_expertise = $expertise_featured_image;
-				}
-
 			// Descendant Areas of Expertise
 
 				// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Descendant Areas of Expertise in that Area of Expertise's subsection
@@ -3770,16 +3728,6 @@ function uamswp_fad_podcast() {
 					$expertise_descendant_fpage_short_desc_expertise = ( isset($expertise_descendant_fpage_short_desc_expertise) && !empty($expertise_descendant_fpage_short_desc_expertise) ) ? $expertise_descendant_fpage_short_desc_expertise : $expertise_descendant_fpage_intro_expertise; // If there is no value, use intro text as a fallback value
 				}
 
-				// Get the featured image value
-				$expertise_descendant_fpage_featured_image_expertise_id = get_field('expertise_descendant_fpage_featured_image');
-				if ( $expertise_descendant_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
-					$expertise_descendant_fpage_featured_image_expertise = image_sizer($expertise_descendant_fpage_featured_image_expertise_id, 1600, 900, 'center', 'center');
-				} elseif ( $expertise_descendant_fpage_featured_image_expertise ) {
-					$expertise_descendant_fpage_featured_image_expertise = wp_get_attachment_url( $expertise_descendant_fpage_featured_image_expertise_id, 'aspect-16-9' );
-				} else {
-					$expertise_descendant_fpage_featured_image_expertise = $expertise_featured_image;
-				}
-
 			// Related Areas of Expertise
 
 				// Get the field values from the current Area of Expertise ontology item for ontology text elements related to Related Areas of Expertise in that Area of Expertise's subsection
@@ -3831,16 +3779,6 @@ function uamswp_fad_podcast() {
 					$expertise_fpage_short_desc_expertise = get_field('expertise_associated_fpage_short_desc');
 					$expertise_fpage_short_desc_expertise = ( isset($expertise_fpage_short_desc_expertise) && !empty($expertise_fpage_short_desc_expertise) ) ? uamswp_fad_fpage_text_replace($expertise_fpage_short_desc_expertise) : $expertise_fpage_short_desc_expertise; // Substitute placeholder text for relevant system settings value
 					$expertise_fpage_short_desc_expertise = ( isset($expertise_fpage_short_desc_expertise) && !empty($expertise_fpage_short_desc_expertise) ) ? $expertise_fpage_short_desc_expertise : $expertise_fpage_intro_expertise; // If there is no value, use intro text as a fallback value
-				}
-
-				// Get the featured image value
-				$expertise_fpage_featured_image_expertise_id = get_field('expertise_associated_fpage_featured_image');
-				if ( $expertise_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
-					$expertise_fpage_featured_image_expertise = image_sizer($expertise_fpage_featured_image_expertise_id, 1600, 900, 'center', 'center');
-				} elseif ( $expertise_fpage_featured_image_expertise ) {
-					$expertise_fpage_featured_image_expertise = wp_get_attachment_url( $expertise_fpage_featured_image_expertise_id, 'aspect-16-9' );
-				} else {
-					$expertise_fpage_featured_image_expertise = $expertise_featured_image;
 				}
 
 			// Clinical Resources
@@ -3930,16 +3868,6 @@ function uamswp_fad_podcast() {
 					$clinical_resource_fpage_short_desc_expertise = get_field('expertise_clinical_resources_fpage_short_desc');
 					$clinical_resource_fpage_short_desc_expertise = ( isset($clinical_resource_fpage_short_desc_expertise) && !empty($clinical_resource_fpage_short_desc_expertise) ) ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_short_desc_expertise) : $clinical_resource_fpage_short_desc_expertise; // Substitute placeholder text for relevant system settings value
 					$clinical_resource_fpage_short_desc_expertise = ( isset($clinical_resource_fpage_short_desc_expertise) && !empty($clinical_resource_fpage_short_desc_expertise) ) ? $clinical_resource_fpage_short_desc_expertise : $clinical_resource_fpage_intro_expertise; // If there is no value, use intro text as a fallback value
-				}
-
-				// Get the featured image value
-				$clinical_resource_fpage_featured_image_expertise_id = get_field('expertise_clinical_resources_fpage_featured_image');
-				if ( $clinical_resource_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
-					$clinical_resource_fpage_featured_image_expertise = image_sizer($clinical_resource_fpage_featured_image_expertise_id, 1600, 900, 'center', 'center');
-				} elseif ( $clinical_resource_fpage_featured_image_expertise ) {
-					$clinical_resource_fpage_featured_image_expertise = wp_get_attachment_url( $clinical_resource_fpage_featured_image_expertise_id, 'aspect-16-9' );
-				} else {
-					$clinical_resource_fpage_featured_image_expertise = $expertise_featured_image;
 				}
 
 			// Conditions
@@ -4542,70 +4470,171 @@ function uamswp_fad_podcast() {
 		function uamswp_fad_fpage_image_expertise() {
 
 			// Make variables available outside of the function
-			global $provider_fpage_image_expertise;
-			global $location_fpage_image_expertise;
-			global $expertise_fpage_image_expertise;
-			global $expertise_descendant_fpage_image_expertise;
-			global $clinical_resource_fpage_image_expertise;
+			global $expertise_featured_image;
+			global $expertise_featured_image_url;
+			global $provider_fpage_featured_image_expertise;
+			global $provider_fpage_featured_image_expertise_url;
+			global $location_fpage_featured_image_expertise;
+			global $location_fpage_featured_image_expertise_url;
+			global $expertise_fpage_featured_image_expertise;
+			global $expertise_fpage_featured_image_expertise_url;
+			global $expertise_descendant_fpage_featured_image_expertise;
+			global $expertise_descendant_fpage_featured_image_expertise_url;
+			global $clinical_resource_fpage_featured_image_expertise;
+			global $clinical_resource_fpage_featured_image_expertise_url;
+
+			// Overview
+
+				// Get the featured image value
+				$expertise_featured_image = get_field('_thumbnail_id');
+
+				// Crop/resize the image
+				if ( $expertise_featured_image && function_exists( 'fly_add_image_size' ) ) {
+					$expertise_featured_image_url = image_sizer($expertise_featured_image, 1600, 900, 'center', 'center');
+				} elseif ( $expertise_featured_image_url ) {
+					$expertise_featured_image_url = wp_get_attachment_url( $expertise_featured_image, 'aspect-16-9' );
+				} else {
+					$expertise_featured_image_url = '';
+				}
 
 			// Providers
-			$provider_fpage_image_expertise = get_field('provider_fpage_featured_image_expertise', 'option'); // Featured image of fake subpage or section for Providers in Area of Expertise subsection
+
+				// Get the featured image value
+				$provider_fpage_featured_image_expertise = get_field('expertise_providers_fpage_featured_image');
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for this placement
+				if ( !isset($provider_fpage_featured_image_expertise) || empty($provider_fpage_featured_image_expertise) ) {
+					$provider_fpage_featured_image_expertise = get_field('provider_fpage_featured_image_expertise', 'option');
+				}
 
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
-				if ( !isset($provider_fpage_image_expertise) || empty($provider_fpage_image_expertise) ) {
+				if ( !isset($provider_fpage_featured_image_expertise) || empty($provider_fpage_featured_image_expertise) ) {
 					if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
 						uamswp_fad_provider_fpage_image_general();
 						global $provider_fpage_image_general;
 					}
-					$provider_fpage_image_expertise = $provider_fpage_image_general; // Featured image
+					$provider_fpage_featured_image_expertise = $provider_fpage_image_general; // Featured image
+				}
+
+				// Crop/resize the image
+				if ( $provider_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
+					$provider_fpage_featured_image_expertise_url = image_sizer($provider_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
+				} elseif ( $provider_fpage_featured_image_expertise_url ) {
+					$provider_fpage_featured_image_expertise_url = wp_get_attachment_url( $provider_fpage_featured_image_expertise, 'aspect-16-9' );
+				} else {
+					$provider_fpage_featured_image_expertise_url = $expertise_featured_image_url;
 				}
 
 			// Locations
-			$location_fpage_image_expertise = get_field('location_fpage_featured_image_expertise', 'option'); // Featured image of fake subpage or section for Locations in Area of Expertise subsection
+	
+				// Get the featured image value
+				$location_fpage_featured_image_expertise = get_field('expertise_locations_fpage_featured_image');
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for this placement
+				if ( !isset($location_fpage_featured_image_expertise) || empty($location_fpage_featured_image_expertise) ) {
+					$location_fpage_featured_image_expertise = get_field('location_fpage_featured_image_expertise', 'option');
+				}
 
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
-				if ( !isset($location_fpage_image_expertise) || empty($location_fpage_image_expertise) ) {
+				if ( !isset($location_fpage_featured_image_expertise) || empty($location_fpage_featured_image_expertise) ) {
 					if ( !isset($location_descendant_fpage_image_general) || empty($location_descendant_fpage_image_general) ) {
 						uamswp_fad_expertise_fpage_image_general();
 						global $location_descendant_fpage_image_general;
 					}
-					$location_fpage_image_expertise = $location_descendant_fpage_image_general; // Featured image
+					$location_fpage_featured_image_expertise = $location_descendant_fpage_image_general; // Featured image
+				}
+
+				// Crop/resize the image
+				if ( $location_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
+					$location_fpage_featured_image_expertise_url = image_sizer($location_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
+				} elseif ( $location_fpage_featured_image_expertise_url ) {
+					$location_fpage_featured_image_expertise_url = wp_get_attachment_url( $location_fpage_featured_image_expertise, 'aspect-16-9' );
+				} else {
+					$location_fpage_featured_image_expertise_url = $expertise_featured_image_url;
 				}
 
 			// Related Areas of Expertise
-			$expertise_fpage_image_expertise = get_field('expertise_fpage_featured_image_expertise', 'option'); // Featured image of fake subpage or section for Related Areas of Expertise in Area of Expertise subsection
+	
+				// Get the featured image value
+				$expertise_fpage_featured_image_expertise = get_field('expertise_associated_fpage_featured_image');
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for this placement
+				if ( !isset($expertise_fpage_featured_image_expertise) || empty($expertise_fpage_featured_image_expertise) ) {
+					$expertise_fpage_featured_image_expertise = get_field('expertise_fpage_featured_image_expertise', 'option');
+				}
 
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
-				if ( !isset($expertise_fpage_image_expertise) || empty($expertise_fpage_image_expertise) ) {
+				if ( !isset($expertise_fpage_featured_image_expertise) || empty($expertise_fpage_featured_image_expertise) ) {
 					if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
 						uamswp_fad_expertise_fpage_image_general();
 						global $expertise_fpage_image_general;
 					}
-					$expertise_fpage_image_expertise = $expertise_fpage_image_general; // Featured image
+					$expertise_fpage_featured_image_expertise = $expertise_fpage_image_general; // Featured image
+				}
+
+				// Crop/resize the image
+				if ( $expertise_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
+					$expertise_fpage_featured_image_expertise_url = image_sizer($expertise_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
+				} elseif ( $expertise_fpage_featured_image_expertise_url ) {
+					$expertise_fpage_featured_image_expertise_url = wp_get_attachment_url( $expertise_fpage_featured_image_expertise, 'aspect-16-9' );
+				} else {
+					$expertise_fpage_featured_image_expertise_url = $expertise_featured_image_url;
 				}
 
 			// Descendant Areas of Expertise
-			$expertise_descendant_fpage_image_expertise = get_field('expertise_descendant_fpage_featured_image_expertise', 'option'); // Featured image of fake subpage or section for Descendant Areas of Expertise in Area of Expertise subsection
+	
+				// Get the featured image value
+				$expertise_descendant_fpage_featured_image_expertise = get_field('expertise_descendant_fpage_featured_image');
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for this placement
+				if ( !isset($expertise_descendant_fpage_featured_image_expertise) || empty($expertise_descendant_fpage_featured_image_expertise) ) {
+					$expertise_descendant_fpage_featured_image_expertise = get_field('expertise_descendant_fpage_featured_image_expertise', 'option');
+				}
 
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
-				if ( !isset($expertise_descendant_fpage_image_expertise) || empty($expertise_descendant_fpage_image_expertise) ) {
+				if ( !isset($expertise_descendant_fpage_featured_image_expertise) || empty($expertise_descendant_fpage_featured_image_expertise) ) {
 					if ( !isset($expertise_descendant_fpage_image_general) || empty($expertise_descendant_fpage_image_general) ) {
 						uamswp_fad_expertise_fpage_image_general();
 						global $expertise_descendant_fpage_image_general;
 					}
-					$expertise_descendant_fpage_image_expertise = $expertise_descendant_fpage_image_general; // Featured image
+					$expertise_descendant_fpage_featured_image_expertise = $expertise_descendant_fpage_image_general; // Featured image
 				}
-	
+
+				// Crop/resize the image
+				if ( $expertise_descendant_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
+					$expertise_descendant_fpage_featured_image_expertise_url = image_sizer($expertise_descendant_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
+				} elseif ( $expertise_descendant_fpage_featured_image_expertise ) {
+					$expertise_descendant_fpage_featured_image_expertise_url = wp_get_attachment_url( $expertise_descendant_fpage_featured_image_expertise, 'aspect-16-9' );
+				} else {
+					$expertise_descendant_fpage_featured_image_expertise_url = $expertise_featured_image_url;
+				}
+
 			// Clinical Resources
-			$clinical_resource_fpage_image_expertise = get_field('clinical_resource_fpage_featured_image_expertise', 'option'); // Featured image of fake subpage or section for Clinical Resources in Area of Expertise subsection
+
+				// Get the featured image value
+				$clinical_resource_fpage_featured_image_expertise = get_field('expertise_clinical_resources_fpage_featured_image');
+
+				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for this placement
+				if ( !isset($clinical_resource_fpage_featured_image_expertise) || empty($clinical_resource_fpage_featured_image_expertise) ) {
+					$expertise_descendant_fpage_featured_image_expertise = get_field('clinical_resource_fpage_featured_image_expertise', 'option');
+				}
 
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
-				if ( !isset($clinical_resource_fpage_image_expertise) || empty($clinical_resource_fpage_image_expertise) ) {
+				if ( !isset($clinical_resource_fpage_featured_image_expertise) || empty($clinical_resource_fpage_featured_image_expertise) ) {
 					if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
 						uamswp_fad_clinical_resource_fpage_image_general();
 						global $clinical_resource_fpage_image_general;
 					}
-					$clinical_resource_fpage_image_expertise = $clinical_resource_fpage_image_general; // Featured image
+					$clinical_resource_fpage_featured_image_expertise = $clinical_resource_fpage_image_general; // Featured image
+				}
+
+				// Crop/resize the image
+				if ( $clinical_resource_fpage_featured_image_expertise_url && function_exists( 'fly_add_image_size' ) ) {
+					$clinical_resource_fpage_featured_image_expertise_url = image_sizer($clinical_resource_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
+				} elseif ( $clinical_resource_fpage_featured_image_expertise_url ) {
+					$clinical_resource_fpage_featured_image_expertise_url = wp_get_attachment_url( $clinical_resource_fpage_featured_image_expertise, 'aspect-16-9' );
+				} else {
+					$clinical_resource_fpage_featured_image_expertise_url = $expertise_featured_image_url;
 				}
 	
 		}
@@ -5385,6 +5414,7 @@ function uamswp_fad_fpage_text_image_overlay() {
 	global $current_fpage; // Fake subpage slug // str
 	global $page_top_level_query; // Get whether this fake subpage's parent item is the top-level item // bool
 
+	// Create the sequence of background colors
 	$text_image_overlay_color_auto = array( 'bg-blue', 'bg-green' );
 
 	// Create an array for storing the UAMS Text & Image Overlay Block item configuration arrays
