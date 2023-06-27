@@ -76,15 +76,15 @@ if ( $text_image_overlay_rows ) :
 			$index = 1;
 			foreach ( $text_image_overlay_rows as $row ) { 
 				// Load values and adding defaults.
-				$heading = $row['heading'] ? substr( $row['heading'], 0, 32 ) : '';
+				$heading = $row['heading'] ? substr( $row['heading'], 0, 32 ) : 'Lorem ipsum dolor sit amet, cons';
 				$heading_attr = uamswp_attr_conversion($heading);
-				$body = $row['body'] ? substr( $row['body'], 0, 280 ) : '';
+				$body = $row['body'] ? substr( $row['body'], 0, 280 ) : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat mas';
 				$button_text = $row['button_text'] ? substr( $row['button_text'], 0, 27 ) : 'Learn More';
-				$button_url = $row['button_url'] ?: '';
-				$button_target = $row['button_target'] ?: '';
+				$button_url = $row['button_url'] ?: get_home_url();
+				$button_target = $row['button_target'] ?: false;
 				$button_desc = $row['button_desc'] ?: $button_text . ', ' . $heading;
 				$background_color = $row['background_color'] ?: $text_image_overlay_color_auto[$index - 1];
-				$image = $row['image'] ?: '';
+				$image = $row['image'] ?: 3566;
 				?>
 				<section class="col-12<?php echo $row_count > 1 ? ' col-sm-6' : ''; ?> item bg-image item-<?php echo $index; ?> <?php echo $background_color; ?>"<?php echo $text_image_overlay_id ? ' aria-labelledby="' . $text_image_overlay_id . '-item-' . $index . '"' : ''; ?>>
 					<?php if ( $row_count > 1 && function_exists( 'fly_add_image_size' ) ) { // Background styles for two tiles in one row with Fly plugin ?>
