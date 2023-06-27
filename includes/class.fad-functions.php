@@ -1298,6 +1298,7 @@ function uamswp_fad_ontology_site_values() {
 	global $clinical_resources;
 	global $conditions_cpt;
 	global $treatments_cpt;
+	global $ancestors_ontology_farthest;
 
 	// Ancestors
 	$ancestors = get_post_ancestors($page_id); // Get all ancestors
@@ -5042,4 +5043,227 @@ if ( !function_exists('array_is_list') ) {
 	
 		return true;
 	}
+}
+
+// Construct UAMS Text & Image Overlay Block
+function uamswp_section_text_image_overlay() {
+
+	// Bring in variables from outside of the function
+	global $text_image_overlay_id; // Section ID attribute value // string
+	global $text_image_overlay_row_0; // Values for the first item // arr
+	global $text_image_overlay_row_1; // Values for the second item // arr
+
+	include( UAMS_FAD_PATH . '/templates/parts/section_text-image-overlay.php' );
+
+}
+
+// Construct UAMS Text & Image Overlay Block on Ontology Fake Subpages
+function uamswp_fad_fpage_text_image_overlay() {
+
+	// Bring in variables from outside of the function
+	global $text_image_overlay_id; // Section ID attribute value // string
+	global $text_image_overlay_row_0; // Values for the first item // arr
+	global $text_image_overlay_row_1; // Values for the second item // arr
+	global $current_fpage; // Fake subpage slug // str
+	global $page_top_level_query; // Get whether this fake subpage's parent item is the top-level item // bool
+
+	$text_image_overlay_color_auto = array( 'bg-blue', 'bg-green' );
+
+	// Create an array for storing the UAMS Text & Image Overlay Block item configuration arrays
+	$fpage_text_image_overlay = array();
+
+	// Create the array for the first UAMS Text & Image Overlay Block item
+	$main_archive = array();
+	$main_archive['button_target'] = true; // Query on whether to open the link in a new window/tab // bool
+
+	if ( $page_top_level_query ) {
+
+		// If the fake subpage's parent is not the top-level ontology item..
+
+		// Create the array for the second UAMS Text & Image Overlay Block item
+		$parent_archive = array();
+		$parent_archive['button_target'] = true; // Query on whether to open the link in a new window/tab // bool
+
+	}
+
+	$i = 0;
+
+	// Set the values of the arrays based on the context of each fake subpage
+	if ( $current_fpage == 'providers' ) {
+
+		// Providers fake subpage
+
+		if ( $page_top_level_query ) {
+
+			// If the fake subpage's parent is not the top-level ontology item..
+
+			// Set the values for the UAMS Text & Image Overlay Block item referencing the top-level ontology item's same fake subpage
+			$parent_archive['heading'] = ''; // Heading text, limited to 32 characters // str
+			$parent_archive['body'] = ''; // Body text, limited to 280 characters // str
+			$parent_archive['button_text'] = ''; // Link text, limited to 27 characters // str
+			$parent_archive['button_url'] = ''; // Full URL // str
+			$parent_archive['button_desc'] = $text_image_overlay_row_1['button_text'] . ', ' . $text_image_overlay_row_1['heading']; // Link ARIA label text // str
+			$parent_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
+			$parent_archive['image'] = ''; // Background image ID // int
+
+			$fpage_text_image_overlay[] = $parent_archive;
+
+			$i++;
+
+		}
+
+		// Set the values for the UAMS Text & Image Overlay Block item referencing the main archive for this fake subpage's post type
+		$main_archive['heading'] = ''; // Heading text, limited to 32 characters // str
+		$main_archive['body'] = ''; // Body text, limited to 280 characters // str
+		$main_archive['button_text'] = ''; // Link text, limited to 27 characters // str
+		$main_archive['button_url'] = ''; // Full URL // str
+		$main_archive['button_desc'] = $text_image_overlay_row_1['button_text'] . ', ' . $text_image_overlay_row_1['heading']; // Link ARIA label text // str
+		$main_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
+		$main_archive['image'] = ''; // Background image ID // int
+
+		$fpage_text_image_overlay[] = $main_archive;
+
+	} elseif ( $current_fpage == 'locations' ) {
+
+		// Locations fake subpage
+
+		if ( $page_top_level_query ) {
+
+			// If the fake subpage's parent is not the top-level ontology item..
+
+			// Set the values for the UAMS Text & Image Overlay Block item referencing the top-level ontology item's same fake subpage
+			$parent_archive['heading'] = ''; // Heading text, limited to 32 characters // str
+			$parent_archive['body'] = ''; // Body text, limited to 280 characters // str
+			$parent_archive['button_text'] = ''; // Link text, limited to 27 characters // str
+			$parent_archive['button_url'] = ''; // Full URL // str
+			$parent_archive['button_desc'] = $text_image_overlay_row_1['button_text'] . ', ' . $text_image_overlay_row_1['heading']; // Link ARIA label text // str
+			$parent_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
+			$parent_archive['image'] = ''; // Background image ID // int
+
+			$fpage_text_image_overlay[] = $parent_archive;
+
+			$i++;
+
+		}
+
+		// Set the values for the UAMS Text & Image Overlay Block item referencing the main archive for this fake subpage's post type
+		$main_archive['heading'] = ''; // Heading text, limited to 32 characters // str
+		$main_archive['body'] = ''; // Body text, limited to 280 characters // str
+		$main_archive['button_text'] = ''; // Link text, limited to 27 characters // str
+		$main_archive['button_url'] = ''; // Full URL // str
+		$main_archive['button_desc'] = $text_image_overlay_row_1['button_text'] . ', ' . $text_image_overlay_row_1['heading']; // Link ARIA label text // str
+		$main_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
+		$main_archive['image'] = ''; // Background image ID // int
+
+		$fpage_text_image_overlay[] = $main_archive;
+
+	} elseif ( $current_fpage == 'specialties' ) {
+
+		// Descendant Areas of Expertise fake subpage
+
+		if ( $page_top_level_query ) {
+
+			// If the fake subpage's parent is not the top-level ontology item..
+
+			// Set the values for the UAMS Text & Image Overlay Block item referencing the top-level ontology item's same fake subpage
+			$parent_archive['heading'] = ''; // Heading text, limited to 32 characters // str
+			$parent_archive['body'] = ''; // Body text, limited to 280 characters // str
+			$parent_archive['button_text'] = ''; // Link text, limited to 27 characters // str
+			$parent_archive['button_url'] = ''; // Full URL // str
+			$parent_archive['button_desc'] = $text_image_overlay_row_1['button_text'] . ', ' . $text_image_overlay_row_1['heading']; // Link ARIA label text // str
+			$parent_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
+			$parent_archive['image'] = ''; // Background image ID // int
+
+			$fpage_text_image_overlay[] = $parent_archive;
+
+			$i++;
+
+		}
+
+		// Set the values for the UAMS Text & Image Overlay Block item referencing the main archive for this fake subpage's post type
+		$main_archive['heading'] = ''; // Heading text, limited to 32 characters // str
+		$main_archive['body'] = ''; // Body text, limited to 280 characters // str
+		$main_archive['button_text'] = ''; // Link text, limited to 27 characters // str
+		$main_archive['button_url'] = ''; // Full URL // str
+		$main_archive['button_desc'] = $text_image_overlay_row_1['button_text'] . ', ' . $text_image_overlay_row_1['heading']; // Link ARIA label text // str
+		$main_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
+		$main_archive['image'] = ''; // Background image ID // int
+
+		$fpage_text_image_overlay[] = $main_archive;
+
+	} elseif ( $current_fpage == 'related' ) {
+
+		// Related Areas of Expertise fake subpage
+
+		if ( $page_top_level_query ) {
+
+			// If the fake subpage's parent is not the top-level ontology item..
+
+			// Set the values for the UAMS Text & Image Overlay Block item referencing the top-level ontology item's same fake subpage
+			$parent_archive['heading'] = ''; // Heading text, limited to 32 characters // str
+			$parent_archive['body'] = ''; // Body text, limited to 280 characters // str
+			$parent_archive['button_text'] = ''; // Link text, limited to 27 characters // str
+			$parent_archive['button_url'] = ''; // Full URL // str
+			$parent_archive['button_desc'] = $text_image_overlay_row_1['button_text'] . ', ' . $text_image_overlay_row_1['heading']; // Link ARIA label text // str
+			$parent_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
+			$parent_archive['image'] = ''; // Background image ID // int
+
+			$fpage_text_image_overlay[] = $parent_archive;
+
+			$i++;
+
+		}
+
+		// Set the values for the UAMS Text & Image Overlay Block item referencing the main archive for this fake subpage's post type
+		$main_archive['heading'] = ''; // Heading text, limited to 32 characters // str
+		$main_archive['body'] = ''; // Body text, limited to 280 characters // str
+		$main_archive['button_text'] = ''; // Link text, limited to 27 characters // str
+		$main_archive['button_url'] = ''; // Full URL // str
+		$main_archive['button_desc'] = $text_image_overlay_row_1['button_text'] . ', ' . $text_image_overlay_row_1['heading']; // Link ARIA label text // str
+		$main_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
+		$main_archive['image'] = ''; // Background image ID // int
+
+		$fpage_text_image_overlay[] = $main_archive;
+
+	} elseif ( $current_fpage == 'resources' ) {
+
+		// Clinical Resources fake subpage
+
+		if ( $page_top_level_query ) {
+
+			// If the fake subpage's parent is not the top-level ontology item..
+
+			// Set the values for the UAMS Text & Image Overlay Block item referencing the top-level ontology item's same fake subpage
+			$parent_archive['heading'] = ''; // Heading text, limited to 32 characters // str
+			$parent_archive['body'] = ''; // Body text, limited to 280 characters // str
+			$parent_archive['button_text'] = ''; // Link text, limited to 27 characters // str
+			$parent_archive['button_url'] = ''; // Full URL // str
+			$parent_archive['button_desc'] = $text_image_overlay_row_1['button_text'] . ', ' . $text_image_overlay_row_1['heading']; // Link ARIA label text // str
+			$parent_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
+			$parent_archive['image'] = ''; // Background image ID // int
+
+			$fpage_text_image_overlay[] = $parent_archive;
+
+			$i++;
+
+		}
+
+		// Set the values for the UAMS Text & Image Overlay Block item referencing the main archive for this fake subpage's post type
+		$main_archive['heading'] = ''; // Heading text, limited to 32 characters // str
+		$main_archive['body'] = ''; // Body text, limited to 280 characters // str
+		$main_archive['button_text'] = ''; // Link text, limited to 27 characters // str
+		$main_archive['button_url'] = ''; // Full URL // str
+		$main_archive['button_desc'] = $text_image_overlay_row_1['button_text'] . ', ' . $text_image_overlay_row_1['heading']; // Link ARIA label text // str
+		$main_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
+		$main_archive['image'] = ''; // Background image ID // int
+
+		$fpage_text_image_overlay[] = $main_archive;
+
+	}
+
+	$text_image_overlay_row_0 = $fpage_text_image_overlay[0] ? $fpage_text_image_overlay[0] : '';
+	$text_image_overlay_row_1 = $fpage_text_image_overlay[1] ? $fpage_text_image_overlay[1] : '';
+
+	// Call the main function to construct UAMS Text & Image Overlay Block
+	uamswp_section_text_image_overlay();
 }
