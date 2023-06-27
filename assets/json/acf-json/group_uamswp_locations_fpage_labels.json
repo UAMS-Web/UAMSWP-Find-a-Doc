@@ -316,9 +316,9 @@
 			"acfe_textarea_code": 0
 		},
 		{
-			"key": "field_location_fpage_featured_image_location",
+			"key": "field_location_descendant_fpage_featured_image_location",
 			"label": "Featured Image of Fake Subpage for Descendant Locations in Location Subsection",
-			"name": "location_fpage_featured_image_location",
+			"name": "location_descendant_fpage_featured_image_location",
 			"type": "image",
 			"instructions": "If you leave this blank, the general placement image will be used.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
 			"required": 0,
