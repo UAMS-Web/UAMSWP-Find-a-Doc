@@ -260,7 +260,7 @@ if ( ! function_exists('conditions_cpt') ) {
 		$args = array(
 			'label' => 'Conditions',
 			'labels' => $labels,
-			'supports' => array( 'title', 'editor', 'author', 'thumbnail','revisions','custom-fields' ),
+			'supports' => array( 'title', 'editor', 'author', 'revisions','custom-fields' ),
 			'taxonomies' => array( ),
 			'hierarchical' => false,
 			'public' => true,
@@ -332,7 +332,7 @@ if ( ! function_exists('treatments_cpt') ) {
 		$args = array(
 			'label' => 'Treatments & Procedures',
 			'labels' => $labels,
-			'supports' => array( 'title', 'editor', 'author', 'thumbnail','revisions','custom-fields' ),
+			'supports' => array( 'title', 'editor', 'author', 'revisions','custom-fields' ),
 			'taxonomies' => array( ),
 			'hierarchical' => false,
 			'public' => true,
