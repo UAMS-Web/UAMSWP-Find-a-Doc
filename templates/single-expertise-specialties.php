@@ -63,6 +63,9 @@ $fpage_intro_attr = uamswp_attr_conversion($fpage_intro); // Attribute-friendly 
 // Get site header and site nav values for ontology subsections
 uamswp_fad_ontology_site_values();
 
+// Get whether this fake subpage's parent item is the top-level item
+$page_top_level_query = $page_id == $ancestors_ontology_farthest; // bool
+
 // Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
 
 	// Query for whether related providers content section should be displayed on ontology pages/subsections
