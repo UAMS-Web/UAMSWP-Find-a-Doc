@@ -5776,78 +5776,27 @@ function uamswp_fad_fpage_text_image_overlay() {
 	$i = 0;
 
 	// Set the values of the arrays based on the context of each fake subpage
-	if ( $current_fpage == 'providers' ) {
+	if (
+		$current_fpage == 'providers'
+		||
+		$current_fpage == 'locations'
+		||
+		$current_fpage == 'specialties'
+		||
+		$current_fpage == 'resources'
+		) {
 
 		// Providers fake subpage
-
-		if ( $page_top_level_query ) {
-
-			// If the fake subpage's parent is not the top-level ontology item..
-
-			// Set the values for the UAMS Text & Image Overlay Block item referencing the top-level ontology item's same fake subpage
-			$parent_archive['heading'] = ''; // Heading text, limited to 32 characters // str
-			$parent_archive['body'] = 'Discover our esteemed team of [providers] within the vast field of [Area of Expertise Title], delivering comprehensive care for UAMS Health patients. Explore our diverse roster of experts of various [descendant areas of expertise] within [Area of Expertise Title].'; // Body text, limited to 280 characters // str
-			$parent_archive['button_text'] = ''; // Link text, limited to 27 characters // str
-			$parent_archive['button_url'] = ''; // Full URL // str
-			$parent_archive['button_desc'] = $text_image_overlay_row_1['button_text'] . ', ' . $text_image_overlay_row_1['heading']; // Link ARIA label text // str
-			$parent_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
-			$parent_archive['image'] = ''; // Background image ID // int
-
-			$fpage_text_image_overlay[] = $parent_archive;
-
-			$i++;
-
-		}
-
-		// Set the values for the UAMS Text & Image Overlay Block item referencing the main archive for this fake subpage's post type
-		$main_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
-
-		$fpage_text_image_overlay[] = $main_archive;
-
-	} elseif ( $current_fpage == 'locations' ) {
-
 		// Locations fake subpage
-
-		if ( $page_top_level_query ) {
-
-			// If the fake subpage's parent is not the top-level ontology item..
-
-			// Set the values for the UAMS Text & Image Overlay Block item referencing the top-level ontology item's same fake subpage
-			$parent_archive['heading'] = ''; // Heading text, limited to 32 characters // str
-			$parent_archive['body'] = ''; // Body text, limited to 280 characters // str
-			$parent_archive['button_text'] = ''; // Link text, limited to 27 characters // str
-			$parent_archive['button_url'] = ''; // Full URL // str
-			$parent_archive['button_desc'] = $text_image_overlay_row_1['button_text'] . ', ' . $text_image_overlay_row_1['heading']; // Link ARIA label text // str
-			$parent_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
-			$parent_archive['image'] = ''; // Background image ID // int
-
-			$fpage_text_image_overlay[] = $parent_archive;
-
-			$i++;
-
-		}
-
-		// Set the values for the UAMS Text & Image Overlay Block item referencing the main archive for this fake subpage's post type
-		$main_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
-
-		$fpage_text_image_overlay[] = $main_archive;
-
-	} elseif ( $current_fpage == 'specialties' ) {
-
 		// Descendant Areas of Expertise fake subpage
+		// Clinical Resources fake subpage
 
 		if ( $page_top_level_query ) {
 
 			// If the fake subpage's parent is not the top-level ontology item..
 
 			// Set the values for the UAMS Text & Image Overlay Block item referencing the top-level ontology item's same fake subpage
-			$parent_archive['heading'] = ''; // Heading text, limited to 32 characters // str
-			$parent_archive['body'] = ''; // Body text, limited to 280 characters // str
-			$parent_archive['button_text'] = ''; // Link text, limited to 27 characters // str
-			$parent_archive['button_url'] = ''; // Full URL // str
-			$parent_archive['button_desc'] = $text_image_overlay_row_1['button_text'] . ', ' . $text_image_overlay_row_1['heading']; // Link ARIA label text // str
 			$parent_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
-			$parent_archive['image'] = ''; // Background image ID // int
 
 			$fpage_text_image_overlay[] = $parent_archive;
 
@@ -5863,34 +5812,6 @@ function uamswp_fad_fpage_text_image_overlay() {
 	} elseif ( $current_fpage == 'related' ) {
 
 		// Related Areas of Expertise fake subpage
-
-		// Set the values for the UAMS Text & Image Overlay Block item referencing the main archive for this fake subpage's post type
-		$main_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
-
-		$fpage_text_image_overlay[] = $main_archive;
-
-	} elseif ( $current_fpage == 'resources' ) {
-
-		// Clinical Resources fake subpage
-
-		if ( $page_top_level_query ) {
-
-			// If the fake subpage's parent is not the top-level ontology item..
-
-			// Set the values for the UAMS Text & Image Overlay Block item referencing the top-level ontology item's same fake subpage
-			$parent_archive['heading'] = ''; // Heading text, limited to 32 characters // str
-			$parent_archive['body'] = ''; // Body text, limited to 280 characters // str
-			$parent_archive['button_text'] = ''; // Link text, limited to 27 characters // str
-			$parent_archive['button_url'] = ''; // Full URL // str
-			$parent_archive['button_desc'] = $text_image_overlay_row_1['button_text'] . ', ' . $text_image_overlay_row_1['heading']; // Link ARIA label text // str
-			$parent_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
-			$parent_archive['image'] = ''; // Background image ID // int
-
-			$fpage_text_image_overlay[] = $parent_archive;
-
-			$i++;
-
-		}
 
 		// Set the values for the UAMS Text & Image Overlay Block item referencing the main archive for this fake subpage's post type
 		$main_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
