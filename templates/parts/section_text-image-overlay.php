@@ -42,24 +42,24 @@ $text_image_overlay_id = ( isset($text_image_overlay_id) && !empty($text_image_o
 $text_image_overlay_rows = array();
 $text_image_overlay_row_0 = ( isset($text_image_overlay_row_0) && !empty($text_image_overlay_row_0) ) ? $text_image_overlay_row_0 : '';
 if ( $text_image_overlay_row_0 ) {
-	$text_image_overlay_row_0['heading'] = ( isset($text_image_overlay_row_0['heading']) && !empty($text_image_overlay_row_0['heading']) ) ? $text_image_overlay_row_0['heading'] : '';
-	$text_image_overlay_row_0['body'] = ( isset($text_image_overlay_row_0['body']) && !empty($text_image_overlay_row_0['body']) ) ? $text_image_overlay_row_0['body'] : '';
-	$text_image_overlay_row_0['button_text'] = ( isset($text_image_overlay_row_0['button_text']) && !empty($text_image_overlay_row_0['button_text']) ) ? $text_image_overlay_row_0['button_text'] : '';
+	$text_image_overlay_row_0['heading'] = ( isset($text_image_overlay_row_0['heading']) && !empty($text_image_overlay_row_0['heading']) ) ? uamswp_fad_fpage_text_replace($text_image_overlay_row_0['heading']) : '';
+	$text_image_overlay_row_0['body'] = ( isset($text_image_overlay_row_0['body']) && !empty($text_image_overlay_row_0['body']) ) ? uamswp_fad_fpage_text_replace($text_image_overlay_row_0['body']) : '';
+	$text_image_overlay_row_0['button_text'] = ( isset($text_image_overlay_row_0['button_text']) && !empty($text_image_overlay_row_0['button_text']) ) ? uamswp_fad_fpage_text_replace($text_image_overlay_row_0['button_text']) : '';
 	$text_image_overlay_row_0['button_url'] = ( isset($text_image_overlay_row_0['button_url']) && !empty($text_image_overlay_row_0['button_url']) ) ? $text_image_overlay_row_0['button_url'] : '';
 	$text_image_overlay_row_0['button_target'] = ( isset($text_image_overlay_row_0['button_target']) && !empty($text_image_overlay_row_0['button_target']) ) ? $text_image_overlay_row_0['button_target'] : '';
-	$text_image_overlay_row_0['button_desc'] = ( isset($text_image_overlay_row_0['button_desc']) && !empty($text_image_overlay_row_0['button_desc']) ) ? uamswp_attr_conversion($text_image_overlay_row_0['button_desc']) : '';
+	$text_image_overlay_row_0['button_desc'] = ( isset($text_image_overlay_row_0['button_desc']) && !empty($text_image_overlay_row_0['button_desc']) ) ? uamswp_attr_conversion(uamswp_fad_fpage_text_replace($text_image_overlay_row_0['button_desc'])) : '';
 	$text_image_overlay_row_0['background_color'] = ( isset($text_image_overlay_row_0['background_color']) && !empty($text_image_overlay_row_0['background_color']) && in_array( $text_image_overlay_row_0['background_color'], $text_image_overlay_color ) ) ? $text_image_overlay_row_0['background_color'] : '';
 	$text_image_overlay_row_0['image'] = ( isset($text_image_overlay_row_0['image']) && !empty($text_image_overlay_row_0['image']) ) ? $text_image_overlay_row_0['image'] : '';
 	$text_image_overlay_rows[] = $text_image_overlay_row_0;
 }
 $text_image_overlay_row_1 = ( isset($text_image_overlay_row_1) && !empty($text_image_overlay_row_1) ) ? $text_image_overlay_row_1 : '';
 if ( $text_image_overlay_row_1 ) {
-	$text_image_overlay_row_1['heading'] = ( isset($text_image_overlay_row_1['heading']) && !empty($text_image_overlay_row_1['heading']) ) ? $text_image_overlay_row_1['heading'] : '';
-	$text_image_overlay_row_1['body'] = ( isset($text_image_overlay_row_1['body']) && !empty($text_image_overlay_row_1['body']) ) ? $text_image_overlay_row_1['body'] : '';
-	$text_image_overlay_row_1['button_text'] = ( isset($text_image_overlay_row_1['button_text']) && !empty($text_image_overlay_row_1['button_text']) ) ? $text_image_overlay_row_1['button_text'] : '';
+	$text_image_overlay_row_1['heading'] = ( isset($text_image_overlay_row_1['heading']) && !empty($text_image_overlay_row_1['heading']) ) ? uamswp_fad_fpage_text_replace($text_image_overlay_row_1['heading']) : '';
+	$text_image_overlay_row_1['body'] = ( isset($text_image_overlay_row_1['body']) && !empty($text_image_overlay_row_1['body']) ) ? uamswp_fad_fpage_text_replace($text_image_overlay_row_1['body']) : '';
+	$text_image_overlay_row_1['button_text'] = ( isset($text_image_overlay_row_1['button_text']) && !empty($text_image_overlay_row_1['button_text']) ) ? uamswp_fad_fpage_text_replace($text_image_overlay_row_1['button_text']) : '';
 	$text_image_overlay_row_1['button_url'] = ( isset($text_image_overlay_row_1['button_url']) && !empty($text_image_overlay_row_1['button_url']) ) ? $text_image_overlay_row_1['button_url'] : '';
 	$text_image_overlay_row_1['button_target'] = ( isset($text_image_overlay_row_1['button_target']) && !empty($text_image_overlay_row_1['button_target']) ) ? $text_image_overlay_row_1['button_target'] : '';
-	$text_image_overlay_row_1['button_desc'] = ( isset($text_image_overlay_row_1['button_desc']) && !empty($text_image_overlay_row_1['button_desc']) ) ? uamswp_attr_conversion($text_image_overlay_row_1['button_desc']) : '';
+	$text_image_overlay_row_1['button_desc'] = ( isset($text_image_overlay_row_1['button_desc']) && !empty($text_image_overlay_row_1['button_desc']) ) ? uamswp_attr_conversion(uamswp_fad_fpage_text_replace($text_image_overlay_row_1['button_desc'])) : '';
 	$text_image_overlay_row_1['background_color'] = ( isset($text_image_overlay_row_1['background_color']) && !empty($text_image_overlay_row_1['background_color']) && in_array( $text_image_overlay_row_1['background_color'], $text_image_overlay_color ) ) ? $text_image_overlay_row_1['background_color'] : '';
 	$text_image_overlay_row_1['image'] = ( isset($text_image_overlay_row_1['image']) && !empty($text_image_overlay_row_1['image']) ) ? $text_image_overlay_row_1['image'] : '';
 	$text_image_overlay_rows[] = $text_image_overlay_row_1;
