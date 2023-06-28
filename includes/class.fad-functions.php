@@ -2858,9 +2858,9 @@ function uamswp_fad_fpage_text_replace($string) {
 			// Make variables available outside of the function
 			global $clinical_resource_fpage_title_general;
 			global $clinical_resource_fpage_intro_general;
-			global $provider_fpage_ref_main_title_general;
-			global $provider_fpage_ref_main_intro_general;
-			global $provider_fpage_ref_main_link_general;
+			global $clinical_resource_fpage_ref_main_title_general;
+			global $clinical_resource_fpage_ref_main_intro_general;
+			global $clinical_resource_fpage_ref_main_link_general;
 			global $clinical_resource_fpage_more_text_general;
 			global $clinical_resource_fpage_more_link_text_general;
 			global $clinical_resource_fpage_more_link_descr_general;
