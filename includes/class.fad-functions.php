@@ -5763,7 +5763,13 @@ function uamswp_fad_fpage_text_image_overlay() {
 
 		// Create the array for the second UAMS Text & Image Overlay Block item
 		$parent_archive = array();
+		$parent_archive['heading'] = $text_image_overlay_parent_archive[$current_fpage]['heading']; // Heading text, limited to 32 characters // str
+		$parent_archive['body'] = $text_image_overlay_parent_archive[$current_fpage]['body']; // Body text, limited to 280 characters // str
+		$parent_archive['button_text'] = $text_image_overlay_parent_archive[$current_fpage]['button_text']; // Link text, limited to 27 characters // str
+		$parent_archive['button_url'] = $text_image_overlay_parent_archive[$current_fpage]['button_url']; // Full URL // str
 		$parent_archive['button_target'] = true; // Query on whether to open the link in a new window/tab // bool
+		$parent_archive['button_desc'] = $parent_archive['button_text'] . ', ' . $parent_archive['heading']; // Link ARIA label text // str
+		$parent_archive['image'] = $text_image_overlay_parent_archive[$current_fpage]['image']; // Background image ID // int
 
 	}
 
