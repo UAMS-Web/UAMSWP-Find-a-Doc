@@ -4281,6 +4281,8 @@ function uamswp_fad_podcast() {
 				$condition_treatment_fpage_intro_clinical_resource = $condition_treatment_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_clinical_resource) : ''; // Intro text
 		}
 
+// Define variables for Find-a-Doc Settings values regarding ontology image elements on fake subpages and single profiles
+
 	// Get field values from Find-a-Doc Settings for ontology image elements in general placements of fake subpages or sections
 
 		// Get system settings for general values of ontology image elements of fake subpage or section for Providers
