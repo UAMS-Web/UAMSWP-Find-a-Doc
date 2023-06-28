@@ -7,7 +7,7 @@
 uamswp_fad_labels_expertise();
 
 // Get system settings for Areas of Expertise Archive Page
-uamswp_fad_archive_expertise();
+uamswp_fad_archive_text_expertise();
 // $expertise_archive_link = get_post_type_archive_link( get_query_var('post_type') );
 
 // Override theme's method of defining the meta page title

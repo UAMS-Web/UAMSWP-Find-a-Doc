@@ -16,7 +16,7 @@
  * 		$treatment_single_name_attr // string
  * 		$treatment_plural_name // string
  * 		$treatment_plural_name_attr // string
- * 	// Vars defined in uamswp_fad_treatment_fpage_text_general()
+ * 	// Vars defined in uamswp_fad_fpage_text_treatment_general()
  * 		$treatment_fpage_title_general // string
  * 		$treatment_fpage_intro_general // string
  * 	// Vars defined in uamswp_fad_treatment_query()
@@ -75,7 +75,7 @@ if ( $treatment_section_show ) {
 		if ( !isset($treatment_section_title) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($treatment_fpage_title_general) ) {
-				uamswp_fad_treatment_fpage_text_general();
+				uamswp_fad_fpage_text_treatment_general();
 				global $treatment_fpage_title_general;
 			}
 			$treatment_section_title = $treatment_fpage_title_general;
@@ -83,7 +83,7 @@ if ( $treatment_section_show ) {
 		if ( !isset($treatment_section_intro) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($treatment_fpage_intro_general) ) {
-				uamswp_fad_treatment_fpage_text_general();
+				uamswp_fad_fpage_text_treatment_general();
 				global $treatment_fpage_intro_general;
 			}
 			$treatment_section_intro = $treatment_fpage_intro_general;

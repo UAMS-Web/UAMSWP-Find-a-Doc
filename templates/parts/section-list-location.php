@@ -16,7 +16,7 @@
  * 		$location_single_name_attr // string
  * 		$location_plural_name // string
  * 		$location_plural_name_attr // string
- * 	// Defined in uamswp_fad_location_fpage_text_general()
+ * 	// Defined in uamswp_fad_fpage_text_location_general()
  * 		$location_fpage_title_general // string
  * 		$location_fpage_intro_general // string
  * 	// Defined on the template or in a function such as uamswp_fad_location_query()
@@ -52,7 +52,7 @@ if ( $location_section_show ) {
 		if ( !isset($location_section_title) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($location_fpage_title_general) ) {
-				uamswp_fad_location_fpage_text_general();
+				uamswp_fad_fpage_text_location_general();
 				global $location_fpage_title_general;
 			}
 			$location_section_title = $location_fpage_title_general;
@@ -60,7 +60,7 @@ if ( $location_section_show ) {
 		if ( !isset($location_section_intro) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($location_fpage_intro_general) ) {
-				uamswp_fad_location_fpage_text_general();
+				uamswp_fad_fpage_text_location_general();
 				global $location_fpage_intro_general;
 			}
 			$location_section_intro = $location_fpage_intro_general;

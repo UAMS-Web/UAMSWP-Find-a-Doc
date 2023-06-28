@@ -2097,7 +2097,7 @@ function uamswp_fad_fpage_text_replace($string) {
 		global $placeholder_provider_short_name;
 		global $placeholder_provider_short_name_possessive;
 
-		// Defined in uamswp_fad_archive_provider()
+		// Defined in uamswp_fad_archive_text_provider()
 		global $placeholder_provider_archive_headline;
 		global $provider_archive_headline;
 
@@ -2115,7 +2115,7 @@ function uamswp_fad_fpage_text_replace($string) {
 		global $placeholder_location_descendant_plural_name;
 		global $location_descendant_plural_name;
 
-		// Defined in uamswp_fad_archive_location()
+		// Defined in uamswp_fad_archive_text_location()
 		global $placeholder_location_archive_headline;
 		global $location_archive_headline;
 
@@ -2132,7 +2132,7 @@ function uamswp_fad_fpage_text_replace($string) {
 		global $placeholder_expertise_descendant_plural_name;
 		global $expertise_descendant_plural_name;
 
-		// Defined in uamswp_fad_archive_expertise()
+		// Defined in uamswp_fad_archive_text_expertise()
 		global $placeholder_expertise_archive_headline;
 		global $expertise_archive_headline;
 		global $placeholder_expertise_archive_intro_text;
@@ -2144,7 +2144,7 @@ function uamswp_fad_fpage_text_replace($string) {
 		global $placeholder_clinical_resource_plural_name;
 		global $clinical_resource_plural_name;
 
-		// Defined in uamswp_fad_archive_clinical_resource()
+		// Defined in uamswp_fad_archive_text_clinical_resource()
 		global $placeholder_clinical_resource_archive_headline;
 		global $clinical_resource_archive_headline;
 
@@ -2166,7 +2166,7 @@ function uamswp_fad_fpage_text_replace($string) {
 		global $placeholder_condition_plural_name;
 		global $condition_plural_name;
 
-		// Defined in uamswp_fad_archive_condition()
+		// Defined in uamswp_fad_archive_text_condition()
 		global $placeholder_condition_archive_headline;
 		global $condition_archive_headline;
 		global $placeholder_condition_archive_intro_text;
@@ -2178,7 +2178,7 @@ function uamswp_fad_fpage_text_replace($string) {
 		global $placeholder_treatment_plural_name;
 		global $treatment_plural_name;
 
-		// Defined in uamswp_fad_archive_treatment()
+		// Defined in uamswp_fad_archive_text_treatment()
 		global $placeholder_treatment_archive_headline;
 		global $treatment_archive_headline;
 		global $placeholder_treatment_archive_intro_text;
@@ -2597,7 +2597,7 @@ function uamswp_fad_fpage_text_replace($string) {
 // Define variables for Find-a-Doc Settings values regarding ontology archive page text
 
 	// Get system settings for provider archive page text
-	function uamswp_fad_archive_provider() {
+	function uamswp_fad_archive_text_provider() {
 		// Make variables available outside of the function
 		global $provider_archive_headline;
 		global $provider_archive_headline_attr;
@@ -2611,7 +2611,7 @@ function uamswp_fad_fpage_text_replace($string) {
 	}
 
 	// Get system settings for location archive page text
-	function uamswp_fad_archive_location() {
+	function uamswp_fad_archive_text_location() {
 		// Make variables available outside of the function
 		global $location_archive_headline;
 		global $location_archive_headline_attr;
@@ -2625,7 +2625,7 @@ function uamswp_fad_fpage_text_replace($string) {
 	}
 
 	// Get system settings for area of expertise archive page text
-	function uamswp_fad_archive_expertise() {
+	function uamswp_fad_archive_text_expertise() {
 		// Make variables available outside of the function
 		global $expertise_archive_headline;
 		global $expertise_archive_headline_attr;
@@ -2643,7 +2643,7 @@ function uamswp_fad_fpage_text_replace($string) {
 	}
 
 	// Get system settings for clinical resource archive page text
-	function uamswp_fad_archive_clinical_resource() {
+	function uamswp_fad_archive_text_clinical_resource() {
 		// Make variables available outside of the function
 		global $clinical_resource_archive_headline;
 		global $clinical_resource_archive_headline_attr;
@@ -2657,7 +2657,7 @@ function uamswp_fad_fpage_text_replace($string) {
 	}
 
 	// Get system settings for condition archive page text
-	function uamswp_fad_archive_condition() {
+	function uamswp_fad_archive_text_condition() {
 		// Make variables available outside of the function
 		global $condition_archive_headline;
 		global $condition_archive_headline_attr;
@@ -2675,7 +2675,7 @@ function uamswp_fad_fpage_text_replace($string) {
 	}
 
 	// Get system settings for treatment archive page text
-	function uamswp_fad_archive_treatment() {
+	function uamswp_fad_archive_text_treatment() {
 		// Make variables available outside of the function
 		global $treatment_archive_headline;
 		global $treatment_archive_headline_attr;
@@ -2697,7 +2697,7 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get field values from Find-a-Doc Settings for ontology text elements in general placements
 
 		// Get system settings for general values of ontology text elements on a fake subpage or section for Providers
-		function uamswp_fad_provider_fpage_text_general() {
+		function uamswp_fad_fpage_text_provider_general() {
 			// Make variables available outside of the function
 			global $provider_fpage_title_general;
 			global $provider_fpage_intro_general;
@@ -2716,7 +2716,7 @@ function uamswp_fad_fpage_text_replace($string) {
 		}
 
 		// Get system settings for general values of ontology text elements on a fake subpage or section for Locations
-		function uamswp_fad_location_fpage_text_general() {
+		function uamswp_fad_fpage_text_location_general() {
 			// Make variables available outside of the function
 			global $location_fpage_title_general;
 			global $location_fpage_intro_general;
@@ -2753,7 +2753,7 @@ function uamswp_fad_fpage_text_replace($string) {
 		}
 
 		// Get system settings for general values of ontology text elements on a fake subpage or section for Areas of Expertise
-		function uamswp_fad_expertise_fpage_text_general() {
+		function uamswp_fad_fpage_text_expertise_general() {
 			// Make variables available outside of the function
 			global $expertise_fpage_title_general;
 			global $expertise_fpage_intro_general;
@@ -2790,7 +2790,7 @@ function uamswp_fad_fpage_text_replace($string) {
 		}
 
 		// Get system settings for general values of ontology text elements on a fake subpage or section for Clinical Resources
-		function uamswp_fad_clinical_resource_fpage_text_general() {
+		function uamswp_fad_fpage_text_clinical_resource_general() {
 			// Make variables available outside of the function
 			global $clinical_resource_fpage_title_general;
 			global $clinical_resource_fpage_intro_general;
@@ -2832,7 +2832,7 @@ function uamswp_fad_fpage_text_replace($string) {
 		}
 
 		// Get system settings for general values of ontology text elements on a fake subpage or section for Conditions
-		function uamswp_fad_condition_fpage_text_general() {
+		function uamswp_fad_fpage_text_condition_general() {
 			// Make variables available outside of the function
 			global $condition_fpage_title_general;
 			global $condition_fpage_intro_general;
@@ -2851,7 +2851,7 @@ function uamswp_fad_fpage_text_replace($string) {
 		}
 
 		// Get system settings for general values of ontology text elements on a fake subpage or section for Treatments
-		function uamswp_fad_treatment_fpage_text_general() {
+		function uamswp_fad_fpage_text_treatment_general() {
 			// Make variables available outside of the function
 			global $treatment_fpage_title_general;
 			global $treatment_fpage_intro_general;
@@ -2870,7 +2870,7 @@ function uamswp_fad_fpage_text_replace($string) {
 		}
 
 		// Get system settings for general values of ontology text elements on a fake subpage or section for Conditions and Treatments combined
-		function uamswp_fad_condition_treatment_fpage_text_general() {
+		function uamswp_fad_fpage_text_condition_treatment_general() {
 			// Make variables available outside of the function
 			global $condition_treatment_fpage_title_general;
 			global $condition_treatment_fpage_intro_general;
@@ -2926,14 +2926,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 				if ( !isset($location_fpage_title_provider) || empty($location_fpage_title_provider) ) {
 					if ( !isset($location_fpage_title_general) || empty($location_fpage_title_general) ) {
-						uamswp_fad_location_fpage_text_general();
+						uamswp_fad_fpage_text_location_general();
 						global $location_fpage_title_general;
 					}
 					$location_fpage_title_provider = $location_fpage_title_general; // Title
 				}
 				if ( !isset($location_fpage_intro_provider) || empty($location_fpage_intro_provider) ) {
 					if ( !isset($location_fpage_intro_general) || empty($location_fpage_intro_general) ) {
-						uamswp_fad_location_fpage_text_general();
+						uamswp_fad_fpage_text_location_general();
 						global $location_fpage_intro_general;
 					}
 					$location_fpage_intro_provider = $location_fpage_intro_general; // Intro text
@@ -2958,14 +2958,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 				if ( !isset($expertise_fpage_title_provider) || empty($expertise_fpage_title_provider) ) {
 					if ( !isset($expertise_fpage_title_general) || empty($expertise_fpage_title_general) ) {
-						uamswp_fad_expertise_fpage_text_general();
+						uamswp_fad_fpage_text_expertise_general();
 						global $expertise_fpage_title_general;
 					}
 					$expertise_fpage_title_provider = $expertise_fpage_title_general; // Title
 				}
 				if ( !isset($expertise_fpage_intro_provider) || empty($expertise_fpage_intro_provider) ) {
 					if ( !isset($expertise_fpage_intro_general) || empty($expertise_fpage_intro_general) ) {
-						uamswp_fad_expertise_fpage_text_general();
+						uamswp_fad_fpage_text_expertise_general();
 						global $expertise_fpage_intro_general;
 					}
 					$expertise_fpage_intro_provider = $expertise_fpage_intro_general; // Intro text
@@ -3002,35 +3002,35 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 				if ( !isset($clinical_resource_fpage_title_provider) || empty($clinical_resource_fpage_title_provider) ) {
 					if ( !isset($clinical_resource_fpage_title_general) || empty($clinical_resource_fpage_title_general) ) {
-						uamswp_fad_clinical_resource_fpage_text_general();
+						uamswp_fad_fpage_text_clinical_resource_general();
 						global $clinical_resource_fpage_title_general;
 					}
 					$clinical_resource_fpage_title_provider = $clinical_resource_fpage_title_general; // Title
 				}
 				if ( !isset($clinical_resource_fpage_intro_provider) || empty($clinical_resource_fpage_intro_provider) ) {
 					if ( !isset($clinical_resource_fpage_intro_general) || empty($clinical_resource_fpage_intro_general) ) {
-						uamswp_fad_clinical_resource_fpage_text_general();
+						uamswp_fad_fpage_text_clinical_resource_general();
 						global $clinical_resource_fpage_intro_general;
 					}
 					$clinical_resource_fpage_intro_provider = $clinical_resource_fpage_intro_general; // Intro text
 				}
 				if ( !isset($clinical_resource_fpage_more_text_provider) || empty($clinical_resource_fpage_more_text_provider) ) {
 					if ( !isset($clinical_resource_fpage_more_text_general) || empty($clinical_resource_fpage_more_text_general) ) {
-						uamswp_fad_clinical_resource_fpage_text_general();
+						uamswp_fad_fpage_text_clinical_resource_general();
 						global $clinical_resource_fpage_more_text_general;
 					}
 					$clinical_resource_fpage_more_text_provider = $clinical_resource_fpage_more_text_general; // "More" intro text
 				}
 				if ( !isset($clinical_resource_fpage_more_link_text_provider) || empty($clinical_resource_fpage_more_link_text_provider) ) {
 					if ( !isset($clinical_resource_fpage_more_link_text_general) || empty($clinical_resource_fpage_more_link_text_general) ) {
-						uamswp_fad_clinical_resource_fpage_text_general();
+						uamswp_fad_fpage_text_clinical_resource_general();
 						global $clinical_resource_fpage_more_link_text_general;
 					}
 					$clinical_resource_fpage_more_link_text_provider = $clinical_resource_fpage_more_link_text_general; // "More" link text
 				}
 				if ( !isset($clinical_resource_fpage_more_link_descr_provider) || empty($clinical_resource_fpage_more_link_descr_provider) ) {
 					if ( !isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general) ) {
-						uamswp_fad_clinical_resource_fpage_text_general();
+						uamswp_fad_fpage_text_clinical_resource_general();
 						global $clinical_resource_fpage_more_link_descr_general;
 					}
 					$clinical_resource_fpage_more_link_descr_provider = $clinical_resource_fpage_more_link_descr_general; // "More" link description
@@ -3058,14 +3058,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 				if ( !isset($condition_fpage_title_provider) || empty($condition_fpage_title_provider) ) {
 					if ( !isset($condition_fpage_title_general) || empty($condition_fpage_title_general) ) {
-						uamswp_fad_condition_fpage_text_general();
+						uamswp_fad_fpage_text_condition_general();
 						global $condition_fpage_title_general;
 					}
 					$condition_fpage_title_provider = $condition_fpage_title_general; // Title
 				}
 				if ( !isset($condition_fpage_intro_provider) || empty($condition_fpage_intro_provider) ) {
 					if ( !isset($condition_fpage_intro_general) || empty($condition_fpage_intro_general) ) {
-						uamswp_fad_condition_fpage_text_general();
+						uamswp_fad_fpage_text_condition_general();
 						global $condition_fpage_intro_general;
 					}
 					$condition_fpage_intro_provider = $condition_fpage_intro_general; // Intro text
@@ -3090,14 +3090,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 				if ( !isset($treatment_fpage_title_provider) || empty($treatment_fpage_title_provider) ) {
 					if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
-						uamswp_fad_treatment_fpage_text_general();
+						uamswp_fad_fpage_text_treatment_general();
 						global $treatment_fpage_title_general;
 					}
 					$treatment_fpage_title_provider = $treatment_fpage_title_general; // Title
 				}
 				if ( !isset($treatment_fpage_intro_provider) || empty($treatment_fpage_intro_provider) ) {
 					if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
-						uamswp_fad_treatment_fpage_text_general();
+						uamswp_fad_fpage_text_treatment_general();
 						global $treatment_fpage_intro_general;
 					}
 					$treatment_fpage_intro_provider = $treatment_fpage_intro_general; // Intro text
@@ -3123,14 +3123,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 				if ( !isset($condition_treatment_fpage_title_provider) || empty($condition_treatment_fpage_title_provider) ) {
 					if ( !isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general) ) {
-						uamswp_fad_condition_treatment_fpage_text_general();
+						uamswp_fad_fpage_text_condition_treatment_general();
 						global $condition_treatment_fpage_title_general;
 					}
 					$condition_treatment_fpage_title_provider = $condition_treatment_fpage_title_general; // Title
 				}
 				if ( !isset($condition_treatment_fpage_intro_provider) || empty($condition_treatment_fpage_intro_provider) ) {
 					if ( !isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general) ) {
-						uamswp_fad_condition_treatment_fpage_text_general();
+						uamswp_fad_fpage_text_condition_treatment_general();
 						global $condition_treatment_fpage_intro_general;
 					}
 					$condition_treatment_fpage_intro_provider = $condition_treatment_fpage_intro_general; // Intro text
@@ -3177,14 +3177,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 				if ( !isset($provider_fpage_title_location) || empty($provider_fpage_title_location) ) {
 					if ( !isset($provider_fpage_title_general) || empty($provider_fpage_title_general) ) {
-						uamswp_fad_provider_fpage_text_general();
+						uamswp_fad_fpage_text_provider_general();
 						global $provider_fpage_title_general;
 					}
 					$provider_fpage_title_location = $provider_fpage_title_general; // Title
 				}
 				if ( !isset($provider_fpage_intro_location) || empty($provider_fpage_intro_location) ) {
 					if ( !isset($provider_fpage_intro_general) || empty($provider_fpage_intro_general) ) {
-						uamswp_fad_provider_fpage_text_general();
+						uamswp_fad_fpage_text_provider_general();
 						global $provider_fpage_intro_general;
 					}
 					$provider_fpage_intro_location = $provider_fpage_intro_general; // Intro text
@@ -3209,14 +3209,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 				if ( !isset($location_descendant_fpage_title_location) || empty($location_descendant_fpage_title_location) ) {
 					if ( !isset($location_descendant_fpage_title_general) || empty($location_descendant_fpage_title_general) ) {
-						uamswp_fad_location_fpage_text_general();
+						uamswp_fad_fpage_text_location_general();
 						global $location_descendant_fpage_title_general;
 					}
 					$location_descendant_fpage_title_location = $location_descendant_fpage_title_general; // Title
 				}
 				if ( !isset($location_descendant_fpage_intro_location) || empty($location_descendant_fpage_intro_location) ) {
 					if ( !isset($location_descendant_fpage_intro_general) || empty($location_descendant_fpage_intro_general) ) {
-						uamswp_fad_location_fpage_text_general();
+						uamswp_fad_fpage_text_location_general();
 						global $location_descendant_fpage_intro_general;
 					}
 					$location_descendant_fpage_intro_location = $location_descendant_fpage_intro_general; // Intro text
@@ -3241,14 +3241,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 				if ( !isset($expertise_fpage_title_location) || empty($expertise_fpage_title_location) ) {
 					if ( !isset($expertise_fpage_title_general) || empty($expertise_fpage_title_general) ) {
-						uamswp_fad_expertise_fpage_text_general();
+						uamswp_fad_fpage_text_expertise_general();
 						global $expertise_fpage_title_general;
 					}
 					$expertise_fpage_title_location = $expertise_fpage_title_general; // Title
 				}
 				if ( !isset($expertise_fpage_intro_location) || empty($expertise_fpage_intro_location) ) {
 					if ( !isset($expertise_fpage_intro_general) || empty($expertise_fpage_intro_general) ) {
-						uamswp_fad_expertise_fpage_text_general();
+						uamswp_fad_fpage_text_expertise_general();
 						global $expertise_fpage_intro_general;
 					}
 					$expertise_fpage_intro_location = $expertise_fpage_intro_general; // Intro text
@@ -3285,35 +3285,35 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 				if ( !isset($clinical_resource_fpage_title_location) || empty($clinical_resource_fpage_title_location) ) {
 					if ( !isset($clinical_resource_fpage_title_general) || empty($clinical_resource_fpage_title_general) ) {
-						uamswp_fad_clinical_resource_fpage_text_general();
+						uamswp_fad_fpage_text_clinical_resource_general();
 						global $clinical_resource_fpage_title_general;
 					}
 					$clinical_resource_fpage_title_location = $clinical_resource_fpage_title_general; // Title
 				}
 				if ( !isset($clinical_resource_fpage_intro_location) || empty($clinical_resource_fpage_intro_location) ) {
 					if ( !isset($clinical_resource_fpage_intro_general) || empty($clinical_resource_fpage_intro_general) ) {
-						uamswp_fad_clinical_resource_fpage_text_general();
+						uamswp_fad_fpage_text_clinical_resource_general();
 						global $clinical_resource_fpage_intro_general;
 					}
 					$clinical_resource_fpage_intro_location = $clinical_resource_fpage_intro_general; // Intro text
 				}
 				if ( !isset($clinical_resource_fpage_more_text_location) || empty($clinical_resource_fpage_more_text_location) ) {
 					if ( !isset($clinical_resource_fpage_more_text_general) || empty($clinical_resource_fpage_more_text_general) ) {
-						uamswp_fad_clinical_resource_fpage_text_general();
+						uamswp_fad_fpage_text_clinical_resource_general();
 						global $clinical_resource_fpage_more_text_general;
 					}
 					$clinical_resource_fpage_more_text_location = $clinical_resource_fpage_more_text_general; // "More" intro text
 				}
 				if ( !isset($clinical_resource_fpage_more_link_text_location) || empty($clinical_resource_fpage_more_link_text_location) ) {
 					if ( !isset($clinical_resource_fpage_more_link_text_general) || empty($clinical_resource_fpage_more_link_text_general) ) {
-						uamswp_fad_clinical_resource_fpage_text_general();
+						uamswp_fad_fpage_text_clinical_resource_general();
 						global $clinical_resource_fpage_more_link_text_general;
 					}
 					$clinical_resource_fpage_more_link_text_location = $clinical_resource_fpage_more_link_text_general; // "More" link text
 				}
 				if ( !isset($clinical_resource_fpage_more_link_descr_location) || empty($clinical_resource_fpage_more_link_descr_location) ) {
 					if ( !isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general) ) {
-						uamswp_fad_clinical_resource_fpage_text_general();
+						uamswp_fad_fpage_text_clinical_resource_general();
 						global $clinical_resource_fpage_more_link_descr_general;
 					}
 					$clinical_resource_fpage_more_link_descr_location = $clinical_resource_fpage_more_link_descr_general; // "More" link description
@@ -3341,14 +3341,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 				if ( !isset($condition_fpage_title_location) || empty($condition_fpage_title_location) ) {
 					if ( !isset($condition_fpage_title_general) || empty($condition_fpage_title_general) ) {
-						uamswp_fad_condition_fpage_text_general();
+						uamswp_fad_fpage_text_condition_general();
 						global $condition_fpage_title_general;
 					}
 					$condition_fpage_title_location = $condition_fpage_title_general; // Title
 				}
 				if ( !isset($condition_fpage_intro_location) || empty($condition_fpage_intro_location) ) {
 					if ( !isset($condition_fpage_intro_general) || empty($condition_fpage_intro_general) ) {
-						uamswp_fad_condition_fpage_text_general();
+						uamswp_fad_fpage_text_condition_general();
 						global $condition_fpage_intro_general;
 					}
 					$condition_fpage_intro_location = $condition_fpage_intro_general; // Intro text
@@ -3373,14 +3373,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 				if ( !isset($treatment_fpage_title_location) || empty($treatment_fpage_title_location) ) {
 					if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
-						uamswp_fad_treatment_fpage_text_general();
+						uamswp_fad_fpage_text_treatment_general();
 						global $treatment_fpage_title_general;
 					}
 					$treatment_fpage_title_location = $treatment_fpage_title_general; // Title
 				}
 				if ( !isset($treatment_fpage_intro_location) || empty($treatment_fpage_intro_location) ) {
 					if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
-						uamswp_fad_treatment_fpage_text_general();
+						uamswp_fad_fpage_text_treatment_general();
 						global $treatment_fpage_intro_general;
 					}
 					$treatment_fpage_intro_location = $treatment_fpage_intro_general; // Intro text
@@ -3406,14 +3406,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 				if ( !isset($condition_treatment_fpage_title_location) || empty($condition_treatment_fpage_title_location) ) {
 					if ( !isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general) ) {
-						uamswp_fad_condition_treatment_fpage_text_general();
+						uamswp_fad_fpage_text_condition_treatment_general();
 						global $condition_treatment_fpage_title_general;
 					}
 					$condition_treatment_fpage_title_location = $condition_treatment_fpage_title_general; // Title
 				}
 				if ( !isset($condition_treatment_fpage_intro_location) || empty($condition_treatment_fpage_intro_location) ) {
 					if ( !isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general) ) {
-						uamswp_fad_condition_treatment_fpage_text_general();
+						uamswp_fad_fpage_text_condition_treatment_general();
 						global $condition_treatment_fpage_intro_general;
 					}
 					$condition_treatment_fpage_intro_location = $condition_treatment_fpage_intro_general; // Intro text
@@ -3596,14 +3596,14 @@ function uamswp_fad_fpage_text_replace($string) {
 					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement of a provider subpage/section
 					if ( !isset($provider_fpage_title_expertise) || empty($provider_fpage_title_expertise) ) {
 						if ( !isset($provider_fpage_title_general) || empty($provider_fpage_title_general) ) {
-							uamswp_fad_provider_fpage_text_general();
+							uamswp_fad_fpage_text_provider_general();
 							global $provider_fpage_title_general;
 						}
 						$provider_fpage_title_expertise = $provider_fpage_title_general; // Title
 					}
 					if ( !isset($provider_fpage_intro_expertise) || empty($provider_fpage_intro_expertise) ) {
 						if ( !isset($provider_fpage_intro_general) || empty($provider_fpage_intro_general) ) {
-							uamswp_fad_provider_fpage_text_general();
+							uamswp_fad_fpage_text_provider_general();
 							global $provider_fpage_intro_general;
 						}
 						$provider_fpage_intro_expertise = $provider_fpage_intro_general; // Intro text
@@ -3649,14 +3649,14 @@ function uamswp_fad_fpage_text_replace($string) {
 					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement of a location subpage/section
 					if ( !isset($location_fpage_title_expertise) || empty($location_fpage_title_expertise) ) {
 						if ( !isset($provider_fpage_title_general) || empty($provider_fpage_title_general) ) {
-							uamswp_fad_provider_fpage_text_general();
+							uamswp_fad_fpage_text_provider_general();
 							global $provider_fpage_title_general;
 						}
 						$location_fpage_title_expertise = $provider_fpage_title_general; // Title
 					}
 					if ( !isset($location_fpage_intro_expertise) || empty($location_fpage_intro_expertise) ) {
 						if ( !isset($provider_fpage_intro_general) || empty($provider_fpage_intro_general) ) {
-							uamswp_fad_provider_fpage_text_general();
+							uamswp_fad_fpage_text_provider_general();
 							global $provider_fpage_intro_general;
 						}
 						$location_fpage_intro_expertise = $provider_fpage_intro_general; // Intro text
@@ -3702,14 +3702,14 @@ function uamswp_fad_fpage_text_replace($string) {
 					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement of a descendant areas of expertise subpage/section
 					if ( !isset($expertise_descendant_fpage_title_expertise) || empty($expertise_descendant_fpage_title_expertise) ) {
 						if ( !isset($expertise_fpage_title_general) || empty($expertise_fpage_title_general) ) {
-							uamswp_fad_expertise_fpage_text_general();
+							uamswp_fad_fpage_text_expertise_general();
 							global $expertise_fpage_title_general;
 						}
 						$expertise_descendant_fpage_title_expertise = $expertise_fpage_title_general; // Title
 					}
 					if ( !isset($expertise_descendant_fpage_intro_expertise) || empty($expertise_descendant_fpage_intro_expertise) ) {
 						if ( !isset($expertise_fpage_intro_general) || empty($expertise_fpage_intro_general) ) {
-							uamswp_fad_expertise_fpage_text_general();
+							uamswp_fad_fpage_text_expertise_general();
 							global $expertise_fpage_intro_general;
 						}
 						$expertise_descendant_fpage_intro_expertise = $expertise_fpage_intro_general; // Intro text
@@ -3755,14 +3755,14 @@ function uamswp_fad_fpage_text_replace($string) {
 					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement of a related areas of expertise subpage/section
 					if ( !isset($expertise_fpage_title_expertise) || empty($expertise_fpage_title_expertise) ) {
 						if ( !isset($expertise_fpage_title_general) || empty($expertise_fpage_title_general) ) {
-							uamswp_fad_expertise_fpage_text_general();
+							uamswp_fad_fpage_text_expertise_general();
 							global $expertise_fpage_title_general;
 						}
 						$expertise_fpage_title_expertise = $expertise_fpage_title_general; // Title
 					}
 					if ( !isset($expertise_fpage_intro_expertise) || empty($expertise_fpage_intro_expertise) ) {
 						if ( !isset($expertise_fpage_intro_general) || empty($expertise_fpage_intro_general) ) {
-							uamswp_fad_expertise_fpage_text_general();
+							uamswp_fad_fpage_text_expertise_general();
 							global $expertise_fpage_intro_general;
 						}
 						$expertise_fpage_intro_expertise = $expertise_fpage_intro_general; // Intro text
@@ -3820,35 +3820,35 @@ function uamswp_fad_fpage_text_replace($string) {
 					// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 					if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
 						if ( !isset($clinical_resource_fpage_title_general) || empty($clinical_resource_fpage_title_general) ) {
-							uamswp_fad_clinical_resource_fpage_text_general();
+							uamswp_fad_fpage_text_clinical_resource_general();
 							global $clinical_resource_fpage_title_general;
 						}
 						$clinical_resource_fpage_title_expertise = $clinical_resource_fpage_title_general; // Title
 					}
 					if ( !isset($clinical_resource_fpage_intro_expertise) || empty($clinical_resource_fpage_intro_expertise) ) {
 						if ( !isset($clinical_resource_fpage_intro_general) || empty($clinical_resource_fpage_intro_general) ) {
-							uamswp_fad_clinical_resource_fpage_text_general();
+							uamswp_fad_fpage_text_clinical_resource_general();
 							global $clinical_resource_fpage_intro_general;
 						}
 						$clinical_resource_fpage_intro_expertise = $clinical_resource_fpage_intro_general; // Intro text
 					}
 					if ( !isset($clinical_resource_fpage_more_text_expertise) || empty($clinical_resource_fpage_more_text_expertise) ) {
 						if ( !isset($clinical_resource_fpage_more_text_general) || empty($clinical_resource_fpage_more_text_general) ) {
-							uamswp_fad_clinical_resource_fpage_text_general();
+							uamswp_fad_fpage_text_clinical_resource_general();
 							global $clinical_resource_fpage_more_text_general;
 						}
 						$clinical_resource_fpage_more_text_expertise = $clinical_resource_fpage_more_text_general; // "More" intro text
 					}
 					if ( !isset($clinical_resource_fpage_more_link_text_expertise) || empty($clinical_resource_fpage_more_link_text_expertise) ) {
 						if ( !isset($clinical_resource_fpage_more_link_text_general) || empty($clinical_resource_fpage_more_link_text_general) ) {
-							uamswp_fad_clinical_resource_fpage_text_general();
+							uamswp_fad_fpage_text_clinical_resource_general();
 							global $clinical_resource_fpage_more_link_text_general;
 						}
 						$clinical_resource_fpage_more_link_text_expertise = $clinical_resource_fpage_more_link_text_general; // "More" link text
 					}
 					if ( !isset($clinical_resource_fpage_more_link_descr_expertise) || empty($clinical_resource_fpage_more_link_descr_expertise) ) {
 						if ( !isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general) ) {
-							uamswp_fad_clinical_resource_fpage_text_general();
+							uamswp_fad_fpage_text_clinical_resource_general();
 							global $clinical_resource_fpage_more_link_descr_general;
 						}
 						$clinical_resource_fpage_more_link_descr_expertise = $clinical_resource_fpage_more_link_descr_general; // "More" link description
@@ -3897,14 +3897,14 @@ function uamswp_fad_fpage_text_replace($string) {
 					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement of a conditions subpage/section
 					if ( !isset($condition_fpage_title_expertise) || empty($condition_fpage_title_expertise) ) {
 						if ( !isset($condition_fpage_title_general) || empty($condition_fpage_title_general) ) {
-							uamswp_fad_condition_fpage_text_general();
+							uamswp_fad_fpage_text_condition_general();
 							global $condition_fpage_title_general;
 						}
 						$condition_fpage_title_expertise = $condition_fpage_title_general; // Title
 					}
 					if ( !isset($condition_fpage_intro_expertise) || empty($condition_fpage_intro_expertise) ) {
 						if ( !isset($condition_fpage_intro_general) || empty($condition_fpage_intro_general) ) {
-							uamswp_fad_condition_fpage_text_general();
+							uamswp_fad_fpage_text_condition_general();
 							global $condition_fpage_intro_general;
 						}
 						$condition_fpage_intro_expertise = $condition_fpage_intro_general; // Intro text
@@ -3939,14 +3939,14 @@ function uamswp_fad_fpage_text_replace($string) {
 					// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement of a treatments subpage/section
 					if ( !isset($treatment_fpage_title_expertise) || empty($treatment_fpage_title_expertise) ) {
 						if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
-							uamswp_fad_treatment_fpage_text_general();
+							uamswp_fad_fpage_text_treatment_general();
 							global $treatment_fpage_title_general;
 						}
 						$treatment_fpage_title_expertise = $treatment_fpage_title_general; // Title
 					}
 					if ( !isset($treatment_fpage_intro_expertise) || empty($treatment_fpage_intro_expertise) ) {
 						if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
-							uamswp_fad_treatment_fpage_text_general();
+							uamswp_fad_fpage_text_treatment_general();
 							global $treatment_fpage_intro_general;
 						}
 						$treatment_fpage_intro_expertise = $treatment_fpage_intro_general; // Intro text
@@ -3981,14 +3981,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement of a combined conditions and treatments subpage/section
 				if ( !isset($condition_treatment_fpage_title_expertise) || empty($condition_treatment_fpage_title_expertise) ) {
 					if ( !isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general) ) {
-						uamswp_fad_condition_treatment_fpage_text_general();
+						uamswp_fad_fpage_text_condition_treatment_general();
 						global $condition_treatment_fpage_title_general;
 					}
 					$condition_treatment_fpage_title_expertise = $condition_treatment_fpage_title_general; // Title
 				}
 				if ( !isset($condition_treatment_fpage_intro_expertise) || empty($condition_treatment_fpage_intro_expertise) ) {
 					if ( !isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general) ) {
-						uamswp_fad_condition_treatment_fpage_text_general();
+						uamswp_fad_fpage_text_condition_treatment_general();
 						global $condition_treatment_fpage_intro_general;
 					}
 					$condition_treatment_fpage_intro_expertise = $condition_treatment_fpage_intro_general; // Intro text
@@ -4035,14 +4035,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 				if ( !isset($provider_fpage_title_clinical_resource) || empty($provider_fpage_title_clinical_resource) ) {
 					if ( !isset($provider_fpage_title_general) || empty($provider_fpage_title_general) ) {
-						uamswp_fad_provider_fpage_text_general();
+						uamswp_fad_fpage_text_provider_general();
 						global $provider_fpage_title_general;
 					}
 					$provider_fpage_title_clinical_resource = $provider_fpage_title_general; // Title
 				}
 				if ( !isset($provider_fpage_intro_clinical_resource) || empty($provider_fpage_intro_clinical_resource) ) {
 					if ( !isset($provider_fpage_intro_general) || empty($provider_fpage_intro_general) ) {
-						uamswp_fad_provider_fpage_text_general();
+						uamswp_fad_fpage_text_provider_general();
 						global $provider_fpage_intro_general;
 					}
 					$provider_fpage_intro_clinical_resource = $provider_fpage_intro_general; // Intro text
@@ -4067,14 +4067,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 				if ( !isset($location_fpage_title_clinical_resource) || empty($location_fpage_title_clinical_resource) ) {
 					if ( !isset($location_fpage_title_general) || empty($location_fpage_title_general) ) {
-						uamswp_fad_location_fpage_text_general();
+						uamswp_fad_fpage_text_location_general();
 						global $location_fpage_title_general;
 					}
 					$location_fpage_title_clinical_resource = $location_fpage_title_general; // Title
 				}
 				if ( !isset($location_fpage_intro_clinical_resource) || empty($location_fpage_intro_clinical_resource) ) {
 					if ( !isset($location_fpage_intro_general) || empty($location_fpage_intro_general) ) {
-						uamswp_fad_location_fpage_text_general();
+						uamswp_fad_fpage_text_location_general();
 						global $location_fpage_intro_general;
 					}
 					$location_fpage_intro_clinical_resource = $location_fpage_intro_general; // Intro text
@@ -4099,14 +4099,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 				if ( !isset($expertise_fpage_title_clinical_resource) || empty($expertise_fpage_title_clinical_resource) ) {
 					if ( !isset($expertise_fpage_title_general) || empty($expertise_fpage_title_general) ) {
-						uamswp_fad_expertise_fpage_text_general();
+						uamswp_fad_fpage_text_expertise_general();
 						global $expertise_fpage_title_general;
 					}
 					$expertise_fpage_title_clinical_resource = $expertise_fpage_title_general; // Title
 				}
 				if ( !isset($expertise_fpage_intro_clinical_resource) || empty($expertise_fpage_intro_clinical_resource) ) {
 					if ( !isset($expertise_fpage_intro_general) || empty($expertise_fpage_intro_general) ) {
-						uamswp_fad_expertise_fpage_text_general();
+						uamswp_fad_fpage_text_expertise_general();
 						global $expertise_fpage_intro_general;
 					}
 					$expertise_fpage_intro_clinical_resource = $expertise_fpage_intro_general; // Intro text
@@ -4143,35 +4143,35 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 				if ( !isset($clinical_resource_fpage_title_clinical_resource) || empty($clinical_resource_fpage_title_clinical_resource) ) {
 					if ( !isset($clinical_resource_fpage_title_general) || empty($clinical_resource_fpage_title_general) ) {
-						uamswp_fad_clinical_resource_fpage_text_general();
+						uamswp_fad_fpage_text_clinical_resource_general();
 						global $clinical_resource_fpage_title_general;
 					}
 					$clinical_resource_fpage_title_clinical_resource = $clinical_resource_fpage_title_general; // Title
 				}
 				if ( !isset($clinical_resource_fpage_intro_clinical_resource) || empty($clinical_resource_fpage_intro_clinical_resource) ) {
 					if ( !isset($clinical_resource_fpage_intro_general) || empty($clinical_resource_fpage_intro_general) ) {
-						uamswp_fad_clinical_resource_fpage_text_general();
+						uamswp_fad_fpage_text_clinical_resource_general();
 						global $clinical_resource_fpage_intro_general;
 					}
 					$clinical_resource_fpage_intro_clinical_resource = $clinical_resource_fpage_intro_general; // Intro text
 				}
 				if ( !isset($clinical_resource_fpage_more_text_clinical_resource) || empty($clinical_resource_fpage_more_text_clinical_resource) ) {
 					if ( !isset($clinical_resource_fpage_more_text_general) || empty($clinical_resource_fpage_more_text_general) ) {
-						uamswp_fad_clinical_resource_fpage_text_general();
+						uamswp_fad_fpage_text_clinical_resource_general();
 						global $clinical_resource_fpage_more_text_general;
 					}
 					$clinical_resource_fpage_more_text_clinical_resource = $clinical_resource_fpage_more_text_general; // "More" intro text
 				}
 				if ( !isset($clinical_resource_fpage_more_link_text_clinical_resource) || empty($clinical_resource_fpage_more_link_text_clinical_resource) ) {
 					if ( !isset($clinical_resource_fpage_more_link_text_general) || empty($clinical_resource_fpage_more_link_text_general) ) {
-						uamswp_fad_clinical_resource_fpage_text_general();
+						uamswp_fad_fpage_text_clinical_resource_general();
 						global $clinical_resource_fpage_more_link_text_general;
 					}
 					$clinical_resource_fpage_more_link_text_clinical_resource = $clinical_resource_fpage_more_link_text_general; // "More" link text
 				}
 				if ( !isset($clinical_resource_fpage_more_link_descr_clinical_resource) || empty($clinical_resource_fpage_more_link_descr_clinical_resource) ) {
 					if ( !isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general) ) {
-						uamswp_fad_clinical_resource_fpage_text_general();
+						uamswp_fad_fpage_text_clinical_resource_general();
 						global $clinical_resource_fpage_more_link_descr_general;
 					}
 					$clinical_resource_fpage_more_link_descr_clinical_resource = $clinical_resource_fpage_more_link_descr_general; // "More" link description
@@ -4199,14 +4199,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 				if ( !isset($condition_fpage_title_clinical_resource) || empty($condition_fpage_title_clinical_resource) ) {
 					if ( !isset($condition_fpage_title_general) || empty($condition_fpage_title_general) ) {
-						uamswp_fad_condition_fpage_text_general();
+						uamswp_fad_fpage_text_condition_general();
 						global $condition_fpage_title_general;
 					}
 					$condition_fpage_title_clinical_resource = $condition_fpage_title_general; // Title
 				}
 				if ( !isset($condition_fpage_intro_clinical_resource) || empty($condition_fpage_intro_clinical_resource) ) {
 					if ( !isset($condition_fpage_intro_general) || empty($condition_fpage_intro_general) ) {
-						uamswp_fad_condition_fpage_text_general();
+						uamswp_fad_fpage_text_condition_general();
 						global $condition_fpage_intro_general;
 					}
 					$condition_fpage_intro_clinical_resource = $condition_fpage_intro_general; // Intro text
@@ -4231,14 +4231,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 				if ( !isset($treatment_fpage_title_clinical_resource) || empty($treatment_fpage_title_clinical_resource) ) {
 					if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
-						uamswp_fad_treatment_fpage_text_general();
+						uamswp_fad_fpage_text_treatment_general();
 						global $treatment_fpage_title_general;
 					}
 					$treatment_fpage_title_clinical_resource = $treatment_fpage_title_general; // Title
 				}
 				if ( !isset($treatment_fpage_intro_clinical_resource) || empty($treatment_fpage_intro_clinical_resource) ) {
 					if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
-						uamswp_fad_treatment_fpage_text_general();
+						uamswp_fad_fpage_text_treatment_general();
 						global $treatment_fpage_intro_general;
 					}
 					$treatment_fpage_intro_clinical_resource = $treatment_fpage_intro_general; // Intro text
@@ -4263,14 +4263,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings
 				if ( !isset($condition_treatment_fpage_title_clinical_resource) || empty($condition_treatment_fpage_title_clinical_resource) ) {
 					if ( !isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general) ) {
-						uamswp_fad_treatment_fpage_text_general();
+						uamswp_fad_fpage_text_treatment_general();
 						global $condition_treatment_fpage_title_general;
 					}
 					$condition_treatment_fpage_title_clinical_resource = $condition_treatment_fpage_title_general; // Title
 				}
 				if ( !isset($condition_treatment_fpage_intro_clinical_resource) || empty($condition_treatment_fpage_intro_clinical_resource) ) {
 					if ( !isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general) ) {
-						uamswp_fad_treatment_fpage_text_general();
+						uamswp_fad_fpage_text_treatment_general();
 						global $condition_treatment_fpage_intro_general;
 					}
 					$condition_treatment_fpage_intro_clinical_resource = $condition_treatment_fpage_intro_general; // Intro text
@@ -4286,7 +4286,7 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get field values from Find-a-Doc Settings for ontology image elements in general placements of fake subpages or sections
 
 		// Get system settings for general values of ontology image elements of fake subpage or section for Providers
-		function uamswp_fad_provider_fpage_image_general() {
+		function uamswp_fad_fpage_image_provider_general() {
 
 			// Make variables available outside of the function
 			global $provider_fpage_image_general;
@@ -4300,7 +4300,7 @@ function uamswp_fad_fpage_text_replace($string) {
 		}
 
 		// Get system settings for general values of ontology image elements of fake subpage or section for Locations
-		function uamswp_fad_location_fpage_image_general() {
+		function uamswp_fad_fpage_image_location_general() {
 
 			// Make variables available outside of the function
 			global $location_fpage_image_general;
@@ -4325,7 +4325,7 @@ function uamswp_fad_fpage_text_replace($string) {
 		}
 
 		// Get system settings for general values of ontology image elements of fake subpage or section for Areas of Expertise
-		function uamswp_fad_expertise_fpage_image_general() {
+		function uamswp_fad_fpage_image_expertise_general() {
 
 			// Make variables available outside of the function
 			global $expertise_fpage_image_general;
@@ -4350,7 +4350,7 @@ function uamswp_fad_fpage_text_replace($string) {
 		}
 
 		// Get system settings for general values of ontology image elements of fake subpage or section for Providers
-		function uamswp_fad_clinical_resource_fpage_image_general() {
+		function uamswp_fad_fpage_image_clinical_resource_general() {
 
 			// Make variables available outside of the function
 			global $clinical_resource_fpage_image_general;
@@ -4379,7 +4379,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
 				if ( !isset($location_fpage_image_provider) || empty($location_fpage_image_provider) ) {
 					if ( !isset($location_fpage_image_general) || empty($location_fpage_image_general) ) {
-						uamswp_fad_location_fpage_image_general();
+						uamswp_fad_fpage_image_location_general();
 						global $location_fpage_image_general;
 					}
 					$location_fpage_image_provider = $location_fpage_image_general; // Featured image
@@ -4391,7 +4391,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
 				if ( !isset($expertise_fpage_image_provider) || empty($expertise_fpage_image_provider) ) {
 					if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
-						uamswp_fad_expertise_fpage_image_general();
+						uamswp_fad_fpage_image_expertise_general();
 						global $expertise_fpage_image_general;
 					}
 					$expertise_fpage_image_provider = $expertise_fpage_image_general; // Featured image
@@ -4403,7 +4403,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
 				if ( !isset($clinical_resource_fpage_image_provider) || empty($clinical_resource_fpage_image_provider) ) {
 					if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
-						uamswp_fad_clinical_resource_fpage_image_general();
+						uamswp_fad_fpage_image_clinical_resource_general();
 						global $clinical_resource_fpage_image_general;
 					}
 					$clinical_resource_fpage_image_provider = $clinical_resource_fpage_image_general; // Featured image
@@ -4426,7 +4426,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
 				if ( !isset($provider_fpage_image_location) || empty($provider_fpage_image_location) ) {
 					if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
-						uamswp_fad_provider_fpage_image_general();
+						uamswp_fad_fpage_image_provider_general();
 						global $provider_fpage_image_general;
 					}
 					$provider_fpage_image_location = $provider_fpage_image_general; // Featured image
@@ -4438,7 +4438,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
 				if ( !isset($location_descendant_fpage_image_location) || empty($location_descendant_fpage_image_location) ) {
 					if ( !isset($location_descendant_fpage_image_general) || empty($location_descendant_fpage_image_general) ) {
-						uamswp_fad_location_fpage_image_general();
+						uamswp_fad_fpage_image_location_general();
 						global $location_descendant_fpage_image_general;
 					}
 					$location_descendant_fpage_image_location = $location_descendant_fpage_image_general; // Featured image
@@ -4450,7 +4450,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
 				if ( !isset($expertise_fpage_image_location) || empty($expertise_fpage_image_location) ) {
 					if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
-						uamswp_fad_expertise_fpage_image_general();
+						uamswp_fad_fpage_image_expertise_general();
 						global $expertise_fpage_image_general;
 					}
 					$expertise_fpage_image_location = $expertise_fpage_image_general; // Featured image
@@ -4462,7 +4462,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
 				if ( !isset($clinical_resource_fpage_image_location) || empty($clinical_resource_fpage_image_location) ) {
 					if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
-						uamswp_fad_clinical_resource_fpage_image_general();
+						uamswp_fad_fpage_image_clinical_resource_general();
 						global $clinical_resource_fpage_image_general;
 					}
 					$clinical_resource_fpage_image_location = $clinical_resource_fpage_image_general; // Featured image
@@ -4514,7 +4514,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
 				if ( !isset($provider_fpage_featured_image_expertise) || empty($provider_fpage_featured_image_expertise) ) {
 					if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
-						uamswp_fad_provider_fpage_image_general();
+						uamswp_fad_fpage_image_provider_general();
 						global $provider_fpage_image_general;
 					}
 					$provider_fpage_featured_image_expertise = $provider_fpage_image_general; // Featured image
@@ -4542,7 +4542,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
 				if ( !isset($location_fpage_featured_image_expertise) || empty($location_fpage_featured_image_expertise) ) {
 					if ( !isset($location_descendant_fpage_image_general) || empty($location_descendant_fpage_image_general) ) {
-						uamswp_fad_expertise_fpage_image_general();
+						uamswp_fad_fpage_image_expertise_general();
 						global $location_descendant_fpage_image_general;
 					}
 					$location_fpage_featured_image_expertise = $location_descendant_fpage_image_general; // Featured image
@@ -4570,7 +4570,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
 				if ( !isset($expertise_fpage_featured_image_expertise) || empty($expertise_fpage_featured_image_expertise) ) {
 					if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
-						uamswp_fad_expertise_fpage_image_general();
+						uamswp_fad_fpage_image_expertise_general();
 						global $expertise_fpage_image_general;
 					}
 					$expertise_fpage_featured_image_expertise = $expertise_fpage_image_general; // Featured image
@@ -4598,7 +4598,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
 				if ( !isset($expertise_descendant_fpage_featured_image_expertise) || empty($expertise_descendant_fpage_featured_image_expertise) ) {
 					if ( !isset($expertise_descendant_fpage_image_general) || empty($expertise_descendant_fpage_image_general) ) {
-						uamswp_fad_expertise_fpage_image_general();
+						uamswp_fad_fpage_image_expertise_general();
 						global $expertise_descendant_fpage_image_general;
 					}
 					$expertise_descendant_fpage_featured_image_expertise = $expertise_descendant_fpage_image_general; // Featured image
@@ -4626,7 +4626,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
 				if ( !isset($clinical_resource_fpage_featured_image_expertise) || empty($clinical_resource_fpage_featured_image_expertise) ) {
 					if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
-						uamswp_fad_clinical_resource_fpage_image_general();
+						uamswp_fad_fpage_image_clinical_resource_general();
 						global $clinical_resource_fpage_image_general;
 					}
 					$clinical_resource_fpage_featured_image_expertise = $clinical_resource_fpage_image_general; // Featured image
@@ -4658,7 +4658,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
 				if ( !isset($provider_fpage_image_clinical_resource) || empty($provider_fpage_image_clinical_resource) ) {
 					if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
-						uamswp_fad_provider_fpage_image_general();
+						uamswp_fad_fpage_image_provider_general();
 						global $provider_fpage_image_general;
 					}
 					$provider_fpage_image_clinical_resource = $provider_fpage_image_general; // Featured image
@@ -4670,7 +4670,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
 				if ( !isset($location_fpage_image_clinical_resource) || empty($location_fpage_image_clinical_resource) ) {
 					if ( !isset($location_fpage_image_general) || empty($location_fpage_image_general) ) {
-						uamswp_fad_location_fpage_image_general();
+						uamswp_fad_fpage_image_location_general();
 						global $location_fpage_image_general;
 					}
 					$location_fpage_image_clinical_resource = $location_fpage_image_general; // Featured image
@@ -4682,7 +4682,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
 				if ( !isset($expertise_fpage_image_clinical_resource) || empty($expertise_fpage_image_clinical_resource) ) {
 					if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
-						uamswp_fad_expertise_fpage_image_general();
+						uamswp_fad_fpage_image_expertise_general();
 						global $expertise_fpage_image_general;
 					}
 					$expertise_fpage_image_clinical_resource = $expertise_fpage_image_general; // Featured image
@@ -4694,7 +4694,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty, set it using the Find-a-Doc Settings for general placement
 				if ( !isset($clinical_resource_fpage_image_clinical_resource) || empty($clinical_resource_fpage_image_clinical_resource) ) {
 					if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
-						uamswp_fad_clinical_resource_fpage_image_general();
+						uamswp_fad_fpage_image_clinical_resource_general();
 						global $clinical_resource_fpage_image_general;
 					}
 					$clinical_resource_fpage_image_clinical_resource = $clinical_resource_fpage_image_general; // Featured image
@@ -4936,7 +4936,7 @@ function uamswp_fad_section_provider() {
 		global $provider_plural_name; // string
 		global $provider_plural_name_attr; // string
 
-		// Defined in uamswp_fad_provider_fpage_text_general()
+		// Defined in uamswp_fad_fpage_text_provider_general()
 		global $provider_fpage_title_general; // string
 		global $provider_fpage_intro_general; // string
 
@@ -4976,7 +4976,7 @@ function uamswp_fad_section_location() {
 		global $location_plural_name; // string
 		global $location_plural_name_attr; // string
 
-		// Defined in uamswp_fad_location_fpage_text_general()
+		// Defined in uamswp_fad_fpage_text_location_general()
 		global $location_fpage_title_general; // string
 		global $location_fpage_intro_general; // string
 
@@ -5014,7 +5014,7 @@ function uamswp_fad_section_expertise() {
 		global $expertise_plural_name; // string
 		global $expertise_plural_name_attr; // string
 
-		// Defined in uamswp_fad_expertise_fpage_text_general()
+		// Defined in uamswp_fad_fpage_text_expertise_general()
 		global $expertise_fpage_title_general; // string
 		global $expertise_fpage_intro_general; // string
 
@@ -5065,7 +5065,7 @@ function uamswp_fad_section_clinical_resource() {
 		global $clinical_resource_plural_name; // string
 		global $clinical_resource_plural_name_attr; // string
 
-		// Defined in uamswp_fad_clinical_resource_fpage_text_general()
+		// Defined in uamswp_fad_fpage_text_clinical_resource_general()
 		global $clinical_resource_fpage_title_general; // string
 		global $clinical_resource_fpage_intro_general; // string
 
@@ -5100,7 +5100,7 @@ function uamswp_fad_section_condition() {
 		global $condition_plural_name; // string
 		global $condition_plural_name_attr; // string
 
-		// Defined in uamswp_fad_condition_fpage_text_general()
+		// Defined in uamswp_fad_fpage_text_condition_general()
 		global $condition_fpage_title_general; // string
 		global $condition_fpage_intro_general; // string
 
@@ -5145,7 +5145,7 @@ function uamswp_fad_section_treatment() {
 		global $treatment_plural_name; // string
 		global $treatment_plural_name_attr; // string
 
-		// Defined in uamswp_fad_treatment_fpage_text_general()
+		// Defined in uamswp_fad_fpage_text_treatment_general()
 		global $treatment_fpage_title_general; // string
 		global $treatment_fpage_intro_general; // string
 
@@ -5200,15 +5200,15 @@ function uamswp_fad_section_condition_treatment() {
 		// Defined in uamswp_fad_labels_treatment()
 		global $treatment_single_name_attr; // string
 
-		// Defined in uamswp_fad_condition_treatment_fpage_text_general()
+		// Defined in uamswp_fad_fpage_text_condition_treatment_general()
 		global $condition_treatment_fpage_title_general; // string
 		global $condition_treatment_fpage_intro_general; // string
 
-		// Defined in uamswp_fad_condition_fpage_text_general()
+		// Defined in uamswp_fad_fpage_text_condition_general()
 		global $condition_fpage_title_general; // string
 		global $condition_fpage_intro_general; // string
 
-		// Defined in uamswp_fad_treatment_fpage_text_general()
+		// Defined in uamswp_fad_fpage_text_treatment_general()
 		global $treatment_fpage_title_general; // string
 		global $treatment_fpage_intro_general; // string
 

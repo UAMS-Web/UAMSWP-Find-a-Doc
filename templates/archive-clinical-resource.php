@@ -25,7 +25,7 @@ uamswp_fad_labels_condition();
 uamswp_fad_labels_treatment();
 
 // Get system settings for clinical resource archive page text
-uamswp_fad_archive_clinical_resource();
+uamswp_fad_archive_text_clinical_resource();
 // $clinical_resource_archive_link = get_post_type_archive_link( get_query_var('post_type') );
 
 // Override theme's method of defining the meta page title

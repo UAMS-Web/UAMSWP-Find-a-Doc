@@ -36,7 +36,7 @@
 	uamswp_fad_labels_treatment();
 
 // Get system settings for location archive page text
-// uamswp_fad_archive_location();
+// uamswp_fad_archive_text_location();
 
 // Get the page ID
 $page_id = get_the_ID();
