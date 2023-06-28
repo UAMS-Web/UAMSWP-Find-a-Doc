@@ -5541,6 +5541,7 @@ function uamswp_fad_fpage_text_image_overlay() {
 	global $text_image_overlay_row_1; // Values for the second item // arr
 	global $current_fpage; // Fake subpage slug // str
 	global $page_top_level_query; // Get whether this fake subpage's parent item is the top-level item // bool
+	global $ancestors_ontology_farthest; // ID of the top-level ontology item ancestor of the current item // int
 	global $provider_archive_image; // Provider archive featured image ID // int
 	if ( !isset($provider_archive_image) || empty($provider_archive_image) ) {
 		uamswp_fad_archive_image_provider();
@@ -5562,29 +5563,111 @@ function uamswp_fad_fpage_text_image_overlay() {
 		global $clinical_resource_archive_image;
 	}
 	global $provider_fpage_title_expertise; // Page title of fake subpage for providers in an Area of Expertise subsection // string
-	if ( !isset($provider_fpage_title_expertise) || empty($provider_fpage_title_expertise) ) {
+	global $location_fpage_title_expertise; // Page title of fake subpage for locations in an Area of Expertise subsection // string
+	global $expertise_descendant_fpage_title_expertise; // Page title of fake subpage for descendant areas of expertise in an Area of Expertise subsection // string
+	global $expertise_fpage_title_expertise; // Page title of fake subpage for related areas of expertise in an Area of Expertise subsection // string
+	global $clinical_resource_fpage_title_expertise; // Page title of fake subpage for clinical resources in an Area of Expertise subsection // string
+	if (
+		!isset($provider_fpage_title_expertise) || empty($provider_fpage_title_expertise)
+		||
+		!isset($location_fpage_title_expertise) || empty($location_fpage_title_expertise)
+		||
+		!isset($expertise_descendant_fpage_title_expertise) || empty($expertise_descendant_fpage_title_expertise)
+		||
+		!isset($expertise_fpage_title_expertise) || empty($expertise_fpage_title_expertise)
+		||
+		!isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise)
+		) {
 		uamswp_fad_fpage_text_expertise();
 		global $provider_fpage_title_expertise;
-	}
-	global $location_fpage_title_expertise; // Page title of fake subpage for locations in an Area of Expertise subsection // string
-	if ( !isset($location_fpage_title_expertise) || empty($location_fpage_title_expertise) ) {
-		uamswp_fad_fpage_text_expertise();
 		global $location_fpage_title_expertise;
-	}
-	global $expertise_descendant_fpage_title_expertise; // Page title of fake subpage for descendant areas of expertise in an Area of Expertise subsection // string
-	if ( !isset($expertise_descendant_fpage_title_expertise) || empty($expertise_descendant_fpage_title_expertise) ) {
-		uamswp_fad_fpage_text_expertise();
 		global $expertise_descendant_fpage_title_expertise;
-	}
-	global $expertise_fpage_title_expertise; // Page title of fake subpage for related areas of expertise in an Area of Expertise subsection // string
-	if ( !isset($expertise_fpage_title_expertise) || empty($expertise_fpage_title_expertise) ) {
-		uamswp_fad_fpage_text_expertise();
 		global $expertise_fpage_title_expertise;
-	}
-	global $clinical_resource_fpage_title_expertise; // Page title of fake subpage for clinical resources in an Area of Expertise subsection // string
-	if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
-		uamswp_fad_fpage_text_expertise();
 		global $clinical_resource_fpage_title_expertise;
+	}
+	global $provider_fpage_ref_main_title_general; // General Title of Reference to Main Provider Archive on Fake Subpage for Providers // string
+	global $provider_fpage_ref_main_intro_general; // General Body Text of Reference to Main Provider Archive on Fake Subpage for Providers // string
+	global $provider_fpage_ref_main_link_general; // General Link Text of Reference to Main Provider Archive on Fake Subpage for Providers // string
+	if (
+		!isset($provider_fpage_ref_main_title_general) || empty($provider_fpage_ref_main_title_general)
+		||
+		!isset($provider_fpage_ref_main_intro_general) || empty($provider_fpage_ref_main_intro_general)
+		||
+		!isset($provider_fpage_ref_main_link_general) || empty($provider_fpage_ref_main_link_general)
+		) {
+		uamswp_fad_fpage_text_provider_general();
+		global $provider_fpage_ref_main_title_general;
+		global $provider_fpage_ref_main_intro_general;
+		global $provider_fpage_ref_main_link_general;
+	}
+	global $location_fpage_ref_main_title_general; // General Title of Reference to Main Location Archive on Fake Subpage for Locations // string
+	global $location_fpage_ref_main_intro_general; // General Body Text of Reference to Main Location Archive on Fake Subpage for Locations // string
+	global $location_fpage_ref_main_link_general; // General Link Text of Reference to Main Location Archive on Fake Subpage for Locations // string
+	global $location_descendant_fpage_ref_main_title_general; // General Title of Reference to Main Location Archive on Fake Subpage for Descendant Locations // string
+	global $location_descendant_fpage_ref_main_intro_general; // General Body Text of Reference to Main Location Archive on Fake Subpage for Descendant Locations // string
+	global $location_descendant_fpage_ref_main_link_general; // General Link Text of Reference to Main Location Archive on Fake Subpage for Descendant Locations // string
+	if (
+		!isset($location_fpage_ref_main_title_general) || empty($location_fpage_ref_main_title_general)
+		||
+		!isset($location_fpage_ref_main_intro_general) || empty($location_fpage_ref_main_intro_general)
+		||
+		!isset($location_fpage_ref_main_link_general) || empty($location_fpage_ref_main_link_general)
+		||
+		!isset($location_descendant_fpage_ref_main_title_general) || empty($location_descendant_fpage_ref_main_title_general)
+		||
+		!isset($location_descendant_fpage_ref_main_intro_general) || empty($location_descendant_fpage_ref_main_intro_general)
+		||
+		!isset($location_descendant_fpage_ref_main_link_general) || empty($location_descendant_fpage_ref_main_link_general)
+		) {
+		uamswp_fad_fpage_text_location_general();
+		global $location_fpage_ref_main_title_general;
+		global $location_fpage_ref_main_intro_general;
+		global $location_fpage_ref_main_link_general;
+		global $location_descendant_fpage_ref_main_title_general;
+		global $location_descendant_fpage_ref_main_intro_general;
+		global $location_descendant_fpage_ref_main_link_general;
+	}
+	global $expertise_fpage_ref_main_title_general; // General Title of Reference to Main Area of Expertise Archive on Fake Subpage for Areas of Expertise // string
+	global $expertise_fpage_ref_main_intro_general; // General Body Text of Reference to Main Area of Expertise Archive on Fake Subpage for Areas of Expertise // string
+	global $expertise_fpage_ref_main_link_general; // General Link Text of Reference to Main Area of Expertise Archive on Fake Subpage for Areas of Expertise // string
+	global $expertise_descendant_fpage_ref_main_title_general; // General Title of Reference to Main Area of Expertise Archive on Fake Subpage for Areas of Expertise // string
+	global $expertise_descendant_fpage_ref_main_intro_general; // General Body Text of Reference to Main Area of Expertise Archive on Fake Subpage for Areas of Expertise // string
+	global $expertise_descendant_fpage_ref_main_link_general; // General Link Text of Reference to Main Area of Expertise Archive on Fake Subpage for Areas of Expertise // string
+	if (
+		!isset($expertise_fpage_ref_main_title_general) || empty($expertise_fpage_ref_main_title_general)
+		||
+		!isset($expertise_fpage_ref_main_intro_general) || empty($expertise_fpage_ref_main_intro_general)
+		||
+		!isset($expertise_fpage_ref_main_link_general) || empty($expertise_fpage_ref_main_link_general)
+		||
+		!isset($expertise_descendant_fpage_ref_main_title_general) || empty($expertise_descendant_fpage_ref_main_title_general)
+		||
+		!isset($expertise_descendant_fpage_ref_main_intro_general) || empty($expertise_descendant_fpage_ref_main_intro_general)
+		||
+		!isset($expertise_descendant_fpage_ref_main_link_general) || empty($expertise_descendant_fpage_ref_main_link_general)
+		) {
+		uamswp_fad_fpage_text_expertise_general();
+		global $expertise_fpage_ref_main_title_general;
+		global $expertise_fpage_ref_main_intro_general;
+		global $expertise_fpage_ref_main_link_general;
+		global $expertise_descendant_fpage_ref_main_title_general;
+		global $expertise_descendant_fpage_ref_main_intro_general;
+		global $expertise_descendant_fpage_ref_main_link_general;
+	}
+	global $clinical_resource_fpage_ref_main_title_general; // General Title of Reference to Main Clinical Resource Archive on Fake Subpage for Clinical Resources // string
+	global $clinical_resource_fpage_ref_main_intro_general; // General Body Text of Reference to Main Clinical Resource Archive on Fake Subpage for Clinical Resources // string
+	global $clinical_resource_fpage_ref_main_link_general; // General Link Text of Reference to Main Clinical Resource Archive on Fake Subpage for Clinical Resources // string
+	if (
+		!isset($clinical_resource_fpage_ref_main_title_general) || empty($clinical_resource_fpage_ref_main_title_general)
+		||
+		!isset($clinical_resource_fpage_ref_main_intro_general) || empty($clinical_resource_fpage_ref_main_intro_general)
+		||
+		!isset($clinical_resource_fpage_ref_main_link_general) || empty($clinical_resource_fpage_ref_main_link_general)
+		) {
+		uamswp_fad_fpage_text_clinical_resource_general();
+		global $clinical_resource_fpage_ref_main_title_general;
+		global $clinical_resource_fpage_ref_main_intro_general;
+		global $clinical_resource_fpage_ref_main_link_general;
 	}
 
 	// Create array of main archive attributes for each fake subpage
