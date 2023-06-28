@@ -2073,6 +2073,240 @@ function uamswp_fad_podcast() {
 	<?php } // endif ( $podcast_section_show )
 }
 
+// Create substitutions for use regarding ontology text elements
+function uamswp_fad_fpage_text_replace($string) {
+	// Be sure to only call this function AFTER the following external global variables have been defined on the page
+
+	// Bring in variables from outside of the function
+
+		// Typically defined on the template: single location, single area of expertise
+		global $page_title;
+
+		// Typically defined on the template: single location
+		global $page_title_phrase;
+
+		// Typically defined on the template: single provider
+		global $short_name;
+		global $short_name_possessive;
+
+		// Defined in uamswp_fad_labels_provider()
+		global $placeholder_provider_single_name;
+		global $provider_single_name;
+		global $placeholder_provider_plural_name;
+		global $provider_plural_name;
+		global $placeholder_provider_short_name;
+		global $placeholder_provider_short_name_possessive;
+
+		// Defined in uamswp_fad_archive_provider()
+		global $placeholder_provider_archive_headline;
+		global $provider_archive_headline;
+
+		// Defined in uamswp_fad_labels_location()
+		global $placeholder_location_single_name;
+		global $location_single_name;
+		global $placeholder_location_plural_name;
+		global $location_plural_name;
+		global $placeholder_location_page_title;
+		global $placeholder_location_page_title_phrase;
+
+		// Defined in uamswp_fad_labels_location_descendant()
+		global $placeholder_location_descendant_single_name;
+		global $location_descendant_single_name;
+		global $placeholder_location_descendant_plural_name;
+		global $location_descendant_plural_name;
+
+		// Defined in uamswp_fad_archive_location()
+		global $placeholder_location_archive_headline;
+		global $location_archive_headline;
+
+		// Defined in uamswp_fad_labels_expertise()
+		global $placeholder_expertise_single_name;
+		global $expertise_single_name;
+		global $placeholder_expertise_plural_name;
+		global $expertise_plural_name;
+		global $placeholder_expertise_page_title;
+
+		// Defined in uamswp_fad_labels_expertise_descendant()
+		global $placeholder_expertise_descendant_single_name;
+		global $expertise_descendant_single_name;
+		global $placeholder_expertise_descendant_plural_name;
+		global $expertise_descendant_plural_name;
+
+		// Defined in uamswp_fad_archive_expertise()
+		global $placeholder_expertise_archive_headline;
+		global $expertise_archive_headline;
+		global $placeholder_expertise_archive_intro_text;
+		global $expertise_archive_intro_text;
+
+		// Defined in uamswp_fad_labels_clinical_resource()
+		global $placeholder_clinical_resource_single_name;
+		global $clinical_resource_single_name;
+		global $placeholder_clinical_resource_plural_name;
+		global $clinical_resource_plural_name;
+
+		// Defined in uamswp_fad_archive_clinical_resource()
+		global $placeholder_clinical_resource_archive_headline;
+		global $clinical_resource_archive_headline;
+
+		// Defined in uamswp_fad_labels_clinical_resource_facet()
+		global $placeholder_clinical_resource_type_single_name;
+		global $clinical_resource_type_single_name;
+		global $placeholder_clinical_resource_type_plural_name;
+		global $clinical_resource_type_plural_name;
+
+		// Defined in uamswp_fad_labels_condition_treatment()
+		global $placeholder_condition_treatment_single_name;
+		global $condition_treatment_single_name;
+		global $placeholder_condition_treatment_plural_name;
+		global $condition_treatment_plural_name;
+
+		// Defined in uamswp_fad_labels_condition()
+		global $placeholder_condition_single_name;
+		global $condition_single_name;
+		global $placeholder_condition_plural_name;
+		global $condition_plural_name;
+
+		// Defined in uamswp_fad_archive_condition()
+		global $placeholder_condition_archive_headline;
+		global $condition_archive_headline;
+		global $placeholder_condition_archive_intro_text;
+		global $condition_archive_intro_text;
+
+		// Defined in uamswp_fad_labels_treatment()
+		global $placeholder_treatment_single_name;
+		global $treatment_single_name;
+		global $placeholder_treatment_plural_name;
+		global $treatment_plural_name;
+
+		// Defined in uamswp_fad_archive_treatment()
+		global $placeholder_treatment_archive_headline;
+		global $treatment_archive_headline;
+		global $placeholder_treatment_archive_intro_text;
+		global $treatment_archive_intro_text;
+
+	// Check variables
+	$page_title = ( isset($page_title) && !empty($page_title) ) ? $page_title : '';
+	$page_title_phrase = ( isset($page_title_phrase) && !empty($page_title_phrase) ) ? $page_title_phrase : '';
+	$short_name = ( isset($short_name) && !empty($short_name) ) ? $short_name : '';
+	$short_name_possessive = ( isset($short_name_possessive) && !empty($short_name_possessive) ) ? $short_name_possessive : '';
+
+	// Make variables available outside of the function
+	// global $fpage_text_replace;
+
+	// Create array for defining text substitutions
+	// Key = old
+	// Value = new
+	$fpage_text_replace = array();
+
+		// System settings for ontology item labels
+
+			// System settings for provider labels
+			$fpage_text_replacements[$placeholder_provider_single_name] = $provider_single_name;
+			$fpage_text_replacements[strtolower($placeholder_provider_single_name)] = strtolower($provider_single_name);
+			$fpage_text_replacements[$placeholder_provider_plural_name] = $provider_plural_name;
+			$fpage_text_replacements[strtolower($placeholder_provider_plural_name)] = strtolower($provider_plural_name);
+
+			// System settings for provider archive page text
+			$fpage_text_replacements[$placeholder_provider_archive_headline] = $provider_archive_headline;
+
+			// System settings for location labels
+			$fpage_text_replacements[$placeholder_location_single_name] = $location_single_name;
+			$fpage_text_replacements[strtolower($placeholder_location_single_name)] = strtolower($location_single_name);
+			$fpage_text_replacements[$placeholder_location_plural_name] = $location_plural_name;
+			$fpage_text_replacements[strtolower($placeholder_location_plural_name)] = strtolower($location_plural_name);
+
+			// System settings for location descendant item labels
+			$fpage_text_replacements[$placeholder_location_descendant_single_name] = $location_descendant_single_name;
+			$fpage_text_replacements[strtolower($placeholder_location_descendant_single_name)] = strtolower($location_descendant_single_name);
+			$fpage_text_replacements[$placeholder_location_descendant_plural_name] = $location_descendant_plural_name;
+			$fpage_text_replacements[strtolower($placeholder_location_descendant_plural_name)] = strtolower($location_descendant_plural_name);
+
+			// System settings for location archive page text
+			$fpage_text_replacements[$placeholder_location_archive_headline] = $location_archive_headline;
+
+			// System settings for area of expertise labels
+			$fpage_text_replacements[$placeholder_expertise_single_name] = $expertise_single_name;
+			$fpage_text_replacements[strtolower($placeholder_expertise_single_name)] = strtolower($expertise_single_name);
+			$fpage_text_replacements[$placeholder_expertise_plural_name] = $expertise_plural_name;
+			$fpage_text_replacements[strtolower($placeholder_expertise_plural_name)] = strtolower($expertise_plural_name);
+
+			// System settings for area of expertise descendant item labels
+			$fpage_text_replacements[$placeholder_expertise_descendant_single_name] = $expertise_descendant_single_name;
+			$fpage_text_replacements[strtolower($placeholder_expertise_descendant_single_name)] = strtolower($expertise_descendant_single_name);
+			$fpage_text_replacements[$placeholder_expertise_descendant_plural_name] = $expertise_descendant_plural_name;
+			$fpage_text_replacements[strtolower($placeholder_expertise_descendant_plural_name)] = strtolower($expertise_descendant_plural_name);
+
+			// System settings for area of expertise archive page text
+			$fpage_text_replacements[$placeholder_expertise_archive_headline] = $expertise_archive_headline;
+			$fpage_text_replacements[$placeholder_expertise_archive_intro_text] = $expertise_archive_intro_text;
+
+			// System settings for clinical resource labels
+			$fpage_text_replacements[$placeholder_clinical_resource_single_name] = $clinical_resource_single_name;
+			$fpage_text_replacements[strtolower($placeholder_clinical_resource_single_name)] = strtolower($clinical_resource_single_name);
+			$fpage_text_replacements[$placeholder_clinical_resource_plural_name] = $clinical_resource_plural_name;
+			$fpage_text_replacements[strtolower($placeholder_clinical_resource_plural_name)] = strtolower($clinical_resource_plural_name);
+
+			// System settings for clinical resource archive page text
+			$fpage_text_replacements[$placeholder_clinical_resource_archive_headline] = $clinical_resource_archive_headline;
+
+			// System settings for clinical resource facet labels
+			$fpage_text_replacements[$placeholder_clinical_resource_type_single_name] = $clinical_resource_type_single_name;
+			$fpage_text_replacements[strtolower($placeholder_clinical_resource_type_single_name)] = strtolower($clinical_resource_type_single_name);
+			$fpage_text_replacements[$placeholder_clinical_resource_type_plural_name] = $clinical_resource_type_plural_name;
+			$fpage_text_replacements[strtolower($placeholder_clinical_resource_type_plural_name)] = strtolower($clinical_resource_type_plural_name);
+
+			// System settings for combined conditions and treatments labels
+			$fpage_text_replacements[$placeholder_condition_treatment_single_name] = $condition_treatment_single_name;
+			$fpage_text_replacements[strtolower($placeholder_condition_treatment_single_name)] = strtolower($condition_treatment_single_name);
+			$fpage_text_replacements[$placeholder_condition_treatment_plural_name] = $condition_treatment_plural_name;
+			$fpage_text_replacements[strtolower($placeholder_condition_treatment_plural_name)] = strtolower($condition_treatment_plural_name);
+
+			// System settings for condition labels
+			$fpage_text_replacements[$placeholder_condition_single_name] = $condition_single_name;
+			$fpage_text_replacements[strtolower($placeholder_condition_single_name)] = strtolower($condition_single_name);
+			$fpage_text_replacements[$placeholder_condition_plural_name] = $condition_plural_name;
+			$fpage_text_replacements[strtolower($placeholder_condition_plural_name)] = strtolower($condition_plural_name);
+
+			// System settings for condition archive page text
+			$fpage_text_replacements[$placeholder_condition_archive_headline] = $condition_archive_headline;
+			$fpage_text_replacements[$placeholder_condition_archive_intro_text] = $condition_archive_intro_text;
+
+			// System settings for treatment labels
+			$fpage_text_replacements[$placeholder_treatment_single_name] = $treatment_single_name;
+			$fpage_text_replacements[strtolower($placeholder_treatment_single_name)] = strtolower($treatment_single_name);
+			$fpage_text_replacements[$placeholder_treatment_plural_name] = $treatment_plural_name;
+			$fpage_text_replacements[strtolower($placeholder_treatment_plural_name)] = strtolower($treatment_plural_name);
+
+			// System settings for location labels
+			$fpage_text_replacements[$placeholder_treatment_archive_headline] = $treatment_archive_headline;
+			$fpage_text_replacements[$placeholder_treatment_archive_intro_text] = $treatment_archive_intro_text;
+
+		// Ontology item titles
+
+			// Provider titles
+			if ( $short_name ) {
+				$fpage_text_replacements[$placeholder_provider_short_name] = $short_name;
+			}
+			if ( $short_name_possessive ) {
+				$fpage_text_replacements[$placeholder_provider_short_name_possessive] = $short_name_possessive;
+			}
+
+			// Location titles
+			if ( $page_title ) {
+				$fpage_text_replacements[$placeholder_location_page_title] = $page_title;
+			}
+			if ( $page_title_phrase ) {
+				$fpage_text_replacements[$placeholder_location_page_title_phrase] = $page_title_phrase;
+			}
+
+			// Area of expertise titles
+			if ( $page_title ) {
+				$fpage_text_replacements[$placeholder_expertise_page_title] = $page_title;
+			}
+
+	return str_replace(array_keys($fpage_text_replacements), array_values($fpage_text_replacements), $string); 
+}
+
 // Define variables for Find-a-Doc Settings values regarding ontology item labels
 
 	// Get system settings for provider labels
@@ -2459,240 +2693,6 @@ function uamswp_fad_podcast() {
 	}
 
 // Define variables for Find-a-Doc Settings values regarding ontology text elements on fake subpages and single profiles
-
-	// Create substitutions for use in fake subpage text elements
-	function uamswp_fad_fpage_text_replace($string) {
-		// Be sure to only call this function AFTER the following external global variables have been defined on the page
-
-		// Bring in variables from outside of the function
-
-			// Typically defined on the template: single location, single area of expertise
-			global $page_title;
-
-			// Typically defined on the template: single location
-			global $page_title_phrase;
-
-			// Typically defined on the template: single provider
-			global $short_name;
-			global $short_name_possessive;
-
-			// Defined in uamswp_fad_labels_provider()
-			global $placeholder_provider_single_name;
-			global $provider_single_name;
-			global $placeholder_provider_plural_name;
-			global $provider_plural_name;
-			global $placeholder_provider_short_name;
-			global $placeholder_provider_short_name_possessive;
-
-			// Defined in uamswp_fad_archive_provider()
-			global $placeholder_provider_archive_headline;
-			global $provider_archive_headline;
-
-			// Defined in uamswp_fad_labels_location()
-			global $placeholder_location_single_name;
-			global $location_single_name;
-			global $placeholder_location_plural_name;
-			global $location_plural_name;
-			global $placeholder_location_page_title;
-			global $placeholder_location_page_title_phrase;
-
-			// Defined in uamswp_fad_labels_location_descendant()
-			global $placeholder_location_descendant_single_name;
-			global $location_descendant_single_name;
-			global $placeholder_location_descendant_plural_name;
-			global $location_descendant_plural_name;
-
-			// Defined in uamswp_fad_archive_location()
-			global $placeholder_location_archive_headline;
-			global $location_archive_headline;
-
-			// Defined in uamswp_fad_labels_expertise()
-			global $placeholder_expertise_single_name;
-			global $expertise_single_name;
-			global $placeholder_expertise_plural_name;
-			global $expertise_plural_name;
-			global $placeholder_expertise_page_title;
-
-			// Defined in uamswp_fad_labels_expertise_descendant()
-			global $placeholder_expertise_descendant_single_name;
-			global $expertise_descendant_single_name;
-			global $placeholder_expertise_descendant_plural_name;
-			global $expertise_descendant_plural_name;
-
-			// Defined in uamswp_fad_archive_expertise()
-			global $placeholder_expertise_archive_headline;
-			global $expertise_archive_headline;
-			global $placeholder_expertise_archive_intro_text;
-			global $expertise_archive_intro_text;
-
-			// Defined in uamswp_fad_labels_clinical_resource()
-			global $placeholder_clinical_resource_single_name;
-			global $clinical_resource_single_name;
-			global $placeholder_clinical_resource_plural_name;
-			global $clinical_resource_plural_name;
-
-			// Defined in uamswp_fad_archive_clinical_resource()
-			global $placeholder_clinical_resource_archive_headline;
-			global $clinical_resource_archive_headline;
-
-			// Defined in uamswp_fad_labels_clinical_resource_facet()
-			global $placeholder_clinical_resource_type_single_name;
-			global $clinical_resource_type_single_name;
-			global $placeholder_clinical_resource_type_plural_name;
-			global $clinical_resource_type_plural_name;
-
-			// Defined in uamswp_fad_labels_condition_treatment()
-			global $placeholder_condition_treatment_single_name;
-			global $condition_treatment_single_name;
-			global $placeholder_condition_treatment_plural_name;
-			global $condition_treatment_plural_name;
-
-			// Defined in uamswp_fad_labels_condition()
-			global $placeholder_condition_single_name;
-			global $condition_single_name;
-			global $placeholder_condition_plural_name;
-			global $condition_plural_name;
-
-			// Defined in uamswp_fad_archive_condition()
-			global $placeholder_condition_archive_headline;
-			global $condition_archive_headline;
-			global $placeholder_condition_archive_intro_text;
-			global $condition_archive_intro_text;
-
-			// Defined in uamswp_fad_labels_treatment()
-			global $placeholder_treatment_single_name;
-			global $treatment_single_name;
-			global $placeholder_treatment_plural_name;
-			global $treatment_plural_name;
-
-			// Defined in uamswp_fad_archive_treatment()
-			global $placeholder_treatment_archive_headline;
-			global $treatment_archive_headline;
-			global $placeholder_treatment_archive_intro_text;
-			global $treatment_archive_intro_text;
-
-		// Check variables
-		$page_title = ( isset($page_title) && !empty($page_title) ) ? $page_title : '';
-		$page_title_phrase = ( isset($page_title_phrase) && !empty($page_title_phrase) ) ? $page_title_phrase : '';
-		$short_name = ( isset($short_name) && !empty($short_name) ) ? $short_name : '';
-		$short_name_possessive = ( isset($short_name_possessive) && !empty($short_name_possessive) ) ? $short_name_possessive : '';
-
-		// Make variables available outside of the function
-		// global $fpage_text_replace;
-
-		// Create array for defining text substitutions
-		// Key = old
-		// Value = new
-		$fpage_text_replace = array();
-
-			// System settings for ontology item labels
-
-				// System settings for provider labels
-				$fpage_text_replacements[$placeholder_provider_single_name] = $provider_single_name;
-				$fpage_text_replacements[strtolower($placeholder_provider_single_name)] = strtolower($provider_single_name);
-				$fpage_text_replacements[$placeholder_provider_plural_name] = $provider_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_provider_plural_name)] = strtolower($provider_plural_name);
-
-				// System settings for provider archive page text
-				$fpage_text_replacements[$placeholder_provider_archive_headline] = $provider_archive_headline;
-
-				// System settings for location labels
-				$fpage_text_replacements[$placeholder_location_single_name] = $location_single_name;
-				$fpage_text_replacements[strtolower($placeholder_location_single_name)] = strtolower($location_single_name);
-				$fpage_text_replacements[$placeholder_location_plural_name] = $location_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_location_plural_name)] = strtolower($location_plural_name);
-
-				// System settings for location descendant item labels
-				$fpage_text_replacements[$placeholder_location_descendant_single_name] = $location_descendant_single_name;
-				$fpage_text_replacements[strtolower($placeholder_location_descendant_single_name)] = strtolower($location_descendant_single_name);
-				$fpage_text_replacements[$placeholder_location_descendant_plural_name] = $location_descendant_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_location_descendant_plural_name)] = strtolower($location_descendant_plural_name);
-
-				// System settings for location archive page text
-				$fpage_text_replacements[$placeholder_location_archive_headline] = $location_archive_headline;
-
-				// System settings for area of expertise labels
-				$fpage_text_replacements[$placeholder_expertise_single_name] = $expertise_single_name;
-				$fpage_text_replacements[strtolower($placeholder_expertise_single_name)] = strtolower($expertise_single_name);
-				$fpage_text_replacements[$placeholder_expertise_plural_name] = $expertise_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_expertise_plural_name)] = strtolower($expertise_plural_name);
-
-				// System settings for area of expertise descendant item labels
-				$fpage_text_replacements[$placeholder_expertise_descendant_single_name] = $expertise_descendant_single_name;
-				$fpage_text_replacements[strtolower($placeholder_expertise_descendant_single_name)] = strtolower($expertise_descendant_single_name);
-				$fpage_text_replacements[$placeholder_expertise_descendant_plural_name] = $expertise_descendant_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_expertise_descendant_plural_name)] = strtolower($expertise_descendant_plural_name);
-
-				// System settings for area of expertise archive page text
-				$fpage_text_replacements[$placeholder_expertise_archive_headline] = $expertise_archive_headline;
-				$fpage_text_replacements[$placeholder_expertise_archive_intro_text] = $expertise_archive_intro_text;
-
-				// System settings for clinical resource labels
-				$fpage_text_replacements[$placeholder_clinical_resource_single_name] = $clinical_resource_single_name;
-				$fpage_text_replacements[strtolower($placeholder_clinical_resource_single_name)] = strtolower($clinical_resource_single_name);
-				$fpage_text_replacements[$placeholder_clinical_resource_plural_name] = $clinical_resource_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_clinical_resource_plural_name)] = strtolower($clinical_resource_plural_name);
-
-				// System settings for clinical resource archive page text
-				$fpage_text_replacements[$placeholder_clinical_resource_archive_headline] = $clinical_resource_archive_headline;
-
-				// System settings for clinical resource facet labels
-				$fpage_text_replacements[$placeholder_clinical_resource_type_single_name] = $clinical_resource_type_single_name;
-				$fpage_text_replacements[strtolower($placeholder_clinical_resource_type_single_name)] = strtolower($clinical_resource_type_single_name);
-				$fpage_text_replacements[$placeholder_clinical_resource_type_plural_name] = $clinical_resource_type_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_clinical_resource_type_plural_name)] = strtolower($clinical_resource_type_plural_name);
-
-				// System settings for combined conditions and treatments labels
-				$fpage_text_replacements[$placeholder_condition_treatment_single_name] = $condition_treatment_single_name;
-				$fpage_text_replacements[strtolower($placeholder_condition_treatment_single_name)] = strtolower($condition_treatment_single_name);
-				$fpage_text_replacements[$placeholder_condition_treatment_plural_name] = $condition_treatment_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_condition_treatment_plural_name)] = strtolower($condition_treatment_plural_name);
-
-				// System settings for condition labels
-				$fpage_text_replacements[$placeholder_condition_single_name] = $condition_single_name;
-				$fpage_text_replacements[strtolower($placeholder_condition_single_name)] = strtolower($condition_single_name);
-				$fpage_text_replacements[$placeholder_condition_plural_name] = $condition_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_condition_plural_name)] = strtolower($condition_plural_name);
-
-				// System settings for condition archive page text
-				$fpage_text_replacements[$placeholder_condition_archive_headline] = $condition_archive_headline;
-				$fpage_text_replacements[$placeholder_condition_archive_intro_text] = $condition_archive_intro_text;
-
-				// System settings for treatment labels
-				$fpage_text_replacements[$placeholder_treatment_single_name] = $treatment_single_name;
-				$fpage_text_replacements[strtolower($placeholder_treatment_single_name)] = strtolower($treatment_single_name);
-				$fpage_text_replacements[$placeholder_treatment_plural_name] = $treatment_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_treatment_plural_name)] = strtolower($treatment_plural_name);
-
-				// System settings for location labels
-				$fpage_text_replacements[$placeholder_treatment_archive_headline] = $treatment_archive_headline;
-				$fpage_text_replacements[$placeholder_treatment_archive_intro_text] = $treatment_archive_intro_text;
-
-			// Ontology item titles
-
-				// Provider titles
-				if ( $short_name ) {
-					$fpage_text_replacements[$placeholder_provider_short_name] = $short_name;
-				}
-				if ( $short_name_possessive ) {
-					$fpage_text_replacements[$placeholder_provider_short_name_possessive] = $short_name_possessive;
-				}
-
-				// Location titles
-				if ( $page_title ) {
-					$fpage_text_replacements[$placeholder_location_page_title] = $page_title;
-				}
-				if ( $page_title_phrase ) {
-					$fpage_text_replacements[$placeholder_location_page_title_phrase] = $page_title_phrase;
-				}
-
-				// Area of expertise titles
-				if ( $page_title ) {
-					$fpage_text_replacements[$placeholder_expertise_page_title] = $page_title;
-				}
-
-		return str_replace(array_keys($fpage_text_replacements), array_values($fpage_text_replacements), $string); 
-	}
 
 	// Get field values from Find-a-Doc Settings for ontology text elements in general placements
 
