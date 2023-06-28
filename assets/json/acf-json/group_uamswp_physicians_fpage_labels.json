@@ -248,6 +248,70 @@
 			"library": "all"
 		},
 		{
+			"key": "field_provider_fpage_ref_main_title_location",
+			"label": "Title of Reference to Main Provider Archive on Fake Subpage for Providers in Location Subsection",
+			"name": "provider_fpage_ref_main_title_location",
+			"type": "text",
+			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_provider_fpage_ref_main_intro_location",
+			"label": "Body Text of Reference to Main Provider Archive on Fake Subpage for Providers in Location Subsection",
+			"name": "provider_fpage_ref_main_intro_location",
+			"type": "textarea",
+			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_provider_fpage_ref_main_link_location",
+			"label": "Link Text of Reference to Main Provider Archive on Fake Subpage for Providers in Location Subsection",
+			"name": "provider_fpage_ref_main_link_location",
+			"type": "text",
+			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
 			"key": "field_provider_fpage_tab_expertise",
 			"label": "Area of Expertise Subsection",
 			"name": "",
@@ -338,6 +402,70 @@
 			"library": "all"
 		},
 		{
+			"key": "field_provider_fpage_ref_main_title_expertise",
+			"label": "Title of Reference to Main Provider Archive on Fake Subpage for Providers in Area of Expertise Subsection",
+			"name": "provider_fpage_ref_main_title_expertise",
+			"type": "text",
+			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_provider_fpage_ref_main_intro_expertise",
+			"label": "Body Text of Reference to Main Provider Archive on Fake Subpage for Providers in Area of Expertise Subsection",
+			"name": "provider_fpage_ref_main_intro_expertise",
+			"type": "textarea",
+			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_provider_fpage_ref_main_link_expertise",
+			"label": "Link Text of Reference to Main Provider Archive on Fake Subpage for Providers in Area of Expertise Subsection",
+			"name": "provider_fpage_ref_main_link_expertise",
+			"type": "text",
+			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
 			"key": "field_provider_fpage_tab_clinical_resource",
 			"label": "Clinical Resource Profile",
 			"name": "",
@@ -426,6 +554,70 @@
 			"acfe_settings": "",
 			"acfe_validate": "",
 			"library": "all"
+		},
+		{
+			"key": "field_provider_fpage_ref_main_title_clinical_resource",
+			"label": "Title of Reference to Main Provider Archive on Fake Subpage for Providers in Clinical Resource Subsection",
+			"name": "provider_fpage_ref_main_title_clinical_resource",
+			"type": "text",
+			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_provider_fpage_ref_main_intro_clinical_resource",
+			"label": "Body Text of Reference to Main Provider Archive on Fake Subpage for Providers in Clinical Resource Subsection",
+			"name": "provider_fpage_ref_main_intro_clinical_resource",
+			"type": "textarea",
+			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_provider_fpage_ref_main_link_clinical_resource",
+			"label": "Link Text of Reference to Main Provider Archive on Fake Subpage for Providers in Clinical Resource Subsection",
+			"name": "provider_fpage_ref_main_link_clinical_resource",
+			"type": "text",
+			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
 		}
 	],
 	"location": [

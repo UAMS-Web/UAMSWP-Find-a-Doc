@@ -386,6 +386,70 @@
 			"library": "all"
 		},
 		{
+			"key": "field_expertise_fpage_ref_main_title_provider",
+			"label": "Title of Reference to Main Area of Expertise Archive on Fake Subpage for Areas of Expertise in Provider Subsection",
+			"name": "expertise_fpage_ref_main_title_provider",
+			"type": "text",
+			"instructions": "Fake subpages contain references linking users back to the main area of expertise archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_expertise_fpage_ref_main_intro_provider",
+			"label": "Body Text of Reference to Main Area of Expertise Archive on Fake Subpage for Areas of Expertise in Provider Subsection",
+			"name": "expertise_fpage_ref_main_intro_provider",
+			"type": "textarea",
+			"instructions": "Fake subpages contain references linking users back to the main area of expertise archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_expertise_fpage_ref_main_link_provider",
+			"label": "Link Text of Reference to Main Area of Expertise Archive on Fake Subpage for Areas of Expertise in Provider Subsection",
+			"name": "expertise_fpage_ref_main_link_provider",
+			"type": "text",
+			"instructions": "Fake subpages contain references linking users back to the main area of expertise archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
 			"key": "field_expertise_fpage_tab_location",
 			"label": "Location Subsection",
 			"name": "",
@@ -474,6 +538,70 @@
 			"acfe_settings": "",
 			"acfe_validate": "",
 			"library": "all"
+		},
+		{
+			"key": "field_expertise_fpage_ref_main_title_location",
+			"label": "Title of Reference to Main Area of Expertise Archive on Fake Subpage for Areas of Expertise in Location Subsection",
+			"name": "expertise_fpage_ref_main_title_location",
+			"type": "text",
+			"instructions": "Fake subpages contain references linking users back to the main area of expertise archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_expertise_fpage_ref_main_intro_location",
+			"label": "Body Text of Reference to Main Area of Expertise Archive on Fake Subpage for Areas of Expertise in Location Subsection",
+			"name": "expertise_fpage_ref_main_intro_location",
+			"type": "textarea",
+			"instructions": "Fake subpages contain references linking users back to the main area of expertise archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_expertise_fpage_ref_main_link_location",
+			"label": "Link Text of Reference to Main Area of Expertise Archive on Fake Subpage for Areas of Expertise in Location Subsection",
+			"name": "expertise_fpage_ref_main_link_location",
+			"type": "text",
+			"instructions": "Fake subpages contain references linking users back to the main area of expertise archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
 		},
 		{
 			"key": "field_expertise_fpage_tab_expertise",
@@ -566,6 +694,70 @@
 			"library": "all"
 		},
 		{
+			"key": "field_expertise_descendant_fpage_ref_main_title_expertise",
+			"label": "Title of Reference to Main Area of Expertise Archive on Fake Subpage for Descendant Areas of Expertise in Area of Expertise Subsection",
+			"name": "expertise_descendant_fpage_ref_main_title_expertise",
+			"type": "text",
+			"instructions": "Fake subpages contain references linking users back to the main area of expertise archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_expertise_descendant_fpage_ref_main_intro_expertise",
+			"label": "Body Text of Reference to Main Area of Expertise Archive on Fake Subpage for Descendant Areas of Expertise in Area of Expertise Subsection",
+			"name": "expertise_descendant_fpage_ref_main_intro_expertise",
+			"type": "textarea",
+			"instructions": "Fake subpages contain references linking users back to the main area of expertise archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_expertise_descendant_fpage_ref_main_link_expertise",
+			"label": "Link Text of Reference to Main Area of Expertise Archive on Fake Subpage for Descendant Areas of Expertise in Area of Expertise Subsection",
+			"name": "expertise_descendant_fpage_ref_main_link_expertise",
+			"type": "text",
+			"instructions": "Fake subpages contain references linking users back to the main area of expertise archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
 			"key": "field_expertise_fpage_title_expertise",
 			"label": "Title of Fake Subpage (or Section) for Related Areas of Expertise Items in Area of Expertise Subsection",
 			"name": "expertise_fpage_title_expertise",
@@ -638,6 +830,70 @@
 			"acfe_settings": "",
 			"acfe_validate": "",
 			"library": "all"
+		},
+		{
+			"key": "field_expertise_fpage_ref_main_title_expertise",
+			"label": "Title of Reference to Main Area of Expertise Archive on Fake Subpage for Related Areas of Expertise in Area of Expertise Subsection",
+			"name": "expertise_fpage_ref_main_title_expertise",
+			"type": "text",
+			"instructions": "Fake subpages contain references linking users back to the main area of expertise archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_expertise_fpage_ref_main_intro_expertise",
+			"label": "Body Text of Reference to Main Area of Expertise Archive on Fake Subpage for Related Areas of Expertise in Area of Expertise Subsection",
+			"name": "expertise_fpage_ref_main_intro_expertise",
+			"type": "textarea",
+			"instructions": "Fake subpages contain references linking users back to the main area of expertise archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_expertise_fpage_ref_main_link_expertise",
+			"label": "Link Text of Reference to Main Area of Expertise Archive on Fake Subpage for Related Areas of Expertise in Area of Expertise Subsection",
+			"name": "expertise_fpage_ref_main_link_expertise",
+			"type": "text",
+			"instructions": "Fake subpages contain references linking users back to the main area of expertise archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
 		},
 		{
 			"key": "field_expertise_fpage_tab_clinical_resource",
@@ -728,6 +984,70 @@
 			"acfe_settings": "",
 			"acfe_validate": "",
 			"library": "all"
+		},
+		{
+			"key": "field_expertise_fpage_ref_main_title_clinical_resource",
+			"label": "Title of Reference to Main Area of Expertise Archive on Fake Subpage for Areas of Expertise in Clinical Resource Subsection",
+			"name": "expertise_fpage_ref_main_title_clinical_resource",
+			"type": "text",
+			"instructions": "Fake subpages contain references linking users back to the main area of expertise archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_expertise_fpage_ref_main_intro_clinical_resource",
+			"label": "Body Text of Reference to Main Area of Expertise Archive on Fake Subpage for Areas of Expertise in Clinical Resource Subsection",
+			"name": "expertise_fpage_ref_main_intro_clinical_resource",
+			"type": "textarea",
+			"instructions": "Fake subpages contain references linking users back to the main area of expertise archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_expertise_fpage_ref_main_link_clinical_resource",
+			"label": "Link Text of Reference to Main Area of Expertise Archive on Fake Subpage for Areas of Expertise in Clinical Resource Subsection",
+			"name": "expertise_fpage_ref_main_link_clinical_resource",
+			"type": "text",
+			"instructions": "Fake subpages contain references linking users back to the main area of expertise archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
 		}
 	],
 	"location": [
