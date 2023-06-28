@@ -5673,37 +5673,37 @@ function uamswp_fad_fpage_text_image_overlay() {
 	// Create array of main archive attributes for each fake subpage
 	$text_image_overlay_main_archive = array(
 		'providers'		=> array(
-			'heading'			=> 'Full List of [Providers]', // Heading text, limited to 32 characters // str
-			'body'				=> 'Discover our comprehensive list of [providers], spanning diverse specialties, who are dedicated to delivering exceptional care at UAMS Health.', // Body text, limited to 280 characters // str
-			'button_text'		=> 'View All [Providers]', // Link text, limited to 27 characters // str
+			'heading'			=> $provider_fpage_ref_main_title_general, // Heading text, limited to 32 characters // str
+			'body'				=> $provider_fpage_ref_main_intro_general, // Body text, limited to 280 characters // str
+			'button_text'		=> $provider_fpage_ref_main_link_general, // Link text, limited to 27 characters // str
 			'button_url'		=> get_post_type_archive_link('provider'), // Full URL // str
 			'image'				=> $provider_archive_image // Background image ID // int
 		),
 		'locations'		=> array(
-			'heading'			=> 'Full List of [Locations]', // Heading text, limited to 32 characters // str
-			'body'				=> 'Discover our extensive network of [locations], offering exceptional care across specialties within our health system. Explore our diverse [locations] and find the one closest to you.', // Body text, limited to 280 characters // str
-			'button_text'		=> 'View All [Locations]', // Link text, limited to 27 characters // str
+			'heading'			=> $location_fpage_ref_main_title_general, // Heading text, limited to 32 characters // str
+			'body'				=> $location_fpage_ref_main_intro_general, // Body text, limited to 280 characters // str
+			'button_text'		=> $location_fpage_ref_main_link_general, // Link text, limited to 27 characters // str
 			'button_url'		=> get_post_type_archive_link('location'), // Full URL // str
 			'image'				=> $location_archive_image // Background image ID // int
 		),
 		'specialties'		=> array(
-			'heading'			=> 'Full List of [Areas of Expertise]', // Heading text, limited to 32 characters // str
-			'body'				=> 'Explore our extensive range of [areas of expertise], encompassing diverse specialties and cutting-edge medical advancements. Discover the breadth of knowledge and skills within UAMS Health.', // Body text, limited to 280 characters // str
-			'button_text'		=> 'View All [Areas of Expertise]', // Link text, limited to 27 characters // str
+			'heading'			=> $expertise_descendant_fpage_ref_main_title_general, // Heading text, limited to 32 characters // str
+			'body'				=> $expertise_descendant_fpage_ref_main_intro_general, // Body text, limited to 280 characters // str
+			'button_text'		=> $expertise_descendant_fpage_ref_main_link_general, // Link text, limited to 27 characters // str
 			'button_url'		=> get_post_type_archive_link('expertise'), // Full URL // str
 			'image'				=> $expertise_archive_image // Background image ID // int
 		),
 		'related'		=> array(
-			'heading'			=> 'Full List of Areas of Expertise', // Heading text, limited to 32 characters // str
-			'body'				=> 'Explore our extensive range of [areas of expertise], encompassing diverse specialties and cutting-edge medical advancements. Discover the breadth of knowledge and skills within UAMS Health.', // Body text, limited to 280 characters // str
-			'button_text'		=> 'View All [Areas of Expertise]', // Link text, limited to 27 characters // str
+			'heading'			=> $expertise_fpage_ref_main_title_general, // Heading text, limited to 32 characters // str
+			'body'				=> $expertise_fpage_ref_main_intro_general, // Body text, limited to 280 characters // str
+			'button_text'		=> $expertise_fpage_ref_main_link_general, // Link text, limited to 27 characters // str
 			'button_url'		=> get_post_type_archive_link('expertise'), // Full URL // str
 			'image'				=> $expertise_archive_image // Background image ID // int
 		),
 		'resources'		=> array(
-			'heading'			=> 'Full List of [Clinical Resources]', // Heading text, limited to 32 characters // str
-			'body'				=> 'Access a wealth of [clinical resources], including articles, videos, infographics, and documents, covering various specialties within UAMS Health. Expand your knowledge and stay informed.', // Body text, limited to 280 characters // str
-			'button_text'		=> 'View All [Clinical Resources]', // Link text, limited to 27 characters // str
+			'heading'			=> $clinical_resource_fpage_ref_main_title_general, // Heading text, limited to 32 characters // str
+			'body'				=> $clinical_resource_fpage_ref_main_intro_general, // Body text, limited to 280 characters // str
+			'button_text'		=> $clinical_resource_fpage_ref_main_link_general, // Link text, limited to 27 characters // str
 			'button_url'		=> get_post_type_archive_link('clinical-resource'), // Full URL // str
 			'image'				=> $clinical_resource_archive_image // Background image ID // int
 		)
@@ -5714,29 +5714,29 @@ function uamswp_fad_fpage_text_image_overlay() {
 		'providers'		=> array(
 			'heading'			=> $provider_fpage_title_expertise, // Heading text, limited to 32 characters // str
 			'body'				=> 'Discover our esteemed team of [providers] within the vast field of [Area of Expertise Title], delivering comprehensive care for UAMS Health patients. Explore our diverse roster of experts of various [descendant areas of expertise] within [Area of Expertise Title].', // Body text, limited to 280 characters // str
-			'button_text'		=> 'View All [Providers]', // Link text, limited to 27 characters // str
-			'button_url'		=> get_post_type_archive_link('provider'), // Full URL // str
+			'button_text'		=> 'View [Providers]', // Link text, limited to 27 characters // str
+			'button_url'		=> trailingslashit(get_permalink($ancestors_ontology_farthest)) . user_trailingslashit('providers'), // Full URL // str
 			'image'				=> $provider_archive_image // Background image ID // int
 		),
 		'locations'		=> array(
 			'heading'			=> $location_fpage_title_expertise, // Heading text, limited to 32 characters // str
 			'body'				=> 'Explore our extensive network of [locations] dedicated to providing exceptional care within the realm of [Area of Expertise Title]. Discover a range of specialized services and comprehensive care options across multiple [descendant areas of expertise].', // Body text, limited to 280 characters // str
-			'button_text'		=> 'View All [Locations]', // Link text, limited to 27 characters // str
-			'button_url'		=> get_post_type_archive_link('location'), // Full URL // str
+			'button_text'		=> 'View [Locations]', // Link text, limited to 27 characters // str
+			'button_url'		=> trailingslashit(get_permalink($ancestors_ontology_farthest)) . user_trailingslashit('locations'), // Full URL // str
 			'image'				=> $location_archive_image // Background image ID // int
 		),
 		'specialties'		=> array(
 			'heading'			=> $expertise_fpage_title_expertise, // Heading text, limited to 32 characters // str
 			'body'				=> 'Discover the breadth of [descendant areas of expertise] within [Area of Expertise Title], offering comprehensive care for various medical needs.', // Body text, limited to 280 characters // str
-			'button_text'		=> 'All [Areas of Expertise]', // Link text, limited to 27 characters // str
-			'button_url'		=> get_post_type_archive_link('expertise'), // Full URL // str
+			'button_text'		=> 'View [Areas of Expertise]', // Link text, limited to 27 characters // str
+			'button_url'		=> trailingslashit(get_permalink($ancestors_ontology_farthest)) . user_trailingslashit('specialties'), // Full URL // str
 			'image'				=> $expertise_archive_image // Background image ID // int
 		),
 		'resources'		=> array(
 			'heading'			=> $clinical_resource_fpage_title_expertise, // Heading text, limited to 32 characters // str
 			'body'				=> 'Unlock a treasure trove of [clinical resources] covering diverse specialties within [Area of Expertise Title]. Access a wealth of articles, videos, infographics, and documents to enhance your knowledge and understanding.', // Body text, limited to 280 characters // str
-			'button_text'		=> 'All [Clinical Resources]', // Link text, limited to 27 characters // str
-			'button_url'		=> get_post_type_archive_link('clinical-resource'), // Full URL // str
+			'button_text'		=> 'View [Clinical Resources]', // Link text, limited to 27 characters // str
+			'button_url'		=> trailingslashit(get_permalink($ancestors_ontology_farthest)) . user_trailingslashit('resources'), // Full URL // str
 			'image'				=> $clinical_resource_archive_image // Background image ID // int
 		)
 	);
