@@ -2073,7 +2073,7 @@ function uamswp_fad_podcast() {
 	<?php } // endif ( $podcast_section_show )
 }
 
-// Get system settings for other ontology item labels and archive page text
+// Define variables for Find-a-Doc Settings values regarding ontology item labels
 
 	// Get system settings for provider labels
 	function uamswp_fad_labels_provider() {
@@ -2107,20 +2107,6 @@ function uamswp_fad_podcast() {
 		// Add item to FacetWP labels array for Providers facet on Clinical Resources archive/list
 		$facet_labels['resource_provider'] = $provider_plural_name;
 		$facet_labels['resource_provider_attr'] = $provider_plural_name_attr;
-	}
-
-	// Get system settings for provider archive page text
-	function uamswp_fad_archive_provider() {
-		// Make variables available outside of the function
-		global $provider_archive_headline;
-		global $provider_archive_headline_attr;
-		global $placeholder_provider_archive_headline;
-
-		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
-		$placeholder_provider_archive_headline = '[Provider Archive Title]';
-
-		$provider_archive_headline = get_field('provider_archive_headline', 'option') ?: 'UAMS Health Providers';
-		$provider_archive_headline_attr = uamswp_attr_conversion($provider_archive_headline);
 	}
 
 	// Get system settings for location labels
@@ -2179,20 +2165,6 @@ function uamswp_fad_podcast() {
 		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
 		$placeholder_location_descendant_single_name = '[Descendant Location]';
 		$placeholder_location_descendant_plural_name = '[Descendant Locations]';
-	}
-
-	// Get system settings for location archive page text
-	function uamswp_fad_archive_location() {
-		// Make variables available outside of the function
-		global $location_archive_headline;
-		global $location_archive_headline_attr;
-		global $placeholder_location_archive_headline;
-
-		$location_archive_headline = get_field('location_archive_headline', 'option') ?: 'Locations';
-		$location_archive_headline_attr = uamswp_attr_conversion($location_archive_headline);
-
-		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
-		$placeholder_location_archive_headline = '[Location Archive Title]';
 	}
 
 	// Get system settings for area of expertise labels
@@ -2255,24 +2227,6 @@ function uamswp_fad_podcast() {
 		$placeholder_expertise_descendant_plural_name = '[Descendant Areas of Expertise]';
 	}
 
-	// Get system settings for area of expertise archive page text
-	function uamswp_fad_archive_expertise() {
-		// Make variables available outside of the function
-		global $expertise_archive_headline;
-		global $expertise_archive_headline_attr;
-		global $expertise_archive_intro_text;
-		global $placeholder_expertise_archive_headline;
-		global $placeholder_expertise_archive_intro_text;
-
-		$expertise_archive_headline = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
-		$expertise_archive_headline_attr = uamswp_attr_conversion($expertise_archive_headline);
-		$expertise_archive_intro_text = get_field('expertise_archive_intro_text', 'option');
-
-		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
-		$placeholder_expertise_archive_headline = '[Area of Expertise Archive Title]';
-		$placeholder_expertise_archive_intro_text = '[Area of Expertise Archive Intro Text]';
-	}
-
 	// Get system settings for clinical resource labels
 	function uamswp_fad_labels_clinical_resource() {
 		// Make variables available outside of the function
@@ -2291,20 +2245,6 @@ function uamswp_fad_podcast() {
 		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
 		$placeholder_clinical_resource_single_name = '[Clinical Resource]';
 		$placeholder_clinical_resource_plural_name = '[Clinical Resources]';
-	}
-
-	// Get system settings for clinical resource archive page text
-	function uamswp_fad_archive_clinical_resource() {
-		// Make variables available outside of the function
-		global $clinical_resource_archive_headline;
-		global $clinical_resource_archive_headline_attr;
-		global $placeholder_clinical_resource_archive_headline;
-
-		$clinical_resource_archive_headline = get_field('clinical_resource_archive_headline', 'option') ?: 'Clinical Resources';
-		$clinical_resource_archive_headline_attr = uamswp_attr_conversion($clinical_resource_archive_headline);
-
-		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
-		$placeholder_clinical_resource_archive_headline = '[Clinical Resource Archive Title]';
 	}
 
 	// Get system settings for clinical resource facet labels
@@ -2386,24 +2326,6 @@ function uamswp_fad_podcast() {
 		$facet_labels['resource_conditions_attr'] = $condition_plural_name_attr;
 	}
 
-	// Get system settings for condition archive page text
-	function uamswp_fad_archive_condition() {
-		// Make variables available outside of the function
-		global $condition_archive_headline;
-		global $condition_archive_headline_attr;
-		global $condition_archive_intro_text;
-		global $placeholder_condition_archive_headline;
-		global $placeholder_condition_archive_intro_text;
-
-		$condition_archive_headline = get_field('conditions_archive_headline', 'option') ?: 'Conditions';
-		$condition_archive_headline_attr = uamswp_attr_conversion($condition_archive_headline);
-		$condition_archive_intro_text = get_field('conditions_archive_intro_text', 'option');
-
-		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
-		$placeholder_condition_archive_headline = '[Condition Archive Title]';
-		$placeholder_condition_archive_intro_text = '[Condition Archive Intro Text]';
-	}
-
 	// Get system settings for treatment labels
 	function uamswp_fad_labels_treatment() {
 		// Make variables available outside of the function
@@ -2436,6 +2358,86 @@ function uamswp_fad_podcast() {
 		// Add item to FacetWP labels array for Treatments facet on Clinical Resources archive/list
 		$facet_labels['resource_treatments'] = $treatment_plural_name;
 		$facet_labels['resource_treatments_attr'] = $treatment_plural_name_attr;
+	}
+
+// Define variables for Find-a-Doc Settings values regarding ontology archive page text
+
+	// Get system settings for provider archive page text
+	function uamswp_fad_archive_provider() {
+		// Make variables available outside of the function
+		global $provider_archive_headline;
+		global $provider_archive_headline_attr;
+		global $placeholder_provider_archive_headline;
+
+		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
+		$placeholder_provider_archive_headline = '[Provider Archive Title]';
+
+		$provider_archive_headline = get_field('provider_archive_headline', 'option') ?: 'UAMS Health Providers';
+		$provider_archive_headline_attr = uamswp_attr_conversion($provider_archive_headline);
+	}
+
+	// Get system settings for location archive page text
+	function uamswp_fad_archive_location() {
+		// Make variables available outside of the function
+		global $location_archive_headline;
+		global $location_archive_headline_attr;
+		global $placeholder_location_archive_headline;
+
+		$location_archive_headline = get_field('location_archive_headline', 'option') ?: 'Locations';
+		$location_archive_headline_attr = uamswp_attr_conversion($location_archive_headline);
+
+		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
+		$placeholder_location_archive_headline = '[Location Archive Title]';
+	}
+
+	// Get system settings for area of expertise archive page text
+	function uamswp_fad_archive_expertise() {
+		// Make variables available outside of the function
+		global $expertise_archive_headline;
+		global $expertise_archive_headline_attr;
+		global $expertise_archive_intro_text;
+		global $placeholder_expertise_archive_headline;
+		global $placeholder_expertise_archive_intro_text;
+
+		$expertise_archive_headline = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
+		$expertise_archive_headline_attr = uamswp_attr_conversion($expertise_archive_headline);
+		$expertise_archive_intro_text = get_field('expertise_archive_intro_text', 'option');
+
+		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
+		$placeholder_expertise_archive_headline = '[Area of Expertise Archive Title]';
+		$placeholder_expertise_archive_intro_text = '[Area of Expertise Archive Intro Text]';
+	}
+
+	// Get system settings for clinical resource archive page text
+	function uamswp_fad_archive_clinical_resource() {
+		// Make variables available outside of the function
+		global $clinical_resource_archive_headline;
+		global $clinical_resource_archive_headline_attr;
+		global $placeholder_clinical_resource_archive_headline;
+
+		$clinical_resource_archive_headline = get_field('clinical_resource_archive_headline', 'option') ?: 'Clinical Resources';
+		$clinical_resource_archive_headline_attr = uamswp_attr_conversion($clinical_resource_archive_headline);
+
+		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
+		$placeholder_clinical_resource_archive_headline = '[Clinical Resource Archive Title]';
+	}
+
+	// Get system settings for condition archive page text
+	function uamswp_fad_archive_condition() {
+		// Make variables available outside of the function
+		global $condition_archive_headline;
+		global $condition_archive_headline_attr;
+		global $condition_archive_intro_text;
+		global $placeholder_condition_archive_headline;
+		global $placeholder_condition_archive_intro_text;
+
+		$condition_archive_headline = get_field('conditions_archive_headline', 'option') ?: 'Conditions';
+		$condition_archive_headline_attr = uamswp_attr_conversion($condition_archive_headline);
+		$condition_archive_intro_text = get_field('conditions_archive_intro_text', 'option');
+
+		// Define string used to find and replace with values from Find-a-Doc Settings in uamswp_fad_fpage_text_replace()
+		$placeholder_condition_archive_headline = '[Condition Archive Title]';
+		$placeholder_condition_archive_intro_text = '[Condition Archive Intro Text]';
 	}
 
 	// Get system settings for treatment archive page text
