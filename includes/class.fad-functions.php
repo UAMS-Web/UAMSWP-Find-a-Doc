@@ -4172,19 +4172,19 @@ function uamswp_fad_fpage_text_replace($string) {
 							}
 						}
 						if ( !isset($provider_fpage_title_expertise) || empty($provider_fpage_title_expertise) ) {
-							$provider_fpage_title_location = $provider_fpage_title_general; // Title
+							$provider_fpage_title_expertise = $provider_fpage_title_general; // Title
 						}
 						if ( !isset($provider_fpage_intro_expertise) || empty($provider_fpage_intro_expertise) ) {
-							$provider_fpage_intro_location = $provider_fpage_intro_general; // Intro text
+							$provider_fpage_intro_expertise = $provider_fpage_intro_general; // Intro text
 						}
 						if ( !isset($provider_fpage_ref_main_title_expertise) || empty($provider_fpage_ref_main_title_expertise) ) {
-							$provider_fpage_ref_main_title_location = $provider_fpage_ref_main_title_general; // Reference to the main provider archive, title
+							$provider_fpage_ref_main_title_expertise = $provider_fpage_ref_main_title_general; // Reference to the main provider archive, title
 						}
 						if ( !isset($provider_fpage_ref_main_intro_expertise) || empty($provider_fpage_ref_main_intro_expertise) ) {
-							$provider_fpage_ref_main_intro_location = $provider_fpage_ref_main_intro_general; // Reference to the main provider archive, body text
+							$provider_fpage_ref_main_intro_expertise = $provider_fpage_ref_main_intro_general; // Reference to the main provider archive, body text
 						}
 						if ( !isset($provider_fpage_ref_main_link_expertise) || empty($provider_fpage_ref_main_link_expertise) ) {
-							$provider_fpage_ref_main_link_location = $provider_fpage_ref_main_link_general; // Reference to the main provider archive, link text
+							$provider_fpage_ref_main_link_expertise = $provider_fpage_ref_main_link_general; // Reference to the main provider archive, link text
 						}
 		
 					// Substitute placeholder text for relevant system settings value
@@ -4939,19 +4939,19 @@ function uamswp_fad_fpage_text_replace($string) {
 						}
 					}
 					if ( !isset($provider_fpage_title_clinical_resource) || empty($provider_fpage_title_clinical_resource) ) {
-						$provider_fpage_title_location = $provider_fpage_title_general; // Title
+						$provider_fpage_title_clinical_resource = $provider_fpage_title_general; // Title
 					}
 					if ( !isset($provider_fpage_intro_clinical_resource) || empty($provider_fpage_intro_clinical_resource) ) {
-						$provider_fpage_intro_location = $provider_fpage_intro_general; // Intro text
+						$provider_fpage_intro_clinical_resource = $provider_fpage_intro_general; // Intro text
 					}
 					if ( !isset($provider_fpage_ref_main_title_clinical_resource) || empty($provider_fpage_ref_main_title_clinical_resource) ) {
-						$provider_fpage_ref_main_title_location = $provider_fpage_ref_main_title_general; // Reference to the main provider archive, title
+						$provider_fpage_ref_main_title_clinical_resource = $provider_fpage_ref_main_title_general; // Reference to the main provider archive, title
 					}
 					if ( !isset($provider_fpage_ref_main_intro_clinical_resource) || empty($provider_fpage_ref_main_intro_clinical_resource) ) {
-						$provider_fpage_ref_main_intro_location = $provider_fpage_ref_main_intro_general; // Reference to the main provider archive, body text
+						$provider_fpage_ref_main_intro_clinical_resource = $provider_fpage_ref_main_intro_general; // Reference to the main provider archive, body text
 					}
 					if ( !isset($provider_fpage_ref_main_link_clinical_resource) || empty($provider_fpage_ref_main_link_clinical_resource) ) {
-						$provider_fpage_ref_main_link_location = $provider_fpage_ref_main_link_general; // Reference to the main provider archive, link text
+						$provider_fpage_ref_main_link_clinical_resource = $provider_fpage_ref_main_link_general; // Reference to the main provider archive, link text
 					}
 	
 				// Substitute placeholder text for relevant system settings value
