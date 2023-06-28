@@ -24,7 +24,7 @@
 			"label": "General Title of Fake Subpage (or Section) for Clinical Resources",
 			"name": "clinical_resource_fpage_title_general",
 			"type": "text",
-			"instructions": "If you leave this blank, the default title structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., title of fake subpage (or section) for clinical resources in areas of expertise subsection).",
+			"instructions": "If you leave this blank, the default title structure will be used</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., title of a fake subpage (or section) for clinical resources in an area of expertise subsection).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -46,7 +46,7 @@
 			"label": "General Intro Text of Fake Subpage (or Section) for Clinical Resources",
 			"name": "clinical_resource_fpage_intro_general",
 			"type": "textarea",
-			"instructions": "If you leave this blank, the default intro text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., intro text of fake subpage (or section) for clinical resources in areas of expertise subsection).",
+			"instructions": "If you leave this blank, the default intro text structure will be used</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., intro text of a fake subpage (or section) for clinical resources in an area of expertise subsection).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -98,7 +98,7 @@
 			"label": "General \"More\" Intro Text of Fake Subpage (or Section) for Clinical Resources",
 			"name": "clinical_resource_fpage_more_text_general",
 			"type": "text",
-			"instructions": "If you leave this blank, the default \"more\" text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
+			"instructions": "If you leave this blank, the default \"more\" text structure will be used</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -118,7 +118,7 @@
 			"label": "General \"More\" Link Text of Fake Subpage (or Section) for Clinical Resources",
 			"name": "clinical_resource_fpage_more_link_text_general",
 			"type": "text",
-			"instructions": "If you leave this blank, the default link text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
+			"instructions": "If you leave this blank, the default link text structure will be used</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -138,7 +138,7 @@
 			"label": "General \"More\" Button Description of Fake Subpage (or Section) for Clinical Resources",
 			"name": "clinical_resource_fpage_more_link_descr_general",
 			"type": "text",
-			"instructions": "If you leave this blank, the default link description structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
+			"instructions": "If you leave this blank, the default link description structure will be used</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -248,7 +248,7 @@
 			"label": "\"More\" Intro Text of Fake Subpage (or Section) for Clinical Resources in a Provider Subsection or Profile",
 			"name": "clinical_resource_fpage_more_text_provider",
 			"type": "text",
-			"instructions": "If you leave this blank, the default \"more\" text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
+			"instructions": "If you leave this blank, the default \"more\" text structure will be used</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -268,7 +268,7 @@
 			"label": "\"More\" Link Text of Fake Subpage (or Section) for Clinical Resources in a Provider Subsection or Profile",
 			"name": "clinical_resource_fpage_more_link_text_provider",
 			"type": "text",
-			"instructions": "If you leave this blank, the default link text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
+			"instructions": "If you leave this blank, the default link text structure will be used</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -288,7 +288,7 @@
 			"label": "\"More\" Button Description of Fake Subpage (or Section) for Clinical Resources in a Provider Subsection or Profile",
 			"name": "clinical_resource_fpage_more_link_descr_provider",
 			"type": "text",
-			"instructions": "If you leave this blank, the default link description structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
+			"instructions": "If you leave this blank, the default link description structure will be used</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -398,7 +398,7 @@
 			"label": "\"More\" Intro Text of Fake Subpage (or Section) for Clinical Resources in a Location Subsection or Profile",
 			"name": "clinical_resource_fpage_more_text_location",
 			"type": "text",
-			"instructions": "If you leave this blank, the default \"more\" text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
+			"instructions": "If you leave this blank, the default \"more\" text structure will be used</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -418,7 +418,7 @@
 			"label": "\"More\" Link Text of Fake Subpage (or Section) for Clinical Resources in a Location Subsection or Profile",
 			"name": "clinical_resource_fpage_more_link_text_location",
 			"type": "text",
-			"instructions": "If you leave this blank, the default link text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
+			"instructions": "If you leave this blank, the default link text structure will be used</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -438,7 +438,7 @@
 			"label": "\"More\" Button Description of Fake Subpage (or Section) for Clinical Resources in a Location Subsection or Profile",
 			"name": "clinical_resource_fpage_more_link_descr_location",
 			"type": "text",
-			"instructions": "If you leave this blank, the default link description structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
+			"instructions": "If you leave this blank, the default link description structure will be used</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -548,7 +548,7 @@
 			"label": "\"More\" Intro Text of Fake Subpage (or Section) for Clinical Resources in an Area of Expertise Subsection or Profile",
 			"name": "clinical_resource_fpage_more_text_expertise",
 			"type": "text",
-			"instructions": "If you leave this blank, the default \"more\" text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
+			"instructions": "If you leave this blank, the default \"more\" text structure will be used</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -568,7 +568,7 @@
 			"label": "\"More\" Link Text of Fake Subpage (or Section) for Clinical Resources in an Area of Expertise Subsection or Profile",
 			"name": "clinical_resource_fpage_more_link_text_expertise",
 			"type": "text",
-			"instructions": "If you leave this blank, the default link text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
+			"instructions": "If you leave this blank, the default link text structure will be used</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -588,7 +588,7 @@
 			"label": "\"More\" Button Description of Fake Subpage (or Section) for Clinical Resources in an Area of Expertise Subsection or Profile",
 			"name": "clinical_resource_fpage_more_link_descr_expertise",
 			"type": "text",
-			"instructions": "If you leave this blank, the default link description structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
+			"instructions": "If you leave this blank, the default link description structure will be used</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -698,7 +698,7 @@
 			"label": "\"More\" Intro Text of Fake Subpage (or Section) for Related Clinical Resources in a Clinical Resources Subsection or Profile",
 			"name": "clinical_resource_fpage_more_text_clinical_resource",
 			"type": "text",
-			"instructions": "If you leave this blank, the default \"more\" text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
+			"instructions": "If you leave this blank, the default \"more\" text structure will be used</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -718,7 +718,7 @@
 			"label": "\"More\" Link Text of Fake Subpage (or Section) for Related Clinical Resources in a Clinical Resources Subsection or Profile",
 			"name": "clinical_resource_fpage_more_link_text_clinical_resource",
 			"type": "text",
-			"instructions": "If you leave this blank, the default link text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
+			"instructions": "If you leave this blank, the default link text structure will be used</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -738,7 +738,7 @@
 			"label": "\"More\" Button Description of Fake Subpage (or Section) for Related Clinical Resources in a Clinical Resources Subsection or Profile",
 			"name": "clinical_resource_fpage_more_link_descr_clinical_resource",
 			"type": "text",
-			"instructions": "If you leave this blank, the default link description structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
+			"instructions": "If you leave this blank, the default link description structure will be used</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., more text of fake subpage (or section) for clinical resources in provider profile).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {

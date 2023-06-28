@@ -24,7 +24,7 @@
 			"label": "General Title of Fake Subpage (or Section) for Conditions and Treatments Combined",
 			"name": "condition_treatment_fpage_title_general",
 			"type": "text",
-			"instructions": "If you leave this blank, the default title structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., title of fake subpage (or section) for conditions and treatments combined in areas of expertise subsection).",
+			"instructions": "If you leave this blank, the default title structure will be used</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., title of a fake subpage (or section) for conditions and treatments combined in an area of expertise subsection).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -46,7 +46,7 @@
 			"label": "General Intro Text of Fake Subpage (or Section) for Conditions and Treatments Combined",
 			"name": "condition_treatment_fpage_intro_general",
 			"type": "textarea",
-			"instructions": "If you leave this blank, the default intro text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., intro text of fake subpage (or section) for conditions and treatments combined in areas of expertise subsection).",
+			"instructions": "If you leave this blank, the default intro text structure will be used</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., intro text of a fake subpage (or section) for conditions and treatments combined in an area of expertise subsection).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
