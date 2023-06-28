@@ -2736,34 +2736,58 @@ function uamswp_fad_fpage_text_replace($string) {
 			global $location_fpage_intro_general;
 			global $location_descendant_fpage_title_general;
 			global $location_descendant_fpage_intro_general;
+			global $location_fpage_ref_main_title_general;
+			global $location_fpage_ref_main_intro_general;
+			global $location_fpage_ref_main_link_general;
+			global $location_descendant_fpage_ref_main_title_general;
+			global $location_descendant_fpage_ref_main_intro_general;
+			global $location_descendant_fpage_ref_main_link_general;
 
 			// Locations
 
 				// Get the system settings for the text elements in a general placement
 				$location_fpage_title_general = get_field('location_fpage_title_general', 'option'); // Fake subpage (or section), title
 				$location_fpage_intro_general = get_field('location_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
+				$location_fpage_ref_main_title_general = get_field('location_fpage_ref_main_title_general', 'option'); // Reference to main location archive, title
+				$location_fpage_ref_main_intro_general = get_field('location_fpage_ref_main_intro_general', 'option'); // Reference to main location archive, body text
+				$location_fpage_ref_main_link_general = get_field('location_fpage_ref_main_link_general', 'option'); // Reference to main location archive, link text
 
 				// If the variable is not set or is empty, set a hardcoded fallback value
 				$location_fpage_title_general = ( isset($location_fpage_title_general) && !empty($location_fpage_title_general) ) ? $location_fpage_title_general : 'Related [Locations]'; // Fake subpage (or section), title
 				$location_fpage_intro_general = ( isset($location_fpage_intro_general) && !empty($location_fpage_intro_general) ) ? $location_fpage_intro_general : ''; // Fake subpage (or section), intro text
+				$location_fpage_ref_main_title_general = ( isset($location_fpage_ref_main_title_general) && !empty($location_fpage_ref_main_title_general) ) ? $location_fpage_ref_main_title_general : 'Full List of [Locations]'; // Reference to main location archive, title
+				$location_fpage_ref_main_intro_general = ( isset($location_fpage_ref_main_intro_general) && !empty($location_fpage_ref_main_intro_general) ) ? $location_fpage_ref_main_intro_general : 'Discover our extensive network of [locations], offering exceptional care across specialties within UAMS Health. Explore our diverse [locations] and find the one closest to you.'; // Reference to main location archive, body text
+				$location_fpage_ref_main_link_general = ( isset($location_fpage_ref_main_link_general) && !empty($location_fpage_ref_main_link_general) ) ? $location_fpage_ref_main_link_general : 'View All [Locations]'; // Reference to main location archive, link text
 
 				// Substitute placeholder text for relevant system settings value
 				$location_fpage_title_general = uamswp_fad_fpage_text_replace($location_fpage_title_general); // Fake subpage (or section), title
 				$location_fpage_intro_general = uamswp_fad_fpage_text_replace($location_fpage_intro_general); // Fake subpage (or section), intro text
+				$location_fpage_ref_main_title_general = uamswp_fad_fpage_text_replace($location_fpage_ref_main_title_general); // Reference to main location archive, title
+				$location_fpage_ref_main_intro_general = uamswp_fad_fpage_text_replace($location_fpage_ref_main_intro_general); // Reference to main location archive, body text
+				$location_fpage_ref_main_link_general = uamswp_fad_fpage_text_replace($location_fpage_ref_main_link_general); // Reference to main location archive, link text
 
 			// Descendant Locations
 
 				// Get the system settings for the text elements in a general placement
 				$location_descendant_fpage_title_general = get_field('location_descendant_fpage_title_general', 'option'); // Fake subpage (or section), title
 				$location_descendant_fpage_intro_general = get_field('location_descendant_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
+				$location_descendant_fpage_ref_main_title_general = get_field('location_descendant_fpage_ref_main_title_general', 'option'); // Reference to main location archive, title
+				$location_descendant_fpage_ref_main_intro_general = get_field('location_descendant_fpage_ref_main_intro_general', 'option'); // Reference to main location archive, body text
+				$location_descendant_fpage_ref_main_link_general = get_field('location_descendant_fpage_ref_main_link_general', 'option'); // Reference to main location archive, link text
 
 				// If the variable is not set or is empty, set a hardcoded fallback value
 				$location_descendant_fpage_title_general = ( isset($location_descendant_fpage_title_general) && !empty($location_descendant_fpage_title_general) ) ? $location_descendant_fpage_title_general : 'Related [Descendant Locations]'; // Fake subpage (or section), title
 				$location_descendant_fpage_intro_general = ( isset($location_descendant_fpage_intro_general) && !empty($location_descendant_fpage_intro_general) ) ? $location_descendant_fpage_intro_general : ''; // Fake subpage (or section), intro text
+				$location_descendant_fpage_ref_main_title_general = ( isset($location_descendant_fpage_ref_main_title_general) && !empty($location_descendant_fpage_ref_main_title_general) ) ? $location_descendant_fpage_ref_main_title_general : $location_fpage_ref_main_title_general; // Reference to main location archive, title
+				$location_descendant_fpage_ref_main_intro_general = ( isset($location_descendant_fpage_ref_main_intro_general) && !empty($location_descendant_fpage_ref_main_intro_general) ) ? $location_descendant_fpage_ref_main_intro_general : $location_fpage_ref_main_intro_general; // Reference to main location archive, body text
+				$location_descendant_fpage_ref_main_link_general = ( isset($location_descendant_fpage_ref_main_link_general) && !empty($location_descendant_fpage_ref_main_link_general) ) ? $location_descendant_fpage_ref_main_link_general : $location_fpage_ref_main_link_general; // Reference to main location archive, link text
 
 				// Substitute placeholder text for relevant system settings value
 				$location_descendant_fpage_title_general = uamswp_fad_fpage_text_replace($location_descendant_fpage_title_general); // Fake subpage (or section), title
 				$location_descendant_fpage_intro_general = uamswp_fad_fpage_text_replace($location_descendant_fpage_intro_general); // Fake subpage (or section), intro text
+				$location_descendant_fpage_ref_main_title_general = uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_title_general); // Reference to main location archive, title
+				$location_descendant_fpage_ref_main_intro_general = uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_intro_general); // Reference to main location archive, body text
+				$location_descendant_fpage_ref_main_link_general = uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_link_general); // Reference to main location archive, link text
 		}
 
 		// Get system settings for general values of ontology text elements on a fake subpage or section for Areas of Expertise
