@@ -120,7 +120,7 @@
 			"label": "General Body Text of Reference to Main Provider Archive on Fake Subpage for Providers",
 			"name": "provider_fpage_ref_main_intro_general",
 			"type": "textarea",
-			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default intro text structure will be used.</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., body text in a reference to the main provider archive on fake subpage for providers in an area of expertise subsection).",
+			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default body text structure will be used.</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., body text in a reference to the main provider archive on fake subpage for providers in an area of expertise subsection).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
