@@ -5475,6 +5475,122 @@ function uamswp_fad_fpage_text_image_overlay() {
 	global $text_image_overlay_row_1; // Values for the second item // arr
 	global $current_fpage; // Fake subpage slug // str
 	global $page_top_level_query; // Get whether this fake subpage's parent item is the top-level item // bool
+	global $provider_archive_image; // Provider archive featured image ID // int
+	if ( !isset($provider_archive_image) || empty($provider_archive_image) ) {
+		uamswp_fad_archive_image_provider();
+		global $provider_archive_image;
+	}
+	global $location_archive_image; // Location archive featured image ID // int
+	if ( !isset($location_archive_image) || empty($location_archive_image) ) {
+		uamswp_fad_archive_image_location();
+		global $location_archive_image;
+	}
+	global $expertise_archive_image; // Area of Expertise archive featured image ID // int
+	if ( !isset($expertise_archive_image) || empty($expertise_archive_image) ) {
+		uamswp_fad_archive_image_expertise();
+		global $expertise_archive_image;
+	}
+	global $clinical_resource_archive_image; // Clinical Resource archive featured image ID // int
+	if ( !isset($clinical_resource_archive_image) || empty($clinical_resource_archive_image) ) {
+		uamswp_fad_archive_image_clinical_resource();
+		global $clinical_resource_archive_image;
+	}
+	global $provider_fpage_title_expertise; // Page title of fake subpage for providers in an Area of Expertise subsection // string
+	if ( !isset($provider_fpage_title_expertise) || empty($provider_fpage_title_expertise) ) {
+		uamswp_fad_fpage_text_expertise();
+		global $provider_fpage_title_expertise;
+	}
+	global $location_fpage_title_expertise; // Page title of fake subpage for locations in an Area of Expertise subsection // string
+	if ( !isset($location_fpage_title_expertise) || empty($location_fpage_title_expertise) ) {
+		uamswp_fad_fpage_text_expertise();
+		global $location_fpage_title_expertise;
+	}
+	global $expertise_descendant_fpage_title_expertise; // Page title of fake subpage for descendant areas of expertise in an Area of Expertise subsection // string
+	if ( !isset($expertise_descendant_fpage_title_expertise) || empty($expertise_descendant_fpage_title_expertise) ) {
+		uamswp_fad_fpage_text_expertise();
+		global $expertise_descendant_fpage_title_expertise;
+	}
+	global $expertise_fpage_title_expertise; // Page title of fake subpage for related areas of expertise in an Area of Expertise subsection // string
+	if ( !isset($expertise_fpage_title_expertise) || empty($expertise_fpage_title_expertise) ) {
+		uamswp_fad_fpage_text_expertise();
+		global $expertise_fpage_title_expertise;
+	}
+	global $clinical_resource_fpage_title_expertise; // Page title of fake subpage for clinical resources in an Area of Expertise subsection // string
+	if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
+		uamswp_fad_fpage_text_expertise();
+		global $clinical_resource_fpage_title_expertise;
+	}
+
+	// Create array of main archive attributes for each fake subpage
+	$text_image_overlay_main_archive = array(
+		'providers'		=> array(
+			'heading'			=> 'Full List of [Providers]', // Heading text, limited to 32 characters // str
+			'body'				=> 'Discover our comprehensive list of [providers], spanning diverse specialties, who are dedicated to delivering exceptional care at UAMS Health.', // Body text, limited to 280 characters // str
+			'button_text'		=> 'View All [Providers]', // Link text, limited to 27 characters // str
+			'button_url'		=> get_post_type_archive_link('provider'), // Full URL // str
+			'image'				=> $provider_archive_image // Background image ID // int
+		),
+		'locations'		=> array(
+			'heading'			=> 'Full List of [Locations]', // Heading text, limited to 32 characters // str
+			'body'				=> 'Discover our extensive network of [locations], offering exceptional care across specialties within our health system. Explore our diverse [locations] and find the one closest to you.', // Body text, limited to 280 characters // str
+			'button_text'		=> 'View All [Locations]', // Link text, limited to 27 characters // str
+			'button_url'		=> get_post_type_archive_link('location'), // Full URL // str
+			'image'				=> $location_archive_image // Background image ID // int
+		),
+		'specialties'		=> array(
+			'heading'			=> 'Full List of [Areas of Expertise]', // Heading text, limited to 32 characters // str
+			'body'				=> 'Explore our extensive range of [areas of expertise], encompassing diverse specialties and cutting-edge medical advancements. Discover the breadth of knowledge and skills within UAMS Health.', // Body text, limited to 280 characters // str
+			'button_text'		=> 'All [Areas of Expertise]', // Link text, limited to 27 characters // str
+			'button_url'		=> get_post_type_archive_link('expertise'), // Full URL // str
+			'image'				=> $expertise_archive_image // Background image ID // int
+		),
+		'related'		=> array(
+			'heading'			=> 'Full List of Areas of Expertise', // Heading text, limited to 32 characters // str
+			'body'				=> 'Explore our extensive range of [areas of expertise], encompassing diverse specialties and cutting-edge medical advancements. Discover the breadth of knowledge and skills within UAMS Health.', // Body text, limited to 280 characters // str
+			'button_text'		=> 'All [Areas of Expertise]', // Link text, limited to 27 characters // str
+			'button_url'		=> get_post_type_archive_link('expertise'), // Full URL // str
+			'image'				=> $expertise_archive_image // Background image ID // int
+		),
+		'resources'		=> array(
+			'heading'			=> 'Full List of [Clinical Resources]', // Heading text, limited to 32 characters // str
+			'body'				=> 'Access a wealth of [clinical resources], including articles, videos, infographics, and documents, covering various specialties within UAMS Health. Expand your knowledge and stay informed.', // Body text, limited to 280 characters // str
+			'button_text'		=> 'All [Clinical Resources]', // Link text, limited to 27 characters // str
+			'button_url'		=> get_post_type_archive_link('clinical-resource'), // Full URL // str
+			'image'				=> $clinical_resource_archive_image // Background image ID // int
+		)
+	);
+
+	// Create array of top-level ontology ancestor fake subpage attributes for each fake subpage
+	$text_image_overlay_parent_archive = array(
+		'providers'		=> array(
+			'heading'			=> $provider_fpage_title_expertise, // Heading text, limited to 32 characters // str
+			'body'				=> 'Discover our esteemed team of [providers] within the vast field of [Area of Expertise Title], delivering comprehensive care for UAMS Health patients. Explore our diverse roster of experts of various [descendant areas of expertise] within [Area of Expertise Title].', // Body text, limited to 280 characters // str
+			'button_text'		=> 'View All [Providers]', // Link text, limited to 27 characters // str
+			'button_url'		=> get_post_type_archive_link('provider'), // Full URL // str
+			'image'				=> $provider_archive_image // Background image ID // int
+		),
+		'locations'		=> array(
+			'heading'			=> $location_fpage_title_expertise, // Heading text, limited to 32 characters // str
+			'body'				=> 'Explore our extensive network of [locations] dedicated to providing exceptional care within the realm of [Area of Expertise Title]. Discover a range of specialized services and comprehensive care options across multiple [descendant areas of expertise].', // Body text, limited to 280 characters // str
+			'button_text'		=> 'View All [Locations]', // Link text, limited to 27 characters // str
+			'button_url'		=> get_post_type_archive_link('location'), // Full URL // str
+			'image'				=> $location_archive_image // Background image ID // int
+		),
+		'specialties'		=> array(
+			'heading'			=> $expertise_fpage_title_expertise, // Heading text, limited to 32 characters // str
+			'body'				=> 'Discover the breadth of [descendant areas of expertise] within [Area of Expertise Title], offering comprehensive care for various medical needs.', // Body text, limited to 280 characters // str
+			'button_text'		=> 'All [Areas of Expertise]', // Link text, limited to 27 characters // str
+			'button_url'		=> get_post_type_archive_link('expertise'), // Full URL // str
+			'image'				=> $expertise_archive_image // Background image ID // int
+		),
+		'resources'		=> array(
+			'heading'			=> $clinical_resource_fpage_title_expertise, // Heading text, limited to 32 characters // str
+			'body'				=> 'Unlock a treasure trove of [clinical resources] covering diverse specialties within [Area of Expertise Title]. Access a wealth of articles, videos, infographics, and documents to enhance your knowledge and understanding.', // Body text, limited to 280 characters // str
+			'button_text'		=> 'All [Clinical Resources]', // Link text, limited to 27 characters // str
+			'button_url'		=> get_post_type_archive_link('clinical-resource'), // Full URL // str
+			'image'				=> $clinical_resource_archive_image // Background image ID // int
+		)
+	);
 
 	// Create the sequence of background colors
 	$text_image_overlay_color_auto = array( 'bg-blue', 'bg-green' );
@@ -5484,7 +5600,13 @@ function uamswp_fad_fpage_text_image_overlay() {
 
 	// Create the array for the first UAMS Text & Image Overlay Block item
 	$main_archive = array();
+	$main_archive['heading'] = $text_image_overlay_main_archive[$current_fpage]['heading']; // Heading text, limited to 32 characters // str
+	$main_archive['body'] = $text_image_overlay_main_archive[$current_fpage]['body']; // Body text, limited to 280 characters // str
+	$main_archive['button_text'] = $text_image_overlay_main_archive[$current_fpage]['button_text']; // Link text, limited to 27 characters // str
+	$main_archive['button_url'] = $text_image_overlay_main_archive[$current_fpage]['button_url']; // Full URL // str
 	$main_archive['button_target'] = true; // Query on whether to open the link in a new window/tab // bool
+	$main_archive['button_desc'] = $main_archive['button_text'] . ', ' . $main_archive['heading']; // Link ARIA label text // str
+	$main_archive['image'] = $text_image_overlay_main_archive[$current_fpage]['image']; // Background image ID // int
 
 	if ( $page_top_level_query ) {
 
@@ -5509,7 +5631,7 @@ function uamswp_fad_fpage_text_image_overlay() {
 
 			// Set the values for the UAMS Text & Image Overlay Block item referencing the top-level ontology item's same fake subpage
 			$parent_archive['heading'] = ''; // Heading text, limited to 32 characters // str
-			$parent_archive['body'] = ''; // Body text, limited to 280 characters // str
+			$parent_archive['body'] = 'Discover our esteemed team of [providers] within the vast field of [Area of Expertise Title], delivering comprehensive care for UAMS Health patients. Explore our diverse roster of experts of various [descendant areas of expertise] within [Area of Expertise Title].'; // Body text, limited to 280 characters // str
 			$parent_archive['button_text'] = ''; // Link text, limited to 27 characters // str
 			$parent_archive['button_url'] = ''; // Full URL // str
 			$parent_archive['button_desc'] = $text_image_overlay_row_1['button_text'] . ', ' . $text_image_overlay_row_1['heading']; // Link ARIA label text // str
@@ -5523,13 +5645,7 @@ function uamswp_fad_fpage_text_image_overlay() {
 		}
 
 		// Set the values for the UAMS Text & Image Overlay Block item referencing the main archive for this fake subpage's post type
-		$main_archive['heading'] = ''; // Heading text, limited to 32 characters // str
-		$main_archive['body'] = ''; // Body text, limited to 280 characters // str
-		$main_archive['button_text'] = ''; // Link text, limited to 27 characters // str
-		$main_archive['button_url'] = ''; // Full URL // str
-		$main_archive['button_desc'] = $text_image_overlay_row_1['button_text'] . ', ' . $text_image_overlay_row_1['heading']; // Link ARIA label text // str
 		$main_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
-		$main_archive['image'] = ''; // Background image ID // int
 
 		$fpage_text_image_overlay[] = $main_archive;
 
@@ -5557,13 +5673,7 @@ function uamswp_fad_fpage_text_image_overlay() {
 		}
 
 		// Set the values for the UAMS Text & Image Overlay Block item referencing the main archive for this fake subpage's post type
-		$main_archive['heading'] = ''; // Heading text, limited to 32 characters // str
-		$main_archive['body'] = ''; // Body text, limited to 280 characters // str
-		$main_archive['button_text'] = ''; // Link text, limited to 27 characters // str
-		$main_archive['button_url'] = ''; // Full URL // str
-		$main_archive['button_desc'] = $text_image_overlay_row_1['button_text'] . ', ' . $text_image_overlay_row_1['heading']; // Link ARIA label text // str
 		$main_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
-		$main_archive['image'] = ''; // Background image ID // int
 
 		$fpage_text_image_overlay[] = $main_archive;
 
@@ -5591,13 +5701,7 @@ function uamswp_fad_fpage_text_image_overlay() {
 		}
 
 		// Set the values for the UAMS Text & Image Overlay Block item referencing the main archive for this fake subpage's post type
-		$main_archive['heading'] = ''; // Heading text, limited to 32 characters // str
-		$main_archive['body'] = ''; // Body text, limited to 280 characters // str
-		$main_archive['button_text'] = ''; // Link text, limited to 27 characters // str
-		$main_archive['button_url'] = ''; // Full URL // str
-		$main_archive['button_desc'] = $text_image_overlay_row_1['button_text'] . ', ' . $text_image_overlay_row_1['heading']; // Link ARIA label text // str
 		$main_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
-		$main_archive['image'] = ''; // Background image ID // int
 
 		$fpage_text_image_overlay[] = $main_archive;
 
@@ -5605,33 +5709,8 @@ function uamswp_fad_fpage_text_image_overlay() {
 
 		// Related Areas of Expertise fake subpage
 
-		if ( $page_top_level_query ) {
-
-			// If the fake subpage's parent is not the top-level ontology item..
-
-			// Set the values for the UAMS Text & Image Overlay Block item referencing the top-level ontology item's same fake subpage
-			$parent_archive['heading'] = ''; // Heading text, limited to 32 characters // str
-			$parent_archive['body'] = ''; // Body text, limited to 280 characters // str
-			$parent_archive['button_text'] = ''; // Link text, limited to 27 characters // str
-			$parent_archive['button_url'] = ''; // Full URL // str
-			$parent_archive['button_desc'] = $text_image_overlay_row_1['button_text'] . ', ' . $text_image_overlay_row_1['heading']; // Link ARIA label text // str
-			$parent_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
-			$parent_archive['image'] = ''; // Background image ID // int
-
-			$fpage_text_image_overlay[] = $parent_archive;
-
-			$i++;
-
-		}
-
 		// Set the values for the UAMS Text & Image Overlay Block item referencing the main archive for this fake subpage's post type
-		$main_archive['heading'] = ''; // Heading text, limited to 32 characters // str
-		$main_archive['body'] = ''; // Body text, limited to 280 characters // str
-		$main_archive['button_text'] = ''; // Link text, limited to 27 characters // str
-		$main_archive['button_url'] = ''; // Full URL // str
-		$main_archive['button_desc'] = $text_image_overlay_row_1['button_text'] . ', ' . $text_image_overlay_row_1['heading']; // Link ARIA label text // str
 		$main_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
-		$main_archive['image'] = ''; // Background image ID // int
 
 		$fpage_text_image_overlay[] = $main_archive;
 
@@ -5659,13 +5738,7 @@ function uamswp_fad_fpage_text_image_overlay() {
 		}
 
 		// Set the values for the UAMS Text & Image Overlay Block item referencing the main archive for this fake subpage's post type
-		$main_archive['heading'] = ''; // Heading text, limited to 32 characters // str
-		$main_archive['body'] = ''; // Body text, limited to 280 characters // str
-		$main_archive['button_text'] = ''; // Link text, limited to 27 characters // str
-		$main_archive['button_url'] = ''; // Full URL // str
-		$main_archive['button_desc'] = $text_image_overlay_row_1['button_text'] . ', ' . $text_image_overlay_row_1['heading']; // Link ARIA label text // str
 		$main_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
-		$main_archive['image'] = ''; // Background image ID // int
 
 		$fpage_text_image_overlay[] = $main_archive;
 
