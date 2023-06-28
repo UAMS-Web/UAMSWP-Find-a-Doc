@@ -2458,7 +2458,7 @@ function uamswp_fad_podcast() {
 		$placeholder_treatment_archive_intro_text = '[Treatment Archive Intro Text]';
 	}
 
-// Define variables for ontology text elements on fake subpages and single profiles
+// Define variables for Find-a-Doc Settings values regarding ontology text elements on fake subpages and single profiles
 
 	// Create substitutions for use in fake subpage text elements
 	function uamswp_fad_fpage_text_replace($string) {
