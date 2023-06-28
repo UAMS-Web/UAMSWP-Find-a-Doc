@@ -4281,6 +4281,64 @@ function uamswp_fad_fpage_text_replace($string) {
 				$condition_treatment_fpage_intro_clinical_resource = $condition_treatment_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_clinical_resource) : ''; // Intro text
 		}
 
+// Define variables for Find-a-Doc Settings values regarding ontology image elements on archive pages
+
+	// Get system settings for provider archive page image elements
+	function uamswp_fad_archive_image_provider() {
+
+		// Make variables available outside of the function
+		global $provider_archive_image;
+
+		// Get the system settings for the image elements on the provider archive
+		$provider_archive_image = get_field('provider_archive_featured_image', 'option'); // Featured image
+
+		// If the variable is not set or is empty, set a hardcoded fallback value
+		$provider_archive_image = ( isset($provider_archive_image) && !empty($provider_archive_image) ) ? $provider_archive_image : ''; // Featured image
+
+	}
+
+	// Get system settings for location archive page image elements
+	function uamswp_fad_archive_image_location() {
+
+		// Make variables available outside of the function
+		global $location_archive_image;
+
+		// Get the system settings for the image elements on the location archive
+		$location_archive_image = get_field('location_archive_featured_image', 'option'); // Featured image
+
+		// If the variable is not set or is empty, set a hardcoded fallback value
+		$location_archive_image = ( isset($location_archive_image) && !empty($location_archive_image) ) ? $location_archive_image : ''; // Featured image
+
+	}
+
+	// Get system settings for area of expertise archive page image elements
+	function uamswp_fad_archive_image_expertise() {
+
+		// Make variables available outside of the function
+		global $expertise_archive_image;
+
+		// Get the system settings for the image elements on the expertise archive
+		$expertise_archive_image = get_field('expertise_archive_featured_image', 'option'); // Featured image
+
+		// If the variable is not set or is empty, set a hardcoded fallback value
+		$expertise_archive_image = ( isset($expertise_archive_image) && !empty($expertise_archive_image) ) ? $expertise_archive_image : ''; // Featured image
+
+	}
+
+	// Get system settings for clinical resource archive page image elements
+	function uamswp_fad_archive_image_clinical_resource() {
+
+		// Make variables available outside of the function
+		global $clinical_resource_archive_image;
+
+		// Get the system settings for the image elements on the clinical resource archive
+		$clinical_resource_archive_image = get_field('clinical_resource_archive_featured_image', 'option'); // Featured image
+
+		// If the variable is not set or is empty, set a hardcoded fallback value
+		$clinical_resource_archive_image = ( isset($clinical_resource_archive_image) && !empty($clinical_resource_archive_image) ) ? $clinical_resource_archive_image : ''; // Featured image
+
+	}
+
 // Define variables for Find-a-Doc Settings values regarding ontology image elements on fake subpages and single profiles
 
 	// Get field values from Find-a-Doc Settings for ontology image elements in general placements of fake subpages or sections
