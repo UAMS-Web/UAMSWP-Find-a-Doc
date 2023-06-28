@@ -6607,125 +6607,123 @@ function uamswp_fad_fpage_text_image_overlay() {
 		global $expertise_fpage_title_expertise;
 		global $clinical_resource_fpage_title_expertise;
 	}
-	global $provider_fpage_ref_main_title_general; // General Title of the Reference to the Main Provider Archive on a Fake Subpage for Providers // string
-	global $provider_fpage_ref_main_intro_general; // General Body Text of the Reference to the Main Provider Archive on a Fake Subpage for Providers // string
-	global $provider_fpage_ref_main_link_general; // General Link Text of the Reference to the Main Provider Archive on a Fake Subpage for Providers // string
-	if (
-		!isset($provider_fpage_ref_main_title_general) || empty($provider_fpage_ref_main_title_general)
-		||
-		!isset($provider_fpage_ref_main_intro_general) || empty($provider_fpage_ref_main_intro_general)
-		||
-		!isset($provider_fpage_ref_main_link_general) || empty($provider_fpage_ref_main_link_general)
-		) {
-		uamswp_fad_fpage_text_provider_general();
-		global $provider_fpage_ref_main_title_general;
-		global $provider_fpage_ref_main_intro_general;
-		global $provider_fpage_ref_main_link_general;
-	}
-	global $location_fpage_ref_main_title_general; // General Title of the Reference to the Main Location Archive on a Fake Subpage for Locations // string
-	global $location_fpage_ref_main_intro_general; // General Body Text of the Reference to the Main Location Archive on a Fake Subpage for Locations // string
-	global $location_fpage_ref_main_link_general; // General Link Text of the Reference to the Main Location Archive on a Fake Subpage for Locations // string
-	global $location_descendant_fpage_ref_main_title_general; // General Title of the Reference to the Main Location Archive on a Fake Subpage for Descendant Locations // string
-	global $location_descendant_fpage_ref_main_intro_general; // General Body Text of the Reference to the Main Location Archive on a Fake Subpage for Descendant Locations // string
-	global $location_descendant_fpage_ref_main_link_general; // General Link Text of the Reference to the Main Location Archive on a Fake Subpage for Descendant Locations // string
-	if (
-		!isset($location_fpage_ref_main_title_general) || empty($location_fpage_ref_main_title_general)
-		||
-		!isset($location_fpage_ref_main_intro_general) || empty($location_fpage_ref_main_intro_general)
-		||
-		!isset($location_fpage_ref_main_link_general) || empty($location_fpage_ref_main_link_general)
-		||
-		!isset($location_descendant_fpage_ref_main_title_general) || empty($location_descendant_fpage_ref_main_title_general)
-		||
-		!isset($location_descendant_fpage_ref_main_intro_general) || empty($location_descendant_fpage_ref_main_intro_general)
-		||
-		!isset($location_descendant_fpage_ref_main_link_general) || empty($location_descendant_fpage_ref_main_link_general)
-		) {
-		uamswp_fad_fpage_text_location_general();
-		global $location_fpage_ref_main_title_general;
-		global $location_fpage_ref_main_intro_general;
-		global $location_fpage_ref_main_link_general;
-		global $location_descendant_fpage_ref_main_title_general;
-		global $location_descendant_fpage_ref_main_intro_general;
-		global $location_descendant_fpage_ref_main_link_general;
-	}
-	global $expertise_fpage_ref_main_title_general; // General Title of the Reference to the Main Area of Expertise Archive on a Fake Subpage for Areas of Expertise // string
-	global $expertise_fpage_ref_main_intro_general; // General Body Text of the Reference to the Main Area of Expertise Archive on a Fake Subpage for Areas of Expertise // string
-	global $expertise_fpage_ref_main_link_general; // General Link Text of the Reference to the Main Area of Expertise Archive on a Fake Subpage for Areas of Expertise // string
-	global $expertise_descendant_fpage_ref_main_title_general; // General Title of the Reference to the Main Area of Expertise Archive on a Fake Subpage for Areas of Expertise // string
-	global $expertise_descendant_fpage_ref_main_intro_general; // General Body Text of the Reference to the Main Area of Expertise Archive on a Fake Subpage for Areas of Expertise // string
-	global $expertise_descendant_fpage_ref_main_link_general; // General Link Text of the Reference to the Main Area of Expertise Archive on a Fake Subpage for Areas of Expertise // string
-	if (
-		!isset($expertise_fpage_ref_main_title_general) || empty($expertise_fpage_ref_main_title_general)
-		||
-		!isset($expertise_fpage_ref_main_intro_general) || empty($expertise_fpage_ref_main_intro_general)
-		||
-		!isset($expertise_fpage_ref_main_link_general) || empty($expertise_fpage_ref_main_link_general)
-		||
-		!isset($expertise_descendant_fpage_ref_main_title_general) || empty($expertise_descendant_fpage_ref_main_title_general)
-		||
-		!isset($expertise_descendant_fpage_ref_main_intro_general) || empty($expertise_descendant_fpage_ref_main_intro_general)
-		||
-		!isset($expertise_descendant_fpage_ref_main_link_general) || empty($expertise_descendant_fpage_ref_main_link_general)
-		) {
-		uamswp_fad_fpage_text_expertise_general();
-		global $expertise_fpage_ref_main_title_general;
-		global $expertise_fpage_ref_main_intro_general;
-		global $expertise_fpage_ref_main_link_general;
-		global $expertise_descendant_fpage_ref_main_title_general;
-		global $expertise_descendant_fpage_ref_main_intro_general;
-		global $expertise_descendant_fpage_ref_main_link_general;
-	}
-	global $clinical_resource_fpage_ref_main_title_general; // General Title of the Reference to the Main Clinical Resource Archive on a Fake Subpage for Clinical Resources // string
-	global $clinical_resource_fpage_ref_main_intro_general; // General Body Text of the Reference to the Main Clinical Resource Archive on a Fake Subpage for Clinical Resources // string
-	global $clinical_resource_fpage_ref_main_link_general; // General Link Text of the Reference to the Main Clinical Resource Archive on a Fake Subpage for Clinical Resources // string
-	if (
-		!isset($clinical_resource_fpage_ref_main_title_general) || empty($clinical_resource_fpage_ref_main_title_general)
-		||
-		!isset($clinical_resource_fpage_ref_main_intro_general) || empty($clinical_resource_fpage_ref_main_intro_general)
-		||
-		!isset($clinical_resource_fpage_ref_main_link_general) || empty($clinical_resource_fpage_ref_main_link_general)
-		) {
-		uamswp_fad_fpage_text_clinical_resource_general();
-		global $clinical_resource_fpage_ref_main_title_general;
-		global $clinical_resource_fpage_ref_main_intro_general;
-		global $clinical_resource_fpage_ref_main_link_general;
+	if ( $current_fpage == 'providers' ) {
+		global $provider_fpage_ref_main_title_expertise; // General Title of the Reference to the Main Provider Archive on a Fake Subpage for Providers // string
+		global $provider_fpage_ref_main_intro_expertise; // General Body Text of the Reference to the Main Provider Archive on a Fake Subpage for Providers // string
+		global $provider_fpage_ref_main_link_expertise; // General Link Text of the Reference to the Main Provider Archive on a Fake Subpage for Providers // string
+		if (
+			!isset($provider_fpage_ref_main_title_expertise) || empty($provider_fpage_ref_main_title_expertise)
+			||
+			!isset($provider_fpage_ref_main_intro_expertise) || empty($provider_fpage_ref_main_intro_expertise)
+			||
+			!isset($provider_fpage_ref_main_link_expertise) || empty($provider_fpage_ref_main_link_expertise)
+			) {
+			uamswp_fad_fpage_text_provider();
+			global $provider_fpage_ref_main_title_expertise;
+			global $provider_fpage_ref_main_intro_expertise;
+			global $provider_fpage_ref_main_link_expertise;
+		}
+	} elseif ( $current_fpage == 'locations' ) {
+		global $location_fpage_ref_main_title_expertise; // General Title of the Reference to the Main Location Archive on a Fake Subpage for Locations // string
+		global $location_fpage_ref_main_intro_expertise; // General Body Text of the Reference to the Main Location Archive on a Fake Subpage for Locations // string
+		global $location_fpage_ref_main_link_expertise; // General Link Text of the Reference to the Main Location Archive on a Fake Subpage for Locations // string
+		if (
+			!isset($location_fpage_ref_main_title_expertise) || empty($location_fpage_ref_main_title_expertise)
+			||
+			!isset($location_fpage_ref_main_intro_expertise) || empty($location_fpage_ref_main_intro_expertise)
+			||
+			!isset($location_fpage_ref_main_link_expertise) || empty($location_fpage_ref_main_link_expertise)
+			) {
+			uamswp_fad_fpage_text_location();
+			global $location_fpage_ref_main_title_expertise;
+			global $location_fpage_ref_main_intro_expertise;
+			global $location_fpage_ref_main_link_expertise;
+		}
+	} elseif ( $current_fpage == 'specialties' ) {
+		global $expertise_descendant_fpage_ref_main_title_expertise; // General Title of the Reference to the Main Area of Expertise Archive on a Fake Subpage for Areas of Expertise // string
+		global $expertise_descendant_fpage_ref_main_intro_expertise; // General Body Text of the Reference to the Main Area of Expertise Archive on a Fake Subpage for Areas of Expertise // string
+		global $expertise_descendant_fpage_ref_main_link_expertise; // General Link Text of the Reference to the Main Area of Expertise Archive on a Fake Subpage for Areas of Expertise // string
+		if (
+			!isset($expertise_descendant_fpage_ref_main_title_expertise) || empty($expertise_descendant_fpage_ref_main_title_expertise)
+			||
+			!isset($expertise_descendant_fpage_ref_main_intro_expertise) || empty($expertise_descendant_fpage_ref_main_intro_expertise)
+			||
+			!isset($expertise_descendant_fpage_ref_main_link_expertise) || empty($expertise_descendant_fpage_ref_main_link_expertise)
+			) {
+			uamswp_fad_fpage_text_expertise();
+			global $expertise_descendant_fpage_ref_main_title_expertise;
+			global $expertise_descendant_fpage_ref_main_intro_expertise;
+			global $expertise_descendant_fpage_ref_main_link_expertise;
+		}
+	} elseif ( $current_fpage == 'related' ) {
+		global $expertise_fpage_ref_main_title_expertise; // General Title of the Reference to the Main Area of Expertise Archive on a Fake Subpage for Areas of Expertise // string
+		global $expertise_fpage_ref_main_intro_expertise; // General Body Text of the Reference to the Main Area of Expertise Archive on a Fake Subpage for Areas of Expertise // string
+		global $expertise_fpage_ref_main_link_expertise; // General Link Text of the Reference to the Main Area of Expertise Archive on a Fake Subpage for Areas of Expertise // string
+		if (
+			!isset($expertise_fpage_ref_main_title_expertise) || empty($expertise_fpage_ref_main_title_expertise)
+			||
+			!isset($expertise_fpage_ref_main_intro_expertise) || empty($expertise_fpage_ref_main_intro_expertise)
+			||
+			!isset($expertise_fpage_ref_main_link_expertise) || empty($expertise_fpage_ref_main_link_expertise)
+			) {
+			uamswp_fad_fpage_text_expertise();
+			global $expertise_fpage_ref_main_title_expertise;
+			global $expertise_fpage_ref_main_intro_expertise;
+			global $expertise_fpage_ref_main_link_expertise;
+		}
+
+	} elseif ( $current_fpage == 'resources' ) {
+		global $clinical_resource_fpage_ref_main_title_expertise; // General Title of the Reference to the Main Clinical Resource Archive on a Fake Subpage for Clinical Resources // string
+		global $clinical_resource_fpage_ref_main_intro_expertise; // General Body Text of the Reference to the Main Clinical Resource Archive on a Fake Subpage for Clinical Resources // string
+		global $clinical_resource_fpage_ref_main_link_expertise; // General Link Text of the Reference to the Main Clinical Resource Archive on a Fake Subpage for Clinical Resources // string
+		if (
+			!isset($clinical_resource_fpage_ref_main_title_expertise) || empty($clinical_resource_fpage_ref_main_title_expertise)
+			||
+			!isset($clinical_resource_fpage_ref_main_intro_expertise) || empty($clinical_resource_fpage_ref_main_intro_expertise)
+			||
+			!isset($clinical_resource_fpage_ref_main_link_expertise) || empty($clinical_resource_fpage_ref_main_link_expertise)
+			) {
+			uamswp_fad_fpage_text_clinical_resource();
+			global $clinical_resource_fpage_ref_main_title_expertise;
+			global $clinical_resource_fpage_ref_main_intro_expertise;
+			global $clinical_resource_fpage_ref_main_link_expertise;
+		}
 	}
 
 	// Create array of main archive attributes for each fake subpage
 	$text_image_overlay_main_archive = array(
 		'providers'		=> array(
-			'heading'			=> $provider_fpage_ref_main_title_general, // Heading text, limited to 32 characters // str
-			'body'				=> $provider_fpage_ref_main_intro_general, // Body text, limited to 280 characters // str
-			'button_text'		=> $provider_fpage_ref_main_link_general, // Link text, limited to 27 characters // str
+			'heading'			=> $provider_fpage_ref_main_title_expertise, // Heading text, limited to 32 characters // str
+			'body'				=> $provider_fpage_ref_main_intro_expertise, // Body text, limited to 280 characters // str
+			'button_text'		=> $provider_fpage_ref_main_link_expertise, // Link text, limited to 27 characters // str
 			'button_url'		=> get_post_type_archive_link('provider'), // Full URL // str
 			'image'				=> $provider_archive_image // Background image ID // int
 		),
 		'locations'		=> array(
-			'heading'			=> $location_fpage_ref_main_title_general, // Heading text, limited to 32 characters // str
-			'body'				=> $location_fpage_ref_main_intro_general, // Body text, limited to 280 characters // str
-			'button_text'		=> $location_fpage_ref_main_link_general, // Link text, limited to 27 characters // str
+			'heading'			=> $location_fpage_ref_main_title_expertise, // Heading text, limited to 32 characters // str
+			'body'				=> $location_fpage_ref_main_intro_expertise, // Body text, limited to 280 characters // str
+			'button_text'		=> $location_fpage_ref_main_link_expertise, // Link text, limited to 27 characters // str
 			'button_url'		=> get_post_type_archive_link('location'), // Full URL // str
 			'image'				=> $location_archive_image // Background image ID // int
 		),
 		'specialties'		=> array(
-			'heading'			=> $expertise_descendant_fpage_ref_main_title_general, // Heading text, limited to 32 characters // str
-			'body'				=> $expertise_descendant_fpage_ref_main_intro_general, // Body text, limited to 280 characters // str
-			'button_text'		=> $expertise_descendant_fpage_ref_main_link_general, // Link text, limited to 27 characters // str
+			'heading'			=> $expertise_descendant_fpage_ref_main_title_expertise, // Heading text, limited to 32 characters // str
+			'body'				=> $expertise_descendant_fpage_ref_main_intro_expertise, // Body text, limited to 280 characters // str
+			'button_text'		=> $expertise_descendant_fpage_ref_main_link_expertise, // Link text, limited to 27 characters // str
 			'button_url'		=> get_post_type_archive_link('expertise'), // Full URL // str
 			'image'				=> $expertise_archive_image // Background image ID // int
 		),
 		'related'		=> array(
-			'heading'			=> $expertise_fpage_ref_main_title_general, // Heading text, limited to 32 characters // str
-			'body'				=> $expertise_fpage_ref_main_intro_general, // Body text, limited to 280 characters // str
-			'button_text'		=> $expertise_fpage_ref_main_link_general, // Link text, limited to 27 characters // str
+			'heading'			=> $expertise_fpage_ref_main_title_expertise, // Heading text, limited to 32 characters // str
+			'body'				=> $expertise_fpage_ref_main_intro_expertise, // Body text, limited to 280 characters // str
+			'button_text'		=> $expertise_fpage_ref_main_link_expertise, // Link text, limited to 27 characters // str
 			'button_url'		=> get_post_type_archive_link('expertise'), // Full URL // str
 			'image'				=> $expertise_archive_image // Background image ID // int
 		),
 		'resources'		=> array(
-			'heading'			=> $clinical_resource_fpage_ref_main_title_general, // Heading text, limited to 32 characters // str
-			'body'				=> $clinical_resource_fpage_ref_main_intro_general, // Body text, limited to 280 characters // str
-			'button_text'		=> $clinical_resource_fpage_ref_main_link_general, // Link text, limited to 27 characters // str
+			'heading'			=> $clinical_resource_fpage_ref_main_title_expertise, // Heading text, limited to 32 characters // str
+			'body'				=> $clinical_resource_fpage_ref_main_intro_expertise, // Body text, limited to 280 characters // str
+			'button_text'		=> $clinical_resource_fpage_ref_main_link_expertise, // Link text, limited to 27 characters // str
 			'button_url'		=> get_post_type_archive_link('clinical-resource'), // Full URL // str
 			'image'				=> $clinical_resource_archive_image // Background image ID // int
 		)
