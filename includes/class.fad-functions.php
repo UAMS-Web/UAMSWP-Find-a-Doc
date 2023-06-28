@@ -2731,6 +2731,7 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Get system settings for general values of ontology text elements on a fake subpage (or section) for Locations
 		function uamswp_fad_fpage_text_location_general() {
+
 			// Make variables available outside of the function
 			global $location_fpage_title_general;
 			global $location_fpage_intro_general;
@@ -2788,6 +2789,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				$location_descendant_fpage_ref_main_title_general = uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_title_general); // Reference to the main location archive, title
 				$location_descendant_fpage_ref_main_intro_general = uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_intro_general); // Reference to the main location archive, body text
 				$location_descendant_fpage_ref_main_link_general = uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_link_general); // Reference to the main location archive, link text
+
 		}
 
 		// Get system settings for general values of ontology text elements on a fake subpage (or section) for Areas of Expertise
@@ -2851,10 +2853,11 @@ function uamswp_fad_fpage_text_replace($string) {
 				$expertise_descendant_fpage_ref_main_intro_general = uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_intro_general); // Reference to the main area of expertise archive, body text
 				$expertise_descendant_fpage_ref_main_link_general = uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_link_general); // Reference to the main area of expertise archive, link text
 
-			}
+		}
 
 		// Get system settings for general values of ontology text elements on a fake subpage (or section) for Clinical Resources
 		function uamswp_fad_fpage_text_clinical_resource_general() {
+
 			// Make variables available outside of the function
 			global $clinical_resource_fpage_title_general;
 			global $clinical_resource_fpage_intro_general;
@@ -2899,6 +2902,7 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Get system settings for general values of ontology text elements on a fake subpage (or section) for Conditions
 		function uamswp_fad_fpage_text_condition_general() {
+
 			// Make variables available outside of the function
 			global $condition_fpage_title_general;
 			global $condition_fpage_intro_general;
@@ -2914,10 +2918,12 @@ function uamswp_fad_fpage_text_replace($string) {
 			// Substitute placeholder text for relevant system settings value
 			$condition_fpage_title_general = uamswp_fad_fpage_text_replace($condition_fpage_title_general); // Fake subpage (or section), title
 			$condition_fpage_intro_general = uamswp_fad_fpage_text_replace($condition_fpage_intro_general); // Fake subpage (or section), intro text
+
 		}
 
 		// Get system settings for general values of ontology text elements on a fake subpage (or section) for Treatments
 		function uamswp_fad_fpage_text_treatment_general() {
+
 			// Make variables available outside of the function
 			global $treatment_fpage_title_general;
 			global $treatment_fpage_intro_general;
@@ -2933,10 +2939,12 @@ function uamswp_fad_fpage_text_replace($string) {
 			// Substitute placeholder text for relevant system settings value
 			$treatment_fpage_title_general = uamswp_fad_fpage_text_replace($treatment_fpage_title_general); // Fake subpage (or section), title
 			$treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($treatment_fpage_intro_general); // Fake subpage (or section), intro text
+
 		}
 
 		// Get system settings for general values of ontology text elements on a fake subpage (or section) for Conditions and Treatments combined
 		function uamswp_fad_fpage_text_condition_treatment_general() {
+
 			// Make variables available outside of the function
 			global $condition_treatment_fpage_title_general;
 			global $condition_treatment_fpage_intro_general;
@@ -2952,12 +2960,14 @@ function uamswp_fad_fpage_text_replace($string) {
 			// Substitute placeholder text for relevant system settings value
 			$condition_treatment_fpage_title_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_general); // Fake subpage (or section), title
 			$condition_treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_general); // Fake subpage (or section), intro text
+
 		}
 
 	// Get field values from Find-a-Doc Settings and from ontology items for ontology text elements in specific subsections and single profiles
 
 		// Get field values for fake subpage text elements in an Provider subsection (or profile)
 		function uamswp_fad_fpage_text_provider() {
+
 			// Make variables available outside of the function
 			global $location_fpage_title_provider;
 			global $location_fpage_intro_provider;
@@ -3205,10 +3215,12 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Substitute placeholder text for relevant system settings value
 				$condition_treatment_fpage_title_provider = $condition_treatment_fpage_title_provider ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_provider) : ''; // Title
 				$condition_treatment_fpage_intro_provider = $condition_treatment_fpage_intro_provider ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_provider) : ''; // Intro text
+
 		}
 
 		// Get field values for fake subpage text elements in an Location subsection (or profile)
 		function uamswp_fad_fpage_text_location() {
+
 			// Make variables available outside of the function
 			global $provider_fpage_title_location;
 			global $provider_fpage_intro_location;
@@ -3488,10 +3500,12 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Substitute placeholder text for relevant system settings value
 				$condition_treatment_fpage_title_location = $condition_treatment_fpage_title_location ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_location) : ''; // Title
 				$condition_treatment_fpage_intro_location = $condition_treatment_fpage_intro_location ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_location) : ''; // Intro text
+
 		}
 
 		// Get field values for fake subpage text elements in an Area of Expertise subsection (or profile)
 		function uamswp_fad_fpage_text_expertise() {
+
 			// Bring in variables from outside of the function
 			global $page_id;
 			global $page_title;
@@ -4063,10 +4077,12 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Substitute placeholder text for relevant system settings value
 				$condition_treatment_fpage_title_expertise = $condition_treatment_fpage_title_expertise ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_expertise) : ''; // Title
 				$condition_treatment_fpage_intro_expertise = $condition_treatment_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_expertise) : ''; // Intro text
+
 		}
 
 		// Get field values for text elements for related ontology sections in a Clinical Resource subsection (or profile)
 		function uamswp_fad_fpage_text_clinical_resource() {
+
 			// Make variables available outside of the function
 			global $provider_fpage_title_clinical_resource;
 			global $provider_fpage_intro_clinical_resource;
@@ -4345,6 +4361,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Substitute placeholder text for relevant system settings value
 				$condition_treatment_fpage_title_clinical_resource = $condition_treatment_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_clinical_resource) : ''; // Title
 				$condition_treatment_fpage_intro_clinical_resource = $condition_treatment_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_clinical_resource) : ''; // Intro text
+
 		}
 
 // Define variables for Find-a-Doc Settings values regarding ontology image elements on archive pages
