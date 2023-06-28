@@ -94,6 +94,70 @@
 			"library": "all"
 		},
 		{
+			"key": "field_provider_fpage_ref_main_title_general",
+			"label": "General Title of Reference to Main Provider Archive on Fake Subpage for Providers",
+			"name": "provider_fpage_ref_main_title_general",
+			"type": "text",
+			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default title structure will be used.</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., title in a reference to the main provider archive on fake subpage for providers in an area of expertise subsection).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Full List of [Providers]",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_provider_fpage_ref_main_intro_general",
+			"label": "General Body Text of Reference to Main Provider Archive on Fake Subpage for Providers",
+			"name": "provider_fpage_ref_main_intro_general",
+			"type": "textarea",
+			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default intro text structure will be used.</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., body text in a reference to the main provider archive on fake subpage for providers in an area of expertise subsection).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "Discover our comprehensive list of [providers], spanning diverse specialties, who are dedicated to delivering exceptional care at UAMS Health.",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_provider_fpage_ref_main_link_general",
+			"label": "General Link Text of Reference to Main Provider Archive on Fake Subpage for Providers",
+			"name": "provider_fpage_ref_main_link_general",
+			"type": "text",
+			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default link text structure will be used.</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., link text in a reference to the main provider archive on fake subpage for providers in an area of expertise subsection).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "View All [Providers]",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
 			"key": "field_provider_fpage_tab_location",
 			"label": "Location Subsection",
 			"name": "",

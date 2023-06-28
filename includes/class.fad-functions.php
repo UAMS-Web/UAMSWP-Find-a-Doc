@@ -2698,21 +2698,35 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Get system settings for general values of ontology text elements on a fake subpage or section for Providers
 		function uamswp_fad_fpage_text_provider_general() {
+
 			// Make variables available outside of the function
 			global $provider_fpage_title_general;
 			global $provider_fpage_intro_general;
+			global $provider_fpage_ref_main_title_general;
+			global $provider_fpage_ref_main_intro_general;
+			global $provider_fpage_ref_main_link_general;
 
 			// Get the system settings for the text elements in a general placement
-			$provider_fpage_title_general = get_field('provider_fpage_title_general', 'option'); // Title
-			$provider_fpage_intro_general = get_field('provider_fpage_intro_general', 'option'); // Intro text
+			$provider_fpage_title_general = get_field('provider_fpage_title_general', 'option'); // Fake subpage (or section), title
+			$provider_fpage_intro_general = get_field('provider_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
+			$provider_fpage_ref_main_title_general = get_field('provider_fpage_ref_main_title_general', 'option'); // Reference to main provider archive, title
+			$provider_fpage_ref_main_intro_general = get_field('provider_fpage_ref_main_intro_general', 'option'); // Reference to main provider archive, body text
+			$provider_fpage_ref_main_link_general = get_field('provider_fpage_ref_main_link_general', 'option'); // Reference to main provider archive, link text
 
 			// If the variable is not set or is empty, set a hardcoded fallback value
-			$provider_fpage_title_general = ( isset($provider_fpage_title_general) && !empty($provider_fpage_title_general) ) ? $provider_fpage_title_general : 'Related [Providers]'; // Title
-			$provider_fpage_intro_general = ( isset($provider_fpage_intro_general) && !empty($provider_fpage_intro_general) ) ? $provider_fpage_intro_general : ''; // Intro text
+			$provider_fpage_title_general = ( isset($provider_fpage_title_general) && !empty($provider_fpage_title_general) ) ? $provider_fpage_title_general : 'Related [Providers]'; // Fake subpage (or section), title
+			$provider_fpage_intro_general = ( isset($provider_fpage_intro_general) && !empty($provider_fpage_intro_general) ) ? $provider_fpage_intro_general : ''; // Fake subpage (or section), intro text
+			$provider_fpage_ref_main_title_general = ( isset($provider_fpage_ref_main_title_general) && !empty($provider_fpage_ref_main_title_general) ) ? $provider_fpage_ref_main_title_general : 'Full List of [Providers]'; // Reference to main provider archive, title
+			$provider_fpage_ref_main_intro_general = ( isset($provider_fpage_ref_main_intro_general) && !empty($provider_fpage_ref_main_intro_general) ) ? $provider_fpage_ref_main_intro_general : 'Discover our comprehensive list of [providers], spanning diverse specialties, who are dedicated to delivering exceptional care at UAMS Health.'; // Reference to main provider archive, body text
+			$provider_fpage_ref_main_link_general = ( isset($provider_fpage_ref_main_link_general) && !empty($provider_fpage_ref_main_link_general) ) ? $provider_fpage_ref_main_link_general : 'View All [Providers]'; // Reference to main provider archive, link text
 
 			// Substitute placeholder text for relevant system settings value
-			$provider_fpage_title_general = uamswp_fad_fpage_text_replace($provider_fpage_title_general); // Title
-			$provider_fpage_intro_general = uamswp_fad_fpage_text_replace($provider_fpage_intro_general); // Intro text
+			$provider_fpage_title_general = uamswp_fad_fpage_text_replace($provider_fpage_title_general); // Fake subpage (or section), title
+			$provider_fpage_intro_general = uamswp_fad_fpage_text_replace($provider_fpage_intro_general); // Fake subpage (or section), intro text
+			$provider_fpage_ref_main_title_general = uamswp_fad_fpage_text_replace($provider_fpage_ref_main_title_general); // Reference to main provider archive, title
+			$provider_fpage_ref_main_intro_general = uamswp_fad_fpage_text_replace($provider_fpage_ref_main_intro_general); // Reference to main provider archive, body text
+			$provider_fpage_ref_main_link_general = uamswp_fad_fpage_text_replace($provider_fpage_ref_main_link_general); // Reference to main provider archive, link text
+
 		}
 
 		// Get system settings for general values of ontology text elements on a fake subpage or section for Locations
