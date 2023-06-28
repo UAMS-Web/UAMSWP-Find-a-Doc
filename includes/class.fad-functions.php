@@ -2792,40 +2792,66 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Get system settings for general values of ontology text elements on a fake subpage or section for Areas of Expertise
 		function uamswp_fad_fpage_text_expertise_general() {
+
 			// Make variables available outside of the function
 			global $expertise_fpage_title_general;
 			global $expertise_fpage_intro_general;
 			global $expertise_descendant_fpage_title_general;
 			global $expertise_descendant_fpage_intro_general;
+			global $expertise_fpage_ref_main_title_general;
+			global $expertise_fpage_ref_main_intro_general;
+			global $expertise_fpage_ref_main_link_general;
+			global $expertise_descendant_fpage_ref_main_title_general;
+			global $expertise_descendant_fpage_ref_main_intro_general;
+			global $expertise_descendant_fpage_ref_main_link_general;
 
 			// Areas of Expertise
 
 				// Get the system settings for the text elements in a general placement
 				$expertise_fpage_title_general = get_field('expertise_fpage_title_general', 'option'); // Fake subpage (or section), title
 				$expertise_fpage_intro_general = get_field('expertise_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
+				$expertise_fpage_ref_main_title_general = get_field('expertise_fpage_ref_main_title_general', 'option'); // Reference to main area of expertise archive, title
+				$expertise_fpage_ref_main_intro_general = get_field('expertise_fpage_ref_main_intro_general', 'option'); // Reference to main area of expertise archive, body text
+				$expertise_fpage_ref_main_link_general = get_field('expertise_fpage_ref_main_link_general', 'option'); // Reference to main area of expertise archive, link text
 
 				// If the variable is not set or is empty, set a hardcoded fallback value
 				$expertise_fpage_title_general = ( isset($expertise_fpage_title_general) && !empty($expertise_fpage_title_general) ) ? $expertise_fpage_title_general : 'Related [Areas of Expertise]'; // Fake subpage (or section), title
 				$expertise_fpage_intro_general = ( isset($expertise_fpage_intro_general) && !empty($expertise_fpage_intro_general) ) ? $expertise_fpage_intro_general : ''; // Fake subpage (or section), intro text
+				$expertise_fpage_ref_main_title_general = ( isset($expertise_fpage_ref_main_title_general) && !empty($expertise_fpage_ref_main_title_general) ) ? $expertise_fpage_ref_main_title_general : 'Full List of [Areas of Expertise]'; // Reference to main area of expertise archive, title
+				$expertise_fpage_ref_main_intro_general = ( isset($expertise_fpage_ref_main_intro_general) && !empty($expertise_fpage_ref_main_intro_general) ) ? $expertise_fpage_ref_main_intro_general : 'Explore our extensive range of [areas of expertise], encompassing diverse specialties and cutting-edge medical advancements. Discover the breadth of knowledge and skills within UAMS Health.'; // Reference to main area of expertise archive, body text
+				$expertise_fpage_ref_main_link_general = ( isset($expertise_fpage_ref_main_link_general) && !empty($expertise_fpage_ref_main_link_general) ) ? $expertise_fpage_ref_main_link_general : 'View All [Areas of Expertise]'; // Reference to main area of expertise archive, link text
 
 				// Substitute placeholder text for relevant system settings value
 				$expertise_fpage_title_general = uamswp_fad_fpage_text_replace($expertise_fpage_title_general); // Fake subpage (or section), title
 				$expertise_fpage_intro_general = uamswp_fad_fpage_text_replace($expertise_fpage_intro_general); // Fake subpage (or section), intro text
+				$expertise_fpage_ref_main_title_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_title_general); // Reference to main area of expertise archive, title
+				$expertise_fpage_ref_main_intro_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_intro_general); // Reference to main area of expertise archive, body text
+				$expertise_fpage_ref_main_link_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_link_general); // Reference to main area of expertise archive, link text
 
 			// Descendant Areas of Expertise
 
 				// Get the system settings for the text elements in a general placement
 				$expertise_descendant_fpage_title_general = get_field('expertise_descendant_fpage_title_general', 'option'); // Fake subpage (or section), title
 				$expertise_descendant_fpage_intro_general = get_field('expertise_descendant_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
+				$expertise_descendant_fpage_ref_main_title_general = get_field('expertise_descendant_fpage_ref_main_title_general', 'option'); // Reference to main area of expertise archive, title
+				$expertise_descendant_fpage_ref_main_intro_general = get_field('expertise_descendant_fpage_ref_main_intro_general', 'option'); // Reference to main area of expertise archive, body text
+				$expertise_descendant_fpage_ref_main_link_general = get_field('expertise_descendant_fpage_ref_main_link_general', 'option'); // Reference to main area of expertise archive, link text
 
 				// If the variable is not set or is empty, set a hardcoded fallback value
 				$expertise_descendant_fpage_title_general = ( isset($expertise_descendant_fpage_title_general) && !empty($expertise_descendant_fpage_title_general) ) ? $expertise_descendant_fpage_title_general : 'Related [Areas of Expertise]'; // Fake subpage (or section), title
 				$expertise_descendant_fpage_intro_general = ( isset($expertise_descendant_fpage_intro_general) && !empty($expertise_descendant_fpage_intro_general) ) ? $expertise_descendant_fpage_intro_general : ''; // Fake subpage (or section), intro text
+				$expertise_descendant_fpage_ref_main_title_general = ( isset($expertise_descendant_fpage_ref_main_title_general) && !empty($expertise_descendant_fpage_ref_main_title_general) ) ? $expertise_descendant_fpage_ref_main_title_general : $expertise_fpage_ref_main_title_general; // Reference to main area of expertise archive, title
+				$expertise_descendant_fpage_ref_main_intro_general = ( isset($expertise_descendant_fpage_ref_main_intro_general) && !empty($expertise_descendant_fpage_ref_main_intro_general) ) ? $expertise_descendant_fpage_ref_main_intro_general : $expertise_fpage_ref_main_intro_general; // Reference to main area of expertise archive, body text
+				$expertise_descendant_fpage_ref_main_link_general = ( isset($expertise_descendant_fpage_ref_main_link_general) && !empty($expertise_descendant_fpage_ref_main_link_general) ) ? $expertise_descendant_fpage_ref_main_link_general : $expertise_fpage_ref_main_link_general; // Reference to main area of expertise archive, link text
 
 				// Substitute placeholder text for relevant system settings value
 				$expertise_descendant_fpage_title_general = uamswp_fad_fpage_text_replace($expertise_descendant_fpage_title_general); // Fake subpage (or section), title
 				$expertise_descendant_fpage_intro_general = uamswp_fad_fpage_text_replace($expertise_descendant_fpage_intro_general); // Fake subpage (or section), intro text
-		}
+				$expertise_descendant_fpage_ref_main_title_general = uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_title_general); // Reference to main area of expertise archive, title
+				$expertise_descendant_fpage_ref_main_intro_general = uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_intro_general); // Reference to main area of expertise archive, body text
+				$expertise_descendant_fpage_ref_main_link_general = uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_link_general); // Reference to main area of expertise archive, link text
+
+			}
 
 		// Get system settings for general values of ontology text elements on a fake subpage or section for Clinical Resources
 		function uamswp_fad_fpage_text_clinical_resource_general() {
@@ -5578,21 +5604,21 @@ function uamswp_fad_fpage_text_image_overlay() {
 		'specialties'		=> array(
 			'heading'			=> 'Full List of [Areas of Expertise]', // Heading text, limited to 32 characters // str
 			'body'				=> 'Explore our extensive range of [areas of expertise], encompassing diverse specialties and cutting-edge medical advancements. Discover the breadth of knowledge and skills within UAMS Health.', // Body text, limited to 280 characters // str
-			'button_text'		=> 'All [Areas of Expertise]', // Link text, limited to 27 characters // str
+			'button_text'		=> 'View All [Areas of Expertise]', // Link text, limited to 27 characters // str
 			'button_url'		=> get_post_type_archive_link('expertise'), // Full URL // str
 			'image'				=> $expertise_archive_image // Background image ID // int
 		),
 		'related'		=> array(
 			'heading'			=> 'Full List of Areas of Expertise', // Heading text, limited to 32 characters // str
 			'body'				=> 'Explore our extensive range of [areas of expertise], encompassing diverse specialties and cutting-edge medical advancements. Discover the breadth of knowledge and skills within UAMS Health.', // Body text, limited to 280 characters // str
-			'button_text'		=> 'All [Areas of Expertise]', // Link text, limited to 27 characters // str
+			'button_text'		=> 'View All [Areas of Expertise]', // Link text, limited to 27 characters // str
 			'button_url'		=> get_post_type_archive_link('expertise'), // Full URL // str
 			'image'				=> $expertise_archive_image // Background image ID // int
 		),
 		'resources'		=> array(
 			'heading'			=> 'Full List of [Clinical Resources]', // Heading text, limited to 32 characters // str
 			'body'				=> 'Access a wealth of [clinical resources], including articles, videos, infographics, and documents, covering various specialties within UAMS Health. Expand your knowledge and stay informed.', // Body text, limited to 280 characters // str
-			'button_text'		=> 'All [Clinical Resources]', // Link text, limited to 27 characters // str
+			'button_text'		=> 'View All [Clinical Resources]', // Link text, limited to 27 characters // str
 			'button_url'		=> get_post_type_archive_link('clinical-resource'), // Full URL // str
 			'image'				=> $clinical_resource_archive_image // Background image ID // int
 		)
