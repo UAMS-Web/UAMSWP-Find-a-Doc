@@ -2740,30 +2740,30 @@ function uamswp_fad_fpage_text_replace($string) {
 			// Locations
 
 				// Get the system settings for the text elements in a general placement
-				$location_fpage_title_general = get_field('location_fpage_title_general', 'option'); // Title
-				$location_fpage_intro_general = get_field('location_fpage_intro_general', 'option'); // Intro text
+				$location_fpage_title_general = get_field('location_fpage_title_general', 'option'); // Fake subpage (or section), title
+				$location_fpage_intro_general = get_field('location_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
 
 				// If the variable is not set or is empty, set a hardcoded fallback value
-				$location_fpage_title_general = ( isset($location_fpage_title_general) && !empty($location_fpage_title_general) ) ? $location_fpage_title_general : 'Related [Locations]'; // Title
-				$location_fpage_intro_general = ( isset($location_fpage_intro_general) && !empty($location_fpage_intro_general) ) ? $location_fpage_intro_general : ''; // Intro text
+				$location_fpage_title_general = ( isset($location_fpage_title_general) && !empty($location_fpage_title_general) ) ? $location_fpage_title_general : 'Related [Locations]'; // Fake subpage (or section), title
+				$location_fpage_intro_general = ( isset($location_fpage_intro_general) && !empty($location_fpage_intro_general) ) ? $location_fpage_intro_general : ''; // Fake subpage (or section), intro text
 
 				// Substitute placeholder text for relevant system settings value
-				$location_fpage_title_general = uamswp_fad_fpage_text_replace($location_fpage_title_general); // Title
-				$location_fpage_intro_general = uamswp_fad_fpage_text_replace($location_fpage_intro_general); // Intro text
+				$location_fpage_title_general = uamswp_fad_fpage_text_replace($location_fpage_title_general); // Fake subpage (or section), title
+				$location_fpage_intro_general = uamswp_fad_fpage_text_replace($location_fpage_intro_general); // Fake subpage (or section), intro text
 
 			// Descendant Locations
 
 				// Get the system settings for the text elements in a general placement
-				$location_descendant_fpage_title_general = get_field('location_descendant_fpage_title_general', 'option'); // Title
-				$location_descendant_fpage_intro_general = get_field('location_descendant_fpage_intro_general', 'option'); // Intro text
+				$location_descendant_fpage_title_general = get_field('location_descendant_fpage_title_general', 'option'); // Fake subpage (or section), title
+				$location_descendant_fpage_intro_general = get_field('location_descendant_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
 
 				// If the variable is not set or is empty, set a hardcoded fallback value
-				$location_descendant_fpage_title_general = ( isset($location_descendant_fpage_title_general) && !empty($location_descendant_fpage_title_general) ) ? $location_descendant_fpage_title_general : 'Related [Descendant Locations]'; // Title
-				$location_descendant_fpage_intro_general = ( isset($location_descendant_fpage_intro_general) && !empty($location_descendant_fpage_intro_general) ) ? $location_descendant_fpage_intro_general : ''; // Intro text
+				$location_descendant_fpage_title_general = ( isset($location_descendant_fpage_title_general) && !empty($location_descendant_fpage_title_general) ) ? $location_descendant_fpage_title_general : 'Related [Descendant Locations]'; // Fake subpage (or section), title
+				$location_descendant_fpage_intro_general = ( isset($location_descendant_fpage_intro_general) && !empty($location_descendant_fpage_intro_general) ) ? $location_descendant_fpage_intro_general : ''; // Fake subpage (or section), intro text
 
 				// Substitute placeholder text for relevant system settings value
-				$location_descendant_fpage_title_general = uamswp_fad_fpage_text_replace($location_descendant_fpage_title_general); // Title
-				$location_descendant_fpage_intro_general = uamswp_fad_fpage_text_replace($location_descendant_fpage_intro_general); // Intro text
+				$location_descendant_fpage_title_general = uamswp_fad_fpage_text_replace($location_descendant_fpage_title_general); // Fake subpage (or section), title
+				$location_descendant_fpage_intro_general = uamswp_fad_fpage_text_replace($location_descendant_fpage_intro_general); // Fake subpage (or section), intro text
 		}
 
 		// Get system settings for general values of ontology text elements on a fake subpage or section for Areas of Expertise
@@ -2777,30 +2777,30 @@ function uamswp_fad_fpage_text_replace($string) {
 			// Areas of Expertise
 
 				// Get the system settings for the text elements in a general placement
-				$expertise_fpage_title_general = get_field('expertise_fpage_title_general', 'option'); // Title
-				$expertise_fpage_intro_general = get_field('expertise_fpage_intro_general', 'option'); // Intro text
+				$expertise_fpage_title_general = get_field('expertise_fpage_title_general', 'option'); // Fake subpage (or section), title
+				$expertise_fpage_intro_general = get_field('expertise_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
 
 				// If the variable is not set or is empty, set a hardcoded fallback value
-				$expertise_fpage_title_general = ( isset($expertise_fpage_title_general) && !empty($expertise_fpage_title_general) ) ? $expertise_fpage_title_general : 'Related [Areas of Expertise]'; // Title
-				$expertise_fpage_intro_general = ( isset($expertise_fpage_intro_general) && !empty($expertise_fpage_intro_general) ) ? $expertise_fpage_intro_general : ''; // Intro text
+				$expertise_fpage_title_general = ( isset($expertise_fpage_title_general) && !empty($expertise_fpage_title_general) ) ? $expertise_fpage_title_general : 'Related [Areas of Expertise]'; // Fake subpage (or section), title
+				$expertise_fpage_intro_general = ( isset($expertise_fpage_intro_general) && !empty($expertise_fpage_intro_general) ) ? $expertise_fpage_intro_general : ''; // Fake subpage (or section), intro text
 
 				// Substitute placeholder text for relevant system settings value
-				$expertise_fpage_title_general = uamswp_fad_fpage_text_replace($expertise_fpage_title_general); // Title
-				$expertise_fpage_intro_general = uamswp_fad_fpage_text_replace($expertise_fpage_intro_general); // Intro text
+				$expertise_fpage_title_general = uamswp_fad_fpage_text_replace($expertise_fpage_title_general); // Fake subpage (or section), title
+				$expertise_fpage_intro_general = uamswp_fad_fpage_text_replace($expertise_fpage_intro_general); // Fake subpage (or section), intro text
 
 			// Descendant Areas of Expertise
 
 				// Get the system settings for the text elements in a general placement
-				$expertise_descendant_fpage_title_general = get_field('expertise_descendant_fpage_title_general', 'option'); // Title
-				$expertise_descendant_fpage_intro_general = get_field('expertise_descendant_fpage_intro_general', 'option'); // Intro text
+				$expertise_descendant_fpage_title_general = get_field('expertise_descendant_fpage_title_general', 'option'); // Fake subpage (or section), title
+				$expertise_descendant_fpage_intro_general = get_field('expertise_descendant_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
 
 				// If the variable is not set or is empty, set a hardcoded fallback value
-				$expertise_descendant_fpage_title_general = ( isset($expertise_descendant_fpage_title_general) && !empty($expertise_descendant_fpage_title_general) ) ? $expertise_descendant_fpage_title_general : 'Related [Areas of Expertise]'; // Title
-				$expertise_descendant_fpage_intro_general = ( isset($expertise_descendant_fpage_intro_general) && !empty($expertise_descendant_fpage_intro_general) ) ? $expertise_descendant_fpage_intro_general : ''; // Intro text
+				$expertise_descendant_fpage_title_general = ( isset($expertise_descendant_fpage_title_general) && !empty($expertise_descendant_fpage_title_general) ) ? $expertise_descendant_fpage_title_general : 'Related [Areas of Expertise]'; // Fake subpage (or section), title
+				$expertise_descendant_fpage_intro_general = ( isset($expertise_descendant_fpage_intro_general) && !empty($expertise_descendant_fpage_intro_general) ) ? $expertise_descendant_fpage_intro_general : ''; // Fake subpage (or section), intro text
 
 				// Substitute placeholder text for relevant system settings value
-				$expertise_descendant_fpage_title_general = uamswp_fad_fpage_text_replace($expertise_descendant_fpage_title_general); // Title
-				$expertise_descendant_fpage_intro_general = uamswp_fad_fpage_text_replace($expertise_descendant_fpage_intro_general); // Intro text
+				$expertise_descendant_fpage_title_general = uamswp_fad_fpage_text_replace($expertise_descendant_fpage_title_general); // Fake subpage (or section), title
+				$expertise_descendant_fpage_intro_general = uamswp_fad_fpage_text_replace($expertise_descendant_fpage_intro_general); // Fake subpage (or section), intro text
 		}
 
 		// Get system settings for general values of ontology text elements on a fake subpage or section for Clinical Resources
@@ -2813,18 +2813,18 @@ function uamswp_fad_fpage_text_replace($string) {
 			global $clinical_resource_fpage_more_link_descr_general;
 
 			// Get the system settings for the text elements in a general placement
-			$clinical_resource_fpage_title_general = get_field('clinical_resource_fpage_title_general', 'option'); // Title
-			$clinical_resource_fpage_intro_general = get_field('clinical_resource_fpage_intro_general', 'option'); // Intro text
+			$clinical_resource_fpage_title_general = get_field('clinical_resource_fpage_title_general', 'option'); // Fake subpage (or section), title
+			$clinical_resource_fpage_intro_general = get_field('clinical_resource_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
 			$clinical_resource_fpage_more_text_general = get_field('clinical_resource_fpage_more_text_general', 'option'); // "More" Intro Text of Fake Subpage or Section for Related Clinical Resources
 			$clinical_resource_fpage_more_link_text_general = get_field('clinical_resource_fpage_more_link_text_general', 'option'); // "More" Link Text of Fake Subpage or Section for Related Clinical Resources
 			$clinical_resource_fpage_more_link_descr_general = get_field('clinical_resource_fpage_more_link_descr_general', 'option'); // "More" Link Description of Fake Subpage or Section for Related Clinical Resources
 
 				// If the variable is not set or is empty, set it using the hardcoded values
 				if ( !isset($clinical_resource_fpage_title_general) || empty($clinical_resource_fpage_title_general) ) {
-					$clinical_resource_fpage_title_general = 'Related [Clinical Resources]'; // Title
+					$clinical_resource_fpage_title_general = 'Related [Clinical Resources]'; // Fake subpage (or section), title
 				}
 				if ( !isset($clinical_resource_fpage_intro_general) || empty($clinical_resource_fpage_intro_general) ) {
-					$clinical_resource_fpage_intro_general = ''; // Intro text
+					$clinical_resource_fpage_intro_general = ''; // Fake subpage (or section), intro text
 				}
 				if ( !isset($clinical_resource_fpage_more_text_general) || empty($clinical_resource_fpage_more_text_general) ) {
 					$clinical_resource_fpage_more_text_general = 'Want to find more related [clinical resources]?'; // "More" intro text
@@ -2837,8 +2837,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				}
 	
 				// Substitute placeholder text for relevant system settings value
-				$clinical_resource_fpage_title_general = $clinical_resource_fpage_title_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_general) : ''; // Title
-				$clinical_resource_fpage_intro_general = $clinical_resource_fpage_intro_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_general) : ''; // Intro text
+				$clinical_resource_fpage_title_general = $clinical_resource_fpage_title_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_general) : ''; // Fake subpage (or section), title
+				$clinical_resource_fpage_intro_general = $clinical_resource_fpage_intro_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_general) : ''; // Fake subpage (or section), intro text
 				$clinical_resource_fpage_more_text_general = $clinical_resource_fpage_more_text_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_text_general) : ''; // "More" Intro Text
 				$clinical_resource_fpage_more_link_text_general = $clinical_resource_fpage_more_link_text_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_text_general) : ''; // "More" Link Text
 				$clinical_resource_fpage_more_link_descr_general = $clinical_resource_fpage_more_link_descr_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_descr_general) : ''; // "More" Link Description
@@ -2852,16 +2852,16 @@ function uamswp_fad_fpage_text_replace($string) {
 			global $condition_fpage_intro_general;
 
 			// Get the system settings for the text elements in a general placement
-			$condition_fpage_title_general = get_field('conditions_fpage_title_general', 'option'); // Title
-			$condition_fpage_intro_general = get_field('conditions_fpage_intro_general', 'option'); // Intro text
+			$condition_fpage_title_general = get_field('conditions_fpage_title_general', 'option'); // Fake subpage (or section), title
+			$condition_fpage_intro_general = get_field('conditions_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
 
 			// If the variable is not set or is empty, set a hardcoded fallback value
-			$condition_fpage_title_general = ( isset($condition_fpage_title_general) && !empty($condition_fpage_title_general) ) ? $condition_fpage_title_general : 'Related [Conditions]'; // Title
-			$condition_fpage_intro_general = ( isset($condition_fpage_intro_general) && !empty($condition_fpage_intro_general) ) ? $condition_fpage_intro_general : 'UAMS Health [providers] care for a broad range of [conditions], some of which may not be listed below.'; // Intro text
+			$condition_fpage_title_general = ( isset($condition_fpage_title_general) && !empty($condition_fpage_title_general) ) ? $condition_fpage_title_general : 'Related [Conditions]'; // Fake subpage (or section), title
+			$condition_fpage_intro_general = ( isset($condition_fpage_intro_general) && !empty($condition_fpage_intro_general) ) ? $condition_fpage_intro_general : 'UAMS Health [providers] care for a broad range of [conditions], some of which may not be listed below.'; // Fake subpage (or section), intro text
 
 			// Substitute placeholder text for relevant system settings value
-			$condition_fpage_title_general = uamswp_fad_fpage_text_replace($condition_fpage_title_general); // Title
-			$condition_fpage_intro_general = uamswp_fad_fpage_text_replace($condition_fpage_intro_general); // Intro text
+			$condition_fpage_title_general = uamswp_fad_fpage_text_replace($condition_fpage_title_general); // Fake subpage (or section), title
+			$condition_fpage_intro_general = uamswp_fad_fpage_text_replace($condition_fpage_intro_general); // Fake subpage (or section), intro text
 		}
 
 		// Get system settings for general values of ontology text elements on a fake subpage or section for Treatments
@@ -2871,16 +2871,16 @@ function uamswp_fad_fpage_text_replace($string) {
 			global $treatment_fpage_intro_general;
 
 			// Get the system settings for the text elements in a general placement
-			$treatment_fpage_title_general = get_field('treatments_fpage_title_general', 'option'); // Title
-			$treatment_fpage_intro_general = get_field('treatments_fpage_intro_general', 'option'); // Intro text
+			$treatment_fpage_title_general = get_field('treatments_fpage_title_general', 'option'); // Fake subpage (or section), title
+			$treatment_fpage_intro_general = get_field('treatments_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
 
 			// If the variable is not set or is empty, set a hardcoded fallback value
-			$treatment_fpage_title_general = ( isset($treatment_fpage_title_general) && !empty($treatment_fpage_title_general) ) ? $treatment_fpage_title_general : 'Related [Treatments]'; // Title
-			$treatment_fpage_intro_general = ( isset($treatment_fpage_intro_general) && !empty($treatment_fpage_intro_general) ) ? $treatment_fpage_intro_general : 'UAMS Health [providers] perform and prescribe a broad range of [treatments], some of which may not be listed below.'; // Intro text
+			$treatment_fpage_title_general = ( isset($treatment_fpage_title_general) && !empty($treatment_fpage_title_general) ) ? $treatment_fpage_title_general : 'Related [Treatments]'; // Fake subpage (or section), title
+			$treatment_fpage_intro_general = ( isset($treatment_fpage_intro_general) && !empty($treatment_fpage_intro_general) ) ? $treatment_fpage_intro_general : 'UAMS Health [providers] perform and prescribe a broad range of [treatments], some of which may not be listed below.'; // Fake subpage (or section), intro text
 
 			// Substitute placeholder text for relevant system settings value
-			$treatment_fpage_title_general = uamswp_fad_fpage_text_replace($treatment_fpage_title_general); // Title
-			$treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($treatment_fpage_intro_general); // Intro text
+			$treatment_fpage_title_general = uamswp_fad_fpage_text_replace($treatment_fpage_title_general); // Fake subpage (or section), title
+			$treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($treatment_fpage_intro_general); // Fake subpage (or section), intro text
 		}
 
 		// Get system settings for general values of ontology text elements on a fake subpage or section for Conditions and Treatments combined
@@ -2890,16 +2890,16 @@ function uamswp_fad_fpage_text_replace($string) {
 			global $condition_treatment_fpage_intro_general;
 
 			// Get the system settings for the text elements in a general placement
-			$condition_treatment_fpage_title_general = get_field('condition_treatment_fpage_title_general', 'option'); // Title
-			$condition_treatment_fpage_intro_general = get_field('condition_treatment_fpage_intro_general', 'option'); // Intro text
+			$condition_treatment_fpage_title_general = get_field('condition_treatment_fpage_title_general', 'option'); // Fake subpage (or section), title
+			$condition_treatment_fpage_intro_general = get_field('condition_treatment_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
 
 			// If the variable is not set or is empty, set a hardcoded fallback value
-			$condition_treatment_fpage_title_general = ( isset($condition_treatment_fpage_title_general) && !empty($condition_treatment_fpage_title_general) ) ? $condition_treatment_fpage_title_general : 'Related [Conditions and Treatments]'; // Title
-			$condition_treatment_fpage_intro_general = ( isset($condition_treatment_fpage_intro_general) && !empty($condition_treatment_fpage_intro_general) ) ? $condition_treatment_fpage_intro_general : 'UAMS Health [providers] perform and prescribe a broad range of [treatments] for a broad range of [conditions], some of which may not be listed below.'; // Intro text
+			$condition_treatment_fpage_title_general = ( isset($condition_treatment_fpage_title_general) && !empty($condition_treatment_fpage_title_general) ) ? $condition_treatment_fpage_title_general : 'Related [Conditions and Treatments]'; // Fake subpage (or section), title
+			$condition_treatment_fpage_intro_general = ( isset($condition_treatment_fpage_intro_general) && !empty($condition_treatment_fpage_intro_general) ) ? $condition_treatment_fpage_intro_general : 'UAMS Health [providers] perform and prescribe a broad range of [treatments] for a broad range of [conditions], some of which may not be listed below.'; // Fake subpage (or section), intro text
 
 			// Substitute placeholder text for relevant system settings value
-			$condition_treatment_fpage_title_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_general); // Title
-			$condition_treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_general); // Intro text
+			$condition_treatment_fpage_title_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_general); // Fake subpage (or section), title
+			$condition_treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_general); // Fake subpage (or section), intro text
 		}
 
 	// Get field values from Find-a-Doc Settings and from ontology items for ontology text elements in specific subsections and single profiles
