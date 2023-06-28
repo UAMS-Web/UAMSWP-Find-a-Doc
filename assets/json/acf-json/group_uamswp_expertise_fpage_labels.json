@@ -1,7 +1,7 @@
 
 {
 	"key": "group_expertise_fpage_labels",
-	"title": "Fake Subpage or Section for Areas of Expertise in an Ontology Subsection or Single Profile",
+	"title": "Fake Subpage (or Section) for Areas of Expertise in an Ontology Subsection or Single Profile",
 	"fields": [
 		{
 			"key": "field_expertise_fpage_tab_general",
@@ -21,10 +21,10 @@
 		},
 		{
 			"key": "field_expertise_fpage_title_general",
-			"label": "General Title of Fake Subpage or Section for Areas of Expertise",
+			"label": "General Title of Fake Subpage (or Section) for Areas of Expertise",
 			"name": "expertise_fpage_title_general",
 			"type": "text",
-			"instructions": "If you leave this blank, the default title structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., title of fake subpage for descendant areas of expertise in areas of expertise subsection).",
+			"instructions": "If you leave this blank, the default title structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., title of fake subpage (or section) for descendant areas of expertise in areas of expertise subsection).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -43,10 +43,10 @@
 		},
 		{
 			"key": "field_expertise_fpage_intro_general",
-			"label": "General Intro Text of Fake Subpage or Section for Areas of Expertise",
+			"label": "General Intro Text of Fake Subpage (or Section) for Areas of Expertise",
 			"name": "expertise_fpage_intro_general",
 			"type": "textarea",
-			"instructions": "If you leave this blank, the default intro text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., intro text of fake subpage for descendant areas of expertise in areas of expertise subsection).",
+			"instructions": "If you leave this blank, the default intro text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., intro text of fake subpage (or section) for descendant areas of expertise in areas of expertise subsection).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -63,7 +63,7 @@
 		},
 		{
 			"key": "field_expertise_fpage_featured_image_general",
-			"label": "General Featured Image of Fake Subpage or Section for Areas of Expertise",
+			"label": "General Featured Image of Fake Subpage (or Section) for Areas of Expertise",
 			"name": "expertise_fpage_featured_image_general",
 			"type": "image",
 			"instructions": "Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
@@ -95,10 +95,10 @@
 		},
 		{
 			"key": "field_expertise_descendant_fpage_title_general",
-			"label": "General Title of Fake Subpage or Section for Descendant Areas of Expertise",
+			"label": "General Title of Fake Subpage (or Section) for Descendant Areas of Expertise",
 			"name": "expertise_descendant_fpage_title_general",
 			"type": "text",
-			"instructions": "If you leave this blank, the default title structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., title of fake subpage for descendant areas of expertise in areas of expertise subsection).",
+			"instructions": "If you leave this blank, the default title structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., title of fake subpage (or section) for descendant areas of expertise in areas of expertise subsection).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -117,10 +117,10 @@
 		},
 		{
 			"key": "field_expertise_descendant_fpage_intro_general",
-			"label": "General Intro Text of Fake Subpage or Section for Descendant Areas of Expertise",
+			"label": "General Intro Text of Fake Subpage (or Section) for Descendant Areas of Expertise",
 			"name": "expertise_descendant_fpage_intro_general",
 			"type": "textarea",
-			"instructions": "If you leave this blank, the default intro text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., intro text of fake subpage for descendant areas of expertise in areas of expertise subsection).",
+			"instructions": "If you leave this blank, the default intro text structure will be used. This value may be overridden by inputs specific to the text element's placement (e.g., intro text of fake subpage (or section) for descendant areas of expertise in areas of expertise subsection).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -137,7 +137,7 @@
 		},
 		{
 			"key": "field_expertise_descendant_fpage_featured_image_general",
-			"label": "General Featured Image of Fake Subpage or Section for Descendant Areas of Expertise",
+			"label": "General Featured Image of Fake Subpage (or Section) for Descendant Areas of Expertise",
 			"name": "expertise_descendant_fpage_featured_image_general",
 			"type": "image",
 			"instructions": "Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
@@ -185,7 +185,7 @@
 		},
 		{
 			"key": "field_expertise_fpage_title_provider",
-			"label": "Title of Fake Subpage for Areas of Expertise in Provider Subsection",
+			"label": "Title of Fake Subpage (or Section) for Areas of Expertise in Provider Subsection",
 			"name": "expertise_fpage_title_provider",
 			"type": "text",
 			"instructions": "If you leave this blank, the default title structure will be used.",
@@ -207,7 +207,7 @@
 		},
 		{
 			"key": "field_expertise_fpage_intro_provider",
-			"label": "Intro Text of Fake Subpage for Areas of Expertise in Provider Subsection",
+			"label": "Intro Text of Fake Subpage (or Section) for Areas of Expertise in Provider Subsection",
 			"name": "expertise_fpage_intro_provider",
 			"type": "textarea",
 			"instructions": "If you leave this blank, the default intro text structure will be used.",
@@ -227,7 +227,7 @@
 		},
 		{
 			"key": "field_expertise_fpage_featured_image_provider",
-			"label": "Featured Image of Fake Subpage for Areas of Expertise in Provider Subsection",
+			"label": "Featured Image of Fake Subpage (or Section) for Areas of Expertise in Provider Subsection",
 			"name": "expertise_fpage_featured_image_provider",
 			"type": "image",
 			"instructions": "If you leave this blank, the general placement image will be used.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
@@ -275,7 +275,7 @@
 		},
 		{
 			"key": "field_expertise_fpage_title_location",
-			"label": "Title of Fake Subpage for Areas of Expertise in Location Subsection",
+			"label": "Title of Fake Subpage (or Section) for Areas of Expertise in Location Subsection",
 			"name": "expertise_fpage_title_location",
 			"type": "text",
 			"instructions": "If you leave this blank, the default title structure will be used.",
@@ -297,7 +297,7 @@
 		},
 		{
 			"key": "field_expertise_fpage_intro_location",
-			"label": "Intro Text of Fake Subpage for Areas of Expertise in Location Subsection",
+			"label": "Intro Text of Fake Subpage (or Section) for Areas of Expertise in Location Subsection",
 			"name": "expertise_fpage_intro_location",
 			"type": "textarea",
 			"instructions": "If you leave this blank, the default intro text structure will be used.",
@@ -317,7 +317,7 @@
 		},
 		{
 			"key": "field_expertise_fpage_featured_image_location",
-			"label": "Featured Image of Fake Subpage for Areas of Expertise in Location Subsection",
+			"label": "Featured Image of Fake Subpage (or Section) for Areas of Expertise in Location Subsection",
 			"name": "expertise_fpage_featured_image_location",
 			"type": "image",
 			"instructions": "If you leave this blank, the general placement image will be used.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
@@ -365,7 +365,7 @@
 		},
 		{
 			"key": "field_expertise_descendant_fpage_title_expertise",
-			"label": "Title of Fake Subpage for Descendant Areas of Expertise Items in Area of Expertise Subsection",
+			"label": "Title of Fake Subpage (or Section) for Descendant Areas of Expertise Items in Area of Expertise Subsection",
 			"name": "expertise_descendant_fpage_title_expertise",
 			"type": "text",
 			"instructions": "If you leave this blank, the default title structure will be used.",
@@ -387,7 +387,7 @@
 		},
 		{
 			"key": "field_expertise_descendant_fpage_intro_expertise",
-			"label": "Intro Text of Fake Subpage for Descendant Areas of Expertise Items in Area of Expertise Subsection",
+			"label": "Intro Text of Fake Subpage (or Section) for Descendant Areas of Expertise Items in Area of Expertise Subsection",
 			"name": "expertise_descendant_fpage_intro_expertise",
 			"type": "textarea",
 			"instructions": "If you leave this blank, the default intro text structure will be used.",
@@ -407,7 +407,7 @@
 		},
 		{
 			"key": "field_expertise_descendant_fpage_featured_image_expertise",
-			"label": "Featured Image of Fake Subpage for Descendant Areas of Expertise Items in Area of Expertise Subsection",
+			"label": "Featured Image of Fake Subpage (or Section) for Descendant Areas of Expertise Items in Area of Expertise Subsection",
 			"name": "expertise_descendant_fpage_featured_image_expertise",
 			"type": "image",
 			"instructions": "If you leave this blank, the general placement image will be used.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
@@ -439,7 +439,7 @@
 		},
 		{
 			"key": "field_expertise_fpage_title_expertise",
-			"label": "Title of Fake Subpage for Related Areas of Expertise Items in Area of Expertise Subsection",
+			"label": "Title of Fake Subpage (or Section) for Related Areas of Expertise Items in Area of Expertise Subsection",
 			"name": "expertise_fpage_title_expertise",
 			"type": "text",
 			"instructions": "If you leave this blank, the default title structure will be used.",
@@ -461,7 +461,7 @@
 		},
 		{
 			"key": "field_expertise_fpage_intro_expertise",
-			"label": "Intro Text of Fake Subpage for Related Areas of Expertise Items in Area of Expertise Subsection",
+			"label": "Intro Text of Fake Subpage (or Section) for Related Areas of Expertise Items in Area of Expertise Subsection",
 			"name": "expertise_fpage_intro_expertise",
 			"type": "textarea",
 			"instructions": "If you leave this blank, the default intro text structure will be used.",
@@ -481,7 +481,7 @@
 		},
 		{
 			"key": "field_expertise_fpage_featured_image_expertise",
-			"label": "Featured Image of Fake Subpage for Related Areas of Expertise Items in Area of Expertise Subsection",
+			"label": "Featured Image of Fake Subpage (or Section) for Related Areas of Expertise Items in Area of Expertise Subsection",
 			"name": "expertise_fpage_featured_image_expertise",
 			"type": "image",
 			"instructions": "If you leave this blank, the general placement image will be used.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
@@ -529,7 +529,7 @@
 		},
 		{
 			"key": "field_expertise_fpage_title_clinical_resource",
-			"label": "Title of Section for Areas of Expertise on Clinical Resource Profile",
+			"label": "Title of Fake Subpage (or Section) for Areas of Expertise on Clinical Resource Profile",
 			"name": "expertise_fpage_title_clinical_resource",
 			"type": "text",
 			"instructions": "If you leave this blank, the default title structure will be used.",
@@ -551,7 +551,7 @@
 		},
 		{
 			"key": "field_expertise_fpage_intro_clinical_resource",
-			"label": "Intro Text of Section for Areas of Expertise on Clinical Resource Profile",
+			"label": "Intro Text of Fake Subpage (or Section) for Areas of Expertise on Clinical Resource Profile",
 			"name": "expertise_fpage_intro_clinical_resource",
 			"type": "textarea",
 			"instructions": "If you leave this blank, the default intro text structure will be used.",
@@ -571,7 +571,7 @@
 		},
 		{
 			"key": "field_expertise_fpage_featured_image_clinical_resource",
-			"label": "Featured Image of Fake Subpage for Areas of Expertise on Clinical Resource Profile",
+			"label": "Featured Image of Fake Subpage (or Section) for Areas of Expertise on Clinical Resource Profile",
 			"name": "expertise_fpage_featured_image_clinical_resource",
 			"type": "image",
 			"instructions": "If you leave this blank, the general placement image will be used.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
