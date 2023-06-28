@@ -6801,8 +6801,6 @@ function uamswp_fad_fpage_text_image_overlay() {
 		||
 		$current_fpage == 'locations'
 		||
-		$current_fpage == 'specialties'
-		||
 		$current_fpage == 'resources'
 		) {
 
@@ -6829,7 +6827,11 @@ function uamswp_fad_fpage_text_image_overlay() {
 
 		$fpage_text_image_overlay[] = $main_archive;
 
-	} elseif ( $current_fpage == 'related' ) {
+	} elseif (
+		$current_fpage == 'specialties'
+		||
+		$current_fpage == 'related'
+		) {
 
 		// Related Areas of Expertise fake subpage
 
