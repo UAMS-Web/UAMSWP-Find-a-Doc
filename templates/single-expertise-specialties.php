@@ -43,10 +43,10 @@ $page_url = get_permalink();
 $ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
 $ontology_type = isset($ontology_type) ? $ontology_type : 1; // Check if 'expertise_type' is not null, and if so, set value to true
 
-// Get system settings for fake subpage text elements on Area of Expertise subsection
+// Get system settings for fake subpage text elements in an Area of Expertise subsection
 uamswp_fad_fpage_text_expertise();
 
-// Get system settings for image elements of fake subpage or section on Area of Expertise subsection or profile
+// Get system settings for image elements of a fake subpage (or section) in an Area of Expertise subsection (or profile)
 uamswp_fad_fpage_image_expertise();
 
 // Get the featured image / post thumbnail
