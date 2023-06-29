@@ -20,6 +20,23 @@
 			"endpoint": 0
 		},
 		{
+			"key": "field_conditions_fpage_title_message_general",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>General Information for a Fake Subpage (or Section) for Conditions<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		{
 			"key": "field_conditions_fpage_title_general",
 			"label": "General Title of a Fake Subpage (or Section) for Conditions",
 			"name": "conditions_fpage_title_general",
@@ -76,6 +93,23 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		{
+			"key": "field_conditions_fpage_title_message_provider",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>General Information for a Fake Subpage (or Section) for Conditions in a Provider Subsection (or Profile)<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
 		},
 		{
 			"key": "field_conditions_fpage_title_provider",
@@ -136,6 +170,23 @@
 			"endpoint": 0
 		},
 		{
+			"key": "field_conditions_fpage_title_message_location",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>General Information for a Fake Subpage (or Section) for Conditions in a Location Subsection (or Profile)<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		{
 			"key": "field_conditions_fpage_title_location",
 			"label": "Title of a Fake Subpage (or Section) for Conditions in a Location Subsection (or Profile)",
 			"name": "conditions_fpage_title_location",
@@ -194,6 +245,23 @@
 			"endpoint": 0
 		},
 		{
+			"key": "field_conditions_fpage_title_message_expertise",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>General Information for a Fake Subpage (or Section) for Conditions in an Area of Expertise Subsection (or Profile)<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		{
 			"key": "field_conditions_fpage_title_expertise",
 			"label": "Title of a Fake Subpage (or Section) for Conditions in an Area of Expertise Subsection (or Profile)",
 			"name": "conditions_fpage_title_expertise",
@@ -250,6 +318,23 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		{
+			"key": "field_conditions_fpage_title_message_clinical_resource",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>General Information for a Fake Subpage (or Section) for Conditions in a Clinical Resource Subsection (or Profile)<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
 		},
 		{
 			"key": "field_conditions_fpage_title_clinical_resource",

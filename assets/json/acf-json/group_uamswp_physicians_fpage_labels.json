@@ -20,6 +20,23 @@
 			"endpoint": 0
 		},
 		{
+			"key": "field_provider_fpage_title_message_general",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>General Information for a Fake Subpage (or Section) for Providers<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		{
 			"key": "field_provider_fpage_title_general",
 			"label": "General Title of a Fake Subpage (or Section) for Providers",
 			"name": "provider_fpage_title_general",
@@ -94,11 +111,28 @@
 			"library": "all"
 		},
 		{
+			"key": "field_provider_fpage_ref_main_message_general",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>Reference to the Main Provider Archive<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		{
 			"key": "field_provider_fpage_ref_main_title_general",
-			"label": "General Title of the Reference to the Main Provider Archive on a Fake Subpage for Providers",
+			"label": "General Title of the Reference to the Main Provider Archive",
 			"name": "provider_fpage_ref_main_title_general",
 			"type": "text",
-			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default title structure will be used.</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., title in a reference to the main provider archive on a fake subpage for providers in an area of expertise subsection).",
+			"instructions": "Fake subpages for providers contain references linking users back to the main provider archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default title structure will be used.</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., title in a reference to the main provider archive on a fake subpage for providers in an area of expertise subsection).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -117,10 +151,10 @@
 		},
 		{
 			"key": "field_provider_fpage_ref_main_intro_general",
-			"label": "General Body Text of the Reference to the Main Provider Archive on a Fake Subpage for Providers",
+			"label": "General Body Text of the Reference to the Main Provider Archive",
 			"name": "provider_fpage_ref_main_intro_general",
 			"type": "textarea",
-			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default body text structure will be used.</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., body text in a reference to the main provider archive on a fake subpage for providers in an area of expertise subsection).",
+			"instructions": "Fake subpages for providers contain references linking users back to the main provider archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default body text structure will be used.</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., body text in a reference to the main provider archive on a fake subpage for providers in an area of expertise subsection).",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -137,10 +171,91 @@
 		},
 		{
 			"key": "field_provider_fpage_ref_main_link_general",
-			"label": "General Link Text of the Reference to the Main Provider Archive on a Fake Subpage for Providers",
+			"label": "General Link Text of the Reference to the Main Provider Archive",
 			"name": "provider_fpage_ref_main_link_general",
 			"type": "text",
-			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default link text structure will be used.</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., link text in a reference to the main provider archive on a fake subpage for providers in an area of expertise subsection).",
+			"instructions": "Fake subpages for providers contain references linking users back to the main provider archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default link text structure will be used.</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., link text in a reference to the main provider archive on a fake subpage for providers in an area of expertise subsection).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "View All [Providers]",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_provider_fpage_ref_top_message_general",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>Reference to the Top-Level Ontology Item's Fake Subpage for Providers<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		{
+			"key": "field_provider_fpage_ref_top_title_general",
+			"label": "General Title of the Reference to the Top-Level Ontology Item's Fake Subpage for Providers",
+			"name": "provider_fpage_ref_top_title_general",
+			"type": "text",
+			"instructions": "Fake subpages under nested ontology items contain references linking users back to the same type of fake subpage under the top-level ancestor ontology item (e.g., from \"Bone Cancer Care Providers\" to \"Cancer Care Providers\"). This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default title structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "Full List of [Providers]",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_provider_fpage_ref_top_intro_general",
+			"label": "General Body Text of the Reference to the Top-Level Ontology Item's Fake Subpage for Providers",
+			"name": "provider_fpage_ref_top_intro_general",
+			"type": "textarea",
+			"instructions": "Fake subpages under nested ontology items contain references linking users back to the same type of fake subpage under the top-level ancestor ontology item (e.g., from \"Bone Cancer Care Providers\" to \"Cancer Care Providers\"). This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default body text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "Discover our comprehensive list of [providers], spanning diverse specialties, who are dedicated to delivering exceptional care at UAMS Health.",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_provider_fpage_ref_top_link_general",
+			"label": "General Link Text of the Reference to the Top-Level Ontology Item's Fake Subpage for Providers",
+			"name": "provider_fpage_ref_top_link_general",
+			"type": "text",
+			"instructions": "Fake subpages under nested ontology items contain references linking users back to the same type of fake subpage under the top-level ancestor ontology item (e.g., from \"Bone Cancer Care Providers\" to \"Cancer Care Providers\"). This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default link text structure will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -174,8 +289,25 @@
 			"endpoint": 0
 		},
 		{
+			"key": "field_provider_fpage_title_message_location",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>General Information for a Fake Subpage (or Section) for Providers in a Location Subsection (or Profile)<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		{
 			"key": "field_provider_fpage_title_location",
-			"label": "Title of a Fake Subpage (or Section) for Providers in a Locations Subsection (or Profile)",
+			"label": "Title of a Fake Subpage (or Section) for Providers in a Location Subsection (or Profile)",
 			"name": "provider_fpage_title_location",
 			"type": "text",
 			"instructions": "If you leave this blank, the default title structure will be used.",
@@ -248,11 +380,28 @@
 			"library": "all"
 		},
 		{
+			"key": "field_provider_fpage_ref_main_message_location",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>Reference to the Main Provider Archive in a Location Subsection<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		{
 			"key": "field_provider_fpage_ref_main_title_location",
-			"label": "Title of the Reference to the Main Provider Archive on a Fake Subpage for Providers in a Location Subsection",
+			"label": "Title of the Reference to the Main Provider Archive in a Location Subsection",
 			"name": "provider_fpage_ref_main_title_location",
 			"type": "text",
-			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
+			"instructions": "Fake subpages for providers contain references linking users back to the main provider archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -274,7 +423,7 @@
 			"label": "Body Text of the Reference to the Main Provider Archive on a Fake Subpage for Providers in a Location Subsection",
 			"name": "provider_fpage_ref_main_intro_location",
 			"type": "textarea",
-			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
+			"instructions": "Fake subpages for providers contain references linking users back to the main provider archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -294,7 +443,7 @@
 			"label": "Link Text of the Reference to the Main Provider Archive on a Fake Subpage for Providers in a Location Subsection",
 			"name": "provider_fpage_ref_main_link_location",
 			"type": "text",
-			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
+			"instructions": "Fake subpages for providers contain references linking users back to the main provider archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -326,6 +475,23 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		{
+			"key": "field_provider_fpage_title_message_expertise",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>General Information for a Fake Subpage (or Section) for Providers in an Area of Expertise Subsection (or Profile)<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
 		},
 		{
 			"key": "field_provider_fpage_title_expertise",
@@ -402,11 +568,28 @@
 			"library": "all"
 		},
 		{
+			"key": "field_provider_fpage_ref_main_message_expertise",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>Reference to the Main Provider Archive in an Area of Expertise Subsection<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		{
 			"key": "field_provider_fpage_ref_main_title_expertise",
-			"label": "Title of the Reference to the Main Provider Archive on a Fake Subpage for Providers in an Area of Expertise Subsection",
+			"label": "Title of the Reference to the Main Provider Archive in an Area of Expertise Subsection",
 			"name": "provider_fpage_ref_main_title_expertise",
 			"type": "text",
-			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
+			"instructions": "Fake subpages for providers contain references linking users back to the main provider archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -425,10 +608,10 @@
 		},
 		{
 			"key": "field_provider_fpage_ref_main_intro_expertise",
-			"label": "Body Text of the Reference to the Main Provider Archive on a Fake Subpage for Providers in an Area of Expertise Subsection",
+			"label": "Body Text of the Reference to the Main Provider Archive in an Area of Expertise Subsection",
 			"name": "provider_fpage_ref_main_intro_expertise",
 			"type": "textarea",
-			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
+			"instructions": "Fake subpages for providers contain references linking users back to the main provider archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -445,10 +628,10 @@
 		},
 		{
 			"key": "field_provider_fpage_ref_main_link_expertise",
-			"label": "Link Text of the Reference to the Main Provider Archive on a Fake Subpage for Providers in an Area of Expertise Subsection",
+			"label": "Link Text of the Reference to the Main Provider Archive in an Area of Expertise Subsection",
 			"name": "provider_fpage_ref_main_link_expertise",
 			"type": "text",
-			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
+			"instructions": "Fake subpages for providers contain references linking users back to the main provider archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -480,6 +663,23 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		{
+			"key": "field_provider_fpage_title_message_clinical_resource",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>General Information for a Fake Subpage (or Section) for Providers in a Clinical Resource Subsection (or Profile)<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
 		},
 		{
 			"key": "field_provider_fpage_title_clinical_resource",
@@ -556,11 +756,28 @@
 			"library": "all"
 		},
 		{
+			"key": "field_provider_fpage_ref_main_message_clinical_resource",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>Reference to the Main Provider Archive in a Clinical Resource Subsection<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		{
 			"key": "field_provider_fpage_ref_main_title_clinical_resource",
-			"label": "Title of the Reference to the Main Provider Archive on a Fake Subpage for Providers in a Clinical Resource Subsection",
+			"label": "Title of the Reference to the Main Provider Archive in a Clinical Resource Subsection",
 			"name": "provider_fpage_ref_main_title_clinical_resource",
 			"type": "text",
-			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
+			"instructions": "Fake subpages for providers contain references linking users back to the main provider archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -582,7 +799,7 @@
 			"label": "Body Text of the Reference to the Main Provider Archive on a Fake Subpage for Providers in a Clinical Resource Subsection",
 			"name": "provider_fpage_ref_main_intro_clinical_resource",
 			"type": "textarea",
-			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
+			"instructions": "Fake subpages for providers contain references linking users back to the main provider archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -602,7 +819,7 @@
 			"label": "Link Text of the Reference to the Main Provider Archive on a Fake Subpage for Providers in a Clinical Resource Subsection",
 			"name": "provider_fpage_ref_main_link_clinical_resource",
 			"type": "text",
-			"instructions": "Fake subpages contain references linking users back to the main provider archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
+			"instructions": "Fake subpages for providers contain references linking users back to the main provider archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
