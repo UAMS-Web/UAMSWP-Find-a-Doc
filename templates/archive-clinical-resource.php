@@ -3,35 +3,71 @@
  * Template Name: Clinical Resources Archive
  */
 
-// Get system settings for provider labels
-uamswp_fad_labels_provider();
+// Get system settings for ontology item labels
 
-// Get system settings for location labels
-uamswp_fad_labels_location();
+	// Get system settings for Provider labels
+	uamswp_fad_labels_provider();
 
-// Get system settings for area of expertise labels
-uamswp_fad_labels_expertise();
+	// Get system settings for Location labels
+	uamswp_fad_labels_location();
 
-// Get system settings for clinical resource labels
-uamswp_fad_labels_clinical_resource();
+	// Get system settings for Area of Expertise labels
+	uamswp_fad_labels_expertise();
 
-// Get system settings for clinical resource facet labels
-uamswp_fad_labels_clinical_resource_facet();
+	// Get system settings for Clinical Resource labels
+	uamswp_fad_labels_clinical_resource();
 
-// Get system settings for condition labels
-uamswp_fad_labels_condition();
+	// Get system settings for Clinical Resource facet labels
+	uamswp_fad_labels_clinical_resource_facet();
 
-// Get system settings for treatment labels
-uamswp_fad_labels_treatment();
+	// Get system settings for Condition labels
+	uamswp_fad_labels_condition();
 
-// Get system settings for clinical resource archive page text
+	// Get system settings for Treatment labels
+	uamswp_fad_labels_treatment();
+
+// Get system settings for Clinical Resource archive page text
 uamswp_fad_archive_text_clinical_resource();
-// $clinical_resource_archive_link = get_post_type_archive_link( get_query_var('post_type') );
+
+// // Get the page ID
+// $page_id = get_the_ID(); // int
+
+// Get the page title
+$page_title = $clinical_resource_archive_headline; // string
+// $page_title_attr = uamswp_attr_conversion($page_title);
+
+// // Get the page URL
+// $page_url = get_permalink();
+
+// Get system settings for the featured image of a Clinical Resource archive page
+uamswp_fad_archive_image_clinical_resource();
+
+// Get the featured image
+$page_image_id = $clinical_resource_archive_image; // Image ID // int
 
 // Override theme's method of defining the meta page title
-$meta_title_base_addition = $clinical_resource_plural_name_attr; // Word or phrase to use to form base meta title
+$meta_title_base_addition = $clinical_resource_plural_name_attr; // Word or phrase to use to form base meta title // string
 uamswp_fad_title_vars(); // Defines universal variables related to the setting the meta title
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+
+// // Override theme's method of defining the meta description
+// $excerpt = '';
+// add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
+
+// // Construct the meta keywords element
+// $keywords = '';
+// add_action('wp_head','uamswp_keyword_hook_header');
+
+// Override the theme's method of defining the social meta tags
+
+	// Crop and resize images for Open Graph and Twitter
+	uamswp_meta_image_resize();
+
+	// Open Graph meta tags
+	add_filter('seopress_social_og_thumb', 'uamswp_sp_social_og_thumb'); // Filter Open Graph thumbnail (og:image)
+
+	// Twitter Card meta tags
+	add_filter('seopress_social_twitter_card_thumb', 'uamswp_sp_social_twitter_card_thumb'); // Filter Twitter Card thumbnail (twitter:image:src)
 
 get_header();
 
@@ -41,7 +77,7 @@ add_filter( 'facetwp_template_use_archive', '__return_true' );
 
 <div class="content-sidebar-wrap">
 	<main class="container-fluid resource-list" id="genesis-content">
-		<h1 class="sr-only" itemprop="headline"><?php echo $clinical_resource_archive_headline; ?></h1>
+		<h1 class="sr-only" itemprop="headline"><?php echo $page_title; ?></h1>
 		<div class="row">
 			<div class="col-12 col-sm filter-col collapse">
 				<button type="button" class="close" aria-label="Close">
