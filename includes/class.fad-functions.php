@@ -6935,7 +6935,7 @@ function uamswp_fad_fpage_text_image_overlay() {
 		// Descendant Areas of Expertise fake subpage
 		// Clinical Resources fake subpage
 
-		if ( $page_top_level_query ) {
+		if ( !$page_top_level_query ) {
 
 			// If the fake subpage's parent is not the top-level ontology item..
 
