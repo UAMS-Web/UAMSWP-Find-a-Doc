@@ -39,6 +39,9 @@
 $text_image_overlay_color = array( 'bg-red', 'bg-black', 'bg-blue', 'bg-green', 'bg-teal', 'bg-eggplant', 'bg-orange' );
 $text_image_overlay_color_auto = array( 'bg-blue', 'bg-green' );
 $text_image_overlay_id = ( isset($text_image_overlay_id) && !empty($text_image_overlay_id) ) ? sanitize_title_with_dashes($text_image_overlay_id) : '';
+$text_image_overlay_heading_maxlength = 32;
+$text_image_overlay_body_maxlength = 280;
+$text_image_overlay_button_text_maxlength = 27;
 $text_image_overlay_rows = array();
 $text_image_overlay_row_0 = ( isset($text_image_overlay_row_0) && !empty($text_image_overlay_row_0) ) ? $text_image_overlay_row_0 : '';
 if ( $text_image_overlay_row_0 ) {
@@ -76,10 +79,10 @@ if ( $text_image_overlay_rows ) :
 			$index = 1;
 			foreach ( $text_image_overlay_rows as $row ) { 
 				// Load values and adding defaults.
-				$heading = $row['heading'] ? substr( $row['heading'], 0, 32 ) : 'Lorem ipsum dolor sit amet, cons';
+				$heading = $row['heading'] ? substr( $row['heading'], 0, $text_image_overlay_heading_maxlength ) : 'Lorem ipsum dolor sit amet, cons';
 				$heading_attr = uamswp_attr_conversion($heading);
-				$body = $row['body'] ? substr( $row['body'], 0, 280 ) : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat mas';
-				$button_text = $row['button_text'] ? substr( $row['button_text'], 0, 27 ) : 'Learn More';
+				$body = $row['body'] ? substr( $row['body'], 0, $text_image_overlay_body_maxlength ) : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat mas';
+				$button_text = $row['button_text'] ? substr( $row['button_text'], 0, $text_image_overlay_button_text_maxlength ) : 'Learn More';
 				$button_url = $row['button_url'] ?: get_home_url();
 				$button_target = $row['button_target'] ?: false;
 				$button_desc = $row['button_desc'] ?: $button_text . ', ' . $heading;
