@@ -675,10 +675,10 @@
 		},
 		"field_expertise_providers_fpage_featured_image": {
 			"key": "field_expertise_providers_fpage_featured_image",
-			"label": "Featured Image for Related Providers Subpage",
+			"label": "Override Featured Image for Related Providers Subpage",
 			"name": "expertise_providers_fpage_featured_image",
 			"type": "image",
-			"instructions": "If you leave this blank, the default image will be used.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
+			"instructions": "If you leave this blank, the default image will be used. The default image is defined in Find-a-Doc Settings.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -828,10 +828,10 @@
 		},
 		"field_expertise_locations_fpage_featured_image": {
 			"key": "field_expertise_locations_fpage_featured_image",
-			"label": "Featured Image for Related Locations Subpage",
+			"label": "Override Featured Image for Related Locations Subpage",
 			"name": "expertise_locations_fpage_featured_image",
 			"type": "image",
-			"instructions": "If you leave this blank, the default image will be used.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
+			"instructions": "If you leave this blank, the default image will be used. The default image is defined in Find-a-Doc Settings.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -950,10 +950,10 @@
 		},
 		"field_expertise_descendant_fpage_featured_image": {
 			"key": "field_expertise_descendant_fpage_featured_image",
-			"label": "Featured Image for Descendant Areas of Expertise Subpage",
+			"label": "Override Featured Image for Descendant Areas of Expertise Subpage",
 			"name": "expertise_descendant_fpage_featured_image",
 			"type": "image",
-			"instructions": "If you leave this blank, the default image will be used.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
+			"instructions": "If you leave this blank, the default image will be used. The default image is defined in Find-a-Doc Settings.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -1097,10 +1097,10 @@
 		},
 		"field_expertise_associated_fpage_featured_image": {
 			"key": "field_expertise_associated_fpage_featured_image",
-			"label": "Featured Image for Related Areas of Expertise Subpage",
+			"label": "Override Featured Image for Related Areas of Expertise Subpage",
 			"name": "expertise_associated_fpage_featured_image",
 			"type": "image",
-			"instructions": "If you leave this blank, the default image will be used.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
+			"instructions": "If you leave this blank, the default image will be used. The default image is defined in Find-a-Doc Settings.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -1250,10 +1250,10 @@
 		},
 		"field_expertise_clinical_resources_fpage_featured_image": {
 			"key": "field_expertise_clinical_resources_fpage_featured_image",
-			"label": "Featured Image for Related Clinical Resources Subpage",
+			"label": "Override Featured Image for Related Clinical Resources Subpage",
 			"name": "expertise_clinical_resources_fpage_featured_image",
 			"type": "image",
-			"instructions": "If you leave this blank, the default image will be used.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
+			"instructions": "If you leave this blank, the default image will be used. The default image is defined in Find-a-Doc Settings.</p><p class='description' style='margin-top: 0.5em;'>Recommended dimensions: 2560x1920 or larger. Minimum dimensions: 1280x720.</p><p class='description' style='margin-top: 0.5em;'>The image will be automatically cropped to a 16:9 aspect ratio when used on the site; 1.91:1 aspect ratio when sharing to Facebook and Twitter.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
