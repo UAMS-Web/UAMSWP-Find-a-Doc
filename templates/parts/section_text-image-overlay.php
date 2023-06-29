@@ -390,8 +390,8 @@ if ( $text_image_overlay_rows ) :
 					</style>
 					<?php } //endif ?>
 					<div class="text-container">
-						<h2<?php echo $text_image_overlay_id ? ' id="' . $text_image_overlay_id . '-item-' . $index  . '"' : ''; ?>><?php echo $heading; ?></h2>
-						<p><?php echo $body; ?></p>
+						<h2<?php echo $text_image_overlay_id ? ' id="' . $text_image_overlay_id . '-item-' . $index  . '"' : ''; ?>><?php echo uamswp_prevent_orphan($heading); ?></h2>
+						<p><?php echo uamswp_prevent_orphan($body); ?></p>
 						<a href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>" class="btn btn-white"<?php echo $button_target ? ' target="'. $button_target .'"' : ''; ?> data-itemtitle="<?php echo $heading_attr; ?>"><?php echo $button_text; ?></a>
 					</div>
 				</section>
