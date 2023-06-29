@@ -86,8 +86,8 @@ if ( $text_image_overlay_rows ) :
 				$background_color = $row['background_color'] ?: $text_image_overlay_color_auto[$index - 1];
 				$image = $row['image'] ?: 3566;
 				?>
-				<section class="col-12<?php echo $row_count > 1 ? ' col-sm-6' : ''; ?> item bg-image item-<?php echo $index; ?> <?php echo $background_color; ?>"<?php echo $text_image_overlay_id ? ' aria-labelledby="' . $text_image_overlay_id . '-item-' . $index . '"' : ''; ?>>
-					<?php if ( $row_count > 1 && function_exists( 'fly_add_image_size' ) ) { // Background styles for two tiles in one row with Fly plugin ?>
+				<section class="col-12<?php echo $text_image_overlay_row_count > 1 ? ' col-sm-6' : ''; ?> item bg-image item-<?php echo $index; ?> <?php echo $background_color; ?>"<?php echo $text_image_overlay_id ? ' aria-labelledby="' . $text_image_overlay_id . '-item-' . $index . '"' : ''; ?>>
+					<?php if ( $text_image_overlay_row_count > 1 && function_exists( 'fly_add_image_size' ) ) { // Background styles for two tiles in one row with Fly plugin ?>
 					<style>
 						<?php echo $text_image_overlay_id ? '#' . $text_image_overlay_id . ' ' : '' ; ?>.item-<?php echo $index; ?>:before {
 							background-image: url("<?php echo image_sizer($image, 576, 432, 'center', 'center'); ?>");
