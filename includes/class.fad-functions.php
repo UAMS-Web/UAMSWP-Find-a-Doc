@@ -1299,6 +1299,7 @@ function uamswp_fad_ontology_site_values() {
 	global $conditions_cpt;
 	global $treatments_cpt;
 	global $ancestors_ontology_farthest;
+	global $page_top_level_query;
 
 	// Ancestors
 	$ancestors = get_post_ancestors($page_id); // Get all ancestors
@@ -1321,6 +1322,7 @@ function uamswp_fad_ontology_site_values() {
 
 	// Get the farthest ancestor with ontology type
 	$ancestors_ontology_farthest = end($ancestors_ontology);
+	$page_top_level_query = empty($ancestors_ontology_farthest); // Get whether this fake subpage's parent item is the top-level item // bool
 
 		// Get the values for farthest ancestor
 		$ancestors_ontology_farthest_obj = '';
