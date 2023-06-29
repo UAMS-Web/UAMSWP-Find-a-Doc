@@ -6903,7 +6903,7 @@ function uamswp_fad_fpage_text_image_overlay() {
 	$main_archive['button_desc'] = $main_archive['button_text'] . ', ' . $main_archive['heading']; // Link ARIA label text // str
 	$main_archive['image'] = $text_image_overlay_main_archive[$current_fpage]['image']; // Background image ID // int
 
-	if ( $page_top_level_query ) {
+	if ( !$page_top_level_query ) {
 
 		// If the fake subpage's parent is not the top-level ontology item..
 
