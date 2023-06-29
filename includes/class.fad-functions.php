@@ -6974,3 +6974,17 @@ function uamswp_fad_fpage_text_image_overlay() {
 	// Call the main function to construct UAMS Text & Image Overlay Block
 	uamswp_section_text_image_overlay();
 }
+
+// Add non-breaking space to prevent orphaned short words
+function uamswp_prevent_orphan($string) {
+
+	// Strip whitespace from the beginning and end of the string
+	$string = trim($string);
+
+	// If the final word is at most five characters...
+	// Replace the preceding space with a non-breaking space
+	$string = preg_replace('/\s(\S{1,5})$/', '&nbsp;$1', $string); 
+
+	return $string;
+
+}
