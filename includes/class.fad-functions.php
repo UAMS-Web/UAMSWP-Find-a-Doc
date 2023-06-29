@@ -6819,35 +6819,35 @@ function uamswp_fad_fpage_text_image_overlay() {
 	// Create array of main archive attributes for each fake subpage
 	$text_image_overlay_main_archive = array(
 		'providers'		=> array(
-			'heading'			=> $provider_fpage_ref_main_title_expertise, // Heading text, limited to 32 characters // str
+			'heading'			=> $provider_fpage_ref_main_title_expertise, // Heading text, limited to 65 characters // str
 			'body'				=> $provider_fpage_ref_main_intro_expertise, // Body text, limited to 280 characters // str
 			'button_text'		=> $provider_fpage_ref_main_link_expertise, // Link text, limited to 27 characters // str
 			'button_url'		=> get_post_type_archive_link('provider'), // Full URL // str
 			'image'				=> $provider_archive_image // Background image ID // int
 		),
 		'locations'		=> array(
-			'heading'			=> $location_fpage_ref_main_title_expertise, // Heading text, limited to 32 characters // str
+			'heading'			=> $location_fpage_ref_main_title_expertise, // Heading text, limited to 65 characters // str
 			'body'				=> $location_fpage_ref_main_intro_expertise, // Body text, limited to 280 characters // str
 			'button_text'		=> $location_fpage_ref_main_link_expertise, // Link text, limited to 27 characters // str
 			'button_url'		=> get_post_type_archive_link('location'), // Full URL // str
 			'image'				=> $location_archive_image // Background image ID // int
 		),
 		'specialties'		=> array(
-			'heading'			=> $expertise_descendant_fpage_ref_main_title_expertise, // Heading text, limited to 32 characters // str
+			'heading'			=> $expertise_descendant_fpage_ref_main_title_expertise, // Heading text, limited to 65 characters // str
 			'body'				=> $expertise_descendant_fpage_ref_main_intro_expertise, // Body text, limited to 280 characters // str
 			'button_text'		=> $expertise_descendant_fpage_ref_main_link_expertise, // Link text, limited to 27 characters // str
 			'button_url'		=> get_post_type_archive_link('expertise'), // Full URL // str
 			'image'				=> $expertise_archive_image // Background image ID // int
 		),
 		'related'		=> array(
-			'heading'			=> $expertise_fpage_ref_main_title_expertise, // Heading text, limited to 32 characters // str
+			'heading'			=> $expertise_fpage_ref_main_title_expertise, // Heading text, limited to 65 characters // str
 			'body'				=> $expertise_fpage_ref_main_intro_expertise, // Body text, limited to 280 characters // str
 			'button_text'		=> $expertise_fpage_ref_main_link_expertise, // Link text, limited to 27 characters // str
 			'button_url'		=> get_post_type_archive_link('expertise'), // Full URL // str
 			'image'				=> $expertise_archive_image // Background image ID // int
 		),
 		'resources'		=> array(
-			'heading'			=> $clinical_resource_fpage_ref_main_title_expertise, // Heading text, limited to 32 characters // str
+			'heading'			=> $clinical_resource_fpage_ref_main_title_expertise, // Heading text, limited to 65 characters // str
 			'body'				=> $clinical_resource_fpage_ref_main_intro_expertise, // Body text, limited to 280 characters // str
 			'button_text'		=> $clinical_resource_fpage_ref_main_link_expertise, // Link text, limited to 27 characters // str
 			'button_url'		=> get_post_type_archive_link('clinical-resource'), // Full URL // str
@@ -6858,28 +6858,28 @@ function uamswp_fad_fpage_text_image_overlay() {
 	// Create array of top-level ontology ancestor fake subpage attributes for each fake subpage
 	$text_image_overlay_parent_archive = array(
 		'providers'		=> array(
-			'heading'			=> $provider_fpage_title_expertise, // Heading text, limited to 32 characters // str
+			'heading'			=> $provider_fpage_title_expertise, // Heading text, limited to 65 characters // str
 			'body'				=> 'Discover our esteemed team of [providers] within the vast field of [Area of Expertise Title], delivering comprehensive care for UAMS Health patients. Explore our diverse roster of experts of various [descendant areas of expertise] within [Area of Expertise Title].', // Body text, limited to 280 characters // str
 			'button_text'		=> 'View [Providers]', // Link text, limited to 27 characters // str
 			'button_url'		=> trailingslashit(get_permalink($ancestors_ontology_farthest)) . user_trailingslashit('providers'), // Full URL // str
 			'image'				=> get_post_thumbnail_id($ancestors_ontology_farthest) // Background image ID // int
 		),
 		'locations'		=> array(
-			'heading'			=> $location_fpage_title_expertise, // Heading text, limited to 32 characters // str
+			'heading'			=> $location_fpage_title_expertise, // Heading text, limited to 65 characters // str
 			'body'				=> 'Explore our extensive network of [locations] dedicated to providing exceptional care within the realm of [Area of Expertise Title]. Discover a range of specialized services and comprehensive care options across multiple [descendant areas of expertise].', // Body text, limited to 280 characters // str
 			'button_text'		=> 'View [Locations]', // Link text, limited to 27 characters // str
 			'button_url'		=> trailingslashit(get_permalink($ancestors_ontology_farthest)) . user_trailingslashit('locations'), // Full URL // str
 			'image'				=> get_post_thumbnail_id($ancestors_ontology_farthest) // Background image ID // int
 		),
 		'specialties'		=> array(
-			'heading'			=> $expertise_fpage_title_expertise, // Heading text, limited to 32 characters // str
+			'heading'			=> $expertise_fpage_title_expertise, // Heading text, limited to 65 characters // str
 			'body'				=> 'Discover the breadth of [descendant areas of expertise] within [Area of Expertise Title], offering comprehensive care for various medical needs.', // Body text, limited to 280 characters // str
 			'button_text'		=> 'View [Areas of Expertise]', // Link text, limited to 27 characters // str
 			'button_url'		=> trailingslashit(get_permalink($ancestors_ontology_farthest)) . user_trailingslashit('specialties'), // Full URL // str
 			'image'				=> get_post_thumbnail_id($ancestors_ontology_farthest) // Background image ID // int
 		),
 		'resources'		=> array(
-			'heading'			=> $clinical_resource_fpage_title_expertise, // Heading text, limited to 32 characters // str
+			'heading'			=> $clinical_resource_fpage_title_expertise, // Heading text, limited to 65 characters // str
 			'body'				=> 'Unlock a treasure trove of [clinical resources] covering diverse specialties within [Area of Expertise Title]. Access a wealth of articles, videos, infographics, and documents to enhance your knowledge and understanding.', // Body text, limited to 280 characters // str
 			'button_text'		=> 'View [Clinical Resources]', // Link text, limited to 27 characters // str
 			'button_url'		=> trailingslashit(get_permalink($ancestors_ontology_farthest)) . user_trailingslashit('resources'), // Full URL // str
@@ -6895,7 +6895,7 @@ function uamswp_fad_fpage_text_image_overlay() {
 
 	// Create the array for the first UAMS Text & Image Overlay Block item
 	$main_archive = array();
-	$main_archive['heading'] = $text_image_overlay_main_archive[$current_fpage]['heading']; // Heading text, limited to 32 characters // str
+	$main_archive['heading'] = $text_image_overlay_main_archive[$current_fpage]['heading']; // Heading text, limited to 65 characters // str
 	$main_archive['body'] = $text_image_overlay_main_archive[$current_fpage]['body']; // Body text, limited to 280 characters // str
 	$main_archive['button_text'] = $text_image_overlay_main_archive[$current_fpage]['button_text']; // Link text, limited to 27 characters // str
 	$main_archive['button_url'] = $text_image_overlay_main_archive[$current_fpage]['button_url']; // Full URL // str
@@ -6909,7 +6909,7 @@ function uamswp_fad_fpage_text_image_overlay() {
 
 		// Create the array for the second UAMS Text & Image Overlay Block item
 		$parent_archive = array();
-		$parent_archive['heading'] = $text_image_overlay_parent_archive[$current_fpage]['heading']; // Heading text, limited to 32 characters // str
+		$parent_archive['heading'] = $text_image_overlay_parent_archive[$current_fpage]['heading']; // Heading text, limited to 65 characters // str
 		$parent_archive['body'] = $text_image_overlay_parent_archive[$current_fpage]['body']; // Body text, limited to 280 characters // str
 		$parent_archive['button_text'] = $text_image_overlay_parent_archive[$current_fpage]['button_text']; // Link text, limited to 27 characters // str
 		$parent_archive['button_url'] = $text_image_overlay_parent_archive[$current_fpage]['button_url']; // Full URL // str

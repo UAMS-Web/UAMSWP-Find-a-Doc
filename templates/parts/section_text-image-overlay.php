@@ -13,7 +13,7 @@
  * Required vars:
  * 	$text_image_overlay_id // Section ID attribute value // string
  * 	$text_image_overlay_row_0 // Values for the first item // arr
- * 		['heading'] // Heading text, limited to 32 characters // str
+ * 		['heading'] // Heading text, limited to 65 characters // str
  * 		['body'] // Body text, limited to 280 characters // str
  * 		['button_text'] // Link text, limited to 27 characters // str
  * 		['button_url'] // Full URL // str
@@ -22,7 +22,7 @@
  * 		['background_color'] // Background color value // str (default: 'blue')
  * 		['image'] // Background image ID // int
  * 	$text_image_overlay_row_1 // Values for the second item // arr
- * 		['heading'] // Heading text, limited to 32 characters // str
+ * 		['heading'] // Heading text, limited to 65 characters // str
  * 		['body'] // Body text, limited to 280 characters // str
  * 		['button_text'] // Link text, limited to 27 characters // str
  * 		['button_url'] // Full URL // str
@@ -39,7 +39,7 @@
 $text_image_overlay_color = array( 'bg-red', 'bg-black', 'bg-blue', 'bg-green', 'bg-teal', 'bg-eggplant', 'bg-orange' );
 $text_image_overlay_color_auto = array( 'bg-blue', 'bg-green' );
 $text_image_overlay_id = ( isset($text_image_overlay_id) && !empty($text_image_overlay_id) ) ? sanitize_title_with_dashes($text_image_overlay_id) : '';
-$text_image_overlay_heading_maxlength = 32;
+$text_image_overlay_heading_maxlength = 65;
 $text_image_overlay_body_maxlength = 280;
 $text_image_overlay_button_text_maxlength = 27;
 $text_image_overlay_rows = array();
