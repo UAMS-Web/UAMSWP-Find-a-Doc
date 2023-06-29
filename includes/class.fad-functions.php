@@ -6985,6 +6985,9 @@ function uamswp_prevent_orphan($string) {
 	// Replace the preceding space with a non-breaking space
 	$string = preg_replace('/\s(\S{1,5})$/', '&nbsp;$1', $string); 
 
+	// Replace the space in "UAMS Health" with a non-breaking space
+	$string = preg_replace('/(UAMS)\s(Health)/', '$1&nbsp;$2', $string); 
+
 	return $string;
 
 }
