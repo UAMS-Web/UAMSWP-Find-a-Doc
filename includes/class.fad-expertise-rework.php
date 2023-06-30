@@ -24,7 +24,8 @@ function fsp_insertrules($rules)
 	// Loop through each of the fake subpages
 	foreach ($my_fake_pages as $slug => $title) {
 		// Add a rewrite rule that transforms a URL structure to a set of query vars
-		add_rewrite_rule('expertise/([^/]+)/' . $slug . '/?$', 'index.php?expertise=$matches[1]&fpage=' . $slug, 'top');
+		add_rewrite_rule('expertise/([^/]+)/' . $slug . '/?$', 'index.php?expertise=$matches[1]&fpage=' . $slug, 'top'); // Top level expertise pages
+		add_rewrite_rule('expertise/(.+?)(?:/([0-9]+))?/' . $slug . '/?$', 'index.php?expertise=$matches[1]&fpage=' . $slug, 'top'); // Child expertise pages
 	}
 }
 add_action( 'init', 'fsp_insertrules' );
