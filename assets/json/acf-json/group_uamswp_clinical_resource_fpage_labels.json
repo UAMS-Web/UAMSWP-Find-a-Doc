@@ -1333,7 +1333,7 @@
 			"acfe_update": ""
 		},
 		{
-			"key": "field_clinical_resource_fpage_more_message_expertise",
+			"key": "field_clinical_resource_fpage_more_message_clinical_resource",
 			"label": "",
 			"name": "",
 			"type": "message",
