@@ -2871,6 +2871,9 @@ function uamswp_fad_fpage_text_replace($string) {
 			global $clinical_resource_fpage_ref_main_title_general;
 			global $clinical_resource_fpage_ref_main_intro_general;
 			global $clinical_resource_fpage_ref_main_link_general;
+			global $clinical_resource_fpage_ref_top_title_general;
+			global $clinical_resource_fpage_ref_top_intro_general;
+			global $clinical_resource_fpage_ref_top_link_general;
 			global $clinical_resource_fpage_more_text_general;
 			global $clinical_resource_fpage_more_link_text_general;
 			global $clinical_resource_fpage_more_link_descr_general;
@@ -2878,33 +2881,42 @@ function uamswp_fad_fpage_text_replace($string) {
 			// Get the Find-a-Doc Settings values for the text elements in general placements
 			$clinical_resource_fpage_title_general = get_field('clinical_resource_fpage_title_general', 'option'); // Fake subpage (or section), title
 			$clinical_resource_fpage_intro_general = get_field('clinical_resource_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
+			$clinical_resource_fpage_ref_main_title_general = get_field('clinical_resource_fpage_ref_main_title_general', 'option'); // Reference to the main clinical resource archive, title
+			$clinical_resource_fpage_ref_main_intro_general = get_field('clinical_resource_fpage_ref_main_intro_general', 'option'); // Reference to the main clinical resource archive, body text
+			$clinical_resource_fpage_ref_main_link_general = get_field('clinical_resource_fpage_ref_main_link_general', 'option'); // Reference to the main clinical resource archive, link text
+			$clinical_resource_fpage_ref_top_title_general = get_field('clinical_resource_fpage_ref_top_title_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, title
+			$clinical_resource_fpage_ref_top_intro_general = get_field('clinical_resource_fpage_ref_top_intro_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, body text
+			$clinical_resource_fpage_ref_top_link_general = get_field('clinical_resource_fpage_ref_top_link_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, link text
 			$clinical_resource_fpage_more_text_general = get_field('clinical_resource_fpage_more_text_general', 'option'); // Fake subpage (or section), "More", intro text
 			$clinical_resource_fpage_more_link_text_general = get_field('clinical_resource_fpage_more_link_text_general', 'option'); // Fake subpage (or section), "More", link text
 			$clinical_resource_fpage_more_link_descr_general = get_field('clinical_resource_fpage_more_link_descr_general', 'option'); // Fake subpage (or section), "More", link description
-			$clinical_resource_fpage_ref_main_title_general = get_field('clinical_resource_fpage_ref_main_title_general', 'option'); // Reference to the main clinical_resource archive, title
-			$clinical_resource_fpage_ref_main_intro_general = get_field('clinical_resource_fpage_ref_main_intro_general', 'option'); // Reference to the main clinical_resource archive, body text
-			$clinical_resource_fpage_ref_main_link_general = get_field('clinical_resource_fpage_ref_main_link_general', 'option'); // Reference to the main clinical_resource archive, link text
 
 			// If the variable is not set or is empty...
 			// Set a hardcoded fallback value
 			$clinical_resource_fpage_title_general = ( isset($clinical_resource_fpage_title_general) && !empty($clinical_resource_fpage_title_general) ) ? $clinical_resource_fpage_title_general : 'Related [Clinical Resources]'; // Fake subpage (or section), title
 			$clinical_resource_fpage_intro_general = ( isset($clinical_resource_fpage_intro_general) && !empty($clinical_resource_fpage_intro_general) ) ? $clinical_resource_fpage_intro_general : ''; // Fake subpage (or section), intro text
+			$clinical_resource_fpage_ref_main_title_general = ( isset($clinical_resource_fpage_ref_main_title_general) && !empty($clinical_resource_fpage_ref_main_title_general) ) ? $clinical_resource_fpage_ref_main_title_general : 'Full List of [Clinical Resources]'; // Reference to the main clinical resource archive, title
+			$clinical_resource_fpage_ref_main_intro_general = ( isset($clinical_resource_fpage_ref_main_intro_general) && !empty($clinical_resource_fpage_ref_main_intro_general) ) ? $clinical_resource_fpage_ref_main_intro_general : 'Access a wealth of [clinical resources], including articles, videos, infographics, and documents, covering various specialties within UAMS Health. Expand your knowledge and stay informed.'; // Reference to the main clinical resource archive, body text
+			$clinical_resource_fpage_ref_main_link_general = ( isset($clinical_resource_fpage_ref_main_link_general) && !empty($clinical_resource_fpage_ref_main_link_general) ) ? $clinical_resource_fpage_ref_main_link_general : 'View All [Clinical Resources]'; // Reference to the main clinical resource archive, link text
+			$clinical_resource_fpage_ref_top_title_general = ( isset($clinical_resource_fpage_ref_top_title_general) && !empty($clinical_resource_fpage_ref_top_title_general) ) ? $clinical_resource_fpage_ref_top_title_general : $clinical_resource_fpage_ref_main_title_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, title
+			$clinical_resource_fpage_ref_top_intro_general = ( isset($clinical_resource_fpage_ref_top_intro_general) && !empty($clinical_resource_fpage_ref_top_intro_general) ) ? $clinical_resource_fpage_ref_top_intro_general : $clinical_resource_fpage_ref_main_intro_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, body text
+			$clinical_resource_fpage_ref_top_link_general = ( isset($clinical_resource_fpage_ref_top_link_general) && !empty($clinical_resource_fpage_ref_top_link_general) ) ? $clinical_resource_fpage_ref_top_link_general : $clinical_resource_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, link text
 			$clinical_resource_fpage_more_text_general = ( isset($clinical_resource_fpage_more_text_general) && !empty($clinical_resource_fpage_more_text_general) ) ? $clinical_resource_fpage_more_text_general : 'Want to find more related [clinical resources]?'; // Fake subpage (or section), "More", intro text
 			$clinical_resource_fpage_more_link_text_general = ( isset($clinical_resource_fpage_more_link_text_general) && !empty($clinical_resource_fpage_more_link_text_general) ) ? $clinical_resource_fpage_more_link_text_general : 'View the Full List';// Fake subpage (or section), "More", link text
 			$clinical_resource_fpage_more_link_descr_general = ( isset($clinical_resource_fpage_more_link_descr_general) && !empty($clinical_resource_fpage_more_link_descr_general) ) ? $clinical_resource_fpage_more_link_descr_general : 'View the full list of related [clinical resources]'; // Fake subpage (or section), "More", link description
-			$clinical_resource_fpage_ref_main_title_general = ( isset($clinical_resource_fpage_ref_main_title_general) && !empty($clinical_resource_fpage_ref_main_title_general) ) ? $clinical_resource_fpage_ref_main_title_general : 'Full List of [Clinical Resources]'; // Reference to the main clinical_resource archive, title
-			$clinical_resource_fpage_ref_main_intro_general = ( isset($clinical_resource_fpage_ref_main_intro_general) && !empty($clinical_resource_fpage_ref_main_intro_general) ) ? $clinical_resource_fpage_ref_main_intro_general : 'Access a wealth of [clinical resources], including articles, videos, infographics, and documents, covering various specialties within UAMS Health. Expand your knowledge and stay informed.'; // Reference to the main clinical_resource archive, body text
-			$clinical_resource_fpage_ref_main_link_general = ( isset($clinical_resource_fpage_ref_main_link_general) && !empty($clinical_resource_fpage_ref_main_link_general) ) ? $clinical_resource_fpage_ref_main_link_general : 'View All [Clinical Resources]'; // Reference to the main clinical_resource archive, link text
 
 			// Substitute placeholder text for relevant Find-a-Doc Settings value
 			$clinical_resource_fpage_title_general = $clinical_resource_fpage_title_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_general) : ''; // Fake subpage (or section), title
 			$clinical_resource_fpage_intro_general = $clinical_resource_fpage_intro_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_general) : ''; // Fake subpage (or section), intro text
+			$clinical_resource_fpage_ref_main_title_general = $clinical_resource_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_title_general) : ''; // Reference to the main clinical resource archive, title
+			$clinical_resource_fpage_ref_main_intro_general = $clinical_resource_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_intro_general) : ''; // Reference to the main clinical resource archive, body text
+			$clinical_resource_fpage_ref_main_link_general = $clinical_resource_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_link_general) : ''; // Reference to the main clinical resource archive, link text
+			$clinical_resource_fpage_ref_top_title_general = $clinical_resource_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_title_general) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, title
+			$clinical_resource_fpage_ref_top_intro_general = $clinical_resource_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_intro_general) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, body text
+			$clinical_resource_fpage_ref_top_link_general = $clinical_resource_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_link_general) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, link text
 			$clinical_resource_fpage_more_text_general = $clinical_resource_fpage_more_text_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_text_general) : ''; // Fake subpage (or section), "More", intro text
 			$clinical_resource_fpage_more_link_text_general = $clinical_resource_fpage_more_link_text_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_text_general) : ''; // Fake subpage (or section), "More", link text
 			$clinical_resource_fpage_more_link_descr_general = $clinical_resource_fpage_more_link_descr_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_descr_general) : ''; // Fake subpage (or section), "More", link description
-			$clinical_resource_fpage_ref_main_title_general = uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_title_general); // Reference to the main clinical_resource archive, title
-			$clinical_resource_fpage_ref_main_intro_general = uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_intro_general); // Reference to the main clinical_resource archive, body text
-			$clinical_resource_fpage_ref_main_link_general = uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_link_general); // Reference to the main clinical_resource archive, link text
 
 		}
 
