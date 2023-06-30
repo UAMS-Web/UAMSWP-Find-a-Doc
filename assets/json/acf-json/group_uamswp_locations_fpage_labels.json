@@ -123,13 +123,13 @@
 				"class": "",
 				"id": ""
 			},
-			"message": "<h3>Reference to the Main Location Archive<\/h3>",
+			"message": "<h3>General Reference to the Main Location Archive<\/h3>",
 			"new_lines": "",
 			"esc_html": 0
 		},
 		{
 			"key": "field_location_fpage_ref_main_title_general",
-			"label": "General Title of the Reference to the Main Location Archive",
+			"label": "General Title of a Reference to the Main Location Archive",
 			"name": "location_fpage_ref_main_title_general",
 			"type": "text",
 			"instructions": "Fake subpages for locations contain references linking users back to the main location archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default title structure will be used.</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., title in a reference to the main location archive on a fake subpage for locations in an area of expertise subsection).",
@@ -151,7 +151,7 @@
 		},
 		{
 			"key": "field_location_fpage_ref_main_intro_general",
-			"label": "General Body Text of the Reference to the Main Location Archive",
+			"label": "General Body Text of a Reference to the Main Location Archive",
 			"name": "location_fpage_ref_main_intro_general",
 			"type": "textarea",
 			"instructions": "Fake subpages for locations contain references linking users back to the main location archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default body text structure will be used.</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., body text in a reference to the main location archive on a fake subpage for locations in an area of expertise subsection).",
@@ -171,7 +171,7 @@
 		},
 		{
 			"key": "field_location_fpage_ref_main_link_general",
-			"label": "General Link Text of the Reference to the Main Location Archive",
+			"label": "General Link Text of a Reference to the Main Location Archive",
 			"name": "location_fpage_ref_main_link_general",
 			"type": "text",
 			"instructions": "Fake subpages for locations contain references linking users back to the main location archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default link text structure will be used.</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., link text in a reference to the main location archive on a fake subpage for locations in an area of expertise subsection).",
@@ -204,13 +204,13 @@
 				"class": "",
 				"id": ""
 			},
-			"message": "<h3>Reference to the Top-Level Ontology Item's Fake Subpage for Locations<\/h3>",
+			"message": "<h3>General Reference to a Top-Level Ontology Item's Fake Subpage for Locations<\/h3>",
 			"new_lines": "",
 			"esc_html": 0
 		},
 		{
 			"key": "field_location_fpage_ref_top_title_general",
-			"label": "General Title of the Reference to the Top-Level Ontology Item's Fake Subpage for Locations",
+			"label": "General Title of a Reference to a Top-Level Ontology Item's Fake Subpage for Locations",
 			"name": "location_fpage_ref_top_title_general",
 			"type": "text",
 			"instructions": "Fake subpages under nested ontology items contain references linking users back to the same type of fake subpage under the top-level ancestor ontology item (e.g., from \"Bone Cancer Care Locations\" to \"Cancer Care Locations\"). This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default title structure will be used.",
@@ -232,7 +232,7 @@
 		},
 		{
 			"key": "field_location_fpage_ref_top_intro_general",
-			"label": "General Body Text of the Reference to the Top-Level Ontology Item's Fake Subpage for Locations",
+			"label": "General Body Text of a Reference to a Top-Level Ontology Item's Fake Subpage for Locations",
 			"name": "location_fpage_ref_top_intro_general",
 			"type": "textarea",
 			"instructions": "Fake subpages under nested ontology items contain references linking users back to the same type of fake subpage under the top-level ancestor ontology item (e.g., from \"Bone Cancer Care Locations\" to \"Cancer Care Locations\"). This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default body text structure will be used.",
@@ -252,7 +252,7 @@
 		},
 		{
 			"key": "field_location_fpage_ref_top_link_general",
-			"label": "General Link Text of the Reference to the Top-Level Ontology Item's Fake Subpage for Locations",
+			"label": "General Link Text of a Reference to a Top-Level Ontology Item's Fake Subpage for Locations",
 			"name": "location_fpage_ref_top_link_general",
 			"type": "text",
 			"instructions": "Fake subpages under nested ontology items contain references linking users back to the same type of fake subpage under the top-level ancestor ontology item (e.g., from \"Bone Cancer Care Locations\" to \"Cancer Care Locations\"). This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default link text structure will be used.",
@@ -382,7 +382,7 @@
 		},
 		{
 			"key": "field_location_descendant_fpage_ref_main_title_general",
-			"label": "General Title of the Reference to the Main Location Archive on a Fake Subpage for Descendant Locations",
+			"label": "General Title of a Reference to the Main Location Archive on a Fake Subpage for Descendant Locations",
 			"name": "location_descendant_fpage_ref_main_title_general",
 			"type": "text",
 			"instructions": "Fake subpages for locations contain references linking users back to the main location archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general title for references on locations will be used.</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., title in a reference to the main location archive on a fake subpage for descendant locations in a location subsection).",
@@ -404,7 +404,7 @@
 		},
 		{
 			"key": "field_location_descendant_fpage_ref_main_intro_general",
-			"label": "General Body Text of the Reference to the Main Location Archive on a Fake Subpage for Descendant Locations",
+			"label": "General Body Text of a Reference to the Main Location Archive on a Fake Subpage for Descendant Locations",
 			"name": "location_descendant_fpage_ref_main_intro_general",
 			"type": "textarea",
 			"instructions": "Fake subpages for locations contain references linking users back to the main location archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general intro text for references on locations will be used.</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., body text in a reference to the main location archive on a fake subpage for descendant locations in a location subsection).",
@@ -424,7 +424,7 @@
 		},
 		{
 			"key": "field_location_descendant_fpage_ref_main_link_general",
-			"label": "General Link Text of the Reference to the Main Location Archive on a Fake Subpage for Descendant Locations",
+			"label": "General Link Text of a Reference to the Main Location Archive on a Fake Subpage for Descendant Locations",
 			"name": "location_descendant_fpage_ref_main_link_general",
 			"type": "text",
 			"instructions": "Fake subpages for locations contain references linking users back to the main location archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general link text for references on locations will be used.</p><p class='description' style='margin-top: 0.5em;'>This value may be overridden by inputs specific to the text element's placement (e.g., link text in a reference to the main location archive on a fake subpage for descendant locations in a location subsection).",
@@ -457,13 +457,13 @@
 				"class": "",
 				"id": ""
 			},
-			"message": "<h3>Reference to the Top-Level Ontology Item's Fake Subpage for Descendant Locations<\/h3>",
+			"message": "<h3>General Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations<\/h3>",
 			"new_lines": "",
 			"esc_html": 0
 		},
 		{
 			"key": "field_location_descendant_fpage_ref_top_title_general",
-			"label": "General Title of the Reference to the Top-Level Ontology Item's Fake Subpage for Descendant Locations",
+			"label": "General Title of a Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations",
 			"name": "location_descendant_fpage_ref_top_title_general",
 			"type": "text",
 			"instructions": "Fake subpages under nested ontology items contain references linking users back to the same type of fake subpage under the top-level ancestor ontology item (e.g., from \"Additional Locations Within the Specialty Clinic\" to \"Additional Locations Within the Orthopaedic and Spine Hospital\"). This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general title for references on locations will be used.",
@@ -485,7 +485,7 @@
 		},
 		{
 			"key": "field_location_descendant_fpage_ref_top_intro_general",
-			"label": "General Body Text of the Reference to the Top-Level Ontology Item's Fake Subpage for Descendant Locations",
+			"label": "General Body Text of a Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations",
 			"name": "location_descendant_fpage_ref_top_intro_general",
 			"type": "textarea",
 			"instructions": "Fake subpages under nested ontology items contain references linking users back to the same type of fake subpage under the top-level ancestor ontology item (e.g., from \"Additional Locations Within the Specialty Clinic\" to \"Additional Locations Within the Orthopaedic and Spine Hospital\"). This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general intro text for references on locations will be used.",
@@ -505,7 +505,7 @@
 		},
 		{
 			"key": "field_location_descendant_fpage_ref_top_link_general",
-			"label": "General Link Text of the Reference to the Top-Level Ontology Item's Fake Subpage for Descendant Locations",
+			"label": "General Link Text of a Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations",
 			"name": "location_descendant_fpage_ref_top_link_general",
 			"type": "text",
 			"instructions": "Fake subpages under nested ontology items contain references linking users back to the same type of fake subpage under the top-level ancestor ontology item (e.g., from \"Additional Locations Within the Specialty Clinic\" to \"Additional Locations Within the Orthopaedic and Spine Hospital\"). This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general link text for references on locations will be used.",
@@ -651,7 +651,7 @@
 		},
 		{
 			"key": "field_location_fpage_ref_main_title_provider",
-			"label": "Title of the Reference to the Main Location Archive in a Provider Subsection",
+			"label": "Title of a Reference to the Main Location Archive in a Provider Subsection",
 			"name": "location_fpage_ref_main_title_provider",
 			"type": "text",
 			"instructions": "Fake subpages for locations contain references linking users back to the main location archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
@@ -673,7 +673,7 @@
 		},
 		{
 			"key": "field_location_fpage_ref_main_intro_provider",
-			"label": "Body Text of the Reference to the Main Location Archive on a Fake Subpage for Locations in a Provider Subsection",
+			"label": "Body Text of a Reference to the Main Location Archive on a Fake Subpage for Locations in a Provider Subsection",
 			"name": "location_fpage_ref_main_intro_provider",
 			"type": "textarea",
 			"instructions": "Fake subpages for locations contain references linking users back to the main location archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
@@ -693,7 +693,7 @@
 		},
 		{
 			"key": "field_location_fpage_ref_main_link_provider",
-			"label": "Link Text of the Reference to the Main Location Archive on a Fake Subpage for Locations in a Provider Subsection",
+			"label": "Link Text of a Reference to the Main Location Archive on a Fake Subpage for Locations in a Provider Subsection",
 			"name": "location_fpage_ref_main_link_provider",
 			"type": "text",
 			"instructions": "Fake subpages for locations contain references linking users back to the main location archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
@@ -839,7 +839,7 @@
 		},
 		{
 			"key": "field_location_fpage_ref_main_title_location",
-			"label": "Title of the Reference to the Main Location Archive on a Fake Subpage for Descendant Locations in a Location Subsection",
+			"label": "Title of a Reference to the Main Location Archive on a Fake Subpage for Descendant Locations in a Location Subsection",
 			"name": "location_fpage_ref_main_title_location",
 			"type": "text",
 			"instructions": "Fake subpages for descendant locations contain references linking users back to the main location archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
@@ -861,7 +861,7 @@
 		},
 		{
 			"key": "field_location_fpage_ref_main_intro_location",
-			"label": "Body Text of the Reference to the Main Location Archive on a Fake Subpage for Descendant Locations in a Location Subsection",
+			"label": "Body Text of a Reference to the Main Location Archive on a Fake Subpage for Descendant Locations in a Location Subsection",
 			"name": "location_fpage_ref_main_intro_location",
 			"type": "textarea",
 			"instructions": "Fake subpages for descendant locations contain references linking users back to the main location archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
@@ -881,10 +881,91 @@
 		},
 		{
 			"key": "field_location_fpage_ref_main_link_location",
-			"label": "Link Text of the Reference to the Main Location Archive on a Fake Subpage for Descendant Locations in a Location Subsection",
+			"label": "Link Text of a Reference to the Main Location Archive on a Fake Subpage for Descendant Locations in a Location Subsection",
 			"name": "location_fpage_ref_main_link_location",
 			"type": "text",
 			"instructions": "Fake subpages for descendant locations contain references linking users back to the main location archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_location_fpage_ref_top_message_location",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>Reference to a Top-Level Location's Fake Subpage for Descendant Locations<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		{
+			"key": "field_location_fpage_ref_top_title_location",
+			"label": "Title of a Reference to a Top-Level Location's Fake Subpage for Descendant Locations",
+			"name": "location_fpage_ref_top_title_location",
+			"type": "text",
+			"instructions": "Fake subpages for descendant locations under descendant locations contain references linking users back to the same type of fake subpage under the top-level ancestor location (e.g., from \"Additional Locations Within the Specialty Clinic\" to \"Additional Locations Within the Orthopaedic and Spine Hospital\"). This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_location_fpage_ref_top_intro_location",
+			"label": "Body Text of a Reference to a Top-Level Location's Fake Subpage for Descendant Locations",
+			"name": "location_fpage_ref_top_intro_location",
+			"type": "textarea",
+			"instructions": "Fake subpages for descendant locations under descendant locations contain references linking users back to the same type of fake subpage under the top-level ancestor location (e.g., from \"Additional Locations Within the Specialty Clinic\" to \"Additional Locations Within the Orthopaedic and Spine Hospital\"). This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_location_fpage_ref_top_link_location",
+			"label": "Link Text of a Reference to a Top-Level Location's Fake Subpage for Descendant Locations",
+			"name": "location_fpage_ref_top_link_location",
+			"type": "text",
+			"instructions": "Fake subpages for descendant locations under descendant locations contain references linking users back to the same type of fake subpage under the top-level ancestor location (e.g., from \"Additional Locations Within the Specialty Clinic\" to \"Additional Locations Within the Orthopaedic and Spine Hospital\"). This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -1027,7 +1108,7 @@
 		},
 		{
 			"key": "field_location_fpage_ref_main_title_expertise",
-			"label": "Title of the Reference to the Main Location Archive in an Area of Expertise Subsection",
+			"label": "Title of a Reference to the Main Location Archive in an Area of Expertise Subsection",
 			"name": "location_fpage_ref_main_title_expertise",
 			"type": "text",
 			"instructions": "Fake subpages for locations contain references linking users back to the main location archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
@@ -1049,7 +1130,7 @@
 		},
 		{
 			"key": "field_location_fpage_ref_main_intro_expertise",
-			"label": "Body Text of the Reference to the Main Location Archive in an Area of Expertise Subsection",
+			"label": "Body Text of a Reference to the Main Location Archive in an Area of Expertise Subsection",
 			"name": "location_fpage_ref_main_intro_expertise",
 			"type": "textarea",
 			"instructions": "Fake subpages for locations contain references linking users back to the main location archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
@@ -1069,10 +1150,91 @@
 		},
 		{
 			"key": "field_location_fpage_ref_main_link_expertise",
-			"label": "Link Text of the Reference to the Main Location Archive in an Area of Expertise Subsection",
+			"label": "Link Text of a Reference to the Main Location Archive in an Area of Expertise Subsection",
 			"name": "location_fpage_ref_main_link_expertise",
 			"type": "text",
 			"instructions": "Fake subpages for locations contain references linking users back to the main location archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_location_fpage_ref_top_message_expertise",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>Reference to a Top-Level Area of Expertise's Fake Subpage for Locations<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		{
+			"key": "field_location_fpage_ref_top_title_expertise",
+			"label": "Title of a Reference to a Top-Level Area of Expertise's Fake Subpage for Locations",
+			"name": "location_fpage_ref_top_title_expertise",
+			"type": "text",
+			"instructions": "Fake subpages for locations under descendant areas of expertise contain references linking users back to the same type of fake subpage under the top-level ancestor area of expertise (e.g., from \"Bone Cancer Care Locations\" to \"Cancer Care Locations\"). This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": "",
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		{
+			"key": "field_location_fpage_ref_top_intro_expertise",
+			"label": "Body Text of a Reference to a Top-Level Area of Expertise's Fake Subpage for Locations",
+			"name": "location_fpage_ref_top_intro_expertise",
+			"type": "textarea",
+			"instructions": "Fake subpages for locations under descendant areas of expertise contain references linking users back to the same type of fake subpage under the top-level ancestor area of expertise (e.g., from \"Bone Cancer Care Locations\" to \"Cancer Care Locations\"). This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 117,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_location_fpage_ref_top_link_expertise",
+			"label": "Link Text of a Reference to a Top-Level Area of Expertise's Fake Subpage for Locations",
+			"name": "location_fpage_ref_top_link_expertise",
+			"type": "text",
+			"instructions": "Fake subpages for locations under descendant areas of expertise contain references linking users back to the same type of fake subpage under the top-level ancestor area of expertise (e.g., from \"Bone Cancer Care Locations\" to \"Cancer Care Locations\"). This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -1215,7 +1377,7 @@
 		},
 		{
 			"key": "field_location_fpage_ref_main_title_clinical_resource",
-			"label": "Title of the Reference to the Main Location Archive in a Clinical Resource Subsection",
+			"label": "Title of a Reference to the Main Location Archive in a Clinical Resource Subsection",
 			"name": "location_fpage_ref_main_title_clinical_resource",
 			"type": "text",
 			"instructions": "Fake subpages for locations contain references linking users back to the main location archive. This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
@@ -1237,7 +1399,7 @@
 		},
 		{
 			"key": "field_location_fpage_ref_main_intro_clinical_resource",
-			"label": "Body Text of the Reference to the Main Location Archive on a Fake Subpage for Locations in a Clinical Resource Subsection",
+			"label": "Body Text of a Reference to the Main Location Archive on a Fake Subpage for Locations in a Clinical Resource Subsection",
 			"name": "location_fpage_ref_main_intro_clinical_resource",
 			"type": "textarea",
 			"instructions": "Fake subpages for locations contain references linking users back to the main location archive. This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
@@ -1257,7 +1419,7 @@
 		},
 		{
 			"key": "field_location_fpage_ref_main_link_clinical_resource",
-			"label": "Link Text of the Reference to the Main Location Archive on a Fake Subpage for Locations in a Clinical Resource Subsection",
+			"label": "Link Text of a Reference to the Main Location Archive on a Fake Subpage for Locations in a Clinical Resource Subsection",
 			"name": "location_fpage_ref_main_link_clinical_resource",
 			"type": "text",
 			"instructions": "Fake subpages for locations contain references linking users back to the main location archive. This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
