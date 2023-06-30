@@ -19,7 +19,7 @@
  * 		$clinical_resource_single_name_attr // string
  * 		$clinical_resource_plural_name // string
  * 		$clinical_resource_plural_name_attr // string
- * 	// Vars defined in uamswp_fad_clinical_resource_fpage_text_general()
+ * 	// Vars defined in uamswp_fad_fpage_text_clinical_resource_general()
  * 		$clinical_resource_fpage_title_general // string
  * 		$clinical_resource_fpage_intro_general // string
  * 	// Vars defined in uamswp_fad_clinical_resource_query()
@@ -56,7 +56,7 @@ if ( $clinical_resource_section_show ) {
 		if ( !isset($clinical_resource_section_title) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($clinical_resource_fpage_title_general) ) {
-				uamswp_fad_clinical_resource_fpage_text_general();
+				uamswp_fad_fpage_text_clinical_resource_general();
 				global $clinical_resource_fpage_title_general;
 			}
 			$clinical_resource_section_title = $clinical_resource_fpage_title_general;
@@ -64,7 +64,7 @@ if ( $clinical_resource_section_show ) {
 		if ( !isset($clinical_resource_section_intro) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($clinical_resource_fpage_intro_general) ) {
-				uamswp_fad_clinical_resource_fpage_text_general();
+				uamswp_fad_fpage_text_clinical_resource_general();
 				global $clinical_resource_fpage_intro_general;
 			}
 			$clinical_resource_section_intro = $clinical_resource_fpage_intro_general;
@@ -74,7 +74,7 @@ if ( $clinical_resource_section_show ) {
 			if ( !isset($clinical_resource_section_more_text) ) {
 				// Set the section title using the system settings for the section title in a general placement
 				if ( !isset($clinical_resource_fpage_more_text_general) ) {
-					uamswp_fad_clinical_resource_fpage_text_general();
+					uamswp_fad_fpage_text_clinical_resource_general();
 					global $clinical_resource_fpage_more_text_general;
 				}
 				$clinical_resource_section_more_text = $clinical_resource_fpage_more_text_general;
@@ -82,7 +82,7 @@ if ( $clinical_resource_section_show ) {
 			if ( !isset($clinical_resource_section_more_link_text) ) {
 				// Set the section title using the system settings for the section title in a general placement
 				if ( !isset($clinical_resource_fpage_more_link_text_general) ) {
-					uamswp_fad_clinical_resource_fpage_text_general();
+					uamswp_fad_fpage_text_clinical_resource_general();
 					global $clinical_resource_fpage_more_link_text_general;
 				}
 				$clinical_resource_section_more_link_text = $clinical_resource_fpage_more_link_text_general;
@@ -90,7 +90,7 @@ if ( $clinical_resource_section_show ) {
 			if ( !isset($clinical_resource_section_more_link_descr) ) {
 				// Set the section title using the system settings for the section title in a general placement
 				if ( !isset($clinical_resource_fpage_more_link_descr_general) ) {
-					uamswp_fad_clinical_resource_fpage_text_general();
+					uamswp_fad_fpage_text_clinical_resource_general();
 					global $clinical_resource_fpage_more_link_descr_general;
 				}
 				$clinical_resource_section_more_link_descr = $clinical_resource_fpage_more_link_descr_general;

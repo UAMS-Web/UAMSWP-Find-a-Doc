@@ -16,7 +16,7 @@
  * 		$expertise_single_name_attr // string
  * 		$expertise_plural_name // string
  * 		$expertise_plural_name_attr // string
- * 	// Vars defined in uamswp_fad_expertise_fpage_text_general()
+ * 	// Vars defined in uamswp_fad_fpage_text_expertise_general()
  * 		$expertise_fpage_title_general // string
  * 		$expertise_fpage_intro_general // string
  * 	// Vars defined in uamswp_fad_expertise_query()
@@ -64,7 +64,7 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 		if ( !isset($expertise_section_title) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($expertise_fpage_title_general) ) {
-				uamswp_fad_expertise_fpage_text_general();
+				uamswp_fad_fpage_text_expertise_general();
 				global $expertise_fpage_title_general;
 			}
 			$expertise_section_title = $expertise_fpage_title_general;
@@ -72,7 +72,7 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 		if ( !isset($expertise_section_intro) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($expertise_fpage_intro_general) ) {
-				uamswp_fad_expertise_fpage_text_general();
+				uamswp_fad_fpage_text_expertise_general();
 				global $expertise_fpage_intro_general;
 			}
 			$expertise_section_intro = $expertise_fpage_intro_general;

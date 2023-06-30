@@ -33,7 +33,7 @@
 	uamswp_fad_labels_treatment();
 
 // Get system settings for area of expertise archive page text
-// uamswp_fad_archive_expertise();
+// uamswp_fad_archive_text_expertise();
 
 // Get the page ID
 $page_id = get_the_ID();
@@ -49,11 +49,14 @@ $page_url = get_permalink();
 $ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
 $ontology_type = isset($ontology_type) ? $ontology_type : 1; // Check if 'expertise_type' is not null, and if so, set value to true
 
-// Get system settings for fake subpage text elements on Area of Expertise subsection
+// Get system settings for fake subpage text elements in an Area of Expertise subsection
 uamswp_fad_fpage_text_expertise();
 
+// Get system settings for image elements of a fake subpage (or section) in an Area of Expertise subsection (or profile)
+uamswp_fad_fpage_image_expertise();
+
 // Get the featured image / post thumbnail
-$page_image_id = $expertise_featured_image_id; // Image ID
+$page_image_id = $expertise_featured_image; // Image ID
 uamswp_meta_image_resize();
 
 // Get system settings for jump links (a.k.a. anchor links)

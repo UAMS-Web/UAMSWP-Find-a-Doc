@@ -59,7 +59,7 @@ $page_title_attr = uamswp_attr_conversion($page_title);
 	uamswp_fad_labels_treatment();
 
 // Get system settings for condition archive page text
-uamswp_fad_archive_condition();
+uamswp_fad_archive_text_condition();
 
 // Override theme's method of defining the meta page title
 $meta_title_enhanced_addition = $condition_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title
