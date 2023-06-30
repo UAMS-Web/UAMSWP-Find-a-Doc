@@ -751,7 +751,7 @@
 			"label": "Title of a Reference to a Top-Level Area of Expertise's Fake Subpage for Providers",
 			"name": "provider_fpage_ref_top_title_expertise",
 			"type": "text",
-			"instructions": "Fake subpages for providers under descendant areas of expertise contain references linking users back to the same type of fake subpage under the top-level ancestor area of expertise (e.g., from \"Bone Cancer Care Providers\" to \"Cancer Care Providers\"). This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
+			"instructions": "Fake subpages for providers under descendant areas of expertise contain references linking users back to the same type of fake subpage under the top-level ancestor area of expertise (e.g., from \"Bone Cancer Care Providers\" to \"Cancer Care Providers\"). This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default title structure will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -761,7 +761,7 @@
 			},
 			"acfe_permissions": "",
 			"default_value": "",
-			"placeholder": "",
+			"placeholder": "[Area of Expertise Title] [Providers]",
 			"prepend": "",
 			"append": "",
 			"maxlength": "",
@@ -773,7 +773,7 @@
 			"label": "Body Text of a Reference to a Top-Level Area of Expertise's Fake Subpage for Providers",
 			"name": "provider_fpage_ref_top_intro_expertise",
 			"type": "textarea",
-			"instructions": "Fake subpages for providers under descendant areas of expertise contain references linking users back to the same type of fake subpage under the top-level ancestor area of expertise (e.g., from \"Bone Cancer Care Providers\" to \"Cancer Care Providers\"). This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
+			"instructions": "Fake subpages for providers under descendant areas of expertise contain references linking users back to the same type of fake subpage under the top-level ancestor area of expertise (e.g., from \"Bone Cancer Care Providers\" to \"Cancer Care Providers\"). This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default body text structure will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -782,7 +782,7 @@
 				"id": ""
 			},
 			"default_value": "",
-			"placeholder": "",
+			"placeholder": "Discover our esteemed team of [providers] within the vast field of [Area of Expertise Title], delivering comprehensive care for UAMS Health patients. Explore our diverse roster of experts of various [descendant areas of expertise] within [Area of Expertise Title].",
 			"maxlength": 117,
 			"rows": 4,
 			"new_lines": "",
@@ -793,7 +793,7 @@
 			"label": "Link Text of a Reference to a Top-Level Area of Expertise's Fake Subpage for Providers",
 			"name": "provider_fpage_ref_top_link_expertise",
 			"type": "text",
-			"instructions": "Fake subpages for providers under descendant areas of expertise contain references linking users back to the same type of fake subpage under the top-level ancestor area of expertise (e.g., from \"Bone Cancer Care Providers\" to \"Cancer Care Providers\"). This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
+			"instructions": "Fake subpages for providers under descendant areas of expertise contain references linking users back to the same type of fake subpage under the top-level ancestor area of expertise (e.g., from \"Bone Cancer Care Providers\" to \"Cancer Care Providers\"). This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default link text structure will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -803,7 +803,7 @@
 			},
 			"acfe_permissions": "",
 			"default_value": "",
-			"placeholder": "",
+			"placeholder": "View [Providers]",
 			"prepend": "",
 			"append": "",
 			"maxlength": "",

@@ -1170,7 +1170,7 @@
 			"label": "Title of a Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources",
 			"name": "clinical_resource_fpage_ref_top_title_expertise",
 			"type": "text",
-			"instructions": "Fake subpages for clinical resources under descendant areas of expertise contain references linking users back to the same type of fake subpage under the top-level ancestor area of expertise (e.g., from \"Clinical Resources Related to Bone Cancer Care\" to \"Clinical Resources Related to Cancer Care\"). This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement title structure will be used.",
+			"instructions": "Fake subpages for clinical resources under descendant areas of expertise contain references linking users back to the same type of fake subpage under the top-level ancestor area of expertise (e.g., from \"Clinical Resources Related to Bone Cancer Care\" to \"Clinical Resources Related to Cancer Care\"). This sets the title used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default title structure will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -1180,7 +1180,7 @@
 			},
 			"acfe_permissions": "",
 			"default_value": "",
-			"placeholder": "",
+			"placeholder": "[Clinical Resources] Related to [Area of Expertise Title]",
 			"prepend": "",
 			"append": "",
 			"maxlength": "",
@@ -1192,7 +1192,7 @@
 			"label": "Body Text of a Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources",
 			"name": "clinical_resource_fpage_ref_top_intro_expertise",
 			"type": "textarea",
-			"instructions": "Fake subpages for clinical resources under descendant areas of expertise contain references linking users back to the same type of fake subpage under the top-level ancestor area of expertise (e.g., from \"Clinical Resources Related to Bone Cancer Care\" to \"Clinical Resources Related to Cancer Care\"). This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement body text structure will be used.",
+			"instructions": "Fake subpages for clinical resources under descendant areas of expertise contain references linking users back to the same type of fake subpage under the top-level ancestor area of expertise (e.g., from \"Clinical Resources Related to Bone Cancer Care\" to \"Clinical Resources Related to Cancer Care\"). This sets the body text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default body text structure will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -1201,7 +1201,7 @@
 				"id": ""
 			},
 			"default_value": "",
-			"placeholder": "",
+			"placeholder": "Unlock a treasure trove of [clinical resources] covering diverse specialties within [Area of Expertise Title]. Access a wealth of articles, videos, infographics, and documents to enhance your knowledge and understanding.",
 			"maxlength": 117,
 			"rows": 4,
 			"new_lines": "",
@@ -1212,7 +1212,7 @@
 			"label": "Link Text of a Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources",
 			"name": "clinical_resource_fpage_ref_top_link_expertise",
 			"type": "text",
-			"instructions": "Fake subpages for clinical resources under descendant areas of expertise contain references linking users back to the same type of fake subpage under the top-level ancestor area of expertise (e.g., from \"Clinical Resources Related to Bone Cancer Care\" to \"Clinical Resources Related to Cancer Care\"). This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the general placement link text structure will be used.",
+			"instructions": "Fake subpages for clinical resources under descendant areas of expertise contain references linking users back to the same type of fake subpage under the top-level ancestor area of expertise (e.g., from \"Clinical Resources Related to Bone Cancer Care\" to \"Clinical Resources Related to Cancer Care\"). This sets the link text used in that reference.</p><p class='description' style='margin-top: 0.5em;'>If you leave this blank, the default link text structure will be used.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -1222,7 +1222,7 @@
 			},
 			"acfe_permissions": "",
 			"default_value": "",
-			"placeholder": "",
+			"placeholder": "View [Clinical Resources]",
 			"prepend": "",
 			"append": "",
 			"maxlength": "",

@@ -4341,13 +4341,13 @@ function uamswp_fad_fpage_text_replace($string) {
 							$provider_fpage_ref_main_link_expertise = ''; // Reference to the main provider archive, link text
 						}
 						if ( !isset($provider_fpage_ref_top_title_expertise) || empty($provider_fpage_ref_top_title_expertise) ) {
-							$provider_fpage_ref_top_title_expertise = ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Providers, title
+							$provider_fpage_ref_top_title_expertise = $provider_fpage_title_expertise; // Reference to a Top-Level Area of Expertise's Fake Subpage for Providers, title
 						}
 						if ( !isset($provider_fpage_ref_top_intro_expertise) || empty($provider_fpage_ref_top_intro_expertise) ) {
-							$provider_fpage_ref_top_intro_expertise = ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Providers, body text
+							$provider_fpage_ref_top_intro_expertise = 'Discover our esteemed team of [providers] within the vast field of [Area of Expertise Title], delivering comprehensive care for UAMS Health patients. Explore our diverse roster of experts of various [descendant areas of expertise] within [Area of Expertise Title].'; // Reference to a Top-Level Area of Expertise's Fake Subpage for Providers, body text
 						}
 						if ( !isset($provider_fpage_ref_top_link_expertise) || empty($provider_fpage_ref_top_link_expertise) ) {
-							$provider_fpage_ref_top_link_expertise = ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Providers, link text
+							$provider_fpage_ref_top_link_expertise = 'View [Providers]'; // Reference to a Top-Level Area of Expertise's Fake Subpage for Providers, link text
 						}
 	
 					// If the variable is not set or is empty...
@@ -4494,13 +4494,13 @@ function uamswp_fad_fpage_text_replace($string) {
 							$location_fpage_ref_main_link_expertise = ''; // Reference to the main location archive, link text
 						}
 						if ( !isset($location_fpage_ref_top_title_expertise) || empty($location_fpage_ref_top_title_expertise) ) {
-							$location_fpage_ref_top_title_expertise = ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Locations, title
+							$location_fpage_ref_top_title_expertise = $location_fpage_title_expertise; // Reference to a Top-Level Area of Expertise's Fake Subpage for Locations, title
 						}
 						if ( !isset($location_fpage_ref_top_intro_expertise) || empty($location_fpage_ref_top_intro_expertise) ) {
-							$location_fpage_ref_top_intro_expertise = ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Locations, body text
+							$location_fpage_ref_top_intro_expertise = 'Explore our extensive network of [locations] dedicated to providing exceptional care within the realm of [Area of Expertise Title]. Discover a range of specialized services and comprehensive care options across multiple [descendant areas of expertise].'; // Reference to a Top-Level Area of Expertise's Fake Subpage for Locations, body text
 						}
 						if ( !isset($location_fpage_ref_top_link_expertise) || empty($location_fpage_ref_top_link_expertise) ) {
-							$location_fpage_ref_top_link_expertise = ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Locations, link text
+							$location_fpage_ref_top_link_expertise = 'View [Locations]'; // Reference to a Top-Level Area of Expertise's Fake Subpage for Locations, link text
 						}
 	
 					// If the variable is not set or is empty...
@@ -4878,13 +4878,13 @@ function uamswp_fad_fpage_text_replace($string) {
 							$clinical_resource_fpage_ref_main_link_expertise = ''; // Reference to the main clinical resource archive, link text
 						}
 						if ( !isset($clinical_resource_fpage_ref_top_title_expertise) || empty($clinical_resource_fpage_ref_top_title_expertise) ) {
-							$clinical_resource_fpage_ref_top_title_expertise = ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources, title
+							$clinical_resource_fpage_ref_top_title_expertise = $clinical_resource_fpage_title_expertise; // Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources, title
 						}
 						if ( !isset($clinical_resource_fpage_ref_top_intro_expertise) || empty($clinical_resource_fpage_ref_top_intro_expertise) ) {
-							$clinical_resource_fpage_ref_top_intro_expertise = ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources, body text
+							$clinical_resource_fpage_ref_top_intro_expertise = 'Unlock a treasure trove of [clinical resources] covering diverse specialties within [Area of Expertise Title]. Access a wealth of articles, videos, infographics, and documents to enhance your knowledge and understanding.'; // Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources, body text
 						}
 						if ( !isset($clinical_resource_fpage_ref_top_link_expertise) || empty($clinical_resource_fpage_ref_top_link_expertise) ) {
-							$clinical_resource_fpage_ref_top_link_expertise = ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources, link text
+							$clinical_resource_fpage_ref_top_link_expertise = 'View [Clinical Resources]'; // Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources, link text
 						}
 						if ( !isset($clinical_resource_fpage_more_text_expertise) || empty($clinical_resource_fpage_more_text_expertise) ) {
 							$clinical_resource_fpage_more_text_expertise = 'Want to find more [clinical resources] related to [Area of Expertise Title]?'; // "More" intro text
