@@ -16,7 +16,7 @@
  * 		$condition_single_name_attr // string
  * 		$condition_plural_name // string
  * 		$condition_plural_name_attr // string
- * 	// Vars defined in uamswp_fad_condition_fpage_text_general()
+ * 	// Vars defined in uamswp_fad_fpage_text_condition_general()
  * 		$condition_fpage_title_general // string
  * 		$condition_fpage_intro_general // string
  * 	// Vars defined in uamswp_fad_condition_query()
@@ -75,7 +75,7 @@ if ( $condition_section_show ) {
 		if ( !isset($condition_section_title) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($condition_fpage_title_general) ) {
-				uamswp_fad_condition_fpage_text_general();
+				uamswp_fad_fpage_text_condition_general();
 				global $condition_fpage_title_general;
 			}
 			$condition_section_title = $condition_fpage_title_general;
@@ -83,7 +83,7 @@ if ( $condition_section_show ) {
 		if ( !isset($condition_section_intro) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($condition_fpage_intro_general) ) {
-				uamswp_fad_condition_fpage_text_general();
+				uamswp_fad_fpage_text_condition_general();
 				global $condition_fpage_intro_general;
 			}
 			$condition_section_intro = $condition_fpage_intro_general;

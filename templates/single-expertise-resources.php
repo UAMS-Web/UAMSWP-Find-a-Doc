@@ -46,11 +46,14 @@ $page_url = get_permalink();
 $ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
 $ontology_type = isset($ontology_type) ? $ontology_type : 1; // Check if 'expertise_type' is not null, and if so, set value to true
 
-// Get system settings for fake subpage text elements on Area of Expertise subsection
+// Get system settings for fake subpage text elements in an Area of Expertise subsection
 uamswp_fad_fpage_text_expertise();
 
+// Get system settings for image elements of a fake subpage (or section) in an Area of Expertise subsection (or profile)
+uamswp_fad_fpage_image_expertise();
+
 // Get the featured image / post thumbnail
-$page_image_id = $clinical_resource_fpage_featured_image_expertise_id; // Image ID
+$page_image_id = $clinical_resource_fpage_featured_image_expertise; // Image ID
 uamswp_meta_image_resize();
 
 // Set general variables for fake subpage
@@ -179,6 +182,9 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	$clinical_resource_section_intro = ''; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of clinical_resource section intro text in a general placement)
 	$clinical_resource_section_more_show = false; // Query whether to show the section that links to more items // bool (default: true)
 	add_action( 'genesis_entry_content', 'uamswp_fad_section_clinical_resource', 14 );
+
+	// Display references to other archive pages
+	add_action( 'genesis_entry_content', 'uamswp_fad_fpage_text_image_overlay', 25);
 
 	// Display appointment information
 	add_action( 'genesis_entry_content', 'uamswp_fad_ontology_appointment', 26 );

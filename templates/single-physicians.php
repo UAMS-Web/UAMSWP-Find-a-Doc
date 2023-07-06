@@ -36,7 +36,7 @@
 	uamswp_fad_labels_treatment();
 
 // Get system settings for provider archive page text
-// uamswp_fad_archive_provider();
+// uamswp_fad_archive_text_provider();
 
 // Get the page ID
 $page_id = get_the_ID();
@@ -123,7 +123,7 @@ $page_id = get_the_ID();
 $gender = get_field('physician_gender',$post->ID);
 $gender_attr = uamswp_attr_conversion($gender);
 
-// Get system settings for fake subpage or section text elements on Provider subsection or profile
+// Get system settings for fake subpage (or section) text elements in an Provider subsection (or profile)
 uamswp_fad_fpage_text_provider();
 
 // Get system settings for jump links (a.k.a. anchor links)

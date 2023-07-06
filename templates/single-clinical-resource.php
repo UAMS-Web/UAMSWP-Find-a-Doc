@@ -33,7 +33,7 @@
 	uamswp_fad_labels_treatment();
 
 // Get system settings for clinical resource archive page text
-// uamswp_fad_archive_clinical_resource();
+// uamswp_fad_archive_text_clinical_resource();
 
 // Get the page ID
 $page_id = get_the_ID();

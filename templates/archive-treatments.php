@@ -34,7 +34,7 @@ function title_filter( $where, $query ){
 uamswp_fad_labels_treatment();
 
 // Get system settings for Treatments Archive Page
-uamswp_fad_archive_treatment();
+uamswp_fad_archive_text_treatment();
 $treatment_archive_link = get_post_type_archive_link( get_query_var('post_type') );
 
 $alpha = '';

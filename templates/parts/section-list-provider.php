@@ -14,7 +14,7 @@
  * 	// Defined in uamswp_fad_labels_provider()
  * 		$provider_plural_name // string
  * 		$provider_plural_name_attr // string
- * 	// Defined in uamswp_fad_provider_fpage_text_general()
+ * 	// Defined in uamswp_fad_fpage_text_provider_general()
  * 		$provider_fpage_title_general // string
  * 		$provider_fpage_intro_general // string
  * 	// Defined in uamswp_fad_provider_query()
@@ -48,7 +48,7 @@ if ( $provider_section_show ) {
 		if ( !isset($provider_section_title) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($provider_fpage_title_general) ) {
-				uamswp_fad_provider_fpage_text_general();
+				uamswp_fad_fpage_text_provider_general();
 				global $provider_fpage_title_general;
 			}
 			$provider_section_title = $provider_fpage_title_general;
@@ -56,7 +56,7 @@ if ( $provider_section_show ) {
 		if ( !isset($provider_section_intro) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($provider_fpage_intro_general) ) {
-				uamswp_fad_provider_fpage_text_general();
+				uamswp_fad_fpage_text_provider_general();
 				global $provider_fpage_intro_general;
 			}
 			$provider_section_intro = $provider_fpage_intro_general;

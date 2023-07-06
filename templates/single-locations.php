@@ -36,7 +36,7 @@
 	uamswp_fad_labels_treatment();
 
 // Get system settings for location archive page text
-// uamswp_fad_archive_location();
+// uamswp_fad_archive_text_location();
 
 // Get the page ID
 $page_id = get_the_ID();
@@ -50,7 +50,7 @@ $page_title_phrase_attr = uamswp_attr_conversion($page_title_phrase);
 // Get the page slug for the location
 $page_slug = $post->post_name;
 
-// Get system settings for fake subpage or section text elements on Location subsection or profile
+// Get system settings for fake subpage (or section) text elements in an Location subsection (or profile)
 uamswp_fad_fpage_text_location();
 
 // Get system settings for jump links (a.k.a. anchor links)
