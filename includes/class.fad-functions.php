@@ -1268,8 +1268,9 @@ function uamswp_fad_ontology_hide() {
 function uamswp_attr_conversion($input)
 {
 	$input_attr = $input;
+	isset($input_attr) ? $input_attr : '';
 	$input_attr = str_replace('"', '\'', $input_attr); // Replace double quotes with single quote
-	$input_attr = htmlentities($input_attr, null, 'UTF-8'); // Convert all applicable characters to HTML entities
+	$input_attr = htmlentities($input_attr, false, 'UTF-8'); // Convert all applicable characters to HTML entities
 	$input_attr = str_replace('&nbsp;', ' ', $input_attr); // Convert non-breaking space with normal space
 	$input_attr = html_entity_decode($input_attr); // Convert HTML entities to their corresponding characters
 	return $input_attr;
@@ -2586,39 +2587,39 @@ function uamswp_fad_podcast() {
 
 				// System settings for provider labels
 				$fpage_text_replacements[$placeholder_provider_single_name] = $provider_single_name;
-				$fpage_text_replacements[strtolower($placeholder_provider_single_name)] = strtolower($provider_single_name);
+				$fpage_text_replacements[strtolower($placeholder_provider_single_name ?? '')] = strtolower($provider_single_name ?? '');
 				$fpage_text_replacements[$placeholder_provider_plural_name] = $provider_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_provider_plural_name)] = strtolower($provider_plural_name);
+				$fpage_text_replacements[strtolower($placeholder_provider_plural_name ?? '')] = strtolower($provider_plural_name ?? '');
 
 				// System settings for provider archive page text
 				$fpage_text_replacements[$placeholder_provider_archive_headline] = $provider_archive_headline;
 
 				// System settings for location labels
 				$fpage_text_replacements[$placeholder_location_single_name] = $location_single_name;
-				$fpage_text_replacements[strtolower($placeholder_location_single_name)] = strtolower($location_single_name);
+				$fpage_text_replacements[strtolower($placeholder_location_single_name ?? '')] = strtolower($location_single_name ?? '');
 				$fpage_text_replacements[$placeholder_location_plural_name] = $location_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_location_plural_name)] = strtolower($location_plural_name);
+				$fpage_text_replacements[strtolower($placeholder_location_plural_name ?? '')] = strtolower($location_plural_name ?? '');
 
 				// System settings for location descendant item labels
 				$fpage_text_replacements[$placeholder_location_descendant_single_name] = $location_descendant_single_name;
-				$fpage_text_replacements[strtolower($placeholder_location_descendant_single_name)] = strtolower($location_descendant_single_name);
+				$fpage_text_replacements[strtolower($placeholder_location_descendant_single_name ?? '')] = strtolower($location_descendant_single_name ?? '');
 				$fpage_text_replacements[$placeholder_location_descendant_plural_name] = $location_descendant_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_location_descendant_plural_name)] = strtolower($location_descendant_plural_name);
+				$fpage_text_replacements[strtolower($placeholder_location_descendant_plural_name ?? '')] = strtolower($location_descendant_plural_name ?? '');
 
 				// System settings for location archive page text
 				$fpage_text_replacements[$placeholder_location_archive_headline] = $location_archive_headline;
 
 				// System settings for area of expertise labels
 				$fpage_text_replacements[$placeholder_expertise_single_name] = $expertise_single_name;
-				$fpage_text_replacements[strtolower($placeholder_expertise_single_name)] = strtolower($expertise_single_name);
+				$fpage_text_replacements[strtolower($placeholder_expertise_single_name ?? '')] = strtolower($expertise_single_name ?? '');
 				$fpage_text_replacements[$placeholder_expertise_plural_name] = $expertise_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_expertise_plural_name)] = strtolower($expertise_plural_name);
+				$fpage_text_replacements[strtolower($placeholder_expertise_plural_name ?? '')] = strtolower($expertise_plural_name ?? '');
 
 				// System settings for area of expertise descendant item labels
 				$fpage_text_replacements[$placeholder_expertise_descendant_single_name] = $expertise_descendant_single_name;
-				$fpage_text_replacements[strtolower($placeholder_expertise_descendant_single_name)] = strtolower($expertise_descendant_single_name);
+				$fpage_text_replacements[strtolower($placeholder_expertise_descendant_single_name ?? '')] = strtolower($expertise_descendant_single_name ?? '');
 				$fpage_text_replacements[$placeholder_expertise_descendant_plural_name] = $expertise_descendant_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_expertise_descendant_plural_name)] = strtolower($expertise_descendant_plural_name);
+				$fpage_text_replacements[strtolower($placeholder_expertise_descendant_plural_name ?? '')] = strtolower($expertise_descendant_plural_name ?? '');
 
 				// System settings for area of expertise archive page text
 				$fpage_text_replacements[$placeholder_expertise_archive_headline] = $expertise_archive_headline;
@@ -2626,30 +2627,30 @@ function uamswp_fad_podcast() {
 
 				// System settings for clinical resource labels
 				$fpage_text_replacements[$placeholder_clinical_resource_single_name] = $clinical_resource_single_name;
-				$fpage_text_replacements[strtolower($placeholder_clinical_resource_single_name)] = strtolower($clinical_resource_single_name);
+				$fpage_text_replacements[strtolower($placeholder_clinical_resource_single_name ?? '')] = strtolower($clinical_resource_single_name ?? '');
 				$fpage_text_replacements[$placeholder_clinical_resource_plural_name] = $clinical_resource_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_clinical_resource_plural_name)] = strtolower($clinical_resource_plural_name);
+				$fpage_text_replacements[strtolower($placeholder_clinical_resource_plural_name ?? '')] = strtolower($clinical_resource_plural_name ?? '');
 
 				// System settings for clinical resource archive page text
 				$fpage_text_replacements[$placeholder_clinical_resource_archive_headline] = $clinical_resource_archive_headline;
 
 				// System settings for clinical resource facet labels
 				$fpage_text_replacements[$placeholder_clinical_resource_type_single_name] = $clinical_resource_type_single_name;
-				$fpage_text_replacements[strtolower($placeholder_clinical_resource_type_single_name)] = strtolower($clinical_resource_type_single_name);
+				$fpage_text_replacements[strtolower($placeholder_clinical_resource_type_single_name ?? '')] = strtolower($clinical_resource_type_single_name ?? '');
 				$fpage_text_replacements[$placeholder_clinical_resource_type_plural_name] = $clinical_resource_type_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_clinical_resource_type_plural_name)] = strtolower($clinical_resource_type_plural_name);
+				$fpage_text_replacements[strtolower($placeholder_clinical_resource_type_plural_name ?? '')] = strtolower($clinical_resource_type_plural_name ?? '');
 
 				// System settings for combined conditions and treatments labels
 				$fpage_text_replacements[$placeholder_condition_treatment_single_name] = $condition_treatment_single_name;
-				$fpage_text_replacements[strtolower($placeholder_condition_treatment_single_name)] = strtolower($condition_treatment_single_name);
+				$fpage_text_replacements[strtolower($placeholder_condition_treatment_single_name ?? '')] = strtolower($condition_treatment_single_name ?? '');
 				$fpage_text_replacements[$placeholder_condition_treatment_plural_name] = $condition_treatment_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_condition_treatment_plural_name)] = strtolower($condition_treatment_plural_name);
+				$fpage_text_replacements[strtolower($placeholder_condition_treatment_plural_name ?? '')] = strtolower($condition_treatment_plural_name ?? '');
 
 				// System settings for condition labels
 				$fpage_text_replacements[$placeholder_condition_single_name] = $condition_single_name;
-				$fpage_text_replacements[strtolower($placeholder_condition_single_name)] = strtolower($condition_single_name);
+				$fpage_text_replacements[strtolower($placeholder_condition_single_name ?? '')] = strtolower($condition_single_name ?? '');
 				$fpage_text_replacements[$placeholder_condition_plural_name] = $condition_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_condition_plural_name)] = strtolower($condition_plural_name);
+				$fpage_text_replacements[strtolower($placeholder_condition_plural_name ?? '')] = strtolower($condition_plural_name ?? '');
 
 				// System settings for condition archive page text
 				$fpage_text_replacements[$placeholder_condition_archive_headline] = $condition_archive_headline;
@@ -2657,9 +2658,9 @@ function uamswp_fad_podcast() {
 
 				// System settings for treatment labels
 				$fpage_text_replacements[$placeholder_treatment_single_name] = $treatment_single_name;
-				$fpage_text_replacements[strtolower($placeholder_treatment_single_name)] = strtolower($treatment_single_name);
+				$fpage_text_replacements[strtolower($placeholder_treatment_single_name ?? '')] = strtolower($treatment_single_name ?? '');
 				$fpage_text_replacements[$placeholder_treatment_plural_name] = $treatment_plural_name;
-				$fpage_text_replacements[strtolower($placeholder_treatment_plural_name)] = strtolower($treatment_plural_name);
+				$fpage_text_replacements[strtolower($placeholder_treatment_plural_name ?? '')] = strtolower($treatment_plural_name ?? '');
 
 				// System settings for location labels
 				$fpage_text_replacements[$placeholder_treatment_archive_headline] = $treatment_archive_headline;
