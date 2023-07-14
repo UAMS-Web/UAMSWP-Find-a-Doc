@@ -1268,7 +1268,7 @@ function uamswp_fad_ontology_hide() {
 function uamswp_attr_conversion($input)
 {
 	$input_attr = isset($input) ? $input : '';
-	if ( isempty($input_attr) ) {
+	if ( empty($input_attr) ) {
 		return '';
 	}
 	$input_attr = str_replace('"', '\'', $input_attr); // Replace double quotes with single quote
