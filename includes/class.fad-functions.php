@@ -1409,6 +1409,35 @@ function uamswp_fad_ontology_site_values() {
 	$clinical_resources = get_field('expertise_clinical_resources', $site_nav_id);
 	$conditions_cpt = get_field('expertise_conditions_cpt', $site_nav_id);
 	$treatments_cpt = get_field('expertise_treatments_cpt', $site_nav_id);
+
+	// Create and return an array to be used on the templates and template parts
+
+		$ontology_site_values = array(
+			'site_nav_id' => $site_nav_id,
+			'navbar_subbrand' => array (
+				'title' => array(
+					'name' => $navbar_subbrand_title,
+					'attr' => $navbar_subbrand_title_attr,
+					'url' => $navbar_subbrand_title_url,
+				),
+				'parent' => array(
+					'name' => $navbar_subbrand_parent,
+					'attr' => $navbar_subbrand_parent_attr,
+					'url' => $navbar_subbrand_parent_url,
+				)
+			),
+			'providers' => $providers,
+			'locations' => $locations,
+			'expertises' => $expertises,
+			'expertise_descendants' => $expertise_descendants,
+			'clinical_resources' => $clinical_resources,
+			'conditions_cpt' => $conditions_cpt,
+			'treatments_cpt' => $treatments_cpt,
+			'ancestors_ontology_farthest' => $ancestors_ontology_farthest,
+			'page_top_level_query' => $page_top_level_query
+		);
+		return $ontology_site_values;
+
 }
 
 // Construct non-standard entry title
