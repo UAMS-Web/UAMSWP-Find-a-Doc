@@ -1267,8 +1267,10 @@ function uamswp_fad_ontology_hide() {
 // Convert text string to HTML attribute-friendly text string
 function uamswp_attr_conversion($input)
 {
-	$input_attr = $input;
-	isset($input_attr) ? $input_attr : '';
+	$input_attr = isset($input) ? $input : '';
+	if ( isempty($input_attr) ) {
+		return '';
+	}
 	$input_attr = str_replace('"', '\'', $input_attr); // Replace double quotes with single quote
 	$input_attr = htmlentities($input_attr, false, 'UTF-8'); // Convert all applicable characters to HTML entities
 	$input_attr = str_replace('&nbsp;', ' ', $input_attr); // Convert non-breaking space with normal space
