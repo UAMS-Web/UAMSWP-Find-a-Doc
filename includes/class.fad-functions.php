@@ -2378,12 +2378,11 @@ function uamswp_fad_fpage_text_replace($string) {
 			$placeholder_expertise_descendant_single_name = $labels_expertise_descendant['placeholder_expertise_descendant_single_name']; // string
 			$placeholder_expertise_descendant_plural_name = $labels_expertise_descendant['placeholder_expertise_descendant_plural_name']; // string
 
-		// Defined in uamswp_fad_archive_text_expertise()
-
-			global $placeholder_expertise_archive_headline;
-			global $expertise_archive_headline;
-			global $placeholder_expertise_archive_intro_text;
-			global $expertise_archive_intro_text;
+		$archive_text_expertise = uamswp_fad_archive_text_expertise();
+			$expertise_archive_headline = $archive_text_expertise['expertise_archive_headline']; // string
+			$expertise_archive_intro_text = $archive_text_expertise['expertise_archive_intro_text']; // string
+			$placeholder_expertise_archive_headline = $archive_text_expertise['placeholder_expertise_archive_headline']; // string
+			$placeholder_expertise_archive_intro_text = $archive_text_expertise['placeholder_expertise_archive_intro_text']; // string
 
 		$labels_clinical_resource = uamswp_fad_labels_clinical_resource();
 			$clinical_resource_single_name = $labels_clinical_resource['clinical_resource_single_name']; // string
@@ -3074,6 +3073,18 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
 		$placeholder_expertise_archive_headline = '[Area of Expertise Archive Title]';
 		$placeholder_expertise_archive_intro_text = '[Area of Expertise Archive Intro Text]';
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$archive_text_expertise = array(
+				'expertise_archive_headline' => $expertise_archive_headline, // string
+				'expertise_archive_headline_attr' => $expertise_archive_headline_attr, // string
+				'expertise_archive_intro_text' => $expertise_archive_intro_text, // string
+				'placeholder_expertise_archive_headline' => $placeholder_expertise_archive_headline, // string
+				'placeholder_expertise_archive_intro_text' => $placeholder_expertise_archive_intro_text // string
+			);
+			return $archive_text_expertise;
+
 	}
 
 	// Get the Find-a-Doc Settings values for clinical resource archive page text
