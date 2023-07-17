@@ -90,7 +90,12 @@ $ontology_site_values = uamswp_fad_ontology_site_values();
 	// Query for whether related locations content section should be displayed on ontology pages/subsections
 	$location_query_id = $site_nav_id;
 	$location_query_field_name = 'location_expertise';
-	uamswp_fad_location_query();
+	$location_query_function = uamswp_fad_location_query();
+		$location_query = $location_query_function['location_query']; // WP_Post[]
+		$location_section_show = $location_query_function['location_section_show']; // bool
+		$location_ids = $location_query_function['location_ids']; // int[]
+		$location_count = $location_query_function['location_count']; // int
+		$location_valid = $location_query_function['location_valid']; // bool
 
 	// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
 	uamswp_fad_expertise_descendant_query();

@@ -1332,6 +1332,7 @@ function uamswp_fad_ontology_site_values() {
 			$ancestors_ontology_farthest_obj = '';
 			$ancestors_ontology_farthest_title = '';
 			$ancestors_ontology_farthest_title_attr = '';
+			echo '<p>$ancestors_ontology_farthest_title_attr = ' . $ancestors_ontology_farthest_title_attr . '</p>'; // test
 			$ancestors_ontology_farthest_url = '';
 			if ( $has_ancestors_ontology && $ancestors_ontology_farthest ) {
 				$ancestors_ontology_farthest_obj = get_post( $ancestors_ontology_farthest );
@@ -1339,6 +1340,7 @@ function uamswp_fad_ontology_site_values() {
 			if ( $ancestors_ontology_farthest_obj ) {
 				$ancestors_ontology_farthest_title = $ancestors_ontology_farthest_obj->post_title;
 				$ancestors_ontology_farthest_title_attr = uamswp_attr_conversion($ancestors_ontology_farthest_title);
+				echo '<p>$ancestors_ontology_farthest_title_attr = ' . $ancestors_ontology_farthest_title_attr . '</p>'; // test
 				$ancestors_ontology_farthest_url = get_permalink( $ancestors_ontology_farthest );
 			}
 
@@ -1587,14 +1589,6 @@ function uamswp_fad_post_title() {
 
 			$ontology_site_values = uamswp_fad_ontology_site_values();
 				$locations = $ontology_site_values['locations']; // int[]
-
-		// Make variables available outside of the function
-
-			global $location_query;
-			global $location_section_show;
-			global $location_ids;
-			global $location_count; // integer
-			global $location_valid;
 
 		$location_valid = false;
 
