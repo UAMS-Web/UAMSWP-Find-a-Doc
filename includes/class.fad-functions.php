@@ -2361,10 +2361,9 @@ function uamswp_fad_fpage_text_replace($string) {
 			$placeholder_location_descendant_single_name = $labels_location_descendant['placeholder_location_descendant_single_name']; // string
 			$placeholder_location_descendant_plural_name = $labels_location_descendant['placeholder_location_descendant_plural_name']; // string
 
-		// Defined in uamswp_fad_archive_text_location()
-
-			global $placeholder_location_archive_headline;
-			global $location_archive_headline;
+		$archive_text_location = uamswp_fad_archive_text_location();
+			$location_archive_headline = $archive_text_location['location_archive_headline']; // string
+			$placeholder_location_archive_headline = $archive_text_location['placeholder_location_archive_headline']; // string
 
 		$labels_expertise = uamswp_fad_labels_expertise();
 			$expertise_single_name = $labels_expertise['expertise_single_name']; // string
@@ -3045,6 +3044,16 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
 		$placeholder_location_archive_headline = '[Location Archive Title]';
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$archive_text_location = array(
+				'location_archive_headline' => $location_archive_headline, // string
+				'location_archive_headline_attr' => $location_archive_headline_attr, // string
+				'placeholder_location_archive_headline' => $placeholder_location_archive_headline // string
+			);
+			return $archive_text_location;
+
 	}
 
 	// Get the Find-a-Doc Settings values for area of expertise archive page text
