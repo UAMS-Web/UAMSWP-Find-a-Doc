@@ -6715,9 +6715,9 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Make variables available outside of the function
 
-				global $location_fpage_image_provider;
-				global $expertise_fpage_image_provider;
-				global $clinical_resource_fpage_image_provider;
+				global $location_fpage_image_provider; // int
+				global $expertise_fpage_image_provider; // int
+				global $clinical_resource_fpage_image_provider; // int
 
 			// Locations
 
@@ -6763,7 +6763,16 @@ function uamswp_fad_fpage_text_replace($string) {
 					}
 					$clinical_resource_fpage_image_provider = $clinical_resource_fpage_image_general; // Featured image
 				}
-	
+
+			// Create and return an array to be used on the templates and template parts
+		
+				$fpage_image_provider = array(
+					'location_fpage_image_provider'				=> $location_fpage_image_provider, // int
+					'expertise_fpage_image_provider'			=> $expertise_fpage_image_provider, // int
+					'clinical_resource_fpage_image_provider'	=> $clinical_resource_fpage_image_provider // int
+				);
+				return $fpage_image_provider;	
+
 		}
 
 		// Get field values for the featured image of a fake subpage (or section) in an Location subsection (or profile)
