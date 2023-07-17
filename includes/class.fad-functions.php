@@ -6489,7 +6489,6 @@ function uamswp_fad_fpage_text_replace($string) {
 					'condition_treatment_fpage_intro_clinical_resource'			=> $condition_treatment_fpage_intro_clinical_resource // string
 				);
 				return $fpage_text_clinical_resource;
-		
 
 		}
 
@@ -6500,14 +6499,21 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Make variables available outside of the function
 
-			global $provider_archive_image;
+			global $provider_archive_image; // int
 
 		// Get the Find-a-Doc Settings value for the featured image of the provider archive
-		$provider_archive_image = get_field('provider_archive_featured_image', 'option'); // Featured image
+		$provider_archive_image = get_field('provider_archive_featured_image', 'option'); // Featured image ID
 
 		// If the variable is not set or is empty...
 		// Set a hardcoded fallback value
 		$provider_archive_image = ( isset($provider_archive_image) && !empty($provider_archive_image) ) ? $provider_archive_image : ''; // Featured image
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$archive_image_provider = array(
+				'provider_archive_image'	=> $provider_archive_image // int
+			);
+			return $archive_image_provider;
 
 	}
 
@@ -7793,8 +7799,8 @@ function uamswp_fad_fpage_text_image_overlay() {
 		global $ancestors_ontology_farthest; // ID of the top-level ontology item ancestor of the current item // int
 		global $provider_archive_image; // Provider archive featured image ID // int
 		if ( !isset($provider_archive_image) || empty($provider_archive_image) ) {
-			uamswp_fad_archive_image_provider();
-			global $provider_archive_image;
+			$archive_image_provider = uamswp_fad_archive_image_provider();
+				$provider_archive_image = $archive_image_provider['provider_archive_image']; // int
 		}
 		global $location_archive_image; // Location archive featured image ID // int
 		if ( !isset($location_archive_image) || empty($location_archive_image) ) {
