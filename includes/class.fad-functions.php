@@ -1007,9 +1007,13 @@ add_action('wp_ajax_nopriv_location_ajax_filter', 'location_ajax_filter_callback
 add_action('wp_ajax_location_ajax_filter', 'location_ajax_filter_callback');
 
 function location_ajax_filter_callback() {
-	global $location_single_name; // Typically defined in uamswp_fad_labels_location()
-	global $location_single_name_attr; // Typically defined in uamswp_fad_labels_location()
-	global $location_plural_name; // Typically defined in uamswp_fad_labels_location()
+
+	// Bring in variables from outside of the function
+
+		$labels_location = uamswp_fad_labels_location();
+			$location_single_name = $labels_location['location_single_name']; // string
+			$location_single_name_attr = $labels_location['location_single_name_attr']; // string
+			$location_plural_name = $labels_location['location_plural_name']; // string
 
 	$tax_query = array();
 
@@ -2095,10 +2099,9 @@ function uamswp_fad_ontology_nav_menu() {
 			$provider_plural_name = $labels_provider['provider_plural_name']; // string
 			$provider_plural_name_attr = $labels_provider['provider_plural_name_attr']; // string
 
-		// Typically defined in uamswp_fad_labels_location()
-
-			global $location_plural_name;
-			global $location_plural_name_attr;
+		$labels_location = uamswp_fad_labels_location();
+			$location_plural_name = $labels_location['location_plural_name']; // string
+			$location_plural_name_attr = $labels_location['location_plural_name_attr']; // string
 
 		// Typically defined in uamswp_fad_labels_expertise()
 
@@ -2160,9 +2163,8 @@ function uamswp_fad_ontology_appointment() {
 
 	// Bring in variables from outside of the function
 
-		// Typically defined in uamswp_fad_labels_location()
-	
-			global $location_single_name;
+		$labels_location = uamswp_fad_labels_location();
+			$location_single_name = $labels_location['location_single_name']; // string
 		
 		// Typically defined on the template
 	
@@ -2349,14 +2351,13 @@ function uamswp_fad_fpage_text_replace($string) {
 			global $placeholder_provider_archive_headline;
 			global $provider_archive_headline;
 
-		// Defined in uamswp_fad_labels_location()
-
-			global $placeholder_location_single_name;
-			global $location_single_name;
-			global $placeholder_location_plural_name;
-			global $location_plural_name;
-			global $placeholder_location_page_title;
-			global $placeholder_location_page_title_phrase;
+		$labels_location = uamswp_fad_labels_location();
+			$location_single_name = $labels_location['location_single_name']; // string
+			$location_plural_name = $labels_location['location_plural_name']; // string
+			$placeholder_location_single_name = $labels_location['placeholder_location_single_name']; // string
+			$placeholder_location_plural_name = $labels_location['placeholder_location_plural_name']; // string
+			$placeholder_location_page_title = $labels_location['placeholder_location_page_title']; // string
+			$placeholder_location_page_title_phrase = $labels_location['placeholder_location_page_title_phrase']; // string
 
 		// Defined in uamswp_fad_labels_location_descendant()
 
@@ -2625,15 +2626,15 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Make variables available outside of the function
 
-			global $location_single_name;
-			global $location_single_name_attr;
-			global $location_plural_name;
-			global $location_plural_name_attr;
-			global $placeholder_location_single_name;
-			global $placeholder_location_plural_name;
-			global $placeholder_location_page_title;
-			global $placeholder_location_page_title_phrase;
-			global $facet_labels;
+			global $location_single_name; // string
+			global $location_single_name_attr; // string
+			global $location_plural_name; // string
+			global $location_plural_name_attr; // string
+			global $placeholder_location_single_name; // string
+			global $placeholder_location_plural_name; // string
+			global $placeholder_location_page_title; // string
+			global $placeholder_location_page_title_phrase; // string
+			global $facet_labels; // array
 
 		$location_single_name = get_field('location_single_name', 'option') ?: 'Location';
 		$location_single_name_attr = uamswp_attr_conversion($location_single_name);
@@ -2658,6 +2659,22 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Add item to FacetWP labels array for Locations facet on Clinical Resources archive/list
 		$facet_labels['resource_locations'] = $location_plural_name;
 		$facet_labels['resource_locations_attr'] = $location_plural_name_attr;
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$labels_location = array(
+				'location_single_name' => $location_single_name, // string
+				'location_single_name_attr' => $location_single_name_attr, // string
+				'location_plural_name' => $location_plural_name, // string
+				'location_plural_name_attr' => $location_plural_name_attr, // string
+				'placeholder_location_single_name' => $placeholder_location_single_name, // string
+				'placeholder_location_plural_name' => $placeholder_location_plural_name, // string
+				'placeholder_location_page_title' => $placeholder_location_page_title, // string
+				'placeholder_location_page_title_phrase' => $placeholder_location_page_title_phrase, // string
+				'facet_labels' => $facet_labels // array
+			);
+			return $labels_location;
+	
 	}
 
 	// Get the Find-a-Doc Settings values for location descendant item labels
@@ -6870,12 +6887,11 @@ function uamswp_fad_section_location() {
 			global $location_section_schema_query; // Query for whether to add locations to schema // bool (default: false)
 			global $location_descendant_list; // Query for whether this is a list of child locations within a location // bool (default: false)
 
-		// Defined in uamswp_fad_labels_location()
-
-			global $location_single_name; // string
-			global $location_single_name_attr; // string
-			global $location_plural_name; // string
-			global $location_plural_name_attr; // string
+		$labels_location = uamswp_fad_labels_location();
+			$location_single_name = $labels_location['location_single_name']; // string
+			$location_single_name_attr = $labels_location['location_single_name_attr']; // string
+			$location_plural_name = $labels_location['location_plural_name']; // string
+			$location_plural_name_attr = $labels_location['location_plural_name_attr']; // string
 
 		// Defined in uamswp_fad_fpage_text_location_general()
 
