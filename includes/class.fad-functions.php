@@ -7806,7 +7806,14 @@ function uamswp_fad_section_condition_treatment() {
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-condition-treatment.php' );
 
-} // end function uamswp_fad_section_treatment()
+	// Create and return an array to be used on the templates and template parts
+
+		$section_condition_treatment = array(
+			'condition_treatment_schema'	=> $condition_treatment_schema // string
+		);
+		return $section_condition_treatment;
+
+} // end function uamswp_fad_section_condition_treatment()
 
 // Define a schema block
 function uamswp_schema_construct($schema_construct_arr) {
