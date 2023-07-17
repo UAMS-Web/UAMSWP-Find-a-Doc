@@ -1857,10 +1857,10 @@ function uamswp_fad_post_title() {
 
 		// Make variables available outside of the function
 
-			global $expertise_query;
-			global $expertise_section_show;
-			global $expertise_ids;
-			global $expertise_count; // integer
+			global $expertise_query; // WP_Post[]
+			global $expertise_section_show; // bool
+			global $expertise_ids; // int[]
+			global $expertise_count; // int
 
 		$args = array(
 			'post__in'	=> $expertises,
@@ -1879,6 +1879,17 @@ function uamswp_fad_post_title() {
 		} else {
 			$expertise_section_show = false;
 		}
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$expertise_query_function = array(
+				'expertise_query' => $expertise_query, // WP_Post[]
+				'expertise_section_show' => $expertise_section_show, // bool
+				'expertise_ids' => $expertise_ids, // int[]
+				'expertise_count' => $expertise_count // int
+			);
+			return $expertise_query_function;
+
 	}
 
 	// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
@@ -2029,9 +2040,8 @@ function uamswp_fad_ontology_nav_menu() {
 		$location_query_function = uamswp_fad_location_query();
 			$location_section_show = $location_query_function['location_section_show']; // bool
 
-		// Typically defined in uamswp_fad_expertise_query()
-
-			global $expertise_section_show;
+		$expertise_query_function = uamswp_fad_expertise_query();
+			$expertise_section_show = $expertise_query_function['expertise_section_show']; // bool
 
 		// Typically defined in uamswp_fad_clinical_resource_query()
 
@@ -6855,11 +6865,10 @@ function uamswp_fad_section_expertise() {
 			global $expertise_fpage_title_general; // string
 			global $expertise_fpage_intro_general; // string
 
-		// Defined on the template or in a function such as uamswp_fad_expertise_query()
-
-			global $expertise_section_show; // bool
-			global $expertise_query; // WP_Post[]
-			global $expertise_count; // int
+		$expertise_query_function = uamswp_fad_expertise_query();
+			$expertise_query = $expertise_query_function['expertise_query']; // WP_Post[]
+			$expertise_section_show = $expertise_query_function['expertise_section_show']; // bool
+			$expertise_count = $expertise_query_function['expertise_count']; // int
 
 		$expertise_descendant_query_function = uamswp_fad_expertise_descendant_query();
 			$expertise_descendant_query = $expertise_descendant_query_function['expertise_descendant_query']; // WP_Post[]
