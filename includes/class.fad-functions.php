@@ -1302,7 +1302,7 @@ function uamswp_fad_ontology_site_values() {
 		global $navbar_subbrand_parent_attr;
 		global $navbar_subbrand_parent_url;
 		global $providers;
-		global $locations;
+		global $locations; // int[]
 		global $expertises;
 		global $expertise_descendants;
 		global $clinical_resources;
@@ -1420,28 +1420,28 @@ function uamswp_fad_ontology_site_values() {
 	// Create and return an array to be used on the templates and template parts
 
 		$ontology_site_values = array(
-			'site_nav_id' => $site_nav_id,
+			'site_nav_id' => $site_nav_id, // int
 			'navbar_subbrand' => array (
 				'title' => array(
-					'name' => $navbar_subbrand_title,
-					'attr' => $navbar_subbrand_title_attr,
-					'url' => $navbar_subbrand_title_url,
+					'name' => $navbar_subbrand_title, // string
+					'attr' => $navbar_subbrand_title_attr, // string
+					'url' => $navbar_subbrand_title_url, // string
 				),
 				'parent' => array(
-					'name' => $navbar_subbrand_parent,
-					'attr' => $navbar_subbrand_parent_attr,
-					'url' => $navbar_subbrand_parent_url,
+					'name' => $navbar_subbrand_parent, // string
+					'attr' => $navbar_subbrand_parent_attr, // string
+					'url' => $navbar_subbrand_parent_url, // string
 				)
 			),
-			'providers' => $providers,
-			'locations' => $locations,
-			'expertises' => $expertises,
+			'providers' => $providers, // int[]
+			'locations' => $locations, // int[]
+			'expertises' => $expertises, // int[]
 			'expertise_descendants' => $expertise_descendants,
-			'clinical_resources' => $clinical_resources,
-			'conditions_cpt' => $conditions_cpt,
-			'treatments_cpt' => $treatments_cpt,
+			'clinical_resources' => $clinical_resources, // int[]
+			'conditions_cpt' => $conditions_cpt, // int[]
+			'treatments_cpt' => $treatments_cpt, // int[]
 			'ancestors_ontology_farthest' => $ancestors_ontology_farthest,
-			'page_top_level_query' => $page_top_level_query
+			'page_top_level_query' => $page_top_level_query // bool
 		);
 		return $ontology_site_values;
 
@@ -1529,7 +1529,7 @@ function uamswp_fad_post_title() {
 				global $jump_link_count;
 
 			$ontology_site_values = uamswp_fad_ontology_site_values();
-				// $site_nav_id = $ontology_site_values['site_nav_id'];
+				// $site_nav_id = $ontology_site_values['site_nav_id']; // int
 				$providers = $ontology_site_values['providers'];
 
 		// Make variables available outside of the function
@@ -1586,7 +1586,7 @@ function uamswp_fad_post_title() {
 				global $jump_link_count;
 
 			$ontology_site_values = uamswp_fad_ontology_site_values();
-				$locations = $ontology_site_values['locations'];
+				$locations = $ontology_site_values['locations']; // int[]
 
 		// Make variables available outside of the function
 
@@ -1718,7 +1718,7 @@ function uamswp_fad_post_title() {
 				global $jump_link_count;
 
 			$ontology_site_values = uamswp_fad_ontology_site_values();
-				$site_nav_id = $ontology_site_values['site_nav_id'];
+				$site_nav_id = $ontology_site_values['site_nav_id']; // int
 				$expertise_descendants = $ontology_site_values['expertise_descendants'];
 
 		// Make variables available outside of the function
@@ -1993,10 +1993,10 @@ function uamswp_fad_ontology_nav_menu() {
 	// Bring in variables from outside of the function
 
 		$ontology_site_values = uamswp_fad_ontology_site_values();
-			$site_nav_id = $ontology_site_values['site_nav_id'];
+			$site_nav_id = $ontology_site_values['site_nav_id']; // int
 
 		$provider_query_function = uamswp_fad_provider_query();
-			$provider_section_show = $provider_query_function['provider_section_show'];
+			$provider_section_show = $provider_query_function['provider_section_show']; // bool
 
 		$location_query_function = uamswp_fad_location_query();
 			$location_section_show = $location_query_function['location_section_show']; // bool
@@ -2050,10 +2050,10 @@ function uamswp_fad_ontology_header() {
 	// Bring in variables from outside of the function
 
 		$ontology_site_values = uamswp_fad_ontology_site_values();
-			$navbar_subbrand_title = $ontology_site_values['navbar_subbrand']['title']['name'];
-			$navbar_subbrand_title_url = $ontology_site_values['navbar_subbrand']['title']['url'];
-			$navbar_subbrand_parent = $ontology_site_values['navbar_subbrand']['parent']['name'];
-			$navbar_subbrand_parent_url = $ontology_site_values['navbar_subbrand']['parent']['url'];
+			$navbar_subbrand_title = $ontology_site_values['navbar_subbrand']['title']['name']; // string
+			$navbar_subbrand_title_url = $ontology_site_values['navbar_subbrand']['title']['url']; // string
+			$navbar_subbrand_parent = $ontology_site_values['navbar_subbrand']['parent']['name']; // string
+			$navbar_subbrand_parent_url = $ontology_site_values['navbar_subbrand']['parent']['url']; // string
 
 	include( UAMS_FAD_PATH . '/templates/parts/single-expertise-header.php');
 
