@@ -1631,6 +1631,18 @@ function uamswp_fad_post_title() {
 				}
 			}
 		}
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$location_query_function = array(
+				'location_query' => $location_query, // WP_Post[]
+				'location_section_show' => $location_section_show, // bool
+				'location_ids' => $location_ids, // int[]
+				'location_count' => $location_count, // int
+				'location_valid' => $location_valid // bool
+			);
+			return $location_query_function;
+
 	}
 
 	// Query for whether descendant locations content section should be displayed on a page
@@ -1986,9 +1998,8 @@ function uamswp_fad_ontology_nav_menu() {
 		$provider_query_function = uamswp_fad_provider_query();
 			$provider_section_show = $provider_query_function['provider_section_show'];
 
-		// Typically defined in uamswp_fad_location_query()
-
-			global $location_section_show;
+		$location_query_function = uamswp_fad_location_query();
+			$location_section_show = $location_query_function['location_section_show']; // bool
 
 		// Typically defined in uamswp_fad_expertise_query()
 
@@ -6772,13 +6783,14 @@ function uamswp_fad_section_location() {
 			global $location_fpage_title_general; // string
 			global $location_fpage_intro_general; // string
 
-		// Defined on the template or in a function such as uamswp_fad_location_query()
+		$ontology_site_values = uamswp_fad_ontology_site_values();
+			$locations = $ontology_site_values['locations']; // int[]
 
-			global $location_section_show; // bool
-			global $location_query; // WP_Post[]
-			global $locations; // int[]
-			global $location_ids; // int[]
-			global $location_count; // int
+		$location_query_function = uamswp_fad_location_query();
+			$location_query = $location_query_function['location_query']; // WP_Post[]
+			$location_section_show = $location_query_function['location_section_show']; // bool
+			$location_ids = $location_query_function['location_ids']; // int[]
+			$location_count = $location_query_function['location_count']; // int
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-location.php' );
 
