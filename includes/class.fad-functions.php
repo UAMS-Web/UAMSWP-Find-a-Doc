@@ -2103,10 +2103,9 @@ function uamswp_fad_ontology_nav_menu() {
 			$location_plural_name = $labels_location['location_plural_name']; // string
 			$location_plural_name_attr = $labels_location['location_plural_name_attr']; // string
 
-		// Typically defined in uamswp_fad_labels_expertise()
-
-			global $expertise_plural_name;
-			global $expertise_plural_name_attr;
+		$labels_expertise = uamswp_fad_labels_expertise();
+			$expertise_plural_name = $labels_expertise['expertise_plural_name']; // string
+			$expertise_plural_name_attr = $labels_expertise['expertise_plural_name_attr']; // string
 
 		// Typically defined in uamswp_fad_labels_expertise_descendant()
 
@@ -2370,13 +2369,12 @@ function uamswp_fad_fpage_text_replace($string) {
 			global $placeholder_location_archive_headline;
 			global $location_archive_headline;
 
-		// Defined in uamswp_fad_labels_expertise()
-
-			global $placeholder_expertise_single_name;
-			global $expertise_single_name;
-			global $placeholder_expertise_plural_name;
-			global $expertise_plural_name;
-			global $placeholder_expertise_page_title;
+		$labels_expertise = uamswp_fad_labels_expertise();
+			$expertise_single_name = $labels_expertise['expertise_single_name']; // string
+			$expertise_plural_name = $labels_expertise['expertise_plural_name']; // string
+			$placeholder_expertise_single_name = $labels_expertise['placeholder_expertise_single_name']; // string
+			$placeholder_expertise_plural_name = $labels_expertise['placeholder_expertise_plural_name']; // string
+			$placeholder_expertise_page_title = $labels_expertise['placeholder_expertise_page_title']; // string
 
 		// Defined in uamswp_fad_labels_expertise_descendant()
 
@@ -2716,14 +2714,14 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Make variables available outside of the function
 
-			global $expertise_single_name;
-			global $expertise_single_name_attr;
-			global $expertise_plural_name;
-			global $expertise_plural_name_attr;
-			global $placeholder_expertise_single_name;
-			global $placeholder_expertise_plural_name;
-			global $placeholder_expertise_page_title;
-			global $facet_labels;
+			global $expertise_single_name; // string
+			global $expertise_single_name_attr; // string
+			global $expertise_plural_name; // string
+			global $expertise_plural_name_attr; // string
+			global $placeholder_expertise_single_name; // string
+			global $placeholder_expertise_plural_name; // string
+			global $placeholder_expertise_page_title; // string
+			global $facet_labels; // array
 
 		$expertise_single_name = get_field('expertise_single_name', 'option') ?: 'Area of Expertise';
 		$expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
@@ -2751,6 +2749,21 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Add item to FacetWP labels array for Areas of Expertise facet on Clinical Resources archive/list
 		$facet_labels['resource_aoe'] = $expertise_plural_name;
 		$facet_labels['resource_aoe_attr'] = $expertise_plural_name_attr;
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$labels_expertise = array(
+				'expertise_single_name' => $expertise_single_name, // string
+				'expertise_single_name_attr' => $expertise_single_name_attr, // string
+				'expertise_plural_name' => $expertise_plural_name, // string
+				'expertise_plural_name_attr' => $expertise_plural_name_attr, // string
+				'placeholder_expertise_single_name' => $placeholder_expertise_single_name, // string
+				'placeholder_expertise_plural_name' => $placeholder_expertise_plural_name, // string
+				'placeholder_expertise_page_title' => $placeholder_expertise_page_title, // string
+				'facet_labels' => $facet_labels // array
+			);
+			return $labels_expertise;
+	
 	}
 
 	// Get the Find-a-Doc Settings values for area of expertise descendant item labels
@@ -6941,12 +6954,11 @@ function uamswp_fad_section_expertise() {
 			global $expertise_section_collapse_list; // Query for whether to collapse the list of locations in the locations section // bool (default: false)
 			global $expertise_descendant_list; // Query for whether this is a list of child areas of expertise within an area of expertise // bool (default: false)
 
-		// Defined in uamswp_fad_labels_expertise()
-
-			global $expertise_single_name; // string
-			global $expertise_single_name_attr; // string
-			global $expertise_plural_name; // string
-			global $expertise_plural_name_attr; // string
+		$labels_expertise = uamswp_fad_labels_expertise();
+			$expertise_single_name = $labels_expertise['expertise_single_name']; // string
+			$expertise_single_name_attr = $labels_expertise['expertise_single_name_attr']; // string
+			$expertise_plural_name = $labels_expertise['expertise_plural_name']; // string
+			$expertise_plural_name_attr = $labels_expertise['expertise_plural_name_attr']; // string
 
 		// Defined in uamswp_fad_fpage_text_expertise_general()
 
