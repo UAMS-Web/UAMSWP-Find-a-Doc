@@ -2960,13 +2960,13 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Make variables available outside of the function
 
-			global $treatment_single_name;
-			global $treatment_single_name_attr;
-			global $treatment_plural_name;
-			global $treatment_plural_name_attr;
-			global $placeholder_treatment_single_name;
-			global $placeholder_treatment_plural_name;
-			global $facet_labels;
+			global $treatment_single_name; // string
+			global $treatment_single_name_attr; // string
+			global $treatment_plural_name; // string
+			global $treatment_plural_name_attr; // string
+			global $placeholder_treatment_single_name; // string
+			global $placeholder_treatment_plural_name; // string
+			global $facet_labels; // array
 
 		$treatment_single_name = get_field('treatments_single_name', 'option') ?: 'Treatment/Procedure';
 		$treatment_single_name_attr = uamswp_attr_conversion($treatment_single_name);
