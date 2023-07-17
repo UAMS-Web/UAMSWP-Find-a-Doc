@@ -1300,24 +1300,6 @@ function uamswp_fad_ontology_site_values() {
 			global $page_url;
 			global $ontology_type;
 
-	// Make variables available outside of the function
-
-		global $navbar_subbrand_title;
-		global $navbar_subbrand_title_attr;
-		global $navbar_subbrand_title_url;
-		global $navbar_subbrand_parent;
-		global $navbar_subbrand_parent_attr;
-		global $navbar_subbrand_parent_url;
-		global $providers;
-		global $locations; // int[]
-		global $expertises;
-		global $expertise_descendants;
-		global $clinical_resources;
-		global $conditions_cpt;
-		global $treatments_cpt;
-		global $ancestors_ontology_farthest;
-		global $page_top_level_query;
-
 	// Ancestors
 
 		$ancestors = get_post_ancestors($page_id); // Get all ancestors

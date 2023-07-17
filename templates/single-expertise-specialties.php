@@ -64,7 +64,23 @@ $fpage_intro = $expertise_descendant_fpage_intro_expertise; // Fake subpage intr
 $fpage_intro_attr = uamswp_attr_conversion($fpage_intro); // Attribute-friendly version of fake subpage intro text
 
 // Get site header and site nav values for ontology subsections
-uamswp_fad_ontology_site_values();
+$ontology_site_values = uamswp_fad_ontology_site_values();
+	$site_nav_id = $ontology_site_values['site_nav_id']; // int
+	$navbar_subbrand_title = $ontology_site_values['navbar_subbrand']['title']['name']; // string
+	$navbar_subbrand_title_attr = $ontology_site_values['navbar_subbrand']['title']['attr']; // string
+	$navbar_subbrand_title_url = $ontology_site_values['navbar_subbrand']['title']['url']; // string
+	$navbar_subbrand_parent = $ontology_site_values['navbar_subbrand']['parent']['name']; // string
+	$navbar_subbrand_parent_attr = $ontology_site_values['navbar_subbrand']['parent']['attr']; // string
+	$navbar_subbrand_parent_url = $ontology_site_values['navbar_subbrand']['parent']['url']; // string
+	$providers = $ontology_site_values['providers']; // int[]
+	$locations = $ontology_site_values['locations']; // int[]
+	$expertises = $ontology_site_values['expertises']; // int[]
+	$expertise_descendants = $ontology_site_values['expertise_descendants'];
+	$clinical_resources = $ontology_site_values['clinical_resources']; // int[]
+	$conditions_cpt = $ontology_site_values['conditions_cpt']; // int[]
+	$treatments_cpt = $ontology_site_values['treatments_cpt']; // int[]
+	$ancestors_ontology_farthest = $ontology_site_values['ancestors_ontology_farthest'];
+	$page_top_level_query = $ontology_site_values['page_top_level_query']; // bool
 
 // Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
 
