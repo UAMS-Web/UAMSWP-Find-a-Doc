@@ -7038,7 +7038,25 @@ function uamswp_fad_fpage_text_replace($string) {
 				} else {
 					$clinical_resource_fpage_featured_image_expertise_url = $expertise_featured_image_url;
 				}
-	
+
+			// Create and return an array to be used on the templates and template parts
+		
+				$fpage_image_expertise = array(
+					'expertise_featured_image'									=> $expertise_featured_image, // int
+					'expertise_featured_image_url'								=> $expertise_featured_image_url, // string
+					'provider_fpage_featured_image_expertise'					=> $provider_fpage_featured_image_expertise, // int
+					'provider_fpage_featured_image_expertise_url'				=> $provider_fpage_featured_image_expertise_url, // string
+					'location_fpage_featured_image_expertise'					=> $location_fpage_featured_image_expertise, // int
+					'location_fpage_featured_image_expertise_url'				=> $location_fpage_featured_image_expertise_url, // string
+					'expertise_fpage_featured_image_expertise'					=> $expertise_fpage_featured_image_expertise, // int
+					'expertise_fpage_featured_image_expertise_url'				=> $expertise_fpage_featured_image_expertise_url, // string
+					'expertise_descendant_fpage_featured_image_expertise'		=> $expertise_descendant_fpage_featured_image_expertise, // int
+					'expertise_descendant_fpage_featured_image_expertise_url'	=> $expertise_descendant_fpage_featured_image_expertise_url, // string
+					'clinical_resource_fpage_featured_image_expertise'			=> $clinical_resource_fpage_featured_image_expertise, // int
+					'clinical_resource_fpage_featured_image_expertise_url'		=> $clinical_resource_fpage_featured_image_expertise_url, // string
+				);
+				return $fpage_image_expertise;
+
 		}
 
 		// Get field values for the featured image of a fake subpage (or section) in a Clinical Resource subsection (or profile)
