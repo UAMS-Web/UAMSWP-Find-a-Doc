@@ -3640,32 +3640,32 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Make variables available outside of the function
 
-				global $location_fpage_title_provider;
-				global $location_fpage_intro_provider;
-				global $location_fpage_ref_main_title_provider;
-				global $location_fpage_ref_main_intro_provider;
-				global $location_fpage_ref_main_link_provider;
-				global $expertise_fpage_title_provider;
-				global $expertise_fpage_intro_provider;
-				global $expertise_fpage_ref_main_title_provider;
-				global $expertise_fpage_ref_main_intro_provider;
-				global $expertise_fpage_ref_main_link_provider;
-				global $clinical_resource_fpage_title_provider;
-				global $clinical_resource_fpage_intro_provider;
-				global $clinical_resource_fpage_ref_main_title_provider;
-				global $clinical_resource_fpage_ref_main_intro_provider;
-				global $clinical_resource_fpage_ref_main_link_provider;
-				global $clinical_resource_fpage_more_text_provider;
-				global $clinical_resource_fpage_more_link_text_provider;
-				global $clinical_resource_fpage_more_link_descr_provider;
-				global $condition_fpage_title_provider;
-				global $condition_fpage_intro_provider;
-				global $treatment_fpage_title_provider;
-				global $treatment_fpage_intro_provider;
-				global $condition_treatment_fpage_title_provider;
-				global $condition_treatment_fpage_intro_provider;
-				global $placeholder_short_name;
-				global $placeholder_short_name_possessive;
+				global $location_fpage_title_provider; // string
+				global $location_fpage_intro_provider; // string
+				global $location_fpage_ref_main_title_provider; // string
+				global $location_fpage_ref_main_intro_provider; // string
+				global $location_fpage_ref_main_link_provider; // string
+				global $expertise_fpage_title_provider; // string
+				global $expertise_fpage_intro_provider; // string
+				global $expertise_fpage_ref_main_title_provider; // string
+				global $expertise_fpage_ref_main_intro_provider; // string
+				global $expertise_fpage_ref_main_link_provider; // string
+				global $clinical_resource_fpage_title_provider; // string
+				global $clinical_resource_fpage_intro_provider; // string
+				global $clinical_resource_fpage_ref_main_title_provider; // string
+				global $clinical_resource_fpage_ref_main_intro_provider; // string
+				global $clinical_resource_fpage_ref_main_link_provider; // string
+				global $clinical_resource_fpage_more_text_provider; // string
+				global $clinical_resource_fpage_more_link_text_provider; // string
+				global $clinical_resource_fpage_more_link_descr_provider; // string
+				global $condition_fpage_title_provider; // string
+				global $condition_fpage_intro_provider; // string
+				global $treatment_fpage_title_provider; // string
+				global $treatment_fpage_intro_provider; // string
+				global $condition_treatment_fpage_title_provider; // string
+				global $condition_treatment_fpage_intro_provider; // string
+				global $placeholder_short_name; // string
+				global $placeholder_short_name_possessive; // string
 
 			// Locations Fake Subpage (or Section)
 
@@ -4085,7 +4085,39 @@ function uamswp_fad_fpage_text_replace($string) {
 					$condition_treatment_fpage_title_provider = $condition_treatment_fpage_title_provider ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_provider) : ''; // Title
 					$condition_treatment_fpage_intro_provider = $condition_treatment_fpage_intro_provider ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_provider) : ''; // Intro text
 
-		}
+			// Create and return an array to be used on the templates and template parts
+		
+				$fpage_text_provider = array(
+					'location_fpage_title_provider'						=> $location_fpage_title_provider, // string
+					'location_fpage_intro_provider'						=> $location_fpage_intro_provider, // string
+					'location_fpage_ref_main_title_provider'			=> $location_fpage_ref_main_title_provider, // string
+					'location_fpage_ref_main_intro_provider'			=> $location_fpage_ref_main_intro_provider, // string
+					'location_fpage_ref_main_link_provider'				=> $location_fpage_ref_main_link_provider, // string
+					'expertise_fpage_title_provider'					=> $expertise_fpage_title_provider, // string
+					'expertise_fpage_intro_provider'					=> $expertise_fpage_intro_provider, // string
+					'expertise_fpage_ref_main_title_provider'			=> $expertise_fpage_ref_main_title_provider, // string
+					'expertise_fpage_ref_main_intro_provider'			=> $expertise_fpage_ref_main_intro_provider, // string
+					'expertise_fpage_ref_main_link_provider'			=> $expertise_fpage_ref_main_link_provider, // string
+					'clinical_resource_fpage_title_provider'			=> $clinical_resource_fpage_title_provider, // string
+					'clinical_resource_fpage_intro_provider'			=> $clinical_resource_fpage_intro_provider, // string
+					'clinical_resource_fpage_ref_main_title_provider'	=> $clinical_resource_fpage_ref_main_title_provider, // string
+					'clinical_resource_fpage_ref_main_intro_provider'	=> $clinical_resource_fpage_ref_main_intro_provider, // string
+					'clinical_resource_fpage_ref_main_link_provider'	=> $clinical_resource_fpage_ref_main_link_provider, // string
+					'clinical_resource_fpage_more_text_provider'		=> $clinical_resource_fpage_more_text_provider, // string
+					'clinical_resource_fpage_more_link_text_provider'	=> $clinical_resource_fpage_more_link_text_provider, // string
+					'clinical_resource_fpage_more_link_descr_provider'	=> $clinical_resource_fpage_more_link_descr_provider, // string
+					'condition_fpage_title_provider'					=> $condition_fpage_title_provider, // string
+					'condition_fpage_intro_provider'					=> $condition_fpage_intro_provider, // string
+					'treatment_fpage_title_provider'					=> $treatment_fpage_title_provider, // string
+					'treatment_fpage_intro_provider'					=> $treatment_fpage_intro_provider, // string
+					'condition_treatment_fpage_title_provider'			=> $condition_treatment_fpage_title_provider, // string
+					'condition_treatment_fpage_intro_provider'			=> $condition_treatment_fpage_intro_provider, // string
+					'placeholder_short_name'							=> $placeholder_short_name, // string
+					'placeholder_short_name_possessive'					=> $placeholder_short_name_possessive // string
+				);
+				return $fpage_text_provider;
+
+	}
 
 		// Get field values for fake subpage text elements in an Location subsection (or profile)
 		function uamswp_fad_fpage_text_location() {
@@ -7678,13 +7710,13 @@ function uamswp_fad_fpage_text_image_overlay() {
 				||
 				!isset($provider_fpage_ref_top_link_expertise) || empty($provider_fpage_ref_top_link_expertise)
 				) {
-				uamswp_fad_fpage_text_provider();
-				global $provider_fpage_ref_main_title_expertise;
-				global $provider_fpage_ref_main_intro_expertise;
-				global $provider_fpage_ref_main_link_expertise;
-				global $provider_fpage_ref_top_title_expertise;
-				global $provider_fpage_ref_top_intro_expertise;
-				global $provider_fpage_ref_top_link_expertise;
+				$fpage_text_provider = uamswp_fad_fpage_text_provider();
+					$provider_fpage_ref_main_title_expertise = $fpage_text_provider['provider_fpage_ref_main_title_expertise']; // string
+					$provider_fpage_ref_main_title_expertise = $fpage_text_provider['provider_fpage_ref_main_title_expertise']; // string
+					$provider_fpage_ref_main_link_expertise = $fpage_text_provider['provider_fpage_ref_main_link_expertise']; // string
+					$provider_fpage_ref_top_title_expertise = $fpage_text_provider['provider_fpage_ref_top_title_expertise']; // string
+					$provider_fpage_ref_top_intro_expertise = $fpage_text_provider['provider_fpage_ref_top_intro_expertise']; // string
+					$provider_fpage_ref_top_link_expertise = $fpage_text_provider['provider_fpage_ref_top_link_expertise']; // string
 			}
 		} elseif ( $current_fpage == 'locations' ) {
 			global $location_fpage_ref_main_title_expertise; // General Title of a Reference to the Main Location Archive on a Fake Subpage for Locations // string
