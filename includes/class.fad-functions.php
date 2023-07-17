@@ -1907,10 +1907,10 @@ function uamswp_fad_post_title() {
 
 		// Make variables available outside of the function
 
-			global $clinical_resource_query;
-			global $clinical_resource_section_show;
-			global $clinical_resource_ids;
-			global $clinical_resource_count;
+			global $clinical_resource_query; // WP_Post[]
+			global $clinical_resource_section_show; // bool
+			global $clinical_resource_ids; // int[]
+			global $clinical_resource_count; // int
 
 		// Check/define variables
 		$clinical_resource_postsPerPage = ( isset($clinical_resource_postsPerPage) && !empty($clinical_resource_postsPerPage) ) ? $clinical_resource_postsPerPage : 4;
@@ -1934,6 +1934,17 @@ function uamswp_fad_post_title() {
 		} else {
 			$clinical_resource_section_show = false;
 		}
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$clinical_resource_query_function = array(
+				'clinical_resource_query' => $clinical_resource_query, // WP_Post[]
+				'clinical_resource_section_show' => $clinical_resource_section_show, // bool
+				'clinical_resource_ids' => $clinical_resource_ids, // int[]
+				'clinical_resource_count' => $clinical_resource_count // int
+			);
+			return $clinical_resource_query_function;
+
 	}
 
 	// Query for whether related conditions content section should be displayed on ontology pages/subsections
@@ -2043,9 +2054,8 @@ function uamswp_fad_ontology_nav_menu() {
 		$expertise_query_function = uamswp_fad_expertise_query();
 			$expertise_section_show = $expertise_query_function['expertise_section_show']; // bool
 
-		// Typically defined in uamswp_fad_clinical_resource_query()
-
-			global $clinical_resource_section_show;
+		$clinical_resource_query_function = uamswp_fad_clinical_resource_query();
+			$clinical_resource_section_show = $clinical_resource_query_function['clinical_resource_section_show']; // bool
 
 		$ontology_site_values = uamswp_fad_ontology_site_values();
 			$expertise_descendants = $ontology_site_values['expertise_descendants'];
@@ -6921,11 +6931,10 @@ function uamswp_fad_section_clinical_resource() {
 			global $clinical_resource_fpage_title_general; // string
 			global $clinical_resource_fpage_intro_general; // string
 
-		// Defined in uamswp_fad_clinical_resource_query()
-
-			global $clinical_resource_section_show; // bool
-			global $clinical_resource_query; // WP_Post[]
-			global $clinical_resource_count; // int
+		$clinical_resource_query_function = uamswp_fad_clinical_resource_query();
+			$clinical_resource_query = $clinical_resource_query_function['clinical_resource_query']; // WP_Post[]
+			$clinical_resource_section_show = $clinical_resource_query_function['clinical_resource_section_show']; // bool
+			$clinical_resource_count = $clinical_resource_query_function['clinical_resource_count']; // int
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-clinical-resource.php' );
 
