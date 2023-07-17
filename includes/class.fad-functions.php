@@ -2111,10 +2111,9 @@ function uamswp_fad_ontology_nav_menu() {
 			$expertise_descendant_plural_name = $labels_expertise_descendant['expertise_descendant_plural_name']; // string
 			$expertise_descendant_plural_name_attr = $labels_expertise_descendant['expertise_descendant_plural_name_attr']; // string
 
-		// Typically defined in uamswp_fad_labels_clinical_resource()
-
-			global $clinical_resource_plural_name;
-			global $clinical_resource_plural_name_attr;
+		$labels_clinical_resource = uamswp_fad_labels_clinical_resource();
+			$clinical_resource_plural_name = $labels_clinical_resource['clinical_resource_plural_name']; // string
+			$clinical_resource_plural_name_attr = $labels_clinical_resource['clinical_resource_plural_name_attr']; // string
 
 	include( UAMS_FAD_PATH . '/templates/parts/single-expertise-nav.php');
 }
@@ -2388,12 +2387,11 @@ function uamswp_fad_fpage_text_replace($string) {
 			global $placeholder_expertise_archive_intro_text;
 			global $expertise_archive_intro_text;
 
-		// Defined in uamswp_fad_labels_clinical_resource()
-
-			global $placeholder_clinical_resource_single_name;
-			global $clinical_resource_single_name;
-			global $placeholder_clinical_resource_plural_name;
-			global $clinical_resource_plural_name;
+		$labels_clinical_resource = uamswp_fad_labels_clinical_resource();
+			$clinical_resource_single_name = $labels_clinical_resource['clinical_resource_single_name']; // string
+			$clinical_resource_plural_name = $labels_clinical_resource['clinical_resource_plural_name']; // string
+			$placeholder_clinical_resource_single_name = $labels_clinical_resource['placeholder_clinical_resource_single_name']; // string
+			$placeholder_clinical_resource_plural_name = $labels_clinical_resource['placeholder_clinical_resource_plural_name']; // string
 
 		// Defined in uamswp_fad_archive_text_clinical_resource()
 
@@ -2804,12 +2802,12 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Make variables available outside of the function
 
-			global $clinical_resource_single_name;
-			global $clinical_resource_single_name_attr;
-			global $clinical_resource_plural_name;
-			global $clinical_resource_plural_name_attr;
-			global $placeholder_clinical_resource_single_name;
-			global $placeholder_clinical_resource_plural_name;
+			global $clinical_resource_single_name; // string
+			global $clinical_resource_single_name_attr; // string
+			global $clinical_resource_plural_name; // string
+			global $clinical_resource_plural_name_attr; // string
+			global $placeholder_clinical_resource_single_name; // string
+			global $placeholder_clinical_resource_plural_name; // string
 
 		$clinical_resource_single_name = get_field('clinical_resource_single_name', 'option') ?: 'Clinical Resource';
 		$clinical_resource_single_name_attr = uamswp_attr_conversion($clinical_resource_single_name);
@@ -2819,6 +2817,19 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
 		$placeholder_clinical_resource_single_name = '[Clinical Resource]';
 		$placeholder_clinical_resource_plural_name = '[Clinical Resources]';
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$labels_clinical_resource = array(
+				'clinical_resource_single_name' => $clinical_resource_single_name, // string
+				'clinical_resource_single_name_attr' => $clinical_resource_single_name_attr, // string
+				'clinical_resource_plural_name' => $clinical_resource_plural_name, // string
+				'clinical_resource_plural_name_attr' => $clinical_resource_plural_name_attr, // string
+				'placeholder_clinical_resource_single_name' => $placeholder_clinical_resource_single_name, // string
+				'placeholder_clinical_resource_plural_name' => $placeholder_clinical_resource_plural_name // string
+			);
+			return $labels_clinical_resource;
+
 	}
 
 	// Get the Find-a-Doc Settings values for clinical resource facet labels
@@ -7020,12 +7031,11 @@ function uamswp_fad_section_clinical_resource() {
 			global $clinical_resource_section_more_link_key; // string
 			global $clinical_resource_section_more_link_value; // string
 
-		// Defined in uamswp_fad_labels_clinical_resource()
-
-			global $clinical_resource_single_name; // string
-			global $clinical_resource_single_name_attr; // string
-			global $clinical_resource_plural_name; // string
-			global $clinical_resource_plural_name_attr; // string
+		$labels_clinical_resource = uamswp_fad_labels_clinical_resource();
+			$clinical_resource_single_name = $labels_clinical_resource['clinical_resource_single_name']; // string
+			$clinical_resource_single_name_attr = $labels_clinical_resource['clinical_resource_single_name_attr']; // string
+			$clinical_resource_plural_name = $labels_clinical_resource['clinical_resource_plural_name']; // string
+			$clinical_resource_plural_name_attr = $labels_clinical_resource['clinical_resource_plural_name_attr']; // string
 
 		// Defined in uamswp_fad_fpage_text_clinical_resource_general()
 
