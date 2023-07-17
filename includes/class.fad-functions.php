@@ -1520,7 +1520,7 @@ function uamswp_fad_post_title() {
 // Queries for whether each of the related ontology content sections should be displayed on ontology pages/subsections
 
 	// Query for whether related providers content section should be displayed on ontology pages/subsections
-	function uamswp_fad_provider_query() {
+	function uamswp_fad_provider_query( $providers ) {
 
 		// Bring in variables from outside of the function
 
@@ -1528,9 +1528,11 @@ function uamswp_fad_post_title() {
 
 				global $jump_link_count;
 
-			$ontology_site_values = uamswp_fad_ontology_site_values();
-				// $site_nav_id = $ontology_site_values['site_nav_id']; // int
-				$providers = $ontology_site_values['providers'];
+			if ( !isset($providers) ) {
+				$ontology_site_values = uamswp_fad_ontology_site_values();
+					// $site_nav_id = $ontology_site_values['site_nav_id']; // int
+					$providers = $ontology_site_values['providers'];
+			}
 
 		// Make variables available outside of the function
 

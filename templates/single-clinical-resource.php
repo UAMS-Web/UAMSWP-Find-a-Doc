@@ -110,7 +110,7 @@ $jump_link_count = 0;
 
 // Query for whether related providers content section should be displayed on ontology pages/subsections
 $providers = get_field( "clinical_resource_providers" );
-uamswp_fad_provider_query();
+uamswp_fad_provider_query( $providers );
 
 // Query for whether related locations content section should be displayed on a page
 $locations = get_field('clinical_resource_locations');

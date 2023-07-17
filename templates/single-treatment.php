@@ -107,7 +107,7 @@ $cta_repeater = get_field('treatment_procedure_cta');
 
 // Query for whether related providers content section should be displayed on ontology pages/subsections
 $providers = get_field('treatment_procedure_physicians');
-uamswp_fad_provider_query();
+uamswp_fad_provider_query( $providers );
 
 // Query for whether related locations content section should be displayed on a page
 $locations = get_field('treatment_procedure_locations');

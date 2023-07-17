@@ -493,7 +493,7 @@ while ( have_posts() ) : the_post(); ?>
 
 		// Query for whether related providers content section should be displayed on ontology pages/subsections
 		$providers = get_field('physician_locations');
-		uamswp_fad_provider_query();
+		uamswp_fad_provider_query( $providers );
 
 		// Query for whether related descendant locations content section should be displayed on a page
 		$current_id = get_the_ID();
