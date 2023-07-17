@@ -7358,10 +7358,18 @@ function uamswp_fad_labels_jump_links() {
 
 	// Make variables available outside of the function
 
-		global $fad_jump_links_title;
+		global $fad_jump_links_title; // string
 
 	// Jump Links Section Title
 	$fad_jump_links_title = get_field('fad_jump_links_title', 'option') ?: 'Content';
+
+	// Create and return an array to be used on the templates and template parts
+
+		$labels_jump_links = array(
+			'fad_jump_links_title'	=> $fad_jump_links_title // string
+		);
+		return $labels_jump_links;
+
 }
 
 // Crop and resize images for Open Graph and Twitter
