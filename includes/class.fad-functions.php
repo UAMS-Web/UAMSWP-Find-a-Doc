@@ -7299,36 +7299,58 @@ function uamswp_fad_appointment_refer() {
 
 	// Make variables available outside of the function
 
-		global $appointment_refer_phone_number;
-		global $appointment_refer_phone_label;
-		global $appointment_refer_phone_label_attr;
-		global $appointment_refer_phone_info;
-		global $appointment_refer_fax_number;
-		global $appointment_refer_fax_label;
-		global $appointment_refer_fax_label_attr;
-		global $appointment_refer_fax_info;
-		global $appointment_refer_web_url;
-		global $appointment_refer_web_label;
-		global $appointment_refer_web_label_attr;
-		global $appointment_refer_web_info;
+		global $appointment_refer_phone_number; // string
+		global $appointment_refer_phone_label; // string
+		global $appointment_refer_phone_label_attr; // string
+		global $appointment_refer_phone_info; // string
+		global $appointment_refer_fax_number; // string
+		global $appointment_refer_fax_label; // string
+		global $appointment_refer_fax_label_attr; // string
+		global $appointment_refer_fax_info; // string
+		global $appointment_refer_web_url; // string
+		global $appointment_refer_web_label; // string
+		global $appointment_refer_web_label_attr; // string
+		global $appointment_refer_web_info; // string
 
 	// Phone Number Information
-	$appointment_refer_phone_number = get_field('appointment_refer_phone_number', 'option') ?: '';
-	$appointment_refer_phone_label = get_field('appointment_refer_phone_label', 'option') ?: '';
-	$appointment_refer_phone_label_attr = uamswp_attr_conversion($appointment_refer_phone_label);
-	$appointment_refer_phone_info = get_field('appointment_refer_phone_info', 'option') ?: '';
+
+		$appointment_refer_phone_number = get_field('appointment_refer_phone_number', 'option') ?: '';
+		$appointment_refer_phone_label = get_field('appointment_refer_phone_label', 'option') ?: '';
+		$appointment_refer_phone_label_attr = uamswp_attr_conversion($appointment_refer_phone_label);
+		$appointment_refer_phone_info = get_field('appointment_refer_phone_info', 'option') ?: '';
 
 	// Fax Information
-	$appointment_refer_fax_number = get_field('appointment_refer_fax_number', 'option') ?: '';
-	$appointment_refer_fax_label = get_field('appointment_refer_fax_label', 'option') ?: '';
-	$appointment_refer_fax_label_attr = uamswp_attr_conversion($appointment_refer_fax_label);
-	$appointment_refer_fax_info = get_field('appointment_refer_fax_info', 'option') ?: '';
+
+		$appointment_refer_fax_number = get_field('appointment_refer_fax_number', 'option') ?: '';
+		$appointment_refer_fax_label = get_field('appointment_refer_fax_label', 'option') ?: '';
+		$appointment_refer_fax_label_attr = uamswp_attr_conversion($appointment_refer_fax_label);
+		$appointment_refer_fax_info = get_field('appointment_refer_fax_info', 'option') ?: '';
 
 	// Webpage Information
-	$appointment_refer_web_url = get_field('appointment_refer_web_url', 'option') ?: '';
-	$appointment_refer_web_label = get_field('appointment_refer_web_label', 'option') ?: '';
-	$appointment_refer_web_label_attr = uamswp_attr_conversion($appointment_refer_web_label);
-	$appointment_refer_web_info = get_field('appointment_refer_web_info', 'option') ?: '';
+
+		$appointment_refer_web_url = get_field('appointment_refer_web_url', 'option') ?: '';
+		$appointment_refer_web_label = get_field('appointment_refer_web_label', 'option') ?: '';
+		$appointment_refer_web_label_attr = uamswp_attr_conversion($appointment_refer_web_label);
+		$appointment_refer_web_info = get_field('appointment_refer_web_info', 'option') ?: '';
+
+	// Create and return an array to be used on the templates and template parts
+
+		$appointment_patients = array(
+			'appointment_refer_phone_number'		=> $appointment_refer_phone_number, // string
+			'appointment_refer_phone_label'			=> $appointment_refer_phone_label, // string
+			'appointment_refer_phone_label_attr'	=> $appointment_refer_phone_label_attr, // string
+			'appointment_refer_phone_info'			=> $appointment_refer_phone_info, // string
+			'appointment_refer_fax_number'			=> $appointment_refer_fax_number, // string
+			'appointment_refer_fax_label'			=> $appointment_refer_fax_label, // string
+			'appointment_refer_fax_label_attr'		=> $appointment_refer_fax_label_attr, // string
+			'appointment_refer_fax_info'			=> $appointment_refer_fax_info, // string
+			'appointment_refer_web_url'				=> $appointment_refer_web_url, // string
+			'appointment_refer_web_label'			=> $appointment_refer_web_label, // string
+			'appointment_refer_web_label_attr'		=> $appointment_refer_web_label_attr, // string
+			'appointment_refer_web_info'			=> $appointment_refer_web_info, // string
+		);
+		return $appointment_patients;
+
 }
 
 // Get the Find-a-Doc Settings value for jump links (a.k.a. anchor links)
