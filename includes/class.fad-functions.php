@@ -1825,6 +1825,22 @@ function uamswp_fad_post_title() {
 				$expertise_content_nav_show = false;
 			}
 		}
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$expertise_descendant_query_function = array(
+				'expertise_descendant_query' => $expertise_descendant_query, // WP_Post[]
+				'expertise_descendant_section_show' => $expertise_descendant_section_show, // bool
+				'expertise_descendant_ids' => $expertise_descendant_ids, // int[]
+				'expertise_descendant_count' => $expertise_descendant_count, // int
+				'expertise_content_query' => $expertise_content_query, // WP_Post[]
+				'expertise_content_nav_show' => $expertise_content_nav_show, // bool
+				'expertise_content_ids' => $expertise_content_ids, // int[]
+				'expertise_content_count' => $expertise_content_count, // int
+				'expertise_content_nav' => $expertise_content_nav // string
+			);
+			return $expertise_descendant_query_function;
+
 	}
 
 	// Query for whether related areas of expertise content section should be displayed on ontology pages/subsections
@@ -2021,12 +2037,13 @@ function uamswp_fad_ontology_nav_menu() {
 
 			global $clinical_resource_section_show;
 
-		// Typically defined in uamswp_fad_expertise_descendant_query()
+		$ontology_site_values = uamswp_fad_ontology_site_values();
+			$expertise_descendants = $ontology_site_values['expertise_descendants'];
 
-			global $expertise_descendant_section_show;
-			global $expertise_descendants;
-			global $expertise_content_nav_show;
-			global $expertise_content_nav;
+		$expertise_descendant_query_function = uamswp_fad_expertise_descendant_query();
+			$expertise_descendant_section_show = $expertise_descendant_query_function['expertise_descendant_section_show']; // bool
+			$expertise_content_nav_show = $expertise_descendant_query_function['expertise_content_nav_show']; // bool
+			$expertise_content_nav = $expertise_descendant_query_function['expertise_content_nav']; // string
 
 		// Typically defined in uamswp_fad_labels_provider()
 
@@ -6844,11 +6861,10 @@ function uamswp_fad_section_expertise() {
 			global $expertise_query; // WP_Post[]
 			global $expertise_count; // int
 
-		// Defined on the template or in a function such as uamswp_fad_expertise_descendant_query()
-
-			global $expertise_descendant_section_show; // bool
-			global $expertise_descendant_query; // WP_Post[]
-			global $expertise_descendant_count; // int
+		$expertise_descendant_query_function = uamswp_fad_expertise_descendant_query();
+			$expertise_descendant_query = $expertise_descendant_query_function['expertise_descendant_query']; // WP_Post[]
+			$expertise_descendant_section_show = $expertise_descendant_query_function['expertise_descendant_section_show']; // bool
+			$expertise_descendant_count = $expertise_descendant_query_function['expertise_descendant_count']; // int
 
 		// Defined on the template or in a function such as uamswp_fad_ontology_hide()
 
