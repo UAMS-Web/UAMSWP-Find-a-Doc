@@ -7381,12 +7381,12 @@ function uamswp_meta_image_resize() {
 
 	// Make variables available outside of the function
 
-		global $meta_og_image;
-		global $meta_og_image_width;
-		global $meta_og_image_height;
-		global $meta_twitter_image;
-		global $page_image_twitter_width;
-		global $page_image_twitter_height;
+		global $meta_og_image; // string
+		global $meta_og_image_width; // int
+		global $meta_og_image_height; // int
+		global $meta_twitter_image; // string
+		global $page_image_twitter_width; // int
+		global $page_image_twitter_height; // int
 
 	// Create multidimensional associative array for defining width and height for each social meta image
 	$image_size = array();
@@ -7431,6 +7431,19 @@ function uamswp_meta_image_resize() {
 		$page_image_twitter_width = '';
 		$page_image_twitter_height = '';
 	}
+
+	// Create and return an array to be used on the templates and template parts
+
+		$meta_image_resize = array(
+			'meta_og_image'				=> $meta_og_image, // string
+			'meta_og_image_width'		=> $meta_og_image_width, // int
+			'meta_og_image_height'		=> $meta_og_image_height, // int
+			'meta_twitter_image'		=> $meta_twitter_image, // string
+			'page_image_twitter_width'	=> $page_image_twitter_width, // int
+			'page_image_twitter_height'	=> $page_image_twitter_height // int
+		);
+		return $meta_image_resize;
+
 }
 
 // Construct Provider List Section
