@@ -2404,12 +2404,11 @@ function uamswp_fad_fpage_text_replace($string) {
 			$placeholder_clinical_resource_type_single_name = $labels_clinical_resource_facet['placeholder_clinical_resource_type_single_name']; // string
 			$placeholder_clinical_resource_type_plural_name = $labels_clinical_resource_facet['placeholder_clinical_resource_type_plural_name']; // string
 
-		// Defined in uamswp_fad_labels_condition_treatment()
-
-			global $placeholder_condition_treatment_single_name;
-			global $condition_treatment_single_name;
-			global $placeholder_condition_treatment_plural_name;
-			global $condition_treatment_plural_name;
+		$labels_condition_treatment = uamswp_fad_labels_condition_treatment();
+			$condition_treatment_single_name = $labels_condition_treatment['condition_treatment_single_name']; // string
+			$condition_treatment_plural_name = $labels_condition_treatment['condition_treatment_plural_name']; // string
+			$placeholder_condition_treatment_single_name = $labels_condition_treatment['placeholder_condition_treatment_single_name']; // string
+			$placeholder_condition_treatment_plural_name = $labels_condition_treatment['placeholder_condition_treatment_plural_name']; // string
 
 		// Defined in uamswp_fad_labels_condition()
 
@@ -2892,6 +2891,19 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
 		$placeholder_condition_treatment_single_name = '[Condition or Treatment]';
 		$placeholder_condition_treatment_plural_name = '[Conditions and Treatments]';
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$labels_condition_treatment = array(
+				'condition_treatment_single_name' => $condition_treatment_single_name, // string
+				'condition_treatment_single_name_attr' => $condition_treatment_single_name_attr, // string
+				'condition_treatment_plural_name' => $condition_treatment_plural_name, // string
+				'condition_treatment_plural_name_attr' => $condition_treatment_plural_name_attr, // string
+				'placeholder_condition_treatment_single_name' => $placeholder_condition_treatment_single_name, // string
+				'placeholder_condition_treatment_plural_name' => $placeholder_condition_treatment_plural_name // string
+			);
+			return $labels_condition_treatment;
+
 	}
 
 	// Get the Find-a-Doc Settings values for condition labels
