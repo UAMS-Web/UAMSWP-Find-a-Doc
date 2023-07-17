@@ -9,7 +9,15 @@
 // Get system settings for ontology item labels
 
 	// Get system settings for provider labels
-	uamswp_fad_labels_provider();
+	$labels_provider = uamswp_fad_labels_provider();
+		$provider_single_name = $labels_provider['provider_single_name']; // string
+		$provider_single_name_attr = $labels_provider['provider_single_name_attr']; // string
+		$provider_plural_name = $labels_provider['provider_plural_name']; // string
+		$provider_plural_name_attr = $labels_provider['provider_plural_name_attr']; // string
+		$placeholder_provider_single_name = $labels_provider['placeholder_provider_single_name']; // string
+		$placeholder_provider_plural_name = $labels_provider['placeholder_provider_plural_name']; // string
+		$placeholder_provider_short_name = $labels_provider['placeholder_provider_short_name']; // string
+		$placeholder_provider_short_name_possessive = $labels_provider['placeholder_provider_short_name_possessive']; // string
 
 	// Get system settings for location labels
 	uamswp_fad_labels_location();

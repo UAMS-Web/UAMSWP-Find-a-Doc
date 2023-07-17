@@ -2548,18 +2548,6 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get the Find-a-Doc Settings values for provider labels
 	function uamswp_fad_labels_provider() {
 
-		// Make variables available outside of the function
-
-			global $provider_single_name; // string
-			global $provider_single_name_attr; // string
-			global $provider_plural_name; // string
-			global $provider_plural_name_attr; // string
-			global $placeholder_provider_single_name; // string
-			global $placeholder_provider_plural_name; // string
-			global $placeholder_provider_short_name; // string
-			global $placeholder_provider_short_name_possessive; // string
-			global $facet_labels; // array
-
 		$provider_single_name = get_field('provider_single_name', 'option') ?: 'Provider';
 		$provider_single_name_attr = uamswp_attr_conversion($provider_single_name);
 		$provider_plural_name = get_field('provider_plural_name', 'option') ?: 'Providers';
