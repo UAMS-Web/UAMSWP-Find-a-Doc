@@ -6525,11 +6525,19 @@ function uamswp_fad_fpage_text_replace($string) {
 			global $location_archive_image;
 
 		// Get the Find-a-Doc Settings value for the featured image of the location archive
-		$location_archive_image = get_field('location_archive_featured_image', 'option'); // Featured image
+		$location_archive_image = get_field('location_archive_featured_image', 'option'); // Featured image ID
 
 		// If the variable is not set or is empty...
 		// Set a hardcoded fallback value
 		$location_archive_image = ( isset($location_archive_image) && !empty($location_archive_image) ) ? $location_archive_image : ''; // Featured image
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$archive_image_location = array(
+				'location_archive_image'	=> $location_archive_image // int
+			);
+			return $archive_image_location;
+
 
 	}
 
@@ -7804,8 +7812,8 @@ function uamswp_fad_fpage_text_image_overlay() {
 		}
 		global $location_archive_image; // Location archive featured image ID // int
 		if ( !isset($location_archive_image) || empty($location_archive_image) ) {
-			uamswp_fad_archive_image_location();
-			global $location_archive_image;
+			$archive_image_location = uamswp_fad_archive_image_location();
+				$location_archive_image = $archive_image_location['location_archive_image']; // int
 		}
 		global $expertise_archive_image; // Area of Expertise archive featured image ID // int
 		if ( !isset($expertise_archive_image) || empty($expertise_archive_image) ) {
