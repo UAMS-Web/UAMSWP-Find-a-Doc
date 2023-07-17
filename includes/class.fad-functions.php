@@ -2410,12 +2410,11 @@ function uamswp_fad_fpage_text_replace($string) {
 			$placeholder_condition_treatment_single_name = $labels_condition_treatment['placeholder_condition_treatment_single_name']; // string
 			$placeholder_condition_treatment_plural_name = $labels_condition_treatment['placeholder_condition_treatment_plural_name']; // string
 
-		// Defined in uamswp_fad_labels_condition()
-
-			global $placeholder_condition_single_name;
-			global $condition_single_name;
-			global $placeholder_condition_plural_name;
-			global $condition_plural_name;
+		$labels_condition = uamswp_fad_labels_condition();
+			$condition_single_name = $labels_condition['condition_single_name']; // string
+			$condition_plural_name = $labels_condition['condition_plural_name']; // string
+			$placeholder_condition_single_name = $labels_condition['placeholder_condition_single_name']; // string
+			$placeholder_condition_plural_name = $labels_condition['placeholder_condition_plural_name']; // string
 
 		// Defined in uamswp_fad_archive_text_condition()
 
@@ -2911,13 +2910,13 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Make variables available outside of the function
 
-			global $condition_single_name;
-			global $condition_single_name_attr;
-			global $condition_plural_name;
-			global $condition_plural_name_attr;
-			global $placeholder_condition_single_name;
-			global $placeholder_condition_plural_name;
-			global $facet_labels;
+			global $condition_single_name; // string
+			global $condition_single_name_attr; // string
+			global $condition_plural_name; // string
+			global $condition_plural_name_attr; // string
+			global $placeholder_condition_single_name; // string
+			global $placeholder_condition_plural_name; // string
+			global $facet_labels; // array
 
 		$condition_single_name = get_field('conditions_single_name', 'option') ?: 'Condition';
 		$condition_single_name_attr = uamswp_attr_conversion($condition_single_name);
@@ -2940,6 +2939,20 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Add item to FacetWP labels array for Conditions facet on Clinical Resources archive/list
 		$facet_labels['resource_conditions'] = $condition_plural_name;
 		$facet_labels['resource_conditions_attr'] = $condition_plural_name_attr;
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$labels_condition = array(
+				'condition_single_name' => $condition_single_name, // string
+				'condition_single_name_attr' => $condition_single_name_attr, // string
+				'condition_plural_name' => $condition_plural_name, // string
+				'condition_plural_name_attr' => $condition_plural_name_attr, // string
+				'placeholder_condition_single_name' => $placeholder_condition_single_name, // string
+				'placeholder_condition_plural_name' => $placeholder_condition_plural_name, // string
+				'facet_labels' => $facet_labels // array
+			);
+			return $labels_condition;
+
 	}
 
 	// Get the Find-a-Doc Settings values for treatment labels
@@ -7093,12 +7106,11 @@ function uamswp_fad_section_condition() {
 			global $condition_section_intro; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of condition section intro text in general placements)
 			global $condition_section_link_item; // Query for whether to link the list items // bool (default: false)
 
-		// Defined in uamswp_fad_labels_condition()
-
-			global $condition_single_name; // string
-			global $condition_single_name_attr; // string
-			global $condition_plural_name; // string
-			global $condition_plural_name_attr; // string
+		$labels_condition = uamswp_fad_labels_condition();
+			$condition_single_name = $labels_condition['condition_single_name']; // string
+			$condition_single_name_attr = $labels_condition['condition_single_name_attr']; // string
+			$condition_plural_name = $labels_condition['condition_plural_name']; // string
+			$condition_plural_name_attr = $labels_condition['condition_plural_name_attr']; // string
 
 		// Defined in uamswp_fad_fpage_text_condition_general()
 
@@ -7209,9 +7221,8 @@ function uamswp_fad_section_condition_treatment() {
 			global $treatment_section_title; // Text to use for the treatments subsection title // string (default: Find-a-Doc Settings value for treatment section title in general placements)
 			global $treatment_section_intro; // Text to use for the treatments subsection intro text // string (default: Find-a-Doc Settings value for treatment section intro text in general placements)
 
-		// Defined in uamswp_fad_labels_condition()
-
-			global $condition_single_name_attr; // string
+		$labels_condition = uamswp_fad_labels_condition();
+			$condition_single_name_attr = $labels_condition['condition_single_name_attr']; // string
 
 		// Defined in uamswp_fad_labels_treatment()
 
