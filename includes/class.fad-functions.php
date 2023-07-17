@@ -2359,12 +2359,11 @@ function uamswp_fad_fpage_text_replace($string) {
 			$placeholder_location_page_title = $labels_location['placeholder_location_page_title']; // string
 			$placeholder_location_page_title_phrase = $labels_location['placeholder_location_page_title_phrase']; // string
 
-		// Defined in uamswp_fad_labels_location_descendant()
-
-			global $placeholder_location_descendant_single_name;
-			global $location_descendant_single_name;
-			global $placeholder_location_descendant_plural_name;
-			global $location_descendant_plural_name;
+		$labels_location_descendant = uamswp_fad_labels_location_descendant();
+			$location_descendant_single_name = $labels_location_descendant['location_descendant_single_name']; // string
+			$location_descendant_plural_name = $labels_location_descendant['location_descendant_plural_name']; // string
+			$placeholder_location_descendant_single_name = $labels_location_descendant['placeholder_location_descendant_single_name']; // string
+			$placeholder_location_descendant_plural_name = $labels_location_descendant['placeholder_location_descendant_plural_name']; // string
 
 		// Defined in uamswp_fad_archive_text_location()
 
@@ -2697,6 +2696,19 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
 		$placeholder_location_descendant_single_name = '[Descendant Location]';
 		$placeholder_location_descendant_plural_name = '[Descendant Locations]';
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$labels_location_descendant = array(
+				'location_descendant_single_name' => $location_descendant_single_name, // string
+				'location_descendant_single_name_attr' => $location_descendant_single_name_attr, // string
+				'location_descendant_plural_name' => $location_descendant_plural_name, // string
+				'location_descendant_plural_name_attr' => $location_descendant_plural_name_attr, // string
+				'placeholder_location_descendant_single_name' => $placeholder_location_descendant_single_name, // string
+				'placeholder_location_descendant_plural_name' => $placeholder_location_descendant_plural_name // string
+			);
+			return $labels_location_descendant;
+	
 	}
 
 	// Get the Find-a-Doc Settings values for area of expertise labels
