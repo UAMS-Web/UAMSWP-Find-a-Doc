@@ -7143,33 +7143,37 @@ function uamswp_fad_fpage_text_replace($string) {
 
 // Filter the allowed block types for all editor types
 function uamswp_fad_allowed_block_types ( $block_editor_context, $editor_context ) {
+
 	// Define the list of blocks associated with landing pages
-	$allowed_marketing = [
-		'acf/action-bar', 			// Block: UAMS Action Bar
-		'acf/call-out', 			// Block: UAMS Call-Out
-		'acf/counter-list', 		// Block: UAMS Counter List
-		'acf/cta', 					// Block: UAMS CTA Bar
-		'acf/fad-locations', 		// Block: UAMS Find-a-Doc Locations
-		'acf/fad-providers', 		// Block: UAMS Find-a-Doc Providers
-		// 'acf/hero', 				// Block: UAMS Hero
-		'acf/image-side', 			// Block: UAMS Side-by-Side Image & Text
-		'acf/link-list', 			// Block: UAMS Link List
-		'acf/livewhale-calendar', 	// Block: UAMS LiveWhale Calendar
-		'acf/logo-list', 			// Block: UAMS Logo List
-		'acf/text-overlay', 		// Block: UAMS Text & Image Overlay
-		'acf/text-stacked', 		// Block: UAMS Stacked Image & Text
-		// 'acf/uams-content', 		// Block: UAMS Content
-		'acf/uams-gallery', 		// Block: UAMS Gallery
-		'acf/uams-section', 		// Block: UAMS Section
-		'acf/uams-news' 			// Block: UAMS News
-	];
+
+		$allowed_marketing = [
+			'acf/action-bar', 			// Block: UAMS Action Bar
+			'acf/call-out', 			// Block: UAMS Call-Out
+			'acf/counter-list', 		// Block: UAMS Counter List
+			'acf/cta', 					// Block: UAMS CTA Bar
+			'acf/fad-locations', 		// Block: UAMS Find-a-Doc Locations
+			'acf/fad-providers', 		// Block: UAMS Find-a-Doc Providers
+			// 'acf/hero', 				// Block: UAMS Hero
+			'acf/image-side', 			// Block: UAMS Side-by-Side Image & Text
+			'acf/link-list', 			// Block: UAMS Link List
+			'acf/livewhale-calendar', 	// Block: UAMS LiveWhale Calendar
+			'acf/logo-list', 			// Block: UAMS Logo List
+			'acf/text-overlay', 		// Block: UAMS Text & Image Overlay
+			'acf/text-stacked', 		// Block: UAMS Stacked Image & Text
+			// 'acf/uams-content', 		// Block: UAMS Content
+			'acf/uams-gallery', 		// Block: UAMS Gallery
+			'acf/uams-section', 		// Block: UAMS Section
+			'acf/uams-news' 			// Block: UAMS News
+		];
 
 	// Include the slugs of any post types that should be restricted to only UAMS blocks
-	if ( 'expertise' === $editor_context->post->post_type ) {
-		return $allowed_marketing;
-	}
+
+		if ( 'expertise' === $editor_context->post->post_type ) {
+			return $allowed_marketing;
+		}
 
 	return $block_editor_context;
+
 }
 add_filter( 'allowed_block_types_all', 'uamswp_fad_allowed_block_types', 10, 2 );
 
@@ -7185,6 +7189,7 @@ function uamswp_fad_meta_desc($html) {
 	$html = $excerpt;
 	
 	return $html;
+
 }
 
 // Get the Find-a-Doc Settings values for general patient appointment information
