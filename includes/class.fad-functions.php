@@ -2590,9 +2590,8 @@ function uamswp_fad_fpage_text_replace($string) {
 		$placeholder_provider_short_name = '[Provider Short Name]';
 		$placeholder_provider_short_name_possessive = '[Provider Short Name\'s]';
 
-
 		// Create array for pairing FacetWP name with label if none exists
-		$facet_labels = isset($facet_labels) ?: array();
+		$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
 
 		// Add item to FacetWP labels array for Providers facet on Clinical Resources archive/list
 		$facet_labels['resource_provider'] = $provider_plural_name;
@@ -2642,9 +2641,7 @@ function uamswp_fad_fpage_text_replace($string) {
 		$placeholder_location_page_title_phrase = '[the Location Title]';
 
 		// Create array for pairing FacetWP name with label if none exists
-		if ( !isset($facet_labels) ) {
-			$facet_labels = [];
-		}
+		$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
 
 		// Add item to FacetWP labels array for Locations facet on Providers archive/list
 		$facet_labels['locations'] = $location_plural_name;
@@ -2731,9 +2728,7 @@ function uamswp_fad_fpage_text_replace($string) {
 		$placeholder_expertise_page_title = '[Area of Expertise Title]';
 
 		// Create array for pairing FacetWP name with label if none exists
-		if ( !isset($facet_labels) ) {
-			$facet_labels = [];
-		}
+		$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
 
 		// Add item to FacetWP labels array for Areas of Expertise facet on Providers archive/list
 		$facet_labels['physician_areas_of_expertise'] = $expertise_plural_name;
@@ -2855,6 +2850,9 @@ function uamswp_fad_fpage_text_replace($string) {
 		$placeholder_clinical_resource_type_single_name = '[Resource Type]';
 		$placeholder_clinical_resource_type_plural_name = '[Resource Types]';
 
+		// Create array for pairing FacetWP name with label if none exists
+		$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
+
 		// Add item to FacetWP labels array for Areas of Expertise facet on Providers archive/list
 		$facet_labels['resource_type'] = $clinical_resource_type_plural_name;
 		$facet_labels['resource_type_attr'] = $clinical_resource_type_plural_name_attr;
@@ -2932,9 +2930,7 @@ function uamswp_fad_fpage_text_replace($string) {
 		$placeholder_condition_plural_name = '[Conditions]';
 
 		// Create array for pairing FacetWP name with label if none exists
-		if ( !isset($facet_labels) ) {
-			$facet_labels = [];
-		}
+		$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
 
 		// Add item to FacetWP labels array for Conditions facet on Providers archive/list
 		$facet_labels['conditions'] = $condition_plural_name;
@@ -2982,9 +2978,7 @@ function uamswp_fad_fpage_text_replace($string) {
 		$placeholder_treatment_plural_name = '[Treatments]';
 
 		// Create array for pairing FacetWP name with label if none exists
-		if ( !isset($facet_labels) ) {
-			$facet_labels = [];
-		}
+		$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
 
 		// Add item to FacetWP labels array for Treatments facet on Providers archive/list
 		$facet_labels['treatments_procedures'] = $treatment_plural_name;
