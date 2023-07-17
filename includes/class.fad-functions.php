@@ -2136,8 +2136,10 @@ function uamswp_fad_ontology_header() {
 
 // Construct the meta keywords element
 function uamswp_keyword_hook_header() { 
+
 	// Bring in variables from outside of the function
-	global $keywords; // Typically defined on the template
+
+		global $keywords; // Typically defined on the template
 
 	if( $keywords ): 
 		$i = 1;
@@ -2151,6 +2153,7 @@ function uamswp_keyword_hook_header() {
 		}
 		echo '<meta name="keywords" content="'. $keyword_text .'" />';
 	endif;
+
 }
 
 // Construct ontology subsection appointment information section
@@ -2185,6 +2188,7 @@ function uamswp_fad_ontology_appointment() {
 			</div>
 		</section>
 	<?php }
+
 }
 
 // Add fake subpages to breadcrumbs
@@ -2198,6 +2202,7 @@ function uamswp_fad_fpage_breadcrumbs($crumbs) {
 
 	$crumbs[] = array($fpage_name, '');
 	return $crumbs;
+
 }
 
 // Add page template class to body element's classes
@@ -2211,6 +2216,7 @@ function uamswp_page_body_class( $classes ) {
 
 	$classes[] = 'page-template-' . $template_type;
 	return $classes;
+
 }
 
 // Add bg-white class to article.entry element
@@ -2226,12 +2232,12 @@ function uamswp_fad_podcast_query() {
 
 		// Typically defined on the template
 
-			global $podcast_name;
-			global $jump_link_count;
+			global $podcast_name; // string
+			global $jump_link_count; // int
 
 	// Make variables available outside of the function
 
-		global $podcast_section_show;
+		global $podcast_section_show; // bool
 
 	// Check if podcast section should be displayed
 	if ( $podcast_name ) {
@@ -2240,6 +2246,15 @@ function uamswp_fad_podcast_query() {
 	} else {
 		$podcast_section_show = false;
 	}
+
+	// Create and return an array to be used on the templates and template parts
+
+		$podcast_query_function = array(
+			'podcast_section_show' => $podcast_section_show, // bool
+			'jump_link_count' => $jump_link_count // int
+		);
+		return $podcast_query_function;
+
 }
 
 // Construct UAMS Health Talk podcast section
@@ -2253,9 +2268,8 @@ function uamswp_fad_podcast() {
 			global $podcast_subject;
 			global $podcast_filter; // Expected values: 'tag' or 'doctor'
 
-		// Typically defined in uamswp_fad_podcast_query()
-
-			global $podcast_section_show;
+		$podcast_query_function = uamswp_fad_podcast_query();
+			$podcast_section_show = $podcast_query_function['podcast_section_show'];
 
 		// Typically defined in uamswp_fad_labels_provider()
 
