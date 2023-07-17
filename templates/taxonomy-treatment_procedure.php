@@ -36,7 +36,15 @@ $embed_code = get_field('treatment_procedure_embed_codes', $term); // Embed / Sy
 		$placeholder_provider_short_name_possessive = $labels_provider['placeholder_provider_short_name_possessive']; // string
 
 	// Get system settings for location labels
-	uamswp_fad_labels_location();
+	$labels_location = uamswp_fad_labels_location();
+		$location_single_name = $labels_location['location_single_name']; // string
+		$location_single_name_attr = $labels_location['location_single_name_attr']; // string
+		$location_plural_name = $labels_location['location_plural_name']; // string
+		$location_plural_name_attr = $labels_location['location_plural_name_attr']; // string
+		$placeholder_location_single_name = $labels_location['placeholder_location_single_name']; // string
+		$placeholder_location_plural_name = $labels_location['placeholder_location_plural_name']; // string
+		$placeholder_location_page_title = $labels_location['placeholder_location_page_title']; // string
+		$placeholder_location_page_title_phrase = $labels_location['placeholder_location_page_title_phrase']; // string
 
 	// Get system settings for area of expertise labels
 	uamswp_fad_labels_expertise();

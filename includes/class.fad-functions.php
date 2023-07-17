@@ -2586,18 +2586,6 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get the Find-a-Doc Settings values for location labels
 	function uamswp_fad_labels_location() {
 
-		// Make variables available outside of the function
-
-			global $location_single_name; // string
-			global $location_single_name_attr; // string
-			global $location_plural_name; // string
-			global $location_plural_name_attr; // string
-			global $placeholder_location_single_name; // string
-			global $placeholder_location_plural_name; // string
-			global $placeholder_location_page_title; // string
-			global $placeholder_location_page_title_phrase; // string
-			global $facet_labels; // array
-
 		$location_single_name = get_field('location_single_name', 'option') ?: 'Location';
 		$location_single_name_attr = uamswp_attr_conversion($location_single_name);
 		$location_plural_name = get_field('location_plural_name', 'option') ?: 'Locations';
