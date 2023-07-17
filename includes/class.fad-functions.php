@@ -6771,7 +6771,7 @@ function uamswp_fad_fpage_text_replace($string) {
 					'expertise_fpage_image_provider'			=> $expertise_fpage_image_provider, // int
 					'clinical_resource_fpage_image_provider'	=> $clinical_resource_fpage_image_provider // int
 				);
-				return $fpage_image_provider;	
+				return $fpage_image_provider;
 
 		}
 
@@ -6844,7 +6844,17 @@ function uamswp_fad_fpage_text_replace($string) {
 					}
 					$clinical_resource_fpage_image_location = $clinical_resource_fpage_image_general; // Featured image
 				}
-	
+
+			// Create and return an array to be used on the templates and template parts
+		
+				$fpage_image_location = array(
+					'provider_fpage_image_location'				=> $provider_fpage_image_location, // int
+					'location_descendant_fpage_image_location'	=> $location_descendant_fpage_image_location, // int
+					'expertise_fpage_image_location'			=> $expertise_fpage_image_location, // int
+					'clinical_resource_fpage_image_location'	=> $clinical_resource_fpage_image_location // int
+				);
+				return $fpage_image_location;
+
 		}
 
 		// Get field values for the featured image of a fake subpage (or section) in an Area of Expertise subsection (or profile)
