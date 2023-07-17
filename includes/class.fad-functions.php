@@ -6568,14 +6568,21 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Make variables available outside of the function
 
-			global $clinical_resource_archive_image;
+			global $clinical_resource_archive_image; // int
 
 		// Get the Find-a-Doc Settings value for the featured image of the clinical resource archive
-		$clinical_resource_archive_image = get_field('clinical_resource_archive_featured_image', 'option'); // Featured image
+		$clinical_resource_archive_image = get_field('clinical_resource_archive_featured_image', 'option'); // Featured image ID
 
 		// If the variable is not set or is empty...
 		// Set a hardcoded fallback value
 		$clinical_resource_archive_image = ( isset($clinical_resource_archive_image) && !empty($clinical_resource_archive_image) ) ? $clinical_resource_archive_image : ''; // Featured image
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$archive_image_clinical_resource = array(
+				'clinical_resource_archive_image'	=> $clinical_resource_archive_image // int
+			);
+			return $archive_image_clinical_resource;
 
 	}
 
@@ -7828,8 +7835,8 @@ function uamswp_fad_fpage_text_image_overlay() {
 		}
 		global $clinical_resource_archive_image; // Clinical Resource archive featured image ID // int
 		if ( !isset($clinical_resource_archive_image) || empty($clinical_resource_archive_image) ) {
-			uamswp_fad_archive_image_clinical_resource();
-			global $clinical_resource_archive_image;
+			$archive_image_clinical_resource = uamswp_fad_archive_image_clinical_resource();
+				$clinical_resource_archive_image = $archive_image_clinical_resource['clinical_resource_archive_image']; // int
 		}
 		global $provider_fpage_title_expertise; // Title of a Fake Subpage (or Section) for Providers in an Area of Expertise Subsection (or Profile) // string
 		global $location_fpage_title_expertise; // Title of a Fake Subpage (or Section) for Locations in an Area of Expertise Subsection (or Profile) // string
