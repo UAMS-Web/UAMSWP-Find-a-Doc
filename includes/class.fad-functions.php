@@ -6538,7 +6538,6 @@ function uamswp_fad_fpage_text_replace($string) {
 			);
 			return $archive_image_location;
 
-
 	}
 
 	// Get the Find-a-Doc Settings value for area of expertise archive page featured image
@@ -6546,14 +6545,21 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Make variables available outside of the function
 
-			global $expertise_archive_image;
+			global $expertise_archive_image; // int
 
 		// Get the Find-a-Doc Settings value for the featured image of the expertise archive
-		$expertise_archive_image = get_field('expertise_archive_featured_image', 'option'); // Featured image
+		$expertise_archive_image = get_field('expertise_archive_featured_image', 'option'); // Featured image ID
 
 		// If the variable is not set or is empty...
 		// Set a hardcoded fallback value
 		$expertise_archive_image = ( isset($expertise_archive_image) && !empty($expertise_archive_image) ) ? $expertise_archive_image : ''; // Featured image
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$archive_image_expertise = array(
+				'expertise_archive_image'	=> $expertise_archive_image // int
+			);
+			return $archive_image_expertise;
 
 	}
 
@@ -7817,8 +7823,8 @@ function uamswp_fad_fpage_text_image_overlay() {
 		}
 		global $expertise_archive_image; // Area of Expertise archive featured image ID // int
 		if ( !isset($expertise_archive_image) || empty($expertise_archive_image) ) {
-			uamswp_fad_archive_image_expertise();
-			global $expertise_archive_image;
+			$archive_image_expertise = uamswp_fad_archive_image_expertise();
+				$expertise_archive_image = $archive_image_expertise['expertise_archive_image']; // int
 		}
 		global $clinical_resource_archive_image; // Clinical Resource archive featured image ID // int
 		if ( !isset($clinical_resource_archive_image) || empty($clinical_resource_archive_image) ) {
