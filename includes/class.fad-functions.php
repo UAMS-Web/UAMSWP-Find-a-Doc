@@ -3014,11 +3014,11 @@ function uamswp_fad_fpage_text_replace($string) {
 			global $provider_archive_headline_attr;
 			global $placeholder_provider_archive_headline;
 
-		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-		$placeholder_provider_archive_headline = '[Provider Archive Title]';
-
 		$provider_archive_headline = get_field('provider_archive_headline', 'option') ?: 'UAMS Health Providers';
 		$provider_archive_headline_attr = uamswp_attr_conversion($provider_archive_headline);
+
+		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
+		$placeholder_provider_archive_headline = '[Provider Archive Title]';
 
 		// Create and return an array to be used on the templates and template parts
 	
