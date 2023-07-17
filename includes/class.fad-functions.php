@@ -1577,7 +1577,7 @@ function uamswp_fad_post_title() {
 	}
 
 	// Query for whether related locations content section should be displayed on a page
-	function uamswp_fad_location_query() {
+	function uamswp_fad_location_query( $locations ) {
 
 		// Bring in variables from outside of the function
 
@@ -1585,8 +1585,10 @@ function uamswp_fad_post_title() {
 
 				global $jump_link_count;
 
-			$ontology_site_values = uamswp_fad_ontology_site_values();
-				$locations = $ontology_site_values['locations']; // int[]
+			if ( !isset($locations) ) {
+				$ontology_site_values = uamswp_fad_ontology_site_values();
+					$locations = $ontology_site_values['locations']; // int[]
+			}
 
 		$location_valid = false;
 
@@ -2066,7 +2068,7 @@ function uamswp_fad_ontology_nav_menu() {
 		$provider_query_function = uamswp_fad_provider_query();
 			$provider_section_show = $provider_query_function['provider_section_show']; // bool
 
-		$location_query_function = uamswp_fad_location_query();
+		$location_query_function = uamswp_fad_location_query( $locations );
 			$location_section_show = $location_query_function['location_section_show']; // bool
 
 		$expertise_query_function = uamswp_fad_expertise_query();
@@ -7478,7 +7480,7 @@ function uamswp_fad_section_location() {
 		$ontology_site_values = uamswp_fad_ontology_site_values();
 			$locations = $ontology_site_values['locations']; // int[]
 
-		$location_query_function = uamswp_fad_location_query();
+		$location_query_function = uamswp_fad_location_query( $locations );
 			$location_query = $location_query_function['location_query']; // WP_Post[]
 			$location_section_show = $location_query_function['location_section_show']; // bool
 			$location_ids = $location_query_function['location_ids']; // int[]

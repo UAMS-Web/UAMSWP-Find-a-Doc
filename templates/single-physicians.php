@@ -187,7 +187,7 @@ $eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$po
 
 // Query for whether related locations content section should be displayed on a page
 $locations = get_field('physician_locations',$post->ID); // Get the provider's location values
-$location_query_function = uamswp_fad_location_query();
+$location_query_function = uamswp_fad_location_query( $locations );
 	$location_query = $location_query_function['location_query']; // WP_Post[]
 	$location_section_show = $location_query_function['location_section_show']; // bool
 	$location_ids = $location_query_function['location_ids']; // int[]
