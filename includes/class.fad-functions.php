@@ -2315,6 +2315,7 @@ function uamswp_fad_podcast() {
 				</div>
 			</section>
 	<?php } // endif ( $podcast_section_show )
+
 }
 
 // Create substitutions for use regarding ontology text elements
@@ -2454,10 +2455,6 @@ function uamswp_fad_fpage_text_replace($string) {
 	$short_name = ( isset($short_name) && !empty($short_name) ) ? $short_name : '';
 	$short_name_possessive = ( isset($short_name_possessive) && !empty($short_name_possessive) ) ? $short_name_possessive : '';
 
-	// Make variables available outside of the function
-
-		// global $fpage_text_replace;
-
 	// Create array for defining text substitutions
 	// Key = old
 	// Value = new
@@ -2570,6 +2567,7 @@ function uamswp_fad_fpage_text_replace($string) {
 			}
 
 	return str_replace(array_keys($fpage_text_replacements), array_values($fpage_text_replacements), $string); 
+
 }
 
 // Define variables for Find-a-Doc Settings values regarding ontology item labels
@@ -2607,6 +2605,7 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Add item to FacetWP labels array for Providers facet on Clinical Resources archive/list
 		$facet_labels['resource_provider'] = $provider_plural_name;
 		$facet_labels['resource_provider_attr'] = $provider_plural_name_attr;
+
 	}
 
 	// Get the Find-a-Doc Settings values for location labels
