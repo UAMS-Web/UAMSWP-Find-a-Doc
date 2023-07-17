@@ -1332,7 +1332,6 @@ function uamswp_fad_ontology_site_values() {
 			$ancestors_ontology_farthest_obj = '';
 			$ancestors_ontology_farthest_title = '';
 			$ancestors_ontology_farthest_title_attr = '';
-			echo '<p>$ancestors_ontology_farthest_title_attr = ' . $ancestors_ontology_farthest_title_attr . '</p>'; // test
 			$ancestors_ontology_farthest_url = '';
 			if ( $has_ancestors_ontology && $ancestors_ontology_farthest ) {
 				$ancestors_ontology_farthest_obj = get_post( $ancestors_ontology_farthest );
@@ -1340,7 +1339,6 @@ function uamswp_fad_ontology_site_values() {
 			if ( $ancestors_ontology_farthest_obj ) {
 				$ancestors_ontology_farthest_title = $ancestors_ontology_farthest_obj->post_title;
 				$ancestors_ontology_farthest_title_attr = uamswp_attr_conversion($ancestors_ontology_farthest_title);
-				echo '<p>$ancestors_ontology_farthest_title_attr = ' . $ancestors_ontology_farthest_title_attr . '</p>'; // test
 				$ancestors_ontology_farthest_url = get_permalink( $ancestors_ontology_farthest );
 			}
 
