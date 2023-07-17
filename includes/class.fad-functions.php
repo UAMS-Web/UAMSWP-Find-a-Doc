@@ -7667,6 +7667,15 @@ function uamswp_fad_section_condition() {
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-condition.php' );
 
+	// Create and return an array to be used on the templates and template parts
+
+		$section_condition = array(
+			'condition_treatment_schema'		=> $condition_treatment_schema, // string
+			'condition_treatment_schema_i'		=> $condition_treatment_schema_i, // int
+			'condition_treatment_schema_count'	=> $condition_treatment_schema_count // int
+		);
+		return $section_condition;
+
 } // end function uamswp_fad_section_condition()
 
 // Construct Treatment List Section
