@@ -3576,8 +3576,8 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Make variables available outside of the function
 
-				global $treatment_fpage_title_general;
-				global $treatment_fpage_intro_general;
+				global $treatment_fpage_title_general; // string
+				global $treatment_fpage_intro_general; // string
 
 			// Get the Find-a-Doc Settings values for the text elements in general placements
 			$treatment_fpage_title_general = get_field('treatments_fpage_title_general', 'option'); // Fake subpage (or section), title
@@ -3591,6 +3591,14 @@ function uamswp_fad_fpage_text_replace($string) {
 			// Substitute placeholder text for relevant Find-a-Doc Settings value
 			$treatment_fpage_title_general = uamswp_fad_fpage_text_replace($treatment_fpage_title_general); // Fake subpage (or section), title
 			$treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($treatment_fpage_intro_general); // Fake subpage (or section), intro text
+
+			// Create and return an array to be used on the templates and template parts
+		
+				$fpage_text_treatment_general = array(
+					'treatment_fpage_title_general'	=> $treatment_fpage_title_general, // string
+					'treatment_fpage_intro_general'	=> $treatment_fpage_intro_general // string
+				);
+				return $fpage_text_treatment_general;
 
 		}
 
@@ -4012,15 +4020,15 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($treatment_fpage_title_provider) || empty($treatment_fpage_title_provider) ) {
 						if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
-							uamswp_fad_fpage_text_treatment_general();
-							global $treatment_fpage_title_general;
+							$fpage_text_treatment_general = uamswp_fad_fpage_text_treatment_general();
+								$treatment_fpage_title_general = $fpage_text_treatment_general['treatment_fpage_title_general']; // string
 						}
 						$treatment_fpage_title_provider = $treatment_fpage_title_general; // Title
 					}
 					if ( !isset($treatment_fpage_intro_provider) || empty($treatment_fpage_intro_provider) ) {
 						if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
-							uamswp_fad_fpage_text_treatment_general();
-							global $treatment_fpage_intro_general;
+							$fpage_text_treatment_general = uamswp_fad_fpage_text_treatment_general();
+								$treatment_fpage_intro_general = $fpage_text_treatment_general['treatment_fpage_intro_general']; // string
 						}
 						$treatment_fpage_intro_provider = $treatment_fpage_intro_general; // Intro text
 					}
@@ -4639,15 +4647,15 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($treatment_fpage_title_location) || empty($treatment_fpage_title_location) ) {
 						if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
-							uamswp_fad_fpage_text_treatment_general();
-							global $treatment_fpage_title_general;
+							$fpage_text_treatment_general = uamswp_fad_fpage_text_treatment_general();
+								$treatment_fpage_title_general = $fpage_text_treatment_general['treatment_fpage_title_general']; // string
 						}
 						$treatment_fpage_title_location = $treatment_fpage_title_general; // Title
 					}
 					if ( !isset($treatment_fpage_intro_location) || empty($treatment_fpage_intro_location) ) {
 						if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
-							uamswp_fad_fpage_text_treatment_general();
-							global $treatment_fpage_intro_general;
+							$fpage_text_treatment_general = uamswp_fad_fpage_text_treatment_general();
+								$treatment_fpage_intro_general = $fpage_text_treatment_general['treatment_fpage_intro_general']; // string
 						}
 						$treatment_fpage_intro_location = $treatment_fpage_intro_general; // Intro text
 					}
@@ -5684,15 +5692,15 @@ function uamswp_fad_fpage_text_replace($string) {
 
 						if ( !isset($treatment_fpage_title_expertise) || empty($treatment_fpage_title_expertise) ) {
 							if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
-								uamswp_fad_fpage_text_treatment_general();
-								global $treatment_fpage_title_general;
+								$fpage_text_treatment_general = uamswp_fad_fpage_text_treatment_general();
+									$treatment_fpage_title_general = $fpage_text_treatment_general['treatment_fpage_title_general']; // string
 							}
 							$treatment_fpage_title_expertise = $treatment_fpage_title_general; // Title
 						}
 						if ( !isset($treatment_fpage_intro_expertise) || empty($treatment_fpage_intro_expertise) ) {
 							if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
-								uamswp_fad_fpage_text_treatment_general();
-								global $treatment_fpage_intro_general;
+								$fpage_text_treatment_general = uamswp_fad_fpage_text_treatment_general();
+									$treatment_fpage_intro_general = $fpage_text_treatment_general['treatment_fpage_intro_general']; // string
 							}
 							$treatment_fpage_intro_expertise = $treatment_fpage_intro_general; // Intro text
 						}
@@ -6243,15 +6251,15 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($treatment_fpage_title_clinical_resource) || empty($treatment_fpage_title_clinical_resource) ) {
 						if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
-							uamswp_fad_fpage_text_treatment_general();
-							global $treatment_fpage_title_general;
+							$fpage_text_treatment_general = uamswp_fad_fpage_text_treatment_general();
+								$treatment_fpage_title_general = $fpage_text_treatment_general['treatment_fpage_title_general']; // string
 						}
 						$treatment_fpage_title_clinical_resource = $treatment_fpage_title_general; // Title
 					}
 					if ( !isset($treatment_fpage_intro_clinical_resource) || empty($treatment_fpage_intro_clinical_resource) ) {
 						if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
-							uamswp_fad_fpage_text_treatment_general();
-							global $treatment_fpage_intro_general;
+							$fpage_text_treatment_general = uamswp_fad_fpage_text_treatment_general();
+								$treatment_fpage_intro_general = $fpage_text_treatment_general['treatment_fpage_intro_general']; // string
 						}
 						$treatment_fpage_intro_clinical_resource = $treatment_fpage_intro_general; // Intro text
 					}
@@ -7315,10 +7323,9 @@ function uamswp_fad_section_treatment() {
 			$treatment_plural_name = $labels_treatment['treatment_plural_name']; // string
 			$treatment_plural_name_attr = $labels_treatment['treatment_plural_name_attr']; // string
 
-		// Defined in uamswp_fad_fpage_text_treatment_general()
-
-			global $treatment_fpage_title_general; // string
-			global $treatment_fpage_intro_general; // string
+		$fpage_text_treatment_general = uamswp_fad_fpage_text_treatment_general();
+			$treatment_fpage_title_general = $fpage_text_treatment_general['treatment_fpage_title_general']; // string
+			$treatment_fpage_intro_general = $fpage_text_treatment_general['treatment_fpage_intro_general']; // string
 
 		// Defined on the template or in a function such as uamswp_fad_treatment_query()
 
@@ -7387,10 +7394,9 @@ function uamswp_fad_section_condition_treatment() {
 			$condition_fpage_title_general = $fpage_text_condition_general['condition_fpage_title_general']; // string
 			$condition_fpage_intro_general = $fpage_text_condition_general['condition_fpage_intro_general']; // string
 
-		// Defined in uamswp_fad_fpage_text_treatment_general()
-
-			global $treatment_fpage_title_general; // string
-			global $treatment_fpage_intro_general; // string
+		$fpage_text_treatment_general = uamswp_fad_fpage_text_treatment_general();
+			$treatment_fpage_title_general = $fpage_text_treatment_general['treatment_fpage_title_general']; // string
+			$treatment_fpage_intro_general = $fpage_text_treatment_general['treatment_fpage_intro_general']; // string
 
 		$condition_query_function = uamswp_fad_condition_query();
 			$condition_cpt_query = $condition_query_function['condition_cpt_query']; // WP_Post[]
