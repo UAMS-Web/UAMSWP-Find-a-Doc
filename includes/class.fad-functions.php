@@ -2398,12 +2398,11 @@ function uamswp_fad_fpage_text_replace($string) {
 			global $placeholder_clinical_resource_archive_headline;
 			global $clinical_resource_archive_headline;
 
-		// Defined in uamswp_fad_labels_clinical_resource_facet()
-
-			global $placeholder_clinical_resource_type_single_name;
-			global $clinical_resource_type_single_name;
-			global $placeholder_clinical_resource_type_plural_name;
-			global $clinical_resource_type_plural_name;
+		$labels_clinical_resource_facet = uamswp_fad_labels_clinical_resource_facet();
+			$clinical_resource_type_single_name = $labels_clinical_resource_facet['clinical_resource_type_single_name']; // string
+			$clinical_resource_type_plural_name = $labels_clinical_resource_facet['clinical_resource_type_plural_name']; // string
+			$placeholder_clinical_resource_type_single_name = $labels_clinical_resource_facet['placeholder_clinical_resource_type_single_name']; // string
+			$placeholder_clinical_resource_type_plural_name = $labels_clinical_resource_facet['placeholder_clinical_resource_type_plural_name']; // string
 
 		// Defined in uamswp_fad_labels_condition_treatment()
 
@@ -2837,13 +2836,13 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Make variables available outside of the function
 
-			global $clinical_resource_type_single_name;
-			global $clinical_resource_type_single_name_attr;
-			global $clinical_resource_type_plural_name;
-			global $clinical_resource_type_plural_name_attr;
-			global $placeholder_clinical_resource_type_single_name;
-			global $placeholder_clinical_resource_type_plural_name;
-			global $facet_labels;
+			global $clinical_resource_type_single_name; // string
+			global $clinical_resource_type_single_name_attr; // string
+			global $clinical_resource_type_plural_name; // string
+			global $clinical_resource_type_plural_name_attr; // string
+			global $placeholder_clinical_resource_type_single_name; // string
+			global $placeholder_clinical_resource_type_plural_name; // string
+			global $facet_labels; // array
 
 		$clinical_resource_type_single_name = get_field('clinical_resource_type_single_name', 'option') ?: 'Resource Type';
 		$clinical_resource_type_single_name_attr = uamswp_attr_conversion($clinical_resource_type_single_name);
@@ -2857,6 +2856,20 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Add item to FacetWP labels array for Areas of Expertise facet on Providers archive/list
 		$facet_labels['resource_type'] = $clinical_resource_type_plural_name;
 		$facet_labels['resource_type_attr'] = $clinical_resource_type_plural_name_attr;
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$labels_clinical_resource_facet = array(
+				'clinical_resource_type_single_name' => $clinical_resource_type_single_name, // string
+				'clinical_resource_type_single_name_attr' => $clinical_resource_type_single_name_attr, // string
+				'clinical_resource_type_plural_name' => $clinical_resource_type_plural_name, // string
+				'clinical_resource_type_plural_name_attr' => $clinical_resource_type_plural_name_attr, // string
+				'placeholder_clinical_resource_type_single_name' => $placeholder_clinical_resource_type_single_name, // string
+				'placeholder_clinical_resource_type_plural_name' => $placeholder_clinical_resource_type_plural_name, // string
+				'facet_labels' => $facet_labels // string
+			);
+			return $labels_clinical_resource_facet;
+
 	}
 
 	// Get the Find-a-Doc Settings values for combined conditions and treatments labels
