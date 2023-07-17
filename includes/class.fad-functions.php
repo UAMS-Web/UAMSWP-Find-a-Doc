@@ -6654,26 +6654,34 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Make variables available outside of the function
 
-				global $expertise_fpage_image_general;
-				global $expertise_descendant_fpage_image_general;
+				global $expertise_fpage_image_general; // int
+				global $expertise_descendant_fpage_image_general; // int
 
 			// Areas of Expertise
 
 				// Get the Find-a-Doc Settings value
-				$expertise_fpage_image_general = get_field('expertise_fpage_featured_image_general', 'option'); // Featured image
+				$expertise_fpage_image_general = get_field('expertise_fpage_featured_image_general', 'option'); // Featured image ID
 
 				// If the variable is not set or is empty...
 				// Set a hardcoded fallback value
-				$expertise_fpage_image_general = ( isset($expertise_fpage_image_general) && !empty($expertise_fpage_image_general) ) ? $expertise_fpage_image_general : ''; // Featured image
+				$expertise_fpage_image_general = ( isset($expertise_fpage_image_general) && !empty($expertise_fpage_image_general) ) ? $expertise_fpage_image_general : ''; // Featured image ID
 
 			// Descendant Areas of Expertise
 
 				// Get the Find-a-Doc Settings value
-				$expertise_descendant_fpage_image_general = get_field('expertise_descendant_fpage_featured_image_general', 'option'); // Featured image
+				$expertise_descendant_fpage_image_general = get_field('expertise_descendant_fpage_featured_image_general', 'option'); // Featured image ID
 
 				// If the variable is not set or is empty...
 				// Set a hardcoded fallback value
-				$expertise_descendant_fpage_image_general = ( isset($expertise_descendant_fpage_image_general) && !empty($expertise_descendant_fpage_image_general) ) ? $expertise_descendant_fpage_image_general : ''; // Featured image
+				$expertise_descendant_fpage_image_general = ( isset($expertise_descendant_fpage_image_general) && !empty($expertise_descendant_fpage_image_general) ) ? $expertise_descendant_fpage_image_general : ''; // Featured image ID
+
+			// Create and return an array to be used on the templates and template parts
+		
+				$fpage_image_expertise_general = array(
+					'expertise_fpage_image_general'				=> $expertise_fpage_image_general, // int
+					'expertise_descendant_fpage_image_general'	=> $expertise_descendant_fpage_image_general // int
+				);
+				return $fpage_image_expertise_general;	
 
 		}
 
@@ -6728,8 +6736,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($expertise_fpage_image_provider) || empty($expertise_fpage_image_provider) ) {
 					if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
-						uamswp_fad_fpage_image_expertise_general();
-						global $expertise_fpage_image_general;
+						$fpage_image_expertise_general = uamswp_fad_fpage_image_expertise_general();
+							$expertise_fpage_image_general = $fpage_image_expertise_general['expertise_fpage_image_general']; // int
 					}
 					$expertise_fpage_image_provider = $expertise_fpage_image_general; // Featured image
 				}
@@ -6800,8 +6808,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($expertise_fpage_image_location) || empty($expertise_fpage_image_location) ) {
 					if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
-						uamswp_fad_fpage_image_expertise_general();
-						global $expertise_fpage_image_general;
+						$fpage_image_expertise_general = uamswp_fad_fpage_image_expertise_general();
+							$expertise_fpage_image_general = $fpage_image_expertise_general['expertise_fpage_image_general']; // int
 					}
 					$expertise_fpage_image_location = $expertise_fpage_image_general; // Featured image
 				}
@@ -6930,8 +6938,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($expertise_fpage_featured_image_expertise) || empty($expertise_fpage_featured_image_expertise) ) {
 					if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
-						uamswp_fad_fpage_image_expertise_general();
-						global $expertise_fpage_image_general;
+						$fpage_image_expertise_general = uamswp_fad_fpage_image_expertise_general();
+							$expertise_fpage_image_general = $fpage_image_expertise_general['expertise_fpage_image_general']; // int
 					}
 					$expertise_fpage_featured_image_expertise = $expertise_fpage_image_general; // Featured image
 				}
@@ -6960,8 +6968,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($expertise_descendant_fpage_featured_image_expertise) || empty($expertise_descendant_fpage_featured_image_expertise) ) {
 					if ( !isset($expertise_descendant_fpage_image_general) || empty($expertise_descendant_fpage_image_general) ) {
-						uamswp_fad_fpage_image_expertise_general();
-						global $expertise_descendant_fpage_image_general;
+						$fpage_image_expertise_general = uamswp_fad_fpage_image_expertise_general();
+							$expertise_descendant_fpage_image_general = $fpage_image_expertise_general['expertise_descendant_fpage_image_general']; // int
 					}
 					$expertise_descendant_fpage_featured_image_expertise = $expertise_descendant_fpage_image_general; // Featured image
 				}
@@ -7054,8 +7062,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($expertise_fpage_image_clinical_resource) || empty($expertise_fpage_image_clinical_resource) ) {
 					if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
-						uamswp_fad_fpage_image_expertise_general();
-						global $expertise_fpage_image_general;
+						$fpage_image_expertise_general = uamswp_fad_fpage_image_expertise_general();
+							$expertise_fpage_image_general = $fpage_image_expertise_general['expertise_fpage_image_general']; // int
 					}
 					$expertise_fpage_image_clinical_resource = $expertise_fpage_image_general; // Featured image
 				}
