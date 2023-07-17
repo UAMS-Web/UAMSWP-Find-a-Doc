@@ -2390,10 +2390,9 @@ function uamswp_fad_fpage_text_replace($string) {
 			$placeholder_clinical_resource_single_name = $labels_clinical_resource['placeholder_clinical_resource_single_name']; // string
 			$placeholder_clinical_resource_plural_name = $labels_clinical_resource['placeholder_clinical_resource_plural_name']; // string
 
-		// Defined in uamswp_fad_archive_text_clinical_resource()
-
-			global $placeholder_clinical_resource_archive_headline;
-			global $clinical_resource_archive_headline;
+		$labels_clinical_resource = uamswp_fad_archive_text_clinical_resource();
+			$clinical_resource_archive_headline = $labels_clinical_resource['clinical_resource_archive_headline']; // string
+			$placeholder_clinical_resource_archive_headline = $labels_clinical_resource['placeholder_clinical_resource_archive_headline']; // string
 
 		$labels_clinical_resource_facet = uamswp_fad_labels_clinical_resource_facet();
 			$clinical_resource_type_single_name = $labels_clinical_resource_facet['clinical_resource_type_single_name']; // string
@@ -3101,6 +3100,16 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
 		$placeholder_clinical_resource_archive_headline = '[Clinical Resource Archive Title]';
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$archive_text_clinical_resource = array(
+				'clinical_resource_archive_headline' => $clinical_resource_archive_headline, // string
+				'clinical_resource_archive_headline_attr' => $clinical_resource_archive_headline_attr, // string
+				'placeholder_clinical_resource_archive_headline' => $placeholder_clinical_resource_archive_headline // string
+			);
+			return $archive_text_clinical_resource;
+
 	}
 
 	// Get the Find-a-Doc Settings values for condition archive page text
