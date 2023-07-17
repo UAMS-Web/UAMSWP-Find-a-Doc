@@ -2568,15 +2568,15 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Make variables available outside of the function
 
-			global $provider_single_name;
-			global $provider_single_name_attr;
-			global $provider_plural_name;
-			global $provider_plural_name_attr;
-			global $placeholder_provider_single_name;
-			global $placeholder_provider_plural_name;
-			global $placeholder_provider_short_name;
-			global $placeholder_provider_short_name_possessive;
-			global $facet_labels;
+			global $provider_single_name; // string
+			global $provider_single_name_attr; // string
+			global $provider_plural_name; // string
+			global $provider_plural_name_attr; // string
+			global $placeholder_provider_single_name; // string
+			global $placeholder_provider_plural_name; // string
+			global $placeholder_provider_short_name; // string
+			global $placeholder_provider_short_name_possessive; // string
+			global $facet_labels; // array
 
 		$provider_single_name = get_field('provider_single_name', 'option') ?: 'Provider';
 		$provider_single_name_attr = uamswp_attr_conversion($provider_single_name);
@@ -2675,12 +2675,12 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Make variables available outside of the function
 
-			global $location_descendant_single_name;
-			global $location_descendant_single_name_attr;
-			global $location_descendant_plural_name;
-			global $location_descendant_plural_name_attr;
-			global $placeholder_location_descendant_single_name;
-			global $placeholder_location_descendant_plural_name;
+			global $location_descendant_single_name; // string
+			global $location_descendant_single_name_attr; // string
+			global $location_descendant_plural_name; // string
+			global $location_descendant_plural_name_attr; // string
+			global $placeholder_location_descendant_single_name; // string
+			global $placeholder_location_descendant_plural_name; // string
 
 		$location_descendant_single_name = get_field('location_descendant_single_name', 'option') ?: 'Additional Location';
 		$location_descendant_single_name_attr = uamswp_attr_conversion($location_descendant_single_name);
@@ -2767,12 +2767,12 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Make variables available outside of the function
 
-			global $expertise_descendant_single_name;
-			global $expertise_descendant_single_name_attr;
-			global $expertise_descendant_plural_name;
-			global $expertise_descendant_plural_name_attr;
-			global $placeholder_expertise_descendant_single_name;
-			global $placeholder_expertise_descendant_plural_name;
+			global $expertise_descendant_single_name; // string
+			global $expertise_descendant_single_name_attr; // string
+			global $expertise_descendant_plural_name; // string
+			global $expertise_descendant_plural_name_attr; // string
+			global $placeholder_expertise_descendant_single_name; // string
+			global $placeholder_expertise_descendant_plural_name; // string
 
 		$expertise_descendant_single_name = get_field('expertise_descendant_single_name', 'option') ?: 'Specialty';
 		$expertise_descendant_single_name_attr = uamswp_attr_conversion($expertise_descendant_single_name);
