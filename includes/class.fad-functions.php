@@ -2423,12 +2423,11 @@ function uamswp_fad_fpage_text_replace($string) {
 			global $placeholder_condition_archive_intro_text;
 			global $condition_archive_intro_text;
 
-		// Defined in uamswp_fad_labels_treatment()
-
-			global $placeholder_treatment_single_name;
-			global $treatment_single_name;
-			global $placeholder_treatment_plural_name;
-			global $treatment_plural_name;
+		$labels_treatment = uamswp_fad_labels_treatment();
+			$treatment_single_name = $labels_treatment['treatment_single_name']; // string
+			$treatment_plural_name = $labels_treatment['treatment_plural_name']; // string
+			$placeholder_treatment_single_name = $labels_treatment['placeholder_treatment_single_name']; // string
+			$placeholder_treatment_plural_name = $labels_treatment['placeholder_treatment_plural_name']; // string
 
 		// Defined in uamswp_fad_archive_text_treatment()
 
@@ -2989,6 +2988,20 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Add item to FacetWP labels array for Treatments facet on Clinical Resources archive/list
 		$facet_labels['resource_treatments'] = $treatment_plural_name;
 		$facet_labels['resource_treatments_attr'] = $treatment_plural_name_attr;
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$labels_treatment = array(
+				'treatment_single_name' => $treatment_single_name, // string
+				'treatment_single_name_attr' => $treatment_single_name_attr, // string
+				'treatment_plural_name' => $treatment_plural_name, // string
+				'treatment_plural_name_attr' => $treatment_plural_name_attr, // string
+				'placeholder_treatment_single_name' => $placeholder_treatment_single_name, // string
+				'placeholder_treatment_plural_name' => $placeholder_treatment_plural_name, // string
+				'facet_labels' => $facet_labels // array
+			);
+			return $labels_treatment;
+
 	}
 
 // Define variables for Find-a-Doc Settings values regarding ontology archive page text
@@ -7157,12 +7170,11 @@ function uamswp_fad_section_treatment() {
 			global $treatment_section_intro; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of treatment section intro text in general placements)
 			global $treatment_section_link_item; // Query for whether to link the list items // bool (default: false)
 
-		// Defined in uamswp_fad_labels_treatment()
-
-			global $treatment_single_name; // string
-			global $treatment_single_name_attr; // string
-			global $treatment_plural_name; // string
-			global $treatment_plural_name_attr; // string
+		$labels_treatment = uamswp_fad_labels_treatment();
+			$treatment_single_name = $labels_treatment['treatment_single_name']; // string
+			$treatment_single_name_attr = $labels_treatment['treatment_single_name_attr']; // string
+			$treatment_plural_name = $labels_treatment['treatment_plural_name']; // string
+			$treatment_plural_name_attr = $labels_treatment['treatment_plural_name_attr']; // string
 
 		// Defined in uamswp_fad_fpage_text_treatment_general()
 
@@ -7224,9 +7236,8 @@ function uamswp_fad_section_condition_treatment() {
 		$labels_condition = uamswp_fad_labels_condition();
 			$condition_single_name_attr = $labels_condition['condition_single_name_attr']; // string
 
-		// Defined in uamswp_fad_labels_treatment()
-
-			global $treatment_single_name_attr; // string
+		$labels_treatment = uamswp_fad_labels_treatment();
+			$treatment_single_name_attr = $labels_treatment['treatment_single_name_attr']; // string
 
 		// Defined in uamswp_fad_fpage_text_condition_treatment_general()
 
