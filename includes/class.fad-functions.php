@@ -1272,8 +1272,7 @@ function uamswp_fad_ontology_hide() {
 }
 
 // Convert text string to HTML attribute-friendly text string
-function uamswp_attr_conversion($input)
-{
+function uamswp_attr_conversion($input) {
 	$input_attr = isset($input) ? $input : '';
 	if ( empty($input_attr) ) {
 		return '';
@@ -2138,7 +2137,9 @@ function uamswp_keyword_hook_header() {
 
 	// Bring in variables from outside of the function
 
-		global $keywords; // Typically defined on the template
+		// Typically defined on the template
+
+			global $keywords;
 
 	if( $keywords ): 
 		$i = 1;
@@ -4117,7 +4118,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				);
 				return $fpage_text_provider;
 
-	}
+		}
 
 		// Get field values for fake subpage text elements in an Location subsection (or profile)
 		function uamswp_fad_fpage_text_location() {
@@ -5902,7 +5903,7 @@ function uamswp_fad_fpage_text_replace($string) {
 					'treatment_fpage_title_expertise'						=> $treatment_fpage_title_expertise, // string
 					'treatment_fpage_intro_expertise'						=> $treatment_fpage_intro_expertise, // string
 					'condition_treatment_fpage_title_expertise'				=> $condition_treatment_fpage_title_expertise, // string
-					'condition_treatment_fpage_intro_expertise'				=> $condition_treatment_fpage_intro_expertise, // string
+					'condition_treatment_fpage_intro_expertise'				=> $condition_treatment_fpage_intro_expertise // string
 				);
 				return $fpage_text_expertise;
 
