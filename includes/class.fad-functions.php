@@ -1563,6 +1563,17 @@ function uamswp_fad_post_title() {
 				$provider_section_show = false;
 			}
 		}
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$provider_query_function = array(
+				'provider_query' => $provider_query, // WP_Post[]
+				'provider_section_show' => $provider_section_show, // bool
+				'provider_ids' => $provider_ids,
+				'provider_count' => $provider_count // integer
+			);
+			return $provider_query_function;
+
 	}
 
 	// Query for whether related locations content section should be displayed on a page
@@ -1966,14 +1977,14 @@ function uamswp_fad_post_title() {
 
 // Construct ontology subsection primary navigation
 function uamswp_fad_ontology_nav_menu() {
+
 	// Bring in variables from outside of the function
 
 		$ontology_site_values = uamswp_fad_ontology_site_values();
 			$site_nav_id = $ontology_site_values['site_nav_id'];
 
-		// Typically defined in uamswp_fad_provider_query()
-
-			global $provider_section_show;
+		$provider_query_function = uamswp_fad_provider_query();
+			$provider_section_show = $provider_query_function['provider_section_show'];
 
 		// Typically defined in uamswp_fad_location_query()
 
@@ -6716,13 +6727,14 @@ function uamswp_fad_section_provider() {
 			global $provider_fpage_title_general; // string
 			global $provider_fpage_intro_general; // string
 
-		// Defined on the template or in a function such as uamswp_fad_provider_query()
+		$ontology_site_values = uamswp_fad_ontology_site_values();
+			$providers = $ontology_site_values['providers']; // int[]
 
-			global $provider_section_show; // bool
-			global $provider_query; // WP_Post[]
-			global $providers; // int[]
-			global $provider_ids; // int[]
-			global $provider_count; // int
+		$provider_query_function = uamswp_fad_provider_query();
+			$provider_query = $provider_query_function['provider_query']; // WP_Post[]
+			$provider_section_show = $provider_query_function['provider_section_show']; // bool
+			$provider_ids = $provider_query_function['provider_ids']; // int[]
+			$provider_count = $provider_query_function['provider_count']; // int
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-provider.php' );
 
