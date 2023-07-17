@@ -1206,7 +1206,7 @@ function uamswp_fad_ontology_hide() {
 
 	// Make variables available outside of the function
 
-		global $hide_medical_ontology;
+		global $hide_medical_ontology; // bool
 
 	// If variables are strings, convert them to arrays
 	$regions = is_array($regions) ? $regions : array( $regions );
@@ -1269,6 +1269,14 @@ function uamswp_fad_ontology_hide() {
 			}
 		} // endwhile
 	} // endif
+
+	// Create and return an array to be used on the templates and template parts
+
+		$ontology_hide = array(
+			'hide_medical_ontology'	=> $hide_medical_ontology // bool
+		);
+		return $ontology_hide;
+
 }
 
 // Convert text string to HTML attribute-friendly text string
@@ -7566,9 +7574,8 @@ function uamswp_fad_section_expertise() {
 			$expertise_descendant_section_show = $expertise_descendant_query_function['expertise_descendant_section_show']; // bool
 			$expertise_descendant_count = $expertise_descendant_query_function['expertise_descendant_count']; // int
 
-		// Defined on the template or in a function such as uamswp_fad_ontology_hide()
-
-			global $hide_medical_ontology; // bool
+		$ontology_hide_function = uamswp_fad_ontology_hide();
+			$hide_medical_ontology = $ontology_hide_function['hide_medical_ontology']; // bool
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-expertise.php' );
 
@@ -7655,9 +7662,8 @@ function uamswp_fad_section_condition() {
 			$condition_ids = $condition_query_function['condition_ids']; // int[]
 			$condition_count = $condition_query_function['condition_count']; // int
 
-		// Defined on the template or in a function such as uamswp_fad_ontology_hide()
-
-			global $hide_medical_ontology; // bool
+		$ontology_hide_function = uamswp_fad_ontology_hide();
+			$hide_medical_ontology = $ontology_hide_function['hide_medical_ontology']; // bool
 
 	// Make variables available outside of the function
 
@@ -7705,8 +7711,6 @@ function uamswp_fad_section_treatment() {
 			$treatment_fpage_title_general = $fpage_text_treatment_general['treatment_fpage_title_general']; // string
 			$treatment_fpage_intro_general = $fpage_text_treatment_general['treatment_fpage_intro_general']; // string
 
-		// Defined on the template or in a function such as uamswp_fad_treatment_query()
-
 		$ontology_site_values = uamswp_fad_ontology_site_values();
 			$treatments_cpt = $ontology_site_values['treatments_cpt'];
 
@@ -7716,9 +7720,8 @@ function uamswp_fad_section_treatment() {
 			$treatment_ids = $treatment_query_function['treatment_ids']; // int[]
 			$treatment_count = $treatment_query_function['treatment_count']; // int
 
-		// Defined on the template or in a function such as uamswp_fad_ontology_hide()
-
-			global $hide_medical_ontology; // bool
+		$ontology_hide_function = uamswp_fad_ontology_hide();
+			$hide_medical_ontology = $ontology_hide_function['hide_medical_ontology']; // bool
 
 	// Make variables available outside of the function
 
@@ -7796,9 +7799,8 @@ function uamswp_fad_section_condition_treatment() {
 			$condition_treatment_section_show = $treatment_query_function['condition_treatment_section_show']; // bool
 			$treatment_count = $treatment_query_function['treatment_count']; // int
 
-		// Defined in uamswp_fad_ontology_hide()
-
-		global $hide_medical_ontology; // bool
+		$ontology_hide_function = uamswp_fad_ontology_hide();
+			$hide_medical_ontology = $ontology_hide_function['hide_medical_ontology']; // bool
 
 	// Make variables available outside of the function
 
