@@ -2421,12 +2421,11 @@ function uamswp_fad_fpage_text_replace($string) {
 			$placeholder_condition_single_name = $labels_condition['placeholder_condition_single_name']; // string
 			$placeholder_condition_plural_name = $labels_condition['placeholder_condition_plural_name']; // string
 
-		// Defined in uamswp_fad_archive_text_condition()
-
-			global $placeholder_condition_archive_headline;
-			global $condition_archive_headline;
-			global $placeholder_condition_archive_intro_text;
-			global $condition_archive_intro_text;
+		$archive_text_condition = uamswp_fad_archive_text_condition();
+			$condition_archive_headline = $archive_text_condition['condition_archive_headline']; // string
+			$condition_archive_intro_text = $archive_text_condition['condition_archive_intro_text']; // string
+			$placeholder_condition_archive_headline = $archive_text_condition['placeholder_condition_archive_headline']; // string
+			$placeholder_condition_archive_intro_text = $archive_text_condition['placeholder_condition_archive_intro_text']; // string
 
 		$labels_treatment = uamswp_fad_labels_treatment();
 			$treatment_single_name = $labels_treatment['treatment_single_name']; // string
