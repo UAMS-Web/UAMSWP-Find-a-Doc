@@ -7100,7 +7100,9 @@ function uamswp_fad_fpage_text_replace($string) {
 				}
 
 			// Areas of Expertise
-			$expertise_fpage_image_clinical_resource = get_field('expertise_fpage_featured_image_clinical_resource', 'option');
+
+				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in a Clinical Resource subsection (or profile)
+				$expertise_fpage_image_clinical_resource = get_field('expertise_fpage_featured_image_clinical_resource', 'option');
 
 				// If the variable is not set or is empty...
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
@@ -7126,7 +7128,17 @@ function uamswp_fad_fpage_text_replace($string) {
 					}
 					$clinical_resource_fpage_image_clinical_resource = $clinical_resource_fpage_image_general; // Featured image
 				}
-	
+
+			// Create and return an array to be used on the templates and template parts
+		
+				$fpage_image_clinical_resource = array(
+					'provider_fpage_image_clinical_resource'			=> $provider_fpage_image_clinical_resource, // int
+					'location_fpage_image_clinical_resource'			=> $location_fpage_image_clinical_resource, // int
+					'expertise_fpage_image_clinical_resource'			=> $expertise_fpage_image_clinical_resource, // int
+					'clinical_resource_fpage_image_clinical_resource'	=> $clinical_resource_fpage_image_clinical_resource // int
+				);
+				return $fpage_image_clinical_resource;
+
 		}
 
 // Filter the allowed block types for all editor types
