@@ -6595,15 +6595,22 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Make variables available outside of the function
 
-				global $provider_fpage_image_general;
+				global $provider_fpage_image_general; // int
 
 			// Get the Find-a-Doc Settings value
-			$provider_fpage_image_general = get_field('provider_fpage_featured_image_general', 'option'); // Featured image
+			$provider_fpage_image_general = get_field('provider_fpage_featured_image_general', 'option'); // Featured image ID
 
 			// If the variable is not set or is empty...
 			// Set a hardcoded fallback value
 			$provider_fpage_image_general = ( isset($provider_fpage_image_general) && !empty($provider_fpage_image_general) ) ? $provider_fpage_image_general : ''; // Featured image
 
+			// Create and return an array to be used on the templates and template parts
+		
+				$fpage_image_provider_general = array(
+					'provider_fpage_image_general'	=> $provider_fpage_image_general // int
+				);
+				return $fpage_image_provider_general;
+	
 		}
 
 		// Get the Find-a-Doc Settings values for the featured image of a fake subpage (or section) for Locations in general placements
@@ -6755,8 +6762,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($provider_fpage_image_location) || empty($provider_fpage_image_location) ) {
 					if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
-						uamswp_fad_fpage_image_provider_general();
-						global $provider_fpage_image_general;
+						$fpage_image_provider_general = uamswp_fad_fpage_image_provider_general();
+							$provider_fpage_image_general = $fpage_image_provider_general['provider_fpage_image_general']; // int
 					}
 					$provider_fpage_image_location = $provider_fpage_image_general; // Featured image
 				}
@@ -6855,8 +6862,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($provider_fpage_featured_image_expertise) || empty($provider_fpage_featured_image_expertise) ) {
 					if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
-						uamswp_fad_fpage_image_provider_general();
-						global $provider_fpage_image_general;
+						$fpage_image_provider_general = uamswp_fad_fpage_image_provider_general();
+							$provider_fpage_image_general = $fpage_image_provider_general['provider_fpage_image_general']; // int
 					}
 					$provider_fpage_featured_image_expertise = $provider_fpage_image_general; // Featured image
 				}
@@ -7011,8 +7018,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($provider_fpage_image_clinical_resource) || empty($provider_fpage_image_clinical_resource) ) {
 					if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
-						uamswp_fad_fpage_image_provider_general();
-						global $provider_fpage_image_general;
+						$fpage_image_provider_general = uamswp_fad_fpage_image_provider_general();
+							$provider_fpage_image_general = $fpage_image_provider_general['provider_fpage_image_general']; // int
 					}
 					$provider_fpage_image_clinical_resource = $provider_fpage_image_general; // Featured image
 				}
