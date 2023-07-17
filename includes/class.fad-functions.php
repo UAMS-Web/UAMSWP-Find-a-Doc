@@ -7197,30 +7197,30 @@ function uamswp_fad_appointment_patients() {
 
 	// Make variables available outside of the function
 
-		global $appointment_patients_phone_number_new;
-		global $appointment_patients_phone_label_new;
-		global $appointment_patients_phone_label_new_attr;
-		global $appointment_patients_phone_info_new;
-		global $appointment_patients_phone_number_existing;
-		global $appointment_patients_phone_label_existing;
-		global $appointment_patients_phone_label_existing_attr;
-		global $appointment_patients_phone_info_existing;
-		global $appointment_patients_phone_number_both;
-		global $appointment_patients_phone_label_both;
-		global $appointment_patients_phone_label_both_attr;
-		global $appointment_patients_phone_info_both;
-		global $appointment_patients_web_url_new;
-		global $appointment_patients_web_label_new;
-		global $appointment_patients_web_label_new_attr;
-		global $appointment_patients_web_info_new;
-		global $appointment_patients_web_url_existing;
-		global $appointment_patients_web_label_existing;
-		global $appointment_patients_web_label_existing_attr;
-		global $appointment_patients_web_info_existing;
-		global $appointment_patients_web_url_both;
-		global $appointment_patients_web_label_both;
-		global $appointment_patients_web_label_both_attr;
-		global $appointment_patients_web_info_both;
+		global $appointment_patients_phone_number_new; // string
+		global $appointment_patients_phone_label_new; // string
+		global $appointment_patients_phone_label_new_attr; // string
+		global $appointment_patients_phone_info_new; // string
+		global $appointment_patients_phone_number_existing; // string
+		global $appointment_patients_phone_label_existing; // string
+		global $appointment_patients_phone_label_existing_attr; // string
+		global $appointment_patients_phone_info_existing; // string
+		global $appointment_patients_phone_number_both; // string
+		global $appointment_patients_phone_label_both; // string
+		global $appointment_patients_phone_label_both_attr; // string
+		global $appointment_patients_phone_info_both; // string
+		global $appointment_patients_web_url_new; // string
+		global $appointment_patients_web_label_new; // string
+		global $appointment_patients_web_label_new_attr; // string
+		global $appointment_patients_web_info_new; // string
+		global $appointment_patients_web_url_existing; // string
+		global $appointment_patients_web_label_existing; // string
+		global $appointment_patients_web_label_existing_attr; // string
+		global $appointment_patients_web_info_existing; // string
+		global $appointment_patients_web_url_both; // string
+		global $appointment_patients_web_label_both; // string
+		global $appointment_patients_web_label_both_attr; // string
+		global $appointment_patients_web_info_both; // string
 
 	// Phone Number Information
 
@@ -7261,6 +7261,37 @@ function uamswp_fad_appointment_patients() {
 		$appointment_patients_web_label_both = get_field('appointment_patients_web_label_both', 'option') ?: '';
 		$appointment_patients_web_label_both_attr = uamswp_attr_conversion($appointment_patients_web_label_both);
 		$appointment_patients_web_info_both = get_field('appointment_patients_web_info_both', 'option') ?: '';
+
+	// Create and return an array to be used on the templates and template parts
+
+		$appointment_patients = array(
+			'appointment_patients_phone_number_new'				=> $appointment_patients_phone_number_new, // string
+			'appointment_patients_phone_label_new'				=> $appointment_patients_phone_label_new, // string
+			'appointment_patients_phone_label_new_attr'			=> $appointment_patients_phone_label_new_attr, // string
+			'appointment_patients_phone_info_new'				=> $appointment_patients_phone_info_new, // string
+			'appointment_patients_phone_number_existing'		=> $appointment_patients_phone_number_existing, // string
+			'appointment_patients_phone_label_existing'			=> $appointment_patients_phone_label_existing, // string
+			'appointment_patients_phone_label_existing_attr'	=> $appointment_patients_phone_label_existing_attr, // string
+			'appointment_patients_phone_info_existing'			=> $appointment_patients_phone_info_existing, // string
+			'appointment_patients_phone_number_both'			=> $appointment_patients_phone_number_both, // string
+			'appointment_patients_phone_label_both'				=> $appointment_patients_phone_label_both, // string
+			'appointment_patients_phone_label_both_attr'		=> $appointment_patients_phone_label_both_attr, // string
+			'appointment_patients_phone_info_both'				=> $appointment_patients_phone_info_both, // string
+			'appointment_patients_web_url_new'					=> $appointment_patients_web_url_new, // string
+			'appointment_patients_web_label_new'				=> $appointment_patients_web_label_new, // string
+			'appointment_patients_web_label_new_attr'			=> $appointment_patients_web_label_new_attr, // string
+			'appointment_patients_web_info_new'					=> $appointment_patients_web_info_new, // string
+			'appointment_patients_web_url_existing'				=> $appointment_patients_web_url_existing, // string
+			'appointment_patients_web_label_existing'			=> $appointment_patients_web_label_existing, // string
+			'appointment_patients_web_label_existing_attr'		=> $appointment_patients_web_label_existing_attr, // string
+			'appointment_patients_web_info_existing'			=> $appointment_patients_web_info_existing, // string
+			'appointment_patients_web_url_both'					=> $appointment_patients_web_url_both, // string
+			'appointment_patients_web_label_both'				=> $appointment_patients_web_label_both, // string
+			'appointment_patients_web_label_both_attr'			=> $appointment_patients_web_label_both_attr, // string
+			'appointment_patients_web_info_both'				=> $appointment_patients_web_info_both // string
+		);
+		return $appointment_patients;
+
 }
 
 // Get the Find-a-Doc Settings values for general patient referral information
