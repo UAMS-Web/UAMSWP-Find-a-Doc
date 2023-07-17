@@ -2091,10 +2091,9 @@ function uamswp_fad_ontology_nav_menu() {
 			$expertise_content_nav_show = $expertise_descendant_query_function['expertise_content_nav_show']; // bool
 			$expertise_content_nav = $expertise_descendant_query_function['expertise_content_nav']; // string
 
-		// Typically defined in uamswp_fad_labels_provider()
-
-			global $provider_plural_name;
-			global $provider_plural_name_attr;
+		$labels_provider = uamswp_fad_labels_provider();
+			$provider_plural_name = $labels_provider['provider_plural_name']; // string
+			$provider_plural_name_attr = $labels_provider['provider_plural_name_attr']; // string
 
 		// Typically defined in uamswp_fad_labels_location()
 
@@ -2271,9 +2270,8 @@ function uamswp_fad_podcast() {
 		$podcast_query_function = uamswp_fad_podcast_query();
 			$podcast_section_show = $podcast_query_function['podcast_section_show'];
 
-		// Typically defined in uamswp_fad_labels_provider()
-
-			global $provider_plural_name;
+		$labels_provider = uamswp_fad_labels_provider();
+			$provider_plural_name = $labels_provider['provider_plural_name']; // string
 
 	if ( $podcast_section_show ) {
 		if ( $podcast_filter == 'tag' ) {
@@ -2338,14 +2336,13 @@ function uamswp_fad_fpage_text_replace($string) {
 			global $short_name;
 			global $short_name_possessive;
 
-		// Defined in uamswp_fad_labels_provider()
-
-			global $placeholder_provider_single_name;
-			global $provider_single_name;
-			global $placeholder_provider_plural_name;
-			global $provider_plural_name;
-			global $placeholder_provider_short_name;
-			global $placeholder_provider_short_name_possessive;
+		$labels_provider = uamswp_fad_labels_provider();
+			$provider_single_name = $labels_provider['provider_single_name']; // string
+			$provider_plural_name = $labels_provider['provider_plural_name']; // string
+			$placeholder_provider_single_name = $labels_provider['placeholder_provider_single_name']; // string
+			$placeholder_provider_plural_name = $labels_provider['placeholder_provider_plural_name']; // string
+			$placeholder_provider_short_name = $labels_provider['placeholder_provider_short_name']; // string
+			$placeholder_provider_short_name_possessive = $labels_provider['placeholder_provider_short_name_possessive']; // string
 
 		// Defined in uamswp_fad_archive_text_provider()
 
@@ -2606,6 +2603,21 @@ function uamswp_fad_fpage_text_replace($string) {
 		$facet_labels['resource_provider'] = $provider_plural_name;
 		$facet_labels['resource_provider_attr'] = $provider_plural_name_attr;
 
+		// Create and return an array to be used on the templates and template parts
+	
+			$labels_provider = array(
+				'provider_single_name' => $provider_single_name, // string
+				'provider_single_name_attr' => $provider_single_name_attr, // string
+				'provider_plural_name' => $provider_plural_name, // string
+				'provider_plural_name_attr' => $provider_plural_name_attr, // string
+				'placeholder_provider_single_name' => $placeholder_provider_single_name, // string
+				'placeholder_provider_plural_name' => $placeholder_provider_plural_name, // string
+				'placeholder_provider_short_name' => $placeholder_provider_short_name, // string
+				'placeholder_provider_short_name_possessive' => $placeholder_provider_short_name_possessive, // string
+				'facet_labels' => $facet_labels // array
+			);
+			return $labels_provider;
+	
 	}
 
 	// Get the Find-a-Doc Settings values for location labels
@@ -6816,10 +6828,9 @@ function uamswp_fad_section_provider() {
 			global $provider_section_filter_title; // Query for whether to add title filter // bool (default: true)
 			global $provider_section_collapse_list; // Query for whether to collapse the list of providers in the providers section // bool (default: true)
 
-		// Defined in uamswp_fad_labels_provider()
-
-			global $provider_plural_name; // string
-			global $provider_plural_name_attr; // string
+		$labels_provider = uamswp_fad_labels_provider();
+			$provider_plural_name = $labels_provider['provider_plural_name']; // string
+			$provider_plural_name_attr = $labels_provider['provider_plural_name_attr']; // string
 
 		// Defined in uamswp_fad_fpage_text_provider_general()
 
