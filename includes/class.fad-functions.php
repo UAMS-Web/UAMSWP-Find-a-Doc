@@ -1660,11 +1660,11 @@ function uamswp_fad_post_title() {
 
 		// Make variables available outside of the function
 
-			global $location_descendant_query;
-			global $location_descendant_section_show;
-			global $location_descendant_ids;
-			global $location_descendant_count; // integer
-			global $location_descendant_valid;
+			global $location_descendant_query; // WP_Post[]
+			global $location_descendant_section_show; // bool
+			global $location_descendant_ids; // int[]
+			global $location_descendant_count; // int
+			global $location_descendant_valid; // bool
 
 		$location_descendant_valid = false;
 
@@ -1705,6 +1705,18 @@ function uamswp_fad_post_title() {
 				}
 			}
 		}
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$location_descendant_query_function = array(
+				'location_descendant_query' => $location_descendant_query, // WP_Post[]
+				'location_descendant_section_show' => $location_descendant_section_show, // bool
+				'location_descendant_ids' => $location_descendant_ids, // int[]
+				'location_descendant_count' => $location_descendant_count, // int
+				'location_descendant_valid' => $location_descendant_valid // bool
+			);
+			return $location_descendant_query_function;
+
 	}
 
 	// Query for whether descendant areas of expertise content section should be displayed on ontology pages/subsections
