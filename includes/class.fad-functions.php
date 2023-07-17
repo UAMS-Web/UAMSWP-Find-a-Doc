@@ -2343,10 +2343,9 @@ function uamswp_fad_fpage_text_replace($string) {
 			$placeholder_provider_short_name = $labels_provider['placeholder_provider_short_name']; // string
 			$placeholder_provider_short_name_possessive = $labels_provider['placeholder_provider_short_name_possessive']; // string
 
-		// Defined in uamswp_fad_archive_text_provider()
-
-			global $placeholder_provider_archive_headline;
-			global $provider_archive_headline;
+		$archive_text_provider = uamswp_fad_archive_text_provider();
+			$provider_archive_headline = $archive_text_provider['provider_archive_headline']; // string
+			$placeholder_provider_archive_headline = $archive_text_provider['placeholder_provider_archive_headline']; // string
 
 		$labels_location = uamswp_fad_labels_location();
 			$location_single_name = $labels_location['location_single_name']; // string
@@ -3020,6 +3019,16 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		$provider_archive_headline = get_field('provider_archive_headline', 'option') ?: 'UAMS Health Providers';
 		$provider_archive_headline_attr = uamswp_attr_conversion($provider_archive_headline);
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$archive_text_provider = array(
+				'provider_archive_headline' => $provider_archive_headline, // string
+				'provider_archive_headline_attr' => $provider_archive_headline_attr, // string
+				'placeholder_provider_archive_headline' => $placeholder_provider_archive_headline // string
+			);
+			return $archive_text_provider;
+
 	}
 
 	// Get the Find-a-Doc Settings values for location archive page text
