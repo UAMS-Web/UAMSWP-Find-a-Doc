@@ -4801,60 +4801,60 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Make variables available outside of the function
 
-				global $expertise_page_title_options;
-				global $expertise_page_title;
-				global $expertise_page_intro;
-				global $expertise_page_image;
-				global $expertise_page_image_mobile;
-				global $expertise_short_desc;
-				global $provider_fpage_title_expertise;
-				global $provider_fpage_intro_expertise;
-				global $provider_fpage_ref_main_title_expertise;
-				global $provider_fpage_ref_main_intro_expertise;
-				global $provider_fpage_ref_main_link_expertise;
-				global $provider_fpage_ref_top_title_expertise;
-				global $provider_fpage_ref_top_intro_expertise;
-				global $provider_fpage_ref_top_link_expertise;
-				global $provider_fpage_short_desc_expertise;
-				global $location_fpage_title_expertise;
-				global $location_fpage_intro_expertise;
-				global $location_fpage_short_desc_expertise;
-				global $location_fpage_ref_main_title_expertise;
-				global $location_fpage_ref_main_intro_expertise;
-				global $location_fpage_ref_main_link_expertise;
-				global $location_fpage_ref_top_title_expertise;
-				global $location_fpage_ref_top_intro_expertise;
-				global $location_fpage_ref_top_link_expertise;
-				global $expertise_descendant_fpage_title_expertise;
-				global $expertise_descendant_fpage_intro_expertise;
-				global $expertise_descendant_fpage_short_desc_expertise;
-				global $expertise_descendant_fpage_ref_main_title_expertise;
-				global $expertise_descendant_fpage_ref_main_intro_expertise;
-				global $expertise_descendant_fpage_ref_main_link_expertise;
-				global $expertise_fpage_title_expertise;
-				global $expertise_fpage_intro_expertise;
-				global $expertise_fpage_short_desc_expertise;
-				global $expertise_fpage_ref_main_title_expertise;
-				global $expertise_fpage_ref_main_intro_expertise;
-				global $expertise_fpage_ref_main_link_expertise;
-				global $clinical_resource_fpage_title_expertise;
-				global $clinical_resource_fpage_intro_expertise;
-				global $clinical_resource_fpage_ref_main_title_expertise;
-				global $clinical_resource_fpage_ref_main_intro_expertise;
-				global $clinical_resource_fpage_ref_main_link_expertise;
-				global $clinical_resource_fpage_ref_top_title_expertise;
-				global $clinical_resource_fpage_ref_top_intro_expertise;
-				global $clinical_resource_fpage_ref_top_link_expertise;
-				global $clinical_resource_fpage_more_text_expertise;
-				global $clinical_resource_fpage_more_link_text_expertise;
-				global $clinical_resource_fpage_more_link_descr_expertise;
-				global $clinical_resource_fpage_short_desc_expertise;
-				global $condition_fpage_title_expertise;
-				global $condition_fpage_intro_expertise;
-				global $treatment_fpage_title_expertise;
-				global $treatment_fpage_intro_expertise;
-				global $condition_treatment_fpage_title_expertise;
-				global $condition_treatment_fpage_intro_expertise;
+				global $expertise_page_title_options; // string
+				global $expertise_page_title; // string
+				global $expertise_page_intro; // string
+				global $expertise_page_image; // string
+				global $expertise_page_image_mobile; // string
+				global $expertise_short_desc; // string
+				global $provider_fpage_title_expertise; // string
+				global $provider_fpage_intro_expertise; // string
+				global $provider_fpage_ref_main_title_expertise; // string
+				global $provider_fpage_ref_main_intro_expertise; // string
+				global $provider_fpage_ref_main_link_expertise; // string
+				global $provider_fpage_ref_top_title_expertise; // string
+				global $provider_fpage_ref_top_intro_expertise; // string
+				global $provider_fpage_ref_top_link_expertise; // string
+				global $provider_fpage_short_desc_expertise; // string
+				global $location_fpage_title_expertise; // string
+				global $location_fpage_intro_expertise; // string
+				global $location_fpage_short_desc_expertise; // string
+				global $location_fpage_ref_main_title_expertise; // string
+				global $location_fpage_ref_main_intro_expertise; // string
+				global $location_fpage_ref_main_link_expertise; // string
+				global $location_fpage_ref_top_title_expertise; // string
+				global $location_fpage_ref_top_intro_expertise; // string
+				global $location_fpage_ref_top_link_expertise; // string
+				global $expertise_descendant_fpage_title_expertise; // string
+				global $expertise_descendant_fpage_intro_expertise; // string
+				global $expertise_descendant_fpage_short_desc_expertise; // string
+				global $expertise_descendant_fpage_ref_main_title_expertise; // string
+				global $expertise_descendant_fpage_ref_main_intro_expertise; // string
+				global $expertise_descendant_fpage_ref_main_link_expertise; // string
+				global $expertise_fpage_title_expertise; // string
+				global $expertise_fpage_intro_expertise; // string
+				global $expertise_fpage_short_desc_expertise; // string
+				global $expertise_fpage_ref_main_title_expertise; // string
+				global $expertise_fpage_ref_main_intro_expertise; // string
+				global $expertise_fpage_ref_main_link_expertise; // string
+				global $clinical_resource_fpage_title_expertise; // string
+				global $clinical_resource_fpage_intro_expertise; // string
+				global $clinical_resource_fpage_ref_main_title_expertise; // string
+				global $clinical_resource_fpage_ref_main_intro_expertise; // string
+				global $clinical_resource_fpage_ref_main_link_expertise; // string
+				global $clinical_resource_fpage_ref_top_title_expertise; // string
+				global $clinical_resource_fpage_ref_top_intro_expertise; // string
+				global $clinical_resource_fpage_ref_top_link_expertise; // string
+				global $clinical_resource_fpage_more_text_expertise; // string
+				global $clinical_resource_fpage_more_link_text_expertise; // string
+				global $clinical_resource_fpage_more_link_descr_expertise; // string
+				global $clinical_resource_fpage_short_desc_expertise; // string
+				global $condition_fpage_title_expertise; // string
+				global $condition_fpage_intro_expertise; // string
+				global $treatment_fpage_title_expertise; // string
+				global $treatment_fpage_intro_expertise; // string
+				global $condition_treatment_fpage_title_expertise; // string
+				global $condition_treatment_fpage_intro_expertise; // string
 
 			// Overview
 
@@ -5845,6 +5845,66 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					$condition_treatment_fpage_title_expertise = $condition_treatment_fpage_title_expertise ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_expertise) : ''; // Title
 					$condition_treatment_fpage_intro_expertise = $condition_treatment_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_expertise) : ''; // Intro text
+
+			// Create and return an array to be used on the templates and template parts
+		
+				$fpage_text_expertise = array(
+					'expertise_page_title_options'							=> $expertise_page_title_options, // string
+					'expertise_page_title'									=> $expertise_page_title, // string
+					'expertise_page_intro'									=> $expertise_page_intro, // string
+					'expertise_page_image'									=> $expertise_page_image, // string
+					'expertise_page_image_mobile'							=> $expertise_page_image_mobile, // string
+					'expertise_short_desc'									=> $expertise_short_desc, // string
+					'provider_fpage_title_expertise'						=> $provider_fpage_title_expertise, // string
+					'provider_fpage_intro_expertise'						=> $provider_fpage_intro_expertise, // string
+					'provider_fpage_ref_main_title_expertise'				=> $provider_fpage_ref_main_title_expertise, // string
+					'provider_fpage_ref_main_intro_expertise'				=> $provider_fpage_ref_main_intro_expertise, // string
+					'provider_fpage_ref_main_link_expertise'				=> $provider_fpage_ref_main_link_expertise, // string
+					'provider_fpage_ref_top_title_expertise'				=> $provider_fpage_ref_top_title_expertise, // string
+					'provider_fpage_ref_top_intro_expertise'				=> $provider_fpage_ref_top_intro_expertise, // string
+					'provider_fpage_ref_top_link_expertise'					=> $provider_fpage_ref_top_link_expertise, // string
+					'provider_fpage_short_desc_expertise'					=> $provider_fpage_short_desc_expertise, // string
+					'location_fpage_title_expertise'						=> $location_fpage_title_expertise, // string
+					'location_fpage_intro_expertise'						=> $location_fpage_intro_expertise, // string
+					'location_fpage_short_desc_expertise'					=> $location_fpage_short_desc_expertise, // string
+					'location_fpage_ref_main_title_expertise'				=> $location_fpage_ref_main_title_expertise, // string
+					'location_fpage_ref_main_intro_expertise'				=> $location_fpage_ref_main_intro_expertise, // string
+					'location_fpage_ref_main_link_expertise'				=> $location_fpage_ref_main_link_expertise, // string
+					'location_fpage_ref_top_title_expertise'				=> $location_fpage_ref_top_title_expertise, // string
+					'location_fpage_ref_top_intro_expertise'				=> $location_fpage_ref_top_intro_expertise, // string
+					'location_fpage_ref_top_link_expertise'					=> $location_fpage_ref_top_link_expertise, // string
+					'expertise_descendant_fpage_title_expertise'			=> $expertise_descendant_fpage_title_expertise, // string
+					'expertise_descendant_fpage_intro_expertise'			=> $expertise_descendant_fpage_intro_expertise, // string
+					'expertise_descendant_fpage_short_desc_expertise'		=> $expertise_descendant_fpage_short_desc_expertise, // string
+					'expertise_descendant_fpage_ref_main_title_expertise'	=> $expertise_descendant_fpage_ref_main_title_expertise, // string
+					'expertise_descendant_fpage_ref_main_intro_expertise'	=> $expertise_descendant_fpage_ref_main_intro_expertise, // string
+					'expertise_descendant_fpage_ref_main_link_expertise'	=> $expertise_descendant_fpage_ref_main_link_expertise, // string
+					'expertise_fpage_title_expertise'						=> $expertise_fpage_title_expertise, // string
+					'expertise_fpage_intro_expertise'						=> $expertise_fpage_intro_expertise, // string
+					'expertise_fpage_short_desc_expertise'					=> $expertise_fpage_short_desc_expertise, // string
+					'expertise_fpage_ref_main_title_expertise'				=> $expertise_fpage_ref_main_title_expertise, // string
+					'expertise_fpage_ref_main_intro_expertise'				=> $expertise_fpage_ref_main_intro_expertise, // string
+					'expertise_fpage_ref_main_link_expertise'				=> $expertise_fpage_ref_main_link_expertise, // string
+					'clinical_resource_fpage_title_expertise'				=> $clinical_resource_fpage_title_expertise, // string
+					'clinical_resource_fpage_intro_expertise'				=> $clinical_resource_fpage_intro_expertise, // string
+					'clinical_resource_fpage_ref_main_title_expertise'		=> $clinical_resource_fpage_ref_main_title_expertise, // string
+					'clinical_resource_fpage_ref_main_intro_expertise'		=> $clinical_resource_fpage_ref_main_intro_expertise, // string
+					'clinical_resource_fpage_ref_main_link_expertise'		=> $clinical_resource_fpage_ref_main_link_expertise, // string
+					'clinical_resource_fpage_ref_top_title_expertise'		=> $clinical_resource_fpage_ref_top_title_expertise, // string
+					'clinical_resource_fpage_ref_top_intro_expertise'		=> $clinical_resource_fpage_ref_top_intro_expertise, // string
+					'clinical_resource_fpage_ref_top_link_expertise'		=> $clinical_resource_fpage_ref_top_link_expertise, // string
+					'clinical_resource_fpage_more_text_expertise'			=> $clinical_resource_fpage_more_text_expertise, // string
+					'clinical_resource_fpage_more_link_text_expertise'		=> $clinical_resource_fpage_more_link_text_expertise, // string
+					'clinical_resource_fpage_more_link_descr_expertise'		=> $clinical_resource_fpage_more_link_descr_expertise, // string
+					'clinical_resource_fpage_short_desc_expertise'			=> $clinical_resource_fpage_short_desc_expertise, // string
+					'condition_fpage_title_expertise'						=> $condition_fpage_title_expertise, // string
+					'condition_fpage_intro_expertise'						=> $condition_fpage_intro_expertise, // string
+					'treatment_fpage_title_expertise'						=> $treatment_fpage_title_expertise, // string
+					'treatment_fpage_intro_expertise'						=> $treatment_fpage_intro_expertise, // string
+					'condition_treatment_fpage_title_expertise'				=> $condition_treatment_fpage_title_expertise, // string
+					'condition_treatment_fpage_intro_expertise'				=> $condition_treatment_fpage_intro_expertise, // string
+				);
+				return $fpage_text_expertise;
 
 		}
 
@@ -7727,12 +7787,12 @@ function uamswp_fad_fpage_text_image_overlay() {
 			||
 			!isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise)
 			) {
-			uamswp_fad_fpage_text_expertise();
-			global $provider_fpage_title_expertise;
-			global $location_fpage_title_expertise;
-			global $expertise_descendant_fpage_title_expertise;
-			global $expertise_fpage_title_expertise;
-			global $clinical_resource_fpage_title_expertise;
+			$fpage_text_expertise = uamswp_fad_fpage_text_expertise();
+				$provider_fpage_title_expertise = $fpage_text_expertise['provider_fpage_title_expertise']; // string
+				$location_fpage_title_expertise = $fpage_text_expertise['location_fpage_title_expertise']; // string
+				$expertise_descendant_fpage_title_expertise = $fpage_text_expertise['expertise_descendant_fpage_title_expertise']; // string
+				$expertise_fpage_title_expertise = $fpage_text_expertise['expertise_fpage_title_expertise']; // string
+				$clinical_resource_fpage_title_expertise = $fpage_text_expertise['clinical_resource_fpage_title_expertise']; // string
 		}
 		if ( $current_fpage == 'providers' ) {
 			global $provider_fpage_ref_main_title_expertise; // General Title of a Reference to the Main Provider Archive on a Fake Subpage for Providers // string
@@ -7801,10 +7861,10 @@ function uamswp_fad_fpage_text_image_overlay() {
 				||
 				!isset($expertise_descendant_fpage_ref_main_link_expertise) || empty($expertise_descendant_fpage_ref_main_link_expertise)
 				) {
-				uamswp_fad_fpage_text_expertise();
-				global $expertise_descendant_fpage_ref_main_title_expertise;
-				global $expertise_descendant_fpage_ref_main_intro_expertise;
-				global $expertise_descendant_fpage_ref_main_link_expertise;
+				$fpage_text_expertise = uamswp_fad_fpage_text_expertise();
+					$expertise_descendant_fpage_ref_main_title_expertise = $fpage_text_expertise['expertise_descendant_fpage_ref_main_title_expertise']; // string
+					$expertise_descendant_fpage_ref_main_intro_expertise = $fpage_text_expertise['expertise_descendant_fpage_ref_main_intro_expertise']; // string
+					$expertise_descendant_fpage_ref_main_link_expertise = $fpage_text_expertise['expertise_descendant_fpage_ref_main_link_expertise']; // string
 			}
 		} elseif ( $current_fpage == 'related' ) {
 			global $expertise_fpage_ref_main_title_expertise; // General Title of a Reference to the Main Area of Expertise Archive on a Fake Subpage for Areas of Expertise // string
@@ -7817,10 +7877,10 @@ function uamswp_fad_fpage_text_image_overlay() {
 				||
 				!isset($expertise_fpage_ref_main_link_expertise) || empty($expertise_fpage_ref_main_link_expertise)
 				) {
-				uamswp_fad_fpage_text_expertise();
-				global $expertise_fpage_ref_main_title_expertise;
-				global $expertise_fpage_ref_main_intro_expertise;
-				global $expertise_fpage_ref_main_link_expertise;
+				$fpage_text_expertise = uamswp_fad_fpage_text_expertise();
+					$expertise_fpage_ref_main_title_expertise = $fpage_text_expertise['expertise_fpage_ref_main_title_expertise']; // string
+					$expertise_fpage_ref_main_intro_expertise = $fpage_text_expertise['expertise_fpage_ref_main_intro_expertise']; // string
+					$expertise_fpage_ref_main_link_expertise = $fpage_text_expertise['expertise_fpage_ref_main_link_expertise']; // string
 			}
 
 		} elseif ( $current_fpage == 'resources' ) {
