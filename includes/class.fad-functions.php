@@ -3245,22 +3245,22 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Make variables available outside of the function
 
-				global $location_fpage_title_general;
-				global $location_fpage_intro_general;
-				global $location_fpage_ref_main_title_general;
-				global $location_fpage_ref_main_intro_general;
-				global $location_fpage_ref_main_link_general;
-				global $location_fpage_ref_top_title_general;
-				global $location_fpage_ref_top_intro_general;
-				global $location_fpage_ref_top_link_general;
-				global $location_descendant_fpage_title_general;
-				global $location_descendant_fpage_intro_general;
-				global $location_descendant_fpage_ref_main_title_general;
-				global $location_descendant_fpage_ref_main_intro_general;
-				global $location_descendant_fpage_ref_main_link_general;
-				global $location_descendant_fpage_ref_top_title_general;
-				global $location_descendant_fpage_ref_top_intro_general;
-				global $location_descendant_fpage_ref_top_link_general;
+				global $location_fpage_title_general; // string
+				global $location_fpage_intro_general; // string
+				global $location_fpage_ref_main_title_general; // string
+				global $location_fpage_ref_main_intro_general; // string
+				global $location_fpage_ref_main_link_general; // string
+				global $location_fpage_ref_top_title_general; // string
+				global $location_fpage_ref_top_intro_general; // string
+				global $location_fpage_ref_top_link_general; // string
+				global $location_descendant_fpage_title_general; // string
+				global $location_descendant_fpage_intro_general; // string
+				global $location_descendant_fpage_ref_main_title_general; // string
+				global $location_descendant_fpage_ref_main_intro_general; // string
+				global $location_descendant_fpage_ref_main_link_general; // string
+				global $location_descendant_fpage_ref_top_title_general; // string
+				global $location_descendant_fpage_ref_top_intro_general; // string
+				global $location_descendant_fpage_ref_top_link_general; // string
 
 			// Locations
 
@@ -3327,6 +3327,28 @@ function uamswp_fad_fpage_text_replace($string) {
 				$location_descendant_fpage_ref_top_title_general = $location_descendant_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_top_title_general) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, title
 				$location_descendant_fpage_ref_top_intro_general = $location_descendant_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_top_intro_general) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, body text
 				$location_descendant_fpage_ref_top_link_general = $location_descendant_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_top_link_general) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, link text
+
+			// Create and return an array to be used on the templates and template parts
+		
+				$fpage_text_location_general = array(
+					'location_fpage_title_general'						=> $location_fpage_title_general, // string
+					'location_fpage_intro_general'						=> $location_fpage_intro_general, // string
+					'location_fpage_ref_main_title_general'				=> $location_fpage_ref_main_title_general, // string
+					'location_fpage_ref_main_intro_general'				=> $location_fpage_ref_main_intro_general, // string
+					'location_fpage_ref_main_link_general'				=> $location_fpage_ref_main_link_general, // string
+					'location_fpage_ref_top_title_general'				=> $location_fpage_ref_top_title_general, // string
+					'location_fpage_ref_top_intro_general'				=> $location_fpage_ref_top_intro_general, // string
+					'location_fpage_ref_top_link_general'				=> $location_fpage_ref_top_link_general, // string
+					'location_descendant_fpage_title_general'			=> $location_descendant_fpage_title_general, // string
+					'location_descendant_fpage_intro_general'			=> $location_descendant_fpage_intro_general, // string
+					'location_descendant_fpage_ref_main_title_general'	=> $location_descendant_fpage_ref_main_title_general, // string
+					'location_descendant_fpage_ref_main_intro_general'	=> $location_descendant_fpage_ref_main_intro_general, // string
+					'location_descendant_fpage_ref_main_link_general'	=> $location_descendant_fpage_ref_main_link_general, // string
+					'location_descendant_fpage_ref_top_title_general'	=> $location_descendant_fpage_ref_top_title_general, // string
+					'location_descendant_fpage_ref_top_intro_general'	=> $location_descendant_fpage_ref_top_intro_general, // string
+					'location_descendant_fpage_ref_top_link_general'	=> $location_descendant_fpage_ref_top_link_general // string
+				);
+				return $fpage_text_location_general;
 
 		}
 
@@ -3638,12 +3660,12 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($location_fpage_ref_main_link_general) || empty($location_fpage_ref_main_link_general)
 							) {
-							uamswp_fad_fpage_text_location_general();
-							global $location_fpage_title_general;
-							global $location_fpage_intro_general;
-							global $location_fpage_ref_main_title_general;
-							global $location_fpage_ref_main_intro_general;
-							global $location_fpage_ref_main_link_general;
+							$fpage_text_location_general = uamswp_fad_fpage_text_location_general();
+								$location_fpage_title_general = $fpage_text_location_general['location_fpage_title_general']; // string
+								$location_fpage_intro_general = $fpage_text_location_general['location_fpage_intro_general']; // string
+								$location_fpage_ref_main_title_general = $fpage_text_location_general['location_fpage_ref_main_title_general']; // string
+								$location_fpage_ref_main_intro_general = $fpage_text_location_general['location_fpage_ref_main_intro_general']; // string
+								$location_fpage_ref_main_link_general = $fpage_text_location_general['location_fpage_ref_main_link_general']; // string
 						}
 					}
 					if ( !isset($location_fpage_title_provider) || empty($location_fpage_title_provider) ) {
@@ -4187,12 +4209,12 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($location_descendant_fpage_ref_main_link_general) || empty($location_descendant_fpage_ref_main_link_general)
 							) {
-							uamswp_fad_fpage_text_location_general();
-							global $location_descendant_fpage_title_general;
-							global $location_descendant_fpage_intro_general;
-							global $location_descendant_fpage_ref_main_title_general;
-							global $location_descendant_fpage_ref_main_intro_general;
-							global $location_descendant_fpage_ref_main_link_general;
+							$fpage_text_location_general = uamswp_fad_fpage_text_location_general();
+								$location_descendant_fpage_title_general = $fpage_text_location_general['location_descendant_fpage_title_general']; // string
+								$location_descendant_fpage_intro_general = $fpage_text_location_general['location_descendant_fpage_intro_general']; // string
+								$location_descendant_fpage_ref_main_title_general = $fpage_text_location_general['location_descendant_fpage_ref_main_title_general']; // string
+								$location_descendant_fpage_ref_main_intro_general = $fpage_text_location_general['location_descendant_fpage_ref_main_intro_general']; // string
+								$location_descendant_fpage_ref_main_link_general = $fpage_text_location_general['location_descendant_fpage_ref_main_link_general']; // string
 						}
 					}
 					if ( !isset($location_descendant_fpage_title_location) || empty($location_descendant_fpage_title_location) ) {
@@ -5050,15 +5072,15 @@ function uamswp_fad_fpage_text_replace($string) {
 								||
 								!isset($location_fpage_ref_top_link_general) || empty($location_fpage_ref_top_link_general)
 								) {
-								uamswp_fad_fpage_text_location_general();
-								global $location_fpage_title_general;
-								global $location_fpage_intro_general;
-								global $location_fpage_ref_main_title_general;
-								global $location_fpage_ref_main_intro_general;
-								global $location_fpage_ref_main_link_general;
-								global $location_fpage_ref_top_title_general;
-								global $location_fpage_ref_top_intro_general;
-								global $location_fpage_ref_top_link_general;
+								$fpage_text_location_general = uamswp_fad_fpage_text_location_general();
+									$location_fpage_title_general = $fpage_text_location_general['location_fpage_title_general']; // string
+									$location_fpage_intro_general = $fpage_text_location_general['location_fpage_intro_general']; // string
+									$location_fpage_ref_main_title_general = $fpage_text_location_general['location_fpage_ref_main_title_general']; // string
+									$location_fpage_ref_main_intro_general = $fpage_text_location_general['location_fpage_ref_main_intro_general']; // string
+									$location_fpage_ref_main_link_general = $fpage_text_location_general['location_fpage_ref_main_link_general']; // string
+									$location_fpage_ref_top_title_general = $fpage_text_location_general['location_fpage_ref_top_title_general']; // string
+									$location_fpage_ref_top_intro_general = $fpage_text_location_general['location_fpage_ref_top_intro_general']; // string
+									$location_fpage_ref_top_link_general = $fpage_text_location_general['location_fpage_ref_top_link_general']; // string
 							}
 						}
 						if ( !isset($location_fpage_title_expertise) || empty($location_fpage_title_expertise) ) {
@@ -5869,12 +5891,12 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($location_fpage_ref_main_link_general) || empty($location_fpage_ref_main_link_general)
 							) {
-							uamswp_fad_fpage_text_location_general();
-							global $location_fpage_title_general;
-							global $location_fpage_intro_general;
-							global $location_fpage_ref_main_title_general;
-							global $location_fpage_ref_main_intro_general;
-							global $location_fpage_ref_main_link_general;
+							$fpage_text_location_general = uamswp_fad_fpage_text_location_general();
+								$location_fpage_title_general = $fpage_text_location_general['location_fpage_title_general']; // string
+								$location_fpage_intro_general = $fpage_text_location_general['location_fpage_intro_general']; // string
+								$location_fpage_ref_main_title_general = $fpage_text_location_general['location_fpage_ref_main_title_general']; // string
+								$location_fpage_ref_main_intro_general = $fpage_text_location_general['location_fpage_ref_main_intro_general']; // string
+								$location_fpage_ref_main_link_general = $fpage_text_location_general['location_fpage_ref_main_link_general']; // string
 						}
 					}
 					if ( !isset($location_fpage_title_clinical_resource) || empty($location_fpage_title_clinical_resource) ) {
@@ -7065,10 +7087,9 @@ function uamswp_fad_section_location() {
 			$location_plural_name = $labels_location['location_plural_name']; // string
 			$location_plural_name_attr = $labels_location['location_plural_name_attr']; // string
 
-		// Defined in uamswp_fad_fpage_text_location_general()
-
-			global $location_fpage_title_general; // string
-			global $location_fpage_intro_general; // string
+		$fpage_text_location_general = uamswp_fad_fpage_text_location_general();
+			$location_fpage_title_general = $fpage_text_location_general['location_fpage_title_general']; // string
+			$location_fpage_intro_general = $fpage_text_location_general['location_fpage_intro_general']; // string
 
 		$ontology_site_values = uamswp_fad_ontology_site_values();
 			$locations = $ontology_site_values['locations']; // int[]
