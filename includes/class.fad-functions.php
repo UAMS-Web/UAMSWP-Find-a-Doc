@@ -6690,14 +6690,21 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Make variables available outside of the function
 
-				global $clinical_resource_fpage_image_general;
+				global $clinical_resource_fpage_image_general; // int
 
 			// Get the Find-a-Doc Settings value
-			$clinical_resource_fpage_image_general = get_field('clinical_resource_fpage_featured_image_general', 'option'); // Featured image
+			$clinical_resource_fpage_image_general = get_field('clinical_resource_fpage_featured_image_general', 'option'); // Featured image ID
 
 			// If the variable is not set or is empty...
 			// Set a hardcoded fallback value
-			$clinical_resource_fpage_image_general = ( isset($clinical_resource_fpage_image_general) && !empty($clinical_resource_fpage_image_general) ) ? $clinical_resource_fpage_image_general : ''; // Featured image
+			$clinical_resource_fpage_image_general = ( isset($clinical_resource_fpage_image_general) && !empty($clinical_resource_fpage_image_general) ) ? $clinical_resource_fpage_image_general : ''; // Featured image ID
+
+			// Create and return an array to be used on the templates and template parts
+		
+				$fpage_image_clinical_resource_general = array(
+					'clinical_resource_fpage_image_general'	=> $clinical_resource_fpage_image_general // int
+				);
+				return $fpage_image_clinical_resource_general;	
 
 		}
 
@@ -6751,8 +6758,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($clinical_resource_fpage_image_provider) || empty($clinical_resource_fpage_image_provider) ) {
 					if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
-						uamswp_fad_fpage_image_clinical_resource_general();
-						global $clinical_resource_fpage_image_general;
+						$fpage_image_clinical_resource_general = uamswp_fad_fpage_image_clinical_resource_general();
+							$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general['clinical_resource_fpage_image_general']; // int
 					}
 					$clinical_resource_fpage_image_provider = $clinical_resource_fpage_image_general; // Featured image
 				}
@@ -6823,8 +6830,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($clinical_resource_fpage_image_location) || empty($clinical_resource_fpage_image_location) ) {
 					if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
-						uamswp_fad_fpage_image_clinical_resource_general();
-						global $clinical_resource_fpage_image_general;
+						$fpage_image_clinical_resource_general = uamswp_fad_fpage_image_clinical_resource_general();
+							$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general['clinical_resource_fpage_image_general']; // int
 					}
 					$clinical_resource_fpage_image_location = $clinical_resource_fpage_image_general; // Featured image
 				}
@@ -6908,8 +6915,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($location_fpage_featured_image_expertise) || empty($location_fpage_featured_image_expertise) ) {
 					if ( !isset($location_descendant_fpage_image_general) || empty($location_descendant_fpage_image_general) ) {
-						$fpage_image_expertise_general = uamswp_fad_fpage_image_expertise_general();
-							$location_descendant_fpage_image_general = $fpage_image_expertise_general['location_descendant_fpage_image_general']; // int
+						$fpage_image_location_general = uamswp_fad_fpage_image_location_general();
+							$location_descendant_fpage_image_general = $fpage_image_location_general['location_descendant_fpage_image_general']; // int
 					}
 					$location_fpage_featured_image_expertise = $location_descendant_fpage_image_general; // Featured image
 				}
@@ -6998,8 +7005,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($clinical_resource_fpage_featured_image_expertise) || empty($clinical_resource_fpage_featured_image_expertise) ) {
 					if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
-						uamswp_fad_fpage_image_clinical_resource_general();
-						global $clinical_resource_fpage_image_general;
+						$fpage_image_clinical_resource_general = uamswp_fad_fpage_image_clinical_resource_general();
+							$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general['clinical_resource_fpage_image_general']; // int
 					}
 					$clinical_resource_fpage_featured_image_expertise = $clinical_resource_fpage_image_general; // Featured image
 				}
@@ -7077,8 +7084,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($clinical_resource_fpage_image_clinical_resource) || empty($clinical_resource_fpage_image_clinical_resource) ) {
 					if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
-						uamswp_fad_fpage_image_clinical_resource_general();
-						global $clinical_resource_fpage_image_general;
+						$fpage_image_clinical_resource_general = uamswp_fad_fpage_image_clinical_resource_general();
+							$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general['clinical_resource_fpage_image_general']; // int
 					}
 					$clinical_resource_fpage_image_clinical_resource = $clinical_resource_fpage_image_general; // Featured image
 				}
