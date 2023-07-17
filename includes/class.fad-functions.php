@@ -1319,110 +1319,119 @@ function uamswp_fad_ontology_site_values() {
 		global $page_top_level_query;
 
 	// Ancestors
-	$ancestors = get_post_ancestors($page_id); // Get all ancestors
+
+		$ancestors = get_post_ancestors($page_id); // Get all ancestors
 
 	// Get only the ancestors with the ontology type
-	$ancestors_ontology = array();
-	if ( $ancestors ) {
-		foreach( $ancestors as $ancestor ) {
-			$ancestor_content_type = get_field('expertise_type', $ancestor); // True is ontology type, false is content type
-			$ancestor_content_type = isset($ancestor_content_type) ? $ancestor_content_type : 1; // Check if 'expertise_type' is not null, and if so, set value to true
-			if ( $ancestor_content_type ) {
-				$ancestors_ontology[] = $ancestor;
+
+		$ancestors_ontology = array();
+		if ( $ancestors ) {
+			foreach( $ancestors as $ancestor ) {
+				$ancestor_content_type = get_field('expertise_type', $ancestor); // True is ontology type, false is content type
+				$ancestor_content_type = isset($ancestor_content_type) ? $ancestor_content_type : 1; // Check if 'expertise_type' is not null, and if so, set value to true
+				if ( $ancestor_content_type ) {
+					$ancestors_ontology[] = $ancestor;
+				}
 			}
 		}
-	}
 
 	// Count the ancestors with ontology type
-	$ancestors_ontology_count = count($ancestors_ontology);
-	$has_ancestors_ontology = $ancestors_ontology_count ? true : false;
+
+		$ancestors_ontology_count = count($ancestors_ontology);
+		$has_ancestors_ontology = $ancestors_ontology_count ? true : false;
 
 	// Get the farthest ancestor with ontology type
-	$ancestors_ontology_farthest = end($ancestors_ontology);
-	$page_top_level_query = empty($ancestors_ontology_farthest); // Get whether this fake subpage's parent item is the top-level item // bool
+
+		$ancestors_ontology_farthest = end($ancestors_ontology);
+		$page_top_level_query = empty($ancestors_ontology_farthest); // Get whether this fake subpage's parent item is the top-level item // bool
 
 		// Get the values for farthest ancestor
-		$ancestors_ontology_farthest_obj = '';
-		$ancestors_ontology_farthest_title = '';
-		$ancestors_ontology_farthest_title_attr = '';
-		$ancestors_ontology_farthest_url = '';
-		if ( $has_ancestors_ontology && $ancestors_ontology_farthest ) {
-			$ancestors_ontology_farthest_obj = get_post( $ancestors_ontology_farthest );
-		}
-		if ( $ancestors_ontology_farthest_obj ) {
-			$ancestors_ontology_farthest_title = $ancestors_ontology_farthest_obj->post_title;
-			$ancestors_ontology_farthest_title_attr = uamswp_attr_conversion($ancestors_ontology_farthest_title);
-			$ancestors_ontology_farthest_url = get_permalink( $ancestors_ontology_farthest );
-		}
+
+			$ancestors_ontology_farthest_obj = '';
+			$ancestors_ontology_farthest_title = '';
+			$ancestors_ontology_farthest_title_attr = '';
+			$ancestors_ontology_farthest_url = '';
+			if ( $has_ancestors_ontology && $ancestors_ontology_farthest ) {
+				$ancestors_ontology_farthest_obj = get_post( $ancestors_ontology_farthest );
+			}
+			if ( $ancestors_ontology_farthest_obj ) {
+				$ancestors_ontology_farthest_title = $ancestors_ontology_farthest_obj->post_title;
+				$ancestors_ontology_farthest_title_attr = uamswp_attr_conversion($ancestors_ontology_farthest_title);
+				$ancestors_ontology_farthest_url = get_permalink( $ancestors_ontology_farthest );
+			}
 
 	// Get the closest ancestor with the ontology type
-	$ancestors_ontology_closest = reset($ancestors_ontology);
+
+		$ancestors_ontology_closest = reset($ancestors_ontology);
 
 		// Get the values for closest ancestor
-		$ancestors_ontology_closest_obj = '';
-		$ancestors_ontology_closest_title = '';
-		$ancestors_ontology_closest_title_attr = '';
-		$ancestors_ontology_closest_url = '';
-		if ( $has_ancestors_ontology && $ancestors_ontology_closest ) {
-			$ancestors_ontology_closest_obj = get_post( $ancestors_ontology_closest );
-		}
-		if ( $ancestors_ontology_closest_obj ) {
-			$ancestors_ontology_closest_title = $ancestors_ontology_closest_obj->post_title;
-			$ancestors_ontology_closest_title_attr = uamswp_attr_conversion($ancestors_ontology_closest_title);
-			$ancestors_ontology_closest_url = get_permalink( $ancestors_ontology_closest );
-		}
+
+			$ancestors_ontology_closest_obj = '';
+			$ancestors_ontology_closest_title = '';
+			$ancestors_ontology_closest_title_attr = '';
+			$ancestors_ontology_closest_url = '';
+			if ( $has_ancestors_ontology && $ancestors_ontology_closest ) {
+				$ancestors_ontology_closest_obj = get_post( $ancestors_ontology_closest );
+			}
+			if ( $ancestors_ontology_closest_obj ) {
+				$ancestors_ontology_closest_title = $ancestors_ontology_closest_obj->post_title;
+				$ancestors_ontology_closest_title_attr = uamswp_attr_conversion($ancestors_ontology_closest_title);
+				$ancestors_ontology_closest_url = get_permalink( $ancestors_ontology_closest );
+			}
 
 	// Set the values of the navbar-subbrand elements
-	if ( $ontology_type ) {
-		// If the page has the ontology type...
-		// Set the navbar-subbrand title element using the page's values 
-		$site_nav_id = $page_id;
-		$navbar_subbrand_title = $page_title;
-		$navbar_subbrand_title_attr = uamswp_attr_conversion($navbar_subbrand_title);
-		$navbar_subbrand_title_url = $page_url;
-		if ( $ancestors_ontology_farthest ) {
-			// If a farthest ancestor with the ontology type exists
-			// Set the navbar-subbrand parent element using the that ancestor's values 
-			$navbar_subbrand_parent = $ancestors_ontology_farthest_title;
-			$navbar_subbrand_parent_url = $ancestors_ontology_farthest_url;
+
+		if ( $ontology_type ) {
+			// If the page has the ontology type...
+			// Set the navbar-subbrand title element using the page's values 
+			$site_nav_id = $page_id;
+			$navbar_subbrand_title = $page_title;
+			$navbar_subbrand_title_attr = uamswp_attr_conversion($navbar_subbrand_title);
+			$navbar_subbrand_title_url = $page_url;
+			if ( $ancestors_ontology_farthest ) {
+				// If a farthest ancestor with the ontology type exists
+				// Set the navbar-subbrand parent element using the that ancestor's values 
+				$navbar_subbrand_parent = $ancestors_ontology_farthest_title;
+				$navbar_subbrand_parent_url = $ancestors_ontology_farthest_url;
+			} else {
+				// Otherwise, do not define the navbar-subbrand parent element
+				$navbar_subbrand_parent = '';
+				$navbar_subbrand_parent_url = '';
+			}
 		} else {
-			// Otherwise, do not define the navbar-subbrand parent element
-			$navbar_subbrand_parent = '';
-			$navbar_subbrand_parent_url = '';
+			// If the page  does not have the ontology type...
+			// Set the navbar-subbrand title element using the values of the closest ancestor with the ontology type
+			$site_nav_id = $ancestors_ontology_closest;
+			$navbar_subbrand_title = $ancestors_ontology_closest_title;
+			$navbar_subbrand_title_attr = uamswp_attr_conversion($navbar_subbrand_title);
+			$navbar_subbrand_title_url = $ancestors_ontology_closest_url;
+			if ( $ancestors_ontology_farthest && ( $ancestors_ontology_closest !== $ancestors_ontology_farthest ) ) {
+				// If a farthest ancestor with the ontology type exists...
+				// And if closest and farthest ancestors with the ontology type are not the same...
+				// Set the navbar-subbrand parent element using the values of the farthest ancestor with the ontology type
+				$navbar_subbrand_parent = $ancestors_ontology_farthest_title;
+				$navbar_subbrand_parent_attr = $ancestors_ontology_farthest_title_attr;
+				$navbar_subbrand_parent_url = $ancestors_ontology_farthest_url;
+			} else {
+				// Otherwise, do not define the navbar-subbrand parent element
+				$navbar_subbrand_parent = '';
+				$navbar_subbrand_parent_url = '';
+			}
 		}
-	} else {
-		// If the page  does not have the ontology type...
-		// Set the navbar-subbrand title element using the values of the closest ancestor with the ontology type
-		$site_nav_id = $ancestors_ontology_closest;
-		$navbar_subbrand_title = $ancestors_ontology_closest_title;
-		$navbar_subbrand_title_attr = uamswp_attr_conversion($navbar_subbrand_title);
-		$navbar_subbrand_title_url = $ancestors_ontology_closest_url;
-		if ( $ancestors_ontology_farthest && ( $ancestors_ontology_closest !== $ancestors_ontology_farthest ) ) {
-			// If a farthest ancestor with the ontology type exists...
-			// And if closest and farthest ancestors with the ontology type are not the same...
-			// Set the navbar-subbrand parent element using the values of the farthest ancestor with the ontology type
-			$navbar_subbrand_parent = $ancestors_ontology_farthest_title;
-			$navbar_subbrand_parent_attr = $ancestors_ontology_farthest_title_attr;
-			$navbar_subbrand_parent_url = $ancestors_ontology_farthest_url;
-		} else {
-			// Otherwise, do not define the navbar-subbrand parent element
-			$navbar_subbrand_parent = '';
-			$navbar_subbrand_parent_url = '';
-		}
-	}
 
 	// Get related ontology items
-	$providers = get_field( "physician_expertise", $site_nav_id );
-	$locations = get_field( 'location_expertise', $site_nav_id );
-	$expertises = get_field('expertise_associated', $site_nav_id);
-	$expertise_descendants = get_pages(
-		array(
-			'child_of'     => $site_nav_id, // int (default: 0)
-			'post_type'    => 'expertise', // string (default: 'page')
-		));
-	$clinical_resources = get_field('expertise_clinical_resources', $site_nav_id);
-	$conditions_cpt = get_field('expertise_conditions_cpt', $site_nav_id);
-	$treatments_cpt = get_field('expertise_treatments_cpt', $site_nav_id);
+
+		$providers = get_field( "physician_expertise", $site_nav_id );
+		$locations = get_field( 'location_expertise', $site_nav_id );
+		$expertises = get_field('expertise_associated', $site_nav_id);
+		$expertise_descendants = get_pages(
+			array(
+				'child_of'     => $site_nav_id, // int (default: 0)
+				'post_type'    => 'expertise', // string (default: 'page')
+			));
+		$clinical_resources = get_field('expertise_clinical_resources', $site_nav_id);
+		$conditions_cpt = get_field('expertise_conditions_cpt', $site_nav_id);
+		$treatments_cpt = get_field('expertise_treatments_cpt', $site_nav_id);
 
 	// Create and return an array to be used on the templates and template parts
 
