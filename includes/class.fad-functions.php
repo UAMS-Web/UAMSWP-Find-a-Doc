@@ -2425,12 +2425,11 @@ function uamswp_fad_fpage_text_replace($string) {
 			$placeholder_treatment_single_name = $labels_treatment['placeholder_treatment_single_name']; // string
 			$placeholder_treatment_plural_name = $labels_treatment['placeholder_treatment_plural_name']; // string
 
-		// Defined in uamswp_fad_archive_text_treatment()
-
-			global $placeholder_treatment_archive_headline;
-			global $treatment_archive_headline;
-			global $placeholder_treatment_archive_intro_text;
-			global $treatment_archive_intro_text;
+		$archive_text_treatment = uamswp_fad_archive_text_treatment();
+			$treatment_archive_headline = $archive_text_treatment['treatment_archive_headline']; // string
+			$treatment_archive_intro_text = $archive_text_treatment['treatment_archive_intro_text']; // string
+			$placeholder_treatment_archive_headline = $archive_text_treatment['placeholder_treatment_archive_headline']; // string
+			$placeholder_treatment_archive_intro_text = $archive_text_treatment['placeholder_treatment_archive_intro_text']; // string
 
 	// Check variables
 	$page_title = ( isset($page_title) && !empty($page_title) ) ? $page_title : '';
@@ -3130,6 +3129,18 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
 		$placeholder_condition_archive_headline = '[Condition Archive Title]';
 		$placeholder_condition_archive_intro_text = '[Condition Archive Intro Text]';
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$archive_text_condition = array(
+				'condition_archive_headline' => $condition_archive_headline, // string
+				'condition_archive_headline_attr' => $condition_archive_headline_attr, // string
+				'condition_archive_intro_text' => $condition_archive_intro_text, // string
+				'placeholder_condition_archive_headline' => $placeholder_condition_archive_headline, // string
+				'placeholder_condition_archive_intro_text' => $placeholder_condition_archive_intro_text // string
+			);
+			return $archive_text_condition;
+
 	}
 
 	// Get the Find-a-Doc Settings values for treatment archive page text
@@ -3137,11 +3148,11 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Make variables available outside of the function
 
-			global $treatment_archive_headline;
-			global $treatment_archive_headline_attr;
-			global $treatment_archive_intro_text;
-			global $placeholder_treatment_archive_headline;
-			global $placeholder_treatment_archive_intro_text;
+			global $treatment_archive_headline; // string
+			global $treatment_archive_headline_attr; // string
+			global $treatment_archive_intro_text; // string
+			global $placeholder_treatment_archive_headline; // string
+			global $placeholder_treatment_archive_intro_text; // string
 
 		$treatment_archive_headline = get_field('treatments_archive_headline', 'option') ?: 'Treatments and Procedures';
 		$treatment_archive_headline_attr = uamswp_attr_conversion($treatment_archive_headline);
@@ -3150,6 +3161,18 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
 		$placeholder_treatment_archive_headline = '[Treatment Archive Title]';
 		$placeholder_treatment_archive_intro_text = '[Treatment Archive Intro Text]';
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$archive_text_treatment = array(
+				'treatment_archive_headline' => $treatment_archive_headline, // string
+				'treatment_archive_headline_attr' => $treatment_archive_headline_attr, // string
+				'treatment_archive_intro_text' => $treatment_archive_intro_text, // string
+				'placeholder_treatment_archive_headline' => $placeholder_treatment_archive_headline, // string
+				'placeholder_treatment_archive_intro_text' => $placeholder_treatment_archive_intro_text // string
+			);
+			return $archive_text_treatment;
+
 	}
 
 // Define variables for Find-a-Doc Settings values regarding ontology text elements on fake subpages and single profiles
