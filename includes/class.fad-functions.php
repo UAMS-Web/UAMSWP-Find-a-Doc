@@ -3461,7 +3461,7 @@ function uamswp_fad_fpage_text_replace($string) {
 					'expertise_descendant_fpage_ref_top_link_general'	=> $expertise_descendant_fpage_ref_top_link_general // string
 				);
 				return $fpage_text_expertise_general;
-	
+
 		}
 
 		// Get the Find-a-Doc Settings values for general values of ontology text elements on a fake subpage (or section) for Clinical Resources
@@ -3469,17 +3469,17 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Make variables available outside of the function
 
-				global $clinical_resource_fpage_title_general;
-				global $clinical_resource_fpage_intro_general;
-				global $clinical_resource_fpage_ref_main_title_general;
-				global $clinical_resource_fpage_ref_main_intro_general;
-				global $clinical_resource_fpage_ref_main_link_general;
-				global $clinical_resource_fpage_ref_top_title_general;
-				global $clinical_resource_fpage_ref_top_intro_general;
-				global $clinical_resource_fpage_ref_top_link_general;
-				global $clinical_resource_fpage_more_text_general;
-				global $clinical_resource_fpage_more_link_text_general;
-				global $clinical_resource_fpage_more_link_descr_general;
+				global $clinical_resource_fpage_title_general; // string
+				global $clinical_resource_fpage_intro_general; // string
+				global $clinical_resource_fpage_ref_main_title_general; // string
+				global $clinical_resource_fpage_ref_main_intro_general; // string
+				global $clinical_resource_fpage_ref_main_link_general; // string
+				global $clinical_resource_fpage_ref_top_title_general; // string
+				global $clinical_resource_fpage_ref_top_intro_general; // string
+				global $clinical_resource_fpage_ref_top_link_general; // string
+				global $clinical_resource_fpage_more_text_general; // string
+				global $clinical_resource_fpage_more_link_text_general; // string
+				global $clinical_resource_fpage_more_link_descr_general; // string
 
 			// Get the Find-a-Doc Settings values for the text elements in general placements
 			$clinical_resource_fpage_title_general = get_field('clinical_resource_fpage_title_general', 'option'); // Fake subpage (or section), title
@@ -3520,6 +3520,23 @@ function uamswp_fad_fpage_text_replace($string) {
 			$clinical_resource_fpage_more_text_general = $clinical_resource_fpage_more_text_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_text_general) : ''; // Fake subpage (or section), "More", intro text
 			$clinical_resource_fpage_more_link_text_general = $clinical_resource_fpage_more_link_text_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_text_general) : ''; // Fake subpage (or section), "More", link text
 			$clinical_resource_fpage_more_link_descr_general = $clinical_resource_fpage_more_link_descr_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_descr_general) : ''; // Fake subpage (or section), "More", link description
+
+			// Create and return an array to be used on the templates and template parts
+		
+				$fpage_text_clinical_resource_general = array(
+					'clinical_resource_fpage_title_general'				=> $clinical_resource_fpage_title_general, // string
+					'clinical_resource_fpage_intro_general'				=> $clinical_resource_fpage_intro_general, // string
+					'clinical_resource_fpage_ref_main_title_general'	=> $clinical_resource_fpage_ref_main_title_general, // string
+					'clinical_resource_fpage_ref_main_intro_general'	=> $clinical_resource_fpage_ref_main_intro_general, // string
+					'clinical_resource_fpage_ref_main_link_general'		=> $clinical_resource_fpage_ref_main_link_general, // string
+					'clinical_resource_fpage_ref_top_title_general'		=> $clinical_resource_fpage_ref_top_title_general, // string
+					'clinical_resource_fpage_ref_top_intro_general'		=> $clinical_resource_fpage_ref_top_intro_general, // string
+					'clinical_resource_fpage_ref_top_link_general'		=> $clinical_resource_fpage_ref_top_link_general, // string
+					'clinical_resource_fpage_more_text_general'			=> $clinical_resource_fpage_more_text_general, // string
+					'clinical_resource_fpage_more_link_text_general'	=> $clinical_resource_fpage_more_link_text_general, // string
+					'clinical_resource_fpage_more_link_descr_general'	=> $clinical_resource_fpage_more_link_descr_general // string
+				);
+				return $fpage_text_clinical_resource_general;
 
 		}
 
@@ -3882,15 +3899,15 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general)
 							) {
-							uamswp_fad_fpage_text_clinical_resource_general();
-							global $clinical_resource_fpage_title_general;
-							global $clinical_resource_fpage_intro_general;
-							global $clinical_resource_fpage_ref_main_title_general;
-							global $clinical_resource_fpage_ref_main_intro_general;
-							global $clinical_resource_fpage_ref_main_link_general;
-							global $clinical_resource_fpage_more_text_general;
-							global $clinical_resource_fpage_more_link_text_general;
-							global $clinical_resource_fpage_more_link_descr_general;
+							$fpage_text_clinical_resource_general = uamswp_fad_fpage_text_clinical_resource_general();
+								$clinical_resource_fpage_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_title_general']; // string
+								$clinical_resource_fpage_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_intro_general']; // string
+								$clinical_resource_fpage_ref_main_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_title_general']; // string
+								$clinical_resource_fpage_ref_main_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_intro_general']; // string
+								$clinical_resource_fpage_ref_main_link_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_link_general']; // string
+								$clinical_resource_fpage_more_text_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_text_general']; // string
+								$clinical_resource_fpage_more_link_text_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_link_text_general']; // string
+								$clinical_resource_fpage_more_link_descr_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_link_descr_general']; // string
 						}
 					}
 					if ( !isset($clinical_resource_fpage_title_provider) || empty($clinical_resource_fpage_title_provider) ) {
@@ -4494,18 +4511,18 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general)
 							) {
-							uamswp_fad_fpage_text_clinical_resource_general();
-							global $clinical_resource_fpage_title_general;
-							global $clinical_resource_fpage_intro_general;
-							global $clinical_resource_fpage_ref_main_title_general;
-							global $clinical_resource_fpage_ref_main_intro_general;
-							global $clinical_resource_fpage_ref_main_link_general;
-							global $clinical_resource_fpage_ref_top_title_general;
-							global $clinical_resource_fpage_ref_top_intro_general;
-							global $clinical_resource_fpage_ref_top_link_general;
-							global $clinical_resource_fpage_more_text_general;
-							global $clinical_resource_fpage_more_link_text_general;
-							global $clinical_resource_fpage_more_link_descr_general;
+							$fpage_text_clinical_resource_general = uamswp_fad_fpage_text_clinical_resource_general();
+								$clinical_resource_fpage_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_title_general']; // string
+								$clinical_resource_fpage_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_intro_general']; // string
+								$clinical_resource_fpage_ref_main_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_title_general']; // string
+								$clinical_resource_fpage_ref_main_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_intro_general']; // string
+								$clinical_resource_fpage_ref_main_link_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_link_general']; // string
+								$clinical_resource_fpage_ref_top_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_top_title_general']; // string
+								$clinical_resource_fpage_ref_top_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_top_intro_general']; // string
+								$clinical_resource_fpage_ref_top_link_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_top_link_general']; // string
+								$clinical_resource_fpage_more_text_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_text_general']; // string
+								$clinical_resource_fpage_more_link_text_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_link_text_general']; // string
+								$clinical_resource_fpage_more_link_descr_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_link_descr_general']; // string
 						}
 					}
 					if ( !isset($clinical_resource_fpage_title_location) || empty($clinical_resource_fpage_title_location) ) {
@@ -5499,18 +5516,18 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general)
 							) {
-							uamswp_fad_fpage_text_clinical_resource_general();
-							global $clinical_resource_fpage_title_general;
-							global $clinical_resource_fpage_intro_general;
-							global $clinical_resource_fpage_ref_main_title_general;
-							global $clinical_resource_fpage_ref_main_intro_general;
-							global $clinical_resource_fpage_ref_main_link_general;
-							global $clinical_resource_fpage_ref_top_title_general;
-							global $clinical_resource_fpage_ref_top_intro_general;
-							global $clinical_resource_fpage_ref_top_link_general;
-							global $clinical_resource_fpage_more_text_general;
-							global $clinical_resource_fpage_more_link_text_general;
-							global $clinical_resource_fpage_more_link_descr_general;
+							$fpage_text_clinical_resource_general = uamswp_fad_fpage_text_clinical_resource_general();
+								$clinical_resource_fpage_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_title_general']; // string
+								$clinical_resource_fpage_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_intro_general']; // string
+								$clinical_resource_fpage_ref_main_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_title_general']; // string
+								$clinical_resource_fpage_ref_main_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_intro_general']; // string
+								$clinical_resource_fpage_ref_main_link_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_link_general']; // string
+								$clinical_resource_fpage_ref_top_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_top_title_general']; // string
+								$clinical_resource_fpage_ref_top_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_top_intro_general']; // string
+								$clinical_resource_fpage_ref_top_link_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_top_link_general']; // string
+								$clinical_resource_fpage_more_text_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_text_general']; // string
+								$clinical_resource_fpage_more_link_text_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_link_text_general']; // string
+								$clinical_resource_fpage_more_link_descr_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_link_descr_general']; // string
 						}
 					}
 					if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
@@ -6113,15 +6130,15 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general)
 							) {
-							uamswp_fad_fpage_text_clinical_resource_general();
-							global $clinical_resource_fpage_title_general;
-							global $clinical_resource_fpage_intro_general;
-							global $clinical_resource_fpage_ref_main_title_general;
-							global $clinical_resource_fpage_ref_main_intro_general;
-							global $clinical_resource_fpage_ref_main_link_general;
-							global $clinical_resource_fpage_more_text_general;
-							global $clinical_resource_fpage_more_link_text_general;
-							global $clinical_resource_fpage_more_link_descr_general;
+							$fpage_text_clinical_resource_general = uamswp_fad_fpage_text_clinical_resource_general();
+								$clinical_resource_fpage_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_title_general']; // string
+								$clinical_resource_fpage_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_intro_general']; // string
+								$clinical_resource_fpage_ref_main_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_title_general']; // string
+								$clinical_resource_fpage_ref_main_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_intro_general']; // string
+								$clinical_resource_fpage_ref_main_link_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_link_general']; // string
+								$clinical_resource_fpage_more_text_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_text_general']; // string
+								$clinical_resource_fpage_more_link_text_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_link_text_general']; // string
+								$clinical_resource_fpage_more_link_descr_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_link_descr_general']; // string
 						}
 					}
 					if ( !isset($clinical_resource_fpage_title_clinical_resource) || empty($clinical_resource_fpage_title_clinical_resource) ) {
@@ -7204,10 +7221,9 @@ function uamswp_fad_section_clinical_resource() {
 			$clinical_resource_plural_name = $labels_clinical_resource['clinical_resource_plural_name']; // string
 			$clinical_resource_plural_name_attr = $labels_clinical_resource['clinical_resource_plural_name_attr']; // string
 
-		// Defined in uamswp_fad_fpage_text_clinical_resource_general()
-
-			global $clinical_resource_fpage_title_general; // string
-			global $clinical_resource_fpage_intro_general; // string
+		$fpage_text_clinical_resource_general = uamswp_fad_fpage_text_clinical_resource_general();
+			$clinical_resource_fpage_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_title_general']; // string
+			$clinical_resource_fpage_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_intro_general']; // string
 
 		$clinical_resource_query_function = uamswp_fad_clinical_resource_query();
 			$clinical_resource_query = $clinical_resource_query_function['clinical_resource_query']; // WP_Post[]
