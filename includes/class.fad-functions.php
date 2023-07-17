@@ -1962,10 +1962,10 @@ function uamswp_fad_post_title() {
 
 		// Make variables available outside of the function
 
-			global $condition_cpt_query;
+			global $condition_cpt_query; // WP_Post[]
 			global $condition_section_show; // bool
 			global $condition_treatment_section_show; // bool
-			global $condition_ids;
+			global $condition_ids; // int[]
 			global $condition_count; // int
 			global $condition_schema; // string
 
@@ -1990,6 +1990,19 @@ function uamswp_fad_post_title() {
 			$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 		}
 		$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$condition_query_function = array(
+				'condition_cpt_query' => $condition_cpt_query, // WP_Post[]
+				'condition_section_show' => $condition_section_show, // bool
+				'condition_treatment_section_show' => $condition_treatment_section_show, // bool
+				'condition_ids' => $condition_ids, // int[]
+				'condition_count' => $condition_count, // int
+				'condition_schema' => $condition_schema // string
+			);
+			return $condition_query_function;
+
 	}
 
 	// Query for whether related treatments content section should be displayed on ontology pages/subsections
@@ -2007,10 +2020,10 @@ function uamswp_fad_post_title() {
 
 		// Make variables available outside of the function
 
-			global $treatment_cpt_query;
+			global $treatment_cpt_query; // WP_Post[]
 			global $treatment_section_show; // bool
 			global $condition_treatment_section_show; // bool
-			global $treatment_ids;
+			global $treatment_ids; // int[]
 			global $treatment_count; // int
 			global $treatment_schema; // string
 
@@ -2035,6 +2048,19 @@ function uamswp_fad_post_title() {
 			$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 		}
 		$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$treatment_query_function = array(
+				'treatment_cpt_query' => $treatment_cpt_query, // WP_Post[]
+				'treatment_section_show' => $treatment_section_show, // bool
+				'condition_treatment_section_show' => $condition_treatment_section_show, // bool
+				'treatment_ids' => $treatment_ids, // int[]
+				'treatment_count' => $treatment_count, // int
+				'treatment_schema' => $treatment_schema // string
+			);
+			return $treatment_query_function;
+
 	}
 
 // Construct ontology subsection primary navigation
@@ -6969,13 +6995,14 @@ function uamswp_fad_section_condition() {
 			global $condition_fpage_title_general; // string
 			global $condition_fpage_intro_general; // string
 
-		// Defined on the template or in a function such as uamswp_fad_condition_query()
+		$ontology_site_values = uamswp_fad_ontology_site_values();
+			$conditions_cpt = $ontology_site_values['conditions_cpt'];
 
-			global $condition_section_show; // bool
-			global $condition_cpt_query; // WP_Post[]
-			global $conditions_cpt; // int[]
-			global $condition_ids; // int[]
-			global $condition_count; // int
+		$condition_query_function = uamswp_fad_condition_query();
+			$condition_cpt_query = $condition_query_function['condition_cpt_query']; // WP_Post[]
+			$condition_section_show = $condition_query_function['condition_section_show']; // bool
+			$condition_ids = $condition_query_function['condition_ids']; // int[]
+			$condition_count = $condition_query_function['condition_count']; // int
 
 		// Defined on the template or in a function such as uamswp_fad_ontology_hide()
 
@@ -7022,11 +7049,14 @@ function uamswp_fad_section_treatment() {
 
 		// Defined on the template or in a function such as uamswp_fad_treatment_query()
 
-			global $treatment_section_show; // bool
-			global $treatment_cpt_query; // WP_Post[]
-			global $treatments_cpt; // int[]
-			global $treatment_ids; // int[]
-			global $treatment_count; // int
+		$ontology_site_values = uamswp_fad_ontology_site_values();
+			$treatments_cpt = $ontology_site_values['treatments_cpt'];
+
+		$treatment_query_function = uamswp_fad_treatment_query();
+			$treatment_cpt_query = $treatment_query_function['treatment_cpt_query']; // WP_Post[]
+			$treatment_section_show = $treatment_query_function['treatment_section_show']; // bool
+			$treatment_ids = $treatment_query_function['treatment_ids']; // int[]
+			$treatment_count = $treatment_query_function['treatment_count']; // int
 
 		// Defined on the template or in a function such as uamswp_fad_ontology_hide()
 
@@ -7092,21 +7122,17 @@ function uamswp_fad_section_condition_treatment() {
 			global $treatment_fpage_title_general; // string
 			global $treatment_fpage_intro_general; // string
 
-		// Defined in uamswp_fad_condition_query() and in uamswp_fad_treatment_query()
+		$condition_query_function = uamswp_fad_condition_query();
+			$condition_cpt_query = $condition_query_function['condition_cpt_query']; // WP_Post[]
+			$condition_section_show = $condition_query_function['condition_section_show']; // bool
+			$condition_treatment_section_show = $condition_query_function['condition_treatment_section_show']; // bool
+			$condition_count = $condition_query_function['condition_count']; // int
 
-			global $condition_treatment_section_show; // bool
-
-		// Defined in uamswp_fad_condition_query()
-
-			global $condition_section_show; // bool
-			global $condition_cpt_query; // WP_Post[]
-			global $condition_count; // int
-
-		// Defined in uamswp_fad_treatment_query()
-
-			global $treatment_section_show; // bool
-			global $treatment_cpt_query; // WP_Post[]
-			global $treatment_count; // int
+		$treatment_query_function = uamswp_fad_treatment_query();
+			$treatment_cpt_query = $treatment_query_function['treatment_cpt_query']; // WP_Post[]
+			$treatment_section_show = $treatment_query_function['treatment_section_show']; // bool
+			$condition_treatment_section_show = $treatment_query_function['condition_treatment_section_show']; // bool
+			$treatment_count = $treatment_query_function['treatment_count']; // int
 
 		// Defined in uamswp_fad_ontology_hide()
 
