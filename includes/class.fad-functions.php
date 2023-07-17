@@ -1421,8 +1421,8 @@ function uamswp_fad_ontology_site_values() {
 
 	// Get related ontology items
 
-		$providers = get_field( "physician_expertise", $site_nav_id );
-		$locations = get_field( 'location_expertise', $site_nav_id );
+		$providers = get_field('physician_expertise', $site_nav_id);
+		$locations = get_field('location_expertise', $site_nav_id);
 		$expertises = get_field('expertise_associated', $site_nav_id);
 		$expertise_descendants = get_pages(
 			array(
