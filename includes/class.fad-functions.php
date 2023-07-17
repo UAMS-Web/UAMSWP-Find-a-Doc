@@ -7728,6 +7728,15 @@ function uamswp_fad_section_treatment() {
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-treatment.php' );
 
+	// Create and return an array to be used on the templates and template parts
+
+		$section_treatment = array(
+			'condition_treatment_schema'		=> $condition_treatment_schema, // string
+			'condition_treatment_schema_i'		=> $condition_treatment_schema_i, // int
+			'condition_treatment_schema_count'	=> $condition_treatment_schema_count // int
+		);
+		return $section_treatment;
+
 } // end function uamswp_fad_section_treatment()
 
 // Construct Combined Condition and Treatment List Section List Section
