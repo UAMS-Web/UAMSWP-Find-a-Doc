@@ -1204,10 +1204,6 @@ function uamswp_fad_ontology_hide() {
 			global $regions;
 			global $service_lines;
 
-	// Make variables available outside of the function
-
-		global $hide_medical_ontology; // bool
-
 	// If variables are strings, convert them to arrays
 	$regions = is_array($regions) ? $regions : array( $regions );
 	$service_lines = is_array($service_lines) ? $service_lines : array( $service_lines );

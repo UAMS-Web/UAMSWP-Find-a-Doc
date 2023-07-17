@@ -217,7 +217,8 @@ uamswp_fad_treatment_query();
 // Conditionally suppress sections based on Find-a-Doc Settings configuration
 $regions = get_field('physician_region',$post->ID);
 $service_lines = get_field('physician_service_line',$post->ID);
-uamswp_fad_ontology_hide();
+$ontology_hide = uamswp_fad_ontology_hide();
+	$hide_medical_ontology = $ontology_hide['hide_medical_ontology']; // bool
 
 // Set the schema description and the meta description
 

@@ -32,10 +32,10 @@
  * 		$treatment_section_show // bool
  * 		$treatment_cpt_query // WP_Post[]
  * 		$treatment_count // int
- * 	// Vars defined in uamswp_fad_ontology_hide()
- * 		$hide_medical_ontology // bool
  * 
  * Optional vars:
+ * 	// Vars defined in uamswp_fad_ontology_hide()
+ * 		$hide_medical_ontology // bool
  * 	// Vars defined on the template
  * 		$condition_treatment_section_class // Section class // string (default: 'conditions-treatments')
  * 		$condition_treatment_section_id // Section ID // string (default: 'conditions-treatments')

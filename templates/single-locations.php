@@ -263,7 +263,8 @@ if ($prescription_query) {
 // Conditionally suppress sections based on Find-a-Doc Settings configuration
 $regions = get_field('location_region',$post->ID);
 $service_lines = get_field('location_service_line',$post->ID);
-uamswp_fad_ontology_hide();
+$ontology_hide = uamswp_fad_ontology_hide();
+	$hide_medical_ontology = $ontology_hide['hide_medical_ontology']; // bool
 
 // Override theme's method of defining the meta description
 add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');

@@ -25,10 +25,10 @@
  * 		$conditions_cpt // int[]
  * 		$condition_ids // int[]
  * 		$condition_count // int
- * 	// Vars defined in uamswp_fad_ontology_hide()
- * 		$hide_medical_ontology // bool
  * 
  * Optional vars:
+ * 	// Vars defined in uamswp_fad_ontology_hide()
+ * 		$hide_medical_ontology // bool
  * 	// Vars defined on the template
  * 		$condition_section_class // Section class // string (default: 'conditions-treatments')
  * 		$condition_section_id // Section ID // string (default: 'conditions')

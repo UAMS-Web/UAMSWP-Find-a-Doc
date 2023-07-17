@@ -27,10 +27,10 @@
  * 		$expertise_descendant_section_show // bool
  * 		$expertise_descendant_query // WP_Post[]
  * 		$expertise_descendant_count // int
- * 	// Vars defined in uamswp_fad_ontology_hide()
- * 		$hide_medical_ontology // bool
  * 
  * Optional vars:
+ * 	// Vars defined in uamswp_fad_ontology_hide()
+ * 		$hide_medical_ontology // bool
  * 	// Vars defined on the template
  * 		$expertise_section_class // Section class // string (default: 'expertise-list')
  * 		$expertise_section_id // Section ID // string (default: 'expertise')
