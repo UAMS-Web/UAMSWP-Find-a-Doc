@@ -2107,10 +2107,9 @@ function uamswp_fad_ontology_nav_menu() {
 			$expertise_plural_name = $labels_expertise['expertise_plural_name']; // string
 			$expertise_plural_name_attr = $labels_expertise['expertise_plural_name_attr']; // string
 
-		// Typically defined in uamswp_fad_labels_expertise_descendant()
-
-			global $expertise_descendant_plural_name;
-			global $expertise_descendant_plural_name_attr;
+		$labels_expertise_descendant = uamswp_fad_labels_expertise_descendant();
+			$expertise_descendant_plural_name = $labels_expertise_descendant['expertise_descendant_plural_name']; // string
+			$expertise_descendant_plural_name_attr = $labels_expertise_descendant['expertise_descendant_plural_name_attr']; // string
 
 		// Typically defined in uamswp_fad_labels_clinical_resource()
 
@@ -2376,12 +2375,11 @@ function uamswp_fad_fpage_text_replace($string) {
 			$placeholder_expertise_plural_name = $labels_expertise['placeholder_expertise_plural_name']; // string
 			$placeholder_expertise_page_title = $labels_expertise['placeholder_expertise_page_title']; // string
 
-		// Defined in uamswp_fad_labels_expertise_descendant()
-
-			global $placeholder_expertise_descendant_single_name;
-			global $expertise_descendant_single_name;
-			global $placeholder_expertise_descendant_plural_name;
-			global $expertise_descendant_plural_name;
+		$labels_expertise_descendant = uamswp_fad_labels_expertise_descendant();
+			$expertise_descendant_single_name = $labels_expertise_descendant['expertise_descendant_single_name']; // string
+			$expertise_descendant_plural_name = $labels_expertise_descendant['expertise_descendant_plural_name']; // string
+			$placeholder_expertise_descendant_single_name = $labels_expertise_descendant['placeholder_expertise_descendant_single_name']; // string
+			$placeholder_expertise_descendant_plural_name = $labels_expertise_descendant['placeholder_expertise_descendant_plural_name']; // string
 
 		// Defined in uamswp_fad_archive_text_expertise()
 
@@ -2763,7 +2761,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				'facet_labels' => $facet_labels // array
 			);
 			return $labels_expertise;
-	
+
 	}
 
 	// Get the Find-a-Doc Settings values for area of expertise descendant item labels
@@ -2786,6 +2784,19 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
 		$placeholder_expertise_descendant_single_name = '[Descendant Area of Expertise]';
 		$placeholder_expertise_descendant_plural_name = '[Descendant Areas of Expertise]';
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$labels_expertise_descendant = array(
+				'expertise_descendant_single_name' => $expertise_descendant_single_name, // string
+				'expertise_descendant_single_name_attr' => $expertise_descendant_single_name_attr, // string
+				'expertise_descendant_plural_name' => $expertise_descendant_plural_name, // string
+				'expertise_descendant_plural_name_attr' => $expertise_descendant_plural_name_attr, // string
+				'placeholder_expertise_descendant_single_name' => $placeholder_expertise_descendant_single_name, // string
+				'placeholder_expertise_descendant_plural_name' => $placeholder_expertise_descendant_plural_name // string
+			);
+			return $labels_expertise_descendant;
+
 	}
 
 	// Get the Find-a-Doc Settings values for clinical resource labels
