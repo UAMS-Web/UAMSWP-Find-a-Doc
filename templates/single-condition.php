@@ -194,7 +194,7 @@ $treatment_query_function = uamswp_fad_treatment_query( $treatments_cpt );
 	$condition_treatment_section_show = $treatment_query_function['condition_treatment_section_show']; // bool
 	$treatment_ids = $treatment_query_function['treatment_ids']; // int[]
 	$treatment_count = $treatment_query_function['treatment_count']; // int
-	$treatment_schema = $treatment_query_function['treatment_schema']; // string
+	$condition_treatment_schema = $treatment_query_function['condition_treatment_schema']; // string
 
 // Classes for indicating presence of content
 $condition_field_classes = '';

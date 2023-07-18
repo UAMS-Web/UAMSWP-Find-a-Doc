@@ -176,7 +176,7 @@ $ontology_site_values = uamswp_fad_ontology_site_values();
 		$condition_treatment_section_show = $condition_query_function['condition_treatment_section_show']; // bool
 		$condition_ids = $condition_query_function['condition_ids']; // int[]
 		$condition_count = $condition_query_function['condition_count']; // int
-		$condition_schema = $condition_query_function['condition_schema']; // string
+		$condition_treatment_schema = $condition_query_function['condition_treatment_schema']; // string
 
 	// Query for whether related treatments content section should be displayed on ontology pages/subsections
 	$treatment_query_function = uamswp_fad_treatment_query( $treatments_cpt );
@@ -185,7 +185,7 @@ $ontology_site_values = uamswp_fad_ontology_site_values();
 		$condition_treatment_section_show = $treatment_query_function['condition_treatment_section_show']; // bool
 		$treatment_ids = $treatment_query_function['treatment_ids']; // int[]
 		$treatment_count = $treatment_query_function['treatment_count']; // int
-		$treatment_schema = $treatment_query_function['treatment_schema']; // string
+		$condition_treatment_schema = $treatment_query_function['condition_treatment_schema']; // string
 
 // Override theme's method of defining the meta page title
 $meta_title_base_addition = $fpage_name_attr; // Word or phrase to use to form base meta title

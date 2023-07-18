@@ -313,7 +313,7 @@ $condition_query_function = uamswp_fad_condition_query( $conditions_cpt );
 	$condition_treatment_section_show = $condition_query_function['condition_treatment_section_show']; // bool
 	$condition_ids = $condition_query_function['condition_ids']; // int[]
 	$condition_count = $condition_query_function['condition_count']; // int
-	$condition_schema = $condition_query_function['condition_schema']; // string
+	$condition_treatment_schema = $condition_query_function['condition_treatment_schema']; // string
 
 // Query for whether related treatments content section should be displayed on ontology pages/subsections
 $treatments = get_field('physician_treatments');
@@ -324,7 +324,7 @@ $treatment_query_function = uamswp_fad_treatment_query( $treatments_cpt );
 	$condition_treatment_section_show = $treatment_query_function['condition_treatment_section_show']; // bool
 	$treatment_ids = $treatment_query_function['treatment_ids']; // int[]
 	$treatment_count = $treatment_query_function['treatment_count']; // int
-	$treatment_schema = $treatment_query_function['treatment_schema']; // string
+	$condition_treatment_schema = $treatment_query_function['condition_treatment_schema']; // string
 
 // Conditionally suppress sections based on Find-a-Doc Settings configuration
 $regions = get_field('physician_region',$post->ID);

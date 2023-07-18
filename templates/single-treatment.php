@@ -187,7 +187,7 @@ $condition_query_function = uamswp_fad_condition_query( $conditions_cpt );
 	$condition_treatment_section_show = $condition_query_function['condition_treatment_section_show']; // bool
 	$condition_ids = $condition_query_function['condition_ids']; // int[]
 	$condition_count = $condition_query_function['condition_count']; // int
-	$condition_schema = $condition_query_function['condition_schema']; // string
+	$condition_treatment_schema = $condition_query_function['condition_treatment_schema']; // string
 
 // Classes for indicating presence of content
 $treatment_field_classes = '';
