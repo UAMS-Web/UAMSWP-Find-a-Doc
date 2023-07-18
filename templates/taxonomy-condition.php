@@ -79,7 +79,13 @@ $page_title_attr = uamswp_attr_conversion($page_title);
 		$placeholder_clinical_resource_plural_name = $labels_clinical_resource['placeholder_clinical_resource_plural_name']; // string
 
 	// Get system settings for combined condition and treatment labels
-	uamswp_fad_labels_condition_treatment();
+	$labels_condition_treatment = uamswp_fad_labels_condition_treatment();
+		$condition_treatment_single_name = $labels_condition_treatment['clinical_resource_single_name']; // string
+		$condition_treatment_single_name_attr = $labels_condition_treatment['clinical_resource_single_name']; // string
+		$condition_treatment_plural_name = $labels_condition_treatment['clinical_resource_single_name']; // string
+		$condition_treatment_plural_name_attr = $labels_condition_treatment['clinical_resource_single_name']; // string
+		$placeholder_condition_treatment_single_name = $labels_condition_treatment['clinical_resource_single_name']; // string
+		$placeholder_condition_treatment_plural_name = $labels_condition_treatment['clinical_resource_single_name']; // string
 
 	// Get system settings for condition labels
 	uamswp_fad_labels_condition();

@@ -2796,15 +2796,6 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get the Find-a-Doc Settings values for combined conditions and treatments labels
 	function uamswp_fad_labels_condition_treatment() {
 
-		// Make variables available outside of the function
-
-			global $condition_treatment_single_name;
-			global $condition_treatment_single_name_attr;
-			global $condition_treatment_plural_name;
-			global $condition_treatment_plural_name_attr;
-			global $placeholder_condition_treatment_single_name;
-			global $placeholder_condition_treatment_plural_name;
-
 		$condition_treatment_single_name = get_field('condition_treatment_single_name', 'option') ?: 'Condition or Treatment';
 		$condition_treatment_single_name_attr = uamswp_attr_conversion($condition_treatment_single_name);
 		$condition_treatment_plural_name = get_field('condition_treatment_plural_name', 'option') ?: 'Conditions and Treatments';
