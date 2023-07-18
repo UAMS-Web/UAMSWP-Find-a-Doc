@@ -1418,28 +1418,28 @@ function uamswp_fad_ontology_site_values() {
 	// Create and return an array to be used on the templates and template parts
 
 		$ontology_site_values = array(
-			'site_nav_id' => $site_nav_id, // int
-			'navbar_subbrand' => array (
-				'title' => array(
-					'name' => $navbar_subbrand_title, // string
-					'attr' => $navbar_subbrand_title_attr, // string
-					'url' => $navbar_subbrand_title_url, // string
+			'site_nav_id'					=> $site_nav_id, // int
+			'navbar_subbrand'				=> array (
+				'title'		=> array(
+					'name'	=> $navbar_subbrand_title, // string
+					'attr'	=> $navbar_subbrand_title_attr, // string
+					'url'	=> $navbar_subbrand_title_url, // string
 				),
-				'parent' => array(
-					'name' => $navbar_subbrand_parent, // string
-					'attr' => $navbar_subbrand_parent_attr, // string
-					'url' => $navbar_subbrand_parent_url, // string
+				'parent'	=> array(
+					'name'	=> $navbar_subbrand_parent, // string
+					'attr'	=> $navbar_subbrand_parent_attr, // string
+					'url'	=> $navbar_subbrand_parent_url, // string
 				)
 			),
-			'providers' => $providers, // int[]
-			'locations' => $locations, // int[]
-			'expertises' => $expertises, // int[]
-			'expertise_descendants' => $expertise_descendants,
-			'clinical_resources' => $clinical_resources, // int[]
-			'conditions_cpt' => $conditions_cpt, // int[]
-			'treatments_cpt' => $treatments_cpt, // int[]
-			'ancestors_ontology_farthest' => $ancestors_ontology_farthest,
-			'page_top_level_query' => $page_top_level_query // bool
+			'providers'						=> $providers, // int[]
+			'locations'						=> $locations, // int[]
+			'expertises'					=> $expertises, // int[]
+			'expertise_descendants'			=> $expertise_descendants,
+			'clinical_resources'			=> $clinical_resources, // int[]
+			'conditions_cpt'				=> $conditions_cpt, // int[]
+			'treatments_cpt'				=> $treatments_cpt, // int[]
+			'ancestors_ontology_farthest'	=> $ancestors_ontology_farthest,
+			'page_top_level_query'			=> $page_top_level_query // bool
 		);
 		return $ontology_site_values;
 
@@ -1569,10 +1569,10 @@ function uamswp_fad_post_title() {
 		// Create and return an array to be used on the templates and template parts
 	
 			$provider_query_function = array(
-				'provider_query' => $provider_query, // WP_Post[]
-				'provider_section_show' => $provider_section_show, // bool
-				'provider_ids' => $provider_ids,
-				'provider_count' => $provider_count // integer
+				'provider_query'		=> $provider_query, // WP_Post[]
+				'provider_section_show'	=> $provider_section_show, // bool
+				'provider_ids'			=> $provider_ids,
+				'provider_count'		=> $provider_count // integer
 			);
 			return $provider_query_function;
 
@@ -1631,11 +1631,11 @@ function uamswp_fad_post_title() {
 		// Create and return an array to be used on the templates and template parts
 	
 			$location_query_function = array(
-				'location_query' => $location_query, // WP_Post[]
-				'location_section_show' => $location_section_show, // bool
-				'location_ids' => $location_ids, // int[]
-				'location_count' => $location_count, // int
-				'location_valid' => $location_valid // bool
+				'location_query'		=> $location_query, // WP_Post[]
+				'location_section_show'	=> $location_section_show, // bool
+				'location_ids'			=> $location_ids, // int[]
+				'location_count'		=> $location_count, // int
+				'location_valid'		=> $location_valid // bool
 			);
 			return $location_query_function;
 
@@ -1705,11 +1705,11 @@ function uamswp_fad_post_title() {
 		// Create and return an array to be used on the templates and template parts
 	
 			$location_descendant_query_function = array(
-				'location_descendant_query' => $location_descendant_query, // WP_Post[]
-				'location_descendant_section_show' => $location_descendant_section_show, // bool
-				'location_descendant_ids' => $location_descendant_ids, // int[]
-				'location_descendant_count' => $location_descendant_count, // int
-				'location_descendant_valid' => $location_descendant_valid // bool
+				'location_descendant_query'			=> $location_descendant_query, // WP_Post[]
+				'location_descendant_section_show'	=> $location_descendant_section_show, // bool
+				'location_descendant_ids'			=> $location_descendant_ids, // int[]
+				'location_descendant_count'			=> $location_descendant_count, // int
+				'location_descendant_valid'			=> $location_descendant_valid // bool
 			);
 			return $location_descendant_query_function;
 
@@ -1825,15 +1825,15 @@ function uamswp_fad_post_title() {
 		// Create and return an array to be used on the templates and template parts
 	
 			$expertise_descendant_query_function = array(
-				'expertise_descendant_query' => $expertise_descendant_query, // WP_Post[]
-				'expertise_descendant_section_show' => $expertise_descendant_section_show, // bool
-				'expertise_descendant_ids' => $expertise_descendant_ids, // int[]
-				'expertise_descendant_count' => $expertise_descendant_count, // int
-				'expertise_content_query' => $expertise_content_query, // WP_Post[]
-				'expertise_content_nav_show' => $expertise_content_nav_show, // bool
-				'expertise_content_ids' => $expertise_content_ids, // int[]
-				'expertise_content_count' => $expertise_content_count, // int
-				'expertise_content_nav' => $expertise_content_nav // string
+				'expertise_descendant_query'		=> $expertise_descendant_query, // WP_Post[]
+				'expertise_descendant_section_show'	=> $expertise_descendant_section_show, // bool
+				'expertise_descendant_ids'			=> $expertise_descendant_ids, // int[]
+				'expertise_descendant_count'		=> $expertise_descendant_count, // int
+				'expertise_content_query'			=> $expertise_content_query, // WP_Post[]
+				'expertise_content_nav_show'		=> $expertise_content_nav_show, // bool
+				'expertise_content_ids'				=> $expertise_content_ids, // int[]
+				'expertise_content_count'			=> $expertise_content_count, // int
+				'expertise_content_nav'				=> $expertise_content_nav // string
 			);
 			return $expertise_descendant_query_function;
 
@@ -1874,10 +1874,10 @@ function uamswp_fad_post_title() {
 		// Create and return an array to be used on the templates and template parts
 	
 			$expertise_query_function = array(
-				'expertise_query' => $expertise_query, // WP_Post[]
-				'expertise_section_show' => $expertise_section_show, // bool
-				'expertise_ids' => $expertise_ids, // int[]
-				'expertise_count' => $expertise_count // int
+				'expertise_query'			=> $expertise_query, // WP_Post[]
+				'expertise_section_show'	=> $expertise_section_show, // bool
+				'expertise_ids'				=> $expertise_ids, // int[]
+				'expertise_count'			=> $expertise_count // int
 			);
 			return $expertise_query_function;
 
@@ -1924,10 +1924,10 @@ function uamswp_fad_post_title() {
 		// Create and return an array to be used on the templates and template parts
 	
 			$clinical_resource_query_function = array(
-				'clinical_resource_query' => $clinical_resource_query, // WP_Post[]
-				'clinical_resource_section_show' => $clinical_resource_section_show, // bool
-				'clinical_resource_ids' => $clinical_resource_ids, // int[]
-				'clinical_resource_count' => $clinical_resource_count // int
+				'clinical_resource_query'			=> $clinical_resource_query, // WP_Post[]
+				'clinical_resource_section_show'	=> $clinical_resource_section_show, // bool
+				'clinical_resource_ids'				=> $clinical_resource_ids, // int[]
+				'clinical_resource_count'			=> $clinical_resource_count // int
 			);
 			return $clinical_resource_query_function;
 
@@ -1973,12 +1973,12 @@ function uamswp_fad_post_title() {
 		// Create and return an array to be used on the templates and template parts
 	
 			$condition_query_function = array(
-				'condition_cpt_query' => $condition_cpt_query, // WP_Post[]
-				'condition_section_show' => $condition_section_show, // bool
-				'condition_treatment_section_show' => $condition_treatment_section_show, // bool
-				'condition_ids' => $condition_ids, // int[]
-				'condition_count' => $condition_count, // int
-				'condition_schema' => $condition_schema // string
+				'condition_cpt_query'				=> $condition_cpt_query, // WP_Post[]
+				'condition_section_show'			=> $condition_section_show, // bool
+				'condition_treatment_section_show'	=> $condition_treatment_section_show, // bool
+				'condition_ids'						=> $condition_ids, // int[]
+				'condition_count'					=> $condition_count, // int
+				'condition_schema'					=> $condition_schema // string
 			);
 			return $condition_query_function;
 
@@ -2024,12 +2024,12 @@ function uamswp_fad_post_title() {
 		// Create and return an array to be used on the templates and template parts
 	
 			$treatment_query_function = array(
-				'treatment_cpt_query' => $treatment_cpt_query, // WP_Post[]
-				'treatment_section_show' => $treatment_section_show, // bool
-				'condition_treatment_section_show' => $condition_treatment_section_show, // bool
-				'treatment_ids' => $treatment_ids, // int[]
-				'treatment_count' => $treatment_count, // int
-				'treatment_schema' => $treatment_schema // string
+				'treatment_cpt_query'				=> $treatment_cpt_query, // WP_Post[]
+				'treatment_section_show'			=> $treatment_section_show, // bool
+				'condition_treatment_section_show'	=> $condition_treatment_section_show, // bool
+				'treatment_ids'						=> $treatment_ids, // int[]
+				'treatment_count'					=> $treatment_count, // int
+				'treatment_schema'					=> $treatment_schema // string
 			);
 			return $treatment_query_function;
 
@@ -2213,8 +2213,8 @@ function uamswp_fad_podcast_query( $podcast_name, $jump_link_count = 0 ) {
 	// Create and return an array to be used on the templates and template parts
 
 		$podcast_query_function = array(
-			'podcast_section_show' => $podcast_section_show, // bool
-			'jump_link_count' => $jump_link_count // int
+			'podcast_section_show'	=> $podcast_section_show, // bool
+			'jump_link_count'		=> $jump_link_count // int
 		);
 		return $podcast_query_function;
 
@@ -2541,15 +2541,15 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Create and return an array to be used on the templates and template parts
 	
 			$labels_provider = array(
-				'provider_single_name' => $provider_single_name, // string
-				'provider_single_name_attr' => $provider_single_name_attr, // string
-				'provider_plural_name' => $provider_plural_name, // string
-				'provider_plural_name_attr' => $provider_plural_name_attr, // string
-				'placeholder_provider_single_name' => $placeholder_provider_single_name, // string
-				'placeholder_provider_plural_name' => $placeholder_provider_plural_name, // string
-				'placeholder_provider_short_name' => $placeholder_provider_short_name, // string
-				'placeholder_provider_short_name_possessive' => $placeholder_provider_short_name_possessive, // string
-				'facet_labels' => $facet_labels // array
+				'provider_single_name'							=> $provider_single_name, // string
+				'provider_single_name_attr'						=> $provider_single_name_attr, // string
+				'provider_plural_name'							=> $provider_plural_name, // string
+				'provider_plural_name_attr'						=> $provider_plural_name_attr, // string
+				'placeholder_provider_single_name'				=> $placeholder_provider_single_name, // string
+				'placeholder_provider_plural_name'				=> $placeholder_provider_plural_name, // string
+				'placeholder_provider_short_name'				=> $placeholder_provider_short_name, // string
+				'placeholder_provider_short_name_possessive'	=> $placeholder_provider_short_name_possessive, // string
+				'facet_labels'									=> $facet_labels // array
 			);
 			return $labels_provider;
 	
@@ -2583,15 +2583,15 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Create and return an array to be used on the templates and template parts
 	
 			$labels_location = array(
-				'location_single_name' => $location_single_name, // string
-				'location_single_name_attr' => $location_single_name_attr, // string
-				'location_plural_name' => $location_plural_name, // string
-				'location_plural_name_attr' => $location_plural_name_attr, // string
-				'placeholder_location_single_name' => $placeholder_location_single_name, // string
-				'placeholder_location_plural_name' => $placeholder_location_plural_name, // string
-				'placeholder_location_page_title' => $placeholder_location_page_title, // string
-				'placeholder_location_page_title_phrase' => $placeholder_location_page_title_phrase, // string
-				'facet_labels' => $facet_labels // array
+				'location_single_name'						=> $location_single_name, // string
+				'location_single_name_attr'					=> $location_single_name_attr, // string
+				'location_plural_name'						=> $location_plural_name, // string
+				'location_plural_name_attr'					=> $location_plural_name_attr, // string
+				'placeholder_location_single_name'			=> $placeholder_location_single_name, // string
+				'placeholder_location_plural_name'			=> $placeholder_location_plural_name, // string
+				'placeholder_location_page_title'			=> $placeholder_location_page_title, // string
+				'placeholder_location_page_title_phrase'	=> $placeholder_location_page_title_phrase, // string
+				'facet_labels'								=> $facet_labels // array
 			);
 			return $labels_location;
 	
@@ -2612,12 +2612,12 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Create and return an array to be used on the templates and template parts
 	
 			$labels_location_descendant = array(
-				'location_descendant_single_name' => $location_descendant_single_name, // string
-				'location_descendant_single_name_attr' => $location_descendant_single_name_attr, // string
-				'location_descendant_plural_name' => $location_descendant_plural_name, // string
-				'location_descendant_plural_name_attr' => $location_descendant_plural_name_attr, // string
-				'placeholder_location_descendant_single_name' => $placeholder_location_descendant_single_name, // string
-				'placeholder_location_descendant_plural_name' => $placeholder_location_descendant_plural_name // string
+				'location_descendant_single_name' 				=> $location_descendant_single_name, // string
+				'location_descendant_single_name_attr' 			=> $location_descendant_single_name_attr, // string
+				'location_descendant_plural_name' 				=> $location_descendant_plural_name, // string
+				'location_descendant_plural_name_attr'			=> $location_descendant_plural_name_attr, // string
+				'placeholder_location_descendant_single_name'	=> $placeholder_location_descendant_single_name, // string
+				'placeholder_location_descendant_plural_name'	=> $placeholder_location_descendant_plural_name // string
 			);
 			return $labels_location_descendant;
 	
@@ -2654,13 +2654,13 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Create and return an array to be used on the templates and template parts
 	
 			$labels_expertise = array(
-				'expertise_single_name' => $expertise_single_name, // string
-				'expertise_single_name_attr' => $expertise_single_name_attr, // string
-				'expertise_plural_name' => $expertise_plural_name, // string
-				'expertise_plural_name_attr' => $expertise_plural_name_attr, // string
-				'placeholder_expertise_single_name' => $placeholder_expertise_single_name, // string
-				'placeholder_expertise_plural_name' => $placeholder_expertise_plural_name, // string
-				'placeholder_expertise_page_title' => $placeholder_expertise_page_title, // string
+				'expertise_single_name'				=> $expertise_single_name, // string
+				'expertise_single_name_attr'		=> $expertise_single_name_attr, // string
+				'expertise_plural_name'				=> $expertise_plural_name, // string
+				'expertise_plural_name_attr'		=> $expertise_plural_name_attr, // string
+				'placeholder_expertise_single_name'	=> $placeholder_expertise_single_name, // string
+				'placeholder_expertise_plural_name'	=> $placeholder_expertise_plural_name, // string
+				'placeholder_expertise_page_title'	=> $placeholder_expertise_page_title, // string
 				'facet_labels' => $facet_labels // array
 			);
 			return $labels_expertise;
@@ -2682,12 +2682,12 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Create and return an array to be used on the templates and template parts
 	
 			$labels_expertise_descendant = array(
-				'expertise_descendant_single_name' => $expertise_descendant_single_name, // string
-				'expertise_descendant_single_name_attr' => $expertise_descendant_single_name_attr, // string
-				'expertise_descendant_plural_name' => $expertise_descendant_plural_name, // string
-				'expertise_descendant_plural_name_attr' => $expertise_descendant_plural_name_attr, // string
-				'placeholder_expertise_descendant_single_name' => $placeholder_expertise_descendant_single_name, // string
-				'placeholder_expertise_descendant_plural_name' => $placeholder_expertise_descendant_plural_name // string
+				'expertise_descendant_single_name'				=> $expertise_descendant_single_name, // string
+				'expertise_descendant_single_name_attr'			=> $expertise_descendant_single_name_attr, // string
+				'expertise_descendant_plural_name'				=> $expertise_descendant_plural_name, // string
+				'expertise_descendant_plural_name_attr'			=> $expertise_descendant_plural_name_attr, // string
+				'placeholder_expertise_descendant_single_name'	=> $placeholder_expertise_descendant_single_name, // string
+				'placeholder_expertise_descendant_plural_name'	=> $placeholder_expertise_descendant_plural_name // string
 			);
 			return $labels_expertise_descendant;
 
@@ -2708,12 +2708,12 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Create and return an array to be used on the templates and template parts
 	
 			$labels_clinical_resource = array(
-				'clinical_resource_single_name' => $clinical_resource_single_name, // string
-				'clinical_resource_single_name_attr' => $clinical_resource_single_name_attr, // string
-				'clinical_resource_plural_name' => $clinical_resource_plural_name, // string
-				'clinical_resource_plural_name_attr' => $clinical_resource_plural_name_attr, // string
-				'placeholder_clinical_resource_single_name' => $placeholder_clinical_resource_single_name, // string
-				'placeholder_clinical_resource_plural_name' => $placeholder_clinical_resource_plural_name // string
+				'clinical_resource_single_name'				=> $clinical_resource_single_name, // string
+				'clinical_resource_single_name_attr'		=> $clinical_resource_single_name_attr, // string
+				'clinical_resource_plural_name'				=> $clinical_resource_plural_name, // string
+				'clinical_resource_plural_name_attr'		=> $clinical_resource_plural_name_attr, // string
+				'placeholder_clinical_resource_single_name'	=> $placeholder_clinical_resource_single_name, // string
+				'placeholder_clinical_resource_plural_name'	=> $placeholder_clinical_resource_plural_name // string
 			);
 			return $labels_clinical_resource;
 
@@ -2751,13 +2751,13 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Create and return an array to be used on the templates and template parts
 	
 			$labels_clinical_resource_facet = array(
-				'clinical_resource_type_single_name' => $clinical_resource_type_single_name, // string
-				'clinical_resource_type_single_name_attr' => $clinical_resource_type_single_name_attr, // string
-				'clinical_resource_type_plural_name' => $clinical_resource_type_plural_name, // string
-				'clinical_resource_type_plural_name_attr' => $clinical_resource_type_plural_name_attr, // string
-				'placeholder_clinical_resource_type_single_name' => $placeholder_clinical_resource_type_single_name, // string
-				'placeholder_clinical_resource_type_plural_name' => $placeholder_clinical_resource_type_plural_name, // string
-				'facet_labels' => $facet_labels // string
+				'clinical_resource_type_single_name'				=> $clinical_resource_type_single_name, // string
+				'clinical_resource_type_single_name_attr'			=> $clinical_resource_type_single_name_attr, // string
+				'clinical_resource_type_plural_name'				=> $clinical_resource_type_plural_name, // string
+				'clinical_resource_type_plural_name_attr'			=> $clinical_resource_type_plural_name_attr, // string
+				'placeholder_clinical_resource_type_single_name'	=> $placeholder_clinical_resource_type_single_name, // string
+				'placeholder_clinical_resource_type_plural_name'	=> $placeholder_clinical_resource_type_plural_name, // string
+				'facet_labels'										=> $facet_labels // string
 			);
 			return $labels_clinical_resource_facet;
 
@@ -2778,12 +2778,12 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Create and return an array to be used on the templates and template parts
 	
 			$labels_condition_treatment = array(
-				'condition_treatment_single_name' => $condition_treatment_single_name, // string
-				'condition_treatment_single_name_attr' => $condition_treatment_single_name_attr, // string
-				'condition_treatment_plural_name' => $condition_treatment_plural_name, // string
-				'condition_treatment_plural_name_attr' => $condition_treatment_plural_name_attr, // string
-				'placeholder_condition_treatment_single_name' => $placeholder_condition_treatment_single_name, // string
-				'placeholder_condition_treatment_plural_name' => $placeholder_condition_treatment_plural_name // string
+				'condition_treatment_single_name'				=> $condition_treatment_single_name, // string
+				'condition_treatment_single_name_attr'			=> $condition_treatment_single_name_attr, // string
+				'condition_treatment_plural_name'				=> $condition_treatment_plural_name, // string
+				'condition_treatment_plural_name_attr'			=> $condition_treatment_plural_name_attr, // string
+				'placeholder_condition_treatment_single_name'	=> $placeholder_condition_treatment_single_name, // string
+				'placeholder_condition_treatment_plural_name'	=> $placeholder_condition_treatment_plural_name // string
 			);
 			return $labels_condition_treatment;
 
@@ -2815,13 +2815,13 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Create and return an array to be used on the templates and template parts
 	
 			$labels_condition = array(
-				'condition_single_name' => $condition_single_name, // string
-				'condition_single_name_attr' => $condition_single_name_attr, // string
-				'condition_plural_name' => $condition_plural_name, // string
-				'condition_plural_name_attr' => $condition_plural_name_attr, // string
-				'placeholder_condition_single_name' => $placeholder_condition_single_name, // string
-				'placeholder_condition_plural_name' => $placeholder_condition_plural_name, // string
-				'facet_labels' => $facet_labels // array
+				'condition_single_name'				=> $condition_single_name, // string
+				'condition_single_name_attr'		=> $condition_single_name_attr, // string
+				'condition_plural_name'				=> $condition_plural_name, // string
+				'condition_plural_name_attr'		=> $condition_plural_name_attr, // string
+				'placeholder_condition_single_name'	=> $placeholder_condition_single_name, // string
+				'placeholder_condition_plural_name'	=> $placeholder_condition_plural_name, // string
+				'facet_labels'						=> $facet_labels // array
 			);
 			return $labels_condition;
 
@@ -2853,13 +2853,13 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Create and return an array to be used on the templates and template parts
 	
 			$labels_treatment = array(
-				'treatment_single_name' => $treatment_single_name, // string
-				'treatment_single_name_attr' => $treatment_single_name_attr, // string
-				'treatment_plural_name' => $treatment_plural_name, // string
-				'treatment_plural_name_attr' => $treatment_plural_name_attr, // string
-				'placeholder_treatment_single_name' => $placeholder_treatment_single_name, // string
-				'placeholder_treatment_plural_name' => $placeholder_treatment_plural_name, // string
-				'facet_labels' => $facet_labels // array
+				'treatment_single_name'				=> $treatment_single_name, // string
+				'treatment_single_name_attr'		=> $treatment_single_name_attr, // string
+				'treatment_plural_name'				=> $treatment_plural_name, // string
+				'treatment_plural_name_attr'		=> $treatment_plural_name_attr, // string
+				'placeholder_treatment_single_name'	=> $placeholder_treatment_single_name, // string
+				'placeholder_treatment_plural_name'	=> $placeholder_treatment_plural_name, // string
+				'facet_labels'						=> $facet_labels // array
 			);
 			return $labels_treatment;
 
@@ -2879,9 +2879,9 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Create and return an array to be used on the templates and template parts
 	
 			$archive_text_provider = array(
-				'provider_archive_headline' => $provider_archive_headline, // string
-				'provider_archive_headline_attr' => $provider_archive_headline_attr, // string
-				'placeholder_provider_archive_headline' => $placeholder_provider_archive_headline // string
+				'provider_archive_headline'				=> $provider_archive_headline, // string
+				'provider_archive_headline_attr'		=> $provider_archive_headline_attr, // string
+				'placeholder_provider_archive_headline'	=> $placeholder_provider_archive_headline // string
 			);
 			return $archive_text_provider;
 
@@ -2905,9 +2905,9 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Create and return an array to be used on the templates and template parts
 	
 			$archive_text_location = array(
-				'location_archive_headline' => $location_archive_headline, // string
-				'location_archive_headline_attr' => $location_archive_headline_attr, // string
-				'placeholder_location_archive_headline' => $placeholder_location_archive_headline // string
+				'location_archive_headline' 			=> $location_archive_headline, // string
+				'location_archive_headline_attr'		=> $location_archive_headline_attr, // string
+				'placeholder_location_archive_headline'	=> $placeholder_location_archive_headline // string
 			);
 			return $archive_text_location;
 
@@ -2935,11 +2935,11 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Create and return an array to be used on the templates and template parts
 	
 			$archive_text_expertise = array(
-				'expertise_archive_headline' => $expertise_archive_headline, // string
-				'expertise_archive_headline_attr' => $expertise_archive_headline_attr, // string
-				'expertise_archive_intro_text' => $expertise_archive_intro_text, // string
-				'placeholder_expertise_archive_headline' => $placeholder_expertise_archive_headline, // string
-				'placeholder_expertise_archive_intro_text' => $placeholder_expertise_archive_intro_text // string
+				'expertise_archive_headline'				=> $expertise_archive_headline, // string
+				'expertise_archive_headline_attr'			=> $expertise_archive_headline_attr, // string
+				'expertise_archive_intro_text'				=> $expertise_archive_intro_text, // string
+				'placeholder_expertise_archive_headline'	=> $placeholder_expertise_archive_headline, // string
+				'placeholder_expertise_archive_intro_text'	=> $placeholder_expertise_archive_intro_text // string
 			);
 			return $archive_text_expertise;
 
@@ -2963,9 +2963,9 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Create and return an array to be used on the templates and template parts
 	
 			$archive_text_clinical_resource = array(
-				'clinical_resource_archive_headline' => $clinical_resource_archive_headline, // string
-				'clinical_resource_archive_headline_attr' => $clinical_resource_archive_headline_attr, // string
-				'placeholder_clinical_resource_archive_headline' => $placeholder_clinical_resource_archive_headline // string
+				'clinical_resource_archive_headline'				=> $clinical_resource_archive_headline, // string
+				'clinical_resource_archive_headline_attr'			=> $clinical_resource_archive_headline_attr, // string
+				'placeholder_clinical_resource_archive_headline'	=> $placeholder_clinical_resource_archive_headline // string
 			);
 			return $archive_text_clinical_resource;
 
@@ -2993,11 +2993,11 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Create and return an array to be used on the templates and template parts
 	
 			$archive_text_condition = array(
-				'condition_archive_headline' => $condition_archive_headline, // string
-				'condition_archive_headline_attr' => $condition_archive_headline_attr, // string
-				'condition_archive_intro_text' => $condition_archive_intro_text, // string
-				'placeholder_condition_archive_headline' => $placeholder_condition_archive_headline, // string
-				'placeholder_condition_archive_intro_text' => $placeholder_condition_archive_intro_text // string
+				'condition_archive_headline'				=> $condition_archive_headline, // string
+				'condition_archive_headline_attr'			=> $condition_archive_headline_attr, // string
+				'condition_archive_intro_text'				=> $condition_archive_intro_text, // string
+				'placeholder_condition_archive_headline'	=> $placeholder_condition_archive_headline, // string
+				'placeholder_condition_archive_intro_text'	=> $placeholder_condition_archive_intro_text // string
 			);
 			return $archive_text_condition;
 
@@ -3025,11 +3025,11 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Create and return an array to be used on the templates and template parts
 	
 			$archive_text_treatment = array(
-				'treatment_archive_headline' => $treatment_archive_headline, // string
-				'treatment_archive_headline_attr' => $treatment_archive_headline_attr, // string
-				'treatment_archive_intro_text' => $treatment_archive_intro_text, // string
-				'placeholder_treatment_archive_headline' => $placeholder_treatment_archive_headline, // string
-				'placeholder_treatment_archive_intro_text' => $placeholder_treatment_archive_intro_text // string
+				'treatment_archive_headline'				=> $treatment_archive_headline, // string
+				'treatment_archive_headline_attr'			=> $treatment_archive_headline_attr, // string
+				'treatment_archive_intro_text'				=> $treatment_archive_intro_text, // string
+				'placeholder_treatment_archive_headline'	=> $placeholder_treatment_archive_headline, // string
+				'placeholder_treatment_archive_intro_text'	=> $placeholder_treatment_archive_intro_text // string
 			);
 			return $archive_text_treatment;
 
