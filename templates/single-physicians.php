@@ -186,7 +186,33 @@ $gender = get_field('physician_gender',$post->ID);
 $gender_attr = uamswp_attr_conversion($gender);
 
 // Get system settings for fake subpage (or section) text elements in an Provider subsection (or profile)
-uamswp_fad_fpage_text_provider();
+$fpage_text_provider = uamswp_fad_fpage_text_provider();
+	$location_fpage_title_provider = $fpage_text_provider['location_fpage_title_provider']; // string
+	$location_fpage_intro_provider = $fpage_text_provider['location_fpage_intro_provider']; // string
+	$location_fpage_ref_main_title_provider = $fpage_text_provider['location_fpage_ref_main_title_provider']; // string
+	$location_fpage_ref_main_intro_provider = $fpage_text_provider['location_fpage_ref_main_intro_provider']; // string
+	$location_fpage_ref_main_link_provider = $fpage_text_provider['location_fpage_ref_main_link_provider']; // string
+	$expertise_fpage_title_provider = $fpage_text_provider['expertise_fpage_title_provider']; // string
+	$expertise_fpage_intro_provider = $fpage_text_provider['expertise_fpage_intro_provider']; // string
+	$expertise_fpage_ref_main_title_provider = $fpage_text_provider['expertise_fpage_ref_main_title_provider']; // string
+	$expertise_fpage_ref_main_intro_provider = $fpage_text_provider['expertise_fpage_ref_main_intro_provider']; // string
+	$expertise_fpage_ref_main_link_provider = $fpage_text_provider['expertise_fpage_ref_main_link_provider']; // string
+	$clinical_resource_fpage_title_provider = $fpage_text_provider['clinical_resource_fpage_title_provider']; // string
+	$clinical_resource_fpage_intro_provider = $fpage_text_provider['clinical_resource_fpage_intro_provider']; // string
+	$clinical_resource_fpage_ref_main_title_provider = $fpage_text_provider['clinical_resource_fpage_ref_main_title_provider']; // string
+	$clinical_resource_fpage_ref_main_intro_provider = $fpage_text_provider['clinical_resource_fpage_ref_main_intro_provider']; // string
+	$clinical_resource_fpage_ref_main_link_provider = $fpage_text_provider['clinical_resource_fpage_ref_main_link_provider']; // string
+	$clinical_resource_fpage_more_text_provider = $fpage_text_provider['clinical_resource_fpage_more_text_provider']; // string
+	$clinical_resource_fpage_more_link_text_provider = $fpage_text_provider['clinical_resource_fpage_more_link_text_provider']; // string
+	$clinical_resource_fpage_more_link_descr_provider = $fpage_text_provider['clinical_resource_fpage_more_link_descr_provider']; // string
+	$condition_fpage_title_provider = $fpage_text_provider['condition_fpage_title_provider']; // string
+	$condition_fpage_intro_provider = $fpage_text_provider['condition_fpage_intro_provider']; // string
+	$treatment_fpage_title_provider = $fpage_text_provider['treatment_fpage_title_provider']; // string
+	$treatment_fpage_intro_provider = $fpage_text_provider['treatment_fpage_intro_provider']; // string
+	$condition_treatment_fpage_title_provider = $fpage_text_provider['condition_treatment_fpage_title_provider']; // string
+	$condition_treatment_fpage_intro_provider = $fpage_text_provider['condition_treatment_fpage_intro_provider']; // string
+	$placeholder_short_name = $fpage_text_provider['placeholder_short_name']; // string
+	$placeholder_short_name_possessive = $fpage_text_provider['placeholder_short_name_possessive']; // string
 
 // Get system settings for jump links (a.k.a. anchor links)
 uamswp_fad_labels_jump_links();

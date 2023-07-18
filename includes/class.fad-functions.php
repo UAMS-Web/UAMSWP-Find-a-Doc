@@ -3528,35 +3528,6 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Get field values for fake subpage text elements in an Provider subsection (or profile)
 		function uamswp_fad_fpage_text_provider() {
 
-			// Make variables available outside of the function
-
-				global $location_fpage_title_provider; // string
-				global $location_fpage_intro_provider; // string
-				global $location_fpage_ref_main_title_provider; // string
-				global $location_fpage_ref_main_intro_provider; // string
-				global $location_fpage_ref_main_link_provider; // string
-				global $expertise_fpage_title_provider; // string
-				global $expertise_fpage_intro_provider; // string
-				global $expertise_fpage_ref_main_title_provider; // string
-				global $expertise_fpage_ref_main_intro_provider; // string
-				global $expertise_fpage_ref_main_link_provider; // string
-				global $clinical_resource_fpage_title_provider; // string
-				global $clinical_resource_fpage_intro_provider; // string
-				global $clinical_resource_fpage_ref_main_title_provider; // string
-				global $clinical_resource_fpage_ref_main_intro_provider; // string
-				global $clinical_resource_fpage_ref_main_link_provider; // string
-				global $clinical_resource_fpage_more_text_provider; // string
-				global $clinical_resource_fpage_more_link_text_provider; // string
-				global $clinical_resource_fpage_more_link_descr_provider; // string
-				global $condition_fpage_title_provider; // string
-				global $condition_fpage_intro_provider; // string
-				global $treatment_fpage_title_provider; // string
-				global $treatment_fpage_intro_provider; // string
-				global $condition_treatment_fpage_title_provider; // string
-				global $condition_treatment_fpage_intro_provider; // string
-				global $placeholder_short_name; // string
-				global $placeholder_short_name_possessive; // string
-
 			// Locations Fake Subpage (or Section)
 
 				$location_fpage_title_provider = get_field('location_fpage_title_provider', 'option'); // Title of a Fake Subpage (or Section) for Locations in a Provider Subsection (or Profile)
