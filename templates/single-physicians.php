@@ -300,7 +300,11 @@ if ( $expertise_section_show ) {
 
 // Query for whether related clinical resources content section should be displayed on ontology pages/subsections
 $clinical_resources = get_field('physician_clinical_resources');
-uamswp_fad_clinical_resource_query();
+$clinical_resource_query_function = uamswp_fad_clinical_resource_query( $clinical_resources );
+	$clinical_resource_query = $clinical_resource_query_function['clinical_resource_query']; // WP_Post[]
+	$clinical_resource_section_show = $clinical_resource_query_function['clinical_resource_section_show']; // bool
+	$clinical_resource_ids = $clinical_resource_query_function['clinical_resource_ids']; // int[]
+	$clinical_resource_count = $clinical_resource_query_function['clinical_resource_count']; // int
 
 // Query for whether related conditions content section should be displayed on ontology pages/subsections
 $conditions = get_field('physician_conditions');
