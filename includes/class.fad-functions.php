@@ -2630,15 +2630,6 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get the Find-a-Doc Settings values for location descendant item labels
 	function uamswp_fad_labels_location_descendant() {
 
-		// Make variables available outside of the function
-
-			global $location_descendant_single_name; // string
-			global $location_descendant_single_name_attr; // string
-			global $location_descendant_plural_name; // string
-			global $location_descendant_plural_name_attr; // string
-			global $placeholder_location_descendant_single_name; // string
-			global $placeholder_location_descendant_plural_name; // string
-
 		$location_descendant_single_name = get_field('location_descendant_single_name', 'option') ?: 'Additional Location';
 		$location_descendant_single_name_attr = uamswp_attr_conversion($location_descendant_single_name);
 		$location_descendant_plural_name = get_field('location_descendant_plural_name', 'option') ?: 'Additional Locations';

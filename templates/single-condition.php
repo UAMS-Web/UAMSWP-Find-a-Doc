@@ -27,8 +27,14 @@
 		$placeholder_location_page_title = $labels_location['placeholder_location_page_title']; // string
 		$placeholder_location_page_title_phrase = $labels_location['placeholder_location_page_title_phrase']; // string
 
-	// Get system settings for location descendant item labels
-	// uamswp_fad_labels_location_descendant();
+	// // Get system settings for location descendant item labels
+	// $labels_location_descendant = uamswp_fad_labels_location_descendant();
+	// 	$location_descendant_single_name = $labels_location_descendant['location_descendant_single_name']; // string
+	// 	$location_descendant_single_name_attr = $labels_location_descendant['location_descendant_single_name_attr']; // string
+	// 	$location_descendant_plural_name = $labels_location_descendant['location_descendant_plural_name']; // string
+	// 	$location_descendant_plural_name_attr = $labels_location_descendant['location_descendant_plural_name_attr']; // string
+	// 	$placeholder_location_descendant_single_name = $labels_location_descendant['placeholder_location_descendant_single_name']; // string
+	// 	$placeholder_location_descendant_plural_name = $labels_location_descendant['placeholder_location_descendant_plural_name']; // string
 
 	// Get system settings for area of expertise labels
 	uamswp_fad_labels_expertise();
