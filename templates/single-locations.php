@@ -584,7 +584,13 @@ while ( have_posts() ) : the_post(); ?>
 
 		// Query for whether related treatments content section should be displayed on ontology pages/subsections
 		$treatments_cpt = get_field('location_treatments_cpt');
-		uamswp_fad_treatment_query();
+		$treatment_query_function = uamswp_fad_treatment_query( $treatments_cpt );
+			$treatment_cpt_query = $treatment_query_function['treatment_cpt_query']; // WP_Post[]
+			$treatment_section_show = $treatment_query_function['treatment_section_show']; // bool
+			$condition_treatment_section_show = $treatment_query_function['condition_treatment_section_show']; // bool
+			$treatment_ids = $treatment_query_function['treatment_ids']; // int[]
+			$treatment_count = $treatment_query_function['treatment_count']; // int
+			$treatment_schema = $treatment_query_function['treatment_schema']; // string
 
 		// Check if Jump Links section should be displayed
 		if ( $jump_link_count >= $jump_link_count_min ) {

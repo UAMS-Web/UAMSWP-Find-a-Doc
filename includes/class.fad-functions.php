@@ -1985,7 +1985,7 @@ function uamswp_fad_post_title() {
 	}
 
 	// Query for whether related treatments content section should be displayed on ontology pages/subsections
-	function uamswp_fad_treatment_query() {
+	function uamswp_fad_treatment_query( $treatments_cpt ) {
 
 		// Bring in variables from outside of the function
 
@@ -1994,17 +1994,10 @@ function uamswp_fad_post_title() {
 				global $jump_link_count;
 				global $ontology_type;
 
-			$ontology_site_values = uamswp_fad_ontology_site_values();
-				$treatments_cpt = $ontology_site_values['treatments_cpt'];
-
-		// Make variables available outside of the function
-
-			global $treatment_cpt_query; // WP_Post[]
-			global $treatment_section_show; // bool
-			global $condition_treatment_section_show; // bool
-			global $treatment_ids; // int[]
-			global $treatment_count; // int
-			global $treatment_schema; // string
+			if ( !isset($treatments_cpt) ) {
+				$ontology_site_values = uamswp_fad_ontology_site_values();
+					$treatments_cpt = $ontology_site_values['treatments_cpt']; // int[] // Value of the related treatments input
+			}
 
 		// Treatments CPT
 		$args = array(
@@ -7521,7 +7514,7 @@ function uamswp_fad_section_condition( $conditions ) {
 //     The template part included in this function can stand on its own. If the 
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
-function uamswp_fad_section_treatment() {
+function uamswp_fad_section_treatment( $treatments_cpt ) {
 
 	// Bring in variables from outside of the function
 
@@ -7547,7 +7540,7 @@ function uamswp_fad_section_treatment() {
 		$ontology_site_values = uamswp_fad_ontology_site_values();
 			$treatments_cpt = $ontology_site_values['treatments_cpt'];
 
-		$treatment_query_function = uamswp_fad_treatment_query();
+		$treatment_query_function = uamswp_fad_treatment_query( $treatments_cpt );
 			$treatment_cpt_query = $treatment_query_function['treatment_cpt_query']; // WP_Post[]
 			$treatment_section_show = $treatment_query_function['treatment_section_show']; // bool
 			$treatment_ids = $treatment_query_function['treatment_ids']; // int[]
@@ -7579,7 +7572,7 @@ function uamswp_fad_section_treatment() {
 //     The template part included in this function can stand on its own. If the 
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
-function uamswp_fad_section_condition_treatment( $conditions ) {
+function uamswp_fad_section_condition_treatment( $conditions_cpt, $treatments_cpt ) {
 
 	// Bring in variables from outside of the function
 
@@ -7620,13 +7613,13 @@ function uamswp_fad_section_condition_treatment( $conditions ) {
 			$treatment_fpage_title_general = $fpage_text_treatment_general['treatment_fpage_title_general']; // string
 			$treatment_fpage_intro_general = $fpage_text_treatment_general['treatment_fpage_intro_general']; // string
 
-		$condition_query_function = uamswp_fad_condition_query( $conditions );
+		$condition_query_function = uamswp_fad_condition_query( $conditions_cpt );
 			$condition_cpt_query = $condition_query_function['condition_cpt_query']; // WP_Post[]
 			$condition_section_show = $condition_query_function['condition_section_show']; // bool
 			$condition_treatment_section_show = $condition_query_function['condition_treatment_section_show']; // bool
 			$condition_count = $condition_query_function['condition_count']; // int
 
-		$treatment_query_function = uamswp_fad_treatment_query();
+		$treatment_query_function = uamswp_fad_treatment_query( $treatments_cpt );
 			$treatment_cpt_query = $treatment_query_function['treatment_cpt_query']; // WP_Post[]
 			$treatment_section_show = $treatment_query_function['treatment_section_show']; // bool
 			$condition_treatment_section_show = $treatment_query_function['condition_treatment_section_show']; // bool
