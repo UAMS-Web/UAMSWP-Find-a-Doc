@@ -8,21 +8,22 @@
 	// Variable definition function
 	// Call before setting $meta_title on template
 	function uamswp_fad_meta_title_vars() {
-		// Bring in variables from outside of the function
-		global $page_title;
-		global $page_title_attr;
-		global $meta_title; // Optional pre-defined meta title // If pre-defined, make it attribute friendly
-		global $meta_title_base_addition; // Word or phrase to use to form base meta title // Defaults to $page_title_attr
-		global $meta_title_base_order; // Optional pre-defined array for name order of base meta title // Expects one value but will accommodate any number
-		global $meta_title_enhanced_addition; // Word or phrase to inject into base meta title to form enhanced meta title level 1
-		global $meta_title_enhanced_order; // Optional pre-defined array for name order of enhanced meta title level 1 // Expects two values but will accommodate any number
-		global $meta_title_enhanced_x2_addition; // Second word or phrase to inject into base meta title to form enhanced meta title level 2
-		global $meta_title_enhanced_x2_order; // Optional pre-defined array for name order of enhanced meta title level 2 // Expects three values but will accommodate any number
-		global $meta_title_enhanced_x3_addition; // Third word or phrase to inject into base meta title to form enhanced meta title level 3
-		global $meta_title_enhanced_x3_order; // Optional pre-defined array for name order of enhanced meta title level 3 // Expects four values but will accommodate any number
 
-		// Make variables available outside of the function
-		global $meta_title;
+		// Bring in variables from outside of the function
+
+			// Defined on the template
+
+				global $page_title; // string
+				global $page_title_attr; // string
+				global $meta_title; // string // Optional pre-defined meta title // If pre-defined, make it attribute friendly
+				global $meta_title_base_addition; // string // Word or phrase to use to form base meta title // Defaults to $page_title_attr
+				global $meta_title_base_order; // array // Optional pre-defined array for name order of base meta title // Expects one value but will accommodate any number
+				global $meta_title_enhanced_addition; // string // Word or phrase to inject into base meta title to form enhanced meta title level 1
+				global $meta_title_enhanced_order; // array // Optional pre-defined array for name order of enhanced meta title level 1 // Expects two values but will accommodate any number
+				global $meta_title_enhanced_x2_addition; // string // Second word or phrase to inject into base meta title to form enhanced meta title level 2
+				global $meta_title_enhanced_x2_order; // array // Optional pre-defined array for name order of enhanced meta title level 2 // Expects three values but will accommodate any number
+				global $meta_title_enhanced_x3_addition; // string // Third word or phrase to inject into base meta title to form enhanced meta title level 3
+				global $meta_title_enhanced_x3_order; // array // Optional pre-defined array for name order of enhanced meta title level 3 // Expects four values but will accommodate any number
 
 		// Check/define variables
 		$page_title = ( isset($page_title) && !empty($page_title) ) ? $page_title : get_the_title();
@@ -161,6 +162,14 @@
 			// Otherwise, use the previously-defined value
 			$meta_title = ( strlen($meta_title_enhanced_x3) <= $meta_title_chars_max ) ? $meta_title_enhanced_x3 : $meta_title;
 		}
+
+		// Create and return an array to be used on the templates and template parts
+	
+			$meta_title_vars = array(
+				'meta_title'	=> $meta_title, // string
+			);
+			return $meta_title_vars;
+
 	}
 
 	// Filter meta title

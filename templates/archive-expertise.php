@@ -85,7 +85,8 @@ $page_image_id = $expertise_archive_image; // Image ID // int
 
 // Override theme's method of defining the meta page title
 $meta_title_base_addition = $expertise_plural_name_attr; // Word or phrase to use to form base meta title
-uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
+$meta_title_vars = uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
+	$meta_title = $meta_title_vars['meta_title']; // string
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 // Override theme's method of defining the meta description

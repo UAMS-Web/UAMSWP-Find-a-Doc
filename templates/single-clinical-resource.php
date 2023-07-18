@@ -122,7 +122,8 @@ $meta_title_base_addition = $page_title_attr; // Word or phrase to inject into b
 $meta_title_enhanced_addition = $clinical_resource_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
 $meta_title_enhanced_x2_addition = $resource_type_label_attr; // Second word or phrase to inject into base meta title to form enhanced meta title level 2
 $meta_title_enhanced_x2_order = array( $meta_title_base_addition, $meta_title_enhanced_x2_addition, $meta_title_enhanced_addition ); // Optional pre-defined array for name order of enhanced meta title level 2 // Expects three values but will accommodate any number
-uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
+$meta_title_vars = uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
+	$meta_title = $meta_title_vars['meta_title']; // string
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 // Modify SEOPress's standard canonical URL settings

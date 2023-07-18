@@ -42,7 +42,8 @@ $condition_archive_link = get_post_type_archive_link( get_query_var('post_type')
 
 // Override theme's method of defining the meta page title
 $meta_title_base_addition = $condition_plural_name_attr; // Word or phrase to use to form base meta title
-uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
+$meta_title_vars = uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
+	$meta_title = $meta_title_vars['meta_title']; // string
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 get_header(); ?>

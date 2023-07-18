@@ -339,7 +339,8 @@ if ( $parent_title_attr ) {
 } else {
 	$meta_title_enhanced_addition = $location_city_attr; // Word or phrase to inject into base meta title to form enhanced meta title
 }
-uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
+$meta_title_vars = uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
+	$meta_title = $meta_title_vars['meta_title']; // string
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 get_header();
