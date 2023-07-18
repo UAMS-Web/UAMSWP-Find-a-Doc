@@ -2037,12 +2037,17 @@ function uamswp_fad_post_title() {
 	}
 
 // Construct ontology subsection primary navigation
-function uamswp_fad_ontology_nav_menu( $locations, $expertises, $clinical_resources ) {
+function uamswp_fad_ontology_nav_menu() {
 
 	// Bring in variables from outside of the function
 
 		$ontology_site_values = uamswp_fad_ontology_site_values();
 			$site_nav_id = $ontology_site_values['site_nav_id']; // int
+			$providers = $ontology_site_values['providers']; // int[]
+			$locations = $ontology_site_values['locations']; // int[]
+			$expertises = $ontology_site_values['expertises']; // int[]
+			$expertise_descendants = $ontology_site_values['expertise_descendants'];
+			$clinical_resources = $ontology_site_values['clinical_resources']; // int[]
 
 		$provider_query_function = uamswp_fad_provider_query();
 			$provider_section_show = $provider_query_function['provider_section_show']; // bool
@@ -2055,9 +2060,6 @@ function uamswp_fad_ontology_nav_menu( $locations, $expertises, $clinical_resour
 
 		$clinical_resource_query_function = uamswp_fad_clinical_resource_query( $clinical_resources );
 			$clinical_resource_section_show = $clinical_resource_query_function['clinical_resource_section_show']; // bool
-
-		$ontology_site_values = uamswp_fad_ontology_site_values();
-			$expertise_descendants = $ontology_site_values['expertise_descendants'];
 
 		$expertise_descendant_query_function = uamswp_fad_expertise_descendant_query();
 			$expertise_descendant_section_show = $expertise_descendant_query_function['expertise_descendant_section_show']; // bool
