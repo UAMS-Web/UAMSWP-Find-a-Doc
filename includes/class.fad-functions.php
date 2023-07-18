@@ -7682,6 +7682,7 @@ function uamswp_schema_construct($schema_construct_arr) {
 	$i = isset($i) ? $i : 0;
 	$chr_newline = PHP_EOL;
 	$chr_tab = chr(9);
+	$schema_construct = isset($schema_construct) ? $schema_construct : '';
 	$schema_construct_square = ( $schema_construct_item_count > 1 ) ? true : false;
 	$schema_construct_arr_list = array_is_list($schema_construct_arr);
 	if ( $schema_construct_square ) {
