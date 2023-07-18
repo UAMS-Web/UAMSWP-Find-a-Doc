@@ -2860,16 +2860,6 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get the Find-a-Doc Settings values for treatment labels
 	function uamswp_fad_labels_treatment() {
 
-		// Make variables available outside of the function
-
-			global $treatment_single_name; // string
-			global $treatment_single_name_attr; // string
-			global $treatment_plural_name; // string
-			global $treatment_plural_name_attr; // string
-			global $placeholder_treatment_single_name; // string
-			global $placeholder_treatment_plural_name; // string
-			global $facet_labels; // array
-
 		$treatment_single_name = get_field('treatments_single_name', 'option') ?: 'Treatment/Procedure';
 		$treatment_single_name_attr = uamswp_attr_conversion($treatment_single_name);
 		$treatment_plural_name = get_field('treatments_plural_name', 'option') ?: 'Treatments and Procedures';

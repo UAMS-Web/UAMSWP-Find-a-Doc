@@ -83,7 +83,13 @@
 		$placeholder_condition_plural_name = $labels_condition['placeholder_condition_plural_name']; // string
 
 	// Get system settings for treatment labels
-	uamswp_fad_labels_treatment();
+	$labels_treatment = uamswp_fad_labels_treatment();
+		$treatment_single_name = $labels_treatment['condition_single_name']; // string
+		$treatment_single_name_attr = $labels_treatment['condition_single_name']; // string
+		$treatment_plural_name = $labels_treatment['condition_single_name']; // string
+		$treatment_plural_name_attr = $labels_treatment['condition_single_name']; // string
+		$placeholder_treatment_single_name = $labels_treatment['condition_single_name']; // string
+		$placeholder_treatment_plural_name = $labels_treatment['condition_single_name']; // string
 
 // Get system settings for condition archive page text
 // uamswp_fad_archive_text_treatment();

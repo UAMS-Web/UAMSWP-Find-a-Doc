@@ -28,7 +28,13 @@ function uamswp_terms_clauses( $clauses, $taxonomies, $args ){
 }
 
 // Get system settings for Treatments Labels
-uamswp_fad_labels_treatment();
+$labels_treatment = uamswp_fad_labels_treatment();
+	$treatment_single_name = $labels_treatment['condition_single_name']; // string
+	$treatment_single_name_attr = $labels_treatment['condition_single_name']; // string
+	$treatment_plural_name = $labels_treatment['condition_single_name']; // string
+	$treatment_plural_name_attr = $labels_treatment['condition_single_name']; // string
+	$placeholder_treatment_single_name = $labels_treatment['condition_single_name']; // string
+	$placeholder_treatment_plural_name = $labels_treatment['condition_single_name']; // string
 
 // Get system settings for Treatments Archive Page
 uamswp_fad_archive_text_treatment();
