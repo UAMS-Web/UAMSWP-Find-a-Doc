@@ -568,6 +568,9 @@ while ( have_posts() ) : the_post(); ?>
 			if ($portal_link) {
 				$portal_url = $portal_link['url'];
 				$portal_link_title = $portal_link['title'];
+			} else {
+				$portal_url = '';
+				$portal_link_title = '';
 			}
 		}
 		if ($portal && $portal_slug !== "_none") {
