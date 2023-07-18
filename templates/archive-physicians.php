@@ -96,7 +96,7 @@ $page_image_id = $provider_archive_image; // Image ID // int
 
 // Override theme's method of defining the meta page title
 $meta_title_base_addition = $provider_plural_name_attr; // Word or phrase to use to form base meta title
-uamswp_fad_title_vars(); // Defines universal variables related to the setting the meta title
+uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 // Override the theme's method of defining the social meta tags

@@ -167,7 +167,7 @@ $ontology_site_values = uamswp_fad_ontology_site_values();
 $meta_title_base_addition = $fpage_name_attr; // Word or phrase to use to form base meta title
 $meta_title_enhanced_addition = $page_title_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
 $meta_title_base_order = array( $meta_title_base_addition, $meta_title_enhanced_addition ); // Override default base meta title structure to force inclusion of $meta_title_enhanced_addition
-uamswp_fad_title_vars(); // Defines universal variables related to the setting the meta title
+uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 // Override theme's method of defining the meta description

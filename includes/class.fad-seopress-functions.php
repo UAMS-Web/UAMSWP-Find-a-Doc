@@ -7,7 +7,7 @@
 
 	// Variable definition function
 	// Call before setting $meta_title on template
-	function uamswp_fad_title_vars() {
+	function uamswp_fad_meta_title_vars() {
 		// Bring in variables from outside of the function
 		global $page_title;
 		global $page_title_attr;

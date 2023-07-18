@@ -343,7 +343,7 @@ $meta_title_enhanced_addition = $phys_title_name_attr; // Word or phrase to inje
 $meta_title_enhanced_x2_addition = $primary_appointment_city_attr; // Second word or phrase to inject into base meta title to form enhanced meta title
 $meta_title_enhanced_x3_addition = $expertise_primary_name_attr; // Third word or phrase to inject into base meta title to form enhanced meta title
 $meta_title_enhanced_x3_order = array( $page_title_attr, $meta_title_enhanced_addition, $meta_title_enhanced_x3_addition, $meta_title_enhanced_x2_addition ); // Optional pre-defined array for name order of enhanced meta title level 3 // Expects four values
-uamswp_fad_title_vars(); // Defines universal variables related to the setting the meta title
+uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
 // add_filter('seopress_titles_title', 'uamswp_fad_title', 20, 2);
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 

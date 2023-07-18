@@ -110,7 +110,7 @@ uamswp_fad_archive_text_condition();
 
 // Override theme's method of defining the meta page title
 $meta_title_enhanced_addition = $condition_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title
-uamswp_fad_title_vars(); // Defines universal variables related to the setting the meta title
+uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 if (empty($excerpt)){
