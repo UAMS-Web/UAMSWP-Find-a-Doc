@@ -131,6 +131,7 @@ if ( $condition_treatment_section_show && !$hide_medical_ontology ) {
 		// Combined Conditions and Treatments
 
 			$condition_treatment_section_class = isset($condition_treatment_section_class) ? $condition_treatment_section_class : 'conditions-treatments';
+			$condition_treatment_section_collapse_list = isset($condition_treatment_section_collapse_list) ? $condition_treatment_section_collapse_list : false;
 			$condition_treatment_section_id = isset($condition_treatment_section_id) ? $condition_treatment_section_id : 'conditions-treatments';
 			$condition_treatment_section_show_header = isset($condition_treatment_section_show_header) ? $condition_treatment_section_show_header : true;
 			if ( $condition_section_show && $treatment_section_show ) {

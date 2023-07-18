@@ -236,6 +236,7 @@ if ( $location_section_show ) {
 											$chr_tab_base_count = 2;
 		
 											// Construct the schema data
+											$location_schema = isset($location_schema) ? $location_schema : '';
 											$location_schema .= uamswp_schema_construct($schema_address_arr);
 
 											$i++;
