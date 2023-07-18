@@ -217,10 +217,9 @@ $jump_link_count = 0;
 	$podcast_name = get_field('condition_podcast_name');
 	$podcast_filter = 'tag';
 	$podcast_subject = $page_title;
-	uamswp_fad_podcast_query();
-	if ( $podcast_section_show ) {
-		$jump_link_count++;
-	}
+	$podcast_query_function = uamswp_fad_podcast_query( $podcast_name, $jump_link_count ); // Defines universal variables related to podcast
+		$podcast_section_show = $podcast_query_function['podcast_section_show']; // bool
+		$jump_link_count = $podcast_query_function['jump_link_count']; // int
 
 	// Check if Clinical Trials section should be displayed
 	if ( !empty($clinical_trials) ) {

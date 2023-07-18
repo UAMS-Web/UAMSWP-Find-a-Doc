@@ -390,7 +390,8 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	$podcast_name = get_field('expertise_podcast_name');
 	$podcast_filter = 'tag';
 	$podcast_subject = $page_title;
-	uamswp_fad_podcast_query();
+	$podcast_query_function = uamswp_fad_podcast_query( $podcast_name ); // Defines universal variables related to podcast
+		$podcast_section_show = $podcast_query_function['podcast_section_show']; // bool
 
 	// Display Combined Conditions and Treatments Section
 	$condition_treatment_section_title = $condition_treatment_fpage_title_expertise; // Text to use for the section title // string (default: Find-a-Doc Settings value for combined condition/treatment section title in a general placement)

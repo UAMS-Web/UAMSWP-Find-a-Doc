@@ -2194,18 +2194,13 @@ function uamswp_add_entry_class( $attributes ) {
 }
 
 // Query for whether UAMS Health Talk podcast section should be displayed on ontology pages/subsections
-function uamswp_fad_podcast_query() {
+function uamswp_fad_podcast_query( $podcast_name, $jump_link_count = 0 ) {
 
 	// Bring in variables from outside of the function
 
-		// Typically defined on the template
-
-			global $podcast_name; // string
-			global $jump_link_count; // int
-
-	// Make variables available outside of the function
-
-		global $podcast_section_show; // bool
+		// Function Arguments
+		// 	$podcast_name // string
+		// 	$jump_link_count // int
 
 	// Check if podcast section should be displayed
 	if ( $podcast_name ) {
@@ -2226,17 +2221,16 @@ function uamswp_fad_podcast_query() {
 }
 
 // Construct UAMS Health Talk podcast section
-function uamswp_fad_podcast() {
+function uamswp_fad_podcast( $podcast_name ) {
 
 	// Bring in variables from outside of the function
 
 		// Typically defined on the template
 
-			global $podcast_name;
 			global $podcast_subject;
 			global $podcast_filter; // Expected values: 'tag' or 'doctor'
 
-		$podcast_query_function = uamswp_fad_podcast_query();
+		$podcast_query_function = uamswp_fad_podcast_query( $podcast_name );
 			$podcast_section_show = $podcast_query_function['podcast_section_show'];
 
 		$labels_provider = uamswp_fad_labels_provider();

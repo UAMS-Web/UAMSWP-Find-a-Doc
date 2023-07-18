@@ -454,7 +454,9 @@ while ( have_posts() ) : the_post();
 
 	// Query for whether UAMS Health Talk podcast section should be displayed on ontology pages/subsections
 	$podcast_name = get_field('physician_podcast_name');
-	uamswp_fad_podcast_query();
+	$podcast_query_function = uamswp_fad_podcast_query( $podcast_name, $jump_link_count ); // Defines universal variables related to podcast
+		$podcast_section_show = $podcast_query_function['podcast_section_show']; // bool
+		$jump_link_count = $podcast_query_function['jump_link_count']; // int
 
 	// Classes for indicating presence of content
 	$provider_field_classes = '';
