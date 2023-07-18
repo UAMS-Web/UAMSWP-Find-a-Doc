@@ -1025,7 +1025,7 @@ while ( have_posts() ) : the_post();
 		// Construct UAMS Health Talk podcast section
 		$podcast_filter = 'doctor';
 		$podcast_subject = $short_name;
-		uamswp_fad_podcast( $podcast_name, $podcast_subject, $podcast_filter );
+		uamswp_fad_podcast( $podcast_name, $podcast_section_show, $podcast_filter, $podcast_subject );
 
 		// Begin Clinical Resources Section
 		$clinical_resource_section_more_link_key = '_resource_provider';
