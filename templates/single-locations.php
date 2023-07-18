@@ -592,12 +592,13 @@ while ( have_posts() ) : the_post(); ?>
 				'post_type' => 'location'
 			)
 		);
-		$location_descendant_query_function = uamswp_fad_location_descendant_query( $location_descendants );
+		$location_descendant_query_function = uamswp_fad_location_descendant_query( $current_id, $location_descendants, $jump_link_count );
 			$location_descendant_query = $location_descendant_query_function['location_descendant_query']; // WP_Post[]
 			$location_descendant_section_show = $location_descendant_query_function['location_descendant_section_show']; // bool
 			$location_descendant_ids = $location_descendant_query_function['location_descendant_ids']; // int[]
 			$location_descendant_count = $location_descendant_query_function['location_descendant_count']; // int
 			$location_descendant_valid = $location_descendant_query_function['location_descendant_valid']; // bool
+			$jump_link_count = $location_descendant_query_function['jump_link_count']; // int
 		$location_query = $location_descendant_query;
 		$location_section_show = $location_descendant_section_show;
 		$location_ids = $location_descendant_ids;

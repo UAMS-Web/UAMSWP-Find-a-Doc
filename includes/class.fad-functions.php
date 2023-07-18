@@ -1642,14 +1642,14 @@ function uamswp_fad_post_title() {
 	}
 
 	// Query for whether descendant locations content section should be displayed on a page
-	function uamswp_fad_location_descendant_query( $location_descendants ) {
+	function uamswp_fad_location_descendant_query( $current_id, $location_descendants, $jump_link_count = 0 ) {
 
 		// Bring in variables from outside of the function
 
-			// Typically defined on the template
-
-				global $current_id;
-				global $jump_link_count;
+			// Function Arguments
+			// 	$current_id // int
+			// 	$location_descendants // int[]
+			// 	$jump_link_count // int
 
 			if ( !isset($location_descendants) ) {
 				$ontology_site_values = uamswp_fad_ontology_site_values();
@@ -1680,7 +1680,7 @@ function uamswp_fad_post_title() {
 				$location_descendant_section_show = true;
 				$location_descendant_ids = $location_descendant_query->posts;
 				$location_descendant_count = count($location_descendant_query->posts);
-				$jump_link_count = $jump_link_count + 1;
+				$jump_link_count++;
 			} else {
 				$location_descendant_section_show = false;
 			}
@@ -1694,6 +1694,12 @@ function uamswp_fad_post_title() {
 					}
 				}
 			}
+		} else {
+			$location_descendant_query = '';
+			$location_descendant_section_show = false;
+			$location_descendant_ids = '';
+			$location_descendant_count = '';
+			$location_descendant_valid = false;
 		}
 
 		// Create and return an array to be used on the templates and template parts
@@ -1703,7 +1709,8 @@ function uamswp_fad_post_title() {
 				'location_descendant_section_show'	=> $location_descendant_section_show, // bool
 				'location_descendant_ids'			=> $location_descendant_ids, // int[]
 				'location_descendant_count'			=> $location_descendant_count, // int
-				'location_descendant_valid'			=> $location_descendant_valid // bool
+				'location_descendant_valid'			=> $location_descendant_valid, // bool
+				'jump_link_count'					=> $jump_link_count // int
 			);
 			return $location_descendant_query_function;
 
