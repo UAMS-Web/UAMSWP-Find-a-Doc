@@ -7216,10 +7216,6 @@ function uamswp_fad_appointment_refer() {
 // Get the Find-a-Doc Settings value for jump links (a.k.a. anchor links)
 function uamswp_fad_labels_jump_links() {
 
-	// Make variables available outside of the function
-
-		global $fad_jump_links_title; // string
-
 	// Jump Links Section Title
 	$fad_jump_links_title = get_field('fad_jump_links_title', 'option') ?: 'Content';
 

@@ -108,10 +108,8 @@ $page_slug = $post->post_name;
 uamswp_fad_fpage_text_clinical_resource();
 
 // Get system settings for jump links (a.k.a. anchor links)
-// uamswp_fad_labels_jump_links();
-
-// Get system settings for jump links (a.k.a. anchor links)
-uamswp_fad_labels_jump_links();
+$labels_jump_links = uamswp_fad_labels_jump_links();
+	$fad_jump_links_title = $labels_jump_links['fad_jump_links_title']; // string
 
 // Get resource type
 $resource_type = get_field('clinical_resource_type');

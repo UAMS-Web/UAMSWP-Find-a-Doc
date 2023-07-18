@@ -118,8 +118,9 @@ uamswp_fad_fpage_image_expertise();
 $page_image_id = $expertise_featured_image; // Image ID
 uamswp_meta_image_resize();
 
-// Get system settings for jump links (a.k.a. anchor links)
-// uamswp_fad_labels_jump_links();
+// // Get system settings for jump links (a.k.a. anchor links)
+// $labels_jump_links = uamswp_fad_labels_jump_links();
+// 	$fad_jump_links_title = $labels_jump_links['fad_jump_links_title']; // string
 
 // Get site header and site nav values for ontology subsections
 $ontology_site_values = uamswp_fad_ontology_site_values();

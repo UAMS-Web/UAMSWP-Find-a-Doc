@@ -215,7 +215,8 @@ $fpage_text_provider = uamswp_fad_fpage_text_provider();
 	$placeholder_short_name_possessive = $fpage_text_provider['placeholder_short_name_possessive']; // string
 
 // Get system settings for jump links (a.k.a. anchor links)
-uamswp_fad_labels_jump_links();
+$labels_jump_links = uamswp_fad_labels_jump_links();
+	$fad_jump_links_title = $labels_jump_links['fad_jump_links_title']; // string
 
 // Set logic for displaying jump links and sections
 $jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?

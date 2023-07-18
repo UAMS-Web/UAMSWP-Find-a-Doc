@@ -105,7 +105,8 @@ $page_title_attr = uamswp_attr_conversion($page_title);
 $page_slug = $post->post_name;
 
 // Get system settings for jump links (a.k.a. anchor links)
-uamswp_fad_labels_jump_links();
+$labels_jump_links = uamswp_fad_labels_jump_links();
+	$fad_jump_links_title = $labels_jump_links['fad_jump_links_title']; // string
 
 // Construct the meta keywords element
 $keywords = get_field('treatment_procedure_alternate');
