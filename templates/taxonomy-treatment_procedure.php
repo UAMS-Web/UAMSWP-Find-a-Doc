@@ -47,7 +47,14 @@ $embed_code = get_field('treatment_procedure_embed_codes', $term); // Embed / Sy
 		$placeholder_location_page_title_phrase = $labels_location['placeholder_location_page_title_phrase']; // string
 
 	// Get system settings for area of expertise labels
-	uamswp_fad_labels_expertise();
+	$labels_expertise = uamswp_fad_labels_expertise();
+		$expertise_single_name = $labels_expertise['expertise_single_name']; // string
+		$expertise_single_name_attr = $labels_expertise['expertise_single_name_attr']; // string
+		$expertise_plural_name = $labels_expertise['expertise_plural_name']; // string
+		$expertise_plural_name_attr = $labels_expertise['expertise_plural_name_attr']; // string
+		$placeholder_expertise_single_name = $labels_expertise['placeholder_expertise_single_name']; // string
+		$placeholder_expertise_plural_name = $labels_expertise['placeholder_expertise_plural_name']; // string
+		$placeholder_expertise_page_title = $labels_expertise['placeholder_expertise_page_title']; // string
 
 	// Get system settings for clinical resource labels
 	uamswp_fad_labels_clinical_resource();

@@ -2656,17 +2656,6 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get the Find-a-Doc Settings values for area of expertise labels
 	function uamswp_fad_labels_expertise() {
 
-		// Make variables available outside of the function
-
-			global $expertise_single_name; // string
-			global $expertise_single_name_attr; // string
-			global $expertise_plural_name; // string
-			global $expertise_plural_name_attr; // string
-			global $placeholder_expertise_single_name; // string
-			global $placeholder_expertise_plural_name; // string
-			global $placeholder_expertise_page_title; // string
-			global $facet_labels; // array
-
 		$expertise_single_name = get_field('expertise_single_name', 'option') ?: 'Area of Expertise';
 		$expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
 		$expertise_plural_name = get_field('expertise_plural_name', 'option') ?: 'Areas of Expertise';
