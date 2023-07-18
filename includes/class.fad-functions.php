@@ -2884,12 +2884,6 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get the Find-a-Doc Settings values for location archive page text
 	function uamswp_fad_archive_text_location() {
 
-		// Make variables available outside of the function
-
-			global $location_archive_headline;
-			global $location_archive_headline_attr;
-			global $placeholder_location_archive_headline;
-
 		$location_archive_headline = get_field('location_archive_headline', 'option') ?: 'Locations';
 		$location_archive_headline_attr = uamswp_attr_conversion($location_archive_headline);
 

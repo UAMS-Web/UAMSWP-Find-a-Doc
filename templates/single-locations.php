@@ -94,8 +94,11 @@
 		$placeholder_treatment_single_name = $labels_treatment['placeholder_treatment_single_name']; // string
 		$placeholder_treatment_plural_name = $labels_treatment['placeholder_treatment_plural_name']; // string
 
-// Get system settings for location archive page text
-// uamswp_fad_archive_text_location();
+// // Get system settings for location archive page text
+// $archive_text_location = uamswp_fad_archive_text_location();
+// 	$location_archive_headline = $archive_text_location['location_archive_headline']; // string
+// 	$location_archive_headline_attr = $archive_text_location['location_archive_headline_attr']; // string
+// 	$placeholder_location_archive_headline = $archive_text_location['placeholder_location_archive_headline']; // string
 
 // Get the page ID
 $page_id = get_the_ID();
