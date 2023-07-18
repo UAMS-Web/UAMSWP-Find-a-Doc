@@ -56,7 +56,13 @@
 		$placeholder_expertise_descendant_plural_name = $labels_expertise_descendant['placeholder_expertise_descendant_plural_name']; // string
 
 	// Get system settings for clinical resource labels
-	uamswp_fad_labels_clinical_resource();
+	$labels_clinical_resource = uamswp_fad_labels_clinical_resource();
+		$clinical_resource_single_name = $labels_clinical_resource['clinical_resource_single_name']; // string
+		$clinical_resource_single_name_attr = $labels_clinical_resource['clinical_resource_single_name_attr']; // string
+		$clinical_resource_plural_name = $labels_clinical_resource['clinical_resource_plural_name']; // string
+		$clinical_resource_plural_name_attr = $labels_clinical_resource['clinical_resource_plural_name_attr']; // string
+		$placeholder_clinical_resource_single_name = $labels_clinical_resource['placeholder_clinical_resource_single_name']; // string
+		$placeholder_clinical_resource_plural_name = $labels_clinical_resource['placeholder_clinical_resource_plural_name']; // string
 
 	// Get system settings for combined condition and treatment labels
 	uamswp_fad_labels_condition_treatment();

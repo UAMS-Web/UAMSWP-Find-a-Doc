@@ -47,7 +47,13 @@
 		$placeholder_expertise_page_title = $labels_expertise['placeholder_expertise_page_title']; // string
 
 	// Get system settings for clinical resource labels
-	uamswp_fad_labels_clinical_resource();
+	$labels_clinical_resource = uamswp_fad_labels_clinical_resource();
+		$clinical_resource_single_name = $labels_clinical_resource['clinical_resource_single_name']; // string
+		$clinical_resource_single_name_attr = $labels_clinical_resource['clinical_resource_single_name_attr']; // string
+		$clinical_resource_plural_name = $labels_clinical_resource['clinical_resource_plural_name']; // string
+		$clinical_resource_plural_name_attr = $labels_clinical_resource['clinical_resource_plural_name_attr']; // string
+		$placeholder_clinical_resource_single_name = $labels_clinical_resource['placeholder_clinical_resource_single_name']; // string
+		$placeholder_clinical_resource_plural_name = $labels_clinical_resource['placeholder_clinical_resource_plural_name']; // string
 
 	// // Get system settings for area of expertise descendant item labels
 	// $labels_expertise_descendant = uamswp_fad_labels_expertise_descendant();

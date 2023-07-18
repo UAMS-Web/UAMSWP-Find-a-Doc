@@ -2726,15 +2726,6 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get the Find-a-Doc Settings values for clinical resource labels
 	function uamswp_fad_labels_clinical_resource() {
 
-		// Make variables available outside of the function
-
-			global $clinical_resource_single_name; // string
-			global $clinical_resource_single_name_attr; // string
-			global $clinical_resource_plural_name; // string
-			global $clinical_resource_plural_name_attr; // string
-			global $placeholder_clinical_resource_single_name; // string
-			global $placeholder_clinical_resource_plural_name; // string
-
 		$clinical_resource_single_name = get_field('clinical_resource_single_name', 'option') ?: 'Clinical Resource';
 		$clinical_resource_single_name_attr = uamswp_attr_conversion($clinical_resource_single_name);
 		$clinical_resource_plural_name = get_field('clinical_resource_plural_name', 'option') ?: 'Clinical Resources';
