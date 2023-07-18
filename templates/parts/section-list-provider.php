@@ -6,7 +6,7 @@
  * the current page.
  * 
  * When this template part is needed for a hook, use the 
- * uamswp_fad_section_provider() function.
+ * uamswp_fad_section_provider( $providers ) function.
  * 
  * Designed for UAMS Health Find-a-Doc
  * 

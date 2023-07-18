@@ -6,7 +6,7 @@
  * associated with the current page.
  * 
  * When this template part is needed for a hook, use the 
- * uamswp_fad_section_expertise() function.
+ * uamswp_fad_section_expertise( $expertises ) function.
  * 
  * Designed for UAMS Health Find-a-Doc
  * 

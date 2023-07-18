@@ -6,7 +6,7 @@
  * the current page.
  * 
  * When this template part is needed for a hook, use the 
- * uamswp_fad_section_condition() function.
+ * uamswp_fad_section_condition( $conditions_cpt ) function.
  * 
  * Designed for UAMS Health Find-a-Doc
  * 

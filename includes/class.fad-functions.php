@@ -2049,7 +2049,7 @@ function uamswp_fad_ontology_nav_menu() {
 			$expertise_descendants = $ontology_site_values['expertise_descendants'];
 			$clinical_resources = $ontology_site_values['clinical_resources']; // int[]
 
-		$provider_query_function = uamswp_fad_provider_query();
+		$provider_query_function = uamswp_fad_provider_query( $providers );
 			$provider_section_show = $provider_query_function['provider_section_show']; // bool
 
 		$location_query_function = uamswp_fad_location_query( $locations );
@@ -2061,7 +2061,7 @@ function uamswp_fad_ontology_nav_menu() {
 		$clinical_resource_query_function = uamswp_fad_clinical_resource_query( $clinical_resources );
 			$clinical_resource_section_show = $clinical_resource_query_function['clinical_resource_section_show']; // bool
 
-		$expertise_descendant_query_function = uamswp_fad_expertise_descendant_query();
+		$expertise_descendant_query_function = uamswp_fad_expertise_descendant_query( $expertise_descendants );
 			$expertise_descendant_section_show = $expertise_descendant_query_function['expertise_descendant_section_show']; // bool
 			$expertise_content_nav_show = $expertise_descendant_query_function['expertise_content_nav_show']; // bool
 			$expertise_content_nav = $expertise_descendant_query_function['expertise_content_nav']; // string
@@ -7232,7 +7232,7 @@ function uamswp_meta_image_resize() {
 //     The template part included in this function can stand on its own. If the 
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
-function uamswp_fad_section_provider() {
+function uamswp_fad_section_provider( $providers ) {
 
 	// Bring in variables from outside of the function
 
@@ -7257,7 +7257,7 @@ function uamswp_fad_section_provider() {
 		$ontology_site_values = uamswp_fad_ontology_site_values();
 			$providers = $ontology_site_values['providers']; // int[]
 
-		$provider_query_function = uamswp_fad_provider_query();
+		$provider_query_function = uamswp_fad_provider_query( $providers );
 			$provider_query = $provider_query_function['provider_query']; // WP_Post[]
 			$provider_section_show = $provider_query_function['provider_section_show']; // bool
 			$provider_ids = $provider_query_function['provider_ids']; // int[]
@@ -7271,7 +7271,7 @@ function uamswp_fad_section_provider() {
 //     The template part included in this function can stand on its own. If the 
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
-function uamswp_fad_section_location() {
+function uamswp_fad_section_location( $locations ) {
 
 	// Bring in variables from outside of the function
 
@@ -7404,7 +7404,7 @@ function uamswp_fad_section_clinical_resource( $clinical_resources ) {
 //     The template part included in this function can stand on its own. If the 
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
-function uamswp_fad_section_condition( $conditions ) {
+function uamswp_fad_section_condition( $conditions_cpt ) {
 
 	// Bring in variables from outside of the function
 

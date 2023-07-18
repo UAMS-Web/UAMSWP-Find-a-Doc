@@ -6,7 +6,7 @@
  * associated with the current page.
  * 
  * When this template part is needed for a hook, use the 
- * uamswp_fad_section_clinical_resource() function.
+ * uamswp_fad_section_clinical_resource( $clinical_resources ) function.
  * 
  * Designed for UAMS Health Find-a-Doc
  * 

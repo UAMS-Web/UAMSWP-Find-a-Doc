@@ -6,7 +6,7 @@
  * associated with the current page.
  * 
  * When this template part is needed for a hook, use the 
- * uamswp_fad_section_condition_treatment() function.
+ * uamswp_fad_section_condition_treatment( $conditions_cpt, $treatments_cpt ) function.
  * 
  * Required vars:
  * 	// Vars defined in uamswp_fad_labels_condition()
