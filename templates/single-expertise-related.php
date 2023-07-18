@@ -154,7 +154,11 @@ $ontology_site_values = uamswp_fad_ontology_site_values();
 	uamswp_fad_expertise_descendant_query();
 
 	// Query for whether related ontology items (of the same post type) content section should be displayed on ontology pages/subsections
-	uamswp_fad_expertise_query();
+	$expertise_query_function = uamswp_fad_expertise_query( $expertises );
+		$expertise_query = $expertise_query_function['expertise_query']; // WP_Post[]
+		$expertise_section_show = $expertise_query_function['expertise_section_show']; // bool
+		$expertise_ids = $expertise_query_function['expertise_ids']; // int[]
+		$expertise_count = $expertise_query_function['expertise_count']; // int
 
 	// Query for whether associated clinical resources content section should be displayed on ontology pages/subsections
 	uamswp_fad_clinical_resource_query();

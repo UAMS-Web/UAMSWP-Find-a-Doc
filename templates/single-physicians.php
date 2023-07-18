@@ -283,7 +283,11 @@ if( $location_section_show ) {
 
 // Query for whether related areas of expertise content section should be displayed on a page
 $expertises = get_field('physician_expertise',$post->ID);
-uamswp_fad_expertise_query();
+$expertise_query_function = uamswp_fad_expertise_query( $expertises );
+	$expertise_query = $expertise_query_function['expertise_query']; // WP_Post[]
+	$expertise_section_show = $expertise_query_function['expertise_section_show']; // bool
+	$expertise_ids = $expertise_query_function['expertise_ids']; // int[]
+	$expertise_count = $expertise_query_function['expertise_count']; // int
 if ( $expertise_section_show ) {
 	foreach ( $expertises as $expertise ) {
 		if ( get_post_status ( $expertise ) == 'publish' ) {

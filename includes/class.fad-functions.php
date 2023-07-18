@@ -1840,7 +1840,7 @@ function uamswp_fad_post_title() {
 	}
 
 	// Query for whether related areas of expertise content section should be displayed on ontology pages/subsections
-	function uamswp_fad_expertise_query() {
+	function uamswp_fad_expertise_query( $expertises ) {
 
 		// Bring in variables from outside of the function
 
@@ -1848,15 +1848,10 @@ function uamswp_fad_post_title() {
 
 				global $jump_link_count;
 
-			$ontology_site_values = uamswp_fad_ontology_site_values();
-				$expertises = $ontology_site_values['expertises'];
-
-		// Make variables available outside of the function
-
-			global $expertise_query; // WP_Post[]
-			global $expertise_section_show; // bool
-			global $expertise_ids; // int[]
-			global $expertise_count; // int
+			if ( !isset($expertises) ) {
+				$ontology_site_values = uamswp_fad_ontology_site_values();
+					$expertises = $ontology_site_values['expertises']; // int[]
+			}
 
 		$args = array(
 			'post__in'	=> $expertises,
@@ -2060,7 +2055,7 @@ function uamswp_fad_post_title() {
 	}
 
 // Construct ontology subsection primary navigation
-function uamswp_fad_ontology_nav_menu() {
+function uamswp_fad_ontology_nav_menu( $locations, $expertises ) {
 
 	// Bring in variables from outside of the function
 
@@ -2073,7 +2068,7 @@ function uamswp_fad_ontology_nav_menu() {
 		$location_query_function = uamswp_fad_location_query( $locations );
 			$location_section_show = $location_query_function['location_section_show']; // bool
 
-		$expertise_query_function = uamswp_fad_expertise_query();
+		$expertise_query_function = uamswp_fad_expertise_query( $expertises );
 			$expertise_section_show = $expertise_query_function['expertise_section_show']; // bool
 
 		$clinical_resource_query_function = uamswp_fad_clinical_resource_query();
@@ -7390,7 +7385,7 @@ function uamswp_fad_section_location() {
 //     The template part included in this function can stand on its own. If the 
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
-function uamswp_fad_section_expertise() {
+function uamswp_fad_section_expertise( $expertises ) {
 
 	// Bring in variables from outside of the function
 
@@ -7414,7 +7409,7 @@ function uamswp_fad_section_expertise() {
 			$expertise_fpage_title_general = $fpage_text_expertise_general['expertise_fpage_title_general']; // string
 			$expertise_fpage_intro_general = $fpage_text_expertise_general['expertise_fpage_intro_general']; // string
 
-		$expertise_query_function = uamswp_fad_expertise_query();
+		$expertise_query_function = uamswp_fad_expertise_query( $expertises );
 			$expertise_query = $expertise_query_function['expertise_query']; // WP_Post[]
 			$expertise_section_show = $expertise_query_function['expertise_section_show']; // bool
 			$expertise_count = $expertise_query_function['expertise_count']; // int
