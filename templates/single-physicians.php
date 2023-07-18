@@ -211,8 +211,6 @@ $fpage_text_provider = uamswp_fad_fpage_text_provider();
 	$treatment_fpage_intro_provider = $fpage_text_provider['treatment_fpage_intro_provider']; // string
 	$condition_treatment_fpage_title_provider = $fpage_text_provider['condition_treatment_fpage_title_provider']; // string
 	$condition_treatment_fpage_intro_provider = $fpage_text_provider['condition_treatment_fpage_intro_provider']; // string
-	$placeholder_short_name = $fpage_text_provider['placeholder_short_name']; // string
-	$placeholder_short_name_possessive = $fpage_text_provider['placeholder_short_name_possessive']; // string
 
 // Get system settings for jump links (a.k.a. anchor links)
 $labels_jump_links = uamswp_fad_labels_jump_links();

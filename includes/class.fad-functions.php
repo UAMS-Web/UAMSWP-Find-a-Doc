@@ -3943,8 +3943,6 @@ function uamswp_fad_fpage_text_replace($string) {
 					'treatment_fpage_intro_provider'					=> $treatment_fpage_intro_provider, // string
 					'condition_treatment_fpage_title_provider'			=> $condition_treatment_fpage_title_provider, // string
 					'condition_treatment_fpage_intro_provider'			=> $condition_treatment_fpage_intro_provider, // string
-					'placeholder_short_name'							=> $placeholder_short_name, // string
-					'placeholder_short_name_possessive'					=> $placeholder_short_name_possessive // string
 				);
 				return $fpage_text_provider;
 
