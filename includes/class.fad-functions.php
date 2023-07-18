@@ -3939,47 +3939,6 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Get field values for fake subpage text elements in an Location subsection (or profile)
 		function uamswp_fad_fpage_text_location() {
 
-			// Make variables available outside of the function
-
-				global $provider_fpage_title_location; // string
-				global $provider_fpage_intro_location; // string
-				global $provider_fpage_ref_main_title_location; // string
-				global $provider_fpage_ref_main_intro_location; // string
-				global $provider_fpage_ref_main_link_location; // string
-				global $provider_fpage_ref_top_title_location; // string
-				global $provider_fpage_ref_top_intro_location; // string
-				global $provider_fpage_ref_top_link_location; // string
-				global $location_descendant_fpage_title_location; // string
-				global $location_descendant_fpage_intro_location; // string
-				global $location_descendant_fpage_ref_main_title_location; // string
-				global $location_descendant_fpage_ref_main_intro_location; // string
-				global $location_descendant_fpage_ref_main_link_location; // string
-				global $expertise_fpage_title_location; // string
-				global $expertise_fpage_intro_location; // string
-				global $expertise_fpage_ref_main_title_location; // string
-				global $expertise_fpage_ref_main_intro_location; // string
-				global $expertise_fpage_ref_main_link_location; // string
-				global $expertise_fpage_ref_top_title_location; // string
-				global $expertise_fpage_ref_top_intro_location; // string
-				global $expertise_fpage_ref_top_link_location; // string
-				global $clinical_resource_fpage_title_location; // string
-				global $clinical_resource_fpage_intro_location; // string
-				global $clinical_resource_fpage_ref_main_title_location; // string
-				global $clinical_resource_fpage_ref_main_intro_location; // string
-				global $clinical_resource_fpage_ref_main_link_location; // string
-				global $clinical_resource_fpage_ref_top_title_location; // string
-				global $clinical_resource_fpage_ref_top_intro_location; // string
-				global $clinical_resource_fpage_ref_top_link_location; // string
-				global $clinical_resource_fpage_more_text_location; // string
-				global $clinical_resource_fpage_more_link_text_location; // string
-				global $clinical_resource_fpage_more_link_descr_location; // string
-				global $condition_fpage_title_location; // string
-				global $condition_fpage_intro_location; // string
-				global $treatment_fpage_title_location; // string
-				global $treatment_fpage_intro_location; // string
-				global $condition_treatment_fpage_title_location; // string
-				global $condition_treatment_fpage_intro_location; // string
-
 			// Providers Fake Subpage (or Section)
 
 				$provider_fpage_title_location = get_field('provider_fpage_title_location', 'option'); // Title of a Fake Subpage (or Section) for Providers in Location Subsection
