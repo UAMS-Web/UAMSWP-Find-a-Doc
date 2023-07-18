@@ -2900,12 +2900,6 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get the Find-a-Doc Settings values for provider archive page text
 	function uamswp_fad_archive_text_provider() {
 
-		// Make variables available outside of the function
-
-			global $provider_archive_headline;
-			global $provider_archive_headline_attr;
-			global $placeholder_provider_archive_headline;
-
 		$provider_archive_headline = get_field('provider_archive_headline', 'option') ?: 'UAMS Health Providers';
 		$provider_archive_headline_attr = uamswp_attr_conversion($provider_archive_headline);
 

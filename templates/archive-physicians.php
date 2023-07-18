@@ -65,7 +65,10 @@
 		$placeholder_treatment_plural_name = $labels_treatment['condition_single_name']; // string
 
 // Get system settings for Provider archive page text
-uamswp_fad_archive_text_provider();
+$archive_text_provider = uamswp_fad_archive_text_provider();
+	$provider_archive_headline = $archive_text_provider['provider_archive_headline']; // string
+	$provider_archive_headline_attr = $archive_text_provider['provider_archive_headline_attr']; // string
+	$placeholder_provider_archive_headline = $archive_text_provider['placeholder_provider_archive_headline']; // string
 
 // // Get the page ID
 // $page_id = get_the_ID(); // int
