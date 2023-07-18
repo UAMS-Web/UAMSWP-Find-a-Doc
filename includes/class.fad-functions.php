@@ -1934,7 +1934,7 @@ function uamswp_fad_post_title() {
 	}
 
 	// Query for whether related conditions content section should be displayed on ontology pages/subsections
-	function uamswp_fad_condition_query() {
+	function uamswp_fad_condition_query( $conditions_cpt ) {
 
 		// Bring in variables from outside of the function
 
@@ -1943,17 +1943,10 @@ function uamswp_fad_post_title() {
 				global $jump_link_count;
 				global $ontology_type;
 
-			$ontology_site_values = uamswp_fad_ontology_site_values();
-				$conditions_cpt = $ontology_site_values['conditions_cpt'];
-
-		// Make variables available outside of the function
-
-			global $condition_cpt_query; // WP_Post[]
-			global $condition_section_show; // bool
-			global $condition_treatment_section_show; // bool
-			global $condition_ids; // int[]
-			global $condition_count; // int
-			global $condition_schema; // string
+			if ( !isset($conditions_cpt) ) {
+				$ontology_site_values = uamswp_fad_ontology_site_values();
+					$conditions_cpt = $ontology_site_values['conditions_cpt']; // int[] // Value of the related conditions input
+			}
 
 		// Conditions CPT
 		$args = array(
@@ -7470,7 +7463,7 @@ function uamswp_fad_section_clinical_resource( $clinical_resources ) {
 //     The template part included in this function can stand on its own. If the 
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
-function uamswp_fad_section_condition() {
+function uamswp_fad_section_condition( $conditions ) {
 
 	// Bring in variables from outside of the function
 
@@ -7496,7 +7489,7 @@ function uamswp_fad_section_condition() {
 		$ontology_site_values = uamswp_fad_ontology_site_values();
 			$conditions_cpt = $ontology_site_values['conditions_cpt'];
 
-		$condition_query_function = uamswp_fad_condition_query();
+		$condition_query_function = uamswp_fad_condition_query( $conditions );
 			$condition_cpt_query = $condition_query_function['condition_cpt_query']; // WP_Post[]
 			$condition_section_show = $condition_query_function['condition_section_show']; // bool
 			$condition_ids = $condition_query_function['condition_ids']; // int[]
@@ -7586,7 +7579,7 @@ function uamswp_fad_section_treatment() {
 //     The template part included in this function can stand on its own. If the 
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
-function uamswp_fad_section_condition_treatment() {
+function uamswp_fad_section_condition_treatment( $conditions ) {
 
 	// Bring in variables from outside of the function
 
@@ -7627,7 +7620,7 @@ function uamswp_fad_section_condition_treatment() {
 			$treatment_fpage_title_general = $fpage_text_treatment_general['treatment_fpage_title_general']; // string
 			$treatment_fpage_intro_general = $fpage_text_treatment_general['treatment_fpage_intro_general']; // string
 
-		$condition_query_function = uamswp_fad_condition_query();
+		$condition_query_function = uamswp_fad_condition_query( $conditions );
 			$condition_cpt_query = $condition_query_function['condition_cpt_query']; // WP_Post[]
 			$condition_section_show = $condition_query_function['condition_section_show']; // bool
 			$condition_treatment_section_show = $condition_query_function['condition_treatment_section_show']; // bool

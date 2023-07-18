@@ -181,7 +181,13 @@ $clinical_resource_query_function = uamswp_fad_clinical_resource_query( $clinica
 
 // Query for whether related conditions content section should be displayed on ontology pages/subsections
 $conditions_cpt = get_field('treatment_conditions');
-uamswp_fad_condition_query();
+$condition_query_function = uamswp_fad_condition_query( $conditions_cpt );
+	$condition_cpt_query = $condition_query_function['clinical_resource_query']; // WP_Post[]
+	$condition_section_show = $condition_query_function['clinical_resource_query']; // bool
+	$condition_treatment_section_show = $condition_query_function['clinical_resource_query']; // bool
+	$condition_ids = $condition_query_function['clinical_resource_query']; // int[]
+	$condition_count = $condition_query_function['clinical_resource_query']; // int
+	$condition_schema = $condition_query_function['clinical_resource_query']; // string
 
 // Classes for indicating presence of content
 $treatment_field_classes = '';

@@ -166,7 +166,13 @@ $ontology_site_values = uamswp_fad_ontology_site_values();
 		$clinical_resource_count = $clinical_resource_query_function['clinical_resource_count']; // int
 
 	// Query for whether related conditions content section should be displayed on ontology pages/subsections
-	uamswp_fad_condition_query();
+	$condition_query_function = uamswp_fad_condition_query( $conditions_cpt );
+		$condition_cpt_query = $condition_query_function['clinical_resource_query']; // WP_Post[]
+		$condition_section_show = $condition_query_function['clinical_resource_query']; // bool
+		$condition_treatment_section_show = $condition_query_function['clinical_resource_query']; // bool
+		$condition_ids = $condition_query_function['clinical_resource_query']; // int[]
+		$condition_count = $condition_query_function['clinical_resource_query']; // int
+		$condition_schema = $condition_query_function['clinical_resource_query']; // string
 
 	// Query for whether related treatments content section should be displayed on ontology pages/subsections
 	uamswp_fad_treatment_query();
