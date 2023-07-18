@@ -67,12 +67,12 @@ $embed_code = get_field('treatment_procedure_embed_codes', $term); // Embed / Sy
 
 	// Get system settings for combined condition and treatment labels
 	$labels_condition_treatment = uamswp_fad_labels_condition_treatment();
-		$condition_treatment_single_name = $labels_condition_treatment['clinical_resource_single_name']; // string
-		$condition_treatment_single_name_attr = $labels_condition_treatment['clinical_resource_single_name']; // string
-		$condition_treatment_plural_name = $labels_condition_treatment['clinical_resource_single_name']; // string
-		$condition_treatment_plural_name_attr = $labels_condition_treatment['clinical_resource_single_name']; // string
-		$placeholder_condition_treatment_single_name = $labels_condition_treatment['clinical_resource_single_name']; // string
-		$placeholder_condition_treatment_plural_name = $labels_condition_treatment['clinical_resource_single_name']; // string
+		$condition_treatment_single_name = $labels_condition_treatment['condition_treatment_single_name']; // string
+		$condition_treatment_single_name_attr = $labels_condition_treatment['condition_treatment_single_name_attr']; // string
+		$condition_treatment_plural_name = $labels_condition_treatment['condition_treatment_plural_name']; // string
+		$condition_treatment_plural_name_attr = $labels_condition_treatment['condition_treatment_plural_name_attr']; // string
+		$placeholder_condition_treatment_single_name = $labels_condition_treatment['placeholder_condition_treatment_single_name']; // string
+		$placeholder_condition_treatment_plural_name = $labels_condition_treatment['placeholder_condition_treatment_plural_name']; // string
 
 	// Get system settings for condition labels
 	$labels_condition = uamswp_fad_labels_condition();
@@ -85,12 +85,12 @@ $embed_code = get_field('treatment_procedure_embed_codes', $term); // Embed / Sy
 
 	// Get system settings for treatment labels
 	$labels_treatment = uamswp_fad_labels_treatment();
-		$treatment_single_name = $labels_treatment['condition_single_name']; // string
-		$treatment_single_name_attr = $labels_treatment['condition_single_name']; // string
-		$treatment_plural_name = $labels_treatment['condition_single_name']; // string
-		$treatment_plural_name_attr = $labels_treatment['condition_single_name']; // string
-		$placeholder_treatment_single_name = $labels_treatment['condition_single_name']; // string
-		$placeholder_treatment_plural_name = $labels_treatment['condition_single_name']; // string
+		$treatment_single_name = $labels_treatment['treatment_single_name']; // string
+		$treatment_single_name_attr = $labels_treatment['treatment_single_name_attr']; // string
+		$treatment_plural_name = $labels_treatment['treatment_plural_name']; // string
+		$treatment_plural_name_attr = $labels_treatment['treatment_plural_name_attr']; // string
+		$placeholder_treatment_single_name = $labels_treatment['placeholder_treatment_single_name']; // string
+		$placeholder_treatment_plural_name = $labels_treatment['placeholder_treatment_plural_name']; // string
 
 // Get system settings for condition archive page text
 uamswp_fad_archive_text_treatment();

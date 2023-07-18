@@ -66,12 +66,12 @@
 
 	// Get system settings for combined condition and treatment labels
 	$labels_condition_treatment = uamswp_fad_labels_condition_treatment();
-		$condition_treatment_single_name = $labels_condition_treatment['clinical_resource_single_name']; // string
-		$condition_treatment_single_name_attr = $labels_condition_treatment['clinical_resource_single_name']; // string
-		$condition_treatment_plural_name = $labels_condition_treatment['clinical_resource_single_name']; // string
-		$condition_treatment_plural_name_attr = $labels_condition_treatment['clinical_resource_single_name']; // string
-		$placeholder_condition_treatment_single_name = $labels_condition_treatment['clinical_resource_single_name']; // string
-		$placeholder_condition_treatment_plural_name = $labels_condition_treatment['clinical_resource_single_name']; // string
+		$condition_treatment_single_name = $labels_condition_treatment['condition_treatment_single_name']; // string
+		$condition_treatment_single_name_attr = $labels_condition_treatment['condition_treatment_single_name_attr']; // string
+		$condition_treatment_plural_name = $labels_condition_treatment['condition_treatment_plural_name']; // string
+		$condition_treatment_plural_name_attr = $labels_condition_treatment['condition_treatment_plural_name_attr']; // string
+		$placeholder_condition_treatment_single_name = $labels_condition_treatment['placeholder_condition_treatment_single_name']; // string
+		$placeholder_condition_treatment_plural_name = $labels_condition_treatment['placeholder_condition_treatment_plural_name']; // string
 
 	// Get system settings for condition labels
 	$labels_condition = uamswp_fad_labels_condition();
@@ -84,12 +84,12 @@
 
 	// Get system settings for treatment labels
 	$labels_treatment = uamswp_fad_labels_treatment();
-		$treatment_single_name = $labels_treatment['condition_single_name']; // string
-		$treatment_single_name_attr = $labels_treatment['condition_single_name']; // string
-		$treatment_plural_name = $labels_treatment['condition_single_name']; // string
-		$treatment_plural_name_attr = $labels_treatment['condition_single_name']; // string
-		$placeholder_treatment_single_name = $labels_treatment['condition_single_name']; // string
-		$placeholder_treatment_plural_name = $labels_treatment['condition_single_name']; // string
+		$treatment_single_name = $labels_treatment['treatment_single_name']; // string
+		$treatment_single_name_attr = $labels_treatment['treatment_single_name_attr']; // string
+		$treatment_plural_name = $labels_treatment['treatment_plural_name']; // string
+		$treatment_plural_name_attr = $labels_treatment['treatment_plural_name_attr']; // string
+		$placeholder_treatment_single_name = $labels_treatment['placeholder_treatment_single_name']; // string
+		$placeholder_treatment_plural_name = $labels_treatment['placeholder_treatment_plural_name']; // string
 
 // Get system settings for clinical resource archive page text
 // uamswp_fad_archive_text_clinical_resource();
@@ -183,12 +183,12 @@ $clinical_resource_query_function = uamswp_fad_clinical_resource_query( $clinica
 // Query for whether related conditions content section should be displayed on ontology pages/subsections
 $conditions_cpt = get_field('clinical_resource_conditions');
 $condition_query_function = uamswp_fad_condition_query( $conditions_cpt );
-	$condition_cpt_query = $condition_query_function['clinical_resource_query']; // WP_Post[]
-	$condition_section_show = $condition_query_function['clinical_resource_query']; // bool
-	$condition_treatment_section_show = $condition_query_function['clinical_resource_query']; // bool
-	$condition_ids = $condition_query_function['clinical_resource_query']; // int[]
-	$condition_count = $condition_query_function['clinical_resource_query']; // int
-	$condition_schema = $condition_query_function['clinical_resource_query']; // string
+	$condition_cpt_query = $condition_query_function['condition_cpt_query']; // WP_Post[]
+	$condition_section_show = $condition_query_function['condition_section_show']; // bool
+	$condition_treatment_section_show = $condition_query_function['condition_treatment_section_show']; // bool
+	$condition_ids = $condition_query_function['condition_ids']; // int[]
+	$condition_count = $condition_query_function['condition_count']; // int
+	$condition_schema = $condition_query_function['condition_schema']; // string
 
 // Query for whether related treatments content section should be displayed on ontology pages/subsections
 $treatments_cpt = get_field('clinical_resource_treatments');
