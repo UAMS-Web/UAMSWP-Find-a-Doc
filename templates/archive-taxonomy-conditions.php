@@ -28,7 +28,13 @@ function uamswp_terms_clauses( $clauses, $taxonomies, $args ){
 }
 
 // Get system settings for condition labels
-uamswp_fad_labels_condition();
+$labels_condition = uamswp_fad_labels_condition();
+	$condition_single_name = $labels_condition['condition_single_name']; // string
+	$condition_single_name_attr = $labels_condition['condition_single_name_attr']; // string
+	$condition_plural_name = $labels_condition['condition_plural_name']; // string
+	$condition_plural_name_attr = $labels_condition['condition_plural_name_attr']; // string
+	$placeholder_condition_single_name = $labels_condition['placeholder_condition_single_name']; // string
+	$placeholder_condition_plural_name = $labels_condition['placeholder_condition_plural_name']; // string
 
 // Get system settings for condition archive page text
 uamswp_fad_archive_text_condition();

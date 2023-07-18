@@ -50,7 +50,13 @@
 	uamswp_fad_labels_clinical_resource_facet();
 
 	// Get system settings for Condition labels
-	uamswp_fad_labels_condition();
+	$labels_condition = uamswp_fad_labels_condition();
+		$condition_single_name = $labels_condition['condition_single_name']; // string
+		$condition_single_name_attr = $labels_condition['condition_single_name_attr']; // string
+		$condition_plural_name = $labels_condition['condition_plural_name']; // string
+		$condition_plural_name_attr = $labels_condition['condition_plural_name_attr']; // string
+		$placeholder_condition_single_name = $labels_condition['placeholder_condition_single_name']; // string
+		$placeholder_condition_plural_name = $labels_condition['placeholder_condition_plural_name']; // string
 
 	// Get system settings for Treatment labels
 	uamswp_fad_labels_treatment();

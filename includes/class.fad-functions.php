@@ -2822,16 +2822,6 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get the Find-a-Doc Settings values for condition labels
 	function uamswp_fad_labels_condition() {
 
-		// Make variables available outside of the function
-
-			global $condition_single_name; // string
-			global $condition_single_name_attr; // string
-			global $condition_plural_name; // string
-			global $condition_plural_name_attr; // string
-			global $placeholder_condition_single_name; // string
-			global $placeholder_condition_plural_name; // string
-			global $facet_labels; // array
-
 		$condition_single_name = get_field('conditions_single_name', 'option') ?: 'Condition';
 		$condition_single_name_attr = uamswp_attr_conversion($condition_single_name);
 		$condition_plural_name = get_field('conditions_plural_name', 'option') ?: 'Conditions';
