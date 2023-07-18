@@ -2700,15 +2700,6 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get the Find-a-Doc Settings values for area of expertise descendant item labels
 	function uamswp_fad_labels_expertise_descendant() {
 
-		// Make variables available outside of the function
-
-			global $expertise_descendant_single_name; // string
-			global $expertise_descendant_single_name_attr; // string
-			global $expertise_descendant_plural_name; // string
-			global $expertise_descendant_plural_name_attr; // string
-			global $placeholder_expertise_descendant_single_name; // string
-			global $placeholder_expertise_descendant_plural_name; // string
-
 		$expertise_descendant_single_name = get_field('expertise_descendant_single_name', 'option') ?: 'Specialty';
 		$expertise_descendant_single_name_attr = uamswp_attr_conversion($expertise_descendant_single_name);
 		$expertise_descendant_plural_name = get_field('expertise_descendant_plural_name', 'option') ?: 'Specialties';
