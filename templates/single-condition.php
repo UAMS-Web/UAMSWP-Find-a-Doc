@@ -215,8 +215,6 @@ $jump_link_count = 0;
 
 	// Check if UAMS Health Talk podcast section should be displayed
 	$podcast_name = get_field('condition_podcast_name');
-	$podcast_filter = 'tag';
-	$podcast_subject = $page_title;
 	$podcast_query_function = uamswp_fad_podcast_query( $podcast_name, $jump_link_count ); // Defines universal variables related to podcast
 		$podcast_section_show = $podcast_query_function['podcast_section_show']; // bool
 		$jump_link_count = $podcast_query_function['jump_link_count']; // int
@@ -425,7 +423,9 @@ $jump_link_count = 0;
 		// End Jump Links Section
 
 		// Construct UAMS Health Talk podcast section
-		uamswp_fad_podcast();
+		$podcast_filter = 'tag';
+		$podcast_subject = $page_title;	
+		uamswp_fad_podcast( $podcast_name, $podcast_subject, $podcast_filter );
 
 		// Begin Clinical Resources Section
 		$clinical_resource_section_more_link_key = '_resource_conditions';

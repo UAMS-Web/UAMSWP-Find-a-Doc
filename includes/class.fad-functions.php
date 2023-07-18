@@ -2221,17 +2221,17 @@ function uamswp_fad_podcast_query( $podcast_name, $jump_link_count = 0 ) {
 }
 
 // Construct UAMS Health Talk podcast section
-function uamswp_fad_podcast( $podcast_name ) {
+function uamswp_fad_podcast( $podcast_name, $podcast_subject, $podcast_filter ) {
 
 	// Bring in variables from outside of the function
 
-		// Typically defined on the template
-
-			global $podcast_subject;
-			global $podcast_filter; // Expected values: 'tag' or 'doctor'
+		// Function Arguments
+		// 	$podcast_name // string
+		// 	$podcast_subject // string
+		// 	$podcast_filter // string // Expected values: 'tag' or 'doctor'
 
 		$podcast_query_function = uamswp_fad_podcast_query( $podcast_name );
-			$podcast_section_show = $podcast_query_function['podcast_section_show'];
+			$podcast_section_show = $podcast_query_function['podcast_section_show']; // bool
 
 		$labels_provider = uamswp_fad_labels_provider();
 			$provider_plural_name = $labels_provider['provider_plural_name']; // string
