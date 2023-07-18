@@ -1642,7 +1642,7 @@ function uamswp_fad_post_title() {
 	}
 
 	// Query for whether descendant locations content section should be displayed on a page
-	function uamswp_fad_location_descendant_query() {
+	function uamswp_fad_location_descendant_query( $location_descendants ) {
 
 		// Bring in variables from outside of the function
 
@@ -1651,16 +1651,10 @@ function uamswp_fad_post_title() {
 				global $current_id;
 				global $jump_link_count;
 
-			$ontology_site_values = uamswp_fad_ontology_site_values();
-				$location_descendants = $ontology_site_values['location_descendants']; // Value of the related locations input
-
-		// Make variables available outside of the function
-
-			global $location_descendant_query; // WP_Post[]
-			global $location_descendant_section_show; // bool
-			global $location_descendant_ids; // int[]
-			global $location_descendant_count; // int
-			global $location_descendant_valid; // bool
+			if ( !isset($location_descendants) ) {
+				$ontology_site_values = uamswp_fad_ontology_site_values();
+					$location_descendants = $ontology_site_values['location_descendants']; // int[] // Value of the related locations input
+			}
 
 		$location_descendant_valid = false;
 
