@@ -4045,11 +4045,11 @@ function uamswp_fad_fpage_text_replace($string) {
 				// If the variable is not set or is empty...
 				// Set a hardcoded fallback value
 
-					$location_fpage_title_location = ( !isset($location_fpage_title_location) || empty($location_fpage_title_location) ) ? $location_fpage_title_location : '[Descendant Locations] Within [the Location Title]'; // Title
-					$location_fpage_intro_location = ( !isset($location_fpage_intro_location) || empty($location_fpage_intro_location) ) ? $location_fpage_intro_location : ''; // Intro text
-					$location_fpage_ref_main_title_location = ( !isset($location_fpage_ref_main_title_location) || empty($location_fpage_ref_main_title_location) ) ? $location_fpage_ref_main_title_location : ''; // Reference to the main location archive, title
-					$location_fpage_ref_main_intro_location = ( !isset($location_fpage_ref_main_intro_location) || empty($location_fpage_ref_main_intro_location) ) ? $location_fpage_ref_main_intro_location : ''; // Reference to the main location archive, body text
-					$location_fpage_ref_main_link_location = ( !isset($location_fpage_ref_main_link_location) || empty($location_fpage_ref_main_link_location) ) ? $location_fpage_ref_main_link_location : ''; // Reference to the main location archive, link text
+					$location_descendant_fpage_title_location = ( !isset($location_descendant_fpage_title_location) || empty($location_descendant_fpage_title_location) ) ? $location_descendant_fpage_title_location : '[Descendant Locations] Within [the Location Title]'; // Title
+					$location_descendant_fpage_intro_location = ( !isset($location_descendant_fpage_intro_location) || empty($location_descendant_fpage_intro_location) ) ? $location_descendant_fpage_intro_location : ''; // Intro text
+					$location_descendant_fpage_ref_main_title_location = ( !isset($location_descendant_fpage_ref_main_title_location) || empty($location_descendant_fpage_ref_main_title_location) ) ? $location_descendant_fpage_ref_main_title_location : ''; // Reference to the main location archive, title
+					$location_descendant_fpage_ref_main_intro_location = ( !isset($location_descendant_fpage_ref_main_intro_location) || empty($location_descendant_fpage_ref_main_intro_location) ) ? $location_descendant_fpage_ref_main_intro_location : ''; // Reference to the main location archive, body text
+					$location_descendant_fpage_ref_main_link_location = ( !isset($location_descendant_fpage_ref_main_link_location) || empty($location_descendant_fpage_ref_main_link_location) ) ? $location_descendant_fpage_ref_main_link_location : ''; // Reference to the main location archive, link text
 
 				// If the variable is not set or is empty...
 				// Get the Find-a-Doc Settings value for general placement
