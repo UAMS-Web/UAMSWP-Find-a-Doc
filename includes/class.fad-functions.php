@@ -1717,30 +1717,17 @@ function uamswp_fad_post_title() {
 	}
 
 	// Query for whether descendant areas of expertise content section should be displayed on ontology pages/subsections
-	function uamswp_fad_expertise_descendant_query() {
+	function uamswp_fad_expertise_descendant_query( $page_id, $jump_link_count = 0 ) {
 
 		// Bring in variables from outside of the function
 
-			// Typically defined on the template
-
-				global $page_id;
-				global $jump_link_count;
+			// Function Arguments
+			// 	$page_id // int
+			// 	$jump_link_count // int
 
 			$ontology_site_values_vars = uamswp_fad_ontology_site_values();
 				$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
 				$expertise_descendants = $ontology_site_values_vars['expertise_descendants'];
-
-		// Make variables available outside of the function
-
-			global $expertise_descendant_query;
-			global $expertise_descendant_section_show;
-			global $expertise_descendant_ids;
-			global $expertise_descendant_count;
-			global $expertise_content_query;
-			global $expertise_content_nav_show;
-			global $expertise_content_ids;
-			global $expertise_content_count;
-			global $expertise_content_nav;
 
 		if ( $expertise_descendants ) {
 			
@@ -1834,7 +1821,8 @@ function uamswp_fad_post_title() {
 				'expertise_content_nav_show'		=> $expertise_content_nav_show, // bool
 				'expertise_content_ids'				=> $expertise_content_ids, // int[]
 				'expertise_content_count'			=> $expertise_content_count, // int
-				'expertise_content_nav'				=> $expertise_content_nav // string
+				'expertise_content_nav'				=> $expertise_content_nav, // string
+				'jump_link_count'					=> $jump_link_count // int
 			);
 			return $expertise_descendant_query_vars;
 
@@ -6505,18 +6493,18 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Make variables available outside of the function
 
-				global $expertise_featured_image;
-				global $expertise_featured_image_url;
-				global $provider_fpage_featured_image_expertise;
-				global $provider_fpage_featured_image_expertise_url;
-				global $location_fpage_featured_image_expertise;
-				global $location_fpage_featured_image_expertise_url;
-				global $expertise_fpage_featured_image_expertise;
-				global $expertise_fpage_featured_image_expertise_url;
-				global $expertise_descendant_fpage_featured_image_expertise;
-				global $expertise_descendant_fpage_featured_image_expertise_url;
-				global $clinical_resource_fpage_featured_image_expertise;
-				global $clinical_resource_fpage_featured_image_expertise_url;
+				global $expertise_featured_image; // int
+				global $expertise_featured_image_url; // string
+				global $provider_fpage_featured_image_expertise; // int
+				global $provider_fpage_featured_image_expertise_url; // string
+				global $location_fpage_featured_image_expertise; // int
+				global $location_fpage_featured_image_expertise_url; // string
+				global $expertise_fpage_featured_image_expertise; // int
+				global $expertise_fpage_featured_image_expertise_url; // string
+				global $expertise_descendant_fpage_featured_image_expertise; // int
+				global $expertise_descendant_fpage_featured_image_expertise_url; // string
+				global $clinical_resource_fpage_featured_image_expertise; // int
+				global $clinical_resource_fpage_featured_image_expertise_url; // string
 
 			// Overview
 

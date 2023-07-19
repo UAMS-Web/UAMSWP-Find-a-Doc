@@ -154,7 +154,19 @@ $fpage_text_expertise_vars = uamswp_fad_fpage_text_expertise( $page_id, $page_ti
 	$condition_treatment_fpage_intro_expertise = $fpage_text_expertise_vars['condition_treatment_fpage_intro_expertise']; // string
 
 // Get system settings for image elements of a fake subpage (or section) in an Area of Expertise subsection (or profile)
-uamswp_fad_fpage_image_expertise();
+$fpage_image_expertise_vars = uamswp_fad_fpage_image_expertise();
+	$expertise_featured_image = $fpage_image_expertise_vars['expertise_featured_image']; // int
+	$expertise_featured_image_url = $fpage_image_expertise_vars['expertise_featured_image_url']; // string
+	$provider_fpage_featured_image_expertise = $fpage_image_expertise_vars['provider_fpage_featured_image_expertise']; // int
+	$provider_fpage_featured_image_expertise_url = $fpage_image_expertise_vars['provider_fpage_featured_image_expertise_url']; // string
+	$location_fpage_featured_image_expertise = $fpage_image_expertise_vars['location_fpage_featured_image_expertise']; // int
+	$location_fpage_featured_image_expertise_url = $fpage_image_expertise_vars['location_fpage_featured_image_expertise_url']; // string
+	$expertise_fpage_featured_image_expertise = $fpage_image_expertise_vars['expertise_fpage_featured_image_expertise']; // int
+	$expertise_fpage_featured_image_expertise_url = $fpage_image_expertise_vars['expertise_fpage_featured_image_expertise_url']; // string
+	$expertise_descendant_fpage_featured_image_expertise = $fpage_image_expertise_vars['expertise_descendant_fpage_featured_image_expertise']; // int
+	$expertise_descendant_fpage_featured_image_expertise_url = $fpage_image_expertise_vars['expertise_descendant_fpage_featured_image_expertise_url']; // string
+	$clinical_resource_fpage_featured_image_expertise = $fpage_image_expertise_vars['clinical_resource_fpage_featured_image_expertise']; // int
+	$clinical_resource_fpage_featured_image_expertise_url = $fpage_image_expertise_vars['clinical_resource_fpage_featured_image_expertise_url']; // string
 
 // Get the featured image / post thumbnail
 $page_image_id = $expertise_descendant_fpage_featured_image_expertise; // Image ID
@@ -211,7 +223,16 @@ $ontology_site_values_vars = uamswp_fad_ontology_site_values();
 		$location_valid = $location_query_vars['location_valid']; // bool
 
 	// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
-	uamswp_fad_expertise_descendant_query();
+	$expertise_descendant_query_vars = uamswp_fad_expertise_descendant_query( $page_id );
+		$expertise_descendant_query = $expertise_descendant_query_vars['expertise_descendant_query']; // WP_Post[]
+		$expertise_descendant_section_show = $expertise_descendant_query_vars['expertise_descendant_section_show']; // bool
+		$expertise_descendant_ids = $expertise_descendant_query_vars['expertise_descendant_ids']; // int[]
+		$expertise_descendant_count = $expertise_descendant_query_vars['expertise_descendant_count']; // int
+		$expertise_content_query = $expertise_descendant_query_vars['expertise_content_query']; // WP_Post[]
+		$expertise_content_nav_show = $expertise_descendant_query_vars['expertise_content_nav_show']; // bool
+		$expertise_content_ids = $expertise_descendant_query_vars['expertise_content_ids']; // int[]
+		$expertise_content_count = $expertise_descendant_query_vars['expertise_content_count']; // int
+		$expertise_content_nav = $expertise_descendant_query_vars['expertise_content_nav']; // string
 
 	// Query for whether related ontology items (of the same post type) content section should be displayed on ontology pages/subsections
 	$expertise_query_vars = uamswp_fad_expertise_query( $expertises );
