@@ -116,7 +116,13 @@ uamswp_fad_fpage_image_expertise();
 
 // Get the featured image / post thumbnail
 $page_image_id = $expertise_featured_image; // Image ID
-uamswp_meta_image_resize();
+$meta_image_resize = uamswp_meta_image_resize( $page_image_id );
+	$meta_og_image = $meta_image_resize['meta_og_image']; // string
+	$meta_og_image_width = $meta_image_resize['meta_og_image_width']; // int
+	$meta_og_image_height = $meta_image_resize['meta_og_image_height']; // int
+	$meta_twitter_image = $meta_image_resize['meta_twitter_image']; // string
+	$meta_twitter_image_width = $meta_image_resize['meta_twitter_image_width']; // int
+	$meta_twitter_image_height = $meta_image_resize['meta_twitter_image_height']; // int
 
 // // Get system settings for jump links (a.k.a. anchor links)
 // $labels_jump_links = uamswp_fad_labels_jump_links();

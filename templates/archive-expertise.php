@@ -100,7 +100,13 @@ add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
 // Override the theme's method of defining the social meta tags
 
 	// Crop and resize images for Open Graph and Twitter
-	uamswp_meta_image_resize();
+	$meta_image_resize = uamswp_meta_image_resize( $page_image_id );
+		$meta_og_image = $meta_image_resize['meta_og_image']; // string
+		$meta_og_image_width = $meta_image_resize['meta_og_image_width']; // int
+		$meta_og_image_height = $meta_image_resize['meta_og_image_height']; // int
+		$meta_twitter_image = $meta_image_resize['meta_twitter_image']; // string
+		$meta_twitter_image_width = $meta_image_resize['meta_twitter_image_width']; // int
+		$meta_twitter_image_height = $meta_image_resize['meta_twitter_image_height']; // int
 
 	// Open Graph meta tags
 	add_filter('seopress_social_og_thumb', 'uamswp_sp_social_og_thumb'); // Filter Open Graph thumbnail (og:image)

@@ -7131,22 +7131,7 @@ function uamswp_fad_labels_jump_links() {
 }
 
 // Crop and resize images for Open Graph and Twitter
-function uamswp_meta_image_resize() {
-
-	// Bring in variables from outside of the function
-
-		// Defined on the template
-
-			global $page_image_id;
-
-	// Make variables available outside of the function
-
-		global $meta_og_image; // string
-		global $meta_og_image_width; // int
-		global $meta_og_image_height; // int
-		global $meta_twitter_image; // string
-		global $page_image_twitter_width; // int
-		global $page_image_twitter_height; // int
+function uamswp_meta_image_resize( $page_image_id ) {
 
 	// Create multidimensional associative array for defining width and height for each social meta image
 	$image_size = array();
@@ -7174,22 +7159,22 @@ function uamswp_meta_image_resize() {
 		$meta_og_image_width = $image_size['opengraph']['width'];
 		$meta_og_image_height = $image_size['opengraph']['height'];
 		$meta_twitter_image = image_sizer($page_image_id, $image_size['twitter']['width'], $image_size['twitter']['height'], 'center', 'center');
-		$page_image_twitter_width = $image_size['twitter']['width'];
-		$page_image_twitter_height = $image_size['twitter']['height'];
+		$meta_twitter_image_width = $image_size['twitter']['width'];
+		$meta_twitter_image_height = $image_size['twitter']['height'];
 	} elseif ( $page_image_id ) {
 		$meta_og_image = wp_get_attachment_url( $page_image_id, 'aspect-16-9' );
 		$meta_og_image_width = image_get_intermediate_size( $page_image_id, 'aspect-16-9' )['width'];
 		$meta_og_image_height = image_get_intermediate_size( $page_image_id, 'aspect-16-9' )['height'];
 		$meta_twitter_image = $meta_og_image;
-		$page_image_twitter_width = $meta_og_image_width;
-		$page_image_twitter_height = $meta_og_image_height;
+		$meta_twitter_image_width = $meta_og_image_width;
+		$meta_twitter_image_height = $meta_og_image_height;
 	} else {
 		$meta_og_image = '';
 		$meta_og_image_width = '';
 		$meta_og_image_height = '';
 		$meta_twitter_image = '';
-		$page_image_twitter_width = '';
-		$page_image_twitter_height = '';
+		$meta_twitter_image_width = '';
+		$meta_twitter_image_height = '';
 	}
 
 	// Create and return an array to be used on the templates and template parts
@@ -7199,8 +7184,8 @@ function uamswp_meta_image_resize() {
 			'meta_og_image_width'		=> $meta_og_image_width, // int
 			'meta_og_image_height'		=> $meta_og_image_height, // int
 			'meta_twitter_image'		=> $meta_twitter_image, // string
-			'page_image_twitter_width'	=> $page_image_twitter_width, // int
-			'page_image_twitter_height'	=> $page_image_twitter_height // int
+			'meta_twitter_image_width'	=> $meta_twitter_image_width, // int
+			'meta_twitter_image_height'	=> $meta_twitter_image_height // int
 		);
 		return $meta_image_resize;
 
