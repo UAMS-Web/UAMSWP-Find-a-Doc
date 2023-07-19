@@ -315,9 +315,9 @@ if ( $condition_treatment_section_show && !$hide_medical_ontology ) {
 											// Define the MedicalSpecialty schema data attribute-value pairs
 											$schema_construct_arr = array();
 											$schema_construct_arr['@type'] = 'MedicalSpecialty';
-											$schema_construct_arr['name'] = $condition_title_attr;
+											$schema_construct_arr['name'] = $treatment_title_attr;
 											if ( $condition_treatment_section_link_item ) {
-												$schema_construct_arr['url'] = $condition_url;
+												$schema_construct_arr['url'] = $treatment_url;
 											}
 
 											// Construct the MedicalSpecialty schema data

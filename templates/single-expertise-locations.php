@@ -251,7 +251,9 @@ $ontology_site_values_vars = uamswp_fad_ontology_site_values();
 		$clinical_resource_count = $clinical_resource_query_vars['clinical_resource_count']; // int
 
 	// Query for whether related conditions content section should be displayed on ontology pages/subsections
-	$condition_query_vars = uamswp_fad_condition_query( $conditions_cpt );
+	$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
+	$ontology_type = isset($ontology_type) ? $ontology_type : true;
+	$condition_query_vars = uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
 		$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
 		$condition_section_show = $condition_query_vars['condition_section_show']; // bool
 		$condition_treatment_section_show = $condition_query_vars['condition_treatment_section_show']; // bool
@@ -260,7 +262,9 @@ $ontology_site_values_vars = uamswp_fad_ontology_site_values();
 		$condition_treatment_schema = $condition_query_vars['condition_treatment_schema']; // string
 
 	// Query for whether related treatments content section should be displayed on ontology pages/subsections
-	$treatment_query_vars = uamswp_fad_treatment_query( $treatments_cpt );
+	$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
+	$ontology_type = isset($ontology_type) ? $ontology_type : true;
+	$treatment_query_vars = uamswp_fad_treatment_query( $treatments_cpt, $condition_treatment_section_show, $ontology_type );
 		$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
 		$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
 		$condition_treatment_section_show = $treatment_query_vars['condition_treatment_section_show']; // bool

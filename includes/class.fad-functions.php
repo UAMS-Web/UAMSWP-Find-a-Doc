@@ -6877,19 +6877,18 @@ function uamswp_meta_image_resize( $page_image_id ) {
 //     The template part included in this function can stand on its own. If the 
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
-function uamswp_fad_section_provider( $providers ) {
+function uamswp_fad_section_provider(
+	$providers, // int[]
+	$provider_section_show_header = true, // bool // Query for whether to display the section header
+	$provider_section_title = '', // string (default: Find-a-Doc Settings value for providers section title in general placements) // Text to use for the section title
+	$provider_section_intro = '', // string (default: Find-a-Doc Settings value for providers section intro text in general placements) // Text to use for the section intro text
+	$provider_section_filter = true, // bool // Query for whether to add filter(s)
+	$provider_section_filter_region = true, // bool // Query for whether to add region filter
+	$provider_section_filter_title = true, // bool // Query for whether to add title filter
+	$provider_section_collapse_list = true // bool // Query for whether to collapse the list of providers in the providers section
+) {
 
 	// Bring in variables from outside of the function
-
-		// Optional variables defined on the template
-
-			global $provider_section_show_header; // Query for whether to display the section header // bool (default: true)
-			global $provider_section_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for providers section title in general placements)
-			global $provider_section_intro; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for providers section intro text in general placements)
-			global $provider_section_filter; // Query for whether to add filter(s) // bool (default: true)
-			global $provider_section_filter_region; // Query for whether to add region filter // bool (default: true)
-			global $provider_section_filter_title; // Query for whether to add title filter // bool (default: true)
-			global $provider_section_collapse_list; // Query for whether to collapse the list of providers in the providers section // bool (default: true)
 
 		$labels_provider_vars = uamswp_fad_labels_provider();
 			$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
@@ -6959,7 +6958,7 @@ function uamswp_fad_section_location( $locations ) {
 //     The template part included in this function can stand on its own. If the 
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
-function uamswp_fad_section_expertise( $expertises ) {
+function uamswp_fad_section_expertise( $expertises, $expertise_descendants = '' ) {
 
 	// Bring in variables from outside of the function
 
@@ -6988,7 +6987,7 @@ function uamswp_fad_section_expertise( $expertises ) {
 			$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
 			$expertise_count = $expertise_query_vars['expertise_count']; // int
 
-		$expertise_descendant_query_vars = uamswp_fad_expertise_descendant_query();
+		$expertise_descendant_query_vars = uamswp_fad_expertise_descendant_query( $expertise_descendants );
 			$expertise_descendant_query = $expertise_descendant_query_vars['expertise_descendant_query']; // WP_Post[]
 			$expertise_descendant_section_show = $expertise_descendant_query_vars['expertise_descendant_section_show']; // bool
 			$expertise_descendant_count = $expertise_descendant_query_vars['expertise_descendant_count']; // int
@@ -7054,6 +7053,8 @@ function uamswp_fad_section_condition(
 	$condition_treatment_schema = '', // string
 	$condition_treatment_schema_i = 0, // int
 	$condition_treatment_schema_count = 0, // int
+	$condition_treatment_section_show = false, // bool
+	$ontology_type = true, // bool
 	$condition_section_title = '', // string // Text to use for the section title
 	$condition_section_intro = '', // string // Text to use for the section intro text
 	$condition_treatment_section_link_item = false, // bool // Query for whether to link the list items
@@ -7077,7 +7078,7 @@ function uamswp_fad_section_condition(
 		$ontology_site_values_vars = uamswp_fad_ontology_site_values();
 			$conditions_cpt = $ontology_site_values_vars['conditions_cpt'];
 
-		$condition_query_vars = uamswp_fad_condition_query( $conditions_cpt );
+		$condition_query_vars = uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
 			$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
 			$condition_section_show = $condition_query_vars['condition_section_show']; // bool
 			$condition_ids = $condition_query_vars['condition_ids']; // int[]
@@ -7107,6 +7108,10 @@ function uamswp_fad_section_condition(
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-condition.php' );
 
+	$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
+	$condition_treatment_schema_i = isset($condition_treatment_schema_i) ? $condition_treatment_schema_i : 0;
+	$condition_treatment_schema_count = isset($condition_treatment_schema_count) ? $condition_treatment_schema_count : 0;
+
 	// Create and return an array to be used on the templates and template parts
 
 		$section_condition_vars = array(
@@ -7127,6 +7132,8 @@ function uamswp_fad_section_treatment(
 	$condition_treatment_schema = '', // string
 	$condition_treatment_schema_i = 0, // int
 	$condition_treatment_schema_count = 0, // int
+	$condition_treatment_section_show = false, // bool
+	$ontology_type = true, // bool
 	$treatment_section_title = '', // string // Text to use for the section title
 	$treatment_section_intro = '', // string // Text to use for the section intro text
 	$condition_treatment_section_link_item = false, // bool // Query for whether to link the list items
@@ -7150,7 +7157,7 @@ function uamswp_fad_section_treatment(
 		$ontology_site_values_vars = uamswp_fad_ontology_site_values();
 			$treatments_cpt = $ontology_site_values_vars['treatments_cpt'];
 
-		$treatment_query_vars = uamswp_fad_treatment_query( $treatments_cpt );
+		$treatment_query_vars = uamswp_fad_treatment_query( $treatments_cpt, $condition_treatment_section_show, $ontology_type );
 			$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
 			$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
 			$treatment_ids = $treatment_query_vars['treatment_ids']; // int[]
@@ -7180,6 +7187,10 @@ function uamswp_fad_section_treatment(
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-treatment.php' );
 
+	$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
+	$condition_treatment_schema_i = isset($condition_treatment_schema_i) ? $condition_treatment_schema_i : 0;
+	$condition_treatment_schema_count = isset($condition_treatment_schema_count) ? $condition_treatment_schema_count : 0;
+
 	// Create and return an array to be used on the templates and template parts
 
 		$section_treatment_vars = array(
@@ -7198,6 +7209,8 @@ function uamswp_fad_section_treatment(
 function uamswp_fad_section_condition_treatment(
 	$conditions_cpt, // int[]
 	$treatments_cpt, // int[]
+	$condition_treatment_section_show = false, // bool
+	$ontology_type = true, // bool
 	$condition_treatment_section_title = '', // string (default: Find-a-Doc Settings value for combined condition/treatment section title in general placements) // Text to use for the section title
 	$condition_treatment_section_intro = '', // string (default: Find-a-Doc Settings value for combined condition/treatment section intro text in general placements) // Text to use for the section intro text
 	$condition_section_title = '', // string (default: Find-a-Doc Settings value for areas of condition section title in general placements) // Text to use for the conditions subsection title
@@ -7236,13 +7249,13 @@ function uamswp_fad_section_condition_treatment(
 			$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
 			$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
 
-		$condition_query_vars = uamswp_fad_condition_query( $conditions_cpt );
+		$condition_query_vars = uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
 			$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
 			$condition_section_show = $condition_query_vars['condition_section_show']; // bool
 			$condition_treatment_section_show = $condition_query_vars['condition_treatment_section_show']; // bool
 			$condition_count = $condition_query_vars['condition_count']; // int
 
-		$treatment_query_vars = uamswp_fad_treatment_query( $treatments_cpt );
+		$treatment_query_vars = uamswp_fad_treatment_query( $treatments_cpt, $condition_treatment_section_show, $ontology_type );
 			$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
 			$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
 			$condition_treatment_section_show = $treatment_query_vars['condition_treatment_section_show']; // bool
@@ -7285,6 +7298,8 @@ function uamswp_fad_section_condition_treatment(
 		}
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-condition-treatment.php' );
+
+	$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
 
 	// Create and return an array to be used on the templates and template parts
 
