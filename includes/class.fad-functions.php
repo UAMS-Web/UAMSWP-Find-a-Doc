@@ -6293,13 +6293,6 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Get field values for the featured image of a fake subpage (or section) in an Location subsection (or profile)
 		function uamswp_fad_fpage_image_location() {
 
-			// Make variables available outside of the function
-
-				global $provider_fpage_image_location;
-				global $location_descendant_fpage_image_location;
-				global $expertise_fpage_image_location;
-				global $clinical_resource_fpage_image_location;
-
 			// Providers
 
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Location subsection (or profile)
