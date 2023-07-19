@@ -83,7 +83,8 @@ $page_title = $expertise_archive_headline; // string
 // $page_url = get_permalink();
 
 // Get system settings for the featured image of an Area of Expertise archive page
-uamswp_fad_archive_image_expertise();
+$archive_image_expertise = uamswp_fad_archive_image_expertise();
+	$expertise_archive_image = $archive_image_expertise['expertise_archive_image']; // int
 
 // Get the featured image
 $page_image_id = $expertise_archive_image; // Image ID // int

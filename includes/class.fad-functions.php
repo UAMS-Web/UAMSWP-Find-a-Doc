@@ -6301,10 +6301,6 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get the Find-a-Doc Settings value for area of expertise archive page featured image
 	function uamswp_fad_archive_image_expertise() {
 
-		// Make variables available outside of the function
-
-			global $expertise_archive_image; // int
-
 		// Get the Find-a-Doc Settings value for the featured image of the expertise archive
 		$expertise_archive_image = get_field('expertise_archive_featured_image', 'option'); // Featured image ID
 
