@@ -5670,41 +5670,6 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Get field values for text elements for related ontology sections in a Clinical Resource subsection (or profile)
 		function uamswp_fad_fpage_text_clinical_resource() {
 
-			// Make variables available outside of the function
-
-				global $provider_fpage_title_clinical_resource; // string
-				global $provider_fpage_intro_clinical_resource; // string
-				global $provider_fpage_ref_main_title_clinical_resource; // string
-				global $provider_fpage_ref_main_intro_clinical_resource; // string
-				global $provider_fpage_ref_main_link_clinical_resource; // string
-				global $provider_fpage_ref_main_title_clinical_resource; // string
-				global $provider_fpage_ref_main_intro_clinical_resource; // string
-				global $provider_fpage_ref_main_link_clinical_resource; // string
-				global $location_fpage_title_clinical_resource; // string
-				global $location_fpage_intro_clinical_resource; // string
-				global $location_fpage_ref_main_title_clinical_resource; // string
-				global $location_fpage_ref_main_intro_clinical_resource; // string
-				global $location_fpage_ref_main_link_clinical_resource; // string
-				global $expertise_fpage_title_clinical_resource; // string
-				global $expertise_fpage_intro_clinical_resource; // string
-				global $expertise_fpage_ref_main_title_clinical_resource; // string
-				global $expertise_fpage_ref_main_intro_clinical_resource; // string
-				global $expertise_fpage_ref_main_link_clinical_resource; // string
-				global $clinical_resource_fpage_title_clinical_resource; // string
-				global $clinical_resource_fpage_intro_clinical_resource; // string
-				global $clinical_resource_fpage_ref_main_title_clinical_resource; // string
-				global $clinical_resource_fpage_ref_main_intro_clinical_resource; // string
-				global $clinical_resource_fpage_ref_main_link_clinical_resource; // string
-				global $clinical_resource_fpage_more_text_clinical_resource; // string
-				global $clinical_resource_fpage_more_link_text_clinical_resource; // string
-				global $clinical_resource_fpage_more_link_descr_clinical_resource; // string
-				global $condition_fpage_title_clinical_resource; // string
-				global $condition_fpage_intro_clinical_resource; // string
-				global $treatment_fpage_title_clinical_resource; // string
-				global $treatment_fpage_intro_clinical_resource; // string
-				global $condition_treatment_fpage_title_clinical_resource; // string
-				global $condition_treatment_fpage_intro_clinical_resource; // string
-
 			// Providers Fake Subpage (or Section)
 
 				$provider_fpage_title_clinical_resource = get_field('provider_fpage_title_clinical_resource', 'option'); // Title of Section for Providers on Clinical Resource Profile
