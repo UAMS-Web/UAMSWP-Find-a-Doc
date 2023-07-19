@@ -91,8 +91,13 @@
 		$placeholder_treatment_single_name = $labels_treatment['placeholder_treatment_single_name']; // string
 		$placeholder_treatment_plural_name = $labels_treatment['placeholder_treatment_plural_name']; // string
 
-// Get system settings for area of expertise archive page text
-// uamswp_fad_archive_text_expertise();
+// // Get system settings for area of expertise archive page text
+// $archive_text_expertise = uamswp_fad_archive_text_expertise();
+// 	$expertise_archive_headline = $archive_text_expertise['expertise_archive_headline']; // string
+// 	$expertise_archive_headline_attr = $archive_text_expertise['expertise_archive_headline_attr']; // string
+// 	$expertise_archive_intro_text = $archive_text_expertise['expertise_archive_intro_text']; // string
+// 	$placeholder_expertise_archive_headline = $archive_text_expertise['placeholder_expertise_archive_headline']; // string
+// 	$placeholder_expertise_archive_intro_text = $archive_text_expertise['placeholder_expertise_archive_intro_text']; // string
 
 // Get the page ID
 $page_id = get_the_ID();

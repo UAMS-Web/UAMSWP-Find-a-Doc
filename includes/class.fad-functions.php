@@ -2901,14 +2901,6 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get the Find-a-Doc Settings values for area of expertise archive page text
 	function uamswp_fad_archive_text_expertise() {
 
-		// Make variables available outside of the function
-
-			global $expertise_archive_headline;
-			global $expertise_archive_headline_attr;
-			global $expertise_archive_intro_text;
-			global $placeholder_expertise_archive_headline;
-			global $placeholder_expertise_archive_intro_text;
-
 		$expertise_archive_headline = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
 		$expertise_archive_headline_attr = uamswp_attr_conversion($expertise_archive_headline);
 		$expertise_archive_intro_text = get_field('expertise_archive_intro_text', 'option');
