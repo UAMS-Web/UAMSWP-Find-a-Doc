@@ -81,7 +81,8 @@ $page_title = $provider_archive_headline; // string
 // $page_url = get_permalink();
 
 // Get system settings for the featured image of a Provider archive page
-uamswp_fad_archive_image_provider();
+$archive_image_provider = uamswp_fad_archive_image_provider();
+	$provider_archive_image = $archive_image_provider['provider_archive_image']; // int
 
 // Get the featured image
 $page_image_id = $provider_archive_image; // Image ID // int

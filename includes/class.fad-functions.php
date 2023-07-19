@@ -6255,10 +6255,6 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get the Find-a-Doc Settings value for provider archive page featured image
 	function uamswp_fad_archive_image_provider() {
 
-		// Make variables available outside of the function
-
-			global $provider_archive_image; // int
-
 		// Get the Find-a-Doc Settings value for the featured image of the provider archive
 		$provider_archive_image = get_field('provider_archive_featured_image', 'option'); // Featured image ID
 
