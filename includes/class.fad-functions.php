@@ -6756,21 +6756,6 @@ function uamswp_fad_appointment_patients() {
 // Get the Find-a-Doc Settings values for general patient referral information
 function uamswp_fad_appointment_refer() {
 
-	// Make variables available outside of the function
-
-		global $appointment_refer_phone_number; // string
-		global $appointment_refer_phone_label; // string
-		global $appointment_refer_phone_label_attr; // string
-		global $appointment_refer_phone_info; // string
-		global $appointment_refer_fax_number; // string
-		global $appointment_refer_fax_label; // string
-		global $appointment_refer_fax_label_attr; // string
-		global $appointment_refer_fax_info; // string
-		global $appointment_refer_web_url; // string
-		global $appointment_refer_web_label; // string
-		global $appointment_refer_web_label_attr; // string
-		global $appointment_refer_web_info; // string
-
 	// Phone Number Information
 
 		$appointment_refer_phone_number = get_field('appointment_refer_phone_number', 'option') ?: '';
