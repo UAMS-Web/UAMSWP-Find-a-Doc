@@ -6213,10 +6213,6 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Get the Find-a-Doc Settings value for the featured image of a fake subpage (or section) for Clinical Resources in general placements
 		function uamswp_fad_fpage_image_clinical_resource_general() {
 
-			// Make variables available outside of the function
-
-				global $clinical_resource_fpage_image_general; // int
-
 			// Get the Find-a-Doc Settings value
 			$clinical_resource_fpage_image_general = get_field('clinical_resource_fpage_featured_image_general', 'option'); // Featured image ID
 
