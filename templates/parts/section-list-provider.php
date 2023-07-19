@@ -48,16 +48,16 @@ if ( $provider_section_show ) {
 		if ( !isset($provider_section_title) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($provider_fpage_title_general) ) {
-				uamswp_fad_fpage_text_provider_general();
-				global $provider_fpage_title_general;
+				$fpage_text_provider_general_vars = uamswp_fad_fpage_text_provider_general();
+					$provider_fpage_title_general = $fpage_text_provider_general_vars['provider_fpage_title_general']; // string
 			}
 			$provider_section_title = $provider_fpage_title_general;
 		}
 		if ( !isset($provider_section_intro) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($provider_fpage_intro_general) ) {
-				uamswp_fad_fpage_text_provider_general();
-				global $provider_fpage_intro_general;
+				$fpage_text_provider_general_vars = uamswp_fad_fpage_text_provider_general();
+					$provider_fpage_intro_general = $fpage_text_provider_general_vars['provider_fpage_intro_general']; // string
 			}
 			$provider_section_intro = $provider_fpage_intro_general;
 		}

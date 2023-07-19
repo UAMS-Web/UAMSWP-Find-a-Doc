@@ -64,16 +64,16 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 		if ( !isset($expertise_section_title) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($expertise_fpage_title_general) ) {
-				uamswp_fad_fpage_text_expertise_general();
-				global $expertise_fpage_title_general;
+				$fpage_text_expertise_general_vars = uamswp_fad_fpage_text_expertise_general();
+					$expertise_fpage_title_general = $fpage_text_expertise_general_vars['expertise_fpage_title_general']; // string
 			}
 			$expertise_section_title = $expertise_fpage_title_general;
 		}
 		if ( !isset($expertise_section_intro) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($expertise_fpage_intro_general) ) {
-				uamswp_fad_fpage_text_expertise_general();
-				global $expertise_fpage_intro_general;
+				$fpage_text_expertise_general_vars = uamswp_fad_fpage_text_expertise_general();
+					$expertise_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_intro_general']; // string
 			}
 			$expertise_section_intro = $expertise_fpage_intro_general;
 		}

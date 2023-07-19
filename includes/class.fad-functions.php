@@ -2979,17 +2979,6 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Get the Find-a-Doc Settings values for general values of ontology text elements on a fake subpage (or section) for Providers
 		function uamswp_fad_fpage_text_provider_general() {
 
-			// Make variables available outside of the function
-
-				global $provider_fpage_title_general; // string
-				global $provider_fpage_intro_general; // string
-				global $provider_fpage_ref_main_title_general; // string
-				global $provider_fpage_ref_main_intro_general; // string
-				global $provider_fpage_ref_main_link_general; // string
-				global $provider_fpage_ref_top_title_general; // string
-				global $provider_fpage_ref_top_intro_general; // string
-				global $provider_fpage_ref_top_link_general; // string
-
 			// Get the Find-a-Doc Settings values for the text elements in general placements
 			$provider_fpage_title_general = get_field('provider_fpage_title_general', 'option'); // Fake subpage (or section), title
 			$provider_fpage_intro_general = get_field('provider_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
@@ -3039,25 +3028,6 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Get the Find-a-Doc Settings values for general values of ontology text elements on a fake subpage (or section) for Locations
 		function uamswp_fad_fpage_text_location_general() {
-
-			// Make variables available outside of the function
-
-				global $location_fpage_title_general; // string
-				global $location_fpage_intro_general; // string
-				global $location_fpage_ref_main_title_general; // string
-				global $location_fpage_ref_main_intro_general; // string
-				global $location_fpage_ref_main_link_general; // string
-				global $location_fpage_ref_top_title_general; // string
-				global $location_fpage_ref_top_intro_general; // string
-				global $location_fpage_ref_top_link_general; // string
-				global $location_descendant_fpage_title_general; // string
-				global $location_descendant_fpage_intro_general; // string
-				global $location_descendant_fpage_ref_main_title_general; // string
-				global $location_descendant_fpage_ref_main_intro_general; // string
-				global $location_descendant_fpage_ref_main_link_general; // string
-				global $location_descendant_fpage_ref_top_title_general; // string
-				global $location_descendant_fpage_ref_top_intro_general; // string
-				global $location_descendant_fpage_ref_top_link_general; // string
 
 			// Locations
 
@@ -3152,25 +3122,6 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Get the Find-a-Doc Settings values for general values of ontology text elements on a fake subpage (or section) for Areas of Expertise
 		function uamswp_fad_fpage_text_expertise_general() {
 
-			// Make variables available outside of the function
-
-				global $expertise_fpage_title_general; // string
-				global $expertise_fpage_intro_general; // string
-				global $expertise_fpage_ref_main_title_general; // string
-				global $expertise_fpage_ref_main_intro_general; // string
-				global $expertise_fpage_ref_main_link_general; // string
-				global $expertise_fpage_ref_top_title_general; // string
-				global $expertise_fpage_ref_top_intro_general; // string
-				global $expertise_fpage_ref_top_link_general; // string
-				global $expertise_descendant_fpage_title_general; // string
-				global $expertise_descendant_fpage_intro_general; // string
-				global $expertise_descendant_fpage_ref_main_title_general; // string
-				global $expertise_descendant_fpage_ref_main_intro_general; // string
-				global $expertise_descendant_fpage_ref_main_link_general; // string
-				global $expertise_descendant_fpage_ref_top_title_general; // string
-				global $expertise_descendant_fpage_ref_top_intro_general; // string
-				global $expertise_descendant_fpage_ref_top_link_general; // string
-
 			// Areas of Expertise
 
 				// Get the Find-a-Doc Settings values for the text elements in general placements
@@ -3264,20 +3215,6 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Get the Find-a-Doc Settings values for general values of ontology text elements on a fake subpage (or section) for Clinical Resources
 		function uamswp_fad_fpage_text_clinical_resource_general() {
 
-			// Make variables available outside of the function
-
-				global $clinical_resource_fpage_title_general; // string
-				global $clinical_resource_fpage_intro_general; // string
-				global $clinical_resource_fpage_ref_main_title_general; // string
-				global $clinical_resource_fpage_ref_main_intro_general; // string
-				global $clinical_resource_fpage_ref_main_link_general; // string
-				global $clinical_resource_fpage_ref_top_title_general; // string
-				global $clinical_resource_fpage_ref_top_intro_general; // string
-				global $clinical_resource_fpage_ref_top_link_general; // string
-				global $clinical_resource_fpage_more_text_general; // string
-				global $clinical_resource_fpage_more_link_text_general; // string
-				global $clinical_resource_fpage_more_link_descr_general; // string
-
 			// Get the Find-a-Doc Settings values for the text elements in general placements
 			$clinical_resource_fpage_title_general = get_field('clinical_resource_fpage_title_general', 'option'); // Fake subpage (or section), title
 			$clinical_resource_fpage_intro_general = get_field('clinical_resource_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
@@ -3339,11 +3276,6 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Get the Find-a-Doc Settings values for general values of ontology text elements on a fake subpage (or section) for Conditions
 		function uamswp_fad_fpage_text_condition_general() {
-
-			// Make variables available outside of the function
-
-				global $condition_fpage_title_general; // string
-				global $condition_fpage_intro_general; // string
 
 			// Get the Find-a-Doc Settings values for the text elements in general placements
 			$condition_fpage_title_general = get_field('conditions_fpage_title_general', 'option'); // Fake subpage (or section), title
