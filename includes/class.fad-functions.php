@@ -4542,70 +4542,14 @@ function uamswp_fad_fpage_text_replace($string) {
 		}
 
 		// Get field values for fake subpage text elements in an Area of Expertise subsection (or profile)
-		function uamswp_fad_fpage_text_expertise() {
+		function uamswp_fad_fpage_text_expertise( $page_id, $page_title, $ontology_type ) {
 
 			// Bring in variables from outside of the function
 
-				global $page_id;
-				global $page_title;
-				global $ontology_type;
-
-			// Make variables available outside of the function
-
-				global $expertise_page_title_options; // string
-				global $expertise_page_title; // string
-				global $expertise_page_intro; // string
-				global $expertise_page_image; // string
-				global $expertise_page_image_mobile; // string
-				global $expertise_short_desc; // string
-				global $provider_fpage_title_expertise; // string
-				global $provider_fpage_intro_expertise; // string
-				global $provider_fpage_ref_main_title_expertise; // string
-				global $provider_fpage_ref_main_intro_expertise; // string
-				global $provider_fpage_ref_main_link_expertise; // string
-				global $provider_fpage_ref_top_title_expertise; // string
-				global $provider_fpage_ref_top_intro_expertise; // string
-				global $provider_fpage_ref_top_link_expertise; // string
-				global $provider_fpage_short_desc_expertise; // string
-				global $location_fpage_title_expertise; // string
-				global $location_fpage_intro_expertise; // string
-				global $location_fpage_short_desc_expertise; // string
-				global $location_fpage_ref_main_title_expertise; // string
-				global $location_fpage_ref_main_intro_expertise; // string
-				global $location_fpage_ref_main_link_expertise; // string
-				global $location_fpage_ref_top_title_expertise; // string
-				global $location_fpage_ref_top_intro_expertise; // string
-				global $location_fpage_ref_top_link_expertise; // string
-				global $expertise_descendant_fpage_title_expertise; // string
-				global $expertise_descendant_fpage_intro_expertise; // string
-				global $expertise_descendant_fpage_short_desc_expertise; // string
-				global $expertise_descendant_fpage_ref_main_title_expertise; // string
-				global $expertise_descendant_fpage_ref_main_intro_expertise; // string
-				global $expertise_descendant_fpage_ref_main_link_expertise; // string
-				global $expertise_fpage_title_expertise; // string
-				global $expertise_fpage_intro_expertise; // string
-				global $expertise_fpage_short_desc_expertise; // string
-				global $expertise_fpage_ref_main_title_expertise; // string
-				global $expertise_fpage_ref_main_intro_expertise; // string
-				global $expertise_fpage_ref_main_link_expertise; // string
-				global $clinical_resource_fpage_title_expertise; // string
-				global $clinical_resource_fpage_intro_expertise; // string
-				global $clinical_resource_fpage_ref_main_title_expertise; // string
-				global $clinical_resource_fpage_ref_main_intro_expertise; // string
-				global $clinical_resource_fpage_ref_main_link_expertise; // string
-				global $clinical_resource_fpage_ref_top_title_expertise; // string
-				global $clinical_resource_fpage_ref_top_intro_expertise; // string
-				global $clinical_resource_fpage_ref_top_link_expertise; // string
-				global $clinical_resource_fpage_more_text_expertise; // string
-				global $clinical_resource_fpage_more_link_text_expertise; // string
-				global $clinical_resource_fpage_more_link_descr_expertise; // string
-				global $clinical_resource_fpage_short_desc_expertise; // string
-				global $condition_fpage_title_expertise; // string
-				global $condition_fpage_intro_expertise; // string
-				global $treatment_fpage_title_expertise; // string
-				global $treatment_fpage_intro_expertise; // string
-				global $condition_treatment_fpage_title_expertise; // string
-				global $condition_treatment_fpage_intro_expertise; // string
+				// Function Arguments
+				// 	$page_id // int
+				// 	$page_title // string
+				// 	$ontology_type // bool
 
 			// Overview
 
@@ -7678,6 +7622,9 @@ function uamswp_fad_fpage_text_image_overlay() {
 
 		// Defined on the template
 
+			global $page_id; // int
+			global $page_title; // string
+			global $ontology_type; // bool
 			global $text_image_overlay_id; // Section ID attribute value // string
 			global $text_image_overlay_row_0; // Values for the first item // arr
 			global $text_image_overlay_row_1; // Values for the second item // arr
@@ -7757,7 +7704,7 @@ function uamswp_fad_fpage_text_image_overlay() {
 			||
 			!isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise)
 			) {
-			$fpage_text_expertise_vars = uamswp_fad_fpage_text_expertise();
+			$fpage_text_expertise_vars = uamswp_fad_fpage_text_expertise( $page_id, $page_title, $ontology_type );
 				$provider_fpage_title_expertise = $fpage_text_expertise_vars['provider_fpage_title_expertise']; // string
 				$location_fpage_title_expertise = $fpage_text_expertise_vars['location_fpage_title_expertise']; // string
 				$expertise_descendant_fpage_title_expertise = $fpage_text_expertise_vars['expertise_descendant_fpage_title_expertise']; // string
@@ -7817,7 +7764,7 @@ function uamswp_fad_fpage_text_image_overlay() {
 				||
 				!isset($expertise_descendant_fpage_ref_main_link_expertise) || empty($expertise_descendant_fpage_ref_main_link_expertise)
 				) {
-				$fpage_text_expertise_vars = uamswp_fad_fpage_text_expertise();
+				$fpage_text_expertise_vars = uamswp_fad_fpage_text_expertise( $page_id, $page_title, $ontology_type );
 					$expertise_descendant_fpage_ref_main_title_expertise = $fpage_text_expertise_vars['expertise_descendant_fpage_ref_main_title_expertise']; // string
 					$expertise_descendant_fpage_ref_main_intro_expertise = $fpage_text_expertise_vars['expertise_descendant_fpage_ref_main_intro_expertise']; // string
 					$expertise_descendant_fpage_ref_main_link_expertise = $fpage_text_expertise_vars['expertise_descendant_fpage_ref_main_link_expertise']; // string
@@ -7830,7 +7777,7 @@ function uamswp_fad_fpage_text_image_overlay() {
 				||
 				!isset($expertise_fpage_ref_main_link_expertise) || empty($expertise_fpage_ref_main_link_expertise)
 				) {
-				$fpage_text_expertise_vars = uamswp_fad_fpage_text_expertise();
+				$fpage_text_expertise_vars = uamswp_fad_fpage_text_expertise( $page_id, $page_title, $ontology_type );
 					$expertise_fpage_ref_main_title_expertise = $fpage_text_expertise_vars['expertise_fpage_ref_main_title_expertise']; // string
 					$expertise_fpage_ref_main_intro_expertise = $fpage_text_expertise_vars['expertise_fpage_ref_main_intro_expertise']; // string
 					$expertise_fpage_ref_main_link_expertise = $fpage_text_expertise_vars['expertise_fpage_ref_main_link_expertise']; // string
