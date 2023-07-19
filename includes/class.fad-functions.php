@@ -6555,13 +6555,6 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Get field values for the featured image of a fake subpage (or section) in a Clinical Resource subsection (or profile)
 		function uamswp_fad_fpage_image_clinical_resource() {
 
-			// Make variables available outside of the function
-
-				global $provider_fpage_image_clinical_resource;
-				global $location_fpage_image_clinical_resource;
-				global $expertise_fpage_image_clinical_resource;
-				global $clinical_resource_fpage_image_clinical_resource;
-
 			// Providers
 
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in a Clinical Resource subsection (or profile)
