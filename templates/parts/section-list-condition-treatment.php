@@ -142,8 +142,8 @@ if ( $condition_treatment_section_show && !$hide_medical_ontology ) {
 
 					// Set the section title using the system settings for the section title in a general placement
 					if ( !isset($condition_treatment_fpage_title_general) ) {
-						uamswp_fad_fpage_text_condition_treatment_general();
-						global $condition_treatment_fpage_title_general;
+						$fpage_text_condition_treatment_general_vars = uamswp_fad_fpage_text_condition_treatment_general();
+							$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_title_general']; // string	
 					}
 					$condition_treatment_section_title = $condition_treatment_fpage_title_general;
 
@@ -152,8 +152,8 @@ if ( $condition_treatment_section_show && !$hide_medical_ontology ) {
 
 					// Set the section title using the system settings for the section title in a general placement
 					if ( !isset($condition_treatment_fpage_intro_general) ) {
-						uamswp_fad_fpage_text_condition_treatment_general();
-						global $condition_treatment_fpage_intro_general;
+						$fpage_text_condition_treatment_general_vars = uamswp_fad_fpage_text_condition_treatment_general();
+							$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_intro_general']; // string	
 					}
 					$condition_treatment_section_intro = $condition_treatment_fpage_intro_general;
 

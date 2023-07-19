@@ -3329,11 +3329,6 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Get the Find-a-Doc Settings values for general values of ontology text elements on a fake subpage (or section) for Conditions and Treatments combined
 		function uamswp_fad_fpage_text_condition_treatment_general() {
 
-			// Make variables available outside of the function
-
-				global $condition_treatment_fpage_title_general; // string
-				global $condition_treatment_fpage_intro_general; // string
-
 			// Get the Find-a-Doc Settings values for the text elements in general placements
 			$condition_treatment_fpage_title_general = get_field('condition_treatment_fpage_title_general', 'option'); // Fake subpage (or section), title
 			$condition_treatment_fpage_intro_general = get_field('condition_treatment_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
