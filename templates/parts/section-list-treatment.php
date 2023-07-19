@@ -75,16 +75,16 @@ if ( $treatment_section_show ) {
 		if ( !isset($treatment_section_title) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($treatment_fpage_title_general) ) {
-				uamswp_fad_fpage_text_treatment_general();
-				global $treatment_fpage_title_general;
+				$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
+					$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
 			}
 			$treatment_section_title = $treatment_fpage_title_general;
 		}
 		if ( !isset($treatment_section_intro) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($treatment_fpage_intro_general) ) {
-				uamswp_fad_fpage_text_treatment_general();
-				global $treatment_fpage_intro_general;
+				$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
+					$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
 			}
 			$treatment_section_intro = $treatment_fpage_intro_general;
 		}
