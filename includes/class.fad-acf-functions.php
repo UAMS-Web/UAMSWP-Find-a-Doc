@@ -243,7 +243,7 @@ function my_taxonomy_query( $args, $field ) {
 		if( empty($_POST['acf']) || ($post_type != 'expertise') ) {
 			return;
 		}
-	
+
 		// Set the featured image value
 		if (
 			!empty($post_id) // If the post ID is not empty ...
@@ -253,7 +253,7 @@ function my_taxonomy_query( $args, $field ) {
 		} else {
 			$post_thumbnail = '';
 		}
-	
+
 		// Update the post with the new thumbnail value
 		if (
 			!empty($post_id) // If the post ID is not empty ...

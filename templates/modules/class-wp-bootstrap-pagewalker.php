@@ -93,7 +93,7 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 			* @param int $depth Depth of page, used for padding.
 			* @param array $args An array of arguments.
 			* @param int $current_page ID of the current page.
-			*/	
+			*/
 			if ( in_array( 'current-page-item', $css_class, true ) || in_array( 'current-page-parent', $css_class, true ) ) {
 				$css_class[] = ' active';
 			}

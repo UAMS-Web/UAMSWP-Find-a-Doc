@@ -68,10 +68,10 @@ if ( $location_section_show ) {
 		$location_section_filter = isset($location_section_filter) ? $location_section_filter : true;
 		if ( $location_section_filter ) {
 			$location_section_filter_region = isset($location_section_filter_region) ? $location_section_filter_region : true;
-			$location_section_filter_title = isset($location_section_filter_title) ? $location_section_filter_title : false;	
+			$location_section_filter_title = isset($location_section_filter_title) ? $location_section_filter_title : false;
 		} else {
 			$location_section_filter_region = false;
-			$location_section_filter_title = false;	
+			$location_section_filter_title = false;
 		}
 		$location_section_filter = ( $location_section_filter && ( $location_section_filter_region || $location_section_filter_title ) ) ? $location_section_filter : false; // Set as false if neither of the filter types is true
 		$location_section_collapse_list = isset($location_section_collapse_list) ? $location_section_collapse_list : false;
@@ -175,7 +175,7 @@ if ( $location_section_show ) {
 			} // endif isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])
 
 		} // endif ( $location_section_filter_region )
-		
+
 		// Count the number of locations in the query
 		$location_count = count($location_query->posts);
 
@@ -216,10 +216,10 @@ if ( $location_section_show ) {
 
 										// Schema data
 										if ( $location_section_schema_query ) {
-		
+
 											// Count locations for schema
 											$schema_construct_item_count = $location_count;
-				
+
 											// Define the top-level schema attribute label
 											$schema_construct_attr = 'address';
 
@@ -231,10 +231,10 @@ if ( $location_section_show ) {
 											$schema_address_arr['addressRegion'] = $location_state;
 											$schema_address_arr['postalCode'] = $location_zip;
 											$schema_address_arr['telephone'] = format_phone_dash( $location_phone );
-		
+
 											// Define number of tabs at start of schema data block being created here
 											$chr_tab_base_count = 2;
-		
+
 											// Construct the schema data
 											$location_schema = isset($location_schema) ? $location_schema : '';
 											$location_schema .= uamswp_schema_construct($schema_address_arr);

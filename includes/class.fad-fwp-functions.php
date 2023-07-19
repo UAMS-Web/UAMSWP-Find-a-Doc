@@ -48,7 +48,7 @@ add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
 
 // FacetWP scripts
 function fwp_facet_scripts() {
-	
+
 	$labels_provider_vars = uamswp_fad_labels_provider();
 	$labels_location_vars = uamswp_fad_labels_location();
 	$labels_expertise_vars = uamswp_fad_labels_expertise();
@@ -66,7 +66,7 @@ function fwp_facet_scripts() {
 		$labels_condition_vars['facet_labels'],
 		$labels_treatment_vars['facet_labels']
 	);
-	
+
 	$classes = get_body_class();
 
 	if (

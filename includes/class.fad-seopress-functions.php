@@ -164,7 +164,7 @@
 		}
 
 		// Create and return an array to be used on the templates and template parts
-	
+
 			$meta_title_vars = array(
 				'meta_title'	=> $meta_title, // string
 			);

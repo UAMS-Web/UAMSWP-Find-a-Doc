@@ -167,12 +167,12 @@ if ( $phone_output == 'location_profile' ) { ?>
 			<dt>General Information<?php echo ( $location_clinic_phone_query || !$location_appointments_query ) ? '' : ' and Appointments'; ?></dt>
 			<dd><?php echo !empty($location_phone_link) ? $location_phone_link : $location_phone; ?></dd>
 			<?php
-			
+
 			// Add phone number to schema construction array
 			$schema_construct_arr[] = $location_phone_format_dash;
 
 		} // endif ( !empty($location_phone) )
-		
+
 		if ( $location_clinic_phone_query && ( !empty($location_new_appointments_phone) || ( !empty($location_return_appointments_phone) && $location_appointment_phone_query ) ) ) {
 		// Appointments
 		?>
@@ -180,12 +180,12 @@ if ( $phone_output == 'location_profile' ) { ?>
 			<?php if ( !empty($location_new_appointments_phone) ) { ?>
 				<dd><?php echo !empty($location_new_appointments_phone_link) ? $location_new_appointments_phone_link : $location_new_appointments_phone; ?><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : ''; ?></dd>
 				<?php
-			
+
 				// Add phone number to schema construction array
 				$schema_construct_arr[] = $location_new_appointments_phone_format_dash;
 
 			} // endif ( !empty($location_new_appointments_phone) )
-			
+
 			if ( !empty($location_return_appointments_phone) && $location_appointment_phone_query ) { ?>
 				<dd><?php echo !empty($location_return_appointments_phone_link) ? $location_return_appointments_phone_link : $location_return_appointments_phone; ?><br/><span class="subtitle">Returning Patients</span></dd>
 				<?php
@@ -205,20 +205,20 @@ if ( $phone_output == 'location_profile' ) { ?>
 
 				// Add phone number to schema construction array
 				$schema_construct_arr[] = $location_ac_appointments_primary_format_dash;
-				
+
 			} // endif ( !empty($location_ac_appointments_primary) )
-			
+
 			if ( !empty($location_ac_appointments_specialty) ) { ?>
 				<dd><?php echo !empty($location_ac_appointments_specialty_link) ? $location_ac_appointments_specialty_link : $location_ac_appointments_specialty; ?><br/><span class="subtitle">Specialty Care</span></dd>
 				<?php
 
 				// Add phone number to schema construction array
 				$schema_construct_arr[] = $location_ac_appointments_specialty_format_dash;
-				
+
 			} // endif ( !empty($location_ac_appointments_specialty) )
 
 		} // endif
-		
+
 		if ( !empty($location_fax) ) {
 		// Fax
 		?>
@@ -226,7 +226,7 @@ if ( $phone_output == 'location_profile' ) { ?>
 			<dd><?php echo $location_fax_format_dash; ?></dd>
 		<?php
 		} // endif ( !empty($location_fax)
-		
+
 		if ( $location_phone_numbers ) {
 		// Additional phone numbers
 
@@ -245,7 +245,7 @@ if ( $phone_output == 'location_profile' ) { ?>
 				<dt><?php echo $title; ?></dt>
 				<dd><a href="tel:<?php echo $phone_format_dash; ?>" data-typetitle="Additional Phone Number: <?php echo $title_attr; ?>"><?php echo $phone_format_dash; ?></a><?php echo ($text ? '<br/><span class="subtitle">'. $text .'</span>' : ''); ?></dd>
 				<?php
-			
+
 				// Add phone number to schema construction array
 				if ( isset($phone) && !empty($phone) ) {
 					$schema_construct_arr[] = $phone_format_dash;
@@ -254,7 +254,7 @@ if ( $phone_output == 'location_profile' ) { ?>
 			} // endwhile ( have_rows('field_location_phone_numbers') )
 
 		} // endif ( $location_phone_numbers )
-		
+
 		?>
 		<?php
 			$phone_numbers = get_field('location_appointments');

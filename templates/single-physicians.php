@@ -707,7 +707,7 @@ while ( have_posts() ) : the_post();
 					<h2 class="h3">Overview</h2>
 					<dl data-sectiontitle="Overview">
 						<?php
-						
+
 						// Display area(s) of expertise
 						if ( $expertise_section_show && !$hide_medical_ontology ) { ?>
 							<dt><?php echo ( count($expertises) > 1 ? $expertise_plural_name : $expertise_single_name ); ?></dt>
@@ -718,7 +718,7 @@ while ( have_posts() ) : the_post();
 								} // endif ( get_post_status ( $expertise ) == 'publish' && $expertise !== 0 )
 							} // endforeach( $expertises as $expertise )
 						} // if ( $expertise_section_show && !$hide_medical_ontology )
-					
+
 						// Display if they accept new patients
 						if ( $eligible_appt ) { ?>
 							<dt>Accepting New Patients</dt>
@@ -752,7 +752,7 @@ while ( have_posts() ) : the_post();
 							foreach( $patients as $patient ) {
 								$patient_name = get_term( $patient, 'patient_type');
 								echo '<dd>' . $patient_name->name . '</dd>';
-								
+
 							} // endforeach
 						} // endif ( $patients )
 
@@ -931,7 +931,7 @@ while ( have_posts() ) : the_post();
 			$appointment_block_instance = 1;
 			include( UAMS_FAD_PATH . '/templates/blocks/appointment-provider.php' );
 		}
-		
+
 		$provider_clinical_split = false;
 		if (
 			( $clinical_bio_section_show ) // column A stuff
@@ -1184,12 +1184,12 @@ while ( have_posts() ) : the_post();
 								if ($research_bio) {
 									echo $research_bio;
 								}
-								
+
 								if ( $research_interests ) { ?>
 									<h3>Research Interests</h3>
 									<?php echo $research_interests;
 								}
-								
+
 								if ( !empty ( $publications ) ) { ?>
 									<h3>Selected Publications</h3>
 									<ul>
@@ -1201,7 +1201,7 @@ while ( have_posts() ) : the_post();
 									</ul>
 								<?php
 								} // endif
-								
+
 								if( $pubmed_author_id ) {
 									$pubmedid = trim($pubmed_author_id);
 									$pubmedcount = ($pubmed_author_number ? $pubmed_author_number : '3');
@@ -1210,7 +1210,7 @@ while ( have_posts() ) : the_post();
 									<p>Publications listed below are automatically derived from MEDLINE/PubMed and other sources, which might result in incorrect or missing publications.</p>
 									<?php echo do_shortcode( '[pubmed terms="' . urlencode($pubmedid) .'%5BAuthor%5D" count="' . $pubmedcount .'"]' );
 								} // endif
-								
+
 								if( $research_profiles_link ) { ?>
 									<h3>UAMS Research Profile</h3>
 									<p>Each UAMS faculty member has a research profile page that includes biographical and contact information, a list of their most recent grant activity and a list of their PubMed publications.</p>
@@ -1378,7 +1378,7 @@ while ( have_posts() ) : the_post();
 			</section>
 		<?php
 		} // endif ( $ratings_section_show )
-		
+
 		if (
 			$appointment_section_show && 
 			( 
@@ -1408,7 +1408,7 @@ while ( have_posts() ) : the_post();
 	if ($full_name_attr) { ?>,
 	"name": "<?php echo $full_name_attr; ?>"<?php
 	} // endif ( $full_name_attr )
-	
+
 	?>,
 	"url": "<?php echo get_permalink(); ?>",
 	"logo": "<?php echo get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png'; ?>"<?php
@@ -1420,10 +1420,10 @@ while ( have_posts() ) : the_post();
 	if ($schema_description) { ?>,
 	"description": "<?php echo $schema_description; ?>"<?php
 	} // endif ( $schema_description )
-	
+
 	if ($condition_treatment_schema) { ?>,
 	<?php echo $condition_treatment_schema;
-	
+
 	} // endif ( $condition_treatment_schema )
 
 	if ($schema_description) { ?>,
@@ -1439,7 +1439,7 @@ while ( have_posts() ) : the_post();
 		"reviewCount": "'. $comment_count . '"' : ''; ?>
 	}<?php
 	} // endif ( $rating_valid )
-	
+
 	?>
 
 }

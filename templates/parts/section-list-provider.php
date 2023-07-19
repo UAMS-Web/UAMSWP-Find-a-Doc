@@ -64,10 +64,10 @@ if ( $provider_section_show ) {
 		$provider_section_filter = isset($provider_section_filter) ? $provider_section_filter : true;
 		if ( $provider_section_filter ) {
 			$provider_section_filter_region = isset($provider_section_filter_region) ? $provider_section_filter_region : true;
-			$provider_section_filter_title = isset($provider_section_filter_title) ? $provider_section_filter_title : true;	
+			$provider_section_filter_title = isset($provider_section_filter_title) ? $provider_section_filter_title : true;
 		} else {
 			$provider_section_filter_region = false;
-			$provider_section_filter_title = false;	
+			$provider_section_filter_title = false;
 		}
 		$provider_section_filter = ( $provider_section_filter && ( $provider_section_filter_region || $provider_section_filter_title ) ) ? $provider_section_filter : false; // Set as false if neither of the filter types is true
 		$provider_section_collapse_list = isset($provider_section_collapse_list) ? $provider_section_collapse_list : true;
@@ -107,7 +107,7 @@ if ( $provider_section_show ) {
 		if ( $provider_section_filter_region ) {
 
 			// Get all available regions (all available, since no titles set on initial load)
-	
+
 				// Get the list of region IDs from the providers
 				$provider_region_IDs = array();
 				while ( $provider_query->have_posts() ) {
@@ -121,22 +121,22 @@ if ( $provider_section_show ) {
 					}
 				} // endwhile
 				$provider_region_IDs = array_unique($provider_region_IDs); // Remove duplicate values from an array
-	
+
 				// Get the list of region slugs from the region IDs
 				$provider_region_list = array();
 				foreach ( $provider_region_IDs as $provider_region_ID ) {
 					$provider_region_list[] = get_term_by( 'ID', $provider_region_ID, 'region' )->slug;
 				}
-	
+
 			// If region cookie is set, run a modified query for providers
 			if (
 				isset($_COOKIE['wp_filter_region'])
 				||
 				isset($_GET['_filter_region'])
 			) {
-	
+
 				$provider_region = isset($_GET['_filter_region']) ? $_GET['_filter_region'] : $_COOKIE['wp_filter_region'];
-	
+
 				// Construct the tax_query array
 				$tax_query = array();
 				if ( !empty($provider_region) ) {
@@ -146,7 +146,7 @@ if ( $provider_section_show ) {
 						'terms' => $provider_region
 					);
 				}
-	
+
 				// Construct the query arguments
 				$args = array(
 					'post_type' => 'provider',
@@ -158,7 +158,7 @@ if ( $provider_section_show ) {
 					'post__in' => $providers,
 					'tax_query' => $tax_query
 				);
-	
+
 				// The Query
 				$provider_query = New WP_Query( $args );
 

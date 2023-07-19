@@ -45,7 +45,7 @@ function uamswp_fad_ontology_canonical($html) {
 	global $page_id; // Defined on the template
 	global $current_fpage; // Defined on the template
 	global $wp_the_query; // WordPress-specific global variable
-	
+
 	// Make sure permalinks for fake subpages are canonical
 	if (
 		!empty($current_fpage) // Is a fake subpage

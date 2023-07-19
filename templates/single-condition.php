@@ -436,7 +436,7 @@ $jump_link_count = 0;
 
 		// Construct UAMS Health Talk podcast section
 		$podcast_filter = 'tag';
-		$podcast_subject = $page_title;	
+		$podcast_subject = $page_title;
 		uamswp_fad_podcast( $podcast_name, $podcast_section_show, $podcast_filter, $podcast_subject );
 
 		// Begin Clinical Resources Section

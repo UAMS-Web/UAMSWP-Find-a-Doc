@@ -588,7 +588,7 @@ while ( have_posts() ) : the_post(); ?>
 			$provider_ids = $provider_query_vars['provider_ids']; // int[]
 			$provider_count = $provider_query_vars['provider_count']; // int
 			$jump_link_count = $provider_query_vars['jump_link_count']; // int
-	
+
 		// Query for whether related descendant locations content section should be displayed on a page
 		$current_id = get_the_ID();
 		$location_descendants = get_pages(
@@ -745,10 +745,10 @@ while ( have_posts() ) : the_post(); ?>
 					include( UAMS_FAD_PATH . '/templates/blocks/locations-phone.php' );
 
 					// Phone Number Schema Data
-					
+
 						// Count items for schema
 						$schema_construct_item_count = count($schema_construct_arr);
-					
+
 						// Construct the phone number schema data
 						$phone_schema = uamswp_schema_construct($schema_construct_arr);
 
@@ -822,7 +822,7 @@ while ( have_posts() ) : the_post(); ?>
 												"Sunday"
 											],
 											"opens": "00:00",
-											"closes": "23:59"	
+											"closes": "23:59"
 											';
 										else :
 											if (is_array($modified_times) || is_object($modified_times)) {
@@ -1099,7 +1099,7 @@ while ( have_posts() ) : the_post(); ?>
 		</div>
 	</section>
 	<?php
-	
+
 	// Begin Jump Links Section
 	if ( $jump_links_section_show ) { ?>
 		<nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
@@ -1814,7 +1814,7 @@ while ( have_posts() ) : the_post(); ?>
 	if ($page_title) { ?>,
 	"name": "<?php echo $page_title; ?>"<?php
 	} // endif ( $page_title )
-	
+
 	?>,
 	"url": "<?php echo get_permalink(); ?>"<?php
 
@@ -1837,11 +1837,11 @@ while ( have_posts() ) : the_post(); ?>
 	if ( !$hoursvary && $hours_schema ) { ?>,
 	<?php echo $hours_schema;
 	} // endif ( !$hoursvary && $hours_schema )
-	
+
 	if ( $phone_schema ) { ?>,
 	<?php echo $phone_schema;
 	} // endif ( $phone_schema )
-	
+
 	?>,
 	"logo": "<?php echo get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png'; ?>"
 }

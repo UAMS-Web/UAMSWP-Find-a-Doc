@@ -97,7 +97,7 @@ if ( $clinical_resource_section_show ) {
 			}
 			$clinical_resource_section_more_link_descr_attr = uamswp_attr_conversion($clinical_resource_section_more_link_descr);
 			$clinical_resource_section_more_link_url = '/clinical-resource/?' . $clinical_resource_section_more_link_key . '=' . $clinical_resource_section_more_link_value;
-			$clinical_resource_section_more_link_target = '_blank';	
+			$clinical_resource_section_more_link_target = '_blank';
 		}
 		$clinical_resource_section_collapse_list = isset($clinical_resource_section_collapse_list) ? $clinical_resource_section_collapse_list : false;
 
