@@ -6151,11 +6151,6 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Get the Find-a-Doc Settings values for the featured image of a fake subpage (or section) for Locations in general placements
 		function uamswp_fad_fpage_image_location_general() {
 
-			// Make variables available outside of the function
-
-				global $location_fpage_image_general; // int
-				global $location_descendant_fpage_image_general; // int
-
 			// Locations
 
 				// Get the Find-a-Doc Settings value
