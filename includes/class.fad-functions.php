@@ -6132,10 +6132,6 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Get the Find-a-Doc Settings value for the featured image of a fake subpage (or section) for Providers in general placements
 		function uamswp_fad_fpage_image_provider_general() {
 
-			// Make variables available outside of the function
-
-				global $provider_fpage_image_general; // int
-
 			// Get the Find-a-Doc Settings value
 			$provider_fpage_image_general = get_field('provider_fpage_featured_image_general', 'option'); // Featured image ID
 
