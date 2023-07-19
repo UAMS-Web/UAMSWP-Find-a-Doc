@@ -1,6 +1,6 @@
 <?php
 /*
- * Template Name: Single Area of Expertise v2
+ * Template Name: Single Area of Expertise
  */
 
 // Get system settings for ontology item labels
@@ -339,195 +339,245 @@ add_action('wp_head','uamswp_keyword_hook_header');
 add_filter( 'body_class', 'uamswp_page_body_class' );
 $template_type = 'default';
 
-get_header();
+// Add bg-white class to article.entry element
+add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
-while ( have_posts() ) : the_post(); ?>
+// Modify Entry Title
 
-<?php endwhile; // end of the loop. ?>
+	// Remove Genesis-standard post title and markup
+	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
+	remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
 
-<div class="content-sidebar-wrap">
-	<main class="clinical-resource-item" id="genesis-content">
-		<?php
+	// Construct non-standard post title
+	add_action( 'genesis_before_content', 'uamswp_fad_post_title' );
+	$entry_header_style = $expertise_page_title_options; // Entry header style
+	$entry_title_text = $expertise_page_title; // Regular title
+	$entry_title_text_supertitle = ''; // Optional supertitle, placed above the regular title
+	$entry_title_text_subtitle = ''; // Optional subtitle, placed below the regular title
+	$entry_title_text_body = $expertise_page_intro; // Optional lead paragraph, placed below the entry title
+	$entry_title_image_desktop = $expertise_page_image; // Desktop breakpoint image ID
+	$entry_title_image_mobile = $expertise_page_image_mobile; // Optional mobile breakpoint image ID
 
-			// Construct page header
+// Remove the post info (byline) from the entry header and the entry footer
+remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
+remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
 
-				$entry_header_style = $expertise_page_title_options; // Entry header style
-				$entry_title_text = $expertise_page_title; // Regular title
-				$entry_title_text_supertitle = ''; // Optional supertitle, placed above the regular title
-				$entry_title_text_subtitle = ''; // Optional subtitle, placed below the regular title
-				$entry_title_text_body = $expertise_page_intro; // Optional lead paragraph, placed below the entry title
-				$entry_title_image_desktop = $expertise_page_image; // Desktop breakpoint image ID
-				$entry_title_image_mobile = $expertise_page_image_mobile; // Optional mobile breakpoint image ID
-				uamswp_fad_post_title();
+// Remove the entry meta (tags) from the entry footer, including markup
+remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_open', 5 );
+remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
+remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
 
-			// Construct page content
+// Construct page content
 
-				// Display alternate names
+	// Display alternate names
+	add_filter( 'genesis_entry_content', 'uamswp_expertise_keywords', 8 );
+	function uamswp_expertise_keywords() {
+		$keywords = get_field('expertise_alternate_names');
+		$keyword_text = '';
+		if( $keywords ): 
+			$i = 1;
+			foreach( $keywords as $keyword ) { 
+				if ( 1 < $i ) {
+					$keyword_text .= '; ';
+				}
+				$keyword_text .= $keyword['alternate_text'];
+				$i++;
+			}
+			echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';
+		endif;
+	}
 
-					$keywords = get_field('expertise_alternate_names');
-					$keyword_text = '';
-					if ( $keywords ) {
-						$i = 1;
-						foreach( $keywords as $keyword ) { 
-							if ( 1 < $i ) {
-								$keyword_text .= '; ';
-							}
-							$keyword_text .= $keyword['alternate_text'];
-							$i++;
-						}
-						echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';
-					} // endif ( $keywords )
+	// Display featured video
+	add_action( 'genesis_entry_content', 'uamswp_expertise_youtube', 12 );
+	function uamswp_expertise_youtube() {
+		$video = get_field('expertise_youtube_link');
+		if( $video ) { ?>
+			<?php if(function_exists('lyte_preparse')) {
+				echo '<div class="alignwide">';
+				echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $video ) );
+				echo '</div>';
+			} else {
+				echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
+				echo wp_oembed_get( $video );
+				echo '</div>';
+			} ?>
+		<?php }
+	}
 
-				// Display featured video
+	// Display call-to-action bars
+	add_action( 'genesis_after_entry', 'uamswp_expertise_cta', 6 );
+	function uamswp_expertise_cta() {
+		$cta_repeater = get_field('expertise_cta');
+		if( $cta_repeater ): 
+			$i = 1;
+			foreach( $cta_repeater as $cta ) { 
+				$cta_heading = $cta['cta_bar_heading'];
+				$cta_body = $cta['cta_bar_body'];
+				$cta_action_type = $cta['cta_bar_action_type'];
 
-					$video = get_field('expertise_youtube_link');
-					if ( $video ) {
-						if ( function_exists('lyte_preparse') ) {
-							echo '<div class="alignwide">';
-							echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $video ) );
-							echo '</div>';
-						} else {
-							echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
-							echo wp_oembed_get( $video );
-							echo '</div>';
-						}
-					} //endif ( $video )
+				$cta_button_text = '';
+				$cta_button_url = '';
+				$cta_button_target = '';
+				$cta_button_desc = '';
+				if ( $cta_action_type == 'url' ) {
+					$cta_button_text = $cta['cta_bar_button_text'];
+					$cta_button_url = $cta['cta_bar_button_url'];
+					if ( $cta_button_url ) {
+						$cta_button_target = $cta_button_url['target'];
+					}
+					$cta_button_desc = $cta['cta_bar_button_description'];
+				}
 
-				// Display call-to-action bars
-			
-					$cta_repeater = get_field('expertise_cta');
-					if ( $cta_repeater ) {
-						$i = 1;
-						foreach( $cta_repeater as $cta ) { 
-							$cta_heading = $cta['cta_bar_heading'];
-							$cta_body = $cta['cta_bar_body'];
-							$cta_action_type = $cta['cta_bar_action_type'];
-		
-							$cta_button_text = '';
-							$cta_button_url = '';
-							$cta_button_target = '';
-							$cta_button_desc = '';
-							if ( $cta_action_type == 'url' ) {
-								$cta_button_text = $cta['cta_bar_button_text'];
-								$cta_button_url = $cta['cta_bar_button_url'];
-								if ( $cta_button_url ) {
-									$cta_button_target = $cta_button_url['target'];
-								}
-								$cta_button_desc = $cta['cta_bar_button_description'];
-							}
-		
-							$cta_phone_prepend = '';
-							$cta_phone = '';
-							$cta_phone_link = '';
-							if ( $cta_action_type == 'phone' ) {
-								$cta_phone_prepend = $cta['cta_bar_phone_prepend'] ? $cta['cta_bar_phone_prepend'] : 'Call';
-								$cta_phone = $cta['cta_bar_phone'];
-								$cta_phone_link = '<a href="tel:' . format_phone_dash( $cta_phone ) . '">' . format_phone_us( $cta_phone ) . '</a>';
-							}
-		
-							$cta_layout = 'cta-bar-centered';
-							$cta_size = 'normal';
-							$cta_use_image = false;
-							$cta_image = '';
-							$cta_background_color = 'bg-auto';
-							$cta_btn_color = 'primary';
-		
-							$cta_className = '';
-							$cta_className .= ' ' . $cta_layout;
-							$cta_className .= ' ' . $cta_background_color;
-							$cta_className .= $cta_use_image ? ' bg-image' : '';
-							if ( $cta_size == 'small' ) {
-								$cta_className .= ' cta-bar-sm';
-							} elseif ( $cta_size == 'large' ) {
-								$cta_className .= ' extra-padding cta-bar-lg';
-							}
-							if ( $cta_action_type == 'none' ) {
-								$cta_className .= ' no-link';
-							}
-		
-							echo '<section class="uams-module cta-bar' . $cta_className . '" id="cta-bar-' . $i . '" aria-label="' . $cta_heading . '">
-								<div class="container-fluid">
-									<div class="row">
-										<div class="col-12">
-											<div class="inner-container">
-												<div class="cta-heading">
-													<h2>' . $cta_heading . '</h2>
-												</div>
-												<div class="cta-body">
-													<div class="text-container">
-														' . $cta_body . '
-													</div>';
-													echo $cta_action_type == 'url' ?
-													'<div class="btn-container">
-														<a href="' . $cta_button_url['url'] . '" aria-label="' . $cta_button_desc . '" class=" btn btn-' . $cta_btn_color . ( $cta_size == 'large' ? ' btn-lg' : '' ) . '"' . ( $cta_button_target ? ' target="'. $cta_button_target . '"' : '' ) . ' data-moduletitle="' . $cta_heading . '">' . $cta_button_text . '</a>
-													</div>'
-													: '';
-													echo $cta_action_type == 'phone' ?
-													'<div class="btn-container">
-														<a href="tel:' . $cta_phone . '" data-moduletitle="' . $cta_heading . '">' . $cta_phone_prepend . ' <span class="no-break">' . $cta_phone . '</span></a>
-													</div>'
-													: '';
-												echo '</div>
-											</div>
-										</div>
+				$cta_phone_prepend = '';
+				$cta_phone = '';
+				$cta_phone_link = '';
+				if ( $cta_action_type == 'phone' ) {
+					$cta_phone_prepend = $cta['cta_bar_phone_prepend'] ? $cta['cta_bar_phone_prepend'] : 'Call';
+					$cta_phone = $cta['cta_bar_phone'];
+					$cta_phone_link = '<a href="tel:' . format_phone_dash( $cta_phone ) . '">' . format_phone_us( $cta_phone ) . '</a>';
+				}
+
+				$cta_layout = 'cta-bar-centered';
+				$cta_size = 'normal';
+				$cta_use_image = false;
+				$cta_image = '';
+				$cta_background_color = 'bg-auto';
+				$cta_btn_color = 'primary';
+
+				$cta_className = '';
+				$cta_className .= ' ' . $cta_layout;
+				$cta_className .= ' ' . $cta_background_color;
+				$cta_className .= $cta_use_image ? ' bg-image' : '';
+				if ( $cta_size == 'small' ) {
+					$cta_className .= ' cta-bar-sm';
+				} elseif ( $cta_size == 'large' ) {
+					$cta_className .= ' extra-padding cta-bar-lg';
+				}
+				if ( $cta_action_type == 'none' ) {
+					$cta_className .= ' no-link';
+				}
+
+				echo '<section class="uams-module cta-bar' . $cta_className . '" id="cta-bar-' . $i . '" aria-label="' . $cta_heading . '">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-12">
+								<div class="inner-container">
+									<div class="cta-heading">
+										<h2>' . $cta_heading . '</h2>
 									</div>
+									<div class="cta-body">
+										<div class="text-container">
+											' . $cta_body . '
+										</div>';
+										echo $cta_action_type == 'url' ?
+										'<div class="btn-container">
+											<a href="' . $cta_button_url['url'] . '" aria-label="' . $cta_button_desc . '" class=" btn btn-' . $cta_btn_color . ( $cta_size == 'large' ? ' btn-lg' : '' ) . '"' . ( $cta_button_target ? ' target="'. $cta_button_target . '"' : '' ) . ' data-moduletitle="' . $cta_heading . '">' . $cta_button_text . '</a>
+										</div>'
+										: '';
+										echo $cta_action_type == 'phone' ?
+										'<div class="btn-container">
+											<a href="tel:' . $cta_phone . '" data-moduletitle="' . $cta_heading . '">' . $cta_phone_prepend . ' <span class="no-break">' . $cta_phone . '</span></a>
+										</div>'
+										: '';
+									echo '</div>
 								</div>
-							</section>';
-							$i++;
-						}
-					} // endif ( $cta_repeater )
+							</div>
+						</div>
+					</div>
+				</section>';
+				$i++;
+			}
+		endif;
+	}
 
-				// Check if podcast section should be displayed
-			
-					$podcast_name = get_field('expertise_podcast_name');
-					$podcast_query_vars = uamswp_fad_podcast_query( $podcast_name ); // Defines universal variables related to podcast
-						$podcast_section_show = $podcast_query_vars['podcast_section_show']; // bool
-			
-				// Construct UAMS Health Talk podcast section
-			
-					$podcast_filter = 'tag';
-					$podcast_subject = $page_title;
-					uamswp_fad_podcast( $podcast_name, $podcast_section_show, $podcast_filter, $podcast_subject );
+	// Check if podcast section should be displayed
 
-				// Construct Combined Conditions and Treatments Section
+		$podcast_name = get_field('expertise_podcast_name');
+		$podcast_query_vars = uamswp_fad_podcast_query( $podcast_name ); // Defines universal variables related to podcast
+			$podcast_section_show = $podcast_query_vars['podcast_section_show']; // bool
 
-					$ontology_type = isset($ontology_type) ? $ontology_type : true; // bool
-					$condition_treatment_section_title = $condition_treatment_fpage_title_expertise; // Text to use for the section title // string (default: Find-a-Doc Settings value for combined condition/treatment section title in a general placement)
-					$condition_treatment_section_intro = $condition_treatment_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for combined condition/treatment section intro text in a general placement)
-					$condition_section_title = $condition_fpage_title_expertise; // Text to use for the section title // string (default: Find-a-Doc Settings value for condition section title in a general placement)
-					$condition_section_intro = $condition_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
-					$treatment_section_title = $treatment_fpage_title_expertise; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
-					$treatment_section_intro = $treatment_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
-					include( UAMS_FAD_PATH . '/templates/parts/section-list-condition-treatment.php' );
+	// Construct UAMS Health Talk podcast section
 
-				// // Construct conditions section
+		$podcast_filter = 'tag';
+		$podcast_subject = $page_title;
+		add_action( 'genesis_after_entry', 'uamswp_fad_podcast', 10 );
 
-				// 	$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
-				// 	$condition_treatment_schema_i = isset($condition_treatment_schema_i) ? $condition_treatment_schema_i : 0;
-				// 	$condition_treatment_schema_count = isset($condition_treatment_schema_count) ? $condition_treatment_schema_count : 0;
-				// 	$condition_section_title = $condition_fpage_title_expertise; // Text to use for the section title // string (default: Find-a-Doc Settings value for condition section title in a general placement)
-				// 	$condition_section_intro = $condition_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
-				// 	include( UAMS_FAD_PATH . '/templates/parts/section-list-condition.php' );
+	// Construct Combined Conditions and Treatments Section
 
-				// // Construct treatments section
+		$ontology_type = isset($ontology_type) ? $ontology_type : true; // bool
+		$condition_treatment_section_title = $condition_treatment_fpage_title_expertise; // Text to use for the section title // string (default: Find-a-Doc Settings value for combined condition/treatment section title in a general placement)
+		$condition_treatment_section_intro = $condition_treatment_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for combined condition/treatment section intro text in a general placement)
+		$condition_section_title = $condition_fpage_title_expertise; // Text to use for the section title // string (default: Find-a-Doc Settings value for condition section title in a general placement)
+		$condition_section_intro = $condition_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
+		$treatment_section_title = $treatment_fpage_title_expertise; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
+		$treatment_section_intro = $treatment_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
+		add_action( 'genesis_after_entry', 'uamswp_fad_section_condition_treatment', 16 );
+		$section_condition_treatment_vars = uamswp_fad_section_condition_treatment(
+			$conditions_cpt, // int[]
+			$treatments_cpt, // int[]
+			$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+			$condition_treatment_section_show, // bool
+			$condition_section_show, // bool
+			$treatment_section_show, // bool
+			$ontology_type, // bool
+			$condition_treatment_section_title, // string // Text to use for the section title
+			$condition_treatment_section_intro, // string // Text to use for the section intro text
+			$condition_section_title, // string // Text to use for the conditions subsection title
+			$condition_section_intro, // string // Text to use for the conditions subsection intro text
+			$treatment_section_title, // string // Text to use for the treatments subsection title
+			$treatment_section_intro // string // Text to use for the treatments subsection intro text
+		);
+			$condition_treatment_schema = $section_condition_treatment_vars['condition_treatment_schema']; // string
 
-				// 	$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
-				// 	$condition_treatment_schema_i = isset($condition_treatment_schema_i) ? $condition_treatment_schema_i : 0;
-				// 	$condition_treatment_schema_count = isset($condition_treatment_schema_count) ? $condition_treatment_schema_count : 0;
-				// 	$treatment_section_title = $treatment_fpage_title_expertise; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
-				// 	$treatment_section_intro = $treatment_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
-				// 	include( UAMS_FAD_PATH . '/templates/parts/section-list-treatment.php' );
+	// // Construct conditions section
 
-				// Check if Make an Appointment section should be displayed
+	// 	$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
+	// 	$condition_treatment_schema_i = isset($condition_treatment_schema_i) ? $condition_treatment_schema_i : 0;
+	// 	$condition_treatment_schema_count = isset($condition_treatment_schema_count) ? $condition_treatment_schema_count : 0;
+	// 	$condition_section_title = $condition_fpage_title_expertise; // Text to use for the section title // string (default: Find-a-Doc Settings value for condition section title in a general placement)
+	// 	$condition_section_intro = $condition_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
+	// 	add_action( 'genesis_after_entry', 'uamswp_fad_section_condition', 16 );
+	// 	$section_condition_vars = uamswp_fad_section_condition(
+	// 		$conditions_cpt, // int[]
+	// 		$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+	// 		$condition_treatment_schema, // string
+	// 		$condition_treatment_schema_i, // int
+	// 		$condition_treatment_schema_count, // int
+	// 		$condition_section_title, // string // Text to use for the section title
+	// 		$condition_section_intro, // string // Text to use for the section intro text
+	// 	);
+	// 		$condition_treatment_schema = $section_condition_vars['condition_treatment_schema']; // string
+	// 		$condition_treatment_schema_i = $section_condition_vars['condition_treatment_schema_i']; // int
+	// 		$condition_treatment_schema_count = $section_condition_vars['condition_treatment_schema_count']; // int
 
-					$appointment_section_show = true; // It should always be displayed.
+	// // Construct treatments section
 
-				// Construct appointment information
+	// 	$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
+	// 	$condition_treatment_schema_i = isset($condition_treatment_schema_i) ? $condition_treatment_schema_i : 0;
+	// 	$condition_treatment_schema_count = isset($condition_treatment_schema_count) ? $condition_treatment_schema_count : 0;
+	// 	$treatment_section_title = $treatment_fpage_title_expertise; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
+	// 	$treatment_section_intro = $treatment_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
+	// 	add_action( 'genesis_after_entry', 'uamswp_fad_section_treatment', 18 );
+	// 	$section_treatment_vars = uamswp_fad_section_treatment( $treatments_cpt )(
+	// 		$treatments_cpt, // int[]
+	// 		$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+	// 		$condition_treatment_schema, // string
+	// 		$condition_treatment_schema_i, // int
+	// 		$condition_treatment_schema_count, // int
+	// 		$treatment_section_title, // string // Text to use for the section title
+	// 		$treatment_section_intro, // string // Text to use for the section intro text
+	// 	);
+	// 		$condition_treatment_schema = $section_treatment_vars['condition_treatment_schema']; // string
+	// 		$condition_treatment_schema_i = $section_treatment_vars['condition_treatment_schema_i']; // int
+	// 		$condition_treatment_schema_count = $section_treatment_vars['condition_treatment_schema_count']; // int
 
-					uamswp_fad_ontology_appointment();
+	// Display appointment information
 
-		?>
-	</main>
-</div>
+		add_action( 'genesis_after_entry', 'uamswp_fad_ontology_appointment', 26 );
 
-<?php get_footer(); ?>
+	// Check if Make an Appointment section should be displayed
+
+		$appointment_section_show = true; // It should always be displayed.
+
+genesis();
