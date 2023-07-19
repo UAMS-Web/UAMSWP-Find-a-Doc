@@ -6182,11 +6182,6 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Get the Find-a-Doc Settings values for the featured image of a fake subpage (or section) for Areas of Expertise in general placements
 		function uamswp_fad_fpage_image_expertise_general() {
 
-			// Make variables available outside of the function
-
-				global $expertise_fpage_image_general; // int
-				global $expertise_descendant_fpage_image_general; // int
-
 			// Areas of Expertise
 
 				// Get the Find-a-Doc Settings value
