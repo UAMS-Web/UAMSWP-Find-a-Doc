@@ -1520,26 +1520,19 @@ function uamswp_fad_post_title() {
 // Queries for whether each of the related ontology content sections should be displayed on ontology pages/subsections
 
 	// Query for whether related providers content section should be displayed on ontology pages/subsections
-	function uamswp_fad_provider_query( $providers ) {
+	function uamswp_fad_provider_query( $providers, $jump_link_count = 0 ) {
 
 		// Bring in variables from outside of the function
 
-			// Typically defined on the template
-
-				global $jump_link_count;
+			// Function Arguments
+			// 	$providers // int[]
+			// 	$jump_link_count // int
 
 			if ( !isset($providers) ) {
 				$ontology_site_values_vars = uamswp_fad_ontology_site_values();
 					// $site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
 					$providers = $ontology_site_values_vars['providers'];
 			}
-
-		// Make variables available outside of the function
-
-			global $provider_query;
-			global $provider_section_show;
-			global $provider_ids;
-			global $provider_count; // integer
 
 		if ( $providers ) {
 			$args = array(
@@ -1571,8 +1564,9 @@ function uamswp_fad_post_title() {
 			$provider_query_vars = array(
 				'provider_query'		=> $provider_query, // WP_Post[]
 				'provider_section_show'	=> $provider_section_show, // bool
-				'provider_ids'			=> $provider_ids,
-				'provider_count'		=> $provider_count // integer
+				'provider_ids'			=> $provider_ids, // int[]
+				'provider_count'		=> $provider_count, // int
+				'jump_link_count'		=> $jump_link_count // int
 			);
 			return $provider_query_vars;
 

@@ -582,8 +582,13 @@ while ( have_posts() ) : the_post(); ?>
 
 		// Query for whether related providers content section should be displayed on ontology pages/subsections
 		$providers = get_field('physician_locations');
-		uamswp_fad_provider_query( $providers );
-
+		$provider_query_vars = uamswp_fad_provider_query( $providers, $jump_link_count );
+			$provider_query = $provider_query_vars['provider_query']; // WP_Post[]
+			$provider_section_show = $provider_query_vars['provider_section_show']; // bool
+			$provider_ids = $provider_query_vars['provider_ids']; // int[]
+			$provider_count = $provider_query_vars['provider_count']; // int
+			$jump_link_count = $provider_query_vars['jump_link_count']; // int
+	
 		// Query for whether related descendant locations content section should be displayed on a page
 		$current_id = get_the_ID();
 		$location_descendants = get_pages(
