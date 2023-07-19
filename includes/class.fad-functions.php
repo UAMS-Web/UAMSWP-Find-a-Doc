@@ -1460,6 +1460,9 @@ function uamswp_fad_post_title() {
 
 	// Add one of the following variable definitions to the relevant template to indicate which entry header style to use
 
+		// Normal style
+		// $entry_header_style = 'normal';
+
 		// Graphic style
 		// $entry_header_style = 'graphic';
 
@@ -1505,17 +1508,23 @@ function uamswp_fad_post_title() {
 
 		// Typically defined on the template
 
-			global $entry_header_style;
-			global $entry_title_text;
-			global $entry_title_text_supertitle;
-			global $entry_title_text_subtitle;
-			global $entry_title_text_body;
-			global $entry_title_image_desktop;
-			global $entry_title_image_mobile;
+			global $entry_header_style; // string
+			global $entry_title_text; // string
+			global $entry_title_text_supertitle; // string (optional)
+			global $entry_title_text_subtitle; // string (optional)
+			global $entry_title_text_body; // string (optional)
+			global $entry_title_image_desktop; // int (optional)
+			global $entry_title_image_mobile; // int (optional)
 
 	// Check/define variables
 
-		$entry_header_style = ( isset($entry_header_style) && !empty($entry_header_style) ) ? $entry_header_style : 'graphic';
+	$entry_header_style = ( isset($entry_header_style) && !empty($entry_header_style) ) ? $entry_header_style : 'graphic';
+	$entry_title_text = ( isset($entry_title_text) && !empty($entry_title_text) ) ? $entry_title_text : get_the_title();
+	$entry_title_text_supertitle = isset($entry_title_text_supertitle) ? $entry_title_text_supertitle : '';
+	$entry_title_text_subtitle = isset($entry_title_text_subtitle) ? $entry_title_text_subtitle : '';
+	$entry_title_text_body = isset($entry_title_text_body) ? $entry_title_text_body : '';
+	$entry_title_image_desktop = isset($entry_title_image_desktop) ? $entry_title_image_desktop : '';
+	$entry_title_image_mobile = isset($entry_title_image_mobile) ? $entry_title_image_mobile : '';
 
 	include( UAMS_FAD_PATH . '/templates/parts/entry-title-' . $entry_header_style . '.php');
 }
