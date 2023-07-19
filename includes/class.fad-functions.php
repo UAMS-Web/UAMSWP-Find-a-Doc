@@ -6332,10 +6332,6 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get the Find-a-Doc Settings value for clinical resource archive page featured image
 	function uamswp_fad_archive_image_clinical_resource() {
 
-		// Make variables available outside of the function
-
-			global $clinical_resource_archive_image; // int
-
 		// Get the Find-a-Doc Settings value for the featured image of the clinical resource archive
 		$clinical_resource_archive_image = get_field('clinical_resource_archive_featured_image', 'option'); // Featured image ID
 

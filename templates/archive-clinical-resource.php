@@ -90,7 +90,8 @@ $page_title = $clinical_resource_archive_headline; // string
 // $page_url = get_permalink();
 
 // Get system settings for the featured image of a Clinical Resource archive page
-uamswp_fad_archive_image_clinical_resource();
+$archive_image_clinical_resource = uamswp_fad_archive_image_clinical_resource();
+	$clinical_resource_archive_image = $archive_image_clinical_resource['clinical_resource_archive_image']; // int
 
 // Get the featured image
 $page_image_id = $clinical_resource_archive_image; // Image ID // int
