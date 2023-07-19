@@ -93,7 +93,12 @@ $embed_code = get_field('treatment_procedure_embed_codes', $term); // Embed / Sy
 		$placeholder_treatment_plural_name = $labels_treatment_vars['placeholder_treatment_plural_name']; // string
 
 // Get system settings for condition archive page text
-uamswp_fad_archive_text_treatment();
+$archive_text_treatment_vars = uamswp_fad_archive_text_treatment();
+	$treatment_archive_headline = $archive_text_treatment_vars['treatment_archive_headline']; // string
+	$treatment_archive_headline_attr = $archive_text_treatment_vars['treatment_archive_headline_attr']; // string
+	$treatment_archive_intro_text = $archive_text_treatment_vars['treatment_archive_intro_text']; // string
+	$placeholder_treatment_archive_headline = $archive_text_treatment_vars['placeholder_treatment_archive_headline']; // string
+	$placeholder_treatment_archive_intro_text = $archive_text_treatment_vars['placeholder_treatment_archive_intro_text']; // string
 
 if (
 	( $medline_type && 'none' != $medline_type && $medline_code && !empty($medline_code) ) // if the medline plus syndication option is filled in

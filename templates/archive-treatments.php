@@ -40,7 +40,12 @@ $labels_treatment_vars = uamswp_fad_labels_treatment();
 	$placeholder_treatment_plural_name = $labels_treatment_vars['placeholder_treatment_plural_name']; // string
 
 // Get system settings for Treatments Archive Page
-uamswp_fad_archive_text_treatment();
+$archive_text_treatment_vars = uamswp_fad_archive_text_treatment();
+	$treatment_archive_headline = $archive_text_treatment_vars['treatment_archive_headline']; // string
+	$treatment_archive_headline_attr = $archive_text_treatment_vars['treatment_archive_headline_attr']; // string
+	$treatment_archive_intro_text = $archive_text_treatment_vars['treatment_archive_intro_text']; // string
+	$placeholder_treatment_archive_headline = $archive_text_treatment_vars['placeholder_treatment_archive_headline']; // string
+	$placeholder_treatment_archive_intro_text = $archive_text_treatment_vars['placeholder_treatment_archive_intro_text']; // string
 $treatment_archive_link = get_post_type_archive_link( get_query_var('post_type') );
 
 $alpha = '';

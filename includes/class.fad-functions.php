@@ -2951,14 +2951,6 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get the Find-a-Doc Settings values for treatment archive page text
 	function uamswp_fad_archive_text_treatment() {
 
-		// Make variables available outside of the function
-
-			global $treatment_archive_headline; // string
-			global $treatment_archive_headline_attr; // string
-			global $treatment_archive_intro_text; // string
-			global $placeholder_treatment_archive_headline; // string
-			global $placeholder_treatment_archive_intro_text; // string
-
 		$treatment_archive_headline = get_field('treatments_archive_headline', 'option') ?: 'Treatments and Procedures';
 		$treatment_archive_headline_attr = uamswp_attr_conversion($treatment_archive_headline);
 		$treatment_archive_intro_text = get_field('treatments_archive_intro_text', 'option');
