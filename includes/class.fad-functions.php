@@ -6278,10 +6278,6 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get the Find-a-Doc Settings value for location archive page featured image
 	function uamswp_fad_archive_image_location() {
 
-		// Make variables available outside of the function
-
-			global $location_archive_image;
-
 		// Get the Find-a-Doc Settings value for the featured image of the location archive
 		$location_archive_image = get_field('location_archive_featured_image', 'option'); // Featured image ID
 
