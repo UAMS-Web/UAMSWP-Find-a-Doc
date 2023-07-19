@@ -7049,18 +7049,20 @@ function uamswp_fad_section_clinical_resource( $clinical_resources ) {
 //     The template part included in this function can stand on its own. If the 
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
-function uamswp_fad_section_condition( $conditions_cpt ) {
+function uamswp_fad_section_condition(
+	$conditions_cpt, // int[]
+	$condition_treatment_schema = '', // string
+	$condition_treatment_schema_i = 0, // int
+	$condition_treatment_schema_count = 0, // int
+	$condition_section_title = '', // string // Text to use for the section title
+	$condition_section_intro = '', // string // Text to use for the section intro text
+	$condition_treatment_section_link_item = false, // bool // Query for whether to link the list items
+	$condition_section_show_header = true, // bool // Query for whether to display the section header
+	$condition_section_class = 'conditions-treatments', // string // Section class
+	$condition_section_id = 'conditions' // string // Section ID
+) {
 
 	// Bring in variables from outside of the function
-
-		// Optional variables defined on the template
-
-			global $condition_section_class; // Section class // string (default: 'conditions-treatments')
-			global $condition_section_id; // Section ID // string (default: 'conditions')
-			global $condition_section_show_header; // Query for whether to display the section header // bool (default: true)
-			global $condition_section_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of condition section title in general placements)
-			global $condition_section_intro; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of condition section intro text in general placements)
-			global $condition_section_link_item; // Query for whether to link the list items // bool (default: false)
 
 		$labels_condition_vars = uamswp_fad_labels_condition();
 			$condition_single_name = $labels_condition_vars['condition_single_name']; // string
@@ -7083,6 +7085,19 @@ function uamswp_fad_section_condition( $conditions_cpt ) {
 
 		$ontology_hide_function = uamswp_fad_ontology_hide();
 			$hide_medical_ontology = $ontology_hide_function['hide_medical_ontology']; // bool
+	
+	// Check/define variables
+
+		if ( !isset($condition_section_title) || empty($condition_section_title) ) {
+			$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
+				$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string // Find-a-Doc Settings value for conditions section title in general placements
+			$condition_section_title = $condition_fpage_title_general;
+		}
+		if ( !isset($condition_section_intro) || empty($condition_section_intro) ) {
+			$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
+				$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string // Find-a-Doc Settings value for conditions section intro text in general placements
+			$condition_section_intro = $condition_fpage_intro_general;
+		}
 
 	// Make variables available outside of the function
 
@@ -7107,18 +7122,20 @@ function uamswp_fad_section_condition( $conditions_cpt ) {
 //     The template part included in this function can stand on its own. If the 
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
-function uamswp_fad_section_treatment( $treatments_cpt ) {
+function uamswp_fad_section_treatment(
+	$treatments_cpt, // int[]
+	$condition_treatment_schema = '', // string
+	$condition_treatment_schema_i = 0, // int
+	$condition_treatment_schema_count = 0, // int
+	$treatment_section_title = '', // string // Text to use for the section title
+	$treatment_section_intro = '', // string // Text to use for the section intro text
+	$condition_treatment_section_link_item = false, // bool // Query for whether to link the list items
+	$treatment_section_show_header = true, // bool // Query for whether to display the section header
+	$treatment_section_class = 'conditions-treatments', // string // Section class
+	$treatment_section_id = 'treatments' // string // Section ID
+) {
 
 	// Bring in variables from outside of the function
-
-		// Optional variables defined on the template
-
-			global $treatment_section_class; // Section class // string (default: 'conditions-treatments')
-			global $treatment_section_id; // Section ID // string (default: 'treatments')
-			global $treatment_section_show_header; // Query whether to display the section header // bool (default: true)
-			global $treatment_section_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of treatment section title in general placements)
-			global $treatment_section_intro; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of treatment section intro text in general placements)
-			global $treatment_section_link_item; // Query for whether to link the list items // bool (default: false)
 
 		$labels_treatment_vars = uamswp_fad_labels_treatment();
 			$treatment_single_name = $labels_treatment_vars['treatment_single_name']; // string
@@ -7141,6 +7158,19 @@ function uamswp_fad_section_treatment( $treatments_cpt ) {
 
 		$ontology_hide_function = uamswp_fad_ontology_hide();
 			$hide_medical_ontology = $ontology_hide_function['hide_medical_ontology']; // bool
+	
+	// Check/define variables
+
+		if ( !isset($treatment_section_title) || empty($treatment_section_title) ) {
+			$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
+				$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string // Find-a-Doc Settings value for treatments section title in general placements
+			$treatment_section_title = $treatment_fpage_title_general;
+		}
+		if ( !isset($treatment_section_intro) || empty($treatment_section_intro) ) {
+			$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
+				$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string // Find-a-Doc Settings value for treatments section intro text in general placements
+			$treatment_section_intro = $treatment_fpage_intro_general;
+		}
 
 	// Make variables available outside of the function
 
@@ -7165,28 +7195,28 @@ function uamswp_fad_section_treatment( $treatments_cpt ) {
 //     The template part included in this function can stand on its own. If the 
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
-function uamswp_fad_section_condition_treatment( $conditions_cpt, $treatments_cpt ) {
+function uamswp_fad_section_condition_treatment(
+	$conditions_cpt, // int[]
+	$treatments_cpt, // int[]
+	$condition_treatment_section_title = '', // string (default: Find-a-Doc Settings value for combined condition/treatment section title in general placements) // Text to use for the section title
+	$condition_treatment_section_intro = '', // string (default: Find-a-Doc Settings value for combined condition/treatment section intro text in general placements) // Text to use for the section intro text
+	$condition_section_title = '', // string (default: Find-a-Doc Settings value for areas of condition section title in general placements) // Text to use for the conditions subsection title
+	$condition_section_intro = '', // string (default: Find-a-Doc Settings value for condition section intro text in general placements) // Text to use for the conditions subsection intro text
+	$treatment_section_title = '', // string (default: Find-a-Doc Settings value for treatment section title in general placements) // Text to use for the treatments subsection title
+	$treatment_section_intro = '', // string (default: Find-a-Doc Settings value for treatment section intro text in general placements) // Text to use for the treatments subsection intro text
+	$condition_treatment_section_link_item = false, // bool // Query for whether to link the list items
+	$condition_treatment_section_show_header = true, // bool // Query for whether to display the section header
+	$condition_section_show_header = true, // bool // Query for whether to display the conditions subsection header
+	$treatment_section_show_header = true, // bool // Query for whether to display the treatments subsection header
+	$condition_treatment_section_class = 'conditions-treatments', // string // Section class
+	$condition_treatment_section_id = 'conditions-treatments', // string // Section ID
+	$condition_section_class = 'conditions', // string // Conditions subsection class
+	$condition_section_id = 'conditions', // string // Conditions subsection ID
+	$treatment_section_class = 'treatments', // string // Treatments subsection class
+	$treatment_section_id = 'treatments' // string // Treatments subsection ID
+) {
 
 	// Bring in variables from outside of the function
-
-		// Optional variables defined on the template
-
-			global $condition_treatment_section_class; // Section class // string (default: 'conditions-treatments')
-			global $condition_treatment_section_id; // Section ID // string (default: 'conditions-treatments')
-			global $condition_treatment_section_show_header; // Query for whether to display the section header // bool (default: true)
-			global $condition_treatment_section_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for combined condition/treatment section title in general placements)
-			global $condition_treatment_section_intro; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for combined condition/treatment section intro text in general placements)
-			global $condition_section_link_item; // Query for whether to link the list items // bool (default: false)
-			global $condition_section_class; // Conditions subsection class // string (default: 'conditions')
-			global $condition_section_id; // Conditions subsection ID // string (default: 'conditions')
-			global $condition_section_show_header; // Query for whether to display the conditions subsection header // bool (default: true)
-			global $condition_section_title; // Text to use for the conditions subsection title // string (default: Find-a-Doc Settings value for areas of condition section title in general placements)
-			global $condition_section_intro; // Text to use for the conditions subsection intro text // string (default: Find-a-Doc Settings value for condition section intro text in general placements)
-			global $treatment_section_class; // Treatments subsection class // string (default: 'treatments')
-			global $treatment_section_id; // Treatments subsection ID // string (default: 'treatments')
-			global $treatment_section_show_header; // Query for whether to display the treatments subsection header // bool (default: true)
-			global $treatment_section_title; // Text to use for the treatments subsection title // string (default: Find-a-Doc Settings value for treatment section title in general placements)
-			global $treatment_section_intro; // Text to use for the treatments subsection intro text // string (default: Find-a-Doc Settings value for treatment section intro text in general placements)
 
 		$labels_condition_vars = uamswp_fad_labels_condition();
 			$condition_single_name_attr = $labels_condition_vars['condition_single_name_attr']; // string
@@ -7220,10 +7250,39 @@ function uamswp_fad_section_condition_treatment( $conditions_cpt, $treatments_cp
 
 		$ontology_hide_function = uamswp_fad_ontology_hide();
 			$hide_medical_ontology = $ontology_hide_function['hide_medical_ontology']; // bool
+	
+	// Check/define variables
 
-	// Make variables available outside of the function
-
-		global $condition_treatment_schema; // string
+		if ( !isset($condition_treatment_section_title) || empty($condition_treatment_section_title) ) {
+			$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_condition_treatment_general();
+				$condition_treatment_fpage_title_general = $fpage_text_treatment_general_vars['condition_treatment_fpage_title_general']; // string // Find-a-Doc Settings value for combined conditions and treatments section title in general placements
+			$condition_treatment_section_title = $condition_treatment_fpage_title_general;
+		}
+		if ( !isset($condition_treatment_section_intro) || empty($condition_treatment_section_intro) ) {
+			$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_condition_treatment_general();
+				$condition_treatment_fpage_intro_general = $fpage_text_treatment_general_vars['condition_treatment_fpage_intro_general']; // string // Find-a-Doc Settings value for combined conditions and treatments section intro text in general placements
+			$condition_treatment_section_intro = $condition_treatment_fpage_intro_general;
+		}
+		if ( !isset($condition_section_title) || empty($condition_section_title) ) {
+			$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
+				$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string // Find-a-Doc Settings value for conditions section title in general placements
+			$condition_treatment_section_title = $condition_fpage_title_general;
+		}
+		if ( !isset($condition_section_intro) || empty($condition_section_intro) ) {
+			$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
+				$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string // Find-a-Doc Settings value for conditions section intro text in general placements
+			$condition_treatment_section_intro = $condition_fpage_intro_general;
+		}
+		if ( !isset($treatment_section_title) || empty($treatment_section_title) ) {
+			$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
+				$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string // Find-a-Doc Settings value for treatments section title in general placements
+			$condition_treatment_section_title = $treatment_fpage_title_general;
+		}
+		if ( !isset($treatment_section_intro) || empty($treatment_section_intro) ) {
+			$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
+				$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string // Find-a-Doc Settings value for treatments section intro text in general placements
+			$treatment_section_intro = $treatment_fpage_intro_general;
+		}
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-condition-treatment.php' );
 

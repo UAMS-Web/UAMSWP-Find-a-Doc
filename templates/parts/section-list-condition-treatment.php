@@ -6,7 +6,7 @@
  * associated with the current page.
  * 
  * When this template part is needed for a hook, use the 
- * uamswp_fad_section_condition_treatment( $conditions_cpt, $treatments_cpt ) function.
+ * uamswp_fad_section_condition_treatment() function.
  * 
  * Required vars:
  * 	// Vars defined in uamswp_fad_labels_condition()
@@ -42,7 +42,7 @@
  * 		$condition_treatment_section_show_header // Query for whether to display the section header // bool (default: true)
  * 		$condition_treatment_section_title // Text to use for the section title // string (default: Find-a-Doc Settings value for combined condition/treatment section title in a general placement)
  * 		$condition_treatment_section_intro // Text to use for the section intro text // string (default: Find-a-Doc Settings value for combined condition/treatment section intro text in a general placement)
- * 		$condition_section_link_item // Query for whether to link the list items // bool (default: false)
+ * 		$condition_treatment_section_link_item // Query for whether to link the list items // bool (default: false)
  * 		$condition_section_class // Conditions subsection class // string (default: 'conditions')
  * 		$condition_section_id // Conditions subsection ID // string (default: 'conditions')
  * 		$condition_section_show_header // Query for whether to display the conditions subsection header // bool (default: true)
@@ -62,11 +62,11 @@
 // Check/define variables
 $condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 $hide_medical_ontology = isset($hide_medical_ontology) ? $hide_medical_ontology : false;
-$condition_section_link_item = isset($condition_section_link_item) ? $condition_section_link_item : false;
+$condition_treatment_section_link_item = isset($condition_treatment_section_link_item) ? $condition_treatment_section_link_item : false;
 if (
 	$condition_treatment_section_show
 	&&
-	$condition_section_link_item
+	$condition_treatment_section_link_item
 	&&
 	$hide_medical_ontology
 	) {
@@ -244,7 +244,7 @@ if ( $condition_treatment_section_show && !$hide_medical_ontology ) {
 											}
 
 											// Construct the MedicalSpecialty schema data
-											global $condition_treatment_schema;
+											$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
 											$condition_treatment_schema .= uamswp_schema_construct($schema_construct_arr);
 
 											?>
@@ -321,7 +321,7 @@ if ( $condition_treatment_section_show && !$hide_medical_ontology ) {
 											}
 
 											// Construct the MedicalSpecialty schema data
-											global $condition_treatment_schema;
+											$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
 											$condition_treatment_schema .= uamswp_schema_construct($schema_construct_arr);
 
 											?>

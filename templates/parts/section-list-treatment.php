@@ -47,11 +47,11 @@
 // Check/define variables
 $treatment_section_show = isset($treatment_section_show) ? $treatment_section_show : false;
 $hide_medical_ontology = isset($hide_medical_ontology) ? $hide_medical_ontology : false;
-$condition_section_link_item = isset($condition_section_link_item) ? $condition_section_link_item : false;
+$condition_treatment_section_link_item = isset($condition_treatment_section_link_item) ? $condition_treatment_section_link_item : false;
 if (
 	$treatment_section_show
 	&&
-	$condition_section_link_item
+	$condition_treatment_section_link_item
 	&&
 	$hide_medical_ontology
 	) {

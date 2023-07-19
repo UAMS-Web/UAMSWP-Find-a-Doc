@@ -6,7 +6,7 @@
  * the current page.
  * 
  * When this template part is needed for a hook, use the 
- * uamswp_fad_section_condition( $conditions_cpt ) function.
+ * uamswp_fad_section_condition() function.
  * 
  * Designed for UAMS Health Find-a-Doc
  * 
@@ -35,7 +35,7 @@
  * 		$condition_section_show_header // Query for whether to display the section header // bool (default: true)
  * 		$condition_section_title // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of condition section title in a general placement)
  * 		$condition_section_intro // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of condition section intro text in a general placement)
- * 		$condition_section_link_item // Query for whether to link the list items // bool (default: false)
+ * 		$condition_treatment_section_link_item // Query for whether to link the list items // bool (default: false)
  * 
  * Return:
  * 	var $condition_treatment_schema; // string
@@ -47,11 +47,11 @@
 // Check/define variables
 $condition_section_show = isset($condition_section_show) ? $condition_section_show : false;
 $hide_medical_ontology = isset($hide_medical_ontology) ? $hide_medical_ontology : false;
-$condition_section_link_item = isset($condition_section_link_item) ? $condition_section_link_item : false;
+$condition_treatment_section_link_item = isset($condition_treatment_section_link_item) ? $condition_treatment_section_link_item : false;
 if (
 	$condition_section_show
 	&&
-	$condition_section_link_item
+	$condition_treatment_section_link_item
 	&&
 	$hide_medical_ontology
 	) {
