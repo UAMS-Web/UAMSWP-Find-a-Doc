@@ -2933,12 +2933,6 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get the Find-a-Doc Settings values for clinical resource archive page text
 	function uamswp_fad_archive_text_clinical_resource() {
 
-		// Make variables available outside of the function
-
-			global $clinical_resource_archive_headline;
-			global $clinical_resource_archive_headline_attr;
-			global $placeholder_clinical_resource_archive_headline;
-
 		$clinical_resource_archive_headline = get_field('clinical_resource_archive_headline', 'option') ?: 'Clinical Resources';
 		$clinical_resource_archive_headline_attr = uamswp_attr_conversion($clinical_resource_archive_headline);
 

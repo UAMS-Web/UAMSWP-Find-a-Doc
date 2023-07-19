@@ -74,7 +74,10 @@
 		$placeholder_treatment_plural_name = $labels_treatment['placeholder_treatment_plural_name']; // string
 
 // Get system settings for Clinical Resource archive page text
-uamswp_fad_archive_text_clinical_resource();
+$archive_text_clinical_resource = uamswp_fad_archive_text_clinical_resource();
+	$clinical_resource_archive_headline = $archive_text_clinical_resource['clinical_resource_archive_headline']; // string
+	$clinical_resource_archive_headline_attr = $archive_text_clinical_resource['clinical_resource_archive_headline_attr']; // string
+	$placeholder_clinical_resource_archive_headline = $archive_text_clinical_resource['placeholder_clinical_resource_archive_headline']; // string
 
 // // Get the page ID
 // $page_id = get_the_ID(); // int
