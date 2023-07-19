@@ -6,81 +6,81 @@
 // Get system settings for ontology item labels
 
 	// Get system settings for provider labels
-	$labels_provider = uamswp_fad_labels_provider();
-		$provider_single_name = $labels_provider['provider_single_name']; // string
-		$provider_single_name_attr = $labels_provider['provider_single_name_attr']; // string
-		$provider_plural_name = $labels_provider['provider_plural_name']; // string
-		$provider_plural_name_attr = $labels_provider['provider_plural_name_attr']; // string
-		$placeholder_provider_single_name = $labels_provider['placeholder_provider_single_name']; // string
-		$placeholder_provider_plural_name = $labels_provider['placeholder_provider_plural_name']; // string
-		$placeholder_provider_short_name = $labels_provider['placeholder_provider_short_name']; // string
-		$placeholder_provider_short_name_possessive = $labels_provider['placeholder_provider_short_name_possessive']; // string
+	$labels_provider_vars = uamswp_fad_labels_provider();
+		$provider_single_name = $labels_provider_vars['provider_single_name']; // string
+		$provider_single_name_attr = $labels_provider_vars['provider_single_name_attr']; // string
+		$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
+		$provider_plural_name_attr = $labels_provider_vars['provider_plural_name_attr']; // string
+		$placeholder_provider_single_name = $labels_provider_vars['placeholder_provider_single_name']; // string
+		$placeholder_provider_plural_name = $labels_provider_vars['placeholder_provider_plural_name']; // string
+		$placeholder_provider_short_name = $labels_provider_vars['placeholder_provider_short_name']; // string
+		$placeholder_provider_short_name_possessive = $labels_provider_vars['placeholder_provider_short_name_possessive']; // string
 
 	// Get system settings for location labels
-	$labels_location = uamswp_fad_labels_location();
-		$location_single_name = $labels_location['location_single_name']; // string
-		$location_single_name_attr = $labels_location['location_single_name_attr']; // string
-		$location_plural_name = $labels_location['location_plural_name']; // string
-		$location_plural_name_attr = $labels_location['location_plural_name_attr']; // string
-		$placeholder_location_single_name = $labels_location['placeholder_location_single_name']; // string
-		$placeholder_location_plural_name = $labels_location['placeholder_location_plural_name']; // string
-		$placeholder_location_page_title = $labels_location['placeholder_location_page_title']; // string
-		$placeholder_location_page_title_phrase = $labels_location['placeholder_location_page_title_phrase']; // string
+	$labels_location_vars = uamswp_fad_labels_location();
+		$location_single_name = $labels_location_vars['location_single_name']; // string
+		$location_single_name_attr = $labels_location_vars['location_single_name_attr']; // string
+		$location_plural_name = $labels_location_vars['location_plural_name']; // string
+		$location_plural_name_attr = $labels_location_vars['location_plural_name_attr']; // string
+		$placeholder_location_single_name = $labels_location_vars['placeholder_location_single_name']; // string
+		$placeholder_location_plural_name = $labels_location_vars['placeholder_location_plural_name']; // string
+		$placeholder_location_page_title = $labels_location_vars['placeholder_location_page_title']; // string
+		$placeholder_location_page_title_phrase = $labels_location_vars['placeholder_location_page_title_phrase']; // string
 
 	// Get system settings for area of expertise labels
-	$labels_expertise = uamswp_fad_labels_expertise();
-		$expertise_single_name = $labels_expertise['expertise_single_name']; // string
-		$expertise_single_name_attr = $labels_expertise['expertise_single_name_attr']; // string
-		$expertise_plural_name = $labels_expertise['expertise_plural_name']; // string
-		$expertise_plural_name_attr = $labels_expertise['expertise_plural_name_attr']; // string
-		$placeholder_expertise_single_name = $labels_expertise['placeholder_expertise_single_name']; // string
-		$placeholder_expertise_plural_name = $labels_expertise['placeholder_expertise_plural_name']; // string
-		$placeholder_expertise_page_title = $labels_expertise['placeholder_expertise_page_title']; // string
+	$labels_expertise_vars = uamswp_fad_labels_expertise();
+		$expertise_single_name = $labels_expertise_vars['expertise_single_name']; // string
+		$expertise_single_name_attr = $labels_expertise_vars['expertise_single_name_attr']; // string
+		$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
+		$expertise_plural_name_attr = $labels_expertise_vars['expertise_plural_name_attr']; // string
+		$placeholder_expertise_single_name = $labels_expertise_vars['placeholder_expertise_single_name']; // string
+		$placeholder_expertise_plural_name = $labels_expertise_vars['placeholder_expertise_plural_name']; // string
+		$placeholder_expertise_page_title = $labels_expertise_vars['placeholder_expertise_page_title']; // string
 
 	// Get system settings for area of expertise descendant item labels
-	$labels_expertise_descendant = uamswp_fad_labels_expertise_descendant();
-		$expertise_descendant_single_name = $labels_expertise_descendant['expertise_descendant_single_name']; // string
-		$expertise_descendant_single_name_attr = $labels_expertise_descendant['expertise_descendant_single_name_attr']; // string
-		$expertise_descendant_plural_name = $labels_expertise_descendant['expertise_descendant_plural_name']; // string
-		$expertise_descendant_plural_name_attr = $labels_expertise_descendant['expertise_descendant_plural_name_attr']; // string
-		$placeholder_expertise_descendant_single_name = $labels_expertise_descendant['placeholder_expertise_descendant_single_name']; // string
-		$placeholder_expertise_descendant_plural_name = $labels_expertise_descendant['placeholder_expertise_descendant_plural_name']; // string
+	$labels_expertise_descendant_vars = uamswp_fad_labels_expertise_descendant();
+		$expertise_descendant_single_name = $labels_expertise_descendant_vars['expertise_descendant_single_name']; // string
+		$expertise_descendant_single_name_attr = $labels_expertise_descendant_vars['expertise_descendant_single_name_attr']; // string
+		$expertise_descendant_plural_name = $labels_expertise_descendant_vars['expertise_descendant_plural_name']; // string
+		$expertise_descendant_plural_name_attr = $labels_expertise_descendant_vars['expertise_descendant_plural_name_attr']; // string
+		$placeholder_expertise_descendant_single_name = $labels_expertise_descendant_vars['placeholder_expertise_descendant_single_name']; // string
+		$placeholder_expertise_descendant_plural_name = $labels_expertise_descendant_vars['placeholder_expertise_descendant_plural_name']; // string
 
 	// Get system settings for clinical resource labels
-	$labels_clinical_resource = uamswp_fad_labels_clinical_resource();
-		$clinical_resource_single_name = $labels_clinical_resource['clinical_resource_single_name']; // string
-		$clinical_resource_single_name_attr = $labels_clinical_resource['clinical_resource_single_name_attr']; // string
-		$clinical_resource_plural_name = $labels_clinical_resource['clinical_resource_plural_name']; // string
-		$clinical_resource_plural_name_attr = $labels_clinical_resource['clinical_resource_plural_name_attr']; // string
-		$placeholder_clinical_resource_single_name = $labels_clinical_resource['placeholder_clinical_resource_single_name']; // string
-		$placeholder_clinical_resource_plural_name = $labels_clinical_resource['placeholder_clinical_resource_plural_name']; // string
+	$labels_clinical_resource_vars = uamswp_fad_labels_clinical_resource();
+		$clinical_resource_single_name = $labels_clinical_resource_vars['clinical_resource_single_name']; // string
+		$clinical_resource_single_name_attr = $labels_clinical_resource_vars['clinical_resource_single_name_attr']; // string
+		$clinical_resource_plural_name = $labels_clinical_resource_vars['clinical_resource_plural_name']; // string
+		$clinical_resource_plural_name_attr = $labels_clinical_resource_vars['clinical_resource_plural_name_attr']; // string
+		$placeholder_clinical_resource_single_name = $labels_clinical_resource_vars['placeholder_clinical_resource_single_name']; // string
+		$placeholder_clinical_resource_plural_name = $labels_clinical_resource_vars['placeholder_clinical_resource_plural_name']; // string
 
 	// Get system settings for combined condition and treatment labels
-	$labels_condition_treatment = uamswp_fad_labels_condition_treatment();
-		$condition_treatment_single_name = $labels_condition_treatment['condition_treatment_single_name']; // string
-		$condition_treatment_single_name_attr = $labels_condition_treatment['condition_treatment_single_name_attr']; // string
-		$condition_treatment_plural_name = $labels_condition_treatment['condition_treatment_plural_name']; // string
-		$condition_treatment_plural_name_attr = $labels_condition_treatment['condition_treatment_plural_name_attr']; // string
-		$placeholder_condition_treatment_single_name = $labels_condition_treatment['placeholder_condition_treatment_single_name']; // string
-		$placeholder_condition_treatment_plural_name = $labels_condition_treatment['placeholder_condition_treatment_plural_name']; // string
+	$labels_condition_treatment_vars = uamswp_fad_labels_condition_treatment();
+		$condition_treatment_single_name = $labels_condition_treatment_vars['condition_treatment_single_name']; // string
+		$condition_treatment_single_name_attr = $labels_condition_treatment_vars['condition_treatment_single_name_attr']; // string
+		$condition_treatment_plural_name = $labels_condition_treatment_vars['condition_treatment_plural_name']; // string
+		$condition_treatment_plural_name_attr = $labels_condition_treatment_vars['condition_treatment_plural_name_attr']; // string
+		$placeholder_condition_treatment_single_name = $labels_condition_treatment_vars['placeholder_condition_treatment_single_name']; // string
+		$placeholder_condition_treatment_plural_name = $labels_condition_treatment_vars['placeholder_condition_treatment_plural_name']; // string
 
 	// Get system settings for condition labels
-	$labels_condition = uamswp_fad_labels_condition();
-		$condition_single_name = $labels_condition['condition_single_name']; // string
-		$condition_single_name_attr = $labels_condition['condition_single_name_attr']; // string
-		$condition_plural_name = $labels_condition['condition_plural_name']; // string
-		$condition_plural_name_attr = $labels_condition['condition_plural_name_attr']; // string
-		$placeholder_condition_single_name = $labels_condition['placeholder_condition_single_name']; // string
-		$placeholder_condition_plural_name = $labels_condition['placeholder_condition_plural_name']; // string
+	$labels_condition_vars = uamswp_fad_labels_condition();
+		$condition_single_name = $labels_condition_vars['condition_single_name']; // string
+		$condition_single_name_attr = $labels_condition_vars['condition_single_name_attr']; // string
+		$condition_plural_name = $labels_condition_vars['condition_plural_name']; // string
+		$condition_plural_name_attr = $labels_condition_vars['condition_plural_name_attr']; // string
+		$placeholder_condition_single_name = $labels_condition_vars['placeholder_condition_single_name']; // string
+		$placeholder_condition_plural_name = $labels_condition_vars['placeholder_condition_plural_name']; // string
 
 	// Get system settings for treatment labels
-	$labels_treatment = uamswp_fad_labels_treatment();
-		$treatment_single_name = $labels_treatment['treatment_single_name']; // string
-		$treatment_single_name_attr = $labels_treatment['treatment_single_name_attr']; // string
-		$treatment_plural_name = $labels_treatment['treatment_plural_name']; // string
-		$treatment_plural_name_attr = $labels_treatment['treatment_plural_name_attr']; // string
-		$placeholder_treatment_single_name = $labels_treatment['placeholder_treatment_single_name']; // string
-		$placeholder_treatment_plural_name = $labels_treatment['placeholder_treatment_plural_name']; // string
+	$labels_treatment_vars = uamswp_fad_labels_treatment();
+		$treatment_single_name = $labels_treatment_vars['treatment_single_name']; // string
+		$treatment_single_name_attr = $labels_treatment_vars['treatment_single_name_attr']; // string
+		$treatment_plural_name = $labels_treatment_vars['treatment_plural_name']; // string
+		$treatment_plural_name_attr = $labels_treatment_vars['treatment_plural_name_attr']; // string
+		$placeholder_treatment_single_name = $labels_treatment_vars['placeholder_treatment_single_name']; // string
+		$placeholder_treatment_plural_name = $labels_treatment_vars['placeholder_treatment_plural_name']; // string
 
 // Get the page ID for the 'parent' area of expertise
 $page_id = get_the_ID();
@@ -107,13 +107,13 @@ uamswp_fad_fpage_image_expertise();
 
 // Get the featured image / post thumbnail
 $page_image_id = $clinical_resource_fpage_featured_image_expertise; // Image ID
-$meta_image_resize = uamswp_meta_image_resize( $page_image_id );
-	$meta_og_image = $meta_image_resize['meta_og_image']; // string
-	$meta_og_image_width = $meta_image_resize['meta_og_image_width']; // int
-	$meta_og_image_height = $meta_image_resize['meta_og_image_height']; // int
-	$meta_twitter_image = $meta_image_resize['meta_twitter_image']; // string
-	$meta_twitter_image_width = $meta_image_resize['meta_twitter_image_width']; // int
-	$meta_twitter_image_height = $meta_image_resize['meta_twitter_image_height']; // int
+$meta_image_resize_vars = uamswp_meta_image_resize( $page_image_id );
+	$meta_og_image = $meta_image_resize_vars['meta_og_image']; // string
+	$meta_og_image_width = $meta_image_resize_vars['meta_og_image_width']; // int
+	$meta_og_image_height = $meta_image_resize_vars['meta_og_image_height']; // int
+	$meta_twitter_image = $meta_image_resize_vars['meta_twitter_image']; // string
+	$meta_twitter_image_width = $meta_image_resize_vars['meta_twitter_image_width']; // int
+	$meta_twitter_image_height = $meta_image_resize_vars['meta_twitter_image_height']; // int
 
 // Set general variables for fake subpage
 $fpage_name = $clinical_resource_plural_name; // Name of ontology item type represented by this fake subpage
@@ -126,23 +126,23 @@ $fpage_intro = $clinical_resource_fpage_intro_expertise; // Fake subpage intro t
 $fpage_intro_attr = uamswp_attr_conversion($fpage_intro); // Attribute-friendly version of fake subpage intro text
 
 // Get site header and site nav values for ontology subsections
-$ontology_site_values = uamswp_fad_ontology_site_values();
-	$site_nav_id = $ontology_site_values['site_nav_id']; // int
-	$navbar_subbrand_title = $ontology_site_values['navbar_subbrand']['title']['name']; // string
-	$navbar_subbrand_title_attr = $ontology_site_values['navbar_subbrand']['title']['attr']; // string
-	$navbar_subbrand_title_url = $ontology_site_values['navbar_subbrand']['title']['url']; // string
-	$navbar_subbrand_parent = $ontology_site_values['navbar_subbrand']['parent']['name']; // string
-	$navbar_subbrand_parent_attr = $ontology_site_values['navbar_subbrand']['parent']['attr']; // string
-	$navbar_subbrand_parent_url = $ontology_site_values['navbar_subbrand']['parent']['url']; // string
-	$providers = $ontology_site_values['providers']; // int[]
-	$locations = $ontology_site_values['locations']; // int[]
-	$expertises = $ontology_site_values['expertises']; // int[]
-	$expertise_descendants = $ontology_site_values['expertise_descendants'];
-	$clinical_resources = $ontology_site_values['clinical_resources']; // int[]
-	$conditions_cpt = $ontology_site_values['conditions_cpt']; // int[]
-	$treatments_cpt = $ontology_site_values['treatments_cpt']; // int[]
-	$ancestors_ontology_farthest = $ontology_site_values['ancestors_ontology_farthest'];
-	$page_top_level_query = $ontology_site_values['page_top_level_query']; // bool
+$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+	$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
+	$navbar_subbrand_title = $ontology_site_values_vars['navbar_subbrand']['title']['name']; // string
+	$navbar_subbrand_title_attr = $ontology_site_values_vars['navbar_subbrand']['title']['attr']; // string
+	$navbar_subbrand_title_url = $ontology_site_values_vars['navbar_subbrand']['title']['url']; // string
+	$navbar_subbrand_parent = $ontology_site_values_vars['navbar_subbrand']['parent']['name']; // string
+	$navbar_subbrand_parent_attr = $ontology_site_values_vars['navbar_subbrand']['parent']['attr']; // string
+	$navbar_subbrand_parent_url = $ontology_site_values_vars['navbar_subbrand']['parent']['url']; // string
+	$providers = $ontology_site_values_vars['providers']; // int[]
+	$locations = $ontology_site_values_vars['locations']; // int[]
+	$expertises = $ontology_site_values_vars['expertises']; // int[]
+	$expertise_descendants = $ontology_site_values_vars['expertise_descendants'];
+	$clinical_resources = $ontology_site_values_vars['clinical_resources']; // int[]
+	$conditions_cpt = $ontology_site_values_vars['conditions_cpt']; // int[]
+	$treatments_cpt = $ontology_site_values_vars['treatments_cpt']; // int[]
+	$ancestors_ontology_farthest = $ontology_site_values_vars['ancestors_ontology_farthest'];
+	$page_top_level_query = $ontology_site_values_vars['page_top_level_query']; // bool
 
 // Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
 
@@ -150,48 +150,48 @@ $ontology_site_values = uamswp_fad_ontology_site_values();
 	uamswp_fad_provider_query( $providers );
 
 	// Query for whether related locations content section should be displayed on ontology pages/subsections
-	$location_query_function = uamswp_fad_location_query( $locations );
-		$location_query = $location_query_function['location_query']; // WP_Post[]
-		$location_section_show = $location_query_function['location_section_show']; // bool
-		$location_ids = $location_query_function['location_ids']; // int[]
-		$location_count = $location_query_function['location_count']; // int
-		$location_valid = $location_query_function['location_valid']; // bool
+	$location_query_vars = uamswp_fad_location_query( $locations );
+		$location_query = $location_query_vars['location_query']; // WP_Post[]
+		$location_section_show = $location_query_vars['location_section_show']; // bool
+		$location_ids = $location_query_vars['location_ids']; // int[]
+		$location_count = $location_query_vars['location_count']; // int
+		$location_valid = $location_query_vars['location_valid']; // bool
 
 	// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
 	uamswp_fad_expertise_descendant_query();
 
 	// Query for whether related ontology items (of the same post type) content section should be displayed on ontology pages/subsections
-	$expertise_query_function = uamswp_fad_expertise_query( $expertises );
-		$expertise_query = $expertise_query_function['expertise_query']; // WP_Post[]
-		$expertise_section_show = $expertise_query_function['expertise_section_show']; // bool
-		$expertise_ids = $expertise_query_function['expertise_ids']; // int[]
-		$expertise_count = $expertise_query_function['expertise_count']; // int
+	$expertise_query_vars = uamswp_fad_expertise_query( $expertises );
+		$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
+		$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
+		$expertise_ids = $expertise_query_vars['expertise_ids']; // int[]
+		$expertise_count = $expertise_query_vars['expertise_count']; // int
 
 	// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
 	$clinical_resource_postsPerPage = -1; // Maximum number of clinical resources displayed in the section (-1, 4, 6, 8, 10, 12) // int (default: 4)
-	$clinical_resource_query_function = uamswp_fad_clinical_resource_query( $clinical_resources );
-		$clinical_resource_query = $clinical_resource_query_function['clinical_resource_query']; // WP_Post[]
-		$clinical_resource_section_show = $clinical_resource_query_function['clinical_resource_section_show']; // bool
-		$clinical_resource_ids = $clinical_resource_query_function['clinical_resource_ids']; // int[]
-		$clinical_resource_count = $clinical_resource_query_function['clinical_resource_count']; // int
+	$clinical_resource_query_vars = uamswp_fad_clinical_resource_query( $clinical_resources );
+		$clinical_resource_query = $clinical_resource_query_vars['clinical_resource_query']; // WP_Post[]
+		$clinical_resource_section_show = $clinical_resource_query_vars['clinical_resource_section_show']; // bool
+		$clinical_resource_ids = $clinical_resource_query_vars['clinical_resource_ids']; // int[]
+		$clinical_resource_count = $clinical_resource_query_vars['clinical_resource_count']; // int
 
 	// Query for whether related conditions content section should be displayed on ontology pages/subsections
-	$condition_query_function = uamswp_fad_condition_query( $conditions_cpt );
-		$condition_cpt_query = $condition_query_function['condition_cpt_query']; // WP_Post[]
-		$condition_section_show = $condition_query_function['condition_section_show']; // bool
-		$condition_treatment_section_show = $condition_query_function['condition_treatment_section_show']; // bool
-		$condition_ids = $condition_query_function['condition_ids']; // int[]
-		$condition_count = $condition_query_function['condition_count']; // int
-		$condition_treatment_schema = $condition_query_function['condition_treatment_schema']; // string
+	$condition_query_vars = uamswp_fad_condition_query( $conditions_cpt );
+		$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
+		$condition_section_show = $condition_query_vars['condition_section_show']; // bool
+		$condition_treatment_section_show = $condition_query_vars['condition_treatment_section_show']; // bool
+		$condition_ids = $condition_query_vars['condition_ids']; // int[]
+		$condition_count = $condition_query_vars['condition_count']; // int
+		$condition_treatment_schema = $condition_query_vars['condition_treatment_schema']; // string
 
 	// Query for whether related treatments content section should be displayed on ontology pages/subsections
-	$treatment_query_function = uamswp_fad_treatment_query( $treatments_cpt );
-		$treatment_cpt_query = $treatment_query_function['treatment_cpt_query']; // WP_Post[]
-		$treatment_section_show = $treatment_query_function['treatment_section_show']; // bool
-		$condition_treatment_section_show = $treatment_query_function['condition_treatment_section_show']; // bool
-		$treatment_ids = $treatment_query_function['treatment_ids']; // int[]
-		$treatment_count = $treatment_query_function['treatment_count']; // int
-		$condition_treatment_schema = $treatment_query_function['condition_treatment_schema']; // string
+	$treatment_query_vars = uamswp_fad_treatment_query( $treatments_cpt );
+		$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
+		$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
+		$condition_treatment_section_show = $treatment_query_vars['condition_treatment_section_show']; // bool
+		$treatment_ids = $treatment_query_vars['treatment_ids']; // int[]
+		$treatment_count = $treatment_query_vars['treatment_count']; // int
+		$condition_treatment_schema = $treatment_query_vars['condition_treatment_schema']; // string
 
 // Override theme's method of defining the meta page title
 $meta_title_base_addition = $fpage_name_attr; // Word or phrase to use to form base meta title

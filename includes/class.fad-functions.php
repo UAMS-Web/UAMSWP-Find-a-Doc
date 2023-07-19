@@ -1010,10 +1010,10 @@ function location_ajax_filter_callback() {
 
 	// Bring in variables from outside of the function
 
-		$labels_location = uamswp_fad_labels_location();
-			$location_single_name = $labels_location['location_single_name']; // string
-			$location_single_name_attr = $labels_location['location_single_name_attr']; // string
-			$location_plural_name = $labels_location['location_plural_name']; // string
+		$labels_location_vars = uamswp_fad_labels_location();
+			$location_single_name = $labels_location_vars['location_single_name']; // string
+			$location_single_name_attr = $labels_location_vars['location_single_name_attr']; // string
+			$location_plural_name = $labels_location_vars['location_plural_name']; // string
 
 	$tax_query = array();
 
@@ -1268,10 +1268,10 @@ function uamswp_fad_ontology_hide() {
 
 	// Create and return an array to be used on the templates and template parts
 
-		$ontology_hide = array(
+		$ontology_hide_vars = array(
 			'hide_medical_ontology'	=> $hide_medical_ontology // bool
 		);
-		return $ontology_hide;
+		return $ontology_hide_vars;
 
 }
 
@@ -1417,7 +1417,7 @@ function uamswp_fad_ontology_site_values() {
 
 	// Create and return an array to be used on the templates and template parts
 
-		$ontology_site_values = array(
+		$ontology_site_values_vars = array(
 			'site_nav_id'					=> $site_nav_id, // int
 			'navbar_subbrand'				=> array (
 				'title'		=> array(
@@ -1441,7 +1441,7 @@ function uamswp_fad_ontology_site_values() {
 			'ancestors_ontology_farthest'	=> $ancestors_ontology_farthest,
 			'page_top_level_query'			=> $page_top_level_query // bool
 		);
-		return $ontology_site_values;
+		return $ontology_site_values_vars;
 
 }
 
@@ -1529,9 +1529,9 @@ function uamswp_fad_post_title() {
 				global $jump_link_count;
 
 			if ( !isset($providers) ) {
-				$ontology_site_values = uamswp_fad_ontology_site_values();
-					// $site_nav_id = $ontology_site_values['site_nav_id']; // int
-					$providers = $ontology_site_values['providers'];
+				$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+					// $site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
+					$providers = $ontology_site_values_vars['providers'];
 			}
 
 		// Make variables available outside of the function
@@ -1568,13 +1568,13 @@ function uamswp_fad_post_title() {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$provider_query_function = array(
+			$provider_query_vars = array(
 				'provider_query'		=> $provider_query, // WP_Post[]
 				'provider_section_show'	=> $provider_section_show, // bool
 				'provider_ids'			=> $provider_ids,
 				'provider_count'		=> $provider_count // integer
 			);
-			return $provider_query_function;
+			return $provider_query_vars;
 
 	}
 
@@ -1588,8 +1588,8 @@ function uamswp_fad_post_title() {
 				global $jump_link_count;
 
 			if ( !isset($locations) ) {
-				$ontology_site_values = uamswp_fad_ontology_site_values();
-					$locations = $ontology_site_values['locations']; // int[]
+				$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+					$locations = $ontology_site_values_vars['locations']; // int[]
 			}
 
 		$location_valid = false;
@@ -1630,14 +1630,14 @@ function uamswp_fad_post_title() {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$location_query_function = array(
+			$location_query_vars = array(
 				'location_query'		=> $location_query, // WP_Post[]
 				'location_section_show'	=> $location_section_show, // bool
 				'location_ids'			=> $location_ids, // int[]
 				'location_count'		=> $location_count, // int
 				'location_valid'		=> $location_valid // bool
 			);
-			return $location_query_function;
+			return $location_query_vars;
 
 	}
 
@@ -1652,8 +1652,8 @@ function uamswp_fad_post_title() {
 			// 	$jump_link_count // int
 
 			if ( !isset($location_descendants) ) {
-				$ontology_site_values = uamswp_fad_ontology_site_values();
-					$location_descendants = $ontology_site_values['location_descendants']; // int[] // Value of the related locations input
+				$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+					$location_descendants = $ontology_site_values_vars['location_descendants']; // int[] // Value of the related locations input
 			}
 
 		$location_descendant_valid = false;
@@ -1704,7 +1704,7 @@ function uamswp_fad_post_title() {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$location_descendant_query_function = array(
+			$location_descendant_query_vars = array(
 				'location_descendant_query'			=> $location_descendant_query, // WP_Post[]
 				'location_descendant_section_show'	=> $location_descendant_section_show, // bool
 				'location_descendant_ids'			=> $location_descendant_ids, // int[]
@@ -1712,7 +1712,7 @@ function uamswp_fad_post_title() {
 				'location_descendant_valid'			=> $location_descendant_valid, // bool
 				'jump_link_count'					=> $jump_link_count // int
 			);
-			return $location_descendant_query_function;
+			return $location_descendant_query_vars;
 
 	}
 
@@ -1726,9 +1726,9 @@ function uamswp_fad_post_title() {
 				global $page_id;
 				global $jump_link_count;
 
-			$ontology_site_values = uamswp_fad_ontology_site_values();
-				$site_nav_id = $ontology_site_values['site_nav_id']; // int
-				$expertise_descendants = $ontology_site_values['expertise_descendants'];
+			$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+				$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
+				$expertise_descendants = $ontology_site_values_vars['expertise_descendants'];
 
 		// Make variables available outside of the function
 
@@ -1825,7 +1825,7 @@ function uamswp_fad_post_title() {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$expertise_descendant_query_function = array(
+			$expertise_descendant_query_vars = array(
 				'expertise_descendant_query'		=> $expertise_descendant_query, // WP_Post[]
 				'expertise_descendant_section_show'	=> $expertise_descendant_section_show, // bool
 				'expertise_descendant_ids'			=> $expertise_descendant_ids, // int[]
@@ -1836,7 +1836,7 @@ function uamswp_fad_post_title() {
 				'expertise_content_count'			=> $expertise_content_count, // int
 				'expertise_content_nav'				=> $expertise_content_nav // string
 			);
-			return $expertise_descendant_query_function;
+			return $expertise_descendant_query_vars;
 
 	}
 
@@ -1850,8 +1850,8 @@ function uamswp_fad_post_title() {
 				global $jump_link_count;
 
 			if ( !isset($expertises) ) {
-				$ontology_site_values = uamswp_fad_ontology_site_values();
-					$expertises = $ontology_site_values['expertises']; // int[]
+				$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+					$expertises = $ontology_site_values_vars['expertises']; // int[]
 			}
 
 		$args = array(
@@ -1874,13 +1874,13 @@ function uamswp_fad_post_title() {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$expertise_query_function = array(
+			$expertise_query_vars = array(
 				'expertise_query'			=> $expertise_query, // WP_Post[]
 				'expertise_section_show'	=> $expertise_section_show, // bool
 				'expertise_ids'				=> $expertise_ids, // int[]
 				'expertise_count'			=> $expertise_count // int
 			);
-			return $expertise_query_function;
+			return $expertise_query_vars;
 
 	}
 
@@ -1895,8 +1895,8 @@ function uamswp_fad_post_title() {
 				global $clinical_resource_postsPerPage; // Maximum number of clinical resources displayed in the section (-1, 4, 6, 8, 10, 12) // int (default: 4)
 
 			if ( !isset($clinical_resources) ) {
-				$ontology_site_values = uamswp_fad_ontology_site_values();
-					$clinical_resources = $ontology_site_values['clinical_resources']; // int[] // Value of the related clinical resources input
+				$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+					$clinical_resources = $ontology_site_values_vars['clinical_resources']; // int[] // Value of the related clinical resources input
 			}
 
 		// Check/define variables
@@ -1924,13 +1924,13 @@ function uamswp_fad_post_title() {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$clinical_resource_query_function = array(
+			$clinical_resource_query_vars = array(
 				'clinical_resource_query'			=> $clinical_resource_query, // WP_Post[]
 				'clinical_resource_section_show'	=> $clinical_resource_section_show, // bool
 				'clinical_resource_ids'				=> $clinical_resource_ids, // int[]
 				'clinical_resource_count'			=> $clinical_resource_count // int
 			);
-			return $clinical_resource_query_function;
+			return $clinical_resource_query_vars;
 
 	}
 
@@ -1945,8 +1945,8 @@ function uamswp_fad_post_title() {
 				global $ontology_type;
 
 			if ( !isset($conditions_cpt) ) {
-				$ontology_site_values = uamswp_fad_ontology_site_values();
-					$conditions_cpt = $ontology_site_values['conditions_cpt']; // int[] // Value of the related conditions input
+				$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+					$conditions_cpt = $ontology_site_values_vars['conditions_cpt']; // int[] // Value of the related conditions input
 			}
 
 		// Conditions CPT
@@ -1973,7 +1973,7 @@ function uamswp_fad_post_title() {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$condition_query_function = array(
+			$condition_query_vars = array(
 				'condition_cpt_query'				=> $condition_cpt_query, // WP_Post[]
 				'condition_section_show'			=> $condition_section_show, // bool
 				'condition_treatment_section_show'	=> $condition_treatment_section_show, // bool
@@ -1981,7 +1981,7 @@ function uamswp_fad_post_title() {
 				'condition_count'					=> $condition_count, // int
 				'condition_treatment_schema'		=> $condition_treatment_schema // string
 			);
-			return $condition_query_function;
+			return $condition_query_vars;
 
 	}
 
@@ -1996,8 +1996,8 @@ function uamswp_fad_post_title() {
 				global $ontology_type;
 
 			if ( !isset($treatments_cpt) ) {
-				$ontology_site_values = uamswp_fad_ontology_site_values();
-					$treatments_cpt = $ontology_site_values['treatments_cpt']; // int[] // Value of the related treatments input
+				$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+					$treatments_cpt = $ontology_site_values_vars['treatments_cpt']; // int[] // Value of the related treatments input
 			}
 
 		// Treatments CPT
@@ -2024,7 +2024,7 @@ function uamswp_fad_post_title() {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$treatment_query_function = array(
+			$treatment_query_vars = array(
 				'treatment_cpt_query'				=> $treatment_cpt_query, // WP_Post[]
 				'treatment_section_show'			=> $treatment_section_show, // bool
 				'condition_treatment_section_show'	=> $condition_treatment_section_show, // bool
@@ -2032,7 +2032,7 @@ function uamswp_fad_post_title() {
 				'treatment_count'					=> $treatment_count, // int
 				'condition_treatment_schema'		=> $condition_treatment_schema // string
 			);
-			return $treatment_query_function;
+			return $treatment_query_vars;
 
 	}
 
@@ -2041,50 +2041,50 @@ function uamswp_fad_ontology_nav_menu() {
 
 	// Bring in variables from outside of the function
 
-		$ontology_site_values = uamswp_fad_ontology_site_values();
-			$site_nav_id = $ontology_site_values['site_nav_id']; // int
-			$providers = $ontology_site_values['providers']; // int[]
-			$locations = $ontology_site_values['locations']; // int[]
-			$expertises = $ontology_site_values['expertises']; // int[]
-			$expertise_descendants = $ontology_site_values['expertise_descendants'];
-			$clinical_resources = $ontology_site_values['clinical_resources']; // int[]
+		$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+			$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
+			$providers = $ontology_site_values_vars['providers']; // int[]
+			$locations = $ontology_site_values_vars['locations']; // int[]
+			$expertises = $ontology_site_values_vars['expertises']; // int[]
+			$expertise_descendants = $ontology_site_values_vars['expertise_descendants'];
+			$clinical_resources = $ontology_site_values_vars['clinical_resources']; // int[]
 
-		$provider_query_function = uamswp_fad_provider_query( $providers );
-			$provider_section_show = $provider_query_function['provider_section_show']; // bool
+		$provider_query_vars = uamswp_fad_provider_query( $providers );
+			$provider_section_show = $provider_query_vars['provider_section_show']; // bool
 
-		$location_query_function = uamswp_fad_location_query( $locations );
-			$location_section_show = $location_query_function['location_section_show']; // bool
+		$location_query_vars = uamswp_fad_location_query( $locations );
+			$location_section_show = $location_query_vars['location_section_show']; // bool
 
-		$expertise_query_function = uamswp_fad_expertise_query( $expertises );
-			$expertise_section_show = $expertise_query_function['expertise_section_show']; // bool
+		$expertise_query_vars = uamswp_fad_expertise_query( $expertises );
+			$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
 
-		$clinical_resource_query_function = uamswp_fad_clinical_resource_query( $clinical_resources );
-			$clinical_resource_section_show = $clinical_resource_query_function['clinical_resource_section_show']; // bool
+		$clinical_resource_query_vars = uamswp_fad_clinical_resource_query( $clinical_resources );
+			$clinical_resource_section_show = $clinical_resource_query_vars['clinical_resource_section_show']; // bool
 
-		$expertise_descendant_query_function = uamswp_fad_expertise_descendant_query( $expertise_descendants );
-			$expertise_descendant_section_show = $expertise_descendant_query_function['expertise_descendant_section_show']; // bool
-			$expertise_content_nav_show = $expertise_descendant_query_function['expertise_content_nav_show']; // bool
-			$expertise_content_nav = $expertise_descendant_query_function['expertise_content_nav']; // string
+		$expertise_descendant_query_vars = uamswp_fad_expertise_descendant_query( $expertise_descendants );
+			$expertise_descendant_section_show = $expertise_descendant_query_vars['expertise_descendant_section_show']; // bool
+			$expertise_content_nav_show = $expertise_descendant_query_vars['expertise_content_nav_show']; // bool
+			$expertise_content_nav = $expertise_descendant_query_vars['expertise_content_nav']; // string
 
-		$labels_provider = uamswp_fad_labels_provider();
-			$provider_plural_name = $labels_provider['provider_plural_name']; // string
-			$provider_plural_name_attr = $labels_provider['provider_plural_name_attr']; // string
+		$labels_provider_vars = uamswp_fad_labels_provider();
+			$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
+			$provider_plural_name_attr = $labels_provider_vars['provider_plural_name_attr']; // string
 
-		$labels_location = uamswp_fad_labels_location();
-			$location_plural_name = $labels_location['location_plural_name']; // string
-			$location_plural_name_attr = $labels_location['location_plural_name_attr']; // string
+		$labels_location_vars = uamswp_fad_labels_location();
+			$location_plural_name = $labels_location_vars['location_plural_name']; // string
+			$location_plural_name_attr = $labels_location_vars['location_plural_name_attr']; // string
 
-		$labels_expertise = uamswp_fad_labels_expertise();
-			$expertise_plural_name = $labels_expertise['expertise_plural_name']; // string
-			$expertise_plural_name_attr = $labels_expertise['expertise_plural_name_attr']; // string
+		$labels_expertise_vars = uamswp_fad_labels_expertise();
+			$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
+			$expertise_plural_name_attr = $labels_expertise_vars['expertise_plural_name_attr']; // string
 
-		$labels_expertise_descendant = uamswp_fad_labels_expertise_descendant();
-			$expertise_descendant_plural_name = $labels_expertise_descendant['expertise_descendant_plural_name']; // string
-			$expertise_descendant_plural_name_attr = $labels_expertise_descendant['expertise_descendant_plural_name_attr']; // string
+		$labels_expertise_descendant_vars = uamswp_fad_labels_expertise_descendant();
+			$expertise_descendant_plural_name = $labels_expertise_descendant_vars['expertise_descendant_plural_name']; // string
+			$expertise_descendant_plural_name_attr = $labels_expertise_descendant_vars['expertise_descendant_plural_name_attr']; // string
 
-		$labels_clinical_resource = uamswp_fad_labels_clinical_resource();
-			$clinical_resource_plural_name = $labels_clinical_resource['clinical_resource_plural_name']; // string
-			$clinical_resource_plural_name_attr = $labels_clinical_resource['clinical_resource_plural_name_attr']; // string
+		$labels_clinical_resource_vars = uamswp_fad_labels_clinical_resource();
+			$clinical_resource_plural_name = $labels_clinical_resource_vars['clinical_resource_plural_name']; // string
+			$clinical_resource_plural_name_attr = $labels_clinical_resource_vars['clinical_resource_plural_name_attr']; // string
 
 	include( UAMS_FAD_PATH . '/templates/parts/single-expertise-nav.php');
 }
@@ -2094,11 +2094,11 @@ function uamswp_fad_ontology_header() {
 
 	// Bring in variables from outside of the function
 
-		$ontology_site_values = uamswp_fad_ontology_site_values();
-			$navbar_subbrand_title = $ontology_site_values['navbar_subbrand']['title']['name']; // string
-			$navbar_subbrand_title_url = $ontology_site_values['navbar_subbrand']['title']['url']; // string
-			$navbar_subbrand_parent = $ontology_site_values['navbar_subbrand']['parent']['name']; // string
-			$navbar_subbrand_parent_url = $ontology_site_values['navbar_subbrand']['parent']['url']; // string
+		$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+			$navbar_subbrand_title = $ontology_site_values_vars['navbar_subbrand']['title']['name']; // string
+			$navbar_subbrand_title_url = $ontology_site_values_vars['navbar_subbrand']['title']['url']; // string
+			$navbar_subbrand_parent = $ontology_site_values_vars['navbar_subbrand']['parent']['name']; // string
+			$navbar_subbrand_parent_url = $ontology_site_values_vars['navbar_subbrand']['parent']['url']; // string
 
 	include( UAMS_FAD_PATH . '/templates/parts/single-expertise-header.php');
 
@@ -2133,8 +2133,8 @@ function uamswp_fad_ontology_appointment() {
 
 	// Bring in variables from outside of the function
 
-		$labels_location = uamswp_fad_labels_location();
-			$location_single_name = $labels_location['location_single_name']; // string
+		$labels_location_vars = uamswp_fad_labels_location();
+			$location_single_name = $labels_location_vars['location_single_name']; // string
 		
 		// Typically defined on the template
 	
@@ -2215,11 +2215,11 @@ function uamswp_fad_podcast_query( $podcast_name, $jump_link_count = 0 ) {
 
 	// Create and return an array to be used on the templates and template parts
 
-		$podcast_query_function = array(
+		$podcast_query_vars = array(
 			'podcast_section_show'	=> $podcast_section_show, // bool
 			'jump_link_count'		=> $jump_link_count // int
 		);
-		return $podcast_query_function;
+		return $podcast_query_vars;
 
 }
 
@@ -2234,8 +2234,8 @@ function uamswp_fad_podcast( $podcast_name, $podcast_section_show, $podcast_filt
 		// 	$podcast_filter // string // Expected values: 'tag' or 'doctor'
 		// 	$podcast_subject // string
 
-		$labels_provider = uamswp_fad_labels_provider();
-			$provider_plural_name = $labels_provider['provider_plural_name']; // string
+		$labels_provider_vars = uamswp_fad_labels_provider();
+			$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
 
 	if ( $podcast_section_show ) {
 		if ( $podcast_filter == 'tag' ) {
@@ -2300,100 +2300,100 @@ function uamswp_fad_fpage_text_replace($string) {
 			global $short_name;
 			global $short_name_possessive;
 
-		$labels_provider = uamswp_fad_labels_provider();
-			$provider_single_name = $labels_provider['provider_single_name']; // string
-			$provider_plural_name = $labels_provider['provider_plural_name']; // string
-			$placeholder_provider_single_name = $labels_provider['placeholder_provider_single_name']; // string
-			$placeholder_provider_plural_name = $labels_provider['placeholder_provider_plural_name']; // string
-			$placeholder_provider_short_name = $labels_provider['placeholder_provider_short_name']; // string
-			$placeholder_provider_short_name_possessive = $labels_provider['placeholder_provider_short_name_possessive']; // string
+		$labels_provider_vars = uamswp_fad_labels_provider();
+			$provider_single_name = $labels_provider_vars['provider_single_name']; // string
+			$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
+			$placeholder_provider_single_name = $labels_provider_vars['placeholder_provider_single_name']; // string
+			$placeholder_provider_plural_name = $labels_provider_vars['placeholder_provider_plural_name']; // string
+			$placeholder_provider_short_name = $labels_provider_vars['placeholder_provider_short_name']; // string
+			$placeholder_provider_short_name_possessive = $labels_provider_vars['placeholder_provider_short_name_possessive']; // string
 
-		$archive_text_provider = uamswp_fad_archive_text_provider();
-			$provider_archive_headline = $archive_text_provider['provider_archive_headline']; // string
-			$placeholder_provider_archive_headline = $archive_text_provider['placeholder_provider_archive_headline']; // string
+		$archive_text_provider_vars = uamswp_fad_archive_text_provider();
+			$provider_archive_headline = $archive_text_provider_vars['provider_archive_headline']; // string
+			$placeholder_provider_archive_headline = $archive_text_provider_vars['placeholder_provider_archive_headline']; // string
 
-		$labels_location = uamswp_fad_labels_location();
-			$location_single_name = $labels_location['location_single_name']; // string
-			$location_plural_name = $labels_location['location_plural_name']; // string
-			$placeholder_location_single_name = $labels_location['placeholder_location_single_name']; // string
-			$placeholder_location_plural_name = $labels_location['placeholder_location_plural_name']; // string
-			$placeholder_location_page_title = $labels_location['placeholder_location_page_title']; // string
-			$placeholder_location_page_title_phrase = $labels_location['placeholder_location_page_title_phrase']; // string
+		$labels_location_vars = uamswp_fad_labels_location();
+			$location_single_name = $labels_location_vars['location_single_name']; // string
+			$location_plural_name = $labels_location_vars['location_plural_name']; // string
+			$placeholder_location_single_name = $labels_location_vars['placeholder_location_single_name']; // string
+			$placeholder_location_plural_name = $labels_location_vars['placeholder_location_plural_name']; // string
+			$placeholder_location_page_title = $labels_location_vars['placeholder_location_page_title']; // string
+			$placeholder_location_page_title_phrase = $labels_location_vars['placeholder_location_page_title_phrase']; // string
 
-		$labels_location_descendant = uamswp_fad_labels_location_descendant();
-			$location_descendant_single_name = $labels_location_descendant['location_descendant_single_name']; // string
-			$location_descendant_plural_name = $labels_location_descendant['location_descendant_plural_name']; // string
-			$placeholder_location_descendant_single_name = $labels_location_descendant['placeholder_location_descendant_single_name']; // string
-			$placeholder_location_descendant_plural_name = $labels_location_descendant['placeholder_location_descendant_plural_name']; // string
+		$labels_location_descendant_vars = uamswp_fad_labels_location_descendant();
+			$location_descendant_single_name = $labels_location_descendant_vars['location_descendant_single_name']; // string
+			$location_descendant_plural_name = $labels_location_descendant_vars['location_descendant_plural_name']; // string
+			$placeholder_location_descendant_single_name = $labels_location_descendant_vars['placeholder_location_descendant_single_name']; // string
+			$placeholder_location_descendant_plural_name = $labels_location_descendant_vars['placeholder_location_descendant_plural_name']; // string
 
-		$archive_text_location = uamswp_fad_archive_text_location();
-			$location_archive_headline = $archive_text_location['location_archive_headline']; // string
-			$placeholder_location_archive_headline = $archive_text_location['placeholder_location_archive_headline']; // string
+		$archive_text_location_vars = uamswp_fad_archive_text_location();
+			$location_archive_headline = $archive_text_location_vars['location_archive_headline']; // string
+			$placeholder_location_archive_headline = $archive_text_location_vars['placeholder_location_archive_headline']; // string
 
-		$labels_expertise = uamswp_fad_labels_expertise();
-			$expertise_single_name = $labels_expertise['expertise_single_name']; // string
-			$expertise_plural_name = $labels_expertise['expertise_plural_name']; // string
-			$placeholder_expertise_single_name = $labels_expertise['placeholder_expertise_single_name']; // string
-			$placeholder_expertise_plural_name = $labels_expertise['placeholder_expertise_plural_name']; // string
-			$placeholder_expertise_page_title = $labels_expertise['placeholder_expertise_page_title']; // string
+		$labels_expertise_vars = uamswp_fad_labels_expertise();
+			$expertise_single_name = $labels_expertise_vars['expertise_single_name']; // string
+			$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
+			$placeholder_expertise_single_name = $labels_expertise_vars['placeholder_expertise_single_name']; // string
+			$placeholder_expertise_plural_name = $labels_expertise_vars['placeholder_expertise_plural_name']; // string
+			$placeholder_expertise_page_title = $labels_expertise_vars['placeholder_expertise_page_title']; // string
 
-		$labels_expertise_descendant = uamswp_fad_labels_expertise_descendant();
-			$expertise_descendant_single_name = $labels_expertise_descendant['expertise_descendant_single_name']; // string
-			$expertise_descendant_plural_name = $labels_expertise_descendant['expertise_descendant_plural_name']; // string
-			$placeholder_expertise_descendant_single_name = $labels_expertise_descendant['placeholder_expertise_descendant_single_name']; // string
-			$placeholder_expertise_descendant_plural_name = $labels_expertise_descendant['placeholder_expertise_descendant_plural_name']; // string
+		$labels_expertise_descendant_vars = uamswp_fad_labels_expertise_descendant();
+			$expertise_descendant_single_name = $labels_expertise_descendant_vars['expertise_descendant_single_name']; // string
+			$expertise_descendant_plural_name = $labels_expertise_descendant_vars['expertise_descendant_plural_name']; // string
+			$placeholder_expertise_descendant_single_name = $labels_expertise_descendant_vars['placeholder_expertise_descendant_single_name']; // string
+			$placeholder_expertise_descendant_plural_name = $labels_expertise_descendant_vars['placeholder_expertise_descendant_plural_name']; // string
 
-		$archive_text_expertise = uamswp_fad_archive_text_expertise();
-			$expertise_archive_headline = $archive_text_expertise['expertise_archive_headline']; // string
-			$expertise_archive_intro_text = $archive_text_expertise['expertise_archive_intro_text']; // string
-			$placeholder_expertise_archive_headline = $archive_text_expertise['placeholder_expertise_archive_headline']; // string
-			$placeholder_expertise_archive_intro_text = $archive_text_expertise['placeholder_expertise_archive_intro_text']; // string
+		$archive_text_expertise_vars = uamswp_fad_archive_text_expertise();
+			$expertise_archive_headline = $archive_text_expertise_vars['expertise_archive_headline']; // string
+			$expertise_archive_intro_text = $archive_text_expertise_vars['expertise_archive_intro_text']; // string
+			$placeholder_expertise_archive_headline = $archive_text_expertise_vars['placeholder_expertise_archive_headline']; // string
+			$placeholder_expertise_archive_intro_text = $archive_text_expertise_vars['placeholder_expertise_archive_intro_text']; // string
 
-		$labels_clinical_resource = uamswp_fad_labels_clinical_resource();
-			$clinical_resource_single_name = $labels_clinical_resource['clinical_resource_single_name']; // string
-			$clinical_resource_plural_name = $labels_clinical_resource['clinical_resource_plural_name']; // string
-			$placeholder_clinical_resource_single_name = $labels_clinical_resource['placeholder_clinical_resource_single_name']; // string
-			$placeholder_clinical_resource_plural_name = $labels_clinical_resource['placeholder_clinical_resource_plural_name']; // string
+		$labels_clinical_resource_vars = uamswp_fad_labels_clinical_resource();
+			$clinical_resource_single_name = $labels_clinical_resource_vars['clinical_resource_single_name']; // string
+			$clinical_resource_plural_name = $labels_clinical_resource_vars['clinical_resource_plural_name']; // string
+			$placeholder_clinical_resource_single_name = $labels_clinical_resource_vars['placeholder_clinical_resource_single_name']; // string
+			$placeholder_clinical_resource_plural_name = $labels_clinical_resource_vars['placeholder_clinical_resource_plural_name']; // string
 
-		$labels_clinical_resource = uamswp_fad_archive_text_clinical_resource();
-			$clinical_resource_archive_headline = $labels_clinical_resource['clinical_resource_archive_headline']; // string
-			$placeholder_clinical_resource_archive_headline = $labels_clinical_resource['placeholder_clinical_resource_archive_headline']; // string
+		$labels_clinical_resource_vars = uamswp_fad_archive_text_clinical_resource();
+			$clinical_resource_archive_headline = $labels_clinical_resource_vars['clinical_resource_archive_headline']; // string
+			$placeholder_clinical_resource_archive_headline = $labels_clinical_resource_vars['placeholder_clinical_resource_archive_headline']; // string
 
-		$labels_clinical_resource_facet = uamswp_fad_labels_clinical_resource_facet();
-			$clinical_resource_type_single_name = $labels_clinical_resource_facet['clinical_resource_type_single_name']; // string
-			$clinical_resource_type_plural_name = $labels_clinical_resource_facet['clinical_resource_type_plural_name']; // string
-			$placeholder_clinical_resource_type_single_name = $labels_clinical_resource_facet['placeholder_clinical_resource_type_single_name']; // string
-			$placeholder_clinical_resource_type_plural_name = $labels_clinical_resource_facet['placeholder_clinical_resource_type_plural_name']; // string
+		$labels_clinical_resource_facet_vars = uamswp_fad_labels_clinical_resource_facet();
+			$clinical_resource_type_single_name = $labels_clinical_resource_facet_vars['clinical_resource_type_single_name']; // string
+			$clinical_resource_type_plural_name = $labels_clinical_resource_facet_vars['clinical_resource_type_plural_name']; // string
+			$placeholder_clinical_resource_type_single_name = $labels_clinical_resource_facet_vars['placeholder_clinical_resource_type_single_name']; // string
+			$placeholder_clinical_resource_type_plural_name = $labels_clinical_resource_facet_vars['placeholder_clinical_resource_type_plural_name']; // string
 
-		$labels_condition_treatment = uamswp_fad_labels_condition_treatment();
-			$condition_treatment_single_name = $labels_condition_treatment['condition_treatment_single_name']; // string
-			$condition_treatment_plural_name = $labels_condition_treatment['condition_treatment_plural_name']; // string
-			$placeholder_condition_treatment_single_name = $labels_condition_treatment['placeholder_condition_treatment_single_name']; // string
-			$placeholder_condition_treatment_plural_name = $labels_condition_treatment['placeholder_condition_treatment_plural_name']; // string
+		$labels_condition_treatment_vars = uamswp_fad_labels_condition_treatment();
+			$condition_treatment_single_name = $labels_condition_treatment_vars['condition_treatment_single_name']; // string
+			$condition_treatment_plural_name = $labels_condition_treatment_vars['condition_treatment_plural_name']; // string
+			$placeholder_condition_treatment_single_name = $labels_condition_treatment_vars['placeholder_condition_treatment_single_name']; // string
+			$placeholder_condition_treatment_plural_name = $labels_condition_treatment_vars['placeholder_condition_treatment_plural_name']; // string
 
-		$labels_condition = uamswp_fad_labels_condition();
-			$condition_single_name = $labels_condition['condition_single_name']; // string
-			$condition_plural_name = $labels_condition['condition_plural_name']; // string
-			$placeholder_condition_single_name = $labels_condition['placeholder_condition_single_name']; // string
-			$placeholder_condition_plural_name = $labels_condition['placeholder_condition_plural_name']; // string
+		$labels_condition_vars = uamswp_fad_labels_condition();
+			$condition_single_name = $labels_condition_vars['condition_single_name']; // string
+			$condition_plural_name = $labels_condition_vars['condition_plural_name']; // string
+			$placeholder_condition_single_name = $labels_condition_vars['placeholder_condition_single_name']; // string
+			$placeholder_condition_plural_name = $labels_condition_vars['placeholder_condition_plural_name']; // string
 
-		$archive_text_condition = uamswp_fad_archive_text_condition();
-			$condition_archive_headline = $archive_text_condition['condition_archive_headline']; // string
-			$condition_archive_intro_text = $archive_text_condition['condition_archive_intro_text']; // string
-			$placeholder_condition_archive_headline = $archive_text_condition['placeholder_condition_archive_headline']; // string
-			$placeholder_condition_archive_intro_text = $archive_text_condition['placeholder_condition_archive_intro_text']; // string
+		$archive_text_condition_vars = uamswp_fad_archive_text_condition();
+			$condition_archive_headline = $archive_text_condition_vars['condition_archive_headline']; // string
+			$condition_archive_intro_text = $archive_text_condition_vars['condition_archive_intro_text']; // string
+			$placeholder_condition_archive_headline = $archive_text_condition_vars['placeholder_condition_archive_headline']; // string
+			$placeholder_condition_archive_intro_text = $archive_text_condition_vars['placeholder_condition_archive_intro_text']; // string
 
-		$labels_treatment = uamswp_fad_labels_treatment();
-			$treatment_single_name = $labels_treatment['treatment_single_name']; // string
-			$treatment_plural_name = $labels_treatment['treatment_plural_name']; // string
-			$placeholder_treatment_single_name = $labels_treatment['placeholder_treatment_single_name']; // string
-			$placeholder_treatment_plural_name = $labels_treatment['placeholder_treatment_plural_name']; // string
+		$labels_treatment_vars = uamswp_fad_labels_treatment();
+			$treatment_single_name = $labels_treatment_vars['treatment_single_name']; // string
+			$treatment_plural_name = $labels_treatment_vars['treatment_plural_name']; // string
+			$placeholder_treatment_single_name = $labels_treatment_vars['placeholder_treatment_single_name']; // string
+			$placeholder_treatment_plural_name = $labels_treatment_vars['placeholder_treatment_plural_name']; // string
 
-		$archive_text_treatment = uamswp_fad_archive_text_treatment();
-			$treatment_archive_headline = $archive_text_treatment['treatment_archive_headline']; // string
-			$treatment_archive_intro_text = $archive_text_treatment['treatment_archive_intro_text']; // string
-			$placeholder_treatment_archive_headline = $archive_text_treatment['placeholder_treatment_archive_headline']; // string
-			$placeholder_treatment_archive_intro_text = $archive_text_treatment['placeholder_treatment_archive_intro_text']; // string
+		$archive_text_treatment_vars = uamswp_fad_archive_text_treatment();
+			$treatment_archive_headline = $archive_text_treatment_vars['treatment_archive_headline']; // string
+			$treatment_archive_intro_text = $archive_text_treatment_vars['treatment_archive_intro_text']; // string
+			$placeholder_treatment_archive_headline = $archive_text_treatment_vars['placeholder_treatment_archive_headline']; // string
+			$placeholder_treatment_archive_intro_text = $archive_text_treatment_vars['placeholder_treatment_archive_intro_text']; // string
 
 	// Check variables
 	$page_title = ( isset($page_title) && !empty($page_title) ) ? $page_title : '';
@@ -2541,7 +2541,7 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$labels_provider = array(
+			$labels_provider_vars = array(
 				'provider_single_name'							=> $provider_single_name, // string
 				'provider_single_name_attr'						=> $provider_single_name_attr, // string
 				'provider_plural_name'							=> $provider_plural_name, // string
@@ -2552,7 +2552,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				'placeholder_provider_short_name_possessive'	=> $placeholder_provider_short_name_possessive, // string
 				'facet_labels'									=> $facet_labels // array
 			);
-			return $labels_provider;
+			return $labels_provider_vars;
 	
 	}
 
@@ -2583,7 +2583,7 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$labels_location = array(
+			$labels_location_vars = array(
 				'location_single_name'						=> $location_single_name, // string
 				'location_single_name_attr'					=> $location_single_name_attr, // string
 				'location_plural_name'						=> $location_plural_name, // string
@@ -2594,7 +2594,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				'placeholder_location_page_title_phrase'	=> $placeholder_location_page_title_phrase, // string
 				'facet_labels'								=> $facet_labels // array
 			);
-			return $labels_location;
+			return $labels_location_vars;
 	
 	}
 
@@ -2612,7 +2612,7 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$labels_location_descendant = array(
+			$labels_location_descendant_vars = array(
 				'location_descendant_single_name' 				=> $location_descendant_single_name, // string
 				'location_descendant_single_name_attr' 			=> $location_descendant_single_name_attr, // string
 				'location_descendant_plural_name' 				=> $location_descendant_plural_name, // string
@@ -2620,7 +2620,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				'placeholder_location_descendant_single_name'	=> $placeholder_location_descendant_single_name, // string
 				'placeholder_location_descendant_plural_name'	=> $placeholder_location_descendant_plural_name // string
 			);
-			return $labels_location_descendant;
+			return $labels_location_descendant_vars;
 	
 	}
 
@@ -2654,7 +2654,7 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$labels_expertise = array(
+			$labels_expertise_vars = array(
 				'expertise_single_name'				=> $expertise_single_name, // string
 				'expertise_single_name_attr'		=> $expertise_single_name_attr, // string
 				'expertise_plural_name'				=> $expertise_plural_name, // string
@@ -2662,9 +2662,9 @@ function uamswp_fad_fpage_text_replace($string) {
 				'placeholder_expertise_single_name'	=> $placeholder_expertise_single_name, // string
 				'placeholder_expertise_plural_name'	=> $placeholder_expertise_plural_name, // string
 				'placeholder_expertise_page_title'	=> $placeholder_expertise_page_title, // string
-				'facet_labels' => $facet_labels // array
+				'facet_labels' 						=> $facet_labels // array
 			);
-			return $labels_expertise;
+			return $labels_expertise_vars;
 
 	}
 
@@ -2682,7 +2682,7 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$labels_expertise_descendant = array(
+			$labels_expertise_descendant_vars = array(
 				'expertise_descendant_single_name'				=> $expertise_descendant_single_name, // string
 				'expertise_descendant_single_name_attr'			=> $expertise_descendant_single_name_attr, // string
 				'expertise_descendant_plural_name'				=> $expertise_descendant_plural_name, // string
@@ -2690,7 +2690,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				'placeholder_expertise_descendant_single_name'	=> $placeholder_expertise_descendant_single_name, // string
 				'placeholder_expertise_descendant_plural_name'	=> $placeholder_expertise_descendant_plural_name // string
 			);
-			return $labels_expertise_descendant;
+			return $labels_expertise_descendant_vars;
 
 	}
 
@@ -2708,7 +2708,7 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$labels_clinical_resource = array(
+			$labels_clinical_resource_vars = array(
 				'clinical_resource_single_name'				=> $clinical_resource_single_name, // string
 				'clinical_resource_single_name_attr'		=> $clinical_resource_single_name_attr, // string
 				'clinical_resource_plural_name'				=> $clinical_resource_plural_name, // string
@@ -2716,7 +2716,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				'placeholder_clinical_resource_single_name'	=> $placeholder_clinical_resource_single_name, // string
 				'placeholder_clinical_resource_plural_name'	=> $placeholder_clinical_resource_plural_name // string
 			);
-			return $labels_clinical_resource;
+			return $labels_clinical_resource_vars;
 
 	}
 
@@ -2741,7 +2741,7 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$labels_clinical_resource_facet = array(
+			$labels_clinical_resource_facet_vars = array(
 				'clinical_resource_type_single_name'				=> $clinical_resource_type_single_name, // string
 				'clinical_resource_type_single_name_attr'			=> $clinical_resource_type_single_name_attr, // string
 				'clinical_resource_type_plural_name'				=> $clinical_resource_type_plural_name, // string
@@ -2750,7 +2750,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				'placeholder_clinical_resource_type_plural_name'	=> $placeholder_clinical_resource_type_plural_name, // string
 				'facet_labels'										=> $facet_labels // string
 			);
-			return $labels_clinical_resource_facet;
+			return $labels_clinical_resource_facet_vars;
 
 	}
 
@@ -2768,7 +2768,7 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$labels_condition_treatment = array(
+			$labels_condition_treatment_vars = array(
 				'condition_treatment_single_name'				=> $condition_treatment_single_name, // string
 				'condition_treatment_single_name_attr'			=> $condition_treatment_single_name_attr, // string
 				'condition_treatment_plural_name'				=> $condition_treatment_plural_name, // string
@@ -2776,7 +2776,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				'placeholder_condition_treatment_single_name'	=> $placeholder_condition_treatment_single_name, // string
 				'placeholder_condition_treatment_plural_name'	=> $placeholder_condition_treatment_plural_name // string
 			);
-			return $labels_condition_treatment;
+			return $labels_condition_treatment_vars;
 
 	}
 
@@ -2805,7 +2805,7 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$labels_condition = array(
+			$labels_condition_vars = array(
 				'condition_single_name'				=> $condition_single_name, // string
 				'condition_single_name_attr'		=> $condition_single_name_attr, // string
 				'condition_plural_name'				=> $condition_plural_name, // string
@@ -2814,7 +2814,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				'placeholder_condition_plural_name'	=> $placeholder_condition_plural_name, // string
 				'facet_labels'						=> $facet_labels // array
 			);
-			return $labels_condition;
+			return $labels_condition_vars;
 
 	}
 
@@ -2843,7 +2843,7 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$labels_treatment = array(
+			$labels_treatment_vars = array(
 				'treatment_single_name'				=> $treatment_single_name, // string
 				'treatment_single_name_attr'		=> $treatment_single_name_attr, // string
 				'treatment_plural_name'				=> $treatment_plural_name, // string
@@ -2852,7 +2852,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				'placeholder_treatment_plural_name'	=> $placeholder_treatment_plural_name, // string
 				'facet_labels'						=> $facet_labels // array
 			);
-			return $labels_treatment;
+			return $labels_treatment_vars;
 
 	}
 
@@ -2869,12 +2869,12 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$archive_text_provider = array(
+			$archive_text_provider_vars = array(
 				'provider_archive_headline'				=> $provider_archive_headline, // string
 				'provider_archive_headline_attr'		=> $provider_archive_headline_attr, // string
 				'placeholder_provider_archive_headline'	=> $placeholder_provider_archive_headline // string
 			);
-			return $archive_text_provider;
+			return $archive_text_provider_vars;
 
 	}
 
@@ -2889,12 +2889,12 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$archive_text_location = array(
+			$archive_text_location_vars = array(
 				'location_archive_headline' 			=> $location_archive_headline, // string
 				'location_archive_headline_attr'		=> $location_archive_headline_attr, // string
 				'placeholder_location_archive_headline'	=> $placeholder_location_archive_headline // string
 			);
-			return $archive_text_location;
+			return $archive_text_location_vars;
 
 	}
 
@@ -2911,14 +2911,14 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$archive_text_expertise = array(
+			$archive_text_expertise_vars = array(
 				'expertise_archive_headline'				=> $expertise_archive_headline, // string
 				'expertise_archive_headline_attr'			=> $expertise_archive_headline_attr, // string
 				'expertise_archive_intro_text'				=> $expertise_archive_intro_text, // string
 				'placeholder_expertise_archive_headline'	=> $placeholder_expertise_archive_headline, // string
 				'placeholder_expertise_archive_intro_text'	=> $placeholder_expertise_archive_intro_text // string
 			);
-			return $archive_text_expertise;
+			return $archive_text_expertise_vars;
 
 	}
 
@@ -2933,12 +2933,12 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$archive_text_clinical_resource = array(
+			$archive_text_clinical_resource_vars = array(
 				'clinical_resource_archive_headline'				=> $clinical_resource_archive_headline, // string
 				'clinical_resource_archive_headline_attr'			=> $clinical_resource_archive_headline_attr, // string
 				'placeholder_clinical_resource_archive_headline'	=> $placeholder_clinical_resource_archive_headline // string
 			);
-			return $archive_text_clinical_resource;
+			return $archive_text_clinical_resource_vars;
 
 	}
 
@@ -2963,14 +2963,14 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$archive_text_condition = array(
+			$archive_text_condition_vars = array(
 				'condition_archive_headline'				=> $condition_archive_headline, // string
 				'condition_archive_headline_attr'			=> $condition_archive_headline_attr, // string
 				'condition_archive_intro_text'				=> $condition_archive_intro_text, // string
 				'placeholder_condition_archive_headline'	=> $placeholder_condition_archive_headline, // string
 				'placeholder_condition_archive_intro_text'	=> $placeholder_condition_archive_intro_text // string
 			);
-			return $archive_text_condition;
+			return $archive_text_condition_vars;
 
 	}
 
@@ -2995,14 +2995,14 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$archive_text_treatment = array(
+			$archive_text_treatment_vars = array(
 				'treatment_archive_headline'				=> $treatment_archive_headline, // string
 				'treatment_archive_headline_attr'			=> $treatment_archive_headline_attr, // string
 				'treatment_archive_intro_text'				=> $treatment_archive_intro_text, // string
 				'placeholder_treatment_archive_headline'	=> $placeholder_treatment_archive_headline, // string
 				'placeholder_treatment_archive_intro_text'	=> $placeholder_treatment_archive_intro_text // string
 			);
-			return $archive_text_treatment;
+			return $archive_text_treatment_vars;
 
 	}
 
@@ -3057,7 +3057,7 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Create and return an array to be used on the templates and template parts
 		
-				$fpage_text_provider_general = array(
+				$fpage_text_provider_general_vars = array(
 					'provider_fpage_title_general'			=> $provider_fpage_title_general, // string
 					'provider_fpage_intro_general'			=> $provider_fpage_intro_general, // string
 					'provider_fpage_ref_main_title_general'	=> $provider_fpage_ref_main_title_general, // string
@@ -3067,7 +3067,7 @@ function uamswp_fad_fpage_text_replace($string) {
 					'provider_fpage_ref_top_intro_general'	=> $provider_fpage_ref_top_intro_general, // string
 					'provider_fpage_ref_top_link_general'	=> $provider_fpage_ref_top_link_general // string
 				);
-				return $fpage_text_provider_general;
+				return $fpage_text_provider_general_vars;
 
 		}
 
@@ -3161,7 +3161,7 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Create and return an array to be used on the templates and template parts
 		
-				$fpage_text_location_general = array(
+				$fpage_text_location_general_vars = array(
 					'location_fpage_title_general'						=> $location_fpage_title_general, // string
 					'location_fpage_intro_general'						=> $location_fpage_intro_general, // string
 					'location_fpage_ref_main_title_general'				=> $location_fpage_ref_main_title_general, // string
@@ -3179,7 +3179,7 @@ function uamswp_fad_fpage_text_replace($string) {
 					'location_descendant_fpage_ref_top_intro_general'	=> $location_descendant_fpage_ref_top_intro_general, // string
 					'location_descendant_fpage_ref_top_link_general'	=> $location_descendant_fpage_ref_top_link_general // string
 				);
-				return $fpage_text_location_general;
+				return $fpage_text_location_general_vars;
 
 		}
 
@@ -3273,7 +3273,7 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Create and return an array to be used on the templates and template parts
 		
-				$fpage_text_expertise_general = array(
+				$fpage_text_expertise_general_vars = array(
 					'expertise_fpage_title_general'						=> $expertise_fpage_title_general, // string
 					'expertise_fpage_intro_general'						=> $expertise_fpage_intro_general, // string
 					'expertise_fpage_ref_main_title_general'			=> $expertise_fpage_ref_main_title_general, // string
@@ -3291,7 +3291,7 @@ function uamswp_fad_fpage_text_replace($string) {
 					'expertise_descendant_fpage_ref_top_intro_general'	=> $expertise_descendant_fpage_ref_top_intro_general, // string
 					'expertise_descendant_fpage_ref_top_link_general'	=> $expertise_descendant_fpage_ref_top_link_general // string
 				);
-				return $fpage_text_expertise_general;
+				return $fpage_text_expertise_general_vars;
 
 		}
 
@@ -3354,7 +3354,7 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Create and return an array to be used on the templates and template parts
 		
-				$fpage_text_clinical_resource_general = array(
+				$fpage_text_clinical_resource_general_vars = array(
 					'clinical_resource_fpage_title_general'				=> $clinical_resource_fpage_title_general, // string
 					'clinical_resource_fpage_intro_general'				=> $clinical_resource_fpage_intro_general, // string
 					'clinical_resource_fpage_ref_main_title_general'	=> $clinical_resource_fpage_ref_main_title_general, // string
@@ -3367,7 +3367,7 @@ function uamswp_fad_fpage_text_replace($string) {
 					'clinical_resource_fpage_more_link_text_general'	=> $clinical_resource_fpage_more_link_text_general, // string
 					'clinical_resource_fpage_more_link_descr_general'	=> $clinical_resource_fpage_more_link_descr_general // string
 				);
-				return $fpage_text_clinical_resource_general;
+				return $fpage_text_clinical_resource_general_vars;
 
 		}
 
@@ -3394,11 +3394,11 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Create and return an array to be used on the templates and template parts
 		
-				$fpage_text_condition_general = array(
+				$fpage_text_condition_general_vars = array(
 					'condition_fpage_title_general'	=> $condition_fpage_title_general, // string
 					'condition_fpage_intro_general'	=> $condition_fpage_intro_general // string
 				);
-				return $fpage_text_condition_general;
+				return $fpage_text_condition_general_vars;
 
 		}
 
@@ -3425,11 +3425,11 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Create and return an array to be used on the templates and template parts
 		
-				$fpage_text_treatment_general = array(
+				$fpage_text_treatment_general_vars = array(
 					'treatment_fpage_title_general'	=> $treatment_fpage_title_general, // string
 					'treatment_fpage_intro_general'	=> $treatment_fpage_intro_general // string
 				);
-				return $fpage_text_treatment_general;
+				return $fpage_text_treatment_general_vars;
 
 		}
 
@@ -3456,11 +3456,11 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Create and return an array to be used on the templates and template parts
 		
-				$fpage_text_condition_treatment_general = array(
+				$fpage_text_condition_treatment_general_vars = array(
 					'condition_treatment_fpage_title_general'	=> $condition_treatment_fpage_title_general, // string
 					'condition_treatment_fpage_intro_general'	=> $condition_treatment_fpage_intro_general // string
 				);
-				return $fpage_text_condition_treatment_general;
+				return $fpage_text_condition_treatment_general_vars;
 
 		}
 
@@ -3525,12 +3525,12 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($location_fpage_ref_main_link_general) || empty($location_fpage_ref_main_link_general)
 							) {
-							$fpage_text_location_general = uamswp_fad_fpage_text_location_general();
-								$location_fpage_title_general = $fpage_text_location_general['location_fpage_title_general']; // string
-								$location_fpage_intro_general = $fpage_text_location_general['location_fpage_intro_general']; // string
-								$location_fpage_ref_main_title_general = $fpage_text_location_general['location_fpage_ref_main_title_general']; // string
-								$location_fpage_ref_main_intro_general = $fpage_text_location_general['location_fpage_ref_main_intro_general']; // string
-								$location_fpage_ref_main_link_general = $fpage_text_location_general['location_fpage_ref_main_link_general']; // string
+							$fpage_text_location_general_vars = uamswp_fad_fpage_text_location_general();
+								$location_fpage_title_general = $fpage_text_location_general_vars['location_fpage_title_general']; // string
+								$location_fpage_intro_general = $fpage_text_location_general_vars['location_fpage_intro_general']; // string
+								$location_fpage_ref_main_title_general = $fpage_text_location_general_vars['location_fpage_ref_main_title_general']; // string
+								$location_fpage_ref_main_intro_general = $fpage_text_location_general_vars['location_fpage_ref_main_intro_general']; // string
+								$location_fpage_ref_main_link_general = $fpage_text_location_general_vars['location_fpage_ref_main_link_general']; // string
 						}
 					}
 					if ( !isset($location_fpage_title_provider) || empty($location_fpage_title_provider) ) {
@@ -3613,12 +3613,12 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($expertise_fpage_ref_main_link_general) || empty($expertise_fpage_ref_main_link_general)
 							) {
-							$fpage_text_expertise_general = uamswp_fad_fpage_text_expertise_general();
-								$expertise_fpage_title_general = $fpage_text_expertise_general['expertise_fpage_title_general']; // string
-								$expertise_fpage_intro_general = $fpage_text_expertise_general['expertise_fpage_intro_general']; // string
-								$expertise_fpage_ref_main_title_general = $fpage_text_expertise_general['expertise_fpage_ref_main_title_general']; // string
-								$expertise_fpage_ref_main_intro_general = $fpage_text_expertise_general['expertise_fpage_ref_main_intro_general']; // string
-								$expertise_fpage_ref_main_link_general = $fpage_text_expertise_general['expertise_fpage_ref_main_link_general']; // string
+							$fpage_text_expertise_general_vars = uamswp_fad_fpage_text_expertise_general();
+								$expertise_fpage_title_general = $fpage_text_expertise_general_vars['expertise_fpage_title_general']; // string
+								$expertise_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_intro_general']; // string
+								$expertise_fpage_ref_main_title_general = $fpage_text_expertise_general_vars['expertise_fpage_ref_main_title_general']; // string
+								$expertise_fpage_ref_main_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_ref_main_intro_general']; // string
+								$expertise_fpage_ref_main_link_general = $fpage_text_expertise_general_vars['expertise_fpage_ref_main_link_general']; // string
 						}
 					}
 					if ( !isset($expertise_fpage_title_provider) || empty($expertise_fpage_title_provider) ) {
@@ -3725,15 +3725,15 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general)
 							) {
-							$fpage_text_clinical_resource_general = uamswp_fad_fpage_text_clinical_resource_general();
-								$clinical_resource_fpage_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_title_general']; // string
-								$clinical_resource_fpage_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_intro_general']; // string
-								$clinical_resource_fpage_ref_main_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_title_general']; // string
-								$clinical_resource_fpage_ref_main_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_intro_general']; // string
-								$clinical_resource_fpage_ref_main_link_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_link_general']; // string
-								$clinical_resource_fpage_more_text_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_text_general']; // string
-								$clinical_resource_fpage_more_link_text_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_link_text_general']; // string
-								$clinical_resource_fpage_more_link_descr_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_link_descr_general']; // string
+							$fpage_text_clinical_resource_general_vars = uamswp_fad_fpage_text_clinical_resource_general();
+								$clinical_resource_fpage_title_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_title_general']; // string
+								$clinical_resource_fpage_intro_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_intro_general']; // string
+								$clinical_resource_fpage_ref_main_title_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_main_title_general']; // string
+								$clinical_resource_fpage_ref_main_intro_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_main_intro_general']; // string
+								$clinical_resource_fpage_ref_main_link_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_main_link_general']; // string
+								$clinical_resource_fpage_more_text_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_more_text_general']; // string
+								$clinical_resource_fpage_more_link_text_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_more_link_text_general']; // string
+								$clinical_resource_fpage_more_link_descr_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_more_link_descr_general']; // string
 						}
 					}
 					if ( !isset($clinical_resource_fpage_title_provider) || empty($clinical_resource_fpage_title_provider) ) {
@@ -3792,15 +3792,15 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($condition_fpage_title_provider) || empty($condition_fpage_title_provider) ) {
 						if ( !isset($condition_fpage_title_general) || empty($condition_fpage_title_general) ) {
-							$fpage_text_condition_general = uamswp_fad_fpage_text_condition_general();
-								$condition_fpage_title_general = $fpage_text_condition_general['condition_fpage_title_general']; // string
+							$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
+								$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
 						}
 						$condition_fpage_title_provider = $condition_fpage_title_general; // Title
 					}
 					if ( !isset($condition_fpage_intro_provider) || empty($condition_fpage_intro_provider) ) {
 						if ( !isset($condition_fpage_intro_general) || empty($condition_fpage_intro_general) ) {
-							$fpage_text_condition_general = uamswp_fad_fpage_text_condition_general();
-								$condition_fpage_intro_general = $fpage_text_condition_general['condition_fpage_intro_general']; // string
+							$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
+								$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
 						}
 						$condition_fpage_intro_provider = $condition_fpage_intro_general; // Intro text
 					}
@@ -3830,15 +3830,15 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($treatment_fpage_title_provider) || empty($treatment_fpage_title_provider) ) {
 						if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
-							$fpage_text_treatment_general = uamswp_fad_fpage_text_treatment_general();
-								$treatment_fpage_title_general = $fpage_text_treatment_general['treatment_fpage_title_general']; // string
+							$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
+								$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
 						}
 						$treatment_fpage_title_provider = $treatment_fpage_title_general; // Title
 					}
 					if ( !isset($treatment_fpage_intro_provider) || empty($treatment_fpage_intro_provider) ) {
 						if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
-							$fpage_text_treatment_general = uamswp_fad_fpage_text_treatment_general();
-								$treatment_fpage_intro_general = $fpage_text_treatment_general['treatment_fpage_intro_general']; // string
+							$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
+								$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
 						}
 						$treatment_fpage_intro_provider = $treatment_fpage_intro_general; // Intro text
 					}
@@ -3869,15 +3869,15 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($condition_treatment_fpage_title_provider) || empty($condition_treatment_fpage_title_provider) ) {
 						if ( !isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general) ) {
-							$fpage_text_condition_treatment_general = uamswp_fad_fpage_text_condition_treatment_general();
-								$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general['condition_treatment_fpage_title_general']; // string
+							$fpage_text_condition_treatment_general_vars = uamswp_fad_fpage_text_condition_treatment_general();
+								$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_title_general']; // string
 						}
 						$condition_treatment_fpage_title_provider = $condition_treatment_fpage_title_general; // Title
 					}
 					if ( !isset($condition_treatment_fpage_intro_provider) || empty($condition_treatment_fpage_intro_provider) ) {
 						if ( !isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general) ) {
-							$fpage_text_condition_treatment_general = uamswp_fad_fpage_text_condition_treatment_general();
-								$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general['condition_treatment_fpage_intro_general']; // string
+							$fpage_text_condition_treatment_general_vars = uamswp_fad_fpage_text_condition_treatment_general();
+								$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_intro_general']; // string
 						}
 						$condition_treatment_fpage_intro_provider = $condition_treatment_fpage_intro_general; // Intro text
 					}
@@ -3889,7 +3889,7 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Create and return an array to be used on the templates and template parts
 		
-				$fpage_text_provider = array(
+				$fpage_text_provider_vars = array(
 					'location_fpage_title_provider'						=> $location_fpage_title_provider, // string
 					'location_fpage_intro_provider'						=> $location_fpage_intro_provider, // string
 					'location_fpage_ref_main_title_provider'			=> $location_fpage_ref_main_title_provider, // string
@@ -3915,7 +3915,7 @@ function uamswp_fad_fpage_text_replace($string) {
 					'condition_treatment_fpage_title_provider'			=> $condition_treatment_fpage_title_provider, // string
 					'condition_treatment_fpage_intro_provider'			=> $condition_treatment_fpage_intro_provider, // string
 				);
-				return $fpage_text_provider;
+				return $fpage_text_provider_vars;
 
 		}
 
@@ -3986,15 +3986,15 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($provider_fpage_ref_top_link_general) || empty($provider_fpage_ref_top_link_general)
 							) {
-							$fpage_text_provider_general = uamswp_fad_fpage_text_provider_general();
-								$provider_fpage_title_general = $fpage_text_provider_general['provider_fpage_title_general']; // string
-								$provider_fpage_intro_general = $fpage_text_provider_general['provider_fpage_intro_general']; // string
-								$provider_fpage_ref_main_title_general = $fpage_text_provider_general['provider_fpage_ref_main_title_general']; // string
-								$provider_fpage_ref_main_intro_general = $fpage_text_provider_general['provider_fpage_ref_main_intro_general']; // string
-								$provider_fpage_ref_main_link_general = $fpage_text_provider_general['provider_fpage_ref_main_link_general']; // string
-								$provider_fpage_ref_top_title_general = $fpage_text_provider_general['provider_fpage_ref_top_title_general']; // string
-								$provider_fpage_ref_top_intro_general = $fpage_text_provider_general['provider_fpage_ref_top_intro_general']; // string
-								$provider_fpage_ref_top_link_general = $fpage_text_provider_general['provider_fpage_ref_top_link_general']; // string
+							$fpage_text_provider_general_vars = uamswp_fad_fpage_text_provider_general();
+								$provider_fpage_title_general = $fpage_text_provider_general_vars['provider_fpage_title_general']; // string
+								$provider_fpage_intro_general = $fpage_text_provider_general_vars['provider_fpage_intro_general']; // string
+								$provider_fpage_ref_main_title_general = $fpage_text_provider_general_vars['provider_fpage_ref_main_title_general']; // string
+								$provider_fpage_ref_main_intro_general = $fpage_text_provider_general_vars['provider_fpage_ref_main_intro_general']; // string
+								$provider_fpage_ref_main_link_general = $fpage_text_provider_general_vars['provider_fpage_ref_main_link_general']; // string
+								$provider_fpage_ref_top_title_general = $fpage_text_provider_general_vars['provider_fpage_ref_top_title_general']; // string
+								$provider_fpage_ref_top_intro_general = $fpage_text_provider_general_vars['provider_fpage_ref_top_intro_general']; // string
+								$provider_fpage_ref_top_link_general = $fpage_text_provider_general_vars['provider_fpage_ref_top_link_general']; // string
 						}
 					}
 					$provider_fpage_title_location = ( !isset($provider_fpage_title_location) || empty($provider_fpage_title_location) ) ? $provider_fpage_title_general : ''; // Title
@@ -4063,12 +4063,12 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($location_descendant_fpage_ref_main_link_general) || empty($location_descendant_fpage_ref_main_link_general)
 							) {
-							$fpage_text_location_general = uamswp_fad_fpage_text_location_general();
-								$location_descendant_fpage_title_general = $fpage_text_location_general['location_descendant_fpage_title_general']; // string
-								$location_descendant_fpage_intro_general = $fpage_text_location_general['location_descendant_fpage_intro_general']; // string
-								$location_descendant_fpage_ref_main_title_general = $fpage_text_location_general['location_descendant_fpage_ref_main_title_general']; // string
-								$location_descendant_fpage_ref_main_intro_general = $fpage_text_location_general['location_descendant_fpage_ref_main_intro_general']; // string
-								$location_descendant_fpage_ref_main_link_general = $fpage_text_location_general['location_descendant_fpage_ref_main_link_general']; // string
+							$fpage_text_location_general_vars = uamswp_fad_fpage_text_location_general();
+								$location_descendant_fpage_title_general = $fpage_text_location_general_vars['location_descendant_fpage_title_general']; // string
+								$location_descendant_fpage_intro_general = $fpage_text_location_general_vars['location_descendant_fpage_intro_general']; // string
+								$location_descendant_fpage_ref_main_title_general = $fpage_text_location_general_vars['location_descendant_fpage_ref_main_title_general']; // string
+								$location_descendant_fpage_ref_main_intro_general = $fpage_text_location_general_vars['location_descendant_fpage_ref_main_intro_general']; // string
+								$location_descendant_fpage_ref_main_link_general = $fpage_text_location_general_vars['location_descendant_fpage_ref_main_link_general']; // string
 						}
 					}
 					if ( !isset($location_descendant_fpage_title_location) || empty($location_descendant_fpage_title_location) ) {
@@ -4175,15 +4175,15 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($expertise_fpage_ref_top_link_general) || empty($expertise_fpage_ref_top_link_general)
 							) {
-							$fpage_text_expertise_general = uamswp_fad_fpage_text_expertise_general();
-								$expertise_fpage_title_general = $fpage_text_expertise_general['expertise_fpage_title_general']; // string
-								$expertise_fpage_intro_general = $fpage_text_expertise_general['expertise_fpage_intro_general']; // string
-								$expertise_fpage_ref_main_title_general = $fpage_text_expertise_general['expertise_fpage_ref_main_title_general']; // string
-								$expertise_fpage_ref_main_intro_general = $fpage_text_expertise_general['expertise_fpage_ref_main_intro_general']; // string
-								$expertise_fpage_ref_main_link_general = $fpage_text_expertise_general['expertise_fpage_ref_main_link_general']; // string
-								$expertise_fpage_ref_top_title_general = $fpage_text_expertise_general['expertise_fpage_ref_top_title_general']; // string
-								$expertise_fpage_ref_top_intro_general = $fpage_text_expertise_general['expertise_fpage_ref_top_intro_general']; // string
-								$expertise_fpage_ref_top_link_general = $fpage_text_expertise_general['expertise_fpage_ref_top_link_general']; // string
+							$fpage_text_expertise_general_vars = uamswp_fad_fpage_text_expertise_general();
+								$expertise_fpage_title_general = $fpage_text_expertise_general_vars['expertise_fpage_title_general']; // string
+								$expertise_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_intro_general']; // string
+								$expertise_fpage_ref_main_title_general = $fpage_text_expertise_general_vars['expertise_fpage_ref_main_title_general']; // string
+								$expertise_fpage_ref_main_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_ref_main_intro_general']; // string
+								$expertise_fpage_ref_main_link_general = $fpage_text_expertise_general_vars['expertise_fpage_ref_main_link_general']; // string
+								$expertise_fpage_ref_top_title_general = $fpage_text_expertise_general_vars['expertise_fpage_ref_top_title_general']; // string
+								$expertise_fpage_ref_top_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_ref_top_intro_general']; // string
+								$expertise_fpage_ref_top_link_general = $fpage_text_expertise_general_vars['expertise_fpage_ref_top_link_general']; // string
 						}
 					}
 					if ( !isset($expertise_fpage_title_location) || empty($expertise_fpage_title_location) ) {
@@ -4326,18 +4326,18 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general)
 							) {
-							$fpage_text_clinical_resource_general = uamswp_fad_fpage_text_clinical_resource_general();
-								$clinical_resource_fpage_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_title_general']; // string
-								$clinical_resource_fpage_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_intro_general']; // string
-								$clinical_resource_fpage_ref_main_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_title_general']; // string
-								$clinical_resource_fpage_ref_main_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_intro_general']; // string
-								$clinical_resource_fpage_ref_main_link_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_link_general']; // string
-								$clinical_resource_fpage_ref_top_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_top_title_general']; // string
-								$clinical_resource_fpage_ref_top_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_top_intro_general']; // string
-								$clinical_resource_fpage_ref_top_link_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_top_link_general']; // string
-								$clinical_resource_fpage_more_text_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_text_general']; // string
-								$clinical_resource_fpage_more_link_text_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_link_text_general']; // string
-								$clinical_resource_fpage_more_link_descr_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_link_descr_general']; // string
+							$fpage_text_clinical_resource_general_vars = uamswp_fad_fpage_text_clinical_resource_general();
+								$clinical_resource_fpage_title_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_title_general']; // string
+								$clinical_resource_fpage_intro_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_intro_general']; // string
+								$clinical_resource_fpage_ref_main_title_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_main_title_general']; // string
+								$clinical_resource_fpage_ref_main_intro_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_main_intro_general']; // string
+								$clinical_resource_fpage_ref_main_link_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_main_link_general']; // string
+								$clinical_resource_fpage_ref_top_title_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_top_title_general']; // string
+								$clinical_resource_fpage_ref_top_intro_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_top_intro_general']; // string
+								$clinical_resource_fpage_ref_top_link_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_top_link_general']; // string
+								$clinical_resource_fpage_more_text_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_more_text_general']; // string
+								$clinical_resource_fpage_more_link_text_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_more_link_text_general']; // string
+								$clinical_resource_fpage_more_link_descr_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_more_link_descr_general']; // string
 						}
 					}
 					if ( !isset($clinical_resource_fpage_title_location) || empty($clinical_resource_fpage_title_location) ) {
@@ -4408,15 +4408,15 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($condition_fpage_title_location) || empty($condition_fpage_title_location) ) {
 						if ( !isset($condition_fpage_title_general) || empty($condition_fpage_title_general) ) {
-							$fpage_text_condition_general = uamswp_fad_fpage_text_condition_general();
-								$condition_fpage_title_general = $fpage_text_condition_general['condition_fpage_title_general']; // string
+							$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
+								$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
 						}
 						$condition_fpage_title_location = $condition_fpage_title_general; // Title
 					}
 					if ( !isset($condition_fpage_intro_location) || empty($condition_fpage_intro_location) ) {
 						if ( !isset($condition_fpage_intro_general) || empty($condition_fpage_intro_general) ) {
-							$fpage_text_condition_general = uamswp_fad_fpage_text_condition_general();
-								$condition_fpage_intro_general = $fpage_text_condition_general['condition_fpage_intro_general']; // string
+							$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
+								$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
 						}
 						$condition_fpage_intro_location = $condition_fpage_intro_general; // Intro text
 					}
@@ -4446,15 +4446,15 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($treatment_fpage_title_location) || empty($treatment_fpage_title_location) ) {
 						if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
-							$fpage_text_treatment_general = uamswp_fad_fpage_text_treatment_general();
-								$treatment_fpage_title_general = $fpage_text_treatment_general['treatment_fpage_title_general']; // string
+							$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
+								$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
 						}
 						$treatment_fpage_title_location = $treatment_fpage_title_general; // Title
 					}
 					if ( !isset($treatment_fpage_intro_location) || empty($treatment_fpage_intro_location) ) {
 						if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
-							$fpage_text_treatment_general = uamswp_fad_fpage_text_treatment_general();
-								$treatment_fpage_intro_general = $fpage_text_treatment_general['treatment_fpage_intro_general']; // string
+							$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
+								$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
 						}
 						$treatment_fpage_intro_location = $treatment_fpage_intro_general; // Intro text
 					}
@@ -4485,15 +4485,15 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($condition_treatment_fpage_title_location) || empty($condition_treatment_fpage_title_location) ) {
 						if ( !isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general) ) {
-							$fpage_text_condition_treatment_general = uamswp_fad_fpage_text_condition_treatment_general();
-								$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general['condition_treatment_fpage_title_general']; // string
+							$fpage_text_condition_treatment_general_vars = uamswp_fad_fpage_text_condition_treatment_general();
+								$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_title_general']; // string
 						}
 						$condition_treatment_fpage_title_location = $condition_treatment_fpage_title_general; // Title
 					}
 					if ( !isset($condition_treatment_fpage_intro_location) || empty($condition_treatment_fpage_intro_location) ) {
 						if ( !isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general) ) {
-							$fpage_text_condition_treatment_general = uamswp_fad_fpage_text_condition_treatment_general();
-								$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general['condition_treatment_fpage_intro_general']; // string
+							$fpage_text_condition_treatment_general_vars = uamswp_fad_fpage_text_condition_treatment_general();
+								$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_intro_general']; // string
 						}
 						$condition_treatment_fpage_intro_location = $condition_treatment_fpage_intro_general; // Intro text
 					}
@@ -4505,7 +4505,7 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Create and return an array to be used on the templates and template parts
 		
-				$fpage_text_location = array(
+				$fpage_text_location_vars = array(
 					'provider_fpage_title_location'						=> $provider_fpage_title_location, // string
 					'provider_fpage_intro_location'						=> $provider_fpage_intro_location, // string
 					'provider_fpage_ref_main_title_location'			=> $provider_fpage_ref_main_title_location, // string
@@ -4545,7 +4545,7 @@ function uamswp_fad_fpage_text_replace($string) {
 					'condition_treatment_fpage_title_location'			=> $condition_treatment_fpage_title_location, // string
 					'condition_treatment_fpage_intro_location'			=> $condition_treatment_fpage_intro_location // string
 				);
-				return $fpage_text_location;
+				return $fpage_text_location_vars;
 
 		}
 
@@ -4817,15 +4817,15 @@ function uamswp_fad_fpage_text_replace($string) {
 								||
 								!isset($provider_fpage_ref_top_link_general) || empty($provider_fpage_ref_top_link_general)
 								) {
-								$fpage_text_provider_general = uamswp_fad_fpage_text_provider_general();
-									$provider_fpage_title_general = $fpage_text_provider_general['provider_fpage_title_general']; // string
-									$provider_fpage_intro_general = $fpage_text_provider_general['provider_fpage_intro_general']; // string
-									$provider_fpage_ref_main_title_general = $fpage_text_provider_general['provider_fpage_ref_main_title_general']; // string
-									$provider_fpage_ref_main_intro_general = $fpage_text_provider_general['provider_fpage_ref_main_intro_general']; // string
-									$provider_fpage_ref_main_link_general = $fpage_text_provider_general['provider_fpage_ref_main_link_general']; // string
-									$provider_fpage_ref_top_title_general = $fpage_text_provider_general['provider_fpage_ref_top_title_general']; // string
-									$provider_fpage_ref_top_intro_general = $fpage_text_provider_general['provider_fpage_ref_top_intro_general']; // string
-									$provider_fpage_ref_top_link_general = $fpage_text_provider_general['provider_fpage_ref_top_link_general']; // string
+								$fpage_text_provider_general_vars = uamswp_fad_fpage_text_provider_general();
+									$provider_fpage_title_general = $fpage_text_provider_general_vars['provider_fpage_title_general']; // string
+									$provider_fpage_intro_general = $fpage_text_provider_general_vars['provider_fpage_intro_general']; // string
+									$provider_fpage_ref_main_title_general = $fpage_text_provider_general_vars['provider_fpage_ref_main_title_general']; // string
+									$provider_fpage_ref_main_intro_general = $fpage_text_provider_general_vars['provider_fpage_ref_main_intro_general']; // string
+									$provider_fpage_ref_main_link_general = $fpage_text_provider_general_vars['provider_fpage_ref_main_link_general']; // string
+									$provider_fpage_ref_top_title_general = $fpage_text_provider_general_vars['provider_fpage_ref_top_title_general']; // string
+									$provider_fpage_ref_top_intro_general = $fpage_text_provider_general_vars['provider_fpage_ref_top_intro_general']; // string
+									$provider_fpage_ref_top_link_general = $fpage_text_provider_general_vars['provider_fpage_ref_top_link_general']; // string
 							}
 						}
 						if ( !isset($provider_fpage_title_expertise) || empty($provider_fpage_title_expertise) ) {
@@ -4970,15 +4970,15 @@ function uamswp_fad_fpage_text_replace($string) {
 								||
 								!isset($location_fpage_ref_top_link_general) || empty($location_fpage_ref_top_link_general)
 								) {
-								$fpage_text_location_general = uamswp_fad_fpage_text_location_general();
-									$location_fpage_title_general = $fpage_text_location_general['location_fpage_title_general']; // string
-									$location_fpage_intro_general = $fpage_text_location_general['location_fpage_intro_general']; // string
-									$location_fpage_ref_main_title_general = $fpage_text_location_general['location_fpage_ref_main_title_general']; // string
-									$location_fpage_ref_main_intro_general = $fpage_text_location_general['location_fpage_ref_main_intro_general']; // string
-									$location_fpage_ref_main_link_general = $fpage_text_location_general['location_fpage_ref_main_link_general']; // string
-									$location_fpage_ref_top_title_general = $fpage_text_location_general['location_fpage_ref_top_title_general']; // string
-									$location_fpage_ref_top_intro_general = $fpage_text_location_general['location_fpage_ref_top_intro_general']; // string
-									$location_fpage_ref_top_link_general = $fpage_text_location_general['location_fpage_ref_top_link_general']; // string
+								$fpage_text_location_general_vars = uamswp_fad_fpage_text_location_general();
+									$location_fpage_title_general = $fpage_text_location_general_vars['location_fpage_title_general']; // string
+									$location_fpage_intro_general = $fpage_text_location_general_vars['location_fpage_intro_general']; // string
+									$location_fpage_ref_main_title_general = $fpage_text_location_general_vars['location_fpage_ref_main_title_general']; // string
+									$location_fpage_ref_main_intro_general = $fpage_text_location_general_vars['location_fpage_ref_main_intro_general']; // string
+									$location_fpage_ref_main_link_general = $fpage_text_location_general_vars['location_fpage_ref_main_link_general']; // string
+									$location_fpage_ref_top_title_general = $fpage_text_location_general_vars['location_fpage_ref_top_title_general']; // string
+									$location_fpage_ref_top_intro_general = $fpage_text_location_general_vars['location_fpage_ref_top_intro_general']; // string
+									$location_fpage_ref_top_link_general = $fpage_text_location_general_vars['location_fpage_ref_top_link_general']; // string
 							}
 						}
 						if ( !isset($location_fpage_title_expertise) || empty($location_fpage_title_expertise) ) {
@@ -5099,12 +5099,12 @@ function uamswp_fad_fpage_text_replace($string) {
 								||
 								!isset($expertise_descendant_fpage_ref_main_link_general) || empty($expertise_descendant_fpage_ref_main_link_general)
 								) {
-								$fpage_text_expertise_general = uamswp_fad_fpage_text_expertise_general();
-									$expertise_descendant_fpage_title_general = $fpage_text_expertise_general['expertise_descendant_fpage_title_general']; // string
-									$expertise_descendant_fpage_intro_general = $fpage_text_expertise_general['expertise_descendant_fpage_intro_general']; // string
-									$expertise_descendant_fpage_ref_main_title_general = $fpage_text_expertise_general['expertise_descendant_fpage_ref_main_title_general']; // string
-									$expertise_descendant_fpage_ref_main_intro_general = $fpage_text_expertise_general['expertise_descendant_fpage_ref_main_intro_general']; // string
-									$expertise_descendant_fpage_ref_main_link_general = $fpage_text_expertise_general['expertise_descendant_fpage_ref_main_link_general']; // string
+								$fpage_text_expertise_general_vars = uamswp_fad_fpage_text_expertise_general();
+									$expertise_descendant_fpage_title_general = $fpage_text_expertise_general_vars['expertise_descendant_fpage_title_general']; // string
+									$expertise_descendant_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_descendant_fpage_intro_general']; // string
+									$expertise_descendant_fpage_ref_main_title_general = $fpage_text_expertise_general_vars['expertise_descendant_fpage_ref_main_title_general']; // string
+									$expertise_descendant_fpage_ref_main_intro_general = $fpage_text_expertise_general_vars['expertise_descendant_fpage_ref_main_intro_general']; // string
+									$expertise_descendant_fpage_ref_main_link_general = $fpage_text_expertise_general_vars['expertise_descendant_fpage_ref_main_link_general']; // string
 							}
 						}
 						if ( !isset($expertise_descendant_fpage_title_expertise) || empty($expertise_descendant_fpage_title_expertise) ) {
@@ -5213,12 +5213,12 @@ function uamswp_fad_fpage_text_replace($string) {
 								||
 								!isset($expertise_fpage_ref_main_link_general) || empty($expertise_fpage_ref_main_link_general)
 								) {
-								$fpage_text_expertise_general = uamswp_fad_fpage_text_expertise_general();
-									$expertise_fpage_title_general = $fpage_text_expertise_general['expertise_fpage_title_general']; // string
-									$expertise_fpage_intro_general = $fpage_text_expertise_general['expertise_fpage_intro_general']; // string
-									$expertise_fpage_ref_main_title_general = $fpage_text_expertise_general['expertise_fpage_ref_main_title_general']; // string
-									$expertise_fpage_ref_main_intro_general = $fpage_text_expertise_general['expertise_fpage_ref_main_intro_general']; // string
-									$expertise_fpage_ref_main_link_general = $fpage_text_expertise_general['expertise_fpage_ref_main_link_general']; // string
+								$fpage_text_expertise_general_vars = uamswp_fad_fpage_text_expertise_general();
+									$expertise_fpage_title_general = $fpage_text_expertise_general_vars['expertise_fpage_title_general']; // string
+									$expertise_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_intro_general']; // string
+									$expertise_fpage_ref_main_title_general = $fpage_text_expertise_general_vars['expertise_fpage_ref_main_title_general']; // string
+									$expertise_fpage_ref_main_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_ref_main_intro_general']; // string
+									$expertise_fpage_ref_main_link_general = $fpage_text_expertise_general_vars['expertise_fpage_ref_main_link_general']; // string
 							}
 						}
 						if ( !isset($expertise_fpage_title_expertise) || empty($expertise_fpage_title_expertise) ) {
@@ -5375,18 +5375,18 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general)
 							) {
-							$fpage_text_clinical_resource_general = uamswp_fad_fpage_text_clinical_resource_general();
-								$clinical_resource_fpage_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_title_general']; // string
-								$clinical_resource_fpage_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_intro_general']; // string
-								$clinical_resource_fpage_ref_main_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_title_general']; // string
-								$clinical_resource_fpage_ref_main_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_intro_general']; // string
-								$clinical_resource_fpage_ref_main_link_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_link_general']; // string
-								$clinical_resource_fpage_ref_top_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_top_title_general']; // string
-								$clinical_resource_fpage_ref_top_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_top_intro_general']; // string
-								$clinical_resource_fpage_ref_top_link_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_top_link_general']; // string
-								$clinical_resource_fpage_more_text_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_text_general']; // string
-								$clinical_resource_fpage_more_link_text_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_link_text_general']; // string
-								$clinical_resource_fpage_more_link_descr_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_link_descr_general']; // string
+							$fpage_text_clinical_resource_general_vars = uamswp_fad_fpage_text_clinical_resource_general();
+								$clinical_resource_fpage_title_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_title_general']; // string
+								$clinical_resource_fpage_intro_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_intro_general']; // string
+								$clinical_resource_fpage_ref_main_title_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_main_title_general']; // string
+								$clinical_resource_fpage_ref_main_intro_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_main_intro_general']; // string
+								$clinical_resource_fpage_ref_main_link_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_main_link_general']; // string
+								$clinical_resource_fpage_ref_top_title_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_top_title_general']; // string
+								$clinical_resource_fpage_ref_top_intro_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_top_intro_general']; // string
+								$clinical_resource_fpage_ref_top_link_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_top_link_general']; // string
+								$clinical_resource_fpage_more_text_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_more_text_general']; // string
+								$clinical_resource_fpage_more_link_text_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_more_link_text_general']; // string
+								$clinical_resource_fpage_more_link_descr_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_more_link_descr_general']; // string
 						}
 					}
 					if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
@@ -5483,15 +5483,15 @@ function uamswp_fad_fpage_text_replace($string) {
 
 						if ( !isset($condition_fpage_title_expertise) || empty($condition_fpage_title_expertise) ) {
 							if ( !isset($condition_fpage_title_general) || empty($condition_fpage_title_general) ) {
-								$fpage_text_condition_general = uamswp_fad_fpage_text_condition_general();
-									$condition_fpage_title_general = $fpage_text_condition_general['condition_fpage_title_general']; // string
+								$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
+									$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
 							}
 							$condition_fpage_title_expertise = $condition_fpage_title_general; // Title
 						}
 						if ( !isset($condition_fpage_intro_expertise) || empty($condition_fpage_intro_expertise) ) {
 							if ( !isset($condition_fpage_intro_general) || empty($condition_fpage_intro_general) ) {
-								$fpage_text_condition_general = uamswp_fad_fpage_text_condition_general();
-									$condition_fpage_intro_general = $fpage_text_condition_general['condition_fpage_intro_general']; // string
+								$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
+									$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
 							}
 							$condition_fpage_intro_expertise = $condition_fpage_intro_general; // Intro text
 						}
@@ -5535,15 +5535,15 @@ function uamswp_fad_fpage_text_replace($string) {
 
 						if ( !isset($treatment_fpage_title_expertise) || empty($treatment_fpage_title_expertise) ) {
 							if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
-								$fpage_text_treatment_general = uamswp_fad_fpage_text_treatment_general();
-									$treatment_fpage_title_general = $fpage_text_treatment_general['treatment_fpage_title_general']; // string
+								$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
+									$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
 							}
 							$treatment_fpage_title_expertise = $treatment_fpage_title_general; // Title
 						}
 						if ( !isset($treatment_fpage_intro_expertise) || empty($treatment_fpage_intro_expertise) ) {
 							if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
-								$fpage_text_treatment_general = uamswp_fad_fpage_text_treatment_general();
-									$treatment_fpage_intro_general = $fpage_text_treatment_general['treatment_fpage_intro_general']; // string
+								$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
+									$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
 							}
 							$treatment_fpage_intro_expertise = $treatment_fpage_intro_general; // Intro text
 						}
@@ -5587,15 +5587,15 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($condition_treatment_fpage_title_expertise) || empty($condition_treatment_fpage_title_expertise) ) {
 						if ( !isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general) ) {
-							$fpage_text_condition_treatment_general = uamswp_fad_fpage_text_condition_treatment_general();
-								$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general['condition_treatment_fpage_title_general']; // string
+							$fpage_text_condition_treatment_general_vars = uamswp_fad_fpage_text_condition_treatment_general();
+								$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_title_general']; // string
 						}
 						$condition_treatment_fpage_title_expertise = $condition_treatment_fpage_title_general; // Title
 					}
 					if ( !isset($condition_treatment_fpage_intro_expertise) || empty($condition_treatment_fpage_intro_expertise) ) {
 						if ( !isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general) ) {
-							$fpage_text_condition_treatment_general = uamswp_fad_fpage_text_condition_treatment_general();
-								$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general['condition_treatment_fpage_intro_general']; // string
+							$fpage_text_condition_treatment_general_vars = uamswp_fad_fpage_text_condition_treatment_general();
+								$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_intro_general']; // string
 						}
 						$condition_treatment_fpage_intro_expertise = $condition_treatment_fpage_intro_general; // Intro text
 					}
@@ -5607,7 +5607,7 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Create and return an array to be used on the templates and template parts
 		
-				$fpage_text_expertise = array(
+				$fpage_text_expertise_vars = array(
 					'expertise_page_title_options'							=> $expertise_page_title_options, // string
 					'expertise_page_title'									=> $expertise_page_title, // string
 					'expertise_page_intro'									=> $expertise_page_intro, // string
@@ -5663,7 +5663,7 @@ function uamswp_fad_fpage_text_replace($string) {
 					'condition_treatment_fpage_title_expertise'				=> $condition_treatment_fpage_title_expertise, // string
 					'condition_treatment_fpage_intro_expertise'				=> $condition_treatment_fpage_intro_expertise // string
 				);
-				return $fpage_text_expertise;
+				return $fpage_text_expertise_vars;
 
 		}
 
@@ -5761,12 +5761,12 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($provider_fpage_ref_main_link_general) || empty($provider_fpage_ref_main_link_general)
 							) {
-							$fpage_text_provider_general = uamswp_fad_fpage_text_provider_general();
-								$provider_fpage_title_general = $fpage_text_provider_general['provider_fpage_title_general']; // string
-								$provider_fpage_intro_general = $fpage_text_provider_general['provider_fpage_intro_general']; // string
-								$provider_fpage_ref_main_title_general = $fpage_text_provider_general['provider_fpage_ref_main_title_general']; // string
-								$provider_fpage_ref_main_intro_general = $fpage_text_provider_general['provider_fpage_ref_main_intro_general']; // string
-								$provider_fpage_ref_main_link_general = $fpage_text_provider_general['provider_fpage_ref_main_link_general']; // string
+							$fpage_text_provider_general_vars = uamswp_fad_fpage_text_provider_general();
+								$provider_fpage_title_general = $fpage_text_provider_general_vars['provider_fpage_title_general']; // string
+								$provider_fpage_intro_general = $fpage_text_provider_general_vars['provider_fpage_intro_general']; // string
+								$provider_fpage_ref_main_title_general = $fpage_text_provider_general_vars['provider_fpage_ref_main_title_general']; // string
+								$provider_fpage_ref_main_intro_general = $fpage_text_provider_general_vars['provider_fpage_ref_main_intro_general']; // string
+								$provider_fpage_ref_main_link_general = $fpage_text_provider_general_vars['provider_fpage_ref_main_link_general']; // string
 						}
 					}
 					if ( !isset($provider_fpage_title_clinical_resource) || empty($provider_fpage_title_clinical_resource) ) {
@@ -5849,12 +5849,12 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($location_fpage_ref_main_link_general) || empty($location_fpage_ref_main_link_general)
 							) {
-							$fpage_text_location_general = uamswp_fad_fpage_text_location_general();
-								$location_fpage_title_general = $fpage_text_location_general['location_fpage_title_general']; // string
-								$location_fpage_intro_general = $fpage_text_location_general['location_fpage_intro_general']; // string
-								$location_fpage_ref_main_title_general = $fpage_text_location_general['location_fpage_ref_main_title_general']; // string
-								$location_fpage_ref_main_intro_general = $fpage_text_location_general['location_fpage_ref_main_intro_general']; // string
-								$location_fpage_ref_main_link_general = $fpage_text_location_general['location_fpage_ref_main_link_general']; // string
+							$fpage_text_location_general_vars = uamswp_fad_fpage_text_location_general();
+								$location_fpage_title_general = $fpage_text_location_general_vars['location_fpage_title_general']; // string
+								$location_fpage_intro_general = $fpage_text_location_general_vars['location_fpage_intro_general']; // string
+								$location_fpage_ref_main_title_general = $fpage_text_location_general_vars['location_fpage_ref_main_title_general']; // string
+								$location_fpage_ref_main_intro_general = $fpage_text_location_general_vars['location_fpage_ref_main_intro_general']; // string
+								$location_fpage_ref_main_link_general = $fpage_text_location_general_vars['location_fpage_ref_main_link_general']; // string
 						}
 					}
 					if ( !isset($location_fpage_title_clinical_resource) || empty($location_fpage_title_clinical_resource) ) {
@@ -5937,12 +5937,12 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($expertise_fpage_ref_main_link_general) || empty($expertise_fpage_ref_main_link_general)
 							) {
-							$fpage_text_expertise_general = uamswp_fad_fpage_text_expertise_general();
-								$expertise_fpage_title_general = $fpage_text_expertise_general['expertise_fpage_title_general']; // string
-								$expertise_fpage_intro_general = $fpage_text_expertise_general['expertise_fpage_intro_general']; // string
-								$expertise_fpage_ref_main_title_general = $fpage_text_expertise_general['expertise_fpage_ref_main_title_general']; // string
-								$expertise_fpage_ref_main_intro_general = $fpage_text_expertise_general['expertise_fpage_ref_main_intro_general']; // string
-								$expertise_fpage_ref_main_link_general = $fpage_text_expertise_general['expertise_fpage_ref_main_link_general']; // string
+							$fpage_text_expertise_general_vars = uamswp_fad_fpage_text_expertise_general();
+								$expertise_fpage_title_general = $fpage_text_expertise_general_vars['expertise_fpage_title_general']; // string
+								$expertise_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_intro_general']; // string
+								$expertise_fpage_ref_main_title_general = $fpage_text_expertise_general_vars['expertise_fpage_ref_main_title_general']; // string
+								$expertise_fpage_ref_main_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_ref_main_intro_general']; // string
+								$expertise_fpage_ref_main_link_general = $fpage_text_expertise_general_vars['expertise_fpage_ref_main_link_general']; // string
 						}
 					}
 					if ( !isset($expertise_fpage_title_clinical_resource) || empty($expertise_fpage_title_clinical_resource) ) {
@@ -6049,15 +6049,15 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general)
 							) {
-							$fpage_text_clinical_resource_general = uamswp_fad_fpage_text_clinical_resource_general();
-								$clinical_resource_fpage_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_title_general']; // string
-								$clinical_resource_fpage_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_intro_general']; // string
-								$clinical_resource_fpage_ref_main_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_title_general']; // string
-								$clinical_resource_fpage_ref_main_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_intro_general']; // string
-								$clinical_resource_fpage_ref_main_link_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_ref_main_link_general']; // string
-								$clinical_resource_fpage_more_text_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_text_general']; // string
-								$clinical_resource_fpage_more_link_text_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_link_text_general']; // string
-								$clinical_resource_fpage_more_link_descr_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_more_link_descr_general']; // string
+							$fpage_text_clinical_resource_general_vars = uamswp_fad_fpage_text_clinical_resource_general();
+								$clinical_resource_fpage_title_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_title_general']; // string
+								$clinical_resource_fpage_intro_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_intro_general']; // string
+								$clinical_resource_fpage_ref_main_title_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_main_title_general']; // string
+								$clinical_resource_fpage_ref_main_intro_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_main_intro_general']; // string
+								$clinical_resource_fpage_ref_main_link_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_main_link_general']; // string
+								$clinical_resource_fpage_more_text_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_more_text_general']; // string
+								$clinical_resource_fpage_more_link_text_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_more_link_text_general']; // string
+								$clinical_resource_fpage_more_link_descr_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_more_link_descr_general']; // string
 						}
 					}
 					if ( !isset($clinical_resource_fpage_title_clinical_resource) || empty($clinical_resource_fpage_title_clinical_resource) ) {
@@ -6116,15 +6116,15 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($condition_fpage_title_clinical_resource) || empty($condition_fpage_title_clinical_resource) ) {
 						if ( !isset($condition_fpage_title_general) || empty($condition_fpage_title_general) ) {
-							$fpage_text_condition_general = uamswp_fad_fpage_text_condition_general();
-								$condition_fpage_title_general = $fpage_text_condition_general['condition_fpage_title_general']; // string
+							$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
+								$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
 						}
 						$condition_fpage_title_clinical_resource = $condition_fpage_title_general; // Title
 					}
 					if ( !isset($condition_fpage_intro_clinical_resource) || empty($condition_fpage_intro_clinical_resource) ) {
 						if ( !isset($condition_fpage_intro_general) || empty($condition_fpage_intro_general) ) {
-							$fpage_text_condition_general = uamswp_fad_fpage_text_condition_general();
-								$condition_fpage_intro_general = $fpage_text_condition_general['condition_fpage_intro_general']; // string
+							$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
+								$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
 						}
 						$condition_fpage_intro_clinical_resource = $condition_fpage_intro_general; // Intro text
 					}
@@ -6154,15 +6154,15 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($treatment_fpage_title_clinical_resource) || empty($treatment_fpage_title_clinical_resource) ) {
 						if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
-							$fpage_text_treatment_general = uamswp_fad_fpage_text_treatment_general();
-								$treatment_fpage_title_general = $fpage_text_treatment_general['treatment_fpage_title_general']; // string
+							$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
+								$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
 						}
 						$treatment_fpage_title_clinical_resource = $treatment_fpage_title_general; // Title
 					}
 					if ( !isset($treatment_fpage_intro_clinical_resource) || empty($treatment_fpage_intro_clinical_resource) ) {
 						if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
-							$fpage_text_treatment_general = uamswp_fad_fpage_text_treatment_general();
-								$treatment_fpage_intro_general = $fpage_text_treatment_general['treatment_fpage_intro_general']; // string
+							$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
+								$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
 						}
 						$treatment_fpage_intro_clinical_resource = $treatment_fpage_intro_general; // Intro text
 					}
@@ -6192,15 +6192,15 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($condition_treatment_fpage_title_clinical_resource) || empty($condition_treatment_fpage_title_clinical_resource) ) {
 						if ( !isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general) ) {
-							$fpage_text_condition_treatment_general = uamswp_fad_fpage_text_condition_treatment_general();
-								$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general['condition_treatment_fpage_title_general']; // string
+							$fpage_text_condition_treatment_general_vars = uamswp_fad_fpage_text_condition_treatment_general();
+								$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_title_general']; // string
 						}
 						$condition_treatment_fpage_title_clinical_resource = $condition_treatment_fpage_title_general; // Title
 					}
 					if ( !isset($condition_treatment_fpage_intro_clinical_resource) || empty($condition_treatment_fpage_intro_clinical_resource) ) {
 						if ( !isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general) ) {
-							$fpage_text_condition_treatment_general = uamswp_fad_fpage_text_condition_treatment_general();
-								$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general['condition_treatment_fpage_intro_general']; // string
+							$fpage_text_condition_treatment_general_vars = uamswp_fad_fpage_text_condition_treatment_general();
+								$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_intro_general']; // string
 						}
 						$condition_treatment_fpage_intro_clinical_resource = $condition_treatment_fpage_intro_general; // Intro text
 					}
@@ -6212,7 +6212,7 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Create and return an array to be used on the templates and template parts
 		
-				$fpage_text_clinical_resource = array(
+				$fpage_text_clinical_resource_vars = array(
 					'provider_fpage_title_clinical_resource'					=> $provider_fpage_title_clinical_resource, // string
 					'provider_fpage_intro_clinical_resource'					=> $provider_fpage_intro_clinical_resource, // string
 					'provider_fpage_ref_main_title_clinical_resource'			=> $provider_fpage_ref_main_title_clinical_resource, // string
@@ -6246,7 +6246,7 @@ function uamswp_fad_fpage_text_replace($string) {
 					'condition_treatment_fpage_title_clinical_resource'			=> $condition_treatment_fpage_title_clinical_resource, // string
 					'condition_treatment_fpage_intro_clinical_resource'			=> $condition_treatment_fpage_intro_clinical_resource // string
 				);
-				return $fpage_text_clinical_resource;
+				return $fpage_text_clinical_resource_vars;
 
 		}
 
@@ -6264,10 +6264,10 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$archive_image_provider = array(
+			$archive_image_provider_vars = array(
 				'provider_archive_image'	=> $provider_archive_image // int
 			);
-			return $archive_image_provider;
+			return $archive_image_provider_vars;
 
 	}
 
@@ -6283,10 +6283,10 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$archive_image_location = array(
+			$archive_image_location_vars = array(
 				'location_archive_image'	=> $location_archive_image // int
 			);
-			return $archive_image_location;
+			return $archive_image_location_vars;
 
 	}
 
@@ -6302,10 +6302,10 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$archive_image_expertise = array(
+			$archive_image_expertise_vars = array(
 				'expertise_archive_image'	=> $expertise_archive_image // int
 			);
-			return $archive_image_expertise;
+			return $archive_image_expertise_vars;
 
 	}
 
@@ -6321,10 +6321,10 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		// Create and return an array to be used on the templates and template parts
 	
-			$archive_image_clinical_resource = array(
+			$archive_image_clinical_resource_vars = array(
 				'clinical_resource_archive_image'	=> $clinical_resource_archive_image // int
 			);
-			return $archive_image_clinical_resource;
+			return $archive_image_clinical_resource_vars;
 
 	}
 
@@ -6348,10 +6348,10 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Create and return an array to be used on the templates and template parts
 		
-				$fpage_image_provider_general = array(
+				$fpage_image_provider_general_vars = array(
 					'provider_fpage_image_general'	=> $provider_fpage_image_general // int
 				);
-				return $fpage_image_provider_general;
+				return $fpage_image_provider_general_vars;
 	
 		}
 
@@ -6383,11 +6383,11 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Create and return an array to be used on the templates and template parts
 		
-				$fpage_image_location_general = array(
+				$fpage_image_location_general_vars = array(
 					'location_fpage_image_general'				=> $location_fpage_image_general, // int
 					'location_descendant_fpage_image_general'	=> $location_descendant_fpage_image_general // int
 				);
-				return $fpage_image_location_general;	
+				return $fpage_image_location_general_vars;	
 
 		}
 
@@ -6419,11 +6419,11 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Create and return an array to be used on the templates and template parts
 		
-				$fpage_image_expertise_general = array(
+				$fpage_image_expertise_general_vars = array(
 					'expertise_fpage_image_general'				=> $expertise_fpage_image_general, // int
 					'expertise_descendant_fpage_image_general'	=> $expertise_descendant_fpage_image_general // int
 				);
-				return $fpage_image_expertise_general;	
+				return $fpage_image_expertise_general_vars;	
 
 		}
 
@@ -6443,10 +6443,10 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Create and return an array to be used on the templates and template parts
 		
-				$fpage_image_clinical_resource_general = array(
+				$fpage_image_clinical_resource_general_vars = array(
 					'clinical_resource_fpage_image_general'	=> $clinical_resource_fpage_image_general // int
 				);
-				return $fpage_image_clinical_resource_general;	
+				return $fpage_image_clinical_resource_general_vars;	
 
 		}
 
@@ -6470,8 +6470,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($location_fpage_image_provider) || empty($location_fpage_image_provider) ) {
 					if ( !isset($location_fpage_image_general) || empty($location_fpage_image_general) ) {
-						$fpage_image_location_general = uamswp_fad_fpage_image_location_general();
-							$location_fpage_image_general = $fpage_image_location_general['location_fpage_image_general']; // int
+						$fpage_image_location_general_vars = uamswp_fad_fpage_image_location_general();
+							$location_fpage_image_general = $fpage_image_location_general_vars['location_fpage_image_general']; // int
 					}
 					$location_fpage_image_provider = $location_fpage_image_general; // Featured image
 				}
@@ -6485,8 +6485,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($expertise_fpage_image_provider) || empty($expertise_fpage_image_provider) ) {
 					if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
-						$fpage_image_expertise_general = uamswp_fad_fpage_image_expertise_general();
-							$expertise_fpage_image_general = $fpage_image_expertise_general['expertise_fpage_image_general']; // int
+						$fpage_image_expertise_general_vars = uamswp_fad_fpage_image_expertise_general();
+							$expertise_fpage_image_general = $fpage_image_expertise_general_vars['expertise_fpage_image_general']; // int
 					}
 					$expertise_fpage_image_provider = $expertise_fpage_image_general; // Featured image
 				}
@@ -6500,20 +6500,20 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($clinical_resource_fpage_image_provider) || empty($clinical_resource_fpage_image_provider) ) {
 					if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
-						$fpage_image_clinical_resource_general = uamswp_fad_fpage_image_clinical_resource_general();
-							$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general['clinical_resource_fpage_image_general']; // int
+						$fpage_image_clinical_resource_general_vars = uamswp_fad_fpage_image_clinical_resource_general();
+							$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general_vars['clinical_resource_fpage_image_general']; // int
 					}
 					$clinical_resource_fpage_image_provider = $clinical_resource_fpage_image_general; // Featured image
 				}
 
 			// Create and return an array to be used on the templates and template parts
 		
-				$fpage_image_provider = array(
+				$fpage_image_provider_vars = array(
 					'location_fpage_image_provider'				=> $location_fpage_image_provider, // int
 					'expertise_fpage_image_provider'			=> $expertise_fpage_image_provider, // int
 					'clinical_resource_fpage_image_provider'	=> $clinical_resource_fpage_image_provider // int
 				);
-				return $fpage_image_provider;
+				return $fpage_image_provider_vars;
 
 		}
 
@@ -6536,8 +6536,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($provider_fpage_image_location) || empty($provider_fpage_image_location) ) {
 					if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
-						$fpage_image_provider_general = uamswp_fad_fpage_image_provider_general();
-							$provider_fpage_image_general = $fpage_image_provider_general['provider_fpage_image_general']; // int
+						$fpage_image_provider_general_vars = uamswp_fad_fpage_image_provider_general();
+							$provider_fpage_image_general = $fpage_image_provider_general_vars['provider_fpage_image_general']; // int
 					}
 					$provider_fpage_image_location = $provider_fpage_image_general; // Featured image
 				}
@@ -6551,8 +6551,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($location_descendant_fpage_image_location) || empty($location_descendant_fpage_image_location) ) {
 					if ( !isset($location_descendant_fpage_image_general) || empty($location_descendant_fpage_image_general) ) {
-						$fpage_image_location_general = uamswp_fad_fpage_image_location_general();
-							$location_descendant_fpage_image_general = $fpage_image_location_general['location_descendant_fpage_image_general']; // int
+						$fpage_image_location_general_vars = uamswp_fad_fpage_image_location_general();
+							$location_descendant_fpage_image_general = $fpage_image_location_general_vars['location_descendant_fpage_image_general']; // int
 					}
 					$location_descendant_fpage_image_location = $location_descendant_fpage_image_general; // Featured image
 				}
@@ -6566,8 +6566,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($expertise_fpage_image_location) || empty($expertise_fpage_image_location) ) {
 					if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
-						$fpage_image_expertise_general = uamswp_fad_fpage_image_expertise_general();
-							$expertise_fpage_image_general = $fpage_image_expertise_general['expertise_fpage_image_general']; // int
+						$fpage_image_expertise_general_vars = uamswp_fad_fpage_image_expertise_general();
+							$expertise_fpage_image_general = $fpage_image_expertise_general_vars['expertise_fpage_image_general']; // int
 					}
 					$expertise_fpage_image_location = $expertise_fpage_image_general; // Featured image
 				}
@@ -6581,21 +6581,21 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($clinical_resource_fpage_image_location) || empty($clinical_resource_fpage_image_location) ) {
 					if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
-						$fpage_image_clinical_resource_general = uamswp_fad_fpage_image_clinical_resource_general();
-							$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general['clinical_resource_fpage_image_general']; // int
+						$fpage_image_clinical_resource_general_vars = uamswp_fad_fpage_image_clinical_resource_general();
+							$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general_vars['clinical_resource_fpage_image_general']; // int
 					}
 					$clinical_resource_fpage_image_location = $clinical_resource_fpage_image_general; // Featured image
 				}
 
 			// Create and return an array to be used on the templates and template parts
 		
-				$fpage_image_location = array(
+				$fpage_image_location_vars = array(
 					'provider_fpage_image_location'				=> $provider_fpage_image_location, // int
 					'location_descendant_fpage_image_location'	=> $location_descendant_fpage_image_location, // int
 					'expertise_fpage_image_location'			=> $expertise_fpage_image_location, // int
 					'clinical_resource_fpage_image_location'	=> $clinical_resource_fpage_image_location // int
 				);
-				return $fpage_image_location;
+				return $fpage_image_location_vars;
 
 		}
 
@@ -6646,8 +6646,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($provider_fpage_featured_image_expertise) || empty($provider_fpage_featured_image_expertise) ) {
 					if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
-						$fpage_image_provider_general = uamswp_fad_fpage_image_provider_general();
-							$provider_fpage_image_general = $fpage_image_provider_general['provider_fpage_image_general']; // int
+						$fpage_image_provider_general_vars = uamswp_fad_fpage_image_provider_general();
+							$provider_fpage_image_general = $fpage_image_provider_general_vars['provider_fpage_image_general']; // int
 					}
 					$provider_fpage_featured_image_expertise = $provider_fpage_image_general; // Featured image
 				}
@@ -6676,8 +6676,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($location_fpage_featured_image_expertise) || empty($location_fpage_featured_image_expertise) ) {
 					if ( !isset($location_descendant_fpage_image_general) || empty($location_descendant_fpage_image_general) ) {
-						$fpage_image_location_general = uamswp_fad_fpage_image_location_general();
-							$location_descendant_fpage_image_general = $fpage_image_location_general['location_descendant_fpage_image_general']; // int
+						$fpage_image_location_general_vars = uamswp_fad_fpage_image_location_general();
+							$location_descendant_fpage_image_general = $fpage_image_location_general_vars['location_descendant_fpage_image_general']; // int
 					}
 					$location_fpage_featured_image_expertise = $location_descendant_fpage_image_general; // Featured image
 				}
@@ -6706,8 +6706,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($expertise_fpage_featured_image_expertise) || empty($expertise_fpage_featured_image_expertise) ) {
 					if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
-						$fpage_image_expertise_general = uamswp_fad_fpage_image_expertise_general();
-							$expertise_fpage_image_general = $fpage_image_expertise_general['expertise_fpage_image_general']; // int
+						$fpage_image_expertise_general_vars = uamswp_fad_fpage_image_expertise_general();
+							$expertise_fpage_image_general = $fpage_image_expertise_general_vars['expertise_fpage_image_general']; // int
 					}
 					$expertise_fpage_featured_image_expertise = $expertise_fpage_image_general; // Featured image
 				}
@@ -6736,8 +6736,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($expertise_descendant_fpage_featured_image_expertise) || empty($expertise_descendant_fpage_featured_image_expertise) ) {
 					if ( !isset($expertise_descendant_fpage_image_general) || empty($expertise_descendant_fpage_image_general) ) {
-						$fpage_image_expertise_general = uamswp_fad_fpage_image_expertise_general();
-							$expertise_descendant_fpage_image_general = $fpage_image_expertise_general['expertise_descendant_fpage_image_general']; // int
+						$fpage_image_expertise_general_vars = uamswp_fad_fpage_image_expertise_general();
+							$expertise_descendant_fpage_image_general = $fpage_image_expertise_general_vars['expertise_descendant_fpage_image_general']; // int
 					}
 					$expertise_descendant_fpage_featured_image_expertise = $expertise_descendant_fpage_image_general; // Featured image
 				}
@@ -6766,8 +6766,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($clinical_resource_fpage_featured_image_expertise) || empty($clinical_resource_fpage_featured_image_expertise) ) {
 					if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
-						$fpage_image_clinical_resource_general = uamswp_fad_fpage_image_clinical_resource_general();
-							$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general['clinical_resource_fpage_image_general']; // int
+						$fpage_image_clinical_resource_general_vars = uamswp_fad_fpage_image_clinical_resource_general();
+							$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general_vars['clinical_resource_fpage_image_general']; // int
 					}
 					$clinical_resource_fpage_featured_image_expertise = $clinical_resource_fpage_image_general; // Featured image
 				}
@@ -6783,7 +6783,7 @@ function uamswp_fad_fpage_text_replace($string) {
 
 			// Create and return an array to be used on the templates and template parts
 		
-				$fpage_image_expertise = array(
+				$fpage_image_expertise_vars = array(
 					'expertise_featured_image'									=> $expertise_featured_image, // int
 					'expertise_featured_image_url'								=> $expertise_featured_image_url, // string
 					'provider_fpage_featured_image_expertise'					=> $provider_fpage_featured_image_expertise, // int
@@ -6797,7 +6797,7 @@ function uamswp_fad_fpage_text_replace($string) {
 					'clinical_resource_fpage_featured_image_expertise'			=> $clinical_resource_fpage_featured_image_expertise, // int
 					'clinical_resource_fpage_featured_image_expertise_url'		=> $clinical_resource_fpage_featured_image_expertise_url, // string
 				);
-				return $fpage_image_expertise;
+				return $fpage_image_expertise_vars;
 
 		}
 
@@ -6820,8 +6820,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($provider_fpage_image_clinical_resource) || empty($provider_fpage_image_clinical_resource) ) {
 					if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
-						$fpage_image_provider_general = uamswp_fad_fpage_image_provider_general();
-							$provider_fpage_image_general = $fpage_image_provider_general['provider_fpage_image_general']; // int
+						$fpage_image_provider_general_vars = uamswp_fad_fpage_image_provider_general();
+							$provider_fpage_image_general = $fpage_image_provider_general_vars['provider_fpage_image_general']; // int
 					}
 					$provider_fpage_image_clinical_resource = $provider_fpage_image_general; // Featured image
 				}
@@ -6835,8 +6835,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($location_fpage_image_clinical_resource) || empty($location_fpage_image_clinical_resource) ) {
 					if ( !isset($location_fpage_image_general) || empty($location_fpage_image_general) ) {
-						$fpage_image_location_general = uamswp_fad_fpage_image_location_general();
-							$location_fpage_image_general = $fpage_image_location_general['location_fpage_image_general']; // int
+						$fpage_image_location_general_vars = uamswp_fad_fpage_image_location_general();
+							$location_fpage_image_general = $fpage_image_location_general_vars['location_fpage_image_general']; // int
 					}
 					$location_fpage_image_clinical_resource = $location_fpage_image_general; // Featured image
 				}
@@ -6850,8 +6850,8 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($expertise_fpage_image_clinical_resource) || empty($expertise_fpage_image_clinical_resource) ) {
 					if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
-						$fpage_image_expertise_general = uamswp_fad_fpage_image_expertise_general();
-							$expertise_fpage_image_general = $fpage_image_expertise_general['expertise_fpage_image_general']; // int
+						$fpage_image_expertise_general_vars = uamswp_fad_fpage_image_expertise_general();
+							$expertise_fpage_image_general = $fpage_image_expertise_general_vars['expertise_fpage_image_general']; // int
 					}
 					$expertise_fpage_image_clinical_resource = $expertise_fpage_image_general; // Featured image
 				}
@@ -6865,21 +6865,21 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 				if ( !isset($clinical_resource_fpage_image_clinical_resource) || empty($clinical_resource_fpage_image_clinical_resource) ) {
 					if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
-						$fpage_image_clinical_resource_general = uamswp_fad_fpage_image_clinical_resource_general();
-							$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general['clinical_resource_fpage_image_general']; // int
+						$fpage_image_clinical_resource_general_vars = uamswp_fad_fpage_image_clinical_resource_general();
+							$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general_vars['clinical_resource_fpage_image_general']; // int
 					}
 					$clinical_resource_fpage_image_clinical_resource = $clinical_resource_fpage_image_general; // Featured image
 				}
 
 			// Create and return an array to be used on the templates and template parts
 		
-				$fpage_image_clinical_resource = array(
+				$fpage_image_clinical_resource_vars = array(
 					'provider_fpage_image_clinical_resource'			=> $provider_fpage_image_clinical_resource, // int
 					'location_fpage_image_clinical_resource'			=> $location_fpage_image_clinical_resource, // int
 					'expertise_fpage_image_clinical_resource'			=> $expertise_fpage_image_clinical_resource, // int
 					'clinical_resource_fpage_image_clinical_resource'	=> $clinical_resource_fpage_image_clinical_resource // int
 				);
-				return $fpage_image_clinical_resource;
+				return $fpage_image_clinical_resource_vars;
 
 		}
 
@@ -7006,7 +7006,7 @@ function uamswp_fad_appointment_patients() {
 
 	// Create and return an array to be used on the templates and template parts
 
-		$appointment_patients = array(
+		$appointment_patients_vars = array(
 			'appointment_patients_phone_number_new'				=> $appointment_patients_phone_number_new, // string
 			'appointment_patients_phone_label_new'				=> $appointment_patients_phone_label_new, // string
 			'appointment_patients_phone_label_new_attr'			=> $appointment_patients_phone_label_new_attr, // string
@@ -7032,7 +7032,7 @@ function uamswp_fad_appointment_patients() {
 			'appointment_patients_web_label_both_attr'			=> $appointment_patients_web_label_both_attr, // string
 			'appointment_patients_web_info_both'				=> $appointment_patients_web_info_both // string
 		);
-		return $appointment_patients;
+		return $appointment_patients_vars;
 
 }
 
@@ -7077,7 +7077,7 @@ function uamswp_fad_appointment_refer() {
 
 	// Create and return an array to be used on the templates and template parts
 
-		$appointment_patients = array(
+		$appointment_refer_vars = array(
 			'appointment_refer_phone_number'		=> $appointment_refer_phone_number, // string
 			'appointment_refer_phone_label'			=> $appointment_refer_phone_label, // string
 			'appointment_refer_phone_label_attr'	=> $appointment_refer_phone_label_attr, // string
@@ -7091,7 +7091,7 @@ function uamswp_fad_appointment_refer() {
 			'appointment_refer_web_label_attr'		=> $appointment_refer_web_label_attr, // string
 			'appointment_refer_web_info'			=> $appointment_refer_web_info, // string
 		);
-		return $appointment_patients;
+		return $appointment_refer_vars;
 
 }
 
@@ -7103,10 +7103,10 @@ function uamswp_fad_labels_jump_links() {
 
 	// Create and return an array to be used on the templates and template parts
 
-		$labels_jump_links = array(
+		$labels_jump_links_vars = array(
 			'fad_jump_links_title'	=> $fad_jump_links_title // string
 		);
-		return $labels_jump_links;
+		return $labels_jump_links_vars;
 
 }
 
@@ -7159,7 +7159,7 @@ function uamswp_meta_image_resize( $page_image_id ) {
 
 	// Create and return an array to be used on the templates and template parts
 
-		$meta_image_resize = array(
+		$meta_image_resize_vars = array(
 			'meta_og_image'				=> $meta_og_image, // string
 			'meta_og_image_width'		=> $meta_og_image_width, // int
 			'meta_og_image_height'		=> $meta_og_image_height, // int
@@ -7167,7 +7167,7 @@ function uamswp_meta_image_resize( $page_image_id ) {
 			'meta_twitter_image_width'	=> $meta_twitter_image_width, // int
 			'meta_twitter_image_height'	=> $meta_twitter_image_height // int
 		);
-		return $meta_image_resize;
+		return $meta_image_resize_vars;
 
 }
 
@@ -7189,22 +7189,22 @@ function uamswp_fad_section_provider( $providers ) {
 			global $provider_section_filter_title; // Query for whether to add title filter // bool (default: true)
 			global $provider_section_collapse_list; // Query for whether to collapse the list of providers in the providers section // bool (default: true)
 
-		$labels_provider = uamswp_fad_labels_provider();
-			$provider_plural_name = $labels_provider['provider_plural_name']; // string
-			$provider_plural_name_attr = $labels_provider['provider_plural_name_attr']; // string
+		$labels_provider_vars = uamswp_fad_labels_provider();
+			$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
+			$provider_plural_name_attr = $labels_provider_vars['provider_plural_name_attr']; // string
 
-		$fpage_text_provider_general = uamswp_fad_fpage_text_provider_general();
-			$provider_fpage_title_general = $fpage_text_provider_general['provider_fpage_title_general']; // string
-			$provider_fpage_intro_general = $fpage_text_provider_general['provider_fpage_intro_general']; // string
+		$fpage_text_provider_general_vars = uamswp_fad_fpage_text_provider_general();
+			$provider_fpage_title_general = $fpage_text_provider_general_vars['provider_fpage_title_general']; // string
+			$provider_fpage_intro_general = $fpage_text_provider_general_vars['provider_fpage_intro_general']; // string
 
-		$ontology_site_values = uamswp_fad_ontology_site_values();
-			$providers = $ontology_site_values['providers']; // int[]
+		$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+			$providers = $ontology_site_values_vars['providers']; // int[]
 
-		$provider_query_function = uamswp_fad_provider_query( $providers );
-			$provider_query = $provider_query_function['provider_query']; // WP_Post[]
-			$provider_section_show = $provider_query_function['provider_section_show']; // bool
-			$provider_ids = $provider_query_function['provider_ids']; // int[]
-			$provider_count = $provider_query_function['provider_count']; // int
+		$provider_query_vars = uamswp_fad_provider_query( $providers );
+			$provider_query = $provider_query_vars['provider_query']; // WP_Post[]
+			$provider_section_show = $provider_query_vars['provider_section_show']; // bool
+			$provider_ids = $provider_query_vars['provider_ids']; // int[]
+			$provider_count = $provider_query_vars['provider_count']; // int
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-provider.php' );
 
@@ -7230,24 +7230,24 @@ function uamswp_fad_section_location( $locations ) {
 			global $location_section_schema_query; // Query for whether to add locations to schema // bool (default: false)
 			global $location_descendant_list; // Query for whether this is a list of child locations within a location // bool (default: false)
 
-		$labels_location = uamswp_fad_labels_location();
-			$location_single_name = $labels_location['location_single_name']; // string
-			$location_single_name_attr = $labels_location['location_single_name_attr']; // string
-			$location_plural_name = $labels_location['location_plural_name']; // string
-			$location_plural_name_attr = $labels_location['location_plural_name_attr']; // string
+		$labels_location_vars = uamswp_fad_labels_location();
+			$location_single_name = $labels_location_vars['location_single_name']; // string
+			$location_single_name_attr = $labels_location_vars['location_single_name_attr']; // string
+			$location_plural_name = $labels_location_vars['location_plural_name']; // string
+			$location_plural_name_attr = $labels_location_vars['location_plural_name_attr']; // string
 
-		$fpage_text_location_general = uamswp_fad_fpage_text_location_general();
-			$location_fpage_title_general = $fpage_text_location_general['location_fpage_title_general']; // string
-			$location_fpage_intro_general = $fpage_text_location_general['location_fpage_intro_general']; // string
+		$fpage_text_location_general_vars = uamswp_fad_fpage_text_location_general();
+			$location_fpage_title_general = $fpage_text_location_general_vars['location_fpage_title_general']; // string
+			$location_fpage_intro_general = $fpage_text_location_general_vars['location_fpage_intro_general']; // string
 
-		$ontology_site_values = uamswp_fad_ontology_site_values();
-			$locations = $ontology_site_values['locations']; // int[]
+		$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+			$locations = $ontology_site_values_vars['locations']; // int[]
 
-		$location_query_function = uamswp_fad_location_query( $locations );
-			$location_query = $location_query_function['location_query']; // WP_Post[]
-			$location_section_show = $location_query_function['location_section_show']; // bool
-			$location_ids = $location_query_function['location_ids']; // int[]
-			$location_count = $location_query_function['location_count']; // int
+		$location_query_vars = uamswp_fad_location_query( $locations );
+			$location_query = $location_query_vars['location_query']; // WP_Post[]
+			$location_section_show = $location_query_vars['location_section_show']; // bool
+			$location_ids = $location_query_vars['location_ids']; // int[]
+			$location_count = $location_query_vars['location_count']; // int
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-location.php' );
 
@@ -7271,25 +7271,25 @@ function uamswp_fad_section_expertise( $expertises ) {
 			global $expertise_section_collapse_list; // Query for whether to collapse the list of locations in the locations section // bool (default: false)
 			global $expertise_descendant_list; // Query for whether this is a list of child areas of expertise within an area of expertise // bool (default: false)
 
-		$labels_expertise = uamswp_fad_labels_expertise();
-			$expertise_single_name = $labels_expertise['expertise_single_name']; // string
-			$expertise_single_name_attr = $labels_expertise['expertise_single_name_attr']; // string
-			$expertise_plural_name = $labels_expertise['expertise_plural_name']; // string
-			$expertise_plural_name_attr = $labels_expertise['expertise_plural_name_attr']; // string
+		$labels_expertise_vars = uamswp_fad_labels_expertise();
+			$expertise_single_name = $labels_expertise_vars['expertise_single_name']; // string
+			$expertise_single_name_attr = $labels_expertise_vars['expertise_single_name_attr']; // string
+			$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
+			$expertise_plural_name_attr = $labels_expertise_vars['expertise_plural_name_attr']; // string
 
-		$fpage_text_expertise_general = uamswp_fad_fpage_text_expertise_general();
-			$expertise_fpage_title_general = $fpage_text_expertise_general['expertise_fpage_title_general']; // string
-			$expertise_fpage_intro_general = $fpage_text_expertise_general['expertise_fpage_intro_general']; // string
+		$fpage_text_expertise_general_vars = uamswp_fad_fpage_text_expertise_general();
+			$expertise_fpage_title_general = $fpage_text_expertise_general_vars['expertise_fpage_title_general']; // string
+			$expertise_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_intro_general']; // string
 
-		$expertise_query_function = uamswp_fad_expertise_query( $expertises );
-			$expertise_query = $expertise_query_function['expertise_query']; // WP_Post[]
-			$expertise_section_show = $expertise_query_function['expertise_section_show']; // bool
-			$expertise_count = $expertise_query_function['expertise_count']; // int
+		$expertise_query_vars = uamswp_fad_expertise_query( $expertises );
+			$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
+			$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
+			$expertise_count = $expertise_query_vars['expertise_count']; // int
 
-		$expertise_descendant_query_function = uamswp_fad_expertise_descendant_query();
-			$expertise_descendant_query = $expertise_descendant_query_function['expertise_descendant_query']; // WP_Post[]
-			$expertise_descendant_section_show = $expertise_descendant_query_function['expertise_descendant_section_show']; // bool
-			$expertise_descendant_count = $expertise_descendant_query_function['expertise_descendant_count']; // int
+		$expertise_descendant_query_vars = uamswp_fad_expertise_descendant_query();
+			$expertise_descendant_query = $expertise_descendant_query_vars['expertise_descendant_query']; // WP_Post[]
+			$expertise_descendant_section_show = $expertise_descendant_query_vars['expertise_descendant_section_show']; // bool
+			$expertise_descendant_count = $expertise_descendant_query_vars['expertise_descendant_count']; // int
 
 		$ontology_hide_function = uamswp_fad_ontology_hide();
 			$hide_medical_ontology = $ontology_hide_function['hide_medical_ontology']; // bool
@@ -7324,20 +7324,20 @@ function uamswp_fad_section_clinical_resource( $clinical_resources ) {
 			global $clinical_resource_section_more_link_key; // string
 			global $clinical_resource_section_more_link_value; // string
 
-		$labels_clinical_resource = uamswp_fad_labels_clinical_resource();
-			$clinical_resource_single_name = $labels_clinical_resource['clinical_resource_single_name']; // string
-			$clinical_resource_single_name_attr = $labels_clinical_resource['clinical_resource_single_name_attr']; // string
-			$clinical_resource_plural_name = $labels_clinical_resource['clinical_resource_plural_name']; // string
-			$clinical_resource_plural_name_attr = $labels_clinical_resource['clinical_resource_plural_name_attr']; // string
+		$labels_clinical_resource_vars = uamswp_fad_labels_clinical_resource();
+			$clinical_resource_single_name = $labels_clinical_resource_vars['clinical_resource_single_name']; // string
+			$clinical_resource_single_name_attr = $labels_clinical_resource_vars['clinical_resource_single_name_attr']; // string
+			$clinical_resource_plural_name = $labels_clinical_resource_vars['clinical_resource_plural_name']; // string
+			$clinical_resource_plural_name_attr = $labels_clinical_resource_vars['clinical_resource_plural_name_attr']; // string
 
-		$fpage_text_clinical_resource_general = uamswp_fad_fpage_text_clinical_resource_general();
-			$clinical_resource_fpage_title_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_title_general']; // string
-			$clinical_resource_fpage_intro_general = $fpage_text_clinical_resource_general['clinical_resource_fpage_intro_general']; // string
+		$fpage_text_clinical_resource_general_vars = uamswp_fad_fpage_text_clinical_resource_general();
+			$clinical_resource_fpage_title_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_title_general']; // string
+			$clinical_resource_fpage_intro_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_intro_general']; // string
 
-		$clinical_resource_query_function = uamswp_fad_clinical_resource_query( $clinical_resources );
-			$clinical_resource_query = $clinical_resource_query_function['clinical_resource_query']; // WP_Post[]
-			$clinical_resource_section_show = $clinical_resource_query_function['clinical_resource_section_show']; // bool
-			$clinical_resource_count = $clinical_resource_query_function['clinical_resource_count']; // int
+		$clinical_resource_query_vars = uamswp_fad_clinical_resource_query( $clinical_resources );
+			$clinical_resource_query = $clinical_resource_query_vars['clinical_resource_query']; // WP_Post[]
+			$clinical_resource_section_show = $clinical_resource_query_vars['clinical_resource_section_show']; // bool
+			$clinical_resource_count = $clinical_resource_query_vars['clinical_resource_count']; // int
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-clinical-resource.php' );
 
@@ -7360,24 +7360,24 @@ function uamswp_fad_section_condition( $conditions_cpt ) {
 			global $condition_section_intro; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of condition section intro text in general placements)
 			global $condition_section_link_item; // Query for whether to link the list items // bool (default: false)
 
-		$labels_condition = uamswp_fad_labels_condition();
-			$condition_single_name = $labels_condition['condition_single_name']; // string
-			$condition_single_name_attr = $labels_condition['condition_single_name_attr']; // string
-			$condition_plural_name = $labels_condition['condition_plural_name']; // string
-			$condition_plural_name_attr = $labels_condition['condition_plural_name_attr']; // string
+		$labels_condition_vars = uamswp_fad_labels_condition();
+			$condition_single_name = $labels_condition_vars['condition_single_name']; // string
+			$condition_single_name_attr = $labels_condition_vars['condition_single_name_attr']; // string
+			$condition_plural_name = $labels_condition_vars['condition_plural_name']; // string
+			$condition_plural_name_attr = $labels_condition_vars['condition_plural_name_attr']; // string
 
-		$fpage_text_condition_general = uamswp_fad_fpage_text_condition_general();
-			$condition_fpage_title_general = $fpage_text_condition_general['condition_fpage_title_general']; // string
-			$condition_fpage_intro_general = $fpage_text_condition_general['condition_fpage_intro_general']; // string
+		$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
+			$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
+			$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
 
-		$ontology_site_values = uamswp_fad_ontology_site_values();
-			$conditions_cpt = $ontology_site_values['conditions_cpt'];
+		$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+			$conditions_cpt = $ontology_site_values_vars['conditions_cpt'];
 
-		$condition_query_function = uamswp_fad_condition_query( $conditions_cpt );
-			$condition_cpt_query = $condition_query_function['condition_cpt_query']; // WP_Post[]
-			$condition_section_show = $condition_query_function['condition_section_show']; // bool
-			$condition_ids = $condition_query_function['condition_ids']; // int[]
-			$condition_count = $condition_query_function['condition_count']; // int
+		$condition_query_vars = uamswp_fad_condition_query( $conditions_cpt );
+			$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
+			$condition_section_show = $condition_query_vars['condition_section_show']; // bool
+			$condition_ids = $condition_query_vars['condition_ids']; // int[]
+			$condition_count = $condition_query_vars['condition_count']; // int
 
 		$ontology_hide_function = uamswp_fad_ontology_hide();
 			$hide_medical_ontology = $ontology_hide_function['hide_medical_ontology']; // bool
@@ -7392,12 +7392,12 @@ function uamswp_fad_section_condition( $conditions_cpt ) {
 
 	// Create and return an array to be used on the templates and template parts
 
-		$section_condition = array(
+		$section_condition_vars = array(
 			'condition_treatment_schema'		=> $condition_treatment_schema, // string
 			'condition_treatment_schema_i'		=> $condition_treatment_schema_i, // int
 			'condition_treatment_schema_count'	=> $condition_treatment_schema_count // int
 		);
-		return $section_condition;
+		return $section_condition_vars;
 
 } // end function uamswp_fad_section_condition()
 
@@ -7418,24 +7418,24 @@ function uamswp_fad_section_treatment( $treatments_cpt ) {
 			global $treatment_section_intro; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of treatment section intro text in general placements)
 			global $treatment_section_link_item; // Query for whether to link the list items // bool (default: false)
 
-		$labels_treatment = uamswp_fad_labels_treatment();
-			$treatment_single_name = $labels_treatment['treatment_single_name']; // string
-			$treatment_single_name_attr = $labels_treatment['treatment_single_name_attr']; // string
-			$treatment_plural_name = $labels_treatment['treatment_plural_name']; // string
-			$treatment_plural_name_attr = $labels_treatment['treatment_plural_name_attr']; // string
+		$labels_treatment_vars = uamswp_fad_labels_treatment();
+			$treatment_single_name = $labels_treatment_vars['treatment_single_name']; // string
+			$treatment_single_name_attr = $labels_treatment_vars['treatment_single_name_attr']; // string
+			$treatment_plural_name = $labels_treatment_vars['treatment_plural_name']; // string
+			$treatment_plural_name_attr = $labels_treatment_vars['treatment_plural_name_attr']; // string
 
-		$fpage_text_treatment_general = uamswp_fad_fpage_text_treatment_general();
-			$treatment_fpage_title_general = $fpage_text_treatment_general['treatment_fpage_title_general']; // string
-			$treatment_fpage_intro_general = $fpage_text_treatment_general['treatment_fpage_intro_general']; // string
+		$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
+			$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
+			$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
 
-		$ontology_site_values = uamswp_fad_ontology_site_values();
-			$treatments_cpt = $ontology_site_values['treatments_cpt'];
+		$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+			$treatments_cpt = $ontology_site_values_vars['treatments_cpt'];
 
-		$treatment_query_function = uamswp_fad_treatment_query( $treatments_cpt );
-			$treatment_cpt_query = $treatment_query_function['treatment_cpt_query']; // WP_Post[]
-			$treatment_section_show = $treatment_query_function['treatment_section_show']; // bool
-			$treatment_ids = $treatment_query_function['treatment_ids']; // int[]
-			$treatment_count = $treatment_query_function['treatment_count']; // int
+		$treatment_query_vars = uamswp_fad_treatment_query( $treatments_cpt );
+			$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
+			$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
+			$treatment_ids = $treatment_query_vars['treatment_ids']; // int[]
+			$treatment_count = $treatment_query_vars['treatment_count']; // int
 
 		$ontology_hide_function = uamswp_fad_ontology_hide();
 			$hide_medical_ontology = $ontology_hide_function['hide_medical_ontology']; // bool
@@ -7450,12 +7450,12 @@ function uamswp_fad_section_treatment( $treatments_cpt ) {
 
 	// Create and return an array to be used on the templates and template parts
 
-		$section_treatment = array(
+		$section_treatment_vars = array(
 			'condition_treatment_schema'		=> $condition_treatment_schema, // string
 			'condition_treatment_schema_i'		=> $condition_treatment_schema_i, // int
 			'condition_treatment_schema_count'	=> $condition_treatment_schema_count // int
 		);
-		return $section_treatment;
+		return $section_treatment_vars;
 
 } // end function uamswp_fad_section_treatment()
 
@@ -7486,35 +7486,35 @@ function uamswp_fad_section_condition_treatment( $conditions_cpt, $treatments_cp
 			global $treatment_section_title; // Text to use for the treatments subsection title // string (default: Find-a-Doc Settings value for treatment section title in general placements)
 			global $treatment_section_intro; // Text to use for the treatments subsection intro text // string (default: Find-a-Doc Settings value for treatment section intro text in general placements)
 
-		$labels_condition = uamswp_fad_labels_condition();
-			$condition_single_name_attr = $labels_condition['condition_single_name_attr']; // string
+		$labels_condition_vars = uamswp_fad_labels_condition();
+			$condition_single_name_attr = $labels_condition_vars['condition_single_name_attr']; // string
 
-		$labels_treatment = uamswp_fad_labels_treatment();
-			$treatment_single_name_attr = $labels_treatment['treatment_single_name_attr']; // string
+		$labels_treatment_vars = uamswp_fad_labels_treatment();
+			$treatment_single_name_attr = $labels_treatment_vars['treatment_single_name_attr']; // string
 
-		$fpage_text_condition_treatment_general = uamswp_fad_fpage_text_condition_treatment_general();
-			$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general['condition_treatment_fpage_title_general']; // string
-			$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general['condition_treatment_fpage_intro_general']; // string
+		$fpage_text_condition_treatment_general_vars = uamswp_fad_fpage_text_condition_treatment_general();
+			$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_title_general']; // string
+			$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_intro_general']; // string
 
-		$fpage_text_condition_general = uamswp_fad_fpage_text_condition_general();
-			$condition_fpage_title_general = $fpage_text_condition_general['condition_fpage_title_general']; // string
-			$condition_fpage_intro_general = $fpage_text_condition_general['condition_fpage_intro_general']; // string
+		$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
+			$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
+			$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
 
-		$fpage_text_treatment_general = uamswp_fad_fpage_text_treatment_general();
-			$treatment_fpage_title_general = $fpage_text_treatment_general['treatment_fpage_title_general']; // string
-			$treatment_fpage_intro_general = $fpage_text_treatment_general['treatment_fpage_intro_general']; // string
+		$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
+			$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
+			$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
 
-		$condition_query_function = uamswp_fad_condition_query( $conditions_cpt );
-			$condition_cpt_query = $condition_query_function['condition_cpt_query']; // WP_Post[]
-			$condition_section_show = $condition_query_function['condition_section_show']; // bool
-			$condition_treatment_section_show = $condition_query_function['condition_treatment_section_show']; // bool
-			$condition_count = $condition_query_function['condition_count']; // int
+		$condition_query_vars = uamswp_fad_condition_query( $conditions_cpt );
+			$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
+			$condition_section_show = $condition_query_vars['condition_section_show']; // bool
+			$condition_treatment_section_show = $condition_query_vars['condition_treatment_section_show']; // bool
+			$condition_count = $condition_query_vars['condition_count']; // int
 
-		$treatment_query_function = uamswp_fad_treatment_query( $treatments_cpt );
-			$treatment_cpt_query = $treatment_query_function['treatment_cpt_query']; // WP_Post[]
-			$treatment_section_show = $treatment_query_function['treatment_section_show']; // bool
-			$condition_treatment_section_show = $treatment_query_function['condition_treatment_section_show']; // bool
-			$treatment_count = $treatment_query_function['treatment_count']; // int
+		$treatment_query_vars = uamswp_fad_treatment_query( $treatments_cpt );
+			$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
+			$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
+			$condition_treatment_section_show = $treatment_query_vars['condition_treatment_section_show']; // bool
+			$treatment_count = $treatment_query_vars['treatment_count']; // int
 
 		$ontology_hide_function = uamswp_fad_ontology_hide();
 			$hide_medical_ontology = $ontology_hide_function['hide_medical_ontology']; // bool
@@ -7527,10 +7527,10 @@ function uamswp_fad_section_condition_treatment( $conditions_cpt, $treatments_cp
 
 	// Create and return an array to be used on the templates and template parts
 
-		$section_condition_treatment = array(
+		$section_condition_treatment_vars = array(
 			'condition_treatment_schema'	=> $condition_treatment_schema // string
 		);
-		return $section_condition_treatment;
+		return $section_condition_treatment_vars;
 
 } // end function uamswp_fad_section_condition_treatment()
 
@@ -7765,28 +7765,28 @@ function uamswp_fad_fpage_text_image_overlay() {
 				global $clinical_resource_fpage_ref_top_link_expertise; // Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources, link text // string
 			}
 
-		$ontology_site_values = uamswp_fad_ontology_site_values();
-			$page_top_level_query = $ontology_site_values['page_top_level_query']; // Get whether this fake subpage's parent item is the top-level item // bool
-			$ancestors_ontology_farthest = $ontology_site_values['ancestors_ontology_farthest']; // ID of the top-level ontology item ancestor of the current item // int
+		$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+			$page_top_level_query = $ontology_site_values_vars['page_top_level_query']; // Get whether this fake subpage's parent item is the top-level item // bool
+			$ancestors_ontology_farthest = $ontology_site_values_vars['ancestors_ontology_farthest']; // ID of the top-level ontology item ancestor of the current item // int
 
 		if ( !isset($provider_archive_image) || empty($provider_archive_image) ) {
-			$archive_image_provider = uamswp_fad_archive_image_provider();
-				$provider_archive_image = $archive_image_provider['provider_archive_image']; // int
+			$archive_image_provider_vars = uamswp_fad_archive_image_provider();
+				$provider_archive_image = $archive_image_provider_vars['provider_archive_image']; // int
 		}
 
 		if ( !isset($location_archive_image) || empty($location_archive_image) ) {
-			$archive_image_location = uamswp_fad_archive_image_location();
-				$location_archive_image = $archive_image_location['location_archive_image']; // int
+			$archive_image_location_vars = uamswp_fad_archive_image_location();
+				$location_archive_image = $archive_image_location_vars['location_archive_image']; // int
 		}
 
 		if ( !isset($expertise_archive_image) || empty($expertise_archive_image) ) {
-			$archive_image_expertise = uamswp_fad_archive_image_expertise();
-				$expertise_archive_image = $archive_image_expertise['expertise_archive_image']; // int
+			$archive_image_expertise_vars = uamswp_fad_archive_image_expertise();
+				$expertise_archive_image = $archive_image_expertise_vars['expertise_archive_image']; // int
 		}
 
 		if ( !isset($clinical_resource_archive_image) || empty($clinical_resource_archive_image) ) {
-			$archive_image_clinical_resource = uamswp_fad_archive_image_clinical_resource();
-				$clinical_resource_archive_image = $archive_image_clinical_resource['clinical_resource_archive_image']; // int
+			$archive_image_clinical_resource_vars = uamswp_fad_archive_image_clinical_resource();
+				$clinical_resource_archive_image = $archive_image_clinical_resource_vars['clinical_resource_archive_image']; // int
 		}
 
 		if (
@@ -7800,12 +7800,12 @@ function uamswp_fad_fpage_text_image_overlay() {
 			||
 			!isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise)
 			) {
-			$fpage_text_expertise = uamswp_fad_fpage_text_expertise();
-				$provider_fpage_title_expertise = $fpage_text_expertise['provider_fpage_title_expertise']; // string
-				$location_fpage_title_expertise = $fpage_text_expertise['location_fpage_title_expertise']; // string
-				$expertise_descendant_fpage_title_expertise = $fpage_text_expertise['expertise_descendant_fpage_title_expertise']; // string
-				$expertise_fpage_title_expertise = $fpage_text_expertise['expertise_fpage_title_expertise']; // string
-				$clinical_resource_fpage_title_expertise = $fpage_text_expertise['clinical_resource_fpage_title_expertise']; // string
+			$fpage_text_expertise_vars = uamswp_fad_fpage_text_expertise();
+				$provider_fpage_title_expertise = $fpage_text_expertise_vars['provider_fpage_title_expertise']; // string
+				$location_fpage_title_expertise = $fpage_text_expertise_vars['location_fpage_title_expertise']; // string
+				$expertise_descendant_fpage_title_expertise = $fpage_text_expertise_vars['expertise_descendant_fpage_title_expertise']; // string
+				$expertise_fpage_title_expertise = $fpage_text_expertise_vars['expertise_fpage_title_expertise']; // string
+				$clinical_resource_fpage_title_expertise = $fpage_text_expertise_vars['clinical_resource_fpage_title_expertise']; // string
 		}
 
 		if ( $current_fpage == 'providers' ) {
@@ -7822,13 +7822,13 @@ function uamswp_fad_fpage_text_image_overlay() {
 				||
 				!isset($provider_fpage_ref_top_link_expertise) || empty($provider_fpage_ref_top_link_expertise)
 				) {
-				$fpage_text_provider = uamswp_fad_fpage_text_provider();
-					$provider_fpage_ref_main_title_expertise = $fpage_text_provider['provider_fpage_ref_main_title_expertise']; // string
-					$provider_fpage_ref_main_title_expertise = $fpage_text_provider['provider_fpage_ref_main_title_expertise']; // string
-					$provider_fpage_ref_main_link_expertise = $fpage_text_provider['provider_fpage_ref_main_link_expertise']; // string
-					$provider_fpage_ref_top_title_expertise = $fpage_text_provider['provider_fpage_ref_top_title_expertise']; // string
-					$provider_fpage_ref_top_intro_expertise = $fpage_text_provider['provider_fpage_ref_top_intro_expertise']; // string
-					$provider_fpage_ref_top_link_expertise = $fpage_text_provider['provider_fpage_ref_top_link_expertise']; // string
+				$fpage_text_provider_vars = uamswp_fad_fpage_text_provider();
+					$provider_fpage_ref_main_title_expertise = $fpage_text_provider_vars['provider_fpage_ref_main_title_expertise']; // string
+					$provider_fpage_ref_main_title_expertise = $fpage_text_provider_vars['provider_fpage_ref_main_title_expertise']; // string
+					$provider_fpage_ref_main_link_expertise = $fpage_text_provider_vars['provider_fpage_ref_main_link_expertise']; // string
+					$provider_fpage_ref_top_title_expertise = $fpage_text_provider_vars['provider_fpage_ref_top_title_expertise']; // string
+					$provider_fpage_ref_top_intro_expertise = $fpage_text_provider_vars['provider_fpage_ref_top_intro_expertise']; // string
+					$provider_fpage_ref_top_link_expertise = $fpage_text_provider_vars['provider_fpage_ref_top_link_expertise']; // string
 			}
 		} elseif ( $current_fpage == 'locations' ) {
 			if (
@@ -7844,13 +7844,13 @@ function uamswp_fad_fpage_text_image_overlay() {
 				||
 				!isset($location_fpage_ref_top_link_expertise) || empty($location_fpage_ref_top_link_expertise)
 				) {
-				$fpage_text_location = uamswp_fad_fpage_text_location();
-					$location_fpage_ref_main_title_expertise = $fpage_text_location['location_fpage_ref_main_title_expertise']; // string
-					$location_fpage_ref_main_intro_expertise = $fpage_text_location['location_fpage_ref_main_intro_expertise']; // string
-					$location_fpage_ref_main_link_expertise = $fpage_text_location['location_fpage_ref_main_link_expertise']; // string
-					$location_fpage_ref_top_title_expertise = $fpage_text_location['location_fpage_ref_top_title_expertise']; // string
-					$location_fpage_ref_top_intro_expertise = $fpage_text_location['location_fpage_ref_top_intro_expertise']; // string
-					$location_fpage_ref_top_link_expertise = $fpage_text_location['location_fpage_ref_top_link_expertise']; // string
+				$fpage_text_location_vars = uamswp_fad_fpage_text_location();
+					$location_fpage_ref_main_title_expertise = $fpage_text_location_vars['location_fpage_ref_main_title_expertise']; // string
+					$location_fpage_ref_main_intro_expertise = $fpage_text_location_vars['location_fpage_ref_main_intro_expertise']; // string
+					$location_fpage_ref_main_link_expertise = $fpage_text_location_vars['location_fpage_ref_main_link_expertise']; // string
+					$location_fpage_ref_top_title_expertise = $fpage_text_location_vars['location_fpage_ref_top_title_expertise']; // string
+					$location_fpage_ref_top_intro_expertise = $fpage_text_location_vars['location_fpage_ref_top_intro_expertise']; // string
+					$location_fpage_ref_top_link_expertise = $fpage_text_location_vars['location_fpage_ref_top_link_expertise']; // string
 			}
 		} elseif ( $current_fpage == 'specialties' ) {
 			if (
@@ -7860,10 +7860,10 @@ function uamswp_fad_fpage_text_image_overlay() {
 				||
 				!isset($expertise_descendant_fpage_ref_main_link_expertise) || empty($expertise_descendant_fpage_ref_main_link_expertise)
 				) {
-				$fpage_text_expertise = uamswp_fad_fpage_text_expertise();
-					$expertise_descendant_fpage_ref_main_title_expertise = $fpage_text_expertise['expertise_descendant_fpage_ref_main_title_expertise']; // string
-					$expertise_descendant_fpage_ref_main_intro_expertise = $fpage_text_expertise['expertise_descendant_fpage_ref_main_intro_expertise']; // string
-					$expertise_descendant_fpage_ref_main_link_expertise = $fpage_text_expertise['expertise_descendant_fpage_ref_main_link_expertise']; // string
+				$fpage_text_expertise_vars = uamswp_fad_fpage_text_expertise();
+					$expertise_descendant_fpage_ref_main_title_expertise = $fpage_text_expertise_vars['expertise_descendant_fpage_ref_main_title_expertise']; // string
+					$expertise_descendant_fpage_ref_main_intro_expertise = $fpage_text_expertise_vars['expertise_descendant_fpage_ref_main_intro_expertise']; // string
+					$expertise_descendant_fpage_ref_main_link_expertise = $fpage_text_expertise_vars['expertise_descendant_fpage_ref_main_link_expertise']; // string
 			}
 		} elseif ( $current_fpage == 'related' ) {
 			if (
@@ -7873,10 +7873,10 @@ function uamswp_fad_fpage_text_image_overlay() {
 				||
 				!isset($expertise_fpage_ref_main_link_expertise) || empty($expertise_fpage_ref_main_link_expertise)
 				) {
-				$fpage_text_expertise = uamswp_fad_fpage_text_expertise();
-					$expertise_fpage_ref_main_title_expertise = $fpage_text_expertise['expertise_fpage_ref_main_title_expertise']; // string
-					$expertise_fpage_ref_main_intro_expertise = $fpage_text_expertise['expertise_fpage_ref_main_intro_expertise']; // string
-					$expertise_fpage_ref_main_link_expertise = $fpage_text_expertise['expertise_fpage_ref_main_link_expertise']; // string
+				$fpage_text_expertise_vars = uamswp_fad_fpage_text_expertise();
+					$expertise_fpage_ref_main_title_expertise = $fpage_text_expertise_vars['expertise_fpage_ref_main_title_expertise']; // string
+					$expertise_fpage_ref_main_intro_expertise = $fpage_text_expertise_vars['expertise_fpage_ref_main_intro_expertise']; // string
+					$expertise_fpage_ref_main_link_expertise = $fpage_text_expertise_vars['expertise_fpage_ref_main_link_expertise']; // string
 			}
 		} elseif ( $current_fpage == 'resources' ) {
 			if (
@@ -7892,13 +7892,13 @@ function uamswp_fad_fpage_text_image_overlay() {
 				||
 				!isset($clinical_resource_fpage_ref_top_link_expertise) || empty($clinical_resource_fpage_ref_top_link_expertise)
 				) {
-				$fpage_text_clinical_resource = uamswp_fad_fpage_text_clinical_resource();
-					$clinical_resource_fpage_ref_main_title_expertise = $fpage_text_clinical_resource['clinical_resource_fpage_ref_main_title_expertise']; // string
-					$clinical_resource_fpage_ref_main_intro_expertise = $fpage_text_clinical_resource['clinical_resource_fpage_ref_main_intro_expertise']; // string
-					$clinical_resource_fpage_ref_main_link_expertise = $fpage_text_clinical_resource['clinical_resource_fpage_ref_main_link_expertise']; // string
-					$clinical_resource_fpage_ref_top_title_expertise = $fpage_text_clinical_resource['clinical_resource_fpage_ref_top_title_expertise']; // string
-					$clinical_resource_fpage_ref_top_intro_expertise = $fpage_text_clinical_resource['clinical_resource_fpage_ref_top_intro_expertise']; // string
-					$clinical_resource_fpage_ref_top_link_expertise = $fpage_text_clinical_resource['clinical_resource_fpage_ref_top_link_expertise']; // string
+				$fpage_text_clinical_resource_vars = uamswp_fad_fpage_text_clinical_resource();
+					$clinical_resource_fpage_ref_main_title_expertise = $fpage_text_clinical_resource_vars['clinical_resource_fpage_ref_main_title_expertise']; // string
+					$clinical_resource_fpage_ref_main_intro_expertise = $fpage_text_clinical_resource_vars['clinical_resource_fpage_ref_main_intro_expertise']; // string
+					$clinical_resource_fpage_ref_main_link_expertise = $fpage_text_clinical_resource_vars['clinical_resource_fpage_ref_main_link_expertise']; // string
+					$clinical_resource_fpage_ref_top_title_expertise = $fpage_text_clinical_resource_vars['clinical_resource_fpage_ref_top_title_expertise']; // string
+					$clinical_resource_fpage_ref_top_intro_expertise = $fpage_text_clinical_resource_vars['clinical_resource_fpage_ref_top_intro_expertise']; // string
+					$clinical_resource_fpage_ref_top_link_expertise = $fpage_text_clinical_resource_vars['clinical_resource_fpage_ref_top_link_expertise']; // string
 			}
 		}
 

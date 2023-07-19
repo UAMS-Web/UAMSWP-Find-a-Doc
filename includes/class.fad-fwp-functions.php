@@ -49,22 +49,22 @@ add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
 // FacetWP scripts
 function fwp_facet_scripts() {
 	
-	$labels_provider = uamswp_fad_labels_provider();
-	$labels_location = uamswp_fad_labels_location();
-	$labels_expertise = uamswp_fad_labels_expertise();
-	$labels_clinical_resource_facet = uamswp_fad_labels_clinical_resource_facet();
-	$labels_condition = uamswp_fad_labels_condition();
-	$labels_treatment = uamswp_fad_labels_treatment();
+	$labels_provider_vars = uamswp_fad_labels_provider();
+	$labels_location_vars = uamswp_fad_labels_location();
+	$labels_expertise_vars = uamswp_fad_labels_expertise();
+	$labels_clinical_resource_facet_vars = uamswp_fad_labels_clinical_resource_facet();
+	$labels_condition_vars = uamswp_fad_labels_condition();
+	$labels_treatment_vars = uamswp_fad_labels_treatment();
 
 	$facet_labels = array();
 	$facet_labels = array_merge(
 		$facet_labels,
-		$labels_provider['facet_labels'],
-		$labels_location['facet_labels'],
-		$labels_expertise['facet_labels'],
-		$labels_clinical_resource_facet['facet_labels'],
-		$labels_condition['facet_labels'],
-		$labels_treatment['facet_labels']
+		$labels_provider_vars['facet_labels'],
+		$labels_location_vars['facet_labels'],
+		$labels_expertise_vars['facet_labels'],
+		$labels_clinical_resource_facet_vars['facet_labels'],
+		$labels_condition_vars['facet_labels'],
+		$labels_treatment_vars['facet_labels']
 	);
 	
 	$classes = get_body_class();
