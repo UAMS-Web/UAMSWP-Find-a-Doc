@@ -6368,21 +6368,6 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Get field values for the featured image of a fake subpage (or section) in an Area of Expertise subsection (or profile)
 		function uamswp_fad_fpage_image_expertise() {
 
-			// Make variables available outside of the function
-
-				global $expertise_featured_image; // int
-				global $expertise_featured_image_url; // string
-				global $provider_fpage_featured_image_expertise; // int
-				global $provider_fpage_featured_image_expertise_url; // string
-				global $location_fpage_featured_image_expertise; // int
-				global $location_fpage_featured_image_expertise_url; // string
-				global $expertise_fpage_featured_image_expertise; // int
-				global $expertise_fpage_featured_image_expertise_url; // string
-				global $expertise_descendant_fpage_featured_image_expertise; // int
-				global $expertise_descendant_fpage_featured_image_expertise_url; // string
-				global $clinical_resource_fpage_featured_image_expertise; // int
-				global $clinical_resource_fpage_featured_image_expertise_url; // string
-
 			// Overview
 
 				// Get the page-level featured image value
