@@ -6,7 +6,7 @@
  * associated with the current page.
  * 
  * When this template part is needed for a hook, use the 
- * uamswp_fad_section_expertise( $expertises ) function.
+ * uamswp_fad_section_expertise() function.
  * 
  * Designed for UAMS Health Find-a-Doc
  * 
@@ -46,21 +46,29 @@
 
 // Check/define variables
 
+	// Query for whether this is a list of child areas of expertise within an area of expertise
 	$expertise_descendant_list = isset($expertise_descendant_list) ? $expertise_descendant_list : false;
+
 	if ( $expertise_descendant_list ) {
 		$expertise_section_show = $expertise_descendant_section_show; // bool
 		$expertise_query = $expertise_descendant_query; // WP_Post[]
 		$expertise_count = $expertise_descendant_count; // int
 	}
 
-
 if ( $expertise_section_show && !$hide_medical_ontology ) {
 
 	// Check/define variables
 
-		$expertise_section_class = isset($expertise_section_class) ? $expertise_section_class : 'expertise-list';
-		$expertise_section_id = isset($expertise_section_id) ? $expertise_section_id : 'expertise';
-		$expertise_section_show_header = isset($expertise_section_show_header) ? $expertise_section_show_header : true;
+		// List of this area of expertise item's descendant items
+			if ( !isset($expertise_descendants) ) {
+				$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+					$expertise_descendants = $ontology_site_values_vars['expertise_descendants']; // int[]
+			}
+
+		// Query for whether item is ontology type vs. content type
+		$ontology_type = isset($ontology_type) ? $ontology_type : true;
+
+		// Text to use for the section title
 		if ( !isset($expertise_section_title) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($expertise_fpage_title_general) ) {
@@ -69,6 +77,8 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 			}
 			$expertise_section_title = $expertise_fpage_title_general;
 		}
+
+		// Text to use for the section intro text
 		if ( !isset($expertise_section_intro) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($expertise_fpage_intro_general) ) {
@@ -77,7 +87,85 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 			}
 			$expertise_section_intro = $expertise_fpage_intro_general;
 		}
+
+		// Query whether to display the section header
+		$expertise_section_show_header = isset($expertise_section_show_header) ? $expertise_section_show_header : true;
+
+		// Query for whether to collapse the list of locations in the locations section
 		$expertise_section_collapse_list = isset($expertise_section_collapse_list) ? $expertise_section_collapse_list : false;
+
+		// Section class
+		$expertise_section_class = isset($expertise_section_class) ? $expertise_section_class : 'expertise-list';
+
+		// Section ID
+		$expertise_section_id = isset($expertise_section_id) ? $expertise_section_id : 'expertise';
+
+		// Other variables
+
+			if ( !isset($expertise_single_name) ) {
+				$labels_expertise_vars = uamswp_fad_labels_expertise();
+					$expertise_single_name = $labels_expertise_vars['expertise_single_name']; // string
+			}
+
+			if ( !isset($expertise_single_name_attr) ) {
+				$labels_expertise_vars = uamswp_fad_labels_expertise();
+					$expertise_single_name_attr = $labels_expertise_vars['expertise_single_name_attr']; // string
+			}
+
+			if ( !isset($expertise_plural_name) ) {
+				$labels_expertise_vars = uamswp_fad_labels_expertise();
+					$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
+			}
+
+			if ( !isset($expertise_plural_name_attr) ) {
+				$labels_expertise_vars = uamswp_fad_labels_expertise();
+					$expertise_plural_name_attr = $labels_expertise_vars['expertise_plural_name_attr']; // string
+			}
+
+			if ( !isset($expertise_fpage_title_general) ) {
+				$fpage_text_expertise_general_vars = uamswp_fad_fpage_text_expertise_general();
+					$expertise_fpage_title_general = $fpage_text_expertise_general_vars['expertise_fpage_title_general']; // string
+			}
+
+			if ( !isset($expertise_fpage_intro_general) ) {
+				$fpage_text_expertise_general_vars = uamswp_fad_fpage_text_expertise_general();
+					$expertise_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_intro_general']; // string
+			}
+
+			if ( !isset($expertise_query) ) {
+				$expertise_query_vars = uamswp_fad_expertise_query( $expertises );
+					$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
+			}
+
+			if ( !isset($expertise_section_show) ) {
+				$expertise_query_vars = uamswp_fad_expertise_query( $expertises );
+					$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
+			}
+
+			if ( !isset($expertise_count) ) {
+				$expertise_query_vars = uamswp_fad_expertise_query( $expertises );
+					$expertise_count = $expertise_query_vars['expertise_count']; // int
+			}
+
+			if ( !isset($expertise_descendant_query) ) {
+				$expertise_descendant_query_vars = uamswp_fad_expertise_descendant_query( $expertise_descendants );
+					$expertise_descendant_query = $expertise_descendant_query_vars['expertise_descendant_query']; // WP_Post[]
+			}
+
+			if ( !isset($expertise_descendant_section_show) ) {
+				$expertise_descendant_query_vars = uamswp_fad_expertise_descendant_query( $expertise_descendants );
+					$expertise_descendant_section_show = $expertise_descendant_query_vars['expertise_descendant_section_show']; // bool
+			}
+
+			if ( !isset($expertise_descendant_count) ) {
+				$expertise_descendant_query_vars = uamswp_fad_expertise_descendant_query( $expertise_descendants );
+					$expertise_descendant_count = $expertise_descendant_query_vars['expertise_descendant_count']; // int
+			}
+
+			if ( !isset($hide_medical_ontology) ) {
+				$ontology_hide_vars = uamswp_fad_ontology_hide();
+					$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
+			}
 
 	?>
 	<section class="uams-module<?php echo $expertise_section_class ? ' ' . $expertise_section_class : ''; ?> bg-auto<?php echo $expertise_section_collapse_list ? ' collapse-list' : ''; ?>"<?php echo $expertise_section_id ? ' id="' . $expertise_section_id . '" aria-labelledby="' . $expertise_section_id . '-title"' : ''; ?>>

@@ -283,6 +283,19 @@ $ontology_site_values_vars = uamswp_fad_ontology_site_values();
 		$treatment_count = $treatment_query_vars['treatment_count']; // int
 		$condition_treatment_schema = $treatment_query_vars['condition_treatment_schema']; // string
 
+	// Query for whether to conditionally suppress ontology sections based on Find-a-Doc Settings configuration
+	$regions = isset($regions) ? $regions : array();
+	$service_lines = isset($service_lines) ? $service_lines : array();
+	if ( $regions || $service_lines ) {
+		$ontology_hide_vars = uamswp_fad_ontology_hide(
+			$regions, // string|array // Region(s) associated with the item
+			$service_lines // string|array // Service line(s) associated with the item
+		);
+			$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
+	} else {
+		$hide_medical_ontology = false; // bool
+	}
+
 // Override theme's method of defining the meta page title
 $meta_title_enhanced_addition = $expertise_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
 $meta_title_vars = uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
@@ -513,14 +526,17 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		$section_condition_treatment_vars = uamswp_fad_section_condition_treatment(
 			$conditions_cpt, // int[]
 			$treatments_cpt, // int[]
+			$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
 			$condition_treatment_section_show, // bool
-			$ontology_type, // bool // $ontology_type
+			$condition_section_show, // bool
+			$treatment_section_show, // bool
+			$ontology_type, // bool
 			$condition_treatment_section_title, // string // Text to use for the section title
 			$condition_treatment_section_intro, // string // Text to use for the section intro text
 			$condition_section_title, // string // Text to use for the conditions subsection title
 			$condition_section_intro, // string // Text to use for the conditions subsection intro text
 			$treatment_section_title, // string // Text to use for the treatments subsection title
-			$treatment_section_intro, // string // Text to use for the treatments subsection intro text
+			$treatment_section_intro // string // Text to use for the treatments subsection intro text
 		);
 			$condition_treatment_schema = $section_condition_treatment_vars['condition_treatment_schema']; // string
 
@@ -534,6 +550,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	// 	add_action( 'genesis_after_entry', 'uamswp_fad_section_condition', 16 );
 	// 	$section_condition_vars = uamswp_fad_section_condition(
 	// 		$conditions_cpt, // int[]
+	// 		$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
 	// 		$condition_treatment_schema, // string
 	// 		$condition_treatment_schema_i, // int
 	// 		$condition_treatment_schema_count, // int
@@ -554,6 +571,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	// 	add_action( 'genesis_after_entry', 'uamswp_fad_section_treatment', 18 );
 	// 	$section_treatment_vars = uamswp_fad_section_treatment( $treatments_cpt )(
 	// 		$treatments_cpt, // int[]
+	// 		$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
 	// 		$condition_treatment_schema, // string
 	// 		$condition_treatment_schema_i, // int
 	// 		$condition_treatment_schema_count, // int

@@ -45,33 +45,52 @@
  */
 
 // Check/define variables
-$condition_section_show = isset($condition_section_show) ? $condition_section_show : false;
-$hide_medical_ontology = isset($hide_medical_ontology) ? $hide_medical_ontology : false;
-$condition_treatment_section_link_item = isset($condition_treatment_section_link_item) ? $condition_treatment_section_link_item : false;
-if (
-	$condition_section_show
-	&&
-	$condition_treatment_section_link_item
-	&&
-	$hide_medical_ontology
-	) {
-	// If the conditions section should be shown...
-	// and if the condition items should be linked...
-	// and if certain ontology items should be hidden on this page...
 
-	// Set the conditions section to not be shown on this page
-	$condition_section_show = false;
+	// Query for whether to show the conditions section
+	$condition_section_show = isset($condition_section_show) ? $condition_section_show : false;
 
-}
+	// Query for whether to link the list items
+	$condition_treatment_section_link_item = isset($condition_treatment_section_link_item) ? $condition_treatment_section_link_item : false;
+
+	// Other variables
+	$hide_medical_ontology = isset($hide_medical_ontology) ? $hide_medical_ontology : false;
+
+	// Revisit query for whether to show the conditions section	
+	if (
+		$condition_section_show
+		&&
+		$condition_treatment_section_link_item
+		&&
+		$hide_medical_ontology
+		) {
+
+		// If the conditions section should be shown...
+		// and if the condition items should be linked...
+		// and if certain ontology items should be hidden on this page...
+
+		// Set the conditions section to not be shown on this page
+		$condition_section_show = false;
+
+	}
 
 // Do something
 if ( $condition_section_show ) {
 
 	// Check/define variables
 
-		$condition_section_class = isset($condition_section_class) ? $condition_section_class : 'conditions-treatments';
-		$condition_section_id = isset($condition_section_id) ? $condition_section_id : 'conditions';
-		$condition_section_show_header = isset($condition_section_show_header) ? $condition_section_show_header : true;
+		// Schema data
+		$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
+
+		// Iteration variable for schema data
+		$condition_treatment_schema_i = isset($condition_treatment_schema_i) ? $condition_treatment_schema_i : 0;
+
+		// Item count for schema data
+		$condition_treatment_schema_count = isset($condition_treatment_schema_count) ? $condition_treatment_schema_count : 0;
+
+		// Query for whether item is ontology type vs. content type
+		$ontology_type = isset($ontology_type) ? $ontology_type : true;
+
+		// Text to use for the section title
 		if ( !isset($condition_section_title) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($condition_fpage_title_general) ) {
@@ -80,6 +99,8 @@ if ( $condition_section_show ) {
 			}
 			$condition_section_title = $condition_fpage_title_general;
 		}
+
+		// Text to use for the section intro text
 		if ( !isset($condition_section_intro) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($condition_fpage_intro_general) ) {
@@ -88,7 +109,78 @@ if ( $condition_section_show ) {
 			}
 			$condition_section_intro = $condition_fpage_intro_general;
 		}
-		$condition_treatment_section_link_item = isset($condition_treatment_section_link_item) ? $condition_treatment_section_link_item : false;
+
+		// Query for whether to display the section header
+		$condition_section_show_header = isset($condition_section_show_header) ? $condition_section_show_header : true;
+
+		// Section class
+		$condition_section_class = isset($condition_section_class) ? $condition_section_class : 'conditions-treatments';
+
+		// Section ID
+		$condition_section_id = isset($condition_section_id) ? $condition_section_id : 'conditions';
+
+		// Other variables
+
+			if ( !isset($condition_single_name) ) {
+				$labels_condition_vars = uamswp_fad_labels_condition();
+					$condition_single_name = $labels_condition_vars['condition_single_name']; // string
+			}
+
+			if ( !isset($condition_single_name_attr) ) {
+				$labels_condition_vars = uamswp_fad_labels_condition();
+					$condition_single_name_attr = $labels_condition_vars['condition_single_name_attr']; // string
+			}
+
+			if ( !isset($condition_plural_name) ) {
+				$labels_condition_vars = uamswp_fad_labels_condition();
+					$condition_plural_name = $labels_condition_vars['condition_plural_name']; // string
+			}
+
+			if ( !isset($condition_plural_name_attr) ) {
+				$labels_condition_vars = uamswp_fad_labels_condition();
+					$condition_plural_name_attr = $labels_condition_vars['condition_plural_name_attr']; // string
+			}
+
+			if ( !isset($condition_fpage_title_general) ) {
+				$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
+					$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
+			}
+
+			if ( !isset($condition_fpage_intro_general) ) {
+				$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
+					$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
+			}
+
+			if ( !isset($conditions_cpt) ) {
+				$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+					$conditions_cpt = $ontology_site_values_vars['conditions_cpt'];
+			}
+
+			if ( !isset($condition_cpt_query) ) {
+				$condition_query_vars = uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
+					$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
+			}
+
+			if ( !isset($condition_cpt_query) ) {
+				$condition_query_vars = uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
+					$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
+			}
+
+			if ( !isset($condition_section_show) ) {
+				$condition_query_vars = uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
+					$condition_section_show = $condition_query_vars['condition_section_show']; // bool
+			}
+
+			if ( !isset($condition_ids) ) {
+				$condition_query_vars = uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
+					$condition_ids = $condition_query_vars['condition_ids']; // int[]
+			}
+
+			if ( !isset($hide_medical_ontology) ) {
+				$ontology_hide_vars = uamswp_fad_ontology_hide();
+					$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
+			}
+
 
 	?>
 	<section class="uams-module<?php echo $condition_section_class ? ' ' . $condition_section_class : ''; ?> bg-auto<?php echo $condition_section_collapse_list ? ' collapse-list' : ''; ?>"<?php echo $condition_section_id ? ' id="' . $condition_section_id . '" aria-labelledby="' . $condition_section_id . '-title"' : ''; ?>>

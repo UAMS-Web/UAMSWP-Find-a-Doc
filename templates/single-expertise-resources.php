@@ -276,6 +276,19 @@ $ontology_site_values_vars = uamswp_fad_ontology_site_values();
 		$treatment_count = $treatment_query_vars['treatment_count']; // int
 		$condition_treatment_schema = $treatment_query_vars['condition_treatment_schema']; // string
 
+	// Query for whether to conditionally suppress ontology sections based on Find-a-Doc Settings configuration
+	$regions = isset($regions) ? $regions : array();
+	$service_lines = isset($service_lines) ? $service_lines : array();
+	if ( $regions || $service_lines ) {
+		$ontology_hide_vars = uamswp_fad_ontology_hide(
+			$regions, // string|array // Region(s) associated with the item
+			$service_lines // string|array // Service line(s) associated with the item
+		);
+			$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
+	} else {
+		$hide_medical_ontology = false; // bool
+	}
+
 // Override theme's method of defining the meta page title
 $meta_title_base_addition = $fpage_name_attr; // Word or phrase to use to form base meta title
 $meta_title_enhanced_addition = $page_title_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1

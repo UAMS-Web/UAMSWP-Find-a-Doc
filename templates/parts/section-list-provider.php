@@ -6,7 +6,7 @@
  * the current page.
  * 
  * When this template part is needed for a hook, use the 
- * uamswp_fad_section_provider( $providers ) function.
+ * uamswp_fad_section_provider() function.
  * 
  * Designed for UAMS Health Find-a-Doc
  * 
@@ -44,7 +44,10 @@ if ( $provider_section_show ) {
 
 	// Check/define variables
 
-		$provider_section_show_header = isset($provider_section_show_header) ? $provider_section_show_header : true;
+		// Query for whether item is ontology type vs. content type
+		$ontology_type = isset($ontology_type) ? $ontology_type : true;
+
+		// Text to use for the section title
 		if ( !isset($provider_section_title) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($provider_fpage_title_general) ) {
@@ -53,6 +56,8 @@ if ( $provider_section_show ) {
 			}
 			$provider_section_title = $provider_fpage_title_general;
 		}
+
+		// Text to use for the section intro text
 		if ( !isset($provider_section_intro) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($provider_fpage_intro_general) ) {
@@ -61,16 +66,73 @@ if ( $provider_section_show ) {
 			}
 			$provider_section_intro = $provider_fpage_intro_general;
 		}
+
+		// Query for whether to display the section header
+		$provider_section_show_header = isset($provider_section_show_header) ? $provider_section_show_header : true;
+
+		// Query for whether to add filter(s)
 		$provider_section_filter = isset($provider_section_filter) ? $provider_section_filter : true;
-		if ( $provider_section_filter ) {
-			$provider_section_filter_region = isset($provider_section_filter_region) ? $provider_section_filter_region : true;
-			$provider_section_filter_title = isset($provider_section_filter_title) ? $provider_section_filter_title : true;
-		} else {
-			$provider_section_filter_region = false;
-			$provider_section_filter_title = false;
-		}
+
+		// Query for whether to add region filter
+		$provider_section_filter_region = isset($provider_section_filter_region) ? $provider_section_filter_region : true;
+
+		// Query for whether to add title filter
+		$provider_section_filter_title = isset($provider_section_filter_title) ? $provider_section_filter_title : true;
+		
+		// Revisit filter queries
+		$provider_section_filter_region = $provider_section_filter ? $provider_section_filter_region : false;
+		$provider_section_filter_title = $provider_section_filter ? $provider_section_filter_title : false;
 		$provider_section_filter = ( $provider_section_filter && ( $provider_section_filter_region || $provider_section_filter_title ) ) ? $provider_section_filter : false; // Set as false if neither of the filter types is true
+
+		// Query for whether to collapse the list of providers in the providers section
 		$provider_section_collapse_list = isset($provider_section_collapse_list) ? $provider_section_collapse_list : true;
+
+		// Other variables
+
+			if ( !isset($provider_plural_name) ) {
+				$labels_provider_vars = uamswp_fad_labels_provider();
+					$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
+			}
+
+			if ( !isset($provider_plural_name_attr) ) {
+				$labels_provider_vars = uamswp_fad_labels_provider();
+					$provider_plural_name_attr = $labels_provider_vars['provider_plural_name_attr']; // string
+			}
+
+			if ( !isset($provider_fpage_title_general) ) {
+				$fpage_text_provider_general_vars = uamswp_fad_fpage_text_provider_general();
+					$provider_fpage_title_general = $fpage_text_provider_general_vars['provider_fpage_title_general']; // string
+			}
+
+			if ( !isset($provider_fpage_intro_general) ) {
+				$fpage_text_provider_general_vars = uamswp_fad_fpage_text_provider_general();
+					$provider_fpage_intro_general = $fpage_text_provider_general_vars['provider_fpage_intro_general']; // string
+			}
+
+			if ( !isset($providers) ) {
+				$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+					$providers = $ontology_site_values_vars['providers']; // int[]
+			}
+
+			if ( !isset($provider_query) ) {
+				$provider_query_vars = uamswp_fad_provider_query( $providers );
+					$provider_query = $provider_query_vars['provider_query']; // WP_Post[]
+			}
+
+			if ( !isset($provider_section_show) ) {
+				$provider_query_vars = uamswp_fad_provider_query( $providers );
+					$provider_section_show = $provider_query_vars['provider_section_show']; // bool
+			}
+
+			if ( !isset($provider_ids) ) {
+				$provider_query_vars = uamswp_fad_provider_query( $providers );
+					$provider_ids = $provider_query_vars['provider_ids']; // int[]
+			}
+
+			if ( !isset($provider_count) ) {
+				$provider_query_vars = uamswp_fad_provider_query( $providers );
+					$provider_count = $provider_query_vars['provider_count']; // int
+			}
 
 	// Filter details
 	if ( $provider_section_filter ) {

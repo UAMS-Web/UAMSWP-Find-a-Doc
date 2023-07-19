@@ -6,7 +6,7 @@
  * the current page.
  * 
  * When this template part is needed for a hook, use the 
- * uamswp_fad_section_location( $locations ) function.
+ * uamswp_fad_section_location() function.
  * 
  * Designed for UAMS Health Find-a-Doc
  * 
@@ -48,7 +48,16 @@ if ( $location_section_show ) {
 
 	// Check/define variables
 
-		$location_section_show_header = isset($location_section_show_header) ? $location_section_show_header : true;
+		// Query for whether to add locations to schema
+		$location_section_schema_query = isset($location_section_schema_query) ? $location_section_schema_query : false;
+
+		// Query for whether item is ontology type vs. content type
+		$ontology_type = isset($ontology_type) ? $ontology_type : true;
+
+		// Query for whether this is a list of child locations within a location
+		$location_descendant_list = isset($location_descendant_list) ? $location_descendant_list : false;
+
+		// Text to use for the section title
 		if ( !isset($location_section_title) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($location_fpage_title_general) ) {
@@ -57,6 +66,8 @@ if ( $location_section_show ) {
 			}
 			$location_section_title = $location_fpage_title_general;
 		}
+
+		// Text to use for the section intro text
 		if ( !isset($location_section_intro) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($location_fpage_intro_general) ) {
@@ -65,18 +76,83 @@ if ( $location_section_show ) {
 			}
 			$location_section_intro = $location_fpage_intro_general;
 		}
+
+		// Query for whether to display the section header
+		$location_section_show_header = isset($location_section_show_header) ? $location_section_show_header : true;
+
+		// Query for whether to add filter(s)
 		$location_section_filter = isset($location_section_filter) ? $location_section_filter : true;
-		if ( $location_section_filter ) {
-			$location_section_filter_region = isset($location_section_filter_region) ? $location_section_filter_region : true;
-			$location_section_filter_title = isset($location_section_filter_title) ? $location_section_filter_title : false;
-		} else {
-			$location_section_filter_region = false;
-			$location_section_filter_title = false;
-		}
+
+		// Query for whether to add region filter
+		$location_section_filter_region = isset($location_section_filter_region) ? $location_section_filter_region : true;
+
+		// Query for whether to add title filter
+		$location_section_filter_title = isset($location_section_filter_title) ? $location_section_filter_title : false;
+		
+		// Revisit filter queries
+		$location_section_filter_region = $location_section_filter ? $location_section_filter_region : false;
+		$location_section_filter_title = $location_section_filter ? $location_section_filter_title : false;
 		$location_section_filter = ( $location_section_filter && ( $location_section_filter_region || $location_section_filter_title ) ) ? $location_section_filter : false; // Set as false if neither of the filter types is true
+
+		// Query for whether to collapse the list of locations in the locations section
 		$location_section_collapse_list = isset($location_section_collapse_list) ? $location_section_collapse_list : false;
-		$location_section_schema_query = isset($location_section_schema_query) ? $location_section_schema_query : false;
-		$location_descendant_list = isset($location_descendant_list) ? $location_descendant_list : false;
+
+		// Other variables
+
+			if ( !isset($location_single_name) ) {
+				$labels_location_vars = uamswp_fad_labels_location();
+					$location_single_name = $labels_location_vars['location_single_name']; // string
+			}
+
+			if ( !isset($location_single_name_attr) ) {
+				$labels_location_vars = uamswp_fad_labels_location();
+					$location_single_name_attr = $labels_location_vars['location_single_name_attr']; // string
+			}
+
+			if ( !isset($location_plural_name) ) {
+				$labels_location_vars = uamswp_fad_labels_location();
+					$location_plural_name = $labels_location_vars['location_plural_name']; // string
+			}
+
+			if ( !isset($location_plural_name_attr) ) {
+				$labels_location_vars = uamswp_fad_labels_location();
+					$location_plural_name_attr = $labels_location_vars['location_plural_name_attr']; // string
+			}
+
+			if ( !isset($location_fpage_title_general) ) {
+				$fpage_text_location_general_vars = uamswp_fad_fpage_text_location_general();
+					$location_fpage_title_general = $fpage_text_location_general_vars['location_fpage_title_general']; // string
+			}
+
+			if ( !isset($location_fpage_intro_general) ) {
+				$fpage_text_location_general_vars = uamswp_fad_fpage_text_location_general();
+					$location_fpage_intro_general = $fpage_text_location_general_vars['location_fpage_intro_general']; // string
+			}
+
+			if ( !isset($locations) ) {
+				$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+					$locations = $ontology_site_values_vars['locations']; // int[]
+			}
+
+			if ( !isset($location_query) ) {
+				$location_query_vars = uamswp_fad_location_query( $locations );
+					$location_query = $location_query_vars['location_query']; // WP_Post[]
+			}
+
+			if ( !isset($location_section_show) ) {
+				$location_query_vars = uamswp_fad_location_query( $locations );
+					$location_section_show = $location_query_vars['location_section_show']; // bool
+			}
+
+			if ( !isset($location_ids) ) {
+				$location_query_vars = uamswp_fad_location_query( $locations );
+					$location_ids = $location_query_vars['location_ids']; // int[]
+			}
+
+			if ( !isset($location_count) ) {
+				$location_query_vars = uamswp_fad_location_query( $locations );
+					$location_count = $location_query_vars['location_count']; // int
+			}
 
 	// Filter details
 	if ( $location_section_filter ) {

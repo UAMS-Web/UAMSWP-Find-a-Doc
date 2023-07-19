@@ -6,7 +6,7 @@
  * the current page.
  * 
  * When this template part is needed for a hook, use the 
- * uamswp_fad_section_treatment( $treatments_cpt ) function.
+ * uamswp_fad_section_treatment() function.
  * 
  * Designed for UAMS Health Find-a-Doc
  * 
@@ -45,33 +45,52 @@
  */
 
 // Check/define variables
-$treatment_section_show = isset($treatment_section_show) ? $treatment_section_show : false;
-$hide_medical_ontology = isset($hide_medical_ontology) ? $hide_medical_ontology : false;
-$condition_treatment_section_link_item = isset($condition_treatment_section_link_item) ? $condition_treatment_section_link_item : false;
-if (
-	$treatment_section_show
-	&&
-	$condition_treatment_section_link_item
-	&&
-	$hide_medical_ontology
-	) {
-	// If the treatments section should be shown...
-	// and if the condition items should be linked...
-	// and if certain ontology items should be hidden on this page...
 
-	// Set the treatments section to not be shown on this page
-	$treatment_section_show = false;
+	// Query for whether to show the treatment section
+	$treatment_section_show = isset($treatment_section_show) ? $treatment_section_show : false;
 
-}
+	// Query for whether to link the list items
+	$condition_treatment_section_link_item = isset($condition_treatment_section_link_item) ? $condition_treatment_section_link_item : false;
+
+	// Other variables
+	$hide_medical_ontology = isset($hide_medical_ontology) ? $hide_medical_ontology : false;
+
+	// Revisit query for whether to show the treatment section
+	if (
+		$treatment_section_show
+		&&
+		$condition_treatment_section_link_item
+		&&
+		$hide_medical_ontology
+		) {
+
+		// If the treatments section should be shown...
+		// and if the condition items should be linked...
+		// and if certain ontology items should be hidden on this page...
+
+		// Set the treatments section to not be shown on this page
+		$treatment_section_show = false;
+
+	}
 
 // Do something
 if ( $treatment_section_show ) {
 
 	// Check/define variables
 
-		$treatment_section_class = isset($treatment_section_class) ? $treatment_section_class : 'conditions-treatments';
-		$treatment_section_id = isset($treatment_section_id) ? $treatment_section_id : 'treatments';
-		$treatment_section_show_header = isset($treatment_section_show_header) ? $treatment_section_show_header : true;
+		// Schema data
+		$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
+
+		// Iteration variable for schema data
+		$condition_treatment_schema_i = isset($condition_treatment_schema_i) ? $condition_treatment_schema_i : 0;
+
+		// Item count for schema data
+		$condition_treatment_schema_count = isset($condition_treatment_schema_count) ? $condition_treatment_schema_count : 0;
+
+		// Query for whether item is ontology type vs. content type
+		$ontology_type = isset($ontology_type) ? $ontology_type : true;
+
+		// Text to use for the section title
 		if ( !isset($treatment_section_title) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($treatment_fpage_title_general) ) {
@@ -80,6 +99,8 @@ if ( $treatment_section_show ) {
 			}
 			$treatment_section_title = $treatment_fpage_title_general;
 		}
+
+		// Text to use for the section intro text
 		if ( !isset($treatment_section_intro) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($treatment_fpage_intro_general) ) {
@@ -88,7 +109,77 @@ if ( $treatment_section_show ) {
 			}
 			$treatment_section_intro = $treatment_fpage_intro_general;
 		}
-		$condition_treatment_section_link_item = isset($condition_treatment_section_link_item) ? $condition_treatment_section_link_item : false;
+
+		// Query for whether to display the section header
+		$treatment_section_show_header = isset($treatment_section_show_header) ? $treatment_section_show_header : true;
+
+		// Section class
+		$treatment_section_class = isset($treatment_section_class) ? $treatment_section_class : 'conditions-treatments';
+
+		// Section ID
+		$treatment_section_id = isset($treatment_section_id) ? $treatment_section_id : 'treatments';
+
+		// Other variables
+
+			if ( !isset($treatment_single_name) ) {
+				$labels_treatment_vars = uamswp_fad_labels_treatment();
+					$treatment_single_name = $labels_treatment_vars['treatment_single_name']; // string
+			}
+
+			if ( !isset($treatment_single_name_attr) ) {
+				$labels_treatment_vars = uamswp_fad_labels_treatment();
+					$treatment_single_name_attr = $labels_treatment_vars['treatment_single_name_attr']; // string
+			}
+
+			if ( !isset($treatment_plural_name) ) {
+				$labels_treatment_vars = uamswp_fad_labels_treatment();
+					$treatment_plural_name = $labels_treatment_vars['treatment_plural_name']; // string
+			}
+
+			if ( !isset($treatment_plural_name_attr) ) {
+				$labels_treatment_vars = uamswp_fad_labels_treatment();
+					$treatment_plural_name_attr = $labels_treatment_vars['treatment_plural_name_attr']; // string
+			}
+
+			if ( !isset($treatment_fpage_title_general) ) {
+				$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
+					$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
+			}
+
+			if ( !isset($treatment_fpage_intro_general) ) {
+				$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
+					$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
+			}
+
+			if ( !isset($treatments_cpt) ) {
+				$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+					$treatments_cpt = $ontology_site_values_vars['treatments_cpt'];
+			}
+
+			if ( !isset($treatment_cpt_query) ) {
+				$treatment_query_vars = uamswp_fad_treatment_query( $treatments_cpt, $condition_treatment_section_show, $ontology_type );
+					$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
+			}
+
+			if ( !isset($treatment_section_show) ) {
+				$treatment_query_vars = uamswp_fad_treatment_query( $treatments_cpt, $condition_treatment_section_show, $ontology_type );
+					$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
+			}
+
+			if ( !isset($treatment_ids) ) {
+				$treatment_query_vars = uamswp_fad_treatment_query( $treatments_cpt, $condition_treatment_section_show, $ontology_type );
+					$treatment_ids = $treatment_query_vars['treatment_ids']; // int[]
+			}
+
+			if ( !isset($treatment_count) ) {
+				$treatment_query_vars = uamswp_fad_treatment_query( $treatments_cpt, $condition_treatment_section_show, $ontology_type );
+					$treatment_count = $treatment_query_vars['treatment_count']; // int
+			}
+
+			if ( !isset($hide_medical_ontology) ) {
+				$ontology_hide_vars = uamswp_fad_ontology_hide();
+					$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
+			}
 
 	?>
 	<section class="uams-module<?php echo $treatment_section_class ? ' ' . $treatment_section_class : ''; ?> bg-auto<?php echo $treatment_section_collapse_list ? ' collapse-list' : ''; ?>"<?php echo $treatment_section_id ? ' id="' . $treatment_section_id . '" aria-labelledby="' . $treatment_section_id . '-title"' : ''; ?>>

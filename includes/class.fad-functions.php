@@ -1195,14 +1195,14 @@ function uamswp_fad_disable_scripts() {
 add_action('wp_enqueue_scripts', 'uamswp_fad_disable_scripts', 100);
 
 // Conditionally suppress ontology sections based on Find-a-Doc Settings configuration
-function uamswp_fad_ontology_hide() {
+function uamswp_fad_ontology_hide(
+	$regions = '', // string|array // Region(s) associated with the item
+	$service_lines = '' // string|array // Service line(s) associated with the item
+) {
 
-	// Bring in variables from outside of the function
-
-		// Defined on the template
-
-			global $regions;
-			global $service_lines;
+	// Check/define variables
+	$regions = isset($regions) ? $regions : array();
+	$service_lines = isset($service_lines) ? $service_lines : array();
 
 	// If variables are strings, convert them to arrays
 	$regions = is_array($regions) ? $regions : array( $regions );
@@ -6933,34 +6933,33 @@ function uamswp_meta_image_resize( $page_image_id ) {
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
 function uamswp_fad_section_provider(
-	$providers, // int[]
-	$provider_section_show_header = true, // bool // Query for whether to display the section header
-	$provider_section_title = '', // string (default: Find-a-Doc Settings value for providers section title in general placements) // Text to use for the section title
-	$provider_section_intro = '', // string (default: Find-a-Doc Settings value for providers section intro text in general placements) // Text to use for the section intro text
-	$provider_section_filter = true, // bool // Query for whether to add filter(s)
-	$provider_section_filter_region = true, // bool // Query for whether to add region filter
-	$provider_section_filter_title = true, // bool // Query for whether to add title filter
-	$provider_section_collapse_list = true // bool // Query for whether to collapse the list of providers in the providers section
+	$providers, // int[] // Value of the related providers input
+	// $provider_section_more_link_key, // string
+	// $provider_section_more_link_value, // string
+	// $provider_descendants = '', // int[] (optional) // List of this provider item's descendant items
+	// $hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+	// $provider_schema = '', // string (optional) // Schema data
+	// $provider_schema_i = 0, // int (optional) // Iteration variable for schema data
+	// $provider_schema_count = 0, // int (optional) // Item count for schema data
+	// $provider_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
+	// $provider_section_show = false, // bool (optional) // Query for whether to show the provider section
+	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
+	// $provider_descendant_list = false, // bool (optional) // Query for whether this is a list of child provider items within a provider item
+	$provider_section_title = '', // string (optional) // Text to use for the section title
+	$provider_section_intro = '', // string (optional) // Text to use for the section intro text
+	// $provider_section_more_show = true, // bool (optional) // Query for whether to show the section that links to more items
+	// $provider_section_more_text = '', // string (optional) // Text to use for the "more" intro text
+	// $provider_section_more_link_text = '', // string (optional) // Text to use for the "more" link text
+	// $provider_section_more_link_descr = '', // string (optional) // Text to use for the "more" link description
+	// $provider_section_link_item = false, // bool (optional) // Query for whether to link the list items
+	$provider_section_show_header = true, // bool (optional) // Query for whether to display the section header
+	$provider_section_filter = true, // bool (optional) // Query for whether to add filter(s)
+	$provider_section_filter_region = true, // bool (optional) // Query for whether to add region filter
+	$provider_section_filter_title = true, // bool (optional) // Query for whether to add title filter
+	$provider_section_collapse_list = true // bool (optional) // Query for whether to collapse the list of providers in the providers section
+	// $provider_section_class = '', // string (optional) // Section class
+	// $provider_section_id = 'providers' // string (optional) // Section ID
 ) {
-
-	// Bring in variables from outside of the function
-
-		$labels_provider_vars = uamswp_fad_labels_provider();
-			$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
-			$provider_plural_name_attr = $labels_provider_vars['provider_plural_name_attr']; // string
-
-		$fpage_text_provider_general_vars = uamswp_fad_fpage_text_provider_general();
-			$provider_fpage_title_general = $fpage_text_provider_general_vars['provider_fpage_title_general']; // string
-			$provider_fpage_intro_general = $fpage_text_provider_general_vars['provider_fpage_intro_general']; // string
-
-		$ontology_site_values_vars = uamswp_fad_ontology_site_values();
-			$providers = $ontology_site_values_vars['providers']; // int[]
-
-		$provider_query_vars = uamswp_fad_provider_query( $providers );
-			$provider_query = $provider_query_vars['provider_query']; // WP_Post[]
-			$provider_section_show = $provider_query_vars['provider_section_show']; // bool
-			$provider_ids = $provider_query_vars['provider_ids']; // int[]
-			$provider_count = $provider_query_vars['provider_count']; // int
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-provider.php' );
 
@@ -6970,196 +6969,145 @@ function uamswp_fad_section_provider(
 //     The template part included in this function can stand on its own. If the 
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
-function uamswp_fad_section_location( $locations ) {
-
-	// Bring in variables from outside of the function
-
-		// Optional variables defined on the template
-
-			global $location_section_show_header; // Query for whether to display the section header // bool (default: true)
-			global $location_section_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for locations section title in general placements)
-			global $location_section_intro; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for locations section intro text in general placements)
-			global $location_section_filter; // Query for whether to add filter(s) // bool (default: true)
-			global $location_section_filter_region; // Query for whether to add region filter // bool (default: true)
-			global $location_section_filter_title; // Query for whether to add title filter // bool (default: false)
-			global $location_section_collapse_list; // Query for whether to collapse the list of locations in the locations section // bool (default: false)
-			global $location_section_schema_query; // Query for whether to add locations to schema // bool (default: false)
-			global $location_descendant_list; // Query for whether this is a list of child locations within a location // bool (default: false)
-
-		$labels_location_vars = uamswp_fad_labels_location();
-			$location_single_name = $labels_location_vars['location_single_name']; // string
-			$location_single_name_attr = $labels_location_vars['location_single_name_attr']; // string
-			$location_plural_name = $labels_location_vars['location_plural_name']; // string
-			$location_plural_name_attr = $labels_location_vars['location_plural_name_attr']; // string
-
-		$fpage_text_location_general_vars = uamswp_fad_fpage_text_location_general();
-			$location_fpage_title_general = $fpage_text_location_general_vars['location_fpage_title_general']; // string
-			$location_fpage_intro_general = $fpage_text_location_general_vars['location_fpage_intro_general']; // string
-
-		$ontology_site_values_vars = uamswp_fad_ontology_site_values();
-			$locations = $ontology_site_values_vars['locations']; // int[]
-
-		$location_query_vars = uamswp_fad_location_query( $locations );
-			$location_query = $location_query_vars['location_query']; // WP_Post[]
-			$location_section_show = $location_query_vars['location_section_show']; // bool
-			$location_ids = $location_query_vars['location_ids']; // int[]
-			$location_count = $location_query_vars['location_count']; // int
+function uamswp_fad_section_location(
+	$locations, // int[] // Value of the related locations input
+	// $location_section_more_link_key, // string
+	// $location_section_more_link_value, // string
+	// $location_descendants = '', // int[] (optional) // List of this location item's descendant items
+	// $hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+	// $location_schema = '', // string (optional) // Schema data
+	// $location_schema_i = 0, // int (optional) // Iteration variable for schema data
+	// $location_schema_count = 0, // int (optional) // Item count for schema data
+	$location_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
+	// $location__section_show = false, // bool (optional) // Query for whether to show the location section
+	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
+	$location_descendant_list = false, // bool (optional) // Query for whether this is a list of child locations within a location
+	$location_section_title = '', // string (optional) // Text to use for the section title
+	$location_section_intro = '', // string (optional) // Text to use for the section intro text
+	// $location_section_more_show = true, // bool (optional) // Query for whether to show the section that links to more items
+	// $location_section_more_text = '', // string (optional) // Text to use for the "more" intro text
+	// $location_section_more_link_text = '', // string (optional) // Text to use for the "more" link text
+	// $location_section_more_link_descr = '', // string (optional) // Text to use for the "more" link description
+	// $location_section_link_item = false, // bool (optional) // Query for whether to link the list items
+	$location_section_show_header = true, // bool (optional) // Query for whether to display the section header
+	$location_section_filter = true, // bool (optional) // Query for whether to add filter(s)
+	$location_section_filter_region = true, // bool (optional) // Query for whether to add region filter
+	$location_section_filter_title = true, // bool (optional) // Query for whether to add title filter
+	$location_section_collapse_list = true // bool (optional) // Query for whether to collapse the list of locations in the locations section
+	// $location_section_class = '', // string (optional) // Section class
+	// $location_section_id = 'locations' // string (optional) // Section ID
+) {
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-location.php' );
 
-} // end function uamswp_fad_section_location()
+}
 
 // Construct Area of Expertise List Section
 //     The template part included in this function can stand on its own. If the 
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
-function uamswp_fad_section_expertise( $expertises, $expertise_descendants = '' ) {
-
-	// Bring in variables from outside of the function
-
-		// Optional variables defined on the template
-
-			global $expertise_section_class; // Section class // string (default: 'expertise-list')
-			global $expertise_section_id; // Section ID // string (default: 'expertise')
-			global $expertise_section_show_header; // Query whether to display the section header // bool (default: true)
-			global $expertise_section_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of expertise section title in general placements)
-			global $expertise_section_intro; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of expertise section intro text in general placements)
-			global $expertise_section_collapse_list; // Query for whether to collapse the list of locations in the locations section // bool (default: false)
-			global $expertise_descendant_list; // Query for whether this is a list of child areas of expertise within an area of expertise // bool (default: false)
-
-		$labels_expertise_vars = uamswp_fad_labels_expertise();
-			$expertise_single_name = $labels_expertise_vars['expertise_single_name']; // string
-			$expertise_single_name_attr = $labels_expertise_vars['expertise_single_name_attr']; // string
-			$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
-			$expertise_plural_name_attr = $labels_expertise_vars['expertise_plural_name_attr']; // string
-
-		$fpage_text_expertise_general_vars = uamswp_fad_fpage_text_expertise_general();
-			$expertise_fpage_title_general = $fpage_text_expertise_general_vars['expertise_fpage_title_general']; // string
-			$expertise_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_intro_general']; // string
-
-		$expertise_query_vars = uamswp_fad_expertise_query( $expertises );
-			$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
-			$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
-			$expertise_count = $expertise_query_vars['expertise_count']; // int
-
-		$expertise_descendant_query_vars = uamswp_fad_expertise_descendant_query( $expertise_descendants );
-			$expertise_descendant_query = $expertise_descendant_query_vars['expertise_descendant_query']; // WP_Post[]
-			$expertise_descendant_section_show = $expertise_descendant_query_vars['expertise_descendant_section_show']; // bool
-			$expertise_descendant_count = $expertise_descendant_query_vars['expertise_descendant_count']; // int
-
-		$ontology_hide_function = uamswp_fad_ontology_hide();
-			$hide_medical_ontology = $ontology_hide_function['hide_medical_ontology']; // bool
+function uamswp_fad_section_expertise(
+	$expertises, // int[] // Value of the related areas of expertise input
+	// $expertise_section_more_link_key, // string
+	// $expertise_section_more_link_value, // string
+	$expertise_descendants = '', // int[] (optional) // List of this area of expertise item's descendant items
+	$hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+	// $expertise_schema = '', // string (optional) // Schema data
+	// $expertise_schema_i = 0, // int (optional) // Iteration variable for schema data
+	// $expertise_schema_count = 0, // int (optional) // Item count for schema data
+	// $expertise_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
+	// $expertise_section_show = false, // bool (optional) // Query for whether to show the area of expertise section
+	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
+	$expertise_descendant_list = false, // bool (optional) // Query for whether this is a list of child areas of expertise within an area of expertise
+	$expertise_section_title = '', // string (optional) // Text to use for the section title
+	$expertise_section_intro = '', // string (optional) // Text to use for the section intro text
+	// $expertise_section_more_show = true, // bool (optional) // Query for whether to show the section that links to more items
+	// $expertise_section_more_text = '', // string (optional) // Text to use for the "more" intro text
+	// $expertise_section_more_link_text = '', // string (optional) // Text to use for the "more" link text
+	// $expertise_section_more_link_descr = '', // string (optional) // Text to use for the "more" link description
+	// $expertise_section_link_item = false, // bool (optional) // Query for whether to link the list items
+	$expertise_section_show_header = true, // bool (optional) // Query whether to display the section header
+	// $expertise_section_filter = true, // bool (optional) // Query for whether to add filter(s)
+	// $expertise_section_filter_region = true, // bool (optional) // Query for whether to add region filter
+	// $expertise_section_filter_title = true, // bool (optional) // Query for whether to add title filter
+	$expertise_section_collapse_list = false, // bool (optional) // Query for whether to collapse the list of locations in the locations section
+	$expertise_section_class = 'expertise-list', // string (optional) // Section class
+	$expertise_section_id = 'expertise' // string (optional) // Section ID
+) {
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-expertise.php' );
 
-} // end function uamswp_fad_section_expertise()
+}
 
 // Construct Clinical Resource List Section
 //     The template part included in this function can stand on its own. If the 
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
-function uamswp_fad_section_clinical_resource( $clinical_resources ) {
-
-	// Bring in variables from outside of the function
-
-		// Optional variables defined on the template
-
-			global $clinical_resource_section_class; // Section class // string (default: '')
-			global $clinical_resource_section_id; // Section ID // string (default: 'related-resources')
-			global $clinical_resource_section_show_header; // Query for whether to display the section header // bool (default: true)
-			global $clinical_resource_section_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for clinical resources section title in general placements)
-			global $clinical_resource_section_intro; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for clinical resources section intro text in general placements)
-			global $clinical_resource_section_more_show; // Query for whether to show the section that links to more items // bool (default: true)
-			global $clinical_resource_section_more_text; // Text to use for the "more" intro text // string (default: Find-a-Doc Settings value for clinical resources section "more" intro text in general placements)
-			global $clinical_resource_section_more_link_text; // Text to use for the "more" link text // string (default: Find-a-Doc Settings value for clinical resources section "more" link text in general placements)
-			global $clinical_resource_section_more_link_descr; // Text to use for the "more" link description // string (default: Find-a-Doc Settings value for clinical resources section "more" link description in general placements)
-			global $clinical_resource_section_collapse_list; // Query for whether to collapse the list of locations in the locations section // bool (default: false)
-
-		// Required variables defined on the template
-
-			global $clinical_resource_section_more_link_key; // string
-			global $clinical_resource_section_more_link_value; // string
-
-		$labels_clinical_resource_vars = uamswp_fad_labels_clinical_resource();
-			$clinical_resource_single_name = $labels_clinical_resource_vars['clinical_resource_single_name']; // string
-			$clinical_resource_single_name_attr = $labels_clinical_resource_vars['clinical_resource_single_name_attr']; // string
-			$clinical_resource_plural_name = $labels_clinical_resource_vars['clinical_resource_plural_name']; // string
-			$clinical_resource_plural_name_attr = $labels_clinical_resource_vars['clinical_resource_plural_name_attr']; // string
-
-		$fpage_text_clinical_resource_general_vars = uamswp_fad_fpage_text_clinical_resource_general();
-			$clinical_resource_fpage_title_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_title_general']; // string
-			$clinical_resource_fpage_intro_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_intro_general']; // string
-
-		$clinical_resource_query_vars = uamswp_fad_clinical_resource_query( $clinical_resources );
-			$clinical_resource_query = $clinical_resource_query_vars['clinical_resource_query']; // WP_Post[]
-			$clinical_resource_section_show = $clinical_resource_query_vars['clinical_resource_section_show']; // bool
-			$clinical_resource_count = $clinical_resource_query_vars['clinical_resource_count']; // int
+function uamswp_fad_section_clinical_resource(
+	$clinical_resources, // int[] // Value of the related clinical resources input
+	$clinical_resource_section_more_link_key, // string
+	$clinical_resource_section_more_link_value, // string
+	// $clinical_resource_descendants = '', // int[] (optional) // List of this clinical resource item's descendant items
+	// $hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+	// $clinical_resource_schema = '', // string (optional) // Schema data
+	// $clinical_resource_schema_i = 0, // int (optional) // Iteration variable for schema data
+	// $clinical_resource_schema_count = 0, // int (optional) // Item count for schema data
+	// $clinical_resource_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
+	// $clinical_resource_section_show = false, // bool (optional) // Query for whether to show the clinical resource section
+	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
+	// $clinical_resource_descendant_list = false, // bool (optional) // Query for whether this is a list of child location items within a location item
+	$clinical_resource_section_title = '', // string (optional) // Text to use for the section title
+	$clinical_resource_section_intro = '', // string (optional) // Text to use for the section intro text
+	$clinical_resource_section_more_show = true, // bool (optional) // Query for whether to show the section that links to more items
+	$clinical_resource_section_more_text = '', // string (optional) // Text to use for the "more" intro text
+	$clinical_resource_section_more_link_text = '', // string (optional) // Text to use for the "more" link text
+	$clinical_resource_section_more_link_descr = '', // string (optional) // Text to use for the "more" link description
+	// $clinical_resource_section_link_item = false, // bool (optional) // Query for whether to link the list items
+	$clinical_resource_section_show_header = true, // bool (optional) // Query for whether to display the section header
+	// $clinical_resource_section_filter = true, // bool (optional) // Query for whether to add filter(s)
+	// $clinical_resource_section_filter_region = true, // bool (optional) // Query for whether to add region filter
+	// $clinical_resource_section_filter_title = true, // bool (optional) // Query for whether to add title filter
+	$clinical_resource_section_collapse_list = false, // bool (optional) // Query for whether to collapse the list of locations in the locations section
+	$clinical_resource_section_class = '', // string (optional) // Section class
+	$clinical_resource_section_id = 'related-resources' // string (optional) // Section ID
+) {
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-clinical-resource.php' );
 
-} // end function uamswp_fad_section_clinical_resource()
+}
 
 // Construct Condition List Section
 //     The template part included in this function can stand on its own. If the 
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
 function uamswp_fad_section_condition(
-	$conditions_cpt, // int[]
-	$condition_treatment_schema = '', // string
-	$condition_treatment_schema_i = 0, // int
-	$condition_treatment_schema_count = 0, // int
-	$condition_treatment_section_show = false, // bool
-	$ontology_type = true, // bool
-	$condition_section_title = '', // string // Text to use for the section title
-	$condition_section_intro = '', // string // Text to use for the section intro text
-	$condition_treatment_section_link_item = false, // bool // Query for whether to link the list items
-	$condition_section_show_header = true, // bool // Query for whether to display the section header
-	$condition_section_class = 'conditions-treatments', // string // Section class
-	$condition_section_id = 'conditions' // string // Section ID
+	$conditions_cpt, // int[] // Value of the related conditions input
+	// $condition_section_more_link_key, // string
+	// $condition_section_more_link_value, // string
+	// $condition_descendants = '', // int[] (optional) // List of this condition item's descendant items
+	$hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+	$condition_treatment_schema = '', // string (optional) // Schema data
+	$condition_treatment_schema_i = 0, // int (optional) // Iteration variable for schema data
+	$condition_treatment_schema_count = 0, // int (optional) // Item count for schema data
+	// $condition_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
+	$condition_section_show = false, // bool (optional) // Query for whether to show the conditions section
+	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
+	// $condition_descendant_list = false, // bool (optional) // Query for whether this is a list of child location items within a location item
+	$condition_section_title = '', // string (optional) // Text to use for the section title
+	$condition_section_intro = '', // string (optional) // Text to use for the section intro text
+	// $condition_section_more_show = true, // bool (optional) // Query for whether to show the section that links to more items
+	// $condition_section_more_text = '', // string (optional) // Text to use for the "more" intro text
+	// $condition_section_more_link_text = '', // string (optional) // Text to use for the "more" link text
+	// $condition_section_more_link_descr = '', // string (optional) // Text to use for the "more" link description
+	$condition_treatment_section_link_item = false, // bool (optional) // Query for whether to link the list items
+	$condition_section_show_header = true, // bool (optional) // Query for whether to display the section header
+	// $condition_section_filter = true, // bool (optional) // Query for whether to add filter(s)
+	// $condition_section_filter_region = true, // bool (optional) // Query for whether to add region filter
+	// $condition_section_filter_title = true, // bool (optional) // Query for whether to add title filter
+	// $condition_section_collapse_list = true, // bool (optional) // Query for whether to collapse the list of providers in the providers section
+	$condition_section_class = 'conditions-treatments', // string (optional) // Section class
+	$condition_section_id = 'conditions' // string (optional) // Section ID
 ) {
-
-	// Bring in variables from outside of the function
-
-		$labels_condition_vars = uamswp_fad_labels_condition();
-			$condition_single_name = $labels_condition_vars['condition_single_name']; // string
-			$condition_single_name_attr = $labels_condition_vars['condition_single_name_attr']; // string
-			$condition_plural_name = $labels_condition_vars['condition_plural_name']; // string
-			$condition_plural_name_attr = $labels_condition_vars['condition_plural_name_attr']; // string
-
-		$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
-			$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
-			$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
-
-		$ontology_site_values_vars = uamswp_fad_ontology_site_values();
-			$conditions_cpt = $ontology_site_values_vars['conditions_cpt'];
-
-		$condition_query_vars = uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
-			$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
-			$condition_section_show = $condition_query_vars['condition_section_show']; // bool
-			$condition_ids = $condition_query_vars['condition_ids']; // int[]
-			$condition_count = $condition_query_vars['condition_count']; // int
-
-		$ontology_hide_function = uamswp_fad_ontology_hide();
-			$hide_medical_ontology = $ontology_hide_function['hide_medical_ontology']; // bool
-
-	// Check/define variables
-
-		if ( !isset($condition_section_title) || empty($condition_section_title) ) {
-			$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
-				$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string // Find-a-Doc Settings value for conditions section title in general placements
-			$condition_section_title = $condition_fpage_title_general;
-		}
-		if ( !isset($condition_section_intro) || empty($condition_section_intro) ) {
-			$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
-				$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string // Find-a-Doc Settings value for conditions section intro text in general placements
-			$condition_section_intro = $condition_fpage_intro_general;
-		}
-
-	// Make variables available outside of the function
-
-		global $condition_treatment_schema; // string
-		global $condition_treatment_schema_i; // int
-		global $condition_treatment_schema_count; // int
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-condition.php' );
 
@@ -7176,69 +7124,40 @@ function uamswp_fad_section_condition(
 		);
 		return $section_condition_vars;
 
-} // end function uamswp_fad_section_condition()
+}
 
 // Construct Treatment List Section
 //     The template part included in this function can stand on its own. If the 
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
 function uamswp_fad_section_treatment(
-	$treatments_cpt, // int[]
-	$condition_treatment_schema = '', // string
-	$condition_treatment_schema_i = 0, // int
-	$condition_treatment_schema_count = 0, // int
-	$condition_treatment_section_show = false, // bool
-	$ontology_type = true, // bool
-	$treatment_section_title = '', // string // Text to use for the section title
-	$treatment_section_intro = '', // string // Text to use for the section intro text
-	$condition_treatment_section_link_item = false, // bool // Query for whether to link the list items
-	$treatment_section_show_header = true, // bool // Query for whether to display the section header
-	$treatment_section_class = 'conditions-treatments', // string // Section class
-	$treatment_section_id = 'treatments' // string // Section ID
+	$treatments_cpt, // int[] // Value of the related treatments input
+	// $treatment_section_more_link_key, // string
+	// $treatment_section_more_link_value, // string
+	// $treatment_descendants = '', // int[] (optional) // List of this treatment item's descendant items
+	$hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+	$condition_treatment_schema = '', // string (optional) // Schema data
+	$condition_treatment_schema_i = 0, // int (optional) // Iteration variable for schema data
+	$condition_treatment_schema_count = 0, // int (optional) // Item count for schema data
+	// $treatment_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
+	$treatment_section_show = false, // bool (optional) // Query for whether to show the treatment section
+	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
+	// $treatment_descendant_list = false, // bool (optional) // Query for whether this is a list of child location items within a location item
+	$treatment_section_title = '', // string (optional) // Text to use for the section title
+	$treatment_section_intro = '', // string (optional) // Text to use for the section intro text
+	// $treatment_section_more_show = true, // bool (optional) // Query for whether to show the section that links to more items
+	// $treatment_section_more_text = '', // string (optional) // Text to use for the "more" intro text
+	// $treatment_section_more_link_text = '', // string (optional) // Text to use for the "more" link text
+	// $treatment_section_more_link_descr = '', // string (optional) // Text to use for the "more" link description
+	$condition_treatment_section_link_item = false, // bool (optional) // Query for whether to link the list items
+	$treatment_section_show_header = true, // bool (optional) // Query for whether to display the section header
+	// $treatment_section_filter = true, // bool (optional) // Query for whether to add filter(s)
+	// $treatment_section_filter_region = true, // bool (optional) // Query for whether to add region filter
+	// $treatment_section_filter_title = true, // bool (optional) // Query for whether to add title filter
+	// $treatment_section_collapse_list = true, // bool (optional) // Query for whether to collapse the list of providers in the providers section
+	$treatment_section_class = 'conditions-treatments', // string (optional) // Section class
+	$treatment_section_id = 'treatments' // string (optional) // Section ID
 ) {
-
-	// Bring in variables from outside of the function
-
-		$labels_treatment_vars = uamswp_fad_labels_treatment();
-			$treatment_single_name = $labels_treatment_vars['treatment_single_name']; // string
-			$treatment_single_name_attr = $labels_treatment_vars['treatment_single_name_attr']; // string
-			$treatment_plural_name = $labels_treatment_vars['treatment_plural_name']; // string
-			$treatment_plural_name_attr = $labels_treatment_vars['treatment_plural_name_attr']; // string
-
-		$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
-			$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
-			$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
-
-		$ontology_site_values_vars = uamswp_fad_ontology_site_values();
-			$treatments_cpt = $ontology_site_values_vars['treatments_cpt'];
-
-		$treatment_query_vars = uamswp_fad_treatment_query( $treatments_cpt, $condition_treatment_section_show, $ontology_type );
-			$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
-			$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
-			$treatment_ids = $treatment_query_vars['treatment_ids']; // int[]
-			$treatment_count = $treatment_query_vars['treatment_count']; // int
-
-		$ontology_hide_function = uamswp_fad_ontology_hide();
-			$hide_medical_ontology = $ontology_hide_function['hide_medical_ontology']; // bool
-
-	// Check/define variables
-
-		if ( !isset($treatment_section_title) || empty($treatment_section_title) ) {
-			$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
-				$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string // Find-a-Doc Settings value for treatments section title in general placements
-			$treatment_section_title = $treatment_fpage_title_general;
-		}
-		if ( !isset($treatment_section_intro) || empty($treatment_section_intro) ) {
-			$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
-				$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string // Find-a-Doc Settings value for treatments section intro text in general placements
-			$treatment_section_intro = $treatment_fpage_intro_general;
-		}
-
-	// Make variables available outside of the function
-
-		global $condition_treatment_schema; // string
-		global $condition_treatment_schema_i; // int
-		global $condition_treatment_schema_count; // int
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-treatment.php' );
 
@@ -7255,102 +7174,54 @@ function uamswp_fad_section_treatment(
 		);
 		return $section_treatment_vars;
 
-} // end function uamswp_fad_section_treatment()
+}
 
 // Construct Combined Condition and Treatment List Section List Section
 //     The template part included in this function can stand on its own. If the 
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
 function uamswp_fad_section_condition_treatment(
-	$conditions_cpt, // int[]
-	$treatments_cpt, // int[]
-	$condition_treatment_section_show = false, // bool
-	$ontology_type = true, // bool
-	$condition_treatment_section_title = '', // string (default: Find-a-Doc Settings value for combined condition/treatment section title in general placements) // Text to use for the section title
-	$condition_treatment_section_intro = '', // string (default: Find-a-Doc Settings value for combined condition/treatment section intro text in general placements) // Text to use for the section intro text
-	$condition_section_title = '', // string (default: Find-a-Doc Settings value for areas of condition section title in general placements) // Text to use for the conditions subsection title
-	$condition_section_intro = '', // string (default: Find-a-Doc Settings value for condition section intro text in general placements) // Text to use for the conditions subsection intro text
-	$treatment_section_title = '', // string (default: Find-a-Doc Settings value for treatment section title in general placements) // Text to use for the treatments subsection title
-	$treatment_section_intro = '', // string (default: Find-a-Doc Settings value for treatment section intro text in general placements) // Text to use for the treatments subsection intro text
-	$condition_treatment_section_link_item = false, // bool // Query for whether to link the list items
-	$condition_treatment_section_show_header = true, // bool // Query for whether to display the section header
-	$condition_section_show_header = true, // bool // Query for whether to display the conditions subsection header
-	$treatment_section_show_header = true, // bool // Query for whether to display the treatments subsection header
-	$condition_treatment_section_class = 'conditions-treatments', // string // Section class
-	$condition_treatment_section_id = 'conditions-treatments', // string // Section ID
-	$condition_section_class = 'conditions', // string // Conditions subsection class
-	$condition_section_id = 'conditions', // string // Conditions subsection ID
-	$treatment_section_class = 'treatments', // string // Treatments subsection class
-	$treatment_section_id = 'treatments' // string // Treatments subsection ID
+	$conditions_cpt, // int[] // Value of the related conditions input
+	$treatments_cpt, // int[] // Value of the related treatments input
+	// $condition_treatment_section_more_link_key, // string
+	// $condition_treatment_section_more_link_value, // string
+	// $condition_descendants = '', // int[] (optional) // List of this condition item's descendant items
+	// $treatment_descendants = '', // int[] (optional) // List of this treatment item's descendant items
+	$hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+	// $condition_treatment_schema = '', // string (optional) // Schema data
+	// $condition_treatment_schema_i = 0, // int (optional) // Iteration variable for schema data
+	// $condition_treatment_schema_count = 0, // int (optional) // Item count for schema data
+	// $condition_treatment_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
+	$condition_treatment_section_show = false, // bool (optional) // Query for whether to show the combined conditions and treatments section
+	$condition_section_show = false, // bool (optional) // Query for whether to show the condition section
+	$treatment_section_show = false, // bool (optional) // Query for whether to show the treatment section
+	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
+	// $condition_treatment_descendant_list = false, // bool (optional) // Query for whether this is a list of child location items within a location item
+	$condition_treatment_section_title = '', // string (optional) // Text to use for the section title
+	$condition_treatment_section_intro = '', // string (optional) // Text to use for the section intro text
+	$condition_section_title = '', // string (optional) // Text to use for the conditions subsection title
+	$condition_section_intro = '', // string (optional) // Text to use for the conditions subsection intro text
+	$treatment_section_title = '', // string (optional) // Text to use for the treatments subsection title
+	$treatment_section_intro = '', // string (optional) // Text to use for the treatments subsection intro text
+	// $condition_treatment_section_more_show = true, // bool (optional) // Query for whether to show the section that links to more items
+	// $condition_treatment_section_more_text = '', // string (optional) // Text to use for the "more" intro text
+	// $condition_treatment_section_more_link_text = '', // string (optional) // Text to use for the "more" link text
+	// $condition_treatment_section_more_link_descr = '', // string (optional) // Text to use for the "more" link description
+	$condition_treatment_section_link_item = false, // bool (optional) // Query for whether to link the list items
+	$condition_treatment_section_show_header = true, // bool (optional) // Query for whether to display the section header
+	$condition_section_show_header = true, // bool (optional) // Query for whether to display the conditions subsection header
+	$treatment_section_show_header = true, // bool (optional) // Query for whether to display the treatments subsection header
+	// $condition_treatment_section_filter = true, // bool (optional) // Query for whether to add filter(s)
+	// $condition_treatment_section_filter_region = true, // bool (optional) // Query for whether to add region filter
+	// $condition_treatment_section_filter_title = true, // bool (optional) // Query for whether to add title filter
+	$condition_treatment_section_collapse_list = false, // bool (optional) // Query for whether to collapse the list of conditions and treatments
+	$condition_treatment_section_class = 'conditions-treatments', // string (optional) // Section class
+	$condition_treatment_section_id = 'conditions-treatments', // string (optional) // Section ID
+	$condition_section_class = 'conditions', // string (optional) // Conditions subsection class
+	$condition_section_id = 'conditions', // string (optional) // Conditions subsection ID
+	$treatment_section_class = 'treatments', // string (optional) // Treatments subsection class
+	$treatment_section_id = 'treatments' // string (optional) // Treatments subsection ID
 ) {
-
-	// Bring in variables from outside of the function
-
-		$labels_condition_vars = uamswp_fad_labels_condition();
-			$condition_single_name_attr = $labels_condition_vars['condition_single_name_attr']; // string
-
-		$labels_treatment_vars = uamswp_fad_labels_treatment();
-			$treatment_single_name_attr = $labels_treatment_vars['treatment_single_name_attr']; // string
-
-		$fpage_text_condition_treatment_general_vars = uamswp_fad_fpage_text_condition_treatment_general();
-			$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_title_general']; // string
-			$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_intro_general']; // string
-
-		$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
-			$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
-			$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
-
-		$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
-			$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
-			$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
-
-		$condition_query_vars = uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
-			$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
-			$condition_section_show = $condition_query_vars['condition_section_show']; // bool
-			$condition_treatment_section_show = $condition_query_vars['condition_treatment_section_show']; // bool
-			$condition_count = $condition_query_vars['condition_count']; // int
-
-		$treatment_query_vars = uamswp_fad_treatment_query( $treatments_cpt, $condition_treatment_section_show, $ontology_type );
-			$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
-			$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
-			$condition_treatment_section_show = $treatment_query_vars['condition_treatment_section_show']; // bool
-			$treatment_count = $treatment_query_vars['treatment_count']; // int
-
-		$ontology_hide_function = uamswp_fad_ontology_hide();
-			$hide_medical_ontology = $ontology_hide_function['hide_medical_ontology']; // bool
-
-	// Check/define variables
-
-		if ( !isset($condition_treatment_section_title) || empty($condition_treatment_section_title) ) {
-			$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_condition_treatment_general();
-				$condition_treatment_fpage_title_general = $fpage_text_treatment_general_vars['condition_treatment_fpage_title_general']; // string // Find-a-Doc Settings value for combined conditions and treatments section title in general placements
-			$condition_treatment_section_title = $condition_treatment_fpage_title_general;
-		}
-		if ( !isset($condition_treatment_section_intro) || empty($condition_treatment_section_intro) ) {
-			$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_condition_treatment_general();
-				$condition_treatment_fpage_intro_general = $fpage_text_treatment_general_vars['condition_treatment_fpage_intro_general']; // string // Find-a-Doc Settings value for combined conditions and treatments section intro text in general placements
-			$condition_treatment_section_intro = $condition_treatment_fpage_intro_general;
-		}
-		if ( !isset($condition_section_title) || empty($condition_section_title) ) {
-			$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
-				$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string // Find-a-Doc Settings value for conditions section title in general placements
-			$condition_treatment_section_title = $condition_fpage_title_general;
-		}
-		if ( !isset($condition_section_intro) || empty($condition_section_intro) ) {
-			$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
-				$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string // Find-a-Doc Settings value for conditions section intro text in general placements
-			$condition_treatment_section_intro = $condition_fpage_intro_general;
-		}
-		if ( !isset($treatment_section_title) || empty($treatment_section_title) ) {
-			$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
-				$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string // Find-a-Doc Settings value for treatments section title in general placements
-			$condition_treatment_section_title = $treatment_fpage_title_general;
-		}
-		if ( !isset($treatment_section_intro) || empty($treatment_section_intro) ) {
-			$fpage_text_treatment_general_vars = uamswp_fad_fpage_text_treatment_general();
-				$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string // Find-a-Doc Settings value for treatments section intro text in general placements
-			$treatment_section_intro = $treatment_fpage_intro_general;
-		}
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-condition-treatment.php' );
 
@@ -7363,7 +7234,7 @@ function uamswp_fad_section_condition_treatment(
 		);
 		return $section_condition_treatment_vars;
 
-} // end function uamswp_fad_section_condition_treatment()
+}
 
 // Define a schema block
 function uamswp_schema_construct($schema_construct_arr) {

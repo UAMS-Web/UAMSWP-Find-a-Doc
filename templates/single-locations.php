@@ -361,11 +361,18 @@ if ($prescription_query) {
 	}
 }
 
-// Conditionally suppress sections based on Find-a-Doc Settings configuration
-$regions = get_field('location_region',$post->ID);
-$service_lines = get_field('location_service_line',$post->ID);
-$ontology_hide_vars = uamswp_fad_ontology_hide();
-	$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
+// Query for whether to conditionally suppress ontology sections based on Find-a-Doc Settings configuration
+$regions = get_field('physician_region',$post->ID);
+$service_lines = get_field('physician_service_line',$post->ID);
+if ( $regions || $service_lines ) {
+	$ontology_hide_vars = uamswp_fad_ontology_hide(
+		$regions, // string|array // Region(s) associated with the item
+		$service_lines // string|array // Service line(s) associated with the item
+	);
+		$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
+} else {
+	$hide_medical_ontology = false; // bool
+}
 
 // Override theme's method of defining the meta description
 add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');

@@ -199,6 +199,19 @@ $condition_query_vars = uamswp_fad_condition_query( $conditions_cpt, $condition_
 	$condition_count = $condition_query_vars['condition_count']; // int
 	$condition_treatment_schema = $condition_query_vars['condition_treatment_schema']; // string
 
+// Query for whether to conditionally suppress ontology sections based on Find-a-Doc Settings configuration
+$regions = isset($regions) ? $regions : array();
+$service_lines = isset($service_lines) ? $service_lines : array();
+if ( $regions || $service_lines ) {
+	$ontology_hide_vars = uamswp_fad_ontology_hide(
+		$regions, // string|array // Region(s) associated with the item
+		$service_lines // string|array // Service line(s) associated with the item
+	);
+		$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
+} else {
+	$hide_medical_ontology = false; // bool
+}
+
 // Classes for indicating presence of content
 $treatment_field_classes = '';
 if ($keywords && array_filter($keywords)) { $treatment_field_classes .= ' has-keywords'; } // Alternate names
