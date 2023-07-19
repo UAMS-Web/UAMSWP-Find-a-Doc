@@ -47,7 +47,13 @@
 		$placeholder_clinical_resource_plural_name = $labels_clinical_resource['placeholder_clinical_resource_plural_name']; // string
 
 	// Get system settings for Clinical Resource facet labels
-	uamswp_fad_labels_clinical_resource_facet();
+	$labels_clinical_resource_facet = uamswp_fad_labels_clinical_resource_facet();
+		$clinical_resource_type_single_name = $labels_clinical_resource_facet['clinical_resource_type_single_name']; // string
+		$clinical_resource_type_single_name_attr = $labels_clinical_resource_facet['clinical_resource_type_single_name_attr']; // string
+		$clinical_resource_type_plural_name = $labels_clinical_resource_facet['clinical_resource_type_plural_name']; // string
+		$clinical_resource_type_plural_name_attr = $labels_clinical_resource_facet['clinical_resource_type_plural_name_attr']; // string
+		$placeholder_clinical_resource_type_single_name = $labels_clinical_resource_facet['placeholder_clinical_resource_type_single_name']; // string
+		$placeholder_clinical_resource_type_plural_name = $labels_clinical_resource_facet['placeholder_clinical_resource_type_plural_name']; // string
 
 	// Get system settings for Condition labels
 	$labels_condition = uamswp_fad_labels_condition();

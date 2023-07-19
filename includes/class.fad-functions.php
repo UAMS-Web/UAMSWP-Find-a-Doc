@@ -2723,16 +2723,6 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get the Find-a-Doc Settings values for clinical resource facet labels
 	function uamswp_fad_labels_clinical_resource_facet() {
 
-		// Make variables available outside of the function
-
-			global $clinical_resource_type_single_name; // string
-			global $clinical_resource_type_single_name_attr; // string
-			global $clinical_resource_type_plural_name; // string
-			global $clinical_resource_type_plural_name_attr; // string
-			global $placeholder_clinical_resource_type_single_name; // string
-			global $placeholder_clinical_resource_type_plural_name; // string
-			global $facet_labels; // array
-
 		$clinical_resource_type_single_name = get_field('clinical_resource_type_single_name', 'option') ?: 'Resource Type';
 		$clinical_resource_type_single_name_attr = uamswp_attr_conversion($clinical_resource_type_single_name);
 		$clinical_resource_type_plural_name = get_field('clinical_resource_type_plural_name', 'option') ?: 'Resource Types';
