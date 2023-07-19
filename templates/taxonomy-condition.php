@@ -106,7 +106,12 @@ $page_title_attr = uamswp_attr_conversion($page_title);
 		$placeholder_treatment_plural_name = $labels_treatment_vars['placeholder_treatment_plural_name']; // string
 
 // Get system settings for condition archive page text
-uamswp_fad_archive_text_condition();
+$archive_text_condition_vars = uamswp_fad_archive_text_condition();
+	$condition_archive_headline = $archive_text_condition_vars['condition_archive_headline']; // string
+	$condition_archive_headline_attr = $archive_text_condition_vars['condition_archive_headline_attr']; // string
+	$condition_archive_intro_text = $archive_text_condition_vars['condition_archive_intro_text']; // string
+	$placeholder_condition_archive_headline = $archive_text_condition_vars['placeholder_condition_archive_headline']; // string
+	$placeholder_condition_archive_intro_text = $archive_text_condition_vars['placeholder_condition_archive_intro_text']; // string
 
 // Override theme's method of defining the meta page title
 $meta_title_enhanced_addition = $condition_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title

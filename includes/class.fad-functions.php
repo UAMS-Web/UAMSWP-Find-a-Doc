@@ -2945,14 +2945,6 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get the Find-a-Doc Settings values for condition archive page text
 	function uamswp_fad_archive_text_condition() {
 
-		// Make variables available outside of the function
-
-			global $condition_archive_headline;
-			global $condition_archive_headline_attr;
-			global $condition_archive_intro_text;
-			global $placeholder_condition_archive_headline;
-			global $placeholder_condition_archive_intro_text;
-
 		$condition_archive_headline = get_field('conditions_archive_headline', 'option') ?: 'Conditions';
 		$condition_archive_headline_attr = uamswp_attr_conversion($condition_archive_headline);
 		$condition_archive_intro_text = get_field('conditions_archive_intro_text', 'option');

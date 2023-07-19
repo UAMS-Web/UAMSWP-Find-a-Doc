@@ -91,8 +91,13 @@
 		$placeholder_treatment_single_name = $labels_treatment_vars['placeholder_treatment_single_name']; // string
 		$placeholder_treatment_plural_name = $labels_treatment_vars['placeholder_treatment_plural_name']; // string
 
-// Get system settings for condition archive page text
-// uamswp_fad_archive_text_condition();
+// // Get system settings for condition archive page text
+// $archive_text_condition_vars = uamswp_fad_archive_text_condition();
+// 	$condition_archive_headline = $archive_text_condition_vars['condition_archive_headline']; // string
+// 	$condition_archive_headline_attr = $archive_text_condition_vars['condition_archive_headline_attr']; // string
+// 	$condition_archive_intro_text = $archive_text_condition_vars['condition_archive_intro_text']; // string
+// 	$placeholder_condition_archive_headline = $archive_text_condition_vars['placeholder_condition_archive_headline']; // string
+// 	$placeholder_condition_archive_intro_text = $archive_text_condition_vars['placeholder_condition_archive_intro_text']; // string
 
 // Get the page ID
 $page_id = get_the_ID();
