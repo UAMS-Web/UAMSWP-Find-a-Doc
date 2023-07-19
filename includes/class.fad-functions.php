@@ -6681,33 +6681,6 @@ function uamswp_fad_meta_desc($html) {
 // Get the Find-a-Doc Settings values for general patient appointment information
 function uamswp_fad_appointment_patients() {
 
-	// Make variables available outside of the function
-
-		global $appointment_patients_phone_number_new; // string
-		global $appointment_patients_phone_label_new; // string
-		global $appointment_patients_phone_label_new_attr; // string
-		global $appointment_patients_phone_info_new; // string
-		global $appointment_patients_phone_number_existing; // string
-		global $appointment_patients_phone_label_existing; // string
-		global $appointment_patients_phone_label_existing_attr; // string
-		global $appointment_patients_phone_info_existing; // string
-		global $appointment_patients_phone_number_both; // string
-		global $appointment_patients_phone_label_both; // string
-		global $appointment_patients_phone_label_both_attr; // string
-		global $appointment_patients_phone_info_both; // string
-		global $appointment_patients_web_url_new; // string
-		global $appointment_patients_web_label_new; // string
-		global $appointment_patients_web_label_new_attr; // string
-		global $appointment_patients_web_info_new; // string
-		global $appointment_patients_web_url_existing; // string
-		global $appointment_patients_web_label_existing; // string
-		global $appointment_patients_web_label_existing_attr; // string
-		global $appointment_patients_web_info_existing; // string
-		global $appointment_patients_web_url_both; // string
-		global $appointment_patients_web_label_both; // string
-		global $appointment_patients_web_label_both_attr; // string
-		global $appointment_patients_web_info_both; // string
-
 	// Phone Number Information
 
 		// New Patients Only
