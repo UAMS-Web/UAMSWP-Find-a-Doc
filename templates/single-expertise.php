@@ -500,24 +500,6 @@ while ( have_posts() ) : the_post(); ?>
 					$treatment_section_intro = $treatment_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
 					include( UAMS_FAD_PATH . '/templates/parts/section-list-condition-treatment.php' );
 
-				// // Construct conditions section
-
-				// 	$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
-				// 	$condition_treatment_schema_i = isset($condition_treatment_schema_i) ? $condition_treatment_schema_i : 0;
-				// 	$condition_treatment_schema_count = isset($condition_treatment_schema_count) ? $condition_treatment_schema_count : 0;
-				// 	$condition_section_title = $condition_fpage_title_expertise; // Text to use for the section title // string (default: Find-a-Doc Settings value for condition section title in a general placement)
-				// 	$condition_section_intro = $condition_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
-				// 	include( UAMS_FAD_PATH . '/templates/parts/section-list-condition.php' );
-
-				// // Construct treatments section
-
-				// 	$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
-				// 	$condition_treatment_schema_i = isset($condition_treatment_schema_i) ? $condition_treatment_schema_i : 0;
-				// 	$condition_treatment_schema_count = isset($condition_treatment_schema_count) ? $condition_treatment_schema_count : 0;
-				// 	$treatment_section_title = $treatment_fpage_title_expertise; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
-				// 	$treatment_section_intro = $treatment_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
-				// 	include( UAMS_FAD_PATH . '/templates/parts/section-list-treatment.php' );
-
 				// Check if Make an Appointment section should be displayed
 
 					$appointment_section_show = true; // It should always be displayed.

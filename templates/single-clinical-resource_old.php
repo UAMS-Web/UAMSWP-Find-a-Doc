@@ -416,52 +416,6 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 		}
 		add_action( 'genesis_after_entry', 'uamswp_fad_section_condition_treatment__template', 12 );
 
-	// // Construct conditions section
-
-	// 	$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
-	// 	$condition_treatment_schema_i = isset($condition_treatment_schema_i) ? $condition_treatment_schema_i : 0;
-	// 	$condition_treatment_schema_count = isset($condition_treatment_schema_count) ? $condition_treatment_schema_count : 0;
-	// 	$ontology_type = isset($ontology_type) ? $ontology_type : true; // bool
-	// 	$condition_section_title = $condition_fpage_title_clinical_resource; // Text to use for the section title // string (default: Find-a-Doc Settings value for condition section title in a general placement)
-	// 	$condition_section_intro = $condition_fpage_intro_clinical_resource; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
-	// 	add_action( 'genesis_after_entry', 'uamswp_fad_section_condition', 12 );
-	// 	$section_condition_vars = isset($section_condition_vars) ? $section_condition_vars : uamswp_fad_section_condition(
-	// 		$conditions_cpt, // int[]
-	// 		$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
-	// 		$condition_treatment_schema, // string
-	// 		$condition_treatment_schema_i, // int
-	// 		$condition_treatment_schema_count, // int
-	// 		$ontology_type, // bool
-	// 		$condition_section_title, // string // Text to use for the section title
-	// 		$condition_section_intro, // string // Text to use for the section intro text
-	// 	);
-	// 		$condition_treatment_schema = $section_condition_vars['condition_treatment_schema']; // string
-	// 		$condition_treatment_schema_i = $section_condition_vars['condition_treatment_schema_i']; // int
-	// 		$condition_treatment_schema_count = $section_condition_vars['condition_treatment_schema_count']; // int
-
-	// // Construct treatments section
-
-	// 	$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
-	// 	$condition_treatment_schema_i = isset($condition_treatment_schema_i) ? $condition_treatment_schema_i : 0;
-	// 	$condition_treatment_schema_count = isset($condition_treatment_schema_count) ? $condition_treatment_schema_count : 0;
-	// 	$ontology_type = isset($ontology_type) ? $ontology_type : true; // bool
-	// 	$treatment_section_title = $treatment_fpage_title_clinical_resource; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
-	// 	$treatment_section_intro = $treatment_fpage_intro_clinical_resource; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
-	// 	add_action( 'genesis_after_entry', 'uamswp_fad_section_treatment', 14 );
-	// 	$section_treatment_vars = isset($section_treatment_vars) ? $section_treatment_vars : uamswp_fad_section_treatment( $treatments_cpt )(
-	// 		$treatments_cpt, // int[]
-	// 		$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
-	// 		$condition_treatment_schema, // string
-	// 		$condition_treatment_schema_i, // int
-	// 		$condition_treatment_schema_count, // int
-	// 		$ontology_type, // bool
-	// 		$treatment_section_title, // string // Text to use for the section title
-	// 		$treatment_section_intro, // string // Text to use for the section intro text
-	// 	);
-	// 		$condition_treatment_schema = $section_treatment_vars['condition_treatment_schema']; // string
-	// 		$condition_treatment_schema_i = $section_treatment_vars['condition_treatment_schema_i']; // int
-	// 		$condition_treatment_schema_count = $section_treatment_vars['condition_treatment_schema_count']; // int
-
 	// Construct providers section
 
 		$provider_section_title = $provider_fpage_title_clinical_resource; // Text to use for the section title

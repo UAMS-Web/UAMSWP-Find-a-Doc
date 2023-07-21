@@ -1252,18 +1252,6 @@ while ( have_posts() ) : the_post();
 		include( UAMS_FAD_PATH . '/templates/parts/section-list-condition-treatment.php' );
 		// End Combined Conditions and Treatments Section
 
-		// // Begin Conditions Section
-		// $condition_section_title = $condition_fpage_title_provider; // Text to use for the section title // string (default: Find-a-Doc Settings value for condition section title in a general placement)
-		// $condition_section_intro = $condition_fpage_intro_provider; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
-		// include( UAMS_FAD_PATH . '/templates/parts/section-list-condition.php' );
-		// // End Conditions Section
-
-		// // Begin Treatments Section
-		// $treatment_section_title = $treatment_fpage_title_provider; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
-		// $treatment_section_intro = $treatment_fpage_intro_provider; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
-		// include( UAMS_FAD_PATH . '/templates/parts/section-list-treatment.php' );
-		// // End Treatments Section
-
 		// Begin Areas of Expertise Section
 		$expertise_section_title = $expertise_fpage_title_provider;
 		$expertise_section_intro = $expertise_fpage_intro_provider;
