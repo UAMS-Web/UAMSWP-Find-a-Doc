@@ -387,11 +387,46 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 
 	// Display ontology page content
-	$location_section_show_header = false; // Query whether to display the section header
+	$location_descendant_list = isset($location_descendant_list) ? $location_descendant_list : false; // Query for whether this is a list of child locations within a location
 	$location_section_title = 'List of ' . $location_plural_name; // Text to use for the section title
 	$location_section_intro = ''; // Text to use for the section intro text
+	$location_section_show_header = false; // Query whether to display the section header
+	$location_section_filter = isset($location_section_filter) ? $location_section_filter : true; // Query for whether to add filter(s)
+	$location_section_filter_region = isset($location_section_filter_region) ? $location_section_filter_region : true; // Query for whether to add region filter
+	$location_section_filter_title = isset($location_section_filter_title) ? $location_section_filter_title : true; // Query for whether to add title filter
 	$location_section_collapse_list = false; // Query whether to collapse the list of locations in the providers section
-	add_action( 'genesis_entry_content', 'uamswp_fad_section_location', 22 );
+	function uamswp_fad_section_location__template() {
+
+		global $locations;
+		global $location_section_schema_query;
+		global $location_section_show;
+		global $ontology_type;
+		global $location_descendant_list;
+		global $location_section_title;
+		global $location_section_intro;
+		global $location_section_show_header;
+		global $location_section_filter;
+		global $location_section_filter_region;
+		global $location_section_filter_title;
+		global $location_section_collapse_list;
+
+		uamswp_fad_section_location(
+			$locations, // int[] // Value of the related locations input
+			$location_section_schema_query, // bool (optional) // Query for whether to add locations to schema
+			$location_section_show, // bool (optional) // Query for whether to show the location section
+			$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
+			$location_descendant_list, // bool (optional) // Query for whether this is a list of child locations within a location
+			$location_section_title, // string (optional) // Text to use for the section title
+			$location_section_intro, // string (optional) // Text to use for the section intro text
+			$location_section_show_header, // bool (optional) // Query for whether to display the section header
+			$location_section_filter, // bool (optional) // Query for whether to add filter(s)
+			$location_section_filter_region, // bool (optional) // Query for whether to add region filter
+			$location_section_filter_title, // bool (optional) // Query for whether to add title filter
+			$location_section_collapse_list // bool (optional) // Query for whether to collapse the list of locations in the locations section
+		);
+
+	}
+	add_action( 'genesis_entry_content', 'uamswp_fad_section_location__template', 22 );
 
 	// Display references to other archive pages
 	add_action( 'genesis_entry_content', 'uamswp_fad_fpage_text_image_overlay', 25 );
