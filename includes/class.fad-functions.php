@@ -1940,6 +1940,15 @@ function uamswp_fad_post_title(
 				$clinical_resource_ids = $clinical_resource_query->posts;
 				$clinical_resource_count = count($clinical_resource_query->posts);
 				$jump_link_count = $jump_link_count + 1;
+
+				// Count valid clinical resource items
+
+					$clinical_resource_count = 0;
+					foreach( $clinical_resources as $resource ) {
+						if ( get_post_status ( $resource ) == 'publish' ) {
+							$clinical_resource_count++;
+						}
+					}
 			} else {
 				$clinical_resource_section_show = false;
 			}
