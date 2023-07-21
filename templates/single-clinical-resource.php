@@ -364,10 +364,10 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 				$clinical_resource_section_more_link_key, // string
 				$clinical_resource_section_more_link_value, // string
 				$clinical_resource_section_show, // bool (optional) // Query for whether to show the clinical resource section
-				$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
-				$clinical_resource_section_title = '', // string (optional) // Text to use for the section title
-				$clinical_resource_section_intro = '', // string (optional) // Text to use for the section intro text
-				$clinical_resource_section_more_show = true, // bool (optional) // Query for whether to show the section that links to more items
+				$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
+				$clinical_resource_section_title, // string (optional) // Text to use for the section title
+				$clinical_resource_section_intro, // string (optional) // Text to use for the section intro text
+				$clinical_resource_section_more_show, // bool (optional) // Query for whether to show the section that links to more items
 			);
 		}
 		add_action( 'genesis_after_entry', 'uamswp_fad_section_clinical_resource__template', 10 );
@@ -425,6 +425,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 		function uamswp_fad_section_provider__template() {
 
 			global $providers;
+			global $provider_section_show;
 			global $ontology_type;
 			global $provider_section_title;
 			global $provider_section_intro;
@@ -433,6 +434,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 			uamswp_fad_section_provider(
 				$providers, // int[] // Value of the related providers input
+				$provider_section_show, // bool (optional) // Query for whether to show the provider section
 				$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
 				$provider_section_title, // string (optional) // Text to use for the section title
 				$provider_section_intro, // string (optional) // Text to use for the section intro text
@@ -455,6 +457,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 			global $locations;
 			global $location_section_schema_query;
+			global $location_section_show;
 			global $ontology_type;
 			global $location_descendant_list;
 			global $location_section_title;
@@ -465,6 +468,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 			uamswp_fad_section_location(
 				$locations, // int[] // Value of the related locations input
 				$location_section_schema_query, // bool (optional) // Query for whether to add locations to schema
+				$location_section_show, // bool (optional) // Query for whether to show the location section
 				$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
 				$location_descendant_list, // bool (optional) // Query for whether this is a list of child locations within a location
 				$location_section_title, // string (optional) // Text to use for the section title
@@ -487,6 +491,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 			global $expertises;
 			global $expertise_descendants;
 			global $hide_medical_ontology;
+			global $expertise_section_show;
 			global $ontology_type;
 			global $expertise_descendant_list;
 			global $expertise_section_title;
@@ -500,6 +505,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 				$expertises, // int[] // Value of the related areas of expertise input
 				$expertise_descendants, // int[] (optional) // List of this area of expertise item's descendant items
 				$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+				$expertise_section_show, // bool // Query for whether to show the area of expertise section
 				$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
 				$expertise_descendant_list, // bool (optional) // Query for whether this is a list of child areas of expertise within an area of expertise
 				$expertise_section_title, // string (optional) // Text to use for the section title

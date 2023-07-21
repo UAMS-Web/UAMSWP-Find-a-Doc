@@ -6971,7 +6971,7 @@ function uamswp_fad_section_provider(
 	// $provider_schema_i = 0, // int (optional) // Iteration variable for schema data
 	// $provider_schema_count = 0, // int (optional) // Item count for schema data
 	// $provider_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
-	// $provider_section_show = false, // bool (optional) // Query for whether to show the provider section
+	$provider_section_show = false, // bool (optional) // Query for whether to show the provider section
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
 	// $provider_descendant_list = false, // bool (optional) // Query for whether this is a list of child provider items within a provider item
 	$provider_section_title = '', // string (optional) // Text to use for the section title
@@ -7008,7 +7008,7 @@ function uamswp_fad_section_location(
 	// $location_schema_i = 0, // int (optional) // Iteration variable for schema data
 	// $location_schema_count = 0, // int (optional) // Item count for schema data
 	$location_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
-	// $location__section_show = false, // bool (optional) // Query for whether to show the location section
+	$location_section_show = false, // bool (optional) // Query for whether to show the location section
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
 	$location_descendant_list = false, // bool (optional) // Query for whether this is a list of child locations within a location
 	$location_section_title = '', // string (optional) // Text to use for the section title
@@ -7045,7 +7045,7 @@ function uamswp_fad_section_expertise(
 	// $expertise_schema_i = 0, // int (optional) // Iteration variable for schema data
 	// $expertise_schema_count = 0, // int (optional) // Item count for schema data
 	// $expertise_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
-	// $expertise_section_show = false, // bool (optional) // Query for whether to show the area of expertise section
+	$expertise_section_show = false, // bool // Query for whether to show the area of expertise section
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
 	$expertise_descendant_list = false, // bool (optional) // Query for whether this is a list of child areas of expertise within an area of expertise
 	$expertise_section_title = '', // string (optional) // Text to use for the section title
