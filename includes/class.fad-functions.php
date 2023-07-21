@@ -6691,6 +6691,27 @@ function uamswp_fad_fpage_text_replace($string) {
 
 		}
 
+// Define the general number of ontology items to display in a fake subpage (or section)
+
+	// Define the general number of items to display on a fake subpage (or section) for Clinical Resource
+	function uamswp_fad_posts_per_page_clinical_resource_general() {
+
+		// General maximum number of clinical resources to display on a fake subpage (-1, 4, 6, 8, 10 or 12)
+		$clinical_resource_posts_per_page_fpage = -1;
+
+		// General maximum number of clinical resources to display in a section on a single profile (-1, 4, 6, 8, 10 or 12)
+		$clinical_resource_posts_per_page_section = 4;
+
+		// Create and return an array to be used on the templates and template parts
+
+			$posts_per_page_clinical_resource_general_vars = array(
+				'clinical_resource_posts_per_page_fpage'	=> $clinical_resource_posts_per_page_fpage, // int
+				'clinical_resource_posts_per_page_section'	=> $clinical_resource_posts_per_page_section // int
+			);
+			return $posts_per_page_clinical_resource_general_vars;
+
+	}
+
 // Filter the allowed block types for all editor types
 function uamswp_fad_allowed_block_types ( $block_editor_context, $editor_context ) {
 
