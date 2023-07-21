@@ -496,10 +496,6 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 			global $expertise_descendant_list;
 			global $expertise_section_title;
 			global $expertise_section_intro;
-			global $expertise_section_show_header;
-			global $expertise_section_collapse_list;
-			global $expertise_section_class;
-			global $expertise_section_id;
 
 			uamswp_fad_section_expertise(
 				$expertises, // int[] // Value of the related areas of expertise input
