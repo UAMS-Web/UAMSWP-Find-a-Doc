@@ -420,21 +420,94 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 		$provider_section_title = $provider_fpage_title_clinical_resource; // Text to use for the section title
 		$provider_section_intro = $provider_fpage_intro_clinical_resource; // Text to use for the section intro text
+		$provider_section_show_header = isset($provider_section_show_header) ? $provider_section_show_header : true; // Query for whether to display the section header
 		$provider_section_filter = false; // Query for whether to add filter(s) // bool (default: true)
-		add_action( 'genesis_after_entry', 'uamswp_fad_section_provider', 16 );
+		function uamswp_fad_section_provider__template() {
+
+			global $providers;
+			global $ontology_type;
+			global $provider_section_title;
+			global $provider_section_intro;
+			global $provider_section_show_header;
+			global $provider_section_filter;
+
+			uamswp_fad_section_provider(
+				$providers, // int[] // Value of the related providers input
+				$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
+				$provider_section_title, // string (optional) // Text to use for the section title
+				$provider_section_intro, // string (optional) // Text to use for the section intro text
+				$provider_section_show_header, // bool (optional) // Query for whether to display the section header
+				$provider_section_filter // bool (optional) // Query for whether to add filter(s)
+			);
+
+		}
+		add_action( 'genesis_after_entry', 'uamswp_fad_section_provider__template', 16 );
 
 	// Construct locations section
 
+		$location_section_schema_query = isset($location_section_schema_query) ? $location_section_schema_query : false;
+		$location_section_show_header = isset($location_section_show_header) ? $location_section_show_header : false;
 		$location_section_title = $location_fpage_title_clinical_resource; // Text to use for the section title
 		$location_section_intro = $location_fpage_intro_clinical_resource; // Text to use for the section intro text
+		$location_section_show_header = isset($location_section_show_header) ? $location_section_show_header : $location_section_show_header;
 		$location_section_filter = false; // Query for whether to add filter(s) // bool (default: true)
-		add_action( 'genesis_after_entry', 'uamswp_fad_section_location', 18 );
+		function uamswp_fad_section_location__template() {
+
+			global $locations;
+			global $location_section_schema_query;
+			global $ontology_type;
+			global $location_descendant_list;
+			global $location_section_title;
+			global $location_section_intro;
+			global $location_section_show_header;
+			global $location_section_filter;
+
+			uamswp_fad_section_location(
+				$locations, // int[] // Value of the related locations input
+				$location_section_schema_query, // bool (optional) // Query for whether to add locations to schema
+				$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
+				$location_descendant_list, // bool (optional) // Query for whether this is a list of child locations within a location
+				$location_section_title, // string (optional) // Text to use for the section title
+				$location_section_intro, // string (optional) // Text to use for the section intro text
+				$location_section_show_header, // bool (optional) // Query for whether to display the section header
+				$location_section_filter // bool (optional) // Query for whether to add filter(s)
+			);
+
+		}
+		add_action( 'genesis_after_entry', 'uamswp_fad_section_location__template', 18 );
 
 	// Construct areas of expertise section
 
+		$expertise_descendants = isset($expertise_descendants) ? $expertise_descendants : ''; // List of this area of expertise item's descendant items
+		$expertise_descendant_list = isset($expertise_descendant_list) ? $expertise_descendant_list : false; // Query for whether this is a list of child areas of expertise within an area of expertise
 		$expertise_section_title = $expertise_fpage_title_clinical_resource; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of expertise section title in a general placement)
 		$expertise_section_intro = $expertise_fpage_intro_clinical_resource; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of expertise section intro text in a general placement)
-		add_action( 'genesis_after_entry', 'uamswp_fad_section_expertise', 20 );
+		function uamswp_fad_section_expertise__template() {
+
+			global $expertises;
+			global $expertise_descendants;
+			global $hide_medical_ontology;
+			global $ontology_type;
+			global $expertise_descendant_list;
+			global $expertise_section_title;
+			global $expertise_section_intro;
+			global $expertise_section_show_header;
+			global $expertise_section_collapse_list;
+			global $expertise_section_class;
+			global $expertise_section_id;
+
+			uamswp_fad_section_expertise(
+				$expertises, // int[] // Value of the related areas of expertise input
+				$expertise_descendants, // int[] (optional) // List of this area of expertise item's descendant items
+				$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+				$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
+				$expertise_descendant_list, // bool (optional) // Query for whether this is a list of child areas of expertise within an area of expertise
+				$expertise_section_title, // string (optional) // Text to use for the section title
+				$expertise_section_intro, // string (optional) // Text to use for the section intro text
+			);
+
+		}
+		add_action( 'genesis_after_entry', 'uamswp_fad_section_expertise__template', 20 );
 
 	// Construct appointment information section
 
