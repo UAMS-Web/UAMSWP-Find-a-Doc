@@ -78,7 +78,7 @@ if ( $provider_section_show ) {
 
 		// Query for whether to add title filter
 		$provider_section_filter_title = isset($provider_section_filter_title) ? $provider_section_filter_title : true;
-		
+
 		// Revisit filter queries
 		$provider_section_filter_region = $provider_section_filter ? $provider_section_filter_region : false;
 		$provider_section_filter_title = $provider_section_filter ? $provider_section_filter_title : false;

@@ -394,7 +394,7 @@ while ( have_posts() ) : the_post(); ?>
 					} //endif ( $video )
 
 				// Display call-to-action bars
-			
+
 					$cta_repeater = get_field('expertise_cta');
 					if ( $cta_repeater ) {
 						$i = 1;
@@ -402,7 +402,7 @@ while ( have_posts() ) : the_post(); ?>
 							$cta_heading = $cta['cta_bar_heading'];
 							$cta_body = $cta['cta_bar_body'];
 							$cta_action_type = $cta['cta_bar_action_type'];
-		
+
 							$cta_button_text = '';
 							$cta_button_url = '';
 							$cta_button_target = '';
@@ -415,7 +415,7 @@ while ( have_posts() ) : the_post(); ?>
 								}
 								$cta_button_desc = $cta['cta_bar_button_description'];
 							}
-		
+
 							$cta_phone_prepend = '';
 							$cta_phone = '';
 							$cta_phone_link = '';
@@ -424,14 +424,14 @@ while ( have_posts() ) : the_post(); ?>
 								$cta_phone = $cta['cta_bar_phone'];
 								$cta_phone_link = '<a href="tel:' . format_phone_dash( $cta_phone ) . '">' . format_phone_us( $cta_phone ) . '</a>';
 							}
-		
+
 							$cta_layout = 'cta-bar-centered';
 							$cta_size = 'normal';
 							$cta_use_image = false;
 							$cta_image = '';
 							$cta_background_color = 'bg-auto';
 							$cta_btn_color = 'primary';
-		
+
 							$cta_className = '';
 							$cta_className .= ' ' . $cta_layout;
 							$cta_className .= ' ' . $cta_background_color;
@@ -444,7 +444,7 @@ while ( have_posts() ) : the_post(); ?>
 							if ( $cta_action_type == 'none' ) {
 								$cta_className .= ' no-link';
 							}
-		
+
 							echo '<section class="uams-module cta-bar' . $cta_className . '" id="cta-bar-' . $i . '" aria-label="' . $cta_heading . '">
 								<div class="container-fluid">
 									<div class="row">

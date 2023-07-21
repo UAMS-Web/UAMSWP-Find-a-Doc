@@ -55,7 +55,7 @@
 	// Other variables
 	$hide_medical_ontology = isset($hide_medical_ontology) ? $hide_medical_ontology : false;
 
-	// Revisit query for whether to show the conditions section	
+	// Revisit query for whether to show the conditions section
 	if (
 		$condition_section_show
 		&&

@@ -88,7 +88,7 @@ if ( $location_section_show ) {
 
 		// Query for whether to add title filter
 		$location_section_filter_title = isset($location_section_filter_title) ? $location_section_filter_title : false;
-		
+
 		// Revisit filter queries
 		$location_section_filter_region = $location_section_filter ? $location_section_filter_region : false;
 		$location_section_filter_title = $location_section_filter ? $location_section_filter_title : false;
