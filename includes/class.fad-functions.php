@@ -1914,6 +1914,7 @@ function uamswp_fad_post_title(
 				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
 					$clinical_resources = $ontology_site_values_vars['clinical_resources']; // int[] // Value of the related clinical resources input
 			}
+			$clinical_resources = array_is_list($clinical_resources) ? array_filter($clinical_resources) : array_values(array_filter($clinical_resources)); // remove empty items from array
 
 			if ( !isset($clinical_resource_posts_per_page) ) {
 				if ( !isset($clinical_resource_posts_per_page_section) ) {
