@@ -299,7 +299,7 @@ if ( $expertise_section_show ) {
 // Query for whether related clinical resources content section should be displayed on ontology pages/subsections
 $clinical_resources = get_field('physician_clinical_resources');
 $posts_per_page_clinical_resource_general_vars = isset($posts_per_page_clinical_resource_general_vars) ? $posts_per_page_clinical_resource_general_vars : uamswp_fad_posts_per_page_clinical_resource_general();
-	$clinical_resource_posts_per_page_section = $posts_per_page_clinical_resource_general_vars['clinical_resource_section_posts_per_page']; // int
+	$clinical_resource_posts_per_page_section = $posts_per_page_clinical_resource_general_vars['clinical_resource_posts_per_page_section']; // int
 $clinical_resource_posts_per_page = $clinical_resource_posts_per_page_section;
 $jump_link_count = isset($jump_link_count) ? $jump_link_count : 0;
 $clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(

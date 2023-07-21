@@ -1918,7 +1918,7 @@ function uamswp_fad_post_title(
 			if ( !isset($clinical_resource_posts_per_page) ) {
 				if ( !isset($clinical_resource_posts_per_page_section) ) {
 					$posts_per_page_clinical_resource_general_vars = isset($posts_per_page_clinical_resource_general_vars) ? $posts_per_page_clinical_resource_general_vars : uamswp_fad_posts_per_page_clinical_resource_general();
-						$clinical_resource_posts_per_page_section = $posts_per_page_clinical_resource_general_vars['clinical_resource_section_posts_per_page']; // int
+						$clinical_resource_posts_per_page_section = $posts_per_page_clinical_resource_general_vars['clinical_resource_posts_per_page_section']; // int
 				}
 				$clinical_resource_posts_per_page = $clinical_resource_posts_per_page_section;
 			}
@@ -2400,9 +2400,9 @@ function uamswp_fad_fpage_text_replace($string) {
 			$placeholder_clinical_resource_single_name = $labels_clinical_resource_vars['placeholder_clinical_resource_single_name']; // string
 			$placeholder_clinical_resource_plural_name = $labels_clinical_resource_vars['placeholder_clinical_resource_plural_name']; // string
 
-		$labels_clinical_resource_vars = isset($labels_clinical_resource_vars) ? $labels_clinical_resource_vars : uamswp_fad_archive_text_clinical_resource();
-			$clinical_resource_archive_headline = $labels_clinical_resource_vars['clinical_resource_archive_headline']; // string
-			$placeholder_clinical_resource_archive_headline = $labels_clinical_resource_vars['placeholder_clinical_resource_archive_headline']; // string
+		$archive_text_clinical_resource_vars = isset($archive_text_clinical_resource_vars) ? $archive_text_clinical_resource_vars : uamswp_fad_archive_text_clinical_resource();
+			$clinical_resource_archive_headline = $archive_text_clinical_resource_vars['clinical_resource_archive_headline']; // string
+			$placeholder_clinical_resource_archive_headline = $archive_text_clinical_resource_vars['placeholder_clinical_resource_archive_headline']; // string
 
 		$labels_clinical_resource_facet_vars = isset($labels_clinical_resource_facet_vars) ? $labels_clinical_resource_facet_vars : uamswp_fad_labels_clinical_resource_facet();
 			$clinical_resource_type_single_name = $labels_clinical_resource_facet_vars['clinical_resource_type_single_name']; // string
@@ -6589,7 +6589,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				// Crop/resize the image
 				if ( $clinical_resource_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
 					$clinical_resource_fpage_featured_image_expertise_url = image_sizer($clinical_resource_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
-				} elseif ( $clinical_resource_fpage_featured_image_expertise_url ) {
+				} elseif ( $clinical_resource_fpage_featured_image_expertise ) {
 					$clinical_resource_fpage_featured_image_expertise_url = wp_get_attachment_url( $clinical_resource_fpage_featured_image_expertise, 'aspect-16-9' );
 				} else {
 					$clinical_resource_fpage_featured_image_expertise_url = $expertise_featured_image_url;
