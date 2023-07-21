@@ -1779,6 +1779,8 @@ function uamswp_fad_post_title(
 				$jump_link_count = $jump_link_count + 1;
 			} else {
 				$expertise_descendant_section_show = false;
+				$expertise_descendant_ids = '';
+				$expertise_descendant_count = 0;
 			}
 
 			$expertise_content_args = array(
@@ -1819,6 +1821,8 @@ function uamswp_fad_post_title(
 				wp_reset_postdata();
 			} else {
 				$expertise_content_nav_show = false;
+				$expertise_content_ids = '';
+				$expertise_content_count = 0;
 			}
 		} else {
 			$expertise_descendant_query = '';
