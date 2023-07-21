@@ -378,9 +378,21 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	// Display references to other archive pages
 	add_action( 'genesis_entry_content', 'uamswp_fad_fpage_text_image_overlay');
 
-	// Display appointment information
-	add_action( 'genesis_entry_content', 'uamswp_fad_ontology_appointment' );
 	// Check if Make an Appointment section should be displayed
+
 	$appointment_section_show = true; // It should always be displayed.
+
+	// Display appointment information
+
+		function uamswp_fad_ontology_appointment__template() {
+
+			global $appointment_section_show;
+
+			uamswp_fad_ontology_appointment(
+				$appointment_section_show
+			);
+
+		}
+		add_action( 'genesis_after_entry', 'uamswp_fad_ontology_appointment__template', 26 );
 
 genesis();

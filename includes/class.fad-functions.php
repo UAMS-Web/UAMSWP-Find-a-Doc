@@ -2171,16 +2171,14 @@ function uamswp_keyword_hook_header() {
 }
 
 // Construct ontology subsection appointment information section
-function uamswp_fad_ontology_appointment() {
+function uamswp_fad_ontology_appointment(
+	$appointment_section_show // bool
+) {
 
 	// Bring in variables from outside of the function
 
 		$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
 			$location_single_name = $labels_location_vars['location_single_name']; // string
-
-		// Typically defined on the template
-
-			global $appointment_section_show;
 
 	if ( $appointment_section_show ) {
 		if ( get_field('location_expertise') ) {

@@ -524,7 +524,7 @@ while ( have_posts() ) : the_post(); ?>
 
 				// Construct appointment information
 
-					uamswp_fad_ontology_appointment();
+					uamswp_fad_ontology_appointment( $appointment_section_show );
 
 		?>
 	</main>
