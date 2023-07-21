@@ -1937,6 +1937,7 @@ function uamswp_fad_post_title(
 
 			// Check if Clinical Resources section should be displayed
 			if( ( $clinical_resources && $clinical_resource_query->have_posts() ) ) {
+
 				$clinical_resource_section_show = true;
 				$clinical_resource_ids = $clinical_resource_query->posts;
 				$clinical_resource_count = count($clinical_resource_query->posts);
@@ -1950,8 +1951,11 @@ function uamswp_fad_post_title(
 							$clinical_resource_count++;
 						}
 					}
+
 			} else {
+
 				$clinical_resource_section_show = false;
+
 			}
 		} else {
 			$clinical_resource_query = '';
