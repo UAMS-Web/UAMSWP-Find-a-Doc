@@ -383,7 +383,30 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	$clinical_resource_section_title = 'List of ' . $clinical_resource_plural_name; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of clinical_resource section title in a general placement)
 	$clinical_resource_section_intro = ''; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of clinical_resource section intro text in a general placement)
 	$clinical_resource_section_more_show = false; // Query whether to show the section that links to more items // bool (default: true)
-	add_action( 'genesis_entry_content', 'uamswp_fad_section_clinical_resource', 14 );
+	function uamswp_fad_section_clinical_resource__template() {
+
+		global $clinical_resources;
+		global $clinical_resource_section_more_link_key;
+		global $clinical_resource_section_more_link_value;
+		global $clinical_resource_section_show;
+		global $ontology_type;
+		global $clinical_resource_section_title;
+		global $clinical_resource_section_intro;
+		global $clinical_resource_section_more_show;
+
+		uamswp_fad_section_clinical_resource(
+			$clinical_resources, // int[] // Value of the related clinical resources input
+			$clinical_resource_section_more_link_key, // string (optional)
+			$clinical_resource_section_more_link_value, // string (optional)
+			$clinical_resource_section_show, // bool (optional) // Query for whether to show the clinical resource section
+			$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
+			$clinical_resource_section_title, // string (optional) // Text to use for the section title
+			$clinical_resource_section_intro, // string (optional) // Text to use for the section intro text
+			$clinical_resource_section_more_show, // bool (optional) // Query for whether to show the section that links to more items
+		);
+
+	}
+	add_action( 'genesis_entry_content', 'uamswp_fad_section_clinical_resource__template', 14 );
 
 	// Display references to other archive pages
 	add_action( 'genesis_entry_content', 'uamswp_fad_fpage_text_image_overlay', 25);

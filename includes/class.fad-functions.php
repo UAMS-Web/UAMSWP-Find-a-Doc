@@ -7068,15 +7068,15 @@ function uamswp_fad_section_expertise(
 //     is all that is necessary.
 function uamswp_fad_section_clinical_resource(
 	$clinical_resources, // int[] // Value of the related clinical resources input
-	$clinical_resource_section_more_link_key, // string
-	$clinical_resource_section_more_link_value, // string
+	$clinical_resource_section_more_link_key = '', // string (optional)
+	$clinical_resource_section_more_link_value = '', // string (optional)
 	// $clinical_resource_descendants = '', // int[] (optional) // List of this clinical resource item's descendant items
 	// $hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
 	// $clinical_resource_schema = '', // string (optional) // Schema data
 	// $clinical_resource_schema_i = 0, // int (optional) // Iteration variable for schema data
 	// $clinical_resource_schema_count = 0, // int (optional) // Item count for schema data
 	// $clinical_resource_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
-	// $clinical_resource_section_show = false, // bool (optional) // Query for whether to show the clinical resource section
+	$clinical_resource_section_show = false, // bool (optional) // Query for whether to show the clinical resource section
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
 	// $clinical_resource_descendant_list = false, // bool (optional) // Query for whether this is a list of child location items within a location item
 	$clinical_resource_section_title = '', // string (optional) // Text to use for the section title

@@ -346,10 +346,31 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 		$clinical_resource_section_more_link_key = '';
 		$clinical_resource_section_more_link_value = '';
-		$clinical_resource_section_title = $clinical_resource_fpage_title_clinical_resource; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of clinical_resource section title in a general placement)
-		$clinical_resource_section_intro = $clinical_resource_fpage_intro_clinical_resource; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of clinical_resource section intro text in a general placement)
-		$clinical_resource_section_more_show = false;
-		add_action( 'genesis_after_entry', 'uamswp_fad_section_clinical_resource', 10 );
+		$clinical_resource_section_title = $clinical_resource_fpage_title_clinical_resource; // Text to use for the section title
+		$clinical_resource_section_intro = $clinical_resource_fpage_intro_clinical_resource; // Text to use for the section intro text
+		$clinical_resource_section_more_show = false; // Query for whether to show the section that links to more items
+		function uamswp_fad_section_clinical_resource__template() {
+			global $clinical_resources;
+			global $clinical_resource_section_more_link_key;
+			global $clinical_resource_section_more_link_value;
+			global $clinical_resource_section_show;
+			global $ontology_type;
+			global $clinical_resource_section_title;
+			global $clinical_resource_section_intro;
+			global $clinical_resource_section_more_show;
+
+			uamswp_fad_section_clinical_resource(
+				$clinical_resources, // int[] // Value of the related clinical resources input
+				$clinical_resource_section_more_link_key, // string
+				$clinical_resource_section_more_link_value, // string
+				$clinical_resource_section_show, // bool (optional) // Query for whether to show the clinical resource section
+				$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
+				$clinical_resource_section_title = '', // string (optional) // Text to use for the section title
+				$clinical_resource_section_intro = '', // string (optional) // Text to use for the section intro text
+				$clinical_resource_section_more_show = true, // bool (optional) // Query for whether to show the section that links to more items
+			);
+		}
+		add_action( 'genesis_after_entry', 'uamswp_fad_section_clinical_resource__template', 10 );
 
 	// Construct Combined Conditions and Treatments Section
 
