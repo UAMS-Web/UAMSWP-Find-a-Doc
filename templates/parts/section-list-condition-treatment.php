@@ -59,6 +59,8 @@
  * 	html <section />
  */
 
+global $condition_treatment_schema;
+
 // Check/define variables
 
 	// Query for whether to show the combined conditions and treatments section
