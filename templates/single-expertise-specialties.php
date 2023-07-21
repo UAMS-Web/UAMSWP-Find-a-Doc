@@ -394,7 +394,30 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	$expertise_section_show_header = false; // Query whether to display the section header // bool (default: true)
 	$expertise_section_title = 'List of ' . $expertise_descendant_plural_name; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of expertise section title in a general placement)
 	$expertise_section_intro = ''; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of expertise section intro text in a general placement)
-	add_action( 'genesis_entry_content', 'uamswp_fad_section_expertise', 12 );
+	function uamswp_fad_section_expertise__template() {
+
+		global $expertises;
+		global $expertise_descendants;
+		global $hide_medical_ontology;
+		global $expertise_section_show;
+		global $ontology_type;
+		global $expertise_descendant_list;
+		global $expertise_section_title;
+		global $expertise_section_intro;
+
+		uamswp_fad_section_expertise(
+			$expertises, // int[] // Value of the related areas of expertise input
+			$expertise_descendants, // int[] (optional) // List of this area of expertise item's descendant items
+			$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+			$expertise_section_show, // bool // Query for whether to show the area of expertise section
+			$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
+			$expertise_descendant_list, // bool (optional) // Query for whether this is a list of child areas of expertise within an area of expertise
+			$expertise_section_title, // string (optional) // Text to use for the section title
+			$expertise_section_intro, // string (optional) // Text to use for the section intro text
+		);
+
+	}
+	add_action( 'genesis_entry_content', 'uamswp_fad_section_expertise__template', 12 );
 
 	// Display references to other archive pages
 	add_action( 'genesis_entry_content', 'uamswp_fad_fpage_text_image_overlay', 25);

@@ -391,9 +391,33 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	// Display ontology page content
 	$expertise_section_id = 'related-expertise';
 	$expertise_section_show_header = false;
+	$expertise_descendant_list = isset($expertise_descendant_list) ? $expertise_descendant_list : false;
 	$expertise_section_title = 'List of Related ' . $expertise_plural_name;
 	$expertise_section_intro = '';
-	add_action( 'genesis_entry_content', 'uamswp_fad_section_expertise', 24 );
+	function uamswp_fad_section_expertise__template() {
+
+		global $expertises;
+		global $expertise_descendants;
+		global $hide_medical_ontology;
+		global $expertise_section_show;
+		global $ontology_type;
+		global $expertise_descendant_list;
+		global $expertise_section_title;
+		global $expertise_section_intro;
+
+		uamswp_fad_section_expertise(
+			$expertises, // int[] // Value of the related areas of expertise input
+			$expertise_descendants, // int[] (optional) // List of this area of expertise item's descendant items
+			$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+			$expertise_section_show, // bool // Query for whether to show the area of expertise section
+			$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
+			$expertise_descendant_list, // bool (optional) // Query for whether this is a list of child areas of expertise within an area of expertise
+			$expertise_section_title, // string (optional) // Text to use for the section title
+			$expertise_section_intro, // string (optional) // Text to use for the section intro text
+		);
+
+	}
+	add_action( 'genesis_entry_content', 'uamswp_fad_section_expertise__template', 24 );
 
 	// Display references to other archive pages
 	add_action( 'genesis_entry_content', 'uamswp_fad_fpage_text_image_overlay', 25);
