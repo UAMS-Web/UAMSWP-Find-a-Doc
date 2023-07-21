@@ -201,7 +201,7 @@ if ( $clinical_resource_section_show ) {
 									while ( $clinical_resource_query->have_posts() ) {
 										$clinical_resource_query->the_post();
 										$id = get_the_ID();
-										include( UAMS_FAD_PATH . '/templates/loops/resource-card.php' );
+										include( UAMS_FAD_PATH . '/templates/loops/resource-card-single.php' );
 									} // endwhile
 								} // endif ( $clinical_resource_count > 0 )
 								wp_reset_postdata();

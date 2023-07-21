@@ -15,30 +15,29 @@
  * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
- * 	$provider_single_name // System setting for Providers single item name
- * 	$provider_plural_name // System setting for Providers plural item name
- * 	$location_single_name // System setting for Locations single item name
- * 	$location_plural_name // System setting for Locations plural item name
- * 	$expertise_single_name // System setting for Areas of Expertise single item name
- * 	$expertise_plural_name // System setting for Areas of Expertise plural item name
- * 	$clinical_resource_single_name // System setting for Clinical Resources single item name
- * 	$clinical_resource_plural_name // System setting for Clinical Resources Plural Item Name
- * 	$condition_single_name // System setting for Conditions single item name
- * 	$condition_plural_name // System setting for Conditions plural item name
- * 	$treatment_single_name // System setting for Treatments single item name
- * 	$treatment_plural_name // System setting for Treatments plural item name
- * 	$clinical_resources
- * 	$clinical_resource_query
- * 	$clinical_resource_postsPerPage
- * 	$resource_more_suppress
- * 	$clinical_resource_section_more_link_key
- * 	$clinical_resource_section_more_link_value
+ * 	$provider_single_name // string // System setting for Providers single item name
+ * 	$provider_plural_name // string // System setting for Providers plural item name
+ * 	$location_single_name // string // System setting for Locations single item name
+ * 	$location_plural_name // string // System setting for Locations plural item name
+ * 	$expertise_single_name // string // System setting for Areas of Expertise single item name
+ * 	$expertise_plural_name // string // System setting for Areas of Expertise plural item name
+ * 	$clinical_resource_single_name // string // System setting for Clinical Resources single item name
+ * 	$clinical_resource_plural_name // string // System setting for Clinical Resources Plural Item Name
+ * 	$condition_single_name // string // System setting for Conditions single item name
+ * 	$condition_plural_name // string // System setting for Conditions plural item name
+ * 	$treatment_single_name // string // System setting for Treatments single item name
+ * 	$treatment_plural_name // string // System setting for Treatments plural item name
+ * 	$clinical_resources // int[]
+ * 	$clinical_resource_query // WP_Post[]
+ * 	$clinical_resource_postsPerPage // int
+ * 	$resource_more_suppress // bool
+ * 	$clinical_resource_section_more_link_key // string
+ * 	$clinical_resource_section_more_link_value // string
  * 
  * Optional var:
- * 	$resource_page = 'single' or 'archive' (default to 'single')
- * 	$resource_heading
- * 	$resource_heading_related_name // To what is it related?
- * 	$resource_intro
+ * 	$resource_heading // string
+ * 	$resource_heading_related_name // string // To what is it related?
+ * 	$resource_intro // string
  */
 
 // Check optional variables
@@ -93,7 +92,7 @@ if ( $resource_layout == 'card') { ?>
 						while ($clinical_resource_query->have_posts()) {
 							$clinical_resource_query->the_post();
 							$id = get_the_ID();
-							include( UAMS_FAD_PATH . '/templates/loops/resource-card.php' );
+							include( UAMS_FAD_PATH . '/templates/loops/resource-card-single.php' );
 						} // endwhile
 						wp_reset_postdata();
 						?>
