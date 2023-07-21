@@ -513,14 +513,29 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	// Check if podcast section should be displayed
 
 		$podcast_name = get_field('expertise_podcast_name');
-		$podcast_query_vars = uamswp_fad_podcast_query( $podcast_name ); // Defines universal variables related to podcast
+		$podcast_query_vars = isset($podcast_query_vars) ? $podcast_query_vars : uamswp_fad_podcast_query( $podcast_name ); // Defines universal variables related to podcast
 			$podcast_section_show = $podcast_query_vars['podcast_section_show']; // bool
 
 	// Construct UAMS Health Talk podcast section
 
-		$podcast_filter = 'tag';
-		$podcast_subject = $page_title;
-		add_action( 'genesis_after_entry', 'uamswp_fad_podcast', 10 );
+		$podcast_filter = 'tag'; // string // Expected values: 'tag' or 'doctor'
+		$podcast_subject = $page_title; // string
+		function uamswp_fad_podcast__template() {
+
+			global $podcast_name;
+			global $podcast_section_show;
+			global $podcast_filter;
+			global $podcast_subject;
+
+			uamswp_fad_podcast(
+				$podcast_name, // string
+				$podcast_section_show, // bool
+				$podcast_filter, // string // Expected values: 'tag' or 'doctor'
+				$podcast_subject // string
+			);
+
+		}
+		add_action( 'genesis_after_entry', 'uamswp_fad_podcast__template', 10 );
 
 	// Construct Combined Conditions and Treatments Section
 

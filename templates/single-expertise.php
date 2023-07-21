@@ -478,13 +478,13 @@ while ( have_posts() ) : the_post(); ?>
 					} // endif ( $cta_repeater )
 
 				// Check if podcast section should be displayed
-			
+
 					$podcast_name = get_field('expertise_podcast_name');
-					$podcast_query_vars = uamswp_fad_podcast_query( $podcast_name ); // Defines universal variables related to podcast
+					$podcast_query_vars = isset($podcast_query_vars) ? $podcast_query_vars : uamswp_fad_podcast_query( $podcast_name ); // Defines universal variables related to podcast
 						$podcast_section_show = $podcast_query_vars['podcast_section_show']; // bool
-			
+
 				// Construct UAMS Health Talk podcast section
-			
+
 					$podcast_filter = 'tag';
 					$podcast_subject = $page_title;
 					uamswp_fad_podcast( $podcast_name, $podcast_section_show, $podcast_filter, $podcast_subject );

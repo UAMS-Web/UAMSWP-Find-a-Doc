@@ -2266,17 +2266,16 @@ function uamswp_fad_podcast_query( $podcast_name, $jump_link_count = 0 ) {
 }
 
 // Construct UAMS Health Talk podcast section
-function uamswp_fad_podcast( $podcast_name, $podcast_section_show, $podcast_filter, $podcast_subject ) {
+function uamswp_fad_podcast(
+	$podcast_name, // string
+	$podcast_section_show, // bool
+	$podcast_filter, // string // Expected values: 'tag' or 'doctor'
+	$podcast_subject // string
+) {
 
 	// Bring in variables from outside of the function
 
-		// Function Arguments
-		// 	$podcast_name // string
-		// 	$podcast_section_show // bool
-		// 	$podcast_filter // string // Expected values: 'tag' or 'doctor'
-		// 	$podcast_subject // string
-
-		$labels_provider_vars = uamswp_fad_labels_provider();
+		$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
 			$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
 
 	if ( $podcast_section_show ) {
@@ -6584,7 +6583,7 @@ function uamswp_fad_fpage_text_replace($string) {
 				}
 
 				// Crop/resize the image
-				if ( $clinical_resource_fpage_featured_image_expertise_url && function_exists( 'fly_add_image_size' ) ) {
+				if ( $clinical_resource_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
 					$clinical_resource_fpage_featured_image_expertise_url = image_sizer($clinical_resource_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
 				} elseif ( $clinical_resource_fpage_featured_image_expertise_url ) {
 					$clinical_resource_fpage_featured_image_expertise_url = wp_get_attachment_url( $clinical_resource_fpage_featured_image_expertise, 'aspect-16-9' );
