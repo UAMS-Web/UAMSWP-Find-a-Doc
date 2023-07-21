@@ -391,8 +391,37 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	$provider_section_title = 'List of ' . $provider_plural_name; // Text to use for the section title
 	$provider_section_intro = ''; // Text to use for the section intro text
 	$provider_section_filter = true; // Query whether to add filter(s)
+	$provider_section_filter_region = isset($provider_section_filter_region) ? $provider_section_filter_region : true; // Query for whether to add region filter
+	$provider_section_filter_title = isset($provider_section_filter_title) ? $provider_section_filter_title : true; // Query for whether to add title filter
 	$provider_section_collapse_list = false; // Query whether to collapse the list of providers in the providers section
-	add_action( 'genesis_entry_content', 'uamswp_fad_section_provider' );
+	function uamswp_fad_section_provider__template() {
+
+		global $providers;
+		global $provider_section_show;
+		global $ontology_type;
+		global $provider_section_title;
+		global $provider_section_intro;
+		global $provider_section_show_header;
+		global $provider_section_filter;
+		global $provider_section_filter_region;
+		global $provider_section_filter_title;
+		global $provider_section_collapse_list;
+
+		uamswp_fad_section_provider(
+			$providers, // int[] // Value of the related providers input
+			$provider_section_show, // bool (optional) // Query for whether to show the provider section
+			$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
+			$provider_section_title, // string (optional) // Text to use for the section title
+			$provider_section_intro, // string (optional) // Text to use for the section intro text
+			$provider_section_show_header, // bool (optional) // Query for whether to display the section header
+			$provider_section_filter, // bool (optional) // Query for whether to add filter(s)
+			$provider_section_filter_region, // bool (optional) // Query for whether to add region filter
+			$provider_section_filter_title, // bool (optional) // Query for whether to add title filter
+			$provider_section_collapse_list // bool (optional) // Query for whether to collapse the list of providers in the providers section
+		);
+
+	}
+	add_action( 'genesis_entry_content', 'uamswp_fad_section_provider__template' );
 
 	// Display references to other archive pages
 	add_action( 'genesis_entry_content', 'uamswp_fad_fpage_text_image_overlay');
