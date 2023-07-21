@@ -344,7 +344,6 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
 
 	// Construct non-standard post title
-	add_action( 'genesis_before_content', 'uamswp_fad_post_title' );
 	$entry_header_style = 'graphic'; // Entry header style
 	$entry_title_text = $fpage_title; // Regular title
 	$entry_title_text_supertitle = ''; // Optional supertitle
@@ -352,6 +351,26 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 	$entry_title_text_body = $fpage_intro; // Optional lead paragraph
 	$entry_title_image_desktop = ''; // Desktop breakpoint image ID
 	$entry_title_image_mobile = ''; // Optional mobile breakpoint image ID
+	function uamswp_fad_post_title__template() {
+		global $entry_title_text; 
+		global $entry_header_style;
+		global $entry_title_text_supertitle;
+		global $entry_title_text_subtitle;
+		global $entry_title_text_body;
+		global $entry_title_image_desktop;
+		global $entry_title_image_mobile;
+
+		uamswp_fad_post_title(
+			$entry_title_text, // string // Entry title text
+			$entry_header_style, // string // Entry header style
+			$entry_title_text_supertitle, // string (optional) // Entry supertitle text
+			$entry_title_text_subtitle, // string (optional) // Entry subtitle text
+			$entry_title_text_body, // string (optional) // Entry header lead paragraph text
+			$entry_title_image_desktop, // int (optional) // Entry header background image for desktop breakpoints
+			$entry_title_image_mobile // int (optional) // Entry header background image for mobile breakpoints
+		);
+	}
+	add_action( 'genesis_before_content', 'uamswp_fad_post_title__template' );
 
 // Remove the post info (byline) from the entry header and the entry footer
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
