@@ -94,7 +94,7 @@ if ( $condition_section_show ) {
 		if ( !isset($condition_section_title) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($condition_fpage_title_general) ) {
-				$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
+				$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general();
 					$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
 			}
 			$condition_section_title = $condition_fpage_title_general;
@@ -104,7 +104,7 @@ if ( $condition_section_show ) {
 		if ( !isset($condition_section_intro) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($condition_fpage_intro_general) ) {
-				$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
+				$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general();
 					$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
 			}
 			$condition_section_intro = $condition_fpage_intro_general;
@@ -122,62 +122,62 @@ if ( $condition_section_show ) {
 		// Other variables
 
 			if ( !isset($condition_single_name) ) {
-				$labels_condition_vars = uamswp_fad_labels_condition();
+				$labels_condition_vars = isset($labels_condition_vars) ? $labels_condition_vars : uamswp_fad_labels_condition();
 					$condition_single_name = $labels_condition_vars['condition_single_name']; // string
 			}
 
 			if ( !isset($condition_single_name_attr) ) {
-				$labels_condition_vars = uamswp_fad_labels_condition();
+				$labels_condition_vars = isset($labels_condition_vars) ? $labels_condition_vars : uamswp_fad_labels_condition();
 					$condition_single_name_attr = $labels_condition_vars['condition_single_name_attr']; // string
 			}
 
 			if ( !isset($condition_plural_name) ) {
-				$labels_condition_vars = uamswp_fad_labels_condition();
+				$labels_condition_vars = isset($labels_condition_vars) ? $labels_condition_vars : uamswp_fad_labels_condition();
 					$condition_plural_name = $labels_condition_vars['condition_plural_name']; // string
 			}
 
 			if ( !isset($condition_plural_name_attr) ) {
-				$labels_condition_vars = uamswp_fad_labels_condition();
+				$labels_condition_vars = isset($labels_condition_vars) ? $labels_condition_vars : uamswp_fad_labels_condition();
 					$condition_plural_name_attr = $labels_condition_vars['condition_plural_name_attr']; // string
 			}
 
 			if ( !isset($condition_fpage_title_general) ) {
-				$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
+				$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general();
 					$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
 			}
 
 			if ( !isset($condition_fpage_intro_general) ) {
-				$fpage_text_condition_general_vars = uamswp_fad_fpage_text_condition_general();
+				$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general();
 					$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
 			}
 
 			if ( !isset($conditions_cpt) ) {
-				$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
 					$conditions_cpt = $ontology_site_values_vars['conditions_cpt'];
 			}
 
 			if ( !isset($condition_cpt_query) ) {
-				$condition_query_vars = uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
+				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
 					$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
 			}
 
 			if ( !isset($condition_cpt_query) ) {
-				$condition_query_vars = uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
+				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
 					$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
 			}
 
 			if ( !isset($condition_section_show) ) {
-				$condition_query_vars = uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
+				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
 					$condition_section_show = $condition_query_vars['condition_section_show']; // bool
 			}
 
 			if ( !isset($condition_ids) ) {
-				$condition_query_vars = uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
+				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
 					$condition_ids = $condition_query_vars['condition_ids']; // int[]
 			}
 
 			if ( !isset($hide_medical_ontology) ) {
-				$ontology_hide_vars = uamswp_fad_ontology_hide();
+				$ontology_hide_vars = isset($ontology_hide_vars) ? $ontology_hide_vars : uamswp_fad_ontology_hide();
 					$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
 			}
 

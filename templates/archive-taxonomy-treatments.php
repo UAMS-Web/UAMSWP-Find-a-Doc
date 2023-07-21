@@ -28,7 +28,7 @@ function uamswp_terms_clauses( $clauses, $taxonomies, $args ){
 }
 
 // Get system settings for Treatments Labels
-$labels_treatment_vars = uamswp_fad_labels_treatment();
+$labels_treatment_vars = isset($labels_treatment_vars) ? $labels_treatment_vars : uamswp_fad_labels_treatment();
 	$treatment_single_name = $labels_treatment_vars['treatment_single_name']; // string
 	$treatment_single_name_attr = $labels_treatment_vars['treatment_single_name_attr']; // string
 	$treatment_plural_name = $labels_treatment_vars['treatment_plural_name']; // string
@@ -37,7 +37,7 @@ $labels_treatment_vars = uamswp_fad_labels_treatment();
 	$placeholder_treatment_plural_name = $labels_treatment_vars['placeholder_treatment_plural_name']; // string
 
 // Get system settings for Treatments Archive Page
-$archive_text_treatment_vars = uamswp_fad_archive_text_treatment();
+$archive_text_treatment_vars = isset($archive_text_treatment_vars) ? $archive_text_treatment_vars : uamswp_fad_archive_text_treatment();
 	$treatment_archive_headline = $archive_text_treatment_vars['treatment_archive_headline']; // string
 	$treatment_archive_headline_attr = $archive_text_treatment_vars['treatment_archive_headline_attr']; // string
 	$treatment_archive_intro_text = $archive_text_treatment_vars['treatment_archive_intro_text']; // string
@@ -47,7 +47,7 @@ $archive_text_treatment_vars = uamswp_fad_archive_text_treatment();
 
 // Override theme's method of defining the meta page title
 $meta_title_base_addition = $treatment_plural_name_attr; // Word or phrase to use to form base meta title
-$meta_title_vars = uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
+$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
 	$meta_title = $meta_title_vars['meta_title']; // string
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 

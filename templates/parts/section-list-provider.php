@@ -51,7 +51,7 @@ if ( $provider_section_show ) {
 		if ( !isset($provider_section_title) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($provider_fpage_title_general) ) {
-				$fpage_text_provider_general_vars = uamswp_fad_fpage_text_provider_general();
+				$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general();
 					$provider_fpage_title_general = $fpage_text_provider_general_vars['provider_fpage_title_general']; // string
 			}
 			$provider_section_title = $provider_fpage_title_general;
@@ -61,7 +61,7 @@ if ( $provider_section_show ) {
 		if ( !isset($provider_section_intro) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($provider_fpage_intro_general) ) {
-				$fpage_text_provider_general_vars = uamswp_fad_fpage_text_provider_general();
+				$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general();
 					$provider_fpage_intro_general = $fpage_text_provider_general_vars['provider_fpage_intro_general']; // string
 			}
 			$provider_section_intro = $provider_fpage_intro_general;
@@ -90,47 +90,47 @@ if ( $provider_section_show ) {
 		// Other variables
 
 			if ( !isset($provider_plural_name) ) {
-				$labels_provider_vars = uamswp_fad_labels_provider();
+				$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
 					$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
 			}
 
 			if ( !isset($provider_plural_name_attr) ) {
-				$labels_provider_vars = uamswp_fad_labels_provider();
+				$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
 					$provider_plural_name_attr = $labels_provider_vars['provider_plural_name_attr']; // string
 			}
 
 			if ( !isset($provider_fpage_title_general) ) {
-				$fpage_text_provider_general_vars = uamswp_fad_fpage_text_provider_general();
+				$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general();
 					$provider_fpage_title_general = $fpage_text_provider_general_vars['provider_fpage_title_general']; // string
 			}
 
 			if ( !isset($provider_fpage_intro_general) ) {
-				$fpage_text_provider_general_vars = uamswp_fad_fpage_text_provider_general();
+				$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general();
 					$provider_fpage_intro_general = $fpage_text_provider_general_vars['provider_fpage_intro_general']; // string
 			}
 
 			if ( !isset($providers) ) {
-				$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
 					$providers = $ontology_site_values_vars['providers']; // int[]
 			}
 
 			if ( !isset($provider_query) ) {
-				$provider_query_vars = uamswp_fad_provider_query( $providers );
+				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query( $providers );
 					$provider_query = $provider_query_vars['provider_query']; // WP_Post[]
 			}
 
 			if ( !isset($provider_section_show) ) {
-				$provider_query_vars = uamswp_fad_provider_query( $providers );
+				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query( $providers );
 					$provider_section_show = $provider_query_vars['provider_section_show']; // bool
 			}
 
 			if ( !isset($provider_ids) ) {
-				$provider_query_vars = uamswp_fad_provider_query( $providers );
+				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query( $providers );
 					$provider_ids = $provider_query_vars['provider_ids']; // int[]
 			}
 
 			if ( !isset($provider_count) ) {
-				$provider_query_vars = uamswp_fad_provider_query( $providers );
+				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query( $providers );
 					$provider_count = $provider_query_vars['provider_count']; // int
 			}
 

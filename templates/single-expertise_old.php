@@ -6,7 +6,7 @@
 // Get system settings for ontology item labels
 
 	// Get system settings for provider labels
-	$labels_provider_vars = uamswp_fad_labels_provider();
+	$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
 		$provider_single_name = $labels_provider_vars['provider_single_name']; // string
 		$provider_single_name_attr = $labels_provider_vars['provider_single_name_attr']; // string
 		$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
@@ -17,7 +17,7 @@
 		$placeholder_provider_short_name_possessive = $labels_provider_vars['placeholder_provider_short_name_possessive']; // string
 
 	// Get system settings for location labels
-	$labels_location_vars = uamswp_fad_labels_location();
+	$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
 		$location_single_name = $labels_location_vars['location_single_name']; // string
 		$location_single_name_attr = $labels_location_vars['location_single_name_attr']; // string
 		$location_plural_name = $labels_location_vars['location_plural_name']; // string
@@ -28,7 +28,7 @@
 		$placeholder_location_page_title_phrase = $labels_location_vars['placeholder_location_page_title_phrase']; // string
 
 	// // Get system settings for location descendant item labels
-	// $labels_location_descendant_vars = uamswp_fad_labels_location_descendant();
+	// $labels_location_descendant_vars = isset($labels_location_descendant_vars) ? $labels_location_descendant_vars : uamswp_fad_labels_location_descendant();
 	// 	$location_descendant_single_name = $labels_location_descendant_vars['location_descendant_single_name']; // string
 	// 	$location_descendant_single_name_attr = $labels_location_descendant_vars['location_descendant_single_name_attr']; // string
 	// 	$location_descendant_plural_name = $labels_location_descendant_vars['location_descendant_plural_name']; // string
@@ -37,7 +37,7 @@
 	// 	$placeholder_location_descendant_plural_name = $labels_location_descendant_vars['placeholder_location_descendant_plural_name']; // string
 
 	// Get system settings for area of expertise labels
-	$labels_expertise_vars = uamswp_fad_labels_expertise();
+	$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
 		$expertise_single_name = $labels_expertise_vars['expertise_single_name']; // string
 		$expertise_single_name_attr = $labels_expertise_vars['expertise_single_name_attr']; // string
 		$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
@@ -47,7 +47,7 @@
 		$placeholder_expertise_page_title = $labels_expertise_vars['placeholder_expertise_page_title']; // string
 
 	// Get system settings for area of expertise descendant item labels
-	$labels_expertise_descendant_vars = uamswp_fad_labels_expertise_descendant();
+	$labels_expertise_descendant_vars = isset($labels_expertise_descendant_vars) ? $labels_expertise_descendant_vars : uamswp_fad_labels_expertise_descendant();
 		$expertise_descendant_single_name = $labels_expertise_descendant_vars['expertise_descendant_single_name']; // string
 		$expertise_descendant_single_name_attr = $labels_expertise_descendant_vars['expertise_descendant_single_name_attr']; // string
 		$expertise_descendant_plural_name = $labels_expertise_descendant_vars['expertise_descendant_plural_name']; // string
@@ -56,7 +56,7 @@
 		$placeholder_expertise_descendant_plural_name = $labels_expertise_descendant_vars['placeholder_expertise_descendant_plural_name']; // string
 
 	// Get system settings for clinical resource labels
-	$labels_clinical_resource_vars = uamswp_fad_labels_clinical_resource();
+	$labels_clinical_resource_vars = isset($labels_clinical_resource_vars) ? $labels_clinical_resource_vars : uamswp_fad_labels_clinical_resource();
 		$clinical_resource_single_name = $labels_clinical_resource_vars['clinical_resource_single_name']; // string
 		$clinical_resource_single_name_attr = $labels_clinical_resource_vars['clinical_resource_single_name_attr']; // string
 		$clinical_resource_plural_name = $labels_clinical_resource_vars['clinical_resource_plural_name']; // string
@@ -65,7 +65,7 @@
 		$placeholder_clinical_resource_plural_name = $labels_clinical_resource_vars['placeholder_clinical_resource_plural_name']; // string
 
 	// Get system settings for combined condition and treatment labels
-	$labels_condition_treatment_vars = uamswp_fad_labels_condition_treatment();
+	$labels_condition_treatment_vars = isset($labels_condition_treatment_vars) ? $labels_condition_treatment_vars : uamswp_fad_labels_condition_treatment();
 		$condition_treatment_single_name = $labels_condition_treatment_vars['condition_treatment_single_name']; // string
 		$condition_treatment_single_name_attr = $labels_condition_treatment_vars['condition_treatment_single_name_attr']; // string
 		$condition_treatment_plural_name = $labels_condition_treatment_vars['condition_treatment_plural_name']; // string
@@ -74,7 +74,7 @@
 		$placeholder_condition_treatment_plural_name = $labels_condition_treatment_vars['placeholder_condition_treatment_plural_name']; // string
 
 	// Get system settings for condition labels
-	$labels_condition_vars = uamswp_fad_labels_condition();
+	$labels_condition_vars = isset($labels_condition_vars) ? $labels_condition_vars : uamswp_fad_labels_condition();
 		$condition_single_name = $labels_condition_vars['condition_single_name']; // string
 		$condition_single_name_attr = $labels_condition_vars['condition_single_name_attr']; // string
 		$condition_plural_name = $labels_condition_vars['condition_plural_name']; // string
@@ -83,7 +83,7 @@
 		$placeholder_condition_plural_name = $labels_condition_vars['placeholder_condition_plural_name']; // string
 
 	// Get system settings for treatment labels
-	$labels_treatment_vars = uamswp_fad_labels_treatment();
+	$labels_treatment_vars = isset($labels_treatment_vars) ? $labels_treatment_vars : uamswp_fad_labels_treatment();
 		$treatment_single_name = $labels_treatment_vars['treatment_single_name']; // string
 		$treatment_single_name_attr = $labels_treatment_vars['treatment_single_name_attr']; // string
 		$treatment_plural_name = $labels_treatment_vars['treatment_plural_name']; // string
@@ -92,7 +92,7 @@
 		$placeholder_treatment_plural_name = $labels_treatment_vars['placeholder_treatment_plural_name']; // string
 
 // // Get system settings for area of expertise archive page text
-// $archive_text_expertise_vars = uamswp_fad_archive_text_expertise();
+// $archive_text_expertise_vars = isset($archive_text_expertise_vars) ? $archive_text_expertise_vars : uamswp_fad_archive_text_expertise();
 // 	$expertise_archive_headline = $archive_text_expertise_vars['expertise_archive_headline']; // string
 // 	$expertise_archive_headline_attr = $archive_text_expertise_vars['expertise_archive_headline_attr']; // string
 // 	$expertise_archive_intro_text = $archive_text_expertise_vars['expertise_archive_intro_text']; // string
@@ -114,7 +114,7 @@ $ontology_type = get_field('expertise_type'); // True is ontology type, false is
 $ontology_type = isset($ontology_type) ? $ontology_type : 1; // Check if 'expertise_type' is not null, and if so, set value to true
 
 // Get system settings for fake subpage text elements in an Area of Expertise subsection
-$fpage_text_expertise_vars = uamswp_fad_fpage_text_expertise( $page_id, $page_title, $ontology_type );
+$fpage_text_expertise_vars = isset($fpage_text_expertise_vars) ? $fpage_text_expertise_vars : uamswp_fad_fpage_text_expertise( $page_id, $page_title, $ontology_type );
 	$expertise_page_title_options = $fpage_text_expertise_vars['expertise_page_title_options']; // string
 	$expertise_page_title = $fpage_text_expertise_vars['expertise_page_title']; // string
 	$expertise_page_intro = $fpage_text_expertise_vars['expertise_page_intro']; // string
@@ -171,7 +171,7 @@ $fpage_text_expertise_vars = uamswp_fad_fpage_text_expertise( $page_id, $page_ti
 	$condition_treatment_fpage_intro_expertise = $fpage_text_expertise_vars['condition_treatment_fpage_intro_expertise']; // string
 
 // Get system settings for image elements of a fake subpage (or section) in an Area of Expertise subsection (or profile)
-$fpage_image_expertise_vars = uamswp_fad_fpage_image_expertise();
+$fpage_image_expertise_vars = isset($fpage_image_expertise_vars) ? $fpage_image_expertise_vars : uamswp_fad_fpage_image_expertise();
 	$expertise_featured_image = $fpage_image_expertise_vars['expertise_featured_image']; // int
 	$expertise_featured_image_url = $fpage_image_expertise_vars['expertise_featured_image_url']; // string
 	$provider_fpage_featured_image_expertise = $fpage_image_expertise_vars['provider_fpage_featured_image_expertise']; // int
@@ -196,11 +196,11 @@ $meta_image_resize_vars = uamswp_meta_image_resize( $page_image_id );
 	$meta_twitter_image_height = $meta_image_resize_vars['meta_twitter_image_height']; // int
 
 // // Get system settings for jump links (a.k.a. anchor links)
-// $labels_jump_links_vars = uamswp_fad_labels_jump_links();
+// $labels_jump_links_vars = isset($labels_jump_links_vars) ? $labels_jump_links_vars : uamswp_fad_labels_jump_links();
 // 	$fad_jump_links_title = $labels_jump_links_vars['fad_jump_links_title']; // string
 
 // Get site header and site nav values for ontology subsections
-$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
 	$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
 	$navbar_subbrand_title = $ontology_site_values_vars['navbar_subbrand']['title']['name']; // string
 	$navbar_subbrand_title_attr = $ontology_site_values_vars['navbar_subbrand']['title']['attr']; // string
@@ -221,14 +221,14 @@ $ontology_site_values_vars = uamswp_fad_ontology_site_values();
 // Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
 
 	// Query for whether related providers content section should be displayed on ontology pages/subsections
-	$provider_query_vars = uamswp_fad_provider_query( $providers );
+	$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query( $providers );
 		$provider_query = $provider_query_vars['provider_query']; // WP_Post[]
 		$provider_section_show = $provider_query_vars['provider_section_show']; // bool
 		$provider_ids = $provider_query_vars['provider_ids']; // int[]
 		$provider_count = $provider_query_vars['provider_count']; // int
 
 	// Query for whether related locations content section should be displayed on ontology pages/subsections
-	$location_query_vars = uamswp_fad_location_query( $locations );
+	$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query( $locations );
 		$location_query = $location_query_vars['location_query']; // WP_Post[]
 		$location_section_show = $location_query_vars['location_section_show']; // bool
 		$location_ids = $location_query_vars['location_ids']; // int[]
@@ -236,7 +236,7 @@ $ontology_site_values_vars = uamswp_fad_ontology_site_values();
 		$location_valid = $location_query_vars['location_valid']; // bool
 
 	// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
-	$expertise_descendant_query_vars = uamswp_fad_expertise_descendant_query( $page_id );
+	$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query( $page_id );
 		$expertise_descendant_query = $expertise_descendant_query_vars['expertise_descendant_query']; // WP_Post[]
 		$expertise_descendant_section_show = $expertise_descendant_query_vars['expertise_descendant_section_show']; // bool
 		$expertise_descendant_ids = $expertise_descendant_query_vars['expertise_descendant_ids']; // int[]
@@ -248,14 +248,14 @@ $ontology_site_values_vars = uamswp_fad_ontology_site_values();
 		$expertise_content_nav = $expertise_descendant_query_vars['expertise_content_nav']; // string
 
 	// Query for whether related ontology items (of the same post type) content section should be displayed on ontology pages/subsections
-	$expertise_query_vars = uamswp_fad_expertise_query( $expertises );
+	$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query( $expertises );
 		$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
 		$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
 		$expertise_ids = $expertise_query_vars['expertise_ids']; // int[]
 		$expertise_count = $expertise_query_vars['expertise_count']; // int
 
 	// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
-	$clinical_resource_query_vars = uamswp_fad_clinical_resource_query( $clinical_resources );
+	$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query( $clinical_resources );
 		$clinical_resource_query = $clinical_resource_query_vars['clinical_resource_query']; // WP_Post[]
 		$clinical_resource_section_show = $clinical_resource_query_vars['clinical_resource_section_show']; // bool
 		$clinical_resource_ids = $clinical_resource_query_vars['clinical_resource_ids']; // int[]
@@ -264,7 +264,7 @@ $ontology_site_values_vars = uamswp_fad_ontology_site_values();
 	// Query for whether related conditions content section should be displayed on ontology pages/subsections
 	$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 	$ontology_type = isset($ontology_type) ? $ontology_type : true;
-	$condition_query_vars = uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
+	$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
 		$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
 		$condition_section_show = $condition_query_vars['condition_section_show']; // bool
 		$condition_treatment_section_show = $condition_query_vars['condition_treatment_section_show']; // bool
@@ -275,7 +275,7 @@ $ontology_site_values_vars = uamswp_fad_ontology_site_values();
 	// Query for whether related treatments content section should be displayed on ontology pages/subsections
 	$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 	$ontology_type = isset($ontology_type) ? $ontology_type : true;
-	$treatment_query_vars = uamswp_fad_treatment_query( $treatments_cpt, $condition_treatment_section_show, $ontology_type );
+	$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query( $treatments_cpt, $condition_treatment_section_show, $ontology_type );
 		$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
 		$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
 		$condition_treatment_section_show = $treatment_query_vars['condition_treatment_section_show']; // bool
@@ -287,7 +287,7 @@ $ontology_site_values_vars = uamswp_fad_ontology_site_values();
 	$regions = isset($regions) ? $regions : array();
 	$service_lines = isset($service_lines) ? $service_lines : array();
 	if ( $regions || $service_lines ) {
-		$ontology_hide_vars = uamswp_fad_ontology_hide(
+		$ontology_hide_vars = isset($ontology_hide_vars) ? $ontology_hide_vars : uamswp_fad_ontology_hide(
 			$regions, // string|array // Region(s) associated with the item
 			$service_lines // string|array // Service line(s) associated with the item
 		);
@@ -298,7 +298,7 @@ $ontology_site_values_vars = uamswp_fad_ontology_site_values();
 
 // Override theme's method of defining the meta page title
 $meta_title_enhanced_addition = $expertise_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
-$meta_title_vars = uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
+$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
 	$meta_title = $meta_title_vars['meta_title']; // string
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
@@ -538,7 +538,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	// 	$condition_section_title = $condition_fpage_title_expertise; // Text to use for the section title // string (default: Find-a-Doc Settings value for condition section title in a general placement)
 	// 	$condition_section_intro = $condition_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
 	// 	add_action( 'genesis_after_entry', 'uamswp_fad_section_condition', 16 );
-	// 	$section_condition_vars = uamswp_fad_section_condition(
+	// 	$section_condition_vars = isset($section_condition_vars) ? $section_condition_vars : uamswp_fad_section_condition(
 	// 		$conditions_cpt, // int[]
 	// 		$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
 	// 		$condition_treatment_schema, // string
@@ -559,7 +559,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	// 	$treatment_section_title = $treatment_fpage_title_expertise; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
 	// 	$treatment_section_intro = $treatment_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
 	// 	add_action( 'genesis_after_entry', 'uamswp_fad_section_treatment', 18 );
-	// 	$section_treatment_vars = uamswp_fad_section_treatment( $treatments_cpt )(
+	// 	$section_treatment_vars = isset($section_treatment_vars) ? $section_treatment_vars : uamswp_fad_section_treatment( $treatments_cpt )(
 	// 		$treatments_cpt, // int[]
 	// 		$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
 	// 		$condition_treatment_schema, // string

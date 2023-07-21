@@ -61,7 +61,7 @@ if ( $location_section_show ) {
 		if ( !isset($location_section_title) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($location_fpage_title_general) ) {
-				$fpage_text_location_general_vars = uamswp_fad_fpage_text_location_general();
+				$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general();
 					$location_fpage_title_general = $fpage_text_location_general_vars['location_fpage_title_general']; // string
 			}
 			$location_section_title = $location_fpage_title_general;
@@ -71,7 +71,7 @@ if ( $location_section_show ) {
 		if ( !isset($location_section_intro) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($location_fpage_intro_general) ) {
-				$fpage_text_location_general_vars = uamswp_fad_fpage_text_location_general();
+				$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general();
 					$location_fpage_intro_general = $fpage_text_location_general_vars['location_fpage_intro_general']; // string
 			}
 			$location_section_intro = $location_fpage_intro_general;
@@ -100,57 +100,57 @@ if ( $location_section_show ) {
 		// Other variables
 
 			if ( !isset($location_single_name) ) {
-				$labels_location_vars = uamswp_fad_labels_location();
+				$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
 					$location_single_name = $labels_location_vars['location_single_name']; // string
 			}
 
 			if ( !isset($location_single_name_attr) ) {
-				$labels_location_vars = uamswp_fad_labels_location();
+				$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
 					$location_single_name_attr = $labels_location_vars['location_single_name_attr']; // string
 			}
 
 			if ( !isset($location_plural_name) ) {
-				$labels_location_vars = uamswp_fad_labels_location();
+				$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
 					$location_plural_name = $labels_location_vars['location_plural_name']; // string
 			}
 
 			if ( !isset($location_plural_name_attr) ) {
-				$labels_location_vars = uamswp_fad_labels_location();
+				$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
 					$location_plural_name_attr = $labels_location_vars['location_plural_name_attr']; // string
 			}
 
 			if ( !isset($location_fpage_title_general) ) {
-				$fpage_text_location_general_vars = uamswp_fad_fpage_text_location_general();
+				$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general();
 					$location_fpage_title_general = $fpage_text_location_general_vars['location_fpage_title_general']; // string
 			}
 
 			if ( !isset($location_fpage_intro_general) ) {
-				$fpage_text_location_general_vars = uamswp_fad_fpage_text_location_general();
+				$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general();
 					$location_fpage_intro_general = $fpage_text_location_general_vars['location_fpage_intro_general']; // string
 			}
 
 			if ( !isset($locations) ) {
-				$ontology_site_values_vars = uamswp_fad_ontology_site_values();
+				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
 					$locations = $ontology_site_values_vars['locations']; // int[]
 			}
 
 			if ( !isset($location_query) ) {
-				$location_query_vars = uamswp_fad_location_query( $locations );
+				$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query( $locations );
 					$location_query = $location_query_vars['location_query']; // WP_Post[]
 			}
 
 			if ( !isset($location_section_show) ) {
-				$location_query_vars = uamswp_fad_location_query( $locations );
+				$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query( $locations );
 					$location_section_show = $location_query_vars['location_section_show']; // bool
 			}
 
 			if ( !isset($location_ids) ) {
-				$location_query_vars = uamswp_fad_location_query( $locations );
+				$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query( $locations );
 					$location_ids = $location_query_vars['location_ids']; // int[]
 			}
 
 			if ( !isset($location_count) ) {
-				$location_query_vars = uamswp_fad_location_query( $locations );
+				$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query( $locations );
 					$location_count = $location_query_vars['location_count']; // int
 			}
 

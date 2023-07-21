@@ -25,7 +25,7 @@ $embed_code = get_field('treatment_procedure_embed_codes', $term); // Embed / Sy
 // Get system settings for ontology item labels
 
 	// Get system settings for provider labels
-	$labels_provider_vars = uamswp_fad_labels_provider();
+	$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
 		$provider_single_name = $labels_provider_vars['provider_single_name']; // string
 		$provider_single_name_attr = $labels_provider_vars['provider_single_name_attr']; // string
 		$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
@@ -36,7 +36,7 @@ $embed_code = get_field('treatment_procedure_embed_codes', $term); // Embed / Sy
 		$placeholder_provider_short_name_possessive = $labels_provider_vars['placeholder_provider_short_name_possessive']; // string
 
 	// Get system settings for location labels
-	$labels_location_vars = uamswp_fad_labels_location();
+	$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
 		$location_single_name = $labels_location_vars['location_single_name']; // string
 		$location_single_name_attr = $labels_location_vars['location_single_name_attr']; // string
 		$location_plural_name = $labels_location_vars['location_plural_name']; // string
@@ -47,7 +47,7 @@ $embed_code = get_field('treatment_procedure_embed_codes', $term); // Embed / Sy
 		$placeholder_location_page_title_phrase = $labels_location_vars['placeholder_location_page_title_phrase']; // string
 
 	// Get system settings for area of expertise labels
-	$labels_expertise_vars = uamswp_fad_labels_expertise();
+	$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
 		$expertise_single_name = $labels_expertise_vars['expertise_single_name']; // string
 		$expertise_single_name_attr = $labels_expertise_vars['expertise_single_name_attr']; // string
 		$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
@@ -57,7 +57,7 @@ $embed_code = get_field('treatment_procedure_embed_codes', $term); // Embed / Sy
 		$placeholder_expertise_page_title = $labels_expertise_vars['placeholder_expertise_page_title']; // string
 
 	// Get system settings for clinical resource labels
-	$labels_clinical_resource_vars = uamswp_fad_labels_clinical_resource();
+	$labels_clinical_resource_vars = isset($labels_clinical_resource_vars) ? $labels_clinical_resource_vars : uamswp_fad_labels_clinical_resource();
 		$clinical_resource_single_name = $labels_clinical_resource_vars['clinical_resource_single_name']; // string
 		$clinical_resource_single_name_attr = $labels_clinical_resource_vars['clinical_resource_single_name_attr']; // string
 		$clinical_resource_plural_name = $labels_clinical_resource_vars['clinical_resource_plural_name']; // string
@@ -66,7 +66,7 @@ $embed_code = get_field('treatment_procedure_embed_codes', $term); // Embed / Sy
 		$placeholder_clinical_resource_plural_name = $labels_clinical_resource_vars['placeholder_clinical_resource_plural_name']; // string
 
 	// Get system settings for combined condition and treatment labels
-	$labels_condition_treatment_vars = uamswp_fad_labels_condition_treatment();
+	$labels_condition_treatment_vars = isset($labels_condition_treatment_vars) ? $labels_condition_treatment_vars : uamswp_fad_labels_condition_treatment();
 		$condition_treatment_single_name = $labels_condition_treatment_vars['condition_treatment_single_name']; // string
 		$condition_treatment_single_name_attr = $labels_condition_treatment_vars['condition_treatment_single_name_attr']; // string
 		$condition_treatment_plural_name = $labels_condition_treatment_vars['condition_treatment_plural_name']; // string
@@ -75,7 +75,7 @@ $embed_code = get_field('treatment_procedure_embed_codes', $term); // Embed / Sy
 		$placeholder_condition_treatment_plural_name = $labels_condition_treatment_vars['placeholder_condition_treatment_plural_name']; // string
 
 	// Get system settings for condition labels
-	$labels_condition_vars = uamswp_fad_labels_condition();
+	$labels_condition_vars = isset($labels_condition_vars) ? $labels_condition_vars : uamswp_fad_labels_condition();
 		$condition_single_name = $labels_condition_vars['condition_single_name']; // string
 		$condition_single_name_attr = $labels_condition_vars['condition_single_name_attr']; // string
 		$condition_plural_name = $labels_condition_vars['condition_plural_name']; // string
@@ -84,7 +84,7 @@ $embed_code = get_field('treatment_procedure_embed_codes', $term); // Embed / Sy
 		$placeholder_condition_plural_name = $labels_condition_vars['placeholder_condition_plural_name']; // string
 
 	// Get system settings for treatment labels
-	$labels_treatment_vars = uamswp_fad_labels_treatment();
+	$labels_treatment_vars = isset($labels_treatment_vars) ? $labels_treatment_vars : uamswp_fad_labels_treatment();
 		$treatment_single_name = $labels_treatment_vars['treatment_single_name']; // string
 		$treatment_single_name_attr = $labels_treatment_vars['treatment_single_name_attr']; // string
 		$treatment_plural_name = $labels_treatment_vars['treatment_plural_name']; // string
@@ -93,7 +93,7 @@ $embed_code = get_field('treatment_procedure_embed_codes', $term); // Embed / Sy
 		$placeholder_treatment_plural_name = $labels_treatment_vars['placeholder_treatment_plural_name']; // string
 
 // Get system settings for condition archive page text
-$archive_text_treatment_vars = uamswp_fad_archive_text_treatment();
+$archive_text_treatment_vars = isset($archive_text_treatment_vars) ? $archive_text_treatment_vars : uamswp_fad_archive_text_treatment();
 	$treatment_archive_headline = $archive_text_treatment_vars['treatment_archive_headline']; // string
 	$treatment_archive_headline_attr = $archive_text_treatment_vars['treatment_archive_headline_attr']; // string
 	$treatment_archive_intro_text = $archive_text_treatment_vars['treatment_archive_intro_text']; // string
@@ -115,7 +115,7 @@ add_action('wp_head','uamswp_keyword_hook_header');
 
 // Override theme's method of defining the meta page title
 $meta_title_enhanced_addition = $treatment_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title
-$meta_title_vars = uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
+$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
 	$meta_title = $meta_title_vars['meta_title']; // string
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 

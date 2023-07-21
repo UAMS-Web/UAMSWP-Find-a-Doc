@@ -28,7 +28,7 @@ function uamswp_terms_clauses( $clauses, $taxonomies, $args ){
 }
 
 // Get system settings for condition labels
-$labels_condition_vars = uamswp_fad_labels_condition();
+$labels_condition_vars = isset($labels_condition_vars) ? $labels_condition_vars : uamswp_fad_labels_condition();
 	$condition_single_name = $labels_condition_vars['condition_single_name']; // string
 	$condition_single_name_attr = $labels_condition_vars['condition_single_name_attr']; // string
 	$condition_plural_name = $labels_condition_vars['condition_plural_name']; // string
@@ -37,7 +37,7 @@ $labels_condition_vars = uamswp_fad_labels_condition();
 	$placeholder_condition_plural_name = $labels_condition_vars['placeholder_condition_plural_name']; // string
 
 // Get system settings for condition archive page text
-$archive_text_condition_vars = uamswp_fad_archive_text_condition();
+$archive_text_condition_vars = isset($archive_text_condition_vars) ? $archive_text_condition_vars : uamswp_fad_archive_text_condition();
 	$condition_archive_headline = $archive_text_condition_vars['condition_archive_headline']; // string
 	$condition_archive_headline_attr = $archive_text_condition_vars['condition_archive_headline_attr']; // string
 	$condition_archive_intro_text = $archive_text_condition_vars['condition_archive_intro_text']; // string
@@ -47,7 +47,7 @@ $condition_archive_link = get_post_type_archive_link( get_query_var('post_type')
 
 // Override theme's method of defining the meta page title
 $meta_title_base_addition = $condition_plural_name_attr; // Word or phrase to use to form base meta title
-$meta_title_vars = uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
+$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
 	$meta_title = $meta_title_vars['meta_title']; // string
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
