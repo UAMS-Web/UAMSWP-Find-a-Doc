@@ -1449,7 +1449,15 @@ function uamswp_fad_ontology_site_values() {
 }
 
 // Construct non-standard entry title
-function uamswp_fad_post_title() {
+function uamswp_fad_post_title(
+	$entry_title_text, // string // Entry title text
+	$entry_header_style, // string // Entry header style
+	$entry_title_text_supertitle = '', // string (optional) // Entry supertitle text
+	$entry_title_text_subtitle = '', // string (optional) // Entry subtitle text
+	$entry_title_text_body = '', // string (optional) // Entry header lead paragraph text
+	$entry_title_image_desktop = '', // int (optional) // Entry header background image for desktop breakpoints
+	$entry_title_image_mobile = '' // int (optional) // Entry header background image for mobile breakpoints
+) {
 	// Add the following (without the commenting) to the relevant template to remove Genesis-standard post title and markup
 	// remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
 	// remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
@@ -1504,22 +1512,10 @@ function uamswp_fad_post_title() {
 		// The minimum dimensions for Graphic style are 992x806
 		// $entry_title_image_mobile = '';
 
-	// Bring in variables from outside of the function
-
-		// Typically defined on the template
-
-			global $entry_header_style; // string
-			global $entry_title_text; // string
-			global $entry_title_text_supertitle; // string (optional)
-			global $entry_title_text_subtitle; // string (optional)
-			global $entry_title_text_body; // string (optional)
-			global $entry_title_image_desktop; // int (optional)
-			global $entry_title_image_mobile; // int (optional)
-
 	// Check/define variables
 
-	$entry_header_style = ( isset($entry_header_style) && !empty($entry_header_style) ) ? $entry_header_style : 'graphic';
 	$entry_title_text = ( isset($entry_title_text) && !empty($entry_title_text) ) ? $entry_title_text : get_the_title();
+	$entry_header_style = ( isset($entry_header_style) && !empty($entry_header_style) ) ? $entry_header_style : 'graphic';
 	$entry_title_text_supertitle = isset($entry_title_text_supertitle) ? $entry_title_text_supertitle : '';
 	$entry_title_text_subtitle = isset($entry_title_text_subtitle) ? $entry_title_text_subtitle : '';
 	$entry_title_text_body = isset($entry_title_text_body) ? $entry_title_text_body : '';

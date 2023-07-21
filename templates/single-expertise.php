@@ -351,14 +351,14 @@ while ( have_posts() ) : the_post(); ?>
 
 			// Construct page header
 
-				$entry_header_style = $expertise_page_title_options; // Entry header style
 				$entry_title_text = $expertise_page_title; // Regular title
+				$entry_header_style = $expertise_page_title_options; // Entry header style
 				$entry_title_text_supertitle = ''; // Optional supertitle, placed above the regular title
 				$entry_title_text_subtitle = ''; // Optional subtitle, placed below the regular title
 				$entry_title_text_body = $expertise_page_intro; // Optional lead paragraph, placed below the entry title
 				$entry_title_image_desktop = $expertise_page_image; // Desktop breakpoint image ID
 				$entry_title_image_mobile = $expertise_page_image_mobile; // Optional mobile breakpoint image ID
-				uamswp_fad_post_title();
+				include( UAMS_FAD_PATH . '/templates/parts/entry-title-' . $entry_header_style . '.php');
 
 			// Construct page content
 

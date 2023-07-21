@@ -288,18 +288,39 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 // Modify Entry Title
 
+	// Remove Genesis-standard post title and markup
+	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
 	remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
-	add_action( 'genesis_entry_header', 'uamswp_resource_post_title' );
+	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
 
-	function uamswp_resource_post_title() {
-		// Bring in variables from outside of the function
-		global $clinical_resource_single_name; // Defined in uamswp_fad_labels_clinical_resource()
+	// Construct non-standard post title
+	$entry_header_style = 'normal'; // Entry header style
+	$entry_title_text = $page_title; // Regular title
+	$entry_title_text_supertitle = $clinical_resource_single_name; // Optional supertitle, placed above the regular title
+	$entry_title_text_subtitle = ''; // Optional subtitle, placed below the regular title
+	$entry_title_text_body = ''; // Optional lead paragraph, placed below the entry title
+	$entry_title_image_desktop = ''; // Desktop breakpoint image ID
+	$entry_title_image_mobile = ''; // Optional mobile breakpoint image ID
+	function uamswp_fad_post_title__template() {
+		global $entry_title_text; 
+		global $entry_header_style;
+		global $entry_title_text_supertitle;
+		global $entry_title_text_subtitle;
+		global $entry_title_text_body;
+		global $entry_title_image_desktop;
+		global $entry_title_image_mobile;
 
-		echo '<h1 class="entry-title" itemprop="headline">';
-		echo '<span class="supertitle">'. $clinical_resource_single_name . '</span><span class="sr-only">: </span>';
-		echo get_the_title();
-		echo '</h1>';
+		uamswp_fad_post_title(
+			$entry_title_text, // string // Entry title text
+			$entry_header_style, // string // Entry header style
+			$entry_title_text_supertitle, // string (optional) // Entry supertitle text
+			$entry_title_text_subtitle, // string (optional) // Entry subtitle text
+			$entry_title_text_body, // string (optional) // Entry header lead paragraph text
+			$entry_title_image_desktop, // int (optional) // Entry header background image for desktop breakpoints
+			$entry_title_image_mobile // int (optional) // Entry header background image for mobile breakpoints
+		);
 	}
+	add_action( 'genesis_entry_header', 'uamswp_fad_post_title__template' );
 
 // Construct page content
 
