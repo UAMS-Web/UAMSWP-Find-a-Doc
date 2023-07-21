@@ -8,19 +8,14 @@
  * Must be used inside a loop
  * 
  * Designed for UAMS Health Find-a-Doc
- * 
- * Required var:
- * 	$id // int // Post ID of the current page
- * 	$clinical_resource_single_name // string // System setting for Clinical Resources single item name
  */
 
 // Check/define variables
 
-	if ( !isset($id) ) {
-		$id = get_the_ID();
-	}
+	$id = get_the_ID();
+
 	if ( !isset($clinical_resource_single_name) ) {
-		$labels_clinical_resource_vars = uamswp_fad_labels_clinical_resource();
+		$labels_clinical_resource_vars = isset($labels_clinical_resource_vars) ? $labels_clinical_resource_vars : uamswp_fad_labels_clinical_resource();
 			$clinical_resource_single_name = $labels_clinical_resource_vars['clinical_resource_single_name']; // string
 	}
 

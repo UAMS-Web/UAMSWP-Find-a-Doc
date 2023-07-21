@@ -187,7 +187,8 @@ $jump_link_count = 0;
 
 // Query for whether related providers content section should be displayed on ontology pages/subsections
 $providers = get_field('clinical_resource_providers');
-$provider_query_vars = uamswp_fad_provider_query( $providers, $jump_link_count );
+$jump_link_count = isset($jump_link_count) ? $jump_link_count : 0;
+$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query( $providers, $jump_link_count );
 	$provider_query = $provider_query_vars['provider_query']; // WP_Post[]
 	$provider_section_show = $provider_query_vars['provider_section_show']; // bool
 	$provider_ids = $provider_query_vars['provider_ids']; // int[]
@@ -213,12 +214,18 @@ $expertise_query_vars = uamswp_fad_expertise_query( $expertises );
 
 // Query for whether related clinical resources content section should be displayed on ontology pages/subsections
 $clinical_resources = get_field('clinical_resource_related');
-$clinical_resource_postsPerPage = -1; // Maximum number of clinical resources displayed in the section (-1, 4, 6, 8, 10, 12) // int (default: 4)
-$clinical_resource_query_vars = uamswp_fad_clinical_resource_query( $clinical_resources );
+$clinical_resource_posts_per_page = -1; // Maximum number of clinical resources displayed in the section (-1, 4, 6, 8, 10, 12) // int (default: 4)
+$jump_link_count = isset($jump_link_count) ? $jump_link_count : 0;
+$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
+	$clinical_resources,
+	$clinical_resource_posts_per_page,
+	$jump_link_count
+);
 	$clinical_resource_query = $clinical_resource_query_vars['clinical_resource_query']; // WP_Post[]
 	$clinical_resource_section_show = $clinical_resource_query_vars['clinical_resource_section_show']; // bool
 	$clinical_resource_ids = $clinical_resource_query_vars['clinical_resource_ids']; // int[]
 	$clinical_resource_count = $clinical_resource_query_vars['clinical_resource_count']; // int
+	$jump_link_count = $clinical_resource_query_vars['jump_link_count']; // int
 
 // Query for whether related conditions content section should be displayed on ontology pages/subsections
 $conditions_cpt = get_field('clinical_resource_conditions');
