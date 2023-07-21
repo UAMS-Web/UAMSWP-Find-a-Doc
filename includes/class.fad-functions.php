@@ -7807,8 +7807,8 @@ function uamswp_fad_fpage_text_image_overlay() {
 
 	}
 
-	$text_image_overlay_row_0 = $fpage_text_image_overlay[0] ? $fpage_text_image_overlay[0] : '';
-	$text_image_overlay_row_1 = $fpage_text_image_overlay[1] ? $fpage_text_image_overlay[1] : '';
+	$text_image_overlay_row_0 = isset($fpage_text_image_overlay[0]) ? $fpage_text_image_overlay[0] : '';
+	$text_image_overlay_row_1 = isset($fpage_text_image_overlay[1]) ? $fpage_text_image_overlay[1] : '';
 
 	// Call the main function to construct UAMS Text & Image Overlay Block
 	uamswp_section_text_image_overlay();
