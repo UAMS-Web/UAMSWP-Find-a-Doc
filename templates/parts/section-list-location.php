@@ -256,6 +256,8 @@ if ( $location_section_show ) {
 		$location_count = count($location_query->posts);
 
 	} // endif ( $location_section_filter )
+		
+	wp_reset_postdata();
 
 	?>
 	<section class="uams-module location-list bg-auto<?php echo $location_section_collapse_list ? ' collapse-list' : ''; ?>" id="locations">
