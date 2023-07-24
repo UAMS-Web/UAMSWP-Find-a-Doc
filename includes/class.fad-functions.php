@@ -7105,6 +7105,7 @@ function uamswp_fad_section_clinical_resource(
 	// $clinical_resource_descendant_list = false, // bool (optional) // Query for whether this is a list of child location items within a location item
 	$clinical_resource_section_title = '', // string (optional) // Text to use for the section title
 	$clinical_resource_section_intro = '', // string (optional) // Text to use for the section intro text
+	$clinical_resource_posts_per_page = '', // int (optional) // Maximum number of clinical resources to display (-1, 4, 6, 8, 10 or 12)
 	$clinical_resource_section_more_show = true, // bool (optional) // Query for whether to show the section that links to more items
 	$clinical_resource_section_more_text = '', // string (optional) // Text to use for the "more" intro text
 	$clinical_resource_section_more_link_text = '', // string (optional) // Text to use for the "more" link text

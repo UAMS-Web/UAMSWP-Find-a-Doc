@@ -38,7 +38,7 @@
 
 	// Number of clinical resources to display
 
-	if ( !isset($clinical_resource_posts_per_page) ) {
+	if ( !isset($clinical_resource_posts_per_page) || empty($clinical_resource_posts_per_page) ) {
 		if ( !isset($clinical_resource_posts_per_page_section) ) {
 			$posts_per_page_clinical_resource_general_vars = isset($posts_per_page_clinical_resource_general_vars) ? $posts_per_page_clinical_resource_general_vars : uamswp_fad_posts_per_page_clinical_resource_general();
 				$clinical_resource_posts_per_page_section = $posts_per_page_clinical_resource_general_vars['clinical_resource_posts_per_page_section']; // int
