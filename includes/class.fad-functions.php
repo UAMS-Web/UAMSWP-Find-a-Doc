@@ -2065,19 +2065,21 @@ function uamswp_fad_ontology_nav_menu() {
 			$expertise_descendants = $ontology_site_values_vars['expertise_descendants'];
 			$clinical_resources = $ontology_site_values_vars['clinical_resources']; // int[]
 
-		$provider_query_vars = uamswp_fad_provider_query( $providers );
+		$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
+			$providers // int[]
+		);
 			$provider_section_show = $provider_query_vars['provider_section_show']; // bool
 
-		$location_query_vars = uamswp_fad_location_query( $locations );
+		$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query( $locations );
 			$location_section_show = $location_query_vars['location_section_show']; // bool
 
-		$expertise_query_vars = uamswp_fad_expertise_query( $expertises );
+		$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query( $expertises );
 			$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
 
-		$clinical_resource_query_vars = uamswp_fad_clinical_resource_query( $clinical_resources );
+		$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query( $clinical_resources );
 			$clinical_resource_section_show = $clinical_resource_query_vars['clinical_resource_section_show']; // bool
 
-		$expertise_descendant_query_vars = uamswp_fad_expertise_descendant_query( $expertise_descendants );
+		$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query( $expertise_descendants );
 			$expertise_descendant_section_show = $expertise_descendant_query_vars['expertise_descendant_section_show']; // bool
 			$expertise_content_nav_show = $expertise_descendant_query_vars['expertise_content_nav_show']; // bool
 			$expertise_content_nav = $expertise_descendant_query_vars['expertise_content_nav']; // string
