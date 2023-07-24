@@ -1709,7 +1709,7 @@ function uamswp_fad_post_title(
 		// Bring in variables from outside of the function
 
 			$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
-				$page_id, // int // ID of the post
+				$page_id // int // ID of the post
 			);
 				$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
 				$expertise_descendants = $ontology_site_values_vars['expertise_descendants'];
@@ -2058,7 +2058,7 @@ function uamswp_fad_ontology_nav_menu(
 	// Bring in variables from outside of the function
 
 		$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
-			$page_id, // int // ID of the post
+			$page_id // int // ID of the post
 		);
 			$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
 			$providers = $ontology_site_values_vars['providers']; // int[]
@@ -2123,7 +2123,7 @@ function uamswp_fad_ontology_header(
 	// Bring in variables from outside of the function
 
 		$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
-			$page_id, // int // ID of the post
+			$page_id // int // ID of the post
 		);
 			$navbar_subbrand_title = $ontology_site_values_vars['navbar_subbrand']['title']['name']; // string
 			$navbar_subbrand_title_url = $ontology_site_values_vars['navbar_subbrand']['title']['url']; // string
@@ -7478,7 +7478,7 @@ function uamswp_fad_fpage_text_image_overlay(
 			}
 
 		$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
-			$page_id, // int // ID of the post
+			$page_id // int // ID of the post
 		);
 			$page_top_level_query = $ontology_site_values_vars['page_top_level_query']; // Get whether this fake subpage's parent item is the top-level item // bool
 			$ancestors_ontology_farthest = $ontology_site_values_vars['ancestors_ontology_farthest']; // ID of the top-level ontology item ancestor of the current item // int
