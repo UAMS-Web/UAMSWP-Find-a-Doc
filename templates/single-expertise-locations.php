@@ -83,17 +83,17 @@
 		$placeholder_treatment_plural_name = $labels_treatment_vars['placeholder_treatment_plural_name']; // string
 
 // Get the page ID for the 'parent' area of expertise
-$page_id = get_the_ID();
+$page_id = get_the_ID(); // ID of the post
 
 // Get the page title for the 'parent' area of expertise
-$page_title = get_the_title(); // Title of the area of expertise
+$page_title = get_the_title(); // Title of the post
 $page_title_attr = uamswp_attr_conversion($page_title);
 
 // Get the page URL for the 'parent' area of expertise
-$page_url = get_permalink();
+$page_url = get_permalink(); // Permalink of the post
 
 // Area of Expertise Content Type
-$ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
+$ontology_type = get_field('expertise_type'); // Ontology type of the post (true is ontology type, false is content type)
 $ontology_type = isset($ontology_type) ? $ontology_type : 1; // Check if 'expertise_type' is not null, and if so, set value to true
 
 // Get system settings for fake subpage text elements in an Area of Expertise subsection

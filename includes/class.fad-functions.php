@@ -1944,10 +1944,10 @@ function uamswp_fad_post_title(
 
 	// Query for whether related conditions content section should be displayed on ontology pages/subsections
 	function uamswp_fad_condition_query(
-		$conditions_cpt,
-		$condition_treatment_section_show = false,
-		$ontology_type = true,
-		$jump_link_count = 0
+		$conditions_cpt, // int[]
+		$condition_treatment_section_show = false, // bool (optional)
+		$ontology_type = true, // bool (optional)
+		$jump_link_count = 0 // int (optional)
 	) {
 
 		if ( $conditions_cpt ) {
