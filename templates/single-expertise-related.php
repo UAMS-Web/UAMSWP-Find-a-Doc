@@ -389,11 +389,12 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 
 	// Display ontology page content
-	$expertise_section_id = 'related-expertise';
-	$expertise_section_show_header = false;
 	$expertise_descendant_list = isset($expertise_descendant_list) ? $expertise_descendant_list : false;
 	$expertise_section_title = 'List of Related ' . $expertise_plural_name;
 	$expertise_section_intro = '';
+	$expertise_section_show_header = false; // Query whether to display the section header
+	$expertise_section_collapse_list = false; // Query for whether to collapse the list of locations in the locations section
+	$expertise_section_id = 'related-expertise'; // Section ID
 	function uamswp_fad_section_expertise__template() {
 
 		global $expertises;
@@ -403,6 +404,9 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		global $expertise_descendant_list;
 		global $expertise_section_title;
 		global $expertise_section_intro;
+		global $expertise_section_show_header;
+		global $expertise_section_collapse_list;
+		global $expertise_section_id;
 
 		uamswp_fad_section_expertise(
 			$expertises, // int[] // Value of the related areas of expertise input (or $expertise_descendants, List of this area of expertise item's descendant items)
@@ -412,6 +416,9 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 			$expertise_descendant_list, // bool (optional) // Query for whether this is a list of child areas of expertise within an area of expertise
 			$expertise_section_title, // string (optional) // Text to use for the section title
 			$expertise_section_intro, // string (optional) // Text to use for the section intro text
+			$expertise_section_show_header, // bool (optional) // Query whether to display the section header
+			$expertise_section_collapse_list, // bool (optional) // Query for whether to collapse the list of locations in the locations section
+			$expertise_section_id // string (optional) // Section ID
 		);
 
 	}

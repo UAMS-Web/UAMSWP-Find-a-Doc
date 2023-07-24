@@ -7078,8 +7078,8 @@ function uamswp_fad_section_expertise(
 	// $expertise_section_filter_region = true, // bool (optional) // Query for whether to add region filter
 	// $expertise_section_filter_title = true, // bool (optional) // Query for whether to add title filter
 	$expertise_section_collapse_list = false, // bool (optional) // Query for whether to collapse the list of locations in the locations section
-	$expertise_section_class = 'expertise-list', // string (optional) // Section class
-	$expertise_section_id = 'expertise' // string (optional) // Section ID
+	$expertise_section_id = 'expertise', // string (optional) // Section ID
+	$expertise_section_class = 'expertise-list' // string (optional) // Section class
 ) {
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-expertise.php' );
