@@ -258,7 +258,9 @@ $eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$po
 
 // Query for whether related locations content section should be displayed on a page
 $locations = get_field('physician_locations',$post->ID); // Get the provider's location values
-$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query( $locations );
+$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query(
+	$locations // int[]
+);
 	$location_query = $location_query_vars['location_query']; // WP_Post[]
 	$location_section_show = $location_query_vars['location_section_show']; // bool
 	$location_ids = $location_query_vars['location_ids']; // int[]
@@ -281,7 +283,9 @@ if( $location_section_show ) {
 
 // Query for whether related areas of expertise content section should be displayed on a page
 $expertises = get_field('physician_expertise',$post->ID);
-$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query( $expertises );
+$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
+	$expertises // int[]
+);
 	$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
 	$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
 	$expertise_ids = $expertise_query_vars['expertise_ids']; // int[]
@@ -318,7 +322,11 @@ $conditions = get_field('physician_conditions');
 $conditions_cpt = get_field('physician_conditions_cpt');
 $condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 $ontology_type = isset($ontology_type) ? $ontology_type : true;
-$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
+$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
+	$conditions_cpt, // int[]
+	$condition_treatment_section_show, // bool (optional)
+	$ontology_type // bool (optional)
+);
 	$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
 	$condition_section_show = $condition_query_vars['condition_section_show']; // bool
 	$condition_treatment_section_show = $condition_query_vars['condition_treatment_section_show']; // bool
@@ -331,7 +339,11 @@ $treatments = get_field('physician_treatments');
 $treatments_cpt = get_field('physician_treatments_cpt');
 $condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 $ontology_type = isset($ontology_type) ? $ontology_type : true;
-$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query( $treatments_cpt, $condition_treatment_section_show, $ontology_type );
+$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
+	$treatments_cpt, // int[]
+	$condition_treatment_section_show, // bool (optional)
+	$ontology_type, // bool (optional)
+);
 	$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
 	$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
 	$condition_treatment_section_show = $treatment_query_vars['condition_treatment_section_show']; // bool
@@ -476,7 +488,10 @@ while ( have_posts() ) : the_post();
 
 	// Query for whether UAMS Health Talk podcast section should be displayed on ontology pages/subsections
 	$podcast_name = get_field('physician_podcast_name');
-	$podcast_query_vars = isset($podcast_query_vars) ? $podcast_query_vars : uamswp_fad_podcast_query( $podcast_name, $jump_link_count ); // Defines universal variables related to podcast
+	$podcast_query_vars = isset($podcast_query_vars) ? $podcast_query_vars : uamswp_fad_podcast_query(
+		$podcast_name, // string
+		$jump_link_count // int (optional)
+	);
 		$podcast_section_show = $podcast_query_vars['podcast_section_show']; // bool
 		$jump_link_count = $podcast_query_vars['jump_link_count']; // int
 
@@ -1045,7 +1060,12 @@ while ( have_posts() ) : the_post();
 		// Construct UAMS Health Talk podcast section
 		$podcast_filter = 'doctor';
 		$podcast_subject = $short_name;
-		uamswp_fad_podcast( $podcast_name, $podcast_section_show, $podcast_filter, $podcast_subject );
+		uamswp_fad_podcast(
+			$podcast_name, // string
+			$podcast_section_show, // bool
+			$podcast_filter, // string // Expected values: 'tag' or 'doctor'
+			$podcast_subject // string
+		);
 
 		// Begin Clinical Resources Section
 		$clinical_resource_section_more_link_key = '_resource_provider';

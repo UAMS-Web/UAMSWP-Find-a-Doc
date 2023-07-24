@@ -66,7 +66,9 @@
 	
 		} else {
 	
-			$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query( $expertises );
+			$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
+				$expertises // int[]
+			);
 				$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
 	
 		}
@@ -268,7 +270,9 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 
 				} else {
 
-					$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query( $expertises );
+					$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
+						$expertises // int[]
+					);
 						$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
 
 				}
@@ -288,7 +292,9 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 				
 				} else {
 
-					$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query( $expertises );
+					$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
+						$expertises // int[]
+					);
 						$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
 
 				}
@@ -308,7 +314,9 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 			
 				} else {
 
-					$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query( $expertises );
+					$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
+						$expertises // int[]
+					);
 						$expertise_count = $expertise_query_vars['expertise_count']; // int
 
 				}

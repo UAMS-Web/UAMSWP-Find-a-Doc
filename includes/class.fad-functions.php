@@ -1363,9 +1363,9 @@ function uamswp_fad_ontology_site_values(
 			// If the page has the ontology type...
 			// Set the navbar-subbrand title element using the page's values 
 			$site_nav_id = $page_id;
-			$navbar_subbrand_title = $page_title;
+			$navbar_subbrand_title = isset($page_title) ? $page_title : get_the_title();
 			$navbar_subbrand_title_attr = uamswp_attr_conversion($navbar_subbrand_title);
-			$navbar_subbrand_title_url = $page_url;
+			$navbar_subbrand_title_url = isset($page_url) ? $page_url : get_permalink();
 			if ( $ancestors_ontology_farthest ) {
 				// If a farthest ancestor with the ontology type exists
 				// Set the navbar-subbrand parent element using the that ancestor's values 
@@ -1944,7 +1944,6 @@ function uamswp_fad_post_title(
 
 	// Query for whether related conditions content section should be displayed on ontology pages/subsections
 	function uamswp_fad_condition_query(
-		$conditions_cpt,
 		$condition_treatment_section_show = false,
 		$ontology_type = true,
 		$jump_link_count = 0
@@ -1998,10 +1997,10 @@ function uamswp_fad_post_title(
 
 	// Query for whether related treatments content section should be displayed on ontology pages/subsections
 	function uamswp_fad_treatment_query(
-		$treatments_cpt,
-		$condition_treatment_section_show = false,
-		$ontology_type = true,
-		$jump_link_count = 0
+		$treatments_cpt, // int[]
+		$condition_treatment_section_show = false, // bool (optional)
+		$ontology_type = true, // bool (optional)
+		$jump_link_count = 0 // int (optional)
 	) {
 
 		if ( $treatments_cpt ) {
@@ -2072,13 +2071,19 @@ function uamswp_fad_ontology_nav_menu(
 		);
 			$provider_section_show = $provider_query_vars['provider_section_show']; // bool
 
-		$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query( $locations );
+		$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query(
+			$locations // int[]
+		);
 			$location_section_show = $location_query_vars['location_section_show']; // bool
 
-		$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query( $expertises );
+		$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
+			$expertises // int[]
+		);
 			$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
 
-		$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query( $clinical_resources );
+		$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
+			$clinical_resources // int[]
+		);
 			$clinical_resource_section_show = $clinical_resource_query_vars['clinical_resource_section_show']; // bool
 
 		$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query( $expertise_descendants );
@@ -2219,13 +2224,10 @@ function uamswp_add_entry_class( $attributes ) {
 }
 
 // Query for whether UAMS Health Talk podcast section should be displayed on ontology pages/subsections
-function uamswp_fad_podcast_query( $podcast_name, $jump_link_count = 0 ) {
-
-	// Bring in variables from outside of the function
-
-		// Function Arguments
-		// 	$podcast_name // string
-		// 	$jump_link_count // int
+function uamswp_fad_podcast_query(
+	$podcast_name, // string
+	$jump_link_count = 0 // int (optional)
+) {
 
 	// Check if podcast section should be displayed
 	if ( $podcast_name ) {
@@ -4477,14 +4479,11 @@ function uamswp_fad_fpage_text_replace($string) {
 		}
 
 		// Get field values for fake subpage text elements in an Area of Expertise subsection (or profile)
-		function uamswp_fad_fpage_text_expertise( $page_id, $page_title, $ontology_type ) {
-
-			// Bring in variables from outside of the function
-
-				// Function Arguments
-				// 	$page_id // int
-				// 	$page_title // string
-				// 	$ontology_type // bool
+		function uamswp_fad_fpage_text_expertise(
+			$page_id, // int
+			$page_title, // string
+			$ontology_type // bool
+		) {
 
 			// Overview
 
@@ -7514,7 +7513,11 @@ function uamswp_fad_fpage_text_image_overlay(
 			||
 			!isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise)
 			) {
-			$fpage_text_expertise_vars = isset($fpage_text_expertise_vars) ? $fpage_text_expertise_vars : uamswp_fad_fpage_text_expertise( $page_id, $page_title, $ontology_type );
+			$fpage_text_expertise_vars = isset($fpage_text_expertise_vars) ? $fpage_text_expertise_vars : uamswp_fad_fpage_text_expertise(
+				$page_id, // int
+				$page_title, // string
+				$ontology_type // bool
+			);
 				$provider_fpage_title_expertise = $fpage_text_expertise_vars['provider_fpage_title_expertise']; // string
 				$location_fpage_title_expertise = $fpage_text_expertise_vars['location_fpage_title_expertise']; // string
 				$expertise_descendant_fpage_title_expertise = $fpage_text_expertise_vars['expertise_descendant_fpage_title_expertise']; // string
@@ -7610,7 +7613,11 @@ function uamswp_fad_fpage_text_image_overlay(
 				||
 				!isset($expertise_descendant_fpage_ref_main_link_expertise) || empty($expertise_descendant_fpage_ref_main_link_expertise)
 				) {
-				$fpage_text_expertise_vars = isset($fpage_text_expertise_vars) ? $fpage_text_expertise_vars : uamswp_fad_fpage_text_expertise( $page_id, $page_title, $ontology_type );
+				$fpage_text_expertise_vars = isset($fpage_text_expertise_vars) ? $fpage_text_expertise_vars : uamswp_fad_fpage_text_expertise(
+					$page_id, // int
+					$page_title, // string
+					$ontology_type // bool
+				);
 					$expertise_descendant_fpage_ref_main_title_expertise = $fpage_text_expertise_vars['expertise_descendant_fpage_ref_main_title_expertise']; // string
 					$expertise_descendant_fpage_ref_main_intro_expertise = $fpage_text_expertise_vars['expertise_descendant_fpage_ref_main_intro_expertise']; // string
 					$expertise_descendant_fpage_ref_main_link_expertise = $fpage_text_expertise_vars['expertise_descendant_fpage_ref_main_link_expertise']; // string
@@ -7632,7 +7639,11 @@ function uamswp_fad_fpage_text_image_overlay(
 				||
 				!isset($expertise_fpage_ref_main_link_expertise) || empty($expertise_fpage_ref_main_link_expertise)
 				) {
-				$fpage_text_expertise_vars = isset($fpage_text_expertise_vars) ? $fpage_text_expertise_vars : uamswp_fad_fpage_text_expertise( $page_id, $page_title, $ontology_type );
+				$fpage_text_expertise_vars = isset($fpage_text_expertise_vars) ? $fpage_text_expertise_vars : uamswp_fad_fpage_text_expertise(
+					$page_id, // int
+					$page_title, // string
+					$ontology_type // bool
+				);
 					$expertise_fpage_ref_main_title_expertise = $fpage_text_expertise_vars['expertise_fpage_ref_main_title_expertise']; // string
 					$expertise_fpage_ref_main_intro_expertise = $fpage_text_expertise_vars['expertise_fpage_ref_main_intro_expertise']; // string
 					$expertise_fpage_ref_main_link_expertise = $fpage_text_expertise_vars['expertise_fpage_ref_main_link_expertise']; // string

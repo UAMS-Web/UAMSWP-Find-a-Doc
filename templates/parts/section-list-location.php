@@ -137,22 +137,30 @@ if ( $location_section_show ) {
 			}
 
 			if ( !isset($location_query) ) {
-				$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query( $locations );
+				$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query(
+					$locations // int[]
+				);
 					$location_query = $location_query_vars['location_query']; // WP_Post[]
 			}
 
 			if ( !isset($location_section_show) ) {
-				$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query( $locations );
+				$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query(
+					$locations // int[]
+				);
 					$location_section_show = $location_query_vars['location_section_show']; // bool
 			}
 
 			if ( !isset($location_ids) ) {
-				$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query( $locations );
+				$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query(
+					$locations // int[]
+				);
 					$location_ids = $location_query_vars['location_ids']; // int[]
 			}
 
 			if ( !isset($location_count) ) {
-				$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query( $locations );
+				$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query(
+					$locations // int[]
+				);
 					$location_count = $location_query_vars['location_count']; // int
 			}
 

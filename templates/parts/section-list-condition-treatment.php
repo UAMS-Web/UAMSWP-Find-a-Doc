@@ -271,42 +271,74 @@ if ( $condition_treatment_section_show ) {
 			}
 
 			if ( !isset($condition_cpt_query) ) {
-				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
+				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
+					$conditions_cpt, // int[]
+					$condition_treatment_section_show, // bool (optional)
+					$ontology_type // bool (optional)
+				);
 					$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
 			}
 
 			if ( !isset($condition_section_show) ) {
-				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
+				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
+					$conditions_cpt, // int[]
+					$condition_treatment_section_show, // bool (optional)
+					$ontology_type // bool (optional)
+				);
 					$condition_section_show = $condition_query_vars['condition_section_show']; // bool
 			}
 
 			if ( !isset($condition_treatment_section_show) ) {
-				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
+				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
+					$conditions_cpt, // int[]
+					$condition_treatment_section_show, // bool (optional)
+					$ontology_type // bool (optional)
+				);
 					$condition_treatment_section_show = $condition_query_vars['condition_treatment_section_show']; // bool
 			}
 
 			if ( !isset($condition_count) ) {
-				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
+				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
+					$conditions_cpt, // int[]
+					$condition_treatment_section_show, // bool (optional)
+					$ontology_type // bool (optional)
+				);
 					$condition_count = $condition_query_vars['condition_count']; // int
 			}
 
 			if ( !isset($treatment_cpt_query) ) {
-				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query( $treatments_cpt, $condition_treatment_section_show, $ontology_type );
+				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
+					$treatments_cpt, // int[]
+					$condition_treatment_section_show, // bool (optional)
+					$ontology_type, // bool (optional)
+				);
 					$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
 			}
 
 			if ( !isset($treatment_section_show) ) {
-				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query( $treatments_cpt, $condition_treatment_section_show, $ontology_type );
+				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
+					$treatments_cpt, // int[]
+					$condition_treatment_section_show, // bool (optional)
+					$ontology_type, // bool (optional)
+				);
 					$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
 			}
 
 			if ( !isset($condition_treatment_section_show) ) {
-				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query( $treatments_cpt, $condition_treatment_section_show, $ontology_type );
+				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
+					$treatments_cpt, // int[]
+					$condition_treatment_section_show, // bool (optional)
+					$ontology_type, // bool (optional)
+				);
 					$condition_treatment_section_show = $treatment_query_vars['condition_treatment_section_show']; // bool
 			}
 
 			if ( !isset($treatment_count) ) {
-				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query( $treatments_cpt, $condition_treatment_section_show, $ontology_type );
+				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
+					$treatments_cpt, // int[]
+					$condition_treatment_section_show, // bool (optional)
+					$ontology_type, // bool (optional)
+				);
 					$treatment_count = $treatment_query_vars['treatment_count']; // int
 			}
 

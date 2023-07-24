@@ -159,22 +159,38 @@ if ( $condition_section_show ) {
 			}
 
 			if ( !isset($condition_cpt_query) ) {
-				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
+				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
+					$conditions_cpt, // int[]
+					$condition_treatment_section_show, // bool (optional)
+					$ontology_type // bool (optional)
+				);
 					$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
 			}
 
 			if ( !isset($condition_cpt_query) ) {
-				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
+				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
+					$conditions_cpt, // int[]
+					$condition_treatment_section_show, // bool (optional)
+					$ontology_type // bool (optional)
+				);
 					$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
 			}
 
 			if ( !isset($condition_section_show) ) {
-				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
+				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
+					$conditions_cpt, // int[]
+					$condition_treatment_section_show, // bool (optional)
+					$ontology_type // bool (optional)
+				);
 					$condition_section_show = $condition_query_vars['condition_section_show']; // bool
 			}
 
 			if ( !isset($condition_ids) ) {
-				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
+				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
+					$conditions_cpt, // int[]
+					$condition_treatment_section_show, // bool (optional)
+					$ontology_type // bool (optional)
+				);
 					$condition_ids = $condition_query_vars['condition_ids']; // int[]
 			}
 

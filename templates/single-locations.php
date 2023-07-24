@@ -590,7 +590,10 @@ while ( have_posts() ) : the_post(); ?>
 		// Query for whether related providers content section should be displayed on ontology pages/subsections
 		$providers = get_field('physician_locations');
 		$jump_link_count = isset($jump_link_count) ? $jump_link_count : 0;
-		$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query( $providers, $jump_link_count );
+		$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
+			$providers,
+			$jump_link_count
+		);
 			$provider_query = $provider_query_vars['provider_query']; // WP_Post[]
 			$provider_section_show = $provider_query_vars['provider_section_show']; // bool
 			$provider_ids = $provider_query_vars['provider_ids']; // int[]
@@ -605,7 +608,11 @@ while ( have_posts() ) : the_post(); ?>
 				'post_type' => 'location'
 			)
 		);
-		$location_descendant_query_vars = isset($location_descendant_query_vars) ? $location_descendant_query_vars : uamswp_fad_location_descendant_query( $current_id, $location_descendants, $jump_link_count );
+		$location_descendant_query_vars = isset($location_descendant_query_vars) ? $location_descendant_query_vars : uamswp_fad_location_descendant_query(
+			$current_id, // int
+			$location_descendants, // int[]
+			$jump_link_count // int
+		);
 			$location_descendant_query = $location_descendant_query_vars['location_descendant_query']; // WP_Post[]
 			$location_descendant_section_show = $location_descendant_query_vars['location_descendant_section_show']; // bool
 			$location_descendant_ids = $location_descendant_query_vars['location_descendant_ids']; // int[]
@@ -620,7 +627,9 @@ while ( have_posts() ) : the_post(); ?>
 
 		// Query for whether related areas of expertise content section should be displayed on a page
 		$expertises = get_field('location_expertise');
-		$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query( $expertises );
+		$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
+			$expertises // int[]
+		);
 			$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
 			$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
 			$expertise_ids = $expertise_query_vars['expertise_ids']; // int[]
@@ -648,7 +657,11 @@ while ( have_posts() ) : the_post(); ?>
 		$conditions_cpt = get_field('location_conditions_cpt');
 		$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 		$ontology_type = isset($ontology_type) ? $ontology_type : true;
-		$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query( $conditions_cpt, $condition_treatment_section_show, $ontology_type );
+		$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
+			$conditions_cpt, // int[]
+			$condition_treatment_section_show, // bool (optional)
+			$ontology_type // bool (optional)
+		);
 			$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
 			$condition_section_show = $condition_query_vars['condition_section_show']; // bool
 			$condition_treatment_section_show = $condition_query_vars['condition_treatment_section_show']; // bool
@@ -660,7 +673,11 @@ while ( have_posts() ) : the_post(); ?>
 		$treatments_cpt = get_field('location_treatments_cpt');
 		$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 		$ontology_type = isset($ontology_type) ? $ontology_type : true;
-		$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query( $treatments_cpt, $condition_treatment_section_show, $ontology_type );
+		$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
+			$treatments_cpt, // int[]
+			$condition_treatment_section_show, // bool (optional)
+			$ontology_type, // bool (optional)
+		);
 			$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
 			$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
 			$condition_treatment_section_show = $treatment_query_vars['condition_treatment_section_show']; // bool
