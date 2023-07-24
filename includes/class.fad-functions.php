@@ -6980,7 +6980,7 @@ function uamswp_meta_image_resize( $page_image_id ) {
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
 function uamswp_fad_section_provider(
-	$providers, // int[] // Value of the related providers input
+	$providers, // int[] // Value of the related providers input (or $provider_descendants, List of this provider item's descendant items)
 	// $provider_section_more_link_key, // string
 	// $provider_section_more_link_value, // string
 	// $provider_descendants = '', // int[] (optional) // List of this provider item's descendant items
@@ -6989,7 +6989,7 @@ function uamswp_fad_section_provider(
 	// $provider_schema_i = 0, // int (optional) // Iteration variable for schema data
 	// $provider_schema_count = 0, // int (optional) // Item count for schema data
 	// $provider_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
-	$provider_section_show = false, // bool (optional) // Query for whether to show the provider section
+	$provider_section_show = false, // bool (optional) // Query for whether to show the provider section (or $provider_desecendant_section_show, Query for whether to show the descendant provider section)
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
 	// $provider_descendant_list = false, // bool (optional) // Query for whether this is a list of child provider items within a provider item
 	$provider_section_title = '', // string (optional) // Text to use for the section title
@@ -7017,7 +7017,7 @@ function uamswp_fad_section_provider(
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
 function uamswp_fad_section_location(
-	$locations, // int[] // Value of the related locations input
+	$locations, // int[] // Value of the related locations input (or $location_descendants, List of this location item's descendant items)
 	// $location_section_more_link_key, // string
 	// $location_section_more_link_value, // string
 	// $location_descendants = '', // int[] (optional) // List of this location item's descendant items
@@ -7026,7 +7026,7 @@ function uamswp_fad_section_location(
 	// $location_schema_i = 0, // int (optional) // Iteration variable for schema data
 	// $location_schema_count = 0, // int (optional) // Item count for schema data
 	$location_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
-	$location_section_show = false, // bool (optional) // Query for whether to show the location section
+	$location_section_show = false, // bool (optional) // Query for whether to show the location section (or $location_desecendant_section_show, Query for whether to show the descendant location section)
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
 	$location_descendant_list = false, // bool (optional) // Query for whether this is a list of child locations within a location
 	$location_section_title = '', // string (optional) // Text to use for the section title
@@ -7054,16 +7054,16 @@ function uamswp_fad_section_location(
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
 function uamswp_fad_section_expertise(
-	$expertises, // int[] // Value of the related areas of expertise input
+	$expertises, // int[] // Value of the related areas of expertise input (or $expertise_descendants, List of this area of expertise item's descendant items)
 	// $expertise_section_more_link_key, // string
 	// $expertise_section_more_link_value, // string
-	$expertise_descendants = '', // int[] (optional) // List of this area of expertise item's descendant items
+	// $expertise_descendants = '', // int[] (optional) // List of this area of expertise item's descendant items
 	$hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
 	// $expertise_schema = '', // string (optional) // Schema data
 	// $expertise_schema_i = 0, // int (optional) // Iteration variable for schema data
 	// $expertise_schema_count = 0, // int (optional) // Item count for schema data
 	// $expertise_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
-	$expertise_section_show = false, // bool // Query for whether to show the area of expertise section
+	$expertise_section_show = false, // bool (optional) // Query for whether to show the area of expertise section (or $expertise_desecendant_section_show, Query for whether to show the descendant area of expertise section)
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
 	$expertise_descendant_list = false, // bool (optional) // Query for whether this is a list of child areas of expertise within an area of expertise
 	$expertise_section_title = '', // string (optional) // Text to use for the section title
@@ -7091,7 +7091,7 @@ function uamswp_fad_section_expertise(
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
 function uamswp_fad_section_clinical_resource(
-	$clinical_resources, // int[] // Value of the related clinical resources input
+	$clinical_resources, // int[] // Value of the related clinical resources input (or $clinical_resource_descendants, List of this clinical resource item's descendant items)
 	$clinical_resource_section_more_link_key = '', // string (optional)
 	$clinical_resource_section_more_link_value = '', // string (optional)
 	// $clinical_resource_descendants = '', // int[] (optional) // List of this clinical resource item's descendant items
@@ -7100,7 +7100,7 @@ function uamswp_fad_section_clinical_resource(
 	// $clinical_resource_schema_i = 0, // int (optional) // Iteration variable for schema data
 	// $clinical_resource_schema_count = 0, // int (optional) // Item count for schema data
 	// $clinical_resource_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
-	$clinical_resource_section_show = false, // bool (optional) // Query for whether to show the clinical resource section
+	$clinical_resource_section_show = false, // bool (optional) // Query for whether to show the clinical resource section (or $clinical_resource_desecendant_section_show, Query for whether to show the descendant clinical resource section)
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
 	// $clinical_resource_descendant_list = false, // bool (optional) // Query for whether this is a list of child location items within a location item
 	$clinical_resource_section_title = '', // string (optional) // Text to use for the section title
@@ -7128,7 +7128,7 @@ function uamswp_fad_section_clinical_resource(
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
 function uamswp_fad_section_condition(
-	$conditions_cpt, // int[] // Value of the related conditions input
+	$conditions_cpt, // int[] // Value of the related conditions input (or $condition_descendants, List of this condition item's descendant items)
 	// $condition_section_more_link_key, // string
 	// $condition_section_more_link_value, // string
 	// $condition_descendants = '', // int[] (optional) // List of this condition item's descendant items
@@ -7137,7 +7137,7 @@ function uamswp_fad_section_condition(
 	$condition_treatment_schema_i = 0, // int (optional) // Iteration variable for schema data
 	$condition_treatment_schema_count = 0, // int (optional) // Item count for schema data
 	// $condition_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
-	$condition_section_show = false, // bool (optional) // Query for whether to show the conditions section
+	$condition_section_show = false, // bool (optional) // Query for whether to show the conditions section (or $condition_desecendant_section_show, Query for whether to show the descendant condition section)
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
 	// $condition_descendant_list = false, // bool (optional) // Query for whether this is a list of child location items within a location item
 	$condition_section_title = '', // string (optional) // Text to use for the section title
@@ -7178,7 +7178,7 @@ function uamswp_fad_section_condition(
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
 function uamswp_fad_section_treatment(
-	$treatments_cpt, // int[] // Value of the related treatments input
+	$treatments_cpt, // int[] // Value of the related treatments input (or $treatment_descendants, List of this treatment item's descendant items)
 	// $treatment_section_more_link_key, // string
 	// $treatment_section_more_link_value, // string
 	// $treatment_descendants = '', // int[] (optional) // List of this treatment item's descendant items
@@ -7187,7 +7187,7 @@ function uamswp_fad_section_treatment(
 	$condition_treatment_schema_i = 0, // int (optional) // Iteration variable for schema data
 	$condition_treatment_schema_count = 0, // int (optional) // Item count for schema data
 	// $treatment_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
-	$treatment_section_show = false, // bool (optional) // Query for whether to show the treatment section
+	$treatment_section_show = false, // bool (optional) // Query for whether to show the treatment section (or $treatment_desecendant_section_show, Query for whether to show the descendant treatment section)
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
 	// $treatment_descendant_list = false, // bool (optional) // Query for whether this is a list of child location items within a location item
 	$treatment_section_title = '', // string (optional) // Text to use for the section title
@@ -7228,8 +7228,8 @@ function uamswp_fad_section_treatment(
 //     relevant page template is not built using hooks/functions, the include() 
 //     is all that is necessary.
 function uamswp_fad_section_condition_treatment(
-	$conditions_cpt, // int[] // Value of the related conditions input
-	$treatments_cpt, // int[] // Value of the related treatments input
+	$conditions_cpt, // int[] // Value of the related conditions input (or $condition_descendants, List of this condition item's descendant items)
+	$treatments_cpt, // int[] // Value of the related treatments input (or $treatment_descendants, List of this treatment item's descendant items)
 	// $condition_treatment_section_more_link_key, // string
 	// $condition_treatment_section_more_link_value, // string
 	// $condition_descendants = '', // int[] (optional) // List of this condition item's descendant items
@@ -7240,8 +7240,8 @@ function uamswp_fad_section_condition_treatment(
 	// $condition_treatment_schema_count = 0, // int (optional) // Item count for schema data
 	// $condition_treatment_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
 	$condition_treatment_section_show = false, // bool (optional) // Query for whether to show the combined conditions and treatments section
-	$condition_section_show = false, // bool (optional) // Query for whether to show the condition section
-	$treatment_section_show = false, // bool (optional) // Query for whether to show the treatment section
+	$condition_section_show = false, // bool (optional) // Query for whether to show the condition section (or $condition_desecendant_section_show, Query for whether to show the descendant condition section)
+	$treatment_section_show = false, // bool (optional) // Query for whether to show the treatment section (or $treatment_desecendant_section_show, Query for whether to show the descendant treatment section)
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
 	// $condition_treatment_descendant_list = false, // bool (optional) // Query for whether this is a list of child location items within a location item
 	$condition_treatment_section_title = '', // string (optional) // Text to use for the section title

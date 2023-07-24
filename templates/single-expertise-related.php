@@ -200,7 +200,7 @@ $ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_
 	$providers = $ontology_site_values_vars['providers']; // int[]
 	$locations = $ontology_site_values_vars['locations']; // int[]
 	$expertises = $ontology_site_values_vars['expertises']; // int[]
-	$expertise_descendants = $ontology_site_values_vars['expertise_descendants'];
+	// $expertise_descendants = $ontology_site_values_vars['expertise_descendants'];
 	$clinical_resources = $ontology_site_values_vars['clinical_resources']; // int[]
 	$conditions_cpt = $ontology_site_values_vars['conditions_cpt']; // int[]
 	$treatments_cpt = $ontology_site_values_vars['treatments_cpt']; // int[]
@@ -397,7 +397,6 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	function uamswp_fad_section_expertise__template() {
 
 		global $expertises;
-		global $expertise_descendants;
 		global $hide_medical_ontology;
 		global $expertise_section_show;
 		global $ontology_type;
@@ -406,8 +405,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		global $expertise_section_intro;
 
 		uamswp_fad_section_expertise(
-			$expertises, // int[] // Value of the related areas of expertise input
-			$expertise_descendants, // int[] (optional) // List of this area of expertise item's descendant items
+			$expertises, // int[] // Value of the related areas of expertise input (or $expertise_descendants, List of this area of expertise item's descendant items)
 			$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
 			$expertise_section_show, // bool // Query for whether to show the area of expertise section
 			$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type

@@ -49,43 +49,87 @@
 	// Query for whether this is a list of child areas of expertise within an area of expertise
 	$expertise_descendant_list = isset($expertise_descendant_list) ? $expertise_descendant_list : false;
 
-	if ( $expertise_descendant_list ) {
-		$expertise_section_show = $expertise_descendant_section_show; // bool
-		$expertise_query = $expertise_descendant_query; // WP_Post[]
-		$expertise_count = $expertise_descendant_count; // int
+	if ( !isset($expertise_section_show) ) {
+
+		if ( $expertise_descendant_list ) {
+	
+			if ( !isset($expertise_descendant_section_show) ) {
+	
+				$page_id = isset($page_id) ? $page_id : get_the_ID();
+	
+				$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query( $page_id );
+					$expertise_descendant_section_show = $expertise_descendant_query_vars['expertise_section_show']; // bool
+	
+			}
+
+			$expertise_section_show = $expertise_descendant_section_show;
+	
+		} else {
+	
+			$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query( $expertises );
+				$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
+	
+		}
+
 	}
+
+	if ( !isset($hide_medical_ontology) ) {
+		$ontology_hide_vars = isset($ontology_hide_vars) ? $ontology_hide_vars : uamswp_fad_ontology_hide();
+			$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
+	}
+
 
 if ( $expertise_section_show && !$hide_medical_ontology ) {
 
 	// Check/define variables
-
-		// List of this area of expertise item's descendant items
-			if ( !isset($expertise_descendants) ) {
-				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
-					$expertise_descendants = $ontology_site_values_vars['expertise_descendants']; // int[]
-			}
 
 		// Query for whether item is ontology type vs. content type
 		$ontology_type = isset($ontology_type) ? $ontology_type : true;
 
 		// Text to use for the section title
 		if ( !isset($expertise_section_title) ) {
+
 			// Set the section title using the system settings for the section title in a general placement
-			if ( !isset($expertise_fpage_title_general) ) {
-				$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
-					$expertise_fpage_title_general = $fpage_text_expertise_general_vars['expertise_fpage_title_general']; // string
+			if ( $expertise_descendant_list ) {
+
+				if ( !isset($expertise_descendant_fpage_title_general) ) {
+					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
+						$expertise_descendant_fpage_title_general = $fpage_text_expertise_general_vars['expertise_descendant_fpage_title_general']; // string
+				}
+				$expertise_section_title = $expertise_descendant_fpage_title_general;
+
+			} else {
+
+				if ( !isset($expertise_fpage_title_general) ) {
+					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
+						$expertise_fpage_title_general = $fpage_text_expertise_general_vars['expertise_fpage_title_general']; // string
+				}
+				$expertise_section_title = $expertise_fpage_title_general;
+
 			}
-			$expertise_section_title = $expertise_fpage_title_general;
 		}
 
 		// Text to use for the section intro text
 		if ( !isset($expertise_section_intro) ) {
+
 			// Set the section title using the system settings for the section title in a general placement
-			if ( !isset($expertise_fpage_intro_general) ) {
-				$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
-					$expertise_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_intro_general']; // string
+			if ( $expertise_descendant_list ) {
+
+				if ( !isset($expertise_descendant_fpage_intro_general) ) {
+					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
+						$expertise_descendant_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_descendant_fpage_intro_general']; // string
+				}
+				$expertise_section_intro = $expertise_descendant_fpage_intro_general;
+
+			} else {
+
+				if ( !isset($expertise_fpage_intro_general) ) {
+					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
+						$expertise_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_intro_general']; // string
+				}
+				$expertise_section_intro = $expertise_fpage_intro_general;
+
 			}
-			$expertise_section_intro = $expertise_fpage_intro_general;
 		}
 
 		// Query whether to display the section header
@@ -103,68 +147,172 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 		// Other variables
 
 			if ( !isset($expertise_single_name) ) {
-				$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
-					$expertise_single_name = $labels_expertise_vars['expertise_single_name']; // string
+
+				if ( $expertise_descendant_list ) {
+
+					if ( !isset($expertise_descendant_single_name) ) {
+						$labels_expertise_descendant_vars = isset($labels_expertise_descendant_vars) ? $labels_expertise_descendant_vars : uamswp_fad_labels_expertise_descendant();
+							$expertise_descendant_single_name = $labels_expertise_descendant_vars['expertise_descendant_single_name']; // string
+					}
+					$expertise_single_name = $expertise_descendant_single_name;
+
+				} else {
+
+					$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
+						$expertise_single_name = $labels_expertise_vars['expertise_single_name']; // string
+
+				}
 			}
 
 			if ( !isset($expertise_single_name_attr) ) {
-				$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
-					$expertise_single_name_attr = $labels_expertise_vars['expertise_single_name_attr']; // string
+
+				if ( $expertise_descendant_list ) {
+				
+					if ( !isset($expertise_descendant_single_name_attr) ) {
+						$labels_expertise_descendant_vars = isset($labels_expertise_descendant_vars) ? $labels_expertise_descendant_vars : uamswp_fad_labels_expertise_descendant();
+							$expertise_descendant_single_name_attr = $labels_expertise_descendant_vars['expertise_descendant_single_name_attr']; // string
+					}
+					$expertise_single_name_attr = $expertise_descendant_single_name_attr;
+
+				} else {
+				
+					$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
+						$expertise_single_name_attr = $labels_expertise_vars['expertise_single_name_attr']; // string
+
+				}
 			}
 
 			if ( !isset($expertise_plural_name) ) {
-				$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
-					$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
+
+				if ( $expertise_descendant_list ) {
+				
+					if ( !isset($expertise_descendant_plural_name) ) {
+						$labels_expertise_descendant_vars = isset($labels_expertise_descendant_vars) ? $labels_expertise_descendant_vars : uamswp_fad_labels_expertise_descendant();
+							$expertise_descendant_plural_name = $labels_expertise_descendant_vars['expertise_descendant_plural_name']; // string
+					}
+					$expertise_plural_name = $expertise_descendant_plural_name;
+
+				} else {
+				
+					$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
+						$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
+
+				}
 			}
 
 			if ( !isset($expertise_plural_name_attr) ) {
-				$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
-					$expertise_plural_name_attr = $labels_expertise_vars['expertise_plural_name_attr']; // string
+
+				if ( $expertise_descendant_list ) {
+				
+					if ( !isset($expertise_descendant_plural_name_attr) ) {
+						$labels_expertise_descendant_vars = isset($labels_expertise_descendant_vars) ? $labels_expertise_descendant_vars : uamswp_fad_labels_expertise_descendant();
+							$expertise_descendant_plural_name_attr = $labels_expertise_descendant_vars['expertise_descendant_plural_name_attr']; // string
+					}
+					$expertise_plural_name_attr = $expertise_descendant_plural_name_attr;
+
+				} else {
+				
+					$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
+						$expertise_plural_name_attr = $labels_expertise_vars['expertise_plural_name_attr']; // string
+
+				}
 			}
 
 			if ( !isset($expertise_fpage_title_general) ) {
-				$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
-					$expertise_fpage_title_general = $fpage_text_expertise_general_vars['expertise_fpage_title_general']; // string
+
+				if ( $expertise_descendant_list ) {
+				
+					if ( !isset($expertise_descendant_fpage_title_general) ) {
+						$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
+							$expertise_descendant_fpage_title_general = $fpage_text_expertise_general_vars['expertise_descendant_fpage_title_general']; // string
+					}
+					$expertise_fpage_title_general = $expertise_descendant_fpage_title_general;
+
+				} else {
+				
+					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
+						$expertise_fpage_title_general = $fpage_text_expertise_general_vars['expertise_fpage_title_general']; // string
+
+				}
 			}
 
 			if ( !isset($expertise_fpage_intro_general) ) {
-				$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
-					$expertise_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_intro_general']; // string
+
+				if ( $expertise_descendant_list ) {
+				
+					if ( !isset($expertise_descendant_fpage_intro_general) ) {
+						$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
+							$expertise_descendant_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_descendant_fpage_intro_general']; // string
+					}
+					$expertise_fpage_intro_general = $expertise_descendant_fpage_intro_general;
+
+				} else {
+				
+					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
+						$expertise_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_intro_general']; // string
+
+				}
 			}
 
 			if ( !isset($expertise_query) ) {
-				$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query( $expertises );
-					$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
+
+				if ( $expertise_descendant_list ) {
+
+					if ( !isset($expertise_descendant_query) ) {
+						$page_id = isset($page_id) ? $page_id : get_the_ID();
+	
+						$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query( $page_id );
+							$expertise_descendant_query = $expertise_descendant_query_vars['expertise_descendant_query']; // WP_Post[]
+					}
+					$expertise_query = $expertise_descendant_query;		
+
+				} else {
+
+					$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query( $expertises );
+						$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
+
+				}
 			}
 
 			if ( !isset($expertise_section_show) ) {
-				$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query( $expertises );
-					$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
+
+				if ( $expertise_descendant_list ) {
+
+					if ( !isset($expertise_descendant_section_show) ) {
+						$page_id = isset($page_id) ? $page_id : get_the_ID();
+	
+						$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query( $page_id );
+							$expertise_descendant_section_show = $expertise_descendant_query_vars['expertise_descendant_section_show']; // bool
+					}
+					$expertise_section_show = $expertise_descendant_section_show;
+				
+				} else {
+
+					$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query( $expertises );
+						$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
+
+				}
 			}
 
 			if ( !isset($expertise_count) ) {
-				$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query( $expertises );
-					$expertise_count = $expertise_query_vars['expertise_count']; // int
-			}
 
-			if ( !isset($expertise_descendant_query) ) {
-				$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query( $expertise_descendants );
-					$expertise_descendant_query = $expertise_descendant_query_vars['expertise_descendant_query']; // WP_Post[]
-			}
+				if ( $expertise_descendant_list ) {
 
-			if ( !isset($expertise_descendant_section_show) ) {
-				$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query( $expertise_descendants );
-					$expertise_descendant_section_show = $expertise_descendant_query_vars['expertise_descendant_section_show']; // bool
-			}
+					if ( !isset($expertise_descendant_count) ) {
+						$page_id = isset($page_id) ? $page_id : get_the_ID();
+	
+						$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query( $page_id );
+							$expertise_descendant_count = $expertise_descendant_query_vars['expertise_descendant_count']; // int
+					}
+					$expertise_count = $expertise_descendant_count;
+			
+				} else {
 
-			if ( !isset($expertise_descendant_count) ) {
-				$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query( $expertise_descendants );
-					$expertise_descendant_count = $expertise_descendant_query_vars['expertise_descendant_count']; // int
-			}
+					$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query( $expertises );
+						$expertise_count = $expertise_query_vars['expertise_count']; // int
 
-			if ( !isset($hide_medical_ontology) ) {
-				$ontology_hide_vars = isset($ontology_hide_vars) ? $ontology_hide_vars : uamswp_fad_ontology_hide();
-					$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
+				}
+
 			}
 
 	?>

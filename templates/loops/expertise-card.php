@@ -45,6 +45,14 @@ if ( !$expertise_descendant_list ) {
 		$parent_title_attr = uamswp_attr_conversion($parent_title);
 		$parent_url = get_permalink($parent_id);
 	}
+} else {
+	$expertise_parent_id = '';
+	$expertise_has_parent = '';
+	$parent_expertise = '';
+	$parent_id = '';
+	$parent_title = '';
+	$parent_title_attr = '';
+	$parent_url = '';
 }
 
 $expertise_label = 'View ' . $expertise_single_name_attr . ' page for' . $expertise_title_attr;

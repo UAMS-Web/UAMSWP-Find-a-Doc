@@ -482,14 +482,12 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 	// Construct areas of expertise section
 
-		$expertise_descendants = isset($expertise_descendants) ? $expertise_descendants : ''; // List of this area of expertise item's descendant items
 		$expertise_descendant_list = isset($expertise_descendant_list) ? $expertise_descendant_list : false; // Query for whether this is a list of child areas of expertise within an area of expertise
 		$expertise_section_title = $expertise_fpage_title_clinical_resource; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of expertise section title in a general placement)
 		$expertise_section_intro = $expertise_fpage_intro_clinical_resource; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of expertise section intro text in a general placement)
 		function uamswp_fad_section_expertise__template() {
 
 			global $expertises;
-			global $expertise_descendants;
 			global $hide_medical_ontology;
 			global $expertise_section_show;
 			global $ontology_type;
@@ -498,8 +496,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 			global $expertise_section_intro;
 
 			uamswp_fad_section_expertise(
-				$expertises, // int[] // Value of the related areas of expertise input
-				$expertise_descendants, // int[] (optional) // List of this area of expertise item's descendant items
+				$expertises, // int[] // Value of the related areas of expertise input (or $expertise_descendants, List of this area of expertise item's descendant items)
 				$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
 				$expertise_section_show, // bool // Query for whether to show the area of expertise section
 				$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
