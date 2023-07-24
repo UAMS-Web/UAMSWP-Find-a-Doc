@@ -2224,6 +2224,10 @@ function uamswp_fad_ontology_appointment(
 // Add fake subpages to breadcrumbs
 function uamswp_fad_fpage_breadcrumbs($crumbs) {
 
+	// $crumbs is a multidimensional array.
+	//     First array: key=position,
+	//     second array: 0=>page title, 1=>URL, 2=>ID (since version 6.1)
+
 	// Bring in variables from outside of the function
 
 		// Typically defined on the template
