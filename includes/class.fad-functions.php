@@ -1528,19 +1528,10 @@ function uamswp_fad_post_title(
 // Queries for whether each of the related ontology content sections should be displayed on ontology pages/subsections
 
 	// Query for whether related providers content section should be displayed on ontology pages/subsections
-	function uamswp_fad_provider_query( $providers, $jump_link_count = 0 ) {
-
-		// Bring in variables from outside of the function
-
-			// Function Arguments
-			// 	$providers // int[]
-			// 	$jump_link_count // int
-
-			if ( !isset($providers) ) {
-				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
-					// $site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
-					$providers = $ontology_site_values_vars['providers'];
-			}
+	function uamswp_fad_provider_query(
+		$providers, // int[]
+		$jump_link_count = 0 // int
+	) {
 
 		if ( $providers ) {
 			$args = array(
@@ -1586,18 +1577,10 @@ function uamswp_fad_post_title(
 	}
 
 	// Query for whether related locations content section should be displayed on a page
-	function uamswp_fad_location_query( $locations ) {
-
-		// Bring in variables from outside of the function
-
-			// Typically defined on the template
-
-				global $jump_link_count;
-
-			if ( !isset($locations) ) {
-				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
-					$locations = $ontology_site_values_vars['locations']; // int[]
-			}
+	function uamswp_fad_location_query(
+		$locations, // int[]
+		$jump_link_count = 0 // int
+	) {
 
 		$location_valid = false;
 
@@ -1647,26 +1630,19 @@ function uamswp_fad_post_title(
 				'location_section_show'	=> $location_section_show, // bool
 				'location_ids'			=> $location_ids, // int[]
 				'location_count'		=> $location_count, // int
-				'location_valid'		=> $location_valid // bool
+				'location_valid'		=> $location_valid, // bool
+				'jump_link_count'		=> $jump_link_count // int
 			);
 			return $location_query_vars;
 
 	}
 
 	// Query for whether descendant locations content section should be displayed on a page
-	function uamswp_fad_location_descendant_query( $current_id, $location_descendants, $jump_link_count = 0 ) {
-
-		// Bring in variables from outside of the function
-
-			// Function Arguments
-			// 	$current_id // int
-			// 	$location_descendants // int[]
-			// 	$jump_link_count // int
-
-			if ( !isset($location_descendants) ) {
-				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
-					$location_descendants = $ontology_site_values_vars['location_descendants']; // int[] // Value of the related locations input
-			}
+	function uamswp_fad_location_descendant_query(
+		$current_id, // int
+		$location_descendants, // int[]
+		$jump_link_count = 0 // int
+	) {
 
 		$location_descendant_valid = false;
 
@@ -1729,13 +1705,12 @@ function uamswp_fad_post_title(
 	}
 
 	// Query for whether descendant areas of expertise content section should be displayed on ontology pages/subsections
-	function uamswp_fad_expertise_descendant_query( $page_id, $jump_link_count = 0 ) {
+	function uamswp_fad_expertise_descendant_query(
+		$page_id, // int
+		$jump_link_count = 0 // int
+	) {
 
 		// Bring in variables from outside of the function
-
-			// Function Arguments
-			// 	$page_id // int
-			// 	$jump_link_count // int
 
 			$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
 				$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
@@ -1855,18 +1830,10 @@ function uamswp_fad_post_title(
 	}
 
 	// Query for whether related areas of expertise content section should be displayed on ontology pages/subsections
-	function uamswp_fad_expertise_query( $expertises ) {
-
-		// Bring in variables from outside of the function
-
-			// Typically defined on the template
-
-				global $jump_link_count;
-
-			if ( !isset($expertises) ) {
-				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
-					$expertises = $ontology_site_values_vars['expertises']; // int[]
-			}
+	function uamswp_fad_expertise_query(
+		$expertises, // int[]
+		$jump_link_count = 0 // int
+	) {
 
 		if ( $expertises ) {
 			$args = array(
@@ -1899,7 +1866,8 @@ function uamswp_fad_post_title(
 				'expertise_query'			=> $expertise_query, // WP_Post[]
 				'expertise_section_show'	=> $expertise_section_show, // bool
 				'expertise_ids'				=> $expertise_ids, // int[]
-				'expertise_count'			=> $expertise_count // int
+				'expertise_count'			=> $expertise_count, // int
+				'jump_link_count'			=> $jump_link_count // int
 			);
 			return $expertise_query_vars;
 
@@ -1913,12 +1881,6 @@ function uamswp_fad_post_title(
 	) {
 
 		// Bring in variables from outside of the function
-
-			if ( !isset($clinical_resources) ) {
-				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
-					$clinical_resources = $ontology_site_values_vars['clinical_resources']; // int[] // Value of the related clinical resources input
-			}
-			$clinical_resources = array_is_list($clinical_resources) ? array_filter($clinical_resources) : array_values(array_filter($clinical_resources)); // remove empty items from array
 
 			if ( !isset($clinical_resource_posts_per_page) ) {
 				if ( !isset($clinical_resource_posts_per_page_section) ) {
@@ -1990,13 +1952,6 @@ function uamswp_fad_post_title(
 		$jump_link_count = 0
 	) {
 
-		// Bring in variables from outside of the function
-
-			if ( !isset($conditions_cpt) ) {
-				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
-					$conditions_cpt = $ontology_site_values_vars['conditions_cpt']; // int[] // Value of the related conditions input
-			}
-
 		if ( $conditions_cpt ) {
 			$args = array(
 				'post_type' => 'condition',
@@ -2036,7 +1991,8 @@ function uamswp_fad_post_title(
 				'condition_treatment_section_show'	=> $condition_treatment_section_show, // bool
 				'condition_ids'						=> $condition_ids, // int[]
 				'condition_count'					=> $condition_count, // int
-				'condition_treatment_schema'		=> $condition_treatment_schema // string
+				'condition_treatment_schema'		=> $condition_treatment_schema, // string
+				'jump_link_count'					=> $jump_link_count // int
 			);
 			return $condition_query_vars;
 
@@ -2049,13 +2005,6 @@ function uamswp_fad_post_title(
 		$ontology_type = true,
 		$jump_link_count = 0
 	) {
-
-		// Bring in variables from outside of the function
-
-			if ( !isset($treatments_cpt) ) {
-				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
-					$treatments_cpt = $ontology_site_values_vars['treatments_cpt']; // int[] // Value of the related treatments input
-			}
 
 		if ( $treatments_cpt ) {
 			$args = array(
@@ -2096,7 +2045,8 @@ function uamswp_fad_post_title(
 				'condition_treatment_section_show'	=> $condition_treatment_section_show, // bool
 				'treatment_ids'						=> $treatment_ids, // int[]
 				'treatment_count'					=> $treatment_count, // int
-				'condition_treatment_schema'		=> $condition_treatment_schema // string
+				'condition_treatment_schema'		=> $condition_treatment_schema, // string
+				'jump_link_count'					=> $jump_link_count // int
 			);
 			return $treatment_query_vars;
 
