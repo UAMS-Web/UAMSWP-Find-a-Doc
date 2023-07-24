@@ -2067,13 +2067,19 @@ function uamswp_fad_post_title(
 
 // Construct ontology subsection primary navigation
 function uamswp_fad_ontology_nav_menu(
-	$page_id // int
+	$page_id, // int // ID of the post
+	$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
+	$page_title, // string (optional) // Title of the post
+	$page_url // string (optional) // Permalink of the post
 ) {
 
 	// Bring in variables from outside of the function
 
 		$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
-			$page_id // int // ID of the post
+			$page_id, // int // ID of the post
+			$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
+			$page_title, // string (optional) // Title of the post
+			$page_url // string (optional) // Permalink of the post
 		);
 			$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
 			$providers = $ontology_site_values_vars['providers']; // int[]

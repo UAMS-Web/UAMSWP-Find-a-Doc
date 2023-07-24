@@ -372,10 +372,16 @@ add_action('wp_head','uamswp_keyword_hook_header');
 
 	// Add ontology subsection primary navigation
 	function uamswp_fad_ontology_nav_menu__template() {
-		global $page_id; 
+		global $page_id;
+		global $ontology_type;
+		global $page_title;
+		global $page_url;
 
 		uamswp_fad_ontology_nav_menu(
-			$page_id // int
+			$page_id, // int // ID of the post
+			$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
+			$page_title, // string (optional) // Title of the post
+			$page_url // string (optional) // Permalink of the post
 		);
 	}
 	add_action( 'genesis_after_header', 'uamswp_fad_ontology_nav_menu__template', 5 );
