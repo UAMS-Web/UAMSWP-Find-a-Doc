@@ -110,27 +110,37 @@ if ( $provider_section_show ) {
 			}
 
 			if ( !isset($providers) ) {
-				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
+				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
+					$page_id // int // ID of the post
+				);
 					$providers = $ontology_site_values_vars['providers']; // int[]
 			}
 
 			if ( !isset($provider_query) ) {
-				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query( $providers );
+				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
+					$providers // int[]
+				);
 					$provider_query = $provider_query_vars['provider_query']; // WP_Post[]
 			}
 
 			if ( !isset($provider_section_show) ) {
-				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query( $providers );
+				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
+					$providers // int[]
+				);
 					$provider_section_show = $provider_query_vars['provider_section_show']; // bool
 			}
 
 			if ( !isset($provider_ids) ) {
-				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query( $providers );
+				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
+					$providers // int[]
+				);
 					$provider_ids = $provider_query_vars['provider_ids']; // int[]
 			}
 
 			if ( !isset($provider_count) ) {
-				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query( $providers );
+				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
+					$providers // int[]
+				);
 					$provider_count = $provider_query_vars['provider_count']; // int
 			}
 

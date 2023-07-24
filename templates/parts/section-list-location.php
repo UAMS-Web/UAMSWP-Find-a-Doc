@@ -130,7 +130,9 @@ if ( $location_section_show ) {
 			}
 
 			if ( !isset($locations) ) {
-				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
+				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
+					$page_id // int // ID of the post
+				);
 					$locations = $ontology_site_values_vars['locations']; // int[]
 			}
 

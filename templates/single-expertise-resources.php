@@ -192,7 +192,12 @@ $fpage_intro = $clinical_resource_fpage_intro_expertise; // Fake subpage intro t
 $fpage_intro_attr = uamswp_attr_conversion($fpage_intro); // Attribute-friendly version of fake subpage intro text
 
 // Get site header and site nav values for ontology subsections
-$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
+$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
+	$page_id, // int // ID of the post
+	$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
+	$page_title, // string (optional) // Title of the post
+	$page_url // string (optional) // Permalink of the post
+);
 	$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
 	$navbar_subbrand_title = $ontology_site_values_vars['navbar_subbrand']['title']['name']; // string
 	$navbar_subbrand_title_attr = $ontology_site_values_vars['navbar_subbrand']['title']['attr']; // string
@@ -324,7 +329,14 @@ add_action('wp_head','uamswp_keyword_hook_header');
 	remove_action( 'genesis_header', 'uamswp_site_image', 5 );
 
 	// Add ontology subsection site header
-	add_action( 'genesis_header', 'uamswp_fad_ontology_header', 5 );
+	function uamswp_fad_ontology_header__template() {
+		global $page_id; 
+
+		uamswp_fad_ontology_header(
+			$page_id // int
+		);
+	}
+	add_action( 'genesis_header', 'uamswp_fad_ontology_header__template', 5 );
 
 // Modify primary navigation
 
@@ -333,7 +345,14 @@ add_action('wp_head','uamswp_keyword_hook_header');
 	remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
 
 	// Add ontology subsection primary navigation
-	add_action( 'genesis_after_header', 'uamswp_fad_ontology_nav_menu', 5 );
+	function uamswp_fad_ontology_nav_menu__template() {
+		global $page_id; 
+
+		uamswp_fad_ontology_nav_menu(
+			$page_id // int
+		);
+	}
+	add_action( 'genesis_after_header', 'uamswp_fad_ontology_nav_menu__template', 5 );
 
 // Add page template class to body element's classes
 add_filter( 'body_class', 'uamswp_page_body_class' );
@@ -445,7 +464,14 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	add_action( 'genesis_entry_content', 'uamswp_fad_section_clinical_resource__template', 14 );
 
 	// Display references to other archive pages
-	add_action( 'genesis_entry_content', 'uamswp_fad_fpage_text_image_overlay', 25);
+	function uamswp_fad_fpage_text_image_overlay__template() {
+		global $page_id; 
+
+		uamswp_fad_fpage_text_image_overlay(
+			$page_id // int
+		);
+	}
+	add_action( 'genesis_entry_content', 'uamswp_fad_fpage_text_image_overlay__template', 25 );
 
 	// Check if Make an Appointment section should be displayed
 

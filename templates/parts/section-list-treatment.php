@@ -152,7 +152,9 @@ if ( $treatment_section_show ) {
 			}
 
 			if ( !isset($treatments_cpt) ) {
-				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
+				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
+					$page_id // int // ID of the post
+				);
 					$treatments_cpt = $ontology_site_values_vars['treatments_cpt'];
 			}
 

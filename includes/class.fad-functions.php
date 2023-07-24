@@ -1289,16 +1289,12 @@ function uamswp_attr_conversion($input) {
 }
 
 // Get site header and site nav values for ontology subsections
-function uamswp_fad_ontology_site_values() {
-
-	// Bring in variables from outside of the function
-
-		// Typically defined on the template
-
-			global $page_id;
-			global $page_title;
-			global $page_url;
-			global $ontology_type;
+function uamswp_fad_ontology_site_values(
+	$page_id, // int // ID of the post
+	$ontology_type = true, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
+	$page_title = '', // string (optional) // Title of the post
+	$page_url = '' // string (optional) // Permalink of the post
+) {
 
 	// Ancestors
 
@@ -1712,7 +1708,9 @@ function uamswp_fad_post_title(
 
 		// Bring in variables from outside of the function
 
-			$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
+			$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
+				$page_id, // int // ID of the post
+			);
 				$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
 				$expertise_descendants = $ontology_site_values_vars['expertise_descendants'];
 
@@ -2053,11 +2051,15 @@ function uamswp_fad_post_title(
 	}
 
 // Construct ontology subsection primary navigation
-function uamswp_fad_ontology_nav_menu() {
+function uamswp_fad_ontology_nav_menu(
+	$page_id // int
+) {
 
 	// Bring in variables from outside of the function
 
-		$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
+		$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
+			$page_id, // int // ID of the post
+		);
 			$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
 			$providers = $ontology_site_values_vars['providers']; // int[]
 			$locations = $ontology_site_values_vars['locations']; // int[]
@@ -2108,11 +2110,15 @@ function uamswp_fad_ontology_nav_menu() {
 }
 
 // Construct ontology subsection site header
-function uamswp_fad_ontology_header() {
+function uamswp_fad_ontology_header(
+	$page_id // int
+) {
 
 	// Bring in variables from outside of the function
 
-		$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
+		$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
+			$page_id, // int // ID of the post
+		);
 			$navbar_subbrand_title = $ontology_site_values_vars['navbar_subbrand']['title']['name']; // string
 			$navbar_subbrand_title_url = $ontology_site_values_vars['navbar_subbrand']['title']['url']; // string
 			$navbar_subbrand_parent = $ontology_site_values_vars['navbar_subbrand']['parent']['name']; // string
@@ -7417,13 +7423,14 @@ function uamswp_section_text_image_overlay() {
 }
 
 // Construct UAMS Text & Image Overlay Block on Ontology Fake Subpages
-function uamswp_fad_fpage_text_image_overlay() {
+function uamswp_fad_fpage_text_image_overlay(
+	$page_id // int
+) {
 
 	// Bring in variables from outside of the function
 
 		// Defined on the template
 
-			global $page_id; // int
 			global $page_title; // string
 			global $ontology_type; // bool
 			global $text_image_overlay_id; // Section ID attribute value // string
@@ -7470,7 +7477,9 @@ function uamswp_fad_fpage_text_image_overlay() {
 				global $clinical_resource_fpage_ref_top_link_expertise; // Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources, link text // string
 			}
 
-		$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values();
+		$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
+			$page_id, // int // ID of the post
+		);
 			$page_top_level_query = $ontology_site_values_vars['page_top_level_query']; // Get whether this fake subpage's parent item is the top-level item // bool
 			$ancestors_ontology_farthest = $ontology_site_values_vars['ancestors_ontology_farthest']; // ID of the top-level ontology item ancestor of the current item // int
 
