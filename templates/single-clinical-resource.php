@@ -470,11 +470,13 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 	// Construct locations section
 
 		$location_section_schema_query = isset($location_section_schema_query) ? $location_section_schema_query : false;
-		$location_section_show_header = isset($location_section_show_header) ? $location_section_show_header : false;
 		$location_section_title = $location_fpage_title_clinical_resource; // Text to use for the section title
 		$location_section_intro = $location_fpage_intro_clinical_resource; // Text to use for the section intro text
-		$location_section_show_header = isset($location_section_show_header) ? $location_section_show_header : $location_section_show_header;
+		$location_section_show_header = isset($location_section_show_header) ? $location_section_show_header : true;
 		$location_section_filter = false; // Query for whether to add filter(s) // bool (default: true)
+		$location_section_filter_region = false; // Query for whether to add region filter
+		$location_section_filter_title = false; // Query for whether to add title filter
+		$location_section_collapse_list = false; // Query for whether to collapse the list of locations in the locations section
 		function uamswp_fad_section_location__template() {
 
 			global $locations;
@@ -486,6 +488,9 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 			global $location_section_intro;
 			global $location_section_show_header;
 			global $location_section_filter;
+			global $location_section_filter_region;
+			global $location_section_filter_title;
+			global $location_section_collapse_list;
 
 			uamswp_fad_section_location(
 				$locations, // int[] // Value of the related locations input
@@ -496,7 +501,10 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 				$location_section_title, // string (optional) // Text to use for the section title
 				$location_section_intro, // string (optional) // Text to use for the section intro text
 				$location_section_show_header, // bool (optional) // Query for whether to display the section header
-				$location_section_filter // bool (optional) // Query for whether to add filter(s)
+				$location_section_filter, // bool (optional) // Query for whether to add filter(s)
+				$location_section_filter_region, // bool (optional) // Query for whether to add region filter
+				$location_section_filter_title, // bool (optional) // Query for whether to add title filter
+				$location_section_collapse_list // bool (optional) // Query for whether to collapse the list of locations in the locations section
 			);
 
 		}
