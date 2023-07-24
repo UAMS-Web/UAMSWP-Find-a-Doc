@@ -107,6 +107,9 @@ $page_title_attr = uamswp_attr_conversion($page_title);
 // Get the page slug for the clinical resource
 $page_slug = $post->post_name;
 
+// Define the placement for content
+$content_placement = 'profile'; // Expected values: 'subsection' or 'profile'
+
 // Get system settings for text elements on Clinical Resource profile
 $fpage_text_clinical_resource_vars = isset($fpage_text_clinical_resource_vars) ? $fpage_text_clinical_resource_vars : uamswp_fad_fpage_text_clinical_resource();
 	$provider_fpage_title_clinical_resource = $fpage_text_clinical_resource_vars['provider_fpage_title_clinical_resource']; // string
@@ -502,6 +505,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 	// Construct areas of expertise section
 
 		$expertise_descendant_list = isset($expertise_descendant_list) ? $expertise_descendant_list : false; // Query for whether this is a list of child areas of expertise within an area of expertise
+		$site_nav_id = ''; // ID of post that defines the subsection
 		$expertise_section_title = $expertise_fpage_title_clinical_resource; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of expertise section title in a general placement)
 		$expertise_section_intro = $expertise_fpage_intro_clinical_resource; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of expertise section intro text in a general placement)
 		function uamswp_fad_section_expertise__template() {
@@ -511,6 +515,8 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 			global $expertise_section_show;
 			global $ontology_type;
 			global $expertise_descendant_list;
+			global $content_placement;
+			global $site_nav_id;
 			global $expertise_section_title;
 			global $expertise_section_intro;
 
@@ -520,6 +526,8 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 				$expertise_section_show, // bool // Query for whether to show the area of expertise section
 				$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
 				$expertise_descendant_list, // bool (optional) // Query for whether this is a list of child areas of expertise within an area of expertise
+				$content_placement, // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
+				$site_nav_id, // int (optional) // ID of post that defines the subsection
 				$expertise_section_title, // string (optional) // Text to use for the section title
 				$expertise_section_intro, // string (optional) // Text to use for the section intro text
 			);

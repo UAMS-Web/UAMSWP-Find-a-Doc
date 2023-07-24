@@ -103,6 +103,9 @@
 // Get the page ID
 $page_id = get_the_ID();
 
+// Define the placement for content
+$content_placement = 'profile'; // Expected values: 'subsection' or 'profile'
+
 // Construct name values for the provider
 
 	// Construct a list of the provider's degrees (e.g., "M.D., Ph.D.")

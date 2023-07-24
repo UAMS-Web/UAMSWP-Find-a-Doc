@@ -92,6 +92,9 @@ $page_title_attr = uamswp_attr_conversion($page_title);
 // Get the page URL for the 'parent' area of expertise
 $page_url = get_permalink();
 
+// Define the placement for content
+$content_placement = 'subsection'; // Expected values: 'subsection' or 'profile'
+
 // Area of Expertise Content Type
 $ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
 $ontology_type = isset($ontology_type) ? $ontology_type : 1; // Check if 'expertise_type' is not null, and if so, set value to true
@@ -240,7 +243,11 @@ $ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_
 		$location_valid = $location_query_vars['location_valid']; // bool
 
 	// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
-	$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query( $page_id );
+	$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query(
+		$expertise_descendants, // int[]
+		'subsection', // string (optional) // Expected values: 'subsection' or 'profile'
+		$site_nav_id // int (optional)
+	);
 		$expertise_descendant_query = $expertise_descendant_query_vars['expertise_descendant_query']; // WP_Post[]
 		$expertise_descendant_section_show = $expertise_descendant_query_vars['expertise_descendant_section_show']; // bool
 		$expertise_descendant_ids = $expertise_descendant_query_vars['expertise_descendant_ids']; // int[]
@@ -429,6 +436,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 
 	// Display ontology page content
 	$expertise_descendant_list = true;
+	$site_nav_id = ''; // ID of post that defines the subsection
 	$expertise_section_id = 'sub-expertise'; // Section ID // string (default: expertise)
 	$expertise_section_show_header = false; // Query whether to display the section header // bool (default: true)
 	$expertise_section_title = 'List of ' . $expertise_descendant_plural_name; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of expertise section title in a general placement)
@@ -440,6 +448,8 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		global $expertise_descendant_section_show;
 		global $ontology_type;
 		global $expertise_descendant_list;
+		global $content_placement;
+		global $site_nav_id;
 		global $expertise_section_title;
 		global $expertise_section_intro;
 
@@ -449,6 +459,8 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 			$expertise_descendant_section_show, // bool (optional) // Query for whether to show the area of expertise section
 			$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
 			$expertise_descendant_list, // bool (optional) // Query for whether this is a list of child areas of expertise within an area of expertise
+			$content_placement, // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
+			$site_nav_id, // int (optional) // ID of post that defines the subsection
 			$expertise_section_title, // string (optional) // Text to use for the section title
 			$expertise_section_intro, // string (optional) // Text to use for the section intro text
 		);

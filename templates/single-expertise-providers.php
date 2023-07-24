@@ -92,6 +92,9 @@ $page_title_attr = uamswp_attr_conversion($page_title);
 // Get the page URL for the 'parent' area of expertise
 $page_url = get_permalink();
 
+// Define the placement for content
+$content_placement = 'subsection'; // Expected values: 'subsection' or 'profile'
+
 // Area of Expertise Content Type
 $ontology_type = get_field('expertise_type'); // True is ontology type, false is content type
 $ontology_type = isset($ontology_type) ? $ontology_type : 1; // Check if 'expertise_type' is not null, and if so, set value to true
@@ -238,7 +241,11 @@ $ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_
 		$location_valid = $location_query_vars['location_valid']; // bool
 
 	// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
-	$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query( $page_id );
+	$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query(
+		$expertise_descendants, // int[]
+		'subsection', // string (optional) // Expected values: 'subsection' or 'profile'
+		$site_nav_id // int (optional)
+	);
 		$expertise_descendant_query = $expertise_descendant_query_vars['expertise_descendant_query']; // WP_Post[]
 		$expertise_descendant_section_show = $expertise_descendant_query_vars['expertise_descendant_section_show']; // bool
 		$expertise_descendant_ids = $expertise_descendant_query_vars['expertise_descendant_ids']; // int[]

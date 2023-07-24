@@ -1702,17 +1702,24 @@ function uamswp_fad_post_title(
 
 	// Query for whether descendant areas of expertise content section should be displayed on ontology pages/subsections
 	function uamswp_fad_expertise_descendant_query(
-		$page_id, // int
-		$jump_link_count = 0 // int
+		$expertise_descendants, // int[]
+		$content_placement = 'profile', // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
+		$site_nav_id = '', // int (optional)
+		$jump_link_count = 0 // int (optional)
 	) {
 
-		// Bring in variables from outside of the function
+		// Check/define variables
+
+		$content_placement = ( isset($content_placement) && !empty($content_placement) ) ? $content_placement : 'profile';
+
+		if ( !isset($site_nav_id) || empty($site_nav_id) ) {
+			$page_id = isset($page_id) ? $page_id : get_the_id();
 
 			$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
 				$page_id // int // ID of the post
 			);
 				$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
-				$expertise_descendants = $ontology_site_values_vars['expertise_descendants'];
+		}
 
 		if ( $expertise_descendants ) {
 
@@ -1756,46 +1763,54 @@ function uamswp_fad_post_title(
 				$expertise_descendant_count = 0;
 			}
 
-			$expertise_content_args = array(
-				'post_parent' => $site_nav_id,
-				'post_type' => 'expertise',
-				'post_status' => 'publish',
-				'posts_per_page' => -1, // We do not want to limit the post count
-				'order' => 'ASC',
-				'orderby' => 'title',
-				'meta_query' => array(
-					'relation' => 'AND',
-					array(
-						'key' => 'hide_from_sub_menu',
-						'value' => '1',
-						'compare' => '!=',
+			if ( $content_placement == 'subsection' ) {
+				$expertise_content_args = array(
+					'post_parent' => $site_nav_id,
+					'post_type' => 'expertise',
+					'post_status' => 'publish',
+					'posts_per_page' => -1, // We do not want to limit the post count
+					'order' => 'ASC',
+					'orderby' => 'title',
+					'meta_query' => array(
+						'relation' => 'AND',
+						array(
+							'key' => 'hide_from_sub_menu',
+							'value' => '1',
+							'compare' => '!=',
+						),
+						array(
+							'key' => 'expertise_type',
+							'value' => '0',
+							'compare' => '=',
+						),
 					),
-					array(
-						'key' => 'expertise_type',
-						'value' => '0',
-						'compare' => '=',
-					),
-				),
-			);
-			$expertise_content_query = new WP_Query( $expertise_content_args );
-			$expertise_content_nav = '';
-			if( ( $expertise_descendants && $expertise_content_query->have_posts() ) ) {
-				$expertise_content_nav_show = true;
-				$expertise_content_ids = $expertise_content_query->posts;
-				$expertise_content_count = count($expertise_content_query->posts);
-				while ( $expertise_content_query->have_posts() ) {
-					$expertise_content_query->the_post();
-					$page_id = get_the_ID();
-					$page_title = get_the_title();
-					$page_title_attr = uamswp_attr_conversion($page_title);
-					$page_url = get_permalink();
-					$expertise_content_nav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-'. $page_id .' nav-item active"><a title="'. $page_title_attr .'" href="'. $page_url .'" class="nav-link"><span itemprop="name">'. $page_title .'</span></a></li>';
-				} // endwhile
-				wp_reset_postdata();
+				);
+				$expertise_content_query = new WP_Query( $expertise_content_args );
+				$expertise_content_nav = '';
+				if( ( $expertise_descendants && $expertise_content_query->have_posts() ) ) {
+					$expertise_content_nav_show = true;
+					$expertise_content_ids = $expertise_content_query->posts;
+					$expertise_content_count = count($expertise_content_query->posts);
+					while ( $expertise_content_query->have_posts() ) {
+						$expertise_content_query->the_post();
+						$page_id = get_the_ID();
+						$page_title = get_the_title();
+						$page_title_attr = uamswp_attr_conversion($page_title);
+						$page_url = get_permalink();
+						$expertise_content_nav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-'. $page_id .' nav-item active"><a title="'. $page_title_attr .'" href="'. $page_url .'" class="nav-link"><span itemprop="name">'. $page_title .'</span></a></li>';
+					} // endwhile
+					wp_reset_postdata();
+				} else {
+					$expertise_content_nav_show = false;
+					$expertise_content_ids = '';
+					$expertise_content_count = 0;
+				}
 			} else {
+				$expertise_content_query = '';
 				$expertise_content_nav_show = false;
 				$expertise_content_ids = '';
 				$expertise_content_count = 0;
+				$expertise_content_nav = '';
 			}
 		} else {
 			$expertise_descendant_query = '';
@@ -2087,7 +2102,11 @@ function uamswp_fad_ontology_nav_menu(
 		);
 			$clinical_resource_section_show = $clinical_resource_query_vars['clinical_resource_section_show']; // bool
 
-		$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query( $expertise_descendants );
+		$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query(
+			$expertise_descendants, // int[]
+			'subsection', // string (optional) // Expected values: 'subsection' or 'profile'
+			$site_nav_id // int (optional)
+		);
 			$expertise_descendant_section_show = $expertise_descendant_query_vars['expertise_descendant_section_show']; // bool
 			$expertise_content_nav_show = $expertise_descendant_query_vars['expertise_content_nav_show']; // bool
 			$expertise_content_nav = $expertise_descendant_query_vars['expertise_content_nav']; // string
@@ -6950,6 +6969,8 @@ function uamswp_fad_section_provider(
 	$provider_section_show = false, // bool (optional) // Query for whether to show the provider section (or $provider_desecendant_section_show, Query for whether to show the descendant provider section)
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
 	// $provider_descendant_list = false, // bool (optional) // Query for whether this is a list of child provider items within a provider item
+	// $content_placement = 'profile', // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
+	// $site_nav_id = '', // int (optional) // ID of post that defines the subsection
 	$provider_section_title = '', // string (optional) // Text to use for the section title
 	$provider_section_intro = '', // string (optional) // Text to use for the section intro text
 	// $provider_section_more_show = true, // bool (optional) // Query for whether to show the section that links to more items
@@ -6987,6 +7008,8 @@ function uamswp_fad_section_location(
 	$location_section_show = false, // bool (optional) // Query for whether to show the location section (or $location_desecendant_section_show, Query for whether to show the descendant location section)
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
 	$location_descendant_list = false, // bool (optional) // Query for whether this is a list of child locations within a location
+	// $content_placement = 'profile', // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
+	// $site_nav_id = '', // int (optional) // ID of post that defines the subsection
 	$location_section_title = '', // string (optional) // Text to use for the section title
 	$location_section_intro = '', // string (optional) // Text to use for the section intro text
 	// $location_section_more_show = true, // bool (optional) // Query for whether to show the section that links to more items
@@ -7024,6 +7047,8 @@ function uamswp_fad_section_expertise(
 	$expertise_section_show = false, // bool (optional) // Query for whether to show the area of expertise section (or $expertise_desecendant_section_show, Query for whether to show the descendant area of expertise section)
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
 	$expertise_descendant_list = false, // bool (optional) // Query for whether this is a list of child areas of expertise within an area of expertise
+	$content_placement = 'profile', // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
+	$site_nav_id = '', // int (optional) // ID of post that defines the subsection
 	$expertise_section_title = '', // string (optional) // Text to use for the section title
 	$expertise_section_intro = '', // string (optional) // Text to use for the section intro text
 	// $expertise_section_more_show = true, // bool (optional) // Query for whether to show the section that links to more items
@@ -7061,6 +7086,8 @@ function uamswp_fad_section_clinical_resource(
 	$clinical_resource_section_show = false, // bool (optional) // Query for whether to show the clinical resource section (or $clinical_resource_desecendant_section_show, Query for whether to show the descendant clinical resource section)
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
 	// $clinical_resource_descendant_list = false, // bool (optional) // Query for whether this is a list of child location items within a location item
+	// $content_placement = 'profile', // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
+	// $site_nav_id = '', // int (optional) // ID of post that defines the subsection
 	$clinical_resource_section_title = '', // string (optional) // Text to use for the section title
 	$clinical_resource_section_intro = '', // string (optional) // Text to use for the section intro text
 	$clinical_resource_posts_per_page = '', // int (optional) // Maximum number of clinical resources to display (-1, 4, 6, 8, 10 or 12)
@@ -7099,6 +7126,8 @@ function uamswp_fad_section_condition(
 	$condition_section_show = false, // bool (optional) // Query for whether to show the conditions section (or $condition_desecendant_section_show, Query for whether to show the descendant condition section)
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
 	// $condition_descendant_list = false, // bool (optional) // Query for whether this is a list of child location items within a location item
+	// $content_placement = 'profile', // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
+	// $site_nav_id = '', // int (optional) // ID of post that defines the subsection
 	$condition_section_title = '', // string (optional) // Text to use for the section title
 	$condition_section_intro = '', // string (optional) // Text to use for the section intro text
 	// $condition_section_more_show = true, // bool (optional) // Query for whether to show the section that links to more items
@@ -7149,6 +7178,8 @@ function uamswp_fad_section_treatment(
 	$treatment_section_show = false, // bool (optional) // Query for whether to show the treatment section (or $treatment_desecendant_section_show, Query for whether to show the descendant treatment section)
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
 	// $treatment_descendant_list = false, // bool (optional) // Query for whether this is a list of child location items within a location item
+	// $content_placement = 'profile', // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
+	// $site_nav_id = '', // int (optional) // ID of post that defines the subsection
 	$treatment_section_title = '', // string (optional) // Text to use for the section title
 	$treatment_section_intro = '', // string (optional) // Text to use for the section intro text
 	// $treatment_section_more_show = true, // bool (optional) // Query for whether to show the section that links to more items
@@ -7203,6 +7234,8 @@ function uamswp_fad_section_condition_treatment(
 	$treatment_section_show = false, // bool (optional) // Query for whether to show the treatment section (or $treatment_desecendant_section_show, Query for whether to show the descendant treatment section)
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
 	// $condition_treatment_descendant_list = false, // bool (optional) // Query for whether this is a list of child location items within a location item
+	// $content_placement = 'profile', // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
+	// $site_nav_id = '', // int (optional) // ID of post that defines the subsection
 	$condition_treatment_section_title = '', // string (optional) // Text to use for the section title
 	$condition_treatment_section_intro = '', // string (optional) // Text to use for the section intro text
 	$condition_section_title = '', // string (optional) // Text to use for the conditions subsection title

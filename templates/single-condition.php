@@ -109,6 +109,9 @@ $page_title_attr = uamswp_attr_conversion($page_title);
 // Get the page slug for the condition
 $page_slug = $post->post_name;
 
+// Define the placement for content
+$content_placement = 'profile'; // Expected values: 'subsection' or 'profile'
+
 // Get system settings for jump links (a.k.a. anchor links)
 $labels_jump_links_vars = isset($labels_jump_links_vars) ? $labels_jump_links_vars : uamswp_fad_labels_jump_links();
 	$fad_jump_links_title = $labels_jump_links_vars['fad_jump_links_title']; // string
