@@ -426,16 +426,12 @@ if ( $condition_treatment_section_show ) {
 											}
 
 											// Define the MedicalSpecialty schema data attribute-value pairs
-											$schema_construct_arr = array();
-											$schema_construct_arr['@type'] = 'MedicalSpecialty';
-											$schema_construct_arr['name'] = $condition_title_attr;
-											if ( $condition_treatment_section_link_item ) {
-												$schema_construct_arr['url'] = $condition_url;
-											}
-
-											// Construct the MedicalSpecialty schema data
-											$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
-											$condition_treatment_schema .= uamswp_schema_construct($schema_construct_arr);
+											$schema_construct_arr = ( isset($schema_construct_arr) && is_array($schema_construct_arr) ) ? $schema_construct_arr : array();
+											$schema_construct_arr[] = array(
+												'@type' => 'MedicalSpecialty',
+												'name' => $condition_title_attr,
+												'url' => ( $condition_treatment_section_link_item ? $condition_url : '' )
+											);
 
 											?>
 											<li>
@@ -503,16 +499,12 @@ if ( $condition_treatment_section_show ) {
 											}
 
 											// Define the MedicalSpecialty schema data attribute-value pairs
-											$schema_construct_arr = array();
-											$schema_construct_arr['@type'] = 'MedicalSpecialty';
-											$schema_construct_arr['name'] = $treatment_title_attr;
-											if ( $condition_treatment_section_link_item ) {
-												$schema_construct_arr['url'] = $treatment_url;
-											}
-
-											// Construct the MedicalSpecialty schema data
-											$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
-											$condition_treatment_schema .= uamswp_schema_construct($schema_construct_arr);
+											$schema_construct_arr = ( isset($schema_construct_arr) && is_array($schema_construct_arr) ) ? $schema_construct_arr : array();
+											$schema_construct_arr[] = array(
+												'@type' => 'MedicalSpecialty',
+												'name' => $treatment_title_attr,
+												'url' => ( $condition_treatment_section_link_item ? $treatment_url : '' )
+											);
 
 											?>
 											<li>
@@ -556,4 +548,12 @@ if ( $condition_treatment_section_show ) {
 	</section>
 <?php 
 } // endif ( $treatment_section_show )
+
+// Construct the MedicalSpecialty schema data
+$condition_treatment_schema = uamswp_schema_construct(
+	$schema_construct_arr, // array
+	$schema_construct_item_count, // int // Number of items (curly bracket groups)
+	'MedicalSpecialty'
+);
+
 ?>

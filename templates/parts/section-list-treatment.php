@@ -265,7 +265,11 @@ if ( $treatment_section_show ) {
 
 									// Construct the MedicalSpecialty schema data
 									global $condition_treatment_schema;
-									$condition_treatment_schema .= uamswp_schema_construct($schema_construct_arr);
+									$condition_treatment_schema .= uamswp_schema_construct(
+										$schema_construct_arr, // array
+										$schema_construct_item_count, // int // Number of items (curly bracket groups)
+										$schema_construct_attr // string (optional) // Top-level schema attribute label
+									);
 
 									?>
 									<li>

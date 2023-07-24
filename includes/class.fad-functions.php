@@ -7406,7 +7406,12 @@ function uamswp_fad_section_condition_treatment(
 }
 
 // Define a schema block
-function uamswp_schema_construct($schema_construct_arr) {
+function uamswp_schema_construct(
+	$schema_construct_arr, // array
+	$schema_construct_item_count, // int // Number of items (curly bracket groups)
+	$schema_construct_attr = '', // string (optional) // Top-level schema attribute label
+	$i = 0 // int (optional)
+) {
 
 	/* 
 	 * Before the while loop...
@@ -7429,24 +7434,24 @@ function uamswp_schema_construct($schema_construct_arr) {
 	 * 	Define the relevant schema variable using this function.
 	 * 
 	 * 		Example:
-	 * 			$condition_treatment_schema .= uamswp_schema_construct($schema_construct_arr);
+	 * 			$condition_treatment_schema .= uamswp_schema_construct(
+	 * 				$schema_construct_arr, // array
+	 * 				$schema_construct_item_count, // int // Number of items (curly bracket groups)
+	 * 				$schema_construct_attr, // string (optional) // Top-level schema attribute label
+	 * 			);
 	 * 
 	 * 		Example:
-	 * 			$phone_schema = uamswp_schema_construct($schema_construct_arr);
+	 * 			$phone_schema = uamswp_schema_construct(
+	 * 				$schema_construct_arr, // array
+	 * 				$schema_construct_item_count, // int // Number of items (curly bracket groups)
+	 * 				$schema_construct_attr, // string (optional) // Top-level schema attribute label
+	 * 			);
 	 * 
 	 * 
 	 * At the end of the while loop...
 	 * 
 	 * 	Define '$i++;'.
 	 */
-
-	// Bring in variables from outside of the function
-
-		// Defined on the template
-
-			global $i;
-			global $schema_construct_item_count; // Count the number of items (curly bracket groups) // int
-			global $schema_construct_attr; // Define the top-level schema attribute label // string
 
 	// Check/define variables
 	$i = isset($i) ? $i : 0;

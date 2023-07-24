@@ -335,7 +335,11 @@ if ( $location_section_show ) {
 
 											// Construct the schema data
 											$location_schema = isset($location_schema) ? $location_schema : '';
-											$location_schema .= uamswp_schema_construct($schema_address_arr);
+											$location_schema .= uamswp_schema_construct(
+												$schema_address_arr, // array
+												$schema_construct_item_count, // int // Number of items (curly bracket groups)
+												$schema_construct_attr // string (optional) // Top-level schema attribute label
+											);
 
 											$i++;
 										}

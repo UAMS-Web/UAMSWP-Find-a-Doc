@@ -779,7 +779,11 @@ while ( have_posts() ) : the_post(); ?>
 						$schema_construct_arr['postalCode'] = $location_zip;
 
 						// Construct the schema data
-						$location_schema = uamswp_schema_construct($schema_construct_arr);
+						$location_schema = uamswp_schema_construct(
+							$schema_construct_arr, // array
+							$schema_construct_item_count, // int // Number of items (curly bracket groups)
+							$schema_construct_attr, // string (optional) // Top-level schema attribute label
+						);
 
 					?>
 					<h2>Contact Information</h2>
@@ -795,7 +799,11 @@ while ( have_posts() ) : the_post(); ?>
 						$schema_construct_item_count = count($schema_construct_arr);
 
 						// Construct the phone number schema data
-						$phone_schema = uamswp_schema_construct($schema_construct_arr);
+						$phone_schema = uamswp_schema_construct(
+							$schema_construct_arr, // array
+							$schema_construct_item_count, // int // Number of items (curly bracket groups)
+							$schema_construct_attr, // string (optional) // Top-level schema attribute label
+						);
 
 					// Hours values
 					$hoursvary = $location_hours_group['location_hours_variable'];
