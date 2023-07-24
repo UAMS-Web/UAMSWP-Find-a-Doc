@@ -2136,13 +2136,19 @@ function uamswp_fad_ontology_nav_menu(
 
 // Construct ontology subsection site header
 function uamswp_fad_ontology_header(
-	$page_id // int
+	$page_id, // int // ID of the post
+	$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
+	$page_title, // string (optional) // Title of the post
+	$page_url // string (optional) // Permalink of the post
 ) {
 
 	// Bring in variables from outside of the function
 
 		$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
-			$page_id // int // ID of the post
+			$page_id, // int // ID of the post
+			$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
+			$page_title, // string (optional) // Title of the post
+			$page_url // string (optional) // Permalink of the post
 		);
 			$navbar_subbrand_title = $ontology_site_values_vars['navbar_subbrand']['title']['name']; // string
 			$navbar_subbrand_title_url = $ontology_site_values_vars['navbar_subbrand']['title']['url']; // string
