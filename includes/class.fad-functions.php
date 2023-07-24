@@ -1787,7 +1787,7 @@ function uamswp_fad_post_title(
 					$expertise_content_query->the_post();
 					$page_id = get_the_ID();
 					$page_title = get_the_title();
-					$page_title_attr = uamswp_attr_conversion($title);
+					$page_title_attr = uamswp_attr_conversion($page_title);
 					$page_url = get_permalink();
 					$expertise_content_nav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-'. $page_id .' nav-item active"><a title="'. $page_title_attr .'" href="'. $page_url .'" class="nav-link"><span itemprop="name">'. $page_title .'</span></a></li>';
 				} // endwhile
