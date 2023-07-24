@@ -48,18 +48,6 @@ if ( $resource_excerpt_len > 160 ) {
 	$resource_excerpt = wp_trim_words( $resource_excerpt, 23, ' &hellip;' );
 }
 
-
-/*
- * Required vars for the single card layout:
- * $id
- * $resource_image_wide
- * $resource_title
- * $resource_type_label
- * $resource_excerpt
- * $resource_label
- * $resource_title_attr
- * $resource_button_text
- */
 $resource_image_wide = get_post_thumbnail_id($page_id);
 
 ?>
