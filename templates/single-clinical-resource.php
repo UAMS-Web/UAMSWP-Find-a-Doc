@@ -104,6 +104,11 @@ $page_id = get_the_ID();
 $page_title = get_the_title();
 $page_title_attr = uamswp_attr_conversion($page_title);
 
+// Array for page titles and section titles
+$page_titles = array(
+	'page_title'	=> $page_title
+);
+
 // Get the page slug for the clinical resource
 $page_slug = $post->post_name;
 
@@ -111,7 +116,9 @@ $page_slug = $post->post_name;
 $content_placement = 'profile'; // Expected values: 'subsection' or 'profile'
 
 // Get system settings for text elements on Clinical Resource profile
-$fpage_text_clinical_resource_vars = isset($fpage_text_clinical_resource_vars) ? $fpage_text_clinical_resource_vars : uamswp_fad_fpage_text_clinical_resource();
+$fpage_text_clinical_resource_vars = isset($fpage_text_clinical_resource_vars) ? $fpage_text_clinical_resource_vars : uamswp_fad_fpage_text_clinical_resource(
+	$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+);
 	$provider_fpage_title_clinical_resource = $fpage_text_clinical_resource_vars['provider_fpage_title_clinical_resource']; // string
 	$provider_fpage_intro_clinical_resource = $fpage_text_clinical_resource_vars['provider_fpage_intro_clinical_resource']; // string
 	$provider_fpage_ref_main_title_clinical_resource = $fpage_text_clinical_resource_vars['provider_fpage_ref_main_title_clinical_resource']; // string
@@ -371,6 +378,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 		$clinical_resource_section_more_show = false; // Query for whether to show the section that links to more items
 		function uamswp_fad_section_clinical_resource__template() {
 			global $clinical_resources;
+			global $page_titles;
 			global $clinical_resource_section_more_link_key;
 			global $clinical_resource_section_more_link_value;
 			global $clinical_resource_section_show;
@@ -382,6 +390,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 			uamswp_fad_section_clinical_resource(
 				$clinical_resources, // int[] // Value of the related clinical resources input
+				$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 				$clinical_resource_section_more_link_key, // string
 				$clinical_resource_section_more_link_value, // string
 				$clinical_resource_section_show, // bool (optional) // Query for whether to show the clinical resource section
@@ -407,6 +416,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 			global $conditions_cpt;
 			global $treatments_cpt;
+			global $page_titles;
 			global $hide_medical_ontology;
 			global $condition_treatment_section_show;
 			global $condition_section_show;
@@ -422,6 +432,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 			uamswp_fad_section_condition_treatment(
 				$conditions_cpt, // int[]
 				$treatments_cpt, // int[]
+				$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 				$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
 				$condition_treatment_section_show, // bool
 				$condition_section_show, // bool
@@ -447,6 +458,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 		function uamswp_fad_section_provider__template() {
 
 			global $providers;
+			global $page_titles;
 			global $provider_section_show;
 			global $ontology_type;
 			global $provider_section_title;
@@ -456,6 +468,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 			uamswp_fad_section_provider(
 				$providers, // int[] // Value of the related providers input
+				$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 				$provider_section_show, // bool (optional) // Query for whether to show the provider section
 				$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
 				$provider_section_title, // string (optional) // Text to use for the section title
@@ -480,6 +493,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 		function uamswp_fad_section_location__template() {
 
 			global $locations;
+			global $page_titles;
 			global $location_section_schema_query;
 			global $location_section_show;
 			global $ontology_type;
@@ -494,6 +508,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 			uamswp_fad_section_location(
 				$locations, // int[] // Value of the related locations input
+				$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 				$location_section_schema_query, // bool (optional) // Query for whether to add locations to schema
 				$location_section_show, // bool (optional) // Query for whether to show the location section
 				$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
@@ -519,6 +534,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 		function uamswp_fad_section_expertise__template() {
 
 			global $expertises;
+			global $page_titles;
 			global $hide_medical_ontology;
 			global $expertise_section_show;
 			global $ontology_type;
@@ -530,6 +546,7 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 			uamswp_fad_section_expertise(
 				$expertises, // int[] // Value of the related areas of expertise input (or $expertise_descendants, List of this area of expertise item's descendant items)
+				$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 				$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
 				$expertise_section_show, // bool // Query for whether to show the area of expertise section
 				$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type

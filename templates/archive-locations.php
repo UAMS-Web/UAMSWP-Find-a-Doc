@@ -77,6 +77,11 @@ $archive_text_location_vars = isset($archive_text_location_vars) ? $archive_text
 $page_title = $location_archive_headline; // string
 // $page_title_attr = uamswp_attr_conversion($page_title);
 
+// Array for page titles and section titles
+$page_titles = array(
+	'page_title'	=> $page_title
+);
+
 // // Get the page URL
 // $page_url = get_permalink();
 

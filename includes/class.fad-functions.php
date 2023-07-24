@@ -2340,24 +2340,27 @@ function uamswp_fad_podcast(
 }
 
 // Create substitutions for use regarding ontology text elements
-function uamswp_fad_fpage_text_replace($string) {
+function uamswp_fad_fpage_text_replace(
+	$string, // string
+	$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+) {
 
-	// Be sure to only call this function AFTER the following external global variables have been defined on the page
+	// Check/define variables
+
+		if ( !isset($page_title) ) {
+			$page_title = isset($page_titles['page_title']) ? $page_titles['page_title'] : '';
+		}
+		if ( !isset($page_title_phrase) ) {
+			$page_title_phrase = isset($page_titles['page_title_phrase']) ? $page_titles['page_title_phrase'] : '';
+		}
+		if ( !isset($short_name) ) {
+			$short_name = isset($page_titles['short_name']) ? $page_titles['short_name'] : '';
+		}
+		if ( !isset($short_name_possessive) ) {
+			$short_name_possessive = isset($page_titles['short_name_possessive']) ? $page_titles['short_name_possessive'] : '';
+		}
 
 	// Bring in variables from outside of the function
-
-		// Typically defined on the template: single location, single area of expertise
-
-			global $page_title;
-
-		// Typically defined on the template: single location
-
-			global $page_title_phrase;
-
-		// Typically defined on the template: single provider
-
-			global $short_name;
-			global $short_name_possessive;
 
 		$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
 			$provider_single_name = $labels_provider_vars['provider_single_name']; // string
@@ -3054,7 +3057,9 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get the Find-a-Doc Settings values for ontology text elements in general placements
 
 		// Get the Find-a-Doc Settings values for general values of ontology text elements on a fake subpage (or section) for Providers
-		function uamswp_fad_fpage_text_provider_general() {
+		function uamswp_fad_fpage_text_provider_general(
+			$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+		) {
 
 			// Get the Find-a-Doc Settings values for the text elements in general placements
 			$provider_fpage_title_general = get_field('provider_fpage_title_general', 'option'); // Fake subpage (or section), title
@@ -3078,14 +3083,14 @@ function uamswp_fad_fpage_text_replace($string) {
 			$provider_fpage_ref_top_link_general = ( isset($provider_fpage_ref_top_link_general) && !empty($provider_fpage_ref_top_link_general) ) ? $provider_fpage_ref_top_link_general : $provider_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, link text
 
 			// Substitute placeholder text for relevant Find-a-Doc Settings value
-			$provider_fpage_title_general = $provider_fpage_title_general ? uamswp_fad_fpage_text_replace($provider_fpage_title_general) : ''; // Fake subpage (or section), title
-			$provider_fpage_intro_general = $provider_fpage_intro_general ? uamswp_fad_fpage_text_replace($provider_fpage_intro_general) : ''; // Fake subpage (or section), intro text
-			$provider_fpage_ref_main_title_general = $provider_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_title_general) : ''; // Reference to the main provider archive, title
-			$provider_fpage_ref_main_intro_general = $provider_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_intro_general) : ''; // Reference to the main provider archive, body text
-			$provider_fpage_ref_main_link_general = $provider_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_link_general) : ''; // Reference to the main provider archive, link text
-			$provider_fpage_ref_top_title_general = $provider_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_title_general) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, title
-			$provider_fpage_ref_top_intro_general = $provider_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_intro_general) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, body text
-			$provider_fpage_ref_top_link_general = $provider_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_link_general) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, link text
+			$provider_fpage_title_general = $provider_fpage_title_general ? uamswp_fad_fpage_text_replace($provider_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
+			$provider_fpage_intro_general = $provider_fpage_intro_general ? uamswp_fad_fpage_text_replace($provider_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
+			$provider_fpage_ref_main_title_general = $provider_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main provider archive, title
+			$provider_fpage_ref_main_intro_general = $provider_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_intro_general, $page_titles) : ''; // Reference to the main provider archive, body text
+			$provider_fpage_ref_main_link_general = $provider_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_link_general, $page_titles) : ''; // Reference to the main provider archive, link text
+			$provider_fpage_ref_top_title_general = $provider_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_title_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, title
+			$provider_fpage_ref_top_intro_general = $provider_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, body text
+			$provider_fpage_ref_top_link_general = $provider_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, link text
 
 			// Create and return an array to be used on the templates and template parts
 
@@ -3104,7 +3109,9 @@ function uamswp_fad_fpage_text_replace($string) {
 		}
 
 		// Get the Find-a-Doc Settings values for general values of ontology text elements on a fake subpage (or section) for Locations
-		function uamswp_fad_fpage_text_location_general() {
+		function uamswp_fad_fpage_text_location_general(
+			$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+		) {
 
 			// Locations
 
@@ -3130,14 +3137,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				$location_fpage_ref_top_link_general = ( isset($location_fpage_ref_top_link_general) && !empty($location_fpage_ref_top_link_general) ) ? $location_fpage_ref_top_link_general : $location_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, link text
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
-				$location_fpage_title_general = $location_fpage_title_general ? uamswp_fad_fpage_text_replace($location_fpage_title_general) : ''; // Fake subpage (or section), title
-				$location_fpage_intro_general = $location_fpage_intro_general ? uamswp_fad_fpage_text_replace($location_fpage_intro_general) : ''; // Fake subpage (or section), intro text
-				$location_fpage_ref_main_title_general = $location_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_title_general) : ''; // Reference to the main location archive, title
-				$location_fpage_ref_main_intro_general = $location_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_intro_general) : ''; // Reference to the main location archive, body text
-				$location_fpage_ref_main_link_general = $location_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_link_general) : ''; // Reference to the main location archive, link text
-				$location_fpage_ref_top_title_general = $location_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_title_general) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, title
-				$location_fpage_ref_top_intro_general = $location_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_intro_general) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, body text
-				$location_fpage_ref_top_link_general = $location_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_link_general) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, link text
+				$location_fpage_title_general = $location_fpage_title_general ? uamswp_fad_fpage_text_replace($location_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
+				$location_fpage_intro_general = $location_fpage_intro_general ? uamswp_fad_fpage_text_replace($location_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
+				$location_fpage_ref_main_title_general = $location_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main location archive, title
+				$location_fpage_ref_main_intro_general = $location_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_intro_general, $page_titles) : ''; // Reference to the main location archive, body text
+				$location_fpage_ref_main_link_general = $location_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_link_general, $page_titles) : ''; // Reference to the main location archive, link text
+				$location_fpage_ref_top_title_general = $location_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_title_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, title
+				$location_fpage_ref_top_intro_general = $location_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, body text
+				$location_fpage_ref_top_link_general = $location_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, link text
 
 			// Descendant Locations
 
@@ -3163,14 +3170,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				$location_descendant_fpage_ref_top_link_general = ( isset($location_descendant_fpage_ref_top_link_general) && !empty($location_descendant_fpage_ref_top_link_general) ) ? $location_descendant_fpage_ref_top_link_general : $location_descendant_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, link text
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
-				$location_descendant_fpage_title_general = $location_descendant_fpage_title_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_title_general) : ''; // Fake subpage (or section), title
-				$location_descendant_fpage_intro_general = $location_descendant_fpage_intro_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_intro_general) : ''; // Fake subpage (or section), intro text
-				$location_descendant_fpage_ref_main_title_general = $location_descendant_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_title_general) : ''; // Reference to the main location archive, title
-				$location_descendant_fpage_ref_main_intro_general = $location_descendant_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_intro_general) : ''; // Reference to the main location archive, body text
-				$location_descendant_fpage_ref_main_link_general = $location_descendant_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_link_general) : ''; // Reference to the main location archive, link text
-				$location_descendant_fpage_ref_top_title_general = $location_descendant_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_top_title_general) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, title
-				$location_descendant_fpage_ref_top_intro_general = $location_descendant_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_top_intro_general) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, body text
-				$location_descendant_fpage_ref_top_link_general = $location_descendant_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_top_link_general) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, link text
+				$location_descendant_fpage_title_general = $location_descendant_fpage_title_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
+				$location_descendant_fpage_intro_general = $location_descendant_fpage_intro_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
+				$location_descendant_fpage_ref_main_title_general = $location_descendant_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main location archive, title
+				$location_descendant_fpage_ref_main_intro_general = $location_descendant_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_intro_general, $page_titles) : ''; // Reference to the main location archive, body text
+				$location_descendant_fpage_ref_main_link_general = $location_descendant_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_link_general, $page_titles) : ''; // Reference to the main location archive, link text
+				$location_descendant_fpage_ref_top_title_general = $location_descendant_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_top_title_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, title
+				$location_descendant_fpage_ref_top_intro_general = $location_descendant_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, body text
+				$location_descendant_fpage_ref_top_link_general = $location_descendant_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, link text
 
 			// Create and return an array to be used on the templates and template parts
 
@@ -3197,7 +3204,9 @@ function uamswp_fad_fpage_text_replace($string) {
 		}
 
 		// Get the Find-a-Doc Settings values for general values of ontology text elements on a fake subpage (or section) for Areas of Expertise
-		function uamswp_fad_fpage_text_expertise_general() {
+		function uamswp_fad_fpage_text_expertise_general(
+			$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+		) {
 
 			// Areas of Expertise
 
@@ -3223,14 +3232,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				$expertise_fpage_ref_top_link_general = ( isset($expertise_fpage_ref_top_link_general) && !empty($expertise_fpage_ref_top_link_general) ) ? $expertise_fpage_ref_top_link_general : $expertise_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, link text
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
-				$expertise_fpage_title_general = uamswp_fad_fpage_text_replace($expertise_fpage_title_general); // Fake subpage (or section), title
-				$expertise_fpage_intro_general = uamswp_fad_fpage_text_replace($expertise_fpage_intro_general); // Fake subpage (or section), intro text
-				$expertise_fpage_ref_main_title_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_title_general); // Reference to the main area of expertise archive, title
-				$expertise_fpage_ref_main_intro_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_intro_general); // Reference to the main area of expertise archive, body text
-				$expertise_fpage_ref_main_link_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_link_general); // Reference to the main area of expertise archive, link text
-				$expertise_fpage_ref_top_title_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_top_title_general); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, title
-				$expertise_fpage_ref_top_intro_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_top_intro_general); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, body text
-				$expertise_fpage_ref_top_link_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_top_link_general); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, link text
+				$expertise_fpage_title_general = uamswp_fad_fpage_text_replace($expertise_fpage_title_general, $page_titles); // Fake subpage (or section), title
+				$expertise_fpage_intro_general = uamswp_fad_fpage_text_replace($expertise_fpage_intro_general, $page_titles); // Fake subpage (or section), intro text
+				$expertise_fpage_ref_main_title_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_title_general, $page_titles); // Reference to the main area of expertise archive, title
+				$expertise_fpage_ref_main_intro_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_intro_general, $page_titles); // Reference to the main area of expertise archive, body text
+				$expertise_fpage_ref_main_link_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_link_general, $page_titles); // Reference to the main area of expertise archive, link text
+				$expertise_fpage_ref_top_title_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_top_title_general, $page_titles); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, title
+				$expertise_fpage_ref_top_intro_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_top_intro_general, $page_titles); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, body text
+				$expertise_fpage_ref_top_link_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_top_link_general, $page_titles); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, link text
 
 			// Descendant Areas of Expertise
 
@@ -3256,14 +3265,14 @@ function uamswp_fad_fpage_text_replace($string) {
 				$expertise_descendant_fpage_ref_top_link_general = ( isset($expertise_descendant_fpage_ref_top_link_general) && !empty($expertise_descendant_fpage_ref_top_link_general) ) ? $expertise_descendant_fpage_ref_top_link_general : $expertise_descendant_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, link text
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
-				$expertise_descendant_fpage_title_general = $expertise_descendant_fpage_title_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_title_general) : ''; // Fake subpage (or section), title
-				$expertise_descendant_fpage_intro_general = $expertise_descendant_fpage_intro_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_intro_general) : ''; // Fake subpage (or section), intro text
-				$expertise_descendant_fpage_ref_main_title_general = $expertise_descendant_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_title_general) : ''; // Reference to the main area of expertise archive, title
-				$expertise_descendant_fpage_ref_main_intro_general = $expertise_descendant_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_intro_general) : ''; // Reference to the main area of expertise archive, body text
-				$expertise_descendant_fpage_ref_main_link_general = $expertise_descendant_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_link_general) : ''; // Reference to the main area of expertise archive, link text
-				$expertise_descendant_fpage_ref_top_title_general = $expertise_descendant_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_top_title_general) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, title
-				$expertise_descendant_fpage_ref_top_intro_general = $expertise_descendant_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_top_intro_general) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, body text
-				$expertise_descendant_fpage_ref_top_link_general = $expertise_descendant_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_top_link_general) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, link text
+				$expertise_descendant_fpage_title_general = $expertise_descendant_fpage_title_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
+				$expertise_descendant_fpage_intro_general = $expertise_descendant_fpage_intro_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
+				$expertise_descendant_fpage_ref_main_title_general = $expertise_descendant_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main area of expertise archive, title
+				$expertise_descendant_fpage_ref_main_intro_general = $expertise_descendant_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_intro_general, $page_titles) : ''; // Reference to the main area of expertise archive, body text
+				$expertise_descendant_fpage_ref_main_link_general = $expertise_descendant_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_link_general, $page_titles) : ''; // Reference to the main area of expertise archive, link text
+				$expertise_descendant_fpage_ref_top_title_general = $expertise_descendant_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_top_title_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, title
+				$expertise_descendant_fpage_ref_top_intro_general = $expertise_descendant_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, body text
+				$expertise_descendant_fpage_ref_top_link_general = $expertise_descendant_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, link text
 
 			// Create and return an array to be used on the templates and template parts
 
@@ -3290,7 +3299,9 @@ function uamswp_fad_fpage_text_replace($string) {
 		}
 
 		// Get the Find-a-Doc Settings values for general values of ontology text elements on a fake subpage (or section) for Clinical Resources
-		function uamswp_fad_fpage_text_clinical_resource_general() {
+		function uamswp_fad_fpage_text_clinical_resource_general(
+			$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+		) {
 
 			// Get the Find-a-Doc Settings values for the text elements in general placements
 			$clinical_resource_fpage_title_general = get_field('clinical_resource_fpage_title_general', 'option'); // Fake subpage (or section), title
@@ -3320,17 +3331,17 @@ function uamswp_fad_fpage_text_replace($string) {
 			$clinical_resource_fpage_more_link_descr_general = ( isset($clinical_resource_fpage_more_link_descr_general) && !empty($clinical_resource_fpage_more_link_descr_general) ) ? $clinical_resource_fpage_more_link_descr_general : 'View the full list of related [clinical resources]'; // Fake subpage (or section), "More", link description
 
 			// Substitute placeholder text for relevant Find-a-Doc Settings value
-			$clinical_resource_fpage_title_general = $clinical_resource_fpage_title_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_general) : ''; // Fake subpage (or section), title
-			$clinical_resource_fpage_intro_general = $clinical_resource_fpage_intro_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_general) : ''; // Fake subpage (or section), intro text
-			$clinical_resource_fpage_ref_main_title_general = $clinical_resource_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_title_general) : ''; // Reference to the main clinical resource archive, title
-			$clinical_resource_fpage_ref_main_intro_general = $clinical_resource_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_intro_general) : ''; // Reference to the main clinical resource archive, body text
-			$clinical_resource_fpage_ref_main_link_general = $clinical_resource_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_link_general) : ''; // Reference to the main clinical resource archive, link text
-			$clinical_resource_fpage_ref_top_title_general = $clinical_resource_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_title_general) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, title
-			$clinical_resource_fpage_ref_top_intro_general = $clinical_resource_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_intro_general) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, body text
-			$clinical_resource_fpage_ref_top_link_general = $clinical_resource_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_link_general) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, link text
-			$clinical_resource_fpage_more_text_general = $clinical_resource_fpage_more_text_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_text_general) : ''; // Fake subpage (or section), "More", intro text
-			$clinical_resource_fpage_more_link_text_general = $clinical_resource_fpage_more_link_text_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_text_general) : ''; // Fake subpage (or section), "More", link text
-			$clinical_resource_fpage_more_link_descr_general = $clinical_resource_fpage_more_link_descr_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_descr_general) : ''; // Fake subpage (or section), "More", link description
+			$clinical_resource_fpage_title_general = $clinical_resource_fpage_title_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
+			$clinical_resource_fpage_intro_general = $clinical_resource_fpage_intro_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
+			$clinical_resource_fpage_ref_main_title_general = $clinical_resource_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main clinical resource archive, title
+			$clinical_resource_fpage_ref_main_intro_general = $clinical_resource_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_intro_general, $page_titles) : ''; // Reference to the main clinical resource archive, body text
+			$clinical_resource_fpage_ref_main_link_general = $clinical_resource_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_link_general, $page_titles) : ''; // Reference to the main clinical resource archive, link text
+			$clinical_resource_fpage_ref_top_title_general = $clinical_resource_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_title_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, title
+			$clinical_resource_fpage_ref_top_intro_general = $clinical_resource_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, body text
+			$clinical_resource_fpage_ref_top_link_general = $clinical_resource_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, link text
+			$clinical_resource_fpage_more_text_general = $clinical_resource_fpage_more_text_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_text_general, $page_titles) : ''; // Fake subpage (or section), "More", intro text
+			$clinical_resource_fpage_more_link_text_general = $clinical_resource_fpage_more_link_text_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_text_general, $page_titles) : ''; // Fake subpage (or section), "More", link text
+			$clinical_resource_fpage_more_link_descr_general = $clinical_resource_fpage_more_link_descr_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_descr_general, $page_titles) : ''; // Fake subpage (or section), "More", link description
 
 			// Create and return an array to be used on the templates and template parts
 
@@ -3352,7 +3363,9 @@ function uamswp_fad_fpage_text_replace($string) {
 		}
 
 		// Get the Find-a-Doc Settings values for general values of ontology text elements on a fake subpage (or section) for Conditions
-		function uamswp_fad_fpage_text_condition_general() {
+		function uamswp_fad_fpage_text_condition_general(
+			$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+		) {
 
 			// Get the Find-a-Doc Settings values for the text elements in general placements
 			$condition_fpage_title_general = get_field('conditions_fpage_title_general', 'option'); // Fake subpage (or section), title
@@ -3364,8 +3377,8 @@ function uamswp_fad_fpage_text_replace($string) {
 			$condition_fpage_intro_general = ( isset($condition_fpage_intro_general) && !empty($condition_fpage_intro_general) ) ? $condition_fpage_intro_general : 'UAMS Health [providers] care for a broad range of [conditions], some of which may not be listed below.'; // Fake subpage (or section), intro text
 
 			// Substitute placeholder text for relevant Find-a-Doc Settings value
-			$condition_fpage_title_general = uamswp_fad_fpage_text_replace($condition_fpage_title_general); // Fake subpage (or section), title
-			$condition_fpage_intro_general = uamswp_fad_fpage_text_replace($condition_fpage_intro_general); // Fake subpage (or section), intro text
+			$condition_fpage_title_general = uamswp_fad_fpage_text_replace($condition_fpage_title_general, $page_titles); // Fake subpage (or section), title
+			$condition_fpage_intro_general = uamswp_fad_fpage_text_replace($condition_fpage_intro_general, $page_titles); // Fake subpage (or section), intro text
 
 			// Create and return an array to be used on the templates and template parts
 
@@ -3378,7 +3391,9 @@ function uamswp_fad_fpage_text_replace($string) {
 		}
 
 		// Get the Find-a-Doc Settings values for general values of ontology text elements on a fake subpage (or section) for Treatments
-		function uamswp_fad_fpage_text_treatment_general() {
+		function uamswp_fad_fpage_text_treatment_general(
+			$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+		) {
 
 			// Get the Find-a-Doc Settings values for the text elements in general placements
 			$treatment_fpage_title_general = get_field('treatments_fpage_title_general', 'option'); // Fake subpage (or section), title
@@ -3390,8 +3405,8 @@ function uamswp_fad_fpage_text_replace($string) {
 			$treatment_fpage_intro_general = ( isset($treatment_fpage_intro_general) && !empty($treatment_fpage_intro_general) ) ? $treatment_fpage_intro_general : 'UAMS Health [providers] perform and prescribe a broad range of [treatments], some of which may not be listed below.'; // Fake subpage (or section), intro text
 
 			// Substitute placeholder text for relevant Find-a-Doc Settings value
-			$treatment_fpage_title_general = uamswp_fad_fpage_text_replace($treatment_fpage_title_general); // Fake subpage (or section), title
-			$treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($treatment_fpage_intro_general); // Fake subpage (or section), intro text
+			$treatment_fpage_title_general = uamswp_fad_fpage_text_replace($treatment_fpage_title_general, $page_titles); // Fake subpage (or section), title
+			$treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($treatment_fpage_intro_general, $page_titles); // Fake subpage (or section), intro text
 
 			// Create and return an array to be used on the templates and template parts
 
@@ -3404,7 +3419,9 @@ function uamswp_fad_fpage_text_replace($string) {
 		}
 
 		// Get the Find-a-Doc Settings values for general values of ontology text elements on a fake subpage (or section) for Conditions and Treatments combined
-		function uamswp_fad_fpage_text_condition_treatment_general() {
+		function uamswp_fad_fpage_text_condition_treatment_general(
+			$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+		) {
 
 			// Get the Find-a-Doc Settings values for the text elements in general placements
 			$condition_treatment_fpage_title_general = get_field('condition_treatment_fpage_title_general', 'option'); // Fake subpage (or section), title
@@ -3416,8 +3433,8 @@ function uamswp_fad_fpage_text_replace($string) {
 			$condition_treatment_fpage_intro_general = ( isset($condition_treatment_fpage_intro_general) && !empty($condition_treatment_fpage_intro_general) ) ? $condition_treatment_fpage_intro_general : 'UAMS Health [providers] perform and prescribe a broad range of [treatments] for a broad range of [conditions], some of which may not be listed below.'; // Fake subpage (or section), intro text
 
 			// Substitute placeholder text for relevant Find-a-Doc Settings value
-			$condition_treatment_fpage_title_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_general); // Fake subpage (or section), title
-			$condition_treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_general); // Fake subpage (or section), intro text
+			$condition_treatment_fpage_title_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_general, $page_titles); // Fake subpage (or section), title
+			$condition_treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_general, $page_titles); // Fake subpage (or section), intro text
 
 			// Create and return an array to be used on the templates and template parts
 
@@ -3432,7 +3449,9 @@ function uamswp_fad_fpage_text_replace($string) {
 	// Get Find-a-Doc Settings values and page-level values for ontology text elements in specific subsections and single profiles
 
 		// Get field values for fake subpage text elements in an Provider subsection (or profile)
-		function uamswp_fad_fpage_text_provider() {
+		function uamswp_fad_fpage_text_provider(
+			$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+		) {
 
 			// Locations Fake Subpage (or Section)
 
@@ -3490,7 +3509,9 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($location_fpage_ref_main_link_general) || empty($location_fpage_ref_main_link_general)
 							) {
-							$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general();
+							$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$location_fpage_title_general = $fpage_text_location_general_vars['location_fpage_title_general']; // string
 								$location_fpage_intro_general = $fpage_text_location_general_vars['location_fpage_intro_general']; // string
 								$location_fpage_ref_main_title_general = $fpage_text_location_general_vars['location_fpage_ref_main_title_general']; // string
@@ -3516,11 +3537,11 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$location_fpage_title_provider = $location_fpage_title_provider ? uamswp_fad_fpage_text_replace($location_fpage_title_provider) : ''; // Title
-					$location_fpage_intro_provider = $location_fpage_intro_provider ? uamswp_fad_fpage_text_replace($location_fpage_intro_provider) : ''; // Intro text
-					$location_fpage_ref_main_title_provider = $location_fpage_ref_main_title_provider ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_title_provider) : ''; // Reference to the main location archive, title
-					$location_fpage_ref_main_intro_provider = $location_fpage_ref_main_intro_provider ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_intro_provider) : ''; // Reference to the main location archive, body text
-					$location_fpage_ref_main_link_provider = $location_fpage_ref_main_link_provider ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_link_provider) : ''; // Reference to the main location archive, link text
+					$location_fpage_title_provider = $location_fpage_title_provider ? uamswp_fad_fpage_text_replace($location_fpage_title_provider, $page_titles) : ''; // Title
+					$location_fpage_intro_provider = $location_fpage_intro_provider ? uamswp_fad_fpage_text_replace($location_fpage_intro_provider, $page_titles) : ''; // Intro text
+					$location_fpage_ref_main_title_provider = $location_fpage_ref_main_title_provider ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_title_provider, $page_titles) : ''; // Reference to the main location archive, title
+					$location_fpage_ref_main_intro_provider = $location_fpage_ref_main_intro_provider ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_intro_provider, $page_titles) : ''; // Reference to the main location archive, body text
+					$location_fpage_ref_main_link_provider = $location_fpage_ref_main_link_provider ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_link_provider, $page_titles) : ''; // Reference to the main location archive, link text
 
 			// Areas of Expertise Fake Subpage (or Section)
 
@@ -3578,7 +3599,9 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($expertise_fpage_ref_main_link_general) || empty($expertise_fpage_ref_main_link_general)
 							) {
-							$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
+							$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$expertise_fpage_title_general = $fpage_text_expertise_general_vars['expertise_fpage_title_general']; // string
 								$expertise_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_intro_general']; // string
 								$expertise_fpage_ref_main_title_general = $fpage_text_expertise_general_vars['expertise_fpage_ref_main_title_general']; // string
@@ -3604,11 +3627,11 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$expertise_fpage_title_provider = $expertise_fpage_title_provider ? uamswp_fad_fpage_text_replace($expertise_fpage_title_provider) : ''; // Title
-					$expertise_fpage_intro_provider = $expertise_fpage_intro_provider ? uamswp_fad_fpage_text_replace($expertise_fpage_intro_provider) : ''; // Intro text
-					$expertise_fpage_ref_main_title_provider = $expertise_fpage_ref_main_title_provider ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_title_provider) : ''; // Reference to the main area of expertise archive, title
-					$expertise_fpage_ref_main_intro_provider = $expertise_fpage_ref_main_intro_provider ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_intro_provider) : ''; // Reference to the main area of expertise archive, body text
-					$expertise_fpage_ref_main_link_provider = $expertise_fpage_ref_main_link_provider ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_link_provider) : ''; // Reference to the main area of expertise archive, link text
+					$expertise_fpage_title_provider = $expertise_fpage_title_provider ? uamswp_fad_fpage_text_replace($expertise_fpage_title_provider, $page_titles) : ''; // Title
+					$expertise_fpage_intro_provider = $expertise_fpage_intro_provider ? uamswp_fad_fpage_text_replace($expertise_fpage_intro_provider, $page_titles) : ''; // Intro text
+					$expertise_fpage_ref_main_title_provider = $expertise_fpage_ref_main_title_provider ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_title_provider, $page_titles) : ''; // Reference to the main area of expertise archive, title
+					$expertise_fpage_ref_main_intro_provider = $expertise_fpage_ref_main_intro_provider ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_intro_provider, $page_titles) : ''; // Reference to the main area of expertise archive, body text
+					$expertise_fpage_ref_main_link_provider = $expertise_fpage_ref_main_link_provider ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_link_provider, $page_titles) : ''; // Reference to the main area of expertise archive, link text
 
 			// Clinical Resources Fake Subpage (or Section)
 
@@ -3690,7 +3713,9 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general)
 							) {
-							$fpage_text_clinical_resource_general_vars = isset($fpage_text_clinical_resource_general_vars) ? $fpage_text_clinical_resource_general_vars : uamswp_fad_fpage_text_clinical_resource_general();
+							$fpage_text_clinical_resource_general_vars = isset($fpage_text_clinical_resource_general_vars) ? $fpage_text_clinical_resource_general_vars : uamswp_fad_fpage_text_clinical_resource_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$clinical_resource_fpage_title_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_title_general']; // string
 								$clinical_resource_fpage_intro_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_intro_general']; // string
 								$clinical_resource_fpage_ref_main_title_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_main_title_general']; // string
@@ -3728,14 +3753,14 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$clinical_resource_fpage_title_provider = $clinical_resource_fpage_title_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_provider) : ''; // Title
-					$clinical_resource_fpage_intro_provider = $clinical_resource_fpage_intro_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_provider) : ''; // Intro text
-					$clinical_resource_fpage_ref_main_title_provider = $clinical_resource_fpage_ref_main_title_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_title_provider) : ''; // Reference to the main clinical resource archive, title
-					$clinical_resource_fpage_ref_main_intro_provider = $clinical_resource_fpage_ref_main_intro_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_intro_provider) : ''; // Reference to the main clinical resource archive, body text
-					$clinical_resource_fpage_ref_main_link_provider = $clinical_resource_fpage_ref_main_link_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_link_provider) : ''; // Reference to the main clinical resource archive, link text
-					$clinical_resource_fpage_more_text_provider = $clinical_resource_fpage_more_text_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_text_provider) : ''; // "More" intro text
-					$clinical_resource_fpage_more_link_text_provider = $clinical_resource_fpage_more_link_text_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_text_provider) : ''; // "More" link text
-					$clinical_resource_fpage_more_link_descr_provider = $clinical_resource_fpage_more_link_descr_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_descr_provider) : ''; // "More" link description
+					$clinical_resource_fpage_title_provider = $clinical_resource_fpage_title_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_provider, $page_titles) : ''; // Title
+					$clinical_resource_fpage_intro_provider = $clinical_resource_fpage_intro_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_provider, $page_titles) : ''; // Intro text
+					$clinical_resource_fpage_ref_main_title_provider = $clinical_resource_fpage_ref_main_title_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_title_provider, $page_titles) : ''; // Reference to the main clinical resource archive, title
+					$clinical_resource_fpage_ref_main_intro_provider = $clinical_resource_fpage_ref_main_intro_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_intro_provider, $page_titles) : ''; // Reference to the main clinical resource archive, body text
+					$clinical_resource_fpage_ref_main_link_provider = $clinical_resource_fpage_ref_main_link_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_link_provider, $page_titles) : ''; // Reference to the main clinical resource archive, link text
+					$clinical_resource_fpage_more_text_provider = $clinical_resource_fpage_more_text_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_text_provider, $page_titles) : ''; // "More" intro text
+					$clinical_resource_fpage_more_link_text_provider = $clinical_resource_fpage_more_link_text_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_text_provider, $page_titles) : ''; // "More" link text
+					$clinical_resource_fpage_more_link_descr_provider = $clinical_resource_fpage_more_link_descr_provider ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_descr_provider, $page_titles) : ''; // "More" link description
 
 			// Conditions Fake Subpage (or Section)
 
@@ -3757,14 +3782,18 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($condition_fpage_title_provider) || empty($condition_fpage_title_provider) ) {
 						if ( !isset($condition_fpage_title_general) || empty($condition_fpage_title_general) ) {
-							$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general();
+							$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
 						}
 						$condition_fpage_title_provider = $condition_fpage_title_general; // Title
 					}
 					if ( !isset($condition_fpage_intro_provider) || empty($condition_fpage_intro_provider) ) {
 						if ( !isset($condition_fpage_intro_general) || empty($condition_fpage_intro_general) ) {
-							$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general();
+							$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
 						}
 						$condition_fpage_intro_provider = $condition_fpage_intro_general; // Intro text
@@ -3772,8 +3801,8 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$condition_fpage_title_provider = $condition_fpage_title_provider ? uamswp_fad_fpage_text_replace($condition_fpage_title_provider) : ''; // Title
-					$condition_fpage_intro_provider = $condition_fpage_intro_provider ? uamswp_fad_fpage_text_replace($condition_fpage_intro_provider) : ''; // Intro text
+					$condition_fpage_title_provider = $condition_fpage_title_provider ? uamswp_fad_fpage_text_replace($condition_fpage_title_provider, $page_titles) : ''; // Title
+					$condition_fpage_intro_provider = $condition_fpage_intro_provider ? uamswp_fad_fpage_text_replace($condition_fpage_intro_provider, $page_titles) : ''; // Intro text
 
 			// Treatments Fake Subpage (or Section)
 
@@ -3795,14 +3824,18 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($treatment_fpage_title_provider) || empty($treatment_fpage_title_provider) ) {
 						if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
-							$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general();
+							$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
 						}
 						$treatment_fpage_title_provider = $treatment_fpage_title_general; // Title
 					}
 					if ( !isset($treatment_fpage_intro_provider) || empty($treatment_fpage_intro_provider) ) {
 						if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
-							$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general();
+							$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
 						}
 						$treatment_fpage_intro_provider = $treatment_fpage_intro_general; // Intro text
@@ -3810,8 +3843,8 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$treatment_fpage_title_provider = $treatment_fpage_title_provider ? uamswp_fad_fpage_text_replace($treatment_fpage_title_provider) : ''; // Title
-					$treatment_fpage_intro_provider = $treatment_fpage_intro_provider ? uamswp_fad_fpage_text_replace($treatment_fpage_intro_provider) : ''; // Intro text
+					$treatment_fpage_title_provider = $treatment_fpage_title_provider ? uamswp_fad_fpage_text_replace($treatment_fpage_title_provider, $page_titles) : ''; // Title
+					$treatment_fpage_intro_provider = $treatment_fpage_intro_provider ? uamswp_fad_fpage_text_replace($treatment_fpage_intro_provider, $page_titles) : ''; // Intro text
 
 
 			// Combined Conditions and Treatments Fake Subpage (or Section)
@@ -3834,14 +3867,18 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($condition_treatment_fpage_title_provider) || empty($condition_treatment_fpage_title_provider) ) {
 						if ( !isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general) ) {
-							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general();
+							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_title_general']; // string
 						}
 						$condition_treatment_fpage_title_provider = $condition_treatment_fpage_title_general; // Title
 					}
 					if ( !isset($condition_treatment_fpage_intro_provider) || empty($condition_treatment_fpage_intro_provider) ) {
 						if ( !isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general) ) {
-							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general();
+							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_intro_general']; // string
 						}
 						$condition_treatment_fpage_intro_provider = $condition_treatment_fpage_intro_general; // Intro text
@@ -3849,8 +3886,8 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$condition_treatment_fpage_title_provider = $condition_treatment_fpage_title_provider ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_provider) : ''; // Title
-					$condition_treatment_fpage_intro_provider = $condition_treatment_fpage_intro_provider ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_provider) : ''; // Intro text
+					$condition_treatment_fpage_title_provider = $condition_treatment_fpage_title_provider ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_provider, $page_titles) : ''; // Title
+					$condition_treatment_fpage_intro_provider = $condition_treatment_fpage_intro_provider ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_provider, $page_titles) : ''; // Intro text
 
 			// Create and return an array to be used on the templates and template parts
 
@@ -3885,7 +3922,9 @@ function uamswp_fad_fpage_text_replace($string) {
 		}
 
 		// Get field values for fake subpage text elements in an Location subsection (or profile)
-		function uamswp_fad_fpage_text_location() {
+		function uamswp_fad_fpage_text_location(
+			$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+		) {
 
 			// Providers Fake Subpage (or Section)
 
@@ -3951,7 +3990,9 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($provider_fpage_ref_top_link_general) || empty($provider_fpage_ref_top_link_general)
 							) {
-							$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general();
+							$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$provider_fpage_title_general = $fpage_text_provider_general_vars['provider_fpage_title_general']; // string
 								$provider_fpage_intro_general = $fpage_text_provider_general_vars['provider_fpage_intro_general']; // string
 								$provider_fpage_ref_main_title_general = $fpage_text_provider_general_vars['provider_fpage_ref_main_title_general']; // string
@@ -3973,14 +4014,14 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$provider_fpage_title_location = $provider_fpage_title_location ? uamswp_fad_fpage_text_replace($provider_fpage_title_location) : ''; // Title
-					$provider_fpage_intro_location = $provider_fpage_intro_location ? uamswp_fad_fpage_text_replace($provider_fpage_intro_location) : ''; // Intro text
-					$provider_fpage_ref_main_title_location = $provider_fpage_ref_main_title_location ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_title_location) : ''; // Reference to the main provider archive, title
-					$provider_fpage_ref_main_intro_location = $provider_fpage_ref_main_intro_location ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_intro_location) : ''; // Reference to the main provider archive, body text
-					$provider_fpage_ref_main_link_location = $provider_fpage_ref_main_link_location ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_link_location) : ''; // Reference to the main provider archive, link text
-					$provider_fpage_ref_top_title_location = $provider_fpage_ref_top_title_location ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_title_location) : ''; // Reference to a Top-Level Location's Fake Subpage for Providers, title
-					$provider_fpage_ref_top_intro_location = $provider_fpage_ref_top_intro_location ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_intro_location) : ''; // Reference to a Top-Level Location's Fake Subpage for Providers, body text
-					$provider_fpage_ref_top_link_location = $provider_fpage_ref_top_link_location ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_link_location) : ''; // Reference to a Top-Level Location's Fake Subpage for Providers, link text
+					$provider_fpage_title_location = $provider_fpage_title_location ? uamswp_fad_fpage_text_replace($provider_fpage_title_location, $page_titles) : ''; // Title
+					$provider_fpage_intro_location = $provider_fpage_intro_location ? uamswp_fad_fpage_text_replace($provider_fpage_intro_location, $page_titles) : ''; // Intro text
+					$provider_fpage_ref_main_title_location = $provider_fpage_ref_main_title_location ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_title_location, $page_titles) : ''; // Reference to the main provider archive, title
+					$provider_fpage_ref_main_intro_location = $provider_fpage_ref_main_intro_location ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_intro_location, $page_titles) : ''; // Reference to the main provider archive, body text
+					$provider_fpage_ref_main_link_location = $provider_fpage_ref_main_link_location ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_link_location, $page_titles) : ''; // Reference to the main provider archive, link text
+					$provider_fpage_ref_top_title_location = $provider_fpage_ref_top_title_location ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_title_location, $page_titles) : ''; // Reference to a Top-Level Location's Fake Subpage for Providers, title
+					$provider_fpage_ref_top_intro_location = $provider_fpage_ref_top_intro_location ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_intro_location, $page_titles) : ''; // Reference to a Top-Level Location's Fake Subpage for Providers, body text
+					$provider_fpage_ref_top_link_location = $provider_fpage_ref_top_link_location ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_link_location, $page_titles) : ''; // Reference to a Top-Level Location's Fake Subpage for Providers, link text
 
 			// Descendant Locations Fake Subpage (or Section)
 
@@ -4028,7 +4069,9 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($location_descendant_fpage_ref_main_link_general) || empty($location_descendant_fpage_ref_main_link_general)
 							) {
-							$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general();
+							$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$location_descendant_fpage_title_general = $fpage_text_location_general_vars['location_descendant_fpage_title_general']; // string
 								$location_descendant_fpage_intro_general = $fpage_text_location_general_vars['location_descendant_fpage_intro_general']; // string
 								$location_descendant_fpage_ref_main_title_general = $fpage_text_location_general_vars['location_descendant_fpage_ref_main_title_general']; // string
@@ -4054,11 +4097,11 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$location_descendant_fpage_title_location = $location_descendant_fpage_title_location ? uamswp_fad_fpage_text_replace($location_descendant_fpage_title_location) : ''; // Title
-					$location_descendant_fpage_intro_location = $location_descendant_fpage_intro_location ? uamswp_fad_fpage_text_replace($location_descendant_fpage_intro_location) : ''; // Intro text
-					$location_descendant_fpage_ref_main_title_location = $location_descendant_fpage_ref_main_title_location ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_title_location) : ''; // Reference to the main location archive, title
-					$location_descendant_fpage_ref_main_intro_location = $location_descendant_fpage_ref_main_intro_location ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_intro_location) : ''; // Reference to the main location archive, body text
-					$location_descendant_fpage_ref_main_link_location = $location_descendant_fpage_ref_main_link_location ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_link_location) : ''; // Reference to the main location archive, link text
+					$location_descendant_fpage_title_location = $location_descendant_fpage_title_location ? uamswp_fad_fpage_text_replace($location_descendant_fpage_title_location, $page_titles) : ''; // Title
+					$location_descendant_fpage_intro_location = $location_descendant_fpage_intro_location ? uamswp_fad_fpage_text_replace($location_descendant_fpage_intro_location, $page_titles) : ''; // Intro text
+					$location_descendant_fpage_ref_main_title_location = $location_descendant_fpage_ref_main_title_location ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_title_location, $page_titles) : ''; // Reference to the main location archive, title
+					$location_descendant_fpage_ref_main_intro_location = $location_descendant_fpage_ref_main_intro_location ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_intro_location, $page_titles) : ''; // Reference to the main location archive, body text
+					$location_descendant_fpage_ref_main_link_location = $location_descendant_fpage_ref_main_link_location ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_link_location, $page_titles) : ''; // Reference to the main location archive, link text
 
 			// Areas of Expertise Fake Subpage (or Section)
 
@@ -4140,7 +4183,9 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($expertise_fpage_ref_top_link_general) || empty($expertise_fpage_ref_top_link_general)
 							) {
-							$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
+							$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$expertise_fpage_title_general = $fpage_text_expertise_general_vars['expertise_fpage_title_general']; // string
 								$expertise_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_intro_general']; // string
 								$expertise_fpage_ref_main_title_general = $fpage_text_expertise_general_vars['expertise_fpage_ref_main_title_general']; // string
@@ -4178,14 +4223,14 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$expertise_fpage_title_location = $expertise_fpage_title_location ? uamswp_fad_fpage_text_replace($expertise_fpage_title_location) : ''; // Title
-					$expertise_fpage_intro_location = $expertise_fpage_intro_location ? uamswp_fad_fpage_text_replace($expertise_fpage_intro_location) : ''; // Intro text
-					$expertise_fpage_ref_main_title_location = $expertise_fpage_ref_main_title_location ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_title_location) : ''; // Reference to the main area of expertise archive, title
-					$expertise_fpage_ref_main_intro_location = $expertise_fpage_ref_main_intro_location ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_intro_location) : ''; // Reference to the main area of expertise archive, body text
-					$expertise_fpage_ref_main_link_location = $expertise_fpage_ref_main_link_location ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_link_location) : ''; // Reference to the main area of expertise archive, link text
-					$expertise_fpage_ref_top_title_location = $expertise_fpage_ref_top_title_location ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_top_title_location) : ''; // Reference to a Top-Level Location's Fake Subpage for Areas of Expertise, title
-					$expertise_fpage_ref_top_intro_location = $expertise_fpage_ref_top_intro_location ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_top_intro_location) : ''; // Reference to a Top-Level Location's Fake Subpage for Areas of Expertise, body text
-					$expertise_fpage_ref_top_link_location = $expertise_fpage_ref_top_link_location ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_top_link_location) : ''; // Reference to a Top-Level Location's Fake Subpage for Areas of Expertise, link text
+					$expertise_fpage_title_location = $expertise_fpage_title_location ? uamswp_fad_fpage_text_replace($expertise_fpage_title_location, $page_titles) : ''; // Title
+					$expertise_fpage_intro_location = $expertise_fpage_intro_location ? uamswp_fad_fpage_text_replace($expertise_fpage_intro_location, $page_titles) : ''; // Intro text
+					$expertise_fpage_ref_main_title_location = $expertise_fpage_ref_main_title_location ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_title_location, $page_titles) : ''; // Reference to the main area of expertise archive, title
+					$expertise_fpage_ref_main_intro_location = $expertise_fpage_ref_main_intro_location ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_intro_location, $page_titles) : ''; // Reference to the main area of expertise archive, body text
+					$expertise_fpage_ref_main_link_location = $expertise_fpage_ref_main_link_location ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_link_location, $page_titles) : ''; // Reference to the main area of expertise archive, link text
+					$expertise_fpage_ref_top_title_location = $expertise_fpage_ref_top_title_location ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_top_title_location, $page_titles) : ''; // Reference to a Top-Level Location's Fake Subpage for Areas of Expertise, title
+					$expertise_fpage_ref_top_intro_location = $expertise_fpage_ref_top_intro_location ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_top_intro_location, $page_titles) : ''; // Reference to a Top-Level Location's Fake Subpage for Areas of Expertise, body text
+					$expertise_fpage_ref_top_link_location = $expertise_fpage_ref_top_link_location ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_top_link_location, $page_titles) : ''; // Reference to a Top-Level Location's Fake Subpage for Areas of Expertise, link text
 
 			// Clinical Resources Fake Subpage (or Section)
 
@@ -4291,7 +4336,9 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general)
 							) {
-							$fpage_text_clinical_resource_general_vars = isset($fpage_text_clinical_resource_general_vars) ? $fpage_text_clinical_resource_general_vars : uamswp_fad_fpage_text_clinical_resource_general();
+							$fpage_text_clinical_resource_general_vars = isset($fpage_text_clinical_resource_general_vars) ? $fpage_text_clinical_resource_general_vars : uamswp_fad_fpage_text_clinical_resource_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$clinical_resource_fpage_title_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_title_general']; // string
 								$clinical_resource_fpage_intro_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_intro_general']; // string
 								$clinical_resource_fpage_ref_main_title_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_main_title_general']; // string
@@ -4341,17 +4388,17 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$clinical_resource_fpage_title_location = $clinical_resource_fpage_title_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_location) : ''; // Title
-					$clinical_resource_fpage_intro_location = $clinical_resource_fpage_intro_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_location) : ''; // Intro text
-					$clinical_resource_fpage_ref_main_title_location = $clinical_resource_fpage_ref_main_title_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_title_location) : ''; // Reference to the main clinical resource archive, title
-					$clinical_resource_fpage_ref_main_intro_location = $clinical_resource_fpage_ref_main_intro_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_intro_location) : ''; // Reference to the main clinical resource archive, body text
-					$clinical_resource_fpage_ref_main_link_location = $clinical_resource_fpage_ref_main_link_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_link_location) : ''; // Reference to the main clinical resource archive, link text
-					$clinical_resource_fpage_ref_top_title_location = $clinical_resource_fpage_ref_top_title_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_title_location) : ''; // Reference to a Top-Level Location's Fake Subpage for Clinical Resources, title
-					$clinical_resource_fpage_ref_top_intro_location = $clinical_resource_fpage_ref_top_intro_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_intro_location) : ''; // Reference to a Top-Level Location's Fake Subpage for Clinical Resources, body text
-					$clinical_resource_fpage_ref_top_link_location = $clinical_resource_fpage_ref_top_link_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_link_location) : ''; // Reference to a Top-Level Location's Fake Subpage for Clinical Resources, link text
-					$clinical_resource_fpage_more_text_location = $clinical_resource_fpage_more_text_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_text_location) : ''; // "More" intro text
-					$clinical_resource_fpage_more_link_text_location = $clinical_resource_fpage_more_link_text_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_text_location) : ''; // "More" link text
-					$clinical_resource_fpage_more_link_descr_location = $clinical_resource_fpage_more_link_descr_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_descr_location) : ''; // "More" link description
+					$clinical_resource_fpage_title_location = $clinical_resource_fpage_title_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_location, $page_titles) : ''; // Title
+					$clinical_resource_fpage_intro_location = $clinical_resource_fpage_intro_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_location, $page_titles) : ''; // Intro text
+					$clinical_resource_fpage_ref_main_title_location = $clinical_resource_fpage_ref_main_title_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_title_location, $page_titles) : ''; // Reference to the main clinical resource archive, title
+					$clinical_resource_fpage_ref_main_intro_location = $clinical_resource_fpage_ref_main_intro_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_intro_location, $page_titles) : ''; // Reference to the main clinical resource archive, body text
+					$clinical_resource_fpage_ref_main_link_location = $clinical_resource_fpage_ref_main_link_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_link_location, $page_titles) : ''; // Reference to the main clinical resource archive, link text
+					$clinical_resource_fpage_ref_top_title_location = $clinical_resource_fpage_ref_top_title_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_title_location, $page_titles) : ''; // Reference to a Top-Level Location's Fake Subpage for Clinical Resources, title
+					$clinical_resource_fpage_ref_top_intro_location = $clinical_resource_fpage_ref_top_intro_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_intro_location, $page_titles) : ''; // Reference to a Top-Level Location's Fake Subpage for Clinical Resources, body text
+					$clinical_resource_fpage_ref_top_link_location = $clinical_resource_fpage_ref_top_link_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_link_location, $page_titles) : ''; // Reference to a Top-Level Location's Fake Subpage for Clinical Resources, link text
+					$clinical_resource_fpage_more_text_location = $clinical_resource_fpage_more_text_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_text_location, $page_titles) : ''; // "More" intro text
+					$clinical_resource_fpage_more_link_text_location = $clinical_resource_fpage_more_link_text_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_text_location, $page_titles) : ''; // "More" link text
+					$clinical_resource_fpage_more_link_descr_location = $clinical_resource_fpage_more_link_descr_location ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_descr_location, $page_titles) : ''; // "More" link description
 
 			// Conditions Fake Subpage (or Section)
 
@@ -4373,14 +4420,18 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($condition_fpage_title_location) || empty($condition_fpage_title_location) ) {
 						if ( !isset($condition_fpage_title_general) || empty($condition_fpage_title_general) ) {
-							$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general();
+							$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
 						}
 						$condition_fpage_title_location = $condition_fpage_title_general; // Title
 					}
 					if ( !isset($condition_fpage_intro_location) || empty($condition_fpage_intro_location) ) {
 						if ( !isset($condition_fpage_intro_general) || empty($condition_fpage_intro_general) ) {
-							$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general();
+							$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
 						}
 						$condition_fpage_intro_location = $condition_fpage_intro_general; // Intro text
@@ -4388,8 +4439,8 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$condition_fpage_title_location = $condition_fpage_title_location ? uamswp_fad_fpage_text_replace($condition_fpage_title_location) : ''; // Title
-					$condition_fpage_intro_location = $condition_fpage_intro_location ? uamswp_fad_fpage_text_replace($condition_fpage_intro_location) : ''; // Intro text
+					$condition_fpage_title_location = $condition_fpage_title_location ? uamswp_fad_fpage_text_replace($condition_fpage_title_location, $page_titles) : ''; // Title
+					$condition_fpage_intro_location = $condition_fpage_intro_location ? uamswp_fad_fpage_text_replace($condition_fpage_intro_location, $page_titles) : ''; // Intro text
 
 			// Treatments Fake Subpage (or Section)
 
@@ -4411,14 +4462,18 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($treatment_fpage_title_location) || empty($treatment_fpage_title_location) ) {
 						if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
-							$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general();
+							$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
 						}
 						$treatment_fpage_title_location = $treatment_fpage_title_general; // Title
 					}
 					if ( !isset($treatment_fpage_intro_location) || empty($treatment_fpage_intro_location) ) {
 						if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
-							$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general();
+							$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
 						}
 						$treatment_fpage_intro_location = $treatment_fpage_intro_general; // Intro text
@@ -4426,8 +4481,8 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$treatment_fpage_title_location = $treatment_fpage_title_location ? uamswp_fad_fpage_text_replace($treatment_fpage_title_location) : ''; // Title
-					$treatment_fpage_intro_location = $treatment_fpage_intro_location ? uamswp_fad_fpage_text_replace($treatment_fpage_intro_location) : ''; // Intro text
+					$treatment_fpage_title_location = $treatment_fpage_title_location ? uamswp_fad_fpage_text_replace($treatment_fpage_title_location, $page_titles) : ''; // Title
+					$treatment_fpage_intro_location = $treatment_fpage_intro_location ? uamswp_fad_fpage_text_replace($treatment_fpage_intro_location, $page_titles) : ''; // Intro text
 
 
 			// Combined Conditions and Treatments Fake Subpage (or Section)
@@ -4450,14 +4505,18 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($condition_treatment_fpage_title_location) || empty($condition_treatment_fpage_title_location) ) {
 						if ( !isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general) ) {
-							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general();
+							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_title_general']; // string
 						}
 						$condition_treatment_fpage_title_location = $condition_treatment_fpage_title_general; // Title
 					}
 					if ( !isset($condition_treatment_fpage_intro_location) || empty($condition_treatment_fpage_intro_location) ) {
 						if ( !isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general) ) {
-							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general();
+							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_intro_general']; // string
 						}
 						$condition_treatment_fpage_intro_location = $condition_treatment_fpage_intro_general; // Intro text
@@ -4465,8 +4524,8 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$condition_treatment_fpage_title_location = $condition_treatment_fpage_title_location ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_location) : ''; // Title
-					$condition_treatment_fpage_intro_location = $condition_treatment_fpage_intro_location ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_location) : ''; // Intro text
+					$condition_treatment_fpage_title_location = $condition_treatment_fpage_title_location ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_location, $page_titles) : ''; // Title
+					$condition_treatment_fpage_intro_location = $condition_treatment_fpage_intro_location ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_location, $page_titles) : ''; // Intro text
 
 			// Create and return an array to be used on the templates and template parts
 
@@ -4517,9 +4576,13 @@ function uamswp_fad_fpage_text_replace($string) {
 		// Get field values for fake subpage text elements in an Area of Expertise subsection (or profile)
 		function uamswp_fad_fpage_text_expertise(
 			$page_id, // int
-			$page_title, // string
+			$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 			$ontology_type // bool
 		) {
+
+			if ( !isset($page_title) ) {
+				$page_title = isset($page_titles['page_title']) ? $page_titles['page_title'] : get_the_title();
+			}
 
 			// Overview
 
@@ -4622,7 +4685,7 @@ function uamswp_fad_fpage_text_replace($string) {
 						$expertise_short_desc = get_field('expertise_short_desc');
 
 						// Substitute placeholder text for the relevant Find-a-Doc Settings value
-						$expertise_short_desc = ( isset($expertise_short_desc) && !empty($expertise_short_desc) ) ? uamswp_fad_fpage_text_replace($expertise_short_desc) : $expertise_short_desc;
+						$expertise_short_desc = ( isset($expertise_short_desc) && !empty($expertise_short_desc) ) ? uamswp_fad_fpage_text_replace($expertise_short_desc, $page_titles) : $expertise_short_desc;
 
 						// If the short description is not set or is empty, use the intro text as a fallback value
 						$expertise_short_desc = ( isset($expertise_short_desc) && !empty($expertise_short_desc) ) ? $expertise_short_desc : $expertise_page_intro;
@@ -4723,7 +4786,9 @@ function uamswp_fad_fpage_text_replace($string) {
 								||
 								!isset($provider_fpage_ref_top_link_general) || empty($provider_fpage_ref_top_link_general)
 								) {
-								$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general();
+								$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general(
+									$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+								);
 									$provider_fpage_title_general = $fpage_text_provider_general_vars['provider_fpage_title_general']; // string
 									$provider_fpage_intro_general = $fpage_text_provider_general_vars['provider_fpage_intro_general']; // string
 									$provider_fpage_ref_main_title_general = $fpage_text_provider_general_vars['provider_fpage_ref_main_title_general']; // string
@@ -4761,14 +4826,14 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-						$provider_fpage_title_expertise = $provider_fpage_title_expertise ? uamswp_fad_fpage_text_replace($provider_fpage_title_expertise) : ''; // Title
-						$provider_fpage_intro_expertise = $provider_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($provider_fpage_intro_expertise) : ''; // Intro text
-						$provider_fpage_ref_main_title_expertise = $provider_fpage_ref_main_title_expertise ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_title_expertise) : ''; // Reference to the main provider archive, title
-						$provider_fpage_ref_main_intro_expertise = $provider_fpage_ref_main_intro_expertise ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_intro_expertise) : ''; // Reference to the main provider archive, body text
-						$provider_fpage_ref_main_link_expertise = $provider_fpage_ref_main_link_expertise ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_link_expertise) : ''; // Reference to the main provider archive, link text
-						$provider_fpage_ref_top_title_expertise = $provider_fpage_ref_top_title_expertise ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_title_expertise) : ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Providers, title
-						$provider_fpage_ref_top_intro_expertise = $provider_fpage_ref_top_intro_expertise ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_intro_expertise) : ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Providers, body text
-						$provider_fpage_ref_top_link_expertise = $provider_fpage_ref_top_link_expertise ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_link_expertise) : ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Providers, link text
+						$provider_fpage_title_expertise = $provider_fpage_title_expertise ? uamswp_fad_fpage_text_replace($provider_fpage_title_expertise, $page_titles) : ''; // Title
+						$provider_fpage_intro_expertise = $provider_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($provider_fpage_intro_expertise, $page_titles) : ''; // Intro text
+						$provider_fpage_ref_main_title_expertise = $provider_fpage_ref_main_title_expertise ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_title_expertise, $page_titles) : ''; // Reference to the main provider archive, title
+						$provider_fpage_ref_main_intro_expertise = $provider_fpage_ref_main_intro_expertise ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_intro_expertise, $page_titles) : ''; // Reference to the main provider archive, body text
+						$provider_fpage_ref_main_link_expertise = $provider_fpage_ref_main_link_expertise ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_link_expertise, $page_titles) : ''; // Reference to the main provider archive, link text
+						$provider_fpage_ref_top_title_expertise = $provider_fpage_ref_top_title_expertise ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_title_expertise, $page_titles) : ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Providers, title
+						$provider_fpage_ref_top_intro_expertise = $provider_fpage_ref_top_intro_expertise ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_intro_expertise, $page_titles) : ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Providers, body text
+						$provider_fpage_ref_top_link_expertise = $provider_fpage_ref_top_link_expertise ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_link_expertise, $page_titles) : ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Providers, link text
 
 				// Get value for meta description
 
@@ -4778,7 +4843,7 @@ function uamswp_fad_fpage_text_replace($string) {
 						$provider_fpage_short_desc_expertise = $provider_fpage_intro_expertise;
 					} else {
 						$provider_fpage_short_desc_expertise = get_field('expertise_providers_fpage_short_desc');
-						$provider_fpage_short_desc_expertise = ( isset($provider_fpage_short_desc_expertise) && !empty($provider_fpage_short_desc_expertise) ) ? uamswp_fad_fpage_text_replace($provider_fpage_short_desc_expertise) : $provider_fpage_short_desc_expertise; // Substitute placeholder text for relevant Find-a-Doc Settings value
+						$provider_fpage_short_desc_expertise = ( isset($provider_fpage_short_desc_expertise) && !empty($provider_fpage_short_desc_expertise) ) ? uamswp_fad_fpage_text_replace($provider_fpage_short_desc_expertise, $page_titles) : $provider_fpage_short_desc_expertise; // Substitute placeholder text for relevant Find-a-Doc Settings value
 						$provider_fpage_short_desc_expertise = ( isset($provider_fpage_short_desc_expertise) && !empty($provider_fpage_short_desc_expertise) ) ? $provider_fpage_short_desc_expertise : $provider_fpage_intro_expertise; // If there is no value, use intro text as a fallback value
 					}
 
@@ -4876,7 +4941,9 @@ function uamswp_fad_fpage_text_replace($string) {
 								||
 								!isset($location_fpage_ref_top_link_general) || empty($location_fpage_ref_top_link_general)
 								) {
-								$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general();
+								$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general(
+									$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+								);
 									$location_fpage_title_general = $fpage_text_location_general_vars['location_fpage_title_general']; // string
 									$location_fpage_intro_general = $fpage_text_location_general_vars['location_fpage_intro_general']; // string
 									$location_fpage_ref_main_title_general = $fpage_text_location_general_vars['location_fpage_ref_main_title_general']; // string
@@ -4914,14 +4981,14 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-						$location_fpage_title_expertise = $location_fpage_title_expertise ? uamswp_fad_fpage_text_replace($location_fpage_title_expertise) : ''; // Title
-						$location_fpage_intro_expertise = $location_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($location_fpage_intro_expertise) : ''; // Intro text
-						$location_fpage_ref_main_title_expertise = $location_fpage_ref_main_title_expertise ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_title_expertise) : ''; // Reference to the main location archive, title
-						$location_fpage_ref_main_intro_expertise = $location_fpage_ref_main_intro_expertise ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_intro_expertise) : ''; // Reference to the main location archive, body text
-						$location_fpage_ref_main_link_expertise = $location_fpage_ref_main_link_expertise ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_link_expertise) : ''; // Reference to the main location archive, link text
-						$location_fpage_ref_top_title_expertise = $location_fpage_ref_top_title_expertise ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_title_expertise) : ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Locations, title
-						$location_fpage_ref_top_intro_expertise = $location_fpage_ref_top_intro_expertise ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_intro_expertise) : ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Locations, body text
-						$location_fpage_ref_top_link_expertise = $location_fpage_ref_top_link_expertise ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_link_expertise) : ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Locations, link text
+						$location_fpage_title_expertise = $location_fpage_title_expertise ? uamswp_fad_fpage_text_replace($location_fpage_title_expertise, $page_titles) : ''; // Title
+						$location_fpage_intro_expertise = $location_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($location_fpage_intro_expertise, $page_titles) : ''; // Intro text
+						$location_fpage_ref_main_title_expertise = $location_fpage_ref_main_title_expertise ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_title_expertise, $page_titles) : ''; // Reference to the main location archive, title
+						$location_fpage_ref_main_intro_expertise = $location_fpage_ref_main_intro_expertise ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_intro_expertise, $page_titles) : ''; // Reference to the main location archive, body text
+						$location_fpage_ref_main_link_expertise = $location_fpage_ref_main_link_expertise ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_link_expertise, $page_titles) : ''; // Reference to the main location archive, link text
+						$location_fpage_ref_top_title_expertise = $location_fpage_ref_top_title_expertise ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_title_expertise, $page_titles) : ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Locations, title
+						$location_fpage_ref_top_intro_expertise = $location_fpage_ref_top_intro_expertise ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_intro_expertise, $page_titles) : ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Locations, body text
+						$location_fpage_ref_top_link_expertise = $location_fpage_ref_top_link_expertise ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_link_expertise, $page_titles) : ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Locations, link text
 
 				// Get value for meta description
 
@@ -4931,7 +4998,7 @@ function uamswp_fad_fpage_text_replace($string) {
 						$location_fpage_short_desc_expertise = $location_fpage_intro_expertise;
 					} else {
 						$location_fpage_short_desc_expertise = get_field('expertise_locations_fpage_short_desc');
-						$location_fpage_short_desc_expertise = ( isset($location_fpage_short_desc_expertise) && !empty($location_fpage_short_desc_expertise) ) ? uamswp_fad_fpage_text_replace($location_fpage_short_desc_expertise) : $location_fpage_short_desc_expertise; // Substitute placeholder text for relevant Find-a-Doc Settings value
+						$location_fpage_short_desc_expertise = ( isset($location_fpage_short_desc_expertise) && !empty($location_fpage_short_desc_expertise) ) ? uamswp_fad_fpage_text_replace($location_fpage_short_desc_expertise, $page_titles) : $location_fpage_short_desc_expertise; // Substitute placeholder text for relevant Find-a-Doc Settings value
 						$location_fpage_short_desc_expertise = ( isset($location_fpage_short_desc_expertise) && !empty($location_fpage_short_desc_expertise) ) ? $location_fpage_short_desc_expertise : $location_fpage_intro_expertise; // If there is no value, use intro text as a fallback value
 					}
 
@@ -5005,7 +5072,9 @@ function uamswp_fad_fpage_text_replace($string) {
 								||
 								!isset($expertise_descendant_fpage_ref_main_link_general) || empty($expertise_descendant_fpage_ref_main_link_general)
 								) {
-								$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
+								$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
+									$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+								);
 									$expertise_descendant_fpage_title_general = $fpage_text_expertise_general_vars['expertise_descendant_fpage_title_general']; // string
 									$expertise_descendant_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_descendant_fpage_intro_general']; // string
 									$expertise_descendant_fpage_ref_main_title_general = $fpage_text_expertise_general_vars['expertise_descendant_fpage_ref_main_title_general']; // string
@@ -5031,11 +5100,11 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-						$expertise_descendant_fpage_title_expertise = $expertise_descendant_fpage_title_expertise ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_title_expertise) : ''; // Title
-						$expertise_descendant_fpage_intro_expertise = $expertise_descendant_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_intro_expertise) : ''; // Intro text
-						$expertise_descendant_fpage_ref_main_title_expertise = $expertise_descendant_fpage_ref_main_title_expertise ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_title_expertise) : ''; // Reference to the main area of expertise archive, title
-						$expertise_descendant_fpage_ref_main_intro_expertise = $expertise_descendant_fpage_ref_main_intro_expertise ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_intro_expertise) : ''; // Reference to the main area of expertise archive, body text
-						$expertise_descendant_fpage_ref_main_link_expertise = $expertise_descendant_fpage_ref_main_link_expertise ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_link_expertise) : ''; // Reference to the main area of expertise archive, link text
+						$expertise_descendant_fpage_title_expertise = $expertise_descendant_fpage_title_expertise ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_title_expertise, $page_titles) : ''; // Title
+						$expertise_descendant_fpage_intro_expertise = $expertise_descendant_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_intro_expertise, $page_titles) : ''; // Intro text
+						$expertise_descendant_fpage_ref_main_title_expertise = $expertise_descendant_fpage_ref_main_title_expertise ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_title_expertise, $page_titles) : ''; // Reference to the main area of expertise archive, title
+						$expertise_descendant_fpage_ref_main_intro_expertise = $expertise_descendant_fpage_ref_main_intro_expertise ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_intro_expertise, $page_titles) : ''; // Reference to the main area of expertise archive, body text
+						$expertise_descendant_fpage_ref_main_link_expertise = $expertise_descendant_fpage_ref_main_link_expertise ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_link_expertise, $page_titles) : ''; // Reference to the main area of expertise archive, link text
 
 				// Get value for meta description
 
@@ -5045,7 +5114,7 @@ function uamswp_fad_fpage_text_replace($string) {
 						$expertise_descendant_fpage_short_desc_expertise = $expertise_descendant_fpage_intro_expertise;
 					} else {
 						$expertise_descendant_fpage_short_desc_expertise = get_field('expertise_descendant_fpage_short_desc');
-						$expertise_descendant_fpage_short_desc_expertise = ( isset($expertise_descendant_fpage_short_desc_expertise) && !empty($expertise_descendant_fpage_short_desc_expertise) ) ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_short_desc_expertise) : $expertise_descendant_fpage_short_desc_expertise; // Substitute placeholder text for relevant Find-a-Doc Settings value
+						$expertise_descendant_fpage_short_desc_expertise = ( isset($expertise_descendant_fpage_short_desc_expertise) && !empty($expertise_descendant_fpage_short_desc_expertise) ) ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_short_desc_expertise, $page_titles) : $expertise_descendant_fpage_short_desc_expertise; // Substitute placeholder text for relevant Find-a-Doc Settings value
 						$expertise_descendant_fpage_short_desc_expertise = ( isset($expertise_descendant_fpage_short_desc_expertise) && !empty($expertise_descendant_fpage_short_desc_expertise) ) ? $expertise_descendant_fpage_short_desc_expertise : $expertise_descendant_fpage_intro_expertise; // If there is no value, use intro text as a fallback value
 					}
 
@@ -5119,7 +5188,9 @@ function uamswp_fad_fpage_text_replace($string) {
 								||
 								!isset($expertise_fpage_ref_main_link_general) || empty($expertise_fpage_ref_main_link_general)
 								) {
-								$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
+								$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
+									$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+								);
 									$expertise_fpage_title_general = $fpage_text_expertise_general_vars['expertise_fpage_title_general']; // string
 									$expertise_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_intro_general']; // string
 									$expertise_fpage_ref_main_title_general = $fpage_text_expertise_general_vars['expertise_fpage_ref_main_title_general']; // string
@@ -5145,11 +5216,11 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-						$expertise_fpage_title_expertise = $expertise_fpage_title_expertise ? uamswp_fad_fpage_text_replace($expertise_fpage_title_expertise) : ''; // Title
-						$expertise_fpage_intro_expertise = $expertise_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($expertise_fpage_intro_expertise) : ''; // Intro text
-						$expertise_fpage_ref_main_title_expertise = $expertise_fpage_ref_main_title_expertise ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_title_expertise) : ''; // Reference to the main area of expertise archive, title
-						$expertise_fpage_ref_main_intro_expertise = $expertise_fpage_ref_main_intro_expertise ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_intro_expertise) : ''; // Reference to the main area of expertise archive, body text
-						$expertise_fpage_ref_main_link_expertise = $expertise_fpage_ref_main_link_expertise ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_link_expertise) : ''; // Reference to the main area of expertise archive, link text
+						$expertise_fpage_title_expertise = $expertise_fpage_title_expertise ? uamswp_fad_fpage_text_replace($expertise_fpage_title_expertise, $page_titles) : ''; // Title
+						$expertise_fpage_intro_expertise = $expertise_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($expertise_fpage_intro_expertise, $page_titles) : ''; // Intro text
+						$expertise_fpage_ref_main_title_expertise = $expertise_fpage_ref_main_title_expertise ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_title_expertise, $page_titles) : ''; // Reference to the main area of expertise archive, title
+						$expertise_fpage_ref_main_intro_expertise = $expertise_fpage_ref_main_intro_expertise ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_intro_expertise, $page_titles) : ''; // Reference to the main area of expertise archive, body text
+						$expertise_fpage_ref_main_link_expertise = $expertise_fpage_ref_main_link_expertise ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_link_expertise, $page_titles) : ''; // Reference to the main area of expertise archive, link text
 
 				// Get value for meta description
 
@@ -5159,7 +5230,7 @@ function uamswp_fad_fpage_text_replace($string) {
 						$expertise_fpage_short_desc_expertise = $expertise_fpage_intro_expertise;
 					} else {
 						$expertise_fpage_short_desc_expertise = get_field('expertise_associated_fpage_short_desc');
-						$expertise_fpage_short_desc_expertise = ( isset($expertise_fpage_short_desc_expertise) && !empty($expertise_fpage_short_desc_expertise) ) ? uamswp_fad_fpage_text_replace($expertise_fpage_short_desc_expertise) : $expertise_fpage_short_desc_expertise; // Substitute placeholder text for relevant Find-a-Doc Settings value
+						$expertise_fpage_short_desc_expertise = ( isset($expertise_fpage_short_desc_expertise) && !empty($expertise_fpage_short_desc_expertise) ) ? uamswp_fad_fpage_text_replace($expertise_fpage_short_desc_expertise, $page_titles) : $expertise_fpage_short_desc_expertise; // Substitute placeholder text for relevant Find-a-Doc Settings value
 						$expertise_fpage_short_desc_expertise = ( isset($expertise_fpage_short_desc_expertise) && !empty($expertise_fpage_short_desc_expertise) ) ? $expertise_fpage_short_desc_expertise : $expertise_fpage_intro_expertise; // If there is no value, use intro text as a fallback value
 					}
 
@@ -5281,7 +5352,9 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general)
 							) {
-							$fpage_text_clinical_resource_general_vars = isset($fpage_text_clinical_resource_general_vars) ? $fpage_text_clinical_resource_general_vars : uamswp_fad_fpage_text_clinical_resource_general();
+							$fpage_text_clinical_resource_general_vars = isset($fpage_text_clinical_resource_general_vars) ? $fpage_text_clinical_resource_general_vars : uamswp_fad_fpage_text_clinical_resource_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$clinical_resource_fpage_title_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_title_general']; // string
 								$clinical_resource_fpage_intro_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_intro_general']; // string
 								$clinical_resource_fpage_ref_main_title_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_main_title_general']; // string
@@ -5331,17 +5404,17 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$clinical_resource_fpage_title_expertise = $clinical_resource_fpage_title_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_expertise) : ''; // Title
-					$clinical_resource_fpage_intro_expertise = $clinical_resource_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_expertise) : ''; // Intro text
-					$clinical_resource_fpage_ref_main_title_expertise = $clinical_resource_fpage_ref_main_title_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_title_expertise) : ''; // Reference to the main clinical resource archive, title
-					$clinical_resource_fpage_ref_main_intro_expertise = $clinical_resource_fpage_ref_main_intro_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_intro_expertise) : ''; // Reference to the main clinical resource archive, body text
-					$clinical_resource_fpage_ref_main_link_expertise = $clinical_resource_fpage_ref_main_link_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_link_expertise) : ''; // Reference to the main clinical resource archive, link text
-					$clinical_resource_fpage_ref_top_title_expertise = $clinical_resource_fpage_ref_top_title_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_title_expertise) : ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources, title
-					$clinical_resource_fpage_ref_top_intro_expertise = $clinical_resource_fpage_ref_top_intro_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_intro_expertise) : ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources, body text
-					$clinical_resource_fpage_ref_top_link_expertise = $clinical_resource_fpage_ref_top_link_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_link_expertise) : ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources, link text
-					$clinical_resource_fpage_more_text_expertise = $clinical_resource_fpage_more_text_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_text_expertise) : ''; // "More" intro text
-					$clinical_resource_fpage_more_link_text_expertise = $clinical_resource_fpage_more_link_text_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_text_expertise) : ''; // "More" link text
-					$clinical_resource_fpage_more_link_descr_expertise = $clinical_resource_fpage_more_link_descr_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_descr_expertise) : ''; // "More" link description
+					$clinical_resource_fpage_title_expertise = $clinical_resource_fpage_title_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_expertise, $page_titles) : ''; // Title
+					$clinical_resource_fpage_intro_expertise = $clinical_resource_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_expertise, $page_titles) : ''; // Intro text
+					$clinical_resource_fpage_ref_main_title_expertise = $clinical_resource_fpage_ref_main_title_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_title_expertise, $page_titles) : ''; // Reference to the main clinical resource archive, title
+					$clinical_resource_fpage_ref_main_intro_expertise = $clinical_resource_fpage_ref_main_intro_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_intro_expertise, $page_titles) : ''; // Reference to the main clinical resource archive, body text
+					$clinical_resource_fpage_ref_main_link_expertise = $clinical_resource_fpage_ref_main_link_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_link_expertise, $page_titles) : ''; // Reference to the main clinical resource archive, link text
+					$clinical_resource_fpage_ref_top_title_expertise = $clinical_resource_fpage_ref_top_title_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_title_expertise, $page_titles) : ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources, title
+					$clinical_resource_fpage_ref_top_intro_expertise = $clinical_resource_fpage_ref_top_intro_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_intro_expertise, $page_titles) : ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources, body text
+					$clinical_resource_fpage_ref_top_link_expertise = $clinical_resource_fpage_ref_top_link_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_link_expertise, $page_titles) : ''; // Reference to a Top-Level Area of Expertise's Fake Subpage for Clinical Resources, link text
+					$clinical_resource_fpage_more_text_expertise = $clinical_resource_fpage_more_text_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_text_expertise, $page_titles) : ''; // "More" intro text
+					$clinical_resource_fpage_more_link_text_expertise = $clinical_resource_fpage_more_link_text_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_text_expertise, $page_titles) : ''; // "More" link text
+					$clinical_resource_fpage_more_link_descr_expertise = $clinical_resource_fpage_more_link_descr_expertise ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_descr_expertise, $page_titles) : ''; // "More" link description
 
 				// Get value for meta description
 
@@ -5351,7 +5424,7 @@ function uamswp_fad_fpage_text_replace($string) {
 						$clinical_resource_fpage_short_desc_expertise = $clinical_resource_fpage_intro_expertise;
 					} else {
 						$clinical_resource_fpage_short_desc_expertise = get_field('expertise_clinical_resources_fpage_short_desc');
-						$clinical_resource_fpage_short_desc_expertise = ( isset($clinical_resource_fpage_short_desc_expertise) && !empty($clinical_resource_fpage_short_desc_expertise) ) ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_short_desc_expertise) : $clinical_resource_fpage_short_desc_expertise; // Substitute placeholder text for relevant Find-a-Doc Settings value
+						$clinical_resource_fpage_short_desc_expertise = ( isset($clinical_resource_fpage_short_desc_expertise) && !empty($clinical_resource_fpage_short_desc_expertise) ) ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_short_desc_expertise, $page_titles) : $clinical_resource_fpage_short_desc_expertise; // Substitute placeholder text for relevant Find-a-Doc Settings value
 						$clinical_resource_fpage_short_desc_expertise = ( isset($clinical_resource_fpage_short_desc_expertise) && !empty($clinical_resource_fpage_short_desc_expertise) ) ? $clinical_resource_fpage_short_desc_expertise : $clinical_resource_fpage_intro_expertise; // If there is no value, use intro text as a fallback value
 					}
 
@@ -5389,14 +5462,18 @@ function uamswp_fad_fpage_text_replace($string) {
 
 						if ( !isset($condition_fpage_title_expertise) || empty($condition_fpage_title_expertise) ) {
 							if ( !isset($condition_fpage_title_general) || empty($condition_fpage_title_general) ) {
-								$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general();
+								$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
+									$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+								);
 									$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
 							}
 							$condition_fpage_title_expertise = $condition_fpage_title_general; // Title
 						}
 						if ( !isset($condition_fpage_intro_expertise) || empty($condition_fpage_intro_expertise) ) {
 							if ( !isset($condition_fpage_intro_general) || empty($condition_fpage_intro_general) ) {
-								$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general();
+								$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
+									$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+								);
 									$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
 							}
 							$condition_fpage_intro_expertise = $condition_fpage_intro_general; // Intro text
@@ -5404,8 +5481,8 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-						$condition_fpage_title_expertise = $condition_fpage_title_expertise ? uamswp_fad_fpage_text_replace($condition_fpage_title_expertise) : ''; // Title
-						$condition_fpage_intro_expertise = $condition_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($condition_fpage_intro_expertise) : ''; // Intro text
+						$condition_fpage_title_expertise = $condition_fpage_title_expertise ? uamswp_fad_fpage_text_replace($condition_fpage_title_expertise, $page_titles) : ''; // Title
+						$condition_fpage_intro_expertise = $condition_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($condition_fpage_intro_expertise, $page_titles) : ''; // Intro text
 
 			// Treatments Fake Subpage (or Section)
 
@@ -5441,14 +5518,18 @@ function uamswp_fad_fpage_text_replace($string) {
 
 						if ( !isset($treatment_fpage_title_expertise) || empty($treatment_fpage_title_expertise) ) {
 							if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
-								$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general();
+								$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
+									$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+								);
 									$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
 							}
 							$treatment_fpage_title_expertise = $treatment_fpage_title_general; // Title
 						}
 						if ( !isset($treatment_fpage_intro_expertise) || empty($treatment_fpage_intro_expertise) ) {
 							if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
-								$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general();
+								$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
+									$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+								);
 									$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
 							}
 							$treatment_fpage_intro_expertise = $treatment_fpage_intro_general; // Intro text
@@ -5456,8 +5537,8 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-						$treatment_fpage_title_expertise = $treatment_fpage_title_expertise ? uamswp_fad_fpage_text_replace($treatment_fpage_title_expertise) : ''; // Title
-						$treatment_fpage_intro_expertise = $treatment_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($treatment_fpage_intro_expertise) : ''; // Intro text
+						$treatment_fpage_title_expertise = $treatment_fpage_title_expertise ? uamswp_fad_fpage_text_replace($treatment_fpage_title_expertise, $page_titles) : ''; // Title
+						$treatment_fpage_intro_expertise = $treatment_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($treatment_fpage_intro_expertise, $page_titles) : ''; // Intro text
 
 			// Combined Conditions and Treatments Fake Subpage (or Section)
 
@@ -5493,14 +5574,18 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($condition_treatment_fpage_title_expertise) || empty($condition_treatment_fpage_title_expertise) ) {
 						if ( !isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general) ) {
-							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general();
+							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_title_general']; // string
 						}
 						$condition_treatment_fpage_title_expertise = $condition_treatment_fpage_title_general; // Title
 					}
 					if ( !isset($condition_treatment_fpage_intro_expertise) || empty($condition_treatment_fpage_intro_expertise) ) {
 						if ( !isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general) ) {
-							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general();
+							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_intro_general']; // string
 						}
 						$condition_treatment_fpage_intro_expertise = $condition_treatment_fpage_intro_general; // Intro text
@@ -5508,8 +5593,8 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$condition_treatment_fpage_title_expertise = $condition_treatment_fpage_title_expertise ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_expertise) : ''; // Title
-					$condition_treatment_fpage_intro_expertise = $condition_treatment_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_expertise) : ''; // Intro text
+					$condition_treatment_fpage_title_expertise = $condition_treatment_fpage_title_expertise ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_expertise, $page_titles) : ''; // Title
+					$condition_treatment_fpage_intro_expertise = $condition_treatment_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_expertise, $page_titles) : ''; // Intro text
 
 			// Create and return an array to be used on the templates and template parts
 
@@ -5574,7 +5659,9 @@ function uamswp_fad_fpage_text_replace($string) {
 		}
 
 		// Get field values for text elements for related ontology sections in a Clinical Resource subsection (or profile)
-		function uamswp_fad_fpage_text_clinical_resource() {
+		function uamswp_fad_fpage_text_clinical_resource(
+			$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+		) {
 
 			// Providers Fake Subpage (or Section)
 
@@ -5632,7 +5719,9 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($provider_fpage_ref_main_link_general) || empty($provider_fpage_ref_main_link_general)
 							) {
-							$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general();
+							$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$provider_fpage_title_general = $fpage_text_provider_general_vars['provider_fpage_title_general']; // string
 								$provider_fpage_intro_general = $fpage_text_provider_general_vars['provider_fpage_intro_general']; // string
 								$provider_fpage_ref_main_title_general = $fpage_text_provider_general_vars['provider_fpage_ref_main_title_general']; // string
@@ -5658,11 +5747,11 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$provider_fpage_title_clinical_resource = $provider_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($provider_fpage_title_clinical_resource) : ''; // Title
-					$provider_fpage_intro_clinical_resource = $provider_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($provider_fpage_intro_clinical_resource) : ''; // Intro text
-					$provider_fpage_ref_main_title_clinical_resource = $provider_fpage_ref_main_title_clinical_resource ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_title_clinical_resource) : ''; // Reference to the main provider archive, title
-					$provider_fpage_ref_main_intro_clinical_resource = $provider_fpage_ref_main_intro_clinical_resource ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_intro_clinical_resource) : ''; // Reference to the main provider archive, body text
-					$provider_fpage_ref_main_link_clinical_resource = $provider_fpage_ref_main_link_clinical_resource ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_link_clinical_resource) : ''; // Reference to the main provider archive, link text
+					$provider_fpage_title_clinical_resource = $provider_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($provider_fpage_title_clinical_resource, $page_titles) : ''; // Title
+					$provider_fpage_intro_clinical_resource = $provider_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($provider_fpage_intro_clinical_resource, $page_titles) : ''; // Intro text
+					$provider_fpage_ref_main_title_clinical_resource = $provider_fpage_ref_main_title_clinical_resource ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_title_clinical_resource, $page_titles) : ''; // Reference to the main provider archive, title
+					$provider_fpage_ref_main_intro_clinical_resource = $provider_fpage_ref_main_intro_clinical_resource ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_intro_clinical_resource, $page_titles) : ''; // Reference to the main provider archive, body text
+					$provider_fpage_ref_main_link_clinical_resource = $provider_fpage_ref_main_link_clinical_resource ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_link_clinical_resource, $page_titles) : ''; // Reference to the main provider archive, link text
 
 			// Locations Fake Subpage (or Section)
 
@@ -5720,7 +5809,9 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($location_fpage_ref_main_link_general) || empty($location_fpage_ref_main_link_general)
 							) {
-							$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general();
+							$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$location_fpage_title_general = $fpage_text_location_general_vars['location_fpage_title_general']; // string
 								$location_fpage_intro_general = $fpage_text_location_general_vars['location_fpage_intro_general']; // string
 								$location_fpage_ref_main_title_general = $fpage_text_location_general_vars['location_fpage_ref_main_title_general']; // string
@@ -5746,11 +5837,11 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$location_fpage_title_clinical_resource = $location_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($location_fpage_title_clinical_resource) : ''; // Title
-					$location_fpage_intro_clinical_resource = $location_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($location_fpage_intro_clinical_resource) : ''; // Intro text
-					$location_fpage_ref_main_title_clinical_resource = $location_fpage_ref_main_title_clinical_resource ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_title_clinical_resource) : ''; // Reference to the main location archive, title
-					$location_fpage_ref_main_intro_clinical_resource = $location_fpage_ref_main_intro_clinical_resource ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_intro_clinical_resource) : ''; // Reference to the main location archive, body text
-					$location_fpage_ref_main_link_clinical_resource = $location_fpage_ref_main_link_clinical_resource ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_link_clinical_resource) : ''; // Reference to the main location archive, link text
+					$location_fpage_title_clinical_resource = $location_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($location_fpage_title_clinical_resource, $page_titles) : ''; // Title
+					$location_fpage_intro_clinical_resource = $location_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($location_fpage_intro_clinical_resource, $page_titles) : ''; // Intro text
+					$location_fpage_ref_main_title_clinical_resource = $location_fpage_ref_main_title_clinical_resource ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_title_clinical_resource, $page_titles) : ''; // Reference to the main location archive, title
+					$location_fpage_ref_main_intro_clinical_resource = $location_fpage_ref_main_intro_clinical_resource ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_intro_clinical_resource, $page_titles) : ''; // Reference to the main location archive, body text
+					$location_fpage_ref_main_link_clinical_resource = $location_fpage_ref_main_link_clinical_resource ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_link_clinical_resource, $page_titles) : ''; // Reference to the main location archive, link text
 
 			// Areas of Expertise Fake Subpage (or Section)
 
@@ -5808,7 +5899,9 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($expertise_fpage_ref_main_link_general) || empty($expertise_fpage_ref_main_link_general)
 							) {
-							$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
+							$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$expertise_fpage_title_general = $fpage_text_expertise_general_vars['expertise_fpage_title_general']; // string
 								$expertise_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_intro_general']; // string
 								$expertise_fpage_ref_main_title_general = $fpage_text_expertise_general_vars['expertise_fpage_ref_main_title_general']; // string
@@ -5834,11 +5927,11 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$expertise_fpage_title_clinical_resource = $expertise_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($expertise_fpage_title_clinical_resource) : ''; // Title
-					$expertise_fpage_intro_clinical_resource = $expertise_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($expertise_fpage_intro_clinical_resource) : ''; // Intro text
-					$expertise_fpage_ref_main_title_clinical_resource = $expertise_fpage_ref_main_title_clinical_resource ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_title_clinical_resource) : ''; // Reference to the main area of expertise archive, title
-					$expertise_fpage_ref_main_intro_clinical_resource = $expertise_fpage_ref_main_intro_clinical_resource ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_intro_clinical_resource) : ''; // Reference to the main area of expertise archive, body text
-					$expertise_fpage_ref_main_link_clinical_resource = $expertise_fpage_ref_main_link_clinical_resource ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_link_clinical_resource) : ''; // Reference to the main area of expertise archive, link text
+					$expertise_fpage_title_clinical_resource = $expertise_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($expertise_fpage_title_clinical_resource, $page_titles) : ''; // Title
+					$expertise_fpage_intro_clinical_resource = $expertise_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($expertise_fpage_intro_clinical_resource, $page_titles) : ''; // Intro text
+					$expertise_fpage_ref_main_title_clinical_resource = $expertise_fpage_ref_main_title_clinical_resource ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_title_clinical_resource, $page_titles) : ''; // Reference to the main area of expertise archive, title
+					$expertise_fpage_ref_main_intro_clinical_resource = $expertise_fpage_ref_main_intro_clinical_resource ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_intro_clinical_resource, $page_titles) : ''; // Reference to the main area of expertise archive, body text
+					$expertise_fpage_ref_main_link_clinical_resource = $expertise_fpage_ref_main_link_clinical_resource ? uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_link_clinical_resource, $page_titles) : ''; // Reference to the main area of expertise archive, link text
 
 			// Clinical Resources Fake Subpage (or Section)
 
@@ -5920,7 +6013,9 @@ function uamswp_fad_fpage_text_replace($string) {
 							||
 							!isset($clinical_resource_fpage_more_link_descr_general) || empty($clinical_resource_fpage_more_link_descr_general)
 							) {
-							$fpage_text_clinical_resource_general_vars = isset($fpage_text_clinical_resource_general_vars) ? $fpage_text_clinical_resource_general_vars : uamswp_fad_fpage_text_clinical_resource_general();
+							$fpage_text_clinical_resource_general_vars = isset($fpage_text_clinical_resource_general_vars) ? $fpage_text_clinical_resource_general_vars : uamswp_fad_fpage_text_clinical_resource_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$clinical_resource_fpage_title_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_title_general']; // string
 								$clinical_resource_fpage_intro_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_intro_general']; // string
 								$clinical_resource_fpage_ref_main_title_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_ref_main_title_general']; // string
@@ -5958,14 +6053,14 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$clinical_resource_fpage_title_clinical_resource = $clinical_resource_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_clinical_resource) : ''; // Title
-					$clinical_resource_fpage_intro_clinical_resource = $clinical_resource_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_clinical_resource) : ''; // Intro text
-					$clinical_resource_fpage_ref_main_title_clinical_resource = $clinical_resource_fpage_ref_main_title_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_title_clinical_resource) : ''; // Reference to the main clinical resource archive, title
-					$clinical_resource_fpage_ref_main_intro_clinical_resource = $clinical_resource_fpage_ref_main_intro_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_intro_clinical_resource) : ''; // Reference to the main clinical resource archive, body text
-					$clinical_resource_fpage_ref_main_link_clinical_resource = $clinical_resource_fpage_ref_main_link_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_link_clinical_resource) : ''; // Reference to the main clinical resource archive, link text
-					$clinical_resource_fpage_more_text_clinical_resource = $clinical_resource_fpage_more_text_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_text_clinical_resource) : ''; // "More" intro text
-					$clinical_resource_fpage_more_link_text_clinical_resource = $clinical_resource_fpage_more_link_text_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_text_clinical_resource) : ''; // "More" link text
-					$clinical_resource_fpage_more_link_descr_clinical_resource = $clinical_resource_fpage_more_link_descr_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_descr_clinical_resource) : ''; // "More" link description
+					$clinical_resource_fpage_title_clinical_resource = $clinical_resource_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_clinical_resource, $page_titles) : ''; // Title
+					$clinical_resource_fpage_intro_clinical_resource = $clinical_resource_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_clinical_resource, $page_titles) : ''; // Intro text
+					$clinical_resource_fpage_ref_main_title_clinical_resource = $clinical_resource_fpage_ref_main_title_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_title_clinical_resource, $page_titles) : ''; // Reference to the main clinical resource archive, title
+					$clinical_resource_fpage_ref_main_intro_clinical_resource = $clinical_resource_fpage_ref_main_intro_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_intro_clinical_resource, $page_titles) : ''; // Reference to the main clinical resource archive, body text
+					$clinical_resource_fpage_ref_main_link_clinical_resource = $clinical_resource_fpage_ref_main_link_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_link_clinical_resource, $page_titles) : ''; // Reference to the main clinical resource archive, link text
+					$clinical_resource_fpage_more_text_clinical_resource = $clinical_resource_fpage_more_text_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_text_clinical_resource, $page_titles) : ''; // "More" intro text
+					$clinical_resource_fpage_more_link_text_clinical_resource = $clinical_resource_fpage_more_link_text_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_text_clinical_resource, $page_titles) : ''; // "More" link text
+					$clinical_resource_fpage_more_link_descr_clinical_resource = $clinical_resource_fpage_more_link_descr_clinical_resource ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_descr_clinical_resource, $page_titles) : ''; // "More" link description
 
 			// Conditions Fake Subpage (or Section)
 
@@ -5987,14 +6082,18 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($condition_fpage_title_clinical_resource) || empty($condition_fpage_title_clinical_resource) ) {
 						if ( !isset($condition_fpage_title_general) || empty($condition_fpage_title_general) ) {
-							$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general();
+							$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
 						}
 						$condition_fpage_title_clinical_resource = $condition_fpage_title_general; // Title
 					}
 					if ( !isset($condition_fpage_intro_clinical_resource) || empty($condition_fpage_intro_clinical_resource) ) {
 						if ( !isset($condition_fpage_intro_general) || empty($condition_fpage_intro_general) ) {
-							$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general();
+							$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
 						}
 						$condition_fpage_intro_clinical_resource = $condition_fpage_intro_general; // Intro text
@@ -6002,8 +6101,8 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$condition_fpage_title_clinical_resource = $condition_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($condition_fpage_title_clinical_resource) : ''; // Title
-					$condition_fpage_intro_clinical_resource = $condition_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($condition_fpage_intro_clinical_resource) : ''; // Intro text
+					$condition_fpage_title_clinical_resource = $condition_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($condition_fpage_title_clinical_resource, $page_titles) : ''; // Title
+					$condition_fpage_intro_clinical_resource = $condition_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($condition_fpage_intro_clinical_resource, $page_titles) : ''; // Intro text
 
 			// Treatments Fake Subpage (or Section)
 
@@ -6025,14 +6124,18 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($treatment_fpage_title_clinical_resource) || empty($treatment_fpage_title_clinical_resource) ) {
 						if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
-							$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general();
+							$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
 						}
 						$treatment_fpage_title_clinical_resource = $treatment_fpage_title_general; // Title
 					}
 					if ( !isset($treatment_fpage_intro_clinical_resource) || empty($treatment_fpage_intro_clinical_resource) ) {
 						if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
-							$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general();
+							$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
 						}
 						$treatment_fpage_intro_clinical_resource = $treatment_fpage_intro_general; // Intro text
@@ -6040,8 +6143,8 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$treatment_fpage_title_clinical_resource = $treatment_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($treatment_fpage_title_clinical_resource) : ''; // Title
-					$treatment_fpage_intro_clinical_resource = $treatment_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($treatment_fpage_intro_clinical_resource) : ''; // Intro text
+					$treatment_fpage_title_clinical_resource = $treatment_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($treatment_fpage_title_clinical_resource, $page_titles) : ''; // Title
+					$treatment_fpage_intro_clinical_resource = $treatment_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($treatment_fpage_intro_clinical_resource, $page_titles) : ''; // Intro text
 
 			// Combined Conditions and Treatments Fake Subpage (or Section)
 
@@ -6063,14 +6166,18 @@ function uamswp_fad_fpage_text_replace($string) {
 
 					if ( !isset($condition_treatment_fpage_title_clinical_resource) || empty($condition_treatment_fpage_title_clinical_resource) ) {
 						if ( !isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general) ) {
-							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general();
+							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_title_general']; // string
 						}
 						$condition_treatment_fpage_title_clinical_resource = $condition_treatment_fpage_title_general; // Title
 					}
 					if ( !isset($condition_treatment_fpage_intro_clinical_resource) || empty($condition_treatment_fpage_intro_clinical_resource) ) {
 						if ( !isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general) ) {
-							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general();
+							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
 								$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_intro_general']; // string
 						}
 						$condition_treatment_fpage_intro_clinical_resource = $condition_treatment_fpage_intro_general; // Intro text
@@ -6078,8 +6185,8 @@ function uamswp_fad_fpage_text_replace($string) {
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-					$condition_treatment_fpage_title_clinical_resource = $condition_treatment_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_clinical_resource) : ''; // Title
-					$condition_treatment_fpage_intro_clinical_resource = $condition_treatment_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_clinical_resource) : ''; // Intro text
+					$condition_treatment_fpage_title_clinical_resource = $condition_treatment_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_clinical_resource, $page_titles) : ''; // Title
+					$condition_treatment_fpage_intro_clinical_resource = $condition_treatment_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_clinical_resource, $page_titles) : ''; // Intro text
 
 			// Create and return an array to be used on the templates and template parts
 
@@ -6974,6 +7081,7 @@ function uamswp_meta_image_resize( $page_image_id ) {
 //     is all that is necessary.
 function uamswp_fad_section_provider(
 	$providers, // int[] // Value of the related providers input (or $provider_descendants, List of this provider item's descendant items)
+	$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 	// $provider_section_more_link_key, // string
 	// $provider_section_more_link_value, // string
 	// $provider_descendants = '', // int[] (optional) // List of this provider item's descendant items
@@ -7013,6 +7121,7 @@ function uamswp_fad_section_provider(
 //     is all that is necessary.
 function uamswp_fad_section_location(
 	$locations, // int[] // Value of the related locations input (or $location_descendants, List of this location item's descendant items)
+	$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 	// $location_section_more_link_key, // string
 	// $location_section_more_link_value, // string
 	// $location_descendants = '', // int[] (optional) // List of this location item's descendant items
@@ -7052,6 +7161,7 @@ function uamswp_fad_section_location(
 //     is all that is necessary.
 function uamswp_fad_section_expertise(
 	$expertises, // int[] // Value of the related areas of expertise input (or $expertise_descendants, List of this area of expertise item's descendant items)
+	$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 	// $expertise_section_more_link_key, // string
 	// $expertise_section_more_link_value, // string
 	// $expertise_descendants = '', // int[] (optional) // List of this area of expertise item's descendant items
@@ -7091,6 +7201,7 @@ function uamswp_fad_section_expertise(
 //     is all that is necessary.
 function uamswp_fad_section_clinical_resource(
 	$clinical_resources, // int[] // Value of the related clinical resources input (or $clinical_resource_descendants, List of this clinical resource item's descendant items)
+	$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 	$clinical_resource_section_more_link_key = '', // string (optional)
 	$clinical_resource_section_more_link_value = '', // string (optional)
 	// $clinical_resource_descendants = '', // int[] (optional) // List of this clinical resource item's descendant items
@@ -7131,6 +7242,7 @@ function uamswp_fad_section_clinical_resource(
 //     is all that is necessary.
 function uamswp_fad_section_condition(
 	$conditions_cpt, // int[] // Value of the related conditions input (or $condition_descendants, List of this condition item's descendant items)
+	$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 	// $condition_section_more_link_key, // string
 	// $condition_section_more_link_value, // string
 	// $condition_descendants = '', // int[] (optional) // List of this condition item's descendant items
@@ -7183,6 +7295,7 @@ function uamswp_fad_section_condition(
 //     is all that is necessary.
 function uamswp_fad_section_treatment(
 	$treatments_cpt, // int[] // Value of the related treatments input (or $treatment_descendants, List of this treatment item's descendant items)
+	$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 	// $treatment_section_more_link_key, // string
 	// $treatment_section_more_link_value, // string
 	// $treatment_descendants = '', // int[] (optional) // List of this treatment item's descendant items
@@ -7236,6 +7349,7 @@ function uamswp_fad_section_treatment(
 function uamswp_fad_section_condition_treatment(
 	$conditions_cpt, // int[] // Value of the related conditions input (or $condition_descendants, List of this condition item's descendant items)
 	$treatments_cpt, // int[] // Value of the related treatments input (or $treatment_descendants, List of this treatment item's descendant items)
+	$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 	// $condition_treatment_section_more_link_key, // string
 	// $condition_treatment_section_more_link_value, // string
 	// $condition_descendants = '', // int[] (optional) // List of this condition item's descendant items
@@ -7457,15 +7571,12 @@ if ( !function_exists('array_is_list') ) {
 }
 
 // Construct UAMS Text & Image Overlay Block
-function uamswp_section_text_image_overlay() {
-
-	// Bring in variables from outside of the function
-
-		// Defined on the template
-
-			global $text_image_overlay_id; // Section ID attribute value // string
-			global $text_image_overlay_row_0; // Values for the first item // arr
-			global $text_image_overlay_row_1; // Values for the second item // arr
+function uamswp_section_text_image_overlay(
+	$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+	$text_image_overlay_id = '', // string (optional) // Section ID attribute value
+	$text_image_overlay_row_0 = '', // array (optional) // Values for the first item
+	$text_image_overlay_row_1 = '' // array (optional) // Values for the second item
+) {
 
 	include( UAMS_FAD_PATH . '/templates/parts/section_text-image-overlay.php' );
 
@@ -7473,16 +7584,22 @@ function uamswp_section_text_image_overlay() {
 
 // Construct UAMS Text & Image Overlay Block on Ontology Fake Subpages
 function uamswp_fad_fpage_text_image_overlay(
-	$page_id // int
+	$page_id, // int
+	$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+	$text_image_overlay_id = '' // string (optional) // Section ID attribute value
 ) {
+
+	// Check/define variables
+
+		if ( !isset($page_title) ) {
+			$page_title = isset($page_titles['page_title']) ? $page_titles['page_title'] : get_the_title();
+		}
 
 	// Bring in variables from outside of the function
 
 		// Defined on the template
 
-			global $page_title; // string
 			global $ontology_type; // bool
-			global $text_image_overlay_id; // Section ID attribute value // string
 			global $text_image_overlay_row_0; // Values for the first item // arr
 			global $text_image_overlay_row_1; // Values for the second item // arr
 			global $current_fpage; // Fake subpage slug // str
@@ -7565,7 +7682,7 @@ function uamswp_fad_fpage_text_image_overlay(
 			) {
 			$fpage_text_expertise_vars = isset($fpage_text_expertise_vars) ? $fpage_text_expertise_vars : uamswp_fad_fpage_text_expertise(
 				$page_id, // int
-				$page_title, // string
+				$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 				$ontology_type // bool
 			);
 				$provider_fpage_title_expertise = $fpage_text_expertise_vars['provider_fpage_title_expertise']; // string
@@ -7589,7 +7706,9 @@ function uamswp_fad_fpage_text_image_overlay(
 				||
 				!isset($provider_fpage_ref_top_link_expertise) || empty($provider_fpage_ref_top_link_expertise)
 				) {
-				$fpage_text_provider_vars = isset($fpage_text_provider_vars) ? $fpage_text_provider_vars : uamswp_fad_fpage_text_provider();
+				$fpage_text_provider_vars = isset($fpage_text_provider_vars) ? $fpage_text_provider_vars : uamswp_fad_fpage_text_provider(
+					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				);
 					$provider_fpage_ref_main_title_expertise = $fpage_text_provider_vars['provider_fpage_ref_main_title_expertise']; // string
 					$provider_fpage_ref_main_title_expertise = $fpage_text_provider_vars['provider_fpage_ref_main_title_expertise']; // string
 					$provider_fpage_ref_main_link_expertise = $fpage_text_provider_vars['provider_fpage_ref_main_link_expertise']; // string
@@ -7629,7 +7748,9 @@ function uamswp_fad_fpage_text_image_overlay(
 				||
 				!isset($location_fpage_ref_top_link_expertise) || empty($location_fpage_ref_top_link_expertise)
 				) {
-				$fpage_text_location_vars = isset($fpage_text_location_vars) ? $fpage_text_location_vars : uamswp_fad_fpage_text_location();
+				$fpage_text_location_vars = isset($fpage_text_location_vars) ? $fpage_text_location_vars : uamswp_fad_fpage_text_location(
+					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				);
 					$location_fpage_ref_main_title_expertise = $fpage_text_location_vars['location_fpage_ref_main_title_expertise']; // string
 					$location_fpage_ref_main_intro_expertise = $fpage_text_location_vars['location_fpage_ref_main_intro_expertise']; // string
 					$location_fpage_ref_main_link_expertise = $fpage_text_location_vars['location_fpage_ref_main_link_expertise']; // string
@@ -7665,7 +7786,7 @@ function uamswp_fad_fpage_text_image_overlay(
 				) {
 				$fpage_text_expertise_vars = isset($fpage_text_expertise_vars) ? $fpage_text_expertise_vars : uamswp_fad_fpage_text_expertise(
 					$page_id, // int
-					$page_title, // string
+					$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 					$ontology_type // bool
 				);
 					$expertise_descendant_fpage_ref_main_title_expertise = $fpage_text_expertise_vars['expertise_descendant_fpage_ref_main_title_expertise']; // string
@@ -7691,7 +7812,7 @@ function uamswp_fad_fpage_text_image_overlay(
 				) {
 				$fpage_text_expertise_vars = isset($fpage_text_expertise_vars) ? $fpage_text_expertise_vars : uamswp_fad_fpage_text_expertise(
 					$page_id, // int
-					$page_title, // string
+					$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 					$ontology_type // bool
 				);
 					$expertise_fpage_ref_main_title_expertise = $fpage_text_expertise_vars['expertise_fpage_ref_main_title_expertise']; // string
@@ -7721,7 +7842,9 @@ function uamswp_fad_fpage_text_image_overlay(
 				||
 				!isset($clinical_resource_fpage_ref_top_link_expertise) || empty($clinical_resource_fpage_ref_top_link_expertise)
 				) {
-				$fpage_text_clinical_resource_vars = isset($fpage_text_clinical_resource_vars) ? $fpage_text_clinical_resource_vars : uamswp_fad_fpage_text_clinical_resource();
+				$fpage_text_clinical_resource_vars = isset($fpage_text_clinical_resource_vars) ? $fpage_text_clinical_resource_vars : uamswp_fad_fpage_text_clinical_resource(
+					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				);
 					$clinical_resource_fpage_ref_main_title_expertise = $fpage_text_clinical_resource_vars['clinical_resource_fpage_ref_main_title_expertise']; // string
 					$clinical_resource_fpage_ref_main_intro_expertise = $fpage_text_clinical_resource_vars['clinical_resource_fpage_ref_main_intro_expertise']; // string
 					$clinical_resource_fpage_ref_main_link_expertise = $fpage_text_clinical_resource_vars['clinical_resource_fpage_ref_main_link_expertise']; // string
@@ -7834,7 +7957,12 @@ function uamswp_fad_fpage_text_image_overlay(
 	$text_image_overlay_row_1 = isset($fpage_text_image_overlay[1]) ? $fpage_text_image_overlay[1] : '';
 
 	// Call the main function to construct UAMS Text & Image Overlay Block
-	uamswp_section_text_image_overlay();
+	uamswp_section_text_image_overlay(
+		$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+		$text_image_overlay_id, // Section ID attribute value // string
+		$text_image_overlay_row_0, // Values for the first item // arr
+		$text_image_overlay_row_1 // Values for the second item // arr
+	);
 }
 
 // Add non-breaking space to prevent orphaned short words

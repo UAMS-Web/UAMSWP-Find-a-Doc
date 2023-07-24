@@ -109,6 +109,12 @@ $page_title_attr = uamswp_attr_conversion($page_title);
 $page_title_phrase = ( get_field('location_prepend_the') ? 'the ' : '' ) . $page_title; // Conditionally prepend "the" to the page title for use in phrases
 $page_title_phrase_attr = uamswp_attr_conversion($page_title_phrase);
 
+// Array for page titles and section titles
+$page_titles = array(
+	'page_title'		=> $page_title,
+	'page_title_phrase'	=> $page_title_phrase
+);
+
 // Get the page slug for the location
 $page_slug = $post->post_name;
 
@@ -116,7 +122,9 @@ $page_slug = $post->post_name;
 $content_placement = 'profile'; // Expected values: 'subsection' or 'profile'
 
 // Get system settings for fake subpage (or section) text elements in an Location subsection (or profile)
-$fpage_text_location_vars = isset($fpage_text_location_vars) ? $fpage_text_location_vars : uamswp_fad_fpage_text_location();
+$fpage_text_location_vars = isset($fpage_text_location_vars) ? $fpage_text_location_vars : uamswp_fad_fpage_text_location(
+	$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+);
 	$provider_fpage_title_location = $fpage_text_location_vars['provider_fpage_title_location']; // string
 	$provider_fpage_intro_location = $fpage_text_location_vars['provider_fpage_intro_location']; // string
 	$provider_fpage_ref_main_title_location = $fpage_text_location_vars['provider_fpage_ref_main_title_location']; // string

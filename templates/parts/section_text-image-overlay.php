@@ -11,24 +11,27 @@
  * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
+ * 	$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+ * 
+ * Optional vars:
  * 	$text_image_overlay_id // Section ID attribute value // string
- * 	$text_image_overlay_row_0 // Values for the first item // arr
- * 		['heading'] // Heading text, limited to 65 characters // str
- * 		['body'] // Body text, limited to 280 characters // str
- * 		['button_text'] // Link text, limited to 27 characters // str
- * 		['button_url'] // Full URL // str
+ * 	$text_image_overlay_row_0 // Values for the first item // array
+ * 		['heading'] // Heading text, limited to 65 characters // string
+ * 		['body'] // Body text, limited to 280 characters // string
+ * 		['button_text'] // Link text, limited to 27 characters // string
+ * 		['button_url'] // Full URL // string
  * 		['button_target'] // Query on whether to open the link in a new window/tab // bool
- * 		['button_desc'] // Link ARIA label text // str (default: ['button_text'] . ', ' . ['heading'] )
- * 		['background_color'] // Background color value // str (default: 'blue')
+ * 		['button_desc'] // Link ARIA label text // string (default: ['button_text'] . ', ' . ['heading'] )
+ * 		['background_color'] // Background color value // string (default: 'blue')
  * 		['image'] // Background image ID // int
- * 	$text_image_overlay_row_1 // Values for the second item // arr
- * 		['heading'] // Heading text, limited to 65 characters // str
- * 		['body'] // Body text, limited to 280 characters // str
- * 		['button_text'] // Link text, limited to 27 characters // str
- * 		['button_url'] // Full URL // str
+ * 	$text_image_overlay_row_1 // Values for the second item // array
+ * 		['heading'] // Heading text, limited to 65 characters // string
+ * 		['body'] // Body text, limited to 280 characters // string
+ * 		['button_text'] // Link text, limited to 27 characters // string
+ * 		['button_url'] // Full URL // string
  * 		['button_target'] // Query on whether to open the link in a new window/tab // bool
- * 		['button_desc'] // Link ARIA label text // str (default: ['button_text'] . ', ' . ['heading'] )
- * 		['background_color'] // Background color value // str (default: 'green')
+ * 		['button_desc'] // Link ARIA label text // string (default: ['button_text'] . ', ' . ['heading'] )
+ * 		['background_color'] // Background color value // string (default: 'green')
  * 		['image'] // Background image ID // int
  * 
  * Return:
@@ -45,24 +48,24 @@ $text_image_overlay_button_text_maxlength = 27;
 $text_image_overlay_rows = array();
 $text_image_overlay_row_0 = ( isset($text_image_overlay_row_0) && !empty($text_image_overlay_row_0) ) ? $text_image_overlay_row_0 : '';
 if ( $text_image_overlay_row_0 ) {
-	$text_image_overlay_row_0['heading'] = ( isset($text_image_overlay_row_0['heading']) && !empty($text_image_overlay_row_0['heading']) ) ? uamswp_fad_fpage_text_replace($text_image_overlay_row_0['heading']) : '';
-	$text_image_overlay_row_0['body'] = ( isset($text_image_overlay_row_0['body']) && !empty($text_image_overlay_row_0['body']) ) ? uamswp_fad_fpage_text_replace($text_image_overlay_row_0['body']) : '';
-	$text_image_overlay_row_0['button_text'] = ( isset($text_image_overlay_row_0['button_text']) && !empty($text_image_overlay_row_0['button_text']) ) ? uamswp_fad_fpage_text_replace($text_image_overlay_row_0['button_text']) : '';
+	$text_image_overlay_row_0['heading'] = ( isset($text_image_overlay_row_0['heading']) && !empty($text_image_overlay_row_0['heading']) ) ? uamswp_fad_fpage_text_replace($text_image_overlay_row_0['heading'], $page_titles) : '';
+	$text_image_overlay_row_0['body'] = ( isset($text_image_overlay_row_0['body']) && !empty($text_image_overlay_row_0['body']) ) ? uamswp_fad_fpage_text_replace($text_image_overlay_row_0['body'], $page_titles) : '';
+	$text_image_overlay_row_0['button_text'] = ( isset($text_image_overlay_row_0['button_text']) && !empty($text_image_overlay_row_0['button_text']) ) ? uamswp_fad_fpage_text_replace($text_image_overlay_row_0['button_text'], $page_titles) : '';
 	$text_image_overlay_row_0['button_url'] = ( isset($text_image_overlay_row_0['button_url']) && !empty($text_image_overlay_row_0['button_url']) ) ? $text_image_overlay_row_0['button_url'] : '';
 	$text_image_overlay_row_0['button_target'] = ( isset($text_image_overlay_row_0['button_target']) && !empty($text_image_overlay_row_0['button_target']) ) ? $text_image_overlay_row_0['button_target'] : '';
-	$text_image_overlay_row_0['button_desc'] = ( isset($text_image_overlay_row_0['button_desc']) && !empty($text_image_overlay_row_0['button_desc']) ) ? uamswp_attr_conversion(uamswp_fad_fpage_text_replace($text_image_overlay_row_0['button_desc'])) : '';
+	$text_image_overlay_row_0['button_desc'] = ( isset($text_image_overlay_row_0['button_desc']) && !empty($text_image_overlay_row_0['button_desc']) ) ? uamswp_attr_conversion(uamswp_fad_fpage_text_replace($text_image_overlay_row_0['button_desc'], $page_titles)) : '';
 	$text_image_overlay_row_0['background_color'] = ( isset($text_image_overlay_row_0['background_color']) && !empty($text_image_overlay_row_0['background_color']) && in_array( $text_image_overlay_row_0['background_color'], $text_image_overlay_color ) ) ? $text_image_overlay_row_0['background_color'] : '';
 	$text_image_overlay_row_0['image'] = ( isset($text_image_overlay_row_0['image']) && !empty($text_image_overlay_row_0['image']) ) ? $text_image_overlay_row_0['image'] : '';
 	$text_image_overlay_rows[] = $text_image_overlay_row_0;
 }
 $text_image_overlay_row_1 = ( isset($text_image_overlay_row_1) && !empty($text_image_overlay_row_1) ) ? $text_image_overlay_row_1 : '';
 if ( $text_image_overlay_row_1 ) {
-	$text_image_overlay_row_1['heading'] = ( isset($text_image_overlay_row_1['heading']) && !empty($text_image_overlay_row_1['heading']) ) ? uamswp_fad_fpage_text_replace($text_image_overlay_row_1['heading']) : '';
-	$text_image_overlay_row_1['body'] = ( isset($text_image_overlay_row_1['body']) && !empty($text_image_overlay_row_1['body']) ) ? uamswp_fad_fpage_text_replace($text_image_overlay_row_1['body']) : '';
-	$text_image_overlay_row_1['button_text'] = ( isset($text_image_overlay_row_1['button_text']) && !empty($text_image_overlay_row_1['button_text']) ) ? uamswp_fad_fpage_text_replace($text_image_overlay_row_1['button_text']) : '';
+	$text_image_overlay_row_1['heading'] = ( isset($text_image_overlay_row_1['heading']) && !empty($text_image_overlay_row_1['heading']) ) ? uamswp_fad_fpage_text_replace($text_image_overlay_row_1['heading'], $page_titles) : '';
+	$text_image_overlay_row_1['body'] = ( isset($text_image_overlay_row_1['body']) && !empty($text_image_overlay_row_1['body']) ) ? uamswp_fad_fpage_text_replace($text_image_overlay_row_1['body'], $page_titles) : '';
+	$text_image_overlay_row_1['button_text'] = ( isset($text_image_overlay_row_1['button_text']) && !empty($text_image_overlay_row_1['button_text']) ) ? uamswp_fad_fpage_text_replace($text_image_overlay_row_1['button_text'], $page_titles) : '';
 	$text_image_overlay_row_1['button_url'] = ( isset($text_image_overlay_row_1['button_url']) && !empty($text_image_overlay_row_1['button_url']) ) ? $text_image_overlay_row_1['button_url'] : '';
 	$text_image_overlay_row_1['button_target'] = ( isset($text_image_overlay_row_1['button_target']) && !empty($text_image_overlay_row_1['button_target']) ) ? $text_image_overlay_row_1['button_target'] : '';
-	$text_image_overlay_row_1['button_desc'] = ( isset($text_image_overlay_row_1['button_desc']) && !empty($text_image_overlay_row_1['button_desc']) ) ? uamswp_attr_conversion(uamswp_fad_fpage_text_replace($text_image_overlay_row_1['button_desc'])) : '';
+	$text_image_overlay_row_1['button_desc'] = ( isset($text_image_overlay_row_1['button_desc']) && !empty($text_image_overlay_row_1['button_desc']) ) ? uamswp_attr_conversion(uamswp_fad_fpage_text_replace($text_image_overlay_row_1['button_desc'], $page_titles)) : '';
 	$text_image_overlay_row_1['background_color'] = ( isset($text_image_overlay_row_1['background_color']) && !empty($text_image_overlay_row_1['background_color']) && in_array( $text_image_overlay_row_1['background_color'], $text_image_overlay_color ) ) ? $text_image_overlay_row_1['background_color'] : '';
 	$text_image_overlay_row_1['image'] = ( isset($text_image_overlay_row_1['image']) && !empty($text_image_overlay_row_1['image']) ) ? $text_image_overlay_row_1['image'] : '';
 	$text_image_overlay_rows[] = $text_image_overlay_row_1;

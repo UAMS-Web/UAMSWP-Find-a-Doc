@@ -11,13 +11,15 @@
  * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
- * 	// Defined in uamswp_fad_labels_provider()
+ * 	// Vars defined on the template
+ * 		$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+ * 	// Vars defined in uamswp_fad_labels_provider()
  * 		$provider_plural_name // string
  * 		$provider_plural_name_attr // string
- * 	// Defined in uamswp_fad_fpage_text_provider_general()
+ * 	// Vars defined in uamswp_fad_fpage_text_provider_general()
  * 		$provider_fpage_title_general // string
  * 		$provider_fpage_intro_general // string
- * 	// Defined in uamswp_fad_provider_query()
+ * 	// Vars defined in uamswp_fad_provider_query()
  * 		$provider_section_show // bool
  * 		$provider_query // WP_Post[]
  * 		$providers // int[]
@@ -51,7 +53,9 @@ if ( $provider_section_show ) {
 		if ( !isset($provider_section_title) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($provider_fpage_title_general) ) {
-				$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general();
+				$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general(
+					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				);
 					$provider_fpage_title_general = $fpage_text_provider_general_vars['provider_fpage_title_general']; // string
 			}
 			$provider_section_title = $provider_fpage_title_general;
@@ -61,7 +65,9 @@ if ( $provider_section_show ) {
 		if ( !isset($provider_section_intro) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($provider_fpage_intro_general) ) {
-				$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general();
+				$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general(
+					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				);
 					$provider_fpage_intro_general = $fpage_text_provider_general_vars['provider_fpage_intro_general']; // string
 			}
 			$provider_section_intro = $provider_fpage_intro_general;
@@ -100,12 +106,16 @@ if ( $provider_section_show ) {
 			}
 
 			if ( !isset($provider_fpage_title_general) ) {
-				$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general();
+				$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general(
+					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				);
 					$provider_fpage_title_general = $fpage_text_provider_general_vars['provider_fpage_title_general']; // string
 			}
 
 			if ( !isset($provider_fpage_intro_general) ) {
-				$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general();
+				$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general(
+					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				);
 					$provider_fpage_intro_general = $fpage_text_provider_general_vars['provider_fpage_intro_general']; // string
 			}
 

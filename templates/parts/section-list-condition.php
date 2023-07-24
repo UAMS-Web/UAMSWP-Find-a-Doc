@@ -11,6 +11,8 @@
  * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
+ * 	// Vars defined on the template
+ * 		$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
  * 	// Vars defined in uamswp_fad_labels_condition()
  * 		$condition_single_name // string
  * 		$condition_single_name_attr // string
@@ -94,7 +96,9 @@ if ( $condition_section_show ) {
 		if ( !isset($condition_section_title) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($condition_fpage_title_general) ) {
-				$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general();
+				$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
+					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				);
 					$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
 			}
 			$condition_section_title = $condition_fpage_title_general;
@@ -104,7 +108,9 @@ if ( $condition_section_show ) {
 		if ( !isset($condition_section_intro) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($condition_fpage_intro_general) ) {
-				$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general();
+				$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
+					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				);
 					$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
 			}
 			$condition_section_intro = $condition_fpage_intro_general;
@@ -142,12 +148,16 @@ if ( $condition_section_show ) {
 			}
 
 			if ( !isset($condition_fpage_title_general) ) {
-				$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general();
+				$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
+					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				);
 					$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
 			}
 
 			if ( !isset($condition_fpage_intro_general) ) {
-				$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general();
+				$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
+					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				);
 					$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
 			}
 

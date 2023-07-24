@@ -22,6 +22,11 @@ $medline_type = get_field('medline_code_type', $term);
 $medline_code = get_field('medline_code_id', $term);
 $embed_code = get_field('treatment_procedure_embed_codes', $term); // Embed / Syndication Code
 
+// Array for page titles and section titles
+$page_titles = array(
+	'page_title'	=> $page_title
+);
+
 // Get system settings for ontology item labels
 
 	// Get system settings for provider labels

@@ -11,6 +11,8 @@
  * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
+ * 	// Vars defined on the template
+ * 		$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
  * 	// Defined in uamswp_fad_labels_location()
  * 		$location_single_name // string
  * 		$location_single_name_attr // string
@@ -61,7 +63,9 @@ if ( $location_section_show ) {
 		if ( !isset($location_section_title) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($location_fpage_title_general) ) {
-				$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general();
+				$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general(
+					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				);
 					$location_fpage_title_general = $fpage_text_location_general_vars['location_fpage_title_general']; // string
 			}
 			$location_section_title = $location_fpage_title_general;
@@ -71,7 +75,9 @@ if ( $location_section_show ) {
 		if ( !isset($location_section_intro) ) {
 			// Set the section title using the system settings for the section title in a general placement
 			if ( !isset($location_fpage_intro_general) ) {
-				$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general();
+				$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general(
+					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				);
 					$location_fpage_intro_general = $fpage_text_location_general_vars['location_fpage_intro_general']; // string
 			}
 			$location_section_intro = $location_fpage_intro_general;
@@ -120,12 +126,16 @@ if ( $location_section_show ) {
 			}
 
 			if ( !isset($location_fpage_title_general) ) {
-				$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general();
+				$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general(
+					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				);
 					$location_fpage_title_general = $fpage_text_location_general_vars['location_fpage_title_general']; // string
 			}
 
 			if ( !isset($location_fpage_intro_general) ) {
-				$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general();
+				$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general(
+					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				);
 					$location_fpage_intro_general = $fpage_text_location_general_vars['location_fpage_intro_general']; // string
 			}
 

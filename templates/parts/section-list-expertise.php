@@ -11,6 +11,8 @@
  * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
+ * 	// Vars defined on the template
+ * 		$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
  * 	// Vars defined in uamswp_fad_labels_expertise()
  * 		$expertise_single_name // string
  * 		$expertise_single_name_attr // string
@@ -104,7 +106,9 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 			if ( $expertise_descendant_list ) {
 
 				if ( !isset($expertise_descendant_fpage_title_general) ) {
-					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
+					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
+						$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+					);
 						$expertise_descendant_fpage_title_general = $fpage_text_expertise_general_vars['expertise_descendant_fpage_title_general']; // string
 				}
 				$expertise_section_title = $expertise_descendant_fpage_title_general;
@@ -112,7 +116,9 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 			} else {
 
 				if ( !isset($expertise_fpage_title_general) ) {
-					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
+					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
+						$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+					);
 						$expertise_fpage_title_general = $fpage_text_expertise_general_vars['expertise_fpage_title_general']; // string
 				}
 				$expertise_section_title = $expertise_fpage_title_general;
@@ -127,7 +133,9 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 			if ( $expertise_descendant_list ) {
 
 				if ( !isset($expertise_descendant_fpage_intro_general) ) {
-					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
+					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
+						$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+					);
 						$expertise_descendant_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_descendant_fpage_intro_general']; // string
 				}
 				$expertise_section_intro = $expertise_descendant_fpage_intro_general;
@@ -135,7 +143,9 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 			} else {
 
 				if ( !isset($expertise_fpage_intro_general) ) {
-					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
+					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
+						$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+					);
 						$expertise_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_intro_general']; // string
 				}
 				$expertise_section_intro = $expertise_fpage_intro_general;
@@ -234,14 +244,18 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 				if ( $expertise_descendant_list ) {
 				
 					if ( !isset($expertise_descendant_fpage_title_general) ) {
-						$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
+						$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
+							$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+						);
 							$expertise_descendant_fpage_title_general = $fpage_text_expertise_general_vars['expertise_descendant_fpage_title_general']; // string
 					}
 					$expertise_fpage_title_general = $expertise_descendant_fpage_title_general;
 
 				} else {
 				
-					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
+					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
+						$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+					);
 						$expertise_fpage_title_general = $fpage_text_expertise_general_vars['expertise_fpage_title_general']; // string
 
 				}
@@ -252,14 +266,18 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 				if ( $expertise_descendant_list ) {
 				
 					if ( !isset($expertise_descendant_fpage_intro_general) ) {
-						$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
+						$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
+							$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+						);
 							$expertise_descendant_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_descendant_fpage_intro_general']; // string
 					}
 					$expertise_fpage_intro_general = $expertise_descendant_fpage_intro_general;
 
 				} else {
 				
-					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general();
+					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
+						$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+					);
 						$expertise_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_intro_general']; // string
 
 				}

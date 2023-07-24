@@ -35,6 +35,11 @@ add_action('wp_head','uamswp_keyword_hook_header');
 $page_title = single_cat_title( '', false );
 $page_title_attr = uamswp_attr_conversion($page_title);
 
+// Array for page titles and section titles
+$page_titles = array(
+	'page_title'	=> $page_title
+);
+
 // Get system settings for ontology item labels
 
 	// Get system settings for provider labels

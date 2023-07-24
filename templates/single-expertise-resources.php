@@ -89,6 +89,11 @@ $page_id = get_the_ID();
 $page_title = get_the_title(); // Title of the area of expertise
 $page_title_attr = uamswp_attr_conversion($page_title);
 
+// Array for page titles and section titles
+$page_titles = array(
+	'page_title'	=> $page_title
+);
+
 // Get the page slug for the 'parent' area of expertise
 $page_slug = $post->post_name;
 
@@ -105,7 +110,7 @@ $ontology_type = isset($ontology_type) ? $ontology_type : 1; // Check if 'expert
 // Get system settings for fake subpage text elements in an Area of Expertise subsection
 $fpage_text_expertise_vars = isset($fpage_text_expertise_vars) ? $fpage_text_expertise_vars : uamswp_fad_fpage_text_expertise(
 	$page_id, // int
-	$page_title, // string
+	$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 	$ontology_type // bool
 );
 	$expertise_page_title_options = $fpage_text_expertise_vars['expertise_page_title_options']; // string
@@ -467,6 +472,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	function uamswp_fad_section_clinical_resource__template() {
 
 		global $clinical_resources;
+		global $page_titles;
 		global $clinical_resource_section_more_link_key;
 		global $clinical_resource_section_more_link_value;
 		global $clinical_resource_section_show;
@@ -483,6 +489,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 
 		uamswp_fad_section_clinical_resource(
 			$clinical_resources, // int[] // Value of the related clinical resources input
+			$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 			$clinical_resource_section_more_link_key, // string (optional)
 			$clinical_resource_section_more_link_value, // string (optional)
 			$clinical_resource_section_show, // bool (optional) // Query for whether to show the clinical resource section
@@ -501,11 +508,16 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	add_action( 'genesis_entry_content', 'uamswp_fad_section_clinical_resource__template', 14 );
 
 	// Display references to other archive pages
+	$text_image_overlay_id = isset($text_image_overlay_id) ? $text_image_overlay_id : '';
 	function uamswp_fad_fpage_text_image_overlay__template() {
-		global $page_id; 
+		global $page_id;
+		global $page_titles;
+		global $text_image_overlay_id;
 
 		uamswp_fad_fpage_text_image_overlay(
-			$page_id // int
+			$page_id, // int
+			$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+			$text_image_overlay_id // string (optional)
 		);
 	}
 	add_action( 'genesis_entry_content', 'uamswp_fad_fpage_text_image_overlay__template', 25 );

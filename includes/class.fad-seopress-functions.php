@@ -26,28 +26,37 @@
 				global $meta_title_enhanced_x3_order; // array // Optional pre-defined array for name order of enhanced meta title level 3 // Expects four values but will accommodate any number
 
 		// Check/define variables
-		$page_title = ( isset($page_title) && !empty($page_title) ) ? $page_title : get_the_title();
-		$page_title_attr = ( isset($page_title_attr) && !empty($page_title_attr) ) ? $page_title_attr : ( function_exists('uamswp_attr_conversion') ? uamswp_attr_conversion($page_title) : $page_title);
-		$meta_title = ( isset($meta_title) && !empty($meta_title) ) ? $meta_title : '';
-		$meta_title_base_addition = ( isset($meta_title_base_addition) && !empty($meta_title_base_addition) ) ? $meta_title_base_addition : $page_title_attr;
-		$meta_title_base_order = ( isset($meta_title_enhanced_order) && !empty($meta_title_enhanced_order) ) ? $meta_title_enhanced_order : array( $meta_title_base_addition );
-		$meta_title_enhanced_addition = ( isset($meta_title_enhanced_addition) && !empty($meta_title_enhanced_addition) ) ? $meta_title_enhanced_addition : '';
-		$meta_title_enhanced_order = ( isset($meta_title_enhanced_order) && !empty($meta_title_enhanced_order) ) ? $meta_title_enhanced_order : array( $meta_title_base_addition, $meta_title_enhanced_addition );
-		$meta_title_enhanced_x2_addition = ( isset($meta_title_enhanced_x2_addition) && !empty($meta_title_enhanced_x2_addition) ) ? $meta_title_enhanced_x2_addition : '';
-		$meta_title_enhanced_x2_order = ( isset($meta_title_enhanced_x2_order) && !empty($meta_title_enhanced_x2_order) ) ? $meta_title_enhanced_x2_order : array( $meta_title_base_addition, $meta_title_enhanced_addition, $meta_title_enhanced_x2_addition );
-		$meta_title_enhanced_x3_addition = ( isset($meta_title_enhanced_x3_addition) && !empty($meta_title_enhanced_x3_addition) ) ? $meta_title_enhanced_x3_addition : '';
-		$meta_title_enhanced_x3_order = ( isset($meta_title_enhanced_x3_order) && !empty($meta_title_enhanced_x3_order) ) ? $meta_title_enhanced_x3_order : array( $meta_title_base_addition, $meta_title_enhanced_addition, $meta_title_enhanced_x2_addition, $meta_title_enhanced_x3_addition );
 
-		// Get the site title
-		// "UAMS Health"
-		$meta_title_site_name = get_bloginfo( "name" );
+			// Page title
+			$page_title = ( isset($page_title) && !empty($page_title) ) ? $page_title : get_the_title();
+			$page_title_attr = ( isset($page_title_attr) && !empty($page_title_attr) ) ? $page_title_attr : ( function_exists('uamswp_attr_conversion') ? uamswp_attr_conversion($page_title) : $page_title);
 
-		// Set the maximum number of characters for the meta title
-		// The recommended length for meta titles is 50-60 characters.
-		$meta_title_chars_max = 60;
+			// Array for page titles and section titles
+			$page_titles = array(
+				'page_title'	=> $page_title
+			);
 
-		// Set the string that separates components of the meta title
-		$meta_title_separator = ' | ';
+			// Meta title
+			$meta_title = ( isset($meta_title) && !empty($meta_title) ) ? $meta_title : '';
+			$meta_title_base_addition = ( isset($meta_title_base_addition) && !empty($meta_title_base_addition) ) ? $meta_title_base_addition : $page_title_attr;
+			$meta_title_base_order = ( isset($meta_title_enhanced_order) && !empty($meta_title_enhanced_order) ) ? $meta_title_enhanced_order : array( $meta_title_base_addition );
+			$meta_title_enhanced_addition = ( isset($meta_title_enhanced_addition) && !empty($meta_title_enhanced_addition) ) ? $meta_title_enhanced_addition : '';
+			$meta_title_enhanced_order = ( isset($meta_title_enhanced_order) && !empty($meta_title_enhanced_order) ) ? $meta_title_enhanced_order : array( $meta_title_base_addition, $meta_title_enhanced_addition );
+			$meta_title_enhanced_x2_addition = ( isset($meta_title_enhanced_x2_addition) && !empty($meta_title_enhanced_x2_addition) ) ? $meta_title_enhanced_x2_addition : '';
+			$meta_title_enhanced_x2_order = ( isset($meta_title_enhanced_x2_order) && !empty($meta_title_enhanced_x2_order) ) ? $meta_title_enhanced_x2_order : array( $meta_title_base_addition, $meta_title_enhanced_addition, $meta_title_enhanced_x2_addition );
+			$meta_title_enhanced_x3_addition = ( isset($meta_title_enhanced_x3_addition) && !empty($meta_title_enhanced_x3_addition) ) ? $meta_title_enhanced_x3_addition : '';
+			$meta_title_enhanced_x3_order = ( isset($meta_title_enhanced_x3_order) && !empty($meta_title_enhanced_x3_order) ) ? $meta_title_enhanced_x3_order : array( $meta_title_base_addition, $meta_title_enhanced_addition, $meta_title_enhanced_x2_addition, $meta_title_enhanced_x3_addition );
+
+			// Get the site title
+			// "UAMS Health"
+			$meta_title_site_name = get_bloginfo( "name" );
+
+			// Set the maximum number of characters for the meta title
+			// The recommended length for meta titles is 50-60 characters.
+			$meta_title_chars_max = 60;
+
+			// Set the string that separates components of the meta title
+			$meta_title_separator = ' | ';
 
 		// Construct base meta title value
 		// "Leonard H. McCoy, M.D. | UAMS Health"

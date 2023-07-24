@@ -79,6 +79,11 @@ $archive_text_expertise_vars = isset($archive_text_expertise_vars) ? $archive_te
 $page_title = $expertise_archive_headline; // string
 // $page_title_attr = uamswp_attr_conversion($page_title);
 
+// Array for page titles and section titles
+$page_titles = array(
+	'page_title'	=> $page_title
+);
+
 // // Get the page URL
 // $page_url = get_permalink();
 

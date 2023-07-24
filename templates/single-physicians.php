@@ -184,12 +184,20 @@ $content_placement = 'profile'; // Expected values: 'subsection' or 'profile'
 	// Sort name parameter (e.g., "mccoy-leonard-h")
 	$sort_name_param_value = sanitize_title_with_dashes($sort_name);
 
+	// Array for page titles and section titles
+	$page_titles = array(
+		'short_name'			=> $short_name,
+		'short_name_possessive'	=> $short_name_possessive
+	);
+
 // Get the provider's gender
 $gender = get_field('physician_gender',$post->ID);
 $gender_attr = uamswp_attr_conversion($gender);
 
 // Get system settings for fake subpage (or section) text elements in an Provider subsection (or profile)
-$fpage_text_provider_vars = isset($fpage_text_provider_vars) ? $fpage_text_provider_vars : uamswp_fad_fpage_text_provider();
+$fpage_text_provider_vars = isset($fpage_text_provider_vars) ? $fpage_text_provider_vars : uamswp_fad_fpage_text_provider(
+	$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+);
 	$location_fpage_title_provider = $fpage_text_provider_vars['location_fpage_title_provider']; // string
 	$location_fpage_intro_provider = $fpage_text_provider_vars['location_fpage_intro_provider']; // string
 	$location_fpage_ref_main_title_provider = $fpage_text_provider_vars['location_fpage_ref_main_title_provider']; // string

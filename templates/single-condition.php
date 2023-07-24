@@ -106,6 +106,11 @@ $page_id = get_the_ID();
 $page_title = get_the_title();
 $page_title_attr = uamswp_attr_conversion($page_title);
 
+// Array for page titles and section titles
+$page_titles = array(
+	'page_title'	=> $page_title
+);
+
 // Get the page slug for the condition
 $page_slug = $post->post_name;
 

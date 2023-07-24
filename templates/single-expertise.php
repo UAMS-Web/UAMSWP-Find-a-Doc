@@ -106,6 +106,11 @@ $page_id = get_the_ID();
 $page_title = get_the_title();
 $page_title_attr = uamswp_attr_conversion($page_title);
 
+// Array for page titles and section titles
+$page_titles = array(
+	'page_title'	=> $page_title
+);
+
 // Get the page URL
 $page_url = get_permalink();
 
@@ -119,7 +124,7 @@ $ontology_type = isset($ontology_type) ? $ontology_type : 1; // Check if 'expert
 // Get system settings for fake subpage text elements in an Area of Expertise subsection
 $fpage_text_expertise_vars = isset($fpage_text_expertise_vars) ? $fpage_text_expertise_vars : uamswp_fad_fpage_text_expertise(
 	$page_id, // int
-	$page_title, // string
+	$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 	$ontology_type // bool
 );
 	$expertise_page_title_options = $fpage_text_expertise_vars['expertise_page_title_options']; // string
@@ -608,23 +613,25 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		$treatment_section_intro = $treatment_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
 		function uamswp_fad_section_condition_treatment__template() {
 
-			global $conditions_cpt; // int[]
-			global $treatments_cpt; // int[]
-			global $hide_medical_ontology; // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
-			global $condition_treatment_section_show; // bool
-			global $condition_section_show; // bool
-			global $treatment_section_show; // bool
-			global $ontology_type; // bool
-			global $condition_treatment_section_title; // string // Text to use for the section title
-			global $condition_treatment_section_intro; // string // Text to use for the section intro text
-			global $condition_section_title; // string // Text to use for the conditions subsection title
-			global $condition_section_intro; // string // Text to use for the conditions subsection intro text
-			global $treatment_section_title; // string // Text to use for the treatments subsection title
-			global $treatment_section_intro; // string // Text to use for the treatments subsection intro text
+			global $conditions_cpt;
+			global $treatments_cpt;
+			global $page_titles;
+			global $hide_medical_ontology;
+			global $condition_treatment_section_show;
+			global $condition_section_show;
+			global $treatment_section_show;
+			global $ontology_type;
+			global $condition_treatment_section_title;
+			global $condition_treatment_section_intro;
+			global $condition_section_title;
+			global $condition_section_intro;
+			global $treatment_section_title;
+			global $treatment_section_intro;
 
 			uamswp_fad_section_condition_treatment(
 				$conditions_cpt, // int[]
 				$treatments_cpt, // int[]
+				$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 				$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
 				$condition_treatment_section_show, // bool
 				$condition_section_show, // bool
