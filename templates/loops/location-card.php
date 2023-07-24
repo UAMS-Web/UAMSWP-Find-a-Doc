@@ -12,7 +12,7 @@
  * Required vars:
  * 	$location_single_name // System setting for Locations Plural Item Name
  * 	$location_single_name_attr // Attribute value friendly version of system setting for Locations single item name
- * 	$id
+ * 	$page_id
  * 
  * Optional vars:
  * 	$location_descendant_list // Query for whether this is a list of child locations within a location // bool (default: false)
@@ -20,17 +20,17 @@
 
 // Reset variables
 $featured_image = '';
-$address_id = $id;
+$address_id = $page_id;
 
 // Check/define variables
 $location_descendant_list = isset($location_descendant_list) ? $location_descendant_list : false;
 
-$location_title = get_the_title($id);
+$location_title = get_the_title($page_id);
 $location_title_attr = uamswp_attr_conversion($location_title);
 
 // Parent Location 
-$location_has_parent = get_field('location_parent', $id);
-$location_parent_id = get_field('location_parent_id', $id);
+$location_has_parent = get_field('location_parent', $page_id);
+$location_parent_id = get_field('location_parent_id', $page_id);
 $parent_location = '';
 $parent_id = '';
 $parent_title = '';
@@ -51,17 +51,17 @@ if ($parent_location) {
 	$featured_image = get_the_post_thumbnail($parent_id, 'aspect-16-9-small', [ 'class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr , 'loading' => 'lazy' ]);
 	$address_id = $parent_id;
 
-	$override_parent_photo = get_field('location_image_override_parent', $id);
-	$override_parent_photo_featured = get_field('location_image_override_parent_featured', $id);
+	$override_parent_photo = get_field('location_image_override_parent', $page_id);
+	$override_parent_photo_featured = get_field('location_image_override_parent_featured', $page_id);
 
 	// Set featured image
 	if ( $override_parent_photo && $override_parent_photo_featured ) {
-		$featured_image = get_the_post_thumbnail($id, 'aspect-16-9-small', [ 'class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr , 'loading' => 'lazy' ]);
+		$featured_image = get_the_post_thumbnail($page_id, 'aspect-16-9-small', [ 'class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr , 'loading' => 'lazy' ]);
 	}
 } else {
 	// Set featured image
-	if ( has_post_thumbnail($id) ) {
-		$featured_image = get_the_post_thumbnail($id, 'aspect-16-9-small', [ 'class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr , 'loading' => 'lazy' ]);
+	if ( has_post_thumbnail($page_id) ) {
+		$featured_image = get_the_post_thumbnail($page_id, 'aspect-16-9-small', [ 'class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr , 'loading' => 'lazy' ]);
 	}
 }
 
@@ -111,7 +111,7 @@ $location_zip = get_field('location_zip', $address_id);
 	<?php } ?>
 	<div class="card-body">
 		<h3 class="card-title h5">
-			<span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self" data-categorytitle="Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $location_title; ?></a></span>
+			<span class="name"><a href="<?php echo get_permalink($page_id); ?>" target="_self" data-categorytitle="Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $location_title; ?></a></span>
 			<?php if ( $parent_location && !$location_descendant_list ) { ?>
 				<span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
 			<?php } // endif ?>
@@ -122,20 +122,20 @@ $location_zip = get_field('location_zip', $address_id);
 		<?php 
 		// Check for if we should display a closure alert
 
-		$location_closing = get_field('location_closing', $id); // true or false
-		$location_closing_date = get_field('location_closing_date', $id); // F j, Y
+		$location_closing = get_field('location_closing', $page_id); // true or false
+		$location_closing_date = get_field('location_closing_date', $page_id); // F j, Y
 		$location_closing_date_past = false;
 		if (new DateTime() >= new DateTime($location_closing_date)) {
 			$location_closing_date_past = true;
 		}
-		$location_closing_length = get_field('location_closing_length', $id);
-		$location_reopen_known = get_field('location_reopen_known', $id);
-		$location_reopen_date = get_field('location_reopen_date', $id); // F j, Y
+		$location_closing_length = get_field('location_closing_length', $page_id);
+		$location_reopen_known = get_field('location_reopen_known', $page_id);
+		$location_reopen_date = get_field('location_reopen_date', $page_id); // F j, Y
 		$location_reopen_date_past = false;
 		if (new DateTime() >= new DateTime($location_reopen_date)) {
 			$location_reopen_date_past = true;
 		}
-		$location_closing_info = get_field('location_closing_info', $id);
+		$location_closing_info = get_field('location_closing_info', $page_id);
 		$location_closing_display = false;
 		if (
 			$location_closing && (
@@ -148,7 +148,7 @@ $location_zip = get_field('location_zip', $address_id);
 
 		// Check for if we should display a modified hours alert
 
-		$location_hours_group = get_field('location_hours_group', $id);
+		$location_hours_group = get_field('location_hours_group', $page_id);
 
 		$modified = $location_hours_group['location_modified_hours'];
 		$modified_start = $location_hours_group['location_modified_hours_start_date'];
@@ -222,7 +222,7 @@ $location_zip = get_field('location_zip', $address_id);
 						This <?php echo strtolower($location_single_name); ?>'s hours will be temporarily modified beginning on <?php echo $location_modified_hours_start; ?>.
 					<?php } // endif
 				} // endif ?>
-				<p><a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $alert_label_attr; ?>" class="alert-link" data-categorytitle="Alert" data-itemtitle="<?php echo $location_title_attr; ?>">Learn more</a></p>
+				<p><a href="<?php echo get_permalink($page_id); ?>" aria-label="<?php echo $alert_label_attr; ?>" class="alert-link" data-categorytitle="Alert" data-itemtitle="<?php echo $location_title_attr; ?>">Learn more</a></p>
 			</div>
 		<?php } // endif ?>
 		<?php $map = get_field('location_map', $address_id); ?>
@@ -232,14 +232,14 @@ $location_zip = get_field('location_zip', $address_id);
 		</p>
 		<?php 
 		// Phone values
-		$phone_output_id = $id;
+		$phone_output_id = $page_id;
 		$phone_output = 'associated_locations';
 		include( UAMS_FAD_PATH . '/templates/blocks/locations-phone.php' );
 		?>
 	</div><!-- .card-body -->
 	<div class="btn-container">
 		<div class="inner-container">
-			<a href="<?php echo get_permalink($id); ?>" class="btn btn-primary" aria-label="View <?php echo strtolower($location_single_name_attr); ?> page for <?php echo $location_title_attr; ?>" data-categorytitle="View Location" data-itemtitle="<?php echo $location_title_attr; ?>">View <?php echo $location_single_name; ?></a>
+			<a href="<?php echo get_permalink($page_id); ?>" class="btn btn-primary" aria-label="View <?php echo strtolower($location_single_name_attr); ?> page for <?php echo $location_title_attr; ?>" data-categorytitle="View Location" data-itemtitle="<?php echo $location_title_attr; ?>">View <?php echo $location_single_name; ?></a>
 			<?php if ($map) { ?>
 			<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get Directions to <?php echo $location_title; ?>" data-categorytitle="Get Directions" data-itemtitle="<?php echo $location_title_attr; ?>">Get Directions</a>
 			<?php } ?>

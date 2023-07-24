@@ -12,17 +12,17 @@
 
 // Check/define variables
 
-	$id = get_the_ID();
+	$page_id = get_the_ID();
 
 	if ( !isset($clinical_resource_single_name) ) {
 		$labels_clinical_resource_vars = isset($labels_clinical_resource_vars) ? $labels_clinical_resource_vars : uamswp_fad_labels_clinical_resource();
 			$clinical_resource_single_name = $labels_clinical_resource_vars['clinical_resource_single_name']; // string
 	}
 
-$resource_title = get_the_title($id);
+$resource_title = get_the_title($page_id);
 $resource_title_attr = uamswp_attr_conversion($resource_title);
 
-$resource_type = get_field('clinical_resource_type', $id);
+$resource_type = get_field('clinical_resource_type', $page_id);
 $resource_type_value = $resource_type['value'];
 $resource_type_label = $resource_type['label'];
 
@@ -42,13 +42,12 @@ if ( isset($resource_type) && isset($resource_button_text_arr[$resource_type_val
 $resource_button_text_attr = uamswp_attr_conversion($resource_button_text);
 $resource_label = $resource_button_text_attr . ', ' . $resource_title_attr;
 
-$resource_excerpt = get_the_excerpt($id) ? get_the_excerpt($id) : wp_strip_all_tags( get_the_content($id) );
+$resource_excerpt = get_the_excerpt($page_id) ? get_the_excerpt($page_id) : wp_strip_all_tags( get_the_content($page_id) );
 $resource_excerpt_len = strlen($resource_excerpt);
 if ( $resource_excerpt_len > 160 ) {
 	$resource_excerpt = wp_trim_words( $resource_excerpt, 23, ' &hellip;' );
 }
 
-$resource_image_wide = get_post_thumbnail_id($id);
 
 /*
  * Required vars for the single card layout:
@@ -61,13 +60,14 @@ $resource_image_wide = get_post_thumbnail_id($id);
  * $resource_title_attr
  * $resource_button_text
  */
+$resource_image_wide = get_post_thumbnail_id($page_id);
 
 ?>
 <div class="item">
 	<div class="card">
 		<div class="card-img-top">
 			<picture>
-				<?php if ( has_post_thumbnail($id) && function_exists( 'fly_add_image_size' ) ) { ?> 
+				<?php if ( has_post_thumbnail($page_id) && function_exists( 'fly_add_image_size' ) ) { ?> 
 					<source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center'); ?>" 
 						media="(min-width: 1921px)">
 					<source srcset="<?php echo image_sizer($resource_image_wide, 433, 244, 'center', 'center'); ?>" 
@@ -80,7 +80,7 @@ $resource_image_wide = get_post_thumbnail_id($id);
 						media="(min-width: 1px)">
 					<!-- Fallback -->
 					<img src="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center'); ?>" alt="" role="presentation" />
-				<?php } elseif ( has_post_thumbnail($id) ) { ?>
+				<?php } elseif ( has_post_thumbnail($page_id) ) { ?>
 					<!-- Fallback -->
 					<?php the_post_thumbnail( 'aspect-16-9-small', array( 'alt' => '', 'role' => 'presentation' ) ); ?>
 				<?php } else { ?>
@@ -92,7 +92,7 @@ $resource_image_wide = get_post_thumbnail_id($id);
 		<div class="card-body">
 			<h3 class="card-title h5"><?php echo $resource_title; ?> <span class="subtitle"><span class="sr-only">(</span><?php echo esc_html($resource_type_label); ?><span class="sr-only">)</span></span></h3>
 			<p class="card-text"><?php echo $resource_excerpt; ?></p>
-			<a href="<?php echo get_permalink($id); ?>" class="btn btn-primary stretched-link" aria-label="<?php echo $resource_label; ?>" data-itemtitle="<?php echo $resource_title_attr; ?>"><?php echo $resource_button_text; ?></a>
+			<a href="<?php echo get_permalink($page_id); ?>" class="btn btn-primary stretched-link" aria-label="<?php echo $resource_label; ?>" data-itemtitle="<?php echo $resource_title_attr; ?>"><?php echo $resource_button_text; ?></a>
 		</div>
 	</div>
 </div>

@@ -757,7 +757,7 @@ while ( have_posts() ) : the_post(); ?>
 					<h2>Contact Information</h2>
 					<?php 
 					// Phone values
-					$phone_output_id = $id;
+					$phone_output_id = $page_id;
 					$phone_output = 'location_profile';
 					include( UAMS_FAD_PATH . '/templates/blocks/locations-phone.php' );
 

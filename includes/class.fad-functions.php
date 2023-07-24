@@ -393,7 +393,7 @@ function uamswp_load_by_ajax_callback(){
 	$loop = new WP_Query($args);
 	$out = '';
 	if ($loop -> have_posts()) : while ($loop -> have_posts()) : $loop -> the_post();
-		$id = get_the_ID();
+		$page_id = get_the_ID();
 		$out .= include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
 	endwhile;
 	endif;
@@ -733,8 +733,8 @@ function provider_ajax_filter_callback() {
 
 	$provider_region_IDs = array();
 	while ($region_prov_ids->have_posts()) : $region_prov_ids->the_post();
-		$id = get_the_ID();
-		$provider_region_IDs = array_merge($provider_region_IDs, get_field('physician_region', $id));
+		$page_id = get_the_ID();
+		$provider_region_IDs = array_merge($provider_region_IDs, get_field('physician_region', $page_id));
 	endwhile;
 	$provider_region_IDs = array_unique($provider_region_IDs);
 	$provider_region_list = array();
@@ -773,8 +773,8 @@ function provider_ajax_filter_callback() {
 
 	$title_list = array();
 	while ($title_prov_ids->have_posts()) : $title_prov_ids->the_post();
-		$id = get_the_ID();
-		$title_list[] = get_field('physician_title', $id);
+		$page_id = get_the_ID();
+		$title_list[] = get_field('physician_title', $page_id);
 	endwhile;
 
 
@@ -805,7 +805,7 @@ function provider_ajax_filter_callback() {
 		//echo $_POST['ppp'];
 		// $z=0;
 		while ( $search_query->have_posts() ) : $search_query->the_post();
-			$id = get_the_ID();
+			$page_id = get_the_ID();
 			include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
 			// $z++;
 		endwhile;
@@ -925,8 +925,8 @@ function provider_title_ajax_filter_callback() {
 		$provider_ids = $search_query->posts;
 		$title_list = array();
 		while ( $search_query->have_posts() ) : $search_query->the_post();
-			$id = get_the_ID();
-			$title_list[] = get_field('physician_title', $id);
+			$page_id = get_the_ID();
+			$title_list[] = get_field('physician_title', $page_id);
 			include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
 		endwhile;
 		echo '<data id="provider_ids" data-postids="'. implode(',', $provider_ids) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
@@ -1047,8 +1047,8 @@ function location_ajax_filter_callback() {
 
 	$location_region_IDs = array();
 	while ($region_loc_ids->have_posts()) : $region_loc_ids->the_post();
-		$id = get_the_ID();
-		$location_region_IDs[] = get_field('location_region', $id);
+		$page_id = get_the_ID();
+		$location_region_IDs[] = get_field('location_region', $page_id);
 	endwhile;
 	$location_region_IDs = array_unique($location_region_IDs);
 	$location_region_list = array();
@@ -1084,7 +1084,7 @@ function location_ajax_filter_callback() {
 	if ( $search_query->have_posts() && !empty($locations) ) {
 		$location_ids = $search_query->posts;
 		while ( $search_query->have_posts() ) : $search_query->the_post();
-			$id = get_the_ID();
+			$page_id = get_the_ID();
 			include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
 		endwhile;
 		echo '<data id="location_ids" data-postids="'. implode(',', $location_ids) .'," data-regions="'. implode(',', $location_region_list) .',"></data>';
@@ -1812,11 +1812,11 @@ function uamswp_fad_post_title(
 				$expertise_content_count = count($expertise_content_query->posts);
 				while ( $expertise_content_query->have_posts() ) {
 					$expertise_content_query->the_post();
-					$id = get_the_ID();
-					$title = get_the_title();
-					$title_attr = uamswp_attr_conversion($title);
-					$url = get_permalink();
-					$expertise_content_nav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-'. $id .' nav-item active"><a title="'. $title_attr .'" href="'. $url .'" class="nav-link"><span itemprop="name">'. $title .'</span></a></li>';
+					$page_id = get_the_ID();
+					$page_title = get_the_title();
+					$page_title_attr = uamswp_attr_conversion($title);
+					$page_url = get_permalink();
+					$expertise_content_nav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-'. $page_id .' nav-item active"><a title="'. $page_title_attr .'" href="'. $page_url .'" class="nav-link"><span itemprop="name">'. $page_title .'</span></a></li>';
 				} // endwhile
 				wp_reset_postdata();
 			} else {

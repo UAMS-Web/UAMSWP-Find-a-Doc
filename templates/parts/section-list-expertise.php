@@ -330,7 +330,7 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 								if ( $expertise_count > 0 ) {
 									while ( $expertise_query->have_posts() ) {
 										$expertise_query->the_post();
-										$id = get_the_ID();
+										$page_id = get_the_ID();
 										include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
 									} // endwhile
 								} // endif ( $expertise_count > 0 )

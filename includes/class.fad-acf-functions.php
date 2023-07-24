@@ -44,8 +44,8 @@ function set_default_portal( $field ) {
 	// Only if no value set
 	if( empty( $field['value'] ) ){
 		$term = get_term_by('slug', 'uams-mychart', 'portal');
-		$id = $term->term_id;
-		$default = array($id);
+		$term_id = $term->term_id;
+		$default = array($term_id);
 		// Set field to default value
 		$field[ 'value' ] = $default ;
 	}
@@ -60,8 +60,8 @@ function set_default_language($value, $post_id, $field) {
 	}
 
 	$term = get_term_by('slug', 'english', 'language');
-	$id = $term->term_id;
-	$value = array($id);
+	$term_id = $term->term_id;
+	$value = array($term_id);
 	return $value;
 }
 
@@ -73,8 +73,8 @@ function set_default_region($value, $post_id, $field) {
 	}
 
 	$term = get_term_by('slug', 'central', 'region');
-	$id = $term->term_id;
-	$value = array($id);
+	$term_id = $term->term_id;
+	$value = array($term_id);
 	return $value;
 }
 

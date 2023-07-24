@@ -18,7 +18,7 @@ global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
 
 if ( have_posts() ) : while ( have_posts() ) : the_post();
 
-$id = get_the_ID();
+$page_id = get_the_ID();
 include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
 
 endwhile; else : ?>

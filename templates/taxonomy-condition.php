@@ -168,7 +168,7 @@ if ( $location_valid ) {
 	ob_start();
 	ob_clean();
 	while ( $location_query->have_posts() ) : $location_query->the_post();
-		$id = get_the_ID();
+		$page_id = get_the_ID();
 		include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
 	endwhile;
 	$location_content .= ob_get_clean();
@@ -315,7 +315,7 @@ if ($providers && !empty($providers)) { $condition_field_classes .= ' has-provid
 										<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $postsCountClass; ?>">
 											<?php
 												while ($provider_query->have_posts()) : $provider_query->the_post();
-													$id = get_the_ID();
+													$page_id = get_the_ID();
 													include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
 												endwhile;
 												wp_reset_postdata();
@@ -361,7 +361,7 @@ if ($providers && !empty($providers)) { $condition_field_classes .= ' has-provid
 								<div class="card-list card-list-expertise">
 								<?php 
 									while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
-										$id = get_the_ID();
+										$page_id = get_the_ID();
 										include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
 									endwhile;
 									wp_reset_postdata();

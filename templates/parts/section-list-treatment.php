@@ -219,11 +219,11 @@ if ( $treatment_section_show ) {
 
 								while ( $treatment_cpt_query->have_posts() ) {
 									$treatment_cpt_query->the_post();
-									$id = get_the_ID();
-									$treatment_title = get_the_title($id);
+									$page_id = get_the_ID();
+									$treatment_title = get_the_title($page_id);
 									$treatment_title_attr = uamswp_attr_conversion($treatment_title);
 									if ( $condition_treatment_section_link_item ) {
-										$treatment_url = get_the_permalink($id);
+										$treatment_url = get_the_permalink($page_id);
 										$treatment_aria_label = 'Go to ' . $treatment_single_name_attr . ' page for ' . $treatment_title_attr;
 									}
 

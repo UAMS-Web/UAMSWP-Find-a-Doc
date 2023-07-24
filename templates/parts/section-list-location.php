@@ -192,8 +192,8 @@ if ( $location_section_show ) {
 				$location_region_IDs = array();
 				while ( $location_query->have_posts() ) {
 					$location_query->the_post();
-					$id = get_the_ID();
-					$location_region_return = get_field('location_region', $id);
+					$page_id = get_the_ID();
+					$location_region_return = get_field('location_region', $page_id);
 					if ( is_array( $location_region_return ) ) {
 						$location_region_IDs = array_merge($location_region_IDs, $location_region_return);
 					} else {
@@ -284,10 +284,10 @@ if ( $location_section_show ) {
 									$title_list = $location_section_filter_title ? array() : '';
 									while ( $location_query->have_posts() ) {
 										$location_query->the_post();
-										$id = get_the_ID();
+										$page_id = get_the_ID();
 										include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
 										if ( $location_section_filter_title ) {
-											$title_list[] = get_field('location_title', $id);
+											$title_list[] = get_field('location_title', $page_id);
 										}
 
 										// Schema data

@@ -162,7 +162,7 @@ if ( $clinical_resource_section_show ) {
 						<ul>
 							<?php
 							while ($clinical_resource_query->have_posts()) : $clinical_resource_query->the_post();
-								$id = get_the_ID();
+								$page_id = get_the_ID();
 								include( UAMS_FAD_PATH . '/templates/loops/resource-list-item.php' );
 							endwhile;
 							wp_reset_postdata(); ?>

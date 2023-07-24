@@ -11,7 +11,7 @@
 $i = 0;
 if ( have_posts() ) : while ( have_posts() ) : the_post();
 $class = ($i%2 == 0)? 'whiteBackground': 'grayBackground';
-$full_name = rwmb_meta('physician_first_name') .' ' .(rwmb_meta('physician_middle_name') ? rwmb_meta('physician_middle_name') . ' ' : '') . rwmb_meta('physician_last_name') . (rwmb_meta('physician_pedigree', $id) ? '&nbsp;' . rwmb_meta('physician_pedigree', $id) : '') . (rwmb_meta('physician_degree') ? ', ' . rwmb_meta('physician_degree') : '');
+$full_name = rwmb_meta('physician_first_name') .' ' .(rwmb_meta('physician_middle_name') ? rwmb_meta('physician_middle_name') . ' ' : '') . rwmb_meta('physician_last_name') . (rwmb_meta('physician_pedigree', $page_id) ? '&nbsp;' . rwmb_meta('physician_pedigree', $page_id) : '') . (rwmb_meta('physician_degree') ? ', ' . rwmb_meta('physician_degree') : '');
 // $profileurl = '/directory/physician/' . $post->post_name .'/';
 ?>
 <div class="<?php echo $class; ?> archive-box">

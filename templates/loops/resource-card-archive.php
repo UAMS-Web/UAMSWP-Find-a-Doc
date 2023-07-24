@@ -12,7 +12,7 @@
 
 // Check/define variables
 
-	$id = get_the_ID();
+	$page_id = get_the_ID();
 
 	if (
 		!isset($provider_single_name)
@@ -64,10 +64,10 @@
 			$treatment_plural_name = $labels_treatment_vars['treatment_plural_name']; // string
 	}
 
-$resource_title = get_the_title($id);
+$resource_title = get_the_title($page_id);
 $resource_title_attr = uamswp_attr_conversion($resource_title);
 
-$resource_type = get_field('clinical_resource_type', $id);
+$resource_type = get_field('clinical_resource_type', $page_id);
 $resource_type_value = $resource_type['value'];
 $resource_type_label = $resource_type['label'];
 
@@ -87,14 +87,14 @@ if ( isset($resource_type) && isset($resource_button_text_arr[$resource_type_val
 $resource_button_text_attr = uamswp_attr_conversion($resource_button_text);
 $resource_label = $resource_button_text_attr . ', ' . $resource_title_attr;
 
-$resource_excerpt = get_the_excerpt($id) ? get_the_excerpt($id) : wp_strip_all_tags( get_the_content($id) );
+$resource_excerpt = get_the_excerpt($page_id) ? get_the_excerpt($page_id) : wp_strip_all_tags( get_the_content($page_id) );
 $resource_excerpt_len = strlen($resource_excerpt);
 if ( $resource_excerpt_len > 160 ) {
 	$resource_excerpt = wp_trim_words( $resource_excerpt, 23, ' &hellip;' );
 }
 
-$resource_image_wide = get_post_thumbnail_id($id);
-$resource_image_square = get_field('clinical_resource_image_square', $id);
+$resource_image_wide = get_post_thumbnail_id($page_id);
+$resource_image_square = get_field('clinical_resource_image_square', $page_id);
 $resource_image_square = ( isset($resource_image_square) && !empty($resource_image_square) ) ? $resource_image_square : $resource_image_wide;
 
 $resource_related_max = 3; // Set how many of each related item type to display
@@ -214,7 +214,7 @@ if ( !empty($resource_expertises) ) {
 	<div class="item">
 		<div class="row">
 			<div class="col image">
-				<a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="Photo" data-itemtitle="<?php echo $resource_title_attr; ?>">
+				<a href="<?php echo get_permalink($page_id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="Photo" data-itemtitle="<?php echo $resource_title_attr; ?>">
 					<picture>
 						<?php if ( has_post_thumbnail() && function_exists( 'fly_add_image_size' ) ) { ?>
 							<source srcset="<?php echo image_sizer($resource_image_square, 243, 243, 'center', 'center'); ?>"
@@ -245,13 +245,13 @@ if ( !empty($resource_expertises) ) {
 				<div class="row">
 					<div class="col-12 primary">
 						<h3 class="h4">
-							<a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $resource_title_attr; ?>">
+							<a href="<?php echo get_permalink($page_id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $resource_title_attr; ?>">
 								<span class="name"><?php echo $resource_title; ?></span>
 							</a>
 							<span class="subtitle"><span class="sr-only"> (</span><?php echo esc_html($resource_type_label); ?><span class="sr-only">)</span></span>
 						</h3>
 						<p><?php echo $resource_excerpt; ?></p>
-						<a class="btn btn-primary" href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo $resource_title_attr; ?>"><?php echo $resource_button_text; ?></a>
+						<a class="btn btn-primary" href="<?php echo get_permalink($page_id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo $resource_title_attr; ?>"><?php echo $resource_button_text; ?></a>
 					</div>
 					<div class="col-12 secondary">
 						<h4 class="h5">Related Content</h4>
@@ -454,7 +454,7 @@ if ( !empty($resource_expertises) ) {
 								$associates = '';
 							?> 
 						</dl>
-						<a class="btn btn-primary" href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo $resource_title_attr; ?>"><?php echo $resource_button_text; ?></a>
+						<a class="btn btn-primary" href="<?php echo get_permalink($page_id); ?>" aria-label="<?php echo $resource_label; ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo $resource_title_attr; ?>"><?php echo $resource_button_text; ?></a>
 					</div>
 				</div>
 			</div>

@@ -37,32 +37,32 @@ if ( have_posts() ) {
 			<?php 
 				while ( have_posts() ) : the_post();
 
-				$id = get_the_ID();
+				$page_id = get_the_ID();
 				// include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
 				?>
 				<tr>
 					<th scope="row"><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title(); ?></a></th>
 					<td>
-						<?php if (get_field('location_phone', $id)) { ?>
-							<a href="tel:<?php echo format_phone_dash( get_field('location_phone', $id) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone', $id) ); ?></a>
+						<?php if (get_field('location_phone', $page_id)) { ?>
+							<a href="tel:<?php echo format_phone_dash( get_field('location_phone', $page_id) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone', $page_id) ); ?></a>
 						<?php } else { ?>
 							&nbsp;
 						<?php } ?>
 					</td>
 					<td>
-						<?php if (get_field('location_new_appointments_phone', $id) && get_field('location_clinic_phone_query', $id)) { ?>
+						<?php if (get_field('location_new_appointments_phone', $page_id) && get_field('location_clinic_phone_query', $page_id)) { ?>
 							<dl>
-								<dt><?php echo get_field('field_location_appointment_phone_query', $id) ? 'New Patients' : 'New and Returning Patients'; ?></dt>
-								<dd><a href="tel:<?php echo format_phone_dash( get_field('location_new_appointments_phone', $id) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_new_appointments_phone', $id) ); ?></a></dd>
-								<?php if (get_field('location_return_appointments_phone', $id) && get_field('field_location_appointment_phone_query', $id)) { ?>
+								<dt><?php echo get_field('field_location_appointment_phone_query', $page_id) ? 'New Patients' : 'New and Returning Patients'; ?></dt>
+								<dd><a href="tel:<?php echo format_phone_dash( get_field('location_new_appointments_phone', $page_id) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_new_appointments_phone', $page_id) ); ?></a></dd>
+								<?php if (get_field('location_return_appointments_phone', $page_id) && get_field('field_location_appointment_phone_query', $page_id)) { ?>
 									<dt>Returning Patients</dt>
-									<dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone', $id) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone', $id) ); ?></a></dd>
+									<dd><a href="tel:<?php echo format_phone_dash( get_field('location_return_appointments_phone', $page_id) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_return_appointments_phone', $page_id) ); ?></a></dd>
 								<?php } ?>
 							</dl>
-						<?php } elseif (get_field('location_phone', $id)) { ?>
+						<?php } elseif (get_field('location_phone', $page_id)) { ?>
 							<dl>
 								<dt>New and Returning Patients</dt>
-								<dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone', $id) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone', $id) ); ?></a></dd>
+								<dd><a href="tel:<?php echo format_phone_dash( get_field('location_phone', $page_id) ); ?>" class="icon-phone"><?php echo format_phone_us( get_field('location_phone', $page_id) ); ?></a></dd>
 							</dl>
 						<?php } else { ?>
 							&nbsp;

@@ -174,8 +174,8 @@ if ( $provider_section_show ) {
 				$provider_region_IDs = array();
 				while ( $provider_query->have_posts() ) {
 					$provider_query->the_post();
-					$id = get_the_ID();
-					$provider_region_return = get_field('physician_region', $id);
+					$page_id = get_the_ID();
+					$provider_region_return = get_field('physician_region', $page_id);
 					if ( is_array( $provider_region_IDs ) ) {
 						$provider_region_IDs = array_merge($provider_region_IDs, $provider_region_return);
 					} else {
@@ -255,10 +255,10 @@ if ( $provider_section_show ) {
 									$title_list = $provider_section_filter_title ? array() : '';
 									while ( $provider_query->have_posts() ) {
 										$provider_query->the_post();
-										$id = get_the_ID();
+										$page_id = get_the_ID();
 										include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
 										if ( $provider_section_filter_title ) {
-											$title_list[] = get_field('physician_title', $id);
+											$title_list[] = get_field('physician_title', $page_id);
 										}
 									} // endwhile
 									if ( $provider_section_filter ) {

@@ -11,15 +11,15 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-$id = '';
-if ( empty( $id ) && isset($block) ) {
-	$id = $block['id'];
+$block_id = '';
+if ( empty( $block_id ) && isset($block) ) {
+	$block_id = $block['id'];
 }
-if ( empty ($id) ) {
-	$id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
+if ( empty ($block_id) ) {
+	$block_id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
 }
 
-$id = 'providers-' . $id;
+$section_id = 'providers-' . $block_id;
 
 $className = '';
 if( !empty($block['className']) ) {
@@ -129,7 +129,7 @@ if($filter_id || $filter_region || $filter_location || $filter_aoe) {
 	// echo '<pre>'; print_r($args); echo '</pre>';
 
 	if ( $provider_query->have_posts() ) : ?>
-		<section class="uams-module provider-list alignfull <?php echo $background_color ? $background_color : 'bg-auto'; ?>" id="<?php echo $id; ?>">
+		<section class="uams-module provider-list alignfull <?php echo $background_color ? $background_color : 'bg-auto'; ?>" id="<?php echo $section_id; ?>">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
@@ -139,7 +139,7 @@ if($filter_id || $filter_region || $filter_location || $filter_aoe) {
 							<div class="card-list card-list-doctors card-list-doctors-count-<?php echo $count; ?>">
 								<div class="card-list">
 								<?php while ( $provider_query->have_posts() ) : $provider_query->the_post();
-									$id = get_the_ID();
+									$page_id = get_the_ID();
 									include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
 								endwhile;
 								wp_reset_postdata();?>
