@@ -190,6 +190,9 @@ $content_placement = 'profile'; // Expected values: 'subsection' or 'profile'
 		'short_name_possessive'	=> $short_name_possessive
 	);
 
+	// Get the page URL for the profile
+	$page_url = get_permalink();
+
 // Get the provider's gender
 $gender = get_field('physician_gender',$post->ID);
 $gender_attr = uamswp_attr_conversion($gender);
@@ -857,6 +860,7 @@ while ( have_posts() ) : the_post();
 				</div>
 				<?php 
 				$docphoto = '/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg';
+				$schema_image = '';
 				if ( has_post_thumbnail() ) { ?>
 					<div class="col-12 col-xs px-0 px-xs-4 px-sm-8 order-1 image">
 						<picture>
@@ -875,9 +879,11 @@ while ( have_posts() ) : the_post();
 								<img src="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center'); ?>" alt="<?php echo $full_name_attr; ?>" />
 								<?php
 								$docphoto = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center');
+								$schema_image = $docphoto;
 							} else {
 								the_post_thumbnail( 'large', array( 'itemprop' => 'image' ) );
 								$docphoto = get_the_post_thumbnail( 'large');
+								$schema_image = $docphoto;
 							} // endif ( function_exists( 'fly_add_image_size' ) ) else ?>
 						</picture>
 					</div>
@@ -1435,6 +1441,17 @@ while ( have_posts() ) : the_post();
 </div>
 <?php
 // Schema Data
+$schema_type = 'Physician'; // string
+$schema_name = $full_name_attr; // string
+$schema_url = $page_url; // string
+$schema_image = isset($schema_image) ? $schema_image : ''; // string
+$schema_description = isset($schema_description) ? $schema_description : ''; // string
+$schema_medical_specialty = $condition_treatment_schema; // array (optional)
+$schema_address = $location_schema; // array (optional)
+$schema_aggregate_rating = $rating_valid; // bool (optional)
+$schema_aggregate_rating_value = $avg_rating; // string (optional)
+$schema_aggregate_rating_count = $review_count; // int (optional)
+$schema_aggregate_rating_review_count = $comment_count; // int (optional)
 include( UAMS_FAD_PATH . '/templates/parts/schema.php' );
 
 endwhile; // end of the loop.
