@@ -98,6 +98,7 @@ if (!$location_address_2) {
 $location_city = get_field('location_city', $address_id);
 $location_state = get_field('location_state', $address_id);
 $location_zip = get_field('location_zip', $address_id);
+$location_map = get_field('location_map', $address_id);
 
 ?>
 <div class="card">

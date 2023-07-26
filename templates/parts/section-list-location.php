@@ -305,23 +305,39 @@ if ( $location_section_show ) {
 											$title_list[] = get_field('location_title', $page_id);
 										}
 
-										// Address Schema Data
+										// Add location details to schema data
 										if ( $location_section_schema_query ) {
 
-											// Check/define the main address schema array
-											$schema_address = ( isset($schema_address) && is_array($schema_address) ) ? $schema_address : array();
+											// Address Schema Data
+											
+												// Check/define the main address schema array
+												$schema_address = ( isset($schema_address) && is_array($schema_address) ) ? $schema_address : array();
 
-											// Add this location's details to the main address schema array
-											$schema_address = uamswp_schema_address(
-												$schema_address, // array (optional) // Main address schema array
-												$location_address_1 . ( $location_address_2_schema ? ' ' . $location_address_2_schema : '' ), // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
-												'', // string (optional) // The post office box number for PO box addresses.
-												$location_city, // string (optional) // The locality in which the street address is, and which is in the region. For example, Mountain View.
-												$location_state, // string (optional) // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
-												$location_zip, // string (optional) // The postal code. For example, 94043.
-												'', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
-												$location_phone_format_dash // string (optional) // The telephone number.
-											);
+												// Add this location's details to the main address schema array
+												$schema_address = uamswp_schema_address(
+													$schema_address, // array (optional) // Main address schema array
+													$location_address_1 . ( $location_address_2_schema ? ' ' . $location_address_2_schema : '' ), // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
+													'', // string (optional) // The post office box number for PO box addresses.
+													$location_city, // string (optional) // The locality in which the street address is, and which is in the region. For example, Mountain View.
+													$location_state, // string (optional) // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
+													$location_zip, // string (optional) // The postal code. For example, 94043.
+													'', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
+													$location_phone_format_dash // string (optional) // The telephone number.
+												);
+
+											// Geo Schema Data
+											
+												// Check/define the main geo schema array
+												$schema_geo = ( isset($schema_geo) && is_array($schema_geo) && !empty($schema_geo) ) ? $schema_geo : array();
+											
+												// Add this location's details to the main geo schema array
+											
+													$schema_geo = uamswp_schema_geo(
+														$schema_geo, // array (optional) // Main geo schema array
+														$location_map['lat'], // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+														$location_map['lng'], // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+													);
+
 										}
 									} // endwhile
 									if ( $location_section_filter ) {

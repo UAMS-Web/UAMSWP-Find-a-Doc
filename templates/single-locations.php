@@ -782,6 +782,19 @@ while ( have_posts() ) : the_post(); ?>
 							'' // string (optional) // The telephone number.
 						);
 
+					// Geo Schema Data
+					
+						// Check/define the main geo schema array
+						$schema_geo = ( isset($schema_geo) && is_array($schema_geo) && !empty($schema_geo) ) ? $schema_geo : array();
+					
+						// Add this location's details to the main geo schema array
+					
+							$schema_geo = uamswp_schema_geo(
+								$schema_geo, // array (optional) // Main geo schema array
+								$map['lat'], // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+								$map['lng'], // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+							);
+
 					?>
 					<h2>Contact Information</h2>
 					<?php

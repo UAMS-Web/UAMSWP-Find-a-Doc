@@ -1460,15 +1460,18 @@ while ( have_posts() ) : the_post();
 		// Recommended by Google Structured Data
 		// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
 
-			// Property: url
-			$schema_url = $page_url; // string
-
 			// Property: aggregateRating
 			$schema_aggregate_rating = $rating_valid; // bool
 			$schema_aggregate_rating_value = $avg_rating; // string
 			$schema_aggregate_rating_count = $review_count; // int
 			$schema_aggregate_rating_review_count = $comment_count; // int
 		
+			// Property: geo
+			$schema_geo = isset($schema_geo) ? $schema_geo : '';
+
+			// Property: url
+			$schema_url = $page_url; // string
+
 		// Additional Selected Properties
 
 			// Property: description

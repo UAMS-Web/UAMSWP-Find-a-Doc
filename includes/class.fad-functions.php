@@ -7728,6 +7728,72 @@ function uamswp_fad_section_condition_treatment(
 
 	}
 
+	// Add data to an array defining schema data for geo
+	function uamswp_schema_geo(
+		$schema_geo = '', // array (optional) // Main geo schema array
+		$latitude = '', // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+		$longitude = '', // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+		$elevation = '' // string (optional) // The elevation of a location (WGS 84). Values may be of the form 'NUMBER UNIT_OF_MEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should be assumed to be a value in meters.
+	) {
+
+		/* Example use:
+		 * 
+		 * 	// Geo Schema Data
+		 * 
+		 * 		// Check/define the main geo schema array
+		 * 		$schema_geo = ( isset($schema_geo) && is_array($schema_geo) && !empty($schema_geo) ) ? $schema_geo : array();
+		 * 
+		 * 		// Add this location's details to the main geo schema array
+		 * 
+		 * 			$schema_geo = uamswp_schema_geo(
+		 * 				$schema_geo, // array (optional) // Main geo schema array
+		 * 				$schema_latitude, // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+		 * 				$schema_longitude, // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+		 * 				$schema_elevation // string (optional) // The elevation of a location (WGS 84). Values may be of the form 'NUMBER UNIT_OF_MEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should be assumed to be a value in meters.
+		 * 			);
+		 */
+
+		// Check/define variables
+
+			$schema_geo = ( isset($schema_geo) && is_array($schema_geo) && !empty($schema_geo) ) ? $schema_geo : array();
+			$latitude = isset($latitude) ? $latitude : '';
+			$longitude = isset($longitude) ? $longitude : '';
+			$elevation = isset($elevation) ? $elevation : '';
+
+		// Create an array for this item
+
+		$schema = array();
+
+		// Add values to the array
+
+			if ( $latitude ) {
+				$schema['latitude'] = $latitude;
+			}
+			
+			if ( $longitude ) {
+				$schema['longitude'] = $longitude;
+			}
+			
+			if ( $elevation ) {
+				$schema['elevation'] = $elevation;
+			}
+
+			if ( !empty($schema) ) {
+				$schema = array('@type' => 'GeoCoordinates') + $schema;
+			}
+
+		// Add this item's array to the main geo schema array
+
+			if ( !empty($schema) ) {
+				$schema_geo[] = $schema;
+			}
+
+		// Return the main geo schema array
+
+			return $schema_geo;
+
+	}
+
 // Create array_is_list function that is available in PHP 8
 if ( !function_exists('array_is_list') ) {
 	function array_is_list(array $array): bool {

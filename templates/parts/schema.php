@@ -7,20 +7,21 @@
  * Required vars:
  * 	$schema_type // string
  * 	$schema_name // string
- * 	$schema_url // string
+ * 	$schema_address // array
  * 
  * Optional vars:
- * 	$schema_image // string
- * 	$schema_description // string
- * 	$schema_medical_specialty // array
- * 	$schema_address // array
+ * 	$schema_aggregate_rating; // bool
+ * 	$schema_aggregate_rating_value; // string
+ * 	$schema_aggregate_rating_count; // int
+ * 	$schema_aggregate_rating_review_count; // int
+ * 	$schema_geo; // array
  * 	$schema_opening_hours_specification // array
- * 	$schema_opening_hours // array
  * 	$schema_telephone // array
- * 	$schema_aggregate_rating; // bool (optional)
- * 	$schema_aggregate_rating_value; // string (optional)
- * 	$schema_aggregate_rating_count; // int (optional)
- * 	$schema_aggregate_rating_review_count; // int (optional)
+ * 	$schema_url // string
+ * 	$schema_description // string
+ * 	$schema_image // string|array
+ * 	$schema_medical_specialty // array
+ * 	$schema_opening_hours // array
  */
 
 // Check/define variables
@@ -80,6 +81,7 @@
 			// Google Structured Data Documentation:
 			// 	- Geographic coordinates of the business
 			// 	- latitude and longitude: The precision must be at least 5 decimal places.
+			$schema_geo = isset($schema_geo) ? $schema_geo : '';
 
 		// Property: openingHoursSpecification
 			// 	Expected Type: OpeningHoursSpecification
@@ -683,6 +685,29 @@
 		$schema_block['address'] = $schema_address; // Add the relevant 'address' value
 
 	}
+
+// Add geo
+
+if ( $schema_geo ) {
+
+	// If the geo schema array only contains one top-level item/array, flatten the geo schema array
+	if ( is_array($schema_geo) ) {
+
+		if ( 1 == count($schema_geo) && is_array($schema_geo[0]) ) {
+
+			$schema_geo = array_reduce( $schema_geo, 'array_merge', array() );
+
+		} elseif ( 1 == count($schema_geo) && !is_array($schema_geo[0]) ) {
+
+			$schema_geo = $schema_geo[0];
+
+		}
+
+	}
+
+	$schema_block['geo'] = $schema_geo; // Add the relevant 'geo' value
+
+}
 
 // Add openingHoursSpecification
 
