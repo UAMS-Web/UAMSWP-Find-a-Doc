@@ -7384,364 +7384,349 @@ function uamswp_fad_section_condition_treatment(
 
 }
 
-// Add data to an array defining schema data for address
-function uamswp_schema_address(
-	$schema_address = '', // array (optional) // Main address schema array
-	$street_address = '', // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
-	$post_office_box_number = '', // string (optional) // The post office box number for PO box addresses.
-	$address_locality = '', // string (optional) // The locality in which the street address is, and which is in the region. For example, Mountain View.
-	$address_region = '', // string (optional) // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
-	$postal_code = '', // string (optional) // The postal code. For example, 94043.
-	$address_country = '', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
-	$telephone = '' // string (optional) // The telephone number.
-) {
+// Collect Values For Schema Data Properties
 
-	/* Example use:
-	 * 
-	 * 	// Address Schema Data
-	 * 
-	 * 		// Check/define the main address schema array
-	 * 		$schema_address = ( isset($schema_address) && is_array($schema_address) ) ? $schema_address : array();
-	 * 
-	 * 		// Add this location's details to the main address schema array
-	 * 		$schema_address = uamswp_schema_address(
-	 * 			$schema_address, // array (optional) // Main address schema array
-	 * 			'PostalAddress', // string (optional) // Schema type
-	 * 			$location_address_1 . ( $location_address_2_schema ? ' ' . $location_address_2_schema : '' ), // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
-	 * 			'', // string (optional) // The post office box number for PO box addresses.
-	 * 			$location_city, // string (optional) // The locality in which the street address is, and which is in the region. For example, Mountain View.
-	 * 			$location_state, // string (optional) // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
-	 * 			$location_zip, // string (optional) // The postal code. For example, 94043.
-	 * 			'', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
-	 * 			$location_phone_format_dash // string (optional) // The telephone number.
-	 * 		);
-	 */
+	// Add data to an array defining schema data for address
+	function uamswp_schema_address(
+		$schema_address = '', // array (optional) // Main address schema array
+		$street_address = '', // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
+		$post_office_box_number = '', // string (optional) // The post office box number for PO box addresses.
+		$address_locality = '', // string (optional) // The locality in which the street address is, and which is in the region. For example, Mountain View.
+		$address_region = '', // string (optional) // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
+		$postal_code = '', // string (optional) // The postal code. For example, 94043.
+		$address_country = '', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
+		$telephone = '' // string (optional) // The telephone number.
+	) {
 
-	// Check/define variables
-		
-		$schema_address = ( isset($schema_address) && is_array($schema_address) ) ? $schema_address : array();
-		$street_address = isset($street_address) ? $street_address : '';
-		$post_office_box_number = isset($post_office_box_number) ? $post_office_box_number : '';
-		$address_locality = isset($address_locality) ? $address_locality : '';
-		$address_region = isset($address_region) ? $address_region : '';
-		$postal_code = isset($postal_code) ? $postal_code : '';
-		$address_country = ( isset($address_country) && !empty($address_country) ) ? $address_country : 'USA';
-		$telephone = isset($telephone) ? $telephone : '';
+		/* Example use:
+		* 
+		* 	// Address Schema Data
+		* 
+		* 		// Check/define the main address schema array
+		* 		$schema_address = ( isset($schema_address) && is_array($schema_address) ) ? $schema_address : array();
+		* 
+		* 		// Add this location's details to the main address schema array
+		* 		$schema_address = uamswp_schema_address(
+		* 			$schema_address, // array (optional) // Main address schema array
+		* 			'PostalAddress', // string (optional) // Schema type
+		* 			$location_address_1 . ( $location_address_2_schema ? ' ' . $location_address_2_schema : '' ), // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
+		* 			'', // string (optional) // The post office box number for PO box addresses.
+		* 			$location_city, // string (optional) // The locality in which the street address is, and which is in the region. For example, Mountain View.
+		* 			$location_state, // string (optional) // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
+		* 			$location_zip, // string (optional) // The postal code. For example, 94043.
+		* 			'', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
+		* 			$location_phone_format_dash // string (optional) // The telephone number.
+		* 		);
+		*/
 
-	// Create an array for this item
+		// Check/define variables
+			
+			$schema_address = ( isset($schema_address) && is_array($schema_address) ) ? $schema_address : array();
+			$street_address = isset($street_address) ? $street_address : '';
+			$post_office_box_number = isset($post_office_box_number) ? $post_office_box_number : '';
+			$address_locality = isset($address_locality) ? $address_locality : '';
+			$address_region = isset($address_region) ? $address_region : '';
+			$postal_code = isset($postal_code) ? $postal_code : '';
+			$address_country = ( isset($address_country) && !empty($address_country) ) ? $address_country : 'USA';
+			$telephone = isset($telephone) ? $telephone : '';
 
-		$schema = array();
+		// Create an array for this item
 
-	// Add values to the array
+			$schema = array();
 
-		if ( $street_address ) {
-			$schema['streetAddress'] = $street_address;
-		}
-		
-		if ( $post_office_box_number ) {
-			$schema['postOfficeBoxNumber'] = $post_office_box_number;
-		}
-		
-		if ( $address_locality ) {
-			$schema['addressLocality'] = $address_locality;
-		}
-		
-		if ( $address_region ) {
-			$schema['addressRegion'] = $address_region;
-		}
-		
-		if ( $postal_code ) {
-			$schema['postalCode'] = $postal_code;
-		}
-		
-		if ( $address_country ) {
-			$schema['addressCountry'] = $address_country;
-		}
-		
-		if ( $telephone ) {
-			$schema['telephone'] = $telephone;
-		}
+		// Add values to the array
 
-		if ( !empty($schema) ) {
-			$schema = array('@type' => 'PostalAddress') + $schema;
-		}
+			if ( $street_address ) {
+				$schema['streetAddress'] = $street_address;
+			}
+			
+			if ( $post_office_box_number ) {
+				$schema['postOfficeBoxNumber'] = $post_office_box_number;
+			}
+			
+			if ( $address_locality ) {
+				$schema['addressLocality'] = $address_locality;
+			}
+			
+			if ( $address_region ) {
+				$schema['addressRegion'] = $address_region;
+			}
+			
+			if ( $postal_code ) {
+				$schema['postalCode'] = $postal_code;
+			}
+			
+			if ( $address_country ) {
+				$schema['addressCountry'] = $address_country;
+			}
+			
+			if ( $telephone ) {
+				$schema['telephone'] = $telephone;
+			}
 
-	// Add this item's array to the main address schema array
+			if ( !empty($schema) ) {
+				$schema = array('@type' => 'PostalAddress') + $schema;
+			}
 
-		if ( !empty($schema) ) {
-			$schema_address[] = $schema;
-		}
+		// Add this item's array to the main address schema array
 
-	// Return the main address schema array
+			if ( !empty($schema) ) {
+				$schema_address[] = $schema;
+			}
 
-		return $schema_address;
+		// Return the main address schema array
 
-}
+			return $schema_address;
 
-// Add data to an array defining schema data for medicalSpecialty
-function uamswp_schema_medical_specialty(
-	$schema_medical_specialty = '', // array (optional) // Main medicalSpecialty schema array
-	$name = '', // string (optional) // The name of the item.
-	$url = '', // string (optional) // URL of the item.
-	$alternate_name = '' // string (optional) // An alias for the item.
-) {
+	}
 
-	/* Example use:
-	 * 
-	 * 	// MedicalSpecialty Schema Data
-	 * 
-	 * 		// Check/define the main medicalSpecialty schema array
-	 * 		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
-	 * 
-	 * 		// Add this location's details to the main medicalSpecialty schema array
-	 * 		$schema_medical_specialty = uamswp_schema_medical_specialty(
-	 * 			$schema_medical_specialty, // array (optional) // Main medicalSpecialty schema array
-	 * 			$condition_title_attr, // string (optional) // The name of the item.
-	 * 			$condition_url // string (optional) // URL of the item.
-	 * 		);
-	 */
+	// Add data to an array defining schema data for medicalSpecialty
+	function uamswp_schema_medical_specialty(
+		$schema_medical_specialty = '', // array (optional) // Main medicalSpecialty schema array
+		$name = '', // string (optional) // The name of the item.
+		$url = '', // string (optional) // URL of the item.
+		$alternate_name = '' // string (optional) // An alias for the item.
+	) {
 
-	// Check/define variables
+		/* Example use:
+		* 
+		* 	// MedicalSpecialty Schema Data
+		* 
+		* 		// Check/define the main medicalSpecialty schema array
+		* 		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
+		* 
+		* 		// Add this location's details to the main medicalSpecialty schema array
+		* 		$schema_medical_specialty = uamswp_schema_medical_specialty(
+		* 			$schema_medical_specialty, // array (optional) // Main medicalSpecialty schema array
+		* 			$condition_title_attr, // string (optional) // The name of the item.
+		* 			$condition_url // string (optional) // URL of the item.
+		* 		);
+		*/
 
-		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
-		$name = isset($name) ? $name : '';
-		$url = isset($url) ? $url : '';
-		$alternate_name = isset($alternate_name) ? $alternate_name : '';
+		// Check/define variables
 
-	// Create an array for this item
+			$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
+			$name = isset($name) ? $name : '';
+			$url = isset($url) ? $url : '';
+			$alternate_name = isset($alternate_name) ? $alternate_name : '';
 
-		$schema = array();
+		// Create an array for this item
 
-	// Add values to the array
+			$schema = array();
 
-		if ( $name ) {
-			$schema['name'] = $name;
-		}
-		
-		if ( $url ) {
-			$schema['url'] = $url;
-		}
-		
-		if ( $alternate_name ) {
-			$schema['alternateName'] = $alternate_name;
-		}
+		// Add values to the array
 
-		if ( !empty($schema) ) {
-			$schema = array('@type' => 'MedicalSpecialty') + $schema;
-		}
+			if ( $name ) {
+				$schema['name'] = $name;
+			}
+			
+			if ( $url ) {
+				$schema['url'] = $url;
+			}
+			
+			if ( $alternate_name ) {
+				$schema['alternateName'] = $alternate_name;
+			}
 
-	// Add this item's array to the main address schema array
+			if ( !empty($schema) ) {
+				$schema = array('@type' => 'MedicalSpecialty') + $schema;
+			}
 
-		if ( !empty($schema) ) {
-			$schema_medical_specialty[] = $schema;
-		}
+		// Add this item's array to the main address schema array
 
-	// Return the main address schema array
+			if ( !empty($schema) ) {
+				$schema_medical_specialty[] = $schema;
+			}
 
-		return $schema_medical_specialty;
+		// Return the main address schema array
 
-}
+			return $schema_medical_specialty;
 
-// Add data to an array defining schema data for medicalSpecialty
-function uamswp_schema_telephone(
-	$schema_telephone = '', // array (optional) // Main telephone schema array
-	$telephone_number = '' // string (optional) // The telephone number.
-) {
+	}
 
-	/* Example use:
-	 * 
-	 * 	// Telephone Schema Data
-	 * 
-	 * 		// Check/define the main telephone schema array
-	 * 		$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
-	 * 
-	 * 		// Add this location's details to the main telephone schema array
-	 * 		$schema_telephone = uamswp_schema_telephone(
-	 * 			$schema_telephone, // array (optional) // Main telephone schema array
-	 * 			$telephone_number // string (optional) // The telephone number.
-	 * 		);
-	 */
+	// Add data to an array defining schema data for medicalSpecialty
+	function uamswp_schema_telephone(
+		$schema_telephone = '', // array (optional) // Main telephone schema array
+		$telephone_number = '' // string (optional) // The telephone number.
+	) {
 
-	// Check/define variables
+		/* Example use:
+		* 
+		* 	// Telephone Schema Data
+		* 
+		* 		// Check/define the main telephone schema array
+		* 		$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
+		* 
+		* 		// Add this location's details to the main telephone schema array
+		* 		$schema_telephone = uamswp_schema_telephone(
+		* 			$schema_telephone, // array (optional) // Main telephone schema array
+		* 			$telephone_number // string (optional) // The telephone number.
+		* 		);
+		*/
 
-		$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
-		$telephone_number = isset($telephone_number) ? $telephone_number : '';
+		// Check/define variables
 
-	// Add values to the main telephone schema array
+			$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
+			$telephone_number = isset($telephone_number) ? $telephone_number : '';
 
-		if ( $telephone_number ) {
-			$schema_telephone[] = $telephone_number;
-		}
+		// Add values to the main telephone schema array
 
-	// Return the main telephone schema array
+			if ( $telephone_number ) {
+				$schema_telephone[] = $telephone_number;
+			}
 
-		return $schema_telephone;
+		// Return the main telephone schema array
 
-}
+			return $schema_telephone;
 
-// Add data to an array defining schema data for OpeningHoursSpecification
-function uamswp_schema_opening_hours_specification(
-	$schema_opening_hours_specification = '', // array (optional) // Main OpeningHoursSpecification schema array
-	$day_of_week = '', // array|string (optional) // The day of the week for which these opening hours are valid.
-	$opens = '', // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-	$closes = '', // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-	$valid_from = '', // string (optional) // The date when the item becomes valid.
-	$valid_through = '' // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-) {
+	}
 
-	/* Example use:
-	 * 
-	 * 	// OpeningHoursSpecification Schema Data
-	 * 
-	 * 		// Check/define the main OpeningHoursSpecification schema array
-	 * 		$schema_opening_hours_specification = ( isset($schema_opening_hours_specification) && is_array($schema_opening_hours_specification) && !empty($schema_opening_hours_specification) ) ? $schema_opening_hours_specification : array();
-	 * 
-	 * 		// Add this location's details to the main OpeningHoursSpecification schema array
-	 * 
-	 * 			// // Schema.org method: Add all days as an array under the dayOfWeek property
-	 * 			// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-	 * 
-	 * 			// 	$schema_opening_hours_specification = uamswp_schema_opening_hours_specification(
-	 * 			// 		$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
-	 * 			// 		$schema_day_of_week, // array|string (optional) // The day of the week for which these opening hours are valid.
-	 * 			// 		$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-	 * 			// 		$schema_closes, // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-	 * 			// 		$schema_valid_from, // string (optional) // The date when the item becomes valid.
-	 * 			// 		$schema_valid_through // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-	 * 			// 	);
-	 * 
-	 * 			// Google method: Loop through all the days defined in the current Hours repeater row separately
-	 * 			// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-	 * 
-	 * 				foreach ( $schema_day_of_week as $day) {
-	 * 					$schema_opening_hours_specification = uamswp_schema_opening_hours_specification(
-	 * 						$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
-	 * 						$day, // array|string (optional) // The day of the week for which these opening hours are valid.
-	 * 						$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-	 * 						$schema_closes, // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-	 * 						$schema_valid_from, // string (optional) // The date when the item becomes valid.
-	 * 						$schema_valid_through // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-	 * 					);
-	 * 				}
-	 */
+	// Add data to an array defining schema data for OpeningHoursSpecification
+	function uamswp_schema_opening_hours_specification(
+		$schema_opening_hours_specification = '', // array (optional) // Main OpeningHoursSpecification schema array
+		$day_of_week = '', // array|string (optional) // The day of the week for which these opening hours are valid.
+		$opens = '', // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+		$closes = '', // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+		$valid_from = '', // string (optional) // The date when the item becomes valid.
+		$valid_through = '' // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+	) {
 
-	// Check/define variables
+		/* Example use:
+		* 
+		* 	// OpeningHoursSpecification Schema Data
+		* 
+		* 		// Check/define the main OpeningHoursSpecification schema array
+		* 		$schema_opening_hours_specification = ( isset($schema_opening_hours_specification) && is_array($schema_opening_hours_specification) && !empty($schema_opening_hours_specification) ) ? $schema_opening_hours_specification : array();
+		* 
+		* 		// Add this location's details to the main OpeningHoursSpecification schema array
+		* 
+		* 			// // Schema.org method: Add all days as an array under the dayOfWeek property
+		* 			// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+		* 
+		* 			// 	$schema_opening_hours_specification = uamswp_schema_opening_hours_specification(
+		* 			// 		$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
+		* 			// 		$schema_day_of_week, // array|string (optional) // The day of the week for which these opening hours are valid.
+		* 			// 		$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+		* 			// 		$schema_closes, // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+		* 			// 		$schema_valid_from, // string (optional) // The date when the item becomes valid.
+		* 			// 		$schema_valid_through // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+		* 			// 	);
+		* 
+		* 			// Google method: Loop through all the days defined in the current Hours repeater row separately
+		* 			// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+		* 
+		* 				foreach ( $schema_day_of_week as $day) {
+		* 					$schema_opening_hours_specification = uamswp_schema_opening_hours_specification(
+		* 						$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
+		* 						$day, // array|string (optional) // The day of the week for which these opening hours are valid.
+		* 						$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+		* 						$schema_closes, // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+		* 						$schema_valid_from, // string (optional) // The date when the item becomes valid.
+		* 						$schema_valid_through // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+		* 					);
+		* 				}
+		*/
 
-		$schema_opening_hours_specification = ( isset($schema_opening_hours_specification) && is_array($schema_opening_hours_specification) && !empty($schema_opening_hours_specification) ) ? $schema_opening_hours_specification : array();
-		$day_of_week = isset($day_of_week) ? $day_of_week : array();
-		$opens = isset($opens) ? $opens : '';
-		$closes = isset($closes) ? $closes : '';
-		$valid_from = isset($valid_from) ? $valid_from : '';
-		$valid_through = isset($valid_through) ? $valid_through : '';
+		// Check/define variables
 
-	// Create an array for this item
+			$schema_opening_hours_specification = ( isset($schema_opening_hours_specification) && is_array($schema_opening_hours_specification) && !empty($schema_opening_hours_specification) ) ? $schema_opening_hours_specification : array();
+			$day_of_week = isset($day_of_week) ? $day_of_week : array();
+			$opens = isset($opens) ? $opens : '';
+			$closes = isset($closes) ? $closes : '';
+			$valid_from = isset($valid_from) ? $valid_from : '';
+			$valid_through = isset($valid_through) ? $valid_through : '';
 
-		$schema = array();
+		// Create an array for this item
 
-	// Add values to the array
+			$schema = array();
 
-		if ( $day_of_week ) {
-			$schema['dayOfWeek'] = $day_of_week;
-		}
-		
-		if ( $opens ) {
-			$schema['opens'] = $opens;
-		}
-		
-		if ( $closes ) {
-			$schema['closes'] = $closes;
-		}
-		
-		if ( $valid_from ) {
-			$schema['validFrom'] = $valid_from;
-		}
-		
-		if ( $valid_through ) {
-			$schema['validThrough'] = $valid_through;
-		}
+		// Add values to the array
 
-		if ( !empty($schema) ) {
-			$schema = array('@type' => 'OpeningHoursSpecification') + $schema;
-		}
+			if ( $day_of_week ) {
+				$schema['dayOfWeek'] = $day_of_week;
+			}
+			
+			if ( $opens ) {
+				$schema['opens'] = $opens;
+			}
+			
+			if ( $closes ) {
+				$schema['closes'] = $closes;
+			}
+			
+			if ( $valid_from ) {
+				$schema['validFrom'] = $valid_from;
+			}
+			
+			if ( $valid_through ) {
+				$schema['validThrough'] = $valid_through;
+			}
 
-	// Add this item's array to the main openingHoursSpecification schema array
+			if ( !empty($schema) ) {
+				$schema = array('@type' => 'OpeningHoursSpecification') + $schema;
+			}
 
-		if ( !empty($schema) ) {
-			$schema_opening_hours_specification[] = $schema;
-		}
+		// Add this item's array to the main openingHoursSpecification schema array
 
-	// Return the main address schema array
+			if ( !empty($schema) ) {
+				$schema_opening_hours_specification[] = $schema;
+			}
 
-		return $schema_opening_hours_specification;
+		// Return the main address schema array
 
-}
+			return $schema_opening_hours_specification;
 
-// Add data to an array defining schema data for OpeningHours
-function uamswp_schema_opening_hours(
-	$schema_opening_hours = '', // array (optional) // Main OpeningHours schema array
-	$day_of_week = '', // string (optional) // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-	$opens = '', // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-	$closes = '' // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-) {
+	}
 
-	/* Example use:
-	 * 
-	 * 	// OpeningHours Schema Data
-	 * 
-	 * 		// Check/define the main OpeningHours schema array
-	 * 		$schema_opening_hours = ( isset($schema_opening_hours) && is_array($schema_opening_hours) && !empty($schema_opening_hours) ) ? $schema_opening_hours : array();
-	 * 
-	 * 		// Add this location's details to the main OpeningHours schema array
-	 * 
-	 * 			// // Schema.org method: Add all days as an array under the dayOfWeek property
-	 * 			// // as documented by Schema.org at https://schema.org/openingHours (https://archive.is/XDQS6)
-	 * 
-	 * 			// 	$schema_opening_hours = uamswp_schema_opening_hours(
-	 * 			// 		$schema_opening_hours, // array (optional) // Main OpeningHours schema array
-	 * 			// 		$schema_day_of_week, // string (optional) // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-	 * 			// 		$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-	 * 			// 		$schema_closes // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-	 * 			// 	);
-	 * 
-	 * 			// Google method: Loop through all the days defined in the current Hours repeater row separately
-	 * 			// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-	 * 
-	 * 				foreach ( $schema_day_of_week as $day) {
-	 * 					$schema_opening_hours = uamswp_schema_opening_hours(
-	 * 						$schema_opening_hours, // array (optional) // Main OpeningHours schema array
-	 * 						$day, // array|string (optional) // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-	 * 						$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-	 * 						$schema_closes, // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-	 * 						$schema_valid_from, // string (optional) // The date when the item becomes valid.
-	 * 						$schema_valid_through // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-	 * 					);
-	 * 				}
-	 */
+	// Add data to an array defining schema data for OpeningHours
+	function uamswp_schema_opening_hours(
+		$schema_opening_hours = '', // array (optional) // Main OpeningHours schema array
+		$day_of_week = '', // string (optional) // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+		$opens = '', // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+		$closes = '' // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+	) {
 
-	// Check/define variables
+		/* Example use:
+		* 
+		* 	// OpeningHours Schema Data
+		* 
+		* 		// Check/define the main OpeningHours schema array
+		* 		$schema_opening_hours = ( isset($schema_opening_hours) && is_array($schema_opening_hours) && !empty($schema_opening_hours) ) ? $schema_opening_hours : array();
+		* 
+		* 		// Add this location's details to the main OpeningHours schema array
+		* 
+		* 			$schema_opening_hours = uamswp_schema_opening_hours(
+		* 				$schema_opening_hours, // array (optional) // Main OpeningHours schema array
+		* 				$schema_day_of_week, // string (optional) // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+		* 				$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+		* 				$schema_closes // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+		* 			);
+		*/
 
-		$schema_opening_hours = ( isset($schema_opening_hours) && is_array($schema_opening_hours) && !empty($schema_opening_hours) ) ? $schema_opening_hours : array();
-		$day_of_week = isset($day_of_week) ? $day_of_week : '';
-		$opens = isset($opens) ? $opens : '';
-		$closes = isset($closes) ? $closes : '';
+		// Check/define variables
 
-	// Add values to the array
+			$schema_opening_hours = ( isset($schema_opening_hours) && is_array($schema_opening_hours) && !empty($schema_opening_hours) ) ? $schema_opening_hours : array();
+			$day_of_week = isset($day_of_week) ? $day_of_week : '';
+			$opens = isset($opens) ? $opens : '';
+			$closes = isset($closes) ? $closes : '';
 
-		if (
-			$day_of_week
-			&&
-			$opens
-			&&
-			$closes
-		) {
-			$schema_opening_hours[] = $day_of_week . ' ' . $opens . '-' . $closes;
-		}
+		// Add values to the array
 
-	// Return the main address schema array
+			if (
+				$day_of_week
+				&&
+				$opens
+				&&
+				$closes
+			) {
+				$schema_opening_hours[] = $day_of_week . ' ' . $opens . '-' . $closes;
+			}
 
-		return $schema_opening_hours;
+		// Return the main address schema array
 
-}
+			return $schema_opening_hours;
+
+	}
 
 // Create array_is_list function that is available in PHP 8
 if ( !function_exists('array_is_list') ) {
