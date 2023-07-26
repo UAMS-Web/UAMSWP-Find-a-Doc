@@ -7544,7 +7544,7 @@ function uamswp_fad_section_condition_treatment(
 
 	}
 
-	// Add data to an array defining schema data for medicalSpecialty
+	// Add data to an array defining schema data for telephone
 	function uamswp_schema_telephone(
 		$schema_telephone = '', // array (optional) // Main telephone schema array
 		$telephone_number = '' // string (optional) // The telephone number.
