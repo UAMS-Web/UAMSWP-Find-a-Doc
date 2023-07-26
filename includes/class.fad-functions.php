@@ -7698,11 +7698,9 @@ function uamswp_schema_opening_hours(
 	 * 
 	 * 			// 	$schema_opening_hours = uamswp_schema_opening_hours(
 	 * 			// 		$schema_opening_hours, // array (optional) // Main OpeningHours schema array
-	 * 			// 		$schema_day_of_week, // array|string (optional) // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+	 * 			// 		$schema_day_of_week, // string (optional) // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 	 * 			// 		$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-	 * 			// 		$schema_closes, // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-	 * 			// 		$schema_valid_from, // string (optional) // The date when the item becomes valid.
-	 * 			// 		$schema_valid_through // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+	 * 			// 		$schema_closes // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 	 * 			// 	);
 	 * 
 	 * 			// Google method: Loop through all the days defined in the current Hours repeater row separately
